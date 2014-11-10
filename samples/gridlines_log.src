@@ -1,0 +1,7 @@
+set logscale y
+set xrange [1: 10]
+set yrange [1: 1000]
+set ytics (1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100,200,300,400,500,600,700,800,900,1000)
+set grid y
+set grid lt -1 lw 0.8
+plot log(x)*exp(x/2) w lines lt -1 lw 1.4,log(x)*exp(x) with lines lt -1 lw 1.4

@@ -1,0 +1,44 @@
+/**
+\mainpage Engauge Digitizer II
+
+The Engauge Digitizer II application quickly extracts numeric data from images containing
+graphs with curves and two axes drawn. Converting an image into data may be described as doing
+the opposite of graphing - which converts numeric data into graph images.
+
+For users
+---------
+Major features added since version Engauge Digitizer 5.2 include:
+
+- Sub-pixel point placement increases accuracy
+- Undo/redo makes recovering from mistakes easy
+- Easier and more powerful zooming
+- Improved drag-and-drop
+
+For developers
+--------------
+Engauge Digitizer Version 2 uses the new <a href="http://qt-project.org">Qt5</a>
+library, rather than the old <a href="http://qt-project.org">Qt3</a>
+library used by Version 1. The Qt3 library is disappearing from most operating systems, but 
+Qt5 should be available for many years.
+
+The code takes advantage of some powerful open source toolkits:
+
+- <a href="http://cccc.sourceforge.net"><b>CCCC</b></a> provides important metrics to identify possible problem areas 
+  (run docccc in src directory)
+- <a href="http://doxygen.org"><b>Doxygen</b></a> documents all C++ classes (run doxygen in src directory)
+- <a href="http://fftw.org"><b>FFTW</b></a> provides a fast-fourier transform (FFT) for faster image processing, 
+  especially cross-correlations
+- <a href="http://log4cpp.sourceforge.net"><b>Log4cpp</b></a> provides configurable logging
+
+The code is architected with some important design patterns:
+
+- <b>Command pattern</b> provides Undo/redo using commands and a command stack
+- <b>Functor pattern</b> provides efficient processing of Curve and Point data from outside the Document class, without violating
+  encapsulation of performed by generic iteration through the Curves with functors
+- <b>Model/View pattern</b> separates graphical object management in the GraphicsScene, and graphical presentation and interaction
+  in the GraphicsView
+- <b>State pattern</b> isolates each digitizing mode into one state, with a context class acting as a container and single 
+  class for interfacing across the state machine boundary
+
+Code development has been moved from sourceforge.net to github.com, and Doxygen documentation has been added. 
+*/

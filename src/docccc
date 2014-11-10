@@ -1,0 +1,4 @@
+# run cccc to produce cyclomatric complexity statistics in OUTDIR
+
+OUTDIR=../doc/cccc
+cccc --outdir=$OUTDIR --html_outfile=$OUTDIR/index.html $(find . -name '*.cpp' | grep -v moc | grep -v rcc)

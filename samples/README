@@ -1,0 +1,38 @@
+Introduction
+------------
+This samples directory contains several sample image files that may be imported into
+Engauge Digitizer (http://digitizer.sourceforge.net).
+
+These files are listed below, with comments:
+
+  corners.png - Graph that lots of corners that would be painful to digitize manually
+  gridlines.gif - Graph with gridlines that are easily removed by Engauge
+  gridlines_log.gif - Another graph with gridlines that are easily removed by Engauge
+  gridlines_log.src - Creates gridlines_log.gif in gnuplot using 'load' command (not an image!)
+  inverse.jpg - Image of y/x function
+  inverse.png - Same as inverse.jpg but in png format
+  linlog.jpg - Graph with linear/logarithmic coordinates
+  linlog.png - Same as linlog.jpg but in png format
+  loglin.png - Graph with logarithmic/linear coordinates
+  loglog.png - Graph with logarithmic/logarithmic coordinates
+  normdist.jpg - Graph of normal distribution
+  normdist.png - Same as normdist.jpg but in png format
+  pointmatch.jpg - Graph with fuzzy points for playing with Point Match feature of Engauge
+  pointplot.bmp - Graph with points that are easily captured by Point Match feature of Engauge, if
+    the Discretize settings are set to "Intensity 90 to 99" for the triangles, and 
+    "Intensity 10 to 50" for the diamonds
+  polarcircles.jpg - Polar plot for experimenting. No coordinates are displayed, so not very useful
+  polarplot.jpg - Polar plot with cardioid pattern
+  polarplot.png - Same as polarplot.jpg but in png format
+  testcase.jpg - Simple graph that serves as an excellent starting point for the new user
+  testcase.png - Same as testcase.jpg but in png format
+  testcoords.jpg - Advanced graph used by developers to check the affine transformations in Engauge
+  testcoords.sxd - Open Office document used to create testcoords.jpg (not an image!)
+  usgs.png - Fictional map loosely based on U.S. Geological Survey topographic maps
+  
+Licensing
+---------
+All of the files in this directory were created by an Engauge Digitizer developer, and 
+are subject to the GNU General Public License as published by the Free Software Foundation; 
+either version 2 of the License, or (at your option) any later version.
+

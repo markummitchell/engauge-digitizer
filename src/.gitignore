@@ -1,0 +1,9 @@
+*.autosave
+.moc
+.moc_test
+.objs
+.objs_test
+engauge6.pro.user.*
+engauge6_test.pro.user.*
+Makefile*
+qrc_*

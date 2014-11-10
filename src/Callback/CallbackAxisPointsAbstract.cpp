@@ -1,0 +1,156 @@
+#include "CallbackAxisPointsAbstract.h"
+#include "Logger.h"
+#include "Point.h"
+#include "QtToString.h"
+
+CallbackAxisPointsAbstract::CallbackAxisPointsAbstract() :
+  m_numberAxisPoints (0),
+  m_isError (false)
+{
+}
+
+CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const QString pointIdentifierOverride,
+                                                       const QPointF &posScreenOverride,
+                                                       const QPointF &posGraphOverride) :
+  m_pointIdentifierOverride (pointIdentifierOverride),
+  m_posScreenOverride (posScreenOverride),
+  m_posGraphOverride (posGraphOverride),
+  m_numberAxisPoints (0),
+  m_isError (false)
+{
+}
+
+bool CallbackAxisPointsAbstract::anyColumnsRepeat (double m [3] [3], int numberColumns)
+{
+  for (int colLeft = 0; colLeft < numberColumns; colLeft++) {
+    for (int colRight = colLeft + 1; colRight < numberColumns; colRight++) {
+
+      if ((m [0] [colLeft] == m [0] [colRight]) &&
+          (m [1] [colLeft] == m [1] [colRight]) &&
+          (m [2] [colLeft] == m [2] [colRight])) {
+
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* curveName */,
+                                                           const Point &point)
+{
+  CallbackSearchReturn rtn = CALLBACK_SEARCH_RETURN_CONTINUE;
+
+  if (m_numberAxisPoints < 3) {
+
+    QPointF posScreen = point.posScreen ();
+    QPointF posGraph = point.posGraph ();
+
+    if (m_pointIdentifierOverride == point.identifier ()) {
+
+      // Override the old point coordinates with its new (if all tests are passed) coordinates
+      posScreen = m_posScreenOverride;
+      posGraph = m_posGraphOverride;
+    }
+
+    // Update range variables
+    if ((m_numberAxisPoints == 0) || (posGraph.x () < m_xGraphLow)) { m_xGraphLow = posGraph.x (); }
+    if ((m_numberAxisPoints == 0) || (posGraph.y () < m_yGraphLow)) { m_yGraphLow = posGraph.y (); }
+    if ((m_numberAxisPoints == 0) || (posGraph.x () > m_xGraphHigh)) { m_xGraphHigh = posGraph.x (); }
+    if ((m_numberAxisPoints == 0) || (posGraph.y () > m_yGraphHigh)) { m_yGraphHigh = posGraph.y (); }
+
+    // Append one new column to each of the screen and graph coordinate matrices
+
+    double sm [3] [3] = {
+      {m_screenInputs.m11 (), m_screenInputs.m12 (), m_screenInputs.m13 ()},
+      {m_screenInputs.m21 (), m_screenInputs.m22 (), m_screenInputs.m23 ()},
+      {m_screenInputs.m31 (), m_screenInputs.m32 (), m_screenInputs.m33 ()}};
+    double gm [3] [3] = {
+      {m_graphOutputs.m11 (), m_graphOutputs.m12 (), m_graphOutputs.m13 ()},
+      {m_graphOutputs.m21 (), m_graphOutputs.m22 (), m_graphOutputs.m23 ()},
+      {m_graphOutputs.m31 (), m_graphOutputs.m32 (), m_graphOutputs.m33 ()}};
+
+    sm [0] [m_numberAxisPoints] = posScreen.x ();
+    sm [1] [m_numberAxisPoints] = posScreen.y ();
+    sm [2] [m_numberAxisPoints] = 1.0;
+
+    gm [0] [m_numberAxisPoints] = posGraph.x ();
+    gm [1] [m_numberAxisPoints] = posGraph.y ();
+    gm [2] [m_numberAxisPoints] = 1.0;
+
+    // Save
+    m_screenInputs.setMatrix (sm [0] [0], sm [0] [1], sm [0] [2],
+                              sm [1] [0], sm [1] [1], sm [1] [2],
+                              sm [2] [0], sm [2] [1], sm [2] [2]);
+    m_graphOutputs.setMatrix (gm [0] [0], gm [0] [1], gm [0] [2],
+                              gm [1] [0], gm [1] [1], gm [1] [2],
+                              gm [2] [0], gm [2] [1], gm [2] [2]);
+
+    ++m_numberAxisPoints; // Update this number before calling anyColumnsRepeat and threePointsAreCollinear
+
+    if (anyColumnsRepeat (sm, m_numberAxisPoints)) {
+
+      m_isError = true;
+      m_errorMessage = "New axis point cannot be at the same screen position as an exisiting axis point";
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+    } else if (anyColumnsRepeat (gm, m_numberAxisPoints)) {
+
+      m_isError = true;
+      m_errorMessage = "New axis point cannot have the same graph coordinates as an existing axis point";
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+    } else if (threePointsAreCollinear (sm, m_numberAxisPoints)) {
+
+      m_isError = true;
+      m_errorMessage = "No more than two axis points can lie along the same line on the screen";
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+    } else if (threePointsAreCollinear (gm, m_numberAxisPoints)) {
+
+      m_isError = true;
+      m_errorMessage = "No more than two axis points can lie along the same line in graph coordinates";
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+    }
+  }
+
+  if (m_numberAxisPoints > 2) {
+
+    rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+  }
+
+  return rtn;
+}
+
+bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int numberColumns)
+{
+  if (numberColumns == 3) {
+    QTransform t (
+        m [0] [0], m [0] [1], m [0] [2],
+        m [1] [0], m [1] [1], m [1] [2],
+        m [2] [0], m [2] [1], m [2] [2]);
+
+    return (t.determinant() == 0);
+  }
+
+  return false;
+}
+
+QTransform CallbackAxisPointsAbstract::transform ()
+{
+  Q_ASSERT (m_numberAxisPoints == 3);
+
+  QTransform screenInputsInv = m_screenInputs.inverted ();
+  QTransform transform = m_graphOutputs * screenInputsInv;
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackAxisPointsAbstract::transform\n"
+                               << "m_screenInputs=\n" << QTransformToString (m_screenInputs).toLatin1 ().data ()
+                               << "m_graphOutputs=\n" << QTransformToString (m_graphOutputs).toLatin1 ().data ()
+                               << "transform=\n" << QTransformToString (transform).toLatin1 ().data ();
+
+  return transform;
+}
+

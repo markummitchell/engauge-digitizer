@@ -1,0 +1,9 @@
+#ifndef COORDS_TYPE_H
+#define COORDS_TYPE_H
+
+enum CoordsType {
+  COORDS_TYPE_CARTESIAN,
+  COORDS_TYPE_POLAR
+};
+
+#endif // COORDS_TYPE_H

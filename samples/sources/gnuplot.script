@@ -1,0 +1,93 @@
+set term png
+
+unset polar
+set grid noxtics
+set grid noytics
+unset logscale x
+unset logscale y
+unset mxtics
+unset mytics
+
+set output "../gnuplot_x_y_points_nogrid.png"
+plot x*sin(x/3) with points, x*sin(x/4) with points, x*sin(x/5) with points
+set output "../gnuplot_x_y_lines_nogrid.png"
+plot x*sin(x/3) with lines, x*sin(x/4) with lines, x*sin(x/5) with lines
+set output "../gnuplot_x_y_linespoints_nogrid.png"
+plot x*sin(x/3) with linespoints, x*sin(x/4) with linespoints, x*sin(x/5) with linespoints
+
+unset polar
+set grid xtics
+set grid ytics
+unset logscale x
+unset logscale y
+unset mxtics
+unset mytics
+
+set output "../gnuplot_x_y_points_grid.png"
+plot x*sin(x/3) with points, x*sin(x/4) with points, x*sin(x/5) with points
+set output "../gnuplot_x_y_lines_grid.png"
+plot x*sin(x/3) with lines, x*sin(x/4) with lines, x*sin(x/5) with lines
+set output "../gnuplot_x_y_linespoints_grid.png"
+plot x*sin(x/3) with linespoints, x*sin(x/4) with linespoints, x*sin(x/5) with linespoints
+
+unset polar
+set grid noxtics
+set grid noytics
+unset logscale x
+set logscale y
+unset mxtics
+set mytics
+
+set output "../gnuplot_x_log_y_points_nogrid.png"
+plot x*exp(x/3) with points, x*exp(x/4) with points, x*exp(x/5) with points
+set output "../gnuplot_x_log_y_lines_nogrid.png"
+plot x*exp(x/3) with lines, x*exp(x/4) with lines, x*exp(x/5) with lines
+set output "../gnuplot_x_log_y_linespoints_nogrid.png"
+plot x*exp(x/3) with linespoints, x*exp(x/4) with linespoints, x*exp(x/5) with linespoints
+
+unset polar
+set grid xtics
+set grid ytics
+unset logscale x
+set logscale y
+unset mxtics
+set mytics
+
+set output "../gnuplot_x_log_y_points_grid.png"
+plot x*exp(x/3) with points, x*exp(x/4) with points, x*exp(x/5) with points
+set output "../gnuplot_x_log_y_lines_grid.png"
+plot x*exp(x/3) with lines, x*exp(x/4) with lines, x*exp(x/5) with lines
+set output "../gnuplot_x_log_y_linespoints_grid.png"
+plot x*exp(x/3) with linespoints, x*exp(x/4) with linespoints, x*exp(x/5) with linespoints
+
+set polar
+set grid polar
+set grid noxtics
+set grid noytics
+unset logscale x
+unset logscale y
+unset mxtics
+unset mytics
+
+set output "../gnuplot_r_theta_points_nogrid.png"
+plot t*sin(t/3) with points, t*sin(t/4) with points, t*sin(t/5) with points
+set output "../gnuplot_r_theta_lines_nogrid.png"
+plot t*sin(t/3) with lines, t*sin(t/4) with lines, t*sin(t/5) with lines
+set output "../gnuplot_r_theta_linespoints_nogrid.png"
+plot t*sin(t/3) with linespoints, t*sin(t/4) with linespoints, t*sin(t/5) with linespoints
+
+set polar
+set grid polar
+set grid xtics
+set grid ytics
+unset logscale x
+unset logscale y
+unset mxtics
+unset mytics
+
+set output "../gnuplot_r_theta_points_grid.png"
+plot t*sin(t/3) with points, t*sin(t/4) with points, t*sin(t/5) with points
+set output "../gnuplot_r_theta_lines_grid.png"
+plot t*sin(t/3) with lines, t*sin(t/4) with lines, t*sin(t/5) with lines
+set output "../gnuplot_r_theta_linespoints_grid.png"
+plot t*sin(t/3) with linespoints, t*sin(t/4) with linespoints, t*sin(t/5) with linespoints

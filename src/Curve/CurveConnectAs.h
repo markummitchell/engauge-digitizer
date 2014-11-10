@@ -1,0 +1,11 @@
+#ifndef CURVE_CONNECT_AS
+#define CURVE_CONNECT_AS
+
+enum CurveConnectAs {
+  CONNECT_AS_FUNCTION,
+  CONNECT_AS_RELATION
+};
+
+#endif // CURVE_CONNECT_AS
+
+

@@ -1,0 +1,21 @@
+08:06:08.663 INFO   - DigitizeStateEmpty::begin
+08:06:08.807 INFO   - MainWindow::resizeEvent
+08:06:08.895 INFO   - MainWindow::resizeEvent
+08:06:23.879 INFO   - GraphicsView::dragEnterEvent urls
+08:06:24.291 INFO   - GraphicsView::dropEvent
+08:06:24.347 INFO   - GraphicsView::dropEvent url=file:///home/mark/engauge6/samples/gnuplot_x_y_lines_grid.png
+08:06:24.347 INFO   - MainWindow::slotFileImportDraggedImageUrl url=file:///home/mark/engauge6/samples/gnuplot_x_y_lines_grid.png
+08:06:24.348 INFO   - LoadImageFromUrl::startLoadImage url=file:///home/mark/engauge6/samples/gnuplot_x_y_lines_grid.png
+08:06:24.350 INFO   - MainWindow::slotFileImportImage fileName=gnuplot_x_y_lines_grid.png
+08:06:24.350 INFO   - MainWindow::loadImage fileName=gnuplot_x_y_lines_grid.png
+08:06:24.356 INFO   - CmdMediator::CmdMediator
+08:06:24.356 INFO   - DigitizeStateContext::setImage
+08:06:24.356 INFO   - DigitizeStateContext::setCursor
+08:06:24.356 INFO   - MainWindow::slotViewZoomFill
+08:06:24.356 INFO   - StatusBar::slotZoom zoom=9
+08:06:24.357 INFO   - MainWindow::slotViewZoom
+08:06:24.357 INFO   - MainWindow::slotViewZoomFill
+08:06:24.357 INFO   - StatusBar::slotZoom zoom=9
+08:06:24.360 INFO   - MainWindow::slotDigitizeAxis
+08:06:24.360 INFO   - DigitizeStateEmpty::end
+08:06:24.360 INFO   - DigitizeStateAxis::begin
