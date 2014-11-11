@@ -3,8 +3,7 @@ engauge6
 
 Rewrite of Engauge Digitizer from Qt3/Qt4 to Qt5
 
-Status
-======
+# Status
 This project aims to replace the 10 year old Engauge Digitizer software project that lives on sourceforge.net, with a newer version. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge26 uses the new Qt5 library which should be available for many years.
 
 As of November 9, 2014, Engauge6 has:
@@ -14,8 +13,7 @@ As of November 9, 2014, Engauge6 has:
 
 Developers and users are encouraged to offer their suggestions and comments!
 
-Features
-========
+# Features
 Ideas for new features in Engauge6:
 
 1. Call OpenCV (or ?) to automatically recognize axes and axis coordinates
