@@ -17,8 +17,8 @@ void TestGraphCoords::cleanupTestCase ()
 
 void TestGraphCoords::initTestCase ()
 {
-  initializeLogging ("engauge6_test",
-                     "engauge6_test.log");
+  initializeLogging ("engauge_test",
+                     "engauge_test.log");
 
   MainWindow w;
   w.show ();

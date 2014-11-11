@@ -172,12 +172,12 @@ void DlgPreferencesPageCoords::initializeGroupCoordsType()
   switch (m_coordsType) {
     case COORDS_TYPE_CARTESIAN:
       m_btnCartesian->setChecked (true);
-      loadPixmap (":engauge6/img/plot_cartesian.png");
+      loadPixmap (":/engauge/img/plot_cartesian.png");
       break;
 
     case COORDS_TYPE_POLAR:
       m_btnPolar->setChecked (true);
-      loadPixmap (":engauge6/img/plot_polar.png");
+      loadPixmap (":/engauge/img/plot_polar.png");
       break;
   }
 }
@@ -197,7 +197,7 @@ void DlgPreferencesPageCoords::slotCartesian ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotCartesian";
 
   m_coordsType = COORDS_TYPE_CARTESIAN;
-  loadPixmap (":engauge6/img/plot_cartesian.png");
+  loadPixmap (":/engauge/img/plot_cartesian.png");
   updateControls();
 }
 
@@ -206,7 +206,7 @@ void DlgPreferencesPageCoords::slotPolar ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotPolar";
 
   m_coordsType = COORDS_TYPE_POLAR;
-  loadPixmap (":engauge6/img/plot_polar.png");
+  loadPixmap (":/engauge/img/plot_polar.png");
   updateControls();
 }
 

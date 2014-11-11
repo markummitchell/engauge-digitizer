@@ -94,46 +94,46 @@ void DlgEditPreferences::createStackedWidgets ()
 
   m_frameCoords = dynamic_cast<QWidget*> (new DlgPreferencesPageCoords (m_cmdMediator));
   createStackedWidgetPage (m_frameCoords,
-                           ":/engauge6/img/settings_coords.png",
+                           ":/engauge/img/settings_coords.png",
                            "Coordinates");
 
   m_frameCurves = dynamic_cast<QWidget*> (new DlgPreferencesPageCurves (m_cmdMediator));
   createStackedWidgetPage (m_frameCurves,
-                           ":/engauge6/img/settings_curves.png",
+                           ":/engauge/img/settings_curves.png",
                            "Curves");
 
   m_frameCurveProperties = dynamic_cast<QWidget*> (new DlgPreferencesPageCurveProperties (m_cmdMediator));
   createStackedWidgetPage (m_frameCurveProperties,
-                           ":/engauge6/img/settings_curve_properties.png",
+                           ":/engauge/img/settings_curve_properties.png",
                            "Curve Properties");
 
   m_frameExport = dynamic_cast<QWidget*> (new DlgPreferencesPageExport (m_cmdMediator));
   createStackedWidgetPage (m_frameExport,
-                           ":/engauge6/img/settings_export.png",
+                           ":/engauge/img/settings_export.png",
                            "Export");
 
   m_frameFilter = dynamic_cast<QWidget*> (new DlgPreferencesPageFilter (m_cmdMediator));
   createStackedWidgetPage (m_frameFilter,
-                           ":/engauge6/img/settings_filter.png",
+                           ":/engauge/img/settings_filter.png",
                            "Filter");
 
   m_frameGridDisplay = dynamic_cast<QWidget*> (new DlgPreferencesPageGridDisplay (m_cmdMediator));
   createStackedWidgetPage (m_frameGridDisplay,
-                           ":/engauge6/img/settings_grid_display.png",
+                           ":/engauge/img/settings_grid_display.png",
                            "Grid Display");
 
   m_frameGridRemoval = dynamic_cast<QWidget*> (new DlgPreferencesPageGridRemoval (m_cmdMediator));
   createStackedWidgetPage (m_frameGridRemoval,
-                           ":/engauge6/img/settings_grid_removal.png",
+                           ":/engauge/img/settings_grid_removal.png",
                            "Grid Removal");
 
   m_framePointMatch = dynamic_cast<QWidget*> (new DlgPreferencesPagePointMatch (m_cmdMediator));
   createStackedWidgetPage (m_framePointMatch,
-                           ":/engauge6/img/settings_point_match.png",
+                           ":/engauge/img/settings_point_match.png",
                            "Point Match");
 
   m_frameSegments = dynamic_cast<QWidget*> (new DlgPreferencesPageSegments (m_cmdMediator));
   createStackedWidgetPage (m_frameSegments,
-                           ":/engauge6/img/settings_segments.png",
+                           ":/engauge/img/settings_segments.png",
                            "Segments");
 }

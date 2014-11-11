@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 {
   QApplication a(argc, argv);
 
-  initializeLogging ("engauge6",
-                     "engauge6.log");
+  initializeLogging ("engauge",
+                     "engauge.log");
 
   MainWindow w;
   w.show();
