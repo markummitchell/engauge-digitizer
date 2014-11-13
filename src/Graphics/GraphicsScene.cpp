@@ -150,7 +150,9 @@ QStringList GraphicsScene::selectedPointIdentifiers () const
   return  selectedIds;
 }
 
-void GraphicsScene::showPoints (bool show)
+void GraphicsScene::showPoints (bool show,
+                                bool showAll,
+                                const QString &curveNameWanted)
 {
   const QList<QGraphicsItem*> &items = QGraphicsScene::items();
   QList<QGraphicsItem*>::const_iterator itr;
@@ -162,7 +164,15 @@ void GraphicsScene::showPoints (bool show)
     bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
     if (isPoint) {
 
-      item->setVisible (show);
+      bool showThisPoint = show;
+      if (show && !showAll) {
+        QString identifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+        QString curveNameGot = Point::curveNameFromPointIdentifier (identifier);
+
+        showThisPoint = (curveNameWanted == curveNameGot);
+      }
+
+      item->setVisible (showThisPoint);
 
     }
   }

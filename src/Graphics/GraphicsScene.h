@@ -42,8 +42,10 @@ public:
   /// Return a list of identifiers for the currently selected points.
   QStringList selectedPointIdentifiers () const;
 
-  /// Show or hide all the Points in the Curves
-  void showPoints (bool show);
+  /// Show or hide all the Points in the Curves (if showAll is true) or just the selected Curve (if showAll is false);
+  void showPoints (bool show,
+                   bool showAll = false,
+                   const QString &curveName = "");
 
   /// Update the Curves and their Points after executing a command.
   void updateAfterCommand (CmdMediator &cmdMediator);

@@ -334,17 +334,11 @@ void MainWindow::createActionsView ()
   m_actionViewDocumentPointsNone->setWhatsThis (tr ("Hide All Points\n\n"
                                                     "No digitized points are shown so the image is easier to see."));
 
-  m_actionViewDocumentPointsAxis = new QAction (tr ("Show Axis Points"), this);
-  m_actionViewDocumentPointsAxis->setCheckable (true);
-  m_actionViewDocumentPointsAxis->setStatusTip (tr ("Show only axis points."));
-  m_actionViewDocumentPointsAxis->setWhatsThis (tr ("Show Axis Points\n\n"
-                                                     "Show only digitized points that belong to the axis"));
-
-  m_actionViewDocumentPointsCurve = new QAction (tr ("Show Curve's Points"), this);
+  m_actionViewDocumentPointsCurve = new QAction (tr ("Show Selected Curve's Points"), this);
   m_actionViewDocumentPointsCurve->setCheckable (true);
   m_actionViewDocumentPointsCurve->setStatusTip (tr ("Show only points in the currently selected curve."));
   m_actionViewDocumentPointsCurve->setWhatsThis (tr ("Show Curve's Points\n\n"
-                                                     "Show only digitized points that belong to the currently selected curve"));
+                                                     "Show only digitized points that belong to the currently selected curve."));
 
   m_actionViewDocumentPointsAll = new QAction (tr ("Show All Points"), this);
   m_actionViewDocumentPointsAll->setCheckable (true);
@@ -361,7 +355,6 @@ void MainWindow::createActionsView ()
 
   m_groupDocumentPoints = new QActionGroup(this);
   m_groupDocumentPoints->addAction (m_actionViewDocumentPointsNone);
-  m_groupDocumentPoints->addAction (m_actionViewDocumentPointsAxis);
   m_groupDocumentPoints->addAction (m_actionViewDocumentPointsCurve);
   m_groupDocumentPoints->addAction (m_actionViewDocumentPointsAll);
   connect (m_groupDocumentPoints, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupDocumentPoints(QAction*)));
@@ -518,7 +511,6 @@ void MainWindow::createMenus()
   m_menuViewDocument->addAction (m_actionViewDocumentImageFiltered);
   m_menuViewDocument->insertSeparator(m_actionViewDocumentPointsNone);
   m_menuViewDocument->addAction (m_actionViewDocumentPointsNone);
-  m_menuViewDocument->addAction (m_actionViewDocumentPointsAxis);
   m_menuViewDocument->addAction (m_actionViewDocumentPointsCurve);
   m_menuViewDocument->addAction (m_actionViewDocumentPointsAll);
   m_menuView->addMenu (m_menuViewDocument);
@@ -579,12 +571,12 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
-  m_comboCurve = new QComboBox ();
-  m_comboCurve->setMinimumWidth (180);
-  m_comboCurve->setStatusTip ("Select curve for new points.");
-  m_comboCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
-                                  "Select curve for any new points. Every point belongs to one curve."));
-  // No need to connect m_comboCurve to push this value somewhere since this value is pulled when needed
+  m_cmbCurve = new QComboBox ();
+  m_cmbCurve->setMinimumWidth (180);
+  m_cmbCurve->setStatusTip ("Select curve for new points.");
+  m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
+                                "Select curve for any new points. Every point belongs to one curve."));
+  connect (m_cmbCurve, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbCurve (int)));
 
   m_toolDigitize = new QToolBar (tr ("Drawing"), this);
   m_toolDigitize->addAction (m_actionDigitizeSelect);
@@ -594,7 +586,7 @@ void MainWindow::createToolBars ()
   m_toolDigitize->addAction (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizePointMatch);
   m_toolDigitize->addAction (m_actionDigitizeSegment);
-  m_toolDigitize->addWidget (m_comboCurve);
+  m_toolDigitize->addWidget (m_cmbCurve);
   addToolBar (m_toolDigitize);
 }
 
@@ -709,15 +701,15 @@ void MainWindow::loadImage (const QString &fileName,
 
 void MainWindow::loadCurveNamesFromCmdMediator ()
 {
-  m_comboCurve->clear ();
+  m_cmbCurve->clear ();
   QStringList curvesGraphsNames = m_cmdMediator->curvesGraphsNames ();
   QStringList::iterator itr;
   for (itr = curvesGraphsNames.begin (); itr != curvesGraphsNames.end (); itr++) {
 
     QString curvesGraphName = *itr;
-    m_comboCurve->addItem (curvesGraphName);
+    m_cmbCurve->addItem (curvesGraphName);
   }
-  m_comboCurve->setCurrentIndex (0);
+  m_cmbCurve->setCurrentIndex (0);
 }
 
 bool MainWindow::maybeSave()
@@ -789,7 +781,7 @@ GraphicsScene &MainWindow::scene ()
 
 QString MainWindow::selectedCurrentCurve () const
 {
-  return m_comboCurve->currentText ();
+  return m_cmbCurve->currentText ();
 }
 
 void MainWindow::setCurrentFile (const QString &fileName)
@@ -903,6 +895,13 @@ void MainWindow::slotCanUndoChanged (bool canUndo)
   m_actionEditUndo->setEnabled (canUndo);
 }
 
+void MainWindow::slotCmbCurve(int /* currentIndex */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
+
+  updateViewedPoints();
+}
+
 void MainWindow::slotContextMenuEvent (QString pointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
@@ -915,7 +914,7 @@ void MainWindow::slotDigitizeAxis ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeAxis";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_AXIS);
-  m_comboCurve->setEnabled (false);
+  m_cmbCurve->setEnabled (false);
 }
 
 void MainWindow::slotDigitizeCurve ()
@@ -923,7 +922,7 @@ void MainWindow::slotDigitizeCurve ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeCurve";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
-  m_comboCurve->setEnabled (true);
+  m_cmbCurve->setEnabled (true);
 }
 
 void MainWindow::slotDigitizePointMatch ()
@@ -931,7 +930,7 @@ void MainWindow::slotDigitizePointMatch ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizePointMatch";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_POINT_MATCH);
-  m_comboCurve->setEnabled (true);
+  m_cmbCurve->setEnabled (true);
 }
 
 void MainWindow::slotDigitizeSegment ()
@@ -939,7 +938,7 @@ void MainWindow::slotDigitizeSegment ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSegment";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SEGMENT);
-  m_comboCurve->setEnabled (true);
+  m_cmbCurve->setEnabled (true);
 }
 
 void MainWindow::slotDigitizeSelect ()
@@ -947,7 +946,7 @@ void MainWindow::slotDigitizeSelect ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSelect";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SELECT);
-  m_comboCurve->setEnabled (false);
+  m_cmbCurve->setEnabled (false);
 }
 
 void MainWindow::slotEditCopy ()
@@ -1253,29 +1252,11 @@ void MainWindow::slotViewGroupDocumentImage(QAction *action)
   }
 }
 
-void MainWindow::slotViewGroupDocumentPoints(QAction *action)
+void MainWindow::slotViewGroupDocumentPoints(QAction * /* action */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupDocumentPoints";
 
-  if (action == m_actionViewDocumentPointsAll) {
-
-    m_scene->showPoints (true);
-
-  } else if (action == m_actionViewDocumentPointsAxis) {
-
-    m_scene->showPoints (true);
-
-  } else if (action == m_actionViewDocumentPointsCurve) {
-
-    m_scene->showPoints (true);
-
-  } else if (action == m_actionViewDocumentPointsNone) {
-
-    m_scene->showPoints (false);
-
-  } else {
-    Q_ASSERT (false);
-  }
+  updateViewedPoints ();
 }
 
 void MainWindow::slotViewGroupStatus(QAction *action)
@@ -1671,6 +1652,27 @@ void MainWindow::updateControls ()
 
   m_actionZoomIn->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
   m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
+}
+
+void MainWindow::updateViewedPoints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedPoints";
+
+  if (m_actionViewDocumentPointsAll->isChecked ()) {
+
+    m_scene->showPoints (true, true);
+
+  } else if (m_actionViewDocumentPointsCurve->isChecked ()) {
+
+    m_scene->showPoints (true, false, m_cmbCurve->currentText ());
+
+  } else if (m_actionViewDocumentPointsNone->isChecked ()) {
+
+    m_scene->showPoints (false);
+
+  } else {
+    Q_ASSERT (false);
+  }
 }
 
 GraphicsView &MainWindow::view ()

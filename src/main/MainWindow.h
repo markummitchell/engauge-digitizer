@@ -61,6 +61,7 @@ public:
 private slots:
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
+  void slotCmbCurve(int);
   void slotContextMenuEvent (QString);
   void slotDigitizeAxis ();
   void slotDigitizeCurve ();
@@ -143,8 +144,9 @@ private:
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
-  void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateAfterCommandStatusBarCoords ();
+  void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateViewedPoints ();
 
   QString m_curfile;
 
@@ -185,7 +187,6 @@ private:
   QAction *m_actionViewDocumentImageFiltered;
   QActionGroup *m_groupDocumentPoints;
   QAction *m_actionViewDocumentPointsNone;
-  QAction *m_actionViewDocumentPointsAxis;
   QAction *m_actionViewDocumentPointsCurve;
   QAction *m_actionViewDocumentPointsAll;
   QMenu *m_menuViewStatus;
@@ -220,7 +221,7 @@ private:
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
-  QComboBox *m_comboCurve;
+  QComboBox *m_cmbCurve;
   QToolBar *m_toolDigitize;
   LoadImageFromUrl *m_loadImageFromUrl;
 
