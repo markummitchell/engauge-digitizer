@@ -99,6 +99,11 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
   }
 }
 
+bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
+{
+  return (str.right (1).at (0).digitValue() >= 0);
+}
+
 QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
                                                             const QString &curveName)
 {
@@ -108,6 +113,85 @@ QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
                             item);
 
   return item;
+}
+
+QString DlgPreferencesPageCurves::nextCurveName () const
+{
+  Q_ASSERT (m_listCurves != 0);
+
+  int row = m_listCurves->currentRow (); // This is -1 for no selection
+  QString curveNameBefore, curveNameAfter;
+  if (row > 0) {
+    curveNameBefore = m_listCurves->item (row - 1)->text ();
+  }
+  if ((row >= 0) && (row < m_listCurves->count () - 1)) {
+    curveNameAfter = m_listCurves->item (row)->text ();
+  }
+
+  QString curveNameNext;
+  if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameBefore)) {
+
+    // Pick a name before curveNameAfter
+    int numberAfter = numberAtEnd (curveNameAfter);
+    int numberNew = numberAfter - 1;
+    int pos = curveNameAfter.lastIndexOf (QString::number (numberAfter));
+    if (pos >= 0) {
+
+      curveNameNext = QString ("%1%2")
+                      .arg (curveNameAfter.left (pos - 1))
+                      .arg (numberNew);
+
+    } else {
+
+      curveNameNext = curveNameAfter; // Better than nothing
+
+    }
+
+  } else if (!curveNameBefore.isEmpty () && endsWithNumber (curveNameBefore)) {
+
+    // Pick a name after curveNameBefore, being sure to not match curveNameAfter
+    int numberBefore = numberAtEnd (curveNameBefore);
+    int numberNew = numberBefore + 1;
+    int pos = curveNameBefore.indexOf (QString::number (numberBefore));
+    if (pos >= 0) {
+
+      curveNameNext = QString ("%1%2")
+                      .arg (curveNameBefore.left (pos - 1))
+                      .arg (numberNew);
+
+    } else {
+
+      curveNameNext = curveNameBefore; // Better than nothing
+
+    }
+  }
+
+  // At this point we have curveNameNext which does not conflict with curveNameBefore or
+  // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
+  // adding to the name until there is no conflict
+  while (m_listCurves->findItems (curveNameNext, Qt::MatchFixedString).count () > 0) {
+    curveNameNext += "-1";
+  }
+
+  return curveNameNext;
+}
+
+int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
+{
+  Q_ASSERT (endsWithNumber (str));
+
+  // Go backward until the first nondigit
+  int ch = str.size () - 1;
+  while (str.at (ch).digitValue() >= 0) {
+    --ch;
+
+    if (ch < 0) {
+      break;
+    }
+  }
+  ++ch;
+
+  return str.mid (ch).toInt ();
 }
 
 void DlgPreferencesPageCurves::slotCurveSelectionChanged ()
@@ -129,7 +213,7 @@ void DlgPreferencesPageCurves::slotNew ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotNew";
 
-  QString curveNameSuggestion ("Suggestion");
+  QString curveNameSuggestion = nextCurveName ();
 
   Q_ASSERT (m_listCurves != 0);
   if (m_listCurves->currentRow () >= 0) {
@@ -142,11 +226,6 @@ void DlgPreferencesPageCurves::slotNew ()
     appendCurveName (curveNameSuggestion);
 
   }
-}
-
-void DlgPreferencesPageCurves::slotRename ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotRename";
 }
 
 void DlgPreferencesPageCurves::slotRemove ()

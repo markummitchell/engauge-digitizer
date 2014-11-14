@@ -24,7 +24,6 @@ private slots:
   void slotMoveUp ();
   void slotNew ();
   void slotRemove ();
-  void slotRename ();
 
 private:
   DlgPreferencesPageCurves(QWidget *parent = 0);
@@ -32,8 +31,11 @@ private:
   QListWidgetItem *appendCurveName (const QString &curveName);
   void createButtons (QGridLayout *layout);
   void createListCurves (QGridLayout *layout);
+  bool endsWithNumber (const QString &str) const;
   QListWidgetItem *insertCurveName (int row,
                                     const QString &curveName);
+  QString nextCurveName () const; // Pick good curve name to go at currentRow()
+  int numberAtEnd (const QString &str) const;
   void updateControls ();
 
   QPushButton *m_btnNew;
