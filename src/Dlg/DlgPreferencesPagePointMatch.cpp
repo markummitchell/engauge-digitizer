@@ -14,9 +14,10 @@ const int POINT_SEPARATION_MIN = 1;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 1;
 
-DlgPreferencesPagePointMatch::DlgPreferencesPagePointMatch(CmdMediator &,
+DlgPreferencesPagePointMatch::DlgPreferencesPagePointMatch(CmdMediator &cmdMediator,
                                                    QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);

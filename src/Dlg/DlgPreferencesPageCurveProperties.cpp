@@ -1,3 +1,4 @@
+#include "CmdMediator.h"
 #include "DlgPreferencesPageCurveProperties.h"
 #include "Logger.h"
 #include <QComboBox>
@@ -9,9 +10,10 @@
 #include <QPushButton>
 #include "ViewPreview.h"
 
-DlgPreferencesPageCurveProperties::DlgPreferencesPageCurveProperties(CmdMediator & /* cmdMediator */,
+DlgPreferencesPageCurveProperties::DlgPreferencesPageCurveProperties(CmdMediator &cmdMediator,
                                                                      QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);

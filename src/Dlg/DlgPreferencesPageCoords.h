@@ -2,9 +2,8 @@
 #define DLG_PREFERENCES_PAGE_COORDS_H
 
 #include "CoordsType.h"
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QComboBox;
 class QGridLayout;
 class QGroupBox;
@@ -15,7 +14,7 @@ class QRadioButton;
 class ViewPreview;
 
 /// Stacked widget page for editing coordinates preferences.
-class DlgPreferencesPageCoords : public QWidget
+class DlgPreferencesPageCoords : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

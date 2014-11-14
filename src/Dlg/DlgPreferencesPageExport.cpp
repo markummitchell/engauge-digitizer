@@ -18,9 +18,10 @@ const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
-DlgPreferencesPageExport::DlgPreferencesPageExport(CmdMediator &,
+DlgPreferencesPageExport::DlgPreferencesPageExport(CmdMediator &cmdMediator,
                                                    QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);

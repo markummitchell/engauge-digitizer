@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_EXPORT_H
 #define DLG_PREFERENCES_PAGE_EXPORT_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QGridLayout;
 class QHBoxLayout;
 class QLineEdit;
@@ -15,7 +14,7 @@ class QTextEdit;
 class QVBoxLayout;
 
 /// Stacked widget page for editing exporting preferences.
-class DlgPreferencesPageExport : public QWidget
+class DlgPreferencesPageExport : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

@@ -17,9 +17,10 @@ const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 1;
 const int POINT_SEPARATION_MAX = 10000;
 
-DlgPreferencesPageSegments::DlgPreferencesPageSegments(CmdMediator &,
+DlgPreferencesPageSegments::DlgPreferencesPageSegments(CmdMediator &cmdMediator,
                                                        QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);

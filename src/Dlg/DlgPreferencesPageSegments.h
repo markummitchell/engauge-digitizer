@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_SEGMENTS_H
 #define DLG_PREFERENCES_PAGE_SEGMENTS_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QCheckBox;
 class QComboBox;
 class QGridLayout;
@@ -12,7 +11,7 @@ class QLineEdit;
 class ViewPreview;
 
 /// Stacked widget page for editing Segments preferences, for DigitizeStateSegment.
-class DlgPreferencesPageSegments : public QWidget
+class DlgPreferencesPageSegments : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

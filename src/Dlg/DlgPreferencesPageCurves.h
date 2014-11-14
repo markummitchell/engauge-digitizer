@@ -1,15 +1,15 @@
 #ifndef DLG_PREFERENCES_PAGE_CURVES_H
 #define DLG_PREFERENCES_PAGE_CURVES_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QGridLayout;
 class QListWidget;
+class QListWidgetItem;
 class QPushButton;
 
 /// Stacked widget page for editing curves preferences.
-class DlgPreferencesPageCurves : public QWidget
+class DlgPreferencesPageCurves : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 
@@ -19,6 +19,7 @@ public:
                            QWidget *parent = 0);
 
 private slots:
+  void slotCurveSelectionChanged ();
   void slotMoveDown ();
   void slotMoveUp ();
   void slotNew ();
@@ -28,8 +29,12 @@ private slots:
 private:
   DlgPreferencesPageCurves(QWidget *parent = 0);
 
+  QListWidgetItem *appendCurveName (const QString &curveName);
   void createButtons (QGridLayout *layout);
   void createListCurves (QGridLayout *layout);
+  QListWidgetItem *insertCurveName (int row,
+                                    const QString &curveName);
+  void updateControls ();
 
   QPushButton *m_btnNew;
   QPushButton *m_btnRemove;

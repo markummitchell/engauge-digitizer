@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_GRID_REMOVAL_H
 #define DLG_PREFERENCES_PAGE_GRID_REMOVAL_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class ViewPreview;
 class QCheckBox;
 class QComboBox;
@@ -13,7 +12,7 @@ class QHBoxLayout;
 class QLineEdit;
 
 /// Stacked widget page for editing grid removal preferences.
-class DlgPreferencesPageGridRemoval : public QWidget
+class DlgPreferencesPageGridRemoval : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

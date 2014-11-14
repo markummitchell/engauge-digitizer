@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_GRID_DISPLAY_H
 #define DLG_PREFERENCES_PAGE_GRID_DISPLAY_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
@@ -11,7 +10,7 @@ class QLineEdit;
 class ViewPreview;
 
 /// Stacked widget page for editing grid display preferences.
-class DlgPreferencesPageGridDisplay : public QWidget
+class DlgPreferencesPageGridDisplay : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

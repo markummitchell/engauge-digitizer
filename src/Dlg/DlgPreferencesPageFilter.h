@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_FILTER_H
 #define DLG_PREFERENCES_PAGE_FILTER_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QGraphicsScene;
 class QGridLayout;
 class QLabel;
@@ -12,7 +11,7 @@ class ViewPreview;
 class ViewProfile;
 
 /// Stacked widget page for editing filtering preferences.
-class DlgPreferencesPageFilter : public QWidget
+class DlgPreferencesPageFilter : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

@@ -1,9 +1,8 @@
 #ifndef DLG_PREFERENCES_PAGE_CURVE_PROPERTIES_H
 #define DLG_PREFERENCES_PAGE_CURVE_PROPERTIES_H
 
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class ViewPreview;
 class QComboBox;
 class QGraphicsScene;
@@ -11,7 +10,7 @@ class QGridLayout;
 class QGroupBox;
 
 /// Stacked widget page for editing curve properties preferences.
-class DlgPreferencesPageCurveProperties : public QWidget
+class DlgPreferencesPageCurveProperties : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

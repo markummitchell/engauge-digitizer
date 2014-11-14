@@ -11,9 +11,10 @@
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 
-DlgPreferencesPageFilter::DlgPreferencesPageFilter(CmdMediator &,
+DlgPreferencesPageFilter::DlgPreferencesPageFilter(CmdMediator &cmdMediator,
                                                    QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   const int EMPTY_COLUMN_WIDTH = 40;
 

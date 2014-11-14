@@ -2,9 +2,8 @@
 #define DLG_PREFERENCES_PAGE_POINT_MATCH_H
 
 #include "CoordsType.h"
-#include <QWidget>
+#include "DlgPreferencesPageAbstractBase.h"
 
-class CmdMediator;
 class QComboBox;
 class QDoubleValidator;
 class QGridLayout;
@@ -13,7 +12,7 @@ class QLineEdit;
 class ViewPreview;
 
 /// Stacked widget page for editing point match preferences, for DigitizeStatePointMatch.
-class DlgPreferencesPagePointMatch : public QWidget
+class DlgPreferencesPagePointMatch : public DlgPreferencesPageAbstractBase
 {
   Q_OBJECT;
 

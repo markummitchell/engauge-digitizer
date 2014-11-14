@@ -1,3 +1,4 @@
+#include "CmdMediator.h"
 #include "DlgPreferencesPageGridDisplay.h"
 #include "Logger.h"
 #include <QComboBox>
@@ -12,9 +13,10 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgPreferencesPageGridDisplay::DlgPreferencesPageGridDisplay(CmdMediator & /* cmdMediator */,
+DlgPreferencesPageGridDisplay::DlgPreferencesPageGridDisplay(CmdMediator &cmdMediator,
                                                              QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);

@@ -27,7 +27,8 @@ const QString POLAR_UNITS_TURNS = "Turns";
 
 DlgPreferencesPageCoords::DlgPreferencesPageCoords(CmdMediator &cmdMediator,
                                                    QWidget *parent) :
-  QWidget (parent),
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent),
   m_coordsType (cmdMediator.coordsType ()),
   m_btnCartesian (0),
   m_btnPolar (0)

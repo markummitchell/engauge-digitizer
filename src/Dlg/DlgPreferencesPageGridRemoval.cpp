@@ -1,3 +1,4 @@
+#include "CmdMediator.h"
 #include "DlgPreferencesPageGridRemoval.h"
 #include "Logger.h"
 #include <QCheckBox>
@@ -18,9 +19,10 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgPreferencesPageGridRemoval::DlgPreferencesPageGridRemoval(CmdMediator & /* cmdMediator */,
+DlgPreferencesPageGridRemoval::DlgPreferencesPageGridRemoval(CmdMediator &cmdMediator,
                                                              QWidget *parent) :
-  QWidget (parent)
+  DlgPreferencesPageAbstractBase (cmdMediator,
+                                  parent)
 {
   const int COLUMN_CHECKBOX_WIDTH = 60;
 
