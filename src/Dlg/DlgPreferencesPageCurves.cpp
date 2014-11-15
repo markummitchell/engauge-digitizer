@@ -44,11 +44,8 @@ DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
 
 QListWidgetItem *DlgPreferencesPageCurves::appendCurveName (const QString &curveName)
 {
-  QListWidgetItem *item = new QListWidgetItem (curveName);
-  item->setFlags (item->flags () | Qt::ItemIsEditable);
-  m_listCurves->addItem (item);
-
-  return item;
+  return insertCurveName (m_listCurves->count (),
+                          curveName);
 }
 
 void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
@@ -106,10 +103,16 @@ bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
 QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
                                                             const QString &curveName)
 {
+  for (int rowExisting = 0; rowExisting < m_listCurves->count (); rowExisting++) {
+    m_listCurves->item (rowExisting)->setSelected (false);
+  }
+
   QListWidgetItem *item = new QListWidgetItem (curveName);
   item->setFlags (item->flags () | Qt::ItemIsEditable);
   m_listCurves->insertItem (row,
                             item);
+
+  m_listCurves->setCurrentItem (item);
 
   return item;
 }
@@ -259,6 +262,21 @@ void DlgPreferencesPageCurves::slotRemove ()
 void DlgPreferencesPageCurves::updateControls ()
 {
   Q_ASSERT (m_listCurves != 0);
+
+  // Debug stuff
+  QList<QListWidgetItem*> items = m_listCurves->selectedItems ();
+  QString selectedItems;
+  for (int ithItem = 0; ithItem < items.count (); ithItem++) {
+    QListWidgetItem *item = items.at (ithItem);
+    if (ithItem > 0) {
+      selectedItems += ",";
+    }
+    selectedItems += QString::number (m_listCurves->row (item));
+  }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::updateControls"
+                              << " currentRow=" << m_listCurves->currentRow ()
+                              << " selected=" << selectedItems.toLatin1 ().data ();
 
   // First and last selected items?
   QListWidgetItem *itemFirst = 0, *itemLast = 0;
