@@ -117,12 +117,17 @@ QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
 
 QString DlgPreferencesPageCurves::nextCurveName () const
 {
+  const QString DASH_ONE ("-1"); // Nice value to start a new range at a lower level than the current level
+
   Q_ASSERT (m_listCurves != 0);
 
   int row = m_listCurves->currentRow (); // This is -1 for no selection
   QString curveNameBefore, curveNameAfter;
   if (row > 0) {
     curveNameBefore = m_listCurves->item (row - 1)->text ();
+  } else if ((row < 0) && (m_listCurves->count () > 0)) {
+    // Append after list which has at least one entry
+    curveNameBefore = m_listCurves->item (m_listCurves->count () - 1)->text ();
   }
   if ((row >= 0) && (row < m_listCurves->count () - 1)) {
     curveNameAfter = m_listCurves->item (row)->text ();
@@ -156,9 +161,16 @@ QString DlgPreferencesPageCurves::nextCurveName () const
     if (pos >= 0) {
 
       curveNameNext = QString ("%1%2")
-                      .arg (curveNameBefore.left (pos - 1))
+                      .arg (curveNameBefore.left (pos))
                       .arg (numberNew);
+      if (curveNameNext == curveNameAfter) {
 
+        // The difference between before and after is exactly one so we go to a lower level
+        curveNameNext = QString ("%1%2")
+                        .arg (curveNameBefore)
+                        .arg (DASH_ONE);
+
+      }
     } else {
 
       curveNameNext = curveNameBefore; // Better than nothing
@@ -170,7 +182,7 @@ QString DlgPreferencesPageCurves::nextCurveName () const
   // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
   // adding to the name until there is no conflict
   while (m_listCurves->findItems (curveNameNext, Qt::MatchFixedString).count () > 0) {
-    curveNameNext += "-1";
+    curveNameNext += DASH_ONE;
   }
 
   return curveNameNext;

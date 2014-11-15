@@ -15,6 +15,7 @@ public:
   virtual ~DlgPreferencesPageAbstractBase();
 
 protected:
+  /// Provide access to Document information wrapped inside CmdMediator.
   CmdMediator &cmdMediator ();
 
 private:
