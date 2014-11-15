@@ -3,9 +3,9 @@
 
 #include "DlgPreferencesPageAbstractBase.h"
 
+class DlgModelCurves;
 class QGridLayout;
-class QListWidget;
-class QListWidgetItem;
+class QListView;
 class QPushButton;
 
 /// Stacked widget page for editing curves preferences.
@@ -26,12 +26,12 @@ private slots:
 private:
   DlgPreferencesPageCurves(QWidget *parent = 0);
 
-  QListWidgetItem *appendCurveName (const QString &curveName);
+  void appendCurveName (const QString &curveName);
   void createButtons (QGridLayout *layout);
   void createListCurves (QGridLayout *layout);
   bool endsWithNumber (const QString &str) const;
-  QListWidgetItem *insertCurveName (int row,
-                                    const QString &curveName);
+  void insertCurveName (int row,
+                        const QString &curveName);
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   void updateControls ();
@@ -39,7 +39,9 @@ private:
   QPushButton *m_btnNew;
   QPushButton *m_btnRemove;
   QPushButton *m_btnRename;
-  QListWidget *m_listCurves;
+
+  DlgModelCurves *m_modelCurves; // Model for m_listCurves
+  QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
 };
 
 #endif // DLG_PREFERENCES_PAGE_CURVES_H

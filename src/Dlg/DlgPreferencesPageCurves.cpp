@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
-#include <QListWidget>
+#include <QListView>
 #include <QPushButton>
 
 DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
@@ -42,10 +42,9 @@ DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
   updateControls ();
 }
 
-QListWidgetItem *DlgPreferencesPageCurves::appendCurveName (const QString &curveName)
+void DlgPreferencesPageCurves::appendCurveName (const QString &curveName)
 {
-  return insertCurveName (m_listCurves->count (),
-                          curveName);
+
 }
 
 void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
@@ -69,8 +68,8 @@ void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
 
 void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
 {
-  // There is no Qt::ItemIsEditable flag for QListWidget, so instead we set that flag for the QListWidgetItems
-  m_listCurves = new QListWidget;
+  // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
+  m_listCurves = new QListView;
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
                                   "Click on a curve name to edit it.\n\n"
                                   "Reorder curves by dragging them around."));
@@ -100,21 +99,9 @@ bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
   return success;
 }
 
-QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
-                                                            const QString &curveName)
+void DlgPreferencesPageCurves::insertCurveName (int row,
+                                                const QString &curveName)
 {
-  for (int rowExisting = 0; rowExisting < m_listCurves->count (); rowExisting++) {
-    m_listCurves->item (rowExisting)->setSelected (false);
-  }
-
-  QListWidgetItem *item = new QListWidgetItem (curveName);
-  item->setFlags (item->flags () | Qt::ItemIsEditable);
-  m_listCurves->insertItem (row,
-                            item);
-
-  m_listCurves->setCurrentItem (item);
-
-  return item;
 }
 
 QString DlgPreferencesPageCurves::nextCurveName () const
@@ -123,89 +110,7 @@ QString DlgPreferencesPageCurves::nextCurveName () const
 
   Q_ASSERT (m_listCurves != 0);
 
-  int numSelectedItems = m_listCurves->selectedItems ().count ();
-  int numItems = m_listCurves->count ();
-
-  int currentIndex = -1;
-  QString curveNameBefore, curveNameAfter;
-  if ((numSelectedItems == 0) &&
-      (numItems > 0)) {
-
-    // Append after list which has at least one entry
-    currentIndex = numItems;
-
-  } else if (numSelectedItems == 1) {
-
-    // Insert before the selected index
-    QListWidgetItem *item = m_listCurves->selectedItems ().at(0);
-    currentIndex = m_listCurves->row (item);
-
-  }
-
-  if (currentIndex > 0) {
-
-    curveNameBefore = m_listCurves->item (currentIndex - 1)->text ();
-
-  }
-
-  if ((0 <= currentIndex) &&
-      (currentIndex < numItems)) {
-
-    curveNameAfter = m_listCurves->item (currentIndex)->text ();
-
-  }
-
-  QString curveNameNext;
-  if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameAfter)) {
-
-    // Pick a name before curveNameAfter
-    int numberAfter = numberAtEnd (curveNameAfter);
-    int numberNew = numberAfter - 1;
-    int pos = curveNameAfter.lastIndexOf (QString::number (numberAfter));
-    if (pos >= 0) {
-
-      curveNameNext = QString ("%1%2")
-                      .arg (curveNameAfter.left (pos))
-                      .arg (numberNew);
-
-    } else {
-
-      curveNameNext = curveNameAfter; // Better than nothing
-
-    }
-
-  } else if (!curveNameBefore.isEmpty () && endsWithNumber (curveNameBefore)) {
-
-    // Pick a name after curveNameBefore, being sure to not match curveNameAfter
-    int numberBefore = numberAtEnd (curveNameBefore);
-    int numberNew = numberBefore + 1;
-    int pos = curveNameBefore.indexOf (QString::number (numberBefore));
-    if (pos >= 0) {
-
-      curveNameNext = QString ("%1%2")
-                      .arg (curveNameBefore.left (pos))
-                      .arg (numberNew);
-      if (curveNameNext == curveNameAfter) {
-
-        // The difference between before and after is exactly one so we go to a lower level
-        curveNameNext = QString ("%1%2")
-                        .arg (curveNameBefore)
-                        .arg (DASH_ONE);
-
-      }
-    } else {
-
-      curveNameNext = curveNameBefore; // Better than nothing
-
-    }
-  }
-
-  // At this point we have curveNameNext which does not conflict with curveNameBefore or
-  // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
-  // adding to the name until there is no conflict
-  while (m_listCurves->findItems (curveNameNext, Qt::MatchFixedString).count () > 0) {
-    curveNameNext += DASH_ONE;
-  }
+  QString curveNameNext ("Next");
 
   return curveNameNext;
 }
@@ -240,18 +145,6 @@ void DlgPreferencesPageCurves::slotNew ()
 
   QString curveNameSuggestion = nextCurveName ();
 
-  Q_ASSERT (m_listCurves != 0);
-  if (m_listCurves->selectedItems ().count () == 1) {
-
-    QListWidgetItem *item = m_listCurves->selectedItems ().at(0);
-    insertCurveName (m_listCurves->row (item),
-                     curveNameSuggestion);
-
-  } else {
-
-    appendCurveName (curveNameSuggestion);
-
-  }
 }
 
 void DlgPreferencesPageCurves::slotRemove ()
@@ -261,37 +154,7 @@ void DlgPreferencesPageCurves::slotRemove ()
 
 void DlgPreferencesPageCurves::updateControls ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::updateControls";
+
   Q_ASSERT (m_listCurves != 0);
-
-  // Debug stuff
-  QList<QListWidgetItem*> items = m_listCurves->selectedItems ();
-  QString selectedItems;
-  for (int ithItem = 0; ithItem < items.count (); ithItem++) {
-    QListWidgetItem *item = items.at (ithItem);
-    if (ithItem > 0) {
-      selectedItems += ",";
-    }
-    selectedItems += QString::number (m_listCurves->row (item));
-  }
-
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::updateControls"
-                              << " currentRow=" << m_listCurves->currentRow ()
-                              << " selected=" << selectedItems.toLatin1 ().data ();
-
-  // First and last selected items?
-  QListWidgetItem *itemFirst = 0, *itemLast = 0;
-  if (m_listCurves->count () > 0) {
-    itemFirst = m_listCurves->item (0);
-    itemLast = m_listCurves->item (m_listCurves->count () - 1);
-  }
-  bool firstIsSelected = false, lastIsSelected = false;
-  for (int row = 0; row < m_listCurves->selectedItems ().count (); row++) {
-    firstIsSelected |= (m_listCurves->selectedItems ().at (row) == itemFirst);
-    lastIsSelected |= (m_listCurves->selectedItems ().at (row) == itemLast);
-  }
-
-  m_btnNew->setEnabled ((m_listCurves->selectedItems ().count () == 0) ||
-                        (m_listCurves->selectedItems ().count () == 1));
-  m_btnRemove->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
-                           (m_listCurves->count () > 1)); // Leave at least one curve
 }
