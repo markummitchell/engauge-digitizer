@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgPreferencesPageCurves.h"
 #include "Logger.h"
+#include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
 #include <QListWidget>
@@ -54,6 +55,8 @@ void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
 {
   m_btnNew = new QPushButton ("New...");
   m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
+                              "If a curve is selected then the new curve will be inserted just before it, otherwise the new curve "
+                              "will be added at the end.\n\n"
                               "Every curve name must be unique"));
   m_btnNew->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   connect (m_btnNew, SIGNAL (pressed ()), this, SLOT (slotNew()));
@@ -101,7 +104,14 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
 
 bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
 {
-  return (str.right (1).at (0).digitValue() >= 0);
+  bool success = false;
+
+  if (!str.isEmpty ()) {
+
+      success = (str.right (1).at (0).digitValue() >= 0);
+  }
+
+  return success;
 }
 
 QListWidgetItem *DlgPreferencesPageCurves::insertCurveName (int row,
@@ -121,20 +131,40 @@ QString DlgPreferencesPageCurves::nextCurveName () const
 
   Q_ASSERT (m_listCurves != 0);
 
-  int row = m_listCurves->currentRow (); // This is -1 for no selection
+  int numSelectedItems = m_listCurves->selectedItems ().count ();
+  int numItems = m_listCurves->count ();
+
+  int currentIndex = -1;
   QString curveNameBefore, curveNameAfter;
-  if (row > 0) {
-    curveNameBefore = m_listCurves->item (row - 1)->text ();
-  } else if ((row < 0) && (m_listCurves->count () > 0)) {
+  if ((numSelectedItems == 0) &&
+      (numItems > 0)) {
+
     // Append after list which has at least one entry
-    curveNameBefore = m_listCurves->item (m_listCurves->count () - 1)->text ();
+    currentIndex = numItems;
+
+  } else if (numSelectedItems == 1) {
+
+    // Insert before the selected index
+    QListWidgetItem *item = m_listCurves->selectedItems ().at(0);
+    currentIndex = m_listCurves->row (item);
+
   }
-  if ((row >= 0) && (row < m_listCurves->count () - 1)) {
-    curveNameAfter = m_listCurves->item (row)->text ();
+
+  if (currentIndex > 0) {
+
+    curveNameBefore = m_listCurves->item (currentIndex - 1)->text ();
+
+  }
+
+  if ((0 <= currentIndex) &&
+      (currentIndex < numItems)) {
+
+    curveNameAfter = m_listCurves->item (currentIndex)->text ();
+
   }
 
   QString curveNameNext;
-  if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameBefore)) {
+  if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameAfter)) {
 
     // Pick a name before curveNameAfter
     int numberAfter = numberAtEnd (curveNameAfter);
@@ -143,7 +173,7 @@ QString DlgPreferencesPageCurves::nextCurveName () const
     if (pos >= 0) {
 
       curveNameNext = QString ("%1%2")
-                      .arg (curveNameAfter.left (pos - 1))
+                      .arg (curveNameAfter.left (pos))
                       .arg (numberNew);
 
     } else {
@@ -193,6 +223,7 @@ int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
   Q_ASSERT (endsWithNumber (str));
 
   // Go backward until the first nondigit
+  int sign = +1;
   int ch = str.size () - 1;
   while (str.at (ch).digitValue() >= 0) {
     --ch;
@@ -203,7 +234,7 @@ int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
   }
   ++ch;
 
-  return str.mid (ch).toInt ();
+  return sign * str.mid (ch).toInt ();
 }
 
 void DlgPreferencesPageCurves::slotCurveSelectionChanged ()
@@ -228,9 +259,10 @@ void DlgPreferencesPageCurves::slotNew ()
   QString curveNameSuggestion = nextCurveName ();
 
   Q_ASSERT (m_listCurves != 0);
-  if (m_listCurves->currentRow () >= 0) {
+  if (m_listCurves->selectedItems ().count () == 1) {
 
-    insertCurveName (m_listCurves->currentRow (),
+    QListWidgetItem *item = m_listCurves->selectedItems ().at(0);
+    insertCurveName (m_listCurves->row (item),
                      curveNameSuggestion);
 
   } else {
@@ -261,6 +293,8 @@ void DlgPreferencesPageCurves::updateControls ()
     lastIsSelected |= (m_listCurves->selectedItems ().at (row) == itemLast);
   }
 
+  m_btnNew->setEnabled ((m_listCurves->selectedItems ().count () == 0) ||
+                        (m_listCurves->selectedItems ().count () == 1));
   m_btnRemove->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
                            (m_listCurves->count () > 1)); // Leave at least one curve
   m_btnMoveUp->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
