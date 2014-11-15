@@ -20,8 +20,6 @@ public:
 
 private slots:
   void slotCurveSelectionChanged ();
-  void slotMoveDown ();
-  void slotMoveUp ();
   void slotNew ();
   void slotRemove ();
 
@@ -40,8 +38,6 @@ private:
 
   QPushButton *m_btnNew;
   QPushButton *m_btnRemove;
-  QPushButton *m_btnMoveUp;
-  QPushButton *m_btnMoveDown;
   QPushButton *m_btnRename;
   QListWidget *m_listCurves;
 };

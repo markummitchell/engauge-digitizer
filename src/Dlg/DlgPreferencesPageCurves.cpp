@@ -68,29 +68,18 @@ void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
   m_btnRemove->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   connect (m_btnRemove, SIGNAL (pressed ()), this, SLOT (slotRemove()));
   layout->addWidget (m_btnRemove, 1, 2, 1, 1, Qt::AlignRight);
-
-  m_btnMoveUp = new QPushButton ("Move Up");
-  m_btnMoveUp->setWhatsThis (tr ("Move the currently selected curve up in the curve list.\n\n"
-                                 "Exported curves will be in the same order as displayed here"));
-  m_btnMoveUp->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-  connect (m_btnMoveUp, SIGNAL (pressed ()), this, SLOT (slotMoveUp()));
-  layout->addWidget (m_btnMoveUp, 3, 3, 1, 1, Qt::AlignBottom);
-
-  m_btnMoveDown = new QPushButton ("Move Down");
-  m_btnMoveDown->setWhatsThis (tr ("Move the currently selected curve down in the curve list.\n\n"
-                                   "Exported curves will be in the same order as displayed here"));
-  m_btnMoveDown->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-  connect (m_btnMoveDown, SIGNAL (pressed ()), this, SLOT (slotMoveDown()));
-  layout->addWidget (m_btnMoveDown, 4, 3, 1, 1, Qt::AlignTop);
 }
 
 void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
 {
   // There is no Qt::ItemIsEditable flag for QListWidget, so instead we set that flag for the QListWidgetItems
   m_listCurves = new QListWidget;
-  m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document"));
+  m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
+                                  "Click on a curve name to edit it.\n\n"
+                                  "Reorder curves by dragging them around."));
   m_listCurves->setMinimumHeight (300);
   m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
+  m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
   layout->addWidget (m_listCurves, 2, 1, 4, 2);
   connect (m_listCurves, SIGNAL (itemSelectionChanged ()), this, SLOT (slotCurveSelectionChanged ()));
 
@@ -242,16 +231,6 @@ void DlgPreferencesPageCurves::slotCurveSelectionChanged ()
   updateControls ();
 }
 
-void DlgPreferencesPageCurves::slotMoveDown ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotMoveDown";
-}
-
-void DlgPreferencesPageCurves::slotMoveUp ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotMoveUp";
-}
-
 void DlgPreferencesPageCurves::slotNew ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotNew";
@@ -297,8 +276,4 @@ void DlgPreferencesPageCurves::updateControls ()
                         (m_listCurves->selectedItems ().count () == 1));
   m_btnRemove->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
                            (m_listCurves->count () > 1)); // Leave at least one curve
-  m_btnMoveUp->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
-                           !firstIsSelected);
-  m_btnMoveDown->setEnabled ((m_listCurves->selectedItems ().count () > 0) &&
-                             !lastIsSelected);
 }
