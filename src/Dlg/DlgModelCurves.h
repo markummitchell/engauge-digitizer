@@ -3,6 +3,7 @@
 
 #include "DlgModelCurveEntry.h"
 #include <QAbstractListModel>
+#include <QHash>
 #include <QStringList>
 
 class DlgModelCurves : public QAbstractListModel
@@ -22,8 +23,12 @@ public:
 
 private:
 
+  QString roleAsString (int role) const;
+
   /// Store entries as QStrings for easy translation into QVariants. Use DlgModelCurveEntry to translate
   QStringList m_modelCurveEntries;
+
+  static QHash<int, QString> m_rolesAsStrings;
 };
 
 #endif // DLG_MODEL_CURVES_H

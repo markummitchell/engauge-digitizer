@@ -3,29 +3,36 @@
 #include "Logger.h"
 #include <QVariant>
 
+QHash<int, QString> DlgModelCurves::m_rolesAsStrings;
+
 DlgModelCurves::DlgModelCurves()
 {
 }
 
 QVariant DlgModelCurves::data (const QModelIndex &index,
-                               int /* role */) const
+                               int role) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::data"
-                               << " indexRow=" << index.row ();
+                               << " indexRow=" << index.row ()
+                               << " role=" << roleAsString (role).toLatin1 ().data ();
 
   int row = index.row ();
+  if (row < 0 || row >= m_modelCurveEntries.count ()) {
+    return QVariant();
+  }
 
-  Q_ASSERT (row < m_modelCurveEntries.count ());
+  if (role != Qt::DisplayRole) {
+    return QVariant();
+  }
 
   QString value = m_modelCurveEntries.at (row);
-
-  return QVariant (value);
+  return value;
 }
 
 
 Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
 {
-  return flags (index) |
+  return QAbstractListModel::flags (index) |
       Qt::ItemIsSelectable |
       Qt::ItemIsEditable;
 }
@@ -73,9 +80,41 @@ bool DlgModelCurves::removeRows (int row,
   return success;
 }
 
+QString DlgModelCurves::roleAsString (int role) const
+{
+  if (m_rolesAsStrings.count () == 0) {
+    m_rolesAsStrings [Qt::AccessibleDescriptionRole] = "AccessibleDescriptionRole";
+    m_rolesAsStrings [Qt::AccessibleTextRole] = "AccessibleTextRole";
+    m_rolesAsStrings [Qt::BackgroundRole] = "BackgroundRole";
+    m_rolesAsStrings [Qt::BackgroundColorRole] = "BackgroundColorRole";
+    m_rolesAsStrings [Qt::CheckStateRole] = "CheckStateRole";
+    m_rolesAsStrings [Qt::DecorationRole] = "DecorationRole";
+    m_rolesAsStrings [Qt::DisplayRole] = "DisplayRole";
+    m_rolesAsStrings [Qt::EditRole] = "EditRole";
+    m_rolesAsStrings [Qt::FontRole] = "FontRole";
+    m_rolesAsStrings [Qt::ForegroundRole] = "ForegroundRole";
+    m_rolesAsStrings [Qt::InitialSortOrderRole] = "InitialSortOrderRole";
+    m_rolesAsStrings [Qt::SizeHintRole] = "SizeHintRole";
+    m_rolesAsStrings [Qt::StatusTipRole] = "StatusTipRole";
+    m_rolesAsStrings [Qt::TextAlignmentRole] = "TextAlignmentRole";
+    m_rolesAsStrings [Qt::TextColorRole] = "TextColorRole";
+    m_rolesAsStrings [Qt::ToolTipRole] = "ToolTipRole";
+    m_rolesAsStrings [Qt::UserRole] = "UserRole";
+    m_rolesAsStrings [Qt::WhatsThisRole] = "WhatsThisRole";
+  }
+
+  Q_ASSERT (m_rolesAsStrings.contains (role));
+
+  return m_rolesAsStrings [role];
+}
+
 int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
 {
-  return m_modelCurveEntries.count ();
+  int count = m_modelCurveEntries.count ();
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::rowCount count=" << count;
+
+  return count;
 }
 
 bool DlgModelCurves::setData (const QModelIndex &index,
