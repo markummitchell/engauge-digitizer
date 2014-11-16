@@ -23,6 +23,8 @@ public:
   DlgPreferencesPageCoords(CmdMediator &cmdMediator,
                            QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotCartesian ();
   void slotPolar ();

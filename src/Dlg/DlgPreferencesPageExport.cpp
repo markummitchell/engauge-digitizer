@@ -300,6 +300,11 @@ void DlgPreferencesPageExport::createXLabel (QHBoxLayout *layoutMisc)
   connect (m_editXLabel, SIGNAL (editingFinished ()), this, SLOT (slotXLabel()));
 }
 
+void DlgPreferencesPageExport::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::load";
+}
+
 void DlgPreferencesPageExport::slotDelimitersCommas(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotDelimitersCommas";

@@ -153,6 +153,11 @@ void DlgPreferencesPageCurveProperties::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+void DlgPreferencesPageCurveProperties::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::load";
+}
+
 void DlgPreferencesPageCurveProperties::slotLineColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotLineColor";

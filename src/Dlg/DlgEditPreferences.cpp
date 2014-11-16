@@ -137,3 +137,12 @@ void DlgEditPreferences::createStackedWidgets ()
                            ":/engauge/img/settings_segments.png",
                            "Segments");
 }
+
+void DlgEditPreferences::showEvent (QShowEvent * /* event */)
+{
+  for (int i = 0; i < m_stackedWidget->count (); i++) {
+
+    DlgPreferencesPageAbstractBase *page = (DlgPreferencesPageAbstractBase *) m_stackedWidget->widget (i);
+    page->load ();
+  }
+}

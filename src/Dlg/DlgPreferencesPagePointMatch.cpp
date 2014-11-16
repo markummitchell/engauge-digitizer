@@ -102,6 +102,11 @@ void DlgPreferencesPagePointMatch::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+void DlgPreferencesPagePointMatch::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::load";
+}
+
 void DlgPreferencesPagePointMatch::slotAcceptedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotAcceptedPointColor";

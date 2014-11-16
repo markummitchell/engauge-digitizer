@@ -19,6 +19,8 @@ public:
   DlgPreferencesPageCurveProperties(CmdMediator &cmdMediator,
                                     QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotLineColor(const QString &);
   void slotLineSize(const QString &);

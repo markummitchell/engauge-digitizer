@@ -19,6 +19,8 @@ public:
   /// Single constructor.
   DlgEditPreferences(CmdMediator &cmdMediator);
 
+  virtual void showEvent (QShowEvent *event);
+
 private slots:
   void changePage (QListWidgetItem *current, QListWidgetItem *previous);
 

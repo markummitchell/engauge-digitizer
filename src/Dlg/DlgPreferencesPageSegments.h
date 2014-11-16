@@ -20,6 +20,8 @@ public:
   DlgPreferencesPageSegments(CmdMediator &cmdMediator,
                              QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotFillCorners (int state);
   void slotLineColor (const QString &);

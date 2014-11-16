@@ -23,6 +23,8 @@ public:
   DlgPreferencesPageExport(CmdMediator &cmdMediator,
                            QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotDelimitersCommas(bool);
   void slotDelimitersSpaces(bool);

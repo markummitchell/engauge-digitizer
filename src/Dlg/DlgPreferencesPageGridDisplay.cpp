@@ -175,6 +175,11 @@ void DlgPreferencesPageGridDisplay::createY (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
+void DlgPreferencesPageGridDisplay::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::load";
+}
+
 void DlgPreferencesPageGridDisplay::slotCountX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotCountX";

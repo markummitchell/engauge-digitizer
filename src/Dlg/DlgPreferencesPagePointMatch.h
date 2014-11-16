@@ -21,6 +21,8 @@ public:
   DlgPreferencesPagePointMatch(CmdMediator &cmdMediator,
                                QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotAcceptedPointColor (const QString &);
   void slotCandidatePointColor (const QString &);

@@ -8,7 +8,8 @@
 log4cpp::Category *mainCat;
 
 void initializeLogging (const QString &name,
-                        const QString &filename)
+                        const QString &filename,
+                        bool isDebug)
 {
   const size_t MAX_FILE_SIZE_BYTES = 6 * 1024 * 1024; // Size that should satisfy most email servers
   const unsigned int MAX_BACKUP_INDEX = 2;
@@ -30,7 +31,11 @@ void initializeLogging (const QString &name,
   //
   // Most trace logging is at INFO level, but methods that are called extremely often (like mouse
   // moves and status bar updates) are at the lower DEBUG level so they are rarely seen
-  mainCat->setPriority (log4cpp::Priority::INFO);
+  if (isDebug) {
+    mainCat->setPriority (log4cpp::Priority::DEBUG);
+  } else {
+    mainCat->setPriority (log4cpp::Priority::INFO);
+  }
 
   mainCat->addAppender (appender);
 }

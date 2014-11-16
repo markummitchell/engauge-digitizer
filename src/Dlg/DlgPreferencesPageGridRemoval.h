@@ -21,6 +21,8 @@ public:
   DlgPreferencesPageGridRemoval(CmdMediator &cmdMediator,
                                 QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotRemoveGridLines (int);
   void slotCloseDistance(const QString &);

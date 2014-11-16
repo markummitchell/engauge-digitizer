@@ -20,6 +20,8 @@ public:
   DlgPreferencesPageFilter(CmdMediator &cmdMediator,
                            QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotForeground();
   void slotHue();

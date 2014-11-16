@@ -41,6 +41,9 @@ HEADERS  += \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgEditPreferences.h \
+    Dlg/DlgModelCurveEntry.h \
+    Dlg/DlgModelCurves.h \
+    Dlg/DlgPreferencesPageAbstractBase.h \
     Dlg/DlgPreferencesPageCoords.h \
     Dlg/DlgPreferencesPageCurves.h \
     Dlg/DlgPreferencesPageCurveProperties.h \
@@ -78,9 +81,7 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
-    include/ZoomFactor.h \
-    Dlg/DlgPreferencesPageAbstractBase.h \
-    Dlg/DlgModelCurves.h
+    include/ZoomFactor.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -114,6 +115,9 @@ SOURCES += \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgEditPreferences.cpp \
+    Dlg/DlgModelCurveEntry.cpp \
+    Dlg/DlgModelCurves.cpp \
+    Dlg/DlgPreferencesPageAbstractBase.cpp \
     Dlg/DlgPreferencesPageCoords.cpp \
     Dlg/DlgPreferencesPageCurves.cpp \
     Dlg/DlgPreferencesPageCurveProperties.cpp \
@@ -146,9 +150,7 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileShades.cpp \
-    Dlg/DlgPreferencesPageAbstractBase.cpp \
-    Dlg/DlgModelCurves.cpp
+    View/ViewProfileShades.cpp
 
 TARGET = ../bin/engauge
 

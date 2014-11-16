@@ -117,6 +117,11 @@ void DlgPreferencesPageFilter::createProfileAndScale (QGridLayout *layout, int &
   layout->addWidget (m_scale, row++, 3);
 }
 
+void DlgPreferencesPageFilter::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::load";
+}
+
 void DlgPreferencesPageFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotForeground";

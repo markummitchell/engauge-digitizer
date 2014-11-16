@@ -183,6 +183,11 @@ void DlgPreferencesPageCoords::initializeGroupCoordsType()
   }
 }
 
+void DlgPreferencesPageCoords::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::load";
+}
+
 void DlgPreferencesPageCoords::loadPixmap (const QString &image)
 {
   if (m_scenePreview->items().count () > 0) {

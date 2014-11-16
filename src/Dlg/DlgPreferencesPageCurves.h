@@ -2,6 +2,7 @@
 #define DLG_PREFERENCES_PAGE_CURVES_H
 
 #include "DlgPreferencesPageAbstractBase.h"
+#include <QModelIndex>
 
 class DlgModelCurves;
 class QGridLayout;
@@ -18,20 +19,26 @@ public:
   DlgPreferencesPageCurves(CmdMediator &cmdMediator,
                            QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
-  void slotCurveSelectionChanged ();
+  void slotDataChanged (const QModelIndex &topLeft,
+                        const QModelIndex &bottomRight,
+                        const QVector<int> &roles);
   void slotNew ();
   void slotRemove ();
 
 private:
   DlgPreferencesPageCurves(QWidget *parent = 0);
 
-  void appendCurveName (const QString &curveName);
+  void appendCurveName (const QString &curveNameNew,
+                        const QString &curveNameOriginal);
   void createButtons (QGridLayout *layout);
   void createListCurves (QGridLayout *layout);
   bool endsWithNumber (const QString &str) const;
   void insertCurveName (int row,
-                        const QString &curveName);
+                        const QString &curveNameNew,
+                        const QString &curveNameOriginal);
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   void updateControls ();

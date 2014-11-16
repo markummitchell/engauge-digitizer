@@ -7,6 +7,7 @@
 extern log4cpp::Category *mainCat;
 
 extern void initializeLogging (const QString &name,
-                               const QString &filename);
+                               const QString &filename,
+                               bool isDebug);
 
 #endif // LOGGER_H

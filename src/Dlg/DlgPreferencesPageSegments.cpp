@@ -107,6 +107,11 @@ void DlgPreferencesPageSegments::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+void DlgPreferencesPageSegments::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::load";
+}
+
 void DlgPreferencesPageSegments::slotFillCorners (int /* state */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotFillCorner";

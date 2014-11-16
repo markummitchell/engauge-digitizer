@@ -211,6 +211,11 @@ void DlgPreferencesPageGridRemoval::createPreview (QGridLayout *layout, int &row
   layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
 
+void DlgPreferencesPageGridRemoval::load ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::load";
+}
+
 void DlgPreferencesPageGridRemoval::slotCloseDistance(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotCloseDistance";

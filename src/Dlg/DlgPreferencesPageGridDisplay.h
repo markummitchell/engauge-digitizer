@@ -19,6 +19,8 @@ public:
   DlgPreferencesPageGridDisplay(CmdMediator &cmdMediator,
                                 QWidget *parent = 0);
 
+  virtual void load ();
+
 private slots:
   void slotDisableX(const QString &);
   void slotCountX(const QString &);
