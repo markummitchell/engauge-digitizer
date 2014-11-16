@@ -58,6 +58,9 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
 Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
 {
   return QAbstractTableModel::flags (index) |
+      Qt::ItemIsDragEnabled |
+      Qt::ItemIsDropEnabled |
+      Qt::ItemIsEnabled |
       Qt::ItemIsSelectable |
       Qt::ItemIsEditable;
 }
@@ -128,9 +131,15 @@ QString DlgModelCurves::roleAsString (int role) const
     m_rolesAsStrings [Qt::WhatsThisRole] = "WhatsThisRole";
   }
 
-  Q_ASSERT (m_rolesAsStrings.contains (role));
+  if (m_rolesAsStrings.contains (role)) {
 
-  return m_rolesAsStrings [role];
+    return m_rolesAsStrings [role];
+
+  } else {
+
+    return QString ("%1?").arg (role);
+
+  }
 }
 
 int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const

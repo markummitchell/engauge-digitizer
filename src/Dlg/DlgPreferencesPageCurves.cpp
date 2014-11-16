@@ -85,8 +85,14 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
                                   "Reorder curves by dragging them around."));
   m_listCurves->setMinimumHeight (300);
   m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
+  m_listCurves->setAcceptDrops (true);
+  m_listCurves->setDefaultDropAction (Qt::MoveAction);
   m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
+  m_listCurves->setDragDropOverwriteMode (false);
+  m_listCurves->setDragEnabled (true);
+  m_listCurves->setDropIndicatorShown (true);
   m_listCurves->setViewMode (QListView::ListMode);
+  m_listCurves->setMovement (QListView::Snap);
   layout->addWidget (m_listCurves, 2, 1, 4, 2);
   connect (m_modelCurves, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
            this, SLOT (slotDataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)));
