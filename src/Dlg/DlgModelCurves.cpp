@@ -9,6 +9,26 @@ DlgModelCurves::DlgModelCurves()
 {
 }
 
+int DlgModelCurves::columnCount (const QModelIndex & /* parent */) const
+{
+  return 2;
+}
+
+bool DlgModelCurves::containsCurveNameCurrent (const QString &curveName) const
+{
+  QStringList::const_iterator itr;
+  for (itr = m_modelCurveEntries.begin (); itr != m_modelCurveEntries.end (); itr++) {
+
+    DlgModelCurveEntry curveEntry (*itr);
+    if (curveName == curveEntry.curveNameCurrent()) {
+
+      return true;
+    }
+  }
+
+  return false;
+}
+
 QVariant DlgModelCurves::data (const QModelIndex &index,
                                int role) const
 {
@@ -25,14 +45,19 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
     return QVariant();
   }
 
-  QString value = m_modelCurveEntries.at (row);
-  return value;
+  DlgModelCurveEntry curveEntry (m_modelCurveEntries.at (row));
+
+  if (index.column () == 0) {
+    return curveEntry.curveNameCurrent();
+  } else {
+    return curveEntry.curveNameOriginal();
+  }
 }
 
 
 Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
 {
-  return QAbstractListModel::flags (index) |
+  return QAbstractTableModel::flags (index) |
       Qt::ItemIsSelectable |
       Qt::ItemIsEditable;
 }
@@ -51,10 +76,10 @@ bool DlgModelCurves::insertRows (int row,
                    row,
                    row + count - 1);
 
-  QString emptyEntry;
+  DlgModelCurveEntry emptyCurveEntry;
 
   m_modelCurveEntries.insert (row,
-                              emptyEntry);
+                              emptyCurveEntry.toString ());
 
   endInsertRows ();
 
@@ -119,19 +144,28 @@ int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
 
 bool DlgModelCurves::setData (const QModelIndex &index,
                               const QVariant &value,
-                              int /* role */)
+                              int role)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::setData"
-                               << " indexRow=" << index.row ();
+                               << " indexRow=" << index.row ()
+                               << " role=" << roleAsString (role).toLatin1 ().data ();
 
   bool success = false;
 
   int row = index.row ();
   if (row < m_modelCurveEntries.count ()) {
 
-    DlgModelCurveEntry curveEntryNew (value.toString ());
+    DlgModelCurveEntry curveEntry (m_modelCurveEntries [row]); // Retrieve entry
 
-    m_modelCurveEntries [row] = curveEntryNew.toString ();
+    if (index.column () == 0) {
+      curveEntry.setCurveNameCurrent (value.toString ());
+    } else if (index.column () == 1) {
+      curveEntry.setCurveNameOriginal (value.toString ());
+    } else {
+      Q_ASSERT (false);
+    }
+
+    m_modelCurveEntries [row] = curveEntry.toString (); // Save update entry
 
     emit dataChanged (index,
                       index);

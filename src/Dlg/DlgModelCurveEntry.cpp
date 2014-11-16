@@ -3,12 +3,17 @@
 
 const QString DELIMITER ("\t");
 
+DlgModelCurveEntry::  DlgModelCurveEntry () :
+  m_curveNameCurrent (""),
+  m_curveNameOriginal ("")
+{
+}
+
 DlgModelCurveEntry::DlgModelCurveEntry (const QString &curveNameCurrent,
                                         const QString &curveNameOriginal) :
   m_curveNameCurrent (curveNameCurrent),
   m_curveNameOriginal (curveNameOriginal)
 {
-
 }
 
 DlgModelCurveEntry::DlgModelCurveEntry (const QString &fromText)
@@ -27,6 +32,16 @@ QString DlgModelCurveEntry::curveNameCurrent () const
 QString DlgModelCurveEntry::curveNameOriginal () const
 {
   return m_curveNameOriginal;
+}
+
+void DlgModelCurveEntry::setCurveNameCurrent (const QString &curveNameCurrent)
+{
+  m_curveNameCurrent = curveNameCurrent;
+}
+
+void DlgModelCurveEntry::setCurveNameOriginal (const QString &curveNameOriginal)
+{
+  m_curveNameOriginal = curveNameOriginal;
 }
 
 QString DlgModelCurveEntry::toString () const

@@ -110,13 +110,13 @@ void DlgPreferencesPageCurves::insertCurveName (int row,
 {
   if (m_modelCurves->insertRow (row)) {
 
-    QModelIndex idx = m_modelCurves->index (row, 0);
-
     DlgModelCurveEntry curveEntry (curveNameNew,
                                    curveNameOriginal);
 
-    m_modelCurves->setData (idx,
-                            curveEntry.toString ());
+    m_modelCurves->setData (m_modelCurves->index (row, 0),
+                            curveEntry.curveNameCurrent ());
+    m_modelCurves->setData (m_modelCurves->index (row, 1),
+                            curveEntry.curveNameOriginal ());
   }
 }
 
@@ -139,7 +139,92 @@ QString DlgPreferencesPageCurves::nextCurveName () const
 
   Q_ASSERT (m_listCurves != 0);
 
-  QString curveNameNext ("Next");
+  int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
+  int numItems = m_listCurves->model ()->rowCount ();
+
+  // Determine index where new entry will be inserted
+  int currentIndex = -1;
+  if ((numSelectedItems == 0) &&
+      (numItems > 0)) {
+
+    // Append after list which has at least one entry
+    currentIndex = numItems;
+
+  } else if (numSelectedItems == 1) {
+
+    // Insert before the selected index
+    currentIndex = m_listCurves->selectionModel ()->selectedIndexes ().at (0).row ();
+
+  }
+
+  // Curves names of existing before/after curves
+  QString curveNameBefore, curveNameAfter;
+  if (currentIndex > 0) {
+
+    QModelIndex index = m_modelCurves->index (currentIndex - 1, 0);
+    curveNameBefore = m_modelCurves->data (index).toString ();
+
+  }
+
+  if ((0 <= currentIndex) && (currentIndex < numItems)) {
+
+    QModelIndex index = m_modelCurves->index (currentIndex, 0);
+    curveNameAfter = m_modelCurves->data (index).toString ();
+
+  }
+
+  // New curve name
+  QString curveNameNext;
+  if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameAfter)) {
+
+    // Pick a name before curveNameAfter
+    int numberAfter = numberAtEnd (curveNameAfter);
+    int numberNew = numberAfter - 1;
+    int pos = curveNameAfter.lastIndexOf (QString::number (numberAfter));
+    if (pos >= 0) {
+
+      curveNameNext = QString ("%1%2")
+                      .arg (curveNameAfter.left (pos))
+                      .arg (numberNew);
+
+    } else {
+
+      curveNameNext = curveNameAfter; // Better than nothing
+
+    }
+
+  } else if (!curveNameBefore.isEmpty () && endsWithNumber (curveNameBefore)) {
+
+    // Pick a name after curveNameBefore, being sure to not match curveNameAfter
+    int numberBefore = numberAtEnd (curveNameBefore);
+    int numberNew = numberBefore + 1;
+    int pos = curveNameBefore.indexOf (QString::number (numberBefore));
+    if (pos >= 0) {
+
+      curveNameNext = QString ("%1%2")
+                      .arg (curveNameBefore.left (pos))
+                      .arg (numberNew);
+      if (curveNameNext == curveNameAfter) {
+
+        // The difference between before and after is exactly one so we go to a lower level
+        curveNameNext = QString ("%1%2")
+                        .arg (curveNameBefore)
+                        .arg (DASH_ONE);
+
+      }
+    } else {
+
+      curveNameNext = curveNameBefore; // Better than nothing
+
+    }
+  }
+
+  // At this point we have curveNameNext which does not conflict with curveNameBefore or
+  // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
+  // adding to the name until there is no conflict
+  while (m_modelCurves->containsCurveNameCurrent (curveNameNext)) {
+    curveNameNext += DASH_ONE;
+  }
 
   return curveNameNext;
 }
@@ -174,8 +259,23 @@ void DlgPreferencesPageCurves::slotNew ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotNew";
 
+  const QString NO_ORIGINAL_CURVE_NAME;
+
   QString curveNameSuggestion = nextCurveName ();
 
+  if (m_listCurves->selectionModel ()->selectedIndexes ().count () == 1) {
+
+    QModelIndex idx = m_listCurves->selectionModel ()->selectedIndexes ().at (0);
+    insertCurveName (idx.row (),
+                     curveNameSuggestion,
+                     NO_ORIGINAL_CURVE_NAME);
+
+  } else {
+
+    appendCurveName (curveNameSuggestion,
+                     NO_ORIGINAL_CURVE_NAME);
+
+  }
 }
 
 void DlgPreferencesPageCurves::slotRemove ()
