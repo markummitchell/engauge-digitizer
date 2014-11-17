@@ -1,7 +1,6 @@
 #include "CmdMediator.h"
 #include "DlgModelCurves.h"
 #include "DlgPreferencesPageCurves.h"
-#include "DlgViewCurves.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QGridLayout>
@@ -80,7 +79,7 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
   m_modelCurves = new DlgModelCurves;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
-  m_listCurves = new DlgViewCurves;
+  m_listCurves = new QListView;
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
                                   "Click on a curve name to edit it.\n\n"
                                   "Reorder curves by dragging them around."));

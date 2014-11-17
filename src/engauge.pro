@@ -81,8 +81,7 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
-    include/ZoomFactor.h \
-    Dlg/DlgViewCurves.h
+    include/ZoomFactor.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -151,8 +150,7 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileShades.cpp \
-    Dlg/DlgViewCurves.cpp
+    View/ViewProfileShades.cpp
 
 TARGET = ../bin/engauge
 
