@@ -34,13 +34,15 @@ private:
   DlgPreferencesPageCurves(QWidget *parent = 0);
 
   void appendCurveName (const QString &curveNameNew,
-                        const QString &curveNameOriginal);
+                        const QString &curveNameOriginal,
+                        int numPoints);
   void createButtons (QGridLayout *layout, int &row);
   void createListCurves (QGridLayout *layout, int &row);
   bool endsWithNumber (const QString &str) const;
   void insertCurveName (int row,
                         const QString &curveNameNew,
-                        const QString &curveNameOriginal);
+                        const QString &curveNameOriginal,
+                        int numPoints);
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   void updateControls ();

@@ -40,14 +40,16 @@ DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
 }
 
 void DlgPreferencesPageCurves::appendCurveName (const QString &curveNameNew,
-                                                const QString &curveNameOriginal)
+                                                const QString &curveNameOriginal,
+                                                int numPoints)
 {
   Q_ASSERT (m_modelCurves != 0);
 
   int row = m_modelCurves->rowCount ();
   insertCurveName (row,
                    curveNameNew,
-                   curveNameOriginal);
+                   curveNameOriginal,
+                   numPoints);
 }
 
 void DlgPreferencesPageCurves::createButtons (QGridLayout *layout,
@@ -114,19 +116,29 @@ bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
 
 void DlgPreferencesPageCurves::insertCurveName (int row,
                                                 const QString &curveNameNew,
-                                                const QString &curveNameOriginal)
+                                                const QString &curveNameOriginal,
+                                                int numPoints)
 {
   if (m_modelCurves->insertRow (row)) {
 
     LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
     DlgModelCurveEntry curveEntry (curveNameNew,
-                                   curveNameOriginal);
+                                   curveNameOriginal,
+                                   numPoints);
 
     m_modelCurves->setData (m_modelCurves->index (row, 0),
                             curveEntry.curveNameCurrent ());
     m_modelCurves->setData (m_modelCurves->index (row, 1),
                             curveEntry.curveNameOriginal ());
+    m_modelCurves->setData (m_modelCurves->index (row, 2),
+                            numPoints);
+
+    // Select the new curve
+    QModelIndex idx = m_modelCurves->index (row, 0);
+    m_listCurves->selectionModel ()->select (idx,
+                                             QItemSelectionModel::ClearAndSelect);
+
   } else {
 
     LOG4CPP_ERROR_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
@@ -143,7 +155,8 @@ void DlgPreferencesPageCurves::load ()
   for (itr = curveNames.begin (); itr != curveNames.end (); itr++) {
     QString curveName = *itr;
     appendCurveName (curveName,
-                     curveName);
+                     curveName,
+                     1);
   }
 }
 
@@ -279,6 +292,7 @@ void DlgPreferencesPageCurves::slotNew ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotNew";
 
   const QString NO_ORIGINAL_CURVE_NAME;
+  const int NO_POINTS = 0;
 
   QString curveNameSuggestion = nextCurveName ();
 
@@ -287,12 +301,14 @@ void DlgPreferencesPageCurves::slotNew ()
     QModelIndex idx = m_listCurves->selectionModel ()->selectedIndexes ().at (0);
     insertCurveName (idx.row (),
                      curveNameSuggestion,
-                     NO_ORIGINAL_CURVE_NAME);
+                     NO_ORIGINAL_CURVE_NAME,
+                     NO_POINTS);
 
   } else {
 
     appendCurveName (curveNameSuggestion,
-                     NO_ORIGINAL_CURVE_NAME);
+                     NO_ORIGINAL_CURVE_NAME,
+                     NO_POINTS);
 
   }
 }

@@ -7,7 +7,7 @@
 /// the DlgModelCurves model class. Subclassing QVariant brings up difficult challenges, so the QString userType
 /// was chosen.
 ///
-/// Each entry has the current and original curve names, separated by a delimiter.
+/// Each entry has the current curve name, original curve name and point count, separated by a delimiter.
 class DlgModelCurveEntry
 {
  public:
@@ -16,7 +16,8 @@ class DlgModelCurveEntry
 
   /// Constructor for converting to QVariant.
   DlgModelCurveEntry (const QString &curveNameCurrent,
-                      const QString &curveNameOriginal);
+                      const QString &curveNameOriginal,
+                      int numPoints);
   /// Constructor for converting from QVariant.
   DlgModelCurveEntry (const QString &fromText);
 
@@ -26,11 +27,17 @@ class DlgModelCurveEntry
   /// Original curve name in document. Empty if there was no original curve
   QString curveNameOriginal () const;
 
+  /// Number of points in curve.
+  int numPoints () const;
+
   /// Set method for current curve name.
   void setCurveNameCurrent (const QString &curveNameCurrent);
 
   /// Set method for original curve name.
   void setCurveNameOriginal (const QString &curveNameOriginal);
+
+  /// Set method for point count.
+  void setNumPoints (int numPoints);
 
   /// QString for creating QVariant.
   QString toString () const;
@@ -39,6 +46,7 @@ private:
 
   QString m_curveNameCurrent;
   QString m_curveNameOriginal;
+  int m_numPoints;
 };
 
 #endif // DLG_MODEL_CURVE_ENTRY_H

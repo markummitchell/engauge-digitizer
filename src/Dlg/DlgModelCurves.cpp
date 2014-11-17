@@ -10,7 +10,7 @@ DlgModelCurves::DlgModelCurves()
 
 int DlgModelCurves::columnCount (const QModelIndex & /* parent */) const
 {
-  return 2;
+  return 3;
 }
 
 bool DlgModelCurves::containsCurveNameCurrent (const QString &curveName) const
@@ -54,8 +54,12 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
 
   if (index.column () == 0) {
     return curveEntry.curveNameCurrent();
-  } else {
+  } else if (index.column () == 1) {
     return curveEntry.curveNameOriginal();
+  } else if (index.column () == 2) {
+    return curveEntry.numPoints ();
+  } else {
+    Q_ASSERT (false);
   }
 }
 
@@ -177,6 +181,8 @@ bool DlgModelCurves::setData (const QModelIndex &index,
         curveEntry.setCurveNameCurrent (value.toString ());
       } else if (index.column () == 1) {
         curveEntry.setCurveNameOriginal (value.toString ());
+      } else if (index.column () == 2) {
+        curveEntry.setNumPoints (value.toInt ());
       } else {
         Q_ASSERT (false);
       }
