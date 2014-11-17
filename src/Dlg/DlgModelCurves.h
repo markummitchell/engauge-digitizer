@@ -3,7 +3,6 @@
 
 #include "DlgModelCurveEntry.h"
 #include <QAbstractTableModel>
-#include <QHash>
 #include <QStringList>
 
 /// Model for QListView in DlgPreferencesPageCurves. First column is visible with current curve name.
@@ -30,7 +29,7 @@ public:
   virtual bool insertRows (int row, int count, const QModelIndex &parent = QModelIndex ());
 
   /// Remove one row.
-  virtual bool removeRows (int row, int count, const QModelIndex &parent = QModelIndex ());
+  virtual bool removeRows (int row, int count, const QModelIndex &parent);
 
   /// One row per curve name.
   virtual int rowCount (const QModelIndex & parent = QModelIndex()) const;
@@ -40,14 +39,13 @@ public:
                        const QVariant &value,
                        int role = Qt::EditRole);
 
-private:
+  /// Allow dragging for reordering.
+  virtual Qt::DropActions supportedDropActions () const;
 
-  QString roleAsString (int role) const;
+private:
 
   /// Store entries as QStrings for easy translation into QVariants. Use DlgModelCurveEntry to translate
   QStringList m_modelCurveEntries;
-
-  static QHash<int, QString> m_rolesAsStrings; // For logging
 };
 
 #endif // DLG_MODEL_CURVES_H

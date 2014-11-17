@@ -1,5 +1,8 @@
+#include <QHash>
 #include <QTransform>
 #include "QtToString.h"
+
+static QHash<int, QString> rolesAsStringsLookupTable; // For logging
 
 QString QPointFToString (const QPointF &pos)
 {
@@ -47,6 +50,54 @@ QString QTransformToString (const QTransform &transform)
                  .arg (transform.m31 (), FIELD_WIDTH)
                  .arg (transform.m32 (), FIELD_WIDTH)
                  .arg (transform.m33 (), FIELD_WIDTH);
+
+  return str;
+}
+
+QString roleAsString (int role)
+{
+  if (rolesAsStringsLookupTable.count () == 0) {
+    rolesAsStringsLookupTable [Qt::AccessibleDescriptionRole] = "AccessibleDescriptionRole";
+    rolesAsStringsLookupTable [Qt::AccessibleTextRole] = "AccessibleTextRole";
+    rolesAsStringsLookupTable [Qt::BackgroundRole] = "BackgroundRole";
+    rolesAsStringsLookupTable [Qt::BackgroundColorRole] = "BackgroundColorRole";
+    rolesAsStringsLookupTable [Qt::CheckStateRole] = "CheckStateRole";
+    rolesAsStringsLookupTable [Qt::DecorationRole] = "DecorationRole";
+    rolesAsStringsLookupTable [Qt::DisplayRole] = "DisplayRole";
+    rolesAsStringsLookupTable [Qt::EditRole] = "EditRole";
+    rolesAsStringsLookupTable [Qt::FontRole] = "FontRole";
+    rolesAsStringsLookupTable [Qt::ForegroundRole] = "ForegroundRole";
+    rolesAsStringsLookupTable [Qt::InitialSortOrderRole] = "InitialSortOrderRole";
+    rolesAsStringsLookupTable [Qt::SizeHintRole] = "SizeHintRole";
+    rolesAsStringsLookupTable [Qt::StatusTipRole] = "StatusTipRole";
+    rolesAsStringsLookupTable [Qt::TextAlignmentRole] = "TextAlignmentRole";
+    rolesAsStringsLookupTable [Qt::TextColorRole] = "TextColorRole";
+    rolesAsStringsLookupTable [Qt::ToolTipRole] = "ToolTipRole";
+    rolesAsStringsLookupTable [Qt::UserRole] = "UserRole";
+    rolesAsStringsLookupTable [Qt::WhatsThisRole] = "WhatsThisRole";
+  }
+
+  if (rolesAsStringsLookupTable.contains (role)) {
+
+    return rolesAsStringsLookupTable [role];
+
+  } else {
+
+    return QString ("%1?").arg (role);
+
+  }
+}
+
+QString rolesAsString (const QVector<int> &roles)
+{
+  QString str;
+
+  for (int i = 0; i < roles.count (); i++) {
+    if (i > 0) {
+      str += ",";
+    }
+    str += roleAsString (roles [i]);
+  }
 
   return str;
 }

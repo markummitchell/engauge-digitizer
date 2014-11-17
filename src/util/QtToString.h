@@ -3,6 +3,7 @@
 
 #include <QCursor>
 #include <QString>
+#include <QVector>
 
 class QPointF;
 class QTransform;
@@ -10,5 +11,7 @@ class QTransform;
 extern QString QPointFToString (const QPointF &pos);
 extern QString QtCursorToString (Qt::CursorShape cursorShape);
 extern QString QTransformToString (const QTransform &transform);
+extern QString roleAsString (int role);
+extern QString rolesAsString (const QVector<int> &roles);
 
 #endif // QT_ENUM_TO_STRING_H

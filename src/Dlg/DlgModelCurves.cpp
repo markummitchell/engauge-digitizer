@@ -1,9 +1,8 @@
 #include "DlgModelCurveEntry.h"
 #include "DlgModelCurves.h"
 #include "Logger.h"
+#include "QtToString.h"
 #include <QVariant>
-
-QHash<int, QString> DlgModelCurves::m_rolesAsStrings;
 
 DlgModelCurves::DlgModelCurves()
 {
@@ -33,15 +32,21 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
                                int role) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::data"
-                               << " indexRow=" << index.row ()
+                               << " isRoot=" << (index.isValid () ? "no" : "yes")
                                << " role=" << roleAsString (role).toLatin1 ().data ();
+
+  if (!index.isValid ()) {
+    // Root item
+    return QVariant ();
+  }
 
   int row = index.row ();
   if (row < 0 || row >= m_modelCurveEntries.count ()) {
     return QVariant();
   }
 
-  if (role != Qt::DisplayRole) {
+  if ((role != Qt::DisplayRole) &&
+      (role != Qt::EditRole)) {
     return QVariant();
   }
 
@@ -57,25 +62,46 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
 
 Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
 {
-  return QAbstractTableModel::flags (index) |
-      Qt::ItemIsDragEnabled |
-      Qt::ItemIsDropEnabled |
-      Qt::ItemIsEnabled |
-      Qt::ItemIsSelectable |
-      Qt::ItemIsEditable;
+  // Only the root item can accept drops, or else dragging one entry onto another
+  // would result in the drop target getting overwritten
+
+  if (index.isValid ()) {
+
+    // Not root item
+    return QAbstractTableModel::flags (index) |
+        Qt::ItemIsDragEnabled |
+        Qt::ItemIsEnabled |
+        Qt::ItemIsSelectable |
+        Qt::ItemIsEditable;
+
+  } else {
+
+    // Root item
+    return QAbstractTableModel::flags (index) |
+        Qt::ItemIsDropEnabled;
+
+  }
 }
 
 bool DlgModelCurves::insertRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::insertRows"
-                               << " row=" << row
-                               << " count=" << count;
+  bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
-  Q_ASSERT (count == 1);
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::insertRows"
+                              << " row=" << row
+                              << " count=" << count
+                              << " isRoot=" << (parent.isValid () ? "no" : "yes")
+                              << " skip=" << (skip ? "yes" : "no");
 
-  beginInsertRows (parent,
+  if (skip) {
+
+    // Parent should be root item which is not valid
+    return false;
+  }
+
+  beginInsertRows (QModelIndex (),
                    row,
                    row + count - 1);
 
@@ -93,53 +119,25 @@ bool DlgModelCurves::removeRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
+  bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
+
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::removeRows"
                                << " row=" << row
-                               << " count=" << count;
+                               << " count=" << count
+                               << " isRoot=" << (parent.isValid () ? "no" : "yes")
+                               << " skip=" << (skip ? "yes" : "no");
 
   bool success = false;
 
-  beginRemoveRows (parent,
+  beginRemoveRows (QModelIndex (),
                    row,
                    row + count - 1);
+
+  m_modelCurveEntries.removeAt (row);
 
   endRemoveRows ();
 
   return success;
-}
-
-QString DlgModelCurves::roleAsString (int role) const
-{
-  if (m_rolesAsStrings.count () == 0) {
-    m_rolesAsStrings [Qt::AccessibleDescriptionRole] = "AccessibleDescriptionRole";
-    m_rolesAsStrings [Qt::AccessibleTextRole] = "AccessibleTextRole";
-    m_rolesAsStrings [Qt::BackgroundRole] = "BackgroundRole";
-    m_rolesAsStrings [Qt::BackgroundColorRole] = "BackgroundColorRole";
-    m_rolesAsStrings [Qt::CheckStateRole] = "CheckStateRole";
-    m_rolesAsStrings [Qt::DecorationRole] = "DecorationRole";
-    m_rolesAsStrings [Qt::DisplayRole] = "DisplayRole";
-    m_rolesAsStrings [Qt::EditRole] = "EditRole";
-    m_rolesAsStrings [Qt::FontRole] = "FontRole";
-    m_rolesAsStrings [Qt::ForegroundRole] = "ForegroundRole";
-    m_rolesAsStrings [Qt::InitialSortOrderRole] = "InitialSortOrderRole";
-    m_rolesAsStrings [Qt::SizeHintRole] = "SizeHintRole";
-    m_rolesAsStrings [Qt::StatusTipRole] = "StatusTipRole";
-    m_rolesAsStrings [Qt::TextAlignmentRole] = "TextAlignmentRole";
-    m_rolesAsStrings [Qt::TextColorRole] = "TextColorRole";
-    m_rolesAsStrings [Qt::ToolTipRole] = "ToolTipRole";
-    m_rolesAsStrings [Qt::UserRole] = "UserRole";
-    m_rolesAsStrings [Qt::WhatsThisRole] = "WhatsThisRole";
-  }
-
-  if (m_rolesAsStrings.contains (role)) {
-
-    return m_rolesAsStrings [role];
-
-  } else {
-
-    return QString ("%1?").arg (role);
-
-  }
 }
 
 int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
@@ -155,26 +153,36 @@ bool DlgModelCurves::setData (const QModelIndex &index,
                               const QVariant &value,
                               int role)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::setData"
-                               << " indexRow=" << index.row ()
-                               << " role=" << roleAsString (role).toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::setData"
+                              << " indexRow=" << index.row ()
+                              << " value=" << (value.isValid () ? "valid" : "invalid")
+                              << " role=" << roleAsString (role).toLatin1 ().data ();
 
   bool success = false;
 
   int row = index.row ();
   if (row < m_modelCurveEntries.count ()) {
 
-    DlgModelCurveEntry curveEntry (m_modelCurveEntries [row]); // Retrieve entry
+    if (!value.isValid () && (role == Qt::EditRole)) {
 
-    if (index.column () == 0) {
-      curveEntry.setCurveNameCurrent (value.toString ());
-    } else if (index.column () == 1) {
-      curveEntry.setCurveNameOriginal (value.toString ());
+      // Remove the entry
+      m_modelCurveEntries.removeAt (row);
+
     } else {
-      Q_ASSERT (false);
-    }
 
-    m_modelCurveEntries [row] = curveEntry.toString (); // Save update entry
+      // Modify the entry
+      DlgModelCurveEntry curveEntry (m_modelCurveEntries [row]); // Retrieve entry
+
+      if (index.column () == 0) {
+        curveEntry.setCurveNameCurrent (value.toString ());
+      } else if (index.column () == 1) {
+        curveEntry.setCurveNameOriginal (value.toString ());
+      } else {
+        Q_ASSERT (false);
+      }
+
+      m_modelCurveEntries [row] = curveEntry.toString (); // Save update entry
+    }
 
     emit dataChanged (index,
                       index);
@@ -183,4 +191,9 @@ bool DlgModelCurves::setData (const QModelIndex &index,
   }
 
   return success;
+}
+
+Qt::DropActions DlgModelCurves::supportedDropActions () const
+{
+  return Qt::MoveAction;
 }

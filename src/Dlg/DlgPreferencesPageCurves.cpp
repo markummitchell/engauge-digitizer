@@ -1,12 +1,14 @@
 #include "CmdMediator.h"
 #include "DlgModelCurves.h"
 #include "DlgPreferencesPageCurves.h"
+#include "DlgViewCurves.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
 #include <QListView>
 #include <QPushButton>
+#include "QtToString.h"
 
 DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
                                                    QWidget *parent) :
@@ -78,21 +80,20 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
   m_modelCurves = new DlgModelCurves;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
-  m_listCurves = new QListView;
-  m_listCurves->setModel (m_modelCurves);
+  m_listCurves = new DlgViewCurves;
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
                                   "Click on a curve name to edit it.\n\n"
                                   "Reorder curves by dragging them around."));
   m_listCurves->setMinimumHeight (300);
   m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
-  m_listCurves->setAcceptDrops (true);
   m_listCurves->setDefaultDropAction (Qt::MoveAction);
-  m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
-  m_listCurves->setDragDropOverwriteMode (false);
+  m_listCurves->setDragDropOverwriteMode (true);
   m_listCurves->setDragEnabled (true);
   m_listCurves->setDropIndicatorShown (true);
+  m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
   m_listCurves->setViewMode (QListView::ListMode);
   m_listCurves->setMovement (QListView::Snap);
+  m_listCurves->setModel (m_modelCurves);
   layout->addWidget (m_listCurves, 2, 1, 4, 2);
   connect (m_modelCurves, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
            this, SLOT (slotDataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)));
@@ -116,6 +117,8 @@ void DlgPreferencesPageCurves::insertCurveName (int row,
 {
   if (m_modelCurves->insertRow (row)) {
 
+    LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
+
     DlgModelCurveEntry curveEntry (curveNameNew,
                                    curveNameOriginal);
 
@@ -123,6 +126,10 @@ void DlgPreferencesPageCurves::insertCurveName (int row,
                             curveEntry.curveNameCurrent ());
     m_modelCurves->setData (m_modelCurves->index (row, 1),
                             curveEntry.curveNameOriginal ());
+  } else {
+
+    LOG4CPP_ERROR_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
+
   }
 }
 
@@ -254,10 +261,15 @@ int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
   return sign * str.mid (ch).toInt ();
 }
 
-void DlgPreferencesPageCurves::slotDataChanged (const QModelIndex & /* topLeft */,
-                                                const QModelIndex & /* bottomRight */,
-                                                const QVector<int> & /* roles */)
+void DlgPreferencesPageCurves::slotDataChanged (const QModelIndex &topLeft,
+                                                const QModelIndex &bottomRight,
+                                                const QVector<int> &roles)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotDataChanged"
+                              << " topLeft=(" << topLeft.row () << "," << topLeft.column () << ")"
+                              << " bottomRight=(" << bottomRight.row () << "," << bottomRight.column () << ")"
+                              << " roles=" << rolesAsString (roles).toLatin1 ().data ();
+
   updateControls ();
 }
 
