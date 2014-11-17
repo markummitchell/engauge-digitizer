@@ -19,6 +19,7 @@ public:
   /// Single constructor.
   DlgEditPreferences(CmdMediator &cmdMediator);
 
+  /// Handle show event so pages can all be initialized.
   virtual void showEvent (QShowEvent *event);
 
 private slots:

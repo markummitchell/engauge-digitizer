@@ -14,7 +14,7 @@ public:
                                  QWidget *parent);
   virtual ~DlgPreferencesPageAbstractBase();
 
-  // Load the pages with the up-to-date information. This is called just before the preferences dialog appears
+  /// Load the pages with the up-to-date information. This is called just before the preferences dialog appears
   virtual void load () = 0;
 
 protected:

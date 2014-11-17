@@ -20,26 +20,21 @@ DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
 
-  createButtons (layout);
-  createListCurves (layout);
+  int row = 1;
+  createListCurves (layout, row);
+  createButtons (layout, row);
 
   layout->setColumnStretch (0, 0); // Empty first column
   layout->setColumnMinimumWidth (0, EMPTY_COLUMN_WIDTH);
   layout->setColumnStretch (1, 1); // New
   layout->setColumnStretch (2, 1); // Remove
-  layout->setColumnStretch (3, 0); // Move Down
-  layout->setColumnStretch (4, 0); // Empty last column
-  layout->setColumnMinimumWidth (4, EMPTY_COLUMN_WIDTH);
+  layout->setColumnStretch (3, 0); // Empty last column
+  layout->setColumnMinimumWidth (3, EMPTY_COLUMN_WIDTH);
 
   layout->setRowStretch (0, 0); // Empty first row
   layout->setRowMinimumHeight (0, EMPTY_ROW_HEIGHT);
-  layout->setRowStretch (1, 0); // New
-  layout->setRowStretch (2, 1); // Row above Move Up
-  layout->setRowStretch (3, 0); // Move Up
-  layout->setRowStretch (4, 0); // Move Down
-  layout->setRowStretch (5, 1); // Row below Move Down
-  layout->setRowStretch (6, 0); // Empty last row
-  layout->setRowMinimumHeight (6, EMPTY_ROW_HEIGHT);
+  layout->setRowStretch (row, 0); // Empty last row
+  layout->setRowMinimumHeight (row, EMPTY_ROW_HEIGHT);
 
   updateControls ();
 }
@@ -55,7 +50,8 @@ void DlgPreferencesPageCurves::appendCurveName (const QString &curveNameNew,
                    curveNameOriginal);
 }
 
-void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
+void DlgPreferencesPageCurves::createButtons (QGridLayout *layout,
+                                              int &row)
 {
   m_btnNew = new QPushButton ("New...");
   m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
@@ -64,18 +60,22 @@ void DlgPreferencesPageCurves::createButtons (QGridLayout *layout)
                               "Every curve name must be unique"));
   m_btnNew->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   connect (m_btnNew, SIGNAL (pressed ()), this, SLOT (slotNew()));
-  layout->addWidget (m_btnNew, 1, 1, 1, 1, Qt::AlignLeft);
+  layout->addWidget (m_btnNew, row, 1, 1, 1, Qt::AlignLeft);
 
   m_btnRemove = new QPushButton ("Remove");
   m_btnRemove->setWhatsThis (tr ("Removes the currently selected curve from the curve list.\n\n"
                                  "There must always be at least one curve"));
   m_btnRemove->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   connect (m_btnRemove, SIGNAL (pressed ()), this, SLOT (slotRemove()));
-  layout->addWidget (m_btnRemove, 1, 2, 1, 1, Qt::AlignRight);
+  layout->addWidget (m_btnRemove, row++, 2, 1, 1, Qt::AlignRight);
 }
 
-void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
+void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout,
+                                                 int &row)
 {
+  QLabel *label = new QLabel (tr ("Curve Names:"));
+  layout->addWidget (label, row++, 1);
+
   m_modelCurves = new DlgModelCurves;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
@@ -93,9 +93,11 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout)
   m_listCurves->setViewMode (QListView::ListMode);
   m_listCurves->setMovement (QListView::Snap);
   m_listCurves->setModel (m_modelCurves);
-  layout->addWidget (m_listCurves, 2, 1, 4, 2);
+  layout->addWidget (m_listCurves, row++, 1, 1, 2);
   connect (m_modelCurves, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
            this, SLOT (slotDataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)));
+  connect (m_listCurves->selectionModel (), SIGNAL (selectionChanged (QItemSelection, QItemSelection)),
+           this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
 }
 
 bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
@@ -210,7 +212,7 @@ QString DlgPreferencesPageCurves::nextCurveName () const
     // Pick a name after curveNameBefore, being sure to not match curveNameAfter
     int numberBefore = numberAtEnd (curveNameBefore);
     int numberNew = numberBefore + 1;
-    int pos = curveNameBefore.indexOf (QString::number (numberBefore));
+    int pos = curveNameBefore.lastIndexOf (QString::number (numberBefore));
     if (pos >= 0) {
 
       curveNameNext = QString ("%1%2")
@@ -305,4 +307,33 @@ void DlgPreferencesPageCurves::updateControls ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::updateControls";
 
   Q_ASSERT (m_listCurves != 0);
+
+  int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
+  int numItems = m_modelCurves->rowCount ();
+
+  if ((numSelectedItems == 0) && m_listCurves->currentIndex ().isValid ()) {
+
+    // Remove confusing partially-filled row corresponding to currentRow
+    m_listCurves->setCurrentIndex (QModelIndex ());
+  }
+
+  if (numSelectedItems < 2 ) {
+
+    // Add or Insert is possible
+    m_btnNew->setEnabled (true);
+    m_btnNew->setText (numSelectedItems == 0 ? "Add" : "Insert");
+
+  } else {
+
+    // Placement of new curve would be ambigous
+    m_btnNew->setEnabled (false);
+  }
+
+  // Leave at least one curve
+  m_btnRemove->setEnabled ((numSelectedItems > 0) && (numSelectedItems < numItems));
+}
+
+void DlgPreferencesPageCurves::slotSelectionChanged (QItemSelection, QItemSelection)
+{
+  updateControls ();
 }
