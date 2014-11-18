@@ -35,6 +35,9 @@ public:
   /// List of graph curve names.
   QStringList curvesGraphsNames () const;
 
+  /// Point count.
+  int curvesGraphsNumPoints (const QString &curveName) const;
+
   /// Export, curve-by-curve, raw data points to a string that will be copied to the clipboard.
   void exportToClipboard (const QStringList &selected,
                           bool transformIsDefined,

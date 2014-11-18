@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QListView>
+#include <QMessageBox>
 #include <QPushButton>
 #include "QtToString.h"
 
@@ -151,7 +152,7 @@ void DlgPreferencesPageCurves::load ()
     QString curveName = *itr;
     appendCurveName (curveName,
                      curveName,
-                     1);
+                     cmdMediator ().curvesGraphsNumPoints (curveName));
   }
 }
 
@@ -311,6 +312,28 @@ void DlgPreferencesPageCurves::slotNew ()
 void DlgPreferencesPageCurves::slotRemove ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotRemove";
+
+  int numPoints = 0;
+  for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
+
+    int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
+    QModelIndex idx = m_modelCurves->index (row, COL_NUM_POINTS);
+    int curvePoints = m_modelCurves->data (idx, Qt::DisplayRole).toInt ();
+
+    numPoints += curvePoints;
+  }
+
+  if (numPoints > 0) {
+
+    QString msg;
+    if (m_listCurves->selectionModel ()->selectedIndexes ().count () == 1) {
+      msg = QString ("Removing this curve will also remove %1 points. Continue?").arg (numPoints);
+    } else {
+      msg = QString ("Removing these curves will also remove %1 points. Continue?").arg (numPoints);
+    }
+
+    QMessageBox::warning (0, "Curves With Points", msg, QMessageBox::Ok, QMessageBox::Cancel);
+  }
 }
 
 void DlgPreferencesPageCurves::updateControls ()

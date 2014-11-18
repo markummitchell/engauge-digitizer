@@ -3,6 +3,10 @@
 
 #include <QString>
 
+const int COL_CURVE_NAME_CURRENT = 0;
+const int COL_CURVE_NAME_ORIGINAL = 1;
+const int COL_NUM_POINTS = 2;
+
 /// Utility class for converting the QVariant in DlgModelCurves to/from the curve names as QStrings, for use by
 /// the DlgModelCurves model class. Subclassing QVariant brings up difficult challenges, so the QString userType
 /// was chosen.

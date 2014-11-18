@@ -143,6 +143,11 @@ void Curve::movePoint (const QString &pointIdentifier,
   point->setPosScreen (posScreen);
 }
 
+int Curve::numPoints () const
+{
+  return m_points.count ();
+}
+
 Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
 {
   Points::iterator itr;

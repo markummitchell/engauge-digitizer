@@ -32,6 +32,9 @@ public:
   /// See CurvesGraphs::curvesGraphsNames.
   QStringList curvesGraphsNames () const;
 
+  /// See CurvesGraphs::curvesGraphsNumPoints
+  int curvesGraphsNumPoints (const QString &curveName) const;
+
   /// Provide the Document to commands, primarily for undo/redo processing.
   Document &document();
 

@@ -32,6 +32,11 @@ QStringList CmdMediator::curvesGraphsNames () const
   return m_document.curvesGraphsNames();
 }
 
+int CmdMediator::curvesGraphsNumPoints (const QString &curveName) const
+{
+  return m_document.curvesGraphsNumPoints(curveName);
+}
+
 Document &CmdMediator::document()
 {
   return m_document;

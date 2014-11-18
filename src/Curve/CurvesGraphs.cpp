@@ -73,6 +73,20 @@ QStringList CurvesGraphs::curvesGraphsNames () const
   return names;
 }
 
+int CurvesGraphs::curvesGraphsNumPoints (const QString &curveName) const
+{
+  CurveList::const_iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    const Curve &curve = *itr;
+    if (curve.curveName () == curveName) {
+      return curve.numPoints ();
+    }
+  }
+
+  return 0;
+}
+
 void CurvesGraphs::exportToClipboard (const QStringList &selected,
                                       bool transformIsDefined,
                                       QTextStream &strCsv,

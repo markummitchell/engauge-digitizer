@@ -57,6 +57,9 @@ public:
   void movePoint (const QString &pointIdentifier,
                   const QPointF &deltaScreen);
 
+  /// Number of points.
+  int numPoints () const;
+
   /// Return the position, in graph coordinates, of the specified Point.
   QPointF positionGraph (const QString &pointIdentifier) const;
 

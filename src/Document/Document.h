@@ -76,11 +76,14 @@ public:
   /// Coordinates type for entire Document.
   CoordsType coordsType () const;
 
-  /// See Document::curveForCurveNames.
+  /// See CurvesGraphs::curveForCurveNames.
   const Curve *curveForCurveName (const QString &curveName) const;
 
   /// See CurvesGraphs::curvesGraphsNames.
   QStringList curvesGraphsNames () const;
+
+  /// See CurvesGraphs::curvesGraphsNumPoints.
+  int curvesGraphsNumPoints (const QString &curveName) const;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,

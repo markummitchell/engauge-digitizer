@@ -205,6 +205,11 @@ QStringList Document::curvesGraphsNames() const
   return m_curvesGraphs.curvesGraphsNames();
 }
 
+int Document::curvesGraphsNumPoints(const QString &curveName) const
+{
+  return m_curvesGraphs.curvesGraphsNumPoints(curveName);
+}
+
 void Document::editPointAxis (const QPointF &posGraph,
                               const QString &identifier)
 {
