@@ -134,11 +134,6 @@ void DlgPreferencesPageCurves::insertCurveName (int row,
     m_modelCurves->setData (m_modelCurves->index (row, 2),
                             numPoints);
 
-    // Select the new curve
-    QModelIndex idx = m_modelCurves->index (row, 0);
-    m_listCurves->selectionModel ()->select (idx,
-                                             QItemSelectionModel::ClearAndSelect);
-
   } else {
 
     LOG4CPP_ERROR_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
@@ -326,12 +321,6 @@ void DlgPreferencesPageCurves::updateControls ()
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_modelCurves->rowCount ();
-
-  if ((numSelectedItems == 0) && m_listCurves->currentIndex ().isValid ()) {
-
-    // Remove confusing partially-filled row corresponding to currentRow
-    m_listCurves->setCurrentIndex (QModelIndex ());
-  }
 
   if (numSelectedItems < 2 ) {
 
