@@ -271,6 +271,18 @@ int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
   return sign * str.mid (ch).toInt ();
 }
 
+void DlgPreferencesPageCurves::removeSelectedCurves ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::removeSelectedCurves";
+
+  for (int i = m_listCurves->selectionModel ()->selectedIndexes ().count () - 1; i >= 0; i--) {
+
+    int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
+
+    m_modelCurves->removeRow (row);
+  }
+}
+
 void DlgPreferencesPageCurves::slotDataChanged (const QModelIndex &topLeft,
                                                 const QModelIndex &bottomRight,
                                                 const QVector<int> &roles)
@@ -323,6 +335,7 @@ void DlgPreferencesPageCurves::slotRemove ()
     numPoints += curvePoints;
   }
 
+  int rtn = QMessageBox::Ok;
   if (numPoints > 0) {
 
     QString msg;
@@ -332,7 +345,15 @@ void DlgPreferencesPageCurves::slotRemove ()
       msg = QString ("Removing these curves will also remove %1 points. Continue?").arg (numPoints);
     }
 
-    QMessageBox::warning (0, "Curves With Points", msg, QMessageBox::Ok, QMessageBox::Cancel);
+    rtn = QMessageBox::warning (0,
+                                "Curves With Points",
+                                msg,
+                                QMessageBox::Ok,
+                                QMessageBox::Cancel);
+  }
+
+  if (rtn == QMessageBox::Ok) {
+    removeSelectedCurves ();
   }
 }
 

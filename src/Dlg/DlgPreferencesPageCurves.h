@@ -45,6 +45,7 @@ private:
                         int numPoints);
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
+  void removeSelectedCurves();
   void updateControls ();
 
   QPushButton *m_btnNew;
