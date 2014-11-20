@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageFilter.h"
+#include "DlgSettingsFilter.h"
 #include "Logger.h"
 #include <QComboBox>
 #include <QGraphicsScene>
@@ -11,10 +11,10 @@
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 
-DlgPreferencesPageFilter::DlgPreferencesPageFilter(CmdMediator &cmdMediator,
-                                                   QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsFilter::DlgSettingsFilter(CmdMediator &cmdMediator,
+                                     QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   const int EMPTY_COLUMN_WIDTH = 40;
 
@@ -37,7 +37,7 @@ DlgPreferencesPageFilter::DlgPreferencesPageFilter(CmdMediator &cmdMediator,
   createPreview (layout, row);
 }
 
-void DlgPreferencesPageFilter::createControls (QGridLayout *layout, int &row)
+void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 {
   QLabel *labelProfile = new QLabel ("Filter parameter:");
   layout->addWidget (labelProfile, row++, 1);
@@ -82,7 +82,7 @@ void DlgPreferencesPageFilter::createControls (QGridLayout *layout, int &row)
   layout->addWidget (m_btnValue, row++, 1);
 }
 
-void DlgPreferencesPageFilter::createPreview (QGridLayout *layout, int &row)
+void DlgSettingsFilter::createPreview (QGridLayout *layout, int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 5);
@@ -96,7 +96,7 @@ void DlgPreferencesPageFilter::createPreview (QGridLayout *layout, int &row)
   layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
 
-void DlgPreferencesPageFilter::createProfileAndScale (QGridLayout *layout, int &row)
+void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
 {
   QLabel *labelProfile = new QLabel ("Filter Parameter Histogram Profile");
   layout->addWidget (labelProfile, row++, 3);
@@ -117,32 +117,32 @@ void DlgPreferencesPageFilter::createProfileAndScale (QGridLayout *layout, int &
   layout->addWidget (m_scale, row++, 3);
 }
 
-void DlgPreferencesPageFilter::load ()
+void DlgSettingsFilter::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::load";
 }
 
-void DlgPreferencesPageFilter::slotForeground ()
+void DlgSettingsFilter::slotForeground ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotForeground";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 }
 
-void DlgPreferencesPageFilter::slotHue ()
+void DlgSettingsFilter::slotHue ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotHue";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 }
 
-void DlgPreferencesPageFilter::slotIntensity ()
+void DlgSettingsFilter::slotIntensity ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotIntensity";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 }
 
-void DlgPreferencesPageFilter::slotSaturation ()
+void DlgSettingsFilter::slotSaturation ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotSaturation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 }
 
-void DlgPreferencesPageFilter::slotValue ()
+void DlgSettingsFilter::slotValue ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageFilter::slotValue";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 }

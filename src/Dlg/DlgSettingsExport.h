@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_EXPORT_H
-#define DLG_PREFERENCES_PAGE_EXPORT_H
+#ifndef DLG_SETTINGS_EXPORT_H
+#define DLG_SETTINGS_EXPORT_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class QGridLayout;
 class QHBoxLayout;
@@ -13,17 +13,15 @@ class QRadioButton;
 class QTextEdit;
 class QVBoxLayout;
 
-/// Stacked widget page for editing exporting preferences.
-class DlgPreferencesPageExport : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing exporting settings.
+class DlgSettingsExport : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageExport(CmdMediator &cmdMediator,
-                           QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsExport(CmdMediator &cmdMediator,
+                    QWidget *parent = 0);
 
 private slots:
   void slotDelimitersCommas(bool);
@@ -62,6 +60,7 @@ private:
                         QHBoxLayout *&layoutRelations,
                         int &row);
   void createXLabel (QHBoxLayout *layoutMisc);
+  virtual void load ();
   void updateControls();
 
   QListWidget *m_listIncluded;
@@ -96,4 +95,4 @@ private:
   QTextEdit *m_editPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_EXPORT_H
+#endif // DLG_SETTINGS_EXPORT_H

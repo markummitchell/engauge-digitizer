@@ -25,7 +25,7 @@ class DlgModelCurveEntry
   /// Constructor for converting from QVariant.
   DlgModelCurveEntry (const QString &fromText);
 
-  /// Curve name displayed in DlgPreferencesPageCurves.
+  /// Curve name displayed in DlgSettingsCurves.
   QString curveNameCurrent () const;
 
   /// Original curve name in document. Empty if there was no original curve

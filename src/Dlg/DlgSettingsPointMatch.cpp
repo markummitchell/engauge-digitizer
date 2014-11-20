@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPagePointMatch.h"
+#include "DlgSettingsPointMatch.h"
 #include "Logger.h"
 #include <QComboBox>
 #include <QIntValidator>
@@ -14,10 +14,10 @@ const int POINT_SEPARATION_MIN = 1;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 1;
 
-DlgPreferencesPagePointMatch::DlgPreferencesPagePointMatch(CmdMediator &cmdMediator,
-                                                   QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsPointMatch::DlgSettingsPointMatch(CmdMediator &cmdMediator,
+                                             QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
@@ -32,8 +32,8 @@ DlgPreferencesPagePointMatch::DlgPreferencesPagePointMatch(CmdMediator &cmdMedia
   createPreview (layout, row);
 }
 
-void DlgPreferencesPagePointMatch::createControls (QGridLayout *layout,
-                                                   int &row)
+void DlgSettingsPointMatch::createControls (QGridLayout *layout,
+                                            int &row)
 {
   QLabel *labelPointSeparation = new QLabel ("Point separation (pixels):");
   layout->addWidget (labelPointSeparation, row, 1);
@@ -85,8 +85,8 @@ void DlgPreferencesPagePointMatch::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbCandidatePointColor, row++, 2);
 }
 
-void DlgPreferencesPagePointMatch::createPreview (QGridLayout *layout,
-                                                  int &row)
+void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
+                                           int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
@@ -102,32 +102,32 @@ void DlgPreferencesPagePointMatch::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgPreferencesPagePointMatch::load ()
+void DlgSettingsPointMatch::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::load";
 }
 
-void DlgPreferencesPagePointMatch::slotAcceptedPointColor (const QString &)
+void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotAcceptedPointColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotAcceptedPointColor";
 }
 
-void DlgPreferencesPagePointMatch::slotCandidatePointColor (const QString &)
+void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotCandidatePointColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotCandidatePointColor";
 }
 
-void DlgPreferencesPagePointMatch::slotPointSeparation (const QString &)
+void DlgSettingsPointMatch::slotPointSeparation (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotPointSeparation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSeparation";
 }
 
-void DlgPreferencesPagePointMatch::slotPointSize (const QString &)
+void DlgSettingsPointMatch::slotPointSize (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotPointSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSize";
 }
 
-void DlgPreferencesPagePointMatch::slotRejectedPointColor (const QString &)
+void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPagePointMatch::slotRejectedPointColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotRejectedPointColor";
 }

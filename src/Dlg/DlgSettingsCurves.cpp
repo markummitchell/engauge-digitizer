@@ -1,6 +1,6 @@
 #include "CmdMediator.h"
 #include "DlgModelCurves.h"
-#include "DlgPreferencesPageCurves.h"
+#include "DlgSettingsCurves.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QGridLayout>
@@ -10,10 +10,10 @@
 #include <QPushButton>
 #include "QtToString.h"
 
-DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
-                                                   QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsCurves::DlgSettingsCurves(CmdMediator &cmdMediator,
+                                     QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   const int EMPTY_COLUMN_WIDTH = 30;
   const int EMPTY_ROW_HEIGHT = 40;
@@ -37,12 +37,14 @@ DlgPreferencesPageCurves::DlgPreferencesPageCurves(CmdMediator &cmdMediator,
   layout->setRowStretch (row, 0); // Empty last row
   layout->setRowMinimumHeight (row, EMPTY_ROW_HEIGHT);
 
+  load ();
+
   updateControls ();
 }
 
-void DlgPreferencesPageCurves::appendCurveName (const QString &curveNameNew,
-                                                const QString &curveNameOriginal,
-                                                int numPoints)
+void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
+                                         const QString &curveNameOriginal,
+                                         int numPoints)
 {
   Q_ASSERT (m_modelCurves != 0);
 
@@ -53,8 +55,8 @@ void DlgPreferencesPageCurves::appendCurveName (const QString &curveNameNew,
                    numPoints);
 }
 
-void DlgPreferencesPageCurves::createButtons (QGridLayout *layout,
-                                              int &row)
+void DlgSettingsCurves::createButtons (QGridLayout *layout,
+                                       int &row)
 {
   m_btnNew = new QPushButton ("New...");
   m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
@@ -73,8 +75,8 @@ void DlgPreferencesPageCurves::createButtons (QGridLayout *layout,
   layout->addWidget (m_btnRemove, row++, 2, 1, 1, Qt::AlignRight);
 }
 
-void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout,
-                                                 int &row)
+void DlgSettingsCurves::createListCurves (QGridLayout *layout,
+                                          int &row)
 {
   QLabel *label = new QLabel (tr ("Curve Names:"));
   layout->addWidget (label, row++, 1);
@@ -103,7 +105,7 @@ void DlgPreferencesPageCurves::createListCurves (QGridLayout *layout,
            this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
 }
 
-bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
+bool DlgSettingsCurves::endsWithNumber (const QString &str) const
 {
   bool success = false;
 
@@ -115,14 +117,14 @@ bool DlgPreferencesPageCurves::endsWithNumber (const QString &str) const
   return success;
 }
 
-void DlgPreferencesPageCurves::insertCurveName (int row,
-                                                const QString &curveNameNew,
-                                                const QString &curveNameOriginal,
-                                                int numPoints)
+void DlgSettingsCurves::insertCurveName (int row,
+                                         const QString &curveNameNew,
+                                         const QString &curveNameOriginal,
+                                         int numPoints)
 {
   if (m_modelCurves->insertRow (row)) {
 
-    LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
+    LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
     DlgModelCurveEntry curveEntry (curveNameNew,
                                    curveNameOriginal,
@@ -137,14 +139,14 @@ void DlgPreferencesPageCurves::insertCurveName (int row,
 
   } else {
 
-    LOG4CPP_ERROR_S ((*mainCat)) << "DlgPreferencesPageCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
+    LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
 
   }
 }
 
-void DlgPreferencesPageCurves::load ()
+void DlgSettingsCurves::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::load";
 
   QStringList curveNames = cmdMediator ().curvesGraphsNames ();
   QStringList::const_iterator itr;
@@ -156,7 +158,7 @@ void DlgPreferencesPageCurves::load ()
   }
 }
 
-QString DlgPreferencesPageCurves::nextCurveName () const
+QString DlgSettingsCurves::nextCurveName () const
 {
   const QString DASH_ONE ("-1"); // Nice value to start a new range at a lower level than the current level
 
@@ -252,7 +254,7 @@ QString DlgPreferencesPageCurves::nextCurveName () const
   return curveNameNext;
 }
 
-int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
+int DlgSettingsCurves::numberAtEnd (const QString &str) const
 {
   Q_ASSERT (endsWithNumber (str));
 
@@ -271,9 +273,9 @@ int DlgPreferencesPageCurves::numberAtEnd (const QString &str) const
   return sign * str.mid (ch).toInt ();
 }
 
-void DlgPreferencesPageCurves::removeSelectedCurves ()
+void DlgSettingsCurves::removeSelectedCurves ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::removeSelectedCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::removeSelectedCurves";
 
   for (int i = m_listCurves->selectionModel ()->selectedIndexes ().count () - 1; i >= 0; i--) {
 
@@ -283,11 +285,11 @@ void DlgPreferencesPageCurves::removeSelectedCurves ()
   }
 }
 
-void DlgPreferencesPageCurves::slotDataChanged (const QModelIndex &topLeft,
-                                                const QModelIndex &bottomRight,
-                                                const QVector<int> &roles)
+void DlgSettingsCurves::slotDataChanged (const QModelIndex &topLeft,
+                                         const QModelIndex &bottomRight,
+                                         const QVector<int> &roles)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotDataChanged"
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotDataChanged"
                               << " topLeft=(" << topLeft.row () << "," << topLeft.column () << ")"
                               << " bottomRight=(" << bottomRight.row () << "," << bottomRight.column () << ")"
                               << " roles=" << rolesAsString (roles).toLatin1 ().data ();
@@ -295,9 +297,9 @@ void DlgPreferencesPageCurves::slotDataChanged (const QModelIndex &topLeft,
   updateControls ();
 }
 
-void DlgPreferencesPageCurves::slotNew ()
+void DlgSettingsCurves::slotNew ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotNew";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotNew";
 
   const QString NO_ORIGINAL_CURVE_NAME;
   const int NO_POINTS = 0;
@@ -321,9 +323,9 @@ void DlgPreferencesPageCurves::slotNew ()
   }
 }
 
-void DlgPreferencesPageCurves::slotRemove ()
+void DlgSettingsCurves::slotRemove ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::slotRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotRemove";
 
   int numPoints = 0;
   for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
@@ -357,9 +359,14 @@ void DlgPreferencesPageCurves::slotRemove ()
   }
 }
 
-void DlgPreferencesPageCurves::updateControls ()
+void DlgSettingsCurves::slotSelectionChanged (QItemSelection, QItemSelection)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurves::updateControls";
+  updateControls ();
+}
+
+void DlgSettingsCurves::updateControls ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::updateControls";
 
   Q_ASSERT (m_listCurves != 0);
 
@@ -380,9 +387,4 @@ void DlgPreferencesPageCurves::updateControls ()
 
   // Leave at least one curve
   m_btnRemove->setEnabled ((numSelectedItems > 0) && (numSelectedItems < numItems));
-}
-
-void DlgPreferencesPageCurves::slotSelectionChanged (QItemSelection, QItemSelection)
-{
-  updateControls ();
 }

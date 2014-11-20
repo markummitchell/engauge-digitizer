@@ -5,7 +5,7 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
-/// Model for QListView in DlgPreferencesPageCurves. First column is visible with current curve name.
+/// Model for QListView in DlgSettingsCurves. First column is visible with current curve name.
 /// Second column is hidden with curve name at the start of editing, or empty if none.
 class DlgModelCurves : public QAbstractTableModel
 {

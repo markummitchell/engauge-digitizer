@@ -11,7 +11,15 @@
 #include "img/DigitPointMatch.xpm"
 #include "img/DigitSegment.xpm"
 #include "img/DigitSelect.xpm"
-#include "DlgEditPreferences.h"
+#include "Dlg/DlgSettingsCoords.h"
+#include "Dlg/DlgSettingsCurveProperties.h"
+#include "Dlg/DlgSettingsCurves.h"
+#include "Dlg/DlgSettingsExport.h"
+#include "Dlg/DlgSettingsFilter.h"
+#include "Dlg/DlgSettingsGridDisplay.h"
+#include "Dlg/DlgSettingsGridRemoval.h"
+#include "Dlg/DlgSettingsPointMatch.h"
+#include "Dlg/DlgSettingsSegments.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
@@ -104,6 +112,7 @@ void MainWindow::createActions()
   createActionsEdit ();
   createActionsDigitize ();
   createActionsView ();
+  createActionsSettings ();
   createActionsHelp ();
 }
 
@@ -218,13 +227,6 @@ void MainWindow::createActionsEdit ()
   m_actionEditDelete->setWhatsThis (tr ("Delete\n\n"
                                         "Deletes the selected points, after copying them to the clipboard."));
   connect (m_actionEditDelete, SIGNAL (triggered ()), this, SLOT (slotEditDelete ()));
-
-  m_actionEditPreferences = new QAction (tr ("Preferences"), this);
-  m_actionEditPreferences->setShortcut (QKeySequence::Preferences);
-  m_actionEditPreferences->setStatusTip (tr ("Edit Document and application settings."));
-  m_actionEditPreferences->setWhatsThis (tr ("Preferences\n"
-                                             "Edit Document and application settings for processing and displaying the current Document."));
-  connect (m_actionEditPreferences, SIGNAL (triggered ()), this, SLOT (slotEditPreferences ()));
 }
 
 void MainWindow::createActionsFile ()
@@ -294,6 +296,54 @@ void MainWindow::createActionsHelp ()
 
   m_actionWhatsThis = QWhatsThis::createAction(this);
   m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
+}
+
+void MainWindow::createActionsSettings ()
+{
+  m_actionSettingsCoords = new QAction (tr ("Coords"), this);
+  m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
+  m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings"));
+  connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
+
+  m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties"), this);
+  m_actionSettingsCurveProperties->setStatusTip (tr ("Edit Curve Properties settings."));
+  m_actionSettingsCurveProperties->setWhatsThis (tr ("Coordinate Settings"));
+  connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
+
+  m_actionSettingsCurves = new QAction (tr ("Curves"), this);
+  m_actionSettingsCurves->setStatusTip (tr ("Edit Curves settings."));
+  m_actionSettingsCurves->setWhatsThis (tr ("Curves Settings"));
+  connect (m_actionSettingsCurves, SIGNAL (triggered ()), this, SLOT (slotSettingsCurves ()));
+
+  m_actionSettingsExport = new QAction (tr ("Export"), this);
+  m_actionSettingsExport->setStatusTip (tr ("Edit Export settings."));
+  m_actionSettingsExport->setWhatsThis (tr ("Export Settings"));
+  connect (m_actionSettingsExport, SIGNAL (triggered ()), this, SLOT (slotSettingsExport ()));
+
+  m_actionSettingsFilter = new QAction (tr ("Filter"), this);
+  m_actionSettingsFilter->setStatusTip (tr ("Edit Filter settings."));
+  m_actionSettingsFilter->setWhatsThis (tr ("Filter Settings"));
+  connect (m_actionSettingsFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsFilter ()));
+
+  m_actionSettingsGridDisplay = new QAction (tr ("Grid Display"), this);
+  m_actionSettingsGridDisplay->setStatusTip (tr ("Edit Grid Display settings."));
+  m_actionSettingsGridDisplay->setWhatsThis (tr ("Grid Display Settings"));
+  connect (m_actionSettingsGridDisplay, SIGNAL (triggered ()), this, SLOT (slotSettingsGridDisplay ()));
+
+  m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
+  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
+  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings"));
+  connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
+
+  m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
+  m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
+  m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings"));
+  connect (m_actionSettingsPointMatch, SIGNAL (triggered ()), this, SLOT (slotSettingsPointMatch ()));
+
+  m_actionSettingsSegments = new QAction (tr ("Segments"), this);
+  m_actionSettingsSegments->setStatusTip (tr ("Edit Segments settings."));
+  m_actionSettingsSegments->setWhatsThis (tr ("Segments Settings"));
+  connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
 }
 
 void MainWindow::createActionsView ()
@@ -493,8 +543,6 @@ void MainWindow::createMenus()
   m_menuEdit->addAction (m_actionEditCopy);
   m_menuEdit->addAction (m_actionEditPaste);
   m_menuEdit->addAction (m_actionEditDelete);
-  m_menuEdit->insertSeparator (m_actionEditPreferences);
-  m_menuEdit->addAction (m_actionEditPreferences);
 
   m_menuDigitize = menuBar()->addMenu(tr("Digitize"));
   m_menuDigitize->addAction (m_actionDigitizeSelect);
@@ -534,6 +582,17 @@ void MainWindow::createMenus()
   m_menuViewZoom->addAction (m_actionZoom1To16);
   m_menuViewZoom->addAction (m_actionZoomFill);
   m_menuView->addMenu (m_menuViewZoom);
+
+  m_menuSettings = menuBar()->addMenu(tr ("Settings"));
+  m_menuSettings->addAction (m_actionSettingsCoords);
+  m_menuSettings->addAction (m_actionSettingsCurveProperties);
+  m_menuSettings->addAction (m_actionSettingsCurves);
+  m_menuSettings->addAction (m_actionSettingsExport);
+  m_menuSettings->addAction (m_actionSettingsFilter);
+  m_menuSettings->addAction (m_actionSettingsGridDisplay);
+  m_menuSettings->addAction (m_actionSettingsGridRemoval);
+  m_menuSettings->addAction (m_actionSettingsPointMatch);
+  m_menuSettings->addAction (m_actionSettingsSegments);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
   m_menuHelp->addAction (m_actionAbout);
@@ -984,12 +1043,75 @@ void MainWindow::slotEditPaste ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPaste";
 }
 
-void MainWindow::slotEditPreferences ()
+void MainWindow::slotSettingsCoords ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPreferences";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
-  Q_ASSERT (m_cmdMediator != 0);
-  DlgEditPreferences dlg (*m_cmdMediator);
+  DlgSettingsCoords dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsCurveProperties ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsCurveProperties dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsCurves ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsCurves dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsExport ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsExport dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsFilter ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsFilter dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsGridDisplay ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsGridDisplay dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsGridRemoval ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsGridRemoval dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsPointMatch ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsPointMatch dlg (*m_cmdMediator);
+  dlg.exec ();
+}
+
+void MainWindow::slotSettingsSegments ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  DlgSettingsSegments dlg (*m_cmdMediator);
   dlg.exec ();
 }
 
@@ -1636,7 +1758,6 @@ void MainWindow::updateControls ()
   m_actionEditCopy->setEnabled (m_scene->selectedItems().count () > 0);
   m_actionEditPaste->setEnabled (false);
   m_actionEditDelete->setEnabled (m_scene->selectedItems().count () > 0);
-  m_actionEditPreferences->setEnabled (!m_curfile.isEmpty ());
 
   m_actionDigitizeAxis->setEnabled (!m_curfile.isEmpty ());
   m_actionDigitizeCurve ->setEnabled (!m_curfile.isEmpty ());

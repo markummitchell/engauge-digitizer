@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_FILTER_H
-#define DLG_PREFERENCES_PAGE_FILTER_H
+#ifndef DLG_SETTINGS_FILTER_H
+#define DLG_SETTINGS_FILTER_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class QGraphicsScene;
 class QGridLayout;
@@ -10,17 +10,15 @@ class QRadioButton;
 class ViewPreview;
 class ViewProfile;
 
-/// Stacked widget page for editing filtering preferences.
-class DlgPreferencesPageFilter : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing filtering settings.
+class DlgSettingsFilter : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageFilter(CmdMediator &cmdMediator,
-                           QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsFilter(CmdMediator &cmdMediator,
+                    QWidget *parent = 0);
 
 private slots:
   void slotForeground();
@@ -34,6 +32,7 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
+  virtual void load ();
 
   QRadioButton *m_btnIntensity;
   QRadioButton *m_btnForeground;
@@ -50,4 +49,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_FILTER_H
+#endif // DLG_SETTINGS_FILTER_H

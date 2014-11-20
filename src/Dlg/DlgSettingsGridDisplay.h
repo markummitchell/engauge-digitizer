@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_GRID_DISPLAY_H
-#define DLG_PREFERENCES_PAGE_GRID_DISPLAY_H
+#ifndef DLG_SETTINGS_GRID_DISPLAY_H
+#define DLG_SETTINGS_GRID_DISPLAY_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class QComboBox;
 class QGraphicsScene;
@@ -9,17 +9,15 @@ class QGridLayout;
 class QLineEdit;
 class ViewPreview;
 
-/// Stacked widget page for editing grid display preferences.
-class DlgPreferencesPageGridDisplay : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing grid display settings.
+class DlgSettingsGridDisplay : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageGridDisplay(CmdMediator &cmdMediator,
-                                QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsGridDisplay(CmdMediator &cmdMediator,
+                         QWidget *parent = 0);
 
 private slots:
   void slotDisableX(const QString &);
@@ -35,11 +33,12 @@ private slots:
   void slotStopY(const QString &);
 
 private:
-  DlgPreferencesPageGridDisplay(QWidget *parent = 0);
+  DlgSettingsGridDisplay(QWidget *parent = 0);
 
   void createX (QGridLayout *layout, int &row);
   void createY (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  virtual void load ();
 
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;
@@ -57,4 +56,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_GRID_DISPLAY_H
+#endif // DLG_SETTINGS_GRID_DISPLAY_H

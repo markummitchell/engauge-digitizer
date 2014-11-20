@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageGridDisplay.h"
+#include "DlgSettingsGridDisplay.h"
 #include "Logger.h"
 #include <QComboBox>
 #include <QGraphicsScene>
@@ -13,10 +13,10 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgPreferencesPageGridDisplay::DlgPreferencesPageGridDisplay(CmdMediator &cmdMediator,
-                                                             QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsGridDisplay::DlgSettingsGridDisplay(CmdMediator &cmdMediator,
+                                               QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
@@ -32,8 +32,8 @@ DlgPreferencesPageGridDisplay::DlgPreferencesPageGridDisplay(CmdMediator &cmdMed
   createPreview (layout, row);
 }
 
-void DlgPreferencesPageGridDisplay::createPreview (QGridLayout *layout,
-                                                   int &row)
+void DlgSettingsGridDisplay::createPreview (QGridLayout *layout,
+                                            int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
@@ -47,8 +47,8 @@ void DlgPreferencesPageGridDisplay::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgPreferencesPageGridDisplay::createX (QGridLayout *layout,
-                                             int &row)
+void DlgSettingsGridDisplay::createX (QGridLayout *layout,
+                                      int &row)
 {
   QString titleX = "X Grid Lines";
   if (false) {
@@ -111,8 +111,8 @@ void DlgPreferencesPageGridDisplay::createX (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopX, 4, 1);
 }
 
-void DlgPreferencesPageGridDisplay::createY (QGridLayout *layout,
-                                             int &row)
+void DlgSettingsGridDisplay::createY (QGridLayout *layout,
+                                      int &row)
 {
   QString titleY =  "Y Grid Lines";
   if (false) {
@@ -175,57 +175,57 @@ void DlgPreferencesPageGridDisplay::createY (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
-void DlgPreferencesPageGridDisplay::load ()
+void DlgSettingsGridDisplay::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::load";
 }
 
-void DlgPreferencesPageGridDisplay::slotCountX(const QString &)
+void DlgSettingsGridDisplay::slotCountX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotCountX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountX";
 }
 
-void DlgPreferencesPageGridDisplay::slotCountY(const QString &)
+void DlgSettingsGridDisplay::slotCountY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotCountY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountY";
 }
 
-void DlgPreferencesPageGridDisplay::slotDisableX(const QString &)
+void DlgSettingsGridDisplay::slotDisableX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotDisableX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableX";
 }
 
-void DlgPreferencesPageGridDisplay::slotDisableY(const QString &)
+void DlgSettingsGridDisplay::slotDisableY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotDisableY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableY";
 }
 
-void DlgPreferencesPageGridDisplay::slotStartX(const QString &)
+void DlgSettingsGridDisplay::slotStartX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStartX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartX";
 }
 
-void DlgPreferencesPageGridDisplay::slotStartY(const QString &)
+void DlgSettingsGridDisplay::slotStartY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStartY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartY";
 }
 
-void DlgPreferencesPageGridDisplay::slotStepX(const QString &)
+void DlgSettingsGridDisplay::slotStepX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStepX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepX";
 }
 
-void DlgPreferencesPageGridDisplay::slotStepY(const QString &)
+void DlgSettingsGridDisplay::slotStepY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStepY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepY";
 }
 
-void DlgPreferencesPageGridDisplay::slotStopX(const QString &)
+void DlgSettingsGridDisplay::slotStopX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStopX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopX";
 }
 
-void DlgPreferencesPageGridDisplay::slotStopY(const QString &)
+void DlgSettingsGridDisplay::slotStopY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridDisplay::slotStopY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopY";
 }

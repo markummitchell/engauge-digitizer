@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageCurveProperties.h"
+#include "DlgSettingsCurveProperties.h"
 #include "Logger.h"
 #include <QComboBox>
 #include <QGraphicsScene>
@@ -10,10 +10,10 @@
 #include <QPushButton>
 #include "ViewPreview.h"
 
-DlgPreferencesPageCurveProperties::DlgPreferencesPageCurveProperties(CmdMediator &cmdMediator,
-                                                                     QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsCurveProperties::DlgSettingsCurveProperties(CmdMediator &cmdMediator,
+                                                       QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
@@ -34,10 +34,12 @@ DlgPreferencesPageCurveProperties::DlgPreferencesPageCurveProperties(CmdMediator
   layout->setColumnStretch(3, 1); // Empty last column
 
   layout->setRowStretch (0, 1); // Expand empty first row
+
+  load ();
 }
 
-void DlgPreferencesPageCurveProperties::createCurveName (QGridLayout *layout,
-                                                         int &row)
+void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
+                                                      int &row)
 {
   QLabel *labelCurveName = new QLabel ("Curve Name:");
   layout->addWidget (labelCurveName, row, 1);
@@ -47,8 +49,8 @@ void DlgPreferencesPageCurveProperties::createCurveName (QGridLayout *layout,
   layout->addWidget (m_cmbCurveName, row++, 2);
 }
 
-void DlgPreferencesPageCurveProperties::createLine (QGridLayout *layout,
-                                                    int &row)
+void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
+                                                 int &row)
 {
   m_groupLine = new QGroupBox ("Line");
   layout->addWidget (m_groupLine, row++, 2);
@@ -88,8 +90,8 @@ void DlgPreferencesPageCurveProperties::createLine (QGridLayout *layout,
   layoutGroup->addWidget (m_cmbLineType, 2, 1);
 }
 
-void DlgPreferencesPageCurveProperties::createPoint (QGridLayout *layout,
-                                                     int &row)
+void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
+                                                  int &row)
 {
   m_groupPoint = new QGroupBox ("Point");
   layout->addWidget (m_groupPoint, row++, 1);
@@ -138,7 +140,7 @@ void DlgPreferencesPageCurveProperties::createPoint (QGridLayout *layout,
   layoutGroup->addWidget (m_cmbPointInteriorColor, 4, 1);
 }
 
-void DlgPreferencesPageCurveProperties::createPreview (QGridLayout *layout,
+void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
                                                        int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
@@ -153,47 +155,47 @@ void DlgPreferencesPageCurveProperties::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgPreferencesPageCurveProperties::load ()
+void DlgSettingsCurveProperties::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::load";
 }
 
-void DlgPreferencesPageCurveProperties::slotLineColor(const QString &)
+void DlgSettingsCurveProperties::slotLineColor(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
 }
 
-void DlgPreferencesPageCurveProperties::slotLineSize(const QString &)
+void DlgSettingsCurveProperties::slotLineSize(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotLineSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineSize";
 }
 
-void DlgPreferencesPageCurveProperties::slotLineType(const QString &)
+void DlgSettingsCurveProperties::slotLineType(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotLineType";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
 }
 
-void DlgPreferencesPageCurveProperties::slotPointLineColor(const QString &)
+void DlgSettingsCurveProperties::slotPointLineColor(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotPointLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineColor";
 }
 
-void DlgPreferencesPageCurveProperties::slotPointLineSize(const QString &)
+void DlgSettingsCurveProperties::slotPointLineSize(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotPointLineSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineSize";
 }
 
-void DlgPreferencesPageCurveProperties::slotPointInteriorColor(const QString &)
+void DlgSettingsCurveProperties::slotPointInteriorColor(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotPointInteriorColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointInteriorColor";
 }
 
-void DlgPreferencesPageCurveProperties::slotPointShape(const QString &)
+void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotPointShape";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
 }
 
-void DlgPreferencesPageCurveProperties::slotPointSize(const QString &)
+void DlgSettingsCurveProperties::slotPointSize(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCurveProperties::slotPointSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointSize";
 }

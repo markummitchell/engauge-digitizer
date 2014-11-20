@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_SEGMENTS_H
-#define DLG_PREFERENCES_PAGE_SEGMENTS_H
+#ifndef DLG_SETTINGS_SEGMENTS_H
+#define DLG_SETTINGS_SEGMENTS_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class QCheckBox;
 class QComboBox;
@@ -10,17 +10,15 @@ class QGraphicsScene;
 class QLineEdit;
 class ViewPreview;
 
-/// Stacked widget page for editing Segments preferences, for DigitizeStateSegment.
-class DlgPreferencesPageSegments : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing Segments settings, for DigitizeStateSegment.
+class DlgSettingsSegments : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageSegments(CmdMediator &cmdMediator,
-                             QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsSegments(CmdMediator &cmdMediator,
+                      QWidget *parent = 0);
 
 private slots:
   void slotFillCorners (int state);
@@ -33,6 +31,7 @@ private:
 
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  virtual void load ();
 
   QLineEdit *m_editMinLength;
   QLineEdit *m_editPointSeparation;
@@ -44,4 +43,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_SEGMENTS_H
+#endif // DLG_SETTINGS_SEGMENTS_H

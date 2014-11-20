@@ -72,7 +72,6 @@ private slots:
   void slotEditCut ();
   void slotEditDelete ();
   void slotEditPaste ();
-  void slotEditPreferences ();
   void slotFileExport ();
   void slotFileExportAs ();
   void slotFileImport();
@@ -91,6 +90,15 @@ private slots:
   void slotMouseRelease (QPointF);
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (Qt::CursorShape);
+  void slotSettingsCoords ();
+  void slotSettingsCurveProperties ();
+  void slotSettingsCurves ();
+  void slotSettingsExport ();
+  void slotSettingsFilter ();
+  void slotSettingsGridDisplay ();
+  void slotSettingsGridRemoval ();
+  void slotSettingsPointMatch ();
+  void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
   void slotViewDigitize ();
   void slotViewGroupDocumentImage(QAction*);
@@ -121,6 +129,7 @@ private:
   void createActionsEdit ();
   void createActionsFile ();
   void createActionsHelp ();
+  void createActionsSettings ();
   void createActionsView ();
   void createCentralWidget ();
   void createLoadImageFromUrl ();
@@ -168,7 +177,6 @@ private:
   QAction *m_actionEditCopy;
   QAction *m_actionEditPaste;
   QAction *m_actionEditDelete;
-  QAction *m_actionEditPreferences;
 
   QMenu *m_menuDigitize;
   QActionGroup *m_groupDigitize;
@@ -208,6 +216,17 @@ private:
   QAction *m_actionZoom1To4;
   QAction *m_actionZoom1To8;
   QAction *m_actionZoom1To16;
+
+  QMenu *m_menuSettings;
+  QAction *m_actionSettingsCoords;
+  QAction *m_actionSettingsCurveProperties;
+  QAction *m_actionSettingsCurves;
+  QAction *m_actionSettingsExport;
+  QAction *m_actionSettingsFilter;
+  QAction *m_actionSettingsGridDisplay;
+  QAction *m_actionSettingsGridRemoval;
+  QAction *m_actionSettingsPointMatch;
+  QAction *m_actionSettingsSegments;
 
   QMenu *m_menuHelp;
   QAction *m_actionAbout;

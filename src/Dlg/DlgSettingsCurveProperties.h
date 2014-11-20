@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_CURVE_PROPERTIES_H
-#define DLG_PREFERENCES_PAGE_CURVE_PROPERTIES_H
+#ifndef DLG_SETTINGS_CURVE_PROPERTIES_H
+#define DLG_SETTINGS_CURVE_PROPERTIES_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class ViewPreview;
 class QComboBox;
@@ -9,17 +9,15 @@ class QGraphicsScene;
 class QGridLayout;
 class QGroupBox;
 
-/// Stacked widget page for editing curve properties preferences.
-class DlgPreferencesPageCurveProperties : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing curve properties settings.
+class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageCurveProperties(CmdMediator &cmdMediator,
-                                    QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsCurveProperties(CmdMediator &cmdMediator,
+                             QWidget *parent = 0);
 
 private slots:
   void slotLineColor(const QString &);
@@ -32,12 +30,13 @@ private slots:
   void slotPointSize(const QString &);
 
 private:
-  DlgPreferencesPageCurveProperties(QWidget *parent = 0);
+  DlgSettingsCurveProperties(QWidget *parent = 0);
 
   void createCurveName (QGridLayout *layout, int &row);
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  virtual void load ();
 
   QComboBox *m_cmbCurveName;
 
@@ -57,4 +56,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_CURVE_PROPERTIES_H
+#endif // DLG_SETTINGS_CURVE_PROPERTIES_H

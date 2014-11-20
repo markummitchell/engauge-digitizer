@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageCoords.h"
+#include "DlgSettingsCoords.h"
 #include "Logger.h"
 #include <QComboBox>
 #include <QDoubleValidator>
@@ -25,10 +25,10 @@ const QString POLAR_UNITS_GRADIANS = "Gradians";
 const QString POLAR_UNITS_RADIANS = "Radians";
 const QString POLAR_UNITS_TURNS = "Turns";
 
-DlgPreferencesPageCoords::DlgPreferencesPageCoords(CmdMediator &cmdMediator,
-                                                   QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent),
+DlgSettingsCoords::DlgSettingsCoords(CmdMediator &cmdMediator,
+                                     QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                               parent),
   m_coordsType (cmdMediator.coordsType ()),
   m_btnCartesian (0),
   m_btnPolar (0)
@@ -46,12 +46,14 @@ DlgPreferencesPageCoords::DlgPreferencesPageCoords(CmdMediator &cmdMediator,
   createGroupScale (layout, row);
   createGroupPolar (layout, row);
   createPreview (layout, row);
+
   initializeGroupCoordsType();
+  load ();
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::createGroupCoordsType (QGridLayout *layout,
-                                                      int &row)
+void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
+                                               int &row)
 {
   m_boxCoordsType = new QGroupBox("Coordinates Types");
   layout->addWidget (m_boxCoordsType, row++, 1, 1, 2);
@@ -74,8 +76,8 @@ void DlgPreferencesPageCoords::createGroupCoordsType (QGridLayout *layout,
   layoutGroup->addWidget (m_btnPolar);
 }
 
-void DlgPreferencesPageCoords::createGroupPolar(QGridLayout *layout,
-                                                int &row)
+void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
+                                         int &row)
 {
   m_boxPolarCoords = new QGroupBox ("Polar Coordinates");
   layout->addWidget (m_boxPolarCoords, row++, 1, 1, 2);
@@ -116,8 +118,8 @@ void DlgPreferencesPageCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (m_editOriginRadius, 1, 1);
 }
 
-void DlgPreferencesPageCoords::createGroupScale (QGridLayout *layout,
-                                                 int &row)
+void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
+                                          int &row)
 {
   m_boxXTheta = new QGroupBox(QString("X/") + QChar (0x98, 0x03) + QString (" Scale"));
   layout->addWidget (m_boxXTheta, row, 1);
@@ -153,8 +155,8 @@ void DlgPreferencesPageCoords::createGroupScale (QGridLayout *layout,
   layoutYRadius->addWidget (m_yRadiusLog);
 }
 
-void DlgPreferencesPageCoords::createPreview (QGridLayout *layout,
-                                              int &row)
+void DlgSettingsCoords::createPreview (QGridLayout *layout,
+                                       int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
@@ -168,7 +170,7 @@ void DlgPreferencesPageCoords::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgPreferencesPageCoords::initializeGroupCoordsType()
+void DlgSettingsCoords::initializeGroupCoordsType()
 {
   switch (m_coordsType) {
     case COORDS_TYPE_CARTESIAN:
@@ -183,12 +185,12 @@ void DlgPreferencesPageCoords::initializeGroupCoordsType()
   }
 }
 
-void DlgPreferencesPageCoords::load ()
+void DlgSettingsCoords::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::load";
 }
 
-void DlgPreferencesPageCoords::loadPixmap (const QString &image)
+void DlgSettingsCoords::loadPixmap (const QString &image)
 {
   if (m_scenePreview->items().count () > 0) {
     m_scenePreview->removeItem (m_scenePreview->items().first());
@@ -198,67 +200,67 @@ void DlgPreferencesPageCoords::loadPixmap (const QString &image)
   m_scenePreview->addPixmap (pixmap);
 }
 
-void DlgPreferencesPageCoords::slotCartesian ()
+void DlgSettingsCoords::slotCartesian ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotCartesian";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotCartesian";
 
   m_coordsType = COORDS_TYPE_CARTESIAN;
   loadPixmap (":/engauge/img/plot_cartesian.png");
   updateControls();
 }
 
-void DlgPreferencesPageCoords::slotPolar ()
+void DlgSettingsCoords::slotPolar ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotPolar";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolar";
 
   m_coordsType = COORDS_TYPE_POLAR;
   loadPixmap (":/engauge/img/plot_polar.png");
   updateControls();
 }
 
-void DlgPreferencesPageCoords::slotPolarOriginRadius()
+void DlgSettingsCoords::slotPolarOriginRadius()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotPolarOriginRadius";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
 
   updateControls();
 }
 
-void DlgPreferencesPageCoords::slotPolarUnits(const QString &)
+void DlgSettingsCoords::slotPolarUnits(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotPolarUnits";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarUnits";
 
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::slotXThetaLinear()
+void DlgSettingsCoords::slotXThetaLinear()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotXThetaLinear";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLinear";
 
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::slotXThetaLog()
+void DlgSettingsCoords::slotXThetaLog()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotXThetaLog";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLog";
 
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::slotYRadiusLinear()
+void DlgSettingsCoords::slotYRadiusLinear()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotYRadiusLinear";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLinear";
 
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::slotYRadiusLog()
+void DlgSettingsCoords::slotYRadiusLog()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageCoords::slotYRadiusLog";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLog";
 
   updateControls ();
 }
 
-void DlgPreferencesPageCoords::updateControls ()
+void DlgSettingsCoords::updateControls ()
 {
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
 

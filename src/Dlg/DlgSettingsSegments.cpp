@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageSegments.h"
+#include "DlgSettingsSegments.h"
 #include "Logger.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -17,10 +17,10 @@ const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 1;
 const int POINT_SEPARATION_MAX = 10000;
 
-DlgPreferencesPageSegments::DlgPreferencesPageSegments(CmdMediator &cmdMediator,
-                                                       QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsSegments::DlgSettingsSegments(CmdMediator &cmdMediator,
+                                         QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
@@ -35,8 +35,8 @@ DlgPreferencesPageSegments::DlgPreferencesPageSegments(CmdMediator &cmdMediator,
   createPreview (layout, row);
 }
 
-void DlgPreferencesPageSegments::createControls (QGridLayout *layout,
-                                                 int &row)
+void DlgSettingsSegments::createControls (QGridLayout *layout,
+                                          int &row)
 {
   QLabel *labelMinLength = new QLabel("Minimum length:");
   layout->addWidget(labelMinLength, row, 1);
@@ -91,8 +91,8 @@ void DlgPreferencesPageSegments::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
-void DlgPreferencesPageSegments::createPreview (QGridLayout *layout,
-                                                int &row)
+void DlgSettingsSegments::createPreview (QGridLayout *layout,
+                                         int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
@@ -107,32 +107,32 @@ void DlgPreferencesPageSegments::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgPreferencesPageSegments::load ()
+void DlgSettingsSegments::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::load";
 }
 
-void DlgPreferencesPageSegments::slotFillCorners (int /* state */)
+void DlgSettingsSegments::slotFillCorners (int /* state */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotFillCorner";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotFillCorner";
 }
 
-void DlgPreferencesPageSegments::slotLineColor (const QString &)
+void DlgSettingsSegments::slotLineColor (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineColor";
 }
 
-void DlgPreferencesPageSegments::slotLineSize (const QString &)
+void DlgSettingsSegments::slotLineSize (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotLineSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineSize";
 }
 
-void DlgPreferencesPageSegments::slotMinLength (const QString &)
+void DlgSettingsSegments::slotMinLength (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotMinLength";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotMinLength";
 }
 
-void DlgPreferencesPageSegments::slotPointSeparation (const QString &)
+void DlgSettingsSegments::slotPointSeparation (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageSegments::slotPointSeparation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotPointSeparation";
 }

@@ -1,7 +1,7 @@
-#ifndef DLG_PREFERENCES_PAGE_GRID_REMOVAL_H
-#define DLG_PREFERENCES_PAGE_GRID_REMOVAL_H
+#ifndef DLG_SETTINGS_GRID_REMOVAL_H
+#define DLG_SETTINGS_GRID_REMOVAL_H
 
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class ViewPreview;
 class QCheckBox;
@@ -11,17 +11,15 @@ class QGridLayout;
 class QHBoxLayout;
 class QLineEdit;
 
-/// Stacked widget page for editing grid removal preferences.
-class DlgPreferencesPageGridRemoval : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing grid removal settings.
+class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageGridRemoval(CmdMediator &cmdMediator,
-                                QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsGridRemoval(CmdMediator &cmdMediator,
+                         QWidget *parent = 0);
 
 private slots:
   void slotRemoveGridLines (int);
@@ -42,13 +40,14 @@ private slots:
   void slotRemoveParallel (int);
 
 private:
-  DlgPreferencesPageGridRemoval(QWidget *parent = 0);
+  DlgSettingsGridRemoval(QWidget *parent = 0);
 
   void createRemoveGridLines (QGridLayout *layout, int &row);
   void createRemoveGridLinesX (QGridLayout *layoutGridLines, int &row);
   void createRemoveGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createRemoveParallel (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  virtual void load ();
   void updateControls ();
 
   QCheckBox *m_chkRemoveGridLines;
@@ -72,4 +71,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_GRID_REMOVAL_H
+#endif // DLG_SETTINGS_GRID_REMOVAL_H

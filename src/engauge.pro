@@ -40,19 +40,18 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgEditPoint.h \
-    Dlg/DlgEditPreferences.h \
     Dlg/DlgModelCurveEntry.h \
     Dlg/DlgModelCurves.h \
-    Dlg/DlgPreferencesPageAbstractBase.h \
-    Dlg/DlgPreferencesPageCoords.h \
-    Dlg/DlgPreferencesPageCurves.h \
-    Dlg/DlgPreferencesPageCurveProperties.h \
-    Dlg/DlgPreferencesPageExport.h \
-    Dlg/DlgPreferencesPageFilter.h \
-    Dlg/DlgPreferencesPageGridDisplay.h \
-    Dlg/DlgPreferencesPageGridRemoval.h \
-    Dlg/DlgPreferencesPagePointMatch.h \
-    Dlg/DlgPreferencesPageSegments.h \
+    Dlg/DlgSettingsAbstractBase.h \
+    Dlg/DlgSettingsCoords.h \
+    Dlg/DlgSettingsCurves.h \
+    Dlg/DlgSettingsCurveProperties.h \
+    Dlg/DlgSettingsExport.h \
+    Dlg/DlgSettingsFilter.h \
+    Dlg/DlgSettingsGridDisplay.h \
+    Dlg/DlgSettingsGridRemoval.h \
+    Dlg/DlgSettingsPointMatch.h \
+    Dlg/DlgSettingsSegments.h \
     Document/Document.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
@@ -114,19 +113,18 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgEditPoint.cpp \
-    Dlg/DlgEditPreferences.cpp \
     Dlg/DlgModelCurveEntry.cpp \
     Dlg/DlgModelCurves.cpp \
-    Dlg/DlgPreferencesPageAbstractBase.cpp \
-    Dlg/DlgPreferencesPageCoords.cpp \
-    Dlg/DlgPreferencesPageCurves.cpp \
-    Dlg/DlgPreferencesPageCurveProperties.cpp \
-    Dlg/DlgPreferencesPageExport.cpp \
-    Dlg/DlgPreferencesPageFilter.cpp \
-    Dlg/DlgPreferencesPageGridDisplay.cpp \
-    Dlg/DlgPreferencesPageGridRemoval.cpp \
-    Dlg/DlgPreferencesPagePointMatch.cpp \
-    Dlg/DlgPreferencesPageSegments.cpp \
+    Dlg/DlgSettingsAbstractBase.cpp \
+    Dlg/DlgSettingsCoords.cpp \
+    Dlg/DlgSettingsCurves.cpp \
+    Dlg/DlgSettingsCurveProperties.cpp \
+    Dlg/DlgSettingsExport.cpp \
+    Dlg/DlgSettingsFilter.cpp \
+    Dlg/DlgSettingsGridDisplay.cpp \
+    Dlg/DlgSettingsGridRemoval.cpp \
+    Dlg/DlgSettingsPointMatch.cpp \
+    Dlg/DlgSettingsSegments.cpp \
     Document/Document.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \

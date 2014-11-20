@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageGridRemoval.h"
+#include "DlgSettingsGridRemoval.h"
 #include "Logger.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -19,10 +19,10 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgPreferencesPageGridRemoval::DlgPreferencesPageGridRemoval(CmdMediator &cmdMediator,
-                                                             QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsGridRemoval::DlgSettingsGridRemoval(CmdMediator &cmdMediator,
+                                               QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   const int COLUMN_CHECKBOX_WIDTH = 60;
 
@@ -43,7 +43,7 @@ DlgPreferencesPageGridRemoval::DlgPreferencesPageGridRemoval(CmdMediator &cmdMed
   updateControls ();
 }
 
-void DlgPreferencesPageGridRemoval::createRemoveGridLines (QGridLayout *layout, int &row)
+void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &row)
 {
   m_chkRemoveGridLines = new QCheckBox ("Remove pixels close to grid lines");
   m_chkRemoveGridLines->setWhatsThis ("Check this box to have pixels close to regularly spaced gridlines removed.\n\n"
@@ -67,7 +67,7 @@ void DlgPreferencesPageGridRemoval::createRemoveGridLines (QGridLayout *layout, 
   createRemoveGridLinesY (layout, row);
 }
 
-void DlgPreferencesPageGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &row)
+void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &row)
 {
   QString titleX = "X Grid Lines";
   if (false) {
@@ -127,7 +127,7 @@ void DlgPreferencesPageGridRemoval::createRemoveGridLinesX (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopX, 4, 1);
 }
 
-void DlgPreferencesPageGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &row)
+void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &row)
 {
   QString titleY = "Y Grid Lines";
   if (false) {
@@ -187,7 +187,7 @@ void DlgPreferencesPageGridRemoval::createRemoveGridLinesY (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
-void DlgPreferencesPageGridRemoval::createRemoveParallel (QGridLayout *layout, int &row)
+void DlgSettingsGridRemoval::createRemoveParallel (QGridLayout *layout, int &row)
 {
   m_chkRemoveParallel = new QCheckBox ("Remove thin lines parallel to the axes");
   m_chkRemoveParallel->setWhatsThis ("Check this box to remove thin lines that are parallel to the axes.\n\n"
@@ -198,7 +198,7 @@ void DlgPreferencesPageGridRemoval::createRemoveParallel (QGridLayout *layout, i
   layout->addWidget (m_chkRemoveParallel, row++, 1, 1, 3);
 }
 
-void DlgPreferencesPageGridRemoval::createPreview (QGridLayout *layout, int &row)
+void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 5);
@@ -211,81 +211,81 @@ void DlgPreferencesPageGridRemoval::createPreview (QGridLayout *layout, int &row
   layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
 
-void DlgPreferencesPageGridRemoval::load ()
+void DlgSettingsGridRemoval::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::load";
 }
 
-void DlgPreferencesPageGridRemoval::slotCloseDistance(const QString &)
+void DlgSettingsGridRemoval::slotCloseDistance(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotCloseDistance";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCloseDistance";
 }
 
-void DlgPreferencesPageGridRemoval::slotCountX(const QString &)
+void DlgSettingsGridRemoval::slotCountX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotCountX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountX";
 }
 
-void DlgPreferencesPageGridRemoval::slotCountY(const QString &)
+void DlgSettingsGridRemoval::slotCountY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotCountY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountY";
 }
 
-void DlgPreferencesPageGridRemoval::slotDisableX(const QString &)
+void DlgSettingsGridRemoval::slotDisableX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotDisableX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableX";
 }
 
-void DlgPreferencesPageGridRemoval::slotDisableY(const QString &)
+void DlgSettingsGridRemoval::slotDisableY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotDisableY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableY";
 }
 
-void DlgPreferencesPageGridRemoval::slotRemoveGridLines (int /* state */)
+void DlgSettingsGridRemoval::slotRemoveGridLines (int /* state */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotRemoveGridLines";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveGridLines";
 
   updateControls();
 }
 
-void DlgPreferencesPageGridRemoval::slotRemoveParallel (int /* state */)
+void DlgSettingsGridRemoval::slotRemoveParallel (int /* state */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotRemoveParallel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveParallel";
 
   updateControls();
 }
 
-void DlgPreferencesPageGridRemoval::slotStartX(const QString &)
+void DlgSettingsGridRemoval::slotStartX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStartX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartX";
 }
 
-void DlgPreferencesPageGridRemoval::slotStartY(const QString &)
+void DlgSettingsGridRemoval::slotStartY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStartY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartY";
 }
 
-void DlgPreferencesPageGridRemoval::slotStepX(const QString &)
+void DlgSettingsGridRemoval::slotStepX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStepX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepX";
 }
 
-void DlgPreferencesPageGridRemoval::slotStepY(const QString &)
+void DlgSettingsGridRemoval::slotStepY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStepY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepY";
 }
 
-void DlgPreferencesPageGridRemoval::slotStopX(const QString &)
+void DlgSettingsGridRemoval::slotStopX(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStopX";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopX";
 }
 
-void DlgPreferencesPageGridRemoval::slotStopY(const QString &)
+void DlgSettingsGridRemoval::slotStopY(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageGridRemoval::slotStopY";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopY";
 }
 
-void DlgPreferencesPageGridRemoval::updateControls ()
+void DlgSettingsGridRemoval::updateControls ()
 {
   m_editCloseDistance->setEnabled (m_chkRemoveGridLines->isChecked ());
   m_cmbDisableX->setEnabled (m_chkRemoveGridLines->isChecked ());

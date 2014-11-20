@@ -1,8 +1,8 @@
-#ifndef DLG_PREFERENCES_PAGE_COORDS_H
-#define DLG_PREFERENCES_PAGE_COORDS_H
+#ifndef DLG_SETTINGS_COORDS_H
+#define DLG_SETTINGS_COORDS_H
 
 #include "CoordsType.h"
-#include "DlgPreferencesPageAbstractBase.h"
+#include "DlgSettingsAbstractBase.h"
 
 class QComboBox;
 class QGridLayout;
@@ -13,17 +13,15 @@ class QLineEdit;
 class QRadioButton;
 class ViewPreview;
 
-/// Stacked widget page for editing coordinates preferences.
-class DlgPreferencesPageCoords : public DlgPreferencesPageAbstractBase
+/// Stacked widget page for editing coordinates settings.
+class DlgSettingsCoords : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgPreferencesPageCoords(CmdMediator &cmdMediator,
-                           QWidget *parent = 0);
-
-  virtual void load ();
+  DlgSettingsCoords(CmdMediator &cmdMediator,
+                    QWidget *parent = 0);
 
 private slots:
   void slotCartesian ();
@@ -46,6 +44,7 @@ private:
   void createPreview(QGridLayout *layout,
                      int &row);
   void initializeGroupCoordsType();
+  virtual void load ();
   void loadPixmap (const QString &image);
   void updateControls();
 
@@ -71,4 +70,4 @@ private:
   ViewPreview *m_viewPreview;
 };
 
-#endif // DLG_PREFERENCES_PAGE_COORDS_H
+#endif // DLG_SETTINGS_COORDS_H

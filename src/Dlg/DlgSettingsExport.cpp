@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgPreferencesPageExport.h"
+#include "DlgSettingsExport.h"
 #include "Logger.h"
 #include <QDoubleValidator>
 #include <QGridLayout>
@@ -18,10 +18,10 @@ const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
-DlgPreferencesPageExport::DlgPreferencesPageExport(CmdMediator &cmdMediator,
-                                                   QWidget *parent) :
-  DlgPreferencesPageAbstractBase (cmdMediator,
-                                  parent)
+DlgSettingsExport::DlgSettingsExport(CmdMediator &cmdMediator,
+                                     QWidget *parent) :
+  DlgSettingsAbstractBase (cmdMediator,
+                           parent)
 {
   QGridLayout *layout = new QGridLayout (this);
   setLayout (layout);
@@ -54,7 +54,7 @@ DlgPreferencesPageExport::DlgPreferencesPageExport(CmdMediator &cmdMediator,
   updateControls ();
 }
 
-void DlgPreferencesPageExport::createCurveSelection (QGridLayout *layout, int &row)
+void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
 {
   QLabel *labelIncluded = new QLabel (tr ("Included"));
   layout->addWidget (labelIncluded, row, 0);
@@ -87,7 +87,7 @@ void DlgPreferencesPageExport::createCurveSelection (QGridLayout *layout, int &r
   row++;
 }
 
-void DlgPreferencesPageExport::createDelimiters (QHBoxLayout *layoutMisc)
+void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
 {
   QGroupBox *groupDelimiters = new QGroupBox (tr ("Delimiters"));
   layoutMisc->addWidget (groupDelimiters, 1);
@@ -111,7 +111,7 @@ void DlgPreferencesPageExport::createDelimiters (QHBoxLayout *layoutMisc)
   connect (m_btnDelimitersTabs, SIGNAL (toggled (bool)), this, SLOT (slotDelimitersTabs(bool)));
 }
 
-void DlgPreferencesPageExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
+void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
 {
   QGroupBox *groupLayout = new QGroupBox (tr ("Layout"));
   layoutFunctions->addWidget (groupLayout, 1);
@@ -132,7 +132,7 @@ void DlgPreferencesPageExport::createFunctionsLayout (QHBoxLayout *layoutFunctio
   connect (m_btnFunctionsLayoutOneCurve, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsLayoutOneCurve (bool)));
 }
 
-void DlgPreferencesPageExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
+void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
 {
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutFunctions->addWidget (groupPointsSelection, 1);
@@ -182,7 +182,7 @@ void DlgPreferencesPageExport::createFunctionsPointsSelection (QHBoxLayout *layo
   connect (m_btnFunctionsPointsRaw, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsPointsRaw(bool)));
 }
 
-void DlgPreferencesPageExport::createHeader (QHBoxLayout *layoutMisc)
+void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
 {
   QGroupBox *groupHeader = new QGroupBox (tr ("Header"));
   layoutMisc->addWidget (groupHeader, 1);
@@ -206,7 +206,7 @@ void DlgPreferencesPageExport::createHeader (QHBoxLayout *layoutMisc)
   connect (m_btnHeaderGnuplot, SIGNAL (toggled (bool)), this, SLOT (slotHeaderGnuplot(bool)));
 }
 
-void DlgPreferencesPageExport::createPreview(QGridLayout *layout, int &row)
+void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
 {
   QLabel *label = new QLabel (tr ("Preview"));
   layout->addWidget (label, row++, 0);
@@ -217,7 +217,7 @@ void DlgPreferencesPageExport::createPreview(QGridLayout *layout, int &row)
   layout->addWidget (m_editPreview, row++, 0, 1, 3);
 }
 
-void DlgPreferencesPageExport::createRelationsPointsSelection (QHBoxLayout *layoutRelations)
+void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelations)
 {
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutRelations->addWidget (groupPointsSelection);
@@ -254,10 +254,10 @@ void DlgPreferencesPageExport::createRelationsPointsSelection (QHBoxLayout *layo
   connect (m_btnRelationsPointsRaw, SIGNAL (toggled (bool)), this, SLOT (slotRelationsPointsRaw(bool)));
 }
 
-void DlgPreferencesPageExport::createTabWidget (QGridLayout *layout,
-                                                QHBoxLayout *&layoutFunctions,
-                                                QHBoxLayout *&layoutRelations,
-                                                int &row)
+void DlgSettingsExport::createTabWidget (QGridLayout *layout,
+                                         QHBoxLayout *&layoutFunctions,
+                                         QHBoxLayout *&layoutRelations,
+                                         int &row)
 {
   QTabWidget *tabWidget = new QTabWidget;
   layout->addWidget (tabWidget, row++, 0, 1, 3);
@@ -273,7 +273,7 @@ void DlgPreferencesPageExport::createTabWidget (QGridLayout *layout,
   widgetRelations->setLayout (layoutRelations);
 }
 
-void DlgPreferencesPageExport::createXLabel (QHBoxLayout *layoutMisc)
+void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
 {
   QWidget *widgetXLabel = new QWidget;
   layoutMisc->addWidget (widgetXLabel, 1);
@@ -300,133 +300,133 @@ void DlgPreferencesPageExport::createXLabel (QHBoxLayout *layoutMisc)
   connect (m_editXLabel, SIGNAL (editingFinished ()), this, SLOT (slotXLabel()));
 }
 
-void DlgPreferencesPageExport::load ()
+void DlgSettingsExport::load ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::load";
 }
 
-void DlgPreferencesPageExport::slotDelimitersCommas(bool)
+void DlgSettingsExport::slotDelimitersCommas(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotDelimitersCommas";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersCommas";
 }
 
-void DlgPreferencesPageExport::slotDelimitersSpaces(bool)
+void DlgSettingsExport::slotDelimitersSpaces(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotDelimitersSpaces";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersSpaces";
 }
 
-void DlgPreferencesPageExport::slotDelimitersTabs(bool)
+void DlgSettingsExport::slotDelimitersTabs(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotDelimitersTabs";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersTabs";
 }
 
-void DlgPreferencesPageExport::slotExclude ()
+void DlgSettingsExport::slotExclude ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotExclude";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotExclude";
 }
 
-void DlgPreferencesPageExport::slotFunctionsLayoutAllCurves(bool)
+void DlgSettingsExport::slotFunctionsLayoutAllCurves(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsLayoutAllCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutAllCurves";
 }
 
-void DlgPreferencesPageExport::slotFunctionsLayoutOneCurve(bool)
+void DlgSettingsExport::slotFunctionsLayoutOneCurve(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsLayoutOneCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutOneCurve";
 }
 
-void DlgPreferencesPageExport::slotFunctionsPointsAllCurves(bool)
+void DlgSettingsExport::slotFunctionsPointsAllCurves(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsPointsAllCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsAllCurves";
 
   updateControls();
 }
 
-void DlgPreferencesPageExport::slotFunctionsPointsEvenlySpaced(bool)
+void DlgSettingsExport::slotFunctionsPointsEvenlySpaced(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsPointsEvenlySpaced";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpaced";
 
   updateControls();
 }
 
-void DlgPreferencesPageExport::slotFunctionsPointsEvenlySpacedInterval()
+void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsPointsEvenlySpacedInterval";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval";
 }
 
-void DlgPreferencesPageExport::slotFunctionsPointsFirstCurve(bool)
+void DlgSettingsExport::slotFunctionsPointsFirstCurve(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsPointsFirstCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsFirstCurve";
 
   updateControls();
 }
 
-void DlgPreferencesPageExport::slotFunctionsPointsRaw(bool)
+void DlgSettingsExport::slotFunctionsPointsRaw(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotFunctionsPointsRaw";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsRaw";
 
   updateControls();
 }
 
-void DlgPreferencesPageExport::slotHeaderGnuplot(bool)
+void DlgSettingsExport::slotHeaderGnuplot(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotHeaderGnuplot";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderGnuplot";
 }
 
-void DlgPreferencesPageExport::slotHeaderNone(bool)
+void DlgSettingsExport::slotHeaderNone(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotHeaderNone";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderNone";
 }
 
-void DlgPreferencesPageExport::slotHeaderSimple(bool)
+void DlgSettingsExport::slotHeaderSimple(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotHeaderSimple";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderSimple";
 }
 
-void DlgPreferencesPageExport::slotInclude ()
+void DlgSettingsExport::slotInclude ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotInclude";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotInclude";
 }
 
-void DlgPreferencesPageExport::slotListExcluded()
+void DlgSettingsExport::slotListExcluded()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotListExcluded";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListExcluded";
 
   updateControls ();
 }
 
-void DlgPreferencesPageExport::slotListIncluded()
+void DlgSettingsExport::slotListIncluded()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotListIncluded";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListIncluded";
 
   updateControls ();
 }
 
-void DlgPreferencesPageExport::slotRelationsPointsEvenlySpaced(bool)
+void DlgSettingsExport::slotRelationsPointsEvenlySpaced(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotRelationsPointsEvenlySpaced";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpaced";
 
   updateControls ();
 }
 
-void DlgPreferencesPageExport::slotRelationsPointsEvenlySpacedInterval()
+void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotRelationsPointsEvenlySpacedInterval";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
 }
 
-void DlgPreferencesPageExport::slotRelationsPointsRaw(bool)
+void DlgSettingsExport::slotRelationsPointsRaw(bool)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotRelationsPointsRaw";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsRaw";
 
   updateControls ();
 }
 
-void DlgPreferencesPageExport::slotXLabel()
+void DlgSettingsExport::slotXLabel()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPreferencesPageExport::slotXLabel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotXLabel";
 }
 
-void DlgPreferencesPageExport::updateControls ()
+void DlgSettingsExport::updateControls ()
 {
   int selectedForInclude = m_listExcluded->selectedItems().count();
   int selectedForExclude = m_listIncluded->selectedItems().count();
