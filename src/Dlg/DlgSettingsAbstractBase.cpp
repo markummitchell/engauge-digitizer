@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
 #include <QPushButton>
+#include <QSpacerItem>
 #include <QVBoxLayout>
 
 DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
@@ -24,23 +25,31 @@ CmdMediator &DlgSettingsAbstractBase::cmdMediator ()
 
 void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 {
-  const int NO_STRETCH = 1;
+  const int STRETCH_OFF = 0, STRETCH_ON = 1;
 
   QVBoxLayout *panelLayout = new QVBoxLayout (this);
+
+  setMinimumWidth (MINIMUM_DIALOG_WIDTH);
   setLayout (panelLayout);
 
   panelLayout->addWidget (subPanel);
+  panelLayout->setStretch (panelLayout->count () - 1, STRETCH_ON);
 
   QWidget *panelButtons = new QWidget (this);
   QHBoxLayout *buttonLayout = new QHBoxLayout (panelButtons);
 
+  QPushButton *btnCancel = new QPushButton (tr ("Cancel"));
+  buttonLayout->addWidget (btnCancel);
+  connect (btnCancel, SIGNAL (pressed ()), this, SLOT (hide ()));
+
+  QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
+  buttonLayout->addItem (spacer);
+
   QPushButton *btnOk = new QPushButton (tr ("Ok"));
   buttonLayout->addWidget (btnOk);
 
-  QPushButton *btnCancel = new QPushButton (tr ("Cancel"));
-  buttonLayout->addWidget (btnCancel);
-
-  panelLayout->addWidget (panelButtons, NO_STRETCH, Qt::AlignCenter);
+  panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
+  panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
 }
 
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)

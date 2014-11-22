@@ -148,6 +148,7 @@ void DlgSettingsCoords::createPreview (QGridLayout *layout,
   m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the coordinate system."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }

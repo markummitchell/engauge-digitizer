@@ -185,6 +185,8 @@ void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
   m_editPreview = new QTextEdit;
   m_editPreview->setReadOnly (true);
   m_editPreview->setWhatsThis (tr ("Preview window shows how current settings affect the exported file"));
+  m_editPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+
   layout->addWidget (m_editPreview, row++, 0, 1, 3);
 }
 

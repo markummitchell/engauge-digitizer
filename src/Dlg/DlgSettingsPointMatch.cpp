@@ -87,6 +87,7 @@ void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
                                    "by the point separation value, and the maximum point size is shown as a box in the center"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }

@@ -63,7 +63,7 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
                                   "Click on a curve name to edit it.\n\n"
                                   "Reorder curves by dragging them around."));
-  m_listCurves->setMinimumHeight (300);
+  m_listCurves->setMinimumHeight (200);
   m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
   m_listCurves->setDefaultDropAction (Qt::MoveAction);
   m_listCurves->setDragDropOverwriteMode (true);

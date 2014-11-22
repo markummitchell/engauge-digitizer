@@ -5,6 +5,9 @@
 
 class CmdMediator;
 
+const int MINIMUM_DIALOG_WIDTH = 320;
+const int MINIMUM_PREVIEW_HEIGHT = 200;
+
 /// Abstract base class for all Settings dialogs.
 class DlgSettingsAbstractBase : public QDialog
 {

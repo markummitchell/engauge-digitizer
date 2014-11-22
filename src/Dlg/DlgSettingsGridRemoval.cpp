@@ -35,7 +35,7 @@ void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
   m_viewPreview = new ViewPreview (m_scenePreview, this);
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+  m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
   layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
 
