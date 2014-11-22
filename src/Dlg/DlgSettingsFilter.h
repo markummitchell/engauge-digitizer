@@ -17,7 +17,7 @@ class DlgSettingsFilter : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsFilter(QWidget *parent = 0);
+  DlgSettingsFilter(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

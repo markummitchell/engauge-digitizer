@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsGridDisplay.h"
 #include "DlgSettingsGridDisplay.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QComboBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -13,8 +15,8 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgSettingsGridDisplay::DlgSettingsGridDisplay(QWidget *parent) :
-  DlgSettingsAbstractBase ("Grid Display", parent)
+DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Grid Display", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -186,6 +188,10 @@ void DlgSettingsGridDisplay::createY (QGridLayout *layout,
 void DlgSettingsGridDisplay::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::handleOk";
+
+  CmdSettingsGridDisplay *cmd = new CmdSettingsGridDisplay (mainWindow (),
+                                                            cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

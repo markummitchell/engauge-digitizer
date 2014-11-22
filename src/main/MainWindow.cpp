@@ -603,15 +603,15 @@ void MainWindow::createMenus()
 
 void MainWindow::createSettingsDialogs ()
 {
-  m_dlgSettingsCoords = new DlgSettingsCoords (this);
-  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (this);
-  m_dlgSettingsCurves = new DlgSettingsCurves (this);
-  m_dlgSettingsExport = new DlgSettingsExport (this);
-  m_dlgSettingsFilter = new DlgSettingsFilter (this);
-  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (this);
-  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (this);
-  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (this);
-  m_dlgSettingsSegments = new DlgSettingsSegments (this);
+  m_dlgSettingsCoords = new DlgSettingsCoords (*this);
+  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
+  m_dlgSettingsCurves = new DlgSettingsCurves (*this);
+  m_dlgSettingsExport = new DlgSettingsExport (*this);
+  m_dlgSettingsFilter = new DlgSettingsFilter (*this);
+  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*this);
+  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
+  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
+  m_dlgSettingsSegments = new DlgSettingsSegments (*this);
 
   m_dlgSettingsCoords->setVisible (false);
   m_dlgSettingsCurveProperties->setVisible (false);

@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsPointMatch.h"
 #include "DlgSettingsPointMatch.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QComboBox>
 #include <QIntValidator>
 #include <QGridLayout>
@@ -14,8 +16,8 @@ const int POINT_SEPARATION_MIN = 1;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 1;
 
-DlgSettingsPointMatch::DlgSettingsPointMatch(QWidget *parent) :
-  DlgSettingsAbstractBase ("Point Match", parent)
+DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Point Match", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -113,6 +115,10 @@ QWidget *DlgSettingsPointMatch::createSubPanel ()
 void DlgSettingsPointMatch::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::handleOk";
+
+  CmdSettingsPointMatch *cmd = new CmdSettingsPointMatch (mainWindow (),
+                                                          cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

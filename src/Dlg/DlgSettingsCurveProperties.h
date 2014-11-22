@@ -16,7 +16,7 @@ class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsCurveProperties(QWidget *parent = 0);
+  DlgSettingsCurveProperties(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

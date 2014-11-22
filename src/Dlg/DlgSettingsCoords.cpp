@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsCoords.h"
 #include "DlgSettingsCoords.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QComboBox>
 #include <QDoubleValidator>
 #include <QGridLayout>
@@ -25,8 +27,8 @@ const QString POLAR_UNITS_GRADIANS = "Gradians";
 const QString POLAR_UNITS_RADIANS = "Radians";
 const QString POLAR_UNITS_TURNS = "Turns";
 
-DlgSettingsCoords::DlgSettingsCoords(QWidget *parent) :
-  DlgSettingsAbstractBase ("Coordinates", parent),
+DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Coordinates", mainWindow),
   m_btnCartesian (0),
   m_btnPolar (0)
 {
@@ -178,6 +180,10 @@ QWidget *DlgSettingsCoords::createSubPanel ()
 void DlgSettingsCoords::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::handleOk";
+
+  CmdSettingsCoords *cmd = new CmdSettingsCoords (mainWindow (),
+                                                  cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsCurveProperties.h"
 #include "DlgSettingsCurveProperties.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QComboBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -10,8 +12,8 @@
 #include <QPushButton>
 #include "ViewPreview.h"
 
-DlgSettingsCurveProperties::DlgSettingsCurveProperties(QWidget *parent) :
-  DlgSettingsAbstractBase ("Curve Properties", parent)
+DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Curve Properties", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -164,6 +166,10 @@ QWidget *DlgSettingsCurveProperties::createSubPanel ()
 void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
+
+  CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
+                                                                    cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

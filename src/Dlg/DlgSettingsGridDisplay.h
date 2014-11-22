@@ -16,7 +16,7 @@ class DlgSettingsGridDisplay : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsGridDisplay(QWidget *parent = 0);
+  DlgSettingsGridDisplay(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

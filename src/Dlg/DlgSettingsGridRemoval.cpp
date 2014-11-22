@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsGridRemoval.h"
 #include "DlgSettingsGridRemoval.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDoubleValidator>
@@ -19,8 +21,8 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgSettingsGridRemoval::DlgSettingsGridRemoval(QWidget *parent) :
-  DlgSettingsAbstractBase ("Grid Removal", parent)
+DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Grid Removal", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -220,6 +222,10 @@ QWidget *DlgSettingsGridRemoval::createSubPanel ()
 void DlgSettingsGridRemoval::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::handleOk";
+
+  CmdSettingsGridRemoval *cmd = new CmdSettingsGridRemoval (mainWindow (),
+                                                            cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

@@ -18,7 +18,7 @@ class DlgSettingsPointMatch : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsPointMatch(QWidget *parent = 0);
+  DlgSettingsPointMatch(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

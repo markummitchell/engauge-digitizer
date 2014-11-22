@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsExport.h"
 #include "DlgSettingsExport.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QDoubleValidator>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -18,8 +20,8 @@ const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
-DlgSettingsExport::DlgSettingsExport(QWidget *parent) :
-  DlgSettingsAbstractBase ("Export", parent)
+DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Export", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -310,6 +312,10 @@ void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
 void DlgSettingsExport::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::handleOk";
+
+  CmdSettingsExport *cmd = new CmdSettingsExport (mainWindow (),
+                                                  cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

@@ -1,12 +1,14 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
+#include "MainWindow.h"
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QVBoxLayout>
 
 DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
-                                                 QWidget *parent) :
-  QDialog (parent),
+                                                 MainWindow &mainWindow) :
+  QDialog (&mainWindow),
+  m_mainWindow (mainWindow),
   m_cmdMediator (0)
 {
   setWindowTitle (title);
@@ -51,6 +53,11 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 
   panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
+}
+
+MainWindow &DlgSettingsAbstractBase::mainWindow ()
+{
+  return m_mainWindow;
 }
 
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)

@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsSegments.h"
 #include "DlgSettingsSegments.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QIntValidator>
@@ -17,8 +19,8 @@ const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 1;
 const int POINT_SEPARATION_MAX = 10000;
 
-DlgSettingsSegments::DlgSettingsSegments(QWidget *parent) :
-  DlgSettingsAbstractBase ("Segments", parent)
+DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Segments", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -118,6 +120,10 @@ QWidget *DlgSettingsSegments::createSubPanel ()
 void DlgSettingsSegments::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::handleOk";
+
+  CmdSettingsSegments *cmd = new CmdSettingsSegments (mainWindow (),
+                                                      cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

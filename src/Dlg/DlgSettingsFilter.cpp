@@ -1,6 +1,8 @@
 #include "CmdMediator.h"
+#include "CmdSettingsFilter.h"
 #include "DlgSettingsFilter.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QComboBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -11,8 +13,8 @@
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 
-DlgSettingsFilter::DlgSettingsFilter(QWidget *parent) :
-  DlgSettingsAbstractBase ("Filter", parent)
+DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Filter", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -128,6 +130,10 @@ QWidget *DlgSettingsFilter::createSubPanel ()
 void DlgSettingsFilter::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::handleOk";
+
+  CmdSettingsFilter *cmd = new CmdSettingsFilter (mainWindow (),
+                                                  cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

@@ -5,6 +5,7 @@
 #include <QObject>
 
 class CmdMediator;
+class MainWindow;
 
 const int MINIMUM_DIALOG_WIDTH = 350;
 const int MINIMUM_PREVIEW_HEIGHT = 200;
@@ -17,7 +18,7 @@ class DlgSettingsAbstractBase : public QDialog
 public:
   /// Single constructor.
   DlgSettingsAbstractBase(const QString &title,
-                          QWidget *parent);
+                          MainWindow &mainWindow);
   virtual ~DlgSettingsAbstractBase();
 
 protected:
@@ -36,6 +37,9 @@ protected:
   /// Load settings from Document.
   virtual void load (CmdMediator &cmdMediator) = 0;
 
+  /// Get method for MainWindow.
+  MainWindow &mainWindow ();
+
   /// Store CmdMediator for easy access by the leaf class.
   void setCmdMediator (CmdMediator &cmdMediator);
 
@@ -46,6 +50,7 @@ private slots:
 private:
   DlgSettingsAbstractBase();
 
+  MainWindow &m_mainWindow;
   CmdMediator *m_cmdMediator;
 };
 

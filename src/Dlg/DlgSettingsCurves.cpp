@@ -1,7 +1,9 @@
 #include "CmdMediator.h"
+#include "CmdSettingsCurves.h"
 #include "DlgModelCurves.h"
 #include "DlgSettingsCurves.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
@@ -10,8 +12,8 @@
 #include <QPushButton>
 #include "QtToString.h"
 
-DlgSettingsCurves::DlgSettingsCurves(QWidget *parent) :
-  DlgSettingsAbstractBase ("Curves", parent)
+DlgSettingsCurves::DlgSettingsCurves(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Curves", mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -123,6 +125,10 @@ bool DlgSettingsCurves::endsWithNumber (const QString &str) const
 void DlgSettingsCurves::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::handleOk";
+
+  CmdSettingsCurves *cmd = new CmdSettingsCurves (mainWindow (),
+                                                  cmdMediator ().document());
+  cmdMediator ().push (cmd);
 
   hide ();
 }

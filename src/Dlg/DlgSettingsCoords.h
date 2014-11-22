@@ -20,7 +20,7 @@ class DlgSettingsCoords : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsCoords(QWidget *parent = 0);
+  DlgSettingsCoords(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
