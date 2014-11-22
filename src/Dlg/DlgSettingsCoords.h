@@ -20,8 +20,10 @@ class DlgSettingsCoords : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsCoords(CmdMediator &cmdMediator,
-                    QWidget *parent = 0);
+  DlgSettingsCoords(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotCartesian ();
@@ -44,7 +46,6 @@ private:
   void createPreview(QGridLayout *layout,
                      int &row);
   void initializeGroupCoordsType();
-  virtual void load ();
   void loadPixmap (const QString &image);
   void updateControls();
 

@@ -14,22 +14,11 @@ const int POINT_SEPARATION_MIN = 1;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 1;
 
-DlgSettingsPointMatch::DlgSettingsPointMatch(CmdMediator &cmdMediator,
-                                             QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsPointMatch::DlgSettingsPointMatch(QWidget *parent) :
+  DlgSettingsAbstractBase ("Point Match", parent)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  layout->setColumnStretch(0, 1); // Empty column
-  layout->setColumnStretch(1, 0); // Labels
-  layout->setColumnStretch(2, 0); // Controls
-  layout->setColumnStretch(3, 1); // Empty column
-
-  int row = 0;
-  createControls (layout, row);
-  createPreview (layout, row);
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsPointMatch::createControls (QGridLayout *layout,
@@ -102,9 +91,29 @@ void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgSettingsPointMatch::load ()
+QWidget *DlgSettingsPointMatch::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch(0, 1); // Empty column
+  layout->setColumnStretch(1, 0); // Labels
+  layout->setColumnStretch(2, 0); // Controls
+  layout->setColumnStretch(3, 1); // Empty column
+
+  int row = 0;
+  createControls (layout, row);
+  createPreview (layout, row);
+
+  return subPanel;
+}
+
+void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)

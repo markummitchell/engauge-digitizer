@@ -17,8 +17,10 @@ class DlgSettingsCurves : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsCurves(CmdMediator &cmdMediator,
-                    QWidget *parent = 0);
+  DlgSettingsCurves(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotDataChanged (const QModelIndex &topLeft,
@@ -29,7 +31,6 @@ private slots:
   void slotSelectionChanged (QItemSelection, QItemSelection);
 
 private:
-  DlgSettingsCurves(QWidget *parent = 0);
 
   void appendCurveName (const QString &curveNameNew,
                         const QString &curveNameOriginal,
@@ -41,7 +42,6 @@ private:
                         const QString &curveNameNew,
                         const QString &curveNameOriginal,
                         int numPoints);
-  void load ();
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   void removeSelectedCurves();

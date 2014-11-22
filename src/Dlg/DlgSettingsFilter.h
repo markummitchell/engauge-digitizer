@@ -17,8 +17,10 @@ class DlgSettingsFilter : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsFilter(CmdMediator &cmdMediator,
-                    QWidget *parent = 0);
+  DlgSettingsFilter(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotForeground();
@@ -32,7 +34,6 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
-  virtual void load ();
 
   QRadioButton *m_btnIntensity;
   QRadioButton *m_btnForeground;

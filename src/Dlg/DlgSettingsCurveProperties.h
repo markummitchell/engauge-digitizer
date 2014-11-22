@@ -16,8 +16,10 @@ class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsCurveProperties(CmdMediator &cmdMediator,
-                             QWidget *parent = 0);
+  DlgSettingsCurveProperties(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotLineColor(const QString &);
@@ -30,13 +32,11 @@ private slots:
   void slotPointSize(const QString &);
 
 private:
-  DlgSettingsCurveProperties(QWidget *parent = 0);
 
   void createCurveName (QGridLayout *layout, int &row);
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  virtual void load ();
 
   QComboBox *m_cmbCurveName;
 

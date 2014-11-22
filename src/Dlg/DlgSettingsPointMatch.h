@@ -18,8 +18,10 @@ class DlgSettingsPointMatch : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsPointMatch(CmdMediator &cmdMediator,
-                        QWidget *parent = 0);
+  DlgSettingsPointMatch(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotAcceptedPointColor (const QString &);
@@ -34,7 +36,6 @@ private:
                        int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
-  virtual void load ();
 
   QLineEdit *m_editPointSeparation;
   QLineEdit *m_editPointSize;

@@ -20,8 +20,10 @@ class DlgSettingsExport : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsExport(CmdMediator &cmdMediator,
-                    QWidget *parent = 0);
+  DlgSettingsExport(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotDelimitersCommas(bool);
@@ -60,7 +62,6 @@ private:
                         QHBoxLayout *&layoutRelations,
                         int &row);
   void createXLabel (QHBoxLayout *layoutMisc);
-  virtual void load ();
   void updateControls();
 
   QListWidget *m_listIncluded;

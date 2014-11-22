@@ -18,40 +18,11 @@ const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
-DlgSettingsExport::DlgSettingsExport(CmdMediator &cmdMediator,
-                                     QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsExport::DlgSettingsExport(QWidget *parent) :
+  DlgSettingsAbstractBase ("Export", parent)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  int row = 0;
-  createCurveSelection (layout, row);
-
-  QHBoxLayout *layoutFunctions, *layoutRelations;
-  createTabWidget (layout,
-                   layoutFunctions,
-                   layoutRelations,
-                   row);
-
-  createFunctionsPointsSelection (layoutFunctions);
-  createFunctionsLayout (layoutFunctions);
-
-  createRelationsPointsSelection (layoutRelations);
-
-  QWidget *widgetMisc = new QWidget;
-  layout->addWidget (widgetMisc, row++, 0, 1, 3);
-  QHBoxLayout *layoutMisc = new QHBoxLayout;
-  widgetMisc->setLayout (layoutMisc);
-
-  createDelimiters (layoutMisc);
-  createHeader (layoutMisc);
-  createXLabel (layoutMisc);
-
-  createPreview (layout, row);
-
-  updateControls ();
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
@@ -254,6 +225,40 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   connect (m_btnRelationsPointsRaw, SIGNAL (toggled (bool)), this, SLOT (slotRelationsPointsRaw(bool)));
 }
 
+QWidget *DlgSettingsExport::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  int row = 0;
+  createCurveSelection (layout, row);
+
+  QHBoxLayout *layoutFunctions, *layoutRelations;
+  createTabWidget (layout,
+                   layoutFunctions,
+                   layoutRelations,
+                   row);
+
+  createFunctionsPointsSelection (layoutFunctions);
+  createFunctionsLayout (layoutFunctions);
+
+  createRelationsPointsSelection (layoutRelations);
+
+  QWidget *widgetMisc = new QWidget;
+  layout->addWidget (widgetMisc, row++, 0, 1, 3);
+  QHBoxLayout *layoutMisc = new QHBoxLayout;
+  widgetMisc->setLayout (layoutMisc);
+
+  createDelimiters (layoutMisc);
+  createHeader (layoutMisc);
+  createXLabel (layoutMisc);
+
+  createPreview (layout, row);
+
+  return subPanel;
+}
+
 void DlgSettingsExport::createTabWidget (QGridLayout *layout,
                                          QHBoxLayout *&layoutFunctions,
                                          QHBoxLayout *&layoutRelations,
@@ -300,9 +305,11 @@ void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
   connect (m_editXLabel, SIGNAL (editingFinished ()), this, SLOT (slotXLabel()));
 }
 
-void DlgSettingsExport::load ()
+void DlgSettingsExport::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsExport::slotDelimitersCommas(bool)

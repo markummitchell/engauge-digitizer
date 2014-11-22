@@ -19,28 +19,24 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgSettingsGridRemoval::DlgSettingsGridRemoval(CmdMediator &cmdMediator,
-                                               QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsGridRemoval::DlgSettingsGridRemoval(QWidget *parent) :
+  DlgSettingsAbstractBase ("Grid Removal", parent)
 {
-  const int COLUMN_CHECKBOX_WIDTH = 60;
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
+}
 
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
+void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
+{
+  QLabel *labelPreview = new QLabel ("Preview");
+  layout->addWidget (labelPreview, row++, 0, 1, 5);
 
-  layout->setColumnStretch(0, 1); // Empty first column
-  layout->setColumnStretch(1, 0); // Checkbox part of "section" checkboxes. In other rows this has empty space as indentation
-  layout->setColumnMinimumWidth(1, COLUMN_CHECKBOX_WIDTH);
-  layout->setColumnStretch(2, 0); // X
-  layout->setColumnStretch(3, 0); // Y
-  layout->setColumnStretch(4, 1); // Empty last column
+  m_scenePreview = new QGraphicsScene (this);
+  m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  int row = 0;
-  createRemoveGridLines (layout, row);
-  createRemoveParallel (layout, row);
-  createPreview (layout, row);
-  updateControls ();
+  layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
 
 void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &row)
@@ -198,22 +194,34 @@ void DlgSettingsGridRemoval::createRemoveParallel (QGridLayout *layout, int &row
   layout->addWidget (m_chkRemoveParallel, row++, 1, 1, 3);
 }
 
-void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
+QWidget *DlgSettingsGridRemoval::createSubPanel ()
 {
-  QLabel *labelPreview = new QLabel ("Preview");
-  layout->addWidget (labelPreview, row++, 0, 1, 5);
+  const int COLUMN_CHECKBOX_WIDTH = 60;
 
-  m_scenePreview = new QGraphicsScene (this);
-  m_viewPreview = new ViewPreview (m_scenePreview, this);
-  m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
 
-  layout->addWidget (m_viewPreview, row++, 0, 1, 5);
+  layout->setColumnStretch(0, 1); // Empty first column
+  layout->setColumnStretch(1, 0); // Checkbox part of "section" checkboxes. In other rows this has empty space as indentation
+  layout->setColumnMinimumWidth(1, COLUMN_CHECKBOX_WIDTH);
+  layout->setColumnStretch(2, 0); // X
+  layout->setColumnStretch(3, 0); // Y
+  layout->setColumnStretch(4, 1); // Empty last column
+
+  int row = 0;
+  createRemoveGridLines (layout, row);
+  createRemoveParallel (layout, row);
+  createPreview (layout, row);
+
+  return subPanel;
 }
 
-void DlgSettingsGridRemoval::load ()
+void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)

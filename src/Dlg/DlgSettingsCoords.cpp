@@ -25,31 +25,13 @@ const QString POLAR_UNITS_GRADIANS = "Gradians";
 const QString POLAR_UNITS_RADIANS = "Radians";
 const QString POLAR_UNITS_TURNS = "Turns";
 
-DlgSettingsCoords::DlgSettingsCoords(CmdMediator &cmdMediator,
-                                     QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                               parent),
-  m_coordsType (cmdMediator.coordsType ()),
+DlgSettingsCoords::DlgSettingsCoords(QWidget *parent) :
+  DlgSettingsAbstractBase ("Coordinates", parent),
   m_btnCartesian (0),
   m_btnPolar (0)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  layout->setColumnStretch(0, 1); // Empty first column
-  layout->setColumnStretch(1, 0); // Labels
-  layout->setColumnStretch(2, 0); // User controls
-  layout->setColumnStretch(3, 1); // Empty last column
-
-  int row = 0;
-  createGroupCoordsType(layout, row);
-  createGroupScale (layout, row);
-  createGroupPolar (layout, row);
-  createPreview (layout, row);
-
-  initializeGroupCoordsType();
-  load ();
-  updateControls ();
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
@@ -170,6 +152,28 @@ void DlgSettingsCoords::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+QWidget *DlgSettingsCoords::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch(0, 1); // Empty first column
+  layout->setColumnStretch(1, 0); // Labels
+  layout->setColumnStretch(2, 0); // User controls
+  layout->setColumnStretch(3, 1); // Empty last column
+
+  int row = 0;
+  createGroupCoordsType(layout, row);
+  createGroupScale (layout, row);
+  createGroupPolar (layout, row);
+  createPreview (layout, row);
+
+  initializeGroupCoordsType();
+
+  return subPanel;
+}
+
 void DlgSettingsCoords::initializeGroupCoordsType()
 {
   switch (m_coordsType) {
@@ -185,9 +189,13 @@ void DlgSettingsCoords::initializeGroupCoordsType()
   }
 }
 
-void DlgSettingsCoords::load ()
+void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::load";
+
+  setCmdMediator (cmdMediator);
+
+  m_coordsType = cmdMediator.coordsType ();
 }
 
 void DlgSettingsCoords::loadPixmap (const QString &image)

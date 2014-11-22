@@ -16,8 +16,10 @@ class DlgSettingsGridDisplay : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsGridDisplay(CmdMediator &cmdMediator,
-                         QWidget *parent = 0);
+  DlgSettingsGridDisplay(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotDisableX(const QString &);
@@ -33,12 +35,10 @@ private slots:
   void slotStopY(const QString &);
 
 private:
-  DlgSettingsGridDisplay(QWidget *parent = 0);
 
   void createX (QGridLayout *layout, int &row);
   void createY (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  virtual void load ();
 
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;

@@ -10,36 +10,11 @@
 #include <QPushButton>
 #include "QtToString.h"
 
-DlgSettingsCurves::DlgSettingsCurves(CmdMediator &cmdMediator,
-                                     QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsCurves::DlgSettingsCurves(QWidget *parent) :
+  DlgSettingsAbstractBase ("Curves", parent)
 {
-  const int EMPTY_COLUMN_WIDTH = 30;
-  const int EMPTY_ROW_HEIGHT = 40;
-
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  int row = 1;
-  createListCurves (layout, row);
-  createButtons (layout, row);
-
-  layout->setColumnStretch (0, 0); // Empty first column
-  layout->setColumnMinimumWidth (0, EMPTY_COLUMN_WIDTH);
-  layout->setColumnStretch (1, 1); // New
-  layout->setColumnStretch (2, 1); // Remove
-  layout->setColumnStretch (3, 0); // Empty last column
-  layout->setColumnMinimumWidth (3, EMPTY_COLUMN_WIDTH);
-
-  layout->setRowStretch (0, 0); // Empty first row
-  layout->setRowMinimumHeight (0, EMPTY_ROW_HEIGHT);
-  layout->setRowStretch (row, 0); // Empty last row
-  layout->setRowMinimumHeight (row, EMPTY_ROW_HEIGHT);
-
-  load ();
-
-  updateControls ();
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
@@ -105,6 +80,34 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
            this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
 }
 
+QWidget *DlgSettingsCurves::createSubPanel ()
+{
+  const int EMPTY_COLUMN_WIDTH = 30;
+  const int EMPTY_ROW_HEIGHT = 40;
+
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  int row = 1;
+  createListCurves (layout, row);
+  createButtons (layout, row);
+
+  layout->setColumnStretch (0, 0); // Empty first column
+  layout->setColumnMinimumWidth (0, EMPTY_COLUMN_WIDTH);
+  layout->setColumnStretch (1, 1); // New
+  layout->setColumnStretch (2, 1); // Remove
+  layout->setColumnStretch (3, 0); // Empty last column
+  layout->setColumnMinimumWidth (3, EMPTY_COLUMN_WIDTH);
+
+  layout->setRowStretch (0, 0); // Empty first row
+  layout->setRowMinimumHeight (0, EMPTY_ROW_HEIGHT);
+  layout->setRowStretch (row, 0); // Empty last row
+  layout->setRowMinimumHeight (row, EMPTY_ROW_HEIGHT);
+
+  return subPanel;
+}
+
 bool DlgSettingsCurves::endsWithNumber (const QString &str) const
 {
   bool success = false;
@@ -144,17 +147,19 @@ void DlgSettingsCurves::insertCurveName (int row,
   }
 }
 
-void DlgSettingsCurves::load ()
+void DlgSettingsCurves::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::load";
 
-  QStringList curveNames = cmdMediator ().curvesGraphsNames ();
+  setCmdMediator (cmdMediator);
+
+  QStringList curveNames = cmdMediator.curvesGraphsNames ();
   QStringList::const_iterator itr;
   for (itr = curveNames.begin (); itr != curveNames.end (); itr++) {
     QString curveName = *itr;
     appendCurveName (curveName,
                      curveName,
-                     cmdMediator ().curvesGraphsNumPoints (curveName));
+                     cmdMediator.curvesGraphsNumPoints (curveName));
   }
 }
 

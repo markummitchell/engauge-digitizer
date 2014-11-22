@@ -17,22 +17,11 @@ const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 1;
 const int POINT_SEPARATION_MAX = 10000;
 
-DlgSettingsSegments::DlgSettingsSegments(CmdMediator &cmdMediator,
-                                         QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsSegments::DlgSettingsSegments(QWidget *parent) :
+  DlgSettingsAbstractBase ("Segments", parent)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  layout->setColumnStretch (0, 1); // Empty first column
-  layout->setColumnStretch (1, 0); // Labels
-  layout->setColumnStretch (2, 0); // User controls
-  layout->setColumnStretch (3, 1); // Empty last column
-
-  int row = 0;
-  createControls(layout, row);
-  createPreview (layout, row);
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsSegments::createControls (QGridLayout *layout,
@@ -107,9 +96,29 @@ void DlgSettingsSegments::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgSettingsSegments::load ()
+QWidget *DlgSettingsSegments::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch (0, 1); // Empty first column
+  layout->setColumnStretch (1, 0); // Labels
+  layout->setColumnStretch (2, 0); // User controls
+  layout->setColumnStretch (3, 1); // Empty last column
+
+  int row = 0;
+  createControls(layout, row);
+  createPreview (layout, row);
+
+  return subPanel;
+}
+
+void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsSegments::slotFillCorners (int /* state */)

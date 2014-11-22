@@ -10,32 +10,11 @@
 #include <QPushButton>
 #include "ViewPreview.h"
 
-DlgSettingsCurveProperties::DlgSettingsCurveProperties(CmdMediator &cmdMediator,
-                                                       QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsCurveProperties::DlgSettingsCurveProperties(QWidget *parent) :
+  DlgSettingsAbstractBase ("Curve Properties", parent)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  int row = 0;
-  createCurveName (layout, row);
-
-  int rowLeft = row, rowRight = row;
-  createPoint (layout, rowLeft);
-  createLine (layout, rowRight);
-
-  row = qMax (rowLeft, rowRight);
-  createPreview (layout, row);
-
-  layout->setColumnStretch(0, 1); // Empty first column
-  layout->setColumnStretch(1, 0); // Point group
-  layout->setColumnStretch(2, 0); // Line group
-  layout->setColumnStretch(3, 1); // Empty last column
-
-  layout->setRowStretch (0, 1); // Expand empty first row
-
-  load ();
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
@@ -155,9 +134,37 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgSettingsCurveProperties::load ()
+QWidget *DlgSettingsCurveProperties::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  int row = 0;
+  createCurveName (layout, row);
+
+  int rowLeft = row, rowRight = row;
+  createPoint (layout, rowLeft);
+  createLine (layout, rowRight);
+
+  row = qMax (rowLeft, rowRight);
+  createPreview (layout, row);
+
+  layout->setColumnStretch(0, 1); // Empty first column
+  layout->setColumnStretch(1, 0); // Point group
+  layout->setColumnStretch(2, 0); // Line group
+  layout->setColumnStretch(3, 1); // Empty last column
+
+  layout->setRowStretch (0, 1); // Expand empty first row
+
+  return subPanel;
+}
+
+void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsCurveProperties::slotLineColor(const QString &)

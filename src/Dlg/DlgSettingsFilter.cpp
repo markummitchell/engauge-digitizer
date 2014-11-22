@@ -11,30 +11,11 @@
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 
-DlgSettingsFilter::DlgSettingsFilter(CmdMediator &cmdMediator,
-                                     QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsFilter::DlgSettingsFilter(QWidget *parent) :
+  DlgSettingsAbstractBase ("Filter", parent)
 {
-  const int EMPTY_COLUMN_WIDTH = 40;
-
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  layout->setColumnStretch(0, 0); // Empty column
-  layout->setColumnMinimumWidth(0, EMPTY_COLUMN_WIDTH);
-  layout->setColumnStretch(1, 0); // Radio buttons
-  layout->setColumnStretch(2, 0); // Empty column to put some space between previous and next columns, so they are not too close
-  layout->setColumnMinimumWidth(2, 15);
-  layout->setColumnStretch(3, 1); // Profile
-  layout->setColumnMinimumWidth(4, EMPTY_COLUMN_WIDTH); // Empty column
-
-  int rowLeft = 0, rowRight = 0;
-  createControls (layout, rowLeft);
-  createProfileAndScale (layout, rowRight);
-
-  int row = qMax (rowLeft, rowRight);
-  createPreview (layout, row);
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
@@ -117,9 +98,37 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   layout->addWidget (m_scale, row++, 3);
 }
 
-void DlgSettingsFilter::load ()
+QWidget *DlgSettingsFilter::createSubPanel ()
+{
+  const int EMPTY_COLUMN_WIDTH = 40;
+
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch(0, 0); // Empty column
+  layout->setColumnMinimumWidth(0, EMPTY_COLUMN_WIDTH);
+  layout->setColumnStretch(1, 0); // Radio buttons
+  layout->setColumnStretch(2, 0); // Empty column to put some space between previous and next columns, so they are not too close
+  layout->setColumnMinimumWidth(2, 15);
+  layout->setColumnStretch(3, 1); // Profile
+  layout->setColumnMinimumWidth(4, EMPTY_COLUMN_WIDTH); // Empty column
+
+  int rowLeft = 0, rowRight = 0;
+  createControls (layout, rowLeft);
+  createProfileAndScale (layout, rowRight);
+
+  int row = qMax (rowLeft, rowRight);
+  createPreview (layout, row);
+
+  return subPanel;
+}
+
+void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsFilter::slotForeground ()

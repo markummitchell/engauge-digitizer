@@ -13,23 +13,11 @@ const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
-DlgSettingsGridDisplay::DlgSettingsGridDisplay(CmdMediator &cmdMediator,
-                                               QWidget *parent) :
-  DlgSettingsAbstractBase (cmdMediator,
-                           parent)
+DlgSettingsGridDisplay::DlgSettingsGridDisplay(QWidget *parent) :
+  DlgSettingsAbstractBase ("Grid Display", parent)
 {
-  QGridLayout *layout = new QGridLayout (this);
-  setLayout (layout);
-
-  layout->setColumnStretch(0, 1); // Empty first column
-  layout->setColumnStretch(1, 0); // X
-  layout->setColumnStretch(2, 0); // Y
-  layout->setColumnStretch(3, 1); // Empty first column
-
-  int row = 0;
-  createX (layout, row);
-  createY (layout, row);
-  createPreview (layout, row);
+  QWidget *subPanel = createSubPanel ();
+  finishPanel (subPanel);
 }
 
 void DlgSettingsGridDisplay::createPreview (QGridLayout *layout,
@@ -45,6 +33,25 @@ void DlgSettingsGridDisplay::createPreview (QGridLayout *layout,
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
+}
+
+QWidget *DlgSettingsGridDisplay::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch(0, 1); // Empty first column
+  layout->setColumnStretch(1, 0); // X
+  layout->setColumnStretch(2, 0); // Y
+  layout->setColumnStretch(3, 1); // Empty first column
+
+  int row = 0;
+  createX (layout, row);
+  createY (layout, row);
+  createPreview (layout, row);
+
+  return subPanel;
 }
 
 void DlgSettingsGridDisplay::createX (QGridLayout *layout,
@@ -175,9 +182,11 @@ void DlgSettingsGridDisplay::createY (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
-void DlgSettingsGridDisplay::load ()
+void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::load";
+
+  setCmdMediator (cmdMediator);
 }
 
 void DlgSettingsGridDisplay::slotCountX(const QString &)

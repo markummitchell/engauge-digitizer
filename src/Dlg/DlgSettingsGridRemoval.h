@@ -18,8 +18,10 @@ class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsGridRemoval(CmdMediator &cmdMediator,
-                         QWidget *parent = 0);
+  DlgSettingsGridRemoval(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotRemoveGridLines (int);
@@ -40,14 +42,12 @@ private slots:
   void slotRemoveParallel (int);
 
 private:
-  DlgSettingsGridRemoval(QWidget *parent = 0);
 
   void createRemoveGridLines (QGridLayout *layout, int &row);
   void createRemoveGridLinesX (QGridLayout *layoutGridLines, int &row);
   void createRemoveGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createRemoveParallel (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  virtual void load ();
   void updateControls ();
 
   QCheckBox *m_chkRemoveGridLines;

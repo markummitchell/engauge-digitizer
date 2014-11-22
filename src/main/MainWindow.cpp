@@ -603,15 +603,15 @@ void MainWindow::createMenus()
 
 void MainWindow::createSettingsDialogs ()
 {
-  m_dlgSettingsCoords = new DlgSettingsCoords (*m_cmdMediator, this);
-  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*m_cmdMediator, this);
-  m_dlgSettingsCurves = new DlgSettingsCurves (*m_cmdMediator, this);
-  m_dlgSettingsExport = new DlgSettingsExport (*m_cmdMediator, this);
-  m_dlgSettingsFilter = new DlgSettingsFilter (*m_cmdMediator, this);
-  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*m_cmdMediator, this);
-  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*m_cmdMediator, this);
-  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*m_cmdMediator, this);
-  m_dlgSettingsSegments = new DlgSettingsSegments (*m_cmdMediator, this);
+  m_dlgSettingsCoords = new DlgSettingsCoords (this);
+  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (this);
+  m_dlgSettingsCurves = new DlgSettingsCurves (this);
+  m_dlgSettingsExport = new DlgSettingsExport (this);
+  m_dlgSettingsFilter = new DlgSettingsFilter (this);
+  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (this);
+  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (this);
+  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (this);
+  m_dlgSettingsSegments = new DlgSettingsSegments (this);
 
   m_dlgSettingsCoords->setVisible (false);
   m_dlgSettingsCurveProperties->setVisible (false);
@@ -1284,6 +1284,7 @@ void MainWindow::slotSettingsCoords ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsCoords->load (*m_cmdMediator);
   m_dlgSettingsCoords->show ();
 }
 
@@ -1291,6 +1292,7 @@ void MainWindow::slotSettingsCurveProperties ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsCurveProperties->load (*m_cmdMediator);
   m_dlgSettingsCurveProperties->show ();
 }
 
@@ -1298,6 +1300,7 @@ void MainWindow::slotSettingsCurves ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsCurves->load (*m_cmdMediator);
   m_dlgSettingsCurves->show ();
 }
 
@@ -1305,6 +1308,7 @@ void MainWindow::slotSettingsExport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsExport->load (*m_cmdMediator);
   m_dlgSettingsExport->show ();
 }
 
@@ -1312,6 +1316,7 @@ void MainWindow::slotSettingsFilter ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsFilter->load (*m_cmdMediator);
   m_dlgSettingsFilter->show ();
 }
 
@@ -1319,6 +1324,7 @@ void MainWindow::slotSettingsGridDisplay ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsGridDisplay->load (*m_cmdMediator);
   m_dlgSettingsGridDisplay->show ();
 }
 
@@ -1326,6 +1332,7 @@ void MainWindow::slotSettingsGridRemoval ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsGridRemoval->load (*m_cmdMediator);
   m_dlgSettingsGridRemoval->show ();
 }
 
@@ -1333,6 +1340,7 @@ void MainWindow::slotSettingsPointMatch ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsPointMatch->load (*m_cmdMediator);
   m_dlgSettingsPointMatch->show ();
 }
 
@@ -1340,6 +1348,7 @@ void MainWindow::slotSettingsSegments ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
+  m_dlgSettingsSegments->load (*m_cmdMediator);
   m_dlgSettingsSegments->show ();
 }
 

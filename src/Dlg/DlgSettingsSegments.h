@@ -17,8 +17,10 @@ class DlgSettingsSegments : public DlgSettingsAbstractBase
 
 public:
   /// Single constructor.
-  DlgSettingsSegments(CmdMediator &cmdMediator,
-                      QWidget *parent = 0);
+  DlgSettingsSegments(QWidget *parent = 0);
+
+  virtual QWidget *createSubPanel ();
+  virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotFillCorners (int state);
@@ -31,7 +33,6 @@ private:
 
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  virtual void load ();
 
   QLineEdit *m_editMinLength;
   QLineEdit *m_editPointSeparation;
