@@ -7,6 +7,15 @@
 
 class CmdMediator;
 class DigitizeStateContext;
+class DlgSettingsCoords;
+class DlgSettingsCurveProperties;
+class DlgSettingsCurves;
+class DlgSettingsExport;
+class DlgSettingsFilter;
+class DlgSettingsGridDisplay;
+class DlgSettingsGridRemoval;
+class DlgSettingsPointMatch;
+class DlgSettingsSegments;
 class GraphicsScene;
 class GraphicsView;
 class LoadImageFromUrl;
@@ -135,6 +144,7 @@ private:
   void createLoadImageFromUrl ();
   void createMenus();
   void createScene ();
+  void createSettingsDialogs ();
   void createStateContext();
   void createStatusBar();
   void createToolBars();
@@ -246,6 +256,16 @@ private:
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   DigitizeStateContext *m_digitizeStateContext;
+
+  DlgSettingsCoords *m_dlgSettingsCoords;
+  DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
+  DlgSettingsCurves *m_dlgSettingsCurves;
+  DlgSettingsExport *m_dlgSettingsExport;
+  DlgSettingsFilter *m_dlgSettingsFilter;
+  DlgSettingsGridDisplay *m_dlgSettingsGridDisplay;
+  DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
+  DlgSettingsPointMatch *m_dlgSettingsPointMatch;
+  DlgSettingsSegments *m_dlgSettingsSegments;
 };
 
 #endif // MAIN_WINDOW_H

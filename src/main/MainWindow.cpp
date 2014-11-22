@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
   createScene ();
   createLoadImageFromUrl ();
   createStateContext ();
+  createSettingsDialogs ();
   updateControls ();
 
   settingsRead ();
@@ -600,6 +601,29 @@ void MainWindow::createMenus()
   m_menuHelp->insertSeparator (m_actionWhatsThis);
 }
 
+void MainWindow::createSettingsDialogs ()
+{
+  m_dlgSettingsCoords = new DlgSettingsCoords (*m_cmdMediator, this);
+  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*m_cmdMediator, this);
+  m_dlgSettingsCurves = new DlgSettingsCurves (*m_cmdMediator, this);
+  m_dlgSettingsExport = new DlgSettingsExport (*m_cmdMediator, this);
+  m_dlgSettingsFilter = new DlgSettingsFilter (*m_cmdMediator, this);
+  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*m_cmdMediator, this);
+  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*m_cmdMediator, this);
+  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*m_cmdMediator, this);
+  m_dlgSettingsSegments = new DlgSettingsSegments (*m_cmdMediator, this);
+
+  m_dlgSettingsCoords->setVisible (false);
+  m_dlgSettingsCurveProperties->setVisible (false);
+  m_dlgSettingsCurves->setVisible (false);
+  m_dlgSettingsExport->setVisible (false);
+  m_dlgSettingsFilter->setVisible (false);
+  m_dlgSettingsGridDisplay->setVisible (false);
+  m_dlgSettingsGridRemoval->setVisible (false);
+  m_dlgSettingsPointMatch->setVisible (false);
+  m_dlgSettingsSegments->setVisible (false);
+}
+
 void MainWindow::createScene ()
 {
   m_scene = new GraphicsScene (this);
@@ -1043,78 +1067,6 @@ void MainWindow::slotEditPaste ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPaste";
 }
 
-void MainWindow::slotSettingsCoords ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsCoords dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsCurveProperties ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsCurveProperties dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsCurves ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsCurves dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsExport ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsExport dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsFilter ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsFilter dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsGridDisplay ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsGridDisplay dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsGridRemoval ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsGridRemoval dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsPointMatch ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsPointMatch dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
-void MainWindow::slotSettingsSegments ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  DlgSettingsSegments dlg (*m_cmdMediator);
-  dlg.exec ();
-}
-
 void MainWindow::slotFileExport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileExport";
@@ -1326,6 +1278,69 @@ void MainWindow::slotSetOverrideCursor (Qt::CursorShape cursorShape)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
 
   m_digitizeStateContext->handleSetOverrideCursor (cursorShape);
+}
+
+void MainWindow::slotSettingsCoords ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsCoords->show ();
+}
+
+void MainWindow::slotSettingsCurveProperties ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsCurveProperties->show ();
+}
+
+void MainWindow::slotSettingsCurves ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsCurves->show ();
+}
+
+void MainWindow::slotSettingsExport ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsExport->show ();
+}
+
+void MainWindow::slotSettingsFilter ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsFilter->show ();
+}
+
+void MainWindow::slotSettingsGridDisplay ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsGridDisplay->show ();
+}
+
+void MainWindow::slotSettingsGridRemoval ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsGridRemoval->show ();
+}
+
+void MainWindow::slotSettingsPointMatch ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsPointMatch->show ();
+}
+
+void MainWindow::slotSettingsSegments ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsSegments->show ();
 }
 
 void MainWindow::slotUndoTextChanged (const QString &text)
@@ -1766,6 +1781,16 @@ void MainWindow::updateControls ()
   m_actionDigitizeSelect->setEnabled (!m_curfile.isEmpty ());
 
   m_actionViewDigitize->setEnabled (!m_curfile.isEmpty ());
+
+  m_actionSettingsCoords->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsCurveProperties->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsCurves->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsExport->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsFilter->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsGridDisplay->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsGridRemoval->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsPointMatch->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsSegments->setEnabled (!m_curfile.isEmpty ());
 
   m_groupDocumentImage->setEnabled (!m_curfile.isEmpty ());
   m_groupDocumentPoints->setEnabled (!m_curfile.isEmpty ());
