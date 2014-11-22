@@ -115,6 +115,13 @@ QWidget *DlgSettingsSegments::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsSegments::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::load";

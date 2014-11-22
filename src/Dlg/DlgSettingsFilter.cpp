@@ -125,6 +125,13 @@ QWidget *DlgSettingsFilter::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsFilter::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::load";

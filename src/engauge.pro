@@ -23,6 +23,15 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
+    Cmd/CmdSettingsCoords.h \
+    Cmd/CmdSettingsCurveProperties.h \
+    Cmd/CmdSettingsCurves.h \
+    Cmd/CmdSettingsExport.h \
+    Cmd/CmdSettingsFilter.h \
+    Cmd/CmdSettingsGridDisplay.h \
+    Cmd/CmdSettingsGridRemoval.h \
+    Cmd/CmdSettingsPointMatch.h \
+    Cmd/CmdSettingsSegments.h \
     include/ColorPalette.h \
     include/CoordsType.h \
     Curve/Curve.h \
@@ -100,6 +109,15 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
+    Cmd/CmdSettingsCoords.cpp \
+    Cmd/CmdSettingsCurveProperties.cpp \
+    Cmd/CmdSettingsCurves.cpp \
+    Cmd/CmdSettingsExport.cpp \
+    Cmd/CmdSettingsFilter.cpp \
+    Cmd/CmdSettingsGridDisplay.cpp \
+    Cmd/CmdSettingsGridRemoval.cpp \
+    Cmd/CmdSettingsPointMatch.cpp \
+    Cmd/CmdSettingsSegments.cpp \
     Curve/Curve.cpp \
     Curve/CurvesGraphs.cpp \
     Curve/CurveStyle.cpp \

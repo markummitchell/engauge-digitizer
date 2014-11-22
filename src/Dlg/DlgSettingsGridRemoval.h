@@ -41,6 +41,9 @@ private slots:
 
   void slotRemoveParallel (int);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createRemoveGridLines (QGridLayout *layout, int &row);

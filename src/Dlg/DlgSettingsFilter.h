@@ -29,6 +29,9 @@ private slots:
   void slotSaturation();
   void slotValue();
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createControls (QGridLayout *layout, int &row);

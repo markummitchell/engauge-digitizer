@@ -29,6 +29,9 @@ private slots:
   void slotMinLength (const QString &);
   void slotPointSeparation (const QString &);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createControls (QGridLayout *layout, int &row);

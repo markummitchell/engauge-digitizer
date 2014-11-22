@@ -183,6 +183,13 @@ void DlgSettingsGridDisplay::createY (QGridLayout *layout,
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
+void DlgSettingsGridDisplay::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::load";

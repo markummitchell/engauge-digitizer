@@ -48,6 +48,9 @@ private slots:
   void slotRelationsPointsRaw(bool);
   void slotXLabel ();
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createCurveSelection (QGridLayout *layout, int &row);

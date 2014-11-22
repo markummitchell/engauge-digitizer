@@ -30,6 +30,9 @@ private slots:
   void slotRemove ();
   void slotSelectionChanged (QItemSelection, QItemSelection);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void appendCurveName (const QString &curveNameNew,

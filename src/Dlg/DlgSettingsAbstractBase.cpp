@@ -47,6 +47,7 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 
   QPushButton *btnOk = new QPushButton (tr ("Ok"));
   buttonLayout->addWidget (btnOk);
+  connect (btnOk, SIGNAL (pressed ()), this, SLOT (slotOk ()));
 
   panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
@@ -55,4 +56,10 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)
 {
   m_cmdMediator = &cmdMediator;
+}
+
+void DlgSettingsAbstractBase::slotOk ()
+{
+  // Forward to leaf class
+  handleOk ();
 }

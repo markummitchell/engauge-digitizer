@@ -175,6 +175,13 @@ QWidget *DlgSettingsCoords::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsCoords::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsCoords::initializeGroupCoordsType()
 {
   switch (m_coordsType) {

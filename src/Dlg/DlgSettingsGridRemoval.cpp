@@ -217,6 +217,13 @@ QWidget *DlgSettingsGridRemoval::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsGridRemoval::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::load";

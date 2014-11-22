@@ -110,6 +110,13 @@ QWidget *DlgSettingsPointMatch::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsPointMatch::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::load";

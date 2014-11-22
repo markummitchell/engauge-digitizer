@@ -161,6 +161,13 @@ QWidget *DlgSettingsCurveProperties::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsCurveProperties::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::load";

@@ -30,6 +30,9 @@ private slots:
   void slotPointSize (const QString &);
   void slotRejectedPointColor (const QString &);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createControls (QGridLayout *layout,

@@ -34,6 +34,9 @@ private slots:
   void slotStepY(const QString &);
   void slotStopY(const QString &);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createX (QGridLayout *layout, int &row);

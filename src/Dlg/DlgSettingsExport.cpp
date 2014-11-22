@@ -307,6 +307,13 @@ void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
   connect (m_editXLabel, SIGNAL (editingFinished ()), this, SLOT (slotXLabel()));
 }
 
+void DlgSettingsExport::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsExport::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::load";

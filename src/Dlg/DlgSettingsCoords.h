@@ -35,6 +35,9 @@ private slots:
   void slotYRadiusLinear();
   void slotYRadiusLog();
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createGroupCoordsType(QGridLayout *layout,

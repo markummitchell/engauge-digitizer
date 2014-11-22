@@ -31,6 +31,9 @@ private slots:
   void slotPointShape(const QString &);
   void slotPointSize(const QString &);
 
+protected:
+  virtual void handleOk ();
+
 private:
 
   void createCurveName (QGridLayout *layout, int &row);

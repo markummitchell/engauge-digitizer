@@ -120,6 +120,13 @@ bool DlgSettingsCurves::endsWithNumber (const QString &str) const
   return success;
 }
 
+void DlgSettingsCurves::handleOk ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::handleOk";
+
+  hide ();
+}
+
 void DlgSettingsCurves::insertCurveName (int row,
                                          const QString &curveNameNew,
                                          const QString &curveNameOriginal,
