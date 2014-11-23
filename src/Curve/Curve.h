@@ -72,6 +72,9 @@ public:
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
 
+  /// Change the curve name
+  void setCurveName (const QString &curveName);
+
 private:
   Curve();
 

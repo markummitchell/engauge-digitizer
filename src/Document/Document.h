@@ -79,6 +79,9 @@ public:
   /// See CurvesGraphs::curveForCurveNames.
   const Curve *curveForCurveName (const QString &curveName) const;
 
+  /// Make all Curves available, read only, for CmdAbstract classes only.
+  const CurvesGraphs &curvesGraphs () const;
+
   /// See CurvesGraphs::curvesGraphsNames.
   QStringList curvesGraphsNames () const;
 
@@ -132,6 +135,9 @@ public:
 
   /// Remove all points identified in the specified CurvesGraphs. See also addPointsInCurvesGraphs
   void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
+
+  /// Let CmdAbstract classes overwrite CurvesGraphs.
+  void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
   /// Return a read-only copy of the Curves settings.
   SettingsCurves settingsCurves () const;

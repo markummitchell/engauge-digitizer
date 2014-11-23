@@ -200,6 +200,11 @@ const Curve *Document::curveForCurveName (const QString &curveName) const
   }
 }
 
+const CurvesGraphs &Document::curvesGraphs () const
+{
+  return m_curvesGraphs;
+}
+
 QStringList Document::curvesGraphsNames() const
 {
   return m_curvesGraphs.curvesGraphsNames();
@@ -320,6 +325,13 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
                                                                                                      &CallbackRemovePointsInCurvesGraphs::callback);
 
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
+
+  m_curvesGraphs = curvesGraphs;
 }
 
 SettingsCurves Document::settingsCurves () const

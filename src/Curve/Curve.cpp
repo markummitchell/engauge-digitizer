@@ -210,3 +210,8 @@ void Curve::removePoint (const QString &identifier)
     }
   }
 }
+
+void Curve::setCurveName (const QString &curveName)
+{
+  m_curveName = curveName;
+}

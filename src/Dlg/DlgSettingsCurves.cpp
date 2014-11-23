@@ -127,7 +127,8 @@ void DlgSettingsCurves::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::handleOk";
 
   CmdSettingsCurves *cmd = new CmdSettingsCurves (mainWindow (),
-                                                  cmdMediator ().document());
+                                                  cmdMediator ().document(),
+                                                  *m_modelCurves);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -165,6 +166,11 @@ void DlgSettingsCurves::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::load";
 
   setCmdMediator (cmdMediator);
+
+  // Remove any data from previous showing of dialog
+  while (m_modelCurves->rowCount () > 0) {
+    m_modelCurves->removeRow (0);
+  }
 
   QStringList curveNames = cmdMediator.curvesGraphsNames ();
   QStringList::const_iterator itr;

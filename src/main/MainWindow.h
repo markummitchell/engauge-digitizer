@@ -40,10 +40,13 @@ public:
   MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
-  /// Accessor for commands to process the Document
+  /// Accessor for commands to process the Document.
   CmdMediator &cmdMediator();
 
-  /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode
+  /// Update the combobox that has the curve names.
+  void loadCurveNamesFromCmdMediator();
+
+  /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
   /// Scene container for the QImage and QGraphicsItems.
@@ -152,7 +155,6 @@ private:
   void loadFile (const QString &fileName);
   void loadImage (const QString &fileName,
                   const QImage &image);
-  void loadCurveNamesFromCmdMediator();
   bool maybeSave();
   void removePixmap();
   bool saveFile(const QString &fileName);
