@@ -330,37 +330,50 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 void DlgSettingsExport::slotDelimitersCommas(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersCommas";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotDelimitersSpaces(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersSpaces";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotDelimitersTabs(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersTabs";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotExclude ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotExclude";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotFunctionsLayoutAllCurves(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutAllCurves";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotFunctionsLayoutOneCurve(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutOneCurve";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotFunctionsPointsAllCurves(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsAllCurves";
 
+  enableOk (true);
   updateControls();
 }
 
@@ -368,18 +381,22 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpaced(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpaced";
 
+  enableOk (true);
   updateControls();
 }
 
 void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotFunctionsPointsFirstCurve(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsFirstCurve";
 
+  enableOk (true);
   updateControls();
 }
 
@@ -387,33 +404,43 @@ void DlgSettingsExport::slotFunctionsPointsRaw(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsRaw";
 
+  enableOk (true);
   updateControls();
 }
 
 void DlgSettingsExport::slotHeaderGnuplot(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderGnuplot";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotHeaderNone(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderNone";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotHeaderSimple(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderSimple";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotInclude ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotInclude";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotListExcluded()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListExcluded";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -421,6 +448,7 @@ void DlgSettingsExport::slotListIncluded()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListIncluded";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -428,24 +456,30 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpaced(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpaced";
 
+  enableOk (true);
   updateControls ();
 }
 
 void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::slotRelationsPointsRaw(bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsRaw";
 
+  enableOk (true);
   updateControls ();
 }
 
 void DlgSettingsExport::slotXLabel()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotXLabel";
+
+  enableOk (true);
 }
 
 void DlgSettingsExport::updateControls ()

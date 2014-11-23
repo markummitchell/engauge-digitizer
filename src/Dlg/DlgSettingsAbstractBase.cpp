@@ -25,6 +25,11 @@ CmdMediator &DlgSettingsAbstractBase::cmdMediator ()
   return *m_cmdMediator;
 }
 
+void DlgSettingsAbstractBase::enableOk (bool enable)
+{
+  m_btnOk->setEnabled (enable);
+}
+
 void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 {
   const int STRETCH_OFF = 0, STRETCH_ON = 1;
@@ -40,16 +45,17 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
   QWidget *panelButtons = new QWidget (this);
   QHBoxLayout *buttonLayout = new QHBoxLayout (panelButtons);
 
-  QPushButton *btnCancel = new QPushButton (tr ("Cancel"));
-  buttonLayout->addWidget (btnCancel);
-  connect (btnCancel, SIGNAL (pressed ()), this, SLOT (hide ()));
+  m_btnCancel = new QPushButton (tr ("Cancel"));
+  buttonLayout->addWidget (m_btnCancel);
+  connect (m_btnCancel, SIGNAL (pressed ()), this, SLOT (hide ()));
 
   QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
   buttonLayout->addItem (spacer);
 
-  QPushButton *btnOk = new QPushButton (tr ("Ok"));
-  buttonLayout->addWidget (btnOk);
-  connect (btnOk, SIGNAL (pressed ()), this, SLOT (slotOk ()));
+  m_btnOk = new QPushButton (tr ("Ok"));
+  m_btnOk->setEnabled (false); // Nothing to save initially
+  buttonLayout->addWidget (m_btnOk);
+  connect (m_btnOk, SIGNAL (pressed ()), this, SLOT (slotOk ()));
 
   panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);

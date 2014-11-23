@@ -148,24 +148,34 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
+
+  enableOk (true);
 }
 
 void DlgSettingsFilter::slotHue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
+
+  enableOk (true);
 }
 
 void DlgSettingsFilter::slotIntensity ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
+
+  enableOk (true);
 }
 
 void DlgSettingsFilter::slotSaturation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
+
+  enableOk (true);
 }
 
 void DlgSettingsFilter::slotValue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
+
+  enableOk (true);
 }

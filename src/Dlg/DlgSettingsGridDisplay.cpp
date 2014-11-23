@@ -206,49 +206,69 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 void DlgSettingsGridDisplay::slotCountX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotCountY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotDisableX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotDisableY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStartX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStartY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStepX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStepY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStopX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridDisplay::slotStopY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopY";
+
+  enableOk (true);
 }

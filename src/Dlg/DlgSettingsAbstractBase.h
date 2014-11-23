@@ -28,6 +28,9 @@ protected:
   /// Create dialog-specific panel to which base class will add Ok and Cancel buttons.
   virtual QWidget *createSubPanel () = 0;
 
+  /// Let leaf subclass control the Ok button.
+  void enableOk (bool enable = true);
+
   /// Add Ok and Cancel buttons to subpanel to get the whole dialog.
   void finishPanel (QWidget *subPanel);
 
@@ -52,6 +55,8 @@ private:
 
   MainWindow &m_mainWindow;
   CmdMediator *m_cmdMediator;
+  QPushButton *m_btnCancel;
+  QPushButton *m_btnOk;
 };
 
 #endif // DLG_SETTINGS_ABSTRACT_BASE_H

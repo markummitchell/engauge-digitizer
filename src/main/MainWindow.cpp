@@ -1293,6 +1293,7 @@ void MainWindow::slotSettingsCurveProperties ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
   m_dlgSettingsCurveProperties->load (*m_cmdMediator);
+  m_dlgSettingsCurveProperties->setCurveName (m_cmbCurve->currentText ());
   m_dlgSettingsCurveProperties->show ();
 }
 

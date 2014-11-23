@@ -21,7 +21,11 @@ public:
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 
+  /// Load information for the specified curve name. When called externally, the load method must have been called first.
+  void setCurveName (const QString &curveName);
+
 private slots:
+  void slotCurveName(const QString &);
   void slotLineColor(const QString &);
   void slotLineSize(const QString &);
   void slotLineType(const QString &);

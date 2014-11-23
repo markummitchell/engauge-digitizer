@@ -226,6 +226,8 @@ void DlgSettingsCoords::slotCartesian ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotCartesian";
 
+  enableOk (true);
+
   m_coordsType = COORDS_TYPE_CARTESIAN;
   loadPixmap (":/engauge/img/plot_cartesian.png");
   updateControls();
@@ -234,6 +236,8 @@ void DlgSettingsCoords::slotCartesian ()
 void DlgSettingsCoords::slotPolar ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolar";
+
+  enableOk (true);
 
   m_coordsType = COORDS_TYPE_POLAR;
   loadPixmap (":/engauge/img/plot_polar.png");
@@ -244,6 +248,7 @@ void DlgSettingsCoords::slotPolarOriginRadius()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
 
+  enableOk (true);
   updateControls();
 }
 
@@ -251,6 +256,7 @@ void DlgSettingsCoords::slotPolarUnits(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarUnits";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -258,6 +264,7 @@ void DlgSettingsCoords::slotXThetaLinear()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLinear";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -265,6 +272,7 @@ void DlgSettingsCoords::slotXThetaLog()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLog";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -272,6 +280,7 @@ void DlgSettingsCoords::slotYRadiusLinear()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLinear";
 
+  enableOk (true);
   updateControls ();
 }
 
@@ -279,6 +288,7 @@ void DlgSettingsCoords::slotYRadiusLog()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLog";
 
+  enableOk (true);
   updateControls ();
 }
 

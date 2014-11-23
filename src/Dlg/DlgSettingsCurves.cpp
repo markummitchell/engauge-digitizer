@@ -318,12 +318,15 @@ void DlgSettingsCurves::slotDataChanged (const QModelIndex &topLeft,
                               << " bottomRight=(" << bottomRight.row () << "," << bottomRight.column () << ")"
                               << " roles=" << rolesAsString (roles).toLatin1 ().data ();
 
+  enableOk (true);
   updateControls ();
 }
 
 void DlgSettingsCurves::slotNew ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotNew";
+
+  enableOk (true);
 
   const QString NO_ORIGINAL_CURVE_NAME;
   const int NO_POINTS = 0;
@@ -350,6 +353,8 @@ void DlgSettingsCurves::slotNew ()
 void DlgSettingsCurves::slotRemove ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotRemove";
+
+  enableOk (true);
 
   int numPoints = 0;
   for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
@@ -385,6 +390,7 @@ void DlgSettingsCurves::slotRemove ()
 
 void DlgSettingsCurves::slotSelectionChanged (QItemSelection, QItemSelection)
 {
+  enableOk (true);
   updateControls ();
 }
 

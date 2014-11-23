@@ -133,24 +133,34 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotAcceptedPointColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotCandidatePointColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsPointMatch::slotPointSeparation (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSeparation";
+
+  enableOk (true);
 }
 
 void DlgSettingsPointMatch::slotPointSize (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSize";
+
+  enableOk (true);
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotRejectedPointColor";
+
+  enableOk (true);
 }

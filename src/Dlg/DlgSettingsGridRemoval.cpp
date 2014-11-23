@@ -240,32 +240,43 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCloseDistance";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotCountX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotCountY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotDisableX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotDisableY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotRemoveGridLines (int /* state */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveGridLines";
 
+  enableOk (true);
   updateControls();
 }
 
@@ -273,37 +284,50 @@ void DlgSettingsGridRemoval::slotRemoveParallel (int /* state */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveParallel";
 
+  enableOk (true);
   updateControls();
 }
 
 void DlgSettingsGridRemoval::slotStartX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotStartY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotStepX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotStepY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotStopX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopX";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::slotStopY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopY";
+
+  enableOk (true);
 }
 
 void DlgSettingsGridRemoval::updateControls ()

@@ -138,24 +138,34 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 void DlgSettingsSegments::slotFillCorners (int /* state */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotFillCorner";
+
+  enableOk (true);
 }
 
 void DlgSettingsSegments::slotLineColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsSegments::slotLineSize (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineSize";
+
+  enableOk (true);
 }
 
 void DlgSettingsSegments::slotMinLength (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotMinLength";
+
+  enableOk (true);
 }
 
 void DlgSettingsSegments::slotPointSeparation (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotPointSeparation";
+
+  enableOk (true);
 }

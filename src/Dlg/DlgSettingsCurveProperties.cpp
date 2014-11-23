@@ -27,6 +27,7 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
 
   m_cmbCurveName = new QComboBox ();
   m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
+  connect (m_cmbCurveName, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCurveName (const QString &)));
   layout->addWidget (m_cmbCurveName, row++, 2);
 }
 
@@ -179,44 +180,88 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::load";
 
   setCmdMediator (cmdMediator);
+
+  // Load curve name combobox
+  m_cmbCurveName->clear ();
+  QStringList curveNames = cmdMediator.curvesGraphsNames();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin (); itr != curveNames.end (); itr++) {
+
+    QString curveName = *itr;
+    m_cmbCurveName->addItem (curveName);
+  }
+}
+
+void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
+
+  // Do nothing if combobox is getting cleared
+  if (!curveName.isEmpty ()) {
+
+    const Curve *curve = ((const Document&) cmdMediator().document ()).curveForCurveName(curveName);
+    Q_ASSERT (curve != 0);
+    PointStyle pointStyle = curve->pointStyle();
+  }
+}
+
+void DlgSettingsCurveProperties::setCurveName (const QString &curveName)
+{
+  m_cmbCurveName->setCurrentText (curveName);
 }
 
 void DlgSettingsCurveProperties::slotLineColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotLineSize(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineSize";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotLineType(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotPointLineColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotPointLineSize(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineSize";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotPointInteriorColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointInteriorColor";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
+
+  enableOk (true);
 }
 
 void DlgSettingsCurveProperties::slotPointSize(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointSize";
+
+  enableOk (true);
 }
