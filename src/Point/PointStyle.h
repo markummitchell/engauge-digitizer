@@ -27,6 +27,12 @@ public:
   /// Return the color to be applied to the QGraphicsItem.
   QColor color () const;
 
+  /// Initial default for axes curve.
+  static PointStyle defaultAxesCurve ();
+
+  /// Initial default for index'th graph curve.
+  static PointStyle defaultGraphCurve (int index);
+
   /// Return true if point is a circle, otherwise it is a polygon. For a circle, the radius is important and no polygon is needed from this class
   bool isCircle () const;
 

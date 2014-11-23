@@ -141,6 +141,11 @@ void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString 
   }
 }
 
+int CurvesGraphs::numCurves () const
+{
+  return m_curvesGraphs.count ();
+}
+
 void CurvesGraphs::removePoint (const QString &pointIdentifier)
 {
   QString curveName = Point::curveNameFromPointIdentifier(pointIdentifier);

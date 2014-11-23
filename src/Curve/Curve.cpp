@@ -9,8 +9,10 @@ const QString AXIS_CURVE_NAME ("Axes");
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
 
-Curve::Curve(const QString &curveName) :
-  m_curveName (curveName)
+Curve::Curve(const QString &curveName,
+             const PointStyle &pointStyle) :
+  m_curveName (curveName),
+  m_pointStyle (pointStyle)
 {
 }
 
@@ -18,12 +20,14 @@ Curve::Curve (const Curve &curve)
 {
   m_curveName = curve.curveName ();
   m_points = curve.points ();
+  m_pointStyle = curve.pointStyle ();
 }
 
 Curve &Curve::operator=(const Curve &curve)
 {
   m_curveName = curve.curveName ();
   m_points = curve.points ();
+  m_pointStyle = curve.pointStyle ();
 
   return *this;
 }
@@ -95,7 +99,8 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
 
       // Check if this curve already exists from a previously exported point
       if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
-        Curve curve(m_curveName);
+        Curve curve(m_curveName,
+                    PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
         curvesGraphs.addGraphCurveAtEnd(curve);
       }
 
@@ -160,6 +165,11 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
 
   Q_ASSERT (false);
   return 0;
+}
+
+PointStyle Curve::pointStyle () const
+{
+  return m_pointStyle;
 }
 
 QPointF Curve::positionGraph (const QString &pointIdentifier) const

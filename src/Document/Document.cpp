@@ -15,20 +15,23 @@
 Document::Document (const QImage &image) :
   m_name ("untitled"),
   m_isModified (false),
-  m_curveAxes (new Curve (AXIS_CURVE_NAME)),
+  m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          PointStyle::defaultAxesCurve ())),
   m_coordsType (COORDS_TYPE_CARTESIAN)
 {
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
   m_pixmap.convertFromImage (image);
 
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME));
+  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ())));
 }
 
 Document::Document (const QString &fileName) :
   m_name (fileName),
   m_isModified (false),
-  m_curveAxes (new Curve (AXIS_CURVE_NAME))
+  m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          PointStyle::defaultAxesCurve()))
 {
   m_successfulRead = true;
 
@@ -43,12 +46,14 @@ Document::Document (const QString &fileName) :
     m_reasonForUnsuccessfulRead = "Operating system says file is not readable";
   }
 
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME));
+  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
-  m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName));
+  m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
+                                             PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
 
 void Document::addPointAxis (const QPointF &posScreen,
@@ -172,6 +177,13 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
 CoordsType Document::coordsType () const
 {
   return m_coordsType;
+}
+
+const Curve &Document::curveAxes () const
+{
+  Q_ASSERT (m_curveAxes != 0);
+
+  return *m_curveAxes;
 }
 
 Curve *Document::curveForCurveName (const QString &curveName)
@@ -332,11 +344,6 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
 
   m_curvesGraphs = curvesGraphs;
-}
-
-SettingsCurves Document::settingsCurves () const
-{
-  return m_settingsCurves;
 }
 
 bool Document::successfulRead () const

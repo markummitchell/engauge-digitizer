@@ -52,6 +52,9 @@ public:
   /// Apply functor to Points on all of the Curves.
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
+  /// Current number of graphs curves.
+  int numCurves () const;
+
   /// Remove the Point from its Curve.
   void removePoint (const QString &pointIdentifier);
 

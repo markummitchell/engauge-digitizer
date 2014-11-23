@@ -80,7 +80,6 @@ HEADERS  += \
     Point/PointStyle.h \
     util/QtToString.h \
     Settings/SettingsCurve.h \
-    Settings/SettingsCurves.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
@@ -159,7 +158,6 @@ SOURCES += \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
     Settings/SettingsCurve.cpp \
-    Settings/SettingsCurves.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
     View/ViewPreview.cpp \

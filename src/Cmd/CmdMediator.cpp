@@ -27,6 +27,11 @@ CoordsType CmdMediator::coordsType () const
   return m_document.coordsType();
 }
 
+const Curve &CmdMediator::curveAxes () const
+{
+  return m_document.curveAxes ();
+}
+
 QStringList CmdMediator::curvesGraphsNames () const
 {
   return m_document.curvesGraphsNames();
@@ -72,11 +77,6 @@ QPixmap CmdMediator::pixmap () const
 QString CmdMediator::reasonForUnsuccessfulRead () const
 {
   return m_document.reasonForUnsuccessfulRead ();
-}
-
-SettingsCurves CmdMediator::settingsCurves () const
-{
-  return m_document.settingsCurves ();
 }
 
 bool CmdMediator::successfulRead () const

@@ -1,6 +1,8 @@
 #include "PointStyle.h"
 #include <qmath.h>
 
+const int DEFAULT_POINT_RADIUS = 10;
+
 PointStyle::PointStyle ()
 {
 }
@@ -72,6 +74,42 @@ QColor PointStyle::color () const
     default:
       Q_ASSERT (false);
   }
+}
+
+PointStyle PointStyle::defaultAxesCurve ()
+{
+  return PointStyle (POINT_SHAPE_CROSS,
+                     DEFAULT_POINT_RADIUS,
+                     COLOR_PALETTE_RED);
+}
+
+PointStyle PointStyle::defaultGraphCurve (int index)
+{
+  PointShape pointShape = POINT_SHAPE_CROSS;
+  switch (index % 4) {
+    case 0:
+      pointShape = POINT_SHAPE_CROSS;
+      break;
+
+    case 1:
+      pointShape = POINT_SHAPE_X;
+      break;
+
+    case 2:
+      pointShape = POINT_SHAPE_DIAMOND;
+      break;
+
+    case 3:
+      pointShape = POINT_SHAPE_SQUARE;
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
+
+  return PointStyle (pointShape,
+                     DEFAULT_POINT_RADIUS,
+                     COLOR_PALETTE_BLUE);
 }
 
 bool PointStyle::isCircle () const

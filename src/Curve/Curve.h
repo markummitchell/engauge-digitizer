@@ -4,6 +4,7 @@
 #include "CallbackSearchReturn.h"
 #include "functor.h"
 #include "Point.h"
+#include "PointStyle.h"
 #include <QHash>
 #include <QList>
 #include <QString>
@@ -22,7 +23,8 @@ class Curve
 {
 public:
   /// Constructor from scratch.
-  Curve(const QString &curveName);
+  Curve(const QString &curveName,
+        const PointStyle &pointStyle);
 
   /// Copy constructor.
   Curve (const Curve &curve);
@@ -69,6 +71,9 @@ public:
   /// Return a shallow copy of the Points.
   const Points points () const;
 
+  /// Return the point style.
+  PointStyle pointStyle () const;
+
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
 
@@ -82,6 +87,7 @@ private:
 
   QString m_curveName;
   Points m_points;
+  PointStyle m_pointStyle;
 };
 
 #endif // CURVE_H

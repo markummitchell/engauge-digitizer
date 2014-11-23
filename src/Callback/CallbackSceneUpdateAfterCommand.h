@@ -4,8 +4,8 @@
 #include "CallbackSearchReturn.h"
 #include "PointIdentifierToGraphicsItem.h"
 #include "PointStyle.h"
-#include "SettingsCurves.h"
 
+class Document;
 class GraphicsScene;
 class Point;
 
@@ -16,7 +16,7 @@ public:
   /// Single constructor.
   CallbackSceneUpdateAfterCommand(PointIdentifierToGraphicsItem &pointIdentifierToGraphicsItem,
                                   GraphicsScene &scene,
-                                  const SettingsCurves &settingsCurves);
+                                  const Document &document);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString & /* curveName */,
@@ -27,7 +27,7 @@ private:
 
   PointIdentifierToGraphicsItem &m_pointIdentifierToGraphicsItem;
   GraphicsScene &m_scene;
-  const SettingsCurves m_settingsCurves;
+  const Document &m_document;
 };
 
 #endif // CALLBACK_SCENE_UPDATE_AFTER_COMMAND_H

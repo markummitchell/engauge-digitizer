@@ -67,9 +67,10 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
   } else {
 
     // Temporary point that user can see while DlgEditPoint is active
-    PointStyle pointStyleAxis = context().cmdMediator().settingsCurves().pointStyleAxis();
+    const Curve &curveAxes = context().cmdMediator().curveAxes();
+    PointStyle pointStyleAxes = curveAxes.pointStyle();
     QGraphicsItem *item = context().mainWindow().scene().addPoint(TEMPORARY_POINT_NAME,
-                                                                  pointStyleAxis,
+                                                                  pointStyleAxes,
                                                                   posScreen);
 
     // Ask user for coordinates

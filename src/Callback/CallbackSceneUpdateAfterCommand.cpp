@@ -1,15 +1,16 @@
 #include "CallbackSceneUpdateAfterCommand.h"
 #include "DataKey.h"
+#include "Document.h"
 #include "GraphicsScene.h"
 #include "Point.h"
 #include <QGraphicsItem>
 
 CallbackSceneUpdateAfterCommand::CallbackSceneUpdateAfterCommand(PointIdentifierToGraphicsItem &pointIdentifierToGraphicsItem,
                                                                  GraphicsScene &scene,
-                                                                 const SettingsCurves &settingsCurves) :
+                                                                 const Document &document) :
   m_pointIdentifierToGraphicsItem (pointIdentifierToGraphicsItem),
   m_scene (scene),
-  m_settingsCurves (settingsCurves)
+  m_document (document)
 {
 }
 
@@ -26,8 +27,10 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
   } else {
 
     // Point does not exist in scene yet so create it
+    const Curve *curve = m_document.curveForCurveName (curveName);
+    Q_ASSERT (curve != 0);
     item = m_scene.addPoint (point.identifier (),
-                             m_settingsCurves.pointStyleForCurveName (curveName),
+                             curve->pointStyle (),
                              point.posScreen ());
   }
 

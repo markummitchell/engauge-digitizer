@@ -7,7 +7,6 @@
 #include <QList>
 #include <QPixmap>
 #include <QString>
-#include "SettingsCurves.h"
 
 class Curve;
 class QImage;
@@ -26,8 +25,7 @@ public:
   /// Add new graph curve to the list of existing graph curves.
   void addGraphCurveAtEnd (const QString &curveName);
 
-  /// Add a single axis point with a generated point identifier. Call this after checkAddPointAxis to guarantee success in this call. Note that PointStyle is not
-  /// applied to the point within the Document.
+  /// Add a single axis point with a generated point identifier. Call this after checkAddPointAxis to guarantee success in this call.
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
@@ -35,8 +33,7 @@ public:
                      const QPointF &posGraph,
                      QString &identifier);
 
-  /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call. Note that PointStyle is not
-  /// applied to the point within the Document.
+  /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call.
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
@@ -44,7 +41,7 @@ public:
                      const QPointF &posGraph,
                      const QString &identifier);
 
-  /// Add a single graph point with a generated point identifier. Note that PointStyle is not applied to the point within the Document.
+  /// Add a single graph point with a generated point identifier.
   void addPointGraph (const QString &curveName,
                       const QPointF &posScreen,
                       QString &identifier);
@@ -75,6 +72,9 @@ public:
 
   /// Coordinates type for entire Document.
   CoordsType coordsType () const;
+
+  /// Get method for axis curve.
+  const Curve &curveAxes () const;
 
   /// See CurvesGraphs::curveForCurveNames.
   const Curve *curveForCurveName (const QString &curveName) const;
@@ -139,9 +139,6 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
-  /// Return a read-only copy of the Curves settings.
-  SettingsCurves settingsCurves () const;
-
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
 
@@ -162,8 +159,6 @@ private:
   CurvesGraphs m_curvesGraphs;
 
   CoordsType m_coordsType;
-
-  SettingsCurves m_settingsCurves;
 };
 
 #endif // DOCUMENT_H

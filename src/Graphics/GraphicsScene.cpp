@@ -189,7 +189,7 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 
   CallbackSceneUpdateAfterCommand ftor (pointIdentifierToGraphicsItem,
                                         *this,
-                                        cmdMediator.settingsCurves ());
+                                        cmdMediator.document ());
 
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                     &CallbackSceneUpdateAfterCommand::callback);

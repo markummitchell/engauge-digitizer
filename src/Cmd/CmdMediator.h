@@ -5,7 +5,6 @@
 #include "Document.h"
 #include "PointStyle.h"
 #include <QUndoStack>
-#include "SettingsCurves.h"
 
 class QImage;
 class Transformation;
@@ -28,6 +27,9 @@ public:
 
   /// See Document::coordsType
   CoordsType coordsType () const;
+
+  /// See Document::curveAxes
+  const Curve &curveAxes () const;
 
   /// See CurvesGraphs::curvesGraphsNames.
   QStringList curvesGraphsNames () const;
@@ -55,9 +57,6 @@ public:
 
   /// See Document::reasonForUnsuccessfulRead.
   QString reasonForUnsuccessfulRead () const;
-
-  /// See Document::settingsCurves.
-  SettingsCurves settingsCurves () const;
 
   /// Wrapper for Document::successfulRead
   bool successfulRead () const;
