@@ -1,6 +1,7 @@
 #ifndef DLG_SETTINGS_CURVE_PROPERTIES_H
 #define DLG_SETTINGS_CURVE_PROPERTIES_H
 
+#include "DlgModelCurveProperties.h"
 #include "DlgSettingsAbstractBase.h"
 
 class ViewPreview;
@@ -57,6 +58,8 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+
+  DlgModelCurveProperties *m_modelCurveProperties;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H

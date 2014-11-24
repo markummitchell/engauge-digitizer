@@ -40,6 +40,9 @@ public:
   /// Provide the Document to commands, primarily for undo/redo processing.
   Document &document();
 
+  /// Provide the Document to commands with read-only access, primarily for undo/redo processing.
+  const Document &document () const;
+
   /// See Document::isModified.
   bool isModified () const;
 

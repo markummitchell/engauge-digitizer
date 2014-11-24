@@ -49,8 +49,9 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgEditPoint.h \
-    Dlg/DlgModelCurveEntry.h \
+    Dlg/DlgModelCurveProperties.h \
     Dlg/DlgModelCurves.h \
+    Dlg/DlgModelCurvesEntry.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
@@ -130,8 +131,9 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgEditPoint.cpp \
-    Dlg/DlgModelCurveEntry.cpp \
+    Dlg/DlgModelCurveProperties.cpp \
     Dlg/DlgModelCurves.cpp \
+    Dlg/DlgModelCurvesEntry.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \

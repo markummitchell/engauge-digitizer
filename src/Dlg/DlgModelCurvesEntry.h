@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_CURVE_ENTRY_H
-#define DLG_MODEL_CURVE_ENTRY_H
+#ifndef DLG_MODEL_CURVES_ENTRY_H
+#define DLG_MODEL_CURVES_ENTRY_H
 
 #include <QString>
 
@@ -12,18 +12,18 @@ const int COL_NUM_POINTS = 2;
 /// was chosen.
 ///
 /// Each entry has the current curve name, original curve name and point count, separated by a delimiter.
-class DlgModelCurveEntry
+class DlgModelCurvesEntry
 {
  public:
   /// Constructor for empty entry.
-  DlgModelCurveEntry ();
+  DlgModelCurvesEntry ();
 
   /// Constructor for converting to QVariant.
-  DlgModelCurveEntry (const QString &curveNameCurrent,
-                      const QString &curveNameOriginal,
-                      int numPoints);
+  DlgModelCurvesEntry (const QString &curveNameCurrent,
+                       const QString &curveNameOriginal,
+                       int numPoints);
   /// Constructor for converting from QVariant.
-  DlgModelCurveEntry (const QString &fromText);
+  DlgModelCurvesEntry (const QString &fromText);
 
   /// Curve name displayed in DlgSettingsCurves.
   QString curveNameCurrent () const;
@@ -53,4 +53,4 @@ private:
   int m_numPoints;
 };
 
-#endif // DLG_MODEL_CURVE_ENTRY_H
+#endif // DLG_MODEL_CURVES_ENTRY_H

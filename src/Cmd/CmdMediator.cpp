@@ -47,6 +47,11 @@ Document &CmdMediator::document()
   return m_document;
 }
 
+const Document &CmdMediator::document() const
+{
+  return m_document;
+}
+
 bool CmdMediator::isModified () const
 {
   return m_document.isModified ();

@@ -14,7 +14,8 @@
 #include "ViewPreview.h"
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curve Properties", mainWindow)
+  DlgSettingsAbstractBase ("Curve Properties", mainWindow),
+  m_modelCurveProperties (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -178,8 +179,10 @@ void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
 
+  Q_ASSERT (m_modelCurveProperties != 0);
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
-                                                                    cmdMediator ().document());
+                                                                    cmdMediator ().document(),
+                                                                    *m_modelCurveProperties);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -201,6 +204,8 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
     QString curveName = *itr;
     m_cmbCurveName->addItem (curveName);
   }
+
+  m_modelCurveProperties = new DlgModelCurveProperties (cmdMediator);
 }
 
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)

@@ -1,11 +1,11 @@
 #ifndef DLG_MODEL_CURVES_H
 #define DLG_MODEL_CURVES_H
 
-#include "DlgModelCurveEntry.h"
+#include "DlgModelCurvesEntry.h"
 #include <QAbstractTableModel>
 #include <QStringList>
 
-/// Model for QListView in DlgSettingsCurves. First column is visible with current curve name.
+/// Model for DlgSettingsCurves and CmdSettingsCurves. This is displayed as a QListView, with visible first column showing current curve name.
 /// Second column is hidden with curve name at the start of editing, or empty if none.
 class DlgModelCurves : public QAbstractTableModel
 {
@@ -44,8 +44,8 @@ public:
 
 private:
 
-  /// Store entries as QStrings for easy translation into QVariants. Use DlgModelCurveEntry to translate
-  QStringList m_modelCurveEntries;
+  /// Store entries as QStrings for easy translation into QVariants. Use DlgModelCurvesEntry to translate
+  QStringList m_modelCurvesEntries;
 };
 
 #endif // DLG_MODEL_CURVES_H

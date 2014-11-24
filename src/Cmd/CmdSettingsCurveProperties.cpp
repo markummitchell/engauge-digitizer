@@ -4,10 +4,12 @@
 #include "MainWindow.h"
 
 CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
-                                                       Document &document) :
+                                                       Document &document,
+                                                       DlgModelCurveProperties &modelCurveProperties) :
   CmdAbstract(mainWindow,
               document,
-              "Curve Properties settings")
+              "Curve Properties settings"),
+  m_modelCurveProperties (modelCurveProperties)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::CmdSettingsCurveProperties";
 }

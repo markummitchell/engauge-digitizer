@@ -143,14 +143,14 @@ void DlgSettingsCurves::insertCurveName (int row,
 
     LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
-    DlgModelCurveEntry curveEntry (curveNameNew,
-                                   curveNameOriginal,
-                                   numPoints);
+    DlgModelCurvesEntry curvesEntry (curveNameNew,
+                                     curveNameOriginal,
+                                     numPoints);
 
     m_modelCurves->setData (m_modelCurves->index (row, 0),
-                            curveEntry.curveNameCurrent ());
+                            curvesEntry.curveNameCurrent ());
     m_modelCurves->setData (m_modelCurves->index (row, 1),
-                            curveEntry.curveNameOriginal ());
+                            curvesEntry.curveNameOriginal ());
     m_modelCurves->setData (m_modelCurves->index (row, 2),
                             numPoints);
 

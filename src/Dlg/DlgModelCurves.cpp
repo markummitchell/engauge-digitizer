@@ -1,4 +1,4 @@
-#include "DlgModelCurveEntry.h"
+#include "DlgModelCurvesEntry.h"
 #include "DlgModelCurves.h"
 #include "Logger.h"
 #include "QtToString.h"
@@ -16,10 +16,10 @@ int DlgModelCurves::columnCount (const QModelIndex & /* parent */) const
 bool DlgModelCurves::containsCurveNameCurrent (const QString &curveName) const
 {
   QStringList::const_iterator itr;
-  for (itr = m_modelCurveEntries.begin (); itr != m_modelCurveEntries.end (); itr++) {
+  for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
 
-    DlgModelCurveEntry curveEntry (*itr);
-    if (curveName == curveEntry.curveNameCurrent()) {
+    DlgModelCurvesEntry curvesEntry (*itr);
+    if (curveName == curvesEntry.curveNameCurrent()) {
 
       return true;
     }
@@ -41,7 +41,7 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
   }
 
   int row = index.row ();
-  if (row < 0 || row >= m_modelCurveEntries.count ()) {
+  if (row < 0 || row >= m_modelCurvesEntries.count ()) {
     return QVariant();
   }
 
@@ -50,14 +50,14 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
     return QVariant();
   }
 
-  DlgModelCurveEntry curveEntry (m_modelCurveEntries.at (row));
+  DlgModelCurvesEntry curvesEntry (m_modelCurvesEntries.at (row));
 
   if (index.column () == 0) {
-    return curveEntry.curveNameCurrent();
+    return curvesEntry.curveNameCurrent();
   } else if (index.column () == 1) {
-    return curveEntry.curveNameOriginal();
+    return curvesEntry.curveNameOriginal();
   } else if (index.column () == 2) {
-    return curveEntry.numPoints ();
+    return curvesEntry.numPoints ();
   } else {
     Q_ASSERT (false);
   }
@@ -109,10 +109,10 @@ bool DlgModelCurves::insertRows (int row,
                    row,
                    row + count - 1);
 
-  DlgModelCurveEntry emptyCurveEntry;
+  DlgModelCurvesEntry emptyCurvesEntry;
 
-  m_modelCurveEntries.insert (row,
-                              emptyCurveEntry.toString ());
+  m_modelCurvesEntries.insert (row,
+                              emptyCurvesEntry.toString ());
 
   endInsertRows ();
 
@@ -137,7 +137,7 @@ bool DlgModelCurves::removeRows (int row,
                    row,
                    row + count - 1);
 
-  m_modelCurveEntries.removeAt (row);
+  m_modelCurvesEntries.removeAt (row);
 
   endRemoveRows ();
 
@@ -146,7 +146,7 @@ bool DlgModelCurves::removeRows (int row,
 
 int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
 {
-  int count = m_modelCurveEntries.count ();
+  int count = m_modelCurvesEntries.count ();
 
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::rowCount count=" << count;
 
@@ -165,29 +165,29 @@ bool DlgModelCurves::setData (const QModelIndex &index,
   bool success = false;
 
   int row = index.row ();
-  if (row < m_modelCurveEntries.count ()) {
+  if (row < m_modelCurvesEntries.count ()) {
 
     if (!value.isValid () && (role == Qt::EditRole)) {
 
       // Remove the entry
-      m_modelCurveEntries.removeAt (row);
+      m_modelCurvesEntries.removeAt (row);
 
     } else {
 
       // Modify the entry
-      DlgModelCurveEntry curveEntry (m_modelCurveEntries [row]); // Retrieve entry
+      DlgModelCurvesEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
 
       if (index.column () == 0) {
-        curveEntry.setCurveNameCurrent (value.toString ());
+        curvesEntry.setCurveNameCurrent (value.toString ());
       } else if (index.column () == 1) {
-        curveEntry.setCurveNameOriginal (value.toString ());
+        curvesEntry.setCurveNameOriginal (value.toString ());
       } else if (index.column () == 2) {
-        curveEntry.setNumPoints (value.toInt ());
+        curvesEntry.setNumPoints (value.toInt ());
       } else {
         Q_ASSERT (false);
       }
 
-      m_modelCurveEntries [row] = curveEntry.toString (); // Save update entry
+      m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
     }
 
     emit dataChanged (index,
