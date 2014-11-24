@@ -76,7 +76,7 @@ public:
   /// Get method for axis curve.
   const Curve &curveAxes () const;
 
-  /// See CurvesGraphs::curveForCurveNames.
+  /// See CurvesGraphs::curveForCurveNames, although this also works for AXIS_CURVE_NAME.
   const Curve *curveForCurveName (const QString &curveName) const;
 
   /// Make all Curves available, read only, for CmdAbstract classes only.

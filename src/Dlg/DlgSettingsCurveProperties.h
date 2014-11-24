@@ -29,9 +29,7 @@ private slots:
   void slotLineColor(const QString &);
   void slotLineSize(const QString &);
   void slotLineType(const QString &);
-  void slotPointLineColor(const QString &);
-  void slotPointLineSize(const QString &);
-  void slotPointInteriorColor(const QString &);
+  void slotPointColor(const QString &);
   void slotPointShape(const QString &);
   void slotPointSize(const QString &);
 
@@ -50,9 +48,7 @@ private:
   QGroupBox *m_groupPoint;
   QComboBox *m_cmbPointShape;
   QComboBox *m_cmbPointSize;
-  QComboBox *m_cmbPointLineSize;
-  QComboBox *m_cmbPointLineColor;
-  QComboBox *m_cmbPointInteriorColor;
+  QComboBox *m_cmbPointColor;
 
   QGroupBox *m_groupLine;
   QComboBox *m_cmbLineSize;

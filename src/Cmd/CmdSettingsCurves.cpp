@@ -36,6 +36,7 @@ CmdSettingsCurves::CmdSettingsCurves(MainWindow &mainWindow,
 
       // There was no original Curve
       Curve curveCurrent (curveNameCurrent,
+                          LineStyle::defaultAxesCurve (),
                           PointStyle::defaultGraphCurve(m_curvesGraphsAfter.numCurves()));
 
       m_curvesGraphsAfter.addGraphCurveAtEnd (curveCurrent); // Save Curve

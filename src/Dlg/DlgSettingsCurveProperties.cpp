@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCurveProperties.h"
+#include "ColorPalette.h"
 #include "DlgSettingsCurveProperties.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -53,6 +54,16 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
 
   m_cmbLineColor = new QComboBox (m_groupLine);
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn between points"));
+  m_cmbLineColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbLineColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbLineColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbLineColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbLineColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbLineColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbLineColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  m_cmbLineColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layoutGroup->addWidget (m_cmbLineColor, 1, 1);
 
@@ -86,6 +97,12 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
 
   m_cmbPointShape = new QComboBox (m_groupPoint);
   m_cmbPointShape->setWhatsThis (tr ("Select a shape for the points"));
+  m_cmbPointShape->addItem ("Circle", POINT_SHAPE_CIRCLE);
+  m_cmbPointShape->addItem ("Cross", POINT_SHAPE_CROSS);
+  m_cmbPointShape->addItem ("Diamond", POINT_SHAPE_DIAMOND);
+  m_cmbPointShape->addItem ("Square", POINT_SHAPE_SQUARE);
+  m_cmbPointShape->addItem ("Triangle", POINT_SHAPE_TRIANGLE);
+  m_cmbPointShape->addItem ("X", POINT_SHAPE_X);
   connect (m_cmbPointShape, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointShape (const QString &)));
   layoutGroup->addWidget (m_cmbPointShape, 0, 1);
 
@@ -97,29 +114,22 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   connect (m_cmbPointSize, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointSize (const QString &)));
   layoutGroup->addWidget (m_cmbPointSize, 1, 1);
 
-  QLabel *labelPointLineSize = new QLabel ("Line Size:");
-  layoutGroup->addWidget (labelPointLineSize, 2, 0);
+  QLabel *labelPointColor = new QLabel ("Color:");
+  layoutGroup->addWidget (labelPointColor, 2, 0);
 
-  m_cmbPointLineSize = new QComboBox (m_groupPoint);
-  m_cmbPointLineSize->setWhatsThis (tr ("Select a size for the line used to draw the point shapes"));
-  connect (m_cmbPointLineSize, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointLineSize (const QString &)));
-  layoutGroup->addWidget (m_cmbPointLineSize, 2, 1);
-
-  QLabel *labelPointLineColor = new QLabel ("Line Color:");
-  layoutGroup->addWidget (labelPointLineColor, 3, 0);
-
-  m_cmbPointLineColor = new QComboBox (m_groupPoint);
-  m_cmbPointLineColor->setWhatsThis (tr ("Select a color for the line used to draw the point shapes"));
-  connect (m_cmbPointLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointLineColor (const QString &)));
-  layoutGroup->addWidget (m_cmbPointLineColor, 3, 1);
-
-  QLabel *labelPointInteriorColor = new QLabel ("Interior Color:");
-  layoutGroup->addWidget (labelPointInteriorColor, 4, 0);
-
-  m_cmbPointInteriorColor = new QComboBox (m_groupPoint);
-  m_cmbPointInteriorColor->setWhatsThis (tr ("Select a color for the interior of the point shapes"));
-  connect (m_cmbPointInteriorColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointInteriorColor (const QString &)));
-  layoutGroup->addWidget (m_cmbPointInteriorColor, 4, 1);
+  m_cmbPointColor = new QComboBox (m_groupPoint);
+  m_cmbPointColor->setWhatsThis (tr ("Select a color for the line used to draw the point shapes"));
+  m_cmbPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointLineColor (const QString &)));
+  layoutGroup->addWidget (m_cmbPointColor, 2, 1);
 }
 
 void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
@@ -183,6 +193,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   // Load curve name combobox
   m_cmbCurveName->clear ();
+  m_cmbCurveName->addItem (AXIS_CURVE_NAME);
   QStringList curveNames = cmdMediator.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = curveNames.begin (); itr != curveNames.end (); itr++) {
@@ -202,6 +213,16 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
     const Curve *curve = ((const Document&) cmdMediator().document ()).curveForCurveName(curveName);
     Q_ASSERT (curve != 0);
     PointStyle pointStyle = curve->pointStyle();
+    LineStyle lineStyle = curve->lineStyle ();
+
+    int indexPointShape = m_cmbPointShape->findData (QVariant (pointStyle.pointShape ()));
+    m_cmbPointShape->setCurrentIndex (indexPointShape);
+
+    int indexPointColor = m_cmbPointColor->findData (QVariant (pointStyle.paletteColor()));
+    m_cmbPointColor->setCurrentIndex (indexPointColor);
+
+    int indexLineColor = m_cmbLineColor->findData (QVariant (lineStyle.paletteColor()));
+    m_cmbLineColor->setCurrentIndex (indexLineColor);
   }
 }
 
@@ -231,23 +252,9 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
   enableOk (true);
 }
 
-void DlgSettingsCurveProperties::slotPointLineColor(const QString &)
+void DlgSettingsCurveProperties::slotPointColor(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineColor";
-
-  enableOk (true);
-}
-
-void DlgSettingsCurveProperties::slotPointLineSize(const QString &)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineSize";
-
-  enableOk (true);
-}
-
-void DlgSettingsCurveProperties::slotPointInteriorColor(const QString &)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointInteriorColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor";
 
   enableOk (true);
 }

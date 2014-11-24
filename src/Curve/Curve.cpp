@@ -10,23 +10,27 @@ const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
 
 Curve::Curve(const QString &curveName,
+             const LineStyle &lineStyle,
              const PointStyle &pointStyle) :
   m_curveName (curveName),
+  m_lineStyle (lineStyle),
   m_pointStyle (pointStyle)
 {
 }
 
-Curve::Curve (const Curve &curve)
+Curve::Curve (const Curve &curve) :
+  m_curveName (curve.curveName ()),
+  m_points (curve.points ()),
+  m_lineStyle (curve.lineStyle ()),
+  m_pointStyle (curve.pointStyle ())
 {
-  m_curveName = curve.curveName ();
-  m_points = curve.points ();
-  m_pointStyle = curve.pointStyle ();
 }
 
 Curve &Curve::operator=(const Curve &curve)
 {
   m_curveName = curve.curveName ();
   m_points = curve.points ();
+  m_lineStyle = curve.lineStyle ();
   m_pointStyle = curve.pointStyle ();
 
   return *this;
@@ -100,6 +104,7 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
       // Check if this curve already exists from a previously exported point
       if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
         Curve curve(m_curveName,
+                    LineStyle::defaultAxesCurve (),
                     PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
         curvesGraphs.addGraphCurveAtEnd(curve);
       }
@@ -137,6 +142,11 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
       break;
     }
   }
+}
+
+LineStyle Curve::lineStyle () const
+{
+  return m_lineStyle;
 }
 
 void Curve::movePoint (const QString &pointIdentifier,

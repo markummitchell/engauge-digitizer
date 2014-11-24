@@ -16,6 +16,7 @@ Document::Document (const QImage &image) :
   m_name ("untitled"),
   m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          LineStyle::defaultAxesCurve(),
                           PointStyle::defaultAxesCurve ())),
   m_coordsType (COORDS_TYPE_CARTESIAN)
 {
@@ -24,6 +25,7 @@ Document::Document (const QImage &image) :
   m_pixmap.convertFromImage (image);
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
                                             PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ())));
 }
 
@@ -31,6 +33,7 @@ Document::Document (const QString &fileName) :
   m_name (fileName),
   m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          LineStyle::defaultAxesCurve(),
                           PointStyle::defaultAxesCurve()))
 {
   m_successfulRead = true;
@@ -47,12 +50,14 @@ Document::Document (const QString &fileName) :
   }
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                             PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
   m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
+                                             LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                              PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
 
