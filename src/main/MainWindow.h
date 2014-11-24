@@ -64,6 +64,9 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
+  /// Update with new curve properties.
+  void updateCurveProperties();
+
   /// View for the QImage and QGraphicsItems, without const.
   GraphicsView &view ();
 

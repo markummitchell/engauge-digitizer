@@ -1810,6 +1810,13 @@ void MainWindow::updateControls ()
   m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
+void MainWindow::updateCurveProperties()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCurveProperties";
+
+  // shit is this method needed?
+}
+
 void MainWindow::updateViewedPoints ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedPoints";
