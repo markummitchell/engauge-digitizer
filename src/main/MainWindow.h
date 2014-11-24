@@ -7,6 +7,7 @@
 
 class CmdMediator;
 class DigitizeStateContext;
+class DlgModelCurveProperties;
 class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
@@ -65,7 +66,7 @@ public:
   void updateAfterMouseRelease();
 
   /// Update with new curve properties.
-  void updateCurveProperties();
+  void updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
 
   /// View for the QImage and QGraphicsItems, without const.
   GraphicsView &view ();

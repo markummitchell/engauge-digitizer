@@ -48,6 +48,9 @@ public:
   /// Radius of point. For a circle this is all that is needed to draw a circle. For a polygon, the radius determines the size of the polygon
   int radius () const;
 
+  /// Set method for point color.
+  void setPaletteColor (ColorPalette paletteColor);
+
 private:
 
   PointShape m_pointShape;

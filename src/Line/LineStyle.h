@@ -27,6 +27,9 @@ public:
   /// Line color.
   ColorPalette paletteColor() const;
 
+  /// Set method for line color.
+  void setPaletteColor (ColorPalette paletteColor);
+
   /// Width of line.
   unsigned int width () const;
 

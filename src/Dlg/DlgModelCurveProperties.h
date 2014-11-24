@@ -35,6 +35,14 @@ public:
   /// Get method for point styles.
   PointStyles pointStyles () const;
 
+  /// Set method for line style of one curve.
+  void setLineStyleForCurveName(const QString &curveName,
+                                const LineStyle &lineStyle);
+
+  /// Set method for point style of one curve.
+  void setPointStyleForCurveName(const QString &curveName,
+                                 const PointStyle &pointStyle);
+
 private:
   DlgModelCurveProperties();
 

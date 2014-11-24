@@ -1810,11 +1810,11 @@ void MainWindow::updateControls ()
   m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
-void MainWindow::updateCurveProperties()
+void MainWindow::updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCurveProperties";
 
-  // shit is this method needed?
+  m_scene->updateCurveProperties(modelCurveProperties);
 }
 
 void MainWindow::updateViewedPoints ()

@@ -43,6 +43,8 @@ private:
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void updateLineStyle();
+  void updatePointStyle();
 
   QComboBox *m_cmbCurveName;
 
@@ -59,7 +61,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelCurveProperties *m_modelCurveProperties;
+  DlgModelCurveProperties *m_modelCurvePropertiesBefore;
+  DlgModelCurveProperties *m_modelCurvePropertiesAfter;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H

@@ -9,6 +9,7 @@
 class CmdMediator;
 class Curve;
 class CurvesGraphs;
+class DlgModelCurveProperties;
 class MainWindow;
 class PointStyle;
 class QGraphicsItem;
@@ -49,6 +50,8 @@ public:
 
   /// Update the Curves and their Points after executing a command.
   void updateAfterCommand (CmdMediator &cmdMediator);
+
+  void updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
 
 private:
   const QGraphicsPixmapItem *image () const;

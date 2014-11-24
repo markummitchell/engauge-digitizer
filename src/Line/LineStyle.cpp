@@ -23,7 +23,7 @@ QColor LineStyle::color () const
 LineStyle LineStyle::defaultAxesCurve ()
 {
   return LineStyle (DEFAULT_LINE_WIDTH,
-                    COLOR_PALETTE_RED); // Same default color as used for PointStyle axes curve default
+                    COLOR_PALETTE_TRANSPARENT); // Same default color as used for PointStyle axes curve default
 }
 
 LineStyle LineStyle::defaultGraphCurve (int /* index */)
@@ -35,6 +35,11 @@ LineStyle LineStyle::defaultGraphCurve (int /* index */)
 ColorPalette LineStyle::paletteColor() const
 {
   return m_paletteColor;
+}
+
+void LineStyle::setPaletteColor (ColorPalette paletteColor)
+{
+  m_paletteColor = paletteColor;
 }
 
 unsigned int LineStyle::width () const

@@ -15,7 +15,8 @@
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Curve Properties", mainWindow),
-  m_modelCurveProperties (0)
+  m_modelCurvePropertiesBefore (0),
+  m_modelCurvePropertiesAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -179,10 +180,13 @@ void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
 
-  Q_ASSERT (m_modelCurveProperties != 0);
+  Q_ASSERT (m_modelCurvePropertiesBefore != 0);
+  Q_ASSERT (m_modelCurvePropertiesAfter != 0);
+
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
                                                                     cmdMediator ().document(),
-                                                                    *m_modelCurveProperties);
+                                                                    *m_modelCurvePropertiesBefore,
+                                                                    *m_modelCurvePropertiesAfter);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -205,7 +209,8 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
     m_cmbCurveName->addItem (curveName);
   }
 
-  m_modelCurveProperties = new DlgModelCurveProperties (cmdMediator);
+  m_modelCurvePropertiesBefore = new DlgModelCurveProperties (cmdMediator);
+  m_modelCurvePropertiesAfter = new DlgModelCurveProperties (cmdMediator);
 }
 
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
@@ -213,10 +218,10 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
 
   // Do nothing if combobox is getting cleared, or load has not been called yet
-  if (!curveName.isEmpty () && (m_modelCurveProperties != 0)) {
+  if (!curveName.isEmpty () && (m_modelCurvePropertiesAfter != 0)) {
 
-    LineStyle lineStyle = m_modelCurveProperties->lineStyleForCurveName (curveName);
-    PointStyle pointStyle = m_modelCurveProperties->pointStyleForCurveName (curveName);
+    LineStyle lineStyle = m_modelCurvePropertiesAfter->lineStyleForCurveName (curveName);
+    PointStyle pointStyle = m_modelCurvePropertiesAfter->pointStyleForCurveName (curveName);
 
     int indexPointShape = m_cmbPointShape->findData (QVariant (pointStyle.pointShape ()));
     m_cmbPointShape->setCurrentIndex (indexPointShape);
@@ -238,6 +243,7 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
 
+  updateLineStyle ();
   enableOk (true);
 }
 
@@ -245,6 +251,7 @@ void DlgSettingsCurveProperties::slotLineSize(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineSize";
 
+  updateLineStyle ();
   enableOk (true);
 }
 
@@ -252,6 +259,7 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
 
+  updateLineStyle ();
   enableOk (true);
 }
 
@@ -259,6 +267,7 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor";
 
+  updatePointStyle ();
   enableOk (true);
 }
 
@@ -266,6 +275,7 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
 
+  updatePointStyle ();
   enableOk (true);
 }
 
@@ -273,5 +283,34 @@ void DlgSettingsCurveProperties::slotPointSize(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointSize";
 
+  updatePointStyle ();
   enableOk (true);
+}
+
+void DlgSettingsCurveProperties::updateLineStyle ()
+{
+  QString curveName = m_cmbCurveName->currentText ();
+
+  // Get values needing update
+  LineStyle lineStyle = m_modelCurvePropertiesAfter->lineStyleForCurveName(curveName);
+
+  // Apply updates
+  lineStyle.setPaletteColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+
+  // Save updates
+  m_modelCurvePropertiesAfter->setLineStyleForCurveName (curveName, lineStyle);
+}
+
+void DlgSettingsCurveProperties::updatePointStyle ()
+{
+  QString curveName = m_cmbCurveName->currentText ();
+
+  // Get values needing update
+  PointStyle pointStyle = m_modelCurvePropertiesAfter->pointStyleForCurveName(curveName);
+
+  // Apply updates
+  pointStyle.setPaletteColor ((ColorPalette) m_cmbPointColor->currentData().toInt ());
+
+  // Save  updates
+  m_modelCurvePropertiesAfter->setPointStyleForCurveName (curveName, pointStyle);
 }

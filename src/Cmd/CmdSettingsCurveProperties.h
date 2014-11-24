@@ -15,7 +15,8 @@ public:
   /// Single constructor.
   CmdSettingsCurveProperties(MainWindow &mainWindow,
                              Document &document,
-                             DlgModelCurveProperties &modelCurveProperties);
+                             const DlgModelCurveProperties &modelCurvePropertiesBefore,
+                             const DlgModelCurveProperties &modelCurvePropertiesAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -23,7 +24,8 @@ public:
 private:
   CmdSettingsCurveProperties();
 
-  DlgModelCurveProperties m_modelCurveProperties;
+  DlgModelCurveProperties m_modelCurvePropertiesBefore;
+  DlgModelCurveProperties m_modelCurvePropertiesAfter;
 };
 
 #endif // CMD_SETTINGS_CURVE_PROPERTIES_H

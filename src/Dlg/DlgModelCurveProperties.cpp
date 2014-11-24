@@ -53,3 +53,15 @@ PointStyles DlgModelCurveProperties::pointStyles () const
 {
   return m_pointStyles;
 }
+
+void DlgModelCurveProperties::setLineStyleForCurveName(const QString &curveName,
+                                                       const LineStyle &lineStyle)
+{
+  m_lineStyles [curveName] = lineStyle;
+}
+
+void DlgModelCurveProperties::setPointStyleForCurveName(const QString &curveName,
+                                                        const PointStyle &pointStyle)
+{
+  m_pointStyles [curveName] = pointStyle;
+}

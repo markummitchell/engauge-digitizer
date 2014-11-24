@@ -207,3 +207,8 @@ int PointStyle::radius () const
 {
   return m_radius;
 }
+
+void PointStyle::setPaletteColor (ColorPalette paletteColor)
+{
+  m_paletteColor = paletteColor;
+}
