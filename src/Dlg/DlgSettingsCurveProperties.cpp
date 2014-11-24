@@ -212,13 +212,11 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
 
-  // Do nothing if combobox is getting cleared
-  if (!curveName.isEmpty ()) {
+  // Do nothing if combobox is getting cleared, or load has not been called yet
+  if (!curveName.isEmpty () && (m_modelCurveProperties != 0)) {
 
-    const Curve *curve = ((const Document&) cmdMediator().document ()).curveForCurveName(curveName);
-    Q_ASSERT (curve != 0);
-    PointStyle pointStyle = curve->pointStyle();
-    LineStyle lineStyle = curve->lineStyle ();
+    LineStyle lineStyle = m_modelCurveProperties->lineStyleForCurveName (curveName);
+    PointStyle pointStyle = m_modelCurveProperties->pointStyleForCurveName (curveName);
 
     int indexPointShape = m_cmbPointShape->findData (QVariant (pointStyle.pointShape ()));
     m_cmbPointShape->setCurrentIndex (indexPointShape);

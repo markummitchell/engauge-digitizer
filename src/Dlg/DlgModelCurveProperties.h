@@ -23,8 +23,14 @@ public:
   /// Assignment constructor.
   DlgModelCurveProperties &operator=(const DlgModelCurveProperties &other);
 
+  /// Line style for specified curve.
+  LineStyle lineStyleForCurveName (const QString &curveName) const;
+
   /// Get method for line styles.
   LineStyles lineStyles () const;
+
+  /// Point style for specified curve.
+  PointStyle pointStyleForCurveName (const QString &curveName) const;
 
   /// Get method for point styles.
   PointStyles pointStyles () const;

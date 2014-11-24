@@ -32,9 +32,21 @@ DlgModelCurveProperties &DlgModelCurveProperties::operator=(const DlgModelCurveP
   return *this;
 }
 
+LineStyle DlgModelCurveProperties::lineStyleForCurveName (const QString &curveName) const
+{
+  Q_ASSERT (m_lineStyles.contains (curveName));
+  return m_lineStyles [curveName];
+}
+
 LineStyles DlgModelCurveProperties::lineStyles () const
 {
   return m_lineStyles;
+}
+
+PointStyle DlgModelCurveProperties::pointStyleForCurveName (const QString &curveName) const
+{
+  Q_ASSERT (m_pointStyles.contains (curveName));
+  return m_pointStyles [curveName];
 }
 
 PointStyles DlgModelCurveProperties::pointStyles () const
