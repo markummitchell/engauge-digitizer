@@ -9,6 +9,7 @@ class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
 class QGroupBox;
+class QSpinBox;
 
 /// Stacked widget page for editing curve properties settings.
 class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
@@ -28,11 +29,11 @@ public:
 private slots:
   void slotCurveName(const QString &);
   void slotLineColor(const QString &);
-  void slotLineSize(const QString &);
+  void slotLineSize(int);
   void slotLineType(const QString &);
   void slotPointColor(const QString &);
   void slotPointShape(const QString &);
-  void slotPointSize(const QString &);
+  void slotPointSize(int);
 
 protected:
   virtual void handleOk ();
@@ -50,11 +51,11 @@ private:
 
   QGroupBox *m_groupPoint;
   QComboBox *m_cmbPointShape;
-  QComboBox *m_cmbPointSize;
+  QSpinBox *m_spinPointSize;
   QComboBox *m_cmbPointColor;
 
   QGroupBox *m_groupLine;
-  QComboBox *m_cmbLineSize;
+  QSpinBox *m_spinLineSize;
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbLineType;
 

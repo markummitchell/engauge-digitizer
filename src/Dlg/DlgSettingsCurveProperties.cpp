@@ -5,13 +5,18 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
+#include <QDebug>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QListWidget>
 #include <QPushButton>
+#include <QSpinBox>
 #include "ViewPreview.h"
+
+const QString CONNECT_AS_FUNCTION_STR ("Function");
+const QString CONNECT_AS_RELATION_STR ("Relation");
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Curve Properties", mainWindow),
@@ -35,7 +40,7 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
 }
 
 void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
-                                                 int &row)
+                                             int &row)
 {
   m_groupLine = new QGroupBox ("Line");
   layout->addWidget (m_groupLine, row++, 2);
@@ -46,10 +51,11 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   QLabel *labelLineSize = new QLabel ("Size:");
   layoutGroup->addWidget (labelLineSize, 0, 0);
 
-  m_cmbLineSize = new QComboBox (m_groupLine);
-  m_cmbLineSize->setWhatsThis (tr ("Select a size for the lines drawn between points"));
-  connect (m_cmbLineSize, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineSize (const QString &)));
-  layoutGroup->addWidget (m_cmbLineSize, 0, 1);
+  m_spinLineSize = new QSpinBox (m_groupLine);
+  m_spinLineSize->setWhatsThis (tr ("Select a size for the lines drawn between points"));
+  m_spinLineSize->setMinimum(1);
+  connect (m_spinLineSize, SIGNAL (valueChanged (int)), this, SLOT (slotLineSize (int)));
+  layoutGroup->addWidget (m_spinLineSize, 0, 1);
 
   QLabel *labelLineColor = new QLabel ("Color:");
   layoutGroup->addWidget (labelLineColor, 1, 0);
@@ -73,6 +79,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   layoutGroup->addWidget (labelLineType, 2, 0);
 
   m_cmbLineType = new QComboBox (m_groupLine);
+  m_cmbLineType->addItem (CONNECT_AS_FUNCTION_STR, QVariant (CONNECT_AS_FUNCTION));
+  m_cmbLineType->addItem (CONNECT_AS_RELATION_STR, QVariant (CONNECT_AS_RELATION));
   m_cmbLineType->setWhatsThis (tr ("Select rule for connecting points with lines.\n\n"
                                    "If the curve is connected as a single-valued function then the points are ordered by "
                                    "increasing value of the independent variable.\n\n"
@@ -111,10 +119,11 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   QLabel *labelPointSize = new QLabel ("Size:");
   layoutGroup->addWidget (labelPointSize, 1, 0);
 
-  m_cmbPointSize = new QComboBox (m_groupPoint);
-  m_cmbPointSize->setWhatsThis (tr ("Select an overall size for the points"));
-  connect (m_cmbPointSize, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointSize (const QString &)));
-  layoutGroup->addWidget (m_cmbPointSize, 1, 1);
+  m_spinPointSize = new QSpinBox (m_groupPoint);
+  m_spinPointSize->setWhatsThis (tr ("Select an overall size for the points"));
+  m_spinPointSize->setMinimum (1);
+  connect (m_spinPointSize, SIGNAL (valueChanged (int)), this, SLOT (slotPointSize (int)));
+  layoutGroup->addWidget (m_spinPointSize, 1, 1);
 
   QLabel *labelPointColor = new QLabel ("Color:");
   layoutGroup->addWidget (labelPointColor, 2, 0);
@@ -130,7 +139,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   m_cmbPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
   m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
   m_cmbPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointLineColor (const QString &)));
+  connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointColor (const QString &)));
   layoutGroup->addWidget (m_cmbPointColor, 2, 1);
 }
 
@@ -198,7 +207,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  // Load curve name combobox
+  // Load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();
   m_cmbCurveName->addItem (AXIS_CURVE_NAME);
   QStringList curveNames = cmdMediator.curvesGraphsNames();
@@ -226,11 +235,19 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
     int indexPointShape = m_cmbPointShape->findData (QVariant (pointStyle.pointShape ()));
     m_cmbPointShape->setCurrentIndex (indexPointShape);
 
+    m_spinPointSize->setValue (pointStyle.radius ());
+
     int indexPointColor = m_cmbPointColor->findData (QVariant (pointStyle.paletteColor()));
     m_cmbPointColor->setCurrentIndex (indexPointColor);
 
     int indexLineColor = m_cmbLineColor->findData (QVariant (lineStyle.paletteColor()));
     m_cmbLineColor->setCurrentIndex (indexLineColor);
+
+    m_spinLineSize->setValue (lineStyle.width ());
+
+    int indexCurveConnectAs = m_cmbLineType->findData (QVariant (lineStyle.curveConnectAs ()));
+    Q_ASSERT (indexCurveConnectAs >= 0);
+    m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
   }
 }
 
@@ -247,7 +264,7 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &)
   enableOk (true);
 }
 
-void DlgSettingsCurveProperties::slotLineSize(const QString &)
+void DlgSettingsCurveProperties::slotLineSize(int)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineSize";
 
@@ -279,7 +296,7 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
   enableOk (true);
 }
 
-void DlgSettingsCurveProperties::slotPointSize(const QString &)
+void DlgSettingsCurveProperties::slotPointSize(int)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointSize";
 
@@ -296,6 +313,8 @@ void DlgSettingsCurveProperties::updateLineStyle ()
 
   // Apply updates
   lineStyle.setPaletteColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+  lineStyle.setWidth (m_spinLineSize->value());
+  lineStyle.setCurveConnectAs ((CurveConnectAs) m_cmbLineType->currentData ().toInt ());
 
   // Save updates
   m_modelCurvePropertiesAfter->setLineStyleForCurveName (curveName, lineStyle);
@@ -310,6 +329,7 @@ void DlgSettingsCurveProperties::updatePointStyle ()
 
   // Apply updates
   pointStyle.setPaletteColor ((ColorPalette) m_cmbPointColor->currentData().toInt ());
+  pointStyle.setRadius (m_spinPointSize->value ());
 
   // Save  updates
   m_modelCurvePropertiesAfter->setPointStyleForCurveName (curveName, pointStyle);

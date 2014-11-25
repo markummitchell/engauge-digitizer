@@ -212,3 +212,8 @@ void PointStyle::setPaletteColor (ColorPalette paletteColor)
 {
   m_paletteColor = paletteColor;
 }
+
+void PointStyle::setRadius (int radius)
+{
+  m_radius = radius;
+}

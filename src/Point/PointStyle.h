@@ -51,6 +51,9 @@ public:
   /// Set method for point color.
   void setPaletteColor (ColorPalette paletteColor);
 
+  /// Set method for point radius.
+  void setRadius (int radius);
+
 private:
 
   PointShape m_pointShape;
