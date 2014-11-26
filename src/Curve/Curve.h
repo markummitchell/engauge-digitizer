@@ -57,7 +57,7 @@ public:
   /// Apply functor to Points on Curve.
   void iterateThroughCurvePoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
-  // Return the line style.
+  /// Return the line style.
   LineStyle lineStyle () const;
 
   /// Translate the position of a point by the specified distance vector.

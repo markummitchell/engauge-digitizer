@@ -85,6 +85,7 @@ HEADERS  += \
     Settings/SettingsCurve.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
+    include/ThetaUnits.h \
     Transformation/Transformation.h \
     View/ViewPreview.h \
     View/ViewProfile.h \

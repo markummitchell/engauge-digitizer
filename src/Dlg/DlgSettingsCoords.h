@@ -26,8 +26,7 @@ public:
   virtual void load (CmdMediator &cmdMediator);
 
 private slots:
-  void slotCartesian ();
-  void slotPolar ();
+  void slotCartesianPolar (bool);
   void slotPolarOriginRadius();
   void slotPolarUnits(const QString &);
   void slotXThetaLinear();

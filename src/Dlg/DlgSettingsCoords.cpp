@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
+#include <QDebug>
 #include <QDoubleValidator>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -52,14 +53,14 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
   m_btnCartesian = new QRadioButton ("Cartesian (X, Y)", m_boxCoordsType);
   m_btnCartesian->setWhatsThis (QString(tr("Select cartesian coordinates.\n\n"
                                            "The X and Y coordinates will be used")));
-  connect (m_btnCartesian, SIGNAL (pressed()), this, SLOT (slotCartesian ()));
+  connect (m_btnCartesian, SIGNAL (toggled(bool)), this, SLOT (slotCartesianPolar (bool)));
   layoutGroup->addWidget (m_btnCartesian);
 
   m_btnPolar = new QRadioButton (polarButtonText, m_boxCoordsType);
   m_btnPolar->setWhatsThis (QString(tr("Select polar coordinates.\n\n"
                                        "The Theta and R coordinates will be used.\n\n"
                                        "Polar coordinates are not allowed with log scale for Theta")));
-  connect (m_btnPolar, SIGNAL (pressed()), this, SLOT (slotPolar ()));
+  connect (m_btnPolar, SIGNAL (toggled(bool)), this, SLOT (slotCartesianPolar (bool)));
   layoutGroup->addWidget (m_btnPolar);
 }
 
@@ -76,12 +77,12 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (labelThetaUnits, 0, 0);
 
   m_cmbPolarUnits = new QComboBox;
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES);
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES);
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES_SECONDS);
-  m_cmbPolarUnits->addItem (POLAR_UNITS_GRADIANS);
-  m_cmbPolarUnits->addItem (POLAR_UNITS_RADIANS);
-  m_cmbPolarUnits->addItem (POLAR_UNITS_TURNS);
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES, QVariant (THETA_UNITS_DEGREES));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES, QVariant (THETA_UNITS_DEGREES_MINUTES));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES_SECONDS, QVariant (THETA_UNITS_DEGREES_MINUTES_SECONDS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_GRADIANS, QVariant (THETA_UNITS_GRADIANS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_RADIANS, QVariant (THETA_UNITS_RADIANS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_TURNS, QVariant (THETA_UNITS_TURNS));
   m_cmbPolarUnits->setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
                                               "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "
                                               "60 minutes per degree. During input, a space must be inserted between the two numbers.\n\n"
@@ -198,11 +199,18 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_modelCoordsBefore = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
   m_modelCoordsAfter = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
 
-  m_btnCartesian->setChecked (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN);
-  m_btnPolar->setChecked (m_modelCoordsAfter->coordsType() == COORDS_TYPE_POLAR);
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 
-  updateControls ();
+  if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_btnCartesian->setChecked (true);
+  } else {
+    m_btnPolar->setChecked (true);
+  }
+
+  int indexPolarUnits = m_cmbPolarUnits->findData (QVariant (m_modelCoordsAfter->thetaUnits()));
+  m_cmbPolarUnits->setCurrentIndex (indexPolarUnits);
+
+  updateControls (); // Probably redundant due to the setChecked just above
 }
 
 void DlgSettingsCoords::loadPixmap (const QString &image)
@@ -215,25 +223,19 @@ void DlgSettingsCoords::loadPixmap (const QString &image)
   m_scenePreview->addPixmap (pixmap);
 }
 
-void DlgSettingsCoords::slotCartesian ()
+void DlgSettingsCoords::slotCartesianPolar (bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotCartesian";
 
   enableOk (true);
 
-  m_modelCoordsAfter->setCoordsType (COORDS_TYPE_CARTESIAN);
-  loadPixmap (":/engauge/img/plot_cartesian.png");
-  updateControls();
-}
-
-void DlgSettingsCoords::slotPolar ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolar";
-
-  enableOk (true);
-
-  m_modelCoordsAfter->setCoordsType(COORDS_TYPE_POLAR);
-  loadPixmap (":/engauge/img/plot_polar.png");
+  if (m_btnCartesian->isChecked ()) {
+    m_modelCoordsAfter->setCoordsType (COORDS_TYPE_CARTESIAN);
+    loadPixmap (":/engauge/img/plot_cartesian.png");
+  } else {
+    m_modelCoordsAfter->setCoordsType(COORDS_TYPE_POLAR);
+    loadPixmap (":/engauge/img/plot_polar.png");
+  }
   updateControls();
 }
 
@@ -252,6 +254,9 @@ void DlgSettingsCoords::slotPolarUnits(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarUnits";
 
   enableOk (true);
+
+  ThetaUnits thetaUnits = (ThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
+  m_modelCoordsAfter->setThetaUnits(thetaUnits);
   updateControls ();
 }
 
@@ -260,6 +265,7 @@ void DlgSettingsCoords::slotXThetaLinear()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLinear";
 
   enableOk (true);
+  m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LINEAR);
   updateControls ();
 }
 
@@ -268,6 +274,7 @@ void DlgSettingsCoords::slotXThetaLog()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLog";
 
   enableOk (true);
+  m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LOG);
   updateControls ();
 }
 
@@ -276,6 +283,7 @@ void DlgSettingsCoords::slotYRadiusLinear()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLinear";
 
   enableOk (true);
+  m_modelCoordsAfter->setCoordScaleYRadius((COORD_SCALE_LINEAR));
   updateControls ();
 }
 
@@ -284,6 +292,7 @@ void DlgSettingsCoords::slotYRadiusLog()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLog";
 
   enableOk (true);
+  m_modelCoordsAfter->setCoordScaleYRadius(COORD_SCALE_LOG);
   updateControls ();
 }
 

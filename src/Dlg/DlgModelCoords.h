@@ -3,9 +3,11 @@
 
 #include "CoordScale.h"
 #include "CoordsType.h"
+#include "ThetaUnits.h"
 
 class CmdMediator;
 
+/// Model for DlgSettingsCoords and CmdSettingsCoords.
 class DlgModelCoords
 {
 public:
@@ -45,12 +47,19 @@ public:
   /// Set method for origin radius in polar mode.
   void setOriginRadius (double originRadius);
 
+  /// Set method for theta units.
+  void setThetaUnits (ThetaUnits thetaUnits);
+
+  /// Get method for theta units.
+  ThetaUnits thetaUnits () const;
+
 private:
 
   CoordsType m_coordsType;
-  double m_originRadius;
+  double m_originRadius; // Applies to polar coordinates. Usually zero
   CoordScale m_coordScaleXTheta;
   CoordScale m_coordScaleYRadius;
+  ThetaUnits m_thetaUnits; // Applies to polar coordinates
 };
 
 #endif // DLG_MODEL_COORDS_H
