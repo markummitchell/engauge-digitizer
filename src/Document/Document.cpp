@@ -17,8 +17,7 @@ Document::Document (const QImage &image) :
   m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           LineStyle::defaultAxesCurve(),
-                          PointStyle::defaultAxesCurve ())),
-  m_coordsType (COORDS_TYPE_CARTESIAN)
+                          PointStyle::defaultAxesCurve ()))
 {
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
@@ -179,11 +178,6 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
   errorMessage = ftor.errorMessage ();
 }
 
-CoordsType Document::coordsType () const
-{
-  return m_coordsType;
-}
-
 const Curve &Document::curveAxes () const
 {
   Q_ASSERT (m_curveAxes != 0);
@@ -230,6 +224,11 @@ QStringList Document::curvesGraphsNames() const
 int Document::curvesGraphsNumPoints(const QString &curveName) const
 {
   return m_curvesGraphs.curvesGraphsNumPoints(curveName);
+}
+
+DlgModelCoords Document::dlgModelCoords() const
+{
+  return m_dlgModelCoords;
 }
 
 void Document::editPointAxis (const QPointF &posGraph,
@@ -349,6 +348,11 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
 
   m_curvesGraphs = curvesGraphs;
+}
+
+void Document::setDlgModelCoords (const DlgModelCoords &dlgModelCoords)
+{
+  m_dlgModelCoords = dlgModelCoords;
 }
 
 bool Document::successfulRead () const

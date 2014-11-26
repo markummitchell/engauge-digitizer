@@ -33,6 +33,7 @@ HEADERS  += \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     include/ColorPalette.h \
+    include/CoordScale.h \
     include/CoordsType.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
@@ -49,6 +50,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgEditPoint.h \
+    Dlg/DlgModelCoords.h \
     Dlg/DlgModelCurveProperties.h \
     Dlg/DlgModelCurves.h \
     Dlg/DlgModelCurvesEntry.h \
@@ -131,6 +133,7 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgEditPoint.cpp \
+    Dlg/DlgModelCoords.cpp \
     Dlg/DlgModelCurveProperties.cpp \
     Dlg/DlgModelCurves.cpp \
     Dlg/DlgModelCurvesEntry.cpp \

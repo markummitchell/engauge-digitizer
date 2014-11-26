@@ -1,8 +1,8 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
-#include "CoordsType.h"
 #include "CurvesGraphs.h"
+#include "DlgModelCoords.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -70,9 +70,6 @@ public:
                            bool &isError,
                            QString &errorMessage);
 
-  /// Coordinates type for entire Document.
-  CoordsType coordsType () const;
-
   /// Get method for axis curve.
   const Curve &curveAxes () const;
 
@@ -87,6 +84,9 @@ public:
 
   /// See CurvesGraphs::curvesGraphsNumPoints.
   int curvesGraphsNumPoints (const QString &curveName) const;
+
+  /// Get method for DlgModelCoords.
+  DlgModelCoords dlgModelCoords () const;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
@@ -139,6 +139,9 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
+  /// Set method for DlgModelCoords.
+  void setDlgModelCoords (const DlgModelCoords &dlgModelCoords);
+
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
 
@@ -158,7 +161,7 @@ private:
   Curve *m_curveAxes;
   CurvesGraphs m_curvesGraphs;
 
-  CoordsType m_coordsType;
+  DlgModelCoords m_dlgModelCoords;
 };
 
 #endif // DOCUMENT_H

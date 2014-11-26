@@ -25,9 +25,6 @@ public:
   /// See CurvesGraphs::applyTransformation
   void applyTransformation (const Transformation &transformation);
 
-  /// See Document::coordsType
-  CoordsType coordsType () const;
-
   /// See Document::curveAxes
   const Curve &curveAxes () const;
 

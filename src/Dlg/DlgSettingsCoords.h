@@ -1,9 +1,9 @@
 #ifndef DLG_SETTINGS_COORDS_H
 #define DLG_SETTINGS_COORDS_H
 
-#include "CoordsType.h"
 #include "DlgSettingsAbstractBase.h"
 
+class DlgModelCoords;
 class QComboBox;
 class QGridLayout;
 class QGroupBox;
@@ -48,12 +48,10 @@ private:
                         int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
-  void initializeGroupCoordsType();
   void loadPixmap (const QString &image);
   void updateControls();
 
   QGroupBox *m_boxCoordsType;
-  CoordsType m_coordsType;
   QRadioButton *m_btnCartesian;
   QRadioButton *m_btnPolar;
 
@@ -72,6 +70,9 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+
+  DlgModelCoords *m_modelCoordsBefore;
+  DlgModelCoords *m_modelCoordsAfter;
 };
 
 #endif // DLG_SETTINGS_COORDS_H

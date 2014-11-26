@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
+#include "DlgModelCoords.h"
 #include "DlgSettingsCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -30,7 +31,9 @@ const QString POLAR_UNITS_TURNS = "Turns";
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Coordinates", mainWindow),
   m_btnCartesian (0),
-  m_btnPolar (0)
+  m_btnPolar (0),
+  m_modelCoordsBefore (0),
+  m_modelCoordsAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -172,8 +175,6 @@ QWidget *DlgSettingsCoords::createSubPanel ()
   createGroupPolar (layout, row);
   createPreview (layout, row);
 
-  initializeGroupCoordsType();
-
   return subPanel;
 }
 
@@ -188,28 +189,20 @@ void DlgSettingsCoords::handleOk ()
   hide ();
 }
 
-void DlgSettingsCoords::initializeGroupCoordsType()
-{
-  switch (m_coordsType) {
-    case COORDS_TYPE_CARTESIAN:
-      m_btnCartesian->setChecked (true);
-      loadPixmap (":/engauge/img/plot_cartesian.png");
-      break;
-
-    case COORDS_TYPE_POLAR:
-      m_btnPolar->setChecked (true);
-      loadPixmap (":/engauge/img/plot_polar.png");
-      break;
-  }
-}
-
 void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::load";
 
   setCmdMediator (cmdMediator);
 
-  m_coordsType = cmdMediator.coordsType ();
+  m_modelCoordsBefore = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
+  m_modelCoordsAfter = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
+
+  m_btnCartesian->setChecked (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN);
+  m_btnPolar->setChecked (m_modelCoordsAfter->coordsType() == COORDS_TYPE_POLAR);
+  m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
+
+  updateControls ();
 }
 
 void DlgSettingsCoords::loadPixmap (const QString &image)
@@ -228,7 +221,7 @@ void DlgSettingsCoords::slotCartesian ()
 
   enableOk (true);
 
-  m_coordsType = COORDS_TYPE_CARTESIAN;
+  m_modelCoordsAfter->setCoordsType (COORDS_TYPE_CARTESIAN);
   loadPixmap (":/engauge/img/plot_cartesian.png");
   updateControls();
 }
@@ -239,7 +232,7 @@ void DlgSettingsCoords::slotPolar ()
 
   enableOk (true);
 
-  m_coordsType = COORDS_TYPE_POLAR;
+  m_modelCoordsAfter->setCoordsType(COORDS_TYPE_POLAR);
   loadPixmap (":/engauge/img/plot_polar.png");
   updateControls();
 }
@@ -249,6 +242,8 @@ void DlgSettingsCoords::slotPolarOriginRadius()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
 
   enableOk (true);
+
+  m_modelCoordsAfter->setOriginRadius(m_editOriginRadius->text ().toDouble ());
   updateControls();
 }
 
@@ -297,8 +292,13 @@ void DlgSettingsCoords::updateControls ()
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
 
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
+  m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
+  m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
 
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
+
+  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LINEAR);
+  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
 
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 }

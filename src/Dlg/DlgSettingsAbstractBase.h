@@ -54,7 +54,7 @@ private:
   DlgSettingsAbstractBase();
 
   MainWindow &m_mainWindow;
-  CmdMediator *m_cmdMediator;
+  CmdMediator *m_cmdMediator; // Cannot be const since Document gets a command pushed if dialog is ok'ed
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
 };

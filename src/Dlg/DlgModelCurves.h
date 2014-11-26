@@ -10,6 +10,7 @@
 class DlgModelCurves : public QAbstractTableModel
 {
 public:
+  /// Default constructor.
   DlgModelCurves();
 
   /// Columns are current curve name in first column, and original curve name in second column.

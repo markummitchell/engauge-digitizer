@@ -22,11 +22,6 @@ void CmdMediator::applyTransformation (const Transformation &transformation)
   m_document.applyTransformation (transformation);
 }
 
-CoordsType CmdMediator::coordsType () const
-{
-  return m_document.coordsType();
-}
-
 const Curve &CmdMediator::curveAxes () const
 {
   return m_document.curveAxes ();
