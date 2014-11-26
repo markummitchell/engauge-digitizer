@@ -14,7 +14,9 @@
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Filter", mainWindow)
+  DlgSettingsAbstractBase ("Filter", mainWindow),
+  m_modelFilterBefore (0),
+  m_modelFilterAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -132,7 +134,9 @@ void DlgSettingsFilter::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::handleOk";
 
   CmdSettingsFilter *cmd = new CmdSettingsFilter (mainWindow (),
-                                                  cmdMediator ().document());
+                                                  cmdMediator ().document(),
+                                                  *m_modelFilterBefore,
+                                                  *m_modelFilterAfter);
   cmdMediator ().push (cmd);
 
   hide ();

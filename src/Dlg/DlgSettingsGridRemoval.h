@@ -3,13 +3,14 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class ViewPreview;
+class DlgModelGridRemoval;
 class QCheckBox;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
 class QHBoxLayout;
 class QLineEdit;
+class ViewPreview;
 
 /// Stacked widget page for editing grid removal settings.
 class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
@@ -72,6 +73,9 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+
+  DlgModelGridRemoval *m_modelGridRemovalBefore;
+  DlgModelGridRemoval *m_modelGridRemovalAfter;
 };
 
 #endif // DLG_SETTINGS_GRID_REMOVAL_H

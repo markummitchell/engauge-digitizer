@@ -20,7 +20,7 @@ void CmdSettingsCurveProperties::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdRedo";
 
-  mainWindow().updateCurveProperties(m_modelCurvePropertiesAfter);
+  mainWindow().updateSettingsCurveProperties(m_modelCurvePropertiesAfter);
   mainWindow().updateAfterCommand();
 }
 
@@ -28,6 +28,6 @@ void CmdSettingsCurveProperties::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdUndo";
 
-  mainWindow().updateCurveProperties(m_modelCurvePropertiesBefore);
+  mainWindow().updateSettingsCurveProperties(m_modelCurvePropertiesBefore);
   mainWindow().updateAfterCommand();
 }

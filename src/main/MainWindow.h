@@ -7,7 +7,15 @@
 
 class CmdMediator;
 class DigitizeStateContext;
+class DlgModelCoords;
 class DlgModelCurveProperties;
+class DlgModelCurves;
+class DlgModelExport;
+class DlgModelFilter;
+class DlgModelGridDisplay;
+class DlgModelGridRemoval;
+class DlgModelPointMatch;
+class DlgModelSegments;
 class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
@@ -65,8 +73,32 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
+  /// Update with new coordinate properties.
+  void updateSettingsCoords(const DlgModelCoords &modelCoords);
+
   /// Update with new curve properties.
-  void updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
+  void updateSettingsCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
+
+  /// Update with new curves.
+  void updateSettingsCurves (const CurvesGraphs &curvesGraphs);
+
+  /// Update with new export properties.
+  void updateSettingsExport(const DlgModelExport &modelExport);
+
+  /// Update with new filter properties.
+  void updateSettingsFilter(const DlgModelFilter &modelFilter);
+
+  /// Update with new grid display properties.
+  void updateSettingsGridDisplay(const DlgModelGridDisplay &modelGridDisplay);
+
+  /// Update with new grid removal properties.
+  void updateSettingsGridRemoval(const DlgModelGridRemoval &modelGridRemoval);
+
+  /// Update with new point match properties.
+  void updateSettingsPointMatch(const DlgModelPointMatch &modelPointMatch);
+
+  /// Update with new segments properties.
+  void updateSettingsSegments(const DlgModelSegments &modelSegments);
 
   /// View for the QImage and QGraphicsItems, without const.
   GraphicsView &view ();

@@ -4,10 +4,14 @@
 #include "MainWindow.h"
 
 CmdSettingsFilter::CmdSettingsFilter(MainWindow &mainWindow,
-                                     Document &document) :
+                                     Document &document,
+                                     const DlgModelFilter &modelFilterBefore,
+                                     const DlgModelFilter &modelFilterAfter) :
   CmdAbstract(mainWindow,
               document,
-              "Filter settings")
+              "Filter settings"),
+  m_modelFilterBefore (modelFilterBefore),
+  m_modelFilterAfter (modelFilterAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsFilter::CmdSettingsFilter";
 }
@@ -16,6 +20,7 @@ void CmdSettingsFilter::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsFilter::cmdRedo";
 
+  mainWindow().updateSettingsFilter(m_modelFilterAfter);
   mainWindow().updateAfterCommand();
 }
 
@@ -23,5 +28,6 @@ void CmdSettingsFilter::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsFilter::cmdUndo";
 
+  mainWindow().updateSettingsFilter(m_modelFilterBefore);
   mainWindow().updateAfterCommand();
 }

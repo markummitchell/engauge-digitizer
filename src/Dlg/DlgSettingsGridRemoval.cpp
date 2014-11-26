@@ -22,7 +22,9 @@ const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
 DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Grid Removal", mainWindow)
+  DlgSettingsAbstractBase ("Grid Removal", mainWindow),
+  m_modelGridRemovalBefore (0),
+  m_modelGridRemovalAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -224,7 +226,9 @@ void DlgSettingsGridRemoval::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::handleOk";
 
   CmdSettingsGridRemoval *cmd = new CmdSettingsGridRemoval (mainWindow (),
-                                                            cmdMediator ().document());
+                                                            cmdMediator ().document(),
+                                                            *m_modelGridRemovalBefore,
+                                                            *m_modelGridRemovalAfter);
   cmdMediator ().push (cmd);
 
   hide ();

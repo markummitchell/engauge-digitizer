@@ -16,7 +16,9 @@ const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
 DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Grid Display", mainWindow)
+  DlgSettingsAbstractBase ("Grid Display", mainWindow),
+  m_modelGridDisplayBefore (0),
+  m_modelGridDisplayAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -190,7 +192,9 @@ void DlgSettingsGridDisplay::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::handleOk";
 
   CmdSettingsGridDisplay *cmd = new CmdSettingsGridDisplay (mainWindow (),
-                                                            cmdMediator ().document());
+                                                            cmdMediator ().document(),
+                                                            *m_modelGridDisplayBefore,
+                                                            *m_modelGridDisplayAfter);
   cmdMediator ().push (cmd);
 
   hide ();

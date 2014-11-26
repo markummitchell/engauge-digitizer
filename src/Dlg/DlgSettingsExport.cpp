@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsExport.h"
+#include "DlgModelExport.h"
 #include "DlgSettingsExport.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -21,7 +22,9 @@ const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
 DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Export", mainWindow)
+  DlgSettingsAbstractBase ("Export", mainWindow),
+  m_modelExportBefore (0),
+  m_modelExportAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -314,7 +317,9 @@ void DlgSettingsExport::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::handleOk";
 
   CmdSettingsExport *cmd = new CmdSettingsExport (mainWindow (),
-                                                  cmdMediator ().document());
+                                                  cmdMediator ().document(),
+                                                  *m_modelExportBefore,
+                                                  *m_modelExportAfter);
   cmdMediator ().push (cmd);
 
   hide ();

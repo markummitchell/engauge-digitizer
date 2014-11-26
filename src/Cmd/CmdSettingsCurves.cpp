@@ -48,9 +48,7 @@ void CmdSettingsCurves::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::cmdRedo";
 
-  document ().setCurvesGraphs (m_curvesGraphsAfter);
-
-  mainWindow().loadCurveNamesFromCmdMediator();
+  mainWindow().updateSettingsCurves(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
 }
 
@@ -58,8 +56,6 @@ void CmdSettingsCurves::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::cmdUndo";
 
-  document ().setCurvesGraphs (m_curvesGraphsBefore);
-
-  mainWindow().loadCurveNamesFromCmdMediator();
+  mainWindow().updateSettingsCurves(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
 }

@@ -4,10 +4,14 @@
 #include "MainWindow.h"
 
 CmdSettingsPointMatch::CmdSettingsPointMatch(MainWindow &mainWindow,
-                                             Document &document) :
+                                             Document &document,
+                                             const DlgModelPointMatch &modelPointMatchBefore,
+                                             const DlgModelPointMatch &modelPointMatchAfter) :
   CmdAbstract(mainWindow,
               document,
-              "Point Match settings")
+              "Point Match settings"),
+  m_modelPointMatchBefore (modelPointMatchBefore),
+  m_modelPointMatchAfter (modelPointMatchAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::CmdSettingsPointMatch";
 }
@@ -16,6 +20,7 @@ void CmdSettingsPointMatch::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdRedo";
 
+  mainWindow().updateSettingsPointMatch(m_modelPointMatchAfter);
   mainWindow().updateAfterCommand();
 }
 
@@ -23,5 +28,6 @@ void CmdSettingsPointMatch::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdUndo";
 
+  mainWindow().updateSettingsPointMatch(m_modelPointMatchBefore);
   mainWindow().updateAfterCommand();
 }

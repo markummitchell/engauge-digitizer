@@ -54,6 +54,12 @@ HEADERS  += \
     Dlg/DlgModelCurveProperties.h \
     Dlg/DlgModelCurves.h \
     Dlg/DlgModelCurvesEntry.h \
+    Dlg/DlgModelExport.h \
+    Dlg/DlgModelFilter.h \
+    Dlg/DlgModelGridDisplay.h \
+    Dlg/DlgModelGridRemoval.h \
+    Dlg/DlgModelPointMatch.h \
+    Dlg/DlgModelSegments.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
@@ -138,6 +144,12 @@ SOURCES += \
     Dlg/DlgModelCurveProperties.cpp \
     Dlg/DlgModelCurves.cpp \
     Dlg/DlgModelCurvesEntry.cpp \
+    Dlg/DlgModelExport.cpp \
+    Dlg/DlgModelFilter.cpp \
+    Dlg/DlgModelGridDisplay.cpp \
+    Dlg/DlgModelGridRemoval.cpp \
+    Dlg/DlgModelPointMatch.cpp \
+    Dlg/DlgModelSegments.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \

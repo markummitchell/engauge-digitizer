@@ -17,7 +17,9 @@ const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 1;
 
 DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Point Match", mainWindow)
+  DlgSettingsAbstractBase ("Point Match", mainWindow),
+  m_modelPointMatchBefore (0),
+  m_modelPointMatchAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -117,7 +119,9 @@ void DlgSettingsPointMatch::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::handleOk";
 
   CmdSettingsPointMatch *cmd = new CmdSettingsPointMatch (mainWindow (),
-                                                          cmdMediator ().document());
+                                                          cmdMediator ().document(),
+                                                          *m_modelPointMatchBefore,
+                                                          *m_modelPointMatchAfter);
   cmdMediator ().push (cmd);
 
   hide ();

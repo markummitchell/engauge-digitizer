@@ -184,7 +184,9 @@ void DlgSettingsCoords::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::handleOk";
 
   CmdSettingsCoords *cmd = new CmdSettingsCoords (mainWindow (),
-                                                  cmdMediator ().document());
+                                                  cmdMediator ().document(),
+                                                  *m_modelCoordsBefore,
+                                                  *m_modelCoordsAfter);
   cmdMediator ().push (cmd);
 
   hide ();

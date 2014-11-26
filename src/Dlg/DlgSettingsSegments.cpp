@@ -20,7 +20,9 @@ const int POINT_SEPARATION_MIN = 1;
 const int POINT_SEPARATION_MAX = 10000;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Segments", mainWindow)
+  DlgSettingsAbstractBase ("Segments", mainWindow),
+  m_modelSegmentsBefore (0),
+  m_modelSegmentsAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -122,7 +124,9 @@ void DlgSettingsSegments::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::handleOk";
 
   CmdSettingsSegments *cmd = new CmdSettingsSegments (mainWindow (),
-                                                      cmdMediator ().document());
+                                                      cmdMediator ().document(),
+                                                      *m_modelSegmentsBefore,
+                                                      *m_modelSegmentsAfter);
   cmdMediator ().push (cmd);
 
   hide ();

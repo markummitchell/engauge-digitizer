@@ -1810,11 +1810,55 @@ void MainWindow::updateControls ()
   m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
-void MainWindow::updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
+void MainWindow::updateSettingsCoords(const DlgModelCoords &modelCoords)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCurveProperties";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
+}
+
+void MainWindow::updateSettingsCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveProperties";
 
   m_scene->updateCurveProperties(modelCurveProperties);
+}
+
+void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurves";
+
+  m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
+
+  loadCurveNamesFromCmdMediator();
+}
+
+void MainWindow::updateSettingsExport(const DlgModelExport &modelExport)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExport";
+}
+
+void MainWindow::updateSettingsFilter(const DlgModelFilter &modelFilter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsFilter";
+}
+
+void MainWindow::updateSettingsGridDisplay(const DlgModelGridDisplay &modelGridDisplay)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
+}
+
+void MainWindow::updateSettingsGridRemoval(const DlgModelGridRemoval &modelGridRemoval)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
+}
+
+void MainWindow::updateSettingsPointMatch(const DlgModelPointMatch &modelPointMatch)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsPointMatch";
+}
+
+void MainWindow::updateSettingsSegments(const DlgModelSegments &modelSegments)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 }
 
 void MainWindow::updateViewedPoints ()
