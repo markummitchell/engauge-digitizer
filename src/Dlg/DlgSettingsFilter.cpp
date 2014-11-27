@@ -147,6 +147,9 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelFilterBefore = new DlgModelFilter (cmdMediator);
+  m_modelFilterAfter = new DlgModelFilter (cmdMediator);
 }
 
 void DlgSettingsFilter::slotForeground ()

@@ -137,6 +137,9 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelSegmentsBefore = new DlgModelSegments (cmdMediator);
+  m_modelSegmentsAfter = new DlgModelSegments (cmdMediator);
 }
 
 void DlgSettingsSegments::slotFillCorners (int /* state */)

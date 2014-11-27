@@ -205,6 +205,9 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelGridDisplayBefore = new DlgModelGridDisplay (cmdMediator);
+  m_modelGridDisplayAfter = new DlgModelGridDisplay (cmdMediator);
 }
 
 void DlgSettingsGridDisplay::slotCountX(const QString &)

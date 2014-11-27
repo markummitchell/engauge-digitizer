@@ -330,6 +330,9 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelExportBefore = new DlgModelExport (cmdMediator);
+  m_modelExportAfter = new DlgModelExport (cmdMediator);
 }
 
 void DlgSettingsExport::slotDelimitersCommas(bool)

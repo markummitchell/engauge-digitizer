@@ -231,6 +231,41 @@ DlgModelCoords Document::dlgModelCoords() const
   return m_dlgModelCoords;
 }
 
+DlgModelCurveProperties Document::dlgModelCurveProperties() const
+{
+  return m_dlgModelCurveProperties;
+}
+
+DlgModelExport Document::dlgModelExport() const
+{
+  return m_dlgModelExport;
+}
+
+DlgModelFilter Document::dlgModelFilter() const
+{
+  return m_dlgModelFilter;
+}
+
+DlgModelGridDisplay Document::dlgModelGridDisplay() const
+{
+  return m_dlgModelGridDisplay;
+}
+
+DlgModelGridRemoval Document::dlgModelGridRemoval() const
+{
+  return m_dlgModelGridRemoval;
+}
+
+DlgModelPointMatch Document::dlgModelPointMatch() const
+{
+  return m_dlgModelPointMatch;
+}
+
+DlgModelSegments Document::dlgModelSegments() const
+{
+  return m_dlgModelSegments;
+}
+
 void Document::editPointAxis (const QPointF &posGraph,
                               const QString &identifier)
 {

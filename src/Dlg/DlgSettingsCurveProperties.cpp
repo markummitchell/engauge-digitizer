@@ -207,6 +207,9 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  m_modelCurvePropertiesBefore = new DlgModelCurveProperties (cmdMediator);
+  m_modelCurvePropertiesAfter = new DlgModelCurveProperties (cmdMediator);
+
   // Load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();
   m_cmbCurveName->addItem (AXIS_CURVE_NAME);
@@ -217,9 +220,6 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
     QString curveName = *itr;
     m_cmbCurveName->addItem (curveName);
   }
-
-  m_modelCurvePropertiesBefore = new DlgModelCurveProperties (cmdMediator);
-  m_modelCurvePropertiesAfter = new DlgModelCurveProperties (cmdMediator);
 }
 
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)

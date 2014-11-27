@@ -14,6 +14,9 @@ class CmdMediator;
 class DlgModelCurveProperties
 {
 public:
+  /// Default constructor.
+  DlgModelCurveProperties();
+
   /// Initial constructor from Document.
   DlgModelCurveProperties(const CmdMediator &cmdMediator);
 
@@ -44,7 +47,6 @@ public:
                                  const PointStyle &pointStyle);
 
 private:
-  DlgModelCurveProperties();
 
   LineStyles m_lineStyles;
   PointStyles m_pointStyles;

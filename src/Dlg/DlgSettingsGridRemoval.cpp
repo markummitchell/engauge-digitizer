@@ -239,6 +239,9 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelGridRemovalBefore = new DlgModelGridRemoval (cmdMediator);
+  m_modelGridRemovalAfter = new DlgModelGridRemoval (cmdMediator);
 }
 
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)

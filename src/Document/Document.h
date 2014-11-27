@@ -3,6 +3,13 @@
 
 #include "CurvesGraphs.h"
 #include "DlgModelCoords.h"
+#include "DlgModelCurveProperties.h"
+#include "DlgModelExport.h"
+#include "DlgModelFilter.h"
+#include "DlgModelGridDisplay.h"
+#include "DlgModelGridRemoval.h"
+#include "DlgModelPointMatch.h"
+#include "DlgModelSegments.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -88,6 +95,27 @@ public:
   /// Get method for DlgModelCoords.
   DlgModelCoords dlgModelCoords () const;
 
+  /// Get method for DlgModelCurveProperties.
+  DlgModelCurveProperties dlgModelCurveProperties() const;
+
+  /// Get method for DlgModelExport.
+  DlgModelExport dlgModelExport() const;
+
+  /// Get method for DlgModelFilter.
+  DlgModelFilter dlgModelFilter() const;
+
+  /// Get method for DlgModelGridDisplay.
+  DlgModelGridDisplay dlgModelGridDisplay() const;
+
+  /// Get method for DlgModelGridRemoval.
+  DlgModelGridRemoval dlgModelGridRemoval() const;
+
+  /// Get method for DlgModelPointMatch.
+  DlgModelPointMatch dlgModelPointMatch() const;
+
+  /// Get method for DlgModelSegments.
+  DlgModelSegments dlgModelSegments() const;
+
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
@@ -162,6 +190,13 @@ private:
   CurvesGraphs m_curvesGraphs;
 
   DlgModelCoords m_dlgModelCoords;
+  DlgModelCurveProperties m_dlgModelCurveProperties;
+  DlgModelExport m_dlgModelExport;
+  DlgModelFilter m_dlgModelFilter;
+  DlgModelGridDisplay m_dlgModelGridDisplay;
+  DlgModelGridRemoval m_dlgModelGridRemoval;
+  DlgModelPointMatch m_dlgModelPointMatch;
+  DlgModelSegments m_dlgModelSegments;
 };
 
 #endif // DOCUMENT_H

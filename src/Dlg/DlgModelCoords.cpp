@@ -1,3 +1,4 @@
+#include "CmdMediator.h"
 #include "DlgModelCoords.h"
 
 DlgModelCoords::DlgModelCoords() :
@@ -6,6 +7,15 @@ DlgModelCoords::DlgModelCoords() :
   m_coordScaleXTheta (COORD_SCALE_LINEAR),
   m_coordScaleYRadius (COORD_SCALE_LINEAR),
   m_thetaUnits (THETA_UNITS_DEGREES)
+{
+}
+
+DlgModelCoords::DlgModelCoords(const CmdMediator &cmdMediator) :
+  m_coordsType (cmdMediator.document().dlgModelCoords().coordsType()),
+  m_originRadius(cmdMediator.document().dlgModelCoords().originRadius()),
+  m_coordScaleXTheta(cmdMediator.document().dlgModelCoords().coordScaleXTheta()),
+  m_coordScaleYRadius(cmdMediator.document().dlgModelCoords().coordScaleYRadius()),
+  m_thetaUnits(cmdMediator.document().dlgModelCoords().thetaUnits())
 {
 }
 

@@ -51,6 +51,7 @@ public:
   /// Update the Curves and their Points after executing a command.
   void updateAfterCommand (CmdMediator &cmdMediator);
 
+  /// Update curve properties after settings changed.
   void updateCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
 
 private:

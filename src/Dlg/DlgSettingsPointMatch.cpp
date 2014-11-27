@@ -132,6 +132,9 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::load";
 
   setCmdMediator (cmdMediator);
+
+  m_modelPointMatchBefore = new DlgModelPointMatch (cmdMediator);
+  m_modelPointMatchAfter = new DlgModelPointMatch (cmdMediator);
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)

@@ -1,6 +1,10 @@
 #include "CmdMediator.h"
 #include "DlgModelCurveProperties.h"
 
+DlgModelCurveProperties::DlgModelCurveProperties()
+{
+}
+
 DlgModelCurveProperties::DlgModelCurveProperties (const CmdMediator &cmdMediator)
 {
   const Curve &curveAxes = cmdMediator.document().curveAxes();
