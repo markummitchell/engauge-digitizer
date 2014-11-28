@@ -9,6 +9,7 @@ class QComboBox;
 class QGridLayout;
 class QGraphicsScene;
 class QLineEdit;
+class QSpinBox;
 class ViewPreview;
 
 /// Stacked widget page for editing Segments settings, for DigitizeStateSegment.
@@ -26,7 +27,7 @@ public:
 private slots:
   void slotFillCorners (int state);
   void slotLineColor (const QString &);
-  void slotLineSize (const QString &);
+  void slotLineSize (int);
   void slotMinLength (const QString &);
   void slotPointSeparation (const QString &);
 
@@ -41,7 +42,7 @@ private:
   QLineEdit *m_editMinLength;
   QLineEdit *m_editPointSeparation;
   QCheckBox *m_chkFillCorners;
-  QComboBox *m_cmbLineSize;
+  QSpinBox *m_spinLineSize;
   QComboBox *m_cmbLineColor;
 
   QGraphicsScene *m_scenePreview;

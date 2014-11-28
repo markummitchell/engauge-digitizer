@@ -170,6 +170,27 @@ public:
   /// Set method for DlgModelCoords.
   void setDlgModelCoords (const DlgModelCoords &dlgModelCoords);
 
+  /// Set method for DlgModelCurveProperties.
+  void setDlgModelCurveProperties(const DlgModelCurveProperties &dlgModelCurveProperties);
+
+  /// Set method for DlgModelExport.
+  void setDlgModelExport(const DlgModelExport &dlgModelExport);
+
+  /// Set method for DlgModelFilter.
+  void setDlgModelFilter(const DlgModelFilter &dlgModelFilter);
+
+  /// Set method for DlgModelGridDisplay.
+  void setDlgModelGridDisplay(const DlgModelGridDisplay &dlgModelGridDisplay);
+
+  /// Set method for DlgModelGridRemoval.
+  void setDlgModelGridRemoval(const DlgModelGridRemoval &dlgModelGridRemoval);
+
+  /// Set method for DlgModelPointMatch.
+  void setDlgModelPointMatch(const DlgModelPointMatch &dlgModelPointMatch);
+
+  /// Set method for DlgModelSegments.
+  void setDlgModelSegments(const DlgModelSegments &dlgModelSegments);
+
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
 

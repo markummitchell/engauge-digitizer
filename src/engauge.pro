@@ -71,6 +71,11 @@ HEADERS  += \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
     Document/Document.h \
+    Export/ExportLayoutFunctions.h \
+    Export/ExportPointsSelectionFunctions.h \
+    Export/ExportPointsSelectionRelations.h \
+    Export/ExportDelimiter.h \
+    Export/ExportHeader.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \

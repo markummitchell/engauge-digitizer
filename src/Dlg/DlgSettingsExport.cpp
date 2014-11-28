@@ -52,13 +52,13 @@ void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
   m_btnInclude->setEnabled (false);
   m_btnInclude->setWhatsThis (tr ("Move the currently selected curve(s) from the excluded list"));
   layout->addWidget (m_btnInclude, row++, 1);
-  connect (m_btnInclude, SIGNAL (toggled (bool)), this, SLOT (slotInclude()));
+  connect (m_btnInclude, SIGNAL (toggled ()), this, SLOT (slotInclude()));
 
   m_btnExclude = new QPushButton (tr ("Exclude>"));
   m_btnExclude->setEnabled (false);
   m_btnExclude->setWhatsThis (tr ("Move the currently selected curve(s) from the included list"));
   layout->addWidget (m_btnExclude, row++, 1);
-  connect (m_btnExclude, SIGNAL (toggled (bool)), this, SLOT (slotExclude()));
+  connect (m_btnExclude, SIGNAL (toggled ()), this, SLOT (slotExclude()));
 
   row++;
 }
@@ -74,17 +74,17 @@ void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
   m_btnDelimitersCommas = new QRadioButton (tr ("Commas"));
   m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersCommas);
-  connect (m_btnDelimitersCommas, SIGNAL (toggled (bool)), this, SLOT (slotDelimitersCommas(bool)));
+  connect (m_btnDelimitersCommas, SIGNAL (pressed ()), this, SLOT (slotDelimitersCommas()));
 
   m_btnDelimitersSpaces = new QRadioButton (tr ("Spaces"));
   m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersSpaces);
-  connect (m_btnDelimitersSpaces, SIGNAL (toggled (bool)), this, SLOT (slotDelimitersSpaces(bool)));
+  connect (m_btnDelimitersSpaces, SIGNAL (pressed ()), this, SLOT (slotDelimitersSpaces()));
 
   m_btnDelimitersTabs = new QRadioButton (tr ("Tabs"));
   m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
-  connect (m_btnDelimitersTabs, SIGNAL (toggled (bool)), this, SLOT (slotDelimitersTabs(bool)));
+  connect (m_btnDelimitersTabs, SIGNAL (pressed ()), this, SLOT (slotDelimitersTabs()));
 }
 
 void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
@@ -99,13 +99,13 @@ void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
   m_btnFunctionsLayoutAllCurves->setWhatsThis (tr ("Exported file will have, on each line, "
                                                    "an X value, the Y value for the first curve, the Y value for the second curve,..."));
   layoutLayout->addWidget (m_btnFunctionsLayoutAllCurves);
-  connect (m_btnFunctionsLayoutAllCurves, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsLayoutAllCurves (bool)));
+  connect (m_btnFunctionsLayoutAllCurves, SIGNAL (pressed()), this, SLOT (slotFunctionsLayoutAllCurves ()));
 
   m_btnFunctionsLayoutOneCurve = new QRadioButton (tr ("One curve on each line"));
   m_btnFunctionsLayoutOneCurve->setWhatsThis (tr ("Exported file will have all the points for "
                                                   "the first curve, with one X-Y pair on each line, then the points for the second curve,..."));
   layoutLayout->addWidget (m_btnFunctionsLayoutOneCurve);
-  connect (m_btnFunctionsLayoutOneCurve, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsLayoutOneCurve (bool)));
+  connect (m_btnFunctionsLayoutOneCurve, SIGNAL (pressed()), this, SLOT (slotFunctionsLayoutOneCurve ()));
 }
 
 void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
@@ -126,20 +126,20 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   m_btnFunctionsPointsAllCurves->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                    "value from every curve. Y values will be linearly interpolated if necessary"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 0, 1, 3);
-  connect (m_btnFunctionsPointsAllCurves, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsPointsAllCurves(bool)));
+  connect (m_btnFunctionsPointsAllCurves, SIGNAL (pressed()), this, SLOT (slotFunctionsPointsAllCurves()));
 
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Y's at X's from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                     "value from the first curve. Y values will be linearly interpolated if necessary"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 3);
-  connect (m_btnFunctionsPointsFirstCurve, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsPointsFirstCurve(bool)));
+  connect (m_btnFunctionsPointsFirstCurve, SIGNAL (pressed()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Y's at evenly spaced X values."));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values "
                                                       "starting with the first X value. If the last interval does not end at the last X value, "
                                                       "the last X value will be added. Y values will be linearly interpolated if necessary"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 3);
-  connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsPointsEvenlySpaced(bool)));
+  connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (pressed()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
   QLabel *labelInterval = new QLabel ("Interval:");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
@@ -155,7 +155,7 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw X's and Y's"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 3);
-  connect (m_btnFunctionsPointsRaw, SIGNAL (toggled (bool)), this, SLOT (slotFunctionsPointsRaw(bool)));
+  connect (m_btnFunctionsPointsRaw, SIGNAL (pressed()), this, SLOT (slotFunctionsPointsRaw()));
 }
 
 void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
@@ -169,17 +169,17 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
   m_btnHeaderNone = new QRadioButton (tr ("None"));
   m_btnHeaderNone->setWhatsThis (tr ("Exported file will have no header line"));
   layoutHeader->addWidget (m_btnHeaderNone);
-  connect (m_btnHeaderNone, SIGNAL (toggled (bool)), this, SLOT (slotHeaderNone(bool)));
+  connect (m_btnHeaderNone, SIGNAL (pressed ()), this, SLOT (slotHeaderNone()));
 
   m_btnHeaderSimple = new QRadioButton (tr ("Simple"));
   m_btnHeaderSimple->setWhatsThis (tr ("Exported file will have simple header line"));
   layoutHeader->addWidget (m_btnHeaderSimple);
-  connect (m_btnHeaderSimple, SIGNAL (toggled (bool)), this, SLOT (slotHeaderSimple(bool)));
+  connect (m_btnHeaderSimple, SIGNAL (pressed ()), this, SLOT (slotHeaderSimple()));
 
   m_btnHeaderGnuplot = new QRadioButton (tr ("Gnuplot"));
   m_btnHeaderGnuplot->setWhatsThis (tr ("Exported file will have gnuplot header line"));
   layoutHeader->addWidget (m_btnHeaderGnuplot);
-  connect (m_btnHeaderGnuplot, SIGNAL (toggled (bool)), this, SLOT (slotHeaderGnuplot(bool)));
+  connect (m_btnHeaderGnuplot, SIGNAL (pressed()), this, SLOT (slotHeaderGnuplot()));
 }
 
 void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
@@ -214,7 +214,7 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
                                                       "for both X and Y. If the last interval does not end at the last point, the last "
                                                       "point will be added"));
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 3);
-  connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (toggled (bool)), this, SLOT (slotRelationsPointsEvenlySpaced(bool)));
+  connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (pressed()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
   QLabel *labelInterval = new QLabel ("Interval:");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
@@ -229,7 +229,7 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw X's and Y's"));
   m_btnRelationsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
   layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 0, 1, 3);
-  connect (m_btnRelationsPointsRaw, SIGNAL (toggled (bool)), this, SLOT (slotRelationsPointsRaw(bool)));
+  connect (m_btnRelationsPointsRaw, SIGNAL (pressed()), this, SLOT (slotRelationsPointsRaw()));
 }
 
 QWidget *DlgSettingsExport::createSubPanel ()
@@ -333,27 +333,66 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 
   m_modelExportBefore = new DlgModelExport (cmdMediator);
   m_modelExportAfter = new DlgModelExport (cmdMediator);
+
+  QStringList::const_iterator itr;
+  for (itr = m_modelExportAfter->curveNamesNotExported().begin ();
+       itr != m_modelExportAfter->curveNamesNotExported().end();
+       ++itr) {
+
+    QString curveNameNotExported = *itr;
+    m_listExcluded->addItem (curveNameNotExported);
+  }
+
+  ExportPointsSelectionFunctions exportPointsSelectionFunctions = m_modelExportAfter->exportPointsSelectionFunctions();
+  m_btnFunctionsPointsAllCurves->setChecked (exportPointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES);
+  m_btnFunctionsPointsFirstCurve->setChecked (exportPointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
+  m_btnFunctionsPointsEvenlySpaced->setChecked (exportPointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC);
+  m_btnFunctionsPointsRaw->setChecked (exportPointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW);
+
+  ExportLayoutFunctions exportLayoutFunctions = m_modelExportAfter->exportLayoutFunctions ();
+  m_btnFunctionsLayoutAllCurves->setChecked (exportLayoutFunctions == EXPORT_LAYOUT_ALL_PER_LINE);
+  m_btnFunctionsLayoutOneCurve->setChecked (exportLayoutFunctions == EXPORT_LAYOUT_ONE_PER_LINE);
+
+  ExportPointsSelectionRelations exportPointsSelectionRelations = m_modelExportAfter->exportPointsSelectionRelations();
+  m_btnRelationsPointsEvenlySpaced->setChecked (exportPointsSelectionRelations == EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE);
+  m_btnRelationsPointsRaw->setChecked (exportPointsSelectionRelations == EXPORT_POINTS_SELECTION_RELATIONS_RAW);
+
+  ExportDelimiter exportDelimiter = m_modelExportAfter->exportDelimiter ();
+  m_btnDelimitersCommas->setChecked (exportDelimiter == EXPORT_DELIMITER_COMMA);
+  m_btnDelimitersSpaces->setChecked (exportDelimiter == EXPORT_DELIMITER_SPACE);
+  m_btnDelimitersTabs->setChecked (exportDelimiter == EXPORT_DELIMITER_TAB);
+
+  ExportHeader exportHeader = m_modelExportAfter->exportHeader ();
+  m_btnHeaderNone->setChecked (exportHeader == EXPORT_HEADER_NONE);
+  m_btnHeaderSimple->setChecked (exportHeader == EXPORT_HEADER_SIMPLE);
+  m_btnHeaderGnuplot->setChecked (exportHeader == EXPORT_HEADER_GNUPLOT);
 }
 
-void DlgSettingsExport::slotDelimitersCommas(bool)
+void DlgSettingsExport::slotDelimitersCommas()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersCommas";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportDelimiter(EXPORT_DELIMITER_COMMA);
 }
 
-void DlgSettingsExport::slotDelimitersSpaces(bool)
+void DlgSettingsExport::slotDelimitersSpaces()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersSpaces";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportDelimiter(EXPORT_DELIMITER_SPACE);
 }
 
-void DlgSettingsExport::slotDelimitersTabs(bool)
+void DlgSettingsExport::slotDelimitersTabs()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersTabs";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportDelimiter(EXPORT_DELIMITER_TAB);
 }
 
 void DlgSettingsExport::slotExclude ()
@@ -363,33 +402,41 @@ void DlgSettingsExport::slotExclude ()
   enableOk (true);
 }
 
-void DlgSettingsExport::slotFunctionsLayoutAllCurves(bool)
+void DlgSettingsExport::slotFunctionsLayoutAllCurves()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutAllCurves";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportLayoutFunctions(EXPORT_LAYOUT_ALL_PER_LINE);
 }
 
-void DlgSettingsExport::slotFunctionsLayoutOneCurve(bool)
+void DlgSettingsExport::slotFunctionsLayoutOneCurve()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutOneCurve";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportLayoutFunctions(EXPORT_LAYOUT_ONE_PER_LINE);
 }
 
-void DlgSettingsExport::slotFunctionsPointsAllCurves(bool)
+void DlgSettingsExport::slotFunctionsPointsAllCurves()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsAllCurves";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES);
   updateControls();
 }
 
-void DlgSettingsExport::slotFunctionsPointsEvenlySpaced(bool)
+void DlgSettingsExport::slotFunctionsPointsEvenlySpaced()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpaced";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC);
   updateControls();
 }
 
@@ -400,41 +447,51 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval()
   enableOk (true);
 }
 
-void DlgSettingsExport::slotFunctionsPointsFirstCurve(bool)
+void DlgSettingsExport::slotFunctionsPointsFirstCurve()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsFirstCurve";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
   updateControls();
 }
 
-void DlgSettingsExport::slotFunctionsPointsRaw(bool)
+void DlgSettingsExport::slotFunctionsPointsRaw()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsRaw";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_RAW);
   updateControls();
 }
 
-void DlgSettingsExport::slotHeaderGnuplot(bool)
+void DlgSettingsExport::slotHeaderGnuplot()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderGnuplot";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportHeader(EXPORT_HEADER_GNUPLOT);
 }
 
-void DlgSettingsExport::slotHeaderNone(bool)
+void DlgSettingsExport::slotHeaderNone()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderNone";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportHeader(EXPORT_HEADER_NONE);
 }
 
-void DlgSettingsExport::slotHeaderSimple(bool)
+void DlgSettingsExport::slotHeaderSimple()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderSimple";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportHeader(EXPORT_HEADER_SIMPLE);
 }
 
 void DlgSettingsExport::slotInclude ()
@@ -460,11 +517,13 @@ void DlgSettingsExport::slotListIncluded()
   updateControls ();
 }
 
-void DlgSettingsExport::slotRelationsPointsEvenlySpaced(bool)
+void DlgSettingsExport::slotRelationsPointsEvenlySpaced()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpaced";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE);
   updateControls ();
 }
 
@@ -475,11 +534,13 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval()
   enableOk (true);
 }
 
-void DlgSettingsExport::slotRelationsPointsRaw(bool)
+void DlgSettingsExport::slotRelationsPointsRaw()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsRaw";
 
   enableOk (true);
+
+  m_modelExportAfter->setExportPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_RAW);
   updateControls ();
 }
 

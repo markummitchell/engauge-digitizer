@@ -10,6 +10,7 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QLineEdit>
+#include <QSpinBox>
 #include "ViewPreview.h"
 
 const int LINE_SIZE_MIN = 1;
@@ -70,10 +71,11 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   QLabel *labelLineSize = new QLabel("Line size:");
   layout->addWidget (labelLineSize, row, 1);
 
-  m_cmbLineSize = new QComboBox;
-  m_cmbLineSize->setWhatsThis (tr ("Select a size for the lines drawn along a segment"));
-  connect (m_cmbLineSize, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineSize (const QString &)));
-  layout->addWidget (m_cmbLineSize, row++, 2);
+  m_spinLineSize = new QSpinBox;
+  m_spinLineSize->setWhatsThis (tr ("Select a size for the lines drawn along a segment"));
+  m_spinLineSize->setMinimum(1);
+  connect (m_spinLineSize, SIGNAL (valueChanged (int)), this, SLOT (slotLineSize (int)));
+  layout->addWidget (m_spinLineSize, row++, 2);
 
   QLabel *labelLineColor = new QLabel("Line color:");
   layout->addWidget (labelLineColor, row, 1);
@@ -156,7 +158,7 @@ void DlgSettingsSegments::slotLineColor (const QString &)
   enableOk (true);
 }
 
-void DlgSettingsSegments::slotLineSize (const QString &)
+void DlgSettingsSegments::slotLineSize (int)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineSize";
 

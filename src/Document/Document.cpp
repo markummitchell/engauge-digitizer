@@ -390,6 +390,41 @@ void Document::setDlgModelCoords (const DlgModelCoords &dlgModelCoords)
   m_dlgModelCoords = dlgModelCoords;
 }
 
+void Document::setDlgModelCurveProperties(const DlgModelCurveProperties &dlgModelCurveProperties)
+{
+  m_dlgModelCurveProperties = dlgModelCurveProperties;
+}
+
+void Document::setDlgModelExport(const DlgModelExport &dlgModelExport)
+{
+  m_dlgModelExport = dlgModelExport;
+}
+
+void Document::setDlgModelFilter(const DlgModelFilter &dlgModelFilter)
+{
+  m_dlgModelFilter = dlgModelFilter;
+}
+
+void Document::setDlgModelGridDisplay(const DlgModelGridDisplay &dlgModelGridDisplay)
+{
+  m_dlgModelGridDisplay = dlgModelGridDisplay;
+}
+
+void Document::setDlgModelGridRemoval(const DlgModelGridRemoval &dlgModelGridRemoval)
+{
+  m_dlgModelGridRemoval = dlgModelGridRemoval;
+}
+
+void Document::setDlgModelPointMatch(const DlgModelPointMatch &dlgModelPointMatch)
+{
+  m_dlgModelPointMatch = dlgModelPointMatch;
+}
+
+void Document::setDlgModelSegments(const DlgModelSegments &dlgModelSegments)
+{
+  m_dlgModelSegments = dlgModelSegments;
+}
+
 bool Document::successfulRead () const
 {
   return m_successfulRead;

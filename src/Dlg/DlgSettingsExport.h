@@ -27,26 +27,26 @@ public:
   virtual void load (CmdMediator &cmdMediator);
 
 private slots:
-  void slotDelimitersCommas(bool);
-  void slotDelimitersSpaces(bool);
-  void slotDelimitersTabs(bool);
+  void slotDelimitersCommas();
+  void slotDelimitersSpaces();
+  void slotDelimitersTabs();
   void slotExclude();
-  void slotFunctionsLayoutAllCurves(bool);
-  void slotFunctionsLayoutOneCurve(bool);
-  void slotFunctionsPointsAllCurves(bool);
-  void slotFunctionsPointsEvenlySpaced(bool);
+  void slotFunctionsLayoutAllCurves();
+  void slotFunctionsLayoutOneCurve();
+  void slotFunctionsPointsAllCurves();
+  void slotFunctionsPointsEvenlySpaced();
   void slotFunctionsPointsEvenlySpacedInterval();
-  void slotFunctionsPointsFirstCurve(bool);
-  void slotFunctionsPointsRaw(bool);
-  void slotHeaderGnuplot(bool);
-  void slotHeaderNone(bool);
-  void slotHeaderSimple(bool);
+  void slotFunctionsPointsFirstCurve();
+  void slotFunctionsPointsRaw();
+  void slotHeaderGnuplot();
+  void slotHeaderNone();
+  void slotHeaderSimple();
   void slotInclude();
   void slotListExcluded();
   void slotListIncluded();
-  void slotRelationsPointsEvenlySpaced(bool);
+  void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval();
-  void slotRelationsPointsRaw(bool);
+  void slotRelationsPointsRaw();
   void slotXLabel ();
 
 protected:
