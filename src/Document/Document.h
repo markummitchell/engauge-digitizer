@@ -93,28 +93,28 @@ public:
   int curvesGraphsNumPoints (const QString &curveName) const;
 
   /// Get method for DlgModelCoords.
-  DlgModelCoords dlgModelCoords () const;
+  DlgModelCoords modelCoords () const;
 
   /// Get method for DlgModelCurveProperties.
-  DlgModelCurveProperties dlgModelCurveProperties() const;
+  DlgModelCurveProperties modelCurveProperties() const;
 
   /// Get method for DlgModelExport.
-  DlgModelExport dlgModelExport() const;
+  DlgModelExport modelExport() const;
 
   /// Get method for DlgModelFilter.
-  DlgModelFilter dlgModelFilter() const;
+  DlgModelFilter modelFilter() const;
 
   /// Get method for DlgModelGridDisplay.
-  DlgModelGridDisplay dlgModelGridDisplay() const;
+  DlgModelGridDisplay modelGridDisplay() const;
 
   /// Get method for DlgModelGridRemoval.
-  DlgModelGridRemoval dlgModelGridRemoval() const;
+  DlgModelGridRemoval modelGridRemoval() const;
 
   /// Get method for DlgModelPointMatch.
-  DlgModelPointMatch dlgModelPointMatch() const;
+  DlgModelPointMatch modelPointMatch() const;
 
   /// Get method for DlgModelSegments.
-  DlgModelSegments dlgModelSegments() const;
+  DlgModelSegments modelSegments() const;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
@@ -168,28 +168,28 @@ public:
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
   /// Set method for DlgModelCoords.
-  void setDlgModelCoords (const DlgModelCoords &dlgModelCoords);
+  void setModelCoords (const DlgModelCoords &modelCoords);
 
   /// Set method for DlgModelCurveProperties.
-  void setDlgModelCurveProperties(const DlgModelCurveProperties &dlgModelCurveProperties);
+  void setModelCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
 
   /// Set method for DlgModelExport.
-  void setDlgModelExport(const DlgModelExport &dlgModelExport);
+  void setModelExport(const DlgModelExport &modelExport);
 
   /// Set method for DlgModelFilter.
-  void setDlgModelFilter(const DlgModelFilter &dlgModelFilter);
+  void setModelFilter(const DlgModelFilter &modelFilter);
 
   /// Set method for DlgModelGridDisplay.
-  void setDlgModelGridDisplay(const DlgModelGridDisplay &dlgModelGridDisplay);
+  void setModelGridDisplay(const DlgModelGridDisplay &modelGridDisplay);
 
   /// Set method for DlgModelGridRemoval.
-  void setDlgModelGridRemoval(const DlgModelGridRemoval &dlgModelGridRemoval);
+  void setModelGridRemoval(const DlgModelGridRemoval &modelGridRemoval);
 
   /// Set method for DlgModelPointMatch.
-  void setDlgModelPointMatch(const DlgModelPointMatch &dlgModelPointMatch);
+  void setModelPointMatch(const DlgModelPointMatch &modelPointMatch);
 
   /// Set method for DlgModelSegments.
-  void setDlgModelSegments(const DlgModelSegments &dlgModelSegments);
+  void setModelSegments(const DlgModelSegments &modelSegments);
 
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
@@ -210,14 +210,14 @@ private:
   Curve *m_curveAxes;
   CurvesGraphs m_curvesGraphs;
 
-  DlgModelCoords m_dlgModelCoords;
-  DlgModelCurveProperties m_dlgModelCurveProperties;
-  DlgModelExport m_dlgModelExport;
-  DlgModelFilter m_dlgModelFilter;
-  DlgModelGridDisplay m_dlgModelGridDisplay;
-  DlgModelGridRemoval m_dlgModelGridRemoval;
-  DlgModelPointMatch m_dlgModelPointMatch;
-  DlgModelSegments m_dlgModelSegments;
+  DlgModelCoords m_modelCoords;
+  DlgModelCurveProperties m_modelCurveProperties;
+  DlgModelExport m_modelExport;
+  DlgModelFilter m_modelFilter;
+  DlgModelGridDisplay m_modelGridDisplay;
+  DlgModelGridRemoval m_modelGridRemoval;
+  DlgModelPointMatch m_modelPointMatch;
+  DlgModelSegments m_modelSegments;
 };
 
 #endif // DOCUMENT_H

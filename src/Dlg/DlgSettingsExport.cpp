@@ -52,13 +52,13 @@ void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
   m_btnInclude->setEnabled (false);
   m_btnInclude->setWhatsThis (tr ("Move the currently selected curve(s) from the excluded list"));
   layout->addWidget (m_btnInclude, row++, 1);
-  connect (m_btnInclude, SIGNAL (toggled ()), this, SLOT (slotInclude()));
+  connect (m_btnInclude, SIGNAL (pressed ()), this, SLOT (slotInclude()));
 
   m_btnExclude = new QPushButton (tr ("Exclude>"));
   m_btnExclude->setEnabled (false);
   m_btnExclude->setWhatsThis (tr ("Move the currently selected curve(s) from the included list"));
   layout->addWidget (m_btnExclude, row++, 1);
-  connect (m_btnExclude, SIGNAL (toggled ()), this, SLOT (slotExclude()));
+  connect (m_btnExclude, SIGNAL (pressed ()), this, SLOT (slotExclude()));
 
   row++;
 }

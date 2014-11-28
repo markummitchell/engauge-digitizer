@@ -11,11 +11,11 @@ DlgModelExport::DlgModelExport() :
 }
 
 DlgModelExport::DlgModelExport (const CmdMediator &cmdMediator) :
-  m_exportPointsSelectionFunctions (cmdMediator.document().dlgModelExport().exportPointsSelectionFunctions()),
-  m_exportPointsSelectionRelations (cmdMediator.document().dlgModelExport().exportPointsSelectionRelations()),
-  m_exportLayoutFunctions (cmdMediator.document().dlgModelExport().exportLayoutFunctions()),
-  m_exportDelimiter (cmdMediator.document().dlgModelExport().exportDelimiter()),
-  m_exportHeader (cmdMediator.document().dlgModelExport().exportHeader())
+  m_exportPointsSelectionFunctions (cmdMediator.document().modelExport().exportPointsSelectionFunctions()),
+  m_exportPointsSelectionRelations (cmdMediator.document().modelExport().exportPointsSelectionRelations()),
+  m_exportLayoutFunctions (cmdMediator.document().modelExport().exportLayoutFunctions()),
+  m_exportDelimiter (cmdMediator.document().modelExport().exportDelimiter()),
+  m_exportHeader (cmdMediator.document().modelExport().exportHeader())
 {
 }
 

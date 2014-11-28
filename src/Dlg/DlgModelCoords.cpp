@@ -6,16 +6,16 @@ DlgModelCoords::DlgModelCoords() :
   m_originRadius (0.0),
   m_coordScaleXTheta (COORD_SCALE_LINEAR),
   m_coordScaleYRadius (COORD_SCALE_LINEAR),
-  m_thetaUnits (THETA_UNITS_DEGREES)
+  m_coordThetaUnits (COORD_THETA_UNITS_DEGREES)
 {
 }
 
 DlgModelCoords::DlgModelCoords(const CmdMediator &cmdMediator) :
-  m_coordsType (cmdMediator.document().dlgModelCoords().coordsType()),
-  m_originRadius(cmdMediator.document().dlgModelCoords().originRadius()),
-  m_coordScaleXTheta(cmdMediator.document().dlgModelCoords().coordScaleXTheta()),
-  m_coordScaleYRadius(cmdMediator.document().dlgModelCoords().coordScaleYRadius()),
-  m_thetaUnits(cmdMediator.document().dlgModelCoords().thetaUnits())
+  m_coordsType (cmdMediator.document().modelCoords().coordsType()),
+  m_originRadius(cmdMediator.document().modelCoords().originRadius()),
+  m_coordScaleXTheta(cmdMediator.document().modelCoords().coordScaleXTheta()),
+  m_coordScaleYRadius(cmdMediator.document().modelCoords().coordScaleYRadius()),
+  m_coordThetaUnits(cmdMediator.document().modelCoords().coordThetaUnits())
 {
 }
 
@@ -24,7 +24,7 @@ DlgModelCoords::DlgModelCoords(const DlgModelCoords &other) :
   m_originRadius (other.originRadius ()),
   m_coordScaleXTheta (other.coordScaleXTheta()),
   m_coordScaleYRadius (other.coordScaleYRadius ()),
-  m_thetaUnits (other.thetaUnits ())
+  m_coordThetaUnits (other.coordThetaUnits ())
 {
 }
 
@@ -34,7 +34,7 @@ DlgModelCoords &DlgModelCoords::operator=(const DlgModelCoords &other)
   m_originRadius = other.originRadius();
   m_coordScaleXTheta = other.coordScaleXTheta();
   m_coordScaleYRadius = other.coordScaleYRadius();
-  m_thetaUnits = other.thetaUnits();
+  m_coordThetaUnits = other.coordThetaUnits();
 
   return *this;
 }
@@ -52,6 +52,11 @@ CoordScale DlgModelCoords::coordScaleYRadius () const
 CoordsType DlgModelCoords::coordsType () const
 {
   return m_coordsType;
+}
+
+CoordThetaUnits DlgModelCoords::coordThetaUnits() const
+{
+  return m_coordThetaUnits;
 }
 
 double DlgModelCoords::originRadius() const
@@ -74,17 +79,13 @@ void DlgModelCoords::setCoordsType (CoordsType coordsType)
   m_coordsType = coordsType;
 }
 
+void DlgModelCoords::setCoordThetaUnits (CoordThetaUnits coordThetaUnits)
+{
+  m_coordThetaUnits = coordThetaUnits;
+}
+
 void DlgModelCoords::setOriginRadius(double originRadius)
 {
   m_originRadius = originRadius;
 }
 
-void DlgModelCoords::setThetaUnits (ThetaUnits thetaUnits)
-{
-  m_thetaUnits = thetaUnits;
-}
-
-ThetaUnits DlgModelCoords::thetaUnits() const
-{
-  return m_thetaUnits;
-}

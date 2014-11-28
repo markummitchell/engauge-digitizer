@@ -150,6 +150,13 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
   m_modelFilterBefore = new DlgModelFilter (cmdMediator);
   m_modelFilterAfter = new DlgModelFilter (cmdMediator);
+
+  FilterParameter filterParameter = m_modelFilterAfter->filterParameter();
+  m_btnIntensity->setChecked (filterParameter == FILTER_PARAMETER_INTENSITY);
+  m_btnForeground->setChecked (filterParameter == FILTER_PARAMETER_FOREGROUND);
+  m_btnHue->setChecked (filterParameter == FILTER_PARAMETER_HUE);
+  m_btnSaturation->setChecked (filterParameter == FILTER_PARAMETER_SATURATION);
+  m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
 }
 
 void DlgSettingsFilter::slotForeground ()
@@ -157,6 +164,9 @@ void DlgSettingsFilter::slotForeground ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
   enableOk (true);
+
+  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_FOREGROUND);
+  updateControls();
 }
 
 void DlgSettingsFilter::slotHue ()
@@ -164,6 +174,9 @@ void DlgSettingsFilter::slotHue ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
   enableOk (true);
+
+  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_HUE);
+  updateControls();
 }
 
 void DlgSettingsFilter::slotIntensity ()
@@ -171,6 +184,9 @@ void DlgSettingsFilter::slotIntensity ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
   enableOk (true);
+
+  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_INTENSITY);
+  updateControls();
 }
 
 void DlgSettingsFilter::slotSaturation ()
@@ -178,6 +194,9 @@ void DlgSettingsFilter::slotSaturation ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
   enableOk (true);
+
+  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
+  updateControls();
 }
 
 void DlgSettingsFilter::slotValue ()
@@ -185,4 +204,12 @@ void DlgSettingsFilter::slotValue ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 
   enableOk (true);
+
+  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_VALUE);
+  updateControls();
+}
+
+void DlgSettingsFilter::updateControls ()
+{
+
 }

@@ -38,6 +38,7 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
+  void updateControls();
 
   QRadioButton *m_btnIntensity;
   QRadioButton *m_btnForeground;

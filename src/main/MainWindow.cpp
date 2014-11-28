@@ -1814,7 +1814,7 @@ void MainWindow::updateSettingsCoords(const DlgModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
 
-  m_cmdMediator->document().setDlgModelCoords(modelCoords);
+  m_cmdMediator->document().setModelCoords(modelCoords);
 }
 
 void MainWindow::updateSettingsCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
@@ -1822,7 +1822,7 @@ void MainWindow::updateSettingsCurveProperties(const DlgModelCurveProperties &mo
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveProperties";
 
   m_scene->updateCurveProperties(modelCurveProperties);
-  m_cmdMediator->document().setDlgModelCurveProperties(modelCurveProperties);
+  m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
 }
 
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
@@ -1837,42 +1837,42 @@ void MainWindow::updateSettingsExport(const DlgModelExport &modelExport)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExport";
 
-  m_cmdMediator->document().setDlgModelExport (modelExport);
+  m_cmdMediator->document().setModelExport (modelExport);
 }
 
 void MainWindow::updateSettingsFilter(const DlgModelFilter &modelFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsFilter";
 
-  m_cmdMediator->document().setDlgModelFilter(modelFilter);
+  m_cmdMediator->document().setModelFilter(modelFilter);
 }
 
 void MainWindow::updateSettingsGridDisplay(const DlgModelGridDisplay &modelGridDisplay)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
 
-  m_cmdMediator->document().setDlgModelGridDisplay(modelGridDisplay);
+  m_cmdMediator->document().setModelGridDisplay(modelGridDisplay);
 }
 
 void MainWindow::updateSettingsGridRemoval(const DlgModelGridRemoval &modelGridRemoval)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
 
-  m_cmdMediator->document().setDlgModelGridRemoval(modelGridRemoval);
+  m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
 }
 
 void MainWindow::updateSettingsPointMatch(const DlgModelPointMatch &modelPointMatch)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsPointMatch";
 
-  m_cmdMediator->document().setDlgModelPointMatch(modelPointMatch);
+  m_cmdMediator->document().setModelPointMatch(modelPointMatch);
 }
 
 void MainWindow::updateSettingsSegments(const DlgModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 
-  m_cmdMediator->document().setDlgModelSegments(modelSegments);
+  m_cmdMediator->document().setModelSegments(modelSegments);
 }
 
 void MainWindow::updateViewedPoints ()

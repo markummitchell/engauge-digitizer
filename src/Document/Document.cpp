@@ -226,46 +226,6 @@ int Document::curvesGraphsNumPoints(const QString &curveName) const
   return m_curvesGraphs.curvesGraphsNumPoints(curveName);
 }
 
-DlgModelCoords Document::dlgModelCoords() const
-{
-  return m_dlgModelCoords;
-}
-
-DlgModelCurveProperties Document::dlgModelCurveProperties() const
-{
-  return m_dlgModelCurveProperties;
-}
-
-DlgModelExport Document::dlgModelExport() const
-{
-  return m_dlgModelExport;
-}
-
-DlgModelFilter Document::dlgModelFilter() const
-{
-  return m_dlgModelFilter;
-}
-
-DlgModelGridDisplay Document::dlgModelGridDisplay() const
-{
-  return m_dlgModelGridDisplay;
-}
-
-DlgModelGridRemoval Document::dlgModelGridRemoval() const
-{
-  return m_dlgModelGridRemoval;
-}
-
-DlgModelPointMatch Document::dlgModelPointMatch() const
-{
-  return m_dlgModelPointMatch;
-}
-
-DlgModelSegments Document::dlgModelSegments() const
-{
-  return m_dlgModelSegments;
-}
-
 void Document::editPointAxis (const QPointF &posGraph,
                               const QString &identifier)
 {
@@ -314,6 +274,46 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   Q_ASSERT (m_curveAxes != 0);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+DlgModelCoords Document::modelCoords() const
+{
+  return m_modelCoords;
+}
+
+DlgModelCurveProperties Document::modelCurveProperties() const
+{
+  return m_modelCurveProperties;
+}
+
+DlgModelExport Document::modelExport() const
+{
+  return m_modelExport;
+}
+
+DlgModelFilter Document::modelFilter() const
+{
+  return m_modelFilter;
+}
+
+DlgModelGridDisplay Document::modelGridDisplay() const
+{
+  return m_modelGridDisplay;
+}
+
+DlgModelGridRemoval Document::modelGridRemoval() const
+{
+  return m_modelGridRemoval;
+}
+
+DlgModelPointMatch Document::modelPointMatch() const
+{
+  return m_modelPointMatch;
+}
+
+DlgModelSegments Document::modelSegments() const
+{
+  return m_modelSegments;
 }
 
 void Document::movePoint (const QString &pointIdentifier,
@@ -385,44 +385,44 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   m_curvesGraphs = curvesGraphs;
 }
 
-void Document::setDlgModelCoords (const DlgModelCoords &dlgModelCoords)
+void Document::setModelCoords (const DlgModelCoords &modelCoords)
 {
-  m_dlgModelCoords = dlgModelCoords;
+  m_modelCoords = modelCoords;
 }
 
-void Document::setDlgModelCurveProperties(const DlgModelCurveProperties &dlgModelCurveProperties)
+void Document::setModelCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
 {
-  m_dlgModelCurveProperties = dlgModelCurveProperties;
+  m_modelCurveProperties = modelCurveProperties;
 }
 
-void Document::setDlgModelExport(const DlgModelExport &dlgModelExport)
+void Document::setModelExport(const DlgModelExport &modelExport)
 {
-  m_dlgModelExport = dlgModelExport;
+  m_modelExport = modelExport;
 }
 
-void Document::setDlgModelFilter(const DlgModelFilter &dlgModelFilter)
+void Document::setModelFilter(const DlgModelFilter &modelFilter)
 {
-  m_dlgModelFilter = dlgModelFilter;
+  m_modelFilter = modelFilter;
 }
 
-void Document::setDlgModelGridDisplay(const DlgModelGridDisplay &dlgModelGridDisplay)
+void Document::setModelGridDisplay(const DlgModelGridDisplay &modelGridDisplay)
 {
-  m_dlgModelGridDisplay = dlgModelGridDisplay;
+  m_modelGridDisplay = modelGridDisplay;
 }
 
-void Document::setDlgModelGridRemoval(const DlgModelGridRemoval &dlgModelGridRemoval)
+void Document::setModelGridRemoval(const DlgModelGridRemoval &modelGridRemoval)
 {
-  m_dlgModelGridRemoval = dlgModelGridRemoval;
+  m_modelGridRemoval = modelGridRemoval;
 }
 
-void Document::setDlgModelPointMatch(const DlgModelPointMatch &dlgModelPointMatch)
+void Document::setModelPointMatch(const DlgModelPointMatch &modelPointMatch)
 {
-  m_dlgModelPointMatch = dlgModelPointMatch;
+  m_modelPointMatch = modelPointMatch;
 }
 
-void Document::setDlgModelSegments(const DlgModelSegments &dlgModelSegments)
+void Document::setModelSegments(const DlgModelSegments &modelSegments)
 {
-  m_dlgModelSegments = dlgModelSegments;
+  m_modelSegments = modelSegments;
 }
 
 bool Document::successfulRead () const

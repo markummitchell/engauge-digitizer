@@ -3,7 +3,7 @@
 
 #include "CoordScale.h"
 #include "CoordsType.h"
-#include "ThetaUnits.h"
+#include "CoordThetaUnits.h"
 
 class CmdMediator;
 
@@ -32,6 +32,9 @@ public:
   /// Get method for coordinates type.
   CoordsType coordsType () const;
 
+  /// Get method for theta units.
+  CoordThetaUnits coordThetaUnits () const;
+
   /// Get method for origin radius in polar mode.
   double originRadius () const;
 
@@ -44,14 +47,11 @@ public:
   /// Set method for coordinates type.
   void setCoordsType (CoordsType coordsType);
 
+  /// Set method for theta units.
+  void setCoordThetaUnits (CoordThetaUnits coordThetaUnits);
+
   /// Set method for origin radius in polar mode.
   void setOriginRadius (double originRadius);
-
-  /// Set method for theta units.
-  void setThetaUnits (ThetaUnits thetaUnits);
-
-  /// Get method for theta units.
-  ThetaUnits thetaUnits () const;
 
 private:
 
@@ -59,7 +59,7 @@ private:
   double m_originRadius; // Applies to polar coordinates. Usually zero
   CoordScale m_coordScaleXTheta;
   CoordScale m_coordScaleYRadius;
-  ThetaUnits m_thetaUnits; // Applies to polar coordinates
+  CoordThetaUnits m_coordThetaUnits; // Applies to polar coordinates
 };
 
 #endif // DLG_MODEL_COORDS_H

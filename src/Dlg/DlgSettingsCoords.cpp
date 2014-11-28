@@ -77,12 +77,12 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (labelThetaUnits, 0, 0);
 
   m_cmbPolarUnits = new QComboBox;
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES, QVariant (THETA_UNITS_DEGREES));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES, QVariant (THETA_UNITS_DEGREES_MINUTES));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES_SECONDS, QVariant (THETA_UNITS_DEGREES_MINUTES_SECONDS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_GRADIANS, QVariant (THETA_UNITS_GRADIANS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_RADIANS, QVariant (THETA_UNITS_RADIANS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_TURNS, QVariant (THETA_UNITS_TURNS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES, QVariant (COORD_THETA_UNITS_DEGREES));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES, QVariant (COORD_THETA_UNITS_DEGREES_MINUTES));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES_SECONDS, QVariant (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_GRADIANS, QVariant (COORD_THETA_UNITS_GRADIANS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_RADIANS, QVariant (COORD_THETA_UNITS_RADIANS));
+  m_cmbPolarUnits->addItem (POLAR_UNITS_TURNS, QVariant (COORD_THETA_UNITS_TURNS));
   m_cmbPolarUnits->setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
                                               "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "
                                               "60 minutes per degree. During input, a space must be inserted between the two numbers.\n\n"
@@ -198,8 +198,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelCoordsBefore = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
-  m_modelCoordsAfter = new DlgModelCoords (cmdMediator.document().dlgModelCoords());
+  m_modelCoordsBefore = new DlgModelCoords (cmdMediator.document().modelCoords());
+  m_modelCoordsAfter = new DlgModelCoords (cmdMediator.document().modelCoords());
 
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 
@@ -209,8 +209,13 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
     m_btnPolar->setChecked (true);
   }
 
-  int indexPolarUnits = m_cmbPolarUnits->findData (QVariant (m_modelCoordsAfter->thetaUnits()));
+  int indexPolarUnits = m_cmbPolarUnits->findData (QVariant (m_modelCoordsAfter->coordThetaUnits()));
   m_cmbPolarUnits->setCurrentIndex (indexPolarUnits);
+
+  m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
+  m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
+  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LINEAR);
+  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
 
   updateControls (); // Probably redundant due to the setChecked just above
 }
@@ -257,8 +262,8 @@ void DlgSettingsCoords::slotPolarUnits(const QString &)
 
   enableOk (true);
 
-  ThetaUnits thetaUnits = (ThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
-  m_modelCoordsAfter->setThetaUnits(thetaUnits);
+  CoordThetaUnits coordThetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
+  m_modelCoordsAfter->setCoordThetaUnits(coordThetaUnits);
   updateControls ();
 }
 
@@ -301,15 +306,7 @@ void DlgSettingsCoords::slotYRadiusLog()
 void DlgSettingsCoords::updateControls ()
 {
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
-
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
-  m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
-  m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
-
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
-
-  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LINEAR);
-  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
-
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 }

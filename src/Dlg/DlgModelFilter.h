@@ -1,6 +1,8 @@
 #ifndef DLG_MODEL_FILTER_H
 #define DLG_MODEL_FILTER_H
 
+#include "Filter/FilterParameter.h"
+
 class CmdMediator;
 
 /// Model for DlgSettingsFilter and CmdSettingsFilter.
@@ -19,9 +21,15 @@ public:
   /// Assignment constructor.
   DlgModelFilter &operator=(const DlgModelFilter &other);
 
+  /// Get method for filter parameter.
+  FilterParameter filterParameter() const;
+
+  /// Set method for filter parameter.
+  void setFilterParameter(FilterParameter filterParameter);
+
 private:
 
-
+  FilterParameter m_filterParameter;
 };
 
 #endif // DLG_MODEL_FILTER_H

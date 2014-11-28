@@ -33,8 +33,9 @@ HEADERS  += \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     include/ColorPalette.h \
-    include/CoordScale.h \
-    include/CoordsType.h \
+    Coord/CoordScale.h \
+    Coord/CoordsType.h \
+    Coord/CoordThetaUnits.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurvesGraphs.h \
@@ -76,6 +77,7 @@ HEADERS  += \
     Export/ExportPointsSelectionRelations.h \
     Export/ExportDelimiter.h \
     Export/ExportHeader.h \
+    Filter/FilterParameter.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \
@@ -96,7 +98,6 @@ HEADERS  += \
     Settings/SettingsCurve.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
-    include/ThetaUnits.h \
     Transformation/Transformation.h \
     View/ViewPreview.h \
     View/ViewProfile.h \
@@ -195,10 +196,12 @@ QT += core gui network printsupport widgets
 LIBS += -llog4cpp
 INCLUDEPATH += Callback \
                Cmd \
+               Coord \
                Curve \
                DigitizeState \
                Dlg \
                Document \
+               Filter \
                Graphics \
                include \
                Line \
