@@ -208,6 +208,22 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 
   m_modelGridDisplayBefore = new DlgModelGridDisplay (cmdMediator);
   m_modelGridDisplayAfter = new DlgModelGridDisplay (cmdMediator);
+
+  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  int indexDisableX = m_cmbDisableX->findData (QVariant (m_modelGridDisplayAfter->gridCoordDisableX()));
+  m_cmbDisableX->setCurrentIndex (indexDisableX);
+
+  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridDisplayAfter->gridCoordDisableY()));
+  m_cmbDisableY->setCurrentIndex (indexDisableY);
+
+  updateControls ();
 }
 
 void DlgSettingsGridDisplay::slotCountX(const QString &)
@@ -229,6 +245,10 @@ void DlgSettingsGridDisplay::slotDisableX(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableX";
 
   enableOk (true);
+
+  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  m_modelGridDisplayAfter->setGridCoordDisableX(gridCoordDisable);
+  updateControls();
 }
 
 void DlgSettingsGridDisplay::slotDisableY(const QString &)
@@ -236,6 +256,10 @@ void DlgSettingsGridDisplay::slotDisableY(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableY";
 
   enableOk (true);
+
+  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  m_modelGridDisplayAfter->setGridCoordDisableY(gridCoordDisable);
+  updateControls();
 }
 
 void DlgSettingsGridDisplay::slotStartX(const QString &)
@@ -278,4 +302,19 @@ void DlgSettingsGridDisplay::slotStopY(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopY";
 
   enableOk (true);
+}
+
+void DlgSettingsGridDisplay::updateControls ()
+{
+  GridCoordDisable disableX = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  m_editCountX->setEnabled (disableX != GRID_COORD_DISABLE_COUNT);
+  m_editStartX->setEnabled (disableX != GRID_COORD_DISABLE_START);
+  m_editStepX->setEnabled (disableX != GRID_COORD_DISABLE_STEP);
+  m_editStopX->setEnabled (disableX != GRID_COORD_DISABLE_STOP);
+
+  GridCoordDisable disableY = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  m_editCountY->setEnabled (disableY != GRID_COORD_DISABLE_COUNT);
+  m_editStartY->setEnabled (disableY != GRID_COORD_DISABLE_START);
+  m_editStepY->setEnabled (disableY != GRID_COORD_DISABLE_STEP);
+  m_editStopY->setEnabled (disableY != GRID_COORD_DISABLE_STOP);
 }

@@ -43,6 +43,7 @@ private:
   void createX (QGridLayout *layout, int &row);
   void createY (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void updateControls();
 
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;

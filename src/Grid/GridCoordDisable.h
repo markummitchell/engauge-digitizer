@@ -1,0 +1,16 @@
+#ifndef GRID_COORD_DISABLE_H
+#define GRID_COORD_DISABLE_H
+
+const QString DISABLE_COUNT ("Count");
+const QString DISABLE_START ("Start");
+const QString DISABLE_STEP ("Step");
+const QString DISABLE_STOP ("Stop");
+
+enum GridCoordDisable {
+  GRID_COORD_DISABLE_COUNT,
+  GRID_COORD_DISABLE_START,
+  GRID_COORD_DISABLE_STEP,
+  GRID_COORD_DISABLE_STOP
+};
+
+#endif // GRID_COORD_DISABLE_H

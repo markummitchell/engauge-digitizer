@@ -242,6 +242,22 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   m_modelGridRemovalBefore = new DlgModelGridRemoval (cmdMediator);
   m_modelGridRemovalAfter = new DlgModelGridRemoval (cmdMediator);
+
+  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  int indexDisableX = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableX()));
+  m_cmbDisableX->setCurrentIndex (indexDisableX);
+
+  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
+  m_cmbDisableY->setCurrentIndex (indexDisableY);
+
+  updateControls ();
 }
 
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)
@@ -270,6 +286,10 @@ void DlgSettingsGridRemoval::slotDisableX(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableX";
 
   enableOk (true);
+
+  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  m_modelGridRemovalAfter->setGridCoordDisableX(gridCoordDisable);
+  updateControls();
 }
 
 void DlgSettingsGridRemoval::slotDisableY(const QString &)
@@ -277,6 +297,10 @@ void DlgSettingsGridRemoval::slotDisableY(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableY";
 
   enableOk (true);
+
+  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  m_modelGridRemovalAfter->setGridCoordDisableY(gridCoordDisable);
+  updateControls();
 }
 
 void DlgSettingsGridRemoval::slotRemoveGridLines (int /* state */)
@@ -340,14 +364,20 @@ void DlgSettingsGridRemoval::slotStopY(const QString &)
 void DlgSettingsGridRemoval::updateControls ()
 {
   m_editCloseDistance->setEnabled (m_chkRemoveGridLines->isChecked ());
+
   m_cmbDisableX->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editCountX->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStartX->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStepX->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStopX->setEnabled (m_chkRemoveGridLines->isChecked ());
+
+  GridCoordDisable disableX = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  m_editCountX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_COUNT));
+  m_editStartX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_START));
+  m_editStepX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_STEP));
+  m_editStopX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_STOP));
+
   m_cmbDisableY->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editCountY->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStartY->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStepY->setEnabled (m_chkRemoveGridLines->isChecked ());
-  m_editStopY->setEnabled (m_chkRemoveGridLines->isChecked ());
+
+  GridCoordDisable disableY = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  m_editCountY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_COUNT));
+  m_editStartY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_START));
+  m_editStepY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STEP));
+  m_editStopY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STOP));
 }

@@ -85,6 +85,7 @@ HEADERS  += \
     Graphics/GraphicsPointPolygon.h \
     Graphics/GraphicsScene.h \
     Graphics/GraphicsView.h \
+    Grid/GridCoordDisable.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -203,6 +204,7 @@ INCLUDEPATH += Callback \
                Document \
                Filter \
                Graphics \
+               Grid \
                include \
                Line \
                Load \
