@@ -142,13 +142,16 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 
   m_modelSegmentsBefore = new DlgModelSegments (cmdMediator);
   m_modelSegmentsAfter = new DlgModelSegments (cmdMediator);
+
+  m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
 }
 
-void DlgSettingsSegments::slotFillCorners (int /* state */)
+void DlgSettingsSegments::slotFillCorners (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotFillCorner";
 
   enableOk (true);
+  m_modelSegmentsAfter->setFillCorners(state == Qt::Checked);
 }
 
 void DlgSettingsSegments::slotLineColor (const QString &)

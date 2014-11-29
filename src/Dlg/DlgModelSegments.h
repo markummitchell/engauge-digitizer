@@ -19,9 +19,15 @@ public:
   /// Assignment constructor.
   DlgModelSegments &operator=(const DlgModelSegments &other);
 
+  /// Get method for fill corners.
+  bool fillCorners () const;
+
+  /// Set method for fill corners.
+  void setFillCorners (bool fillCorners);
+
 private:
 
-
+  bool m_fillCorners;
 };
 
 #endif // DLG_MODEL_SEGMENTS_H

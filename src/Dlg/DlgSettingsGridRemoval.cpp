@@ -45,7 +45,7 @@ void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 
 void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &row)
 {
-  m_chkRemoveGridLines = new QCheckBox ("Remove pixels close to grid lines");
+  m_chkRemoveGridLines = new QCheckBox ("Remove pixels close to defined grid lines");
   m_chkRemoveGridLines->setWhatsThis ("Check this box to have pixels close to regularly spaced gridlines removed.\n\n"
                                       "This option is only available when the axis points have all been defined.");
   connect (m_chkRemoveGridLines, SIGNAL (stateChanged (int)), this, SLOT (slotRemoveGridLines (int)));
@@ -243,6 +243,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_modelGridRemovalBefore = new DlgModelGridRemoval (cmdMediator);
   m_modelGridRemovalAfter = new DlgModelGridRemoval (cmdMediator);
 
+  m_chkRemoveGridLines->setChecked (m_modelGridRemovalAfter->removeDefinedGridLines());
+
   m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
   m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
@@ -256,6 +258,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
   m_cmbDisableY->setCurrentIndex (indexDisableY);
+
+  m_chkRemoveParallel->setChecked (m_modelGridRemovalAfter->removeParallelToAxes());
 
   updateControls ();
 }
@@ -303,19 +307,21 @@ void DlgSettingsGridRemoval::slotDisableY(const QString &)
   updateControls();
 }
 
-void DlgSettingsGridRemoval::slotRemoveGridLines (int /* state */)
+void DlgSettingsGridRemoval::slotRemoveGridLines (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveGridLines";
 
   enableOk (true);
+  m_modelGridRemovalAfter->setRemoveDefinedGridLines(state == Qt::Checked);
   updateControls();
 }
 
-void DlgSettingsGridRemoval::slotRemoveParallel (int /* state */)
+void DlgSettingsGridRemoval::slotRemoveParallel (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveParallel";
 
   enableOk (true);
+  m_modelGridRemovalAfter->setRemoveParallelToAxes(state == Qt::Checked);
   updateControls();
 }
 
