@@ -58,6 +58,16 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbAcceptedPointColor = new QComboBox;
   m_cmbAcceptedPointColor->setWhatsThis (tr ("Select a color for matched points that are accepted"));
+  m_cmbAcceptedPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbAcceptedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbAcceptedPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbAcceptedPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbAcceptedPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbAcceptedPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbAcceptedPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbAcceptedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbAcceptedPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  m_cmbAcceptedPointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
   connect (m_cmbAcceptedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &)));
   layout->addWidget (m_cmbAcceptedPointColor, row++, 2);
 
@@ -66,6 +76,16 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbRejectedPointColor = new QComboBox;
   m_cmbRejectedPointColor->setWhatsThis (tr ("Select a color for matched points that are rejected"));
+  m_cmbRejectedPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbRejectedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbRejectedPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbRejectedPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbRejectedPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbRejectedPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbRejectedPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbRejectedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbRejectedPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  m_cmbRejectedPointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
   connect (m_cmbRejectedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotRejectedPointColor (const QString &)));
   layout->addWidget (m_cmbRejectedPointColor, row++, 2);
 
@@ -74,6 +94,16 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbCandidatePointColor = new QComboBox;
   m_cmbCandidatePointColor->setWhatsThis (tr ("Select a color for the point being decided upon"));
+  m_cmbCandidatePointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbCandidatePointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbCandidatePointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbCandidatePointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbCandidatePointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbCandidatePointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbCandidatePointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbCandidatePointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbCandidatePointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  m_cmbCandidatePointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
   connect (m_cmbCandidatePointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCandidatePointColor (const QString &)));
   layout->addWidget (m_cmbCandidatePointColor, row++, 2);
 }
@@ -135,6 +165,22 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
   m_modelPointMatchBefore = new DlgModelPointMatch (cmdMediator);
   m_modelPointMatchAfter = new DlgModelPointMatch (cmdMediator);
+
+  m_editPointSeparation->setText(QString::number(m_modelPointMatchAfter->pointSeparation()));
+  m_editPointSize->setText(QString::number(m_modelPointMatchAfter->maxPointSize()));
+
+  int indexAccepted = m_cmbAcceptedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorAccepted()));
+  Q_ASSERT (indexAccepted >= 0);
+  m_cmbAcceptedPointColor->setCurrentIndex(indexAccepted);
+
+  int indexCandidate = m_cmbCandidatePointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorCandidate()));
+  Q_ASSERT (indexCandidate >= 0);
+  m_cmbCandidatePointColor->setCurrentIndex(indexCandidate);
+
+  int indexRejected = m_cmbRejectedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorRejected()));
+  Q_ASSERT (indexRejected >= 0);
+  m_cmbRejectedPointColor->setCurrentIndex(indexRejected);
+
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
@@ -142,6 +188,8 @@ void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotAcceptedPointColor";
 
   enableOk (true);
+
+  m_modelPointMatchAfter->setPaletteColorAccepted((ColorPalette) m_cmbAcceptedPointColor->currentData().toInt());
 }
 
 void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
@@ -149,20 +197,26 @@ void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotCandidatePointColor";
 
   enableOk (true);
+
+  m_modelPointMatchAfter->setPaletteColorCandidate((ColorPalette) m_cmbCandidatePointColor->currentData().toInt());
 }
 
-void DlgSettingsPointMatch::slotPointSeparation (const QString &)
+void DlgSettingsPointMatch::slotPointSeparation (const QString &pointSeparation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSeparation";
 
   enableOk (true);
+
+  m_modelPointMatchAfter->setPointSeparation(pointSeparation.toDouble());
 }
 
-void DlgSettingsPointMatch::slotPointSize (const QString &)
+void DlgSettingsPointMatch::slotPointSize (const QString &pointSize)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSize";
 
   enableOk (true);
+
+  m_modelPointMatchAfter->setMaxPointSize(pointSize.toDouble());
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
@@ -170,4 +224,6 @@ void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotRejectedPointColor";
 
   enableOk (true);
+
+  m_modelPointMatchAfter->setPaletteColorRejected((ColorPalette) m_cmbRejectedPointColor->currentData().toInt());
 }

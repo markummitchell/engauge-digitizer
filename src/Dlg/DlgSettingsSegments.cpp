@@ -82,6 +82,16 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
 
   m_cmbLineColor = new QComboBox;
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn along a segment"));
+  m_cmbLineColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbLineColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  m_cmbLineColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  m_cmbLineColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  m_cmbLineColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  m_cmbLineColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  m_cmbLineColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  m_cmbLineColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
@@ -143,7 +153,14 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_modelSegmentsBefore = new DlgModelSegments (cmdMediator);
   m_modelSegmentsAfter = new DlgModelSegments (cmdMediator);
 
+  m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
+  m_editMinLength->setText (QString::number(m_modelSegmentsAfter->minLength()));
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
+  m_spinLineSize->setValue (m_modelSegmentsAfter->lineSize());
+
+  int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
+  Q_ASSERT (indexLineColor >= 0);
+  m_cmbLineColor->setCurrentIndex(indexLineColor);
 }
 
 void DlgSettingsSegments::slotFillCorners (int state)
@@ -159,25 +176,33 @@ void DlgSettingsSegments::slotLineColor (const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineColor";
 
   enableOk (true);
+
+  m_modelSegmentsAfter->setLineColor((ColorPalette) m_cmbLineColor->currentData().toInt());
 }
 
-void DlgSettingsSegments::slotLineSize (int)
+void DlgSettingsSegments::slotLineSize (int lineSize)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineSize";
 
   enableOk (true);
+
+  m_modelSegmentsAfter->setLineSize(lineSize);
 }
 
-void DlgSettingsSegments::slotMinLength (const QString &)
+void DlgSettingsSegments::slotMinLength (const QString &minLength)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotMinLength";
 
   enableOk (true);
+
+  m_modelSegmentsAfter->setMinLength(minLength.toDouble());
 }
 
-void DlgSettingsSegments::slotPointSeparation (const QString &)
+void DlgSettingsSegments::slotPointSeparation (const QString &pointSeparation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotPointSeparation";
 
   enableOk (true);
+
+  m_modelSegmentsAfter->setPointSeparation(pointSeparation.toDouble());
 }

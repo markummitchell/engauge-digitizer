@@ -97,6 +97,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editCountX->setWhatsThis ("Number of X grid lines.\n\n"
                               "The number of X grid lines must be entered as an integer greater than zero");
   m_editCountX->setValidator (new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS));
+  connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
   QLabel *labelStart = new QLabel ("Start:");
@@ -106,6 +107,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStartX->setWhatsThis ("Value of the first X grid line.\n\n"
                               "The start value cannot be greater than the stop value");
   m_editStartX->setValidator (new QDoubleValidator ());
+  connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
   QLabel *labelStep = new QLabel ("Step:");
@@ -115,6 +117,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStepX->setWhatsThis ("Difference in value between two successive X grid lines.\n\n"
                              "The step value must be greater than zero");
   m_editStepX->setValidator (new QDoubleValidator ());
+  connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
   QLabel *labelStop = new QLabel ("Stop:");
@@ -124,6 +127,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStopX->setWhatsThis ("Value of the last X grid line.\n\n"
                              "The stop value cannot be less than the start value");
   m_editStopX->setValidator (new QDoubleValidator ());
+  connect (m_editStopX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopX (const QString &)));
   layoutGroup->addWidget (m_editStopX, 4, 1);
 }
 
@@ -157,6 +161,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editCountY->setWhatsThis ("Number of Y grid lines.\n\n"
                               "The number of Y grid lines must be entered as an integer greater than zero");
   m_editCountY->setValidator (new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS));
+  connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
   QLabel *labelStart = new QLabel ("Start:");
@@ -166,6 +171,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStartY->setWhatsThis ("Value of the first Y grid line.\n\n"
                               "The start value cannot be greater than the stop value");
   m_editStartY->setValidator (new QDoubleValidator ());
+  connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
   QLabel *labelStep = new QLabel ("Step:");
@@ -175,6 +181,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStepY->setWhatsThis ("Difference in value between two successive Y grid lines.\n\n"
                              "The step value must be greater than zero");
   m_editStepY->setValidator (new QDoubleValidator ());
+  connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
   QLabel *labelStop = new QLabel ("Stop:");
@@ -184,6 +191,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStopY->setWhatsThis ("Value of the last Y grid line.\n\n"
                              "The stop value cannot be less than the start value");
   m_editStopY->setValidator (new QDoubleValidator ());
+  connect (m_editStopY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopY (const QString &)));
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
@@ -245,6 +253,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   m_chkRemoveGridLines->setChecked (m_modelGridRemovalAfter->removeDefinedGridLines());
 
+  m_editCloseDistance->setText (QString::number (m_modelGridRemovalAfter->closeDistance()));
+
   m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
   m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
@@ -252,12 +262,22 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   int indexDisableX = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableX()));
   m_cmbDisableX->setCurrentIndex (indexDisableX);
 
+  m_editCountX->setText(QString::number(m_modelGridRemovalAfter->countX()));
+  m_editStartX->setText(QString::number(m_modelGridRemovalAfter->startX()));
+  m_editStepX->setText(QString::number(m_modelGridRemovalAfter->stepX()));
+  m_editStopX->setText(QString::number(m_modelGridRemovalAfter->stopX()));
+
   m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
   m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
   m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
   m_cmbDisableY->setCurrentIndex (indexDisableY);
+
+  m_editCountY->setText(QString::number(m_modelGridRemovalAfter->countY()));
+  m_editStartY->setText(QString::number(m_modelGridRemovalAfter->startY()));
+  m_editStepY->setText(QString::number(m_modelGridRemovalAfter->stepY()));
+  m_editStopY->setText(QString::number(m_modelGridRemovalAfter->stopY()));
 
   m_chkRemoveParallel->setChecked (m_modelGridRemovalAfter->removeParallelToAxes());
 
@@ -269,20 +289,26 @@ void DlgSettingsGridRemoval::slotCloseDistance(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCloseDistance";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setCloseDistance(m_editCloseDistance->text().toDouble());
 }
 
-void DlgSettingsGridRemoval::slotCountX(const QString &)
+void DlgSettingsGridRemoval::slotCountX(const QString &count)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountX";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setCountX(count.toInt());
 }
 
-void DlgSettingsGridRemoval::slotCountY(const QString &)
+void DlgSettingsGridRemoval::slotCountY(const QString &count)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountY";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setCountY(count.toInt());
 }
 
 void DlgSettingsGridRemoval::slotDisableX(const QString &)
@@ -325,46 +351,58 @@ void DlgSettingsGridRemoval::slotRemoveParallel (int state)
   updateControls();
 }
 
-void DlgSettingsGridRemoval::slotStartX(const QString &)
+void DlgSettingsGridRemoval::slotStartX(const QString &startX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartX";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStartX(startX.toDouble());
 }
 
-void DlgSettingsGridRemoval::slotStartY(const QString &)
+void DlgSettingsGridRemoval::slotStartY(const QString &startY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartY";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStartY(startY.toDouble());
 }
 
-void DlgSettingsGridRemoval::slotStepX(const QString &)
+void DlgSettingsGridRemoval::slotStepX(const QString &stepX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepX";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStepX(stepX.toDouble());
 }
 
-void DlgSettingsGridRemoval::slotStepY(const QString &)
+void DlgSettingsGridRemoval::slotStepY(const QString &stepY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepY";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStepY(stepY.toDouble());
 }
 
-void DlgSettingsGridRemoval::slotStopX(const QString &)
+void DlgSettingsGridRemoval::slotStopX(const QString &stopX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopX";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStopX(stopX.toDouble());
 }
 
-void DlgSettingsGridRemoval::slotStopY(const QString &)
+void DlgSettingsGridRemoval::slotStopY(const QString &stopY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopY";
 
   enableOk (true);
+
+  m_modelGridRemovalAfter->setStopY(stopY.toDouble());
 }
 
 void DlgSettingsGridRemoval::updateControls ()
