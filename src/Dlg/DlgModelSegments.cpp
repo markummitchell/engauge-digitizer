@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelSegments.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 const double DEFAULT_POINT_SEPARATION = 1;
 const double DEFAULT_MIN_LENGTH = 5;
@@ -67,6 +69,14 @@ double DlgModelSegments::minLength() const
 double DlgModelSegments::pointSeparation() const
 {
   return m_pointSeparation;
+}
+
+void DlgModelSegments::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelSegments::saveModel";
+
+  stream.writeStartElement("DlgModelSegments");
+  stream.writeEndElement();
 }
 
 void DlgModelSegments::setFillCorners (bool fillCorners)

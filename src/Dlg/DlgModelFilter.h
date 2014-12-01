@@ -1,12 +1,13 @@
 #ifndef DLG_MODEL_FILTER_H
 #define DLG_MODEL_FILTER_H
 
-#include "Filter/FilterParameter.h"
+#include "DocumentModelAbstractBase.h"
+#include "FilterParameter.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsFilter and CmdSettingsFilter.
-class DlgModelFilter
+class DlgModelFilter : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -23,6 +24,8 @@ public:
 
   /// Get method for filter parameter.
   FilterParameter filterParameter() const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for filter parameter.
   void setFilterParameter(FilterParameter filterParameter);

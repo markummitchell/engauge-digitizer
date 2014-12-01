@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelCoords.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 DlgModelCoords::DlgModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
@@ -62,6 +64,14 @@ CoordThetaUnits DlgModelCoords::coordThetaUnits() const
 double DlgModelCoords::originRadius() const
 {
   return m_originRadius;
+}
+
+void DlgModelCoords::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCoords::saveModel";
+
+  stream.writeStartElement("DlgModelCoords");
+  stream.writeEndElement();
 }
 
 void DlgModelCoords::setCoordScaleXTheta (CoordScale coordScale)

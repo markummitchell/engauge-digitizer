@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelFilter.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 DlgModelFilter::DlgModelFilter() :
   m_filterParameter (FILTER_PARAMETER_INTENSITY)
@@ -28,6 +30,14 @@ DlgModelFilter &DlgModelFilter::operator=(const DlgModelFilter &other)
 FilterParameter DlgModelFilter::filterParameter() const
 {
   return m_filterParameter;
+}
+
+void DlgModelFilter::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelFilter::saveModel";
+
+  stream.writeStartElement("DlgModelFilter");
+  stream.writeEndElement();
 }
 
 void DlgModelFilter::setFilterParameter(FilterParameter filterParameter)

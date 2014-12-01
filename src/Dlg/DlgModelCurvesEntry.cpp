@@ -1,5 +1,6 @@
 #include "DlgModelCurvesEntry.h"
 #include <QStringList>
+#include <QXmlStreamWriter>
 
 const QString DELIMITER ("\t");
 

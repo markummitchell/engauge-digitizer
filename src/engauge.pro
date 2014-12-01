@@ -105,7 +105,8 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
-    include/ZoomFactor.h
+    include/ZoomFactor.h \
+    Document/DocumentModelAbstractBase.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -189,7 +190,8 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileShades.cpp
+    View/ViewProfileShades.cpp \
+    Document/DocumentModelAbstractBase.cpp
 
 TARGET = ../bin/engauge
 
@@ -202,6 +204,7 @@ INCLUDEPATH += Callback \
                DigitizeState \
                Dlg \
                Document \
+               Export \
                Filter \
                Graphics \
                Grid \

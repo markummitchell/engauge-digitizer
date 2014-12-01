@@ -1,4 +1,5 @@
 #include "LineStyle.h"
+#include <QXmlStreamWriter>
 
 const int DEFAULT_LINE_WIDTH = 1;
 
@@ -61,6 +62,15 @@ LineStyle LineStyle::defaultGraphCurve (int /* index */)
 ColorPalette LineStyle::paletteColor() const
 {
   return m_paletteColor;
+}
+
+void LineStyle::saveStyle(QXmlStreamWriter &stream) const
+{
+  stream.writeStartElement("LineStyle");
+  stream.writeAttribute ("LineWidth", QString::number(m_width));
+  stream.writeAttribute ("Color", QString::number (m_paletteColor));
+  stream.writeAttribute ("ConnectAs", QString::number (m_curveConnectAs));
+  stream.writeEndElement();
 }
 
 void LineStyle::setCurveConnectAs(CurveConnectAs curveConnectAs)

@@ -2,12 +2,13 @@
 #define DLG_MODEL_CURVES_H
 
 #include "DlgModelCurvesEntry.h"
+#include "DocumentModelAbstractBase.h"
 #include <QAbstractTableModel>
 #include <QStringList>
 
 /// Model for DlgSettingsCurves and CmdSettingsCurves. This is displayed as a QListView, with visible first column showing current curve name.
 /// Second column is hidden with curve name at the start of editing, or empty if none.
-class DlgModelCurves : public QAbstractTableModel
+class DlgModelCurves : public QAbstractTableModel, public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -34,6 +35,8 @@ public:
 
   /// One row per curve name.
   virtual int rowCount (const QModelIndex & parent = QModelIndex()) const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Store one curve name data.
   virtual bool setData(const QModelIndex &index,

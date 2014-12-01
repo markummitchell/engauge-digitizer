@@ -5,6 +5,8 @@
 #include "CurveConnectAs.h"
 #include <QColor>
 
+class QXmlStreamWriter;
+
 /// Details for a specific Line.
 class LineStyle
 {
@@ -37,6 +39,9 @@ public:
 
   /// Line color.
   ColorPalette paletteColor() const;
+
+  /// Save style to stream.
+  void saveStyle(QXmlStreamWriter &stream) const;
 
   /// Set connect as.
   void setCurveConnectAs (CurveConnectAs curveConnectAs);

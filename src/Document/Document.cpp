@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QImage>
 #include <QtToString.h>
+#include <QXmlStreamWriter>
 #include "Transformation.h"
 
 Document::Document (const QImage &image) :
@@ -376,6 +377,23 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
                                                                                                      &CallbackRemovePointsInCurvesGraphs::callback);
 
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+void Document::saveDocument(QXmlStreamWriter &stream)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::saveDocument";
+
+  stream.writeStartDocument();
+  stream.writeDTD("<!DOCTYPE engauge>");
+  m_modelCoords.saveModel(stream);
+  m_modelCurveProperties.saveModel(stream);
+  m_modelExport.saveModel(stream);
+  m_modelFilter.saveModel(stream);
+  m_modelGridDisplay.saveModel(stream);
+  m_modelGridRemoval.saveModel(stream);
+  m_modelPointMatch.saveModel(stream);
+  m_modelSegments.saveModel(stream);
+  stream.writeEndDocument();
 }
 
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)

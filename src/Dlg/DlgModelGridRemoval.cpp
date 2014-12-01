@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelGridRemoval.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 const double CLOSE_DISTANCE_DEFAULT = 1.0;
 
@@ -110,6 +112,14 @@ bool DlgModelGridRemoval::removeDefinedGridLines () const
 bool DlgModelGridRemoval::removeParallelToAxes () const
 {
   return m_removeParallelToAxes;
+}
+
+void DlgModelGridRemoval::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelGridRemoval::saveModel";
+
+  stream.writeStartElement("DlgModelGridRemoval");
+  stream.writeEndElement();
 }
 
 void DlgModelGridRemoval::setCloseDistance(double closeDistance)

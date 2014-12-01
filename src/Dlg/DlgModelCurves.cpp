@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "QtToString.h"
 #include <QVariant>
+#include <QXmlStreamWriter>
 
 DlgModelCurves::DlgModelCurves()
 {
@@ -151,6 +152,14 @@ int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
   LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::rowCount count=" << count;
 
   return count;
+}
+
+void DlgModelCurves::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::saveModel";
+
+  stream.writeStartElement("DlgModelCurves");
+  stream.writeEndElement();
 }
 
 bool DlgModelCurves::setData (const QModelIndex &index,

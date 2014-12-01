@@ -16,6 +16,7 @@ Curve::Curve(const QString &curveName,
   m_lineStyle (lineStyle),
   m_pointStyle (pointStyle)
 {
+  qDebug()<<"shita "<< lineStyle.paletteColor()<<" " << m_lineStyle.paletteColor();
 }
 
 Curve::Curve (const Curve &curve) :
@@ -24,6 +25,7 @@ Curve::Curve (const Curve &curve) :
   m_lineStyle (curve.lineStyle ()),
   m_pointStyle (curve.pointStyle ())
 {
+  qDebug()<<"shitb "<< curve.lineStyle().paletteColor()<<" " << m_lineStyle.paletteColor();
 }
 
 Curve &Curve::operator=(const Curve &curve)
@@ -32,6 +34,7 @@ Curve &Curve::operator=(const Curve &curve)
   m_points = curve.points ();
   m_lineStyle = curve.lineStyle ();
   m_pointStyle = curve.pointStyle ();
+  qDebug()<<"shitc "<< curve.lineStyle().paletteColor()<<" " << m_lineStyle.paletteColor();
 
   return *this;
 }

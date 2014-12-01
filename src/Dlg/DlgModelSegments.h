@@ -2,11 +2,12 @@
 #define DLG_MODEL_SEGMENTS_H
 
 #include "ColorPalette.h"
+#include "DocumentModelAbstractBase.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsSegments and CmdSettingsSegments.
-class DlgModelSegments
+class DlgModelSegments : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -35,6 +36,8 @@ public:
 
   /// Get method for point separation.
   double pointSeparation() const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for fill corners.
   void setFillCorners (bool fillCorners);

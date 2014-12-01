@@ -1,12 +1,13 @@
 #ifndef DLG_MODEL_GRID_DISPLAY_H
 #define DLG_MODEL_GRID_DISPLAY_H
 
-#include "Grid/GridCoordDisable.h"
+#include "DocumentModelAbstractBase.h"
+#include "GridCoordDisable.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsGridDisplay and CmdSettingsGridDisplay.
-class DlgModelGridDisplay
+class DlgModelGridDisplay : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -32,6 +33,8 @@ public:
 
   /// Get method for y coord parameter to disable.
   GridCoordDisable gridCoordDisableY () const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for x count.
   void setCountX(int countX);

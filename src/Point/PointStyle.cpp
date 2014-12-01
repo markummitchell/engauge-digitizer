@@ -1,5 +1,6 @@
 #include "PointStyle.h"
 #include <qmath.h>
+#include <QXmlStreamWriter>
 
 const int DEFAULT_POINT_RADIUS = 10;
 
@@ -7,17 +8,17 @@ PointStyle::PointStyle ()
 {
 }
 
-PointStyle::PointStyle(PointShape pointShape,
+PointStyle::PointStyle(PointShape shape,
                        unsigned int radius,
                        ColorPalette paletteColor) :
-  m_pointShape (pointShape),
+  m_shape (shape),
   m_radius (radius),
   m_paletteColor (paletteColor)
 {
 }
 
 PointStyle::PointStyle (const PointStyle &other) :
-  m_pointShape (other.pointShape()),
+  m_shape (other.shape()),
   m_radius (other.radius ()),
   m_paletteColor (other.paletteColor ())
 {
@@ -25,7 +26,7 @@ PointStyle::PointStyle (const PointStyle &other) :
 
 PointStyle &PointStyle::operator=(const PointStyle &other)
 {
-  m_pointShape = other.pointShape ();
+  m_shape = other.shape ();
   m_radius = other.radius ();
   m_paletteColor = other.paletteColor ();
 
@@ -85,36 +86,36 @@ PointStyle PointStyle::defaultAxesCurve ()
 
 PointStyle PointStyle::defaultGraphCurve (int index)
 {
-  PointShape pointShape = POINT_SHAPE_CROSS;
+  PointShape shape = POINT_SHAPE_CROSS;
   switch (index % 4) {
     case 0:
-      pointShape = POINT_SHAPE_CROSS;
+      shape = POINT_SHAPE_CROSS;
       break;
 
     case 1:
-      pointShape = POINT_SHAPE_X;
+      shape = POINT_SHAPE_X;
       break;
 
     case 2:
-      pointShape = POINT_SHAPE_DIAMOND;
+      shape = POINT_SHAPE_DIAMOND;
       break;
 
     case 3:
-      pointShape = POINT_SHAPE_SQUARE;
+      shape = POINT_SHAPE_SQUARE;
       break;
 
     default:
       Q_ASSERT (false);
   }
 
-  return PointStyle (pointShape,
+  return PointStyle (shape,
                      DEFAULT_POINT_RADIUS,
                      COLOR_PALETTE_BLUE);
 }
 
 bool PointStyle::isCircle () const
 {
-  return m_pointShape == POINT_SHAPE_CIRCLE;
+  return m_shape == POINT_SHAPE_CIRCLE;
 }
 
 ColorPalette PointStyle::paletteColor () const
@@ -122,16 +123,11 @@ ColorPalette PointStyle::paletteColor () const
   return m_paletteColor;
 }
 
-PointShape PointStyle::pointShape () const
-{
-  return m_pointShape;
-}
-
 QPolygonF PointStyle::polygon () const
 {
   QVector<QPointF> points;
 
-  switch (m_pointShape) {
+  switch (m_shape) {
 
     case POINT_SHAPE_CIRCLE:
       Q_ASSERT (false);
@@ -208,6 +204,15 @@ int PointStyle::radius () const
   return m_radius;
 }
 
+void PointStyle::saveStyle(QXmlStreamWriter &stream) const
+{
+  stream.writeStartElement("PointStyle");
+  stream.writeAttribute ("Radius", QString::number (m_radius));
+  stream.writeAttribute ("Color", QString::number (m_paletteColor));
+  stream.writeAttribute ("Shape", QString::number (m_shape));
+  stream.writeEndElement();
+}
+
 void PointStyle::setPaletteColor (ColorPalette paletteColor)
 {
   m_paletteColor = paletteColor;
@@ -216,4 +221,14 @@ void PointStyle::setPaletteColor (ColorPalette paletteColor)
 void PointStyle::setRadius (int radius)
 {
   m_radius = radius;
+}
+
+void PointStyle::setShape (PointShape shape)
+{
+  m_shape = shape;
+}
+
+PointShape PointStyle::shape () const
+{
+  return m_shape;
 }

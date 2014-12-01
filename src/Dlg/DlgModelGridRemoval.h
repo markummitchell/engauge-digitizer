@@ -1,12 +1,13 @@
 #ifndef DLG_MODEL_GRID_REMOVAL_H
 #define DLG_MODEL_GRID_REMOVAL_H
 
-#include "Grid/GridCoordDisable.h"
+#include "DocumentModelAbstractBase.h"
+#include "GridCoordDisable.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval.
-class DlgModelGridRemoval
+class DlgModelGridRemoval : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -41,6 +42,8 @@ public:
 
   /// Get method for removing lines parallel to axes.
   bool removeParallelToAxes () const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for close distance.
   void setCloseDistance (double closeDistance);

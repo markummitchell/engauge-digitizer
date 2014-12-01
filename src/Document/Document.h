@@ -18,6 +18,7 @@
 class Curve;
 class QImage;
 class QTransform;
+class QXmlStreamWriter;
 
 /// Storage of one imported image and the data attached to that image
 class Document
@@ -163,6 +164,9 @@ public:
 
   /// Remove all points identified in the specified CurvesGraphs. See also addPointsInCurvesGraphs
   void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
+
+  /// Save document
+  void saveDocument(QXmlStreamWriter &stream);
 
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);

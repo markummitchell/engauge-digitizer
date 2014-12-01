@@ -6,6 +6,8 @@
 #include <QColor>
 #include <QPolygonF>
 
+class QXmlStreamWriter;
+
 /// Details for a specific Point.
 class PointStyle
 {
@@ -39,14 +41,14 @@ public:
   /// Get method for point color.
   ColorPalette paletteColor () const;
 
-  /// Get method for point shape.
-  PointShape pointShape () const;
-
   /// Return the polygon for creating a QGraphicsPolygonItem. The size is determined by the radius
   QPolygonF polygon () const;
 
   /// Radius of point. For a circle this is all that is needed to draw a circle. For a polygon, the radius determines the size of the polygon
   int radius () const;
+
+  /// Save style to stream.
+  void saveStyle(QXmlStreamWriter &stream) const;
 
   /// Set method for point color.
   void setPaletteColor (ColorPalette paletteColor);
@@ -54,9 +56,15 @@ public:
   /// Set method for point radius.
   void setRadius (int radius);
 
+  /// Set method for point shape.
+  void setShape (PointShape shape);
+
+  /// Get method for point shape.
+  PointShape shape () const;
+
 private:
 
-  PointShape m_pointShape;
+  PointShape m_shape;
   unsigned int m_radius;
   ColorPalette m_paletteColor;
 };

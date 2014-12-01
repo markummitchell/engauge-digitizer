@@ -4,11 +4,12 @@
 #include "CoordScale.h"
 #include "CoordsType.h"
 #include "CoordThetaUnits.h"
+#include "DocumentModelAbstractBase.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsCoords and CmdSettingsCoords.
-class DlgModelCoords
+class DlgModelCoords : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -37,6 +38,8 @@ public:
 
   /// Get method for origin radius in polar mode.
   double originRadius () const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for linear/log scale on x/theta.
   void setCoordScaleXTheta (CoordScale coordScale);

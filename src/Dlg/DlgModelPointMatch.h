@@ -2,11 +2,12 @@
 #define DLG_MODEL_POINT_MATCH_H
 
 #include "ColorPalette.h"
+#include "DocumentModelAbstractBase.h"
 
 class CmdMediator;
 
 /// Model for DlgSettingsPointMatch and CmdSettingsPointMatch.
-class DlgModelPointMatch
+class DlgModelPointMatch : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -32,6 +33,8 @@ public:
 
   /// Get method for rejected color.
   ColorPalette paletteColorRejected() const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Get method for point separation.
   double pointSeparation() const;

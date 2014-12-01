@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelPointMatch.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 const double DEFAULT_POINT_SEPARATION = 0;
 const double DEFAULT_MAX_POINT_SIZE = 1;
@@ -68,6 +70,14 @@ ColorPalette DlgModelPointMatch::paletteColorRejected() const
 double DlgModelPointMatch::pointSeparation() const
 {
   return m_pointSeparation;
+}
+
+void DlgModelPointMatch::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelPointMatch::saveModel";
+
+  stream.writeStartElement("DlgModelPointMatch");
+  stream.writeEndElement();
 }
 
 void DlgModelPointMatch::setMaxPointSize(double maxPointSize)

@@ -2,6 +2,7 @@
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QDebug>
 
 CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
                                                        Document &document,
@@ -13,6 +14,7 @@ CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
   m_modelCurvePropertiesBefore (modelCurvePropertiesBefore),
   m_modelCurvePropertiesAfter (modelCurvePropertiesAfter)
 {
+  qDebug()<<"CmdSettingsCurveProperties constructor";
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::CmdSettingsCurveProperties";
 }
 
@@ -20,7 +22,9 @@ void CmdSettingsCurveProperties::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdRedo";
 
+  qDebug()<<"CmdSettingsCurveProperties before cmdRedo";
   mainWindow().updateSettingsCurveProperties(m_modelCurvePropertiesAfter);
+  qDebug()<<"CmdSettingsCurveProperties after cmdRedo";
   mainWindow().updateAfterCommand();
 }
 

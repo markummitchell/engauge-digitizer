@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelGridDisplay.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 // These defaults should always be overwritten when Document coordinates are defined
 const int DEFAULT_COUNT = 2;
@@ -81,6 +83,14 @@ GridCoordDisable DlgModelGridDisplay::gridCoordDisableX () const
 GridCoordDisable DlgModelGridDisplay::gridCoordDisableY () const
 {
   return m_gridCoordDisableY;
+}
+
+void DlgModelGridDisplay::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelGridDisplay::saveModel";
+
+  stream.writeStartElement("DlgModelGridDisplay");
+  stream.writeEndElement();
 }
 
 void DlgModelGridDisplay::setCountX(int countX)

@@ -44,8 +44,7 @@ private:
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  void updateLineStyle();
-  void updatePointStyle();
+  void loadForCurveName(const QString &curveName);
 
   QComboBox *m_cmbCurveName;
 

@@ -1,17 +1,18 @@
 #ifndef DLG_MODEL_EXPORT_H
 #define DLG_MODEL_EXPORT_H
 
-#include "Export/ExportDelimiter.h"
-#include "Export/ExportHeader.h"
-#include "Export/ExportLayoutFunctions.h"
-#include "Export/ExportPointsSelectionFunctions.h"
-#include "Export/ExportPointsSelectionRelations.h"
+#include "DocumentModelAbstractBase.h"
+#include "ExportDelimiter.h"
+#include "ExportHeader.h"
+#include "ExportLayoutFunctions.h"
+#include "ExportPointsSelectionFunctions.h"
+#include "ExportPointsSelectionRelations.h"
 #include <QStringList>
 
 class CmdMediator;
 
 /// Model for DlgSettingsExport and CmdSettingsExport.
-class DlgModelExport
+class DlgModelExport : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
@@ -43,6 +44,8 @@ public:
 
   /// Get method for point selection for relations.
   ExportPointsSelectionRelations exportPointsSelectionRelations() const;
+
+  virtual void saveModel(QXmlStreamWriter &stream) const;
 
   /// Set method for curve names not exported.
   void setCurveNamesNotExported(const QStringList &curveNamesNotExported);

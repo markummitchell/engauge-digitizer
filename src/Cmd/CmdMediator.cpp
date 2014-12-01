@@ -4,6 +4,7 @@
 #include "Point.h"
 #include <QImage>
 #include <QUndoCommand>
+#include <QXmlStreamWriter>
 #include "Transformation.h"
 
 CmdMediator::CmdMediator (const QImage &image) :

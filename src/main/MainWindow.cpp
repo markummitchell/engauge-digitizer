@@ -49,6 +49,7 @@
 #include "QtToString.h"
 #include <QVBoxLayout>
 #include <QWhatsThis>
+#include <QXmlStreamWriter>
 #include "StatusBar.h"
 #include "ZoomFactor.h"
 
@@ -301,7 +302,7 @@ void MainWindow::createActionsHelp ()
 
 void MainWindow::createActionsSettings ()
 {
-  m_actionSettingsCoords = new QAction (tr ("Coords"), this);
+  m_actionSettingsCoords = new QAction (tr ("Coordinates"), this);
   m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
   m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings"));
   connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
@@ -846,9 +847,9 @@ bool MainWindow::saveFile (const QString &fileName)
     return false;
   }
 
-  QTextStream out(&file);
+  QXmlStreamWriter stream(&file);
   QApplication::setOverrideCursor (Qt::WaitCursor);
-//  out << textEdit->toPlainText ();
+  m_cmdMediator->document().saveDocument(stream);
   QApplication::restoreOverrideCursor ();
 
   setCurrentFile(fileName);

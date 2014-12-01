@@ -1,5 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgModelExport.h"
+#include "Logger.h"
+#include <QXmlStreamWriter>
 
 DlgModelExport::DlgModelExport() :
   m_exportPointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
@@ -68,6 +70,14 @@ ExportPointsSelectionFunctions DlgModelExport::exportPointsSelectionFunctions() 
 ExportPointsSelectionRelations DlgModelExport::exportPointsSelectionRelations() const
 {
   return m_exportPointsSelectionRelations;
+}
+
+void DlgModelExport::saveModel(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelExport::saveModel";
+
+  stream.writeStartElement("DlgModelExport");
+  stream.writeEndElement();
 }
 
 void DlgModelExport::setCurveNamesNotExported(const QStringList &curveNamesNotExported)
