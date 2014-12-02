@@ -48,7 +48,8 @@ public:
   int radius () const;
 
   /// Save style to stream.
-  void saveStyle(QXmlStreamWriter &stream) const;
+  void saveStyle(QXmlStreamWriter &stream,
+                 const QString &curveName) const;
 
   /// Set method for point color.
   void setPaletteColor (ColorPalette paletteColor);

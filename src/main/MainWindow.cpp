@@ -54,20 +54,19 @@
 #include "ZoomFactor.h"
 
 const QString EMPTY_FILENAME ("");
+const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
-  m_curfile (EMPTY_FILENAME),
+  m_engaugeFile (EMPTY_FILENAME),
+  m_currentFile (EMPTY_FILENAME),
   m_layout (0),
   m_scene (0),
   m_view (0),
   m_image (0),
   m_cmdMediator (0)
 {
-  const int VersionNumber = 6;
-
-  setWindowTitle (tr ("Engauge Digitizer %1")
-      .arg (VersionNumber));
+  setCurrentFile ("");
   QPixmap bannerIcon (bannerapp_xpm);
   setWindowIcon (bannerIcon);
 
@@ -847,12 +846,14 @@ bool MainWindow::saveFile (const QString &fileName)
     return false;
   }
 
-  QXmlStreamWriter stream(&file);
   QApplication::setOverrideCursor (Qt::WaitCursor);
+  QXmlStreamWriter stream(&file);
+  stream.setAutoFormatting(true);
   m_cmdMediator->document().saveDocument(stream);
   QApplication::restoreOverrideCursor ();
 
   setCurrentFile(fileName);
+  m_engaugeFile = fileName;
   m_statusBar->showTemporaryMessage("File saved");
   return true;
 }
@@ -870,13 +871,25 @@ QString MainWindow::selectedCurrentCurve () const
 
 void MainWindow::setCurrentFile (const QString &fileName)
 {
-  m_curfile = fileName;
+  const int VersionNumber = 6;
 
-  QString shownName = m_curfile;
-  if (m_curfile.isEmpty()) {
-    shownName = "untitled.dig";
+  QString title = QString (tr ("Engauge Digitizer %1")
+                           .arg (VersionNumber));
+
+  QString fileNameStripped = fileName;
+  if (!fileName.isEmpty()) {
+
+    fileNameStripped = fileNameStripped
+                       .replace(".bmp", "")
+                       .replace(".gif", "")
+                       .replace(".jpg", "")
+                       .replace(".png", "");
+    title += QString (": %1")
+             .arg (fileNameStripped);
   }
-  setWindowFilePath(shownName);
+
+  m_currentFile = fileNameStripped;
+  setWindowTitle (title);
 }
 
 void MainWindow::setCurrentPathFromFile (const QString &fileName)
@@ -1164,10 +1177,10 @@ bool MainWindow::slotFileSave()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileSave";
 
-  if (m_curfile.isEmpty()) {
+  if (m_engaugeFile.isEmpty()) {
     return slotFileSaveAs();
   } else {
-    return saveFile (m_curfile);
+    return saveFile (m_engaugeFile);
   }
 }
 
@@ -1175,12 +1188,21 @@ bool MainWindow::slotFileSaveAs()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileSaveAs";
 
-  QFileDialog dialog(this);
-  dialog.setWindowModality(Qt::WindowModal);
-  dialog.setAcceptMode(QFileDialog::AcceptSave);
-  if (dialog.exec()) {
+  QString filenameDefault = QString ("%1.%2")
+                            .arg (m_currentFile)
+                            .arg (ENGAUGE_FILENAME_EXTENSION);
 
-    QStringList files = dialog.selectedFiles();
+  if (!m_engaugeFile.isEmpty()) {
+    filenameDefault = m_engaugeFile;
+  }
+
+  QFileDialog dlg(this);
+  dlg.setWindowModality(Qt::WindowModal);
+  dlg.setAcceptMode(QFileDialog::AcceptSave);
+  dlg.selectFile(filenameDefault);
+  if (dlg.exec()) {
+
+    QStringList files = dlg.selectedFiles();
     return saveFile(files.at(0));
   }
 
@@ -1746,7 +1768,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 
-  m_transformation.update (!m_curfile.isEmpty (), *m_cmdMediator);
+  m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
 
   if (m_transformation.transformIsDefined()) {
     m_cmdMediator->applyTransformation (m_transformation);
@@ -1767,11 +1789,11 @@ void MainWindow::updateControls ()
   }
 
   m_menuFileOpenRecent->setEnabled (m_menuFileOpenRecent->actions().count() > 0);
-  m_actionSave->setEnabled (!m_curfile.isEmpty ());
-  m_actionSaveAs->setEnabled (!m_curfile.isEmpty ());
-  m_actionExport->setEnabled (!m_curfile.isEmpty ());
-  m_actionExportAs->setEnabled (!m_curfile.isEmpty ());
-  m_actionPrint->setEnabled (!m_curfile.isEmpty ());
+  m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
+  m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
+  m_actionExport->setEnabled (!m_currentFile.isEmpty ());
+  m_actionExportAs->setEnabled (!m_currentFile.isEmpty ());
+  m_actionPrint->setEnabled (!m_currentFile.isEmpty ());
 
   if (m_cmdMediator == 0) {
     m_actionEditUndo->setEnabled (false);
@@ -1785,30 +1807,30 @@ void MainWindow::updateControls ()
   m_actionEditPaste->setEnabled (false);
   m_actionEditDelete->setEnabled (m_scene->selectedItems().count () > 0);
 
-  m_actionDigitizeAxis->setEnabled (!m_curfile.isEmpty ());
-  m_actionDigitizeCurve ->setEnabled (!m_curfile.isEmpty ());
-  m_actionDigitizePointMatch->setEnabled (!m_curfile.isEmpty ());
-  m_actionDigitizeSegment->setEnabled (!m_curfile.isEmpty ());
-  m_actionDigitizeSelect->setEnabled (!m_curfile.isEmpty ());
+  m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
 
-  m_actionViewDigitize->setEnabled (!m_curfile.isEmpty ());
+  m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
 
-  m_actionSettingsCoords->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsCurveProperties->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsCurves->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsExport->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsFilter->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsGridDisplay->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsGridRemoval->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsPointMatch->setEnabled (!m_curfile.isEmpty ());
-  m_actionSettingsSegments->setEnabled (!m_curfile.isEmpty ());
+  m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsCurves->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsFilter->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGridDisplay->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
 
-  m_groupDocumentImage->setEnabled (!m_curfile.isEmpty ());
-  m_groupDocumentPoints->setEnabled (!m_curfile.isEmpty ());
-  m_groupZoom->setEnabled (!m_curfile.isEmpty ());
+  m_groupDocumentImage->setEnabled (!m_currentFile.isEmpty ());
+  m_groupDocumentPoints->setEnabled (!m_currentFile.isEmpty ());
+  m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
-  m_actionZoomIn->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
-  m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
+  m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
+  m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)

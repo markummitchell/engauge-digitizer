@@ -41,7 +41,8 @@ public:
   ColorPalette paletteColor() const;
 
   /// Save style to stream.
-  void saveStyle(QXmlStreamWriter &stream) const;
+  void saveStyle(QXmlStreamWriter &stream,
+                 const QString &curveName) const;
 
   /// Set connect as.
   void setCurveConnectAs (CurveConnectAs curveConnectAs);

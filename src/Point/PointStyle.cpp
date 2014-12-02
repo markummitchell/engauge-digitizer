@@ -204,9 +204,11 @@ int PointStyle::radius () const
   return m_radius;
 }
 
-void PointStyle::saveStyle(QXmlStreamWriter &stream) const
+void PointStyle::saveStyle(QXmlStreamWriter &stream,
+                           const QString &curveName) const
 {
   stream.writeStartElement("PointStyle");
+  stream.writeAttribute ("Curve", curveName);
   stream.writeAttribute ("Radius", QString::number (m_radius));
   stream.writeAttribute ("Color", QString::number (m_paletteColor));
   stream.writeAttribute ("Shape", QString::number (m_shape));

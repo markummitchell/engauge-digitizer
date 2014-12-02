@@ -64,9 +64,11 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::saveStyle(QXmlStreamWriter &stream) const
+void LineStyle::saveStyle(QXmlStreamWriter &stream,
+                          const QString &curveName) const
 {
   stream.writeStartElement("LineStyle");
+  stream.writeAttribute ("Curve", curveName);
   stream.writeAttribute ("LineWidth", QString::number(m_width));
   stream.writeAttribute ("Color", QString::number (m_paletteColor));
   stream.writeAttribute ("ConnectAs", QString::number (m_curveConnectAs));

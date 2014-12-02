@@ -205,7 +205,8 @@ private:
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateViewedPoints ();
 
-  QString m_curfile;
+  QString m_engaugeFile;
+  QString m_currentFile;
 
   QMenu *m_menuFile;
   QAction *m_actionImport;

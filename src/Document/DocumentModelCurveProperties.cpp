@@ -139,14 +139,18 @@ void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
 
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.constBegin(); itrL != m_lineStyles.constEnd(); itrL++) {
-    const LineStyle &lineStyle = *itrL;
-    lineStyle.saveStyle(stream);
+    QString curveName = itrL.key();
+    const LineStyle &lineStyle = itrL.value();
+    lineStyle.saveStyle(stream,
+                        curveName);
   }
 
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.constBegin(); itrP != m_pointStyles.constEnd(); itrP++) {
-    const PointStyle &pointStyle = *itrP;
-    pointStyle.saveStyle(stream);
+    QString curveName = itrP.key();
+    const PointStyle &pointStyle = itrP.value();
+    pointStyle.saveStyle(stream,
+                         curveName);
   }
 
   stream.writeEndElement();
