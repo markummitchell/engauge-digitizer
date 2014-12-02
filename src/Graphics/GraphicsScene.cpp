@@ -2,7 +2,7 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
 #include "DataKey.h"
-#include "DlgModelCurveProperties.h"
+#include "DocumentModelCurveProperties.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsPointPolygon.h"
@@ -223,7 +223,7 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
   }
 }
 
-void GraphicsScene::updateCurveProperties (const DlgModelCurveProperties &modelCurveProperties)
+void GraphicsScene::updateCurveProperties (const DocumentModelCurveProperties &modelCurveProperties)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveProperties";
 }

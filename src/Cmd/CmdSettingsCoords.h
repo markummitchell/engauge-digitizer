@@ -2,7 +2,7 @@
 #define CMD_SETTINGS_COORDS_H
 
 #include "CmdAbstract.h"
-#include "DlgModelCoords.h"
+#include "DocumentModelCoords.h"
 
 /// Command for DlgSettingsCoords
 class CmdSettingsCoords : public CmdAbstract
@@ -11,8 +11,8 @@ public:
   /// Single constructor.
   CmdSettingsCoords(MainWindow &mainWindow,
                     Document &document,
-                    const DlgModelCoords &modelCoordsBefore,
-                    const DlgModelCoords &modelCoordsAfter);
+                    const DocumentModelCoords &modelCoordsBefore,
+                    const DocumentModelCoords &modelCoordsAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -20,8 +20,8 @@ public:
 private:
   CmdSettingsCoords();
 
-  DlgModelCoords m_modelCoordsBefore;
-  DlgModelCoords m_modelCoordsAfter;
+  DocumentModelCoords m_modelCoordsBefore;
+  DocumentModelCoords m_modelCoordsAfter;
 };
 
 #endif // CMD_SETTINGS_COORDS_H

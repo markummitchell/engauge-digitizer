@@ -4,7 +4,7 @@
 #include "CoordsType.h"
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelPointMatch;
+class DocumentModelPointMatch;
 class QComboBox;
 class QDoubleValidator;
 class QGridLayout;
@@ -50,8 +50,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelPointMatch *m_modelPointMatchBefore;
-  DlgModelPointMatch *m_modelPointMatchAfter;
+  DocumentModelPointMatch *m_modelPointMatchBefore;
+  DocumentModelPointMatch *m_modelPointMatchAfter;
 };
 
 #endif // DLG_SETTINGS_POINT_MATCH_H

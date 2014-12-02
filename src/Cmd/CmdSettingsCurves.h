@@ -4,7 +4,7 @@
 #include "CmdAbstract.h"
 #include "CurvesGraphs.h"
 
-class DlgModelCurves;
+class DocumentModelCurves;
 
 /// Command for DlgSettingsCurves
 class CmdSettingsCurves : public CmdAbstract
@@ -13,7 +13,7 @@ public:
   /// Single constructor.
   CmdSettingsCurves(MainWindow &mainWindow,
                     Document &document,
-                    const DlgModelCurves &modelCurves);
+                    const DocumentModelCurves &modelCurves);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

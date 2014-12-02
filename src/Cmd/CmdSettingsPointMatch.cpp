@@ -5,8 +5,8 @@
 
 CmdSettingsPointMatch::CmdSettingsPointMatch(MainWindow &mainWindow,
                                              Document &document,
-                                             const DlgModelPointMatch &modelPointMatchBefore,
-                                             const DlgModelPointMatch &modelPointMatchAfter) :
+                                             const DocumentModelPointMatch &modelPointMatchBefore,
+                                             const DocumentModelPointMatch &modelPointMatchAfter) :
   CmdAbstract(mainWindow,
               document,
               "Point Match settings"),

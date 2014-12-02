@@ -5,8 +5,8 @@
 
 CmdSettingsSegments::CmdSettingsSegments(MainWindow &mainWindow,
                                          Document &document,
-                                         const DlgModelSegments &modelSegmentsBefore,
-                                         const DlgModelSegments &modelSegmentsAfter) :
+                                         const DocumentModelSegments &modelSegmentsBefore,
+                                         const DocumentModelSegments &modelSegmentsAfter) :
   CmdAbstract(mainWindow,
               document,
               "Segments settings"),

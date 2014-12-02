@@ -6,20 +6,20 @@
 #include "Curve.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
-#include "img/DigitAxis.xpm"
-#include "img/DigitCurve.xpm"
-#include "img/DigitPointMatch.xpm"
-#include "img/DigitSegment.xpm"
-#include "img/DigitSelect.xpm"
-#include "Dlg/DlgSettingsCoords.h"
-#include "Dlg/DlgSettingsCurveProperties.h"
-#include "Dlg/DlgSettingsCurves.h"
-#include "Dlg/DlgSettingsExport.h"
-#include "Dlg/DlgSettingsFilter.h"
-#include "Dlg/DlgSettingsGridDisplay.h"
-#include "Dlg/DlgSettingsGridRemoval.h"
-#include "Dlg/DlgSettingsPointMatch.h"
-#include "Dlg/DlgSettingsSegments.h"
+#include "DigitAxis.xpm"
+#include "DigitCurve.xpm"
+#include "DigitPointMatch.xpm"
+#include "DigitSegment.xpm"
+#include "DigitSelect.xpm"
+#include "DlgSettingsCoords.h"
+#include "DlgSettingsCurveProperties.h"
+#include "DlgSettingsCurves.h"
+#include "DlgSettingsExport.h"
+#include "DlgSettingsFilter.h"
+#include "DlgSettingsGridDisplay.h"
+#include "DlgSettingsGridRemoval.h"
+#include "DlgSettingsPointMatch.h"
+#include "DlgSettingsSegments.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
@@ -1811,14 +1811,14 @@ void MainWindow::updateControls ()
   m_actionZoomOut->setEnabled (!m_curfile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
-void MainWindow::updateSettingsCoords(const DlgModelCoords &modelCoords)
+void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
 
   m_cmdMediator->document().setModelCoords(modelCoords);
 }
 
-void MainWindow::updateSettingsCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
+void MainWindow::updateSettingsCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveProperties";
 
@@ -1834,42 +1834,42 @@ void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
   loadCurveNamesFromCmdMediator();
 }
 
-void MainWindow::updateSettingsExport(const DlgModelExport &modelExport)
+void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExport";
 
   m_cmdMediator->document().setModelExport (modelExport);
 }
 
-void MainWindow::updateSettingsFilter(const DlgModelFilter &modelFilter)
+void MainWindow::updateSettingsFilter(const DocumentModelFilter &modelFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsFilter";
 
   m_cmdMediator->document().setModelFilter(modelFilter);
 }
 
-void MainWindow::updateSettingsGridDisplay(const DlgModelGridDisplay &modelGridDisplay)
+void MainWindow::updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
 
   m_cmdMediator->document().setModelGridDisplay(modelGridDisplay);
 }
 
-void MainWindow::updateSettingsGridRemoval(const DlgModelGridRemoval &modelGridRemoval)
+void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
 
   m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
 }
 
-void MainWindow::updateSettingsPointMatch(const DlgModelPointMatch &modelPointMatch)
+void MainWindow::updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsPointMatch";
 
   m_cmdMediator->document().setModelPointMatch(modelPointMatch);
 }
 
-void MainWindow::updateSettingsSegments(const DlgModelSegments &modelSegments)
+void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 

@@ -163,8 +163,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelPointMatchBefore = new DlgModelPointMatch (cmdMediator);
-  m_modelPointMatchAfter = new DlgModelPointMatch (cmdMediator);
+  m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator);
+  m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator);
 
   m_editPointSeparation->setText(QString::number(m_modelPointMatchAfter->pointSeparation()));
   m_editPointSize->setText(QString::number(m_modelPointMatchAfter->maxPointSize()));

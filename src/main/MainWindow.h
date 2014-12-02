@@ -7,15 +7,6 @@
 
 class CmdMediator;
 class DigitizeStateContext;
-class DlgModelCoords;
-class DlgModelCurveProperties;
-class DlgModelCurves;
-class DlgModelExport;
-class DlgModelFilter;
-class DlgModelGridDisplay;
-class DlgModelGridRemoval;
-class DlgModelPointMatch;
-class DlgModelSegments;
 class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
@@ -25,6 +16,15 @@ class DlgSettingsGridDisplay;
 class DlgSettingsGridRemoval;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
+class DocumentModelCoords;
+class DocumentModelCurveProperties;
+class DocumentModelCurves;
+class DocumentModelExport;
+class DocumentModelFilter;
+class DocumentModelGridDisplay;
+class DocumentModelGridRemoval;
+class DocumentModelPointMatch;
+class DocumentModelSegments;
 class GraphicsScene;
 class GraphicsView;
 class LoadImageFromUrl;
@@ -74,31 +74,31 @@ public:
   void updateAfterMouseRelease();
 
   /// Update with new coordinate properties.
-  void updateSettingsCoords(const DlgModelCoords &modelCoords);
+  void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
   /// Update with new curve properties.
-  void updateSettingsCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
+  void updateSettingsCurveProperties(const DocumentModelCurveProperties &modelCurveProperties);
 
   /// Update with new curves.
   void updateSettingsCurves (const CurvesGraphs &curvesGraphs);
 
   /// Update with new export properties.
-  void updateSettingsExport(const DlgModelExport &modelExport);
+  void updateSettingsExport(const DocumentModelExport &modelExport);
 
   /// Update with new filter properties.
-  void updateSettingsFilter(const DlgModelFilter &modelFilter);
+  void updateSettingsFilter(const DocumentModelFilter &modelFilter);
 
   /// Update with new grid display properties.
-  void updateSettingsGridDisplay(const DlgModelGridDisplay &modelGridDisplay);
+  void updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
 
   /// Update with new grid removal properties.
-  void updateSettingsGridRemoval(const DlgModelGridRemoval &modelGridRemoval);
+  void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
   /// Update with new point match properties.
-  void updateSettingsPointMatch(const DlgModelPointMatch &modelPointMatch);
+  void updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch);
 
   /// Update with new segments properties.
-  void updateSettingsSegments(const DlgModelSegments &modelSegments);
+  void updateSettingsSegments(const DocumentModelSegments &modelSegments);
 
   /// View for the QImage and QGraphicsItems, without const.
   GraphicsView &view ();

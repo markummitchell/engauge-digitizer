@@ -2,7 +2,7 @@
 #define CMD_SETTINGS_COORDS_H
 
 #include "CmdAbstract.h"
-#include "DlgModelExport.h"
+#include "DocumentModelExport.h"
 
 /// Command for DlgSettingsExport
 class CmdSettingsExport : public CmdAbstract
@@ -11,8 +11,8 @@ public:
   /// Single constructor.
   CmdSettingsExport(MainWindow &mainWindow,
                     Document &document,
-                    const DlgModelExport &modelExportBefore,
-                    const DlgModelExport &modelExportAfter);
+                    const DocumentModelExport &modelExportBefore,
+                    const DocumentModelExport &modelExportAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -20,8 +20,8 @@ public:
 private:
   CmdSettingsExport();
 
-  DlgModelExport m_modelExportBefore;
-  DlgModelExport m_modelExportAfter;
+  DocumentModelExport m_modelExportBefore;
+  DocumentModelExport m_modelExportAfter;
 };
 
 #endif // CMD_SETTINGS_COORDS_H

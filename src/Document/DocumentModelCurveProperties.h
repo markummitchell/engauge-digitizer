@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_CURVE_PROPERTIES_H
-#define DLG_MODEL_CURVE_PROPERTIES_H
+#ifndef DOCUMENT_MODEL_CURVE_PROPERTIES_H
+#define DOCUMENT_MODEL_CURVE_PROPERTIES_H
 
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
@@ -13,20 +13,20 @@ typedef QHash<QString, PointStyle> PointStyles;
 class CmdMediator;
 
 /// Model for DlgSettingsCurveProperties and CmdSettingsCurveProperties.
-class DlgModelCurveProperties : public DocumentModelAbstractBase
+class DocumentModelCurveProperties : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelCurveProperties();
+  DocumentModelCurveProperties();
 
   /// Initial constructor from Document.
-  DlgModelCurveProperties(const CmdMediator &cmdMediator);
+  DocumentModelCurveProperties(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelCurveProperties (const DlgModelCurveProperties &other);
+  DocumentModelCurveProperties (const DocumentModelCurveProperties &other);
 
   /// Assignment constructor.
-  DlgModelCurveProperties &operator=(const DlgModelCurveProperties &other);
+  DocumentModelCurveProperties &operator=(const DocumentModelCurveProperties &other);
 
   /// Insertion operator.
   
@@ -96,4 +96,4 @@ private:
   PointStyles m_pointStyles;
 };
 
-#endif // DLG_MODEL_CURVE_PROPERTIES_H
+#endif // DOCUMENT_MODEL_CURVE_PROPERTIES_H

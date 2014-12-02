@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelCoords;
+class DocumentModelCoords;
 class QComboBox;
 class QGridLayout;
 class QGroupBox;
@@ -70,8 +70,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelCoords *m_modelCoordsBefore;
-  DlgModelCoords *m_modelCoordsAfter;
+  DocumentModelCoords *m_modelCoordsBefore;
+  DocumentModelCoords *m_modelCoordsAfter;
 };
 
 #endif // DLG_SETTINGS_COORDS_H

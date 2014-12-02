@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelSegments;
+class DocumentModelSegments;
 class QCheckBox;
 class QComboBox;
 class QGridLayout;
@@ -48,8 +48,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelSegments *m_modelSegmentsBefore;
-  DlgModelSegments *m_modelSegmentsAfter;
+  DocumentModelSegments *m_modelSegmentsBefore;
+  DocumentModelSegments *m_modelSegmentsAfter;
 };
 
 #endif // DLG_SETTINGS_SEGMENTS_H

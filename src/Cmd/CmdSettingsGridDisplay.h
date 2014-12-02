@@ -2,7 +2,7 @@
 #define CMD_SETTINGS_GRID_DISPLAY_H
 
 #include "CmdAbstract.h"
-#include "DlgModelGridDisplay.h"
+#include "DocumentModelGridDisplay.h"
 
 /// Command for DlgSettingsGridDisplay
 class CmdSettingsGridDisplay : public CmdAbstract
@@ -11,8 +11,8 @@ public:
   /// Single constructor.
   CmdSettingsGridDisplay(MainWindow &mainWindow,
                          Document &document,
-                         const DlgModelGridDisplay &modelGridDisplayBefore,
-                         const DlgModelGridDisplay &modelGridDisplayAfter);
+                         const DocumentModelGridDisplay &modelGridDisplayBefore,
+                         const DocumentModelGridDisplay &modelGridDisplayAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -20,8 +20,8 @@ public:
 private:
   CmdSettingsGridDisplay();
 
-  DlgModelGridDisplay m_modelGridDisplayBefore;
-  DlgModelGridDisplay m_modelGridDisplayAfter;
+  DocumentModelGridDisplay m_modelGridDisplayBefore;
+  DocumentModelGridDisplay m_modelGridDisplayAfter;
 };
 
 #endif // CMD_SETTINGS_GRID_DISPLAY_H

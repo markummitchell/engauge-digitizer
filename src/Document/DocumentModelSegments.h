@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_SEGMENTS_H
-#define DLG_MODEL_SEGMENTS_H
+#ifndef DOCUMENT_MODEL_SEGMENTS_H
+#define DOCUMENT_MODEL_SEGMENTS_H
 
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
@@ -7,20 +7,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsSegments and CmdSettingsSegments.
-class DlgModelSegments : public DocumentModelAbstractBase
+class DocumentModelSegments : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelSegments();
+  DocumentModelSegments();
 
   /// Initial constructor from Document.
-  DlgModelSegments(const CmdMediator &cmdMediator);
+  DocumentModelSegments(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelSegments(const DlgModelSegments &other);
+  DocumentModelSegments(const DocumentModelSegments &other);
 
   /// Assignment constructor.
-  DlgModelSegments &operator=(const DlgModelSegments &other);
+  DocumentModelSegments &operator=(const DocumentModelSegments &other);
 
   /// Get method for fill corners.
   bool fillCorners () const;
@@ -63,4 +63,4 @@ private:
   ColorPalette m_lineColor;
 };
 
-#endif // DLG_MODEL_SEGMENTS_H
+#endif // DOCUMENT_MODEL_SEGMENTS_H

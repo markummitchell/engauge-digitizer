@@ -1,13 +1,13 @@
 #include "CmdSettingsCoords.h"
-#include "DlgModelCoords.h"
+#include "DocumentModelCoords.h"
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
 CmdSettingsCoords::CmdSettingsCoords(MainWindow &mainWindow,
                                      Document &document,
-                                     const DlgModelCoords &modelCoordsBefore,
-                                     const DlgModelCoords &modelCoordsAfter) :
+                                     const DocumentModelCoords &modelCoordsBefore,
+                                     const DocumentModelCoords &modelCoordsAfter) :
   CmdAbstract(mainWindow,
               document,
               "Coordinate settings"),

@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_FILTER_H
-#define DLG_MODEL_FILTER_H
+#ifndef DOCUMENT_MODEL_FILTER_H
+#define DOCUMENT_MODEL_FILTER_H
 
 #include "DocumentModelAbstractBase.h"
 #include "FilterParameter.h"
@@ -7,20 +7,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsFilter and CmdSettingsFilter.
-class DlgModelFilter : public DocumentModelAbstractBase
+class DocumentModelFilter : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelFilter();
+  DocumentModelFilter();
 
   /// Initial constructor from Document.
-  DlgModelFilter(const CmdMediator &cmdMediator);
+  DocumentModelFilter(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelFilter(const DlgModelFilter &other);
+  DocumentModelFilter(const DocumentModelFilter &other);
 
   /// Assignment constructor.
-  DlgModelFilter &operator=(const DlgModelFilter &other);
+  DocumentModelFilter &operator=(const DocumentModelFilter &other);
 
   /// Get method for filter parameter.
   FilterParameter filterParameter() const;
@@ -35,4 +35,4 @@ private:
   FilterParameter m_filterParameter;
 };
 
-#endif // DLG_MODEL_FILTER_H
+#endif // DOCUMENT_MODEL_FILTER_H

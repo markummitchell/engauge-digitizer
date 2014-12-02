@@ -208,9 +208,9 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   qDebug() << "DlgSettingsCurveProperties::load before before";
-  m_modelCurvePropertiesBefore = new DlgModelCurveProperties (cmdMediator);
+  m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator);
   qDebug() << "DlgSettingsCurveProperties::load between before and after";
-  m_modelCurvePropertiesAfter = new DlgModelCurveProperties (cmdMediator);
+  m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator);
   qDebug() << "DlgSettingsCurveProperties::load after after";
 
   // Load curve name combobox. The curve-specific controls get loaded in slotCurveName

@@ -277,42 +277,42 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-DlgModelCoords Document::modelCoords() const
+DocumentModelCoords Document::modelCoords() const
 {
   return m_modelCoords;
 }
 
-DlgModelCurveProperties Document::modelCurveProperties() const
+DocumentModelCurveProperties Document::modelCurveProperties() const
 {
   return m_modelCurveProperties;
 }
 
-DlgModelExport Document::modelExport() const
+DocumentModelExport Document::modelExport() const
 {
   return m_modelExport;
 }
 
-DlgModelFilter Document::modelFilter() const
+DocumentModelFilter Document::modelFilter() const
 {
   return m_modelFilter;
 }
 
-DlgModelGridDisplay Document::modelGridDisplay() const
+DocumentModelGridDisplay Document::modelGridDisplay() const
 {
   return m_modelGridDisplay;
 }
 
-DlgModelGridRemoval Document::modelGridRemoval() const
+DocumentModelGridRemoval Document::modelGridRemoval() const
 {
   return m_modelGridRemoval;
 }
 
-DlgModelPointMatch Document::modelPointMatch() const
+DocumentModelPointMatch Document::modelPointMatch() const
 {
   return m_modelPointMatch;
 }
 
-DlgModelSegments Document::modelSegments() const
+DocumentModelSegments Document::modelSegments() const
 {
   return m_modelSegments;
 }
@@ -403,42 +403,42 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   m_curvesGraphs = curvesGraphs;
 }
 
-void Document::setModelCoords (const DlgModelCoords &modelCoords)
+void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 {
   m_modelCoords = modelCoords;
 }
 
-void Document::setModelCurveProperties(const DlgModelCurveProperties &modelCurveProperties)
+void Document::setModelCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
 {
   m_modelCurveProperties = modelCurveProperties;
 }
 
-void Document::setModelExport(const DlgModelExport &modelExport)
+void Document::setModelExport(const DocumentModelExport &modelExport)
 {
   m_modelExport = modelExport;
 }
 
-void Document::setModelFilter(const DlgModelFilter &modelFilter)
+void Document::setModelFilter(const DocumentModelFilter &modelFilter)
 {
   m_modelFilter = modelFilter;
 }
 
-void Document::setModelGridDisplay(const DlgModelGridDisplay &modelGridDisplay)
+void Document::setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
 {
   m_modelGridDisplay = modelGridDisplay;
 }
 
-void Document::setModelGridRemoval(const DlgModelGridRemoval &modelGridRemoval)
+void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   m_modelGridRemoval = modelGridRemoval;
 }
 
-void Document::setModelPointMatch(const DlgModelPointMatch &modelPointMatch)
+void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
   m_modelPointMatch = modelPointMatch;
 }
 
-void Document::setModelSegments(const DlgModelSegments &modelSegments)
+void Document::setModelSegments(const DocumentModelSegments &modelSegments)
 {
   m_modelSegments = modelSegments;
 }

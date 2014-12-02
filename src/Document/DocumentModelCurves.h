@@ -1,18 +1,18 @@
-#ifndef DLG_MODEL_CURVES_H
-#define DLG_MODEL_CURVES_H
+#ifndef DOCUMENT_MODEL_CURVES_H
+#define DOCUMENT_MODEL_CURVES_H
 
-#include "DlgModelCurvesEntry.h"
+#include "DocumentModelCurvesEntry.h"
 #include "DocumentModelAbstractBase.h"
 #include <QAbstractTableModel>
 #include <QStringList>
 
 /// Model for DlgSettingsCurves and CmdSettingsCurves. This is displayed as a QListView, with visible first column showing current curve name.
 /// Second column is hidden with curve name at the start of editing, or empty if none.
-class DlgModelCurves : public QAbstractTableModel, public DocumentModelAbstractBase
+class DocumentModelCurves : public QAbstractTableModel, public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelCurves();
+  DocumentModelCurves();
 
   /// Columns are current curve name in first column, and original curve name in second column.
   virtual int columnCount (const QModelIndex &parent = QModelIndex()) const;
@@ -48,8 +48,8 @@ public:
 
 private:
 
-  /// Store entries as QStrings for easy translation into QVariants. Use DlgModelCurvesEntry to translate
+  /// Store entries as QStrings for easy translation into QVariants. Use DocumentModelCurvesEntry to translate
   QStringList m_modelCurvesEntries;
 };
 
-#endif // DLG_MODEL_CURVES_H
+#endif // DOCUMENT_MODEL_CURVES_H

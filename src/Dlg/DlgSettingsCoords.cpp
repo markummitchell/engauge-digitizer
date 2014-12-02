@@ -1,7 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
-#include "DlgModelCoords.h"
 #include "DlgSettingsCoords.h"
+#include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -198,8 +198,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelCoordsBefore = new DlgModelCoords (cmdMediator.document().modelCoords());
-  m_modelCoordsAfter = new DlgModelCoords (cmdMediator.document().modelCoords());
+  m_modelCoordsBefore = new DocumentModelCoords (cmdMediator.document().modelCoords());
+  m_modelCoordsAfter = new DocumentModelCoords (cmdMediator.document().modelCoords());
 
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 

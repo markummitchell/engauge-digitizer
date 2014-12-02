@@ -1,14 +1,14 @@
 #include "CmdMediator.h"
-#include "DlgModelCurveProperties.h"
+#include "DocumentModelCurveProperties.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QXmlStreamWriter>
 
-DlgModelCurveProperties::DlgModelCurveProperties()
+DocumentModelCurveProperties::DocumentModelCurveProperties()
 {
 }
 
-DlgModelCurveProperties::DlgModelCurveProperties (const CmdMediator &cmdMediator)
+DocumentModelCurveProperties::DocumentModelCurveProperties (const CmdMediator &cmdMediator)
 {
   const Curve &curveAxes = cmdMediator.document().curveAxes();
   m_lineStyles [AXIS_CURVE_NAME].setCurveConnectAs (curveAxes.lineStyle().curveConnectAs());
@@ -34,7 +34,7 @@ DlgModelCurveProperties::DlgModelCurveProperties (const CmdMediator &cmdMediator
   }
 }
 
-DlgModelCurveProperties::DlgModelCurveProperties (const DlgModelCurveProperties &other)
+DocumentModelCurveProperties::DocumentModelCurveProperties (const DocumentModelCurveProperties &other)
 {
   LineStyles::const_iterator itrL;
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
@@ -52,7 +52,7 @@ DlgModelCurveProperties::DlgModelCurveProperties (const DlgModelCurveProperties 
   }
 }
 
-DlgModelCurveProperties &DlgModelCurveProperties::operator=(const DlgModelCurveProperties &other)
+DocumentModelCurveProperties &DocumentModelCurveProperties::operator=(const DocumentModelCurveProperties &other)
 {
   LineStyles::const_iterator itrL;
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
@@ -72,70 +72,70 @@ DlgModelCurveProperties &DlgModelCurveProperties::operator=(const DlgModelCurveP
   return *this;
 }
 
-ColorPalette DlgModelCurveProperties::lineColor (const QString &curveName) const
+ColorPalette DocumentModelCurveProperties::lineColor (const QString &curveName) const
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
     qDebug() << "shit4 "<<curveName<<" "<< m_lineStyles[curveName].paletteColor();
   return m_lineStyles [curveName].paletteColor();
 }
 
-CurveConnectAs DlgModelCurveProperties::lineConnectAs (const QString &curveName) const
+CurveConnectAs DocumentModelCurveProperties::lineConnectAs (const QString &curveName) const
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   return m_lineStyles [curveName].curveConnectAs();
 }
 
-const LineStyles &DlgModelCurveProperties::lineStyles () const
+const LineStyles &DocumentModelCurveProperties::lineStyles () const
 {
   return m_lineStyles;
 }
 
-int DlgModelCurveProperties::lineWidth (const QString &curveName) const
+int DocumentModelCurveProperties::lineWidth (const QString &curveName) const
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   return m_lineStyles [curveName].width();
 }
 
-ColorPalette DlgModelCurveProperties::pointColor (const QString &curveName) const
+ColorPalette DocumentModelCurveProperties::pointColor (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].paletteColor();
 }
 
-bool DlgModelCurveProperties::pointIsCircle (const QString &curveName) const
+bool DocumentModelCurveProperties::pointIsCircle (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].isCircle();
 }
 
-QPolygonF DlgModelCurveProperties::pointPolygon (const QString &curveName) const
+QPolygonF DocumentModelCurveProperties::pointPolygon (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].polygon();
 }
 
-int DlgModelCurveProperties::pointRadius (const QString &curveName) const
+int DocumentModelCurveProperties::pointRadius (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].radius();
 }
 
-PointShape DlgModelCurveProperties::pointShape (const QString &curveName) const
+PointShape DocumentModelCurveProperties::pointShape (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].shape ();
 }
 
-const PointStyles &DlgModelCurveProperties::pointStyles() const
+const PointStyles &DocumentModelCurveProperties::pointStyles() const
 {
   return m_pointStyles;
 }
 
-void DlgModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurveProperties::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurveProperties::saveModel";
 
-  stream.writeStartElement("DlgModelCurveProperties");
+  stream.writeStartElement("DocumentModelCurveProperties");
 
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.constBegin(); itrL != m_lineStyles.constEnd(); itrL++) {
@@ -152,7 +152,7 @@ void DlgModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
   stream.writeEndElement();
 }
 
-void DlgModelCurveProperties::setLineColor (const QString &curveName,
+void DocumentModelCurveProperties::setLineColor (const QString &curveName,
                                             ColorPalette lineColor)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
@@ -160,35 +160,35 @@ void DlgModelCurveProperties::setLineColor (const QString &curveName,
     qDebug() << "shit6 "<< curveName<<" "<<lineColor<< "->"<< m_lineStyles[curveName].paletteColor();
 }
 
-void DlgModelCurveProperties::setLineConnectAs (const QString &curveName,
+void DocumentModelCurveProperties::setLineConnectAs (const QString &curveName,
                                                 CurveConnectAs curveConnectAs)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setCurveConnectAs(curveConnectAs);
 }
 
-void DlgModelCurveProperties::setLineWidth (const QString &curveName,
+void DocumentModelCurveProperties::setLineWidth (const QString &curveName,
                                             int width)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setWidth(width);
 }
 
-void DlgModelCurveProperties::setPointColor (const QString &curveName,
+void DocumentModelCurveProperties::setPointColor (const QString &curveName,
                                              ColorPalette curveColor)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   m_pointStyles [curveName].setPaletteColor(curveColor);
 }
 
-void DlgModelCurveProperties::setPointRadius (const QString &curveName,
+void DocumentModelCurveProperties::setPointRadius (const QString &curveName,
                                               int radius)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   m_pointStyles [curveName].setRadius (radius);
 }
 
-void DlgModelCurveProperties::setPointShape (const QString &curveName,
+void DocumentModelCurveProperties::setPointShape (const QString &curveName,
                                              PointShape shape)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));

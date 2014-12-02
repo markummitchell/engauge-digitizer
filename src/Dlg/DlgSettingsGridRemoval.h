@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelGridRemoval;
+class DocumentModelGridRemoval;
 class QCheckBox;
 class QComboBox;
 class QGraphicsScene;
@@ -74,8 +74,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelGridRemoval *m_modelGridRemovalBefore;
-  DlgModelGridRemoval *m_modelGridRemovalAfter;
+  DocumentModelGridRemoval *m_modelGridRemovalBefore;
+  DocumentModelGridRemoval *m_modelGridRemovalAfter;
 };
 
 #endif // DLG_SETTINGS_GRID_REMOVAL_H

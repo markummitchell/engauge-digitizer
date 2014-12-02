@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelExport;
+class DocumentModelExport;
 class QGridLayout;
 class QHBoxLayout;
 class QLineEdit;
@@ -99,8 +99,8 @@ private:
 
   QTextEdit *m_editPreview;
 
-  DlgModelExport *m_modelExportBefore;
-  DlgModelExport *m_modelExportAfter;
+  DocumentModelExport *m_modelExportBefore;
+  DocumentModelExport *m_modelExportAfter;
 };
 
 #endif // DLG_SETTINGS_EXPORT_H

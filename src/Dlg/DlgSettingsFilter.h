@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelFilter;
+class DocumentModelFilter;
 class QGraphicsScene;
 class QGridLayout;
 class QLabel;
@@ -54,8 +54,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelFilter *m_modelFilterBefore;
-  DlgModelFilter *m_modelFilterAfter;
+  DocumentModelFilter *m_modelFilterBefore;
+  DocumentModelFilter *m_modelFilterAfter;
 };
 
 #endif // DLG_SETTINGS_FILTER_H

@@ -5,8 +5,8 @@
 
 CmdSettingsGridDisplay::CmdSettingsGridDisplay(MainWindow &mainWindow,
                                                Document &document,
-                                               const DlgModelGridDisplay &modelGridDisplayBefore,
-                                               const DlgModelGridDisplay &modelGridDisplayAfter) :
+                                               const DocumentModelGridDisplay &modelGridDisplayBefore,
+                                               const DocumentModelGridDisplay &modelGridDisplayAfter) :
   CmdAbstract(mainWindow,
               document,
               "Grid Display settings"),

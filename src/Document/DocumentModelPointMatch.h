@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_POINT_MATCH_H
-#define DLG_MODEL_POINT_MATCH_H
+#ifndef DOCUMENT_MODEL_POINT_MATCH_H
+#define DOCUMENT_MODEL_POINT_MATCH_H
 
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
@@ -7,20 +7,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsPointMatch and CmdSettingsPointMatch.
-class DlgModelPointMatch : public DocumentModelAbstractBase
+class DocumentModelPointMatch : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelPointMatch();
+  DocumentModelPointMatch();
 
   /// Initial constructor from Document.
-  DlgModelPointMatch(const CmdMediator &cmdMediator);
+  DocumentModelPointMatch(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelPointMatch(const DlgModelPointMatch &other);
+  DocumentModelPointMatch(const DocumentModelPointMatch &other);
 
   /// Assignment constructor.
-  DlgModelPointMatch &operator=(const DlgModelPointMatch &other);
+  DocumentModelPointMatch &operator=(const DocumentModelPointMatch &other);
 
   /// Get method for max point size.
   double maxPointSize() const;
@@ -63,4 +63,4 @@ private:
   ColorPalette m_paletteColorRejected;
 };
 
-#endif // DLG_MODEL_POINT_MATCH_H
+#endif // DOCUMENT_MODEL_POINT_MATCH_H

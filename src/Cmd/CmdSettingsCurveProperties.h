@@ -2,11 +2,11 @@
 #define CMD_SETTINGS_CURVE_PROPERTIES_H
 
 #include "CmdAbstract.h"
-#include "DlgModelCurveProperties.h"
+#include "DocumentModelCurveProperties.h"
 #include "LineStyle.h"
 #include "PointStyle.h"
 
-class DlgModelCurveProperties;
+class DocumentModelCurveProperties;
 
 /// Command for DlgSettingsCurveProperties
 class CmdSettingsCurveProperties : public CmdAbstract
@@ -15,8 +15,8 @@ public:
   /// Single constructor.
   CmdSettingsCurveProperties(MainWindow &mainWindow,
                              Document &document,
-                             const DlgModelCurveProperties &modelCurvePropertiesBefore,
-                             const DlgModelCurveProperties &modelCurvePropertiesAfter);
+                             const DocumentModelCurveProperties &modelCurvePropertiesBefore,
+                             const DocumentModelCurveProperties &modelCurvePropertiesAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -24,8 +24,8 @@ public:
 private:
   CmdSettingsCurveProperties();
 
-  DlgModelCurveProperties m_modelCurvePropertiesBefore;
-  DlgModelCurveProperties m_modelCurvePropertiesAfter;
+  DocumentModelCurveProperties m_modelCurvePropertiesBefore;
+  DocumentModelCurveProperties m_modelCurvePropertiesAfter;
 };
 
 #endif // CMD_SETTINGS_CURVE_PROPERTIES_H

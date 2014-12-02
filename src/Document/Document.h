@@ -2,14 +2,14 @@
 #define DOCUMENT_H
 
 #include "CurvesGraphs.h"
-#include "DlgModelCoords.h"
-#include "DlgModelCurveProperties.h"
-#include "DlgModelExport.h"
-#include "DlgModelFilter.h"
-#include "DlgModelGridDisplay.h"
-#include "DlgModelGridRemoval.h"
-#include "DlgModelPointMatch.h"
-#include "DlgModelSegments.h"
+#include "DocumentModelCoords.h"
+#include "DocumentModelCurveProperties.h"
+#include "DocumentModelExport.h"
+#include "DocumentModelFilter.h"
+#include "DocumentModelGridDisplay.h"
+#include "DocumentModelGridRemoval.h"
+#include "DocumentModelPointMatch.h"
+#include "DocumentModelSegments.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -93,29 +93,29 @@ public:
   /// See CurvesGraphs::curvesGraphsNumPoints.
   int curvesGraphsNumPoints (const QString &curveName) const;
 
-  /// Get method for DlgModelCoords.
-  DlgModelCoords modelCoords () const;
+  /// Get method for DocumentModelCoords.
+  DocumentModelCoords modelCoords () const;
 
-  /// Get method for DlgModelCurveProperties.
-  DlgModelCurveProperties modelCurveProperties() const;
+  /// Get method for DocumentModelCurveProperties.
+  DocumentModelCurveProperties modelCurveProperties() const;
 
-  /// Get method for DlgModelExport.
-  DlgModelExport modelExport() const;
+  /// Get method for DocumentModelExport.
+  DocumentModelExport modelExport() const;
 
-  /// Get method for DlgModelFilter.
-  DlgModelFilter modelFilter() const;
+  /// Get method for DocumentModelFilter.
+  DocumentModelFilter modelFilter() const;
 
-  /// Get method for DlgModelGridDisplay.
-  DlgModelGridDisplay modelGridDisplay() const;
+  /// Get method for DocumentModelGridDisplay.
+  DocumentModelGridDisplay modelGridDisplay() const;
 
-  /// Get method for DlgModelGridRemoval.
-  DlgModelGridRemoval modelGridRemoval() const;
+  /// Get method for DocumentModelGridRemoval.
+  DocumentModelGridRemoval modelGridRemoval() const;
 
-  /// Get method for DlgModelPointMatch.
-  DlgModelPointMatch modelPointMatch() const;
+  /// Get method for DocumentModelPointMatch.
+  DocumentModelPointMatch modelPointMatch() const;
 
-  /// Get method for DlgModelSegments.
-  DlgModelSegments modelSegments() const;
+  /// Get method for DocumentModelSegments.
+  DocumentModelSegments modelSegments() const;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
@@ -171,29 +171,29 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
-  /// Set method for DlgModelCoords.
-  void setModelCoords (const DlgModelCoords &modelCoords);
+  /// Set method for DocumentModelCoords.
+  void setModelCoords (const DocumentModelCoords &modelCoords);
 
-  /// Set method for DlgModelCurveProperties.
-  void setModelCurveProperties(const DlgModelCurveProperties &modelCurveProperties);
+  /// Set method for DocumentModelCurveProperties.
+  void setModelCurveProperties(const DocumentModelCurveProperties &modelCurveProperties);
 
-  /// Set method for DlgModelExport.
-  void setModelExport(const DlgModelExport &modelExport);
+  /// Set method for DocumentModelExport.
+  void setModelExport(const DocumentModelExport &modelExport);
 
-  /// Set method for DlgModelFilter.
-  void setModelFilter(const DlgModelFilter &modelFilter);
+  /// Set method for DocumentModelFilter.
+  void setModelFilter(const DocumentModelFilter &modelFilter);
 
-  /// Set method for DlgModelGridDisplay.
-  void setModelGridDisplay(const DlgModelGridDisplay &modelGridDisplay);
+  /// Set method for DocumentModelGridDisplay.
+  void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
 
-  /// Set method for DlgModelGridRemoval.
-  void setModelGridRemoval(const DlgModelGridRemoval &modelGridRemoval);
+  /// Set method for DocumentModelGridRemoval.
+  void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
-  /// Set method for DlgModelPointMatch.
-  void setModelPointMatch(const DlgModelPointMatch &modelPointMatch);
+  /// Set method for DocumentModelPointMatch.
+  void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
 
-  /// Set method for DlgModelSegments.
-  void setModelSegments(const DlgModelSegments &modelSegments);
+  /// Set method for DocumentModelSegments.
+  void setModelSegments(const DocumentModelSegments &modelSegments);
 
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
@@ -214,14 +214,14 @@ private:
   Curve *m_curveAxes;
   CurvesGraphs m_curvesGraphs;
 
-  DlgModelCoords m_modelCoords;
-  DlgModelCurveProperties m_modelCurveProperties;
-  DlgModelExport m_modelExport;
-  DlgModelFilter m_modelFilter;
-  DlgModelGridDisplay m_modelGridDisplay;
-  DlgModelGridRemoval m_modelGridRemoval;
-  DlgModelPointMatch m_modelPointMatch;
-  DlgModelSegments m_modelSegments;
+  DocumentModelCoords m_modelCoords;
+  DocumentModelCurveProperties m_modelCurveProperties;
+  DocumentModelExport m_modelExport;
+  DocumentModelFilter m_modelFilter;
+  DocumentModelGridDisplay m_modelGridDisplay;
+  DocumentModelGridRemoval m_modelGridRemoval;
+  DocumentModelPointMatch m_modelPointMatch;
+  DocumentModelSegments m_modelSegments;
 };
 
 #endif // DOCUMENT_H

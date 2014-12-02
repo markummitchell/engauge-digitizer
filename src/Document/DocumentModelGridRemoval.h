@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_GRID_REMOVAL_H
-#define DLG_MODEL_GRID_REMOVAL_H
+#ifndef DOCUMENT_MODEL_GRID_REMOVAL_H
+#define DOCUMENT_MODEL_GRID_REMOVAL_H
 
 #include "DocumentModelAbstractBase.h"
 #include "GridCoordDisable.h"
@@ -7,20 +7,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval.
-class DlgModelGridRemoval : public DocumentModelAbstractBase
+class DocumentModelGridRemoval : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelGridRemoval();
+  DocumentModelGridRemoval();
 
   /// Initial constructor from Document.
-  DlgModelGridRemoval(const CmdMediator &cmdMediator);
+  DocumentModelGridRemoval(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelGridRemoval(const DlgModelGridRemoval &other);
+  DocumentModelGridRemoval(const DocumentModelGridRemoval &other);
 
   /// Assignment constructor.
-  DlgModelGridRemoval &operator=(const DlgModelGridRemoval &other);
+  DocumentModelGridRemoval &operator=(const DocumentModelGridRemoval &other);
 
   /// Get method for close distance.
   double closeDistance() const;
@@ -120,4 +120,4 @@ private:
   bool m_removeParallelToAxes;
 };
 
-#endif // DLG_MODEL_GRID_REMOVAL_H
+#endif // DOCUMENT_MODEL_GRID_REMOVAL_H

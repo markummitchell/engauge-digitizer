@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_COORDS_H
-#define DLG_MODEL_COORDS_H
+#ifndef DOCUMENT_MODEL_COORDS_H
+#define DOCUMENT_MODEL_COORDS_H
 
 #include "CoordScale.h"
 #include "CoordsType.h"
@@ -9,20 +9,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsCoords and CmdSettingsCoords.
-class DlgModelCoords : public DocumentModelAbstractBase
+class DocumentModelCoords : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelCoords();
+  DocumentModelCoords();
 
   /// Initial constructor from Document.
-  DlgModelCoords(const CmdMediator &cmdMediator);
+  DocumentModelCoords(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelCoords(const DlgModelCoords &other);
+  DocumentModelCoords(const DocumentModelCoords &other);
 
   /// Assignment constructor.
-  DlgModelCoords &operator=(const DlgModelCoords &other);
+  DocumentModelCoords &operator=(const DocumentModelCoords &other);
 
   /// Get method for linear/log scale on x/theta.
   CoordScale coordScaleXTheta () const;
@@ -65,4 +65,4 @@ private:
   CoordThetaUnits m_coordThetaUnits; // Applies to polar coordinates
 };
 
-#endif // DLG_MODEL_COORDS_H
+#endif // DOCUMENT_MODEL_COORDS_H

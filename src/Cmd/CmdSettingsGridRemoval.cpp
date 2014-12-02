@@ -5,8 +5,8 @@
 
 CmdSettingsGridRemoval::CmdSettingsGridRemoval(MainWindow &mainWindow,
                                                Document &document,
-                                               const DlgModelGridRemoval &modelGridRemovalBefore,
-                                               const DlgModelGridRemoval &modelGridRemovalAfter) :
+                                               const DocumentModelGridRemoval &modelGridRemovalBefore,
+                                               const DocumentModelGridRemoval &modelGridRemovalAfter) :
   CmdAbstract(mainWindow,
               document,
               "Grid Removal settings"),

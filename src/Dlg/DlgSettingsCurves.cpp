@@ -1,7 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCurves.h"
-#include "DlgModelCurves.h"
 #include "DlgSettingsCurves.h"
+#include "DocumentModelCurves.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDebug>
@@ -58,7 +58,7 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
   QLabel *label = new QLabel (tr ("Curve Names:"));
   layout->addWidget (label, row++, 1);
 
-  m_modelCurves = new DlgModelCurves;
+  m_modelCurves = new DocumentModelCurves;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
   m_listCurves = new QListView;
@@ -143,9 +143,9 @@ void DlgSettingsCurves::insertCurveName (int row,
 
     LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
-    DlgModelCurvesEntry curvesEntry (curveNameNew,
-                                     curveNameOriginal,
-                                     numPoints);
+    DocumentModelCurvesEntry curvesEntry (curveNameNew,
+                                          curveNameOriginal,
+                                          numPoints);
 
     m_modelCurves->setData (m_modelCurves->index (row, 0),
                             curvesEntry.curveNameCurrent ());

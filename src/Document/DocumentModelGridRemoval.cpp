@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgModelGridRemoval.h"
+#include "DocumentModelGridRemoval.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -9,7 +9,7 @@ const double CLOSE_DISTANCE_DEFAULT = 1.0;
 const int DEFAULT_COUNT = 2;
 const double DEFAULT_NON_COUNT = 0.0;
 
-DlgModelGridRemoval::DlgModelGridRemoval() :
+DocumentModelGridRemoval::DocumentModelGridRemoval() :
   m_removeDefinedGridLines (false),
   m_closeDistance (CLOSE_DISTANCE_DEFAULT),
   m_gridCoordDisableX (GRID_COORD_DISABLE_COUNT),
@@ -26,7 +26,7 @@ DlgModelGridRemoval::DlgModelGridRemoval() :
 {
 }
 
-DlgModelGridRemoval::DlgModelGridRemoval(const CmdMediator &cmdMediator) :
+DocumentModelGridRemoval::DocumentModelGridRemoval(const CmdMediator &cmdMediator) :
   m_removeDefinedGridLines (cmdMediator.document().modelGridRemoval().removeDefinedGridLines()),
   m_closeDistance (cmdMediator.document().modelGridRemoval().closeDistance()),
   m_gridCoordDisableX (cmdMediator.document().modelGridRemoval().gridCoordDisableX()),
@@ -43,7 +43,7 @@ DlgModelGridRemoval::DlgModelGridRemoval(const CmdMediator &cmdMediator) :
 {
 }
 
-DlgModelGridRemoval::DlgModelGridRemoval(const DlgModelGridRemoval &other) :
+DocumentModelGridRemoval::DocumentModelGridRemoval(const DocumentModelGridRemoval &other) :
   m_removeDefinedGridLines (other.removeDefinedGridLines()),
   m_closeDistance (other.closeDistance()),
   m_gridCoordDisableX (other.gridCoordDisableX()),
@@ -60,7 +60,7 @@ DlgModelGridRemoval::DlgModelGridRemoval(const DlgModelGridRemoval &other) :
 {
 }
 
-DlgModelGridRemoval &DlgModelGridRemoval::operator=(const DlgModelGridRemoval &other)
+DocumentModelGridRemoval &DocumentModelGridRemoval::operator=(const DocumentModelGridRemoval &other)
 {
   m_removeDefinedGridLines = other.removeDefinedGridLines();
   m_closeDistance = other.closeDistance();
@@ -79,140 +79,140 @@ DlgModelGridRemoval &DlgModelGridRemoval::operator=(const DlgModelGridRemoval &o
   return *this;
 }
 
-double DlgModelGridRemoval::closeDistance() const
+double DocumentModelGridRemoval::closeDistance() const
 {
   return m_closeDistance;
 }
 
-int DlgModelGridRemoval::countX() const
+int DocumentModelGridRemoval::countX() const
 {
   return m_countX;
 }
 
-int DlgModelGridRemoval::countY() const
+int DocumentModelGridRemoval::countY() const
 {
   return m_countY;
 }
 
-GridCoordDisable DlgModelGridRemoval::gridCoordDisableX () const
+GridCoordDisable DocumentModelGridRemoval::gridCoordDisableX () const
 {
   return m_gridCoordDisableX;
 }
 
-GridCoordDisable DlgModelGridRemoval::gridCoordDisableY () const
+GridCoordDisable DocumentModelGridRemoval::gridCoordDisableY () const
 {
   return m_gridCoordDisableY;
 }
 
-bool DlgModelGridRemoval::removeDefinedGridLines () const
+bool DocumentModelGridRemoval::removeDefinedGridLines () const
 {
   return m_removeDefinedGridLines;
 }
 
-bool DlgModelGridRemoval::removeParallelToAxes () const
+bool DocumentModelGridRemoval::removeParallelToAxes () const
 {
   return m_removeParallelToAxes;
 }
 
-void DlgModelGridRemoval::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelGridRemoval::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelGridRemoval::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveModel";
 
-  stream.writeStartElement("DlgModelGridRemoval");
+  stream.writeStartElement("DocumentModelGridRemoval");
   stream.writeEndElement();
 }
 
-void DlgModelGridRemoval::setCloseDistance(double closeDistance)
+void DocumentModelGridRemoval::setCloseDistance(double closeDistance)
 {
   m_closeDistance = closeDistance;
 }
 
-void DlgModelGridRemoval::setCountX(int countX)
+void DocumentModelGridRemoval::setCountX(int countX)
 {
   m_countX = countX;
 }
 
-void DlgModelGridRemoval::setCountY(int countY)
+void DocumentModelGridRemoval::setCountY(int countY)
 {
   m_countY = countY;
 }
 
-void DlgModelGridRemoval::setGridCoordDisableX (GridCoordDisable gridCoordDisable)
+void DocumentModelGridRemoval::setGridCoordDisableX (GridCoordDisable gridCoordDisable)
 {
   m_gridCoordDisableX = gridCoordDisable;
 }
 
-void DlgModelGridRemoval::setGridCoordDisableY (GridCoordDisable gridCoordDisable)
+void DocumentModelGridRemoval::setGridCoordDisableY (GridCoordDisable gridCoordDisable)
 {
   m_gridCoordDisableY = gridCoordDisable;
 }
 
-void DlgModelGridRemoval::setRemoveDefinedGridLines (bool removeDefinedGridLines)
+void DocumentModelGridRemoval::setRemoveDefinedGridLines (bool removeDefinedGridLines)
 {
   m_removeDefinedGridLines = removeDefinedGridLines;
 }
 
-void DlgModelGridRemoval::setRemoveParallelToAxes (bool removeParallelToAxes)
+void DocumentModelGridRemoval::setRemoveParallelToAxes (bool removeParallelToAxes)
 {
   m_removeParallelToAxes = removeParallelToAxes;
 }
 
-void DlgModelGridRemoval::setStartX(double startX)
+void DocumentModelGridRemoval::setStartX(double startX)
 {
   m_startX = startX;
 }
 
-void DlgModelGridRemoval::setStartY(double startY)
+void DocumentModelGridRemoval::setStartY(double startY)
 {
   m_startY = startY;
 }
 
-void DlgModelGridRemoval::setStepX(double stepX)
+void DocumentModelGridRemoval::setStepX(double stepX)
 {
   m_stepX = stepX;
 }
 
-void DlgModelGridRemoval::setStepY(double stepY)
+void DocumentModelGridRemoval::setStepY(double stepY)
 {
   m_stepY = stepY;
 }
 
-void DlgModelGridRemoval::setStopX(double stopX)
+void DocumentModelGridRemoval::setStopX(double stopX)
 {
   m_stopX = stopX;
 }
 
-void DlgModelGridRemoval::setStopY(double stopY)
+void DocumentModelGridRemoval::setStopY(double stopY)
 {
   m_stopY = stopY;
 }
 
-double DlgModelGridRemoval::startX() const
+double DocumentModelGridRemoval::startX() const
 {
   return m_startX;
 }
 
-double DlgModelGridRemoval::startY() const
+double DocumentModelGridRemoval::startY() const
 {
   return m_startY;
 }
 
-double DlgModelGridRemoval::stepX() const
+double DocumentModelGridRemoval::stepX() const
 {
   return m_stepX;
 }
 
-double DlgModelGridRemoval::stepY() const
+double DocumentModelGridRemoval::stepY() const
 {
   return m_stepY;
 }
 
-double DlgModelGridRemoval::stopX() const
+double DocumentModelGridRemoval::stopX() const
 {
   return m_stopX;
 }
 
-double DlgModelGridRemoval::stopY() const
+double DocumentModelGridRemoval::stopY() const
 {
   return m_stopY;
 }

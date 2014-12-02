@@ -2,7 +2,7 @@
 #define CMD_SETTINGS_SEGMENTS_H
 
 #include "CmdAbstract.h"
-#include "DlgModelSegments.h"
+#include "DocumentModelSegments.h"
 
 /// Command for DlgSettingsSegments
 class CmdSettingsSegments : public CmdAbstract
@@ -11,8 +11,8 @@ public:
   /// Single constructor.
   CmdSettingsSegments(MainWindow &mainWindow,
                       Document &document,
-                      const DlgModelSegments &modelSegmentsBefore,
-                      const DlgModelSegments &modelSegmentsAfter);
+                      const DocumentModelSegments &modelSegmentsBefore,
+                      const DocumentModelSegments &modelSegmentsAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -20,8 +20,8 @@ public:
 private:
   CmdSettingsSegments();
 
-  DlgModelSegments m_modelSegmentsBefore;
-  DlgModelSegments m_modelSegmentsAfter;
+  DocumentModelSegments m_modelSegmentsBefore;
+  DocumentModelSegments m_modelSegmentsAfter;
 };
 
 #endif // CMD_SETTINGS_SEGMENTS_H

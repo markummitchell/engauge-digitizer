@@ -1,17 +1,17 @@
-#include "DlgModelCurvesEntry.h"
+#include "DocumentModelCurvesEntry.h"
 #include <QStringList>
 #include <QXmlStreamWriter>
 
 const QString DELIMITER ("\t");
 
-DlgModelCurvesEntry::  DlgModelCurvesEntry () :
+DocumentModelCurvesEntry::  DocumentModelCurvesEntry () :
   m_curveNameCurrent (""),
   m_curveNameOriginal (""),
   m_numPoints (0)
 {
 }
 
-DlgModelCurvesEntry::DlgModelCurvesEntry (const QString &curveNameCurrent,
+DocumentModelCurvesEntry::DocumentModelCurvesEntry (const QString &curveNameCurrent,
                                         const QString &curveNameOriginal,
                                         int numPoints) :
   m_curveNameCurrent (curveNameCurrent),
@@ -20,7 +20,7 @@ DlgModelCurvesEntry::DlgModelCurvesEntry (const QString &curveNameCurrent,
 {
 }
 
-DlgModelCurvesEntry::DlgModelCurvesEntry (const QString &fromText)
+DocumentModelCurvesEntry::DocumentModelCurvesEntry (const QString &fromText)
 {
   QStringList values = fromText.split (DELIMITER);
   Q_ASSERT (values.count () == 3);
@@ -29,37 +29,37 @@ DlgModelCurvesEntry::DlgModelCurvesEntry (const QString &fromText)
   m_numPoints = values.at (2).toInt();
 }
 
-QString DlgModelCurvesEntry::curveNameCurrent () const
+QString DocumentModelCurvesEntry::curveNameCurrent () const
 {
   return m_curveNameCurrent;
 }
 
-QString DlgModelCurvesEntry::curveNameOriginal () const
+QString DocumentModelCurvesEntry::curveNameOriginal () const
 {
   return m_curveNameOriginal;
 }
 
-int DlgModelCurvesEntry::numPoints () const
+int DocumentModelCurvesEntry::numPoints () const
 {
   return m_numPoints;
 }
 
-void DlgModelCurvesEntry::setCurveNameCurrent (const QString &curveNameCurrent)
+void DocumentModelCurvesEntry::setCurveNameCurrent (const QString &curveNameCurrent)
 {
   m_curveNameCurrent = curveNameCurrent;
 }
 
-void DlgModelCurvesEntry::setCurveNameOriginal (const QString &curveNameOriginal)
+void DocumentModelCurvesEntry::setCurveNameOriginal (const QString &curveNameOriginal)
 {
   m_curveNameOriginal = curveNameOriginal;
 }
 
-void DlgModelCurvesEntry::setNumPoints (int numPoints)
+void DocumentModelCurvesEntry::setNumPoints (int numPoints)
 {
   m_numPoints = numPoints;
 }
 
-QString DlgModelCurvesEntry::toString () const
+QString DocumentModelCurvesEntry::toString () const
 {
   return QString ("%1%2%3%4%5")
       .arg (m_curveNameCurrent)

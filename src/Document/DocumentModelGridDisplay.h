@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_GRID_DISPLAY_H
-#define DLG_MODEL_GRID_DISPLAY_H
+#ifndef DOCUMENT_MODEL_GRID_DISPLAY_H
+#define DOCUMENT_MODEL_GRID_DISPLAY_H
 
 #include "DocumentModelAbstractBase.h"
 #include "GridCoordDisable.h"
@@ -7,20 +7,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsGridDisplay and CmdSettingsGridDisplay.
-class DlgModelGridDisplay : public DocumentModelAbstractBase
+class DocumentModelGridDisplay : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelGridDisplay();
+  DocumentModelGridDisplay();
 
   /// Initial constructor from Document.
-  DlgModelGridDisplay(const CmdMediator &cmdMediator);
+  DocumentModelGridDisplay(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelGridDisplay(const DlgModelGridDisplay &other);
+  DocumentModelGridDisplay(const DocumentModelGridDisplay &other);
 
   /// Assignment constructor.
-  DlgModelGridDisplay &operator=(const DlgModelGridDisplay &other);
+  DocumentModelGridDisplay &operator=(const DocumentModelGridDisplay &other);
 
   /// Get method for x count.
   int countX() const;
@@ -98,4 +98,4 @@ private:
   double m_stopY;
 };
 
-#endif // DLG_MODEL_GRID_DISPLAY_H
+#endif // DOCUMENT_MODEL_GRID_DISPLAY_H

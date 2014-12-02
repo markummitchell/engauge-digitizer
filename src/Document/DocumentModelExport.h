@@ -1,5 +1,5 @@
-#ifndef DLG_MODEL_EXPORT_H
-#define DLG_MODEL_EXPORT_H
+#ifndef DOCUMENT_MODEL_EXPORT_H
+#define DOCUMENT_MODEL_EXPORT_H
 
 #include "DocumentModelAbstractBase.h"
 #include "ExportDelimiter.h"
@@ -12,20 +12,20 @@
 class CmdMediator;
 
 /// Model for DlgSettingsExport and CmdSettingsExport.
-class DlgModelExport : public DocumentModelAbstractBase
+class DocumentModelExport : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DlgModelExport();
+  DocumentModelExport();
 
   /// Initial constructor from Document.
-  DlgModelExport(const CmdMediator &cmdMediator);
+  DocumentModelExport(const CmdMediator &cmdMediator);
 
   /// Copy constructor.
-  DlgModelExport(const DlgModelExport &other);
+  DocumentModelExport(const DocumentModelExport &other);
 
   /// Assignment constructor.
-  DlgModelExport &operator=(const DlgModelExport &other);
+  DocumentModelExport &operator=(const DocumentModelExport &other);
 
   /// Get method for curve names not exported.
   QStringList curveNamesNotExported() const;
@@ -77,4 +77,4 @@ private:
   ExportHeader m_exportHeader;
 };
 
-#endif // DLG_MODEL_EXPORT_H
+#endif // DOCUMENT_MODEL_EXPORT_H

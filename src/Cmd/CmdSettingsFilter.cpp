@@ -5,8 +5,8 @@
 
 CmdSettingsFilter::CmdSettingsFilter(MainWindow &mainWindow,
                                      Document &document,
-                                     const DlgModelFilter &modelFilterBefore,
-                                     const DlgModelFilter &modelFilterAfter) :
+                                     const DocumentModelFilter &modelFilterBefore,
+                                     const DocumentModelFilter &modelFilterAfter) :
   CmdAbstract(mainWindow,
               document,
               "Filter settings"),

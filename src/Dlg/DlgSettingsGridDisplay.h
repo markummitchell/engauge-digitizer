@@ -3,7 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
-class DlgModelGridDisplay;
+class DocumentModelGridDisplay;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
@@ -60,8 +60,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DlgModelGridDisplay *m_modelGridDisplayBefore;
-  DlgModelGridDisplay *m_modelGridDisplayAfter;
+  DocumentModelGridDisplay *m_modelGridDisplayBefore;
+  DocumentModelGridDisplay *m_modelGridDisplayAfter;
 };
 
 #endif // DLG_SETTINGS_GRID_DISPLAY_H

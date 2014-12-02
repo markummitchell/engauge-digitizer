@@ -1,13 +1,13 @@
 #include "CmdSettingsExport.h"
-#include "DlgModelExport.h"
+#include "DocumentModelExport.h"
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
 CmdSettingsExport::CmdSettingsExport(MainWindow &mainWindow,
                                      Document &document,
-                                     const DlgModelExport &modelExportBefore,
-                                     const DlgModelExport &modelExportAfter) :
+                                     const DocumentModelExport &modelExportBefore,
+                                     const DocumentModelExport &modelExportAfter) :
   CmdAbstract(mainWindow,
               document,
               "Export settings"),

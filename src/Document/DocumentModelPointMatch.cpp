@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DlgModelPointMatch.h"
+#include "DocumentModelPointMatch.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -9,7 +9,7 @@ const ColorPalette DEFAULT_COLOR_ACCEPTED = COLOR_PALETTE_GREEN;
 const ColorPalette DEFAULT_COLOR_CANDIDATE = COLOR_PALETTE_YELLOW;
 const ColorPalette DEFAULT_COLOR_REJECTED = COLOR_PALETTE_RED;
 
-DlgModelPointMatch::DlgModelPointMatch() :
+DocumentModelPointMatch::DocumentModelPointMatch() :
   m_pointSeparation (DEFAULT_POINT_SEPARATION),
   m_maxPointSize (DEFAULT_MAX_POINT_SIZE),
   m_paletteColorAccepted (DEFAULT_COLOR_ACCEPTED),
@@ -18,7 +18,7 @@ DlgModelPointMatch::DlgModelPointMatch() :
 {
 }
 
-DlgModelPointMatch::DlgModelPointMatch(const CmdMediator &cmdMediator) :
+DocumentModelPointMatch::DocumentModelPointMatch(const CmdMediator &cmdMediator) :
   m_pointSeparation (cmdMediator.document().modelPointMatch().pointSeparation()),
   m_maxPointSize (cmdMediator.document().modelPointMatch().maxPointSize()),
   m_paletteColorAccepted (cmdMediator.document().modelPointMatch().paletteColorAccepted()),
@@ -27,7 +27,7 @@ DlgModelPointMatch::DlgModelPointMatch(const CmdMediator &cmdMediator) :
 {
 }
 
-DlgModelPointMatch::DlgModelPointMatch(const DlgModelPointMatch &other) :
+DocumentModelPointMatch::DocumentModelPointMatch(const DocumentModelPointMatch &other) :
   m_pointSeparation (other.pointSeparation()),
   m_maxPointSize (other.maxPointSize()),
   m_paletteColorAccepted (other.paletteColorAccepted()),
@@ -36,7 +36,7 @@ DlgModelPointMatch::DlgModelPointMatch(const DlgModelPointMatch &other) :
 {
 }
 
-DlgModelPointMatch &DlgModelPointMatch::operator=(const DlgModelPointMatch &other)
+DocumentModelPointMatch &DocumentModelPointMatch::operator=(const DocumentModelPointMatch &other)
 {
   m_pointSeparation = other.pointSeparation();
   m_maxPointSize = other.maxPointSize();
@@ -47,60 +47,60 @@ DlgModelPointMatch &DlgModelPointMatch::operator=(const DlgModelPointMatch &othe
   return *this;
 }
 
-double DlgModelPointMatch::maxPointSize () const
+double DocumentModelPointMatch::maxPointSize () const
 {
   return m_maxPointSize;
 }
 
-ColorPalette DlgModelPointMatch::paletteColorAccepted() const
+ColorPalette DocumentModelPointMatch::paletteColorAccepted() const
 {
   return m_paletteColorAccepted;
 }
 
-ColorPalette DlgModelPointMatch::paletteColorCandidate() const
+ColorPalette DocumentModelPointMatch::paletteColorCandidate() const
 {
   return  m_paletteColorCandidate;
 }
 
-ColorPalette DlgModelPointMatch::paletteColorRejected() const
+ColorPalette DocumentModelPointMatch::paletteColorRejected() const
 {
   return m_paletteColorRejected;
 }
 
-double DlgModelPointMatch::pointSeparation() const
+double DocumentModelPointMatch::pointSeparation() const
 {
   return m_pointSeparation;
 }
 
-void DlgModelPointMatch::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelPointMatch::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelPointMatch::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveModel";
 
-  stream.writeStartElement("DlgModelPointMatch");
+  stream.writeStartElement("DocumentModelPointMatch");
   stream.writeEndElement();
 }
 
-void DlgModelPointMatch::setMaxPointSize(double maxPointSize)
+void DocumentModelPointMatch::setMaxPointSize(double maxPointSize)
 {
   m_maxPointSize = maxPointSize;
 }
 
-void DlgModelPointMatch::setPointSeparation(double pointSeparation)
+void DocumentModelPointMatch::setPointSeparation(double pointSeparation)
 {
   m_pointSeparation = pointSeparation;
 }
 
-void DlgModelPointMatch::setPaletteColorAccepted(ColorPalette paletteColorAccepted)
+void DocumentModelPointMatch::setPaletteColorAccepted(ColorPalette paletteColorAccepted)
 {
   m_paletteColorAccepted = paletteColorAccepted;
 }
 
-void DlgModelPointMatch::setPaletteColorCandidate(ColorPalette paletteColorCandidate)
+void DocumentModelPointMatch::setPaletteColorCandidate(ColorPalette paletteColorCandidate)
 {
   m_paletteColorCandidate = paletteColorCandidate;
 }
 
-void DlgModelPointMatch::setPaletteColorRejected(ColorPalette paletteColorRejected)
+void DocumentModelPointMatch::setPaletteColorRejected(ColorPalette paletteColorRejected)
 {
   m_paletteColorRejected = paletteColorRejected;
 }

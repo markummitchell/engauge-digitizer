@@ -150,8 +150,8 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelSegmentsBefore = new DlgModelSegments (cmdMediator);
-  m_modelSegmentsAfter = new DlgModelSegments (cmdMediator);
+  m_modelSegmentsBefore = new DocumentModelSegments (cmdMediator);
+  m_modelSegmentsAfter = new DocumentModelSegments (cmdMediator);
 
   m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
   m_editMinLength->setText (QString::number(m_modelSegmentsAfter->minLength()));

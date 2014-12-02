@@ -248,8 +248,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelGridRemovalBefore = new DlgModelGridRemoval (cmdMediator);
-  m_modelGridRemovalAfter = new DlgModelGridRemoval (cmdMediator);
+  m_modelGridRemovalBefore = new DocumentModelGridRemoval (cmdMediator);
+  m_modelGridRemovalAfter = new DocumentModelGridRemoval (cmdMediator);
 
   m_chkRemoveGridLines->setChecked (m_modelGridRemovalAfter->removeDefinedGridLines());
 

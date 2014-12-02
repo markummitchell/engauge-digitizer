@@ -1,25 +1,25 @@
-#include "DlgModelCurvesEntry.h"
-#include "DlgModelCurves.h"
+#include "DocumentModelCurvesEntry.h"
+#include "DocumentModelCurves.h"
 #include "Logger.h"
 #include "QtToString.h"
 #include <QVariant>
 #include <QXmlStreamWriter>
 
-DlgModelCurves::DlgModelCurves()
+DocumentModelCurves::DocumentModelCurves()
 {
 }
 
-int DlgModelCurves::columnCount (const QModelIndex & /* parent */) const
+int DocumentModelCurves::columnCount (const QModelIndex & /* parent */) const
 {
   return 3;
 }
 
-bool DlgModelCurves::containsCurveNameCurrent (const QString &curveName) const
+bool DocumentModelCurves::containsCurveNameCurrent (const QString &curveName) const
 {
   QStringList::const_iterator itr;
   for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
 
-    DlgModelCurvesEntry curvesEntry (*itr);
+    DocumentModelCurvesEntry curvesEntry (*itr);
     if (curveName == curvesEntry.curveNameCurrent()) {
 
       return true;
@@ -29,10 +29,10 @@ bool DlgModelCurves::containsCurveNameCurrent (const QString &curveName) const
   return false;
 }
 
-QVariant DlgModelCurves::data (const QModelIndex &index,
+QVariant DocumentModelCurves::data (const QModelIndex &index,
                                int role) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::data"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::data"
                                << " isRoot=" << (index.isValid () ? "no" : "yes")
                                << " role=" << roleAsString (role).toLatin1 ().data ();
 
@@ -51,7 +51,7 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
     return QVariant();
   }
 
-  DlgModelCurvesEntry curvesEntry (m_modelCurvesEntries.at (row));
+  DocumentModelCurvesEntry curvesEntry (m_modelCurvesEntries.at (row));
 
   if (index.column () == 0) {
     return curvesEntry.curveNameCurrent();
@@ -65,7 +65,7 @@ QVariant DlgModelCurves::data (const QModelIndex &index,
 }
 
 
-Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
+Qt::ItemFlags DocumentModelCurves::flags (const QModelIndex &index) const
 {
   // Only the root item can accept drops, or else dragging one entry onto another
   // would result in the drop target getting overwritten
@@ -88,13 +88,13 @@ Qt::ItemFlags DlgModelCurves::flags (const QModelIndex &index) const
   }
 }
 
-bool DlgModelCurves::insertRows (int row,
+bool DocumentModelCurves::insertRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::insertRows"
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::insertRows"
                               << " row=" << row
                               << " count=" << count
                               << " isRoot=" << (parent.isValid () ? "no" : "yes")
@@ -110,7 +110,7 @@ bool DlgModelCurves::insertRows (int row,
                    row,
                    row + count - 1);
 
-  DlgModelCurvesEntry emptyCurvesEntry;
+  DocumentModelCurvesEntry emptyCurvesEntry;
 
   m_modelCurvesEntries.insert (row,
                               emptyCurvesEntry.toString ());
@@ -120,13 +120,13 @@ bool DlgModelCurves::insertRows (int row,
   return true;
 }
 
-bool DlgModelCurves::removeRows (int row,
+bool DocumentModelCurves::removeRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::removeRows"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::removeRows"
                                << " row=" << row
                                << " count=" << count
                                << " isRoot=" << (parent.isValid () ? "no" : "yes")
@@ -145,28 +145,28 @@ bool DlgModelCurves::removeRows (int row,
   return success;
 }
 
-int DlgModelCurves::rowCount (const QModelIndex & /* parent */) const
+int DocumentModelCurves::rowCount (const QModelIndex & /* parent */) const
 {
   int count = m_modelCurvesEntries.count ();
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgModelCurves::rowCount count=" << count;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::rowCount count=" << count;
 
   return count;
 }
 
-void DlgModelCurves::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCurves::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::saveModel";
 
-  stream.writeStartElement("DlgModelCurves");
+  stream.writeStartElement("DocumentModelCurves");
   stream.writeEndElement();
 }
 
-bool DlgModelCurves::setData (const QModelIndex &index,
+bool DocumentModelCurves::setData (const QModelIndex &index,
                               const QVariant &value,
                               int role)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCurves::setData"
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::setData"
                               << " indexRow=" << index.row ()
                               << " value=" << (value.isValid () ? "valid" : "invalid")
                               << " role=" << roleAsString (role).toLatin1 ().data ();
@@ -184,7 +184,7 @@ bool DlgModelCurves::setData (const QModelIndex &index,
     } else {
 
       // Modify the entry
-      DlgModelCurvesEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
+      DocumentModelCurvesEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
 
       if (index.column () == 0) {
         curvesEntry.setCurveNameCurrent (value.toString ());
@@ -208,7 +208,7 @@ bool DlgModelCurves::setData (const QModelIndex &index,
   return success;
 }
 
-Qt::DropActions DlgModelCurves::supportedDropActions () const
+Qt::DropActions DocumentModelCurves::supportedDropActions () const
 {
   return Qt::MoveAction;
 }

@@ -1,9 +1,9 @@
 #include "CmdMediator.h"
-#include "DlgModelCoords.h"
+#include "DocumentModelCoords.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
-DlgModelCoords::DlgModelCoords() :
+DocumentModelCoords::DocumentModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
   m_originRadius (0.0),
   m_coordScaleXTheta (COORD_SCALE_LINEAR),
@@ -12,7 +12,7 @@ DlgModelCoords::DlgModelCoords() :
 {
 }
 
-DlgModelCoords::DlgModelCoords(const CmdMediator &cmdMediator) :
+DocumentModelCoords::DocumentModelCoords(const CmdMediator &cmdMediator) :
   m_coordsType (cmdMediator.document().modelCoords().coordsType()),
   m_originRadius(cmdMediator.document().modelCoords().originRadius()),
   m_coordScaleXTheta(cmdMediator.document().modelCoords().coordScaleXTheta()),
@@ -21,7 +21,7 @@ DlgModelCoords::DlgModelCoords(const CmdMediator &cmdMediator) :
 {
 }
 
-DlgModelCoords::DlgModelCoords(const DlgModelCoords &other) :
+DocumentModelCoords::DocumentModelCoords(const DocumentModelCoords &other) :
   m_coordsType (other.coordsType ()),
   m_originRadius (other.originRadius ()),
   m_coordScaleXTheta (other.coordScaleXTheta()),
@@ -30,7 +30,7 @@ DlgModelCoords::DlgModelCoords(const DlgModelCoords &other) :
 {
 }
 
-DlgModelCoords &DlgModelCoords::operator=(const DlgModelCoords &other)
+DocumentModelCoords &DocumentModelCoords::operator=(const DocumentModelCoords &other)
 {
   m_coordsType = other.coordsType();
   m_originRadius = other.originRadius();
@@ -41,60 +41,60 @@ DlgModelCoords &DlgModelCoords::operator=(const DlgModelCoords &other)
   return *this;
 }
 
-CoordScale DlgModelCoords::coordScaleXTheta () const
+CoordScale DocumentModelCoords::coordScaleXTheta () const
 {
   return m_coordScaleXTheta;
 }
 
-CoordScale DlgModelCoords::coordScaleYRadius () const
+CoordScale DocumentModelCoords::coordScaleYRadius () const
 {
   return m_coordScaleYRadius;
 }
 
-CoordsType DlgModelCoords::coordsType () const
+CoordsType DocumentModelCoords::coordsType () const
 {
   return m_coordsType;
 }
 
-CoordThetaUnits DlgModelCoords::coordThetaUnits() const
+CoordThetaUnits DocumentModelCoords::coordThetaUnits() const
 {
   return m_coordThetaUnits;
 }
 
-double DlgModelCoords::originRadius() const
+double DocumentModelCoords::originRadius() const
 {
   return m_originRadius;
 }
 
-void DlgModelCoords::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCoords::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelCoords::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::saveModel";
 
-  stream.writeStartElement("DlgModelCoords");
+  stream.writeStartElement("DocumentModelCoords");
   stream.writeEndElement();
 }
 
-void DlgModelCoords::setCoordScaleXTheta (CoordScale coordScale)
+void DocumentModelCoords::setCoordScaleXTheta (CoordScale coordScale)
 {
   m_coordScaleXTheta = coordScale;
 }
 
-void DlgModelCoords::setCoordScaleYRadius (CoordScale coordScale)
+void DocumentModelCoords::setCoordScaleYRadius (CoordScale coordScale)
 {
   m_coordScaleYRadius = coordScale;
 }
 
-void DlgModelCoords::setCoordsType (CoordsType coordsType)
+void DocumentModelCoords::setCoordsType (CoordsType coordsType)
 {
   m_coordsType = coordsType;
 }
 
-void DlgModelCoords::setCoordThetaUnits (CoordThetaUnits coordThetaUnits)
+void DocumentModelCoords::setCoordThetaUnits (CoordThetaUnits coordThetaUnits)
 {
   m_coordThetaUnits = coordThetaUnits;
 }
 
-void DlgModelCoords::setOriginRadius(double originRadius)
+void DocumentModelCoords::setOriginRadius(double originRadius)
 {
   m_originRadius = originRadius;
 }

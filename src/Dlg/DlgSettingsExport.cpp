@@ -1,6 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsExport.h"
-#include "DlgModelExport.h"
+#include "DocumentModelExport.h"
 #include "DlgSettingsExport.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -331,8 +331,8 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelExportBefore = new DlgModelExport (cmdMediator);
-  m_modelExportAfter = new DlgModelExport (cmdMediator);
+  m_modelExportBefore = new DocumentModelExport (cmdMediator);
+  m_modelExportAfter = new DocumentModelExport (cmdMediator);
 
   QStringList::const_iterator itr;
   for (itr = m_modelExportAfter->curveNamesNotExported().begin ();

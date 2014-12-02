@@ -2,7 +2,7 @@
 #define CMD_SETTINGS_GRID_REMOVAL_H
 
 #include "CmdAbstract.h"
-#include "DlgModelGridRemoval.h"
+#include "DocumentModelGridRemoval.h"
 
 /// Command for DlgSettingsGridRemoval
 class CmdSettingsGridRemoval : public CmdAbstract
@@ -11,8 +11,8 @@ public:
   /// Single constructor.
   CmdSettingsGridRemoval(MainWindow &mainWindow,
                          Document &document,
-                         const DlgModelGridRemoval &modelGridRemovalBefore,
-                         const DlgModelGridRemoval &modelGridRemovalAfter);
+                         const DocumentModelGridRemoval &modelGridRemovalBefore,
+                         const DocumentModelGridRemoval &modelGridRemovalAfter);
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -20,8 +20,8 @@ public:
 private:
   CmdSettingsGridRemoval();
 
-  DlgModelGridRemoval m_modelGridRemovalBefore;
-  DlgModelGridRemoval m_modelGridRemovalAfter;
+  DocumentModelGridRemoval m_modelGridRemovalBefore;
+  DocumentModelGridRemoval m_modelGridRemovalAfter;
 };
 
 #endif // CMD_SETTINGS_GRID_REMOVAL_H

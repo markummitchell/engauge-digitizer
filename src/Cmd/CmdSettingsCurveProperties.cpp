@@ -6,8 +6,8 @@
 
 CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
                                                        Document &document,
-                                                       const DlgModelCurveProperties &modelCurvePropertiesBefore,
-                                                       const DlgModelCurveProperties &modelCurvePropertiesAfter) :
+                                                       const DocumentModelCurveProperties &modelCurvePropertiesBefore,
+                                                       const DocumentModelCurveProperties &modelCurvePropertiesAfter) :
   CmdAbstract(mainWindow,
               document,
               "Curve Properties settings"),

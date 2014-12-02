@@ -1,9 +1,9 @@
 #include "CmdMediator.h"
-#include "DlgModelExport.h"
+#include "DocumentModelExport.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
-DlgModelExport::DlgModelExport() :
+DocumentModelExport::DocumentModelExport() :
   m_exportPointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
   m_exportPointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
   m_exportLayoutFunctions (EXPORT_LAYOUT_ALL_PER_LINE),
@@ -12,7 +12,7 @@ DlgModelExport::DlgModelExport() :
 {
 }
 
-DlgModelExport::DlgModelExport (const CmdMediator &cmdMediator) :
+DocumentModelExport::DocumentModelExport (const CmdMediator &cmdMediator) :
   m_exportPointsSelectionFunctions (cmdMediator.document().modelExport().exportPointsSelectionFunctions()),
   m_exportPointsSelectionRelations (cmdMediator.document().modelExport().exportPointsSelectionRelations()),
   m_exportLayoutFunctions (cmdMediator.document().modelExport().exportLayoutFunctions()),
@@ -21,7 +21,7 @@ DlgModelExport::DlgModelExport (const CmdMediator &cmdMediator) :
 {
 }
 
-DlgModelExport::DlgModelExport(const DlgModelExport &other) :
+DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
   m_exportPointsSelectionFunctions (other.exportPointsSelectionFunctions()),
   m_exportPointsSelectionRelations (other.exportPointsSelectionRelations()),
   m_exportLayoutFunctions (other.exportLayoutFunctions()),
@@ -31,7 +31,7 @@ DlgModelExport::DlgModelExport(const DlgModelExport &other) :
 
 }
 
-DlgModelExport &DlgModelExport::operator=(const DlgModelExport &other)
+DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &other)
 {
   m_exportPointsSelectionFunctions = other.exportPointsSelectionFunctions();
   m_exportPointsSelectionRelations = other.exportPointsSelectionRelations();
@@ -42,70 +42,70 @@ DlgModelExport &DlgModelExport::operator=(const DlgModelExport &other)
   return *this;
 }
 
-QStringList DlgModelExport::curveNamesNotExported() const
+QStringList DocumentModelExport::curveNamesNotExported() const
 {
   return m_curveNamesNotExported;
 }
 
-ExportDelimiter DlgModelExport::exportDelimiter() const
+ExportDelimiter DocumentModelExport::exportDelimiter() const
 {
   return m_exportDelimiter;
 }
 
-ExportHeader DlgModelExport::exportHeader() const
+ExportHeader DocumentModelExport::exportHeader() const
 {
   return m_exportHeader;
 }
 
-ExportLayoutFunctions DlgModelExport::exportLayoutFunctions() const
+ExportLayoutFunctions DocumentModelExport::exportLayoutFunctions() const
 {
   return m_exportLayoutFunctions;
 }
 
-ExportPointsSelectionFunctions DlgModelExport::exportPointsSelectionFunctions() const
+ExportPointsSelectionFunctions DocumentModelExport::exportPointsSelectionFunctions() const
 {
   return m_exportPointsSelectionFunctions;
 }
 
-ExportPointsSelectionRelations DlgModelExport::exportPointsSelectionRelations() const
+ExportPointsSelectionRelations DocumentModelExport::exportPointsSelectionRelations() const
 {
   return m_exportPointsSelectionRelations;
 }
 
-void DlgModelExport::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelExport::saveModel(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgModelExport::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::saveModel";
 
-  stream.writeStartElement("DlgModelExport");
+  stream.writeStartElement("DocumentModelExport");
   stream.writeEndElement();
 }
 
-void DlgModelExport::setCurveNamesNotExported(const QStringList &curveNamesNotExported)
+void DocumentModelExport::setCurveNamesNotExported(const QStringList &curveNamesNotExported)
 {
   m_curveNamesNotExported = curveNamesNotExported;
 }
 
-void DlgModelExport::setExportDelimiter(ExportDelimiter exportDelimiter)
+void DocumentModelExport::setExportDelimiter(ExportDelimiter exportDelimiter)
 {
   m_exportDelimiter = exportDelimiter;
 }
 
-void DlgModelExport::setExportHeader(ExportHeader exportHeader)
+void DocumentModelExport::setExportHeader(ExportHeader exportHeader)
 {
   m_exportHeader = exportHeader;
 }
 
-void DlgModelExport::setExportLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions)
+void DocumentModelExport::setExportLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions)
 {
   m_exportLayoutFunctions = exportLayoutFunctions;
 }
 
-void DlgModelExport::setExportPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions)
+void DocumentModelExport::setExportPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions)
 {
   m_exportPointsSelectionFunctions = exportPointsSelectionFunctions;
 }
 
-void DlgModelExport::setExportPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations)
+void DocumentModelExport::setExportPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations)
 {
   m_exportPointsSelectionRelations = exportPointsSelectionRelations;
 }
