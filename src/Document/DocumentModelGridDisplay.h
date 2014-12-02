@@ -4,7 +4,7 @@
 #include "DocumentModelAbstractBase.h"
 #include "GridCoordDisable.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsGridDisplay and CmdSettingsGridDisplay.
 class DocumentModelGridDisplay : public DocumentModelAbstractBase
@@ -14,7 +14,7 @@ public:
   DocumentModelGridDisplay();
 
   /// Initial constructor from Document.
-  DocumentModelGridDisplay(const CmdMediator &cmdMediator);
+  DocumentModelGridDisplay(const Document &document);
 
   /// Copy constructor.
   DocumentModelGridDisplay(const DocumentModelGridDisplay &other);

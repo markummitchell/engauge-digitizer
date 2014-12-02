@@ -148,8 +148,8 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelFilterBefore = new DocumentModelFilter (cmdMediator);
-  m_modelFilterAfter = new DocumentModelFilter (cmdMediator);
+  m_modelFilterBefore = new DocumentModelFilter (cmdMediator.document());
+  m_modelFilterAfter = new DocumentModelFilter (cmdMediator.document());
 
   FilterParameter filterParameter = m_modelFilterAfter->filterParameter();
   m_btnIntensity->setChecked (filterParameter == FILTER_PARAMETER_INTENSITY);

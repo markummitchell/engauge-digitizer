@@ -4,7 +4,7 @@
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsPointMatch and CmdSettingsPointMatch.
 class DocumentModelPointMatch : public DocumentModelAbstractBase
@@ -14,7 +14,7 @@ public:
   DocumentModelPointMatch();
 
   /// Initial constructor from Document.
-  DocumentModelPointMatch(const CmdMediator &cmdMediator);
+  DocumentModelPointMatch(const Document &document);
 
   /// Copy constructor.
   DocumentModelPointMatch(const DocumentModelPointMatch &other);

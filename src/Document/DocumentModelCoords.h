@@ -6,7 +6,7 @@
 #include "CoordThetaUnits.h"
 #include "DocumentModelAbstractBase.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsCoords and CmdSettingsCoords.
 class DocumentModelCoords : public DocumentModelAbstractBase
@@ -16,7 +16,7 @@ public:
   DocumentModelCoords();
 
   /// Initial constructor from Document.
-  DocumentModelCoords(const CmdMediator &cmdMediator);
+  DocumentModelCoords(const Document &document);
 
   /// Copy constructor.
   DocumentModelCoords(const DocumentModelCoords &other);

@@ -26,20 +26,20 @@ DocumentModelGridRemoval::DocumentModelGridRemoval() :
 {
 }
 
-DocumentModelGridRemoval::DocumentModelGridRemoval(const CmdMediator &cmdMediator) :
-  m_removeDefinedGridLines (cmdMediator.document().modelGridRemoval().removeDefinedGridLines()),
-  m_closeDistance (cmdMediator.document().modelGridRemoval().closeDistance()),
-  m_gridCoordDisableX (cmdMediator.document().modelGridRemoval().gridCoordDisableX()),
-  m_countX (cmdMediator.document().modelGridRemoval().countX()),
-  m_startX (cmdMediator.document().modelGridRemoval().startX()),
-  m_stepX (cmdMediator.document().modelGridRemoval().stepX()),
-  m_stopX (cmdMediator.document().modelGridRemoval().stopX()),
-  m_gridCoordDisableY (cmdMediator.document().modelGridRemoval().gridCoordDisableY()),
-  m_countY (cmdMediator.document().modelGridRemoval().countY()),
-  m_startY (cmdMediator.document().modelGridRemoval().startY()),
-  m_stepY (cmdMediator.document().modelGridRemoval().stepY()),
-  m_stopY (cmdMediator.document().modelGridRemoval().stopY()),
-  m_removeParallelToAxes (cmdMediator.document().modelGridRemoval().removeParallelToAxes())
+DocumentModelGridRemoval::DocumentModelGridRemoval(const Document &document) :
+  m_removeDefinedGridLines (document.modelGridRemoval().removeDefinedGridLines()),
+  m_closeDistance (document.modelGridRemoval().closeDistance()),
+  m_gridCoordDisableX (document.modelGridRemoval().gridCoordDisableX()),
+  m_countX (document.modelGridRemoval().countX()),
+  m_startX (document.modelGridRemoval().startX()),
+  m_stepX (document.modelGridRemoval().stepX()),
+  m_stopX (document.modelGridRemoval().stopX()),
+  m_gridCoordDisableY (document.modelGridRemoval().gridCoordDisableY()),
+  m_countY (document.modelGridRemoval().countY()),
+  m_startY (document.modelGridRemoval().startY()),
+  m_stepY (document.modelGridRemoval().stepY()),
+  m_stopY (document.modelGridRemoval().stopY()),
+  m_removeParallelToAxes (document.modelGridRemoval().removeParallelToAxes())
 {
 }
 

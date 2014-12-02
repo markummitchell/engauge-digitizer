@@ -207,11 +207,8 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  qDebug() << "DlgSettingsCurveProperties::load before before";
-  m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator);
-  qDebug() << "DlgSettingsCurveProperties::load between before and after";
-  m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator);
-  qDebug() << "DlgSettingsCurveProperties::load after after";
+  m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator.document());
+  m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator.document());
 
   // Load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();
@@ -277,9 +274,6 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
 
   enableOk (true);
 
-  qDebug()<< "shitty " << m_cmbCurveName->currentText() << " " <<
-             m_cmbLineColor->currentData().toInt()
-             << " " << lineColor;
   m_modelCurvePropertiesAfter->setLineColor(m_cmbCurveName->currentText(),
                                             (ColorPalette) m_cmbLineColor->currentData().toInt());
 }

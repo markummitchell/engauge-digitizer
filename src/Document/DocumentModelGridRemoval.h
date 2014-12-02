@@ -4,7 +4,7 @@
 #include "DocumentModelAbstractBase.h"
 #include "GridCoordDisable.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval.
 class DocumentModelGridRemoval : public DocumentModelAbstractBase
@@ -14,7 +14,7 @@ public:
   DocumentModelGridRemoval();
 
   /// Initial constructor from Document.
-  DocumentModelGridRemoval(const CmdMediator &cmdMediator);
+  DocumentModelGridRemoval(const Document &document);
 
   /// Copy constructor.
   DocumentModelGridRemoval(const DocumentModelGridRemoval &other);

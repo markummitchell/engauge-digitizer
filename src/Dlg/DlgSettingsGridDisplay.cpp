@@ -206,8 +206,8 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelGridDisplayBefore = new DocumentModelGridDisplay (cmdMediator);
-  m_modelGridDisplayAfter = new DocumentModelGridDisplay (cmdMediator);
+  m_modelGridDisplayBefore = new DocumentModelGridDisplay (cmdMediator.document());
+  m_modelGridDisplayAfter = new DocumentModelGridDisplay (cmdMediator.document());
 
   m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));

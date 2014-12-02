@@ -9,7 +9,7 @@
 #include "ExportPointsSelectionRelations.h"
 #include <QStringList>
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsExport and CmdSettingsExport.
 class DocumentModelExport : public DocumentModelAbstractBase
@@ -19,7 +19,7 @@ public:
   DocumentModelExport();
 
   /// Initial constructor from Document.
-  DocumentModelExport(const CmdMediator &cmdMediator);
+  DocumentModelExport(const Document &document);
 
   /// Copy constructor.
   DocumentModelExport(const DocumentModelExport &other);

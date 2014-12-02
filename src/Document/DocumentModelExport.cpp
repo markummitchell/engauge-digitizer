@@ -12,12 +12,12 @@ DocumentModelExport::DocumentModelExport() :
 {
 }
 
-DocumentModelExport::DocumentModelExport (const CmdMediator &cmdMediator) :
-  m_exportPointsSelectionFunctions (cmdMediator.document().modelExport().exportPointsSelectionFunctions()),
-  m_exportPointsSelectionRelations (cmdMediator.document().modelExport().exportPointsSelectionRelations()),
-  m_exportLayoutFunctions (cmdMediator.document().modelExport().exportLayoutFunctions()),
-  m_exportDelimiter (cmdMediator.document().modelExport().exportDelimiter()),
-  m_exportHeader (cmdMediator.document().modelExport().exportHeader())
+DocumentModelExport::DocumentModelExport (const Document &document) :
+  m_exportPointsSelectionFunctions (document.modelExport().exportPointsSelectionFunctions()),
+  m_exportPointsSelectionRelations (document.modelExport().exportPointsSelectionRelations()),
+  m_exportLayoutFunctions (document.modelExport().exportLayoutFunctions()),
+  m_exportDelimiter (document.modelExport().exportDelimiter()),
+  m_exportHeader (document.modelExport().exportHeader())
 {
 }
 

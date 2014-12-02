@@ -21,17 +21,17 @@ DocumentModelGridDisplay::DocumentModelGridDisplay() :
 {
 }
 
-DocumentModelGridDisplay::DocumentModelGridDisplay(const CmdMediator &cmdMediator) :
-  m_gridCoordDisableX (cmdMediator.document().modelGridDisplay().gridCoordDisableX()),
-  m_countX (cmdMediator.document().modelGridDisplay().countX()),
-  m_startX (cmdMediator.document().modelGridDisplay().startX()),
-  m_stepX (cmdMediator.document().modelGridDisplay().stepX()),
-  m_stopX (cmdMediator.document().modelGridDisplay().stopX()),
-  m_gridCoordDisableY (cmdMediator.document().modelGridDisplay().gridCoordDisableY()),
-  m_countY (cmdMediator.document().modelGridDisplay().countY()),
-  m_startY (cmdMediator.document().modelGridDisplay().startY()),
-  m_stepY (cmdMediator.document().modelGridDisplay().stepY()),
-  m_stopY (cmdMediator.document().modelGridDisplay().stopY())
+DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
+  m_gridCoordDisableX (document.modelGridDisplay().gridCoordDisableX()),
+  m_countX (document.modelGridDisplay().countX()),
+  m_startX (document.modelGridDisplay().startX()),
+  m_stepX (document.modelGridDisplay().stepX()),
+  m_stopX (document.modelGridDisplay().stopX()),
+  m_gridCoordDisableY (document.modelGridDisplay().gridCoordDisableY()),
+  m_countY (document.modelGridDisplay().countY()),
+  m_startY (document.modelGridDisplay().startY()),
+  m_stepY (document.modelGridDisplay().stepY()),
+  m_stopY (document.modelGridDisplay().stopY())
 {
 }
 

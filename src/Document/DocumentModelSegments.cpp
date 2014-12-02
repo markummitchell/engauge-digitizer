@@ -17,12 +17,12 @@ DocumentModelSegments::DocumentModelSegments() :
 {
 }
 
-DocumentModelSegments::DocumentModelSegments(const CmdMediator &cmdMediator) :
-  m_pointSeparation (cmdMediator.document().modelSegments().pointSeparation()),
-  m_minLength (cmdMediator.document().modelSegments().minLength()),
-  m_fillCorners (cmdMediator.document().modelSegments().fillCorners()),
-  m_lineSize (cmdMediator.document().modelSegments().lineSize()),
-  m_lineColor (cmdMediator.document().modelSegments().lineColor())
+DocumentModelSegments::DocumentModelSegments(const Document &document) :
+  m_pointSeparation (document.modelSegments().pointSeparation()),
+  m_minLength (document.modelSegments().minLength()),
+  m_fillCorners (document.modelSegments().fillCorners()),
+  m_lineSize (document.modelSegments().lineSize()),
+  m_lineColor (document.modelSegments().lineColor())
 {
 }
 

@@ -4,7 +4,7 @@
 #include "DocumentModelAbstractBase.h"
 #include "FilterParameter.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsFilter and CmdSettingsFilter.
 class DocumentModelFilter : public DocumentModelAbstractBase
@@ -14,7 +14,7 @@ public:
   DocumentModelFilter();
 
   /// Initial constructor from Document.
-  DocumentModelFilter(const CmdMediator &cmdMediator);
+  DocumentModelFilter(const Document &document);
 
   /// Copy constructor.
   DocumentModelFilter(const DocumentModelFilter &other);

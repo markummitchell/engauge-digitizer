@@ -4,7 +4,7 @@
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsSegments and CmdSettingsSegments.
 class DocumentModelSegments : public DocumentModelAbstractBase
@@ -14,7 +14,7 @@ public:
   DocumentModelSegments();
 
   /// Initial constructor from Document.
-  DocumentModelSegments(const CmdMediator &cmdMediator);
+  DocumentModelSegments(const Document &document);
 
   /// Copy constructor.
   DocumentModelSegments(const DocumentModelSegments &other);

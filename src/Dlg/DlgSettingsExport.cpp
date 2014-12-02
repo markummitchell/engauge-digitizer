@@ -331,8 +331,8 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  m_modelExportBefore = new DocumentModelExport (cmdMediator);
-  m_modelExportAfter = new DocumentModelExport (cmdMediator);
+  m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
+  m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
 
   QStringList::const_iterator itr;
   for (itr = m_modelExportAfter->curveNamesNotExported().begin ();

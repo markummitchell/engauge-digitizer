@@ -10,7 +10,7 @@
 typedef QHash<QString, LineStyle> LineStyles;
 typedef QHash<QString, PointStyle> PointStyles;
 
-class CmdMediator;
+class Document;
 
 /// Model for DlgSettingsCurveProperties and CmdSettingsCurveProperties.
 class DocumentModelCurveProperties : public DocumentModelAbstractBase
@@ -20,7 +20,7 @@ public:
   DocumentModelCurveProperties();
 
   /// Initial constructor from Document.
-  DocumentModelCurveProperties(const CmdMediator &cmdMediator);
+  DocumentModelCurveProperties(const Document &document);
 
   /// Copy constructor.
   DocumentModelCurveProperties (const DocumentModelCurveProperties &other);

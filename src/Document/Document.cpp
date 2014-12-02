@@ -4,6 +4,7 @@
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
 #include "Document.h"
+#include "DocumentModelCurveProperties.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
@@ -284,7 +285,9 @@ DocumentModelCoords Document::modelCoords() const
 
 DocumentModelCurveProperties Document::modelCurveProperties() const
 {
-  return m_modelCurveProperties;
+  DocumentModelCurveProperties modelCurveProperties(*this);
+
+  return modelCurveProperties;
 }
 
 DocumentModelExport Document::modelExport() const
@@ -386,7 +389,6 @@ void Document::saveDocument(QXmlStreamWriter &stream)
   stream.writeStartDocument();
   stream.writeDTD("<!DOCTYPE engauge>");
   m_modelCoords.saveModel(stream);
-  m_modelCurveProperties.saveModel(stream);
   m_modelExport.saveModel(stream);
   m_modelFilter.saveModel(stream);
   m_modelGridDisplay.saveModel(stream);
@@ -410,7 +412,29 @@ void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 
 void Document::setModelCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
 {
-  m_modelCurveProperties = modelCurveProperties;
+  LineStyles::const_iterator itrL;
+  for (itrL = modelCurveProperties.lineStyles().constBegin ();
+       itrL != modelCurveProperties.lineStyles().constEnd();
+       itrL++) {
+
+    QString curveName = itrL.key();
+    const LineStyle &lineStyle = itrL.value();
+
+    Curve *curve = curveForCurveName (curveName);
+    curve->setLineStyle (lineStyle);
+  }
+
+  PointStyles::const_iterator itrP;
+  for (itrP = modelCurveProperties.pointStyles().constBegin ();
+       itrP != modelCurveProperties.pointStyles().constEnd ();
+       itrP++) {
+
+    QString curveName = itrP.key();
+    const PointStyle &pointStyle = itrP.value();
+
+    Curve *curve = curveForCurveName (curveName);
+    curve->setPointStyle (pointStyle);
+  }
 }
 
 void Document::setModelExport(const DocumentModelExport &modelExport)

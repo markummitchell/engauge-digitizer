@@ -8,9 +8,9 @@ DocumentModelCurveProperties::DocumentModelCurveProperties()
 {
 }
 
-DocumentModelCurveProperties::DocumentModelCurveProperties (const CmdMediator &cmdMediator)
+DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &document)
 {
-  const Curve &curveAxes = cmdMediator.document().curveAxes();
+  const Curve &curveAxes = document.curveAxes();
   m_lineStyles [AXIS_CURVE_NAME].setCurveConnectAs (curveAxes.lineStyle().curveConnectAs());
   m_lineStyles [AXIS_CURVE_NAME].setPaletteColor(curveAxes.lineStyle().paletteColor());
   m_lineStyles [AXIS_CURVE_NAME].setWidth(curveAxes.lineStyle().width());
@@ -18,14 +18,13 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const CmdMediator &c
   m_pointStyles [AXIS_CURVE_NAME].setRadius(curveAxes.pointStyle().radius());
   m_pointStyles [AXIS_CURVE_NAME].setShape(curveAxes.pointStyle().shape());
 
-  QStringList graphCurveNames = cmdMediator.document().curvesGraphsNames();
+  QStringList graphCurveNames = document.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
 
     const QString &graphCurveName = *itr;
-    const Curve *graphCurve = cmdMediator.document ().curveForCurveName(graphCurveName);
+    const Curve *graphCurve = document.curveForCurveName(graphCurveName);
     m_lineStyles [graphCurveName].setCurveConnectAs (graphCurve->lineStyle().curveConnectAs());
-    qDebug() << "shit1 "<< graphCurveName << " " << graphCurve->lineStyle().paletteColor();
     m_lineStyles [graphCurveName].setPaletteColor(graphCurve->lineStyle().paletteColor());
     m_lineStyles [graphCurveName].setWidth(graphCurve->lineStyle().width());
     m_pointStyles [graphCurveName].setPaletteColor(graphCurve->pointStyle ().paletteColor());
@@ -40,7 +39,6 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const DocumentModelC
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
     QString curveName = itrL.key();
     LineStyle lineStyle = itrL.value();
-    qDebug() << "shit2 "<<curveName<< " " << itrL.value().paletteColor() << "->" << lineStyle.paletteColor();
     m_lineStyles [curveName] = lineStyle;
   }
 
@@ -58,7 +56,6 @@ DocumentModelCurveProperties &DocumentModelCurveProperties::operator=(const Docu
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
     QString curveName = itrL.key();
     LineStyle lineStyle = itrL.value();
-    qDebug() << "shit3 "<<curveName<<" "<< itrL.value().paletteColor() << "->" << lineStyle.paletteColor();
     m_lineStyles [curveName] = lineStyle;
   }
 
@@ -75,7 +72,6 @@ DocumentModelCurveProperties &DocumentModelCurveProperties::operator=(const Docu
 ColorPalette DocumentModelCurveProperties::lineColor (const QString &curveName) const
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
-    qDebug() << "shit4 "<<curveName<<" "<< m_lineStyles[curveName].paletteColor();
   return m_lineStyles [curveName].paletteColor();
 }
 
@@ -161,7 +157,6 @@ void DocumentModelCurveProperties::setLineColor (const QString &curveName,
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setPaletteColor(lineColor);
-    qDebug() << "shit6 "<< curveName<<" "<<lineColor<< "->"<< m_lineStyles[curveName].paletteColor();
 }
 
 void DocumentModelCurveProperties::setLineConnectAs (const QString &curveName,

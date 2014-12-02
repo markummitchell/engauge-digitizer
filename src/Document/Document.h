@@ -215,7 +215,7 @@ private:
   CurvesGraphs m_curvesGraphs;
 
   DocumentModelCoords m_modelCoords;
-  DocumentModelCurveProperties m_modelCurveProperties;
+  // DocumentModelCurveProperties is not here since curve properties are stored inside CurvesGraphs
   DocumentModelExport m_modelExport;
   DocumentModelFilter m_modelFilter;
   DocumentModelGridDisplay m_modelGridDisplay;

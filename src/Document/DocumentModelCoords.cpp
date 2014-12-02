@@ -12,12 +12,12 @@ DocumentModelCoords::DocumentModelCoords() :
 {
 }
 
-DocumentModelCoords::DocumentModelCoords(const CmdMediator &cmdMediator) :
-  m_coordsType (cmdMediator.document().modelCoords().coordsType()),
-  m_originRadius(cmdMediator.document().modelCoords().originRadius()),
-  m_coordScaleXTheta(cmdMediator.document().modelCoords().coordScaleXTheta()),
-  m_coordScaleYRadius(cmdMediator.document().modelCoords().coordScaleYRadius()),
-  m_coordThetaUnits(cmdMediator.document().modelCoords().coordThetaUnits())
+DocumentModelCoords::DocumentModelCoords(const Document &document) :
+  m_coordsType (document.modelCoords().coordsType()),
+  m_originRadius(document.modelCoords().originRadius()),
+  m_coordScaleXTheta(document.modelCoords().coordScaleXTheta()),
+  m_coordScaleYRadius(document.modelCoords().coordScaleYRadius()),
+  m_coordThetaUnits(document.modelCoords().coordThetaUnits())
 {
 }
 

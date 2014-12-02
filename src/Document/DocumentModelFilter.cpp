@@ -8,8 +8,8 @@ DocumentModelFilter::DocumentModelFilter() :
 {
 }
 
-DocumentModelFilter::DocumentModelFilter(const CmdMediator &cmdMediator) :
-  m_filterParameter (cmdMediator.document().modelFilter().filterParameter())
+DocumentModelFilter::DocumentModelFilter(const Document &document) :
+  m_filterParameter (document.modelFilter().filterParameter())
 {
 
 }

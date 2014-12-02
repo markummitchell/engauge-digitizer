@@ -85,6 +85,12 @@ public:
   /// Change the curve name
   void setCurveName (const QString &curveName);
 
+  /// Set line style.
+  void setLineStyle (const LineStyle &lineStyle);
+
+  /// Set point style.
+  void setPointStyle (const PointStyle &pointStyle);
+
 private:
   Curve();
 

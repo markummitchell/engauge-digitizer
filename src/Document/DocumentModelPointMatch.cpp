@@ -18,12 +18,12 @@ DocumentModelPointMatch::DocumentModelPointMatch() :
 {
 }
 
-DocumentModelPointMatch::DocumentModelPointMatch(const CmdMediator &cmdMediator) :
-  m_pointSeparation (cmdMediator.document().modelPointMatch().pointSeparation()),
-  m_maxPointSize (cmdMediator.document().modelPointMatch().maxPointSize()),
-  m_paletteColorAccepted (cmdMediator.document().modelPointMatch().paletteColorAccepted()),
-  m_paletteColorCandidate (cmdMediator.document().modelPointMatch().paletteColorCandidate()),
-  m_paletteColorRejected (cmdMediator.document().modelPointMatch().paletteColorRejected())
+DocumentModelPointMatch::DocumentModelPointMatch(const Document &document) :
+  m_pointSeparation (document.modelPointMatch().pointSeparation()),
+  m_maxPointSize (document.modelPointMatch().maxPointSize()),
+  m_paletteColorAccepted (document.modelPointMatch().paletteColorAccepted()),
+  m_paletteColorCandidate (document.modelPointMatch().paletteColorCandidate()),
+  m_paletteColorRejected (document.modelPointMatch().paletteColorRejected())
 {
 }
 
