@@ -109,7 +109,9 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
 void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
                                           int &row)
 {
-  m_boxXTheta = new QGroupBox(QString("X/") + QChar (0x98, 0x03) + QString (" Scale"));
+  const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
+
+  m_boxXTheta = new QGroupBox(OVERRIDDEN_VALUE);
   layout->addWidget (m_boxXTheta, row, 1);
 
   QVBoxLayout *layoutXTheta = new QVBoxLayout (m_boxXTheta);
@@ -126,7 +128,7 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
   connect (m_xThetaLog, SIGNAL (pressed ()), this, SLOT (slotXThetaLog()));
   layoutXTheta->addWidget (m_xThetaLog);
 
-  m_boxYRadius = new QGroupBox ("Y/R Scale");
+  m_boxYRadius = new QGroupBox (OVERRIDDEN_VALUE);
   layout->addWidget (m_boxYRadius, row++, 2);
 
   QVBoxLayout *layoutYRadius = new QVBoxLayout (m_boxYRadius);
@@ -309,4 +311,19 @@ void DlgSettingsCoords::updateControls ()
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
+
+  QString captionXTheta = (m_btnCartesian->isChecked () ?
+                             QString ("X") :
+                             QChar (0x98, 0x03)) + QString (" Scale");
+  QString captionYRadius = (m_btnCartesian->isChecked () ?
+                              QString ("Y") :
+                              QString ("R")) + QString (" Scale");
+
+  if (m_boxXTheta->title() != captionXTheta) {
+    m_boxXTheta->setTitle (captionXTheta);
+  }
+
+  if (m_boxYRadius->title () != captionYRadius) {
+    m_boxYRadius->setTitle (captionYRadius);
+  }
 }
