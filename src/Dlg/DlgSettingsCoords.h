@@ -39,6 +39,8 @@ protected:
 
 private:
 
+  void annotateAngleAtTop(const QFont &defaultFont);
+  void annotateRadiusAtOrigin(const QFont &defaultFont);
   void createGroupCoordsType(QGridLayout *layout,
                              int &row);
   void createGroupPolar(QGridLayout *layout,
@@ -47,8 +49,16 @@ private:
                         int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
-  void loadPixmap (const QString &image);
+  void drawCartesianLinearX();
+  void drawCartesianLinearY();
+  void drawCartesianLogX();
+  void drawCartesianLogY();
+  void drawPolarLinearRadius();
+  void drawPolarLogRadius();
+  void drawPolarTheta();
+  void resetSceneRectangle();
   void updateControls();
+  void updatePreview();
 
   QGroupBox *m_boxCoordsType;
   QRadioButton *m_btnCartesian;

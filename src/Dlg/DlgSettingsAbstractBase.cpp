@@ -47,7 +47,7 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 
   m_btnCancel = new QPushButton (tr ("Cancel"));
   buttonLayout->addWidget (m_btnCancel);
-  connect (m_btnCancel, SIGNAL (pressed ()), this, SLOT (hide ()));
+  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (hide ()));
 
   QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
   buttonLayout->addItem (spacer);
@@ -55,7 +55,7 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
   m_btnOk = new QPushButton (tr ("Ok"));
   m_btnOk->setEnabled (false); // Nothing to save initially
   buttonLayout->addWidget (m_btnOk);
-  connect (m_btnOk, SIGNAL (pressed ()), this, SLOT (slotOk ()));
+  connect (m_btnOk, SIGNAL (released ()), this, SLOT (slotOk ()));
 
   panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);

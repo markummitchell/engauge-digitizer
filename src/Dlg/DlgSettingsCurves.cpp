@@ -41,14 +41,14 @@ void DlgSettingsCurves::createButtons (QGridLayout *layout,
                               "will be added at the end.\n\n"
                               "Every curve name must be unique"));
   m_btnNew->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-  connect (m_btnNew, SIGNAL (pressed ()), this, SLOT (slotNew()));
+  connect (m_btnNew, SIGNAL (released ()), this, SLOT (slotNew()));
   layout->addWidget (m_btnNew, row, 1, 1, 1, Qt::AlignLeft);
 
   m_btnRemove = new QPushButton ("Remove");
   m_btnRemove->setWhatsThis (tr ("Removes the currently selected curve from the curve list.\n\n"
                                  "There must always be at least one curve"));
   m_btnRemove->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-  connect (m_btnRemove, SIGNAL (pressed ()), this, SLOT (slotRemove()));
+  connect (m_btnRemove, SIGNAL (released ()), this, SLOT (slotRemove()));
   layout->addWidget (m_btnRemove, row++, 2, 1, 1, Qt::AlignRight);
 }
 

@@ -98,11 +98,11 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
 
   m_btnOk = new QPushButton (tr ("Ok"), this);
   layout->addWidget(m_btnOk);
-  connect (m_btnOk, SIGNAL (pressed ()), this, SLOT (accept ()));
+  connect (m_btnOk, SIGNAL (released ()), this, SLOT (accept ()));
 
   m_btnCancel = new QPushButton (tr ("Cancel"), this);
   layout->addWidget(m_btnCancel);
-  connect (m_btnCancel, SIGNAL (pressed ()), this, SLOT (reject ()));
+  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
 QPointF DlgEditPoint::posGraph () const

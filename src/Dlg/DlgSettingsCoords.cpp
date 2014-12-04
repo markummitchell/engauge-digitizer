@@ -4,6 +4,7 @@
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <math.h>
 #include <QComboBox>
 #include <QDebug>
 #include <QDoubleValidator>
@@ -29,6 +30,32 @@ const QString POLAR_UNITS_GRADIANS = "Gradians";
 const QString POLAR_UNITS_RADIANS = "Radians";
 const QString POLAR_UNITS_TURNS = "Turns";
 
+const int STEPS_PER_CYCLE = 4; // Repeat STEPS_PER_CYLE-1 unhighlighted steps plus 1 highlighted step in each cycle
+const int STEPS_CYCLE_COUNT = 4; // Repeat one highlighted step + STEPS_UNHIGHLIGHTED_PER_HIGHLIGHTED steps this many times
+const int NUM_COORD_STEPS = 1 + STEPS_PER_CYCLE * STEPS_CYCLE_COUNT;
+
+const int CARTESIAN_COORD_MAX = 100;
+const int CARTESIAN_COORD_MIN = -100;
+const double CARTESIAN_COORD_STEP = (CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN) / (NUM_COORD_STEPS - 1.0);
+
+const int POLAR_RADIUS = CARTESIAN_COORD_MAX;
+const double POLAR_STEP = POLAR_RADIUS / (NUM_COORD_STEPS - 1.0);
+
+const int POLAR_THETA_MAX = 360;
+const int POLAR_THETA_MIN = 0;
+const double POLAR_THETA_STEP = (POLAR_THETA_MAX - POLAR_THETA_MIN) / (NUM_COORD_STEPS - 1.0);
+
+const double XCENTER = (CARTESIAN_COORD_MIN + CARTESIAN_COORD_MAX) / 2.0;
+const double YCENTER = (CARTESIAN_COORD_MIN + CARTESIAN_COORD_MAX) / 2.0;
+
+const double LINE_WIDTH_THIN = 0.0;
+const double LINE_WIDTH_THICK = 2.0;
+
+const double PI = 3.1415926535;
+const double DEG_2_RAD = PI / 180.0;
+
+const int FONT_SIZE = 6;
+
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Coordinates", mainWindow),
   m_btnCartesian (0),
@@ -38,6 +65,48 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+void DlgSettingsCoords::annotateAngleAtTop (const QFont &defaultFont) {
+
+  QString angle;
+  CoordThetaUnits thetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData().toInt();
+
+  switch (thetaUnits) {
+    case COORD_THETA_UNITS_DEGREES:
+    case COORD_THETA_UNITS_DEGREES_MINUTES:
+    case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+      angle = "90.0";
+      break;
+
+     case COORD_THETA_UNITS_GRADIANS:
+      angle = "100.0";
+      break;
+
+    case COORD_THETA_UNITS_RADIANS:
+      angle = "PI / 2.0";
+      break;
+
+    case COORD_THETA_UNITS_TURNS:
+      angle = "1.0 / 4.0";
+      break;
+
+    default:
+     break;
+  }
+
+  QGraphicsTextItem *textAngle = m_scenePreview->addText (angle);
+  textAngle->setFont (QFont (defaultFont.defaultFamily(), FONT_SIZE));
+  textAngle->setPos (XCENTER - textAngle->boundingRect().width () / 2.0,
+                     CARTESIAN_COORD_MIN);
+}
+
+void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
+
+  QGraphicsTextItem *textRadius = m_scenePreview->addText (m_editOriginRadius->text());
+  textRadius->setFont (QFont (defaultFont.defaultFamily(), FONT_SIZE));
+  textRadius->setPos (XCENTER - textRadius->boundingRect().width () / 2.0,
+                      YCENTER);
 }
 
 void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
@@ -119,13 +188,13 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
 
   m_xThetaLinear = new QRadioButton ("Linear", m_boxXTheta);
   m_xThetaLinear->setWhatsThis (QString(tr("Specifies linear scale for the X or Theta coordinate")));
-  connect (m_xThetaLinear, SIGNAL (pressed ()), this, SLOT (slotXThetaLinear()));
+  connect (m_xThetaLinear, SIGNAL (released ()), this, SLOT (slotXThetaLinear()));
   layoutXTheta->addWidget (m_xThetaLinear);
 
   m_xThetaLog = new QRadioButton ("Log", m_boxXTheta);
   m_xThetaLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the X coordinate.\n\n"
                                         "Log scale is not allowed for the Theta coordinate")));
-  connect (m_xThetaLog, SIGNAL (pressed ()), this, SLOT (slotXThetaLog()));
+  connect (m_xThetaLog, SIGNAL (released ()), this, SLOT (slotXThetaLog()));
   layoutXTheta->addWidget (m_xThetaLog);
 
   m_boxYRadius = new QGroupBox (OVERRIDDEN_VALUE);
@@ -136,12 +205,12 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
 
   m_yRadiusLinear = new QRadioButton ("Linear", m_boxYRadius);
   m_yRadiusLinear->setWhatsThis (QString(tr("Specifies linear scale for the Y or R coordinate")));
-  connect (m_yRadiusLinear, SIGNAL(pressed()), this, SLOT (slotYRadiusLinear()));
+  connect (m_yRadiusLinear, SIGNAL(released()), this, SLOT (slotYRadiusLinear()));
   layoutYRadius->addWidget (m_yRadiusLinear);
 
   m_yRadiusLog = new QRadioButton ("Log", m_boxYRadius);
   m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate")));
-  connect (m_yRadiusLog, SIGNAL(pressed ()), this, SLOT (slotYRadiusLog ()));
+  connect (m_yRadiusLog, SIGNAL(released ()), this, SLOT (slotYRadiusLog ()));
   layoutYRadius->addWidget (m_yRadiusLog);
 }
 
@@ -181,6 +250,139 @@ QWidget *DlgSettingsCoords::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsCoords::drawCartesianLinearX () {
+
+  bool isAxis = true;
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double x = CARTESIAN_COORD_MIN + step * CARTESIAN_COORD_STEP;
+    QGraphicsLineItem *line = m_scenePreview->addLine (x, CARTESIAN_COORD_MIN, x, CARTESIAN_COORD_MAX);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush ((isHighlighted ? Qt::gray : Qt::lightGray)),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+    if (isAxis) {
+      line = m_scenePreview->addLine (x, CARTESIAN_COORD_MIN, x, CARTESIAN_COORD_MAX);
+      line->setPen(QPen (QBrush (Qt::black),
+                         LINE_WIDTH_THICK));
+    }
+    isAxis = false;
+  }
+}
+
+void DlgSettingsCoords::drawCartesianLinearY () {
+
+  bool isAxis = true;
+  for (int step = NUM_COORD_STEPS - 1; step >= 0; step--) {
+    double y = CARTESIAN_COORD_MIN + step * CARTESIAN_COORD_STEP;
+    QGraphicsLineItem *line = m_scenePreview->addLine (CARTESIAN_COORD_MIN, y, CARTESIAN_COORD_MAX, y);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+    if (isAxis) {
+      line = m_scenePreview->addLine (CARTESIAN_COORD_MIN, y, CARTESIAN_COORD_MAX, y);
+      line->setPen(QPen (QBrush (Qt::black),
+                         LINE_WIDTH_THICK));
+    }
+    isAxis = false;
+  }
+}
+
+void DlgSettingsCoords::drawCartesianLogX () {
+
+  bool isAxis = true;
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double s = (exp (step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
+               (exp (1.0) - 1.0);
+    double x = (1.0 - s) * CARTESIAN_COORD_MIN + s * CARTESIAN_COORD_MAX;
+    QGraphicsLineItem *line = m_scenePreview->addLine (x, CARTESIAN_COORD_MIN, x, CARTESIAN_COORD_MAX);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+    if (isAxis) {
+      line = m_scenePreview->addLine (x, CARTESIAN_COORD_MIN, x, CARTESIAN_COORD_MAX);
+      line->setPen(QPen (QBrush (Qt::black),
+                         LINE_WIDTH_THICK));
+    }
+    isAxis = false;
+  }
+}
+
+void DlgSettingsCoords::drawCartesianLogY () {
+
+  bool isAxis = true;
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double s = (exp (step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
+               (exp (1.0) - 1.0);
+    double y = (1.0 - s) * CARTESIAN_COORD_MAX + s * CARTESIAN_COORD_MIN; // Invert y coordinate (min<->max)
+    QGraphicsLineItem *line = m_scenePreview->addLine (CARTESIAN_COORD_MIN, y, CARTESIAN_COORD_MAX, y);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+    if (isAxis) {
+      line = m_scenePreview->addLine (CARTESIAN_COORD_MIN, y, CARTESIAN_COORD_MAX, y);
+      line->setPen(QPen (QBrush (Qt::black),
+                         LINE_WIDTH_THICK));
+    }
+    isAxis = false;
+  }
+}
+
+void DlgSettingsCoords::drawPolarLinearRadius () {
+
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double radius = step * POLAR_STEP;
+    QGraphicsEllipseItem *line = m_scenePreview->addEllipse (XCENTER - radius,
+                                                             YCENTER - radius,
+                                                             2.0 * radius,
+                                                             2.0 * radius);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                               LINE_WIDTH_THIN,
+                               (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+  }
+}
+
+void DlgSettingsCoords::drawPolarLogRadius () {
+
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double s = (exp (step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
+               (exp (1.0) - 1.0);
+    double radius = (s * (NUM_COORD_STEPS - 1.0)) * POLAR_STEP;
+    QGraphicsEllipseItem *line = m_scenePreview->addEllipse (XCENTER - radius,
+                                                             YCENTER - radius,
+                                                             2.0 * radius,
+                                                             2.0 * radius);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+  }
+}
+
+void DlgSettingsCoords::drawPolarTheta () {
+
+  bool isAxis = true;
+  for (int step = 0; step < NUM_COORD_STEPS; step++) {
+    double theta = POLAR_THETA_MIN + step * POLAR_THETA_STEP;
+    double x = POLAR_RADIUS * cos (theta * DEG_2_RAD);
+    double y = POLAR_RADIUS * sin (theta * DEG_2_RAD);
+    QGraphicsLineItem *line = m_scenePreview->addLine (XCENTER, YCENTER, XCENTER + x, YCENTER + y);
+    bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
+    line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),
+                       LINE_WIDTH_THIN,
+                       (isHighlighted ? Qt::SolidLine : Qt::DashLine)));
+    if (isAxis) {
+      line = m_scenePreview->addLine (XCENTER, YCENTER, XCENTER + x, YCENTER + y);
+      line->setPen(QPen (QBrush (Qt::black),
+                         LINE_WIDTH_THICK));
+    }
+    isAxis = false;
+  }
+}
+
 void DlgSettingsCoords::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::handleOk";
@@ -217,19 +419,21 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
   m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
   m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LINEAR);
-  m_yRadiusLinear->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
+  m_yRadiusLog->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
 
   updateControls (); // Probably redundant due to the setChecked just above
+  updatePreview();
 }
 
-void DlgSettingsCoords::loadPixmap (const QString &image)
-{
-  if (m_scenePreview->items().count () > 0) {
-    m_scenePreview->removeItem (m_scenePreview->items().first());
-  }
+void DlgSettingsCoords::resetSceneRectangle () {
 
-  QPixmap pixmap (image);
-  m_scenePreview->addPixmap (pixmap);
+  QRect rect (CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
+              CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
+              CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP,
+              CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP);
+  m_scenePreview->setSceneRect(rect);
+  m_viewPreview->setSceneRect(rect);
+  m_viewPreview->centerOn (QPointF (0.0, 0.0));
 }
 
 void DlgSettingsCoords::slotCartesianPolar (bool)
@@ -240,12 +444,11 @@ void DlgSettingsCoords::slotCartesianPolar (bool)
 
   if (m_btnCartesian->isChecked ()) {
     m_modelCoordsAfter->setCoordsType (COORDS_TYPE_CARTESIAN);
-    loadPixmap (":/engauge/img/plot_cartesian.png");
   } else {
     m_modelCoordsAfter->setCoordsType(COORDS_TYPE_POLAR);
-    loadPixmap (":/engauge/img/plot_polar.png");
   }
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotPolarOriginRadius()
@@ -256,6 +459,7 @@ void DlgSettingsCoords::slotPolarOriginRadius()
 
   m_modelCoordsAfter->setOriginRadius(m_editOriginRadius->text ().toDouble ());
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotPolarUnits(const QString &)
@@ -267,6 +471,7 @@ void DlgSettingsCoords::slotPolarUnits(const QString &)
   CoordThetaUnits coordThetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
   m_modelCoordsAfter->setCoordThetaUnits(coordThetaUnits);
   updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotXThetaLinear()
@@ -276,6 +481,7 @@ void DlgSettingsCoords::slotXThetaLinear()
   enableOk (true);
   m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LINEAR);
   updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotXThetaLog()
@@ -285,6 +491,7 @@ void DlgSettingsCoords::slotXThetaLog()
   enableOk (true);
   m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LOG);
   updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotYRadiusLinear()
@@ -294,6 +501,7 @@ void DlgSettingsCoords::slotYRadiusLinear()
   enableOk (true);
   m_modelCoordsAfter->setCoordScaleYRadius((COORD_SCALE_LINEAR));
   updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsCoords::slotYRadiusLog()
@@ -303,6 +511,7 @@ void DlgSettingsCoords::slotYRadiusLog()
   enableOk (true);
   m_modelCoordsAfter->setCoordScaleYRadius(COORD_SCALE_LOG);
   updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsCoords::updateControls ()
@@ -325,5 +534,48 @@ void DlgSettingsCoords::updateControls ()
 
   if (m_boxYRadius->title () != captionYRadius) {
     m_boxYRadius->setTitle (captionYRadius);
+  }
+}
+
+void DlgSettingsCoords::updatePreview()
+{
+  m_scenePreview->clear();
+
+  // General approach
+  // 1) Axis lines are extra thick, but since they sometimes disappear as the preview window is rescaled, we keep the
+  //    constant-pixel line under each axis line
+  // 2) Every STEPS_UNHIGHLIGHTED_PER_HIGHLIGHTED out of STEPS_UNHIGHLIGHTED_PER_HIGHLIGHTED+1 lines are dashed to make
+  //    them more subtle
+
+  if (m_btnCartesian->isChecked()) {
+
+    // Cartesian
+    if (m_xThetaLinear->isChecked()) {
+      drawCartesianLinearX ();
+    } else {
+      drawCartesianLogX ();
+    }
+
+    if (m_yRadiusLinear->isChecked()) {
+      drawCartesianLinearY ();
+    } else {
+      drawCartesianLogY ();
+    }
+
+  } else {
+
+    // Polar
+    drawPolarTheta ();
+    if (m_yRadiusLinear->isChecked()) {
+      drawPolarLinearRadius ();
+    } else {
+      drawPolarLogRadius ();
+    }
+
+    QFont defaultFont;
+    annotateRadiusAtOrigin (defaultFont);
+    annotateAngleAtTop (defaultFont);
+
+    resetSceneRectangle();
   }
 }

@@ -32,7 +32,7 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
                                     "to hide unimportant information and emphasize important information.\n\n"
                                     "The Intensity value of a pixel is computed from the red, green "
                                     "and blue components as I = (R + G + B) / 3"));
-  connect (m_btnIntensity, SIGNAL (pressed ()), this, SLOT (slotIntensity ()));
+  connect (m_btnIntensity, SIGNAL (released ()), this, SLOT (slotIntensity ()));
   layout->addWidget (m_btnIntensity, row++, 1);
 
   m_btnForeground = new QRadioButton ("Foreground");
@@ -41,21 +41,21 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
                                      "The background color is shown on the left side of the scale bar. All pixels with approximately "
                                      "the background color are considered part of the background, and all other pixels are considered "
                                      "part of the foreground"));
-  connect (m_btnForeground, SIGNAL (pressed ()), this, SLOT (slotForeground ()));
+  connect (m_btnForeground, SIGNAL (released ()), this, SLOT (slotForeground ()));
   layout->addWidget (m_btnForeground, row++, 1);
 
   m_btnHue = new QRadioButton ("Hue");
   m_btnHue->setWhatsThis (tr ("Filter the original image into black and white pixels using the Hue component of the "
                               "Hue, Saturation and Value (HSV) color components, "
                               "to hide unimportant information and emphasize important information."));
-  connect (m_btnHue, SIGNAL (pressed ()), this, SLOT (slotHue ()));
+  connect (m_btnHue, SIGNAL (released ()), this, SLOT (slotHue ()));
   layout->addWidget (m_btnHue, row++, 1);
 
   m_btnSaturation = new QRadioButton ("Saturation");
   m_btnSaturation->setWhatsThis (tr ("Filter the original image into black and white pixels using the Saturation component of the "
                                      "Hue, Saturation and Value (HSV) color components, "
                                      "to hide unimportant information and emphasize important information."));
-  connect (m_btnSaturation, SIGNAL (pressed ()), this, SLOT (slotSaturation ()));
+  connect (m_btnSaturation, SIGNAL (released ()), this, SLOT (slotSaturation ()));
   layout->addWidget (m_btnSaturation, row++, 1);
 
   m_btnValue = new QRadioButton ("Value");
@@ -63,7 +63,7 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
                                 "Hue, Saturation and Value (HSV) color components, "
                                 "to hide unimportant information and emphasize important information.\n\n"
                                 "The Value component is also called the Lightness."));
-  connect (m_btnValue, SIGNAL (pressed ()), this, SLOT (slotValue ()));
+  connect (m_btnValue, SIGNAL (released ()), this, SLOT (slotValue ()));
   layout->addWidget (m_btnValue, row++, 1);
 }
 
