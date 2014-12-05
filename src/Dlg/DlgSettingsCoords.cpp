@@ -56,6 +56,8 @@ const double DEG_2_RAD = PI / 180.0;
 
 const int FONT_SIZE = 6;
 
+const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
+
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Coordinates", mainWindow),
   m_btnCartesian (0),
@@ -67,38 +69,91 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   finishPanel (subPanel);
 }
 
-void DlgSettingsCoords::annotateAngleAtTop (const QFont &defaultFont) {
+void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
 
-  QString angle;
-  CoordThetaUnits thetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData().toInt();
+  // 0=+x, 1=+y, 2=-x, 3=-y
+  for (int direction = 0; direction < 4; direction++) {
 
-  switch (thetaUnits) {
-    case COORD_THETA_UNITS_DEGREES:
-    case COORD_THETA_UNITS_DEGREES_MINUTES:
-    case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
-      angle = "90.0";
-      break;
+    QString angle;
+    CoordThetaUnits thetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData().toInt();
 
-     case COORD_THETA_UNITS_GRADIANS:
-      angle = "100.0";
-      break;
+    switch (thetaUnits) {
+      case COORD_THETA_UNITS_DEGREES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+        angle = QString::number (90.0 * direction);
+        break;
 
-    case COORD_THETA_UNITS_RADIANS:
-      angle = "PI / 2.0";
-      break;
+       case COORD_THETA_UNITS_GRADIANS:
+        angle = QString::number (100.0 * direction);
+        break;
 
-    case COORD_THETA_UNITS_TURNS:
-      angle = "1.0 / 4.0";
-      break;
+      case COORD_THETA_UNITS_RADIANS:
+        switch (direction) {
+          case 0:
+            angle = "0";
+            break;
+          case 1:
+            angle = "PI / 2";
+            break;
+          case 2:
+            angle = "PI";
+            break;
+          case 3:
+            angle = "3 * PI / 2";
+        }
+        break;
 
-    default:
-     break;
+      case COORD_THETA_UNITS_TURNS:
+        switch (direction) {
+          case 0:
+            angle = "0";
+            break;
+          case 1:
+            angle = "1 / 4";
+            break;
+          case 2:
+            angle = "1 / 2";
+            break;
+          case 3:
+            angle = "3 / 4";
+        break;
+      }
+
+      default:
+       break;
+    }
+
+    QGraphicsTextItem *textAngle = m_scenePreview->addText (angle);
+    textAngle->setFont (QFont (defaultFont.defaultFamily(), FONT_SIZE));
+    double x, y;
+    switch (direction) {
+      case 0:
+        x = CARTESIAN_COORD_MAX - textAngle->boundingRect().width ();
+        break;
+      case 1:
+      case 3:
+        x = XCENTER - textAngle->boundingRect().width () / 2.0;
+        break;
+      case 2:
+        x = CARTESIAN_COORD_MIN;
+        break;
+    }
+    switch (direction) {
+      case 0:
+      case 2:
+        y = YCENTER;
+        break;
+      case 1:
+        y = CARTESIAN_COORD_MIN;
+        break;
+      case 3:
+        y = CARTESIAN_COORD_MAX - textAngle->boundingRect().height ();
+        break;
+    }
+
+    textAngle->setPos (x, y);
   }
-
-  QGraphicsTextItem *textAngle = m_scenePreview->addText (angle);
-  textAngle->setFont (QFont (defaultFont.defaultFamily(), FONT_SIZE));
-  textAngle->setPos (XCENTER - textAngle->boundingRect().width () / 2.0,
-                     CARTESIAN_COORD_MIN);
 }
 
 void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
@@ -313,8 +368,8 @@ void DlgSettingsCoords::drawCartesianLogY () {
 
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
-    double s = (exp (step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
-               (exp (1.0) - 1.0);
+    double s = (pow (POWER_FOR_LOG, step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
+               (pow (POWER_FOR_LOG, 1.0) - 1.0);
     double y = (1.0 - s) * CARTESIAN_COORD_MAX + s * CARTESIAN_COORD_MIN; // Invert y coordinate (min<->max)
     QGraphicsLineItem *line = m_scenePreview->addLine (CARTESIAN_COORD_MIN, y, CARTESIAN_COORD_MAX, y);
     bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
@@ -348,8 +403,8 @@ void DlgSettingsCoords::drawPolarLinearRadius () {
 void DlgSettingsCoords::drawPolarLogRadius () {
 
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
-    double s = (exp (step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
-               (exp (1.0) - 1.0);
+    double s = (pow (POWER_FOR_LOG, step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
+               (pow (POWER_FOR_LOG, 1.0) - 1.0);
     double radius = (s * (NUM_COORD_STEPS - 1.0)) * POLAR_STEP;
     QGraphicsEllipseItem *line = m_scenePreview->addEllipse (XCENTER - radius,
                                                              YCENTER - radius,
@@ -574,8 +629,8 @@ void DlgSettingsCoords::updatePreview()
 
     QFont defaultFont;
     annotateRadiusAtOrigin (defaultFont);
-    annotateAngleAtTop (defaultFont);
-
-    resetSceneRectangle();
+    annotateAngles (defaultFont);
   }
+
+  resetSceneRectangle();
 }

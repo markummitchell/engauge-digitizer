@@ -45,6 +45,8 @@ private:
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void loadForCurveName(const QString &curveName);
+  void resetSceneRectangle();
+  void updatePreview();
 
   QComboBox *m_cmbCurveName;
 

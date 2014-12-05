@@ -2,6 +2,7 @@
 #include "CmdSettingsCurveProperties.h"
 #include "ColorPalette.h"
 #include "DlgSettingsCurveProperties.h"
+#include "GraphicsPointPolygon.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -17,6 +18,9 @@
 
 const QString CONNECT_AS_FUNCTION_STR ("Function");
 const QString CONNECT_AS_RELATION_STR ("Relation");
+
+const double PREVIEW_WIDTH = 100.0;
+const double PREVIEW_HEIGHT = 100.0;
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Curve Properties", mainWindow),
@@ -251,6 +255,17 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
 }
 
+void DlgSettingsCurveProperties::resetSceneRectangle () {
+
+  QRect rect (0.0,
+              0.0,
+              PREVIEW_WIDTH,
+              PREVIEW_HEIGHT);
+  m_scenePreview->setSceneRect(rect);
+  m_viewPreview->setSceneRect(rect);
+  m_viewPreview->centerOn (QPointF (0.0, 0.0));
+}
+
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
@@ -276,6 +291,7 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
 
   m_modelCurvePropertiesAfter->setLineColor(m_cmbCurveName->currentText(),
                                             (ColorPalette) m_cmbLineColor->currentData().toInt());
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::slotLineSize(int lineSize)
@@ -286,6 +302,7 @@ void DlgSettingsCurveProperties::slotLineSize(int lineSize)
 
   m_modelCurvePropertiesAfter->setLineWidth(m_cmbCurveName->currentText(),
                                             lineSize);
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::slotLineType(const QString &)
@@ -296,6 +313,7 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
 
   m_modelCurvePropertiesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
                                                 (CurveConnectAs) m_cmbLineType->currentData().toInt ());
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::slotPointColor(const QString &)
@@ -306,6 +324,7 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
 
   m_modelCurvePropertiesAfter->setPointColor(m_cmbCurveName->currentText(),
                                              (ColorPalette) m_cmbPointColor->currentData().toInt ());
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::slotPointShape(const QString &)
@@ -316,6 +335,7 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
 
   m_modelCurvePropertiesAfter->setPointShape(m_cmbCurveName->currentText(),
                                              (PointShape) m_cmbPointShape->currentData().toInt ());
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::slotPointSize(int radius)
@@ -326,4 +346,32 @@ void DlgSettingsCurveProperties::slotPointSize(int radius)
 
   m_modelCurvePropertiesAfter->setPointRadius(m_cmbCurveName->currentText(),
                                               radius);
+  updatePreview();
+}
+
+void DlgSettingsCurveProperties::updatePreview()
+{
+  const QString NULL_IDENTIFIER;
+
+  m_scenePreview->clear();
+
+  QString currentCurve = m_cmbCurveName->currentText();
+
+  QPointF posLeft (PREVIEW_WIDTH / 3.0,
+                   PREVIEW_HEIGHT / 2.0);
+  GraphicsPointPolygon *itemLeft = new GraphicsPointPolygon (NULL_IDENTIFIER,
+                                                             posLeft,
+                                                             m_modelCurvePropertiesAfter->pointColor(currentCurve),
+                                                             m_modelCurvePropertiesAfter->pointPolygon(currentCurve));
+  m_scenePreview->addItem (itemLeft);
+
+  QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
+                    PREVIEW_HEIGHT / 2.0);
+  GraphicsPointPolygon *itemRight = new GraphicsPointPolygon (NULL_IDENTIFIER,
+                                                              posRight,
+                                                              m_modelCurvePropertiesAfter->pointColor (currentCurve),
+                                                              m_modelCurvePropertiesAfter->pointPolygon (currentCurve));
+  m_scenePreview->addItem (itemRight);
+
+  resetSceneRectangle();
 }

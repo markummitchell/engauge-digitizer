@@ -39,7 +39,7 @@ protected:
 
 private:
 
-  void annotateAngleAtTop(const QFont &defaultFont);
+  void annotateAngles(const QFont &defaultFont);
   void annotateRadiusAtOrigin(const QFont &defaultFont);
   void createGroupCoordsType(QGridLayout *layout,
                              int &row);
