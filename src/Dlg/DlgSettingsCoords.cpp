@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QDebug>
 #include <QDoubleValidator>
+#include <QGraphicsRectItem>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QGraphicsPixmapItem>
@@ -486,8 +487,10 @@ void DlgSettingsCoords::resetSceneRectangle () {
               CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
               CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP,
               CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP);
-  m_scenePreview->setSceneRect(rect);
-  m_viewPreview->setSceneRect(rect);
+
+  QGraphicsRectItem *itemPerimeter = new QGraphicsRectItem(rect);
+  itemPerimeter->setVisible(false);
+  m_scenePreview->addItem (itemPerimeter);
   m_viewPreview->centerOn (QPointF (0.0, 0.0));
 }
 

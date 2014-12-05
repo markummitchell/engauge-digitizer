@@ -7,6 +7,7 @@
 #include "MainWindow.h"
 #include <QComboBox>
 #include <QDebug>
+#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -261,8 +262,10 @@ void DlgSettingsCurveProperties::resetSceneRectangle () {
               0.0,
               PREVIEW_WIDTH,
               PREVIEW_HEIGHT);
-  m_scenePreview->setSceneRect(rect);
-  m_viewPreview->setSceneRect(rect);
+
+  QGraphicsRectItem *itemPerimeter = new QGraphicsRectItem(rect);
+  itemPerimeter->setVisible(false);
+  m_scenePreview->addItem (itemPerimeter);
   m_viewPreview->centerOn (QPointF (0.0, 0.0));
 }
 
