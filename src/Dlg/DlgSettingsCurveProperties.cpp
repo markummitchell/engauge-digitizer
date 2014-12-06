@@ -2,18 +2,21 @@
 #include "CmdSettingsCurveProperties.h"
 #include "ColorPalette.h"
 #include "DlgSettingsCurveProperties.h"
+#include "EnumsToQt.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
 #include <QDebug>
+#include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QListWidget>
+#include <QPen>
 #include <QPushButton>
 #include <QSpinBox>
 #include <QTransform>
@@ -273,6 +276,12 @@ void DlgSettingsCurveProperties::resetSceneRectangle () {
   m_viewPreview->centerOn (QPointF (0.0, 0.0));
 }
 
+void DlgSettingsCurveProperties::setCurveName (const QString &curveName)
+{
+  m_cmbCurveName->setCurrentText (curveName);
+  loadForCurveName (curveName);
+}
+
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
@@ -282,12 +291,6 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
 
     loadForCurveName (curveName);
   }
-}
-
-void DlgSettingsCurveProperties::setCurveName (const QString &curveName)
-{
-  m_cmbCurveName->setCurrentText (curveName);
-  loadForCurveName (curveName);
 }
 
 void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
@@ -364,21 +367,33 @@ void DlgSettingsCurveProperties::updatePreview()
 
   QString currentCurve = m_cmbCurveName->currentText();
 
+  // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
                    PREVIEW_HEIGHT / 2.0);
   GraphicsPointPolygon *itemLeft = new GraphicsPointPolygon (NULL_IDENTIFIER,
                                                              posLeft,
-                                                             m_modelCurvePropertiesAfter->pointColor(currentCurve),
+                                                             ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor(currentCurve)),
                                                              m_modelCurvePropertiesAfter->pointPolygon(currentCurve));
   m_scenePreview->addItem (itemLeft);
 
+  // Right point
   QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
                     PREVIEW_HEIGHT / 2.0);
   GraphicsPointPolygon *itemRight = new GraphicsPointPolygon (NULL_IDENTIFIER,
                                                               posRight,
-                                                              m_modelCurvePropertiesAfter->pointColor (currentCurve),
+                                                              ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor (currentCurve)),
                                                               m_modelCurvePropertiesAfter->pointPolygon (currentCurve));
   m_scenePreview->addItem (itemRight);
+
+  // Line between points
+  QGraphicsLineItem *itemLine = new QGraphicsLineItem (posLeft.x(),
+                                                       posLeft.y(),
+                                                       posRight.x(),
+                                                       posRight.y());
+  itemLine->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelCurvePropertiesAfter->lineColor (currentCurve))),
+                    m_modelCurvePropertiesAfter->lineWidth(currentCurve)));
+  itemLine->setZValue (-1.0);
+  m_scenePreview->addItem (itemLine);
 
   resetSceneRectangle();
 }

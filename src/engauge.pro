@@ -106,7 +106,8 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
     include/ZoomFactor.h \
-    Document/DocumentModelAbstractBase.h
+    Document/DocumentModelAbstractBase.h \
+    util/EnumsToQt.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -191,7 +192,8 @@ SOURCES += \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
     View/ViewProfileShades.cpp \
-    Document/DocumentModelAbstractBase.cpp
+    Document/DocumentModelAbstractBase.cpp \
+    util/EnumsToQt.cpp
 
 TARGET = ../bin/engauge
 
