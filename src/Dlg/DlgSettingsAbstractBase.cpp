@@ -12,6 +12,7 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
   m_cmdMediator (0)
 {
   setWindowTitle (title);
+  setModal (true);
 }
 
 DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
@@ -69,6 +70,11 @@ MainWindow &DlgSettingsAbstractBase::mainWindow ()
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)
 {
   m_cmdMediator = &cmdMediator;
+}
+
+void DlgSettingsAbstractBase::showEvent (QShowEvent * /* event */)
+{
+  m_btnOk->setEnabled (false);
 }
 
 void DlgSettingsAbstractBase::slotOk ()

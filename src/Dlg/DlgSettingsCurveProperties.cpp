@@ -230,9 +230,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   loadForCurveName (mainWindow().selectedCurrentCurve());
 
-  // Set the horizontal and vertical scales to the current scales used by mainWindow
-  m_viewPreview->scale (mainWindow().view().transform().m11(),
-                        mainWindow().view().transform().m22());
+  updatePreview();
 }
 
 void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)

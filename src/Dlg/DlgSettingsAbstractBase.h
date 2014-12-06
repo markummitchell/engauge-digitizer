@@ -47,6 +47,9 @@ protected:
   void setCmdMediator (CmdMediator &cmdMediator);
 
 private slots:
+  /// Do preparation before dialog is displayed.
+  virtual void showEvent (QShowEvent *event);
+
   /// Save changes entered in dialog.
   void slotOk ();
 
