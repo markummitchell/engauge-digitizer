@@ -21,11 +21,17 @@ GraphicsPointPolygon::GraphicsPointPolygon(const QString &identifier,
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
   setPos (posScreen.x (),
           posScreen.y ());
-  setPen (QPen (QBrush (color), ZERO_WIDTH));
+  setPen (QPen (color));
   setEnabled (true);
   setFlags (QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable |
             QGraphicsItem::ItemSendsGeometryChanges);
+
+  // Shadow item is not selectable so it needs no stored data
+  m_shadowZeroWidth = new QGraphicsPolygonItem (polygon,
+                                                this);
+  m_shadowZeroWidth->setPen (QPen (QBrush (color), ZERO_WIDTH));
+  m_shadowZeroWidth->setEnabled (true);
 }
 
 QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,

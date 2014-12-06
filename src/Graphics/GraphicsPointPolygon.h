@@ -20,6 +20,8 @@ public:
 
 private:
   GraphicsPointPolygon();
+
+  QGraphicsPolygonItem *m_shadowZeroWidth; // Shadow item overlays the superclass instance to ensure visibility
 };
 
 #endif // GRAPHICS_POINT_POLYGON_H
