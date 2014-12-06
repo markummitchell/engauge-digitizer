@@ -10,6 +10,12 @@
 ///
 /// The subclasses of this class use multiple inheritance to inherit from one of the subclasses
 /// of QGraphicsItem.
+///
+/// Lines are drawn twice:
+/// 1) As zero-width lines since these always appear even zooming results in some pixel rows/columns disappearing
+/// 2) As nonzer-width lines so user can have thick, and highly visible, points
+/// This dual-line approach is better than using QGraphicsItem::ItemIgnoresTransformations to prevent horrible
+/// aliasing problems, since that approach involves complicated transformation matrix manipulations
 class GraphicsPointAbstractBase
 {
 public:

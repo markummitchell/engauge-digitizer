@@ -20,11 +20,13 @@ GraphicsPointCircle::GraphicsPointCircle(const QString &identifier,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointCircle::GraphicsPointCircle identifier=" << identifier.toLatin1 ().data ();
 
+  const double ZERO_WIDTH = 0.0;
+
   setData (DATA_KEY_IDENTIFIER, identifier);
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
   setPos (posScreen.x (),
           posScreen.y ());
-  setPen (QPen (color));
+  setPen (QPen (QBrush (color), ZERO_WIDTH));
   setEnabled (true);
   setFlags (QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable |

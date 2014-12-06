@@ -185,7 +185,7 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
 void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
 {
   QLabel *label = new QLabel (tr ("Preview"));
-  layout->addWidget (label, row++, 0);
+  layout->addWidget (label, row++, 0, 1, 3);
 
   m_editPreview = new QTextEdit;
   m_editPreview->setReadOnly (true);

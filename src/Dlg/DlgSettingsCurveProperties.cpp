@@ -3,6 +3,7 @@
 #include "ColorPalette.h"
 #include "DlgSettingsCurveProperties.h"
 #include "GraphicsPointPolygon.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -15,6 +16,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QTransform>
 #include "ViewPreview.h"
 
 const QString CONNECT_AS_FUNCTION_STR ("Function");
@@ -152,7 +154,7 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
                                                        int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
-  layout->addWidget (labelPreview, row++, 0);
+  layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);
   m_viewPreview = new ViewPreview (m_scenePreview, this);
@@ -227,6 +229,10 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   }
 
   loadForCurveName (mainWindow().selectedCurrentCurve());
+
+  // Set the horizontal and vertical scales to the current scales used by mainWindow
+  m_viewPreview->scale (mainWindow().view().transform().m11(),
+                        mainWindow().view().transform().m22());
 }
 
 void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
@@ -286,7 +292,7 @@ void DlgSettingsCurveProperties::setCurveName (const QString &curveName)
   loadForCurveName (curveName);
 }
 
-void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
+void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
 
