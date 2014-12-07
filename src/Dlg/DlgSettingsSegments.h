@@ -38,6 +38,8 @@ private:
 
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void updateControls();
+  void updatePreview();
 
   QLineEdit *m_editMinLength;
   QLineEdit *m_editPointSeparation;

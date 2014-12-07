@@ -282,127 +282,127 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_chkRemoveParallel->setChecked (m_modelGridRemovalAfter->removeParallelToAxes());
 
   updateControls ();
+  enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCloseDistance";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setCloseDistance(m_editCloseDistance->text().toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotCountX(const QString &count)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountX";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setCountX(count.toInt());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotCountY(const QString &count)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountY";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setCountY(count.toInt());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotDisableX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableX";
 
-  enableOk (true);
-
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
   m_modelGridRemovalAfter->setGridCoordDisableX(gridCoordDisable);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotDisableY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableY";
 
-  enableOk (true);
-
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
   m_modelGridRemovalAfter->setGridCoordDisableY(gridCoordDisable);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotRemoveGridLines (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveGridLines";
 
-  enableOk (true);
   m_modelGridRemovalAfter->setRemoveDefinedGridLines(state == Qt::Checked);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotRemoveParallel (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveParallel";
 
-  enableOk (true);
   m_modelGridRemovalAfter->setRemoveParallelToAxes(state == Qt::Checked);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStartX(const QString &startX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartX";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStartX(startX.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStartY(const QString &startY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartY";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStartY(startY.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStepX(const QString &stepX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepX";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStepX(stepX.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStepY(const QString &stepY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepY";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStepY(stepY.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStopX(const QString &stopX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopX";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStopX(stopX.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::slotStopY(const QString &stopY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopY";
 
-  enableOk (true);
-
   m_modelGridRemovalAfter->setStopY(stopY.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGridRemoval::updateControls ()
@@ -424,4 +424,9 @@ void DlgSettingsGridRemoval::updateControls ()
   m_editStartY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_START));
   m_editStepY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STEP));
   m_editStopY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STOP));
+}
+
+void DlgSettingsGridRemoval::updatePreview ()
+{
+
 }

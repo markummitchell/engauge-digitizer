@@ -35,7 +35,7 @@ private slots:
   void slotFunctionsLayoutOneCurve();
   void slotFunctionsPointsAllCurves();
   void slotFunctionsPointsEvenlySpaced();
-  void slotFunctionsPointsEvenlySpacedInterval();
+  void slotFunctionsPointsEvenlySpacedInterval(const QString  &);
   void slotFunctionsPointsFirstCurve();
   void slotFunctionsPointsRaw();
   void slotHeaderGnuplot();
@@ -45,7 +45,7 @@ private slots:
   void slotListExcluded();
   void slotListIncluded();
   void slotRelationsPointsEvenlySpaced();
-  void slotRelationsPointsEvenlySpacedInterval();
+  void slotRelationsPointsEvenlySpacedInterval(const QString &);
   void slotRelationsPointsRaw();
   void slotXLabel (const QString &);
 

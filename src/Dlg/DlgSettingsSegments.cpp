@@ -161,48 +161,63 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
   Q_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex(indexLineColor);
+
+  updateControls();
+  enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
 }
 
 void DlgSettingsSegments::slotFillCorners (int state)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotFillCorner";
 
-  enableOk (true);
   m_modelSegmentsAfter->setFillCorners(state == Qt::Checked);
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsSegments::slotLineColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineColor";
 
-  enableOk (true);
-
   m_modelSegmentsAfter->setLineColor((ColorPalette) m_cmbLineColor->currentData().toInt());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsSegments::slotLineWidth (int lineWidth)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineWidth";
 
-  enableOk (true);
-
   m_modelSegmentsAfter->setLineWidth(lineWidth);
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsSegments::slotMinLength (const QString &minLength)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotMinLength";
 
-  enableOk (true);
-
   m_modelSegmentsAfter->setMinLength(minLength.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsSegments::slotPointSeparation (const QString &pointSeparation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotPointSeparation";
 
-  enableOk (true);
-
   m_modelSegmentsAfter->setPointSeparation(pointSeparation.toDouble());
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsSegments::updateControls()
+{
+
+}
+
+void DlgSettingsSegments::updatePreview()
+{
+
 }

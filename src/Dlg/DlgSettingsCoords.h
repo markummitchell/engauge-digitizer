@@ -27,7 +27,7 @@ public:
 
 private slots:
   void slotCartesianPolar (bool);
-  void slotPolarOriginRadius();
+  void slotPolarOriginRadius(const QString &);
   void slotPolarUnits(const QString &);
   void slotXThetaLinear();
   void slotXThetaLog();

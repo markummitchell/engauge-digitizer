@@ -227,7 +227,7 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   m_editOriginRadius->setWhatsThis (QString(tr("Specify radius value at origin.\n\n"
                                                "Normally the radius at the origin is 0, but a nonzero value may be applied in other cases "
                                                "(like when the radial units are decibels).")));
-  connect (m_editOriginRadius, SIGNAL (editingFinished ()), this, SLOT (slotPolarOriginRadius()));
+  connect (m_editOriginRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPolarOriginRadius(const QString &)));
   layoutPolar->addWidget (m_editOriginRadius, 1, 1);
 }
 
@@ -478,6 +478,7 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_yRadiusLog->setChecked (m_modelCoordsAfter->coordScaleYRadius() == COORD_SCALE_LOG);
 
   updateControls (); // Probably redundant due to the setChecked just above
+  enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
 }
 
@@ -498,8 +499,6 @@ void DlgSettingsCoords::slotCartesianPolar (bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotCartesian";
 
-  enableOk (true);
-
   if (m_btnCartesian->isChecked ()) {
     m_modelCoordsAfter->setCoordsType (COORDS_TYPE_CARTESIAN);
   } else {
@@ -509,11 +508,9 @@ void DlgSettingsCoords::slotCartesianPolar (bool)
   updatePreview();
 }
 
-void DlgSettingsCoords::slotPolarOriginRadius()
+void DlgSettingsCoords::slotPolarOriginRadius(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
-
-  enableOk (true);
 
   m_modelCoordsAfter->setOriginRadius(m_editOriginRadius->text ().toDouble ());
   updateControls();
@@ -523,8 +520,6 @@ void DlgSettingsCoords::slotPolarOriginRadius()
 void DlgSettingsCoords::slotPolarUnits(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarUnits";
-
-  enableOk (true);
 
   CoordThetaUnits coordThetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
   m_modelCoordsAfter->setCoordThetaUnits(coordThetaUnits);
@@ -536,7 +531,6 @@ void DlgSettingsCoords::slotXThetaLinear()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLinear";
 
-  enableOk (true);
   m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LINEAR);
   updateControls ();
   updatePreview();
@@ -546,7 +540,6 @@ void DlgSettingsCoords::slotXThetaLog()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotXThetaLog";
 
-  enableOk (true);
   m_modelCoordsAfter->setCoordScaleXTheta(COORD_SCALE_LOG);
   updateControls ();
   updatePreview();
@@ -556,7 +549,6 @@ void DlgSettingsCoords::slotYRadiusLinear()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLinear";
 
-  enableOk (true);
   m_modelCoordsAfter->setCoordScaleYRadius((COORD_SCALE_LINEAR));
   updateControls ();
   updatePreview();
@@ -566,7 +558,6 @@ void DlgSettingsCoords::slotYRadiusLog()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLog";
 
-  enableOk (true);
   m_modelCoordsAfter->setCoordScaleYRadius(COORD_SCALE_LOG);
   updateControls ();
   updatePreview();
@@ -574,6 +565,9 @@ void DlgSettingsCoords::slotYRadiusLog()
 
 void DlgSettingsCoords::updateControls ()
 {
+  bool isGoodState = !(m_btnPolar->isChecked() && m_editOriginRadius->text().isEmpty());
+  enableOk (isGoodState);
+
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());

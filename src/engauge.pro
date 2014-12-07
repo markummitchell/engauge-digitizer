@@ -61,6 +61,8 @@ HEADERS  += \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
+    Dlg/DlgSpinBoxDouble.h \
+    Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelCoords.h \
@@ -80,6 +82,7 @@ HEADERS  += \
     Export/ExportDelimiter.h \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
+    Export/ExportToFile.h \
     Filter/FilterParameter.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
@@ -108,9 +111,7 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
-    include/ZoomFactor.h \
-    Export/ExportToFile.h
-
+    include/ZoomFactor.h
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \
@@ -161,7 +162,10 @@ SOURCES += \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
+    Dlg/DlgSpinBoxDouble.cpp \
+    Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
+    Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelCurves.cpp \
@@ -174,6 +178,7 @@ SOURCES += \
     Document/DocumentModelSegments.cpp \
     util/EnumsToQt.cpp \
     Export/ExportToClipboard.cpp \
+    Export/ExportToFile.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointPolygon.cpp \
@@ -195,9 +200,7 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileShades.cpp \
-    Document/DocumentModelAbstractBase.cpp \
-    Export/ExportToFile.cpp
+    View/ViewProfileShades.cpp
 
 TARGET = ../bin/engauge
 

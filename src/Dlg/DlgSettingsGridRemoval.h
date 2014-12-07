@@ -53,6 +53,7 @@ private:
   void createRemoveParallel (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void updateControls ();
+  void updatePreview();
 
   QCheckBox *m_chkRemoveGridLines;
   QLineEdit *m_editCloseDistance;

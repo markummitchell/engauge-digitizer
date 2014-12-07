@@ -181,49 +181,63 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   Q_ASSERT (indexRejected >= 0);
   m_cmbRejectedPointColor->setCurrentIndex(indexRejected);
 
+  updateControls();
+  enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotAcceptedPointColor";
 
-  enableOk (true);
-
   m_modelPointMatchAfter->setPaletteColorAccepted((ColorPalette) m_cmbAcceptedPointColor->currentData().toInt());
+
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotCandidatePointColor";
 
-  enableOk (true);
-
   m_modelPointMatchAfter->setPaletteColorCandidate((ColorPalette) m_cmbCandidatePointColor->currentData().toInt());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsPointMatch::slotPointSeparation (const QString &pointSeparation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSeparation";
 
-  enableOk (true);
-
   m_modelPointMatchAfter->setPointSeparation(pointSeparation.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsPointMatch::slotPointSize (const QString &pointSize)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSize";
 
-  enableOk (true);
-
   m_modelPointMatchAfter->setMaxPointSize(pointSize.toDouble());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotRejectedPointColor";
 
-  enableOk (true);
-
   m_modelPointMatchAfter->setPaletteColorRejected((ColorPalette) m_cmbRejectedPointColor->currentData().toInt());
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsPointMatch::updateControls()
+{
+
+}
+
+void DlgSettingsPointMatch::updatePreview()
+{
+
 }

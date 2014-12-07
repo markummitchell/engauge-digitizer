@@ -157,59 +157,63 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_btnHue->setChecked (filterParameter == FILTER_PARAMETER_HUE);
   m_btnSaturation->setChecked (filterParameter == FILTER_PARAMETER_SATURATION);
   m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
+
+  updateControls();
+  enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
-  enableOk (true);
-
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_FOREGROUND);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotHue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
-  enableOk (true);
-
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_HUE);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotIntensity ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
-  enableOk (true);
-
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_INTENSITY);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotSaturation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
-  enableOk (true);
-
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotValue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 
-  enableOk (true);
-
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_VALUE);
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsFilter::updateControls ()
+{
+
+}
+
+void DlgSettingsFilter::updatePreview ()
 {
 
 }

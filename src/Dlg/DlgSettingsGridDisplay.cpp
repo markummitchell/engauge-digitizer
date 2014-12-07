@@ -234,100 +234,100 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   m_editStopY->setText(QString::number(m_modelGridDisplayAfter->stopY()));
 
   updateControls ();
+  enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotCountX(const QString &countX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountX";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setCountX(countX.toInt());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotCountY(const QString &countY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountY";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setCountY(countY.toInt());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotDisableX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableX";
 
-  enableOk (true);
-
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
   m_modelGridDisplayAfter->setGridCoordDisableX(gridCoordDisable);
-  updateControls();
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotDisableY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotDisableY";
 
-  enableOk (true);
-
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
   m_modelGridDisplayAfter->setGridCoordDisableY(gridCoordDisable);
-  updateControls();
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStartX(const QString &startX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartX";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStartX(startX.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStartY(const QString &startY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartY";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStartY(startY.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStepX(const QString &stepX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepX";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStepX(stepX.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStepY(const QString &stepY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepY";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStepY(stepY.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStopX(const QString &stopX)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopX";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStopX(stopX.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::slotStopY(const QString &stopY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopY";
 
-  enableOk (true);
-
   m_modelGridDisplayAfter->setStopY(stopY.toDouble());
+  updateControls ();
+  updatePreview();
 }
 
 void DlgSettingsGridDisplay::updateControls ()
@@ -343,4 +343,9 @@ void DlgSettingsGridDisplay::updateControls ()
   m_editStartY->setEnabled (disableY != GRID_COORD_DISABLE_START);
   m_editStepY->setEnabled (disableY != GRID_COORD_DISABLE_STEP);
   m_editStopY->setEnabled (disableY != GRID_COORD_DISABLE_STOP);
+}
+
+void DlgSettingsGridDisplay::updatePreview()
+{
+
 }

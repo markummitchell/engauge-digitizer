@@ -28,8 +28,15 @@ protected:
   /// Create dialog-specific panel to which base class will add Ok and Cancel buttons.
   virtual QWidget *createSubPanel () = 0;
 
-  /// Let leaf subclass control the Ok button.
-  void enableOk (bool enable = true);
+  /// Let leaf subclass control the Ok button. This method is separate from the subclasses' updateControls, rather than
+  /// part of that method since updateControls is not aware of when it is called at startup - at which point the ok
+  /// button should ALWAYS be disabled since there are not yet any changes. In other words, we call this method at startup
+  /// to override the ok button state that was just set by updateControls
+  ///
+  /// Note - if this method is called with a constant value of true from updateControls, one of two cases applies:
+  /// 1) There are no constraints to worry about (like a required text field cannot be empty)
+  /// 2) There are constraints, but they are already handled by validators and/or other constraint logic
+  void enableOk (bool enable);
 
   /// Add Ok and Cancel buttons to subpanel to get the whole dialog.
   void finishPanel (QWidget *subPanel);
