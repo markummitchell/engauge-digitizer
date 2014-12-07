@@ -16,6 +16,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
   m_lineStyles [AXIS_CURVE_NAME].setWidth(curveAxes.lineStyle().width());
   m_pointStyles [AXIS_CURVE_NAME].setPaletteColor(curveAxes.pointStyle ().paletteColor());
   m_pointStyles [AXIS_CURVE_NAME].setRadius(curveAxes.pointStyle().radius());
+  m_pointStyles [AXIS_CURVE_NAME].setLineWidth(curveAxes.pointStyle().lineWidth());
   m_pointStyles [AXIS_CURVE_NAME].setShape(curveAxes.pointStyle().shape());
 
   QStringList graphCurveNames = document.curvesGraphsNames();
@@ -29,6 +30,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
     m_lineStyles [graphCurveName].setWidth(graphCurve->lineStyle().width());
     m_pointStyles [graphCurveName].setPaletteColor(graphCurve->pointStyle ().paletteColor());
     m_pointStyles [graphCurveName].setRadius(graphCurve->pointStyle().radius());
+    m_pointStyles [graphCurveName].setLineWidth(graphCurve->pointStyle().lineWidth());
     m_pointStyles [graphCurveName].setShape(graphCurve->pointStyle().shape());
   }
 }
@@ -86,7 +88,7 @@ const LineStyles &DocumentModelCurveProperties::lineStyles () const
   return m_lineStyles;
 }
 
-int DocumentModelCurveProperties::lineWidth (const QString &curveName) const
+double DocumentModelCurveProperties::lineWidth (const QString &curveName) const
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   return m_lineStyles [curveName].width();
@@ -102,6 +104,12 @@ bool DocumentModelCurveProperties::pointIsCircle (const QString &curveName) cons
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   return m_pointStyles [curveName].isCircle();
+}
+
+double DocumentModelCurveProperties::pointLineWidth (const QString &curveName) const
+{
+  Q_ASSERT (m_pointStyles.contains (curveName));
+  return m_pointStyles [curveName].lineWidth();
 }
 
 QPolygonF DocumentModelCurveProperties::pointPolygon (const QString &curveName) const
@@ -153,42 +161,49 @@ void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
 }
 
 void DocumentModelCurveProperties::setLineColor (const QString &curveName,
-                                            ColorPalette lineColor)
+                                                 ColorPalette lineColor)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setPaletteColor(lineColor);
 }
 
 void DocumentModelCurveProperties::setLineConnectAs (const QString &curveName,
-                                                CurveConnectAs curveConnectAs)
+                                                     CurveConnectAs curveConnectAs)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setCurveConnectAs(curveConnectAs);
 }
 
 void DocumentModelCurveProperties::setLineWidth (const QString &curveName,
-                                            int width)
+                                                 int width)
 {
   Q_ASSERT (m_lineStyles.contains (curveName));
   m_lineStyles [curveName].setWidth(width);
 }
 
 void DocumentModelCurveProperties::setPointColor (const QString &curveName,
-                                             ColorPalette curveColor)
+                                                  ColorPalette curveColor)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   m_pointStyles [curveName].setPaletteColor(curveColor);
 }
 
+void DocumentModelCurveProperties::setPointLineWidth (const QString &curveName,
+                                                      double width)
+{
+  Q_ASSERT (m_pointStyles.contains (curveName));
+  m_pointStyles [curveName].setLineWidth (width);
+}
+
 void DocumentModelCurveProperties::setPointRadius (const QString &curveName,
-                                              int radius)
+                                                   int radius)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   m_pointStyles [curveName].setRadius (radius);
 }
 
 void DocumentModelCurveProperties::setPointShape (const QString &curveName,
-                                             PointShape shape)
+                                                  PointShape shape)
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
   m_pointStyles [curveName].setShape (shape);

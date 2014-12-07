@@ -3,6 +3,7 @@
 #include "CurvesGraphs.h"
 #include "DataKey.h"
 #include "DocumentModelCurveProperties.h"
+#include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsPointPolygon.h"
@@ -25,8 +26,9 @@ QGraphicsItem *GraphicsScene::addPoint (const QString &identifier,
 {
   GraphicsPointPolygon *item = new GraphicsPointPolygon (identifier,
                                                          posScreen,
-                                                         pointStyle.color (),
-                                                         pointStyle.polygon ());
+                                                         ColorPaletteToQColor (pointStyle.paletteColor ()),
+                                                         pointStyle.polygon (),
+                                                         pointStyle.lineWidth());
   addItem (item);
 
   item->setToolTip (identifier);

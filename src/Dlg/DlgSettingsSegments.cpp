@@ -68,14 +68,14 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_chkFillCorners, SIGNAL (stateChanged (int)), this, SLOT (slotFillCorners (int)));
   layout->addWidget (m_chkFillCorners, row++, 2);
 
-  QLabel *labelLineSize = new QLabel("Line size:");
-  layout->addWidget (labelLineSize, row, 1);
+  QLabel *labelLineWidth = new QLabel("Line width:");
+  layout->addWidget (labelLineWidth, row, 1);
 
-  m_spinLineSize = new QSpinBox;
-  m_spinLineSize->setWhatsThis (tr ("Select a size for the lines drawn along a segment"));
-  m_spinLineSize->setMinimum(1);
-  connect (m_spinLineSize, SIGNAL (valueChanged (int)), this, SLOT (slotLineSize (int)));
-  layout->addWidget (m_spinLineSize, row++, 2);
+  m_spinLineWidth = new QSpinBox;
+  m_spinLineWidth->setWhatsThis (tr ("Select a size for the lines drawn along a segment"));
+  m_spinLineWidth->setMinimum(1);
+  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
+  layout->addWidget (m_spinLineWidth, row++, 2);
 
   QLabel *labelLineColor = new QLabel("Line color:");
   layout->addWidget (labelLineColor, row, 1);
@@ -156,7 +156,7 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
   m_editMinLength->setText (QString::number(m_modelSegmentsAfter->minLength()));
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
-  m_spinLineSize->setValue (m_modelSegmentsAfter->lineSize());
+  m_spinLineWidth->setValue (m_modelSegmentsAfter->lineWidth());
 
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
   Q_ASSERT (indexLineColor >= 0);
@@ -180,13 +180,13 @@ void DlgSettingsSegments::slotLineColor (const QString &)
   m_modelSegmentsAfter->setLineColor((ColorPalette) m_cmbLineColor->currentData().toInt());
 }
 
-void DlgSettingsSegments::slotLineSize (int lineSize)
+void DlgSettingsSegments::slotLineWidth (int lineWidth)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineWidth";
 
   enableOk (true);
 
-  m_modelSegmentsAfter->setLineSize(lineSize);
+  m_modelSegmentsAfter->setLineWidth(lineWidth);
 }
 
 void DlgSettingsSegments::slotMinLength (const QString &minLength)

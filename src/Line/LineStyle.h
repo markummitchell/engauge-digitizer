@@ -25,9 +25,6 @@ public:
   /// Assignment operator.
   LineStyle &operator= (const LineStyle &other);
 
-  /// Return the line color.
-  QColor color () const;
-
   /// Get method for connect type.
   CurveConnectAs curveConnectAs () const;
 

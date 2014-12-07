@@ -13,7 +13,8 @@ public:
   GraphicsPointPolygon(const QString &identifier,
                        const QPointF &posScreen,
                        const QColor &color,
-                       const QPolygonF &polygon);
+                       const QPolygonF &polygon,
+                       double lineWidth);
 
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);

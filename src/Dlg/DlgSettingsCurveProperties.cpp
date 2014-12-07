@@ -58,14 +58,14 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   QGridLayout *layoutGroup = new QGridLayout;
   m_groupLine->setLayout (layoutGroup);
 
-  QLabel *labelLineSize = new QLabel ("Size:");
-  layoutGroup->addWidget (labelLineSize, 0, 0);
+  QLabel *labelLineWidth = new QLabel ("Width:");
+  layoutGroup->addWidget (labelLineWidth, 0, 0);
 
-  m_spinLineSize = new QSpinBox (m_groupLine);
-  m_spinLineSize->setWhatsThis (tr ("Select a size for the lines drawn between points"));
-  m_spinLineSize->setMinimum(1);
-  connect (m_spinLineSize, SIGNAL (valueChanged (int)), this, SLOT (slotLineSize (int)));
-  layoutGroup->addWidget (m_spinLineSize, 0, 1);
+  m_spinLineWidth = new QSpinBox (m_groupLine);
+  m_spinLineWidth->setWhatsThis (tr ("Select a width for the lines drawn between points"));
+  m_spinLineWidth->setMinimum(1);
+  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
+  layoutGroup->addWidget (m_spinLineWidth, 0, 1);
 
   QLabel *labelLineColor = new QLabel ("Color:");
   layoutGroup->addWidget (labelLineColor, 1, 0);
@@ -104,7 +104,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
 }
 
 void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
-                                                  int &row)
+                                              int &row)
 {
   m_groupPoint = new QGroupBox ("Point");
   layout->addWidget (m_groupPoint, row++, 1);
@@ -126,17 +126,31 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   connect (m_cmbPointShape, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointShape (const QString &)));
   layoutGroup->addWidget (m_cmbPointShape, 0, 1);
 
-  QLabel *labelPointSize = new QLabel ("Size:");
-  layoutGroup->addWidget (labelPointSize, 1, 0);
+  QLabel *labelPointRadius = new QLabel ("Radius:");
+  layoutGroup->addWidget (labelPointRadius, 1, 0);
 
-  m_spinPointSize = new QSpinBox (m_groupPoint);
-  m_spinPointSize->setWhatsThis (tr ("Select an overall size for the points"));
-  m_spinPointSize->setMinimum (1);
-  connect (m_spinPointSize, SIGNAL (valueChanged (int)), this, SLOT (slotPointSize (int)));
-  layoutGroup->addWidget (m_spinPointSize, 1, 1);
+  m_spinPointRadius = new QSpinBox (m_groupPoint);
+  m_spinPointRadius->setWhatsThis (tr ("Select a radius for the points"));
+  m_spinPointRadius->setMinimum (1);
+  connect (m_spinPointRadius, SIGNAL (valueChanged (int)), this, SLOT (slotPointRadius (int)));
+  layoutGroup->addWidget (m_spinPointRadius, 1, 1);
+
+  QLabel *labelPointLineWidth = new QLabel ("Line width:");
+  layoutGroup->addWidget (labelPointLineWidth, 2, 0);
+
+  m_spinPointLineWidth = new QDoubleSpinBox (m_groupPoint);
+  m_spinPointLineWidth->setWhatsThis (tr ("Select a line width for the points.\n\n"
+                                          "A larger width results in a thicker line, with the exception of a value of zero "
+                                          "which always results in a line that is one pixel wide (which is easy to see even "
+                                          "when zoomed far out)"));
+  m_spinPointLineWidth->setMinimum (0);
+  m_spinPointLineWidth->setSingleStep (0.1);
+  m_spinPointLineWidth->setDecimals (1);
+  connect (m_spinPointLineWidth, SIGNAL (valueChanged (double)), this, SLOT (slotPointLineWidth (double)));
+  layoutGroup->addWidget (m_spinPointLineWidth, 2, 1);
 
   QLabel *labelPointColor = new QLabel ("Color:");
-  layoutGroup->addWidget (labelPointColor, 2, 0);
+  layoutGroup->addWidget (labelPointColor, 3, 0);
 
   m_cmbPointColor = new QComboBox (m_groupPoint);
   m_cmbPointColor->setWhatsThis (tr ("Select a color for the line used to draw the point shapes"));
@@ -150,7 +164,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
   m_cmbPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
   connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointColor (const QString &)));
-  layoutGroup->addWidget (m_cmbPointColor, 2, 1);
+  layoutGroup->addWidget (m_cmbPointColor, 3, 1);
 }
 
 void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
@@ -246,7 +260,8 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   Q_ASSERT (indexPointShape >= 0);
   m_cmbPointShape->setCurrentIndex (indexPointShape);
 
-  m_spinPointSize->setValue (m_modelCurvePropertiesAfter->pointRadius(curveName));
+  m_spinPointRadius->setValue (m_modelCurvePropertiesAfter->pointRadius(curveName));
+  m_spinPointLineWidth->setValue (m_modelCurvePropertiesAfter->pointLineWidth(curveName));
 
   int indexPointColor = m_cmbPointColor->findData (QVariant (m_modelCurvePropertiesAfter->pointColor(curveName)));
   Q_ASSERT (indexPointColor >= 0);
@@ -256,7 +271,7 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   Q_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
-  m_spinLineSize->setValue (m_modelCurvePropertiesAfter->lineWidth(curveName));
+  m_spinLineWidth->setValue (m_modelCurvePropertiesAfter->lineWidth(curveName));
 
   int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurvePropertiesAfter->lineConnectAs (curveName)));
   Q_ASSERT (indexCurveConnectAs >= 0);
@@ -304,14 +319,14 @@ void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotLineSize(int lineSize)
+void DlgSettingsCurveProperties::slotLineWidth(int lineWidth)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth";
 
   enableOk (true);
 
   m_modelCurvePropertiesAfter->setLineWidth(m_cmbCurveName->currentText(),
-                                            lineSize);
+                                            lineWidth);
   updatePreview();
 }
 
@@ -337,6 +352,28 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
   updatePreview();
 }
 
+void DlgSettingsCurveProperties::slotPointLineWidth(double width)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth";
+
+  enableOk (true);
+
+  m_modelCurvePropertiesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
+                                                 width);
+  updatePreview();
+}
+
+void DlgSettingsCurveProperties::slotPointRadius(int radius)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius";
+
+  enableOk (true);
+
+  m_modelCurvePropertiesAfter->setPointRadius(m_cmbCurveName->currentText(),
+                                              radius);
+  updatePreview();
+}
+
 void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
@@ -345,17 +382,6 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
 
   m_modelCurvePropertiesAfter->setPointShape(m_cmbCurveName->currentText(),
                                              (PointShape) m_cmbPointShape->currentData().toInt ());
-  updatePreview();
-}
-
-void DlgSettingsCurveProperties::slotPointSize(int radius)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointSize";
-
-  enableOk (true);
-
-  m_modelCurvePropertiesAfter->setPointRadius(m_cmbCurveName->currentText(),
-                                              radius);
   updatePreview();
 }
 
@@ -373,7 +399,8 @@ void DlgSettingsCurveProperties::updatePreview()
   GraphicsPointPolygon *itemLeft = new GraphicsPointPolygon (NULL_IDENTIFIER,
                                                              posLeft,
                                                              ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor(currentCurve)),
-                                                             m_modelCurvePropertiesAfter->pointPolygon(currentCurve));
+                                                             m_modelCurvePropertiesAfter->pointPolygon(currentCurve),
+                                                             m_modelCurvePropertiesAfter->pointLineWidth(currentCurve));
   m_scenePreview->addItem (itemLeft);
 
   // Right point
@@ -382,7 +409,8 @@ void DlgSettingsCurveProperties::updatePreview()
   GraphicsPointPolygon *itemRight = new GraphicsPointPolygon (NULL_IDENTIFIER,
                                                               posRight,
                                                               ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor (currentCurve)),
-                                                              m_modelCurvePropertiesAfter->pointPolygon (currentCurve));
+                                                              m_modelCurvePropertiesAfter->pointPolygon (currentCurve),
+                                                              m_modelCurvePropertiesAfter->pointLineWidth (currentCurve));
   m_scenePreview->addItem (itemRight);
 
   // Line between points

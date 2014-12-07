@@ -6,6 +6,7 @@
 
 class ViewPreview;
 class QComboBox;
+class QDoubleSpinBox;
 class QGraphicsScene;
 class QGridLayout;
 class QGroupBox;
@@ -29,11 +30,12 @@ public:
 private slots:
   void slotCurveName(const QString &);
   void slotLineColor(const QString &);
-  void slotLineSize(int);
   void slotLineType(const QString &);
+  void slotLineWidth(int);
   void slotPointColor(const QString &);
+  void slotPointLineWidth (double);
+  void slotPointRadius(int);
   void slotPointShape(const QString &);
-  void slotPointSize(int);
 
 protected:
   virtual void handleOk ();
@@ -52,11 +54,12 @@ private:
 
   QGroupBox *m_groupPoint;
   QComboBox *m_cmbPointShape;
-  QSpinBox *m_spinPointSize;
+  QSpinBox *m_spinPointRadius;
+  QDoubleSpinBox *m_spinPointLineWidth;
   QComboBox *m_cmbPointColor;
 
   QGroupBox *m_groupLine;
-  QSpinBox *m_spinLineSize;
+  QSpinBox *m_spinLineWidth;
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbLineType;
 

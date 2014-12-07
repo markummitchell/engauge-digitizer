@@ -14,6 +14,7 @@ public:
   /// Normal constructor.
   SettingsCurve (PointShape pointShape,
                  unsigned int radius,
+                 double lineWidth,
                  ColorPalette paletteColor);
 
   /// Copy constructor.

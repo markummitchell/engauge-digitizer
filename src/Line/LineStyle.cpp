@@ -35,11 +35,6 @@ LineStyle &LineStyle::operator= (const LineStyle &other)
   return *this;
 }
 
-QColor LineStyle::color () const
-{
-  return Qt::red;
-}
-
 CurveConnectAs LineStyle::curveConnectAs () const
 {
   return m_curveConnectAs;

@@ -28,8 +28,8 @@ public:
   /// Get method for line color.
   ColorPalette lineColor() const;
 
-  /// Get method for line size.
-  double lineSize() const;
+  /// Get method for line width.
+  double lineWidth() const;
 
   /// Get method for min length.
   double minLength() const;
@@ -45,8 +45,8 @@ public:
   /// Set method for line color.
   void setLineColor(ColorPalette lineColor);
 
-  /// Set method for line size.
-  void setLineSize (double lineSize);
+  /// Set method for line width.
+  void setLineWidth (double lineWidth);
 
   /// Set method for min length.
   void setMinLength(double minLength);
@@ -59,7 +59,7 @@ private:
   double m_pointSeparation;
   double m_minLength;
   bool m_fillCorners;
-  double m_lineSize;
+  double m_lineWidth;
   ColorPalette m_lineColor;
 };
 

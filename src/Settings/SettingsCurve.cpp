@@ -6,9 +6,11 @@ SettingsCurve::SettingsCurve ()
 
 SettingsCurve::SettingsCurve(PointShape pointShape,
                              unsigned int radius,
+                             double lineWidth,
                              ColorPalette paletteColor) :
   m_pointStyle (pointShape,
                 radius,
+                lineWidth,
                 paletteColor)
 {
 }

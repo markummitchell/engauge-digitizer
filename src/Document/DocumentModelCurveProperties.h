@@ -40,13 +40,16 @@ public:
   const LineStyles &lineStyles () const;
 
   /// Get method for line width in specified curve.
-  int lineWidth (const QString &curveName) const;
+  double lineWidth (const QString &curveName) const;
 
   /// Get method for curve point color in specified curve.
   ColorPalette pointColor (const QString &curveName) const;
 
   /// Get method for curve point is circle in specified curve.
   bool pointIsCircle (const QString &curveName) const;
+
+  /// Get method for curve point line width.
+  double pointLineWidth (const QString &curveName) const;
 
   /// Get method for curve point polygon in specified curve.
   QPolygonF pointPolygon (const QString &curveName) const;
@@ -81,6 +84,10 @@ public:
   /// Set method for curve point is circle in specified curve.
   void setPointIsCircle (const QString &curveName,
                          bool pointIsCircle);
+
+  /// Set method for curve point perimeter line width.
+  void setPointLineWidth (const QString &curveName,
+                          double width);
 
   /// Set method for curve point radius.
   void setPointRadius (const QString &curveName,

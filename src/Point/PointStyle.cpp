@@ -3,6 +3,7 @@
 #include <QXmlStreamWriter>
 
 const int DEFAULT_POINT_RADIUS = 10;
+const double DEFAULT_LINE_WIDTH = 1;
 
 PointStyle::PointStyle ()
 {
@@ -10,9 +11,11 @@ PointStyle::PointStyle ()
 
 PointStyle::PointStyle(PointShape shape,
                        unsigned int radius,
+                       double lineWidth,
                        ColorPalette paletteColor) :
   m_shape (shape),
   m_radius (radius),
+  m_lineWidth (lineWidth),
   m_paletteColor (paletteColor)
 {
 }
@@ -20,6 +23,7 @@ PointStyle::PointStyle(PointShape shape,
 PointStyle::PointStyle (const PointStyle &other) :
   m_shape (other.shape()),
   m_radius (other.radius ()),
+  m_lineWidth (other.lineWidth ()),
   m_paletteColor (other.paletteColor ())
 {
 }
@@ -28,59 +32,17 @@ PointStyle &PointStyle::operator=(const PointStyle &other)
 {
   m_shape = other.shape ();
   m_radius = other.radius ();
+  m_lineWidth = other.lineWidth ();
   m_paletteColor = other.paletteColor ();
 
   return *this;
-}
-
-QColor PointStyle::color () const
-{
-  switch (m_paletteColor) {
-    case COLOR_PALETTE_BLACK:
-      return Qt::black;
-      break;
-
-    case COLOR_PALETTE_BLUE:
-      return Qt::blue;
-      break;
-
-    case COLOR_PALETTE_CYAN:
-      return Qt::cyan;
-      break;
-
-    case COLOR_PALETTE_GOLD:
-      return QColor (0xff, 0xd7, 0x00);
-      break;
-
-    case COLOR_PALETTE_GREEN:
-      return Qt::green;
-      break;
-
-    case COLOR_PALETTE_MAGENTA:
-      return Qt::magenta;
-      break;
-
-    case COLOR_PALETTE_RED:
-      return Qt::red;
-      break;
-
-    case COLOR_PALETTE_TRANSPARENT:
-      return Qt::transparent;
-      break;
-
-    case COLOR_PALETTE_YELLOW:
-      return Qt::yellow;
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
 }
 
 PointStyle PointStyle::defaultAxesCurve ()
 {
   return PointStyle (POINT_SHAPE_CROSS,
                      DEFAULT_POINT_RADIUS,
+                     DEFAULT_LINE_WIDTH,
                      COLOR_PALETTE_RED);
 }
 
@@ -110,12 +72,18 @@ PointStyle PointStyle::defaultGraphCurve (int index)
 
   return PointStyle (shape,
                      DEFAULT_POINT_RADIUS,
+                     DEFAULT_LINE_WIDTH,
                      COLOR_PALETTE_BLUE);
 }
 
 bool PointStyle::isCircle () const
 {
   return m_shape == POINT_SHAPE_CIRCLE;
+}
+
+double PointStyle::lineWidth() const
+{
+  return m_lineWidth;
 }
 
 ColorPalette PointStyle::paletteColor () const
@@ -213,6 +181,11 @@ void PointStyle::saveStyle(QXmlStreamWriter &stream,
   stream.writeAttribute ("Color", QString::number (m_paletteColor));
   stream.writeAttribute ("Shape", QString::number (m_shape));
   stream.writeEndElement();
+}
+
+void PointStyle::setLineWidth(double width)
+{
+  m_lineWidth = width;
 }
 
 void PointStyle::setPaletteColor (ColorPalette paletteColor)

@@ -18,6 +18,7 @@ public:
   /// Normal constructor. The style type and radius are determined by the currently selected Curve
   PointStyle(PointShape pointShape,
              unsigned int radius,
+             double lineWidth,
              ColorPalette paletteColor);
 
   /// Copy constructor.
@@ -25,9 +26,6 @@ public:
 
   /// Assignment constructor.
   PointStyle &operator=(const PointStyle &other);
-
-  /// Return the color to be applied to the QGraphicsItem.
-  QColor color () const;
 
   /// Initial default for axes curve.
   static PointStyle defaultAxesCurve ();
@@ -37,6 +35,9 @@ public:
 
   /// Return true if point is a circle, otherwise it is a polygon. For a circle, the radius is important and no polygon is needed from this class
   bool isCircle () const;
+
+  /// Get method for line width.
+  double lineWidth () const;
 
   /// Get method for point color.
   ColorPalette paletteColor () const;
@@ -50,6 +51,9 @@ public:
   /// Save style to stream.
   void saveStyle(QXmlStreamWriter &stream,
                  const QString &curveName) const;
+
+  /// Set method for line width.
+  void setLineWidth (double width);
 
   /// Set method for point color.
   void setPaletteColor (ColorPalette paletteColor);
@@ -67,6 +71,7 @@ private:
 
   PointShape m_shape;
   unsigned int m_radius;
+  double m_lineWidth;
   ColorPalette m_paletteColor;
 };
 

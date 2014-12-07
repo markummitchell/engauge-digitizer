@@ -11,7 +11,8 @@
 GraphicsPointCircle::GraphicsPointCircle(const QString &identifier,
                                          const QPointF &posScreen,
                                          const QColor &color,
-                                         int radius) :
+                                         unsigned int radius,
+                                         double lineWidth) :
   GraphicsPointAbstractBase (),
   QGraphicsEllipseItem (QRect (posScreen.x () - radius,
                                posScreen.y () - radius,
@@ -26,7 +27,7 @@ GraphicsPointCircle::GraphicsPointCircle(const QString &identifier,
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
   setPos (posScreen.x (),
           posScreen.y ());
-  setPen (QPen (color));
+  setPen (QPen (QBrush (color), lineWidth));
   setEnabled (true);
   setFlags (QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable |

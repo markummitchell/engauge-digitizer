@@ -5,14 +5,14 @@
 
 const double DEFAULT_POINT_SEPARATION = 1;
 const double DEFAULT_MIN_LENGTH = 5;
-const double DEFAULT_LINE_SIZE = 1;
+const double DEFAULT_LINE_WIDTH = 1;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_GREEN);
 
 DocumentModelSegments::DocumentModelSegments() :
   m_pointSeparation (DEFAULT_POINT_SEPARATION),
   m_minLength (DEFAULT_MIN_LENGTH),
   m_fillCorners (false),
-  m_lineSize (DEFAULT_LINE_SIZE),
+  m_lineWidth (DEFAULT_LINE_WIDTH),
   m_lineColor (DEFAULT_LINE_COLOR)
 {
 }
@@ -21,7 +21,7 @@ DocumentModelSegments::DocumentModelSegments(const Document &document) :
   m_pointSeparation (document.modelSegments().pointSeparation()),
   m_minLength (document.modelSegments().minLength()),
   m_fillCorners (document.modelSegments().fillCorners()),
-  m_lineSize (document.modelSegments().lineSize()),
+  m_lineWidth (document.modelSegments().lineWidth()),
   m_lineColor (document.modelSegments().lineColor())
 {
 }
@@ -30,7 +30,7 @@ DocumentModelSegments::DocumentModelSegments(const DocumentModelSegments &other)
   m_pointSeparation (other.pointSeparation()),
   m_minLength (other.minLength()),
   m_fillCorners (other.fillCorners ()),
-  m_lineSize (other.lineSize()),
+  m_lineWidth (other.lineWidth()),
   m_lineColor (other.lineColor())
 {
 }
@@ -40,7 +40,7 @@ DocumentModelSegments &DocumentModelSegments::operator=(const DocumentModelSegme
   m_pointSeparation = other.pointSeparation();
   m_minLength = other.minLength();
   m_fillCorners = other.fillCorners ();
-  m_lineSize = other.lineSize();
+  m_lineWidth = other.lineWidth();
   m_lineColor = other.lineColor();
 
   return *this;
@@ -56,9 +56,9 @@ ColorPalette DocumentModelSegments::lineColor() const
   return m_lineColor;
 }
 
-double DocumentModelSegments::lineSize() const
+double DocumentModelSegments::lineWidth() const
 {
-  return m_lineSize;
+  return m_lineWidth;
 }
 
 double DocumentModelSegments::minLength() const
@@ -89,9 +89,9 @@ void DocumentModelSegments::setLineColor(ColorPalette lineColor)
   m_lineColor = lineColor;
 }
 
-void DocumentModelSegments::setLineSize(double lineSize)
+void DocumentModelSegments::setLineWidth(double lineWidth)
 {
-  m_lineSize = lineSize;
+  m_lineWidth = lineWidth;
 }
 
 void DocumentModelSegments::setMinLength(double minLength)
