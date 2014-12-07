@@ -1,6 +1,7 @@
 #include "CmdCut.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "ExportToClipboard.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -31,12 +32,13 @@ CmdCut::CmdCut(MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::CmdCut"
                               << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
 
+  ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
-  document.exportToClipboard (selected,
-                              mainWindow.transformIsDefined(),
-                              strCsv,
-                              strHtml,
-                              m_curvesGraphs);
+  exportStrategy.exportToClipboard (selected,
+                                    mainWindow.transformIsDefined(),
+                                    strCsv,
+                                    strHtml,
+                                    m_curvesGraphs);
 }
 
 void CmdCut::cmdRedo ()

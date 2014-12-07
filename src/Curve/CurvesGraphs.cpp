@@ -87,33 +87,6 @@ int CurvesGraphs::curvesGraphsNumPoints (const QString &curveName) const
   return 0;
 }
 
-void CurvesGraphs::exportToClipboard (const QStringList &selected,
-                                      bool transformIsDefined,
-                                      QTextStream &strCsv,
-                                      QTextStream &strHtml,
-                                      CurvesGraphs &curvesGraphs) const
-{
-  // For speed, build a hash as a fast lookup table
-  QHash<QString, bool> selectedHash;
-  QStringList::const_iterator itrH;
-  for (itrH = selected.begin (); itrH != selected.end (); itrH++) {
-    QString pointIdentifier = *itrH;
-    selectedHash [pointIdentifier] = false;
-  }
-
-  // Export
-  CurveList::const_iterator itrC;
-  for (itrC = m_curvesGraphs.begin(); itrC != m_curvesGraphs.end (); itrC++) {
-
-    const Curve &curve = *itrC;
-    curve.exportToClipboard (selectedHash,
-                             transformIsDefined,
-                             strCsv,
-                             strHtml,
-                             curvesGraphs);
-  }
-}
-
 void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
                                               const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {

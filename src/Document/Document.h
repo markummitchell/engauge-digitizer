@@ -93,6 +93,22 @@ public:
   /// See CurvesGraphs::curvesGraphsNumPoints.
   int curvesGraphsNumPoints (const QString &curveName) const;
 
+  /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
+  void editPointAxis (const QPointF &posGraph,
+                      const QString &identifier);
+
+  /// Return true if Document has changed since last time file was saved.
+  bool isModified () const;
+
+  /// See Curve::iterateThroughCurvePoints, for the axes curve.
+  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+
+  /// See Curve::iterateThroughCurvePoints, for the axes curve.
+  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+
+  /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
+  void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
 
@@ -116,29 +132,6 @@ public:
 
   /// Get method for DocumentModelSegments.
   DocumentModelSegments modelSegments() const;
-
-  /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
-  void editPointAxis (const QPointF &posGraph,
-                      const QString &identifier);
-
-  /// See CurvesGraphs::exportToClipboard
-  void exportToClipboard (const QStringList &selected,
-                          bool transformIsDefined,
-                          QTextStream &strCsv,
-                          QTextStream &strHtml,
-                          CurvesGraphs &curvesGraphs) const;
-
-  /// Return true if Document has changed since last time file was saved.
-  bool isModified () const;
-
-  /// See Curve::iterateThroughCurvePoints, for the axes curve.
-  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
-
-  /// See Curve::iterateThroughCurvePoints, for the axes curve.
-  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-
-  /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
-  void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
   /// See Curve::movePoint
   void movePoint (const QString &pointIdentifier,

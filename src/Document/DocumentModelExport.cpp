@@ -3,41 +3,57 @@
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
+const double DEFAULT_POINTS_INTERVAL = 1.0; // Although rarely the right value, value of one is better than zero (=infinite loops)
+const double DEFAULT_RELATIONS_INTERVAL = DEFAULT_POINTS_INTERVAL;
+const QString DEFAULT_X_LABEL ("x");
+
 DocumentModelExport::DocumentModelExport() :
-  m_exportPointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
-  m_exportPointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
-  m_exportLayoutFunctions (EXPORT_LAYOUT_ALL_PER_LINE),
-  m_exportDelimiter (EXPORT_DELIMITER_COMMA),
-  m_exportHeader (EXPORT_HEADER_SIMPLE)
+  m_pointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
+  m_pointsInterval (DEFAULT_POINTS_INTERVAL),
+  m_pointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
+  m_relationsInterval (DEFAULT_RELATIONS_INTERVAL),
+  m_layoutFunctions (EXPORT_LAYOUT_ALL_PER_LINE),
+  m_delimiter (EXPORT_DELIMITER_COMMA),
+  m_header (EXPORT_HEADER_SIMPLE),
+  m_xLabel (DEFAULT_X_LABEL)
 {
 }
 
 DocumentModelExport::DocumentModelExport (const Document &document) :
-  m_exportPointsSelectionFunctions (document.modelExport().exportPointsSelectionFunctions()),
-  m_exportPointsSelectionRelations (document.modelExport().exportPointsSelectionRelations()),
-  m_exportLayoutFunctions (document.modelExport().exportLayoutFunctions()),
-  m_exportDelimiter (document.modelExport().exportDelimiter()),
-  m_exportHeader (document.modelExport().exportHeader())
+  m_pointsSelectionFunctions (document.modelExport().pointsSelectionFunctions()),
+  m_pointsInterval (document.modelExport().pointsInterval()),
+  m_pointsSelectionRelations (document.modelExport().pointsSelectionRelations()),
+  m_relationsInterval (document.modelExport().relationsInterval()),
+  m_layoutFunctions (document.modelExport().layoutFunctions()),
+  m_delimiter (document.modelExport().delimiter()),
+  m_header (document.modelExport().header()),
+  m_xLabel (document.modelExport().xLabel())
 {
 }
 
 DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
-  m_exportPointsSelectionFunctions (other.exportPointsSelectionFunctions()),
-  m_exportPointsSelectionRelations (other.exportPointsSelectionRelations()),
-  m_exportLayoutFunctions (other.exportLayoutFunctions()),
-  m_exportDelimiter (other.exportDelimiter()),
-  m_exportHeader (other.exportHeader())
+  m_pointsSelectionFunctions (other.pointsSelectionFunctions()),
+  m_pointsInterval (other.pointsInterval()),
+  m_pointsSelectionRelations (other.pointsSelectionRelations()),
+  m_relationsInterval (other.relationsInterval()),
+  m_layoutFunctions (other.layoutFunctions()),
+  m_delimiter (other.delimiter()),
+  m_header (other.header()),
+  m_xLabel (other.xLabel ())
 {
 
 }
 
 DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &other)
 {
-  m_exportPointsSelectionFunctions = other.exportPointsSelectionFunctions();
-  m_exportPointsSelectionRelations = other.exportPointsSelectionRelations();
-  m_exportLayoutFunctions = other.exportLayoutFunctions();
-  m_exportDelimiter = other.exportDelimiter();
-  m_exportHeader = other.exportHeader();
+  m_pointsSelectionFunctions = other.pointsSelectionFunctions();
+  m_pointsInterval = other.pointsInterval();
+  m_pointsSelectionRelations = other.pointsSelectionRelations();
+  m_relationsInterval = other.relationsInterval();
+  m_layoutFunctions = other.layoutFunctions();
+  m_delimiter = other.delimiter();
+  m_header = other.header();
+  m_xLabel = other.xLabel();
 
   return *this;
 }
@@ -47,29 +63,39 @@ QStringList DocumentModelExport::curveNamesNotExported() const
   return m_curveNamesNotExported;
 }
 
-ExportDelimiter DocumentModelExport::exportDelimiter() const
+ExportDelimiter DocumentModelExport::delimiter() const
 {
-  return m_exportDelimiter;
+  return m_delimiter;
 }
 
-ExportHeader DocumentModelExport::exportHeader() const
+ExportHeader DocumentModelExport::header() const
 {
-  return m_exportHeader;
+  return m_header;
 }
 
-ExportLayoutFunctions DocumentModelExport::exportLayoutFunctions() const
+ExportLayoutFunctions DocumentModelExport::layoutFunctions() const
 {
-  return m_exportLayoutFunctions;
+  return m_layoutFunctions;
 }
 
-ExportPointsSelectionFunctions DocumentModelExport::exportPointsSelectionFunctions() const
+double DocumentModelExport::pointsInterval() const
 {
-  return m_exportPointsSelectionFunctions;
+  return m_pointsInterval;
 }
 
-ExportPointsSelectionRelations DocumentModelExport::exportPointsSelectionRelations() const
+ExportPointsSelectionFunctions DocumentModelExport::pointsSelectionFunctions() const
 {
-  return m_exportPointsSelectionRelations;
+  return m_pointsSelectionFunctions;
+}
+
+ExportPointsSelectionRelations DocumentModelExport::pointsSelectionRelations() const
+{
+  return m_pointsSelectionRelations;
+}
+
+double DocumentModelExport::relationsInterval() const
+{
+  return m_relationsInterval;
 }
 
 void DocumentModelExport::saveModel(QXmlStreamWriter &stream) const
@@ -85,27 +111,47 @@ void DocumentModelExport::setCurveNamesNotExported(const QStringList &curveNames
   m_curveNamesNotExported = curveNamesNotExported;
 }
 
-void DocumentModelExport::setExportDelimiter(ExportDelimiter exportDelimiter)
+void DocumentModelExport::setDelimiter(ExportDelimiter delimiter)
 {
-  m_exportDelimiter = exportDelimiter;
+  m_delimiter = delimiter;
 }
 
-void DocumentModelExport::setExportHeader(ExportHeader exportHeader)
+void DocumentModelExport::setHeader(ExportHeader header)
 {
-  m_exportHeader = exportHeader;
+  m_header = header;
 }
 
-void DocumentModelExport::setExportLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions)
+void DocumentModelExport::setLayoutFunctions(ExportLayoutFunctions layoutFunctions)
 {
-  m_exportLayoutFunctions = exportLayoutFunctions;
+  m_layoutFunctions = layoutFunctions;
 }
 
-void DocumentModelExport::setExportPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions)
+void DocumentModelExport::setPointsInterval(double pointsInterval)
 {
-  m_exportPointsSelectionFunctions = exportPointsSelectionFunctions;
+  m_pointsInterval = pointsInterval;
 }
 
-void DocumentModelExport::setExportPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations)
+void DocumentModelExport::setPointsSelectionFunctions(ExportPointsSelectionFunctions pointsSelectionFunctions)
 {
-  m_exportPointsSelectionRelations = exportPointsSelectionRelations;
+  m_pointsSelectionFunctions = pointsSelectionFunctions;
+}
+
+void DocumentModelExport::setRelationsInterval(double relationsInterval)
+{
+  m_relationsInterval = relationsInterval;
+}
+
+void DocumentModelExport::setPointsSelectionRelations(ExportPointsSelectionRelations pointsSelectionRelations)
+{
+  m_pointsSelectionRelations = pointsSelectionRelations;
+}
+
+void DocumentModelExport::setXLabel (const QString &xLabel)
+{
+  m_xLabel = xLabel;
+}
+
+QString DocumentModelExport::xLabel () const
+{
+  return m_xLabel;
 }

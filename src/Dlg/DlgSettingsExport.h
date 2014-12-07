@@ -47,7 +47,7 @@ private slots:
   void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval();
   void slotRelationsPointsRaw();
-  void slotXLabel ();
+  void slotXLabel (const QString &);
 
 protected:
   virtual void handleOk ();
@@ -67,6 +67,7 @@ private:
                         int &row);
   void createXLabel (QHBoxLayout *layoutMisc);
   void updateControls();
+  void updatePreview();
 
   QListWidget *m_listIncluded;
   QListWidget *m_listExcluded;

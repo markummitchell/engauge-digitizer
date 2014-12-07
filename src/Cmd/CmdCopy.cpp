@@ -1,6 +1,7 @@
 #include "CmdCopy.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "ExportToClipboard.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -31,12 +32,13 @@ CmdCopy::CmdCopy(MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::CmdCopy"
                               << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
 
+  ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
-  document.exportToClipboard (selected,
-                              mainWindow.transformIsDefined(),
-                              strCsv,
-                              strHtml,
-                              m_curvesGraphs);
+  exportStrategy.exportToClipboard (selected,
+                                    mainWindow.transformIsDefined(),
+                                    strCsv,
+                                    strHtml,
+                                    m_curvesGraphs);
 }
 
 void CmdCopy::cmdRedo ()

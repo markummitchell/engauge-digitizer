@@ -38,13 +38,6 @@ public:
   /// Point count.
   int curvesGraphsNumPoints (const QString &curveName) const;
 
-  /// Export, curve-by-curve, raw data points to a string that will be copied to the clipboard.
-  void exportToClipboard (const QStringList &selected,
-                          bool transformIsDefined,
-                          QTextStream &strCsv,
-                          QTextStream &strHtml,
-                          CurvesGraphs &curvesGraphs) const;
-
   /// Apply functor to Points in the specified axis or graph Curve.
   void iterateThroughCurvePoints (const QString &curveNameWanted,
                                   const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);

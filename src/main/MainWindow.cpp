@@ -554,6 +554,7 @@ void MainWindow::createMenus()
 
   m_menuView = menuBar()->addMenu(tr("View"));
   m_menuView->addAction (m_actionViewDigitize);
+  m_menuView->insertSeparator (m_actionViewDocumentImageNone);
   m_menuViewDocument = new QMenu (tr ("Document"));
   m_menuViewDocument->addAction (m_actionViewDocumentImageNone);
   m_menuViewDocument->addAction (m_actionViewDocumentImageOriginal);

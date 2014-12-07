@@ -239,19 +239,6 @@ void Document::editPointAxis (const QPointF &posGraph,
                           identifier);
 }
 
-void Document::exportToClipboard (const QStringList &selected,
-                                  bool transformIsDefined,
-                                  QTextStream &strCsv,
-                                  QTextStream &strHtml,
-                                  CurvesGraphs &curvesGraphs) const
-{
-  m_curvesGraphs.exportToClipboard (selected,
-                                    transformIsDefined,
-                                    strCsv,
-                                    strHtml,
-                                    curvesGraphs);
-}
-
 bool Document::isModified () const
 {
   return m_isModified;

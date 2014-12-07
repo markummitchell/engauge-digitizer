@@ -62,6 +62,7 @@ HEADERS  += \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
     Document/Document.h \
+    Document/DocumentModelAbstractBase.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelCurveProperties.h \
     Document/DocumentModelCurves.h \
@@ -72,11 +73,13 @@ HEADERS  += \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
+    util/EnumsToQt.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsSelectionFunctions.h \
     Export/ExportPointsSelectionRelations.h \
     Export/ExportDelimiter.h \
     Export/ExportHeader.h \
+    Export/ExportToClipboard.h \
     Filter/FilterParameter.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
@@ -106,8 +109,7 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
     include/ZoomFactor.h \
-    Document/DocumentModelAbstractBase.h \
-    util/EnumsToQt.h
+    Export/ExportToFile.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -170,6 +172,8 @@ SOURCES += \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
+    util/EnumsToQt.cpp \
+    Export/ExportToClipboard.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointPolygon.cpp \
@@ -193,7 +197,7 @@ SOURCES += \
     View/ViewProfileParameters.cpp \
     View/ViewProfileShades.cpp \
     Document/DocumentModelAbstractBase.cpp \
-    util/EnumsToQt.cpp
+    Export/ExportToFile.cpp
 
 TARGET = ../bin/engauge
 

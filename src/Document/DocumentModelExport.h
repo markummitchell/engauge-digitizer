@@ -31,19 +31,25 @@ public:
   QStringList curveNamesNotExported() const;
 
   /// Get method for delimiter.
-  ExportDelimiter exportDelimiter() const;
+  ExportDelimiter delimiter() const;
 
   /// Get method for header.
-  ExportHeader exportHeader() const;
+  ExportHeader header() const;
 
   /// Get method for functions layout.
-  ExportLayoutFunctions exportLayoutFunctions() const;
+  ExportLayoutFunctions layoutFunctions() const;
+
+  /// Get method for points interval.
+  double pointsInterval () const;
 
   /// Get method for point selection for functions.
-  ExportPointsSelectionFunctions exportPointsSelectionFunctions() const;
+  ExportPointsSelectionFunctions pointsSelectionFunctions() const;
 
   /// Get method for point selection for relations.
-  ExportPointsSelectionRelations exportPointsSelectionRelations() const;
+  ExportPointsSelectionRelations pointsSelectionRelations() const;
+
+  /// Get method for relations interval.
+  double relationsInterval () const;
 
   virtual void saveModel(QXmlStreamWriter &stream) const;
 
@@ -51,30 +57,45 @@ public:
   void setCurveNamesNotExported(const QStringList &curveNamesNotExported);
 
   /// Set method for delimiter.
-  void setExportDelimiter(ExportDelimiter exportDelimiter);
+  void setDelimiter(ExportDelimiter exportDelimiter);
 
   /// Set method for header.
-  void setExportHeader(ExportHeader exportHeader);
+  void setHeader(ExportHeader exportHeader);
 
   /// Set method for functions layout.
-  void setExportLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions);
+  void setLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions);
+
+  /// Set method for points interval.
+  void setPointsInterval (double pointsInterval);
 
   /// Set method for point selection for functions.
-  void setExportPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions);
+  void setPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions);
 
   /// Set method for point selection for relations.
-  void setExportPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations);
+  void setPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations);
+
+  /// Set method for relations interval.
+  void setRelationsInterval (double relationsInterval);
+
+  /// Set method for x label.
+  void setXLabel (const QString &xLabel);
+
+  /// Get method for x label.
+  QString xLabel () const;
 
 private:
 
   // Curves to be excluded from export. New curves will not appear in this so they will be exported by default.
   QStringList m_curveNamesNotExported;
 
-  ExportPointsSelectionFunctions m_exportPointsSelectionFunctions;
-  ExportPointsSelectionRelations m_exportPointsSelectionRelations;
-  ExportLayoutFunctions m_exportLayoutFunctions;
-  ExportDelimiter m_exportDelimiter;
-  ExportHeader m_exportHeader;
+  ExportPointsSelectionFunctions m_pointsSelectionFunctions;
+  double m_pointsInterval;
+  ExportPointsSelectionRelations m_pointsSelectionRelations;
+  double m_relationsInterval;
+  ExportLayoutFunctions m_layoutFunctions;
+  ExportDelimiter m_delimiter;
+  ExportHeader m_header;
+  QString m_xLabel;
 };
 
 #endif // DOCUMENT_MODEL_EXPORT_H
