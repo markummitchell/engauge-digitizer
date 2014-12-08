@@ -3,11 +3,13 @@
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
+const QStringList DEFAULT_CURVE_NAMES_NOT_EXPORTED;
 const double DEFAULT_POINTS_INTERVAL = 1.0; // Although rarely the right value, value of one is better than zero (=infinite loops)
 const double DEFAULT_RELATIONS_INTERVAL = DEFAULT_POINTS_INTERVAL;
 const QString DEFAULT_X_LABEL ("x");
 
 DocumentModelExport::DocumentModelExport() :
+  m_curveNamesNotExported (DEFAULT_CURVE_NAMES_NOT_EXPORTED),
   m_pointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
   m_pointsInterval (DEFAULT_POINTS_INTERVAL),
   m_pointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
@@ -20,6 +22,7 @@ DocumentModelExport::DocumentModelExport() :
 }
 
 DocumentModelExport::DocumentModelExport (const Document &document) :
+  m_curveNamesNotExported (document.modelExport().curveNamesNotExported()),
   m_pointsSelectionFunctions (document.modelExport().pointsSelectionFunctions()),
   m_pointsInterval (document.modelExport().pointsInterval()),
   m_pointsSelectionRelations (document.modelExport().pointsSelectionRelations()),
@@ -32,6 +35,7 @@ DocumentModelExport::DocumentModelExport (const Document &document) :
 }
 
 DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
+  m_curveNamesNotExported (other.curveNamesNotExported()),
   m_pointsSelectionFunctions (other.pointsSelectionFunctions()),
   m_pointsInterval (other.pointsInterval()),
   m_pointsSelectionRelations (other.pointsSelectionRelations()),
@@ -46,6 +50,7 @@ DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
 
 DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &other)
 {
+  m_curveNamesNotExported = other.curveNamesNotExported();
   m_pointsSelectionFunctions = other.pointsSelectionFunctions();
   m_pointsInterval = other.pointsInterval();
   m_pointsSelectionRelations = other.pointsSelectionRelations();

@@ -39,12 +39,16 @@ void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
   layout->addWidget (labelExcluded, row++, 2);
 
   m_listIncluded = new QListWidget;
-  m_listIncluded->setWhatsThis (tr ("List of curves to be included in the exported file"));
+  m_listIncluded->setWhatsThis (tr ("List of curves to be included in the exported file.\n\n"
+                                    "The order of the curves here does not affect the order in the exported file. That "
+                                    "order is determined by the Curves settings."));
+  m_listIncluded->setSelectionMode (QAbstractItemView::MultiSelection);
   layout->addWidget (m_listIncluded, row, 0, 4, 1);
   connect (m_listIncluded, SIGNAL (itemSelectionChanged ()), this, SLOT (slotListIncluded()));
 
   m_listExcluded = new QListWidget;
   m_listExcluded->setWhatsThis (tr ("List of curves to be excluded from the exported file"));
+  m_listExcluded->setSelectionMode (QAbstractItemView::MultiSelection);
   layout->addWidget (m_listExcluded, row++, 2, 4, 1);
   connect (m_listExcluded, SIGNAL (itemSelectionChanged ()), this, SLOT (slotListExcluded()));
 
@@ -340,13 +344,23 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
   m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
 
+  // Excluded curves
+  m_listExcluded->clear();
+  QStringList curveNamesExcluded = m_modelExportAfter->curveNamesNotExported();
   QStringList::const_iterator itr;
-  for (itr = m_modelExportAfter->curveNamesNotExported().begin ();
-       itr != m_modelExportAfter->curveNamesNotExported().end();
-       ++itr) {
-
+  for (itr = curveNamesExcluded.begin (); itr != curveNamesExcluded.end(); ++itr) {
     QString curveNameNotExported = *itr;
     m_listExcluded->addItem (curveNameNotExported);
+  }
+
+  // Include curves that are not excluded
+  m_listIncluded->clear();
+  QStringList curveNamesAll = cmdMediator.document().curvesGraphsNames();
+  for (itr = curveNamesAll.begin (); itr != curveNamesAll.end(); itr++) {
+    QString curveName = *itr;
+    if (!curveNamesExcluded.contains (curveName)) {
+      m_listIncluded->addItem (curveName);
+    }
   }
 
   ExportPointsSelectionFunctions pointsSelectionFunctions = m_modelExportAfter->pointsSelectionFunctions();
@@ -413,6 +427,32 @@ void DlgSettingsExport::slotExclude ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotExclude";
 
+  // Perform forward pass to get excluded curves in the proper order
+  int i;
+  QStringList excluded;
+  for (i = 0; i < m_listIncluded->count(); i++) {
+    if (m_listIncluded->item(i)->isSelected()) {
+      excluded += m_listIncluded->item(i)->text();
+    }
+  }
+
+  // Add the excluded curves to the excluded list
+  for (i = 0; i < excluded.count(); i++) {
+    QString curveName = excluded.at (i);
+    m_listExcluded->addItem (curveName);
+  }
+
+  // Perform backwards pass to remove the excluded curves from the included list
+  for (i = m_listIncluded->count() - 1; i>= 0; i--) {
+    QString curveName = m_listIncluded->item(i)->text();
+    if (excluded.contains (curveName)) {
+      QListWidgetItem *item = m_listIncluded->item (i);
+      m_listIncluded->removeItemWidget (item);
+      delete item;
+    }
+  }
+
+  m_modelExportAfter->setCurveNamesNotExported(excluded);
   updateControls();
   updatePreview();
 }
@@ -511,6 +551,35 @@ void DlgSettingsExport::slotInclude ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotInclude";
 
+  // Perform forward pass to get included curves in the proper order
+  int i;
+  QStringList included;
+  for (i = 0; i < m_listExcluded->count(); i++) {
+    if (m_listExcluded->item(i)->isSelected()) {
+      included += m_listExcluded->item(i)->text();
+    }
+  }
+
+  // Add the included curves to the included list
+  for (i = 0; i < included.count(); i++) {
+    QString curveName = included.at (i);
+    m_listIncluded->addItem (curveName);
+  }
+
+  // Perform backwards pass to remove the included curves from the excluded list
+  QStringList excluded;
+  for (i = m_listExcluded->count() - 1; i>= 0; i--) {
+    QString curveName = m_listExcluded->item(i)->text();
+    QListWidgetItem *item = m_listExcluded->item (i);
+    if (included.contains (curveName)) {
+      m_listExcluded->removeItemWidget (item);
+      delete item;
+    } else {
+      excluded += item->text();
+    }
+  }
+
+  m_modelExportAfter->setCurveNamesNotExported(excluded);
   updateControls();
   updatePreview();
 }
@@ -520,7 +589,7 @@ void DlgSettingsExport::slotListExcluded()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListExcluded";
 
   updateControls();
-  updatePreview();
+  // Do not call updatePreview since this method changes nothing
 }
 
 void DlgSettingsExport::slotListIncluded()
@@ -528,7 +597,7 @@ void DlgSettingsExport::slotListIncluded()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListIncluded";
 
   updateControls();
-  updatePreview();
+  // Do not call updatePreview since this method changes nothing
 }
 
 void DlgSettingsExport::slotRelationsPointsEvenlySpaced()
@@ -572,6 +641,9 @@ void DlgSettingsExport::updateControls ()
   bool isGoodState = !m_editFunctionsPointsEvenlySpacing->text().isEmpty () &&
                      !m_editRelationsPointsEvenlySpacing->text().isEmpty ();
   enableOk (isGoodState);
+
+  m_listIncluded->sortItems (Qt::AscendingOrder);
+  m_listExcluded->sortItems (Qt::AscendingOrder);
 
   int selectedForInclude = m_listExcluded->selectedItems().count();
   int selectedForExclude = m_listIncluded->selectedItems().count();
