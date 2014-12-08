@@ -2,6 +2,8 @@
 #define DLG_SETTINGS_FILTER_H
 
 #include "DlgSettingsAbstractBase.h"
+#include <QColor>
+#include <QPixmap>
 
 class DocumentModelFilter;
 class QGraphicsScene;
@@ -38,7 +40,9 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
+  unsigned int pixelToBin (const QColor &pixel);
   void updateControls();
+  void updateHistogram(const QPixmap &pixmap);
   void updatePreview();
 
   QRadioButton *m_btnIntensity;

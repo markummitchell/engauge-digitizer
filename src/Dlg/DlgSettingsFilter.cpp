@@ -4,14 +4,17 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QLabel>
 #include <QRadioButton>
+#include <QRgb>
 #include "ViewPreview.h"
 #include "ViewProfile.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
+const int HISTOGRAM_BINS = 255;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Filter", mainWindow),
@@ -163,6 +166,38 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
+unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
+{
+  unsigned int bin = 0;
+
+  switch (m_modelFilterAfter->filterParameter()) {
+    case FILTER_PARAMETER_FOREGROUND:
+      bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
+      break;
+
+    case FILTER_PARAMETER_HUE:
+      bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
+      break;
+
+    case FILTER_PARAMETER_INTENSITY:
+      bin = qGray (pixel.rgb());
+      break;
+
+    case FILTER_PARAMETER_SATURATION:
+      bin = pixel.saturationF() * (HISTOGRAM_BINS - 1.0);
+      break;
+
+    case FILTER_PARAMETER_VALUE:
+      bin = pixel.valueF() * (HISTOGRAM_BINS - 1.0);
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
+
+  return bin;
+}
+
 void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
@@ -210,10 +245,57 @@ void DlgSettingsFilter::slotValue ()
 
 void DlgSettingsFilter::updateControls ()
 {
+  QImage image = cmdMediator().document().pixmap().toImage();
 
+  m_btnHue->setEnabled (!image.isGrayscale());
+}
+
+void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
+{
+  m_sceneProfile->clear();
+
+  QImage image = pixmap.toImage();
+
+  unsigned int histogramBins [HISTOGRAM_BINS];
+
+  // Initialize histogram bins
+  int bin;
+  for (bin = 0; bin < HISTOGRAM_BINS; bin++) {
+    histogramBins [bin] = 0;
+  }
+
+  // Populate histogram bins
+  unsigned int maxBinCount = 0;
+  for (int x = 0; x < image.width(); x++) {
+    for (int y = 0; y < image.height(); y++) {
+      QColor pixel (image.pixel (x, y));
+      int bin = pixelToBin (pixel);
+      ++histogramBins [bin];
+
+      if (histogramBins [bin] > maxBinCount) {
+        maxBinCount = histogramBins [bin];
+      }
+    }
+  }
+
+  // Draw histogram, normalizing so highest peak exactly fills the vertical range
+  for (bin = 1; bin < HISTOGRAM_BINS - 1; bin++) {
+
+    double x0 = m_viewProfile->width() * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
+    double y0 = m_viewProfile->height() * histogramBins [bin - 1] / maxBinCount;
+    double x1 = m_viewProfile->width() * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
+    double y1 = m_viewProfile->height() * histogramBins [bin] / maxBinCount;
+
+    QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
+    m_sceneProfile->addItem (line);
+  }
 }
 
 void DlgSettingsFilter::updatePreview ()
 {
+  QPixmap pixmap = cmdMediator().document().pixmap();
+  updateHistogram(pixmap);
 
+  m_scenePreview->clear();
+  m_scenePreview->addPixmap (pixmap);
 }
