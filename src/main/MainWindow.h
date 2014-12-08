@@ -121,7 +121,6 @@ private slots:
   void slotEditDelete ();
   void slotEditPaste ();
   void slotFileExport ();
-  void slotFileExportAs ();
   void slotFileImport();
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
@@ -215,7 +214,6 @@ private:
   QAction *m_actionSave;
   QAction *m_actionSaveAs;
   QAction *m_actionExport;
-  QAction *m_actionExportAs;
   QAction *m_actionPrint;
   QAction *m_actionExit;
 

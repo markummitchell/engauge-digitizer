@@ -20,6 +20,7 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "ExportToFile.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
@@ -55,6 +56,8 @@
 
 const QString EMPTY_FILENAME ("");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
+const QString CSV_FILENAME_EXTENSION ("csv");
+const QString TSV_FILENAME_EXTENSION ("tsv");
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -266,12 +269,6 @@ void MainWindow::createActionsFile ()
   m_actionExport->setWhatsThis (tr ("Export Document\n\n"
                                     "Exports the current document into a text file."));
   connect (m_actionExport, SIGNAL (triggered ()), this, SLOT (slotFileExport ()));
-
-  m_actionExportAs = new QAction (tr ("Export As"), this);
-  m_actionExportAs->setStatusTip (tr ("Exports the current document into a text file under a new filename."));
-  m_actionExportAs->setWhatsThis (tr ("Export Document As\n\n"
-                                      "Exports the current document into a text file under a new filename."));
-  connect (m_actionExportAs, SIGNAL (triggered ()), this, SLOT (slotFileExportAs ()));
 
   m_actionPrint = new QAction (tr ("&Print"), this);
   m_actionPrint->setShortcut (QKeySequence::Print);
@@ -530,7 +527,6 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionSave);
   m_menuFile->addAction (m_actionSaveAs);
   m_menuFile->addAction (m_actionExport);
-  m_menuFile->addAction (m_actionExportAs);
   m_menuFile->insertSeparator (m_actionPrint);
   m_menuFile->addAction (m_actionPrint);
   m_menuFile->insertSeparator (m_actionExit);
@@ -1085,11 +1081,38 @@ void MainWindow::slotEditPaste ()
 void MainWindow::slotFileExport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileExport";
-}
 
-void MainWindow::slotFileExportAs ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileExportAs";
+  const int SELECTED_FILTER = 0;
+  QString filter = QString ("Text CSV (*.%1);;Text TSV (*.%2);;All files (*.*)")
+                   .arg (CSV_FILENAME_EXTENSION)
+                   .arg (TSV_FILENAME_EXTENSION);
+  QString defaultFileName = QString ("%1/%2.%3")
+                            .arg (QDir::currentPath ())
+                            .arg (m_currentFile)
+                            .arg (CSV_FILENAME_EXTENSION);
+  QString fileName = QFileDialog::getSaveFileName (this,
+                                                   tr("Export"),
+                                                   defaultFileName,
+                                                   filter,
+                                                   SELECTED_FILTER);
+  if (!fileName.isEmpty ()) {
+
+    QFile file (fileName);
+    if (file.open(QIODevice::WriteOnly)) {
+
+      QTextStream str (&file);
+
+      ExportToFile exportStrategy;
+      exportStrategy.exportToFile (cmdMediator().document().modelExport(),
+                                   cmdMediator().document(),
+                                   str);
+    } else {
+
+      QMessageBox::critical (0,
+                             tr ("Export Error"),
+                             tr ("Unable to export to file ") + fileName);
+    }
+  }
 }
 
 void MainWindow::slotFileImport ()
@@ -1793,7 +1816,6 @@ void MainWindow::updateControls ()
   m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionExport->setEnabled (!m_currentFile.isEmpty ());
-  m_actionExportAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionPrint->setEnabled (!m_currentFile.isEmpty ());
 
   if (m_cmdMediator == 0) {

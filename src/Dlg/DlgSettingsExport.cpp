@@ -2,6 +2,7 @@
 #include "CmdSettingsExport.h"
 #include "DocumentModelExport.h"
 #include "DlgSettingsExport.h"
+#include "ExportToFile.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDoubleValidator>
@@ -15,6 +16,7 @@
 #include <QRadioButton>
 #include <QTabWidget>
 #include <QTextEdit>
+#include <QTextStream>
 #include <QVBoxLayout>
 
 const int MIN_INDENT_COLUMN_WIDTH = 20;
@@ -658,5 +660,13 @@ void DlgSettingsExport::updateControls ()
 
 void DlgSettingsExport::updatePreview()
 {
+  QString exportedText;
+  QTextStream str (&exportedText);
 
+  ExportToFile exportStrategy;
+  exportStrategy.exportToFile (*m_modelExportAfter,
+                               cmdMediator().document(),
+                               str);
+
+  m_editPreview->setText (exportedText);
 }
