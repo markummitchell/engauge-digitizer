@@ -148,11 +148,11 @@ private slots:
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
-  void slotViewBackground ();
-  void slotViewDigitize ();
-  void slotViewGroupDocumentImage(QAction*);
-  void slotViewGroupDocumentPoints(QAction*);
+  void slotViewGroupBackground(QAction*);
+  void slotViewGroupPoints(QAction*);
   void slotViewGroupStatus(QAction*);
+  void slotViewToolBarBackground ();
+  void slotViewToolBarDigitize ();
   void slotViewZoom16To1 ();
   void slotViewZoom8To1 ();
   void slotViewZoom4To1 ();
@@ -204,6 +204,7 @@ private:
   void settingsWrite ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateViewedBackground();
   void updateViewedPoints ();
 
   QString m_engaugeFile;
@@ -238,15 +239,16 @@ private:
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
   QAction *m_actionViewDigitize;
-  QMenu *m_menuViewDocument;
-  QActionGroup *m_groupDocumentImage;
-  QAction *m_actionViewDocumentImageNone;
-  QAction *m_actionViewDocumentImageOriginal;
-  QAction *m_actionViewDocumentImageFiltered;
-  QActionGroup *m_groupDocumentPoints;
-  QAction *m_actionViewDocumentPointsNone;
-  QAction *m_actionViewDocumentPointsCurve;
-  QAction *m_actionViewDocumentPointsAll;
+  QMenu *m_menuViewBackground;
+  QActionGroup *m_groupBackground;
+  QAction *m_actionViewBackgroundNone;
+  QAction *m_actionViewBackgroundOriginal;
+  QAction *m_actionViewBackgroundFiltered;
+  QMenu *m_menuViewPoints;
+  QActionGroup *m_groupPoints;
+  QAction *m_actionViewPointsNone;
+  QAction *m_actionViewPointsCurve;
+  QAction *m_actionViewPointsAll;
   QMenu *m_menuViewStatus;
   QActionGroup *m_groupStatus;
   QAction *m_actionStatusNever;

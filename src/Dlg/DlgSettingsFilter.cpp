@@ -169,7 +169,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
 unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
 {
-  unsigned int bin = 0;
+  int bin = 0; // Must be negatie since value is sometimes -1 below
 
   switch (m_modelFilterAfter->filterParameter()) {
     case FILTER_PARAMETER_FOREGROUND:

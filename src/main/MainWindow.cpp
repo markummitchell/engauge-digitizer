@@ -353,7 +353,7 @@ void MainWindow::createActionsView ()
   m_actionViewBackground->setStatusTip (tr ("Show or hide the background toolbar."));
   m_actionViewBackground->setWhatsThis (tr ("View Background ToolBar\n\n"
                                             "Show or hide the background toolbar"));
-  connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewBackground ()));
+  connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewToolBarBackground ()));
 
   m_actionViewDigitize = new QAction (tr ("Digitize Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
@@ -361,60 +361,60 @@ void MainWindow::createActionsView ()
   m_actionViewDigitize->setStatusTip (tr ("Show or hide the digitize toolbar."));
   m_actionViewDigitize->setWhatsThis (tr ("View Digitize ToolBar\n\n"
                                           "Show or hide the digitize toolbar"));
-  connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewDigitize()));
+  connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewToolBarDigitize()));
 
-  m_actionViewDocumentImageNone = new QAction (tr ("Hide Image"), this);
-  m_actionViewDocumentImageNone->setCheckable (true);
-  m_actionViewDocumentImageNone->setStatusTip (tr ("Hide the image underneath the points."));
-  m_actionViewDocumentImageNone->setWhatsThis (tr ("Hide Image\n\n"
+  m_actionViewBackgroundNone = new QAction (tr ("Hide Image"), this);
+  m_actionViewBackgroundNone->setCheckable (true);
+  m_actionViewBackgroundNone->setStatusTip (tr ("Hide the image underneath the points."));
+  m_actionViewBackgroundNone->setWhatsThis (tr ("Hide Image\n\n"
                                                    "No image is shown so points are easier to see"));
 
-  m_actionViewDocumentImageOriginal = new QAction (tr ("Show Original Image"), this);
-  m_actionViewDocumentImageOriginal->setCheckable (true);
-  m_actionViewDocumentImageOriginal->setStatusTip (tr ("Show the original image underneath the points."));
-  m_actionViewDocumentImageOriginal->setWhatsThis (tr ("Show Original Image\n\n"
+  m_actionViewBackgroundOriginal = new QAction (tr ("Show Original Image"), this);
+  m_actionViewBackgroundOriginal->setCheckable (true);
+  m_actionViewBackgroundOriginal->setStatusTip (tr ("Show the original image underneath the points."));
+  m_actionViewBackgroundOriginal->setWhatsThis (tr ("Show Original Image\n\n"
                                                        "Show the original image underneath the points"));
 
-  m_actionViewDocumentImageFiltered = new QAction (tr ("Show Filtered Image"), this);
-  m_actionViewDocumentImageFiltered->setCheckable (true);
-  m_actionViewDocumentImageFiltered->setChecked (true);
-  m_actionViewDocumentImageFiltered->setStatusTip (tr ("Show the filtered image underneath the points."));
-  m_actionViewDocumentImageFiltered->setWhatsThis (tr ("Show Filtered Image\n\n"
+  m_actionViewBackgroundFiltered = new QAction (tr ("Show Filtered Image"), this);
+  m_actionViewBackgroundFiltered->setCheckable (true);
+  m_actionViewBackgroundFiltered->setChecked (true);
+  m_actionViewBackgroundFiltered->setStatusTip (tr ("Show the filtered image underneath the points."));
+  m_actionViewBackgroundFiltered->setWhatsThis (tr ("Show Filtered Image\n\n"
                                                        "Show the filtered image underneath the points.\n\n"
                                                        "The filtered image is created from the original image according to the "
                                                        "Filter preferences so unimportant information is hidden and important "
                                                        "information is emphasized"));
 
-  m_actionViewDocumentPointsNone = new QAction (tr ("Hide All Points"), this);
-  m_actionViewDocumentPointsNone->setCheckable (true);
-  m_actionViewDocumentPointsNone->setStatusTip (tr ("Hide all digitized points."));
-  m_actionViewDocumentPointsNone->setWhatsThis (tr ("Hide All Points\n\n"
+  m_actionViewPointsNone = new QAction (tr ("Hide All Points"), this);
+  m_actionViewPointsNone->setCheckable (true);
+  m_actionViewPointsNone->setStatusTip (tr ("Hide all digitized points."));
+  m_actionViewPointsNone->setWhatsThis (tr ("Hide All Points\n\n"
                                                     "No digitized points are shown so the image is easier to see."));
 
-  m_actionViewDocumentPointsCurve = new QAction (tr ("Show Selected Curve's Points"), this);
-  m_actionViewDocumentPointsCurve->setCheckable (true);
-  m_actionViewDocumentPointsCurve->setStatusTip (tr ("Show only points in the currently selected curve."));
-  m_actionViewDocumentPointsCurve->setWhatsThis (tr ("Show Curve's Points\n\n"
+  m_actionViewPointsCurve = new QAction (tr ("Show Selected Curve's Points"), this);
+  m_actionViewPointsCurve->setCheckable (true);
+  m_actionViewPointsCurve->setStatusTip (tr ("Show only points in the currently selected curve."));
+  m_actionViewPointsCurve->setWhatsThis (tr ("Show Curve's Points\n\n"
                                                      "Show only digitized points that belong to the currently selected curve."));
 
-  m_actionViewDocumentPointsAll = new QAction (tr ("Show All Points"), this);
-  m_actionViewDocumentPointsAll->setCheckable (true);
-  m_actionViewDocumentPointsAll->setChecked (true);
-  m_actionViewDocumentPointsAll->setStatusTip (tr ("Show all points."));
-  m_actionViewDocumentPointsAll->setWhatsThis (tr ("Show All Points\n\n"
+  m_actionViewPointsAll = new QAction (tr ("Show All Points"), this);
+  m_actionViewPointsAll->setCheckable (true);
+  m_actionViewPointsAll->setChecked (true);
+  m_actionViewPointsAll->setStatusTip (tr ("Show all points."));
+  m_actionViewPointsAll->setWhatsThis (tr ("Show All Points\n\n"
                                                    "Show all digitized axis and curve points"));
 
-  m_groupDocumentImage = new QActionGroup(this);
-  m_groupDocumentImage->addAction (m_actionViewDocumentImageNone);
-  m_groupDocumentImage->addAction (m_actionViewDocumentImageOriginal);
-  m_groupDocumentImage->addAction (m_actionViewDocumentImageFiltered);
-  connect (m_groupDocumentImage, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupDocumentImage(QAction*)));
+  m_groupBackground = new QActionGroup(this);
+  m_groupBackground->addAction (m_actionViewBackgroundNone);
+  m_groupBackground->addAction (m_actionViewBackgroundOriginal);
+  m_groupBackground->addAction (m_actionViewBackgroundFiltered);
+  connect (m_groupBackground, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupBackground(QAction*)));
 
-  m_groupDocumentPoints = new QActionGroup(this);
-  m_groupDocumentPoints->addAction (m_actionViewDocumentPointsNone);
-  m_groupDocumentPoints->addAction (m_actionViewDocumentPointsCurve);
-  m_groupDocumentPoints->addAction (m_actionViewDocumentPointsAll);
-  connect (m_groupDocumentPoints, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupDocumentPoints(QAction*)));
+  m_groupPoints = new QActionGroup(this);
+  m_groupPoints->addAction (m_actionViewPointsNone);
+  m_groupPoints->addAction (m_actionViewPointsCurve);
+  m_groupPoints->addAction (m_actionViewPointsAll);
+  connect (m_groupPoints, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupPoints(QAction*)));
 
   m_actionStatusNever = new QAction (tr ("Hide Always"), this);
   m_actionStatusNever->setCheckable(true);
@@ -560,16 +560,17 @@ void MainWindow::createMenus()
   m_menuView = menuBar()->addMenu(tr("View"));
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
-  m_menuView->insertSeparator (m_actionViewDocumentImageNone);
-  m_menuViewDocument = new QMenu (tr ("Document"));
-  m_menuViewDocument->addAction (m_actionViewDocumentImageNone);
-  m_menuViewDocument->addAction (m_actionViewDocumentImageOriginal);
-  m_menuViewDocument->addAction (m_actionViewDocumentImageFiltered);
-  m_menuViewDocument->insertSeparator(m_actionViewDocumentPointsNone);
-  m_menuViewDocument->addAction (m_actionViewDocumentPointsNone);
-  m_menuViewDocument->addAction (m_actionViewDocumentPointsCurve);
-  m_menuViewDocument->addAction (m_actionViewDocumentPointsAll);
-  m_menuView->addMenu (m_menuViewDocument);
+  m_menuView->insertSeparator (m_actionViewBackgroundNone);
+  m_menuViewBackground = new QMenu (tr ("Background"));
+  m_menuViewBackground->addAction (m_actionViewBackgroundNone);
+  m_menuViewBackground->addAction (m_actionViewBackgroundOriginal);
+  m_menuViewBackground->addAction (m_actionViewBackgroundFiltered);
+  m_menuView->addMenu (m_menuViewBackground);
+  m_menuViewPoints = new QMenu (tr ("Points"));
+  m_menuViewPoints->addAction (m_actionViewPointsNone);
+  m_menuViewPoints->addAction (m_actionViewPointsCurve);
+  m_menuViewPoints->addAction (m_actionViewPointsAll);
+  m_menuView->addMenu (m_menuViewPoints);
   m_menuViewStatus = new QMenu (tr ("Status Bar"));
   m_menuViewStatus->addAction (m_actionStatusNever);
   m_menuViewStatus->addAction (m_actionStatusTemporary);
@@ -1035,23 +1036,25 @@ void MainWindow::slotCmbBackground(int currentIndex)
 
   switch (currentIndex) {
     case BACKGROUND_IMAGE_NONE:
-      if (!m_actionViewDocumentImageNone->isChecked()) {
-        m_actionViewDocumentImageNone->toggle();
+      if (!m_actionViewBackgroundNone->isChecked()) {
+        m_actionViewBackgroundNone->toggle();
       }
       break;
 
     case BACKGROUND_IMAGE_ORIGINAL:
-      if (!m_actionViewDocumentImageOriginal->isChecked ()) {
-          m_actionViewDocumentImageOriginal->toggle();
+      if (!m_actionViewBackgroundOriginal->isChecked ()) {
+          m_actionViewBackgroundOriginal->toggle();
       }
       break;
 
     case BACKGROUND_IMAGE_FILTERED:
-      if (!m_actionViewDocumentImageFiltered->isChecked ()) {
-        m_actionViewDocumentImageFiltered->toggle();
+      if (!m_actionViewBackgroundFiltered->isChecked ()) {
+        m_actionViewBackgroundFiltered->toggle();
       }
       break;
   }
+
+  updateViewedBackground();
 }
 
 void MainWindow::slotCmbCurve(int /* currentIndex */)
@@ -1476,55 +1479,29 @@ void MainWindow::slotUndoTextChanged (const QString &text)
   m_actionEditUndo->setText (completeText);
 }
 
-void MainWindow::slotViewBackground ()
+void MainWindow::slotViewGroupBackground(QAction *action)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewBackground";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupBackground";
 
-  if (m_actionViewBackground->isChecked ()) {
-    m_toolBackground->show();
-  } else {
-    m_toolBackground->hide();
-  }
-}
-
-void MainWindow::slotViewDigitize ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewDigitize";
-
-  if (m_actionViewDigitize->isChecked ()) {
-    m_toolDigitize->show();
-  } else {
-    m_toolDigitize->hide();
-  }
-}
-
-void MainWindow::slotViewGroupDocumentImage(QAction *action)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupDocumentImage";
-
-  if (action == m_actionViewDocumentImageFiltered) {
-
-    m_image->setPixmap(m_cmdMediator->pixmap ());
-
-  } else if (action == m_actionViewDocumentImageNone) {
-
-    // Replace image by plain background, so boundary is still visible and useful as a reference for the points
-    QPixmap allWhite (m_cmdMediator->pixmap ());
-    allWhite.fill (Qt::white);
-    m_image->setPixmap (allWhite);
-
-  } else if (action == m_actionViewDocumentImageOriginal) {
-
-    m_image->setPixmap(m_cmdMediator->pixmap ());
-
+  // Set the combobox
+  int indexBackground;
+  if (action == m_actionViewBackgroundNone) {
+    indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_NONE));
+  } else if (action == m_actionViewBackgroundOriginal) {
+    indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_ORIGINAL));
+  } else if (action == m_actionViewBackgroundFiltered) {
+    indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_FILTERED));
   } else {
     Q_ASSERT (false);
   }
+  m_cmbBackground->setCurrentIndex (indexBackground);
+
+  updateViewedBackground();
 }
 
-void MainWindow::slotViewGroupDocumentPoints(QAction * /* action */)
+void MainWindow::slotViewGroupPoints(QAction * /* action */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupDocumentPoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupPoints";
 
   updateViewedPoints ();
 }
@@ -1541,6 +1518,28 @@ void MainWindow::slotViewGroupStatus(QAction *action)
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_TEMPORARY);
   } else {
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_ALWAYS);
+  }
+}
+
+void MainWindow::slotViewToolBarBackground ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarBackground";
+
+  if (m_actionViewBackground->isChecked ()) {
+    m_toolBackground->show();
+  } else {
+    m_toolBackground->hide();
+  }
+}
+
+void MainWindow::slotViewToolBarDigitize ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarDigitize";
+
+  if (m_actionViewDigitize->isChecked ()) {
+    m_toolDigitize->show();
+  } else {
+    m_toolDigitize->hide();
   }
 }
 
@@ -1926,8 +1925,8 @@ void MainWindow::updateControls ()
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
 
-  m_groupDocumentImage->setEnabled (!m_currentFile.isEmpty ());
-  m_groupDocumentPoints->setEnabled (!m_currentFile.isEmpty ());
+  m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
+  m_groupPoints->setEnabled (!m_currentFile.isEmpty ());
   m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
@@ -1999,19 +1998,46 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
   m_cmdMediator->document().setModelSegments(modelSegments);
 }
 
+void MainWindow::updateViewedBackground()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedBackground";
+
+  if (m_cmdMediator != 0) {
+
+    if (m_actionViewBackgroundFiltered->isChecked ()) {
+
+      m_image->setPixmap(m_cmdMediator->pixmap ());
+
+    } else if (m_actionViewBackgroundNone->isChecked()) {
+
+      // Replace image by plain background, so boundary is still visible and useful as a reference for the points
+      QPixmap allWhite (m_cmdMediator->pixmap ());
+      allWhite.fill (Qt::white);
+      m_image->setPixmap (allWhite);
+
+    } else if (m_actionViewBackgroundOriginal->isChecked ()) {
+
+      m_image->setPixmap(m_cmdMediator->pixmap ());
+
+    } else {
+      Q_ASSERT (false);
+    }
+  }
+}
+
 void MainWindow::updateViewedPoints ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedPoints";
 
-  if (m_actionViewDocumentPointsAll->isChecked ()) {
+  if (m_actionViewPointsAll->isChecked ()) {
 
     m_scene->showPoints (true, true);
 
-  } else if (m_actionViewDocumentPointsCurve->isChecked ()) {
+  } else if (m_actionViewPointsCurve->isChecked ()) {
 
     m_scene->showPoints (true, false, m_cmbCurve->currentText ());
 
-  } else if (m_actionViewDocumentPointsNone->isChecked ()) {
+  } else if (m_actionViewPointsNone->isChecked ()) {
 
     m_scene->showPoints (false);
 
