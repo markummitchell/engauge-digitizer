@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
+#include <QDebug>
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -177,6 +178,10 @@ unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
 
     case FILTER_PARAMETER_HUE:
       bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
+      if (bin < 0) {
+        // Color is achromatic (r=g=b) so it has no hue
+        bin = HISTOGRAM_BINS - 1;
+      }
       break;
 
     case FILTER_PARAMETER_INTENSITY:
@@ -247,7 +252,6 @@ void DlgSettingsFilter::updateControls ()
 {
   QImage image = cmdMediator().document().pixmap().toImage();
 
-  m_btnHue->setEnabled (!image.isGrayscale());
 }
 
 void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
@@ -270,7 +274,7 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
     for (int y = 0; y < image.height(); y++) {
       QColor pixel (image.pixel (x, y));
       int bin = pixelToBin (pixel);
-      ++histogramBins [bin];
+      ++(histogramBins [bin]);
 
       if (histogramBins [bin] > maxBinCount) {
         maxBinCount = histogramBins [bin];

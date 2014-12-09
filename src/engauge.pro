@@ -5,6 +5,7 @@ MOC_DIR = .moc
 RCC_DIR = .rcc
 
 HEADERS  += \
+    include/BackgroundImage.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxisPointsAbstract.h \
     Callback/CallbackCheckAddPointAxis.h \
@@ -112,6 +113,7 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileShades.h \
     include/ZoomFactor.h
+
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \

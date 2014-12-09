@@ -1,0 +1,11 @@
+#ifndef BACKGROUND_IMAGE_H
+#define BACKGROUND_IMAGE_H
+
+/// Background selection.
+enum BackgroundImage {
+  BACKGROUND_IMAGE_NONE,
+  BACKGROUND_IMAGE_ORIGINAL,
+  BACKGROUND_IMAGE_FILTERED
+};
+
+#endif // BACKGROUND_IMAGE_H

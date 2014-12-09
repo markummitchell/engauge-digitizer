@@ -109,6 +109,7 @@ public:
 private slots:
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
+  void slotCmbBackground(int);
   void slotCmbCurve(int);
   void slotContextMenuEvent (QString);
   void slotDigitizeAxis ();
@@ -147,6 +148,7 @@ private slots:
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
+  void slotViewBackground ();
   void slotViewDigitize ();
   void slotViewGroupDocumentImage(QAction*);
   void slotViewGroupDocumentPoints(QAction*);
@@ -234,6 +236,7 @@ private:
   QAction *m_actionDigitizeSegment;
 
   QMenu *m_menuView;
+  QAction *m_actionViewBackground;
   QAction *m_actionViewDigitize;
   QMenu *m_menuViewDocument;
   QActionGroup *m_groupDocumentImage;
@@ -290,6 +293,9 @@ private:
   QComboBox *m_cmbCurve;
   QToolBar *m_toolDigitize;
   LoadImageFromUrl *m_loadImageFromUrl;
+
+  QComboBox *m_cmbBackground;
+  QToolBar *m_toolBackground;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   DigitizeStateContext *m_digitizeStateContext;

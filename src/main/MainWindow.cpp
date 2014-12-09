@@ -1,3 +1,4 @@
+#include "BackgroundImage.h"
 #include "img/bannerapp.xpm"
 #include "CmdCopy.h"
 #include "CmdCut.h"
@@ -346,6 +347,14 @@ void MainWindow::createActionsSettings ()
 
 void MainWindow::createActionsView ()
 {
+  m_actionViewBackground = new QAction (tr ("Background Toolbar"), this);
+  m_actionViewBackground->setCheckable (true);
+  m_actionViewBackground->setChecked (true);
+  m_actionViewBackground->setStatusTip (tr ("Show or hide the background toolbar."));
+  m_actionViewBackground->setWhatsThis (tr ("View Background ToolBar\n\n"
+                                            "Show or hide the background toolbar"));
+  connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewBackground ()));
+
   m_actionViewDigitize = new QAction (tr ("Digitize Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
   m_actionViewDigitize->setChecked (true);
@@ -549,6 +558,7 @@ void MainWindow::createMenus()
   m_menuDigitize->addAction (m_actionDigitizeSegment);
 
   m_menuView = menuBar()->addMenu(tr("View"));
+  m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->insertSeparator (m_actionViewDocumentImageNone);
   m_menuViewDocument = new QMenu (tr ("Document"));
@@ -651,7 +661,25 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
+  m_cmbBackground = new QComboBox ();
+  m_cmbBackground->setEnabled (false);
+  m_cmbBackground->setStatusTip ("Select background image");
+  m_cmbBackground->setWhatsThis (tr ("Selected Background\n\n"
+                                     "Select background image:\n"
+                                     "1) No background which highlights points\n"
+                                     "2) Original image which shows everything\n"
+                                     "3) Filtered image which highlights important details"));
+  m_cmbBackground->addItem ("No background", QVariant (BACKGROUND_IMAGE_NONE));
+  m_cmbBackground->addItem ("Original image", QVariant (BACKGROUND_IMAGE_ORIGINAL));
+  m_cmbBackground->addItem ("Filtered image", QVariant (BACKGROUND_IMAGE_FILTERED));
+  connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
+
+  m_toolBackground = new QToolBar (tr ("Background"), this);
+  m_toolBackground->addWidget (m_cmbBackground);
+  addToolBar (m_toolBackground);
+
   m_cmbCurve = new QComboBox ();
+  m_cmbCurve->setEnabled (false);
   m_cmbCurve->setMinimumWidth (180);
   m_cmbCurve->setStatusTip ("Select curve for new points.");
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
@@ -942,6 +970,16 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   move (settings.value ("pos",
                         QPoint (200, 200)).toPoint ());
 
+  // Background toolbar visibility
+  bool viewBackgroundToolBar = settings.value ("viewBackgroundToolBar",
+                                               true).toBool ();
+  m_actionViewBackground->setChecked (viewBackgroundToolBar);
+  m_toolBackground->setVisible (viewBackgroundToolBar);
+  BackgroundImage backgroundImage = (BackgroundImage) settings.value ("backgroundImage",
+                                                                      BACKGROUND_IMAGE_FILTERED).toInt ();
+  int indexBackground = m_cmbBackground->findData (QVariant (backgroundImage));
+  m_cmbBackground->setCurrentIndex (indexBackground);
+
   // Digitize toolbar visibility
   bool viewDigitizeToolBar = settings.value ("viewDigitizeToolBar",
                                              true).toBool ();
@@ -970,6 +1008,8 @@ void MainWindow::settingsWrite ()
   settings.beginGroup ("MainWindow");
   settings.setValue ("size", size ());
   settings.setValue ("pos", pos ());
+  settings.setValue ("viewBackground", m_toolBackground->isVisible());
+  settings.setValue ("backgroundImage", m_cmbBackground->currentData().toInt());
   settings.setValue ("viewDigitizeToolBar", m_toolDigitize->isVisible ());
   settings.setValue ("viewStatusBar", m_statusBar->statusBarMode ());
   settings.endGroup ();
@@ -987,6 +1027,31 @@ void MainWindow::slotCanUndoChanged (bool canUndo)
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotCanUndoChanged";
 
   m_actionEditUndo->setEnabled (canUndo);
+}
+
+void MainWindow::slotCmbBackground(int currentIndex)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbBackground";
+
+  switch (currentIndex) {
+    case BACKGROUND_IMAGE_NONE:
+      if (!m_actionViewDocumentImageNone->isChecked()) {
+        m_actionViewDocumentImageNone->toggle();
+      }
+      break;
+
+    case BACKGROUND_IMAGE_ORIGINAL:
+      if (!m_actionViewDocumentImageOriginal->isChecked ()) {
+          m_actionViewDocumentImageOriginal->toggle();
+      }
+      break;
+
+    case BACKGROUND_IMAGE_FILTERED:
+      if (!m_actionViewDocumentImageFiltered->isChecked ()) {
+        m_actionViewDocumentImageFiltered->toggle();
+      }
+      break;
+  }
 }
 
 void MainWindow::slotCmbCurve(int /* currentIndex */)
@@ -1411,6 +1476,17 @@ void MainWindow::slotUndoTextChanged (const QString &text)
   m_actionEditUndo->setText (completeText);
 }
 
+void MainWindow::slotViewBackground ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewBackground";
+
+  if (m_actionViewBackground->isChecked ()) {
+    m_toolBackground->show();
+  } else {
+    m_toolBackground->hide();
+  }
+}
+
 void MainWindow::slotViewDigitize ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewDigitize";
@@ -1811,6 +1887,8 @@ void MainWindow::updateControls ()
   if (m_cmdMediator != 0) {
     setWindowModified (m_cmdMediator->isModified ()); // Put asterisk in title bar when document is modified
   }
+
+  m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
   m_menuFileOpenRecent->setEnabled (m_menuFileOpenRecent->actions().count() > 0);
   m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
