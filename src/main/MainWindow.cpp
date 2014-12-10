@@ -363,46 +363,46 @@ void MainWindow::createActionsView ()
                                           "Show or hide the digitize toolbar"));
   connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewToolBarDigitize()));
 
-  m_actionViewBackgroundNone = new QAction (tr ("Hide Image"), this);
+  m_actionViewBackgroundNone = new QAction (tr ("No Background"), this);
   m_actionViewBackgroundNone->setCheckable (true);
-  m_actionViewBackgroundNone->setStatusTip (tr ("Hide the image underneath the points."));
-  m_actionViewBackgroundNone->setWhatsThis (tr ("Hide Image\n\n"
-                                                   "No image is shown so points are easier to see"));
+  m_actionViewBackgroundNone->setStatusTip (tr ("Do not show the image underneath the points."));
+  m_actionViewBackgroundNone->setWhatsThis (tr ("No Background\n\n"
+                                                "No image is shown so points are easier to see"));
 
   m_actionViewBackgroundOriginal = new QAction (tr ("Show Original Image"), this);
   m_actionViewBackgroundOriginal->setCheckable (true);
   m_actionViewBackgroundOriginal->setStatusTip (tr ("Show the original image underneath the points."));
   m_actionViewBackgroundOriginal->setWhatsThis (tr ("Show Original Image\n\n"
-                                                       "Show the original image underneath the points"));
+                                                    "Show the original image underneath the points"));
 
   m_actionViewBackgroundFiltered = new QAction (tr ("Show Filtered Image"), this);
   m_actionViewBackgroundFiltered->setCheckable (true);
   m_actionViewBackgroundFiltered->setChecked (true);
   m_actionViewBackgroundFiltered->setStatusTip (tr ("Show the filtered image underneath the points."));
   m_actionViewBackgroundFiltered->setWhatsThis (tr ("Show Filtered Image\n\n"
-                                                       "Show the filtered image underneath the points.\n\n"
-                                                       "The filtered image is created from the original image according to the "
-                                                       "Filter preferences so unimportant information is hidden and important "
-                                                       "information is emphasized"));
+                                                    "Show the filtered image underneath the points.\n\n"
+                                                    "The filtered image is created from the original image according to the "
+                                                    "Filter preferences so unimportant information is hidden and important "
+                                                    "information is emphasized"));
 
   m_actionViewPointsNone = new QAction (tr ("Hide All Points"), this);
   m_actionViewPointsNone->setCheckable (true);
   m_actionViewPointsNone->setStatusTip (tr ("Hide all digitized points."));
   m_actionViewPointsNone->setWhatsThis (tr ("Hide All Points\n\n"
-                                                    "No digitized points are shown so the image is easier to see."));
+                                            "No digitized points are shown so the image is easier to see."));
 
   m_actionViewPointsCurve = new QAction (tr ("Show Selected Curve's Points"), this);
   m_actionViewPointsCurve->setCheckable (true);
   m_actionViewPointsCurve->setStatusTip (tr ("Show only points in the currently selected curve."));
   m_actionViewPointsCurve->setWhatsThis (tr ("Show Curve's Points\n\n"
-                                                     "Show only digitized points that belong to the currently selected curve."));
+                                             "Show only digitized points that belong to the currently selected curve."));
 
   m_actionViewPointsAll = new QAction (tr ("Show All Points"), this);
   m_actionViewPointsAll->setCheckable (true);
   m_actionViewPointsAll->setChecked (true);
   m_actionViewPointsAll->setStatusTip (tr ("Show all points."));
   m_actionViewPointsAll->setWhatsThis (tr ("Show All Points\n\n"
-                                                   "Show all digitized axis and curve points"));
+                                           "Show all digitized axis and curve points"));
 
   m_groupBackground = new QActionGroup(this);
   m_groupBackground->addAction (m_actionViewBackgroundNone);

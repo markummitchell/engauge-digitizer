@@ -84,6 +84,8 @@ HEADERS  += \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
+    Filter/Filter.h \
+    Filter/FilterColorEntry.h \
     Filter/FilterParameter.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
@@ -181,6 +183,7 @@ SOURCES += \
     util/EnumsToQt.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
+    Filter/Filter.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointPolygon.cpp \
