@@ -51,7 +51,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateScale.h \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
-    Dlg/DlgBoundary.h \
+    Dlg/DlgDivider.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsCoords.h \
@@ -156,7 +156,7 @@ SOURCES += \
     DigitizeState/DigitizeStateScale.cpp \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
-    Dlg/DlgBoundary.cpp \
+    Dlg/DlgDivider.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsCoords.cpp \

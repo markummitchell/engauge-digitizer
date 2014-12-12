@@ -6,7 +6,7 @@ Filter::Filter()
 }
 
 bool Filter::colorCompare (QRgb rgb1,
-                           QRgb rgb2)
+                           QRgb rgb2) const
 {
   const long MASK = 0xf0f0f0f0;
   return (rgb1 & MASK) == (rgb2 & MASK);

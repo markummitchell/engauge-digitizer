@@ -1,7 +1,8 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
-#include "DlgBoundary.h"
+#include "DlgDivider.h"
 #include "DlgSettingsFilter.h"
+#include "Filter.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -17,7 +18,7 @@
 #include "ViewProfile.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int HISTOGRAM_BINS = 256;
+const int HISTOGRAM_BINS = 70;
 const int PROFILE_SCENE_WIDTH = 100;
 const int PROFILE_SCENE_HEIGHT = 100;
 
@@ -111,15 +112,6 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   m_scale->setAutoFillBackground(true);
   m_scale->setPalette (QPalette (Qt::red));
   layout->addWidget (m_scale, row++, 3);
-
-  m_boundaryLow = new DlgBoundary(*m_sceneProfile,
-                                  PROFILE_SCENE_WIDTH,
-                                  PROFILE_SCENE_HEIGHT,
-                                  0);
-  m_boundaryHigh = new DlgBoundary(*m_sceneProfile,
-                                   PROFILE_SCENE_WIDTH,
-                                   PROFILE_SCENE_HEIGHT,
-                                   PROFILE_SCENE_WIDTH - 1);
 }
 
 QWidget *DlgSettingsFilter::createSubPanel ()
@@ -204,7 +196,7 @@ unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
       break;
 
     case FILTER_PARAMETER_INTENSITY:
-      bin = qGray (pixel.rgb());
+      bin = qGray (pixel.rgb()) * (HISTOGRAM_BINS - 1.0) / 255.0;
       break;
 
     case FILTER_PARAMETER_SATURATION:
@@ -287,18 +279,23 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
     histogramBins [bin] = 0;
   }
 
+  Filter filter;
+  QRgb rgbBackground = filter.marginColor(&image);
+
   // Populate histogram bins
   double maxBinCount = 0;
   for (int x = 0; x < image.width(); x++) {
     for (int y = 0; y < image.height(); y++) {
       QColor pixel (image.pixel (x, y));
-      int bin = pixelToBin (pixel);
-      Q_ASSERT (0 <= bin);
-      Q_ASSERT (bin < HISTOGRAM_BINS);
-      ++(histogramBins [bin]);
+      if (!filter.colorCompare (rgbBackground, pixel.rgb())) {
 
-      if (histogramBins [bin] > maxBinCount) {
-        maxBinCount = histogramBins [bin];
+        int bin = pixelToBin (pixel);
+        Q_ASSERT (0 <= bin && bin < HISTOGRAM_BINS);
+        ++(histogramBins [bin]);
+
+        if (histogramBins [bin] > maxBinCount) {
+          maxBinCount = histogramBins [bin];
+        }
       }
     }
   }
@@ -322,6 +319,17 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
     QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
     m_sceneProfile->addItem (line);
   }
+
+  m_dividerLow = new DlgDivider(*m_sceneProfile,
+                                PROFILE_SCENE_HEIGHT,
+                                0,
+                                20);
+  m_dividerHigh = new DlgDivider(*m_sceneProfile,
+                                 PROFILE_SCENE_HEIGHT,
+                                 PROFILE_SCENE_WIDTH - 1,
+                                 40);
+  m_dividerLow->setX (20);
+  m_dividerHigh->setX (50);
 }
 
 void DlgSettingsFilter::updatePreview ()
