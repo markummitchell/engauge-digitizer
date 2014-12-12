@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
+#include "DlgBoundary.h"
 #include "DlgSettingsFilter.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -9,13 +10,16 @@
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QLabel>
+#include <qmath.h>
 #include <QRadioButton>
 #include <QRgb>
 #include "ViewPreview.h"
 #include "ViewProfile.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int HISTOGRAM_BINS = 255;
+const int HISTOGRAM_BINS = 256;
+const int PROFILE_SCENE_WIDTH = 100;
+const int PROFILE_SCENE_HEIGHT = 100;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Filter", mainWindow),
@@ -92,6 +96,8 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   layout->addWidget (labelProfile, row++, 3);
 
   m_sceneProfile = new QGraphicsScene;
+  m_sceneProfile->setSceneRect(0, 0, PROFILE_SCENE_WIDTH, PROFILE_SCENE_HEIGHT);
+
   m_viewProfile = new ViewProfile (m_sceneProfile);
   m_viewProfile->setWhatsThis (tr ("Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust "
                                    "the range of filter parameter values that will be included in the filtered image. The clear portion will "
@@ -105,6 +111,15 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   m_scale->setAutoFillBackground(true);
   m_scale->setPalette (QPalette (Qt::red));
   layout->addWidget (m_scale, row++, 3);
+
+  m_boundaryLow = new DlgBoundary(*m_sceneProfile,
+                                  PROFILE_SCENE_WIDTH,
+                                  PROFILE_SCENE_HEIGHT,
+                                  0);
+  m_boundaryHigh = new DlgBoundary(*m_sceneProfile,
+                                   PROFILE_SCENE_WIDTH,
+                                   PROFILE_SCENE_HEIGHT,
+                                   PROFILE_SCENE_WIDTH - 1);
 }
 
 QWidget *DlgSettingsFilter::createSubPanel ()
@@ -174,13 +189,17 @@ unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
   switch (m_modelFilterAfter->filterParameter()) {
     case FILTER_PARAMETER_FOREGROUND:
       bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
+      if (bin < 0) {
+        // Color is achromatic (r=g=b) so it has no hue
+        bin = 0;
+      }
       break;
 
     case FILTER_PARAMETER_HUE:
       bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
       if (bin < 0) {
         // Color is achromatic (r=g=b) so it has no hue
-        bin = HISTOGRAM_BINS - 1;
+        bin = 0;
       }
       break;
 
@@ -260,7 +279,7 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
 
   QImage image = pixmap.toImage();
 
-  unsigned int histogramBins [HISTOGRAM_BINS];
+  double histogramBins [HISTOGRAM_BINS];
 
   // Initialize histogram bins
   int bin;
@@ -269,11 +288,13 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
   }
 
   // Populate histogram bins
-  unsigned int maxBinCount = 0;
+  double maxBinCount = 0;
   for (int x = 0; x < image.width(); x++) {
     for (int y = 0; y < image.height(); y++) {
       QColor pixel (image.pixel (x, y));
       int bin = pixelToBin (pixel);
+      Q_ASSERT (0 <= bin);
+      Q_ASSERT (bin < HISTOGRAM_BINS);
       ++(histogramBins [bin]);
 
       if (histogramBins [bin] > maxBinCount) {
@@ -282,13 +303,21 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
     }
   }
 
-  // Draw histogram, normalizing so highest peak exactly fills the vertical range
-  for (bin = 1; bin < HISTOGRAM_BINS - 1; bin++) {
+  // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
+  // so smaller peaks do not disappear
+  for (bin = 1; bin < HISTOGRAM_BINS; bin++) {
 
-    double x0 = m_viewProfile->width() * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
-    double y0 = m_viewProfile->height() * histogramBins [bin - 1] / maxBinCount;
-    double x1 = m_viewProfile->width() * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
-    double y1 = m_viewProfile->height() * histogramBins [bin] / maxBinCount;
+    double x0 = PROFILE_SCENE_WIDTH * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
+
+    // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+    double count0 = maxBinCount - histogramBins [bin - 1] + 1; // Min value is 1 so log does not blow up
+    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * qLn (count0) / qLn (maxBinCount + 1.0);
+
+    double x1 = PROFILE_SCENE_WIDTH * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
+
+    // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+    double count1 = maxBinCount - histogramBins [bin] + 1; // Min value is 1 so log does not blow up
+    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * qLn (count1) / qLn (maxBinCount + 1.0);
 
     QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
     m_sceneProfile->addItem (line);

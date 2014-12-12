@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QPixmap>
 
+class DlgBoundary;
 class DocumentModelFilter;
 class QGraphicsScene;
 class QGridLayout;
@@ -58,6 +59,8 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+  DlgBoundary *m_boundaryLow;
+  DlgBoundary *m_boundaryHigh;
 
   DocumentModelFilter *m_modelFilterBefore;
   DocumentModelFilter *m_modelFilterAfter;
