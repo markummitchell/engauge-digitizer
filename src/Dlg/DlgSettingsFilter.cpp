@@ -321,13 +321,17 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
   }
 
   m_dividerLow = new DlgDivider(*m_sceneProfile,
+                                *m_viewProfile,
+                                PROFILE_SCENE_WIDTH,
                                 PROFILE_SCENE_HEIGHT,
-                                0,
-                                20);
+                                PROFILE_SCENE_HEIGHT * 2.0 / 3.0,
+                                true);
   m_dividerHigh = new DlgDivider(*m_sceneProfile,
+                                 *m_viewProfile,
                                  PROFILE_SCENE_HEIGHT,
-                                 PROFILE_SCENE_WIDTH - 1,
-                                 40);
+                                 PROFILE_SCENE_WIDTH,
+                                 PROFILE_SCENE_HEIGHT / 3.0,
+                                 false);
   m_dividerLow->setX (20);
   m_dividerHigh->setX (50);
 }
