@@ -332,8 +332,23 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
                                  PROFILE_SCENE_WIDTH,
                                  PROFILE_SCENE_HEIGHT / 3.0,
                                  false);
-  m_dividerLow->setX (20);
-  m_dividerHigh->setX (50);
+
+  if (m_btnForeground->isChecked()) {
+    m_dividerLow->setX (m_modelFilterAfter->foregroundLow(), FOREGROUND_MIN, FOREGROUND_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->foregroundHigh(), FOREGROUND_MIN, FOREGROUND_MAX);
+  } else if (m_btnIntensity->isChecked()) {
+    m_dividerLow->setX (m_modelFilterAfter->intensityLow(), INTENSITY_MIN, INTENSITY_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->intensityHigh(), INTENSITY_MIN, INTENSITY_MAX);
+  } else if (m_btnHue->isChecked()) {
+    m_dividerLow->setX (m_modelFilterAfter->hueLow(), HUE_MIN, HUE_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->hueHigh(), HUE_MIN, HUE_MAX);
+  } else if (m_btnSaturation->isChecked()) {
+    m_dividerLow->setX (m_modelFilterAfter->saturationLow(), SATURATION_MIN, SATURATION_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->saturationHigh(), SATURATION_MIN, SATURATION_MAX);
+  } else if (m_btnValue->isChecked()) {
+    m_dividerLow->setX (m_modelFilterAfter->valueLow(), VALUE_MIN, VALUE_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->valueHigh(), VALUE_MIN, VALUE_MAX);
+  }
 }
 
 void DlgSettingsFilter::updatePreview ()

@@ -112,26 +112,31 @@ void DlgDivider::mousePressEvent(QGraphicsSceneMouseEvent * /* event */)
                             rect().y () + rect().height () / 2.0);
 }
 
-void DlgDivider::setX (int x)
+void DlgDivider::setX (double x,
+                       double xLow,
+                       double xHigh)
 {
-  setRect (x - PADDLE_WIDTH / 2,
+  // Convert to screen coordinates
+  double xScene = m_sceneWidth * (x - xLow) / (xHigh - xLow);
+
+  setRect (xScene - PADDLE_WIDTH / 2,
            m_yCenter - PADDLE_HEIGHT / 2,
            PADDLE_WIDTH,
            PADDLE_HEIGHT);
 
-  m_divider->setLine (x,
+  m_divider->setLine (xScene,
                       -SLOP,
-                      x,
+                      xScene,
                       2 * SLOP + m_sceneHeight);
   if (m_isLowerBoundary) {
     m_shadedArea->setRect (-SLOP,
                            -SLOP,
-                           SLOP + x,
+                           SLOP + xScene,
                            2 * SLOP + m_sceneHeight);
   } else {
-    m_shadedArea->setRect (x,
+    m_shadedArea->setRect (xScene,
                            -SLOP,
-                           m_sceneWidth + SLOP - x,
+                           m_sceneWidth + SLOP - xScene,
                            2 * SLOP + m_sceneHeight);
   }
 }

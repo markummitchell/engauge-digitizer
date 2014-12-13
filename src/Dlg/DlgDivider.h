@@ -30,7 +30,9 @@ public:
   virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
   /// Set the position by specifying the new x coordinate.
-  void setX (int x);
+  void setX (double x,
+             double xLow,
+             double xHigh);
 
 private:
   DlgDivider ();
