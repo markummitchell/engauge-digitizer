@@ -4,6 +4,7 @@
 #include "FilterParameter.h"
 #include <QObject>
 #include <QPixmap>
+#include <QTimer>
 
 /// Class for processing new filter settings. This is based on http://blog.debao.me/2013/08/how-to-use-qworker-in-the-right-way-part-1/
 class DlgFilterWorker : public QObject
@@ -20,6 +21,9 @@ public slots:
                               double low,
                               double high);
 
+private slots:
+  void slotRestartTimeout ();
+
 signals:
   /// Send a processed vertical piece of the original pixmap. The destination is between xLeft and xLeft+pixmap.width()
   void signalTransferPiece (int xLeft,
@@ -33,6 +37,8 @@ private:
   FilterParameter m_filterParameterCurrent; // Set when processing restarts
   double m_low; // Requested/current low threshold
   double m_high; // Requested/current high threshold
+
+  QTimer m_restartTimer; // Decouple slotRestartProcessing from the processing that this class performs
 };
 
 #endif // DLG_FILTER_WORKER_H

@@ -146,6 +146,7 @@ void DlgSettingsFilter::createThread ()
 {
   m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
                                         *this);
+  m_filterThread->start(); // Now that thread is started, we can use signalApplyFilter
 }
 
 void DlgSettingsFilter::handleOk ()

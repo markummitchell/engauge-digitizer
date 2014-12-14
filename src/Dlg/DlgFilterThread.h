@@ -2,7 +2,6 @@
 #define DLG_FILTER_THREAD_H
 
 #include "DlgFilterWorker.h"
-#include "FilterParameter.h"
 #include <QObject>
 #include <QPixmap>
 #include <QThread>
@@ -31,12 +30,10 @@ private:
   DlgFilterThread();
 
   QPixmap m_pixmapOriginal;
-  FilterParameter m_filterParameterRequested; // Set by slotRestartProcessing
-  FilterParameter m_filterParameterCurrent; // Set when processing restarts
-  double m_low; // Requested/current low threshold
-  double m_high; // Requested/current high threshold
+  DlgSettingsFilter &m_dlgSettingsFilter;
 
-  DlgFilterWorker m_dlgFilterWorker;
+  // Worker must be created in the run method of this thread so it belongs to this thread rather than the GUI thread that called it
+  DlgFilterWorker *m_dlgFilterWorker;
 };
 
 #endif // DLG_FILTER_THREAD_H
