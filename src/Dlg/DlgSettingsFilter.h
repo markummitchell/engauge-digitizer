@@ -42,7 +42,7 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
-  unsigned int pixelToBin (const QColor &pixel);
+  int pixelToBin (const QColor &pixel); // Apply filter parameter to pixel. Result is signed since -1 values indicate an invalid conversion
   void updateControls();
   void updateHistogram(const QPixmap &pixmap);
   void updatePreview();

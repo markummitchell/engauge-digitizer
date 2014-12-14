@@ -175,16 +175,15 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
-unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
+int DlgSettingsFilter::pixelToBin (const QColor &pixel)
 {
-  int bin = 0; // Must be negatie since value is sometimes -1 below
+  int bin = 0;
 
   switch (m_modelFilterAfter->filterParameter()) {
     case FILTER_PARAMETER_FOREGROUND:
       bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
       if (bin < 0) {
         // Color is achromatic (r=g=b) so it has no hue
-        bin = 0;
       }
       break;
 
@@ -192,7 +191,6 @@ unsigned int DlgSettingsFilter::pixelToBin (const QColor &pixel)
       bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
       if (bin < 0) {
         // Color is achromatic (r=g=b) so it has no hue
-        bin = 0;
       }
       break;
 
@@ -293,11 +291,14 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
       if (!filter.colorCompare (rgbBackground, pixel.rgb())) {
 
         int bin = pixelToBin (pixel);
-        Q_ASSERT (0 <= bin && bin < HISTOGRAM_BINS);
-        ++(histogramBins [bin]);
+        Q_ASSERT (bin < HISTOGRAM_BINS);
+        if (bin >= 0) {
 
-        if (histogramBins [bin] > maxBinCount) {
-          maxBinCount = histogramBins [bin];
+          ++(histogramBins [bin]);
+
+          if (histogramBins [bin] > maxBinCount) {
+            maxBinCount = histogramBins [bin];
+          }
         }
       }
     }
