@@ -1,20 +1,25 @@
 #include "DlgDivider.h"
 #include <QBrush>
 #include <QCursor>
+#include <QDebug>
 #include <QGraphicsLineItem>
+#include <QGraphicsPolygonItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QPen>
 
+const double ARROW_WIDTH = 4.0;
+const double ARROW_HEIGHT = 5.0;
 const double DIVIDER_WIDTH = 0.0; // Zero value gives a concise line that is a single pixel wide
 const int PADDLE_HEIGHT = 10;
 const int PADDLE_WIDTH = 10;
 const double SHADED_AREA_OPACITY = 0.4;
 const int X_INITIAL = 0;
 const int SLOP = 2; // Pixels of shading added at each boundary to prevent a gap
-const QColor SHADED_AREA_COLOR = QColor (200, 240, 200);
-const QColor DIVIDER_COLOR = QColor (80, 200, 80);
+const QColor ARROW_COLOR (Qt::NoPen);
+const QColor SHADED_AREA_COLOR = QColor (180, 180, 180);
+const QColor DIVIDER_COLOR = QColor (200, 200, 200);
 
 DlgDivider::DlgDivider (QGraphicsScene &scene,
                         QGraphicsView &view,
@@ -46,6 +51,9 @@ DlgDivider::DlgDivider (QGraphicsScene &scene,
             QGraphicsItem::ItemSendsGeometryChanges);
   setCursor (Qt::OpenHandCursor);
   setZValue (2.0);
+
+  // Arrow on paddle
+  m_arrow = new QGraphicsPolygonItem (this);
 
   // Shaded area
   m_shadedArea = new QGraphicsRectItem (X_INITIAL,
@@ -83,21 +91,11 @@ QVariant DlgDivider::itemChange (GraphicsItemChange change, const QVariant &valu
     newPos -= m_startDragPos; // Change from absolute coordinates back to relative coordinates
 
     // Before returning newPos for the paddle, we apply its movement to the divider and shaded area
-    m_divider->setLine (newX,
-                        -SLOP,
-                        newX,
-                        2 * SLOP + m_sceneHeight);
-    if (m_isLowerBoundary) {
-      m_shadedArea->setRect (-SLOP,
-                             -SLOP,
-                             SLOP + newX,
-                             2 * SLOP + m_sceneHeight);
-    } else {
-      m_shadedArea->setRect (newX,
-                             -SLOP,
-                             m_sceneWidth + SLOP - newX,
-                             2 * SLOP + m_sceneHeight);
-    }
+    m_xScene = newX;
+    updateGeometryDivider();
+    updateGeometryNonPaddle ();
+
+    emit signalMoved(m_xScene);
 
     return newPos;
   }
@@ -117,26 +115,93 @@ void DlgDivider::setX (double x,
                        double xHigh)
 {
   // Convert to screen coordinates
-  double xScene = m_sceneWidth * (x - xLow) / (xHigh - xLow);
+  m_xScene = m_sceneWidth * (x - xLow) / (xHigh - xLow);
+  emit signalMoved (m_xScene);
 
-  setRect (xScene - PADDLE_WIDTH / 2,
+  updateGeometryPaddle ();
+  updateGeometryDivider ();
+  updateGeometryNonPaddle ();
+
+  double xLeft = rect().left() + rect().width() / 2.0 - ARROW_WIDTH / 2.0;
+  double xRight = rect().left() + rect().width() / 2.0 + ARROW_WIDTH / 2.0;
+  double yTop = rect().top() + rect().height() / 2.0 - ARROW_HEIGHT / 2.0;
+  double yMiddle = rect().top() + rect().height() / 2.0;
+  double yBottom = rect().top() + rect().height() / 2.0 + ARROW_HEIGHT / 2.0;
+  QPolygonF polygonArrow;
+  if (m_isLowerBoundary) {
+    polygonArrow.push_front (QPointF (xLeft, yTop));
+    polygonArrow.push_front (QPointF (xRight, yMiddle));
+    polygonArrow.push_front (QPointF (xLeft, yBottom));
+  } else {
+    polygonArrow.push_front (QPointF (xRight, yTop));
+    polygonArrow.push_front (QPointF (xLeft, yMiddle));
+    polygonArrow.push_front (QPointF (xRight, yBottom));
+  }
+  m_arrow->setPolygon (polygonArrow);
+  m_arrow->setPen (QPen (Qt::black));
+  m_arrow->setBrush (QBrush (ARROW_COLOR));
+}
+
+void DlgDivider::slotOtherMoved(double xSceneOther)
+{
+  m_xSceneOther = xSceneOther;
+  updateGeometryNonPaddle ();
+}
+
+void DlgDivider::updateGeometryDivider ()
+{
+  m_divider->setLine (m_xScene,
+                      -SLOP,
+                      m_xScene,
+                      2 * SLOP + m_sceneHeight);
+}
+
+void DlgDivider::updateGeometryNonPaddle()
+{
+  if (m_isLowerBoundary) {
+    if (m_xScene <= m_xSceneOther) {
+
+      // There is one unshaded region in the center
+      m_shadedArea->setRect (-SLOP,
+                             -SLOP,
+                             SLOP + m_xScene,
+                             2 * SLOP + m_sceneHeight);
+
+    } else {
+
+      // There are two unshaded regions on the two sides
+      m_shadedArea->setRect (m_xSceneOther,
+                             -SLOP,
+                             m_xScene - m_xSceneOther,
+                             2 * SLOP + m_sceneHeight);
+
+    }
+  } else {
+
+    if (m_xSceneOther <= m_xScene) {
+
+      // There are two unshaded regions on the two sides
+      m_shadedArea->setRect (m_xScene,
+                             -SLOP,
+                             SLOP + m_sceneWidth - m_xScene,
+                             2 * SLOP + m_sceneHeight);
+
+    } else {
+
+      // There is one unshaded region in the center. To prevent extra-dark shading due to having two
+      // overlapping shaded areas, this shaded area is given zero extent
+      m_shadedArea->setRect (m_xSceneOther,
+                             -SLOP,
+                             0,
+                             2 * SLOP + m_sceneHeight);
+    }
+  }
+}
+
+void DlgDivider::updateGeometryPaddle ()
+{
+  setRect (m_xScene - PADDLE_WIDTH / 2,
            m_yCenter - PADDLE_HEIGHT / 2,
            PADDLE_WIDTH,
            PADDLE_HEIGHT);
-
-  m_divider->setLine (xScene,
-                      -SLOP,
-                      xScene,
-                      2 * SLOP + m_sceneHeight);
-  if (m_isLowerBoundary) {
-    m_shadedArea->setRect (-SLOP,
-                           -SLOP,
-                           SLOP + xScene,
-                           2 * SLOP + m_sceneHeight);
-  } else {
-    m_shadedArea->setRect (xScene,
-                           -SLOP,
-                           m_sceneWidth + SLOP - xScene,
-                           2 * SLOP + m_sceneHeight);
-  }
 }

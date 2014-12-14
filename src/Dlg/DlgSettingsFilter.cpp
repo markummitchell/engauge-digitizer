@@ -87,6 +87,7 @@ void DlgSettingsFilter::createPreview (QGridLayout *layout, int &row)
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+  m_viewPreview->setRenderHint(QPainter::Antialiasing);
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 5);
 }
@@ -332,6 +333,8 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
                                  PROFILE_SCENE_WIDTH,
                                  PROFILE_SCENE_HEIGHT / 3.0,
                                  false);
+  connect (m_dividerLow, SIGNAL (signalMoved(double)), m_dividerHigh, SLOT (slotOtherMoved(double)));
+  connect (m_dividerHigh, SIGNAL (signalMoved(double)), m_dividerLow, SLOT (slotOtherMoved(double)));
 
   if (m_btnForeground->isChecked()) {
     m_dividerLow->setX (m_modelFilterAfter->foregroundLow(), FOREGROUND_MIN, FOREGROUND_MAX);

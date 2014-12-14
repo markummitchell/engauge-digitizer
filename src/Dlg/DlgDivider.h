@@ -2,9 +2,11 @@
 #define DLG_DIVIDER_H
 
 #include <QGraphicsRectItem>
+#include <QObject>
 
 class QGraphicsLineItem;
 class QGraphicsScene;
+class QGraphicsPolygonItem;
 class QGraphicsView;
 
 /// Divider that can be dragged, in a dialog QGraphicsView. Click on the paddle to drag.
@@ -12,8 +14,10 @@ class QGraphicsView;
 /// -# Paddle which is the superclass of this class, since we catch its events so dragging works
 /// -# Divider which is a vertical line
 /// -# Shaded area that extends from xAnchor to the divider
-class DlgDivider : public QGraphicsRectItem
+class DlgDivider : public QObject, public QGraphicsRectItem
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor.
   DlgDivider (QGraphicsScene &scene,
@@ -34,13 +38,29 @@ public:
              double xLow,
              double xHigh);
 
+private slots:
+  /// Notify other divider this one moved.
+  void slotOtherMoved(double xSceneOther);
+
+signals:
+  /// Receive notification from other divider so overlapping shaded areas can be reconciled.
+  void signalMoved(double xSceneOther);
+
 private:
   DlgDivider ();
 
+  // Update geoemtries since one of the dividers (this or the other) moved
+  void updateGeometryDivider ();
+  void updateGeometryNonPaddle ();
+  void updateGeometryPaddle ();
+
   QGraphicsView &m_view;
   int m_yCenter;
+  double m_xScene; // X coordinae of this divider
+  double m_xSceneOther; // X coordinate of other divider. Used when the two dividers have moved past each other so there are two unshaded areas
   QGraphicsLineItem *m_divider;
   QGraphicsRectItem *m_shadedArea;
+  QGraphicsPolygonItem *m_arrow;
   int m_sceneWidth;
   int m_sceneHeight;
   bool m_isLowerBoundary;
