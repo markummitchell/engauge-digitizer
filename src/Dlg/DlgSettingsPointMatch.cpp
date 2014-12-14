@@ -58,16 +58,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbAcceptedPointColor = new QComboBox;
   m_cmbAcceptedPointColor->setWhatsThis (tr ("Select a color for matched points that are accepted"));
-  m_cmbAcceptedPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbAcceptedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbAcceptedPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbAcceptedPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbAcceptedPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbAcceptedPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbAcceptedPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbAcceptedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbAcceptedPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  m_cmbAcceptedPointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
+  populateColorComboWithTransparent (*m_cmbAcceptedPointColor);
   connect (m_cmbAcceptedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &)));
   layout->addWidget (m_cmbAcceptedPointColor, row++, 2);
 
@@ -76,16 +67,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbRejectedPointColor = new QComboBox;
   m_cmbRejectedPointColor->setWhatsThis (tr ("Select a color for matched points that are rejected"));
-  m_cmbRejectedPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbRejectedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbRejectedPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbRejectedPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbRejectedPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbRejectedPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbRejectedPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbRejectedPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbRejectedPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  m_cmbRejectedPointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
+  populateColorComboWithTransparent (*m_cmbRejectedPointColor);
   connect (m_cmbRejectedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotRejectedPointColor (const QString &)));
   layout->addWidget (m_cmbRejectedPointColor, row++, 2);
 
@@ -94,16 +76,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 
   m_cmbCandidatePointColor = new QComboBox;
   m_cmbCandidatePointColor->setWhatsThis (tr ("Select a color for the point being decided upon"));
-  m_cmbCandidatePointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbCandidatePointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbCandidatePointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbCandidatePointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbCandidatePointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbCandidatePointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbCandidatePointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbCandidatePointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbCandidatePointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  m_cmbCandidatePointColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
+  populateColorComboWithTransparent (*m_cmbCandidatePointColor);
   connect (m_cmbCandidatePointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCandidatePointColor (const QString &)));
   layout->addWidget (m_cmbCandidatePointColor, row++, 2);
 }

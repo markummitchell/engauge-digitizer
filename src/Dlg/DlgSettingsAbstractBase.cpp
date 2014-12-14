@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
 #include "MainWindow.h"
+#include <QComboBox>
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QVBoxLayout>
@@ -65,6 +66,25 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 MainWindow &DlgSettingsAbstractBase::mainWindow ()
 {
   return m_mainWindow;
+}
+
+void DlgSettingsAbstractBase::populateColorComboWithoutTransparent (QComboBox &combo)
+{
+  combo.addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
+  combo.addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  combo.addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
+  combo.addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
+  combo.addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
+  combo.addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
+  combo.addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
+  combo.addItem ("Red", QVariant (COLOR_PALETTE_RED));
+  combo.addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+}
+
+void DlgSettingsAbstractBase::populateColorComboWithTransparent (QComboBox &combo)
+{
+  populateColorComboWithoutTransparent (combo);
+  combo.addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
 }
 
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)

@@ -82,16 +82,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
 
   m_cmbLineColor = new QComboBox;
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn along a segment"));
-  m_cmbLineColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbLineColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbLineColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbLineColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbLineColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbLineColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbLineColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  m_cmbLineColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
+  populateColorComboWithTransparent (*m_cmbLineColor);
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layout->addWidget (m_cmbLineColor, row++, 2);
 }

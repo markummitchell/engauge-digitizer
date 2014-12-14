@@ -6,6 +6,7 @@
 
 class CmdMediator;
 class MainWindow;
+class QComboBox;
 
 const int MINIMUM_DIALOG_WIDTH = 350;
 const int MINIMUM_PREVIEW_HEIGHT = 200;
@@ -49,6 +50,12 @@ protected:
 
   /// Get method for MainWindow.
   MainWindow &mainWindow ();
+
+  /// Add colors in color palette to combobox, without transparent entry at end.
+  void populateColorComboWithoutTransparent (QComboBox &combo);
+
+  /// Add colors in color palette to combobox, with transparent entry at end.
+  void populateColorComboWithTransparent (QComboBox &combo);
 
   /// Store CmdMediator for easy access by the leaf class.
   void setCmdMediator (CmdMediator &cmdMediator);

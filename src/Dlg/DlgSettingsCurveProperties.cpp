@@ -74,16 +74,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
 
   m_cmbLineColor = new QComboBox (m_groupLine);
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn between points"));
-  m_cmbLineColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbLineColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbLineColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbLineColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbLineColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbLineColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbLineColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbLineColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
-  m_cmbLineColor->addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
+  populateColorComboWithTransparent (*m_cmbLineColor);
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layoutGroup->addWidget (m_cmbLineColor, 1, 1);
 
@@ -156,15 +147,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
 
   m_cmbPointColor = new QComboBox (m_groupPoint);
   m_cmbPointColor->setWhatsThis (tr ("Select a color for the line used to draw the point shapes"));
-  m_cmbPointColor->addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbPointColor->addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  m_cmbPointColor->addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  m_cmbPointColor->addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  m_cmbPointColor->addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  m_cmbPointColor->addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  m_cmbPointColor->addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  m_cmbPointColor->addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  populateColorComboWithoutTransparent (*m_cmbPointColor);
   connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointColor (const QString &)));
   layoutGroup->addWidget (m_cmbPointColor, 3, 1);
 }
