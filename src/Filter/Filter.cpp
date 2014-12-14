@@ -1,4 +1,5 @@
 #include "Filter.h"
+#include <qmath.h>
 #include <QImage>
 
 Filter::Filter()
@@ -58,4 +59,81 @@ void Filter::mergePixelIntoColorCounts (QRgb pixel,
   if (!found) {
     colorCounts.append (entry);
   }
+}
+
+bool Filter::pixelIsOn (FilterParameter filterParameter,
+                        const QColor &pixel,
+                        QRgb rgbBackground,
+                        double low0To1,
+                        double high0To1)
+{
+  bool rtn = false;
+
+  double s = pixelToZeroToOneOrMinusOne (filterParameter,
+                                         pixel,
+                                         rgbBackground);
+  if (s >= 0.0) {
+    if (low0To1 <= high0To1) {
+
+      // Single valid range
+      rtn = (s <= low0To1) || (high0To1 <= s);
+
+    } else {
+
+      // Two ranges
+      rtn = (high0To1 <= s) && (s <= low0To1);
+
+    }
+  }
+
+  return rtn;
+}
+
+double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
+                                           const QColor &pixel,
+                                           QRgb rgbBackground)
+{
+  double s = 0.0;
+
+  switch (filterParameter) {
+    case FILTER_PARAMETER_FOREGROUND:
+      {
+        double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
+                                 pow (pixel.green() - qGreen (rgbBackground), 2) +
+                                 pow (pixel.blue()  - qBlue  (rgbBackground), 2));
+        s = distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
+      }
+      break;
+
+    case FILTER_PARAMETER_HUE:
+      {
+        s = pixel.hueF();
+        if (s < 0) {
+          // Color is achromatic (r=g=b) so it has no hue
+        }
+      }
+      break;
+
+    case FILTER_PARAMETER_INTENSITY:
+      {
+        double distance = qSqrt (pow (pixel.red(), 2) +
+                                 pow (pixel.green(), 2) +
+                                 pow (pixel.blue(), 2));
+        s = distance / qSqrt (255 * 255 + 255 * 255 + 255 * 255);
+      }
+      break;
+
+    case FILTER_PARAMETER_SATURATION:
+      s = pixel.saturationF();
+      break;
+
+    case FILTER_PARAMETER_VALUE:
+      s = pixel.valueF();
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
+
+  return s;
 }

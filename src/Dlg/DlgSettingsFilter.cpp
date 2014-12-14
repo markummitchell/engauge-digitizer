@@ -10,8 +10,10 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
+#include <QImage>
 #include <QLabel>
 #include <qmath.h>
+#include <QPixmap>
 #include <QRadioButton>
 #include <QRgb>
 #include "ViewPreview.h"
@@ -143,11 +145,19 @@ QWidget *DlgSettingsFilter::createSubPanel ()
   return subPanel;
 }
 
-void DlgSettingsFilter::createThread ()
+QRgb DlgSettingsFilter::createThread ()
 {
+  // Get background color
+  QImage image = cmdMediator().document().pixmap().toImage();
+  Filter filter;
+  QRgb rgbBackground = filter.marginColor(&image);
+
   m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
+                                        rgbBackground,
                                         *this);
   m_filterThread->start(); // Now that thread is started, we can use signalApplyFilter
+
+  return rgbBackground;
 }
 
 void DlgSettingsFilter::handleOk ()
@@ -179,65 +189,16 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_btnSaturation->setChecked (filterParameter == FILTER_PARAMETER_SATURATION);
   m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
 
-  // Get background color
-  QImage image = cmdMediator.document().pixmap().toImage();
-  Filter filter;
-  QRgb rgbBackground = filter.marginColor(&image);
-  m_scale->setBackgroundColor (rgbBackground);
+  m_scenePreview->clear();
+  m_imagePreview = cmdMediator.document().pixmap().toImage();
+  m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
 
-  createThread ();
+  QRgb rgbBackground = createThread ();
+  m_scale->setBackgroundColor (rgbBackground);
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   createThread ();
   updatePreview(); // Needs thread initialized
-}
-
-int DlgSettingsFilter::pixelToBin (const QColor &pixel,
-                                   QRgb rgbBackground)
-{
-  int bin = 0;
-
-  switch (m_modelFilterAfter->filterParameter()) {
-    case FILTER_PARAMETER_FOREGROUND:
-      {
-        double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
-                                 pow (pixel.green() - qGreen (rgbBackground), 2) +
-                                 pow (pixel.blue()  - qBlue  (rgbBackground), 2));
-        bin = distance * (HISTOGRAM_BINS - 1.0) / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
-      }
-      break;
-
-    case FILTER_PARAMETER_HUE:
-      {
-        bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
-        if (bin < 0) {
-          // Color is achromatic (r=g=b) so it has no hue
-        }
-      }
-      break;
-
-    case FILTER_PARAMETER_INTENSITY:
-      {
-        double distance = qSqrt (pow (pixel.red(), 2) +
-                                 pow (pixel.green(), 2) +
-                                 pow (pixel.blue(), 2));
-        bin = distance * (HISTOGRAM_BINS - 1.0) / qSqrt (255 * 255 + 255 * 255 + 255 * 255);
-      }
-      break;
-
-    case FILTER_PARAMETER_SATURATION:
-      bin = pixel.saturationF() * (HISTOGRAM_BINS - 1.0);
-      break;
-
-    case FILTER_PARAMETER_VALUE:
-      bin = pixel.valueF() * (HISTOGRAM_BINS - 1.0);
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
-
-  return bin;
 }
 
 void DlgSettingsFilter::slotForeground ()
@@ -277,9 +238,23 @@ void DlgSettingsFilter::slotSaturation ()
 }
 
 void DlgSettingsFilter::slotTransferPiece (int xLeft,
-                                           QPixmap pixmap)
+                                           QImage image)
 {
-  // Overwrite one piece of the processed image
+  // Overwrite one piece of the processed image. This approach is a bit slow because the entire QPixmap
+  // in the QGraphicsScene gets exchanged as part of each update, but that seems to be the only possible
+  // approach when using QGraphicsScene. If not fast enough or there is ugly flicker, we may replace
+  // QGraphicsScene by a simple QWidget and override the paint function - but that approach may get
+  // complicated when resizing the QGraphicsView
+  int xStop = xLeft + image.width ();
+  for (int xFrom = xLeft, xTo = 0; xFrom < xStop; xFrom++, xTo++) {
+    for (int y = 0; y < image.height (); y++) {
+
+      QColor pixel = image.pixel (xFrom, y);
+//shit      m_imagePreview.setPixel (xTo, y, pixel.rgb());
+    }
+  }
+
+//shit  m_sceneProfile->addPixmap (QPixmap::fromImage (m_imagePreview));
 }
 
 void DlgSettingsFilter::slotValue ()
@@ -324,10 +299,13 @@ void DlgSettingsFilter::updateHistogram()
       QColor pixel (image.pixel (x, y));
       if (!filter.colorCompare (rgbBackground, pixel.rgb())) {
 
-        int bin = pixelToBin (pixel, rgbBackground);
-        Q_ASSERT (bin < HISTOGRAM_BINS);
-        if (bin >= 0) {
+        double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterParameter(),
+                                                      pixel,
+                                                      rgbBackground);
+        Q_ASSERT (s <= 1.0);
+        if (s >= 0) {
 
+          int bin = s * (HISTOGRAM_BINS - 1.0);
           ++(histogramBins [bin]);
 
           if (histogramBins [bin] > maxBinCount) {
@@ -419,9 +397,7 @@ void DlgSettingsFilter::updatePreview ()
 
   updateHistogram();
 
-  m_scenePreview->clear();
-  m_scenePreview->addPixmap (cmdMediator().document().pixmap());
-
+  // This (indirectly) updates the preview
   emit signalApplyFilter (m_modelFilterAfter->filterParameter(),
                           m_modelFilterAfter->low(),
                           m_modelFilterAfter->high());

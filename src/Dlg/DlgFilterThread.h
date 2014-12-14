@@ -16,6 +16,7 @@ class DlgFilterThread : public QThread
 public:
   /// Single constructor.
   DlgFilterThread(const QPixmap &pixmapOriginal,
+                  QRgb rgbBackground,
                   DlgSettingsFilter &dlgSettingsFilter);
 
   /// Run this thread.
@@ -24,12 +25,14 @@ public:
 signals:
   /// Send a processed vertical piece of the original pixmap. The destination is between xLeft and xLeft+pixmap.width()
   void signalTransferPiece (int xLeft,
-                            QPixmap pixmap);
+                            QImage image);
 
 private:
   DlgFilterThread();
 
   QPixmap m_pixmapOriginal;
+  QRgb m_rgbBackground;
+
   DlgSettingsFilter &m_dlgSettingsFilter;
 
   // Worker must be created in the run method of this thread so it belongs to this thread rather than the GUI thread that called it

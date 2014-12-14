@@ -2,6 +2,7 @@
 #define FILTER_H
 
 #include "FilterColorEntry.h"
+#include "FilterParameter.h"
 #include <QList>
 #include <QRgb>
 
@@ -22,6 +23,19 @@ public:
   /// only pixels in the four borders are examined, with the results from those borders safely representing the most
   /// common color of the entire margin areas.
   QRgb marginColor(const QImage *image);
+
+  /// Return true if
+  bool pixelIsOn (FilterParameter filterParameter,
+                  const QColor &pixel,
+                  QRgb rgbBackground,
+                  double low0To1,
+                  double high0To1);
+
+  /// Return pixel converted according to the current filter parameter, normalized to zero to one. Special
+  /// case is -1 for a pixel that cannot be converted, like finding hue value for gray scale pixel
+  double pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
+                                     const QColor &pixel,
+                                     QRgb rgbBackground);
 
 private:
 

@@ -4,6 +4,7 @@
 #include "DlgSettingsAbstractBase.h"
 #include "FilterParameter.h"
 #include <QColor>
+#include <QImage>
 #include <QPixmap>
 
 class DlgFilterThread;
@@ -32,7 +33,7 @@ public:
 public slots:
   /// Receive processed piece of preview image, to be inserted at xLeft to xLeft+pixmap.width().
   void slotTransferPiece (int xLeft,
-                          QPixmap pixmap);
+                          QImage image);
 
 signals:
   /// Send filter parameters to DlgFilterThread and DlgFilterWorker for processing.
@@ -55,12 +56,7 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
-  void createThread ();
-
-  // Apply filter parameter to pixel. Result is signed since -1 values indicate an invalid conversion. Background is used
-  // for filtering by foreground
-  int pixelToBin (const QColor &pixel,
-                  QRgb rgbBackground);
+  QRgb createThread (); // Returns background color
 
   void updateControls();
   void updateHistogram();
@@ -84,6 +80,8 @@ private:
   // Apply filter parameters to preview image in a separate thread so dragging the dividers in the profile
   // will not be slowed down by the filter parameter processing
   DlgFilterThread *m_filterThread;
+
+  QImage m_imagePreview;
 
   DocumentModelFilter *m_modelFilterBefore;
   DocumentModelFilter *m_modelFilterAfter;

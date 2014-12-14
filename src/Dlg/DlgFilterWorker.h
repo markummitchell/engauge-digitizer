@@ -2,6 +2,7 @@
 #define DLG_FILTER_WORKER_H
 
 #include "FilterParameter.h"
+#include <QImage>
 #include <QObject>
 #include <QPixmap>
 #include <QTimer>
@@ -13,7 +14,8 @@ class DlgFilterWorker : public QObject
 
 public:
   /// Single constructor.
-  DlgFilterWorker(const QPixmap &pixmapOriginal);
+  DlgFilterWorker(const QPixmap &pixmapOriginal,
+                  QRgb m_rgbBackground);
 
 public slots:
   /// Start processing with a new set of parameters. Any ongoing processing is interrupted when m_filterParameter changes.
@@ -27,17 +29,22 @@ private slots:
 signals:
   /// Send a processed vertical piece of the original pixmap. The destination is between xLeft and xLeft+pixmap.width()
   void signalTransferPiece (int xLeft,
-                            QPixmap pixmap);
+                            QImage image);
 
 private:
   DlgFilterWorker();
 
-  QPixmap m_pixmapOriginal;
+  QImage m_imageOriginal; // Use QImage rather than QPixmap so we can access pixel by pixel
+  QRgb m_rgbBackground;
+
   FilterParameter m_filterParameterRequested; // Set by slotRestartProcessing
+  double m_lowRequested;
+  double m_highRequested;
   FilterParameter m_filterParameterCurrent; // Set when processing restarts
   double m_low; // Requested/current low threshold
   double m_high; // Requested/current high threshold
 
+  int m_xLeft;
   QTimer m_restartTimer; // Decouple slotRestartProcessing from the processing that this class performs
 };
 
