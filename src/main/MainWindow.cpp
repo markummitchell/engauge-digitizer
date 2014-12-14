@@ -905,11 +905,12 @@ void MainWindow::setCurrentFile (const QString &fileName)
   QString fileNameStripped = fileName;
   if (!fileName.isEmpty()) {
 
+    // Strip out common file extensions. For Windows, upper case characters are allowed
     fileNameStripped = fileNameStripped
-                       .replace(".bmp", "")
-                       .replace(".gif", "")
-                       .replace(".jpg", "")
-                       .replace(".png", "");
+                       .replace(".bmp", "", Qt::CaseInsensitive)
+                       .replace(".gif", "", Qt::CaseInsensitive)
+                       .replace(".jpg", "", Qt::CaseInsensitive)
+                       .replace(".png", "", Qt::CaseInsensitive);
     title += QString (": %1")
              .arg (fileNameStripped);
   }

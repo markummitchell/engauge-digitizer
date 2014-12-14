@@ -16,6 +16,7 @@ int DocumentModelCurves::columnCount (const QModelIndex & /* parent */) const
 
 bool DocumentModelCurves::containsCurveNameCurrent (const QString &curveName) const
 {
+  // Search for curve with matching name
   QStringList::const_iterator itr;
   for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
 

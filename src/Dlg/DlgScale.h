@@ -23,8 +23,8 @@ private:
   void paintForeground ();
   void paintHue ();
   void paintIntensity ();
-  void paintOneStep (const QColor &colorStart,
-                     const QColor &colorStop);
+  void paintOneSpectrum (const QColor &colorStart,
+                         const QColor &colorStop); // Generic processing for painting with only one spectrum
   void paintSaturation ();
   void paintValue ();
 

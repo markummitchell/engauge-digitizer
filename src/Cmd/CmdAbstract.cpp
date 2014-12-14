@@ -51,6 +51,7 @@ void CmdAbstract::redo ()
 
   }
 
+  // Invoke the leaf class redo method
   cmdRedo ();
 
   if (m_isFirstRedo) {
@@ -67,6 +68,7 @@ void CmdAbstract::undo ()
 
   Point::setIdentifierIndex (m_identifierIndexAfterRedo);
 
+  // Invoke the leaf class undo method
   cmdUndo ();
 
   Point::setIdentifierIndex (m_identifierIndexBeforeRedo);

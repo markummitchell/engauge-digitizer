@@ -22,12 +22,6 @@ public:
   /// Run this thread.
   virtual void run();
 
-public slots:
-  /// Start processing with a new set of parameters. Any ongoing processing is interrupted when m_filterParameter changes.
-  void slotRestartProcessing (FilterParameter filterParameter,
-                              double low,
-                              double high);
-
 signals:
   /// Send a processed vertical piece of the original pixmap. The destination is between xLeft and xLeft+pixmap.width()
   void signalTransferPiece (int xLeft,

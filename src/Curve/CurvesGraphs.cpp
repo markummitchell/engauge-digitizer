@@ -33,6 +33,7 @@ void CurvesGraphs::applyTransformation (const Transformation &transformation)
 
 Curve *CurvesGraphs::curveForCurveName (const QString &curveName)
 {
+  // Search for curve with matching name
   CurveList::iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
@@ -47,6 +48,7 @@ Curve *CurvesGraphs::curveForCurveName (const QString &curveName)
 
 const Curve *CurvesGraphs::curveForCurveName (const QString &curveName) const
 {
+  // Search for curve with matching name
   CurveList::const_iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
@@ -75,6 +77,7 @@ QStringList CurvesGraphs::curvesGraphsNames () const
 
 int CurvesGraphs::curvesGraphsNumPoints (const QString &curveName) const
 {
+  // Search for curve with matching name
   CurveList::const_iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
@@ -90,6 +93,7 @@ int CurvesGraphs::curvesGraphsNumPoints (const QString &curveName) const
 void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
                                               const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
+  // Search for curve with matching name
   CurveList::const_iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 

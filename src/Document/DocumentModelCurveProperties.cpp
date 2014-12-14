@@ -10,6 +10,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties()
 
 DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &document)
 {
+  // Axis curve
   const Curve &curveAxes = document.curveAxes();
   m_lineStyles [AXIS_CURVE_NAME].setCurveConnectAs (curveAxes.lineStyle().curveConnectAs());
   m_lineStyles [AXIS_CURVE_NAME].setPaletteColor(curveAxes.lineStyle().paletteColor());
@@ -19,6 +20,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
   m_pointStyles [AXIS_CURVE_NAME].setLineWidth(curveAxes.pointStyle().lineWidth());
   m_pointStyles [AXIS_CURVE_NAME].setShape(curveAxes.pointStyle().shape());
 
+  // Graph curves
   QStringList graphCurveNames = document.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
@@ -37,6 +39,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
 
 DocumentModelCurveProperties::DocumentModelCurveProperties (const DocumentModelCurveProperties &other)
 {
+  // Line styles
   LineStyles::const_iterator itrL;
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
     QString curveName = itrL.key();
@@ -44,6 +47,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const DocumentModelC
     m_lineStyles [curveName] = lineStyle;
   }
 
+  // Point styles
   PointStyles::const_iterator itrP;
   for (itrP = other.pointStyles().constBegin(); itrP != other.pointStyles().constEnd(); itrP++) {
     QString curveName = itrP.key();
@@ -54,6 +58,7 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const DocumentModelC
 
 DocumentModelCurveProperties &DocumentModelCurveProperties::operator=(const DocumentModelCurveProperties &other)
 {
+  // Line styles
   LineStyles::const_iterator itrL;
   for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
     QString curveName = itrL.key();
@@ -61,6 +66,7 @@ DocumentModelCurveProperties &DocumentModelCurveProperties::operator=(const Docu
     m_lineStyles [curveName] = lineStyle;
   }
 
+  // Point styles
   PointStyles::const_iterator itrP;
   for (itrP = other.pointStyles().constBegin(); itrP != other.pointStyles().constEnd(); itrP++) {
     QString curveName = itrP.key();
@@ -141,6 +147,7 @@ void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
 
   stream.writeStartElement("DocumentModelCurveProperties");
 
+  // Line styles
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.constBegin(); itrL != m_lineStyles.constEnd(); itrL++) {
     QString curveName = itrL.key();
@@ -149,6 +156,7 @@ void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
                         curveName);
   }
 
+  // Point styles
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.constBegin(); itrP != m_pointStyles.constEnd(); itrP++) {
     QString curveName = itrP.key();

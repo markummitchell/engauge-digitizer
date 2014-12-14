@@ -129,10 +129,15 @@ void DlgDivider::setX (double x,
   double yBottom = rect().top() + rect().height() / 2.0 + ARROW_HEIGHT / 2.0;
   QPolygonF polygonArrow;
   if (m_isLowerBoundary) {
+
+    // Draw arrow pointing to the right
     polygonArrow.push_front (QPointF (xLeft, yTop));
     polygonArrow.push_front (QPointF (xRight, yMiddle));
     polygonArrow.push_front (QPointF (xLeft, yBottom));
+
   } else {
+
+    // Draw arrow pointing to the left
     polygonArrow.push_front (QPointF (xRight, yTop));
     polygonArrow.push_front (QPointF (xLeft, yMiddle));
     polygonArrow.push_front (QPointF (xRight, yBottom));

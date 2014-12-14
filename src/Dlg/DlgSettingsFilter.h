@@ -2,6 +2,7 @@
 #define DLG_SETTINGS_FILTER_H
 
 #include "DlgSettingsAbstractBase.h"
+#include "FilterParameter.h"
 #include <QColor>
 #include <QPixmap>
 

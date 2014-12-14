@@ -39,11 +39,12 @@ void DlgScale::paintEvent (QPaintEvent *event)
 
 void DlgScale::paintForeground ()
 {
-  paintOneStep (QColor (Qt::white), QColor (Qt::black));
+  paintOneSpectrum (QColor (Qt::white), QColor (Qt::black));
 }
 
 void DlgScale::paintHue ()
 {
+  // Create one spectrum from red to green, then another from green to blue
   QLinearGradient gradientRG (QPointF (0.0,
                                        height() / 2.0),
                               QPointF (width () / 2.0,
@@ -77,11 +78,11 @@ void DlgScale::paintHue ()
 
 void DlgScale::paintIntensity ()
 {
-  paintOneStep (QColor (Qt::black), QColor (Qt::red));
+  paintOneSpectrum (QColor (Qt::black), QColor (Qt::red));
 }
 
-void DlgScale::paintOneStep (const QColor &colorStart,
-                             const QColor &colorStop)
+void DlgScale::paintOneSpectrum (const QColor &colorStart,
+                                 const QColor &colorStop)
 {
   QLinearGradient gradient (QPointF (0.0,
                                        height() / 2.0),
@@ -104,12 +105,12 @@ void DlgScale::paintOneStep (const QColor &colorStart,
 
 void DlgScale::paintSaturation ()
 {
-  paintOneStep (QColor (Qt::white), QColor (Qt::red));
+  paintOneSpectrum (QColor (Qt::white), QColor (Qt::red));
 }
 
 void DlgScale::paintValue ()
 {
-  paintOneStep (QColor (Qt::black), QColor (Qt::red));
+  paintOneSpectrum (QColor (Qt::black), QColor (Qt::red));
 }
 
 void DlgScale::setFilterParameter (FilterParameter filterParameter)

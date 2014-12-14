@@ -52,7 +52,8 @@ public:
   /// Get method for foreground lower bound.
   int foregroundLow () const;
 
-  /// High value (0-1) of foreground, hue, intensity, saturation or value according to current filter parameter.
+  /// High value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// normalized to 0 to 1.
   double high () const;
 
   /// Get method for hue higher bound.
@@ -67,7 +68,8 @@ public:
   /// Get method for intensity lower bound.
   int intensityLow () const;
 
-  /// Low value (0-1) of foreground, hue, intensity, saturation or value according to current filter parameter.
+  /// Low value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// normalized to 0 to 1.
   double low () const;
 
   /// Get method for saturation higher bound.

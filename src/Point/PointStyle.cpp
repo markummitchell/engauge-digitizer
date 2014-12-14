@@ -49,26 +49,11 @@ PointStyle PointStyle::defaultAxesCurve ()
 PointStyle PointStyle::defaultGraphCurve (int index)
 {
   PointShape shape = POINT_SHAPE_CROSS;
-  switch (index % 4) {
-    case 0:
-      shape = POINT_SHAPE_CROSS;
-      break;
-
-    case 1:
-      shape = POINT_SHAPE_X;
-      break;
-
-    case 2:
-      shape = POINT_SHAPE_DIAMOND;
-      break;
-
-    case 3:
-      shape = POINT_SHAPE_SQUARE;
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
+  static PointShape pointShapes [] = {POINT_SHAPE_CROSS,
+                                      POINT_SHAPE_X,
+                                      POINT_SHAPE_DIAMOND,
+                                      POINT_SHAPE_SQUARE};
+  shape = pointShapes [index % 4];
 
   return PointStyle (shape,
                      DEFAULT_POINT_RADIUS,

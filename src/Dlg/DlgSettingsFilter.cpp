@@ -144,7 +144,8 @@ QWidget *DlgSettingsFilter::createSubPanel ()
 
 void DlgSettingsFilter::createThread ()
 {
-  m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap());
+  m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
+                                        *this);
 }
 
 void DlgSettingsFilter::handleOk ()
@@ -255,6 +256,12 @@ void DlgSettingsFilter::slotSaturation ()
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsFilter::slotTransferPiece (int xLeft,
+                                           QPixmap pixmap)
+{
+
 }
 
 void DlgSettingsFilter::slotValue ()

@@ -46,12 +46,14 @@ void Curve::applyTransformation (const Transformation &transformation)
   QList<Point>::iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
 
+    // Get current screen coordinates
     Point &point = *itr;
     QPointF posScreen = point.posScreen();
     QPointF posGraph;
     transformation.transform (posScreen,
                               posGraph);
 
+    // Overwrite old graph coordinates
     point.setPosGraph (posGraph);
   }
 }
@@ -64,6 +66,7 @@ QString Curve::curveName () const
 void Curve::editPoint (const QPointF &posGraph,
                        const QString &identifier)
 {
+  // Search for the point with matching identifier
   QList<Point>::iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
 
@@ -186,6 +189,7 @@ QPointF Curve::positionGraph (const QString &pointIdentifier) const
 {
   QPointF posGraph;
 
+  // Search for point with matching identifier
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;
@@ -202,6 +206,7 @@ QPointF Curve::positionScreen (const QString &pointIdentifier) const
 {
   QPointF posScreen;
 
+  // Search for point with matching identifier
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;
@@ -221,6 +226,7 @@ const Points Curve::points () const
 
 void Curve::removePoint (const QString &identifier)
 {
+  // Search for point with matching identifier
   Points::iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     Point point = *itr;

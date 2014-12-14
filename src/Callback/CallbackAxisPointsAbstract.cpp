@@ -29,11 +29,13 @@ bool CallbackAxisPointsAbstract::anyColumnsRepeat (double m [3] [3], int numberC
           (m [1] [colLeft] == m [1] [colRight]) &&
           (m [2] [colLeft] == m [2] [colRight])) {
 
+        // Columns colLeft and colRight repeat each other, which means matrix cannot be inverted
         return true;
       }
     }
   }
 
+  // No columns repeat
   return false;
 }
 
@@ -71,24 +73,29 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
       {m_graphOutputs.m21 (), m_graphOutputs.m22 (), m_graphOutputs.m23 ()},
       {m_graphOutputs.m31 (), m_graphOutputs.m32 (), m_graphOutputs.m33 ()}};
 
+    // Screen coordinates
     sm [0] [m_numberAxisPoints] = posScreen.x ();
     sm [1] [m_numberAxisPoints] = posScreen.y ();
     sm [2] [m_numberAxisPoints] = 1.0;
 
+    // Graph coordinates
     gm [0] [m_numberAxisPoints] = posGraph.x ();
     gm [1] [m_numberAxisPoints] = posGraph.y ();
     gm [2] [m_numberAxisPoints] = 1.0;
 
-    // Save
+    // Save screen matrix
     m_screenInputs.setMatrix (sm [0] [0], sm [0] [1], sm [0] [2],
                               sm [1] [0], sm [1] [1], sm [1] [2],
                               sm [2] [0], sm [2] [1], sm [2] [2]);
+
+    // Save graph matrix
     m_graphOutputs.setMatrix (gm [0] [0], gm [0] [1], gm [0] [2],
                               gm [1] [0], gm [1] [1], gm [1] [2],
                               gm [2] [0], gm [2] [1], gm [2] [2]);
 
     ++m_numberAxisPoints; // Update this number before calling anyColumnsRepeat and threePointsAreCollinear
 
+    // Error checking
     if (anyColumnsRepeat (sm, m_numberAxisPoints)) {
 
       m_isError = true;
@@ -118,6 +125,7 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
 
   if (m_numberAxisPoints > 2) {
 
+    // There are enough axis points
     rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
   }
@@ -128,6 +136,8 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
 bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int numberColumns)
 {
   if (numberColumns == 3) {
+
+    // Compute determinant to determine if the three points are collinear
     QTransform t (
         m [0] [0], m [0] [1], m [0] [2],
         m [1] [0], m [1] [1], m [1] [2],
