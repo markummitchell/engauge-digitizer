@@ -43,15 +43,18 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       QPointF cursorScreenDelta (cursorScreen.x () + X_DELTA_PIXELS,
                                  cursorScreen.y () + Y_DELTA_PIXELS);
 
+      // Screen to graph
       QPointF cursorGraph, cursorGraphDelta;
       transform (cursorScreen, cursorGraph);
       transform (cursorScreenDelta, cursorGraphDelta);
 
+      // Compute graph coordinates at cursor
       double xGraph = cursorGraph.x ();
       double yGraph = cursorGraph.y ();
       xGraph = roundOffSmallValues (xGraph, m_xGraphRange);
       yGraph = roundOffSmallValues (yGraph, m_yGraphRange);
 
+      // Compute graph resolutions at cursor
       double resolutionXGraph = qAbs ((cursorGraphDelta.x () - cursorGraph.x ()) / X_DELTA_PIXELS);
       double resolutionYGraph = qAbs ((cursorGraphDelta.y () - cursorGraph.y ()) / Y_DELTA_PIXELS);
       resolutionXGraph = roundOffSmallValues (resolutionXGraph, m_xGraphRange);

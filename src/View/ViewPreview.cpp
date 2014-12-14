@@ -9,6 +9,7 @@ ViewPreview::ViewPreview(QGraphicsScene *scene,
 
 void ViewPreview::resizeEvent(QResizeEvent *event)
 {
+  // Make image fit the new window size
   fitInView (scene()->itemsBoundingRect ());
 
   QGraphicsView::resizeEvent (event);

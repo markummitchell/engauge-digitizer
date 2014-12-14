@@ -1,6 +1,5 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
-#include "DlgDivider.h"
 #include "DlgFilterThread.h"
 #include "DlgScale.h"
 #include "DlgSettingsFilter.h"
@@ -18,6 +17,7 @@
 #include <QRgb>
 #include "ViewPreview.h"
 #include "ViewProfile.h"
+#include "ViewProfileDivider.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 const int HISTOGRAM_BINS = 70;
@@ -261,7 +261,7 @@ void DlgSettingsFilter::slotSaturation ()
 void DlgSettingsFilter::slotTransferPiece (int xLeft,
                                            QPixmap pixmap)
 {
-
+  // Overwrite one piece of the processed image
 }
 
 void DlgSettingsFilter::slotValue ()
@@ -285,6 +285,7 @@ void DlgSettingsFilter::updateHistogram()
 
   m_scale->setFilterParameter (m_modelFilterAfter->filterParameter());
 
+  // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
 
   double histogramBins [HISTOGRAM_BINS];
@@ -339,18 +340,18 @@ void DlgSettingsFilter::updateHistogram()
     m_sceneProfile->addItem (line);
   }
 
-  m_dividerLow = new DlgDivider(*m_sceneProfile,
-                                *m_viewProfile,
-                                PROFILE_SCENE_WIDTH,
-                                PROFILE_SCENE_HEIGHT,
-                                PROFILE_SCENE_HEIGHT * 2.0 / 3.0,
-                                true);
-  m_dividerHigh = new DlgDivider(*m_sceneProfile,
-                                 *m_viewProfile,
-                                 PROFILE_SCENE_HEIGHT,
-                                 PROFILE_SCENE_WIDTH,
-                                 PROFILE_SCENE_HEIGHT / 3.0,
-                                 false);
+  m_dividerLow = new ViewProfileDivider(*m_sceneProfile,
+                                        *m_viewProfile,
+                                        PROFILE_SCENE_WIDTH,
+                                        PROFILE_SCENE_HEIGHT,
+                                        PROFILE_SCENE_HEIGHT * 2.0 / 3.0,
+                                        true);
+  m_dividerHigh = new ViewProfileDivider(*m_sceneProfile,
+                                         *m_viewProfile,
+                                         PROFILE_SCENE_HEIGHT,
+                                         PROFILE_SCENE_WIDTH,
+                                         PROFILE_SCENE_HEIGHT / 3.0,
+                                         false);
   connect (m_dividerLow, SIGNAL (signalMoved(double)), m_dividerHigh, SLOT (slotOtherMoved(double)));
   connect (m_dividerHigh, SIGNAL (signalMoved(double)), m_dividerLow, SLOT (slotOtherMoved(double)));
 

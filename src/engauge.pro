@@ -51,7 +51,6 @@ HEADERS  += \
     DigitizeState/DigitizeStateScale.h \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
-    Dlg/DlgDivider.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
@@ -117,7 +116,6 @@ HEADERS  += \
     View/ViewProfile.h \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
-    View/ViewProfileShades.h \
     include/ZoomFactor.h
 
 SOURCES += \
@@ -159,7 +157,6 @@ SOURCES += \
     DigitizeState/DigitizeStateScale.cpp \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
-    Dlg/DlgDivider.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
@@ -212,8 +209,7 @@ SOURCES += \
     View/ViewPreview.cpp \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
-    View/ViewProfileParameters.cpp \
-    View/ViewProfileShades.cpp
+    View/ViewProfileParameters.cpp
 
 TARGET = ../bin/engauge
 

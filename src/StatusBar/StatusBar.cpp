@@ -222,6 +222,7 @@ void StatusBar::slotZoom(int zoom)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "StatusBar::slotZoom zoom=" << zoom;
 
+  // Show string for the numeric zoom value
   switch ((ZoomFactor) zoom) {
     case ZOOM_16_TO_1:
       m_comboZoom->setCurrentText (LABEL_ZOOM_16_TO_1);

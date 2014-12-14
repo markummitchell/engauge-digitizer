@@ -6,7 +6,6 @@
 #include <QColor>
 #include <QPixmap>
 
-class DlgDivider;
 class DlgFilterThread;
 class DlgScale;
 class DocumentModelFilter;
@@ -16,6 +15,7 @@ class QLabel;
 class QRadioButton;
 class ViewPreview;
 class ViewProfile;
+class ViewProfileDivider;
 
 /// Stacked widget page for editing filtering settings.
 class DlgSettingsFilter : public DlgSettingsAbstractBase
@@ -74,8 +74,8 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
-  DlgDivider *m_dividerLow;
-  DlgDivider *m_dividerHigh;
+  ViewProfileDivider *m_dividerLow;
+  ViewProfileDivider *m_dividerHigh;
 
   // Apply filter parameters to preview image in a separate thread so dragging the dividers in the profile
   // will not be slowed down by the filter parameter processing

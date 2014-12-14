@@ -3,47 +3,70 @@
 
 #include <QGraphicsRectItem>
 #include <QObject>
-#include <QPointF>
 
-class QGraphicsRectItem;
+class QGraphicsLineItem;
 class QGraphicsScene;
-class QPainter;
-class ViewProfile;
+class QGraphicsPolygonItem;
+class QGraphicsView;
 
-/// Movable divider in ViewProfile. This displays a selectable button, with a vertical divider line.
+/// Divider that can be dragged, in a dialog QGraphicsView. Click on the paddle to drag.
+/// There are three parts:
+/// -# Paddle which is the superclass of this class, since we catch its events so dragging works
+/// -# Divider which is a vertical line
+/// -# Shaded area that extends from xAnchor to the divider
 class ViewProfileDivider : public QObject, public QGraphicsRectItem
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  explicit ViewProfileDivider(QGraphicsScene *scene,
-                              ViewProfile &viewProfile,
-                              double xCenter,
-                              double yCenter,
-                              bool isLower);
+  ViewProfileDivider (QGraphicsScene &scene,
+                      QGraphicsView &view,
+                      int sceneWidth,
+                      int sceneHeight,
+                      int yCenter,
+                      bool isLowerBoundary);
 
-  /// Limit movement to x coordinate when user drags the handle around.
-  virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+  /// Intercept changes so divider movement can be restricted to horizontal direction only.
+  virtual QVariant itemChange (GraphicsItemChange change, const QVariant &value);
 
-  /// Save starting location of itemChange movements
+  /// Save paddle position at start of click-and-drag.
   virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
-  /// Paint the handle so we can add an arrow on the inside, and add some color.
-  virtual void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+  /// Set the position by specifying the new x coordinate.
+  void setX (double x,
+             double xLow,
+             double xHigh);
+
+private slots:
+  /// Notify other divider this one moved.
+  void slotOtherMoved(double xSceneOther);
 
 signals:
-  /// Share the drag with the shades.
-  void signalDividerMoved(bool isLower, QPointF pos);
+  /// Receive notification from other divider so overlapping shaded areas can be reconciled.
+  void signalMoved(double xSceneOther);
 
 private:
-  ViewProfileDivider();
+  ViewProfileDivider ();
 
-  void createShade(double xCenter);
+  // Update geoemtries since one of the dividers (this or the other) moved
+  void updateGeometryDivider ();
+  void updateGeometryNonPaddle ();
+  void updateGeometryPaddle ();
 
-  ViewProfile &m_viewProfile;
-  QPointF m_mousePressPos; // This is used to manually implement dragging so the y coordinates can be kept constant
-  bool m_isLower;
+  QGraphicsView &m_view;
+  int m_yCenter;
+  double m_xScene; // X coordinae of this divider
+  double m_xSceneOther; // X coordinate of other divider. Used when the two dividers have moved past each other so there
+                        // are two unshaded areas
+  QGraphicsLineItem *m_divider;
+  QGraphicsRectItem *m_shadedArea;
+  QGraphicsPolygonItem *m_arrow;
+  int m_sceneWidth;
+  int m_sceneHeight;
+  bool m_isLowerBoundary;
+
+  QPointF m_startDragPos;
 };
 
 #endif // VIEW_PROFILE_DIVIDER_H
