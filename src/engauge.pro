@@ -54,7 +54,6 @@ HEADERS  += \
     Dlg/DlgEditPoint.h \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
-    Dlg/DlgScale.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
@@ -116,6 +115,7 @@ HEADERS  += \
     View/ViewProfile.h \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
+    View/ViewProfileScale.h \
     include/ZoomFactor.h
 
 SOURCES += \
@@ -160,7 +160,6 @@ SOURCES += \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
-    Dlg/DlgScale.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
@@ -209,7 +208,8 @@ SOURCES += \
     View/ViewPreview.cpp \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
-    View/ViewProfileParameters.cpp
+    View/ViewProfileParameters.cpp \
+    View/ViewProfileScale.cpp
 
 TARGET = ../bin/engauge
 

@@ -1,13 +1,13 @@
-#include "DlgScale.h"
+#include "ViewProfileScale.h"
 #include <QPainter>
 
-DlgScale::DlgScale(QWidget *parent) :
+ViewProfileScale::ViewProfileScale(QWidget *parent) :
   QLabel (parent),
   m_filterParameter (FILTER_PARAMETER_FOREGROUND)
 {
 }
 
-void DlgScale::paintEvent (QPaintEvent *event)
+void ViewProfileScale::paintEvent (QPaintEvent *event)
 {
   switch (m_filterParameter) {
     case FILTER_PARAMETER_FOREGROUND:
@@ -37,14 +37,22 @@ void DlgScale::paintEvent (QPaintEvent *event)
   QLabel::paintEvent (event);
 }
 
-void DlgScale::paintForeground ()
+void ViewProfileScale::paintForeground ()
 {
-  paintOneSpectrum (QColor (Qt::white), QColor (Qt::black));
+  if (qGray (m_rgbBackground) < 127) {
+    // Go from blackish to white
+    paintOneSpectrum (QColor (m_rgbBackground), QColor (Qt::white));
+  } else {
+    // Go from whitish to black
+    paintOneSpectrum (QColor (m_rgbBackground), QColor (Qt::black));
+  }
 }
 
-void DlgScale::paintHue ()
+void ViewProfileScale::paintHue ()
 {
-  // Create one spectrum from red to green, then another from green to blue
+  // Create two spectrums:
+  // 1) one spectrum from red to green
+  // 2) another from green to blue
   QLinearGradient gradientRG (QPointF (0.0,
                                        height() / 2.0),
                               QPointF (width () / 2.0,
@@ -76,12 +84,12 @@ void DlgScale::paintHue ()
                     rect().height ());
 }
 
-void DlgScale::paintIntensity ()
+void ViewProfileScale::paintIntensity ()
 {
-  paintOneSpectrum (QColor (Qt::black), QColor (Qt::red));
+  paintOneSpectrum (QColor (Qt::black), QColor (Qt::white));
 }
 
-void DlgScale::paintOneSpectrum (const QColor &colorStart,
+void ViewProfileScale::paintOneSpectrum (const QColor &colorStart,
                                  const QColor &colorStop)
 {
   QLinearGradient gradient (QPointF (0.0,
@@ -103,17 +111,22 @@ void DlgScale::paintOneSpectrum (const QColor &colorStart,
                     rect().height ());
 }
 
-void DlgScale::paintSaturation ()
+void ViewProfileScale::paintSaturation ()
 {
   paintOneSpectrum (QColor (Qt::white), QColor (Qt::red));
 }
 
-void DlgScale::paintValue ()
+void ViewProfileScale::paintValue ()
 {
   paintOneSpectrum (QColor (Qt::black), QColor (Qt::red));
 }
 
-void DlgScale::setFilterParameter (FilterParameter filterParameter)
+void ViewProfileScale::setBackgroundColor (QRgb rgbBackground)
+{
+  m_rgbBackground = rgbBackground;
+}
+
+void ViewProfileScale::setFilterParameter (FilterParameter filterParameter)
 {
   m_filterParameter = filterParameter;
   update ();

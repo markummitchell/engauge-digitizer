@@ -1,7 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
 #include "DlgFilterThread.h"
-#include "DlgScale.h"
 #include "DlgSettingsFilter.h"
 #include "Filter.h"
 #include "Logger.h"
@@ -18,6 +17,7 @@
 #include "ViewPreview.h"
 #include "ViewProfile.h"
 #include "ViewProfileDivider.h"
+#include "ViewProfileScale.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
 const int HISTOGRAM_BINS = 70;
@@ -42,16 +42,17 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
   m_btnIntensity->setWhatsThis (tr ("Filter the original image into black and white pixels using the Intensity parameter, "
                                     "to hide unimportant information and emphasize important information.\n\n"
                                     "The Intensity value of a pixel is computed from the red, green "
-                                    "and blue components as I = (R + G + B) / 3"));
+                                    "and blue components as I = squareroot (R * R + G * G + B * B)"));
   connect (m_btnIntensity, SIGNAL (released ()), this, SLOT (slotIntensity ()));
   layout->addWidget (m_btnIntensity, row++, 1);
 
   m_btnForeground = new QRadioButton ("Foreground");
   m_btnForeground->setWhatsThis (tr ("Filter the original image into black and white pixels by isolating the foreground from the background, "
                                      "to hide unimportant information and emphasize important information.\n\n"
-                                     "The background color is shown on the left side of the scale bar. All pixels with approximately "
-                                     "the background color are considered part of the background, and all other pixels are considered "
-                                     "part of the foreground"));
+                                     "The background color is shown on the left side of the scale bar.\n\n"
+                                     "The distance of any color (R, G, B) from the background color (Rb, Gb, Bb) is computed as "
+                                     "F = squareroot ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). On the left end of the "
+                                     "scale, the foreground distance value is zero, and it increases linearly to the maximum on the far right."));
   connect (m_btnForeground, SIGNAL (released ()), this, SLOT (slotForeground ()));
   layout->addWidget (m_btnForeground, row++, 1);
 
@@ -110,7 +111,7 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS, 1);
   row += PROFILE_HEIGHT_IN_ROWS;
 
-  m_scale = new DlgScale;
+  m_scale = new ViewProfileScale;
   m_scale->setWhatsThis (tr ("This read-only box displays a graphical representation of the horizontal axis in the histogram profile above."));
   m_scale->setAutoFillBackground(true);
   layout->addWidget (m_scale, row++, 3);
@@ -178,6 +179,12 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_btnSaturation->setChecked (filterParameter == FILTER_PARAMETER_SATURATION);
   m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
 
+  // Get background color
+  QImage image = cmdMediator.document().pixmap().toImage();
+  Filter filter;
+  QRgb rgbBackground = filter.marginColor(&image);
+  m_scale->setBackgroundColor (rgbBackground);
+
   createThread ();
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -185,27 +192,37 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   updatePreview(); // Needs thread initialized
 }
 
-int DlgSettingsFilter::pixelToBin (const QColor &pixel)
+int DlgSettingsFilter::pixelToBin (const QColor &pixel,
+                                   QRgb rgbBackground)
 {
   int bin = 0;
 
   switch (m_modelFilterAfter->filterParameter()) {
     case FILTER_PARAMETER_FOREGROUND:
-      bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
-      if (bin < 0) {
-        // Color is achromatic (r=g=b) so it has no hue
+      {
+        double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
+                                 pow (pixel.green() - qGreen (rgbBackground), 2) +
+                                 pow (pixel.blue()  - qBlue  (rgbBackground), 2));
+        bin = distance * (HISTOGRAM_BINS - 1.0) / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
       }
       break;
 
     case FILTER_PARAMETER_HUE:
-      bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
-      if (bin < 0) {
-        // Color is achromatic (r=g=b) so it has no hue
+      {
+        bin = pixel.hueF() * (HISTOGRAM_BINS - 1.0);
+        if (bin < 0) {
+          // Color is achromatic (r=g=b) so it has no hue
+        }
       }
       break;
 
     case FILTER_PARAMETER_INTENSITY:
-      bin = qGray (pixel.rgb()) * (HISTOGRAM_BINS - 1.0) / 255.0;
+      {
+        double distance = qSqrt (pow (pixel.red(), 2) +
+                                 pow (pixel.green(), 2) +
+                                 pow (pixel.blue(), 2));
+        bin = distance * (HISTOGRAM_BINS - 1.0) / qSqrt (255 * 255 + 255 * 255 + 255 * 255);
+      }
       break;
 
     case FILTER_PARAMETER_SATURATION:
@@ -307,7 +324,7 @@ void DlgSettingsFilter::updateHistogram()
       QColor pixel (image.pixel (x, y));
       if (!filter.colorCompare (rgbBackground, pixel.rgb())) {
 
-        int bin = pixelToBin (pixel);
+        int bin = pixelToBin (pixel, rgbBackground);
         Q_ASSERT (bin < HISTOGRAM_BINS);
         if (bin >= 0) {
 

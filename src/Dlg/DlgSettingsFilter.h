@@ -7,7 +7,6 @@
 #include <QPixmap>
 
 class DlgFilterThread;
-class DlgScale;
 class DocumentModelFilter;
 class QGraphicsScene;
 class QGridLayout;
@@ -16,6 +15,7 @@ class QRadioButton;
 class ViewPreview;
 class ViewProfile;
 class ViewProfileDivider;
+class ViewProfileScale;
 
 /// Stacked widget page for editing filtering settings.
 class DlgSettingsFilter : public DlgSettingsAbstractBase
@@ -56,7 +56,12 @@ private:
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
   void createThread ();
-  int pixelToBin (const QColor &pixel); // Apply filter parameter to pixel. Result is signed since -1 values indicate an invalid conversion
+
+  // Apply filter parameter to pixel. Result is signed since -1 values indicate an invalid conversion. Background is used
+  // for filtering by foreground
+  int pixelToBin (const QColor &pixel,
+                  QRgb rgbBackground);
+
   void updateControls();
   void updateHistogram();
   void updatePreview();
@@ -69,8 +74,7 @@ private:
 
   QGraphicsScene *m_sceneProfile;
   ViewProfile *m_viewProfile;
-
-  DlgScale *m_scale;
+  ViewProfileScale *m_scale;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

@@ -19,7 +19,7 @@ const int X_INITIAL = 0;
 const int SLOP = 2; // Pixels of shading added at each boundary to prevent a gap
 const QColor ARROW_COLOR (Qt::NoPen);
 const QColor SHADED_AREA_COLOR = QColor (220, 220, 220); // Light gray
-const QColor DIVIDER_COLOR = QColor (200, 200, 200); // Slightly darker gray
+const QColor DIVIDER_COLOR = QColor (140, 140, 255); // Slightly darker gray
 
 ViewProfileDivider::ViewProfileDivider (QGraphicsScene &scene,
                                         QGraphicsView &view,
@@ -122,11 +122,13 @@ void ViewProfileDivider::setX (double x,
   updateGeometryDivider ();
   updateGeometryNonPaddle ();
 
+  // Triangle vertices
   double xLeft = rect().left() + rect().width() / 2.0 - ARROW_WIDTH / 2.0;
   double xRight = rect().left() + rect().width() / 2.0 + ARROW_WIDTH / 2.0;
   double yTop = rect().top() + rect().height() / 2.0 - ARROW_HEIGHT / 2.0;
   double yMiddle = rect().top() + rect().height() / 2.0;
   double yBottom = rect().top() + rect().height() / 2.0 + ARROW_HEIGHT / 2.0;
+
   QPolygonF polygonArrow;
   if (m_isLowerBoundary) {
 
