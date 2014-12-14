@@ -6,6 +6,7 @@
 #include <QPixmap>
 
 class DlgDivider;
+class DlgScale;
 class DocumentModelFilter;
 class QGraphicsScene;
 class QGridLayout;
@@ -55,7 +56,7 @@ private:
   QGraphicsScene *m_sceneProfile;
   ViewProfile *m_viewProfile;
 
-  QLabel *m_scale;
+  DlgScale *m_scale;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

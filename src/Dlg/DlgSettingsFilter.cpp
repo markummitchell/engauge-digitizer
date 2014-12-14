@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
 #include "DlgDivider.h"
+#include "DlgScale.h"
 #include "DlgSettingsFilter.h"
 #include "Filter.h"
 #include "Logger.h"
@@ -108,10 +109,9 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS, 1);
   row += PROFILE_HEIGHT_IN_ROWS;
 
-  m_scale = new QLabel;
+  m_scale = new DlgScale;
   m_scale->setWhatsThis (tr ("This read-only box displays a graphical representation of the horizontal axis in the histogram profile above."));
   m_scale->setAutoFillBackground(true);
-  m_scale->setPalette (QPalette (Qt::red));
   layout->addWidget (m_scale, row++, 3);
 }
 
@@ -269,6 +269,8 @@ void DlgSettingsFilter::updateControls ()
 void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
 {
   m_sceneProfile->clear();
+
+  m_scale->setFilterParameter (m_modelFilterAfter->filterParameter());
 
   QImage image = pixmap.toImage();
 
