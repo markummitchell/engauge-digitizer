@@ -70,6 +70,35 @@ int DocumentModelFilter::foregroundLow () const
   return m_foregroundLow;
 }
 
+double DocumentModelFilter::high () const
+{
+  switch (m_filterParameter)
+  {
+    case FILTER_PARAMETER_FOREGROUND:
+      return (double) (m_foregroundHigh - FOREGROUND_LOW_DEFAULT) /
+          (double) (FOREGROUND_HIGH_DEFAULT - FOREGROUND_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_HUE:
+      return (double) (m_hueHigh - HUE_LOW_DEFAULT) /
+          ((double) HUE_HIGH_DEFAULT - HUE_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_INTENSITY:
+      return (double) (m_intensityHigh - INTENSITY_LOW_DEFAULT) /
+          (double) (INTENSITY_HIGH_DEFAULT - INTENSITY_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_SATURATION:
+      return (double) (m_saturationHigh - SATURATION_LOW_DEFAULT) /
+          (double) (SATURATION_HIGH_DEFAULT - SATURATION_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_VALUE:
+      return (double) (m_valueHigh - VALUE_LOW_DEFAULT) /
+          (double) (VALUE_HIGH_DEFAULT - VALUE_LOW_DEFAULT);
+
+    default:
+      Q_ASSERT (false);
+  }
+}
+
 int DocumentModelFilter::hueHigh () const
 {
   return m_hueHigh;
@@ -88,6 +117,35 @@ int DocumentModelFilter::intensityHigh () const
 int DocumentModelFilter::intensityLow () const
 {
   return m_intensityLow;
+}
+
+double DocumentModelFilter::low () const
+{
+  switch (m_filterParameter)
+  {
+    case FILTER_PARAMETER_FOREGROUND:
+      return (double) (m_foregroundLow - FOREGROUND_LOW_DEFAULT) /
+          (double) (FOREGROUND_HIGH_DEFAULT - FOREGROUND_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_HUE:
+      return (double) (m_hueLow - HUE_LOW_DEFAULT) /
+          ((double) HUE_HIGH_DEFAULT - HUE_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_INTENSITY:
+      return (double) (m_intensityLow - INTENSITY_LOW_DEFAULT) /
+          (double) (INTENSITY_HIGH_DEFAULT - INTENSITY_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_SATURATION:
+      return (double) (m_saturationLow - SATURATION_LOW_DEFAULT) /
+          (double) (SATURATION_HIGH_DEFAULT - SATURATION_LOW_DEFAULT);
+
+    case FILTER_PARAMETER_VALUE:
+      return (double) (m_valueLow - VALUE_LOW_DEFAULT) /
+          (double) (VALUE_HIGH_DEFAULT - VALUE_LOW_DEFAULT);
+
+    default:
+      Q_ASSERT (false);
+  }
 }
 
 int DocumentModelFilter::saturationHigh () const

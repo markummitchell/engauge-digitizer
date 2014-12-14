@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
 #include "DlgDivider.h"
+#include "DlgFilterThread.h"
 #include "DlgScale.h"
 #include "DlgSettingsFilter.h"
 #include "Filter.h"
@@ -141,6 +142,11 @@ QWidget *DlgSettingsFilter::createSubPanel ()
   return subPanel;
 }
 
+void DlgSettingsFilter::createThread ()
+{
+  m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap());
+}
+
 void DlgSettingsFilter::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::handleOk";
@@ -170,9 +176,11 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_btnSaturation->setChecked (filterParameter == FILTER_PARAMETER_SATURATION);
   m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
 
+  createThread ();
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
-  updatePreview();
+  createThread ();
+  updatePreview(); // Needs thread initialized
 }
 
 int DlgSettingsFilter::pixelToBin (const QColor &pixel)
@@ -264,13 +272,13 @@ void DlgSettingsFilter::updateControls ()
 
 }
 
-void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
+void DlgSettingsFilter::updateHistogram()
 {
   m_sceneProfile->clear();
 
   m_scale->setFilterParameter (m_modelFilterAfter->filterParameter());
 
-  QImage image = pixmap.toImage();
+  QImage image = cmdMediator().document().pixmap().toImage();
 
   double histogramBins [HISTOGRAM_BINS];
 
@@ -359,9 +367,14 @@ void DlgSettingsFilter::updateHistogram(const QPixmap &pixmap)
 
 void DlgSettingsFilter::updatePreview ()
 {
-  QPixmap pixmap = cmdMediator().document().pixmap();
-  updateHistogram(pixmap);
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettings::updatePreview";
+
+  updateHistogram();
 
   m_scenePreview->clear();
-  m_scenePreview->addPixmap (pixmap);
+  m_scenePreview->addPixmap (cmdMediator().document().pixmap());
+
+  emit signalApplyFilter (m_modelFilterAfter->filterParameter(),
+                          m_modelFilterAfter->low(),
+                          m_modelFilterAfter->high());
 }

@@ -6,6 +6,7 @@
 #include <QPixmap>
 
 class DlgDivider;
+class DlgFilterThread;
 class DlgScale;
 class DocumentModelFilter;
 class QGraphicsScene;
@@ -27,6 +28,17 @@ public:
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 
+public slots:
+  /// Receive processed piece of preview image, to be inserted at xLeft to xLeft+pixmap.width().
+  void slotTransferPiece (int xLeft,
+                          QPixmap pixmap);
+
+signals:
+  /// Send filter parameters to DlgFilterThread and DlgFilterWorker for processing.
+  void signalApplyFilter (FilterParameter filterParameter,
+                          double low,
+                          double high);
+
 private slots:
   void slotForeground();
   void slotHue();
@@ -42,9 +54,10 @@ private:
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
+  void createThread ();
   int pixelToBin (const QColor &pixel); // Apply filter parameter to pixel. Result is signed since -1 values indicate an invalid conversion
   void updateControls();
-  void updateHistogram(const QPixmap &pixmap);
+  void updateHistogram();
   void updatePreview();
 
   QRadioButton *m_btnIntensity;
@@ -62,6 +75,10 @@ private:
   ViewPreview *m_viewPreview;
   DlgDivider *m_dividerLow;
   DlgDivider *m_dividerHigh;
+
+  // Apply filter parameters to preview image in a separate thread so dragging the dividers in the profile
+  // will not be slowed down by the filter parameter processing
+  DlgFilterThread *m_filterThread;
 
   DocumentModelFilter *m_modelFilterBefore;
   DocumentModelFilter *m_modelFilterAfter;
