@@ -43,11 +43,16 @@ private slots:
   void slotOtherMoved(double xSceneOther);
 
 signals:
-  /// Receive notification from other divider so overlapping shaded areas can be reconciled.
-  void signalMoved(double xSceneOther);
+  /// Signal used when divider is dragged and m_isLowerBoundary is true.
+  void signalMovedLow (double xSceneOther);
+
+  /// Signal used when divider is dragged and m_isLowerBoundary is false.
+  void signalMovedHigh (double xSceneOther);
 
 private:
   ViewProfileDivider ();
+
+  void sendSignalMoved ();
 
   // Update geoemtries since one of the dividers (this or the other) moved
   void updateGeometryDivider ();

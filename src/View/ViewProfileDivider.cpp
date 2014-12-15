@@ -95,7 +95,7 @@ QVariant ViewProfileDivider::itemChange (GraphicsItemChange change, const QVaria
     updateGeometryDivider();
     updateGeometryNonPaddle ();
 
-    emit signalMoved(m_xScene);
+    sendSignalMoved ();
 
     return newPos;
   }
@@ -110,13 +110,22 @@ void ViewProfileDivider::mousePressEvent(QGraphicsSceneMouseEvent * /* event */)
                             rect().y () + rect().height () / 2.0);
 }
 
+void ViewProfileDivider::sendSignalMoved ()
+{
+  if (m_isLowerBoundary) {
+    emit signalMovedLow (m_xScene);
+  } else {
+    emit signalMovedHigh (m_xScene);
+  }
+}
+
 void ViewProfileDivider::setX (double x,
                                double xLow,
                                double xHigh)
 {
   // Convert to screen coordinates
   m_xScene = m_sceneWidth * (x - xLow) / (xHigh - xLow);
-  emit signalMoved (m_xScene);
+  sendSignalMoved ();
 
   updateGeometryPaddle ();
   updateGeometryDivider ();

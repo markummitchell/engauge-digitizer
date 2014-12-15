@@ -42,6 +42,8 @@ signals:
                           double high);
 
 private slots:
+  void slotDividerHigh (double);
+  void slotDividerLow (double);
   void slotForeground();
   void slotHue();
   void slotIntensity();

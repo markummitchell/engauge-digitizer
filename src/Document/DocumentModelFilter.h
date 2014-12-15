@@ -89,6 +89,9 @@ public:
   /// Set method for foreground lower bound.
   void setForegroundLow (int foregroundLow);
 
+  /// Set the high value for the current filter parameter.
+  void setHigh (double s0To1);
+
   /// Set method for hue higher bound.
   void setHueHigh (int hueHigh);
 
@@ -100,6 +103,9 @@ public:
 
   /// Set method for intensity lower bound.
   void setIntensityLow (int intensityLow);
+
+  /// Set the low value for the current filter parameter.
+  void setLow (double s0To1);
 
   /// Set method for saturation high.
   void setSaturationHigh (int saturationHigh);

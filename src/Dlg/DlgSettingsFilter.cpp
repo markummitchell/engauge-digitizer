@@ -201,6 +201,16 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   updatePreview(); // Needs thread initialized
 }
 
+void DlgSettingsFilter::slotDividerHigh (double xCenter)
+{
+  m_modelFilterAfter->setHigh (xCenter / (double) PROFILE_SCENE_WIDTH);
+}
+
+void DlgSettingsFilter::slotDividerLow (double xCenter)
+{
+  m_modelFilterAfter->setLow (xCenter / (double) PROFILE_SCENE_WIDTH);
+}
+
 void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
@@ -245,16 +255,19 @@ void DlgSettingsFilter::slotTransferPiece (int xLeft,
   // approach when using QGraphicsScene. If not fast enough or there is ugly flicker, we may replace
   // QGraphicsScene by a simple QWidget and override the paint function - but that approach may get
   // complicated when resizing the QGraphicsView
+  qDebug() << "shit " << m_imagePreview.width() << " " << m_imagePreview.height() << " " << xLeft
+              << image.width() << " " << image.height();
+
   int xStop = xLeft + image.width ();
-  for (int xFrom = xLeft, xTo = 0; xFrom < xStop; xFrom++, xTo++) {
+  for (int xFrom = 0, xTo = xLeft; xFrom < image.width(); xFrom++, xTo++) {
     for (int y = 0; y < image.height (); y++) {
 
       QColor pixel = image.pixel (xFrom, y);
-//shit      m_imagePreview.setPixel (xTo, y, pixel.rgb());
+      m_imagePreview.setPixel (xTo, y, pixel.rgb());
     }
   }
 
-//shit  m_sceneProfile->addPixmap (QPixmap::fromImage (m_imagePreview));
+  m_sceneProfile->addPixmap (QPixmap::fromImage (m_imagePreview));
 }
 
 void DlgSettingsFilter::slotValue ()
@@ -350,9 +363,14 @@ void DlgSettingsFilter::updateHistogram()
                                          PROFILE_SCENE_HEIGHT / 3.0,
                                          false);
 
-  // Connect the dividers since the shaded areas depend on both divides when low divider is moved to the right of the high divider
-  connect (m_dividerLow, SIGNAL (signalMoved(double)), m_dividerHigh, SLOT (slotOtherMoved(double)));
-  connect (m_dividerHigh, SIGNAL (signalMoved(double)), m_dividerLow, SLOT (slotOtherMoved(double)));
+  // Connect the dividers to each other since the shaded areas depend on both divides when low divider is
+  // moved to the right of the high divider
+  connect (m_dividerLow, SIGNAL (signalMovedLow (double)), m_dividerHigh, SLOT (slotOtherMoved(double)));
+  connect (m_dividerHigh, SIGNAL (signalMovedHigh (double)), m_dividerLow, SLOT (slotOtherMoved(double)));
+
+  // Update preview when the dividers move
+  connect (m_dividerLow, SIGNAL (signalMovedLow (double)), this, SLOT (slotDividerLow (double)));
+  connect (m_dividerHigh, SIGNAL(signalMovedHigh (double)), this, SLOT (slotDividerHigh (double)));
 
   if (m_btnForeground->isChecked()) {
 

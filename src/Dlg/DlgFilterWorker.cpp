@@ -30,7 +30,9 @@ void DlgFilterWorker::slotRestartProcessing (FilterParameter filterParameter,
   m_low = low;
   m_high = high;
 
-  m_restartTimer.start (NO_DELAY);
+  if (!m_restartTimer.isActive()) {
+    m_restartTimer.start (NO_DELAY);
+  }
 }
 
 void DlgFilterWorker::slotRestartTimeout ()
@@ -47,7 +49,10 @@ void DlgFilterWorker::slotRestartTimeout ()
 
     m_xLeft = 0;
 
-  } else {
+    // Start timer to process first piece
+    m_restartTimer.start (NO_DELAY);
+
+  } else if (m_xLeft < m_imageOriginal.width ()) {
 
     // To to process a new piece, starting at m_xLeft
     int xStop = m_xLeft + COLUMNS_PER_PIECE;
@@ -76,8 +81,11 @@ void DlgFilterWorker::slotRestartTimeout ()
 
     emit signalTransferPiece (m_xLeft,
                               imageProcessed);
+    m_xLeft += processedWidth;
 
     if (xStop < m_imageOriginal.width()) {
+
+      // Restart timer to process next piece
       m_restartTimer.start (NO_DELAY);
     }
   }

@@ -183,6 +183,34 @@ void DocumentModelFilter::setForegroundLow (int foregroundLow)
   m_foregroundLow = foregroundLow;
 }
 
+void DocumentModelFilter::setHigh (double s0To1)
+{
+  switch (m_filterParameter) {
+    case FILTER_PARAMETER_FOREGROUND:
+      setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
+      break;
+
+    case FILTER_PARAMETER_HUE:
+      setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
+      break;
+
+    case FILTER_PARAMETER_INTENSITY:
+      setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
+      break;
+
+    case FILTER_PARAMETER_SATURATION:
+      setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
+      break;
+
+    case FILTER_PARAMETER_VALUE:
+      setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
+}
+
 void DocumentModelFilter::setHueHigh (int hueHigh)
 {
   Q_ASSERT (HUE_MIN <= hueHigh && hueHigh <= HUE_MAX);
@@ -205,6 +233,34 @@ void DocumentModelFilter::setIntensityLow (int intensityLow)
 {
   Q_ASSERT (INTENSITY_MIN <= intensityLow && intensityLow <= INTENSITY_MAX);
   m_intensityLow = intensityLow;
+}
+
+void DocumentModelFilter::setLow (double s0To1)
+{
+  switch (m_filterParameter) {
+    case FILTER_PARAMETER_FOREGROUND:
+      setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
+      break;
+
+    case FILTER_PARAMETER_HUE:
+      setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
+      break;
+
+    case FILTER_PARAMETER_INTENSITY:
+      setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
+      break;
+
+    case FILTER_PARAMETER_SATURATION:
+      setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
+      break;
+
+    case FILTER_PARAMETER_VALUE:
+      setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
 }
 
 void DocumentModelFilter::setSaturationHigh (int saturationHigh)
