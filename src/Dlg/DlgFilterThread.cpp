@@ -17,7 +17,7 @@ void DlgFilterThread::run ()
 
   // Connect signal to start process
   connect (&m_dlgSettingsFilter, SIGNAL (signalApplyFilter (FilterParameter, double, double)),
-           m_dlgFilterWorker, SLOT (slotRestartProcessing (FilterParameter, double, double)));
+           m_dlgFilterWorker, SLOT (slotNewParameters (FilterParameter, double, double)));
 
   // Connect signal to return each piece of completed processing
   connect (m_dlgFilterWorker, SIGNAL (signalTransferPiece (int, QImage)),

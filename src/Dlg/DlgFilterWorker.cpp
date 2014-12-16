@@ -11,41 +11,44 @@ DlgFilterWorker::DlgFilterWorker(const QPixmap &pixmapOriginal,
                                  QRgb rgbBackground) :
   m_imageOriginal (pixmapOriginal.toImage()),
   m_rgbBackground (rgbBackground),
-  m_filterParameterRequested (NUM_FILTER_PARAMETERS),
-  m_lowRequested (-1.0),
-  m_highRequested (-1.0),
-  m_filterParameterCurrent (NUM_FILTER_PARAMETERS)
+  m_filterParameter (NUM_FILTER_PARAMETERS),
+  m_low (-1.0),
+  m_high (-1.0)
 {
   m_restartTimer.setSingleShot (false);
   connect (&m_restartTimer, SIGNAL (timeout ()), this, SLOT (slotRestartTimeout()));
 }
 
-void DlgFilterWorker::slotRestartProcessing (FilterParameter filterParameter,
-                                             double low,
-                                             double high)
+void DlgFilterWorker::slotNewParameters (FilterParameter filterParameter,
+                                         double low,
+                                         double high)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotRestartProcessing";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotNewParameters";
 
-  m_filterParameterRequested = filterParameter;
-  m_low = low;
-  m_high = high;
+  // Push onto queue
+  DlgFilterCommand command (filterParameter,
+                            low,
+                            high);
+  m_inputCommandQueue.push_back (command);
 
   if (!m_restartTimer.isActive()) {
+
+    // Timer is not currently active so start it up
     m_restartTimer.start (NO_DELAY);
   }
 }
 
 void DlgFilterWorker::slotRestartTimeout ()
 {
-  // Try to process a new piece
-  if ((m_filterParameterRequested != m_filterParameterCurrent) ||
-      (m_lowRequested != m_low) ||
-      (m_highRequested != m_high)) {
+  if (m_inputCommandQueue.count() > 0) {
+
+    DlgFilterCommand command = m_inputCommandQueue.last();
+    m_inputCommandQueue.clear ();
 
     // Start over from the left side
-    m_filterParameterCurrent = m_filterParameterRequested;
-    m_low = m_lowRequested;
-    m_high = m_highRequested;
+    m_filterParameter = command.filterParameter();
+    m_low = command.low0To1();
+    m_high = command.high0To1();
 
     m_xLeft = 0;
 
@@ -60,15 +63,18 @@ void DlgFilterWorker::slotRestartTimeout ()
       xStop = m_imageOriginal.width();
     }
 
+    // From  here on, if a new command gets pushed onto the queue then we immediately stop processing
+    // and do nothing except start the timer so we can start over after the next timeout. The goal is
+    // to not tie up the gui by emitting signalTransferPiece unnecessarily
     Filter filter;
     int processedWidth = xStop - m_xLeft;
     QImage imageProcessed (processedWidth,
                            m_imageOriginal.height(),
                            QImage::Format_RGB32);
-    for (int xFrom = m_xLeft, xTo = 0; xFrom < xStop; xFrom++, xTo++) {
-      for (int y = 0; y < m_imageOriginal.height (); y++) {
+    for (int xFrom = m_xLeft, xTo = 0; (xFrom < xStop) && (m_inputCommandQueue.count() == 0); xFrom++, xTo++) {
+      for (int y = 0; (y < m_imageOriginal.height ()) && (m_inputCommandQueue.count() == 0); y++) {
         QColor pixel = m_imageOriginal.pixel (xFrom, y);
-        bool isOn = filter.pixelIsOn (m_filterParameterCurrent,
+        bool isOn = filter.pixelIsOn (m_filterParameter,
                                       pixel,
                                       m_rgbBackground,
                                       m_low,
@@ -79,11 +85,14 @@ void DlgFilterWorker::slotRestartTimeout ()
       }
     }
 
-    emit signalTransferPiece (m_xLeft,
-                              imageProcessed);
-    m_xLeft += processedWidth;
+    if (m_inputCommandQueue.count() == 0) {
+      emit signalTransferPiece (m_xLeft,
+                                imageProcessed);
+      m_xLeft += processedWidth;
+    }
 
-    if (xStop < m_imageOriginal.width()) {
+    if ((xStop < m_imageOriginal.width()) ||
+        (m_inputCommandQueue.count () > 0)) {
 
       // Restart timer to process next piece
       m_restartTimer.start (NO_DELAY);

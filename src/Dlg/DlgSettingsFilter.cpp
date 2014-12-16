@@ -198,17 +198,20 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   createThread ();
+  updateHistogram();
   updatePreview(); // Needs thread initialized
 }
 
 void DlgSettingsFilter::slotDividerHigh (double xCenter)
 {
   m_modelFilterAfter->setHigh (xCenter / (double) PROFILE_SCENE_WIDTH);
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotDividerLow (double xCenter)
 {
   m_modelFilterAfter->setLow (xCenter / (double) PROFILE_SCENE_WIDTH);
+  updatePreview();
 }
 
 void DlgSettingsFilter::slotForeground ()
@@ -217,6 +220,7 @@ void DlgSettingsFilter::slotForeground ()
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_FOREGROUND);
   updateControls();
+  updateHistogram();
   updatePreview();
 }
 
@@ -225,6 +229,7 @@ void DlgSettingsFilter::slotHue ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_HUE);
+  updateHistogram();
   updateControls();
   updatePreview();
 }
@@ -234,6 +239,7 @@ void DlgSettingsFilter::slotIntensity ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_INTENSITY);
+  updateHistogram();
   updateControls();
   updatePreview();
 }
@@ -243,6 +249,7 @@ void DlgSettingsFilter::slotSaturation ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
+  updateHistogram();
   updateControls();
   updatePreview();
 }
@@ -255,10 +262,6 @@ void DlgSettingsFilter::slotTransferPiece (int xLeft,
   // approach when using QGraphicsScene. If not fast enough or there is ugly flicker, we may replace
   // QGraphicsScene by a simple QWidget and override the paint function - but that approach may get
   // complicated when resizing the QGraphicsView
-  qDebug() << "shit " << m_imagePreview.width() << " " << m_imagePreview.height() << " " << xLeft
-              << image.width() << " " << image.height();
-
-  int xStop = xLeft + image.width ();
   for (int xFrom = 0, xTo = xLeft; xFrom < image.width(); xFrom++, xTo++) {
     for (int y = 0; y < image.height (); y++) {
 
@@ -267,7 +270,13 @@ void DlgSettingsFilter::slotTransferPiece (int xLeft,
     }
   }
 
-  m_sceneProfile->addPixmap (QPixmap::fromImage (m_imagePreview));
+  // Remove old pixmap
+  QGraphicsItem *itemPixmap = m_scenePreview->items().at(0);
+  m_scenePreview->removeItem (itemPixmap);
+  delete itemPixmap;
+
+  // Save new pixmap. Only visible change should be the area covered by the pixels in image
+  m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
 }
 
 void DlgSettingsFilter::slotValue ()
@@ -275,6 +284,7 @@ void DlgSettingsFilter::slotValue ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_VALUE);
+  updateHistogram();
   updateControls();
   updatePreview();
 }
@@ -412,8 +422,6 @@ void DlgSettingsFilter::updateHistogram()
 void DlgSettingsFilter::updatePreview ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettings::updatePreview";
-
-  updateHistogram();
 
   // This (indirectly) updates the preview
   emit signalApplyFilter (m_modelFilterAfter->filterParameter(),
