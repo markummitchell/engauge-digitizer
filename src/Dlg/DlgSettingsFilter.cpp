@@ -22,7 +22,7 @@
 #include "ViewProfileScale.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int HISTOGRAM_BINS = 70;
+const int HISTOGRAM_BINS = 101;
 const int PROFILE_SCENE_WIDTH = 100;
 const int PROFILE_SCENE_HEIGHT = 100;
 
@@ -297,6 +297,8 @@ void DlgSettingsFilter::updateControls ()
 
 void DlgSettingsFilter::updateHistogram()
 {
+  const double PEN_WIDTH = 0.0; // Zero value gives one-pixel width at all scales
+
   m_sceneProfile->clear();
 
   m_scale->setFilterParameter (m_modelFilterAfter->filterParameter());
@@ -341,21 +343,23 @@ void DlgSettingsFilter::updateHistogram()
 
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
+  double logPixelCount = qLn (image.width() * image.height());
   for (bin = 1; bin < HISTOGRAM_BINS; bin++) {
 
     double x0 = PROFILE_SCENE_WIDTH * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
 
     // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
-    double count0 = maxBinCount - histogramBins [bin - 1] + 1; // Min value is 1 so log does not blow up
-    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * qLn (count0) / qLn (maxBinCount + 1.0);
+    double count0 = 1.0 + histogramBins [bin - 1];
+    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count0) / logPixelCount);
 
     double x1 = PROFILE_SCENE_WIDTH * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
 
     // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
-    double count1 = maxBinCount - histogramBins [bin] + 1; // Min value is 1 so log does not blow up
-    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * qLn (count1) / qLn (maxBinCount + 1.0);
+    double count1 = 1.0 + histogramBins [bin];
+    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count1) / logPixelCount);
 
     QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
+    line->setPen (QPen (QBrush (Qt::black), PEN_WIDTH));
     m_sceneProfile->addItem (line);
   }
 
