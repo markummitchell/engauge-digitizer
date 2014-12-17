@@ -52,6 +52,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgEditPoint.h \
+    Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
@@ -116,8 +117,7 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
-    include/ZoomFactor.h \
-    Dlg/DlgFilterCommand.h
+    include/ZoomFactor.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -159,6 +159,7 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgEditPoint.cpp \
+    Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
@@ -197,7 +198,6 @@ SOURCES += \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
-    main/main.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
     Point/Point.cpp \
@@ -210,8 +210,10 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileScale.cpp \
-    Dlg/DlgFilterCommand.cpp
+    View/ViewProfileScale.cpp
+
+# Main entry point for non-test
+SOURCES += main/main.cpp
 
 TARGET = ../bin/engauge
 

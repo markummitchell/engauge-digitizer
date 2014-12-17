@@ -17,19 +17,21 @@ void TestGraphCoords::cleanupTestCase ()
 
 void TestGraphCoords::initTestCase ()
 {
+  const bool DEBUG_FLAG = false;
   initializeLogging ("engauge_test",
-                     "engauge_test.log");
+                     "engauge_test.log",
+                     DEBUG_FLAG);
 
   MainWindow w;
   w.show ();
 }
 
-void TestGraphCoords::testThreeGoodPoints ()
+void TestGraphCoords::testThreeCollinearPoints ()
 {
   QVERIFY (false);
 }
 
-void TestGraphCoords::testThreeCollinearPoints ()
+void TestGraphCoords::testThreeGoodPoints ()
 {
   QVERIFY (false);
 }

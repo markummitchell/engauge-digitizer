@@ -1,0 +1,4 @@
+00:06:33.086 INFO   - DigitizeStateEmpty::begin
+00:06:33.101 INFO   - MainWindow::slotCmbBackground
+00:06:33.101 INFO   - MainWindow::updateViewedBackground
+00:06:33.136 INFO   - MainWindow::resizeEvent

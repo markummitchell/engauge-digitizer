@@ -32,11 +32,12 @@ The code takes advantage of some powerful open source toolkits:
 
 The code is architected with some important design patterns:
 
-- <b>Command pattern</b> provides Undo/redo using commands and a command stack
+- <b>Command pattern</b> provides Undo/Redo using commands and a command stack, and also provides robust data transfer
+  between threads using commands and a FIFO command queue
 - <b>Functor pattern</b> provides efficient processing of Curve and Point data from outside the Document class, without violating
   encapsulation of performed by generic iteration through the Curves with functors
 - <b>Model/View pattern</b> separates graphical object management in the GraphicsScene, and graphical presentation and interaction
-  in the GraphicsView
+  in the GraphicsView. Delegates, representing the document, interact with the Model and View
 - <b>State pattern</b> isolates each digitizing mode into one state, with a context class acting as a container and single 
   class for interfacing across the state machine boundary
 
