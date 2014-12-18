@@ -1,4 +1,5 @@
 #include "Filter.h"
+#include <QDebug>
 #include <qmath.h>
 #include <QImage>
 
@@ -76,12 +77,12 @@ bool Filter::pixelIsOn (FilterParameter filterParameter,
     if (low0To1 <= high0To1) {
 
       // Single valid range
-      rtn = (s <= low0To1) || (high0To1 <= s);
+      rtn = (low0To1 <= s) && (s <= high0To1);
 
     } else {
 
       // Two ranges
-      rtn = (high0To1 <= s) && (s <= low0To1);
+      rtn = (s <= high0To1) || (low0To1 <= s);
 
     }
   }

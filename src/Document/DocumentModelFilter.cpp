@@ -75,24 +75,24 @@ double DocumentModelFilter::high () const
   switch (m_filterParameter)
   {
     case FILTER_PARAMETER_FOREGROUND:
-      return (double) (m_foregroundHigh - FOREGROUND_LOW_DEFAULT) /
-          (double) (FOREGROUND_HIGH_DEFAULT - FOREGROUND_LOW_DEFAULT);
+      return (double) (m_foregroundHigh - FOREGROUND_MIN) /
+          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
     case FILTER_PARAMETER_HUE:
-      return (double) (m_hueHigh - HUE_LOW_DEFAULT) /
-          ((double) HUE_HIGH_DEFAULT - HUE_LOW_DEFAULT);
+      return (double) (m_hueHigh - HUE_MIN) /
+          ((double) HUE_MAX - HUE_MIN);
 
     case FILTER_PARAMETER_INTENSITY:
-      return (double) (m_intensityHigh - INTENSITY_LOW_DEFAULT) /
-          (double) (INTENSITY_HIGH_DEFAULT - INTENSITY_LOW_DEFAULT);
+      return (double) (m_intensityHigh - INTENSITY_MIN) /
+          (double) (INTENSITY_MAX - INTENSITY_MIN);
 
     case FILTER_PARAMETER_SATURATION:
-      return (double) (m_saturationHigh - SATURATION_LOW_DEFAULT) /
-          (double) (SATURATION_HIGH_DEFAULT - SATURATION_LOW_DEFAULT);
+      return (double) (m_saturationHigh - SATURATION_MIN) /
+          (double) (SATURATION_MAX - SATURATION_MIN);
 
     case FILTER_PARAMETER_VALUE:
-      return (double) (m_valueHigh - VALUE_LOW_DEFAULT) /
-          (double) (VALUE_HIGH_DEFAULT - VALUE_LOW_DEFAULT);
+      return (double) (m_valueHigh - VALUE_MIN) /
+          (double) (VALUE_MAX - VALUE_MIN);
 
     default:
       Q_ASSERT (false);
@@ -124,24 +124,24 @@ double DocumentModelFilter::low () const
   switch (m_filterParameter)
   {
     case FILTER_PARAMETER_FOREGROUND:
-      return (double) (m_foregroundLow - FOREGROUND_LOW_DEFAULT) /
-          (double) (FOREGROUND_HIGH_DEFAULT - FOREGROUND_LOW_DEFAULT);
+      return (double) (m_foregroundLow - FOREGROUND_MIN) /
+          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
     case FILTER_PARAMETER_HUE:
-      return (double) (m_hueLow - HUE_LOW_DEFAULT) /
-          ((double) HUE_HIGH_DEFAULT - HUE_LOW_DEFAULT);
+      return (double) (m_hueLow - HUE_MIN) /
+          ((double) HUE_MAX - HUE_MIN);
 
     case FILTER_PARAMETER_INTENSITY:
-      return (double) (m_intensityLow - INTENSITY_LOW_DEFAULT) /
-          (double) (INTENSITY_HIGH_DEFAULT - INTENSITY_LOW_DEFAULT);
+      return (double) (m_intensityLow - INTENSITY_MIN) /
+          (double) (INTENSITY_MAX - INTENSITY_MIN);
 
     case FILTER_PARAMETER_SATURATION:
-      return (double) (m_saturationLow - SATURATION_LOW_DEFAULT) /
-          (double) (SATURATION_HIGH_DEFAULT - SATURATION_LOW_DEFAULT);
+      return (double) (m_saturationLow - SATURATION_MIN) /
+          (double) (SATURATION_MAX - SATURATION_MIN);
 
     case FILTER_PARAMETER_VALUE:
-      return (double) (m_valueLow - VALUE_LOW_DEFAULT) /
-          (double) (VALUE_HIGH_DEFAULT - VALUE_LOW_DEFAULT);
+      return (double) (m_valueLow - VALUE_MIN) /
+          (double) (VALUE_MAX - VALUE_MIN);
 
     default:
       Q_ASSERT (false);

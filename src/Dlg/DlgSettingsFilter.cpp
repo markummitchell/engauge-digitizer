@@ -22,9 +22,11 @@
 #include "ViewProfileScale.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int HISTOGRAM_BINS = 101;
+const int HISTOGRAM_BINS = 100;
 const int PROFILE_SCENE_WIDTH = 100;
 const int PROFILE_SCENE_HEIGHT = 100;
+const int FIRST_NONEMPTY_BIN_AT_START = 1;
+const int LAST_NONEMPTY_BIN_AT_END = HISTOGRAM_BINS - 2;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Filter", mainWindow),
@@ -318,24 +320,26 @@ void DlgSettingsFilter::updateHistogram()
   QRgb rgbBackground = filter.marginColor(&image);
 
   // Populate histogram bins
-  double maxBinCount = 0;
+  int maxBinCount = 0;
   for (int x = 0; x < image.width(); x++) {
     for (int y = 0; y < image.height(); y++) {
       QColor pixel (image.pixel (x, y));
-      if (!filter.colorCompare (rgbBackground, pixel.rgb())) {
+      double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterParameter(),
+                                                    pixel,
+                                                    rgbBackground);
+      Q_ASSERT (s <= 1.0);
+      if (s >= 0) {
 
-        double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterParameter(),
-                                                      pixel,
-                                                      rgbBackground);
-        Q_ASSERT (s <= 1.0);
-        if (s >= 0) {
+        // Instead of mapping from s=0 through 1 to bin=0 through HISTOGRAM_BINS-1, we
+        // map it to bin=1 through HISTOGRAM_BINS-2 so first and last bin are zero. The
+        // result is a peak at the start or end is complete and easier to read
+        int bin = FIRST_NONEMPTY_BIN_AT_START + s * (LAST_NONEMPTY_BIN_AT_END - FIRST_NONEMPTY_BIN_AT_START);
+        Q_ASSERT ((FIRST_NONEMPTY_BIN_AT_START <= bin) &&
+                  (LAST_NONEMPTY_BIN_AT_END >= bin));
+        ++(histogramBins [bin]);
 
-          int bin = s * (HISTOGRAM_BINS - 1.0);
-          ++(histogramBins [bin]);
-
-          if (histogramBins [bin] > maxBinCount) {
-            maxBinCount = histogramBins [bin];
-          }
+        if (histogramBins [bin] > maxBinCount) {
+          maxBinCount = histogramBins [bin];
         }
       }
     }
@@ -343,20 +347,20 @@ void DlgSettingsFilter::updateHistogram()
 
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
-  double logPixelCount = qLn (image.width() * image.height());
+  double logMaxBinCount = qLn (maxBinCount);
   for (bin = 1; bin < HISTOGRAM_BINS; bin++) {
 
     double x0 = PROFILE_SCENE_WIDTH * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
 
-    // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+    // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
     double count0 = 1.0 + histogramBins [bin - 1];
-    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count0) / logPixelCount);
+    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count0) / logMaxBinCount);
 
     double x1 = PROFILE_SCENE_WIDTH * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
 
-    // Map 0 through maxBinCount to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+    // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
     double count1 = 1.0 + histogramBins [bin];
-    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count1) / logPixelCount);
+    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count1) / logMaxBinCount);
 
     QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
     line->setPen (QPen (QBrush (Qt::black), PEN_WIDTH));

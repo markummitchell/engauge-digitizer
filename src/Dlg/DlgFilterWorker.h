@@ -7,6 +7,7 @@
 #include <QList>
 #include <QObject>
 #include <QPixmap>
+#include <QRgb>
 #include <QTimer>
 
 typedef QList<DlgFilterCommand> FilterCommandQueue;

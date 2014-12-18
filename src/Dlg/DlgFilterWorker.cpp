@@ -23,7 +23,9 @@ void DlgFilterWorker::slotNewParameters (FilterParameter filterParameter,
                                          double low,
                                          double high)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotNewParameters";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotNewParameters filterParameter=" << filterParameter
+                              << " low=" << low
+                              << " high=" << high;
 
   // Push onto queue
   DlgFilterCommand command (filterParameter,
@@ -74,11 +76,16 @@ void DlgFilterWorker::slotRestartTimeout ()
     for (int xFrom = m_xLeft, xTo = 0; (xFrom < xStop) && (m_inputCommandQueue.count() == 0); xFrom++, xTo++) {
       for (int y = 0; (y < m_imageOriginal.height ()) && (m_inputCommandQueue.count() == 0); y++) {
         QColor pixel = m_imageOriginal.pixel (xFrom, y);
-        bool isOn = filter.pixelIsOn (m_filterParameter,
-                                      pixel,
-                                      m_rgbBackground,
-                                      m_low,
-                                      m_high);
+        bool isOn = false;
+        if (pixel.rgb() != m_rgbBackground) {
+
+          isOn = filter.pixelIsOn (m_filterParameter,
+                                   pixel,
+                                   m_rgbBackground,
+                                   m_low,
+                                   m_high);
+        }
+
         imageProcessed.setPixel (xTo, y, (isOn ?
                                           QColor (Qt::black).rgb () :
                                           QColor (Qt::white).rgb ()));
