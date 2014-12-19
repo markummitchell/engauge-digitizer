@@ -1945,7 +1945,7 @@ void MainWindow::updateControls ()
 
 void MainWindow::updateImages (const QPixmap &pixmap)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImage";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImages";
 
   removePixmaps ();
 

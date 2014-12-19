@@ -51,6 +51,16 @@ DocumentModelFilter::DocumentModelFilter(const DocumentModelFilter &other) :
 DocumentModelFilter &DocumentModelFilter::operator=(const DocumentModelFilter &other)
 {
   m_filterParameter = other.filterParameter();
+  m_intensityLow = other.intensityLow();
+  m_intensityHigh = other.intensityHigh();
+  m_foregroundLow = other.foregroundLow();
+  m_foregroundHigh = other.foregroundHigh();
+  m_hueLow = other.hueLow();
+  m_hueHigh = other.hueHigh();
+  m_saturationLow = other.saturationLow();
+  m_saturationHigh = other.saturationHigh();
+  m_valueLow = other.valueLow();
+  m_valueHigh = other.valueHigh();
 
   return *this;
 }
