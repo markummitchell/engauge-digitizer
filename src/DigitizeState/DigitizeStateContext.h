@@ -10,7 +10,6 @@ class CmdAbstractBase;
 class CmdMediator;
 class DigitizeStateAbstractBase;
 class MainWindow;
-class QGraphicsPixmapItem;
 class QUndoCommand;
 
 /// Container for all DigitizeStateAbstractBase subclasses. This functions as the context class in a standard state machine implementation
@@ -70,7 +69,7 @@ public:
   void setDragMode (QGraphicsView::DragMode dragMode);
 
   /// Set the image so QGraphicsView cursor and drag mode are accessible
-  void setImage (QGraphicsPixmapItem *item);
+  void setImageIsLoaded (bool imageIsLoaded);
 
   /// QGraphicsView for use by DigitizeStateAbstractBase subclasses
   QGraphicsView &view();
@@ -82,7 +81,7 @@ private:
 
   MainWindow &m_mainWindow;
   QGraphicsView &m_view;
-  QGraphicsPixmapItem *m_image; // Pixmap image. This is used for changing the cursor
+  bool m_imageIsLoaded; // Cursor and dragging can be affected by whether or not image is loaded
 
   QVector<DigitizeStateAbstractBase*> m_states;
   DigitizeState m_currentState;

@@ -193,7 +193,7 @@ private:
   void loadImage (const QString &fileName,
                   const QImage &image);
   bool maybeSave();
-  void removePixmap();
+  void removePixmaps();
   bool saveFile(const QString &fileName);
   void setCurrentFile(const QString &fileName);
   void setCurrentPathFromFile (const QString &fileName);
@@ -204,6 +204,7 @@ private:
   void settingsWrite ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateImages (const QPixmap &pixmap);
   void updateViewedBackground();
   void updateViewedPoints ();
 
@@ -287,7 +288,10 @@ private:
   QVBoxLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
-  QGraphicsPixmapItem *m_image;
+
+  QGraphicsPixmapItem *m_imageNone; // White background with boundary indicating the edge of the original image
+  QGraphicsPixmapItem *m_imageUnfiltered; // Original unfiltered image
+  QGraphicsPixmapItem *m_imageFiltered; // Image produced by Filter class
 
   StatusBar *m_statusBar;
   Transformation m_transformation;

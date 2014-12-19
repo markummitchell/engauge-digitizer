@@ -67,7 +67,9 @@ void DlgFilterWorker::slotRestartTimeout ()
 
     // From  here on, if a new command gets pushed onto the queue then we immediately stop processing
     // and do nothing except start the timer so we can start over after the next timeout. The goal is
-    // to not tie up the gui by emitting signalTransferPiece unnecessarily
+    // to not tie up the gui by emitting signalTransferPiece unnecessarily.
+    //
+    // This code is basically a heavily customized version of Filter::filterImage
     Filter filter;
     int processedWidth = xStop - m_xLeft;
     QImage imageProcessed (processedWidth,

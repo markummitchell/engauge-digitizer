@@ -197,11 +197,10 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
   QRgb rgbBackground = createThread ();
   m_scale->setBackgroundColor (rgbBackground);
-  updateControls();
-  enableOk (false); // Disable Ok button since there not yet any changes
   createThread ();
   updateHistogram();
   updatePreview(); // Needs thread initialized
+  enableOk (false); // Disable Ok button since there not yet any changes
 }
 
 void DlgSettingsFilter::slotDividerHigh (double xCenter)
@@ -221,7 +220,6 @@ void DlgSettingsFilter::slotForeground ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_FOREGROUND);
-  updateControls();
   updateHistogram();
   updatePreview();
 }
@@ -232,7 +230,6 @@ void DlgSettingsFilter::slotHue ()
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_HUE);
   updateHistogram();
-  updateControls();
   updatePreview();
 }
 
@@ -242,7 +239,6 @@ void DlgSettingsFilter::slotIntensity ()
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_INTENSITY);
   updateHistogram();
-  updateControls();
   updatePreview();
 }
 
@@ -252,7 +248,6 @@ void DlgSettingsFilter::slotSaturation ()
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
   updateHistogram();
-  updateControls();
   updatePreview();
 }
 
@@ -287,18 +282,15 @@ void DlgSettingsFilter::slotValue ()
 
   m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_VALUE);
   updateHistogram();
-  updateControls();
   updatePreview();
-}
-
-void DlgSettingsFilter::updateControls ()
-{
-  QImage image = cmdMediator().document().pixmap().toImage();
-
 }
 
 void DlgSettingsFilter::updateHistogram()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::updateHistogram";
+
+  enableOk (true);
+
   const double PEN_WIDTH = 0.0; // Zero value gives one-pixel width at all scales
 
   m_sceneProfile->clear();
@@ -430,6 +422,8 @@ void DlgSettingsFilter::updateHistogram()
 void DlgSettingsFilter::updatePreview ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettings::updatePreview";
+
+  enableOk (true);
 
   // This (indirectly) updates the preview
   emit signalApplyFilter (m_modelFilterAfter->filterParameter(),

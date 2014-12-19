@@ -14,6 +14,38 @@ bool Filter::colorCompare (QRgb rgb1,
   return (rgb1 & MASK) == (rgb2 & MASK);
 }
 
+void Filter::filterImage (const QImage &imageOriginal,
+                          QImage &imageFiltered,
+                          FilterParameter filterParameter,
+                          double low,
+                          double high,
+                          QRgb rgbBackground)
+{
+  Q_ASSERT (imageOriginal.width () == imageFiltered.width());
+  Q_ASSERT (imageOriginal.height() == imageFiltered.height());
+  Q_ASSERT (imageFiltered.format () == QImage::Format_RGB32);
+
+  for (int x = 0; x < imageOriginal.width(); x++) {
+    for (int y = 0; y < imageOriginal.height (); y++) {
+
+      QColor pixel = imageOriginal.pixel (x, y);
+      bool isOn = false;
+      if (pixel.rgb() != rgbBackground) {
+
+        isOn = pixelIsOn (filterParameter,
+                          pixel,
+                          rgbBackground,
+                          low,
+                          high);
+      }
+
+      imageFiltered.setPixel (x, y, (isOn ?
+                                     QColor (Qt::black).rgb () :
+                                     QColor (Qt::white).rgb ()));
+    }
+  }
+}
+
 QRgb Filter::marginColor(const QImage *image)
 {
   // Add unique colors to colors list

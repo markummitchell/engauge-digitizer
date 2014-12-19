@@ -22,6 +22,7 @@
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "ExportToFile.h"
+#include "Filter.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
@@ -67,7 +68,9 @@ MainWindow::MainWindow(QWidget *parent) :
   m_layout (0),
   m_scene (0),
   m_view (0),
-  m_image (0),
+  m_imageNone (0),
+  m_imageUnfiltered (0),
+  m_imageFiltered (0),
   m_cmdMediator (0)
 {
   setCurrentFile ("");
@@ -729,7 +732,7 @@ void MainWindow::loadFile (const QString &fileName)
     setCurrentPathFromFile (fileName);
 
     if (m_cmdMediator != 0) {
-      removePixmap();
+      removePixmaps ();
       delete m_cmdMediator;
       m_cmdMediator = 0;
     }
@@ -780,7 +783,7 @@ void MainWindow::loadImage (const QString &fileName,
   setCurrentPathFromFile (fileName);
 
   if (m_cmdMediator != 0) {
-    removePixmap();
+    removePixmaps ();
     delete m_cmdMediator;
     m_cmdMediator = 0;
   }
@@ -841,11 +844,21 @@ bool MainWindow::maybeSave()
   return true;
 }
 
-void MainWindow::removePixmap ()
+void MainWindow::removePixmaps ()
 {
-  if (m_image != 0) {
-    m_scene->removeItem (m_image);
-    m_image = 0;
+  if (m_imageNone != 0) {
+    m_scene->removeItem (m_imageNone);
+    m_imageNone = 0;
+  }
+
+  if (m_imageUnfiltered != 0) {
+    m_scene->removeItem (m_imageUnfiltered);
+    m_imageUnfiltered = 0;
+  }
+
+  if (m_imageFiltered != 0) {
+    m_scene->removeItem (m_imageFiltered);
+    m_imageFiltered = 0;
   }
 }
 
@@ -936,14 +949,10 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
 
 void MainWindow::setPixmap (const QPixmap &pixmap)
 {
-  removePixmap();
+  m_digitizeStateContext->setImageIsLoaded (true);
 
-  m_image = m_scene->addPixmap (pixmap);
-  m_image->setData (DATA_KEY_IDENTIFIER, "view");
-  m_image->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
-  m_scene->setSceneRect (m_image->boundingRect ()); // Reset or else small image after large image will be off-center
-
-  m_digitizeStateContext->setImage (m_image);
+  updateImages (pixmap);
+  updateViewedBackground ();
 }
 
 void MainWindow::settingsRead ()
@@ -1686,7 +1695,7 @@ void MainWindow::slotViewZoomFill ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomFill";
 
-  m_view->fitInView (m_image);
+  m_view->fitInView (m_imageUnfiltered);
   emit signalZoom(ZOOM_FILL);
 }
 
@@ -1934,6 +1943,46 @@ void MainWindow::updateControls ()
   m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
 }
 
+void MainWindow::updateImages (const QPixmap &pixmap)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImage";
+
+  removePixmaps ();
+
+  // Empty background
+  QPixmap pixmapNone (pixmap);
+  pixmapNone.fill (Qt::white);
+  m_imageNone = m_scene->addPixmap (pixmapNone);
+  m_imageNone->setData (DATA_KEY_IDENTIFIER, "view");
+  m_imageNone->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+
+  // Unfiltered original image
+  m_imageUnfiltered = m_scene->addPixmap (pixmap);
+  m_imageUnfiltered->setData (DATA_KEY_IDENTIFIER, "view");
+  m_imageUnfiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+
+  // Reset scene rectangle or else small image after large image will be off-center
+  m_scene->setSceneRect (m_imageUnfiltered->boundingRect ());
+
+  // Filtered image
+  Filter filter;
+  QImage imageUnfiltered (pixmap.toImage ());
+  QImage imageFiltered (pixmap.width (),
+                        pixmap.height (),
+                        QImage::Format_RGB32);
+  QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
+  filter.filterImage (imageUnfiltered,
+                      imageFiltered,
+                      cmdMediator().document().modelFilter().filterParameter(),
+                      cmdMediator().document().modelFilter().low(),
+                      cmdMediator().document().modelFilter().high(),
+                      rgbBackground);
+
+  m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
+  m_imageFiltered->setData (DATA_KEY_IDENTIFIER, "view");
+  m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+}
+
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
@@ -1969,6 +2018,8 @@ void MainWindow::updateSettingsFilter(const DocumentModelFilter &modelFilter)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsFilter";
 
   m_cmdMediator->document().setModelFilter(modelFilter);
+  updateImages (cmdMediator().document().pixmap());
+  updateViewedBackground ();
 }
 
 void MainWindow::updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
@@ -2005,24 +2056,11 @@ void MainWindow::updateViewedBackground()
 
   if (m_cmdMediator != 0) {
 
-    if (m_actionViewBackgroundFiltered->isChecked ()) {
+    BackgroundImage backgroundImage = (BackgroundImage) m_cmbBackground->currentData().toInt();
 
-      m_image->setPixmap(m_cmdMediator->pixmap ());
-
-    } else if (m_actionViewBackgroundNone->isChecked()) {
-
-      // Replace image by plain background, so boundary is still visible and useful as a reference for the points
-      QPixmap allWhite (m_cmdMediator->pixmap ());
-      allWhite.fill (Qt::white);
-      m_image->setPixmap (allWhite);
-
-    } else if (m_actionViewBackgroundOriginal->isChecked ()) {
-
-      m_image->setPixmap(m_cmdMediator->pixmap ());
-
-    } else {
-      Q_ASSERT (false);
-    }
+    m_imageNone->setVisible (backgroundImage == BACKGROUND_IMAGE_NONE);
+    m_imageUnfiltered->setVisible (backgroundImage == BACKGROUND_IMAGE_ORIGINAL);
+    m_imageFiltered->setVisible (backgroundImage == BACKGROUND_IMAGE_FILTERED);
   }
 }
 

@@ -13,7 +13,6 @@
 #include "MainWindow.h"
 #include <QApplication>
 #include <QCursor>
-#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "QtToString.h"
@@ -22,7 +21,7 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
                                            QGraphicsView &view) :
   m_mainWindow (mainWindow),
   m_view (view),
-  m_image (0),
+  m_imageIsLoaded (false),
   m_cmdMediator (0)
 {
   m_states.insert (DIGITIZE_STATE_AXIS       , new DigitizeStateAxis       (*this));
@@ -137,16 +136,16 @@ void DigitizeStateContext::setDragMode (QGraphicsView::DragMode dragMode)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateContext::setDragMode";
 
-  if (m_image != 0) {
+  if (m_imageIsLoaded) {
     m_view.setDragMode (dragMode);
   }
 }
 
-void DigitizeStateContext::setImage(QGraphicsPixmapItem *item)
+void DigitizeStateContext::setImageIsLoaded(bool imageIsLoaded)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::setImage";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::setImageIsLoaded";
 
-  m_image = item;
+  m_imageIsLoaded = imageIsLoaded;
   setCursor ();
 }
 

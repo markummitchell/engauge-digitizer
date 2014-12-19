@@ -60,7 +60,6 @@ private:
   void createProfileAndScale (QGridLayout *layout, int &row);
   QRgb createThread (); // Returns background color
 
-  void updateControls();
   void updateHistogram();
   void updatePreview();
 

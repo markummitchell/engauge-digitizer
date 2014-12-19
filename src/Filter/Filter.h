@@ -19,6 +19,14 @@ public:
   bool colorCompare (QRgb rgb1,
                      QRgb rgb2) const;
 
+  /// Filter the original image according to the specified filtering parameters.
+  void filterImage (const QImage &imageOriginal,
+                    QImage &imageFiltered,
+                    FilterParameter filterParameter,
+                    double low,
+                    double high,
+                    QRgb rgbBackground);
+
   /// Identify the margin color of the image, which is defined as the most common color in the four margins. For speed,
   /// only pixels in the four borders are examined, with the results from those borders safely representing the most
   /// common color of the entire margin areas.
