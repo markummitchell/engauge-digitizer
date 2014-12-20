@@ -77,6 +77,7 @@ GridClassifier::GridClassifier(const QPixmap &originalPixmap,
   for (int binStep = MIN_STEP_PIXELS; binStep < NUM_HISTOGRAM_BINS; binStep++) {
     for (int bin = 0; bin < NUM_HISTOGRAM_BINS; bin++) {
 
+      // Set up picket fence of evenly spaced peaks. First peak is always at bin=0
       if (bin % binStep) {
         picketFence [bin] = 1.0;
       } else {
