@@ -136,6 +136,13 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelPointMatchBefore != 0) {
+    delete m_modelPointMatchBefore;
+  }
+  if (m_modelPointMatchAfter != 0) {
+    delete m_modelPointMatchAfter;
+  }
+
   m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator.document());
   m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator.document());
 

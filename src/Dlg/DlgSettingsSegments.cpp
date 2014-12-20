@@ -141,6 +141,13 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelSegmentsBefore != 0) {
+    delete m_modelSegmentsBefore;
+  }
+  if (m_modelSegmentsAfter != 0) {
+    delete m_modelSegmentsAfter;
+  }
+
   m_modelSegmentsBefore = new DocumentModelSegments (cmdMediator.document());
   m_modelSegmentsAfter = new DocumentModelSegments (cmdMediator.document());
 

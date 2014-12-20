@@ -343,6 +343,13 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelExportBefore != 0) {
+    delete m_modelExportBefore;
+  }
+  if (m_modelExportAfter != 0) {
+    delete m_modelExportAfter;
+  }
+
   m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
   m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
 

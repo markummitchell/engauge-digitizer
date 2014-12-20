@@ -87,6 +87,10 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
                                "The X grid lines are specified using only three values at a time. For flexibility, four values "
                                "are offered so you must chose which value is disabled. Once disabled, that value is simply "
                                "updated as the other values change");
+  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableX, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotDisableX (const QString &)));
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
@@ -151,6 +155,10 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
                                "The Y grid lines are specified using only three values at a time. For flexibility, four values "
                                "are offered so you must chose which value is disabled. Once disabled, that value is simply "
                                "updated as the other values change");
+  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableY, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotDisableY (const QString &)));
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
@@ -248,6 +256,13 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelGridRemovalBefore != 0) {
+    delete m_modelGridRemovalBefore;
+  }
+  if (m_modelGridRemovalAfter != 0) {
+    delete m_modelGridRemovalAfter;
+  }
+
   m_modelGridRemovalBefore = new DocumentModelGridRemoval (cmdMediator.document());
   m_modelGridRemovalAfter = new DocumentModelGridRemoval (cmdMediator.document());
 
@@ -255,10 +270,6 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   m_editCloseDistance->setText (QString::number (m_modelGridRemovalAfter->closeDistance()));
 
-  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableX = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableX()));
   m_cmbDisableX->setCurrentIndex (indexDisableX);
 
@@ -267,10 +278,6 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_editStepX->setText(QString::number(m_modelGridRemovalAfter->stepX()));
   m_editStopX->setText(QString::number(m_modelGridRemovalAfter->stopX()));
 
-  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
   m_cmbDisableY->setCurrentIndex (indexDisableY);
 
@@ -280,6 +287,9 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_editStopY->setText(QString::number(m_modelGridRemovalAfter->stopY()));
 
   m_chkRemoveParallel->setChecked (m_modelGridRemovalAfter->removeParallelToAxes());
+
+  m_scenePreview->clear();
+  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes

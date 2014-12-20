@@ -181,6 +181,13 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelFilterBefore != 0) {
+    delete m_modelFilterBefore;
+  }
+  if (m_modelFilterAfter != 0) {
+    delete m_modelFilterAfter;
+  }
+
   m_modelFilterBefore = new DocumentModelFilter (cmdMediator.document());
   m_modelFilterAfter = new DocumentModelFilter (cmdMediator.document());
 

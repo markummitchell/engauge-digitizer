@@ -79,6 +79,10 @@ void DlgSettingsGridDisplay::createX (QGridLayout *layout,
   m_cmbDisableX->setWhatsThis (tr ("Disabled value.\n\nThe X grid lines are specified "
                                    "using only three values at a time. For flexibility, four values are offered so you must chose "
                                    "which value is disabled. Once disabled, that value is simply updated as the other values change"));
+  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableX, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (slotDisableX (const QString &)));
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
@@ -143,6 +147,10 @@ void DlgSettingsGridDisplay::createY (QGridLayout *layout,
   m_cmbDisableY->setWhatsThis (tr ("Disabled value.\n\nThe Y grid lines are specified "
                                    "using only three values at a time. For flexibility, four values are offered so you must chose "
                                    "which value is disabled. Once disabled, that value is simply updated as the other values change"));
+  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableY, SIGNAL (currentTextChanged (const QString &)), this, SLOT  (slotDisableY (const QString &)));
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
@@ -206,13 +214,16 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  if (m_modelGridDisplayBefore != 0) {
+    delete m_modelGridDisplayBefore;
+  }
+  if (m_modelGridDisplayAfter != 0) {
+    delete m_modelGridDisplayAfter;
+  }
+
   m_modelGridDisplayBefore = new DocumentModelGridDisplay (cmdMediator.document());
   m_modelGridDisplayAfter = new DocumentModelGridDisplay (cmdMediator.document());
 
-  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableX = m_cmbDisableX->findData (QVariant (m_modelGridDisplayAfter->gridCoordDisableX()));
   m_cmbDisableX->setCurrentIndex (indexDisableX);
 
@@ -221,10 +232,6 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   m_editStepX->setText(QString::number(m_modelGridDisplayAfter->stepX()));
   m_editStopX->setText(QString::number(m_modelGridDisplayAfter->stopX()));
 
-  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
   int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridDisplayAfter->gridCoordDisableY()));
   m_cmbDisableY->setCurrentIndex (indexDisableY);
 
@@ -232,6 +239,9 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   m_editStartY->setText(QString::number(m_modelGridDisplayAfter->startY()));
   m_editStepY->setText(QString::number(m_modelGridDisplayAfter->stepY()));
   m_editStopY->setText(QString::number(m_modelGridDisplayAfter->stopY()));
+
+  m_scenePreview->clear();
+  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
