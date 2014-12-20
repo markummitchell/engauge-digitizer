@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsGridDisplay.h"
+#include "CoordScale.h"
 #include "DlgSettingsGridDisplay.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -9,6 +10,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <qmath.h>
 #include "ViewPreview.h"
 
 const int COUNT_MIN = 1;
@@ -253,6 +255,7 @@ void DlgSettingsGridDisplay::slotCountX(const QString &countX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountX";
 
   m_modelGridDisplayAfter->setCountX(countX.toInt());
+  updateDependentParameterX ();
   updateControls ();
   updatePreview();
 }
@@ -262,6 +265,7 @@ void DlgSettingsGridDisplay::slotCountY(const QString &countY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotCountY";
 
   m_modelGridDisplayAfter->setCountY(countY.toInt());
+  updateDependentParameterY ();
   updateControls ();
   updatePreview();
 }
@@ -272,6 +276,7 @@ void DlgSettingsGridDisplay::slotDisableX(const QString &)
 
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
   m_modelGridDisplayAfter->setGridCoordDisableX(gridCoordDisable);
+  updateDependentParameterX ();
   updateControls ();
   updatePreview();
 }
@@ -282,6 +287,7 @@ void DlgSettingsGridDisplay::slotDisableY(const QString &)
 
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
   m_modelGridDisplayAfter->setGridCoordDisableY(gridCoordDisable);
+  updateDependentParameterY ();
   updateControls ();
   updatePreview();
 }
@@ -291,6 +297,7 @@ void DlgSettingsGridDisplay::slotStartX(const QString &startX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartX";
 
   m_modelGridDisplayAfter->setStartX(startX.toDouble());
+  updateDependentParameterX ();
   updateControls ();
   updatePreview();
 }
@@ -300,6 +307,7 @@ void DlgSettingsGridDisplay::slotStartY(const QString &startY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStartY";
 
   m_modelGridDisplayAfter->setStartY(startY.toDouble());
+  updateDependentParameterY ();
   updateControls ();
   updatePreview();
 }
@@ -309,6 +317,7 @@ void DlgSettingsGridDisplay::slotStepX(const QString &stepX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepX";
 
   m_modelGridDisplayAfter->setStepX(stepX.toDouble());
+  updateDependentParameterX ();
   updateControls ();
   updatePreview();
 }
@@ -318,6 +327,7 @@ void DlgSettingsGridDisplay::slotStepY(const QString &stepY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStepY";
 
   m_modelGridDisplayAfter->setStepY(stepY.toDouble());
+  updateDependentParameterY ();
   updateControls ();
   updatePreview();
 }
@@ -327,6 +337,7 @@ void DlgSettingsGridDisplay::slotStopX(const QString &stopX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopX";
 
   m_modelGridDisplayAfter->setStopX(stopX.toDouble());
+  updateDependentParameterX ();
   updateControls ();
   updatePreview();
 }
@@ -336,6 +347,7 @@ void DlgSettingsGridDisplay::slotStopY(const QString &stopY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotStopY";
 
   m_modelGridDisplayAfter->setStopY(stopY.toDouble());
+  updateDependentParameterY ();
   updateControls ();
   updatePreview();
 }
@@ -353,6 +365,157 @@ void DlgSettingsGridDisplay::updateControls ()
   m_editStartY->setEnabled (disableY != GRID_COORD_DISABLE_START);
   m_editStepY->setEnabled (disableY != GRID_COORD_DISABLE_STEP);
   m_editStopY->setEnabled (disableY != GRID_COORD_DISABLE_STOP);
+
+  enableOk (!m_editCountX->text().isEmpty () &&
+            !m_editCountY->text().isEmpty () &&
+            !m_editStartX->text().isEmpty () &&
+            !m_editStartY->text().isEmpty () &&
+            !m_editStepX->text().isEmpty () &&
+            !m_editStepY->text().isEmpty () &&
+            !m_editStopX->text().isEmpty () &&
+            !m_editStopY->text().isEmpty ());
+}
+
+void DlgSettingsGridDisplay::updateDependentParameterX ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::updateDependentParameterX";
+
+  CoordScale coordScale = cmdMediator().document().modelCoords().coordScaleXTheta();
+  double count = m_modelGridDisplayAfter->countX ();
+  double start = m_modelGridDisplayAfter->startX ();
+  double step = m_modelGridDisplayAfter->stepX ();
+  double stop = m_modelGridDisplayAfter->stopX ();
+
+  switch (m_modelGridDisplayAfter->gridCoordDisableX())
+  {
+    case GRID_COORD_DISABLE_COUNT:
+      {
+        bool computationSucceeded = false;
+        if (coordScale == COORD_SCALE_LINEAR) {
+          if (step != 0) {
+            count = 1 + (int) (0.5 + (stop - start) / step);
+            computationSucceeded = true;
+          }
+        } else {
+          if (step > 0) {
+            count = 1 + (int) ((qLn(stop) - qLn(start)) / qLn(step));
+            computationSucceeded = true;
+          }
+        }
+        Q_ASSERT(m_editCountX != 0);
+        if (computationSucceeded) {
+          m_editCountX->setText(QString("%1").arg(count));
+          m_modelGridDisplayAfter->setCountX (count);
+        } else {
+          m_editCountX->setText ("");
+        }
+      }
+      break;
+
+    case GRID_COORD_DISABLE_START:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        start = stop - (count - 1.0) * step;
+      } else {
+        start = exp(qLn(stop) - (count - 1.0) * qLn(step));
+      }
+      Q_ASSERT(m_editStartX != 0);
+      m_editStartX->setText(QString("%1").arg(start));
+      m_modelGridDisplayAfter->setStartX (start);
+      break;
+
+    case GRID_COORD_DISABLE_STEP:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        step = (stop - start) / (count - 1.0);
+      } else {
+        step = exp((qLn(stop) - qLn(start)) / (count - 1.0));
+      }
+      Q_ASSERT(m_editStepX != 0);
+      m_editStepX->setText(QString("%1").arg(step));
+      m_modelGridDisplayAfter->setStepX (step);
+      break;
+
+    case GRID_COORD_DISABLE_STOP:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        stop = start + (count - 1.0) * step;
+      } else {
+        stop = exp(qLn(start) + (count - 1.0) * qLn(step));
+      }
+      Q_ASSERT(m_editStopX != 0);
+      m_editStopX->setText(QString("%1").arg(stop));
+      m_modelGridDisplayAfter->setStopX (stop);
+      break;
+  }
+}
+
+void DlgSettingsGridDisplay::updateDependentParameterY ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::updateDependentParameterY";
+
+  CoordScale coordScale = cmdMediator().document().modelCoords().coordScaleYRadius();
+  double count = m_modelGridDisplayAfter->countY ();
+  double start = m_modelGridDisplayAfter->startY ();
+  double step = m_modelGridDisplayAfter->stepY ();
+  double stop = m_modelGridDisplayAfter->stopY ();
+
+  switch (m_modelGridDisplayAfter->gridCoordDisableY())
+  {
+    case GRID_COORD_DISABLE_COUNT:
+      {
+        bool computationSucceeded = false;
+        if (coordScale == COORD_SCALE_LINEAR) {
+          if (step != 0) {
+            count = 1 + (int) (0.5 + (stop - start) / step);
+            computationSucceeded = true;
+          }
+        } else {
+          if (step > 0) {
+            count = 1 + (int) ((qLn(stop) - qLn(start)) / qLn(step));
+            computationSucceeded = true;
+          }
+        }
+        Q_ASSERT(m_editCountY != 0);
+        if (computationSucceeded) {
+          m_editCountY->setText(QString("%1").arg(count));
+          m_modelGridDisplayAfter->setCountY (count);
+        } else {
+          m_editCountY->setText ("");
+        }
+      }
+      break;
+
+    case GRID_COORD_DISABLE_START:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        start = stop - (count - 1.0) * step;
+      } else {
+        start = exp(qLn(stop) - (count - 1.0) * qLn(step));
+      }
+      Q_ASSERT(m_editStartY != 0);
+      m_editStartY->setText(QString("%1").arg(start));
+      m_modelGridDisplayAfter->setStartY (start);
+      break;
+
+    case GRID_COORD_DISABLE_STEP:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        step = (stop - start) / (count - 1.0);
+      } else {
+        step = exp((qLn(stop) - qLn(start)) / (count - 1.0));
+      }
+      Q_ASSERT(m_editStepY != 0);
+      m_editStepY->setText(QString("%1").arg(step));
+      m_modelGridDisplayAfter->setStepY (step);
+      break;
+
+    case GRID_COORD_DISABLE_STOP:
+      if (coordScale == COORD_SCALE_LINEAR) {
+        stop = start + (count - 1.0) * step;
+      } else {
+        stop = exp(qLn(start) + (count - 1.0) * qLn(step));
+      }
+      Q_ASSERT(m_editStopY != 0);
+      m_editStopY->setText(QString("%1").arg(stop));
+      m_modelGridDisplayAfter->setStopY (stop);
+      break;
+  }
 }
 
 void DlgSettingsGridDisplay::updatePreview()

@@ -44,6 +44,8 @@ private:
   void createY (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void updateControls();
+  void updateDependentParameterX();
+  void updateDependentParameterY();
   void updatePreview();
 
   QComboBox *m_cmbDisableX;
