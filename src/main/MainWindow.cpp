@@ -27,6 +27,7 @@
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
+#include "GridClassifier.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -1877,7 +1878,16 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 
+  bool transformWasDefined = m_transformation.transformIsDefined();
+
   m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
+
+  if (m_transformation.transformIsDefined() && !transformWasDefined) {
+
+    // Initialize grid removal settings so user does not have to
+    GridClassifier gridClassifier(cmdMediator().document().pixmap(),
+                                  m_transformation);
+  }
 
   if (m_transformation.transformIsDefined()) {
     m_cmdMediator->applyTransformation (m_transformation);

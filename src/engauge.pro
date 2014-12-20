@@ -37,6 +37,7 @@ HEADERS  += \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
     Coord/CoordThetaUnits.h \
+    Correlation/Correlation.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurvesGraphs.h \
@@ -97,6 +98,7 @@ HEADERS  += \
     Graphics/GraphicsPointPolygon.h \
     Graphics/GraphicsScene.h \
     Graphics/GraphicsView.h \
+    Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
@@ -146,6 +148,7 @@ SOURCES += \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
+    Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurvesGraphs.cpp \
     Curve/CurveStyle.cpp \
@@ -195,6 +198,7 @@ SOURCES += \
     Graphics/GraphicsPointPolygon.cpp \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \
+    Grid/GridClassifier.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
@@ -218,10 +222,11 @@ SOURCES += main/main.cpp
 TARGET = ../bin/engauge
 
 QT += core gui network printsupport widgets
-LIBS += -llog4cpp
+LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \
                Cmd \
                Coord \
+               Correlation \
                Curve \
                DigitizeState \
                Dlg \
