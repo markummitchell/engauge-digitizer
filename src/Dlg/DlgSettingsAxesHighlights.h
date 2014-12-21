@@ -4,6 +4,7 @@
 #include "DlgSettingsAbstractBase.h"
 
 class DocumentModelAxesHighlights;
+class HighlightsPoint;
 class QAbstractButton;
 class QButtonGroup;
 class QComboBox;
@@ -50,6 +51,7 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+  HighlightsPoint *m_highlightsPoint;
 
   DocumentModelAxesHighlights *m_modelAxesHighlightsBefore;
   DocumentModelAxesHighlights *m_modelAxesHighlightsAfter;

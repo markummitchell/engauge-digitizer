@@ -1,7 +1,9 @@
+#include "HighlightsPoint.h"
 #include "CmdMediator.h"
 #include "CmdSettingsAxesHighlights.h"
 #include "CoordScale.h"
 #include "DlgSettingsAxesHighlights.h"
+#include "EnumsToQt.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QButtonGroup>
@@ -17,6 +19,7 @@
 
 DlgSettingsAxesHighlights::DlgSettingsAxesHighlights(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Axes Highlight", mainWindow),
+  m_highlightsPoint (0),
   m_modelAxesHighlightsBefore (0),
   m_modelAxesHighlightsAfter (0)
 {
@@ -147,7 +150,8 @@ void DlgSettingsAxesHighlights::load (CmdMediator &cmdMediator)
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
   m_scenePreview->clear();
-  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
+  m_highlightsPoint = new HighlightsPoint;
+  m_scenePreview->addItem (m_highlightsPoint);
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -194,4 +198,7 @@ void DlgSettingsAxesHighlights::updateControls ()
 
 void DlgSettingsAxesHighlights::updatePreview()
 {
+  QColor lineColor = ColorPaletteToQColor (m_modelAxesHighlightsAfter->lineColor ());
+  Q_ASSERT (m_highlightsPoint != 0);
+  m_highlightsPoint->setLineColor (lineColor);
 }

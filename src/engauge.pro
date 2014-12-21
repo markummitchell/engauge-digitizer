@@ -101,6 +101,7 @@ HEADERS  += \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
     Highlights/HighlightsMode.h \
+    Highlights/HighlightsPoint.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -200,6 +201,7 @@ SOURCES += \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
+    Highlights/HighlightsPoint.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \

@@ -656,14 +656,6 @@ void MainWindow::createScene ()
 {
   m_scene = new GraphicsScene (this);
   m_view = new GraphicsView (m_scene, *this);
-  // Skip setStatusTip here since that will overwrite much more important messages, and trigger gratuitous showing of status bar
-  m_view->setWhatsThis (tr ("Document\n\n"
-                            "After an image file is imported, or an Engauge Document opened, an image appears in this area. "
-                            "Points are added to the image.\n\n"
-                            "If the image is a graph with two axes and one or more curves, then three axis points must be "
-                            "created along those axes. Then curve points can be added along the curves.\n\n"
-                            "If the image is a map with a scale to define length, then two axis points must be "
-                            "created at either end of the scale. Then curve points can be added."));
   m_layout->addWidget (m_view);
 }
 
