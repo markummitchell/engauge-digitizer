@@ -27,6 +27,7 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class GraphicsScene;
 class GraphicsView;
+class HighlightsPoint;
 class LoadImageFromUrl;
 class QAction;
 class QActionGroup;
@@ -204,7 +205,7 @@ private:
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
   void updateAfterCommandStatusBarCoords ();
-  void updateAfterTransitionFromNoTransformToTransform();
+  void updateAfterTransitionFromNoTransformToTransform(); // Housekeeping after transformation has just been defined
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);
   void updateViewedBackground();
@@ -296,9 +297,9 @@ private:
   QGraphicsPixmapItem *m_imageFiltered; // Image produced by Filter class
 
   // One highlight line for each axis point
-  QGraphicsLineItem *m_axesHighlight0;
-  QGraphicsLineItem *m_axesHighlight1;
-  QGraphicsLineItem *m_axesHighlight2;
+  HighlightsPoint *m_axesHighlight0;
+  HighlightsPoint *m_axesHighlight1;
+  HighlightsPoint *m_axesHighlight2;
 
   StatusBar *m_statusBar;
   Transformation m_transformation;

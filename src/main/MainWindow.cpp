@@ -1,5 +1,6 @@
 #include "BackgroundImage.h"
 #include "img/bannerapp.xpm"
+#include "CallbackPositionHighlightsFromAxesPoints.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -29,6 +30,7 @@
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "GridClassifier.h"
+#include "HighlightsPoint.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -1926,9 +1928,18 @@ void MainWindow::updateAfterTransitionFromNoTransformToTransform()
                                              countY);
   cmdMediator().document().setModelGridRemoval (modelGridRemoval);
 
-  m_axesHighlight0 = new QGraphicsLineItem;
-  m_axesHighlight1 = new QGraphicsLineItem;
-  m_axesHighlight2 = new QGraphicsLineItem;
+  // Create axes highlights
+  m_axesHighlight0 = new HighlightsPoint;
+  m_axesHighlight1 = new HighlightsPoint;
+  m_axesHighlight2 = new HighlightsPoint;
+
+  CallbackPositionHighlightsFromAxesPoints ftor (m_axesHighlight0,
+                                                 m_axesHighlight1,
+                                                 m_axesHighlight2,
+                                                 m_transformation);
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackPositionHighlightsFromAxesPoints::callback);
+  cmdMediator().iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void MainWindow::updateControls ()

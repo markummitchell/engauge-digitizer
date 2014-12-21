@@ -10,6 +10,7 @@ HEADERS  += \
     Callback/CallbackAxisPointsAbstract.h \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
+    Callback/CallbackPositionHighlightsFromAxesPoints.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
@@ -128,6 +129,7 @@ SOURCES += \
     Callback/CallbackAxisPointsAbstract.cpp \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
+    Callback/CallbackPositionHighlightsFromAxesPoints.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
