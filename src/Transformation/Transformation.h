@@ -25,6 +25,10 @@ public:
   void transform (const QPointF &coordScreen,
                   QPointF &coordGraph) const;
 
+  /// Transform from graph coordinates to pixel screen coordinates
+  void transformInverse (const QPointF &coordGraph,
+                         QPointF &coordScreen) const;
+
   /// Update transform by iterating through the axis points.
   void update (bool fileIsLoaded,
                const CmdMediator &cmdMediator);

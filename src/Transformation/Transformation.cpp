@@ -93,6 +93,14 @@ void Transformation::transform (const QPointF &coordScreen,
   coordGraph = m_transform.transposed ().map (coordScreen);
 }
 
+void Transformation::transformInverse (const QPointF &coordGraph,
+                                       QPointF &coordScreen) const
+{
+  Q_ASSERT (m_transformIsDefined);
+
+  coordScreen = m_transform.map (coordGraph);
+}
+
 void Transformation::update (bool fileIsLoaded,
                              const CmdMediator &cmdMediator)
 {
