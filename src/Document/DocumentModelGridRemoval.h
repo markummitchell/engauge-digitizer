@@ -13,6 +13,14 @@ public:
   /// Default constructor.
   DocumentModelGridRemoval();
 
+  /// Constructor fed by GridClassifier.
+  DocumentModelGridRemoval (double startX,
+                            double startY,
+                            double stepX,
+                            double stepY,
+                            int countX,
+                            int countY);
+
   /// Initial constructor from Document.
   DocumentModelGridRemoval(const Document &document);
 

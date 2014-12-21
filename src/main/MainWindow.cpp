@@ -21,6 +21,7 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentModelGridRemoval.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
@@ -1885,8 +1886,24 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   if (m_transformation.transformIsDefined() && !transformWasDefined) {
 
     // Initialize grid removal settings so user does not have to
-    GridClassifier gridClassifier(cmdMediator().document().pixmap(),
-                                  m_transformation);
+    int countX, countY;
+    double startX, startY, stepX, stepY;
+    GridClassifier gridClassifier;
+    gridClassifier.classify (cmdMediator().document().pixmap(),
+                             m_transformation,
+                             countX,
+                             startX,
+                             stepX,
+                             countY,
+                             startY,
+                             stepY);
+    DocumentModelGridRemoval modelGridRemoval (startX,
+                                               startY,
+                                               stepX,
+                                               stepY,
+                                               countX,
+                                               countY);
+    cmdMediator().document().setModelGridRemoval (modelGridRemoval);
   }
 
   if (m_transformation.transformIsDefined()) {

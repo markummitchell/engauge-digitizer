@@ -26,6 +26,27 @@ DocumentModelGridRemoval::DocumentModelGridRemoval() :
 {
 }
 
+DocumentModelGridRemoval::DocumentModelGridRemoval (double startX,
+                                                    double startY,
+                                                    double stepX,
+                                                    double stepY,
+                                                    int countX,
+                                                    int countY) :
+  m_removeDefinedGridLines (false),
+  m_closeDistance (CLOSE_DISTANCE_DEFAULT),
+  m_gridCoordDisableX (GRID_COORD_DISABLE_COUNT),
+  m_countX (countX),
+  m_startX (startX),
+  m_stepX (stepX),
+  m_stopX (startX + (countX - 1.0) * stepX),
+  m_gridCoordDisableY (GRID_COORD_DISABLE_COUNT),
+  m_countY (countY),
+  m_startY (startY),
+  m_stepY (stepY),
+  m_stopY (startY + (countY - 1.0) * stepY)
+{
+}
+
 DocumentModelGridRemoval::DocumentModelGridRemoval(const Document &document) :
   m_removeDefinedGridLines (document.modelGridRemoval().removeDefinedGridLines()),
   m_closeDistance (document.modelGridRemoval().closeDistance()),

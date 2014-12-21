@@ -13,22 +13,29 @@ public:
 
   /// Return the shift in function1 that best aligns that function with function2. The functions
   /// are normalized internally.
-  void correlate (int N,
-                  double function1 [],
-                  double function2 [],
-                  int &binStepMax,
-                  double &corrMax) const;
+  void correlateWithShift (int N,
+                           const double function1 [],
+                           const double function2 [],
+                           int &binStartMax,
+                           double &corrMax) const;
+
+  /// Return the correlation of the two functions, without any shift. The functions
+  /// are normalized internally.
+  void correlateWithoutShift (int N,
+                              const double function1 [],
+                              const double function2 [],
+                              double &corrMax) const;
 
 private:
   Correlation();
 
   int m_N;
 
-  fftw_complex *m_signala_ext;
-  fftw_complex *m_signalb_ext;
-  fftw_complex *m_out_shifted;
-  fftw_complex *m_outa;
-  fftw_complex *m_outb;
+  fftw_complex *m_signalA;
+  fftw_complex *m_signalB;
+  fftw_complex *m_outShifted;
+  fftw_complex *m_outA;
+  fftw_complex *m_outB;
   fftw_complex *m_out;
 
   fftw_plan m_planA;
