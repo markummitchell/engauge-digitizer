@@ -24,12 +24,12 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
+    Cmd/CmdSettingsAxesHighlight.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
     Cmd/CmdSettingsExport.h \
     Cmd/CmdSettingsFilter.h \
-    Cmd/CmdSettingsGridDisplay.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
@@ -56,12 +56,12 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
+    Dlg/DlgSettingsAxesHighlight.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
     Dlg/DlgSettingsExport.h \
     Dlg/DlgSettingsFilter.h \
-    Dlg/DlgSettingsGridDisplay.h \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
@@ -69,13 +69,13 @@ HEADERS  += \
     Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
+    Document/DocumentModelAxesHighlight.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelCurveProperties.h \
     Document/DocumentModelCurves.h \
     Document/DocumentModelCurvesEntry.h \
     Document/DocumentModelExport.h \
     Document/DocumentModelFilter.h \
-    Document/DocumentModelGridDisplay.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -137,12 +137,12 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
+    Cmd/CmdSettingsAxesHighlight.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
     Cmd/CmdSettingsExport.cpp \
     Cmd/CmdSettingsFilter.cpp \
-    Cmd/CmdSettingsGridDisplay.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
@@ -163,12 +163,12 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
+    Dlg/DlgSettingsAxesHighlight.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
     Dlg/DlgSettingsExport.cpp \
     Dlg/DlgSettingsFilter.cpp \
-    Dlg/DlgSettingsGridDisplay.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
@@ -176,13 +176,13 @@ SOURCES += \
     Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
+    Document/DocumentModelAxesHighlight.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelCurves.cpp \
     Document/DocumentModelCurvesEntry.cpp \
     Document/DocumentModelExport.cpp \
     Document/DocumentModelFilter.cpp \
-    Document/DocumentModelGridDisplay.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \

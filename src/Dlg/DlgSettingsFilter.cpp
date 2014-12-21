@@ -181,6 +181,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Flush old data
   if (m_modelFilterBefore != 0) {
     delete m_modelFilterBefore;
   }
@@ -188,6 +189,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
     delete m_modelFilterAfter;
   }
 
+  // Save new data
   m_modelFilterBefore = new DocumentModelFilter (cmdMediator.document());
   m_modelFilterAfter = new DocumentModelFilter (cmdMediator.document());
 

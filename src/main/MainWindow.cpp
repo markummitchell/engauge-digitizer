@@ -12,12 +12,12 @@
 #include "DigitPointMatch.xpm"
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
+#include "DlgSettingsAxesHighlight.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsCurves.h"
 #include "DlgSettingsExport.h"
 #include "DlgSettingsFilter.h"
-#include "DlgSettingsGridDisplay.h"
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
@@ -306,47 +306,57 @@ void MainWindow::createActionsSettings ()
 {
   m_actionSettingsCoords = new QAction (tr ("Coordinates"), this);
   m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
-  m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings"));
+  m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings\n\n"
+                                            "Coordinate settings determine how the graph coordinates are mapped to the pixels in the image"));
   connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
 
   m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties"), this);
   m_actionSettingsCurveProperties->setStatusTip (tr ("Edit Curve Properties settings."));
-  m_actionSettingsCurveProperties->setWhatsThis (tr ("Coordinate Settings"));
+  m_actionSettingsCurveProperties->setWhatsThis (tr ("Curve Properties Settings\n\n"
+                                                     "Curves properties settings determine how each curve appears"));
   connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
 
   m_actionSettingsCurves = new QAction (tr ("Curves"), this);
   m_actionSettingsCurves->setStatusTip (tr ("Edit Curves settings."));
-  m_actionSettingsCurves->setWhatsThis (tr ("Curves Settings"));
+  m_actionSettingsCurves->setWhatsThis (tr ("Curves Settings\n\n"
+                                            "Curves settings determine which curves are included in the current document"));
   connect (m_actionSettingsCurves, SIGNAL (triggered ()), this, SLOT (slotSettingsCurves ()));
 
   m_actionSettingsExport = new QAction (tr ("Export"), this);
   m_actionSettingsExport->setStatusTip (tr ("Edit Export settings."));
-  m_actionSettingsExport->setWhatsThis (tr ("Export Settings"));
+  m_actionSettingsExport->setWhatsThis (tr ("Export Settings\n\n"
+                                            "Export settings affect how exported files are formatted"));
   connect (m_actionSettingsExport, SIGNAL (triggered ()), this, SLOT (slotSettingsExport ()));
 
   m_actionSettingsFilter = new QAction (tr ("Filter"), this);
   m_actionSettingsFilter->setStatusTip (tr ("Edit Filter settings."));
-  m_actionSettingsFilter->setWhatsThis (tr ("Filter Settings"));
+  m_actionSettingsFilter->setWhatsThis (tr ("Filter Settings\n\n"
+                                            "Filtering simplifies the graphs for easier Point Matching and Segment Filling"));
   connect (m_actionSettingsFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsFilter ()));
 
-  m_actionSettingsGridDisplay = new QAction (tr ("Grid Display"), this);
-  m_actionSettingsGridDisplay->setStatusTip (tr ("Edit Grid Display settings."));
-  m_actionSettingsGridDisplay->setWhatsThis (tr ("Grid Display Settings"));
-  connect (m_actionSettingsGridDisplay, SIGNAL (triggered ()), this, SLOT (slotSettingsGridDisplay ()));
+  m_actionSettingsAxesHighlight = new QAction (tr ("Axes Highlight"), this);
+  m_actionSettingsAxesHighlight->setStatusTip (tr ("Edit Axes Highlight settings."));
+  m_actionSettingsAxesHighlight->setWhatsThis (tr ("Axes Highlight Settings\n\n"
+                                                   "Axes highlighting usually reveals axis point mistakes that are otherwise hard to find."));
+  connect (m_actionSettingsAxesHighlight, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesHighlight ()));
 
   m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
   m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
-  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings"));
+  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings\n\n"
+                                                 "Grid removal simplifies the graphs for easier Point Matching and Segment Filling, when "
+                                                 "Filtering is not enough."));
   connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
 
   m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
   m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
-  m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings"));
+  m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings\n\n"
+                                                "Point match settings determine how points are matched while in Point Match mode"));
   connect (m_actionSettingsPointMatch, SIGNAL (triggered ()), this, SLOT (slotSettingsPointMatch ()));
 
-  m_actionSettingsSegments = new QAction (tr ("Segments"), this);
-  m_actionSettingsSegments->setStatusTip (tr ("Edit Segments settings."));
-  m_actionSettingsSegments->setWhatsThis (tr ("Segments Settings"));
+  m_actionSettingsSegments = new QAction (tr ("Segment Fill"), this);
+  m_actionSettingsSegments->setStatusTip (tr ("Edit Segment Fill settings."));
+  m_actionSettingsSegments->setWhatsThis (tr ("Segment Fill Settings\n\n"
+                                              "Segment fill settings determine how points are generated in the Segment Fill mode"));
   connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
 }
 
@@ -603,7 +613,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCurves);
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsFilter);
-  m_menuSettings->addAction (m_actionSettingsGridDisplay);
+  m_menuSettings->addAction (m_actionSettingsAxesHighlight);
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
@@ -621,7 +631,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurves = new DlgSettingsCurves (*this);
   m_dlgSettingsExport = new DlgSettingsExport (*this);
   m_dlgSettingsFilter = new DlgSettingsFilter (*this);
-  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*this);
+  m_dlgSettingsAxesHighlight = new DlgSettingsAxesHighlight (*this);
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
@@ -631,7 +641,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurves->setVisible (false);
   m_dlgSettingsExport->setVisible (false);
   m_dlgSettingsFilter->setVisible (false);
-  m_dlgSettingsGridDisplay->setVisible (false);
+  m_dlgSettingsAxesHighlight->setVisible (false);
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
@@ -1448,12 +1458,12 @@ void MainWindow::slotSettingsFilter ()
   m_dlgSettingsFilter->show ();
 }
 
-void MainWindow::slotSettingsGridDisplay ()
+void MainWindow::slotSettingsAxesHighlight ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
-  m_dlgSettingsGridDisplay->load (*m_cmdMediator);
-  m_dlgSettingsGridDisplay->show ();
+  m_dlgSettingsAxesHighlight->load (*m_cmdMediator);
+  m_dlgSettingsAxesHighlight->show ();
 }
 
 void MainWindow::slotSettingsGridRemoval ()
@@ -1957,7 +1967,7 @@ void MainWindow::updateControls ()
   m_actionSettingsCurves->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsFilter->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsGridDisplay->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsAxesHighlight->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
@@ -2010,6 +2020,13 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
 }
 
+void MainWindow::updateSettingsAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesHighlight";
+
+  m_cmdMediator->document().setModelAxesHighlight(modelAxesHighlight);
+}
+
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
@@ -2047,13 +2064,6 @@ void MainWindow::updateSettingsFilter(const DocumentModelFilter &modelFilter)
   m_cmdMediator->document().setModelFilter(modelFilter);
   updateImages (cmdMediator().document().pixmap());
   updateViewedBackground ();
-}
-
-void MainWindow::updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
-
-  m_cmdMediator->document().setModelGridDisplay(modelGridDisplay);
 }
 
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

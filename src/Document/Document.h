@@ -2,11 +2,11 @@
 #define DOCUMENT_H
 
 #include "CurvesGraphs.h"
+#include "DocumentModelAxesHighlight.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelCurveProperties.h"
 #include "DocumentModelExport.h"
 #include "DocumentModelFilter.h"
-#include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
@@ -109,6 +109,9 @@ public:
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
+  /// Get method for DocumentModelAxesHighlight.
+  DocumentModelAxesHighlight modelAxesHighlight() const;
+
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
 
@@ -120,9 +123,6 @@ public:
 
   /// Get method for DocumentModelFilter.
   DocumentModelFilter modelFilter() const;
-
-  /// Get method for DocumentModelGridDisplay.
-  DocumentModelGridDisplay modelGridDisplay() const;
 
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
@@ -164,6 +164,9 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
+  /// Set method for DocumentModelAxesHighlight.
+  void setModelAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight);
+
   /// Set method for DocumentModelCoords.
   void setModelCoords (const DocumentModelCoords &modelCoords);
 
@@ -175,9 +178,6 @@ public:
 
   /// Set method for DocumentModelFilter.
   void setModelFilter(const DocumentModelFilter &modelFilter);
-
-  /// Set method for DocumentModelGridDisplay.
-  void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
 
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
@@ -196,22 +196,27 @@ private:
 
   Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
 
+  // Metadata
   QString m_name;
   QPixmap m_pixmap;
 
+  // Read variables
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
 
+  // Dirty flag
   bool m_isModified;
 
+  // Curves
   Curve *m_curveAxes;
   CurvesGraphs m_curvesGraphs;
 
+  // Model objects for the various settings
+  DocumentModelAxesHighlight m_modelAxesHighlight;
   DocumentModelCoords m_modelCoords;
   // DocumentModelCurveProperties is not here since curve properties are stored inside CurvesGraphs
   DocumentModelExport m_modelExport;
   DocumentModelFilter m_modelFilter;
-  DocumentModelGridDisplay m_modelGridDisplay;
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;

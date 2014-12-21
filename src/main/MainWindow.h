@@ -7,21 +7,21 @@
 
 class CmdMediator;
 class DigitizeStateContext;
+class DlgSettingsAxesHighlight;
 class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
 class DlgSettingsExport;
 class DlgSettingsFilter;
-class DlgSettingsGridDisplay;
 class DlgSettingsGridRemoval;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
+class DocumentModelAxesHighlight;
 class DocumentModelCoords;
 class DocumentModelCurveProperties;
 class DocumentModelCurves;
 class DocumentModelExport;
 class DocumentModelFilter;
-class DocumentModelGridDisplay;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
@@ -73,6 +73,9 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
+  /// Update with new axes highlight properties.
+  void updateSettingsAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight);
+
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
@@ -87,9 +90,6 @@ public:
 
   /// Update with new filter properties.
   void updateSettingsFilter(const DocumentModelFilter &modelFilter);
-
-  /// Update with new grid display properties.
-  void updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
 
   /// Update with new grid removal properties.
   void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
@@ -138,12 +138,12 @@ private slots:
   void slotMouseRelease (QPointF);
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (Qt::CursorShape);
+  void slotSettingsAxesHighlight ();
   void slotSettingsCoords ();
   void slotSettingsCurveProperties ();
   void slotSettingsCurves ();
   void slotSettingsExport ();
   void slotSettingsFilter ();
-  void slotSettingsGridDisplay ();
   void slotSettingsGridRemoval ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
@@ -271,12 +271,12 @@ private:
   QAction *m_actionZoom1To16;
 
   QMenu *m_menuSettings;
+  QAction *m_actionSettingsAxesHighlight;
   QAction *m_actionSettingsCoords;
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsCurves;
   QAction *m_actionSettingsExport;
   QAction *m_actionSettingsFilter;
-  QAction *m_actionSettingsGridDisplay;
   QAction *m_actionSettingsGridRemoval;
   QAction *m_actionSettingsPointMatch;
   QAction *m_actionSettingsSegments;
@@ -306,12 +306,12 @@ private:
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   DigitizeStateContext *m_digitizeStateContext;
 
+  DlgSettingsAxesHighlight *m_dlgSettingsAxesHighlight;
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsCurves *m_dlgSettingsCurves;
   DlgSettingsExport *m_dlgSettingsExport;
   DlgSettingsFilter *m_dlgSettingsFilter;
-  DlgSettingsGridDisplay *m_dlgSettingsGridDisplay;
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;

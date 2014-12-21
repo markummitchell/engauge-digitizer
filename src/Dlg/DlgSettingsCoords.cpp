@@ -438,6 +438,7 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Flush old data
   if (m_modelCoordsBefore != 0) {
     delete m_modelCoordsBefore;
   }
@@ -445,6 +446,7 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
     delete m_modelCoordsAfter;
   }
 
+  // Save new data
   m_modelCoordsBefore = new DocumentModelCoords (cmdMediator.document().modelCoords());
   m_modelCoordsAfter = new DocumentModelCoords (cmdMediator.document().modelCoords());
 

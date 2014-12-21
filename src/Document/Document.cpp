@@ -265,6 +265,11 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
+DocumentModelAxesHighlight Document::modelAxesHighlight() const
+{
+  return m_modelAxesHighlight;
+}
+
 DocumentModelCoords Document::modelCoords() const
 {
   return m_modelCoords;
@@ -285,11 +290,6 @@ DocumentModelExport Document::modelExport() const
 DocumentModelFilter Document::modelFilter() const
 {
   return m_modelFilter;
-}
-
-DocumentModelGridDisplay Document::modelGridDisplay() const
-{
-  return m_modelGridDisplay;
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
@@ -378,7 +378,7 @@ void Document::saveDocument(QXmlStreamWriter &stream)
   m_modelCoords.saveModel(stream);
   m_modelExport.saveModel(stream);
   m_modelFilter.saveModel(stream);
-  m_modelGridDisplay.saveModel(stream);
+  m_modelAxesHighlight.saveModel(stream);
   m_modelGridRemoval.saveModel(stream);
   m_modelPointMatch.saveModel(stream);
   m_modelSegments.saveModel(stream);
@@ -390,6 +390,11 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
 
   m_curvesGraphs = curvesGraphs;
+}
+
+void Document::setModelAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight)
+{
+  m_modelAxesHighlight = modelAxesHighlight;
 }
 
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)
@@ -432,11 +437,6 @@ void Document::setModelExport(const DocumentModelExport &modelExport)
 void Document::setModelFilter(const DocumentModelFilter &modelFilter)
 {
   m_modelFilter = modelFilter;
-}
-
-void Document::setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
-{
-  m_modelGridDisplay = modelGridDisplay;
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

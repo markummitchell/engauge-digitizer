@@ -256,6 +256,7 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Flush old data
   if (m_modelGridRemovalBefore != 0) {
     delete m_modelGridRemovalBefore;
   }
@@ -263,6 +264,7 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
     delete m_modelGridRemovalAfter;
   }
 
+  // Save new data
   m_modelGridRemovalBefore = new DocumentModelGridRemoval (cmdMediator.document());
   m_modelGridRemovalAfter = new DocumentModelGridRemoval (cmdMediator.document());
 

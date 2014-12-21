@@ -216,6 +216,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Flush old data
   if (m_modelCurvePropertiesBefore != 0) {
     delete m_modelCurvePropertiesBefore;
   }
@@ -223,6 +224,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
     delete m_modelCurvePropertiesAfter;
   }
 
+  // Save new data
   m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator.document());
   m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator.document());
 

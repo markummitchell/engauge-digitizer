@@ -343,6 +343,7 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Flush old data
   if (m_modelExportBefore != 0) {
     delete m_modelExportBefore;
   }
@@ -350,6 +351,7 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
     delete m_modelExportAfter;
   }
 
+  // Save new data
   m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
   m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
 
