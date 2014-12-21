@@ -5,7 +5,6 @@ MOC_DIR = .moc
 RCC_DIR = .rcc
 
 HEADERS  += \
-    include/AxesHighlight.h \
     include/BackgroundImage.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxisPointsAbstract.h \
@@ -25,7 +24,7 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
-    Cmd/CmdSettingsAxesHighlight.h \
+    Cmd/CmdSettingsAxesHighlights.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
@@ -58,7 +57,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
-    Dlg/DlgSettingsAxesHighlight.h \
+    Dlg/DlgSettingsAxesHighlights.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
@@ -71,7 +70,7 @@ HEADERS  += \
     Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
-    Document/DocumentModelAxesHighlight.h \
+    Document/DocumentModelAxesHighlights.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelCurveProperties.h \
     Document/DocumentModelCurves.h \
@@ -101,6 +100,7 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
+    Highlights/HighlightsMode.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -140,7 +140,7 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
-    Cmd/CmdSettingsAxesHighlight.cpp \
+    Cmd/CmdSettingsAxesHighlights.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
@@ -167,7 +167,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
-    Dlg/DlgSettingsAxesHighlight.cpp \
+    Dlg/DlgSettingsAxesHighlights.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
@@ -180,7 +180,7 @@ SOURCES += \
     Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
-    Document/DocumentModelAxesHighlight.cpp \
+    Document/DocumentModelAxesHighlights.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelCurves.cpp \
@@ -236,6 +236,7 @@ INCLUDEPATH += Callback \
                Filter \
                Graphics \
                Grid \
+               Highlights \
                img \
                include \
                Line \

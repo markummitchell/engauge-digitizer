@@ -7,7 +7,7 @@
 
 class CmdMediator;
 class DigitizeStateContext;
-class DlgSettingsAxesHighlight;
+class DlgSettingsAxesHighlights;
 class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
@@ -16,7 +16,7 @@ class DlgSettingsFilter;
 class DlgSettingsGridRemoval;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
-class DocumentModelAxesHighlight;
+class DocumentModelAxesHighlights;
 class DocumentModelCoords;
 class DocumentModelCurveProperties;
 class DocumentModelCurves;
@@ -32,6 +32,7 @@ class QAction;
 class QActionGroup;
 class QCloseEvent;
 class QComboBox;
+class QGraphicsLineItem;
 class QGraphicsPixmapItem;
 class QMenu;
 class QSettings;
@@ -73,8 +74,8 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
-  /// Update with new axes highlight properties.
-  void updateSettingsAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight);
+  /// Update with new axes highlights properties.
+  void updateSettingsAxesHighlights(const DocumentModelAxesHighlights &modelAxesHighlights);
 
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
@@ -138,7 +139,7 @@ private slots:
   void slotMouseRelease (QPointF);
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (Qt::CursorShape);
-  void slotSettingsAxesHighlight ();
+  void slotSettingsAxesHighlights ();
   void slotSettingsCoords ();
   void slotSettingsCurveProperties ();
   void slotSettingsCurves ();
@@ -271,7 +272,7 @@ private:
   QAction *m_actionZoom1To16;
 
   QMenu *m_menuSettings;
-  QAction *m_actionSettingsAxesHighlight;
+  QAction *m_actionSettingsAxesHighlights;
   QAction *m_actionSettingsCoords;
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsCurves;
@@ -293,6 +294,11 @@ private:
   QGraphicsPixmapItem *m_imageUnfiltered; // Original unfiltered image
   QGraphicsPixmapItem *m_imageFiltered; // Image produced by Filter class
 
+  // One highlight line for each axis point
+  QGraphicsLineItem *m_axesHighlight0;
+  QGraphicsLineItem *m_axesHighlight1;
+  QGraphicsLineItem *m_axesHighlight2;
+
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -306,7 +312,7 @@ private:
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   DigitizeStateContext *m_digitizeStateContext;
 
-  DlgSettingsAxesHighlight *m_dlgSettingsAxesHighlight;
+  DlgSettingsAxesHighlights *m_dlgSettingsAxesHighlights;
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsCurves *m_dlgSettingsCurves;

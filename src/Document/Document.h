@@ -2,7 +2,7 @@
 #define DOCUMENT_H
 
 #include "CurvesGraphs.h"
-#include "DocumentModelAxesHighlight.h"
+#include "DocumentModelAxesHighlights.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelCurveProperties.h"
 #include "DocumentModelExport.h"
@@ -109,8 +109,8 @@ public:
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
-  /// Get method for DocumentModelAxesHighlight.
-  DocumentModelAxesHighlight modelAxesHighlight() const;
+  /// Get method for DocumentModelAxesHighlights.
+  DocumentModelAxesHighlights modelAxesHighlights() const;
 
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
@@ -164,8 +164,8 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
-  /// Set method for DocumentModelAxesHighlight.
-  void setModelAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight);
+  /// Set method for DocumentModelAxesHighlights.
+  void setModelAxesHighlights(const DocumentModelAxesHighlights &modelAxesHighlights);
 
   /// Set method for DocumentModelCoords.
   void setModelCoords (const DocumentModelCoords &modelCoords);
@@ -212,7 +212,7 @@ private:
   CurvesGraphs m_curvesGraphs;
 
   // Model objects for the various settings
-  DocumentModelAxesHighlight m_modelAxesHighlight;
+  DocumentModelAxesHighlights m_modelAxesHighlights;
   DocumentModelCoords m_modelCoords;
   // DocumentModelCurveProperties is not here since curve properties are stored inside CurvesGraphs
   DocumentModelExport m_modelExport;

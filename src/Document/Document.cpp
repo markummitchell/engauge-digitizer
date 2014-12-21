@@ -265,9 +265,9 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-DocumentModelAxesHighlight Document::modelAxesHighlight() const
+DocumentModelAxesHighlights Document::modelAxesHighlights() const
 {
-  return m_modelAxesHighlight;
+  return m_modelAxesHighlights;
 }
 
 DocumentModelCoords Document::modelCoords() const
@@ -378,7 +378,7 @@ void Document::saveDocument(QXmlStreamWriter &stream)
   m_modelCoords.saveModel(stream);
   m_modelExport.saveModel(stream);
   m_modelFilter.saveModel(stream);
-  m_modelAxesHighlight.saveModel(stream);
+  m_modelAxesHighlights.saveModel(stream);
   m_modelGridRemoval.saveModel(stream);
   m_modelPointMatch.saveModel(stream);
   m_modelSegments.saveModel(stream);
@@ -392,9 +392,9 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   m_curvesGraphs = curvesGraphs;
 }
 
-void Document::setModelAxesHighlight(const DocumentModelAxesHighlight &modelAxesHighlight)
+void Document::setModelAxesHighlights(const DocumentModelAxesHighlights &modelAxesHighlights)
 {
-  m_modelAxesHighlight = modelAxesHighlight;
+  m_modelAxesHighlights = modelAxesHighlights;
 }
 
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)

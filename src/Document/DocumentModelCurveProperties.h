@@ -27,8 +27,6 @@ public:
 
   /// Assignment constructor.
   DocumentModelCurveProperties &operator=(const DocumentModelCurveProperties &other);
-
-  /// Insertion operator.
   
   /// Get method for line color in specified curve.
   ColorPalette lineColor (const QString &curveName) const;
