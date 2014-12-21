@@ -36,6 +36,7 @@ protected:
 private:
 
   void createControls (QGridLayout *layout, int &row);
+  void createPoints ();
   void createPreview (QGridLayout *layout, int &row);
   void updateControls();
   void updatePreview();
@@ -51,7 +52,9 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
-  HighlightsPoint *m_highlightsPoint;
+  HighlightsPoint *m_highlightsPoint0;
+  HighlightsPoint *m_highlightsPoint1;
+  HighlightsPoint *m_highlightsPoint2;
 
   DocumentModelAxesHighlights *m_modelAxesHighlightsBefore;
   DocumentModelAxesHighlights *m_modelAxesHighlightsAfter;

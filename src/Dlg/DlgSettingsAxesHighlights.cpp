@@ -17,9 +17,19 @@
 #include <QRadioButton>
 #include "ViewPreview.h"
 
+const int AXIS_WIDTH = 4;
+const int RECT_WIDTH = 640;
+const int RECT_HEIGHT = 480;
+const int X_LEFT = RECT_WIDTH / 8;
+const int X_RIGHT = RECT_WIDTH * 7 / 8;
+const int Y_TOP = RECT_HEIGHT / 8;
+const int Y_BOTTOM = RECT_HEIGHT * 7 / 8;
+
 DlgSettingsAxesHighlights::DlgSettingsAxesHighlights(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Axes Highlight", mainWindow),
-  m_highlightsPoint (0),
+  m_highlightsPoint0 (0),
+  m_highlightsPoint1 (0),
+  m_highlightsPoint2 (0),
   m_modelAxesHighlightsBefore (0),
   m_modelAxesHighlightsAfter (0)
 {
@@ -27,43 +37,9 @@ DlgSettingsAxesHighlights::DlgSettingsAxesHighlights(MainWindow &mainWindow) :
   finishPanel (subPanel);
 }
 
-void DlgSettingsAxesHighlights::createPreview (QGridLayout *layout,
-                                               int &row)
-{
-  QLabel *labelPreview = new QLabel ("Preview");
-  layout->addWidget (labelPreview, row++, 0, 1, 4);
-
-  m_scenePreview = new QGraphicsScene (this);
-  m_viewPreview = new ViewPreview (m_scenePreview, this);
-  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the displayed grid lines."));
-  m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
-
-  layout->addWidget (m_viewPreview, row++, 0, 1, 4);
-}
-
-QWidget *DlgSettingsAxesHighlights::createSubPanel ()
-{
-  QWidget *subPanel = new QWidget ();
-  QGridLayout *layout = new QGridLayout (subPanel);
-  subPanel->setLayout (layout);
-
-  layout->setColumnStretch(0, 1); // Empty first column
-  layout->setColumnStretch(1, 0); // X
-  layout->setColumnStretch(2, 0); // Y
-  layout->setColumnStretch(3, 1); // Empty first column
-
-  int row = 0;
-  createControls (layout, row);
-  createPreview (layout, row);
-
-  return subPanel;
-}
-
 void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
                                                 int &row)
-{  
+{
   QGroupBox *groupBox = new QGroupBox (tr ("Axes Highlights Lifetime"));
   layout->addWidget (groupBox, row++, 1, 1, 2);
 
@@ -104,6 +80,78 @@ void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
   populateColorComboWithTransparent (*m_cmbLineColor);
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layout->addWidget (m_cmbLineColor, row++, 2);
+}
+
+void DlgSettingsAxesHighlights::createPoints ()
+{
+  m_highlightsPoint0 = new HighlightsPoint;
+  m_highlightsPoint1 = new HighlightsPoint;
+  m_highlightsPoint2 = new HighlightsPoint;
+
+  m_scenePreview->addItem (m_highlightsPoint0);
+  m_scenePreview->addItem (m_highlightsPoint1);
+  m_scenePreview->addItem (m_highlightsPoint2);
+
+  // Create an invisible rectangular item that will guarantee a margin all around the outside, since otherwise QGraphicsView
+  // will zoom in on the points
+  QGraphicsRectItem *itemRect = new QGraphicsRectItem (0,
+                                                       0,
+                                                       RECT_WIDTH,
+                                                       RECT_HEIGHT);
+  itemRect->setPen (Qt::NoPen);
+  m_scenePreview->addItem (itemRect);
+
+  // Since the typical image is wider than it is high, there are usually two points at the bottom and one point up high
+  // on the left. We will position these points the same way
+  m_highlightsPoint0->setPos (QPointF (X_LEFT, Y_BOTTOM));
+  m_highlightsPoint1->setPos (QPointF (X_RIGHT, Y_BOTTOM));
+  m_highlightsPoint2->setPos (QPointF (X_LEFT, Y_TOP));
+
+  // For a realistic background, draw two black axis lines underneath (lower z value)
+  QGraphicsLineItem *axisHorizontal = new QGraphicsLineItem (X_LEFT, Y_BOTTOM, X_RIGHT, Y_BOTTOM);
+  QGraphicsLineItem *axisVertical = new QGraphicsLineItem (X_LEFT, Y_BOTTOM, X_LEFT, Y_TOP);
+  axisHorizontal->setPen (QPen (QBrush (Qt::black), AXIS_WIDTH));
+  axisVertical->setPen (QPen (QBrush (Qt::black), AXIS_WIDTH));
+  axisHorizontal->setZValue (-1);
+  axisVertical->setZValue (-1);
+  m_scenePreview->addItem (axisHorizontal);
+  m_scenePreview->addItem (axisVertical);
+}
+
+void DlgSettingsAxesHighlights::createPreview (QGridLayout *layout,
+                                               int &row)
+{
+  QLabel *labelPreview = new QLabel ("Preview");
+  layout->addWidget (labelPreview, row++, 0, 1, 4);
+
+  m_scenePreview = new QGraphicsScene (this);
+  m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the displayed axes highlights"));
+  m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+
+  layout->addWidget (m_viewPreview, row++, 0, 1, 4);
+}
+
+QWidget *DlgSettingsAxesHighlights::createSubPanel ()
+{
+  QWidget *subPanel = new QWidget ();
+  QGridLayout *layout = new QGridLayout (subPanel);
+  subPanel->setLayout (layout);
+
+  layout->setColumnStretch(0, 1); // Empty first column
+  layout->setColumnStretch(1, 0); // X
+  layout->setColumnStretch(2, 0); // Y
+  layout->setColumnStretch(3, 1); // Empty first column
+
+  int row = 0;
+  createControls (layout, row);
+  createPreview (layout, row);
+
+  createPoints ();
+
+  return subPanel;
 }
 
 void DlgSettingsAxesHighlights::handleOk ()
@@ -149,10 +197,6 @@ void DlgSettingsAxesHighlights::load (CmdMediator &cmdMediator)
   Q_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
-  m_scenePreview->clear();
-  m_highlightsPoint = new HighlightsPoint;
-  m_scenePreview->addItem (m_highlightsPoint);
-
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
@@ -179,6 +223,7 @@ void DlgSettingsAxesHighlights::slotLineColor(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::slotLineColor";
 
   m_modelAxesHighlightsAfter->setLineColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+  updatePreview();
 }
 
 void DlgSettingsAxesHighlights::slotSeconds (const QString &)
@@ -199,6 +244,8 @@ void DlgSettingsAxesHighlights::updateControls ()
 void DlgSettingsAxesHighlights::updatePreview()
 {
   QColor lineColor = ColorPaletteToQColor (m_modelAxesHighlightsAfter->lineColor ());
-  Q_ASSERT (m_highlightsPoint != 0);
-  m_highlightsPoint->setLineColor (lineColor);
+  Q_ASSERT (m_highlightsPoint0 != 0 && m_highlightsPoint1 != 0 && m_highlightsPoint2 != 0);
+  m_highlightsPoint0->setLineColor (lineColor);
+  m_highlightsPoint1->setLineColor (lineColor);
+  m_highlightsPoint2->setLineColor (lineColor);
 }

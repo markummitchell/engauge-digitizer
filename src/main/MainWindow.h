@@ -204,6 +204,7 @@ private:
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
   void updateAfterCommandStatusBarCoords ();
+  void updateAfterTransitionFromNoTransformToTransform();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);
   void updateViewedBackground();

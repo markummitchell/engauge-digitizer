@@ -1891,30 +1891,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
 
   if (m_transformation.transformIsDefined() && !transformWasDefined) {
-
-    // Initialize grid removal settings so user does not have to
-    int countX, countY;
-    double startX, startY, stepX, stepY;
-    GridClassifier gridClassifier;
-    gridClassifier.classify (cmdMediator().document().pixmap(),
-                             m_transformation,
-                             countX,
-                             startX,
-                             stepX,
-                             countY,
-                             startY,
-                             stepY);
-    DocumentModelGridRemoval modelGridRemoval (startX,
-                                               startY,
-                                               stepX,
-                                               stepY,
-                                               countX,
-                                               countY);
-    cmdMediator().document().setModelGridRemoval (modelGridRemoval);
-
-    m_axesHighlight0 = new QGraphicsLineItem;
-    m_axesHighlight1 = new QGraphicsLineItem;
-    m_axesHighlight2 = new QGraphicsLineItem;
+    updateAfterTransitionFromNoTransformToTransform ();
   }
 
   if (m_transformation.transformIsDefined()) {
@@ -1925,6 +1902,33 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   QPointF posScreen = m_view->mapToScene (posLocal);
 
   slotMouseMove (posScreen); // Update the status bar coordinates to reflect the newly updated transformation
+}
+
+void MainWindow::updateAfterTransitionFromNoTransformToTransform()
+{
+  // Initialize grid removal settings so user does not have to
+  int countX, countY;
+  double startX, startY, stepX, stepY;
+  GridClassifier gridClassifier;
+  gridClassifier.classify (cmdMediator().document().pixmap(),
+                           m_transformation,
+                           countX,
+                           startX,
+                           stepX,
+                           countY,
+                           startY,
+                           stepY);
+  DocumentModelGridRemoval modelGridRemoval (startX,
+                                             startY,
+                                             stepX,
+                                             stepY,
+                                             countX,
+                                             countY);
+  cmdMediator().document().setModelGridRemoval (modelGridRemoval);
+
+  m_axesHighlight0 = new QGraphicsLineItem;
+  m_axesHighlight1 = new QGraphicsLineItem;
+  m_axesHighlight2 = new QGraphicsLineItem;
 }
 
 void MainWindow::updateControls ()

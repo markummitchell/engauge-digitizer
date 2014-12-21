@@ -2,12 +2,15 @@
 #include "Logger.h"
 #include <QPen>
 
+// To emphasize that the axis lines are still there, we make these highlights somewhat transparent
+const double HIGHLIGHTS_OPACITY = 0.6;
+
 // Rather than complicate the user interface and make the point size adjustable, we just make
 // it a constant. The size should be very big to guarantee visibility
-const int HIGHLIGHTS_POINT_RADIUS = 20;
+const int HIGHLIGHTS_POINT_RADIUS = 50;
 
 // One-pixel wide line (produced by setting width=0) is too small
-const int HIGHLIGHTS_POINTS_WIDTH = 1;
+const int HIGHLIGHTS_POINTS_WIDTH = 5;
 
 HighlightsPoint::HighlightsPoint() :
   QGraphicsPolygonItem (0)
@@ -24,6 +27,7 @@ HighlightsPoint::HighlightsPoint() :
   QPolygonF polygon (points);
 
   setPolygon (polygon);
+  setOpacity (HIGHLIGHTS_OPACITY);
 }
 
 void HighlightsPoint::setLineColor (const QColor &lineColor)
