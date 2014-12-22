@@ -103,6 +103,10 @@ HEADERS  += \
     Grid/GridCoordDisable.h \
     Highlights/HighlightsMode.h \
     Highlights/HighlightsPoint.h \
+    Highlights/HighlightsStateAbstractBase.h \
+    Highlights/HighlightsStateContext.h \
+    Highlights/HighlightsStateTransformDefined.h \
+    Highlights/HighlightsStateTransformUndefined.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -204,6 +208,10 @@ SOURCES += \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
     Highlights/HighlightsPoint.cpp \
+    Highlights/HighlightsStateAbstractBase.cpp \
+    Highlights/HighlightsStateContext.cpp \
+    Highlights/HighlightsStateTransformDefined.cpp \
+    Highlights/HighlightsStateTransformUndefined.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
@@ -219,7 +227,7 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileScale.cpp
+    View/ViewProfileScale.cpp 
 
 # Main entry point for non-test
 SOURCES += main/main.cpp

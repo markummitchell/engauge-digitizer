@@ -1894,8 +1894,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
   if (m_transformation.transformIsDefined() && !transformWasDefined) {
     updateAfterTransitionFromNoTransformToTransform ();
-  } else if (!m_transformation.transformIsDefined() && transformWasDefined) {
-    updateAfterTransitionFrom
+//  } else if (!m_transformation.transformIsDefined() && transformWasDefined) {
+//    updateAfterTransitionFrom
   }
 
   if (m_transformation.transformIsDefined()) {
