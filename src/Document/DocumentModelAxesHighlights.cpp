@@ -5,10 +5,14 @@
 
 const int DEFAULT_HIGHLIGHTS_SECONDS = 3;
 
+// Color that should be easily visible against black axes lines. Red resonates with
+// the default axes point color, and seems fairly bright when opacity is made transparent.
+const ColorPalette DEFAULT_LINE_COLOR = COLOR_PALETTE_RED;
+
 DocumentModelAxesHighlights::DocumentModelAxesHighlights() :
   m_highlightsMode (HIGHLIGHTS_MODE_N_SECONDS),
   m_highlightsSeconds (DEFAULT_HIGHLIGHTS_SECONDS),
-  m_lineColor (COLOR_PALETTE_YELLOW) // Bright color that should be easily visible against black axes lines
+  m_lineColor (DEFAULT_LINE_COLOR)
 {
 }
 

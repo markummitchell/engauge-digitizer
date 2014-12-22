@@ -22,8 +22,7 @@ CallbackSearchReturn CallbackPositionHighlightsFromAxesPoints::callback (const Q
 
   HighlightsPoint *highlightsPoint = m_highlightsPoints [m_nextHighlightPoint];
 
-  highlightsPoint->setPos (point.posScreen(),
-                           m_transformation);
+  highlightsPoint->setPos (point.posScreen());
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }

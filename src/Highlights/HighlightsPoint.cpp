@@ -18,19 +18,30 @@ HighlightsPoint::HighlightsPoint() :
   QGraphicsPolygonItem (0)
 {
   setOpacity (HIGHLIGHTS_OPACITY);
+
+  // Draw as a pair of vertical and horizontal lines, about (0,0)
+  QVector<QPointF> points; // Screen (pixels) coordinates
+  points.push_back (QPointF (0, -HIGHLIGHTS_POINT_RADIUS));
+  points.push_back (QPointF (0, HIGHLIGHTS_POINT_RADIUS));
+  points.push_back (QPointF (0, 0));
+  points.push_back (QPointF (-HIGHLIGHTS_POINT_RADIUS, 0));
+  points.push_back (QPointF (HIGHLIGHTS_POINT_RADIUS, 0));
+  points.push_back (QPointF (0, 0));
+
+  QPolygonF polygon (points);
+
+  setPolygon (polygon);
 }
 
-void HighlightsPoint::setLineColor (const QColor &lineColor)
+HighlightsPoint::HighlightsPoint(const Transformation &transformation) :
+  QGraphicsPolygonItem (0)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "HighlightsPoint::setLineColor";
+  setOpacity (HIGHLIGHTS_OPACITY);
 
-  setPen (QPen (QBrush (lineColor), HIGHLIGHTS_POINTS_WIDTH));
-}
-
-void HighlightsPoint::setPos (const QPointF &posScreen,
-                              const Transformation &transformation)
-{
   Q_ASSERT (transformation.transformIsDefined());
+
+  // The directions computed below would be the same for any point, since the transformation is affine. We pick the origin
+  QPointF posScreen (0, 0);
 
   QPointF posGraph;
   transformation.transform (posScreen,
@@ -81,4 +92,11 @@ void HighlightsPoint::setPos (const QPointF &posScreen,
   QPolygonF polygon (points);
 
   setPolygon (polygon);
+}
+
+void HighlightsPoint::setLineColor (const QColor &lineColor)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "HighlightsPoint::setLineColor";
+
+  setPen (QPen (QBrush (lineColor), HIGHLIGHTS_POINTS_WIDTH));
 }
