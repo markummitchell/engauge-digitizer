@@ -1,10 +1,10 @@
-#ifndef DLG_SETTINGS_AXES_HIGHLIGHTS_H
-#define DLG_SETTINGS_AXES_HIGHLIGHTS_H
+#ifndef DLG_SETTINGS_AXES_CHECKER_H
+#define DLG_SETTINGS_AXES_CHECKER_H
 
 #include "DlgSettingsAbstractBase.h"
 
-class DocumentModelAxesHighlights;
-class HighlightsPoint;
+class DocumentModelAxesChecker;
+class Checker;
 class QAbstractButton;
 class QButtonGroup;
 class QComboBox;
@@ -13,14 +13,14 @@ class QGridLayout;
 class QRadioButton;
 class ViewPreview;
 
-/// Stacked widget page for editing axes highlights settings.
-class DlgSettingsAxesHighlights : public DlgSettingsAbstractBase
+/// Stacked widget page for editing axes checker settings.
+class DlgSettingsAxesChecker : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgSettingsAxesHighlights(MainWindow &mainWindow);
+  DlgSettingsAxesChecker(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
@@ -52,12 +52,10 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
-  HighlightsPoint *m_highlightsPoint0;
-  HighlightsPoint *m_highlightsPoint1;
-  HighlightsPoint *m_highlightsPoint2;
+  Checker *m_checker;
 
-  DocumentModelAxesHighlights *m_modelAxesHighlightsBefore;
-  DocumentModelAxesHighlights *m_modelAxesHighlightsAfter;
+  DocumentModelAxesChecker *m_modelAxesCheckerBefore;
+  DocumentModelAxesChecker *m_modelAxesCheckerAfter;
 };
 
-#endif // DLG_SETTINGS_AXES_HIGHLIGHTS_H
+#endif // DLG_SETTINGS_AXES_CHECKER_H

@@ -1,6 +1,6 @@
 #include "BackgroundImage.h"
 #include "img/bannerapp.xpm"
-#include "CallbackPositionHighlightsFromAxesPoints.h"
+#include "CallbackAxesCheckerFromAxesPoints.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -13,7 +13,7 @@
 #include "DigitPointMatch.xpm"
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
-#include "DlgSettingsAxesHighlights.h"
+#include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsCurves.h"
@@ -30,7 +30,6 @@
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "GridClassifier.h"
-#include "HighlightsPoint.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -76,9 +75,6 @@ MainWindow::MainWindow(QWidget *parent) :
   m_imageNone (0),
   m_imageUnfiltered (0),
   m_imageFiltered (0),
-  m_axesHighlight0 (0),
-  m_axesHighlight1 (0),
-  m_axesHighlight2 (0),
   m_cmdMediator (0)
 {
   setCurrentFile ("");
@@ -341,11 +337,11 @@ void MainWindow::createActionsSettings ()
                                             "Filtering simplifies the graphs for easier Point Matching and Segment Filling"));
   connect (m_actionSettingsFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsFilter ()));
 
-  m_actionSettingsAxesHighlights = new QAction (tr ("Axes Highlights"), this);
-  m_actionSettingsAxesHighlights->setStatusTip (tr ("Edit Axes Highlights settings."));
-  m_actionSettingsAxesHighlights->setWhatsThis (tr ("Axes Highlights Settings\n\n"
-                                                    "Axes highlighting usually reveals axis point mistakes that are otherwise hard to find."));
-  connect (m_actionSettingsAxesHighlights, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesHighlights ()));
+  m_actionSettingsAxesChecker = new QAction (tr ("Axes Checker"), this);
+  m_actionSettingsAxesChecker->setStatusTip (tr ("Edit Axes Checker settings."));
+  m_actionSettingsAxesChecker->setWhatsThis (tr ("Axes Checker Settings\n\n"
+                                                 "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
+  connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
 
   m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
   m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
@@ -620,7 +616,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCurves);
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsFilter);
-  m_menuSettings->addAction (m_actionSettingsAxesHighlights);
+  m_menuSettings->addAction (m_actionSettingsAxesChecker);
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
@@ -638,7 +634,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurves = new DlgSettingsCurves (*this);
   m_dlgSettingsExport = new DlgSettingsExport (*this);
   m_dlgSettingsFilter = new DlgSettingsFilter (*this);
-  m_dlgSettingsAxesHighlights = new DlgSettingsAxesHighlights (*this);
+  m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
@@ -648,7 +644,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurves->setVisible (false);
   m_dlgSettingsExport->setVisible (false);
   m_dlgSettingsFilter->setVisible (false);
-  m_dlgSettingsAxesHighlights->setVisible (false);
+  m_dlgSettingsAxesChecker->setVisible (false);
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
@@ -1416,12 +1412,12 @@ void MainWindow::slotSetOverrideCursor (Qt::CursorShape cursorShape)
   m_digitizeStateContext->handleSetOverrideCursor (cursorShape);
 }
 
-void MainWindow::slotSettingsAxesHighlights ()
+void MainWindow::slotSettingsAxesChecker ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsAxesHighlights";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsAxesChecker";
 
-  m_dlgSettingsAxesHighlights->load (*m_cmdMediator);
-  m_dlgSettingsAxesHighlights->show ();
+  m_dlgSettingsAxesChecker->load (*m_cmdMediator);
+  m_dlgSettingsAxesChecker->show ();
 }
 
 void MainWindow::slotSettingsCoords ()
@@ -1930,18 +1926,13 @@ void MainWindow::updateAfterTransitionFromNoTransformToTransform()
                                              countY);
   cmdMediator().document().setModelGridRemoval (modelGridRemoval);
 
-  // Create axes highlights
-  m_axesHighlight0 = new HighlightsPoint;
-  m_axesHighlight1 = new HighlightsPoint;
-  m_axesHighlight2 = new HighlightsPoint;
-
-  CallbackPositionHighlightsFromAxesPoints ftor (m_axesHighlight0,
-                                                 m_axesHighlight1,
-                                                 m_axesHighlight2,
-                                                 m_transformation);
+  // Create axes checker
+  CallbackAxesCheckerFromAxesPoints ftor;
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackPositionHighlightsFromAxesPoints::callback);
-  cmdMediator().iterateThroughCurvePointsAxes(ftorWithCallback);
+                                                                                                    &CallbackAxesCheckerFromAxesPoints::callback);
+  cmdMediator().iterateThroughCurvePointsAxes (ftorWithCallback);
+
+//  m_axesChecker = new Checker (ftor.polygon ());
 }
 
 void MainWindow::updateControls ()
@@ -1985,7 +1976,7 @@ void MainWindow::updateControls ()
   m_actionSettingsCurves->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsFilter->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsAxesHighlights->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
@@ -2038,11 +2029,11 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
 }
 
-void MainWindow::updateSettingsAxesHighlights(const DocumentModelAxesHighlights &modelAxesHighlights)
+void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesHighlights";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
 
-  m_cmdMediator->document().setModelAxesHighlights(modelAxesHighlights);
+  m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
 }
 
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)

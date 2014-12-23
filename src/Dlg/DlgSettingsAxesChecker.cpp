@@ -1,8 +1,8 @@
-#include "HighlightsPoint.h"
+#include "Checker.h"
 #include "CmdMediator.h"
-#include "CmdSettingsAxesHighlights.h"
+#include "CmdSettingsAxesChecker.h"
 #include "CoordScale.h"
-#include "DlgSettingsAxesHighlights.h"
+#include "DlgSettingsAxesChecker.h"
 #include "EnumsToQt.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -25,22 +25,20 @@ const int X_RIGHT = RECT_WIDTH * 7 / 8;
 const int Y_TOP = RECT_HEIGHT / 8;
 const int Y_BOTTOM = RECT_HEIGHT * 7 / 8;
 
-DlgSettingsAxesHighlights::DlgSettingsAxesHighlights(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Axes Highlight", mainWindow),
-  m_highlightsPoint0 (0),
-  m_highlightsPoint1 (0),
-  m_highlightsPoint2 (0),
-  m_modelAxesHighlightsBefore (0),
-  m_modelAxesHighlightsAfter (0)
+DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Axes Checker", mainWindow),
+  m_checker (0),
+  m_modelAxesCheckerBefore (0),
+  m_modelAxesCheckerAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
 }
 
-void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
-                                                int &row)
+void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
+                                             int &row)
 {
-  QGroupBox *groupBox = new QGroupBox (tr ("Axes Highlights Lifetime"));
+  QGroupBox *groupBox = new QGroupBox (tr ("Axes Checker Lifetime"));
   layout->addWidget (groupBox, row++, 1, 1, 2);
 
   QGridLayout *layoutLifetime = new QGridLayout;
@@ -48,11 +46,11 @@ void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
 
   int rowLifetime = 0;
   m_btnNever = new QRadioButton ("Do not show", groupBox);
-  m_btnNever->setWhatsThis (tr ("Never show axes highlights."));
+  m_btnNever->setWhatsThis (tr ("Never show axes checker."));
   layoutLifetime->addWidget (m_btnNever, rowLifetime++, 0, 1, 2);
 
   m_btnNSeconds = new QRadioButton ("Show for a number of seconds", groupBox);
-  m_btnNSeconds->setWhatsThis (tr ("Show axes highlights for a number of seconds after changing axes points."));
+  m_btnNSeconds->setWhatsThis (tr ("Show axes checker for a number of seconds after changing axes points."));
   layoutLifetime->addWidget (m_btnNSeconds, rowLifetime, 0, 1, 1);
 
   m_cmbSeconds = new QComboBox;
@@ -63,7 +61,7 @@ void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
   connect (m_cmbSeconds, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotSeconds (const QString &)));
 
   m_btnForever = new QRadioButton ("Show always", groupBox);
-  m_btnForever->setWhatsThis (tr ("Always show axes highlights."));
+  m_btnForever->setWhatsThis (tr ("Always show axes checker."));
   layoutLifetime->addWidget (m_btnForever, rowLifetime++, 0, 1, 2);
 
   m_groupMode = new QButtonGroup;
@@ -82,15 +80,16 @@ void DlgSettingsAxesHighlights::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
-void DlgSettingsAxesHighlights::createPoints ()
+void DlgSettingsAxesChecker::createPoints ()
 {
-  m_highlightsPoint0 = new HighlightsPoint;
-  m_highlightsPoint1 = new HighlightsPoint;
-  m_highlightsPoint2 = new HighlightsPoint;
+  QVector<QPointF> points;
+  points.push_back (QPointF (X_LEFT, Y_TOP));
+  points.push_back (QPointF (X_LEFT, Y_BOTTOM));
+  points.push_back (QPointF (X_RIGHT, Y_BOTTOM));
 
-  m_scenePreview->addItem (m_highlightsPoint0);
-  m_scenePreview->addItem (m_highlightsPoint1);
-  m_scenePreview->addItem (m_highlightsPoint2);
+  QPolygonF polygon (points);
+  m_checker = new Checker (polygon);
+  m_scenePreview->addItem (m_checker);
 
   // Create an invisible rectangular item that will guarantee a margin all around the outside, since otherwise QGraphicsView
   // will zoom in on the points
@@ -100,12 +99,6 @@ void DlgSettingsAxesHighlights::createPoints ()
                                                        RECT_HEIGHT);
   itemRect->setPen (Qt::NoPen);
   m_scenePreview->addItem (itemRect);
-
-  // Since the typical image is wider than it is high, there are usually two points at the bottom and one point up high
-  // on the left. We will position these points the same way
-  m_highlightsPoint0->setPos (QPointF (X_LEFT, Y_BOTTOM));
-  m_highlightsPoint1->setPos (QPointF (X_RIGHT, Y_BOTTOM));
-  m_highlightsPoint2->setPos (QPointF (X_LEFT, Y_TOP));
 
   // For a realistic background, draw two black axis lines underneath (lower z value)
   QGraphicsLineItem *axisHorizontal = new QGraphicsLineItem (X_LEFT, Y_BOTTOM, X_RIGHT, Y_BOTTOM);
@@ -118,15 +111,15 @@ void DlgSettingsAxesHighlights::createPoints ()
   m_scenePreview->addItem (axisVertical);
 }
 
-void DlgSettingsAxesHighlights::createPreview (QGridLayout *layout,
-                                               int &row)
+void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
+                                            int &row)
 {
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);
   m_viewPreview = new ViewPreview (m_scenePreview, this);
-  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the displayed axes highlights"));
+  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the displayed axes checker"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
@@ -134,7 +127,7 @@ void DlgSettingsAxesHighlights::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-QWidget *DlgSettingsAxesHighlights::createSubPanel ()
+QWidget *DlgSettingsAxesChecker::createSubPanel ()
 {
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
@@ -154,46 +147,46 @@ QWidget *DlgSettingsAxesHighlights::createSubPanel ()
   return subPanel;
 }
 
-void DlgSettingsAxesHighlights::handleOk ()
+void DlgSettingsAxesChecker::handleOk ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::handleOk";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::handleOk";
 
-  CmdSettingsAxesHighlights *cmd = new CmdSettingsAxesHighlights (mainWindow (),
-                                                                  cmdMediator ().document(),
-                                                                  *m_modelAxesHighlightsBefore,
-                                                                  *m_modelAxesHighlightsAfter);
+  CmdSettingsAxesChecker *cmd = new CmdSettingsAxesChecker (mainWindow (),
+                                                                cmdMediator ().document(),
+                                                                *m_modelAxesCheckerBefore,
+                                                                *m_modelAxesCheckerAfter);
   cmdMediator ().push (cmd);
 
   hide ();
 }
 
-void DlgSettingsAxesHighlights::load (CmdMediator &cmdMediator)
+void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::load";
 
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelAxesHighlightsBefore != 0) {
-    delete m_modelAxesHighlightsBefore;
+  if (m_modelAxesCheckerBefore != 0) {
+    delete m_modelAxesCheckerBefore;
   }
-  if (m_modelAxesHighlightsAfter != 0) {
-    delete m_modelAxesHighlightsAfter;
+  if (m_modelAxesCheckerAfter != 0) {
+    delete m_modelAxesCheckerAfter;
   }
 
   // Save new data
-  m_modelAxesHighlightsBefore = new DocumentModelAxesHighlights (cmdMediator.document());
-  m_modelAxesHighlightsAfter = new DocumentModelAxesHighlights (cmdMediator.document());
+  m_modelAxesCheckerBefore = new DocumentModelAxesChecker (cmdMediator.document());
+  m_modelAxesCheckerAfter = new DocumentModelAxesChecker (cmdMediator.document());
 
-  HighlightsMode highlightsMode = m_modelAxesHighlightsAfter->highlightsMode();
-  m_btnNever->setChecked (highlightsMode == HIGHLIGHTS_MODE_NEVER);
-  m_btnNSeconds->setChecked (highlightsMode == HIGHLIGHTS_MODE_N_SECONDS);
-  m_btnForever->setChecked (highlightsMode == HIGHLIGHTS_MODE_FOREVER);
-  int indexSeconds = m_cmbSeconds->findData (QVariant (m_modelAxesHighlightsAfter->highlightsSeconds()));
+  CheckerMode checkerMode = m_modelAxesCheckerAfter->checkerMode();
+  m_btnNever->setChecked (checkerMode == CHECKER_MODE_NEVER);
+  m_btnNSeconds->setChecked (checkerMode == CHECKER_MODE_N_SECONDS);
+  m_btnForever->setChecked (checkerMode == CHECKER_MODE_FOREVER);
+  int indexSeconds = m_cmbSeconds->findData (QVariant (m_modelAxesCheckerAfter->checkerSeconds()));
   Q_ASSERT (indexSeconds >= 0);
   m_cmbSeconds->setCurrentIndex(indexSeconds);
 
-  int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelAxesHighlightsAfter->lineColor()));
+  int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelAxesCheckerAfter->lineColor()));
   Q_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
@@ -202,50 +195,48 @@ void DlgSettingsAxesHighlights::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
-void DlgSettingsAxesHighlights::slotGroupMode (QAbstractButton*)
+void DlgSettingsAxesChecker::slotGroupMode (QAbstractButton*)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::slotGroupMode";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::slotGroupMode";
 
   if (m_btnNever->isChecked ()) {
-    m_modelAxesHighlightsAfter->setHighlightsMode(HIGHLIGHTS_MODE_NEVER);
+    m_modelAxesCheckerAfter->setCheckerMode(CHECKER_MODE_NEVER);
   } else if (m_btnNSeconds->isChecked ()) {
-    m_modelAxesHighlightsAfter->setHighlightsMode(HIGHLIGHTS_MODE_N_SECONDS);
+    m_modelAxesCheckerAfter->setCheckerMode(CHECKER_MODE_N_SECONDS);
   } else {
-    m_modelAxesHighlightsAfter->setHighlightsMode(HIGHLIGHTS_MODE_FOREVER);
+    m_modelAxesCheckerAfter->setCheckerMode(CHECKER_MODE_FOREVER);
   }
 
   updateControls ();
   updatePreview();
 }
 
-void DlgSettingsAxesHighlights::slotLineColor(const QString &)
+void DlgSettingsAxesChecker::slotLineColor(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::slotLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::slotLineColor";
 
-  m_modelAxesHighlightsAfter->setLineColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+  m_modelAxesCheckerAfter->setLineColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
   updatePreview();
 }
 
-void DlgSettingsAxesHighlights::slotSeconds (const QString &)
+void DlgSettingsAxesChecker::slotSeconds (const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesHighlights::slotLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::slotLineColor";
 
-  m_modelAxesHighlightsAfter->setHighlightsSeconds(m_cmbSeconds->currentData().toInt());
+  m_modelAxesCheckerAfter->setCheckerSeconds(m_cmbSeconds->currentData().toInt());
   updateControls();
 }
 
-void DlgSettingsAxesHighlights::updateControls ()
+void DlgSettingsAxesChecker::updateControls ()
 {
   enableOk (true);
 
   m_cmbSeconds->setEnabled (m_btnNSeconds->isChecked ());
 }
 
-void DlgSettingsAxesHighlights::updatePreview()
+void DlgSettingsAxesChecker::updatePreview()
 {
-  QColor lineColor = ColorPaletteToQColor (m_modelAxesHighlightsAfter->lineColor ());
-  Q_ASSERT (m_highlightsPoint0 != 0 && m_highlightsPoint1 != 0 && m_highlightsPoint2 != 0);
-  m_highlightsPoint0->setLineColor (lineColor);
-  m_highlightsPoint1->setLineColor (lineColor);
-  m_highlightsPoint2->setLineColor (lineColor);
+  QColor lineColor = ColorPaletteToQColor (m_modelAxesCheckerAfter->lineColor ());
+  Q_ASSERT (m_checker != 0);
+  m_checker->setLineColor (lineColor);
 }

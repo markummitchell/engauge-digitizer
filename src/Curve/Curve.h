@@ -28,7 +28,7 @@ public:
         const LineStyle &lineStyle,
         const PointStyle &pointStyle);
 
-  /// Copy constructor.
+  /// Copy constructor. Copying a Curve only helps for making a copy, since access to any Points inside must be via functor.
   Curve (const Curve &curve);
 
   /// Assignment constructor.

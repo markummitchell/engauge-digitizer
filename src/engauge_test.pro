@@ -24,7 +24,7 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
-    Cmd/CmdSettingsAxesHighlights.h \
+    Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
@@ -56,7 +56,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
-    Dlg/DlgSettingsAxesHighlights.h \
+    Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
@@ -69,7 +69,7 @@ HEADERS  += \
     Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
-    Document/DocumentModelAxesHighlights.h \
+    Document/DocumentModelAxesChecker.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelCurveProperties.h \
     Document/DocumentModelCurves.h \
@@ -98,7 +98,7 @@ HEADERS  += \
     Graphics/GraphicsScene.h \
     Graphics/GraphicsView.h \
     Grid/GridCoordDisable.h \
-    Highlight/Highlights.h \
+    Highlight/Indicator.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -138,7 +138,7 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
-    Cmd/CmdSettingsAxesHighlights.cpp \
+    Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
@@ -164,7 +164,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
-    Dlg/DlgSettingsAxesHighlights.cpp \
+    Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
@@ -177,7 +177,7 @@ SOURCES += \
     Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
-    Document/DocumentModelAxesHighlights.cpp \
+    Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelCurves.cpp \

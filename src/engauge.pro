@@ -7,14 +7,20 @@ RCC_DIR = .rcc
 HEADERS  += \
     include/BackgroundImage.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
+    Callback/CallbackAxesCheckerFromAxesPoints.h \
     Callback/CallbackAxisPointsAbstract.h \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
-    Callback/CallbackPositionHighlightsFromAxesPoints.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
     Callback/CallbackUpdateTransform.h \
+    Checker/Checker.h \
+    Checker/CheckerMode.h \
+    Checker/CheckerStateAbstractBase.h \
+    Checker/CheckerStateContext.h \
+    Checker/CheckerStateTransformDefined.h \
+    Checker/CheckerStateTransformUndefined.h \
     Cmd/CmdAbstract.h \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
@@ -25,7 +31,7 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
-    Cmd/CmdSettingsAxesHighlights.h \
+    Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
@@ -58,7 +64,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
-    Dlg/DlgSettingsAxesHighlights.h \
+    Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
@@ -71,7 +77,7 @@ HEADERS  += \
     Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
-    Document/DocumentModelAxesHighlights.h \
+    Document/DocumentModelAxesChecker.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelCurveProperties.h \
     Document/DocumentModelCurves.h \
@@ -101,12 +107,6 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
-    Highlights/HighlightsMode.h \
-    Highlights/HighlightsPoint.h \
-    Highlights/HighlightsStateAbstractBase.h \
-    Highlights/HighlightsStateContext.h \
-    Highlights/HighlightsStateTransformDefined.h \
-    Highlights/HighlightsStateTransformUndefined.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -130,13 +130,18 @@ HEADERS  += \
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
+    Callback/CallbackAxesCheckerFromAxesPoints.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
-    Callback/CallbackPositionHighlightsFromAxesPoints.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
+    Checker/Checker.cpp \
+    Checker/CheckerStateAbstractBase.cpp \
+    Checker/CheckerStateContext.cpp \
+    Checker/CheckerStateTransformDefined.cpp \
+    Checker/CheckerStateTransformUndefined.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
@@ -147,7 +152,7 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
-    Cmd/CmdSettingsAxesHighlights.cpp \
+    Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
@@ -174,7 +179,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
-    Dlg/DlgSettingsAxesHighlights.cpp \
+    Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
@@ -187,7 +192,7 @@ SOURCES += \
     Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
-    Document/DocumentModelAxesHighlights.cpp \
+    Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelCurves.cpp \
@@ -207,11 +212,6 @@ SOURCES += \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
-    Highlights/HighlightsPoint.cpp \
-    Highlights/HighlightsStateAbstractBase.cpp \
-    Highlights/HighlightsStateContext.cpp \
-    Highlights/HighlightsStateTransformDefined.cpp \
-    Highlights/HighlightsStateTransformUndefined.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
@@ -237,6 +237,7 @@ TARGET = ../bin/engauge
 QT += core gui network printsupport widgets
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \
+               Checker \
                Cmd \
                Coord \
                Correlation \
@@ -248,7 +249,6 @@ INCLUDEPATH += Callback \
                Filter \
                Graphics \
                Grid \
-               Highlights \
                img \
                include \
                Line \
