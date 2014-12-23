@@ -17,10 +17,6 @@ HEADERS  += \
     Callback/CallbackUpdateTransform.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
-    Checker/CheckerStateAbstractBase.h \
-    Checker/CheckerStateContext.h \
-    Checker/CheckerStateTransformDefined.h \
-    Checker/CheckerStateTransformUndefined.h \
     Cmd/CmdAbstract.h \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
@@ -121,6 +117,10 @@ HEADERS  += \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
+    Transformation/TransformationStateAbstractBase.h \
+    Transformation/TransformationStateContext.h \
+    Transformation/TransformationStateDefined.h \
+    Transformation/TransformationStateUndefined.h \
     View/ViewPreview.h \
     View/ViewProfile.h \
     View/ViewProfileDivider.h \
@@ -138,10 +138,6 @@ SOURCES += \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
     Checker/Checker.cpp \
-    Checker/CheckerStateAbstractBase.cpp \
-    Checker/CheckerStateContext.cpp \
-    Checker/CheckerStateTransformDefined.cpp \
-    Checker/CheckerStateTransformUndefined.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
@@ -223,6 +219,10 @@ SOURCES += \
     Settings/SettingsCurve.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
+    Transformation/TransformationStateAbstractBase.cpp \
+    Transformation/TransformationStateContext.cpp \
+    Transformation/TransformationStateDefined.cpp \
+    Transformation/TransformationStateUndefined.cpp \
     View/ViewPreview.cpp \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \

@@ -1,6 +1,5 @@
 #include "BackgroundImage.h"
 #include "img/bannerapp.xpm"
-#include "CallbackAxesCheckerFromAxesPoints.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -22,14 +21,12 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
-#include "DocumentModelGridRemoval.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
-#include "GridClassifier.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -58,6 +55,7 @@
 #include <QWhatsThis>
 #include <QXmlStreamWriter>
 #include "StatusBar.h"
+#include "TransformationStateContext.h"
 #include "ZoomFactor.h"
 
 const QString EMPTY_FILENAME ("");
@@ -89,7 +87,8 @@ MainWindow::MainWindow(QWidget *parent) :
   createToolBars ();
   createScene ();
   createLoadImageFromUrl ();
-  createStateContext ();
+  createStateContextDigitize ();
+  createStateContextTransformation ();
   createSettingsDialogs ();
   updateControls ();
 
@@ -657,10 +656,15 @@ void MainWindow::createScene ()
   m_layout->addWidget (m_view);
 }
 
-void MainWindow::createStateContext ()
+void MainWindow::createStateContextDigitize ()
 {
   m_digitizeStateContext = new DigitizeStateContext (*this,
                                                      *m_view);
+}
+
+void MainWindow::createStateContextTransformation ()
+{
+  m_transformationStateContext = new TransformationStateContext ();
 }
 
 void MainWindow::createStatusBar ()
@@ -1888,51 +1892,32 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
   m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
 
+  // Trigger state transitions for transformation if appropriate
   if (m_transformation.transformIsDefined() && !transformWasDefined) {
-    updateAfterTransitionFromNoTransformToTransform ();
-//  } else if (!m_transformation.transformIsDefined() && transformWasDefined) {
-//    updateAfterTransitionFrom
+
+    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+                                                         cmdMediator(),
+                                                         m_transformation);
+
+  } else if (!m_transformation.transformIsDefined() && transformWasDefined) {
+
+    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+                                                         cmdMediator(),
+                                                         m_transformation);
+
   }
 
   if (m_transformation.transformIsDefined()) {
+
+    // Update transformation. This is done regardless of whether or not the transformation was defined before
     m_cmdMediator->applyTransformation (m_transformation);
+
   }
 
   QPoint posLocal = m_view->mapFromGlobal (QCursor::pos ()) - HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT;
   QPointF posScreen = m_view->mapToScene (posLocal);
 
   slotMouseMove (posScreen); // Update the status bar coordinates to reflect the newly updated transformation
-}
-
-void MainWindow::updateAfterTransitionFromNoTransformToTransform()
-{
-  // Initialize grid removal settings so user does not have to
-  int countX, countY;
-  double startX, startY, stepX, stepY;
-  GridClassifier gridClassifier;
-  gridClassifier.classify (cmdMediator().document().pixmap(),
-                           m_transformation,
-                           countX,
-                           startX,
-                           stepX,
-                           countY,
-                           startY,
-                           stepY);
-  DocumentModelGridRemoval modelGridRemoval (startX,
-                                             startY,
-                                             stepX,
-                                             stepY,
-                                             countX,
-                                             countY);
-  cmdMediator().document().setModelGridRemoval (modelGridRemoval);
-
-  // Create axes checker
-  CallbackAxesCheckerFromAxesPoints ftor;
-  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackAxesCheckerFromAxesPoints::callback);
-  cmdMediator().iterateThroughCurvePointsAxes (ftorWithCallback);
-
-//  m_axesChecker = new Checker (ftor.polygon ());
 }
 
 void MainWindow::updateControls ()

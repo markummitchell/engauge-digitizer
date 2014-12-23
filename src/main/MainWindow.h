@@ -27,7 +27,6 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class GraphicsScene;
 class GraphicsView;
-class IndicatorPoint;
 class LoadImageFromUrl;
 class QAction;
 class QActionGroup;
@@ -40,6 +39,7 @@ class QSettings;
 class QToolBar;
 class QVBoxLayout;
 class StatusBar;
+class TransformationStateContext;
 
 /// Main window consisting of menu, graphics scene, status bar and optional toolbars as a Single Document Interface
 class MainWindow : public QMainWindow
@@ -187,7 +187,8 @@ private:
   void createMenus();
   void createScene ();
   void createSettingsDialogs ();
-  void createStateContext();
+  void createStateContextDigitize();
+  void createStateContextTransformation();
   void createStatusBar();
   void createToolBars();
   void fileImport (const QString &fileName);
@@ -205,7 +206,6 @@ private:
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
   void updateAfterCommandStatusBarCoords ();
-  void updateAfterTransitionFromNoTransformToTransform(); // Housekeeping after transformation has just been defined
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);
   void updateViewedBackground();
@@ -296,8 +296,6 @@ private:
   QGraphicsPixmapItem *m_imageUnfiltered; // Original unfiltered image
   QGraphicsPixmapItem *m_imageFiltered; // Image produced by Filter class
 
-  IndicatorPoint *m_axesIndicator;
-
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -309,7 +307,12 @@ private:
   QToolBar *m_toolBackground;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
+
+  // State machine for user interface states
   DigitizeStateContext *m_digitizeStateContext;
+
+  // State machine for transformation states
+  TransformationStateContext *m_transformationStateContext;
 
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
   DlgSettingsCoords *m_dlgSettingsCoords;
