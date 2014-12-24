@@ -8,12 +8,14 @@ class TransformationStateUndefined : public TransformationStateAbstractBase
 {
 public:
   /// Single constructor.
-  TransformationStateUndefined(TransformationStateContext &context);
+  TransformationStateUndefined(TransformationStateContext &context,
+                               QGraphicsScene &scene);
 
   virtual void begin(CmdMediator &cmdMediator,
                      const Transformation &transformation);
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation);
+  virtual void updateLineColor (const QColor &lineColor);
 
 private:
   TransformationStateUndefined();

@@ -21,6 +21,7 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "EnumsToQt.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
@@ -664,7 +665,9 @@ void MainWindow::createStateContextDigitize ()
 
 void MainWindow::createStateContextTransformation ()
 {
-  m_transformationStateContext = new TransformationStateContext ();
+  Q_ASSERT (m_scene != 0);
+
+  m_transformationStateContext = new TransformationStateContext (*m_scene);
 }
 
 void MainWindow::createStatusBar ()
@@ -2020,6 +2023,7 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
+  m_transformationStateContext->updateLineColor (ColorPaletteToQColor (modelAxesChecker.lineColor()));
 }
 
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)

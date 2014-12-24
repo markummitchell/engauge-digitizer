@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
 #include "MainWindow.h"
+#include <QColor>
 #include <QComboBox>
 #include <QPushButton>
 #include <QSpacerItem>

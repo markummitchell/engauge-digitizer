@@ -7,6 +7,7 @@
 #include <QPolygonF>
 
 class Point;
+class QGraphicsScene;
 class QPolygonF;
 class Transformation;
 
@@ -18,7 +19,7 @@ class Checker : public QGraphicsPolygonItem
 {
 public:
   /// Single constructor for DlgSettingsAxesChecker, which does not have an explicit transformation. The identity transformation is assumed
-  Checker();
+  Checker(QGraphicsScene &scene);
 
   /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker
   void prepareForDisplay (const QPolygonF &polygon,
@@ -28,7 +29,11 @@ public:
   void prepareForDisplay (const QList<Point> &Points,
                           const QColor &lineColor);
 
+  /// Change to a new line color.
+  void setLineColor (const QColor &color);
+
 private:
+  Checker();
 
   // Compute fourth point so each axis has two points along it, which gives three line segments (all from the intersection point).
   // We need three lines since resulting polygon must be closed (first and last points are the same or else there will be an

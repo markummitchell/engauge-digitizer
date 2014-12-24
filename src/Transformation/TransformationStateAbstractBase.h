@@ -2,6 +2,7 @@
 #define TRANSFORMATION_STATE_ABSTRACT_BASE_H
 
 class CmdMediator;
+class QColor;
 class Transformation;
 class TransformationStateContext;
 
@@ -27,6 +28,9 @@ public:
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation) = 0;
+
+  /// Set new line color.
+  virtual void updateLineColor (const QColor &lineColor) = 0;
 
 protected:
   /// Reference to the TransformationStateContext that contains all the TransformationStateAbstractBase subclasses, without const.

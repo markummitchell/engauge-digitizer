@@ -1,13 +1,15 @@
 #include "CmdMediator.h"
+#include "Logger.h"
+#include <QGraphicsScene>
 #include "TransformationStateAbstractBase.h"
 #include "TransformationStateContext.h"
 #include "TransformationStateDefined.h"
 #include "TransformationStateUndefined.h"
 
-TransformationStateContext::TransformationStateContext()
+TransformationStateContext::TransformationStateContext(QGraphicsScene &scene)
 {
-  m_states.insert (TRANSFORMATION_STATE_DEFINED  , new TransformationStateDefined   (*this));
-  m_states.insert (TRANSFORMATION_STATE_UNDEFINED, new TransformationStateUndefined (*this));
+  m_states.insert (TRANSFORMATION_STATE_DEFINED  , new TransformationStateDefined   (*this, scene));
+  m_states.insert (TRANSFORMATION_STATE_UNDEFINED, new TransformationStateUndefined (*this, scene));
   Q_ASSERT (m_states.size () == NUM_TRANSFORMATION_STATES);
 
   m_currentState = NUM_TRANSFORMATION_STATES; // Value that forces a transition right away
@@ -21,6 +23,8 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
                                                          CmdMediator &cmdMediator,
                                                          const Transformation &transformation)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::triggerStateTransition";
+
   // Transition if we are not already at the requested state
   if (transformationState != m_currentState) {
 
@@ -36,4 +40,11 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
     m_states[m_currentState]->begin(cmdMediator,
                                     transformation);
   }
+}
+
+void TransformationStateContext::updateLineColor (const QColor &color)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateLineColor";
+
+  m_states[m_currentState]->updateLineColor (color);
 }

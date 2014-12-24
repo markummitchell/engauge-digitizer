@@ -86,8 +86,7 @@ void DlgSettingsAxesChecker::createPoints ()
 {
   QBrush AXES_BRUSH (Qt::gray);
 
-  m_checker = new Checker;
-  m_scenePreview->addItem (m_checker);
+  m_checker = new Checker (*m_scenePreview);
 
   // Create an invisible rectangular item that will guarantee a margin all around the outside, since otherwise QGraphicsView
   // will zoom in on the points
@@ -225,6 +224,7 @@ void DlgSettingsAxesChecker::slotLineColor(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::slotLineColor";
 
   m_modelAxesCheckerAfter->setLineColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+  updateControls();
   updatePreview();
 }
 

@@ -5,6 +5,7 @@
 #include "TransformationStateAbstractBase.h"
 
 class CmdMediator;
+class QGraphicsScene;
 class Transformation;
 
 /// Context class for transformation state machine. This removes some tricky state processing from MainWindow.
@@ -14,15 +15,18 @@ class TransformationStateContext
 {
 public:
   /// Single constructor.
-  TransformationStateContext();
+  TransformationStateContext(QGraphicsScene &scene);
   virtual ~TransformationStateContext();
 
   /// Trigger a state transition to be performed immediately.
   void triggerStateTransition (TransformationState transformationState,
                                CmdMediator &cmdMediator,
                                const Transformation &transformation);
+  /// Set new line color.
+  void updateLineColor (const QColor &lineColor);
 
 private:
+  TransformationStateContext();
 
   QVector<TransformationStateAbstractBase*> m_states;
   TransformationState m_currentState;

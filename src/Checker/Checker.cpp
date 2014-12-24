@@ -1,6 +1,7 @@
 #include "CallbackUpdateTransform.h"
 #include "Checker.h"
 #include "Logger.h"
+#include <QGraphicsScene>
 #include <qmath.h>
 #include <QPen>
 #include "Transformation.h"
@@ -13,10 +14,12 @@ const double CHECKER_OPACITY = 0.6;
 // One-pixel wide line (produced by setting width=0) is too small
 const int CHECKER_POINTS_WIDTH = 5;
 
-Checker::Checker() :
+Checker::Checker(QGraphicsScene &scene) :
   QGraphicsPolygonItem (0)
 {
   setOpacity (CHECKER_OPACITY);
+  setZValue (1000);// shitty hack
+  scene.addItem (this);
 }
 
 void Checker::prepareForDisplay (const QPolygonF &polygon,
@@ -48,7 +51,7 @@ void Checker::prepareForDisplay (const QList<Point> &points,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  setPen (QPen (QBrush (lineColor), CHECKER_POINTS_WIDTH));
+  setLineColor (lineColor);
 
   Q_ASSERT (points.count () == 3);
 
@@ -89,6 +92,11 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   }
 
   setPolygon (polygonClosed);
+}
+
+void Checker::setLineColor (const QColor &color)
+{
+  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
 }
 
 QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
@@ -137,7 +145,7 @@ QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
   QTransform transform = transformationFromThreePoints (pointAxis0a,
                                                         pointAxis0b,
                                                         pointAxis1);
-  QPointF pointBothAxesScreen = transform.map (pointBothAxesGraph);
+  QPointF pointBothAxesScreen = transform.inverted ().transposed().map (pointBothAxesGraph);
 
   // Create the three lines in screen coordinates
   QPolygonF polygon;

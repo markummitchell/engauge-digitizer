@@ -2,14 +2,18 @@
 #include "Checker.h"
 #include "CmdMediator.h"
 #include "Document.h"
+#include "EnumsToQt.h"
 #include "GridClassifier.h"
 #include "Logger.h"
+#include <QGraphicsScene>
 #include "Transformation.h"
 #include "TransformationStateContext.h"
 #include "TransformationStateDefined.h"
 
-TransformationStateDefined::TransformationStateDefined(TransformationStateContext &context) :
-  TransformationStateAbstractBase (context)
+TransformationStateDefined::TransformationStateDefined(TransformationStateContext &context,
+                                                       QGraphicsScene &scene) :
+  TransformationStateAbstractBase (context),
+  m_axesChecker (new Checker (scene))
 {
 }
 
@@ -44,9 +48,9 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
                                                                                                     &CallbackAxesCheckerFromAxesPoints::callback);
   cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
-  m_axesChecker.setVisible (true);
-  m_axesChecker.prepareForDisplay (ftor.points(),
-                                   cmdMediator.document().modelAxesChecker().lineColor());
+  m_axesChecker->prepareForDisplay (ftor.points(),
+                                    ColorPaletteToQColor (cmdMediator.document().modelAxesChecker().lineColor()));
+  m_axesChecker->setVisible (true);
 }
 
 void TransformationStateDefined::end(CmdMediator &cmdMediator,
@@ -54,5 +58,12 @@ void TransformationStateDefined::end(CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
 
-  m_axesChecker.setVisible (false);
+  m_axesChecker->setVisible (false);
+}
+
+void TransformationStateDefined::updateLineColor (const QColor &lineColor)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::updateLineColor";
+
+  m_axesChecker->setLineColor (lineColor);
 }
