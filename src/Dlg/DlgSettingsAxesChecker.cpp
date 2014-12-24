@@ -24,6 +24,8 @@ const int X_LEFT = RECT_WIDTH / 8;
 const int X_RIGHT = RECT_WIDTH * 7 / 8;
 const int Y_TOP = RECT_HEIGHT / 8;
 const int Y_BOTTOM = RECT_HEIGHT * 7 / 8;
+const int TICKS_PER_AXIS = 6;
+const int TICK_MARK_LENGTH = 8;
 
 DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Axes Checker", mainWindow),
@@ -75,20 +77,16 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
 
   m_cmbLineColor = new QComboBox;
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the highlight lines drawn at each axis point"));
-  populateColorComboWithTransparent (*m_cmbLineColor);
+  populateColorComboWithoutTransparent (*m_cmbLineColor);
   connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
 void DlgSettingsAxesChecker::createPoints ()
 {
-  QVector<QPointF> points;
-  points.push_back (QPointF (X_LEFT, Y_TOP));
-  points.push_back (QPointF (X_LEFT, Y_BOTTOM));
-  points.push_back (QPointF (X_RIGHT, Y_BOTTOM));
+  QBrush AXES_BRUSH (Qt::gray);
 
-  QPolygonF polygon (points);
-  m_checker = new Checker (polygon);
+  m_checker = new Checker;
   m_scenePreview->addItem (m_checker);
 
   // Create an invisible rectangular item that will guarantee a margin all around the outside, since otherwise QGraphicsView
@@ -100,15 +98,26 @@ void DlgSettingsAxesChecker::createPoints ()
   itemRect->setPen (Qt::NoPen);
   m_scenePreview->addItem (itemRect);
 
-  // For a realistic background, draw two black axis lines underneath (lower z value)
-  QGraphicsLineItem *axisHorizontal = new QGraphicsLineItem (X_LEFT, Y_BOTTOM, X_RIGHT, Y_BOTTOM);
-  QGraphicsLineItem *axisVertical = new QGraphicsLineItem (X_LEFT, Y_BOTTOM, X_LEFT, Y_TOP);
-  axisHorizontal->setPen (QPen (QBrush (Qt::black), AXIS_WIDTH));
-  axisVertical->setPen (QPen (QBrush (Qt::black), AXIS_WIDTH));
-  axisHorizontal->setZValue (-1);
-  axisVertical->setZValue (-1);
-  m_scenePreview->addItem (axisHorizontal);
-  m_scenePreview->addItem (axisVertical);
+  // For a realistic background, draw a rectangle underneath (lower z value), and some tick marks
+  QGraphicsRectItem *frameBox = new QGraphicsRectItem (X_LEFT,
+                                                       Y_BOTTOM,
+                                                       X_RIGHT - X_LEFT,
+                                                       Y_TOP - Y_BOTTOM);
+  frameBox->setPen (QPen (AXES_BRUSH, AXIS_WIDTH));
+  frameBox->setZValue (-1);
+  m_scenePreview->addItem (frameBox);
+  for (int x = X_LEFT; x < X_RIGHT; x += (X_RIGHT - X_LEFT) / TICKS_PER_AXIS) {
+    QGraphicsLineItem *tick = new QGraphicsLineItem (x, Y_BOTTOM, x, Y_BOTTOM + TICK_MARK_LENGTH);
+    tick->setPen (QPen (AXES_BRUSH, AXIS_WIDTH));
+    tick->setZValue (-1);
+    m_scenePreview->addItem (tick);
+  }
+  for (int y = Y_TOP; y < Y_BOTTOM; y += (Y_BOTTOM - Y_TOP) / TICKS_PER_AXIS) {
+    QGraphicsLineItem *tick = new QGraphicsLineItem (X_LEFT, y, X_LEFT + TICK_MARK_LENGTH, y);
+    tick->setPen (QPen (AXES_BRUSH, AXIS_WIDTH));
+    tick->setZValue (-1);
+    m_scenePreview->addItem (tick);
+  }
 }
 
 void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
@@ -152,9 +161,9 @@ void DlgSettingsAxesChecker::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::handleOk";
 
   CmdSettingsAxesChecker *cmd = new CmdSettingsAxesChecker (mainWindow (),
-                                                                cmdMediator ().document(),
-                                                                *m_modelAxesCheckerBefore,
-                                                                *m_modelAxesCheckerAfter);
+                                                            cmdMediator ().document(),
+                                                            *m_modelAxesCheckerBefore,
+                                                            *m_modelAxesCheckerAfter);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -236,7 +245,15 @@ void DlgSettingsAxesChecker::updateControls ()
 
 void DlgSettingsAxesChecker::updatePreview()
 {
+  QVector<QPointF> points;
+  points.push_back (QPointF (X_LEFT, Y_TOP));
+  points.push_back (QPointF (X_LEFT, Y_BOTTOM));
+  points.push_back (QPointF (X_RIGHT, Y_BOTTOM));
+
+  QPolygonF polygon (points);
+
   QColor lineColor = ColorPaletteToQColor (m_modelAxesCheckerAfter->lineColor ());
   Q_ASSERT (m_checker != 0);
-  m_checker->setLineColor (lineColor);
+  m_checker->prepareForDisplay (polygon,
+                                lineColor);
 }

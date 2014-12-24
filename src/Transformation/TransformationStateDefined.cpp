@@ -1,5 +1,7 @@
 #include "CallbackAxesCheckerFromAxesPoints.h"
+#include "Checker.h"
 #include "CmdMediator.h"
+#include "Document.h"
 #include "GridClassifier.h"
 #include "Logger.h"
 #include "Transformation.h"
@@ -7,8 +9,7 @@
 #include "TransformationStateDefined.h"
 
 TransformationStateDefined::TransformationStateDefined(TransformationStateContext &context) :
-  TransformationStateAbstractBase (context),
-  m_transformation (0)
+  TransformationStateAbstractBase (context)
 {
 }
 
@@ -43,11 +44,15 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
                                                                                                     &CallbackAxesCheckerFromAxesPoints::callback);
   cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
-//  m_axesChecker = new Checker (ftor.polygon ());
+  m_axesChecker.setVisible (true);
+  m_axesChecker.prepareForDisplay (ftor.points(),
+                                   cmdMediator.document().modelAxesChecker().lineColor());
 }
 
 void TransformationStateDefined::end(CmdMediator &cmdMediator,
                                      const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
+
+  m_axesChecker.setVisible (false);
 }

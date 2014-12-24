@@ -3,7 +3,6 @@
 
 #include "CallbackSearchReturn.h"
 #include "Point.h"
-#include <QPolygonF>
 #include <QString>
 #include <QList>
 
@@ -21,7 +20,7 @@ public:
                                  const Point &point);
 
   /// Return the collected points as a polygon, in screen coordinates.
-  QPolygonF polygon () const;
+  Points points () const;
 
 private:
 

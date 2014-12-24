@@ -1954,6 +1954,7 @@ void MainWindow::updateControls ()
   m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
 
+  m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());

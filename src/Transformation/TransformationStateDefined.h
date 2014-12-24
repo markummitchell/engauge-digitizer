@@ -1,6 +1,7 @@
 #ifndef TRANSFORMATION_STATE_DEFINED_H
 #define TRANSFORMATION_STATE_DEFINED_H
 
+#include "Checker.h"
 #include "Transformation.h"
 #include "TransformationStateAbstractBase.h"
 
@@ -19,7 +20,7 @@ public:
 private:
   TransformationStateDefined();
 
-  Transformation *m_transformation;
+  Checker m_axesChecker;
 };
 
 #endif // TRANSFORMATION_STATE_DEFINED_H

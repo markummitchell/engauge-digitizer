@@ -14,9 +14,7 @@ CallbackSearchReturn CallbackAxesCheckerFromAxesPoints::callback (const QString 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-QPolygonF CallbackAxesCheckerFromAxesPoints::polygon() const
+Points CallbackAxesCheckerFromAxesPoints::points() const
 {
-  QPolygonF pf;
-
-  return pf;
+  return m_points;
 }
