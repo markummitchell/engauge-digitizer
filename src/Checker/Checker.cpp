@@ -20,6 +20,8 @@ Checker::Checker(QGraphicsScene &scene) :
 {
   setOpacity (CHECKER_OPACITY);
   setZValue (Z_VALUE_IN_FRONT);
+  setToolTip (QObject::tr ("Axes checker. If this does not align with the axes, then the axes points should be checked"));
+
   scene.addItem (this);
 }
 

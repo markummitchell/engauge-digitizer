@@ -37,6 +37,7 @@ void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 
   m_scenePreview = new QGraphicsScene (this);
   m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect grid removal"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
