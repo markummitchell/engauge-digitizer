@@ -10,13 +10,16 @@
 class Transformation
 {
 public:
-  /// Default constructor.
+  /// Default constructor. This is marked as undefined until the proper number of axis points are added
   Transformation();
 
   /// Assignment operator.
   Transformation &operator=(const Transformation &other);
 
-  /// Inequality operator.
+  /// Identity transformation
+  void identity();
+
+  /// Inequality operator. This is marked as defined.
   bool operator!=(const Transformation &other);
 
   /// Return string descriptions of cursor coordinates for status bar

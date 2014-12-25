@@ -1913,7 +1913,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // There was not a define/undefined or undefined/defined transition, but the transformation changed so we
     // need to update the Checker
-    m_transformationStateContext->updateModelAxesChecker(cmdMediator().document().modelAxesChecker());
+    m_transformationStateContext->updateAxesChecker(cmdMediator(),
+                                                    m_transformation);
 
   }
 
@@ -2030,7 +2031,8 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
-  m_transformationStateContext->updateModelAxesChecker (modelAxesChecker);
+  m_transformationStateContext->updateAxesChecker (*m_cmdMediator,
+                                                   m_transformation);
 }
 
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)

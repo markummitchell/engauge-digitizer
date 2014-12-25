@@ -23,9 +23,10 @@ void TransformationStateUndefined::end(CmdMediator &cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::end";
 }
 
-void TransformationStateUndefined::updateModelAxesChecker (const DocumentModelAxesChecker & /* modelAxesChecker */)
+void TransformationStateUndefined::updateAxesChecker (CmdMediator & /* cmdMediator */,
+                                                           const Transformation & /* transformation */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::updateModelAxesChecker";
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::updateAxesChecker";
 
   // Noop
 }

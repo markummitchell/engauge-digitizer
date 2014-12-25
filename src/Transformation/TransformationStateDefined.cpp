@@ -28,6 +28,23 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::begin";
 
+  setModelGridRemoval (cmdMediator,
+                       transformation);
+  updateAxesChecker (cmdMediator,
+                     transformation);
+}
+
+void TransformationStateDefined::end(CmdMediator &cmdMediator,
+                                     const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
+
+  m_axesChecker->setVisible (false);
+}
+
+void TransformationStateDefined::setModelGridRemoval (CmdMediator &cmdMediator,
+                                                      const Transformation &transformation)
+{
   // Initialize grid removal settings so user does not have to
   int countX, countY;
   double startX, startY, stepX, stepY;
@@ -47,25 +64,6 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
                                              countX,
                                              countY);
   cmdMediator.document().setModelGridRemoval (modelGridRemoval);
-
-  // Create axes checker
-  CallbackAxesCheckerFromAxesPoints ftor;
-  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackAxesCheckerFromAxesPoints::callback);
-  cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
-
-  m_axesChecker->prepareForDisplay (ftor.points(),
-                                    cmdMediator.document().modelAxesChecker());
-  m_axesChecker->setVisible (true);
-  startTimer (cmdMediator.document().modelAxesChecker());
-}
-
-void TransformationStateDefined::end(CmdMediator &cmdMediator,
-                                     const Transformation &transformation)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
-
-  m_axesChecker->setVisible (false);
 }
 
 void TransformationStateDefined::slotTimeout()
@@ -79,7 +77,7 @@ void TransformationStateDefined::startTimer (const DocumentModelAxesChecker &mod
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::startTimer";
 
-  m_axesChecker->setVisible (true);
+  m_axesChecker->setVisible (modelAxesChecker.checkerMode () != CHECKER_MODE_NEVER);
 
   if (modelAxesChecker.checkerMode () == CHECKER_MODE_N_SECONDS) {
 
@@ -89,10 +87,17 @@ void TransformationStateDefined::startTimer (const DocumentModelAxesChecker &mod
   }
 }
 
-void TransformationStateDefined::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
+void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
+                                                    const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::updateModelAxesChecker";
+  CallbackAxesCheckerFromAxesPoints ftor;
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackAxesCheckerFromAxesPoints::callback);
+  cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
-  m_axesChecker->updateModelAxesChecker (modelAxesChecker);
-  startTimer (modelAxesChecker);
+  m_axesChecker->prepareForDisplay (ftor.points(),
+                                    cmdMediator.document().modelAxesChecker(),
+                                    transformation);
+  m_axesChecker->setVisible (true);
+  startTimer (cmdMediator.document().modelAxesChecker());
 }

@@ -94,6 +94,28 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
   }
 }
 
+void Transformation::identity()
+{
+  const QString DUMMY_CURVENAME ("dummy");
+
+  Point p1 (DUMMY_CURVENAME, QPointF (0, 0), QPointF (0, 0));
+  Point p2 (DUMMY_CURVENAME, QPointF (1, 0), QPointF (1, 0));
+  Point p3 (DUMMY_CURVENAME, QPointF (0, 1), QPointF (0, 1));
+
+  CallbackUpdateTransform cb;
+  cb.callback (DUMMY_CURVENAME, p1);
+  cb.callback (DUMMY_CURVENAME, p2);
+  cb.callback (DUMMY_CURVENAME, p3);
+
+  m_transformIsDefined = cb.transformIsDefined ();
+  m_xGraphRange = cb.xGraphRange ();
+  m_yGraphRange = cb.yGraphRange ();
+
+  if (m_transformIsDefined) {
+    m_transform = cb.transform ();
+  }
+}
+
 double Transformation::roundOffSmallValues (double value, double range)
 {
   if (qAbs (value) < range / qPow (10.0, PRECISION_DIGITS)) {
@@ -116,7 +138,7 @@ void Transformation::transformInverse (const QPointF &coordGraph,
 {
   Q_ASSERT (m_transformIsDefined);
 
-  coordScreen = m_transform.map (coordGraph);
+  coordScreen = m_transform.inverted ().transposed ().map (coordGraph);
 }
 
 QTransform Transformation::transformMatrix () const

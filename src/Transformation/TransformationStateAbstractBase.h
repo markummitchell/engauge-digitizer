@@ -31,7 +31,8 @@ public:
                    const Transformation &transformation) = 0;
 
   /// Apply the new DocumentModelAxesChecker
-  virtual void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker) = 0;
+  virtual void updateAxesChecker (CmdMediator &cmdMediator,
+                                  const Transformation &transformation) = 0;
 
 protected:
   /// Reference to the TransformationStateContext that contains all the TransformationStateAbstractBase subclasses, without const.

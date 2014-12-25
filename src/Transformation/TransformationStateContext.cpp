@@ -42,9 +42,11 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
   }
 }
 
-void TransformationStateContext::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
+void TransformationStateContext::updateAxesChecker (CmdMediator &cmdMediator,
+                                                    const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateModelAxesChecker";
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateAxesChecker";
 
-  m_states[m_currentState]->updateModelAxesChecker (modelAxesChecker);
+  m_states[m_currentState]->updateAxesChecker (cmdMediator,
+                                               transformation);
 }

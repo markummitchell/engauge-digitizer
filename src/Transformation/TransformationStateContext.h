@@ -25,7 +25,8 @@ public:
                                const Transformation &transformation);
 
   /// Apply the new DocumentModelAxesChecker
-  void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker);
+  void updateAxesChecker (CmdMediator &cmdMediator,
+                          const Transformation &transformation);
 
 private:
   TransformationStateContext();

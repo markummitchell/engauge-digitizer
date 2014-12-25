@@ -1,4 +1,3 @@
-#include "CallbackUpdateTransform.h"
 #include "Checker.h"
 #include "EnumsToQt.h"
 #include "Logger.h"
@@ -44,12 +43,16 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
     points.push_back (p);
   }
 
+  Transformation transformIdentity;
+  transformIdentity.identity();
   prepareForDisplay (points,
-                     modelAxesChecker);
+                     modelAxesChecker,
+                     transformIdentity);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
-                                 const DocumentModelAxesChecker &modelAxesChecker)
+                                 const DocumentModelAxesChecker &modelAxesChecker,
+                                 const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
@@ -71,22 +74,22 @@ void Checker::prepareForDisplay (const QList<Point> &points,
 
     // Two points are on vertical axis. Draw perpendicular line through the third point to represent horizontal axis
     if (x == x01) {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2));
+      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2), transformation);
     } else if (x == x12) {
-      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0));
+      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0), transformation);
     } else {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1));
+      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1), transformation);
     }
 
   } else {
 
     // Two points are on horizontal axis. Draw perpendicular line through the third point to represent vertical axis
     if (y == y01) {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2));
+      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2), transformation);
     } else if (y == y12) {
-      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0));
+      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0), transformation);
     } else {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1));
+      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1), transformation);
     }
 
   }
@@ -96,9 +99,17 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   updateModelAxesChecker (modelAxesChecker);
 }
 
+void Checker::setLineColor (const DocumentModelAxesChecker &modelAxesChecker)
+{
+  QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
+
+  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
+}
+
 QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
                                               const Point &pointAxis0b,
-                                              const Point &pointAxis1)
+                                              const Point &pointAxis1,
+                                              const Transformation &transformation)
 {
   const double EPSILON = (qMax (qAbs (pointAxis0a.posGraph().x() - pointAxis0b.posGraph().x ()),
                                 qAbs (pointAxis0a.posGraph().y() - pointAxis0b.posGraph().y ()))) / 1000000.0;
@@ -139,10 +150,9 @@ QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
   }
 
   // Transform intersection point to screen coordinates
-  QTransform transform = transformationFromThreePoints (pointAxis0a,
-                                                        pointAxis0b,
-                                                        pointAxis1);
-  QPointF pointBothAxesScreen = transform.inverted ().transposed().map (pointBothAxesGraph);
+  QPointF pointBothAxesScreen;
+  transformation.transformInverse (pointBothAxesGraph,
+                                   pointBothAxesScreen);
 
   // Create the three lines in screen coordinates
   QPolygonF polygon;
@@ -156,20 +166,6 @@ QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
   polygon.push_back (pointBothAxesScreen);
 
   return polygon;
-}
-
-QTransform Checker::transformationFromThreePoints (const Point &pointAxis0a,
-                                                   const Point &pointAxis0b,
-                                                   const Point &pointAxis1)
-{
-  const QString DUMMY_CURVENAME;
-
-  CallbackUpdateTransform cb;
-  cb.callback (DUMMY_CURVENAME, pointAxis0a);
-  cb.callback (DUMMY_CURVENAME, pointAxis0b);
-  cb.callback (DUMMY_CURVENAME, pointAxis1);
-
-  return cb.transform();
 }
 
 void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)

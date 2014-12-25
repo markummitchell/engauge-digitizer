@@ -23,31 +23,32 @@ public:
   /// Single constructor for DlgSettingsAxesChecker, which does not have an explicit transformation. The identity transformation is assumed
   Checker(QGraphicsScene &scene);
 
-  /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker
+  /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker.
+  /// The identity matrix is used for the transformations between screen and graph coordinates
   void prepareForDisplay (const QPolygonF &polygon,
                           const DocumentModelAxesChecker &modelAxesChecker);
 
   /// Create the polygon from current information, including pixel and graph coordinates, just prior to display. This is for TransformationStateDefined
   void prepareForDisplay (const QList<Point> &Points,
-                          const DocumentModelAxesChecker &modelAxesChecker);
+                          const DocumentModelAxesChecker &modelAxesChecker,
+                          const Transformation &transformation);
 
-  /// Apply the new DocumentModelAxesChecker. This method starts the timer unless the mode is never or forever
+  /// Apply the new DocumentModelAxesChecker, to the points already associated with this object. This method starts the
+  /// timer unless the mode is never or forever
   virtual void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker);
 
 private:
   Checker();
+
+  void setLineColor(const DocumentModelAxesChecker &modelAxesChecker);
 
   // Compute fourth point so each axis has two points along it, which gives three line segments (all from the intersection point).
   // We need three lines since resulting polygon must be closed (first and last points are the same or else there will be an
   // unwanted final line)
   QPolygonF threeLinesFromThreePoints (const Point &pointAxis0a,
                                        const Point &pointAxis0b,
-                                       const Point &pointAxis1);
-
-  // Compute transformation locally, rather than having to pass transformation through multiple levels of code from highest level
-  QTransform transformationFromThreePoints (const Point &pointAxis0a,
-                                            const Point &pointAxis0b,
-                                            const Point &pointAxis1);
+                                       const Point &pointAxis1,
+                                       const Transformation &transformation);
 };
 
 #endif // CHECKER_H
