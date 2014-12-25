@@ -14,7 +14,7 @@ class CallbackUpdateTransform : public CallbackAxisPointsAbstract
 {
 public:
   /// Single constructor.
-  CallbackUpdateTransform();
+  CallbackUpdateTransform(const DocumentModelCoords &modelCoords);
 
   /// Returns screen-to-graph transform after transformIsDefined has already indicated success.
   QTransform transform ();
@@ -22,6 +22,10 @@ public:
   /// True if enough Points were available to create a Transformation. Except for the node count, all other
   /// failure modes are caught externally so user gets immediate feedback as soon as bad axis point data appears
   bool transformIsDefined () const;
+
+private:
+  CallbackUpdateTransform();
+
 };
 
 #endif // CALLBACK_UPDATE_TRANSFORM_H

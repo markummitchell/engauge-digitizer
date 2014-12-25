@@ -2,6 +2,7 @@
 #define TRANSFORMATION_H
 
 #include "CmdMediator.h"
+#include "DocumentModelCoords.h"
 #include <QPoint>
 #include <QString>
 #include <QTransform>
@@ -31,11 +32,11 @@ public:
   /// Transform is defined when at least three axis points have been digitized
   bool transformIsDefined() const { return m_transformIsDefined; }
 
-  /// Transform from pixel screen coordinates to graph coordinates
+  /// Transform from cartesian pixel screen coordinates to cartesian/polar graph coordinates
   void transform (const QPointF &coordScreen,
                   QPointF &coordGraph) const;
 
-  /// Transform from graph coordinates to pixel screen coordinates
+  /// Transform from cartesian/polar graph coordinates to cartesian pixel screen coordinates
   void transformInverse (const QPointF &coordGraph,
                          QPointF &coordScreen) const;
 
@@ -54,7 +55,12 @@ public:
 
 private:
   bool m_transformIsDefined;
+
+  // Transform between cartesian screen coordinates and cartesian graph coordinates
   QTransform m_transform;
+
+  // Coordinates information from last time the transform was updated. Only defined if  m_transformIsDefined is true
+  DocumentModelCoords m_modelCoords;
 
   // No need to display values like 1E-17 when it is insignificant relative to the range
   double roundOffSmallValues (double value, double range);

@@ -2,6 +2,7 @@
 #define CALLBACK_AXIS_POINTS_ABSTRACT
 
 #include "CallbackSearchReturn.h"
+#include "DocumentModelCoords.h"
 #include <QString>
 #include <QTransform>
 
@@ -21,10 +22,11 @@ class CallbackAxisPointsAbstract
 {
 public:
   /// Constructor for when all of the existing axis points are to be processed as is.
-  CallbackAxisPointsAbstract();
+  CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords);
 
   /// Constructor for when the data for one of the existing axis points is to be locally overwritten.
-  CallbackAxisPointsAbstract(const QString pointIdentifierOverride,
+  CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
+                             const QString pointIdentifierOverride,
                              const QPointF &posGraphOverride,
                              const QPointF &posScreenOverride);
 
@@ -57,6 +59,9 @@ private:
 
   bool anyColumnsRepeat (double m [3] [3], int numberColumns);
   bool threePointsAreCollinear (double m [3] [3], int numberColumns);
+
+  // Coordinates information that will be applied to the coordinates before they are used to compute the transformation
+  DocumentModelCoords m_modelCoords;
 
   // For overriding one existing Point. Identifier is empty for no overriding
   QString m_pointIdentifierOverride;

@@ -1,7 +1,8 @@
 #include "CallbackUpdateTransform.h"
 #include "Point.h"
 
-CallbackUpdateTransform::CallbackUpdateTransform()
+CallbackUpdateTransform::CallbackUpdateTransform(const DocumentModelCoords &modelCoords) :
+  CallbackAxisPointsAbstract (modelCoords)
 {
 }
 

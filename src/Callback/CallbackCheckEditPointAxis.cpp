@@ -1,10 +1,12 @@
 #include "CallbackCheckEditPointAxis.h"
 #include "Point.h"
 
-CallbackCheckEditPointAxis::CallbackCheckEditPointAxis(const QString &pointIdentifier,
+CallbackCheckEditPointAxis::CallbackCheckEditPointAxis(const DocumentModelCoords &modelCoords,
+                                                       const QString &pointIdentifier,
                                                        const QPointF &posScreen,
                                                        const QPointF &posGraph) :
-  CallbackAxisPointsAbstract (pointIdentifier,
+  CallbackAxisPointsAbstract (modelCoords,
+                              pointIdentifier,
                               posScreen,
                               posGraph)
 {

@@ -102,7 +102,9 @@ void Transformation::identity()
   Point p2 (DUMMY_CURVENAME, QPointF (1, 0), QPointF (1, 0));
   Point p3 (DUMMY_CURVENAME, QPointF (0, 1), QPointF (0, 1));
 
-  CallbackUpdateTransform cb;
+  DocumentModelCoords modelCoords; // Default coordinates are simple linear and cartesian, which is what we want
+
+  CallbackUpdateTransform cb (modelCoords);
   cb.callback (DUMMY_CURVENAME, p1);
   cb.callback (DUMMY_CURVENAME, p2);
   cb.callback (DUMMY_CURVENAME, p3);
@@ -157,7 +159,9 @@ void Transformation::update (bool fileIsLoaded,
 
   } else {
 
-    CallbackUpdateTransform ftor;
+    m_modelCoords = cmdMediator.document().modelCoords();
+
+    CallbackUpdateTransform ftor (m_modelCoords);
 
     Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                       &CallbackUpdateTransform::callback);
@@ -168,6 +172,8 @@ void Transformation::update (bool fileIsLoaded,
     m_yGraphRange = ftor.yGraphRange ();
 
     if (m_transformIsDefined) {
+
+      // The transform is actually calculated by the callback
       m_transform = ftor.transform ();
     }
   }

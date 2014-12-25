@@ -148,7 +148,8 @@ void Document::checkAddPointAxis (const QPointF &posScreen,
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
 
-  CallbackCheckAddPointAxis ftor (posScreen,
+  CallbackCheckAddPointAxis ftor (m_modelCoords,
+                                  posScreen,
                                   posGraph);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
@@ -168,7 +169,8 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
   LOG4CPP_INFO_S ((*mainCat)) << "Document::checkEditPointAxis"
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
 
-  CallbackCheckEditPointAxis ftor (pointIdentifier,
+  CallbackCheckEditPointAxis ftor (m_modelCoords,
+                                   pointIdentifier,
                                    posScreen,
                                    posGraph);
 

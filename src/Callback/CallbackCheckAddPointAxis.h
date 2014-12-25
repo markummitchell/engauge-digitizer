@@ -5,6 +5,7 @@
 #include <QPointF>
 #include <QString>
 
+class DocumentModelCoords;
 class Point;
 
 /// Callback for sanity checking the screen and graph coordinates of an axis point, before it is added to the axes curve.
@@ -12,7 +13,8 @@ class CallbackCheckAddPointAxis : public CallbackAxisPointsAbstract
 {
 public:
   /// Single constructor.
-  CallbackCheckAddPointAxis(const QPointF &posScreen,
+  CallbackCheckAddPointAxis(const DocumentModelCoords &modelCoords,
+                            const QPointF &posScreen,
                             const QPointF &posGraph);
 
   /// True if an error occurred during iteration.

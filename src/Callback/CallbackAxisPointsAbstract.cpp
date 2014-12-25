@@ -3,15 +3,18 @@
 #include "Point.h"
 #include "QtToString.h"
 
-CallbackAxisPointsAbstract::CallbackAxisPointsAbstract() :
+CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords) :
+  m_modelCoords (modelCoords),
   m_numberAxisPoints (0),
   m_isError (false)
 {
 }
 
-CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const QString pointIdentifierOverride,
+CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
+                                                       const QString pointIdentifierOverride,
                                                        const QPointF &posScreenOverride,
                                                        const QPointF &posGraphOverride) :
+  m_modelCoords (modelCoords),
   m_pointIdentifierOverride (pointIdentifierOverride),
   m_posScreenOverride (posScreenOverride),
   m_posGraphOverride (posGraphOverride),
