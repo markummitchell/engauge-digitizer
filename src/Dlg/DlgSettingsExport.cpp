@@ -151,7 +151,8 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
-  m_editFunctionsPointsEvenlySpacing->setValidator (new QDoubleValidator());
+  m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator;
+  m_editFunctionsPointsEvenlySpacing->setValidator (m_validatorFunctionsPointsEvenlySpacing);
   m_editFunctionsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setWhatsThis (tr ("Interval between successive X values when exporting at evenly spaced X values"));
@@ -226,7 +227,8 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
-  m_editRelationsPointsEvenlySpacing->setValidator (new QDoubleValidator());
+  m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator;
+  m_editRelationsPointsEvenlySpacing->setValidator (m_validatorRelationsPointsEvenlySpacing);
   m_editRelationsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
   layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
@@ -649,8 +651,12 @@ void DlgSettingsExport::slotXLabel(const QString &)
 
 void DlgSettingsExport::updateControls ()
 {
-  bool isGoodState = !m_editFunctionsPointsEvenlySpacing->text().isEmpty () &&
-                     !m_editRelationsPointsEvenlySpacing->text().isEmpty ();
+  QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
+  QString textRelations = m_editRelationsPointsEvenlySpacing->text();
+  int posFunctions, posRelations;
+
+  bool isGoodState = (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable) &&
+                     (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
   enableOk (isGoodState);
 
   m_listIncluded->sortItems (Qt::AscendingOrder);

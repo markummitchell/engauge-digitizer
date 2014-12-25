@@ -7,6 +7,7 @@
 class DocumentModelPointMatch;
 class QComboBox;
 class QDoubleValidator;
+class QIntValidator;
 class QGridLayout;
 class QGraphicsScene;
 class QLineEdit;
@@ -44,7 +45,9 @@ private:
   void updatePreview();
 
   QLineEdit *m_editPointSeparation;
+  QIntValidator *m_validatorPointSeparation;
   QLineEdit *m_editPointSize;
+  QIntValidator *m_validatorPointSize;
   QComboBox *m_cmbAcceptedPointColor;
   QComboBox *m_cmbRejectedPointColor;
   QComboBox *m_cmbCandidatePointColor;

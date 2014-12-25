@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDoubleValidator>
 #include <QIntValidator>
 #include <QGridLayout>
 #include <QGraphicsScene>
@@ -40,7 +41,8 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
                                      "Only segments with more points will be created.\n\n"
                                      "This value should be as large as possible to reduce memory usage. This value has "
                                      "a lower limit"));
-  m_editMinLength->setValidator (new QIntValidator (MIN_LENGTH_MIN, MIN_LENGTH_MAX));
+  m_validatorMinLength = new QIntValidator (MIN_LENGTH_MIN, MIN_LENGTH_MAX);
+  m_editMinLength->setValidator (m_validatorMinLength);
   connect (m_editMinLength, SIGNAL (textChanged (const QString &)), this, SLOT (slotMinLength (const QString &)));
   layout->addWidget(m_editMinLength, row++, 2);
 
@@ -53,7 +55,8 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
                                            "If Fill Corners is enabled, then additional points will be inserted at corners so some points "
                                            "will be closer.\n\n"
                                            "This value has a lower limit"));
-  m_editPointSeparation->setValidator (new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX));
+  m_validatorPointSeparation = new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX);
+  m_editPointSeparation->setValidator (m_validatorPointSeparation);
   connect (m_editPointSeparation, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
   layout->addWidget (m_editPointSeparation, row++, 2);
 
@@ -214,7 +217,12 @@ void DlgSettingsSegments::slotPointSeparation (const QString &pointSeparation)
 
 void DlgSettingsSegments::updateControls()
 {
-
+  QString textMinLength = m_editMinLength->text();
+  QString textPointSeparation = m_editPointSeparation->text();
+  int pos;
+  bool isOk = (m_validatorMinLength->validate (textMinLength, pos) == QValidator::Acceptable) &&
+              (m_validatorPointSeparation->validate (textPointSeparation, pos) == QValidator::Acceptable);
+  enableOk (isOk);
 }
 
 void DlgSettingsSegments::updatePreview()

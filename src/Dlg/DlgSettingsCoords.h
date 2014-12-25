@@ -5,6 +5,7 @@
 
 class DocumentModelCoords;
 class QComboBox;
+class QDoubleValidator;
 class QGridLayout;
 class QGroupBox;
 class QGraphicsScene;
@@ -76,6 +77,7 @@ private:
   QComboBox *m_cmbPolarUnits;
 
   QLineEdit *m_editOriginRadius;
+  QDoubleValidator *m_validatorOriginRadius;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

@@ -35,7 +35,8 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   m_editPointSeparation->setWhatsThis (tr ("Select a point separation in pixels.\n\n"
                                            "Matched points must be separated from existing points by at least this number of pixels.\n\n"
                                            "This value has a lower limit"));
-  m_editPointSeparation->setValidator (new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX));
+  m_validatorPointSeparation = new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX);
+  m_editPointSeparation->setValidator (m_validatorPointSeparation);
   connect (m_editPointSeparation, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
   layout->addWidget (m_editPointSeparation, row++, 2);
 
@@ -49,7 +50,8 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
                                      "This size is also used to determine if a region of pixels that are on, in the processed image, "
                                      "should be ignored since that region is wider or taller than this limit.\n\n"
                                      "This value has a lower limit"));
-  m_editPointSize->setValidator (new QIntValidator (POINT_SIZE_MIN, POINT_SIZE_MAX));
+  m_validatorPointSize = new QIntValidator (POINT_SIZE_MIN, POINT_SIZE_MAX);
+  m_editPointSize->setValidator (m_validatorPointSize);
   connect (m_editPointSize, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSize (const QString &)));
   layout->addWidget (m_editPointSize, row++, 2);
 
@@ -216,7 +218,12 @@ void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 
 void DlgSettingsPointMatch::updateControls()
 {
-
+  QString textPointSeparation = m_editPointSeparation->text();
+  QString textPointSize = m_editPointSize->text();
+  int pos;
+  bool isOk = (m_validatorPointSeparation->validate (textPointSeparation, pos) == QValidator::Acceptable) &&
+              (m_validatorPointSize->validate (textPointSize, pos) == QValidator::Acceptable);
+  enableOk (isOk);
 }
 
 void DlgSettingsPointMatch::updatePreview()

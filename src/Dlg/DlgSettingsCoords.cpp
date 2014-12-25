@@ -203,7 +203,8 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (labelOriginRadius, 1, 0);
 
   m_editOriginRadius = new QLineEdit (m_boxPolarCoords);
-  m_editOriginRadius->setValidator (new QDoubleValidator);
+  m_validatorOriginRadius = new QDoubleValidator;
+  m_editOriginRadius->setValidator (m_validatorOriginRadius);
   m_editOriginRadius->setWhatsThis (QString(tr("Specify radius value at origin.\n\n"
                                                "Normally the radius at the origin is 0, but a nonzero value may be applied in other cases "
                                                "(like when the radial units are decibels).")));
@@ -554,7 +555,11 @@ void DlgSettingsCoords::slotYRadiusLog()
 
 void DlgSettingsCoords::updateControls ()
 {
-  bool isGoodState = !(m_btnPolar->isChecked() && m_editOriginRadius->text().isEmpty());
+  QString textOriginRadius = m_editOriginRadius->text();
+  int posOriginRadius;
+
+  bool isGoodState = !(m_btnPolar->isChecked() &&
+                       m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) != QValidator::Acceptable);
   enableOk (isGoodState);
 
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());

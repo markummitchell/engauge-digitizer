@@ -65,7 +65,8 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
 
   m_editGraphX = new QLineEdit;
   m_editGraphX->setAlignment (ALIGNMENT);
-  m_editGraphX->setValidator (new QDoubleValidator ());
+  m_validatorGraphX = new QDoubleValidator ();
+  m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
   m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
                                   "For cartesian plots this is X. For polar plots this is the radius R."));
@@ -77,7 +78,8 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
 
   m_editGraphY = new QLineEdit;
   m_editGraphY->setAlignment (ALIGNMENT);
-  m_editGraphY->setValidator (new QDoubleValidator ());
+  m_validatorGraphY = new QDoubleValidator ();
+  m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
   m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
                                   "For cartesian plots this is Y. For plot plots this is the angle Theta."));
@@ -118,7 +120,13 @@ void DlgEditPoint::slotTextChanged (const QString &)
 
 void DlgEditPoint::updateControls ()
 {
-  m_btnOk->setEnabled (!m_editGraphX->text().isEmpty () &&
-                       !m_editGraphY->text().isEmpty ());
+  // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
+  QString textX = m_editGraphX->text();
+  QString textY = m_editGraphY->text();
+  int posX, posY;
+  m_btnOk->setEnabled (!textX.isEmpty () &&
+                       !textY.isEmpty () &&
+                       (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
+                       (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
 }
 

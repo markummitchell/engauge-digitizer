@@ -4,6 +4,7 @@
 #include "DlgSettingsAbstractBase.h"
 
 class DocumentModelExport;
+class QDoubleValidator;
 class QGridLayout;
 class QHBoxLayout;
 class QLineEdit;
@@ -79,6 +80,7 @@ private:
   QRadioButton *m_btnFunctionsPointsFirstCurve;
   QRadioButton *m_btnFunctionsPointsEvenlySpaced;
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
+  QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
   QRadioButton *m_btnFunctionsPointsRaw;
 
   QRadioButton *m_btnFunctionsLayoutAllCurves;
@@ -86,6 +88,7 @@ private:
 
   QRadioButton *m_btnRelationsPointsEvenlySpaced;
   QLineEdit *m_editRelationsPointsEvenlySpacing;
+  QDoubleValidator *m_validatorRelationsPointsEvenlySpacing;
   QRadioButton *m_btnRelationsPointsRaw;
 
   QRadioButton *m_btnDelimitersCommas;

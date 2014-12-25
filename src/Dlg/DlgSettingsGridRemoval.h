@@ -6,6 +6,7 @@
 class DocumentModelGridRemoval;
 class QCheckBox;
 class QComboBox;
+class QDoubleValidator;
 class QGraphicsScene;
 class QGridLayout;
 class QHBoxLayout;
@@ -57,18 +58,27 @@ private:
 
   QCheckBox *m_chkRemoveGridLines;
   QLineEdit *m_editCloseDistance;
+  QDoubleValidator *m_validatorCloseDistance;
 
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;
   QLineEdit *m_editStartX;
   QLineEdit *m_editStepX;
   QLineEdit *m_editStopX;
+  QDoubleValidator *m_validatorCountX;
+  QDoubleValidator *m_validatorStartX;
+  QDoubleValidator *m_validatorStepX;
+  QDoubleValidator *m_validatorStopX;
 
   QComboBox *m_cmbDisableY;
   QLineEdit *m_editCountY;
   QLineEdit *m_editStartY;
   QLineEdit *m_editStepY;
   QLineEdit *m_editStopY;
+  QDoubleValidator *m_validatorCountY;
+  QDoubleValidator *m_validatorStartY;
+  QDoubleValidator *m_validatorStepY;
+  QDoubleValidator *m_validatorStopY;
 
   QCheckBox *m_chkRemoveParallel;
 

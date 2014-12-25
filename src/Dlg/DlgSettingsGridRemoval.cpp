@@ -59,7 +59,8 @@ void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &ro
                                      "Pixels that are closer to the regularly spaced gridlines, than this distance, "
                                      "will be removed.\n\n"
                                      "This value cannot be negative. A zero value disables this feature. Decimal values are allowed");
-  m_editCloseDistance->setValidator (new QDoubleValidator (CLOSE_DISTANCE_MIN, CLOSE_DISTANCE_MAX, CLOSE_DECIMALS));
+  m_validatorCloseDistance = new QDoubleValidator (CLOSE_DISTANCE_MIN, CLOSE_DISTANCE_MAX, CLOSE_DECIMALS);
+  m_editCloseDistance->setValidator (m_validatorCloseDistance);
   connect (m_editCloseDistance, SIGNAL (textChanged (const QString &)), this, SLOT (slotCloseDistance (const QString &)));
   layout->addWidget (m_editCloseDistance, row++, 3);
 
@@ -100,7 +101,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editCountX = new QLineEdit;
   m_editCountX->setWhatsThis ("Number of X grid lines.\n\n"
                               "The number of X grid lines must be entered as an integer greater than zero");
-  m_editCountX->setValidator (new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS));
+  m_validatorCountX = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
+  m_editCountX->setValidator (m_validatorCountX);
   connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
@@ -110,7 +112,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStartX = new QLineEdit;
   m_editStartX->setWhatsThis ("Value of the first X grid line.\n\n"
                               "The start value cannot be greater than the stop value");
-  m_editStartX->setValidator (new QDoubleValidator ());
+  m_validatorStartX = new QDoubleValidator;
+  m_editStartX->setValidator (m_validatorStartX);
   connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
@@ -120,7 +123,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStepX = new QLineEdit;
   m_editStepX->setWhatsThis ("Difference in value between two successive X grid lines.\n\n"
                              "The step value must be greater than zero");
-  m_editStepX->setValidator (new QDoubleValidator ());
+  m_validatorStepX = new QDoubleValidator;
+  m_editStepX->setValidator (m_validatorStepX);
   connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
@@ -130,7 +134,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   m_editStopX = new QLineEdit;
   m_editStopX->setWhatsThis ("Value of the last X grid line.\n\n"
                              "The stop value cannot be less than the start value");
-  m_editStopX->setValidator (new QDoubleValidator ());
+  m_validatorStopX = new QDoubleValidator;
+  m_editStopX->setValidator (m_validatorStopX);
   connect (m_editStopX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopX (const QString &)));
   layoutGroup->addWidget (m_editStopX, 4, 1);
 }
@@ -168,7 +173,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editCountY = new QLineEdit;
   m_editCountY->setWhatsThis ("Number of Y grid lines.\n\n"
                               "The number of Y grid lines must be entered as an integer greater than zero");
-  m_editCountY->setValidator (new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS));
+  m_validatorCountY = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
+  m_editCountY->setValidator (m_validatorCountY);
   connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
@@ -178,7 +184,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStartY = new QLineEdit;
   m_editStartY->setWhatsThis ("Value of the first Y grid line.\n\n"
                               "The start value cannot be greater than the stop value");
-  m_editStartY->setValidator (new QDoubleValidator ());
+  m_validatorStartY = new QDoubleValidator;
+  m_editStartY->setValidator (m_validatorStartY);
   connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
@@ -188,7 +195,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStepY = new QLineEdit;
   m_editStepY->setWhatsThis ("Difference in value between two successive Y grid lines.\n\n"
                              "The step value must be greater than zero");
-  m_editStepY->setValidator (new QDoubleValidator ());
+  m_validatorStepY = new QDoubleValidator;
+  m_editStepY->setValidator (m_validatorStepY);
   connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
@@ -198,7 +206,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   m_editStopY = new QLineEdit;
   m_editStopY->setWhatsThis ("Value of the last Y grid line.\n\n"
                              "The stop value cannot be less than the start value");
-  m_editStopY->setValidator (new QDoubleValidator ());
+  m_validatorStopY = new QDoubleValidator;
+  m_editStopY->setValidator (m_validatorStopY);
   connect (m_editStopY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopY (const QString &)));
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
@@ -436,6 +445,28 @@ void DlgSettingsGridRemoval::updateControls ()
   m_editStartY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_START));
   m_editStepY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STEP));
   m_editStopY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STOP));
+
+  QString textCloseDistance = m_editCloseDistance->text();
+  QString textCountX = m_editCountX->text();
+  QString textStartX = m_editStartX->text();
+  QString textStepX = m_editStepX->text();
+  QString textStopX = m_editStopX->text();
+  QString textCountY = m_editCountY->text();
+  QString textStartY = m_editStartY->text();
+  QString textStepY = m_editStepY->text();
+  QString textStopY = m_editStopY->text();
+
+  int pos;
+  bool isOk = (m_validatorCloseDistance->validate (textCloseDistance, pos) == QValidator::Acceptable) &&
+              (m_validatorCountX->validate (textCountX, pos) == QValidator::Acceptable) &&
+              (m_validatorStartX->validate (textStartX, pos) == QValidator::Acceptable) &&
+              (m_validatorStepX->validate (textStepX, pos) == QValidator::Acceptable) &&
+              (m_validatorStopX->validate (textStopX, pos) == QValidator::Acceptable) &&
+              (m_validatorCountY->validate (textCountY, pos) == QValidator::Acceptable) &&
+              (m_validatorStartY->validate (textStartY, pos) == QValidator::Acceptable) &&
+              (m_validatorStepY->validate (textStepY, pos) == QValidator::Acceptable) &&
+              (m_validatorStopY->validate (textStopY, pos) == QValidator::Acceptable);
+  enableOk (isOk);
 }
 
 void DlgSettingsGridRemoval::updatePreview ()

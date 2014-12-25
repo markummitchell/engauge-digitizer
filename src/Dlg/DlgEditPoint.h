@@ -7,6 +7,7 @@
 
 class DigitizeStateAbstractBase;
 class MainWindow;
+class QDoubleValidator;
 class QVBoxLayout;
 
 /// Dialog box for editing the information of one axis point.
@@ -40,7 +41,9 @@ private:
 
   Qt::CursorShape m_cursorShape;
   QLineEdit *m_editGraphX;
+  QDoubleValidator *m_validatorGraphX;
   QLineEdit *m_editGraphY;
+  QDoubleValidator *m_validatorGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
 };
