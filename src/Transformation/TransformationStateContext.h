@@ -5,6 +5,7 @@
 #include "TransformationStateAbstractBase.h"
 
 class CmdMediator;
+class DocumentModelAxesChecker;
 class QGraphicsScene;
 class Transformation;
 
@@ -22,8 +23,9 @@ public:
   void triggerStateTransition (TransformationState transformationState,
                                CmdMediator &cmdMediator,
                                const Transformation &transformation);
-  /// Set new line color.
-  void updateLineColor (const QColor &lineColor);
+
+  /// Apply the new DocumentModelAxesChecker
+  void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker);
 
 private:
   TransformationStateContext();

@@ -21,7 +21,6 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
-#include "EnumsToQt.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
@@ -1891,22 +1890,30 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 
-  bool transformWasDefined = m_transformation.transformIsDefined();
+  Transformation m_transformationBefore (m_transformation);
 
   m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
 
   // Trigger state transitions for transformation if appropriate
-  if (m_transformation.transformIsDefined() && !transformWasDefined) {
+  if (!m_transformationBefore.transformIsDefined() && m_transformation.transformIsDefined()) {
 
+    // Transition from undefined to defined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
                                                          cmdMediator(),
                                                          m_transformation);
 
-  } else if (!m_transformation.transformIsDefined() && transformWasDefined) {
+  } else if (m_transformationBefore.transformIsDefined() && !m_transformation.transformIsDefined()) {
 
+    // Transition from defined to undefined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
                                                          cmdMediator(),
                                                          m_transformation);
+
+  } else if (m_transformation.transformIsDefined() && (m_transformationBefore != m_transformation)) {
+
+    // There was not a define/undefined or undefined/defined transition, but the transformation changed so we
+    // need to update the Checker
+    m_transformationStateContext->updateModelAxesChecker(cmdMediator().document().modelAxesChecker());
 
   }
 
@@ -2023,7 +2030,7 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
-  m_transformationStateContext->updateLineColor (ColorPaletteToQColor (modelAxesChecker.lineColor()));
+  m_transformationStateContext->updateModelAxesChecker (modelAxesChecker);
 }
 
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)

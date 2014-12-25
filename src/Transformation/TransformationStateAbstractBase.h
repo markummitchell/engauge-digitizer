@@ -2,6 +2,7 @@
 #define TRANSFORMATION_STATE_ABSTRACT_BASE_H
 
 class CmdMediator;
+class DocumentModelAxesChecker;
 class QColor;
 class Transformation;
 class TransformationStateContext;
@@ -29,8 +30,8 @@ public:
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation) = 0;
 
-  /// Set new line color.
-  virtual void updateLineColor (const QColor &lineColor) = 0;
+  /// Apply the new DocumentModelAxesChecker
+  virtual void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker) = 0;
 
 protected:
   /// Reference to the TransformationStateContext that contains all the TransformationStateAbstractBase subclasses, without const.

@@ -1,11 +1,13 @@
 #ifndef CHECKER_H
 #define CHECKER_H
 
+#include "CheckerMode.h"
 #include <QColor>
 #include <QGraphicsPolygonItem>
 #include <QList>
 #include <QPolygonF>
 
+class DocumentModelAxesChecker;
 class Point;
 class QGraphicsScene;
 class QPolygonF;
@@ -23,14 +25,14 @@ public:
 
   /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker
   void prepareForDisplay (const QPolygonF &polygon,
-                          const QColor &lineColor);
+                          const DocumentModelAxesChecker &modelAxesChecker);
 
   /// Create the polygon from current information, including pixel and graph coordinates, just prior to display. This is for TransformationStateDefined
   void prepareForDisplay (const QList<Point> &Points,
-                          const QColor &lineColor);
+                          const DocumentModelAxesChecker &modelAxesChecker);
 
-  /// Change to a new line color.
-  void setLineColor (const QColor &color);
+  /// Apply the new DocumentModelAxesChecker. This method starts the timer unless the mode is never or forever
+  virtual void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker);
 
 private:
   Checker();

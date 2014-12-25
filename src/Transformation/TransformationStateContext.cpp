@@ -42,9 +42,9 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
   }
 }
 
-void TransformationStateContext::updateLineColor (const QColor &color)
+void TransformationStateContext::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateModelAxesChecker";
 
-  m_states[m_currentState]->updateLineColor (color);
+  m_states[m_currentState]->updateModelAxesChecker (modelAxesChecker);
 }

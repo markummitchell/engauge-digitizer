@@ -3,7 +3,6 @@
 #include "CmdSettingsAxesChecker.h"
 #include "CoordScale.h"
 #include "DlgSettingsAxesChecker.h"
-#include "EnumsToQt.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QButtonGroup>
@@ -252,8 +251,7 @@ void DlgSettingsAxesChecker::updatePreview()
 
   QPolygonF polygon (points);
 
-  QColor lineColor = ColorPaletteToQColor (m_modelAxesCheckerAfter->lineColor ());
   Q_ASSERT (m_checker != 0);
   m_checker->prepareForDisplay (polygon,
-                                lineColor);
+                                *m_modelAxesCheckerAfter);
 }

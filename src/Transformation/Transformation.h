@@ -10,7 +10,14 @@
 class Transformation
 {
 public:
+  /// Default constructor.
   Transformation();
+
+  /// Assignment operator.
+  Transformation &operator=(const Transformation &other);
+
+  /// Inequality operator.
+  bool operator!=(const Transformation &other);
 
   /// Return string descriptions of cursor coordinates for status bar
   void coordTextForStatusBar (QPointF cursorScreen,
@@ -29,9 +36,18 @@ public:
   void transformInverse (const QPointF &coordGraph,
                          QPointF &coordScreen) const;
 
+  /// Get method for copying only, for the transform matrix.
+  QTransform transformMatrix () const;
+
   /// Update transform by iterating through the axis points.
   void update (bool fileIsLoaded,
                const CmdMediator &cmdMediator);
+
+  /// Get method for copying only, for x epsilon.
+  double xGraphRange() const;
+
+  /// Get method for copying only, for y epsilon.
+  double yGraphRange() const;
 
 private:
   bool m_transformIsDefined;

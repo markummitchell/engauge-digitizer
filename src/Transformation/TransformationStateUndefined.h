@@ -15,7 +15,7 @@ public:
                      const Transformation &transformation);
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation);
-  virtual void updateLineColor (const QColor &lineColor);
+  virtual void updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker);
 
 private:
   TransformationStateUndefined();

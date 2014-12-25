@@ -23,9 +23,9 @@ void TransformationStateUndefined::end(CmdMediator &cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::end";
 }
 
-void TransformationStateUndefined::updateLineColor (const QColor & /* lineColor */)
+void TransformationStateUndefined::updateModelAxesChecker (const DocumentModelAxesChecker & /* modelAxesChecker */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::updateLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::updateModelAxesChecker";
 
   // Noop
 }

@@ -1,5 +1,6 @@
 #include "CallbackUpdateTransform.h"
 #include "Checker.h"
+#include "EnumsToQt.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include <qmath.h>
@@ -7,6 +8,7 @@
 #include "Transformation.h"
 
 const QString DUMMY_CURVENAME ("dummy");
+const int Z_VALUE_IN_FRONT = 100;
 
 // To emphasize that the axis lines are still there, we make these checker somewhat transparent
 const double CHECKER_OPACITY = 0.6;
@@ -18,12 +20,12 @@ Checker::Checker(QGraphicsScene &scene) :
   QGraphicsPolygonItem (0)
 {
   setOpacity (CHECKER_OPACITY);
-  setZValue (1000);// shitty hack
+  setZValue (Z_VALUE_IN_FRONT);
   scene.addItem (this);
 }
 
 void Checker::prepareForDisplay (const QPolygonF &polygon,
-                                 const QColor &lineColor)
+                                 const DocumentModelAxesChecker &modelAxesChecker)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
@@ -43,15 +45,13 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
   }
 
   prepareForDisplay (points,
-                     lineColor);
+                     modelAxesChecker);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
-                                 const QColor &lineColor)
+                                 const DocumentModelAxesChecker &modelAxesChecker)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
-
-  setLineColor (lineColor);
 
   Q_ASSERT (points.count () == 3);
 
@@ -92,16 +92,13 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   }
 
   setPolygon (polygonClosed);
-}
 
-void Checker::setLineColor (const QColor &color)
-{
-  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
+  updateModelAxesChecker (modelAxesChecker);
 }
 
 QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
-                                            const Point &pointAxis0b,
-                                            const Point &pointAxis1)
+                                              const Point &pointAxis0b,
+                                              const Point &pointAxis1)
 {
   const double EPSILON = (qMax (qAbs (pointAxis0a.posGraph().x() - pointAxis0b.posGraph().x ()),
                                 qAbs (pointAxis0a.posGraph().y() - pointAxis0b.posGraph().y ()))) / 1000000.0;
@@ -173,4 +170,11 @@ QTransform Checker::transformationFromThreePoints (const Point &pointAxis0a,
   cb.callback (DUMMY_CURVENAME, pointAxis1);
 
   return cb.transform();
+}
+
+void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
+{
+  QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
+
+  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
 }

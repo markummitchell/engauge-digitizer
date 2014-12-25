@@ -14,6 +14,24 @@ Transformation::Transformation() :
 {
 }
 
+Transformation &Transformation::operator=(const Transformation &other)
+{
+  m_transformIsDefined = other.transformIsDefined();
+  m_transform = other.transformMatrix ();
+  m_xGraphRange = other.xGraphRange ();
+  m_yGraphRange = other.yGraphRange ();
+
+  return *this;
+}
+
+bool Transformation::operator!=(const Transformation &other)
+{
+  return (m_transformIsDefined != other.transformIsDefined()) ||
+         (m_transform != other.transformMatrix ()) ||
+         (m_xGraphRange != other.xGraphRange()) ||
+         (m_yGraphRange != other.yGraphRange());
+}
+
 void Transformation::coordTextForStatusBar (QPointF cursorScreen,
                                             QString &coordsScreen,
                                             QString &coordsGraph,
@@ -101,6 +119,11 @@ void Transformation::transformInverse (const QPointF &coordGraph,
   coordScreen = m_transform.map (coordGraph);
 }
 
+QTransform Transformation::transformMatrix () const
+{
+  return m_transform;
+}
+
 void Transformation::update (bool fileIsLoaded,
                              const CmdMediator &cmdMediator)
 {
@@ -126,4 +149,14 @@ void Transformation::update (bool fileIsLoaded,
       m_transform = ftor.transform ();
     }
   }
+}
+
+double Transformation::xGraphRange() const
+{
+  return m_xGraphRange;
+}
+
+double Transformation::yGraphRange() const
+{
+  return m_yGraphRange;
 }
