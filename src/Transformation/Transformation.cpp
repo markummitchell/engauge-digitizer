@@ -9,6 +9,8 @@
 /// number of characters.
 const int PRECISION_DIGITS = 4;
 
+const double PI = 3.1415926535;
+
 Transformation::Transformation() :
   m_transformIsDefined (false)
 {
@@ -30,6 +32,90 @@ bool Transformation::operator!=(const Transformation &other)
          (m_transform != other.transformMatrix ()) ||
          (m_xGraphRange != other.xGraphRange()) ||
          (m_yGraphRange != other.yGraphRange());
+}
+
+QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords &modelCoords,
+                                                       const QPointF &posGraphIn)
+{
+  // Initialize assuming input coordinates are already cartesian
+  QPointF posGraphCartesian = posGraphIn;
+
+  if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+
+    // Input coordinates are polar so convert them
+    double angleRadians;
+    switch (modelCoords.coordThetaUnits())
+    {
+      case COORD_THETA_UNITS_DEGREES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+        angleRadians = posGraphIn.x () * PI / 180.0;
+        break;
+
+      case COORD_THETA_UNITS_GRADIANS:
+        angleRadians = posGraphIn.x () * PI / 200.0;
+        break;
+
+      case COORD_THETA_UNITS_RADIANS:
+        angleRadians = posGraphIn.x ();
+        break;
+
+      case COORD_THETA_UNITS_TURNS:
+        angleRadians = posGraphIn.x () * 2.0 * PI;
+        break;
+
+      default:
+        Q_ASSERT (false);
+    }
+
+    double radius = posGraphIn.y ();
+    posGraphCartesian.setX (radius * cos (angleRadians));
+    posGraphCartesian.setY (radius * sin (angleRadians));
+  }
+
+  return posGraphCartesian;
+}
+
+QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords &modelCoords,
+                                                       const QPointF &posGraphIn)
+{
+  // Initialize assuming output coordinates are to be cartesian
+  QPointF posGraphCartesianOrPolar = posGraphIn;
+
+  if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+
+    // Output coordinates are to be polar so convert them
+    double angleRadians = atan2 (posGraphIn.y (),
+                                 posGraphIn.x ());
+    switch (modelCoords.coordThetaUnits())
+    {
+      case COORD_THETA_UNITS_DEGREES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES:
+      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+        posGraphCartesianOrPolar.setX (angleRadians * 180.0 / PI);
+        break;
+
+      case COORD_THETA_UNITS_GRADIANS:
+        posGraphCartesianOrPolar.setX (angleRadians * 200.0 / PI);
+        break;
+
+      case COORD_THETA_UNITS_RADIANS:
+        posGraphCartesianOrPolar.setX (angleRadians);
+        break;
+
+      case COORD_THETA_UNITS_TURNS:
+        posGraphCartesianOrPolar.setX (angleRadians / 2.0 / PI);
+        break;
+
+      default:
+        Q_ASSERT (false);
+    }
+
+    double radius = qSqrt (posGraphIn.x () * posGraphIn.x () + posGraphIn.y () * posGraphIn.y ());
+    posGraphCartesianOrPolar.setY (radius);
+  }
+
+  return posGraphCartesianOrPolar;
 }
 
 void Transformation::coordTextForStatusBar (QPointF cursorScreen,
@@ -65,6 +151,12 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       QPointF cursorGraph, cursorGraphDelta;
       transform (cursorScreen, cursorGraph);
       transform (cursorScreenDelta, cursorGraphDelta);
+
+      // Convert to polar if appropriate
+      cursorGraph = cartesianOrPolarFromCartesian (m_modelCoords,
+                                                   cursorGraph);
+      cursorGraphDelta = cartesianOrPolarFromCartesian (m_modelCoords,
+                                                        cursorGraphDelta);
 
       // Compute graph coordinates at cursor
       double xGraph = cursorGraph.x ();

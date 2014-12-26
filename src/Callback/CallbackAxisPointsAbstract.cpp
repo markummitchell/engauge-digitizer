@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "Point.h"
 #include "QtToString.h"
+#include "Transformation.h"
 
 CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords) :
   m_modelCoords (modelCoords),
@@ -58,6 +59,10 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
       posScreen = m_posScreenOverride;
       posGraph = m_posGraphOverride;
     }
+
+    // Make sure graph coordinates are cartesian and not polar
+    posGraph = Transformation::cartesianFromCartesianOrPolar (m_modelCoords,
+                                                              posGraph);
 
     // Update range variables
     if ((m_numberAxisPoints == 0) || (posGraph.x () < m_xGraphLow)) { m_xGraphLow = posGraph.x (); }

@@ -3,7 +3,7 @@
 
 #include "CmdMediator.h"
 #include "DocumentModelCoords.h"
-#include <QPoint>
+#include <QPointF>
 #include <QString>
 #include <QTransform>
 
@@ -22,6 +22,14 @@ public:
 
   /// Inequality operator. This is marked as defined.
   bool operator!=(const Transformation &other);
+
+  /// Output cartesian coordinates from input cartesian or polar coordinates. This is static for easier use externally
+  static QPointF cartesianFromCartesianOrPolar (const DocumentModelCoords &modelCoords,
+                                                const QPointF &posGraphIn);
+
+  /// Output cartesian or polar coordinates from input cartesian coordinates. This is static for easier use externally
+  static QPointF cartesianOrPolarFromCartesian (const DocumentModelCoords &modelCoords,
+                                                const QPointF &posGraphIn);
 
   /// Return string descriptions of cursor coordinates for status bar
   void coordTextForStatusBar (QPointF cursorScreen,
