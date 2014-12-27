@@ -61,26 +61,78 @@ void Checker::deleteLine (QGraphicsItem *&item)
   item = 0;
 }
 
-void Checker::createUMissingXSide (double xMissing,
-                                   double xKept,
-                                   double yMin,
-                                   double yMax,
-                                   const Transformation &transformation)
+void Checker::loadAxesPointToSideConnectivity (const QList<Point> points,
+                                               double xMin,
+                                               double xMax,
+                                               double yMin,
+                                               double yMax,
+                                               Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES])
 {
-  createLine (m_side0, QPointF (xMissing, yMin), QPointF (xKept, yMin), transformation);
-  createLine (m_side1, QPointF (xKept, yMin), QPointF (xKept, yMax), transformation);
-  createLine (m_side2, QPointF (xKept, yMax), QPointF (xMissing, yMax), transformation);
+  // Point is on a side if it is closer than the distance between two tic marks
+  const double MAX_NUMBER_OF_TICS = 20.0;
+  double xEpsilon = (xMax - xMin) / MAX_NUMBER_OF_TICS;
+  double yEpsilon = (yMax - yMin) / MAX_NUMBER_OF_TICS;
+
+  for (int i = 0; i < NUM_AXES_POINTS; i++) {
+    for (int side = 0; side < NUM_SIDES; side++) {
+
+      bool connected;
+      switch (side) {
+        case SIDE_BOTTOM:
+          connected= (qAbs (points.at(i).posGraph().y() - yMin) < yEpsilon);
+          break;
+
+        case SIDE_LEFT:
+          connected = (qAbs (points.at(i).posGraph().x() - xMin) < xEpsilon);
+          break;
+
+        case SIDE_RIGHT:
+          connected = (qAbs (points.at(i).posGraph().y() - yMax) < yEpsilon);
+          break;
+
+        case SIDE_TOP:
+          connected = (qAbs (points.at(i).posGraph().x() - xMax) < xEpsilon);
+          break;
+
+        default:
+          Q_ASSERT (false);
+      }
+
+      axesPointToSideConnectivity [i] [side] = (connected ?
+                                                  CONNECTIVITY_NOT_ALONG_SIDE :
+                                                  CONNECTIVITY_ALONG_SIDE_UNASSIGNED);
+    }
+  }
 }
 
-void Checker::createUMissingYSide (double xMin,
-                                   double xMax,
-                                   double yMissing,
-                                   double yKept,
-                                   const Transformation &transformation)
+int Checker::nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES])
 {
-  createLine (m_side0, QPointF (xMin, yMissing), QPointF (xMin, yKept), transformation);
-  createLine (m_side1, QPointF (xMin, yKept), QPointF (xMax, yKept), transformation);
-  createLine (m_side2, QPointF (xMax, yKept), QPointF (xMax, yMissing), transformation);
+  const double FOM_DELTA_FOR_UNASSIGNED = 1.0;
+  const double FOM_DELTA_FOR_ASSIGNED = 0.1;
+
+  // As a clever figure of merit, we define a figure of merit for each side that has the number of
+  // unconnected points as the integer part, and the number of connected points as the tenths decimal.
+  // This gives preference to the side with more connected points, when two sides have the same
+  // number of unconnected points
+  double fomMax = 0;
+  int sideMax = -1; // Value that is returned if no unassigned points are found
+  for (int side = 0; side < NUM_SIDES; side++) {
+    double fom = 0;
+    for (int i = 0; i < NUM_AXES_POINTS; i++) {
+      if (axesPointToSideConnectivity [i] [side] == CONNECTIVITY_ALONG_SIDE_UNASSIGNED) {
+        fom += FOM_DELTA_FOR_UNASSIGNED;
+      } else if (axesPointToSideConnectivity [i] [side] == CONNECTIVITY_ALONG_SIDE_ASSIGNED) {
+        fom += FOM_DELTA_FOR_ASSIGNED;
+      }
+    }
+
+    if ((fom > fomMax) && (fom >= FOM_DELTA_FOR_UNASSIGNED)) {
+      fomMax = fom;
+      sideMax = side;
+    }
+  }
+
+  return sideMax;
 }
 
 void Checker::prepareForDisplay (const QPolygonF &polygon,
@@ -89,7 +141,7 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  Q_ASSERT (polygon.count () == 3);
+  Q_ASSERT (polygon.count () == NUM_AXES_POINTS);
 
   // Convert pixel coordinates in QPointF to screen and graph coordinates in Point using
   // identity transformation, so this routine can call the general case routine
@@ -119,11 +171,16 @@ void Checker::prepareForDisplay (const QList<Point> &points,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  Q_ASSERT (points.count () == 3);
+  Q_ASSERT (points.count () == NUM_AXES_POINTS);
+
+  deleteLine (m_side0);
+  deleteLine (m_side1);
+  deleteLine (m_side2);
 
   // Get the min and max of x and y
   double xMin, xMax, yMin, yMax;
-  for (int i = 0; i < 3; i++) {
+  int i;
+  for (i = 0; i < 3; i++) {
     if (i == 0) {
       xMin = points.at(i).posGraph().x();
       xMax = points.at(i).posGraph().x();
@@ -136,40 +193,55 @@ void Checker::prepareForDisplay (const QList<Point> &points,
     yMax = qMax (yMax, points.at(i).posGraph().y());
   }
 
-  // Compute the distances of the axes points from the midpoints of each of the four sides
-  // of the box bounded by xMin, xMax, yMin and yMax. The side furthest from the axes points will be
-  // dropped, with the remaining three sides forming the u shape
-  QPointF midXMin (xMin, (yMin + yMax) / 2.0);
-  QPointF midXMax (xMax, (yMin + yMax) / 2.0);
-  QPointF midYMin ((xMin + xMax) / 2.0, yMin);
-  QPointF midYMax ((xMin + xMax) / 2.0, yMax);
+  // Match up each axes point with the one or two sides it lies along
+  Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES];
+  loadAxesPointToSideConnectivity (points,
+                                   xMin,
+                                   xMax,
+                                   yMin,
+                                   yMax,
+                                   axesPointToSideConnectivity);
 
-  double totalDistanceXMin = (points.at(0).posGraph() - midXMin).manhattanLength() +
-                             (points.at(1).posGraph() - midXMin).manhattanLength() +
-                             (points.at(2).posGraph() - midXMin).manhattanLength();
-  double totalDistanceXMax = (points.at(0).posGraph() - midXMax).manhattanLength() +
-                             (points.at(1).posGraph() - midXMax).manhattanLength() +
-                             (points.at(2).posGraph() - midXMax).manhattanLength();
-  double totalDistanceYMin = (points.at(0).posGraph() - midYMin).manhattanLength() +
-                             (points.at(1).posGraph() - midYMin).manhattanLength() +
-                             (points.at(2).posGraph() - midYMin).manhattanLength();
-  double totalDistanceYMax = (points.at(0).posGraph() - midYMax).manhattanLength() +
-                             (points.at(1).posGraph() - midYMax).manhattanLength() +
-                             (points.at(2).posGraph() - midYMax).manhattanLength();
-  double minTotalDistance = qMin (qMin (qMin (totalDistanceXMin, totalDistanceXMax), totalDistanceYMin), totalDistanceYMax);
+  // Greedy algorithm to assign axes points to sides. We use a minimum number of sides
+  int sideCount = 0;
+  int nextS;
+  while ((nextS = nextSide (axesPointToSideConnectivity)) >= 0) {
 
-  deleteLine (m_side0);
-  deleteLine (m_side1);
-  deleteLine (m_side2);
+    QPointF p1, p2;
+    switch (nextS) {
+      case SIDE_BOTTOM:
+        p1 = QPointF (xMin, yMin);
+        p2 = QPointF (xMax, yMin);
+        break;
 
-  if (minTotalDistance == totalDistanceXMin) {
-    createUMissingXSide (xMin, xMax, yMin, yMax, transformation);
-  } else if (minTotalDistance == totalDistanceXMax) {
-    createUMissingXSide (xMax, xMin, yMin, yMax, transformation);
-  } else if (minTotalDistance == totalDistanceYMin) {
-    createUMissingYSide (xMin, xMax, yMin, yMax, transformation);
-  } else {
-    createUMissingYSide (xMin, xMax, yMax, yMin, transformation);
+      case SIDE_LEFT:
+        p1 = QPointF (xMin, yMin);
+        p2 = QPointF (xMin, yMax);
+        break;
+
+      case SIDE_RIGHT:
+        p1 = QPointF (xMax, yMin);
+        p2 = QPointF (xMax, yMax);
+        break;
+
+      case SIDE_TOP:
+        p1 = QPointF (xMin, yMax);
+        p2 = QPointF (xMax, yMax);
+        break;
+    }
+
+    switch (sideCount++) {
+      case 0:
+        createLine (m_side0, p1, p2, transformation);
+        break;
+
+      case 1:
+        createLine (m_side1, p1, p2, transformation);
+        break;
+
+      case 2:
+        createLine (m_side2, p1, p2, transformation);
+    }
   }
 
   updateModelAxesChecker (modelAxesChecker);

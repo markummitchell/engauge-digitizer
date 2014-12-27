@@ -14,6 +14,27 @@ class QGraphicsScene;
 class QPolygonF;
 class Transformation;
 
+const int NUM_AXES_POINTS = 3;
+enum Sides {
+  SIDE_BOTTOM,
+  SIDE_LEFT,
+  SIDE_TOP,
+  SIDE_RIGHT,
+  NUM_SIDES
+};
+
+// States that describe how an axes point and side are related. Each axes point gets
+// assigned to one side even if it lies along two sides. Assigned points are still relevant
+// since the greedy algorithm will prefer to use a side that goes through one unassigned and
+// one assigned point over a side that simply goes through an assigned point. This strategy
+// prevents, for example, one side at xMin and one side at xMax for points at bottom-left,
+// top-left, and bottom-right
+enum Connectivity {
+  CONNECTIVITY_NOT_ALONG_SIDE,
+  CONNECTIVITY_ALONG_SIDE_UNASSIGNED,
+  CONNECTIVITY_ALONG_SIDE_ASSIGNED
+};
+
 /// U-shape that is drawn through the three axis points, to temporarily (usually) or permanently (rarely)
 /// highlight the local up/down/left/right directions when all axis points have been defined. The goal of the checker
 /// is to make it obvious when a mistake has happened so the screen-to-graph transformation is
@@ -61,17 +82,14 @@ private:
                    const QPointF &pointFromGraph,
                    const QPointF &pointToGraph,
                    const Transformation &transformation);
-  void createUMissingXSide (double xMissing,
-                            double xKept,
-                            double yMin,
-                            double yMax,
-                            const Transformation &transformation);
-  void createUMissingYSide (double xMin,
-                            double xMax,
-                            double yMissing,
-                            double yKept,
-                            const Transformation &transformation);
   void deleteLine (QGraphicsItem *&item);
+  void loadAxesPointToSideConnectivity (const QList<Point> points,
+                                        double xMin,
+                                        double xMax,
+                                        double yMin,
+                                        double yMax,
+                                        Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
+  int nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
 
   // Low level routine to set line color
   void setLineColor (QGraphicsItem *item, const QPen &pen);
