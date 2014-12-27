@@ -15,7 +15,7 @@ class QPolygonF;
 class Transformation;
 
 const int NUM_AXES_POINTS = 3;
-enum Sides {
+enum Side {
   SIDE_BOTTOM,
   SIDE_LEFT,
   SIDE_TOP,
@@ -89,6 +89,8 @@ private:
                                         double yMin,
                                         double yMax,
                                         Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
+  void markSideAsAssigned (Side side,
+                           Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
   int nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
 
   // Low level routine to set line color

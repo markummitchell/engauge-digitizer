@@ -105,6 +105,16 @@ void Checker::loadAxesPointToSideConnectivity (const QList<Point> points,
   }
 }
 
+void Checker::markSideAsAssigned (Side side,
+                                  Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES])
+{
+  for (int i = 0; i < NUM_SIDES; i++) {
+    if (axesPointToSideConnectivity [i] [side] == CONNECTIVITY_ALONG_SIDE_UNASSIGNED) {
+      axesPointToSideConnectivity [i] [side] = CONNECTIVITY_ALONG_SIDE_ASSIGNED;
+    }
+  }
+}
+
 int Checker::nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES])
 {
   const double FOM_DELTA_FOR_UNASSIGNED = 1.0;
@@ -206,6 +216,9 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   int sideCount = 0;
   int nextS;
   while ((nextS = nextSide (axesPointToSideConnectivity)) >= 0) {
+
+    markSideAsAssigned ((Side) nextS,
+                        axesPointToSideConnectivity);
 
     QPointF p1, p2;
     switch (nextS) {
