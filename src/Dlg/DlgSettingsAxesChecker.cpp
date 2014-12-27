@@ -7,6 +7,7 @@
 #include "MainWindow.h"
 #include <QButtonGroup>
 #include <QComboBox>
+#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -30,7 +31,8 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Axes Checker", mainWindow),
   m_checker (0),
   m_modelAxesCheckerBefore (0),
-  m_modelAxesCheckerAfter (0)
+  m_modelAxesCheckerAfter (0),
+  m_modelCoords (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -180,10 +182,14 @@ void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
   if (m_modelAxesCheckerAfter != 0) {
     delete m_modelAxesCheckerAfter;
   }
+  if (m_modelCoords != 0) {
+    delete m_modelCoords;
+  }
 
   // Save new data
   m_modelAxesCheckerBefore = new DocumentModelAxesChecker (cmdMediator.document());
   m_modelAxesCheckerAfter = new DocumentModelAxesChecker (cmdMediator.document());
+  m_modelCoords = new DocumentModelCoords (cmdMediator.document());
 
   CheckerMode checkerMode = m_modelAxesCheckerAfter->checkerMode();
   m_btnNever->setChecked (checkerMode == CHECKER_MODE_NEVER);
@@ -253,5 +259,6 @@ void DlgSettingsAxesChecker::updatePreview()
 
   Q_ASSERT (m_checker != 0);
   m_checker->prepareForDisplay (polygon,
-                                *m_modelAxesCheckerAfter);
+                                *m_modelAxesCheckerAfter,
+                                *m_modelCoords);
 }

@@ -1,6 +1,8 @@
 #include "Checker.h"
 #include "EnumsToQt.h"
 #include "Logger.h"
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QPen>
@@ -16,17 +18,74 @@ const double CHECKER_OPACITY = 0.6;
 const int CHECKER_POINTS_WIDTH = 5;
 
 Checker::Checker(QGraphicsScene &scene) :
-  QGraphicsPolygonItem (0)
+  m_scene (scene),
+  m_side0 (0),
+  m_side1 (0),
+  m_side2 (0)
 {
-  setOpacity (CHECKER_OPACITY);
-  setZValue (Z_VALUE_IN_FRONT);
-  setToolTip (QObject::tr ("Axes checker. If this does not align with the axes, then the axes points should be checked"));
+}
 
-  scene.addItem (this);
+void Checker::bindItemToScene(QGraphicsItem *item)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Checker:bindItemToScene";
+
+  item->setOpacity (CHECKER_OPACITY);
+  item->setZValue (Z_VALUE_IN_FRONT);
+  item->setToolTip (QObject::tr ("Axes checker. If this does not align with the axes, then the axes points should be checked"));
+
+  m_scene.addItem (item);
+}
+
+void Checker::createLine (QGraphicsItem *&item,
+                          const QPointF &pointFromGraph,
+                          const QPointF &pointToGraph,
+                          const Transformation &transformation)
+{
+  QPointF pointFromScreen, pointToScreen;
+  transformation.transformInverse (pointFromGraph,
+                                   pointFromScreen);
+  transformation.transformInverse (pointToGraph,
+                                   pointToScreen);
+
+  item = new QGraphicsLineItem (QLineF (pointFromScreen,
+                                        pointToScreen));
+  bindItemToScene (item);
+}
+
+void Checker::deleteLine (QGraphicsItem *&item)
+{
+  if (item != 0) {
+    delete item;
+  }
+
+  item = 0;
+}
+
+void Checker::createUMissingXSide (double xMissing,
+                                   double xKept,
+                                   double yMin,
+                                   double yMax,
+                                   const Transformation &transformation)
+{
+  createLine (m_side0, QPointF (xMissing, yMin), QPointF (xKept, yMin), transformation);
+  createLine (m_side1, QPointF (xKept, yMin), QPointF (xKept, yMax), transformation);
+  createLine (m_side2, QPointF (xKept, yMax), QPointF (xMissing, yMax), transformation);
+}
+
+void Checker::createUMissingYSide (double xMin,
+                                   double xMax,
+                                   double yMissing,
+                                   double yKept,
+                                   const Transformation &transformation)
+{
+  createLine (m_side0, QPointF (xMin, yMissing), QPointF (xMin, yKept), transformation);
+  createLine (m_side1, QPointF (xMin, yKept), QPointF (xMax, yKept), transformation);
+  createLine (m_side2, QPointF (xMax, yKept), QPointF (xMax, yMissing), transformation);
 }
 
 void Checker::prepareForDisplay (const QPolygonF &polygon,
-                                 const DocumentModelAxesChecker &modelAxesChecker)
+                                 const DocumentModelAxesChecker &modelAxesChecker,
+                                 const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
@@ -49,130 +108,99 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
   transformIdentity.identity();
   prepareForDisplay (points,
                      modelAxesChecker,
+                     modelCoords,
                      transformIdentity);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
                                  const DocumentModelAxesChecker &modelAxesChecker,
+                                 const DocumentModelCoords &modelCoords,
                                  const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
   Q_ASSERT (points.count () == 3);
 
-  // Figure out which two axes points are closest in either x or y graph coordinates - they are on the same axis
-  double x01 = qAbs (points.at(0).posGraph().x() - points.at(1).posGraph().x());
-  double x12 = qAbs (points.at(1).posGraph().x() - points.at(2).posGraph().x());
-  double x02 = qAbs (points.at(0).posGraph().x() - points.at(2).posGraph().x());
-  double x = qMin (qMin (x01, x12), x02);
-
-  double y01 = qAbs (points.at(0).posGraph().y() - points.at(1).posGraph().y());
-  double y12 = qAbs (points.at(1).posGraph().y() - points.at(2).posGraph().y());
-  double y02 = qAbs (points.at(0).posGraph().y() - points.at(2).posGraph().y());
-  double y = qMin (qMin (y01, y12), y02);
-
-  QPolygonF polygonClosed;
-  if (x < y) {
-
-    // Two points are on vertical axis. Draw perpendicular line through the third point to represent horizontal axis
-    if (x == x01) {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2), transformation);
-    } else if (x == x12) {
-      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0), transformation);
-    } else {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1), transformation);
+  // Get the min and max of x and y
+  double xMin, xMax, yMin, yMax;
+  for (int i = 0; i < 3; i++) {
+    if (i == 0) {
+      xMin = points.at(i).posGraph().x();
+      xMax = points.at(i).posGraph().x();
+      yMin = points.at(i).posGraph().y();
+      yMax = points.at(i).posGraph().y();
     }
-
-  } else {
-
-    // Two points are on horizontal axis. Draw perpendicular line through the third point to represent vertical axis
-    if (y == y01) {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (1), points.at (2), transformation);
-    } else if (y == y12) {
-      polygonClosed = threeLinesFromThreePoints (points.at (1), points.at (2), points.at (0), transformation);
-    } else {
-      polygonClosed = threeLinesFromThreePoints (points.at (0), points.at (2), points.at (1), transformation);
-    }
-
+    xMin = qMin (xMin, points.at(i).posGraph().x());
+    xMax = qMax (xMax, points.at(i).posGraph().x());
+    yMin = qMin (yMin, points.at(i).posGraph().y());
+    yMax = qMax (yMax, points.at(i).posGraph().y());
   }
 
-  setPolygon (polygonClosed);
+  // Compute the distances of the axes points from the midpoints of each of the four sides
+  // of the box bounded by xMin, xMax, yMin and yMax. The side furthest from the axes points will be
+  // dropped, with the remaining three sides forming the u shape
+  QPointF midXMin (xMin, (yMin + yMax) / 2.0);
+  QPointF midXMax (xMax, (yMin + yMax) / 2.0);
+  QPointF midYMin ((xMin + xMax) / 2.0, yMin);
+  QPointF midYMax ((xMin + xMax) / 2.0, yMax);
+
+  double totalDistanceXMin = (points.at(0).posGraph() - midXMin).manhattanLength() +
+                             (points.at(1).posGraph() - midXMin).manhattanLength() +
+                             (points.at(2).posGraph() - midXMin).manhattanLength();
+  double totalDistanceXMax = (points.at(0).posGraph() - midXMax).manhattanLength() +
+                             (points.at(1).posGraph() - midXMax).manhattanLength() +
+                             (points.at(2).posGraph() - midXMax).manhattanLength();
+  double totalDistanceYMin = (points.at(0).posGraph() - midYMin).manhattanLength() +
+                             (points.at(1).posGraph() - midYMin).manhattanLength() +
+                             (points.at(2).posGraph() - midYMin).manhattanLength();
+  double totalDistanceYMax = (points.at(0).posGraph() - midYMax).manhattanLength() +
+                             (points.at(1).posGraph() - midYMax).manhattanLength() +
+                             (points.at(2).posGraph() - midYMax).manhattanLength();
+  double minTotalDistance = qMin (qMin (qMin (totalDistanceXMin, totalDistanceXMax), totalDistanceYMin), totalDistanceYMax);
+
+  deleteLine (m_side0);
+  deleteLine (m_side1);
+  deleteLine (m_side2);
+
+  if (minTotalDistance == totalDistanceXMin) {
+    createUMissingXSide (xMin, xMax, yMin, yMax, transformation);
+  } else if (minTotalDistance == totalDistanceXMax) {
+    createUMissingXSide (xMax, xMin, yMin, yMax, transformation);
+  } else if (minTotalDistance == totalDistanceYMin) {
+    createUMissingYSide (xMin, xMax, yMin, yMax, transformation);
+  } else {
+    createUMissingYSide (xMin, xMax, yMax, yMin, transformation);
+  }
 
   updateModelAxesChecker (modelAxesChecker);
 }
 
-void Checker::setLineColor (const DocumentModelAxesChecker &modelAxesChecker)
+void Checker::setLineColor (QGraphicsItem *item, const QPen &pen)
 {
-  QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
-
-  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
+  QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
+  QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
+  if (itemLine == 0) {
+    itemEllipse->setPen (pen);
+  } else {
+    itemLine->setPen (pen);
+  }
 }
 
-QPolygonF Checker::threeLinesFromThreePoints (const Point &pointAxis0a,
-                                              const Point &pointAxis0b,
-                                              const Point &pointAxis1,
-                                              const Transformation &transformation)
+void Checker::setVisible (bool visible)
 {
-  const double EPSILON = (qMax (qAbs (pointAxis0a.posGraph().x() - pointAxis0b.posGraph().x ()),
-                                qAbs (pointAxis0a.posGraph().y() - pointAxis0b.posGraph().y ()))) / 1000000.0;
-
-  QPointF pointBothAxesGraph;
-  // Compute slope from the two points on the same axis, then compute the inverse slope
-  double deltaX = pointAxis0b.posGraph().x () - pointAxis0a.posGraph().x ();
-  double deltaY = pointAxis0b.posGraph().y () - pointAxis0a.posGraph().y ();
-  if (qAbs (deltaX) < EPSILON) {
-
-    // Axis 0 is vertical line
-    pointBothAxesGraph = QPointF (pointAxis0b.posGraph().x(),
-                                  pointAxis1.posGraph().y());
-
-  } else if (qAbs (deltaY) < EPSILON) {
-
-    // Axis 0 is horizontal line
-    pointBothAxesGraph = QPointF (pointAxis1.posGraph().x(),
-                                  pointAxis0a.posGraph().y());
-
-  } else {
-
-    // Axis 0 is not vertical or horizontal line
-    double slope0 = deltaY / deltaX;
-    double slope1 = -1.0 * deltaX / deltaY
-                          ;
-    // Solve for y intercepts
-    double yIntercept0 = pointAxis0a.posGraph().y () - slope0 * pointAxis0a.posGraph().x ();
-    double yIntercept1 = pointAxis1.posGraph().y () - slope1 * pointAxis1.posGraph().x ();
-
-    // Find intersection point of the two equations y = slope * x + yIntercept, by subtracting them
-    double xIntersect = -1.0 * (yIntercept0 - yIntercept1) / (slope0 - slope1);
-    double yIntersect = slope0 * xIntersect + yIntercept0;
-
-    pointBothAxesGraph = QPointF (xIntersect,
-                                  yIntersect);
-
+  if (m_side0 != 0) {
+    m_side0->setVisible (visible);
+    m_side1->setVisible (visible);
+    m_side2->setVisible (visible);
   }
-
-  // Transform intersection point to screen coordinates
-  QPointF pointBothAxesScreen;
-  transformation.transformInverse (pointBothAxesGraph,
-                                   pointBothAxesScreen);
-
-  // Create the three lines in screen coordinates
-  QPolygonF polygon;
-
-  polygon.push_back (pointBothAxesScreen);
-  polygon.push_back (pointAxis0a.posScreen ());
-  polygon.push_back (pointBothAxesScreen);
-  polygon.push_back (pointAxis0b.posScreen ());
-  polygon.push_back (pointBothAxesScreen);
-  polygon.push_back (pointAxis1.posScreen ());
-  polygon.push_back (pointBothAxesScreen);
-
-  return polygon;
 }
 
 void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
 {
   QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
+  QPen pen (QBrush (color), CHECKER_POINTS_WIDTH);
 
-  setPen (QPen (QBrush (color), CHECKER_POINTS_WIDTH));
+  setLineColor (m_side0, pen);
+  setLineColor (m_side1, pen);
+  setLineColor (m_side2, pen);
 }

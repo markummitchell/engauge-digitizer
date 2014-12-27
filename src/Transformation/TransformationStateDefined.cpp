@@ -97,6 +97,7 @@ void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
 
   m_axesChecker->prepareForDisplay (ftor.points(),
                                     cmdMediator.document().modelAxesChecker(),
+                                    cmdMediator.document().modelCoords(),
                                     transformation);
   m_axesChecker->setVisible (true);
   startTimer (cmdMediator.document().modelAxesChecker());

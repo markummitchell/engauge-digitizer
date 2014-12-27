@@ -4,6 +4,7 @@
 #include "DlgSettingsAbstractBase.h"
 
 class DocumentModelAxesChecker;
+class DocumentModelCoords;
 class Checker;
 class QAbstractButton;
 class QButtonGroup;
@@ -56,6 +57,7 @@ private:
 
   DocumentModelAxesChecker *m_modelAxesCheckerBefore;
   DocumentModelAxesChecker *m_modelAxesCheckerAfter;
+  DocumentModelCoords *m_modelCoords;
 };
 
 #endif // DLG_SETTINGS_AXES_CHECKER_H
