@@ -78,6 +78,7 @@ private:
   Checker();
 
   void bindItemToScene(QGraphicsItem *item);
+  QString connectivityString (Connectivity connectivity);
   void createLine (QGraphicsItem *&item,
                    const QPointF &pointFromGraph,
                    const QPointF &pointToGraph,
@@ -91,7 +92,11 @@ private:
                                         Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
   void markSideAsAssigned (Side side,
                            Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
-  int nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES]);
+  int nextSide (const Connectivity axesPointToSideConnectivity [NUM_AXES_POINTS] [NUM_SIDES],
+                bool isBottom,
+                bool isLeft,
+                bool isTop,
+                bool isRight);
 
   // Low level routine to set line color
   void setLineColor (QGraphicsItem *item, const QPen &pen);
@@ -103,6 +108,7 @@ private:
   QGraphicsItem *m_side0;
   QGraphicsItem *m_side1;
   QGraphicsItem *m_side2;
+  QGraphicsItem *m_side3;
 };
 
 #endif // CHECKER_H
