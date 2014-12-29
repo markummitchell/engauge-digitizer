@@ -44,6 +44,8 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
 void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
                                                       int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createCurveName";
+
   QLabel *labelCurveName = new QLabel ("Curve Name:");
   layout->addWidget (labelCurveName, row, 1);
 
@@ -56,6 +58,8 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
 void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                              int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createLine";
+
   m_groupLine = new QGroupBox ("Line");
   layout->addWidget (m_groupLine, row++, 2);
 
@@ -101,6 +105,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
 void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
                                               int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createPoint";
+
   m_groupPoint = new QGroupBox ("Point");
   layout->addWidget (m_groupPoint, row++, 1);
 
@@ -157,6 +163,8 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
 void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
                                                        int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
@@ -172,6 +180,8 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
 
 QWidget *DlgSettingsCurveProperties::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);

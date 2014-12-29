@@ -41,6 +41,8 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
 void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
                                              int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createControls";
+
   QGroupBox *groupBox = new QGroupBox (tr ("Axes Checker Lifetime"));
   layout->addWidget (groupBox, row++, 1, 1, 2);
 
@@ -85,6 +87,8 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
 
 void DlgSettingsAxesChecker::createPoints ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createPoints";
+
   QBrush AXES_BRUSH (Qt::gray);
 
   m_checker = new Checker (*m_scenePreview);
@@ -123,6 +127,8 @@ void DlgSettingsAxesChecker::createPoints ()
 void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
                                             int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
@@ -138,6 +144,8 @@ void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
 
 QWidget *DlgSettingsAxesChecker::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);

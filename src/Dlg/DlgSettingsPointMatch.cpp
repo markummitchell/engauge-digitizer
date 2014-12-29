@@ -35,6 +35,8 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
 void DlgSettingsPointMatch::createControls (QGridLayout *layout,
                                             int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createControls";
+
   QLabel *labelMinPointSeparation = new QLabel ("Minimum point separation (pixels):");
   layout->addWidget (labelMinPointSeparation, row, 1);
 
@@ -95,6 +97,8 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
                                            int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
@@ -113,6 +117,8 @@ void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
 
 QWidget *DlgSettingsPointMatch::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);

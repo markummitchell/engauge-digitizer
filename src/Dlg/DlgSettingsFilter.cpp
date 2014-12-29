@@ -41,6 +41,8 @@ DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
 
 void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createControls";
+
   QLabel *labelProfile = new QLabel ("Filter parameter:");
   layout->addWidget (labelProfile, row++, 1);
 
@@ -87,6 +89,8 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 
 void DlgSettingsFilter::createPreview (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 5);
 
@@ -103,6 +107,8 @@ void DlgSettingsFilter::createPreview (QGridLayout *layout, int &row)
 
 void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createProfileAndScale";
+
   QLabel *labelProfile = new QLabel ("Filter Parameter Histogram Profile");
   layout->addWidget (labelProfile, row++, 3);
 
@@ -125,6 +131,8 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
 
 QWidget *DlgSettingsFilter::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createSubPanel";
+
   const int EMPTY_COLUMN_WIDTH = 40;
 
   QWidget *subPanel = new QWidget ();
@@ -151,6 +159,8 @@ QWidget *DlgSettingsFilter::createSubPanel ()
 
 QRgb DlgSettingsFilter::createThread ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createThread";
+
   // Get background color
   QImage image = cmdMediator().document().pixmap().toImage();
   Filter filter;

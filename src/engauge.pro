@@ -113,6 +113,7 @@ HEADERS  += \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
+    Segment/Segment.h \
     Settings/SettingsCurve.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
@@ -126,7 +127,8 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
-    include/ZoomFactor.h
+    include/ZoomFactor.h \
+    Segment/SegmentFactory.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -216,6 +218,7 @@ SOURCES += \
     Point/Point.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
+    Segment/Segment.cpp \
     Settings/SettingsCurve.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
@@ -227,7 +230,8 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileScale.cpp 
+    View/ViewProfileScale.cpp \
+    Segment/SegmentFactory.cpp
 
 # Main entry point for non-test
 SOURCES += main/main.cpp

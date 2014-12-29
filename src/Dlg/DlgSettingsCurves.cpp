@@ -35,6 +35,8 @@ void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
 void DlgSettingsCurves::createButtons (QGridLayout *layout,
                                        int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createButtons";
+
   m_btnNew = new QPushButton ("New...");
   m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
                               "If a curve is selected then the new curve will be inserted just before it, otherwise the new curve "
@@ -55,6 +57,8 @@ void DlgSettingsCurves::createButtons (QGridLayout *layout,
 void DlgSettingsCurves::createListCurves (QGridLayout *layout,
                                           int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createListCurves";
+
   QLabel *label = new QLabel (tr ("Curve Names:"));
   layout->addWidget (label, row++, 1);
 
@@ -84,6 +88,8 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
 
 QWidget *DlgSettingsCurves::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createSubPanel";
+
   const int EMPTY_COLUMN_WIDTH = 30;
   const int EMPTY_ROW_HEIGHT = 40;
 

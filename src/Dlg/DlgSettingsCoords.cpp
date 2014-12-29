@@ -150,6 +150,8 @@ void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
 void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
                                                int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupCoordsType";
+
   m_boxCoordsType = new QGroupBox("Coordinates Types");
   layout->addWidget (m_boxCoordsType, row++, 1, 1, 2);
 
@@ -174,6 +176,8 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
 void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
                                          int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupPolar";
+
   m_boxPolarCoords = new QGroupBox ("Polar Coordinates");
   layout->addWidget (m_boxPolarCoords, row++, 1, 1, 2);
 
@@ -217,6 +221,8 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
 void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
                                           int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupScale";
+
   const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
 
   m_boxXTheta = new QGroupBox(OVERRIDDEN_VALUE);
@@ -256,6 +262,8 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
 void DlgSettingsCoords::createPreview (QGridLayout *layout,
                                        int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
@@ -271,6 +279,8 @@ void DlgSettingsCoords::createPreview (QGridLayout *layout,
 
 QWidget *DlgSettingsCoords::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
@@ -289,7 +299,9 @@ QWidget *DlgSettingsCoords::createSubPanel ()
   return subPanel;
 }
 
-void DlgSettingsCoords::drawCartesianLinearX () {
+void DlgSettingsCoords::drawCartesianLinearX ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawCartesianLinearX";
 
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
@@ -308,7 +320,9 @@ void DlgSettingsCoords::drawCartesianLinearX () {
   }
 }
 
-void DlgSettingsCoords::drawCartesianLinearY () {
+void DlgSettingsCoords::drawCartesianLinearY ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawCartesianLinearY";
 
   bool isAxis = true;
   for (int step = NUM_COORD_STEPS - 1; step >= 0; step--) {
@@ -327,7 +341,9 @@ void DlgSettingsCoords::drawCartesianLinearY () {
   }
 }
 
-void DlgSettingsCoords::drawCartesianLogX () {
+void DlgSettingsCoords::drawCartesianLogX ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawCartesianLogX";
 
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
@@ -348,7 +364,9 @@ void DlgSettingsCoords::drawCartesianLogX () {
   }
 }
 
-void DlgSettingsCoords::drawCartesianLogY () {
+void DlgSettingsCoords::drawCartesianLogY ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawCartesianLogY";
 
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
@@ -369,7 +387,9 @@ void DlgSettingsCoords::drawCartesianLogY () {
   }
 }
 
-void DlgSettingsCoords::drawPolarLinearRadius () {
+void DlgSettingsCoords::drawPolarLinearRadius ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawPolarLinearRadius";
 
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
     double radius = step * POLAR_STEP;
@@ -384,7 +404,9 @@ void DlgSettingsCoords::drawPolarLinearRadius () {
   }
 }
 
-void DlgSettingsCoords::drawPolarLogRadius () {
+void DlgSettingsCoords::drawPolarLogRadius ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawPolarLogRadius";
 
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
     double s = (pow (POWER_FOR_LOG, step / (NUM_COORD_STEPS - 1.0)) - 1.0) /
@@ -401,7 +423,9 @@ void DlgSettingsCoords::drawPolarLogRadius () {
   }
 }
 
-void DlgSettingsCoords::drawPolarTheta () {
+void DlgSettingsCoords::drawPolarTheta ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::drawPolarTheta";
 
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {

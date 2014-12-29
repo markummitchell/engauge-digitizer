@@ -34,6 +34,8 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
 
 void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 5);
 
@@ -48,6 +50,8 @@ void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 
 void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLines";
+
   m_chkRemoveGridLines = new QCheckBox ("Remove pixels close to defined grid lines");
   m_chkRemoveGridLines->setWhatsThis ("Check this box to have pixels close to regularly spaced gridlines removed.\n\n"
                                       "This option is only available when the axis points have all been defined.");
@@ -73,6 +77,8 @@ void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &ro
 
 void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLinesX";
+
   QString titleX = "X Grid Lines";
   if (false) {
     titleX = QString (QChar (0x98, 0x03)) + QString (" Grid Lines");
@@ -145,6 +151,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
 
 void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLinesY";
+
   QString titleY = "Y Grid Lines";
   if (false) {
     titleY = QString ("R Grid Lines");
@@ -217,6 +225,8 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
 
 void DlgSettingsGridRemoval::createRemoveParallel (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveParallel";
+
   m_chkRemoveParallel = new QCheckBox ("Remove thin lines parallel to the axes");
   m_chkRemoveParallel->setWhatsThis ("Check this box to remove thin lines that are parallel to the axes.\n\n"
                                      "This option is only available when the axis points have all been defined.\n\n"
@@ -228,6 +238,8 @@ void DlgSettingsGridRemoval::createRemoveParallel (QGridLayout *layout, int &row
 
 QWidget *DlgSettingsGridRemoval::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createSubPanel";
+
   const int COLUMN_CHECKBOX_WIDTH = 60;
 
   QWidget *subPanel = new QWidget ();

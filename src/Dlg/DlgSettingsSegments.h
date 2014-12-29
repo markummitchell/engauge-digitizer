@@ -39,6 +39,7 @@ private:
 
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void createPreviewImage ();
   void updateControls();
   void updatePreview();
 

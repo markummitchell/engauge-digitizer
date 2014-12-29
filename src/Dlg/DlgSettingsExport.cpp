@@ -34,6 +34,8 @@ DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
 
 void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createCurveSelection";
+
   QLabel *labelIncluded = new QLabel (tr ("Included"));
   layout->addWidget (labelIncluded, row, 0);
 
@@ -71,6 +73,8 @@ void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
 
 void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createDelimiters";
+
   QGroupBox *groupDelimiters = new QGroupBox (tr ("Delimiters"));
   layoutMisc->addWidget (groupDelimiters, 1);
 
@@ -95,6 +99,8 @@ void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
 
 void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFunctionsLayout";
+
   QGroupBox *groupLayout = new QGroupBox (tr ("Layout"));
   layoutFunctions->addWidget (groupLayout, 1);
 
@@ -116,6 +122,8 @@ void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
 
 void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFunctionsPointsSelection";
+
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutFunctions->addWidget (groupPointsSelection, 1);
 
@@ -167,6 +175,8 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
 
 void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createHeader";
+
   QGroupBox *groupHeader = new QGroupBox (tr ("Header"));
   layoutMisc->addWidget (groupHeader, 1);
 
@@ -191,6 +201,8 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
 
 void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createPreview";
+
   QLabel *label = new QLabel (tr ("Preview"));
   layout->addWidget (label, row++, 0, 1, 3);
 
@@ -204,6 +216,8 @@ void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
 
 void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelations)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createRelationsPointsSelection";
+
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutRelations->addWidget (groupPointsSelection);
 
@@ -242,6 +256,8 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
 
 QWidget *DlgSettingsExport::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
@@ -279,6 +295,8 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
                                          QHBoxLayout *&layoutRelations,
                                          int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createTabWidget";
+
   QTabWidget *tabWidget = new QTabWidget;
   layout->addWidget (tabWidget, row++, 0, 1, 3);
 
@@ -301,6 +319,8 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
 
 void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createXLabel";
+
   QWidget *widgetXLabel = new QWidget;
   layoutMisc->addWidget (widgetXLabel, 1);
 

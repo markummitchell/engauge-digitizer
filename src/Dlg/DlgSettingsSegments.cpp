@@ -95,6 +95,8 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
 void DlgSettingsSegments::createPreview (QGridLayout *layout,
                                          int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createPreview";
+
   QLabel *labelPreview = new QLabel ("Preview");
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
@@ -109,8 +111,15 @@ void DlgSettingsSegments::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+void DlgSettingsSegments::createPreviewImage ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createPreviewImage";
+}
+
 QWidget *DlgSettingsSegments::createSubPanel ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createSubPanel";
+
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
@@ -123,6 +132,7 @@ QWidget *DlgSettingsSegments::createSubPanel ()
   int row = 0;
   createControls(layout, row);
   createPreview (layout, row);
+  createPreviewImage ();
 
   return subPanel;
 }
