@@ -4,20 +4,27 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
-#include <QIntValidator>
-#include <QGridLayout>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsRectItem>
 #include <QGraphicsScene>
+#include <QGridLayout>
 #include <QLabel>
-#include <QLineEdit>
+#include <qmath.h>
+#include <QPen>
+#include <QSpinBox>
 #include "ViewPreview.h"
 
 const int POINT_SEPARATION_MAX = 1024;
-const int POINT_SEPARATION_MIN = 1;
+const int POINT_SEPARATION_MIN = 2;
 const int POINT_SIZE_MAX = 1024;
-const int POINT_SIZE_MIN = 1;
+const int POINT_SIZE_MIN = 5;
 
 DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Point Match", mainWindow),
+  m_scenePreview (0),
+  m_viewPreview (0),
+  m_boxSize (0),
   m_modelPointMatchBefore (0),
   m_modelPointMatchAfter (0)
 {
@@ -28,32 +35,34 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
 void DlgSettingsPointMatch::createControls (QGridLayout *layout,
                                             int &row)
 {
-  QLabel *labelPointSeparation = new QLabel ("Point separation (pixels):");
-  layout->addWidget (labelPointSeparation, row, 1);
+  QLabel *labelMinPointSeparation = new QLabel ("Minimum point separation (pixels):");
+  layout->addWidget (labelMinPointSeparation, row, 1);
 
-  m_editPointSeparation = new QLineEdit;
-  m_editPointSeparation->setWhatsThis (tr ("Select a point separation in pixels.\n\n"
-                                           "Matched points must be separated from existing points by at least this number of pixels.\n\n"
-                                           "This value has a lower limit"));
-  m_validatorPointSeparation = new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX);
-  m_editPointSeparation->setValidator (m_validatorPointSeparation);
-  connect (m_editPointSeparation, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
-  layout->addWidget (m_editPointSeparation, row++, 2);
+  m_spinMinPointSeparation = new QSpinBox;
+  QString whatsThis = QString ("Select a minimum point separation in pixels.\n\n"
+                               "Matched points must be separated from existing points by at least this number of pixels.\n\n"
+                               "This value has a lower limit of %1 since overlapping points are too hard to separate")
+                      .arg (POINT_SEPARATION_MIN);
+  m_spinMinPointSeparation->setWhatsThis (whatsThis);
+  m_spinMinPointSeparation->setMinimum (POINT_SEPARATION_MIN);
+  m_spinMinPointSeparation->setMaximum (POINT_SEPARATION_MAX);
+  connect (m_spinMinPointSeparation, SIGNAL (valueChanged (int)), this, SLOT (slotMinPointSeparation (int)));
+  layout->addWidget (m_spinMinPointSeparation, row++, 2);
 
   QLabel *labelPointSize = new QLabel ("Maximum point size (pixels):");
   layout->addWidget (labelPointSize, row, 1);
 
-  m_editPointSize = new QLineEdit;
-  m_editPointSize->setWhatsThis (tr ("Select a maximum point size in pixels.\n\n"
+  m_spinPointSize = new QSpinBox;
+  m_spinPointSize->setWhatsThis (tr ("Select a maximum point size in pixels.\n\n"
                                      "Sample match points must fit within a square box, around the cursor, having width and height "
                                      "equal to this maximum.\n\n"
                                      "This size is also used to determine if a region of pixels that are on, in the processed image, "
                                      "should be ignored since that region is wider or taller than this limit.\n\n"
                                      "This value has a lower limit"));
-  m_validatorPointSize = new QIntValidator (POINT_SIZE_MIN, POINT_SIZE_MAX);
-  m_editPointSize->setValidator (m_validatorPointSize);
-  connect (m_editPointSize, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSize (const QString &)));
-  layout->addWidget (m_editPointSize, row++, 2);
+  m_spinPointSize->setMinimum (POINT_SIZE_MIN);
+  m_spinPointSize->setMaximum (POINT_SIZE_MAX);
+  connect (m_spinPointSize, SIGNAL (valueChanged (int)), this, SLOT (slotMaxPointSize (int)));
+  layout->addWidget (m_spinPointSize, row++, 2);
 
   QLabel *labelAcceptedPointColor = new QLabel ("Accepted point color:");
   layout->addWidget (labelAcceptedPointColor, row, 1);
@@ -97,6 +106,7 @@ void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+  connect (m_viewPreview, SIGNAL (signalMouseMove (QPointF)), this, SLOT (slotMouseMove (QPointF)));
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
@@ -138,6 +148,12 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Cross check local and incoming values. If this asserts, either limits in this class are broken or default value is out of bounds
+  Q_ASSERT (POINT_SEPARATION_MIN <= cmdMediator.document().modelPointMatch().minPointSeparation());
+  Q_ASSERT (POINT_SEPARATION_MAX > cmdMediator.document().modelPointMatch().minPointSeparation());
+  Q_ASSERT (POINT_SIZE_MIN <= cmdMediator.document().modelPointMatch().maxPointSize());
+  Q_ASSERT (POINT_SIZE_MAX > cmdMediator.document().modelPointMatch().maxPointSize());
+
   // Flush old data
   if (m_modelPointMatchBefore != 0) {
     delete m_modelPointMatchBefore;
@@ -150,8 +166,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator.document());
   m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator.document());
 
-  m_editPointSeparation->setText(QString::number(m_modelPointMatchAfter->pointSeparation()));
-  m_editPointSize->setText(QString::number(m_modelPointMatchAfter->maxPointSize()));
+  m_spinMinPointSeparation->setValue(m_modelPointMatchAfter->minPointSeparation());
+  m_spinPointSize->setValue(m_modelPointMatchAfter->maxPointSize());
 
   int indexAccepted = m_cmbAcceptedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorAccepted()));
   Q_ASSERT (indexAccepted >= 0);
@@ -165,9 +181,26 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   Q_ASSERT (indexRejected >= 0);
   m_cmbRejectedPointColor->setCurrentIndex(indexRejected);
 
+  // Fix the preview size using an invisible boundary
+  QGraphicsRectItem *boundary = m_scenePreview->addRect (QRect (0,
+                                                                0,
+                                                                cmdMediator.document().pixmap().width (),
+                                                                cmdMediator.document().pixmap().height ()));
+  boundary->setVisible (false);
+
+  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
+
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+double DlgSettingsPointMatch::radiusAlongDiagonal () const
+{
+  double minPointSeparation = m_modelPointMatchAfter->minPointSeparation();
+  double maxPointSize = m_modelPointMatchAfter->maxPointSize();
+
+  return minPointSeparation + qSqrt (2.0) * maxPointSize / 2.0;
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
@@ -189,22 +222,45 @@ void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
   updatePreview();
 }
 
-void DlgSettingsPointMatch::slotPointSeparation (const QString &pointSeparation)
+void DlgSettingsPointMatch::slotMaxPointSize (int maxPointSize)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSeparation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotMaxPointSize";
 
-  m_modelPointMatchAfter->setPointSeparation(pointSeparation.toDouble());
+  m_modelPointMatchAfter->setMaxPointSize(maxPointSize);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsPointMatch::slotPointSize (const QString &pointSize)
+void DlgSettingsPointMatch::slotMinPointSeparation (int minPointSeparation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotPointSize";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotMinPointSeparation";
 
-  m_modelPointMatchAfter->setMaxPointSize(pointSize.toDouble());
+  m_modelPointMatchAfter->setMinPointSeparation(minPointSeparation);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsPointMatch::slotMouseMove (QPointF pos)
+{
+  // Move the box so it follows the mouse move
+  if (m_boxSize != 0) {
+
+    // Do not move any part outside the preview window or else ugly, and unwanted, shifting will occur
+    if (pos.x() - radiusAlongDiagonal () < 0) {
+      pos.setX (radiusAlongDiagonal ());
+    }
+    if (pos.y() - radiusAlongDiagonal () < 0) {
+      pos.setY (radiusAlongDiagonal ());
+    }
+    if (pos.x() + radiusAlongDiagonal () > m_scenePreview->sceneRect().width ()) {
+      pos.setX (m_scenePreview->sceneRect().width() - radiusAlongDiagonal ());
+    }
+    if (pos.y() + radiusAlongDiagonal () > m_scenePreview->sceneRect().height ()) {
+      pos.setY (m_scenePreview->sceneRect().height() - radiusAlongDiagonal ());
+    }
+
+    m_boxSize->setPos (pos);
+  }
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
@@ -218,15 +274,75 @@ void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 
 void DlgSettingsPointMatch::updateControls()
 {
-  QString textPointSeparation = m_editPointSeparation->text();
-  QString textPointSize = m_editPointSize->text();
-  int pos;
-  bool isOk = (m_validatorPointSeparation->validate (textPointSeparation, pos) == QValidator::Acceptable) &&
-              (m_validatorPointSize->validate (textPointSize, pos) == QValidator::Acceptable);
-  enableOk (isOk);
+  // All controls in this dialog are always fully validated so the ok button is always enabled (after the first change)
+  enableOk (true);
 }
 
 void DlgSettingsPointMatch::updatePreview()
 {
+  QPen pen (QBrush (Qt::black), 0);
 
+  if (m_boxSize != 0) {
+    m_scenePreview->removeItem (m_boxSize);
+    delete m_boxSize;
+    m_boxSize = 0;
+  }
+
+  // Geometry parameters
+  double maxPointSize = m_modelPointMatchAfter->maxPointSize();
+  double minPointSeparation = m_modelPointMatchAfter->minPointSeparation();
+
+  double xLeft = -1.0 * maxPointSize / 2.0;
+  double xRight = maxPointSize / 2.0;
+  double yTop = -1.0 * maxPointSize / 2.0;
+  double yBottom = maxPointSize / 2.0;
+  double diagonalSide = minPointSeparation / qSqrt (2.0);
+
+  // Create a box in the center
+  m_boxSize = new QGraphicsRectItem (xLeft,
+                                     yTop,
+                                     maxPointSize,
+                                     maxPointSize);
+  m_boxSize->setPos (cmdMediator().document().pixmap().width () / 2.0,
+                     cmdMediator().document().pixmap().height () / 2.0); // Initially box is in center of preview
+  m_boxSize->setPen (pen);
+  m_boxSize->setZValue (100);
+  m_scenePreview->addItem (m_boxSize);
+
+  // Create one diagonal line extending from each corner of the box in the center. They are children to the
+  // box so (1) dragging the box causes the lines to get dragged and (2) deleting the box causes the lines to get deleted.
+  // These are children so they do not need to be added to the scene
+  QGraphicsLineItem *lineTL = new QGraphicsLineItem (xLeft,
+                                                     yTop,
+                                                     xLeft - diagonalSide,
+                                                     yTop - diagonalSide,
+                                                     m_boxSize);
+  QGraphicsLineItem *lineTR = new QGraphicsLineItem (xRight,
+                                                     yTop,
+                                                     xRight + diagonalSide,
+                                                     yTop - diagonalSide,
+                                                     m_boxSize);
+  QGraphicsLineItem *lineBL = new QGraphicsLineItem (xLeft,
+                                                     yBottom,
+                                                     xLeft - diagonalSide,
+                                                     yBottom + diagonalSide,
+                                                     m_boxSize);
+  QGraphicsLineItem *lineBR = new QGraphicsLineItem (xRight,
+                                                     yBottom,
+                                                     xRight + diagonalSide,
+                                                     yBottom + diagonalSide,
+                                                     m_boxSize);
+  lineTL->setPen (pen);
+  lineTR->setPen (pen);
+  lineBL->setPen (pen);
+  lineBR->setPen (pen);
+
+  // Draw a circle circumscribing the four diagonals. Like the diagonals, this is a child to the box in the center.
+  // Since this is a child it does not need to be added to the scene
+  QGraphicsEllipseItem *circle = new QGraphicsEllipseItem (-1.0 * radiusAlongDiagonal (),
+                                                           -1.0 * radiusAlongDiagonal (),
+                                                           2.0 * radiusAlongDiagonal (),
+                                                           2.0 * radiusAlongDiagonal (),
+                                                           m_boxSize);
+  circle->setPen (pen);
 }

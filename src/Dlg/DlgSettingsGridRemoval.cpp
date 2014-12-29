@@ -23,6 +23,8 @@ const int COUNT_DECIMALS = 0;
 
 DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Grid Removal", mainWindow),
+  m_scenePreview (0),
+  m_viewPreview (0),
   m_modelGridRemovalBefore (0),
   m_modelGridRemovalAfter (0)
 {

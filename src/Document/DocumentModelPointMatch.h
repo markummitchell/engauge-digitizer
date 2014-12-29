@@ -25,6 +25,9 @@ public:
   /// Get method for max point size.
   double maxPointSize() const;
 
+  /// Get method for minimum point separation.
+  double minPointSeparation() const;
+
   /// Get method for accepted color.
   ColorPalette paletteColorAccepted() const;
 
@@ -36,11 +39,11 @@ public:
 
   virtual void saveModel(QXmlStreamWriter &stream) const;
 
-  /// Get method for point separation.
-  double pointSeparation() const;
-
   /// Set method for max point size.
   void setMaxPointSize (double maxPointSize);
+
+  /// Set method for minimum point separation.
+  void setMinPointSeparation (double minPointSeparation);
 
   /// Set method for accepted color.
   void setPaletteColorAccepted(ColorPalette paletteColorAccepted);
@@ -51,12 +54,9 @@ public:
   /// Set method for rejected color.
   void setPaletteColorRejected(ColorPalette paletteColorRejected);
 
-  /// Set method for point separation.
-  void setPointSeparation (double pointSeparation);
-
 private:
 
-  double m_pointSeparation;
+  double m_minPointSeparation;
   double m_maxPointSize;
   ColorPalette m_paletteColorAccepted;
   ColorPalette m_paletteColorCandidate;

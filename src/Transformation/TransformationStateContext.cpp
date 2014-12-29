@@ -47,6 +47,11 @@ void TransformationStateContext::updateAxesChecker (CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::updateAxesChecker";
 
-  m_states[m_currentState]->updateAxesChecker (cmdMediator,
-                                               transformation);
+  // Skip if there is no image so the state has not yet been set yet
+  if (m_currentState < NUM_TRANSFORMATION_STATES) {
+
+    m_states[m_currentState]->updateAxesChecker (cmdMediator,
+                                                 transformation);
+
+  }
 }

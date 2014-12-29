@@ -63,6 +63,8 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Coordinates", mainWindow),
   m_btnCartesian (0),
   m_btnPolar (0),
+  m_scenePreview (0),
+  m_viewPreview (0),
   m_modelCoordsBefore (0),
   m_modelCoordsAfter (0)
 {
@@ -472,8 +474,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
-void DlgSettingsCoords::resetSceneRectangle () {
-
+void DlgSettingsCoords::resetSceneRectangle ()
+{
   QRect rect (CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
               CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
               CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP,

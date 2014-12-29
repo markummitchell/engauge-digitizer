@@ -6,11 +6,11 @@
 
 class DocumentModelPointMatch;
 class QComboBox;
-class QDoubleValidator;
-class QIntValidator;
-class QGridLayout;
+class QGraphicsPixmapItem;
+class QGraphicsRectItem;
 class QGraphicsScene;
-class QLineEdit;
+class QGridLayout;
+class QSpinBox;
 class ViewPreview;
 
 /// Stacked widget page for editing point match settings, for DigitizeStatePointMatch.
@@ -28,8 +28,9 @@ public:
 private slots:
   void slotAcceptedPointColor (const QString &);
   void slotCandidatePointColor (const QString &);
-  void slotPointSeparation (const QString &);
-  void slotPointSize (const QString &);
+  void slotMaxPointSize (int);
+  void slotMinPointSeparation (int);
+  void slotMouseMove (QPointF pos);
   void slotRejectedPointColor (const QString &);
 
 protected:
@@ -41,19 +42,19 @@ private:
                        int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
+  double radiusAlongDiagonal () const;
   void updateControls();
   void updatePreview();
 
-  QLineEdit *m_editPointSeparation;
-  QIntValidator *m_validatorPointSeparation;
-  QLineEdit *m_editPointSize;
-  QIntValidator *m_validatorPointSize;
+  QSpinBox *m_spinMinPointSeparation;
+  QSpinBox *m_spinPointSize;
   QComboBox *m_cmbAcceptedPointColor;
   QComboBox *m_cmbRejectedPointColor;
   QComboBox *m_cmbCandidatePointColor;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+  QGraphicsRectItem *m_boxSize;
 
   DocumentModelPointMatch *m_modelPointMatchBefore;
   DocumentModelPointMatch *m_modelPointMatchAfter;

@@ -18,11 +18,13 @@ const int LINE_SIZE_MIN = 1;
 const int LINE_SIZE_MAX = 10000;
 const int MIN_LENGTH_MIN = 1;
 const int MIN_LENGTH_MAX = 10000;
-const int POINT_SEPARATION_MIN = 1;
+const int POINT_SEPARATION_MIN = 5;
 const int POINT_SEPARATION_MAX = 10000;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Segments", mainWindow),
+  m_scenePreview (0),
+  m_viewPreview (0),
   m_modelSegmentsBefore (0),
   m_modelSegmentsAfter (0)
 {
