@@ -40,15 +40,21 @@ void Checker::bindItemToScene(QGraphicsItem *item)
 }
 
 void Checker::createLine (QGraphicsItem *&item,
+                          const DocumentModelCoords &modelCoords,
                           const QPointF &pointFromGraph,
                           const QPointF &pointToGraph,
                           const Transformation &transformation)
 {
+  QPointF pointFromGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
+                                                                             pointFromGraph);
+  QPointF pointToGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
+                                                                           pointToGraph);
+
   // Convert graph coordinates to screen coordinates
   QPointF pointFromScreen, pointToScreen;
-  transformation.transformInverse (pointFromGraph,
+  transformation.transformInverse (pointFromGraphCart,
                                    pointFromScreen);
-  transformation.transformInverse (pointToGraph,
+  transformation.transformInverse (pointToGraphCart,
                                    pointToScreen);
 
   item = new QGraphicsLineItem (QLineF (pointFromScreen,
@@ -128,16 +134,17 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   }
 
   // Draw the bounding box as four sides
-  createLine (m_side0, QPointF (xMin, yMin), QPointF (xMax, yMin), transformation);
-  createLine (m_side1, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation);
-  createLine (m_side2, QPointF (xMax, yMin), QPointF (xMax, yMax), transformation);
-  createLine (m_side3, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation);
+  createLine (m_side0, modelCoords, QPointF (xMin, yMin), QPointF (xMax, yMin), transformation);
+  createLine (m_side1, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation);
+  createLine (m_side2, modelCoords, QPointF (xMax, yMin), QPointF (xMax, yMax), transformation);
+  createLine (m_side3, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation);
 
   updateModelAxesChecker (modelAxesChecker);
 }
 
 void Checker::setLineColor (QGraphicsItem *item, const QPen &pen)
 {
+  // Downcast since QGraphicsItem does not have a pen
   QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
   QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
   if (itemLine == 0) {

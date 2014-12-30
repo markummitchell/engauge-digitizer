@@ -53,6 +53,7 @@ private:
 
   void bindItemToScene(QGraphicsItem *item);
   void createLine (QGraphicsItem *&item,
+                   const DocumentModelCoords &modelCoords,
                    const QPointF &pointFromGraph,
                    const QPointF &pointToGraph,
                    const Transformation &transformation);
