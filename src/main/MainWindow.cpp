@@ -1227,8 +1227,12 @@ void MainWindow::slotFileImport ()
     }
     str << ")";
 
+    // Allow selection of files with strange suffixes in case the file extension was changed. Since
+    // the default is the first filter, we add this afterwards (it is the off-nominal case)
+    str << ";; All Files (*.*)";
+
     QString fileName = QFileDialog::getOpenFileName (this,
-                                                     tr("Open Image"),
+                                                     tr("Import Image"),
                                                      QDir::currentPath (),
                                                      filter);
     if (!fileName.isEmpty ()) {
@@ -1265,10 +1269,15 @@ void MainWindow::slotFileOpen()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileOpen";
 
   if (maybeSave ()) {
+
+    // Allow selection of files with strange suffixes in case the file extension was changed. Since
+    // the default is the first filter, the wildcard filter is added afterwards (it is the off-nominal case)
+    QString filter (tr ("Documents (*.dig);; All Files (*.*)"));
+
     QString fileName = QFileDialog::getOpenFileName (this,
                                                      tr("Open Document"),
                                                      QDir::currentPath (),
-                                                     tr ("Documents (*.dig)"));
+                                                     filter);
     if (!fileName.isEmpty ()) {
       loadFile (fileName);
     }
