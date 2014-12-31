@@ -1388,6 +1388,7 @@ void MainWindow::slotMouseMove (QPointF pos)
                                           coordsScreen,
                                           coordsGraph,
                                           resolutionGraph);
+
   m_statusBar->setCoordinates (coordsScreen,
                                coordsGraph,
                                resolutionGraph);

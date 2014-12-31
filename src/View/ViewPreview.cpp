@@ -11,7 +11,9 @@ ViewPreview::ViewPreview(QGraphicsScene *scene,
 
 void ViewPreview::mouseMoveEvent(QMouseEvent *event)
 {
-  emit signalMouseMove (event->localPos ());
+  QPointF pos = mapToScene (event->pos ());
+
+  emit signalMouseMove (pos);
 }
 
 void ViewPreview::resizeEvent(QResizeEvent *event)
