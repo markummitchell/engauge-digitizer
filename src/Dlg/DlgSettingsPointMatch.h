@@ -6,6 +6,8 @@
 
 class DocumentModelPointMatch;
 class QComboBox;
+class QGraphicsEllipseItem;
+class QGraphicsLineItem;
 class QGraphicsPixmapItem;
 class QGraphicsRectItem;
 class QGraphicsScene;
@@ -38,10 +40,13 @@ protected:
 
 private:
 
+  QPointF boxPositionConstraint(const QPointF &posIn);
   void createControls (QGridLayout *layout,
                        int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
+  void createTemplate();
+  void initializeBox();
   double radiusAlongDiagonal () const;
   void updateControls();
   void updatePreview();
@@ -55,6 +60,11 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
   QGraphicsRectItem *m_boxSize;
+  QGraphicsLineItem *m_lineTL;
+  QGraphicsLineItem *m_lineTR;
+  QGraphicsLineItem *m_lineBL;
+  QGraphicsLineItem *m_lineBR;
+  QGraphicsEllipseItem *m_circle;
 
   DocumentModelPointMatch *m_modelPointMatchBefore;
   DocumentModelPointMatch *m_modelPointMatchAfter;

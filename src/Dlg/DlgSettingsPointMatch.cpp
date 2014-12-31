@@ -32,6 +32,28 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   finishPanel (subPanel);
 }
 
+QPointF DlgSettingsPointMatch::boxPositionConstraint(const QPointF &posIn)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::boxPositionConstraint";
+
+  // Do not move any part outside the preview window or else ugly, and unwanted, shifting will occur
+  QPointF pos (posIn);
+  if (pos.x() - radiusAlongDiagonal () < 0) {
+    pos.setX (radiusAlongDiagonal ());
+  }
+  if (pos.y() - radiusAlongDiagonal () < 0) {
+    pos.setY (radiusAlongDiagonal ());
+  }
+  if (pos.x() + radiusAlongDiagonal () > m_scenePreview->sceneRect().width ()) {
+    pos.setX (m_scenePreview->sceneRect().width() - radiusAlongDiagonal ());
+  }
+  if (pos.y() + radiusAlongDiagonal () > m_scenePreview->sceneRect().height ()) {
+    pos.setY (m_scenePreview->sceneRect().height() - radiusAlongDiagonal ());
+  }
+
+  return pos;
+}
+
 void DlgSettingsPointMatch::createControls (QGridLayout *layout,
                                             int &row)
 {
@@ -131,8 +153,39 @@ QWidget *DlgSettingsPointMatch::createSubPanel ()
   int row = 0;
   createControls (layout, row);
   createPreview (layout, row);
+  createTemplate ();
 
   return subPanel;
+}
+
+void DlgSettingsPointMatch::createTemplate ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createTemplate";
+
+  QPen pen (QBrush (Qt::black), 0);
+
+  // Create a box in the center
+  m_boxSize = new QGraphicsRectItem;
+  m_boxSize->setPen (pen);
+  m_boxSize->setZValue (100);
+  m_scenePreview->addItem (m_boxSize);
+
+  // Create one diagonal line extending from each corner of the box in the center. They are children to the
+  // box so (1) dragging the box causes the lines to get dragged and (2) deleting the box causes the lines to get deleted.
+  // These are children so they do not need to be added to the scene
+  m_lineTL = new QGraphicsLineItem (m_boxSize);
+  m_lineTR = new QGraphicsLineItem (m_boxSize);
+  m_lineBL = new QGraphicsLineItem (m_boxSize);
+  m_lineBR = new QGraphicsLineItem (m_boxSize);
+  m_lineTL->setPen (pen);
+  m_lineTR->setPen (pen);
+  m_lineBL->setPen (pen);
+  m_lineBR->setPen (pen);
+
+  // Draw a circle circumscribing the four diagonals. Like the diagonals, this is a child to the box in the center.
+  // Since this is a child it does not need to be added to the scene
+  m_circle = new QGraphicsEllipseItem (m_boxSize);
+  m_circle->setPen (pen);
 }
 
 void DlgSettingsPointMatch::handleOk ()
@@ -146,6 +199,14 @@ void DlgSettingsPointMatch::handleOk ()
   cmdMediator ().push (cmd);
 
   hide ();
+}
+
+void DlgSettingsPointMatch::initializeBox ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::initializeBox";
+
+  m_boxSize->setPos (cmdMediator().document().pixmap().width () / 2.0,
+                     cmdMediator().document().pixmap().height () / 2.0); // Initially box is in center of preview
 }
 
 void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
@@ -186,6 +247,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   int indexRejected = m_cmbRejectedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorRejected()));
   Q_ASSERT (indexRejected >= 0);
   m_cmbRejectedPointColor->setCurrentIndex(indexRejected);
+
+  initializeBox ();
 
   // Fix the preview size using an invisible boundary
   QGraphicsRectItem *boundary = m_scenePreview->addRect (QRect (0,
@@ -248,25 +311,11 @@ void DlgSettingsPointMatch::slotMinPointSeparation (int minPointSeparation)
 
 void DlgSettingsPointMatch::slotMouseMove (QPointF pos)
 {
-  // Move the box so it follows the mouse move
-  if (m_boxSize != 0) {
+  // Move the box so it follows the mouse move, making sure to keep it entirely inside the view to
+  // prevent autoresizing by QGraphicsView
+  pos = boxPositionConstraint (pos);
 
-    // Do not move any part outside the preview window or else ugly, and unwanted, shifting will occur
-    if (pos.x() - radiusAlongDiagonal () < 0) {
-      pos.setX (radiusAlongDiagonal ());
-    }
-    if (pos.y() - radiusAlongDiagonal () < 0) {
-      pos.setY (radiusAlongDiagonal ());
-    }
-    if (pos.x() + radiusAlongDiagonal () > m_scenePreview->sceneRect().width ()) {
-      pos.setX (m_scenePreview->sceneRect().width() - radiusAlongDiagonal ());
-    }
-    if (pos.y() + radiusAlongDiagonal () > m_scenePreview->sceneRect().height ()) {
-      pos.setY (m_scenePreview->sceneRect().height() - radiusAlongDiagonal ());
-    }
-
-    m_boxSize->setPos (pos);
-  }
+  m_boxSize->setPos (pos);
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
@@ -286,14 +335,6 @@ void DlgSettingsPointMatch::updateControls()
 
 void DlgSettingsPointMatch::updatePreview()
 {
-  QPen pen (QBrush (Qt::black), 0);
-
-  if (m_boxSize != 0) {
-    m_scenePreview->removeItem (m_boxSize);
-    delete m_boxSize;
-    m_boxSize = 0;
-  }
-
   // Geometry parameters
   double maxPointSize = m_modelPointMatchAfter->maxPointSize();
   double minPointSeparation = m_modelPointMatchAfter->minPointSeparation();
@@ -304,51 +345,40 @@ void DlgSettingsPointMatch::updatePreview()
   double yBottom = maxPointSize / 2.0;
   double diagonalSide = minPointSeparation / qSqrt (2.0);
 
-  // Create a box in the center
-  m_boxSize = new QGraphicsRectItem (xLeft,
-                                     yTop,
-                                     maxPointSize,
-                                     maxPointSize);
-  m_boxSize->setPos (cmdMediator().document().pixmap().width () / 2.0,
-                     cmdMediator().document().pixmap().height () / 2.0); // Initially box is in center of preview
-  m_boxSize->setPen (pen);
-  m_boxSize->setZValue (100);
-  m_scenePreview->addItem (m_boxSize);
+  // Update box size
+  m_boxSize->setRect (xLeft,
+                      yTop,
+                      maxPointSize,
+                      maxPointSize);
 
-  // Create one diagonal line extending from each corner of the box in the center. They are children to the
-  // box so (1) dragging the box causes the lines to get dragged and (2) deleting the box causes the lines to get deleted.
-  // These are children so they do not need to be added to the scene
-  QGraphicsLineItem *lineTL = new QGraphicsLineItem (xLeft,
-                                                     yTop,
-                                                     xLeft - diagonalSide,
-                                                     yTop - diagonalSide,
-                                                     m_boxSize);
-  QGraphicsLineItem *lineTR = new QGraphicsLineItem (xRight,
-                                                     yTop,
-                                                     xRight + diagonalSide,
-                                                     yTop - diagonalSide,
-                                                     m_boxSize);
-  QGraphicsLineItem *lineBL = new QGraphicsLineItem (xLeft,
-                                                     yBottom,
-                                                     xLeft - diagonalSide,
-                                                     yBottom + diagonalSide,
-                                                     m_boxSize);
-  QGraphicsLineItem *lineBR = new QGraphicsLineItem (xRight,
-                                                     yBottom,
-                                                     xRight + diagonalSide,
-                                                     yBottom + diagonalSide,
-                                                     m_boxSize);
-  lineTL->setPen (pen);
-  lineTR->setPen (pen);
-  lineBL->setPen (pen);
-  lineBR->setPen (pen);
+  // Position the lines relative to the parent
+  m_lineTL->setLine (xLeft,
+                     yTop,
+                     xLeft - diagonalSide,
+                     yTop - diagonalSide);
+  m_lineTR->setLine (xRight,
+                     yTop,
+                     xRight + diagonalSide,
+                     yTop - diagonalSide);
+  m_lineBL->setLine (xLeft,
+                     yBottom,
+                     xLeft - diagonalSide,
+                     yBottom + diagonalSide);
+  m_lineBR->setLine (xRight,
+                     yBottom,
+                     xRight + diagonalSide,
+                     yBottom + diagonalSide);
 
-  // Draw a circle circumscribing the four diagonals. Like the diagonals, this is a child to the box in the center.
-  // Since this is a child it does not need to be added to the scene
-  QGraphicsEllipseItem *circle = new QGraphicsEllipseItem (-1.0 * radiusAlongDiagonal (),
-                                                           -1.0 * radiusAlongDiagonal (),
-                                                           2.0 * radiusAlongDiagonal (),
-                                                           2.0 * radiusAlongDiagonal (),
-                                                           m_boxSize);
-  circle->setPen (pen);
+  // Position the circle relative to the parent
+  m_circle->setRect (-1.0 * radiusAlongDiagonal (),
+                     -1.0 * radiusAlongDiagonal (),
+                     2.0 * radiusAlongDiagonal (),
+                     2.0 * radiusAlongDiagonal ());
+
+  // Changing any of the size may have just pushed an edge outside the view, so apply the
+  // box position constraint. This is a noop if nothing extends past the box edge
+  QPointF pos = boxPositionConstraint (m_boxSize->pos ());
+  if (pos != m_boxSize->pos ()) {
+    m_boxSize->setPos (pos);
+  }
 }
