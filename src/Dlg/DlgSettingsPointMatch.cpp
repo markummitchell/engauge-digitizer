@@ -36,19 +36,25 @@ QPointF DlgSettingsPointMatch::boxPositionConstraint(const QPointF &posIn)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::boxPositionConstraint";
 
+  double radius = radiusAlongDiagonal();
+  double diameter = 2.0 * radius;
+
   // Do not move any part outside the preview window or else ugly, and unwanted, shifting will occur
   QPointF pos (posIn);
-  if (pos.x() - radiusAlongDiagonal () < 0) {
-    pos.setX (radiusAlongDiagonal ());
+  if (pos.x() - radius < 0) {
+    pos.setX (radius);
   }
-  if (pos.y() - radiusAlongDiagonal () < 0) {
-    pos.setY (radiusAlongDiagonal ());
+
+  if (pos.y() - radius < 0) {
+    pos.setY (radius);
   }
-  if (pos.x() + radiusAlongDiagonal () > m_scenePreview->sceneRect().width ()) {
-    pos.setX (m_scenePreview->sceneRect().width() - radiusAlongDiagonal ());
+
+  if (pos.x() + diameter > m_scenePreview->sceneRect().width ()) {
+    pos.setX (m_scenePreview->sceneRect().width() - diameter);
   }
-  if (pos.y() + radiusAlongDiagonal () > m_scenePreview->sceneRect().height ()) {
-    pos.setY (m_scenePreview->sceneRect().height() - radiusAlongDiagonal ());
+
+  if (pos.y() + diameter > m_scenePreview->sceneRect().height ()) {
+    pos.setY (m_scenePreview->sceneRect().height() - diameter);
   }
 
   return pos;
