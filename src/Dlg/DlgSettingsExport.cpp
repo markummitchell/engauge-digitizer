@@ -377,7 +377,7 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
   m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
 
-  // Excluded curves
+  // Populate controls. First load excluded curves
   m_listExcluded->clear();
   QStringList curveNamesExcluded = m_modelExportAfter->curveNamesNotExported();
   QStringList::const_iterator itr;

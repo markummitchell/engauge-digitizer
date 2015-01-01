@@ -15,8 +15,6 @@
 #include <QSpinBox>
 #include "ViewPreview.h"
 
-const int LINE_SIZE_MIN = 1;
-const int LINE_SIZE_MAX = 10000;
 const int MIN_LENGTH_MIN = 1;
 const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 5;
@@ -219,6 +217,9 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  static bool shit = true;
+  QPoint posDlg = pos ();
+
   // Flush old data
   if (m_modelSegmentsBefore != 0) {
     delete m_modelSegmentsBefore;
@@ -231,6 +232,13 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_modelSegmentsBefore = new DocumentModelSegments (cmdMediator.document());
   m_modelSegmentsAfter = new DocumentModelSegments (cmdMediator.document());
 
+  // Sanity checks. Incoming defaults must be acceptable to the local limits
+  Q_ASSERT (MIN_LENGTH_MIN <= m_modelSegmentsAfter->minLength ());
+  Q_ASSERT (MIN_LENGTH_MAX >= m_modelSegmentsAfter->minLength ());
+  Q_ASSERT (POINT_SEPARATION_MIN <= m_modelSegmentsAfter->pointSeparation());
+  Q_ASSERT (POINT_SEPARATION_MAX >= m_modelSegmentsAfter->pointSeparation());
+
+  // Populate controls
   m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
   m_editMinLength->setText (QString::number(m_modelSegmentsAfter->minLength()));
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
@@ -243,6 +251,11 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+
+  if (!shit) {
+    move (posDlg);
+  }
+  shit = false;
 }
 
 void DlgSettingsSegments::slotFillCorners (int state)

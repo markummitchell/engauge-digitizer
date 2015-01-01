@@ -205,6 +205,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_modelFilterBefore = new DocumentModelFilter (cmdMediator.document());
   m_modelFilterAfter = new DocumentModelFilter (cmdMediator.document());
 
+  // Populate controls
   FilterParameter filterParameter = m_modelFilterAfter->filterParameter();
   m_btnIntensity->setChecked (filterParameter == FILTER_PARAMETER_INTENSITY);
   m_btnForeground->setChecked (filterParameter == FILTER_PARAMETER_FOREGROUND);

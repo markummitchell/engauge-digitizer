@@ -477,6 +477,7 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_modelCoordsBefore = new DocumentModelCoords (cmdMediator.document().modelCoords());
   m_modelCoordsAfter = new DocumentModelCoords (cmdMediator.document().modelCoords());
 
+  // Populate controls
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 
   if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {

@@ -199,6 +199,7 @@ void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
   m_modelAxesCheckerAfter = new DocumentModelAxesChecker (cmdMediator.document());
   m_modelCoords = new DocumentModelCoords (cmdMediator.document());
 
+  // Populate controls
   CheckerMode checkerMode = m_modelAxesCheckerAfter->checkerMode();
   m_btnNever->setChecked (checkerMode == CHECKER_MODE_NEVER);
   m_btnNSeconds->setChecked (checkerMode == CHECKER_MODE_N_SECONDS);

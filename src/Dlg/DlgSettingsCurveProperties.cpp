@@ -240,7 +240,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator.document());
   m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator.document());
 
-  // Load curve name combobox. The curve-specific controls get loaded in slotCurveName
+  // Populate controls. First load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();
   m_cmbCurveName->addItem (AXIS_CURVE_NAME);
   QStringList curveNames = cmdMediator.curvesGraphsNames();

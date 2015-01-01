@@ -292,6 +292,11 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_modelGridRemovalBefore = new DocumentModelGridRemoval (cmdMediator.document());
   m_modelGridRemovalAfter = new DocumentModelGridRemoval (cmdMediator.document());
 
+  // Sanity checks. Incoming defaults must be acceptable to the local limits
+  Q_ASSERT (CLOSE_DISTANCE_MIN <= m_modelGridRemovalAfter->closeDistance());
+  Q_ASSERT (CLOSE_DISTANCE_MAX >= m_modelGridRemovalAfter->closeDistance());
+
+  // Populate controls
   m_chkRemoveGridLines->setChecked (m_modelGridRemovalAfter->removeDefinedGridLines());
 
   m_editCloseDistance->setText (QString::number (m_modelGridRemovalAfter->closeDistance()));

@@ -221,12 +221,6 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  // Cross check local and incoming values. If this asserts, either limits in this class are broken or default value is out of bounds
-  Q_ASSERT (POINT_SEPARATION_MIN <= cmdMediator.document().modelPointMatch().minPointSeparation());
-  Q_ASSERT (POINT_SEPARATION_MAX > cmdMediator.document().modelPointMatch().minPointSeparation());
-  Q_ASSERT (POINT_SIZE_MIN <= cmdMediator.document().modelPointMatch().maxPointSize());
-  Q_ASSERT (POINT_SIZE_MAX > cmdMediator.document().modelPointMatch().maxPointSize());
-
   // Flush old data
   if (m_modelPointMatchBefore != 0) {
     delete m_modelPointMatchBefore;
@@ -239,6 +233,13 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator.document());
   m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator.document());
 
+  // Sanity checks. Incoming defaults must be acceptable to the local limits
+  Q_ASSERT (POINT_SEPARATION_MIN <= m_modelPointMatchAfter->minPointSeparation());
+  Q_ASSERT (POINT_SEPARATION_MAX > m_modelPointMatchAfter->minPointSeparation());
+  Q_ASSERT (POINT_SIZE_MIN <= m_modelPointMatchAfter->maxPointSize());
+  Q_ASSERT (POINT_SIZE_MAX > m_modelPointMatchAfter->maxPointSize());
+
+  // Populate controls
   m_spinMinPointSeparation->setValue(m_modelPointMatchAfter->minPointSeparation());
   m_spinPointSize->setValue(m_modelPointMatchAfter->maxPointSize());
 
