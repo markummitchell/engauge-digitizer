@@ -114,7 +114,6 @@ HEADERS  += \
     Point/PointStyle.h \
     util/QtToString.h \
     Segment/Segment.h \
-    Settings/SettingsCurve.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
@@ -219,7 +218,6 @@ SOURCES += \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
     Segment/Segment.cpp \
-    Settings/SettingsCurve.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
@@ -262,7 +260,6 @@ INCLUDEPATH += Callback \
                Mime \
                Plot \
                Point \
-               Settings \
                StatusBar \
                Transformation \
                util \
