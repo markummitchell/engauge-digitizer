@@ -11,6 +11,7 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QLineEdit>
+#include <qmath.h>
 #include <QSpinBox>
 #include "ViewPreview.h"
 
@@ -20,6 +21,13 @@ const int MIN_LENGTH_MIN = 1;
 const int MIN_LENGTH_MAX = 10000;
 const int POINT_SEPARATION_MIN = 5;
 const int POINT_SEPARATION_MAX = 10000;
+
+const int IMAGE_WIDTH = 400;
+const int IMAGE_HEIGHT = 300;
+
+const double TWOPI = 2.0 * 3.1415926535;
+
+const double BRUSH_WIDTH = 2.0;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Segments", mainWindow),
@@ -35,6 +43,8 @@ DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
 void DlgSettingsSegments::createControls (QGridLayout *layout,
                                           int &row)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createControls";
+
   QLabel *labelMinLength = new QLabel("Minimum length:");
   layout->addWidget(labelMinLength, row, 1);
 
@@ -114,6 +124,59 @@ void DlgSettingsSegments::createPreview (QGridLayout *layout,
 void DlgSettingsSegments::createPreviewImage ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createPreviewImage";
+
+  QImage image (IMAGE_WIDTH,
+                IMAGE_HEIGHT,
+                QImage::Format_RGB32);
+  image.fill (Qt::white);
+  QPainter painter (&image);
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setPen (QPen (QBrush (Qt::black), BRUSH_WIDTH));
+
+  int margin = IMAGE_WIDTH / 15;
+  int yCenter = IMAGE_HEIGHT / 2;
+  int yHeight = IMAGE_HEIGHT / 4;
+  int x, y, xLast, yLast;
+  bool isFirst;
+
+  // Draw sinusoid
+  isFirst = true;
+  int xStart = margin, xEnd = IMAGE_WIDTH / 2 - margin;
+  for (x = xStart; x < xEnd; x++) {
+    double s = (double) (x - xStart) / (double) (xEnd - xStart);
+    int y = yCenter - yHeight * qSin (TWOPI * s);
+
+    if (!isFirst) {
+      painter.drawLine (xLast, yLast, x, y);
+    }
+    isFirst = false;
+    xLast = x;
+    yLast = y;
+  }
+
+  // Draw triangular waveform that looks like sinusoid straightened up into line segments
+  isFirst = true;
+  xStart = IMAGE_WIDTH / 2 + margin, xEnd = IMAGE_WIDTH - margin;
+  for (x = xStart; x < xEnd; x++) {
+    double s = (double) (x - xStart) / (double) (xEnd - xStart);
+    if (s <= 0.25) {
+      y = yCenter - yHeight * (4.0 * s);
+    } else if (s < 0.75) {
+      y = yCenter - yHeight * (1.0 - 4.0 * (s - 0.25));
+    } else {
+      y = yCenter + yHeight * (1.0 - 4 * (s - 0.75));
+    }
+
+    if (!isFirst) {
+      painter.drawLine (xLast, yLast, x, y);
+    }
+    isFirst = false;
+    xLast = x;
+    yLast = y;
+  }
+
+  QPixmap pixmap = QPixmap::fromImage (image);
+  m_scenePreview->addPixmap (pixmap);
 }
 
 QWidget *DlgSettingsSegments::createSubPanel ()
