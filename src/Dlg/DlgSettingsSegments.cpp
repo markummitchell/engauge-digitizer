@@ -28,7 +28,9 @@ const double TWOPI = 2.0 * 3.1415926535;
 const double BRUSH_WIDTH = 2.0;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Segments", mainWindow),
+  DlgSettingsAbstractBase ("Segments",
+                           "DlgSettingsSegments",
+                           mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelSegmentsBefore (0),
@@ -217,9 +219,6 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
-  static bool shit = true;
-  QPoint posDlg = pos ();
-
   // Flush old data
   if (m_modelSegmentsBefore != 0) {
     delete m_modelSegmentsBefore;
@@ -251,11 +250,6 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
-
-  if (!shit) {
-    move (posDlg);
-  }
-  shit = false;
 }
 
 void DlgSettingsSegments::slotFillCorners (int state)

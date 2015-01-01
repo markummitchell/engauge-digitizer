@@ -1,17 +1,21 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
+#include "Logger.h"
 #include "MainWindow.h"
 #include <QColor>
 #include <QComboBox>
 #include <QPushButton>
+#include <QSettings>
 #include <QSpacerItem>
 #include <QVBoxLayout>
 
 DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
+                                                 const QString &dialogName,
                                                  MainWindow &mainWindow) :
   QDialog (&mainWindow),
   m_mainWindow (mainWindow),
-  m_cmdMediator (0)
+  m_cmdMediator (0),
+  m_dialogName (dialogName)
 {
   setWindowTitle (title);
   setModal (true);
@@ -50,7 +54,7 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
 
   m_btnCancel = new QPushButton (tr ("Cancel"));
   buttonLayout->addWidget (m_btnCancel);
-  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (hide ()));
+  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (slotCancel ()));
 
   QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
   buttonLayout->addItem (spacer);
@@ -88,6 +92,13 @@ void DlgSettingsAbstractBase::populateColorComboWithTransparent (QComboBox &comb
   combo.addItem ("Transparent", QVariant (COLOR_PALETTE_TRANSPARENT));
 }
 
+void DlgSettingsAbstractBase::saveGeometryToSettings()
+{
+  // Store the settings for use by showEvent
+  QSettings settings;
+  settings.setValue (m_dialogName, saveGeometry ());
+}
+
 void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)
 {
   m_cmdMediator = &cmdMediator;
@@ -96,10 +107,29 @@ void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)
 void DlgSettingsAbstractBase::showEvent (QShowEvent * /* event */)
 {
   m_btnOk->setEnabled (false);
+
+  QSettings settings;
+  if (settings.contains (m_dialogName)) {
+
+    // Restore the settings that were stored by the last call to saveGeometryToSettings
+    restoreGeometry (settings.value (m_dialogName).toByteArray ());
+  }
+}
+
+void DlgSettingsAbstractBase::slotCancel ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::slotCancel";
+
+  saveGeometryToSettings();
+  hide();
 }
 
 void DlgSettingsAbstractBase::slotOk ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::slotOk";
+
+  saveGeometryToSettings();
+
   // Forward to leaf class
   handleOk ();
 }

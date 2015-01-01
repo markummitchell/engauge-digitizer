@@ -31,7 +31,9 @@ const double PREVIEW_WIDTH = 100.0;
 const double PREVIEW_HEIGHT = 100.0;
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curve Properties", mainWindow),
+  DlgSettingsAbstractBase ("Curve Properties",
+                           "DlgSettingsCurveProperties",
+                           mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelCurvePropertiesBefore (0),

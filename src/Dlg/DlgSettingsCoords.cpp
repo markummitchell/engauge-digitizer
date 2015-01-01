@@ -60,7 +60,9 @@ const int FONT_SIZE = 6;
 const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
 
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Coordinates", mainWindow),
+  DlgSettingsAbstractBase ("Coordinates",
+                           "DlgSettingsCoords",
+                           mainWindow),
   m_btnCartesian (0),
   m_btnPolar (0),
   m_scenePreview (0),

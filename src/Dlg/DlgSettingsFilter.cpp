@@ -29,7 +29,9 @@ const int FIRST_NONEMPTY_BIN_AT_START = 1;
 const int LAST_NONEMPTY_BIN_AT_END = HISTOGRAM_BINS - 2;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Filter", mainWindow),
+  DlgSettingsAbstractBase ("Filter",
+                           "DlgSettingsFilter",
+                           mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelFilterBefore (0),

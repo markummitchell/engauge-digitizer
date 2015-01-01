@@ -19,6 +19,7 @@ class DlgSettingsAbstractBase : public QDialog
 public:
   /// Single constructor.
   DlgSettingsAbstractBase(const QString &title,
+                          const QString &dialogName,
                           MainWindow &mainWindow);
   virtual ~DlgSettingsAbstractBase();
 
@@ -64,16 +65,23 @@ private slots:
   /// Do preparation before dialog is displayed.
   virtual void showEvent (QShowEvent *event);
 
+  /// Hide dialog.
+  void slotCancel();
+
   /// Save changes entered in dialog.
   void slotOk ();
 
 private:
   DlgSettingsAbstractBase();
 
+  void saveGeometryToSettings ();
+
   MainWindow &m_mainWindow;
   CmdMediator *m_cmdMediator; // Cannot be const since Document gets a command pushed if dialog is ok'ed
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
+
+  const QString m_dialogName;
 };
 
 #endif // DLG_SETTINGS_ABSTRACT_BASE_H

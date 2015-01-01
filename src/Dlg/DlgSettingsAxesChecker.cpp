@@ -28,7 +28,9 @@ const int TICKS_PER_AXIS = 6;
 const int TICK_MARK_LENGTH = 8;
 
 DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Axes Checker", mainWindow),
+  DlgSettingsAbstractBase ("Axes Checker",
+                           "DlgSettingsAxesChecker",
+                           mainWindow),
   m_checker (0),
   m_modelAxesCheckerBefore (0),
   m_modelAxesCheckerAfter (0),

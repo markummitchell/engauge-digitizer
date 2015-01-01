@@ -22,7 +22,9 @@ const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 
 DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Grid Removal", mainWindow),
+  DlgSettingsAbstractBase ("Grid Removal",
+                           "DlgSettingsGridRemoval",
+                           mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelGridRemovalBefore (0),

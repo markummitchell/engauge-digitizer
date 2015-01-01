@@ -24,7 +24,9 @@ const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
 DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Export", mainWindow),
+  DlgSettingsAbstractBase ("Export",
+                           "DlgSettingsExport",
+                           mainWindow),
   m_modelExportBefore (0),
   m_modelExportAfter (0)
 {

@@ -13,7 +13,9 @@
 #include "QtToString.h"
 
 DlgSettingsCurves::DlgSettingsCurves(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curves", mainWindow)
+  DlgSettingsAbstractBase ("Curves",
+                           "DlgSetingsCurves",
+                           mainWindow)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
