@@ -15,6 +15,9 @@ public:
   /// Single constructor.
   Segment();
 
+  // Add some more pixels in a new column to an active segment
+  void appendColumn(int x, int y, const DocumentModelSegments &modelSegments);
+
   /// Set the segment properties.
   void setDocumentModelSegments (const DocumentModelSegments &modelSegments);
 

@@ -81,11 +81,11 @@ void DlgFilterWorker::slotRestartTimeout ()
         bool isOn = false;
         if (pixel.rgb() != m_rgbBackground) {
 
-          isOn = filter.pixelIsOn (m_filterParameter,
-                                   pixel,
-                                   m_rgbBackground,
-                                   m_low,
-                                   m_high);
+          isOn = filter.pixelUnfilteredIsOn (m_filterParameter,
+                                             pixel,
+                                             m_rgbBackground,
+                                             m_low,
+                                             m_high);
         }
 
         imageProcessed.setPixel (xTo, y, (isOn ?

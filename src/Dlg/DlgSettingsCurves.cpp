@@ -25,7 +25,7 @@ void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
                                          const QString &curveNameOriginal,
                                          int numPoints)
 {
-  Q_ASSERT (m_modelCurves != 0);
+  Q_CHECK_PTR (m_modelCurves);
 
   int row = m_modelCurves->rowCount ();
   insertCurveName (row,
@@ -196,7 +196,7 @@ QString DlgSettingsCurves::nextCurveName () const
 {
   const QString DASH_ONE ("-1"); // Nice value to start a new range at a lower level than the current level
 
-  Q_ASSERT (m_listCurves != 0);
+  Q_CHECK_PTR (m_listCurves);
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_listCurves->model ()->rowCount ();
@@ -408,7 +408,7 @@ void DlgSettingsCurves::updateControls ()
 
   enableOk (true);
 
-  Q_ASSERT (m_listCurves != 0);
+  Q_CHECK_PTR (m_listCurves);
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_modelCurves->rowCount ();

@@ -28,7 +28,7 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
 
     // Point does not exist in scene yet so create it
     const Curve *curve = m_document.curveForCurveName (curveName);
-    Q_ASSERT (curve != 0);
+    Q_CHECK_PTR (curve);
     item = m_scene.addPoint (point.identifier (),
                              curve->pointStyle (),
                              point.posScreen ());

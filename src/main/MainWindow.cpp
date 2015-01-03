@@ -113,7 +113,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 CmdMediator &MainWindow::cmdMediator ()
 {
-  Q_ASSERT (m_cmdMediator != 0);
+  Q_CHECK_PTR (m_cmdMediator);
 
   return *m_cmdMediator;
 }
@@ -664,7 +664,7 @@ void MainWindow::createStateContextDigitize ()
 
 void MainWindow::createStateContextTransformation ()
 {
-  Q_ASSERT (m_scene != 0);
+  Q_CHECK_PTR (m_scene);
 
   m_transformationStateContext = new TransformationStateContext (*m_scene);
 }
@@ -912,7 +912,7 @@ bool MainWindow::saveFile (const QString &fileName)
 
 GraphicsScene &MainWindow::scene ()
 {
-  Q_ASSERT (m_scene != 0);
+  Q_CHECK_PTR (m_scene);
   return *m_scene;
 }
 
@@ -1543,7 +1543,7 @@ void MainWindow::slotViewGroupStatus(QAction *action)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupStatus";
 
-  Q_ASSERT (m_statusBar != 0); // At startup, make sure status bar is already set up when View menu gets initialized
+  Q_CHECK_PTR (m_statusBar); // At startup, make sure status bar is already set up when View menu gets initialized
 
   if (action == m_actionStatusNever) {
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_NEVER);
@@ -2142,12 +2142,12 @@ void MainWindow::updateViewedPoints ()
 
 GraphicsView &MainWindow::view ()
 {
-  Q_ASSERT (m_view != 0);
+  Q_CHECK_PTR (m_view);
   return *m_view;
 }
 
 const GraphicsView &MainWindow::view () const
 {
-  Q_ASSERT (m_view != 0);
+  Q_CHECK_PTR (m_view);
   return *m_view;
 }

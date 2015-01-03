@@ -28,7 +28,7 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
 
     QString curveName = *itrC;
     const Curve *curve = curvesGraphs.curveForCurveName(curveName);
-    Q_ASSERT (curve != 0);
+    Q_CHECK_PTR (curve);
     curve->exportToClipboard (selectedHash,
                               transformIsDefined,
                               strCsv,

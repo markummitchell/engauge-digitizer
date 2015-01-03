@@ -184,7 +184,7 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
 
 const Curve &Document::curveAxes () const
 {
-  Q_ASSERT (m_curveAxes != 0);
+  Q_CHECK_PTR (m_curveAxes);
 
   return *m_curveAxes;
 }
@@ -248,21 +248,21 @@ bool Document::isModified () const
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  Q_ASSERT (m_curveAxes != 0);
+  Q_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  Q_ASSERT (m_curveAxes != 0);
+  Q_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  Q_ASSERT (m_curveAxes != 0);
+  Q_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }

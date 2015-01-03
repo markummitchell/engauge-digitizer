@@ -27,7 +27,7 @@ DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
 
 CmdMediator &DlgSettingsAbstractBase::cmdMediator ()
 {
-  Q_ASSERT (m_cmdMediator != 0);
+  Q_CHECK_PTR (m_cmdMediator);
 
   return *m_cmdMediator;
 }

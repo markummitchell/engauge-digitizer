@@ -108,12 +108,15 @@ HEADERS  += \
     Logger/Logger.h \
     main/MainWindow.h \
     Mime/MimePoints.h \
+    util/mmsubs.h \
     Point/Point.h \
     Point/PointIdentifierToGraphicsItem.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
     Segment/Segment.h \
+    Segment/SegmentFactory.h \
+    Segment/SegmentLine.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
@@ -126,8 +129,7 @@ HEADERS  += \
     View/ViewProfileDivider.h \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
-    include/ZoomFactor.h \
-    Segment/SegmentFactory.h
+    include/ZoomFactor.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -214,10 +216,13 @@ SOURCES += \
     Logger/Logger.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
+    util/mmsubs.cpp \
     Point/Point.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
     Segment/Segment.cpp \
+    Segment/SegmentFactory.cpp \
+    Segment/SegmentLine.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
@@ -228,8 +233,7 @@ SOURCES += \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
-    View/ViewProfileScale.cpp \
-    Segment/SegmentFactory.cpp
+    View/ViewProfileScale.cpp
 
 # Main entry point for non-test
 SOURCES += main/main.cpp

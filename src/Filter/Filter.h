@@ -19,6 +19,8 @@ public:
   bool colorCompare (QRgb rgb1,
                      QRgb rgb2) const;
 
+  // Return true if specified filtered pixel is on
+
   /// Filter the original image according to the specified filtering parameters.
   void filterImage (const QImage &imageOriginal,
                     QImage &imageFiltered,
@@ -32,18 +34,23 @@ public:
   /// common color of the entire margin areas.
   QRgb marginColor(const QImage *image);
 
-  /// Return true if
-  bool pixelIsOn (FilterParameter filterParameter,
-                  const QColor &pixel,
-                  QRgb rgbBackground,
-                  double low0To1,
-                  double high0To1);
+  /// Return true if specified filtered pixel is on
+  bool pixelFilteredIsOn (const QImage &image,
+                          int x,
+                          int y) const;
 
   /// Return pixel converted according to the current filter parameter, normalized to zero to one. Special
   /// case is -1 for a pixel that cannot be converted, like finding hue value for gray scale pixel
   double pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
                                      const QColor &pixel,
-                                     QRgb rgbBackground);
+                                     QRgb rgbBackground) const;
+
+  /// Return true if specified unfiltered pixel is on
+  bool pixelUnfilteredIsOn (FilterParameter filterParameter,
+                            const QColor &pixel,
+                            QRgb rgbBackground,
+                            double low0To1,
+                            double high0To1) const;
 
 private:
 

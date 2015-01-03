@@ -212,8 +212,8 @@ void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
 
-  Q_ASSERT (m_modelCurvePropertiesBefore != 0);
-  Q_ASSERT (m_modelCurvePropertiesAfter != 0);
+  Q_CHECK_PTR (m_modelCurvePropertiesBefore);
+  Q_CHECK_PTR (m_modelCurvePropertiesAfter);
 
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
                                                                     cmdMediator ().document(),

@@ -1,4 +1,5 @@
 #include "Filter.h"
+#include "mmsubs.h"
 #include <QDebug>
 #include <qmath.h>
 #include <QImage>
@@ -32,11 +33,11 @@ void Filter::filterImage (const QImage &imageOriginal,
       bool isOn = false;
       if (pixel.rgb() != rgbBackground) {
 
-        isOn = pixelIsOn (filterParameter,
-                          pixel,
-                          rgbBackground,
-                          low,
-                          high);
+        isOn = pixelUnfilteredIsOn (filterParameter,
+                                    pixel,
+                                    rgbBackground,
+                                    low,
+                                    high);
       }
 
       imageFiltered.setPixel (x, y, (isOn ?
@@ -94,11 +95,32 @@ void Filter::mergePixelIntoColorCounts (QRgb pixel,
   }
 }
 
-bool Filter::pixelIsOn (FilterParameter filterParameter,
-                        const QColor &pixel,
-                        QRgb rgbBackground,
-                        double low0To1,
-                        double high0To1)
+bool Filter::pixelFilteredIsOn (const QImage &image,
+                                int x,
+                                int y) const
+{
+  bool rtn = false;
+
+  if ((0 <= x) &&
+      (0 <= y) &&
+      (x < image.width()) &&
+      (y < image.height())) {
+
+    // Pixel is on if it is closer to black than white in gray scale. This test must be performed
+    // on little endian and big endian systems, with or without alpha bits (which are typically high bits);
+    const int BLACK_WHITE_THRESHOLD = 255 / 2; // Put threshold in middle of range
+    int gray = qGray (pixelRGB (image, x, y));
+    rtn = (gray < BLACK_WHITE_THRESHOLD);
+  }
+
+  return rtn;
+}
+
+bool Filter::pixelUnfilteredIsOn (FilterParameter filterParameter,
+                                  const QColor &pixel,
+                                  QRgb rgbBackground,
+                                  double low0To1,
+                                  double high0To1) const
 {
   bool rtn = false;
 
@@ -124,7 +146,7 @@ bool Filter::pixelIsOn (FilterParameter filterParameter,
 
 double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
                                            const QColor &pixel,
-                                           QRgb rgbBackground)
+                                           QRgb rgbBackground) const
 {
   double s = 0.0;
 
