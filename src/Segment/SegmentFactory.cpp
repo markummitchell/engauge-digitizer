@@ -1,3 +1,4 @@
+#include "DocumentModelSegments.h"
 #include "Filter.h"
 #include "Logger.h"
 #include <QApplication>
@@ -58,6 +59,20 @@ int SegmentFactory::adjacentSegments(Segment **lastSegment, int yStart, int ySto
   }
 
   return segments;
+}
+
+QList<QPoint> SegmentFactory::fillPoints(const DocumentModelSegments &modelSegments)
+{
+  QList<QPoint> list;
+  QList<Segment*>::iterator itr;
+  for (itr = m_segments.begin (); itr != m_segments.end(); itr++) {
+
+    Segment *segment = *itr;
+    Q_CHECK_PTR(segment);
+    list += segment->fillPoints(modelSegments);
+  }
+
+  return list;
 }
 
 void SegmentFactory::finishRun(bool *lastBool,
@@ -262,24 +277,66 @@ void SegmentFactory::matchRunsToSegments(int x,
 
   int yStart = 0;
   bool inRun = false;
-  for (int y = 0; y < height; y++)
-  {
-    if (!inRun && currBool [y])
-    {
+  for (int y = 0; y < height; y++) {
+    if (!inRun && currBool [y]) {
       inRun = true;
       yStart = y;
     }
 
-    if ((y + 1 >= height) || !currBool [y + 1])
-    {
-      if (inRun)
+    if ((y + 1 >= height) || !currBool [y + 1]) {
+      if (inRun) {
         finishRun(lastBool, nextBool, lastSegment, currSegment, x, yStart, y, height, modelSegments, madeLines, segments);
+      }
 
       inRun = false;
     }
   }
 
   removeUnneededLines(lastSegment, currSegment, height, foldedLines, shortLines, modelSegments);
+}
+
+void SegmentFactory::removeUnneededLines(Segment **lastSegment,
+                                         Segment **currSegment,
+                                         int height,
+                                         int *foldedLines,
+                                         int *shortLines,
+                                         const DocumentModelSegments &modelSegments)
+{
+  Segment *segLast = 0;
+  for (int yLast = 0; yLast < height; yLast++) {
+
+    if (lastSegment [yLast] && (lastSegment [yLast] != segLast)) {
+
+      segLast = lastSegment [yLast];
+
+      // If the segment is found in the current column then it is still in work so postpone processing
+      bool found = false;
+      for (int yCur = 0; yCur < height; yCur++) {
+        if (segLast == currSegment [yCur]) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+
+        Q_CHECK_PTR(segLast);
+        if (segLast->length() < (modelSegments.minLength() - 1) * modelSegments.pointSeparation()) {
+
+          // Remove whole segment since it is too short
+          *shortLines += segLast->lineCount();
+          m_segments.removeOne(segLast);
+          delete segLast;
+          segLast = 0;
+
+        } else {
+
+          // Keep segment, but try to fold lines
+          segLast->removeUnneededLines(foldedLines);
+        }
+      }
+    }
+  }
 }
 
 void SegmentFactory::scrollBool(bool *left,

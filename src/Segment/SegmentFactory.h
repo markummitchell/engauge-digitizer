@@ -1,6 +1,8 @@
 #ifndef SEGMENT_FACTORY_H
 #define SEGMENT_FACTORY_H
 
+#include <QList>
+
 class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;
@@ -12,6 +14,9 @@ class SegmentFactory
 public:
   /// Single constructor.
   SegmentFactory(QGraphicsScene &scene);
+
+  /// Return segment fill points for all segments, for previewing
+  QList<QPoint> fillPoints(const DocumentModelSegments &modelSegments);
 
   /// Main entry point for creating all Segments for the filtered image.
   void makeSegments (const QImage &imageFiltered,
@@ -89,6 +94,9 @@ private:
                      int height);
 
   QGraphicsScene &m_scene;
+
+  // Segments produced by scanning the image
+  QList<Segment*> m_segments;
 };
 
 #endif // SEGMENT_FACTORY_H

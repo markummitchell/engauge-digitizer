@@ -3,16 +3,18 @@
 
 #include <QGraphicsLineItem>
 
+class QGraphicsScene;
 class Segment;
 
-// This class is a special case of the standard QGraphicsLineItem for segments.
+/// This class is a special case of the standard QGraphicsLineItem for segments.
 class SegmentLine : public QGraphicsLineItem
 {
 public:
   /// Single constructor.
-  SegmentLine(QQGraphicsScene  &scene,
+  SegmentLine(QGraphicsScene &scene,
               Segment *segment);
 
+  /// Segment that owns this line
   Segment *segment() const;
 
 private:

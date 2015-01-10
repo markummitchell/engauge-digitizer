@@ -1,5 +1,6 @@
 #include "mmsubs.h"
 #include <QImage>
+#include <qmath.h>
 
 QRgb pixelRGB(const QImage &image, int x, int y)
 {
@@ -37,6 +38,50 @@ QRgb pixelRGB32(const QImage &image32Bit, int x, int y)
 {
   unsigned int* p = (unsigned int *) image32Bit.scanLine(y) + x;
   return *p;
+}
+
+void projectPointOntoLine(double xCenter,
+                          double yCenter,
+                          double xStart,
+                          double yStart,
+                          double xStop,
+                          double yStop,
+                          double *xProjection,
+                          double* yProjection)
+{
+  if (qAbs (yStart - yStop) < 0.000001) {
+
+    // Special case - line segment is vertical
+    *yProjection = yStart;
+    double s = (xCenter - xStart) / (xStop - xStart);
+    if (s < 0) {
+      *xProjection = xStart;
+    } else if (s > 1) {
+      *xProjection = xStop;
+    } else {
+      *xProjection = (1.0 - s) * xStart + s * xStop;
+    }
+  } else {
+
+    // General case - compute slope and intercept of line through (xCenter, yCenter)
+    double slope = (xStop - xStart) / (yStart - yStop);
+    double yintercept = yCenter - slope * xCenter;
+
+    // Intersect center point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
+    double s = (slope * xStart + yintercept - yStart) /
+      (yStop - yStart + slope * (xStart - xStop));
+
+    if (s < 0) {
+      *xProjection = xStart;
+      *yProjection = yStart;
+    } else if (s > 1) {
+      *xProjection = xStop;
+      *yProjection = yStop;
+    } else {
+      *xProjection = (1.0 - s) * xStart + s * xStop;
+      *yProjection = (1.0 - s) * yStart + s * yStop;
+    }
+  }
 }
 
 void setPixelRGB(QImage &image, int x, int y, QRgb q)

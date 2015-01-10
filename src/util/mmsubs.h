@@ -17,6 +17,16 @@ extern QRgb pixelRGB8 (const QImage &image8Bit, int x, int y);
 /// Get pixel method for 32 bit depth
 extern QRgb pixelRGB32 (const QImage &image32Bit, int x, int y);
 
+/// Find the projection of a point onto a line such that the line through the point and its projection are normal to the original line
+extern void projectPointOntoLine(double xCenter,
+                                 double yCenter,
+                                 double xStart,
+                                 double yStart,
+                                 double xStop,
+                                 double yStop,
+                                 double *xProjection,
+                                 double *yProjection);
+
 /// Set pixel method for any bit depth
 extern void setPixelRGB (QImage &image, int x, int y, QRgb q);
 
