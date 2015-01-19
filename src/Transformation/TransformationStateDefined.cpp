@@ -34,8 +34,8 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
                      transformation);
 }
 
-void TransformationStateDefined::end(CmdMediator &cmdMediator,
-                                     const Transformation &transformation)
+void TransformationStateDefined::end(CmdMediator & /* cmdMediator */,
+                                     const Transformation & /* transformation */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
 

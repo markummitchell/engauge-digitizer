@@ -183,6 +183,7 @@ private:
   void createActionsSettings ();
   void createActionsView ();
   void createCentralWidget ();
+  void createIcons();
   void createLoadImageFromUrl ();
   void createMenus();
   void createScene ();

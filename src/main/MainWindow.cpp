@@ -1,5 +1,9 @@
 #include "BackgroundImage.h"
-#include "img/bannerapp.xpm"
+#include "img/bannerapp_16.xpm"
+#include "img/bannerapp_32.xpm"
+#include "img/bannerapp_64.xpm"
+#include "img/bannerapp_128.xpm"
+#include "img/bannerapp_256.xpm"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -76,8 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
   m_cmdMediator (0)
 {
   setCurrentFile ("");
-  QPixmap bannerIcon (bannerapp_xpm);
-  setWindowIcon (bannerIcon);
+  createIcons();
   setWindowFlags (Qt::WindowContextHelpButtonHint);
 
   createCentralWidget();
@@ -535,6 +538,24 @@ void MainWindow::createCentralWidget ()
   setCentralWidget (widget);
   m_layout = new QVBoxLayout;
   widget->setLayout (m_layout);
+}
+
+void MainWindow::createIcons()
+{
+  QIcon icon;
+  QPixmap icon16 (bannerapp_16);
+  QPixmap icon32 (bannerapp_32);
+  QPixmap icon64 (bannerapp_64);
+  QPixmap icon128 (bannerapp_128);
+  QPixmap icon256 (bannerapp_256);
+
+  icon.addPixmap (icon16);
+  icon.addPixmap (icon32);
+  icon.addPixmap (icon64);
+  icon.addPixmap (icon128);
+  icon.addPixmap (icon256);
+
+  setWindowIcon (icon);
 }
 
 void MainWindow::createLoadImageFromUrl ()

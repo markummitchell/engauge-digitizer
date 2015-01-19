@@ -11,14 +11,14 @@ TransformationStateUndefined::TransformationStateUndefined(TransformationStateCo
 {
 }
 
-void TransformationStateUndefined::begin(CmdMediator &cmdMediator,
-                                         const Transformation &transformation)
+void TransformationStateUndefined::begin(CmdMediator & /* cmdMediator */,
+                                         const Transformation & /* transformation */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::begin";
 }
 
-void TransformationStateUndefined::end(CmdMediator &cmdMediator,
-                                       const Transformation &transformation)
+void TransformationStateUndefined::end(CmdMediator & /* cmdMediator */,
+                                       const Transformation & /* transformation */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::end";
 }

@@ -241,6 +241,7 @@ SOURCES += main/main.cpp
 TARGET = ../bin/engauge
 
 QT += core gui network printsupport widgets
+
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \
                Checker \
