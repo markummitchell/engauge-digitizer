@@ -25,11 +25,11 @@ void DigitizeStatePointMatch::begin ()
   context().setDragMode(QGraphicsView::NoDrag);
 }
 
-Qt::CursorShape DigitizeStatePointMatch::cursorShape() const
+QCursor DigitizeStatePointMatch::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::cursorShape";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::cursor";
 
-  return Qt::CrossCursor;
+  return QCursor (Qt::CrossCursor);
 }
 
 void DigitizeStatePointMatch::end ()

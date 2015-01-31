@@ -2,6 +2,7 @@
 #define DIGITIZE_STATE_CONTEXT_H
 
 #include "DigitizeStateAbstractBase.h"
+#include <QCursor>
 #include <QGraphicsView>
 #include <QObject>
 #include <QVector>
@@ -48,7 +49,7 @@ public:
   void handleMouseRelease (QPointF pos);
 
   /// See DigitizeStateAbstractBase::handleSetOverrideCursor
-  void handleSetOverrideCursor (Qt::CursorShape cursorShape);
+  void handleSetOverrideCursor (const QCursor &cursor);
 
   /// Reference to the MainWindow, without const.
   MainWindow &mainWindow ();

@@ -32,11 +32,11 @@ void DigitizeStateAxis::begin ()
   context().setDragMode(QGraphicsView::NoDrag);
 }
 
-Qt::CursorShape DigitizeStateAxis::cursorShape() const
+QCursor DigitizeStateAxis::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::cursorShape";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::cursor";
 
-  return Qt::CrossCursor;
+  return QCursor (Qt::CrossCursor);
 }
 
 void DigitizeStateAxis::end ()
@@ -76,7 +76,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     // Ask user for coordinates
     DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),
                                           *this,
-                                          cursorShape ());
+                                          cursor ());
     int rtn = dlg->exec ();
     QPointF posGraph = dlg->posGraph ();
     delete dlg;

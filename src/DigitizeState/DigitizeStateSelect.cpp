@@ -36,11 +36,11 @@ void DigitizeStateSelect::begin ()
   setCursorForPoints ();
 }
 
-Qt::CursorShape DigitizeStateSelect::cursorShape() const
+QCursor DigitizeStateSelect::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSelect::cursorShape";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSelect::cursor";
 
-  return Qt::ArrowCursor;
+  return QCursor (Qt::ArrowCursor);
 }
 
 void DigitizeStateSelect::end ()

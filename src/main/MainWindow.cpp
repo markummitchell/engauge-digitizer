@@ -1463,11 +1463,11 @@ void MainWindow::slotRedoTextChanged (const QString &text)
   m_actionEditRedo->setText (completeText);
 }
 
-void MainWindow::slotSetOverrideCursor (Qt::CursorShape cursorShape)
+void MainWindow::slotSetOverrideCursor (QCursor cursor)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
 
-  m_digitizeStateContext->handleSetOverrideCursor (cursorShape);
+  m_digitizeStateContext->handleSetOverrideCursor (cursor);
 }
 
 void MainWindow::slotSettingsAxesChecker ()

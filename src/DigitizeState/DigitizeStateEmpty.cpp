@@ -19,11 +19,11 @@ void DigitizeStateEmpty::begin ()
   setCursor();
 }
 
-Qt::CursorShape DigitizeStateEmpty::cursorShape() const
+QCursor DigitizeStateEmpty::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEmpty::cursorShape";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEmpty::cursor";
 
-  return Qt::ArrowCursor;
+  return QCursor (Qt::ArrowCursor);
 }
 
 void DigitizeStateEmpty::end ()

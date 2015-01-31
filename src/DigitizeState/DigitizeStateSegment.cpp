@@ -22,11 +22,11 @@ void DigitizeStateSegment::begin ()
   context().setDragMode(QGraphicsView::NoDrag);
 }
 
-Qt::CursorShape DigitizeStateSegment::cursorShape() const
+QCursor DigitizeStateSegment::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSegment::cursorShape";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSegment::cursor";
 
-  return Qt::ArrowCursor;
+  return QCursor (Qt::ArrowCursor);
 }
 
 void DigitizeStateSegment::end ()

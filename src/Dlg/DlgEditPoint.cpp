@@ -14,7 +14,7 @@ const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
 DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,
-                            Qt::CursorShape cursorShape,
+                            const QCursor &cursorShape,
                             QString xValue,
                             QString yValue) :
   QDialog (&mainWindow),
@@ -26,7 +26,7 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   // allocates this DlgEditPoint. The digitizeState argument is otherwise unused.
   digitizeState.removeOverrideCursor();
 
-  connect (this, SIGNAL (signalSetOverrideCursor (Qt::CursorShape)), &mainWindow, SLOT (slotSetOverrideCursor (Qt::CursorShape)));
+  connect (this, SIGNAL (signalSetOverrideCursor (QCursor)), &mainWindow, SLOT (slotSetOverrideCursor (QCursor)));
 
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);

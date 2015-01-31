@@ -101,9 +101,9 @@ void DigitizeStateContext::handleMouseRelease (QPointF pos)
   m_states [m_currentState]->handleMouseRelease (pos);
 }
 
-void DigitizeStateContext::handleSetOverrideCursor (Qt::CursorShape cursorShape)
+void DigitizeStateContext::handleSetOverrideCursor (const QCursor &cursor)
 {
-  m_states [m_currentState]->handleSetOverrideCursor (cursorShape);
+  m_states [m_currentState]->handleSetOverrideCursor (cursor);
 }
 
 MainWindow &DigitizeStateContext::mainWindow ()

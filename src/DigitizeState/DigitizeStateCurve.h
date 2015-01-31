@@ -12,7 +12,7 @@ public:
   virtual ~DigitizeStateCurve();
 
   virtual void begin();
-  virtual Qt::CursorShape cursorShape () const;
+  virtual QCursor cursor () const;
   virtual void end();
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);

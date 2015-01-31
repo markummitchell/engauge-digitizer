@@ -1,6 +1,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateEyeDropper.h"
 #include "Logger.h"
+#include <QBitmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -22,11 +23,18 @@ void DigitizeStateEyeDropper::begin ()
   context().setDragMode(QGraphicsView::NoDrag);
 }
 
-Qt::CursorShape DigitizeStateEyeDropper::cursorShape() const
+QCursor DigitizeStateEyeDropper::cursor() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEyeDropper::cursorShape";
+  const int HOT_X_IN_BITMAP = 8;
+  const int HOT_Y_IN_BITMAP = 24;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEyeDropper::cursor";
 
-  return Qt::BitmapCursor;
+  QBitmap bitmap (":/engauge/img/cursor_eyedropper.xpm");
+  QBitmap bitmapMask (":/engauge/img/cursor_eyedropper_mask.xpm");
+  return QCursor (bitmap,
+                  bitmapMask,
+                  HOT_X_IN_BITMAP,
+                  HOT_Y_IN_BITMAP);
 }
 
 void DigitizeStateEyeDropper::end ()

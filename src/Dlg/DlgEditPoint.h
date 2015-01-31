@@ -1,6 +1,7 @@
 #ifndef DLG_EDIT_POINT_H
 #define DLG_EDIT_POINT_H
 
+#include <QCursor>
 #include <QDialog>
 #include <QLineEdit>
 #include <QPushButton>
@@ -19,7 +20,7 @@ public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   DlgEditPoint (MainWindow &mainWindow,
                 DigitizeStateAbstractBase &digitizeState,
-                Qt::CursorShape cursorShape,
+                const QCursor &cursorShape,
                 QString xValue = "",
                 QString yValue = "");
   ~DlgEditPoint ();
@@ -29,7 +30,7 @@ public:
 
 signals:
   /// Send a signal to trigger the setting of the override cursor.
-  void signalSetOverrideCursor (Qt::CursorShape);
+  void signalSetOverrideCursor (QCursor);
 
 private slots:
   void slotTextChanged (const QString &);
@@ -39,7 +40,7 @@ private:
   void createOkCancel (QVBoxLayout *layoutOuter);
   void updateControls ();
 
-  Qt::CursorShape m_cursorShape;
+  QCursor m_cursorShape;
   QLineEdit *m_editGraphX;
   QDoubleValidator *m_validatorGraphX;
   QLineEdit *m_editGraphY;

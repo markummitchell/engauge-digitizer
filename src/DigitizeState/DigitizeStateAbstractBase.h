@@ -1,6 +1,7 @@
 #ifndef DIGITIZE_STATE_ABSTRACT_BASE_H
 #define DIGITIZE_STATE_ABSTRACT_BASE_H
 
+#include <QCursor>
 #include <QPointF>
 
 class DigitizeStateContext;
@@ -57,7 +58,7 @@ public:
   virtual void handleMouseRelease (QPointF pos) = 0;
 
   /// Handle the command to set the override cursor
-  void handleSetOverrideCursor (Qt::CursorShape cursorShape);
+  void handleSetOverrideCursor (const QCursor &cursor);
 
   /// Remove the override cursor if it is in use. This is called after a leave event, and prior to displaying a QDialog
   void removeOverrideCursor ();
@@ -67,7 +68,7 @@ public:
 
 protected:
   /// Returns the state-specific cursor shape.
-  virtual Qt::CursorShape cursorShape () const = 0;
+  virtual QCursor cursor () const = 0;
 
 private:
   DigitizeStateAbstractBase();

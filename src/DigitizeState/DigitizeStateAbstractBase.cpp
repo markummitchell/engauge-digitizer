@@ -44,7 +44,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
   // Ask user for coordinates
   DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
                                        *this,
-                                       cursorShape (),
+                                       cursor (),
                                        xGraphValue,
                                        yGraphValue);
   int rtn = dlg->exec ();
@@ -91,14 +91,14 @@ void DigitizeStateAbstractBase::handleLeave ()
   removeOverrideCursor ();
 }
 
-void DigitizeStateAbstractBase::handleSetOverrideCursor (Qt::CursorShape cursorShape)
+void DigitizeStateAbstractBase::handleSetOverrideCursor (const QCursor &cursor)
 {
   removeOverrideCursor ();
 
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleSetOverrideCursor setOverrideCursor="
-                              << QtCursorToString (cursorShape).toLatin1 ().data ();
+                              << QtCursorToString (cursor.shape ()).toLatin1 ().data ();
 
-  QApplication::setOverrideCursor (cursorShape);
+  QApplication::setOverrideCursor (cursor);
   m_isOverrideCursor = true;
 }
 
@@ -121,5 +121,5 @@ void DigitizeStateAbstractBase::setCursor()
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAbstractBase::setCursor";
 
   removeOverrideCursor ();
-  context().view().setCursor (QCursor (cursorShape ()));
+  context().view().setCursor (cursor ());
 }

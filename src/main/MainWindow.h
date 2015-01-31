@@ -1,6 +1,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include <QCursor>
 #include <QMainWindow>
 #include <QUrl>
 #include "Transformation.h"
@@ -140,7 +141,7 @@ private slots:
   void slotMousePress (QPointF);
   void slotMouseRelease (QPointF);
   void slotRedoTextChanged (const QString &);
-  void slotSetOverrideCursor (Qt::CursorShape);
+  void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
   void slotSettingsCoords ();
   void slotSettingsCurveProperties ();
