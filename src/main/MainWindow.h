@@ -113,11 +113,11 @@ private slots:
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
   void slotCmbBackground(int);
-  void slotCmbCurve(int);
+  void slotCmbCurve(int);  
   void slotContextMenuEvent (QString);
   void slotDigitizeAxis ();
+  void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
-  void slotDigitizeEyeDropper ();
   void slotDigitizePointMatch ();
   void slotDigitizeSegment ();
   void slotDigitizeSelect ();
@@ -241,7 +241,7 @@ private:
   QAction *m_actionDigitizeAxis;
   QAction *m_actionDigitizeCurve;
   QAction *m_actionDigitizePointMatch;
-  QAction *m_actionDigitizeEyeDropper;
+  QAction *m_actionDigitizeColorPicker;
   QAction *m_actionDigitizeSegment;
 
   QMenu *m_menuView;

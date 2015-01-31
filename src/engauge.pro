@@ -49,9 +49,9 @@ HEADERS  += \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
     DigitizeState/DigitizeStateContext.h \
+    DigitizeState/DigitizeStateColorPicker.h \
     DigitizeState/DigitizeStateCurve.h \
     DigitizeState/DigitizeStateEmpty.h \
-    DigitizeState/DigitizeStateEyeDropper.h \
     DigitizeState/DigitizeStatePointMatch.h \
     DigitizeState/DigitizeStateScale.h \
     DigitizeState/DigitizeStateSegment.h \
@@ -167,10 +167,10 @@ SOURCES += \
     Curve/CurveStyle.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \
+    DigitizeState/DigitizeStateColorPicker.cpp \
     DigitizeState/DigitizeStateContext.cpp \
     DigitizeState/DigitizeStateCurve.cpp \
     DigitizeState/DigitizeStateEmpty.cpp \
-    DigitizeState/DigitizeStateEyeDropper.cpp \
     DigitizeState/DigitizeStatePointMatch.cpp \
     DigitizeState/DigitizeStateScale.cpp \
     DigitizeState/DigitizeStateSegment.cpp \

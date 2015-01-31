@@ -1,15 +1,15 @@
-#ifndef DIGITIZE_STATE_EYE_DROPPER_H
-#define DIGITIZE_STATE_EYE_DROPPER_H
+#ifndef DIGITIZE_STATE_COLOR_PICKER_H
+#define DIGITIZE_STATE_COLOR_PICKER_H
 
 #include "DigitizeStateAbstractBase.h"
 
 /// Digitizing state for selecting a color for DigitizeStateSegment.
-class DigitizeStateEyeDropper : public DigitizeStateAbstractBase
+class DigitizeStateColorPicker : public DigitizeStateAbstractBase
 {
 public:
   /// Single constructor.
-  DigitizeStateEyeDropper(DigitizeStateContext &context);
-  virtual ~DigitizeStateEyeDropper();
+  DigitizeStateColorPicker(DigitizeStateContext &context);
+  virtual ~DigitizeStateColorPicker();
 
   virtual void begin();
   virtual QCursor cursor () const;
@@ -19,7 +19,7 @@ public:
   virtual void handleMouseRelease (QPointF posScreen);
 
 private:
-  DigitizeStateEyeDropper();
+  DigitizeStateColorPicker();
 };
 
-#endif // DIGITIZE_STATE_EYE_DROPPER_H
+#endif // DIGITIZE_STATE_COLOR_PICKER_H

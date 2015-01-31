@@ -12,8 +12,8 @@
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitAxis.xpm"
+#include "DigitColorPicker.xpm"
 #include "DigitCurve.xpm"
-#include "DigitEyeDropper.xpm"
 #include "DigitPointMatch.xpm"
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
@@ -136,26 +136,26 @@ void MainWindow::createActionsDigitize ()
 {
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
-  QPixmap pixmapEyeDropper (DigitEyeDropper_xpm);
+  QPixmap pixmapColorPicker (DigitColorPicker_xpm);
   QPixmap pixmapPointMatch (DigitPointMatch_xpm);
   QPixmap pixmapSegment (DigitSegment_xpm);
   QPixmap pixmapSelect (DigitSelect_xpm);
 
   QIcon iconAxis (pixmapAxis);
   QIcon iconCurve (pixmapCurve);
-  QIcon iconEyeDropper (pixmapEyeDropper);
+  QIcon iconColorPicker (pixmapColorPicker);
   QIcon iconPointMatch (pixmapPointMatch);
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
 
-  m_actionDigitizeSelect = new QAction (iconSelect, tr ("Select"), this);
+  m_actionDigitizeSelect = new QAction (iconSelect, tr ("Select Tool"), this);
   m_actionDigitizeSelect->setCheckable (true);
   m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
   m_actionDigitizeSelect->setWhatsThis (tr ("Select\n\n"
                                             "Select points on the screen."));
   connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
 
-  m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point"), this);
+  m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point Tool"), this);
   m_actionDigitizeAxis->setCheckable (true);
   m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
   m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
@@ -165,7 +165,7 @@ void MainWindow::createActionsDigitize ()
                                           "the graph coordinates."));
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
 
-  m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point"), this);
+  m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
   m_actionDigitizeCurve->setCheckable (true);
   m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
   m_actionDigitizeCurve->setWhatsThis (tr ("Digitize Curve Point\n\n"
@@ -175,7 +175,7 @@ void MainWindow::createActionsDigitize ()
                                            "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
 
-  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match"), this);
+  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match Tool"), this);
   m_actionDigitizePointMatch->setCheckable (true);
   m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
   m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
@@ -184,14 +184,16 @@ void MainWindow::createActionsDigitize ()
                                                 "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
 
-  m_actionDigitizeEyeDropper = new QAction (iconEyeDropper, tr ("Eye Dropper"), this);
-  m_actionDigitizeEyeDropper->setCheckable (true);
-  m_actionDigitizeEyeDropper->setStatusTip (tr ("Select a pixel for setting the Segment Fill filter for the current curve."));
-  m_actionDigitizeEyeDropper->setWhatsThis (tr ("Select a pixel under the cursor for setting the Segment Fill filter of "
-                                                "the currently selected curve."));
-  connect (m_actionDigitizeEyeDropper, SIGNAL (triggered ()), this, SLOT (slotDigitizeEyeDropper ()));
+  m_actionDigitizeColorPicker = new QAction (iconColorPicker, tr ("Color Picker Tool"), this);
+  m_actionDigitizeColorPicker->setCheckable (true);
+  m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Points mode."));
+  m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Points filtering\n\n"
+                                                 "Select a pixel along the currently selected curve. That pixel and its neighbors will "
+                                                 "define the filter settings (color, brightness, and so on) of the currently selected curve "
+                                                 "while in Segment Points mode."));
+  connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
-  m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Points"), this);
+  m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Points Tool"), this);
   m_actionDigitizeSegment->setCheckable (true);
   m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
   m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
@@ -206,7 +208,7 @@ void MainWindow::createActionsDigitize ()
   m_groupDigitize->addAction (m_actionDigitizeAxis);
   m_groupDigitize->addAction (m_actionDigitizeCurve);
   m_groupDigitize->addAction (m_actionDigitizePointMatch);
-  m_groupDigitize->addAction (m_actionDigitizeEyeDropper);
+  m_groupDigitize->addAction (m_actionDigitizeColorPicker);
   m_groupDigitize->addAction (m_actionDigitizeSegment);
 }
 
@@ -604,7 +606,7 @@ void MainWindow::createMenus()
   m_menuDigitize->addAction (m_actionDigitizeAxis);
   m_menuDigitize->addAction (m_actionDigitizeCurve);
   m_menuDigitize->addAction (m_actionDigitizePointMatch);
-  m_menuDigitize->addAction (m_actionDigitizeEyeDropper);
+  m_menuDigitize->addAction (m_actionDigitizeColorPicker);
   m_menuDigitize->addAction (m_actionDigitizeSegment);
 
   m_menuView = menuBar()->addMenu(tr("View"));
@@ -743,7 +745,7 @@ void MainWindow::createToolBars ()
   m_toolDigitize->insertSeparator (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizePointMatch);
-  m_toolDigitize->addAction (m_actionDigitizeEyeDropper);
+  m_toolDigitize->addAction (m_actionDigitizeColorPicker);
   m_toolDigitize->addAction (m_actionDigitizeSegment);
   m_toolDigitize->addWidget (m_cmbCurve);
   addToolBar (m_toolDigitize);
@@ -1136,19 +1138,19 @@ void MainWindow::slotDigitizeAxis ()
   m_cmbCurve->setEnabled (false);
 }
 
+void MainWindow::slotDigitizeColorPicker ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeColorPicker";
+
+  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_COLOR_PICKER);
+  m_cmbCurve->setEnabled (true);
+}
+
 void MainWindow::slotDigitizeCurve ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeCurve";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
-  m_cmbCurve->setEnabled (true);
-}
-
-void MainWindow::slotDigitizeEyeDropper ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeEyeDropper";
-
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_EYE_DROPPER);
   m_cmbCurve->setEnabled (true);
 }
 
@@ -2014,7 +2016,7 @@ void MainWindow::updateControls ()
   m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
-  m_actionDigitizeEyeDropper->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeColorPicker->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
 
