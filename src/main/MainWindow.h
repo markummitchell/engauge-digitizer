@@ -116,6 +116,7 @@ private slots:
   void slotContextMenuEvent (QString);
   void slotDigitizeAxis ();
   void slotDigitizeCurve ();
+  void slotDigitizeEyeDropper ();
   void slotDigitizePointMatch ();
   void slotDigitizeSegment ();
   void slotDigitizeSelect ();
@@ -239,6 +240,7 @@ private:
   QAction *m_actionDigitizeAxis;
   QAction *m_actionDigitizeCurve;
   QAction *m_actionDigitizePointMatch;
+  QAction *m_actionDigitizeEyeDropper;
   QAction *m_actionDigitizeSegment;
 
   QMenu *m_menuView;

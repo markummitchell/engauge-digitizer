@@ -13,6 +13,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitAxis.xpm"
 #include "DigitCurve.xpm"
+#include "DigitEyeDropper.xpm"
 #include "DigitPointMatch.xpm"
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
@@ -135,12 +136,14 @@ void MainWindow::createActionsDigitize ()
 {
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
+  QPixmap pixmapEyeDropper (DigitEyeDropper_xpm);
   QPixmap pixmapPointMatch (DigitPointMatch_xpm);
   QPixmap pixmapSegment (DigitSegment_xpm);
   QPixmap pixmapSelect (DigitSelect_xpm);
 
   QIcon iconAxis (pixmapAxis);
   QIcon iconCurve (pixmapCurve);
+  QIcon iconEyeDropper (pixmapEyeDropper);
   QIcon iconPointMatch (pixmapPointMatch);
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
@@ -174,20 +177,27 @@ void MainWindow::createActionsDigitize ()
 
   m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match"), this);
   m_actionDigitizePointMatch->setCheckable (true);
-  m_actionDigitizePointMatch->setStatusTip (tr ("Digitize points along a segment of a curve."));
-  m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Segment Fill\n\n"
-                                             "Digitizes a curve or segment by placing points along the "
-                                             "segment under the cursor. Use this mode to quickly digitize multiple points along a "
-                                             "curve with a single click.\n\n"
-                                             "New points will be assigned to the currently selected curve."));
+  m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
+  m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
+                                                "Digitizes curve points in a point plot by finding points that match a sample point. The process "
+                                                "starts by selecting a representative sample point.\n\n"
+                                                "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
+
+  m_actionDigitizeEyeDropper = new QAction (iconEyeDropper, tr ("Eye Dropper"), this);
+  m_actionDigitizeEyeDropper->setCheckable (true);
+  m_actionDigitizeEyeDropper->setStatusTip (tr ("Select a pixel for setting the Segment Fill filter for the current curve."));
+  m_actionDigitizeEyeDropper->setWhatsThis (tr ("Select a pixel under the cursor for setting the Segment Fill filter of "
+                                                "the currently selected curve."));
+  connect (m_actionDigitizeEyeDropper, SIGNAL (triggered ()), this, SLOT (slotDigitizeEyeDropper ()));
 
   m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Points"), this);
   m_actionDigitizeSegment->setCheckable (true);
-  m_actionDigitizeSegment->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
-  m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
-                                             "Digitizes curve points in a point plot by finding points that match a sample point. The process "
-                                             "starts by selecting a representative sample point.\n\n"
+  m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
+  m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
+                                             "Digitizes a curve or segment by placing points along the "
+                                             "segment under the cursor. Use this mode to quickly digitize multiple points along a "
+                                             "curve with a single click.\n\n"
                                              "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizeSegment, SIGNAL (triggered ()), this, SLOT (slotDigitizeSegment ()));
 
@@ -196,6 +206,7 @@ void MainWindow::createActionsDigitize ()
   m_groupDigitize->addAction (m_actionDigitizeAxis);
   m_groupDigitize->addAction (m_actionDigitizeCurve);
   m_groupDigitize->addAction (m_actionDigitizePointMatch);
+  m_groupDigitize->addAction (m_actionDigitizeEyeDropper);
   m_groupDigitize->addAction (m_actionDigitizeSegment);
 }
 
@@ -593,6 +604,7 @@ void MainWindow::createMenus()
   m_menuDigitize->addAction (m_actionDigitizeAxis);
   m_menuDigitize->addAction (m_actionDigitizeCurve);
   m_menuDigitize->addAction (m_actionDigitizePointMatch);
+  m_menuDigitize->addAction (m_actionDigitizeEyeDropper);
   m_menuDigitize->addAction (m_actionDigitizeSegment);
 
   m_menuView = menuBar()->addMenu(tr("View"));
@@ -731,6 +743,7 @@ void MainWindow::createToolBars ()
   m_toolDigitize->insertSeparator (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizePointMatch);
+  m_toolDigitize->addAction (m_actionDigitizeEyeDropper);
   m_toolDigitize->addAction (m_actionDigitizeSegment);
   m_toolDigitize->addWidget (m_cmbCurve);
   addToolBar (m_toolDigitize);
@@ -1128,6 +1141,14 @@ void MainWindow::slotDigitizeCurve ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeCurve";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
+  m_cmbCurve->setEnabled (true);
+}
+
+void MainWindow::slotDigitizeEyeDropper ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeEyeDropper";
+
+  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_EYE_DROPPER);
   m_cmbCurve->setEnabled (true);
 }
 
@@ -1993,6 +2014,7 @@ void MainWindow::updateControls ()
   m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeEyeDropper->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
 

@@ -9,5 +9,6 @@
         <file>img/settings_point_match.png</file>
         <file>img/settings_segments.png</file>
         <file>img/settings_export.png</file>
+        <file>img/cursor_eyedropper.xpm</file>
     </qresource>
 </RCC>

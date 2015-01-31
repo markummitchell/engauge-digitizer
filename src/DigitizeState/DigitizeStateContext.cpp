@@ -3,6 +3,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateCurve.h"
 #include "DigitizeStateEmpty.h"
+#include "DigitizeStateEyeDropper.h"
 #include "DigitizeStatePointMatch.h"
 #include "DigitizeStateScale.h"
 #include "DigitizeStateSegment.h"
@@ -27,6 +28,7 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   m_states.insert (DIGITIZE_STATE_AXIS       , new DigitizeStateAxis       (*this));
   m_states.insert (DIGITIZE_STATE_CURVE      , new DigitizeStateCurve      (*this));
   m_states.insert (DIGITIZE_STATE_EMPTY      , new DigitizeStateEmpty      (*this));
+  m_states.insert (DIGITIZE_STATE_EYE_DROPPER, new DigitizeStateEyeDropper (*this));
   m_states.insert (DIGITIZE_STATE_POINT_MATCH, new DigitizeStatePointMatch (*this));
   m_states.insert (DIGITIZE_STATE_SCALE      , new DigitizeStateScale      (*this));
   m_states.insert (DIGITIZE_STATE_SEGMENT    , new DigitizeStateSegment    (*this));
