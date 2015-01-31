@@ -90,6 +90,7 @@ void DigitizeStateSelect::handleMouseRelease (QPointF posScreen)
 
     QString moveText = moveTextFromDeltaScreen (deltaScreen);
 
+    // Create command to move points
     CmdMoveBy *cmd = new CmdMoveBy (context().mainWindow(),
                                     context().cmdMediator().document(),
                                     deltaScreen,
@@ -134,6 +135,7 @@ void DigitizeStateSelect::keyPressArrow (Qt::Key key)
       Q_ASSERT (false);
   }
 
+  // Create command to move points
   CmdMoveBy *cmd = new CmdMoveBy (context().mainWindow(),
                                   context().cmdMediator ().document(),
                                   deltaScreen,

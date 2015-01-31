@@ -51,6 +51,7 @@ void DigitizeStateCurve::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleMouseRelease";
 
+  // Create command to add point
   QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
                                             context ().cmdMediator ().document (),
                                             context ().mainWindow().selectedCurrentCurve(),

@@ -25,6 +25,7 @@ void DigitizeStateColorPicker::begin ()
 
 QCursor DigitizeStateColorPicker::cursor() const
 {
+  // Hot point is at the point of the eye dropper
   const int HOT_X_IN_BITMAP = 8;
   const int HOT_Y_IN_BITMAP = 24;
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateColorPicker::cursor";

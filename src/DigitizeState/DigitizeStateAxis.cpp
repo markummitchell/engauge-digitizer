@@ -104,6 +104,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
 
       } else {
 
+        // Create command to add point
         QUndoCommand *cmd = new CmdAddPointAxis (context ().mainWindow(),
                                                  context ().cmdMediator ().document (),
                                                  posScreen,

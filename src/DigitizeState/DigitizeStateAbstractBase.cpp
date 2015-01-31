@@ -73,7 +73,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
 
     } else {
 
-
+      // Create a command to edit the point
       CmdEditPointAxis *cmd = new CmdEditPointAxis (context().mainWindow(),
                                                     context().cmdMediator().document(),
                                                     pointIdentifier,

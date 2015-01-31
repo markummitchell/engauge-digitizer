@@ -1624,6 +1624,7 @@ void MainWindow::slotViewZoom(int zoom)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoom";
 
+  // Update zoom controls and apply the zoom factor
   switch ((ZoomFactor) zoom) {
     case ZOOM_16_TO_1:
       m_actionZoom16To1->setChecked(true);
@@ -1770,7 +1771,7 @@ void MainWindow::slotViewZoomIn ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomIn";
 
-  // Try to go in
+  // Try to zoom in. First determine what the next zoom factor should be
 
   bool goto16To1 = false, goto8To1 = false, goto4To1 = false, goto2To1 = false;
   bool goto1To1 = false;
@@ -1809,6 +1810,7 @@ void MainWindow::slotViewZoomIn ()
     goto1To8 = m_actionZoom1To16->isChecked ();
   }
 
+  // Update controls and apply zoom factor
   if (goto16To1) {
     m_actionZoom16To1->setChecked (true);
     slotViewZoom16To1 ();
@@ -1843,7 +1845,7 @@ void MainWindow::slotViewZoomOut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomOut";
 
-  // Try to go out
+  // Try to zoom out. First determine what the next zoom factor should be
 
   bool goto16To1 = false, goto8To1 = false, goto4To1 = false, goto2To1 = false;
   bool goto1To1 = false;
@@ -1882,6 +1884,7 @@ void MainWindow::slotViewZoomOut ()
     goto1To16 = m_actionZoom1To8->isChecked ();
   }
 
+  // Update controls and apply zoom factor
   if (goto1To16) {
     m_actionZoom1To16->setChecked (true);
     slotViewZoom1To16 ();

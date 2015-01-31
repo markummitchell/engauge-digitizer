@@ -25,6 +25,7 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   m_imageIsLoaded (false),
   m_cmdMediator (0)
 {
+  // These states follow the same order as the DigitizeState enumeration
   m_states.insert (DIGITIZE_STATE_AXIS        , new DigitizeStateAxis        (*this));
   m_states.insert (DIGITIZE_STATE_COLOR_PICKER, new DigitizeStateColorPicker (*this));
   m_states.insert (DIGITIZE_STATE_CURVE       , new DigitizeStateCurve       (*this));
@@ -67,10 +68,15 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
 {
   if (m_currentState != m_requestedState) {
 
+    // A transition is waiting so perform it
+
     if (m_currentState != NUM_DIGITIZE_STATES) {
+
+      // This is not the first state so close the previous state
       m_states [m_currentState]->end ();
     }
 
+    // Start the new state
     m_currentState = m_requestedState;
     m_states [m_requestedState]->begin ();
   }

@@ -20,6 +20,10 @@ QString QtCursorToString (Qt::CursorShape cursorShape)
       return "Qt::ArrowCursor";
       break;
 
+    case Qt::BitmapCursor:
+      return "Qt::BitmapCursor";
+      break;
+
     case Qt::CrossCursor:
       return "Qt::CrossCursor";
       break;
@@ -57,6 +61,8 @@ QString QTransformToString (const QTransform &transform)
 QString roleAsString (int role)
 {
   if (rolesAsStringsLookupTable.count () == 0) {
+
+    // List from qnamespace.h
     rolesAsStringsLookupTable [Qt::AccessibleDescriptionRole] = "AccessibleDescriptionRole";
     rolesAsStringsLookupTable [Qt::AccessibleTextRole] = "AccessibleTextRole";
     rolesAsStringsLookupTable [Qt::BackgroundRole] = "BackgroundRole";
