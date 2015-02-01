@@ -126,6 +126,12 @@ PointShape DocumentModelCurveProperties::pointShape (const QString &curveName) c
   return m_pointStyles [curveName].shape ();
 }
 
+const PointStyle DocumentModelCurveProperties::pointStyle (const QString &curveName) const
+{
+  Q_ASSERT (m_pointStyles.contains (curveName));
+  return m_pointStyles [curveName];
+}
+
 const PointStyles &DocumentModelCurveProperties::pointStyles() const
 {
   return m_pointStyles;

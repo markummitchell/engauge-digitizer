@@ -101,6 +101,7 @@ HEADERS  += \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \
     Graphics/GraphicsPointCircle.h \
+    Graphics/GraphicsPointFactory.h \
     Graphics/GraphicsPointPolygon.h \
     Graphics/GraphicsScene.h \
     Graphics/GraphicsView.h \
@@ -212,6 +213,7 @@ SOURCES += \
     Filter/Filter.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
+    Graphics/GraphicsPointFactory.cpp \
     Graphics/GraphicsPointPolygon.cpp \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \

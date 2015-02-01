@@ -868,6 +868,11 @@ void MainWindow::loadCurveNamesFromCmdMediator ()
   for (itr = curvesGraphsNames.begin (); itr != curvesGraphsNames.end (); itr++) {
 
     QString curvesGraphName = *itr;
+
+//    QImage img;
+//    QPixmap pixmap =
+//    QIcon icon;
+//    m_cmbCurve->addItem (icon, curvesGraphName);
     m_cmbCurve->addItem (curvesGraphName);
   }
   m_cmbCurve->setCurrentIndex (0);

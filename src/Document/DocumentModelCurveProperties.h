@@ -59,6 +59,9 @@ public:
   /// Get method for curve point shape.
   PointShape pointShape(const QString &curveName) const;
 
+  /// Get method for copying one point style. Cannot return just a reference or else there is a warning about returning reference to temporary
+  const PointStyle pointStyle (const QString &curveName) const;
+
   /// Get method for copying all point styles in one step.
   const PointStyles &pointStyles () const;
 

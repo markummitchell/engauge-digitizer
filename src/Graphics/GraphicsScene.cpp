@@ -6,6 +6,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPointAbstractBase.h"
+#include "GraphicsPointFactory.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
 #include "Logger.h"
@@ -24,11 +25,10 @@ QGraphicsItem *GraphicsScene::addPoint (const QString &identifier,
                                         const PointStyle &pointStyle,
                                         const QPointF &posScreen)
 {
-  GraphicsPointPolygon *item = new GraphicsPointPolygon (identifier,
-                                                         posScreen,
-                                                         ColorPaletteToQColor (pointStyle.paletteColor ()),
-                                                         pointStyle.polygon (),
-                                                         pointStyle.lineWidth());
+  GraphicsPointFactory pointFactory;
+  QAbstractGraphicsShapeItem  *item = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (identifier,
+                                                                                                           posScreen,
+                                                                                                           pointStyle));
   addItem (item);
 
   item->setToolTip (identifier);

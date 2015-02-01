@@ -5,6 +5,7 @@
 #include "DlgSpinBoxDouble.h"
 #include "DlgSpinBoxInt.h"
 #include "EnumsToQt.h"
+#include "GraphicsPointFactory.h"
 #include "GraphicsPointPolygon.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -406,24 +407,23 @@ void DlgSettingsCurveProperties::updatePreview()
 
   QString currentCurve = m_cmbCurveName->currentText();
 
+  GraphicsPointFactory pointFactory;
+  const PointStyle pointStyle = m_modelCurvePropertiesAfter->pointStyle (currentCurve);
+
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
                    PREVIEW_HEIGHT / 2.0);
-  GraphicsPointPolygon *itemLeft = new GraphicsPointPolygon (NULL_IDENTIFIER,
-                                                             posLeft,
-                                                             ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor(currentCurve)),
-                                                             m_modelCurvePropertiesAfter->pointPolygon(currentCurve),
-                                                             m_modelCurvePropertiesAfter->pointLineWidth(currentCurve));
+  QAbstractGraphicsShapeItem  *itemLeft = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
+                                                                                                               posLeft,
+                                                                                                               pointStyle));
   m_scenePreview->addItem (itemLeft);
 
   // Right point
   QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
                     PREVIEW_HEIGHT / 2.0);
-  GraphicsPointPolygon *itemRight = new GraphicsPointPolygon (NULL_IDENTIFIER,
-                                                              posRight,
-                                                              ColorPaletteToQColor (m_modelCurvePropertiesAfter->pointColor (currentCurve)),
-                                                              m_modelCurvePropertiesAfter->pointPolygon (currentCurve),
-                                                              m_modelCurvePropertiesAfter->pointLineWidth (currentCurve));
+  QAbstractGraphicsShapeItem  *itemRight = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
+                                                                                                                posRight,
+                                                                                                                pointStyle));
   m_scenePreview->addItem (itemRight);
 
   // Line between points
