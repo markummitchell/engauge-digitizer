@@ -2,7 +2,7 @@
 #define DLG_SETTINGS_FILTER_H
 
 #include "DlgSettingsAbstractBase.h"
-#include "FilterParameter.h"
+#include "FilterMode.h"
 #include <QColor>
 #include <QImage>
 #include <QPixmap>
@@ -38,7 +38,7 @@ public slots:
 
 signals:
   /// Send filter parameters to DlgFilterThread and DlgFilterWorker for processing.
-  void signalApplyFilter (FilterParameter filterParameter,
+  void signalApplyFilter (FilterMode filterMode,
                           double low,
                           double high);
 

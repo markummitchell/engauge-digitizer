@@ -53,10 +53,10 @@ const CurveFilters &DocumentModelFilter::curveFilters() const
   return m_curveFilters;
 }
 
-FilterParameter DocumentModelFilter::filterParameter(const QString &curveName) const
+FilterMode DocumentModelFilter::filterMode(const QString &curveName) const
 {
   Q_ASSERT (m_curveFilters.contains (curveName));
-  return m_curveFilters [curveName].filterParameter();
+  return m_curveFilters [curveName].filterMode();
 }
 
 int DocumentModelFilter::foregroundHigh (const QString &curveName) const
@@ -127,11 +127,11 @@ void DocumentModelFilter::saveModel(QXmlStreamWriter &stream) const
   stream.writeEndElement();
 }
 
-void DocumentModelFilter::setFilterParameter(const QString &curveName,
-                                             FilterParameter filterParameter)
+void DocumentModelFilter::setFilterMode(const QString &curveName,
+                                             FilterMode filterMode)
 {
   Q_ASSERT (m_curveFilters.contains (curveName));
-  m_curveFilters [curveName].setFilterParameter(filterParameter);
+  m_curveFilters [curveName].setFilterMode(filterMode);
 }
 
 void DocumentModelFilter::setForegroundHigh (const QString &curveName,

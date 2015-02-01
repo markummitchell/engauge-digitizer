@@ -11,7 +11,7 @@ DlgFilterWorker::DlgFilterWorker(const QPixmap &pixmapOriginal,
                                  QRgb rgbBackground) :
   m_imageOriginal (pixmapOriginal.toImage()),
   m_rgbBackground (rgbBackground),
-  m_filterParameter (NUM_FILTER_PARAMETERS),
+  m_filterMode (NUM_FILTER_MODES),
   m_low (-1.0),
   m_high (-1.0)
 {
@@ -19,16 +19,16 @@ DlgFilterWorker::DlgFilterWorker(const QPixmap &pixmapOriginal,
   connect (&m_restartTimer, SIGNAL (timeout ()), this, SLOT (slotRestartTimeout()));
 }
 
-void DlgFilterWorker::slotNewParameters (FilterParameter filterParameter,
+void DlgFilterWorker::slotNewParameters (FilterMode filterMode,
                                          double low,
                                          double high)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotNewParameters filterParameter=" << filterParameter
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgFilterWorker::slotNewParameters filterMode=" << filterMode
                               << " low=" << low
                               << " high=" << high;
 
   // Push onto queue
-  DlgFilterCommand command (filterParameter,
+  DlgFilterCommand command (filterMode,
                             low,
                             high);
   m_inputCommandQueue.push_back (command);
@@ -48,7 +48,7 @@ void DlgFilterWorker::slotRestartTimeout ()
     m_inputCommandQueue.clear ();
 
     // Start over from the left side
-    m_filterParameter = command.filterParameter();
+    m_filterMode = command.filterMode();
     m_low = command.low0To1();
     m_high = command.high0To1();
 
@@ -81,7 +81,7 @@ void DlgFilterWorker::slotRestartTimeout ()
         bool isOn = false;
         if (pixel.rgb() != m_rgbBackground) {
 
-          isOn = filter.pixelUnfilteredIsOn (m_filterParameter,
+          isOn = filter.pixelUnfilteredIsOn (m_filterMode,
                                              pixel,
                                              m_rgbBackground,
                                              m_low,

@@ -96,7 +96,7 @@ HEADERS  += \
     Export/ExportToFile.h \
     Filter/Filter.h \
     Filter/FilterColorEntry.h \
-    Filter/FilterParameter.h \
+    Filter/FilterMode.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \

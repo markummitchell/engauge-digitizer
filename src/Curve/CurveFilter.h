@@ -1,7 +1,7 @@
 #ifndef CURVE_FILTER_H
 #define CURVE_FILTER_H
 
-#include "FilterParameter.h"
+#include "FilterMode.h"
 
 class QXmlStreamWriter;
 
@@ -13,7 +13,7 @@ public:
   CurveFilter ();
 
   /// Normal constructor. The style type and radius are determined by the currently selected Curve
-  CurveFilter (FilterParameter m_filterParameter,
+  CurveFilter (FilterMode m_filterMode,
                int m_intensityLow,
                int m_intensityHigh,
                int m_foregroundLow,
@@ -34,8 +34,8 @@ public:
   /// Initial default for any Curve.
   static CurveFilter defaultFilter ();
 
-  /// Get method for filter parameter.
-  FilterParameter filterParameter() const;
+  /// Get method for filter mode.
+  FilterMode filterMode() const;
 
   /// Get method for foreground higher bound.
   int foregroundHigh () const;
@@ -43,7 +43,7 @@ public:
   /// Get method for foreground lower bound.
   int foregroundLow () const;
 
-  /// High value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// High value of foreground, hue, intensity, saturation or value according to current filter mode,
   /// normalized to 0 to 1.
   double high () const;
 
@@ -59,7 +59,7 @@ public:
   /// Get method for intensity lower bound.
   int intensityLow () const;
 
-  /// Low value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// Low value of foreground, hue, intensity, saturation or value according to current filter mode,
   /// normalized to 0 to 1.
   double low () const;
 
@@ -71,8 +71,8 @@ public:
 
   virtual void saveModel(QXmlStreamWriter &stream) const;
 
-  /// Set method for filter parameter.
-  void setFilterParameter(FilterParameter filterParameter);
+  /// Set method for filter mode.
+  void setFilterMode(FilterMode filterMode);
 
   /// Set method for foreground higher bound.
   void setForegroundHigh (int foregroundHigh);
@@ -80,7 +80,7 @@ public:
   /// Set method for foreground lower bound.
   void setForegroundLow (int foregroundLow);
 
-  /// Set the high value for the current filter parameter.
+  /// Set the high value for the current filter mode.
   void setHigh (double s0To1);
 
   /// Set method for hue higher bound.
@@ -95,7 +95,7 @@ public:
   /// Set method for intensity lower bound.
   void setIntensityLow (int intensityLow);
 
-  /// Set the low value for the current filter parameter.
+  /// Set the low value for the current filter mode.
   void setLow (double s0To1);
 
   /// Set method for saturation high.
@@ -118,7 +118,7 @@ public:
 
 private:
 
-  FilterParameter m_filterParameter;
+  FilterMode m_filterMode;
   int m_intensityLow;
   int m_intensityHigh;
   int m_foregroundLow;

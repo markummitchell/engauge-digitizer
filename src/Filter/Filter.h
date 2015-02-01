@@ -2,7 +2,7 @@
 #define FILTER_H
 
 #include "FilterColorEntry.h"
-#include "FilterParameter.h"
+#include "FilterMode.h"
 #include <QList>
 #include <QRgb>
 
@@ -24,7 +24,7 @@ public:
   /// Filter the original image according to the specified filtering parameters.
   void filterImage (const QImage &imageOriginal,
                     QImage &imageFiltered,
-                    FilterParameter filterParameter,
+                    FilterMode filterMode,
                     double low,
                     double high,
                     QRgb rgbBackground);
@@ -41,12 +41,12 @@ public:
 
   /// Return pixel converted according to the current filter parameter, normalized to zero to one. Special
   /// case is -1 for a pixel that cannot be converted, like finding hue value for gray scale pixel
-  double pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
+  double pixelToZeroToOneOrMinusOne (FilterMode filterMode,
                                      const QColor &pixel,
                                      QRgb rgbBackground) const;
 
   /// Return true if specified unfiltered pixel is on
-  bool pixelUnfilteredIsOn (FilterParameter filterParameter,
+  bool pixelUnfilteredIsOn (FilterMode filterMode,
                             const QColor &pixel,
                             QRgb rgbBackground,
                             double low0To1,

@@ -29,8 +29,8 @@ public:
   /// Get method for copying all curve filters in one step.
   const CurveFilters &curveFilters () const;
 
-  /// Get method for filter parameter.
-  FilterParameter filterParameter(const QString &curveName) const;
+  /// Get method for filter mode.
+  FilterMode filterMode(const QString &curveName) const;
 
   /// Get method for foreground higher bound.
   int foregroundHigh (const QString &curveName) const;
@@ -38,7 +38,7 @@ public:
   /// Get method for foreground lower bound.
   int foregroundLow (const QString &curveName) const;
 
-  /// High value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// High value of foreground, hue, intensity, saturation or value according to current filter mode.
   /// normalized to 0 to 1.
   double high (const QString &curveName) const;
 
@@ -54,7 +54,7 @@ public:
   /// Get method for intensity lower bound.
   int intensityLow (const QString &curveName) const;
 
-  /// Low value of foreground, hue, intensity, saturation or value according to current filter parameter,
+  /// Low value of foreground, hue, intensity, saturation or value according to current filter mode
   /// normalized to 0 to 1.
   double low (const QString &curveName) const;
 
@@ -66,9 +66,9 @@ public:
 
   virtual void saveModel(QXmlStreamWriter &stream) const;
 
-  /// Set method for filter parameter.
-  void setFilterParameter(const QString &curveName,
-                          FilterParameter filterParameter);
+  /// Set method for filter mode.
+  void setFilterMode(const QString &curveName,
+                     FilterMode filterMode);
 
   /// Set method for foreground higher bound.
   void setForegroundHigh (const QString &curveName,
@@ -78,7 +78,7 @@ public:
   void setForegroundLow (const QString &curveName,
                          int foregroundLow);
 
-  /// Set the high value for the current filter parameter.
+  /// Set the high value for the current filter mode.
   void setHigh (const QString &curveName,
                 double s0To1);
 
@@ -98,7 +98,7 @@ public:
   void setIntensityLow (const QString &curveName,
                         int intensityLow);
 
-  /// Set the low value for the current filter parameter.
+  /// Set the low value for the current filter mode.
   void setLow (const QString &curveName,
                double s0To1);
 

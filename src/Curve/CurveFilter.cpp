@@ -5,7 +5,7 @@
 #include <QXmlStreamWriter>
 
 CurveFilter::CurveFilter() :
-  m_filterParameter (FILTER_PARAMETER_INTENSITY),
+  m_filterMode (FILTER_MODE_INTENSITY),
   m_intensityLow (INTENSITY_LOW_DEFAULT),
   m_intensityHigh (INTENSITY_HIGH_DEFAULT),
   m_foregroundLow (FOREGROUND_LOW_DEFAULT),
@@ -19,7 +19,7 @@ CurveFilter::CurveFilter() :
 {
 }
 
-CurveFilter::CurveFilter(FilterParameter filterParameter,
+CurveFilter::CurveFilter(FilterMode filterMode,
                          int intensityLow,
                          int intensityHigh,
                          int foregroundLow,
@@ -30,7 +30,7 @@ CurveFilter::CurveFilter(FilterParameter filterParameter,
                          int saturationHigh,
                          int valueLow,
                          int valueHigh) :
-  m_filterParameter (filterParameter),
+  m_filterMode (filterMode),
   m_intensityLow (intensityLow),
   m_intensityHigh (intensityHigh),
   m_foregroundLow (foregroundLow),
@@ -45,7 +45,7 @@ CurveFilter::CurveFilter(FilterParameter filterParameter,
 }
 
 CurveFilter::CurveFilter(const CurveFilter &other) :
-  m_filterParameter (other.filterParameter()),
+  m_filterMode (other.filterMode()),
   m_intensityLow (other.intensityLow()),
   m_intensityHigh (other.intensityHigh()),
   m_foregroundLow (other.foregroundLow()),
@@ -61,7 +61,7 @@ CurveFilter::CurveFilter(const CurveFilter &other) :
 
 CurveFilter &CurveFilter::operator=(const CurveFilter &other)
 {
-  m_filterParameter = other.filterParameter();
+  m_filterMode = other.filterMode();
   m_intensityLow = other.intensityLow();
   m_intensityHigh = other.intensityHigh();
   m_foregroundLow = other.foregroundLow();
@@ -81,9 +81,9 @@ CurveFilter CurveFilter::defaultFilter ()
   return CurveFilter ();
 }
 
-FilterParameter CurveFilter::filterParameter() const
+FilterMode CurveFilter::filterMode() const
 {
-  return m_filterParameter;
+  return m_filterMode;
 }
 
 int CurveFilter::foregroundHigh () const
@@ -98,25 +98,25 @@ int CurveFilter::foregroundLow () const
 
 double CurveFilter::high () const
 {
-  switch (m_filterParameter)
+  switch (m_filterMode)
   {
-    case FILTER_PARAMETER_FOREGROUND:
+    case FILTER_MODE_FOREGROUND:
       return (double) (m_foregroundHigh - FOREGROUND_MIN) /
           (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       return (double) (m_hueHigh - HUE_MIN) /
           ((double) HUE_MAX - HUE_MIN);
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       return (double) (m_intensityHigh - INTENSITY_MIN) /
           (double) (INTENSITY_MAX - INTENSITY_MIN);
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       return (double) (m_saturationHigh - SATURATION_MIN) /
           (double) (SATURATION_MAX - SATURATION_MIN);
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       return (double) (m_valueHigh - VALUE_MIN) /
           (double) (VALUE_MAX - VALUE_MIN);
 
@@ -147,25 +147,25 @@ int CurveFilter::intensityLow () const
 
 double CurveFilter::low () const
 {
-  switch (m_filterParameter)
+  switch (m_filterMode)
   {
-    case FILTER_PARAMETER_FOREGROUND:
+    case FILTER_MODE_FOREGROUND:
       return (double) (m_foregroundLow - FOREGROUND_MIN) /
           (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       return (double) (m_hueLow - HUE_MIN) /
           ((double) HUE_MAX - HUE_MIN);
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       return (double) (m_intensityLow - INTENSITY_MIN) /
           (double) (INTENSITY_MAX - INTENSITY_MIN);
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       return (double) (m_saturationLow - SATURATION_MIN) /
           (double) (SATURATION_MAX - SATURATION_MIN);
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       return (double) (m_valueLow - VALUE_MIN) /
           (double) (VALUE_MAX - VALUE_MIN);
 
@@ -192,9 +192,9 @@ void CurveFilter::saveModel(QXmlStreamWriter &stream) const
   stream.writeEndElement();
 }
 
-void CurveFilter::setFilterParameter(FilterParameter filterParameter)
+void CurveFilter::setFilterMode(FilterMode filterMode)
 {
-  m_filterParameter = filterParameter;
+  m_filterMode = filterMode;
 }
 
 void CurveFilter::setForegroundHigh (int foregroundHigh)
@@ -211,24 +211,24 @@ void CurveFilter::setForegroundLow (int foregroundLow)
 
 void CurveFilter::setHigh (double s0To1)
 {
-  switch (m_filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
+  switch (m_filterMode) {
+    case FILTER_MODE_FOREGROUND:
       setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
       break;
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
       break;
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
       break;
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
       break;
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
       break;
 
@@ -263,24 +263,24 @@ void CurveFilter::setIntensityLow (int intensityLow)
 
 void CurveFilter::setLow (double s0To1)
 {
-  switch (m_filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
+  switch (m_filterMode) {
+    case FILTER_MODE_FOREGROUND:
       setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
       break;
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
       break;
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
       break;
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
       break;
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
       break;
 

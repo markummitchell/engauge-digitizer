@@ -3,30 +3,30 @@
 
 ViewProfileScale::ViewProfileScale(QWidget *parent) :
   QLabel (parent),
-  m_filterParameter (FILTER_PARAMETER_FOREGROUND)
+  m_filterMode (FILTER_MODE_FOREGROUND)
 {
 }
 
 void ViewProfileScale::paintEvent (QPaintEvent *event)
 {
-  switch (m_filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
+  switch (m_filterMode) {
+    case FILTER_MODE_FOREGROUND:
       paintForeground ();
       break;
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       paintHue ();
       break;
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       paintIntensity ();
       break;
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       paintSaturation ();
       break;
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       paintValue ();
       break;
 
@@ -126,8 +126,8 @@ void ViewProfileScale::setBackgroundColor (QRgb rgbBackground)
   m_rgbBackground = rgbBackground;
 }
 
-void ViewProfileScale::setFilterParameter (FilterParameter filterParameter)
+void ViewProfileScale::setFilterMode (FilterMode filterMode)
 {
-  m_filterParameter = filterParameter;
+  m_filterMode = filterMode;
   update ();
 }

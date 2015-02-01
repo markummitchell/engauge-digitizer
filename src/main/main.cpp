@@ -1,4 +1,4 @@
-#include "FilterParameter.h"
+#include "FilterMode.h"
 #include <iostream>
 #include "Logger.h"
 #include "MainWindow.h"
@@ -12,7 +12,7 @@ void parseCmdLine (int argc, char **argv, bool &isDebug);
 // Functions
 int main(int argc, char *argv[])
 {
-  qRegisterMetaType<FilterParameter> ("FilterParameter");
+  qRegisterMetaType<FilterMode> ("FilterMode");
 
   QApplication a(argc, argv);
 

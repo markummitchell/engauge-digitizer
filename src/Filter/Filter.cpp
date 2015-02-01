@@ -17,7 +17,7 @@ bool Filter::colorCompare (QRgb rgb1,
 
 void Filter::filterImage (const QImage &imageOriginal,
                           QImage &imageFiltered,
-                          FilterParameter filterParameter,
+                          FilterMode filterMode,
                           double low,
                           double high,
                           QRgb rgbBackground)
@@ -33,7 +33,7 @@ void Filter::filterImage (const QImage &imageOriginal,
       bool isOn = false;
       if (pixel.rgb() != rgbBackground) {
 
-        isOn = pixelUnfilteredIsOn (filterParameter,
+        isOn = pixelUnfilteredIsOn (filterMode,
                                     pixel,
                                     rgbBackground,
                                     low,
@@ -116,7 +116,7 @@ bool Filter::pixelFilteredIsOn (const QImage &image,
   return rtn;
 }
 
-bool Filter::pixelUnfilteredIsOn (FilterParameter filterParameter,
+bool Filter::pixelUnfilteredIsOn (FilterMode filterMode,
                                   const QColor &pixel,
                                   QRgb rgbBackground,
                                   double low0To1,
@@ -124,7 +124,7 @@ bool Filter::pixelUnfilteredIsOn (FilterParameter filterParameter,
 {
   bool rtn = false;
 
-  double s = pixelToZeroToOneOrMinusOne (filterParameter,
+  double s = pixelToZeroToOneOrMinusOne (filterMode,
                                          pixel,
                                          rgbBackground);
   if (s >= 0.0) {
@@ -144,14 +144,14 @@ bool Filter::pixelUnfilteredIsOn (FilterParameter filterParameter,
   return rtn;
 }
 
-double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
+double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
                                            const QColor &pixel,
                                            QRgb rgbBackground) const
 {
   double s = 0.0;
 
-  switch (filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
+  switch (filterMode) {
+    case FILTER_MODE_FOREGROUND:
       {
         double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
                                  pow (pixel.green() - qGreen (rgbBackground), 2) +
@@ -160,7 +160,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
       }
       break;
 
-    case FILTER_PARAMETER_HUE:
+    case FILTER_MODE_HUE:
       {
         s = pixel.hueF();
         if (s < 0) {
@@ -169,7 +169,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
       }
       break;
 
-    case FILTER_PARAMETER_INTENSITY:
+    case FILTER_MODE_INTENSITY:
       {
         double distance = qSqrt (pow (pixel.red(), 2) +
                                  pow (pixel.green(), 2) +
@@ -178,11 +178,11 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterParameter filterParameter,
       }
       break;
 
-    case FILTER_PARAMETER_SATURATION:
+    case FILTER_MODE_SATURATION:
       s = pixel.saturationF();
       break;
 
-    case FILTER_PARAMETER_VALUE:
+    case FILTER_MODE_VALUE:
       s = pixel.valueF();
       break;
 
