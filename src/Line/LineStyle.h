@@ -14,7 +14,7 @@ public:
   /// Default constructor only for use when this class is being stored by a container that requires the default constructor.
   LineStyle ();
 
-  /// Single constructor.
+  /// Normal constructor.
   LineStyle (unsigned int width,
              ColorPalette paletteColor,
              CurveConnectAs curveConnectAs);

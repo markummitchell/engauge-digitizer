@@ -10,9 +10,11 @@ const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
 
 Curve::Curve(const QString &curveName,
+             const CurveFilter &curveFilter,
              const LineStyle &lineStyle,
              const PointStyle &pointStyle) :
   m_curveName (curveName),
+  m_curveFilter (curveFilter),
   m_lineStyle (lineStyle),
   m_pointStyle (pointStyle)
 {
@@ -21,6 +23,7 @@ Curve::Curve(const QString &curveName,
 Curve::Curve (const Curve &curve) :
   m_curveName (curve.curveName ()),
   m_points (curve.points ()),
+  m_curveFilter (curve.curveFilter ()),
   m_lineStyle (curve.lineStyle ()),
   m_pointStyle (curve.pointStyle ())
 {
@@ -30,6 +33,7 @@ Curve &Curve::operator=(const Curve &curve)
 {
   m_curveName = curve.curveName ();
   m_points = curve.points ();
+  m_curveFilter = curve.curveFilter ();
   m_lineStyle = curve.lineStyle ();
   m_pointStyle = curve.pointStyle ();
 
@@ -56,6 +60,11 @@ void Curve::applyTransformation (const Transformation &transformation)
     // Overwrite old graph coordinates
     point.setPosGraph (posGraph);
   }
+}
+
+CurveFilter Curve::curveFilter () const
+{
+  return m_curveFilter;
 }
 
 QString Curve::curveName () const
@@ -107,6 +116,7 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
       // Check if this curve already exists from a previously exported point
       if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
         Curve curve(m_curveName,
+                    CurveFilter::defaultFilter (),
                     LineStyle::defaultAxesCurve (),
                     PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
         curvesGraphs.addGraphCurveAtEnd(curve);
@@ -235,6 +245,11 @@ void Curve::removePoint (const QString &identifier)
       break;
     }
   }
+}
+
+void Curve::setCurveFilter (const CurveFilter &curveFilter)
+{
+  m_curveFilter = curveFilter;
 }
 
 void Curve::setCurveName (const QString &curveName)

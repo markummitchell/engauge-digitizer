@@ -43,8 +43,10 @@ HEADERS  += \
     Correlation/Correlation.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
+    Curve/CurveConstants.h \
+    Curve/CurveFilter.h \
+    Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
-    Curve/CurveStyle.h \
     include/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
@@ -163,8 +165,9 @@ SOURCES += \
     Cmd/CmdSettingsSegments.cpp \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
+    Curve/CurveFilter.cpp \
+    Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
-    Curve/CurveStyle.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \
     DigitizeState/DigitizeStateColorPicker.cpp \

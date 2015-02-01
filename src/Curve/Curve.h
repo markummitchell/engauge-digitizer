@@ -2,6 +2,7 @@
 #define CURVE_H
 
 #include "CallbackSearchReturn.h"
+#include "CurveFilter.h"
 #include "functor.h"
 #include "LineStyle.h"
 #include "Point.h"
@@ -25,6 +26,7 @@ class Curve
 public:
   /// Constructor from scratch.
   Curve(const QString &curveName,
+        const CurveFilter &curveFilter,
         const LineStyle &lineStyle,
         const PointStyle &pointStyle);
 
@@ -39,6 +41,9 @@ public:
 
   /// Apply transformation that is stored and updated externally.
   void applyTransformation (const Transformation &transformation);
+
+  /// Return the curve filter.
+  CurveFilter curveFilter () const;
 
   /// Name of this Curve.
   QString curveName () const;
@@ -82,6 +87,9 @@ public:
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
 
+  /// Set curve filter.
+  void setCurveFilter (const CurveFilter &curveFilter);
+
   /// Change the curve name
   void setCurveName (const QString &curveName);
 
@@ -99,6 +107,7 @@ private:
   QString m_curveName;
   Points m_points;
 
+  CurveFilter m_curveFilter;
   LineStyle m_lineStyle;
   PointStyle m_pointStyle;
 };

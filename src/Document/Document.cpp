@@ -18,6 +18,7 @@ Document::Document (const QImage &image) :
   m_name ("untitled"),
   m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          CurveFilter::defaultFilter (),
                           LineStyle::defaultAxesCurve(),
                           PointStyle::defaultAxesCurve ()))
 {
@@ -26,6 +27,7 @@ Document::Document (const QImage &image) :
   m_pixmap.convertFromImage (image);
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            CurveFilter::defaultFilter (),
                                             LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
                                             PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ())));
 }
@@ -34,6 +36,7 @@ Document::Document (const QString &fileName) :
   m_name (fileName),
   m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
+                          CurveFilter::defaultFilter (),
                           LineStyle::defaultAxesCurve(),
                           PointStyle::defaultAxesCurve()))
 {
@@ -51,6 +54,7 @@ Document::Document (const QString &fileName) :
   }
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+                                            CurveFilter::defaultFilter (),
                                             LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                             PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
@@ -58,6 +62,7 @@ Document::Document (const QString &fileName) :
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
   m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
+                                             CurveFilter::defaultFilter (),
                                              LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                              PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
 }
@@ -279,6 +284,7 @@ DocumentModelCoords Document::modelCoords() const
 
 DocumentModelCurveProperties Document::modelCurveProperties() const
 {
+  // Construct a curve-specific model
   DocumentModelCurveProperties modelCurveProperties(*this);
 
   return modelCurveProperties;
@@ -291,7 +297,10 @@ DocumentModelExport Document::modelExport() const
 
 DocumentModelFilter Document::modelFilter() const
 {
-  return m_modelFilter;
+  // Construct a curve-specific model
+  DocumentModelFilter modelFilter(*this);
+
+  return modelFilter;
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
@@ -379,7 +388,6 @@ void Document::saveDocument(QXmlStreamWriter &stream)
   stream.writeDTD("<!DOCTYPE engauge>");
   m_modelCoords.saveModel(stream);
   m_modelExport.saveModel(stream);
-  m_modelFilter.saveModel(stream);
   m_modelAxesChecker.saveModel(stream);
   m_modelGridRemoval.saveModel(stream);
   m_modelPointMatch.saveModel(stream);
@@ -406,6 +414,7 @@ void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 
 void Document::setModelCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
 {
+  // Save the LineStyle for each Curve
   LineStyles::const_iterator itrL;
   for (itrL = modelCurveProperties.lineStyles().constBegin ();
        itrL != modelCurveProperties.lineStyles().constEnd();
@@ -418,6 +427,7 @@ void Document::setModelCurveProperties(const DocumentModelCurveProperties &model
     curve->setLineStyle (lineStyle);
   }
 
+  // Save the PointStyle for each Curve
   PointStyles::const_iterator itrP;
   for (itrP = modelCurveProperties.pointStyles().constBegin ();
        itrP != modelCurveProperties.pointStyles().constEnd ();
@@ -438,7 +448,18 @@ void Document::setModelExport(const DocumentModelExport &modelExport)
 
 void Document::setModelFilter(const DocumentModelFilter &modelFilter)
 {
-  m_modelFilter = modelFilter;
+  // Save the CurveFilter for each Curve
+  CurveFilters::const_iterator itr;
+  for (itr = modelFilter.curveFilters().constBegin ();
+       itr != modelFilter.curveFilters().constEnd();
+       itr++) {
+
+    QString curveName = itr.key();
+    const CurveFilter &curveFilter = itr.value();
+
+    Curve *curve = curveForCurveName (curveName);
+    curve->setCurveFilter (curveFilter);
+  }
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

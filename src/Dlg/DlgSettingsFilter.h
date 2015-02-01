@@ -9,6 +9,7 @@
 
 class DlgFilterThread;
 class DocumentModelFilter;
+class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
 class QLabel;
@@ -42,6 +43,7 @@ signals:
                           double high);
 
 private slots:
+  void slotCurveName(const QString &curveName);
   void slotDividerHigh (double);
   void slotDividerLow (double);
   void slotForeground();
@@ -59,9 +61,11 @@ private:
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
   QRgb createThread (); // Returns background color
-
+  void loadForCurveName(const QString &curveName);
   void updateHistogram();
   void updatePreview();
+
+  QComboBox *m_cmbCurveName;
 
   QRadioButton *m_btnIntensity;
   QRadioButton *m_btnForeground;

@@ -39,8 +39,8 @@ HEADERS  += \
     Coord/CoordThetaUnits.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
+    Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
-    Curve/CurveStyle.h \
     include/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
@@ -148,8 +148,8 @@ SOURCES += \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Curve/Curve.cpp \
+    Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
-    Curve/CurveStyle.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \
     DigitizeState/DigitizeStateContext.cpp \

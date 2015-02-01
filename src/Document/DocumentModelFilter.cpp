@@ -3,169 +3,120 @@
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
-DocumentModelFilter::DocumentModelFilter() :
-  m_filterParameter (FILTER_PARAMETER_INTENSITY),
-  m_intensityLow (INTENSITY_LOW_DEFAULT),
-  m_intensityHigh (INTENSITY_HIGH_DEFAULT),
-  m_foregroundLow (FOREGROUND_LOW_DEFAULT),
-  m_foregroundHigh (FOREGROUND_HIGH_DEFAULT),
-  m_hueLow (HUE_LOW_DEFAULT),
-  m_hueHigh (HUE_HIGH_DEFAULT),
-  m_saturationLow (SATURATION_LOW_DEFAULT),
-  m_saturationHigh (SATURATION_HIGH_DEFAULT),
-  m_valueLow (VALUE_LOW_DEFAULT),
-  m_valueHigh (VALUE_HIGH_DEFAULT)
+DocumentModelFilter::DocumentModelFilter()
 {
 }
 
-DocumentModelFilter::DocumentModelFilter(const Document &document) :
-  m_filterParameter (document.modelFilter().filterParameter()),
-  m_intensityLow (document.modelFilter().intensityLow()),
-  m_intensityHigh (document.modelFilter().intensityHigh()),
-  m_foregroundLow (document.modelFilter().foregroundLow()),
-  m_foregroundHigh (document.modelFilter().foregroundHigh()),
-  m_hueLow (document.modelFilter().hueLow()),
-  m_hueHigh (document.modelFilter().hueHigh()),
-  m_saturationLow (document.modelFilter().saturationLow()),
-  m_saturationHigh (document.modelFilter().saturationHigh()),
-  m_valueLow (document.modelFilter().valueLow()),
-  m_valueHigh (document.modelFilter().valueHigh())
+DocumentModelFilter::DocumentModelFilter(const Document &document)
 {
+  // Axis curve
+  const Curve &curveAxes = document.curveAxes();
+  m_curveFilters [AXIS_CURVE_NAME] = curveAxes.curveFilter();
+
+  // Graph curves
+  QStringList graphCurveNames = document.curvesGraphsNames();
+  QStringList::const_iterator itr;
+  for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
+
+    const QString &graphCurveName = *itr;
+    const Curve *graphCurve = document.curveForCurveName(graphCurveName);
+    m_curveFilters [graphCurveName] = graphCurve->curveFilter();
+  }
 }
 
-DocumentModelFilter::DocumentModelFilter(const DocumentModelFilter &other) :
-  m_filterParameter (other.filterParameter()),
-  m_intensityLow (other.intensityLow()),
-  m_intensityHigh (other.intensityHigh()),
-  m_foregroundLow (other.foregroundLow()),
-  m_foregroundHigh (other.foregroundHigh()),
-  m_hueLow (other.hueLow()),
-  m_hueHigh (other.hueHigh()),
-  m_saturationLow (other.saturationLow()),
-  m_saturationHigh (other.saturationHigh()),
-  m_valueLow (other.valueLow()),
-  m_valueHigh (other.valueHigh())
+DocumentModelFilter::DocumentModelFilter(const DocumentModelFilter &other)
 {
+  // Curve filters
+  CurveFilters::const_iterator itr;
+  for (itr = other.curveFilters().constBegin (); itr != other.curveFilters().constEnd(); itr++) {
+    QString curveName = itr.key();
+    CurveFilter curveFilter = itr.value();
+    m_curveFilters [curveName] = curveFilter;
+  }
 }
 
 DocumentModelFilter &DocumentModelFilter::operator=(const DocumentModelFilter &other)
 {
-  m_filterParameter = other.filterParameter();
-  m_intensityLow = other.intensityLow();
-  m_intensityHigh = other.intensityHigh();
-  m_foregroundLow = other.foregroundLow();
-  m_foregroundHigh = other.foregroundHigh();
-  m_hueLow = other.hueLow();
-  m_hueHigh = other.hueHigh();
-  m_saturationLow = other.saturationLow();
-  m_saturationHigh = other.saturationHigh();
-  m_valueLow = other.valueLow();
-  m_valueHigh = other.valueHigh();
+  // Curve filters
+  CurveFilters::const_iterator itr;
+  for (itr = other.curveFilters().constBegin (); itr != other.curveFilters().constEnd(); itr++) {
+    QString curveName = itr.key();
+    CurveFilter curveFilter = itr.value();
+    m_curveFilters [curveName] = curveFilter;
+  }
 
   return *this;
 }
 
-FilterParameter DocumentModelFilter::filterParameter() const
+const CurveFilters &DocumentModelFilter::curveFilters() const
 {
-  return m_filterParameter;
+  return m_curveFilters;
 }
 
-int DocumentModelFilter::foregroundHigh () const
+FilterParameter DocumentModelFilter::filterParameter(const QString &curveName) const
 {
-  return m_foregroundHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].filterParameter();
 }
 
-int DocumentModelFilter::foregroundLow () const
+int DocumentModelFilter::foregroundHigh (const QString &curveName) const
 {
-  return m_foregroundLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].foregroundHigh();
 }
 
-double DocumentModelFilter::high () const
+int DocumentModelFilter::foregroundLow (const QString &curveName) const
 {
-  switch (m_filterParameter)
-  {
-    case FILTER_PARAMETER_FOREGROUND:
-      return (double) (m_foregroundHigh - FOREGROUND_MIN) /
-          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
-
-    case FILTER_PARAMETER_HUE:
-      return (double) (m_hueHigh - HUE_MIN) /
-          ((double) HUE_MAX - HUE_MIN);
-
-    case FILTER_PARAMETER_INTENSITY:
-      return (double) (m_intensityHigh - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN);
-
-    case FILTER_PARAMETER_SATURATION:
-      return (double) (m_saturationHigh - SATURATION_MIN) /
-          (double) (SATURATION_MAX - SATURATION_MIN);
-
-    case FILTER_PARAMETER_VALUE:
-      return (double) (m_valueHigh - VALUE_MIN) /
-          (double) (VALUE_MAX - VALUE_MIN);
-
-    default:
-      Q_ASSERT (false);
-  }
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].foregroundLow();
 }
 
-int DocumentModelFilter::hueHigh () const
+double DocumentModelFilter::high (const QString &curveName) const
 {
-  return m_hueHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].high();
 }
 
-int DocumentModelFilter::hueLow () const
+int DocumentModelFilter::hueHigh (const QString &curveName) const
 {
-  return m_hueLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].hueHigh();
 }
 
-int DocumentModelFilter::intensityHigh () const
+int DocumentModelFilter::hueLow (const QString &curveName) const
 {
-  return m_intensityHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].hueLow();
 }
 
-int DocumentModelFilter::intensityLow () const
+int DocumentModelFilter::intensityHigh (const QString &curveName) const
 {
-  return m_intensityLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].intensityHigh();
 }
 
-double DocumentModelFilter::low () const
+int DocumentModelFilter::intensityLow (const QString &curveName) const
 {
-  switch (m_filterParameter)
-  {
-    case FILTER_PARAMETER_FOREGROUND:
-      return (double) (m_foregroundLow - FOREGROUND_MIN) /
-          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
-
-    case FILTER_PARAMETER_HUE:
-      return (double) (m_hueLow - HUE_MIN) /
-          ((double) HUE_MAX - HUE_MIN);
-
-    case FILTER_PARAMETER_INTENSITY:
-      return (double) (m_intensityLow - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN);
-
-    case FILTER_PARAMETER_SATURATION:
-      return (double) (m_saturationLow - SATURATION_MIN) /
-          (double) (SATURATION_MAX - SATURATION_MIN);
-
-    case FILTER_PARAMETER_VALUE:
-      return (double) (m_valueLow - VALUE_MIN) /
-          (double) (VALUE_MAX - VALUE_MIN);
-
-    default:
-      Q_ASSERT (false);
-  }
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].intensityLow();
 }
 
-int DocumentModelFilter::saturationHigh () const
+double DocumentModelFilter::low (const QString &curveName) const
 {
-  return m_saturationHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].low();
 }
 
-int DocumentModelFilter::saturationLow () const
+int DocumentModelFilter::saturationHigh (const QString &curveName) const
 {
-  return m_saturationLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].saturationHigh();
+}
+
+int DocumentModelFilter::saturationLow (const QString &curveName) const
+{
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].saturationLow();
 }
 
 void DocumentModelFilter::saveModel(QXmlStreamWriter &stream) const
@@ -176,133 +127,105 @@ void DocumentModelFilter::saveModel(QXmlStreamWriter &stream) const
   stream.writeEndElement();
 }
 
-void DocumentModelFilter::setFilterParameter(FilterParameter filterParameter)
+void DocumentModelFilter::setFilterParameter(const QString &curveName,
+                                             FilterParameter filterParameter)
 {
-  m_filterParameter = filterParameter;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setFilterParameter(filterParameter);
 }
 
-void DocumentModelFilter::setForegroundHigh (int foregroundHigh)
+void DocumentModelFilter::setForegroundHigh (const QString &curveName,
+                                             int foregroundHigh)
 {
-  Q_ASSERT (FOREGROUND_MIN <= foregroundHigh && foregroundHigh <= FOREGROUND_MAX);
-  m_foregroundHigh = foregroundHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setForegroundHigh(foregroundHigh);
 }
 
-void DocumentModelFilter::setForegroundLow (int foregroundLow)
+void DocumentModelFilter::setForegroundLow (const QString &curveName,
+                                            int foregroundLow)
 {
-  Q_ASSERT (FOREGROUND_MIN <= foregroundLow && foregroundLow <= FOREGROUND_MAX);
-  m_foregroundLow = foregroundLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setForegroundLow(foregroundLow);
 }
 
-void DocumentModelFilter::setHigh (double s0To1)
+void DocumentModelFilter::setHigh (const QString &curveName,
+                                   double s0To1)
 {
-  switch (m_filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
-      setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
-      break;
-
-    case FILTER_PARAMETER_HUE:
-      setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
-      break;
-
-    case FILTER_PARAMETER_INTENSITY:
-      setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
-      break;
-
-    case FILTER_PARAMETER_SATURATION:
-      setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
-      break;
-
-    case FILTER_PARAMETER_VALUE:
-      setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setHigh(s0To1);
 }
 
-void DocumentModelFilter::setHueHigh (int hueHigh)
+void DocumentModelFilter::setHueHigh (const QString &curveName,
+                                      int hueHigh)
 {
-  Q_ASSERT (HUE_MIN <= hueHigh && hueHigh <= HUE_MAX);
-  m_hueHigh = hueHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setHueHigh(hueHigh);
 }
 
-void DocumentModelFilter::setHueLow (int hueLow)
+void DocumentModelFilter::setHueLow (const QString &curveName,
+                                     int hueLow)
 {
-  Q_ASSERT (HUE_MIN <= hueLow && hueLow <= HUE_MAX);
-  m_hueLow = hueLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setHueLow(hueLow);
 }
 
-void DocumentModelFilter::setIntensityHigh (int intensityHigh)
+void DocumentModelFilter::setIntensityHigh (const QString &curveName,
+                                            int intensityHigh)
 {
-  Q_ASSERT (INTENSITY_MIN <= intensityHigh && intensityHigh <= INTENSITY_MAX);
-  m_intensityHigh = intensityHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setIntensityHigh(intensityHigh);
 }
 
-void DocumentModelFilter::setIntensityLow (int intensityLow)
+void DocumentModelFilter::setIntensityLow (const QString &curveName,
+                                           int intensityLow)
 {
-  Q_ASSERT (INTENSITY_MIN <= intensityLow && intensityLow <= INTENSITY_MAX);
-  m_intensityLow = intensityLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setIntensityLow(intensityLow);
 }
 
-void DocumentModelFilter::setLow (double s0To1)
+void DocumentModelFilter::setLow (const QString &curveName,
+                                  double s0To1)
 {
-  switch (m_filterParameter) {
-    case FILTER_PARAMETER_FOREGROUND:
-      setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
-      break;
-
-    case FILTER_PARAMETER_HUE:
-      setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
-      break;
-
-    case FILTER_PARAMETER_INTENSITY:
-      setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
-      break;
-
-    case FILTER_PARAMETER_SATURATION:
-      setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
-      break;
-
-    case FILTER_PARAMETER_VALUE:
-      setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setLow(s0To1);
 }
 
-void DocumentModelFilter::setSaturationHigh (int saturationHigh)
+void DocumentModelFilter::setSaturationHigh (const QString &curveName,
+                                             int saturationHigh)
 {
-  Q_ASSERT (SATURATION_MIN <= saturationHigh && saturationHigh <= SATURATION_MAX);
-  m_saturationHigh = saturationHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setSaturationHigh(saturationHigh);
 }
 
-void DocumentModelFilter::setSaturationLow (int saturationLow)
+void DocumentModelFilter::setSaturationLow (const QString &curveName,
+                                            int saturationLow)
 {
-  Q_ASSERT (SATURATION_MIN <= saturationLow && saturationLow <= SATURATION_MAX);
-  m_saturationLow = saturationLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setSaturationLow(saturationLow);
 }
 
-void DocumentModelFilter::setValueHigh (int valueHigh)
+void DocumentModelFilter::setValueHigh (const QString &curveName,
+                                        int valueHigh)
 {
-  Q_ASSERT (VALUE_MIN <= valueHigh && valueHigh <= VALUE_MAX);
-  m_valueHigh = valueHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setValueHigh(valueHigh);
 }
 
-void DocumentModelFilter::setValueLow (int valueLow)
+void DocumentModelFilter::setValueLow (const QString &curveName,
+                                       int valueLow)
 {
-  Q_ASSERT (VALUE_MIN <= valueLow && valueLow <= VALUE_MAX);
-  m_valueLow = valueLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  m_curveFilters [curveName].setValueLow(valueLow);
 }
 
-int DocumentModelFilter::valueHigh () const
+int DocumentModelFilter::valueHigh (const QString &curveName) const
 {
-  return m_valueHigh;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].valueHigh();
 }
 
-int DocumentModelFilter::valueLow () const
+int DocumentModelFilter::valueLow (const QString &curveName) const
 {
-  return m_valueLow;
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName].valueLow();
 }

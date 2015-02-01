@@ -214,9 +214,9 @@ private:
   // Model objects for the various settings
   DocumentModelAxesChecker m_modelAxesChecker;
   DocumentModelCoords m_modelCoords;
-  // DocumentModelCurveProperties is not here since curve properties are stored inside CurvesGraphs
+  // DocumentModelCurveProperties is not here since curve properties are stored inside the Curve class
   DocumentModelExport m_modelExport;
-  DocumentModelFilter m_modelFilter;
+  // DocumentModelFilter is not here since filtering settings are stored inside the Curve class
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;

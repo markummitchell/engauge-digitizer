@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
+#include "CurveConstants.h"
 #include "DlgFilterThread.h"
 #include "DlgSettingsFilter.h"
 #include "Filter.h"
@@ -45,7 +46,15 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::createControls";
 
-  QLabel *labelProfile = new QLabel ("Filter parameter:");
+  QLabel *labelCurve = new QLabel ("Curve Name:");
+  layout->addWidget (labelCurve, row++, 1);
+
+  m_cmbCurveName = new QComboBox ();
+  m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
+  connect (m_cmbCurveName, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCurveName (const QString &)));
+  layout->addWidget (m_cmbCurveName, row++, 2);
+
+  QLabel *labelProfile = new QLabel ("Filter mode:");
   layout->addWidget (labelProfile, row++, 1);
 
   m_btnIntensity = new QRadioButton ("Intensity");
@@ -207,8 +216,26 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_modelFilterBefore = new DocumentModelFilter (cmdMediator.document());
   m_modelFilterAfter = new DocumentModelFilter (cmdMediator.document());
 
+  // Populate controls. First load curve name combobox. The curve-specific controls get loaded in slotCurveName
+  m_cmbCurveName->clear ();
+  m_cmbCurveName->addItem (AXIS_CURVE_NAME);
+  QStringList curveNames = cmdMediator.curvesGraphsNames();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin (); itr != curveNames.end (); itr++) {
+
+    QString curveName = *itr;
+    m_cmbCurveName->addItem (curveName);
+  }
+
+  loadForCurveName (mainWindow().selectedCurrentCurve());
+
+  enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsFilter::loadForCurveName(const QString &curveName)
+{
   // Populate controls
-  FilterParameter filterParameter = m_modelFilterAfter->filterParameter();
+  FilterParameter filterParameter = m_modelFilterAfter->filterParameter(curveName);
   m_btnIntensity->setChecked (filterParameter == FILTER_PARAMETER_INTENSITY);
   m_btnForeground->setChecked (filterParameter == FILTER_PARAMETER_FOREGROUND);
   m_btnHue->setChecked (filterParameter == FILTER_PARAMETER_HUE);
@@ -216,7 +243,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   m_btnValue->setChecked (filterParameter == FILTER_PARAMETER_VALUE);
 
   m_scenePreview->clear();
-  m_imagePreview = cmdMediator.document().pixmap().toImage();
+  m_imagePreview = cmdMediator().document().pixmap().toImage();
   m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
 
   QRgb rgbBackground = createThread ();
@@ -227,15 +254,28 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
+void DlgSettingsFilter::slotCurveName(const QString &curveName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotCurveName";
+
+  // Do nothing if combobox is getting cleared, or load has not been called yet
+  if (!curveName.isEmpty () && (m_modelFilterAfter != 0)) {
+
+    loadForCurveName (curveName);
+  }
+}
+
 void DlgSettingsFilter::slotDividerHigh (double xCenter)
 {
-  m_modelFilterAfter->setHigh (xCenter / (double) PROFILE_SCENE_WIDTH);
+  m_modelFilterAfter->setHigh (m_cmbCurveName->currentText(),
+                               xCenter / (double) PROFILE_SCENE_WIDTH);
   updatePreview();
 }
 
 void DlgSettingsFilter::slotDividerLow (double xCenter)
 {
-  m_modelFilterAfter->setLow (xCenter / (double) PROFILE_SCENE_WIDTH);
+  m_modelFilterAfter->setLow (m_cmbCurveName->currentText(),
+                              xCenter / (double) PROFILE_SCENE_WIDTH);
   updatePreview();
 }
 
@@ -243,7 +283,8 @@ void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
-  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_FOREGROUND);
+  m_modelFilterAfter->setFilterParameter(m_cmbCurveName->currentText(),
+                                         FILTER_PARAMETER_FOREGROUND);
   updateHistogram();
   updatePreview();
 }
@@ -252,7 +293,8 @@ void DlgSettingsFilter::slotHue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
-  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_HUE);
+  m_modelFilterAfter->setFilterParameter(m_cmbCurveName->currentText(),
+                                         FILTER_PARAMETER_HUE);
   updateHistogram();
   updatePreview();
 }
@@ -261,7 +303,8 @@ void DlgSettingsFilter::slotIntensity ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
-  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_INTENSITY);
+  m_modelFilterAfter->setFilterParameter(m_cmbCurveName->currentText(),
+                                         FILTER_PARAMETER_INTENSITY);
   updateHistogram();
   updatePreview();
 }
@@ -270,7 +313,8 @@ void DlgSettingsFilter::slotSaturation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
-  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_SATURATION);
+  m_modelFilterAfter->setFilterParameter(m_cmbCurveName->currentText(),
+                                         FILTER_PARAMETER_SATURATION);
   updateHistogram();
   updatePreview();
 }
@@ -304,7 +348,8 @@ void DlgSettingsFilter::slotValue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 
-  m_modelFilterAfter->setFilterParameter(FILTER_PARAMETER_VALUE);
+  m_modelFilterAfter->setFilterParameter(m_cmbCurveName->currentText(),
+                                         FILTER_PARAMETER_VALUE);
   updateHistogram();
   updatePreview();
 }
@@ -317,9 +362,11 @@ void DlgSettingsFilter::updateHistogram()
 
   const double PEN_WIDTH = 0.0; // Zero value gives one-pixel width at all scales
 
+  QString curveName = m_cmbCurveName->currentText();
+
   m_sceneProfile->clear();
 
-  m_scale->setFilterParameter (m_modelFilterAfter->filterParameter());
+  m_scale->setFilterParameter (m_modelFilterAfter->filterParameter(curveName));
 
   // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
@@ -340,7 +387,7 @@ void DlgSettingsFilter::updateHistogram()
   for (int x = 0; x < image.width(); x++) {
     for (int y = 0; y < image.height(); y++) {
       QColor pixel (image.pixel (x, y));
-      double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterParameter(),
+      double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterParameter(curveName),
                                                     pixel,
                                                     rgbBackground);
       Q_ASSERT (s <= 1.0);
@@ -409,32 +456,32 @@ void DlgSettingsFilter::updateHistogram()
   if (m_btnForeground->isChecked()) {
 
     // Foreground
-    m_dividerLow->setX (m_modelFilterAfter->foregroundLow(), FOREGROUND_MIN, FOREGROUND_MAX);
-    m_dividerHigh->setX (m_modelFilterAfter->foregroundHigh(), FOREGROUND_MIN, FOREGROUND_MAX);
+    m_dividerLow->setX (m_modelFilterAfter->foregroundLow(curveName), FOREGROUND_MIN, FOREGROUND_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->foregroundHigh(curveName), FOREGROUND_MIN, FOREGROUND_MAX);
 
   } else if (m_btnIntensity->isChecked()) {
 
     // Intensity
-    m_dividerLow->setX (m_modelFilterAfter->intensityLow(), INTENSITY_MIN, INTENSITY_MAX);
-    m_dividerHigh->setX (m_modelFilterAfter->intensityHigh(), INTENSITY_MIN, INTENSITY_MAX);
+    m_dividerLow->setX (m_modelFilterAfter->intensityLow(curveName), INTENSITY_MIN, INTENSITY_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->intensityHigh(curveName), INTENSITY_MIN, INTENSITY_MAX);
 
   } else if (m_btnHue->isChecked()) {
 
     // Hue
-    m_dividerLow->setX (m_modelFilterAfter->hueLow(), HUE_MIN, HUE_MAX);
-    m_dividerHigh->setX (m_modelFilterAfter->hueHigh(), HUE_MIN, HUE_MAX);
+    m_dividerLow->setX (m_modelFilterAfter->hueLow(curveName), HUE_MIN, HUE_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->hueHigh(curveName), HUE_MIN, HUE_MAX);
 
   } else if (m_btnSaturation->isChecked()) {
 
     // Saturation
-    m_dividerLow->setX (m_modelFilterAfter->saturationLow(), SATURATION_MIN, SATURATION_MAX);
-    m_dividerHigh->setX (m_modelFilterAfter->saturationHigh(), SATURATION_MIN, SATURATION_MAX);
+    m_dividerLow->setX (m_modelFilterAfter->saturationLow(curveName), SATURATION_MIN, SATURATION_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->saturationHigh(curveName), SATURATION_MIN, SATURATION_MAX);
 
   } else if (m_btnValue->isChecked()) {
 
     // Value
-    m_dividerLow->setX (m_modelFilterAfter->valueLow(), VALUE_MIN, VALUE_MAX);
-    m_dividerHigh->setX (m_modelFilterAfter->valueHigh(), VALUE_MIN, VALUE_MAX);
+    m_dividerLow->setX (m_modelFilterAfter->valueLow(curveName), VALUE_MIN, VALUE_MAX);
+    m_dividerHigh->setX (m_modelFilterAfter->valueHigh(curveName), VALUE_MIN, VALUE_MAX);
 
   } else {
 
@@ -450,7 +497,8 @@ void DlgSettingsFilter::updatePreview ()
   enableOk (true);
 
   // This (indirectly) updates the preview
-  emit signalApplyFilter (m_modelFilterAfter->filterParameter(),
-                          m_modelFilterAfter->low(),
-                          m_modelFilterAfter->high());
+  QString curveName = m_cmbCurveName->currentText();
+  emit signalApplyFilter (m_modelFilterAfter->filterParameter(curveName),
+                          m_modelFilterAfter->low(curveName),
+                          m_modelFilterAfter->high(curveName));
 }

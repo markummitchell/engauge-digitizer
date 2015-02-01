@@ -12,13 +12,8 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
 {
   // Axis curve
   const Curve &curveAxes = document.curveAxes();
-  m_lineStyles [AXIS_CURVE_NAME].setCurveConnectAs (curveAxes.lineStyle().curveConnectAs());
-  m_lineStyles [AXIS_CURVE_NAME].setPaletteColor(curveAxes.lineStyle().paletteColor());
-  m_lineStyles [AXIS_CURVE_NAME].setWidth(curveAxes.lineStyle().width());
-  m_pointStyles [AXIS_CURVE_NAME].setPaletteColor(curveAxes.pointStyle ().paletteColor());
-  m_pointStyles [AXIS_CURVE_NAME].setRadius(curveAxes.pointStyle().radius());
-  m_pointStyles [AXIS_CURVE_NAME].setLineWidth(curveAxes.pointStyle().lineWidth());
-  m_pointStyles [AXIS_CURVE_NAME].setShape(curveAxes.pointStyle().shape());
+  m_lineStyles [AXIS_CURVE_NAME] = curveAxes.lineStyle();
+  m_pointStyles [AXIS_CURVE_NAME] = curveAxes.pointStyle ();
 
   // Graph curves
   QStringList graphCurveNames = document.curvesGraphsNames();
@@ -27,13 +22,8 @@ DocumentModelCurveProperties::DocumentModelCurveProperties (const Document &docu
 
     const QString &graphCurveName = *itr;
     const Curve *graphCurve = document.curveForCurveName(graphCurveName);
-    m_lineStyles [graphCurveName].setCurveConnectAs (graphCurve->lineStyle().curveConnectAs());
-    m_lineStyles [graphCurveName].setPaletteColor(graphCurve->lineStyle().paletteColor());
-    m_lineStyles [graphCurveName].setWidth(graphCurve->lineStyle().width());
-    m_pointStyles [graphCurveName].setPaletteColor(graphCurve->pointStyle ().paletteColor());
-    m_pointStyles [graphCurveName].setRadius(graphCurve->pointStyle().radius());
-    m_pointStyles [graphCurveName].setLineWidth(graphCurve->pointStyle().lineWidth());
-    m_pointStyles [graphCurveName].setShape(graphCurve->pointStyle().shape());
+    m_lineStyles [graphCurveName] = graphCurve->lineStyle();
+    m_pointStyles [graphCurveName] = graphCurve->pointStyle ();
   }
 }
 

@@ -7,6 +7,7 @@
 #include "PointStyle.h"
 #include <QHash>
 
+// Lookup-tables by curve name
 typedef QHash<QString, LineStyle> LineStyles;
 typedef QHash<QString, PointStyle> PointStyles;
 
