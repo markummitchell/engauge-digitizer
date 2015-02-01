@@ -34,6 +34,7 @@ The code is architected with some important design patterns:
 
 - <b>Command pattern</b> provides Undo/Redo using commands and a command stack, and also provides robust data transfer
   between threads using commands and a FIFO command queue
+- <b>Factory pattern</b> generates points with the details encapsulated in the factory class
 - <b>Functor pattern</b> provides efficient processing of Curve and Point data from outside the Document class, without violating
   encapsulation of performed by generic iteration through the Curves with functors
 - <b>Model/View pattern</b> separates graphical object management in the GraphicsScene, and graphical presentation and interaction
