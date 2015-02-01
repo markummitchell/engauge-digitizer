@@ -55,9 +55,6 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator &cmdMediator();
 
-  /// Update the combobox that has the curve names.
-  void loadCurveNamesFromCmdMediator();
-
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
@@ -195,6 +192,7 @@ private:
   void createStatusBar();
   void createToolBars();
   void fileImport (const QString &fileName);
+  void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadFile (const QString &fileName);
   void loadImage (const QString &fileName,
                   const QImage &image);

@@ -9,6 +9,7 @@
 #include "CmdDelete.h"
 #include "CmdMediator.h"
 #include "Curve.h"
+#include "CurveIcon.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitAxis.xpm"
@@ -734,6 +735,7 @@ void MainWindow::createToolBars ()
   m_cmbCurve->setEnabled (false);
   m_cmbCurve->setMinimumWidth (180);
   m_cmbCurve->setStatusTip ("Select curve for new points.");
+  m_cmbCurve->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon); // Prevents awkward resizing when click on control to change selection
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
                                 "Select curve for any new points. Every point belongs to one curve."));
   connect (m_cmbCurve, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbCurve (int)));
@@ -768,6 +770,23 @@ void MainWindow::fileImport (const QString &fileName)
              image);
 }
 
+void MainWindow::loadCurveListFromCmdMediator ()
+{
+  m_cmbCurve->clear ();
+  QStringList curvesGraphsNames = m_cmdMediator->curvesGraphsNames ();
+  QStringList::iterator itr;
+  for (itr = curvesGraphsNames.begin (); itr != curvesGraphsNames.end (); itr++) {
+
+    QString curvesGraphName = *itr;
+
+    PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(curvesGraphName);
+    CurveIcon curveIcon (pointStyle);
+    m_cmbCurve->addItem (QIcon (curveIcon.pixmap()),
+                         curvesGraphName);
+  }
+  m_cmbCurve->setCurrentIndex (0);
+}
+
 void MainWindow::loadFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadFile fileName=" << fileName.toLatin1 ().data ();
@@ -794,7 +813,7 @@ void MainWindow::loadFile (const QString &fileName)
     connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
     connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
     connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
-    loadCurveNamesFromCmdMediator ();
+    loadCurveListFromCmdMediator ();
     setPixmap (m_cmdMediator->pixmap ());
     slotViewZoomFill();
 
@@ -845,7 +864,7 @@ void MainWindow::loadImage (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
-  loadCurveNamesFromCmdMediator ();
+  loadCurveListFromCmdMediator ();
   setPixmap (m_cmdMediator->pixmap ());
   slotViewZoomFill();
 
@@ -858,24 +877,6 @@ void MainWindow::loadImage (const QString &fileName,
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
 
   updateControls ();
-}
-
-void MainWindow::loadCurveNamesFromCmdMediator ()
-{
-  m_cmbCurve->clear ();
-  QStringList curvesGraphsNames = m_cmdMediator->curvesGraphsNames ();
-  QStringList::iterator itr;
-  for (itr = curvesGraphsNames.begin (); itr != curvesGraphsNames.end (); itr++) {
-
-    QString curvesGraphName = *itr;
-
-//    QImage img;
-//    QPixmap pixmap =
-//    QIcon icon;
-//    m_cmbCurve->addItem (icon, curvesGraphName);
-    m_cmbCurve->addItem (curvesGraphName);
-  }
-  m_cmbCurve->setCurrentIndex (0);
 }
 
 bool MainWindow::maybeSave()
@@ -2111,6 +2112,7 @@ void MainWindow::updateSettingsCurveProperties(const DocumentModelCurvePropertie
 
   m_scene->updateCurveProperties(modelCurveProperties);
   m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
+  loadCurveListFromCmdMediator();
 }
 
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
@@ -2118,7 +2120,7 @@ void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurves";
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
-  loadCurveNamesFromCmdMediator();
+  loadCurveListFromCmdMediator();
 }
 
 void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
