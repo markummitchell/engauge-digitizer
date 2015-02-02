@@ -41,6 +41,7 @@ class QToolBar;
 class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
+class ViewSegmentFilter;
 
 /// Main window consisting of menu, graphics scene, status bar and optional toolbars as a Single Document Interface
 class MainWindow : public QMainWindow
@@ -154,6 +155,7 @@ private slots:
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarDigitize ();
+  void slotViewToolBarViews ();
   void slotViewZoom16To1 ();
   void slotViewZoom8To1 ();
   void slotViewZoom4To1 ();
@@ -245,6 +247,7 @@ private:
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
   QAction *m_actionViewDigitize;
+  QAction *m_actionViewViews;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
@@ -307,6 +310,9 @@ private:
 
   QComboBox *m_cmbBackground;
   QToolBar *m_toolBackground;
+
+  ViewSegmentFilter *m_viewSegmentFilter;
+  QToolBar *m_toolViews;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
 

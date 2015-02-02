@@ -47,6 +47,7 @@
 #include <QGraphicsPixmapItem>
 #include <QImageReader>
 #include <QKeySequence>
+#include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -62,6 +63,7 @@
 #include <QXmlStreamWriter>
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
+#include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
 
 const QString EMPTY_FILENAME ("");
@@ -397,6 +399,14 @@ void MainWindow::createActionsView ()
                                           "Show or hide the digitize toolbar"));
   connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewToolBarDigitize()));
 
+  m_actionViewViews = new QAction (tr ("Views Toolbar"), this);
+  m_actionViewViews->setCheckable (true);
+  m_actionViewViews->setChecked (true);
+  m_actionViewViews->setStatusTip (tr ("Show or hide the views toolbar."));
+  m_actionViewViews->setWhatsThis (tr ("View Views ToolBar\n\n"
+                                       "Show or hide the views toolbar"));
+  connect (m_actionViewViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarViews()));
+
   m_actionViewBackgroundNone = new QAction (tr ("No Background"), this);
   m_actionViewBackgroundNone->setCheckable (true);
   m_actionViewBackgroundNone->setStatusTip (tr ("Do not show the image underneath the points."));
@@ -613,6 +623,7 @@ void MainWindow::createMenus()
   m_menuView = menuBar()->addMenu(tr("View"));
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
+  m_menuView->addAction (m_actionViewViews);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
   m_menuViewBackground = new QMenu (tr ("Background"));
   m_menuViewBackground->addAction (m_actionViewBackgroundNone);
@@ -714,9 +725,12 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
+  const int SEGMENT_FILTER_SIZE = 24;
+
+  // Background toolbar widgets
   m_cmbBackground = new QComboBox ();
   m_cmbBackground->setEnabled (false);
-  m_cmbBackground->setStatusTip ("Select background image");
+  m_cmbBackground->setStatusTip (tr ("Select background image"));
   m_cmbBackground->setWhatsThis (tr ("Selected Background\n\n"
                                      "Select background image:\n"
                                      "1) No background which highlights points\n"
@@ -727,19 +741,21 @@ void MainWindow::createToolBars ()
   m_cmbBackground->addItem ("Filtered image", QVariant (BACKGROUND_IMAGE_FILTERED));
   connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
 
+  // Background toolbar
   m_toolBackground = new QToolBar (tr ("Background"), this);
   m_toolBackground->addWidget (m_cmbBackground);
   addToolBar (m_toolBackground);
 
+  // Digitize toolbar widgets that are not created elsewhere
   m_cmbCurve = new QComboBox ();
   m_cmbCurve->setEnabled (false);
   m_cmbCurve->setMinimumWidth (180);
-  m_cmbCurve->setStatusTip ("Select curve for new points.");
-  m_cmbCurve->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon); // Prevents awkward resizing when click on control to change selection
+  m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
                                 "Select curve for any new points. Every point belongs to one curve."));
   connect (m_cmbCurve, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbCurve (int)));
 
+  // Digitize toolbar
   m_toolDigitize = new QToolBar (tr ("Drawing"), this);
   m_toolDigitize->addAction (m_actionDigitizeSelect);
   m_toolDigitize->insertSeparator (m_actionDigitizeAxis);
@@ -751,6 +767,22 @@ void MainWindow::createToolBars ()
   m_toolDigitize->addAction (m_actionDigitizeSegment);
   m_toolDigitize->addWidget (m_cmbCurve);
   addToolBar (m_toolDigitize);
+
+  // Views toolbar widgets
+  m_viewSegmentFilter = new ViewSegmentFilter();
+  m_viewSegmentFilter->setMinimumSize(SEGMENT_FILTER_SIZE, SEGMENT_FILTER_SIZE);
+  m_viewSegmentFilter->setMaximumSize(SEGMENT_FILTER_SIZE, SEGMENT_FILTER_SIZE);
+  m_viewSegmentFilter->setAutoFillBackground(true); // Allows control of background color using setPalette
+  m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Points mode"));
+  m_viewSegmentFilter->setWhatsThis (tr ("Segment Points Filter\n\n"
+                                         "View of filter for the current curve in Segment Points mode. This view cannot be changed, but the "
+                                         "filter settings can be quickly set using Color Picker mode, or more carefully set using the "
+                                         "Filter Settings dialog."));
+
+  // Views toolbar
+  m_toolViews = new QToolBar (tr ("Views"), this);
+  m_toolViews->addWidget (m_viewSegmentFilter);
+  addToolBar (m_toolViews);
 }
 
 void MainWindow::fileImport (const QString &fileName)
@@ -1052,6 +1084,12 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionViewDigitize->setChecked (viewDigitizeToolBar);
   m_toolDigitize->setVisible (viewDigitizeToolBar);
 
+  // Views toolbar visibility
+  bool viewViewsToolBar = settings.value ("viewViewsToolBar",
+                                          true).toBool ();
+  m_actionViewViews->setChecked (viewViewsToolBar);
+  m_toolViews->setVisible (viewViewsToolBar);
+
   // Statusbar visibility
   StatusBarMode statusBarMode = (StatusBarMode) settings.value ("viewStatusBar",
                                                                 false).toInt ();
@@ -1078,6 +1116,7 @@ void MainWindow::settingsWrite ()
   settings.setValue ("backgroundImage", m_cmbBackground->currentData().toInt());
   settings.setValue ("viewDigitizeToolBar", m_toolDigitize->isVisible ());
   settings.setValue ("viewStatusBar", m_statusBar->statusBarMode ());
+  settings.setValue ("viewViewsToolBar", m_toolViews->isVisible ());
   settings.endGroup ();
 }
 
@@ -1626,6 +1665,17 @@ void MainWindow::slotViewToolBarDigitize ()
   }
 }
 
+void MainWindow::slotViewToolBarViews ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarViews";
+
+  if (m_actionViewViews->isChecked ()) {
+    m_toolViews->show();
+  } else {
+    m_toolViews->hide();
+  }
+}
+
 void MainWindow::slotViewZoom(int zoom)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoom";
@@ -2031,6 +2081,7 @@ void MainWindow::updateControls ()
 
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
