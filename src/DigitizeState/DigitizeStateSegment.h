@@ -11,6 +11,7 @@ public:
   DigitizeStateSegment(DigitizeStateContext &context);
   virtual ~DigitizeStateSegment();
 
+  virtual QString activeCurve () const;
   virtual void begin();
   virtual QCursor cursor () const;
   virtual void end();

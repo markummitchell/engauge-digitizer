@@ -11,6 +11,7 @@ public:
   DigitizeStatePointMatch(DigitizeStateContext &context);
   virtual ~DigitizeStatePointMatch();
 
+  virtual QString activeCurve () const;
   virtual void begin();
   virtual QCursor cursor () const;
   virtual void end();

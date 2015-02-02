@@ -44,6 +44,11 @@ DigitizeStateContext::~DigitizeStateContext()
 {
 }
 
+QString DigitizeStateContext::activeCurve () const
+{
+  return m_states [m_currentState]->activeCurve ();
+}
+
 void DigitizeStateContext::appendNewCmd(QUndoCommand *cmd)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::appendNewCmd";

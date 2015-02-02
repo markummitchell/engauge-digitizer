@@ -2,6 +2,7 @@
 #define DIGITIZE_STATE_CONTEXT_H
 
 #include "DigitizeStateAbstractBase.h"
+#include "PointStyle.h"
 #include <QCursor>
 #include <QGraphicsView>
 #include <QObject>
@@ -23,6 +24,9 @@ public:
   DigitizeStateContext(MainWindow &mainWindow,
                        QGraphicsView &view);
   virtual ~DigitizeStateContext ();
+
+  /// Curve name for active Curve. This can include AXIS_CURVE_NAME, and empty string
+  QString activeCurve () const;
 
   /// Append just-created QUndoCommand to command stack. This is called from DigitizeStateAbstractBase subclasses
   void appendNewCmd(QUndoCommand *cmd);

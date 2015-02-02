@@ -1,6 +1,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateSegment.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -14,12 +15,18 @@ DigitizeStateSegment::~DigitizeStateSegment ()
 {
 }
 
+QString DigitizeStateSegment::activeCurve () const
+{
+  return context().mainWindow().selectedGraphCurve();
+}
+
 void DigitizeStateSegment::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateSegment::cursor() const

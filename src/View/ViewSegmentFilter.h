@@ -3,7 +3,8 @@
 
 #include <QLabel>
 
-/// Class that displays the current Segment Filter in a MainWindow toolbar. A gradient is displayed
+/// Class that displays the current Segment Filter in a MainWindow toolbar. A gradient is displayed. No border
+/// is drawn so the appearance is consistent with ViewPointStyle which would not work with a border.
 class ViewSegmentFilter : public QLabel
 {
 public:

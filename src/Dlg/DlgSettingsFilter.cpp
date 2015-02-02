@@ -227,7 +227,7 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
     m_cmbCurveName->addItem (curveName);
   }
 
-  loadForCurveName (mainWindow().selectedCurrentCurve());
+  loadForCurveName (mainWindow().selectedGraphCurve());
 
   enableOk (false); // Disable Ok button since there not yet any changes
 }

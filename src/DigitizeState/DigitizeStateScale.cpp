@@ -1,6 +1,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateScale.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -14,12 +15,18 @@ DigitizeStateScale::~DigitizeStateScale ()
 {
 }
 
+QString DigitizeStateScale::activeCurve () const
+{
+  return context().mainWindow().selectedGraphCurve();
+}
+
 void DigitizeStateScale::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateScale::cursor() const

@@ -9,7 +9,6 @@
 #include "CmdDelete.h"
 #include "CmdMediator.h"
 #include "Curve.h"
-#include "CurveIcon.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitAxis.xpm"
@@ -739,7 +738,7 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
-  const int VIEW_SIZE = 24;
+  const int VIEW_SIZE = 22;
 
   // Background toolbar widgets
   m_cmbBackground = new QComboBox ();
@@ -804,6 +803,7 @@ void MainWindow::createToolBars ()
   // Views toolbar
   m_toolViews = new QToolBar (tr ("Views"), this);
   m_toolViews->addWidget (m_viewPointStyle);
+  m_toolViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
   m_toolViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolViews);
 }
@@ -916,7 +916,7 @@ void MainWindow::loadImage (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
-  loadPointPreview ();
+  updateViewPointStyle ();
   setPixmap (m_cmdMediator->pixmap ());
   slotViewZoomFill();
 
@@ -929,11 +929,6 @@ void MainWindow::loadImage (const QString &fileName,
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
 
   updateControls ();
-}
-
-void MainWindow::loadPointPreview ()
-{
-  PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(selectedCurrentCurve ());
 }
 
 void MainWindow::loadToolTips()
@@ -1048,7 +1043,7 @@ GraphicsScene &MainWindow::scene ()
   return *m_scene;
 }
 
-QString MainWindow::selectedCurrentCurve () const
+QString MainWindow::selectedGraphCurve () const
 {
   return m_cmbCurve->currentText ();
 }
@@ -1231,6 +1226,7 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
   updateViewedPoints();
+  updateViewPointStyle();
 }
 
 void MainWindow::slotContextMenuEvent (QString pointIdentifier)
@@ -1603,7 +1599,7 @@ void MainWindow::slotSettingsCurveProperties ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
   m_dlgSettingsCurveProperties->load (*m_cmdMediator);
-  m_dlgSettingsCurveProperties->setCurveName (selectedCurrentCurve ());
+  m_dlgSettingsCurveProperties->setCurveName (selectedGraphCurve ());
   m_dlgSettingsCurveProperties->show ();
 }
 
@@ -2203,9 +2199,9 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
   filter.filterImage (imageUnfiltered,
                       imageFiltered,
-                      cmdMediator().document().modelFilter().filterMode(selectedCurrentCurve ()),
-                      cmdMediator().document().modelFilter().low(selectedCurrentCurve ()),
-                      cmdMediator().document().modelFilter().high(selectedCurrentCurve ()),
+                      cmdMediator().document().modelFilter().filterMode(selectedGraphCurve ()),
+                      cmdMediator().document().modelFilter().low(selectedGraphCurve ()),
+                      cmdMediator().document().modelFilter().high(selectedGraphCurve ()),
                       rgbBackground);
 
   m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
@@ -2235,7 +2231,7 @@ void MainWindow::updateSettingsCurveProperties(const DocumentModelCurvePropertie
 
   m_scene->updateCurveProperties(modelCurveProperties);
   m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
-  loadPointPreview();
+  updateViewPointStyle();
 }
 
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
@@ -2244,7 +2240,7 @@ void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
-  loadPointPreview();
+  updateViewPointStyle();
 }
 
 void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
@@ -2308,7 +2304,7 @@ void MainWindow::updateViewedPoints ()
 
   } else if (m_actionViewPointsCurve->isChecked ()) {
 
-    m_scene->showPoints (true, false, selectedCurrentCurve ());
+    m_scene->showPoints (true, false, selectedGraphCurve ());
 
   } else if (m_actionViewPointsNone->isChecked ()) {
 
@@ -2316,6 +2312,27 @@ void MainWindow::updateViewedPoints ()
 
   } else {
     Q_ASSERT (false);
+  }
+}
+
+void MainWindow::updateViewPointStyle ()
+{
+  QString activeCurve = m_digitizeStateContext->activeCurve ();
+
+  updateViewPointStyle (activeCurve);
+}
+
+void MainWindow::updateViewPointStyle (const QString &activeCurve)
+{
+  if (activeCurve.isEmpty ()) {
+
+    m_viewPointStyle->unsetPointStyle ();
+
+  } else {
+
+    PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(activeCurve);
+    m_viewPointStyle->setPointStyle (pointStyle);
+
   }
 }
 

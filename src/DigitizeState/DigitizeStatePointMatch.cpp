@@ -17,12 +17,18 @@ DigitizeStatePointMatch::~DigitizeStatePointMatch ()
 {
 }
 
+QString DigitizeStatePointMatch::activeCurve () const
+{
+  return context().mainWindow().selectedGraphCurve();
+}
+
 void DigitizeStatePointMatch::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStatePointMatch::cursor() const
@@ -54,7 +60,7 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
   // Create command to add point
   QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
                                             context ().cmdMediator ().document (),
-                                            context ().mainWindow().selectedCurrentCurve(),
+                                            context ().mainWindow().selectedGraphCurve(),
                                             posScreen);
   context().appendNewCmd(cmd);
 }

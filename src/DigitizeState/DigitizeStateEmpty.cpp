@@ -1,7 +1,8 @@
 #include "DigitizeStateEmpty.h"
 #include "DigitizeStateContext.h"
-#include <QCursor>
 #include "Logger.h"
+#include "MainWindow.h"
+#include <QCursor>
 
 DigitizeStateEmpty::DigitizeStateEmpty (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -12,11 +13,17 @@ DigitizeStateEmpty::~DigitizeStateEmpty ()
 {
 }
 
+QString DigitizeStateEmpty::activeCurve () const
+{
+  return "";
+}
+
 void DigitizeStateEmpty::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
   setCursor();
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateEmpty::cursor() const

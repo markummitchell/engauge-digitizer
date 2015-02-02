@@ -24,12 +24,18 @@ DigitizeStateAxis::~DigitizeStateAxis ()
 {
 }
 
+QString DigitizeStateAxis::activeCurve () const
+{
+  return AXIS_CURVE_NAME;
+}
+
 void DigitizeStateAxis::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateAxis::cursor() const

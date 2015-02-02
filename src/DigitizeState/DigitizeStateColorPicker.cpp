@@ -1,6 +1,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateColorPicker.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QBitmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
@@ -15,12 +16,18 @@ DigitizeStateColorPicker::~DigitizeStateColorPicker ()
 {
 }
 
+QString DigitizeStateColorPicker::activeCurve () const
+{
+  return context().mainWindow().selectedGraphCurve();
+}
+
 void DigitizeStateColorPicker::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateColorPicker::cursor() const

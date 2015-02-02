@@ -26,6 +26,11 @@ DigitizeStateSelect::~DigitizeStateSelect ()
 {
 }
 
+QString DigitizeStateSelect::activeCurve () const
+{
+  return context().mainWindow().selectedGraphCurve();
+}
+
 void DigitizeStateSelect::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::begin";
@@ -34,6 +39,7 @@ void DigitizeStateSelect::begin ()
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
   setCursorForPoints ();
+  context().mainWindow().updateViewPointStyle(activeCurve ());
 }
 
 QCursor DigitizeStateSelect::cursor() const

@@ -1,6 +1,7 @@
 #ifndef DIGITIZE_STATE_ABSTRACT_BASE_H
 #define DIGITIZE_STATE_ABSTRACT_BASE_H
 
+#include "PointStyle.h"
 #include <QCursor>
 #include <QPointF>
 
@@ -29,6 +30,9 @@ public:
   /// Single constructor.
   DigitizeStateAbstractBase(DigitizeStateContext &context);
   virtual ~DigitizeStateAbstractBase ();
+
+  /// Name of the active Curve. This can include AXIS_CURVE_NAME
+  virtual QString activeCurve () const = 0;
 
   /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state
   virtual void begin() = 0;

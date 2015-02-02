@@ -45,7 +45,6 @@ HEADERS  += \
     Curve/CurveConnectAs.h \
     Curve/CurveConstants.h \
     Curve/CurveFilter.h \
-    Curve/CurveIcon.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
     include/DataKey.h \
@@ -171,7 +170,6 @@ SOURCES += \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurveFilter.cpp \
-    Curve/CurveIcon.cpp \
     Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \

@@ -14,12 +14,14 @@ public:
   DigitizeStateAxis(DigitizeStateContext &context);
   virtual ~DigitizeStateAxis();
 
+  virtual QString activeCurve () const;
   virtual void begin();
   virtual QCursor cursor () const;
   virtual void end();
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
+
 private:
   DigitizeStateAxis();
 };
