@@ -14,8 +14,8 @@ extern const QString SETTINGS_POS;
 extern const QString SETTINGS_SIZE;
 extern const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR;
 extern const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR;
+extern const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR;
 extern const QString SETTINGS_VIEW_STATUS_BAR;
 extern const QString SETTINGS_VIEW_TOOL_TIPS;
-extern const QString SETTINGS_VIEW_VIEWS_TOOLBAR;
 
 #endif // SETTINGS_H

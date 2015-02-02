@@ -160,7 +160,7 @@ private slots:
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarDigitize ();
-  void slotViewToolBarViews ();
+  void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
   void slotViewZoom8To1 ();
@@ -255,7 +255,7 @@ private:
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
   QAction *m_actionViewDigitize;
-  QAction *m_actionViewViews;
+  QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
@@ -322,7 +322,7 @@ private:
 
   ViewPointStyle *m_viewPointStyle;
   ViewSegmentFilter *m_viewSegmentFilter;
-  QToolBar *m_toolViews;
+  QToolBar *m_toolSettingsViews;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
 

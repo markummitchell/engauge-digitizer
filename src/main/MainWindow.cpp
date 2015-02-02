@@ -67,6 +67,14 @@
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
 
+// These constants are used for the menu item text AND for tooltip text
+const QString DIGITIZE_ACTION_AXIS_POINT (QObject::tr ("Axis Point Tool"));
+const QString DIGITIZE_ACTION_COLOR_PICKER (QObject::tr ("Color Picker Tool"));
+const QString DIGITIZE_ACTION_CURVE_POINT (QObject::tr ("Curve Point Tool"));
+const QString DIGITIZE_ACTION_POINT_MATCH (QObject::tr ("Point Match Tool"));
+const QString DIGITIZE_ACTION_SEGMENT_POINTS (QObject::tr ("Segment Points Tool"));
+const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
+
 const QString EMPTY_FILENAME ("");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const QString CSV_FILENAME_EXTENSION ("csv");
@@ -138,8 +146,6 @@ void MainWindow::createActions()
 
 void MainWindow::createActionsDigitize ()
 {
-  const QString IGNORED_TEXT; // Tooltip text is set later by loadToolTips
-
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
   QPixmap pixmapColorPicker (DigitColorPicker_xpm);
@@ -154,14 +160,14 @@ void MainWindow::createActionsDigitize ()
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
 
-  m_actionDigitizeSelect = new QAction (iconSelect, IGNORED_TEXT, this);
+  m_actionDigitizeSelect = new QAction (iconSelect, DIGITIZE_ACTION_SELECT, this);
   m_actionDigitizeSelect->setCheckable (true);
   m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
   m_actionDigitizeSelect->setWhatsThis (tr ("Select\n\n"
                                             "Select points on the screen."));
   connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
 
-  m_actionDigitizeAxis = new QAction (iconAxis, IGNORED_TEXT, this);
+  m_actionDigitizeAxis = new QAction (iconAxis, DIGITIZE_ACTION_AXIS_POINT, this);
   m_actionDigitizeAxis->setCheckable (true);
   m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
   m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
@@ -171,7 +177,7 @@ void MainWindow::createActionsDigitize ()
                                           "the graph coordinates."));
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
 
-  m_actionDigitizeCurve = new QAction (iconCurve, IGNORED_TEXT, this);
+  m_actionDigitizeCurve = new QAction (iconCurve, DIGITIZE_ACTION_CURVE_POINT, this);
   m_actionDigitizeCurve->setCheckable (true);
   m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
   m_actionDigitizeCurve->setWhatsThis (tr ("Digitize Curve Point\n\n"
@@ -181,7 +187,7 @@ void MainWindow::createActionsDigitize ()
                                            "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
 
-  m_actionDigitizePointMatch = new QAction (iconPointMatch, IGNORED_TEXT, this);
+  m_actionDigitizePointMatch = new QAction (iconPointMatch, DIGITIZE_ACTION_POINT_MATCH, this);
   m_actionDigitizePointMatch->setCheckable (true);
   m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
   m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
@@ -190,7 +196,7 @@ void MainWindow::createActionsDigitize ()
                                                 "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
 
-  m_actionDigitizeColorPicker = new QAction (iconColorPicker, IGNORED_TEXT, this);
+  m_actionDigitizeColorPicker = new QAction (iconColorPicker, DIGITIZE_ACTION_COLOR_PICKER, this);
   m_actionDigitizeColorPicker->setCheckable (true);
   m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Points mode."));
   m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Points filtering\n\n"
@@ -199,7 +205,7 @@ void MainWindow::createActionsDigitize ()
                                                  "while in Segment Points mode."));
   connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
-  m_actionDigitizeSegment = new QAction (iconSegment, IGNORED_TEXT, this);
+  m_actionDigitizeSegment = new QAction (iconSegment, DIGITIZE_ACTION_SEGMENT_POINTS, this);
   m_actionDigitizeSegment->setCheckable (true);
   m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
   m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
@@ -394,21 +400,22 @@ void MainWindow::createActionsView ()
                                             "Show or hide the background toolbar"));
   connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewToolBarBackground ()));
 
-  m_actionViewDigitize = new QAction (tr ("Digitize Toolbar"), this);
+  m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
   m_actionViewDigitize->setChecked (true);
-  m_actionViewDigitize->setStatusTip (tr ("Show or hide the digitize toolbar."));
-  m_actionViewDigitize->setWhatsThis (tr ("View Digitize ToolBar\n\n"
-                                          "Show or hide the digitize toolbar"));
+  m_actionViewDigitize->setStatusTip (tr ("Show or hide the digitizing tools toolbar."));
+  m_actionViewDigitize->setWhatsThis (tr ("View Digitizing Tools ToolBar\n\n"
+                                          "Show or hide the digitizing tools toolbar"));
   connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewToolBarDigitize()));
 
-  m_actionViewViews = new QAction (tr ("Views Toolbar"), this);
-  m_actionViewViews->setCheckable (true);
-  m_actionViewViews->setChecked (true);
-  m_actionViewViews->setStatusTip (tr ("Show or hide the views toolbar."));
-  m_actionViewViews->setWhatsThis (tr ("View Views ToolBar\n\n"
-                                       "Show or hide the views toolbar"));
-  connect (m_actionViewViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarViews()));
+  m_actionViewSettingsViews = new QAction (tr ("Settings Views Toolbar"), this);
+  m_actionViewSettingsViews->setCheckable (true);
+  m_actionViewSettingsViews->setChecked (true);
+  m_actionViewSettingsViews->setStatusTip (tr ("Show or hide the settings views toolbar."));
+  m_actionViewSettingsViews->setWhatsThis (tr ("View Settings Views ToolBar\n\n"
+                                               "Show or hide the settings views toolbar. These views graphically show the "
+                                               "most important settings."));
+  connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
 
   m_actionViewToolTips = new QAction (tr ("View Tool Tips"), this);
   m_actionViewToolTips->setCheckable (true);
@@ -634,7 +641,7 @@ void MainWindow::createMenus()
   m_menuView = menuBar()->addMenu(tr("View"));
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
-  m_menuView->addAction (m_actionViewViews);
+  m_menuView->addAction (m_actionViewSettingsViews);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
@@ -800,12 +807,12 @@ void MainWindow::createToolBars ()
                                          "displayed in this toolbar. To changed the filter settings, "
                                          "use the Color Picker mode or the Filter Settings dialog."));
 
-  // Views toolbar
-  m_toolViews = new QToolBar (tr ("Views"), this);
-  m_toolViews->addWidget (m_viewPointStyle);
-  m_toolViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
-  m_toolViews->addWidget (m_viewSegmentFilter);
-  addToolBar (m_toolViews);
+  // Settings views toolbar
+  m_toolSettingsViews = new QToolBar (tr ("Views"), this);
+  m_toolSettingsViews->addWidget (m_viewPointStyle);
+  m_toolSettingsViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
+  m_toolSettingsViews->addWidget (m_viewSegmentFilter);
+  addToolBar (m_toolSettingsViews);
 }
 
 void MainWindow::fileImport (const QString &fileName)
@@ -936,12 +943,12 @@ void MainWindow::loadToolTips()
   if (m_actionViewToolTips->isChecked ()) {
 
     // Show tool tips
-    m_actionDigitizeSelect->setToolTip (tr ("Select Tool"));
-    m_actionDigitizeAxis->setToolTip (tr ("Axis Point Tool"));
-    m_actionDigitizeCurve->setToolTip (tr ("Curve Point Tool"));
-    m_actionDigitizePointMatch->setToolTip (tr ("Point Match Tool"));
-    m_actionDigitizeColorPicker->setToolTip (tr ("Color Picker Tool"));
-    m_actionDigitizeSegment->setToolTip (tr ("Segment Points Tool"));
+    m_actionDigitizeSelect->setToolTip (DIGITIZE_ACTION_SELECT);
+    m_actionDigitizeAxis->setToolTip (DIGITIZE_ACTION_AXIS_POINT);
+    m_actionDigitizeCurve->setToolTip (DIGITIZE_ACTION_CURVE_POINT);
+    m_actionDigitizePointMatch->setToolTip (DIGITIZE_ACTION_POINT_MATCH);
+    m_actionDigitizeColorPicker->setToolTip (DIGITIZE_ACTION_COLOR_PICKER);
+    m_actionDigitizeSegment->setToolTip (DIGITIZE_ACTION_SEGMENT_POINTS);
     m_cmbBackground->setToolTip (tr ("Background image."));
     m_cmbCurve->setToolTip (tr ("Currently selected curve."));
     m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve."));
@@ -1138,10 +1145,10 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_toolDigitize->setVisible (viewDigitizeToolBar);
 
   // Views toolbar visibility
-  bool viewViewsToolBar = settings.value (SETTINGS_VIEW_VIEWS_TOOLBAR,
-                                          true).toBool ();
-  m_actionViewViews->setChecked (viewViewsToolBar);
-  m_toolViews->setVisible (viewViewsToolBar);
+  bool viewSettingsViewsToolBar = settings.value (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR,
+                                                  true).toBool ();
+  m_actionViewSettingsViews->setChecked (viewSettingsViewsToolBar);
+  m_toolSettingsViews->setVisible (viewSettingsViewsToolBar);
 
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
@@ -1175,7 +1182,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
-  settings.setValue (SETTINGS_VIEW_VIEWS_TOOLBAR, m_actionViewViews->isChecked ());
+  settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.endGroup ();
 }
@@ -1726,14 +1733,14 @@ void MainWindow::slotViewToolBarDigitize ()
   }
 }
 
-void MainWindow::slotViewToolBarViews ()
+void MainWindow::slotViewToolBarSettingsViews ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarViews";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarSettingsViews";
 
-  if (m_actionViewViews->isChecked ()) {
-    m_toolViews->show();
+  if (m_actionViewSettingsViews->isChecked ()) {
+    m_toolSettingsViews->show();
   } else {
-    m_toolViews->hide();
+    m_toolSettingsViews->hide();
   }
 }
 
@@ -2149,7 +2156,7 @@ void MainWindow::updateControls ()
 
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
-  m_actionViewViews->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
