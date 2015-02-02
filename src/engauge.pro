@@ -122,6 +122,7 @@ HEADERS  += \
     Segment/Segment.h \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
+    Settings/Settings.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
@@ -234,6 +235,7 @@ SOURCES += \
     Segment/Segment.cpp \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
+    Settings/Settings.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
@@ -278,6 +280,7 @@ INCLUDEPATH += Callback \
                Mime \
                Plot \
                Point \
+               Settings \
                StatusBar \
                Transformation \
                util \

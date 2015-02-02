@@ -61,6 +61,7 @@
 #include <QVBoxLayout>
 #include <QWhatsThis>
 #include <QXmlStreamWriter>
+#include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
 #include "ViewPointStyle.h"
@@ -138,6 +139,8 @@ void MainWindow::createActions()
 
 void MainWindow::createActionsDigitize ()
 {
+  const QString IGNORED_TEXT; // Tooltip text is set later by loadToolTips
+
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
   QPixmap pixmapColorPicker (DigitColorPicker_xpm);
@@ -152,14 +155,14 @@ void MainWindow::createActionsDigitize ()
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
 
-  m_actionDigitizeSelect = new QAction (iconSelect, tr ("Select Tool"), this);
+  m_actionDigitizeSelect = new QAction (iconSelect, IGNORED_TEXT, this);
   m_actionDigitizeSelect->setCheckable (true);
   m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
   m_actionDigitizeSelect->setWhatsThis (tr ("Select\n\n"
                                             "Select points on the screen."));
   connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
 
-  m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point Tool"), this);
+  m_actionDigitizeAxis = new QAction (iconAxis, IGNORED_TEXT, this);
   m_actionDigitizeAxis->setCheckable (true);
   m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
   m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
@@ -169,7 +172,7 @@ void MainWindow::createActionsDigitize ()
                                           "the graph coordinates."));
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
 
-  m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
+  m_actionDigitizeCurve = new QAction (iconCurve, IGNORED_TEXT, this);
   m_actionDigitizeCurve->setCheckable (true);
   m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
   m_actionDigitizeCurve->setWhatsThis (tr ("Digitize Curve Point\n\n"
@@ -179,7 +182,7 @@ void MainWindow::createActionsDigitize ()
                                            "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
 
-  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match Tool"), this);
+  m_actionDigitizePointMatch = new QAction (iconPointMatch, IGNORED_TEXT, this);
   m_actionDigitizePointMatch->setCheckable (true);
   m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
   m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
@@ -188,7 +191,7 @@ void MainWindow::createActionsDigitize ()
                                                 "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
 
-  m_actionDigitizeColorPicker = new QAction (iconColorPicker, tr ("Color Picker Tool"), this);
+  m_actionDigitizeColorPicker = new QAction (iconColorPicker, IGNORED_TEXT, this);
   m_actionDigitizeColorPicker->setCheckable (true);
   m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Points mode."));
   m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Points filtering\n\n"
@@ -197,7 +200,7 @@ void MainWindow::createActionsDigitize ()
                                                  "while in Segment Points mode."));
   connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
-  m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Points Tool"), this);
+  m_actionDigitizeSegment = new QAction (iconSegment, IGNORED_TEXT, this);
   m_actionDigitizeSegment->setCheckable (true);
   m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
   m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
@@ -407,6 +410,14 @@ void MainWindow::createActionsView ()
   m_actionViewViews->setWhatsThis (tr ("View Views ToolBar\n\n"
                                        "Show or hide the views toolbar"));
   connect (m_actionViewViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarViews()));
+
+  m_actionViewToolTips = new QAction (tr ("View Tool Tips"), this);
+  m_actionViewToolTips->setCheckable (true);
+  m_actionViewToolTips->setChecked (true);
+  m_actionViewToolTips->setStatusTip (tr ("Show or hide the tool tips."));
+  m_actionViewToolTips->setWhatsThis (tr ("View Tool Tips\n\n"
+                                          "Show or hide the tool tips"));
+  connect (m_actionViewToolTips, SIGNAL (triggered ()), this, SLOT (slotViewToolTips()));
 
   m_actionViewBackgroundNone = new QAction (tr ("No Background"), this);
   m_actionViewBackgroundNone->setCheckable (true);
@@ -625,6 +636,8 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewViews);
+  m_menuView->insertSeparator (m_actionViewToolTips);
+  m_menuView->addAction (m_actionViewToolTips);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
   m_menuViewBackground = new QMenu (tr ("Background"));
   m_menuViewBackground->addAction (m_actionViewBackgroundNone);
@@ -751,7 +764,6 @@ void MainWindow::createToolBars ()
   m_cmbCurve = new QComboBox ();
   m_cmbCurve->setEnabled (false);
   m_cmbCurve->setMinimumWidth (180);
-  m_cmbCurve->setToolTip (tr ("Currently selected curve.")); // Other widgets have hover text so this does also for consistency
   m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
                                 "Select curve for any new points. Every point belongs to one curve."));
@@ -774,7 +786,6 @@ void MainWindow::createToolBars ()
   m_viewPointStyle = new ViewPointStyle();
   m_viewPointStyle->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
   m_viewPointStyle->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve.")); // Other widgets have hover text so this does also for consistency
   m_viewPointStyle->setStatusTip (tr ("Points style for the currently selected curve"));
   m_viewPointStyle->setWhatsThis (tr ("Points Style\n\n"
                                       "Points style for the currently selected curve. The points style is only "
@@ -784,7 +795,6 @@ void MainWindow::createToolBars ()
   m_viewSegmentFilter = new ViewSegmentFilter();
   m_viewSegmentFilter->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
   m_viewSegmentFilter->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewSegmentFilter->setToolTip (tr ("Segment Points filter for currently selected curve.")); // Other widgets have hover text so this does also for consistency
   m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Points mode"));
   m_viewSegmentFilter->setWhatsThis (tr ("Segment Points Filter\n\n"
                                          "View of filter for the current curve in Segment Points mode. The filter settings are only "
@@ -926,6 +936,39 @@ void MainWindow::loadPointPreview ()
   PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(selectedCurrentCurve ());
 }
 
+void MainWindow::loadToolTips()
+{
+  if (m_actionViewToolTips->isChecked ()) {
+
+    // Show tool tips
+    m_actionDigitizeSelect->setToolTip (tr ("Select Tool"));
+    m_actionDigitizeAxis->setToolTip (tr ("Axis Point Tool"));
+    m_actionDigitizeCurve->setToolTip (tr ("Curve Point Tool"));
+    m_actionDigitizePointMatch->setToolTip (tr ("Point Match Tool"));
+    m_actionDigitizeColorPicker->setToolTip (tr ("Color Picker Tool"));
+    m_actionDigitizeSegment->setToolTip (tr ("Segment Points Tool"));
+    m_cmbBackground->setToolTip (tr ("Background image."));
+    m_cmbCurve->setToolTip (tr ("Currently selected curve."));
+    m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve."));
+    m_viewSegmentFilter->setToolTip (tr ("Segment Points filter for currently selected curve."));
+
+  } else {
+
+    // Remove any previous tool tips
+    m_actionDigitizeSelect->setToolTip ("");
+    m_actionDigitizeAxis->setToolTip ("");
+    m_actionDigitizeCurve->setToolTip ("");
+    m_actionDigitizePointMatch->setToolTip ("");
+    m_actionDigitizeColorPicker->setToolTip ("");
+    m_actionDigitizeSegment->setToolTip ("");
+    m_cmbBackground->setToolTip ("");
+    m_cmbCurve->setToolTip ("");
+    m_viewPointStyle->setToolTip ("");
+    m_viewSegmentFilter->setToolTip ("");
+
+  }
+}
+
 bool MainWindow::maybeSave()
 {
   if (m_cmdMediator != 0) {
@@ -1059,7 +1102,7 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
 
 void MainWindow::settingsRead ()
 {
-  QSettings settings ("Engauge", "Digitizer");
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
 
   settingsReadEnvironment (settings);
   settingsReadMainWindow (settings);
@@ -1067,46 +1110,52 @@ void MainWindow::settingsRead ()
 
 void MainWindow::settingsReadEnvironment (QSettings &settings)
 {
-  settings.beginGroup ("Environment");
-  QDir::setCurrent (settings.value ("currentDirectory",
+  settings.beginGroup (SETTINGS_GROUP_ENVIRONMENT);
+  QDir::setCurrent (settings.value (SETTINGS_CURRENT_DIRECTORY,
                                     QDir::currentPath ()).toString ());
   settings.endGroup ();
 }
 
 void MainWindow::settingsReadMainWindow (QSettings &settings)
 {
-  settings.beginGroup("MainWindow");
+  settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
   // Window geometry
-  resize (settings.value ("size",
+  resize (settings.value (SETTINGS_SIZE,
                           QSize (400, 400)).toSize ());
-  move (settings.value ("pos",
+  move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 
   // Background toolbar visibility
-  bool viewBackgroundToolBar = settings.value ("viewBackgroundToolBar",
+  bool viewBackgroundToolBar = settings.value (SETTINGS_VIEW_BACKGROUND_TOOLBAR,
                                                true).toBool ();
   m_actionViewBackground->setChecked (viewBackgroundToolBar);
   m_toolBackground->setVisible (viewBackgroundToolBar);
-  BackgroundImage backgroundImage = (BackgroundImage) settings.value ("backgroundImage",
+  BackgroundImage backgroundImage = (BackgroundImage) settings.value (SETTINGS_BACKGROUND_IMAGE,
                                                                       BACKGROUND_IMAGE_FILTERED).toInt ();
   int indexBackground = m_cmbBackground->findData (QVariant (backgroundImage));
   m_cmbBackground->setCurrentIndex (indexBackground);
 
   // Digitize toolbar visibility
-  bool viewDigitizeToolBar = settings.value ("viewDigitizeToolBar",
+  bool viewDigitizeToolBar = settings.value (SETTINGS_VIEW_DIGITIZE_TOOLBAR,
                                              true).toBool ();
   m_actionViewDigitize->setChecked (viewDigitizeToolBar);
   m_toolDigitize->setVisible (viewDigitizeToolBar);
 
   // Views toolbar visibility
-  bool viewViewsToolBar = settings.value ("viewViewsToolBar",
+  bool viewViewsToolBar = settings.value (SETTINGS_VIEW_VIEWS_TOOLBAR,
                                           true).toBool ();
   m_actionViewViews->setChecked (viewViewsToolBar);
   m_toolViews->setVisible (viewViewsToolBar);
 
+  // Tooltips visibility
+  bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
+                                      true).toBool ();
+  m_actionViewToolTips->setChecked (viewToolTips);
+  loadToolTips ();
+
   // Statusbar visibility
-  StatusBarMode statusBarMode = (StatusBarMode) settings.value ("viewStatusBar",
+  StatusBarMode statusBarMode = (StatusBarMode) settings.value (SETTINGS_VIEW_STATUS_BAR,
                                                                 false).toInt ();
   m_statusBar->setStatusBarMode (statusBarMode);
   m_actionStatusNever->setChecked (statusBarMode == STATUS_BAR_MODE_NEVER);
@@ -1118,20 +1167,21 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
 void MainWindow::settingsWrite ()
 {
-  QSettings settings ("Engauge", "Digitizer");
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
 
-  settings.beginGroup ("Environment");
-  settings.setValue ("currentDirectory", QDir::currentPath ());
+  settings.beginGroup (SETTINGS_GROUP_ENVIRONMENT);
+  settings.setValue (SETTINGS_CURRENT_DIRECTORY, QDir::currentPath ());
   settings.endGroup ();
 
-  settings.beginGroup ("MainWindow");
-  settings.setValue ("size", size ());
-  settings.setValue ("pos", pos ());
-  settings.setValue ("viewBackground", m_toolBackground->isVisible());
-  settings.setValue ("backgroundImage", m_cmbBackground->currentData().toInt());
-  settings.setValue ("viewDigitizeToolBar", m_toolDigitize->isVisible ());
-  settings.setValue ("viewStatusBar", m_statusBar->statusBarMode ());
-  settings.setValue ("viewViewsToolBar", m_toolViews->isVisible ());
+  settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
+  settings.setValue (SETTINGS_SIZE, size ());
+  settings.setValue (SETTINGS_POS, pos ());
+  settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
+  settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
+  settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
+  settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
+  settings.setValue (SETTINGS_VIEW_VIEWS_TOOLBAR, m_actionViewViews->isChecked ());
+  settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.endGroup ();
 }
 
@@ -1689,6 +1739,13 @@ void MainWindow::slotViewToolBarViews ()
   } else {
     m_toolViews->hide();
   }
+}
+
+void MainWindow::slotViewToolTips ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolTips";
+
+  loadToolTips();
 }
 
 void MainWindow::slotViewZoom(int zoom)

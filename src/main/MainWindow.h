@@ -157,6 +157,7 @@ private slots:
   void slotViewToolBarBackground ();
   void slotViewToolBarDigitize ();
   void slotViewToolBarViews ();
+  void slotViewToolTips ();
   void slotViewZoom16To1 ();
   void slotViewZoom8To1 ();
   void slotViewZoom4To1 ();
@@ -200,6 +201,7 @@ private:
   void loadImage (const QString &fileName,
                   const QImage &image);
   void loadPointPreview ();
+  void loadToolTips ();
   bool maybeSave();
   void removePixmaps();
   bool saveFile(const QString &fileName);
@@ -250,6 +252,7 @@ private:
   QAction *m_actionViewBackground;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewViews;
+  QAction *m_actionViewToolTips;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
