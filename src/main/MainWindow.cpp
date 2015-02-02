@@ -923,7 +923,7 @@ void MainWindow::loadImage (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
-  updateViewPointStyle ();
+  updateViewsOfSettings ();
   setPixmap (m_cmdMediator->pixmap ());
   slotViewZoomFill();
 
@@ -1233,7 +1233,7 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
   updateViewedPoints();
-  updateViewPointStyle();
+  updateViewsOfSettings();
 }
 
 void MainWindow::slotContextMenuEvent (QString pointIdentifier)
@@ -2238,7 +2238,7 @@ void MainWindow::updateSettingsCurveProperties(const DocumentModelCurvePropertie
 
   m_scene->updateCurveProperties(modelCurveProperties);
   m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
-  updateViewPointStyle();
+  updateViewsOfSettings();
 }
 
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
@@ -2247,7 +2247,7 @@ void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
-  updateViewPointStyle();
+  updateViewsOfSettings();
 }
 
 void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
@@ -2322,23 +2322,28 @@ void MainWindow::updateViewedPoints ()
   }
 }
 
-void MainWindow::updateViewPointStyle ()
+void MainWindow::updateViewsOfSettings ()
 {
   QString activeCurve = m_digitizeStateContext->activeCurve ();
 
-  updateViewPointStyle (activeCurve);
+  updateViewsOfSettings (activeCurve);
 }
 
-void MainWindow::updateViewPointStyle (const QString &activeCurve)
+void MainWindow::updateViewsOfSettings (const QString &activeCurve)
 {
   if (activeCurve.isEmpty ()) {
 
     m_viewPointStyle->unsetPointStyle ();
+    m_viewSegmentFilter->unsetCurveFilter ();
+
 
   } else {
 
     PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(activeCurve);
     m_viewPointStyle->setPointStyle (pointStyle);
+
+    CurveFilter curveFilter = m_cmdMediator->document().modelFilter().curveFilter(activeCurve);
+    m_viewSegmentFilter->setCurveFilter (curveFilter);
 
   }
 }

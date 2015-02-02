@@ -23,7 +23,7 @@ void DigitizeStateEmpty::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
   setCursor();
-  context().mainWindow().updateViewPointStyle(activeCurve ());
+  context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
 QCursor DigitizeStateEmpty::cursor() const

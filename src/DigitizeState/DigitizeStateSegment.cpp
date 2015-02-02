@@ -26,7 +26,7 @@ void DigitizeStateSegment::begin ()
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
-  context().mainWindow().updateViewPointStyle(activeCurve ());
+  context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
 QCursor DigitizeStateSegment::cursor() const

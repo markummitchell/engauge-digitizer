@@ -28,7 +28,7 @@ void DigitizeStatePointMatch::begin ()
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
-  context().mainWindow().updateViewPointStyle(activeCurve ());
+  context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
 QCursor DigitizeStatePointMatch::cursor() const

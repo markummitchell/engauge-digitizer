@@ -102,9 +102,8 @@ public:
   /// Update with new segments properties.
   void updateSettingsSegments(const DocumentModelSegments &modelSegments);
 
-  /// Update the point style view. The public version of this method is called by DigitizeStateAbstractBase class
-  /// which provides curve name
-  void updateViewPointStyle (const QString &activeCurve);
+  /// Update curve-specific view of settings. Private version gets active curve name from DigitizeStateContext
+  void updateViewsOfSettings (const QString &activeCurve);
 
   /// View for the QImage and QGraphicsItems, without const.
   GraphicsView &view ();
@@ -220,7 +219,7 @@ private:
   void updateImages (const QPixmap &pixmap);
   void updateViewedBackground();
   void updateViewedPoints ();
-  void updateViewPointStyle (); // Private version gets active curve name from DigitizeContext
+  void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
 
   QString m_engaugeFile;
   QString m_currentFile;

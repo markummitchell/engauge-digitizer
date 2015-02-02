@@ -48,6 +48,12 @@ DocumentModelFilter &DocumentModelFilter::operator=(const DocumentModelFilter &o
   return *this;
 }
 
+const CurveFilter DocumentModelFilter::curveFilter (const QString &curveName) const
+{
+  Q_ASSERT (m_curveFilters.contains (curveName));
+  return m_curveFilters [curveName];
+}
+
 const CurveFilters &DocumentModelFilter::curveFilters() const
 {
   return m_curveFilters;

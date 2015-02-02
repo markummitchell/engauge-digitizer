@@ -39,7 +39,7 @@ void DigitizeStateSelect::begin ()
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
   setCursorForPoints ();
-  context().mainWindow().updateViewPointStyle(activeCurve ());
+  context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
 QCursor DigitizeStateSelect::cursor() const

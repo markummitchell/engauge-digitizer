@@ -26,6 +26,9 @@ public:
   /// Assignment constructor.
   DocumentModelFilter &operator=(const DocumentModelFilter &other);
 
+  /// Get method for copying one curve filter. Cannot return just a reference or else there is a warning about returning reference to temporary
+  const CurveFilter curveFilter (const QString &curveName) const;
+
   /// Get method for copying all curve filters in one step.
   const CurveFilters &curveFilters () const;
 
