@@ -10,6 +10,7 @@ public:
   /// Single constructor.
   ViewSegmentFilter(QWidget *parent = 0);
 
+  /// Paint with a horizontal linear gradient.
   virtual void paintEvent(QPaintEvent *event);
 
 private:

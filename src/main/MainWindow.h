@@ -41,6 +41,7 @@ class QToolBar;
 class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
+class ViewPointStyle;
 class ViewSegmentFilter;
 
 /// Main window consisting of menu, graphics scene, status bar and optional toolbars as a Single Document Interface
@@ -198,6 +199,7 @@ private:
   void loadFile (const QString &fileName);
   void loadImage (const QString &fileName,
                   const QImage &image);
+  void loadPointPreview ();
   bool maybeSave();
   void removePixmaps();
   bool saveFile(const QString &fileName);
@@ -311,6 +313,7 @@ private:
   QComboBox *m_cmbBackground;
   QToolBar *m_toolBackground;
 
+  ViewPointStyle *m_viewPointStyle;
   ViewSegmentFilter *m_viewSegmentFilter;
   QToolBar *m_toolViews;
 

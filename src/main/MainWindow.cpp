@@ -63,6 +63,7 @@
 #include <QXmlStreamWriter>
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
+#include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
 
@@ -725,7 +726,7 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
-  const int SEGMENT_FILTER_SIZE = 24;
+  const int VIEW_SIZE = 24;
 
   // Background toolbar widgets
   m_cmbBackground = new QComboBox ();
@@ -750,6 +751,7 @@ void MainWindow::createToolBars ()
   m_cmbCurve = new QComboBox ();
   m_cmbCurve->setEnabled (false);
   m_cmbCurve->setMinimumWidth (180);
+  m_cmbCurve->setToolTip (tr ("Currently selected curve.")); // Other widgets have hover text so this does also for consistency
   m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
                                 "Select curve for any new points. Every point belongs to one curve."));
@@ -769,18 +771,29 @@ void MainWindow::createToolBars ()
   addToolBar (m_toolDigitize);
 
   // Views toolbar widgets
+  m_viewPointStyle = new ViewPointStyle();
+  m_viewPointStyle->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
+  m_viewPointStyle->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
+  m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve.")); // Other widgets have hover text so this does also for consistency
+  m_viewPointStyle->setStatusTip (tr ("Points style for the currently selected curve"));
+  m_viewPointStyle->setWhatsThis (tr ("Points Style\n\n"
+                                      "Points style for the currently selected curve. The points style is only "
+                                      "displayed in this toolbar. To change the points style, "
+                                      "use the Curve Properties dialog."));
+
   m_viewSegmentFilter = new ViewSegmentFilter();
-  m_viewSegmentFilter->setMinimumSize(SEGMENT_FILTER_SIZE, SEGMENT_FILTER_SIZE);
-  m_viewSegmentFilter->setMaximumSize(SEGMENT_FILTER_SIZE, SEGMENT_FILTER_SIZE);
-  m_viewSegmentFilter->setAutoFillBackground(true); // Allows control of background color using setPalette
+  m_viewSegmentFilter->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
+  m_viewSegmentFilter->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
+  m_viewSegmentFilter->setToolTip (tr ("Segment Points filter for currently selected curve.")); // Other widgets have hover text so this does also for consistency
   m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Points mode"));
   m_viewSegmentFilter->setWhatsThis (tr ("Segment Points Filter\n\n"
-                                         "View of filter for the current curve in Segment Points mode. This view cannot be changed, but the "
-                                         "filter settings can be quickly set using Color Picker mode, or more carefully set using the "
-                                         "Filter Settings dialog."));
+                                         "View of filter for the current curve in Segment Points mode. The filter settings are only "
+                                         "displayed in this toolbar. To changed the filter settings, "
+                                         "use the Color Picker mode or the Filter Settings dialog."));
 
   // Views toolbar
   m_toolViews = new QToolBar (tr ("Views"), this);
+  m_toolViews->addWidget (m_viewPointStyle);
   m_toolViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolViews);
 }
@@ -810,11 +823,7 @@ void MainWindow::loadCurveListFromCmdMediator ()
   for (itr = curvesGraphsNames.begin (); itr != curvesGraphsNames.end (); itr++) {
 
     QString curvesGraphName = *itr;
-
-    PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(curvesGraphName);
-    CurveIcon curveIcon (pointStyle);
-    m_cmbCurve->addItem (QIcon (curveIcon.pixmap()),
-                         curvesGraphName);
+    m_cmbCurve->addItem (curvesGraphName);
   }
   m_cmbCurve->setCurrentIndex (0);
 }
@@ -897,6 +906,7 @@ void MainWindow::loadImage (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
+  loadPointPreview ();
   setPixmap (m_cmdMediator->pixmap ());
   slotViewZoomFill();
 
@@ -909,6 +919,11 @@ void MainWindow::loadImage (const QString &fileName,
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
 
   updateControls ();
+}
+
+void MainWindow::loadPointPreview ()
+{
+  PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(selectedCurrentCurve ());
 }
 
 bool MainWindow::maybeSave()
@@ -1538,7 +1553,7 @@ void MainWindow::slotSettingsCurveProperties ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
 
   m_dlgSettingsCurveProperties->load (*m_cmdMediator);
-  m_dlgSettingsCurveProperties->setCurveName (m_cmbCurve->currentText ());
+  m_dlgSettingsCurveProperties->setCurveName (selectedCurrentCurve ());
   m_dlgSettingsCurveProperties->show ();
 }
 
@@ -2163,7 +2178,7 @@ void MainWindow::updateSettingsCurveProperties(const DocumentModelCurvePropertie
 
   m_scene->updateCurveProperties(modelCurveProperties);
   m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
-  loadCurveListFromCmdMediator();
+  loadPointPreview();
 }
 
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
@@ -2172,6 +2187,7 @@ void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
+  loadPointPreview();
 }
 
 void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
@@ -2235,7 +2251,7 @@ void MainWindow::updateViewedPoints ()
 
   } else if (m_actionViewPointsCurve->isChecked ()) {
 
-    m_scene->showPoints (true, false, m_cmbCurve->currentText ());
+    m_scene->showPoints (true, false, selectedCurrentCurve ());
 
   } else if (m_actionViewPointsNone->isChecked ()) {
 

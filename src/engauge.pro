@@ -129,6 +129,7 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
+    View/ViewPointStyle.h \
     View/ViewPreview.h \
     View/ViewProfile.h \
     View/ViewProfileDivider.h \
@@ -239,6 +240,7 @@ SOURCES += \
     Transformation/TransformationStateContext.cpp \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
+    View/ViewPointStyle.cpp \
     View/ViewPreview.cpp \
     View/ViewProfile.cpp \
     View/ViewProfileDivider.cpp \
