@@ -2264,6 +2264,7 @@ void MainWindow::updateSettingsFilter(const DocumentModelFilter &modelFilter)
   m_cmdMediator->document().setModelFilter(modelFilter);
   updateImages (cmdMediator().document().pixmap());
   updateViewedBackground ();
+  updateViewsOfSettings();
 }
 
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
@@ -2343,7 +2344,8 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
     m_viewPointStyle->setPointStyle (pointStyle);
 
     CurveFilter curveFilter = m_cmdMediator->document().modelFilter().curveFilter(activeCurve);
-    m_viewSegmentFilter->setCurveFilter (curveFilter);
+    m_viewSegmentFilter->setCurveFilter (curveFilter,
+                                         m_cmdMediator->pixmap ());
 
   }
 }

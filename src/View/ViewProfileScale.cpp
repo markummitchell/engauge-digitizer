@@ -53,32 +53,21 @@ void ViewProfileScale::paintHue ()
   // Create two spectrums:
   // 1) one spectrum from red to green
   // 2) another from green to blue
-  QLinearGradient gradientRG (QPointF (0.0,
-                                       height() / 2.0),
-                              QPointF (width () / 2.0,
-                                       height () / 2.0));
-  QLinearGradient gradientGB (QPointF (width() / 2.0,
-                                       height () / 2.0),
-                              QPointF (width (),
-                                       height () / 2.0));
-  gradientRG.setColorAt (0, Qt::red);
-  gradientRG.setColorAt (1, Qt::green);
-  gradientGB.setColorAt (0, Qt::green);
-  gradientGB.setColorAt (1, Qt::blue);
+  QLinearGradient gradient (QPointF (0.0,
+                                     height() / 2.0),
+                            QPointF (width (),
+                                     height () / 2.0));
+  gradient.setColorAt (0.0, Qt::red);
+  gradient.setColorAt (0.5, Qt::green);
+  gradient.setColorAt (1.0, Qt::blue);
 
   QPainter painter (this);
   painter.setPen (Qt::NoPen);
 
-  QBrush brushRG (gradientRG);
-  QBrush brushGB (gradientGB);
+  QBrush brush (gradient);
 
-  painter.setBrush (brushRG);
+  painter.setBrush (brush);
   painter.drawRect (0,
-                    0,
-                    rect().width () / 2.0,
-                    rect().height ());
-  painter.setBrush (brushGB);
-  painter.drawRect (rect().width() / 2.0,
                     0,
                     rect().width (),
                     rect().height ());

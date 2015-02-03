@@ -1,68 +1,123 @@
+#include "CurveConstants.h"
 #include "CurveFilter.h"
+#include "Filter.h"
 #include <QPainter>
+#include <QPixmap>
 #include "ViewSegmentFilter.h"
 
 ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :
   QLabel (parent),
-  m_filterIsDefined (false)
+  m_filterIsDefined (false),
+  m_rgbBackground (QColor (Qt::white))
 {
   // Note the size is set externally by the layout engine
 }
 
-QColor ViewSegmentFilter::colorHigh () const
+QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
+                                            int foreground,
+                                            int hue,
+                                            int intensity,
+                                            int saturation,
+                                            int value) const
 {
-  QColor color (Qt::red);
+  int r = 0, g = 0, b = 0;
 
-  switch (m_curveFilter.filterMode ())
+  switch (filterMode)
   {
     case FILTER_MODE_FOREGROUND:
+      {
+        double s = (double) (foreground - FOREGROUND_MIN) / (double) (FOREGROUND_MAX - FOREGROUND_MIN);
+        if (qGray (m_rgbBackground.rgb ()) < 127) {
+          // Go from blackish to white
+          r = s * 255;
+          g = s * 255;
+          b = s * 255;
+        } else {
+          // Go from whitish to black
+          r = (1.0 - s) * 255;
+          g = (1.0 - s) * 255;
+          b = (1.0 - s) * 255;
+        }
+      }
       break;
 
     case FILTER_MODE_HUE:
+      {
+        // red-green and green-blue like ViewProfileScale::paintHue
+
+        const int HUE_MID = (HUE_MIN + HUE_MAX) / 2;
+        if (hue < HUE_MID) {
+          // 0-0.5 is red-green
+          double s = (double) (hue - HUE_MIN) / (double) (HUE_MID - HUE_MIN);
+          r = (1.0 - s) * 255;
+          g = s * 255;
+        } else {
+          // 0.5-1 is green-blue
+          double s = (double) (hue - HUE_MID) / (double) (HUE_MAX - HUE_MID);
+          g = (1.0 - s) * 255;
+          b = s * 255;
+        }
+      }
       break;
 
     case FILTER_MODE_INTENSITY:
+      {
+        // black-white like ViewProfileScale::paintIntensity
+
+        double s = (double) (intensity - INTENSITY_MIN) / (double) (INTENSITY_MAX - INTENSITY_MIN);
+        r = s * 255;
+        g = s * 255;
+        b = s * 255;
+      }
       break;
 
     case FILTER_MODE_SATURATION:
+      {
+        // white-red like ViewProfileScale::paintSaturation
+
+        double s = (double) (saturation - SATURATION_MIN) / (double) (SATURATION_MAX - SATURATION_MIN);
+        r = 255;
+        g = (1.0 - s) * 255;
+        b = (1.0 - s) * 255;
+      }
       break;
 
     case FILTER_MODE_VALUE:
+      {
+        // black-red like ViewProfileScale::paintValue
+
+        double s = (double) (value - VALUE_MIN) / (double) (VALUE_MAX - VALUE_MIN);
+        r = s * 255;
+        g = 0;
+        b = 0;
+      }
       break;
 
     default:
       Q_ASSERT (false);
   }
 
-  return color;
+  return QColor (r, g, b);
+}
+
+QColor ViewSegmentFilter::colorHigh () const
+{
+  return colorFromSetting (m_curveFilter.filterMode (),
+                           m_curveFilter.foregroundHigh (),
+                           m_curveFilter.hueHigh (),
+                           m_curveFilter.intensityHigh(),
+                           m_curveFilter.saturationHigh(),
+                           m_curveFilter.valueHigh());
 }
 
 QColor ViewSegmentFilter::colorLow () const
 {
-  QColor color (Qt::green);
-
-  switch (m_curveFilter.filterMode ())
-  {
-    case FILTER_MODE_FOREGROUND:
-      break;
-
-    case FILTER_MODE_HUE:
-      break;
-
-    case FILTER_MODE_INTENSITY:
-      break;
-
-    case FILTER_MODE_SATURATION:
-      break;
-
-    case FILTER_MODE_VALUE:
-      break;
-
-    default:
-      Q_ASSERT (false);
-  }
-
-  return color;
+  return colorFromSetting (m_curveFilter.filterMode (),
+                           m_curveFilter.foregroundLow (),
+                           m_curveFilter.hueLow (),
+                           m_curveFilter.intensityLow(),
+                           m_curveFilter.saturationLow(),
+                           m_curveFilter.valueLow());
 }
 
 void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
@@ -91,10 +146,16 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
   }
 }
 
-void ViewSegmentFilter::setCurveFilter (const CurveFilter &curveFilter)
+void ViewSegmentFilter::setCurveFilter (const CurveFilter &curveFilter,
+                                        const QPixmap &pixmap)
 {
   m_curveFilter = curveFilter;
   m_filterIsDefined = true;
+
+  // Compute background color
+  Filter filter;
+  QImage img = pixmap.toImage();
+  m_rgbBackground = filter.marginColor(&img);
 
   // Force a redraw
   update();

@@ -35,6 +35,7 @@ DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
                            mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
+  m_filterThread (0),
   m_modelFilterBefore (0),
   m_modelFilterAfter (0)
 {
@@ -51,7 +52,8 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 
   m_cmbCurveName = new QComboBox ();
   m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
-  connect (m_cmbCurveName, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCurveName (const QString &)));
+  // Use activated signal since it is not activated by programmatic changes
+  connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &)));
   layout->addWidget (m_cmbCurveName, row++, 1);
 
   QLabel *labelProfile = new QLabel ("Filter mode:");
@@ -177,10 +179,14 @@ QRgb DlgSettingsFilter::createThread ()
   Filter filter;
   QRgb rgbBackground = filter.marginColor(&image);
 
-  m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
-                                        rgbBackground,
-                                        *this);
-  m_filterThread->start(); // Now that thread is started, we can use signalApplyFilter
+  // Only create thread once
+  if (m_filterThread == 0) {
+
+    m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
+                                          rgbBackground,
+                                          *this);
+    m_filterThread->start(); // Now that thread is started, we can use signalApplyFilter
+  }
 
   return rgbBackground;
 }
@@ -227,42 +233,48 @@ void DlgSettingsFilter::load (CmdMediator &cmdMediator)
     m_cmbCurveName->addItem (curveName);
   }
 
-  loadForCurveName (mainWindow().selectedGraphCurve());
+  // This sets the curve name
+  m_cmbCurveName->setCurrentText (mainWindow().selectedGraphCurve());
+  loadForCurveName();
 
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
-void DlgSettingsFilter::loadForCurveName(const QString &curveName)
+void DlgSettingsFilter::loadForCurveName()
 {
-  // Populate controls
-  FilterMode filterMode = m_modelFilterAfter->filterMode(curveName);
-  m_btnIntensity->setChecked (filterMode == FILTER_MODE_INTENSITY);
-  m_btnForeground->setChecked (filterMode == FILTER_MODE_FOREGROUND);
-  m_btnHue->setChecked (filterMode == FILTER_MODE_HUE);
-  m_btnSaturation->setChecked (filterMode == FILTER_MODE_SATURATION);
-  m_btnValue->setChecked (filterMode == FILTER_MODE_VALUE);
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::loadForCurveName";
 
-  m_scenePreview->clear();
-  m_imagePreview = cmdMediator().document().pixmap().toImage();
-  m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
+  // Get curve name from control
+  QString curveName = m_cmbCurveName->currentText();
 
-  QRgb rgbBackground = createThread ();
-  m_scale->setBackgroundColor (rgbBackground);
-  createThread ();
-  updateHistogram();
-  updatePreview(); // Needs thread initialized
-  enableOk (false); // Disable Ok button since there not yet any changes
+  // Skip if everything is not set up yet
+  if (!curveName.isEmpty () && m_modelFilterAfter != 0) {
+
+    // Populate controls
+    FilterMode filterMode = m_modelFilterAfter->filterMode(curveName);
+    m_btnIntensity->setChecked (filterMode == FILTER_MODE_INTENSITY);
+    m_btnForeground->setChecked (filterMode == FILTER_MODE_FOREGROUND);
+    m_btnHue->setChecked (filterMode == FILTER_MODE_HUE);
+    m_btnSaturation->setChecked (filterMode == FILTER_MODE_SATURATION);
+    m_btnValue->setChecked (filterMode == FILTER_MODE_VALUE);
+
+    m_scenePreview->clear();
+    m_imagePreview = cmdMediator().document().pixmap().toImage();
+    m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
+
+    QRgb rgbBackground = createThread ();
+    m_scale->setBackgroundColor (rgbBackground);
+    createThread ();
+    updateHistogram();
+    updatePreview(); // Needs thread initialized
+  }
 }
 
-void DlgSettingsFilter::slotCurveName(const QString &curveName)
+void DlgSettingsFilter::slotCurveName(const QString & /* curveName */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotCurveName";
 
-  // Do nothing if combobox is getting cleared, or load has not been called yet
-  if (!curveName.isEmpty () && (m_modelFilterAfter != 0)) {
-
-    loadForCurveName (curveName);
-  }
+  loadForCurveName ();
 }
 
 void DlgSettingsFilter::slotDividerHigh (double xCenter)
@@ -284,7 +296,7 @@ void DlgSettingsFilter::slotForeground ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
   m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                         FILTER_MODE_FOREGROUND);
+                                    FILTER_MODE_FOREGROUND);
   updateHistogram();
   updatePreview();
 }
@@ -294,7 +306,7 @@ void DlgSettingsFilter::slotHue ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
   m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                         FILTER_MODE_HUE);
+                                    FILTER_MODE_HUE);
   updateHistogram();
   updatePreview();
 }
@@ -304,7 +316,7 @@ void DlgSettingsFilter::slotIntensity ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
   m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                         FILTER_MODE_INTENSITY);
+                                    FILTER_MODE_INTENSITY);
   updateHistogram();
   updatePreview();
 }
@@ -314,7 +326,7 @@ void DlgSettingsFilter::slotSaturation ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
   m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                         FILTER_MODE_SATURATION);
+                                    FILTER_MODE_SATURATION);
   updateHistogram();
   updatePreview();
 }

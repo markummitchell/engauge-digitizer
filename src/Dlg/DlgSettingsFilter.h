@@ -61,7 +61,7 @@ private:
   void createPreview (QGridLayout *layout, int &row);
   void createProfileAndScale (QGridLayout *layout, int &row);
   QRgb createThread (); // Returns background color
-  void loadForCurveName(const QString &curveName);
+  void loadForCurveName();
   void updateHistogram();
   void updatePreview();
 
