@@ -759,7 +759,7 @@ void MainWindow::createToolBars ()
   m_cmbBackground->addItem ("No background", QVariant (BACKGROUND_IMAGE_NONE));
   m_cmbBackground->addItem ("Original image", QVariant (BACKGROUND_IMAGE_ORIGINAL));
   m_cmbBackground->addItem ("Filtered image", QVariant (BACKGROUND_IMAGE_FILTERED));
-  connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
+  connect (m_cmbBackground, SIGNAL (activated (int)), this, SLOT (slotCmbBackground (int))); // activated() ignores code changes
 
   // Background toolbar
   m_toolBackground = new QToolBar (tr ("Background"), this);
@@ -773,7 +773,7 @@ void MainWindow::createToolBars ()
   m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
                                 "Select curve for any new points. Every point belongs to one curve."));
-  connect (m_cmbCurve, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbCurve (int)));
+  connect (m_cmbCurve, SIGNAL (activated (int)), this, SLOT (slotCmbCurve (int))); // activated() ignores code changes
 
   // Digitize toolbar
   m_toolDigitize = new QToolBar (tr ("Drawing"), this);

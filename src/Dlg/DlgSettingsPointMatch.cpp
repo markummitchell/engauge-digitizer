@@ -102,7 +102,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   m_cmbAcceptedPointColor = new QComboBox;
   m_cmbAcceptedPointColor->setWhatsThis (tr ("Select a color for matched points that are accepted"));
   populateColorComboWithTransparent (*m_cmbAcceptedPointColor);
-  connect (m_cmbAcceptedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &)));
+  connect (m_cmbAcceptedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbAcceptedPointColor, row++, 2);
 
   QLabel *labelRejectedPointColor = new QLabel ("Rejected point color:");
@@ -111,7 +111,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   m_cmbRejectedPointColor = new QComboBox;
   m_cmbRejectedPointColor->setWhatsThis (tr ("Select a color for matched points that are rejected"));
   populateColorComboWithTransparent (*m_cmbRejectedPointColor);
-  connect (m_cmbRejectedPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotRejectedPointColor (const QString &)));
+  connect (m_cmbRejectedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotRejectedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbRejectedPointColor, row++, 2);
 
   QLabel *labelCandidatePointColor = new QLabel ("Candidate point color:");
@@ -120,7 +120,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   m_cmbCandidatePointColor = new QComboBox;
   m_cmbCandidatePointColor->setWhatsThis (tr ("Select a color for the point being decided upon"));
   populateColorComboWithTransparent (*m_cmbCandidatePointColor);
-  connect (m_cmbCandidatePointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCandidatePointColor (const QString &)));
+  connect (m_cmbCandidatePointColor, SIGNAL (activated (const QString &)), this, SLOT (slotCandidatePointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbCandidatePointColor, row++, 2);
 }
 

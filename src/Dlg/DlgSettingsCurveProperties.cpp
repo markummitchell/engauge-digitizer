@@ -54,7 +54,7 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
 
   m_cmbCurveName = new QComboBox ();
   m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
-  connect (m_cmbCurveName, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotCurveName (const QString &)));
+  connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbCurveName, row++, 2);
 }
 
@@ -84,7 +84,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   m_cmbLineColor = new QComboBox (m_groupLine);
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn between points"));
   populateColorComboWithTransparent (*m_cmbLineColor);
-  connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
+  connect (m_cmbLineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineColor, 1, 1);
 
   QLabel *labelLineType = new QLabel ("Connect as:");
@@ -101,7 +101,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                    "between the two endpoints of that line - as if its age was between the ages of the two "
                                    "endpoints.\n\n"
                                    "Lines are drawn between successively ordered points"));
-  connect (m_cmbLineType, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineType (const QString &)));
+  connect (m_cmbLineType, SIGNAL (activated (const QString &)), this, SLOT (slotLineType (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineType, 2, 1);
 }
 
@@ -127,7 +127,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   m_cmbPointShape->addItem ("Square", POINT_SHAPE_SQUARE);
   m_cmbPointShape->addItem ("Triangle", POINT_SHAPE_TRIANGLE);
   m_cmbPointShape->addItem ("X", POINT_SHAPE_X);
-  connect (m_cmbPointShape, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointShape (const QString &)));
+  connect (m_cmbPointShape, SIGNAL (activated (const QString &)), this, SLOT (slotPointShape (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbPointShape, 0, 1);
 
   QLabel *labelPointRadius = new QLabel ("Radius:");
@@ -159,7 +159,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   m_cmbPointColor = new QComboBox (m_groupPoint);
   m_cmbPointColor->setWhatsThis (tr ("Select a color for the line used to draw the point shapes"));
   populateColorComboWithoutTransparent (*m_cmbPointColor);
-  connect (m_cmbPointColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPointColor (const QString &)));
+  connect (m_cmbPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotPointColor (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbPointColor, 3, 1);
 }
 

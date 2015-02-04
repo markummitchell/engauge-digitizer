@@ -60,8 +60,7 @@ void StatusBar::createGroupUnits ()
                                  "Values at cursor coordinates to display. Coordinates are in screen (pixels) or "
                                  "graph units. Resolution (which is the number of graph units per pixel) is "
                                  "in graph units. Graph units are only available after axis points have been defined."));
-
-  connect (m_comboUnits, SIGNAL (currentTextChanged(const QString &)), this, SLOT (slotComboUnits (const QString &)));
+  connect (m_comboUnits, SIGNAL (activated(const QString &)), this, SLOT (slotComboUnits (const QString &))); // activated() ignores code changes
 
   m_editCoords = new QTextEdit;
   m_editCoords->setEnabled (false); // Disabled until file is opened
@@ -111,8 +110,7 @@ void StatusBar::createZoom ()
   m_comboZoom->setToolTip (tr ("Select zoom."));
   m_comboZoom->setWhatsThis (tr("Select Zoom\n\n"
                                 "Points can be more accurately placed by zooming in."));
-
-  connect (m_comboZoom, SIGNAL (currentTextChanged(const QString &)), this, SLOT (slotComboZoom (const QString &)));
+  connect (m_comboZoom, SIGNAL (activated(const QString &)), this, SLOT (slotComboZoom (const QString &))); // activated() ignores code changes
 
   m_statusBar.addPermanentWidget (m_comboZoom);
 }

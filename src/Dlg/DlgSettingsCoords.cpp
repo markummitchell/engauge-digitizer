@@ -204,7 +204,7 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
                                               "Gradians format uses a single real number. One complete revolution is 400 gradians.\n\n"
                                               "Radians format uses a single real number. One complete revolution is 2*pi radians.\n\n"
                                               "Turns format uses a single real number. One complete revolution is one turn.")));
-  connect (m_cmbPolarUnits, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotPolarUnits(const QString &)));
+  connect (m_cmbPolarUnits, SIGNAL (activated (const QString &)), this, SLOT (slotPolarUnits(const QString &))); // activated() ignores code changes
   layoutPolar->addWidget (m_cmbPolarUnits, 0, 1);
 
   QLabel *labelOriginRadius = new QLabel("Origin radius value:");

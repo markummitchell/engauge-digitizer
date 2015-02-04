@@ -52,8 +52,7 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
 
   m_cmbCurveName = new QComboBox ();
   m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
-  // Use activated signal since it is not activated by programmatic changes
-  connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &)));
+  connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbCurveName, row++, 1);
 
   QLabel *labelProfile = new QLabel ("Filter mode:");

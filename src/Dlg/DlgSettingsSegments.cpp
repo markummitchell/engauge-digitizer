@@ -98,7 +98,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   m_cmbLineColor = new QComboBox;
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn along a segment"));
   populateColorComboWithTransparent (*m_cmbLineColor);
-  connect (m_cmbLineColor, SIGNAL (currentTextChanged (const QString &)), this, SLOT (slotLineColor (const QString &)));
+  connect (m_cmbLineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
