@@ -96,6 +96,7 @@ HEADERS  += \
     Export/ExportToFile.h \
     Filter/Filter.h \
     Filter/FilterColorEntry.h \
+    Filter/FilterHistogram.h \
     Filter/FilterMode.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
@@ -214,6 +215,7 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
+    Filter/FilterHistogram.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointFactory.cpp \

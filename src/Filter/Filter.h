@@ -19,8 +19,6 @@ public:
   bool colorCompare (QRgb rgb1,
                      QRgb rgb2) const;
 
-  // Return true if specified filtered pixel is on
-
   /// Filter the original image according to the specified filtering parameters.
   void filterImage (const QImage &imageOriginal,
                     QImage &imageFiltered,

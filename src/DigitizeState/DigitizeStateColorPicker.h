@@ -26,9 +26,9 @@ public:
 private:
   DigitizeStateColorPicker();
 
-  DocumentModelFilter transformFilter (const QRgb &rgb,
-                                       const DocumentModelFilter &modelFilterBefore,
-                                       const QString &curveName);
+  void computeFilterFromPixel (const QPointF &posScreen,
+                               const QString &curveName,
+                               DocumentModelFilter &modelFilterAfter);
 };
 
 #endif // DIGITIZE_STATE_COLOR_PICKER_H

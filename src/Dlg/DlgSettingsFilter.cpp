@@ -4,6 +4,7 @@
 #include "DlgFilterThread.h"
 #include "DlgSettingsFilter.h"
 #include "Filter.h"
+#include "FilterHistogram.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -23,11 +24,8 @@
 #include "ViewProfileScale.h"
 
 const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int HISTOGRAM_BINS = 100;
 const int PROFILE_SCENE_WIDTH = 100;
 const int PROFILE_SCENE_HEIGHT = 100;
-const int FIRST_NONEMPTY_BIN_AT_START = 1;
-const int LAST_NONEMPTY_BIN_AT_END = HISTOGRAM_BINS - 2;
 
 DlgSettingsFilter::DlgSettingsFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Filter",
@@ -384,46 +382,19 @@ void DlgSettingsFilter::updateHistogram()
 
   double histogramBins [HISTOGRAM_BINS];
 
-  // Initialize histogram bins
-  int bin;
-  for (bin = 0; bin < HISTOGRAM_BINS; bin++) {
-    histogramBins [bin] = 0;
-  }
-
   Filter filter;
-  QRgb rgbBackground = filter.marginColor(&image);
-
-  // Populate histogram bins
-  int maxBinCount = 0;
-  for (int x = 0; x < image.width(); x++) {
-    for (int y = 0; y < image.height(); y++) {
-
-      QColor pixel (image.pixel (x, y));
-      double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterMode(curveName),
-                                                    pixel,
-                                                    rgbBackground);
-      Q_ASSERT (s <= 1.0);
-      if (s >= 0) {
-
-        // Instead of mapping from s=0 through 1 to bin=0 through HISTOGRAM_BINS-1, we
-        // map it to bin=1 through HISTOGRAM_BINS-2 so first and last bin are zero. The
-        // result is a peak at the start or end is complete and easier to read
-        int bin = FIRST_NONEMPTY_BIN_AT_START + s * (LAST_NONEMPTY_BIN_AT_END - FIRST_NONEMPTY_BIN_AT_START);
-        Q_ASSERT ((FIRST_NONEMPTY_BIN_AT_START <= bin) &&
-                  (LAST_NONEMPTY_BIN_AT_END >= bin));
-        ++(histogramBins [bin]);
-
-        if (histogramBins [bin] > maxBinCount) {
-          maxBinCount = histogramBins [bin];
-        }
-      }
-    }
-  }
+  FilterHistogram filterHistogram;
+  int maxBinCount;
+  filterHistogram.generate (filter,
+                            histogramBins,
+                            m_modelFilterAfter->filterMode (curveName),
+                            image,
+                            maxBinCount);
 
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
   double logMaxBinCount = qLn (maxBinCount);
-  for (bin = 1; bin < HISTOGRAM_BINS; bin++) {
+  for (int bin = 1; bin < HISTOGRAM_BINS; bin++) {
 
     double x0 = PROFILE_SCENE_WIDTH * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
 
