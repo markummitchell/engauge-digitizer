@@ -397,6 +397,7 @@ void DlgSettingsFilter::updateHistogram()
   int maxBinCount = 0;
   for (int x = 0; x < image.width(); x++) {
     for (int y = 0; y < image.height(); y++) {
+
       QColor pixel (image.pixel (x, y));
       double s = filter.pixelToZeroToOneOrMinusOne (m_modelFilterAfter->filterMode(curveName),
                                                     pixel,

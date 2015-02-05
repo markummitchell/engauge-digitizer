@@ -57,9 +57,10 @@ void ViewProfileScale::paintHue ()
                                      height() / 2.0),
                             QPointF (width (),
                                      height () / 2.0));
-  gradient.setColorAt (0.0, Qt::red);
-  gradient.setColorAt (0.5, Qt::green);
-  gradient.setColorAt (1.0, Qt::blue);
+  gradient.setColorAt (0.0000, Qt::red);
+  gradient.setColorAt (0.3333, Qt::green);
+  gradient.setColorAt (0.6666, Qt::blue);
+  gradient.setColorAt (1.0000, Qt::red);
 
   QPainter painter (this);
   painter.setPen (Qt::NoPen);

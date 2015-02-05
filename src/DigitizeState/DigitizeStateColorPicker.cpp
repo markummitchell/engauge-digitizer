@@ -1,5 +1,8 @@
+#include "CmdMediator.h"
+#include "CmdSettingsFilter.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateColorPicker.h"
+#include "DocumentModelFilter.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QBitmap>
@@ -60,7 +63,47 @@ void DigitizeStateColorPicker::handleMousePress (QPointF /* posScreen */)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMousePress";
 }
 
-void DigitizeStateColorPicker::handleMouseRelease (QPointF /* posScreen */)
+void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseRelease";
+
+  QRgb rgb = context().cmdMediator().document().pixmap().toImage().pixel (posScreen.toPoint ());
+
+  DocumentModelFilter modelFilterBefore = context().cmdMediator().document().modelFilter();
+  DocumentModelFilter modelFilterAfter = transformFilter (rgb,
+                                                          modelFilterBefore,
+                                                          context().mainWindow().selectedGraphCurve());
+
+  // Create command to change segment filter
+  QUndoCommand *cmd = new CmdSettingsFilter (context ().mainWindow(),
+                                             context ().cmdMediator ().document (),
+                                             modelFilterBefore,
+                                             modelFilterAfter);
+  context().appendNewCmd(cmd);
+}
+
+DocumentModelFilter DigitizeStateColorPicker::transformFilter (const QRgb &rgb,
+                                                               const DocumentModelFilter &modelFilterBefore,
+                                                               const QString &curveName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::transformFilter";
+
+  DocumentModelFilter modelFilterAfter = modelFilterBefore;
+
+  // The choice of which filter mode to use is determined, currently, by the selected pixel. This
+  // could be maybe made smarter by looking at other pixels, or even the entire image
+  int r = qRed (rgb);
+  int g = qGreen (rgb);
+  int b = qBlue (rgb);
+  if (r == g && g == b) {
+
+    // Pixel is gray scale, so we use intensity
+
+  } else {
+
+    // Pixel is not gray scale, so we use hue
+
+  }
+
+  return modelFilterAfter;
 }
