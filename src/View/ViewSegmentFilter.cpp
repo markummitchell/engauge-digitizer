@@ -45,17 +45,24 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       {
         // red-green and green-blue like ViewProfileScale::paintHue
 
-        const int HUE_MID = (HUE_MIN + HUE_MAX) / 2;
-        if (hue < HUE_MID) {
-          // 0-0.5 is red-green
-          double s = (double) (hue - HUE_MIN) / (double) (HUE_MID - HUE_MIN);
+        int HUE_THRESHOLD_LOW = 0.666 * HUE_MIN + 0.333 * HUE_MAX;
+        int HUE_THRESHOLD_HIGH = 0.333 * HUE_MIN + 0.666 * HUE_MAX;
+
+        if (hue < HUE_THRESHOLD_LOW) {
+          // 0-0.333 is red-green
+          double s = (double) (hue - HUE_MIN) / (double) (HUE_THRESHOLD_LOW - HUE_MIN);
           r = (1.0 - s) * 255;
           g = s * 255;
-        } else {
-          // 0.5-1 is green-blue
-          double s = (double) (hue - HUE_MID) / (double) (HUE_MAX - HUE_MID);
+        } else if (hue < HUE_THRESHOLD_HIGH) {
+          // 0.333-0.666 is green-blue
+          double s = (double) (hue - HUE_THRESHOLD_LOW) / (double) (HUE_THRESHOLD_HIGH - HUE_THRESHOLD_LOW);
           g = (1.0 - s) * 255;
           b = s * 255;
+        } else {
+          // 0.666-1 is blue-red
+          double s = (double) (hue - HUE_THRESHOLD_HIGH) / (double) (HUE_MAX - HUE_THRESHOLD_HIGH);
+          b = (1.0 - s) * 255;
+          r = s * 255;
         }
       }
       break;

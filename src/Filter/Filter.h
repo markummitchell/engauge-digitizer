@@ -50,6 +50,10 @@ public:
                             double low0To1,
                             double high0To1) const;
 
+  /// Inverse of pixelToZeroToOneOrMinusOne
+  int zeroToOneToValue (FilterMode filterMode,
+                        double s);
+
 private:
 
   typedef QList<FilterColorEntry> ColorList;

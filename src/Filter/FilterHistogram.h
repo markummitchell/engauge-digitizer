@@ -31,6 +31,10 @@ public:
                  const QImage &image,
                  int &maxBinCount) const;
 
+  /// Inverse of binFromPixel
+  int valueFromBin (Filter &filter,
+                    FilterMode filterMode,
+                    int bin);
 };
 
 #endif // FILTER_HISTOGRAM_H

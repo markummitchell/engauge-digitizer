@@ -70,3 +70,15 @@ void FilterHistogram::generate (Filter &filter,
     }
   }
 }
+
+int FilterHistogram::valueFromBin (Filter &filter,
+                                   FilterMode filterMode,
+                                   int bin)
+{
+  // Just do everything in binFromPixel backwards
+  double s = (double) (bin - FIRST_NON_EMPTY_BIN_AT_START) / (double) (LAST_NON_EMPTY_BIN_AT_END - FIRST_NON_EMPTY_BIN_AT_START);
+  s = qMin (qMax (s, 0.0), 1.0);
+
+  return filter.zeroToOneToValue (filterMode,
+                                  s);
+}

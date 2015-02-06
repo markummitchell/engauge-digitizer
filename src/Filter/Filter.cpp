@@ -1,3 +1,4 @@
+#include "CurveConstants.h"
 #include "Filter.h"
 #include "mmsubs.h"
 #include <QDebug>
@@ -191,4 +192,47 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
   }
 
   return s;
+}
+
+int Filter::zeroToOneToValue (FilterMode filterMode,
+                              double s)
+{
+  int value = 0;
+
+  switch (filterMode) {
+    case FILTER_MODE_FOREGROUND:
+      {
+        value = FOREGROUND_MIN + s * (FOREGROUND_MAX - FOREGROUND_MIN);
+      }
+      break;
+
+    case FILTER_MODE_HUE:
+      {
+        value = HUE_MIN + s * (HUE_MAX - HUE_MIN);
+      }
+      break;
+
+    case FILTER_MODE_INTENSITY:
+      {
+        value = INTENSITY_MIN + s * (INTENSITY_MAX - INTENSITY_MIN);
+      }
+      break;
+
+    case FILTER_MODE_SATURATION:
+      {
+        value = SATURATION_MIN + s * (SATURATION_MAX - SATURATION_MIN);
+      }
+      break;
+
+    case FILTER_MODE_VALUE:
+      {
+        value = VALUE_MIN + s * (VALUE_MAX - VALUE_MIN);
+      }
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
+
+  return value;
 }

@@ -41,8 +41,11 @@ void DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::computeFilterFromPixel";
 
+  // Adjust screen position so truncation gives round-up behavior
+  QPointF posScreenPlusHalf = posScreen - QPointF (0.5, 0.5);
+
   QImage image = context().cmdMediator().document().pixmap().toImage();
-  QColor pixel = image.pixel (posScreen.toPoint ());
+  QColor pixel = image.pixel (posScreenPlusHalf.toPoint ());
 
   // The choice of which filter mode to use is determined, currently, by the selected pixel. This
   // could be maybe made smarter by looking at other pixels, or even the entire image
@@ -84,7 +87,67 @@ void DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
                                               pixel,
                                               rgbBackground);
 
-  // Identify the entire width of the peak that the selected pixel belongs to
+  // Identify the entire width of the peak that the selected pixel belongs to. Go in both directions until the count
+  // hits zero or goes up
+  int lowerBin = pixelBin, upperBin = pixelBin;
+  while ((lowerBin > 0) &&
+         (histogramBins [lowerBin - 1] <= histogramBins [lowerBin]) &&
+         (histogramBins [lowerBin] > 0)) {
+    --lowerBin;
+  }
+  while ((upperBin < HISTOGRAM_BINS - 1) &&
+         (histogramBins [upperBin + 1] <= histogramBins [upperBin]) &&
+         (histogramBins [upperBin] > 0)) {
+    ++upperBin;
+  }
+
+  // Compute values from bin numbers
+  int lowerValue = filterHistogram.valueFromBin(filter,
+                                                modelFilterAfter.filterMode (curveName),
+                                                lowerBin);
+  int upperValue = filterHistogram.valueFromBin(filter,
+                                                modelFilterAfter.filterMode (curveName),
+                                                upperBin);
+
+  switch (modelFilterAfter.filterMode (curveName)) {
+    case FILTER_MODE_FOREGROUND:
+      modelFilterAfter.setForegroundLow(curveName,
+                                        lowerValue);
+      modelFilterAfter.setForegroundHigh(curveName,
+                                         upperValue);
+      break;
+
+    case FILTER_MODE_HUE:
+      modelFilterAfter.setHueLow(curveName,
+                                 lowerValue);
+      modelFilterAfter.setHueHigh(curveName,
+                                  upperValue);
+      break;
+
+    case FILTER_MODE_INTENSITY:
+      modelFilterAfter.setIntensityLow(curveName,
+                                       lowerValue);
+      modelFilterAfter.setIntensityHigh(curveName,
+                                        upperValue);
+      break;
+
+    case FILTER_MODE_SATURATION:
+      modelFilterAfter.setSaturationLow(curveName,
+                                        lowerValue);
+      modelFilterAfter.setSaturationHigh(curveName,
+                                         upperValue);
+      break;
+
+    case FILTER_MODE_VALUE:
+      modelFilterAfter.setValueLow(curveName,
+                                   lowerValue);
+      modelFilterAfter.setValueHigh(curveName,
+                                    upperValue);
+      break;
+
+    default:
+      Q_ASSERT (false);
+  }
 }
 
 QCursor DigitizeStateColorPicker::cursor() const
@@ -122,7 +185,7 @@ void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseRelease";
 
   DocumentModelFilter modelFilterBefore = context().cmdMediator().document().modelFilter();
-  DocumentModelFilter modelFilterAfter;
+  DocumentModelFilter modelFilterAfter = context().cmdMediator().document().modelFilter();
   computeFilterFromPixel (posScreen,
                           context().mainWindow().selectedGraphCurve(),
                           modelFilterAfter);
