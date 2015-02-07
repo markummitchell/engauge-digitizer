@@ -9,7 +9,7 @@ FilterHistogram::FilterHistogram()
 {
 }
 
-int FilterHistogram::binFromPixel (Filter &filter,
+int FilterHistogram::binFromPixel (const Filter &filter,
                                    FilterMode filterMode,
                                    const QColor &pixel,
                                    const QRgb &rgbBackground) const
@@ -33,7 +33,7 @@ int FilterHistogram::binFromPixel (Filter &filter,
   return bin;
 }
 
-void FilterHistogram::generate (Filter &filter,
+void FilterHistogram::generate (const Filter &filter,
                                 double histogramBins [],
                                 FilterMode filterMode,
                                 const QImage &image,
@@ -71,7 +71,7 @@ void FilterHistogram::generate (Filter &filter,
   }
 }
 
-int FilterHistogram::valueFromBin (Filter &filter,
+int FilterHistogram::valueFromBin (const Filter &filter,
                                    FilterMode filterMode,
                                    int bin)
 {

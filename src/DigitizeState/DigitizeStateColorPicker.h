@@ -4,6 +4,9 @@
 #include "DigitizeStateAbstractBase.h"
 
 class DocumentModelFilter;
+class QColor;
+class QImage;
+class QPointF;
 
 /// Digitizing state for selecting a color for DigitizeStateSegment. The basic strategy is that this
 /// class acts like a special case of DlgSettingsFilter. Specifically, the pixel just selected by a
@@ -26,9 +29,17 @@ public:
 private:
   DigitizeStateColorPicker();
 
-  void computeFilterFromPixel (const QPointF &posScreen,
+  bool computeFilterFromPixel (const QPointF &posScreen,
                                const QString &curveName,
                                DocumentModelFilter &modelFilterAfter);
+  bool findNearestNonBackgroundPixel (const QImage &image,
+                                      const QPointF &posScreenPlusHalf,
+                                      const QRgb &rgbBackground,
+                                      QColor &pixel);
+  void saveLowerValueUpperValue (DocumentModelFilter &modelFilterAfter,
+                                 const QString &curveName,
+                                 double lowerValue,
+                                 double upperValue);
 };
 
 #endif // DIGITIZE_STATE_COLOR_PICKER_H

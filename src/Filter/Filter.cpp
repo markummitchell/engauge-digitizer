@@ -48,7 +48,7 @@ void Filter::filterImage (const QImage &imageOriginal,
   }
 }
 
-QRgb Filter::marginColor(const QImage *image)
+QRgb Filter::marginColor(const QImage *image) const
 {
   // Add unique colors to colors list
   ColorList colorCounts;
@@ -74,7 +74,7 @@ QRgb Filter::marginColor(const QImage *image)
 }
 
 void Filter::mergePixelIntoColorCounts (QRgb pixel,
-                                        ColorList &colorCounts)
+                                        ColorList &colorCounts) const
 {
   FilterColorEntry entry;
   entry.color = pixel;
@@ -195,7 +195,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
 }
 
 int Filter::zeroToOneToValue (FilterMode filterMode,
-                              double s)
+                              double s) const
 {
   int value = 0;
 

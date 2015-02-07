@@ -30,7 +30,7 @@ public:
   /// Identify the margin color of the image, which is defined as the most common color in the four margins. For speed,
   /// only pixels in the four borders are examined, with the results from those borders safely representing the most
   /// common color of the entire margin areas.
-  QRgb marginColor(const QImage *image);
+  QRgb marginColor(const QImage *image) const;
 
   /// Return true if specified filtered pixel is on
   bool pixelFilteredIsOn (const QImage &image,
@@ -52,14 +52,14 @@ public:
 
   /// Inverse of pixelToZeroToOneOrMinusOne
   int zeroToOneToValue (FilterMode filterMode,
-                        double s);
+                        double s) const;
 
 private:
 
   typedef QList<FilterColorEntry> ColorList;
 
   void mergePixelIntoColorCounts (QRgb pixel,
-                                  ColorList &colorCounts);
+                                  ColorList &colorCounts) const;
 };
 
 #endif // FILTER_H
