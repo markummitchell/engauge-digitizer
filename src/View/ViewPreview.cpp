@@ -18,7 +18,7 @@ void ViewPreview::mouseMoveEvent(QMouseEvent *event)
 
 void ViewPreview::resizeEvent(QResizeEvent *event)
 {
-  // Make image fit the new window size
+  // Make image fit the new window size. This is needed since QGraphicsView ignores layout stretching
   fitInView (scene()->itemsBoundingRect ());
 
   QGraphicsView::resizeEvent (event);

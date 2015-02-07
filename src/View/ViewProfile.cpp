@@ -4,6 +4,10 @@
 
 const int FRAME_WIDTH = 2;
 
+// Insert a little space on the left and right so first and last points are visible. Although the
+// ViewProfile will no longer be exactly aligned with the ViewScale underneath, the difference is insignificant
+const double SLOP_ON_SIDES = 0.5;
+
 ViewProfile::ViewProfile(QGraphicsScene *scene,
                          QWidget *parent) :
   QGraphicsView (scene, parent)
@@ -15,7 +19,6 @@ ViewProfile::ViewProfile(QGraphicsScene *scene,
   setMinimumHeight (160);
   setMaximumHeight (160);
   setMinimumWidth (240);
-  setMaximumWidth (240);
 
   createFrame ();
   refit ();
@@ -23,7 +26,7 @@ ViewProfile::ViewProfile(QGraphicsScene *scene,
 
 void ViewProfile::createFrame ()
 {
-  m_frame = new QGraphicsRectItem (-1, -1, 102, 102);
+  m_frame = new QGraphicsRectItem (0, 0, 100, 100);
   m_frame->setPen (QPen (QBrush (qRgb (0.0, 0.0, 0.0)), FRAME_WIDTH));
 
   scene()->addItem (m_frame);
@@ -32,9 +35,9 @@ void ViewProfile::createFrame ()
 void ViewProfile::refit ()
 {
   // Force the scene boundaries to be the same, even after resizing
-  QRectF bounds = QRectF (VIEW_PROFILE_X_MIN,
+  QRectF bounds = QRectF (VIEW_PROFILE_X_MIN - SLOP_ON_SIDES,
                           VIEW_PROFILE_Y_MIN,
-                          VIEW_PROFILE_X_MAX,
+                          VIEW_PROFILE_X_MAX + 2 * SLOP_ON_SIDES,
                           VIEW_PROFILE_Y_MAX);
   fitInView (bounds);
   setSceneRect (bounds);

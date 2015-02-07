@@ -129,7 +129,6 @@ void DlgSettingsFilter::createProfileAndScale (QGridLayout *layout, int &row)
   m_viewProfile->setWhatsThis (tr ("Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust "
                                    "the range of filter parameter values that will be included in the filtered image. The clear portion will "
                                    "be included, and the shaded portion will be excluded."));
-
   layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS, 1);
   row += PROFILE_HEIGHT_IN_ROWS;
 
@@ -152,10 +151,12 @@ QWidget *DlgSettingsFilter::createSubPanel ()
   layout->setColumnStretch(0, 0); // Empty column
   layout->setColumnMinimumWidth(0, EMPTY_COLUMN_WIDTH);
   layout->setColumnStretch(1, 0); // Radio buttons
+  layout->setColumnMinimumWidth(1, 210);
   layout->setColumnStretch(2, 0); // Empty column to put some space between previous and next columns, so they are not too close
   layout->setColumnMinimumWidth(2, 15);
   layout->setColumnStretch(3, 1); // Profile
   layout->setColumnMinimumWidth(4, EMPTY_COLUMN_WIDTH); // Empty column
+  layout->setColumnStretch(4, 0);
 
   int rowLeft = 0, rowRight = 0;
   createControls (layout, rowLeft);
