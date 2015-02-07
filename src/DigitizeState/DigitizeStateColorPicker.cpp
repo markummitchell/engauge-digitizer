@@ -127,7 +127,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
 
     QMessageBox::warning (0,
                           "Color Picker",
-                          "Sorry, but the color picker point must be near a non-background pixel. Please try again");
+                          "Sorry, but the color picker point must be near a non-background pixel. Please try again.");
 
   }
 
@@ -239,35 +239,35 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelFilter &mo
                                          upperValue);
       break;
 
-  case FILTER_MODE_HUE:
-    modelFilterAfter.setHueLow(curveName,
-                               lowerValue);
-    modelFilterAfter.setHueHigh(curveName,
-                                upperValue);
-    break;
-
-  case FILTER_MODE_INTENSITY:
-    modelFilterAfter.setIntensityLow(curveName,
-                                     lowerValue);
-    modelFilterAfter.setIntensityHigh(curveName,
-                                      upperValue);
-    break;
-
-  case FILTER_MODE_SATURATION:
-    modelFilterAfter.setSaturationLow(curveName,
-                                      lowerValue);
-    modelFilterAfter.setSaturationHigh(curveName,
-                                       upperValue);
-    break;
-
-  case FILTER_MODE_VALUE:
-    modelFilterAfter.setValueLow(curveName,
+    case FILTER_MODE_HUE:
+      modelFilterAfter.setHueLow(curveName,
                                  lowerValue);
-    modelFilterAfter.setValueHigh(curveName,
+      modelFilterAfter.setHueHigh(curveName,
                                   upperValue);
-    break;
+      break;
 
-  default:
-    Q_ASSERT (false);
+    case FILTER_MODE_INTENSITY:
+      modelFilterAfter.setIntensityLow(curveName,
+                                       lowerValue);
+      modelFilterAfter.setIntensityHigh(curveName,
+                                        upperValue);
+      break;
+
+    case FILTER_MODE_SATURATION:
+      modelFilterAfter.setSaturationLow(curveName,
+                                        lowerValue);
+      modelFilterAfter.setSaturationHigh(curveName,
+                                         upperValue);
+      break;
+
+    case FILTER_MODE_VALUE:
+      modelFilterAfter.setValueLow(curveName,
+                                   lowerValue);
+      modelFilterAfter.setValueHigh(curveName,
+                                    upperValue);
+      break;
+
+    default:
+      Q_ASSERT (false);
   }
 }
