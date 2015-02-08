@@ -5,6 +5,7 @@
 #include "DocumentModelCurveProperties.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
+#include "GraphicsLine.h"
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsPointFactory.h"
 #include "GraphicsPointPolygon.h"
@@ -25,10 +26,15 @@ QGraphicsItem *GraphicsScene::addPoint (const QString &identifier,
                                         const PointStyle &pointStyle,
                                         const QPointF &posScreen)
 {
+  // Ordinal value is initially computed as one plus the max ordinal seen so far. This initial ordinal value will be overridden if the
+  // cordinates determine the ordinal values.
+  //
+  // This is an N-squared algorithm and may be worth replacing later
   GraphicsPointFactory pointFactory;
   QAbstractGraphicsShapeItem  *item = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (identifier,
                                                                                                            posScreen,
-                                                                                                           pointStyle));
+                                                                                                           pointStyle,
+                                                                                                           maxOrdinal () + 1));
   addItem (item);
 
   item->setToolTip (identifier);
@@ -68,9 +74,9 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
   return 0;
 }
 
-PointIdentifierToGraphicsItem GraphicsScene::mapPointIdentifierToGraphicsItem ()
+void GraphicsScene::mapPointIdentifierToGraphicsItem ()
 {
-  PointIdentifierToGraphicsItem map;
+  m_mapPointIdentifierToGraphicsItem.clear ();
 
   QList<QGraphicsItem*> items = QGraphicsScene::items();
   QList<QGraphicsItem*>::iterator itr;
@@ -87,12 +93,35 @@ PointIdentifierToGraphicsItem GraphicsScene::mapPointIdentifierToGraphicsItem ()
       // Mark item as Not Wanted
       item->setData (DATA_KEY_WANTED, false);
 
-      map [identifier] = item;
+      m_mapPointIdentifierToGraphicsItem [identifier] = item;
 
     }
   }
+}
 
-  return map;
+int GraphicsScene::maxOrdinal () const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::maxOrdinal";
+
+  int maxOrdinal = 0;
+
+  const QList<QGraphicsItem*> &items = QGraphicsScene::items();
+  QList<QGraphicsItem*>::const_iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    const QGraphicsItem *item = *itr;
+
+    // Only look at the Points
+    bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
+    if (isPoint) {
+
+      // Save if max value so far
+      int ordinal = item->data (DATA_KEY_ORDINAL).toInt ();
+      maxOrdinal = qMax (maxOrdinal, ordinal);
+    }
+  }
+
+  return maxOrdinal;
 }
 
 QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
@@ -185,12 +214,69 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
+  updatePoints (cmdMediator);
+  updateLines (cmdMediator);
+}
+
+void GraphicsScene::updateCurveProperties (const DocumentModelCurveProperties &modelCurveProperties)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveProperties";
+}
+
+void GraphicsScene::updateLines (CmdMediator &cmdMediator)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLines";
+
+  // We use the automatic sorting by key of QMap, to sort by ordinal
+  QMap<int, QGraphicsItem*> mapOrdinalToGraphicsItem;
+  PointIdentifierToGraphicsItem::const_iterator itrP;
+  for (itrP = m_mapPointIdentifierToGraphicsItem.begin (); itrP != m_mapPointIdentifierToGraphicsItem.end (); itrP++) {
+    QGraphicsItem *item = itrP.value();
+    int ordinal = item->data (DATA_KEY_ORDINAL).toInt ();
+    mapOrdinalToGraphicsItem [ordinal] = item;
+  }
+
+  // Loop through successive pairs of points
+  bool isFirst = true;
+  QPointF posLast (0, 0);
+  QMap<int, QGraphicsItem*>::iterator itrO;
+  for (itrO = mapOrdinalToGraphicsItem.begin (); itrO != mapOrdinalToGraphicsItem.end (); itrO++) {
+
+    QGraphicsItem *item = *itrO;
+
+    // Points that are involved
+    QPointF pos = item->pos ();
+
+    if (isFirst) {
+
+      // Skip line ending at first point
+      isFirst = false;
+
+    } else {
+
+      // Connect lines between the ordered points
+      GraphicsLine *line = new GraphicsLine;
+      line->setLine (QLineF (posLast,
+                             pos));
+
+     addItem (line);
+    }
+
+    posLast = pos;
+  }
+}
+
+void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePoints";
+
+  mapPointIdentifierToGraphicsItem();
+
   // First pass:
   // 1) Create map from point identifier to graphics item
   // 2) Mark all points as Not Wanted (this is done by while creating the map)
-  PointIdentifierToGraphicsItem pointIdentifierToGraphicsItem = mapPointIdentifierToGraphicsItem();
 
-  CallbackSceneUpdateAfterCommand ftor (pointIdentifierToGraphicsItem,
+  CallbackSceneUpdateAfterCommand ftor (m_mapPointIdentifierToGraphicsItem,
                                         *this,
                                         cmdMediator.document ());
 
@@ -223,9 +309,7 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 
     }
   }
-}
 
-void GraphicsScene::updateCurveProperties (const DocumentModelCurveProperties &modelCurveProperties)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveProperties";
+  // Refresh to reflect changes just made
+  mapPointIdentifierToGraphicsItem();
 }

@@ -402,6 +402,7 @@ void DlgSettingsCurveProperties::updateControls()
 void DlgSettingsCurveProperties::updatePreview()
 {
   const QString NULL_IDENTIFIER;
+  const int ORDINAL_0 = 0, ORDINAL_1 = 1;
 
   m_scenePreview->clear();
 
@@ -415,7 +416,8 @@ void DlgSettingsCurveProperties::updatePreview()
                    PREVIEW_HEIGHT / 2.0);
   QAbstractGraphicsShapeItem  *itemLeft = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
                                                                                                                posLeft,
-                                                                                                               pointStyle));
+                                                                                                               pointStyle,
+                                                                                                               ORDINAL_0));
   m_scenePreview->addItem (itemLeft);
 
   // Right point
@@ -423,7 +425,8 @@ void DlgSettingsCurveProperties::updatePreview()
                     PREVIEW_HEIGHT / 2.0);
   QAbstractGraphicsShapeItem  *itemRight = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
                                                                                                                 posRight,
-                                                                                                                pointStyle));
+                                                                                                                pointStyle,
+                                                                                                                ORDINAL_1));
   m_scenePreview->addItem (itemRight);
 
   // Line between points

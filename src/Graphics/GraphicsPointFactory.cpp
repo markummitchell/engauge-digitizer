@@ -15,7 +15,8 @@ GraphicsPointFactory::GraphicsPointFactory()
 
 GraphicsPointAbstractBase *GraphicsPointFactory::createPoint (const QString &identifier,
                                                               const QPointF &posScreen,
-                                                              const PointStyle &pointStyle)
+                                                              const PointStyle &pointStyle,
+                                                              int ordinal)
 {
   switch (pointStyle.shape ())
   {
@@ -25,7 +26,8 @@ GraphicsPointAbstractBase *GraphicsPointFactory::createPoint (const QString &ide
                                                              posScreen,
                                                              ColorPaletteToQColor (pointStyle.paletteColor ()),
                                                              pointStyle.radius (),
-                                                             pointStyle.lineWidth());
+                                                             pointStyle.lineWidth(),
+                                                             ordinal);
         item->setToolTip (identifier);
         item->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
@@ -38,7 +40,8 @@ GraphicsPointAbstractBase *GraphicsPointFactory::createPoint (const QString &ide
                                                                posScreen,
                                                                ColorPaletteToQColor (pointStyle.paletteColor ()),
                                                                pointStyle.polygon (),
-                                                               pointStyle.lineWidth());
+                                                               pointStyle.lineWidth(),
+                                                               ordinal);
 
         item->setToolTip (identifier);
         item->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);

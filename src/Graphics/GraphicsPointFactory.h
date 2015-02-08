@@ -17,7 +17,8 @@ public:
   /// Create circle or polygon point according to the PointStyle.
   GraphicsPointAbstractBase *createPoint (const QString &identifier,
                                           const QPointF &posScreen,
-                                          const PointStyle &pointStyle);
+                                          const PointStyle &pointStyle,
+                                          int ordinal);
 };
 
 #endif // GRAPHICS_POINT_FACTORY_H

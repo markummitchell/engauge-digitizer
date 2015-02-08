@@ -100,6 +100,7 @@ HEADERS  += \
     Filter/FilterMode.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
+    Graphics/GraphicsLine.h \
     Graphics/GraphicsPointAbstractBase.h \
     Graphics/GraphicsPointCircle.h \
     Graphics/GraphicsPointFactory.h \
@@ -108,6 +109,7 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
+    Line/LineIdentifierToGraphicsItem.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -216,6 +218,7 @@ SOURCES += \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
     Filter/FilterHistogram.cpp \
+    Graphics/GraphicsLine.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointFactory.cpp \

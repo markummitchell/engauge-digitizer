@@ -2,6 +2,7 @@
 #define GRAPHICS_SCENE_H
 
 #include "CmdMediator.h"
+#include "LineIdentifierToGraphicsItem.h"
 #include "PointIdentifierToGraphicsItem.h"
 #include <QGraphicsScene>
 #include <QStringList>
@@ -14,8 +15,12 @@ class MainWindow;
 class PointStyle;
 class QGraphicsItem;
 
-/// Add Point handling to generic QGraphicsScene. The primary task is to update the graphics items to stay in
-/// sync with the Points in the Document.
+/// Add point and line handling to generic QGraphicsScene. The primary tasks are:
+/// -# update the graphics items to stay in sync with the explicit Points in the Document
+/// -# update the graphics items to stay in sync with the implicit lines between the Points, according to Document settings
+///
+/// This class stores points and lines as QGraphicsItems, but also maintains identifier-to-QGraphicsItems mappings to
+/// the points and lines are accessible for updates (like when dragging points around and we need to update the attached lines).
 class GraphicsScene : public QGraphicsScene
 {
 public:
@@ -26,13 +31,6 @@ public:
   QGraphicsItem *addPoint (const QString &identifier,
                            const PointStyle &pointStyle,
                            const QPointF &posScreen);
-
-  /// Dump all important cursors
-  QString dumpCursors () const;
-
-  /// Create a map from Point identifier to graphics item in the scene. Typically the map lives only briefly and
-  /// gets regenerated whenever it is needed.
-  PointIdentifierToGraphicsItem mapPointIdentifierToGraphicsItem ();
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
@@ -55,7 +53,29 @@ public:
   void updateCurveProperties(const DocumentModelCurveProperties &modelCurveProperties);
 
 private:
+
+  /// Dump all important cursors
+  QString dumpCursors () const;
+
   const QGraphicsPixmapItem *image () const;
+
+  /// Regenerate m_mapPointIdentifierToGraphicsItem
+  void mapPointIdentifierToGraphicsItem ();
+
+  /// Max ordinal of the Points.
+  int maxOrdinal () const;
+
+  /// Update lines using a multi-pass algorithm.
+  void updateLines (CmdMediator &cmdMediator);
+
+  /// Update Points using a multi-pass algorithm.
+  void updatePoints (CmdMediator &cmdMediator);
+
+  /// Mapping for moving lines when their points get moved
+  LineIdentifierToGraphicsItem m_lineIdentifierToGraphicsItem;
+
+  /// Mapping for finding Points.
+  PointIdentifierToGraphicsItem m_mapPointIdentifierToGraphicsItem;
 };
 
 #endif // GRAPHICS_SCENE_H

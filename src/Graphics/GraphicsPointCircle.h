@@ -14,7 +14,8 @@ public:
                       const QPointF &posScreen,
                       const QColor &color,
                       unsigned int radius,
-                      double lineWidth);
+                      double lineWidth,
+                      int ordinal);
 
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);

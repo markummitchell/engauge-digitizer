@@ -34,6 +34,9 @@ public:
   /// Return the current index for storage in case we need to reset it later while performing a Redo.
   static unsigned int identifierIndex ();
 
+  /// Get method for ordinal.
+  int ordinal () const;
+
   /// Accessor for graph position.
   QPointF posGraph () const;
 
@@ -42,6 +45,9 @@ public:
 
   /// Reset the current index while performing a Redo.
   static void setIdentifierIndex (unsigned int identifierIndex);
+
+  /// Set the ordinal used for ordering Points.
+  void setOrdinal (int ordinal);
 
   /// Set method for position in graph coordinates.
   void setPosGraph (const QPointF &posGraph);
@@ -62,6 +68,7 @@ private:
   QString m_identifier;
   QPointF m_posScreen;
   QPointF m_posGraph;
+  int m_ordinal;
 
   static unsigned int m_identifierIndex; // For generating unique identifiers
 };

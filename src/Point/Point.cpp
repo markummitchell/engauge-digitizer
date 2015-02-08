@@ -10,7 +10,8 @@ Point::Point(const QString &curveName,
              const QPointF posGraph) :
   m_identifier (uniqueIdentifierGenerator(curveName)),
   m_posScreen (posScreen),
-  m_posGraph (posGraph)
+  m_posGraph (posGraph),
+  m_ordinal (0)
 {
   Q_ASSERT (!curveName.isEmpty ());
 }
@@ -21,7 +22,8 @@ Point::Point(const QString &curveName,
              const QPointF posGraph) :
   m_identifier (identifier),
   m_posScreen (posScreen),
-  m_posGraph (posGraph)
+  m_posGraph (posGraph),
+  m_ordinal (0)
 {
   Q_ASSERT (!curveName.isEmpty ());
 }
@@ -31,6 +33,7 @@ Point::Point (const Point &point)
   m_posScreen = point.posScreen ();
   m_posGraph = point.posGraph ();
   m_identifier = point.identifier ();
+  m_ordinal = point.ordinal ();
 }
 
 Point &Point::operator=(const Point &point)
@@ -38,6 +41,7 @@ Point &Point::operator=(const Point &point)
   m_posScreen = point.posScreen ();
   m_posGraph = point.posGraph ();
   m_identifier = point.identifier ();
+  m_ordinal = point.ordinal ();
 
   return *this;
 }
@@ -58,6 +62,11 @@ unsigned int Point::identifierIndex ()
   return m_identifierIndex;
 }
 
+int Point::ordinal () const
+{
+  return m_ordinal;
+}
+
 QPointF Point::posGraph () const
 {
   return m_posGraph;
@@ -71,6 +80,11 @@ QPointF Point::posScreen () const
 void Point::setIdentifierIndex (unsigned int identifierIndex)
 {
   m_identifierIndex = identifierIndex;
+}
+
+void Point::setOrdinal(int ordinal)
+{
+  m_ordinal = ordinal;
 }
 
 void Point::setPosGraph (const QPointF &posGraph)
