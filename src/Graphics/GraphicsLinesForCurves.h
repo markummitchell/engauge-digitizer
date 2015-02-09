@@ -1,6 +1,8 @@
 #ifndef GRAPHICS_LINES_FOR_CURVES_H
 #define GRAPHICS_LINES_FOR_CURVES_H
 
+#include "LineStyle.h"
+#include "LineStyles.h"
 #include <QHash>
 
 class GraphicsLinesForCurve;
@@ -16,13 +18,15 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
-  /// Add new item. An assert happens if the item is already in the map
+  /// Add new item. If the item is already in the map then it is just updated
   void saveItem (const QString &curveName,
+                 const LineStyle &lineStyle,
                  int ordinal,
                  QGraphicsItem*line);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene);
+  void updateLines (GraphicsScene &scene,
+                    const LineStyles &lineStyles);
 
 private:
 

@@ -5,6 +5,7 @@
 
 class GraphicsLine;
 class GraphicsScene;
+class LineStyle;
 class QGraphicsItem;
 
 typedef QMap<int, QGraphicsItem*> GraphicsLineContainer;
@@ -19,10 +20,12 @@ public:
 
   /// Add new item. An assert happens if the item is already in the map
   void saveItem (int ordinal,
+                 const LineStyle &lineStyle,
                  QGraphicsItem *line);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene);
+  void updateLines (GraphicsScene &scene,
+                    const LineStyle &lineStyle);
 
 private:
 

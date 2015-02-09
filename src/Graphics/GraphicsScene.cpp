@@ -242,11 +242,13 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
 
     // Save entry even if entry already exists
     m_graphicsLinesForCurves.saveItem (curveName,
+                                       cmdMediator.document().modelCurveProperties().lineStyle(curveName),
                                        ordinal,
                                        item);
   }
 
-  m_graphicsLinesForCurves.updateLines (*this);
+  m_graphicsLinesForCurves.updateLines (*this,
+                                        cmdMediator.document().modelCurveProperties().lineStyles());
 }
 
 void GraphicsScene::updatePoints (CmdMediator &cmdMediator)

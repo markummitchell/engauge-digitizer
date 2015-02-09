@@ -4,12 +4,9 @@
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
 #include "LineStyle.h"
+#include "LineStyles.h"
 #include "PointStyle.h"
-#include <QHash>
-
-// Lookup-tables by curve name
-typedef QHash<QString, LineStyle> LineStyles;
-typedef QHash<QString, PointStyle> PointStyles;
+#include "PointStyles.h"
 
 class Document;
 
@@ -34,6 +31,9 @@ public:
 
   /// Get method for connect as method for lines in specified curve.
   CurveConnectAs lineConnectAs (const QString &curveName) const;
+
+  /// Get method for line style in specified curve.
+  LineStyle lineStyle (const QString &curveName) const;
 
   /// Get method for copying all line styles in one step.
   const LineStyles &lineStyles () const;

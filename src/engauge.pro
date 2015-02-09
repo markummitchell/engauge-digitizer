@@ -113,6 +113,7 @@ HEADERS  += \
     Grid/GridCoordDisable.h \
     Line/LineIdentifierToGraphicsItem.h \
     Line/LineStyle.h \
+    Line/LineStyles.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     main/MainWindow.h \
@@ -122,6 +123,7 @@ HEADERS  += \
     Point/PointIdentifierToGraphicsItem.h \
     Point/PointShape.h \
     Point/PointStyle.h \
+    Point/PointStyles.h \
     util/QtToString.h \
     Segment/Segment.h \
     Segment/SegmentFactory.h \

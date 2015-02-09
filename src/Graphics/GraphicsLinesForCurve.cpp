@@ -1,6 +1,7 @@
 #include "GraphicsLine.h"
 #include "GraphicsLinesForCurve.h"
 #include "GraphicsScene.h"
+#include "LineStyle.h"
 #include "Logger.h"
 #include <QGraphicsItem>
 
@@ -9,26 +10,28 @@ GraphicsLinesForCurve::GraphicsLinesForCurve()
 }
 
 void GraphicsLinesForCurve::saveItem (int ordinal,
+                                      const LineStyle &lineStyle,
                                       QGraphicsItem *line)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::saveItem";
 
   if (!m_graphicsLines.contains (ordinal)) {
-    m_graphicsLines [ordinal] = new GraphicsLine;
+    m_graphicsLines [ordinal] = new GraphicsLine (lineStyle);
   }
 
   m_graphicsLines [ordinal] = line;
 }
 
-void GraphicsLinesForCurve::updateLines (GraphicsScene &scene)
+void GraphicsLinesForCurve::updateLines (GraphicsScene &scene,
+                                         const LineStyle &lineStyle)
 {
   // Loop through successive pairs of points
   bool isFirst = true;
   QPointF posLast (0, 0);
   QMap<int, QGraphicsItem*>::iterator itr;
-  for (int i = 0; i < m_graphicsLines.count () ; i++) {
+  for (itr = m_graphicsLines.begin (); itr != m_graphicsLines.end (); itr++) {
 
-    QGraphicsItem *item = m_graphicsLines.value (i);
+    QGraphicsItem *item = *itr;
 
     // Points that are involved
     QPointF pos = item->pos ();
@@ -41,7 +44,7 @@ void GraphicsLinesForCurve::updateLines (GraphicsScene &scene)
     } else {
 
       // Connect lines between the ordered points
-      GraphicsLine *line = new GraphicsLine;
+      GraphicsLine *line = new GraphicsLine (lineStyle);
       line->setLine (QLineF (posLast,
                              pos));
 
