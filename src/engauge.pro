@@ -101,6 +101,8 @@ HEADERS  += \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsLine.h \
+    Graphics/GraphicsLinesForCurve.h \
+    Graphics/GraphicsLinesForCurves.h \
     Graphics/GraphicsPointAbstractBase.h \
     Graphics/GraphicsPointCircle.h \
     Graphics/GraphicsPointFactory.h \
@@ -219,6 +221,8 @@ SOURCES += \
     Filter/Filter.cpp \
     Filter/FilterHistogram.cpp \
     Graphics/GraphicsLine.cpp \
+    Graphics/GraphicsLinesForCurve.cpp \
+    Graphics/GraphicsLinesForCurves.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPointCircle.cpp \
     Graphics/GraphicsPointFactory.cpp \

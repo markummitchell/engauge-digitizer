@@ -12,6 +12,7 @@
 #include "GraphicsScene.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "Point.h"
 #include "PointStyle.h"
 #include <QApplication>
 #include <QGraphicsItem>
@@ -228,42 +229,24 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLines";
 
   // We use the automatic sorting by key of QMap, to sort by ordinal
-  QMap<int, QGraphicsItem*> mapOrdinalToGraphicsItem;
-  PointIdentifierToGraphicsItem::const_iterator itrP;
-  for (itrP = m_mapPointIdentifierToGraphicsItem.begin (); itrP != m_mapPointIdentifierToGraphicsItem.end (); itrP++) {
-    QGraphicsItem *item = itrP.value();
+  PointIdentifierToGraphicsItem::const_iterator itr;
+  for (itr = m_mapPointIdentifierToGraphicsItem.begin (); itr != m_mapPointIdentifierToGraphicsItem.end (); itr++) {
+
+    // Get item
+    QGraphicsItem *item = itr.value();
+
+    // Get parameters for the item
+    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+    QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
     int ordinal = item->data (DATA_KEY_ORDINAL).toInt ();
-    mapOrdinalToGraphicsItem [ordinal] = item;
+
+    // Save entry even if entry already exists
+    m_graphicsLinesForCurves.saveItem (curveName,
+                                       ordinal,
+                                       item);
   }
 
-  // Loop through successive pairs of points
-  bool isFirst = true;
-  QPointF posLast (0, 0);
-  QMap<int, QGraphicsItem*>::iterator itrO;
-  for (itrO = mapOrdinalToGraphicsItem.begin (); itrO != mapOrdinalToGraphicsItem.end (); itrO++) {
-
-    QGraphicsItem *item = *itrO;
-
-    // Points that are involved
-    QPointF pos = item->pos ();
-
-    if (isFirst) {
-
-      // Skip line ending at first point
-      isFirst = false;
-
-    } else {
-
-      // Connect lines between the ordered points
-      GraphicsLine *line = new GraphicsLine;
-      line->setLine (QLineF (posLast,
-                             pos));
-
-     addItem (line);
-    }
-
-    posLast = pos;
-  }
+  m_graphicsLinesForCurves.updateLines (*this);
 }
 
 void GraphicsScene::updatePoints (CmdMediator &cmdMediator)

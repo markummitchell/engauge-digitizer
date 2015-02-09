@@ -2,9 +2,11 @@
 #define GRAPHICS_SCENE_H
 
 #include "CmdMediator.h"
+#include "GraphicsLinesForCurves.h"
 #include "LineIdentifierToGraphicsItem.h"
 #include "PointIdentifierToGraphicsItem.h"
 #include <QGraphicsScene>
+#include <QHash>
 #include <QStringList>
 
 class CmdMediator;
@@ -76,6 +78,9 @@ private:
 
   /// Mapping for finding Points.
   PointIdentifierToGraphicsItem m_mapPointIdentifierToGraphicsItem;
+
+  /// Curve name to GraphicsLinesForCurve
+  GraphicsLinesForCurves m_graphicsLinesForCurves;
 };
 
 #endif // GRAPHICS_SCENE_H
