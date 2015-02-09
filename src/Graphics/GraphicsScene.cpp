@@ -78,6 +78,7 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
 void GraphicsScene::mapPointIdentifierToGraphicsItem ()
 {
   m_mapPointIdentifierToGraphicsItem.clear ();
+  m_mapPointIdentifierToGraphicsPoint.clear ();
 
   QList<QGraphicsItem*> items = QGraphicsScene::items();
   QList<QGraphicsItem*>::iterator itr;
@@ -234,17 +235,18 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
 
     // Get item
     QGraphicsItem *item = itr.value();
+    GraphicsPointAbstractBase *point = m_mapPointIdentifierToGraphicsPoint [itr.key ()];
 
     // Get parameters for the item
-    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+    QString pointIdentifier = point->data (DATA_KEY_IDENTIFIER).toString ();
     QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-    int ordinal = item->data (DATA_KEY_ORDINAL).toInt ();
+    int ordinal = point->data (DATA_KEY_ORDINAL).toInt ();
 
     // Save entry even if entry already exists
-    m_graphicsLinesForCurves.saveItem (curveName,
-                                       cmdMediator.document().modelCurveProperties().lineStyle(curveName),
-                                       ordinal,
-                                       item);
+    m_graphicsLinesForCurves.savePoint (curveName,
+                                        ordinal,
+                                        item,
+                                        point);
   }
 
   m_graphicsLinesForCurves.updateLines (*this,

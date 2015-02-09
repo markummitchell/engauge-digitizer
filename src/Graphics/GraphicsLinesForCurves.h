@@ -6,6 +6,7 @@
 #include <QHash>
 
 class GraphicsLinesForCurve;
+class GraphicsPointAbstractBase;
 class GraphicsScene;
 class QGraphicsItem;
 
@@ -18,11 +19,14 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
-  /// Add new item. If the item is already in the map then it is just updated
-  void saveItem (const QString &curveName,
-                 const LineStyle &lineStyle,
-                 int ordinal,
-                 QGraphicsItem*line);
+  /// Clear out existing point just prior to storing new set of points
+  void resetPoints ();
+
+  /// Add new item. If the item is already in the map then it is just updated. The item/point pointers both point to the same object
+  void savePoint (const QString &curveName,
+                  int ordinal,
+                  QGraphicsItem *item,
+                  GraphicsPointAbstractBase *point);
 
   /// Remove stale lines and insert missing lines
   void updateLines (GraphicsScene &scene,

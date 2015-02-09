@@ -1,6 +1,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsLine.h"
 #include "LineStyle.h"
+#include <QLineF>
 #include <QPen>
 
 GraphicsLine::GraphicsLine(const LineStyle &lineStyle)
@@ -12,4 +13,20 @@ GraphicsLine::GraphicsLine(const LineStyle &lineStyle)
   QPen pen (QBrush (color),
             width);
   setPen (pen);
+}
+
+void GraphicsLine::moveStart (const QPointF &pos)
+{
+  QLineF newLine (pos,
+                  line().p2 ());
+
+  setLine (newLine);
+}
+
+void GraphicsLine::moveEnd (const QPointF &pos)
+{
+  QLineF newLine (line().p1 (),
+                  pos);
+
+  setLine (newLine);
 }

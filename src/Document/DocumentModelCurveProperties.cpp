@@ -79,12 +79,6 @@ CurveConnectAs DocumentModelCurveProperties::lineConnectAs (const QString &curve
   return m_lineStyles [curveName].curveConnectAs();
 }
 
-LineStyle DocumentModelCurveProperties::lineStyle (const QString &curveName) const
-{
-  Q_ASSERT (m_lineStyles.contains (curveName));
-  return m_lineStyles [curveName];
-}
-
 const LineStyles &DocumentModelCurveProperties::lineStyles () const
 {
   return m_lineStyles;
