@@ -1,21 +1,21 @@
 #include "DataKey.h"
 #include "GraphicsPoint.h"
-#include "GraphicsPointPolygon.h"
+#include "GraphicsPointEllipse.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GraphicsPointPolygon::GraphicsPointPolygon(GraphicsPoint &graphicsPoint) :
+GraphicsPointEllipse::GraphicsPointEllipse(GraphicsPoint &graphicsPoint) :
   m_graphicsPoint (graphicsPoint)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointPolygon::GraphicsPointPolygon";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointEllipse::GraphicsPointEllipse";
 }
 
-QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
+QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
                                           const QVariant &value)
 {
   if (change == QGraphicsItem::ItemPositionHasChanged) {
 
-    LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPointPolygon::itemChange"
+    LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPointEllipse::itemChange"
                                  << " identifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
                                  << " positionHasChanged";
 
@@ -24,6 +24,6 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
     m_graphicsPoint.moveAttachedLines(pos());
   }
 
-  return QGraphicsPolygonItem::itemChange(change,
+  return QGraphicsEllipseItem::itemChange(change,
                                           value);
 }

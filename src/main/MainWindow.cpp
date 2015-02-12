@@ -29,7 +29,6 @@
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
-#include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "LoadImageFromUrl.h"

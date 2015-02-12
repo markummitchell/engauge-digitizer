@@ -93,8 +93,7 @@ HEADERS  += \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \
-    Graphics/GraphicsPointCircle.h \
-    Graphics/GraphicsPointPolygon.h \
+    Graphics/GraphicsPoint.h \
     Graphics/GraphicsScene.h \
     Graphics/GraphicsView.h \
     Grid/GridCoordDisable.h \
@@ -105,7 +104,7 @@ HEADERS  += \
     main/MainWindow.h \
     Mime/MimePoints.h \
     Point/Point.h \
-    Point/PointIdentifierToGraphicsItem.h \
+    Point/PointIdentifierToGraphicsPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
@@ -192,8 +191,7 @@ SOURCES += \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
-    Graphics/GraphicsPointCircle.cpp \
-    Graphics/GraphicsPointPolygon.cpp \
+    Graphics/GraphicsPoint.cpp \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \
     Line/LineStyle.cpp \

@@ -25,8 +25,7 @@ void GraphicsLinesForCurves::resetPoints ()
 
 void GraphicsLinesForCurves::savePoint (const QString &curveName,
                                         int ordinal,
-                                        QGraphicsItem *item,
-                                        GraphicsPointAbstractBase *point)
+                                        GraphicsPoint *point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::savePoint";
 
@@ -38,7 +37,6 @@ void GraphicsLinesForCurves::savePoint (const QString &curveName,
     }
 
     m_graphicsLinesForCurve [curveName]->savePoint (ordinal,
-                                                    item,
                                                     point);
   }
 }

@@ -5,8 +5,8 @@
 #include "DlgSpinBoxDouble.h"
 #include "DlgSpinBoxInt.h"
 #include "EnumsToQt.h"
+#include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
-#include "GraphicsPointPolygon.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -414,20 +414,20 @@ void DlgSettingsCurveProperties::updatePreview()
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
                    PREVIEW_HEIGHT / 2.0);
-  QAbstractGraphicsShapeItem  *itemLeft = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
-                                                                                                               posLeft,
-                                                                                                               pointStyle,
-                                                                                                               ORDINAL_0));
-  m_scenePreview->addItem (itemLeft);
+  pointFactory.createPoint (*m_scenePreview,
+                            NULL_IDENTIFIER,
+                            posLeft,
+                            pointStyle,
+                            ORDINAL_0);
 
   // Right point
   QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
                     PREVIEW_HEIGHT / 2.0);
-  QAbstractGraphicsShapeItem  *itemRight = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (NULL_IDENTIFIER,
-                                                                                                                posRight,
-                                                                                                                pointStyle,
-                                                                                                                ORDINAL_1));
-  m_scenePreview->addItem (itemRight);
+  pointFactory.createPoint (*m_scenePreview,
+                            NULL_IDENTIFIER,
+                            posRight,
+                            pointStyle,
+                            ORDINAL_1);
 
   // Line between points
   QGraphicsLineItem *itemLine = new QGraphicsLineItem (posLeft.x(),

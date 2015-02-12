@@ -6,9 +6,8 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsLine.h"
-#include "GraphicsPointAbstractBase.h"
+#include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
-#include "GraphicsPointPolygon.h"
 #include "GraphicsScene.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -23,7 +22,7 @@ GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
 {
 }
 
-QGraphicsItem *GraphicsScene::addPoint (const QString &identifier,
+GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
                                         const PointStyle &pointStyle,
                                         const QPointF &posScreen)
 {
@@ -32,16 +31,16 @@ QGraphicsItem *GraphicsScene::addPoint (const QString &identifier,
   //
   // This is an N-squared algorithm and may be worth replacing later
   GraphicsPointFactory pointFactory;
-  QAbstractGraphicsShapeItem  *item = dynamic_cast<QAbstractGraphicsShapeItem*> (pointFactory.createPoint (identifier,
-                                                                                                           posScreen,
-                                                                                                           pointStyle,
-                                                                                                           maxOrdinal () + 1));
-  addItem (item);
+  GraphicsPoint *point = pointFactory.createPoint (*this,
+                                                   identifier,
+                                                   posScreen,
+                                                   pointStyle,
+                                                   maxOrdinal () + 1);
 
-  item->setToolTip (identifier);
-  item->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  point->setToolTip (identifier);
+  point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
-  return item;
+  return point;
 }
 
 QString GraphicsScene::dumpCursors () const
@@ -73,32 +72,6 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
 
   Q_ASSERT (false);
   return 0;
-}
-
-void GraphicsScene::mapPointIdentifierToGraphicsItem ()
-{
-  m_mapPointIdentifierToGraphicsItem.clear ();
-  m_mapPointIdentifierToGraphicsPoint.clear ();
-
-  QList<QGraphicsItem*> items = QGraphicsScene::items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    QGraphicsItem* item = *itr;
-
-    // Skip the image and only consider the Points
-    bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    if (isPoint) {
-
-      QString identifier = item->data (DATA_KEY_IDENTIFIER).toString ();
-
-      // Mark item as Not Wanted
-      item->setData (DATA_KEY_WANTED, false);
-
-      m_mapPointIdentifierToGraphicsItem [identifier] = item;
-
-    }
-  }
 }
 
 int GraphicsScene::maxOrdinal () const
@@ -230,12 +203,11 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLines";
 
   // We use the automatic sorting by key of QMap, to sort by ordinal
-  PointIdentifierToGraphicsItem::const_iterator itr;
-  for (itr = m_mapPointIdentifierToGraphicsItem.begin (); itr != m_mapPointIdentifierToGraphicsItem.end (); itr++) {
+  PointIdentifierToGraphicsPoint::const_iterator itr;
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
 
     // Get item
-    QGraphicsItem *item = itr.value();
-    GraphicsPointAbstractBase *point = m_mapPointIdentifierToGraphicsPoint [itr.key ()];
+    GraphicsPoint *point = itr.value();
 
     // Get parameters for the item
     QString pointIdentifier = point->data (DATA_KEY_IDENTIFIER).toString ();
@@ -245,7 +217,6 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
     // Save entry even if entry already exists
     m_graphicsLinesForCurves.savePoint (curveName,
                                         ordinal,
-                                        item,
                                         point);
   }
 
@@ -257,18 +228,20 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePoints";
 
-  mapPointIdentifierToGraphicsItem();
-
-  // First pass:
-  // 1) Create map from point identifier to graphics item
-  // 2) Mark all points as Not Wanted (this is done by while creating the map)
-
-  CallbackSceneUpdateAfterCommand ftor (m_mapPointIdentifierToGraphicsItem,
+  CallbackSceneUpdateAfterCommand ftor (m_mapPointIdentifierToGraphicsPoint,
                                         *this,
                                         cmdMediator.document ());
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                     &CallbackSceneUpdateAfterCommand::callback);
 
-  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackSceneUpdateAfterCommand::callback);
+  // First pass:
+  // 1) Mark all points as Not Wanted (this is done while creating the map)
+  PointIdentifierToGraphicsPoint::iterator itr;
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+    GraphicsPoint *point = *itr;
+    point->setWanted (false);
+  }
+
   // Next pass:
   // 1) Existing points that are found in the map are marked as Wanted
   // 2) Add new points that were just created in the Document. The new points are marked as Wanted
@@ -277,26 +250,15 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  QList<QGraphicsItem*> items = QGraphicsScene::items();
-  QList<QGraphicsItem*>::iterator itrG = items.begin ();
-  while (itrG != items.end()) {
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
 
-    QGraphicsItem* item = *itrG;
+    QString identifier = itr.key();
+    GraphicsPoint *graphicsPoint = itr.value();
 
-    bool isWanted = item->data (DATA_KEY_WANTED).toBool ();
-    bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    if (isPoint && !isWanted) {
+    if (!graphicsPoint->wanted ()) {
 
-      removeItem (item);
-      itrG = items.erase (itrG);
-
-    } else {
-
-      ++itrG;
-
+      delete graphicsPoint;
+      m_mapPointIdentifierToGraphicsPoint.remove (identifier);
     }
   }
-
-  // Refresh to reflect changes just made
-  mapPointIdentifierToGraphicsItem();
 }

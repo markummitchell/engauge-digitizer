@@ -1,7 +1,7 @@
 #include "DataKey.h"
 #include "GraphicsLine.h"
 #include "GraphicsLinesForCurve.h"
-#include "GraphicsPointAbstractBase.h"
+#include "GraphicsPoint.h"
 #include "GraphicsScene.h"
 #include "LineStyle.h"
 #include "Logger.h"
@@ -20,12 +20,10 @@ void GraphicsLinesForCurve::resetPoints()
 }
 
 void GraphicsLinesForCurve::savePoint (int ordinal,
-                                       QGraphicsItem *item,
-                                       GraphicsPointAbstractBase *point)
+                                       GraphicsPoint *point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::savePoint";
 
-  m_graphicsItems [ordinal] = item;
   m_graphicsPoints [ordinal] = point;
 }
 
@@ -36,17 +34,14 @@ void GraphicsLinesForCurve::updateLines (GraphicsScene &scene,
   bool isFirst = true;
   int ordinalLast = -1;
   QPointF posLast (0, 0);
-  QMap<int, QGraphicsItem*>::iterator itr;
-  for (itr = m_graphicsItems.begin (); itr != m_graphicsItems.end (); itr++) {
+  QMap<int, GraphicsPoint*>::iterator itr;
+  for (itr = m_graphicsPoints.begin (); itr != m_graphicsPoints.end (); itr++) {
 
     int ordinal = itr.key();
-    QGraphicsItem *item = itr.value();
-
-    // Get GraphicsPointAbstractBase representation of the same item
-    GraphicsPointAbstractBase *point = m_graphicsPoints [ordinal];
+    GraphicsPoint *point = itr.value();
 
     // Points that are involved
-    QPointF pos = item->pos ();
+    QPointF pos = point->pos ();
 
     if (isFirst) {
 

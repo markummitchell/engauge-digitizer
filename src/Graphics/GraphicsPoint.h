@@ -1,0 +1,75 @@
+#ifndef GRAPHICS_POINT_H
+#define GRAPHICS_POINT_H
+
+#include "GraphicsPointAbstractBase.h"
+#include <QGraphicsEllipseItem>
+#include <QGraphicsPolygonItem>
+#include <QPointF>
+
+class QGraphicsScene;
+
+/// Graphics item for drawing a circular or polygonal Point. 
+///
+/// Layering is used for the single graphics item contained by this class. External code only has to deal with this
+/// single class, and there is no multiple inheritance involved. If inheritance was used, we would have one class
+/// based on QGraphicsEllipseItem and another on QGraphicsPolygonItem, so having a single class (for the convenience
+/// of the external code) would involve multiple inheritance (of those two classes). With the inheritance approach, 
+/// using just the methods supplied by QGraphicsItem would be inadequate.
+class GraphicsPoint : public GraphicsPointAbstractBase
+{
+public:
+  /// Constructor of circular point.
+  GraphicsPoint(QGraphicsScene &scene,
+                const QString &identifier,
+                const QPointF &posScreen,
+                const QColor &color,
+                unsigned int radius,
+                double lineWidth,
+                int ordinal);
+
+  /// Constructor of polygon point.
+  GraphicsPoint(QGraphicsScene &scene,
+                const QString &identifier,
+                const QPointF &posScreen,
+                const QColor &color,
+                const QPolygonF &polygon,
+                double lineWidth,
+                int ordinal);
+
+  /// Destructor. This remove the graphics item from the scene
+  ~GraphicsPoint ();
+
+  /// Proxy method for QGraphicsItem::data
+  QVariant data (int key) const;
+
+  /// Proxy method for QGraphicsItem::pos.
+  QPointF pos () const;
+
+  /// Proxy method for QGraphicsItem::setData
+  void setData (int key, const QVariant &data);
+
+  /// Proxy method for QGraphicsItem::setToolTip
+  void setToolTip (const QString &toolTip);
+
+  /// Mark point as wanted/unwanted. This is for determining which points are to be removed when updating
+  void setWanted (bool wanted);
+
+  /// Identify point as wanted//unwanted
+  bool wanted () const;
+
+private:
+  GraphicsPoint();
+
+  // Ellipse graphics items. Unused if point is polygonal.
+  QGraphicsEllipseItem *m_graphicsItemEllipse;
+  QGraphicsEllipseItem *m_shadowZeroWidthEllipse; // Shadow item overlays the superclass instance to ensure visibility
+
+  // Polygon graphics items. Unused if point is elliptical.
+  QGraphicsPolygonItem *m_graphicsItemPolygon;
+  QGraphicsPolygonItem *m_shadowZeroWidthPolygon; // Shadow item overlays the superclass instance to ensure visibility
+
+  // Housekeeping
+  bool m_wanted;
+};
+
+#endif // GRAPHICS_POINT_H

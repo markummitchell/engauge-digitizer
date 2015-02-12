@@ -26,16 +26,14 @@ public:
   GraphicsPointAbstractBase();
   virtual ~GraphicsPointAbstractBase();
 
+  /// Move lines that are attached to this line, since they were bound previously
+  void moveAttachedLines (const QPointF &pos);
+
   /// Bind line to this point, with this point as the line end
   void setLineWithPointAsEnd (GraphicsLine &graphicsLine);
 
   /// Bind line to this point, with this point as the line start
   void setLineWithPointAsStart (GraphicsLine &graphicsLine);
-
-protected:
-
-  /// Move lines that are attached to this line, since they were bound previously
-  void moveAttachedLines (const QPointF &pos);
 
 private:
   void removeOverrideCursor ();

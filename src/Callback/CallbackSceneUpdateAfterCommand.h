@@ -2,7 +2,7 @@
 #define CALLBACK_SCENE_UPDATE_AFTER_COMMAND_H
 
 #include "CallbackSearchReturn.h"
-#include "PointIdentifierToGraphicsItem.h"
+#include "PointIdentifierToGraphicsPoint.h"
 #include "PointStyle.h"
 
 class Document;
@@ -14,7 +14,7 @@ class CallbackSceneUpdateAfterCommand
 {
 public:
   /// Single constructor.
-  CallbackSceneUpdateAfterCommand(PointIdentifierToGraphicsItem &pointIdentifierToGraphicsItem,
+  CallbackSceneUpdateAfterCommand(PointIdentifierToGraphicsPoint &pointIdentifierToGraphicsPoint,
                                   GraphicsScene &scene,
                                   const Document &document);
 
@@ -25,7 +25,7 @@ public:
 private:
   CallbackSceneUpdateAfterCommand();
 
-  PointIdentifierToGraphicsItem &m_pointIdentifierToGraphicsItem;
+  PointIdentifierToGraphicsPoint &m_pointIdentifierToGraphicsPoint;
   GraphicsScene &m_scene;
   const Document &m_document;
 };

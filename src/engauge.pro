@@ -103,8 +103,9 @@ HEADERS  += \
     Graphics/GraphicsLine.h \
     Graphics/GraphicsLinesForCurve.h \
     Graphics/GraphicsLinesForCurves.h \
+    Graphics/GraphicsPoint.h \
     Graphics/GraphicsPointAbstractBase.h \
-    Graphics/GraphicsPointCircle.h \
+    Graphics/GraphicsPointEllipse.h \
     Graphics/GraphicsPointFactory.h \
     Graphics/GraphicsPointPolygon.h \
     Graphics/GraphicsScene.h \
@@ -120,7 +121,7 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Point/Point.h \
-    Point/PointIdentifierToGraphicsItem.h \
+    Point/PointIdentifierToGraphicsPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     Point/PointStyles.h \
@@ -225,8 +226,9 @@ SOURCES += \
     Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
+    Graphics/GraphicsPoint.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
-    Graphics/GraphicsPointCircle.cpp \
+    Graphics/GraphicsPointEllipse.cpp \
     Graphics/GraphicsPointFactory.cpp \
     Graphics/GraphicsPointPolygon.cpp \
     Graphics/GraphicsScene.cpp \

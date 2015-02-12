@@ -1,21 +1,17 @@
 #ifndef GRAPHICS_POINT_POLYGON_H
 #define GRAPHICS_POINT_POLYGON_H
 
-#include "GraphicsPointAbstractBase.h"
 #include <QGraphicsPolygonItem>
-#include <QPolygonF>
+#include <QPointF>
 
-/// Polygon graphics item for displaying a single Point.
-class GraphicsPointPolygon : public GraphicsPointAbstractBase, public QGraphicsPolygonItem
+class GraphicsPoint;
+
+/// This class add event handling to QGraphicsPolygonItem
+class GraphicsPointPolygon : public QGraphicsPolygonItem
 {
 public:
-  /// Single constructor.
-  GraphicsPointPolygon(const QString &identifier,
-                       const QPointF &posScreen,
-                       const QColor &color,
-                       const QPolygonF &polygon,
-                       double lineWidth,
-                       int ordinal);
+  /// Single constructor
+  GraphicsPointPolygon(GraphicsPoint &graphicsPoint);
 
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -23,7 +19,7 @@ public:
 private:
   GraphicsPointPolygon();
 
-  QGraphicsPolygonItem *m_shadowZeroWidth; // Shadow item overlays the superclass instance to ensure visibility
+  GraphicsPoint &m_graphicsPoint;
 };
 
 #endif // GRAPHICS_POINT_POLYGON_H

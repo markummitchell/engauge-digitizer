@@ -4,7 +4,7 @@
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
 #include "LineIdentifierToGraphicsItem.h"
-#include "PointIdentifierToGraphicsItem.h"
+#include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>
 #include <QStringList>
@@ -13,9 +13,9 @@ class CmdMediator;
 class Curve;
 class CurvesGraphs;
 class DocumentModelCurveProperties;
+class GraphicsPoint;
 class MainWindow;
 class PointStyle;
-class QGraphicsItem;
 
 /// Add point and line handling to generic QGraphicsScene. The primary tasks are:
 /// -# update the graphics items to stay in sync with the explicit Points in the Document
@@ -30,7 +30,7 @@ public:
   GraphicsScene(MainWindow *mainWindow);
 
   /// Add one QGraphicsItem-based object that represents one Point.
-  QGraphicsItem *addPoint (const QString &identifier,
+  GraphicsPoint *addPoint (const QString &identifier,
                            const PointStyle &pointStyle,
                            const QPointF &posScreen);
 
@@ -61,9 +61,6 @@ private:
 
   const QGraphicsPixmapItem *image () const;
 
-  /// Regenerate m_mapPointIdentifierToGraphicsItem
-  void mapPointIdentifierToGraphicsItem ();
-
   /// Max ordinal of the Points.
   int maxOrdinal () const;
 
@@ -77,7 +74,7 @@ private:
   LineIdentifierToGraphicsItem m_lineIdentifierToGraphicsItem;
 
   /// Mapping for finding Points.
-  PointIdentifierToGraphicsItem m_mapPointIdentifierToGraphicsItem;
+  PointIdentifierToGraphicsPoint m_mapPointIdentifierToGraphicsPoint;
 
   /// Curve name to GraphicsLinesForCurve
   GraphicsLinesForCurves m_graphicsLinesForCurves;

@@ -4,13 +4,12 @@
 #include <QMap>
 
 class GraphicsLine;
-class GraphicsPointAbstractBase;
+class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
 class QGraphicsItem;
 
-typedef QMap<int, QGraphicsItem*> GraphicsItemContainer;
-typedef QMap<int, GraphicsPointAbstractBase*> GraphicsPointContainer;
+typedef QMap<int, GraphicsPoint*> GraphicsPointContainer;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
 /// maintains order by key
@@ -25,8 +24,7 @@ public:
 
   /// Add new point. The item/point pointers both point to the same object
   void savePoint (int ordinal,
-                  QGraphicsItem *item,
-                  GraphicsPointAbstractBase *point);
+                  GraphicsPoint *point);
 
   /// Remove stale lines and insert missing lines
   void updateLines (GraphicsScene &scene,
@@ -34,7 +32,6 @@ public:
 
 private:
 
-  GraphicsItemContainer m_graphicsItems;
   GraphicsPointContainer m_graphicsPoints;
 };
 
