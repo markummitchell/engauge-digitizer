@@ -7,8 +7,7 @@ enum DataKey {
   DATA_KEY_GRAPHICS_ITEM_TYPE,   ///> Item type (i.e. image versus point)
   DATA_KEY_ORDINAL_LAST,         ///> Ordinal value of previous point. This and DATA_KEY_ORDINAL apply to a line since it has two points
   DATA_KEY_ORDINAL,              ///> Ordinal value for ordering points when drawing lines
-  DATA_KEY_POSITION_HAS_CHANGED, ///> True if item has changed since last mousePressEvent
-  DATA_KEY_WANTED                ///> Wanted/unwanted flag when updating the items in the scene
+  DATA_KEY_POSITION_HAS_CHANGED  ///> True if item has changed since last mousePressEvent
 };
 
 #endif // DATA_KEY_H

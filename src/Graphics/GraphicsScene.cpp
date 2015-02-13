@@ -40,6 +40,10 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
+  // Update the map
+  Q_ASSERT (!m_mapPointIdentifierToGraphicsPoint.contains (identifier));
+  m_mapPointIdentifierToGraphicsPoint [identifier] = point;
+
   return point;
 }
 
@@ -133,6 +137,7 @@ QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
 
   return  movedIds;
 }
+
 QStringList GraphicsScene::selectedPointIdentifiers () const
 {
   QStringList selectedIds;
@@ -202,6 +207,9 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLines";
 
+  // Remove all old entries
+  m_graphicsLinesForCurves.resetPoints ();
+
   // We use the automatic sorting by key of QMap, to sort by ordinal
   PointIdentifierToGraphicsPoint::const_iterator itr;
   for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
@@ -250,14 +258,21 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+  PointIdentifierToGraphicsPoint::iterator itrNext;
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr = itrNext) {
+
+    // Save next value of iterator since current iterator may be invalidated
+    itrNext = itr;
+    ++itrNext;
 
     QString identifier = itr.key();
-    GraphicsPoint *graphicsPoint = itr.value();
+    GraphicsPoint *point = itr.value();
 
-    if (!graphicsPoint->wanted ()) {
+    if (!point->wanted ()) {
 
-      delete graphicsPoint;
+      delete point;
+
+      // Update map
       m_mapPointIdentifierToGraphicsPoint.remove (identifier);
     }
   }
