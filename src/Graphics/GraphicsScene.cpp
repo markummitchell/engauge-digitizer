@@ -138,6 +138,15 @@ QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
   return  movedIds;
 }
 
+void GraphicsScene::removePoint (const QString &identifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint";
+
+  GraphicsPoint *point = m_mapPointIdentifierToGraphicsPoint [identifier];
+  m_mapPointIdentifierToGraphicsPoint.remove (identifier);
+  delete point;
+}
+
 QStringList GraphicsScene::selectedPointIdentifiers () const
 {
   QStringList selectedIds;
@@ -277,7 +286,6 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
     itrNext = itr;
     ++itrNext;
 
-    QString identifier = itr.key();
     GraphicsPoint *point = itr.value();
 
     if (!point->wanted ()) {
@@ -285,7 +293,7 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
       delete point;
 
       // Update map
-      m_mapPointIdentifierToGraphicsPoint.remove (identifier);
+      m_mapPointIdentifierToGraphicsPoint.erase (itr);
     }
   }
 }

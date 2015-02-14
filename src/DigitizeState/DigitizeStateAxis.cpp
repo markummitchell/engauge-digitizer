@@ -88,7 +88,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     delete dlg;
 
     // Remove temporary point
-    delete point;
+    context().mainWindow().scene().removePoint(TEMPORARY_POINT_NAME);
 
     if (rtn == QDialog::Accepted) {
 

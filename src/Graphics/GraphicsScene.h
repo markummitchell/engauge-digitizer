@@ -37,6 +37,9 @@ public:
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
 
+  /// Remove specified point
+  void removePoint (const QString &identifier);
+
   /// Reset positionHasChanged flag for all items. Typically this is done as part of mousePressEvent.
   void resetPositionHasChanged();
 
