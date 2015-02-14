@@ -4,8 +4,8 @@
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GraphicsPointPolygon::GraphicsPointPolygon(GraphicsPoint &graphicsPoint) :
-  m_graphicsPoint (graphicsPoint)
+GraphicsPointPolygon::GraphicsPointPolygon(const QPolygonF &polygon) :
+  QGraphicsPolygonItem (polygon)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointPolygon::GraphicsPointPolygon";
 }
@@ -21,7 +21,7 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
 
     setData (DATA_KEY_POSITION_HAS_CHANGED, QVariant (true));
 
-    m_graphicsPoint.moveAttachedLines(pos());
+//    m_graphicsPoint.moveAttachedLines(pos());
   }
 
   return QGraphicsPolygonItem::itemChange(change,

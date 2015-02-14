@@ -6,6 +6,8 @@
 #include <QGraphicsPolygonItem>
 #include <QPointF>
 
+class GraphicsPointEllipse;
+class GraphicsPointPolygon;
 class QGraphicsScene;
 
 /// Graphics item for drawing a circular or polygonal Point. 
@@ -61,11 +63,11 @@ private:
   GraphicsPoint();
 
   // Ellipse graphics items. Unused if point is polygonal.
-  QGraphicsEllipseItem *m_graphicsItemEllipse;
+  GraphicsPointEllipse *m_graphicsItemEllipse;
   QGraphicsEllipseItem *m_shadowZeroWidthEllipse; // Shadow item overlays the superclass instance to ensure visibility
 
   // Polygon graphics items. Unused if point is elliptical.
-  QGraphicsPolygonItem *m_graphicsItemPolygon;
+  GraphicsPointPolygon *m_graphicsItemPolygon;
   QGraphicsPolygonItem *m_shadowZeroWidthPolygon; // Shadow item overlays the superclass instance to ensure visibility
 
   // Housekeeping

@@ -1,6 +1,8 @@
 #include "DataKey.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
+#include "GraphicsPointEllipse.h"
+#include "GraphicsPointPolygon.h"
 #include "Logger.h"
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
@@ -27,7 +29,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   const double ZERO_WIDTH = 0.0;
 
-  m_graphicsItemEllipse = new QGraphicsEllipseItem (QRect (posScreen.x () - radius,
+  m_graphicsItemEllipse = new GraphicsPointEllipse (QRect (posScreen.x () - radius,
                                                            posScreen.y () - radius,
                                                            2 * radius + 1,
                                                            2 * radius + 1));
@@ -72,7 +74,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   const double ZERO_WIDTH = 0.0;
 
-  m_graphicsItemPolygon = new QGraphicsPolygonItem (polygon);
+  m_graphicsItemPolygon = new GraphicsPointPolygon (polygon);
   scene.addItem (m_graphicsItemPolygon);
 
   m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, identifier);

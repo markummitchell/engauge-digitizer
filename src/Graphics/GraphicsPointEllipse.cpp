@@ -4,8 +4,8 @@
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GraphicsPointEllipse::GraphicsPointEllipse(GraphicsPoint &graphicsPoint) :
-  m_graphicsPoint (graphicsPoint)
+GraphicsPointEllipse::GraphicsPointEllipse(const QRect &rect) :
+  QGraphicsEllipseItem (rect)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointEllipse::GraphicsPointEllipse";
 }
@@ -21,7 +21,7 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
 
     setData (DATA_KEY_POSITION_HAS_CHANGED, QVariant (true));
 
-    m_graphicsPoint.moveAttachedLines(pos());
+//    m_graphicsPoint.moveAttachedLines(pos());
   }
 
   return QGraphicsEllipseItem::itemChange(change,
