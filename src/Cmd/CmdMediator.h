@@ -40,7 +40,7 @@ public:
   /// Provide the Document to commands with read-only access, primarily for undo/redo processing.
   const Document &document () const;
 
-  /// See Document::isModified.
+  /// Dirty flag. Document is dirty if there are any unsaved changes
   bool isModified () const;
 
   /// See Curve::iterateThroughCurvePoints, for the single axes curve.

@@ -97,9 +97,6 @@ public:
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
 
-  /// Return true if Document has changed since last time file was saved.
-  bool isModified () const;
-
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
@@ -203,9 +200,6 @@ private:
   // Read variables
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
-
-  // Dirty flag
-  bool m_isModified;
 
   // Curves
   Curve *m_curveAxes;

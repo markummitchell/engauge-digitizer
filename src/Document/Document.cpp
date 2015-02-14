@@ -16,7 +16,6 @@
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
-  m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           CurveFilter::defaultFilter (),
                           LineStyle::defaultAxesCurve(),
@@ -34,7 +33,6 @@ Document::Document (const QImage &image) :
 
 Document::Document (const QString &fileName) :
   m_name (fileName),
-  m_isModified (false),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           CurveFilter::defaultFilter (),
                           LineStyle::defaultAxesCurve(),
@@ -244,11 +242,6 @@ void Document::editPointAxis (const QPointF &posGraph,
 
   m_curveAxes->editPoint (posGraph,
                           identifier);
-}
-
-bool Document::isModified () const
-{
-  return m_isModified;
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)

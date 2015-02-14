@@ -50,7 +50,7 @@ const Document &CmdMediator::document() const
 
 bool CmdMediator::isModified () const
 {
-  return m_document.isModified ();
+  return !isClean();
 }
 
 void CmdMediator::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
