@@ -23,12 +23,16 @@ public:
   void resetPoints ();
 
   /// Add new line. If the item is already in the map then it is just updated. The line is associated with the lower ordinal value, and
-  /// the upper ordinal value is not involved. The ordinalOther value is only for debugging
+  /// the upper ordinal value is not involved. The ordinalOther value is only for debugging.
+  ///
+  /// The start and end point can be switched without any problems.
+  ///
+  /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
   void saveLine (GraphicsScene &scene,
                  double ordinalAssociated,
                  double ordinalOther,
-                 const GraphicsPoint &pointLow,
-                 const GraphicsPoint &pointHigh,
+                 GraphicsPoint &pointStart,
+                 GraphicsPoint &pointEnd,
                  const LineStyle &lineStyle);
 
   /// Remove stale lines and insert missing lines

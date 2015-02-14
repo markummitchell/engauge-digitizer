@@ -47,14 +47,17 @@ public:
   /// Proxy method for QGraphicsItem::pos.
   QPointF pos () const;
 
+  /// Mark point as unwanted, and unbind any bound lines.
+  void reset();
+
   /// Proxy method for QGraphicsItem::setData
   void setData (int key, const QVariant &data);
 
   /// Proxy method for QGraphicsItem::setToolTip
   void setToolTip (const QString &toolTip);
 
-  /// Mark point as wanted/unwanted. This is for determining which points are to be removed when updating
-  void setWanted (bool wanted);
+  /// Mark point as wanted. Marking as unwanted is done by the reset function
+  void setWanted ();
 
   /// Identify point as wanted//unwanted
   bool wanted () const;

@@ -17,17 +17,24 @@ void GraphicsPointAbstractBase::moveAttachedLines (const QPointF &pos)
   if (m_lineWithPointAsStart != 0) {
     m_lineWithPointAsStart->moveStart (pos);
   }
+
   if (m_lineWithPointAsEnd != 0) {
     m_lineWithPointAsEnd->moveEnd (pos);
   }
 }
 
-void GraphicsPointAbstractBase::setLineWithPointAsEnd (GraphicsLine &graphicsLine)
+void GraphicsPointAbstractBase::reset ()
 {
-  m_lineWithPointAsEnd = &graphicsLine;
+  m_lineWithPointAsEnd = 0;
+  m_lineWithPointAsStart = 0;
 }
 
-void GraphicsPointAbstractBase::setLineWithPointAsStart (GraphicsLine &graphicsLine)
+void GraphicsPointAbstractBase::setLineWithPointAsEnd (GraphicsLine *graphicsLine)
 {
-  m_lineWithPointAsStart = &graphicsLine;
+  m_lineWithPointAsEnd = graphicsLine;
+}
+
+void GraphicsPointAbstractBase::setLineWithPointAsStart (GraphicsLine *graphicsLine)
+{
+  m_lineWithPointAsStart = graphicsLine;
 }

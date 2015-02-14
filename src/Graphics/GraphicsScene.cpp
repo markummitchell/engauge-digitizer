@@ -321,7 +321,7 @@ void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
   PointIdentifierToGraphicsPoint::iterator itr;
   for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
     GraphicsPoint *point = *itr;
-    point->setWanted (false);
+    point->reset ();
   }
 
   // Next pass:

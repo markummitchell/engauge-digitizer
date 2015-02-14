@@ -27,8 +27,8 @@ void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
                                        const QString &curveName,
                                        double ordinalAssociated,
                                        double ordinalOther,
-                                       const GraphicsPoint &pointLow,
-                                       const GraphicsPoint &pointHigh,
+                                       GraphicsPoint &pointStart,
+                                       GraphicsPoint &pointEnd,
                                        const LineStyle &lineStyle)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::saveLine"
@@ -46,8 +46,8 @@ void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
     m_graphicsLinesForCurve [curveName]->saveLine (scene,
                                                    ordinalAssociated,
                                                    ordinalOther,
-                                                   pointLow,
-                                                   pointHigh,
+                                                   pointStart,
+                                                   pointEnd,
                                                    lineStyle);
   }
 }

@@ -30,10 +30,15 @@ public:
   void moveAttachedLines (const QPointF &pos);
 
   /// Bind line to this point, with this point as the line end
-  void setLineWithPointAsEnd (GraphicsLine &graphicsLine);
+  void setLineWithPointAsEnd (GraphicsLine *graphicsLine);
 
   /// Bind line to this point, with this point as the line start
-  void setLineWithPointAsStart (GraphicsLine &graphicsLine);
+  void setLineWithPointAsStart (GraphicsLine *graphicsLine);
+
+protected:
+
+  /// Unbind connected lines.
+  void reset ();
 
 private:
   void removeOverrideCursor ();

@@ -36,7 +36,7 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
 
   // Mark point as wanted
   Q_CHECK_PTR (graphicsPoint);
-  graphicsPoint->setWanted (true);
+  graphicsPoint->setWanted ();
 
   return rtn;
 }

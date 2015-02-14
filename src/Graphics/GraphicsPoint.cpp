@@ -29,7 +29,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   const double ZERO_WIDTH = 0.0;
 
-  m_graphicsItemEllipse = new GraphicsPointEllipse (QRect (posScreen.x () - radius,
+  m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
+                                                    QRect (posScreen.x () - radius,
                                                            posScreen.y () - radius,
                                                            2 * radius + 1,
                                                            2 * radius + 1));
@@ -74,7 +75,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   const double ZERO_WIDTH = 0.0;
 
-  m_graphicsItemPolygon = new GraphicsPointPolygon (polygon);
+  m_graphicsItemPolygon = new GraphicsPointPolygon (*this,
+                                                    polygon);
   scene.addItem (m_graphicsItemPolygon);
 
   m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, identifier);
@@ -133,6 +135,13 @@ QPointF GraphicsPoint::pos () const
   }
 }
 
+void GraphicsPoint::reset ()
+{
+  m_wanted = false;
+
+  GraphicsPointAbstractBase::reset ();
+}
+
 void GraphicsPoint::setData (int key, const QVariant &data)
 {
   if (m_graphicsItemEllipse == 0) {
@@ -151,9 +160,9 @@ void GraphicsPoint::setToolTip (const QString &toolTip)
   }
 }
 
-void GraphicsPoint::setWanted (bool wanted)
+void GraphicsPoint::setWanted ()
 {
-  m_wanted = wanted;
+  m_wanted = true;
 }
 
 bool GraphicsPoint::wanted () const
