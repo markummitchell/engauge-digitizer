@@ -20,7 +20,7 @@ public:
                               const QString &identifier,
                               const QPointF &posScreen,
                               const PointStyle &pointStyle,
-                              int ordinal);
+                              double ordinal);
 };
 
 #endif // GRAPHICS_POINT_FACTORY_H

@@ -17,7 +17,9 @@ class GraphicsLine : public QGraphicsLineItem
 {
 public:
   /// Single constructor
-  GraphicsLine(const LineStyle &lineStyle);
+  GraphicsLine(double ordinalAssociated,
+               double ordinalOther,
+               const LineStyle &lineStyle);
 
   /// Move start point of this line.
   void moveStart (const QPointF &pos);
@@ -34,6 +36,8 @@ public:
 private:
   GraphicsLine();
 
+  double m_ordinalAssociated; // Only for debugging
+  double m_ordinalOther; // Only for debugging
   bool m_wanted;
 };
 

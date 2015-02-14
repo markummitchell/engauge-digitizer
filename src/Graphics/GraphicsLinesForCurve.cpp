@@ -16,7 +16,7 @@ void GraphicsLinesForCurve::resetPoints()
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::resetPoints";
 
   // Mark all points as unwanted.
-  QMap<int, GraphicsLine*>::iterator itr;
+  QMap<double, GraphicsLine*>::iterator itr;
   for (itr = m_graphicsLines.begin (); itr != m_graphicsLines.end (); itr++) {
     GraphicsLine *line = itr.value();
     line->setWanted (false);
@@ -24,28 +24,33 @@ void GraphicsLinesForCurve::resetPoints()
 }
 
 void GraphicsLinesForCurve::saveLine (GraphicsScene &scene,
-                                      int ordinalLow,
+                                      double ordinalAssociated,
+                                      double ordinalOther,
                                       const GraphicsPoint &pointLow,
                                       const GraphicsPoint &pointHigh,
                                       const LineStyle &lineStyle)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::saveLine";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::saveLine"
+                              << " ordinalAssociated=" << ordinalAssociated
+                              << " ordinalOther=" << ordinalOther;
 
   GraphicsLine *line;
-  if (!m_graphicsLines.contains (ordinalLow)) {
+  if (!m_graphicsLines.contains (ordinalAssociated)) {
 
-    line = new GraphicsLine (lineStyle);
+    line = new GraphicsLine (ordinalAssociated,
+                             ordinalOther,
+                             lineStyle);
     line->moveStart (pointLow.pos ());
     line->moveEnd (pointHigh.pos ());
 
-    m_graphicsLines [ordinalLow] = line;
+    m_graphicsLines [ordinalAssociated] = line;
 
     scene.addItem (line);
 
   } else {
 
     // Line already exists, but move its endpoints only if necessary to reduce the chance of flicker
-    line = m_graphicsLines [ordinalLow];
+    line = m_graphicsLines [ordinalAssociated];
     if (line->line ().p1 () != pointLow.pos ()) {
       line->moveStart (pointLow.pos ());
     }
@@ -61,7 +66,7 @@ void GraphicsLinesForCurve::saveLine (GraphicsScene &scene,
 void GraphicsLinesForCurve::updateLines (GraphicsScene &scene)
 {
   // Remove unwanted lines
-  QMap<int, GraphicsLine*>::iterator itr, itrNext;
+  QMap<double, GraphicsLine*>::iterator itr, itrNext;
   for (itr = m_graphicsLines.begin (); itr != m_graphicsLines.end (); itr = itrNext) {
 
     // Save next iterator value in case we remove entry itr

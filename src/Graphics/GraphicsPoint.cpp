@@ -15,7 +15,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QColor &color,
                              unsigned int radius,
                              double lineWidth,
-                             int ordinal) :
+                             double ordinal) :
   GraphicsPointAbstractBase (),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),
@@ -60,7 +60,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QColor &color,
                              const QPolygonF &polygon,
                              double lineWidth,
-                             int ordinal) :
+                             double ordinal) :
   GraphicsPointAbstractBase (),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),

@@ -23,10 +23,11 @@ public:
   void resetPoints ();
 
   /// Add new item. If the item is already in the map then it is just updated. The line is associated with the lower ordinal value, and
-  /// the upper ordinal value is not involved
+  /// the upper ordinal value is not involved. The ordinalOther value is only for debugging
   void saveLine (GraphicsScene &scene,
                  const QString &curveName,
-                 int ordinalLow,
+                 double ordinalAssociated,
+                 double ordinalOther,
                  const GraphicsPoint &pointLow,
                  const GraphicsPoint &pointHigh,
                  const LineStyle &lineStyle);

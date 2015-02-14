@@ -25,12 +25,16 @@ void GraphicsLinesForCurves::resetPoints ()
 
 void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
                                        const QString &curveName,
-                                       int ordinalLow,
+                                       double ordinalAssociated,
+                                       double ordinalOther,
                                        const GraphicsPoint &pointLow,
                                        const GraphicsPoint &pointHigh,
                                        const LineStyle &lineStyle)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::saveLine";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::saveLine"
+                              << " curve=" << curveName.toLatin1().data()
+                              << " ordinalAssociated=" << ordinalAssociated
+                              << " ordinalOther=" << ordinalOther;
 
   // No lines are drawn for the axis points, other than the axes checker box
   if (curveName != AXIS_CURVE_NAME) {
@@ -40,7 +44,8 @@ void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
     }
 
     m_graphicsLinesForCurve [curveName]->saveLine (scene,
-                                                   ordinalLow,
+                                                   ordinalAssociated,
+                                                   ordinalOther,
                                                    pointLow,
                                                    pointHigh,
                                                    lineStyle);

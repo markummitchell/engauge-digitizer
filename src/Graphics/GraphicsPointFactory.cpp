@@ -17,7 +17,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                                   const QString &identifier,
                                                   const QPointF &posScreen,
                                                   const PointStyle &pointStyle,
-                                                  int ordinal)
+                                                  double ordinal)
 {
   GraphicsPoint *item = 0;
 

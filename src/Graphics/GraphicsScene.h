@@ -7,6 +7,7 @@
 #include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>
+#include <QMap>
 #include <QStringList>
 
 class CmdMediator;
@@ -16,6 +17,9 @@ class DocumentModelCurveProperties;
 class GraphicsPoint;
 class MainWindow;
 class PointStyle;
+
+// Map ordinals to corresponding point identifiers. This augments the map from point identifier to GraphicsPoint
+typedef QMap<double, QString> MapOrdinalToPointIdentifier;
 
 /// Add point and line handling to generic QGraphicsScene. The primary tasks are:
 /// -# update the graphics items to stay in sync with the explicit Points in the Document
@@ -59,13 +63,16 @@ public:
 
 private:
 
+  /// Create internal, temporary map of ordinal to point identifier
+  MapOrdinalToPointIdentifier createMapOrdinalToPointIdentifier ();
+
   /// Dump all important cursors
   QString dumpCursors () const;
 
   const QGraphicsPixmapItem *image () const;
 
   /// Max ordinal of the Points.
-  int maxOrdinal () const;
+  double maxOrdinal () const;
 
   /// Update lines using a multi-pass algorithm.
   void updateLines (CmdMediator &cmdMediator);

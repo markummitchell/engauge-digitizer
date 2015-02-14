@@ -62,7 +62,7 @@ unsigned int Point::identifierIndex ()
   return m_identifierIndex;
 }
 
-int Point::ordinal () const
+double Point::ordinal () const
 {
   return m_ordinal;
 }
@@ -82,7 +82,7 @@ void Point::setIdentifierIndex (unsigned int identifierIndex)
   m_identifierIndex = identifierIndex;
 }
 
-void Point::setOrdinal(int ordinal)
+void Point::setOrdinal(double ordinal)
 {
   m_ordinal = ordinal;
 }

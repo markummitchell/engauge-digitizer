@@ -26,6 +26,12 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
                                         const PointStyle &pointStyle,
                                         const QPointF &posScreen)
 {
+  double ordinal = maxOrdinal () + 1;
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addPoint"
+                              << " identifier=" << identifier.toLatin1().data()
+                              << " ordinal=" << ordinal;
+
   // Ordinal value is initially computed as one plus the max ordinal seen so far. This initial ordinal value will be overridden if the
   // cordinates determine the ordinal values.
   //
@@ -35,7 +41,7 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
                                                    identifier,
                                                    posScreen,
                                                    pointStyle,
-                                                   maxOrdinal () + 1);
+                                                   ordinal);
 
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
@@ -45,6 +51,26 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   m_mapPointIdentifierToGraphicsPoint [identifier] = point;
 
   return point;
+}
+
+MapOrdinalToPointIdentifier GraphicsScene::createMapOrdinalToPointIdentifier ()
+{
+  // Start with empty map
+  MapOrdinalToPointIdentifier map;
+
+  PointIdentifierToGraphicsPoint::const_iterator itr;
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+
+    // Get item
+    QString pointIdentifier = itr.key();
+    GraphicsPoint *point = itr.value();
+
+    double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();;
+
+    map [ordinal] = pointIdentifier;
+  }
+
+  return map;
 }
 
 QString GraphicsScene::dumpCursors () const
@@ -78,11 +104,11 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
   return 0;
 }
 
-int GraphicsScene::maxOrdinal () const
+double GraphicsScene::maxOrdinal () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::maxOrdinal";
+  // LOG4CPP_INFO_S is on exit
 
-  int maxOrdinal = 0;
+  double maxOrdinal = 0;
 
   const QList<QGraphicsItem*> &items = QGraphicsScene::items();
   QList<QGraphicsItem*>::const_iterator itr;
@@ -95,10 +121,12 @@ int GraphicsScene::maxOrdinal () const
     if (isPoint) {
 
       // Save if max value so far
-      int ordinal = item->data (DATA_KEY_ORDINAL).toInt ();
+      double ordinal = item->data (DATA_KEY_ORDINAL).toDouble ();
       maxOrdinal = qMax (maxOrdinal, ordinal);
     }
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::maxOrdinal maxOrdinal=" << maxOrdinal;
 
   return maxOrdinal;
 }
@@ -140,7 +168,7 @@ QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
 
 void GraphicsScene::removePoint (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint identifier=" << identifier.toLatin1().data();
 
   GraphicsPoint *point = m_mapPointIdentifierToGraphicsPoint [identifier];
   m_mapPointIdentifierToGraphicsPoint.remove (identifier);
@@ -219,6 +247,9 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
   // Remove all old entries
   m_graphicsLinesForCurves.resetPoints ();
 
+  // Create a sorted map of ordinal to point identifier
+  MapOrdinalToPointIdentifier mapOrdinalToPointIdentifier = createMapOrdinalToPointIdentifier();
+
   // Names of axis and graph curves
   QStringList curveNames;
   curveNames << AXIS_CURVE_NAME << cmdMediator.document().curvesGraphsNames();
@@ -230,30 +261,37 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
     QString curveNameWanted = *itrC;
 
     // Last values
-    int ordinalLast = -1;
+    double ordinalLast = -1;
     GraphicsPoint *pointLast = 0;
 
     // We use the automatic sorting by key of QMap, to sort by ordinal
-    PointIdentifierToGraphicsPoint::const_iterator itr;
-    for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+    MapOrdinalToPointIdentifier::const_iterator itr;
+    for (itr = mapOrdinalToPointIdentifier.begin (); itr != mapOrdinalToPointIdentifier.end (); itr++) {
 
-      // Get item
-      GraphicsPoint *point = itr.value();
+      // Get point identifier for this ordinal
+      QString pointIdentifier = itr.value();
+
+      // Get point
+      GraphicsPoint *point = m_mapPointIdentifierToGraphicsPoint [pointIdentifier];
 
       // Get parameters for the item
-      QString pointIdentifier = point->data (DATA_KEY_IDENTIFIER).toString ();
       QString curveNameGot = Point::curveNameFromPointIdentifier (pointIdentifier);
-      int ordinal = point->data (DATA_KEY_ORDINAL).toInt ();
+      double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();
 
       // Skip this point if it is not in the desired curve
       if (curveNameWanted == curveNameGot) {
 
         if (pointLast != 0) {
 
+          // Each line is associated only with the lower ordinal value, to prevent ambiguity
+          double ordinalAssociated = qMin (ordinalLast, ordinal);
+          double ordinalOther = qMax (ordinalLast, ordinal);
+
           // Save entry even if entry already exists
           m_graphicsLinesForCurves.saveLine (*this,
                                              curveNameGot,
-                                             ordinalLast,
+                                             ordinalAssociated,
+                                             ordinalOther,
                                              *pointLast,
                                              *point,
                                              cmdMediator.document().modelCurveProperties().lineStyle(curveNameGot));
