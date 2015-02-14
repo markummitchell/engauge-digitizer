@@ -22,14 +22,17 @@ public:
   /// Clear out existing point just prior to storing new set of points
   void resetPoints ();
 
-  /// Add new item. If the item is already in the map then it is just updated. The item/point pointers both point to the same object
-  void savePoint (const QString &curveName,
-                  int ordinal,
-                  GraphicsPoint *point);
+  /// Add new item. If the item is already in the map then it is just updated. The line is associated with the lower ordinal value, and
+  /// the upper ordinal value is not involved
+  void saveLine (GraphicsScene &scene,
+                 const QString &curveName,
+                 int ordinalLow,
+                 const GraphicsPoint &pointLow,
+                 const GraphicsPoint &pointHigh,
+                 const LineStyle &lineStyle);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene,
-                    const LineStyles &lineStyles);
+  void updateLines (GraphicsScene &scene);
 
 private:
 

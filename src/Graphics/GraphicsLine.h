@@ -25,8 +25,16 @@ public:
   /// Move end point of this line.
   void moveEnd (const QPointF &pos);
 
+  /// Mark this line as unwanted or wanted
+  void setWanted (bool wanted);
+
+  /// Get method for wanted value
+  bool wanted() const;
+
 private:
   GraphicsLine();
+
+  bool m_wanted;
 };
 
 #endif // GRAPHICS_LINE_H

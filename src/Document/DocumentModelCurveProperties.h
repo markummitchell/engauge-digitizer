@@ -32,6 +32,9 @@ public:
   /// Get method for connect as method for lines in specified curve.
   CurveConnectAs lineConnectAs (const QString &curveName) const;
 
+  /// Get method for copying one line style in one step.
+  const LineStyle &lineStyle (const QString &curveName) const;
+
   /// Get method for copying all line styles in one step.
   const LineStyles &lineStyles () const;
 

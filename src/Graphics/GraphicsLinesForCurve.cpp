@@ -15,55 +15,66 @@ void GraphicsLinesForCurve::resetPoints()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::resetPoints";
 
-  // Delete the pointers. The allocated memory is managed elsewhere so no deletion is involved here
-  m_graphicsPoints.clear ();
+  // Mark all points as unwanted.
+  QMap<int, GraphicsLine*>::iterator itr;
+  for (itr = m_graphicsLines.begin (); itr != m_graphicsLines.end (); itr++) {
+    GraphicsLine *line = itr.value();
+    line->setWanted (false);
+  }
 }
 
-void GraphicsLinesForCurve::savePoint (int ordinal,
-                                       GraphicsPoint *point)
+void GraphicsLinesForCurve::saveLine (GraphicsScene &scene,
+                                      int ordinalLow,
+                                      const GraphicsPoint &pointLow,
+                                      const GraphicsPoint &pointHigh,
+                                      const LineStyle &lineStyle)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::savePoint";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::saveLine";
 
-  m_graphicsPoints [ordinal] = point;
-}
+  GraphicsLine *line;
+  if (!m_graphicsLines.contains (ordinalLow)) {
 
-void GraphicsLinesForCurve::updateLines (GraphicsScene &scene,
-                                         const LineStyle &lineStyle)
-{
-  // Loop through successive pairs of points. Since they
-  bool isFirst = true;
-  int ordinalLast = -1;
-  QPointF posLast (0, 0);
-  QMap<int, GraphicsPoint*>::iterator itr;
-  for (itr = m_graphicsPoints.begin (); itr != m_graphicsPoints.end (); itr++) {
+    line = new GraphicsLine (lineStyle);
+    line->moveStart (pointLow.pos ());
+    line->moveEnd (pointHigh.pos ());
 
-    int ordinal = itr.key();
-    GraphicsPoint *point = itr.value();
+    m_graphicsLines [ordinalLow] = line;
 
-    // Points that are involved
-    QPointF pos = point->pos ();
+    scene.addItem (line);
 
-    if (isFirst) {
+  } else {
 
-      // Skip line ending at first point
-      isFirst = false;
-
-    } else {
-
-      // Connect lines between the ordered points
-      GraphicsLine *line = new GraphicsLine (lineStyle);
-      line->setLine (QLineF (posLast,
-                             pos));
-      line->setData (DATA_KEY_ORDINAL_LAST, ordinalLast);
-      line->setData (DATA_KEY_ORDINAL, ordinal);
-
-      point->setLineWithPointAsEnd(*line);
-
-      scene.addItem (line);
+    // Line already exists, but move its endpoints only if necessary to reduce the chance of flicker
+    line = m_graphicsLines [ordinalLow];
+    if (line->line ().p1 () != pointLow.pos ()) {
+      line->moveStart (pointLow.pos ());
     }
 
-    // Save values for next ieration of this loop
-    ordinalLast = ordinal;
-    posLast = pos;
+    if (line->line ().p2 () != pointHigh.pos ()) {
+      line->moveEnd (pointHigh.pos ());
+    }
+  }
+
+  line->setWanted (true);
+}
+
+void GraphicsLinesForCurve::updateLines (GraphicsScene &scene)
+{
+  // Remove unwanted lines
+  QMap<int, GraphicsLine*>::iterator itr, itrNext;
+  for (itr = m_graphicsLines.begin (); itr != m_graphicsLines.end (); itr = itrNext) {
+
+    // Save next iterator value in case we remove entry itr
+    itrNext = itr;
+    itrNext++;
+
+    // Get line from map
+    GraphicsLine *line = itr.value();
+
+    if (!line->wanted ()) {
+
+      scene.removeItem (line);
+      m_graphicsLines.erase (itr);
+    }
   }
 }

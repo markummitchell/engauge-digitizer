@@ -79,6 +79,11 @@ CurveConnectAs DocumentModelCurveProperties::lineConnectAs (const QString &curve
   return m_lineStyles [curveName].curveConnectAs();
 }
 
+const LineStyle &DocumentModelCurveProperties::lineStyle (const QString &curveName) const
+{
+  return m_lineStyles [curveName];
+}
+
 const LineStyles &DocumentModelCurveProperties::lineStyles () const
 {
   return m_lineStyles;

@@ -210,6 +210,10 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
   // Remove all old entries
   m_graphicsLinesForCurves.resetPoints ();
 
+  // Last values
+  int ordinalLast = -1;
+  GraphicsPoint *pointLast = 0;
+
   // We use the automatic sorting by key of QMap, to sort by ordinal
   PointIdentifierToGraphicsPoint::const_iterator itr;
   for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
@@ -222,14 +226,22 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
     QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
     int ordinal = point->data (DATA_KEY_ORDINAL).toInt ();
 
-    // Save entry even if entry already exists
-    m_graphicsLinesForCurves.savePoint (curveName,
-                                        ordinal,
-                                        point);
+    if (pointLast != 0) {
+
+      // Save entry even if entry already exists
+      m_graphicsLinesForCurves.saveLine (*this,
+                                         curveName,
+                                         ordinalLast,
+                                         *pointLast,
+                                         *point,
+                                         cmdMediator.document().modelCurveProperties().lineStyle(curveName));
+    }
+
+    ordinalLast = ordinal;
+    pointLast = point;
   }
 
-  m_graphicsLinesForCurves.updateLines (*this,
-                                        cmdMediator.document().modelCurveProperties().lineStyles());
+  m_graphicsLinesForCurves.updateLines (*this);
 }
 
 void GraphicsScene::updatePoints (CmdMediator &cmdMediator)

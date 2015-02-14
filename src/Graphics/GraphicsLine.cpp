@@ -4,7 +4,8 @@
 #include <QLineF>
 #include <QPen>
 
-GraphicsLine::GraphicsLine(const LineStyle &lineStyle)
+GraphicsLine::GraphicsLine(const LineStyle &lineStyle) :
+  m_wanted (true)
 {
   // Line pen is set here. The line geometry is set later, after the constructor has finished
   QColor color (ColorPaletteToQColor (lineStyle.paletteColor ()));
@@ -29,4 +30,14 @@ void GraphicsLine::moveEnd (const QPointF &pos)
                   pos);
 
   setLine (newLine);
+}
+
+void GraphicsLine::setWanted (bool wanted)
+{
+  m_wanted = wanted;
+}
+
+bool GraphicsLine::wanted () const
+{
+  return m_wanted;
 }

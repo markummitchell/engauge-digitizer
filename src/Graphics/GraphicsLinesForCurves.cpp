@@ -23,11 +23,14 @@ void GraphicsLinesForCurves::resetPoints ()
   }
 }
 
-void GraphicsLinesForCurves::savePoint (const QString &curveName,
-                                        int ordinal,
-                                        GraphicsPoint *point)
+void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
+                                       const QString &curveName,
+                                       int ordinalLow,
+                                       const GraphicsPoint &pointLow,
+                                       const GraphicsPoint &pointHigh,
+                                       const LineStyle &lineStyle)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::savePoint";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::saveLine";
 
   // No lines are drawn for the axis points, other than the axes checker box
   if (curveName != AXIS_CURVE_NAME) {
@@ -36,13 +39,15 @@ void GraphicsLinesForCurves::savePoint (const QString &curveName,
       m_graphicsLinesForCurve [curveName] = new GraphicsLinesForCurve;
     }
 
-    m_graphicsLinesForCurve [curveName]->savePoint (ordinal,
-                                                    point);
+    m_graphicsLinesForCurve [curveName]->saveLine (scene,
+                                                   ordinalLow,
+                                                   pointLow,
+                                                   pointHigh,
+                                                   lineStyle);
   }
 }
 
-void GraphicsLinesForCurves::updateLines (GraphicsScene &scene,
-                                          const LineStyles &lineStyles)
+void GraphicsLinesForCurves::updateLines (GraphicsScene &scene)
 {
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
@@ -50,7 +55,6 @@ void GraphicsLinesForCurves::updateLines (GraphicsScene &scene,
     const QString curveName = itr.key();
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->updateLines (scene,
-                                lineStyles [curveName]);
+    graphicsLines->updateLines (scene);
   }
 }

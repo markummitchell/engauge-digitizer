@@ -9,7 +9,7 @@ class GraphicsScene;
 class LineStyle;
 class QGraphicsItem;
 
-typedef QMap<int, GraphicsPoint*> GraphicsPointContainer;
+typedef QMap<int, GraphicsLine*> GraphicsLineContainer;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
 /// maintains order by key
@@ -22,17 +22,20 @@ public:
   /// Clear out existing point just prior to storing new set of points
   void resetPoints ();
 
-  /// Add new point. The item/point pointers both point to the same object
-  void savePoint (int ordinal,
-                  GraphicsPoint *point);
+  /// Add new line. If the item is already in the map then it is just updated. The line is associated with the lower ordinal value, and
+  /// the upper ordinal value is not involved
+  void saveLine (GraphicsScene &scene,
+                 int ordinalLow,
+                 const GraphicsPoint &pointLow,
+                 const GraphicsPoint &pointHigh,
+                 const LineStyle &lineStyle);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene,
-                    const LineStyle &lineStyle);
+  void updateLines (GraphicsScene &scene);
 
 private:
 
-  GraphicsPointContainer m_graphicsPoints;
+  GraphicsLineContainer m_graphicsLines;
 };
 
 #endif // GRAPHICS_LINES_FOR_CURVE_H
