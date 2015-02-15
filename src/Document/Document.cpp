@@ -6,6 +6,7 @@
 #include "Document.h"
 #include "DocumentModelCurveProperties.h"
 #include "DocumentSerialize.h"
+#include "EnumsToQt.h"
 #include <iostream>
 #include "Logger.h"
 #include "Point.h"
@@ -48,17 +49,39 @@ Document::Document (const QString &fileName) :
   QFile *file = new QFile (fileName);
   if (file->open (QIODevice::ReadOnly | QIODevice::Text)) {
 
-    // Import from xml
+    // Import from xml. Loop to end of data or error condition occurs, whichever is first
     QXmlStreamReader reader (file);
-    while (!reader.atEnd()) {
-      QXmlStreamReader::TokenType token = reader.readNext();
+    while (!reader.atEnd() && !reader.hasError()) {
+      QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
 
-      if (token == QXmlStreamReader::StartDocument) {
-        continue;
-      } else if (token == QXmlStreamReader::StartElement) {
-        std::cout << "start " << reader.name().toLatin1().data() << std::endl;
-      } else if (token == QXmlStreamReader::EndElement) {
-        std::cout << "end " << reader.name ().toLatin1().data() << std::endl;
+      // Iterate to next StartElement
+      if (tokenType == QXmlStreamReader::StartElement) {
+
+        // This is a StartElement, so process it
+        QString tag = reader.name().toString();
+        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER) {
+          loadAxesChecker(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+          loadCoords(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+          loadCurvesGraphs(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+          // Do nothing. This is the root node
+        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+          loadExport(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+          loadGridRemoval(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+          loadImage(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+          loadPointMatch(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+          loadSegments(reader);
+        } else {
+          m_successfulRead = false;
+          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
+          break;
+        }
       }
     }
     if (reader.hasError ()) {
@@ -290,6 +313,254 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   Q_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+void Document::loadAxesChecker(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadAxesChecker";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR)) {
+
+    m_modelAxesChecker.setCheckerMode ((CheckerMode) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE).toInt());
+    m_modelAxesChecker.setCheckerSeconds (attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS).toInt());
+    m_modelAxesChecker.setLineColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_AXES_CHECKER)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read axes checker data");
+  }
+}
+
+void Document::loadCoords(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadCoords";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS)) {
+
+    m_modelCoords.setCoordsType ((CoordsType) attributes.value(DOCUMENT_SERIALIZE_COORDS_TYPE).toInt());
+    m_modelCoords.setOriginRadius (attributes.value(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS).toDouble());
+    m_modelCoords.setCoordScaleXTheta ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA).toInt());
+    m_modelCoords.setCoordScaleYRadius ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
+    m_modelCoords.setCoordThetaUnits ((CoordThetaUnits) attributes.value(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read coordinates data");
+  }
+}
+
+void Document::loadCurvesGraphs(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadCurvesGraphs";
+
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CURVES_GRAPHS)){
+    loadNextFromReader(reader);
+  }
+}
+
+void Document::loadExport(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadExport";
+
+  bool success = false;
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_X_LABEL)) {
+
+    m_modelExport.setPointsSelectionFunctions ((ExportPointsSelectionFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS).toInt());
+    m_modelExport.setPointsInterval (attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL).toDouble());
+    m_modelExport.setPointsSelectionRelations ((ExportPointsSelectionRelations) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
+    m_modelExport.setRelationsInterval (attributes.value(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL).toDouble());
+    m_modelExport.setLayoutFunctions ((ExportLayoutFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS).toInt());
+    m_modelExport.setDelimiter ((ExportDelimiter) attributes.value (DOCUMENT_SERIALIZE_EXPORT_DELIMITER).toInt());
+    m_modelExport.setHeader ((ExportHeader) attributes.value(DOCUMENT_SERIALIZE_EXPORT_HEADER).toInt());
+    m_modelExport.setXLabel (attributes.value(DOCUMENT_SERIALIZE_EXPORT_X_LABEL).toString());
+
+    // Read element containing excluded curve names
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+    if ((tokenType == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED)) {
+
+      QStringList curveNamesNotExported;
+
+      tokenType = loadNextFromReader(reader);
+      while (tokenType == QXmlStreamReader::StartElement) {
+
+        if (reader.name() == DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED) {
+          curveNamesNotExported << reader.text().toString();
+        }
+        tokenType = loadNextFromReader(reader);
+      }
+
+      // Save curve names
+      m_modelExport.setCurveNamesNotExported(curveNamesNotExported);
+
+      // Read until end of this subtree
+      while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+      (reader.name() != DOCUMENT_SERIALIZE_EXPORT)){
+        loadNextFromReader(reader);
+      }
+
+      success = true;
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
+}
+
+void Document::loadGridRemoval(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadGridRemoval";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y)) {
+
+    QString removeValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES).toString();
+
+    m_modelGridRemoval.setRemoveDefinedGridLines (removeValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    m_modelGridRemoval.setCloseDistance (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE).toDouble());
+    m_modelGridRemoval.setGridCoordDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X).toInt());
+    m_modelGridRemoval.setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X).toInt());
+    m_modelGridRemoval.setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X).toDouble());
+    m_modelGridRemoval.setStepX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X).toDouble());
+    m_modelGridRemoval.setStopX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X).toDouble());
+    m_modelGridRemoval.setGridCoordDisableY ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y).toInt());
+    m_modelGridRemoval.setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y).toInt());
+    m_modelGridRemoval.setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y).toDouble());
+    m_modelGridRemoval.setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y).toDouble());
+    m_modelGridRemoval.setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y).toDouble());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_GRID_REMOVAL)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read grid removal data");
+  }
+}
+
+void Document::loadImage(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadImage";
+
+  loadNextFromReader(reader); // Read to CDATA
+  if (reader.isCDATA ()) {
+
+    // Get base64 array
+    QByteArray array64 = reader.text().toString().toUtf8();
+
+    // Decoded array
+    QByteArray array;
+    array = QByteArray::fromBase64(array64);
+
+    // Read decoded array into image
+    QDataStream str (&array, QIODevice::ReadOnly);
+    QImage img = m_pixmap.toImage ();
+    str >> img;
+    m_pixmap = QPixmap::fromImage (img);
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_IMAGE)){
+      loadNextFromReader(reader);
+    }
+
+  } else {
+    reader.raiseError ("Cannot read image data");
+  }
+}
+
+QXmlStreamReader::TokenType Document::loadNextFromReader (QXmlStreamReader &reader) const
+{
+  QXmlStreamReader::TokenType tokenType = reader.readNext();
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::loadNextFromReader "
+                               << " tokenType=" << XmlReaderTokenTypeToString (tokenType).toLatin1().data()
+                               << " tag=" << reader.name().toLatin1().data();
+
+  return tokenType;
+}
+
+void Document::loadPointMatch(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadPointMatch";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED)) {
+
+    m_modelPointMatch.setMinPointSeparation (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION).toDouble());
+    m_modelPointMatch.setMaxPointSize (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE).toDouble());
+    m_modelPointMatch.setPaletteColorAccepted ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED).toInt());
+    m_modelPointMatch.setPaletteColorCandidate ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE).toInt());
+    m_modelPointMatch.setPaletteColorRejected ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_POINT_MATCH)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read point match data");
+  }
+}
+
+void Document::loadSegments(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadSegments";
+
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_SEGMENTS)){
+    loadNextFromReader(reader);
+  }
 }
 
 DocumentModelAxesChecker Document::modelAxesChecker() const

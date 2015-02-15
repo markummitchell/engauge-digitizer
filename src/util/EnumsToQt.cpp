@@ -45,3 +45,33 @@ QColor ColorPaletteToQColor (ColorPalette color) {
   Q_ASSERT (false);
   return QColor (Qt::black);
 }
+
+QString XmlReaderTokenTypeToString (QXmlStreamReader::TokenType tokenType)
+{
+  switch (tokenType) {
+    case QXmlStreamReader::Characters:
+      return "Characters";
+    case QXmlStreamReader::Comment:
+      return "Comment";
+    case QXmlStreamReader::DTD:
+      return "DTD";
+    case QXmlStreamReader::EndDocument:
+      return "EndDocument";
+    case QXmlStreamReader::EndElement:
+      return "EndElement";
+    case QXmlStreamReader::EntityReference:
+      return "EntityReference";
+    case QXmlStreamReader::Invalid:
+      return "Invalid";
+    case QXmlStreamReader::NoToken:
+      return "NoToken";
+    case QXmlStreamReader::ProcessingInstruction:
+      return "ProcessingInstruction";
+    case QXmlStreamReader::StartDocument:
+      return "StartDocument";
+    case QXmlStreamReader::StartElement:
+      return "StartElement";
+  }
+
+  return "<Unknown>";
+}

@@ -144,16 +144,17 @@ void DocumentModelGridRemoval::saveDocument(QXmlStreamWriter &stream) const
   stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES, m_removeDefinedGridLines ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y, QString::number (m_closeDistance));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X, QString::number (m_gridCoordDisableX));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X, QString::number (m_countX));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X, QString::number (m_startX));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X, QString::number (m_stepX));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X, QString::number (m_stopX));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y, QString::number (m_gridCoordDisableY));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y, QString::number (m_countY));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y, QString::number (m_startY));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y, QString::number (m_stepY));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y, QString::number (m_stopY));
   stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES, m_removeParallelToAxes ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);

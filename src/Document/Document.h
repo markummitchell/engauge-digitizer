@@ -14,6 +14,7 @@
 #include <QList>
 #include <QPixmap>
 #include <QString>
+#include <QXmlStreamReader>
 
 class Curve;
 class QImage;
@@ -192,6 +193,16 @@ private:
   Document ();
 
   Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
+
+  void loadAxesChecker(QXmlStreamReader &reader);
+  void loadCoords(QXmlStreamReader &reader);
+  void loadCurvesGraphs(QXmlStreamReader &reader);
+  void loadExport(QXmlStreamReader &reader);
+  void loadGridRemoval(QXmlStreamReader &reader);
+  void loadImage(QXmlStreamReader &reader);
+  QXmlStreamReader::TokenType loadNextFromReader (QXmlStreamReader &reader) const; // Debugging wrapper for QXmlStreamReader::readNext
+  void loadPointMatch(QXmlStreamReader &reader);
+  void loadSegments (QXmlStreamReader &reader);
 
   // Metadata
   QString m_name;
