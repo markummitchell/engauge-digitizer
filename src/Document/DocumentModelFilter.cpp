@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelFilter.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -125,11 +126,19 @@ int DocumentModelFilter::saturationLow (const QString &curveName) const
   return m_curveFilters [curveName].saturationLow();
 }
 
-void DocumentModelFilter::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelFilter::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::saveDocument";
 
-  stream.writeStartElement("DocumentModelFilter");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_FILTER);
+
+  // Loop through filters
+  CurveFilters::const_iterator itr;
+  for (itr = m_curveFilters.begin (); itr != m_curveFilters.end (); itr++) {
+    const CurveFilter &curveFilter = *itr;
+    curveFilter.saveDocument(stream);
+  }
+
   stream.writeEndElement();
 }
 

@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelCoords.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -66,11 +67,16 @@ double DocumentModelCoords::originRadius() const
   return m_originRadius;
 }
 
-void DocumentModelCoords::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCoords::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::saveDocument";
 
-  stream.writeStartElement("DocumentModelCoords");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_COORDS);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE, QString::number (m_coordsType));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS, QString::number (m_originRadius));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA, QString::number (m_coordScaleXTheta));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS, QString::number (m_coordScaleYRadius));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS, QString::number (m_coordThetaUnits));
   stream.writeEndElement();
 }
 

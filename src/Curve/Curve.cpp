@@ -1,8 +1,10 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
+#include <QXmlStreamWriter>
 #include "Transformation.h"
 
 const QString AXIS_CURVE_NAME ("Axes");
@@ -245,6 +247,29 @@ void Curve::removePoint (const QString &identifier)
       break;
     }
   }
+}
+
+void Curve::saveDocument(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
+  m_curveFilter.saveDocument (stream);
+  m_lineStyle.saveDocument (stream);
+  m_pointStyle.saveDocument (stream);
+
+  // Loop through points
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_POINTS);
+  Points::const_iterator itr;
+  for (itr = m_points.begin (); itr != m_points.end (); itr++) {
+    const Point &point = *itr;
+    point.saveDocument (stream);
+  }
+
+  stream.writeEndElement();
+
+  stream.writeEndElement();
 }
 
 void Curve::setCurveFilter (const CurveFilter &curveFilter)

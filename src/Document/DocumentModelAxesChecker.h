@@ -32,7 +32,7 @@ public:
   /// Get method for line color.
   ColorPalette lineColor () const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for checker mode.
   void setCheckerMode (CheckerMode checkerMode);

@@ -5,6 +5,7 @@
 #include "Curve.h"
 #include "Document.h"
 #include "DocumentModelCurveProperties.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
@@ -379,12 +380,16 @@ void Document::saveDocument(QXmlStreamWriter &stream)
 
   stream.writeStartDocument();
   stream.writeDTD("<!DOCTYPE engauge>");
-  m_modelCoords.saveModel(stream);
-  m_modelExport.saveModel(stream);
-  m_modelAxesChecker.saveModel(stream);
-  m_modelGridRemoval.saveModel(stream);
-  m_modelPointMatch.saveModel(stream);
-  m_modelSegments.saveModel(stream);
+  stream.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
+  m_modelCoords.saveDocument(stream);
+  m_modelExport.saveDocument(stream);
+  m_modelAxesChecker.saveDocument(stream);
+  m_modelGridRemoval.saveDocument(stream);
+  m_modelPointMatch.saveDocument(stream);
+  m_modelSegments.saveDocument(stream);
+  m_curveAxes->saveDocument(stream);
+  m_curvesGraphs.saveDocument(stream);
+  stream.writeEndElement();
   stream.writeEndDocument();
 }
 

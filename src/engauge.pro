@@ -86,6 +86,7 @@ HEADERS  += \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
+    Document/DocumentSerialize.h \
     util/EnumsToQt.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsSelectionFunctions.h \
@@ -218,6 +219,7 @@ SOURCES += \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
+    Document/DocumentSerialize.cpp \
     util/EnumsToQt.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \

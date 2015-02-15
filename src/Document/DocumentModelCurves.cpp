@@ -1,5 +1,6 @@
 #include "DocumentModelCurvesEntry.h"
 #include "DocumentModelCurves.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "QtToString.h"
 #include <QVariant>
@@ -114,7 +115,7 @@ bool DocumentModelCurves::insertRows (int row,
   DocumentModelCurvesEntry emptyCurvesEntry;
 
   m_modelCurvesEntries.insert (row,
-                              emptyCurvesEntry.toString ());
+                               emptyCurvesEntry.toString ());
 
   endInsertRows ();
 
@@ -155,11 +156,19 @@ int DocumentModelCurves::rowCount (const QModelIndex & /* parent */) const
   return count;
 }
 
-void DocumentModelCurves::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCurves::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::saveDocument";
 
-  stream.writeStartElement("DocumentModelCurves");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVES);
+  QStringList::const_iterator itr;
+  for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
+
+    DocumentModelCurvesEntry curvesEntry (*itr);
+    curvesEntry.saveDocument(stream);
+
+  }
+
   stream.writeEndElement();
 }
 

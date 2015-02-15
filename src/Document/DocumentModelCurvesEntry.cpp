@@ -1,4 +1,6 @@
 #include "DocumentModelCurvesEntry.h"
+#include "DocumentSerialize.h"
+#include "Logger.h"
 #include <QStringList>
 #include <QXmlStreamWriter>
 
@@ -42,6 +44,17 @@ QString DocumentModelCurvesEntry::curveNameOriginal () const
 int DocumentModelCurvesEntry::numPoints () const
 {
   return m_numPoints;
+}
+
+void DocumentModelCurvesEntry::saveDocument(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurvesEntry::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVES_ENTRY);
+  stream.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_CURVE_NAME_CURRENT, m_curveNameCurrent);
+  stream.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_CURVE_NAME_ORIGINAL, m_curveNameOriginal);
+  stream.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_NUM_POINTS, QString::number (m_numPoints));
+  stream.writeEndElement();
 }
 
 void DocumentModelCurvesEntry::setCurveNameCurrent (const QString &curveNameCurrent)

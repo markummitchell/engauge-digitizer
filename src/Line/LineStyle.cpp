@@ -1,4 +1,6 @@
+#include "DocumentSerialize.h"
 #include "LineStyle.h"
+#include "Logger.h"
 #include <QXmlStreamWriter>
 
 const int DEFAULT_LINE_WIDTH = 1;
@@ -59,14 +61,14 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::saveStyle(QXmlStreamWriter &stream,
-                          const QString &curveName) const
+void LineStyle::saveDocument(QXmlStreamWriter &stream) const
 {
-  stream.writeStartElement("LineStyle");
-  stream.writeAttribute ("Curve", curveName);
-  stream.writeAttribute ("LineWidth", QString::number(m_width));
-  stream.writeAttribute ("Color", QString::number (m_paletteColor));
-  stream.writeAttribute ("ConnectAs", QString::number (m_curveConnectAs));
+  LOG4CPP_INFO_S ((*mainCat))  << "LineStyle::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
+  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));
+  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR, QString::number (m_paletteColor));
+  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS, QString::number (m_curveConnectAs));
   stream.writeEndElement();
 }
 

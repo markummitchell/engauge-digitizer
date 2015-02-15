@@ -51,7 +51,7 @@ public:
   /// Get method for relations interval.
   double relationsInterval () const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for curve names not exported.
   void setCurveNamesNotExported(const QStringList &curveNamesNotExported);

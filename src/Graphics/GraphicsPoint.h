@@ -12,6 +12,13 @@ class QGraphicsScene;
 
 /// Graphics item for drawing a circular or polygonal Point. 
 ///
+/// In this class, lines are drawn twice:
+/// 1) As nonzero-width lines so user can have thick, and highly visible, points
+/// 2) As a 'shadow' with zero-width lines since these always appear even when zooming results in some pixel
+///    rows/columns disappearing
+/// This dual-line approach is better than using QGraphicsItem::ItemIgnoresTransformations to prevent horrible
+/// aliasing problems, since that approach involves complicated transformation matrix manipulations
+///
 /// Layering is used for the single graphics item contained by this class. External code only has to deal with this
 /// single class, and there is no multiple inheritance involved. If inheritance was used, we would have one class
 /// based on QGraphicsEllipseItem and another on QGraphicsPolygonItem, so having a single class (for the convenience

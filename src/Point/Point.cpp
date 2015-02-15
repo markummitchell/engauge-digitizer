@@ -1,5 +1,8 @@
+#include "DocumentSerialize.h"
+#include "Logger.h"
 #include "Point.h"
 #include <QStringList>
+#include <QXmlStreamWriter>
 
 unsigned int Point::m_identifierIndex = 0;
 
@@ -75,6 +78,31 @@ QPointF Point::posGraph () const
 QPointF Point::posScreen () const
 {
   return m_posScreen;
+}
+
+void Point::saveDocument(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER, m_identifier);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL, QString::number (m_ordinal));
+
+  // Variable m_identifierIndex is static, but for simplicity this is handled like other values. Those values are all
+  // the same, but simplicity wins over a few extra bytes of storage
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX, QString::number (m_identifierIndex));
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posScreen.x()));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posScreen.y()));
+  stream.writeEndElement();
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
+  stream.writeEndElement();
+
+  stream.writeEndElement();
 }
 
 void Point::setIdentifierIndex (unsigned int identifierIndex)

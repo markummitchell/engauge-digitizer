@@ -1,7 +1,10 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "DocumentSerialize.h"
+#include "Logger.h"
 #include "Point.h"
 #include <QTextStream>
+#include <QXmlStreamWriter>
 #include "Transformation.h"
 
 CurvesGraphs::CurvesGraphs()
@@ -129,4 +132,20 @@ void CurvesGraphs::removePoint (const QString &pointIdentifier)
 
   Curve *curve = curveForCurveName (curveName);
   curve->removePoint (pointIdentifier);
+}
+
+void CurvesGraphs::saveDocument(QXmlStreamWriter &stream) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVES_GRAPHS);
+
+  CurveList::const_iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    const Curve &curve = *itr;
+    curve.saveDocument (stream);
+  }
+
+  stream.writeEndElement();
 }

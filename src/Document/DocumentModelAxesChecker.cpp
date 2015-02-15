@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelAxesChecker.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -54,11 +55,14 @@ ColorPalette DocumentModelAxesChecker::lineColor () const
   return m_lineColor;
 }
 
-void DocumentModelAxesChecker::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelAxesChecker::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::saveDocument";
 
-  stream.writeStartElement("DocumentModelAxesChecker");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_AXES_CHECKER);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE, QString::number (m_checkerMode));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS, QString::number (m_checkerSeconds));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR, QString::number (m_lineColor));
   stream.writeEndElement();
 }
 

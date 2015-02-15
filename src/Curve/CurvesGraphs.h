@@ -7,6 +7,7 @@
 #include <QStringList>
 
 class Point;
+class QXmlStreamWriter;
 class Transformation;
 
 typedef QList<Curve> CurveList;
@@ -50,6 +51,9 @@ public:
 
   /// Remove the Point from its Curve.
   void removePoint (const QString &pointIdentifier);
+
+  /// Serialize curves
+  void saveDocument(QXmlStreamWriter &stream) const;
 
 private:
 

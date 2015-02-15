@@ -18,6 +18,7 @@ extern const QString DEFAULT_GRAPH_CURVE_NAME;
 
 class CurvesGraphs;
 class QTextStream;
+class QXmlStreamWriter;
 class Transformation;
 
 /// Container for one set of digitized Points
@@ -86,6 +87,9 @@ public:
 
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
+
+  /// Serialize curve
+  void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set curve filter.
   void setCurveFilter (const CurveFilter &curveFilter);

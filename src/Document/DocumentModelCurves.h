@@ -36,7 +36,7 @@ public:
   /// One row per curve name.
   virtual int rowCount (const QModelIndex & parent = QModelIndex()) const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Store one curve name data.
   virtual bool setData(const QModelIndex &index,

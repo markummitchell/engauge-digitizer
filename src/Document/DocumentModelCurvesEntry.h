@@ -3,6 +3,8 @@
 
 #include <QString>
 
+class QXmlStreamWriter;
+
 const int COL_CURVE_NAME_CURRENT = 0;
 const int COL_CURVE_NAME_ORIGINAL = 1;
 const int COL_NUM_POINTS = 2;
@@ -33,6 +35,9 @@ class DocumentModelCurvesEntry
 
   /// Number of points in curve.
   int numPoints () const;
+
+  /// Serialize into stream
+  void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for current curve name.
   void setCurveNameCurrent (const QString &curveNameCurrent);

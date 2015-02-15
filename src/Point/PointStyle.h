@@ -48,9 +48,8 @@ public:
   /// Radius of point. For a circle this is all that is needed to draw a circle. For a polygon, the radius determines the size of the polygon
   int radius () const;
 
-  /// Save style to stream.
-  void saveStyle(QXmlStreamWriter &stream,
-                 const QString &curveName) const;
+  /// Serialize to stream
+  void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for line width.
   void setLineWidth (double width);

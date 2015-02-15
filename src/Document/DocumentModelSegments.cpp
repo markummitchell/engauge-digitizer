@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelSegments.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -71,11 +72,18 @@ double DocumentModelSegments::pointSeparation() const
   return m_pointSeparation;
 }
 
-void DocumentModelSegments::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelSegments::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelSegments::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelSegments::saveDocument";
 
-  stream.writeStartElement("DocumentModelSegments");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_SEGMENTS);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_POINT_SEPARATION, QString::number (m_pointSeparation));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_MIN_LENGTH, QString::number (m_minLength));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_FILL_CORNERS, m_fillCorners ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH, QString::number (m_lineWidth));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR, QString::number (m_lineColor));
   stream.writeEndElement();
 }
 

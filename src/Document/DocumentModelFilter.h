@@ -67,7 +67,7 @@ public:
   /// Get method for saturation lower bound.
   int saturationLow (const QString &curveName) const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for filter mode.
   void setFilterMode(const QString &curveName,

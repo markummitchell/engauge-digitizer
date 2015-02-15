@@ -16,7 +16,7 @@ public:
 
 protected:
   /// Save entire model as xml into stream.
-  virtual void saveModel(QXmlStreamWriter &stream) const = 0;
+  virtual void saveDocument(QXmlStreamWriter &stream) const = 0;
 };
 
 #endif // DOCUMENT_MODEL_ABSTRACT_BASE_H

@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelGridRemoval.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -135,11 +136,28 @@ bool DocumentModelGridRemoval::removeParallelToAxes () const
   return m_removeParallelToAxes;
 }
 
-void DocumentModelGridRemoval::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelGridRemoval::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveDocument";
 
-  stream.writeStartElement("DocumentModelGridRemoval");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_GRID_REMOVAL);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES, m_removeDefinedGridLines ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y, QString::number (m_closeDistance));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES, m_removeParallelToAxes ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
+
   stream.writeEndElement();
 }
 

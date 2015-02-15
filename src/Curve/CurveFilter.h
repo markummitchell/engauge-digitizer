@@ -70,7 +70,7 @@ public:
   int saturationLow () const;
 
   /// Save curve filter to stream.
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for filter mode.
   void setFilterMode(FilterMode filterMode);

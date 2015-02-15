@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelCurveProperties.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QXmlStreamWriter>
@@ -142,28 +143,35 @@ const PointStyles &DocumentModelCurveProperties::pointStyles() const
   return m_pointStyles;
 }
 
-void DocumentModelCurveProperties::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelCurveProperties::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurveProperties::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurveProperties::saveDocument";
 
-  stream.writeStartElement("DocumentModelCurveProperties");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES);
 
   // Line styles
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_LINE_STYLES);
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.constBegin(); itrL != m_lineStyles.constEnd(); itrL++) {
     QString curveName = itrL.key();
     const LineStyle &lineStyle = itrL.value();
-    lineStyle.saveStyle(stream,
-                        curveName);
+
+    stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
+    lineStyle.saveDocument (stream);
+    stream.writeEndElement();
   }
+  stream.writeEndElement();
 
   // Point styles
+  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_POINT_STYLES);
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.constBegin(); itrP != m_pointStyles.constEnd(); itrP++) {
     QString curveName = itrP.key();
     const PointStyle &pointStyle = itrP.value();
-    pointStyle.saveStyle(stream,
-                         curveName);
+
+    stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
+    pointStyle.saveDocument (stream);
+    stream.writeEndElement();
   }
 
   stream.writeEndElement();

@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DocumentModelPointMatch.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 
@@ -72,11 +73,16 @@ ColorPalette DocumentModelPointMatch::paletteColorRejected() const
   return m_paletteColorRejected;
 }
 
-void DocumentModelPointMatch::saveModel(QXmlStreamWriter &stream) const
+void DocumentModelPointMatch::saveDocument(QXmlStreamWriter &stream) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveModel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveDocument";
 
-  stream.writeStartElement("DocumentModelPointMatch");
+  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_MATCH);
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE, QString::number (m_maxPointSize));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED, QString::number (m_paletteColorAccepted));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE, QString::number (m_paletteColorCandidate));
+  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED, QString::number (m_paletteColorRejected));
   stream.writeEndElement();
 }
 

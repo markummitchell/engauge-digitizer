@@ -1,3 +1,5 @@
+#include "DocumentSerialize.h"
+#include "Logger.h"
 #include "PointStyle.h"
 #include <qmath.h>
 #include <QXmlStreamWriter>
@@ -157,14 +159,14 @@ int PointStyle::radius () const
   return m_radius;
 }
 
-void PointStyle::saveStyle(QXmlStreamWriter &stream,
-                           const QString &curveName) const
+void PointStyle::saveDocument(QXmlStreamWriter &stream) const
 {
-  stream.writeStartElement("PointStyle");
-  stream.writeAttribute ("Curve", curveName);
-  stream.writeAttribute ("Radius", QString::number (m_radius));
-  stream.writeAttribute ("Color", QString::number (m_paletteColor));
-  stream.writeAttribute ("Shape", QString::number (m_shape));
+  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::saveDocument";
+
+  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
+  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
+  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));
+  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE, QString::number (m_shape));
   stream.writeEndElement();
 }
 

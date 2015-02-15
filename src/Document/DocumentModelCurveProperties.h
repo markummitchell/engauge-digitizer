@@ -65,7 +65,7 @@ public:
   /// Get method for copying all point styles in one step.
   const PointStyles &pointStyles () const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for line color in specified curve.
   void setLineColor (const QString &curveName,

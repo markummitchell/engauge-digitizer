@@ -4,6 +4,8 @@
 #include <QPointF>
 #include <QString>
 
+class QXmlStreamWriter;
+
 /// Class that represents one digitized point. The screen-to-graph coordinate transformation is always external to this class
 class Point
 {
@@ -42,6 +44,9 @@ public:
 
   /// Accessor for screen position
   QPointF posScreen () const;
+
+  /// Serialize to stream
+  void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Reset the current index while performing a Redo.
   static void setIdentifierIndex (unsigned int identifierIndex);

@@ -51,7 +51,7 @@ public:
   /// Get method for removing lines parallel to axes.
   bool removeParallelToAxes () const;
 
-  virtual void saveModel(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for close distance.
   void setCloseDistance (double closeDistance);
