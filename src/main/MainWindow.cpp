@@ -1057,6 +1057,7 @@ QString MainWindow::selectedGraphCurve () const
 void MainWindow::setCurrentFile (const QString &fileName)
 {
   const int VersionNumber = 6;
+  const QString PLACEHOLDER ("[*]");
 
   QString title = QString (tr ("Engauge Digitizer %1")
                            .arg (VersionNumber));
@@ -1075,6 +1076,11 @@ void MainWindow::setCurrentFile (const QString &fileName)
   }
 
   m_currentFile = fileNameStripped;
+
+  // To prevent "QWidget::setWindowModified: The window title does not contain a [*] placeholder" warnings,
+  // we always append a placeholder
+  title += PLACEHOLDER;
+
   setWindowTitle (title);
 }
 
@@ -1476,7 +1482,16 @@ bool MainWindow::slotFileSaveAs()
     filenameDefault = m_engaugeFile;
   }
 
+  QString filterDigitizer = QString ("Digitizer (*.%1)").arg (ENGAUGE_FILENAME_EXTENSION);
+  QString filterAll ("All files (*. *)");
+
+  QStringList filters;
+  filters << filterDigitizer;
+  filters << filterAll;
+
   QFileDialog dlg(this);
+  dlg.selectNameFilter (filterDigitizer);
+  dlg.setNameFilters (filters);
   dlg.setWindowModality(Qt::WindowModal);
   dlg.setAcceptMode(QFileDialog::AcceptSave);
   dlg.selectFile(filenameDefault);

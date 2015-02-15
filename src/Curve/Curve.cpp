@@ -266,7 +266,6 @@ void Curve::saveDocument(QXmlStreamWriter &stream) const
     const Point &point = *itr;
     point.saveDocument (stream);
   }
-
   stream.writeEndElement();
 
   stream.writeEndElement();

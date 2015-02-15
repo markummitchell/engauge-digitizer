@@ -8,6 +8,8 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "Point.h"
+#include <QByteArray>
+#include <QDataStream>
 #include <QDebug>
 #include <QFile>
 #include <QImage>
@@ -381,6 +383,17 @@ void Document::saveDocument(QXmlStreamWriter &stream)
   stream.writeStartDocument();
   stream.writeDTD("<!DOCTYPE engauge>");
   stream.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
+
+  // Serialize the Document image. That binary data is encoded as base64
+  QByteArray array;
+  QDataStream str (&array, QIODevice::WriteOnly);
+  QImage img = m_pixmap.toImage ();
+  str << img;
+  stream.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
+  stream.writeCDATA (array.toBase64 ());
+  stream.writeEndElement();
+
+  // Serialize the Document variables
   m_modelCoords.saveDocument(stream);
   m_modelExport.saveDocument(stream);
   m_modelAxesChecker.saveDocument(stream);
