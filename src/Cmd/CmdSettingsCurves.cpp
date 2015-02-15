@@ -1,12 +1,12 @@
 #include "CmdSettingsCurves.h"
-#include "DocumentModelCurves.h"
+#include "CurveNameList.h"
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
 CmdSettingsCurves::CmdSettingsCurves(MainWindow &mainWindow,
                                      Document &document,
-                                     const DocumentModelCurves &modelCurves) :
+                                     const CurveNameList &modelCurves) :
   CmdAbstract(mainWindow,
               document,
               "Curves settings")

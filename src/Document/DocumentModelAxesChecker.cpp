@@ -80,15 +80,15 @@ void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
   }
 }
 
-void DocumentModelAxesChecker::saveDocument(QXmlStreamWriter &stream) const
+void DocumentModelAxesChecker::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_AXES_CHECKER);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE, QString::number (m_checkerMode));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS, QString::number (m_checkerSeconds));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR, QString::number (m_lineColor));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_AXES_CHECKER);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE, QString::number (m_checkerMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS, QString::number (m_checkerSeconds));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR, QString::number (m_lineColor));
+  writer.writeEndElement();
 }
 
 void DocumentModelAxesChecker::setCheckerMode(CheckerMode checkerMode)

@@ -39,7 +39,7 @@ public:
   /// Get method for rejected color.
   ColorPalette paletteColorRejected() const;
 
-  virtual void saveDocument(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for max point size.
   void setMaxPointSize (double maxPointSize);

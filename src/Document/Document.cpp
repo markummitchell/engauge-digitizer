@@ -457,34 +457,34 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-void Document::saveDocument(QXmlStreamWriter &stream)
+void Document::saveDocument(QXmlStreamWriter &writer)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::saveDocument";
 
-  stream.writeStartDocument();
-  stream.writeDTD("<!DOCTYPE engauge>");
-  stream.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
+  writer.writeStartDocument();
+  writer.writeDTD("<!DOCTYPE engauge>");
+  writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
 
   // Serialize the Document image. That binary data is encoded as base64
   QByteArray array;
   QDataStream str (&array, QIODevice::WriteOnly);
   QImage img = m_pixmap.toImage ();
   str << img;
-  stream.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
-  stream.writeCDATA (array.toBase64 ());
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
+  writer.writeCDATA (array.toBase64 ());
+  writer.writeEndElement();
 
   // Serialize the Document variables
-  m_modelCoords.saveDocument(stream);
-  m_modelExport.saveDocument(stream);
-  m_modelAxesChecker.saveDocument(stream);
-  m_modelGridRemoval.saveDocument(stream);
-  m_modelPointMatch.saveDocument(stream);
-  m_modelSegments.saveDocument(stream);
-  m_curveAxes->saveDocument(stream);
-  m_curvesGraphs.saveDocument(stream);
-  stream.writeEndElement();
-  stream.writeEndDocument();
+  m_modelCoords.saveDocument(writer);
+  m_modelExport.saveDocument(writer);
+  m_modelAxesChecker.saveDocument(writer);
+  m_modelGridRemoval.saveDocument(writer);
+  m_modelPointMatch.saveDocument(writer);
+  m_modelSegments.saveDocument(writer);
+  m_curveAxes->saveDocument(writer);
+  m_curvesGraphs.saveDocument(writer);
+  writer.writeEndElement();
+  writer.writeEndDocument();
 }
 
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)

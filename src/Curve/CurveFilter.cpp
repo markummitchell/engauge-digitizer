@@ -226,23 +226,23 @@ int CurveFilter::saturationLow () const
   return m_saturationLow;
 }
 
-void CurveFilter::saveDocument(QXmlStreamWriter &stream) const
+void CurveFilter::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH, QString::number (m_foregroundHigh));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW, QString::number (m_hueLow));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH, QString::number (m_hueHigh));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW, QString::number (m_saturationLow));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH, QString::number (m_saturationHigh));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW, QString::number (m_valueLow));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH, QString::number (m_valueHigh));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH, QString::number (m_foregroundHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW, QString::number (m_hueLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH, QString::number (m_hueHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW, QString::number (m_saturationLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH, QString::number (m_saturationHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW, QString::number (m_valueLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH, QString::number (m_valueHigh));
+  writer.writeEndElement();
 }
 
 void CurveFilter::setFilterMode(FilterMode filterMode)

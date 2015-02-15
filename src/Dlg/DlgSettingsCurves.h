@@ -5,7 +5,7 @@
 #include <QItemSelection>
 #include <QModelIndex>
 
-class DocumentModelCurves;
+class CurveNameList;
 class QGridLayout;
 class QListView;
 class QPushButton;
@@ -54,7 +54,7 @@ private:
   QPushButton *m_btnRemove;
   QPushButton *m_btnRename;
 
-  DocumentModelCurves *m_modelCurves; // Model for m_listCurves
+  CurveNameList *m_curveNameList; // Model for m_listCurves
   QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
 };
 

@@ -1,5 +1,5 @@
-#ifndef DOCUMENT_MODEL_CURVES_ENTRY_H
-#define DOCUMENT_MODEL_CURVES_ENTRY_H
+#ifndef CURVE_NAME_LIST_ENTRY_H
+#define CURVE_NAME_LIST_ENTRY_H
 
 #include <QString>
 
@@ -9,23 +9,23 @@ const int COL_CURVE_NAME_CURRENT = 0;
 const int COL_CURVE_NAME_ORIGINAL = 1;
 const int COL_NUM_POINTS = 2;
 
-/// Utility class for converting the QVariant in DocumentModelCurves to/from the curve names as QStrings, for use by
-/// the DocumentModelCurves model class. Subclassing QVariant brings up difficult challenges, so the QString userType
+/// Utility class for converting the QVariant in CurveNameList to/from the curve names as QStrings, for use by
+/// the CurveNameList model class. Subclassing QVariant brings up difficult challenges, so the QString userType
 /// was chosen.
 ///
 /// Each entry has the current curve name, original curve name and point count, separated by a delimiter.
-class DocumentModelCurvesEntry
+class CurveNameListEntry
 {
  public:
   /// Constructor for empty entry.
-  DocumentModelCurvesEntry ();
+  CurveNameListEntry ();
 
   /// Constructor for converting to QVariant.
-  DocumentModelCurvesEntry (const QString &curveNameCurrent,
-                            const QString &curveNameOriginal,
-                            int numPoints);
+  CurveNameListEntry (const QString &curveNameCurrent,
+                      const QString &curveNameOriginal,
+                      int numPoints);
   /// Constructor for converting from QVariant.
-  DocumentModelCurvesEntry (const QString &fromText);
+  CurveNameListEntry (const QString &fromText);
 
   /// Curve name displayed in DlgSettingsCurves.
   QString curveNameCurrent () const;
@@ -37,7 +37,7 @@ class DocumentModelCurvesEntry
   int numPoints () const;
 
   /// Serialize into stream
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for current curve name.
   void setCurveNameCurrent (const QString &curveNameCurrent);
@@ -58,4 +58,4 @@ private:
   int m_numPoints;
 };
 
-#endif // DOCUMENT_MODEL_CURVES_ENTRY_H
+#endif // CURVE_NAME_LIST_ENTRY_H

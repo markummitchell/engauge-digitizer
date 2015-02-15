@@ -61,7 +61,7 @@ public:
   int intensityLow () const;
 
   /// Load curve filter to stream.
-  void loadDocument(QXmlStreamReader &stream);
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Low value of foreground, hue, intensity, saturation or value according to current filter mode,
   /// normalized to 0 to 1.
@@ -74,7 +74,7 @@ public:
   int saturationLow () const;
 
   /// Save curve filter to stream.
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for filter mode.
   void setFilterMode(FilterMode filterMode);

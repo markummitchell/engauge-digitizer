@@ -171,6 +171,26 @@ LineStyle Curve::lineStyle () const
   return m_lineStyle;
 }
 
+void Curve::loadCurvePoints(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadCurvePoints";
+
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+         (reader.name() != DOCUMENT_SERIALIZE_CURVE_POINTS)) {
+
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if (tokenType == QXmlStreamReader::StartElement) {
+
+      if (reader.name () == DOCUMENT_SERIALIZE_POINT) {
+
+        Point point (reader);
+        m_points.push_back (point);
+      }
+    }
+  }
+}
+
 void Curve::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadDocument";
@@ -188,7 +208,7 @@ void Curve::loadDocument(QXmlStreamReader &reader)
       if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
         m_curveFilter.loadDocument(reader);
       } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
-
+        loadCurvePoints(reader);
       } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
         m_lineStyle.loadDocument(reader);
       } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
@@ -290,26 +310,26 @@ void Curve::removePoint (const QString &identifier)
   }
 }
 
-void Curve::saveDocument(QXmlStreamWriter &stream) const
+void Curve::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Curve::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
-  m_curveFilter.saveDocument (stream);
-  m_lineStyle.saveDocument (stream);
-  m_pointStyle.saveDocument (stream);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
+  m_curveFilter.saveDocument (writer);
+  m_lineStyle.saveDocument (writer);
+  m_pointStyle.saveDocument (writer);
 
   // Loop through points
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_POINTS);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_POINTS);
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;
-    point.saveDocument (stream);
+    point.saveDocument (writer);
   }
-  stream.writeEndElement();
+  writer.writeEndElement();
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }
 
 void Curve::setCurveFilter (const CurveFilter &curveFilter)

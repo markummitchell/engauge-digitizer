@@ -41,7 +41,7 @@ public:
   /// Get method for origin radius in polar mode.
   double originRadius () const;
 
-  virtual void saveDocument(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for linear/log scale on x/theta.
   void setCoordScaleXTheta (CoordScale coordScale);

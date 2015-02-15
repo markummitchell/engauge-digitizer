@@ -160,18 +160,18 @@ void CurvesGraphs::removePoint (const QString &pointIdentifier)
   curve->removePoint (pointIdentifier);
 }
 
-void CurvesGraphs::saveDocument(QXmlStreamWriter &stream) const
+void CurvesGraphs::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVES_GRAPHS);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVES_GRAPHS);
 
   CurveList::const_iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
     const Curve &curve = *itr;
-    curve.saveDocument (stream);
+    curve.saveDocument (writer);
   }
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }

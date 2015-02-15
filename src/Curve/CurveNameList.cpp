@@ -1,27 +1,27 @@
-#include "DocumentModelCurvesEntry.h"
-#include "DocumentModelCurves.h"
+#include "CurveNameListEntry.h"
+#include "CurveNameList.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "QtToString.h"
 #include <QVariant>
 #include <QXmlStreamWriter>
 
-DocumentModelCurves::DocumentModelCurves()
+CurveNameList::CurveNameList()
 {
 }
 
-int DocumentModelCurves::columnCount (const QModelIndex & /* parent */) const
+int CurveNameList::columnCount (const QModelIndex & /* parent */) const
 {
   return 3;
 }
 
-bool DocumentModelCurves::containsCurveNameCurrent (const QString &curveName) const
+bool CurveNameList::containsCurveNameCurrent (const QString &curveName) const
 {
   // Search for curve with matching name
   QStringList::const_iterator itr;
   for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
 
-    DocumentModelCurvesEntry curvesEntry (*itr);
+    CurveNameListEntry curvesEntry (*itr);
     if (curveName == curvesEntry.curveNameCurrent()) {
 
       return true;
@@ -31,10 +31,10 @@ bool DocumentModelCurves::containsCurveNameCurrent (const QString &curveName) co
   return false;
 }
 
-QVariant DocumentModelCurves::data (const QModelIndex &index,
+QVariant CurveNameList::data (const QModelIndex &index,
                                int role) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::data"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::data"
                                << " isRoot=" << (index.isValid () ? "no" : "yes")
                                << " role=" << roleAsString (role).toLatin1 ().data ();
 
@@ -53,7 +53,7 @@ QVariant DocumentModelCurves::data (const QModelIndex &index,
     return QVariant();
   }
 
-  DocumentModelCurvesEntry curvesEntry (m_modelCurvesEntries.at (row));
+  CurveNameListEntry curvesEntry (m_modelCurvesEntries.at (row));
 
   if (index.column () == 0) {
     return curvesEntry.curveNameCurrent();
@@ -67,7 +67,7 @@ QVariant DocumentModelCurves::data (const QModelIndex &index,
 }
 
 
-Qt::ItemFlags DocumentModelCurves::flags (const QModelIndex &index) const
+Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
 {
   // Only the root item can accept drops, or else dragging one entry onto another
   // would result in the drop target getting overwritten
@@ -90,13 +90,13 @@ Qt::ItemFlags DocumentModelCurves::flags (const QModelIndex &index) const
   }
 }
 
-bool DocumentModelCurves::insertRows (int row,
+bool CurveNameList::insertRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::insertRows"
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::insertRows"
                               << " row=" << row
                               << " count=" << count
                               << " isRoot=" << (parent.isValid () ? "no" : "yes")
@@ -112,7 +112,7 @@ bool DocumentModelCurves::insertRows (int row,
                    row,
                    row + count - 1);
 
-  DocumentModelCurvesEntry emptyCurvesEntry;
+  CurveNameListEntry emptyCurvesEntry;
 
   m_modelCurvesEntries.insert (row,
                                emptyCurvesEntry.toString ());
@@ -122,18 +122,13 @@ bool DocumentModelCurves::insertRows (int row,
   return true;
 }
 
-void DocumentModelCurves::loadDocument(QXmlStreamReader &/* reader */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::loadDocument";
-}
-
-bool DocumentModelCurves::removeRows (int row,
+bool CurveNameList::removeRows (int row,
                                  int count,
                                  const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::removeRows"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::removeRows"
                                << " row=" << row
                                << " count=" << count
                                << " isRoot=" << (parent.isValid () ? "no" : "yes")
@@ -152,36 +147,20 @@ bool DocumentModelCurves::removeRows (int row,
   return success;
 }
 
-int DocumentModelCurves::rowCount (const QModelIndex & /* parent */) const
+int CurveNameList::rowCount (const QModelIndex & /* parent */) const
 {
   int count = m_modelCurvesEntries.count ();
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DocumentModelCurves::rowCount count=" << count;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::rowCount count=" << count;
 
   return count;
 }
 
-void DocumentModelCurves::saveDocument(QXmlStreamWriter &stream) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::saveDocument";
-
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVES);
-  QStringList::const_iterator itr;
-  for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {
-
-    DocumentModelCurvesEntry curvesEntry (*itr);
-    curvesEntry.saveDocument(stream);
-
-  }
-
-  stream.writeEndElement();
-}
-
-bool DocumentModelCurves::setData (const QModelIndex &index,
+bool CurveNameList::setData (const QModelIndex &index,
                               const QVariant &value,
                               int role)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::setData"
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData"
                               << " indexRow=" << index.row ()
                               << " value=" << (value.isValid () ? "valid" : "invalid")
                               << " role=" << roleAsString (role).toLatin1 ().data ();
@@ -199,7 +178,7 @@ bool DocumentModelCurves::setData (const QModelIndex &index,
     } else {
 
       // Modify the entry
-      DocumentModelCurvesEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
+      CurveNameListEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
 
       if (index.column () == 0) {
         curvesEntry.setCurveNameCurrent (value.toString ());
@@ -223,7 +202,7 @@ bool DocumentModelCurves::setData (const QModelIndex &index,
   return success;
 }
 
-Qt::DropActions DocumentModelCurves::supportedDropActions () const
+Qt::DropActions CurveNameList::supportedDropActions () const
 {
   return Qt::MoveAction;
 }

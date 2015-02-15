@@ -102,17 +102,17 @@ ColorPalette DocumentModelPointMatch::paletteColorRejected() const
   return m_paletteColorRejected;
 }
 
-void DocumentModelPointMatch::saveDocument(QXmlStreamWriter &stream) const
+void DocumentModelPointMatch::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_MATCH);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE, QString::number (m_maxPointSize));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED, QString::number (m_paletteColorAccepted));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE, QString::number (m_paletteColorCandidate));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED, QString::number (m_paletteColorRejected));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_MATCH);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE, QString::number (m_maxPointSize));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED, QString::number (m_paletteColorAccepted));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE, QString::number (m_paletteColorCandidate));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED, QString::number (m_paletteColorRejected));
+  writer.writeEndElement();
 }
 
 void DocumentModelPointMatch::setMaxPointSize(double maxPointSize)

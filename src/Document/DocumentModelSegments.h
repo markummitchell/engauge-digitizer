@@ -39,7 +39,7 @@ public:
   /// Get method for point separation.
   double pointSeparation() const;
 
-  virtual void saveDocument(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for fill corners.
   void setFillCorners (bool fillCorners);

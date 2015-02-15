@@ -131,20 +131,20 @@ int DocumentModelFilter::saturationLow (const QString &curveName) const
   return m_curveFilters [curveName].saturationLow();
 }
 
-void DocumentModelFilter::saveDocument(QXmlStreamWriter &stream) const
+void DocumentModelFilter::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_FILTER);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_FILTER);
 
   // Loop through filters
   CurveFilters::const_iterator itr;
   for (itr = m_curveFilters.begin (); itr != m_curveFilters.end (); itr++) {
     const CurveFilter &curveFilter = *itr;
-    curveFilter.saveDocument(stream);
+    curveFilter.saveDocument(writer);
   }
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }
 
 void DocumentModelFilter::setFilterMode(const QString &curveName,

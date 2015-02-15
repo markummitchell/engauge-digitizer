@@ -53,7 +53,7 @@ public:
   int radius () const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for line width.
   void setLineWidth (double width);

@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "Point.h"
 #include <QStringList>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
 unsigned int Point::m_identifierIndex = 0;
@@ -39,6 +40,11 @@ Point::Point (const Point &point)
   m_ordinal = point.ordinal ();
 }
 
+Point::Point (QXmlStreamReader &reader)
+{
+  loadDocument(reader);
+}
+
 Point &Point::operator=(const Point &point)
 {
   m_posScreen = point.posScreen ();
@@ -65,6 +71,63 @@ unsigned int Point::identifierIndex ()
   return m_identifierIndex;
 }
 
+void Point::loadDocument(QXmlStreamReader &reader)
+{
+  bool success = true;
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX)) {
+
+    m_identifier = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString();
+    m_ordinal = attributes.value(DOCUMENT_SERIALIZE_POINT_ORDINAL).toDouble();
+    m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();
+
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+           (reader.name () != DOCUMENT_SERIALIZE_POINT)) {
+
+      if (reader.tokenType () == QXmlStreamReader::StartElement) {
+
+        if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
+
+          attributes = reader.attributes();
+
+          if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_X) &&
+              attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_Y)) {
+
+            m_posScreen.setX (attributes.value(DOCUMENT_SERIALIZE_POINT_X).toDouble());
+            m_posScreen.setY (attributes.value(DOCUMENT_SERIALIZE_POINT_Y).toDouble());
+
+          } else {
+            success = false;
+          }
+        } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH) {
+
+          attributes = reader.attributes();
+
+          if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_X) &&
+              attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_Y)) {
+
+            m_posGraph.setX (attributes.value(DOCUMENT_SERIALIZE_POINT_X).toDouble());
+            m_posGraph.setY (attributes.value(DOCUMENT_SERIALIZE_POINT_Y).toDouble());
+
+          } else {
+            success = false;
+          }
+        }
+      }
+    }
+  } else {
+    success = false;
+  }
+
+  if (!success) {
+    reader.raiseError("Cannot read point data");
+  }
+}
+
 double Point::ordinal () const
 {
   return m_ordinal;
@@ -80,29 +143,29 @@ QPointF Point::posScreen () const
   return m_posScreen;
 }
 
-void Point::saveDocument(QXmlStreamWriter &stream) const
+void Point::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER, m_identifier);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL, QString::number (m_ordinal));
+  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER, m_identifier);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL, QString::number (m_ordinal));
 
   // Variable m_identifierIndex is static, but for simplicity this is handled like other values. Those values are all
   // the same, but simplicity wins over a few extra bytes of storage
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX, QString::number (m_identifierIndex));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX, QString::number (m_identifierIndex));
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posScreen.x()));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posScreen.y()));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posScreen.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posScreen.y()));
+  writer.writeEndElement();
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
+  writer.writeEndElement();
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }
 
 void Point::setIdentifierIndex (unsigned int identifierIndex)

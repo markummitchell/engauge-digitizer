@@ -22,7 +22,7 @@ protected:
   virtual void loadDocument(QXmlStreamReader &reader) = 0;
 
   /// Save entire model as xml into stream.
-  virtual void saveDocument(QXmlStreamWriter &stream) const = 0;
+  virtual void saveDocument(QXmlStreamWriter &writer) const = 0;
 };
 
 #endif // DOCUMENT_MODEL_ABSTRACT_BASE_H

@@ -34,7 +34,7 @@ public:
 
   virtual void loadDocument(QXmlStreamReader &reader);
 
-  virtual void saveDocument(QXmlStreamWriter &stream) const;
+  virtual void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for checker mode.
   void setCheckerMode (CheckerMode checkerMode);

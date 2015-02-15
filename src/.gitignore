@@ -4,6 +4,7 @@
 .moc_test
 .objs
 .objs_test
+engauge.log*
 engauge.pro.user
 engauge_test.pro.user
 Makefile*

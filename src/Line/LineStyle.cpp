@@ -87,15 +87,15 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::saveDocument(QXmlStreamWriter &stream) const
+void LineStyle::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat))  << "LineStyle::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
-  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));
-  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR, QString::number (m_paletteColor));
-  stream.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS, QString::number (m_curveConnectAs));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
+  writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR, QString::number (m_paletteColor));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS, QString::number (m_curveConnectAs));
+  writer.writeEndElement();
 }
 
 void LineStyle::setCurveConnectAs(CurveConnectAs curveConnectAs)

@@ -186,16 +186,16 @@ int PointStyle::radius () const
   return m_radius;
 }
 
-void PointStyle::saveDocument(QXmlStreamWriter &stream) const
+void PointStyle::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
-  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
-  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH, QString::number (m_lineWidth));
-  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));
-  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE, QString::number (m_shape));
-  stream.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH, QString::number (m_lineWidth));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE, QString::number (m_shape));
+  writer.writeEndElement();
 }
 
 void PointStyle::setLineWidth(double width)

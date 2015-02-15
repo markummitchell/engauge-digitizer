@@ -57,7 +57,7 @@ public:
   void removePoint (const QString &pointIdentifier);
 
   /// Serialize curves
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
 private:
 

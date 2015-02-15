@@ -175,31 +175,31 @@ double DocumentModelExport::relationsInterval() const
   return m_relationsInterval;
 }
 
-void DocumentModelExport::saveDocument(QXmlStreamWriter &stream) const
+void DocumentModelExport::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_EXPORT);
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS, QString::number (m_pointsSelectionFunctions));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL, QString::number (m_pointsInterval));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS, QString::number (m_pointsSelectionRelations));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL, QString::number (m_relationsInterval));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS, QString::number (m_layoutFunctions));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER, QString::number (m_delimiter));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER, QString::number (m_header));
-  stream.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_X_LABEL, m_xLabel);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS, QString::number (m_pointsSelectionFunctions));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL, QString::number (m_pointsInterval));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS, QString::number (m_pointsSelectionRelations));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL, QString::number (m_relationsInterval));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS, QString::number (m_layoutFunctions));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER, QString::number (m_delimiter));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER, QString::number (m_header));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_X_LABEL, m_xLabel);
 
   // Loop through curve names that are not to be exported
-  stream.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED);
   QStringList::const_iterator itr;
   for (itr = m_curveNamesNotExported.begin (); itr != m_curveNamesNotExported.end (); itr++) {
     QString curveNameNotExported = *itr;
-    stream.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED, curveNameNotExported);
-    stream.writeEndElement();
+    writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED, curveNameNotExported);
+    writer.writeEndElement();
   }
-  stream.writeEndElement();
+  writer.writeEndElement();
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }
 
 void DocumentModelExport::setCurveNamesNotExported(const QStringList &curveNamesNotExported)

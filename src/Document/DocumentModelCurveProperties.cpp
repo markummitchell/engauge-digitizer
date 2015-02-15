@@ -148,38 +148,38 @@ const PointStyles &DocumentModelCurveProperties::pointStyles() const
   return m_pointStyles;
 }
 
-void DocumentModelCurveProperties::saveDocument(QXmlStreamWriter &stream) const
+void DocumentModelCurveProperties::saveDocument(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurveProperties::saveDocument";
 
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES);
 
   // Line styles
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_LINE_STYLES);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_LINE_STYLES);
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.constBegin(); itrL != m_lineStyles.constEnd(); itrL++) {
     QString curveName = itrL.key();
     const LineStyle &lineStyle = itrL.value();
 
-    stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
-    lineStyle.saveDocument (stream);
-    stream.writeEndElement();
+    writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
+    lineStyle.saveDocument (writer);
+    writer.writeEndElement();
   }
-  stream.writeEndElement();
+  writer.writeEndElement();
 
   // Point styles
-  stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_POINT_STYLES);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_POINT_STYLES);
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.constBegin(); itrP != m_pointStyles.constEnd(); itrP++) {
     QString curveName = itrP.key();
     const PointStyle &pointStyle = itrP.value();
 
-    stream.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
-    pointStyle.saveDocument (stream);
-    stream.writeEndElement();
+    writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_PROPERTIES_CURVE_NAME, curveName);
+    pointStyle.saveDocument (writer);
+    writer.writeEndElement();
   }
 
-  stream.writeEndElement();
+  writer.writeEndElement();
 }
 
 void DocumentModelCurveProperties::setLineColor (const QString &curveName,

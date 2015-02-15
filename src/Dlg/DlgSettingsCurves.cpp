@@ -1,7 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCurves.h"
+#include "CurveNameList.h"
 #include "DlgSettingsCurves.h"
-#include "DocumentModelCurves.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDebug>
@@ -25,9 +25,9 @@ void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
                                          const QString &curveNameOriginal,
                                          int numPoints)
 {
-  Q_CHECK_PTR (m_modelCurves);
+  Q_CHECK_PTR (m_curveNameList);
 
-  int row = m_modelCurves->rowCount ();
+  int row = m_curveNameList->rowCount ();
   insertCurveName (row,
                    curveNameNew,
                    curveNameOriginal,
@@ -64,7 +64,7 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
   QLabel *label = new QLabel (tr ("Curve Names:"));
   layout->addWidget (label, row++, 1);
 
-  m_modelCurves = new DocumentModelCurves;
+  m_curveNameList = new CurveNameList;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
   m_listCurves = new QListView;
@@ -80,9 +80,9 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
   m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
   m_listCurves->setViewMode (QListView::ListMode);
   m_listCurves->setMovement (QListView::Snap);
-  m_listCurves->setModel (m_modelCurves);
+  m_listCurves->setModel (m_curveNameList);
   layout->addWidget (m_listCurves, row++, 1, 1, 2);
-  connect (m_modelCurves, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
+  connect (m_curveNameList, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
            this, SLOT (slotDataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)));
   connect (m_listCurves->selectionModel (), SIGNAL (selectionChanged (QItemSelection, QItemSelection)),
            this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
@@ -136,7 +136,7 @@ void DlgSettingsCurves::handleOk ()
 
   CmdSettingsCurves *cmd = new CmdSettingsCurves (mainWindow (),
                                                   cmdMediator ().document(),
-                                                  *m_modelCurves);
+                                                  *m_curveNameList);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -147,20 +147,20 @@ void DlgSettingsCurves::insertCurveName (int row,
                                          const QString &curveNameOriginal,
                                          int numPoints)
 {
-  if (m_modelCurves->insertRow (row)) {
+  if (m_curveNameList->insertRow (row)) {
 
     LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
-    DocumentModelCurvesEntry curvesEntry (curveNameNew,
-                                          curveNameOriginal,
-                                          numPoints);
+    CurveNameListEntry curvesEntry (curveNameNew,
+                                    curveNameOriginal,
+                                    numPoints);
 
-    m_modelCurves->setData (m_modelCurves->index (row, 0),
-                            curvesEntry.curveNameCurrent ());
-    m_modelCurves->setData (m_modelCurves->index (row, 1),
-                            curvesEntry.curveNameOriginal ());
-    m_modelCurves->setData (m_modelCurves->index (row, 2),
-                            numPoints);
+    m_curveNameList->setData (m_curveNameList->index (row, 0),
+                              curvesEntry.curveNameCurrent ());
+    m_curveNameList->setData (m_curveNameList->index (row, 1),
+                              curvesEntry.curveNameOriginal ());
+    m_curveNameList->setData (m_curveNameList->index (row, 2),
+                              numPoints);
 
   } else {
 
@@ -176,8 +176,8 @@ void DlgSettingsCurves::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Remove any data from previous showing of dialog
-  while (m_modelCurves->rowCount () > 0) {
-    m_modelCurves->removeRow (0);
+  while (m_curveNameList->rowCount () > 0) {
+    m_curveNameList->removeRow (0);
   }
 
   QStringList curveNames = cmdMediator.curvesGraphsNames ();
@@ -220,15 +220,15 @@ QString DlgSettingsCurves::nextCurveName () const
   QString curveNameBefore, curveNameAfter;
   if (currentIndex > 0) {
 
-    QModelIndex index = m_modelCurves->index (currentIndex - 1, 0);
-    curveNameBefore = m_modelCurves->data (index).toString ();
+    QModelIndex index = m_curveNameList->index (currentIndex - 1, 0);
+    curveNameBefore = m_curveNameList->data (index).toString ();
 
   }
 
   if ((0 <= currentIndex) && (currentIndex < numItems)) {
 
-    QModelIndex index = m_modelCurves->index (currentIndex, 0);
-    curveNameAfter = m_modelCurves->data (index).toString ();
+    QModelIndex index = m_curveNameList->index (currentIndex, 0);
+    curveNameAfter = m_curveNameList->data (index).toString ();
 
   }
 
@@ -281,7 +281,7 @@ QString DlgSettingsCurves::nextCurveName () const
   // At this point we have curveNameNext which does not conflict with curveNameBefore or
   // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
   // adding to the name until there is no conflict
-  while (m_modelCurves->containsCurveNameCurrent (curveNameNext)) {
+  while (m_curveNameList->containsCurveNameCurrent (curveNameNext)) {
     curveNameNext += DASH_ONE;
   }
 
@@ -315,7 +315,7 @@ void DlgSettingsCurves::removeSelectedCurves ()
 
     int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
 
-    m_modelCurves->removeRow (row);
+    m_curveNameList->removeRow (row);
   }
 }
 
@@ -367,8 +367,8 @@ void DlgSettingsCurves::slotRemove ()
   for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
 
     int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
-    QModelIndex idx = m_modelCurves->index (row, COL_NUM_POINTS);
-    int curvePoints = m_modelCurves->data (idx, Qt::DisplayRole).toInt ();
+    QModelIndex idx = m_curveNameList->index (row, COL_NUM_POINTS);
+    int curvePoints = m_curveNameList->data (idx, Qt::DisplayRole).toInt ();
 
     numPoints += curvePoints;
   }
@@ -411,7 +411,7 @@ void DlgSettingsCurves::updateControls ()
   Q_CHECK_PTR (m_listCurves);
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
-  int numItems = m_modelCurves->rowCount ();
+  int numItems = m_curveNameList->rowCount ();
 
   if (numSelectedItems < 2 ) {
 

@@ -20,7 +20,6 @@ class DlgSettingsSegments;
 class DocumentModelAxesChecker;
 class DocumentModelCoords;
 class DocumentModelCurveProperties;
-class DocumentModelCurves;
 class DocumentModelExport;
 class DocumentModelFilter;
 class DocumentModelGridRemoval;

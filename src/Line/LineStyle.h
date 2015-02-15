@@ -42,7 +42,7 @@ public:
   ColorPalette paletteColor() const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set connect as.
   void setCurveConnectAs (CurveConnectAs curveConnectAs);

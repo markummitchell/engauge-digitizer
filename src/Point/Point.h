@@ -4,6 +4,7 @@
 #include <QPointF>
 #include <QString>
 
+class QXmlStreamReader;
 class QXmlStreamWriter;
 
 /// Class that represents one digitized point. The screen-to-graph coordinate transformation is always external to this class
@@ -20,6 +21,9 @@ public:
          const QPointF &posScreen,
          const QString &identifier,
          const QPointF posGraph = QPointF (0, 0));
+
+  /// Constructor when loading from serialized xml
+  Point (QXmlStreamReader &reader);
 
   /// Copy constructor.
   Point (const Point &point);
@@ -46,7 +50,7 @@ public:
   QPointF posScreen () const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Reset the current index while performing a Redo.
   static void setIdentifierIndex (unsigned int identifierIndex);
@@ -62,6 +66,9 @@ public:
 
 private:
   Point();
+
+  /// Load from serialized xml
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Generate a unique identifier for a Point. This is static so it can be used while a
   /// GraphicsPointAbstractBase-based object is being constructed.
