@@ -175,10 +175,17 @@ void Curve::loadCurvePoints(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadCurvePoints";
 
+  bool success = true;
+
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
          (reader.name() != DOCUMENT_SERIALIZE_CURVE_POINTS)) {
 
     QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
 
     if (tokenType == QXmlStreamReader::StartElement) {
 
@@ -188,6 +195,10 @@ void Curve::loadCurvePoints(QXmlStreamReader &reader)
         m_points.push_back (point);
       }
     }
+  }
+
+  if (!success) {
+    reader.raiseError("Cannot read curve data");
   }
 }
 
@@ -199,9 +210,14 @@ void Curve::loadDocument(QXmlStreamReader &reader)
 
   // Read until end of this subtree
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-         (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
+         (reader.name() != DOCUMENT_SERIALIZE_CURVE)){
 
     QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
 
     if (tokenType == QXmlStreamReader::StartElement) {
 
@@ -212,11 +228,17 @@ void Curve::loadDocument(QXmlStreamReader &reader)
       } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
         m_lineStyle.loadDocument(reader);
       } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
-        m_lineStyle.loadDocument(reader);
+        m_pointStyle.loadDocument(reader);
       } else {
         success = false;
         break;
       }
+    }
+
+    if (reader.hasError()) {
+      // No need to set success flag to indicate failure, which raises the error, since the error was already raised. Just
+      // need to exit the loop immediately
+      break;
     }
   }
 

@@ -67,6 +67,8 @@ void DocumentModelCoords::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::loadDocument";
 
+  bool success = true;
+
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE) &&
@@ -85,8 +87,14 @@ void DocumentModelCoords::loadDocument(QXmlStreamReader &reader)
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
     (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
       loadNextFromReader(reader);
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
-  } else {
+  }
+
+  if (!success) {
     reader.raiseError ("Cannot read coordinates data");
   }
 }

@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
+#include "Xml.h"
 
 CurvesGraphs::CurvesGraphs()
 {
@@ -139,6 +140,18 @@ void CurvesGraphs::loadDocument(QXmlStreamReader &reader)
 
       m_curvesGraphs.push_back (curve);
 
+    } else {
+
+      loadNextFromReader(reader);
+      if (reader.hasError()) {
+        // No need to set success flag, which raises the error, since error was already raised. Just
+        // need to exit loop immediately
+        break;
+      }
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
   }
 

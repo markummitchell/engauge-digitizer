@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 unsigned int Point::m_identifierIndex = 0;
 
@@ -88,6 +89,12 @@ void Point::loadDocument(QXmlStreamReader &reader)
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
            (reader.name () != DOCUMENT_SERIALIZE_POINT)) {
 
+      loadNextFromReader(reader);
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
+
       if (reader.tokenType () == QXmlStreamReader::StartElement) {
 
         if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
@@ -102,6 +109,7 @@ void Point::loadDocument(QXmlStreamReader &reader)
 
           } else {
             success = false;
+            break;
           }
         } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH) {
 
@@ -115,6 +123,7 @@ void Point::loadDocument(QXmlStreamReader &reader)
 
           } else {
             success = false;
+            break;
           }
         }
       }

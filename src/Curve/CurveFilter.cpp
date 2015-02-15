@@ -151,6 +151,8 @@ void CurveFilter::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::loadFilter";
 
+  bool success = true;
+
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE) &&
@@ -181,8 +183,15 @@ void CurveFilter::loadDocument(QXmlStreamReader &reader)
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
     (reader.name() != DOCUMENT_SERIALIZE_CURVE_FILTER)){
       loadNextFromReader(reader);
+
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
-  } else {
+  }
+
+  if (!success) {
     reader.raiseError ("Cannot read curve filter data");
   }
 }

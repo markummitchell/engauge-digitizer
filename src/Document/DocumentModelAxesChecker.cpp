@@ -60,6 +60,8 @@ void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::loadDocument";
 
+  bool success = true;
+
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE) &&
@@ -74,8 +76,14 @@ void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
     (reader.name() != DOCUMENT_SERIALIZE_AXES_CHECKER)){
       loadNextFromReader(reader);
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
-  } else {
+  }
+
+  if (!success) {
     reader.raiseError ("Cannot read axes checker data");
   }
 }

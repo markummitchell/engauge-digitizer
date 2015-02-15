@@ -92,7 +92,7 @@ void PointStyle::loadDocument(QXmlStreamReader &reader)
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-    (reader.name() != DOCUMENT_SERIALIZE_LINE_STYLE)){
+    (reader.name() != DOCUMENT_SERIALIZE_POINT_STYLE)){
       loadNextFromReader(reader);
     }
   } else {

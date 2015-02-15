@@ -131,6 +131,8 @@ void DocumentModelGridRemoval::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::loadDocument";
 
+  bool success = true;
+
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES) &&
@@ -169,8 +171,14 @@ void DocumentModelGridRemoval::loadDocument(QXmlStreamReader &reader)
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
     (reader.name() != DOCUMENT_SERIALIZE_GRID_REMOVAL)){
       loadNextFromReader(reader);
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
-  } else {
+  }
+
+  if (!success) {
     reader.raiseError ("Cannot read grid removal data");
   }
 }

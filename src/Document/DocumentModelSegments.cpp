@@ -67,10 +67,20 @@ void DocumentModelSegments::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelSegments::loadDocument";
 
+  bool success = true;
+
   // Read until end of this subtree
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
   (reader.name() != DOCUMENT_SERIALIZE_SEGMENTS)){
     loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+  }
+
+  if (!success) {
+    reader.raiseError("Cannot read segment data");
   }
 }
 

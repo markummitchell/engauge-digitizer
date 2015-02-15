@@ -89,7 +89,7 @@ void DocumentModelExport::loadDocument(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::loadDocument";
 
-  bool success = false;
+  bool success = true;
 
   QXmlStreamAttributes attributes = reader.attributes();
 
@@ -116,15 +116,12 @@ void DocumentModelExport::loadDocument(QXmlStreamReader &reader)
            (reader.name() != DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED)) {
 
       if (reader.atEnd()) {
+        success = false;
         break;
       }
-
-      // Keep reading
     }
 
-    if (!reader.atEnd()) {
-
-      // We have QXmlStreamRerader::StartElement and tag=DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED
+    if (success) {
 
       QStringList curveNamesNotExported;
 
@@ -144,9 +141,11 @@ void DocumentModelExport::loadDocument(QXmlStreamReader &reader)
       while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
       (reader.name() != DOCUMENT_SERIALIZE_EXPORT)){
         loadNextFromReader(reader);
+        if (reader.atEnd()) {
+          success = false;
+          break;
+        }
       }
-
-      success = true;
     }
   }
 
