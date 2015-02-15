@@ -1039,6 +1039,10 @@ bool MainWindow::saveFile (const QString &fileName)
   m_cmdMediator->document().saveDocument(stream);
   QApplication::restoreOverrideCursor ();
 
+  // Notify the undo stack that the current state is now considered "clean". This will automatically trigger a
+  // signal back to this class that will update the modified marker in the title bar
+  m_cmdMediator->setClean ();
+
   setCurrentFile(fileName);
   m_engaugeFile = fileName;
   m_statusBar->showTemporaryMessage("File saved");
