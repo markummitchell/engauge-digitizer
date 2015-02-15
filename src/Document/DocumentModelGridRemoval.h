@@ -45,6 +45,8 @@ public:
   /// Get method for y coord parameter to disable.
   GridCoordDisable gridCoordDisableY () const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for removing defined grid lines.
   bool removeDefinedGridLines () const;
 

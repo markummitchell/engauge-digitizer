@@ -4,6 +4,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 CurveFilter::CurveFilter() :
   m_filterMode (FILTER_MODE_INTENSITY),
@@ -144,6 +145,46 @@ int CurveFilter::intensityHigh () const
 int CurveFilter::intensityLow () const
 {
   return m_intensityLow;
+}
+
+void CurveFilter::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::loadFilter";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH)) {
+
+    setFilterMode ((FilterMode) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE).toInt());
+    setIntensityLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW).toInt());
+    setIntensityHigh ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH).toInt());
+    setForegroundLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW).toInt());
+    setForegroundHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH).toInt());
+    setHueLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW).toInt());
+    setHueHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH).toInt());
+    setSaturationLow ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW).toInt());
+    setSaturationHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH).toInt());
+    setValueLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW).toInt());
+    setValueHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_CURVE_FILTER)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read curve filter data");
+  }
 }
 
 double CurveFilter::low () const

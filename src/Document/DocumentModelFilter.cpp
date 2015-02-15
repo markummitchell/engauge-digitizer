@@ -108,6 +108,11 @@ int DocumentModelFilter::intensityLow (const QString &curveName) const
   return m_curveFilters [curveName].intensityLow();
 }
 
+void DocumentModelFilter::loadDocument(QXmlStreamReader &/* reader */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::loadDocument";
+}
+
 double DocumentModelFilter::low (const QString &curveName) const
 {
   Q_ASSERT (m_curveFilters.contains (curveName));

@@ -7,6 +7,7 @@
 #include <QStringList>
 
 class Point;
+class QXmlStreamReader;
 class QXmlStreamWriter;
 class Transformation;
 
@@ -45,6 +46,9 @@ public:
 
   /// Apply functor to Points on all of the Curves.
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+
+  /// Load from serialized file
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Current number of graphs curves.
   int numCurves () const;

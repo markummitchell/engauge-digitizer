@@ -41,6 +41,8 @@ public:
   /// Get method for line width in specified curve.
   double lineWidth (const QString &curveName) const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for curve point color in specified curve.
   ColorPalette pointColor (const QString &curveName) const;
 

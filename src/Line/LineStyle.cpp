@@ -1,7 +1,9 @@
 #include "DocumentSerialize.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const int DEFAULT_LINE_WIDTH = 1;
 
@@ -54,6 +56,30 @@ LineStyle LineStyle::defaultGraphCurve (int /* index */)
   return LineStyle (DEFAULT_LINE_WIDTH,
                     COLOR_PALETTE_BLUE,
                     CONNECT_AS_FUNCTION); // Same default color as used for PointStyle graph curves default
+}
+
+void LineStyle::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "LineStyle::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS)) {
+
+    setWidth (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH).toInt());
+    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR).toInt());
+    setCurveConnectAs ((CurveConnectAs) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_LINE_STYLE)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read line style data");
+  }
 }
 
 ColorPalette LineStyle::paletteColor() const

@@ -1,6 +1,8 @@
 #ifndef DOCUMENT_MODEL_ABSTRACT_BASE_H
 #define DOCUMENT_MODEL_ABSTRACT_BASE_H
 
+#include <QXmlStreamReader>
+
 class QTextStream;
 class QXmlStreamWriter;
 
@@ -15,6 +17,10 @@ public:
   virtual ~DocumentModelAbstractBase();
 
 protected:
+
+  /// Load model from serialized xml
+  virtual void loadDocument(QXmlStreamReader &reader) = 0;
+
   /// Save entire model as xml into stream.
   virtual void saveDocument(QXmlStreamWriter &stream) const = 0;
 };

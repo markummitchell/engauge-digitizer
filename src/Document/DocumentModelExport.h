@@ -39,6 +39,8 @@ public:
   /// Get method for functions layout.
   ExportLayoutFunctions layoutFunctions() const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for points interval.
   double pointsInterval () const;
 

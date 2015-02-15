@@ -4,8 +4,10 @@
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
+#include "Xml.h"
 
 const QString AXIS_CURVE_NAME ("Axes");
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
@@ -29,6 +31,11 @@ Curve::Curve (const Curve &curve) :
   m_lineStyle (curve.lineStyle ()),
   m_pointStyle (curve.pointStyle ())
 {
+}
+
+Curve::Curve (QXmlStreamReader &reader)
+{
+  loadDocument(reader);
 }
 
 Curve &Curve::operator=(const Curve &curve)
@@ -162,6 +169,40 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
 LineStyle Curve::lineStyle () const
 {
   return m_lineStyle;
+}
+
+void Curve::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadDocument";
+
+  bool success = true;
+
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+         (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
+
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if (tokenType == QXmlStreamReader::StartElement) {
+
+      if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
+        m_curveFilter.loadDocument(reader);
+      } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
+
+      } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
+        m_lineStyle.loadDocument(reader);
+      } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
+        m_lineStyle.loadDocument(reader);
+      } else {
+        success = false;
+        break;
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read curve data");
+  }
 }
 
 void Curve::movePoint (const QString &pointIdentifier,

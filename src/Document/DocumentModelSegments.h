@@ -31,6 +31,8 @@ public:
   /// Get method for line width.
   double lineWidth() const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for min length.
   double minLength() const;
 

@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const double CLOSE_DISTANCE_DEFAULT = 1.0;
 
@@ -124,6 +125,54 @@ GridCoordDisable DocumentModelGridRemoval::gridCoordDisableX () const
 GridCoordDisable DocumentModelGridRemoval::gridCoordDisableY () const
 {
   return m_gridCoordDisableY;
+}
+
+void DocumentModelGridRemoval::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES)) {
+
+    // Boolean values
+    QString definedValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES).toString();
+    QString parallelValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES).toString();
+
+    setRemoveDefinedGridLines (definedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    setCloseDistance (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE).toDouble());
+    setGridCoordDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X).toInt());
+    setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X).toInt());
+    setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X).toDouble());
+    setStepX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X).toDouble());
+    setStopX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X).toDouble());
+    setGridCoordDisableY ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y).toInt());
+    setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y).toInt());
+    setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y).toDouble());
+    setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y).toDouble());
+    setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y).toDouble());
+    setRemoveParallelToAxes (parallelValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_GRID_REMOVAL)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read grid removal data");
+  }
 }
 
 bool DocumentModelGridRemoval::removeDefinedGridLines () const

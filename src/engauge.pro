@@ -145,6 +145,7 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
+    util/Xml.h \
     include/ZoomFactor.h
 
 SOURCES += \
@@ -261,7 +262,8 @@ SOURCES += \
     View/ViewProfileDivider.cpp \
     View/ViewProfileParameters.cpp \
     View/ViewProfileScale.cpp \
-    View/ViewSegmentFilter.cpp
+    View/ViewSegmentFilter.cpp \
+    util/Xml.cpp
 
 # Main entry point for non-test
 SOURCES += main/main.cpp

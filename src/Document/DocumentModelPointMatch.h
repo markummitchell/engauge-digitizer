@@ -22,6 +22,8 @@ public:
   /// Assignment constructor.
   DocumentModelPointMatch &operator=(const DocumentModelPointMatch &other);
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for max point size.
   double maxPointSize() const;
 

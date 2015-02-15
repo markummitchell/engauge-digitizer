@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const double DEFAULT_MIN_POINT_SEPARATION = 20;
 const double DEFAULT_MAX_POINT_SIZE = 20;
@@ -46,6 +47,34 @@ DocumentModelPointMatch &DocumentModelPointMatch::operator=(const DocumentModelP
   m_paletteColorRejected = other.paletteColorRejected();
 
   return *this;
+}
+
+void DocumentModelPointMatch::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED)) {
+
+    setMinPointSeparation (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION).toDouble());
+    setMaxPointSize (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE).toDouble());
+    setPaletteColorAccepted ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED).toInt());
+    setPaletteColorCandidate ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE).toInt());
+    setPaletteColorRejected ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_POINT_MATCH)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read point match data");
+  }
 }
 
 double DocumentModelPointMatch::maxPointSize () const

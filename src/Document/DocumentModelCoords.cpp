@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 DocumentModelCoords::DocumentModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
@@ -60,6 +61,34 @@ CoordsType DocumentModelCoords::coordsType () const
 CoordThetaUnits DocumentModelCoords::coordThetaUnits() const
 {
   return m_coordThetaUnits;
+}
+
+void DocumentModelCoords::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS)) {
+
+    setCoordsType ((CoordsType) attributes.value(DOCUMENT_SERIALIZE_COORDS_TYPE).toInt());
+    setOriginRadius (attributes.value(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS).toDouble());
+    setCoordScaleXTheta ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA).toInt());
+    setCoordScaleYRadius ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
+    setCoordThetaUnits ((CoordThetaUnits) attributes.value(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 double DocumentModelCoords::originRadius() const

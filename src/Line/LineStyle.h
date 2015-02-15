@@ -5,6 +5,7 @@
 #include "CurveConnectAs.h"
 #include <QColor>
 
+class QXmlStreamReader;
 class QXmlStreamWriter;
 
 /// Details for a specific Line.
@@ -33,6 +34,9 @@ public:
 
   /// Initial default for index'th graph curve.
   static LineStyle defaultGraphCurve (int index);
+
+  /// Load model from serialized xml
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Line color.
   ColorPalette paletteColor() const;

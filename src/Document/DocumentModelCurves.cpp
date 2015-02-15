@@ -122,6 +122,11 @@ bool DocumentModelCurves::insertRows (int row,
   return true;
 }
 
+void DocumentModelCurves::loadDocument(QXmlStreamReader &/* reader */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurves::loadDocument";
+}
+
 bool DocumentModelCurves::removeRows (int row,
                                  int count,
                                  const QModelIndex &parent)

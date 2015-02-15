@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const double DEFAULT_POINT_SEPARATION = 5;
 const double DEFAULT_MIN_LENGTH = 5;
@@ -60,6 +61,17 @@ ColorPalette DocumentModelSegments::lineColor() const
 double DocumentModelSegments::lineWidth() const
 {
   return m_lineWidth;
+}
+
+void DocumentModelSegments::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelSegments::loadDocument";
+
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_SEGMENTS)){
+    loadNextFromReader(reader);
+  }
 }
 
 double DocumentModelSegments::minLength() const

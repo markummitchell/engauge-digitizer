@@ -18,6 +18,7 @@ extern const QString DEFAULT_GRAPH_CURVE_NAME;
 
 class CurvesGraphs;
 class QTextStream;
+class QXmlStreamReader;
 class QXmlStreamWriter;
 class Transformation;
 
@@ -30,6 +31,9 @@ public:
         const CurveFilter &curveFilter,
         const LineStyle &lineStyle,
         const PointStyle &pointStyle);
+
+  /// Constructor for use when loading from serialized xml
+  Curve (QXmlStreamReader &reader);
 
   /// Copy constructor. Copying a Curve only helps for making a copy, since access to any Points inside must be via functor.
   Curve (const Curve &curve);
@@ -65,6 +69,9 @@ public:
 
   /// Return the line style.
   LineStyle lineStyle () const;
+
+  /// Load from serialized file
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Translate the position of a point by the specified distance vector.
   void movePoint (const QString &pointIdentifier,

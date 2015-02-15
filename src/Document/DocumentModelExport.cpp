@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const QStringList DEFAULT_CURVE_NAMES_NOT_EXPORTED;
 const double DEFAULT_POINTS_INTERVAL = 1.0; // Although rarely the right value, value of one is better than zero (=infinite loops)
@@ -82,6 +83,76 @@ ExportHeader DocumentModelExport::header() const
 ExportLayoutFunctions DocumentModelExport::layoutFunctions() const
 {
   return m_layoutFunctions;
+}
+
+void DocumentModelExport::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::loadDocument";
+
+  bool success = false;
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_X_LABEL)) {
+
+    setPointsSelectionFunctions ((ExportPointsSelectionFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS).toInt());
+    setPointsInterval (attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL).toDouble());
+    setPointsSelectionRelations ((ExportPointsSelectionRelations) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
+    setRelationsInterval (attributes.value(DOCUMENT_SERIALIZE_EXPORT_RELATIONS_INTERVAL).toDouble());
+    setLayoutFunctions ((ExportLayoutFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS).toInt());
+    setDelimiter ((ExportDelimiter) attributes.value (DOCUMENT_SERIALIZE_EXPORT_DELIMITER).toInt());
+    setHeader ((ExportHeader) attributes.value(DOCUMENT_SERIALIZE_EXPORT_HEADER).toInt());
+    setXLabel (attributes.value(DOCUMENT_SERIALIZE_EXPORT_X_LABEL).toString());
+
+    // Read element containing excluded curve names
+    while ((loadNextFromReader (reader) != QXmlStreamReader::StartElement) ||
+           (reader.name() != DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED)) {
+
+      if (reader.atEnd()) {
+        break;
+      }
+
+      // Keep reading
+    }
+
+    if (!reader.atEnd()) {
+
+      // We have QXmlStreamRerader::StartElement and tag=DOCUMENT_SERIALIZE_EXPORT_CURVE_NAMES_NOT_EXPORTED
+
+      QStringList curveNamesNotExported;
+
+      QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+      while (tokenType == QXmlStreamReader::StartElement) {
+
+        if (reader.name() == DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED) {
+          curveNamesNotExported << reader.text().toString();
+        }
+        tokenType = loadNextFromReader(reader);
+      }
+
+      // Save curve names
+      setCurveNamesNotExported(curveNamesNotExported);
+
+      // Read until end of this subtree
+      while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+      (reader.name() != DOCUMENT_SERIALIZE_EXPORT)){
+        loadNextFromReader(reader);
+      }
+
+      success = true;
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read export data");
+  }
 }
 
 double DocumentModelExport::pointsInterval() const

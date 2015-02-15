@@ -121,6 +121,32 @@ void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString 
   }
 }
 
+void CurvesGraphs::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::loadDocument";
+
+  bool success = true;
+
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CURVES_GRAPHS)){
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name () == DOCUMENT_SERIALIZE_CURVE)) {
+
+      Curve curve (reader);
+      curve.loadDocument(reader);
+
+      m_curvesGraphs.push_back (curve);
+
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read graph curves data");
+  }
+}
+
 int CurvesGraphs::numCurves () const
 {
   return m_curvesGraphs.count ();

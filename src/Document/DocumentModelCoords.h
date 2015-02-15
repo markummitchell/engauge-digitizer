@@ -36,6 +36,8 @@ public:
   /// Get method for theta units.
   CoordThetaUnits coordThetaUnits () const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Get method for origin radius in polar mode.
   double originRadius () const;
 

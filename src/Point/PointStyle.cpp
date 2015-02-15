@@ -3,6 +3,7 @@
 #include "PointStyle.h"
 #include <qmath.h>
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const int DEFAULT_POINT_RADIUS = 10;
 const double DEFAULT_LINE_WIDTH = 1;
@@ -71,6 +72,32 @@ bool PointStyle::isCircle () const
 double PointStyle::lineWidth() const
 {
   return m_lineWidth;
+}
+
+void PointStyle::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE)) {
+
+    setRadius (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS).toInt());
+    setLineWidth (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH).toDouble());
+    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR).toInt());
+    setShape ((PointShape) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_LINE_STYLE)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read point style data");
+  }
 }
 
 ColorPalette PointStyle::paletteColor () const
@@ -165,6 +192,7 @@ void PointStyle::saveDocument(QXmlStreamWriter &stream) const
 
   stream.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
   stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
+  stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH, QString::number (m_lineWidth));
   stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));
   stream.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE, QString::number (m_shape));
   stream.writeEndElement();

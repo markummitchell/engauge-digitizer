@@ -30,6 +30,8 @@ public:
   /// Insert one row.
   virtual bool insertRows (int row, int count, const QModelIndex &parent = QModelIndex ());
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   /// Remove one row.
   virtual bool removeRows (int row, int count, const QModelIndex &parent);
 

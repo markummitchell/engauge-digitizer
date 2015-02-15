@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 const int DEFAULT_CHECKER_SECONDS = 3;
 
@@ -53,6 +54,30 @@ int DocumentModelAxesChecker::checkerSeconds() const
 ColorPalette DocumentModelAxesChecker::lineColor () const
 {
   return m_lineColor;
+}
+
+void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::loadDocument";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR)) {
+
+    setCheckerMode ((CheckerMode) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE).toInt());
+    setCheckerSeconds (attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS).toInt());
+    setLineColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR).toInt());
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_AXES_CHECKER)){
+      loadNextFromReader(reader);
+    }
+  } else {
+    reader.raiseError ("Cannot read axes checker data");
+  }
 }
 
 void DocumentModelAxesChecker::saveDocument(QXmlStreamWriter &stream) const

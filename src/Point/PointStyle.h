@@ -6,6 +6,7 @@
 #include <QColor>
 #include <QPolygonF>
 
+class QXmlStreamReader;
 class QXmlStreamWriter;
 
 /// Details for a specific Point.
@@ -38,6 +39,9 @@ public:
 
   /// Get method for line width.
   double lineWidth () const;
+
+  /// Load model from serialized xml
+  void loadDocument(QXmlStreamReader &reader);
 
   /// Get method for point color.
   ColorPalette paletteColor () const;

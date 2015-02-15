@@ -3,6 +3,7 @@
 
 #include "FilterMode.h"
 
+class QXmlStreamReader;
 class QXmlStreamWriter;
 
 /// Filter parameters for one curve. For a class, this is handled the same as LineStyle and PointStyle
@@ -59,6 +60,9 @@ public:
   /// Get method for intensity lower bound.
   int intensityLow () const;
 
+  /// Load curve filter to stream.
+  void loadDocument(QXmlStreamReader &stream);
+
   /// Low value of foreground, hue, intensity, saturation or value according to current filter mode,
   /// normalized to 0 to 1.
   double low () const;
@@ -70,7 +74,7 @@ public:
   int saturationLow () const;
 
   /// Save curve filter to stream.
-  virtual void saveDocument(QXmlStreamWriter &stream) const;
+  void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for filter mode.
   void setFilterMode(FilterMode filterMode);

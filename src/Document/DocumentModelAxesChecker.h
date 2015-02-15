@@ -32,6 +32,8 @@ public:
   /// Get method for line color.
   ColorPalette lineColor () const;
 
+  virtual void loadDocument(QXmlStreamReader &reader);
+
   virtual void saveDocument(QXmlStreamWriter &stream) const;
 
   /// Set method for checker mode.

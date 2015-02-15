@@ -96,6 +96,11 @@ double DocumentModelCurveProperties::lineWidth (const QString &curveName) const
   return m_lineStyles [curveName].width();
 }
 
+void DocumentModelCurveProperties::loadDocument(QXmlStreamReader &/* reader */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCurveProperties::loadDocument";
+}
+
 ColorPalette DocumentModelCurveProperties::pointColor (const QString &curveName) const
 {
   Q_ASSERT (m_pointStyles.contains (curveName));
