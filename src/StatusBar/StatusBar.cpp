@@ -110,7 +110,8 @@ void StatusBar::createZoom ()
   m_comboZoom->setToolTip (tr ("Select zoom."));
   m_comboZoom->setWhatsThis (tr("Select Zoom\n\n"
                                 "Points can be more accurately placed by zooming in."));
-  connect (m_comboZoom, SIGNAL (activated(const QString &)), this, SLOT (slotComboZoom (const QString &))); // activated() ignores code changes
+  // Zoom combobox must use currentTextChanged rather than activated or else fill-zoom-at-startup never takes effect
+  connect (m_comboZoom, SIGNAL (currentTextChanged(const QString &)), this, SLOT (slotComboZoom (const QString &)));
 
   m_statusBar.addPermanentWidget (m_comboZoom);
 }
