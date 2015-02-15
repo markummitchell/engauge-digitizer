@@ -849,7 +849,8 @@ void MainWindow::loadFile (const QString &fileName)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadFile fileName=" << fileName.toLatin1 ().data ();
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
-  CmdMediator *cmdMediator = new CmdMediator (fileName);
+  CmdMediator *cmdMediator = new CmdMediator (*this,
+                                              fileName);
   QApplication::restoreOverrideCursor();
 
   if (cmdMediator->successfulRead ()) {
@@ -902,7 +903,8 @@ void MainWindow::loadImage (const QString &fileName,
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage fileName=" << fileName.toLatin1 ().data ();
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
-  CmdMediator *cmdMediator = new CmdMediator (image);
+  CmdMediator *cmdMediator = new CmdMediator (*this,
+                                              image);
   QApplication::restoreOverrideCursor();
 
   setCurrentPathFromFile (fileName);
@@ -1204,6 +1206,13 @@ void MainWindow::slotCanUndoChanged (bool canUndo)
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotCanUndoChanged";
 
   m_actionEditUndo->setEnabled (canUndo);
+}
+
+void MainWindow::slotCleanChanged(bool clean)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCleanChanged";
+
+  setWindowModified (!clean);
 }
 
 void MainWindow::slotCmbBackground(int currentIndex)
@@ -2136,10 +2145,6 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 void MainWindow::updateControls ()
 {
 //  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateControls";
-
-  if (m_cmdMediator != 0) {
-    setWindowModified (m_cmdMediator->isModified ()); // Put asterisk in title bar when document is modified
-  }
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 

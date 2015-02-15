@@ -6,6 +6,7 @@
 #include "PointStyle.h"
 #include <QUndoStack>
 
+class MainWindow;
 class QImage;
 class Transformation;
 
@@ -17,10 +18,12 @@ class CmdMediator : public QUndoStack
 {
 public:
   /// Constructor for imported images and dragged images.
-  CmdMediator (const QImage &image);
+  CmdMediator (MainWindow &mainWindow,
+               const QImage &image);
 
   /// Constructor for opened Documents. The specified file is opened and read.
-  CmdMediator (const QString &fileName);
+  CmdMediator (MainWindow &mainWindow,
+               const QString &fileName);
 
   /// See CurvesGraphs::applyTransformation
   void applyTransformation (const Transformation &transformation);
@@ -40,7 +43,8 @@ public:
   /// Provide the Document to commands with read-only access, primarily for undo/redo processing.
   const Document &document () const;
 
-  /// Dirty flag. Document is dirty if there are any unsaved changes
+  /// Dirty flag. Document is dirty if there are any unsaved changes. The dirty flag is pushed (rather than pulled from this method) through
+  /// the QUndoStack::cleanChanged signal
   bool isModified () const;
 
   /// See Curve::iterateThroughCurvePoints, for the single axes curve.
@@ -63,6 +67,8 @@ public:
 
 private:
   CmdMediator ();
+
+  void connectSignals (MainWindow &mainWindow);
 
   Document m_document;
 };

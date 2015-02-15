@@ -1,26 +1,39 @@
 #include "CmdMediator.h"
 #include "Document.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include "Point.h"
 #include <QImage>
 #include <QUndoCommand>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
 
-CmdMediator::CmdMediator (const QImage &image) :
+CmdMediator::CmdMediator (MainWindow &mainWindow,
+                          const QImage &image) :
   m_document (image)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator image=" << image.width() << "x" << image.height ();
+
+  connectSignals(mainWindow);
 }
 
-CmdMediator::CmdMediator (const QString &fileName) :
+CmdMediator::CmdMediator (MainWindow &mainWindow,
+                          const QString &fileName) :
   m_document (fileName)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
+
+  connectSignals(mainWindow);
 }
 
 void CmdMediator::applyTransformation (const Transformation &transformation)
 {
   m_document.applyTransformation (transformation);
+}
+
+void CmdMediator::connectSignals (MainWindow &mainWindow)
+{
+  connect (this, SIGNAL (cleanChanged (bool)), &mainWindow, SLOT (slotCleanChanged (bool)));
 }
 
 const Curve &CmdMediator::curveAxes () const
