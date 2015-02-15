@@ -6,6 +6,7 @@
 #include "Document.h"
 #include "DocumentModelCurveProperties.h"
 #include "DocumentSerialize.h"
+#include <iostream>
 #include "Logger.h"
 #include "Point.h"
 #include <QByteArray>
@@ -14,6 +15,7 @@
 #include <QFile>
 #include <QImage>
 #include <QtToString.h>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
 
@@ -43,10 +45,32 @@ Document::Document (const QString &fileName) :
 {
   m_successfulRead = true;
 
-  QFile file(fileName);
-  if (file.isReadable ()) {
+  QFile *file = new QFile (fileName);
+  if (file->open (QIODevice::ReadOnly | QIODevice::Text)) {
 
-    // Insert import code here
+    // Import from xml
+    QXmlStreamReader reader (file);
+    while (!reader.atEnd()) {
+      QXmlStreamReader::TokenType token = reader.readNext();
+
+      if (token == QXmlStreamReader::StartDocument) {
+        continue;
+      } else if (token == QXmlStreamReader::StartElement) {
+        std::cout << "start " << reader.name().toLatin1().data() << std::endl;
+      } else if (token == QXmlStreamReader::EndElement) {
+        std::cout << "end " << reader.name ().toLatin1().data() << std::endl;
+      }
+    }
+    if (reader.hasError ()) {
+
+      m_successfulRead = false;
+      m_reasonForUnsuccessfulRead = reader.errorString();
+    }
+
+    // Close and deactivate
+    file->close ();
+    delete file;
+    file = 0;
 
   } else {
 

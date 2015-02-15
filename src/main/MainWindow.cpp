@@ -75,6 +75,7 @@ const QString DIGITIZE_ACTION_SEGMENT_POINTS (QObject::tr ("Segment Points Tool"
 const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
 
 const QString EMPTY_FILENAME ("");
+const QString ENGAUGE_FILENAME_DESCRIPTION ("Engauge Document");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const QString CSV_FILENAME_EXTENSION ("csv");
 const QString TSV_FILENAME_EXTENSION ("tsv");
@@ -1447,7 +1448,9 @@ void MainWindow::slotFileOpen()
 
     // Allow selection of files with strange suffixes in case the file extension was changed. Since
     // the default is the first filter, the wildcard filter is added afterwards (it is the off-nominal case)
-    QString filter (tr ("Documents (*.dig);; All Files (*.*)"));
+    QString filter = QString ("%1 (*.%2);; All Files (*.*)")
+                     .arg (ENGAUGE_FILENAME_DESCRIPTION)
+                     .arg (ENGAUGE_FILENAME_EXTENSION);
 
     QString fileName = QFileDialog::getOpenFileName (this,
                                                      tr("Open Document"),
@@ -1495,7 +1498,9 @@ bool MainWindow::slotFileSaveAs()
     filenameDefault = m_engaugeFile;
   }
 
-  QString filterDigitizer = QString ("Digitizer (*.%1)").arg (ENGAUGE_FILENAME_EXTENSION);
+  QString filterDigitizer = QString ("%1 (*.%2)")
+                            .arg (ENGAUGE_FILENAME_DESCRIPTION)
+                            .arg (ENGAUGE_FILENAME_EXTENSION);
   QString filterAll ("All files (*. *)");
 
   QStringList filters;
