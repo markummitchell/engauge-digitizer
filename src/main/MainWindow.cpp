@@ -925,7 +925,7 @@ void MainWindow::loadImage (const QString &fileName,
   QApplication::restoreOverrideCursor();
 
   setCurrentPathFromFile (fileName);
-  rebuildRecentFileListForCurrentFile (fileName);
+  // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list
 
   if (m_cmdMediator != 0) {
     removePixmaps ();
