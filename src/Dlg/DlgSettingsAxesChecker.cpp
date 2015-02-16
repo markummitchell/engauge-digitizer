@@ -261,6 +261,8 @@ void DlgSettingsAxesChecker::updateControls ()
 
 void DlgSettingsAxesChecker::updatePreview()
 {
+  const int ZERO_RADIUS_SINCE_NO_POINTS = 0;
+
   QVector<QPointF> points;
   points.push_back (QPointF (X_LEFT, Y_TOP));
   points.push_back (QPointF (X_LEFT, Y_BOTTOM));
@@ -270,6 +272,7 @@ void DlgSettingsAxesChecker::updatePreview()
 
   Q_ASSERT (m_checker != 0);
   m_checker->prepareForDisplay (polygon,
+                                ZERO_RADIUS_SINCE_NO_POINTS,
                                 *m_modelAxesCheckerAfter,
                                 *m_modelCoords);
 }

@@ -14,6 +14,7 @@ class QGraphicsScene;
 class QPolygonF;
 class Transformation;
 
+const int MAX_LINES_PER_SIDE = 3;
 const int NUM_AXES_POINTS = 3;
 
 /// Box shape that is drawn through the three axis points, to temporarily (usually) or permanently (rarely)
@@ -30,13 +31,17 @@ public:
   Checker(QGraphicsScene &scene);
 
   /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker.
-  /// The identity matrix is used for the transformations between screen and graph coordinates
+  /// The identity matrix is used for the transformations between screen and graph coordinates. The point radius is used to exclude
+  /// the lines from  the axes points for clarity
   void prepareForDisplay (const QPolygonF &polygon,
+                          int pointRadius,
                           const DocumentModelAxesChecker &modelAxesChecker,
                           const DocumentModelCoords &modelCoords);
 
-  /// Create the polygon from current information, including pixel and graph coordinates, just prior to display. This is for TransformationStateDefined
+  /// Create the polygon from current information, including pixel and graph coordinates, just prior to display. This is for
+  /// TransformationStateDefined. The point radius is used to exclude the lines from the axes points for clarity
   void prepareForDisplay (const QList<Point> &Points,
+                          int pointRadius,
                           const DocumentModelAxesChecker &modelAxesChecker,
                           const DocumentModelCoords &modelCoords,
                           const Transformation &transformation);
@@ -52,24 +57,48 @@ private:
   Checker();
 
   void bindItemToScene(QGraphicsItem *item);
-  void createLine (QGraphicsItem *&item,
+  void createSide (int pointRadius,
+                   const QList<Point> &points,
                    const DocumentModelCoords &modelCoords,
                    const QPointF &pointFromGraph,
                    const QPointF &pointToGraph,
-                   const Transformation &transformation);
-  void deleteLine (QGraphicsItem *&item);
+                   const Transformation &transformation,
+                   QGraphicsItem *items [MAX_LINES_PER_SIDE]);
+  void deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE]);
+
+  // Intercept circle around point with line. Intersection point count is either 0 or 2. For simplicity,
+  // if point just touches line then the point count is handled as two points at the same position
+  void interceptPointCircleWithLine (int pointIntercept,
+                                     QList<double> &sInterceptPoints,
+                                     const Point &point,
+                                     const QPointF &pointFromScreen,
+                                     const QPointF &pointToScreen);
+
+  // Distance to nearest point in points list
+  double minScreenDistanceFromPoints (const QPointF &posScreen,
+                                      const QList<Point> &points);
 
   // Low level routine to set line color
-  void setLineColor (QGraphicsItem *item, const QPen &pen);
+  void setLineColor (QGraphicsItem *item [MAX_LINES_PER_SIDE], const QPen &pen);
+
+  void setVisibleSide (QGraphicsItem *item [MAX_LINES_PER_SIDE],
+                       bool visible);
 
   QGraphicsScene &m_scene;
 
   // These segments are QGraphicsLineItem line segments or QGraphicsEllipseItem arc segments. Together they
-  // make up a u shape in cartesian coordinates, or a u shapes topological equivalent in polar coordinates
-  QGraphicsItem *m_side0;
-  QGraphicsItem *m_side1;
-  QGraphicsItem *m_side2;
-  QGraphicsItem *m_side3;
+  // make up a box shape in cartesian coordinates.
+  //
+  // A major complication is that drawing the box with just four lines from corner to corner results in extremely
+  // thick lines through the axes points, which obscures the axis point unacceptably. So, each side is drawn with
+  // 3 visible lines:
+  // 1) corner1 to either point1 or corner2 (whichever comes first)
+  // 2) unused, or point1 to either point2 or corner2 (whichever comes first)
+  // 3) unused point2 to corner2
+  QGraphicsItem *m_sideLeft [MAX_LINES_PER_SIDE];
+  QGraphicsItem *m_sideTop [MAX_LINES_PER_SIDE];
+  QGraphicsItem *m_sideRight [MAX_LINES_PER_SIDE];
+  QGraphicsItem *m_sideBottom [MAX_LINES_PER_SIDE];
 };
 
 #endif // CHECKER_H

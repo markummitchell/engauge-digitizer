@@ -96,6 +96,7 @@ void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
   cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
   m_axesChecker->prepareForDisplay (ftor.points(),
+                                    cmdMediator.document().modelCurveStyles().pointRadius(AXIS_CURVE_NAME),
                                     cmdMediator.document().modelAxesChecker(),
                                     cmdMediator.document().modelCoords(),
                                     transformation);

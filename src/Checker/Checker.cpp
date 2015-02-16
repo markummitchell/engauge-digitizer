@@ -16,16 +16,18 @@ const int NO_SIDE = -1;
 // To emphasize that the axis lines are still there, we make these checker somewhat transparent
 const double CHECKER_OPACITY = 0.6;
 
-// One-pixel wide line (produced by setting width=0) is too small
+// One-pixel wide line (produced by setting width=0) is too small. 5 is way too big to accurately reposition points
 const int CHECKER_POINTS_WIDTH = 5;
 
 Checker::Checker(QGraphicsScene &scene) :
-  m_scene (scene),
-  m_side0 (0),
-  m_side1 (0),
-  m_side2 (0),
-  m_side3 (0)
+  m_scene (scene)
 {
+  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
+    m_sideLeft [i] = 0;
+    m_sideTop [i] = 0;
+    m_sideRight [i] = 0;
+    m_sideBottom [i] = 0;
+  }
 }
 
 void Checker::bindItemToScene(QGraphicsItem *item)
@@ -39,11 +41,13 @@ void Checker::bindItemToScene(QGraphicsItem *item)
   m_scene.addItem (item);
 }
 
-void Checker::createLine (QGraphicsItem *&item,
+void Checker::createSide (int pointRadius,
+                          const QList<Point> &points,
                           const DocumentModelCoords &modelCoords,
                           const QPointF &pointFromGraph,
                           const QPointF &pointToGraph,
-                          const Transformation &transformation)
+                          const Transformation &transformation,
+                          QGraphicsItem *items [MAX_LINES_PER_SIDE])
 {
   QPointF pointFromGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
                                                                              pointFromGraph);
@@ -57,22 +61,169 @@ void Checker::createLine (QGraphicsItem *&item,
   transformation.transformInverse (pointToGraphCart,
                                    pointToScreen);
 
-  item = new QGraphicsLineItem (QLineF (pointFromScreen,
-                                        pointToScreen));
-
-  bindItemToScene (item);
-}
-
-void Checker::deleteLine (QGraphicsItem *&item)
-{
-  if (item != 0) {
-    delete item;
+  // Build a list of points where the circle around each point intercepts the infinite line through
+  // pointFromScreen and pointToScreen
+  QList<double> sInterceptPoints;
+  sInterceptPoints << 0; // Start at limit
+  sInterceptPoints << 1; // Stop at limit
+  QList<Point>::const_iterator itr;
+  for (itr = points.begin (); itr != points.end (); itr++) {
+    const Point &point = *itr;
+    interceptPointCircleWithLine (pointRadius,
+                                  sInterceptPoints,
+                                  point,
+                                  pointFromScreen,
+                                  pointToScreen);
   }
 
-  item = 0;
+  qSort (sInterceptPoints);
+
+  // Loop through sorted s values, ignoring those outside the range 0 to 1. Draw line for (s(i-1),s(i))
+  // if the midpoint is not near any point
+  int itemCount = 0;
+  double sLast = 0;
+  for (int i = 0; i < sInterceptPoints.count(); i++) {
+    double s = sInterceptPoints.at (i);
+    if (i > 0) {
+      if (0 < s && sLast < 1) {
+
+        double sMidpoint = (s + sLast) / 2.0;
+
+        QPointF posStart    = (1.0 - sLast    ) * pointFromScreen + sLast     * pointToScreen;
+        QPointF posMidpoint = (1.0 - sMidpoint) * pointFromScreen + sMidpoint * pointToScreen;
+        QPointF posEnd      = (1.0 - s        ) * pointFromScreen + s         * pointToScreen;
+
+        if (minScreenDistanceFromPoints (posMidpoint, points) > pointRadius) {
+          QGraphicsItem *item = new QGraphicsLineItem (QLineF (posStart,
+                                                               posEnd));
+          items [itemCount++] = item;
+          bindItemToScene (item);
+        }
+      }
+    }
+    sLast = s;
+  }
+}
+
+void Checker::deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE])
+{
+  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
+    QGraphicsItem *item = items [i];
+    if (item != 0) {
+      delete item;
+    }
+
+    items [i] = 0;
+  }
+}
+
+void Checker::interceptPointCircleWithLine (int pointRadius,
+                                            QList<double> &sInterceptPoints,
+                                            const Point &point,
+                                            const QPointF &pointFromScreen,
+                                            const QPointF &pointToScreen)
+{
+  double distanceFromTo = qSqrt ((pointToScreen.x() - pointFromScreen.x()) * (pointToScreen.x() - pointFromScreen.x()) +
+                                 (pointToScreen.y() - pointFromScreen.y()) * (pointToScreen.y() - pointFromScreen.y()));
+
+  // Compensate for slop in drawing of lines by making radius a tiny bit bigger
+  double radiusTweaked = pointRadius + 1;
+
+  // Intersect:
+  // 1) (y-y0)/(y1-y0) = (x-x0)/(x1-x0), but converted from two point form to slope intercept form for convenience
+  // 2) (x-xc)^2+(y-yc)^2=r^2
+
+  double dx = pointToScreen.x() - pointFromScreen.x();
+  double dy = pointToScreen.y() - pointFromScreen.y();
+
+  // Handle more-horizontal and more-vertical lines separately to prevent divide by zero issues
+  if (dx < dy) {
+
+    // x = slope * y + intercept
+    double slope = dx / dy;
+    double intercept = pointToScreen.x() - slope * pointToScreen.y();
+
+    // Perpendicular line that goes through specified point
+    double slopePerp = -1.0 / slope;
+    double interceptPerp = point.posScreen().x() - slopePerp * point.posScreen().y();
+
+    // Intersection point of both lines comes from subtracting both x=slope*y+intercept and x=slopePerp*y+interceptPerp
+    double yIntercept = (interceptPerp - intercept) / (slope - slopePerp);
+    double xIntercept = slope * yIntercept + intercept;
+
+    // Distance from point to line
+    double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
+                               (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
+    if (separation < radiusTweaked) {
+
+      // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
+      double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
+                                            (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
+
+      // Find both intersection points at +/-offsetFromIntercept
+      double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
+      double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
+      double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
+
+      sInterceptPoints.push_back (sMinus);
+      sInterceptPoints.push_back (sPlus);
+    }
+
+  } else {
+
+    // y = slope * y + intercept
+    double slope = dy / dx;
+    double intercept = pointToScreen.y() - slope * pointToScreen.x();
+
+    // Perpendicular line that goes through specified point
+    double slopePerp = -1.0 / slope;
+    double interceptPerp = point.posScreen().y() - slopePerp * point.posScreen().x();
+
+    // Intersection point of both lines comes from subtracting both y=slope*x+intercept and y=slopePerp*x+interceptPerp
+    double xIntercept = (interceptPerp - intercept) / (slope - slopePerp);
+    double yIntercept = slope * xIntercept + intercept;
+
+    // Distance from point to line
+    double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
+                               (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
+    if (separation < radiusTweaked) {
+
+      // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
+      double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
+                                            (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
+
+      // Find both intersection points at +/-offsetFromIntercept
+      double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
+      double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
+      double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
+
+      sInterceptPoints.push_back (sMinus);
+      sInterceptPoints.push_back (sPlus);
+    }
+  }
+}
+
+double Checker::minScreenDistanceFromPoints (const QPointF &posScreen,
+                                             const QList<Point> &points)
+{
+  double minDistance = 0;
+  for (int i = 0; i < points.count (); i++) {
+    const Point &pointCenter = points.at (i);
+
+    double dx = posScreen.x() - pointCenter.posScreen().x();
+    double dy = posScreen.y() - pointCenter.posScreen().y();
+
+    double distance = qSqrt (dx * dx + dy * dy);
+    if (i == 0 || distance < minDistance) {
+      minDistance = distance;
+    }
+  }
+
+  return minDistance;
 }
 
 void Checker::prepareForDisplay (const QPolygonF &polygon,
+                                 int pointRadius,
                                  const DocumentModelAxesChecker &modelAxesChecker,
                                  const DocumentModelCoords &modelCoords)
 {
@@ -97,12 +248,14 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
   Transformation transformIdentity;
   transformIdentity.identity();
   prepareForDisplay (points,
+                     pointRadius,
                      modelAxesChecker,
                      modelCoords,
                      transformIdentity);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
+                                 int pointRadius,
                                  const DocumentModelAxesChecker &modelAxesChecker,
                                  const DocumentModelCoords &modelCoords,
                                  const Transformation &transformation)
@@ -112,10 +265,10 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   Q_ASSERT (points.count () == NUM_AXES_POINTS);
 
   // Remove previous lines
-  deleteLine (m_side0);
-  deleteLine (m_side1);
-  deleteLine (m_side2);
-  deleteLine (m_side3);
+  deleteSide (m_sideLeft);
+  deleteSide (m_sideTop);
+  deleteSide (m_sideRight);
+  deleteSide (m_sideBottom);
 
   // Get the min and max of x and y
   double xMin, xMax, yMin, yMax;
@@ -134,33 +287,48 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   }
 
   // Draw the bounding box as four sides
-  createLine (m_side0, modelCoords, QPointF (xMin, yMin), QPointF (xMax, yMin), transformation);
-  createLine (m_side1, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation);
-  createLine (m_side2, modelCoords, QPointF (xMax, yMin), QPointF (xMax, yMax), transformation);
-  createLine (m_side3, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation);
+  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation, m_sideLeft);
+  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation, m_sideTop);
+  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMax), QPointF (xMax, yMin), transformation, m_sideRight);
+  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMin), QPointF (xMin, yMin), transformation, m_sideBottom);
 
   updateModelAxesChecker (modelAxesChecker);
 }
 
-void Checker::setLineColor (QGraphicsItem *item, const QPen &pen)
+void Checker::setLineColor (QGraphicsItem *items [MAX_LINES_PER_SIDE], const QPen &pen)
 {
-  // Downcast since QGraphicsItem does not have a pen
-  QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
-  QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
-  if (itemLine == 0) {
-    itemEllipse->setPen (pen);
-  } else {
-    itemLine->setPen (pen);
+  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
+    QGraphicsItem *item = items [i];
+    if (item != 0) {
+
+      // Downcast since QGraphicsItem does not have a pen
+      QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
+      QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
+      if (itemLine == 0) {
+        itemEllipse->setPen (pen);
+      } else {
+        itemLine->setPen (pen);
+      }
+    }
   }
 }
 
 void Checker::setVisible (bool visible)
 {
-  if (m_side0 != 0) {
-    m_side0->setVisible (visible);
-    m_side1->setVisible (visible);
-    m_side2->setVisible (visible);
-    m_side3->setVisible (visible);
+  setVisibleSide (m_sideLeft, visible);
+  setVisibleSide (m_sideTop, visible);
+  setVisibleSide (m_sideRight, visible);
+  setVisibleSide (m_sideBottom, visible);
+}
+
+void Checker::setVisibleSide (QGraphicsItem *items [MAX_LINES_PER_SIDE],
+                              bool visible)
+{
+  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
+    QGraphicsItem *item = items [i];
+    if (item != 0) {
+      item->setVisible (visible);
+    }
   }
 }
 
@@ -169,8 +337,8 @@ void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesC
   QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
   QPen pen (QBrush (color), CHECKER_POINTS_WIDTH);
 
-  setLineColor (m_side0, pen);
-  setLineColor (m_side1, pen);
-  setLineColor (m_side2, pen);
-  setLineColor (m_side3, pen);
+  setLineColor (m_sideLeft, pen);
+  setLineColor (m_sideTop, pen);
+  setLineColor (m_sideRight, pen);
+  setLineColor (m_sideBottom, pen);
 }
