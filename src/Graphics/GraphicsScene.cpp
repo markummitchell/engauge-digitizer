@@ -1,8 +1,8 @@
 #include "CallbackSceneUpdateAfterCommand.h"
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "CurveStyles.h"
 #include "DataKey.h"
-#include "DocumentModelCurveProperties.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsLine.h"
@@ -235,9 +235,9 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
   updateLines (cmdMediator);
 }
 
-void GraphicsScene::updateCurveProperties (const DocumentModelCurveProperties &modelCurveProperties)
+void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveProperties";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 }
 
 void GraphicsScene::updateLines (CmdMediator &cmdMediator)
@@ -294,7 +294,7 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
                                              ordinalOther,
                                              *pointLast,
                                              *point,
-                                             cmdMediator.document().modelCurveProperties().lineStyle(curveNameGot));
+                                             cmdMediator.document().modelCurveStyles().lineStyle(curveNameGot));
         }
 
         ordinalLast = ordinal;

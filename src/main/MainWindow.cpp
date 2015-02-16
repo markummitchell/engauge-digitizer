@@ -2265,21 +2265,21 @@ void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
   m_cmdMediator->document().setModelCoords(modelCoords);
 }
 
-void MainWindow::updateSettingsCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveProperties";
-
-  m_scene->updateCurveProperties(modelCurveProperties);
-  m_cmdMediator->document().setModelCurveProperties(modelCurveProperties);
-  updateViewsOfSettings();
-}
-
 void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurves";
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
+  updateViewsOfSettings();
+}
+
+void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
+
+  m_scene->updateCurveStyles(modelCurveStyles);
+  m_cmdMediator->document().setModelCurveStyles(modelCurveStyles);
   updateViewsOfSettings();
 }
 
@@ -2373,7 +2373,7 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
 
   } else {
 
-    PointStyle pointStyle = m_cmdMediator->document().modelCurveProperties().pointStyle(activeCurve);
+    PointStyle pointStyle = m_cmdMediator->document().modelCurveStyles().pointStyle(activeCurve);
     m_viewPointStyle->setPointStyle (pointStyle);
 
     CurveFilter curveFilter = m_cmdMediator->document().modelFilter().curveFilter(activeCurve);

@@ -49,6 +49,7 @@ HEADERS  += \
     Curve/CurveNameListEntry.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
+    Curve/CurveStyles.h \
     include/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
@@ -80,7 +81,6 @@ HEADERS  += \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
     Document/DocumentModelCoords.h \
-    Document/DocumentModelCurveProperties.h \
     Document/DocumentModelExport.h \
     Document/DocumentModelFilter.h \
     Document/DocumentModelGridRemoval.h \
@@ -184,6 +184,7 @@ SOURCES += \
     Curve/CurveNameListEntry.cpp \
     Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
+    Curve/CurveStyles.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \
     DigitizeState/DigitizeStateColorPicker.cpp \
@@ -214,7 +215,6 @@ SOURCES += \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelCoords.cpp \
-    Document/DocumentModelCurveProperties.cpp \
     Document/DocumentModelExport.cpp \
     Document/DocumentModelFilter.cpp \
     Document/DocumentModelGridRemoval.cpp \

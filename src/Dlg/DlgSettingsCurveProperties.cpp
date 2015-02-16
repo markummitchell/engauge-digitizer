@@ -37,8 +37,8 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
                            mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
-  m_modelCurvePropertiesBefore (0),
-  m_modelCurvePropertiesAfter (0)
+  m_modelCurveStylesBefore (0),
+  m_modelCurveStylesAfter (0)
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
@@ -213,13 +213,13 @@ void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
 
-  Q_CHECK_PTR (m_modelCurvePropertiesBefore);
-  Q_CHECK_PTR (m_modelCurvePropertiesAfter);
+  Q_CHECK_PTR (m_modelCurveStylesBefore);
+  Q_CHECK_PTR (m_modelCurveStylesAfter);
 
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
                                                                     cmdMediator ().document(),
-                                                                    *m_modelCurvePropertiesBefore,
-                                                                    *m_modelCurvePropertiesAfter);
+                                                                    *m_modelCurveStylesBefore,
+                                                                    *m_modelCurveStylesAfter);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -232,16 +232,16 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelCurvePropertiesBefore != 0) {
-    delete m_modelCurvePropertiesBefore;
+  if (m_modelCurveStylesBefore != 0) {
+    delete m_modelCurveStylesBefore;
   }
-  if (m_modelCurvePropertiesAfter != 0) {
-    delete m_modelCurvePropertiesAfter;
+  if (m_modelCurveStylesAfter != 0) {
+    delete m_modelCurveStylesAfter;
   }
 
   // Save new data
-  m_modelCurvePropertiesBefore = new DocumentModelCurveProperties (cmdMediator.document());
-  m_modelCurvePropertiesAfter = new DocumentModelCurveProperties (cmdMediator.document());
+  m_modelCurveStylesBefore = new CurveStyles (cmdMediator.document());
+  m_modelCurveStylesAfter = new CurveStyles (cmdMediator.document());
 
   // Populate controls. First load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();
@@ -265,24 +265,24 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   Q_ASSERT (indexCurveName >= 0);
   m_cmbCurveName->setCurrentIndex(indexCurveName);
 
-  int indexPointShape = m_cmbPointShape->findData (QVariant (m_modelCurvePropertiesAfter->pointShape (curveName)));
+  int indexPointShape = m_cmbPointShape->findData (QVariant (m_modelCurveStylesAfter->pointShape (curveName)));
   Q_ASSERT (indexPointShape >= 0);
   m_cmbPointShape->setCurrentIndex (indexPointShape);
 
-  m_spinPointRadius->setValue (m_modelCurvePropertiesAfter->pointRadius(curveName));
-  m_spinPointLineWidth->setValue (m_modelCurvePropertiesAfter->pointLineWidth(curveName));
+  m_spinPointRadius->setValue (m_modelCurveStylesAfter->pointRadius(curveName));
+  m_spinPointLineWidth->setValue (m_modelCurveStylesAfter->pointLineWidth(curveName));
 
-  int indexPointColor = m_cmbPointColor->findData (QVariant (m_modelCurvePropertiesAfter->pointColor(curveName)));
+  int indexPointColor = m_cmbPointColor->findData (QVariant (m_modelCurveStylesAfter->pointColor(curveName)));
   Q_ASSERT (indexPointColor >= 0);
   m_cmbPointColor->setCurrentIndex (indexPointColor);
 
-  int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelCurvePropertiesAfter->lineColor(curveName)));
+  int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelCurveStylesAfter->lineColor(curveName)));
   Q_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
-  m_spinLineWidth->setValue (m_modelCurvePropertiesAfter->lineWidth(curveName));
+  m_spinLineWidth->setValue (m_modelCurveStylesAfter->lineWidth(curveName));
 
-  int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurvePropertiesAfter->lineConnectAs (curveName)));
+  int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurveStylesAfter->lineConnectAs (curveName)));
   Q_ASSERT (indexCurveConnectAs >= 0);
   m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
 
@@ -314,7 +314,7 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
 
   // Do nothing if combobox is getting cleared, or load has not been called yet
-  if (!curveName.isEmpty () && (m_modelCurvePropertiesAfter != 0)) {
+  if (!curveName.isEmpty () && (m_modelCurveStylesAfter != 0)) {
 
     loadForCurveName (curveName);
   }
@@ -324,7 +324,7 @@ void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
 
-  m_modelCurvePropertiesAfter->setLineColor(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setLineColor(m_cmbCurveName->currentText(),
                                             (ColorPalette) m_cmbLineColor->currentData().toInt());
   updateControls();
   updatePreview();
@@ -334,7 +334,7 @@ void DlgSettingsCurveProperties::slotLineWidth(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth";
 
-  m_modelCurvePropertiesAfter->setLineWidth(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setLineWidth(m_cmbCurveName->currentText(),
                                             m_spinLineWidth->text().toDouble());
   updateControls ();
   updatePreview();
@@ -344,7 +344,7 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
 
-  m_modelCurvePropertiesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
                                                 (CurveConnectAs) m_cmbLineType->currentData().toInt ());
   updateControls();
   updatePreview();
@@ -354,7 +354,7 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor";
 
-  m_modelCurvePropertiesAfter->setPointColor(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setPointColor(m_cmbCurveName->currentText(),
                                              (ColorPalette) m_cmbPointColor->currentData().toInt ());
   updateControls();
   updatePreview();
@@ -364,7 +364,7 @@ void DlgSettingsCurveProperties::slotPointLineWidth(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth";
 
-  m_modelCurvePropertiesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
                                                  m_spinPointLineWidth->text().toDouble());
   updateControls();
   updatePreview();
@@ -374,7 +374,7 @@ void DlgSettingsCurveProperties::slotPointRadius(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius";
 
-  m_modelCurvePropertiesAfter->setPointRadius(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setPointRadius(m_cmbCurveName->currentText(),
                                               m_spinPointRadius->text().toInt());
   updateControls();
   updatePreview();
@@ -384,7 +384,7 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
 
-  m_modelCurvePropertiesAfter->setPointShape(m_cmbCurveName->currentText(),
+  m_modelCurveStylesAfter->setPointShape(m_cmbCurveName->currentText(),
                                              (PointShape) m_cmbPointShape->currentData().toInt ());
   updateControls();
   updatePreview();
@@ -409,7 +409,7 @@ void DlgSettingsCurveProperties::updatePreview()
   QString currentCurve = m_cmbCurveName->currentText();
 
   GraphicsPointFactory pointFactory;
-  const PointStyle pointStyle = m_modelCurvePropertiesAfter->pointStyle (currentCurve);
+  const PointStyle pointStyle = m_modelCurveStylesAfter->pointStyle (currentCurve);
 
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
@@ -434,8 +434,8 @@ void DlgSettingsCurveProperties::updatePreview()
                                                        posLeft.y(),
                                                        posRight.x(),
                                                        posRight.y());
-  itemLine->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelCurvePropertiesAfter->lineColor (currentCurve))),
-                    m_modelCurvePropertiesAfter->lineWidth(currentCurve)));
+  itemLine->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelCurveStylesAfter->lineColor (currentCurve))),
+                    m_modelCurveStylesAfter->lineWidth(currentCurve)));
   itemLine->setZValue (-1.0);
   m_scenePreview->addItem (itemLine);
 

@@ -1,7 +1,7 @@
 #ifndef DLG_SETTINGS_CURVE_PROPERTIES_H
 #define DLG_SETTINGS_CURVE_PROPERTIES_H
 
-#include "DocumentModelCurveProperties.h"
+#include "CurveStyles.h"
 #include "DlgSettingsAbstractBase.h"
 
 class DlgSpinBoxDouble;
@@ -67,8 +67,8 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  DocumentModelCurveProperties *m_modelCurvePropertiesBefore;
-  DocumentModelCurveProperties *m_modelCurvePropertiesAfter;
+  CurveStyles *m_modelCurveStylesBefore;
+  CurveStyles *m_modelCurveStylesAfter;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H

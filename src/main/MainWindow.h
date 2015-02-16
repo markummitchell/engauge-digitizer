@@ -7,6 +7,7 @@
 #include "Transformation.h"
 
 class CmdMediator;
+class CurveStyles;
 class DigitizeStateContext;
 class DlgSettingsAxesChecker;
 class DlgSettingsCoords;
@@ -19,7 +20,6 @@ class DlgSettingsPointMatch;
 class DlgSettingsSegments;
 class DocumentModelAxesChecker;
 class DocumentModelCoords;
-class DocumentModelCurveProperties;
 class DocumentModelExport;
 class DocumentModelFilter;
 class DocumentModelGridRemoval;
@@ -80,11 +80,11 @@ public:
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
-  /// Update with new curve properties.
-  void updateSettingsCurveProperties(const DocumentModelCurveProperties &modelCurveProperties);
-
   /// Update with new curves.
   void updateSettingsCurves (const CurvesGraphs &curvesGraphs);
+
+  /// Update with new curve styles.
+  void updateSettingsCurveStyles(const CurveStyles &modelCurveStyles);
 
   /// Update with new export properties.
   void updateSettingsExport(const DocumentModelExport &modelExport);

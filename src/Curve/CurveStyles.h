@@ -1,8 +1,7 @@
-#ifndef DOCUMENT_MODEL_CURVE_PROPERTIES_H
-#define DOCUMENT_MODEL_CURVE_PROPERTIES_H
+#ifndef CURVE_STYLES_H
+#define CURVE_STYLES_H
 
 #include "ColorPalette.h"
-#include "DocumentModelAbstractBase.h"
 #include "LineStyle.h"
 #include "LineStyles.h"
 #include "PointStyle.h"
@@ -11,20 +10,20 @@
 class Document;
 
 /// Model for DlgSettingsCurveProperties and CmdSettingsCurveProperties.
-class DocumentModelCurveProperties : public DocumentModelAbstractBase
+class CurveStyles
 {
 public:
   /// Default constructor.
-  DocumentModelCurveProperties();
+  CurveStyles();
 
   /// Initial constructor from Document.
-  DocumentModelCurveProperties(const Document &document);
+  CurveStyles(const Document &document);
 
   /// Copy constructor.
-  DocumentModelCurveProperties (const DocumentModelCurveProperties &other);
+  CurveStyles (const CurveStyles &other);
 
   /// Assignment constructor.
-  DocumentModelCurveProperties &operator=(const DocumentModelCurveProperties &other);
+  CurveStyles &operator=(const CurveStyles &other);
   
   /// Get method for line color in specified curve.
   ColorPalette lineColor (const QString &curveName) const;
@@ -40,8 +39,6 @@ public:
 
   /// Get method for line width in specified curve.
   double lineWidth (const QString &curveName) const;
-
-  virtual void loadDocument(QXmlStreamReader &reader);
 
   /// Get method for curve point color in specified curve.
   ColorPalette pointColor (const QString &curveName) const;
@@ -66,8 +63,6 @@ public:
 
   /// Get method for copying all point styles in one step.
   const PointStyles &pointStyles () const;
-
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for line color in specified curve.
   void setLineColor (const QString &curveName,
@@ -107,4 +102,4 @@ private:
   PointStyles m_pointStyles;
 };
 
-#endif // DOCUMENT_MODEL_CURVE_PROPERTIES_H
+#endif // CURVE_STYLES_H

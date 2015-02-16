@@ -13,7 +13,7 @@
 class CmdMediator;
 class Curve;
 class CurvesGraphs;
-class DocumentModelCurveProperties;
+class CurveStyles;
 class GraphicsPoint;
 class MainWindow;
 class PointStyle;
@@ -58,8 +58,8 @@ public:
   /// Update the Curves and their Points after executing a command.
   void updateAfterCommand (CmdMediator &cmdMediator);
 
-  /// Update curve properties after settings changed.
-  void updateCurveProperties(const DocumentModelCurveProperties &modelCurveProperties);
+  /// Update curve styles after settings changed.
+  void updateCurveStyles(const CurveStyles &modelCurveStyles);
 
 private:
 

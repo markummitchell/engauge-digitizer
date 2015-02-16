@@ -3,8 +3,8 @@
 #include "CallbackCheckEditPointAxis.h"
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
+#include "CurveStyles.h"
 #include "Document.h"
-#include "DocumentModelCurveProperties.h"
 #include "DocumentSerialize.h"
 #include "EnumsToQt.h"
 #include <iostream>
@@ -353,12 +353,12 @@ DocumentModelCoords Document::modelCoords() const
   return m_modelCoords;
 }
 
-DocumentModelCurveProperties Document::modelCurveProperties() const
+CurveStyles Document::modelCurveStyles() const
 {
   // Construct a curve-specific model
-  DocumentModelCurveProperties modelCurveProperties(*this);
+  CurveStyles modelCurveStyles(*this);
 
-  return modelCurveProperties;
+  return modelCurveStyles;
 }
 
 DocumentModelExport Document::modelExport() const
@@ -498,12 +498,12 @@ void Document::setModelCoords (const DocumentModelCoords &modelCoords)
   m_modelCoords = modelCoords;
 }
 
-void Document::setModelCurveProperties(const DocumentModelCurveProperties &modelCurveProperties)
+void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 {
   // Save the LineStyle for each Curve
   LineStyles::const_iterator itrL;
-  for (itrL = modelCurveProperties.lineStyles().constBegin ();
-       itrL != modelCurveProperties.lineStyles().constEnd();
+  for (itrL = modelCurveStyles.lineStyles().constBegin ();
+       itrL != modelCurveStyles.lineStyles().constEnd();
        itrL++) {
 
     QString curveName = itrL.key();
@@ -515,8 +515,8 @@ void Document::setModelCurveProperties(const DocumentModelCurveProperties &model
 
   // Save the PointStyle for each Curve
   PointStyles::const_iterator itrP;
-  for (itrP = modelCurveProperties.pointStyles().constBegin ();
-       itrP != modelCurveProperties.pointStyles().constEnd ();
+  for (itrP = modelCurveStyles.pointStyles().constBegin ();
+       itrP != modelCurveStyles.pointStyles().constEnd ();
        itrP++) {
 
     QString curveName = itrP.key();

@@ -6,13 +6,13 @@
 
 CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
                                                        Document &document,
-                                                       const DocumentModelCurveProperties &modelCurvePropertiesBefore,
-                                                       const DocumentModelCurveProperties &modelCurvePropertiesAfter) :
+                                                       const CurveStyles &modelCurveStylesBefore,
+                                                       const CurveStyles &modelCurveStylesAfter) :
   CmdAbstract(mainWindow,
               document,
               "Curve Properties settings"),
-  m_modelCurvePropertiesBefore (modelCurvePropertiesBefore),
-  m_modelCurvePropertiesAfter (modelCurvePropertiesAfter)
+  m_modelCurveStylesBefore (modelCurveStylesBefore),
+  m_modelCurveStylesAfter (modelCurveStylesAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::CmdSettingsCurveProperties";
 }
@@ -21,7 +21,7 @@ void CmdSettingsCurveProperties::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdRedo";
 
-  mainWindow().updateSettingsCurveProperties(m_modelCurvePropertiesAfter);
+  mainWindow().updateSettingsCurveStyles(m_modelCurveStylesAfter);
   mainWindow().updateAfterCommand();
 }
 
@@ -29,6 +29,6 @@ void CmdSettingsCurveProperties::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdUndo";
 
-  mainWindow().updateSettingsCurveProperties(m_modelCurvePropertiesBefore);
+  mainWindow().updateSettingsCurveStyles(m_modelCurveStylesBefore);
   mainWindow().updateAfterCommand();
 }
