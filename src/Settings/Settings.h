@@ -11,6 +11,7 @@ extern const QString SETTINGS_ENGAUGE;
 extern const QString SETTINGS_GROUP_ENVIRONMENT;
 extern const QString SETTINGS_GROUP_MAIN_WINDOW;
 extern const QString SETTINGS_POS;
+extern const QString SETTINGS_RECENT_FILE_LIST;
 extern const QString SETTINGS_SIZE;
 extern const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR;
 extern const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR;

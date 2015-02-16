@@ -12,6 +12,7 @@ const QString SETTINGS_CURRENT_DIRECTORY ("currentDirectory");
 const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow");
 const QString SETTINGS_BACKGROUND_IMAGE ("backgroundImage");
 const QString SETTINGS_POS ("pos");
+const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");
 const QString SETTINGS_SIZE ("size");
 const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR ("viewBackgroundToolBar");
 const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR ("viewDigitizeToolBar");

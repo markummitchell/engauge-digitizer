@@ -142,6 +142,7 @@ private slots:
   void slotMouseMove (QPointF);
   void slotMousePress (QPointF);
   void slotMouseRelease (QPointF);
+  void slotRecentFileAction ();
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
@@ -205,6 +206,7 @@ private:
                   const QImage &image);
   void loadToolTips ();
   bool maybeSave();
+  void rebuildRecentFileListForCurrentFile(const QString &filePath);
   void removePixmaps();
   bool saveFile(const QString &fileName);
   void setCurrentFile(const QString &fileName);
@@ -217,17 +219,19 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);
+  void updateRecentFileList();
   void updateViewedBackground();
   void updateViewedPoints ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
 
-  QString m_engaugeFile;
-  QString m_currentFile;
+  QString m_engaugeFile; // Not empty when a Document is currently loaded AND it was loaded and/or saved as an Engauge file
+  QString m_currentFile; // Not empty when a Document is currently loaded
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
+  QList<QAction*> m_actionRecentFiles;
   QAction *m_actionSave;
   QAction *m_actionSaveAs;
   QAction *m_actionExport;

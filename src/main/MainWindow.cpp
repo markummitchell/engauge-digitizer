@@ -80,6 +80,8 @@ const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const QString CSV_FILENAME_EXTENSION ("csv");
 const QString TSV_FILENAME_EXTENSION ("tsv");
 
+const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
+
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   m_engaugeFile (EMPTY_FILENAME),
@@ -284,6 +286,13 @@ void MainWindow::createActionsFile ()
   m_actionOpen->setWhatsThis (tr ("Open Document\n\n"
                                   "Opens an existing document."));
   connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
+
+  for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
+    QAction *recentFileAction = new QAction (this);
+    recentFileAction->setVisible (true);
+    connect (recentFileAction, SIGNAL (triggered ()), this, SLOT (slotRecentFileAction ()));
+    m_actionRecentFiles.append (recentFileAction);
+  }
 
   m_actionSave = new QAction(tr ("&Save"), this);
   m_actionSave->setShortcut (QKeySequence::Save);
@@ -611,6 +620,9 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionOpen);
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
+  for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
+    m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
+  }
   m_menuFile->addMenu (m_menuFileOpenRecent);
   m_menuFile->insertSeparator (m_actionSave);
   m_menuFile->addAction (m_actionSave);
@@ -691,6 +703,8 @@ void MainWindow::createMenus()
   m_menuHelp->addAction (m_actionAbout);
   m_menuHelp->addAction (m_actionWhatsThis);
   m_menuHelp->insertSeparator (m_actionWhatsThis);
+
+  updateRecentFileList();
 }
 
 void MainWindow::createSettingsDialogs ()
@@ -857,7 +871,8 @@ void MainWindow::loadFile (const QString &fileName)
   if (cmdMediator->successfulRead ()) {
 
     setCurrentPathFromFile (fileName);
-    m_engaugeFile = fileName; // This enables the FileSaveAs menu option
+    rebuildRecentFileListForCurrentFile(fileName);
+    m_currentFile = fileName; // This enables the FileSaveAs menu option
 
     if (m_cmdMediator != 0) {
       removePixmaps ();
@@ -910,6 +925,7 @@ void MainWindow::loadImage (const QString &fileName,
   QApplication::restoreOverrideCursor();
 
   setCurrentPathFromFile (fileName);
+  rebuildRecentFileListForCurrentFile (fileName);
 
   if (m_cmdMediator != 0) {
     removePixmaps ();
@@ -994,6 +1010,24 @@ bool MainWindow::maybeSave()
   return true;
 }
 
+void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::rebuildRecentFileListForCurrentFile";
+
+  setWindowFilePath (filePath);
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  QStringList recentFilePaths = settings.value (SETTINGS_RECENT_FILE_LIST).toStringList();
+  recentFilePaths.removeAll (filePath); // Remove previous instance of the current filePath
+  recentFilePaths.prepend (filePath); // Insert current filePath at start
+  while (recentFilePaths.count () > (int) MAX_RECENT_FILE_LIST_SIZE) {
+    recentFilePaths.removeLast (); // Remove entry since the number of entries exceeds the limit
+  }
+  settings.setValue (SETTINGS_RECENT_FILE_LIST, recentFilePaths);
+
+  updateRecentFileList();
+}
+
 void MainWindow::removePixmaps ()
 {
   if (m_imageNone != 0) {
@@ -1034,6 +1068,8 @@ bool MainWindow::saveFile (const QString &fileName)
                           arg(file.errorString()));
     return false;
   }
+
+  rebuildRecentFileListForCurrentFile (fileName);
 
   QApplication::setOverrideCursor (Qt::WaitCursor);
   QXmlStreamWriter stream(&file);
@@ -1604,6 +1640,18 @@ void MainWindow::slotMouseRelease (QPointF pos)
   m_digitizeStateContext->handleMouseRelease (pos);
 }
 
+void MainWindow::slotRecentFileAction ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotRecentFileAction";
+
+  QAction *action = qobject_cast<QAction*>(sender ());
+
+  if (action) {
+    QString fileName = action->data().toString();
+    loadFile (fileName);
+  }
+}
+
 void MainWindow::slotRedoTextChanged (const QString &text)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotRedoTextChanged";
@@ -2162,7 +2210,8 @@ void MainWindow::updateControls ()
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
-  m_menuFileOpenRecent->setEnabled (m_menuFileOpenRecent->actions().count() > 0);
+  m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
+                                    (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
   m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionExport->setEnabled (!m_currentFile.isEmpty ());
@@ -2247,6 +2296,34 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
   m_imageFiltered->setData (DATA_KEY_IDENTIFIER, "view");
   m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+}
+
+void MainWindow::updateRecentFileList()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  QStringList recentFilePaths = settings.value(SETTINGS_RECENT_FILE_LIST).toStringList();
+
+  // Determine the desired size of the path list
+  unsigned int count = recentFilePaths.size();
+  if (count > MAX_RECENT_FILE_LIST_SIZE) {
+    count = MAX_RECENT_FILE_LIST_SIZE;
+  }
+
+  // Add visible entries
+  unsigned int i;
+  for (i = 0; i < count; i++) {
+    QString strippedName = QFileInfo (recentFilePaths.at(i)).fileName();
+    m_actionRecentFiles.at (i)->setText (strippedName);
+    m_actionRecentFiles.at (i)->setData (recentFilePaths.at (i));
+    m_actionRecentFiles.at (i)->setVisible (true);
+  }
+
+  // Hide any extra entries
+  for (i = count; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
+    m_actionRecentFiles.at (i)->setVisible (false);
+  }
 }
 
 void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
