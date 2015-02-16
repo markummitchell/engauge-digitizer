@@ -208,38 +208,47 @@ void Curve::loadDocument(QXmlStreamReader &reader)
 
   bool success = true;
 
-  // Read until end of this subtree
-  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-         (reader.name() != DOCUMENT_SERIALIZE_CURVE)){
+  QXmlStreamAttributes attributes = reader.attributes();
 
-    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+  if (attributes.hasAttribute (DOCUMENT_SERIALIZE_CURVE_NAME)) {
 
-    if (reader.atEnd()) {
-      success = false;
-      break;
-    }
+    setCurveName (attributes.value (DOCUMENT_SERIALIZE_CURVE_NAME).toString());
 
-    if (tokenType == QXmlStreamReader::StartElement) {
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+           (reader.name() != DOCUMENT_SERIALIZE_CURVE)){
 
-      if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
-        m_curveFilter.loadDocument(reader);
-      } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
-        loadCurvePoints(reader);
-      } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
-        m_lineStyle.loadDocument(reader);
-      } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
-        m_pointStyle.loadDocument(reader);
-      } else {
+      QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+      if (reader.atEnd()) {
         success = false;
         break;
       }
-    }
 
-    if (reader.hasError()) {
-      // No need to set success flag to indicate failure, which raises the error, since the error was already raised. Just
-      // need to exit the loop immediately
-      break;
+      if (tokenType == QXmlStreamReader::StartElement) {
+
+        if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
+          m_curveFilter.loadDocument(reader);
+        } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
+          loadCurvePoints(reader);
+        } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
+          m_lineStyle.loadDocument(reader);
+        } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
+          m_pointStyle.loadDocument(reader);
+        } else {
+          success = false;
+          break;
+        }
+      }
+
+      if (reader.hasError()) {
+        // No need to set success flag to indicate failure, which raises the error, since the error was already raised. Just
+        // need to exit the loop immediately
+        break;
+      }
     }
+  } else {
+    success = false;
   }
 
   if (!success) {

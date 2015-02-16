@@ -136,7 +136,6 @@ void CurvesGraphs::loadDocument(QXmlStreamReader &reader)
         (reader.name () == DOCUMENT_SERIALIZE_CURVE)) {
 
       Curve curve (reader);
-      curve.loadDocument(reader);
 
       m_curvesGraphs.push_back (curve);
 

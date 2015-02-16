@@ -70,9 +70,6 @@ public:
   /// Return the line style.
   LineStyle lineStyle () const;
 
-  /// Load from serialized file
-  void loadDocument(QXmlStreamReader &reader);
-
   /// Translate the position of a point by the specified distance vector.
   void movePoint (const QString &pointIdentifier,
                   const QPointF &deltaScreen);
@@ -114,6 +111,7 @@ private:
   Curve();
 
   void loadCurvePoints(QXmlStreamReader &reader);
+  void loadDocument(QXmlStreamReader &reader);
   Point *pointForPointIdentifier (const QString pointIdentifier);
 
   QString m_curveName;

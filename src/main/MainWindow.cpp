@@ -857,6 +857,7 @@ void MainWindow::loadFile (const QString &fileName)
   if (cmdMediator->successfulRead ()) {
 
     setCurrentPathFromFile (fileName);
+    m_engaugeFile = fileName; // This enables the FileSaveAs menu option
 
     if (m_cmdMediator != 0) {
       removePixmaps ();
@@ -884,7 +885,7 @@ void MainWindow::loadFile (const QString &fileName)
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
     slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
-    updateControls ();
+    updateAfterCommand ();
 
   } else {
 
@@ -2094,13 +2095,6 @@ void MainWindow::updateAfterCommand ()
   updateAfterCommandStatusBarCoords ();
 }
 
-void MainWindow::updateAfterMouseRelease ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterMouseRelease";
-
-  updateControls ();
-}
-
 void MainWindow::updateAfterCommandStatusBarCoords ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommandStatusBarCoords";
@@ -2149,6 +2143,13 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   QPointF posScreen = m_view->mapToScene (posLocal);
 
   slotMouseMove (posScreen); // Update the status bar coordinates to reflect the newly updated transformation
+}
+
+void MainWindow::updateAfterMouseRelease ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterMouseRelease";
+
+  updateControls ();
 }
 
 void MainWindow::updateControls ()

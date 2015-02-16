@@ -40,10 +40,7 @@ Document::Document (const QImage &image) :
 
 Document::Document (const QString &fileName) :
   m_name (fileName),
-  m_curveAxes (new Curve (AXIS_CURVE_NAME,
-                          CurveFilter::defaultFilter (),
-                          LineStyle::defaultAxesCurve(),
-                          PointStyle::defaultAxesCurve()))
+  m_curveAxes (0)
 {
   m_successfulRead = true;
 
@@ -65,7 +62,7 @@ Document::Document (const QString &fileName) :
         } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
           m_modelCoords.loadDocument(reader);
         } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-          m_curveAxes->loadDocument(reader);
+          m_curveAxes = new Curve (reader);
         } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
           m_curvesGraphs.loadDocument(reader);
         } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
@@ -104,10 +101,7 @@ Document::Document (const QString &fileName) :
     m_reasonForUnsuccessfulRead = "Operating system says file is not readable";
   }
 
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
-                                            CurveFilter::defaultFilter (),
-                                            LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
-                                            PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
+  // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
 }
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
