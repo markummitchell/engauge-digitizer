@@ -1491,9 +1491,13 @@ bool MainWindow::slotFileSaveAs()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileSaveAs";
 
-  QString filenameDefault = QString ("%1.%2")
-                            .arg (m_currentFile)
-                            .arg (ENGAUGE_FILENAME_EXTENSION);
+  // Append engauge file extension if it is not already there
+  QString filenameDefault = m_currentFile;
+  if (!m_currentFile.endsWith (ENGAUGE_FILENAME_EXTENSION)) {
+    filenameDefault = QString ("%1.%2")
+                               .arg (m_currentFile)
+                               .arg (ENGAUGE_FILENAME_EXTENSION);
+  }
 
   if (!m_engaugeFile.isEmpty()) {
     filenameDefault = m_engaugeFile;
