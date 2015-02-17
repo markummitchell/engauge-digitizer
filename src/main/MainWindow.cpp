@@ -773,7 +773,8 @@ void MainWindow::createToolBars ()
   m_cmbBackground->addItem ("No background", QVariant (BACKGROUND_IMAGE_NONE));
   m_cmbBackground->addItem ("Original image", QVariant (BACKGROUND_IMAGE_ORIGINAL));
   m_cmbBackground->addItem ("Filtered image", QVariant (BACKGROUND_IMAGE_FILTERED));
-  connect (m_cmbBackground, SIGNAL (activated (int)), this, SLOT (slotCmbBackground (int))); // activated() ignores code changes
+  // selectBackgroundOriginal needs currentIndexChanged
+  connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
 
   // Background toolbar
   m_toolBackground = new QToolBar (tr ("Background"), this);
@@ -1091,6 +1092,13 @@ GraphicsScene &MainWindow::scene ()
 {
   Q_CHECK_PTR (m_scene);
   return *m_scene;
+}
+
+void MainWindow::selectBackgroundOriginal()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::selectBackgroundOriginal";
+
+  m_cmbBackground->setCurrentIndex(BACKGROUND_IMAGE_ORIGINAL);
 }
 
 QString MainWindow::selectedGraphCurve () const

@@ -35,6 +35,7 @@ void DigitizeStateColorPicker::begin ()
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
+  context().mainWindow().selectBackgroundOriginal(); // Only makes sense to have original image with all its colors
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 

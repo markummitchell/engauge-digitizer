@@ -62,6 +62,9 @@ public:
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
 
+  /// Make original background visible, for DigitizeStateColorPicker
+  void selectBackgroundOriginal();
+
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
 
