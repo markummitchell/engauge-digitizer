@@ -20,7 +20,7 @@ QString DigitizeStateSegment::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateSegment::begin ()
+void DigitizeStateSegment::begin (DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::begin";
 

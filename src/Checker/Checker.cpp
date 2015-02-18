@@ -16,7 +16,9 @@ const int NO_SIDE = -1;
 // To emphasize that the axis lines are still there, we make these checker somewhat transparent
 const double CHECKER_OPACITY = 0.6;
 
-// One-pixel wide line (produced by setting width=0) is too small. 5 is way too big to accurately reposition points
+// One-pixel wide line (produced by setting width=0) is too small. 5 is big enough to be always noticeable,
+// but such a thick line obscures the axes points. To keep the axes points visible, we remove portions of 
+// the line nearer to an axes point than the point radius.
 const int CHECKER_POINTS_WIDTH = 5;
 
 Checker::Checker(QGraphicsScene &scene) :

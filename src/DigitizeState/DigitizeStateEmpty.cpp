@@ -18,7 +18,7 @@ QString DigitizeStateEmpty::activeCurve () const
   return "";
 }
 
-void DigitizeStateEmpty::begin ()
+void DigitizeStateEmpty::begin (DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 

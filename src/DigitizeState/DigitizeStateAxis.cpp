@@ -29,7 +29,7 @@ QString DigitizeStateAxis::activeCurve () const
   return AXIS_CURVE_NAME;
 }
 
-void DigitizeStateAxis::begin ()
+void DigitizeStateAxis::begin (DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::begin";
 

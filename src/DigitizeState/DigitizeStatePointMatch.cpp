@@ -22,7 +22,7 @@ QString DigitizeStatePointMatch::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStatePointMatch::begin ()
+void DigitizeStatePointMatch::begin (DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::begin";
 

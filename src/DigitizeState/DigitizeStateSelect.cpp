@@ -31,7 +31,7 @@ QString DigitizeStateSelect::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateSelect::begin ()
+void DigitizeStateSelect::begin (DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::begin";
 

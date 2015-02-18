@@ -34,8 +34,9 @@ public:
   /// Name of the active Curve. This can include AXIS_CURVE_NAME
   virtual QString activeCurve () const = 0;
 
-  /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state
-  virtual void begin() = 0;
+  /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state.
+  /// The previousState value is used by DigitizeStateColorPicker to return to the previous state
+  virtual void begin(DigitizeState previousState) = 0;
 
   /// Reference to the DigitizeStateContext that contains all the DigitizeStateAbstractBase subclasses, without const.
   DigitizeStateContext &context();

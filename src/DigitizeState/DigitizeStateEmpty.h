@@ -12,7 +12,7 @@ public:
   virtual ~DigitizeStateEmpty();
 
   virtual QString activeCurve () const;
-  virtual void begin();
+  virtual void begin(DigitizeState previousState);
   virtual QCursor cursor () const;
   virtual void end();
   virtual void handleKeyPress (Qt::Key key);

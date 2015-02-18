@@ -29,13 +29,17 @@ QString DigitizeStateColorPicker::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateColorPicker::begin ()
+void DigitizeStateColorPicker::begin (DigitizeState previousState)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::begin";
 
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
-  context().mainWindow().selectBackgroundOriginal(); // Only makes sense to have original image with all its colors
+
+  // Save current state stuff so it can be restored afterwards
+  m_previousDigitizeState = previousState;
+  m_previousBackground = context().mainWindow().selectOriginal(BACKGROUND_IMAGE_ORIGINAL); // Only makes sense to have original image with all its colors
+
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
@@ -124,6 +128,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
                               curveName,
                               lowerValue,
                               upperValue);
+
   } else {
 
     QMessageBox::warning (0,
@@ -153,6 +158,10 @@ QCursor DigitizeStateColorPicker::cursor() const
 void DigitizeStateColorPicker::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::end";
+
+  // Restore original background. The state transition was triggered earlier by either the user selecting
+  // a valid point, or by user clicking on another digitize state button
+  context().mainWindow().selectOriginal(m_previousBackground);
 }
 
 bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &image,
@@ -217,6 +226,9 @@ void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
   if (computeFilterFromPixel (posScreen,
                               context().mainWindow().selectedGraphCurve(),
                               modelFilterAfter)) {
+
+    // Trigger a state transition. The background restoration will be handled by the end method
+    context().requestDelayedStateTransition(m_previousDigitizeState);
 
     // Create command to change segment filter
     QUndoCommand *cmd = new CmdSettingsFilter (context ().mainWindow(),

@@ -1,6 +1,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include "BackgroundImage.h"
 #include <QCursor>
 #include <QMainWindow>
 #include <QUrl>
@@ -62,8 +63,9 @@ public:
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
 
-  /// Make original background visible, for DigitizeStateColorPicker
-  void selectBackgroundOriginal();
+  /// Make original background visible, for DigitizeStateColorPicker. This returns the previous background state for restoring
+  /// when state finishes
+  BackgroundImage selectOriginal(BackgroundImage backgroundImage);
 
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;

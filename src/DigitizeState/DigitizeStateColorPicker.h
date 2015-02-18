@@ -1,6 +1,7 @@
 #ifndef DIGITIZE_STATE_COLOR_PICKER_H
 #define DIGITIZE_STATE_COLOR_PICKER_H
 
+#include "BackgroundImage.h"
 #include "DigitizeStateAbstractBase.h"
 
 class DocumentModelFilter;
@@ -19,7 +20,7 @@ public:
   virtual ~DigitizeStateColorPicker();
 
   virtual QString activeCurve () const;
-  virtual void begin();
+  virtual void begin(DigitizeState previousState);
   virtual QCursor cursor () const;
   virtual void end();
   virtual void handleKeyPress (Qt::Key key);
@@ -40,6 +41,10 @@ private:
                                  const QString &curveName,
                                  double lowerValue,
                                  double upperValue);
+
+  // Save previous state and background for restoring as soon as user selects a valid point
+  DigitizeState m_previousDigitizeState;
+  BackgroundImage m_previousBackground;
 };
 
 #endif // DIGITIZE_STATE_COLOR_PICKER_H

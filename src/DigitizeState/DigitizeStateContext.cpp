@@ -82,8 +82,9 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
     }
 
     // Start the new state
+    DigitizeState previousState = m_currentState;
     m_currentState = m_requestedState;
-    m_states [m_requestedState]->begin ();
+    m_states [m_requestedState]->begin (previousState);
   }
 }
 
@@ -95,21 +96,32 @@ void DigitizeStateContext::handleContextMenuEvent (const QString &pointIdentifie
 void DigitizeStateContext::handleKeyPress (Qt::Key key)
 {
   m_states [m_currentState]->handleKeyPress (key);
+
+  completeRequestedStateTransitionIfExists();
+
 }
 
 void DigitizeStateContext::handleLeave ()
 {
   m_states [m_currentState]->handleLeave ();
+
+  completeRequestedStateTransitionIfExists();
+
 }
 
 void DigitizeStateContext::handleMousePress (QPointF pos)
 {
   m_states [m_currentState]->handleMousePress (pos);
+
+  completeRequestedStateTransitionIfExists();
+
 }
 
 void DigitizeStateContext::handleMouseRelease (QPointF pos)
 {
   m_states [m_currentState]->handleMouseRelease (pos);
+
+  completeRequestedStateTransitionIfExists();
 }
 
 void DigitizeStateContext::handleSetOverrideCursor (const QCursor &cursor)

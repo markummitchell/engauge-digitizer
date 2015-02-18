@@ -1094,11 +1094,18 @@ GraphicsScene &MainWindow::scene ()
   return *m_scene;
 }
 
-void MainWindow::selectBackgroundOriginal()
+BackgroundImage MainWindow::selectOriginal(BackgroundImage backgroundImage)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::selectBackgroundOriginal";
 
-  m_cmbBackground->setCurrentIndex(BACKGROUND_IMAGE_ORIGINAL);
+  BackgroundImage previousBackground = (BackgroundImage) m_cmbBackground->currentData().toInt();
+
+  int index = m_cmbBackground->findData (backgroundImage);
+  Q_ASSERT (index >= 0);
+
+  m_cmbBackground->setCurrentIndex(index);
+
+  return previousBackground;
 }
 
 QString MainWindow::selectedGraphCurve () const
