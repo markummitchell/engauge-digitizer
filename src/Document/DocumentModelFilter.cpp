@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 DocumentModelFilter::DocumentModelFilter()
 {
@@ -108,9 +109,44 @@ int DocumentModelFilter::intensityLow (const QString &curveName) const
   return m_curveFilters [curveName].intensityLow();
 }
 
-void DocumentModelFilter::loadDocument(QXmlStreamReader &/* reader */)
+void DocumentModelFilter::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::loadXml";
+
+  bool success = true;
+
+  m_curveFilters.clear();
+
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) &&
+         (reader.name() != DOCUMENT_SERIALIZE_FILTER)) {
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER)) {
+      
+      QXmlStreamAttributes attributes = reader.attributes();
+
+      if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME)) {
+
+        QString curveName = attributes.value(DOCUMENT_SERIALIZE_CURVE_NAME).toString();
+
+        CurveFilter curveFilter(reader);
+        m_curveFilters [curveName] = curveFilter;
+
+      } else {
+        success = false;
+        break;
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError("Cannot read filter data");
+  }
 }
 
 double DocumentModelFilter::low (const QString &curveName) const
@@ -131,9 +167,9 @@ int DocumentModelFilter::saturationLow (const QString &curveName) const
   return m_curveFilters [curveName].saturationLow();
 }
 
-void DocumentModelFilter::saveDocument(QXmlStreamWriter &writer) const
+void DocumentModelFilter::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelFilter::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_FILTER);
 
@@ -141,7 +177,7 @@ void DocumentModelFilter::saveDocument(QXmlStreamWriter &writer) const
   CurveFilters::const_iterator itr;
   for (itr = m_curveFilters.begin (); itr != m_curveFilters.end (); itr++) {
     const CurveFilter &curveFilter = *itr;
-    curveFilter.saveDocument(writer);
+    curveFilter.saveXml(writer);
   }
 
   writer.writeEndElement();

@@ -22,7 +22,7 @@ public:
   /// Assignment constructor.
   DocumentModelPointMatch &operator=(const DocumentModelPointMatch &other);
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for max point size.
   double maxPointSize() const;
@@ -39,7 +39,7 @@ public:
   /// Get method for rejected color.
   ColorPalette paletteColorRejected() const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for max point size.
   void setMaxPointSize (double maxPointSize);

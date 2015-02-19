@@ -43,7 +43,7 @@ Point::Point (const Point &point)
 
 Point::Point (QXmlStreamReader &reader)
 {
-  loadDocument(reader);
+  loadXml(reader);
 }
 
 Point &Point::operator=(const Point &point)
@@ -72,8 +72,10 @@ unsigned int Point::identifierIndex ()
   return m_identifierIndex;
 }
 
-void Point::loadDocument(QXmlStreamReader &reader)
+void Point::loadXml(QXmlStreamReader &reader)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::loadXml";
+
   bool success = true;
 
   QXmlStreamAttributes attributes = reader.attributes();
@@ -152,9 +154,9 @@ QPointF Point::posScreen () const
   return m_posScreen;
 }
 
-void Point::saveDocument(QXmlStreamWriter &writer) const
+void Point::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT);
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER, m_identifier);

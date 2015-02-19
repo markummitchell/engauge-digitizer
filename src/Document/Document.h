@@ -156,8 +156,8 @@ public:
   /// Remove all points identified in the specified CurvesGraphs. See also addPointsInCurvesGraphs
   void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
 
-  /// Save document
-  void saveDocument(QXmlStreamWriter &writer);
+  /// Save document to xml
+  void saveXml(QXmlStreamWriter &writer);
 
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);

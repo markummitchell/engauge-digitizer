@@ -63,9 +63,9 @@ CoordThetaUnits DocumentModelCoords::coordThetaUnits() const
   return m_coordThetaUnits;
 }
 
-void DocumentModelCoords::loadDocument(QXmlStreamReader &reader)
+void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::loadXml";
 
   bool success = true;
 
@@ -104,9 +104,9 @@ double DocumentModelCoords::originRadius() const
   return m_originRadius;
 }
 
-void DocumentModelCoords::saveDocument(QXmlStreamWriter &writer) const
+void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelCoords::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_COORDS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE, QString::number (m_coordsType));

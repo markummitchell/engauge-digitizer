@@ -49,9 +49,9 @@ DocumentModelPointMatch &DocumentModelPointMatch::operator=(const DocumentModelP
   return *this;
 }
 
-void DocumentModelPointMatch::loadDocument(QXmlStreamReader &reader)
+void DocumentModelPointMatch::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::loadXml";
 
   bool success = true;
 
@@ -110,9 +110,9 @@ ColorPalette DocumentModelPointMatch::paletteColorRejected() const
   return m_paletteColorRejected;
 }
 
-void DocumentModelPointMatch::saveDocument(QXmlStreamWriter &writer) const
+void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_MATCH);
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));

@@ -93,7 +93,7 @@ public:
   void removePoint (const QString &identifier);
 
   /// Serialize curve
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set curve filter.
   void setCurveFilter (const CurveFilter &curveFilter);
@@ -111,7 +111,7 @@ private:
   Curve();
 
   void loadCurvePoints(QXmlStreamReader &reader);
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
   Point *pointForPointIdentifier (const QString pointIdentifier);
 
   QString m_curveName;

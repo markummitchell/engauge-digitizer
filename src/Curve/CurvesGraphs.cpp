@@ -122,9 +122,9 @@ void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString 
   }
 }
 
-void CurvesGraphs::loadDocument(QXmlStreamReader &reader)
+void CurvesGraphs::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::loadXml";
 
   bool success = true;
 
@@ -172,9 +172,9 @@ void CurvesGraphs::removePoint (const QString &pointIdentifier)
   curve->removePoint (pointIdentifier);
 }
 
-void CurvesGraphs::saveDocument(QXmlStreamWriter &writer) const
+void CurvesGraphs::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVES_GRAPHS);
 
@@ -182,7 +182,7 @@ void CurvesGraphs::saveDocument(QXmlStreamWriter &writer) const
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
     const Curve &curve = *itr;
-    curve.saveDocument (writer);
+    curve.saveXml (writer);
   }
 
   writer.writeEndElement();

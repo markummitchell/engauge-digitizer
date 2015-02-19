@@ -48,7 +48,7 @@ public:
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
   /// Load from serialized file
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Current number of graphs curves.
   int numCurves () const;
@@ -57,7 +57,7 @@ public:
   void removePoint (const QString &pointIdentifier);
 
   /// Serialize curves
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
 private:
 

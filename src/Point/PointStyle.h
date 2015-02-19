@@ -41,7 +41,7 @@ public:
   double lineWidth () const;
 
   /// Load model from serialized xml
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Get method for point color.
   ColorPalette paletteColor () const;
@@ -53,7 +53,7 @@ public:
   int radius () const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for line width.
   void setLineWidth (double width);

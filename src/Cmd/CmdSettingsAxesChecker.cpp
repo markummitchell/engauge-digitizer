@@ -1,5 +1,6 @@
 #include "CmdSettingsAxesChecker.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -34,8 +35,8 @@ void CmdSettingsAxesChecker::cmdUndo ()
 
 void CmdSettingsAxesChecker::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsAxesChecker");
-  m_modelAxesCheckerBefore.saveDocument(writer);
-  m_modelAxesCheckerAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_AXES_CHECKER);
+  m_modelAxesCheckerBefore.saveXml(writer);
+  m_modelAxesCheckerAfter.saveXml(writer);
   writer.writeEndElement();
 }

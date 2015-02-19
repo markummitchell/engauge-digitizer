@@ -45,7 +45,7 @@ public:
   /// Get method for y coord parameter to disable.
   GridCoordDisable gridCoordDisableY () const;
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for removing defined grid lines.
   bool removeDefinedGridLines () const;
@@ -53,7 +53,7 @@ public:
   /// Get method for removing lines parallel to axes.
   bool removeParallelToAxes () const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for close distance.
   void setCloseDistance (double closeDistance);

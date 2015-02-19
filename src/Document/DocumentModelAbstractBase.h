@@ -19,10 +19,10 @@ public:
 protected:
 
   /// Load model from serialized xml
-  virtual void loadDocument(QXmlStreamReader &reader) = 0;
+  virtual void loadXml(QXmlStreamReader &reader) = 0;
 
   /// Save entire model as xml into stream.
-  virtual void saveDocument(QXmlStreamWriter &writer) const = 0;
+  virtual void saveXml(QXmlStreamWriter &writer) const = 0;
 };
 
 #endif // DOCUMENT_MODEL_ABSTRACT_BASE_H

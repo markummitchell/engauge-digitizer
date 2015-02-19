@@ -57,7 +57,7 @@ public:
   /// Get method for intensity lower bound.
   int intensityLow (const QString &curveName) const;
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Low value of foreground, hue, intensity, saturation or value according to current filter mode
   /// normalized to 0 to 1.
@@ -69,7 +69,7 @@ public:
   /// Get method for saturation lower bound.
   int saturationLow (const QString &curveName) const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for filter mode.
   void setFilterMode(const QString &curveName,

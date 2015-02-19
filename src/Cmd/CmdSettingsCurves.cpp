@@ -1,6 +1,7 @@
 #include "CmdSettingsCurves.h"
 #include "CurveNameList.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -63,8 +64,8 @@ void CmdSettingsCurves::cmdUndo ()
 
 void CmdSettingsCurves::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsCurves");
-  m_curvesGraphsBefore.saveDocument(writer);
-  m_curvesGraphsAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVES);
+  m_curvesGraphsBefore.saveXml(writer);
+  m_curvesGraphsAfter.saveXml(writer);
   writer.writeEndElement();
 }

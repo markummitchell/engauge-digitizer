@@ -46,9 +46,9 @@ int CurveNameListEntry::numPoints () const
   return m_numPoints;
 }
 
-void CurveNameListEntry::saveDocument(QXmlStreamWriter &writer) const
+void CurveNameListEntry::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameListEntry::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameListEntry::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVES_ENTRY);
   writer.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_CURVE_NAME_CURRENT, m_curveNameCurrent);

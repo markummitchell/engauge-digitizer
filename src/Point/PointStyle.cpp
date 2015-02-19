@@ -74,9 +74,9 @@ double PointStyle::lineWidth() const
   return m_lineWidth;
 }
 
-void PointStyle::loadDocument(QXmlStreamReader &reader)
+void PointStyle::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::loadXml";
 
   QXmlStreamAttributes attributes = reader.attributes();
 
@@ -186,9 +186,9 @@ int PointStyle::radius () const
   return m_radius;
 }
 
-void PointStyle::saveDocument(QXmlStreamWriter &writer) const
+void PointStyle::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));

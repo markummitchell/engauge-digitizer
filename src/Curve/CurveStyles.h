@@ -66,7 +66,7 @@ public:
   const PointStyles &pointStyles () const;
 
   /// Serialize to xml
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for line color in specified curve.
   void setLineColor (const QString &curveName,

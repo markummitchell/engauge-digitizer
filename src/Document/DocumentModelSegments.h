@@ -31,7 +31,7 @@ public:
   /// Get method for line width.
   double lineWidth() const;
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for min length.
   double minLength() const;
@@ -39,7 +39,7 @@ public:
   /// Get method for point separation.
   double pointSeparation() const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for fill corners.
   void setFillCorners (bool fillCorners);

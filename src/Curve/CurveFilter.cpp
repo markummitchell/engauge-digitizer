@@ -61,6 +61,11 @@ CurveFilter::CurveFilter(const CurveFilter &other) :
 {
 }
 
+CurveFilter::CurveFilter(QXmlStreamReader &reader)
+{
+  loadXml(reader);
+}
+
 CurveFilter &CurveFilter::operator=(const CurveFilter &other)
 {
   m_filterMode = other.filterMode();
@@ -147,9 +152,9 @@ int CurveFilter::intensityLow () const
   return m_intensityLow;
 }
 
-void CurveFilter::loadDocument(QXmlStreamReader &reader)
+void CurveFilter::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::loadFilter";
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::loadXml";
 
   bool success = true;
 
@@ -235,9 +240,9 @@ int CurveFilter::saturationLow () const
   return m_saturationLow;
 }
 
-void CurveFilter::saveDocument(QXmlStreamWriter &writer) const
+void CurveFilter::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));

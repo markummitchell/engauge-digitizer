@@ -29,6 +29,9 @@ public:
   /// Copy constructor.
   CurveFilter (const CurveFilter &other);
 
+  /// Constructor when loading from serialized xml
+  CurveFilter(QXmlStreamReader &reader);
+
   /// Assignment operator.
   CurveFilter &operator= (const CurveFilter &other);
 
@@ -61,7 +64,7 @@ public:
   int intensityLow () const;
 
   /// Load curve filter to stream.
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Low value of foreground, hue, intensity, saturation or value according to current filter mode,
   /// normalized to 0 to 1.
@@ -74,7 +77,7 @@ public:
   int saturationLow () const;
 
   /// Save curve filter to stream.
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for filter mode.
   void setFilterMode(FilterMode filterMode);

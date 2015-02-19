@@ -1075,7 +1075,7 @@ bool MainWindow::saveFile (const QString &fileName)
   QApplication::setOverrideCursor (Qt::WaitCursor);
   QXmlStreamWriter stream(&file);
   stream.setAutoFormatting(true);
-  m_cmdMediator->document().saveDocument(stream);
+  m_cmdMediator->document().saveXml(stream);
   QApplication::restoreOverrideCursor ();
 
   // Notify the undo stack that the current state is now considered "clean". This will automatically trigger a

@@ -143,21 +143,23 @@ const PointStyles &CurveStyles::pointStyles() const
   return m_pointStyles;
 }
 
-void CurveStyles::saveDocument(QXmlStreamWriter &writer) const
+void CurveStyles::saveXml(QXmlStreamWriter &writer) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveStyles::saveXml";
+
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES);
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_LINE_STYLES);
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.begin(); itrL != m_lineStyles.end(); itrL++) {
     const LineStyle &lineStyle = itrL.value();
-    lineStyle.saveDocument(writer);
+    lineStyle.saveXml(writer);
   }
   writer.writeEndElement();
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_POINT_STYLES);
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.begin(); itrP != m_pointStyles.end(); itrP++) {
     const PointStyle &pointStyle = itrP.value();
-    pointStyle.saveDocument(writer);
+    pointStyle.saveXml(writer);
   }
   writer.writeEndElement();
   writer.writeEndElement();

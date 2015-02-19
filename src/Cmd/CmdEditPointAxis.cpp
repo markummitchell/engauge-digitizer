@@ -1,5 +1,6 @@
 #include "CmdEditPointAxis.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QTextStream>
@@ -47,11 +48,11 @@ void CmdEditPointAxis::cmdUndo ()
 
 void CmdEditPointAxis::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdEditPointAxis");
-  writer.writeAttribute("identifier", m_pointIdentifier);
-  writer.writeAttribute("xGraphBefore", QString::number (m_posGraphBefore.x()));
-  writer.writeAttribute("yGraphBefore", QString::number (m_posGraphBefore.y()));
-  writer.writeAttribute("xGraphAfter", QString::number (m_posGraphAfter.x()));
-  writer.writeAttribute("yGraphAfter", QString::number (m_posGraphAfter.y()));
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_EDIT_POINT_AXIS);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_pointIdentifier);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X_BEFORE, QString::number (m_posGraphBefore.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE, QString::number (m_posGraphBefore.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X_AFTER, QString::number (m_posGraphAfter.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER, QString::number (m_posGraphAfter.y()));
   writer.writeEndElement();
 }

@@ -1,5 +1,6 @@
 #include "CmdAddPointGraph.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "QtToString.h"
@@ -42,10 +43,10 @@ void CmdAddPointGraph::cmdUndo ()
 
 void CmdAddPointGraph::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdAddPointGraph");
-  writer.writeAttribute("curveName", m_curveName);
-  writer.writeAttribute("xScreen", QString::number (m_posScreen.x()));
-  writer.writeAttribute("yScreen", QString::number (m_posScreen.y()));
-  writer.writeAttribute("identifier", m_identifierAdded);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_ADD_POINT_GRAPH);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
   writer.writeEndElement();
 }

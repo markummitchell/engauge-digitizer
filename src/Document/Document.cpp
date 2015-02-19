@@ -58,25 +58,25 @@ Document::Document (const QString &fileName) :
         // This is a StartElement, so process it
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-          m_modelAxesChecker.loadDocument(reader);
+          m_modelAxesChecker.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-          m_modelCoords.loadDocument(reader);
+          m_modelCoords.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
           m_curveAxes = new Curve (reader);
         } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-          m_curvesGraphs.loadDocument(reader);
+          m_curvesGraphs.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
           // Do nothing. This is the root node
         } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-          m_modelExport.loadDocument(reader);
+          m_modelExport.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-          m_modelGridRemoval.loadDocument(reader);
+          m_modelGridRemoval.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           loadImage(reader);
         } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-          m_modelPointMatch.loadDocument(reader);
+          m_modelPointMatch.loadXml(reader);
         } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-          m_modelSegments.loadDocument(reader);
+          m_modelSegments.loadXml(reader);
         } else {
           m_successfulRead = false;
           m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
@@ -451,9 +451,9 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-void Document::saveDocument(QXmlStreamWriter &writer)
+void Document::saveXml(QXmlStreamWriter &writer)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::saveXml";
 
   writer.writeStartDocument();
   writer.writeDTD("<!DOCTYPE engauge>");
@@ -469,14 +469,14 @@ void Document::saveDocument(QXmlStreamWriter &writer)
   writer.writeEndElement();
 
   // Serialize the Document variables
-  m_modelCoords.saveDocument(writer);
-  m_modelExport.saveDocument(writer);
-  m_modelAxesChecker.saveDocument(writer);
-  m_modelGridRemoval.saveDocument(writer);
-  m_modelPointMatch.saveDocument(writer);
-  m_modelSegments.saveDocument(writer);
-  m_curveAxes->saveDocument(writer);
-  m_curvesGraphs.saveDocument(writer);
+  m_modelCoords.saveXml(writer);
+  m_modelExport.saveXml(writer);
+  m_modelAxesChecker.saveXml(writer);
+  m_modelGridRemoval.saveXml(writer);
+  m_modelPointMatch.saveXml(writer);
+  m_modelSegments.saveXml(writer);
+  m_curveAxes->saveXml(writer);
+  m_curvesGraphs.saveXml(writer);
   writer.writeEndElement();
   writer.writeEndDocument();
 }

@@ -1,5 +1,6 @@
 #include "CmdSettingsCurveProperties.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDebug>
@@ -35,8 +36,8 @@ void CmdSettingsCurveProperties::cmdUndo ()
 
 void CmdSettingsCurveProperties::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsCurveProperties");
-  m_modelCurveStylesBefore.saveDocument(writer);
-  m_modelCurveStylesAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES);
+  m_modelCurveStylesBefore.saveXml(writer);
+  m_modelCurveStylesAfter.saveXml(writer);
   writer.writeEndElement();
 }

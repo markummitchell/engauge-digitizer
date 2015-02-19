@@ -50,7 +50,7 @@ public:
   QPointF posScreen () const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Reset the current index while performing a Redo.
   static void setIdentifierIndex (unsigned int identifierIndex);
@@ -68,7 +68,7 @@ private:
   Point();
 
   /// Load from serialized xml
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Generate a unique identifier for a Point. This is static so it can be used while a
   /// GraphicsPointAbstractBase-based object is being constructed.

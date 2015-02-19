@@ -35,7 +35,7 @@ Curve::Curve (const Curve &curve) :
 
 Curve::Curve (QXmlStreamReader &reader)
 {
-  loadDocument(reader);
+  loadXml(reader);
 }
 
 Curve &Curve::operator=(const Curve &curve)
@@ -202,9 +202,9 @@ void Curve::loadCurvePoints(QXmlStreamReader &reader)
   }
 }
 
-void Curve::loadDocument(QXmlStreamReader &reader)
+void Curve::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadXml";
 
   bool success = true;
 
@@ -228,13 +228,13 @@ void Curve::loadDocument(QXmlStreamReader &reader)
       if (tokenType == QXmlStreamReader::StartElement) {
 
         if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
-          m_curveFilter.loadDocument(reader);
+          m_curveFilter.loadXml(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
           loadCurvePoints(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
-          m_lineStyle.loadDocument(reader);
+          m_lineStyle.loadXml(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
-          m_pointStyle.loadDocument(reader);
+          m_pointStyle.loadXml(reader);
         } else {
           success = false;
           break;
@@ -341,22 +341,22 @@ void Curve::removePoint (const QString &identifier)
   }
 }
 
-void Curve::saveDocument(QXmlStreamWriter &writer) const
+void Curve::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Curve::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
-  m_curveFilter.saveDocument (writer);
-  m_lineStyle.saveDocument (writer);
-  m_pointStyle.saveDocument (writer);
+  m_curveFilter.saveXml (writer);
+  m_lineStyle.saveXml (writer);
+  m_pointStyle.saveXml (writer);
 
   // Loop through points
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_POINTS);
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;
-    point.saveDocument (writer);
+    point.saveXml (writer);
   }
   writer.writeEndElement();
 

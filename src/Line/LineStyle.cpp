@@ -58,9 +58,9 @@ LineStyle LineStyle::defaultGraphCurve (int /* index */)
                     CONNECT_AS_FUNCTION); // Same default color as used for PointStyle graph curves default
 }
 
-void LineStyle::loadDocument(QXmlStreamReader &reader)
+void LineStyle::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "LineStyle::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "LineStyle::loadXml";
 
   QXmlStreamAttributes attributes = reader.attributes();
 
@@ -87,9 +87,9 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::saveDocument(QXmlStreamWriter &writer) const
+void LineStyle::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat))  << "LineStyle::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat))  << "LineStyle::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));

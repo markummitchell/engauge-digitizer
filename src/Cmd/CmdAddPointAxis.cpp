@@ -1,5 +1,6 @@
 #include "CmdAddPointAxis.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "QtToString.h"
@@ -43,11 +44,11 @@ void CmdAddPointAxis::cmdUndo ()
 
 void CmdAddPointAxis::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdAddPointAxis");
-  writer.writeAttribute("xScreen", QString::number (m_posScreen.x()));
-  writer.writeAttribute("yScreen", QString::number (m_posScreen.y()));
-  writer.writeAttribute("xGraph", QString::number (m_posGraph.x()));
-  writer.writeAttribute("yGraph", QString::number (m_posGraph.y()));
-  writer.writeAttribute("identifier", m_identifierAdded);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_ADD_POINT_AXIS);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X, QString::number (m_posGraph.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y, QString::number (m_posGraph.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
   writer.writeEndElement();
 }

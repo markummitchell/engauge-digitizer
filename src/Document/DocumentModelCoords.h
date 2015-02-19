@@ -36,12 +36,12 @@ public:
   /// Get method for theta units.
   CoordThetaUnits coordThetaUnits () const;
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for origin radius in polar mode.
   double originRadius () const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for linear/log scale on x/theta.
   void setCoordScaleXTheta (CoordScale coordScale);

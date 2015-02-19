@@ -1,5 +1,6 @@
 #include "CmdSettingsPointMatch.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -34,8 +35,8 @@ void CmdSettingsPointMatch::cmdUndo ()
 
 void CmdSettingsPointMatch::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsPointMatch");
-  m_modelPointMatchBefore.saveDocument (writer);
-  m_modelPointMatchAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_POINT_MATCH);
+  m_modelPointMatchBefore.saveXml (writer);
+  m_modelPointMatchAfter.saveXml(writer);
   writer.writeEndElement();
 }

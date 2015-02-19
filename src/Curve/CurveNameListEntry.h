@@ -37,7 +37,7 @@ class CurveNameListEntry
   int numPoints () const;
 
   /// Serialize into stream
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for current curve name.
   void setCurveNameCurrent (const QString &curveNameCurrent);

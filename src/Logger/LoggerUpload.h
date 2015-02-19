@@ -8,6 +8,7 @@ public:
   /// Single constructor
   LoggerUpload();
 
+  /// Smart equivalent to standard assert method and Q_ASSERT. Upon error, an upload is proposed
   static void assert(bool condition,
                      const char* file,
                      int line);

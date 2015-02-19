@@ -36,13 +36,13 @@ public:
   static LineStyle defaultGraphCurve (int index);
 
   /// Load model from serialized xml
-  void loadDocument(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Line color.
   ColorPalette paletteColor() const;
 
   /// Serialize to stream
-  void saveDocument(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set connect as.
   void setCurveConnectAs (CurveConnectAs curveConnectAs);

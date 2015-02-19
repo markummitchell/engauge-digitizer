@@ -39,7 +39,7 @@ public:
   /// Get method for functions layout.
   ExportLayoutFunctions layoutFunctions() const;
 
-  virtual void loadDocument(QXmlStreamReader &reader);
+  virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for points interval.
   double pointsInterval () const;
@@ -53,7 +53,7 @@ public:
   /// Get method for relations interval.
   double relationsInterval () const;
 
-  virtual void saveDocument(QXmlStreamWriter &writer) const;
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for curve names not exported.
   void setCurveNamesNotExported(const QStringList &curveNamesNotExported);

@@ -1,6 +1,7 @@
 #include "CmdDelete.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "ExportToClipboard.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
@@ -57,10 +58,11 @@ void CmdDelete::cmdUndo ()
 
 void CmdDelete::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdDelete");
-  writer.writeAttribute("transformDefined", m_transformIsDefined ? "true" : "false");
-  writer.writeAttribute("csv", m_csv);
-  writer.writeAttribute("html", m_html);
-  m_curvesGraphs.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_DELETE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,
+                        m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_HTML, m_html);
+  m_curvesGraphs.saveXml(writer);
   writer.writeEndElement();
 }

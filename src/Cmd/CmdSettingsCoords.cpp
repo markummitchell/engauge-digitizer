@@ -1,6 +1,7 @@
 #include "CmdSettingsCoords.h"
 #include "DocumentModelCoords.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -35,8 +36,8 @@ void CmdSettingsCoords::cmdUndo ()
 
 void CmdSettingsCoords::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsCoords");
-  m_modelCoordsBefore.saveDocument(writer);
-  m_modelCoordsAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS);
+  m_modelCoordsBefore.saveXml(writer);
+  m_modelCoordsAfter.saveXml(writer);
   writer.writeEndElement();
 }

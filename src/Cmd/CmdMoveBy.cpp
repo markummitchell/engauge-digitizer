@@ -1,6 +1,7 @@
 #include "CmdMoveBy.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -90,16 +91,17 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
 
 void CmdMoveBy::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdMoveBy");
-  writer.writeAttribute("xDeltaScreen", QString::number (m_deltaScreen.x()));
-  writer.writeAttribute("yDeltaScreen", QString::number (m_deltaScreen.y()));
-  writer.writeStartElement("identifiers");
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_MOVE_BY);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA, QString::number (m_deltaScreen.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA, QString::number (m_deltaScreen.y()));
+  writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);
   PointIdentifiers::const_iterator itr;
   for (itr = m_movedPoints.begin(); itr != m_movedPoints.end (); itr++) {
     QString identifier = itr.key();
     bool value = itr.value();
-    writer.writeStartElement ("identifier", identifier);
-    writer.writeAttribute("value", value ? "true" : "false");
+    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER, identifier);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_MOVED,
+                          value ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
     writer.writeEndElement();
   }
   writer.writeEndElement();

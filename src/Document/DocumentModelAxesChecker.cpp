@@ -56,9 +56,9 @@ ColorPalette DocumentModelAxesChecker::lineColor () const
   return m_lineColor;
 }
 
-void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
+void DocumentModelAxesChecker::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::loadXml";
 
   bool success = true;
 
@@ -88,9 +88,9 @@ void DocumentModelAxesChecker::loadDocument(QXmlStreamReader &reader)
   }
 }
 
-void DocumentModelAxesChecker::saveDocument(QXmlStreamWriter &writer) const
+void DocumentModelAxesChecker::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelAxesChecker::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_AXES_CHECKER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE, QString::number (m_checkerMode));

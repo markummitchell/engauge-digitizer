@@ -1,6 +1,7 @@
 #include "CmdSettingsExport.h"
-#include "DocumentModelExport.h"
 #include "Document.h"
+#include "DocumentModelExport.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -35,8 +36,8 @@ void CmdSettingsExport::cmdUndo ()
 
 void CmdSettingsExport::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsExport");
-  m_modelExportBefore.saveDocument (writer);
-  m_modelExportAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
+  m_modelExportBefore.saveXml (writer);
+  m_modelExportAfter.saveXml(writer);
   writer.writeEndElement();
 }

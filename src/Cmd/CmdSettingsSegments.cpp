@@ -1,5 +1,6 @@
 #include "CmdSettingsSegments.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -34,8 +35,8 @@ void CmdSettingsSegments::cmdUndo ()
 
 void CmdSettingsSegments::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsSegments");
-  m_modelSegmentsBefore.saveDocument (writer);
-  m_modelSegmentsAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_SEGMENTS);
+  m_modelSegmentsBefore.saveXml (writer);
+  m_modelSegmentsAfter.saveXml(writer);
   writer.writeEndElement();
 }

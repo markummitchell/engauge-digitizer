@@ -127,9 +127,9 @@ GridCoordDisable DocumentModelGridRemoval::gridCoordDisableY () const
   return m_gridCoordDisableY;
 }
 
-void DocumentModelGridRemoval::loadDocument(QXmlStreamReader &reader)
+void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::loadDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::loadXml";
 
   bool success = true;
 
@@ -193,9 +193,9 @@ bool DocumentModelGridRemoval::removeParallelToAxes () const
   return m_removeParallelToAxes;
 }
 
-void DocumentModelGridRemoval::saveDocument(QXmlStreamWriter &writer) const
+void DocumentModelGridRemoval::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_REMOVAL);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES, m_removeDefinedGridLines ?

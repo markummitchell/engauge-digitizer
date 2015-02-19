@@ -1,5 +1,6 @@
 #include "CmdSettingsFilter.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -34,8 +35,8 @@ void CmdSettingsFilter::cmdUndo ()
 
 void CmdSettingsFilter::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsFilter");
-  m_modelFilterBefore.saveDocument (writer);
-  m_modelFilterAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_FILTER);
+  m_modelFilterBefore.saveXml (writer);
+  m_modelFilterAfter.saveXml(writer);
   writer.writeEndElement();
 }

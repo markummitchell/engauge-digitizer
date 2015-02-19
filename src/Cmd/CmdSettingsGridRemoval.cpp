@@ -1,5 +1,6 @@
 #include "CmdSettingsGridRemoval.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -34,8 +35,8 @@ void CmdSettingsGridRemoval::cmdUndo ()
 
 void CmdSettingsGridRemoval::saveCommands (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement("CmdSettingsGridRemoval");
-  m_modelGridRemovalBefore.saveDocument (writer);
-  m_modelGridRemovalAfter.saveDocument(writer);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_GRID_REMOVAL);
+  m_modelGridRemovalBefore.saveXml (writer);
+  m_modelGridRemovalAfter.saveXml(writer);
   writer.writeEndElement();
 }
