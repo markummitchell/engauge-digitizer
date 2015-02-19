@@ -41,7 +41,7 @@ void CmdAddPointGraph::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdAddPointGraph::saveCommands (QXmlStreamWriter &writer) const
+void CmdAddPointGraph::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_ADD_POINT_GRAPH);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);

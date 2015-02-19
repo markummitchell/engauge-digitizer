@@ -33,7 +33,7 @@ void CmdSettingsGridRemoval::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsGridRemoval::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsGridRemoval::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_GRID_REMOVAL);
   m_modelGridRemovalBefore.saveXml (writer);

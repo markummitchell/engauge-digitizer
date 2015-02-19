@@ -71,7 +71,7 @@ void CmdCut::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdCut::saveCommands (QXmlStreamWriter &writer) const
+void CmdCut::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_CUT);
   writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,

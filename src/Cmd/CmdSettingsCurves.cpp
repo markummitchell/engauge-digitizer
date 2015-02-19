@@ -62,7 +62,7 @@ void CmdSettingsCurves::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurves::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsCurves::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVES);
   m_curvesGraphsBefore.saveXml(writer);

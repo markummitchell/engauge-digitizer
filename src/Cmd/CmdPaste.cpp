@@ -53,7 +53,7 @@ void CmdPaste::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdPaste::saveCommands (QXmlStreamWriter &writer) const
+void CmdPaste::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_PASTE);
   writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);

@@ -67,7 +67,7 @@ void CmdCopy::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdCopy::saveCommands (QXmlStreamWriter &writer) const
+void CmdCopy::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_COPY);
   writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,

@@ -34,7 +34,7 @@ void CmdSettingsCurveProperties::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurveProperties::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsCurveProperties::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES);
   m_modelCurveStylesBefore.saveXml(writer);

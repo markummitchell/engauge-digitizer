@@ -33,7 +33,7 @@ void CmdSettingsPointMatch::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsPointMatch::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsPointMatch::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_POINT_MATCH);
   m_modelPointMatchBefore.saveXml (writer);

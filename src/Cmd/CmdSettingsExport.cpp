@@ -34,7 +34,7 @@ void CmdSettingsExport::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsExport::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsExport::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
   m_modelExportBefore.saveXml (writer);

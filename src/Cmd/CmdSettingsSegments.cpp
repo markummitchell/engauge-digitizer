@@ -33,7 +33,7 @@ void CmdSettingsSegments::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsSegments::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsSegments::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_SEGMENTS);
   m_modelSegmentsBefore.saveXml (writer);

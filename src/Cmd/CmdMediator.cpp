@@ -1,3 +1,4 @@
+#include "CmdAbstract.h"
 #include "CmdMediator.h"
 #include "Document.h"
 #include "Logger.h"
@@ -91,6 +92,15 @@ QPixmap CmdMediator::pixmap () const
 QString CmdMediator::reasonForUnsuccessfulRead () const
 {
   return m_document.reasonForUnsuccessfulRead ();
+}
+
+void CmdMediator::saveXml(QXmlStreamWriter &writer) const
+{
+  for (int i = 0; i < index(); i++) {
+
+    const CmdAbstract *cmd = dynamic_cast<const CmdAbstract *>(command(i));
+    cmd->saveXml (writer);
+  }
 }
 
 bool CmdMediator::successfulRead () const

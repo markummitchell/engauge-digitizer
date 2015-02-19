@@ -42,7 +42,7 @@ void CmdAddPointAxis::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdAddPointAxis::saveCommands (QXmlStreamWriter &writer) const
+void CmdAddPointAxis::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_ADD_POINT_AXIS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));

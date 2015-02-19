@@ -33,7 +33,7 @@ void CmdSettingsAxesChecker::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsAxesChecker::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsAxesChecker::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_AXES_CHECKER);
   m_modelAxesCheckerBefore.saveXml(writer);

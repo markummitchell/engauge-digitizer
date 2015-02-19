@@ -33,7 +33,7 @@ void CmdSettingsFilter::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsFilter::saveCommands (QXmlStreamWriter &writer) const
+void CmdSettingsFilter::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_FILTER);
   m_modelFilterBefore.saveXml (writer);

@@ -23,6 +23,9 @@ public:
   /// Undo method that is called when QUndoStack is moved one command backward.
   virtual void cmdUndo () = 0;
 
+  /// Save commands as xml for later uploading
+  virtual void saveXml (QXmlStreamWriter &writer) const = 0;
+
 protected:
   /// Return the Document that this command will modify during redo and undo.
   Document &document();
@@ -32,9 +35,6 @@ protected:
 
   /// Return the MainWindow so it can be updated by this command as a last step.
   MainWindow &mainWindow ();
-
-  /// Save commands as xml for later uploading
-  virtual void saveCommands (QXmlStreamWriter &writer) const = 0;
 
 private:
   CmdAbstract();

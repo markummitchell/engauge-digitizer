@@ -62,6 +62,9 @@ public:
   /// See Document::reasonForUnsuccessfulRead.
   QString reasonForUnsuccessfulRead () const;
 
+  /// Serialize to xml
+  void saveXml(QXmlStreamWriter &writer) const;
+
   /// Wrapper for Document::successfulRead
   bool successfulRead () const;
 

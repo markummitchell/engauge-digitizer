@@ -89,7 +89,7 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
   }
 }
 
-void CmdMoveBy::saveCommands (QXmlStreamWriter &writer) const
+void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_MOVE_BY);
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA, QString::number (m_deltaScreen.x()));

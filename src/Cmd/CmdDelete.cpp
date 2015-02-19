@@ -56,7 +56,7 @@ void CmdDelete::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdDelete::saveCommands (QXmlStreamWriter &writer) const
+void CmdDelete::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_DELETE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,

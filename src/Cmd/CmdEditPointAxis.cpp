@@ -46,7 +46,7 @@ void CmdEditPointAxis::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
-void CmdEditPointAxis::saveCommands (QXmlStreamWriter &writer) const
+void CmdEditPointAxis::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_EDIT_POINT_AXIS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_pointIdentifier);
