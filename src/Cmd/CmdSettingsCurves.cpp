@@ -60,3 +60,11 @@ void CmdSettingsCurves::cmdUndo ()
   mainWindow().updateSettingsCurves(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsCurves::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsCurves");
+  m_curvesGraphsBefore.saveDocument(writer);
+  m_curvesGraphsAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

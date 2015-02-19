@@ -31,3 +31,11 @@ void CmdSettingsFilter::cmdUndo ()
   mainWindow().updateSettingsFilter(m_modelFilterBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsFilter::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsFilter");
+  m_modelFilterBefore.saveDocument (writer);
+  m_modelFilterAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

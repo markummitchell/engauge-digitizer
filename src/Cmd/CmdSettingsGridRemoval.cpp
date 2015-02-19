@@ -31,3 +31,11 @@ void CmdSettingsGridRemoval::cmdUndo ()
   mainWindow().updateSettingsGridRemoval(m_modelGridRemovalBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsGridRemoval::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsGridRemoval");
+  m_modelGridRemovalBefore.saveDocument (writer);
+  m_modelGridRemovalAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

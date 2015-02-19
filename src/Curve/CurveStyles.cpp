@@ -143,6 +143,26 @@ const PointStyles &CurveStyles::pointStyles() const
   return m_pointStyles;
 }
 
+void CurveStyles::saveDocument(QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_LINE_STYLES);
+  LineStyles::const_iterator itrL;
+  for (itrL = m_lineStyles.begin(); itrL != m_lineStyles.end(); itrL++) {
+    const LineStyle &lineStyle = itrL.value();
+    lineStyle.saveDocument(writer);
+  }
+  writer.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_POINT_STYLES);
+  PointStyles::const_iterator itrP;
+  for (itrP = m_pointStyles.begin(); itrP != m_pointStyles.end(); itrP++) {
+    const PointStyle &pointStyle = itrP.value();
+    pointStyle.saveDocument(writer);
+  }
+  writer.writeEndElement();
+  writer.writeEndElement();
+}
+
 void CurveStyles::setLineColor (const QString &curveName,
                                 ColorPalette lineColor)
 {

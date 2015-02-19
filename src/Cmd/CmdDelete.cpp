@@ -54,3 +54,13 @@ void CmdDelete::cmdUndo ()
 
   mainWindow().updateAfterCommand();
 }
+
+void CmdDelete::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdDelete");
+  writer.writeAttribute("transformDefined", m_transformIsDefined ? "true" : "false");
+  writer.writeAttribute("csv", m_csv);
+  writer.writeAttribute("html", m_html);
+  m_curvesGraphs.saveDocument(writer);
+  writer.writeEndElement();
+}

@@ -8,6 +8,7 @@
 #include "PointStyles.h"
 
 class Document;
+class QXmlStreamWriter;
 
 /// Model for DlgSettingsCurveProperties and CmdSettingsCurveProperties.
 class CurveStyles
@@ -63,6 +64,9 @@ public:
 
   /// Get method for copying all point styles in one step.
   const PointStyles &pointStyles () const;
+
+  /// Serialize to xml
+  void saveDocument(QXmlStreamWriter &writer) const;
 
   /// Set method for line color in specified curve.
   void setLineColor (const QString &curveName,

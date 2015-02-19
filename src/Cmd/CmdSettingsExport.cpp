@@ -32,3 +32,11 @@ void CmdSettingsExport::cmdUndo ()
   mainWindow().updateSettingsExport(m_modelExportBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsExport::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsExport");
+  m_modelExportBefore.saveDocument (writer);
+  m_modelExportAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

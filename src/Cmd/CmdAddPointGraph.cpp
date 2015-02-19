@@ -39,3 +39,13 @@ void CmdAddPointGraph::cmdUndo ()
   document().removePointGraph (m_identifierAdded);
   mainWindow().updateAfterCommand();
 }
+
+void CmdAddPointGraph::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdAddPointGraph");
+  writer.writeAttribute("curveName", m_curveName);
+  writer.writeAttribute("xScreen", QString::number (m_posScreen.x()));
+  writer.writeAttribute("yScreen", QString::number (m_posScreen.y()));
+  writer.writeAttribute("identifier", m_identifierAdded);
+  writer.writeEndElement();
+}

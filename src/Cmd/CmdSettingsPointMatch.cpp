@@ -31,3 +31,11 @@ void CmdSettingsPointMatch::cmdUndo ()
   mainWindow().updateSettingsPointMatch(m_modelPointMatchBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsPointMatch::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsPointMatch");
+  m_modelPointMatchBefore.saveDocument (writer);
+  m_modelPointMatchAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

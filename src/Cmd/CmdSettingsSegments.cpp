@@ -31,3 +31,11 @@ void CmdSettingsSegments::cmdUndo ()
   mainWindow().updateSettingsSegments(m_modelSegmentsBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsSegments::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsSegments");
+  m_modelSegmentsBefore.saveDocument (writer);
+  m_modelSegmentsAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

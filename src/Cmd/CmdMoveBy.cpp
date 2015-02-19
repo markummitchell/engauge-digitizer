@@ -87,3 +87,21 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
     }
   }
 }
+
+void CmdMoveBy::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdMoveBy");
+  writer.writeAttribute("xDeltaScreen", QString::number (m_deltaScreen.x()));
+  writer.writeAttribute("yDeltaScreen", QString::number (m_deltaScreen.y()));
+  writer.writeStartElement("identifiers");
+  PointIdentifiers::const_iterator itr;
+  for (itr = m_movedPoints.begin(); itr != m_movedPoints.end (); itr++) {
+    QString identifier = itr.key();
+    bool value = itr.value();
+    writer.writeStartElement ("identifier", identifier);
+    writer.writeAttribute("value", value ? "true" : "false");
+    writer.writeEndElement();
+  }
+  writer.writeEndElement();
+  writer.writeEndElement();
+}

@@ -69,3 +69,13 @@ void CmdCut::cmdUndo ()
 
   mainWindow().updateAfterCommand();
 }
+
+void CmdCut::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdCut");
+  writer.writeAttribute("transformDefined", m_transformIsDefined ? "true" : "false");
+  writer.writeAttribute("csv", m_csv);
+  writer.writeAttribute("html", m_html);
+  m_curvesGraphs.saveDocument(writer);
+  writer.writeEndElement();
+}

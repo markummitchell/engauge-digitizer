@@ -51,3 +51,19 @@ void CmdPaste::cmdUndo ()
 
   mainWindow().updateAfterCommand();
 }
+
+void CmdPaste::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdPaste");
+  writer.writeStartElement("identifiers");
+  PointIdentifiers::const_iterator itr;
+  for (itr = m_copiedPoints.begin(); itr != m_copiedPoints.end (); itr++) {
+    QString identifier = itr.key();
+    bool value = itr.value();
+    writer.writeStartElement ("identifier", identifier);
+    writer.writeAttribute("value", value ? "true" : "false");
+    writer.writeEndElement();
+  }
+  writer.writeEndElement();
+  writer.writeEndElement();
+}

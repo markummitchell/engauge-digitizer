@@ -16,6 +16,7 @@ public:
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
+  virtual void saveCommands (QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsAxesChecker();

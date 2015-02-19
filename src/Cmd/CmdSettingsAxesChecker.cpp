@@ -31,3 +31,11 @@ void CmdSettingsAxesChecker::cmdUndo ()
   mainWindow().updateSettingsAxesChecker(m_modelAxesCheckerBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsAxesChecker::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsAxesChecker");
+  m_modelAxesCheckerBefore.saveDocument(writer);
+  m_modelAxesCheckerAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

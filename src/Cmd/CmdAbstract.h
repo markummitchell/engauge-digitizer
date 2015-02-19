@@ -5,6 +5,7 @@
 
 class Document;
 class MainWindow;
+class QXmlStreamWriter;
 
 /// Wrapper around QUndoCommand. This simplifies the more complicated feature set of QUndoCommand
 class CmdAbstract : public QUndoCommand
@@ -31,6 +32,9 @@ protected:
 
   /// Return the MainWindow so it can be updated by this command as a last step.
   MainWindow &mainWindow ();
+
+  /// Save commands as xml for later uploading
+  virtual void saveCommands (QXmlStreamWriter &writer) const = 0;
 
 private:
   CmdAbstract();

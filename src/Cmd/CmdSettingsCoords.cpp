@@ -32,3 +32,11 @@ void CmdSettingsCoords::cmdUndo ()
   mainWindow().updateSettingsCoords(m_modelCoordsBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsCoords::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsCoords");
+  m_modelCoordsBefore.saveDocument(writer);
+  m_modelCoordsAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

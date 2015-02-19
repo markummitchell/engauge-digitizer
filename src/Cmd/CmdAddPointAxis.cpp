@@ -40,3 +40,14 @@ void CmdAddPointAxis::cmdUndo ()
   document().removePointAxis (m_identifierAdded);
   mainWindow().updateAfterCommand();
 }
+
+void CmdAddPointAxis::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdAddPointAxis");
+  writer.writeAttribute("xScreen", QString::number (m_posScreen.x()));
+  writer.writeAttribute("yScreen", QString::number (m_posScreen.y()));
+  writer.writeAttribute("xGraph", QString::number (m_posGraph.x()));
+  writer.writeAttribute("yGraph", QString::number (m_posGraph.y()));
+  writer.writeAttribute("identifier", m_identifierAdded);
+  writer.writeEndElement();
+}

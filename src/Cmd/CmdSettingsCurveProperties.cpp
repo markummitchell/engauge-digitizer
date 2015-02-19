@@ -32,3 +32,11 @@ void CmdSettingsCurveProperties::cmdUndo ()
   mainWindow().updateSettingsCurveStyles(m_modelCurveStylesBefore);
   mainWindow().updateAfterCommand();
 }
+
+void CmdSettingsCurveProperties::saveCommands (QXmlStreamWriter &writer) const
+{
+  writer.writeStartElement("CmdSettingsCurveProperties");
+  m_modelCurveStylesBefore.saveDocument(writer);
+  m_modelCurveStylesAfter.saveDocument(writer);
+  writer.writeEndElement();
+}

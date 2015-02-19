@@ -118,6 +118,7 @@ HEADERS  += \
     Line/LineStyles.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
+    Logger/LoggerUpload.h \
     main/MainWindow.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
@@ -146,7 +147,8 @@ HEADERS  += \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
     util/Xml.h \
-    include/ZoomFactor.h
+    include/ZoomFactor.h \
+    include/EngaugeAssert.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -240,6 +242,7 @@ SOURCES += \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
+    Logger/LoggerUpload.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
