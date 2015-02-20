@@ -61,7 +61,8 @@ void CmdPaste::saveXml (QXmlStreamWriter &writer) const
   for (itr = m_copiedPoints.begin(); itr != m_copiedPoints.end (); itr++) {
     QString identifier = itr.key();
     bool value = itr.value();
-    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER, identifier);
+    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER_NAME, identifier);
     writer.writeAttribute(DOCUMENT_SERIALIZE_COPIED,
                           value ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
     writer.writeEndElement();

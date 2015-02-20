@@ -44,6 +44,8 @@ void LoggerUpload::loggerOutput(const char *comment,
 
     QString xmlCommands;
     QXmlStreamWriter writer (&xmlCommands);
+    writer.setAutoFormatting(true);
+
     m_cmdMediator->saveXml(writer);
 
     cerr << "Error '" << context << "' in file " << file << " at line " << line << endl

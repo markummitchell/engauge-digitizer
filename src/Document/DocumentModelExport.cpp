@@ -193,7 +193,8 @@ void DocumentModelExport::saveXml(QXmlStreamWriter &writer) const
   QStringList::const_iterator itr;
   for (itr = m_curveNamesNotExported.begin (); itr != m_curveNamesNotExported.end (); itr++) {
     QString curveNameNotExported = *itr;
-    writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED, curveNameNotExported);
+    writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_CURVE_NAME_NOT_EXPORTED_NAME, curveNameNotExported);
     writer.writeEndElement();
   }
   writer.writeEndElement();

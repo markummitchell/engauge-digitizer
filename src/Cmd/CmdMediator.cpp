@@ -1,6 +1,7 @@
 #include "CmdAbstract.h"
 #include "CmdMediator.h"
 #include "Document.h"
+#include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "LoggerUpload.h"
@@ -107,11 +108,15 @@ QString CmdMediator::reasonForUnsuccessfulRead () const
 
 void CmdMediator::saveXml(QXmlStreamWriter &writer) const
 {
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_MEDIATOR);
+
   for (int i = 0; i < index(); i++) {
 
     const CmdAbstract *cmd = dynamic_cast<const CmdAbstract *>(command(i));
     cmd->saveXml (writer);
   }
+
+  writer.writeEndElement();
 }
 
 bool CmdMediator::successfulRead () const

@@ -99,7 +99,8 @@ void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const
   for (itr = m_movedPoints.begin(); itr != m_movedPoints.end (); itr++) {
     QString identifier = itr.key();
     bool value = itr.value();
-    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER, identifier);
+    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER_NAME, identifier);
     writer.writeAttribute(DOCUMENT_SERIALIZE_MOVED,
                           value ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
     writer.writeEndElement();
