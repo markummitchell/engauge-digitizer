@@ -3,6 +3,7 @@
 #include "CmdSettingsAxesChecker.h"
 #include "CoordScale.h"
 #include "DlgSettingsAxesChecker.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QButtonGroup>
@@ -207,11 +208,11 @@ void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
   m_btnNSeconds->setChecked (checkerMode == CHECKER_MODE_N_SECONDS);
   m_btnForever->setChecked (checkerMode == CHECKER_MODE_FOREVER);
   int indexSeconds = m_cmbSeconds->findData (QVariant (m_modelAxesCheckerAfter->checkerSeconds()));
-  Q_ASSERT (indexSeconds >= 0);
+  ENGAUGE_ASSERT (indexSeconds >= 0);
   m_cmbSeconds->setCurrentIndex(indexSeconds);
 
   int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelAxesCheckerAfter->lineColor()));
-  Q_ASSERT (indexLineColor >= 0);
+  ENGAUGE_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
   updateControls ();
@@ -270,7 +271,7 @@ void DlgSettingsAxesChecker::updatePreview()
 
   QPolygonF polygon (points);
 
-  Q_ASSERT (m_checker != 0);
+  ENGAUGE_ASSERT (m_checker != 0);
   m_checker->prepareForDisplay (polygon,
                                 ZERO_RADIUS_SINCE_NO_POINTS,
                                 *m_modelAxesCheckerAfter,

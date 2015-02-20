@@ -1,6 +1,7 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
@@ -280,7 +281,7 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
     }
   }
 
-  Q_ASSERT (false);
+  ENGAUGE_ASSERT (false);
   return 0;
 }
 

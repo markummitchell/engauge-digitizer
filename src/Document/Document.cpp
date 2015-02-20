@@ -6,6 +6,7 @@
 #include "CurveStyles.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include <iostream>
 #include "Logger.h"
@@ -234,7 +235,7 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
 
 const Curve &Document::curveAxes () const
 {
-  Q_CHECK_PTR (m_curveAxes);
+  ENGAUGE_CHECK_PTR (m_curveAxes);
 
   return *m_curveAxes;
 }
@@ -293,21 +294,21 @@ void Document::editPointAxis (const QPointF &posGraph,
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  Q_CHECK_PTR (m_curveAxes);
+  ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  Q_CHECK_PTR (m_curveAxes);
+  ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  Q_CHECK_PTR (m_curveAxes);
+  ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
@@ -422,7 +423,7 @@ QPointF Document::positionScreen (const QString &pointIdentifier) const
 
 QString Document::reasonForUnsuccessfulRead () const
 {
-  Q_ASSERT (!m_successfulRead);
+  ENGAUGE_ASSERT (!m_successfulRead);
 
   return m_reasonForUnsuccessfulRead;
 }

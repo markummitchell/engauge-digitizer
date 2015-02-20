@@ -1,3 +1,4 @@
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 
 QColor ColorPaletteToQColor (ColorPalette color) {
@@ -42,7 +43,7 @@ QColor ColorPaletteToQColor (ColorPalette color) {
       break;
   }
 
-  Q_ASSERT (false);
+  ENGAUGE_ASSERT (false);
   return QColor (Qt::black);
 }
 

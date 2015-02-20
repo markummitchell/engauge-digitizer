@@ -3,6 +3,7 @@
 #include "CurveConstants.h"
 #include "DlgFilterThread.h"
 #include "DlgSettingsFilter.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "FilterHistogram.h"
 #include "Logger.h"
@@ -469,7 +470,7 @@ void DlgSettingsFilter::updateHistogram()
 
   } else {
 
-    Q_ASSERT (false);
+    ENGAUGE_ASSERT (false);
 
   }
 }

@@ -3,6 +3,7 @@
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DataKey.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsLine.h"
@@ -47,7 +48,7 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   // Update the map
-  Q_ASSERT (!m_mapPointIdentifierToGraphicsPoint.contains (identifier));
+  ENGAUGE_ASSERT (!m_mapPointIdentifierToGraphicsPoint.contains (identifier));
   m_mapPointIdentifierToGraphicsPoint [identifier] = point;
 
   return point;
@@ -100,7 +101,7 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
     }
   }
 
-  Q_ASSERT (false);
+  ENGAUGE_ASSERT (false);
   return 0;
 }
 

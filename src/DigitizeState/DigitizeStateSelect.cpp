@@ -3,6 +3,7 @@
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateSelect.h"
+#include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -138,7 +139,7 @@ void DigitizeStateSelect::keyPressArrow (Qt::Key key)
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   // Create command to move points

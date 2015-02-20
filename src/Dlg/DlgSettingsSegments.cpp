@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsSegments.h"
 #include "DlgSettingsSegments.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCheckBox>
@@ -232,10 +233,10 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_modelSegmentsAfter = new DocumentModelSegments (cmdMediator.document());
 
   // Sanity checks. Incoming defaults must be acceptable to the local limits
-  Q_ASSERT (MIN_LENGTH_MIN <= m_modelSegmentsAfter->minLength ());
-  Q_ASSERT (MIN_LENGTH_MAX >= m_modelSegmentsAfter->minLength ());
-  Q_ASSERT (POINT_SEPARATION_MIN <= m_modelSegmentsAfter->pointSeparation());
-  Q_ASSERT (POINT_SEPARATION_MAX >= m_modelSegmentsAfter->pointSeparation());
+  ENGAUGE_ASSERT (MIN_LENGTH_MIN <= m_modelSegmentsAfter->minLength ());
+  ENGAUGE_ASSERT (MIN_LENGTH_MAX >= m_modelSegmentsAfter->minLength ());
+  ENGAUGE_ASSERT (POINT_SEPARATION_MIN <= m_modelSegmentsAfter->pointSeparation());
+  ENGAUGE_ASSERT (POINT_SEPARATION_MAX >= m_modelSegmentsAfter->pointSeparation());
 
   // Populate controls
   m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
@@ -244,7 +245,7 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_spinLineWidth->setValue (m_modelSegmentsAfter->lineWidth());
 
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
-  Q_ASSERT (indexLineColor >= 0);
+  ENGAUGE_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex(indexLineColor);
 
   updateControls();

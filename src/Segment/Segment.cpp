@@ -1,4 +1,5 @@
 #include "DocumentModelSegments.h"
+#include "EngaugeAssert.h"
 #include "mmsubs.h"
 #include <QGraphicsScene>
 #include <qmath.h>
@@ -46,7 +47,7 @@ bool Segment::pointsAreCloseToLine(double xLeft,
 void Segment::appendColumn(int x, int y, const DocumentModelSegments &modelSegments)
 {
   SegmentLine* line = new SegmentLine(m_scene, this);
-  Q_CHECK_PTR(line);
+  ENGAUGE_CHECK_PTR(line);
   line->setLine(QLineF (x - 1,
                         m_yLast,
                         x,
@@ -78,7 +79,7 @@ void Segment::createAcceptablePoint(bool *pFirst,
     *xPrev = x;
     *yPrev = y;
 
-    Q_CHECK_PTR(pList);
+    ENGAUGE_CHECK_PTR(pList);
     pList->append(QPoint(i, j));
   }
 
@@ -114,7 +115,7 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
       SegmentLine *line = *itr;
       bool firstPointOfLineSegment = true;
 
-      Q_CHECK_PTR(line);
+      ENGAUGE_CHECK_PTR(line);
       double xNext = (double) line->line().x2();
       double yNext = (double) line->line().y2();
 
@@ -172,7 +173,7 @@ QList<QPoint> Segment::fillPointsWithoutFillingCorners(const DocumentModelSegmen
 
       SegmentLine *line = *itr;
 
-      Q_CHECK_PTR(line);
+      ENGAUGE_CHECK_PTR(line);
       xNext = (double) line->line().x2();
       yNext = (double) line->line().y2();
 
@@ -234,7 +235,7 @@ void Segment::removeUnneededLines(int *foldedLines)
       double yLeft = lineOlder->line().y1();
       double xInt = lineOlder->line().x2();
       double yInt = lineOlder->line().y2();
-      Q_CHECK_PTR(line);
+      ENGAUGE_CHECK_PTR(line);
       double xRight = line->line().x2();
       double yRight = line->line().y2();
 

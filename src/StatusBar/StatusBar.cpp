@@ -1,3 +1,4 @@
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QFrame>
 #include <QHBoxLayout>
@@ -194,7 +195,7 @@ void StatusBar::slotComboZoom (const QString &text)
   } else if (text == LABEL_ZOOM_FILL) {
     emit signalZoom (ZOOM_FILL);
   } else {
-    Q_ASSERT (false);
+    ENGAUGE_ASSERT (false);
   }
 }
 

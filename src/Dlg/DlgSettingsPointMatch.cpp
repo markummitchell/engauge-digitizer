@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsPointMatch.h"
 #include "DlgSettingsPointMatch.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QComboBox>
@@ -236,25 +237,25 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator.document());
 
   // Sanity checks. Incoming defaults must be acceptable to the local limits
-  Q_ASSERT (POINT_SEPARATION_MIN <= m_modelPointMatchAfter->minPointSeparation());
-  Q_ASSERT (POINT_SEPARATION_MAX > m_modelPointMatchAfter->minPointSeparation());
-  Q_ASSERT (POINT_SIZE_MIN <= m_modelPointMatchAfter->maxPointSize());
-  Q_ASSERT (POINT_SIZE_MAX > m_modelPointMatchAfter->maxPointSize());
+  ENGAUGE_ASSERT (POINT_SEPARATION_MIN <= m_modelPointMatchAfter->minPointSeparation());
+  ENGAUGE_ASSERT (POINT_SEPARATION_MAX > m_modelPointMatchAfter->minPointSeparation());
+  ENGAUGE_ASSERT (POINT_SIZE_MIN <= m_modelPointMatchAfter->maxPointSize());
+  ENGAUGE_ASSERT (POINT_SIZE_MAX > m_modelPointMatchAfter->maxPointSize());
 
   // Populate controls
   m_spinMinPointSeparation->setValue(m_modelPointMatchAfter->minPointSeparation());
   m_spinPointSize->setValue(m_modelPointMatchAfter->maxPointSize());
 
   int indexAccepted = m_cmbAcceptedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorAccepted()));
-  Q_ASSERT (indexAccepted >= 0);
+  ENGAUGE_ASSERT (indexAccepted >= 0);
   m_cmbAcceptedPointColor->setCurrentIndex(indexAccepted);
 
   int indexCandidate = m_cmbCandidatePointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorCandidate()));
-  Q_ASSERT (indexCandidate >= 0);
+  ENGAUGE_ASSERT (indexCandidate >= 0);
   m_cmbCandidatePointColor->setCurrentIndex(indexCandidate);
 
   int indexRejected = m_cmbRejectedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorRejected()));
-  Q_ASSERT (indexRejected >= 0);
+  ENGAUGE_ASSERT (indexRejected >= 0);
   m_cmbRejectedPointColor->setCurrentIndex(indexRejected);
 
   initializeBox ();

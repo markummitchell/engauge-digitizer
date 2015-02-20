@@ -8,6 +8,7 @@
 #include "DigitizeStateScale.h"
 #include "DigitizeStateSegment.h"
 #include "DigitizeStateSelect.h"
+#include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -34,7 +35,7 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   m_states.insert (DIGITIZE_STATE_SCALE       , new DigitizeStateScale       (*this));
   m_states.insert (DIGITIZE_STATE_SEGMENT     , new DigitizeStateSegment     (*this));
   m_states.insert (DIGITIZE_STATE_SELECT      , new DigitizeStateSelect      (*this));
-  Q_ASSERT (m_states.size () == NUM_DIGITIZE_STATES);
+  ENGAUGE_ASSERT (m_states.size () == NUM_DIGITIZE_STATES);
 
   m_currentState = NUM_DIGITIZE_STATES; // Value that forces a transition right away
   requestImmediateStateTransition (DIGITIZE_STATE_EMPTY);
@@ -53,7 +54,7 @@ void DigitizeStateContext::appendNewCmd(QUndoCommand *cmd)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::appendNewCmd";
 
-  Q_ASSERT (m_cmdMediator != 0);
+  ENGAUGE_ASSERT (m_cmdMediator != 0);
   m_cmdMediator->push (cmd);
 }
 
@@ -64,7 +65,7 @@ void DigitizeStateContext::bindToCmdMediator (CmdMediator *cmdMediator)
 
 CmdMediator &DigitizeStateContext::cmdMediator ()
 {
-  Q_ASSERT (m_cmdMediator != 0);
+  ENGAUGE_ASSERT (m_cmdMediator != 0);
 
   return *m_cmdMediator;
 }

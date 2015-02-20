@@ -4,6 +4,7 @@
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSpinBoxDouble.h"
 #include "DlgSpinBoxInt.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
@@ -213,8 +214,8 @@ void DlgSettingsCurveProperties::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::handleOk";
 
-  Q_CHECK_PTR (m_modelCurveStylesBefore);
-  Q_CHECK_PTR (m_modelCurveStylesAfter);
+  ENGAUGE_CHECK_PTR (m_modelCurveStylesBefore);
+  ENGAUGE_CHECK_PTR (m_modelCurveStylesAfter);
 
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
                                                                     cmdMediator ().document(),
@@ -262,28 +263,28 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
 {
   int indexCurveName = m_cmbCurveName->findText(curveName);
-  Q_ASSERT (indexCurveName >= 0);
+  ENGAUGE_ASSERT (indexCurveName >= 0);
   m_cmbCurveName->setCurrentIndex(indexCurveName);
 
   int indexPointShape = m_cmbPointShape->findData (QVariant (m_modelCurveStylesAfter->pointShape (curveName)));
-  Q_ASSERT (indexPointShape >= 0);
+  ENGAUGE_ASSERT (indexPointShape >= 0);
   m_cmbPointShape->setCurrentIndex (indexPointShape);
 
   m_spinPointRadius->setValue (m_modelCurveStylesAfter->pointRadius(curveName));
   m_spinPointLineWidth->setValue (m_modelCurveStylesAfter->pointLineWidth(curveName));
 
   int indexPointColor = m_cmbPointColor->findData (QVariant (m_modelCurveStylesAfter->pointColor(curveName)));
-  Q_ASSERT (indexPointColor >= 0);
+  ENGAUGE_ASSERT (indexPointColor >= 0);
   m_cmbPointColor->setCurrentIndex (indexPointColor);
 
   int indexLineColor = m_cmbLineColor->findData (QVariant (m_modelCurveStylesAfter->lineColor(curveName)));
-  Q_ASSERT (indexLineColor >= 0);
+  ENGAUGE_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex (indexLineColor);
 
   m_spinLineWidth->setValue (m_modelCurveStylesAfter->lineWidth(curveName));
 
   int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurveStylesAfter->lineConnectAs (curveName)));
-  Q_ASSERT (indexCurveConnectAs >= 0);
+  ENGAUGE_ASSERT (indexCurveConnectAs >= 0);
   m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
 
   updateControls();

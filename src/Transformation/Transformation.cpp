@@ -1,5 +1,6 @@
 #include "CallbackUpdateTransform.h"
 #include "Document.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <qmath.h>
 #include <QtGlobal>
@@ -65,7 +66,7 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
         break;
 
       default:
-        Q_ASSERT (false);
+        ENGAUGE_ASSERT (false);
     }
 
     double radius = posGraphIn.y ();
@@ -108,7 +109,7 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
         break;
 
       default:
-        Q_ASSERT (false);
+        ENGAUGE_ASSERT (false);
     }
 
     double radius = qSqrt (posGraphIn.x () * posGraphIn.x () + posGraphIn.y () * posGraphIn.y ());
@@ -222,7 +223,7 @@ double Transformation::roundOffSmallValues (double value, double range)
 void Transformation::transform (const QPointF &coordScreen,
                                 QPointF &coordGraph) const
 {
-  Q_ASSERT (m_transformIsDefined);
+  ENGAUGE_ASSERT (m_transformIsDefined);
 
   coordGraph = m_transform.transposed ().map (coordScreen);
 }
@@ -230,7 +231,7 @@ void Transformation::transform (const QPointF &coordScreen,
 void Transformation::transformInverse (const QPointF &coordGraph,
                                        QPointF &coordScreen) const
 {
-  Q_ASSERT (m_transformIsDefined);
+  ENGAUGE_ASSERT (m_transformIsDefined);
 
   coordScreen = m_transform.inverted ().transposed ().map (coordGraph);
 }

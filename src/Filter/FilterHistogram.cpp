@@ -1,3 +1,4 @@
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "FilterHistogram.h"
 #include <QImage>
@@ -20,7 +21,7 @@ int FilterHistogram::binFromPixel (const Filter &filter,
   double s = filter.pixelToZeroToOneOrMinusOne (filterMode,
                                                 pixel,
                                                 rgbBackground);
-  Q_ASSERT (s <= 1.0);
+  ENGAUGE_ASSERT (s <= 1.0);
 
   int bin = -1;
 
@@ -59,7 +60,7 @@ void FilterHistogram::generate (const Filter &filter,
                               rgbBackground);
       if (bin >= 0) {
 
-        Q_ASSERT ((FIRST_NON_EMPTY_BIN_AT_START <= bin) &&
+        ENGAUGE_ASSERT ((FIRST_NON_EMPTY_BIN_AT_START <= bin) &&
                   (LAST_NON_EMPTY_BIN_AT_END >= bin));
         ++(histogramBins [bin]);
 

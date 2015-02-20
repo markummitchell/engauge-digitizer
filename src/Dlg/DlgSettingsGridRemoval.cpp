@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsGridRemoval.h"
 #include "DlgSettingsGridRemoval.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCheckBox>
@@ -295,8 +296,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_modelGridRemovalAfter = new DocumentModelGridRemoval (cmdMediator.document());
 
   // Sanity checks. Incoming defaults must be acceptable to the local limits
-  Q_ASSERT (CLOSE_DISTANCE_MIN <= m_modelGridRemovalAfter->closeDistance());
-  Q_ASSERT (CLOSE_DISTANCE_MAX >= m_modelGridRemovalAfter->closeDistance());
+  ENGAUGE_ASSERT (CLOSE_DISTANCE_MIN <= m_modelGridRemovalAfter->closeDistance());
+  ENGAUGE_ASSERT (CLOSE_DISTANCE_MAX >= m_modelGridRemovalAfter->closeDistance());
 
   // Populate controls
   m_chkRemoveGridLines->setChecked (m_modelGridRemovalAfter->removeDefinedGridLines());

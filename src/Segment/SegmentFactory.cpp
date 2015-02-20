@@ -1,4 +1,5 @@
 #include "DocumentModelSegments.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "Logger.h"
 #include <QApplication>
@@ -68,7 +69,7 @@ QList<QPoint> SegmentFactory::fillPoints(const DocumentModelSegments &modelSegme
   for (itr = m_segments.begin (); itr != m_segments.end(); itr++) {
 
     Segment *segment = *itr;
-    Q_CHECK_PTR(segment);
+    ENGAUGE_CHECK_PTR(segment);
     list += segment->fillPoints(modelSegments);
   }
 
@@ -112,7 +113,7 @@ void SegmentFactory::finishRun(bool *lastBool,
   {
     // This is the start of a new segment
     seg = new Segment(m_scene, (int) (0.5 + (yStart + yStop) / 2.0));
-    Q_CHECK_PTR (seg);
+    ENGAUGE_CHECK_PTR (seg);
 
     segments.append(seg);
   }
@@ -122,7 +123,7 @@ void SegmentFactory::finishRun(bool *lastBool,
     seg = adjacentSegment(lastSegment, yStart, yStop, height);
 
     ++(*madeLines);
-    Q_CHECK_PTR(seg);
+    ENGAUGE_CHECK_PTR(seg);
     seg->appendColumn(x, (int) (0.5 + (yStart + yStop) / 2.0), modelSegments);
   }
 
@@ -185,20 +186,20 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   {
 
     dlg = new QProgressDialog("Scanning segments in image", "Cancel", 0, width);
-    Q_CHECK_PTR (dlg);
+    ENGAUGE_CHECK_PTR (dlg);
     dlg->show();
   }
 
   bool* lastBool = new bool [height];
-  Q_CHECK_PTR(lastBool);
+  ENGAUGE_CHECK_PTR(lastBool);
   bool* currBool = new bool [height];
-  Q_CHECK_PTR(currBool);
+  ENGAUGE_CHECK_PTR(currBool);
   bool* nextBool = new bool [height];
-  Q_CHECK_PTR(nextBool);
+  ENGAUGE_CHECK_PTR(nextBool);
   Segment** lastSegment = new Segment* [height];
-  Q_CHECK_PTR(lastSegment);
+  ENGAUGE_CHECK_PTR(lastSegment);
   Segment** currSegment = new Segment* [height];
-  Q_CHECK_PTR(currSegment);
+  ENGAUGE_CHECK_PTR(currSegment);
 
   Filter filter;
   loadBool(filter, lastBool, imageFiltered, -1);
@@ -320,7 +321,7 @@ void SegmentFactory::removeUnneededLines(Segment **lastSegment,
 
       if (!found) {
 
-        Q_CHECK_PTR(segLast);
+        ENGAUGE_CHECK_PTR(segLast);
         if (segLast->length() < (modelSegments.minLength() - 1) * modelSegments.pointSeparation()) {
 
           // Remove whole segment since it is too short

@@ -1,6 +1,7 @@
 #include "CallbackSceneUpdateAfterCommand.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "Point.h"
 #include <QGraphicsItem>
@@ -28,14 +29,14 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
 
     // Point does not exist in scene yet so create it
     const Curve *curve = m_document.curveForCurveName (curveName);
-    Q_CHECK_PTR (curve);
+    ENGAUGE_CHECK_PTR (curve);
     graphicsPoint = m_scene.addPoint (point.identifier (),
                                       curve->pointStyle (),
                                       point.posScreen ());
   }
 
   // Mark point as wanted
-  Q_CHECK_PTR (graphicsPoint);
+  ENGAUGE_CHECK_PTR (graphicsPoint);
   graphicsPoint->setWanted ();
 
   return rtn;

@@ -1,5 +1,6 @@
 #include <complex.h>
 #include "Correlation.h"
+#include "EngaugeAssert.h"
 #include "fftw3.h"
 #include "Logger.h"
 #include <QDebug>
@@ -45,7 +46,7 @@ void Correlation::correlateWithShift (int N,
 
   int i;
 
-  Q_ASSERT (N == m_N);
+  ENGAUGE_ASSERT (N == m_N);
 
   // Normalize input functions so that:
   // 1) mean is zero. This is used to compute an additive normalization constant

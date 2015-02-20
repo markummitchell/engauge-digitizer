@@ -1,5 +1,6 @@
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QColor>
@@ -27,7 +28,7 @@ DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
 
 CmdMediator &DlgSettingsAbstractBase::cmdMediator ()
 {
-  Q_CHECK_PTR (m_cmdMediator);
+  ENGAUGE_CHECK_PTR (m_cmdMediator);
 
   return *m_cmdMediator;
 }

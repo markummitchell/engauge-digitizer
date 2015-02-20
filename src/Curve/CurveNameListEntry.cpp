@@ -1,5 +1,6 @@
 #include "CurveNameListEntry.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QStringList>
 #include <QXmlStreamWriter>
@@ -25,7 +26,7 @@ CurveNameListEntry::CurveNameListEntry (const QString &curveNameCurrent,
 CurveNameListEntry::CurveNameListEntry (const QString &fromText)
 {
   QStringList values = fromText.split (DELIMITER);
-  Q_ASSERT (values.count () == 3);
+  ENGAUGE_ASSERT (values.count () == 3);
   m_curveNameCurrent = values.at (0);
   m_curveNameOriginal = values.at (1);
   m_numPoints = values.at (2).toInt();

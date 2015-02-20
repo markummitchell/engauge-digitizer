@@ -3,6 +3,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateColorPicker.h"
 #include "DocumentModelFilter.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "FilterHistogram.h"
 #include "Logger.h"
@@ -281,6 +282,6 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelFilter &mo
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 }

@@ -2,6 +2,7 @@
 #include "CmdSettingsCoords.h"
 #include "DlgSettingsCoords.h"
 #include "DocumentModelCoords.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <math.h>
@@ -95,13 +96,13 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
 
       case COORD_THETA_UNITS_RADIANS:
         static QString radiansUnits [] = {"0", "PI / 2", "PI", "3 * PI / 2"};
-        Q_ASSERT (direction < 4);
+        ENGAUGE_ASSERT (direction < 4);
         angle = radiansUnits [direction];
         break;
 
       case COORD_THETA_UNITS_TURNS:
         static QString turnsUnits [] = {"0", "1 / 4", "1 / 2", "3 / 4"};
-        Q_ASSERT (direction < 4);
+        ENGAUGE_ASSERT (direction < 4);
         angle = turnsUnits [direction];
         break;
 

@@ -1,6 +1,7 @@
 #include "CurveNameListEntry.h"
 #include "CurveNameList.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "QtToString.h"
 #include <QVariant>
@@ -62,7 +63,7 @@ QVariant CurveNameList::data (const QModelIndex &index,
   } else if (index.column () == 2) {
     return curvesEntry.numPoints ();
   } else {
-    Q_ASSERT (false);
+    ENGAUGE_ASSERT (false);
   }
 }
 
@@ -187,7 +188,7 @@ bool CurveNameList::setData (const QModelIndex &index,
       } else if (index.column () == 2) {
         curvesEntry.setNumPoints (value.toInt ());
       } else {
-        Q_ASSERT (false);
+        ENGAUGE_ASSERT (false);
       }
 
       m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry

@@ -1,4 +1,5 @@
 #include "CallbackAxisPointsAbstract.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
 #include "QtToString.h"
@@ -159,7 +160,7 @@ bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int 
 
 QTransform CallbackAxisPointsAbstract::transform ()
 {
-  Q_ASSERT (m_numberAxisPoints == 3);
+  ENGAUGE_ASSERT (m_numberAxisPoints == 3);
 
   QTransform screenInputsInv = m_screenInputs.inverted ();
   QTransform transform = m_graphOutputs * screenInputsInv;

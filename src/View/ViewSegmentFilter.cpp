@@ -1,5 +1,6 @@
 #include "CurveConstants.h"
 #include "CurveFilter.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include <QPainter>
 #include <QPixmap>
@@ -101,7 +102,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   return QColor (r, g, b);

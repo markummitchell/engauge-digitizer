@@ -1,4 +1,5 @@
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "PointStyle.h"
 #include <qmath.h>
@@ -112,7 +113,7 @@ QPolygonF PointStyle::polygon () const
   switch (m_shape) {
 
     case POINT_SHAPE_CIRCLE:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
       break;
 
     case POINT_SHAPE_CROSS:
@@ -174,7 +175,7 @@ QPolygonF PointStyle::polygon () const
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   QPolygonF polygon (points);

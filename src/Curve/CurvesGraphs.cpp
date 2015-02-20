@@ -1,6 +1,7 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QTextStream>
@@ -109,7 +110,7 @@ void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
     }
   }
 
-  Q_ASSERT (false);
+  ENGAUGE_ASSERT (false);
 }
 
 void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)

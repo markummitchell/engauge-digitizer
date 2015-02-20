@@ -1,4 +1,5 @@
 #include "CmdMediator.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include "TransformationStateAbstractBase.h"
@@ -10,7 +11,7 @@ TransformationStateContext::TransformationStateContext(QGraphicsScene &scene)
 {
   m_states.insert (TRANSFORMATION_STATE_DEFINED  , new TransformationStateDefined   (*this, scene));
   m_states.insert (TRANSFORMATION_STATE_UNDEFINED, new TransformationStateUndefined (*this, scene));
-  Q_ASSERT (m_states.size () == NUM_TRANSFORMATION_STATES);
+  ENGAUGE_ASSERT (m_states.size () == NUM_TRANSFORMATION_STATES);
 
   m_currentState = NUM_TRANSFORMATION_STATES; // Value that forces a transition right away
 }

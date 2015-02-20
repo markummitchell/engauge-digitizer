@@ -1,7 +1,9 @@
 #include "CmdAbstract.h"
 #include "CmdMediator.h"
 #include "Document.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
+#include "LoggerUpload.h"
 #include "MainWindow.h"
 #include "Point.h"
 #include <QImage>
@@ -16,6 +18,8 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator image=" << image.width() << "x" << image.height ();
 
   connectSignals(mainWindow);
+
+  LoggerUpload::bindToCmdMediator(this);
 }
 
 CmdMediator::CmdMediator (MainWindow &mainWindow,
@@ -25,6 +29,13 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
 
   connectSignals(mainWindow);
+
+  LoggerUpload::bindToCmdMediator(this);
+}
+
+CmdMediator::~CmdMediator()
+{
+  LoggerUpload::bindToCmdMediator(0);
 }
 
 void CmdMediator::applyTransformation (const Transformation &transformation)
@@ -84,7 +95,7 @@ void CmdMediator::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QSt
 
 QPixmap CmdMediator::pixmap () const
 {
-  Q_ASSERT (m_document.successfulRead ());
+  ENGAUGE_ASSERT (m_document.successfulRead ());
 
   return m_document.pixmap ();
 }

@@ -1,4 +1,5 @@
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
 #include <QStringList>
@@ -18,7 +19,7 @@ Point::Point(const QString &curveName,
   m_posGraph (posGraph),
   m_ordinal (0)
 {
-  Q_ASSERT (!curveName.isEmpty ());
+  ENGAUGE_ASSERT (!curveName.isEmpty ());
 }
 
 Point::Point(const QString &curveName,
@@ -30,7 +31,7 @@ Point::Point(const QString &curveName,
   m_posGraph (posGraph),
   m_ordinal (0)
 {
-  Q_ASSERT (!curveName.isEmpty ());
+  ENGAUGE_ASSERT (!curveName.isEmpty ());
 }
 
 Point::Point (const Point &point)

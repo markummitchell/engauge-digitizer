@@ -2,6 +2,7 @@
 #include "CurveConstants.h"
 #include "CurveFilter.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -128,7 +129,7 @@ double CurveFilter::high () const
           (double) (VALUE_MAX - VALUE_MIN);
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 }
 
@@ -226,7 +227,7 @@ double CurveFilter::low () const
           (double) (VALUE_MAX - VALUE_MIN);
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 }
 
@@ -266,13 +267,13 @@ void CurveFilter::setFilterMode(FilterMode filterMode)
 
 void CurveFilter::setForegroundHigh (int foregroundHigh)
 {
-  Q_ASSERT (FOREGROUND_MIN <= foregroundHigh && foregroundHigh <= FOREGROUND_MAX);
+  ENGAUGE_ASSERT (FOREGROUND_MIN <= foregroundHigh && foregroundHigh <= FOREGROUND_MAX);
   m_foregroundHigh = foregroundHigh;
 }
 
 void CurveFilter::setForegroundLow (int foregroundLow)
 {
-  Q_ASSERT (FOREGROUND_MIN <= foregroundLow && foregroundLow <= FOREGROUND_MAX);
+  ENGAUGE_ASSERT (FOREGROUND_MIN <= foregroundLow && foregroundLow <= FOREGROUND_MAX);
   m_foregroundLow = foregroundLow;
 }
 
@@ -300,31 +301,31 @@ void CurveFilter::setHigh (double s0To1)
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 }
 
 void CurveFilter::setHueHigh (int hueHigh)
 {
-  Q_ASSERT (HUE_MIN <= hueHigh && hueHigh <= HUE_MAX);
+  ENGAUGE_ASSERT (HUE_MIN <= hueHigh && hueHigh <= HUE_MAX);
   m_hueHigh = hueHigh;
 }
 
 void CurveFilter::setHueLow (int hueLow)
 {
-  Q_ASSERT (HUE_MIN <= hueLow && hueLow <= HUE_MAX);
+  ENGAUGE_ASSERT (HUE_MIN <= hueLow && hueLow <= HUE_MAX);
   m_hueLow = hueLow;
 }
 
 void CurveFilter::setIntensityHigh (int intensityHigh)
 {
-  Q_ASSERT (INTENSITY_MIN <= intensityHigh && intensityHigh <= INTENSITY_MAX);
+  ENGAUGE_ASSERT (INTENSITY_MIN <= intensityHigh && intensityHigh <= INTENSITY_MAX);
   m_intensityHigh = intensityHigh;
 }
 
 void CurveFilter::setIntensityLow (int intensityLow)
 {
-  Q_ASSERT (INTENSITY_MIN <= intensityLow && intensityLow <= INTENSITY_MAX);
+  ENGAUGE_ASSERT (INTENSITY_MIN <= intensityLow && intensityLow <= INTENSITY_MAX);
   m_intensityLow = intensityLow;
 }
 
@@ -352,31 +353,31 @@ void CurveFilter::setLow (double s0To1)
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 }
 
 void CurveFilter::setSaturationHigh (int saturationHigh)
 {
-  Q_ASSERT (SATURATION_MIN <= saturationHigh && saturationHigh <= SATURATION_MAX);
+  ENGAUGE_ASSERT (SATURATION_MIN <= saturationHigh && saturationHigh <= SATURATION_MAX);
   m_saturationHigh = saturationHigh;
 }
 
 void CurveFilter::setSaturationLow (int saturationLow)
 {
-  Q_ASSERT (SATURATION_MIN <= saturationLow && saturationLow <= SATURATION_MAX);
+  ENGAUGE_ASSERT (SATURATION_MIN <= saturationLow && saturationLow <= SATURATION_MAX);
   m_saturationLow = saturationLow;
 }
 
 void CurveFilter::setValueHigh (int valueHigh)
 {
-  Q_ASSERT (VALUE_MIN <= valueHigh && valueHigh <= VALUE_MAX);
+  ENGAUGE_ASSERT (VALUE_MIN <= valueHigh && valueHigh <= VALUE_MAX);
   m_valueHigh = valueHigh;
 }
 
 void CurveFilter::setValueLow (int valueLow)
 {
-  Q_ASSERT (VALUE_MIN <= valueLow && valueLow <= VALUE_MAX);
+  ENGAUGE_ASSERT (VALUE_MIN <= valueLow && valueLow <= VALUE_MAX);
   m_valueLow = valueLow;
 }
 

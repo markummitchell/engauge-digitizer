@@ -1,4 +1,5 @@
 #include "CurveConstants.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "mmsubs.h"
 #include <QDebug>
@@ -23,9 +24,9 @@ void Filter::filterImage (const QImage &imageOriginal,
                           double high,
                           QRgb rgbBackground)
 {
-  Q_ASSERT (imageOriginal.width () == imageFiltered.width());
-  Q_ASSERT (imageOriginal.height() == imageFiltered.height());
-  Q_ASSERT (imageFiltered.format () == QImage::Format_RGB32);
+  ENGAUGE_ASSERT (imageOriginal.width () == imageFiltered.width());
+  ENGAUGE_ASSERT (imageOriginal.height() == imageFiltered.height());
+  ENGAUGE_ASSERT (imageFiltered.format () == QImage::Format_RGB32);
 
   for (int x = 0; x < imageOriginal.width(); x++) {
     for (int y = 0; y < imageOriginal.height (); y++) {
@@ -188,7 +189,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   return s;
@@ -231,7 +232,7 @@ int Filter::zeroToOneToValue (FilterMode filterMode,
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   return value;

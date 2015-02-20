@@ -1,3 +1,4 @@
+#include "EngaugeAssert.h"
 #include "ViewProfileScale.h"
 #include <QPainter>
 
@@ -31,7 +32,7 @@ void ViewProfileScale::paintEvent (QPaintEvent *event)
       break;
 
     default:
-      Q_ASSERT (false);
+      ENGAUGE_ASSERT (false);
   }
 
   QLabel::paintEvent (event);

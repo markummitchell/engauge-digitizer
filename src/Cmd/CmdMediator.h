@@ -25,6 +25,9 @@ public:
   CmdMediator (MainWindow &mainWindow,
                const QString &fileName);
 
+  /// Destructor
+  ~CmdMediator();
+
   /// See CurvesGraphs::applyTransformation
   void applyTransformation (const Transformation &transformation);
 

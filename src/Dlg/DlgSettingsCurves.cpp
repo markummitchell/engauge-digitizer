@@ -2,6 +2,7 @@
 #include "CmdSettingsCurves.h"
 #include "CurveNameList.h"
 #include "DlgSettingsCurves.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDebug>
@@ -25,7 +26,7 @@ void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
                                          const QString &curveNameOriginal,
                                          int numPoints)
 {
-  Q_CHECK_PTR (m_curveNameList);
+  ENGAUGE_CHECK_PTR (m_curveNameList);
 
   int row = m_curveNameList->rowCount ();
   insertCurveName (row,
@@ -196,7 +197,7 @@ QString DlgSettingsCurves::nextCurveName () const
 {
   const QString DASH_ONE ("-1"); // Nice value to start a new range at a lower level than the current level
 
-  Q_CHECK_PTR (m_listCurves);
+  ENGAUGE_CHECK_PTR (m_listCurves);
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_listCurves->model ()->rowCount ();
@@ -290,7 +291,7 @@ QString DlgSettingsCurves::nextCurveName () const
 
 int DlgSettingsCurves::numberAtEnd (const QString &str) const
 {
-  Q_ASSERT (endsWithNumber (str));
+  ENGAUGE_ASSERT (endsWithNumber (str));
 
   // Go backward until the first nondigit
   int sign = +1;
@@ -408,7 +409,7 @@ void DlgSettingsCurves::updateControls ()
 
   enableOk (true);
 
-  Q_CHECK_PTR (m_listCurves);
+  ENGAUGE_CHECK_PTR (m_listCurves);
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_curveNameList->rowCount ();

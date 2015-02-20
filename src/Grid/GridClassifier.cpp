@@ -1,4 +1,5 @@
 #include "Correlation.h"
+#include "EngaugeAssert.h"
 #include "Filter.h"
 #include "GridClassifier.h"
 #include "Logger.h"
@@ -90,8 +91,8 @@ void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
   yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
   yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
 
-  Q_ASSERT (xMin < xMax);
-  Q_ASSERT (yMin < yMax);
+  ENGAUGE_ASSERT (xMin < xMax);
+  ENGAUGE_ASSERT (yMin < yMax);
 }
 
 void GridClassifier::initializeHistogramBins ()
@@ -169,8 +170,8 @@ void GridClassifier::populateHistogramBins (const QImage &image,
         int binX = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.x() - xMin) / (xMax - xMin);
         int binY = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.y() - yMin) / (yMax - yMin);
 
-        Q_ASSERT (binX < NUM_HISTOGRAM_BINS);
-        Q_ASSERT (binY < NUM_HISTOGRAM_BINS);
+        ENGAUGE_ASSERT (binX < NUM_HISTOGRAM_BINS);
+        ENGAUGE_ASSERT (binY < NUM_HISTOGRAM_BINS);
 
         ++m_binsX [binX];
         ++m_binsY [binY];

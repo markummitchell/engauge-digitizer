@@ -26,6 +26,7 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "EngaugeAssert.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
@@ -131,7 +132,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 CmdMediator &MainWindow::cmdMediator ()
 {
-  Q_CHECK_PTR (m_cmdMediator);
+  ENGAUGE_CHECK_PTR (m_cmdMediator);
 
   return *m_cmdMediator;
 }
@@ -745,7 +746,7 @@ void MainWindow::createStateContextDigitize ()
 
 void MainWindow::createStateContextTransformation ()
 {
-  Q_CHECK_PTR (m_scene);
+  ENGAUGE_CHECK_PTR (m_scene);
 
   m_transformationStateContext = new TransformationStateContext (*m_scene);
 }
@@ -1090,7 +1091,7 @@ bool MainWindow::saveFile (const QString &fileName)
 
 GraphicsScene &MainWindow::scene ()
 {
-  Q_CHECK_PTR (m_scene);
+  ENGAUGE_CHECK_PTR (m_scene);
   return *m_scene;
 }
 
@@ -1101,7 +1102,7 @@ BackgroundImage MainWindow::selectOriginal(BackgroundImage backgroundImage)
   BackgroundImage previousBackground = (BackgroundImage) m_cmbBackground->currentData().toInt();
 
   int index = m_cmbBackground->findData (backgroundImage);
-  Q_ASSERT (index >= 0);
+  ENGAUGE_ASSERT (index >= 0);
 
   m_cmbBackground->setCurrentIndex(index);
 
@@ -1150,7 +1151,7 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
   if (dir.exists ()) {
 
     bool success = QDir::setCurrent (dir.absolutePath ()); // Return to chosen directory the next time
-    Q_ASSERT (success);
+    ENGAUGE_ASSERT (success);
 
   } else {
 
@@ -1782,7 +1783,7 @@ void MainWindow::slotViewGroupBackground(QAction *action)
   } else if (action == m_actionViewBackgroundFiltered) {
     indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_FILTERED));
   } else {
-    Q_ASSERT (false);
+    ENGAUGE_ASSERT (false);
   }
   m_cmbBackground->setCurrentIndex (indexBackground);
 
@@ -1800,7 +1801,7 @@ void MainWindow::slotViewGroupStatus(QAction *action)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupStatus";
 
-  Q_CHECK_PTR (m_statusBar); // At startup, make sure status bar is already set up when View menu gets initialized
+  ENGAUGE_CHECK_PTR (m_statusBar); // At startup, make sure status bar is already set up when View menu gets initialized
 
   if (action == m_actionStatusNever) {
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_NEVER);
@@ -2444,7 +2445,7 @@ void MainWindow::updateViewedPoints ()
     m_scene->showPoints (false);
 
   } else {
-    Q_ASSERT (false);
+    ENGAUGE_ASSERT (false);
   }
 }
 
@@ -2477,12 +2478,12 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
 
 GraphicsView &MainWindow::view ()
 {
-  Q_CHECK_PTR (m_view);
+  ENGAUGE_CHECK_PTR (m_view);
   return *m_view;
 }
 
 const GraphicsView &MainWindow::view () const
 {
-  Q_CHECK_PTR (m_view);
+  ENGAUGE_CHECK_PTR (m_view);
   return *m_view;
 }

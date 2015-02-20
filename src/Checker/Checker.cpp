@@ -1,4 +1,5 @@
 #include "Checker.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "Logger.h"
 #include <QGraphicsEllipseItem>
@@ -231,7 +232,7 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  Q_ASSERT (polygon.count () == NUM_AXES_POINTS);
+  ENGAUGE_ASSERT (polygon.count () == NUM_AXES_POINTS);
 
   // Convert pixel coordinates in QPointF to screen and graph coordinates in Point using
   // identity transformation, so this routine can call the general case routine
@@ -264,7 +265,7 @@ void Checker::prepareForDisplay (const QList<Point> &points,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  Q_ASSERT (points.count () == NUM_AXES_POINTS);
+  ENGAUGE_ASSERT (points.count () == NUM_AXES_POINTS);
 
   // Remove previous lines
   deleteSide (m_sideLeft);
