@@ -27,6 +27,7 @@
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "ExportToFile.h"
 #include "Filter.h"
@@ -851,11 +852,22 @@ void MainWindow::doErrorReport (const char *context,
     QXmlStreamWriter writer (&xmlCommands);
     writer.setAutoFormatting(true);
 
+    writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
+
+    // Commands
     m_cmdMediator->saveXml(writer);
 
-    std::cerr << "Error '" << context << "' in file " << file << " at line " << line << std::endl
-              << "Details: " << comment << std::endl
-              << xmlCommands.toLatin1().data() << std::endl;
+    // Error
+    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_CONTEXT, context);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_FILE, file);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_LINE, QString::number (line));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_COMMENT, comment);
+    writer.writeEndElement();
+
+    writer.writeEndElement();
+
+    std::cerr << xmlCommands.toLatin1().data() << std::endl;
   }
 }
 
