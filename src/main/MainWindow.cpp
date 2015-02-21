@@ -164,6 +164,7 @@ void MainWindow::createActionsDigitize ()
   QIcon iconSelect (pixmapSelect);
 
   m_actionDigitizeSelect = new QAction (iconSelect, DIGITIZE_ACTION_SELECT, this);
+  m_actionDigitizeSelect->setShortcut (QKeySequence (tr ("Shift+F2")));
   m_actionDigitizeSelect->setCheckable (true);
   m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
   m_actionDigitizeSelect->setWhatsThis (tr ("Select\n\n"
@@ -171,6 +172,7 @@ void MainWindow::createActionsDigitize ()
   connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
 
   m_actionDigitizeAxis = new QAction (iconAxis, DIGITIZE_ACTION_AXIS_POINT, this);
+  m_actionDigitizeAxis->setShortcut (QKeySequence (tr ("Shift+F3")));
   m_actionDigitizeAxis->setCheckable (true);
   m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
   m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
@@ -181,6 +183,7 @@ void MainWindow::createActionsDigitize ()
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
 
   m_actionDigitizeCurve = new QAction (iconCurve, DIGITIZE_ACTION_CURVE_POINT, this);
+  m_actionDigitizeCurve->setShortcut (QKeySequence (tr ("Shift+F4")));
   m_actionDigitizeCurve->setCheckable (true);
   m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
   m_actionDigitizeCurve->setWhatsThis (tr ("Digitize Curve Point\n\n"
@@ -191,6 +194,7 @@ void MainWindow::createActionsDigitize ()
   connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
 
   m_actionDigitizePointMatch = new QAction (iconPointMatch, DIGITIZE_ACTION_POINT_MATCH, this);
+  m_actionDigitizePointMatch->setShortcut (QKeySequence (tr ("Shift+F5")));
   m_actionDigitizePointMatch->setCheckable (true);
   m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
   m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
@@ -200,6 +204,7 @@ void MainWindow::createActionsDigitize ()
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
 
   m_actionDigitizeColorPicker = new QAction (iconColorPicker, DIGITIZE_ACTION_COLOR_PICKER, this);
+  m_actionDigitizeColorPicker->setShortcut (QKeySequence (tr ("Shift+F6")));
   m_actionDigitizeColorPicker->setCheckable (true);
   m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Points mode."));
   m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Points filtering\n\n"
@@ -209,6 +214,7 @@ void MainWindow::createActionsDigitize ()
   connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
   m_actionDigitizeSegment = new QAction (iconSegment, DIGITIZE_ACTION_SEGMENT_POINTS, this);
+  m_actionDigitizeSegment->setShortcut (QKeySequence (tr ("Shift+F7")));
   m_actionDigitizeSegment->setCheckable (true);
   m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
   m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
@@ -333,13 +339,13 @@ void MainWindow::createActionsFile ()
 
 void MainWindow::createActionsHelp ()
 {
+  m_actionWhatsThis = QWhatsThis::createAction(this);
+  m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
+
   m_actionAbout = new QAction(tr ("About Engauge"), this);
   m_actionAbout->setStatusTip (tr ("About the application."));
   m_actionAbout->setWhatsThis (tr ("About Engauge\n\nAbout the application."));
   connect (m_actionAbout, SIGNAL (triggered ()), this, SLOT (slotHelpAbout ()));
-
-  m_actionWhatsThis = QWhatsThis::createAction(this);
-  m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
 }
 
 void MainWindow::createActionsSettings ()
@@ -701,9 +707,9 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsSegments);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
-  m_menuHelp->addAction (m_actionAbout);
   m_menuHelp->addAction (m_actionWhatsThis);
-  m_menuHelp->insertSeparator (m_actionWhatsThis);
+  m_menuHelp->insertSeparator (m_actionAbout);
+  m_menuHelp->addAction (m_actionAbout);
 
   updateRecentFileList();
 }
