@@ -1,18 +1,15 @@
-#include "CmdMediator.h"
-#include <iostream>
 #include "LoggerUpload.h"
+#include "MainWindow.h"
 
-using namespace std;
-
-const CmdMediator *LoggerUpload::m_cmdMediator = (const CmdMediator*) 0;
+const MainWindow *LoggerUpload::m_mainWindow = (const MainWindow*) 0;
 
 LoggerUpload::LoggerUpload()
 {
 }
 
-void LoggerUpload::bindToCmdMediator(const CmdMediator *cmdMediator)
+void LoggerUpload::bindToMainWindow (const MainWindow *mainWindow)
 {
-  m_cmdMediator = cmdMediator;
+  m_mainWindow = mainWindow;
 }
 
 void LoggerUpload::loggerAssert(const char *condition,
@@ -40,17 +37,11 @@ void LoggerUpload::loggerOutput(const char *comment,
                                 int line,
                                 const char *context)
 {
-  if (m_cmdMediator != 0) {
-
-    QString xmlCommands;
-    QXmlStreamWriter writer (&xmlCommands);
-    writer.setAutoFormatting(true);
-
-    m_cmdMediator->saveXml(writer);
-
-    cerr << "Error '" << context << "' in file " << file << " at line " << line << endl
-         << "Details: " << comment << endl
-         << xmlCommands.toLatin1().data() << endl;
+  if (m_mainWindow != 0) {
+    m_mainWindow->doErrorReport(comment,
+                                file,
+                                line,
+                                context);
   }
 
   exit (-1); // Stop execution since it is no longer safe to continue

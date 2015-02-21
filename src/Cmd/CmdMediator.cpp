@@ -19,8 +19,6 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator image=" << image.width() << "x" << image.height ();
 
   connectSignals(mainWindow);
-
-  LoggerUpload::bindToCmdMediator(this);
 }
 
 CmdMediator::CmdMediator (MainWindow &mainWindow,
@@ -30,13 +28,10 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
 
   connectSignals(mainWindow);
-
-  LoggerUpload::bindToCmdMediator(this);
 }
 
 CmdMediator::~CmdMediator()
 {
-  LoggerUpload::bindToCmdMediator(0);
 }
 
 void CmdMediator::applyTransformation (const Transformation &transformation)

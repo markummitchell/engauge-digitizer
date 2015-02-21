@@ -61,6 +61,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateScale.h \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
+    Dlg/DlgAbout.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
@@ -197,6 +198,7 @@ SOURCES += \
     DigitizeState/DigitizeStateScale.cpp \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
+    Dlg/DlgAbout.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \

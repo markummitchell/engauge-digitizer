@@ -57,6 +57,12 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator &cmdMediator();
 
+  /// Make error report. Do not exit since we want nothing to happen if user clicks hidden shortcut in DlgAbout
+  void doErrorReport(const char *comment,
+                     const char *file,
+                     int line,
+                     const char *context) const;
+
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
