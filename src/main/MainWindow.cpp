@@ -42,6 +42,7 @@
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QDebug>
+#include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsLineItem>
@@ -65,6 +66,7 @@
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
+#include "VersionNumber.h"
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
@@ -84,6 +86,8 @@ const QString CSV_FILENAME_EXTENSION ("csv");
 const QString TSV_FILENAME_EXTENSION ("tsv");
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
+
+const char *VERSION_NUMBER = "6.0";
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -841,36 +845,6 @@ void MainWindow::createToolBars ()
   addToolBar (m_toolSettingsViews);
 }
 
-void MainWindow::doErrorReport (const char *context,
-                                const char *file,
-                                int line,
-                                const char *comment) const
-{
-  if (m_cmdMediator != 0) {
-
-    QString xmlCommands;
-    QXmlStreamWriter writer (&xmlCommands);
-    writer.setAutoFormatting(true);
-
-    writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
-
-    // Commands
-    m_cmdMediator->saveXml(writer);
-
-    // Error
-    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_CONTEXT, context);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_FILE, file);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_LINE, QString::number (line));
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_COMMENT, comment);
-    writer.writeEndElement();
-
-    writer.writeEndElement();
-
-    std::cerr << xmlCommands.toLatin1().data() << std::endl;
-  }
-}
-
 void MainWindow::fileImport (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport fileName=" << fileName.toLatin1 ().data ();
@@ -899,6 +873,20 @@ void MainWindow::loadCurveListFromCmdMediator ()
     m_cmbCurve->addItem (curvesGraphName);
   }
   m_cmbCurve->setCurrentIndex (0);
+}
+
+void MainWindow::loadDomInputFile(QDomDocument &domInputFile) const
+{
+  QFile file (m_currentFile);
+
+  // File should be available for opening, if not then the dom will be left empty. We assume it has not been
+  // modified since opened
+  if (!file.open (QIODevice::ReadOnly)) {
+    return;
+  }
+
+  domInputFile.setContent (&file);
+  file.close();
 }
 
 void MainWindow::loadFile (const QString &fileName)
@@ -1097,6 +1085,97 @@ void MainWindow::resizeEvent(QResizeEvent * /* event */)
   }
 }
 
+void MainWindow::saveErrorReport (const char *context,
+                                  const char *file,
+                                  int line,
+                                  const char *comment) const
+{
+  const bool DEEP_COPY = true;
+
+  if (m_cmdMediator != 0) {
+
+    QString xmlErrorReport;
+    QXmlStreamWriter writer (&xmlErrorReport);
+    writer.setAutoFormatting(true);
+
+    // Entire error report contains metadata, commands and other details
+    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR_REPORT);
+
+    // Version
+    writer.writeStartElement(DOCUMENT_SERIALIZE_APPLICATION);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
+    writer.writeEndElement();
+
+    // Image
+    writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (m_cmdMediator->pixmap().width ()));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (m_cmdMediator->pixmap().height ()));
+    writer.writeEndElement();
+
+    // Placeholder for original file, before the commands in the command stack were applied
+    writer.writeStartElement(DOCUMENT_SERIALIZE_FILE);
+    writer.writeEndElement();
+
+    // Commands
+    m_cmdMediator->saveXml(writer);
+
+    // Error
+    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_CONTEXT, context);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_FILE, file);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_LINE, QString::number (line));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_COMMENT, comment);
+    writer.writeEndElement();
+
+    writer.writeEndElement();
+
+    // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents
+    QDomDocument domErrorReport ("ErrorReport");
+    domErrorReport.setContent (xmlErrorReport);
+    QDomDocument domInputFile;
+    loadDomInputFile (domInputFile);
+    QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
+    fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+    QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
+    if (nodesFileTo.count () > 0) {
+      QDomNode nodeFileTo = nodesFileTo.at (0);
+      nodeFileTo.appendChild (fragmentFileFrom);
+    }
+
+    // Replace DOCUMENT_SERIALIZE_IMAGE by same node with CDATA removed, since:
+    // 1) it is very big and working with smaller files, especially in emails, is easier
+    // 2) removing the image better preserves user's privacy
+    // 3) having the actual image does not help that much when debugging
+    QDomNodeList nodesDocument = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
+    for (int i = 0 ; i < nodesDocument.count(); i++) {
+      QDomNode nodeDocument = nodesDocument.at (i);
+      QDomElement elemImage = nodeDocument.firstChildElement(DOCUMENT_SERIALIZE_IMAGE);
+      if (!elemImage.isNull()) {
+
+        // Get old image attributes so we can create an empty document with the same size
+        if (elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
+            elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
+
+          int width = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
+          int height = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+
+          QDomNode nodeReplacement;
+          QDomElement elemReplacement = nodeReplacement.toElement();
+          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH, width);
+          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT, height);
+
+          // Replace with the new and then remove the old
+          nodeDocument.insertBefore (nodeReplacement,
+                                     elemImage);
+          nodeDocument.removeChild(elemImage);
+        }
+      }
+    }
+
+    std::cerr << domErrorReport.toString().toLatin1().data() << std::endl;
+  }
+}
+
 bool MainWindow::saveFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::saveFile fileName=" << fileName.toLatin1 ().data ();
@@ -1156,11 +1235,10 @@ QString MainWindow::selectedGraphCurve () const
 
 void MainWindow::setCurrentFile (const QString &fileName)
 {
-  const int VersionNumber = 6;
   const QString PLACEHOLDER ("[*]");
 
   QString title = QString (tr ("Engauge Digitizer %1")
-                           .arg (VersionNumber));
+                           .arg (VERSION_NUMBER));
 
   QString fileNameStripped = fileName;
   if (!fileName.isEmpty()) {

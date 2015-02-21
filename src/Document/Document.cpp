@@ -466,6 +466,12 @@ void Document::saveXml(QXmlStreamWriter &writer)
   QImage img = m_pixmap.toImage ();
   str << img;
   writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
+
+  // Image width and height are explicitly inserted for error reports, since the CDATA is removed
+  // but we still want the image size for reconstructing the error(s)
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (img.width()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
+
   writer.writeCDATA (array.toBase64 ());
   writer.writeEndElement();
 

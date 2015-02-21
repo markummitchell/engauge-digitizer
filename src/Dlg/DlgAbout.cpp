@@ -1,6 +1,7 @@
 #include "DlgAbout.h"
 #include "MainWindow.h"
 #include <QKeyEvent>
+#include "VersionNumber.h"
 
 DlgAbout::DlgAbout (MainWindow &mainWindow) :
   QMessageBox (&mainWindow),
@@ -8,9 +9,9 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
 {
   setWindowTitle (tr ("About Engauge"));
   setTextFormat (Qt::RichText);
-  setText (QString ("%1 %2 %3")
+  setText (QString ("%1 Version %2 %3")
            .arg (tr ("<p>Engauge Digitizer</b>"))
-           .arg ("Version 6.0")
+           .arg (VERSION_NUMBER)
            .arg (tr ("</p><p>&copy; 2014 Mark Mitchell</p>"
                      "<p>Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from "
                      "images of graphs. The process may be considered as \"inverse graphing\". When you \"engauge\" a document, "
@@ -38,10 +39,10 @@ void DlgAbout::keyPressEvent(QKeyEvent *event)
       ((event->modifiers() & Qt::ShiftModifier) != 0) &&
       ((event->modifiers() & Qt::ControlModifier) != 0)) {
 
-    m_mainWindow.doErrorReport("Shift+Control+E",
-                               __FILE__,
-                               __LINE__,
-                               "assert");
+    m_mainWindow.saveErrorReport("Shift+Control+E",
+                                 __FILE__,
+                                 __LINE__,
+                                 "assert");
   }
 
   QMessageBox::keyPressEvent(event);

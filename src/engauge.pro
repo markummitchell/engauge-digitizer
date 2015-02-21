@@ -88,6 +88,7 @@ HEADERS  += \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
     Document/DocumentSerialize.h \
+    include/EngaugeAssert.h \
     util/EnumsToQt.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsSelectionFunctions.h \
@@ -140,6 +141,7 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
+    include/VersionNumber.h \
     View/ViewPointStyle.h \
     View/ViewPreview.h \
     View/ViewProfile.h \
@@ -148,8 +150,7 @@ HEADERS  += \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
     util/Xml.h \
-    include/ZoomFactor.h \
-    include/EngaugeAssert.h
+    include/ZoomFactor.h
 
 SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
@@ -275,7 +276,7 @@ SOURCES += main/main.cpp
 
 TARGET = ../bin/engauge
 
-QT += core gui network printsupport widgets
+QT += core gui network printsupport widgets xml
 
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \

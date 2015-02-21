@@ -33,6 +33,7 @@ class QAction;
 class QActionGroup;
 class QCloseEvent;
 class QComboBox;
+class QDomDocument;
 class QGraphicsLineItem;
 class QGraphicsPixmapItem;
 class QMenu;
@@ -57,14 +58,14 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator &cmdMediator();
 
-  /// Make error report. Do not exit since we want nothing to happen if user clicks hidden shortcut in DlgAbout
-  void doErrorReport(const char *comment,
-                     const char *file,
-                     int line,
-                     const char *context) const;
-
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
+
+  /// Save error report. Does not exit since we want nothing to happen if user clicks hidden shortcut in DlgAbout
+  void saveErrorReport(const char *comment,
+                       const char *file,
+                       int line,
+                       const char *context) const;
 
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
@@ -212,6 +213,7 @@ private:
   void createToolBars();
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
+  void loadDomInputFile(QDomDocument &domInputFile) const;
   void loadFile (const QString &fileName);
   void loadImage (const QString &fileName,
                   const QImage &image);
