@@ -1,3 +1,5 @@
+<h1>This Software Is Not Yet Operational!</h1>
+
 engauge6
 ========
 
@@ -29,3 +31,6 @@ New features already added to Engauge2:
 2. Single settings dialog (with tabs) that is resizable preview windows
 3. Import by drag-and-drop
 4. Replacement of Qt3 (which is at its end of life) by Qt5
+5. Much better zooming
+6. Color picking straight from the original image
+7. Uploadable error report generated when a programming error is encountered
