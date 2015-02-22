@@ -30,6 +30,9 @@ CmdSettingsCurveProperties::CmdSettingsCurveProperties (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::CmdSettingsCurveProperties";
+  
+  m_modelCurveStylesBefore.loadXml (reader);
+  m_modelCurveStylesAfter.loadXml (reader);
 }
 
 CmdSettingsCurveProperties::~CmdSettingsCurveProperties ()

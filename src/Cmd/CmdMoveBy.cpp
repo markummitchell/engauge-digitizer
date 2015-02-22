@@ -28,7 +28,7 @@ CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
     QString selectedPointIdentifier = *itr;
 
     selected << selectedPointIdentifier;
-    m_movedPoints [selectedPointIdentifier] = true;
+    m_movedPoints.setKeyValue (selectedPointIdentifier, true);
   }
 
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMoveBy::CmdMoveBy"
@@ -55,6 +55,7 @@ CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
 
   m_deltaScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X_DELTA).toDouble());
   m_deltaScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA).toDouble());
+  m_movedPoints.loadXml (reader);
 }
 
 CmdMoveBy::~CmdMoveBy ()
@@ -86,11 +87,11 @@ void CmdMoveBy::cmdUndo ()
 void CmdMoveBy::moveBy (const QPointF &deltaScreen)
 {
   // Move Points in the Document
-  PointIdentifiers::iterator itrD;
-  for (itrD = m_movedPoints.begin (); itrD != m_movedPoints.end (); itrD++) {
+  for (int i = 0; i < m_movedPoints.count(); i++) {
 
-      QString pointIdentifier = itrD.key ();
-      document().movePoint (pointIdentifier, deltaScreen);
+    QString pointIdentifier = m_movedPoints.getKey (i);
+    document().movePoint (pointIdentifier, deltaScreen);
+
   }
 
   // Move Points in GraphicsScene, using the new positions in Document
@@ -123,17 +124,6 @@ void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA, QString::number (m_deltaScreen.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA, QString::number (m_deltaScreen.y()));
-  writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);
-  PointIdentifiers::const_iterator itr;
-  for (itr = m_movedPoints.begin(); itr != m_movedPoints.end (); itr++) {
-    QString identifier = itr.key();
-    bool value = itr.value();
-    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER_NAME, identifier);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_MOVED,
-                          value ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
-    writer.writeEndElement();
-  }
-  writer.writeEndElement();
+  m_movedPoints.saveXml (writer);
   writer.writeEndElement();
 }

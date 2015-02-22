@@ -69,6 +69,7 @@ CmdCopy::CmdCopy (MainWindow &mainWindow,
   m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
   m_csv = attributes.value(DOCUMENT_SERIALIZE_CSV).toString();
   m_html = attributes.value(DOCUMENT_SERIALIZE_HTML).toString();
+  m_curvesGraphs.loadXml(reader);
 }
 
 CmdCopy::~CmdCopy ()

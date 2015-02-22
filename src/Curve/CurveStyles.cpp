@@ -4,7 +4,9 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QDebug>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 CurveStyles::CurveStyles()
 {
@@ -97,6 +99,49 @@ double CurveStyles::lineWidth (const QString &curveName) const
   return m_lineStyles [curveName].width();
 }
 
+void CurveStyles::loadXml (QXmlStreamReader &reader)
+{
+  bool success = true;
+
+  // Read through each DOCUMENT_SERIALIZE_LINE_STYLE and DOCUMENT_SERIALIZE_POINT_STYLE until end of DOCUMENT_SERIALIZE_CURVE_STYLES is encountered
+  while (loadNextFromReader (reader)) {
+
+    if (reader.atEnd() || reader.hasError ()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::EndElement) &&
+         (reader.name() == DOCUMENT_SERIALIZE_CURVE_STYLES)) {
+      break;
+    }
+
+    // Not done yet
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE)) {
+
+      // Node has a LineStyle that we need to parse and save
+      LineStyle lineStyle;
+      QString curveName = lineStyle.loadXml (reader);
+
+      m_lineStyles [curveName] = lineStyle;
+
+    } else if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+               (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE)) {
+
+      // Node has a PointSTyle that we need to parse and save
+      PointStyle pointStyle;
+      QString curveName = pointStyle.loadXml (reader);
+
+      m_pointStyles [curveName] = pointStyle;
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read point identifiers");
+  }
+}
+
 ColorPalette CurveStyles::pointColor (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
@@ -152,15 +197,23 @@ void CurveStyles::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_LINE_STYLES);
   LineStyles::const_iterator itrL;
   for (itrL = m_lineStyles.begin(); itrL != m_lineStyles.end(); itrL++) {
+
+    QString curveName = itrL.key();
     const LineStyle &lineStyle = itrL.value();
-    lineStyle.saveXml(writer);
+
+    lineStyle.saveXml(writer,
+                      curveName);
   }
   writer.writeEndElement();
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_POINT_STYLES);
   PointStyles::const_iterator itrP;
   for (itrP = m_pointStyles.begin(); itrP != m_pointStyles.end(); itrP++) {
+
+    QString curveName = itrP.key();
     const PointStyle &pointStyle = itrP.value();
-    pointStyle.saveXml(writer);
+
+    pointStyle.saveXml(writer,
+                       curveName);
   }
   writer.writeEndElement();
   writer.writeEndElement();

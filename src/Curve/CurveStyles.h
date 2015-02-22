@@ -8,6 +8,7 @@
 #include "PointStyles.h"
 
 class Document;
+class QXmlStreamReader;
 class QXmlStreamWriter;
 
 /// Model for DlgSettingsCurveProperties and CmdSettingsCurveProperties.
@@ -40,6 +41,9 @@ public:
 
   /// Get method for line width in specified curve.
   double lineWidth (const QString &curveName) const;
+
+  /// Load from serialized xml
+  void loadXml (QXmlStreamReader &reader);
 
   /// Get method for curve point color in specified curve.
   ColorPalette pointColor (const QString &curveName) const;

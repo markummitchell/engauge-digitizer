@@ -29,6 +29,9 @@ CmdSettingsPointMatch::CmdSettingsPointMatch (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::CmdSettingsPointMatch";
+
+  m_modelPointMatchBefore.loadXml (reader);
+  m_modelPointMatchAfter.loadXml (reader);
 }
 
 CmdSettingsPointMatch::~CmdSettingsPointMatch ()

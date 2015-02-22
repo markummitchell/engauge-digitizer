@@ -29,6 +29,9 @@ CmdSettingsGridRemoval::CmdSettingsGridRemoval (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGridRemoval::CmdSettingsGridRemoval";
+
+  m_modelGridRemovalBefore.loadXml (reader);
+  m_modelGridRemovalAfter.loadXml (reader);
 }
 
 CmdSettingsGridRemoval::~CmdSettingsGridRemoval()

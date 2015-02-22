@@ -29,6 +29,9 @@ CmdSettingsAxesChecker::CmdSettingsAxesChecker (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsAxesChecker::CmdSettingsAxesChecker";
+  
+  m_modelAxesCheckerBefore.loadXml (reader);
+  m_modelAxesCheckerAfter.loadXml (reader);
 }
 
 CmdSettingsAxesChecker::~CmdSettingsAxesChecker ()

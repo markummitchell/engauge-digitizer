@@ -75,17 +75,20 @@ double PointStyle::lineWidth() const
   return m_lineWidth;
 }
 
-void PointStyle::loadXml(QXmlStreamReader &reader)
+QString PointStyle::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::loadXml";
 
+  QString curveName;
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS) &&
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE)) {
 
+    curveName = attributes.value(DOCUMENT_SERIALIZE_CURVE_NAME).toString();
     setRadius (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS).toInt());
     setLineWidth (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH).toDouble());
     setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR).toInt());
@@ -99,6 +102,8 @@ void PointStyle::loadXml(QXmlStreamReader &reader)
   } else {
     reader.raiseError ("Cannot read point style data");
   }
+
+  return curveName;
 }
 
 ColorPalette PointStyle::paletteColor () const
@@ -187,11 +192,13 @@ int PointStyle::radius () const
   return m_radius;
 }
 
-void PointStyle::saveXml(QXmlStreamWriter &writer) const
+void PointStyle::saveXml(QXmlStreamWriter &writer,
+                         const QString &curveName) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointStyle::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_STYLE);
+  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVE_NAME, curveName);
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));

@@ -349,8 +349,10 @@ void Curve::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
   m_curveFilter.saveXml (writer);
-  m_lineStyle.saveXml (writer);
-  m_pointStyle.saveXml (writer);
+  m_lineStyle.saveXml (writer,
+                       m_curveName);
+  m_pointStyle.saveXml (writer,
+                        m_curveName);
 
   // Loop through points
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_POINTS);

@@ -35,14 +35,15 @@ public:
   /// Initial default for index'th graph curve.
   static LineStyle defaultGraphCurve (int index);
 
-  /// Load model from serialized xml
-  void loadXml(QXmlStreamReader &reader);
+  /// Load model from serialized xml. Returns the curve name
+  QString loadXml(QXmlStreamReader &reader);
 
   /// Line color.
   ColorPalette paletteColor() const;
 
   /// Serialize to stream
-  void saveXml(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer,
+               const QString &curveName) const;
 
   /// Set connect as.
   void setCurveConnectAs (CurveConnectAs curveConnectAs);

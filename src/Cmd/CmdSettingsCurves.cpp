@@ -58,6 +58,9 @@ CmdSettingsCurves::CmdSettingsCurves (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::CmdSettingsCurves";
+  
+  m_curvesGraphsBefore.loadXml (reader);
+  m_curvesGraphsAfter.loadXml (reader);
 }
 
 CmdSettingsCurves::~CmdSettingsCurves ()

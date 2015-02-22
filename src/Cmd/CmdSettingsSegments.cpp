@@ -29,6 +29,9 @@ CmdSettingsSegments::CmdSettingsSegments (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsSegments::CmdSettingsSegments";
+
+  m_modelSegmentsBefore.loadXml (reader);
+  m_modelSegmentsAfter.loadXml (reader);
 }
 
 CmdSettingsSegments::~CmdSettingsSegments ()

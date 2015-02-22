@@ -31,7 +31,7 @@ CmdPaste::CmdPaste(MainWindow &mainWindow,
     QString selectedPointIdentifier = *itr;
 
     selected << selectedPointIdentifier;
-    m_copiedPoints [selectedPointIdentifier] = true;
+    m_copiedPoints.setKeyValue (selectedPointIdentifier, true);
   }
 
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::CmdPaste"
@@ -48,7 +48,7 @@ CmdPaste::CmdPaste (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::CmdPaste";
 
-  QXmlStreamAttributes attributes = reader.attributes();
+  m_copiedPoints.loadXml (reader);
 }
 
 CmdPaste::~CmdPaste ()
@@ -79,17 +79,6 @@ void CmdPaste::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_PASTE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
-  writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);
-  PointIdentifiers::const_iterator itr;
-  for (itr = m_copiedPoints.begin(); itr != m_copiedPoints.end (); itr++) {
-    QString identifier = itr.key();
-    bool value = itr.value();
-    writer.writeStartElement (DOCUMENT_SERIALIZE_IDENTIFIER);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER_NAME, identifier);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_COPIED,
-                          value ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
-    writer.writeEndElement();
-  }
-  writer.writeEndElement();
+  m_copiedPoints.saveXml (writer);
   writer.writeEndElement();
 }

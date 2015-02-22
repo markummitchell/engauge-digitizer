@@ -3,12 +3,10 @@
 
 #include "CmdAbstract.h"
 #include "MimePoints.h"
-#include <QHash>
+#include "PointIdentifiers.h"
 #include <QStringList>
 
 class QXmlStreamReader;
-
-typedef QHash<QString, bool> PointIdentifiers;
 
 /// Command for moving all selected Points by a specified translation.
 class CmdPaste : public CmdAbstract

@@ -29,6 +29,9 @@ CmdSettingsFilter::CmdSettingsFilter (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsFilter::CmdSettingsFilter";
+
+  m_modelFilterBefore.loadXml (reader);
+  m_modelFilterAfter.loadXml (reader);
 }
 
 CmdSettingsFilter::~CmdSettingsFilter ()

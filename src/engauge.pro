@@ -126,6 +126,7 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Point/Point.h \
+    Point/PointIdentifiers.h \
     Point/PointIdentifierToGraphicsPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
@@ -252,6 +253,7 @@ SOURCES += \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
     Point/Point.cpp \
+    Point/PointIdentifiers.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
     Segment/Segment.cpp \

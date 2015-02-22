@@ -30,6 +30,9 @@ CmdSettingsExport::CmdSettingsExport (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExport::CmdSettingsExport";
+
+  m_modelExportBefore.loadXml (reader);
+  m_modelExportAfter.loadXml (reader);
 }
 
 CmdSettingsExport::~CmdSettingsExport ()

@@ -30,6 +30,9 @@ CmdSettingsCoords::CmdSettingsCoords (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::CmdSettingsCoords";
+  
+  m_modelCoordsBefore.loadXml (reader);
+  m_modelCoordsAfter.loadXml (reader);
 }
 
 CmdSettingsCoords::~CmdSettingsCoords ()

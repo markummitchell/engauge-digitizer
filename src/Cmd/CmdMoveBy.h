@@ -2,13 +2,11 @@
 #define CMD_MOVE_BY_H
 
 #include "CmdAbstract.h"
-#include <QHash>
+#include "PointIdentifiers.h"
 #include <QPointF>
 #include <QStringList>
 
 class QXmlStreamReader;
-
-typedef QHash<QString, bool> PointIdentifiers;
 
 /// Command for moving all selected Points by a specified translation.
 class CmdMoveBy : public CmdAbstract
