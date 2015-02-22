@@ -62,6 +62,7 @@
 #include "QtToString.h"
 #include <QVBoxLayout>
 #include <QWhatsThis>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Settings.h"
 #include "StatusBar.h"
@@ -89,7 +90,8 @@ const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 const char *VERSION_NUMBER = "6.0";
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(const QString &errorReportFile,
+                       QWidget *parent) :
   QMainWindow(parent),
   m_engaugeFile (EMPTY_FILENAME),
   m_currentFile (EMPTY_FILENAME),
@@ -122,6 +124,10 @@ MainWindow::MainWindow(QWidget *parent) :
   settingsRead ();
   setCurrentFile ("");
   setUnifiedTitleAndToolBarOnMac(true);
+
+  if (!errorReportFile.isEmpty()) {
+    loadErrorReportFile(errorReportFile);
+  }
 }
 
 MainWindow::~MainWindow()
@@ -875,23 +881,9 @@ void MainWindow::loadCurveListFromCmdMediator ()
   m_cmbCurve->setCurrentIndex (0);
 }
 
-void MainWindow::loadDomInputFile(QDomDocument &domInputFile) const
+void MainWindow::loadDocumentFile (const QString &fileName)
 {
-  QFile file (m_currentFile);
-
-  // File should be available for opening, if not then the dom will be left empty. We assume it has not been
-  // modified since opened
-  if (!file.open (QIODevice::ReadOnly)) {
-    return;
-  }
-
-  domInputFile.setContent (&file);
-  file.close();
-}
-
-void MainWindow::loadFile (const QString &fileName)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadFile fileName=" << fileName.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadDocumentFile fileName=" << fileName.toLatin1 ().data ();
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
@@ -942,6 +934,36 @@ void MainWindow::loadFile (const QString &fileName)
     delete cmdMediator;
 
   }
+}
+
+void MainWindow::loadDomInputFile(QDomDocument &domInputFile) const
+{
+  QFile file (m_currentFile);
+
+  // File should be available for opening, if not then the dom will be left empty. We assume it has not been
+  // modified since opened
+  if (!file.open (QIODevice::ReadOnly)) {
+    return;
+  }
+
+  domInputFile.setContent (&file);
+  file.close();
+}
+
+void MainWindow::loadErrorReportFile(const QString &errorReportFile)
+{
+  QFile file (errorReportFile);
+  if (!file.exists()) {
+    QMessageBox::critical (this,
+                           tr ("Load Error"),
+                           tr ("File not found: ") + errorReportFile);
+    exit (-1);
+  }
+
+  QXmlStreamReader reader (&file);
+  m_cmdMediator = new CmdMediator(*this,
+                                  errorReportFile,
+                                  reader);
 }
 
 void MainWindow::loadImage (const QString &fileName,
@@ -1085,10 +1107,42 @@ void MainWindow::resizeEvent(QResizeEvent * /* event */)
   }
 }
 
-void MainWindow::saveErrorReport (const char *context,
-                                  const char *file,
-                                  int line,
-                                  const char *comment) const
+bool MainWindow::saveDocumentFile (const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::saveDocumentFile fileName=" << fileName.toLatin1 ().data ();
+
+  QFile file(fileName);
+  if (!file.open(QFile::WriteOnly)) {
+    QMessageBox::warning (this,
+                          tr("Application"),
+                          tr ("Cannot write file %1: \n%2.").
+                          arg(fileName).
+                          arg(file.errorString()));
+    return false;
+  }
+
+  rebuildRecentFileListForCurrentFile (fileName);
+
+  QApplication::setOverrideCursor (Qt::WaitCursor);
+  QXmlStreamWriter stream(&file);
+  stream.setAutoFormatting(true);
+  m_cmdMediator->document().saveXml(stream);
+  QApplication::restoreOverrideCursor ();
+
+  // Notify the undo stack that the current state is now considered "clean". This will automatically trigger a
+  // signal back to this class that will update the modified marker in the title bar
+  m_cmdMediator->setClean ();
+
+  setCurrentFile(fileName);
+  m_engaugeFile = fileName;
+  m_statusBar->showTemporaryMessage("File saved");
+  return true;
+}
+
+void MainWindow::saveErrorReportFile (const char *context,
+                                      const char *file,
+                                      int line,
+                                      const char *comment) const
 {
   const bool DEEP_COPY = true;
 
@@ -1174,38 +1228,6 @@ void MainWindow::saveErrorReport (const char *context,
 
     std::cerr << domErrorReport.toString().toLatin1().data() << std::endl;
   }
-}
-
-bool MainWindow::saveFile (const QString &fileName)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::saveFile fileName=" << fileName.toLatin1 ().data ();
-
-  QFile file(fileName);
-  if (!file.open(QFile::WriteOnly)) {
-    QMessageBox::warning (this,
-                          tr("Application"),
-                          tr ("Cannot write file %1: \n%2.").
-                          arg(fileName).
-                          arg(file.errorString()));
-    return false;
-  }
-
-  rebuildRecentFileListForCurrentFile (fileName);
-
-  QApplication::setOverrideCursor (Qt::WaitCursor);
-  QXmlStreamWriter stream(&file);
-  stream.setAutoFormatting(true);
-  m_cmdMediator->document().saveXml(stream);
-  QApplication::restoreOverrideCursor ();
-
-  // Notify the undo stack that the current state is now considered "clean". This will automatically trigger a
-  // signal back to this class that will update the modified marker in the title bar
-  m_cmdMediator->setClean ();
-
-  setCurrentFile(fileName);
-  m_engaugeFile = fileName;
-  m_statusBar->showTemporaryMessage("File saved");
-  return true;
 }
 
 GraphicsScene &MainWindow::scene ()
@@ -1628,7 +1650,7 @@ void MainWindow::slotFileOpen()
                                                      QDir::currentPath (),
                                                      filter);
     if (!fileName.isEmpty ()) {
-      loadFile (fileName);
+      loadDocumentFile (fileName);
     }
   }
 }
@@ -1653,7 +1675,7 @@ bool MainWindow::slotFileSave()
   if (m_engaugeFile.isEmpty()) {
     return slotFileSaveAs();
   } else {
-    return saveFile (m_engaugeFile);
+    return saveDocumentFile (m_engaugeFile);
   }
 }
 
@@ -1691,7 +1713,7 @@ bool MainWindow::slotFileSaveAs()
   if (dlg.exec()) {
 
     QStringList files = dlg.selectedFiles();
-    return saveFile(files.at(0));
+    return saveDocumentFile(files.at(0));
   }
 
   return false;
@@ -1758,7 +1780,7 @@ void MainWindow::slotRecentFileAction ()
 
   if (action) {
     QString fileName = action->data().toString();
-    loadFile (fileName);
+    loadDocumentFile (fileName);
   }
 }
 

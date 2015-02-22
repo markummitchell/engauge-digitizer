@@ -4,17 +4,26 @@
 #include "CmdAbstract.h"
 #include <QPointF>
 
+class QXmlStreamReader;
+
 /// Command for editing the graph coordinates one axis point. The screen coordinates are
 /// handled by another command
 class CmdEditPointAxis : public CmdAbstract
 {
  public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdEditPointAxis(MainWindow &mainWindow,
                    Document &document,
                    const QString &pointIdentifier,
                    const QPointF &posGraphBefore,
                    const QPointF &posGraphAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdEditPointAxis(MainWindow &mainWindow,
+                   Document &document,
+                   const QString &cmdDescription,
+                   QXmlStreamReader &reader);
+
   virtual ~CmdEditPointAxis();
 
   virtual void cmdRedo ();

@@ -5,15 +5,24 @@
 #include "CurvesGraphs.h"
 
 class CurveNameList;
+class QXmlStreamReader;
 
 /// Command for DlgSettingsCurves
 class CmdSettingsCurves : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsCurves(MainWindow &mainWindow,
                     Document &document,
                     const CurveNameList &modelCurves);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsCurves(MainWindow &mainWindow,
+                    Document &document,
+                    const QString &cmdDescription,
+                    QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsCurves();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

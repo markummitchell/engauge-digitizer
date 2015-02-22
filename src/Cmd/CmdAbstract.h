@@ -11,10 +11,11 @@ class QXmlStreamWriter;
 class CmdAbstract : public QUndoCommand
 {
 public:
-  /// Single constructor.
+  /// Single constructor
   CmdAbstract(MainWindow &mainWindow,
               Document &document,
-              const QString &text);
+              const QString &cmdDescription);
+
   virtual ~CmdAbstract();
 
   /// Redo method that is called when QUndoStack is moved one command forward.

@@ -24,6 +24,7 @@ HEADERS  += \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
     Cmd/CmdEditPointAxis.h \
+    Cmd/CmdFactory.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
@@ -169,6 +170,7 @@ SOURCES += \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
     Cmd/CmdEditPointAxis.cpp \
+    Cmd/CmdFactory.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \

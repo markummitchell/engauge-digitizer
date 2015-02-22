@@ -4,6 +4,9 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QXmlStreamReader>
+
+const QString CMD_DESCRIPTION ("Coordinate settings");
 
 CmdSettingsCoords::CmdSettingsCoords(MainWindow &mainWindow,
                                      Document &document,
@@ -11,11 +14,26 @@ CmdSettingsCoords::CmdSettingsCoords(MainWindow &mainWindow,
                                      const DocumentModelCoords &modelCoordsAfter) :
   CmdAbstract(mainWindow,
               document,
-              "Coordinate settings"),
+              CMD_DESCRIPTION),
   m_modelCoordsBefore (modelCoordsBefore),
   m_modelCoordsAfter (modelCoordsAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::CmdSettingsCoords";
+}
+
+CmdSettingsCoords::CmdSettingsCoords (MainWindow &mainWindow,
+                                      Document &document,
+                                      const QString &cmdDescription,
+                                      QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::CmdSettingsCoords";
+}
+
+CmdSettingsCoords::~CmdSettingsCoords ()
+{
 }
 
 void CmdSettingsCoords::cmdRedo ()
@@ -36,7 +54,9 @@ void CmdSettingsCoords::cmdUndo ()
 
 void CmdSettingsCoords::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   m_modelCoordsBefore.saveXml(writer);
   m_modelCoordsAfter.saveXml(writer);
   writer.writeEndElement();

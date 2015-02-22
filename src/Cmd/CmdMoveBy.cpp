@@ -2,12 +2,14 @@
 #include "DataKey.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGraphicsItem>
 #include <QtToString.h>
+#include <QXmlStreamReader>
 
 CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
                      Document &document,
@@ -32,6 +34,31 @@ CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMoveBy::CmdMoveBy"
                               << " deltaScreen=" << QPointFToString (deltaScreen).toLatin1 ().data ()
                               << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
+}
+
+CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
+                      Document &document,
+                      const QString &cmdDescription,
+                      QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdMoveBy::CmdMoveBy";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA) ) {
+      ENGAUGE_ASSERT (false);
+  }
+
+  m_deltaScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X_DELTA).toDouble());
+  m_deltaScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA).toDouble());
+}
+
+CmdMoveBy::~CmdMoveBy ()
+{
 }
 
 void CmdMoveBy::cmdRedo ()
@@ -91,7 +118,9 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
 
 void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_MOVE_BY);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_MOVE_BY);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA, QString::number (m_deltaScreen.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA, QString::number (m_deltaScreen.y()));
   writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);

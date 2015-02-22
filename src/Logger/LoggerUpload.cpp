@@ -38,10 +38,10 @@ void LoggerUpload::loggerOutput(const char *comment,
                                 const char *context)
 {
   if (m_mainWindow != 0) {
-    m_mainWindow->saveErrorReport(comment,
-                                  file,
-                                  line,
-                                  context);
+    m_mainWindow->saveErrorReportFile(comment,
+                                      file,
+                                      line,
+                                      context);
   }
 
   exit (-1); // Stop execution since it is no longer safe to continue

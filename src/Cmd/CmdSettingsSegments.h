@@ -4,15 +4,25 @@
 #include "CmdAbstract.h"
 #include "DocumentModelSegments.h"
 
+class QXmlStreamReader;
+
 /// Command for DlgSettingsSegments
 class CmdSettingsSegments : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsSegments(MainWindow &mainWindow,
                       Document &document,
                       const DocumentModelSegments &modelSegmentsBefore,
                       const DocumentModelSegments &modelSegmentsAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsSegments(MainWindow &mainWindow,
+                      Document &document,
+                      const QString &cmdDescription,
+                      QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsSegments();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

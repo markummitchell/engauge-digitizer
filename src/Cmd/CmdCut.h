@@ -6,14 +6,24 @@
 #include <QHash>
 #include <QStringList>
 
+class QXmlStreamReader;
+
 /// Command for cutting all selected Points.
 class CmdCut : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdCut(MainWindow &mainWindow,
          Document &document,
          const QStringList &selectedPointIdentifiers);
+
+  /// Constructor for parsing error report file xml
+  CmdCut(MainWindow &mainWindow,
+         Document &document,
+         const QString &cmdDescription,
+         QXmlStreamReader &reader);
+
+  virtual ~CmdCut();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

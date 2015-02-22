@@ -7,16 +7,25 @@
 #include "PointStyle.h"
 
 class CurveStyles;
+class QXmlStreamReader;
 
 /// Command for DlgSettingsCurveProperties
 class CmdSettingsCurveProperties : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsCurveProperties(MainWindow &mainWindow,
                              Document &document,
                              const CurveStyles &modelCurveStylesBefore,
                              const CurveStyles &modelCurveStylesAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsCurveProperties(MainWindow &mainWindow,
+                             Document &document,
+                             const QString &cmdDescription,
+                             QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsCurveProperties();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

@@ -6,16 +6,26 @@
 #include <QHash>
 #include <QStringList>
 
+class QXmlStreamReader;
+
 typedef QHash<QString, bool> PointIdentifiers;
 
 /// Command for moving all selected Points by a specified translation.
 class CmdPaste : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdPaste(MainWindow &mainWindow,
            Document &document,
            const QStringList &selectedPointIdentifiers);
+
+  /// Constructor for parsing error report file xml
+  CmdPaste(MainWindow &mainWindow,
+           Document &document,
+           const QString &cmdDescription,
+           QXmlStreamReader &reader);
+
+  virtual ~CmdPaste();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

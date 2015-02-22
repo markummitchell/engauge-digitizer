@@ -1,18 +1,28 @@
-#ifndef CMD_SETTINGS_COORDS_H
-#define CMD_SETTINGS_COORDS_H
+#ifndef CMD_SETTINGS_EXPORT_H
+#define CMD_SETTINGS_EXPORT_H
 
 #include "CmdAbstract.h"
 #include "DocumentModelExport.h"
+
+class QXmlStreamReader;
 
 /// Command for DlgSettingsExport
 class CmdSettingsExport : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsExport(MainWindow &mainWindow,
                     Document &document,
                     const DocumentModelExport &modelExportBefore,
                     const DocumentModelExport &modelExportAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsExport(MainWindow &mainWindow,
+                    Document &document,
+                    const QString &cmdDescription,
+                    QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsExport();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
@@ -25,4 +35,4 @@ private:
   DocumentModelExport m_modelExportAfter;
 };
 
-#endif // CMD_SETTINGS_COORDS_H
+#endif // CMD_SETTINGS_EXPORT_H

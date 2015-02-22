@@ -48,40 +48,62 @@ Document::Document (const QString &fileName) :
   QFile *file = new QFile (fileName);
   if (file->open (QIODevice::ReadOnly | QIODevice::Text)) {
 
-    // Import from xml. Loop to end of data or error condition occurs, whichever is first
     QXmlStreamReader reader (file);
-    while (!reader.atEnd() && !reader.hasError()) {
+
+    // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
+    // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
+    bool inDocumentSubtree = false;
+
+    // Import from xml. Loop to end of data or error condition occurs, whichever is first
+    while (!reader.atEnd() &&
+           !reader.hasError()) {
       QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
 
-      // Iterate to next StartElement
-      if (tokenType == QXmlStreamReader::StartElement) {
+      // Branching to skip non-Document nodes
+      if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+          (tokenType == QXmlStreamReader::StartElement)) {
 
-        // This is a StartElement, so process it
-        QString tag = reader.name().toString();
-        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-          m_modelAxesChecker.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-          m_modelCoords.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-          m_curveAxes = new Curve (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-          m_curvesGraphs.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-          // Do nothing. This is the root node
-        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-          m_modelExport.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-          m_modelGridRemoval.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-          loadImage(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-          m_modelPointMatch.loadXml(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-          m_modelSegments.loadXml(reader);
-        } else {
-          m_successfulRead = false;
-          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
-          break;
+        inDocumentSubtree = true;
+
+      } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+                 (tokenType == QXmlStreamReader::EndElement)) {
+
+        // Exit out of loop immediately
+        break;
+      }
+
+      if (inDocumentSubtree) {
+
+        // Iterate to next StartElement
+        if (tokenType == QXmlStreamReader::StartElement) {
+
+          // This is a StartElement, so process it
+          QString tag = reader.name().toString();
+          if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+            m_modelAxesChecker.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+            m_modelCoords.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+            m_curveAxes = new Curve (reader);
+          } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+            m_curvesGraphs.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+            // Do nothing. This is the root node
+          } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+            m_modelExport.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+            m_modelGridRemoval.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+            loadImage(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+            m_modelPointMatch.loadXml(reader);
+          } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+            m_modelSegments.loadXml(reader);
+          } else {
+            m_successfulRead = false;
+            m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
+            break;
+          }
         }
       }
     }

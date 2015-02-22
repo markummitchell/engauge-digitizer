@@ -4,15 +4,24 @@
 #include "CmdAbstract.h"
 #include <QPointF>
 
+class QXmlStreamReader;
+
 /// Command for adding one graph point.
 class CmdAddPointGraph : public CmdAbstract
 {
  public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdAddPointGraph(MainWindow &mainWindow,
                    Document &document,
                    const QString &curveName,
                    const QPointF &posScreen);
+
+  /// Constructor for parsing error report file xml
+  CmdAddPointGraph(MainWindow &mainWindow,
+                   Document &document,
+                   const QString &cmdDescription,
+                   QXmlStreamReader &reader);
+
   virtual ~CmdAddPointGraph();
 
   virtual void cmdRedo ();
@@ -22,7 +31,7 @@ class CmdAddPointGraph : public CmdAbstract
 private:
   CmdAddPointGraph();
 
-  const QString m_curveName;
+  QString m_curveName;
   QPointF m_posScreen;
   QString m_identifierAdded; // Point that got added
 };

@@ -1,4 +1,5 @@
 #include "CmdAbstract.h"
+#include "CmdFactory.h"
 #include "CmdMediator.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -7,10 +8,13 @@
 #include "LoggerUpload.h"
 #include "MainWindow.h"
 #include "Point.h"
+#include <QDomNode>
 #include <QImage>
 #include <QUndoCommand>
+#include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
+#include "Xml.h"
 
 CmdMediator::CmdMediator (MainWindow &mainWindow,
                           const QImage &image) :
@@ -26,6 +30,30 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   m_document (fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
+
+  connectSignals(mainWindow);
+}
+
+CmdMediator::CmdMediator (MainWindow &mainWindow,
+                          const QString &fileName,
+                          QXmlStreamReader &reader) :
+  m_document (fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
+
+  // Load commands
+  CmdFactory factory;
+  while (!reader.atEnd() && !reader.hasError()) {
+
+    if ((loadNextFromReader (reader) == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_CMD)) {
+
+      // Extract and append new command to command stack
+      push (factory.createCmd (mainWindow,
+                               m_document,
+                               reader));
+    }
+  }
 
   connectSignals(mainWindow);
 }

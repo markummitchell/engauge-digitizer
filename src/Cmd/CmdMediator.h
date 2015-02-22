@@ -8,6 +8,7 @@
 
 class MainWindow;
 class QImage;
+class QXmlStreamReader;
 class Transformation;
 
 /// Command queue stack.
@@ -24,6 +25,12 @@ public:
   /// Constructor for opened Documents. The specified file is opened and read.
   CmdMediator (MainWindow &mainWindow,
                const QString &fileName);
+
+  /// Constructor for error report files. The specified file is opened and read, and commands are read into the command stack.
+  /// The Document uses its own xml parser to read the file directly
+  CmdMediator (MainWindow &mainWindow,
+               const QString &fileName,
+               QXmlStreamReader &reader);
 
   /// Destructor
   ~CmdMediator();

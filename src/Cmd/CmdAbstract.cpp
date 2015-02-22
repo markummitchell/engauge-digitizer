@@ -6,8 +6,8 @@
 
 CmdAbstract::CmdAbstract(MainWindow &mainWindow,
                          Document &document,
-                         const QString &text) :
-  QUndoCommand (text),
+                         const QString &cmdDescription) :
+  QUndoCommand (cmdDescription),
   m_mainWindow (mainWindow),
   m_document (document),
   m_isFirstRedo (true)

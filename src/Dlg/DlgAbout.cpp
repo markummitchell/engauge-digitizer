@@ -39,10 +39,10 @@ void DlgAbout::keyPressEvent(QKeyEvent *event)
       ((event->modifiers() & Qt::ShiftModifier) != 0) &&
       ((event->modifiers() & Qt::ControlModifier) != 0)) {
 
-    m_mainWindow.saveErrorReport("Shift+Control+E",
-                                 __FILE__,
-                                 __LINE__,
-                                 "assert");
+    m_mainWindow.saveErrorReportFile("Shift+Control+E",
+                                     __FILE__,
+                                     __LINE__,
+                                     "assert");
   }
 
   QMessageBox::keyPressEvent(event);

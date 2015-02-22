@@ -52,7 +52,8 @@ class MainWindow : public QMainWindow
 
 public:
   /// Single constructor.
-  MainWindow(QWidget *parent = 0);
+  MainWindow(const QString &errorReportFile, // Empty if unused
+             QWidget *parent = 0);
   ~MainWindow();
 
   /// Accessor for commands to process the Document.
@@ -62,10 +63,10 @@ public:
   void resizeEvent (QResizeEvent *event);
 
   /// Save error report. Does not exit since we want nothing to happen if user clicks hidden shortcut in DlgAbout
-  void saveErrorReport(const char *comment,
-                       const char *file,
-                       int line,
-                       const char *context) const;
+  void saveErrorReportFile(const char *comment,
+                           const char *file,
+                           int line,
+                           const char *context) const;
 
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
@@ -193,6 +194,8 @@ signals:
   void signalZoom(int);
 
 private:
+  MainWindow();
+
   virtual void closeEvent(QCloseEvent *event);
   void createActions();
   void createActionsDigitize ();
@@ -213,15 +216,16 @@ private:
   void createToolBars();
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
+  void loadDocumentFile (const QString &fileName);
   void loadDomInputFile(QDomDocument &domInputFile) const;
-  void loadFile (const QString &fileName);
+  void loadErrorReportFile(const QString &errorReportFile);
   void loadImage (const QString &fileName,
                   const QImage &image);
   void loadToolTips ();
   bool maybeSave();
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   void removePixmaps();
-  bool saveFile(const QString &fileName);
+  bool saveDocumentFile(const QString &fileName);
   void setCurrentFile(const QString &fileName);
   void setCurrentPathFromFile (const QString &fileName);
   void setPixmap (const QPixmap &pixmap);

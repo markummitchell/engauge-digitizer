@@ -4,6 +4,9 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QXmlStreamReader>
+
+const QString CMD_DESCRIPTION ("Export settings");
 
 CmdSettingsExport::CmdSettingsExport(MainWindow &mainWindow,
                                      Document &document,
@@ -11,11 +14,26 @@ CmdSettingsExport::CmdSettingsExport(MainWindow &mainWindow,
                                      const DocumentModelExport &modelExportAfter) :
   CmdAbstract(mainWindow,
               document,
-              "Export settings"),
+              CMD_DESCRIPTION),
   m_modelExportBefore (modelExportBefore),
   m_modelExportAfter (modelExportAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExport::CmdSettingsExport";
+}
+
+CmdSettingsExport::CmdSettingsExport (MainWindow &mainWindow,
+                                      Document &document,
+                                      const QString &cmdDescription,
+                                      QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExport::CmdSettingsExport";
+}
+
+CmdSettingsExport::~CmdSettingsExport ()
+{
 }
 
 void CmdSettingsExport::cmdRedo ()
@@ -36,7 +54,9 @@ void CmdSettingsExport::cmdUndo ()
 
 void CmdSettingsExport::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   m_modelExportBefore.saveXml (writer);
   m_modelExportAfter.saveXml(writer);
   writer.writeEndElement();

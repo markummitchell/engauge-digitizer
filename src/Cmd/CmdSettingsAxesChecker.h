@@ -4,15 +4,25 @@
 #include "CmdAbstract.h"
 #include "DocumentModelAxesChecker.h"
 
+class QXmlStreamReader;
+
 /// Command for DlgSettingsAxesChecker
 class CmdSettingsAxesChecker : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsAxesChecker(MainWindow &mainWindow,
                          Document &document,
                          const DocumentModelAxesChecker &modelAxesCheckerBefore,
                          const DocumentModelAxesChecker &modelAxesCheckerAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsAxesChecker(MainWindow &mainWindow,
+                         Document &document,
+                         const QString &cmdDescription,
+                         QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsAxesChecker();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

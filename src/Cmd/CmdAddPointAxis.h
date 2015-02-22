@@ -4,15 +4,24 @@
 #include "CmdAbstract.h"
 #include <QPointF>
 
+class QXmlStreamReader;
+
 /// Command for adding one axis point.
 class CmdAddPointAxis : public CmdAbstract
 {
  public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdAddPointAxis(MainWindow &mainWindow,
                   Document &document,
                   const QPointF &posScreen,
                   const QPointF &posGraph);
+
+  /// Constructor for parsing error report file xml
+  CmdAddPointAxis(MainWindow &mainWindow,
+                  Document &document,
+                  const QString &cmdDescription,
+                  QXmlStreamReader &reader);
+
   virtual ~CmdAddPointAxis();
 
   virtual void cmdRedo ();

@@ -2,6 +2,7 @@
 #include "DataKey.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -12,13 +13,16 @@
 #include <QGraphicsItem>
 #include <QTextStream>
 #include "QtToString.h"
+#include <QXmlStreamReader>
+
+const QString CMD_DESCRIPTION ("Paste");
 
 CmdPaste::CmdPaste(MainWindow &mainWindow,
                    Document &document,
                    const QStringList &selectedPointIdentifiers) :
   CmdAbstract(mainWindow,
               document,
-              "Paste")
+              CMD_DESCRIPTION)
 {
   QStringList selected;
   QStringList::const_iterator itr;
@@ -32,6 +36,23 @@ CmdPaste::CmdPaste(MainWindow &mainWindow,
 
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::CmdPaste"
                               << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
+}
+
+CmdPaste::CmdPaste (MainWindow &mainWindow,
+                    Document &document,
+                    const QString &cmdDescription,
+                    QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::CmdPaste";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+}
+
+CmdPaste::~CmdPaste ()
+{
 }
 
 void CmdPaste::cmdRedo ()
@@ -55,7 +76,9 @@ void CmdPaste::cmdUndo ()
 
 void CmdPaste::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_PASTE);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_PASTE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeStartElement(DOCUMENT_SERIALIZE_IDENTIFIERS);
   PointIdentifiers::const_iterator itr;
   for (itr = m_copiedPoints.begin(); itr != m_copiedPoints.end (); itr++) {

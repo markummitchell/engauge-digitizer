@@ -4,15 +4,25 @@
 #include "CmdAbstract.h"
 #include "DocumentModelCoords.h"
 
+class QXmlStreamReader;
+
 /// Command for DlgSettingsCoords
 class CmdSettingsCoords : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsCoords(MainWindow &mainWindow,
                     Document &document,
                     const DocumentModelCoords &modelCoordsBefore,
                     const DocumentModelCoords &modelCoordsAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsCoords(MainWindow &mainWindow,
+                    Document &document,
+                    const QString &cmdDescription,
+                    QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsCoords();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

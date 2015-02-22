@@ -1,9 +1,13 @@
 #include "CmdAddPointAxis.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "QtToString.h"
+#include <QXmlStreamReader>
+
+const QString CMD_DESCRIPTION ("Add axis point");
 
 CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
                                   Document &document,
@@ -11,13 +15,40 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
                                   const QPointF &posGraph) :
   CmdAbstract (mainWindow,
                document,
-               "Add axis point"),
+               CMD_DESCRIPTION),
   m_posScreen (posScreen),
   m_posGraph (posGraph)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::CmdAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
+}
+
+CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
+                                  Document &document,
+                                  const QString &cmdDescription,
+                                  QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::CmdAddPointAxis";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
+      ENGAUGE_ASSERT (false);
+  }
+
+  m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
+  m_posScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
+  m_posGraph.setX(attributes.value(DOCUMENT_SERIALIZE_GRAPH_X).toDouble());
+  m_posGraph.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y).toDouble());
+  m_identifierAdded = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
 }
 
 CmdAddPointAxis::~CmdAddPointAxis ()
@@ -44,7 +75,9 @@ void CmdAddPointAxis::cmdUndo ()
 
 void CmdAddPointAxis::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_ADD_POINT_AXIS);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_ADD_POINT_AXIS);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X, QString::number (m_posGraph.x()));

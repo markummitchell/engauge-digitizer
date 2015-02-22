@@ -28,7 +28,7 @@ public:
   /// Constructor for imported images and dragged images
   Document (const QImage &image);
 
-  /// Constructor for opened Documents. The specified file is opened and read
+  /// Constructor for opened Documents, and error report files. The specified file is opened and read
   Document (const QString &fileName);
 
   /// Add new graph curve to the list of existing graph curves.

@@ -4,15 +4,25 @@
 #include "CmdAbstract.h"
 #include "DocumentModelFilter.h"
 
+class QXmlStreamReader;
+
 /// Command for DlgSettingsFilter
 class CmdSettingsFilter : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsFilter(MainWindow &mainWindow,
                     Document &document,
                     const DocumentModelFilter &modelFilterBefore,
                     const DocumentModelFilter &modelFilterAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsFilter(MainWindow &mainWindow,
+                    Document &document,
+                    const QString &cmdDescription,
+                    QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsFilter();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

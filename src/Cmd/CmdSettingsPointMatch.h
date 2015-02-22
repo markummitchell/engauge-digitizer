@@ -4,15 +4,25 @@
 #include "CmdAbstract.h"
 #include "DocumentModelPointMatch.h"
 
+class QXmlStreamReader;
+
 /// Command for DlgSettingsPointMatch
 class CmdSettingsPointMatch : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdSettingsPointMatch(MainWindow &mainWindow,
                         Document &document,
                         const DocumentModelPointMatch &modelPointMatchBefore,
                         const DocumentModelPointMatch &modelPointMatchAfter);
+
+  /// Constructor for parsing error report file xml
+  CmdSettingsPointMatch(MainWindow &mainWindow,
+                        Document &document,
+                        const QString &cmdDescription,
+                        QXmlStreamReader &reader);
+
+  virtual ~CmdSettingsPointMatch();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

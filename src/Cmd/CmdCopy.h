@@ -6,14 +6,24 @@
 #include <QHash>
 #include <QStringList>
 
+class QXmlStreamReader;
+
 /// Command for moving all selected Points by a specified translation.
 class CmdCopy : public CmdAbstract
 {
 public:
-  /// Single constructor.
+  /// Constructor for normal creation
   CmdCopy(MainWindow &mainWindow,
           Document &document,
           const QStringList &selectedPointIdentifiers);
+
+  /// Constructor for parsing error report file xml
+  CmdCopy(MainWindow &mainWindow,
+          Document &document,
+          const QString &cmdDescription,
+          QXmlStreamReader &reader);
+
+  virtual ~CmdCopy();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();

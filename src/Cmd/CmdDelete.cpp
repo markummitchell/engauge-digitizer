@@ -2,6 +2,7 @@
 #include "DataKey.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "ExportToClipboard.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
@@ -9,13 +10,16 @@
 #include "MainWindow.h"
 #include <QTextStream>
 #include <QtToString.h>
+#include <QXmlStreamReader>
+
+const QString CMD_DESCRIPTION ("Delete");
 
 CmdDelete::CmdDelete(MainWindow &mainWindow,
                      Document &document,
                      const QStringList &selectedPointIdentifiers) :
   CmdAbstract(mainWindow,
               document,
-              "Delete")
+              CMD_DESCRIPTION)
 {
   QStringList selected;
   QStringList::const_iterator itr;
@@ -38,6 +42,35 @@ CmdDelete::CmdDelete(MainWindow &mainWindow,
                               m_curvesGraphs);
 }
 
+CmdDelete::CmdDelete (MainWindow &mainWindow,
+                      Document &document,
+                      const QString &cmdDescription,
+                      QXmlStreamReader &reader) :
+  CmdAbstract (mainWindow,
+               document,
+               cmdDescription)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_CSV) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_HTML)) {
+      ENGAUGE_ASSERT (false);
+  }
+
+  QString defined = attributes.value(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED).toString();
+
+  m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
+  m_csv = attributes.value(DOCUMENT_SERIALIZE_CSV).toString();
+  m_html = attributes.value(DOCUMENT_SERIALIZE_HTML).toString();
+}
+
+CmdDelete::~CmdDelete ()
+{
+}
+
 void CmdDelete::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdRedo";
@@ -58,7 +91,9 @@ void CmdDelete::cmdUndo ()
 
 void CmdDelete::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD_DELETE);
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_DELETE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,
                         m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
