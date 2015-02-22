@@ -18,6 +18,7 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
+#include "DlgErrorReport.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveProperties.h"
@@ -29,6 +30,7 @@
 #include "DlgSettingsSegments.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
+#include "EnumsToQt.h"
 #include "ExportToFile.h"
 #include "Filter.h"
 #include "GraphicsItemType.h"
@@ -43,11 +45,13 @@
 #include <QComboBox>
 #include <QDebug>
 #include <QDomDocument>
+#include <QKeyEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
 #include <QImageReader>
+#include <QKeyEvent>
 #include <QKeySequence>
 #include <QLabel>
 #include <QMenu>
@@ -125,6 +129,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   setCurrentFile ("");
   setUnifiedTitleAndToolBarOnMac(true);
 
+  installEventFilter(this);
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
   }
@@ -851,6 +856,26 @@ void MainWindow::createToolBars ()
   addToolBar (m_toolSettingsViews);
 }
 
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+{
+  if (event->type () == QEvent::KeyPress) {
+
+    QKeyEvent *eventKeyPress = (QKeyEvent *) event;
+
+    if ((eventKeyPress->key() == Qt::Key_E) &&
+        ((eventKeyPress->modifiers() & Qt::ShiftModifier) != 0) &&
+        ((eventKeyPress->modifiers() & Qt::ControlModifier) != 0)) {
+
+      saveErrorReportFileAndExit ("Shift+Control+E",
+                                  __FILE__,
+                                  __LINE__,
+                                  "assert");
+    }
+  }
+
+  return QObject::eventFilter (target, event);
+}
+
 void MainWindow::fileImport (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport fileName=" << fileName.toLatin1 ().data ();
@@ -866,6 +891,9 @@ void MainWindow::fileImport (const QString &fileName)
 
   loadImage (fileName,
              image);
+
+  m_originalFile = fileName;
+  m_originalFileWasImported = true;
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -924,6 +952,9 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     updateAfterCommand ();
 
+    m_originalFile = fileName;
+    m_originalFileWasImported = false;
+
   } else {
 
     QMessageBox::warning (this,
@@ -934,20 +965,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     delete cmdMediator;
 
   }
-}
-
-void MainWindow::loadDomInputFile(QDomDocument &domInputFile) const
-{
-  QFile file (m_currentFile);
-
-  // File should be available for opening, if not then the dom will be left empty. We assume it has not been
-  // modified since opened
-  if (!file.open (QIODevice::ReadOnly)) {
-    return;
-  }
-
-  domInputFile.setContent (&file);
-  file.close();
 }
 
 void MainWindow::loadErrorReportFile(const QString &errorReportFile)
@@ -1007,6 +1024,20 @@ void MainWindow::loadImage (const QString &fileName,
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
 
   updateControls ();
+}
+
+void MainWindow::loadInputFileForErrorReport(QDomDocument &domInputFile) const
+{
+  QFile file (m_originalFile);
+
+  // File should be available for opening, if not then the dom will be left empty. We assume it has not been
+  // modified since opened
+  if (!file.open (QIODevice::ReadOnly)) {
+    return;
+  }
+
+  domInputFile.setContent (&file);
+  file.close();
 }
 
 void MainWindow::loadToolTips()
@@ -1139,10 +1170,10 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
   return true;
 }
 
-void MainWindow::saveErrorReportFile (const char *context,
-                                      const char *file,
-                                      int line,
-                                      const char *comment) const
+void MainWindow::saveErrorReportFileAndExit (const char *context,
+                                             const char *file,
+                                             int line,
+                                             const char *comment) const
 {
   const bool DEEP_COPY = true;
 
@@ -1160,6 +1191,12 @@ void MainWindow::saveErrorReportFile (const char *context,
     writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
     writer.writeEndElement();
 
+    // Operating system
+    writer.writeStartElement(DOCUMENT_SERIALIZE_OPERATING_SYSTEM);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_ENDIAN, EndianToString (QSysInfo::ByteOrder));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_WORD_SIZE, QString::number (QSysInfo::WordSize));
+    writer.writeEndElement();
+
     // Image
     writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
     writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (m_cmdMediator->pixmap().width ()));
@@ -1168,6 +1205,8 @@ void MainWindow::saveErrorReportFile (const char *context,
 
     // Placeholder for original file, before the commands in the command stack were applied
     writer.writeStartElement(DOCUMENT_SERIALIZE_FILE);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_FILE_IMPORTED,
+                          m_originalFileWasImported ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
     writer.writeEndElement();
 
     // Commands
@@ -1183,50 +1222,57 @@ void MainWindow::saveErrorReportFile (const char *context,
 
     writer.writeEndElement();
 
-    // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents
+    // Put string into DOM
     QDomDocument domErrorReport ("ErrorReport");
     domErrorReport.setContent (xmlErrorReport);
-    QDomDocument domInputFile;
-    loadDomInputFile (domInputFile);
-    QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
-    fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
-    QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
-    if (nodesFileTo.count () > 0) {
-      QDomNode nodeFileTo = nodesFileTo.at (0);
-      nodeFileTo.appendChild (fragmentFileFrom);
-    }
 
-    // Replace DOCUMENT_SERIALIZE_IMAGE by same node with CDATA removed, since:
-    // 1) it is very big and working with smaller files, especially in emails, is easier
-    // 2) removing the image better preserves user's privacy
-    // 3) having the actual image does not help that much when debugging
-    QDomNodeList nodesDocument = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
-    for (int i = 0 ; i < nodesDocument.count(); i++) {
-      QDomNode nodeDocument = nodesDocument.at (i);
-      QDomElement elemImage = nodeDocument.firstChildElement(DOCUMENT_SERIALIZE_IMAGE);
-      if (!elemImage.isNull()) {
+    // Postprocessing
+    if (!m_originalFileWasImported) {
 
-        // Get old image attributes so we can create an empty document with the same size
-        if (elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
-            elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
+      // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents
+      QDomDocument domInputFile;
+      loadInputFileForErrorReport (domInputFile);
+      QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
+      fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+      QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
+      if (nodesFileTo.count () > 0) {
+        QDomNode nodeFileTo = nodesFileTo.at (0);
+        nodeFileTo.appendChild (fragmentFileFrom);
+      }
 
-          int width = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
-          int height = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+      // Replace DOCUMENT_SERIALIZE_IMAGE by same node with CDATA removed, since:
+      // 1) it is very big and working with smaller files, especially in emails, is easier
+      // 2) removing the image better preserves user's privacy
+      // 3) having the actual image does not help that much when debugging
+      QDomNodeList nodesDocument = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
+      for (int i = 0 ; i < nodesDocument.count(); i++) {
+        QDomNode nodeDocument = nodesDocument.at (i);
+        QDomElement elemImage = nodeDocument.firstChildElement(DOCUMENT_SERIALIZE_IMAGE);
+        if (!elemImage.isNull()) {
 
-          QDomNode nodeReplacement;
-          QDomElement elemReplacement = nodeReplacement.toElement();
-          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH, width);
-          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT, height);
+          // Get old image attributes so we can create an empty document with the same size
+          if (elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
+              elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
 
-          // Replace with the new and then remove the old
-          nodeDocument.insertBefore (nodeReplacement,
-                                     elemImage);
-          nodeDocument.removeChild(elemImage);
+            int width = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
+            int height = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+
+            QDomNode nodeReplacement;
+            QDomElement elemReplacement = nodeReplacement.toElement();
+            elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH, width);
+            elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT, height);
+
+            // Replace with the new and then remove the old
+            nodeDocument.insertBefore (nodeReplacement,
+                                       elemImage);
+            nodeDocument.removeChild(elemImage);
+          }
         }
       }
     }
 
-    std::cerr << domErrorReport.toString().toLatin1().data() << std::endl;
+    DlgErrorReport dlg (domErrorReport.toString());
+    dlg.exec();
   }
 }
 
@@ -1605,7 +1651,9 @@ void MainWindow::slotFileImport ()
                                                      QDir::currentPath (),
                                                      filter);
     if (!fileName.isEmpty ()) {
+
       fileImport (fileName);
+
     }
   }
 }
@@ -1650,7 +1698,9 @@ void MainWindow::slotFileOpen()
                                                      QDir::currentPath (),
                                                      filter);
     if (!fileName.isEmpty ()) {
+
       loadDocumentFile (fileName);
+
     }
   }
 }

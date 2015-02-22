@@ -59,14 +59,17 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator &cmdMediator();
 
+  /// Catch secret keypresses
+  virtual bool eventFilter(QObject *, QEvent *);
+
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
-  /// Save error report. Does not exit since we want nothing to happen if user clicks hidden shortcut in DlgAbout
-  void saveErrorReportFile(const char *comment,
-                           const char *file,
-                           int line,
-                           const char *context) const;
+  /// Save error report and exit
+  void saveErrorReportFileAndExit(const char *comment,
+                                  const char *file,
+                                  int line,
+                                  const char *context) const;
 
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
@@ -217,10 +220,10 @@ private:
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
-  void loadDomInputFile(QDomDocument &domInputFile) const;
   void loadErrorReportFile(const QString &errorReportFile);
   void loadImage (const QString &fileName,
                   const QImage &image);
+  void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
@@ -241,6 +244,8 @@ private:
   void updateViewedPoints ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
 
+  QString m_originalFile; // Original filename for error report
+  bool m_originalFileWasImported; // True/false for imported/opened
   QString m_engaugeFile; // Not empty when a Document is currently loaded AND it was loaded and/or saved as an Engauge file
   QString m_currentFile; // Not empty when a Document is currently loaded
 

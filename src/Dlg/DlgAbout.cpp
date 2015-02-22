@@ -1,6 +1,5 @@
 #include "DlgAbout.h"
 #include "MainWindow.h"
-#include <QKeyEvent>
 #include "VersionNumber.h"
 
 DlgAbout::DlgAbout (MainWindow &mainWindow) :
@@ -31,19 +30,4 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
                      "<ul>"
                      "<li><a href='http://www.fftw.org'>Project page</a></li>"
                      "</ul>")));
-}
-
-void DlgAbout::keyPressEvent(QKeyEvent *event)
-{
-  if ((event->key() == Qt::Key_E) &&
-      ((event->modifiers() & Qt::ShiftModifier) != 0) &&
-      ((event->modifiers() & Qt::ControlModifier) != 0)) {
-
-    m_mainWindow.saveErrorReportFile("Shift+Control+E",
-                                     __FILE__,
-                                     __LINE__,
-                                     "assert");
-  }
-
-  QMessageBox::keyPressEvent(event);
 }

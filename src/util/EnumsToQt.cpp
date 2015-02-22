@@ -47,6 +47,18 @@ QColor ColorPaletteToQColor (ColorPalette color) {
   return QColor (Qt::black);
 }
 
+QString EndianToString (QSysInfo::Endian endian)
+{
+  switch (endian) {
+    case QSysInfo::BigEndian:
+      return "BigEndian";
+    case QSysInfo::LittleEndian:
+      return "LittleEndian";
+  }
+
+  return "<Unknown>";
+}
+
 QString XmlReaderTokenTypeToString (QXmlStreamReader::TokenType tokenType)
 {
   switch (tokenType) {

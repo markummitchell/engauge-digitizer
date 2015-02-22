@@ -1,3 +1,4 @@
+#include <iostream>
 #include "LoggerUpload.h"
 #include "MainWindow.h"
 
@@ -38,11 +39,12 @@ void LoggerUpload::loggerOutput(const char *comment,
                                 const char *context)
 {
   if (m_mainWindow != 0) {
-    m_mainWindow->saveErrorReportFile(comment,
-                                      file,
-                                      line,
-                                      context);
+    m_mainWindow->saveErrorReportFileAndExit(comment,
+                                             file,
+                                             line,
+                                             context);
   }
 
+  std::cerr << "Error '" << context << "' at file " << file << " line " << line << ": " << comment << std::endl;
   exit (-1); // Stop execution since it is no longer safe to continue
 }

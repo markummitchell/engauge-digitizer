@@ -12,9 +12,6 @@ class DlgAbout : public QMessageBox
   /// Single constructor
   DlgAbout(MainWindow  &mainWindow);
 
-  /// Handle the hidden keyboard shortcut
-  virtual void keyPressEvent (QKeyEvent *event);
-
  private:
   DlgAbout();
   
