@@ -37,6 +37,7 @@ HEADERS  += \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
+    Cmd/CmdStackShadow.h \
     include/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
@@ -185,6 +186,7 @@ SOURCES += \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
+    Cmd/CmdStackShadow.cpp \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurveFilter.cpp \

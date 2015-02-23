@@ -8,6 +8,7 @@
 #include "CmdCut.h"
 #include "CmdDelete.h"
 #include "CmdMediator.h"
+#include "CmdStackShadow.h"
 #include "Curve.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
@@ -125,6 +126,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStateContextDigitize ();
   createStateContextTransformation ();
   createSettingsDialogs ();
+  createCommandStackShadow ();
   updateControls ();
 
   settingsRead ();
@@ -620,6 +622,11 @@ void MainWindow::createCentralWidget ()
   widget->setLayout (m_layout);
 }
 
+void MainWindow::createCommandStackShadow ()
+{
+  m_cmdStackShadow = new CmdStackShadow;
+}
+
 void MainWindow::createIcons()
 {
   QIcon icon;
@@ -987,7 +994,11 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   QXmlStreamReader reader (&file);
   file.open(QIODevice::ReadOnly | QIODevice::Text);
   m_cmdMediator = new CmdMediator(*this,
-                                  errorReportFile,
+                                  errorReportFile);
+
+  // Load the commands into the shadow command stack
+  m_cmdStackShadow->loadCommands (*this,
+                                  m_cmdMediator->document(),
                                   reader);
   file.close();
 
@@ -2355,6 +2366,8 @@ bool MainWindow::transformIsDefined() const
 void MainWindow::updateAfterCommand ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommand";
+
+  ENGAUGE_CHECK_PTR (m_cmdMediator);
 
   // Update the QGraphicsScene with the populated Curves
   m_scene->updateAfterCommand (*m_cmdMediator);

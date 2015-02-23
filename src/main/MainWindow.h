@@ -8,6 +8,7 @@
 #include "Transformation.h"
 
 class CmdMediator;
+class CmdStackShadow;
 class CurveStyles;
 class DigitizeStateContext;
 class DlgSettingsAxesChecker;
@@ -208,6 +209,7 @@ private:
   void createActionsSettings ();
   void createActionsView ();
   void createCentralWidget ();
+  void createCommandStackShadow ();
   void createIcons();
   void createLoadImageFromUrl ();
   void createMenus();
@@ -353,6 +355,7 @@ private:
   QToolBar *m_toolSettingsViews;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
+  CmdStackShadow *m_cmdStackShadow; /// Shadow of CmdMediator, for commands loaded from error report file
 
   // State machine for user interface states
   DigitizeStateContext *m_digitizeStateContext;

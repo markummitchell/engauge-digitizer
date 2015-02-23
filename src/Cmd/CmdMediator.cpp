@@ -34,30 +34,6 @@ CmdMediator::CmdMediator (MainWindow &mainWindow,
   connectSignals(mainWindow);
 }
 
-CmdMediator::CmdMediator (MainWindow &mainWindow,
-                          const QString &fileName,
-                          QXmlStreamReader &reader) :
-  m_document (fileName)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator filename=" << fileName.toLatin1().data();
-
-  // Load commands
-  CmdFactory factory;
-  while (!reader.atEnd() && !reader.hasError()) {
-
-    if ((loadNextFromReader (reader) == QXmlStreamReader::StartElement) &&
-        (reader.name() == DOCUMENT_SERIALIZE_CMD)) {
-
-      // Extract and append new command to command stack
-      push (factory.createCmd (mainWindow,
-                               m_document,
-                               reader));
-    }
-  }
-
-  connectSignals(mainWindow);
-}
-
 CmdMediator::~CmdMediator()
 {
 }
