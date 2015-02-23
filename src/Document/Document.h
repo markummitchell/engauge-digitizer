@@ -193,6 +193,7 @@ private:
   Document ();
 
   Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
+  void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadCurvesGraphs(QXmlStreamReader &reader);
   void loadImage(QXmlStreamReader &reader);
 

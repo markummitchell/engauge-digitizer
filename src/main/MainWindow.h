@@ -220,7 +220,8 @@ private:
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
-  void loadErrorReportFile(const QString &errorReportFile);
+  void loadErrorReportFile(const QString &initialPath,
+                           const QString &errorReportFile);
   void loadImage (const QString &fileName,
                   const QImage &image);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
@@ -236,6 +237,8 @@ private:
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
+  void setupAfterLoad (const QString &fileName,
+                       const QString &temporaryMessage);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);

@@ -109,6 +109,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
 {
   LoggerUpload::bindToMainWindow(this);
 
+  QString initialPath = QDir::currentPath();
+
   setCurrentFile ("");
   createIcons();
   setWindowFlags (Qt::WindowContextHelpButtonHint);
@@ -131,7 +133,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   installEventFilter(this);
   if (!errorReportFile.isEmpty()) {
-    loadErrorReportFile(errorReportFile);
+    loadErrorReportFile(initialPath,
+                        errorReportFile);
   }
 }
 
@@ -931,20 +934,8 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     }
 
     m_cmdMediator = cmdMediator;
-    m_digitizeStateContext->bindToCmdMediator (cmdMediator);
-    connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
-    connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ()));
-    connect (m_cmdMediator, SIGNAL (canRedoChanged(bool)), this, SLOT (slotCanRedoChanged (bool)));
-    connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
-    connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
-    connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
-    loadCurveListFromCmdMediator ();
-    setPixmap (m_cmdMediator->pixmap ());
-    slotViewZoomFill();
-
-    setCurrentFile(fileName);
-    m_statusBar->showTemporaryMessage("File opened");
-    m_statusBar->wakeUp ();
+    setupAfterLoad(fileName,
+                   "File opened");
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -967,20 +958,50 @@ void MainWindow::loadDocumentFile (const QString &fileName)
   }
 }
 
-void MainWindow::loadErrorReportFile(const QString &errorReportFile)
+void MainWindow::loadErrorReportFile(const QString &initialPath,
+                                     const QString &errorReportFile)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadErrorReportFile"
+                              << " path=" << initialPath.toLatin1().data()
+                              << " file=" << errorReportFile.toLatin1().data();
+
+  // The default path has been changed from its original executable-based initial value to the last directory used
+  // according to the settings. Since the executable-based directory is much more stable, and we want a predictable
+  // directory in the likely event that the error report file has a relative path, we temporarily switch the default path
+  // back to the executable-based initial value
+  QString originalPath = QDir::currentPath();
+  QDir::setCurrent(initialPath);
+
   QFile file (errorReportFile);
   if (!file.exists()) {
+    // Convert path from relative to absolute so file-not-found errors are easier to fix
+    QFileInfo fileInfo (errorReportFile);
+
     QMessageBox::critical (this,
                            tr ("Load Error"),
-                           tr ("File not found: ") + errorReportFile);
+                           tr ("File not found: ") + fileInfo.absoluteFilePath());
     exit (-1);
   }
 
+  // Open the error report file as if it was a regular Document file
   QXmlStreamReader reader (&file);
+  file.open(QIODevice::ReadOnly | QIODevice::Text);
   m_cmdMediator = new CmdMediator(*this,
                                   errorReportFile,
                                   reader);
+  file.close();
+
+  // Reset the original path now that the error report file has been read in
+  QDir::setCurrent(originalPath);
+
+  setupAfterLoad(errorReportFile,
+                 "Error report opened");
+
+  // Start select mode
+  m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
+  slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
+
+  updateAfterCommand ();
 }
 
 void MainWindow::loadImage (const QString &fileName,
@@ -1003,21 +1024,8 @@ void MainWindow::loadImage (const QString &fileName,
   }
 
   m_cmdMediator = cmdMediator;
-  m_digitizeStateContext->bindToCmdMediator (cmdMediator);
-  connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
-  connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ()));
-  connect (m_cmdMediator, SIGNAL (canRedoChanged(bool)), this, SLOT (slotCanRedoChanged (bool)));
-  connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
-  connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
-  connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
-  loadCurveListFromCmdMediator ();
-  updateViewsOfSettings ();
-  setPixmap (m_cmdMediator->pixmap ());
-  slotViewZoomFill();
-
-  setCurrentFile(fileName);
-  m_statusBar->showTemporaryMessage ("File imported");
-  m_statusBar->wakeUp ();
+  setupAfterLoad(fileName,
+                 "File imported");
 
   // Start axis mode
   m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
@@ -1436,6 +1444,32 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.endGroup ();
+}
+
+void MainWindow::setupAfterLoad (const QString &fileName,
+                                 const QString &temporaryMessage)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
+                              << " file=" << fileName.toLatin1().data()
+                              << " message=" << temporaryMessage.toLatin1().data();
+
+  // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
+  m_digitizeStateContext->bindToCmdMediator (m_cmdMediator);
+
+  connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
+  connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ()));
+  connect (m_cmdMediator, SIGNAL (canRedoChanged(bool)), this, SLOT (slotCanRedoChanged (bool)));
+  connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
+  connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
+  connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
+  loadCurveListFromCmdMediator ();
+  updateViewsOfSettings ();
+  setPixmap (m_cmdMediator->pixmap ());
+  slotViewZoomFill();
+
+  setCurrentFile(fileName);
+  m_statusBar->showTemporaryMessage (temporaryMessage);
+  m_statusBar->wakeUp ();
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)

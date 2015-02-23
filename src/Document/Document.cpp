@@ -59,7 +59,14 @@ Document::Document (const QString &fileName) :
            !reader.hasError()) {
       QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
 
-      // Branching to skip non-Document nodes
+      // Special processing of DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT, for an error report file
+      if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
+          (tokenType == QXmlStreamReader::StartElement)) {
+
+        generateEmptyPixmap (reader.attributes());
+      }
+
+      // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
       if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
           (tokenType == QXmlStreamReader::StartElement)) {
 
@@ -94,6 +101,7 @@ Document::Document (const QString &fileName) :
           } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
             m_modelGridRemoval.loadXml(reader);
           } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+            // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
             loadImage(reader);
           } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
             m_modelPointMatch.loadXml(reader);
@@ -312,6 +320,23 @@ void Document::editPointAxis (const QPointF &posGraph,
 
   m_curveAxes->editPoint (posGraph,
                           identifier);
+}
+
+void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::generateEmptyPixmap";
+
+  int width = 800, height = 500; // Defaults
+
+  if (attributes.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
+      attributes.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
+
+    width = attributes.value (DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
+    height = attributes.value (DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+
+  }
+
+  m_pixmap = QPixmap (width, height);
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
