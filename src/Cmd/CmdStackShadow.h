@@ -2,6 +2,7 @@
 #define CMD_STACK_SHADOW_H
 
 #include <QList>
+#include <QObject>
 
 class CmdAbstract;
 class Document;
@@ -20,18 +21,32 @@ typedef QList<CmdAbstract*> CmdListInternal;
 ///
 /// This class is not named CmdMediatorShadow since does not maintain a Document like CmdMediator, although in some ways
 /// that name might be a useful alias
-class CmdStackShadow
+class CmdStackShadow : public QObject
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor
   CmdStackShadow();
+
+  /// Return true if there is a command available
+  bool canRedo () const;
 
   /// Load commands from serialized xml
   void loadCommands (MainWindow &mainWindow,
                      Document &document,
                      QXmlStreamReader &reader);
 
+public slots:
+  /// Move next command from list to CmdMediator. Noop if there are no more commands
+  void slotRedo ();
+
+  /// Throw away every command since trying to reconcile two different command stacks after an undo is too dangerous
+  void slotUndo ();
+
 private:
+
+  MainWindow *m_mainWindow;
 
   CmdListInternal m_cmdList;
 };

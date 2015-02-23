@@ -1468,7 +1468,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   m_digitizeStateContext->bindToCmdMediator (m_cmdMediator);
 
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
-  connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ()));
+  connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdStackShadow, SLOT (slotUndo ()));
+  connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ())); // No effect until CmdMediator::undo and CmdStackShadow::slotUndo get called
+  connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdStackShadow, SLOT (slotRedo ())); // No effect after CmdMediator::undo and CmdStackShadow::slotUndo get called
   connect (m_cmdMediator, SIGNAL (canRedoChanged(bool)), this, SLOT (slotCanRedoChanged (bool)));
   connect (m_cmdMediator, SIGNAL (canUndoChanged(bool)), this, SLOT (slotCanUndoChanged (bool)));
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
@@ -1487,7 +1489,7 @@ void MainWindow::slotCanRedoChanged (bool canRedo)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotCanRedoChanged";
 
-  m_actionEditRedo->setEnabled (canRedo);
+  m_actionEditRedo->setEnabled (canRedo || m_cmdStackShadow->canRedo());
 }
 
 void MainWindow::slotCanUndoChanged (bool canUndo)
@@ -2451,7 +2453,7 @@ void MainWindow::updateControls ()
     m_actionEditRedo->setEnabled (false);
   } else {
     m_actionEditUndo->setEnabled (m_cmdMediator->canUndo ());
-    m_actionEditRedo->setEnabled (m_cmdMediator->canRedo ());
+    m_actionEditRedo->setEnabled (m_cmdMediator->canRedo () || m_cmdStackShadow->canRedo ());
   }
   m_actionEditCut->setEnabled (m_scene->selectedItems().count () > 0);
   m_actionEditCopy->setEnabled (m_scene->selectedItems().count () > 0);

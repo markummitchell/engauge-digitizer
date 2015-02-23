@@ -1,15 +1,28 @@
+#include "CmdAbstract.h"
 #include "CmdFactory.h"
+#include "CmdMediator.h"
 #include "CmdStackShadow.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QUndoCommand>
 #include <QXmlStreamReader>
 #include "Xml.h"
 
-CmdStackShadow::CmdStackShadow()
+CmdStackShadow::CmdStackShadow() :
+  m_mainWindow (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::CmdStackShadow";
+}
+
+bool CmdStackShadow::canRedo() const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::canRedo";
+
+  bool canRedo = (m_cmdList.count () > 0);
+
+  return canRedo;
 }
 
 void CmdStackShadow::loadCommands (MainWindow &mainWindow,
@@ -17,6 +30,9 @@ void CmdStackShadow::loadCommands (MainWindow &mainWindow,
                                    QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::loadCommands";
+
+  // Save pointer to MainWindow
+  m_mainWindow = &mainWindow;
 
   // Load commands
   CmdFactory factory;
@@ -31,4 +47,34 @@ void CmdStackShadow::loadCommands (MainWindow &mainWindow,
                                               reader));
     }
   }
+}
+
+void CmdStackShadow::slotRedo ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::slotRedo";
+
+  if (m_cmdList.count() > 0) {
+
+    QUndoCommand *cmd = dynamic_cast<QUndoCommand*> (m_cmdList.front());
+
+    m_cmdList.pop_front();
+
+    if (m_mainWindow != 0) {
+       m_mainWindow->cmdMediator().push(cmd);
+    }
+  }
+}
+
+void CmdStackShadow::slotUndo()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::slotUndo";
+
+  CmdListInternal::iterator itr;
+  for (itr = m_cmdList.begin(); itr != m_cmdList.end(); itr++) {
+
+    CmdAbstract *cmd = *itr;
+    delete cmd;
+  }
+
+  m_cmdList.clear();
 }
