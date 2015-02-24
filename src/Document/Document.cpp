@@ -26,8 +26,8 @@ Document::Document (const QImage &image) :
   m_name ("untitled"),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           CurveFilter::defaultFilter (),
-                          LineStyle::defaultAxesCurve(),
-                          PointStyle::defaultAxesCurve ()))
+                          CurveStyle (LineStyle::defaultAxesCurve(),
+                                      PointStyle::defaultAxesCurve ())))
 {
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
@@ -35,8 +35,8 @@ Document::Document (const QImage &image) :
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
                                             CurveFilter::defaultFilter (),
-                                            LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
-                                            PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ())));
+                                            CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
+                                                        PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
 }
 
 Document::Document (const QString &fileName) :
@@ -139,8 +139,8 @@ void Document::addGraphCurveAtEnd (const QString &curveName)
 {
   m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
                                              CurveFilter::defaultFilter (),
-                                             LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
-                                             PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves())));
+                                             CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
+                                                         PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
 }
 
 void Document::addPointAxis (const QPointF &posScreen,
@@ -554,30 +554,16 @@ void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 
 void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 {
-  // Save the LineStyle for each Curve
-  LineStyles::const_iterator itrL;
-  for (itrL = modelCurveStyles.lineStyles().constBegin ();
-       itrL != modelCurveStyles.lineStyles().constEnd();
-       itrL++) {
+  // Save the LineStyle and PointStyle for each Curve
+  QStringList curveNames = modelCurveStyles.curveNames();
+  QStringList::iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
-    QString curveName = itrL.key();
-    const LineStyle &lineStyle = itrL.value();
-
-    Curve *curve = curveForCurveName (curveName);
-    curve->setLineStyle (lineStyle);
-  }
-
-  // Save the PointStyle for each Curve
-  PointStyles::const_iterator itrP;
-  for (itrP = modelCurveStyles.pointStyles().constBegin ();
-       itrP != modelCurveStyles.pointStyles().constEnd ();
-       itrP++) {
-
-    QString curveName = itrP.key();
-    const PointStyle &pointStyle = itrP.value();
+    QString curveName = *itr;
+    const CurveStyle &curveStyle = modelCurveStyles.curveStyle (curveName);
 
     Curve *curve = curveForCurveName (curveName);
-    curve->setPointStyle (pointStyle);
+    curve->setCurveStyle (curveStyle);
   }
 }
 

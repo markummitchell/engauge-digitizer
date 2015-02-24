@@ -51,6 +51,7 @@ HEADERS  += \
     Curve/CurveNameListEntry.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
+    Curve/CurveStyle.h \
     Curve/CurveStyles.h \
     include/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
@@ -120,7 +121,6 @@ HEADERS  += \
     Grid/GridCoordDisable.h \
     Line/LineIdentifierToGraphicsItem.h \
     Line/LineStyle.h \
-    Line/LineStyles.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
@@ -132,7 +132,6 @@ HEADERS  += \
     Point/PointIdentifierToGraphicsPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
-    Point/PointStyles.h \
     util/QtToString.h \
     Segment/Segment.h \
     Segment/SegmentFactory.h \
@@ -194,6 +193,7 @@ SOURCES += \
     Curve/CurveNameListEntry.cpp \
     Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
+    Curve/CurveStyle.cpp \
     Curve/CurveStyles.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \

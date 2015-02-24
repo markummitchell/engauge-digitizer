@@ -31,7 +31,7 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
     const Curve *curve = m_document.curveForCurveName (curveName);
     ENGAUGE_CHECK_PTR (curve);
     graphicsPoint = m_scene.addPoint (point.identifier (),
-                                      curve->pointStyle (),
+                                      curve->curveStyle().pointStyle (),
                                       point.posScreen ());
   }
 

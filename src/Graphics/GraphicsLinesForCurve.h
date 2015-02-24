@@ -36,7 +36,7 @@ public:
                  const LineStyle &lineStyle);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene);
+  void updateLineMembership (GraphicsScene &scene);
 
 private:
 

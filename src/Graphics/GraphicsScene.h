@@ -75,10 +75,14 @@ private:
   double maxOrdinal () const;
 
   /// Update lines using a multi-pass algorithm.
-  void updateLines (CmdMediator &cmdMediator);
+  void updateLineMembership (CmdMediator &cmdMediator);
+
+  /// Update graph coordinates and (where applicable) ordinals of the points after point membership has been updated, so line
+  /// membership can be updated
+  void updatePointGraphCoordinatesAndOrdinals (CmdMediator &cmdMediator);
 
   /// Update Points using a multi-pass algorithm.
-  void updatePoints (CmdMediator &cmdMediator);
+  void updatePointMembership (CmdMediator &cmdMediator);
 
   /// Mapping for moving lines when their points get moved
   LineIdentifierToGraphicsItem m_lineIdentifierToGraphicsItem;

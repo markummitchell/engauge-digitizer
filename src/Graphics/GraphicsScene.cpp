@@ -232,8 +232,12 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
-  updatePoints (cmdMediator);
-  updateLines (cmdMediator);
+  updatePointMembership (cmdMediator);
+
+  // Point membership is fixed, so now update the point ordinals so the lines can be assigned
+  updatePointGraphCoordinatesAndOrdinals (cmdMediator);
+
+  updateLineMembership (cmdMediator);
 }
 
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
@@ -241,9 +245,9 @@ void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 }
 
-void GraphicsScene::updateLines (CmdMediator &cmdMediator)
+void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLines";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembership";
 
   // Remove all old entries
   m_graphicsLinesForCurves.resetPoints ();
@@ -304,12 +308,31 @@ void GraphicsScene::updateLines (CmdMediator &cmdMediator)
     }
   }
 
-  m_graphicsLinesForCurves.updateLines (*this);
+  m_graphicsLinesForCurves.updateLineMembership (*this);
 }
 
-void GraphicsScene::updatePoints (CmdMediator &cmdMediator)
+void GraphicsScene::updatePointGraphCoordinatesAndOrdinals (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointGraphCoordinatesAndOrdinals";
+
+  // Loop through all points
+  PointIdentifierToGraphicsPoint::iterator itr;
+  for (itr = m_mapPointIdentifierToGraphicsPoint.begin(); itr != m_mapPointIdentifierToGraphicsPoint.end(); itr++) {
+
+//    Point &point = itr.value();
+//    QString curveName = Point::curveNameFromPointIdentifier (point.identifier());
+//
+//    // Skip axes points
+//    if (curveName != AXIS_CURVE_NAME) {
+//
+//      const LineStyle &lineStyle = cmdMediator.document().modelCurveStyle(curveName);
+//    }
+  }
+}
+
+void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
   CallbackSceneUpdateAfterCommand ftor (m_mapPointIdentifierToGraphicsPoint,
                                         *this,

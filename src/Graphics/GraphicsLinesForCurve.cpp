@@ -68,7 +68,7 @@ void GraphicsLinesForCurve::saveLine (GraphicsScene &scene,
   pointEnd.setLineWithPointAsEnd (line);
 }
 
-void GraphicsLinesForCurve::updateLines (GraphicsScene &scene)
+void GraphicsLinesForCurve::updateLineMembership (GraphicsScene &scene)
 {
   // Remove unwanted lines
   QMap<double, GraphicsLine*>::iterator itr, itrNext;

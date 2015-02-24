@@ -16,12 +16,10 @@ const QString TAB_DELIMITER ("\t");
 
 Curve::Curve(const QString &curveName,
              const CurveFilter &curveFilter,
-             const LineStyle &lineStyle,
-             const PointStyle &pointStyle) :
+             const CurveStyle &curveStyle) :
   m_curveName (curveName),
   m_curveFilter (curveFilter),
-  m_lineStyle (lineStyle),
-  m_pointStyle (pointStyle)
+  m_curveStyle (curveStyle)
 {
 }
 
@@ -29,8 +27,7 @@ Curve::Curve (const Curve &curve) :
   m_curveName (curve.curveName ()),
   m_points (curve.points ()),
   m_curveFilter (curve.curveFilter ()),
-  m_lineStyle (curve.lineStyle ()),
-  m_pointStyle (curve.pointStyle ())
+  m_curveStyle (curve.curveStyle ())
 {
 }
 
@@ -44,8 +41,7 @@ Curve &Curve::operator=(const Curve &curve)
   m_curveName = curve.curveName ();
   m_points = curve.points ();
   m_curveFilter = curve.curveFilter ();
-  m_lineStyle = curve.lineStyle ();
-  m_pointStyle = curve.pointStyle ();
+  m_curveStyle = curve.curveStyle ();
 
   return *this;
 }
@@ -80,6 +76,11 @@ CurveFilter Curve::curveFilter () const
 QString Curve::curveName () const
 {
   return  m_curveName;
+}
+
+CurveStyle Curve::curveStyle() const
+{
+  return m_curveStyle;
 }
 
 void Curve::editPoint (const QPointF &posGraph,
@@ -123,12 +124,16 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
                 << "<tr><th>X</th><th>" << m_curveName << "</th></tr>\n";
       }
 
+      // Default curve style
+      CurveStyle curveStyleDefault;
+      curveStyleDefault.setLineStyle(LineStyle::defaultAxesCurve());
+      curveStyleDefault.setPointStyle(PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
+
       // Check if this curve already exists from a previously exported point
       if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
         Curve curve(m_curveName,
                     CurveFilter::defaultFilter (),
-                    LineStyle::defaultAxesCurve (),
-                    PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
+                    curveStyleDefault);
         curvesGraphs.addGraphCurveAtEnd(curve);
       }
 
@@ -165,11 +170,6 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
       break;
     }
   }
-}
-
-LineStyle Curve::lineStyle () const
-{
-  return m_lineStyle;
 }
 
 void Curve::loadCurvePoints(QXmlStreamReader &reader)
@@ -232,10 +232,8 @@ void Curve::loadXml(QXmlStreamReader &reader)
           m_curveFilter.loadXml(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
           loadCurvePoints(reader);
-        } else if (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE) {
-          m_lineStyle.loadXml(reader);
-        } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE) {
-          m_pointStyle.loadXml(reader);
+        } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_STYLE) {
+          m_curveStyle.loadXml(reader);
         } else {
           success = false;
           break;
@@ -283,11 +281,6 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
 
   ENGAUGE_ASSERT (false);
   return 0;
-}
-
-PointStyle Curve::pointStyle () const
-{
-  return m_pointStyle;
 }
 
 QPointF Curve::positionGraph (const QString &pointIdentifier) const
@@ -349,9 +342,7 @@ void Curve::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
   m_curveFilter.saveXml (writer);
-  m_lineStyle.saveXml (writer,
-                       m_curveName);
-  m_pointStyle.saveXml (writer,
+  m_curveStyle.saveXml (writer,
                         m_curveName);
 
   // Loop through points
@@ -376,12 +367,8 @@ void Curve::setCurveName (const QString &curveName)
   m_curveName = curveName;
 }
 
-void Curve::setLineStyle (const LineStyle &lineStyle)
+void Curve::setCurveStyle (const CurveStyle &curveStyle)
 {
-  m_lineStyle = lineStyle;
+  m_curveStyle = curveStyle;
 }
 
-void Curve::setPointStyle (const PointStyle &pointStyle)
-{
-  m_pointStyle = pointStyle;
-}

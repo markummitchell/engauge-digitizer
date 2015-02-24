@@ -2681,7 +2681,7 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
 
   } else {
 
-    PointStyle pointStyle = m_cmdMediator->document().modelCurveStyles().pointStyle(activeCurve);
+    PointStyle pointStyle = m_cmdMediator->document().modelCurveStyles().curveStyle(activeCurve).pointStyle();
     m_viewPointStyle->setPointStyle (pointStyle);
 
     CurveFilter curveFilter = m_cmdMediator->document().modelFilter().curveFilter(activeCurve);

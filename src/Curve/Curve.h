@@ -3,10 +3,9 @@
 
 #include "CallbackSearchReturn.h"
 #include "CurveFilter.h"
+#include "CurveStyle.h"
 #include "functor.h"
-#include "LineStyle.h"
 #include "Point.h"
-#include "PointStyle.h"
 #include <QHash>
 #include <QList>
 #include <QString>
@@ -29,8 +28,7 @@ public:
   /// Constructor from scratch.
   Curve(const QString &curveName,
         const CurveFilter &curveFilter,
-        const LineStyle &lineStyle,
-        const PointStyle &pointStyle);
+        const CurveStyle &curveStyle);
 
   /// Constructor for use when loading from serialized xml
   Curve (QXmlStreamReader &reader);
@@ -53,6 +51,9 @@ public:
   /// Name of this Curve.
   QString curveName () const;
 
+  /// Return the curve style
+  CurveStyle curveStyle() const;
+
   /// Edit the graph coordinates of an axis point. This method does not apply to a graph point
   void editPoint (const QPointF &posGraph,
                   const QString &identifier);
@@ -67,9 +68,6 @@ public:
   /// Apply functor to Points on Curve.
   void iterateThroughCurvePoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
-  /// Return the line style.
-  LineStyle lineStyle () const;
-
   /// Translate the position of a point by the specified distance vector.
   void movePoint (const QString &pointIdentifier,
                   const QPointF &deltaScreen);
@@ -77,17 +75,14 @@ public:
   /// Number of points.
   int numPoints () const;
 
+  /// Return a shallow copy of the Points.
+  const Points points () const;
+
   /// Return the position, in graph coordinates, of the specified Point.
   QPointF positionGraph (const QString &pointIdentifier) const;
 
   /// Return the position, in screen coordinates, of the specified Point.
   QPointF positionScreen (const QString &pointIdentifier) const;
-
-  /// Return a shallow copy of the Points.
-  const Points points () const;
-
-  /// Return the point style.
-  PointStyle pointStyle () const;
 
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
@@ -101,11 +96,8 @@ public:
   /// Change the curve name
   void setCurveName (const QString &curveName);
 
-  /// Set line style.
-  void setLineStyle (const LineStyle &lineStyle);
-
-  /// Set point style.
-  void setPointStyle (const PointStyle &pointStyle);
+  /// Set curve style.
+  void setCurveStyle (const CurveStyle &curveStyle);
 
 private:
   Curve();
@@ -118,8 +110,7 @@ private:
   Points m_points;
 
   CurveFilter m_curveFilter;
-  LineStyle m_lineStyle;
-  PointStyle m_pointStyle;
+  CurveStyle m_curveStyle;
 };
 
 #endif // CURVE_H

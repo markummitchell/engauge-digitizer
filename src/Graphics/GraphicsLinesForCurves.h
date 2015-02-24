@@ -1,13 +1,12 @@
 #ifndef GRAPHICS_LINES_FOR_CURVES_H
 #define GRAPHICS_LINES_FOR_CURVES_H
 
-#include "LineStyle.h"
-#include "LineStyles.h"
 #include <QHash>
 
 class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
+class LineStyle;
 class QGraphicsItem;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
@@ -35,7 +34,7 @@ public:
                  const LineStyle &lineStyle);
 
   /// Remove stale lines and insert missing lines
-  void updateLines (GraphicsScene &scene);
+  void updateLineMembership (GraphicsScene &scene);
 
 private:
 

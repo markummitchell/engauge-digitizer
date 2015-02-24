@@ -410,7 +410,7 @@ void DlgSettingsCurveProperties::updatePreview()
   QString currentCurve = m_cmbCurveName->currentText();
 
   GraphicsPointFactory pointFactory;
-  const PointStyle pointStyle = m_modelCurveStylesAfter->pointStyle (currentCurve);
+  const PointStyle pointStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).pointStyle();
 
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,

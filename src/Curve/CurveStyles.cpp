@@ -16,8 +16,8 @@ CurveStyles::CurveStyles (const Document &document)
 {
   // Axis curve
   const Curve &curveAxes = document.curveAxes();
-  m_lineStyles [AXIS_CURVE_NAME] = curveAxes.lineStyle();
-  m_pointStyles [AXIS_CURVE_NAME] = curveAxes.pointStyle ();
+  m_curveStyles [AXIS_CURVE_NAME].setLineStyle (curveAxes.curveStyle().lineStyle());
+  m_curveStyles [AXIS_CURVE_NAME].setPointStyle (curveAxes.curveStyle().pointStyle());
 
   // Graph curves
   QStringList graphCurveNames = document.curvesGraphsNames();
@@ -26,77 +26,76 @@ CurveStyles::CurveStyles (const Document &document)
 
     const QString &graphCurveName = *itr;
     const Curve *graphCurve = document.curveForCurveName(graphCurveName);
-    m_lineStyles [graphCurveName] = graphCurve->lineStyle();
-    m_pointStyles [graphCurveName] = graphCurve->pointStyle ();
+    m_curveStyles [graphCurveName].setLineStyle (graphCurve->curveStyle().lineStyle());
+    m_curveStyles [graphCurveName].setPointStyle (graphCurve->curveStyle().pointStyle());
   }
 }
 
 CurveStyles::CurveStyles (const CurveStyles &other)
 {
-  // Line styles
-  LineStyles::const_iterator itrL;
-  for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
-    QString curveName = itrL.key();
-    LineStyle lineStyle = itrL.value();
-    m_lineStyles [curveName] = lineStyle;
-  }
+  const QStringList curveNames = other.curveNames();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
-  // Point styles
-  PointStyles::const_iterator itrP;
-  for (itrP = other.pointStyles().constBegin(); itrP != other.pointStyles().constEnd(); itrP++) {
-    QString curveName = itrP.key();
-    PointStyle pointStyle = itrP.value();   
-    m_pointStyles [curveName] = pointStyle;
+    QString curveName = *itr;
+
+    m_curveStyles [curveName] = other.curveStyle (curveName);
   }
 }
 
 CurveStyles &CurveStyles::operator=(const CurveStyles &other)
 {
-  // Line styles
-  LineStyles::const_iterator itrL;
-  for (itrL = other.lineStyles().constBegin (); itrL != other.lineStyles().constEnd(); itrL++) {
-    QString curveName = itrL.key();
-    LineStyle lineStyle = itrL.value();
-    m_lineStyles [curveName] = lineStyle;
-  }
+  const QStringList curveNames = other.curveNames();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
-  // Point styles
-  PointStyles::const_iterator itrP;
-  for (itrP = other.pointStyles().constBegin(); itrP != other.pointStyles().constEnd(); itrP++) {
-    QString curveName = itrP.key();
-    PointStyle pointStyle = itrP.value();
-    m_pointStyles [curveName] = pointStyle;
+    QString curveName = *itr;
+
+    m_curveStyles [curveName] = other.curveStyle (curveName);
   }
 
   return *this;
 }
 
+QStringList CurveStyles::curveNames () const
+{
+  QStringList curveNames;
+  CurveStylesInternal::const_iterator itr;
+  for (itr = m_curveStyles.begin(); itr != m_curveStyles.end(); itr++) {
+
+    curveNames << itr.key();
+  }
+
+  return curveNames;
+}
+
+CurveStyle CurveStyles::curveStyle (const QString &curveName) const
+{
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName];
+}
+
 ColorPalette CurveStyles::lineColor (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  return m_lineStyles [curveName].paletteColor();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].lineStyle().paletteColor();
 }
 
 CurveConnectAs CurveStyles::lineConnectAs (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  return m_lineStyles [curveName].curveConnectAs();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].lineStyle().curveConnectAs();
 }
 
 const LineStyle CurveStyles::lineStyle (const QString &curveName) const
 {
-  return m_lineStyles [curveName];
-}
-
-const LineStyles &CurveStyles::lineStyles () const
-{
-  return m_lineStyles;
+  return m_curveStyles [curveName].lineStyle();
 }
 
 double CurveStyles::lineWidth (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  return m_lineStyles [curveName].width();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].lineStyle().width();
 }
 
 void CurveStyles::loadXml (QXmlStreamReader &reader)
@@ -118,75 +117,55 @@ void CurveStyles::loadXml (QXmlStreamReader &reader)
 
     // Not done yet
     if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
-        (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE)) {
+        (reader.name() == DOCUMENT_SERIALIZE_CURVE_STYLE)) {
 
-      // Node has a LineStyle that we need to parse and save
-      LineStyle lineStyle;
-      QString curveName = lineStyle.loadXml (reader);
+      // Node has a CurveStyle that we need to parse and save
+      CurveStyle curveStyle;
+      QString curveName = curveStyle.loadXml (reader);
 
-      m_lineStyles [curveName] = lineStyle;
-
-    } else if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
-               (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE)) {
-
-      // Node has a PointSTyle that we need to parse and save
-      PointStyle pointStyle;
-      QString curveName = pointStyle.loadXml (reader);
-
-      m_pointStyles [curveName] = pointStyle;
+      m_curveStyles [curveName] = curveStyle;
     }
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read point identifiers");
+    reader.raiseError ("Cannot read curve styles");
   }
 }
 
 ColorPalette CurveStyles::pointColor (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].paletteColor();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().paletteColor();
 }
 
 bool CurveStyles::pointIsCircle (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].isCircle();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().isCircle();
 }
 
 double CurveStyles::pointLineWidth (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].lineWidth();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().lineWidth();
 }
 
 QPolygonF CurveStyles::pointPolygon (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].polygon();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().polygon();
 }
 
 int CurveStyles::pointRadius (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].radius();
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().radius();
 }
 
 PointShape CurveStyles::pointShape (const QString &curveName) const
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName].shape ();
-}
-
-const PointStyle CurveStyles::pointStyle (const QString &curveName) const
-{
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  return m_pointStyles [curveName];
-}
-
-const PointStyles &CurveStyles::pointStyles() const
-{
-  return m_pointStyles;
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle().shape ();
 }
 
 void CurveStyles::saveXml(QXmlStreamWriter &writer) const
@@ -194,77 +173,72 @@ void CurveStyles::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "CurveStyles::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES);
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_LINE_STYLES);
-  LineStyles::const_iterator itrL;
-  for (itrL = m_lineStyles.begin(); itrL != m_lineStyles.end(); itrL++) {
+  CurveStylesInternal::const_iterator itr;
+  for (itr = m_curveStyles.begin(); itr != m_curveStyles.end(); itr++) {
 
-    QString curveName = itrL.key();
-    const LineStyle &lineStyle = itrL.value();
+    QString curveName = itr.key();
+    const CurveStyle &curveStyle = itr.value();
 
-    lineStyle.saveXml(writer,
-                      curveName);
-  }
-  writer.writeEndElement();
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLES_POINT_STYLES);
-  PointStyles::const_iterator itrP;
-  for (itrP = m_pointStyles.begin(); itrP != m_pointStyles.end(); itrP++) {
-
-    QString curveName = itrP.key();
-    const PointStyle &pointStyle = itrP.value();
-
-    pointStyle.saveXml(writer,
+    curveStyle.saveXml(writer,
                        curveName);
   }
   writer.writeEndElement();
-  writer.writeEndElement();
+}
+
+void CurveStyles::setCurveStyle (const QString &curveName,
+                                 const CurveStyle &curveStyle)
+{
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].setLineStyle(curveStyle.lineStyle());
+  m_curveStyles [curveName].setPointStyle(curveStyle.pointStyle());
 }
 
 void CurveStyles::setLineColor (const QString &curveName,
                                 ColorPalette lineColor)
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  m_lineStyles [curveName].setPaletteColor(lineColor);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].lineStyle().setPaletteColor(lineColor);
 }
 
 void CurveStyles::setLineConnectAs (const QString &curveName,
                                     CurveConnectAs curveConnectAs)
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  m_lineStyles [curveName].setCurveConnectAs(curveConnectAs);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].lineStyle().setCurveConnectAs(curveConnectAs);
 }
 
 void CurveStyles::setLineWidth (const QString &curveName,
                                 int width)
 {
-  ENGAUGE_ASSERT (m_lineStyles.contains (curveName));
-  m_lineStyles [curveName].setWidth(width);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].lineStyle().setWidth(width);
 }
 
 void CurveStyles::setPointColor (const QString &curveName,
                                  ColorPalette curveColor)
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  m_pointStyles [curveName].setPaletteColor(curveColor);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].pointStyle().setPaletteColor(curveColor);
 }
 
 void CurveStyles::setPointLineWidth (const QString &curveName,
                                      double width)
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  m_pointStyles [curveName].setLineWidth (width);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].pointStyle().setLineWidth (width);
 }
 
 void CurveStyles::setPointRadius (const QString &curveName,
                                   int radius)
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  m_pointStyles [curveName].setRadius (radius);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].pointStyle().setRadius (radius);
 }
 
 void CurveStyles::setPointShape (const QString &curveName,
                                  PointShape shape)
 {
-  ENGAUGE_ASSERT (m_pointStyles.contains (curveName));
-  m_pointStyles [curveName].setShape (shape);
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  m_curveStyles [curveName].pointStyle().setShape (shape);
 }
 

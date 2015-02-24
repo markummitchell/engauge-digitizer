@@ -52,14 +52,13 @@ void GraphicsLinesForCurves::saveLine (GraphicsScene &scene,
   }
 }
 
-void GraphicsLinesForCurves::updateLines (GraphicsScene &scene)
+void GraphicsLinesForCurves::updateLineMembership (GraphicsScene &scene)
 {
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
 
-    const QString curveName = itr.key();
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->updateLines (scene);
+    graphicsLines->updateLineMembership (scene);
   }
 }
