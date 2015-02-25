@@ -1,6 +1,6 @@
 #include "DlgAbout.h"
 #include "MainWindow.h"
-#include "VersionNumber.h"
+#include "Version.h"
 
 DlgAbout::DlgAbout (MainWindow &mainWindow) :
   QMessageBox (&mainWindow),

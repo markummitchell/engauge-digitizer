@@ -41,7 +41,7 @@ public:
   double lineWidth () const;
 
   /// Load model from serialized xml. Returns the curve name
-  QString loadXml(QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Get method for point color.
   ColorPalette paletteColor () const;
@@ -53,8 +53,7 @@ public:
   int radius () const;
 
   /// Serialize to stream
-  void saveXml(QXmlStreamWriter &writer,
-               const QString &curveName) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for line width.
   void setLineWidth (double width);

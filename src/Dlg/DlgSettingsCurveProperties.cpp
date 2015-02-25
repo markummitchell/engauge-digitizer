@@ -326,7 +326,7 @@ void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
 
   m_modelCurveStylesAfter->setLineColor(m_cmbCurveName->currentText(),
-                                            (ColorPalette) m_cmbLineColor->currentData().toInt());
+                                        (ColorPalette) m_cmbLineColor->currentData().toInt());
   updateControls();
   updatePreview();
 }
@@ -336,7 +336,7 @@ void DlgSettingsCurveProperties::slotLineWidth(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth";
 
   m_modelCurveStylesAfter->setLineWidth(m_cmbCurveName->currentText(),
-                                            m_spinLineWidth->text().toDouble());
+                                        m_spinLineWidth->text().toDouble());
   updateControls ();
   updatePreview();
 }
@@ -346,7 +346,7 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
 
   m_modelCurveStylesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
-                                                (CurveConnectAs) m_cmbLineType->currentData().toInt ());
+                                            (CurveConnectAs) m_cmbLineType->currentData().toInt ());
   updateControls();
   updatePreview();
 }
@@ -356,7 +356,7 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor";
 
   m_modelCurveStylesAfter->setPointColor(m_cmbCurveName->currentText(),
-                                             (ColorPalette) m_cmbPointColor->currentData().toInt ());
+                                         (ColorPalette) m_cmbPointColor->currentData().toInt ());
   updateControls();
   updatePreview();
 }
@@ -366,7 +366,7 @@ void DlgSettingsCurveProperties::slotPointLineWidth(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth";
 
   m_modelCurveStylesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
-                                                 m_spinPointLineWidth->text().toDouble());
+                                             m_spinPointLineWidth->text().toDouble());
   updateControls();
   updatePreview();
 }
@@ -376,7 +376,7 @@ void DlgSettingsCurveProperties::slotPointRadius(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius";
 
   m_modelCurveStylesAfter->setPointRadius(m_cmbCurveName->currentText(),
-                                              m_spinPointRadius->text().toInt());
+                                          m_spinPointRadius->text().toInt());
   updateControls();
   updatePreview();
 }
@@ -386,7 +386,7 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
 
   m_modelCurveStylesAfter->setPointShape(m_cmbCurveName->currentText(),
-                                             (PointShape) m_cmbPointShape->currentData().toInt ());
+                                         (PointShape) m_cmbPointShape->currentData().toInt ());
   updateControls();
   updatePreview();
 }

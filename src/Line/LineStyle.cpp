@@ -58,19 +58,16 @@ LineStyle LineStyle::defaultGraphCurve (int /* index */)
                     CONNECT_AS_FUNCTION); // Same default color as used for PointStyle graph curves default
 }
 
-QString LineStyle::loadXml(QXmlStreamReader &reader)
+void LineStyle::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "LineStyle::loadXml";
 
-  QString curveName;
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH) &&
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS)) {
 
-    curveName = attributes.value(DOCUMENT_SERIALIZE_CURVE_NAME).toString();
     setWidth (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH).toInt());
     setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR).toInt());
     setCurveConnectAs ((CurveConnectAs) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH).toInt());
@@ -83,8 +80,6 @@ QString LineStyle::loadXml(QXmlStreamReader &reader)
   } else {
     reader.raiseError ("Cannot read line style data");
   }
-
-  return curveName;
 }
 
 ColorPalette LineStyle::paletteColor() const
@@ -92,13 +87,11 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::saveXml(QXmlStreamWriter &writer,
-                        const QString &curveName) const
+void LineStyle::saveXml(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat))  << "LineStyle::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
-  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVE_NAME, curveName);
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR, QString::number (m_paletteColor));
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS, QString::number (m_curveConnectAs));

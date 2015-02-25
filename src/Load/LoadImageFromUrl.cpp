@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QtNetwork/QNetworkReply>
 #include <QUrl>
+#include "Version.h"
 
 LoadImageFromUrl::LoadImageFromUrl (MainWindow &mainWindow) :
   m_mainWindow (mainWindow),
@@ -56,7 +57,7 @@ void LoadImageFromUrl::slotFinished ()
     str << "Unable to download image from " << urlWithoutScheme;
 
     QMessageBox::critical (&m_mainWindow,
-                           tr ("Engauge Digitizer"),
+                           engaugeWindowTitle(),
                            message,
                            QMessageBox::Ok);
   }
@@ -88,7 +89,7 @@ void LoadImageFromUrl::startLoadImage (const QUrl &url)
       str << "Unable to load image from " << url.toLocalFile ();
 
       QMessageBox::critical (&m_mainWindow,
-                             tr ("Engauge Digitizer"),
+                             engaugeWindowTitle(),
                              message,
                              QMessageBox::Ok);
     }

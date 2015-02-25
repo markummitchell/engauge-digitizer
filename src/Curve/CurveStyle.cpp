@@ -1,6 +1,9 @@
 #include "CurveStyle.h"
+#include "DocumentSerialize.h"
+#include "Logger.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "Xml.h"
 
 CurveStyle::CurveStyle()
 {
@@ -20,7 +23,46 @@ LineStyle CurveStyle::lineStyle() const
 
 QString CurveStyle::loadXml(QXmlStreamReader &reader)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveStyle::loadXml";
 
+  bool success = true;
+  QString curveName;
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME)) {
+
+    curveName = attributes.value (DOCUMENT_SERIALIZE_CURVE_NAME).toString();
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_POINT_STYLE)){
+      loadNextFromReader(reader);
+
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
+
+      if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+          (reader.name() == DOCUMENT_SERIALIZE_LINE_STYLE)) {
+
+        m_lineStyle.loadXml (reader);
+
+      } else if ((reader.tokenType() == QXmlStreamReader::StartElement) &
+                 (reader.name() == DOCUMENT_SERIALIZE_POINT_STYLE)) {
+
+        m_pointStyle.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read curve style data");
+  }
+
+  return curveName;
 }
 
 PointStyle CurveStyle::pointStyle() const
@@ -31,12 +73,53 @@ PointStyle CurveStyle::pointStyle() const
 void CurveStyle::saveXml(QXmlStreamWriter &writer,
                          const QString &curveName) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveStyle::saveXml";
 
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_STYLE);
+  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVE_NAME, curveName);
+  m_lineStyle.saveXml (writer);
+  m_pointStyle.saveXml (writer);
+  writer.writeEndElement();
+}
+
+void CurveStyle::setLineColor (ColorPalette lineColor)
+{
+  m_lineStyle.setPaletteColor(lineColor);
+}
+
+void CurveStyle::setLineConnectAs (CurveConnectAs curveConnectAs)
+{
+  m_lineStyle.setCurveConnectAs(curveConnectAs);
 }
 
 void CurveStyle::setLineStyle(const LineStyle &lineStyle)
 {
   m_lineStyle = lineStyle;
+}
+
+void CurveStyle::setLineWidth (int width)
+{
+  m_lineStyle.setWidth(width);
+}
+
+void CurveStyle::setPointColor (ColorPalette curveColor)
+{
+  m_pointStyle.setPaletteColor(curveColor);
+}
+
+void CurveStyle::setPointLineWidth (double width)
+{
+  m_pointStyle.setLineWidth(width);
+}
+
+void CurveStyle::setPointRadius (int radius)
+{
+  m_pointStyle.setRadius(radius);
+}
+
+void CurveStyle::setPointShape (PointShape shape)
+{
+  m_pointStyle.setShape(shape);
 }
 
 void CurveStyle::setPointStyle(const PointStyle &pointStyle)

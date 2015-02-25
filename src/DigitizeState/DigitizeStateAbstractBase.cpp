@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QTimer>
 #include "QtToString.h"
+#include "Version.h"
 
 DigitizeStateAbstractBase::DigitizeStateAbstractBase(DigitizeStateContext &context) :
   m_context (context),
@@ -68,7 +69,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
     if (isError) {
 
       QMessageBox::warning (0,
-                            "Application",
+                            engaugeWindowTitle(),
                             errorMessage);
 
     } else {

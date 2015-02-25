@@ -72,7 +72,7 @@
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
-#include "VersionNumber.h"
+#include "Version.h"
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
@@ -115,6 +115,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   setCurrentFile ("");
   createIcons();
   setWindowFlags (Qt::WindowContextHelpButtonHint);
+  setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();
   createActions ();
@@ -893,7 +894,7 @@ void MainWindow::fileImport (const QString &fileName)
   QImage image;
   if (!image.load (fileName)) {
     QMessageBox::warning (this,
-                          tr("Application"),
+                          engaugeWindowTitle(),
                           tr("Cannot read file %1.").
                           arg(fileName));
     return;
@@ -956,7 +957,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
   } else {
 
     QMessageBox::warning (this,
-                          tr("Application"),
+                          engaugeWindowTitle(),
                           tr("Cannot read file %1:\n%2.").
                           arg(fileName).
                           arg(cmdMediator->reasonForUnsuccessfulRead ()));
@@ -985,7 +986,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
     QFileInfo fileInfo (errorReportFile);
 
     QMessageBox::critical (this,
-                           tr ("Load Error"),
+                           engaugeWindowTitle(),
                            tr ("File not found: ") + fileInfo.absoluteFilePath());
     exit (-1);
   }
@@ -1097,7 +1098,7 @@ bool MainWindow::maybeSave()
   if (m_cmdMediator != 0) {
     if (m_cmdMediator->isModified()) {
       QMessageBox::StandardButton ret = QMessageBox::warning (this,
-                                                              tr("Application"),
+                                                              engaugeWindowTitle(),
                                                               tr("The document has been modified.\n"
                                                                  "Do you want to save your changes?"),
                                                               QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -1164,7 +1165,7 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
   QFile file(fileName);
   if (!file.open(QFile::WriteOnly)) {
     QMessageBox::warning (this,
-                          tr("Application"),
+                          engaugeWindowTitle(),
                           tr ("Cannot write file %1: \n%2.").
                           arg(fileName).
                           arg(file.errorString()));
@@ -1662,7 +1663,7 @@ void MainWindow::slotFileExport ()
     } else {
 
       QMessageBox::critical (0,
-                             tr ("Export Error"),
+                             engaugeWindowTitle(),
                              tr ("Unable to export to file ") + fileName);
     }
   }

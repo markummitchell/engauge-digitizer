@@ -189,56 +189,62 @@ void CurveStyles::setCurveStyle (const QString &curveName,
                                  const CurveStyle &curveStyle)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].setLineStyle(curveStyle.lineStyle());
-  m_curveStyles [curveName].setPointStyle(curveStyle.pointStyle());
+  m_curveStyles [curveName] = curveStyle;
 }
 
 void CurveStyles::setLineColor (const QString &curveName,
                                 ColorPalette lineColor)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].lineStyle().setPaletteColor(lineColor);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setLineColor (lineColor);
 }
 
 void CurveStyles::setLineConnectAs (const QString &curveName,
                                     CurveConnectAs curveConnectAs)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].lineStyle().setCurveConnectAs(curveConnectAs);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setLineConnectAs(curveConnectAs);
 }
 
 void CurveStyles::setLineWidth (const QString &curveName,
                                 int width)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].lineStyle().setWidth(width);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setLineWidth(width);
 }
 
 void CurveStyles::setPointColor (const QString &curveName,
                                  ColorPalette curveColor)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].pointStyle().setPaletteColor(curveColor);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setPointColor (curveColor);
 }
 
 void CurveStyles::setPointLineWidth (const QString &curveName,
                                      double width)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].pointStyle().setLineWidth (width);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setLineWidth (width);
 }
 
 void CurveStyles::setPointRadius (const QString &curveName,
                                   int radius)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].pointStyle().setRadius (radius);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setPointRadius (radius);
 }
 
 void CurveStyles::setPointShape (const QString &curveName,
                                  PointShape shape)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  m_curveStyles [curveName].pointStyle().setShape (shape);
+  CurveStyle &curveStyle = m_curveStyles [curveName];
+  curveStyle.setPointShape (shape);
 }
 

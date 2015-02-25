@@ -144,7 +144,7 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
-    include/VersionNumber.h \
+    util/Version.h \
     View/ViewPointStyle.h \
     View/ViewPreview.h \
     View/ViewProfile.h \
@@ -270,6 +270,7 @@ SOURCES += \
     Transformation/TransformationStateContext.cpp \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
+    util/Version.cpp \
     View/ViewPointStyle.cpp \
     View/ViewPreview.cpp \
     View/ViewProfile.cpp \

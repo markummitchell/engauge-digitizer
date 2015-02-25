@@ -31,8 +31,29 @@ public:
   void saveXml(QXmlStreamWriter &writer,
                const QString &curveName) const;
 
+  /// Set method for line color in specified curve.
+  void setLineColor (ColorPalette lineColor);
+
+  /// Set method for connect as method for lines in specified curve.
+  void setLineConnectAs (CurveConnectAs curveConnectAs);
+
   /// Set method for LineStyle
   void setLineStyle (const LineStyle &lineStyle);
+
+  /// Set method for line width in specified curve.
+  void setLineWidth (int width);
+
+  /// Set method curve point color in specified curve.
+  void setPointColor (ColorPalette curveColor);
+
+  /// Set method for curve point perimeter line width.
+  void setPointLineWidth (double width);
+
+  /// Set method for curve point radius.
+  void setPointRadius (int radius);
+
+  /// Set method for curve point shape in specified curve.
+  void setPointShape (PointShape shape);
 
   /// Set method for PointStyle
   void setPointStyle (const PointStyle &pointStyle);
