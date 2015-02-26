@@ -6,6 +6,7 @@
 #include <QGraphicsPolygonItem>
 #include <QPointF>
 
+class CurveStyle;
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;
 class PointStyle;
@@ -69,6 +70,9 @@ public:
 
   /// Mark point as wanted. Marking as unwanted is done by the reset function
   void setWanted ();
+
+  /// Update point and line styles that comprise the curve style
+  void updateCurveStyle (const CurveStyle &curveStyle);
 
   /// Identify point as wanted//unwanted
   bool wanted () const;

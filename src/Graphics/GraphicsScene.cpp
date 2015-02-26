@@ -48,8 +48,8 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   // Update the map
-  ENGAUGE_ASSERT (!m_mapPointIdentifierToGraphicsPoint.contains (identifier));
-  m_mapPointIdentifierToGraphicsPoint [identifier] = point;
+  ENGAUGE_ASSERT (!m_pointIdentifierToGraphicsPoint.contains (identifier));
+  m_pointIdentifierToGraphicsPoint [identifier] = point;
 
   return point;
 }
@@ -60,7 +60,7 @@ MapOrdinalToPointIdentifier GraphicsScene::createMapOrdinalToPointIdentifier ()
   MapOrdinalToPointIdentifier map;
 
   PointIdentifierToGraphicsPoint::const_iterator itr;
-  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr++) {
 
     // Get item
     QString pointIdentifier = itr.key();
@@ -171,8 +171,8 @@ void GraphicsScene::removePoint (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint identifier=" << identifier.toLatin1().data();
 
-  GraphicsPoint *point = m_mapPointIdentifierToGraphicsPoint [identifier];
-  m_mapPointIdentifierToGraphicsPoint.remove (identifier);
+  GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [identifier];
+  m_pointIdentifierToGraphicsPoint.remove (identifier);
   delete point;
 }
 
@@ -243,6 +243,21 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
+
+  // Loop through the points. Since each point is attached to a line (actually, two lines) we give the point and line styles
+  // to the point so it can them to itself and an attached line
+  PointIdentifierToGraphicsPoint::iterator itr;
+  for (itr = m_pointIdentifierToGraphicsPoint.begin(); itr != m_pointIdentifierToGraphicsPoint.end(); itr++) {
+
+    QString pointIdentifier = itr.key();
+    GraphicsPoint *point = itr.value();
+
+    QString curveName = Point::curveNameFromPointIdentifier(pointIdentifier);
+
+    CurveStyle curveStyle = modelCurveStyles.curveStyle(curveName);
+
+    point->updateCurveStyle (curveStyle);
+  }
 }
 
 void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
@@ -277,7 +292,7 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
       QString pointIdentifier = itr.value();
 
       // Get point
-      GraphicsPoint *point = m_mapPointIdentifierToGraphicsPoint [pointIdentifier];
+      GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [pointIdentifier];
 
       // Get parameters for the item
       QString curveNameGot = Point::curveNameFromPointIdentifier (pointIdentifier);
@@ -317,7 +332,7 @@ void GraphicsScene::updatePointGraphCoordinatesAndOrdinals (CmdMediator &cmdMedi
 
   // Loop through all points
   PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_mapPointIdentifierToGraphicsPoint.begin(); itr != m_mapPointIdentifierToGraphicsPoint.end(); itr++) {
+  for (itr = m_pointIdentifierToGraphicsPoint.begin(); itr != m_pointIdentifierToGraphicsPoint.end(); itr++) {
 
 //    Point &point = itr.value();
 //    QString curveName = Point::curveNameFromPointIdentifier (point.identifier());
@@ -334,7 +349,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
-  CallbackSceneUpdateAfterCommand ftor (m_mapPointIdentifierToGraphicsPoint,
+  CallbackSceneUpdateAfterCommand ftor (m_pointIdentifierToGraphicsPoint,
                                         *this,
                                         cmdMediator.document ());
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
@@ -343,7 +358,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
   // First pass:
   // 1) Mark all points as Not Wanted (this is done while creating the map)
   PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr++) {
+  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr++) {
     GraphicsPoint *point = *itr;
     point->reset ();
   }
@@ -357,7 +372,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
   // Next pass:
   // 1) Remove points that were just removed from the Document
   PointIdentifierToGraphicsPoint::iterator itrNext;
-  for (itr = m_mapPointIdentifierToGraphicsPoint.begin (); itr != m_mapPointIdentifierToGraphicsPoint.end (); itr = itrNext) {
+  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr = itrNext) {
 
     // Save next value of iterator since current iterator may be invalidated
     itrNext = itr;
@@ -370,7 +385,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
       delete point;
 
       // Update map
-      m_mapPointIdentifierToGraphicsPoint.erase (itr);
+      m_pointIdentifierToGraphicsPoint.erase (itr);
     }
   }
 }

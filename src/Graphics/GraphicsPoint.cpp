@@ -1,3 +1,4 @@
+#include "CurveStyle.h"
 #include "DataKey.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
@@ -178,6 +179,15 @@ void GraphicsPoint::setToolTip (const QString &toolTip)
 void GraphicsPoint::setWanted ()
 {
   m_wanted = true;
+}
+
+void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle)
+{
+  // Apply point style to this point
+  setPointStyle (curveStyle.pointStyle());
+
+  // Apply curve style to the line attached to this point as the start point
+
 }
 
 bool GraphicsPoint::wanted () const

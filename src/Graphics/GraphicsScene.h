@@ -88,7 +88,7 @@ private:
   LineIdentifierToGraphicsItem m_lineIdentifierToGraphicsItem;
 
   /// Mapping for finding Points.
-  PointIdentifierToGraphicsPoint m_mapPointIdentifierToGraphicsPoint;
+  PointIdentifierToGraphicsPoint m_pointIdentifierToGraphicsPoint;
 
   /// Curve name to GraphicsLinesForCurve
   GraphicsLinesForCurves m_graphicsLinesForCurves;
