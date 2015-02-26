@@ -4,12 +4,11 @@
 #include "CurveStyles.h"
 #include "DlgSettingsAbstractBase.h"
 
-class DlgSpinBoxDouble;
-class DlgSpinBoxInt;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
 class QGroupBox;
+class QSpinBox;
 class ViewPreview;
 
 /// Stacked widget page for editing curve properties settings.
@@ -31,10 +30,10 @@ private slots:
   void slotCurveName(const QString &);
   void slotLineColor(const QString &);
   void slotLineType(const QString &);
-  void slotLineWidth(const QString &);
+  void slotLineWidth(int);
   void slotPointColor(const QString &);
-  void slotPointLineWidth (const QString &);
-  void slotPointRadius(const QString &);
+  void slotPointLineWidth (int);
+  void slotPointRadius(int);
   void slotPointShape(const QString &);
 
 protected:
@@ -55,12 +54,12 @@ private:
 
   QGroupBox *m_groupPoint;
   QComboBox *m_cmbPointShape;
-  DlgSpinBoxInt *m_spinPointRadius;
-  DlgSpinBoxDouble *m_spinPointLineWidth;
+  QSpinBox *m_spinPointRadius;
+  QSpinBox *m_spinPointLineWidth;
   QComboBox *m_cmbPointColor;
 
   QGroupBox *m_groupLine;
-  DlgSpinBoxInt *m_spinLineWidth;
+  QSpinBox *m_spinLineWidth;
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbLineType;
 

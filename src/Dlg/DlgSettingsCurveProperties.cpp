@@ -2,10 +2,9 @@
 #include "CmdSettingsCurveProperties.h"
 #include "ColorPalette.h"
 #include "DlgSettingsCurveProperties.h"
-#include "DlgSpinBoxDouble.h"
-#include "DlgSpinBoxInt.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsLine.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
 #include "GraphicsView.h"
@@ -23,6 +22,7 @@
 #include <QListWidget>
 #include <QPen>
 #include <QPushButton>
+#include <QSpinBox>
 #include <QTransform>
 #include "ViewPreview.h"
 
@@ -73,10 +73,10 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   QLabel *labelLineWidth = new QLabel ("Width:");
   layoutGroup->addWidget (labelLineWidth, 0, 0);
 
-  m_spinLineWidth = new DlgSpinBoxInt (m_groupLine);
+  m_spinLineWidth = new QSpinBox (m_groupLine);
   m_spinLineWidth->setWhatsThis (tr ("Select a width for the lines drawn between points"));
   m_spinLineWidth->setMinimum(1);
-  connect (m_spinLineWidth, SIGNAL (textChanged (const QString &)), this, SLOT (slotLineWidth (const QString &)));
+  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
   layoutGroup->addWidget (m_spinLineWidth, 0, 1);
 
   QLabel *labelLineColor = new QLabel ("Color:");
@@ -101,7 +101,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                    "points placed along an existing line. Any point placed on top of any existing line is inserted "
                                    "between the two endpoints of that line - as if its age was between the ages of the two "
                                    "endpoints.\n\n"
-                                   "Lines are drawn between successively ordered points"));
+                                   "Lines are drawn between successively ordered points.\n\n"
+                                   "Changing the rule for connecting points will not not affect the preview window."));
   connect (m_cmbLineType, SIGNAL (activated (const QString &)), this, SLOT (slotLineType (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineType, 2, 1);
 }
@@ -134,24 +135,22 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   QLabel *labelPointRadius = new QLabel ("Radius:");
   layoutGroup->addWidget (labelPointRadius, 1, 0);
 
-  m_spinPointRadius = new DlgSpinBoxInt (m_groupPoint);
-  m_spinPointRadius->setWhatsThis (tr ("Select a radius for the points"));
+  m_spinPointRadius = new QSpinBox (m_groupPoint);
+  m_spinPointRadius->setWhatsThis (tr ("Select a radius, in pixels, for the points"));
   m_spinPointRadius->setMinimum (1);
-  connect (m_spinPointRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointRadius (const QString &)));
+  connect (m_spinPointRadius, SIGNAL (valueChanged (int)), this, SLOT (slotPointRadius (int)));
   layoutGroup->addWidget (m_spinPointRadius, 1, 1);
 
   QLabel *labelPointLineWidth = new QLabel ("Line width:");
   layoutGroup->addWidget (labelPointLineWidth, 2, 0);
 
-  m_spinPointLineWidth = new DlgSpinBoxDouble (m_groupPoint);
-  m_spinPointLineWidth->setWhatsThis (tr ("Select a line width for the points.\n\n"
+  m_spinPointLineWidth = new QSpinBox (m_groupPoint);
+  m_spinPointLineWidth->setWhatsThis (tr ("Select a line width, in pixels, for the points.\n\n"
                                           "A larger width results in a thicker line, with the exception of a value of zero "
                                           "which always results in a line that is one pixel wide (which is easy to see even "
                                           "when zoomed far out)"));
   m_spinPointLineWidth->setMinimum (0);
-  m_spinPointLineWidth->setSingleStep (0.1);
-  m_spinPointLineWidth->setDecimals (1);
-  connect (m_spinPointLineWidth, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointLineWidth (const QString &)));
+  connect (m_spinPointLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotPointLineWidth (int)));
   layoutGroup->addWidget (m_spinPointLineWidth, 2, 1);
 
   QLabel *labelPointColor = new QLabel ("Color:");
@@ -321,9 +320,9 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
   }
 }
 
-void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
+void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor color=" << lineColor.toLatin1().data();
 
   m_modelCurveStylesAfter->setLineColor(m_cmbCurveName->currentText(),
                                         (ColorPalette) m_cmbLineColor->currentData().toInt());
@@ -331,19 +330,19 @@ void DlgSettingsCurveProperties::slotLineColor(const QString & /* lineColor */)
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotLineWidth(const QString &)
+void DlgSettingsCurveProperties::slotLineWidth(int width)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth width=" << width;
 
   m_modelCurveStylesAfter->setLineWidth(m_cmbCurveName->currentText(),
-                                        m_spinLineWidth->text().toDouble());
+                                        width);
   updateControls ();
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotLineType(const QString &)
+void DlgSettingsCurveProperties::slotLineType(const QString &lineType)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType lineType=" << lineType.toLatin1().data();
 
   m_modelCurveStylesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
                                             (CurveConnectAs) m_cmbLineType->currentData().toInt ());
@@ -351,9 +350,9 @@ void DlgSettingsCurveProperties::slotLineType(const QString &)
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotPointColor(const QString &)
+void DlgSettingsCurveProperties::slotPointColor(const QString &pointColor)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor pointColor=" << pointColor.toLatin1().data();
 
   m_modelCurveStylesAfter->setPointColor(m_cmbCurveName->currentText(),
                                          (ColorPalette) m_cmbPointColor->currentData().toInt ());
@@ -361,22 +360,22 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &)
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotPointLineWidth(const QString &)
+void DlgSettingsCurveProperties::slotPointLineWidth(int lineWidth)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth lineWidth=" << lineWidth;
 
   m_modelCurveStylesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
-                                             m_spinPointLineWidth->text().toDouble());
+                                             lineWidth);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::slotPointRadius(const QString &)
+void DlgSettingsCurveProperties::slotPointRadius(int radius)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius radius=" << radius;
 
   m_modelCurveStylesAfter->setPointRadius(m_cmbCurveName->currentText(),
-                                          m_spinPointRadius->text().toInt());
+                                          radius);
   updateControls();
   updatePreview();
 }
@@ -411,34 +410,36 @@ void DlgSettingsCurveProperties::updatePreview()
 
   GraphicsPointFactory pointFactory;
   const PointStyle pointStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).pointStyle();
+  const LineStyle lineStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).lineStyle();
 
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
                    PREVIEW_HEIGHT / 2.0);
-  pointFactory.createPoint (*m_scenePreview,
-                            NULL_IDENTIFIER,
-                            posLeft,
-                            pointStyle,
-                            ORDINAL_0);
+  GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
+                                                       NULL_IDENTIFIER,
+                                                       posLeft,
+                                                       pointStyle,
+                                                       ORDINAL_0);
+  pointLeft->setPointStyle (pointStyle);
 
   // Right point
   QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
                     PREVIEW_HEIGHT / 2.0);
-  pointFactory.createPoint (*m_scenePreview,
-                            NULL_IDENTIFIER,
-                            posRight,
-                            pointStyle,
-                            ORDINAL_1);
+  GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
+                                                        NULL_IDENTIFIER,
+                                                        posRight,
+                                                        pointStyle,
+                                                        ORDINAL_1);
+  pointRight->setPointStyle (pointStyle);
 
   // Line between points
-  QGraphicsLineItem *itemLine = new QGraphicsLineItem (posLeft.x(),
-                                                       posLeft.y(),
-                                                       posRight.x(),
-                                                       posRight.y());
-  itemLine->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelCurveStylesAfter->lineColor (currentCurve))),
-                    m_modelCurveStylesAfter->lineWidth(currentCurve)));
-  itemLine->setZValue (-1.0);
-  m_scenePreview->addItem (itemLine);
+  GraphicsLine *line = new GraphicsLine (ORDINAL_0,
+                                         ORDINAL_1,
+                                         lineStyle);
+  line->moveStart(posLeft);
+  line->moveEnd(posRight);
+  line->setZValue (-1.0); // Looks nicer if line goes under the points, so points are unobscured
+  m_scenePreview->addItem (line);
 
   resetSceneRectangle();
 }

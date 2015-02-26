@@ -19,7 +19,7 @@ public:
   /// Normal constructor. The style type and radius are determined by the currently selected Curve
   PointStyle(PointShape pointShape,
              unsigned int radius,
-             double lineWidth,
+             int lineWidth,
              ColorPalette paletteColor);
 
   /// Copy constructor.
@@ -38,7 +38,7 @@ public:
   bool isCircle () const;
 
   /// Get method for line width.
-  double lineWidth () const;
+  int lineWidth () const;
 
   /// Load model from serialized xml. Returns the curve name
   void loadXml(QXmlStreamReader &reader);
@@ -56,7 +56,7 @@ public:
   void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for line width.
-  void setLineWidth (double width);
+  void setLineWidth (int width);
 
   /// Set method for point color.
   void setPaletteColor (ColorPalette paletteColor);
@@ -74,7 +74,7 @@ private:
 
   PointShape m_shape;
   unsigned int m_radius;
-  double m_lineWidth;
+  int m_lineWidth;
   ColorPalette m_paletteColor;
 };
 

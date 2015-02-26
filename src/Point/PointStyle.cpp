@@ -7,7 +7,7 @@
 #include "Xml.h"
 
 const int DEFAULT_POINT_RADIUS = 10;
-const double DEFAULT_LINE_WIDTH = 1;
+const int DEFAULT_LINE_WIDTH = 1;
 
 PointStyle::PointStyle ()
 {
@@ -15,7 +15,7 @@ PointStyle::PointStyle ()
 
 PointStyle::PointStyle(PointShape shape,
                        unsigned int radius,
-                       double lineWidth,
+                       int lineWidth,
                        ColorPalette paletteColor) :
   m_shape (shape),
   m_radius (radius),
@@ -70,7 +70,7 @@ bool PointStyle::isCircle () const
   return m_shape == POINT_SHAPE_CIRCLE;
 }
 
-double PointStyle::lineWidth() const
+int PointStyle::lineWidth() const
 {
   return m_lineWidth;
 }
@@ -87,7 +87,7 @@ void PointStyle::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE)) {
 
     setRadius (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS).toInt());
-    setLineWidth (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH).toDouble());
+    setLineWidth (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH).toInt());
     setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR).toInt());
     setShape ((PointShape) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE).toInt());
 
@@ -199,7 +199,7 @@ void PointStyle::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void PointStyle::setLineWidth(double width)
+void PointStyle::setLineWidth(int width)
 {
   m_lineWidth = width;
 }

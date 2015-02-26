@@ -92,7 +92,7 @@ const LineStyle CurveStyles::lineStyle (const QString &curveName) const
   return m_curveStyles [curveName].lineStyle();
 }
 
-double CurveStyles::lineWidth (const QString &curveName) const
+int CurveStyles::lineWidth (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
   return m_curveStyles [curveName].lineStyle().width();
@@ -144,10 +144,10 @@ bool CurveStyles::pointIsCircle (const QString &curveName) const
   return m_curveStyles [curveName].pointStyle().isCircle();
 }
 
-double CurveStyles::pointLineWidth (const QString &curveName) const
+int CurveStyles::pointLineWidth (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  return m_curveStyles [curveName].pointStyle().lineWidth();
+  return m_curveStyles [curveName].lineStyle().width();
 }
 
 QPolygonF CurveStyles::pointPolygon (const QString &curveName) const
@@ -225,11 +225,11 @@ void CurveStyles::setPointColor (const QString &curveName,
 }
 
 void CurveStyles::setPointLineWidth (const QString &curveName,
-                                     double width)
+                                     int width)
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
   CurveStyle &curveStyle = m_curveStyles [curveName];
-  curveStyle.setLineWidth (width);
+  curveStyle.setPointLineWidth (width);
 }
 
 void CurveStyles::setPointRadius (const QString &curveName,

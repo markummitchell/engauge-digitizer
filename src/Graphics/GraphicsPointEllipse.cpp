@@ -30,3 +30,10 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
   return QGraphicsEllipseItem::itemChange(change,
                                           value);
 }
+
+void GraphicsPointEllipse::setRadius(int radius)
+{
+  // Resize assuming symmetry about the origin, and an aspect ratio of 1:1 (so x and y scales are the same)
+  double scale = (2 * radius) / boundingRect().width();
+  setScale (scale);
+}

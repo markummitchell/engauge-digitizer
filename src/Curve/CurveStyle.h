@@ -47,7 +47,7 @@ public:
   void setPointColor (ColorPalette curveColor);
 
   /// Set method for curve point perimeter line width.
-  void setPointLineWidth (double width);
+  void setPointLineWidth (int width);
 
   /// Set method for curve point radius.
   void setPointRadius (int radius);

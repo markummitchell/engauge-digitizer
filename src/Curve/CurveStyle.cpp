@@ -107,7 +107,7 @@ void CurveStyle::setPointColor (ColorPalette curveColor)
   m_pointStyle.setPaletteColor(curveColor);
 }
 
-void CurveStyle::setPointLineWidth (double width)
+void CurveStyle::setPointLineWidth (int width)
 {
   m_pointStyle.setLineWidth(width);
 }

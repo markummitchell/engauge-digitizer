@@ -17,6 +17,9 @@ public:
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
+  /// Update the radius
+  void setRadius(int radius);
+
 private:
   GraphicsPointPolygon();
 

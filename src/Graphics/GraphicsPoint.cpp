@@ -1,9 +1,11 @@
 #include "DataKey.h"
+#include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointEllipse.h"
 #include "GraphicsPointPolygon.h"
 #include "Logger.h"
+#include "PointStyle.h"
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
 #include <QGraphicsScene>
@@ -30,8 +32,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   const double ZERO_WIDTH = 0.0;
 
   m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
-                                                    QRect (posScreen.x () - radius,
-                                                           posScreen.y () - radius,
+                                                    QRect (- radius,
+                                                           - radius,
                                                            2 * radius + 1,
                                                            2 * radius + 1));
   scene.addItem (m_graphicsItemEllipse);
@@ -147,7 +149,20 @@ void GraphicsPoint::setData (int key, const QVariant &data)
   if (m_graphicsItemEllipse == 0) {
     m_graphicsItemPolygon->setData (key, data);
   } else {
-    m_graphicsItemPolygon->setData (key, data);
+    m_graphicsItemEllipse->setData (key, data);
+  }
+}
+
+void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
+{
+  if (m_graphicsItemEllipse == 0) {
+    m_graphicsItemPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                         pointStyle.lineWidth()));
+    m_graphicsItemPolygon->setRadius (pointStyle.radius());
+  } else {
+    m_graphicsItemEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                         pointStyle.lineWidth()));
+    m_graphicsItemEllipse->setRadius (pointStyle.radius());
   }
 }
 

@@ -8,6 +8,7 @@
 
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;
+class PointStyle;
 class QGraphicsScene;
 
 /// Graphics item for drawing a circular or polygonal Point. 
@@ -59,6 +60,9 @@ public:
 
   /// Proxy method for QGraphicsItem::setData
   void setData (int key, const QVariant &data);
+
+  /// Update the point style
+  void setPointStyle (const PointStyle &pointStyle);
 
   /// Proxy method for QGraphicsItem::setToolTip
   void setToolTip (const QString &toolTip);

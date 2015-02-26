@@ -33,6 +33,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   pointStyle.lineWidth(),
                                   ordinal);
       }
+      break;
 
     default:
       {
@@ -44,6 +45,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   pointStyle.lineWidth(),
                                   ordinal);
       }
+      break;
   }
   
   return item;

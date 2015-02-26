@@ -44,7 +44,7 @@ public:
   const LineStyle lineStyle (const QString &curveName) const;
 
   /// Get method for line width in specified curve.
-  double lineWidth (const QString &curveName) const;
+  int lineWidth (const QString &curveName) const;
 
   /// Load from serialized xml
   void loadXml (QXmlStreamReader &reader);
@@ -56,7 +56,7 @@ public:
   bool pointIsCircle (const QString &curveName) const;
 
   /// Get method for curve point line width.
-  double pointLineWidth (const QString &curveName) const;
+  int pointLineWidth (const QString &curveName) const;
 
   /// Get method for curve point polygon in specified curve.
   QPolygonF pointPolygon (const QString &curveName) const;
@@ -99,7 +99,7 @@ public:
 
   /// Set method for curve point perimeter line width.
   void setPointLineWidth (const QString &curveName,
-                          double width);
+                          int width);
 
   /// Set method for curve point radius.
   void setPointRadius (const QString &curveName,

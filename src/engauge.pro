@@ -80,8 +80,6 @@ HEADERS  += \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
-    Dlg/DlgSpinBoxDouble.h \
-    Dlg/DlgSpinBoxInt.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
@@ -221,8 +219,6 @@ SOURCES += \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
-    Dlg/DlgSpinBoxDouble.cpp \
-    Dlg/DlgSpinBoxInt.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
