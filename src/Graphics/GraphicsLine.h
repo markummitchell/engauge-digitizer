@@ -18,14 +18,16 @@ class GraphicsLine : public QGraphicsLineItem
 public:
   /// Single constructor
   GraphicsLine(double ordinalAssociated,
-               double ordinalOther,
-               const LineStyle &lineStyle);
+               double ordinalOther);
 
   /// Move start point of this line.
   void moveStart (const QPointF &pos);
 
   /// Move end point of this line.
   void moveEnd (const QPointF &pos);
+
+  /// Apply line style to this line
+  void setLineStyle (const LineStyle &lineStyle);
 
   /// Mark this line as unwanted or wanted
   void setWanted (bool wanted);

@@ -2,15 +2,17 @@
 #define GRAPHICS_POINT_H
 
 #include "GraphicsPointAbstractBase.h"
-#include <QGraphicsEllipseItem>
-#include <QGraphicsPolygonItem>
+#include "GraphicsPoint.h"
 #include <QPointF>
 
 class CurveStyle;
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;
 class PointStyle;
+class QColor;
 class QGraphicsScene;
+class QPolygonF;
+class QVariant;
 
 /// Graphics item for drawing a circular or polygonal Point. 
 ///
@@ -82,11 +84,11 @@ private:
 
   // Ellipse graphics items. Unused if point is polygonal.
   GraphicsPointEllipse *m_graphicsItemEllipse;
-  QGraphicsEllipseItem *m_shadowZeroWidthEllipse; // Shadow item overlays the superclass instance to ensure visibility
+  GraphicsPointEllipse *m_shadowZeroWidthEllipse; // Shadow item overlays the superclass instance to ensure visibility
 
   // Polygon graphics items. Unused if point is elliptical.
   GraphicsPointPolygon *m_graphicsItemPolygon;
-  QGraphicsPolygonItem *m_shadowZeroWidthPolygon; // Shadow item overlays the superclass instance to ensure visibility
+  GraphicsPointPolygon *m_shadowZeroWidthPolygon; // Shadow item overlays the superclass instance to ensure visibility
 
   // Housekeeping
   bool m_wanted;

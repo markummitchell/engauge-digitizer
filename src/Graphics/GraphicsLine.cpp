@@ -6,8 +6,7 @@
 #include <QPen>
 
 GraphicsLine::GraphicsLine(double ordinalAssociated,
-                           double ordinalOther,
-                           const LineStyle &lineStyle) :
+                           double ordinalOther) :
   m_ordinalAssociated (ordinalAssociated),
   m_ordinalOther (ordinalOther),
   m_wanted (true)
@@ -15,14 +14,6 @@ GraphicsLine::GraphicsLine(double ordinalAssociated,
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLine::GraphicsLine"
                               << " ordinalAssociated=" << ordinalAssociated
                               << " ordinalOther=" << ordinalOther;
-
-  // Line pen is set here. The line geometry is set later, after the constructor has finished
-  QColor color (ColorPaletteToQColor (lineStyle.paletteColor ()));
-  unsigned int width = lineStyle.width ();
-
-  QPen pen (QBrush (color),
-            width);
-  setPen (pen);
 }
 
 void GraphicsLine::moveStart (const QPointF &pos)
@@ -39,6 +30,17 @@ void GraphicsLine::moveEnd (const QPointF &pos)
                   pos);
 
   setLine (newLine);
+}
+
+void GraphicsLine::setLineStyle (const LineStyle &lineStyle)
+{
+  // Line pen is set here. The line geometry is set later, after the constructor has finished
+  QColor color (ColorPaletteToQColor (lineStyle.paletteColor ()));
+  unsigned int width = lineStyle.width ();
+
+  QPen pen (QBrush (color),
+            width);
+  setPen (pen);
 }
 
 void GraphicsLine::setWanted (bool wanted)

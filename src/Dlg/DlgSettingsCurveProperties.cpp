@@ -12,7 +12,6 @@
 #include "MainWindow.h"
 #include <QComboBox>
 #include <QDebug>
-#include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -434,8 +433,9 @@ void DlgSettingsCurveProperties::updatePreview()
 
   // Line between points
   GraphicsLine *line = new GraphicsLine (ORDINAL_0,
-                                         ORDINAL_1,
-                                         lineStyle);
+                                         ORDINAL_1);
+  pointLeft->setLineWithPointAsStart(line);
+  line->setLineStyle (lineStyle);
   line->moveStart(posLeft);
   line->moveEnd(posRight);
   line->setZValue (-1.0); // Looks nicer if line goes under the points, so points are unobscured

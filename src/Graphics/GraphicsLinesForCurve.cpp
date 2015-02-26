@@ -38,8 +38,8 @@ void GraphicsLinesForCurve::saveLine (GraphicsScene &scene,
   if (!m_graphicsLines.contains (ordinalAssociated)) {
 
     line = new GraphicsLine (ordinalAssociated,
-                             ordinalOther,
-                             lineStyle);
+                             ordinalOther);
+    line->setLineStyle (lineStyle);
     line->moveStart (pointStart.pos ());
     line->moveEnd (pointEnd.pos ());
 

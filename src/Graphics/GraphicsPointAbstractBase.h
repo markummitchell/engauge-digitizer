@@ -5,6 +5,7 @@
 #include <QString>
 
 class GraphicsLine;
+class LineStyle;
 
 /// Base class for adding identifiers to graphics items that represent Points. Identifiers are needed
 /// to distinguish which nodes are selected from those that are not selected. Each identifier is stored
@@ -31,6 +32,9 @@ protected:
 
   /// Unbind connected lines.
   void reset ();
+
+  /// Apply line style to line attached to this point as the start point
+  void setLineStyle(const LineStyle &lineStyle);
 
 private:
   void removeOverrideCursor ();

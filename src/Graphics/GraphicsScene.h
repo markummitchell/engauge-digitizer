@@ -3,7 +3,7 @@
 
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
-#include "LineIdentifierToGraphicsItem.h"
+#include "LineIdentifierToGraphicsLine.h"
 #include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>
@@ -85,7 +85,7 @@ private:
   void updatePointMembership (CmdMediator &cmdMediator);
 
   /// Mapping for moving lines when their points get moved
-  LineIdentifierToGraphicsItem m_lineIdentifierToGraphicsItem;
+  LineIdentifierToGraphicsLine m_lineIdentifierToGraphicsLine;
 
   /// Mapping for finding Points.
   PointIdentifierToGraphicsPoint m_pointIdentifierToGraphicsPoint;
