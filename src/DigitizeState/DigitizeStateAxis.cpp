@@ -3,6 +3,7 @@
 #include "DigitizeStateAxis.h"
 #include "DigitizeStateContext.h"
 #include "DlgEditPoint.h"
+#include "Document.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -82,6 +83,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     // Ask user for coordinates
     DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),
                                           *this,
+                                          context().cmdMediator().document().modelCoords(),
                                           cursor ());
     int rtn = dlg->exec ();
     QPointF posGraph = dlg->posGraph ();

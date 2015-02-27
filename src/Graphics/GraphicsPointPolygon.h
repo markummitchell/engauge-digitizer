@@ -23,6 +23,7 @@ public:
 private:
   GraphicsPointPolygon();
 
+  // Reference to the GraphicsPoint that this class belongs to
   GraphicsPoint &m_graphicsPoint;
 };
 

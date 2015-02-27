@@ -10,6 +10,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QImage>
 #include <QtToString.h>
 

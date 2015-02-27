@@ -21,6 +21,8 @@
 #include <QVBoxLayout>
 #include "ViewPreview.h"
 
+const QChar THETA (QChar(0x98, 0x03));
+
 const QString POLAR_UNITS_DEGREES = QString("Degrees (DDD.DDDDD") + QChar(0260) + QString (")");
 const QString POLAR_UNITS_DEGREES_MINUTES = QString("Degrees Minutes (DDD") + QChar(0260) +
                                             QString(" MM.MMM") + QChar(0x2032) +
@@ -160,7 +162,7 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
 
   QVBoxLayout *layoutGroup = new QVBoxLayout (m_boxCoordsType);
 
-  QString polarButtonText = QString("Polar (R, ") + QChar(0x98, 0x03) + QString(")");
+  QString polarButtonText = QString("Polar (R, ") + THETA + QString(")");
 
   m_btnCartesian = new QRadioButton ("Cartesian (X, Y)", m_boxCoordsType);
   m_btnCartesian->setWhatsThis (QString(tr("Select cartesian coordinates.\n\n"
@@ -187,7 +189,7 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   QGridLayout *layoutPolar = new QGridLayout (m_boxPolarCoords);
   m_boxPolarCoords->setLayout (layoutPolar);
 
-  QLabel *labelThetaUnits = new QLabel(QChar (0x98, 0x03) + QString (" Units:"));
+  QLabel *labelThetaUnits = new QLabel(THETA + QString (" Units:"));
   layoutPolar->addWidget (labelThetaUnits, 0, 0);
 
   m_cmbPolarUnits = new QComboBox;
@@ -599,7 +601,7 @@ void DlgSettingsCoords::updateControls ()
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
                              QString ("X") :
-                             QChar (0x98, 0x03)) + QString (" Scale");
+                             THETA) + QString (" Scale");
   QString captionYRadius = (m_btnCartesian->isChecked () ?
                               QString ("Y") :
                               QString ("R")) + QString (" Scale");

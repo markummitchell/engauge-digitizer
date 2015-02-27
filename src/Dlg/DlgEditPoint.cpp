@@ -1,5 +1,6 @@
 #include "DigitizeStateAbstractBase.h"
 #include "DlgEditPoint.h"
+#include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDoubleValidator>
@@ -11,9 +12,11 @@
 #include <QVBoxLayout>
 
 const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
+const QChar THETA (QChar(0x98, 0x03));
 
 DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,
+                            const DocumentModelCoords &modelCoords,
                             const QCursor &cursorShape,
                             QString xValue,
                             QString yValue) :
@@ -35,7 +38,8 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   setModal(true);
   setWindowTitle (tr ("Edit Axis Point"));
 
-  createCoords (layout);
+  createCoords (layout,
+                modelCoords);
   createOkCancel (layout);
 
   m_editGraphX->setText (xValue);
@@ -51,9 +55,14 @@ DlgEditPoint::~DlgEditPoint()
   emit signalSetOverrideCursor (m_cursorShape);
 }
 
-void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
+void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
+                                 const DocumentModelCoords &modelCoords)
 {
-  QGroupBox *panel = new QGroupBox (tr ("Graph Coordinates"), this);
+  bool isCartesian = (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
+  QString description = QString ("Graph Coordinates (%1, %2):")
+                        .arg (isCartesian ? QChar ('X') : THETA)
+                        .arg (isCartesian ? QChar ('Y') : QChar ('R'));
+  QGroupBox *panel = new QGroupBox (description, this);
   layoutOuter->addWidget (panel);
 
   QHBoxLayout *layout = new QHBoxLayout (panel);

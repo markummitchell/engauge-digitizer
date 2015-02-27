@@ -7,6 +7,7 @@
 #include <QPushButton>
 
 class DigitizeStateAbstractBase;
+class DocumentModelCoords;
 class MainWindow;
 class QDoubleValidator;
 class QVBoxLayout;
@@ -20,6 +21,7 @@ public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   DlgEditPoint (MainWindow &mainWindow,
                 DigitizeStateAbstractBase &digitizeState,
+                const DocumentModelCoords &modelCoords,
                 const QCursor &cursorShape,
                 QString xValue = "",
                 QString yValue = "");
@@ -36,7 +38,8 @@ private slots:
   void slotTextChanged (const QString &);
 
 private:
-  void createCoords (QVBoxLayout *layoutOuter);
+  void createCoords (QVBoxLayout *layoutOuter,
+                     const DocumentModelCoords &modelCoords);
   void createOkCancel (QVBoxLayout *layoutOuter);
   void updateControls ();
 

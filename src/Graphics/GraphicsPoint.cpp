@@ -117,10 +117,10 @@ GraphicsPoint::~GraphicsPoint()
   if (m_graphicsItemEllipse == 0) {
 
     QGraphicsScene *scene = m_graphicsItemPolygon->scene();
+
+    // Since m_shadowZeroWidthPolygon is a child of m_graphicsItemPolygon, removing the parent removes both
     scene->removeItem (m_graphicsItemPolygon);
-    scene->removeItem (m_shadowZeroWidthPolygon);
     delete m_graphicsItemPolygon;
-    delete m_shadowZeroWidthPolygon;
     m_graphicsItemPolygon = 0;
     m_shadowZeroWidthPolygon = 0;
 
@@ -128,10 +128,10 @@ GraphicsPoint::~GraphicsPoint()
   } else {
 
     QGraphicsScene *scene = m_graphicsItemEllipse->scene();
+
+    // Since m_shadowZeroWidthEllipse is a child of m_graphicsItemEllipse, removing the parent removes both
     scene->removeItem (m_graphicsItemEllipse);
-    scene->removeItem (m_shadowZeroWidthEllipse);
     delete m_graphicsItemEllipse;
-    delete m_shadowZeroWidthEllipse;
     m_graphicsItemEllipse = 0;
     m_shadowZeroWidthEllipse = 0;
 

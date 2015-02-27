@@ -3,6 +3,7 @@
 #include "DigitizeStateAbstractBase.h"
 #include "DigitizeStateContext.h"
 #include "DlgEditPoint.h"
+#include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QApplication>
@@ -45,6 +46,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
   // Ask user for coordinates
   DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
                                        *this,
+                                       context().cmdMediator().document().modelCoords(),
                                        cursor (),
                                        xGraphValue,
                                        yGraphValue);
