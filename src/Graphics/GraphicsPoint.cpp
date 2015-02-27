@@ -174,26 +174,17 @@ void GraphicsPoint::setData (int key, const QVariant &data)
 
 void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 {
+  // Setting pen and radius of parent graphics items below also affects the child shadows
+  // (m_shadowItemPolygon and m_shadowItemEllipse)
   if (m_graphicsItemEllipse == 0) {
-
     m_graphicsItemPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
                                          pointStyle.lineWidth()));
-    m_shadowZeroWidthPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
-                                            ZERO_WIDTH));
-
     m_graphicsItemPolygon->setRadius (pointStyle.radius());
-    m_shadowZeroWidthPolygon->setRadius (pointStyle.radius());
 
   } else {
-
     m_graphicsItemEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
                                          pointStyle.lineWidth()));
-    m_shadowZeroWidthEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
-                                            ZERO_WIDTH));
-
     m_graphicsItemEllipse->setRadius (pointStyle.radius());
-    m_shadowZeroWidthEllipse->setRadius (pointStyle.radius());
-
   }
 }
 
