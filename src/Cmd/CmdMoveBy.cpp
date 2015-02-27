@@ -106,10 +106,12 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
 
       if (m_movedPoints.contains (pointIdentifier)) {
 
+        // Get the new position
         QPointF posScreen = document().positionScreen (pointIdentifier);
 
         if (item->pos () != posScreen) {
 
+          // Save the new position
           item->setPos (posScreen);
         }
       }

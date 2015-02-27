@@ -77,10 +77,6 @@ private:
   /// Update lines using a multi-pass algorithm.
   void updateLineMembership (CmdMediator &cmdMediator);
 
-  /// Update graph coordinates and (where applicable) ordinals of the points after point membership has been updated, so line
-  /// membership can be updated
-  void updatePointGraphCoordinatesAndOrdinals (CmdMediator &cmdMediator);
-
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator);
 

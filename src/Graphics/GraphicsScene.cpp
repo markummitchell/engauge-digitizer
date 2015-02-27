@@ -232,11 +232,10 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
+  // Update the points
   updatePointMembership (cmdMediator);
 
-  // Point membership is fixed, so now update the point ordinals so the lines can be assigned
-  updatePointGraphCoordinatesAndOrdinals (cmdMediator);
-
+  // Update the lines between the points
   updateLineMembership (cmdMediator);
 }
 
@@ -324,25 +323,6 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
   }
 
   m_graphicsLinesForCurves.updateLineMembership (*this);
-}
-
-void GraphicsScene::updatePointGraphCoordinatesAndOrdinals (CmdMediator &cmdMediator)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointGraphCoordinatesAndOrdinals";
-
-  // Loop through all points
-  PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_pointIdentifierToGraphicsPoint.begin(); itr != m_pointIdentifierToGraphicsPoint.end(); itr++) {
-
-//    Point &point = itr.value();
-//    QString curveName = Point::curveNameFromPointIdentifier (point.identifier());
-//
-//    // Skip axes points
-//    if (curveName != AXIS_CURVE_NAME) {
-//
-//      const LineStyle &lineStyle = cmdMediator.document().modelCurveStyle(curveName);
-//    }
-  }
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)

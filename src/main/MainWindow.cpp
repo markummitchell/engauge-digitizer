@@ -2372,11 +2372,14 @@ void MainWindow::updateAfterCommand ()
 
   ENGAUGE_CHECK_PTR (m_cmdMediator);
 
-  // Update the QGraphicsScene with the populated Curves
+  // Update transformation stuff, including the graph coordinates of every point in the Document, so coordinates in status bar are up to date
+  updateAfterCommandStatusBarCoords ();
+
+  // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
+  // by updateAfterCommandStatusBarCoords
   m_scene->updateAfterCommand (*m_cmdMediator);
 
   updateControls ();
-  updateAfterCommandStatusBarCoords ();
 }
 
 void MainWindow::updateAfterCommandStatusBarCoords ()
