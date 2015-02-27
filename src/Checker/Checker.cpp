@@ -2,8 +2,9 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "Logger.h"
+#include "mmsubs.h"
 #include <QGraphicsEllipseItem>
-#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QPen>
@@ -50,7 +51,8 @@ void Checker::createSide (int pointRadius,
                           const QPointF &pointFromGraph,
                           const QPointF &pointToGraph,
                           const Transformation &transformation,
-                          QGraphicsItem *items [MAX_LINES_PER_SIDE])
+                          QGraphicsItem *items [MAX_LINES_PER_SIDE],
+                          bool sideArcsAboutOrigin)
 {
   QPointF pointFromGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
                                                                              pointFromGraph);
@@ -63,6 +65,11 @@ void Checker::createSide (int pointRadius,
                                    pointFromScreen);
   transformation.transformInverse (pointToGraphCart,
                                    pointToScreen);
+
+  // Get screen coordinates of origin
+  QPointF pointOriginGraph (0, 0), pointOriginScreen;
+  transformation.transformInverse (pointOriginGraph,
+                                   pointOriginScreen);
 
   // Build a list of points where the circle around each point intercepts the infinite line through
   // pointFromScreen and pointToScreen
@@ -97,8 +104,23 @@ void Checker::createSide (int pointRadius,
         QPointF posEnd      = (1.0 - s        ) * pointFromScreen + s         * pointToScreen;
 
         if (minScreenDistanceFromPoints (posMidpoint, points) > pointRadius) {
-          QGraphicsItem *item = new QGraphicsLineItem (QLineF (posStart,
-                                                               posEnd));
+          QGraphicsItem *item;
+
+          if (sideArcsAboutOrigin) {
+
+            // Draw along an arc
+            item = ellipseItem (posStart,
+                                posEnd,
+                                pointOriginScreen);
+
+          } else {
+
+            // Draw straight line
+            item = new QGraphicsLineItem (QLineF (posStart,
+                                                  posEnd));
+
+          }
+
           items [itemCount++] = item;
           bindItemToScene (item);
         }
@@ -118,6 +140,58 @@ void Checker::deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE])
 
     items [i] = 0;
   }
+}
+
+QGraphicsItem *Checker::ellipseItem(const QPointF &posStart,
+                                    const QPointF &posEnd,
+                                    const QPointF &posOrigin) const
+{
+  // Solve ellipse about origin through two points ((x-x0)/a)^2+((y-y0)/b)^2=1
+  double x0 = posOrigin.x();
+  double y0 = posOrigin.y();
+  double x1 = posStart.x() - x0;
+  double y1 = posStart.y() - y0;
+  double x2 = posEnd.x()   - x0;
+  double y2 = posEnd.y()   - y0;
+  double numeratorB = x2 * x2 * y1 * y1 - x1 * x1 * y2 * y2;
+  double denominatorB = x2 * x2 - x1 * x1;
+
+  QGraphicsItem *item;
+
+  if (abs (denominatorB) > 0.000001) {
+
+    double b = sqrt (numeratorB / denominatorB);
+
+    double argumentA = qMax (0.0, 1.0 - y1 * y1 / b / b);
+    double a = x1 / sqrt (argumentA);
+
+    // Compute angle between the start and end points, about the origin, assuming we go the shorter way around the circle
+    double angleStart = angleBetweenVectors (1.0,
+                                             0.0,
+                                             x1,
+                                             y1);
+    double angleSpan = angleBetweenVectors (x1,
+                                            y1,
+                                            x2,
+                                            y2);
+
+    QGraphicsEllipseItem *ellipseItem = new QGraphicsEllipseItem (QRectF (QPointF (x0 - a,
+                                                                                   y0 - b),
+                                                                          QPointF (x0 + a,
+                                                                                   y0 + b)));
+//    ellipseItem->setStartAngle (angleStart);
+//    ellipseItem->setSpanAngle (angleSpan);
+    item = ellipseItem;
+
+  } else {
+
+    // Bad geometry, so just draw a straight line
+    item = new QGraphicsLineItem (QLineF (posStart,
+                                          posEnd));
+
+  }
+
+  return item;
 }
 
 void Checker::interceptPointCircleWithLine (int pointRadius,
@@ -289,11 +363,14 @@ void Checker::prepareForDisplay (const QList<Point> &points,
     yMax = qMax (yMax, points.at(i).posGraph().y());
   }
 
+  // Cartesian diagram gets rectangular box, and polar diagram gets annular arc
+  bool isPolarCoordinates = (modelCoords.coordsType() == COORDS_TYPE_POLAR);
+
   // Draw the bounding box as four sides
-  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation, m_sideLeft);
-  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation, m_sideTop);
-  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMax), QPointF (xMax, yMin), transformation, m_sideRight);
-  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMin), QPointF (xMin, yMin), transformation, m_sideBottom);
+  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation, m_sideLeft, false);
+  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation, m_sideTop, isPolarCoordinates);
+  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMax), QPointF (xMax, yMin), transformation, m_sideRight, false);
+  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMin), QPointF (xMin, yMin), transformation, m_sideBottom, isPolarCoordinates);
 
   updateModelAxesChecker (modelAxesChecker);
 }
@@ -307,10 +384,10 @@ void Checker::setLineColor (QGraphicsItem *items [MAX_LINES_PER_SIDE], const QPe
       // Downcast since QGraphicsItem does not have a pen
       QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
       QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
-      if (itemLine == 0) {
-        itemEllipse->setPen (pen);
-      } else {
+      if (itemLine != 0) {
         itemLine->setPen (pen);
+      } else if (itemEllipse != 0) {
+        itemEllipse->setPen (pen);
       }
     }
   }
