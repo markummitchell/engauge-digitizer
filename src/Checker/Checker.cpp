@@ -165,6 +165,12 @@ void Checker::createTransformArc (const Transformation &transformation,
 
   ellipseXAxis = qSqrt (dXRadiusY0X * dXRadiusY0X + dXRadiusY0Y * dXRadiusY0Y);
   ellipseYAxis = qSqrt (dX0YRadiusX * dX0YRadiusX + dX0YRadiusY * dX0YRadiusY);
+
+  // Finish up by including shear in transformation, although usually this is overkill
+  double sx = -0.05;
+  double sy = -0.075;
+
+  transformArc.shear (sx, sy);
 }
 
 void Checker::deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE])
@@ -213,8 +219,8 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                                                                        ellipseYAxis),
                                                        QPointF (       ellipseXAxis,
                                                                 -1.0 * ellipseYAxis)));
-  item->setStartAngle (angleStart);
-  item->setSpanAngle (angleSpan);
+//  item->setStartAngle (angleStart);
+//  item->setSpanAngle (angleSpan);
   item->setTransform (transformArc);
 
   return item;
