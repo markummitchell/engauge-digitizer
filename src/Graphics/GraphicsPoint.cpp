@@ -53,14 +53,14 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_graphicsItemEllipse->setToolTip (identifier);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
-  // Shadow item is not selectable so it needs no stored data
+  // Shadow item is not selectable so it needs no stored data. Do NOT
+  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
   m_shadowZeroWidthEllipse = new GraphicsPointEllipse (*this,
                                                        QRect (- radius,
                                                               - radius,
                                                               2 * radius + 1,
                                                               2 * radius + 1));
   m_shadowZeroWidthEllipse->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
-  scene.addItem (m_shadowZeroWidthEllipse);
 
   m_shadowZeroWidthEllipse->setPen (QPen (QBrush (color), ZERO_WIDTH));
   m_shadowZeroWidthEllipse->setEnabled (true);
@@ -100,11 +100,11 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_graphicsItemPolygon->setToolTip (identifier);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
-  // Shadow item is not selectable so it needs no stored data
+  // Shadow item is not selectable so it needs no stored data. Do NOT
+  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
   m_shadowZeroWidthPolygon = new GraphicsPointPolygon (*this,
                                                        polygon);
   m_shadowZeroWidthPolygon->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
-  scene.addItem (m_shadowZeroWidthPolygon);
 
   m_shadowZeroWidthPolygon->setPen (QPen (QBrush (color), ZERO_WIDTH));
   m_shadowZeroWidthPolygon->setEnabled (true);

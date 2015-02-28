@@ -104,6 +104,7 @@ HEADERS  += \
     Filter/FilterHistogram.h \
     Filter/FilterMode.h \
     Callback/functor.h \
+    Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsLine.h \
     Graphics/GraphicsLinesForCurve.h \
@@ -234,6 +235,7 @@ SOURCES += \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
     Filter/FilterHistogram.cpp \
+    Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \

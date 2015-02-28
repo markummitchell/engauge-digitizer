@@ -1,24 +1,6 @@
-#include <math.h>
 #include "mmsubs.h"
 #include <QImage>
 #include <qmath.h>
-
-double angleBetweenVectors (double dx1,
-                            double dy1,
-                            double dx2,
-                            double dy2)
-{
-  // Vector magnitudes
-  double mag1 = sqrt (dx1 * dx1 + dy1 * dy1);
-  double mag2 = sqrt (dx2 * dx2 + dy2 * dy2);
-
-  // Dot product = (vec1 dot vec2) / (mag1 * mag2) = cos (angle)
-  double cosAngle = (dx1 * dx2 + dy1 * dy2) / mag1 / mag2;
-  cosAngle = fmin (cosAngle, 1.0);
-  cosAngle = fmax (cosAngle, -1.0);
-
-  return acos (cosAngle);
-}
 
 QRgb pixelRGB(const QImage &image, int x, int y)
 {

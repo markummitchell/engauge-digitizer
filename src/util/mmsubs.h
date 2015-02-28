@@ -5,12 +5,6 @@
 
 class QImage;
 
-/// Angle, in radians, between two vectors from the same point
-extern double angleBetweenVectors (double dx1,
-                                   double dy1,
-                                   double dx2,
-                                   double dy2);
-
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);
 

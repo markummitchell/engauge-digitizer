@@ -65,12 +65,17 @@ private:
                    const QPointF &pointFromGraph,
                    const QPointF &pointToGraph,
                    const Transformation &transformation,
-                   QGraphicsItem *items [MAX_LINES_PER_SIDE],
-                   bool sideArcsAboutOrigin);
+                   QGraphicsItem *items [MAX_LINES_PER_SIDE]);
+  void createTransformArc (const Transformation &transformation,
+                           double radius,
+                           QTransform &transformArc,
+                           double &ellipseXAxis,
+                           double &ellipseYAxis) const;
   void deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE]);
-  QGraphicsItem *ellipseItem(const QPointF &posStart,
-                             const QPointF &posEnd,
-                             const QPointF &posOrigin) const;
+  QGraphicsItem *ellipseItem(const Transformation &transformation,
+                             double radius,
+                             const QPointF &posStartScreen,
+                             const QPointF &posEndScreen) const;
 
   // Intercept circle around point with line. Intersection point count is either 0 or 2. For simplicity,
   // if point just touches line then the point count is handled as two points at the same position
