@@ -931,7 +931,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
   if (cmdMediator->successfulRead ()) {
 
-    m_engaugeFile = fileName;
     setCurrentPathFromFile (fileName);
     rebuildRecentFileListForCurrentFile(fileName);
     m_currentFile = fileName; // This enables the FileSaveAs menu option
@@ -950,7 +949,8 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
     slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
-    updateAfterCommand ();
+    m_engaugeFile = fileName;
+    updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
     m_originalFile = fileName;
     m_originalFileWasImported = false;
@@ -1187,7 +1187,9 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
 
   setCurrentFile(fileName);
   m_engaugeFile = fileName;
+  updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
   m_statusBar->showTemporaryMessage("File saved");
+
   return true;
 }
 
@@ -1332,12 +1334,10 @@ void MainWindow::setCurrentFile (const QString &fileName)
   QString fileNameStripped = fileName;
   if (!fileName.isEmpty()) {
 
-    // Strip out common file extensions. For Windows, upper case characters are allowed
-    fileNameStripped = fileNameStripped
-                       .replace(".bmp", "", Qt::CaseInsensitive)
-                       .replace(".gif", "", Qt::CaseInsensitive)
-                       .replace(".jpg", "", Qt::CaseInsensitive)
-                       .replace(".png", "", Qt::CaseInsensitive);
+    // Strip out path and file extension
+    QFileInfo fileInfo (fileName);
+    fileNameStripped = fileInfo.baseName();
+
     title += QString (": %1")
              .arg (fileNameStripped);
   }
