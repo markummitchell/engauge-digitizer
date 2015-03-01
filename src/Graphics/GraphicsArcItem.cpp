@@ -21,6 +21,23 @@ GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
 {
 }
 
+QRectF GraphicsArcItem::boundingRect() const
+{
+  // Untransformed bounding rectangle
+  QRectF uBoundingRect = QGraphicsEllipseItem::boundingRect();
+
+  // Bounding rectangle with transform incorporated
+  QPointF posTopLeftU =  uBoundingRect.topLeft();
+  QPointF posBottomRightU = uBoundingRect.bottomRight();
+
+  // Transformed bounding rectangle
+  QPointF posTopLeftT = transform().map(posTopLeftU);
+  QPointF posBottomRightT = transform().map(posBottomRightU);
+
+  return QRectF (posTopLeftT,
+                 posBottomRightT);
+}
+
 void GraphicsArcItem::paint (QPainter *painter,
                              const QStyleOptionGraphicsItem * /* option */,
                              QWidget * /* widget */)

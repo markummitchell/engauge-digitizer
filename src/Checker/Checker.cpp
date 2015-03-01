@@ -1,9 +1,11 @@
+#include "CallbackUpdateTransform.h"
 #include "Checker.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "Logger.h"
 #include "mmsubs.h"
+#include <QDebug>
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QPen>
@@ -25,6 +27,7 @@ const int CHECKER_POINTS_WIDTH = 5;
 
 const double PI = 3.1415926535;
 const double RADIANS_TO_TICS = 5760 / (2.0 * PI);
+const double RADIANS_TO_DEGREES = 180.0 / PI;
 
 Checker::Checker(QGraphicsScene &scene) :
   m_scene (scene)
@@ -129,27 +132,25 @@ void Checker::createSide (int pointRadius,
   }
 }
 
-void Checker::createTransformArc (const Transformation &transformation,
-                                  double radius,
-                                  QTransform &transformArc,
-                                  double &ellipseXAxis,
-                                  double &ellipseYAxis) const
+void Checker::createTransformAlign (const Transformation &transformation,
+                                    double radius,
+                                    const QPointF &posOriginScreen,
+                                    QTransform &transformAlign,
+                                    double &ellipseXAxis,
+                                    double &ellipseYAxis) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::createTransformArc"
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::TransformAlign"
                               << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data();
 
-  // Get origin
-  QPointF posOriginScreen;
-  transformation.transformInverse (QPointF (0, 0),
-                                   posOriginScreen);
+  // Compute a minimal transformation that aligns the graph x and y axes with the screen x and y axes. Specifically, shear,
+  // translation and rotation are allowed but not scaling. Scaling is bad since it messes up the line thickness of the drawn arc.
+  //
+  // Assumptions:
+  // 1) Keep the graph origin at the same screen coordinates
+  // 2) Keep the (+radius,0) the same pixel distance from the origin but moved to the same pixel row as the origin
+  // 3) Keep the (0,+radius) the same pixel distance from the origin but moved to the same pixel column as the origin
 
-  // Translate to get the origin in the right place
-  transformArc.translate (posOriginScreen.x(),
-                          posOriginScreen.y());
-
-  // We do NOT do any scaling here since that also scales the pen line, resulting in a line that is, say, 60 pixels wide
-  // instead of the few pixels that we want. Instead, we compute the ellipse parameters so it can be drawn in screen coordinates
-  // (although maybe with rotation)
+  // Get (+radius,0) and (0,+radius) points
   QPointF posXRadiusY0Graph (radius, 0), posX0YRadiusGraph (0, radius);
   QPointF posXRadiusY0Screen, posX0YRadiusScreen;
   transformation.transformInverse (posXRadiusY0Graph,
@@ -157,20 +158,27 @@ void Checker::createTransformArc (const Transformation &transformation,
   transformation.transformInverse (posX0YRadiusGraph,
                                    posX0YRadiusScreen);
 
-  double dXRadiusY0X = posXRadiusY0Screen.x() - posOriginScreen.x();
-  double dXRadiusY0Y = posXRadiusY0Screen.y() - posOriginScreen.y();
+  // Compute arc/ellipse parameters
+  ellipseXAxis = qAbs (posXRadiusY0Screen.x() - posOriginScreen.x());
+  ellipseYAxis = qAbs (posX0YRadiusScreen.y() - posOriginScreen.y());
 
-  double dX0YRadiusX = posX0YRadiusScreen.x() - posOriginScreen.x();
-  double dX0YRadiusY = posX0YRadiusScreen.y() - posOriginScreen.y();
+  // Compute the aligned coordinates, constrained by the rules listed above
+  QPointF posXRadiusY0AlignedScreen (posOriginScreen.x() + ellipseXAxis, posOriginScreen.y());
+  QPointF posX0YRadiusAlignedScreen (posOriginScreen.x(), posOriginScreen.y() - ellipseYAxis);
 
-  ellipseXAxis = qSqrt (dXRadiusY0X * dXRadiusY0X + dXRadiusY0Y * dXRadiusY0Y);
-  ellipseYAxis = qSqrt (dX0YRadiusX * dX0YRadiusX + dX0YRadiusY * dX0YRadiusY);
+  // Compute transform. Note that transform is not screen-to/from-graph or vice versa, but from
+  // screen-unaligned-to/from-screen-aligned
+  DocumentModelCoords modelCoords; // Default coordinates are simple linear and cartesian, which is what we want
 
-  // Finish up by including shear in transformation, although usually this is overkill
-  double sx = -0.05;
-  double sy = -0.075;
+  CallbackUpdateTransform cb (modelCoords,
+                              posOriginScreen,
+                              posXRadiusY0Screen,
+                              posX0YRadiusScreen,
+                              posOriginScreen,
+                              posXRadiusY0AlignedScreen,
+                              posX0YRadiusAlignedScreen);
 
-  transformArc.shear (sx, sy);
+  transformAlign = cb.transform();
 }
 
 void Checker::deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE])
@@ -197,15 +205,22 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   transformation.transform (posEndScreen,
                             posEndGraph);
 
-  // Compute transform for arc, and ellipse parameters. Transform does not include scaling since that messes
-  // up the thickness of the drawn line
+  // Get origin
+  QPointF posOriginGraph (0, 0), posOriginScreen;
+  transformation.transformInverse (posOriginGraph,
+                                   posOriginScreen);
+
+  // Compute rotate/shear transform that aligns graph coordinates with screen coordinates, and ellipse parameters.
+  // Transform does not include scaling since that messes up the thickness of the drawn line, and does not include
+  // translation since that is not important
   double ellipseXAxis, ellipseYAxis;
-  QTransform transformArc;
-  createTransformArc (transformation,
-                      radius,
-                      transformArc,
-                      ellipseXAxis,
-                      ellipseYAxis);
+  QTransform transformAlign;
+  createTransformAlign (transformation,
+                        radius,
+                        posOriginScreen,
+                        transformAlign,
+                        ellipseXAxis,
+                        ellipseYAxis);
 
   // Get the angles about the origin of the start and end points
   double angleStart = qAtan2 (posStartGraph.y(),
@@ -216,12 +231,13 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
 
   // Create a circle in graph space with the specified radius
   GraphicsArcItem *item = new GraphicsArcItem (QRectF (QPointF (-1.0 * ellipseXAxis,
-                                                                       ellipseYAxis),
+                                                                       ellipseYAxis) + posOriginScreen,
                                                        QPointF (       ellipseXAxis,
-                                                                -1.0 * ellipseYAxis)));
-//  item->setStartAngle (angleStart);
-//  item->setSpanAngle (angleSpan);
-  item->setTransform (transformArc);
+                                                                -1.0 * ellipseYAxis) + posOriginScreen));
+  item->setStartAngle (angleStart);
+  item->setSpanAngle (angleSpan);
+
+  item->setTransform (transformAlign.transposed ().inverted ());
 
   return item;
 }

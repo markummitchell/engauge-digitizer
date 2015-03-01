@@ -66,11 +66,12 @@ private:
                    const QPointF &pointToGraph,
                    const Transformation &transformation,
                    QGraphicsItem *items [MAX_LINES_PER_SIDE]);
-  void createTransformArc (const Transformation &transformation,
-                           double radius,
-                           QTransform &transformArc,
-                           double &ellipseXAxis,
-                           double &ellipseYAxis) const;
+  void createTransformAlign (const Transformation &transformation,
+                             double radius,
+                             const QPointF &posOriginScreen,
+                             QTransform &transformAlign,
+                             double &ellipseXAxis,
+                             double &ellipseYAxis) const;
   void deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE]);
   QGraphicsItem *ellipseItem(const Transformation &transformation,
                              double radius,

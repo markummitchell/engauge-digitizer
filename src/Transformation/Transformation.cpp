@@ -189,18 +189,15 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
 
 void Transformation::identity()
 {
-  const QString DUMMY_CURVENAME ("dummy");
-
-  Point p1 (DUMMY_CURVENAME, QPointF (0, 0), QPointF (0, 0));
-  Point p2 (DUMMY_CURVENAME, QPointF (1, 0), QPointF (1, 0));
-  Point p3 (DUMMY_CURVENAME, QPointF (0, 1), QPointF (0, 1));
-
   DocumentModelCoords modelCoords; // Default coordinates are simple linear and cartesian, which is what we want
 
-  CallbackUpdateTransform cb (modelCoords);
-  cb.callback (DUMMY_CURVENAME, p1);
-  cb.callback (DUMMY_CURVENAME, p2);
-  cb.callback (DUMMY_CURVENAME, p3);
+  CallbackUpdateTransform cb (modelCoords,
+                              QPointF (0, 0),
+                              QPointF (1, 0),
+                              QPointF (0, 1),
+                              QPointF (0, 0),
+                              QPointF (1, 0),
+                              QPointF (0, 1));
 
   m_transformIsDefined = cb.transformIsDefined ();
   m_xGraphRange = cb.xGraphRange ();

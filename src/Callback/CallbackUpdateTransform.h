@@ -16,6 +16,15 @@ public:
   /// Single constructor.
   CallbackUpdateTransform(const DocumentModelCoords &modelCoords);
 
+  /// Constructor from three graph/screen position pairs.
+  CallbackUpdateTransform(const DocumentModelCoords &modelCoords,
+                          const QPointF &posScreen0,
+                          const QPointF &posScreen1,
+                          const QPointF &posScreen2,
+                          const QPointF &posGraph0,
+                          const QPointF &posGraph1,
+                          const QPointF &posGraph2);
+
   /// Returns screen-to-graph transform after transformIsDefined has already indicated success.
   QTransform transform ();
 

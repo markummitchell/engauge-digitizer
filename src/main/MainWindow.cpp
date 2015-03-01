@@ -931,6 +931,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
   if (cmdMediator->successfulRead ()) {
 
+    m_engaugeFile = fileName;
     setCurrentPathFromFile (fileName);
     rebuildRecentFileListForCurrentFile(fileName);
     m_currentFile = fileName; // This enables the FileSaveAs menu option

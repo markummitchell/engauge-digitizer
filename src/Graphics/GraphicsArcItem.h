@@ -18,6 +18,10 @@ public:
   GraphicsArcItem(const QRectF &rect,
                   QGraphicsItem *parent = 0);
 
+  /// QGraphicsEllipseItem ignored transformation when computing bounding rectangle, although it should
+  /// so we must make boundingRect smarter
+  virtual QRectF boundingRect() const;
+
   /// Paint without interior fill
   virtual void paint (QPainter *painter,
                       const QStyleOptionGraphicsItem *option,
