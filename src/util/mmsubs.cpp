@@ -1,6 +1,35 @@
 #include "mmsubs.h"
 #include <QImage>
+#include <QPointF>
 #include <qmath.h>
+
+double angleBetweenVectors (const QPointF &v1,
+                            const QPointF &v2)
+{
+  double v1Mag = qSqrt (v1.x() * v1.x() + v1.y() * v1.y());
+  double v2Mag = qSqrt (v2.x() * v2.x() + v2.y() * v2.y());
+
+  double angle = 0;
+  if ((v1Mag > 0) || (v2Mag > 0)) {
+
+    double cosArg = (v1.x() * v2.x() + v1.y() * v2.y()) / (v1Mag * v2Mag);
+    cosArg = qMin (qMax (cosArg, -1.0), 1.0);
+    angle = qAcos (cosArg);
+  }
+
+  return angle;
+}
+
+double angleFromVectorToVector (const QPointF &vFrom,
+                                const QPointF &vTo)
+{
+  double angleFrom = qAtan2 (vFrom.y(), vFrom.x());
+  double angleTo   = qAtan2 (vTo.y()  , vTo.x());
+
+  // Rotate both angles to put from vector along x axis. Note that angleFrom-angleFrom is zero,
+  // and angleTo-angleFrom is -pi to +pi radians
+  return angleTo - angleFrom;
+}
 
 QRgb pixelRGB(const QImage &image, int x, int y)
 {

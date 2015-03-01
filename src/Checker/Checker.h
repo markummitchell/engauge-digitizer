@@ -58,12 +58,25 @@ public:
 private:
   Checker();
 
+  // For polar coordinates, pick the smallest angle range. Note that xMax may be less than xMin, in which case
+  // xMax+period should be used. Ymin is also set to zero for polar coordinates
+  void adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
+                               const Transformation &transformation,
+                               const QList<Point> &points,
+                               double &xMin,
+                               double &xMax,
+                               double &yMin) const;
   void bindItemToScene(QGraphicsItem *item);
+
+  // Create side, either along constant X/theta or constant Y/radius side. Line goes from pointFromGraph to pointToGraph.
+  // If the coordinates are polar, we go clockwise from pointFromGraph to pointToGraph (as set up by adjustPolarAngleRange).
   void createSide (int pointRadius,
                    const QList<Point> &points,
                    const DocumentModelCoords &modelCoords,
-                   const QPointF &pointFromGraph,
-                   const QPointF &pointToGraph,
+                   double xFrom,
+                   double yFrom,
+                   double xTo,
+                   double yTo,
                    const Transformation &transformation,
                    QGraphicsItem *items [MAX_LINES_PER_SIDE]);
   void createTransformAlign (const Transformation &transformation,

@@ -4,6 +4,15 @@
 #include <QRgb>
 
 class QImage;
+class QPointF;
+
+/// Angle between two vectors. Direction is unimportant, so result is between 0 to pi radians
+extern double angleBetweenVectors (const QPointF &v1,
+                                   const QPointF &v2);
+
+/// Angle between two vectors. Direction is positive when rotation is about +z vector, so result is betwen -pi to pi radians
+extern double angleFromVectorToVector (const QPointF &vFrom,
+                                       const QPointF &vTo);
 
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);

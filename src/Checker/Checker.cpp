@@ -26,7 +26,8 @@ const double CHECKER_OPACITY = 0.6;
 const int CHECKER_POINTS_WIDTH = 5;
 
 const double PI = 3.1415926535;
-const double RADIANS_TO_TICS = 5760 / (2.0 * PI);
+const double TWO_PI = 2.0 * PI;
+const double RADIANS_TO_TICS = 5760 / TWO_PI;
 const double RADIANS_TO_DEGREES = 180.0 / PI;
 
 Checker::Checker(QGraphicsScene &scene) :
@@ -37,6 +38,67 @@ Checker::Checker(QGraphicsScene &scene) :
     m_sideTop [i] = 0;
     m_sideRight [i] = 0;
     m_sideBottom [i] = 0;
+  }
+}
+
+void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
+                                      const Transformation &transformation,
+                                      const QList<Point> &points,
+                                      double &xMin,
+                                      double &xMax,
+                                      double &yMin) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::adjustPolarAngleRanges";
+
+  const double UNIT_LENGTH = 1.0;
+
+  if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+
+    // Range minimum is origin
+    yMin = 0.0;
+
+    // Perform special processing to account for periodicity of polar coordinates. Start with unit vectors
+    // in the directions of the three axis points
+    double angle0 = points.at(0).posGraph().x();
+    double angle1 = points.at(1).posGraph().x();
+    double angle2 = points.at(2).posGraph().x();
+    QPointF pos0 = transformation.cartesianFromCartesianOrPolar(modelCoords,
+                                                                QPointF (angle0, UNIT_LENGTH));
+    QPointF pos1 = transformation.cartesianFromCartesianOrPolar(modelCoords,
+                                                                QPointF (angle1, UNIT_LENGTH));
+    QPointF pos2 = transformation.cartesianFromCartesianOrPolar(modelCoords,
+                                                                QPointF (angle2, UNIT_LENGTH));
+
+    // Angles in radians. Unlike the units-specific values in angle0, angle1 and angle2, we know these range from
+    // 0 to TWO_PI
+    double angle0Radians = qAtan2 (pos0.y(), pos0.x());
+    double angle1Radians = qAtan2 (pos1.y(), pos1.x());
+    double angle2Radians = qAtan2 (pos2.y(), pos2.y());
+
+    // Identify the axis point that is more in the center of the other two axis points. The arc is then drawn
+    // from one of the other two points to the other. Center point has smaller angles with the other points
+    double sumAngle0 = angleBetweenVectors(pos0, pos1) + angleBetweenVectors(pos0, pos2);
+    double sumAngle1 = angleBetweenVectors(pos1, pos0) + angleBetweenVectors(pos1, pos2);
+    double sumAngle2 = angleBetweenVectors(pos2, pos0) + angleBetweenVectors(pos2, pos1);
+    if ((sumAngle0 <= sumAngle1) && (sumAngle0 <= sumAngle2)) {
+
+      // Point 0 is in the middle
+      xMin = (angle1Radians < angle2Radians) ? angle1 : angle2;
+      xMax = (angle1Radians < angle2Radians) ? angle2 : angle1;
+
+    } else if ((sumAngle1 <= sumAngle0) && (sumAngle2 <= sumAngle2)) {
+
+      // Point 1 is in the middle
+      xMin = (angle0Radians < angle2Radians) ? angle0 : angle2;
+      xMax = (angle0Radians < angle2Radians) ? angle2 : angle0;
+
+    } else {
+
+      // Point 2 is in the middle
+      xMin = (angle0Radians < angle1Radians) ? angle0 : angle1;
+      xMax = (angle0Radians < angle1Radians) ? angle1 : angle0;
+
+    }
   }
 }
 
@@ -54,11 +116,15 @@ void Checker::bindItemToScene(QGraphicsItem *item)
 void Checker::createSide (int pointRadius,
                           const QList<Point> &points,
                           const DocumentModelCoords &modelCoords,
-                          const QPointF &pointFromGraph,
-                          const QPointF &pointToGraph,
+                          double xFrom,
+                          double yFrom,
+                          double xTo,
+                          double yTo,
                           const Transformation &transformation,
                           QGraphicsItem *items [MAX_LINES_PER_SIDE])
 {
+  QPointF pointFromGraph (xFrom, yFrom), pointToGraph (xTo, yTo);
+
   QPointF pointFromGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
                                                                              pointFromGraph);
   QPointF pointToGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
@@ -227,6 +293,9 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                               posStartGraph.x()) * RADIANS_TO_TICS;
   double angleEnd = qAtan2 (posEndGraph.y(),
                             posEndGraph.x()) * RADIANS_TO_TICS;
+  if (angleEnd < angleStart) {
+    angleEnd += TWO_PI * RADIANS_TO_TICS;
+  }
   double angleSpan = angleEnd - angleStart;
 
   // Create a circle in graph space with the specified radius
@@ -414,11 +483,20 @@ void Checker::prepareForDisplay (const QList<Point> &points,
     yMax = qMax (yMax, points.at(i).posGraph().y());
   }
 
+  // Min and max of angles needs special processing since periodicity introduces some ambiguity. This is a noop for rectangular coordinates
+  // and for polar coordinates when periodicity is not an issue
+  adjustPolarAngleRanges (modelCoords,
+                          transformation,
+                          points,
+                          xMin,
+                          xMax,
+                          yMin);
+
   // Draw the bounding box as four sides
-  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMin), QPointF (xMin, yMax), transformation, m_sideLeft);
-  createSide (pointRadius, points, modelCoords, QPointF (xMin, yMax), QPointF (xMax, yMax), transformation, m_sideTop);
-  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMax), QPointF (xMax, yMin), transformation, m_sideRight);
-  createSide (pointRadius, points, modelCoords, QPointF (xMax, yMin), QPointF (xMin, yMin), transformation, m_sideBottom);
+  createSide (pointRadius, points, modelCoords, xMin, yMin, xMin, yMax, transformation, m_sideLeft);
+  createSide (pointRadius, points, modelCoords, xMin, yMax, xMax, yMax, transformation, m_sideTop);
+  createSide (pointRadius, points, modelCoords, xMax, yMax, xMax, yMin, transformation, m_sideRight);
+  createSide (pointRadius, points, modelCoords, xMax, yMin, xMin, yMin, transformation, m_sideBottom);
 
   updateModelAxesChecker (modelAxesChecker);
 }
