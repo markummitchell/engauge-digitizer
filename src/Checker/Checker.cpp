@@ -230,10 +230,11 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   double angleSpan = angleEnd - angleStart;
 
   // Create a circle in graph space with the specified radius
-  GraphicsArcItem *item = new GraphicsArcItem (QRectF (QPointF (-1.0 * ellipseXAxis,
-                                                                       ellipseYAxis) + posOriginScreen,
-                                                       QPointF (       ellipseXAxis,
-                                                                -1.0 * ellipseYAxis) + posOriginScreen));
+  QRectF boundingRect (-1.0 * ellipseXAxis + posOriginScreen.x(),
+                       -1.0 * ellipseYAxis + posOriginScreen.y(),
+                       2 * ellipseXAxis,
+                       2 * ellipseYAxis);
+  GraphicsArcItem *item = new GraphicsArcItem (boundingRect);
   item->setStartAngle (angleStart);
   item->setSpanAngle (angleSpan);
 
@@ -262,69 +263,71 @@ void Checker::interceptPointCircleWithLine (int pointRadius,
   double dy = pointToScreen.y() - pointFromScreen.y();
 
   // Handle more-horizontal and more-vertical lines separately to prevent divide by zero issues
-  if (dx < dy) {
+  double xIntercept, yIntercept;
+  if (qAbs (dx) < qAbs (dy)) {
 
-    // x = slope * y + intercept
-    double slope = dx / dy;
-    double intercept = pointToScreen.x() - slope * pointToScreen.y();
+    if (dx == 0) {
 
-    // Perpendicular line that goes through specified point
-    double slopePerp = -1.0 / slope;
-    double interceptPerp = point.posScreen().x() - slopePerp * point.posScreen().y();
+      // For a perfectly vertical line the inverse slope will crash below, but intersection is trivial
+      xIntercept = pointToScreen.x();
+      yIntercept = point.posScreen().y();
 
-    // Intersection point of both lines comes from subtracting both x=slope*y+intercept and x=slopePerp*y+interceptPerp
-    double yIntercept = (interceptPerp - intercept) / (slope - slopePerp);
-    double xIntercept = slope * yIntercept + intercept;
+    } else {
 
-    // Distance from point to line
-    double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
-                               (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
-    if (separation < radiusTweaked) {
+      // x = slope * y + intercept
+      double slope = dx / dy;
+      double intercept = pointToScreen.x() - slope * pointToScreen.y();
 
-      // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
-      double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
-                                            (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
+      // Perpendicular line that goes through specified point
+      double slopePerp = -1.0 / slope;
+      double interceptPerp = point.posScreen().x() - slopePerp * point.posScreen().y();
 
-      // Find both intersection points at +/-offsetFromIntercept
-      double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
-      double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
-      double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
+      // Intersection point of both lines comes from subtracting both x=slope*y+intercept and x=slopePerp*y+interceptPerp
+      yIntercept = (interceptPerp - intercept) / (slope - slopePerp);
+      xIntercept = slope * yIntercept + intercept;
 
-      sInterceptPoints.push_back (sMinus);
-      sInterceptPoints.push_back (sPlus);
     }
-
   } else {
 
-    // y = slope * y + intercept
-    double slope = dy / dx;
-    double intercept = pointToScreen.y() - slope * pointToScreen.x();
+    if (dy == 0) {
 
-    // Perpendicular line that goes through specified point
-    double slopePerp = -1.0 / slope;
-    double interceptPerp = point.posScreen().y() - slopePerp * point.posScreen().x();
+      // For a perfectly horizontal line the inverse slope will crash below, but intersection is trivial
+      xIntercept = point.posScreen().x();
+      yIntercept = pointToScreen.y();
 
-    // Intersection point of both lines comes from subtracting both y=slope*x+intercept and y=slopePerp*x+interceptPerp
-    double xIntercept = (interceptPerp - intercept) / (slope - slopePerp);
-    double yIntercept = slope * xIntercept + intercept;
+    } else {
 
-    // Distance from point to line
-    double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
-                               (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
-    if (separation < radiusTweaked) {
+      // y = slope * y + intercept
+      double slope = dy / dx;
+      double intercept = pointToScreen.y() - slope * pointToScreen.x();
 
-      // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
-      double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
-                                            (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
+      // Perpendicular line that goes through specified point
+      double slopePerp = -1.0 / slope;
+      double interceptPerp = point.posScreen().y() - slopePerp * point.posScreen().x();
 
-      // Find both intersection points at +/-offsetFromIntercept
-      double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
-      double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
-      double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
+      // Intersection point of both lines comes from subtracting both y=slope*x+intercept and y=slopePerp*x+interceptPerp
+      xIntercept = (interceptPerp - intercept) / (slope - slopePerp);
+      yIntercept = slope * xIntercept + intercept;
 
-      sInterceptPoints.push_back (sMinus);
-      sInterceptPoints.push_back (sPlus);
     }
+  }
+
+  // Distance from point to line
+  double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
+                             (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
+  if (separation < radiusTweaked) {
+
+    // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
+    double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
+                                          (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
+
+    // Find both intersection points at +/-offsetFromIntercept
+    double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
+    double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
+    double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
+
+    sInterceptPoints.push_back (sMinus);
+    sInterceptPoints.push_back (sPlus);
   }
 }
 
