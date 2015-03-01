@@ -71,7 +71,9 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
     if ((m_numberAxisPoints == 0) || (posGraph.x () > m_xGraphHigh)) { m_xGraphHigh = posGraph.x (); }
     if ((m_numberAxisPoints == 0) || (posGraph.y () > m_yGraphHigh)) { m_yGraphHigh = posGraph.y (); }
 
-    // Append one new column to each of the screen and graph coordinate matrices
+    // Append one new column to each of the screen and graph coordinate matrices. Since QTransform::setTransform
+    // deals with an entire array instead of element by element, we copy the QTransform arrays here, modify them,
+    // and then copy them back. The local arrays are also handy for error checking
 
     double sm [3] [3] = {
       {m_screenInputs.m11 (), m_screenInputs.m12 (), m_screenInputs.m13 ()},
@@ -161,6 +163,9 @@ bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int 
 QTransform CallbackAxisPointsAbstract::transform ()
 {
   ENGAUGE_ASSERT (m_numberAxisPoints == 3);
+
+  // This is where the magic of generating the screen-to/from-graph transformation occurs. Note that log processing
+  // and polar coordinates are external to this class
 
   QTransform screenInputsInv = m_screenInputs.inverted ();
   QTransform transform = m_graphOutputs * screenInputsInv;

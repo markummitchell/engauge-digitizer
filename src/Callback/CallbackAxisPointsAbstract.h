@@ -18,6 +18,13 @@ class Point;
 /// -# Use all existing axis points, but override the details of one existing axis point to see if those
 ///    details violate any constraint (prior to editing the point)
 /// -# Use all existing axis points as is. This is for computing the transformation after axis points are added/edited
+///
+/// This class computes the screen-to/from-graph transformation. This is done in a callback rather than in a more
+/// common utility class since:
+/// 1) The callback integrates very well with the user interface, especially when dealing with pathological geometry issues
+/// 2) This class is reasonably easy to work with when trying the compute a screen-to/from-graph transformation away from
+///    the gui
+/// NOTE that log scaling and polar coordinates are entirely external to this class, and the transformation it generates
 class CallbackAxisPointsAbstract
 {
 public:
