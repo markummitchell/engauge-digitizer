@@ -33,12 +33,6 @@ const double RADIANS_TO_DEGREES = 180.0 / PI;
 Checker::Checker(QGraphicsScene &scene) :
   m_scene (scene)
 {
-  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
-    m_sideLeft [i] = 0;
-    m_sideTop [i] = 0;
-    m_sideRight [i] = 0;
-    m_sideBottom [i] = 0;
-  }
 }
 
 void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
@@ -69,12 +63,6 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
     QPointF pos2 = transformation.cartesianFromCartesianOrPolar(modelCoords,
                                                                 QPointF (angle2, UNIT_LENGTH));
 
-    // Angles in radians. Unlike the units-specific values in angle0, angle1 and angle2, we know these range from
-    // 0 to TWO_PI
-    double angle0Radians = qAtan2 (pos0.y(), pos0.x());
-    double angle1Radians = qAtan2 (pos1.y(), pos1.x());
-    double angle2Radians = qAtan2 (pos2.y(), pos2.y());
-
     // Identify the axis point that is more in the center of the other two axis points. The arc is then drawn
     // from one of the other two points to the other. Center point has smaller angles with the other points
     double sumAngle0 = angleBetweenVectors(pos0, pos1) + angleBetweenVectors(pos0, pos2);
@@ -82,27 +70,42 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
     double sumAngle2 = angleBetweenVectors(pos2, pos0) + angleBetweenVectors(pos2, pos1);
     if ((sumAngle0 <= sumAngle1) && (sumAngle0 <= sumAngle2)) {
 
-      // Point 0 is in the middle
-      xMin = (angle1Radians < angle2Radians) ? angle1 : angle2;
-      xMax = (angle1Radians < angle2Radians) ? angle2 : angle1;
-
+      // Point 0 is in the middle. Either or neither of points 1 and 2 may be along point 0
+      if ((angleFromVectorToVector (pos0, pos1) < 0) ||
+          (angleFromVectorToVector (pos0, pos2) > 0)) {
+        xMin = angle1;
+        xMax = angle2;
+      } else {
+        xMin = angle2;
+        xMax = angle1;
+      }
     } else if ((sumAngle1 <= sumAngle0) && (sumAngle2 <= sumAngle2)) {
 
-      // Point 1 is in the middle
-      xMin = (angle0Radians < angle2Radians) ? angle0 : angle2;
-      xMax = (angle0Radians < angle2Radians) ? angle2 : angle0;
-
+      // Point 1 is in the middle. Either or neither of points 0 and 2 may be along point 1
+      if ((angleFromVectorToVector (pos1, pos0) < 0) ||
+          (angleFromVectorToVector (pos1, pos2) > 0)) {
+        xMin = angle0;
+        xMax = angle2;
+      } else {
+        xMin = angle2;
+        xMax = angle0;
+      }
     } else {
 
-      // Point 2 is in the middle
-      xMin = (angle0Radians < angle1Radians) ? angle0 : angle1;
-      xMax = (angle0Radians < angle1Radians) ? angle1 : angle0;
-
+      // Point 2 is in the middle. Either or neither of points 0 and 1 may be along point 2
+      if ((angleFromVectorToVector (pos2, pos0) < 0) ||
+          (angleFromVectorToVector (pos2, pos1) > 0)) {
+        xMin = angle0;
+        xMax = angle1;
+      } else {
+        xMin = angle1;
+        xMax = angle0;
+      }
     }
   }
 }
 
-void Checker::bindItemToScene(QGraphicsItem *item)
+void Checker::bindItemToScene(QGraphicsItem *item) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Checker:bindItemToScene";
 
@@ -121,81 +124,108 @@ void Checker::createSide (int pointRadius,
                           double xTo,
                           double yTo,
                           const Transformation &transformation,
-                          QGraphicsItem *items [MAX_LINES_PER_SIDE])
+                          SideSegments &sideSegments)
 {
-  QPointF pointFromGraph (xFrom, yFrom), pointToGraph (xTo, yTo);
+  // Originally a complicated algorithm tried to intercept a straight line from (xFrom,yFrom) to (xTo,yTo). That did not work well since:
+  // 1) Calculations for mostly orthogonal cartesian coordinates worked less well with non-orthogonal polar coordinates
+  // 2) Ambiguity in polar coordinates between the shorter and longer paths between (theta0,radius) and (theta1,radius)
+  //
+  // Current algorithm breaks up the interval between (xMin,yMin) and (xMax,yMax) into many smaller pieces and stitches the
+  // desired pieces together. For straight lines in linear graphs this algorithm is very much overkill, but there is no significant
+  // penalty and this approach works in every situation
 
-  QPointF pointFromGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
-                                                                             pointFromGraph);
-  QPointF pointToGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
-                                                                           pointToGraph);
+  const int NUM_STEPS = 1000; // Should give single-pixel resolution on most images, and 'good enough' resolution on extremely large images
 
-  // Convert graph coordinates to screen coordinates
-  QPointF pointFromScreen, pointToScreen;
-  transformation.transformInverse (pointFromGraphCart,
-                                   pointFromScreen);
-  transformation.transformInverse (pointToGraphCart,
-                                   pointToScreen);
+  if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) && (xTo < xFrom)) {
 
-  // Build a list of points where the circle around each point intercepts the infinite line through
-  // pointFromScreen and pointToScreen
-  QList<double> sInterceptPoints;
-  sInterceptPoints << 0; // Start at limit
-  sInterceptPoints << 1; // Stop at limit
-  QList<Point>::const_iterator itr;
-  for (itr = points.begin (); itr != points.end (); itr++) {
-    const Point &point = *itr;
-    interceptPointCircleWithLine (pointRadius,
-                                  sInterceptPoints,
-                                  point,
-                                  pointFromScreen,
-                                  pointToScreen);
+    // Polar coordinates case where we go past the periodic theta maximum
+    xTo += modelCoords.thetaPeriod();
   }
 
-  qSort (sInterceptPoints);
+  bool stateSegmentIsActive = false;
+  QPointF posStartScreen (0, 0);
 
-  // Loop through sorted s values, ignoring those outside the range 0 to 1. Draw line for (s(i-1),s(i))
-  // if the midpoint is not near any point
-  int itemCount = 0;
-  double sLast = 0;
-  for (int i = 0; i < sInterceptPoints.count(); i++) {
-    double s = sInterceptPoints.at (i);
-    if (i > 0) {
-      if (0 < s && sLast < 1) {
+  // Loop through steps. Final step i=NUM_STEPS does final processing if a segment is active
+  for (int i = 0; i <= NUM_STEPS; i++) {
 
-        double sMidpoint = (s + sLast) / 2.0;
+    double s = (double) i / (double) NUM_STEPS;
 
-        QPointF posStartScreen    = (1.0 - sLast    ) * pointFromScreen + sLast     * pointToScreen;
-        QPointF posMidpointScreen = (1.0 - sMidpoint) * pointFromScreen + sMidpoint * pointToScreen;
-        QPointF posEndScreen      = (1.0 - s        ) * pointFromScreen + s         * pointToScreen;
+    double xGraph = (1.0 - s) * xFrom + s * xTo;
+    double yGraph = (1.0 - s) * yFrom + s * yTo;
 
-        if (minScreenDistanceFromPoints (posMidpointScreen, points) > pointRadius) {
-          QGraphicsItem *item;
+    QPointF pointGraph (xGraph, yGraph);
 
-          if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
-              (pointFromGraph.y() == pointToGraph.y())) {
+    QPointF pointGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
+                                                                           pointGraph);
 
-            // Draw along an arc since this is a side of constant radius, and we have polar coordinates
-            item = ellipseItem (transformation,
-                                pointFromGraph.y(),
-                                posStartScreen,
-                                posEndScreen);
+    // Convert graph coordinates to screen coordinates
+    QPointF pointScreen;
+    transformation.transformInverse (pointGraphCart,
+                                     pointScreen);
 
-          } else {
+    double distanceToNearestPoint = minScreenDistanceFromPoints (pointScreen,
+                                                                 points);
+    if ((distanceToNearestPoint < pointRadius) ||
+        (i == NUM_STEPS)) {
 
-            // Draw straight line
-            item = new QGraphicsLineItem (QLineF (posStartScreen,
-                                                  posEndScreen));
+        // Too close to point, so point is not included in side. Or this is the final iteration of the loop
+      if (stateSegmentIsActive) {
 
-          }
+        // State transition
+        finishActiveSegment (modelCoords,
+                             posStartScreen,
+                             pointScreen,
+                             yFrom,
+                             yTo,
+                             transformation,
+                             sideSegments);
+        stateSegmentIsActive = false;
 
-          items [itemCount++] = item;
-          bindItemToScene (item);
-        }
+      }
+    } else {
+
+      // Outside point, so include point in side
+      if (!stateSegmentIsActive) {
+
+        // State transition
+        stateSegmentIsActive = true;
+        posStartScreen = pointScreen;
+
       }
     }
-    sLast = s;
   }
+}
+
+void Checker::finishActiveSegment (const DocumentModelCoords &modelCoords,
+                                   const QPointF &posStartScreen,
+                                   const QPointF &posEndScreen,
+                                   double yFrom,
+                                   double yTo,
+                                   const Transformation &transformation,
+                                   SideSegments &sideSegments) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::finishActiveSegment";
+
+  QGraphicsItem *item;
+  if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
+      (yFrom == yTo)) {
+
+    // Draw along an arc since this is a side of constant radius, and we have polar coordinates
+    item = ellipseItem (transformation,
+                        yFrom,
+                        posStartScreen,
+                        posEndScreen);
+
+  } else {
+
+    // Draw straight line
+    item = new QGraphicsLineItem (QLineF (posStartScreen,
+                                          posEndScreen));
+
+  }
+
+  sideSegments.push_back (item);
+  bindItemToScene (item);
 }
 
 void Checker::createTransformAlign (const Transformation &transformation,
@@ -247,16 +277,16 @@ void Checker::createTransformAlign (const Transformation &transformation,
   transformAlign = cb.transform();
 }
 
-void Checker::deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE])
+void Checker::deleteSide (SideSegments &sideSegments)
 {
-  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
-    QGraphicsItem *item = items [i];
+  for (int i = 0; i < sideSegments.count(); i++) {
+    QGraphicsItem *item = sideSegments [i];
     if (item != 0) {
       delete item;
     }
-
-    items [i] = 0;
   }
+
+  sideSegments.clear();
 }
 
 QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
@@ -310,94 +340,6 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   item->setTransform (transformAlign.transposed ().inverted ());
 
   return item;
-}
-
-void Checker::interceptPointCircleWithLine (int pointRadius,
-                                            QList<double> &sInterceptPoints,
-                                            const Point &point,
-                                            const QPointF &pointFromScreen,
-                                            const QPointF &pointToScreen)
-{
-  double distanceFromTo = qSqrt ((pointToScreen.x() - pointFromScreen.x()) * (pointToScreen.x() - pointFromScreen.x()) +
-                                 (pointToScreen.y() - pointFromScreen.y()) * (pointToScreen.y() - pointFromScreen.y()));
-
-  // Compensate for slop in drawing of lines by making radius a tiny bit bigger
-  double radiusTweaked = pointRadius + 1;
-
-  // Intersect:
-  // 1) (y-y0)/(y1-y0) = (x-x0)/(x1-x0), but converted from two point form to slope intercept form for convenience
-  // 2) (x-xc)^2+(y-yc)^2=r^2
-
-  double dx = pointToScreen.x() - pointFromScreen.x();
-  double dy = pointToScreen.y() - pointFromScreen.y();
-
-  // Handle more-horizontal and more-vertical lines separately to prevent divide by zero issues
-  double xIntercept, yIntercept;
-  if (qAbs (dx) < qAbs (dy)) {
-
-    if (dx == 0) {
-
-      // For a perfectly vertical line the inverse slope will crash below, but intersection is trivial
-      xIntercept = pointToScreen.x();
-      yIntercept = point.posScreen().y();
-
-    } else {
-
-      // x = slope * y + intercept
-      double slope = dx / dy;
-      double intercept = pointToScreen.x() - slope * pointToScreen.y();
-
-      // Perpendicular line that goes through specified point
-      double slopePerp = -1.0 / slope;
-      double interceptPerp = point.posScreen().x() - slopePerp * point.posScreen().y();
-
-      // Intersection point of both lines comes from subtracting both x=slope*y+intercept and x=slopePerp*y+interceptPerp
-      yIntercept = (interceptPerp - intercept) / (slope - slopePerp);
-      xIntercept = slope * yIntercept + intercept;
-
-    }
-  } else {
-
-    if (dy == 0) {
-
-      // For a perfectly horizontal line the inverse slope will crash below, but intersection is trivial
-      xIntercept = point.posScreen().x();
-      yIntercept = pointToScreen.y();
-
-    } else {
-
-      // y = slope * y + intercept
-      double slope = dy / dx;
-      double intercept = pointToScreen.y() - slope * pointToScreen.x();
-
-      // Perpendicular line that goes through specified point
-      double slopePerp = -1.0 / slope;
-      double interceptPerp = point.posScreen().y() - slopePerp * point.posScreen().x();
-
-      // Intersection point of both lines comes from subtracting both y=slope*x+intercept and y=slopePerp*x+interceptPerp
-      xIntercept = (interceptPerp - intercept) / (slope - slopePerp);
-      yIntercept = slope * xIntercept + intercept;
-
-    }
-  }
-
-  // Distance from point to line
-  double separation = qSqrt ((xIntercept - point.posScreen().x()) * (xIntercept - point.posScreen().x()) +
-                             (yIntercept - point.posScreen().y()) * (yIntercept - point.posScreen().y()));
-  if (separation < radiusTweaked) {
-
-    // s at intercept (=distanceFromIntercept/distanceFromTo) is not needed, but distance is needed
-    double distanceFromIntercept = qSqrt ((xIntercept - pointFromScreen.x()) * (xIntercept - pointFromScreen.x()) +
-                                          (yIntercept - pointFromScreen.y()) * (yIntercept - pointFromScreen.y()));
-
-    // Find both intersection points at +/-offsetFromIntercept
-    double offsetFromIntercept = qSqrt (radiusTweaked * radiusTweaked - separation * separation);
-    double sMinus = (distanceFromIntercept - offsetFromIntercept) / distanceFromTo;
-    double sPlus  = (distanceFromIntercept + offsetFromIntercept) / distanceFromTo;
-
-    sInterceptPoints.push_back (sMinus);
-    sInterceptPoints.push_back (sPlus);
-  }
 }
 
 double Checker::minScreenDistanceFromPoints (const QPointF &posScreen,
@@ -501,10 +443,11 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   updateModelAxesChecker (modelAxesChecker);
 }
 
-void Checker::setLineColor (QGraphicsItem *items [MAX_LINES_PER_SIDE], const QPen &pen)
+void Checker::setLineColor (SideSegments &sideSegments,
+                            const QPen &pen)
 {
-  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
-    QGraphicsItem *item = items [i];
+  for (int i = 0; i < sideSegments.count(); i++) {
+    QGraphicsItem *item = sideSegments [i];
     if (item != 0) {
 
       // Downcast since QGraphicsItem does not have a pen
@@ -527,11 +470,11 @@ void Checker::setVisible (bool visible)
   setVisibleSide (m_sideBottom, visible);
 }
 
-void Checker::setVisibleSide (QGraphicsItem *items [MAX_LINES_PER_SIDE],
+void Checker::setVisibleSide (SideSegments &sideSegments,
                               bool visible)
 {
-  for (int i = 0; i < MAX_LINES_PER_SIDE; i++) {
-    QGraphicsItem *item = items [i];
+  for (int i = 0; i < sideSegments.count(); i++) {
+    QGraphicsItem *item = sideSegments [i];
     if (item != 0) {
       item->setVisible (visible);
     }

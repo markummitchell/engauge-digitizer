@@ -58,6 +58,9 @@ public:
   /// Set method for origin radius in polar mode.
   void setOriginRadius (double originRadius);
 
+  /// Return the period of the theta value for polar coordinates, consistent with CoordThetaUnits
+  double thetaPeriod () const;
+
 private:
 
   CoordsType m_coordsType;

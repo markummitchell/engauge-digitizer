@@ -1,9 +1,13 @@
 #include "CmdMediator.h"
 #include "DocumentModelCoords.h"
 #include "DocumentSerialize.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
+
+const double PI = 3.1415926535;
+const double TWO_PI = 2.0 * PI;
 
 DocumentModelCoords::DocumentModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
@@ -142,3 +146,24 @@ void DocumentModelCoords::setOriginRadius(double originRadius)
   m_originRadius = originRadius;
 }
 
+double DocumentModelCoords::thetaPeriod () const
+{
+  switch (m_coordThetaUnits) {
+    case COORD_THETA_UNITS_DEGREES:
+    case COORD_THETA_UNITS_DEGREES_MINUTES:
+    case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+      return 360;
+
+    case COORD_THETA_UNITS_GRADIANS:
+      return 400;
+
+    case COORD_THETA_UNITS_RADIANS:
+      return TWO_PI;
+
+    case COORD_THETA_UNITS_TURNS:
+      return 1;
+  }
+
+  ENGAUGE_ASSERT(false);
+  return 0;
+}

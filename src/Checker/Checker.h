@@ -16,8 +16,9 @@ class QGraphicsScene;
 class QPolygonF;
 class Transformation;
 
-const int MAX_LINES_PER_SIDE = 3;
 const int NUM_AXES_POINTS = 3;
+
+typedef QList<QGraphicsItem *> SideSegments;
 
 /// Box shape that is drawn through the three axis points, to temporarily (usually) or permanently (rarely)
 /// highlight the local up/down/left/right directions when all axis points have been defined. The goal of the checker
@@ -66,7 +67,7 @@ private:
                                double &xMin,
                                double &xMax,
                                double &yMin) const;
-  void bindItemToScene(QGraphicsItem *item);
+  void bindItemToScene(QGraphicsItem *item) const;
 
   // Create side, either along constant X/theta or constant Y/radius side. Line goes from pointFromGraph to pointToGraph.
   // If the coordinates are polar, we go clockwise from pointFromGraph to pointToGraph (as set up by adjustPolarAngleRange).
@@ -78,35 +79,33 @@ private:
                    double xTo,
                    double yTo,
                    const Transformation &transformation,
-                   QGraphicsItem *items [MAX_LINES_PER_SIDE]);
+                   SideSegments &sideSegments);
   void createTransformAlign (const Transformation &transformation,
                              double radius,
                              const QPointF &posOriginScreen,
                              QTransform &transformAlign,
                              double &ellipseXAxis,
                              double &ellipseYAxis) const;
-  void deleteSide (QGraphicsItem *items [MAX_LINES_PER_SIDE]);
+  void deleteSide (SideSegments &sideSegments);
   QGraphicsItem *ellipseItem(const Transformation &transformation,
                              double radius,
                              const QPointF &posStartScreen,
                              const QPointF &posEndScreen) const;
-
-  // Intercept circle around point with line. Intersection point count is either 0 or 2. For simplicity,
-  // if point just touches line then the point count is handled as two points at the same position
-  void interceptPointCircleWithLine (int pointIntercept,
-                                     QList<double> &sInterceptPoints,
-                                     const Point &point,
-                                     const QPointF &pointFromScreen,
-                                     const QPointF &pointToScreen);
-
-  // Distance to nearest point in points list
+  void finishActiveSegment (const DocumentModelCoords &modelCoords,
+                            const QPointF &posStartScreen,
+                            const QPointF &posEndScreen,
+                            double yFrom,
+                            double yTo,
+                            const Transformation &transformation,
+                            SideSegments &sideSegments) const;
   double minScreenDistanceFromPoints (const QPointF &posScreen,
                                       const QList<Point> &points);
 
   // Low level routine to set line color
-  void setLineColor (QGraphicsItem *item [MAX_LINES_PER_SIDE], const QPen &pen);
+  void setLineColor (SideSegments &sideSegments,
+                     const QPen &pen);
 
-  void setVisibleSide (QGraphicsItem *item [MAX_LINES_PER_SIDE],
+  void setVisibleSide (SideSegments &sideSegments,
                        bool visible);
 
   QGraphicsScene &m_scene;
@@ -116,14 +115,14 @@ private:
   //
   // A major complication is that drawing the box with just four lines from corner to corner results in extremely
   // thick lines through the axes points, which obscures the axis point unacceptably. So, each side is drawn with
-  // 3 visible lines:
+  // up to 3 visible lines:
   // 1) corner1 to either point1 or corner2 (whichever comes first)
   // 2) unused, or point1 to either point2 or corner2 (whichever comes first)
   // 3) unused point2 to corner2
-  QGraphicsItem *m_sideLeft [MAX_LINES_PER_SIDE];
-  QGraphicsItem *m_sideTop [MAX_LINES_PER_SIDE];
-  QGraphicsItem *m_sideRight [MAX_LINES_PER_SIDE];
-  QGraphicsItem *m_sideBottom [MAX_LINES_PER_SIDE];
+  SideSegments m_sideLeft;
+  SideSegments m_sideTop;
+  SideSegments m_sideRight;
+  SideSegments m_sideBottom;
 };
 
 #endif // CHECKER_H
