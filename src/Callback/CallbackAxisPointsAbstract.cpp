@@ -62,10 +62,6 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
       posGraph = m_posGraphOverride;
     }
 
-    // Make sure graph coordinates are cartesian and not polar
-    posGraph = Transformation::cartesianFromCartesianOrPolar (m_modelCoords,
-                                                              posGraph);
-
     // Update range variables
     if ((m_numberAxisPoints == 0) || (posGraph.x () < m_xGraphLow)) { m_xGraphLow = posGraph.x (); }
     if ((m_numberAxisPoints == 0) || (posGraph.y () < m_yGraphLow)) { m_yGraphLow = posGraph.y (); }
@@ -100,7 +96,8 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
                               sm [1] [0], sm [1] [1], sm [1] [2],
                               sm [2] [0], sm [2] [1], sm [2] [2]);
 
-    // Save graph matrix
+    // Save graph matrix. These are the raw graph coordinates, which means they may be polar coordinates
+    // and/or have log scaling, since Transformation converts raw to linear cartesian cooordinates
     m_graphOutputs.setMatrix (gm [0] [0], gm [0] [1], gm [0] [2],
                               gm [1] [0], gm [1] [1], gm [1] [2],
                               gm [2] [0], gm [2] [1], gm [2] [2]);
