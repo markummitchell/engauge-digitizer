@@ -1,3 +1,4 @@
+#include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
 #include "DlgSettingsCoords.h"
@@ -152,6 +153,19 @@ void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
                       YCENTER);
 }
 
+QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
+                                             bool &isEmpty) const
+{
+  CallbackBoundingRects ftor;
+
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackBoundingRects::callback);
+  cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
+  cmdMediator.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+
+  return ftor.boundingRectGraph(isEmpty);
+}
+
 void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
                                                int &row)
 {
@@ -242,8 +256,9 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
   layoutXTheta->addWidget (m_xThetaLinear);
 
   m_xThetaLog = new QRadioButton ("Log", m_boxXTheta);
-  m_xThetaLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the X coordinate.\n\n"
-                                        "Log scale is not allowed for the Theta coordinate")));
+  m_xThetaLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the X or Theta coordinate.\n\n"
+                                        "Log scale is not allowed if there are negative coordinates.\n\n"
+                                        "Log scale is not allowed for the Theta coordinate.")));
   connect (m_xThetaLog, SIGNAL (released ()), this, SLOT (slotXThetaLog()));
   layoutXTheta->addWidget (m_xThetaLog);
 
@@ -259,7 +274,8 @@ void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
   layoutYRadius->addWidget (m_yRadiusLinear);
 
   m_yRadiusLog = new QRadioButton ("Log", m_boxYRadius);
-  m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate")));
+  m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate\n\n"
+                                        "Log scale is not allowed if there are negative coordinates.")));
   connect (m_yRadiusLog, SIGNAL(released ()), this, SLOT (slotYRadiusLog ()));
   layoutYRadius->addWidget (m_yRadiusLog);
 }
@@ -469,6 +485,15 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::load";
 
   setCmdMediator (cmdMediator);
+
+  // Remove if coordinates are log so later constraints can be applied
+  bool isEmpty;
+  QRectF rectGraph = boundingRectGraph (cmdMediator,
+                                        isEmpty);
+  bool xThetaGoesNegative = isEmpty || (rectGraph.x() <= 0);
+  bool yRGoesNegative = isEmpty || (rectGraph.y() <= 0);
+  m_boxXTheta->setEnabled (!xThetaGoesNegative);
+  m_boxYRadius->setEnabled (!yRGoesNegative);
 
   // Flush old data
   if (m_modelCoordsBefore != 0) {

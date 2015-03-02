@@ -9,6 +9,7 @@ HEADERS  += \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxesCheckerFromAxesPoints.h \
     Callback/CallbackAxisPointsAbstract.h \
+    Callback/CallbackBoundingRects.h \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
@@ -80,6 +81,7 @@ HEADERS  += \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
+    Dlg/DlgValidatorLog.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
@@ -158,6 +160,7 @@ SOURCES += \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxesCheckerFromAxesPoints.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \
+    Callback/CallbackBoundingRects.cpp \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
@@ -220,6 +223,7 @@ SOURCES += \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
+    Dlg/DlgValidatorLog.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \

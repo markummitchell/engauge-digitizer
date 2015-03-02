@@ -1,5 +1,6 @@
 #include "DigitizeStateAbstractBase.h"
 #include "DlgEditPoint.h"
+#include "DlgValidatorLog.h"
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -58,10 +59,37 @@ DlgEditPoint::~DlgEditPoint()
 void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
                                  const DocumentModelCoords &modelCoords)
 {
+  // Identify coordinate names
   bool isCartesian = (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
-  QString description = QString ("Graph Coordinates (%1, %2):")
-                        .arg (isCartesian ? QChar ('X') : THETA)
-                        .arg (isCartesian ? QChar ('Y') : QChar ('R'));
+  QChar nameXTheta = (isCartesian ? QChar ('X') : THETA);
+  QChar nameYR = (isCartesian ? QChar ('Y') : QChar ('R'));
+
+  // Constraints on x and y are needed for log scaling
+  bool isConstraintX = false, isConstraintY = false;
+  if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
+    m_validatorGraphX = new DlgValidatorLog ();
+    isConstraintX = true;
+  } else {
+    m_validatorGraphX = new QDoubleValidator ();
+  }
+
+  if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+    m_validatorGraphY = new DlgValidatorLog ();
+    isConstraintY = true;
+  } else {
+    m_validatorGraphY = new QDoubleValidator ();
+  }
+
+  // Label
+  QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8:")
+                        .arg (nameXTheta)
+                        .arg (nameYR)
+                        .arg (isConstraintX || isConstraintY ? " with " : "")
+                        .arg (isConstraintX                  ? QString (nameXTheta) : "")
+                        .arg (isConstraintX                  ? " > 0" : "")
+                        .arg (isConstraintX && isConstraintY ? " and " : "")
+                        .arg (                 isConstraintY ? QString (nameYR) : "")
+                        .arg (                 isConstraintY ? " > 0" : "");
   QGroupBox *panel = new QGroupBox (description, this);
   layoutOuter->addWidget (panel);
 
@@ -74,7 +102,6 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
 
   m_editGraphX = new QLineEdit;
   m_editGraphX->setAlignment (ALIGNMENT);
-  m_validatorGraphX = new QDoubleValidator ();
   m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
   m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
@@ -87,7 +114,6 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
 
   m_editGraphY = new QLineEdit;
   m_editGraphY->setAlignment (ALIGNMENT);
-  m_validatorGraphY = new QDoubleValidator ();
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
   m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"

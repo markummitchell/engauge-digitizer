@@ -3,7 +3,6 @@
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelCoords.h"
-#include <QGenericMatrix>
 #include <QString>
 #include <QTransform>
 

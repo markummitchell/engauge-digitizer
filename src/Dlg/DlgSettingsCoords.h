@@ -42,6 +42,8 @@ private:
 
   void annotateAngles(const QFont &defaultFont);
   void annotateRadiusAtOrigin(const QFont &defaultFont);
+  QRectF boundingRectGraph (CmdMediator &cmdMediator,
+                            bool &isEmpty) const;
   void createGroupCoordsType(QGridLayout *layout,
                              int &row);
   void createGroupPolar(QGridLayout *layout,
