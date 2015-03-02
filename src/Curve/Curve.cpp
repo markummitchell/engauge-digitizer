@@ -60,8 +60,8 @@ void Curve::applyTransformation (const Transformation &transformation)
     Point &point = *itr;
     QPointF posScreen = point.posScreen();
     QPointF posGraph;
-    transformation.transform (posScreen,
-                              posGraph);
+    transformation.transformScreenToRawGraph (posScreen,
+                                              posGraph);
 
     // Overwrite old graph coordinates
     point.setPosGraph (posGraph);

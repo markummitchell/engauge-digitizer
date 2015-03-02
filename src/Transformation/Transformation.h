@@ -23,6 +23,19 @@ public:
   /// Inequality operator. This is marked as defined.
   bool operator!=(const Transformation &other);
 
+  /// Calculate QTransform using from/to points that have already been adjusted for, when applicable,
+  /// log scaling and polar coordinates. The points are linear and cartesian.
+  ///
+  /// This method is kept very generic since it used for different types of transformations:
+  /// -# In many place to calculate screen-to/from-graph
+  /// -# By Checker to calculate unaligned-to/from-aligned
+  static QTransform calculateTransformFromLinearCartesianPoints (const QPointF &posFrom0,
+                                                                 const QPointF &posFrom1,
+                                                                 const QPointF &posFrom2,
+                                                                 const QPointF &posTo0,
+                                                                 const QPointF &posTo1,
+                                                                 const QPointF &posTo2);
+
   /// Output cartesian coordinates from input cartesian or polar coordinates. This is static for easier use externally
   static QPointF cartesianFromCartesianOrPolar (const DocumentModelCoords &modelCoords,
                                                 const QPointF &posGraphIn);
@@ -40,16 +53,32 @@ public:
   /// Transform is defined when at least three axis points have been digitized
   bool transformIsDefined() const { return m_transformIsDefined; }
 
-  /// Transform from cartesian pixel screen coordinates to cartesian/polar graph coordinates
-  void transform (const QPointF &coordScreen,
-                  QPointF &coordGraph) const;
+  /// Transform from linear cartesian graph coordinates to cartesian, polar, linear, log coordinates
+  void transformLinearCartesianGraphToRawGraph (const QPointF &coordGraph,
+                                                QPointF &coordScreen) const;
 
-  /// Transform from cartesian/polar graph coordinates to cartesian pixel screen coordinates
-  void transformInverse (const QPointF &coordGraph,
-                         QPointF &coordScreen) const;
+  /// Transform from linear cartesian graph coordinates to cartesian pixel screen coordinates
+  void transformLinearCartesianGraphToScreen (const QPointF &coordGraph,
+                                              QPointF &coordScreen) const;
 
   /// Get method for copying only, for the transform matrix.
   QTransform transformMatrix () const;
+
+  /// Convert graph coordinates (linear or log, cartesian or polar) to linear cartesian coordinates
+  void transformRawGraphToLinearCartesianGraph (const QPointF &pointRaw,
+                                           QPointF &pointLinearCartesian) const;
+
+  /// Transform from raw graph coordinates to linear cartesian graph coordinates, then to screen coordinates
+  void transformRawGraphToScreen (const QPointF &pointRaw,
+                                  QPointF &pointScreen) const;
+
+  /// Transform screen coordinates to linear cartesian coordinates
+  void transformScreenToLinearCartesianGraph (const QPointF &pointScreen,
+                                              QPointF &pointLinearCartesian) const;
+
+  /// Transform from cartesian pixel screen coordinates to cartesian/polar graph coordinates
+  void transformScreenToRawGraph (const QPointF &coordScreen,
+                                  QPointF &coordGraph) const;
 
   /// Update transform by iterating through the axis points.
   void update (bool fileIsLoaded,
@@ -62,6 +91,11 @@ public:
   double yGraphRange() const;
 
 private:
+
+  // Compute transform from screen and graph points. The 3x3 matrices are handled as QTransform since QMatrix is deprecated
+  void updateTransformFromMatrices (const QTransform &matrixScreen,
+                                    const QTransform &matrixGraph);
+
   bool m_transformIsDefined;
 
   // Transform between cartesian screen coordinates and cartesian graph coordinates

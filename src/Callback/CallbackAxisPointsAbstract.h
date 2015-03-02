@@ -3,6 +3,7 @@
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelCoords.h"
+#include <QGenericMatrix>
 #include <QString>
 #include <QTransform>
 
@@ -10,7 +11,10 @@ class Point;
 
 /// Callback for collecting axis points and then performing common calculations on those axis points.
 /// This class collects 3x3 matrix G which contains columns of graph coordinates, and 3x3 matrix S
-/// which contains columns of screen coordinates. It then solves (G) = (T) (S) for the transformation T.
+/// which contains columns of screen coordinates. Although it goes almost as far as solving (G) = (T) (S)
+/// for the transformation T, that is left for the Transformation class. This class does, however, do the
+/// sanity checking (like for collinear points) so the gui can provide immediate feedback to the user
+/// well before the Transformation class gets involved
 ///
 /// This class is versatile. The cases are:
 /// -# Use all existing axis points, and then the subclass can effectively append one more point to check if that
@@ -18,13 +22,6 @@ class Point;
 /// -# Use all existing axis points, but override the details of one existing axis point to see if those
 ///    details violate any constraint (prior to editing the point)
 /// -# Use all existing axis points as is. This is for computing the transformation after axis points are added/edited
-///
-/// This class computes the screen-to/from-graph transformation. This is done in a callback rather than in a more
-/// common utility class since:
-/// 1) The callback integrates very well with the user interface, especially when dealing with pathological geometry issues
-/// 2) This class is reasonably easy to work with when trying the compute a screen-to/from-graph transformation away from
-///    the gui
-/// NOTE that log scaling and polar coordinates are entirely external to this class, and the transformation it generates
 class CallbackAxisPointsAbstract
 {
 public:
@@ -41,8 +38,13 @@ public:
   CallbackSearchReturn callback (const QString &curveName,
                                  const Point &point);
 
-  /// Returns screen-to-graph transform after transformIsDefined has already indicated success.
-  QTransform transform ();
+  /// Returns graph coordinates matrix after transformIsDefined has already indicated success. Since QMatrix is deprecated
+  /// the results are returned as QTransform
+  QTransform matrixGraph () const;
+
+  /// Returns screen coordinates matrix after transformIsDefined has already indicated success. Since QMatrix is deprecated
+  /// the results are returned as QTransform
+  QTransform matrixScreen () const;
 
   /// Return the range of the x graph coordinate from low to high, after the transform is defined.
   double xGraphRange () const { return m_xGraphHigh - m_xGraphLow; }

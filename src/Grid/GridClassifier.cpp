@@ -79,10 +79,10 @@ void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
   // set up along each of the axes. The range of bins will encompass every pixel in the image, and no more.
 
   QPointF posGraphTL, posGraphTR, posGraphBL, posGraphBR;
-  transformation.transform (QPointF (0, 0)                         , posGraphTL);
-  transformation.transform (QPointF (image.width(), 0)             , posGraphTR);
-  transformation.transform (QPointF (0, image.height())            , posGraphBL);
-  transformation.transform (QPointF (image.width(), image.height()), posGraphBR);
+  transformation.transformScreenToRawGraph (QPointF (0, 0)                         , posGraphTL);
+  transformation.transformScreenToRawGraph (QPointF (image.width(), 0)             , posGraphTR);
+  transformation.transformScreenToRawGraph (QPointF (0, image.height())            , posGraphBL);
+  transformation.transformScreenToRawGraph (QPointF (image.width(), image.height()), posGraphBR);
 
   // Since transformation is affine (linear rather than quadratic), we only need to look at the screen corners to
   // get the domains of x and y
@@ -166,7 +166,7 @@ void GridClassifier::populateHistogramBins (const QImage &image,
 
         // Add this pixel to histograms
         QPointF posGraph;
-        transformation.transform (QPointF (x, y), posGraph);
+        transformation.transformScreenToRawGraph (QPointF (x, y), posGraph);
         int binX = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.x() - xMin) / (xMax - xMin);
         int binY = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.y() - yMin) / (yMax - yMin);
 

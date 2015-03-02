@@ -2,6 +2,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
+#include <qmath.h>
 #include "QtToString.h"
 #include "Transformation.h"
 
@@ -144,6 +145,16 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
   return rtn;
 }
 
+QTransform CallbackAxisPointsAbstract::matrixGraph () const
+{
+  return m_graphOutputs;
+}
+
+QTransform CallbackAxisPointsAbstract::matrixScreen () const
+{
+  return m_screenInputs;
+}
+
 bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int numberColumns)
 {
   if (numberColumns == 3) {
@@ -159,22 +170,3 @@ bool CallbackAxisPointsAbstract::threePointsAreCollinear (double m [3] [3], int 
 
   return false;
 }
-
-QTransform CallbackAxisPointsAbstract::transform ()
-{
-  ENGAUGE_ASSERT (m_numberAxisPoints == 3);
-
-  // This is where the magic of generating the screen-to/from-graph transformation occurs. Note that log processing
-  // and polar coordinates are external to this class
-
-  QTransform screenInputsInv = m_screenInputs.inverted ();
-  QTransform transform = m_graphOutputs * screenInputsInv;
-
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackAxisPointsAbstract::transform\n"
-                               << "m_screenInputs=\n" << QTransformToString (m_screenInputs).toLatin1 ().data ()
-                               << "m_graphOutputs=\n" << QTransformToString (m_graphOutputs).toLatin1 ().data ()
-                               << "transform=\n" << QTransformToString (transform).toLatin1 ().data ();
-
-  return transform;
-}
-

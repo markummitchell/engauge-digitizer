@@ -16,18 +16,6 @@ public:
   /// Single constructor.
   CallbackUpdateTransform(const DocumentModelCoords &modelCoords);
 
-  /// Constructor from three graph/screen position pairs.
-  CallbackUpdateTransform(const DocumentModelCoords &modelCoords,
-                          const QPointF &posScreen0,
-                          const QPointF &posScreen1,
-                          const QPointF &posScreen2,
-                          const QPointF &posGraph0,
-                          const QPointF &posGraph1,
-                          const QPointF &posGraph2);
-
-  /// Returns screen-to-graph transform after transformIsDefined has already indicated success.
-  QTransform transform ();
-
   /// True if enough Points were available to create a Transformation. Except for the node count, all other
   /// failure modes are caught externally so user gets immediate feedback as soon as bad axis point data appears
   bool transformIsDefined () const;

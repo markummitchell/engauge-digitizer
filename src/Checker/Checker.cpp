@@ -1,4 +1,3 @@
-#include "CallbackUpdateTransform.h"
 #include "Checker.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
@@ -153,15 +152,9 @@ void Checker::createSide (int pointRadius,
     double xGraph = (1.0 - s) * xFrom + s * xTo;
     double yGraph = (1.0 - s) * yFrom + s * yTo;
 
-    QPointF pointGraph (xGraph, yGraph);
-
-    QPointF pointGraphCart = transformation.cartesianFromCartesianOrPolar (modelCoords,
-                                                                           pointGraph);
-
-    // Convert graph coordinates to screen coordinates
     QPointF pointScreen;
-    transformation.transformInverse (pointGraphCart,
-                                     pointScreen);
+    transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
+                                              pointScreen);
 
     double distanceToNearestPoint = minScreenDistanceFromPoints (pointScreen,
                                                                  points);
@@ -249,10 +242,10 @@ void Checker::createTransformAlign (const Transformation &transformation,
   // Get (+radius,0) and (0,+radius) points
   QPointF posXRadiusY0Graph (radius, 0), posX0YRadiusGraph (0, radius);
   QPointF posXRadiusY0Screen, posX0YRadiusScreen;
-  transformation.transformInverse (posXRadiusY0Graph,
-                                   posXRadiusY0Screen);
-  transformation.transformInverse (posX0YRadiusGraph,
-                                   posX0YRadiusScreen);
+  transformation.transformLinearCartesianGraphToScreen (posXRadiusY0Graph,
+                                                        posXRadiusY0Screen);
+  transformation.transformLinearCartesianGraphToScreen (posX0YRadiusGraph,
+                                                        posX0YRadiusScreen);
 
   // Compute arc/ellipse parameters
   ellipseXAxis = qAbs (posXRadiusY0Screen.x() - posOriginScreen.x());
@@ -262,19 +255,12 @@ void Checker::createTransformAlign (const Transformation &transformation,
   QPointF posXRadiusY0AlignedScreen (posOriginScreen.x() + ellipseXAxis, posOriginScreen.y());
   QPointF posX0YRadiusAlignedScreen (posOriginScreen.x(), posOriginScreen.y() - ellipseYAxis);
 
-  // Compute transform. Note that transform is not screen-to/from-graph or vice versa, but from
-  // screen-unaligned-to/from-screen-aligned
-  DocumentModelCoords modelCoords; // Default coordinates are simple linear and cartesian, which is what we want
-
-  CallbackUpdateTransform cb (modelCoords,
-                              posOriginScreen,
-                              posXRadiusY0Screen,
-                              posX0YRadiusScreen,
-                              posOriginScreen,
-                              posXRadiusY0AlignedScreen,
-                              posX0YRadiusAlignedScreen);
-
-  transformAlign = cb.transform();
+  transformAlign = Transformation::calculateTransformFromLinearCartesianPoints (posOriginScreen,
+                                                                                posXRadiusY0Screen,
+                                                                                posX0YRadiusScreen,
+                                                                                posOriginScreen,
+                                                                                posXRadiusY0AlignedScreen,
+                                                                                posX0YRadiusAlignedScreen);
 }
 
 void Checker::deleteSide (SideSegments &sideSegments)
@@ -296,15 +282,15 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
 {
   QPointF posStartGraph, posEndGraph;
 
-  transformation.transform (posStartScreen,
-                            posStartGraph);
-  transformation.transform (posEndScreen,
-                            posEndGraph);
+  transformation.transformScreenToRawGraph (posStartScreen,
+                                            posStartGraph);
+  transformation.transformScreenToRawGraph (posEndScreen,
+                                            posEndGraph);
 
   // Get origin
   QPointF posOriginGraph (0, 0), posOriginScreen;
-  transformation.transformInverse (posOriginGraph,
-                                   posOriginScreen);
+  transformation.transformRawGraphToScreen (posOriginGraph,
+                                            posOriginScreen);
 
   // Compute rotate/shear transform that aligns graph coordinates with screen coordinates, and ellipse parameters.
   // Transform does not include scaling since that messes up the thickness of the drawn line, and does not include
