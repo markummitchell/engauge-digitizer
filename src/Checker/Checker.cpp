@@ -26,6 +26,7 @@ const int CHECKER_POINTS_WIDTH = 5;
 
 const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
+const double DEGREES_TO_RADIANS = PI / 180.0;
 const double RADIANS_TO_TICS = 5760 / TWO_PI;
 const double RADIANS_TO_DEGREES = 180.0 / PI;
 
@@ -315,9 +316,9 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                         ellipseYAxis);
 
   // Get the angles about the origin of the start and end points
-  double angleStart = qAtan2 (posStartGraph.y(),
+  double angleStart = qAtan2 (posStartGraph.y() * DEGREES_TO_RADIANS,
                               posStartGraph.x()) * RADIANS_TO_TICS;
-  double angleEnd = qAtan2 (posEndGraph.y(),
+  double angleEnd = qAtan2 (posEndGraph.y() * DEGREES_TO_RADIANS,
                             posEndGraph.x()) * RADIANS_TO_TICS;
   if (angleEnd < angleStart) {
     angleEnd += TWO_PI * RADIANS_TO_TICS;
