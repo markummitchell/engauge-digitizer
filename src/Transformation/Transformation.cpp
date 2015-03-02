@@ -21,8 +21,6 @@ Transformation &Transformation::operator=(const Transformation &other)
 {
   m_transformIsDefined = other.transformIsDefined();
   m_transform = other.transformMatrix ();
-  m_xGraphRange = other.xGraphRange ();
-  m_yGraphRange = other.yGraphRange ();
 
   return *this;
 }
@@ -30,9 +28,7 @@ Transformation &Transformation::operator=(const Transformation &other)
 bool Transformation::operator!=(const Transformation &other)
 {
   return (m_transformIsDefined != other.transformIsDefined()) ||
-         (m_transform != other.transformMatrix ()) ||
-         (m_xGraphRange != other.xGraphRange()) ||
-         (m_yGraphRange != other.yGraphRange());
+         (m_transform != other.transformMatrix ());
 }
 
 QTransform Transformation::calculateTransformFromLinearCartesianPoints (const QPointF &posFrom0,
@@ -170,32 +166,20 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       QPointF cursorScreenDelta (cursorScreen.x () + X_DELTA_PIXELS,
                                  cursorScreen.y () + Y_DELTA_PIXELS);
 
-      // Screen to graph
-      QPointF cursorGraph, cursorGraphDelta;
-      transformScreenToRawGraph (cursorScreen, cursorGraph);
-      transformScreenToRawGraph (cursorScreenDelta, cursorGraphDelta);
-
-      // Convert to polar if appropriate
-      cursorGraph = cartesianOrPolarFromCartesian (m_modelCoords,
-                                                   cursorGraph);
-      cursorGraphDelta = cartesianOrPolarFromCartesian (m_modelCoords,
-                                                        cursorGraphDelta);
-
-      // Compute graph coordinates at cursor
-      double xGraph = cursorGraph.x ();
-      double yGraph = cursorGraph.y ();
-      xGraph = roundOffSmallValues (xGraph, m_xGraphRange);
-      yGraph = roundOffSmallValues (yGraph, m_yGraphRange);
+      // Convert to graph coordinates
+      QPointF pointGraph, pointGraphDelta;
+      transformScreenToRawGraph (cursorScreen,
+                                 pointGraph);
+      transformScreenToRawGraph (cursorScreenDelta,
+                                 pointGraphDelta);
 
       // Compute graph resolutions at cursor
-      double resolutionXGraph = qAbs ((cursorGraphDelta.x () - cursorGraph.x ()) / X_DELTA_PIXELS);
-      double resolutionYGraph = qAbs ((cursorGraphDelta.y () - cursorGraph.y ()) / Y_DELTA_PIXELS);
-      resolutionXGraph = roundOffSmallValues (resolutionXGraph, m_xGraphRange);
-      resolutionYGraph = roundOffSmallValues (resolutionYGraph, m_yGraphRange);
+      double resolutionXGraph = qAbs ((pointGraphDelta.x () - pointGraph.x ()) / X_DELTA_PIXELS);
+      double resolutionYGraph = qAbs ((pointGraphDelta.y () - pointGraph.y ()) / Y_DELTA_PIXELS);
 
       coordsGraph = QString ("(%1, %2)")
-                    .arg (xGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS)
-                    .arg (yGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS);
+                    .arg (pointGraph.x(), UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS)
+                    .arg (pointGraph.y(), UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS);
       resolutionsGraph = QString ("(%1, %2)")
                          .arg (resolutionXGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS)
                          .arg (resolutionYGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS);
@@ -213,8 +197,6 @@ void Transformation::identity()
 {
   // Initialize assuming points (0,0) (1,0) (0,1)
   m_transformIsDefined = true;
-  m_xGraphRange = 1.0;
-  m_yGraphRange = 1.0;
 
   QTransform ident;
   m_transform = ident;
@@ -339,8 +321,6 @@ void Transformation::update (bool fileIsLoaded,
     cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
     m_transformIsDefined = ftor.transformIsDefined ();
-    m_xGraphRange = ftor.xGraphRange ();
-    m_yGraphRange = ftor.yGraphRange ();
 
     if (m_transformIsDefined) {
 
@@ -411,14 +391,4 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                              QPointF (gm [0] [0], gm [1] [0]),
                                                              QPointF (gm [0] [1], gm [1] [1]),
                                                              QPointF (gm [0] [2], gm [1] [2]));
-}
-
-double Transformation::xGraphRange() const
-{
-  return m_xGraphRange;
-}
-
-double Transformation::yGraphRange() const
-{
-  return m_yGraphRange;
 }

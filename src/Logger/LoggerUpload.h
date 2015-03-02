@@ -28,7 +28,7 @@ public:
 
 private:
 
-  static void loggerOutput (const char *comment,
+  static void loggerOutput (const char* comment,
                             const char *file,
                             int line,
                             const char* context) Q_NORETURN;

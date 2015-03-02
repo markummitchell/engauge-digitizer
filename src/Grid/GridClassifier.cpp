@@ -170,8 +170,9 @@ void GridClassifier::populateHistogramBins (const QImage &image,
         int binX = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.x() - xMin) / (xMax - xMin);
         int binY = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.y() - yMin) / (yMax - yMin);
 
-        ENGAUGE_ASSERT (binX < NUM_HISTOGRAM_BINS);
-        ENGAUGE_ASSERT (binY < NUM_HISTOGRAM_BINS);
+        // Roundoff error in log scaling may let bin go just outside legal range
+        binX = qMin (binX, NUM_HISTOGRAM_BINS - 1);
+        binY = qMin (binY, NUM_HISTOGRAM_BINS - 1);
 
         ++m_binsX [binX];
         ++m_binsY [binY];

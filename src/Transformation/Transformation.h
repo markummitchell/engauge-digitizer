@@ -84,12 +84,6 @@ public:
   void update (bool fileIsLoaded,
                const CmdMediator &cmdMediator);
 
-  /// Get method for copying only, for x epsilon.
-  double xGraphRange() const;
-
-  /// Get method for copying only, for y epsilon.
-  double yGraphRange() const;
-
 private:
 
   // Compute transform from screen and graph points. The 3x3 matrices are handled as QTransform since QMatrix is deprecated
@@ -106,10 +100,6 @@ private:
 
   // No need to display values like 1E-17 when it is insignificant relative to the range
   double roundOffSmallValues (double value, double range);
-
-  // Values for determining when an epsilon value is so close to zero that it should be displayed as zero
-  double m_xGraphRange;
-  double m_yGraphRange;
 };
 
 #endif // TRANSFORMATION_H

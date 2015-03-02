@@ -133,7 +133,8 @@ void Checker::createSide (int pointRadius,
   // desired pieces together. For straight lines in linear graphs this algorithm is very much overkill, but there is no significant
   // penalty and this approach works in every situation
 
-  const int NUM_STEPS = 1000; // Should give single-pixel resolution on most images, and 'good enough' resolution on extremely large images
+  // Should give single-pixel resolution on most images, and 'good enough' resolution on extremely large images
+  const int NUM_STEPS = 1000;
 
   if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) && (xTo < xFrom)) {
 
@@ -149,8 +150,17 @@ void Checker::createSide (int pointRadius,
 
     double s = (double) i / (double) NUM_STEPS;
 
+    // Interpolate coordinates assuming normal linear scaling
     double xGraph = (1.0 - s) * xFrom + s * xTo;
     double yGraph = (1.0 - s) * yFrom + s * yTo;
+
+    // Replace interpolated coordinates using log scaling if appropriate
+    if(modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
+      xGraph = qExp ((1.0 - s) * qLn (xFrom) + s * qLn (xTo));
+    }
+    if(modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+      yGraph = qExp ((1.0 - s) * qLn (yFrom) + s * qLn (yTo));
+    }
 
     QPointF pointScreen;
     transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
