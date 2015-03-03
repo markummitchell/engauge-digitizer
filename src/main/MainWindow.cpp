@@ -900,11 +900,11 @@ void MainWindow::fileImport (const QString &fileName)
     return;
   }
 
+  m_originalFile = fileName; // This is needed by loadImage below if an error report is generated
+  m_originalFileWasImported = true;
+
   loadImage (fileName,
              image);
-
-  m_originalFile = fileName;
-  m_originalFileWasImported = true;
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -950,10 +950,10 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
     m_engaugeFile = fileName;
-    updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
-
-    m_originalFile = fileName;
+    m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
+
+    updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
   } else {
 

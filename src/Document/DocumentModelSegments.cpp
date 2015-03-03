@@ -106,6 +106,7 @@ void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR, QString::number (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
   writer.writeEndElement();
 }
 

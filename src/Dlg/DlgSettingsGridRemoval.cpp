@@ -100,10 +100,14 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
                                "The X grid lines are specified using only three values at a time. For flexibility, four values "
                                "are offered so you must chose which value is disabled. Once disabled, that value is simply "
                                "updated as the other values change");
-  m_cmbDisableX->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableX->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableX->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableX->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_COUNT),
+                         QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_START),
+                         QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_STEP),
+                         QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_STOP),
+                         QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableX, SIGNAL (activated (const QString &)), this, SLOT (slotDisableX (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
@@ -174,10 +178,14 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
                                "The Y grid lines are specified using only three values at a time. For flexibility, four values "
                                "are offered so you must chose which value is disabled. Once disabled, that value is simply "
                                "updated as the other values change");
-  m_cmbDisableY->addItem(DISABLE_COUNT, QVariant (GRID_COORD_DISABLE_COUNT));
-  m_cmbDisableY->addItem(DISABLE_START, QVariant (GRID_COORD_DISABLE_START));
-  m_cmbDisableY->addItem(DISABLE_STEP, QVariant (GRID_COORD_DISABLE_STEP));
-  m_cmbDisableY->addItem(DISABLE_STOP, QVariant (GRID_COORD_DISABLE_STOP));
+  m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_COUNT),
+                         QVariant (GRID_COORD_DISABLE_COUNT));
+  m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_START),
+                         QVariant (GRID_COORD_DISABLE_START));
+  m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_STEP),
+                         QVariant (GRID_COORD_DISABLE_STEP));
+  m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_STOP),
+                         QVariant (GRID_COORD_DISABLE_STOP));
   connect (m_cmbDisableY, SIGNAL (activated (const QString &)), this, SLOT (slotDisableY (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 

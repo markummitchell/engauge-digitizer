@@ -94,7 +94,9 @@ void LineStyle::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_LINE_STYLE);
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH, QString::number(m_width));
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR, QString::number (m_paletteColor));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_COLOR_STRING, colorPaletteToString (m_paletteColor));
   writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS, QString::number (m_curveConnectAs));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS_STRING, curveConnectAsToString (m_curveConnectAs));
   writer.writeEndElement();
 }
 

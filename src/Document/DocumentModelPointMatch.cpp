@@ -118,8 +118,11 @@ void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE, QString::number (m_maxPointSize));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED, QString::number (m_paletteColorAccepted));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED_STRING, colorPaletteToString (m_paletteColorAccepted));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE, QString::number (m_paletteColorCandidate));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE_STRING, colorPaletteToString (m_paletteColorCandidate));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED, QString::number (m_paletteColorRejected));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED_STRING, colorPaletteToString (m_paletteColorRejected));
   writer.writeEndElement();
 }
 

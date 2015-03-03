@@ -1,6 +1,8 @@
 #ifndef COLOR_PALETTE_H
 #define COLOR_PALETTE_H
 
+#include <QString>
+
 enum ColorPalette {
   COLOR_PALETTE_BLACK,
   COLOR_PALETTE_BLUE,
@@ -13,5 +15,7 @@ enum ColorPalette {
   COLOR_PALETTE_TRANSPARENT,
   NUM_PALETTE_COLORS
 };
+
+extern QString colorPaletteToString (ColorPalette colorPalette);
 
 #endif // COLOR_PALETTE_H

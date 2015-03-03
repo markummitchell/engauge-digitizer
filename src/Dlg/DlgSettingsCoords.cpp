@@ -22,19 +22,6 @@
 #include <QVBoxLayout>
 #include "ViewPreview.h"
 
-const QChar THETA (QChar(0x98, 0x03));
-
-const QString POLAR_UNITS_DEGREES = QString("Degrees (DDD.DDDDD") + QChar(0260) + QString (")");
-const QString POLAR_UNITS_DEGREES_MINUTES = QString("Degrees Minutes (DDD") + QChar(0260) +
-                                            QString(" MM.MMM") + QChar(0x2032) +
-                                            QString(")");
-const QString POLAR_UNITS_DEGREES_MINUTES_SECONDS = QString("Degrees Minutes Seconds (DDD") + QChar(0260) +
-                                                    QString(" MM") + QChar(0x2032) +
-                                                    QString(" SS.S") + QChar(0x2033) + QString(")");
-const QString POLAR_UNITS_GRADIANS = "Gradians";
-const QString POLAR_UNITS_RADIANS = "Radians";
-const QString POLAR_UNITS_TURNS = "Turns";
-
 const int STEPS_PER_CYCLE = 4; // Repeat STEPS_PER_CYLE-1 unhighlighted steps plus 1 highlighted step in each cycle
 const int STEPS_CYCLE_COUNT = 4; // Repeat one highlighted step + STEPS_UNHIGHLIGHTED_PER_HIGHLIGHTED steps this many times
 const int NUM_COORD_STEPS = 1 + STEPS_PER_CYCLE * STEPS_CYCLE_COUNT;
@@ -207,12 +194,18 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (labelThetaUnits, 0, 0);
 
   m_cmbPolarUnits = new QComboBox;
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES, QVariant (COORD_THETA_UNITS_DEGREES));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES, QVariant (COORD_THETA_UNITS_DEGREES_MINUTES));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_DEGREES_MINUTES_SECONDS, QVariant (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_GRADIANS, QVariant (COORD_THETA_UNITS_GRADIANS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_RADIANS, QVariant (COORD_THETA_UNITS_RADIANS));
-  m_cmbPolarUnits->addItem (POLAR_UNITS_TURNS, QVariant (COORD_THETA_UNITS_TURNS));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES),
+                            QVariant (COORD_THETA_UNITS_DEGREES));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES_MINUTES),
+                            QVariant (COORD_THETA_UNITS_DEGREES_MINUTES));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS),
+                            QVariant (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_GRADIANS),
+                            QVariant (COORD_THETA_UNITS_GRADIANS));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_RADIANS),
+                            QVariant (COORD_THETA_UNITS_RADIANS));
+  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_TURNS),
+                            QVariant (COORD_THETA_UNITS_TURNS));
   m_cmbPolarUnits->setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
                                               "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "
                                               "60 minutes per degree. During input, a space must be inserted between the two numbers.\n\n"

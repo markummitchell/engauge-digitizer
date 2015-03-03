@@ -13,7 +13,6 @@
 #include <QVBoxLayout>
 
 const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
-const QChar THETA (QChar(0x98, 0x03));
 
 DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,

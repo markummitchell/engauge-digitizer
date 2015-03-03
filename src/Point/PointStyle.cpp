@@ -195,7 +195,9 @@ void PointStyle::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS, QString::number (m_radius));
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR, QString::number (m_paletteColor));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_COLOR_STRING, colorPaletteToString (m_paletteColor));
   writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE, QString::number (m_shape));
+  writer.writeAttribute (DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE_STRING, pointShapeToString (m_shape));
   writer.writeEndElement();
 }
 

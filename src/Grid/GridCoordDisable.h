@@ -1,10 +1,7 @@
 #ifndef GRID_COORD_DISABLE_H
 #define GRID_COORD_DISABLE_H
 
-const QString DISABLE_COUNT ("Count");
-const QString DISABLE_START ("Start");
-const QString DISABLE_STEP ("Step");
-const QString DISABLE_STOP ("Stop");
+#include <QString>
 
 enum GridCoordDisable {
   GRID_COORD_DISABLE_COUNT,
@@ -12,5 +9,7 @@ enum GridCoordDisable {
   GRID_COORD_DISABLE_STEP,
   GRID_COORD_DISABLE_STOP
 };
+
+extern QString gridCoordDisableToString (GridCoordDisable gridCoordDisable);
 
 #endif // GRID_COORD_DISABLE_H

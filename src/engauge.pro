@@ -188,8 +188,13 @@ SOURCES += \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
+    include/ColorPalette.cpp \
+    Coord/CoordScale.cpp \
+    Coord/CoordsType.cpp \
+    Coord/CoordThetaUnits.cpp \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
+    Curve/CurveConnectAs.cpp \
     Curve/CurveFilter.cpp \
     Curve/CurveNameList.cpp \
     Curve/CurveNameListEntry.cpp \
@@ -235,10 +240,16 @@ SOURCES += \
     Document/DocumentModelSegments.cpp \
     Document/DocumentSerialize.cpp \
     util/EnumsToQt.cpp \
+    Export/ExportDelimiter.cpp \
+    Export/ExportHeader.cpp \
+    Export/ExportLayoutFunctions.cpp \
+    Export/ExportPointsSelectionFunctions.cpp \
+    Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
     Filter/FilterHistogram.cpp \
+    Filter/FilterMode.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
@@ -251,6 +262,7 @@ SOURCES += \
     Graphics/GraphicsScene.cpp \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
+    Grid/GridCoordDisable.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
@@ -260,6 +272,7 @@ SOURCES += \
     util/mmsubs.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
+    Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
     Segment/Segment.cpp \

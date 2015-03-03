@@ -114,10 +114,14 @@ void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_COORDS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE, QString::number (m_coordsType));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_TYPE_STRING, coordsTypeToString (m_coordsType));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS, QString::number (m_originRadius));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA, QString::number (m_coordScaleXTheta));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA_STRING, coordScaleToString (m_coordScaleXTheta));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS, QString::number (m_coordScaleYRadius));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS_STRING, coordScaleToString (m_coordScaleYRadius));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS, QString::number (m_coordThetaUnits));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_THETA_UNITS_STRING, coordThetaUnitsToString (m_coordThetaUnits));
   writer.writeEndElement();
 }
 

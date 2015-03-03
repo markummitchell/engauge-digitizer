@@ -247,6 +247,7 @@ void CurveFilter::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE_STRING, filterModeToString (m_filterMode));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
