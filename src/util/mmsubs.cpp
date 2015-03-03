@@ -3,6 +3,8 @@
 #include <QPointF>
 #include <qmath.h>
 
+const double PI = 3.1415926535;
+
 double angleBetweenVectors (const QPointF &v1,
                             const QPointF &v2)
 {
@@ -28,7 +30,16 @@ double angleFromVectorToVector (const QPointF &vFrom,
 
   // Rotate both angles to put from vector along x axis. Note that angleFrom-angleFrom is zero,
   // and angleTo-angleFrom is -pi to +pi radians
-  return angleTo - angleFrom;
+  double angleSeparation = angleTo - angleFrom;
+
+  while (angleSeparation < -1.0 * PI) {
+    angleSeparation += 2.0 * PI;
+  }
+  while (angleSeparation > PI) {
+    angleSeparation -= 2.0 * PI;
+  }
+
+  return angleSeparation;
 }
 
 QRgb pixelRGB(const QImage &image, int x, int y)

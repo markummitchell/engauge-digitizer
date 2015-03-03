@@ -102,6 +102,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
         xMax = angle0;
       }
     }
+
+    // Make sure theta is increasing
+    while (xMax < xMin) {
+      xMax += modelCoords.thetaPeriod();
+    }
   }
 }
 
@@ -136,12 +141,6 @@ void Checker::createSide (int pointRadius,
 
   // Should give single-pixel resolution on most images, and 'good enough' resolution on extremely large images
   const int NUM_STEPS = 1000;
-
-  if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) && (xTo < xFrom)) {
-
-    // Polar coordinates case where we go past the periodic theta maximum
-    xTo += modelCoords.thetaPeriod();
-  }
 
   bool stateSegmentIsActive = false;
   QPointF posStartScreen (0, 0);
@@ -316,12 +315,10 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                         ellipseYAxis);
 
   // Get the angles about the origin of the start and end points
-  double angleStart = qAtan2 (posStartGraph.y() * DEGREES_TO_RADIANS,
-                              posStartGraph.x()) * RADIANS_TO_TICS;
-  double angleEnd = qAtan2 (posEndGraph.y() * DEGREES_TO_RADIANS,
-                            posEndGraph.x()) * RADIANS_TO_TICS;
+  double angleStart = posStartGraph.x() * DEGREES_TO_RADIANS;
+  double angleEnd = posEndGraph.x() * DEGREES_TO_RADIANS;
   if (angleEnd < angleStart) {
-    angleEnd += TWO_PI * RADIANS_TO_TICS;
+    angleEnd += TWO_PI;
   }
   double angleSpan = angleEnd - angleStart;
 
@@ -331,8 +328,8 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                        2 * ellipseXAxis,
                        2 * ellipseYAxis);
   GraphicsArcItem *item = new GraphicsArcItem (boundingRect);
-  item->setStartAngle (angleStart);
-  item->setSpanAngle (angleSpan);
+  item->setStartAngle (angleStart * RADIANS_TO_TICS);
+  item->setSpanAngle (angleSpan * RADIANS_TO_TICS);
 
   item->setTransform (transformAlign.transposed ().inverted ());
 
