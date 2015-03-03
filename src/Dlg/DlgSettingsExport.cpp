@@ -83,17 +83,17 @@ void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
   QVBoxLayout *layoutDelimiters = new QVBoxLayout;
   groupDelimiters->setLayout (layoutDelimiters);
 
-  m_btnDelimitersCommas = new QRadioButton (tr ("Commas"));
+  m_btnDelimitersCommas = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_COMMA));
   m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersCommas);
   connect (m_btnDelimitersCommas, SIGNAL (released ()), this, SLOT (slotDelimitersCommas()));
 
-  m_btnDelimitersSpaces = new QRadioButton (tr ("Spaces"));
+  m_btnDelimitersSpaces = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_SPACE));
   m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersSpaces);
   connect (m_btnDelimitersSpaces, SIGNAL (released ()), this, SLOT (slotDelimitersSpaces()));
 
-  m_btnDelimitersTabs = new QRadioButton (tr ("Tabs"));
+  m_btnDelimitersTabs = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_TAB));
   m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values"));
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
@@ -185,17 +185,17 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
   QVBoxLayout *layoutHeader = new QVBoxLayout;
   groupHeader->setLayout (layoutHeader);
 
-  m_btnHeaderNone = new QRadioButton (tr ("None"));
+  m_btnHeaderNone = new QRadioButton (exportHeaderToString (EXPORT_HEADER_NONE));
   m_btnHeaderNone->setWhatsThis (tr ("Exported file will have no header line"));
   layoutHeader->addWidget (m_btnHeaderNone);
   connect (m_btnHeaderNone, SIGNAL (released ()), this, SLOT (slotHeaderNone()));
 
-  m_btnHeaderSimple = new QRadioButton (tr ("Simple"));
+  m_btnHeaderSimple = new QRadioButton (exportHeaderToString (EXPORT_HEADER_SIMPLE));
   m_btnHeaderSimple->setWhatsThis (tr ("Exported file will have simple header line"));
   layoutHeader->addWidget (m_btnHeaderSimple);
   connect (m_btnHeaderSimple, SIGNAL (released ()), this, SLOT (slotHeaderSimple()));
 
-  m_btnHeaderGnuplot = new QRadioButton (tr ("Gnuplot"));
+  m_btnHeaderGnuplot = new QRadioButton (exportHeaderToString (EXPORT_HEADER_GNUPLOT));
   m_btnHeaderGnuplot->setWhatsThis (tr ("Exported file will have gnuplot header line"));
   layoutHeader->addWidget (m_btnHeaderGnuplot);
   connect (m_btnHeaderGnuplot, SIGNAL (released()), this, SLOT (slotHeaderGnuplot()));

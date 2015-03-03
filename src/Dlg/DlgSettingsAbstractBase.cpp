@@ -76,15 +76,22 @@ MainWindow &DlgSettingsAbstractBase::mainWindow ()
 
 void DlgSettingsAbstractBase::populateColorComboWithoutTransparent (QComboBox &combo)
 {
-  combo.addItem ("Blue", QVariant (COLOR_PALETTE_BLUE));
-  combo.addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  combo.addItem ("Black", QVariant (COLOR_PALETTE_BLACK));
-  combo.addItem ("Cyan", QVariant (COLOR_PALETTE_CYAN));
-  combo.addItem ("Gold", QVariant (COLOR_PALETTE_GOLD));
-  combo.addItem ("Green", QVariant (COLOR_PALETTE_GREEN));
-  combo.addItem ("Magenta", QVariant (COLOR_PALETTE_MAGENTA));
-  combo.addItem ("Red", QVariant (COLOR_PALETTE_RED));
-  combo.addItem ("Yellow", QVariant (COLOR_PALETTE_YELLOW));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_BLUE),
+                 QVariant (COLOR_PALETTE_BLUE));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_BLACK),
+                 QVariant (COLOR_PALETTE_BLACK));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_CYAN),
+                 QVariant (COLOR_PALETTE_CYAN));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_GOLD),
+                 QVariant (COLOR_PALETTE_GOLD));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_GREEN),
+                 QVariant (COLOR_PALETTE_GREEN));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_MAGENTA),
+                 QVariant (COLOR_PALETTE_MAGENTA));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_RED),
+                 QVariant (COLOR_PALETTE_RED));
+  combo.addItem (colorPaletteToString (COLOR_PALETTE_YELLOW),
+                 QVariant (COLOR_PALETTE_YELLOW));
 }
 
 void DlgSettingsAbstractBase::populateColorComboWithTransparent (QComboBox &combo)

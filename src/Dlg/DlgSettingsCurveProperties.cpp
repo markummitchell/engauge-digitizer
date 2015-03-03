@@ -122,12 +122,18 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
 
   m_cmbPointShape = new QComboBox (m_groupPoint);
   m_cmbPointShape->setWhatsThis (tr ("Select a shape for the points"));
-  m_cmbPointShape->addItem ("Circle", POINT_SHAPE_CIRCLE);
-  m_cmbPointShape->addItem ("Cross", POINT_SHAPE_CROSS);
-  m_cmbPointShape->addItem ("Diamond", POINT_SHAPE_DIAMOND);
-  m_cmbPointShape->addItem ("Square", POINT_SHAPE_SQUARE);
-  m_cmbPointShape->addItem ("Triangle", POINT_SHAPE_TRIANGLE);
-  m_cmbPointShape->addItem ("X", POINT_SHAPE_X);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_CIRCLE),
+                            POINT_SHAPE_CIRCLE);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_CROSS),
+                            POINT_SHAPE_CROSS);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_DIAMOND),
+                            POINT_SHAPE_DIAMOND);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_SQUARE),
+                            POINT_SHAPE_SQUARE);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_TRIANGLE),
+                            POINT_SHAPE_TRIANGLE);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_X),
+                            POINT_SHAPE_X);
   connect (m_cmbPointShape, SIGNAL (activated (const QString &)), this, SLOT (slotPointShape (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbPointShape, 0, 1);
 

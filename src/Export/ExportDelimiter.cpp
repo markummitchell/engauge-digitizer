@@ -4,13 +4,13 @@ QString exportDelimiterToString (ExportDelimiter exportDelimiter)
 {
   switch (exportDelimiter) {
     case EXPORT_DELIMITER_COMMA:
-      return "Comma";
+      return "Commas";
 
     case EXPORT_DELIMITER_SPACE:
-      return "Space";
+      return "Spaces";
 
     case EXPORT_DELIMITER_TAB:
-      return "Tab";
+      return "Tabs";
 
     default:
       return "Unknown";
