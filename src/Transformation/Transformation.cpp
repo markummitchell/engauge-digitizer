@@ -202,6 +202,11 @@ void Transformation::identity()
   m_transform = ident;
 }
 
+DocumentModelCoords Transformation::modelCoords() const
+{
+  return m_modelCoords;
+}
+
 double Transformation::roundOffSmallValues (double value, double range)
 {
   if (qAbs (value) < range / qPow (10.0, PRECISION_DIGITS)) {

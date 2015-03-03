@@ -1,4 +1,5 @@
 #include "Correlation.h"
+#include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "Filter.h"
 #include "GridClassifier.h"
@@ -84,12 +85,24 @@ void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
   transformation.transformScreenToRawGraph (QPointF (0, image.height())            , posGraphBL);
   transformation.transformScreenToRawGraph (QPointF (image.width(), image.height()), posGraphBR);
 
-  // Since transformation is affine (linear rather than quadratic), we only need to look at the screen corners to
-  // get the domains of x and y
-  xMin = qMin (qMin (qMin (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
-  xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
-  yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
-  yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+  // Compute x and y ranges for setting up the histogram bins
+  if (transformation.modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+
+    // For affine cartesian coordinates, we only need to look at the screen corners
+    xMin = qMin (qMin (qMin (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+    xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+    yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+    yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+
+  } else {
+
+    // For affine polar coordinates, easiest approach is to assume the full circle
+    xMin = 0.0;
+    xMax = transformation.modelCoords().thetaPeriod();
+    yMin = 0.0;
+    yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+
+  }
 
   ENGAUGE_ASSERT (xMin < xMax);
   ENGAUGE_ASSERT (yMin < yMax);
@@ -167,11 +180,23 @@ void GridClassifier::populateHistogramBins (const QImage &image,
         // Add this pixel to histograms
         QPointF posGraph;
         transformation.transformScreenToRawGraph (QPointF (x, y), posGraph);
+
+        if (transformation.modelCoords().coordsType() == COORDS_TYPE_POLAR) {
+
+          // If out of the 0 to period range, the theta value must shifted by the period to get into that range
+          while (posGraph.x() < xMin) {
+            posGraph.setX (posGraph.x() + transformation.modelCoords().thetaPeriod());
+          }
+          while (posGraph.x() > xMax) {
+            posGraph.setX (posGraph.x() - transformation.modelCoords().thetaPeriod());
+          }
+        }
+
         int binX = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.x() - xMin) / (xMax - xMin);
         int binY = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.y() - yMin) / (yMax - yMin);
 
-        ENGAUGE_ASSERT (0 < binX);
-        ENGAUGE_ASSERT (0 < binY);
+        ENGAUGE_ASSERT (0 <= binX);
+        ENGAUGE_ASSERT (0 <= binY);
         ENGAUGE_ASSERT (binX < 2 * NUM_HISTOGRAM_BINS);
         ENGAUGE_ASSERT (binY < 2 * NUM_HISTOGRAM_BINS);
 

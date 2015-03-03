@@ -50,6 +50,9 @@ public:
                               QString &coordsGraph,
                               QString &resolutionGraph);
 
+  /// Get method for DocumentModelCoords
+  DocumentModelCoords modelCoords() const;
+
   /// Transform is defined when at least three axis points have been digitized
   bool transformIsDefined() const { return m_transformIsDefined; }
 
