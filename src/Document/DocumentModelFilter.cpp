@@ -51,6 +51,12 @@ DocumentModelFilter &DocumentModelFilter::operator=(const DocumentModelFilter &o
   return *this;
 }
 
+ColorFilterMode DocumentModelFilter::colorFilterMode(const QString &curveName) const
+{
+  ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
+  return m_colorFilterSettingsList [curveName].colorFilterMode();
+}
+
 const ColorFilterSettings DocumentModelFilter::colorFilterSettings (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
@@ -60,12 +66,6 @@ const ColorFilterSettings DocumentModelFilter::colorFilterSettings (const QStrin
 const ColorFilterSettingsList &DocumentModelFilter::colorFilterSettingsList () const
 {
   return m_colorFilterSettingsList;
-}
-
-FilterMode DocumentModelFilter::filterMode(const QString &curveName) const
-{
-  ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
-  return m_colorFilterSettingsList [curveName].filterMode();
 }
 
 int DocumentModelFilter::foregroundHigh (const QString &curveName) const
@@ -184,11 +184,11 @@ void DocumentModelFilter::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void DocumentModelFilter::setFilterMode(const QString &curveName,
-                                             FilterMode filterMode)
+void DocumentModelFilter::setColorFilterMode(const QString &curveName,
+                                             ColorFilterMode colorFilterMode)
 {
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
-  m_colorFilterSettingsList [curveName].setFilterMode(filterMode);
+  m_colorFilterSettingsList [curveName].setColorFilterMode(colorFilterMode);
 }
 
 void DocumentModelFilter::setForegroundHigh (const QString &curveName,

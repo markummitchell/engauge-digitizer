@@ -2525,7 +2525,7 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
   filter.filterImage (imageUnfiltered,
                       imageFiltered,
-                      cmdMediator().document().modelFilter().filterMode(selectedGraphCurve ()),
+                      cmdMediator().document().modelFilter().colorFilterMode(selectedGraphCurve ()),
                       cmdMediator().document().modelFilter().low(selectedGraphCurve ()),
                       cmdMediator().document().modelFilter().high(selectedGraphCurve ()),
                       rgbBackground);

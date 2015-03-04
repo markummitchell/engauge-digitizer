@@ -75,14 +75,14 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
     if (r == g && g == b) {
 
       // Pixel is gray scale, so we use intensity
-      modelFilterAfter.setFilterMode (curveName,
-                                      FILTER_MODE_INTENSITY);
+      modelFilterAfter.setColorFilterMode (curveName,
+                                           COLOR_FILTER_MODE_INTENSITY);
 
     } else {
 
       // Pixel is not gray scale, so we use hue
-      modelFilterAfter.setFilterMode (curveName,
-                                      FILTER_MODE_HUE);
+      modelFilterAfter.setColorFilterMode (curveName,
+                                           COLOR_FILTER_MODE_HUE);
 
     }
 
@@ -93,13 +93,13 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
     int maxBinCount;
     filterHistogram.generate (filter,
                               histogramBins,
-                              modelFilterAfter.filterMode (curveName),
+                              modelFilterAfter.colorFilterMode (curveName),
                               image,
                               maxBinCount);
 
     // Bin for pixel
     int pixelBin = filterHistogram.binFromPixel(filter,
-                                                modelFilterAfter.filterMode (curveName),
+                                                modelFilterAfter.colorFilterMode (curveName),
                                                 pixel,
                                                 rgbBackground);
 
@@ -119,10 +119,10 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
 
     // Compute and save values from bin numbers
     int lowerValue = filterHistogram.valueFromBin(filter,
-                                                  modelFilterAfter.filterMode (curveName),
+                                                  modelFilterAfter.colorFilterMode (curveName),
                                                   lowerBin);
     int upperValue = filterHistogram.valueFromBin(filter,
-                                                  modelFilterAfter.filterMode (curveName),
+                                                  modelFilterAfter.colorFilterMode (curveName),
                                                   upperBin);
 
     saveLowerValueUpperValue (modelFilterAfter,
@@ -245,36 +245,36 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelFilter &mo
                                                          double lowerValue,
                                                          double upperValue)
 {
-  switch (modelFilterAfter.filterMode (curveName)) {
-    case FILTER_MODE_FOREGROUND:
+  switch (modelFilterAfter.colorFilterMode (curveName)) {
+    case COLOR_FILTER_MODE_FOREGROUND:
       modelFilterAfter.setForegroundLow(curveName,
                                         lowerValue);
       modelFilterAfter.setForegroundHigh(curveName,
                                          upperValue);
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       modelFilterAfter.setHueLow(curveName,
                                  lowerValue);
       modelFilterAfter.setHueHigh(curveName,
                                   upperValue);
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       modelFilterAfter.setIntensityLow(curveName,
                                        lowerValue);
       modelFilterAfter.setIntensityHigh(curveName,
                                         upperValue);
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       modelFilterAfter.setSaturationLow(curveName,
                                         lowerValue);
       modelFilterAfter.setSaturationHigh(curveName,
                                          upperValue);
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       modelFilterAfter.setValueLow(curveName,
                                    lowerValue);
       modelFilterAfter.setValueHigh(curveName,

@@ -14,7 +14,7 @@ ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :
   // Note the size is set externally by the layout engine
 }
 
-QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
+QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
                                             int foreground,
                                             int hue,
                                             int intensity,
@@ -23,9 +23,9 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
 {
   int r = 0, g = 0, b = 0;
 
-  switch (filterMode)
+  switch (coloFilterMode)
   {
-    case FILTER_MODE_FOREGROUND:
+    case COLOR_FILTER_MODE_FOREGROUND:
       {
         double s = (double) (foreground - FOREGROUND_MIN) / (double) (FOREGROUND_MAX - FOREGROUND_MIN);
         if (qGray (m_rgbBackground.rgb ()) < 127) {
@@ -42,7 +42,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       {
         // red-green and green-blue like ViewProfileScale::paintHue
 
@@ -68,7 +68,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       {
         // black-white like ViewProfileScale::paintIntensity
 
@@ -79,7 +79,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       {
         // white-red like ViewProfileScale::paintSaturation
 
@@ -90,7 +90,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       {
         // black-red like ViewProfileScale::paintValue
 
@@ -110,7 +110,7 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
 
 QColor ViewSegmentFilter::colorHigh () const
 {
-  return colorFromSetting (m_colorFilterSettings.filterMode (),
+  return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
                            m_colorFilterSettings.foregroundHigh (),
                            m_colorFilterSettings.hueHigh (),
                            m_colorFilterSettings.intensityHigh(),
@@ -120,7 +120,7 @@ QColor ViewSegmentFilter::colorHigh () const
 
 QColor ViewSegmentFilter::colorLow () const
 {
-  return colorFromSetting (m_colorFilterSettings.filterMode (),
+  return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
                            m_colorFilterSettings.foregroundLow (),
                            m_colorFilterSettings.hueLow (),
                            m_colorFilterSettings.intensityLow(),

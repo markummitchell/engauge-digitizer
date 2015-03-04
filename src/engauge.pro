@@ -40,6 +40,7 @@ HEADERS  += \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
     Color/ColorConstants.h \
+    Color/ColorFilterMode.h \
     Color/ColorFilterSettings.h \
     include/ColorPalette.h \
     Coord/CoordScale.h \
@@ -104,7 +105,6 @@ HEADERS  += \
     Filter/Filter.h \
     Filter/FilterColorEntry.h \
     Filter/FilterHistogram.h \
-    Filter/FilterMode.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -188,6 +188,7 @@ SOURCES += \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
+    Color/ColorFilterMode.cpp \
     Color/ColorFilterSettings.cpp \
     include/ColorPalette.cpp \
     Coord/CoordScale.cpp \
@@ -249,7 +250,6 @@ SOURCES += \
     Export/ExportToFile.cpp \
     Filter/Filter.cpp \
     Filter/FilterHistogram.cpp \
-    Filter/FilterMode.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \

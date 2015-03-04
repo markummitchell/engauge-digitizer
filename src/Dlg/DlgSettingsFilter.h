@@ -1,8 +1,8 @@
 #ifndef DLG_SETTINGS_FILTER_H
 #define DLG_SETTINGS_FILTER_H
 
+#include "ColorFilterMode.h"
 #include "DlgSettingsAbstractBase.h"
-#include "FilterMode.h"
 #include <QColor>
 #include <QImage>
 #include <QPixmap>
@@ -38,7 +38,7 @@ public slots:
 
 signals:
   /// Send filter parameters to DlgFilterThread and DlgFilterWorker for processing.
-  void signalApplyFilter (FilterMode filterMode,
+  void signalApplyFilter (ColorFilterMode colorFilterMode,
                           double low,
                           double high);
 

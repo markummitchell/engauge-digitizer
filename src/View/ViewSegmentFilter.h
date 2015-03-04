@@ -28,7 +28,7 @@ public:
 
 private:
 
-  QColor colorFromSetting (FilterMode filterMode,
+  QColor colorFromSetting (ColorFilterMode colorFilterMode,
                            int foreground,
                            int hue,
                            int intensity,

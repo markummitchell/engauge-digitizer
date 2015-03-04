@@ -19,7 +19,7 @@ bool Filter::colorCompare (QRgb rgb1,
 
 void Filter::filterImage (const QImage &imageOriginal,
                           QImage &imageFiltered,
-                          FilterMode filterMode,
+                          ColorFilterMode colorFilterMode,
                           double low,
                           double high,
                           QRgb rgbBackground)
@@ -35,7 +35,7 @@ void Filter::filterImage (const QImage &imageOriginal,
       bool isOn = false;
       if (pixel.rgb() != rgbBackground) {
 
-        isOn = pixelUnfilteredIsOn (filterMode,
+        isOn = pixelUnfilteredIsOn (colorFilterMode,
                                     pixel,
                                     rgbBackground,
                                     low,
@@ -118,7 +118,7 @@ bool Filter::pixelFilteredIsOn (const QImage &image,
   return rtn;
 }
 
-bool Filter::pixelUnfilteredIsOn (FilterMode filterMode,
+bool Filter::pixelUnfilteredIsOn (ColorFilterMode colorFilterMode,
                                   const QColor &pixel,
                                   QRgb rgbBackground,
                                   double low0To1,
@@ -126,7 +126,7 @@ bool Filter::pixelUnfilteredIsOn (FilterMode filterMode,
 {
   bool rtn = false;
 
-  double s = pixelToZeroToOneOrMinusOne (filterMode,
+  double s = pixelToZeroToOneOrMinusOne (colorFilterMode,
                                          pixel,
                                          rgbBackground);
   if (s >= 0.0) {
@@ -146,14 +146,14 @@ bool Filter::pixelUnfilteredIsOn (FilterMode filterMode,
   return rtn;
 }
 
-double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
+double Filter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
                                            const QColor &pixel,
                                            QRgb rgbBackground) const
 {
   double s = 0.0;
 
-  switch (filterMode) {
-    case FILTER_MODE_FOREGROUND:
+  switch (colorFilterMode) {
+    case COLOR_FILTER_MODE_FOREGROUND:
       {
         double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
                                  pow (pixel.green() - qGreen (rgbBackground), 2) +
@@ -162,7 +162,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       {
         s = pixel.hueF();
         if (s < 0) {
@@ -171,7 +171,7 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       {
         double distance = qSqrt (pow (pixel.red(), 2) +
                                  pow (pixel.green(), 2) +
@@ -180,11 +180,11 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
       }
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       s = pixel.saturationF();
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       s = pixel.valueF();
       break;
 
@@ -195,37 +195,37 @@ double Filter::pixelToZeroToOneOrMinusOne (FilterMode filterMode,
   return s;
 }
 
-int Filter::zeroToOneToValue (FilterMode filterMode,
+int Filter::zeroToOneToValue (ColorFilterMode colorFilterMode,
                               double s) const
 {
   int value = 0;
 
-  switch (filterMode) {
-    case FILTER_MODE_FOREGROUND:
+  switch (colorFilterMode) {
+    case COLOR_FILTER_MODE_FOREGROUND:
       {
         value = FOREGROUND_MIN + s * (FOREGROUND_MAX - FOREGROUND_MIN);
       }
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       {
         value = HUE_MIN + s * (HUE_MAX - HUE_MIN);
       }
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       {
         value = INTENSITY_MIN + s * (INTENSITY_MAX - INTENSITY_MIN);
       }
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       {
         value = SATURATION_MIN + s * (SATURATION_MAX - SATURATION_MIN);
       }
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       {
         value = VALUE_MIN + s * (VALUE_MAX - VALUE_MIN);
       }

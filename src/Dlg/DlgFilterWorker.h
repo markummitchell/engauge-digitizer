@@ -1,8 +1,8 @@
 #ifndef DLG_FILTER_WORKER_H
 #define DLG_FILTER_WORKER_H
 
+#include "ColorFilterMode.h"
 #include "DlgFilterCommand.h"
-#include "FilterMode.h"
 #include <QImage>
 #include <QList>
 #include <QObject>
@@ -24,7 +24,7 @@ public:
 
 public slots:
   /// Start processing with a new set of parameters. Any ongoing processing is interrupted when m_filterMode changes.
-  void slotNewParameters (FilterMode filterMode,
+  void slotNewParameters (ColorFilterMode colorFilterMode,
                           double low,
                           double high);
 
@@ -43,7 +43,7 @@ private:
   QRgb m_rgbBackground;
 
   FilterCommandQueue m_inputCommandQueue;
-  FilterMode m_filterMode; // Set when processing restarts
+  ColorFilterMode m_colorFilterMode; // Set when processing restarts
   double m_low;
   double m_high;
 

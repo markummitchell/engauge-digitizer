@@ -57,7 +57,7 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
   QLabel *labelProfile = new QLabel ("Filter mode:");
   layout->addWidget (labelProfile, row++, 1);
 
-  m_btnIntensity = new QRadioButton (filterModeToString (FILTER_MODE_INTENSITY));
+  m_btnIntensity = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_INTENSITY));
   m_btnIntensity->setWhatsThis (tr ("Filter the original image into black and white pixels using the Intensity parameter, "
                                     "to hide unimportant information and emphasize important information.\n\n"
                                     "The Intensity value of a pixel is computed from the red, green "
@@ -65,7 +65,7 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
   connect (m_btnIntensity, SIGNAL (released ()), this, SLOT (slotIntensity ()));
   layout->addWidget (m_btnIntensity, row++, 1);
 
-  m_btnForeground = new QRadioButton (filterModeToString (FILTER_MODE_FOREGROUND));
+  m_btnForeground = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_FOREGROUND));
   m_btnForeground->setWhatsThis (tr ("Filter the original image into black and white pixels by isolating the foreground from the background, "
                                      "to hide unimportant information and emphasize important information.\n\n"
                                      "The background color is shown on the left side of the scale bar.\n\n"
@@ -75,21 +75,21 @@ void DlgSettingsFilter::createControls (QGridLayout *layout, int &row)
   connect (m_btnForeground, SIGNAL (released ()), this, SLOT (slotForeground ()));
   layout->addWidget (m_btnForeground, row++, 1);
 
-  m_btnHue = new QRadioButton (filterModeToString (FILTER_MODE_HUE));
+  m_btnHue = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_HUE));
   m_btnHue->setWhatsThis (tr ("Filter the original image into black and white pixels using the Hue component of the "
                               "Hue, Saturation and Value (HSV) color components, "
                               "to hide unimportant information and emphasize important information."));
   connect (m_btnHue, SIGNAL (released ()), this, SLOT (slotHue ()));
   layout->addWidget (m_btnHue, row++, 1);
 
-  m_btnSaturation = new QRadioButton (filterModeToString (FILTER_MODE_SATURATION));
+  m_btnSaturation = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_SATURATION));
   m_btnSaturation->setWhatsThis (tr ("Filter the original image into black and white pixels using the Saturation component of the "
                                      "Hue, Saturation and Value (HSV) color components, "
                                      "to hide unimportant information and emphasize important information."));
   connect (m_btnSaturation, SIGNAL (released ()), this, SLOT (slotSaturation ()));
   layout->addWidget (m_btnSaturation, row++, 1);
 
-  m_btnValue = new QRadioButton (filterModeToString (FILTER_MODE_VALUE));
+  m_btnValue = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_VALUE));
   m_btnValue->setWhatsThis (tr ("Filter the original image into black and white pixels using the Value component of the "
                                 "Hue, Saturation and Value (HSV) color components, "
                                 "to hide unimportant information and emphasize important information.\n\n"
@@ -250,12 +250,12 @@ void DlgSettingsFilter::loadForCurveName()
   if (!curveName.isEmpty () && m_modelFilterAfter != 0) {
 
     // Populate controls
-    FilterMode filterMode = m_modelFilterAfter->filterMode(curveName);
-    m_btnIntensity->setChecked (filterMode == FILTER_MODE_INTENSITY);
-    m_btnForeground->setChecked (filterMode == FILTER_MODE_FOREGROUND);
-    m_btnHue->setChecked (filterMode == FILTER_MODE_HUE);
-    m_btnSaturation->setChecked (filterMode == FILTER_MODE_SATURATION);
-    m_btnValue->setChecked (filterMode == FILTER_MODE_VALUE);
+    ColorFilterMode colorFilterMode = m_modelFilterAfter->colorFilterMode(curveName);
+    m_btnIntensity->setChecked (colorFilterMode == COLOR_FILTER_MODE_INTENSITY);
+    m_btnForeground->setChecked (colorFilterMode == COLOR_FILTER_MODE_FOREGROUND);
+    m_btnHue->setChecked (colorFilterMode == COLOR_FILTER_MODE_HUE);
+    m_btnSaturation->setChecked (colorFilterMode == COLOR_FILTER_MODE_SATURATION);
+    m_btnValue->setChecked (colorFilterMode == COLOR_FILTER_MODE_VALUE);
 
     m_scenePreview->clear();
     m_imagePreview = cmdMediator().document().pixmap().toImage();
@@ -294,8 +294,8 @@ void DlgSettingsFilter::slotForeground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotForeground";
 
-  m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                    FILTER_MODE_FOREGROUND);
+  m_modelFilterAfter->setColorFilterMode(m_cmbCurveName->currentText(),
+                                         COLOR_FILTER_MODE_FOREGROUND);
   updateHistogram();
   updatePreview();
 }
@@ -304,8 +304,8 @@ void DlgSettingsFilter::slotHue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotHue";
 
-  m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                    FILTER_MODE_HUE);
+  m_modelFilterAfter->setColorFilterMode(m_cmbCurveName->currentText(),
+                                         COLOR_FILTER_MODE_HUE);
   updateHistogram();
   updatePreview();
 }
@@ -314,8 +314,8 @@ void DlgSettingsFilter::slotIntensity ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotIntensity";
 
-  m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                    FILTER_MODE_INTENSITY);
+  m_modelFilterAfter->setColorFilterMode(m_cmbCurveName->currentText(),
+                                         COLOR_FILTER_MODE_INTENSITY);
   updateHistogram();
   updatePreview();
 }
@@ -324,8 +324,8 @@ void DlgSettingsFilter::slotSaturation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotSaturation";
 
-  m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                    FILTER_MODE_SATURATION);
+  m_modelFilterAfter->setColorFilterMode(m_cmbCurveName->currentText(),
+                                         COLOR_FILTER_MODE_SATURATION);
   updateHistogram();
   updatePreview();
 }
@@ -359,8 +359,8 @@ void DlgSettingsFilter::slotValue ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsFilter::slotValue";
 
-  m_modelFilterAfter->setFilterMode(m_cmbCurveName->currentText(),
-                                    FILTER_MODE_VALUE);
+  m_modelFilterAfter->setColorFilterMode(m_cmbCurveName->currentText(),
+                                         COLOR_FILTER_MODE_VALUE);
   updateHistogram();
   updatePreview();
 }
@@ -377,7 +377,7 @@ void DlgSettingsFilter::updateHistogram()
 
   m_sceneProfile->clear();
 
-  m_scale->setFilterMode (m_modelFilterAfter->filterMode(curveName));
+  m_scale->setColorFilterMode (m_modelFilterAfter->colorFilterMode(curveName));
 
   // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
@@ -389,7 +389,7 @@ void DlgSettingsFilter::updateHistogram()
   int maxBinCount;
   filterHistogram.generate (filter,
                             histogramBins,
-                            m_modelFilterAfter->filterMode (curveName),
+                            m_modelFilterAfter->colorFilterMode (curveName),
                             image,
                             maxBinCount);
 
@@ -483,7 +483,7 @@ void DlgSettingsFilter::updatePreview ()
 
   // This (indirectly) updates the preview
   QString curveName = m_cmbCurveName->currentText();
-  emit signalApplyFilter (m_modelFilterAfter->filterMode(curveName),
+  emit signalApplyFilter (m_modelFilterAfter->colorFilterMode(curveName),
                           m_modelFilterAfter->low(curveName),
                           m_modelFilterAfter->high(curveName));
 }

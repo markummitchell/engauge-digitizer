@@ -1,16 +1,16 @@
 #include "DlgFilterCommand.h"
 
-DlgFilterCommand::DlgFilterCommand(FilterMode filterMode,
+DlgFilterCommand::DlgFilterCommand(ColorFilterMode colorFilterMode,
                                    double low0To1,
                                    double high0To1) :
-  m_filterMode (filterMode),
+  m_colorFilterMode (colorFilterMode),
   m_low0To1 (low0To1),
   m_high0To1 (high0To1)
 {
 }
 
 DlgFilterCommand::DlgFilterCommand(const DlgFilterCommand &other) :
-  m_filterMode (other.filterMode()),
+  m_colorFilterMode (other.colorFilterMode()),
   m_low0To1 (other.low0To1()),
   m_high0To1 (other.high0To1())
 {
@@ -18,16 +18,16 @@ DlgFilterCommand::DlgFilterCommand(const DlgFilterCommand &other) :
 
 DlgFilterCommand &DlgFilterCommand::operator=(const DlgFilterCommand &other)
 {
-  m_filterMode = other.filterMode();
+  m_colorFilterMode = other.colorFilterMode();
   m_low0To1 = other.low0To1();
   m_high0To1 = other.high0To1();
 
   return *this;
 }
 
-FilterMode DlgFilterCommand::filterMode() const
+ColorFilterMode DlgFilterCommand::colorFilterMode() const
 {
-  return m_filterMode;
+  return m_colorFilterMode;
 }
 
 double DlgFilterCommand::high0To1() const

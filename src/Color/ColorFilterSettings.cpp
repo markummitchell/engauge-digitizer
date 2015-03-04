@@ -8,7 +8,7 @@
 #include "Xml.h"
 
 ColorFilterSettings::ColorFilterSettings() :
-  m_filterMode (FILTER_MODE_INTENSITY),
+  m_colorFilterMode (COLOR_FILTER_MODE_INTENSITY),
   m_intensityLow (INTENSITY_LOW_DEFAULT),
   m_intensityHigh (INTENSITY_HIGH_DEFAULT),
   m_foregroundLow (FOREGROUND_LOW_DEFAULT),
@@ -22,7 +22,7 @@ ColorFilterSettings::ColorFilterSettings() :
 {
 }
 
-ColorFilterSettings::ColorFilterSettings(FilterMode filterMode,
+ColorFilterSettings::ColorFilterSettings(ColorFilterMode colorFilterMode,
                                          int intensityLow,
                                          int intensityHigh,
                                          int foregroundLow,
@@ -33,7 +33,7 @@ ColorFilterSettings::ColorFilterSettings(FilterMode filterMode,
                                          int saturationHigh,
                                          int valueLow,
                                          int valueHigh) :
-  m_filterMode (filterMode),
+  m_colorFilterMode (colorFilterMode),
   m_intensityLow (intensityLow),
   m_intensityHigh (intensityHigh),
   m_foregroundLow (foregroundLow),
@@ -48,7 +48,7 @@ ColorFilterSettings::ColorFilterSettings(FilterMode filterMode,
 }
 
 ColorFilterSettings::ColorFilterSettings(const ColorFilterSettings &other) :
-  m_filterMode (other.filterMode()),
+  m_colorFilterMode (other.colorFilterMode()),
   m_intensityLow (other.intensityLow()),
   m_intensityHigh (other.intensityHigh()),
   m_foregroundLow (other.foregroundLow()),
@@ -69,7 +69,7 @@ ColorFilterSettings::ColorFilterSettings(QXmlStreamReader &reader)
 
 ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &other)
 {
-  m_filterMode = other.filterMode();
+  m_colorFilterMode = other.colorFilterMode();
   m_intensityLow = other.intensityLow();
   m_intensityHigh = other.intensityHigh();
   m_foregroundLow = other.foregroundLow();
@@ -84,14 +84,14 @@ ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &o
   return *this;
 }
 
+ColorFilterMode ColorFilterSettings::colorFilterMode() const
+{
+  return m_colorFilterMode;
+}
+
 ColorFilterSettings ColorFilterSettings::defaultFilter ()
 {
   return ColorFilterSettings ();
-}
-
-FilterMode ColorFilterSettings::filterMode() const
-{
-  return m_filterMode;
 }
 
 int ColorFilterSettings::foregroundHigh () const
@@ -106,25 +106,25 @@ int ColorFilterSettings::foregroundLow () const
 
 double ColorFilterSettings::high () const
 {
-  switch (m_filterMode)
+  switch (m_colorFilterMode)
   {
-    case FILTER_MODE_FOREGROUND:
+    case COLOR_FILTER_MODE_FOREGROUND:
       return (double) (m_foregroundHigh - FOREGROUND_MIN) /
           (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       return (double) (m_hueHigh - HUE_MIN) /
           ((double) HUE_MAX - HUE_MIN);
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       return (double) (m_intensityHigh - INTENSITY_MIN) /
           (double) (INTENSITY_MAX - INTENSITY_MIN);
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       return (double) (m_saturationHigh - SATURATION_MIN) /
           (double) (SATURATION_MAX - SATURATION_MIN);
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       return (double) (m_valueHigh - VALUE_MIN) /
           (double) (VALUE_MAX - VALUE_MIN);
 
@@ -173,7 +173,7 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH)) {
 
-    setFilterMode ((FilterMode) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE).toInt());
+    setColorFilterMode ((ColorFilterMode) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE).toInt());
     setIntensityLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW).toInt());
     setIntensityHigh ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH).toInt());
     setForegroundLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW).toInt());
@@ -204,25 +204,25 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
 
 double ColorFilterSettings::low () const
 {
-  switch (m_filterMode)
+  switch (m_colorFilterMode)
   {
-    case FILTER_MODE_FOREGROUND:
+    case COLOR_FILTER_MODE_FOREGROUND:
       return (double) (m_foregroundLow - FOREGROUND_MIN) /
           (double) (FOREGROUND_MAX - FOREGROUND_MIN);
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       return (double) (m_hueLow - HUE_MIN) /
           ((double) HUE_MAX - HUE_MIN);
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       return (double) (m_intensityLow - INTENSITY_MIN) /
           (double) (INTENSITY_MAX - INTENSITY_MIN);
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       return (double) (m_saturationLow - SATURATION_MIN) /
           (double) (SATURATION_MAX - SATURATION_MIN);
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       return (double) (m_valueLow - VALUE_MIN) /
           (double) (VALUE_MAX - VALUE_MIN);
 
@@ -246,8 +246,8 @@ void ColorFilterSettings::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "ColorFilterSettings::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE_STRING, filterModeToString (m_filterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_colorFilterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE_STRING, colorFilterModeToString (m_colorFilterMode));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
@@ -261,9 +261,9 @@ void ColorFilterSettings::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void ColorFilterSettings::setFilterMode(FilterMode filterMode)
+void ColorFilterSettings::setColorFilterMode(ColorFilterMode colorFilterMode)
 {
-  m_filterMode = filterMode;
+  m_colorFilterMode = colorFilterMode;
 }
 
 void ColorFilterSettings::setForegroundHigh (int foregroundHigh)
@@ -280,24 +280,24 @@ void ColorFilterSettings::setForegroundLow (int foregroundLow)
 
 void ColorFilterSettings::setHigh (double s0To1)
 {
-  switch (m_filterMode) {
-    case FILTER_MODE_FOREGROUND:
+  switch (m_colorFilterMode) {
+    case COLOR_FILTER_MODE_FOREGROUND:
       setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
       break;
 
@@ -332,24 +332,24 @@ void ColorFilterSettings::setIntensityLow (int intensityLow)
 
 void ColorFilterSettings::setLow (double s0To1)
 {
-  switch (m_filterMode) {
-    case FILTER_MODE_FOREGROUND:
+  switch (m_colorFilterMode) {
+    case COLOR_FILTER_MODE_FOREGROUND:
       setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
       break;
 
-    case FILTER_MODE_HUE:
+    case COLOR_FILTER_MODE_HUE:
       setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
       break;
 
-    case FILTER_MODE_INTENSITY:
+    case COLOR_FILTER_MODE_INTENSITY:
       setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
       break;
 
-    case FILTER_MODE_SATURATION:
+    case COLOR_FILTER_MODE_SATURATION:
       setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
       break;
 
-    case FILTER_MODE_VALUE:
+    case COLOR_FILTER_MODE_VALUE:
       setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
       break;
 

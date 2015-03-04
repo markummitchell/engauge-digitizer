@@ -1,7 +1,7 @@
 #ifndef VIEW_PROFILE_SCALE_H
 #define VIEW_PROFILE_SCALE_H
 
-#include "FilterMode.h"
+#include "ColorFilterMode.h"
 #include <QColor>
 #include <QLabel>
 #include <QRgb>
@@ -20,7 +20,7 @@ public:
   void setBackgroundColor (QRgb rgbBackground);
 
   /// Change the gradient type.
-  void setFilterMode (FilterMode filterMode);
+  void setColorFilterMode (ColorFilterMode colorFilterMode);
 
 private:
 
@@ -33,7 +33,7 @@ private:
   void paintValue ();
 
   QRgb m_rgbBackground;
-  FilterMode m_filterMode;
+  ColorFilterMode m_colorFilterMode;
 };
 
 #endif // VIEW_PROFILE_SCALE_H

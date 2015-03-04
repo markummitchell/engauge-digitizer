@@ -19,7 +19,7 @@ public:
 
   /// Compute histogram bin number from pixel according to filter
   int binFromPixel (const Filter &filter,
-                    FilterMode filterMode,
+                    ColorFilterMode colorFilterMode,
                     const QColor &pixel,
                     const QRgb &rgbBackground) const;
 
@@ -28,13 +28,13 @@ public:
   /// -# this smooths out the curve
   void generate (const Filter &filter,
                  double histogramBins [],
-                 FilterMode filterMode,
+                 ColorFilterMode colorFilterMode,
                  const QImage &image,
                  int &maxBinCount) const;
 
   /// Inverse of binFromPixel
   int valueFromBin (const Filter &filter,
-                    FilterMode filterMode,
+                    ColorFilterMode colorFilterMode,
                     int bin);
 };
 

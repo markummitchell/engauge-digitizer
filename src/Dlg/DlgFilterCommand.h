@@ -1,14 +1,14 @@
 #ifndef DLG_FILTER_COMMAND_H
 #define DLG_FILTER_COMMAND_H
 
-#include "FilterMode.h"
+#include "ColorFilterMode.h"
 
 /// Command pattern object for receiving new parameters in DlgFilterWorker from GUI thread.
 class DlgFilterCommand
 {
 public:
   /// Initial constructor.
-  DlgFilterCommand(FilterMode filterMode,
+  DlgFilterCommand(ColorFilterMode colorFilterMode,
                    double low0To1,
                    double high0To1);
 
@@ -19,7 +19,7 @@ public:
   DlgFilterCommand &operator=(const DlgFilterCommand &other);
 
   /// Get method for filter mode.
-  FilterMode filterMode() const;
+  ColorFilterMode colorFilterMode() const;
 
   /// Get method for high value.
   double high0To1 () const;
@@ -30,7 +30,7 @@ public:
 private:
   DlgFilterCommand();
 
-  FilterMode m_filterMode;
+  ColorFilterMode m_colorFilterMode;
   double m_low0To1;
   double m_high0To1;
 };

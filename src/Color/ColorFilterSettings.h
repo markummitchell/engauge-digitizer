@@ -1,7 +1,7 @@
 #ifndef COLOR_FILTER_SETTINGS_H
 #define COLOR_FILTER_SETTINGS_H
 
-#include "FilterMode.h"
+#include "ColorFilterMode.h"
 
 class QXmlStreamReader;
 class QXmlStreamWriter;
@@ -14,17 +14,17 @@ public:
   ColorFilterSettings ();
 
   /// Normal constructor. The style type and radius are determined by the currently selected Curve
-  ColorFilterSettings (FilterMode m_filterMode,
-                       int m_intensityLow,
-                       int m_intensityHigh,
-                       int m_foregroundLow,
-                       int m_foregroundHigh,
-                       int m_hueLow,
-                       int m_hueHigh,
-                       int m_saturationLow,
-                       int m_saturationHigh,
-                       int m_valueLow,
-                       int m_valueHigh);
+  ColorFilterSettings (ColorFilterMode colorFilterMode,
+                       int intensityLow,
+                       int intensityHigh,
+                       int foregroundLow,
+                       int foregroundHigh,
+                       int hueLow,
+                       int hueHigh,
+                       int saturationLow,
+                       int saturationHigh,
+                       int valueLow,
+                       int valueHigh);
 
   /// Copy constructor.
   ColorFilterSettings (const ColorFilterSettings &other);
@@ -35,11 +35,11 @@ public:
   /// Assignment operator.
   ColorFilterSettings &operator= (const ColorFilterSettings &other);
 
+  /// Get method for filter mode.
+  ColorFilterMode colorFilterMode() const;
+
   /// Initial default for any Curve.
   static ColorFilterSettings defaultFilter ();
-
-  /// Get method for filter mode.
-  FilterMode filterMode() const;
 
   /// Get method for foreground higher bound.
   int foregroundHigh () const;
@@ -80,7 +80,7 @@ public:
   void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for filter mode.
-  void setFilterMode(FilterMode filterMode);
+  void setColorFilterMode(ColorFilterMode colorFilterMode);
 
   /// Set method for foreground higher bound.
   void setForegroundHigh (int foregroundHigh);
@@ -126,7 +126,7 @@ public:
 
 private:
 
-  FilterMode m_filterMode;
+  ColorFilterMode m_colorFilterMode;
   int m_intensityLow;
   int m_intensityHigh;
   int m_foregroundLow;
