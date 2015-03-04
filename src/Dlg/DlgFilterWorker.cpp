@@ -1,6 +1,5 @@
+#include "ColorFilter.h"
 #include "DlgFilterWorker.h"
-#include "DlgSettingsFilter.h"
-#include "Filter.h"
 #include "Logger.h"
 #include <QImage>
 
@@ -69,8 +68,8 @@ void DlgFilterWorker::slotRestartTimeout ()
     // and do nothing except start the timer so we can start over after the next timeout. The goal is
     // to not tie up the gui by emitting signalTransferPiece unnecessarily.
     //
-    // This code is basically a heavily customized version of Filter::filterImage
-    Filter filter;
+    // This code is basically a heavily customized version of ColorFilter::filterImage
+    ColorFilter filter;
     int processedWidth = xStop - m_xLeft;
     QImage imageProcessed (processedWidth,
                            m_imageOriginal.height(),

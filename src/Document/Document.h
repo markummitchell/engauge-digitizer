@@ -4,9 +4,9 @@
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
+#include "DocumentModelColorFilter.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelExport.h"
-#include "DocumentModelFilter.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
@@ -110,6 +110,9 @@ public:
   /// Get method for DocumentModelAxesChecker.
   DocumentModelAxesChecker modelAxesChecker() const;
 
+  /// Get method for DocumentModelColorFilter.
+  DocumentModelColorFilter modelColorFilter() const;
+
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
 
@@ -118,9 +121,6 @@ public:
 
   /// Get method for DocumentModelExport.
   DocumentModelExport modelExport() const;
-
-  /// Get method for DocumentModelFilter.
-  DocumentModelFilter modelFilter() const;
 
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
@@ -165,6 +165,9 @@ public:
   /// Set method for DocumentModelAxesChecker.
   void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
 
+  /// Set method for DocumentModelColorFilter.
+  void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
+
   /// Set method for DocumentModelCoords.
   void setModelCoords (const DocumentModelCoords &modelCoords);
 
@@ -173,9 +176,6 @@ public:
 
   /// Set method for DocumentModelExport.
   void setModelExport(const DocumentModelExport &modelExport);
-
-  /// Set method for DocumentModelFilter.
-  void setModelFilter(const DocumentModelFilter &modelFilter);
 
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
@@ -214,7 +214,7 @@ private:
   DocumentModelCoords m_modelCoords;
   // CurveStyles is not here since curve properties are stored inside the Curve class
   DocumentModelExport m_modelExport;
-  // DocumentModelFilter is not here since filtering settings are stored inside the Curve class
+  // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;

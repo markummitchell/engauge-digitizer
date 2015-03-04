@@ -9,11 +9,11 @@
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
 #include "CmdSettingsAxesChecker.h"
+#include "CmdSettingsColorFilter.h"
 #include "CmdSettingsCoords.h"
 #include "CmdSettingsCurveProperties.h"
 #include "CmdSettingsCurves.h"
 #include "CmdSettingsExport.h"
-#include "CmdSettingsFilter.h"
 #include "CmdSettingsGridRemoval.h"
 #include "CmdSettingsPointMatch.h"
 #include "CmdSettingsSegments.h"
@@ -91,6 +91,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                       document,
                                       cmdDescription,
                                       reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_COLOR_FILTER) {
+    cmd = new CmdSettingsColorFilter (mainWindow,
+                                      document,
+                                      cmdDescription,
+                                      reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS) {
     cmd = new CmdSettingsCoords (mainWindow,
                                  document,
@@ -108,11 +113,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                  reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT) {
     cmd = new CmdSettingsExport (mainWindow,
-                                 document,
-                                 cmdDescription,
-                                 reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_FILTER) {
-    cmd = new CmdSettingsFilter (mainWindow,
                                  document,
                                  cmdDescription,
                                  reader);

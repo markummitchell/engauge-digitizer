@@ -228,7 +228,7 @@ void Curve::loadXml(QXmlStreamReader &reader)
 
       if (tokenType == QXmlStreamReader::StartElement) {
 
-        if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
+        if (reader.name() == DOCUMENT_SERIALIZE_COLOR_FILTER) {
           m_colorFilterSettings.loadXml(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
           loadCurvePoints(reader);

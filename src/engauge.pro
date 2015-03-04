@@ -30,19 +30,22 @@ HEADERS  += \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
     Cmd/CmdSettingsAxesChecker.h \
+    Cmd/CmdSettingsColorFilter.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
     Cmd/CmdSettingsExport.h \
-    Cmd/CmdSettingsFilter.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
     Color/ColorConstants.h \
+    Color/ColorFilter.h \
+    Color/ColorFilterEntry.h \
+    Color/ColorFilterHistogram.h \
     Color/ColorFilterMode.h \
     Color/ColorFilterSettings.h \
-    include/ColorPalette.h \
+    Color/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
     Coord/CoordThetaUnits.h \
@@ -74,11 +77,11 @@ HEADERS  += \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
+    Dlg/DlgSettingsColorFilter.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
     Dlg/DlgSettingsExport.h \
-    Dlg/DlgSettingsFilter.h \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
@@ -86,9 +89,9 @@ HEADERS  += \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
+    Document/DocumentModelColorFilter.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelExport.h \
-    Document/DocumentModelFilter.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -102,9 +105,6 @@ HEADERS  += \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
-    Filter/Filter.h \
-    Filter/FilterColorEntry.h \
-    Filter/FilterHistogram.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -179,18 +179,20 @@ SOURCES += \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
+    Cmd/CmdSettingsColorFilter.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
     Cmd/CmdSettingsExport.cpp \
-    Cmd/CmdSettingsFilter.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
+    Color/ColorFilter.cpp \
+    Color/ColorFilterHistogram.cpp \
     Color/ColorFilterMode.cpp \
     Color/ColorFilterSettings.cpp \
-    include/ColorPalette.cpp \
+    Color/ColorPalette.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
     Coord/CoordThetaUnits.cpp \
@@ -221,11 +223,11 @@ SOURCES += \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
+    Dlg/DlgSettingsColorFilter.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
     Dlg/DlgSettingsExport.cpp \
-    Dlg/DlgSettingsFilter.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
@@ -233,9 +235,9 @@ SOURCES += \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
+    Document/DocumentModelColorFilter.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelExport.cpp \
-    Document/DocumentModelFilter.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
@@ -248,8 +250,6 @@ SOURCES += \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
-    Filter/Filter.cpp \
-    Filter/FilterHistogram.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
@@ -314,7 +314,6 @@ INCLUDEPATH += Callback \
                Dlg \
                Document \
                Export \
-               Filter \
                Graphics \
                Grid \
                img \

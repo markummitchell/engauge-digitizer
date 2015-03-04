@@ -1,5 +1,5 @@
-#ifndef DLG_SETTINGS_FILTER_H
-#define DLG_SETTINGS_FILTER_H
+#ifndef DLG_SETTINGS_COLOR_FILTER_H
+#define DLG_SETTINGS_COLOR_FILTER_H
 
 #include "ColorFilterMode.h"
 #include "DlgSettingsAbstractBase.h"
@@ -8,7 +8,7 @@
 #include <QPixmap>
 
 class DlgFilterThread;
-class DocumentModelFilter;
+class DocumentModelColorFilter;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
@@ -20,13 +20,13 @@ class ViewProfileDivider;
 class ViewProfileScale;
 
 /// Stacked widget page for editing filtering settings.
-class DlgSettingsFilter : public DlgSettingsAbstractBase
+class DlgSettingsColorFilter : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgSettingsFilter(MainWindow &mainWindow);
+  DlgSettingsColorFilter(MainWindow &mainWindow);
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
@@ -88,8 +88,8 @@ private:
 
   QImage m_imagePreview;
 
-  DocumentModelFilter *m_modelFilterBefore;
-  DocumentModelFilter *m_modelFilterAfter;
+  DocumentModelColorFilter *m_modelColorFilterBefore;
+  DocumentModelColorFilter *m_modelColorFilterAfter;
 };
 
-#endif // DLG_SETTINGS_FILTER_H
+#endif // DLG_SETTINGS_COLOR_FILTER_H

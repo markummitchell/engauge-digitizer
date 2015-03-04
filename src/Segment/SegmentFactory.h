@@ -51,7 +51,7 @@ private:
                  QList<Segment*> segments);
 
   // Initialize one column of boolean flags using the pixels of the specified column
-  void loadBool (const Filter &filter,
+  void loadBool (const ColorFilter &filter,
                  bool *columnBool,
                  const QImage &image,
                  int x);

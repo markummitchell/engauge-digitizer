@@ -1,7 +1,7 @@
+#include "ColorFilter.h"
 #include "Correlation.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
 #include "GridClassifier.h"
 #include "Logger.h"
 #include <QDebug>
@@ -165,7 +165,7 @@ void GridClassifier::populateHistogramBins (const QImage &image,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::populateHistogramBins";
 
-  Filter filter;
+  ColorFilter filter;
   QRgb rgbBackground = filter.marginColor (&image);
 
   for (int x = 0; x < image.width(); x++) {

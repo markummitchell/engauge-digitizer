@@ -1,19 +1,19 @@
-#ifndef FILTER_H
-#define FILTER_H
+#ifndef COLOR_FILTER_H
+#define COLOR_FILTER_H
 
+#include "ColorFilterEntry.h"
 #include "ColorFilterMode.h"
-#include "FilterColorEntry.h"
 #include <QList>
 #include <QRgb>
 
 class QImage;
 
 /// Class for filtering image to remove unimportant information.
-class Filter
+class ColorFilter
 {
 public:
   /// Single constructor.
-  Filter();
+  ColorFilter();
 
   /// See if the two color values are close enough to be considered to be the same.
   bool colorCompare (QRgb rgb1,
@@ -56,10 +56,10 @@ public:
 
 private:
 
-  typedef QList<FilterColorEntry> ColorList;
+  typedef QList<ColorFilterEntry> ColorList;
 
   void mergePixelIntoColorCounts (QRgb pixel,
                                   ColorList &colorCounts) const;
 };
 
-#endif // FILTER_H
+#endif // COLOR_FILTER_H

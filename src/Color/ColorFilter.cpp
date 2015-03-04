@@ -1,28 +1,28 @@
 #include "ColorConstants.h"
+#include "ColorFilter.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
 #include "mmsubs.h"
 #include <QDebug>
 #include <qmath.h>
 #include <QImage>
 
-Filter::Filter()
+ColorFilter::ColorFilter()
 {
 }
 
-bool Filter::colorCompare (QRgb rgb1,
-                           QRgb rgb2) const
+bool ColorFilter::colorCompare (QRgb rgb1,
+                                QRgb rgb2) const
 {
   const long MASK = 0xf0f0f0f0;
   return (rgb1 & MASK) == (rgb2 & MASK);
 }
 
-void Filter::filterImage (const QImage &imageOriginal,
-                          QImage &imageFiltered,
-                          ColorFilterMode colorFilterMode,
-                          double low,
-                          double high,
-                          QRgb rgbBackground)
+void ColorFilter::filterImage (const QImage &imageOriginal,
+                               QImage &imageFiltered,
+                               ColorFilterMode colorFilterMode,
+                               double low,
+                               double high,
+                               QRgb rgbBackground)
 {
   ENGAUGE_ASSERT (imageOriginal.width () == imageFiltered.width());
   ENGAUGE_ASSERT (imageOriginal.height() == imageFiltered.height());
@@ -49,7 +49,7 @@ void Filter::filterImage (const QImage &imageOriginal,
   }
 }
 
-QRgb Filter::marginColor(const QImage *image) const
+QRgb ColorFilter::marginColor(const QImage *image) const
 {
   // Add unique colors to colors list
   ColorList colorCounts;
@@ -63,7 +63,7 @@ QRgb Filter::marginColor(const QImage *image) const
   }
 
   // Margin color is the most frequent color
-  FilterColorEntry entryMax;
+  ColorFilterEntry entryMax;
   entryMax.count = 0;
   for (ColorList::const_iterator itr = colorCounts.begin (); itr != colorCounts.end (); itr++) {
     if ((*itr).count > entryMax.count) {
@@ -74,10 +74,10 @@ QRgb Filter::marginColor(const QImage *image) const
   return entryMax.color.rgb();
 }
 
-void Filter::mergePixelIntoColorCounts (QRgb pixel,
-                                        ColorList &colorCounts) const
+void ColorFilter::mergePixelIntoColorCounts (QRgb pixel,
+                                             ColorList &colorCounts) const
 {
-  FilterColorEntry entry;
+  ColorFilterEntry entry;
   entry.color = pixel;
   entry.count = 0;
 
@@ -97,9 +97,9 @@ void Filter::mergePixelIntoColorCounts (QRgb pixel,
   }
 }
 
-bool Filter::pixelFilteredIsOn (const QImage &image,
-                                int x,
-                                int y) const
+bool ColorFilter::pixelFilteredIsOn (const QImage &image,
+                                     int x,
+                                     int y) const
 {
   bool rtn = false;
 
@@ -118,11 +118,11 @@ bool Filter::pixelFilteredIsOn (const QImage &image,
   return rtn;
 }
 
-bool Filter::pixelUnfilteredIsOn (ColorFilterMode colorFilterMode,
-                                  const QColor &pixel,
-                                  QRgb rgbBackground,
-                                  double low0To1,
-                                  double high0To1) const
+bool ColorFilter::pixelUnfilteredIsOn (ColorFilterMode colorFilterMode,
+                                       const QColor &pixel,
+                                       QRgb rgbBackground,
+                                       double low0To1,
+                                       double high0To1) const
 {
   bool rtn = false;
 
@@ -146,9 +146,9 @@ bool Filter::pixelUnfilteredIsOn (ColorFilterMode colorFilterMode,
   return rtn;
 }
 
-double Filter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
-                                           const QColor &pixel,
-                                           QRgb rgbBackground) const
+double ColorFilter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
+                                                const QColor &pixel,
+                                                QRgb rgbBackground) const
 {
   double s = 0.0;
 
@@ -195,8 +195,8 @@ double Filter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
   return s;
 }
 
-int Filter::zeroToOneToValue (ColorFilterMode colorFilterMode,
-                              double s) const
+int ColorFilter::zeroToOneToValue (ColorFilterMode colorFilterMode,
+                                   double s) const
 {
   int value = 0;
 

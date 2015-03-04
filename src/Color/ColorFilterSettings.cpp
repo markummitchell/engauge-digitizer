@@ -161,33 +161,33 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH)) {
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_HIGH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH)) {
 
-    setColorFilterMode ((ColorFilterMode) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE).toInt());
-    setIntensityLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW).toInt());
-    setIntensityHigh ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH).toInt());
-    setForegroundLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW).toInt());
-    setForegroundHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH).toInt());
-    setHueLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW).toInt());
-    setHueHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH).toInt());
-    setSaturationLow ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW).toInt());
-    setSaturationHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH).toInt());
-    setValueLow (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW).toInt());
-    setValueHigh (attributes.value(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH).toInt());
+    setColorFilterMode ((ColorFilterMode) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE).toInt());
+    setIntensityLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_LOW).toInt());
+    setIntensityHigh ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH).toInt());
+    setForegroundLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_LOW).toInt());
+    setForegroundHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_HIGH).toInt());
+    setHueLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_LOW).toInt());
+    setHueHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_HIGH).toInt());
+    setSaturationLow ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_LOW).toInt());
+    setSaturationHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_HIGH).toInt());
+    setValueLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW).toInt());
+    setValueHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH).toInt());
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-    (reader.name() != DOCUMENT_SERIALIZE_CURVE_FILTER)){
+    (reader.name() != DOCUMENT_SERIALIZE_COLOR_FILTER)){
       loadNextFromReader(reader);
 
       if (reader.atEnd()) {
@@ -245,19 +245,19 @@ void ColorFilterSettings::saveXml(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ColorFilterSettings::saveXml";
 
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_colorFilterMode));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE_STRING, colorFilterModeToString (m_colorFilterMode));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_FOREGROUND_HIGH, QString::number (m_foregroundHigh));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_LOW, QString::number (m_hueLow));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_HUE_HIGH, QString::number (m_hueHigh));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_LOW, QString::number (m_saturationLow));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_SATURATION_HIGH, QString::number (m_saturationHigh));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_LOW, QString::number (m_valueLow));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_VALUE_HIGH, QString::number (m_valueHigh));
+  writer.writeStartElement(DOCUMENT_SERIALIZE_COLOR_FILTER);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE, QString::number (m_colorFilterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE_STRING, colorFilterModeToString (m_colorFilterMode));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_LOW, QString::number (m_intensityLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH, QString::number (m_intensityHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_LOW, QString::number (m_foregroundLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_HIGH, QString::number (m_foregroundHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_LOW, QString::number (m_hueLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_HIGH, QString::number (m_hueHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_LOW, QString::number (m_saturationLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_HIGH, QString::number (m_saturationHigh));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW, QString::number (m_valueLow));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH, QString::number (m_valueHigh));
   writer.writeEndElement();
 }
 

@@ -25,15 +25,18 @@ HEADERS  += \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
     Cmd/CmdSettingsAxesChecker.h \
+    Cmd/CmdSettingsColorFilter.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsCurves.h \
     Cmd/CmdSettingsExport.h \
-    Cmd/CmdSettingsFilter.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Color/ColorConstants.h \
+    Color/ColorFilter.h \
+    Color/ColorFilterEntry.h \
+    Color/ColorFilterMode.h \
     include/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
@@ -61,11 +64,11 @@ HEADERS  += \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
+    Dlg/DlgSettingsColorFilter.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurves.h \
     Dlg/DlgSettingsCurveProperties.h \
     Dlg/DlgSettingsExport.h \
-    Dlg/DlgSettingsFilter.h \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
@@ -74,9 +77,9 @@ HEADERS  += \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
+    Document/DocumentModelColorFilter.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelExport.h \
-    Document/DocumentModelFilter.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -88,9 +91,6 @@ HEADERS  += \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
-    Filter/Filter.h \
-    Filter/FilterColorEntry.h \
-    Filter/FilterMode.h \
     Callback/functor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsPointAbstractBase.h \
@@ -139,14 +139,15 @@ SOURCES += \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
+    Cmd/CmdSettingsColorFilter.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsCurves.cpp \
     Cmd/CmdSettingsExport.cpp \
-    Cmd/CmdSettingsFilter.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
+    Color/ColorFilter.cpp \
     Curve/Curve.cpp \
     Curve/CurveNameList.cpp \
     Curve/CurveNameListEntry.cpp \
@@ -168,11 +169,11 @@ SOURCES += \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
+    Dlg/DlgSettingsColorFilter.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurves.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
     Dlg/DlgSettingsExport.cpp \
-    Dlg/DlgSettingsFilter.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
@@ -181,16 +182,15 @@ SOURCES += \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
+    Document/DocumentModelColorFilter.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelExport.cpp \
-    Document/DocumentModelFilter.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
     util/EnumsToQt.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
-    Filter/Filter.cpp \
     Graphics/GraphicsPointAbstractBase.cpp \
     Graphics/GraphicsPoint.cpp \
     Graphics/GraphicsScene.cpp \
@@ -228,7 +228,6 @@ INCLUDEPATH += Callback \
                Dlg \
                Document \
                Export \
-               Filter \
                Graphics \
                Grid \
                Highlight \

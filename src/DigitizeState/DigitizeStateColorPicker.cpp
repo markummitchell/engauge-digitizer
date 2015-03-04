@@ -1,11 +1,11 @@
 #include "CmdMediator.h"
-#include "CmdSettingsFilter.h"
+#include "CmdSettingsColorFilter.h"
+#include "ColorFilter.h"
+#include "ColorFilterHistogram.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateColorPicker.h"
-#include "DocumentModelFilter.h"
+#include "DocumentModelColorFilter.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
-#include "FilterHistogram.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QBitmap>
@@ -46,14 +46,14 @@ void DigitizeStateColorPicker::begin (DigitizeState previousState)
 
 bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
                                                        const QString &curveName,
-                                                       DocumentModelFilter &modelFilterAfter)
+                                                       DocumentModelColorFilter &modelColorFilterAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::computeFilterFromPixel";
 
   bool rtn = false;
 
   // Filter for background color now, and then later, once filter mode is set, processing of image
-  Filter filter;
+  ColorFilter filter;
   QImage image = context().cmdMediator().document().pixmap().toImage();
   QRgb rgbBackground = filter.marginColor(&image);
 
@@ -75,31 +75,31 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
     if (r == g && g == b) {
 
       // Pixel is gray scale, so we use intensity
-      modelFilterAfter.setColorFilterMode (curveName,
-                                           COLOR_FILTER_MODE_INTENSITY);
+      modelColorFilterAfter.setColorFilterMode (curveName,
+                                                COLOR_FILTER_MODE_INTENSITY);
 
     } else {
 
       // Pixel is not gray scale, so we use hue
-      modelFilterAfter.setColorFilterMode (curveName,
-                                           COLOR_FILTER_MODE_HUE);
+      modelColorFilterAfter.setColorFilterMode (curveName,
+                                                COLOR_FILTER_MODE_HUE);
 
     }
 
     // Generate histogram
     double histogramBins [HISTOGRAM_BINS];
 
-    FilterHistogram filterHistogram;
+    ColorFilterHistogram filterHistogram;
     int maxBinCount;
     filterHistogram.generate (filter,
                               histogramBins,
-                              modelFilterAfter.colorFilterMode (curveName),
+                              modelColorFilterAfter.colorFilterMode (curveName),
                               image,
                               maxBinCount);
 
     // Bin for pixel
     int pixelBin = filterHistogram.binFromPixel(filter,
-                                                modelFilterAfter.colorFilterMode (curveName),
+                                                modelColorFilterAfter.colorFilterMode (curveName),
                                                 pixel,
                                                 rgbBackground);
 
@@ -119,13 +119,13 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
 
     // Compute and save values from bin numbers
     int lowerValue = filterHistogram.valueFromBin(filter,
-                                                  modelFilterAfter.colorFilterMode (curveName),
+                                                  modelColorFilterAfter.colorFilterMode (curveName),
                                                   lowerBin);
     int upperValue = filterHistogram.valueFromBin(filter,
-                                                  modelFilterAfter.colorFilterMode (curveName),
+                                                  modelColorFilterAfter.colorFilterMode (curveName),
                                                   upperBin);
 
-    saveLowerValueUpperValue (modelFilterAfter,
+    saveLowerValueUpperValue (modelColorFilterAfter,
                               curveName,
                               lowerValue,
                               upperValue);
@@ -222,63 +222,63 @@ void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseRelease";
 
-  DocumentModelFilter modelFilterBefore = context().cmdMediator().document().modelFilter();
-  DocumentModelFilter modelFilterAfter = context().cmdMediator().document().modelFilter();
+  DocumentModelColorFilter modelColorFilterBefore = context().cmdMediator().document().modelColorFilter();
+  DocumentModelColorFilter modelColorFilterAfter = context().cmdMediator().document().modelColorFilter();
   if (computeFilterFromPixel (posScreen,
                               context().mainWindow().selectedGraphCurve(),
-                              modelFilterAfter)) {
+                              modelColorFilterAfter)) {
 
     // Trigger a state transition. The background restoration will be handled by the end method
     context().requestDelayedStateTransition(m_previousDigitizeState);
 
     // Create command to change segment filter
-    QUndoCommand *cmd = new CmdSettingsFilter (context ().mainWindow(),
-                                               context ().cmdMediator ().document (),
-                                               modelFilterBefore,
-                                               modelFilterAfter);
+    QUndoCommand *cmd = new CmdSettingsColorFilter (context ().mainWindow(),
+                                                    context ().cmdMediator ().document (),
+                                                    modelColorFilterBefore,
+                                                    modelColorFilterAfter);
     context().appendNewCmd(cmd);
   }
 }
 
-void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelFilter &modelFilterAfter,
+void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilter &modelColorFilterAfter,
                                                          const QString &curveName,
                                                          double lowerValue,
                                                          double upperValue)
 {
-  switch (modelFilterAfter.colorFilterMode (curveName)) {
+  switch (modelColorFilterAfter.colorFilterMode (curveName)) {
     case COLOR_FILTER_MODE_FOREGROUND:
-      modelFilterAfter.setForegroundLow(curveName,
-                                        lowerValue);
-      modelFilterAfter.setForegroundHigh(curveName,
-                                         upperValue);
+      modelColorFilterAfter.setForegroundLow(curveName,
+                                             lowerValue);
+      modelColorFilterAfter.setForegroundHigh(curveName,
+                                              upperValue);
       break;
 
     case COLOR_FILTER_MODE_HUE:
-      modelFilterAfter.setHueLow(curveName,
-                                 lowerValue);
-      modelFilterAfter.setHueHigh(curveName,
-                                  upperValue);
+      modelColorFilterAfter.setHueLow(curveName,
+                                      lowerValue);
+      modelColorFilterAfter.setHueHigh(curveName,
+                                       upperValue);
       break;
 
     case COLOR_FILTER_MODE_INTENSITY:
-      modelFilterAfter.setIntensityLow(curveName,
-                                       lowerValue);
-      modelFilterAfter.setIntensityHigh(curveName,
-                                        upperValue);
+      modelColorFilterAfter.setIntensityLow(curveName,
+                                            lowerValue);
+      modelColorFilterAfter.setIntensityHigh(curveName,
+                                             upperValue);
       break;
 
     case COLOR_FILTER_MODE_SATURATION:
-      modelFilterAfter.setSaturationLow(curveName,
-                                        lowerValue);
-      modelFilterAfter.setSaturationHigh(curveName,
-                                         upperValue);
+      modelColorFilterAfter.setSaturationLow(curveName,
+                                             lowerValue);
+      modelColorFilterAfter.setSaturationHigh(curveName,
+                                              upperValue);
       break;
 
     case COLOR_FILTER_MODE_VALUE:
-      modelFilterAfter.setValueLow(curveName,
-                                   lowerValue);
-      modelFilterAfter.setValueHigh(curveName,
-                                    upperValue);
+      modelColorFilterAfter.setValueLow(curveName,
+                                        lowerValue);
+      modelColorFilterAfter.setValueHigh(curveName,
+                                         upperValue);
       break;
 
     default:

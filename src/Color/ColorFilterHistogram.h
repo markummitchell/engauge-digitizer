@@ -1,24 +1,23 @@
-#ifndef FILTER_HISTOGRAM_H
-#define FILTER_HISTOGRAM_H
+#ifndef COLOR_FILTER_HISTOGRAM_H
+#define COLOR_FILTER_HISTOGRAM_H
 
-#include "DocumentModelFilter.h"
 #include <QRgb>
 
 const int HISTOGRAM_BINS = 100;
 
-class Filter;
+class ColorFilter;
 class QColor;
 class QImage;
 
 /// Class that generates a histogram according to the current filter.
-class FilterHistogram
+class ColorFilterHistogram
 {
 public:
   /// Single constructor
-  FilterHistogram();
+  ColorFilterHistogram();
 
   /// Compute histogram bin number from pixel according to filter
-  int binFromPixel (const Filter &filter,
+  int binFromPixel (const ColorFilter &filter,
                     ColorFilterMode colorFilterMode,
                     const QColor &pixel,
                     const QRgb &rgbBackground) const;
@@ -26,16 +25,16 @@ public:
   /// Generate the histogram. The resolution is coarse since
   /// -# finer resolution is not needed
   /// -# this smooths out the curve
-  void generate (const Filter &filter,
+  void generate (const ColorFilter &filter,
                  double histogramBins [],
                  ColorFilterMode colorFilterMode,
                  const QImage &image,
                  int &maxBinCount) const;
 
   /// Inverse of binFromPixel
-  int valueFromBin (const Filter &filter,
+  int valueFromBin (const ColorFilter &filter,
                     ColorFilterMode colorFilterMode,
                     int bin);
 };
 
-#endif // FILTER_HISTOGRAM_H
+#endif // COLOR_FILTER_HISTOGRAM_H

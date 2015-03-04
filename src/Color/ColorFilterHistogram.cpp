@@ -1,19 +1,19 @@
+#include "ColorFilter.h"
+#include "ColorFilterHistogram.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
-#include "FilterHistogram.h"
 #include <QImage>
 
 const int FIRST_NON_EMPTY_BIN_AT_START = 1;
 const int LAST_NON_EMPTY_BIN_AT_END = HISTOGRAM_BINS - 2;
 
-FilterHistogram::FilterHistogram()
+ColorFilterHistogram::ColorFilterHistogram()
 {
 }
 
-int FilterHistogram::binFromPixel (const Filter &filter,
-                                   ColorFilterMode colorFilterMode,
-                                   const QColor &pixel,
-                                   const QRgb &rgbBackground) const
+int ColorFilterHistogram::binFromPixel (const ColorFilter &filter,
+                                        ColorFilterMode colorFilterMode,
+                                        const QColor &pixel,
+                                        const QRgb &rgbBackground) const
 {
   // Instead of mapping from s=0 through 1 to bin=0 through HISTOGRAM_BINS-1, we
   // map it to bin=1 through HISTOGRAM_BINS-2 so first and last bin are zero. The
@@ -34,11 +34,11 @@ int FilterHistogram::binFromPixel (const Filter &filter,
   return bin;
 }
 
-void FilterHistogram::generate (const Filter &filter,
-                                double histogramBins [],
-                                ColorFilterMode colorFilterMode,
-                                const QImage &image,
-                                int &maxBinCount) const
+void ColorFilterHistogram::generate (const ColorFilter &filter,
+                                     double histogramBins [],
+                                     ColorFilterMode colorFilterMode,
+                                     const QImage &image,
+                                     int &maxBinCount) const
 {
   // Initialize histogram bins
   int bin;
@@ -72,9 +72,9 @@ void FilterHistogram::generate (const Filter &filter,
   }
 }
 
-int FilterHistogram::valueFromBin (const Filter &filter,
-                                   ColorFilterMode colorFilterMode,
-                                   int bin)
+int ColorFilterHistogram::valueFromBin (const ColorFilter &filter,
+                                        ColorFilterMode colorFilterMode,
+                                        int bin)
 {
   // Just do everything in binFromPixel backwards
   double s = (double) (bin - FIRST_NON_EMPTY_BIN_AT_START) / (double) (LAST_NON_EMPTY_BIN_AT_END - FIRST_NON_EMPTY_BIN_AT_START);

@@ -1,6 +1,6 @@
+#include "ColorFilter.h"
 #include "DocumentModelSegments.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
 #include "Logger.h"
 #include <QApplication>
 #include <QGraphicsScene>
@@ -132,7 +132,7 @@ void SegmentFactory::finishRun(bool *lastBool,
   }
 }
 
-void SegmentFactory::loadBool (const Filter &filter,
+void SegmentFactory::loadBool (const ColorFilter &filter,
                                bool *columnBool,
                                const QImage &image,
                                int x)
@@ -201,7 +201,7 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   Segment** currSegment = new Segment* [height];
   ENGAUGE_CHECK_PTR(currSegment);
 
-  Filter filter;
+  ColorFilter filter;
   loadBool(filter, lastBool, imageFiltered, -1);
   loadBool(filter, currBool, imageFiltered, 0);
   loadBool(filter, nextBool, imageFiltered, 1);

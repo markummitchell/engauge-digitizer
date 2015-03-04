@@ -396,6 +396,14 @@ DocumentModelAxesChecker Document::modelAxesChecker() const
   return m_modelAxesChecker;
 }
 
+DocumentModelColorFilter Document::modelColorFilter() const
+{
+  // Construct a curve-specific model
+  DocumentModelColorFilter modelColorFilter(*this);
+
+  return modelColorFilter;
+}
+
 DocumentModelCoords Document::modelCoords() const
 {
   return m_modelCoords;
@@ -412,14 +420,6 @@ CurveStyles Document::modelCurveStyles() const
 DocumentModelExport Document::modelExport() const
 {
   return m_modelExport;
-}
-
-DocumentModelFilter Document::modelFilter() const
-{
-  // Construct a curve-specific model
-  DocumentModelFilter modelFilter(*this);
-
-  return modelFilter;
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
@@ -547,6 +547,22 @@ void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChec
   m_modelAxesChecker = modelAxesChecker;
 }
 
+void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
+{
+  // Save the CurveFilter for each Curve
+  ColorFilterSettingsList::const_iterator itr;
+  for (itr = modelColorFilter.colorFilterSettingsList().constBegin ();
+       itr != modelColorFilter.colorFilterSettingsList().constEnd();
+       itr++) {
+
+    QString curveName = itr.key();
+    const ColorFilterSettings &colorFilterSettings = itr.value();
+
+    Curve *curve = curveForCurveName (curveName);
+    curve->setColorFilterSettings (colorFilterSettings);
+  }
+}
+
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 {
   m_modelCoords = modelCoords;
@@ -570,22 +586,6 @@ void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 void Document::setModelExport(const DocumentModelExport &modelExport)
 {
   m_modelExport = modelExport;
-}
-
-void Document::setModelFilter(const DocumentModelFilter &modelFilter)
-{
-  // Save the CurveFilter for each Curve
-  ColorFilterSettingsList::const_iterator itr;
-  for (itr = modelFilter.colorFilterSettingsList().constBegin ();
-       itr != modelFilter.colorFilterSettingsList().constEnd();
-       itr++) {
-
-    QString curveName = itr.key();
-    const ColorFilterSettings &colorFilterSettings = itr.value();
-
-    Curve *curve = curveForCurveName (curveName);
-    curve->setColorFilterSettings (colorFilterSettings);
-  }
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

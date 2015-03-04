@@ -16,14 +16,14 @@ class DlgSettingsCoords;
 class DlgSettingsCurveProperties;
 class DlgSettingsCurves;
 class DlgSettingsExport;
-class DlgSettingsFilter;
+class DlgSettingsColorFilter;
 class DlgSettingsGridRemoval;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
 class DocumentModelAxesChecker;
 class DocumentModelCoords;
 class DocumentModelExport;
-class DocumentModelFilter;
+class DocumentModelColorFilter;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
@@ -94,6 +94,9 @@ public:
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
 
+  /// Update with new color filter properties.
+  void updateSettingsColorFilter(const DocumentModelColorFilter &modelColorFilter);
+
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
@@ -105,9 +108,6 @@ public:
 
   /// Update with new export properties.
   void updateSettingsExport(const DocumentModelExport &modelExport);
-
-  /// Update with new filter properties.
-  void updateSettingsFilter(const DocumentModelFilter &modelFilter);
 
   /// Update with new grid removal properties.
   void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
@@ -163,11 +163,11 @@ private slots:
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
+  void slotSettingsColorFilter ();
   void slotSettingsCoords ();
   void slotSettingsCurveProperties ();
   void slotSettingsCurves ();
   void slotSettingsExport ();
-  void slotSettingsFilter ();
   void slotSettingsGridRemoval ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
@@ -319,11 +319,11 @@ private:
 
   QMenu *m_menuSettings;
   QAction *m_actionSettingsAxesChecker;
+  QAction *m_actionSettingsColorFilter;
   QAction *m_actionSettingsCoords;
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsCurves;
   QAction *m_actionSettingsExport;
-  QAction *m_actionSettingsFilter;
   QAction *m_actionSettingsGridRemoval;
   QAction *m_actionSettingsPointMatch;
   QAction *m_actionSettingsSegments;
@@ -364,11 +364,11 @@ private:
   TransformationStateContext *m_transformationStateContext;
 
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
+  DlgSettingsColorFilter *m_dlgSettingsColorFilter;
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsCurves *m_dlgSettingsCurves;
   DlgSettingsExport *m_dlgSettingsExport;
-  DlgSettingsFilter *m_dlgSettingsFilter;
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;

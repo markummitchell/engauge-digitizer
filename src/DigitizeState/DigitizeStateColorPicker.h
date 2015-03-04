@@ -4,7 +4,7 @@
 #include "BackgroundImage.h"
 #include "DigitizeStateAbstractBase.h"
 
-class DocumentModelFilter;
+class DocumentModelColorFilter;
 class QColor;
 class QImage;
 class QPointF;
@@ -32,12 +32,12 @@ private:
 
   bool computeFilterFromPixel (const QPointF &posScreen,
                                const QString &curveName,
-                               DocumentModelFilter &modelFilterAfter);
+                               DocumentModelColorFilter &modelColorFilterAfter);
   bool findNearestNonBackgroundPixel (const QImage &image,
                                       const QPointF &posScreenPlusHalf,
                                       const QRgb &rgbBackground,
                                       QColor &pixel);
-  void saveLowerValueUpperValue (DocumentModelFilter &modelFilterAfter,
+  void saveLowerValueUpperValue (DocumentModelColorFilter &modelColorFilterAfter,
                                  const QString &curveName,
                                  double lowerValue,
                                  double upperValue);

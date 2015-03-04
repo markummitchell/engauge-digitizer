@@ -9,6 +9,7 @@
 #include "CmdDelete.h"
 #include "CmdMediator.h"
 #include "CmdStackShadow.h"
+#include "ColorFilter.h"
 #include "Curve.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
@@ -21,11 +22,11 @@
 #include "DlgAbout.h"
 #include "DlgErrorReport.h"
 #include "DlgSettingsAxesChecker.h"
+#include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsCurves.h"
 #include "DlgSettingsExport.h"
-#include "DlgSettingsFilter.h"
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
@@ -33,7 +34,6 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "ExportToFile.h"
-#include "Filter.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -399,11 +399,11 @@ void MainWindow::createActionsSettings ()
                                             "Export settings affect how exported files are formatted"));
   connect (m_actionSettingsExport, SIGNAL (triggered ()), this, SLOT (slotSettingsExport ()));
 
-  m_actionSettingsFilter = new QAction (tr ("Filter"), this);
-  m_actionSettingsFilter->setStatusTip (tr ("Edit Filter settings."));
-  m_actionSettingsFilter->setWhatsThis (tr ("Filter Settings\n\n"
-                                            "Filtering simplifies the graphs for easier Point Matching and Segment Filling"));
-  connect (m_actionSettingsFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsFilter ()));
+  m_actionSettingsColorFilter = new QAction (tr ("Color Filter"), this);
+  m_actionSettingsColorFilter->setStatusTip (tr ("Edit Color Filter settings."));
+  m_actionSettingsColorFilter->setWhatsThis (tr ("Color Filter Settings\n\n"
+                                                 "Color filtering simplifies the graphs for easier Point Matching and Segment Filling"));
+  connect (m_actionSettingsColorFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsColorFilter ()));
 
   m_actionSettingsAxesChecker = new QAction (tr ("Axes Checker"), this);
   m_actionSettingsAxesChecker->setStatusTip (tr ("Edit Axes Checker settings."));
@@ -415,7 +415,7 @@ void MainWindow::createActionsSettings ()
   m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
   m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings\n\n"
                                                  "Grid removal simplifies the graphs for easier Point Matching and Segment Filling, when "
-                                                 "Filtering is not enough."));
+                                                 "Color Filtering is not enough."));
   connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
 
   m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
@@ -730,7 +730,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCurveProperties);
   m_menuSettings->addAction (m_actionSettingsCurves);
   m_menuSettings->addAction (m_actionSettingsExport);
-  m_menuSettings->addAction (m_actionSettingsFilter);
+  m_menuSettings->addAction (m_actionSettingsColorFilter);
   m_menuSettings->addAction (m_actionSettingsAxesChecker);
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
@@ -750,7 +750,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
   m_dlgSettingsCurves = new DlgSettingsCurves (*this);
   m_dlgSettingsExport = new DlgSettingsExport (*this);
-  m_dlgSettingsFilter = new DlgSettingsFilter (*this);
+  m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
   m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
@@ -760,7 +760,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCurveProperties->setVisible (false);
   m_dlgSettingsCurves->setVisible (false);
   m_dlgSettingsExport->setVisible (false);
-  m_dlgSettingsFilter->setVisible (false);
+  m_dlgSettingsColorFilter->setVisible (false);
   m_dlgSettingsAxesChecker->setVisible (false);
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
@@ -1909,6 +1909,14 @@ void MainWindow::slotSettingsAxesChecker ()
   m_dlgSettingsAxesChecker->show ();
 }
 
+void MainWindow::slotSettingsColorFilter ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsColorFilter";
+
+  m_dlgSettingsColorFilter->load (*m_cmdMediator);
+  m_dlgSettingsColorFilter->show ();
+}
+
 void MainWindow::slotSettingsCoords ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
@@ -1940,14 +1948,6 @@ void MainWindow::slotSettingsExport ()
 
   m_dlgSettingsExport->load (*m_cmdMediator);
   m_dlgSettingsExport->show ();
-}
-
-void MainWindow::slotSettingsFilter ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  m_dlgSettingsFilter->load (*m_cmdMediator);
-  m_dlgSettingsFilter->show ();
 }
 
 void MainWindow::slotSettingsGridRemoval ()
@@ -2481,7 +2481,7 @@ void MainWindow::updateControls ()
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurves->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsFilter->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsColorFilter->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
@@ -2517,7 +2517,7 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   m_scene->setSceneRect (m_imageUnfiltered->boundingRect ());
 
   // Filtered image
-  Filter filter;
+  ColorFilter filter;
   QImage imageUnfiltered (pixmap.toImage ());
   QImage imageFiltered (pixmap.width (),
                         pixmap.height (),
@@ -2525,9 +2525,9 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
   filter.filterImage (imageUnfiltered,
                       imageFiltered,
-                      cmdMediator().document().modelFilter().colorFilterMode(selectedGraphCurve ()),
-                      cmdMediator().document().modelFilter().low(selectedGraphCurve ()),
-                      cmdMediator().document().modelFilter().high(selectedGraphCurve ()),
+                      cmdMediator().document().modelColorFilter().colorFilterMode(selectedGraphCurve ()),
+                      cmdMediator().document().modelColorFilter().low(selectedGraphCurve ()),
+                      cmdMediator().document().modelColorFilter().high(selectedGraphCurve ()),
                       rgbBackground);
 
   m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
@@ -2572,6 +2572,16 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
                                                    m_transformation);
 }
 
+void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &modelColorFilter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
+
+  m_cmdMediator->document().setModelColorFilter(modelColorFilter);
+  updateImages (cmdMediator().document().pixmap());
+  updateViewedBackground ();
+  updateViewsOfSettings();
+}
+
 void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCoords";
@@ -2602,16 +2612,6 @@ void MainWindow::updateSettingsExport(const DocumentModelExport &modelExport)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExport";
 
   m_cmdMediator->document().setModelExport (modelExport);
-}
-
-void MainWindow::updateSettingsFilter(const DocumentModelFilter &modelFilter)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsFilter";
-
-  m_cmdMediator->document().setModelFilter(modelFilter);
-  updateImages (cmdMediator().document().pixmap());
-  updateViewedBackground ();
-  updateViewsOfSettings();
 }
 
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
@@ -2690,7 +2690,7 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
     PointStyle pointStyle = m_cmdMediator->document().modelCurveStyles().curveStyle(activeCurve).pointStyle();
     m_viewPointStyle->setPointStyle (pointStyle);
 
-    ColorFilterSettings colorFilterSettings = m_cmdMediator->document().modelFilter().colorFilterSettings(activeCurve);
+    ColorFilterSettings colorFilterSettings = m_cmdMediator->document().modelColorFilter().colorFilterSettings(activeCurve);
     m_viewSegmentFilter->setColorFilterSettings (colorFilterSettings,
                                                  m_cmdMediator->pixmap ());
 

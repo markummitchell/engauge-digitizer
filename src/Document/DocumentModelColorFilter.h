@@ -1,5 +1,5 @@
-#ifndef DOCUMENT_MODEL_FILTER_H
-#define DOCUMENT_MODEL_FILTER_H
+#ifndef DOCUMENT_MODEL_COLOR_FILTER_H
+#define DOCUMENT_MODEL_COLOR_FILTER_H
 
 #include "ColorFilterSettings.h"
 #include "DocumentModelAbstractBase.h"
@@ -10,21 +10,21 @@ typedef QHash<QString, ColorFilterSettings> ColorFilterSettingsList;
 
 class Document;
 
-/// Model for DlgSettingsFilter and CmdSettingsFilter.
-class DocumentModelFilter : public DocumentModelAbstractBase
+/// Model for DlgSettingsColorFilter and CmdSettingsColorFilter.
+class DocumentModelColorFilter : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DocumentModelFilter();
+  DocumentModelColorFilter();
 
   /// Initial constructor from Document.
-  DocumentModelFilter(const Document &document);
+  DocumentModelColorFilter(const Document &document);
 
   /// Copy constructor.
-  DocumentModelFilter(const DocumentModelFilter &other);
+  DocumentModelColorFilter(const DocumentModelColorFilter &other);
 
   /// Assignment constructor.
-  DocumentModelFilter &operator=(const DocumentModelFilter &other);
+  DocumentModelColorFilter &operator=(const DocumentModelColorFilter &other);
 
   /// Get method for filter mode.
   ColorFilterMode colorFilterMode(const QString &curveName) const;
@@ -134,4 +134,4 @@ private:
   ColorFilterSettingsList m_colorFilterSettingsList;
 };
 
-#endif // DOCUMENT_MODEL_FILTER_H
+#endif // DOCUMENT_MODEL_COLOR_FILTER_H

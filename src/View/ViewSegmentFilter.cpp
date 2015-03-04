@@ -1,7 +1,7 @@
 #include "ColorConstants.h"
+#include "ColorFilter.h"
 #include "ColorFilterSettings.h"
 #include "EngaugeAssert.h"
-#include "Filter.h"
 #include <QPainter>
 #include <QPixmap>
 #include "ViewSegmentFilter.h"
@@ -161,7 +161,7 @@ void ViewSegmentFilter::setColorFilterSettings (const ColorFilterSettings &color
   m_filterIsDefined = true;
 
   // Compute background color
-  Filter filter;
+  ColorFilter filter;
   QImage img = pixmap.toImage();
   m_rgbBackground = filter.marginColor(&img);
 

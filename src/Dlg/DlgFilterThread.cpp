@@ -1,12 +1,12 @@
 #include "DlgFilterThread.h"
-#include "DlgSettingsFilter.h"
+#include "DlgSettingsColorFilter.h"
 
 DlgFilterThread::DlgFilterThread(const QPixmap &pixmapOriginal,
                                  QRgb rgbBackground,
-                                 DlgSettingsFilter &dlgSettingsFilter) :
+                                 DlgSettingsColorFilter &dlgSettingsColorFilter) :
   m_pixmapOriginal (pixmapOriginal),
   m_rgbBackground (rgbBackground),
-  m_dlgSettingsFilter (dlgSettingsFilter),
+  m_dlgSettingsColorFilter (dlgSettingsColorFilter),
   m_dlgFilterWorker (0)
 {
 }
@@ -20,12 +20,12 @@ void DlgFilterThread::run ()
                                              m_rgbBackground);
 
     // Connect signal to start process
-    connect (&m_dlgSettingsFilter, SIGNAL (signalApplyFilter (FilterMode, double, double)),
+    connect (&m_dlgSettingsColorFilter, SIGNAL (signalApplyFilter (FilterMode, double, double)),
              m_dlgFilterWorker, SLOT (slotNewParameters (FilterMode, double, double)));
 
     // Connect signal to return each piece of completed processing
     connect (m_dlgFilterWorker, SIGNAL (signalTransferPiece (int, QImage)),
-             &m_dlgSettingsFilter, SLOT (slotTransferPiece (int, QImage)));
+             &m_dlgSettingsColorFilter, SLOT (slotTransferPiece (int, QImage)));
   }
 
   exec ();

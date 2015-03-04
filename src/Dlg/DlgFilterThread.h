@@ -6,7 +6,7 @@
 #include <QPixmap>
 #include <QThread>
 
-class DlgSettingsFilter;
+class DlgSettingsColorFilter;
 
 /// Class for processing new filter settings. This is based on http://blog.debao.me/2013/08/how-to-use-qthread-in-the-right-way-part-1/
 class DlgFilterThread : public QThread
@@ -17,7 +17,7 @@ public:
   /// Single constructor.
   DlgFilterThread(const QPixmap &pixmapOriginal,
                   QRgb rgbBackground,
-                  DlgSettingsFilter &dlgSettingsFilter);
+                  DlgSettingsColorFilter &dlgSettingsColorFilter);
 
   /// Run this thread.
   virtual void run();
@@ -33,7 +33,7 @@ private:
   QPixmap m_pixmapOriginal;
   QRgb m_rgbBackground;
 
-  DlgSettingsFilter &m_dlgSettingsFilter;
+  DlgSettingsColorFilter &m_dlgSettingsColorFilter;
 
   // Worker must be created in the run method of this thread so it belongs to this thread rather than the GUI thread that called it
   DlgFilterWorker *m_dlgFilterWorker;
