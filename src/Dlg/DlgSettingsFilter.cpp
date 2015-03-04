@@ -1,6 +1,6 @@
 #include "CmdMediator.h"
 #include "CmdSettingsFilter.h"
-#include "CurveConstants.h"
+#include "ColorConstants.h"
 #include "DlgFilterThread.h"
 #include "DlgSettingsFilter.h"
 #include "EngaugeAssert.h"

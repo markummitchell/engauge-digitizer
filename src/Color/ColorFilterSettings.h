@@ -1,42 +1,42 @@
-#ifndef CURVE_FILTER_H
-#define CURVE_FILTER_H
+#ifndef COLOR_FILTER_SETTINGS_H
+#define COLOR_FILTER_SETTINGS_H
 
 #include "FilterMode.h"
 
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
-/// Filter parameters for one curve. For a class, this is handled the same as LineStyle and PointStyle
-class CurveFilter
+/// Color filter parameters for one curve. For a class, this is handled the same as LineStyle and PointStyle
+class ColorFilterSettings
 {
 public:
   /// Default constructor only for use when this class is being stored by a container that requires the default constructor.
-  CurveFilter ();
+  ColorFilterSettings ();
 
   /// Normal constructor. The style type and radius are determined by the currently selected Curve
-  CurveFilter (FilterMode m_filterMode,
-               int m_intensityLow,
-               int m_intensityHigh,
-               int m_foregroundLow,
-               int m_foregroundHigh,
-               int m_hueLow,
-               int m_hueHigh,
-               int m_saturationLow,
-               int m_saturationHigh,
-               int m_valueLow,
-               int m_valueHigh);
+  ColorFilterSettings (FilterMode m_filterMode,
+                       int m_intensityLow,
+                       int m_intensityHigh,
+                       int m_foregroundLow,
+                       int m_foregroundHigh,
+                       int m_hueLow,
+                       int m_hueHigh,
+                       int m_saturationLow,
+                       int m_saturationHigh,
+                       int m_valueLow,
+                       int m_valueHigh);
 
   /// Copy constructor.
-  CurveFilter (const CurveFilter &other);
-
+  ColorFilterSettings (const ColorFilterSettings &other);
+  
   /// Constructor when loading from serialized xml
-  CurveFilter(QXmlStreamReader &reader);
+  ColorFilterSettings (QXmlStreamReader &reader);
 
   /// Assignment operator.
-  CurveFilter &operator= (const CurveFilter &other);
+  ColorFilterSettings &operator= (const ColorFilterSettings &other);
 
   /// Initial default for any Curve.
-  static CurveFilter defaultFilter ();
+  static ColorFilterSettings defaultFilter ();
 
   /// Get method for filter mode.
   FilterMode filterMode() const;
@@ -139,4 +139,4 @@ private:
   int m_valueHigh;
 };
 
-#endif // CURVE_FILTER_H
+#endif // COLOR_FILTER_SETTINGS_H

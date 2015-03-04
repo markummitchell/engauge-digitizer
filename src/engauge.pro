@@ -39,6 +39,8 @@ HEADERS  += \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
+    Color/ColorConstants.h \
+    Color/ColorFilterSettings.h \
     include/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
@@ -46,8 +48,6 @@ HEADERS  += \
     Correlation/Correlation.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
-    Curve/CurveConstants.h \
-    Curve/CurveFilter.h \
     Curve/CurveNameList.h \
     Curve/CurveNameListEntry.h \
     Curve/CurveSettingsInt.h \
@@ -188,6 +188,7 @@ SOURCES += \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
+    Color/ColorFilterSettings.cpp \
     include/ColorPalette.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
@@ -195,7 +196,6 @@ SOURCES += \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurveConnectAs.cpp \
-    Curve/CurveFilter.cpp \
     Curve/CurveNameList.cpp \
     Curve/CurveNameListEntry.cpp \
     Curve/CurveSettingsInt.cpp \
@@ -306,6 +306,7 @@ LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \
                Checker \
                Cmd \
+               Color \
                Coord \
                Correlation \
                Curve \

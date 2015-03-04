@@ -1,5 +1,5 @@
-#include "CurveConstants.h"
-#include "CurveFilter.h"
+#include "ColorConstants.h"
+#include "ColorFilterSettings.h"
 #include "EngaugeAssert.h"
 #include "Filter.h"
 #include <QPainter>
@@ -110,22 +110,22 @@ QColor ViewSegmentFilter::colorFromSetting (FilterMode filterMode,
 
 QColor ViewSegmentFilter::colorHigh () const
 {
-  return colorFromSetting (m_curveFilter.filterMode (),
-                           m_curveFilter.foregroundHigh (),
-                           m_curveFilter.hueHigh (),
-                           m_curveFilter.intensityHigh(),
-                           m_curveFilter.saturationHigh(),
-                           m_curveFilter.valueHigh());
+  return colorFromSetting (m_colorFilterSettings.filterMode (),
+                           m_colorFilterSettings.foregroundHigh (),
+                           m_colorFilterSettings.hueHigh (),
+                           m_colorFilterSettings.intensityHigh(),
+                           m_colorFilterSettings.saturationHigh(),
+                           m_colorFilterSettings.valueHigh());
 }
 
 QColor ViewSegmentFilter::colorLow () const
 {
-  return colorFromSetting (m_curveFilter.filterMode (),
-                           m_curveFilter.foregroundLow (),
-                           m_curveFilter.hueLow (),
-                           m_curveFilter.intensityLow(),
-                           m_curveFilter.saturationLow(),
-                           m_curveFilter.valueLow());
+  return colorFromSetting (m_colorFilterSettings.filterMode (),
+                           m_colorFilterSettings.foregroundLow (),
+                           m_colorFilterSettings.hueLow (),
+                           m_colorFilterSettings.intensityLow(),
+                           m_colorFilterSettings.saturationLow(),
+                           m_colorFilterSettings.valueLow());
 }
 
 void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
@@ -154,10 +154,10 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
   }
 }
 
-void ViewSegmentFilter::setCurveFilter (const CurveFilter &curveFilter,
-                                        const QPixmap &pixmap)
+void ViewSegmentFilter::setColorFilterSettings (const ColorFilterSettings &colorFilterSettings,
+                                                const QPixmap &pixmap)
 {
-  m_curveFilter = curveFilter;
+  m_colorFilterSettings = colorFilterSettings;
   m_filterIsDefined = true;
 
   // Compute background color
@@ -169,7 +169,7 @@ void ViewSegmentFilter::setCurveFilter (const CurveFilter &curveFilter,
   update();
 }
 
-void ViewSegmentFilter::unsetCurveFilter ()
+void ViewSegmentFilter::unsetColorFilterSettings ()
 {
   m_filterIsDefined = false;
 

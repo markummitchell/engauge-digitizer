@@ -1,8 +1,8 @@
 #ifndef CURVE_SETTINGS_INT_H
 #define CURVE_SETTINGS_INT_H
 
+#include "ColorFilterSettings.h"
 #include "CurveConnectAs.h"
-#include "CurveFilter.h"
 #include "LineStyle.h"
 #include "PointStyle.h"
 
@@ -12,7 +12,7 @@ class CurveSettingsInt
 {
  public:
   /// Single constructor.
-  CurveSettingsInt(const CurveFilter &curveFilter,
+  CurveSettingsInt(const ColorFilterSettings &colorFilterSettings,
                    const PointStyle &pointStyle,
                    const LineStyle &lineStyle,
                    CurveConnectAs curveConnectAs);
@@ -20,8 +20,8 @@ class CurveSettingsInt
   /// Get method for connection method.
   CurveConnectAs curveConnectAs () const;
 
-  /// Get method for curve filter.
-  CurveFilter curveFilter () const;
+  /// Get method for color filter.
+  ColorFilterSettings colorFilterSettings () const;
 
   /// Get method for line style.
   LineStyle lineStyle () const;
@@ -32,7 +32,7 @@ class CurveSettingsInt
  private:
   CurveSettingsInt();
 
-  CurveFilter m_curveFilter;
+  ColorFilterSettings m_colorFilterSettings;
   PointStyle m_pointStyle;
   LineStyle m_lineStyle;
   CurveConnectAs m_curveConnectAs;

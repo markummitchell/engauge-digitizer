@@ -33,6 +33,7 @@ HEADERS  += \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
+    Color/ColorConstants.h \
     include/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \

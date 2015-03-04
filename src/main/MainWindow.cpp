@@ -2682,7 +2682,7 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
   if (activeCurve.isEmpty ()) {
 
     m_viewPointStyle->unsetPointStyle ();
-    m_viewSegmentFilter->unsetCurveFilter ();
+    m_viewSegmentFilter->unsetColorFilterSettings ();
 
 
   } else {
@@ -2690,9 +2690,9 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
     PointStyle pointStyle = m_cmdMediator->document().modelCurveStyles().curveStyle(activeCurve).pointStyle();
     m_viewPointStyle->setPointStyle (pointStyle);
 
-    CurveFilter curveFilter = m_cmdMediator->document().modelFilter().curveFilter(activeCurve);
-    m_viewSegmentFilter->setCurveFilter (curveFilter,
-                                         m_cmdMediator->pixmap ());
+    ColorFilterSettings colorFilterSettings = m_cmdMediator->document().modelFilter().colorFilterSettings(activeCurve);
+    m_viewSegmentFilter->setColorFilterSettings (colorFilterSettings,
+                                                 m_cmdMediator->pixmap ());
 
   }
 }

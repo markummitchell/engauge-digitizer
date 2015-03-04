@@ -25,7 +25,7 @@
 Document::Document (const QImage &image) :
   m_name ("untitled"),
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
-                          CurveFilter::defaultFilter (),
+                          ColorFilterSettings::defaultFilter (),
                           CurveStyle (LineStyle::defaultAxesCurve(),
                                       PointStyle::defaultAxesCurve ())))
 {
@@ -34,7 +34,7 @@ Document::Document (const QImage &image) :
   m_pixmap.convertFromImage (image);
 
   m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
-                                            CurveFilter::defaultFilter (),
+                                            ColorFilterSettings::defaultFilter (),
                                             CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
                                                         PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
 }
@@ -138,7 +138,7 @@ Document::Document (const QString &fileName) :
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
   m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
-                                             CurveFilter::defaultFilter (),
+                                             ColorFilterSettings::defaultFilter (),
                                              CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                                          PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
 }
@@ -575,16 +575,16 @@ void Document::setModelExport(const DocumentModelExport &modelExport)
 void Document::setModelFilter(const DocumentModelFilter &modelFilter)
 {
   // Save the CurveFilter for each Curve
-  CurveFilters::const_iterator itr;
-  for (itr = modelFilter.curveFilters().constBegin ();
-       itr != modelFilter.curveFilters().constEnd();
+  ColorFilterSettingsList::const_iterator itr;
+  for (itr = modelFilter.colorFilterSettingsList().constBegin ();
+       itr != modelFilter.colorFilterSettingsList().constEnd();
        itr++) {
 
     QString curveName = itr.key();
-    const CurveFilter &curveFilter = itr.value();
+    const ColorFilterSettings &colorFilterSettings = itr.value();
 
     Curve *curve = curveForCurveName (curveName);
-    curve->setCurveFilter (curveFilter);
+    curve->setColorFilterSettings (colorFilterSettings);
   }
 }
 

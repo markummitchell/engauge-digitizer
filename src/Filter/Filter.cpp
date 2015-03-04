@@ -1,4 +1,4 @@
-#include "CurveConstants.h"
+#include "ColorConstants.h"
 #include "EngaugeAssert.h"
 #include "Filter.h"
 #include "mmsubs.h"

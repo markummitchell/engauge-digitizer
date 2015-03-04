@@ -1,12 +1,12 @@
 #ifndef DOCUMENT_MODEL_FILTER_H
 #define DOCUMENT_MODEL_FILTER_H
 
-#include "CurveFilter.h"
+#include "ColorFilterSettings.h"
 #include "DocumentModelAbstractBase.h"
 #include <QHash>
 
 // Lookup-table by curve name
-typedef QHash<QString, CurveFilter> CurveFilters;
+typedef QHash<QString, ColorFilterSettings> ColorFilterSettingsList;
 
 class Document;
 
@@ -26,11 +26,11 @@ public:
   /// Assignment constructor.
   DocumentModelFilter &operator=(const DocumentModelFilter &other);
 
-  /// Get method for copying one curve filter. Cannot return just a reference or else there is a warning about returning reference to temporary
-  const CurveFilter curveFilter (const QString &curveName) const;
+  /// Get method for copying one color filter. Cannot return just a reference or else there is a warning about returning reference to temporary
+  const ColorFilterSettings colorFilterSettings (const QString &curveName) const;
 
-  /// Get method for copying all curve filters in one step.
-  const CurveFilters &curveFilters () const;
+  /// Get method for copying all color filters in one step.
+  const ColorFilterSettingsList &colorFilterSettingsList () const;
 
   /// Get method for filter mode.
   FilterMode filterMode(const QString &curveName) const;
@@ -131,7 +131,7 @@ public:
 
 private:
 
-  CurveFilters m_curveFilters;
+  ColorFilterSettingsList m_colorFilterSettingsList;
 };
 
 #endif // DOCUMENT_MODEL_FILTER_H

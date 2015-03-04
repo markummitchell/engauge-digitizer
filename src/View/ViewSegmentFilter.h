@@ -1,7 +1,7 @@
 #ifndef VIEW_SEGMENT_FILTER_H
 #define VIEW_SEGMENT_FILTER_H
 
-#include "CurveFilter.h"
+#include "ColorFilterSettings.h"
 #include <QColor>
 #include <QLabel>
 
@@ -19,12 +19,12 @@ public:
   /// Paint with a horizontal linear gradient.
   virtual void paintEvent(QPaintEvent *event);
 
-  /// Apply the CurveStyle of the currently selected curve. The pixmap is included so the background color can be computed.
-  void setCurveFilter (const CurveFilter &curveFilter,
-                       const QPixmap &pixmap);
+  /// Apply the color filter of the currently selected curve. The pixmap is included so the background color can be computed.
+  void setColorFilterSettings (const ColorFilterSettings &colorFilterSettings,
+                               const QPixmap &pixmap);
 
-  /// Apply no CurveStyle
-  void unsetCurveFilter ();
+  /// Apply no color filter
+  void unsetColorFilterSettings ();
 
 private:
 
@@ -37,7 +37,7 @@ private:
   QColor colorHigh () const;
   QColor colorLow () const;
 
-  CurveFilter m_curveFilter;
+  ColorFilterSettings m_colorFilterSettings;
   bool m_filterIsDefined;
   QColor m_rgbBackground;
 };

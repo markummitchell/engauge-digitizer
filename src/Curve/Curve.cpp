@@ -15,10 +15,10 @@ const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
 
 Curve::Curve(const QString &curveName,
-             const CurveFilter &curveFilter,
+             const ColorFilterSettings &colorFilterSettings,
              const CurveStyle &curveStyle) :
   m_curveName (curveName),
-  m_curveFilter (curveFilter),
+  m_colorFilterSettings (colorFilterSettings),
   m_curveStyle (curveStyle)
 {
 }
@@ -26,7 +26,7 @@ Curve::Curve(const QString &curveName,
 Curve::Curve (const Curve &curve) :
   m_curveName (curve.curveName ()),
   m_points (curve.points ()),
-  m_curveFilter (curve.curveFilter ()),
+  m_colorFilterSettings (curve.colorFilterSettings ()),
   m_curveStyle (curve.curveStyle ())
 {
 }
@@ -40,7 +40,7 @@ Curve &Curve::operator=(const Curve &curve)
 {
   m_curveName = curve.curveName ();
   m_points = curve.points ();
-  m_curveFilter = curve.curveFilter ();
+  m_colorFilterSettings = curve.colorFilterSettings ();
   m_curveStyle = curve.curveStyle ();
 
   return *this;
@@ -68,9 +68,9 @@ void Curve::applyTransformation (const Transformation &transformation)
   }
 }
 
-CurveFilter Curve::curveFilter () const
+ColorFilterSettings Curve::colorFilterSettings () const
 {
-  return m_curveFilter;
+  return m_colorFilterSettings;
 }
 
 QString Curve::curveName () const
@@ -132,7 +132,7 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
       // Check if this curve already exists from a previously exported point
       if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
         Curve curve(m_curveName,
-                    CurveFilter::defaultFilter (),
+                    ColorFilterSettings::defaultFilter (),
                     curveStyleDefault);
         curvesGraphs.addGraphCurveAtEnd(curve);
       }
@@ -229,7 +229,7 @@ void Curve::loadXml(QXmlStreamReader &reader)
       if (tokenType == QXmlStreamReader::StartElement) {
 
         if (reader.name() == DOCUMENT_SERIALIZE_CURVE_FILTER) {
-          m_curveFilter.loadXml(reader);
+          m_colorFilterSettings.loadXml(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_POINTS) {
           loadCurvePoints(reader);
         } else if (reader.name() == DOCUMENT_SERIALIZE_CURVE_STYLE) {
@@ -341,7 +341,7 @@ void Curve::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
-  m_curveFilter.saveXml (writer);
+  m_colorFilterSettings.saveXml (writer);
   m_curveStyle.saveXml (writer,
                         m_curveName);
 
@@ -357,9 +357,9 @@ void Curve::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void Curve::setCurveFilter (const CurveFilter &curveFilter)
+void Curve::setColorFilterSettings (const ColorFilterSettings &colorFilterSettings)
 {
-  m_curveFilter = curveFilter;
+  m_colorFilterSettings = colorFilterSettings;
 }
 
 void Curve::setCurveName (const QString &curveName)

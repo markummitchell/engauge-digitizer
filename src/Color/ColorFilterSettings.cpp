@@ -1,13 +1,13 @@
 #include "CmdMediator.h"
-#include "CurveConstants.h"
-#include "CurveFilter.h"
+#include "ColorConstants.h"
+#include "ColorFilterSettings.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
-CurveFilter::CurveFilter() :
+ColorFilterSettings::ColorFilterSettings() :
   m_filterMode (FILTER_MODE_INTENSITY),
   m_intensityLow (INTENSITY_LOW_DEFAULT),
   m_intensityHigh (INTENSITY_HIGH_DEFAULT),
@@ -22,17 +22,17 @@ CurveFilter::CurveFilter() :
 {
 }
 
-CurveFilter::CurveFilter(FilterMode filterMode,
-                         int intensityLow,
-                         int intensityHigh,
-                         int foregroundLow,
-                         int foregroundHigh,
-                         int hueLow,
-                         int hueHigh,
-                         int saturationLow,
-                         int saturationHigh,
-                         int valueLow,
-                         int valueHigh) :
+ColorFilterSettings::ColorFilterSettings(FilterMode filterMode,
+                                         int intensityLow,
+                                         int intensityHigh,
+                                         int foregroundLow,
+                                         int foregroundHigh,
+                                         int hueLow,
+                                         int hueHigh,
+                                         int saturationLow,
+                                         int saturationHigh,
+                                         int valueLow,
+                                         int valueHigh) :
   m_filterMode (filterMode),
   m_intensityLow (intensityLow),
   m_intensityHigh (intensityHigh),
@@ -47,7 +47,7 @@ CurveFilter::CurveFilter(FilterMode filterMode,
 {
 }
 
-CurveFilter::CurveFilter(const CurveFilter &other) :
+ColorFilterSettings::ColorFilterSettings(const ColorFilterSettings &other) :
   m_filterMode (other.filterMode()),
   m_intensityLow (other.intensityLow()),
   m_intensityHigh (other.intensityHigh()),
@@ -62,12 +62,12 @@ CurveFilter::CurveFilter(const CurveFilter &other) :
 {
 }
 
-CurveFilter::CurveFilter(QXmlStreamReader &reader)
+ColorFilterSettings::ColorFilterSettings(QXmlStreamReader &reader)
 {
   loadXml(reader);
 }
 
-CurveFilter &CurveFilter::operator=(const CurveFilter &other)
+ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &other)
 {
   m_filterMode = other.filterMode();
   m_intensityLow = other.intensityLow();
@@ -84,27 +84,27 @@ CurveFilter &CurveFilter::operator=(const CurveFilter &other)
   return *this;
 }
 
-CurveFilter CurveFilter::defaultFilter ()
+ColorFilterSettings ColorFilterSettings::defaultFilter ()
 {
-  return CurveFilter ();
+  return ColorFilterSettings ();
 }
 
-FilterMode CurveFilter::filterMode() const
+FilterMode ColorFilterSettings::filterMode() const
 {
   return m_filterMode;
 }
 
-int CurveFilter::foregroundHigh () const
+int ColorFilterSettings::foregroundHigh () const
 {
   return m_foregroundHigh;
 }
 
-int CurveFilter::foregroundLow () const
+int ColorFilterSettings::foregroundLow () const
 {
   return m_foregroundLow;
 }
 
-double CurveFilter::high () const
+double ColorFilterSettings::high () const
 {
   switch (m_filterMode)
   {
@@ -133,29 +133,29 @@ double CurveFilter::high () const
   }
 }
 
-int CurveFilter::hueHigh () const
+int ColorFilterSettings::hueHigh () const
 {
   return m_hueHigh;
 }
 
-int CurveFilter::hueLow () const
+int ColorFilterSettings::hueLow () const
 {
   return m_hueLow;
 }
 
-int CurveFilter::intensityHigh () const
+int ColorFilterSettings::intensityHigh () const
 {
   return m_intensityHigh;
 }
 
-int CurveFilter::intensityLow () const
+int ColorFilterSettings::intensityLow () const
 {
   return m_intensityLow;
 }
 
-void CurveFilter::loadXml(QXmlStreamReader &reader)
+void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::loadXml";
+  LOG4CPP_INFO_S ((*mainCat)) << "ColorFilterSettings::loadXml";
 
   bool success = true;
 
@@ -202,7 +202,7 @@ void CurveFilter::loadXml(QXmlStreamReader &reader)
   }
 }
 
-double CurveFilter::low () const
+double ColorFilterSettings::low () const
 {
   switch (m_filterMode)
   {
@@ -231,19 +231,19 @@ double CurveFilter::low () const
   }
 }
 
-int CurveFilter::saturationHigh () const
+int ColorFilterSettings::saturationHigh () const
 {
   return m_saturationHigh;
 }
 
-int CurveFilter::saturationLow () const
+int ColorFilterSettings::saturationLow () const
 {
   return m_saturationLow;
 }
 
-void CurveFilter::saveXml(QXmlStreamWriter &writer) const
+void ColorFilterSettings::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveFilter::saveXml";
+  LOG4CPP_INFO_S ((*mainCat)) << "ColorFilterSettings::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE_FILTER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_FILTER_MODE, QString::number (m_filterMode));
@@ -261,24 +261,24 @@ void CurveFilter::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void CurveFilter::setFilterMode(FilterMode filterMode)
+void ColorFilterSettings::setFilterMode(FilterMode filterMode)
 {
   m_filterMode = filterMode;
 }
 
-void CurveFilter::setForegroundHigh (int foregroundHigh)
+void ColorFilterSettings::setForegroundHigh (int foregroundHigh)
 {
   ENGAUGE_ASSERT (FOREGROUND_MIN <= foregroundHigh && foregroundHigh <= FOREGROUND_MAX);
   m_foregroundHigh = foregroundHigh;
 }
 
-void CurveFilter::setForegroundLow (int foregroundLow)
+void ColorFilterSettings::setForegroundLow (int foregroundLow)
 {
   ENGAUGE_ASSERT (FOREGROUND_MIN <= foregroundLow && foregroundLow <= FOREGROUND_MAX);
   m_foregroundLow = foregroundLow;
 }
 
-void CurveFilter::setHigh (double s0To1)
+void ColorFilterSettings::setHigh (double s0To1)
 {
   switch (m_filterMode) {
     case FILTER_MODE_FOREGROUND:
@@ -306,31 +306,31 @@ void CurveFilter::setHigh (double s0To1)
   }
 }
 
-void CurveFilter::setHueHigh (int hueHigh)
+void ColorFilterSettings::setHueHigh (int hueHigh)
 {
   ENGAUGE_ASSERT (HUE_MIN <= hueHigh && hueHigh <= HUE_MAX);
   m_hueHigh = hueHigh;
 }
 
-void CurveFilter::setHueLow (int hueLow)
+void ColorFilterSettings::setHueLow (int hueLow)
 {
   ENGAUGE_ASSERT (HUE_MIN <= hueLow && hueLow <= HUE_MAX);
   m_hueLow = hueLow;
 }
 
-void CurveFilter::setIntensityHigh (int intensityHigh)
+void ColorFilterSettings::setIntensityHigh (int intensityHigh)
 {
   ENGAUGE_ASSERT (INTENSITY_MIN <= intensityHigh && intensityHigh <= INTENSITY_MAX);
   m_intensityHigh = intensityHigh;
 }
 
-void CurveFilter::setIntensityLow (int intensityLow)
+void ColorFilterSettings::setIntensityLow (int intensityLow)
 {
   ENGAUGE_ASSERT (INTENSITY_MIN <= intensityLow && intensityLow <= INTENSITY_MAX);
   m_intensityLow = intensityLow;
 }
 
-void CurveFilter::setLow (double s0To1)
+void ColorFilterSettings::setLow (double s0To1)
 {
   switch (m_filterMode) {
     case FILTER_MODE_FOREGROUND:
@@ -358,36 +358,36 @@ void CurveFilter::setLow (double s0To1)
   }
 }
 
-void CurveFilter::setSaturationHigh (int saturationHigh)
+void ColorFilterSettings::setSaturationHigh (int saturationHigh)
 {
   ENGAUGE_ASSERT (SATURATION_MIN <= saturationHigh && saturationHigh <= SATURATION_MAX);
   m_saturationHigh = saturationHigh;
 }
 
-void CurveFilter::setSaturationLow (int saturationLow)
+void ColorFilterSettings::setSaturationLow (int saturationLow)
 {
   ENGAUGE_ASSERT (SATURATION_MIN <= saturationLow && saturationLow <= SATURATION_MAX);
   m_saturationLow = saturationLow;
 }
 
-void CurveFilter::setValueHigh (int valueHigh)
+void ColorFilterSettings::setValueHigh (int valueHigh)
 {
   ENGAUGE_ASSERT (VALUE_MIN <= valueHigh && valueHigh <= VALUE_MAX);
   m_valueHigh = valueHigh;
 }
 
-void CurveFilter::setValueLow (int valueLow)
+void ColorFilterSettings::setValueLow (int valueLow)
 {
   ENGAUGE_ASSERT (VALUE_MIN <= valueLow && valueLow <= VALUE_MAX);
   m_valueLow = valueLow;
 }
 
-int CurveFilter::valueHigh () const
+int ColorFilterSettings::valueHigh () const
 {
   return m_valueHigh;
 }
 
-int CurveFilter::valueLow () const
+int ColorFilterSettings::valueLow () const
 {
   return m_valueLow;
 }

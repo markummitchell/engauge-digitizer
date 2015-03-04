@@ -2,7 +2,7 @@
 #define CURVE_H
 
 #include "CallbackSearchReturn.h"
-#include "CurveFilter.h"
+#include "ColorFilterSettings.h"
 #include "CurveStyle.h"
 #include "functor.h"
 #include "Point.h"
@@ -27,7 +27,7 @@ class Curve
 public:
   /// Constructor from scratch.
   Curve(const QString &curveName,
-        const CurveFilter &curveFilter,
+        const ColorFilterSettings &colorFilterSettings,
         const CurveStyle &curveStyle);
 
   /// Constructor for use when loading from serialized xml
@@ -45,8 +45,8 @@ public:
   /// Apply transformation that is stored and updated externally.
   void applyTransformation (const Transformation &transformation);
 
-  /// Return the curve filter.
-  CurveFilter curveFilter () const;
+  /// Return the color filter.
+  ColorFilterSettings colorFilterSettings () const;
 
   /// Name of this Curve.
   QString curveName () const;
@@ -90,8 +90,8 @@ public:
   /// Serialize curve
   void saveXml(QXmlStreamWriter &writer) const;
 
-  /// Set curve filter.
-  void setCurveFilter (const CurveFilter &curveFilter);
+  /// Set color filter.
+  void setColorFilterSettings (const ColorFilterSettings &colorFilterSettings);
 
   /// Change the curve name
   void setCurveName (const QString &curveName);
@@ -109,7 +109,7 @@ private:
   QString m_curveName;
   Points m_points;
 
-  CurveFilter m_curveFilter;
+  ColorFilterSettings m_colorFilterSettings;
   CurveStyle m_curveStyle;
 };
 
