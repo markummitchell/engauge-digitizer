@@ -1,4 +1,4 @@
-set term png
+set term png size 1000,800
 
 unset polar
 set grid noxtics
@@ -69,11 +69,11 @@ unset logscale y
 unset mxtics
 unset mytics
 
-set output "../gnuplot_r_theta_points_nogrid.png"
+set output "../gnuplot_theta_r_points_nogrid.png"
 plot t*sin(t/3) with points, t*sin(t/4) with points, t*sin(t/5) with points
-set output "../gnuplot_r_theta_lines_nogrid.png"
+set output "../gnuplot_theta_r_lines_nogrid.png"
 plot t*sin(t/3) with lines, t*sin(t/4) with lines, t*sin(t/5) with lines
-set output "../gnuplot_r_theta_linespoints_nogrid.png"
+set output "../gnuplot_theta_r_linespoints_nogrid.png"
 plot t*sin(t/3) with linespoints, t*sin(t/4) with linespoints, t*sin(t/5) with linespoints
 
 set polar
@@ -85,9 +85,24 @@ unset logscale y
 unset mxtics
 unset mytics
 
-set output "../gnuplot_r_theta_points_grid.png"
+set output "../gnuplot_theta_r_points_grid.png"
 plot t*sin(t/3) with points, t*sin(t/4) with points, t*sin(t/5) with points
-set output "../gnuplot_r_theta_lines_grid.png"
+set output "../gnuplot_theta_r_lines_grid.png"
 plot t*sin(t/3) with lines, t*sin(t/4) with lines, t*sin(t/5) with lines
-set output "../gnuplot_r_theta_linespoints_grid.png"
+set output "../gnuplot_theta_r_linespoints_grid.png"
 plot t*sin(t/3) with linespoints, t*sin(t/4) with linespoints, t*sin(t/5) with linespoints
+
+set polar
+set angles degrees
+set grid polar 30
+unset logscale x
+unset logscale y
+unset mxtics
+unset mytics
+set rtics (1,10,100,1000)
+set log r 10
+set rrange [1: 1000]
+set trange [0: 1440]
+
+set output "../gnuplot_theta_log_r_lines_grid.png
+plot exp((t/150)**1) with lines, exp((t/150)**1.1) with lines, exp((t/150)**1.2) with lines
