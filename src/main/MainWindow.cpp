@@ -106,7 +106,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_imageNone (0),
   m_imageUnfiltered (0),
   m_imageFiltered (0),
-  m_cmdMediator (0)
+  m_cmdMediator (0),
+  m_transformationStateContext (0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -1485,6 +1486,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   setCurrentFile(fileName);
   m_statusBar->showTemporaryMessage (temporaryMessage);
   m_statusBar->wakeUp ();
+
+  updateAfterCommand(); // Replace stale points by points in new Document
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)

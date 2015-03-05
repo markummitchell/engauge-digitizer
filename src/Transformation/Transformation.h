@@ -7,7 +7,7 @@
 #include <QString>
 #include <QTransform>
 
-/// Affine transformation between screen and graph coordinates, based on digitized axis points
+/// Affine transformation between screen and graph coordinates, based on digitized axis points.
 class Transformation
 {
 public:
@@ -93,6 +93,7 @@ private:
   void updateTransformFromMatrices (const QTransform &matrixScreen,
                                     const QTransform &matrixGraph);
 
+  // State variable
   bool m_transformIsDefined;
 
   // Transform between cartesian screen coordinates and cartesian graph coordinates
