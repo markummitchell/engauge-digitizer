@@ -1,4 +1,4 @@
-set term png size 1000,800
+set term png size 1000,800 
 
 unset polar
 set grid noxtics
@@ -97,10 +97,11 @@ set angles degrees
 set grid polar 30
 unset logscale x
 unset logscale y
-unset mxtics
-unset mytics
+unset xtics
+unset ytics
 set rtics (1,10,100,1000)
 set log r 10
+set sample 4000
 set rrange [1: 1000]
 set trange [0: 1440]
 
