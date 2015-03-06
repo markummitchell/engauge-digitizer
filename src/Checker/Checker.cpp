@@ -199,40 +199,8 @@ void Checker::createSide (int pointRadius,
   }
 }
 
-void Checker::finishActiveSegment (const DocumentModelCoords &modelCoords,
-                                   const QPointF &posStartScreen,
-                                   const QPointF &posEndScreen,
-                                   double yFrom,
-                                   double yTo,
-                                   const Transformation &transformation,
-                                   SideSegments &sideSegments) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::finishActiveSegment";
-
-  QGraphicsItem *item;
-  if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
-      (yFrom == yTo)) {
-
-    // Draw along an arc since this is a side of constant radius, and we have polar coordinates
-    item = ellipseItem (transformation,
-                        yFrom,
-                        posStartScreen,
-                        posEndScreen);
-
-  } else {
-
-    // Draw straight line
-    item = new QGraphicsLineItem (QLineF (posStartScreen,
-                                          posEndScreen));
-
-  }
-
-  sideSegments.push_back (item);
-  bindItemToScene (item);
-}
-
 void Checker::createTransformAlign (const Transformation &transformation,
-                                    double radius,
+                                    double radiusLinearCartesian,
                                     const QPointF &posOriginScreen,
                                     QTransform &transformAlign,
                                     double &ellipseXAxis,
@@ -250,7 +218,7 @@ void Checker::createTransformAlign (const Transformation &transformation,
   // 3) Keep the (0,+radius) the same pixel distance from the origin but moved to the same pixel column as the origin
 
   // Get (+radius,0) and (0,+radius) points
-  QPointF posXRadiusY0Graph (radius, 0), posX0YRadiusGraph (0, radius);
+  QPointF posXRadiusY0Graph (radiusLinearCartesian, 0), posX0YRadiusGraph (0, radiusLinearCartesian);
   QPointF posXRadiusY0Screen, posX0YRadiusScreen;
   transformation.transformLinearCartesianGraphToScreen (posXRadiusY0Graph,
                                                         posXRadiusY0Screen);
@@ -292,6 +260,11 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
 {
   QPointF posStartGraph, posEndGraph;
 
+  double radiusLinearCartesian = radius;
+  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
+    radiusLinearCartesian = qLn (LOG_OFFSET + radius);
+  }
+
   transformation.transformScreenToRawGraph (posStartScreen,
                                             posStartGraph);
   transformation.transformScreenToRawGraph (posEndScreen,
@@ -308,7 +281,7 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   double ellipseXAxis, ellipseYAxis;
   QTransform transformAlign;
   createTransformAlign (transformation,
-                        radius,
+                        radiusLinearCartesian,
                         posOriginScreen,
                         transformAlign,
                         ellipseXAxis,
@@ -334,6 +307,38 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   item->setTransform (transformAlign.transposed ().inverted ());
 
   return item;
+}
+
+void Checker::finishActiveSegment (const DocumentModelCoords &modelCoords,
+                                   const QPointF &posStartScreen,
+                                   const QPointF &posEndScreen,
+                                   double yFrom,
+                                   double yTo,
+                                   const Transformation &transformation,
+                                   SideSegments &sideSegments) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::finishActiveSegment";
+
+  QGraphicsItem *item;
+  if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
+      (yFrom == yTo)) {
+
+    // Draw along an arc since this is a side of constant radius, and we have polar coordinates
+    item = ellipseItem (transformation,
+                        yFrom,
+                        posStartScreen,
+                        posEndScreen);
+
+  } else {
+
+    // Draw straight line
+    item = new QGraphicsLineItem (QLineF (posStartScreen,
+                                          posEndScreen));
+
+  }
+
+  sideSegments.push_back (item);
+  bindItemToScene (item);
 }
 
 double Checker::minScreenDistanceFromPoints (const QPointF &posScreen,

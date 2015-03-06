@@ -81,7 +81,7 @@ private:
                    const Transformation &transformation,
                    SideSegments &sideSegments);
   void createTransformAlign (const Transformation &transformation,
-                             double radius,
+                             double radiusLinearCartesian,
                              const QPointF &posOriginScreen,
                              QTransform &transformAlign,
                              double &ellipseXAxis,
