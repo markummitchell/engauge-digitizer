@@ -483,8 +483,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   bool isEmpty;
   QRectF rectGraph = boundingRectGraph (cmdMediator,
                                         isEmpty);
-  bool xThetaGoesNegative = isEmpty || (rectGraph.x() <= 0);
-  bool yRGoesNegative = isEmpty || (rectGraph.y() <= 0);
+  bool xThetaGoesNegative = !isEmpty && (rectGraph.x() <= 0);
+  bool yRGoesNegative = !isEmpty && (rectGraph.y() <= 0);
   m_boxXTheta->setEnabled (!xThetaGoesNegative);
   m_boxYRadius->setEnabled (!yRGoesNegative);
 

@@ -155,11 +155,11 @@ void Checker::createSide (int pointRadius,
     double yGraph = (1.0 - s) * yFrom + s * yTo;
 
     // Replace interpolated coordinates using log scaling if appropriate
-    if(modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-      xGraph = qExp ((1.0 - s) * qLn (xFrom) + s * qLn (xTo));
+    if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
+      xGraph = qExp ((1.0 - s) * qLn (LOG_OFFSET + xFrom) + s * qLn (LOG_OFFSET + xTo)) - LOG_OFFSET;
     }
-    if(modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      yGraph = qExp ((1.0 - s) * qLn (yFrom) + s * qLn (yTo));
+    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+      yGraph = qExp ((1.0 - s) * qLn (LOG_OFFSET + yFrom) + s * qLn (LOG_OFFSET + yTo)) - LOG_OFFSET;
     }
 
     QPointF pointScreen;

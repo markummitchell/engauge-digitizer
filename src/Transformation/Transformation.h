@@ -7,6 +7,12 @@
 #include <QString>
 #include <QTransform>
 
+// For polar coordianes, log scaling of radius requires an additive offset since log(r) for 0<r<infinity ranges from
+// -infinity to +infinity. Since we want a zero at the origin rather than -infinity, we use log(1+r) instead. Since
+// this additive offset does not have any significant effect with log scale cartesian coordinates, we apply it
+// for both polar and cartesian coordinates
+extern const double LOG_OFFSET;
+
 /// Affine transformation between screen and graph coordinates, based on digitized axis points.
 class Transformation
 {

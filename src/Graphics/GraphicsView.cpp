@@ -140,7 +140,7 @@ void GraphicsView::dropEvent (QDropEvent *event)
 
 bool GraphicsView::inBounds (const QPointF &posScreen)
 {
-  QRectF boundingRect = scene()->itemsBoundingRect();
+  QRectF boundingRect = scene()->sceneRect();
 
   return 0 <= posScreen.x () &&
          0 <= posScreen.y () &&
