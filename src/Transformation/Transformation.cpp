@@ -2,6 +2,7 @@
 #include "Document.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QDebug>
 #include <qmath.h>
 #include <QtGlobal>
 #include "Transformation.h"
@@ -11,7 +12,7 @@
 const int PRECISION_DIGITS = 4;
 
 const double PI = 3.1415926535;
-const double LOG_OFFSET = 1.0;
+const double LOG_OFFSET = 1;
 
 Transformation::Transformation() :
   m_transformIsDefined (false)
@@ -201,6 +202,18 @@ void Transformation::identity()
 
   QTransform ident;
   m_transform = ident;
+
+  m_lowerX = 0;
+  m_lowerY = 0;
+  m_upperX = 1;
+  m_upperY = 1;
+}
+
+double Transformation::logToLinear (double xy,
+                                    double xyMin,
+                                    double xyMax)
+{
+  return xyMin + (xyMax - xyMin) * (qLn (xy) - qLn (xyMin)) / (qLn (xyMax) - qLn (xyMin));
 }
 
 DocumentModelCoords Transformation::modelCoords() const
@@ -230,11 +243,13 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
 
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    pointRawGraph.setX (qExp (pointRawGraph.x()) - LOG_OFFSET);
+    double logX = qLn (m_lowerX) + (qLn (m_upperX) - qLn (m_lowerX)) * (pointRawGraph.x() - m_lowerX) / (m_upperX - m_lowerX);
+    pointRawGraph.setX (qExp (logX));
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    pointRawGraph.setY (qExp (pointRawGraph.y()) - LOG_OFFSET);
+    double logY = qLn (m_lowerY) + (qLn (m_upperY) - qLn (m_lowerY)) * (pointRawGraph.y() - m_lowerY) / (m_upperY - m_lowerY);
+    pointRawGraph.setY (qExp (logY));
   }
 }
 
@@ -259,11 +274,15 @@ void Transformation::transformRawGraphToLinearCartesianGraph (const QPointF &poi
 
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    x = qLn (LOG_OFFSET + x);
+    x = logToLinear (x,
+                     m_lowerX,
+                     m_upperX);
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    y = qLn (LOG_OFFSET + y);
+    y = logToLinear (y,
+                     m_lowerY,
+                     m_upperY);
   }
 
   // Apply polar coordinates if appropriate. Note range coordinate has just been transformed if it has log scaling
@@ -341,6 +360,13 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices";
 
+  // Save bounds in case there is log scaling later
+  m_lowerX = qMin (qMin (matrixGraph.m11(), matrixGraph.m12()), matrixGraph.m13 ());
+  m_lowerY = qMin (qMin (matrixGraph.m21(), matrixGraph.m22()), matrixGraph.m23 ());
+  m_upperX = qMax (qMax (matrixGraph.m11(), matrixGraph.m12()), matrixGraph.m13 ());
+  m_upperY = qMax (qMax (matrixGraph.m21(), matrixGraph.m22()), matrixGraph.m23 ());
+
+  // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),
                           matrixGraph.m21());
   QPointF pointGraphRaw1 (matrixGraph.m12(),
@@ -363,4 +389,28 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                              QPointF (pointGraphLinearCart0.x(), pointGraphLinearCart0.y()),
                                                              QPointF (pointGraphLinearCart1.x(), pointGraphLinearCart1.y()),
                                                              QPointF (pointGraphLinearCart2.x(), pointGraphLinearCart2.y()));
+
+  // shit start
+  if (m_transformIsDefined) {
+  QPointF p0,p1,p2,p3,p4,p5,p6,p7,p8,p9;
+  transformScreenToLinearCartesianGraph (QPointF (498,20), p0);
+  transformScreenToLinearCartesianGraph (QPointF (498,147), p1);
+  transformScreenToLinearCartesianGraph (QPointF (498,270), p2);
+  transformScreenToLinearCartesianGraph (QPointF (656, 400), p3);
+  transformScreenToLinearCartesianGraph (QPointF (812,400), p4);
+  transformScreenToLinearCartesianGraph (QPointF (968,400), p5);
+  transformScreenToLinearCartesianGraph (QPointF (498,525), p6);
+  transformScreenToLinearCartesianGraph (QPointF (498,651), p7);
+  transformScreenToLinearCartesianGraph (QPointF (498,780), p8);
+  qDebug() << p0.x() <<"," << p0.y() << " "
+              << p1.x() <<","<<p1.y() << " "
+                 << p2.x() <<"," << p2.y() << " "
+                    << p3.x() << "," << p3.y() << " "
+                       << p4.x() << "," << p4.y() << " "
+                          << p5.x() << "," << p5.y() << " "
+                             << p6.x() << "," << p6.y() << " "
+                                << p7.x() << "," << p7.y() << " "
+                                   << p8.x() << "," << p8.y();
+  }
+  // shit end
 }

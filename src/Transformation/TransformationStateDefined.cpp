@@ -95,11 +95,30 @@ void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
                                                                                                     &CallbackAxesCheckerFromAxesPoints::callback);
   cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
+  double xMin = 0, yMin = 0, xMax = 0, yMax = 0;
+  bool isFirst = true;
+  Points::const_iterator itr;
+  for (itr = ftor.points().begin(); itr != ftor.points().end(); itr++) {
+
+    const Point &p = *itr;
+
+    if (isFirst || p.posGraph().x() < xMin) xMin = p.posGraph().x();
+    if (isFirst || p.posGraph().y() < yMin) yMin = p.posGraph().y();
+    if (isFirst || p.posGraph().x() > xMax) xMax = p.posGraph().x();
+    if (isFirst || p.posGraph().y() > yMax) yMax = p.posGraph().y();
+
+    isFirst = false;
+  }
+
   m_axesChecker->prepareForDisplay (ftor.points(),
                                     cmdMediator.document().modelCurveStyles().pointRadius(AXIS_CURVE_NAME),
                                     cmdMediator.document().modelAxesChecker(),
                                     cmdMediator.document().modelCoords(),
-                                    transformation);
+                                    transformation,
+                                    xMin,
+                                    yMin,
+                                    xMax,
+                                    yMax);
   m_axesChecker->setVisible (true);
   startTimer (cmdMediator.document().modelAxesChecker());
 }

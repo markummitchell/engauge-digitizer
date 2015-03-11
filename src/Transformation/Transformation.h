@@ -7,13 +7,19 @@
 #include <QString>
 #include <QTransform>
 
-// For polar coordianes, log scaling of radius requires an additive offset since log(r) for 0<r<infinity ranges from
-// -infinity to +infinity. Since we want a zero at the origin rather than -infinity, we use log(1+r) instead. Since
-// this additive offset does not have any significant effect with log scale cartesian coordinates, we apply it
-// for both polar and cartesian coordinates
-extern const double LOG_OFFSET;
-
 /// Affine transformation between screen and graph coordinates, based on digitized axis points.
+///
+/// Transformation from screen pixels to graph coordinates involves two steps:
+/// -# Transform from screen pixels (which are linear and cartesian) to linear cartesian graph coordinates
+/// -# Transform from linear cartesian graph coordinates to the final graph coordinates, which are linear
+///    or log scaled, and cartesian or polar
+///
+/// Transformation from graph coordinates to screen pixels reverses the steps involved in the
+/// transformation from screen pixels to graph coordinates
+///
+/// Log scaling is calculated as (xLinear - xLogMin) / (xLogMax - xLogMin) = (ln(xLog) - ln(xLogMin)) / (ln(xLogMax) - ln(xLogMin)),
+/// which leaves the points (xLogMin,yLonMin) and (xLogMax,yLogMax) unaffected but gives log growth on all
+/// other points
 class Transformation
 {
 public:
@@ -56,6 +62,11 @@ public:
                               QString &coordsGraph,
                               QString &resolutionGraph);
 
+  /// Convert scaling from log to linear. Calling code is responsible for determining if this is necessary
+  static double logToLinear (double xy,
+                             double xyMin,
+                             double xyMax);
+
   /// Get method for DocumentModelCoords
   DocumentModelCoords modelCoords() const;
 
@@ -75,7 +86,7 @@ public:
 
   /// Convert graph coordinates (linear or log, cartesian or polar) to linear cartesian coordinates
   void transformRawGraphToLinearCartesianGraph (const QPointF &pointRaw,
-                                           QPointF &pointLinearCartesian) const;
+                                                QPointF &pointLinearCartesian) const;
 
   /// Transform from raw graph coordinates to linear cartesian graph coordinates, then to screen coordinates
   void transformRawGraphToScreen (const QPointF &pointRaw,
@@ -95,6 +106,9 @@ public:
 
 private:
 
+  // No need to display values like 1E-17 when it is insignificant relative to the range
+  double roundOffSmallValues (double value, double range);
+
   // Compute transform from screen and graph points. The 3x3 matrices are handled as QTransform since QMatrix is deprecated
   void updateTransformFromMatrices (const QTransform &matrixScreen,
                                     const QTransform &matrixGraph);
@@ -108,8 +122,11 @@ private:
   // Coordinates information from last time the transform was updated. Only defined if  m_transformIsDefined is true
   DocumentModelCoords m_modelCoords;
 
-  // No need to display values like 1E-17 when it is insignificant relative to the range
-  double roundOffSmallValues (double value, double range);
+  // These are set as the first step of updating the transformation
+  double m_lowerX;
+  double m_lowerY;
+  double m_upperX;
+  double m_upperY;
 };
 
 #endif // TRANSFORMATION_H

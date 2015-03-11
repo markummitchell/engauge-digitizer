@@ -128,6 +128,10 @@ void Checker::createSide (int pointRadius,
                           double yFrom,
                           double xTo,
                           double yTo,
+                          double xMin,
+                          double yMin,
+                          double xMax,
+                          double yMax,
                           const Transformation &transformation,
                           SideSegments &sideSegments)
 {
@@ -156,10 +160,14 @@ void Checker::createSide (int pointRadius,
 
     // Replace interpolated coordinates using log scaling if appropriate
     if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-      xGraph = qExp ((1.0 - s) * qLn (LOG_OFFSET + xFrom) + s * qLn (LOG_OFFSET + xTo)) - LOG_OFFSET;
+      xGraph = Transformation::logToLinear ((1.0 - s) * xFrom + s * xTo,
+                                            xMin,
+                                            xMax);
     }
     if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      yGraph = qExp ((1.0 - s) * qLn (LOG_OFFSET + yFrom) + s * qLn (LOG_OFFSET + yTo)) - LOG_OFFSET;
+      yGraph = Transformation::logToLinear ((1.0 - s) * yFrom + s * yTo,
+                                            yMin,
+                                            yMax);
     }
 
     QPointF pointScreen;
@@ -260,11 +268,6 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
 {
   QPointF posStartGraph, posEndGraph;
 
-  double radiusLinearCartesian = radius;
-  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
-    radiusLinearCartesian = qLn (LOG_OFFSET + radius);
-  }
-
   transformation.transformScreenToRawGraph (posStartScreen,
                                             posStartGraph);
   transformation.transformScreenToRawGraph (posEndScreen,
@@ -281,7 +284,7 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
   double ellipseXAxis, ellipseYAxis;
   QTransform transformAlign;
   createTransformAlign (transformation,
-                        radiusLinearCartesian,
+                        radius,
                         posOriginScreen,
                         transformAlign,
                         ellipseXAxis,
@@ -369,13 +372,21 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 
   ENGAUGE_ASSERT (polygon.count () == NUM_AXES_POINTS);
 
+  double xMin = 0, yMin = 0, xMax = 0, yMax = 0;
+
   // Convert pixel coordinates in QPointF to screen and graph coordinates in Point using
-  // identity transformation, so this routine can call the general case routine
+  // identity transformation, so this routine can reuse computations provided by Transformation
   QList<Point> points;
   QPolygonF::const_iterator itr;
   for (itr = polygon.begin (); itr != polygon.end (); itr++) {
 
-    QPointF pF = *itr;
+    const QPointF &pF = *itr;
+
+    if (points.count() == 0 || pF.x () < xMin) xMin = pF.x ();
+    if (points.count() == 0 || pF.y () < yMin) yMin = pF.y ();
+    if (points.count() == 0 || pF.x () > xMax) xMax = pF.x ();
+    if (points.count() == 0 || pF.y () > yMax) yMax = pF.y ();
+
     Point p (DUMMY_CURVENAME,
              pF,
              pF);
@@ -389,14 +400,22 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
                      pointRadius,
                      modelAxesChecker,
                      modelCoords,
-                     transformIdentity);
+                     transformIdentity,
+                     xMin,
+                     yMin,
+                     xMax,
+                     yMax);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
                                  int pointRadius,
                                  const DocumentModelAxesChecker &modelAxesChecker,
                                  const DocumentModelCoords &modelCoords,
-                                 const Transformation &transformation)
+                                 const Transformation &transformation,
+                                 double xMin,
+                                 double yMin,
+                                 double xMax,
+                                 double yMax)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
@@ -409,19 +428,19 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   deleteSide (m_sideBottom);
 
   // Get the min and max of x and y
-  double xMin, xMax, yMin, yMax;
+  double xFrom, xTo, yFrom, yTo;
   int i;
   for (i = 0; i < 3; i++) {
     if (i == 0) {
-      xMin = points.at(i).posGraph().x();
-      xMax = points.at(i).posGraph().x();
-      yMin = points.at(i).posGraph().y();
-      yMax = points.at(i).posGraph().y();
+      xFrom = points.at(i).posGraph().x();
+      xTo   = points.at(i).posGraph().x();
+      yFrom = points.at(i).posGraph().y();
+      yTo   = points.at(i).posGraph().y();
     }
-    xMin = qMin (xMin, points.at(i).posGraph().x());
-    xMax = qMax (xMax, points.at(i).posGraph().x());
-    yMin = qMin (yMin, points.at(i).posGraph().y());
-    yMax = qMax (yMax, points.at(i).posGraph().y());
+    xFrom = qMin (xFrom, points.at(i).posGraph().x());
+    xTo   = qMax (xTo  , points.at(i).posGraph().x());
+    yFrom = qMin (yFrom, points.at(i).posGraph().y());
+    yTo   = qMax (yTo  , points.at(i).posGraph().y());
   }
 
   // Min and max of angles needs special processing since periodicity introduces some ambiguity. This is a noop for rectangular coordinates
@@ -429,15 +448,15 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   adjustPolarAngleRanges (modelCoords,
                           transformation,
                           points,
-                          xMin,
-                          xMax,
-                          yMin);
+                          xFrom,
+                          xTo,
+                          yFrom);
 
   // Draw the bounding box as four sides
-  createSide (pointRadius, points, modelCoords, xMin, yMin, xMin, yMax, transformation, m_sideLeft);
-  createSide (pointRadius, points, modelCoords, xMin, yMax, xMax, yMax, transformation, m_sideTop);
-  createSide (pointRadius, points, modelCoords, xMax, yMax, xMax, yMin, transformation, m_sideRight);
-  createSide (pointRadius, points, modelCoords, xMax, yMin, xMin, yMin, transformation, m_sideBottom);
+  createSide (pointRadius, points, modelCoords, xFrom, yFrom, xFrom, yTo  , xMin, yMin, xMax, yMax, transformation, m_sideLeft);
+  createSide (pointRadius, points, modelCoords, xFrom, yTo  , xTo  , yTo  , xMin, yMin, xMax, yMax, transformation, m_sideTop);
+  createSide (pointRadius, points, modelCoords, xTo  , yTo  , xTo  , yFrom, xMin, yMin, xMax, yMax, transformation, m_sideRight);
+  createSide (pointRadius, points, modelCoords, xTo  , yFrom, xFrom, yFrom, xMin, yMin, xMax, yMax, transformation, m_sideBottom);
 
   updateModelAxesChecker (modelAxesChecker);
 }
