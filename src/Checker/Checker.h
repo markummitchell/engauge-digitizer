@@ -47,11 +47,7 @@ public:
                           int pointRadius,
                           const DocumentModelAxesChecker &modelAxesChecker,
                           const DocumentModelCoords &modelCoords,
-                          const Transformation &transformation,
-                          double xMin,
-                          double yMin,
-                          double xMax,
-                          double yMax);
+                          const Transformation &transformation);
 
   /// Show/hide this axes checker.
   void setVisible (bool visible);
@@ -82,10 +78,6 @@ private:
                    double yFrom,
                    double xTo,
                    double yTo,
-                   double xMin,
-                   double yMin,
-                   double xMax,
-                   double yMax,
                    const Transformation &transformation,
                    SideSegments &sideSegments);
   void createTransformAlign (const Transformation &transformation,

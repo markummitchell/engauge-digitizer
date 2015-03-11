@@ -62,10 +62,12 @@ public:
                               QString &coordsGraph,
                               QString &resolutionGraph);
 
-  /// Convert scaling from log to linear. Calling code is responsible for determining if this is necessary
-  static double logToLinear (double xy,
-                             double xyMin,
-                             double xyMax);
+  /// Convert cartesian scaling from log to linear. Calling code is responsible for determining if this is necessary
+  static double logToLinearCartesian (double xy);
+
+  /// Convert radius scaling from log to linear. Calling code is responsible for determining if this is necessary
+  static double logToLinearRadius (double r,
+                                   double rCenter);
 
   /// Get method for DocumentModelCoords
   DocumentModelCoords modelCoords() const;

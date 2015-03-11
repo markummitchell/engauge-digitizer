@@ -209,11 +209,15 @@ void Transformation::identity()
   m_upperY = 1;
 }
 
-double Transformation::logToLinear (double xy,
-                                    double xyMin,
-                                    double xyMax)
+double Transformation::logToLinearCartesian (double xy)
 {
-  return xyMin + (xyMax - xyMin) * (qLn (xy) - qLn (xyMin)) / (qLn (xyMax) - qLn (xyMin));
+  return qLn (xy);
+}
+
+double Transformation::logToLinearRadius (double r,
+                                          double rCenter)
+{
+  return qLn (r) - qLn (rCenter);
 }
 
 DocumentModelCoords Transformation::modelCoords() const
@@ -243,13 +247,17 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
 
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    double logX = qLn (m_lowerX) + (qLn (m_upperX) - qLn (m_lowerX)) * (pointRawGraph.x() - m_lowerX) / (m_upperX - m_lowerX);
-    pointRawGraph.setX (qExp (logX));
+    pointRawGraph.setX (qExp (pointRawGraph.x()));
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    double logY = qLn (m_lowerY) + (qLn (m_upperY) - qLn (m_lowerY)) * (pointRawGraph.y() - m_lowerY) / (m_upperY - m_lowerY);
-    pointRawGraph.setY (qExp (logY));
+    if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+      // Cartesian
+      pointRawGraph.setY (qExp (pointRawGraph.x()));
+    } else {
+      // Polar radius
+      pointRawGraph.setY (qExp (pointRawGraph.y() + qLn (m_modelCoords.originRadius ())));
+    }
   }
 }
 
@@ -274,15 +282,12 @@ void Transformation::transformRawGraphToLinearCartesianGraph (const QPointF &poi
 
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    x = logToLinear (x,
-                     m_lowerX,
-                     m_upperX);
+    x = logToLinearCartesian (x);
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    y = logToLinear (y,
-                     m_lowerY,
-                     m_upperY);
+    y = logToLinearRadius (y,
+                           m_modelCoords.originRadius());
   }
 
   // Apply polar coordinates if appropriate. Note range coordinate has just been transformed if it has log scaling

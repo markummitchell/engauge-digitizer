@@ -2,6 +2,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
 #include "DlgSettingsCoords.h"
+#include "DlgValidatorLog.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
@@ -221,7 +222,7 @@ void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
   layoutPolar->addWidget (labelOriginRadius, 1, 0);
 
   m_editOriginRadius = new QLineEdit (m_boxPolarCoords);
-  m_validatorOriginRadius = new QDoubleValidator;
+  m_validatorOriginRadius = new DlgValidatorLog;
   m_editOriginRadius->setValidator (m_validatorOriginRadius);
   m_editOriginRadius->setWhatsThis (QString(tr("Specify radius value at origin.\n\n"
                                                "Normally the radius at the origin is 0, but a nonzero value may be applied in other cases "
@@ -608,14 +609,13 @@ void DlgSettingsCoords::updateControls ()
   QString textOriginRadius = m_editOriginRadius->text();
   int posOriginRadius;
 
-  bool isGoodState = !(m_btnPolar->isChecked() &&
-                       m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) != QValidator::Acceptable);
-  enableOk (isGoodState);
+  enableOk (m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) == QValidator::Acceptable);
 
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
-  m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
+  m_editOriginRadius->setEnabled (m_btnPolar->isChecked () &&
+                                  m_yRadiusLog->isChecked ());
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
                              QString ("X") :

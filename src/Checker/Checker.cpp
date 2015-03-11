@@ -128,10 +128,6 @@ void Checker::createSide (int pointRadius,
                           double yFrom,
                           double xTo,
                           double yTo,
-                          double xMin,
-                          double yMin,
-                          double xMax,
-                          double yMax,
                           const Transformation &transformation,
                           SideSegments &sideSegments)
 {
@@ -160,14 +156,18 @@ void Checker::createSide (int pointRadius,
 
     // Replace interpolated coordinates using log scaling if appropriate
     if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-      xGraph = Transformation::logToLinear ((1.0 - s) * xFrom + s * xTo,
-                                            xMin,
-                                            xMax);
+      // Cartesian
+      xGraph = Transformation::logToLinearCartesian ((1.0 - s) * xFrom + s * xTo);
     }
     if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      yGraph = Transformation::logToLinear ((1.0 - s) * yFrom + s * yTo,
-                                            yMin,
-                                            yMax);
+      if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+        // Cartesian
+        yGraph = Transformation::logToLinearCartesian ((1.0 - s) * yFrom + s * yTo);
+      } else {
+        // Polar radius
+        yGraph = Transformation::logToLinearRadius ((1.0 - s) * yFrom + s * yTo,
+                                                    modelCoords.originRadius());
+      }
     }
 
     QPointF pointScreen;
@@ -372,8 +372,6 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 
   ENGAUGE_ASSERT (polygon.count () == NUM_AXES_POINTS);
 
-  double xMin = 0, yMin = 0, xMax = 0, yMax = 0;
-
   // Convert pixel coordinates in QPointF to screen and graph coordinates in Point using
   // identity transformation, so this routine can reuse computations provided by Transformation
   QList<Point> points;
@@ -381,11 +379,6 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
   for (itr = polygon.begin (); itr != polygon.end (); itr++) {
 
     const QPointF &pF = *itr;
-
-    if (points.count() == 0 || pF.x () < xMin) xMin = pF.x ();
-    if (points.count() == 0 || pF.y () < yMin) yMin = pF.y ();
-    if (points.count() == 0 || pF.x () > xMax) xMax = pF.x ();
-    if (points.count() == 0 || pF.y () > yMax) yMax = pF.y ();
 
     Point p (DUMMY_CURVENAME,
              pF,
@@ -400,22 +393,14 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
                      pointRadius,
                      modelAxesChecker,
                      modelCoords,
-                     transformIdentity,
-                     xMin,
-                     yMin,
-                     xMax,
-                     yMax);
+                     transformIdentity);
 }
 
 void Checker::prepareForDisplay (const QList<Point> &points,
                                  int pointRadius,
                                  const DocumentModelAxesChecker &modelAxesChecker,
                                  const DocumentModelCoords &modelCoords,
-                                 const Transformation &transformation,
-                                 double xMin,
-                                 double yMin,
-                                 double xMax,
-                                 double yMax)
+                                 const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
@@ -453,10 +438,10 @@ void Checker::prepareForDisplay (const QList<Point> &points,
                           yFrom);
 
   // Draw the bounding box as four sides
-  createSide (pointRadius, points, modelCoords, xFrom, yFrom, xFrom, yTo  , xMin, yMin, xMax, yMax, transformation, m_sideLeft);
-  createSide (pointRadius, points, modelCoords, xFrom, yTo  , xTo  , yTo  , xMin, yMin, xMax, yMax, transformation, m_sideTop);
-  createSide (pointRadius, points, modelCoords, xTo  , yTo  , xTo  , yFrom, xMin, yMin, xMax, yMax, transformation, m_sideRight);
-  createSide (pointRadius, points, modelCoords, xTo  , yFrom, xFrom, yFrom, xMin, yMin, xMax, yMax, transformation, m_sideBottom);
+  createSide (pointRadius, points, modelCoords, xFrom, yFrom, xFrom, yTo  , transformation, m_sideLeft);
+  createSide (pointRadius, points, modelCoords, xFrom, yTo  , xTo  , yTo  , transformation, m_sideTop);
+  createSide (pointRadius, points, modelCoords, xTo  , yTo  , xTo  , yFrom, transformation, m_sideRight);
+  createSide (pointRadius, points, modelCoords, xTo  , yFrom, xFrom, yFrom, transformation, m_sideBottom);
 
   updateModelAxesChecker (modelAxesChecker);
 }
