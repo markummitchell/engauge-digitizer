@@ -25,8 +25,10 @@
 #include <QTransform>
 #include "ViewPreview.h"
 
-const QString CONNECT_AS_FUNCTION_STR ("Function");
-const QString CONNECT_AS_RELATION_STR ("Relation");
+const QString CONNECT_AS_FUNCTION_SMOOTH_STR ("Function - Smooth");
+const QString CONNECT_AS_FUNCTION_STRAIGHT_STR ("Function - Straight");
+const QString CONNECT_AS_RELATION_SMOOTH_STR ("Relation - Smooth");
+const QString CONNECT_AS_RELATION_STRAIGHT_STR ("Relation - Straight");
 
 const double PREVIEW_WIDTH = 100.0;
 const double PREVIEW_HEIGHT = 100.0;
@@ -42,6 +44,8 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
 {
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+
+  setMinimumWidth (740); // Override finishPanel width for room for m_cmbLineType and preview to be completely visible
 }
 
 void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
@@ -91,8 +95,10 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   layoutGroup->addWidget (labelLineType, 2, 0);
 
   m_cmbLineType = new QComboBox (m_groupLine);
-  m_cmbLineType->addItem (CONNECT_AS_FUNCTION_STR, QVariant (CONNECT_AS_FUNCTION));
-  m_cmbLineType->addItem (CONNECT_AS_RELATION_STR, QVariant (CONNECT_AS_RELATION));
+  m_cmbLineType->addItem (CONNECT_AS_FUNCTION_STRAIGHT_STR, QVariant (CONNECT_AS_FUNCTION_STRAIGHT));
+  m_cmbLineType->addItem (CONNECT_AS_FUNCTION_SMOOTH_STR, QVariant (CONNECT_AS_FUNCTION_SMOOTH));
+  m_cmbLineType->addItem (CONNECT_AS_RELATION_STRAIGHT_STR, QVariant (CONNECT_AS_RELATION_STRAIGHT));
+  m_cmbLineType->addItem (CONNECT_AS_RELATION_SMOOTH_STR, QVariant (CONNECT_AS_RELATION_SMOOTH));
   m_cmbLineType->setWhatsThis (tr ("Select rule for connecting points with lines.\n\n"
                                    "If the curve is connected as a single-valued function then the points are ordered by "
                                    "increasing value of the independent variable.\n\n"
@@ -101,7 +107,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                    "between the two endpoints of that line - as if its age was between the ages of the two "
                                    "endpoints.\n\n"
                                    "Lines are drawn between successively ordered points.\n\n"
-                                   "Changing the rule for connecting points will not not affect the preview window."));
+                                   "Straight curves are drawn with straight lines between successive points. Smooth curves are drawn "
+                                   "with smooth lines between successive points.\n\n"));
   connect (m_cmbLineType, SIGNAL (activated (const QString &)), this, SLOT (slotLineType (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineType, 2, 1);
 }
@@ -407,7 +414,8 @@ void DlgSettingsCurveProperties::updateControls()
 void DlgSettingsCurveProperties::updatePreview()
 {
   const QString NULL_IDENTIFIER;
-  const int ORDINAL_0 = 0, ORDINAL_1 = 1;
+  const int ORDINAL_0 = 0, ORDINAL_1 = 1, ORDINAL_2 = 2;
+  const double Z_LINE = -1.0; // Looks nicer if line goes under the points, so points are unobscured
 
   m_scenePreview->clear();
 
@@ -417,35 +425,71 @@ void DlgSettingsCurveProperties::updatePreview()
   const PointStyle pointStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).pointStyle();
   const LineStyle lineStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).lineStyle();
 
+  // Function or relation?
+  bool isRelation = (lineStyle.curveConnectAs() == CONNECT_AS_RELATION_SMOOTH ||
+                     lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT);
+
+  // Ordinals. We change the order of the center and right points from left-to-right when connecting as a relation
+  int ordinalLeft = ORDINAL_0, ordinalCenter = ORDINAL_1, ordinalRight = ORDINAL_2;
+  if (isRelation) {
+    ordinalCenter = ORDINAL_2;
+    ordinalRight = ORDINAL_1;
+  }
   // Left point
   QPointF posLeft (PREVIEW_WIDTH / 3.0,
-                   PREVIEW_HEIGHT / 2.0);
+                   PREVIEW_HEIGHT * 2.0 / 3.0);
   GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
                                                        NULL_IDENTIFIER,
                                                        posLeft,
                                                        pointStyle,
-                                                       ORDINAL_0);
+                                                       ordinalLeft);
   pointLeft->setPointStyle (pointStyle);
+
+  // Center point
+  QPointF posCenter (PREVIEW_WIDTH / 2.0,
+                     PREVIEW_HEIGHT / 3.0);
+  GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
+                                                         NULL_IDENTIFIER,
+                                                         posCenter,
+                                                         pointStyle,
+                                                         ordinalCenter);
+  pointCenter->setPointStyle (pointStyle);
 
   // Right point
   QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
-                    PREVIEW_HEIGHT / 2.0);
+                    PREVIEW_HEIGHT * 2.0 / 3.0);
   GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
                                                         NULL_IDENTIFIER,
                                                         posRight,
                                                         pointStyle,
-                                                        ORDINAL_1);
+                                                        ordinalRight);
   pointRight->setPointStyle (pointStyle);
 
-  // Line between points
-  GraphicsLine *line = new GraphicsLine (ORDINAL_0,
-                                         ORDINAL_1);
-  pointLeft->setLineWithPointAsStart(line);
-  line->setLineStyle (lineStyle);
-  line->moveStart(posLeft);
-  line->moveEnd(posRight);
-  line->setZValue (-1.0); // Looks nicer if line goes under the points, so points are unobscured
-  m_scenePreview->addItem (line);
+  // Lines between points
+  GraphicsLine *line0 = new GraphicsLine (ORDINAL_0,
+                                          ORDINAL_1);
+  GraphicsLine *line1 = new GraphicsLine (ORDINAL_1,
+                                          ORDINAL_2);
+  line0->setLineStyle (lineStyle);
+  line1->setLineStyle (lineStyle);
+  pointLeft->setLineWithPointAsStart(line0);
+  if (isRelation) {
+    line0->moveStart(posLeft);
+    line0->moveEnd(posRight);
+    pointRight->setLineWithPointAsStart(line1);
+    line1->moveStart(posRight);
+    line1->moveEnd(posCenter);
+  } else {
+    line0->moveStart(posLeft);
+    line0->moveEnd(posCenter);
+    pointCenter->setLineWithPointAsStart(line1);
+    line1->moveStart(posCenter);
+    line1->moveEnd(posRight);
+  }
+  line0->setZValue (Z_LINE);
+  line1->setZValue (Z_LINE);
+  m_scenePreview->addItem (line0);
+  m_scenePreview->addItem (line1);
 
   resetSceneRectangle();
 }

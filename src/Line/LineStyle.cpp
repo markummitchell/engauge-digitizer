@@ -10,7 +10,7 @@ const int DEFAULT_LINE_WIDTH = 1;
 LineStyle::LineStyle () :
   m_width (0),
   m_paletteColor (COLOR_PALETTE_TRANSPARENT),
-  m_curveConnectAs (CONNECT_AS_FUNCTION)
+  m_curveConnectAs (CONNECT_AS_FUNCTION_SMOOTH)
 {
 }
 
@@ -48,14 +48,14 @@ LineStyle LineStyle::defaultAxesCurve ()
 {
   return LineStyle (DEFAULT_LINE_WIDTH,
                     COLOR_PALETTE_TRANSPARENT,
-                    CONNECT_AS_FUNCTION); // Same default color as used for PointStyle axes curve default
+                    CONNECT_AS_FUNCTION_SMOOTH); // Same default color as used for PointStyle axes curve default
 }
 
 LineStyle LineStyle::defaultGraphCurve (int /* index */)
 {
   return LineStyle (DEFAULT_LINE_WIDTH,
                     COLOR_PALETTE_BLUE,
-                    CONNECT_AS_FUNCTION); // Same default color as used for PointStyle graph curves default
+                    CONNECT_AS_FUNCTION_SMOOTH); // Same default color as used for PointStyle graph curves default
 }
 
 void LineStyle::loadXml(QXmlStreamReader &reader)
