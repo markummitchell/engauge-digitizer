@@ -248,7 +248,7 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
     if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
       // Cartesian
-      pointRawGraph.setY (qExp (pointRawGraph.x()));
+      pointRawGraph.setY (qExp (pointRawGraph.y()));
     } else {
       // Polar radius
       pointRawGraph.setY (qExp (pointRawGraph.y() + qLn (m_modelCoords.originRadius ())));
