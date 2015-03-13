@@ -165,7 +165,14 @@ void Checker::createSide (int pointRadius,
     double xGraph = (1.0 - s) * xFrom + s * xTo;
     double yGraph = (1.0 - s) * yFrom + s * yTo;
 
-    // Replace interpolated coordinates using log scaling if appropriate
+    // Replace interpolated coordinates using log scaling if appropriate, preserving the same ranges
+    if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
+      xGraph = qExp ((1.0 - s) * qLn (xFrom) + s * qLn (xTo));
+    }
+    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+      yGraph = qExp ((1.0 - s) * qLn (yFrom) + s * qLn (yTo));
+    }
+
     QPointF pointScreen;
     transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
                                               pointScreen);
