@@ -49,7 +49,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
   if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
 
     // Range minimum is origin
-    yMin = 0.0;
+    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
+      yMin = 0.0;
+    } else {
+      yMin = modelCoords.originRadius();
+    }
 
     // Perform special processing to account for periodicity of polar coordinates. Start with unit vectors
     // in the directions of the three axis points
@@ -79,7 +83,7 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
         xMin = angle2;
         xMax = angle1;
       }
-    } else if ((sumAngle1 <= sumAngle0) && (sumAngle2 <= sumAngle2)) {
+    } else if ((sumAngle1 <= sumAngle0) && (sumAngle1 <= sumAngle2)) {
 
       // Point 1 is in the middle. Either or neither of points 0 and 2 may be along point 1
       if ((angleFromVectorToVector (pos1, pos0) < 0) ||
@@ -131,6 +135,13 @@ void Checker::createSide (int pointRadius,
                           const Transformation &transformation,
                           SideSegments &sideSegments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::createSide"
+                              << " pointRadius=" << pointRadius
+                              << " xFrom=" << xFrom
+                              << " yFrom=" << yFrom
+                              << " xTo=" << xTo
+                              << " yTo=" << yTo;
+
   // Originally a complicated algorithm tried to intercept a straight line from (xFrom,yFrom) to (xTo,yTo). That did not work well since:
   // 1) Calculations for mostly orthogonal cartesian coordinates worked less well with non-orthogonal polar coordinates
   // 2) Ambiguity in polar coordinates between the shorter and longer paths between (theta0,radius) and (theta1,radius)
@@ -155,21 +166,6 @@ void Checker::createSide (int pointRadius,
     double yGraph = (1.0 - s) * yFrom + s * yTo;
 
     // Replace interpolated coordinates using log scaling if appropriate
-    if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-      // Cartesian
-      xGraph = Transformation::logToLinearCartesian ((1.0 - s) * xFrom + s * xTo);
-    }
-    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-        // Cartesian
-        yGraph = Transformation::logToLinearCartesian ((1.0 - s) * yFrom + s * yTo);
-      } else {
-        // Polar radius
-        yGraph = Transformation::logToLinearRadius ((1.0 - s) * yFrom + s * yTo,
-                                                    modelCoords.originRadius());
-      }
-    }
-
     QPointF pointScreen;
     transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
                                               pointScreen);
@@ -214,8 +210,7 @@ void Checker::createTransformAlign (const Transformation &transformation,
                                     double &ellipseXAxis,
                                     double &ellipseYAxis) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::TransformAlign"
-                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data();
+  // LOG4CPP_INFO_S is below
 
   // Compute a minimal transformation that aligns the graph x and y axes with the screen x and y axes. Specifically, shear,
   // translation and rotation are allowed but not scaling. Scaling is bad since it messes up the line thickness of the drawn arc.
@@ -247,6 +242,14 @@ void Checker::createTransformAlign (const Transformation &transformation,
                                                                                 posOriginScreen,
                                                                                 posXRadiusY0AlignedScreen,
                                                                                 posX0YRadiusAlignedScreen);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::TransformAlign"
+                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data()
+                              << " radiusLinearCartesian=" << radiusLinearCartesian
+                              << " ellipseXAxis=" << ellipseXAxis
+                              << " ellipseYAxis=" << ellipseYAxis
+                              << " posXRadiusY0AlignedScreen=" << QPointFToString (posXRadiusY0AlignedScreen).toLatin1().data()
+                              << " posX0YRadiusAlignedScreen=" << QPointFToString (posX0YRadiusAlignedScreen).toLatin1().data();
 }
 
 void Checker::deleteSide (SideSegments &sideSegments)
@@ -262,33 +265,18 @@ void Checker::deleteSide (SideSegments &sideSegments)
 }
 
 QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
-                                    double radius,
+                                    double radiusLinearCartesian,
                                     const QPointF &posStartScreen,
                                     const QPointF &posEndScreen) const
 {
+  // LOG4CPP_INFO_S is below
+
   QPointF posStartGraph, posEndGraph;
 
   transformation.transformScreenToRawGraph (posStartScreen,
                                             posStartGraph);
   transformation.transformScreenToRawGraph (posEndScreen,
                                             posEndGraph);
-
-  // Get origin
-  QPointF posOriginGraph (0, 0), posOriginScreen;
-  transformation.transformRawGraphToScreen (posOriginGraph,
-                                            posOriginScreen);
-
-  // Compute rotate/shear transform that aligns graph coordinates with screen coordinates, and ellipse parameters.
-  // Transform does not include scaling since that messes up the thickness of the drawn line, and does not include
-  // translation since that is not important
-  double ellipseXAxis, ellipseYAxis;
-  QTransform transformAlign;
-  createTransformAlign (transformation,
-                        radius,
-                        posOriginScreen,
-                        transformAlign,
-                        ellipseXAxis,
-                        ellipseYAxis);
 
   // Get the angles about the origin of the start and end points
   double angleStart = posStartGraph.x() * DEGREES_TO_RADIANS;
@@ -297,6 +285,31 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
     angleEnd += TWO_PI;
   }
   double angleSpan = angleEnd - angleStart;
+
+  // Get origin
+  QPointF posOriginGraph (0, 0), posOriginScreen;
+  transformation.transformLinearCartesianGraphToScreen (posOriginGraph,
+                                                        posOriginScreen);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::ellipseItem"
+                              << " radiusLinearCartesian=" << radiusLinearCartesian
+                              << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
+                              << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
+                              << " posOriginScreen=" << QPointFToString (posOriginScreen).toLatin1().data()
+                              << " angleStart=" << angleStart / DEGREES_TO_RADIANS
+                              << " angleEnd=" << angleEnd / DEGREES_TO_RADIANS;
+
+  // Compute rotate/shear transform that aligns linear cartesian graph coordinates with screen coordinates, and ellipse parameters.
+  // Transform does not include scaling since that messes up the thickness of the drawn line, and does not include
+  // translation since that is not important
+  double ellipseXAxis, ellipseYAxis;
+  QTransform transformAlign;
+  createTransformAlign (transformation,
+                        radiusLinearCartesian,
+                        posOriginScreen,
+                        transformAlign,
+                        ellipseXAxis,
+                        ellipseYAxis);
 
   // Create a circle in graph space with the specified radius
   QRectF boundingRect (-1.0 * ellipseXAxis + posOriginScreen.x(),
@@ -320,28 +333,49 @@ void Checker::finishActiveSegment (const DocumentModelCoords &modelCoords,
                                    const Transformation &transformation,
                                    SideSegments &sideSegments) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::finishActiveSegment";
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::finishActiveSegment"
+                              << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
+                              << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
+                              << " yFrom=" << yFrom
+                              << " yTo=" << yTo;
 
   QGraphicsItem *item;
   if ((modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
       (yFrom == yTo)) {
 
+    // Linear cartesian radius
+    double radiusLinearCartesian = yFrom;
+    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+      radiusLinearCartesian = transformation.logToLinearRadius(yFrom,
+                                                               modelCoords.originRadius());
+    }
+
     // Draw along an arc since this is a side of constant radius, and we have polar coordinates
     item = ellipseItem (transformation,
-                        yFrom,
+                        radiusLinearCartesian,
                         posStartScreen,
                         posEndScreen);
 
   } else {
 
     // Draw straight line
-    item = new QGraphicsLineItem (QLineF (posStartScreen,
-                                          posEndScreen));
-
+    item = lineItem (posStartScreen,
+                     posEndScreen);
   }
 
   sideSegments.push_back (item);
   bindItemToScene (item);
+}
+
+QGraphicsItem *Checker::lineItem (const QPointF &posStartScreen,
+                                  const QPointF &posEndScreen) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::lineItem"
+                              << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
+                              << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data();
+
+  return new QGraphicsLineItem (QLineF (posStartScreen,
+                                        posEndScreen));
 }
 
 double Checker::minScreenDistanceFromPoints (const QPointF &posScreen,

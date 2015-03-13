@@ -202,11 +202,6 @@ void Transformation::identity()
 
   QTransform ident;
   m_transform = ident;
-
-  m_lowerX = 0;
-  m_lowerY = 0;
-  m_upperX = 1;
-  m_upperY = 1;
 }
 
 double Transformation::logToLinearCartesian (double xy)
@@ -364,12 +359,6 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                   const QTransform &matrixGraph)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices";
-
-  // Save bounds in case there is log scaling later
-  m_lowerX = qMin (qMin (matrixGraph.m11(), matrixGraph.m12()), matrixGraph.m13 ());
-  m_lowerY = qMin (qMin (matrixGraph.m21(), matrixGraph.m22()), matrixGraph.m23 ());
-  m_upperX = qMax (qMax (matrixGraph.m11(), matrixGraph.m12()), matrixGraph.m13 ());
-  m_upperY = qMax (qMax (matrixGraph.m21(), matrixGraph.m22()), matrixGraph.m23 ());
 
   // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),

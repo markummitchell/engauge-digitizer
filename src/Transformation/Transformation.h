@@ -123,12 +123,6 @@ private:
 
   // Coordinates information from last time the transform was updated. Only defined if  m_transformIsDefined is true
   DocumentModelCoords m_modelCoords;
-
-  // These are set as the first step of updating the transformation
-  double m_lowerX;
-  double m_lowerY;
-  double m_upperX;
-  double m_upperY;
 };
 
 #endif // TRANSFORMATION_H

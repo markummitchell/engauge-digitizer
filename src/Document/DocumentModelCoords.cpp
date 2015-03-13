@@ -8,10 +8,11 @@
 
 const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
+const double LEGAL_ORIGIN_RADIUS = 1.0;
 
 DocumentModelCoords::DocumentModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
-  m_originRadius (0.0),
+  m_originRadius (LEGAL_ORIGIN_RADIUS),
   m_coordScaleXTheta (COORD_SCALE_LINEAR),
   m_coordScaleYRadius (COORD_SCALE_LINEAR),
   m_coordThetaUnits (COORD_THETA_UNITS_DEGREES)

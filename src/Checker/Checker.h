@@ -88,7 +88,7 @@ private:
                              double &ellipseYAxis) const;
   void deleteSide (SideSegments &sideSegments);
   QGraphicsItem *ellipseItem(const Transformation &transformation,
-                             double radius,
+                             double radiusLinearCartesian,
                              const QPointF &posStartScreen,
                              const QPointF &posEndScreen) const;
   void finishActiveSegment (const DocumentModelCoords &modelCoords,
@@ -98,6 +98,8 @@ private:
                             double yTo,
                             const Transformation &transformation,
                             SideSegments &sideSegments) const;
+  QGraphicsItem *lineItem (const QPointF &posStartScreen,
+                           const QPointF &posEndScreen) const;
   double minScreenDistanceFromPoints (const QPointF &posScreen,
                                       const QList<Point> &points);
 
