@@ -138,6 +138,9 @@ HEADERS  += \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
     Settings/Settings.h \
+    Spline/Spline.h \
+    Spline/SplineCoeff.h \
+    Spline/SplinePair.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Transformation/Transformation.h \
@@ -279,6 +282,9 @@ SOURCES += \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
     Settings/Settings.cpp \
+    Spline/Spline.cpp \
+    Spline/SplineCoeff.cpp \
+    Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
@@ -326,6 +332,7 @@ INCLUDEPATH += Callback \
                Plot \
                Point \
                Settings \
+               Spline \
                StatusBar \
                Transformation \
                util \
