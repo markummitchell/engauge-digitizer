@@ -1,8 +1,8 @@
 TEMPLATE    = app
-CONFIG      = qt warn_on thread debug
-OBJECTS_DIR = .objs
-MOC_DIR = .moc
-RCC_DIR = .rcc
+CONFIG      = qt warn_on thread debug testcase
+OBJECTS_DIR = .objs_test
+MOC_DIR = .moc_test
+RCC_DIR = .rcc_test
 
 HEADERS  += \
     include/BackgroundImage.h \
@@ -144,6 +144,7 @@ HEADERS  += \
     Spline/SplinePair.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
+    Test/TestGraphCoords.h \
     Transformation/Transformation.h \
     Transformation/TransformationStateAbstractBase.h \
     Transformation/TransformationStateContext.h \
@@ -271,7 +272,6 @@ SOURCES += \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
-    main/main.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
@@ -288,6 +288,7 @@ SOURCES += \
     Spline/SplineCoeff.cpp \
     Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
+    Test/TestGraphCoords.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
     Transformation/TransformationStateContext.cpp \
@@ -303,10 +304,9 @@ SOURCES += \
     View/ViewSegmentFilter.cpp \
     util/Xml.cpp
 
-TARGET = ../bin/engauge
+TARGET = ../bin/TestGraphCoords
 
-QT += core gui network printsupport widgets xml
-
+QT += core gui network printsupport testlib widgets xml
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Callback \
                Checker \
@@ -333,6 +333,7 @@ INCLUDEPATH += Callback \
                Settings \
                Spline \
                StatusBar \
+               Test \
                Transformation \
                util \
                View

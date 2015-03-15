@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Test names. Synchronize with edit_one_test
+tests=(TestGraphCoords TestSpline)
+
+# Make sure correct qt installation is being used, by looking for '5.' in the version number
+VERSION5=`qmake -v | grep '5\.'`
+if [ -z "$VERSION5" ]
+then
+    echo "Need Qt5";
+else
+
+    for t in "${tests[@]}"
+    do
+	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
+	qmake engauge_test.pro
+	make clean
+	make
+	../bin/$t
+    done
+fi
+

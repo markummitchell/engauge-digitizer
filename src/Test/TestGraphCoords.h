@@ -1,7 +1,10 @@
 #ifndef TEST_GRAPH_COORDS_H
 #define TEST_GRAPH_COORDS_H
 
+#include "DocumentModelCoords.h"
 #include <QObject>
+
+class CallbackUpdateTransform;
 
 /// Unit tests of graph coordinate sanity checking
 class TestGraphCoords : public QObject
@@ -19,8 +22,11 @@ private slots:
 
   void testThreeCollinearPoints ();
   void testThreeGoodPoints ();
-  void testTwoPointsSharings ();
+  void testTwoPointsSharingGraphCoords ();
   void testTwoPointsSharingScreenCoords ();
+
+  DocumentModelCoords m_modelCoords;
+  CallbackUpdateTransform *m_callback;
 };
 
 #endif // TEST_GRAPH_COORDS_H
