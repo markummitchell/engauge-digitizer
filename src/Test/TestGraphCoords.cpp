@@ -22,7 +22,7 @@ void TestGraphCoords::initTestCase ()
                      "engauge_test.log",
                      DEBUG_FLAG);
 
-  MainWindow w;
+  MainWindow w ("engauge_test_error_report.log");
   w.show ();
 }
 

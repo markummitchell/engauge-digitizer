@@ -61,8 +61,8 @@ HEADERS  += \
     include/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
-    DigitizeState/DigitizeStateContext.h \
     DigitizeState/DigitizeStateColorPicker.h \
+    DigitizeState/DigitizeStateContext.h \
     DigitizeState/DigitizeStateCurve.h \
     DigitizeState/DigitizeStateEmpty.h \
     DigitizeState/DigitizeStatePointMatch.h \
@@ -98,6 +98,7 @@ HEADERS  += \
     Document/DocumentSerialize.h \
     include/EngaugeAssert.h \
     util/EnumsToQt.h \
+    Export/ExportDelimiter.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsSelectionFunctions.h \
     Export/ExportPointsSelectionRelations.h \
