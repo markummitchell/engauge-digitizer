@@ -1,0 +1,10 @@
+#!/bin/bash
+
+array=(TestGraphCoords TestSpline)
+for t in "${array[@]}"
+do
+    sed 's/TEST/$t/g' engauge_test_template.pro >engauge_test.pro
+    qmake engauge_test.pro
+    make
+    ../bin/$t
+done

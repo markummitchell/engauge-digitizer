@@ -144,7 +144,7 @@ HEADERS  += \
     Spline/SplinePair.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
-    Test/TestSpline.h \
+    Test/TEST.h \
     Transformation/Transformation.h \
     Transformation/TransformationStateAbstractBase.h \
     Transformation/TransformationStateContext.h \
@@ -288,7 +288,7 @@ SOURCES += \
     Spline/SplineCoeff.cpp \
     Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
-    Test/TestSpline.cpp \
+    Test/TEST.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
     Transformation/TransformationStateContext.cpp \
@@ -304,7 +304,7 @@ SOURCES += \
     View/ViewSegmentFilter.cpp \
     util/Xml.cpp
 
-TARGET = ../bin/engauge_test
+TARGET = ../bin/TEST
 
 QT += core gui network printsupport testlib widgets xml
 LIBS += -llog4cpp -lfftw3
