@@ -113,8 +113,8 @@ SplinePair Spline::interpolateBezierPoints (double t) const
       SplinePair s ((t - m_t[i]) / (m_t[i + 1] - m_t[i]));
       SplinePair onems (SplinePair (1.0) - s);
       SplinePair xy = onems * onems * onems * m_xy [i] +
-                      SplitPair (3.0) * onems * onems * s * m_p1 [i] +
-                      SplitPair (3.0) * onems * s * s * m_p2 [i] +
+                      SplinePair (3.0) * onems * onems * s * m_p1 [i] +
+                      SplinePair (3.0) * onems * s * s * m_p2 [i] +
                       s * s * s * m_xy[i + 1];
       return xy;
     }
@@ -123,16 +123,16 @@ SplinePair Spline::interpolateBezierPoints (double t) const
   ENGAUGE_ASSERT (false);
 }
 
-SplinePair Spline::p1 (int i) const
+SplinePair Spline::p1 (unsigned int i) const
 {
-  ENGAUGE_ASSERT (i < m_p1.size ());
+  ENGAUGE_ASSERT (i < (unsigned int) m_p1.size ());
 
   return m_p1 [i];
 }
 
-SplinePair Spline::p2 (int i) const
+SplinePair Spline::p2 (unsigned int i) const
 {
-  ENGAUGE_ASSERT (i < m_p2.size ());
+  ENGAUGE_ASSERT (i < (unsigned int) m_p2.size ());
 
   return m_p2 [i];
 }

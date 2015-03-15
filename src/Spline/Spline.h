@@ -30,7 +30,12 @@ class Spline
   /// are not separated by +1 consistently then this algorithm will probably need additional effort to work right
   SplinePair interpolateBezierPoints (double t) const;
 
-  /// Bezier p1 control point for specified interval. 
+  /// Bezier p1 control point for specified interval. P0 is m_xy[i] and P3 is m_xy[i+1]
+  SplinePair p1 (unsigned int i) const;
+
+  /// Bezier p2 control point for specified interval. P0 is m_xy[i] and P3 is m_xy[i+1]
+  SplinePair p2 (unsigned int i) const;
+
 private:
   Spline();
 
