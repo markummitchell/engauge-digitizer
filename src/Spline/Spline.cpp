@@ -14,12 +14,24 @@ Spline::Spline(const std::vector<double> &t,
   ENGAUGE_ASSERT (t.size() == xy.size());
   ENGAUGE_ASSERT (xy.size() >= 3);
 
+  checkTIncrements (t);
   computeCoefficientsForIntervals (t, xy);
   computeControlPointsForIntervals ();
 }
 
 Spline::~Spline()
 {
+}
+
+void Spline::checkTIncrements (const std::vector<double> &t) const
+{
+  for (unsigned int i = 1; i < t.size(); i++) {
+    double tStep = t[i] - t[i-1];
+
+    // Failure here means the increment is not one, which it should be. The epsilon is much larger than roundoff
+    // could produce
+    ENGAUGE_ASSERT (qAbs (tStep - 1.0) < 0.0001);
+  }
 }
 
 void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
@@ -102,7 +114,7 @@ SplinePair Spline::interpolateCoeff (double t) const
   return itr->eval(t);
 }
 
-SplinePair Spline::interpolateBezierPoints (double t) const
+SplinePair Spline::interpolateControlPoints (double t) const
 {
   ENGAUGE_ASSERT (m_xy.size() != 0);
 
@@ -120,6 +132,7 @@ SplinePair Spline::interpolateBezierPoints (double t) const
     }
   }
 
+  // Input argument is out of bounds
   ENGAUGE_ASSERT (false);
 }
 

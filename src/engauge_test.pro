@@ -144,6 +144,7 @@ HEADERS  += \
     Spline/SplinePair.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
+    Test/TestSpline.h \
     Transformation/Transformation.h \
     Transformation/TransformationStateAbstractBase.h \
     Transformation/TransformationStateContext.h \
@@ -287,6 +288,7 @@ SOURCES += \
     Spline/SplineCoeff.cpp \
     Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
+    Test/TestSpline.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \
     Transformation/TransformationStateContext.cpp \
@@ -301,10 +303,6 @@ SOURCES += \
     View/ViewProfileScale.cpp \
     View/ViewSegmentFilter.cpp \
     util/Xml.cpp
-
-# Main entry point for test
-HEADERS += Test/TestGraphCoords.h
-SOURCES += Test/TestGraphCoords.cpp
 
 TARGET = ../bin/engauge_test
 
@@ -335,6 +333,7 @@ INCLUDEPATH += Callback \
                Settings \
                Spline \
                StatusBar \
+               Test \
                Transformation \
                util \
                View

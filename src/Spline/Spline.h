@@ -28,7 +28,7 @@ class Spline
 
   /// Return interpolated y for specified x, for testing. This uses the bezier points. If the t values
   /// are not separated by +1 consistently then this algorithm will probably need additional effort to work right
-  SplinePair interpolateBezierPoints (double t) const;
+  SplinePair interpolateControlPoints (double t) const;
 
   /// Bezier p1 control point for specified interval. P0 is m_xy[i] and P3 is m_xy[i+1]
   SplinePair p1 (unsigned int i) const;
@@ -38,6 +38,11 @@ class Spline
 
 private:
   Spline();
+
+  // Although coefficient interpolation works for successive t values not 1.0 apart, the control point interpolation
+  // does not so we check the increments. Note that the starting value is arbitrary. Removing this restriction will
+  // mean upgrading the code to allow arbitrary t increments
+  void checkTIncrements (const std::vector<double> &t) const;
 
   void computeCoefficientsForIntervals (const std::vector<double> &t,
                                         const std::vector<SplinePair> &xy);

@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-/// Test class for unit tests.
+/// Unit tests of graph coordinate sanity checking
 class TestGraphCoords : public QObject
 {
   Q_OBJECT
@@ -16,9 +16,10 @@ signals:
 private slots:
   void cleanupTestCase ();
   void initTestCase ();
+
   void testThreeCollinearPoints ();
   void testThreeGoodPoints ();
-  void testTwoPointsSharingGraphCoords ();
+  void testTwoPointsSharings ();
   void testTwoPointsSharingScreenCoords ();
 };
 
