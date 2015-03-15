@@ -29,22 +29,54 @@ void TestGraphCoords::initTestCase ()
   w.show ();
 }
 
+void TestGraphCoords::testAnyColumnsRepeat ()
+{
+  double m [3] [3];
+
+  // First two points repeat
+  m [0] [0] = 100;
+  m [1] [0] = 100;
+  m [2] [0] = 1;
+
+  m [0] [1] = 100;
+  m [1] [1] = 100;
+  m [2] [1] = 1;
+
+  m [0] [2] = 200;
+  m [1] [2] = 200;
+  m [2] [2] = 1;
+
+  QVERIFY (m_callback->anyColumnsRepeat (m, 3));
+
+  // No points repeat
+  m [0] [1] = 300;
+
+  QVERIFY (!m_callback->anyColumnsRepeat (m, 3));
+}
+
 void TestGraphCoords::testThreeCollinearPoints ()
 {
-  QVERIFY (false);
+  double m [3] [3];
+
+  // Points are collinear
+  m [0] [0] = 100;
+  m [1] [0] = 100;
+  m [2] [0] = 1;
+
+  m [0] [1] = 150;
+  m [1] [1] = 150;
+  m [2] [1] = 1;
+
+  m [0] [2] = 200;
+  m [1] [2] = 200;
+  m [2] [2] = 1;
+
+  QVERIFY (m_callback->threePointsAreCollinear (m, 3));
+
+  // Points are not collinear
+  m [0] [1] = 300;
+
+  QVERIFY (!m_callback->threePointsAreCollinear (m, 3));
 }
 
-void TestGraphCoords::testThreeGoodPoints ()
-{
-  QVERIFY (false);
-}
 
-void TestGraphCoords::testTwoPointsSharingGraphCoords ()
-{
-  QVERIFY (true);
-}
-
-void TestGraphCoords::testTwoPointsSharingScreenCoords ()
-{
-  QCOMPARE (3, 5);
-}

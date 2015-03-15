@@ -20,10 +20,10 @@ private slots:
   void cleanupTestCase ();
   void initTestCase ();
 
+  void testAnyColumnsRepeat ();
   void testThreeCollinearPoints ();
-  void testThreeGoodPoints ();
-  void testTwoPointsSharingGraphCoords ();
-  void testTwoPointsSharingScreenCoords ();
+
+private:
 
   DocumentModelCoords m_modelCoords;
   CallbackUpdateTransform *m_callback;

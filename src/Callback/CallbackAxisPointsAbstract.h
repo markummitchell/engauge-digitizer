@@ -23,6 +23,9 @@ class Point;
 /// -# Use all existing axis points as is. This is for computing the transformation after axis points are added/edited
 class CallbackAxisPointsAbstract
 {
+  /// For unit testing
+  friend class TestGraphCoords;
+
 public:
   /// Constructor for when all of the existing axis points are to be processed as is.
   CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords);

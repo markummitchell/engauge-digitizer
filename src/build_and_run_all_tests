@@ -10,12 +10,18 @@ then
     echo "Need Qt5";
 else
 
+    # Build tests
     for t in "${tests[@]}"
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake engauge_test.pro
 	make clean
-	make
+	make all
+    done
+
+    # Run tests
+    for t in "${tests[@]}"
+    do
 	../bin/$t
     done
 fi
