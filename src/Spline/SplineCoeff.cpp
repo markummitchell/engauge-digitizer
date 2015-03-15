@@ -26,11 +26,31 @@ bool SplineCoeff::operator<(double t) const
 {
   return m_t < t;
 }
-  
+
+SplinePair SplineCoeff::a () const
+{
+  return m_a;
+}
+
+SplinePair SplineCoeff::b () const
+{
+  return m_b;
+}
+
+SplinePair SplineCoeff::c () const
+{
+  return m_c;
+}
+
+SplinePair SplineCoeff::d () const
+{
+  return m_d;
+}
+
 SplinePair SplineCoeff::eval(double t) const
 {
-  double xix = t - m_t;
-  return m_a + m_b * xix + m_c * (xix * xix) + m_d * (xix * xix * xix);
+  double deltat = t - m_t;
+  return m_a + m_b * deltat + m_c * (deltat * deltat) + m_d * (deltat * deltat * deltat);
 }
 
 double SplineCoeff::t () const

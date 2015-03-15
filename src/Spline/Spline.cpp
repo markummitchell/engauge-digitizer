@@ -13,9 +13,24 @@ Spline::Spline(const std::vector<double> &t,
 {
   ENGAUGE_ASSERT (t.size() == xy.size());
   ENGAUGE_ASSERT (xy.size() >= 3);
-        
+
+  computeCoefficientsForIntervals (t, xy);
+  computeControlPointsForIntervals ();
+}
+
+Spline::~Spline()
+{
+}
+
+void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
+                                              const std::vector<SplinePair> &xy)
+{
+  int i, j;
   int n = xy.size() - 1;
-        
+
+  m_t = t;
+  m_xy = xy;
+
   vector<SplinePair> b(n), d(n), a(n), c(n+1), l(n+1), u(n+1), z(n+1);
   vector<SplinePair> h(n+1);
 
@@ -23,39 +38,58 @@ Spline::Spline(const std::vector<double> &t,
   u[0] = SplinePair (0.0);
   z[0] = SplinePair (0.0);
   h[0] = t[1] - t[0];
-            
-  for (int i = 1; i < n; i++) {
+
+  for (i = 1; i < n; i++) {
     h[i] = t[i+1] - t[i];
     l[i] = SplinePair (2.0) * (t[i+1] - t[i-1]) - h[i-1] * u[i-1];
     u[i] = h[i] / l[i];
     a[i] = (SplinePair (3.0) / h[i]) * (xy[i+1] - xy[i]) - (SplinePair (3.0) / h[i-1]) * (xy[i] - xy[i-1]);
     z[i] = (a[i] - h[i-1] * z[i-1]) / l[i];
   }
-            
+
   l[n] = SplinePair (1.0);
   z[n] = SplinePair (0.0);
   c[n] = SplinePair (0.0);
-        
-  for (int j = n - 1; j >= 0; j--) {
+
+  for (j = n - 1; j >= 0; j--) {
     c[j] = z[j] - u[j] * c[j+1];
     b[j] = (xy[j+1] - xy[j]) / (h[j]) - (h[j] * (c[j+1] + SplinePair (2.0) * c[j])) / SplinePair (3.0);
     d[j] = (c[j+1] - c[j]) / (SplinePair (3.0) * h[j]);
   }
-        
-  for (int i = 0; i < n; i++) {
+
+  for (i = 0; i < n; i++) {
     m_elements.push_back(SplineCoeff(t[i],
                                      xy[i],
                                      b[i],
                                      c[i],
                                      d[i]));
-  }        
+  }
 }
 
-Spline::~Spline()
+void Spline::computeControlPointsForIntervals ()
 {
+  int n = m_xy.size() - 1;
+
+  for (int i = 0; i < n; i++) {
+    const SplineCoeff &element = m_elements[i];
+
+    // Derivative at P0 from (1-s)^3*P0+(1-s)^2*s*P1+(1-s)*s^2*P2+s^3*P3 with s=0 evaluates to 3(P1-P0). That
+    // derivative must match the derivative of y=a+b*(t-ti)+c*(t-ti)^2+d*(t-ti)^3 with t=ti which evaluates to b.
+    // So 3(P1-P0)=b
+    SplinePair p1 = m_xy [i] + element.b() /
+                    SplinePair (3.0);
+
+    // Derivative at P2 from (1-s)^3*P0+(1-s)^2*s*P1+(1-s)*s^2*P2+s^3*P3 with s=1 evaluates to 3(P3-P2). That
+    // derivative must match the derivative of y=a+b*(t-ti)+c*(t-ti)^2+d*(t-ti)^3 with t=ti+1 which evaluates to b+2*c+3*d
+    SplinePair p2 = m_xy [i + 1] - (element.b() + SplinePair (2.0) * element.c() + SplinePair (3.0) * element.d()) /
+                    SplinePair (3.0);
+
+    m_p1.push_back (p1);
+    m_p2.push_back (p2);
+  }
 }
-    
-SplinePair Spline::interpolate(double t) const
+
+SplinePair Spline::interpolateCoeff (double t) const
 {
   ENGAUGE_ASSERT (m_elements.size() != 0);
   
@@ -66,4 +100,39 @@ SplinePair Spline::interpolate(double t) const
   }   
             
   return itr->eval(t);
+}
+
+SplinePair Spline::interpolateBezierPoints (double t) const
+{
+  ENGAUGE_ASSERT (m_xy.size() != 0);
+
+  for (int i = 0; i < (signed) m_xy.size() - 1; i++) {
+
+    if (m_t[i] <= t && t <= m_t[i+1]) {
+
+      SplinePair s ((t - m_t[i]) / (m_t[i + 1] - m_t[i]));
+      SplinePair onems (SplinePair (1.0) - s);
+      SplinePair xy = onems * onems * onems * m_xy [i] +
+                      SplitPair (3.0) * onems * onems * s * m_p1 [i] +
+                      SplitPair (3.0) * onems * s * s * m_p2 [i] +
+                      s * s * s * m_xy[i + 1];
+      return xy;
+    }
+  }
+
+  ENGAUGE_ASSERT (false);
+}
+
+SplinePair Spline::p1 (int i) const
+{
+  ENGAUGE_ASSERT (i < m_p1.size ());
+
+  return m_p1 [i];
+}
+
+SplinePair Spline::p2 (int i) const
+{
+  ENGAUGE_ASSERT (i < m_p2.size ());
+
+  return m_p2 [i];
 }

@@ -1,7 +1,3 @@
-/* "THE BEER-WARE LICENSE" (Revision 42): Devin Lane wrote this file. As long as you retain 
- * this notice you can do whatever you want with this stuff. If we meet some day, and you
- * think this stuff is worth it, you can buy me a beer in return. */
-
 #ifndef SPLINE_COEFF
 #define SPLINE_COEFF
 
@@ -28,6 +24,18 @@ public:
   /// Comparison operator for collection
   bool operator<(double t) const;
   
+  /// Get method for a
+  SplinePair a () const;
+
+  /// Get method for b
+  SplinePair b () const;
+
+  /// Get method for c
+  SplinePair c () const;
+
+  /// Get method for d
+  SplinePair d () const;
+
   /// Evaluate the value using the a,b,c,d coefficients, over this interval
   SplinePair eval(double t) const;
 
