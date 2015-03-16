@@ -17,6 +17,7 @@ else
 	qmake engauge_test.pro
 	make clean
 	make all
+        rm engauge_test.pro
     done
 
     # Run tests

@@ -3,10 +3,10 @@
 
 #include <QHash>
 
+class CurveStyles;
 class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
-class LineStyle;
 class QGraphicsItem;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
@@ -18,23 +18,17 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
-  /// Clear out existing point just prior to storing new set of points
-  void resetPoints ();
+  /// Add new point
+  void savePoint (GraphicsScene &scene,
+                  const QString &curveName,
+                  double ordinal,
+                  GraphicsPoint &point);
 
-  /// Add new item. If the item is already in the map then it is just updated. The line is associated with the lower ordinal value, and
-  /// the upper ordinal value is not involved. The ordinalOther value is only for debugging
-  ///
-  /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
-  void saveLine (GraphicsScene &scene,
-                 const QString &curveName,
-                 double ordinalAssociated,
-                 double ordinalOther,
-                 GraphicsPoint &pointStart,
-                 GraphicsPoint &pointEnd,
-                 const LineStyle &lineStyle);
+  /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
+  void updateFinish (const CurveStyles &curveStyles);
 
-  /// Remove stale lines and insert missing lines
-  void updateLineMembership (GraphicsScene &scene);
+  /// Mark the start of savePoint calls. Afterwards, updateFinish gets called
+  void updateStart ();
 
 private:
 

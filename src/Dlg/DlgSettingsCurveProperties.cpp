@@ -4,7 +4,6 @@
 #include "DlgSettingsCurveProperties.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
-#include "GraphicsLine.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
 #include "GraphicsView.h"
@@ -466,30 +465,7 @@ void DlgSettingsCurveProperties::updatePreview()
   pointRight->setPointStyle (pointStyle);
 
   // Lines between points
-  GraphicsLine *line0 = new GraphicsLine (ORDINAL_0,
-                                          ORDINAL_1);
-  GraphicsLine *line1 = new GraphicsLine (ORDINAL_1,
-                                          ORDINAL_2);
-  line0->setLineStyle (lineStyle);
-  line1->setLineStyle (lineStyle);
-  pointLeft->setLineWithPointAsStart(line0);
-  if (isRelation) {
-    line0->moveStart(posLeft);
-    line0->moveEnd(posRight);
-    pointRight->setLineWithPointAsStart(line1);
-    line1->moveStart(posRight);
-    line1->moveEnd(posCenter);
-  } else {
-    line0->moveStart(posLeft);
-    line0->moveEnd(posCenter);
-    pointCenter->setLineWithPointAsStart(line1);
-    line1->moveStart(posCenter);
-    line1->moveEnd(posRight);
-  }
-  line0->setZValue (Z_LINE);
-  line1->setZValue (Z_LINE);
-  m_scenePreview->addItem (line0);
-  m_scenePreview->addItem (line1);
+  // shit remember to use Z_LINE
 
   resetSceneRectangle();
 }

@@ -11,6 +11,9 @@ class QXmlStreamWriter;
 class Point
 {
 public:
+  /// Default constructor so this class can be used inside a container
+  Point ();
+
   /// Constructor from scratch. The position, in screen coordinates, applies to the center of the Point
   Point (const QString &curveName,
          const QPointF &posScreen,
@@ -65,7 +68,6 @@ public:
   void setPosScreen (const QPointF &posScreen);
 
 private:
-  Point();
 
   /// Load from serialized xml
   void loadXml(QXmlStreamReader &reader);

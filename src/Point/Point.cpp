@@ -11,6 +11,10 @@ unsigned int Point::m_identifierIndex = 0;
 
 const QString POINT_IDENTIFIER_DELIMITER ("_");
 
+Point::Point ()
+{
+}
+
 Point::Point(const QString &curveName,
              const QPointF &posScreen,
              const QPointF posGraph) :

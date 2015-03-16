@@ -32,6 +32,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   setMouseTracking (true);
   setAcceptDrops (true);
   setEnabled (true);
+  setRenderHints(QPainter::Antialiasing);
   setBackgroundBrush (QBrush (QColor (Qt::gray)));
   verticalScrollBar()->setCursor (QCursor (Qt::ArrowCursor));
   horizontalScrollBar()->setCursor (QCursor (Qt::ArrowCursor));

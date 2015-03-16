@@ -6,7 +6,6 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
-#include "GraphicsLine.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
 #include "GraphicsScene.h"
@@ -263,9 +262,6 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembership";
 
-  // Remove all old entries
-  m_graphicsLinesForCurves.resetPoints ();
-
   // Create a sorted map of ordinal to point identifier
   MapOrdinalToPointIdentifier mapOrdinalToPointIdentifier = createMapOrdinalToPointIdentifier();
 
@@ -273,56 +269,32 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
   QStringList curveNames;
   curveNames << AXIS_CURVE_NAME << cmdMediator.document().curvesGraphsNames();
 
-  // Loop through the curves. Processing one curve at a time is simpler than trying to process all in parallel
-  QStringList::iterator itrC;
-  for (itrC = curveNames.begin (); itrC != curveNames.end (); itrC++) {
+  // Initialize before saving points
+  m_graphicsLinesForCurves.updateStart();
 
-    QString curveNameWanted = *itrC;
+  // Iterate through all points. The order, and grouping by curve, is not important since the
+  // ordering and grouping is handled afterwards by updateFinish
+  MapOrdinalToPointIdentifier::const_iterator itr;
+  for (itr = mapOrdinalToPointIdentifier.begin (); itr != mapOrdinalToPointIdentifier.end (); itr++) {
 
-    // Last values
-    double ordinalLast = -1;
-    GraphicsPoint *pointLast = 0;
+    // Get point identifier for this ordinal
+    QString pointIdentifier = itr.value();
 
-    // We use the automatic sorting by key of QMap, to sort by ordinal
-    MapOrdinalToPointIdentifier::const_iterator itr;
-    for (itr = mapOrdinalToPointIdentifier.begin (); itr != mapOrdinalToPointIdentifier.end (); itr++) {
+    // Get point
+    GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [pointIdentifier];
 
-      // Get point identifier for this ordinal
-      QString pointIdentifier = itr.value();
+    // Get parameters for the item
+    QString curveNameGot = Point::curveNameFromPointIdentifier (pointIdentifier);
+    double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();
 
-      // Get point
-      GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [pointIdentifier];
-
-      // Get parameters for the item
-      QString curveNameGot = Point::curveNameFromPointIdentifier (pointIdentifier);
-      double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();
-
-      // Skip this point if it is not in the desired curve
-      if (curveNameWanted == curveNameGot) {
-
-        if (pointLast != 0) {
-
-          // Each line is associated only with the lower ordinal value, to prevent ambiguity
-          double ordinalAssociated = qMin (ordinalLast, ordinal);
-          double ordinalOther = qMax (ordinalLast, ordinal);
-
-          // Save entry even if entry already exists
-          m_graphicsLinesForCurves.saveLine (*this,
-                                             curveNameGot,
-                                             ordinalAssociated,
-                                             ordinalOther,
-                                             *pointLast,
-                                             *point,
-                                             cmdMediator.document().modelCurveStyles().lineStyle(curveNameGot));
-        }
-
-        ordinalLast = ordinal;
-        pointLast = point;
-      }
-    }
+    // Save entry even if entry already exists
+    m_graphicsLinesForCurves.savePoint (*this,
+                                       curveNameGot,
+                                       ordinal,
+                                       *point);
   }
 
-  m_graphicsLinesForCurves.updateLineMembership (*this);
+  m_graphicsLinesForCurves.updateFinish(cmdMediator.document().modelCurveStyles());
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)

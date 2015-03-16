@@ -109,7 +109,6 @@ HEADERS  += \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
-    Graphics/GraphicsLine.h \
     Graphics/GraphicsLinesForCurve.h \
     Graphics/GraphicsLinesForCurves.h \
     Graphics/GraphicsPoint.h \
@@ -256,7 +255,6 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Graphics/GraphicsArcItem.cpp \
-    Graphics/GraphicsLine.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
     Graphics/GraphicsPoint.cpp \

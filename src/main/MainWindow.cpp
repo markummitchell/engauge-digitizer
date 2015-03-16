@@ -892,17 +892,25 @@ void MainWindow::fileImport (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport fileName=" << fileName.toLatin1 ().data ();
 
+  QString originalFileOld = m_originalFile;
+  bool originalFileWasImported = m_originalFileWasImported;
+
+  m_originalFile = fileName; // Make this available for logging in case an error occurs during the load
+  m_originalFileWasImported = true;
+
   QImage image;
   if (!image.load (fileName)) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
                           tr("Cannot read file %1.").
                           arg(fileName));
+
+    // Reset
+    m_originalFile = originalFileOld;
+    m_originalFileWasImported = originalFileWasImported;
+
     return;
   }
-
-  m_originalFile = fileName; // This is needed by loadImage below if an error report is generated
-  m_originalFileWasImported = true;
 
   loadImage (fileName,
              image);
@@ -1253,11 +1261,14 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
     // Postprocessing
     if (!m_originalFileWasImported) {
 
-      // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents
+      // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents. Very early
+      // in the loading process, the original file may not be specified yet (m_originalFile is empty)
       QDomDocument domInputFile;
       loadInputFileForErrorReport (domInputFile);
       QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
-      fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+      if (!domInputFile.isNull()) {
+        fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+      }
       QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
       if (nodesFileTo.count () > 0) {
         QDomNode nodeFileTo = nodesFileTo.at (0);
