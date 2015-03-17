@@ -1,6 +1,7 @@
 #ifndef GRAPHICS_LINES_FOR_CURVE_H
 #define GRAPHICS_LINES_FOR_CURVE_H
 
+#include "MapOrdinalToPoint.h"
 #include "Point.h"
 #include <QGraphicsPathItem>
 #include <QMap>
@@ -8,9 +9,6 @@
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
-
-/// Store points ordered by the ordinal. Container type is QMap since that maintains order by key
-typedef QMap<double, Point> GraphicsPointContainer;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
 /// maintains order by key
@@ -38,7 +36,7 @@ private:
   QPainterPath drawLinesStraight ();
 
   const QString m_curveName;
-  GraphicsPointContainer m_graphicsPoints;
+  MapOrdinalToPoint m_graphicsPoints;
 };
 
 #endif // GRAPHICS_LINES_FOR_CURVE_H

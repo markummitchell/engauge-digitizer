@@ -19,9 +19,6 @@ public:
   GraphicsPointAbstractBase();
   virtual ~GraphicsPointAbstractBase();
 
-  /// Move lines that are attached to this line, since they were bound previously
-  void moveAttachedLines (const QPointF &pos);
-
   /// Bind line to this point, with this point as the line end
   void setLineWithPointAsEnd (GraphicsLine *graphicsLine);
 
@@ -32,9 +29,6 @@ protected:
 
   /// Unbind connected lines.
   void reset ();
-
-  /// Apply line style to line attached to this point as the start point
-  void setLineStyle(const LineStyle &lineStyle);
 
 private:
   void removeOverrideCursor ();

@@ -4,6 +4,7 @@
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
 #include "LineIdentifierToGraphicsLine.h"
+#include "MapOrdinalToPoint.h"
 #include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>
@@ -37,6 +38,9 @@ public:
   GraphicsPoint *addPoint (const QString &identifier,
                            const PointStyle &pointStyle,
                            const QPointF &posScreen);
+
+  /// A mouse move has just occurred so move the selected points, since they were dragged
+  void moveLinesWithDraggedPoints ();
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;

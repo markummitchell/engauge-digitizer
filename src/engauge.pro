@@ -126,6 +126,7 @@ HEADERS  += \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
     main/MainWindow.h \
+    include/MapOrdinalToPoint.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Point/Point.h \

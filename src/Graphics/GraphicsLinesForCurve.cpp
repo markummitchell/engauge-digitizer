@@ -27,7 +27,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
   // iterator instead of an index
   vector<double> t;
   vector<SplinePair> xy;
-  GraphicsPointContainer::const_iterator itr;
+  MapOrdinalToPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
     double ordinal = itr.key();
@@ -79,7 +79,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
 
   // Create QPainterPath through the points
   bool isFirst = true;
-  GraphicsPointContainer::const_iterator itr;
+  MapOrdinalToPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
     const Point &point = *itr;

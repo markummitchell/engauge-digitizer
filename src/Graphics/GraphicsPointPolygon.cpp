@@ -23,9 +23,6 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
                                  << " positionHasChanged";
 
     setData (DATA_KEY_POSITION_HAS_CHANGED, QVariant (true));
-
-    // Send the new position over to the line so it moves the same
-    m_graphicsPoint.moveAttachedLines(pos());
   }
 
   return QGraphicsPolygonItem::itemChange(change,

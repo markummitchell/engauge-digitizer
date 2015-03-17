@@ -383,28 +383,4 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                              QPointF (pointGraphLinearCart0.x(), pointGraphLinearCart0.y()),
                                                              QPointF (pointGraphLinearCart1.x(), pointGraphLinearCart1.y()),
                                                              QPointF (pointGraphLinearCart2.x(), pointGraphLinearCart2.y()));
-
-  // shit start
-  if (m_transformIsDefined) {
-  QPointF p0,p1,p2,p3,p4,p5,p6,p7,p8,p9;
-  transformScreenToLinearCartesianGraph (QPointF (498,20), p0);
-  transformScreenToLinearCartesianGraph (QPointF (498,147), p1);
-  transformScreenToLinearCartesianGraph (QPointF (498,270), p2);
-  transformScreenToLinearCartesianGraph (QPointF (656, 400), p3);
-  transformScreenToLinearCartesianGraph (QPointF (812,400), p4);
-  transformScreenToLinearCartesianGraph (QPointF (968,400), p5);
-  transformScreenToLinearCartesianGraph (QPointF (498,525), p6);
-  transformScreenToLinearCartesianGraph (QPointF (498,651), p7);
-  transformScreenToLinearCartesianGraph (QPointF (498,780), p8);
-  qDebug() << p0.x() <<"," << p0.y() << " "
-              << p1.x() <<","<<p1.y() << " "
-                 << p2.x() <<"," << p2.y() << " "
-                    << p3.x() << "," << p3.y() << " "
-                       << p4.x() << "," << p4.y() << " "
-                          << p5.x() << "," << p5.y() << " "
-                             << p6.x() << "," << p6.y() << " "
-                                << p7.x() << "," << p7.y() << " "
-                                   << p8.x() << "," << p8.y();
-  }
-  // shit end
 }

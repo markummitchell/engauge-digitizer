@@ -205,7 +205,6 @@ void GraphicsPoint::setWanted ()
 void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle)
 {
   setPointStyle (curveStyle.pointStyle()); // This point
-  setLineStyle (curveStyle.lineStyle()); // Curve attached to this point
 }
 
 bool GraphicsPoint::wanted () const

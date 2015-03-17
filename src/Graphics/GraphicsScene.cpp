@@ -87,6 +87,11 @@ QString GraphicsScene::dumpCursors () const
   return dump;
 }
 
+void GraphicsScene::moveLinesWithDraggedPoints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
+}
+
 const QGraphicsPixmapItem *GraphicsScene::image () const
 {
   QList<QGraphicsItem*> items = QGraphicsScene::items();

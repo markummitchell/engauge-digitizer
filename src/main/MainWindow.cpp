@@ -1858,15 +1858,19 @@ void MainWindow::slotMouseMove (QPointF pos)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotMouseMove pos=" << QPointFToString (pos).toLatin1 ().data ();
 
+  // Get status bar coordinates
   QString coordsScreen, coordsGraph, resolutionGraph;
   m_transformation.coordTextForStatusBar (pos,
                                           coordsScreen,
                                           coordsGraph,
                                           resolutionGraph);
 
+  // Update status bar coordinates
   m_statusBar->setCoordinates (coordsScreen,
                                coordsGraph,
                                resolutionGraph);
+
+  m_scene->moveLinesWithDraggedPoints();
 }
 
 void MainWindow::slotMousePress (QPointF pos)
