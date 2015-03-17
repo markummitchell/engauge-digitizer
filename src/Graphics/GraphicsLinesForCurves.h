@@ -8,6 +8,7 @@ class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
 class QGraphicsItem;
+class QPointF;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
 
@@ -17,6 +18,14 @@ class GraphicsLinesForCurves
 public:
   /// Single constructor
   GraphicsLinesForCurves();
+
+  /// Move position of one point, so lines can be moved correspondingly
+  void moveLinesWithDraggedPoint (const QString &pointIdentifier,
+                                  int ordinal,
+                                  const QPointF &scenePos);
+
+  /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
+  void moveLinesWithDraggedPoints (const CurveStyles &curveStyles);
 
   /// Add new point
   void savePoint (GraphicsScene &scene,

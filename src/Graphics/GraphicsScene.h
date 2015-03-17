@@ -40,7 +40,7 @@ public:
                            const QPointF &posScreen);
 
   /// A mouse move has just occurred so move the selected points, since they were dragged
-  void moveLinesWithDraggedPoints ();
+  void moveLinesWithDraggedPoints (const CurveStyles &modelCurveStyles);
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;

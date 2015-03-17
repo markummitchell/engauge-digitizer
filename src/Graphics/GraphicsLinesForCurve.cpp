@@ -95,6 +95,29 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
   return path;
 }
 
+void GraphicsLinesForCurve::moveLinesWithDraggedPoint (const QString & /* pointIdentifier */,
+                                                       int ordinal,
+                                                       const QPointF &scenePos)
+{
+  m_graphicsPoints [ordinal] = Point (m_curveName,
+                                      scenePos);
+}
+
+void GraphicsLinesForCurve::moveLinesWithDraggedPoints (const LineStyle &lineStyle)
+{
+  // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals
+  QPainterPath path;
+  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
+      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT) {
+
+    path = drawLinesStraight ();
+  } else {
+    path = drawLinesSmooth ();
+  }
+
+  setPath (path);
+}
+
 void GraphicsLinesForCurve::savePoint (double ordinal,
                                        GraphicsPoint &point)
 {
@@ -117,17 +140,7 @@ void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)
                    lineStyle.width());
   setPen (pen);
 
-  // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals
-  QPainterPath path;
-  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
-      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT) {
-
-    path = drawLinesStraight ();
-  } else {
-    path = drawLinesSmooth ();
-  }
-
-  setPath (path);
+  moveLinesWithDraggedPoints (lineStyle);
 }
 
 void GraphicsLinesForCurve::updateStart ()

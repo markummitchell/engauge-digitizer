@@ -18,6 +18,14 @@ public:
   /// Single constructor
   GraphicsLinesForCurve(const QString &curveName);
 
+  /// Move position of one point, so lines can be moved correspondingly
+  void moveLinesWithDraggedPoint (const QString &pointIdentifier,
+                                  int ordinal,
+                                  const QPointF &scenePos);
+
+  /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
+  void moveLinesWithDraggedPoints (const LineStyle &lineStyle);
+
   /// Add new line.
   ///
   /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines

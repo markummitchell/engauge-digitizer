@@ -159,8 +159,6 @@ QPointF GraphicsPoint::pos () const
 void GraphicsPoint::reset ()
 {
   m_wanted = false;
-
-  GraphicsPointAbstractBase::reset ();
 }
 
 void GraphicsPoint::setData (int key, const QVariant &data)

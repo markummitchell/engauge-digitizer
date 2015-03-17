@@ -87,13 +87,35 @@ QString GraphicsScene::dumpCursors () const
   return dump;
 }
 
-void GraphicsScene::moveLinesWithDraggedPoints ()
+void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
+
+  // Loop through items in scene and process the selected items
+  QList<QGraphicsItem*> items = QGraphicsScene::items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    QGraphicsItem* item = *itr;
+    if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) &&
+        item->isSelected()) {
+
+      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
+      int ordinal = item->data (DATA_KEY_ORDINAL).toInt();
+
+      m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
+                                                          ordinal,
+                                                          item->scenePos ());
+    }
+  }
+
+  // Recompute the lines one time for efficiency
+  m_graphicsLinesForCurves.moveLinesWithDraggedPoints (curveStyles);
 }
 
 const QGraphicsPixmapItem *GraphicsScene::image () const
 {
+  // Loop through items in scene to find the image
   QList<QGraphicsItem*> items = QGraphicsScene::items();
   QList<QGraphicsItem*>::iterator itr;
   for (itr = items.begin(); itr != items.end(); itr++) {
