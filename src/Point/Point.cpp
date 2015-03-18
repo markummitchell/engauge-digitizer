@@ -38,14 +38,6 @@ Point::Point(const QString &curveName,
   ENGAUGE_ASSERT (!curveName.isEmpty ());
 }
 
-Point::Point (const Point &point)
-{
-  m_posScreen = point.posScreen ();
-  m_posGraph = point.posGraph ();
-  m_identifier = point.identifier ();
-  m_ordinal = point.ordinal ();
-}
-
 Point::Point (QXmlStreamReader &reader)
 {
   loadXml(reader);
@@ -59,6 +51,24 @@ Point &Point::operator=(const Point &point)
   m_ordinal = point.ordinal ();
 
   return *this;
+}
+
+Point::Point (const Point &other)
+{
+  m_posScreen = other.posScreen ();
+  m_posGraph = other.posGraph ();
+  m_identifier = other.identifier ();
+  m_ordinal = other.ordinal ();
+}
+
+Point::Point (const QString &identifier,
+              double ordinal,
+              const QPointF &posScreen) :
+  m_identifier (identifier),
+  m_posScreen (posScreen),
+  m_posGraph (0, 0),
+  m_ordinal (ordinal)
+{
 }
 
 QString Point::curveNameFromPointIdentifier (const QString &pointIdentifier)

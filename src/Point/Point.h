@@ -28,11 +28,16 @@ public:
   /// Constructor when loading from serialized xml
   Point (QXmlStreamReader &reader);
 
-  /// Copy constructor.
-  Point (const Point &point);
+  /// Constructor for creating a proxy Point outside of the Document
+  Point (const QString &identifier,
+         double ordinal,
+         const QPointF &posScreen);
 
   /// Assignment constructor.
   Point &operator=(const Point &point);
+
+  /// Copy constructor.
+  Point (const Point &point);
 
   /// Parse the curve name from the specified point identifier. This does the opposite of uniqueIdentifierGenerator
   static QString curveNameFromPointIdentifier (const QString &pointIdentifier);

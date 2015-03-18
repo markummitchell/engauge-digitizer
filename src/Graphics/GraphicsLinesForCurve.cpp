@@ -5,6 +5,7 @@
 #include "GraphicsScene.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include "Point.h"
 #include <QGraphicsItem>
 #include <QPen>
 #include "QtToString.h"
@@ -17,23 +18,22 @@ GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
 {
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
+QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const OrdinalToPointIdentifier &ordinalToPointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth";
 
   QPainterPath path;
 
-  // Prepare spline inputs. The ordinal values may not start at 0 so we iterate with an
-  // iterator instead of an index
+  // Prepare spline inputs. Note that the ordinal values may not start at 0
   vector<double> t;
   vector<SplinePair> xy;
-  MapOrdinalToPoint::const_iterator itr;
-  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+  OrdinalToPointIdentifier::const_iterator itr;
+  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
 
-    double ordinal = itr.key();
-    const Point &point = itr.value();
+    const QString pointIdentifier = itr.value();
+    const Point &point = m_graphicsPoints [pointIdentifier];
 
-    t.push_back (ordinal);
+    t.push_back (point.ordinal ());
     xy.push_back (SplinePair (point.posScreen ().x(),
                               point.posScreen ().y()));
   }
@@ -46,9 +46,10 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
 
   // Create QPainterPath through the points
   bool isFirst = true;
-  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
 
-    const Point &point = itr.value();
+    const QString pointIdentifier = itr.value();
+    const Point &point = m_graphicsPoints [pointIdentifier];
 
     if (isFirst) {
       isFirst = false;
@@ -71,7 +72,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
   return path;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
+QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdentifier &ordinalToPointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesStraight";
 
@@ -79,10 +80,11 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
 
   // Create QPainterPath through the points
   bool isFirst = true;
-  MapOrdinalToPoint::const_iterator itr;
-  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+  OrdinalToPointIdentifier::const_iterator itr;
+  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
 
-    const Point &point = *itr;
+    const QString pointIdentifier = itr.value();
+    const Point &point = m_graphicsPoints [pointIdentifier];
 
     if (isFirst) {
       isFirst = false;
@@ -95,40 +97,61 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
   return path;
 }
 
-void GraphicsLinesForCurve::moveLinesWithDraggedPoint (const QString & /* pointIdentifier */,
+void GraphicsLinesForCurve::moveLinesWithDraggedPoint (const QString &pointIdentifier,
                                                        int ordinal,
                                                        const QPointF &scenePos)
 {
-  m_graphicsPoints [ordinal] = Point (m_curveName,
-                                      scenePos);
+  // Replace existing entry if there is one, with a proxy Point for the one in the Document
+  Point point (pointIdentifier,
+               ordinal,
+               scenePos);
+
+  m_graphicsPoints [pointIdentifier] = point;
 }
 
 void GraphicsLinesForCurve::moveLinesWithDraggedPoints (const LineStyle &lineStyle)
 {
+  OrdinalToPointIdentifier ordinalToPointIdentifier;
+
+  // Order by ordinals locally
+  PointIdentifierToPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    const Point &point = *itr;
+    ordinalToPointIdentifier [point.ordinal ()] = point.identifier ();
+
+  }
+  
   // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals
   QPainterPath path;
   if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
       lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT) {
 
-    path = drawLinesStraight ();
+    path = drawLinesStraight (ordinalToPointIdentifier);
   } else {
-    path = drawLinesSmooth ();
+    path = drawLinesSmooth (ordinalToPointIdentifier);
   }
 
   setPath (path);
 }
 
-void GraphicsLinesForCurve::savePoint (double ordinal,
-                                       GraphicsPoint &point)
+void GraphicsLinesForCurve::savePoint (const QString &pointIdentifier,
+                                       double ordinal,
+                                       GraphicsPoint &graphicsPoint)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::savePoint"
                               << " curve=" << m_curveName.toLatin1().data()
+                              << " identifier=" << pointIdentifier.toLatin1().data()
                               << " ordinal=" << ordinal
-                              << " pos=" << QPointFToString (point.pos()).toLatin1().data()
+                              << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
                               << " newPointCount=" << (m_graphicsPoints.count() + 1);
 
-  m_graphicsPoints [ordinal] = Point (m_curveName,
-                                      point.pos());
+  // Replace existing entry if there is one, with a proxy Point for the one in the Document
+  Point point (pointIdentifier,
+               ordinal,
+               graphicsPoint.pos());
+
+  m_graphicsPoints [pointIdentifier] = point;
 }
 
 void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)

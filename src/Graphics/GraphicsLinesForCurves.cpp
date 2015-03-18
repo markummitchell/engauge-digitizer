@@ -20,11 +20,14 @@ void GraphicsLinesForCurves::moveLinesWithDraggedPoint (const QString &pointIden
 {
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
 
-  ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
+  if (curveName != AXIS_CURVE_NAME) {
 
-  m_graphicsLinesForCurve [curveName]->moveLinesWithDraggedPoint (pointIdentifier,
-                                                                  ordinal,
-                                                                  scenePos);
+    ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
+
+    m_graphicsLinesForCurve [curveName]->moveLinesWithDraggedPoint (pointIdentifier,
+                                                                    ordinal,
+                                                                    scenePos);
+  }
 }
 
 void GraphicsLinesForCurves::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
@@ -41,12 +44,13 @@ void GraphicsLinesForCurves::moveLinesWithDraggedPoints (const CurveStyles &curv
 
 void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                                         const QString &curveName,
+                                        const QString &pointIdentifier,
                                         double ordinal,
                                         GraphicsPoint &point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::savePoint"
                               << " curve=" << curveName.toLatin1().data()
-                              << " ordinal=" << ordinal
+                              << " identifier=" << pointIdentifier.toLatin1().data()
                               << " pos=" << QPointFToString (point.pos()).toLatin1().data();
 
   // No lines are drawn for the axis points, other than the axes checker box
@@ -60,7 +64,8 @@ void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
       m_graphicsLinesForCurve [curveName] = item;
     }
 
-    m_graphicsLinesForCurve [curveName]->savePoint (ordinal,
+    m_graphicsLinesForCurve [curveName]->savePoint (pointIdentifier,
+                                                    ordinal,
                                                     point);
   }
 }

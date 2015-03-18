@@ -30,6 +30,7 @@ public:
   /// Add new point
   void savePoint (GraphicsScene &scene,
                   const QString &curveName,
+                  const QString &pointIdentifier,
                   double ordinal,
                   GraphicsPoint &point);
 

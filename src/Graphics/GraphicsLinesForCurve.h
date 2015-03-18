@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_LINES_FOR_CURVE_H
 #define GRAPHICS_LINES_FOR_CURVE_H
 
-#include "MapOrdinalToPoint.h"
+#include "PointIdentifierToPoint.h"
 #include "Point.h"
 #include <QGraphicsPathItem>
 #include <QMap>
@@ -9,6 +9,9 @@
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
+
+/// Order-preserving map from ordinal to pointIdentifier of Point
+typedef QMap<double, QString> OrdinalToPointIdentifier;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
 /// maintains order by key
@@ -29,7 +32,8 @@ public:
   /// Add new line.
   ///
   /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
-  void savePoint (double ordinal,
+  void savePoint (const QString &pointIdentifier,
+                  double ordinal,
                   GraphicsPoint &point);
 
   /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
@@ -40,11 +44,11 @@ public:
 
 private:
 
-  QPainterPath drawLinesSmooth ();
-  QPainterPath drawLinesStraight ();
+  QPainterPath drawLinesSmooth (const OrdinalToPointIdentifier &ordinalToPointIdentifier);
+  QPainterPath drawLinesStraight (const OrdinalToPointIdentifier &ordinalToPointIdentifier);
 
   const QString m_curveName;
-  MapOrdinalToPoint m_graphicsPoints;
+  PointIdentifierToPoint m_graphicsPoints;
 };
 
 #endif // GRAPHICS_LINES_FOR_CURVE_H

@@ -316,9 +316,10 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
 
     // Save entry even if entry already exists
     m_graphicsLinesForCurves.savePoint (*this,
-                                       curveNameGot,
-                                       ordinal,
-                                       *point);
+                                        curveNameGot,
+                                        pointIdentifier,
+                                        ordinal,
+                                        *point);
   }
 
   m_graphicsLinesForCurves.updateFinish(cmdMediator.document().modelCurveStyles());

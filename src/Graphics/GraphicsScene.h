@@ -4,7 +4,6 @@
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
 #include "LineIdentifierToGraphicsLine.h"
-#include "MapOrdinalToPoint.h"
 #include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>

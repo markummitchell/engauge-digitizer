@@ -126,12 +126,12 @@ HEADERS  += \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
     main/MainWindow.h \
-    include/MapOrdinalToPoint.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointIdentifierToGraphicsPoint.h \
+    Point/PointIdentifierToPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
