@@ -122,10 +122,12 @@ void GraphicsLinesForCurve::moveLinesWithDraggedPoints (const LineStyle &lineSty
 
   }
   
-  // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals
+  // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals. The
+  // Spline algorithm will crash with fewer than three points so it is only called when there are enough points
   QPainterPath path;
   if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
-      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT) {
+      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
+      m_graphicsPoints.count () < 3) {
 
     path = drawLinesStraight (ordinalToPointIdentifier);
   } else {

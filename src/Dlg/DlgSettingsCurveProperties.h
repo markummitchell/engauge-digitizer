@@ -4,6 +4,7 @@
 #include "CurveStyles.h"
 #include "DlgSettingsAbstractBase.h"
 
+class GraphicsPoint;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
@@ -45,6 +46,10 @@ private:
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void drawLine (bool isRelation,
+                 const LineStyle &lineStyle);
+  void drawPoints (bool isRelation,
+                   const PointStyle &pointStyle);
   void loadForCurveName(const QString &curveName);
   void resetSceneRectangle();
   void updateControls();

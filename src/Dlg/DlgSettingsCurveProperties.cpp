@@ -22,7 +22,12 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QTransform>
+#include "Spline.h"
+#include "SplinePair.h"
+#include <vector>
 #include "ViewPreview.h"
+
+using namespace std;
 
 const QString CONNECT_AS_FUNCTION_SMOOTH_STR ("Function - Smooth");
 const QString CONNECT_AS_FUNCTION_STRAIGHT_STR ("Function - Straight");
@@ -31,6 +36,13 @@ const QString CONNECT_AS_RELATION_STRAIGHT_STR ("Relation - Straight");
 
 const double PREVIEW_WIDTH = 100.0;
 const double PREVIEW_HEIGHT = 100.0;
+
+const QPointF POS_LEFT (PREVIEW_WIDTH / 3.0,
+                        PREVIEW_HEIGHT * 2.0 / 3.0);
+const QPointF POS_CENTER (PREVIEW_WIDTH / 2.0,
+                          PREVIEW_HEIGHT / 3.0);
+const QPointF POS_RIGHT (2.0 * PREVIEW_WIDTH / 3.0,
+                         PREVIEW_HEIGHT * 2.0 / 3.0);
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Curve Properties",
@@ -184,10 +196,14 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
 
   m_scenePreview = new QGraphicsScene (this);
   m_viewPreview = new ViewPreview (m_scenePreview, this);
-  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the points and line of the selected curve."));
+  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the points and line of the selected curve.\n\n"
+                                   "The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A "
+                                   "function can have only one Y value, at most, for any X value, but a relation can have multiple Y values "
+                                   "for one X value."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+  m_viewPreview->setRenderHint (QPainter::Antialiasing);
 
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
@@ -218,6 +234,98 @@ QWidget *DlgSettingsCurveProperties::createSubPanel ()
   layout->setRowStretch (0, 1); // Expand empty first row
 
   return subPanel;
+}
+
+void DlgSettingsCurveProperties::drawLine (bool isRelation,
+                                           const LineStyle &lineStyle)
+{
+  const double Z_LINE = -1.0; // Looks nicer if line goes under the points, so points are unobscured
+
+  // Line between points. Start with function connection
+  QPainterPath path;
+  QPointF p0 (POS_LEFT), p1 (POS_CENTER), p2 (POS_RIGHT);
+  if (isRelation) {
+
+    // Relation connection
+    p1 = POS_RIGHT;
+    p2 = POS_CENTER;
+  }
+
+  // Draw straight or smooth
+  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
+      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
+
+    vector<double> t;
+    vector<SplinePair> xy;
+    t.push_back(0);
+    t.push_back(1);
+    t.push_back(2);
+    xy.push_back (SplinePair (p0.x(), p0.y()));
+    xy.push_back (SplinePair (p1.x(), p1.y()));
+    xy.push_back (SplinePair (p2.x(), p2.y()));
+    Spline spline (t, xy);
+    path.moveTo (p0);
+    path.cubicTo (QPointF (spline.p1(0).x(),
+                           spline.p1(0).y()),
+                  QPointF (spline.p2(0).x(),
+                           spline.p2(0).y()),
+                  p1);
+    path.cubicTo (QPointF (spline.p1(1).x(),
+                           spline.p1(1).y()),
+                  QPointF (spline.p2(1).x(),
+                           spline.p2(1).y()),
+                  p2);
+  } else {
+    path.moveTo (p0);
+    path.lineTo (p1);
+    path.lineTo (p2);
+  }
+
+  QGraphicsPathItem *line = new QGraphicsPathItem (path);
+  line->setPen (QPen (QBrush (ColorPaletteToQColor (lineStyle.paletteColor())),
+                      lineStyle.width()));
+  line->setZValue (Z_LINE);
+  m_scenePreview->addItem (line);
+}
+
+void DlgSettingsCurveProperties::drawPoints (bool isRelation,
+                                             const PointStyle &pointStyle)
+{
+  const QString NULL_IDENTIFIER;
+  const int ORDINAL_0 = 0, ORDINAL_1 = 1, ORDINAL_2 = 2;
+
+  // Ordinals. We change the order of the center and right points from left-to-right when connecting as a relation
+  int ordinalLeft = ORDINAL_0, ordinalCenter = ORDINAL_1, ordinalRight = ORDINAL_2;
+  if (isRelation) {
+    ordinalCenter = ORDINAL_2;
+    ordinalRight = ORDINAL_1;
+  }
+
+  GraphicsPointFactory pointFactory;
+
+  // Left point
+  GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
+                                                       NULL_IDENTIFIER,
+                                                       POS_LEFT,
+                                                       pointStyle,
+                                                       ordinalLeft);
+  pointLeft->setPointStyle (pointStyle);
+
+  // Center point
+  GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
+                                                         NULL_IDENTIFIER,
+                                                         POS_CENTER,
+                                                         pointStyle,
+                                                         ordinalCenter);
+  pointCenter->setPointStyle (pointStyle);
+
+  // Right point
+  GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
+                                                        NULL_IDENTIFIER,
+                                                        POS_RIGHT,
+                                                        pointStyle,
+                                                        ordinalRight);
+  pointRight->setPointStyle (pointStyle);
 }
 
 void DlgSettingsCurveProperties::handleOk ()
@@ -412,15 +520,10 @@ void DlgSettingsCurveProperties::updateControls()
 
 void DlgSettingsCurveProperties::updatePreview()
 {
-  const QString NULL_IDENTIFIER;
-  const int ORDINAL_0 = 0, ORDINAL_1 = 1, ORDINAL_2 = 2;
-  const double Z_LINE = -1.0; // Looks nicer if line goes under the points, so points are unobscured
-
   m_scenePreview->clear();
 
   QString currentCurve = m_cmbCurveName->currentText();
 
-  GraphicsPointFactory pointFactory;
   const PointStyle pointStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).pointStyle();
   const LineStyle lineStyle = m_modelCurveStylesAfter->curveStyle (currentCurve).lineStyle();
 
@@ -428,44 +531,10 @@ void DlgSettingsCurveProperties::updatePreview()
   bool isRelation = (lineStyle.curveConnectAs() == CONNECT_AS_RELATION_SMOOTH ||
                      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT);
 
-  // Ordinals. We change the order of the center and right points from left-to-right when connecting as a relation
-  int ordinalLeft = ORDINAL_0, ordinalCenter = ORDINAL_1, ordinalRight = ORDINAL_2;
-  if (isRelation) {
-    ordinalCenter = ORDINAL_2;
-    ordinalRight = ORDINAL_1;
-  }
-  // Left point
-  QPointF posLeft (PREVIEW_WIDTH / 3.0,
-                   PREVIEW_HEIGHT * 2.0 / 3.0);
-  GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
-                                                       NULL_IDENTIFIER,
-                                                       posLeft,
-                                                       pointStyle,
-                                                       ordinalLeft);
-  pointLeft->setPointStyle (pointStyle);
-
-  // Center point
-  QPointF posCenter (PREVIEW_WIDTH / 2.0,
-                     PREVIEW_HEIGHT / 3.0);
-  GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
-                                                         NULL_IDENTIFIER,
-                                                         posCenter,
-                                                         pointStyle,
-                                                         ordinalCenter);
-  pointCenter->setPointStyle (pointStyle);
-
-  // Right point
-  QPointF posRight (2.0 * PREVIEW_WIDTH / 3.0,
-                    PREVIEW_HEIGHT * 2.0 / 3.0);
-  GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
-                                                        NULL_IDENTIFIER,
-                                                        posRight,
-                                                        pointStyle,
-                                                        ordinalRight);
-  pointRight->setPointStyle (pointStyle);
-
-  // Lines between points
-  // shit remember to use Z_LINE
+  drawPoints (isRelation,
+              pointStyle);
+  drawLine (isRelation,
+            lineStyle);
 
   resetSceneRectangle();
 }
