@@ -3,7 +3,6 @@
 
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
-#include "LineIdentifierToGraphicsLine.h"
 #include "PointIdentifierToGraphicsPoint.h"
 #include <QGraphicsScene>
 #include <QHash>
@@ -77,14 +76,16 @@ private:
   /// Max ordinal of the Points.
   double maxOrdinal () const;
 
-  /// Update lines using a multi-pass algorithm.
-  void updateLineMembership (CmdMediator &cmdMediator);
+  /// Update lines using a multi-pass algorithm, from points in m_graphicsLinesForCurves that were previously replicated
+  /// from the points in CmdMediator. This method should never, for simplicity, try to access any points in CmdMediator
+  void updateLinesBetweenPoints (CmdMediator &cmdMediator);
+
+  /// Update ordinals to reflect point reordering due to dragging. This ordinal processing is done quickly done locally
+  /// so the attached lines reflect the eventual results when the drag command gets processed
+  void updateOrdinalsAfterDrag (const CurveStyles &curveStyles);
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator);
-
-  /// Mapping for moving lines when their points get moved
-  LineIdentifierToGraphicsLine m_lineIdentifierToGraphicsLine;
 
   /// Mapping for finding Points.
   PointIdentifierToGraphicsPoint m_pointIdentifierToGraphicsPoint;

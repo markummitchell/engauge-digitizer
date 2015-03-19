@@ -15,7 +15,6 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 }
 
 void GraphicsLinesForCurves::moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                                        int ordinal,
                                                         const QPointF &scenePos)
 {
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
@@ -25,7 +24,6 @@ void GraphicsLinesForCurves::moveLinesWithDraggedPoint (const QString &pointIden
     ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
 
     m_graphicsLinesForCurve [curveName]->moveLinesWithDraggedPoint (pointIdentifier,
-                                                                    ordinal,
                                                                     scenePos);
   }
 }
@@ -81,6 +79,20 @@ void GraphicsLinesForCurves::updateFinish (const CurveStyles &curveStyles)
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
     graphicsLines->updateFinish (curveStyles.lineStyle (curveName));
+  }
+}
+
+void GraphicsLinesForCurves::updateOrdinalsAfterDrag (const CurveStyles &curveStyles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateOrdinalsAfterDrag";
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    QString curveName = itr.key();
+    GraphicsLinesForCurve *graphicsLines = itr.value();
+
+    graphicsLines->updateOrdinalsAfterDrag (curveStyles.lineStyle (curveName));
   }
 }
 

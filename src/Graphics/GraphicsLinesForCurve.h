@@ -23,7 +23,6 @@ public:
 
   /// Move position of one point, so lines can be moved correspondingly
   void moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                  int ordinal,
                                   const QPointF &scenePos);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
@@ -38,6 +37,9 @@ public:
 
   /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void updateFinish (const LineStyle &lineStyle);
+
+  /// See GraphicsScene::updateOrdinalsAfterDrag
+  void updateOrdinalsAfterDrag (const LineStyle &lineStyle);
 
   /// Mark the start of savePoint calls. Afterwards, updateFinish gets called
   void updateStart ();

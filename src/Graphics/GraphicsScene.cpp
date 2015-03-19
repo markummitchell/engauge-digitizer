@@ -87,32 +87,6 @@ QString GraphicsScene::dumpCursors () const
   return dump;
 }
 
-void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
-
-  // Loop through items in scene and process the selected items
-  QList<QGraphicsItem*> items = QGraphicsScene::items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    QGraphicsItem* item = *itr;
-    if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) &&
-        item->isSelected()) {
-
-      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
-      int ordinal = item->data (DATA_KEY_ORDINAL).toInt();
-
-      m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
-                                                          ordinal,
-                                                          item->scenePos ());
-    }
-  }
-
-  // Recompute the lines one time for efficiency
-  m_graphicsLinesForCurves.moveLinesWithDraggedPoints (curveStyles);
-}
-
 const QGraphicsPixmapItem *GraphicsScene::image () const
 {
   // Loop through items in scene to find the image
@@ -156,6 +130,35 @@ double GraphicsScene::maxOrdinal () const
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::maxOrdinal maxOrdinal=" << maxOrdinal;
 
   return maxOrdinal;
+}
+
+void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
+
+  // Ordinals must be updated to reflect reordering that may have resulted from dragging points
+  updateOrdinalsAfterDrag (curveStyles);
+
+  // Loop through items in scene and process the selected items. Note that the ordinal values
+  // just set by updateOrdinalsAfterDrag in m_graphicsLinesForCurves override the ordinal values
+  // in QGraphicsItem::data
+  QList<QGraphicsItem*> items = QGraphicsScene::items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    QGraphicsItem* item = *itr;
+    if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) &&
+        item->isSelected()) {
+
+      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
+
+      m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
+                                                          item->scenePos ());
+    }
+  }
+
+  // Recompute the lines one time for efficiency
+  m_graphicsLinesForCurves.moveLinesWithDraggedPoints (curveStyles);
 }
 
 QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
@@ -262,15 +265,14 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
   updatePointMembership (cmdMediator);
 
   // Update the lines between the points
-  updateLineMembership (cmdMediator);
+  updateLinesBetweenPoints (cmdMediator);
 }
 
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 
-  // Loop through the points. Since each point is attached to a line (actually, two lines) we give the point and line styles
-  // to the point so it can them to itself and an attached line
+  // Loop through the points
   PointIdentifierToGraphicsPoint::iterator itr;
   for (itr = m_pointIdentifierToGraphicsPoint.begin(); itr != m_pointIdentifierToGraphicsPoint.end(); itr++) {
 
@@ -285,9 +287,9 @@ void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
   }
 }
 
-void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
+void GraphicsScene::updateLinesBetweenPoints (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembership";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLinesBetweenPoints";
 
   // Create a sorted map of ordinal to point identifier
   MapOrdinalToPointIdentifier mapOrdinalToPointIdentifier = createMapOrdinalToPointIdentifier();
@@ -322,7 +324,13 @@ void GraphicsScene::updateLineMembership (CmdMediator &cmdMediator)
                                         *point);
   }
 
+  // Draw lines through the points that have been ordered by their ordinals
   m_graphicsLinesForCurves.updateFinish(cmdMediator.document().modelCurveStyles());
+}
+
+void GraphicsScene::updateOrdinalsAfterDrag (const CurveStyles &curveStyles)
+{
+  m_graphicsLinesForCurves.updateOrdinalsAfterDrag (curveStyles);
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)

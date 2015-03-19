@@ -7,11 +7,14 @@
 #include "Logger.h"
 #include "Point.h"
 #include <QGraphicsItem>
+#include <QMap>
 #include <QPen>
 #include "QtToString.h"
 #include "Spline.h"
 
 using namespace std;
+
+typedef QMap<double, QString> XOrThetaToPointIdentifier;
 
 GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
   m_curveName (curveName)
@@ -98,10 +101,13 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
 }
 
 void GraphicsLinesForCurve::moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                                       int ordinal,
                                                        const QPointF &scenePos)
 {
-  // Replace existing entry if there is one, with a proxy Point for the one in the Document
+  Point pointOld = m_graphicsPoints [pointIdentifier];
+  double ordinal = pointOld.ordinal();
+
+  // Replace existing entry if there is one, with a proxy Point for the one in the Document. Steal the
+  // ordinal value from the old Point
   Point point (pointIdentifier,
                ordinal,
                scenePos);
@@ -166,6 +172,37 @@ void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)
   setPen (pen);
 
   moveLinesWithDraggedPoints (lineStyle);
+}
+
+void GraphicsLinesForCurve::updateOrdinalsAfterDrag (const LineStyle &lineStyle)
+{
+  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
+      lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT) {
+
+    // Make sure ordinals are properly ordered
+
+    // Get a map of x/theta values as keys with point identifiers as the values
+    XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
+    PointIdentifierToPoint::iterator itrP;
+    for (itrP = m_graphicsPoints.begin(); itrP != m_graphicsPoints.end(); itrP++) {
+
+       QString pointIdentifier = itrP.key();
+       const Point &point = itrP.value();
+
+       xOrThetaToPointIdentifier [point.posScreen().x()] = pointIdentifier;
+    }
+
+    // Loop through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
+    int ordinal = 0;
+    XOrThetaToPointIdentifier::const_iterator itrX;
+    for (itrX = xOrThetaToPointIdentifier.begin(); itrX != xOrThetaToPointIdentifier.end(); itrX++) {
+
+      QString pointIdentifier = itrX.value();
+      Point &point = m_graphicsPoints [pointIdentifier];
+
+      point.setOrdinal (ordinal++); // Override the old ordinal
+    }
+  }
 }
 
 void GraphicsLinesForCurve::updateStart ()

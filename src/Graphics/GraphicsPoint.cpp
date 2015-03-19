@@ -170,6 +170,7 @@ void GraphicsPoint::setData (int key, const QVariant &data)
   }
 }
 
+
 void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 {
   // Setting pen and radius of parent graphics items below also affects the child shadows

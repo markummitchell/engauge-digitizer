@@ -120,7 +120,6 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
-    Line/LineIdentifierToGraphicsLine.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
