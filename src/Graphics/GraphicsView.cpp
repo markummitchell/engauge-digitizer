@@ -91,7 +91,9 @@ void GraphicsView::dragEnterEvent (QDragEnterEvent *event)
 
 void GraphicsView::dragMoveEvent (QDragMoveEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::dragMoveEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dragMoveEvent";
+
+  QPointF posScreen = mapToScene (event->pos ());
 
   if (event->mimeData ()->hasImage () ||
       event->mimeData ()->hasUrls ()) {

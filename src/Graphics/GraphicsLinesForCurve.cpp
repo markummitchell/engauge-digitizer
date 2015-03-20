@@ -1,4 +1,5 @@
 #include "DataKey.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsLinesForCurve.h"
 #include "GraphicsPoint.h"
@@ -103,16 +104,10 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
 void GraphicsLinesForCurve::moveLinesWithDraggedPoint (const QString &pointIdentifier,
                                                        const QPointF &scenePos)
 {
-  Point pointOld = m_graphicsPoints [pointIdentifier];
-  double ordinal = pointOld.ordinal();
-
-  // Replace existing entry if there is one, with a proxy Point for the one in the Document. Steal the
-  // ordinal value from the old Point
-  Point point (pointIdentifier,
-               ordinal,
-               scenePos);
-
-  m_graphicsPoints [pointIdentifier] = point;
+  // Since point membership was brought up to date already, we know there is an entry for pointIdentifier.
+  // We just need to update the points position
+  ENGAUGE_ASSERT (m_graphicsPoints.contains (pointIdentifier));
+  m_graphicsPoints [pointIdentifier].setPosScreen (scenePos);
 }
 
 void GraphicsLinesForCurve::moveLinesWithDraggedPoints (const LineStyle &lineStyle)

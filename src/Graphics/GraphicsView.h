@@ -66,10 +66,10 @@ signals:
   /// Send leave to MainWindow for managing the override cursor.
   void signalLeave ();
 
-  /// Send mouse move to MainWindow for eventual display of cursor coordinates in StatusBar.
+  /// Send mouse move to MainWindow for eventual display of cursor coordinates in StatusBar
   void signalMouseMove (QPointF);
 
-  /// Send mouse press to MainWindow for creating one or more Points.
+  /// Send mouse press to MainWindow for creating one or more Points
   void signalMousePress (QPointF);
 
   /// Send mouse release to MainWindow for moving Points.
