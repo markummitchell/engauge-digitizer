@@ -16,6 +16,7 @@ class CurveStyles;
 class GraphicsPoint;
 class MainWindow;
 class PointStyle;
+class Transformation;
 
 // Map ordinals to corresponding point identifiers. This augments the map from point identifier to GraphicsPoint
 typedef QMap<double, QString> MapOrdinalToPointIdentifier;
@@ -37,8 +38,10 @@ public:
                            const PointStyle &pointStyle,
                            const QPointF &posScreen);
 
-  /// A mouse move has just occurred so move the selected points, since they were dragged
-  void moveLinesWithDraggedPoints (const CurveStyles &modelCurveStyles);
+  /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
+  /// so the screen coordinates can be converted to graph coordinates when updating point ordinals
+  void moveLinesWithDraggedPoints (const CurveStyles &modelCurveStyles,
+                                   const Transformation &transformation);
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
@@ -78,14 +81,15 @@ private:
 
   /// Update lines using a multi-pass algorithm, from points in m_graphicsLinesForCurves that were previously replicated
   /// from the points in CmdMediator. This method should never, for simplicity, try to access any points in CmdMediator
-  void updateLinesBetweenPoints (CmdMediator &cmdMediator);
-
-  /// Update ordinals to reflect point reordering due to dragging. This ordinal processing is done quickly done locally
-  /// so the attached lines reflect the eventual results when the drag command gets processed
-  void updateOrdinalsAfterDrag (const CurveStyles &curveStyles);
+  void updateLineMembershipForPoints (CmdMediator &cmdMediator);
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator);
+
+  /// Update ordinals to reflect point reordering due to dragging. This ordinal processing is done quickly done locally
+  /// so the attached lines reflect the eventual results when the drag command gets processed
+  void updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
+                                     const Transformation &transformation);
 
   /// Mapping for finding Points.
   PointIdentifierToGraphicsPoint m_pointIdentifierToGraphicsPoint;

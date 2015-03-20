@@ -20,6 +20,7 @@ class Curve;
 class QImage;
 class QTransform;
 class QXmlStreamWriter;
+class Transformation;
 
 /// Storage of one imported image and the data attached to that image
 class Document
@@ -196,6 +197,7 @@ private:
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadCurvesGraphs(QXmlStreamReader &reader);
   void loadImage(QXmlStreamReader &reader);
+  void updatePointOrdinals (); // See GraphicsScene::updatePointOrdinalsAfterDrag. Graph coordinates of point must be up to date
 
   // Metadata
   QString m_name;

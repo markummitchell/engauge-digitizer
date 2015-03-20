@@ -1874,7 +1874,8 @@ void MainWindow::slotMouseMove (QPointF pos)
                                  resolutionGraph);
 
     // Move lines
-    m_scene->moveLinesWithDraggedPoints(m_cmdMediator->document().modelCurveStyles());
+    m_scene->moveLinesWithDraggedPoints(m_cmdMediator->document().modelCurveStyles(),
+                                        m_transformation);
   }
 }
 

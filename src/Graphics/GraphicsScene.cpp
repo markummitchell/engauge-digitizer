@@ -16,6 +16,7 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include "QtToString.h"
+#include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
   QGraphicsScene(mainWindow)
@@ -132,7 +133,8 @@ double GraphicsScene::maxOrdinal () const
   return maxOrdinal;
 }
 
-void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
+void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles,
+                                                const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
 
@@ -143,7 +145,8 @@ void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
   if (selectedItems().count() > 0) {
 
     // Ordinals must be updated to reflect reordering that may have resulted from dragging points
-    updateOrdinalsAfterDrag (curveStyles);
+    updatePointOrdinalsAfterDrag (curveStyles,
+                                  transformation);
 
     // Loop through items in scene and process the selected items. Note that the ordinal values
     // just set by updateOrdinalsAfterDrag in m_graphicsLinesForCurves override the ordinal values
@@ -272,7 +275,7 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
   updatePointMembership (cmdMediator);
 
   // Update the lines between the points
-  updateLinesBetweenPoints (cmdMediator);
+  updateLineMembershipForPoints (cmdMediator);
 }
 
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
@@ -294,9 +297,9 @@ void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
   }
 }
 
-void GraphicsScene::updateLinesBetweenPoints (CmdMediator &cmdMediator)
+void GraphicsScene::updateLineMembershipForPoints (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLinesBetweenPoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembershipForPoints";
 
   // Create a sorted map of ordinal to point identifier
   MapOrdinalToPointIdentifier mapOrdinalToPointIdentifier = createMapOrdinalToPointIdentifier();
@@ -333,11 +336,6 @@ void GraphicsScene::updateLinesBetweenPoints (CmdMediator &cmdMediator)
 
   // Draw lines through the points that have been ordered by their ordinals
   m_graphicsLinesForCurves.updateFinish(cmdMediator.document().modelCurveStyles());
-}
-
-void GraphicsScene::updateOrdinalsAfterDrag (const CurveStyles &curveStyles)
-{
-  m_graphicsLinesForCurves.updateOrdinalsAfterDrag (curveStyles);
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
@@ -383,4 +381,11 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
       m_pointIdentifierToGraphicsPoint.erase (itr);
     }
   }
+}
+
+void GraphicsScene::updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
+                                                  const Transformation &transformation)
+{
+  m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
+                                                         transformation);
 }

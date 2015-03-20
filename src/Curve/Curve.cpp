@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "Point.h"
 #include <QDebug>
+#include <QMap>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
@@ -13,6 +14,8 @@
 const QString AXIS_CURVE_NAME ("Axes");
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
+
+typedef QMap<double, QString> XOrThetaToPointIdentifier;
 
 Curve::Curve(const QString &curveName,
              const ColorFilterSettings &colorFilterSettings,
@@ -372,3 +375,38 @@ void Curve::setCurveStyle (const CurveStyle &curveStyle)
   m_curveStyle = curveStyle;
 }
 
+void Curve::updatePointOrdinals ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::updatePointOrdinals";
+
+  if (m_curveStyle.lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
+      m_curveStyle.lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT) {
+
+    // Make sure ordinals are properly ordered
+
+    // Get a map of x/theta values as keys with point identifiers as the values
+    XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
+    Points::iterator itr;
+    for (itr = m_points.begin (); itr != m_points.end (); itr++) {
+      Point &point = *itr;
+      xOrThetaToPointIdentifier [point.posGraph().x()] = point.identifier();
+    }
+
+    // Since m_points is a list (and therefore does not provide direct access to elements), we build a temporary map of
+    // point identifier to ordinal, by looping through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
+    QMap<QString, double> pointIdentifierToOrdinal;
+    int ordinal = 0;
+    XOrThetaToPointIdentifier::const_iterator itrX;
+    for (itrX = xOrThetaToPointIdentifier.begin(); itrX != xOrThetaToPointIdentifier.end(); itrX++) {
+
+      QString pointIdentifier = itrX.value();
+      pointIdentifierToOrdinal [pointIdentifier] = ordinal++;
+    }
+
+    // Override the old ordinal values
+    for (itr = m_points.begin(); itr != m_points.end(); itr++) {
+      Point &point = *itr;
+      point.setOrdinal (ordinal++);
+    }
+  }
+}

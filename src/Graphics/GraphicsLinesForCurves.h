@@ -9,6 +9,7 @@ class GraphicsPoint;
 class GraphicsScene;
 class QGraphicsItem;
 class QPointF;
+class Transformation;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
 
@@ -37,7 +38,8 @@ public:
   void updateFinish (const CurveStyles &curveStyles);
 
   /// See GraphicsScene::updateOrdinalsAfterDrag
-  void updateOrdinalsAfterDrag (const CurveStyles &curveStyles);
+  void updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
+                                     const Transformation &transformation);
 
   /// Mark the start of savePoint calls. Afterwards, updateFinish gets called
   void updateStart ();

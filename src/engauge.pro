@@ -120,7 +120,6 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
-    Line/LineSorter.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -266,7 +265,6 @@ SOURCES += \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
     Grid/GridCoordDisable.cpp \
-    Line/LineSorter.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \

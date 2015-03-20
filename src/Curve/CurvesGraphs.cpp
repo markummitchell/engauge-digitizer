@@ -1,5 +1,6 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "CurveStyles.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
@@ -187,4 +188,16 @@ void CurvesGraphs::saveXml(QXmlStreamWriter &writer) const
   }
 
   writer.writeEndElement();
+}
+
+void CurvesGraphs::updatePointOrdinals ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::updatePointOrdinals";
+
+  CurveList::iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    Curve &curve = *itr;
+    curve.updatePointOrdinals ();
+  }
 }

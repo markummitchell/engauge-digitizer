@@ -9,6 +9,7 @@
 #include "Point.h"
 #include <QGraphicsItem>
 #include "QtToString.h"
+#include "Transformation.h"
 
 GraphicsLinesForCurves::GraphicsLinesForCurves()
 {
@@ -82,9 +83,10 @@ void GraphicsLinesForCurves::updateFinish (const CurveStyles &curveStyles)
   }
 }
 
-void GraphicsLinesForCurves::updateOrdinalsAfterDrag (const CurveStyles &curveStyles)
+void GraphicsLinesForCurves::updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
+                                                           const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateOrdinalsAfterDrag";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updatePointOrdinalsAfterDrag";
 
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
@@ -92,7 +94,8 @@ void GraphicsLinesForCurves::updateOrdinalsAfterDrag (const CurveStyles &curveSt
     QString curveName = itr.key();
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->updateOrdinalsAfterDrag (curveStyles.lineStyle (curveName));
+    graphicsLines->updatePointOrdinalsAfterDrag (curveStyles.lineStyle (curveName),
+                                                 transformation);
   }
 }
 

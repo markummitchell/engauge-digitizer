@@ -12,6 +12,7 @@
 #include <QPen>
 #include "QtToString.h"
 #include "Spline.h"
+#include "Transformation.h"
 
 using namespace std;
 
@@ -169,7 +170,8 @@ void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)
   moveLinesWithDraggedPoints (lineStyle);
 }
 
-void GraphicsLinesForCurve::updateOrdinalsAfterDrag (const LineStyle &lineStyle)
+void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,
+                                                          const Transformation &transformation)
 {
   if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
       lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT) {
@@ -182,9 +184,14 @@ void GraphicsLinesForCurve::updateOrdinalsAfterDrag (const LineStyle &lineStyle)
     for (itrP = m_graphicsPoints.begin(); itrP != m_graphicsPoints.end(); itrP++) {
 
        QString pointIdentifier = itrP.key();
-       const Point &point = itrP.value();
+       const Point &pointScreen = itrP.value();
 
-       xOrThetaToPointIdentifier [point.posScreen().x()] = pointIdentifier;
+       // Convert screen coordinate to graph coordinates, which gives us x/theta
+       QPointF pointGraph;
+       transformation.transformScreenToRawGraph(pointScreen.posScreen(),
+                                                pointGraph);
+
+       xOrThetaToPointIdentifier [pointGraph.x()] = pointIdentifier;
     }
 
     // Loop through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted

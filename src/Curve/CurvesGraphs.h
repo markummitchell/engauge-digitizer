@@ -6,6 +6,7 @@
 #include <QList>
 #include <QStringList>
 
+class CurveStyles;
 class Point;
 class QXmlStreamReader;
 class QXmlStreamWriter;
@@ -58,6 +59,9 @@ public:
 
   /// Serialize curves
   void saveXml(QXmlStreamWriter &writer) const;
+
+  /// Update point ordinals to be consistent with their CurveStyle and x/theta coordinate
+  void updatePointOrdinals ();
 
 private:
 

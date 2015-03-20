@@ -9,6 +9,7 @@
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
+class Transformation;
 
 /// Order-preserving map from ordinal to pointIdentifier of Point
 typedef QMap<double, QString> OrdinalToPointIdentifier;
@@ -38,8 +39,9 @@ public:
   /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void updateFinish (const LineStyle &lineStyle);
 
-  /// See GraphicsScene::updateOrdinalsAfterDrag
-  void updateOrdinalsAfterDrag (const LineStyle &lineStyle);
+  /// See GraphicsScene::updateOrdinalsAfterDrag. Pretty much the same steps as Curve::updatePointOrdinals
+  void updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,
+                                     const Transformation &transformation);
 
   /// Mark the start of savePoint calls. Afterwards, updateFinish gets called
   void updateStart ();
