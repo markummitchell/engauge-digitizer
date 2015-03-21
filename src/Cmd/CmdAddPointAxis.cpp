@@ -62,6 +62,7 @@ void CmdAddPointAxis::cmdRedo ()
   document().addPointAxis (m_posScreen,
                            m_posGraph,
                            m_identifierAdded);
+  document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
 
@@ -70,6 +71,7 @@ void CmdAddPointAxis::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdUndo";
 
   document().removePointAxis (m_identifierAdded);
+  document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
 

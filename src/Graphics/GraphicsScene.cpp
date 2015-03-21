@@ -133,44 +133,6 @@ double GraphicsScene::maxOrdinal () const
   return maxOrdinal;
 }
 
-void GraphicsScene::moveLinesWithDraggedPoints (const CurveStyles &curveStyles,
-                                                const Transformation &transformation)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::moveLinesWithDraggedPoints";
-
-  // Skip processing if no points are being selected since that means no points are getting moved. This prevents some
-  // unnecessary processing (and the resulting slight delay) when the cursor is simply being moved by itself. If one or
-  // more points are selected, they may or may not be getting dragged, but it is too hard to figure determine which is the case
-  // so we chose the safer option and always process if any point is selected
-  if (selectedItems().count() > 0) {
-
-    // Ordinals must be updated to reflect reordering that may have resulted from dragging points
-    updatePointOrdinalsAfterDrag (curveStyles,
-                                  transformation);
-
-    // Loop through items in scene and process the selected items. Note that the ordinal values
-    // just set by updateOrdinalsAfterDrag in m_graphicsLinesForCurves override the ordinal values
-    // in QGraphicsItem::data
-    QList<QGraphicsItem*> items = QGraphicsScene::items();
-    QList<QGraphicsItem*>::iterator itr;
-    for (itr = items.begin(); itr != items.end(); itr++) {
-
-      QGraphicsItem* item = *itr;
-      if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) &&
-          item->isSelected()) {
-
-        QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
-
-        m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
-                                                            item->scenePos ());
-      }
-    }
-
-    // Recompute the lines one time for efficiency
-    m_graphicsLinesForCurves.moveLinesWithDraggedPoints (curveStyles);
-  }
-}
-
 QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::positionHasChangedPointIdentifiers";
@@ -213,6 +175,19 @@ void GraphicsScene::removePoint (const QString &identifier)
   GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [identifier];
   m_pointIdentifierToGraphicsPoint.remove (identifier);
   delete point;
+}
+
+void GraphicsScene::resetPositionHasChangedFlags()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::resetPositionHasChangedFlags";
+
+  QList<QGraphicsItem*> itms = items ();
+  QList<QGraphicsItem*>::const_iterator itr;
+  for (itr = itms.begin (); itr != itms.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+    item->setData (DATA_KEY_POSITION_HAS_CHANGED, false);
+  }
 }
 
 QStringList GraphicsScene::selectedPointIdentifiers () const
@@ -294,6 +269,46 @@ void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
     CurveStyle curveStyle = modelCurveStyles.curveStyle(curveName);
 
     point->updateCurveStyle (curveStyle);
+  }
+}
+
+void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
+                                                              const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints";
+
+  // There are 3 cases here:
+  // 1) mouse is moving with no points selected
+  // 2) mouse is moving with points selected but none are being dragged
+  // 3) mouse is moving with points selected and one or more points are being dragged
+  // Cases 2 and 3 are hard to distinguish since the QGraphics* classes are not very informative, so case 2
+  // is handled as case 3 (=lines are updated even though they might not actually move)
+  if (selectedItems().count () > 0) {
+
+    // Ordinals must be updated to reflect reordering that may have resulted from dragging points
+    m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
+                                                           transformation);
+
+    // Loop through items in scene and process the selected items. Note that the ordinal values
+    // just set by updateOrdinalsAfterDrag in m_graphicsLinesForCurves override the ordinal values
+    // in QGraphicsItem::data
+    QList<QGraphicsItem*> items = QGraphicsScene::items();
+    QList<QGraphicsItem*>::iterator itr;
+    for (itr = items.begin(); itr != items.end(); itr++) {
+
+      QGraphicsItem* item = *itr;
+      if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) &&
+          item->isSelected()) {
+
+        QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
+
+        m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
+                                                            item->scenePos ());
+      }
+    }
+
+    // Recompute the lines one time for efficiency
+    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
   }
 }
 
@@ -381,11 +396,4 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
       m_pointIdentifierToGraphicsPoint.erase (itr);
     }
   }
-}
-
-void GraphicsScene::updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
-                                                  const Transformation &transformation)
-{
-  m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
-                                                         transformation);
 }

@@ -47,9 +47,6 @@ public:
   /// Intercept mouse release events to move one or more Points.
   virtual void mouseReleaseEvent (QMouseEvent *event);
 
-  /// Prepare for possible item moves after mousePressEvent.
-  void resetPositionHasChangedFlags();
-
 signals:
   /// Send right click on axis point to MainWindow for editing.
   void signalContextMenuEvent (QString pointIdentifier);

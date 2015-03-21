@@ -29,18 +29,6 @@ void GraphicsLinesForCurves::moveLinesWithDraggedPoint (const QString &pointIden
   }
 }
 
-void GraphicsLinesForCurves::moveLinesWithDraggedPoints (const CurveStyles &curveStyles)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::moveLinesWithDraggedPoints";
-
-  GraphicsLinesContainer::const_iterator itr;
-  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
-
-    QString curveName = itr.key();
-    m_graphicsLinesForCurve [curveName]->moveLinesWithDraggedPoints(curveStyles.lineStyle (curveName));
-  }
-}
-
 void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                                         const QString &curveName,
                                         const QString &pointIdentifier,
@@ -80,6 +68,18 @@ void GraphicsLinesForCurves::updateFinish (const CurveStyles &curveStyles)
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
     graphicsLines->updateFinish (curveStyles.lineStyle (curveName));
+  }
+}
+
+void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints";
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    QString curveName = itr.key();
+    m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName));
   }
 }
 

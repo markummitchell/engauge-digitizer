@@ -158,8 +158,6 @@ void Document::addPointAxis (const QPointF &posScreen,
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
-
-  updatePointOrdinals ();
 }
 
 void Document::addPointAxis (const QPointF &posScreen,
@@ -176,8 +174,6 @@ void Document::addPointAxis (const QPointF &posScreen,
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
-
-  updatePointOrdinals ();
 }
 
 void Document::addPointGraph (const QString &curveName,
@@ -193,8 +189,6 @@ void Document::addPointGraph (const QString &curveName,
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraph"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
-
-  updatePointOrdinals ();
 }
 
 void Document::addPointGraph (const QString &curveName,
@@ -209,8 +203,6 @@ void Document::addPointGraph (const QString &curveName,
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraph"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
-
-  updatePointOrdinals ();
 }
 
 void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
@@ -221,15 +213,11 @@ void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
                                                                                                      &CallbackAddPointsInCurvesGraphs::callback);
 
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
-
-  updatePointOrdinals ();
 }
 
 void Document::applyTransformation (const Transformation &transformation)
 {
   m_curvesGraphs.applyTransformation (transformation);
-
-  updatePointOrdinals ();
 }
 
 void Document::checkAddPointAxis (const QPointF &posScreen,
@@ -332,8 +320,6 @@ void Document::editPointAxis (const QPointF &posGraph,
 
   m_curveAxes->editPoint (posGraph,
                           identifier);
-
-  updatePointOrdinals ();
 }
 
 void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
@@ -358,7 +344,6 @@ void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
-  updatePointOrdinals();
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
@@ -373,7 +358,6 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
-  updatePointOrdinals();
 }
 
 void Document::loadImage(QXmlStreamReader &reader)
@@ -626,6 +610,8 @@ bool Document::successfulRead () const
 
 void Document::updatePointOrdinals ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::updatePointOrdinals";
+
   // The graph coordinates of all points in m_curvesGraphs must have already been updated at this point. See applyTransformation
   m_curvesGraphs.updatePointOrdinals ();
 }

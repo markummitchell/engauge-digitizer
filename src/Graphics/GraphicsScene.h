@@ -38,11 +38,6 @@ public:
                            const PointStyle &pointStyle,
                            const QPointF &posScreen);
 
-  /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
-  /// so the screen coordinates can be converted to graph coordinates when updating point ordinals
-  void moveLinesWithDraggedPoints (const CurveStyles &modelCurveStyles,
-                                   const Transformation &transformation);
-
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
 
@@ -50,7 +45,7 @@ public:
   void removePoint (const QString &identifier);
 
   /// Reset positionHasChanged flag for all items. Typically this is done as part of mousePressEvent.
-  void resetPositionHasChanged();
+  void resetPositionHasChangedFlags();
 
   /// Return a list of identifiers for the currently selected points.
   QStringList selectedPointIdentifiers () const;
@@ -65,6 +60,11 @@ public:
 
   /// Update curve styles after settings changed.
   void updateCurveStyles(const CurveStyles &modelCurveStyles);
+
+  /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
+  /// so the screen coordinates can be converted to graph coordinates when updating point ordinals
+  void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &modelCurveStyles,
+                                                 const Transformation &transformation);
 
 private:
 
@@ -85,11 +85,6 @@ private:
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator);
-
-  /// Update ordinals to reflect point reordering due to dragging. This ordinal processing is done quickly done locally
-  /// so the attached lines reflect the eventual results when the drag command gets processed
-  void updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
-                                     const Transformation &transformation);
 
   /// Mapping for finding Points.
   PointIdentifierToGraphicsPoint m_pointIdentifierToGraphicsPoint;

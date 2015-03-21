@@ -59,6 +59,7 @@ void CmdAddPointGraph::cmdRedo ()
   document().addPointGraph (m_curveName,
                             m_posScreen,
                             m_identifierAdded);
+  document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
 
@@ -67,6 +68,7 @@ void CmdAddPointGraph::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
   document().removePointGraph (m_identifierAdded);
+  document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
 

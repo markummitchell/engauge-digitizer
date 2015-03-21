@@ -93,8 +93,6 @@ void GraphicsView::dragMoveEvent (QDragMoveEvent *event)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dragMoveEvent";
 
-  QPointF posScreen = mapToScene (event->pos ());
-
   if (event->mimeData ()->hasImage () ||
       event->mimeData ()->hasUrls ()) {
     event->acceptProposedAction();
@@ -236,17 +234,4 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
   }
 
   QGraphicsView::mouseReleaseEvent (event);
-}
-
-void GraphicsView::resetPositionHasChangedFlags()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::resetPositionHasChangedFlags";
-
-  QList<QGraphicsItem*> items = scene()->items ();
-  QList<QGraphicsItem*>::const_iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    item->setData (DATA_KEY_POSITION_HAS_CHANGED, false);
-  }
 }

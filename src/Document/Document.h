@@ -190,6 +190,10 @@ public:
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;
 
+  /// Update point ordinals after point addition/removal or dragging. See GraphicsScene::updatePointOrdinalsAfterDrag.
+  /// Graph coordinates of point must be up to date
+  void updatePointOrdinals ();
+
 private:
   Document ();
 
@@ -197,7 +201,6 @@ private:
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadCurvesGraphs(QXmlStreamReader &reader);
   void loadImage(QXmlStreamReader &reader);
-  void updatePointOrdinals (); // See GraphicsScene::updatePointOrdinalsAfterDrag. Graph coordinates of point must be up to date
 
   // Metadata
   QString m_name;

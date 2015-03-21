@@ -406,7 +406,8 @@ void Curve::updatePointOrdinals ()
     // Override the old ordinal values
     for (itr = m_points.begin(); itr != m_points.end(); itr++) {
       Point &point = *itr;
-      point.setOrdinal (ordinal++);
+      int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
+      point.setOrdinal (ordinalNew);
     }
   }
 }

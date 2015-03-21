@@ -4,6 +4,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
+#include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -69,7 +70,6 @@ void CmdMoveBy::cmdRedo ()
                               << " moving=" << m_movedPoints.count ();
 
   moveBy (m_deltaScreen);
-
   mainWindow().updateAfterCommand();
 }
 
@@ -80,7 +80,6 @@ void CmdMoveBy::cmdUndo ()
                               << " moving=" << m_movedPoints.count ();
 
   moveBy (-1.0 * m_deltaScreen);
-
   mainWindow().updateAfterCommand();
 }
 
@@ -117,6 +116,9 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
       }
     }
   }
+
+  // Update the lines attached to the points
+  mainWindow().updateGraphicsLinesToMatchGraphicsPoints();
 }
 
 void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const

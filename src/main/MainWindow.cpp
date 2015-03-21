@@ -1873,9 +1873,7 @@ void MainWindow::slotMouseMove (QPointF pos)
                                  coordsGraph,
                                  resolutionGraph);
 
-    // Move lines
-    m_scene->moveLinesWithDraggedPoints(m_cmdMediator->document().modelCurveStyles(),
-                                        m_transformation);
+    updateGraphicsLinesToMatchGraphicsPoints();
   }
 }
 
@@ -1883,7 +1881,7 @@ void MainWindow::slotMousePress (QPointF pos)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotMousePress";
 
-  m_view->resetPositionHasChangedFlags();
+  m_scene->resetPositionHasChangedFlags();
 
   m_digitizeStateContext->handleMousePress (pos);
 }
@@ -2517,6 +2515,14 @@ void MainWindow::updateControls ()
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
   m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
+}
+
+void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGraphicsLinesToMatchGraphicsPoints";
+
+  m_scene->updateGraphicsLinesToMatchGraphicsPoints(m_cmdMediator->document().modelCurveStyles(),
+                                                    m_transformation);
 }
 
 void MainWindow::updateImages (const QPixmap &pixmap)

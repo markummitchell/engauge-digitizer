@@ -26,9 +26,6 @@ public:
   void moveLinesWithDraggedPoint (const QString &pointIdentifier,
                                   const QPointF &scenePos);
 
-  /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
-  void moveLinesWithDraggedPoints (const LineStyle &lineStyle);
-
   /// Add new line.
   ///
   /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
@@ -38,6 +35,9 @@ public:
 
   /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void updateFinish (const LineStyle &lineStyle);
+
+  /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
+  void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle);
 
   /// See GraphicsScene::updateOrdinalsAfterDrag. Pretty much the same steps as Curve::updatePointOrdinals
   void updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,

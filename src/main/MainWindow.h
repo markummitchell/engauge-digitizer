@@ -85,11 +85,14 @@ public:
   /// Return true if all three axis points have been defined.
   bool transformIsDefined() const;
 
-  /// See GraphicsScene::updateAfterCommand.
+  /// See GraphicsScene::updateAfterCommand
   void updateAfterCommand();
 
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
+
+  /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, ...
+  void updateGraphicsLinesToMatchGraphicsPoints();
 
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
