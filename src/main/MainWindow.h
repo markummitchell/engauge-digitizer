@@ -86,12 +86,13 @@ public:
   bool transformIsDefined() const;
 
   /// See GraphicsScene::updateAfterCommand
-  void updateAfterCommand();
+  void updateAfterCommand(bool linesAreAlreadyUpdated = false);
 
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
-  /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, ...
+  /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, and such. The points
+  /// in the Document may (and probably are) out of date with respect to the graphics points
   void updateGraphicsLinesToMatchGraphicsPoints();
 
   /// Update with new axes indicator properties.

@@ -55,8 +55,10 @@ public:
                    bool showAll = false,
                    const QString &curveName = "");
 
-  /// Update the Curves and their Points after executing a command.
-  void updateAfterCommand (CmdMediator &cmdMediator);
+  /// Update the Points and their Curves after executing a command. After a mouse drag, the lines are already updated and
+  /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
+  void updateAfterCommand (CmdMediator &cmdMediator,
+                           bool linesAreAlreadyUpdated);
 
   /// Update curve styles after settings changed.
   void updateCurveStyles(const CurveStyles &modelCurveStyles);

@@ -12,6 +12,8 @@
 #include <QtToString.h>
 #include <QXmlStreamReader>
 
+const bool LINES_ARE_ALREADY_UPDATED = true;
+
 CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
                      Document &document,
                      const QPointF &deltaScreen,
@@ -70,7 +72,7 @@ void CmdMoveBy::cmdRedo ()
                               << " moving=" << m_movedPoints.count ();
 
   moveBy (m_deltaScreen);
-  mainWindow().updateAfterCommand();
+  mainWindow().updateAfterCommand(LINES_ARE_ALREADY_UPDATED);
 }
 
 void CmdMoveBy::cmdUndo ()
@@ -80,11 +82,13 @@ void CmdMoveBy::cmdUndo ()
                               << " moving=" << m_movedPoints.count ();
 
   moveBy (-1.0 * m_deltaScreen);
-  mainWindow().updateAfterCommand();
+  mainWindow().updateAfterCommand(LINES_ARE_ALREADY_UPDATED);
 }
 
 void CmdMoveBy::moveBy (const QPointF &deltaScreen)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdMoveBy::moveBy";
+
   // Move Points in the Document
   for (int i = 0; i < m_movedPoints.count(); i++) {
 
