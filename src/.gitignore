@@ -1,5 +1,6 @@
 \#*
 *.autosave
+build_and_run_all_tests.log
 .moc
 .moc_test
 .objs

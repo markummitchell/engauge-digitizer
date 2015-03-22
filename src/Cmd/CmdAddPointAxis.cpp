@@ -59,9 +59,9 @@ void CmdAddPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdRedo";
 
-  document().addPointAxis (m_posScreen,
-                           m_posGraph,
-                           m_identifierAdded);
+  document().addPointAxisWithGeneratedIdentifier (m_posScreen,
+                                                  m_posGraph,
+                                                  m_identifierAdded);
   document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }

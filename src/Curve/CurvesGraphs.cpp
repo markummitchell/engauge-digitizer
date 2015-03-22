@@ -124,6 +124,16 @@ void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString 
   }
 }
 
+void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)  const
+{
+  CurveList::const_iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    const Curve &curve = *itr;
+    curve.iterateThroughCurvePoints (ftorWithCallback);
+  }
+}
+
 void CurvesGraphs::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::loadXml";

@@ -48,6 +48,9 @@ public:
   /// Apply functor to Points on all of the Curves.
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
+  /// Apply functor to Points on all of the Curves.
+  void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+
   /// Load from serialized file
   void loadXml(QXmlStreamReader &reader);
 

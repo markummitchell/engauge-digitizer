@@ -80,47 +80,65 @@ QRgb pixelRGB32(const QImage &image32Bit, int x, int y)
   return *p;
 }
 
-void projectPointOntoLine(double xCenter,
-                          double yCenter,
+void projectPointOntoLine(double xToProject,
+                          double yToProject,
                           double xStart,
                           double yStart,
                           double xStop,
                           double yStop,
                           double *xProjection,
-                          double* yProjection)
+                          double *yProjection,
+                          double *projectedDistanceOutsideLine)
 {
-  if (qAbs (yStart - yStop) < 0.000001) {
+  double s;
+  if (qAbs (yStart - yStop) > qAbs (xStart - xStop)) {
 
-    // Special case - line segment is vertical
-    *yProjection = yStart;
-    double s = (xCenter - xStart) / (xStop - xStart);
-    if (s < 0) {
-      *xProjection = xStart;
-    } else if (s > 1) {
-      *xProjection = xStop;
-    } else {
-      *xProjection = (1.0 - s) * xStart + s * xStop;
-    }
-  } else {
-
-    // General case - compute slope and intercept of line through (xCenter, yCenter)
+    // More vertical than horizontal. Compute slope and intercept of y=slope*x+yintercept line through (xToProject, yToProject)
     double slope = (xStop - xStart) / (yStart - yStop);
-    double yintercept = yCenter - slope * xCenter;
+    double yintercept = yToProject - slope * xToProject;
 
-    // Intersect center point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
-    double s = (slope * xStart + yintercept - yStart) /
+    // Intersect projected point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
+    s = (slope * xStart + yintercept - yStart) /
       (yStop - yStart + slope * (xStart - xStop));
 
-    if (s < 0) {
-      *xProjection = xStart;
-      *yProjection = yStart;
-    } else if (s > 1) {
-      *xProjection = xStop;
-      *yProjection = yStop;
-    } else {
-      *xProjection = (1.0 - s) * xStart + s * xStop;
-      *yProjection = (1.0 - s) * yStart + s * yStop;
-    }
+  } else {
+
+    // More horizontal than vertical. Compute slope and intercept of x=slope*y+xintercept line through (xToProject, yToProject)
+    double slope = (yStop - yStart) / (xStart - xStop);
+    double xintercept = xToProject - slope * yToProject;
+
+    // Intersect projected point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
+    s = (slope * yStart + xintercept - xStart) /
+      (xStop - xStart + slope * (yStart - yStop));
+
+  }
+
+  *xProjection = (1.0 - s) * xStart + s * xStop;
+  *yProjection = (1.0 - s) * yStart + s * yStop;
+
+  if (s < 0) {
+
+    *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStart) * (*xProjection - xStart) +
+                                           (*yProjection - yStart) * (*yProjection - yStart));
+
+    // Bring projection point to inside line
+    *xProjection = xStart;
+    *yProjection = yStart;
+
+  } else if (s > 1) {
+
+    *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStop) * (*xProjection - xStop) +
+                                           (*yProjection - yStop) * (*yProjection - yStop));
+
+    // Bring projection point to inside line
+    *xProjection = xStop;
+    *yProjection = yStop;
+
+  } else {
+
+    // Projected point is aleady inside line
+    *projectedDistanceOutsideLine = 0.0;
+
   }
 }
 

@@ -20,8 +20,8 @@ bool Segment::pointIsCloseToLine(double xLeft,
                                  double xRight,
                                  double yRight)
 {
-  double xProj, yProj;
-  projectPointOntoLine(xInt, yInt, xLeft, yLeft, xRight, yRight, &xProj, &yProj);
+  double xProj, yProj, projectedDistanceOutsideLine;
+  projectPointOntoLine(xInt, yInt, xLeft, yLeft, xRight, yRight, &xProj, &yProj, &projectedDistanceOutsideLine);
 
   return (
     (xInt - xProj) * (xInt - xProj) +

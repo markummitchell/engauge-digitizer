@@ -1,7 +1,20 @@
 #!/bin/bash
 
 # Test names. Synchronize with edit_one_test
-tests=(TestGraphCoords TestSpline)
+tests=(TestGraphCoords TestProjectedPoint TestSpline)
+if [ -n "$1" ]
+then 
+    tests=("$1");
+fi
+
+# Logging
+LOGFILE="build_and_run_all_tests.log"
+rm -rf $LOGFILE
+
+# Cleanup. We do not want to force complete rebuild for each test application since that takes VERY long
+rm .moc_test/*
+rm .obj_test/*
+rm ../bin/Test*
 
 # Make sure correct qt installation is being used, by looking for '5.' in the version number
 VERSION5=`qmake -v | grep '5\.'`
@@ -15,8 +28,8 @@ else
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake engauge_test.pro
-	make clean
-	make all
+        make clean 2>>$LOGFILE >/dev/null
+	make all 2>>$LOGFILE >/dev/null
         rm engauge_test.pro
     done
 
@@ -26,4 +39,3 @@ else
 	../bin/$t
     done
 fi
-

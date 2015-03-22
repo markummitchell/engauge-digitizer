@@ -143,9 +143,9 @@ void Document::addGraphCurveAtEnd (const QString &curveName)
                                                          PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
 }
 
-void Document::addPointAxis (const QPointF &posScreen,
-                             const QPointF &posGraph,
-                             QString &identifier)
+void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
+                                                    const QPointF &posGraph,
+                                                    QString &identifier)
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
@@ -154,15 +154,15 @@ void Document::addPointAxis (const QPointF &posScreen,
 
   identifier = point.identifier();
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxis"
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithGeneratedIdentifier"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
 
-void Document::addPointAxis (const QPointF &posScreen,
-                             const QPointF &posGraph,
-                             const QString &identifier)
+void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
+                                                    const QPointF &posGraph,
+                                                    const QString &identifier)
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
@@ -170,15 +170,16 @@ void Document::addPointAxis (const QPointF &posScreen,
                posGraph);
   m_curveAxes->addPoint (point);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxis"
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithSpecifiedIdentifier"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
 
-void Document::addPointGraph (const QString &curveName,
-                              const QPointF &posScreen,
-                              QString &identifier)
+void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
+                                                     const QPointF &posScreen,
+                                                     QString &identifier,
+                                                     double ordinal)
 {
   Point point (curveName,
                posScreen);
@@ -186,21 +187,22 @@ void Document::addPointGraph (const QString &curveName,
 
   identifier = point.identifier();
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraph"
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithGeneratedIdentifier"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
 
-void Document::addPointGraph (const QString &curveName,
-                              const QPointF &posScreen,
-                              const QString &identifier)
+void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
+                                                     const QPointF &posScreen,
+                                                     const QString &identifier,
+                                                     double ordinal)
 {
   Point point (curveName,
                posScreen,
                identifier);
   m_curvesGraphs.addPoint (point);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraph"
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithSpecifiedIdentifier"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
@@ -354,6 +356,13 @@ void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
+{
+  ENGAUGE_CHECK_PTR (m_curveAxes);
+
+  m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 

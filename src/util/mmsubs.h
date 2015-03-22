@@ -26,15 +26,20 @@ extern QRgb pixelRGB8 (const QImage &image8Bit, int x, int y);
 /// Get pixel method for 32 bit depth
 extern QRgb pixelRGB32 (const QImage &image32Bit, int x, int y);
 
-/// Find the projection of a point onto a line such that the line through the point and its projection are normal to the original line
-extern void projectPointOntoLine(double xCenter,
-                                 double yCenter,
+/// Find the projection of a point onto a line such that the line through the point and its projection are normal to
+/// the original line, subject to one constraint. The constraint is that if the project point is outside the (xStart,yStart)
+/// to (xStop,yStop) line segment then it will be moved to (xStart,yStart) or (xStop,yStop), whichever is closer.
+/// The returned argument projectedDistanceOutsideLine specifies how far the projected point was moved because of
+/// this constraint - zero if it was not moved or greater than zero if it was moved.
+extern void projectPointOntoLine(double xToProject,
+                                 double yToProject,
                                  double xStart,
                                  double yStart,
                                  double xStop,
                                  double yStop,
                                  double *xProjection,
-                                 double *yProjection);
+                                 double *yProjection,
+                                 double *projectedDistanceOutsideLine);
 
 /// Set pixel method for any bit depth
 extern void setPixelRGB (QImage &image, int x, int y, QRgb q);

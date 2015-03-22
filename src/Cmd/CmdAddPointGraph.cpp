@@ -1,3 +1,4 @@
+#include "CallbackPointOrdinal.h"
 #include "CmdAddPointGraph.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -17,10 +18,14 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
                document,
                CMD_DESCRIPTION),
   m_curveName (curveName),
-  m_posScreen (posScreen)
+  m_posScreen (posScreen),
+  m_ordinal (ordinalForNewPoint (document,
+                                 posScreen,
+                                 curveName))
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::CmdAddPointGraph"
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ();
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
+                              << " ordinal=" << m_ordinal;
 }
 
 CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
@@ -38,6 +43,7 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
       ENGAUGE_ASSERT (false);
   }
@@ -45,6 +51,7 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
   m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
   m_posScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
   m_curveName = attributes.value(DOCUMENT_SERIALIZE_CURVE_NAME).toString();
+  m_ordinal = attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
   m_identifierAdded = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
 }
 
@@ -56,9 +63,10 @@ void CmdAddPointGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdRedo";
 
-  document().addPointGraph (m_curveName,
-                            m_posScreen,
-                            m_identifierAdded);
+  document().addPointGraphWithGeneratedIdentifier (m_curveName,
+                                                   m_posScreen,
+                                                   m_identifierAdded,
+                                                   m_ordinal);
   document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
@@ -72,12 +80,28 @@ void CmdAddPointGraph::cmdUndo ()
   mainWindow().updateAfterCommand();
 }
 
+double CmdAddPointGraph::ordinalForNewPoint (const Document &document,
+                                             const QPointF &posScreen,
+                                             const QString &curveName)
+{
+  CallbackPointOrdinal ftor (document.modelCurveStyles().lineStyle(curveName),
+                             curveName,
+                             posScreen);
+
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackPointOrdinal::callback);
+  document.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+
+  return ftor.ordinal ();
+}
+
 void CmdAddPointGraph::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_ADD_POINT_GRAPH);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);

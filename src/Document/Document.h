@@ -39,27 +39,29 @@ public:
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
-  void addPointAxis (const QPointF &posScreen,
-                     const QPointF &posGraph,
-                     QString &identifier);
+  void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
+                                            const QPointF &posGraph,
+                                            QString &identifier);
 
   /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call.
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
-  void addPointAxis (const QPointF &posScreen,
-                     const QPointF &posGraph,
-                     const QString &identifier);
+  void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
+                                            const QPointF &posGraph,
+                                            const QString &identifier);
 
   /// Add a single graph point with a generated point identifier.
-  void addPointGraph (const QString &curveName,
-                      const QPointF &posScreen,
-                      QString &identifier);
+  void addPointGraphWithGeneratedIdentifier (const QString &curveName,
+                                             const QPointF &posScreen,
+                                             QString &generatedIentifier,
+                                             double ordinal);
 
   /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Document.
-  void addPointGraph (const QString &curveName,
-                      const QPointF &posScreen,
-                      const QString &identifier);
+  void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
+                                             const QPointF &posScreen,
+                                             const QString &identifier,
+                                             double ordinal);
 
   /// Add all points identified in the specified CurvesGraphs. See also removePointsInCurvesGraphs
   void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
@@ -107,6 +109,9 @@ public:
 
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+
+  /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
+  void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
   /// Get method for DocumentModelAxesChecker.
   DocumentModelAxesChecker modelAxesChecker() const;
