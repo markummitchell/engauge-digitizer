@@ -2384,6 +2384,13 @@ void MainWindow::slotViewZoomOut ()
   }
 }
 
+Transformation MainWindow::transformation() const
+{
+  Q_ASSERT (transformIsDefined ());
+
+  return m_transformation;
+}
+
 bool MainWindow::transformIsDefined() const
 {
   return m_transformation.transformIsDefined();

@@ -149,6 +149,7 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
+               UNDEFINED_ORDINAL,
                posGraph);
   m_curveAxes->addPoint (point);
 
@@ -167,6 +168,7 @@ void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
   Point point (AXIS_CURVE_NAME,
                posScreen,
                identifier,
+               UNDEFINED_ORDINAL,
                posGraph);
   m_curveAxes->addPoint (point);
 
@@ -182,7 +184,8 @@ void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                      double ordinal)
 {
   Point point (curveName,
-               posScreen);
+               posScreen,
+               ordinal);
   m_curvesGraphs.addPoint (point);
 
   identifier = point.identifier();
@@ -199,7 +202,8 @@ void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
 {
   Point point (curveName,
                posScreen,
-               identifier);
+               identifier,
+               ordinal);
   m_curvesGraphs.addPoint (point);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithSpecifiedIdentifier"

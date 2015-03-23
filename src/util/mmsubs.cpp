@@ -88,7 +88,8 @@ void projectPointOntoLine(double xToProject,
                           double yStop,
                           double *xProjection,
                           double *yProjection,
-                          double *projectedDistanceOutsideLine)
+                          double *projectedDistanceOutsideLine,
+                          double *distanceToLine)
 {
   double s;
   if (qAbs (yStart - yStop) > qAbs (xStart - xStop)) {
@@ -120,6 +121,8 @@ void projectPointOntoLine(double xToProject,
 
     *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStart) * (*xProjection - xStart) +
                                            (*yProjection - yStart) * (*yProjection - yStart));
+    *distanceToLine = qSqrt ((xToProject - xStart) * (xToProject - xStart) +
+                             (yToProject - yStart) * (yToProject - yStart));
 
     // Bring projection point to inside line
     *xProjection = xStart;
@@ -129,12 +132,17 @@ void projectPointOntoLine(double xToProject,
 
     *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStop) * (*xProjection - xStop) +
                                            (*yProjection - yStop) * (*yProjection - yStop));
+    *distanceToLine = qSqrt ((xToProject - xStop) * (xToProject - xStop) +
+                             (yToProject - yStop) * (yToProject - yStop));
 
     // Bring projection point to inside line
     *xProjection = xStop;
     *yProjection = yStop;
 
   } else {
+
+    *distanceToLine = qSqrt ((xToProject - *xProjection) * (xToProject - *xProjection) +
+                             (yToProject - *yProjection) * (yToProject - *yProjection));
 
     // Projected point is aleady inside line
     *projectedDistanceOutsideLine = 0.0;

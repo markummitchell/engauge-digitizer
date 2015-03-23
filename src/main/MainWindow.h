@@ -82,6 +82,9 @@ public:
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
 
+  /// Return read-only copy of transformation
+  Transformation transformation() const;
+
   /// Return true if all three axis points have been defined.
   bool transformIsDefined() const;
 

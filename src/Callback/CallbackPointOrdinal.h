@@ -5,6 +5,7 @@
 #include "LineStyle.h"
 #include <QPointF>
 #include <QString>
+#include "Transformation.h"
 
 class Point;
 
@@ -14,6 +15,7 @@ class CallbackPointOrdinal
 public:
   /// Single constructor
   CallbackPointOrdinal(const LineStyle &lineStyle,
+                       const Transformation &transformation,
                        const QString &curveName,
                        const QPointF &posScreen);
 
@@ -28,6 +30,7 @@ private:
   CallbackPointOrdinal();
 
   const LineStyle m_lineStyle;
+  const Transformation m_transformation;
   const QString m_curveName;  
   const QPointF m_posScreen;
 };

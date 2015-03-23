@@ -5,6 +5,7 @@
 #include <QPointF>
 
 class QXmlStreamReader;
+class Transformation;
 
 /// Command for adding one graph point.
 class CmdAddPointGraph : public CmdAbstract
@@ -34,6 +35,7 @@ private:
   // Depending on CurveStyle settings, determine where in its Curve it will be inserted. This is specified as the ordinal.
   // This is static so it is available during construction
   static double ordinalForNewPoint (const Document &document,
+                                    const Transformation &transformation,
                                     const QPointF &posScreen,
                                     const QString &curveName);
 

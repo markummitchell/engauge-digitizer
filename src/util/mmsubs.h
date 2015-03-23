@@ -26,11 +26,20 @@ extern QRgb pixelRGB8 (const QImage &image8Bit, int x, int y);
 /// Get pixel method for 32 bit depth
 extern QRgb pixelRGB32 (const QImage &image32Bit, int x, int y);
 
-/// Find the projection of a point onto a line such that the line through the point and its projection are normal to
+/// Find the projection of a point onto a line segment such that the line through the point and its projection are normal to
 /// the original line, subject to one constraint. The constraint is that if the project point is outside the (xStart,yStart)
 /// to (xStop,yStop) line segment then it will be moved to (xStart,yStart) or (xStop,yStop), whichever is closer.
-/// The returned argument projectedDistanceOutsideLine specifies how far the projected point was moved because of
-/// this constraint - zero if it was not moved or greater than zero if it was moved.
+/// \param xToProject X/theta coordinate to project
+/// \param yToProject Y/radius coordinate to project
+/// \param xStart X/theta at start
+/// \param yStart Y/radius at start
+/// \param xStop X/theta at end
+/// \param yStop Y/radius at end
+/// \param xProjection X/theta coordinate of point projected onto line, moved to between start and end points if outside
+/// \param yProjection Y/radius coordinate of point projected onto line, moved to between start and end points if outside
+/// \param projectedDistanceOutsideLine Specifies how far the projected point was moved because of
+///                                     this constraint - zero if it was not moved or greater than zero if it was moved.
+/// \param distanceToLine Distance between point and close point on the line segment
 extern void projectPointOntoLine(double xToProject,
                                  double yToProject,
                                  double xStart,
@@ -39,7 +48,8 @@ extern void projectPointOntoLine(double xToProject,
                                  double yStop,
                                  double *xProjection,
                                  double *yProjection,
-                                 double *projectedDistanceOutsideLine);
+                                 double *projectedDistanceOutsideLine,
+                                 double *distanceToLine);
 
 /// Set pixel method for any bit depth
 extern void setPixelRGB (QImage &image, int x, int y, QRgb q);

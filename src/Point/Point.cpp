@@ -17,11 +17,12 @@ Point::Point ()
 
 Point::Point(const QString &curveName,
              const QPointF &posScreen,
+             double ordinal,
              const QPointF posGraph) :
   m_identifier (uniqueIdentifierGenerator(curveName)),
   m_posScreen (posScreen),
   m_posGraph (posGraph),
-  m_ordinal (0)
+  m_ordinal (ordinal)
 {
   ENGAUGE_ASSERT (!curveName.isEmpty ());
 }
@@ -29,11 +30,12 @@ Point::Point(const QString &curveName,
 Point::Point(const QString &curveName,
              const QPointF &posScreen,
              const QString &identifier,
+             double ordinal,
              const QPointF posGraph) :
   m_identifier (identifier),
   m_posScreen (posScreen),
   m_posGraph (posGraph),
-  m_ordinal (0)
+  m_ordinal (ordinal)
 {
   ENGAUGE_ASSERT (!curveName.isEmpty ());
 }

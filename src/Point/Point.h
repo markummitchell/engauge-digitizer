@@ -7,6 +7,8 @@
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
+const double UNDEFINED_ORDINAL = -1.0;
+
 /// Class that represents one digitized point. The screen-to-graph coordinate transformation is always external to this class
 class Point
 {
@@ -17,12 +19,14 @@ public:
   /// Constructor from scratch. The position, in screen coordinates, applies to the center of the Point
   Point (const QString &curveName,
          const QPointF &posScreen,
+         double ordinal = UNDEFINED_ORDINAL,
          const QPointF posGraph = QPointF (0, 0));
 
   /// Constructor for specified identifier (after redo). The position, in screen coordinates, applies to the center of the Point
   Point (const QString &curveName,
          const QPointF &posScreen,
          const QString &identifier,
+         double ordinal = UNDEFINED_ORDINAL,
          const QPointF posGraph = QPointF (0, 0));
 
   /// Constructor when loading from serialized xml

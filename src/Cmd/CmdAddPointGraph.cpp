@@ -7,6 +7,7 @@
 #include "MainWindow.h"
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Transformation.h"
 
 const QString CMD_DESCRIPTION ("Add graph point");
 
@@ -20,6 +21,7 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
   m_curveName (curveName),
   m_posScreen (posScreen),
   m_ordinal (ordinalForNewPoint (document,
+                                 mainWindow.transformation(),
                                  posScreen,
                                  curveName))
 {
@@ -81,10 +83,12 @@ void CmdAddPointGraph::cmdUndo ()
 }
 
 double CmdAddPointGraph::ordinalForNewPoint (const Document &document,
+                                             const Transformation &transformation,
                                              const QPointF &posScreen,
                                              const QString &curveName)
 {
   CallbackPointOrdinal ftor (document.modelCurveStyles().lineStyle(curveName),
+                             transformation,
                              curveName,
                              posScreen);
 
