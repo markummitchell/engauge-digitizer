@@ -175,6 +175,35 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
   }
 }
 
+void Curve::iterateThroughCurveSegments (const Functor2wRet<const Point&, const Point&, CallbackSearchReturn> &ftorWithCallback) const
+{
+  int index;
+  typedef QMap<double, int> MapOrdinalToIndex;
+
+  // Compile a map of ordinals to list indexes
+  MapOrdinalToIndex mapOrdinalToIndex;
+  QList<Point>::const_iterator itr;
+  for (index = 0; index < m_points.count(); index++) {
+
+    const Point &point = m_points [index];
+    mapOrdinalToIndex [point.ordinal()] = index;
+  }
+
+  // Loop through Points in order of their ordinals
+  for (index = 1; index < mapOrdinalToIndex.count(); index++) {
+
+    const Point &pointMinus1 = m_points [index - 1];
+    const Point &point = m_points [index];
+
+    CallbackSearchReturn rtn = ftorWithCallback (pointMinus1,
+                                                 point);
+
+    if (rtn == CALLBACK_SEARCH_RETURN_INTERRUPT) {
+      break;
+    }
+  }
+}
+
 void Curve::loadCurvePoints(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Curve::loadCurvePoints";

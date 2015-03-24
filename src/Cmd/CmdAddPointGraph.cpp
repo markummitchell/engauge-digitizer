@@ -89,12 +89,12 @@ double CmdAddPointGraph::ordinalForNewPoint (const Document &document,
 {
   CallbackPointOrdinal ftor (document.modelCurveStyles().lineStyle(curveName),
                              transformation,
-                             curveName,
                              posScreen);
 
-  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackPointOrdinal::callback);
-  document.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+  Functor2wRet<const Point&, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                 &CallbackPointOrdinal::callback);
+  document.iterateThroughCurveSegments (curveName,
+                                        ftorWithCallback);
 
   return ftor.ordinal ();
 }

@@ -16,12 +16,11 @@ public:
   /// Single constructor
   CallbackPointOrdinal(const LineStyle &lineStyle,
                        const Transformation &transformation,
-                       const QString &curveName,
                        const QPointF &posScreen);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback (const Point &pointStart,
+                                 const Point &pointStop);
 
   /// Computed ordinal
   double ordinal () const;
@@ -31,8 +30,21 @@ private:
 
   const LineStyle m_lineStyle;
   const Transformation m_transformation;
-  const QString m_curveName;  
   const QPointF m_posScreen;
+
+  // Find the line segment using one or two steps:
+  // 1) If the closest point to m_posScreen is between the endpoints of a line segment, then finding the minimum point-to-line distance
+  //    is sufficient to determine the closest line segment. There is no ambiguity, since only one line segment will have the
+  //    minimum point-to-line distance
+  // 2) If case 1 does not apply, then there are two cases:
+  //    2a) The point is just past one terminating line segment. There is no ambiguity, since only one line segment will have the
+  //        minimum point-to-line distance
+  //    2b) The point is near a vertex between two line segments. There is ambiguity with the two line segments which is resolved
+  //        by comparing the minimum projected-distance-outside-line (minimum value wins)
+  bool m_haveMinimumDistanceToLine;
+  double m_minimumDistanceToLine;
+  double m_minimumProjectedDistanceOutsideLine;
+  double m_ordinal; // Valid when m_haveMinimumDistanceToLine is true
 };
 
 #endif // CALLBACK_POINT_ORDINAL_H

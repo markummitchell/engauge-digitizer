@@ -114,6 +114,24 @@ void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
   ENGAUGE_ASSERT (false);
 }
 
+void CurvesGraphs::iterateThroughCurveSegments (const QString &curveNameWanted,
+                                                const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
+{
+  // Search for curve with matching name
+  CurveList::const_iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    const Curve &curve = *itr;
+    if (curve.curveName () == curveNameWanted) {
+
+      curve.iterateThroughCurveSegments (ftorWithCallback);
+      return;
+    }
+  }
+
+  ENGAUGE_ASSERT (false);
+}
+
 void CurvesGraphs::iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   CurveList::const_iterator itr;

@@ -107,6 +107,10 @@ public:
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
+  /// See Curve::iterateThroughCurveSegments, for any axes or graph curve
+  void iterateThroughCurveSegments (const QString &curveName,
+                                    const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 

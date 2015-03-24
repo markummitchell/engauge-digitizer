@@ -45,6 +45,10 @@ public:
   void iterateThroughCurvePoints (const QString &curveNameWanted,
                                   const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 
+  /// Apply functor to segments on the specified axis or graph Curve.
+  void iterateThroughCurveSegments (const QString &curveNameWanted,
+                                    const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+
   /// Apply functor to Points on all of the Curves.
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 

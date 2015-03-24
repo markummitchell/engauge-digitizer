@@ -359,6 +359,17 @@ void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
+void Document::iterateThroughCurveSegments (const QString &curveName,
+                                            const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
+{
+  if (curveName == AXIS_CURVE_NAME) {
+    m_curveAxes->iterateThroughCurveSegments(ftorWithCallback);
+  } else {
+    m_curvesGraphs.iterateThroughCurveSegments(curveName,
+                                               ftorWithCallback);
+  }
+}
+
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);

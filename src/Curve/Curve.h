@@ -68,6 +68,9 @@ public:
   /// Apply functor to Points on Curve.
   void iterateThroughCurvePoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
+  /// Apply functor to successive Points, as line segments, on Curve. This could be a bit slow
+  void iterateThroughCurveSegments (const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+
   /// Translate the position of a point by the specified distance vector.
   void movePoint (const QString &pointIdentifier,
                   const QPointF &deltaScreen);
