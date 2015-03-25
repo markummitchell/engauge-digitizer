@@ -131,7 +131,6 @@ HEADERS  += \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointIdentifierToGraphicsPoint.h \
-    Point/PointIdentifierToPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \

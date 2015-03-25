@@ -15,20 +15,6 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 {
 }
 
-void GraphicsLinesForCurves::moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                                        const QPointF &scenePos)
-{
-  QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-
-  if (curveName != AXIS_CURVE_NAME) {
-
-    ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
-
-    m_graphicsLinesForCurve [curveName]->moveLinesWithDraggedPoint (pointIdentifier,
-                                                                    scenePos);
-  }
-}
-
 void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                                         const QString &curveName,
                                         const QString &pointIdentifier,

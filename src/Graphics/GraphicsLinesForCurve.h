@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_LINES_FOR_CURVE_H
 #define GRAPHICS_LINES_FOR_CURVE_H
 
-#include "PointIdentifierToPoint.h"
+#include "PointIdentifierToGraphicsPoint.h"
 #include "Point.h"
 #include <QGraphicsPathItem>
 #include <QMap>
@@ -21,10 +21,6 @@ class GraphicsLinesForCurve : public QGraphicsPathItem
 public:
   /// Single constructor
   GraphicsLinesForCurve(const QString &curveName);
-
-  /// Move position of one point, so lines can be moved correspondingly
-  void moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                  const QPointF &scenePos);
 
   /// Add new line.
   ///
@@ -52,7 +48,7 @@ private:
   QPainterPath drawLinesStraight (const OrdinalToPointIdentifier &ordinalToPointIdentifier);
 
   const QString m_curveName;
-  PointIdentifierToPoint m_graphicsPoints;
+  PointIdentifierToGraphicsPoint m_graphicsPoints;
 };
 
 #endif // GRAPHICS_LINES_FOR_CURVE_H

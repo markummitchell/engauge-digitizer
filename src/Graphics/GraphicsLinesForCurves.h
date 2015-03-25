@@ -20,10 +20,6 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
-  /// Move position of one point, so lines can be moved correspondingly
-  void moveLinesWithDraggedPoint (const QString &pointIdentifier,
-                                  const QPointF &scenePos);
-
   /// Add new point
   void savePoint (GraphicsScene &scene,
                   const QString &curveName,

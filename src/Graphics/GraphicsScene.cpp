@@ -31,6 +31,7 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
 
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addPoint"
                               << " identifier=" << identifier.toLatin1().data()
+                              << " count=" << m_pointIdentifierToGraphicsPoint.count()
                               << " ordinal=" << ordinal;
 
   // Ordinal value is initially computed as one plus the max ordinal seen so far. This initial ordinal value will be overridden if the
@@ -285,23 +286,6 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
   // Ordinals must be updated to reflect reordering that may have resulted from dragging points
   m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
                                                          transformation);
-
-  // Loop through items in scene and process all items. Note that the ordinal values
-  // just set by updateOrdinalsAfterDrag in m_graphicsLinesForCurves override the ordinal values
-  // in QGraphicsItem::data. This algorithm is slow since it processes all items versus just a few selected items
-  QList<QGraphicsItem*> items = QGraphicsScene::items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    QGraphicsItem* item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) {
-
-      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString();
-
-      m_graphicsLinesForCurves.moveLinesWithDraggedPoint (pointIdentifier,
-                                                            item->scenePos ());
-    }
-  }
 
   // Recompute the lines one time for efficiency
   m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
