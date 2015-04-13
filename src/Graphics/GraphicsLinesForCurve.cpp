@@ -6,6 +6,7 @@
 #include "GraphicsScene.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include "PointStyle.h"
 #include <QGraphicsItem>
 #include <QMap>
 #include <QPen>
@@ -101,6 +102,19 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
   return path;
 }
 
+void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removePoint"
+                              << " point=" << pointIdentifier.toLatin1().data();
+
+  ENGAUGE_ASSERT (m_graphicsPoints.contains (pointIdentifier));
+  GraphicsPoint *graphicsPoint = m_graphicsPoints [pointIdentifier];
+
+  m_graphicsPoints.remove (pointIdentifier);
+
+  delete graphicsPoint;
+}
+
 void GraphicsLinesForCurve::savePoint (const QString &pointIdentifier,
                                        double ordinal,
                                        GraphicsPoint &graphicsPoint)
@@ -113,6 +127,30 @@ void GraphicsLinesForCurve::savePoint (const QString &pointIdentifier,
                               << " newPointCount=" << (m_graphicsPoints.count() + 1);
 
   m_graphicsPoints [pointIdentifier] = &graphicsPoint;
+}
+
+void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
+                                                const PointStyle &pointStyle,
+                                                const Point &point)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand";
+
+  GraphicsPoint *graphicsPoint = 0;
+  if (m_graphicsPoints.contains (point.identifier())) {
+
+    graphicsPoint = m_graphicsPoints [point.identifier()];
+
+  } else {
+
+    // Point does not exist in scene so create it
+    graphicsPoint = scene.addPoint (point.identifier (),
+                                    pointStyle,
+                                    point.posScreen());
+  }
+
+  // Mark point as wanted
+  ENGAUGE_CHECK_PTR (graphicsPoint);
+  graphicsPoint->setWanted ();
 }
 
 void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)

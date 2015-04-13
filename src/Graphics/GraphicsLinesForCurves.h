@@ -7,6 +7,7 @@ class CurveStyles;
 class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
+class Point;
 class QGraphicsItem;
 class QPointF;
 class Transformation;
@@ -20,12 +21,21 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
+  /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
+  void removePoint (const QString &identifier);
+
   /// Add new point
   void savePoint (GraphicsScene &scene,
                   const QString &curveName,
                   const QString &pointIdentifier,
                   double ordinal,
                   GraphicsPoint &point);
+
+  /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
+  void updateAfterCommand (GraphicsScene &scene,
+                           const CurveStyles &curveStyles,
+                           const QString &curveName,
+                           const Point &point);
 
   /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void updateFinish (const CurveStyles &curveStyles);

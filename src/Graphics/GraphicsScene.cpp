@@ -31,7 +31,6 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
 
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addPoint"
                               << " identifier=" << identifier.toLatin1().data()
-                              << " count=" << m_pointIdentifierToGraphicsPoint.count()
                               << " ordinal=" << ordinal;
 
   // Ordinal value is initially computed as one plus the max ordinal seen so far. This initial ordinal value will be overridden if the
@@ -48,31 +47,7 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
-  // Update the map
-  ENGAUGE_ASSERT (!m_pointIdentifierToGraphicsPoint.contains (identifier));
-  m_pointIdentifierToGraphicsPoint [identifier] = point;
-
   return point;
-}
-
-MapOrdinalToPointIdentifier GraphicsScene::createMapOrdinalToPointIdentifier ()
-{
-  // Start with empty map
-  MapOrdinalToPointIdentifier map;
-
-  PointIdentifierToGraphicsPoint::const_iterator itr;
-  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr++) {
-
-    // Get item
-    QString pointIdentifier = itr.key();
-    GraphicsPoint *point = itr.value();
-
-    double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();;
-
-    map [ordinal] = pointIdentifier;
-  }
-
-  return map;
 }
 
 QString GraphicsScene::dumpCursors () const
@@ -173,9 +148,7 @@ void GraphicsScene::removePoint (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint identifier=" << identifier.toLatin1().data();
 
-  GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [identifier];
-  m_pointIdentifierToGraphicsPoint.remove (identifier);
-  delete point;
+  m_graphicsLinesForCurves.removePoint (identifier);
 }
 
 void GraphicsScene::resetPositionHasChangedFlags()
@@ -262,20 +235,6 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
-
-  // Loop through the points
-  PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_pointIdentifierToGraphicsPoint.begin(); itr != m_pointIdentifierToGraphicsPoint.end(); itr++) {
-
-    QString pointIdentifier = itr.key();
-    GraphicsPoint *point = itr.value();
-
-    QString curveName = Point::curveNameFromPointIdentifier(pointIdentifier);
-
-    CurveStyle curveStyle = modelCurveStyles.curveStyle(curveName);
-
-    point->updateCurveStyle (curveStyle);
-  }
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
@@ -294,49 +253,13 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
 void GraphicsScene::updateLineMembershipForPoints (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembershipForPoints";
-
-  // Create a sorted map of ordinal to point identifier
-  MapOrdinalToPointIdentifier mapOrdinalToPointIdentifier = createMapOrdinalToPointIdentifier();
-
-  // Names of axis and graph curves
-  QStringList curveNames;
-  curveNames << AXIS_CURVE_NAME << cmdMediator.document().curvesGraphsNames();
-
-  // Initialize before saving points
-  m_graphicsLinesForCurves.updateStart();
-
-  // Iterate through all points. The order, and grouping by curve, is not important since the
-  // ordering and grouping is handled afterwards by updateFinish
-  MapOrdinalToPointIdentifier::const_iterator itr;
-  for (itr = mapOrdinalToPointIdentifier.begin (); itr != mapOrdinalToPointIdentifier.end (); itr++) {
-
-    // Get point identifier for this ordinal
-    QString pointIdentifier = itr.value();
-
-    // Get point
-    GraphicsPoint *point = m_pointIdentifierToGraphicsPoint [pointIdentifier];
-
-    // Get parameters for the item
-    QString curveNameGot = Point::curveNameFromPointIdentifier (pointIdentifier);
-    double ordinal = point->data (DATA_KEY_ORDINAL).toDouble ();
-
-    // Save entry even if entry already exists
-    m_graphicsLinesForCurves.savePoint (*this,
-                                        curveNameGot,
-                                        pointIdentifier,
-                                        ordinal,
-                                        *point);
-  }
-
-  // Draw lines through the points that have been ordered by their ordinals
-  m_graphicsLinesForCurves.updateFinish(cmdMediator.document().modelCurveStyles());
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
-  CallbackSceneUpdateAfterCommand ftor (m_pointIdentifierToGraphicsPoint,
+  CallbackSceneUpdateAfterCommand ftor (m_graphicsLinesForCurves,
                                         *this,
                                         cmdMediator.document ());
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,

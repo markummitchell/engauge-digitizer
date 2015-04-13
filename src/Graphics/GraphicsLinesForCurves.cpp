@@ -15,6 +15,17 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 {
 }
 
+void GraphicsLinesForCurves::removePoint(const QString &identifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::removePoint"
+                              << " point=" << identifier.toLatin1().data ();
+
+  QString curveName = Point::curveNameFromPointIdentifier(identifier);
+
+  ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
+  m_graphicsLinesForCurve [curveName]->removePoint(identifier);
+}
+
 void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                                         const QString &curveName,
                                         const QString &pointIdentifier,
@@ -41,6 +52,20 @@ void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                                                     ordinal,
                                                     point);
   }
+}
+
+void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
+                                                 const CurveStyles &curveStyles,
+                                                 const QString &curveName,
+                                                 const Point &point)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateAfterCommand"
+                              << " point=" << point.identifier().toLatin1().data();
+
+  ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
+  m_graphicsLinesForCurve [curveName]->updateAfterCommand (scene,
+                                                           curveStyles.pointStyle(curveName),
+                                                           point);
 }
 
 void GraphicsLinesForCurves::updateFinish (const CurveStyles &curveStyles)
