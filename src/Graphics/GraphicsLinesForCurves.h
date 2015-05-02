@@ -21,6 +21,12 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
+  /// Remove points that are unwanted
+  void lineMembershipPurge ();
+
+  /// Mark points as unwanted
+  void lineMembershipReset ();
+
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);
 

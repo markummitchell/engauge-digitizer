@@ -168,6 +168,12 @@ PointShape CurveStyles::pointShape (const QString &curveName) const
   return m_curveStyles [curveName].pointStyle().shape ();
 }
 
+const PointStyle CurveStyles::pointStyle (const QString &curveName) const
+{
+  ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
+  return m_curveStyles [curveName].pointStyle();
+}
+
 void CurveStyles::saveXml(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveStyles::saveXml";

@@ -102,6 +102,38 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
   return path;
 }
 
+void GraphicsLinesForCurve::lineMembershipPurge ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge";
+
+  PointIdentifierToGraphicsPoint::iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    GraphicsPoint *point = *itr;
+
+    if (!point->wanted ()) {
+
+      const QString pointIdentifier = itr.key ();
+
+      delete point;
+      m_graphicsPoints.remove (pointIdentifier);
+    }
+  }
+}
+
+void GraphicsLinesForCurve::lineMembershipReset ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipReset";
+
+  PointIdentifierToGraphicsPoint::iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    GraphicsPoint *point = *itr;
+
+    point->reset ();
+  }
+}
+
 void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removePoint"

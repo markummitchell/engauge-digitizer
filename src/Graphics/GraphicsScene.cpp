@@ -267,11 +267,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
 
   // First pass:
   // 1) Mark all points as Not Wanted (this is done while creating the map)
-  PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr++) {
-    GraphicsPoint *point = *itr;
-    point->reset ();
-  }
+  m_graphicsLinesForCurves.lineMembershipReset ();
 
   // Next pass:
   // 1) Existing points that are found in the map are marked as Wanted
@@ -281,21 +277,5 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  PointIdentifierToGraphicsPoint::iterator itrNext;
-  for (itr = m_pointIdentifierToGraphicsPoint.begin (); itr != m_pointIdentifierToGraphicsPoint.end (); itr = itrNext) {
-
-    // Save next value of iterator since current iterator may be invalidated
-    itrNext = itr;
-    ++itrNext;
-
-    GraphicsPoint *point = itr.value();
-
-    if (!point->wanted ()) {
-
-      delete point;
-
-      // Update map
-      m_pointIdentifierToGraphicsPoint.erase (itr);
-    }
-  }
+  m_graphicsLinesForCurves.lineMembershipPurge ();
 }

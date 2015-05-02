@@ -15,6 +15,32 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 {
 }
 
+void GraphicsLinesForCurves::lineMembershipPurge()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::lineMembershipPurge";
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    GraphicsLinesForCurve *graphicsLines = itr.value();
+
+    graphicsLines->lineMembershipPurge ();
+  }
+}
+
+void GraphicsLinesForCurves::lineMembershipReset()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::lineMembershipReset";
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    GraphicsLinesForCurve *graphicsLines = itr.value();
+
+    graphicsLines->lineMembershipReset ();
+  }
+}
+
 void GraphicsLinesForCurves::removePoint(const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::removePoint"
