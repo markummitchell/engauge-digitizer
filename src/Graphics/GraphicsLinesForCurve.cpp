@@ -10,6 +10,7 @@
 #include <QGraphicsItem>
 #include <QMap>
 #include <QPen>
+#include <QTextStream>
 #include "QtToString.h"
 #include "Spline.h"
 #include "Transformation.h"
@@ -131,6 +132,19 @@ void GraphicsLinesForCurve::lineMembershipReset ()
     GraphicsPoint *point = *itr;
 
     point->reset ();
+  }
+}
+
+void GraphicsLinesForCurve::printStream (QTextStream &str) const
+{
+  str << "curve name: " << m_curveName << endl;
+
+  PointIdentifierToGraphicsPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    const GraphicsPoint *point = *itr;
+
+    point->printStream (str);
   }
 }
 

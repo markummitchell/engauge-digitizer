@@ -9,6 +9,7 @@
 
 unsigned int Point::m_identifierIndex = 0;
 
+extern const QString AXIS_CURVE_NAME;
 const QString POINT_IDENTIFIER_DELIMITER ("_");
 
 Point::Point ()
@@ -214,6 +215,14 @@ void Point::setPosGraph (const QPointF &posGraph)
 void Point::setPosScreen (const QPointF &posScreen)
 {
   m_posScreen = posScreen;
+}
+
+QString Point::temporaryPointIdentifier ()
+{
+  return QString ("%1%2%3")
+      .arg (AXIS_CURVE_NAME)
+      .arg (POINT_IDENTIFIER_DELIMITER)
+      .arg (0);
 }
 
 QString Point::uniqueIdentifierGenerator (const QString &curveName)

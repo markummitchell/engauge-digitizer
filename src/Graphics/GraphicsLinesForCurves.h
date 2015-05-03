@@ -10,6 +10,7 @@ class GraphicsScene;
 class Point;
 class QGraphicsItem;
 class QPointF;
+class QTextStream;
 class Transformation;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
@@ -26,6 +27,12 @@ public:
 
   /// Mark points as unwanted
   void lineMembershipReset ();
+
+  /// Debugging method for printing directly from symbolic debugger
+  void print () const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);

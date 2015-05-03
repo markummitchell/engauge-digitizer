@@ -76,6 +76,9 @@ public:
   /// Set method for position in screen coordinates.
   void setPosScreen (const QPointF &posScreen);
 
+  /// Point identifier for temporary point that is used by DigitzeStateAxis
+  static QString temporaryPointIdentifier ();
+
 private:
 
   /// Load from serialized xml

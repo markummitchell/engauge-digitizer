@@ -18,6 +18,7 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPalette>
 #include <QRadioButton>
 #include <QStackedWidget>
 #include <QVBoxLayout>
@@ -609,13 +610,26 @@ void DlgSettingsCoords::updateControls ()
   QString textOriginRadius = m_editOriginRadius->text();
   int posOriginRadius;
 
-  enableOk (m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) == QValidator::Acceptable);
+  m_validatorOriginRadius->prepareForValidate (m_yRadiusLinear->isChecked () ?
+                                                 COORD_SCALE_LINEAR :
+                                                 COORD_SCALE_LOG);
+  bool goodOriginRadius = (m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) == QValidator::Acceptable);
+
+  enableOk (goodOriginRadius);
 
   m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
   m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
-  m_editOriginRadius->setEnabled (m_btnPolar->isChecked () &&
-                                  m_yRadiusLog->isChecked ());
+  m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
+
+  if (m_editOriginRadius->isEnabled ()) {
+
+    // Using red text, make it more obvious why ok button is disabled when polar coordinates/log scale/origin radius are in conflict
+    QPalette palette;
+    palette.setColor (QPalette::Text,
+                      goodOriginRadius ? Qt::black : Qt::red);
+   m_editOriginRadius->setPalette (palette);
+  }
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
                              QString ("X") :

@@ -12,6 +12,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneContextMenuEvent>
 #include <QPen>
+#include <QTextStream>
 #include "QtToString.h"
 
 const double ZERO_WIDTH = 0.0;
@@ -153,6 +154,15 @@ QPointF GraphicsPoint::pos () const
     return m_graphicsItemPolygon->pos ();
   } else {
     return m_graphicsItemEllipse->pos ();
+  }
+}
+
+void GraphicsPoint::printStream (QTextStream &str) const
+{
+  if (m_graphicsItemEllipse == 0) {
+    m_graphicsItemPolygon->printStream (str);
+  } else {
+    m_graphicsItemEllipse->printStream (str);
   }
 }
 

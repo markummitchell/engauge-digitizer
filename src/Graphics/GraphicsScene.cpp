@@ -47,6 +47,14 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
+  // This adds the GraphicsPoint, and also its GraphicsLinesForCurve if that does not already exist
+  QString curveName = Point::curveNameFromPointIdentifier (identifier);
+  m_graphicsLinesForCurves.savePoint (*this,
+                                      curveName,
+                                      identifier,
+                                      ordinal,
+                                      *point);
+
   return point;
 }
 
@@ -242,12 +250,15 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints";
 
-  // Ordinals must be updated to reflect reordering that may have resulted from dragging points
-  m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
-                                                         transformation);
+  if (transformation.transformIsDefined()) {
 
-  // Recompute the lines one time for efficiency
-  m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
+    // Ordinals must be updated to reflect reordering that may have resulted from dragging points
+    m_graphicsLinesForCurves.updatePointOrdinalsAfterDrag (curveStyles,
+                                                           transformation);
+
+    // Recompute the lines one time for efficiency
+    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
+  }
 }
 
 void GraphicsScene::updateLineMembershipForPoints (CmdMediator &cmdMediator)

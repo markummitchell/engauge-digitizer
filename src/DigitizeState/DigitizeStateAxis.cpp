@@ -14,8 +14,6 @@
 #include <QMessageBox>
 #include <QTimer>
 
-const QString TEMPORARY_POINT_NAME ("temporary");
-
 DigitizeStateAxis::DigitizeStateAxis (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
 {
@@ -76,7 +74,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     // Temporary point that user can see while DlgEditPoint is active
     const Curve &curveAxes = context().cmdMediator().curveAxes();
     PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
-    context().mainWindow().scene().addPoint(TEMPORARY_POINT_NAME,
+    context().mainWindow().scene().addPoint(Point::temporaryPointIdentifier (),
                                             pointStyleAxes,
                                             posScreen);
 
@@ -90,7 +88,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     delete dlg;
 
     // Remove temporary point
-    context().mainWindow().scene().removePoint(TEMPORARY_POINT_NAME);
+    context().mainWindow().scene().removePoint(Point::temporaryPointIdentifier ());
 
     if (rtn == QDialog::Accepted) {
 

@@ -3,7 +3,11 @@
 DlgValidatorLog::DlgValidatorLog(QObject *parent) :
   QDoubleValidator(parent)
 {
-  setBottom (0.0); // Inclusive boundary
+}
+
+void DlgValidatorLog::prepareForValidate (CoordScale coordScale)
+{
+  m_coordScale = coordScale;
 }
 
 QValidator::State DlgValidatorLog::validate (QString &input,
@@ -14,10 +18,17 @@ QValidator::State DlgValidatorLog::validate (QString &input,
                                                  pos);
   if (state == QValidator::Acceptable) {
 
-    // Make lower boundary exclusive
-    if (input.toDouble() == 0.0) {
+    if (m_coordScale == COORD_SCALE_LOG) {
+      if (input.toDouble () < 0.0) {
 
-      return QValidator::Intermediate;
+        // Cannot allow negative number
+        state = QValidator::Invalid;
+
+      } if (input.toDouble () == 0.0) {
+
+        // Treat as a leading zero, which is legal
+        state = QValidator::Intermediate;
+      }
     }
   }
 

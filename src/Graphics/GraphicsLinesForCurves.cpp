@@ -5,9 +5,11 @@
 #include "GraphicsLinesForCurves.h"
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsScene.h"
+#include <iostream>
 #include "Logger.h"
 #include "Point.h"
 #include <QGraphicsItem>
+#include <QTextStream>
 #include "QtToString.h"
 #include "Transformation.h"
 
@@ -41,6 +43,26 @@ void GraphicsLinesForCurves::lineMembershipReset()
   }
 }
 
+void GraphicsLinesForCurves::print () const
+{
+  QString text;
+  QTextStream str (&text);
+
+  printStream (str);
+  std::cerr << text.toLatin1().data();
+}
+
+void GraphicsLinesForCurves::printStream (QTextStream &str) const
+{
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    const GraphicsLinesForCurve *graphicsLines = itr.value();
+
+    graphicsLines->printStream (str);
+  }
+}
+
 void GraphicsLinesForCurves::removePoint(const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::removePoint"
@@ -63,21 +85,17 @@ void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
                               << " identifier=" << pointIdentifier.toLatin1().data()
                               << " pos=" << QPointFToString (point.pos()).toLatin1().data();
 
-  // No lines are drawn for the axis points, other than the axes checker box
-  if (curveName != AXIS_CURVE_NAME) {
+  if (!m_graphicsLinesForCurve.contains (curveName)) {
 
-    if (!m_graphicsLinesForCurve.contains (curveName)) {
+    GraphicsLinesForCurve *item = new GraphicsLinesForCurve(curveName);
+    scene.addItem (item);
 
-      GraphicsLinesForCurve *item = new GraphicsLinesForCurve(curveName);
-      scene.addItem (item);
-
-      m_graphicsLinesForCurve [curveName] = item;
-    }
-
-    m_graphicsLinesForCurve [curveName]->savePoint (pointIdentifier,
-                                                    ordinal,
-                                                    point);
+    m_graphicsLinesForCurve [curveName] = item;
   }
+
+  m_graphicsLinesForCurve [curveName]->savePoint (pointIdentifier,
+                                                  ordinal,
+                                                  point);
 }
 
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,

@@ -10,6 +10,7 @@ class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
 class PointStyle;
+class QTestStream;
 class Transformation;
 
 /// Order-preserving map from ordinal to pointIdentifier of Point
@@ -28,6 +29,9 @@ public:
 
   /// Mark points as unwanted
   void lineMembershipReset ();
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);

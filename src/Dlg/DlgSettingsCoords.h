@@ -3,6 +3,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class DlgValidatorLog;
 class DocumentModelCoords;
 class QComboBox;
 class QDoubleValidator;
@@ -79,7 +80,7 @@ private:
   QComboBox *m_cmbPolarUnits;
 
   QLineEdit *m_editOriginRadius;
-  QDoubleValidator *m_validatorOriginRadius;
+  DlgValidatorLog *m_validatorOriginRadius;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

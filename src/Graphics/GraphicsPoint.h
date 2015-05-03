@@ -12,6 +12,7 @@ class PointStyle;
 class QColor;
 class QGraphicsScene;
 class QPolygonF;
+class QTextStream;
 class QVariant;
 
 /// Graphics item for drawing a circular or polygonal Point. 
@@ -57,6 +58,9 @@ public:
 
   /// Proxy method for QGraphicsItem::pos.
   QPointF pos () const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Mark point as unwanted, and unbind any bound lines.
   void reset();

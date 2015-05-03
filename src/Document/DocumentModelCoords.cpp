@@ -8,11 +8,14 @@
 
 const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
-const double LEGAL_ORIGIN_RADIUS = 1.0;
+
+// Zero default for origin radius, which is usually wanted for COORD_SCALE_LINEAR, it is illegal
+// for COORD_SCALE_LOG (for which 1.0 is probably preferred as the default. Note linear is more common than log
+const double DEFAULT_ORIGIN_RADIUS_LINEAR = 0.0;
 
 DocumentModelCoords::DocumentModelCoords() :
   m_coordsType (COORDS_TYPE_CARTESIAN),
-  m_originRadius (LEGAL_ORIGIN_RADIUS),
+  m_originRadius (DEFAULT_ORIGIN_RADIUS_LINEAR),
   m_coordScaleXTheta (COORD_SCALE_LINEAR),
   m_coordScaleYRadius (COORD_SCALE_LINEAR),
   m_coordThetaUnits (COORD_THETA_UNITS_DEGREES)
