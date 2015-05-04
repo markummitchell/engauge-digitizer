@@ -117,7 +117,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
   return path;
 }
 
-void GraphicsLinesForCurve::lineMembershipPurge ()
+void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge";
 
@@ -134,6 +134,13 @@ void GraphicsLinesForCurve::lineMembershipPurge ()
       m_graphicsPoints.remove (pointIdentifier);
     }
   }
+
+  // Apply line style
+  QPen pen = QPen (QBrush (ColorPaletteToQColor (lineStyle.paletteColor())),
+                   lineStyle.width());
+  setPen (pen);
+
+  updateGraphicsLinesToMatchGraphicsPoints (lineStyle);
 }
 
 void GraphicsLinesForCurve::lineMembershipReset ()
@@ -197,18 +204,6 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   // Mark point as wanted
   ENGAUGE_CHECK_PTR (graphicsPoint);
   graphicsPoint->setWanted ();
-}
-
-void GraphicsLinesForCurve::updateFinish (const LineStyle &lineStyle)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateFinish";
-
-  // Apply line style
-  QPen pen = QPen (QBrush (ColorPaletteToQColor (lineStyle.paletteColor())),
-                   lineStyle.width());
-  setPen (pen);
-
-  updateGraphicsLinesToMatchGraphicsPoints (lineStyle);
 }
 
 void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle)
@@ -275,9 +270,4 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
       point->setData (DATA_KEY_ORDINAL, QVariant (ordinal++)); // Override the old ordinal
     }
   }
-}
-
-void GraphicsLinesForCurve::updateStart ()
-{
-  m_graphicsPoints.clear();
 }

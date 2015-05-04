@@ -31,10 +31,10 @@ public:
                  double ordinal,
                  GraphicsPoint &point);
 
-  /// Remove points that are unwanted
-  void lineMembershipPurge ();
+  /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
+  void lineMembershipPurge (const LineStyle &lineStyle);
 
-  /// Mark points as unwanted
+  /// Mark points as unwanted. Afterwards, lineMembershipPurge gets called
   void lineMembershipReset ();
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
@@ -48,18 +48,12 @@ public:
                            const PointStyle &pointStyle,
                            const Point &point);
 
-  /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
-  void updateFinish (const LineStyle &lineStyle);
-
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle);
 
   /// See GraphicsScene::updateOrdinalsAfterDrag. Pretty much the same steps as Curve::updatePointOrdinals
   void updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,
                                      const Transformation &transformation);
-
-  /// Mark the start of addPoint calls. Afterwards, updateFinish gets called
-  void updateStart ();
 
 private:
 

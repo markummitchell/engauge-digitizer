@@ -256,6 +256,14 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
 void GraphicsScene::updateLineMembershipForPoints (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembershipForPoints";
+
+  // Desired curve names include both axes and graph curve names
+  QStringList curveNames;
+  curveNames << AXIS_CURVE_NAME;
+  curveNames << cmdMediator.document().curvesGraphsNames();
+
+  m_graphicsLinesForCurves.addRemoveCurves (*this,
+                                            curveNames);
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
@@ -280,5 +288,5 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  m_graphicsLinesForCurves.lineMembershipPurge ();
+  m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles());
 }

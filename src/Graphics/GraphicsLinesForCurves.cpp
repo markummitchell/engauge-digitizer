@@ -68,16 +68,17 @@ void GraphicsLinesForCurves::addRemoveCurves (GraphicsScene &scene,
   }
 }
 
-void GraphicsLinesForCurves::lineMembershipPurge()
+void GraphicsLinesForCurves::lineMembershipPurge(const CurveStyles &curveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::lineMembershipPurge";
 
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
 
+    const QString curveName = itr.key ();
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->lineMembershipPurge ();
+    graphicsLines->lineMembershipPurge (curveStyles.lineStyle (curveName));
   }
 }
 
@@ -139,20 +140,6 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                            point);
 }
 
-void GraphicsLinesForCurves::updateFinish (const CurveStyles &curveStyles)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateFinish";
-
-  GraphicsLinesContainer::const_iterator itr;
-  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
-
-    QString curveName = itr.key();
-    GraphicsLinesForCurve *graphicsLines = itr.value();
-
-    graphicsLines->updateFinish (curveStyles.lineStyle (curveName));
-  }
-}
-
 void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints";
@@ -183,18 +170,5 @@ void GraphicsLinesForCurves::updatePointOrdinalsAfterDrag (const CurveStyles &cu
 
     graphicsLines->updatePointOrdinalsAfterDrag (curveStyles.lineStyle (curveName),
                                                  transformation);
-  }
-}
-
-void GraphicsLinesForCurves::updateStart ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateStart";
-
-  GraphicsLinesContainer::const_iterator itr;
-  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
-
-    GraphicsLinesForCurve *graphicsLines = itr.value();
-
-    graphicsLines->updateStart ();
   }
 }

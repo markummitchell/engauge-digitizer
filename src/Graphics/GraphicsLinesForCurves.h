@@ -32,10 +32,10 @@ public:
   void addRemoveCurves (GraphicsScene &scene,
                         const QStringList &curveNames);
 
-  /// Remove points that are unwanted
-  void lineMembershipPurge ();
+  /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
+  void lineMembershipPurge (const CurveStyles &curveStyles);
 
-  /// Mark points as unwanted
+  /// Mark points as unwanted. Afterwards, lineMembershipPurge gets called
   void lineMembershipReset ();
 
   /// Debugging method for printing directly from symbolic debugger
@@ -53,18 +53,12 @@ public:
                            const QString &curveName,
                            const Point &point);
 
-  /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
-  void updateFinish (const CurveStyles &curveStyles);
-
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles);
 
   /// See GraphicsScene::updateOrdinalsAfterDrag
   void updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,
                                      const Transformation &transformation);
-
-  /// Mark the start of addPoint calls. Afterwards, updateFinish gets called
-  void updateStart ();
 
 private:
 
