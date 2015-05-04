@@ -27,10 +27,14 @@ public:
   /// Single constructor.
   GraphicsScene(MainWindow *mainWindow);
 
-  /// Add one QGraphicsItem-based object that represents one Point.
-  GraphicsPoint *addPoint (const QString &identifier,
-                           const PointStyle &pointStyle,
-                           const QPointF &posScreen);
+  /// Add one temporary point to m_graphicsLinesForCurves. Non-temporary points are handled by the updateLineMembership functions
+  void addTemporaryPoint (const QString &identifier,
+                          GraphicsPoint *point);
+
+  /// Create one QGraphicsItem-based object that represents one Point. It is NOT added to m_graphicsLinesForCurves (see addPoint)
+  GraphicsPoint *createPoint (const QString &identifier,
+                              const PointStyle &pointStyle,
+                              const QPointF &posScreen);
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;

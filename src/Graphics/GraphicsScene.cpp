@@ -23,13 +23,27 @@ GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
 {
 }
 
-GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
-                                        const PointStyle &pointStyle,
-                                        const QPointF &posScreen)
+void GraphicsScene::addTemporaryPoint (const QString &identifier,
+                                       GraphicsPoint *point)
+{
+  const int TEMPORARY_POINT_ORDINAL = 0;
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addTemporaryPoint"
+                              << " identifer=" << identifier.toLatin1().data();
+
+  m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
+                                     identifier,
+                                     TEMPORARY_POINT_ORDINAL,
+                                     *point);
+}
+
+GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
+                                           const PointStyle &pointStyle,
+                                           const QPointF &posScreen)
 {
   double ordinal = maxOrdinal () + 1;
 
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addPoint"
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createPoint"
                               << " identifier=" << identifier.toLatin1().data()
                               << " ordinal=" << ordinal;
 

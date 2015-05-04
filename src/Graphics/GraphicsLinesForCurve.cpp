@@ -196,9 +196,9 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   } else {
 
     // Point does not exist in scene so create it
-    graphicsPoint = scene.addPoint (point.identifier (),
-                                    pointStyle,
-                                    point.posScreen());
+    graphicsPoint = scene.createPoint (point.identifier (),
+                                       pointStyle,
+                                       point.posScreen());
   }
 
   // Mark point as wanted
