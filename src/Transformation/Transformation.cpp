@@ -240,6 +240,12 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
                                                    pointRawGraph);
   }
 
+  // Apply linear offset to radius if appropriate
+  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) ||
+      (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR)) {
+    pointRawGraph.setY (pointRawGraph.y() + m_modelCoords.originRadius());
+  }
+
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
     pointRawGraph.setX (qExp (pointRawGraph.x()));
@@ -274,6 +280,12 @@ void Transformation::transformRawGraphToLinearCartesianGraph (const QPointF &poi
 {
   double x = pointRaw.x();
   double y = pointRaw.y();
+
+  // Apply linear offset to radius if appropriate
+  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) ||
+      (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR)) {
+    y -= m_modelCoords.originRadius();
+  }
 
   // Apply log scaling if appropriate
   if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {

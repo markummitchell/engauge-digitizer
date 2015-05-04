@@ -134,7 +134,12 @@ void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const Cur
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
 
     QString curveName = itr.key();
-    m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName));
+
+    // This is where we add lines for non-axes curves
+    if (curveName != AXIS_CURVE_NAME) {
+
+      m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName));
+    }
   }
 }
 
