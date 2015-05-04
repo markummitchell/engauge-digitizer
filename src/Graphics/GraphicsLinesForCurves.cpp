@@ -17,6 +17,57 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 {
 }
 
+void GraphicsLinesForCurves::addPoint (const QString &curveName,
+                                       const QString &pointIdentifier,
+                                       double ordinal,
+                                       GraphicsPoint &point)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::addPoint"
+                              << " curve=" << curveName.toLatin1().data()
+                              << " identifier=" << pointIdentifier.toLatin1().data()
+                              << " pos=" << QPointFToString (point.pos()).toLatin1().data();
+
+  m_graphicsLinesForCurve [curveName]->addPoint (pointIdentifier,
+                                                 ordinal,
+                                                 point);
+}
+
+void GraphicsLinesForCurves::addRemoveCurves (GraphicsScene &scene,
+                                              const QStringList &curveNames)
+{
+  // Add new curves
+  QStringList::const_iterator itrC;
+  for (itrC = curveNames.begin (); itrC != curveNames.end (); itrC++) {
+
+    QString curveName = *itrC;
+
+    if (!m_graphicsLinesForCurve.contains (curveName)) {
+
+      GraphicsLinesForCurve *item = new GraphicsLinesForCurve(curveName);
+      scene.addItem (item);
+
+      m_graphicsLinesForCurve [curveName] = item;
+    }
+  }
+
+  // Remove expired curves
+  GraphicsLinesContainer::const_iterator itrG, itrGNext;
+  for (itrG = m_graphicsLinesForCurve.begin (); itrG != m_graphicsLinesForCurve.end (); itrG = itrGNext) {
+
+    const QString curveName = itrG.key ();
+    GraphicsLinesForCurve *graphicsLines = itrG.value();
+
+    itrGNext = itrG;
+    itrGNext++;
+
+    if (!curveNames.contains (curveName)) {
+
+      delete graphicsLines;
+      m_graphicsLinesForCurve.remove (curveName);
+    }
+  }
+}
+
 void GraphicsLinesForCurves::lineMembershipPurge()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::lineMembershipPurge";
@@ -72,30 +123,6 @@ void GraphicsLinesForCurves::removePoint(const QString &identifier)
 
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
   m_graphicsLinesForCurve [curveName]->removePoint(identifier);
-}
-
-void GraphicsLinesForCurves::savePoint (GraphicsScene &scene,
-                                        const QString &curveName,
-                                        const QString &pointIdentifier,
-                                        double ordinal,
-                                        GraphicsPoint &point)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::savePoint"
-                              << " curve=" << curveName.toLatin1().data()
-                              << " identifier=" << pointIdentifier.toLatin1().data()
-                              << " pos=" << QPointFToString (point.pos()).toLatin1().data();
-
-  if (!m_graphicsLinesForCurve.contains (curveName)) {
-
-    GraphicsLinesForCurve *item = new GraphicsLinesForCurve(curveName);
-    scene.addItem (item);
-
-    m_graphicsLinesForCurve [curveName] = item;
-  }
-
-  m_graphicsLinesForCurve [curveName]->savePoint (pointIdentifier,
-                                                  ordinal,
-                                                  point);
 }
 
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,

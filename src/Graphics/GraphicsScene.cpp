@@ -47,14 +47,6 @@ GraphicsPoint *GraphicsScene::addPoint (const QString &identifier,
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
-  // This adds the GraphicsPoint, and also its GraphicsLinesForCurve if that does not already exist
-  QString curveName = Point::curveNameFromPointIdentifier (identifier);
-  m_graphicsLinesForCurves.savePoint (*this,
-                                      curveName,
-                                      identifier,
-                                      ordinal,
-                                      *point);
-
   return point;
 }
 

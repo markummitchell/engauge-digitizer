@@ -24,6 +24,20 @@ GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
 {
 }
 
+void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
+                                      double ordinal,
+                                      GraphicsPoint &graphicsPoint)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::addPoint"
+                              << " curve=" << m_curveName.toLatin1().data()
+                              << " identifier=" << pointIdentifier.toLatin1().data()
+                              << " ordinal=" << ordinal
+                              << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
+                              << " newPointCount=" << (m_graphicsPoints.count() + 1);
+
+  m_graphicsPoints [pointIdentifier] = &graphicsPoint;
+}
+
 QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const OrdinalToPointIdentifier &ordinalToPointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth";
@@ -159,20 +173,6 @@ void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)
   m_graphicsPoints.remove (pointIdentifier);
 
   delete graphicsPoint;
-}
-
-void GraphicsLinesForCurve::savePoint (const QString &pointIdentifier,
-                                       double ordinal,
-                                       GraphicsPoint &graphicsPoint)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::savePoint"
-                              << " curve=" << m_curveName.toLatin1().data()
-                              << " identifier=" << pointIdentifier.toLatin1().data()
-                              << " ordinal=" << ordinal
-                              << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
-                              << " newPointCount=" << (m_graphicsPoints.count() + 1);
-
-  m_graphicsPoints [pointIdentifier] = &graphicsPoint;
 }
 
 void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,

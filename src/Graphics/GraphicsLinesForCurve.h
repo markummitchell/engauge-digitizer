@@ -24,6 +24,13 @@ public:
   /// Single constructor
   GraphicsLinesForCurve(const QString &curveName);
 
+  /// Add new line.
+  ///
+  /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
+  void addPoint (const QString &pointIdentifier,
+                 double ordinal,
+                 GraphicsPoint &point);
+
   /// Remove points that are unwanted
   void lineMembershipPurge ();
 
@@ -36,19 +43,12 @@ public:
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);
 
-  /// Add new line.
-  ///
-  /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines
-  void savePoint (const QString &pointIdentifier,
-                  double ordinal,
-                  GraphicsPoint &point);
-
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
                            const PointStyle &pointStyle,
                            const Point &point);
 
-  /// Mark the end of savePoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
+  /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void updateFinish (const LineStyle &lineStyle);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
@@ -58,7 +58,7 @@ public:
   void updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,
                                      const Transformation &transformation);
 
-  /// Mark the start of savePoint calls. Afterwards, updateFinish gets called
+  /// Mark the start of addPoint calls. Afterwards, updateFinish gets called
   void updateStart ();
 
 private:
