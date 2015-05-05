@@ -4,6 +4,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -229,6 +230,43 @@ double ColorFilterSettings::low () const
     default:
       ENGAUGE_ASSERT (false);
   }
+}
+
+void ColorFilterSettings::printStream (QTextStream &str) const
+{
+  str << "ColorFilterSettings\n";
+
+  switch (m_colorFilterMode) {
+    case COLOR_FILTER_MODE_INTENSITY:
+      str << "intensityLow=" << m_intensityLow << "\n";
+      str << "intensityHigh=" << m_intensityHigh << "\n";
+      break;
+
+    case COLOR_FILTER_MODE_FOREGROUND:
+      str << "foregroundLow=" << m_foregroundLow << "\n";
+      str << "foregroundHigh=" << m_foregroundHigh << "\n";
+      break;
+
+    case COLOR_FILTER_MODE_HUE:
+      str << "hueLow=" << m_hueLow << "\n";
+      str << "hueHigh=" << m_hueHigh << "\n";
+      break;
+
+    case COLOR_FILTER_MODE_SATURATION:
+      str << "saturationLow" << m_saturationLow << "\n";
+      str << "saturationHigh" << m_saturationHigh << "\n";
+      break;
+
+    case COLOR_FILTER_MODE_VALUE:
+      str << "valueLow=" << m_valueLow << "\n";
+      str << "valueHigh=" << m_valueHigh << "\n";
+      break;
+
+    default:
+      break;
+  }
+  
+  str << "\n";
 }
 
 int ColorFilterSettings::saturationHigh () const

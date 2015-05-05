@@ -3,6 +3,8 @@
 #include "Logger.h"
 #include "PointStyle.h"
 #include <qmath.h>
+#include <QTextStream>
+#include <QtToString.h>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -180,6 +182,18 @@ QPolygonF PointStyle::polygon () const
 
   QPolygonF polygon (points);
   return polygon;
+}
+
+void PointStyle::printStream(QTextStream &str) const
+{
+  str << "PointStyle\n";
+
+  str << pointShapeToString (m_shape) << "\n";
+  str << "radius=" << m_radius << "\n";
+  str << "lineWidth=" << m_lineWidth << "\n";
+  str << "color=" << colorPaletteToString (m_paletteColor) << "\n";
+
+  str << "\n";
 }
 
 int PointStyle::radius () const

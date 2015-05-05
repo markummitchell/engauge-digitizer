@@ -159,11 +159,29 @@ QPointF GraphicsPoint::pos () const
 
 void GraphicsPoint::printStream (QTextStream &str) const
 {
+  str << "GraphicsPoint\n";
+
+  QString identifier;
+  int ordinal;
+  QString pointType;
+  QPointF pos;
   if (m_graphicsItemEllipse == 0) {
-    m_graphicsItemPolygon->printStream (str);
+    identifier = m_graphicsItemPolygon->data (DATA_KEY_IDENTIFIER).toString ();
+    ordinal = m_graphicsItemPolygon->data (DATA_KEY_ORDINAL).toDouble ();
+    pointType = "polygon";
+    pos = m_graphicsItemPolygon->pos();
   } else {
-    m_graphicsItemEllipse->printStream (str);
+    identifier = m_graphicsItemEllipse->data (DATA_KEY_IDENTIFIER).toString ();
+    ordinal = m_graphicsItemEllipse->data (DATA_KEY_ORDINAL).toDouble ();
+    pointType = "ellipse";
+    pos = m_graphicsItemEllipse->pos();
   }
+
+  str << identifier
+      << " ordinal=" << ordinal
+      << " " << pointType << "Pos=" << QPointFToString (pos);
+
+  str << "\n";
 }
 
 void GraphicsPoint::reset ()

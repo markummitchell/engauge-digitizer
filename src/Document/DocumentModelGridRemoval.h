@@ -5,6 +5,7 @@
 #include "GridCoordDisable.h"
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval.
 class DocumentModelGridRemoval : public DocumentModelAbstractBase
@@ -46,6 +47,9 @@ public:
   GridCoordDisable gridCoordDisableY () const;
 
   virtual void loadXml(QXmlStreamReader &reader);
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Get method for removing defined grid lines.
   bool removeDefinedGridLines () const;

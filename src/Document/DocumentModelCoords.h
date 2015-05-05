@@ -7,6 +7,7 @@
 #include "DocumentModelAbstractBase.h"
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsCoords and CmdSettingsCoords.
 class DocumentModelCoords : public DocumentModelAbstractBase
@@ -40,6 +41,9 @@ public:
 
   /// Get method for origin radius in polar mode.
   double originRadius () const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 

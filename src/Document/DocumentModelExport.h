@@ -10,6 +10,7 @@
 #include <QStringList>
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsExport and CmdSettingsExport.
 class DocumentModelExport : public DocumentModelAbstractBase
@@ -49,6 +50,9 @@ public:
 
   /// Get method for point selection for relations.
   ExportPointsSelectionRelations pointsSelectionRelations() const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Get method for relations interval.
   double relationsInterval () const;

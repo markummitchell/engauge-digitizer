@@ -3,7 +3,6 @@
 #include "GraphicsPointPolygon.h"
 #include "Logger.h"
 #include <QGraphicsScene>
-#include <QTextStream>
 #include "QtToString.h"
 
 GraphicsPointPolygon::GraphicsPointPolygon(GraphicsPoint &graphicsPoint,
@@ -29,11 +28,6 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
 
   return QGraphicsPolygonItem::itemChange(change,
                                           value);
-}
-
-void GraphicsPointPolygon::printStream (QTextStream &str) const
-{
-  str << "polygon: " << QPointFToString (scenePos ());
 }
 
 void GraphicsPointPolygon::setRadius(int radius)

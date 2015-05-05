@@ -171,6 +171,7 @@ SOURCES += \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
     Checker/Checker.cpp \
+    Checker/CheckerMode.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \

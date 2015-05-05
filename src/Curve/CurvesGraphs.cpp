@@ -194,6 +194,20 @@ int CurvesGraphs::numCurves () const
   return m_curvesGraphs.count ();
 }
 
+void CurvesGraphs::printStream (QTextStream &str) const
+{
+  str << "CurvesGraphs\n";
+
+  CurveList::const_iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    const Curve &curve = *itr;
+    curve.printStream (str);
+  }
+
+  str << "\n";
+}
+
 void CurvesGraphs::removePoint (const QString &pointIdentifier)
 {
   QString curveName = Point::curveNameFromPointIdentifier(pointIdentifier);

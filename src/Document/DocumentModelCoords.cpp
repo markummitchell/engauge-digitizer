@@ -3,6 +3,8 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QTextStream>
+#include "QtToString.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -110,6 +112,19 @@ void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
 double DocumentModelCoords::originRadius() const
 {
   return m_originRadius;
+}
+
+void DocumentModelCoords::printStream(QTextStream &str) const
+{
+  str << "DocumentModelCoords\n";
+
+  str << "coordsType=" << coordsTypeToString (m_coordsType) << "\n";
+  str << "originRadius" << m_originRadius << "\n";
+  str << "coordScaleXTheta=" << coordScaleToString (m_coordScaleXTheta) << "\n";
+  str << "coordScaleYRadius=" << coordScaleToString (m_coordScaleYRadius) << "\n";
+  str << "coordThetaUnits=" << coordThetaUnitsToString (m_coordThetaUnits) << "\n";
+
+  str << "\n";
 }
 
 void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const

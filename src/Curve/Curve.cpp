@@ -6,6 +6,7 @@
 #include "Point.h"
 #include <QDebug>
 #include <QMap>
+#include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
@@ -352,6 +353,23 @@ QPointF Curve::positionScreen (const QString &pointIdentifier) const
 const Points Curve::points () const
 {
   return m_points;
+}
+
+void Curve::printStream (QTextStream &str) const
+{
+  str << "Curve\n";
+
+  str << "curve=" << m_curveName << "\n";
+  Points::const_iterator itr;
+  for (itr = m_points.begin (); itr != m_points.end (); itr++) {
+    const Point &point = *itr;
+    point.printStream (str);
+  }
+
+  m_colorFilterSettings.printStream (str);
+  m_curveStyle.printStream (str);
+
+  str << "\n";
 }
 
 void Curve::removePoint (const QString &identifier)

@@ -158,6 +158,8 @@ void GraphicsLinesForCurve::lineMembershipReset ()
 
 void GraphicsLinesForCurve::printStream (QTextStream &str) const
 {
+  str << "GraphicsLinesForCurve\n";
+
   str << "curve name: " << m_curveName << endl;
 
   PointIdentifierToGraphicsPoint::const_iterator itr;
@@ -167,6 +169,8 @@ void GraphicsLinesForCurve::printStream (QTextStream &str) const
 
     point->printStream (str);
   }
+
+  str << "\n";
 }
 
 void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)

@@ -2,6 +2,7 @@
 #include "DocumentModelExport.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -167,6 +168,30 @@ ExportPointsSelectionFunctions DocumentModelExport::pointsSelectionFunctions() c
 ExportPointsSelectionRelations DocumentModelExport::pointsSelectionRelations() const
 {
   return m_pointsSelectionRelations;
+}
+
+void DocumentModelExport::printStream(QTextStream &str) const
+{
+  str << "DocumentModelExport\n";
+
+  str << "curveNamesNotExported=";
+  QStringList::const_iterator itr;
+  for (itr = m_curveNamesNotExported.begin (); itr != m_curveNamesNotExported.end(); itr++) {
+    QString curveName = *itr;
+    str << curveName << " ";
+  }
+  str << "\n";
+
+  str << "exportPointsSelectionFunctions=" << exportPointsSelectionFunctionsToString (m_pointsSelectionFunctions) << "\n";
+  str << "pointsInterval=" << m_pointsInterval << "\n";
+  str << "exportPointsSelectionRelations=" << exportPointsSelectionRelationsToString (m_pointsSelectionRelations) << "\n";
+  str << "relationsInterval=" << m_relationsInterval << "\n";
+  str << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
+  str << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
+  str << "exportHeader=" << exportHeaderToString (m_header) << "\n";
+  str << "xLabel=" << m_xLabel << "\n";
+
+  str << "\n";
 }
 
 double DocumentModelExport::relationsInterval() const

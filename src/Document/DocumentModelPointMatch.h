@@ -5,6 +5,7 @@
 #include "DocumentModelAbstractBase.h"
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsPointMatch and CmdSettingsPointMatch.
 class DocumentModelPointMatch : public DocumentModelAbstractBase
@@ -38,6 +39,9 @@ public:
 
   /// Get method for rejected color.
   ColorPalette paletteColorRejected() const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 

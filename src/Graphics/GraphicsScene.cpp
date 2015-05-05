@@ -233,17 +233,30 @@ void GraphicsScene::showPoints (bool show,
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
                                         bool linesAreAlreadyUpdated)
 {
+  // shit start
+  cmdMediator.document().print();
+  m_graphicsLinesForCurves.print ();
+  // shit stop
+
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
+
+  updateCurves (cmdMediator);
 
   // Update the points
   updatePointMembership (cmdMediator);
+}
 
-  if (!linesAreAlreadyUpdated) {
+void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurves";
 
-    // Update the lines between the points
-    updateLineMembershipForPoints (cmdMediator);
+  // Desired curve names include both axes and graph curve names
+  QStringList curveNames;
+  curveNames << AXIS_CURVE_NAME;
+  curveNames << cmdMediator.document().curvesGraphsNames();
 
-  }
+  m_graphicsLinesForCurves.addRemoveCurves (*this,
+                                            curveNames);
 }
 
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
@@ -265,19 +278,6 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
     // Recompute the lines one time for efficiency
     m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
   }
-}
-
-void GraphicsScene::updateLineMembershipForPoints (CmdMediator &cmdMediator)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateLineMembershipForPoints";
-
-  // Desired curve names include both axes and graph curve names
-  QStringList curveNames;
-  curveNames << AXIS_CURVE_NAME;
-  curveNames << cmdMediator.document().curvesGraphsNames();
-
-  m_graphicsLinesForCurves.addRemoveCurves (*this,
-                                            curveNames);
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)

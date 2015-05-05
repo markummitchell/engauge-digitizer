@@ -1,6 +1,7 @@
 #include "CurveStyle.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -68,6 +69,16 @@ QString CurveStyle::loadXml(QXmlStreamReader &reader)
 PointStyle CurveStyle::pointStyle() const
 {
   return m_pointStyle;
+}
+
+void CurveStyle::printStream(QTextStream &str) const
+{
+  str << "CurveStyle\n";
+
+  m_pointStyle.printStream (str);
+  m_lineStyle.printStream (str);
+
+  str << "\n";
 }
 
 void CurveStyle::saveXml(QXmlStreamWriter &writer,

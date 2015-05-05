@@ -4,6 +4,7 @@
 #include "LineStyle.h"
 #include "PointStyle.h"
 
+class QTextStream;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
@@ -26,6 +27,9 @@ public:
 
   /// Get method for PointStyle
   PointStyle pointStyle() const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Serialize to xml
   void saveXml(QXmlStreamWriter &writer,

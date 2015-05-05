@@ -2,6 +2,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -181,6 +182,27 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
   if (!success) {
     reader.raiseError ("Cannot read grid removal data");
   }
+}
+
+void DocumentModelGridRemoval::printStream(QTextStream &str) const
+{
+  str << "DocumentModelGridRemoval\n";
+
+  str << "removeDefinedGridLines=" << (m_removeDefinedGridLines ? "true" : "false") << "\n";
+  str << "closeDistance=" << m_closeDistance << "\n";
+  str << "gridCoordDisableX=" << gridCoordDisableToString (m_gridCoordDisableX) << "\n";
+  str << "countX=" << m_countX << "\n";
+  str << "startX=" << m_startX << "\n";
+  str << "stepX=" << m_stepX << "\n";
+  str << "stopX=" << m_stopX << "\n";
+  str << "gridCoordDisableY=" << gridCoordDisableToString (m_gridCoordDisableY) << "\n";
+  str << "countY=" << m_countY << "\n";
+  str << "startY=" << m_startY << "\n";
+  str << "stepY=" << m_stepY << "\n";
+  str << "stopY=" << m_stopY << "\n";
+  str << "removeParallelToAxes=" << (m_removeParallelToAxes ? "true" : "false") << "\n";
+
+  str << "\n";
 }
 
 bool DocumentModelGridRemoval::removeDefinedGridLines () const

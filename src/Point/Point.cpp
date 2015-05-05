@@ -3,6 +3,8 @@
 #include "Logger.h"
 #include "Point.h"
 #include <QStringList>
+#include <QTextStream>
+#include "QtToString.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -170,6 +172,18 @@ QPointF Point::posGraph () const
 QPointF Point::posScreen () const
 {
   return m_posScreen;
+}
+
+void Point::printStream(QTextStream &str) const
+{
+  str << "Point\n";
+
+  str << "identifier=" << m_identifier << "\n";
+  str << "posScreen=" << QPointFToString (m_posScreen) << "\n";
+  str << "posGraph=" << QPointFToString (m_posGraph) << "\n";
+  str << "ordinal=" << m_ordinal << "\n";
+
+  str << "\n";
 }
 
 void Point::saveXml(QXmlStreamWriter &writer) const

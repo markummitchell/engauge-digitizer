@@ -106,6 +106,8 @@ void GraphicsLinesForCurves::print () const
 
 void GraphicsLinesForCurves::printStream (QTextStream &str) const
 {
+  str << "GraphicsLinesForCurves\n";
+
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
 
@@ -113,6 +115,8 @@ void GraphicsLinesForCurves::printStream (QTextStream &str) const
 
     graphicsLines->printStream (str);
   }
+
+  str << "\n";
 }
 
 void GraphicsLinesForCurves::removePoint(const QString &identifier)

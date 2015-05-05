@@ -5,7 +5,6 @@
 #include <QPointF>
 
 class GraphicsPoint;
-class QTextStream;
 
 /// This class add event handling to QGraphicsPolygonItem
 class GraphicsPointPolygon : public QGraphicsPolygonItem
@@ -17,9 +16,6 @@ public:
 
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
-
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
 
   /// Update the radius
   void setRadius(int radius);

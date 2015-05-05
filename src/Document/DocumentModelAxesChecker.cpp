@@ -2,6 +2,8 @@
 #include "DocumentModelAxesChecker.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
+#include "QtToString.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -86,6 +88,17 @@ void DocumentModelAxesChecker::loadXml(QXmlStreamReader &reader)
   if (!success) {
     reader.raiseError ("Cannot read axes checker data");
   }
+}
+
+void DocumentModelAxesChecker::printStream(QTextStream &str) const
+{
+  str << "DocumentModelAxesChecker\n";
+
+  str << "checkerMode=" << checkerModeToString (m_checkerMode) << "\n";
+  str << "checkerSeconds=" << m_checkerSeconds << "\n";
+  str << "color=" << colorPaletteToString (m_lineColor) << "\n";
+
+  str << "\n";
 }
 
 void DocumentModelAxesChecker::saveXml(QXmlStreamWriter &writer) const

@@ -6,6 +6,7 @@
 #include "CheckerMode.h"
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsAxesChecker and CmdSettingsAxesChecker.
 class DocumentModelAxesChecker : public DocumentModelAbstractBase
@@ -33,6 +34,9 @@ public:
   ColorPalette lineColor () const;
 
   virtual void loadXml(QXmlStreamReader &reader);
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 

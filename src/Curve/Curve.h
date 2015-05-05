@@ -87,6 +87,9 @@ public:
   /// Return the position, in screen coordinates, of the specified Point.
   QPointF positionScreen (const QString &pointIdentifier) const;
 
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
+
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
 

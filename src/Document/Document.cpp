@@ -492,6 +492,35 @@ QPointF Document::positionScreen (const QString &pointIdentifier) const
   return curve->positionScreen (pointIdentifier);
 }
 
+void Document::print () const
+{
+  QString text;
+  QTextStream str (&text);
+
+  printStream (str);
+  std::cerr << text.toLatin1().data();
+}
+
+void Document::printStream (QTextStream &str) const
+{
+  str << "Document\n";
+
+  str << "name=" << m_name << "\n";
+  str << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
+
+  m_curveAxes->printStream (str);
+  m_curvesGraphs.printStream (str);
+
+  m_modelAxesChecker.printStream (str);
+  m_modelCoords.printStream (str);
+  m_modelExport.printStream (str);
+  m_modelGridRemoval.printStream (str);
+  m_modelPointMatch.printStream (str);
+  m_modelSegments.printStream (str);
+
+  str << "\n";
+}
+
 QString Document::reasonForUnsuccessfulRead () const
 {
   ENGAUGE_ASSERT (!m_successfulRead);

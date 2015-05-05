@@ -76,9 +76,8 @@ private:
   /// Compute max ordinal number on the fly which is more robust than remembering it as events unfold. Insignificantly slower.
   double maxOrdinal () const;
 
-  /// Update lines using a multi-pass algorithm, from points in m_graphicsLinesForCurves that were previously replicated
-  /// from the points in CmdMediator. This method should never, for simplicity, try to access any points in CmdMediator
-  void updateLineMembershipForPoints (CmdMediator &cmdMediator);
+  /// Remove expired curves and add new curves
+  void updateCurves (CmdMediator &cmdMediator);
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator);

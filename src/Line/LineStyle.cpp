@@ -1,6 +1,7 @@
 #include "DocumentSerialize.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -85,6 +86,17 @@ void LineStyle::loadXml(QXmlStreamReader &reader)
 ColorPalette LineStyle::paletteColor() const
 {
   return m_paletteColor;
+}
+
+void LineStyle::printStream(QTextStream &str) const
+{
+  str << "LineStyle\n";
+
+  str << "width=" << m_width << "\n";
+  str << "color=" << colorPaletteToString (m_paletteColor) << "\n";
+  str << "curveConnectAs=" << curveConnectAsToString (m_curveConnectAs) << "\n";
+
+  str << "\n";
 }
 
 void LineStyle::saveXml(QXmlStreamWriter &writer) const

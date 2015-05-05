@@ -5,6 +5,7 @@
 #include "CurveConnectAs.h"
 #include <QColor>
 
+class QTextStream;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
@@ -40,6 +41,9 @@ public:
 
   /// Line color.
   ColorPalette paletteColor() const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Serialize to stream
   void saveXml(QXmlStreamWriter &writer) const;

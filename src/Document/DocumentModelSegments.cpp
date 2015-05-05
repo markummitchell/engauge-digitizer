@@ -2,6 +2,7 @@
 #include "DocumentModelSegments.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -92,6 +93,19 @@ double DocumentModelSegments::minLength() const
 double DocumentModelSegments::pointSeparation() const
 {
   return m_pointSeparation;
+}
+
+void DocumentModelSegments::printStream(QTextStream &str) const
+{
+  str << "DocumentModelSegments\n";
+
+  str << "pointSeparation=" << m_pointSeparation << "\n";
+  str << "minLength=" << m_minLength << "\n";
+  str << "fillCorners=" << (m_fillCorners ? "true" : "false") << "\n";
+  str << "lineWidth=" << m_lineWidth << "\n";
+  str << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
+
+  str << "\n";
 }
 
 void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const

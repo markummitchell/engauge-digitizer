@@ -9,6 +9,7 @@
 typedef QHash<QString, ColorFilterSettings> ColorFilterSettingsList;
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsColorFilter and CmdSettingsColorFilter.
 class DocumentModelColorFilter : public DocumentModelAbstractBase
@@ -62,6 +63,9 @@ public:
   /// Low value of foreground, hue, intensity, saturation or value according to current filter mode
   /// normalized to 0 to 1.
   double low (const QString &curveName) const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   /// Get method for saturation higher bound.
   int saturationHigh (const QString &curveName) const;

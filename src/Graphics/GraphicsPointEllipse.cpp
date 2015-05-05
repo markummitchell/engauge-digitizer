@@ -3,7 +3,6 @@
 #include "GraphicsPointEllipse.h"
 #include "Logger.h"
 #include <QGraphicsScene>
-#include <QTextStream>
 #include "QtToString.h"
 
 GraphicsPointEllipse::GraphicsPointEllipse(GraphicsPoint &graphicsPoint,
@@ -28,11 +27,6 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
 
   return QGraphicsEllipseItem::itemChange(change,
                                           value);
-}
-
-void GraphicsPointEllipse::printStream (QTextStream &str) const
-{
-  str << "ellipse: " << QPointFToString (scenePos ());
 }
 
 void GraphicsPointEllipse::setRadius(int radius)

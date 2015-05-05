@@ -154,6 +154,12 @@ public:
   /// See Curve::positionScreen.
   QPointF positionScreen (const QString &pointIdentifier) const;
 
+  /// Debugging method for printing directly from symbolic debugger
+  void print () const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
+
   /// Return an informative text message explaining why startup loading failed. Applies if successfulRead returns false
   QString reasonForUnsuccessfulRead () const;
 

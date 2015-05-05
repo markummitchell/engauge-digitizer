@@ -3,6 +3,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 

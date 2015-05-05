@@ -5,6 +5,7 @@
 #include "DocumentModelAbstractBase.h"
 
 class Document;
+class QTextStream;
 
 /// Model for DlgSettingsSegments and CmdSettingsSegments.
 class DocumentModelSegments : public DocumentModelAbstractBase
@@ -38,6 +39,9 @@ public:
 
   /// Get method for point separation.
   double pointSeparation() const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 

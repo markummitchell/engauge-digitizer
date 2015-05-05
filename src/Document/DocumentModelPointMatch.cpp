@@ -2,6 +2,7 @@
 #include "DocumentModelPointMatch.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
@@ -108,6 +109,19 @@ ColorPalette DocumentModelPointMatch::paletteColorCandidate() const
 ColorPalette DocumentModelPointMatch::paletteColorRejected() const
 {
   return m_paletteColorRejected;
+}
+
+void DocumentModelPointMatch::printStream(QTextStream &str) const
+{
+  str << "DocumentModelPointMatch\n";
+
+  str << "minPointSeparation=" << m_minPointSeparation << "\n";
+  str << "maxPointSize=" << m_maxPointSize << "\n";
+  str << "colorAccepted=" << colorPaletteToString (m_paletteColorAccepted) << "\n";
+  str << "colorCandidate=" << colorPaletteToString (m_paletteColorCandidate) << "\n";
+  str << "colorRejected=" << colorPaletteToString (m_paletteColorRejected) << "\n";
+
+  str << "\n";
 }
 
 void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const
