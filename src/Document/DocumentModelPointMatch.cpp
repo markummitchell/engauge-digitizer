@@ -111,17 +111,18 @@ ColorPalette DocumentModelPointMatch::paletteColorRejected() const
   return m_paletteColorRejected;
 }
 
-void DocumentModelPointMatch::printStream(QTextStream &str) const
+void DocumentModelPointMatch::printStream(QString indentation,
+                                          QTextStream &str) const
 {
-  str << "DocumentModelPointMatch\n";
+  str << indentation << "DocumentModelPointMatch\n";
 
-  str << "minPointSeparation=" << m_minPointSeparation << "\n";
-  str << "maxPointSize=" << m_maxPointSize << "\n";
-  str << "colorAccepted=" << colorPaletteToString (m_paletteColorAccepted) << "\n";
-  str << "colorCandidate=" << colorPaletteToString (m_paletteColorCandidate) << "\n";
-  str << "colorRejected=" << colorPaletteToString (m_paletteColorRejected) << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << "minPointSeparation=" << m_minPointSeparation << "\n";
+  str << indentation << "maxPointSize=" << m_maxPointSize << "\n";
+  str << indentation << "colorAccepted=" << colorPaletteToString (m_paletteColorAccepted) << "\n";
+  str << indentation << "colorCandidate=" << colorPaletteToString (m_paletteColorCandidate) << "\n";
+  str << indentation << "colorRejected=" << colorPaletteToString (m_paletteColorRejected) << "\n";
 }
 
 void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const

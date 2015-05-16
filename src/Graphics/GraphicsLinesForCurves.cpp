@@ -100,23 +100,25 @@ void GraphicsLinesForCurves::print () const
   QString text;
   QTextStream str (&text);
 
-  printStream (str);
+  printStream ("", str);
   std::cerr << text.toLatin1().data();
 }
 
-void GraphicsLinesForCurves::printStream (QTextStream &str) const
+void GraphicsLinesForCurves::printStream (QString indentation,
+                                          QTextStream &str) const
 {
-  str << "GraphicsLinesForCurves\n";
+  str << indentation << "GraphicsLinesForCurves\n";
+
+  indentation += INDENTATION_DELTA;
 
   GraphicsLinesContainer::const_iterator itr;
   for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
 
     const GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->printStream (str);
+    graphicsLines->printStream (indentation,
+                                str);
   }
-
-  str << "\n";
 }
 
 void GraphicsLinesForCurves::removePoint(const QString &identifier)

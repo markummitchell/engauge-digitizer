@@ -65,7 +65,8 @@ public:
   double low (const QString &curveName) const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Get method for saturation higher bound.
   int saturationHigh (const QString &curveName) const;

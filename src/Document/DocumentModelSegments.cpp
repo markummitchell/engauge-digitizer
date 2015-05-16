@@ -95,17 +95,18 @@ double DocumentModelSegments::pointSeparation() const
   return m_pointSeparation;
 }
 
-void DocumentModelSegments::printStream(QTextStream &str) const
+void DocumentModelSegments::printStream(QString indentation,
+                                        QTextStream &str) const
 {
-  str << "DocumentModelSegments\n";
+  str << indentation << "DocumentModelSegments\n";
 
-  str << "pointSeparation=" << m_pointSeparation << "\n";
-  str << "minLength=" << m_minLength << "\n";
-  str << "fillCorners=" << (m_fillCorners ? "true" : "false") << "\n";
-  str << "lineWidth=" << m_lineWidth << "\n";
-  str << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << "pointSeparation=" << m_pointSeparation << "\n";
+  str << indentation << "minLength=" << m_minLength << "\n";
+  str << indentation << "fillCorners=" << (m_fillCorners ? "true" : "false") << "\n";
+  str << indentation << "lineWidth=" << m_lineWidth << "\n";
+  str << indentation << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
 }
 
 void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const

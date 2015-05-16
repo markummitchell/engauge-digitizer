@@ -10,4 +10,7 @@ extern void initializeLogging (const QString &name,
                                const QString &filename,
                                bool isDebug);
 
+// Indentation increments between successive levels of indentation
+extern const QString INDENTATION_DELTA;
+
 #endif // LOGGER_H

@@ -194,18 +194,20 @@ int CurvesGraphs::numCurves () const
   return m_curvesGraphs.count ();
 }
 
-void CurvesGraphs::printStream (QTextStream &str) const
+void CurvesGraphs::printStream (QString indentation,
+                                QTextStream &str) const
 {
-  str << "CurvesGraphs\n";
+  str << indentation << "CurvesGraphs\n";
+
+  indentation += INDENTATION_DELTA;
 
   CurveList::const_iterator itr;
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
     const Curve &curve = *itr;
-    curve.printStream (str);
+    curve.printStream (indentation,
+                       str);
   }
-
-  str << "\n";
 }
 
 void CurvesGraphs::removePoint (const QString &pointIdentifier)

@@ -157,9 +157,12 @@ QPointF GraphicsPoint::pos () const
   }
 }
 
-void GraphicsPoint::printStream (QTextStream &str) const
+void GraphicsPoint::printStream (QString indentation,
+                                 QTextStream &str) const
 {
-  str << "GraphicsPoint\n";
+  str << indentation << "GraphicsPoint\n";
+
+  indentation += INDENTATION_DELTA;
 
   QString identifier;
   int ordinal;
@@ -177,11 +180,9 @@ void GraphicsPoint::printStream (QTextStream &str) const
     pos = m_graphicsItemEllipse->pos();
   }
 
-  str << identifier
+  str << indentation << identifier
       << " ordinal=" << ordinal
-      << " " << pointType << "Pos=" << QPointFToString (pos);
-
-  str << "\n";
+      << " " << pointType << "Pos=" << QPointFToString (pos) << "\n";
 }
 
 void GraphicsPoint::reset ()

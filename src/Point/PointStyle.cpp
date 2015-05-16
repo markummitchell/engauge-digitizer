@@ -184,16 +184,17 @@ QPolygonF PointStyle::polygon () const
   return polygon;
 }
 
-void PointStyle::printStream(QTextStream &str) const
+void PointStyle::printStream(QString indentation,
+                             QTextStream &str) const
 {
-  str << "PointStyle\n";
+  str << indentation << "PointStyle\n";
 
-  str << pointShapeToString (m_shape) << "\n";
-  str << "radius=" << m_radius << "\n";
-  str << "lineWidth=" << m_lineWidth << "\n";
-  str << "color=" << colorPaletteToString (m_paletteColor) << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << pointShapeToString (m_shape) << "\n";
+  str << indentation << "radius=" << m_radius << "\n";
+  str << indentation << "lineWidth=" << m_lineWidth << "\n";
+  str << indentation << "color=" << colorPaletteToString (m_paletteColor) << "\n";
 }
 
 int PointStyle::radius () const

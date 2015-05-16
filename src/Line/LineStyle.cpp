@@ -88,15 +88,16 @@ ColorPalette LineStyle::paletteColor() const
   return m_paletteColor;
 }
 
-void LineStyle::printStream(QTextStream &str) const
+void LineStyle::printStream(QString indentation,
+                            QTextStream &str) const
 {
-  str << "LineStyle\n";
+  str << indentation << "LineStyle\n";
+  
+  indentation += INDENTATION_DELTA;
 
-  str << "width=" << m_width << "\n";
-  str << "color=" << colorPaletteToString (m_paletteColor) << "\n";
-  str << "curveConnectAs=" << curveConnectAsToString (m_curveConnectAs) << "\n";
-
-  str << "\n";
+  str << indentation << "width=" << m_width << "\n";
+  str << indentation << "color=" << colorPaletteToString (m_paletteColor) << "\n";
+  str << indentation << "curveConnectAs=" << curveConnectAsToString (m_curveConnectAs) << "\n";
 }
 
 void LineStyle::saveXml(QXmlStreamWriter &writer) const

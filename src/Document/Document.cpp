@@ -497,28 +497,38 @@ void Document::print () const
   QString text;
   QTextStream str (&text);
 
-  printStream (str);
+  printStream ("",
+               str);
   std::cerr << text.toLatin1().data();
 }
 
-void Document::printStream (QTextStream &str) const
+void Document::printStream (QString indentation,
+                            QTextStream &str) const
 {
-  str << "Document\n";
+  str << indentation << "Document\n";
 
-  str << "name=" << m_name << "\n";
-  str << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
+  indentation += INDENTATION_DELTA;
 
-  m_curveAxes->printStream (str);
-  m_curvesGraphs.printStream (str);
+  str << indentation << "name=" << m_name << "\n";
+  str << indentation << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
 
-  m_modelAxesChecker.printStream (str);
-  m_modelCoords.printStream (str);
-  m_modelExport.printStream (str);
-  m_modelGridRemoval.printStream (str);
-  m_modelPointMatch.printStream (str);
-  m_modelSegments.printStream (str);
+  m_curveAxes->printStream (indentation,
+                            str);
+  m_curvesGraphs.printStream (indentation,
+                              str);
 
-  str << "\n";
+  m_modelAxesChecker.printStream (indentation,
+                                  str);
+  m_modelCoords.printStream (indentation,
+                             str);
+  m_modelExport.printStream (indentation,
+                             str);
+  m_modelGridRemoval.printStream (indentation,
+                                  str);
+  m_modelPointMatch.printStream (indentation,
+                                 str);
+  m_modelSegments.printStream (indentation,
+                               str);
 }
 
 QString Document::reasonForUnsuccessfulRead () const

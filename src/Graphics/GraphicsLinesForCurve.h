@@ -38,7 +38,8 @@ public:
   void lineMembershipReset ();
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);

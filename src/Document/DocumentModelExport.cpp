@@ -170,28 +170,31 @@ ExportPointsSelectionRelations DocumentModelExport::pointsSelectionRelations() c
   return m_pointsSelectionRelations;
 }
 
-void DocumentModelExport::printStream(QTextStream &str) const
+void DocumentModelExport::printStream(QString indentation,
+                                      QTextStream &str) const
 {
-  str << "DocumentModelExport\n";
+  str << indentation << "DocumentModelExport\n";
 
-  str << "curveNamesNotExported=";
+  indentation += INDENTATION_DELTA;
+
+  str << indentation << "curveNamesNotExported=";
   QStringList::const_iterator itr;
   for (itr = m_curveNamesNotExported.begin (); itr != m_curveNamesNotExported.end(); itr++) {
     QString curveName = *itr;
-    str << curveName << " ";
+    str << indentation << curveName << " ";
   }
   str << "\n";
 
-  str << "exportPointsSelectionFunctions=" << exportPointsSelectionFunctionsToString (m_pointsSelectionFunctions) << "\n";
-  str << "pointsInterval=" << m_pointsInterval << "\n";
-  str << "exportPointsSelectionRelations=" << exportPointsSelectionRelationsToString (m_pointsSelectionRelations) << "\n";
-  str << "relationsInterval=" << m_relationsInterval << "\n";
-  str << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
-  str << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
-  str << "exportHeader=" << exportHeaderToString (m_header) << "\n";
-  str << "xLabel=" << m_xLabel << "\n";
-
-  str << "\n";
+  str << indentation << "exportPointsSelectionFunctions=" 
+      << exportPointsSelectionFunctionsToString (m_pointsSelectionFunctions) << "\n";
+  str << indentation << "pointsInterval=" << m_pointsInterval << "\n";
+  str << indentation << "exportPointsSelectionRelations=" 
+      << exportPointsSelectionRelationsToString (m_pointsSelectionRelations) << "\n";
+  str << indentation << "relationsInterval=" << m_relationsInterval << "\n";
+  str << indentation << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
+  str << indentation << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
+  str << indentation << "exportHeader=" << exportHeaderToString (m_header) << "\n";
+  str << indentation << "xLabel=" << m_xLabel << "\n";
 }
 
 double DocumentModelExport::relationsInterval() const

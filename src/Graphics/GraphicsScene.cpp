@@ -158,6 +158,13 @@ QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
   return  movedIds;
 }
 
+void GraphicsScene::printStream (QString indentation,
+                                 QTextStream &str)
+{
+  m_graphicsLinesForCurves.printStream (indentation,
+                                        str);
+}
+
 void GraphicsScene::removePoint (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removePoint identifier=" << identifier.toLatin1().data();
@@ -233,11 +240,6 @@ void GraphicsScene::showPoints (bool show,
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
                                         bool linesAreAlreadyUpdated)
 {
-  // shit start
-  cmdMediator.document().print();
-  m_graphicsLinesForCurves.print ();
-  // shit stop
-
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
   updateCurves (cmdMediator);

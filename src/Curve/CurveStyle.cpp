@@ -71,14 +71,17 @@ PointStyle CurveStyle::pointStyle() const
   return m_pointStyle;
 }
 
-void CurveStyle::printStream(QTextStream &str) const
+void CurveStyle::printStream(QString indentation,
+                             QTextStream &str) const
 {
-  str << "CurveStyle\n";
+  str << indentation << "CurveStyle\n";
 
-  m_pointStyle.printStream (str);
-  m_lineStyle.printStream (str);
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  m_pointStyle.printStream (indentation,
+                            str);
+  m_lineStyle.printStream (indentation,
+                           str);
 }
 
 void CurveStyle::saveXml(QXmlStreamWriter &writer,

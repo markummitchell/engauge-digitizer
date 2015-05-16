@@ -51,7 +51,8 @@ public:
   QPolygonF polygon () const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Radius of point. For a circle this is all that is needed to draw a circle. For a polygon, the radius determines the size of the polygon
   int radius () const;

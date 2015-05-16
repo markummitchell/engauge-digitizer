@@ -90,15 +90,16 @@ void DocumentModelAxesChecker::loadXml(QXmlStreamReader &reader)
   }
 }
 
-void DocumentModelAxesChecker::printStream(QTextStream &str) const
+void DocumentModelAxesChecker::printStream(QString indentation,
+                                           QTextStream &str) const
 {
-  str << "DocumentModelAxesChecker\n";
+  str << indentation << "DocumentModelAxesChecker\n";
 
-  str << "checkerMode=" << checkerModeToString (m_checkerMode) << "\n";
-  str << "checkerSeconds=" << m_checkerSeconds << "\n";
-  str << "color=" << colorPaletteToString (m_lineColor) << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << "checkerMode=" << checkerModeToString (m_checkerMode) << "\n";
+  str << indentation << "checkerSeconds=" << m_checkerSeconds << "\n";
+  str << indentation << "color=" << colorPaletteToString (m_lineColor) << "\n";
 }
 
 void DocumentModelAxesChecker::saveXml(QXmlStreamWriter &writer) const

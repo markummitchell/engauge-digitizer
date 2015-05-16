@@ -49,7 +49,8 @@ public:
   virtual void loadXml(QXmlStreamReader &reader);
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Get method for removing defined grid lines.
   bool removeDefinedGridLines () const;

@@ -255,6 +255,7 @@ private:
   void updateViewedBackground();
   void updateViewedPoints ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
+  void writeCheckpointToLogFile();
 
   QString m_originalFile; // Original filename for error report
   bool m_originalFileWasImported; // True/false for imported/opened

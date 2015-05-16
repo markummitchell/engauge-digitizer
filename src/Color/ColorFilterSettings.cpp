@@ -232,41 +232,42 @@ double ColorFilterSettings::low () const
   }
 }
 
-void ColorFilterSettings::printStream (QTextStream &str) const
+void ColorFilterSettings::printStream (QString indentation,
+                                       QTextStream &str) const
 {
-  str << "ColorFilterSettings\n";
+  str << indentation << "ColorFilterSettings\n";
+
+  indentation += INDENTATION_DELTA;
 
   switch (m_colorFilterMode) {
     case COLOR_FILTER_MODE_INTENSITY:
-      str << "intensityLow=" << m_intensityLow << "\n";
-      str << "intensityHigh=" << m_intensityHigh << "\n";
+      str << indentation << "intensityLow=" << m_intensityLow << "\n";
+      str << indentation << "intensityHigh=" << m_intensityHigh << "\n";
       break;
 
     case COLOR_FILTER_MODE_FOREGROUND:
-      str << "foregroundLow=" << m_foregroundLow << "\n";
-      str << "foregroundHigh=" << m_foregroundHigh << "\n";
+      str << indentation << "foregroundLow=" << m_foregroundLow << "\n";
+      str << indentation << "foregroundHigh=" << m_foregroundHigh << "\n";
       break;
 
     case COLOR_FILTER_MODE_HUE:
-      str << "hueLow=" << m_hueLow << "\n";
-      str << "hueHigh=" << m_hueHigh << "\n";
+      str << indentation << "hueLow=" << m_hueLow << "\n";
+      str << indentation << "hueHigh=" << m_hueHigh << "\n";
       break;
 
     case COLOR_FILTER_MODE_SATURATION:
-      str << "saturationLow" << m_saturationLow << "\n";
-      str << "saturationHigh" << m_saturationHigh << "\n";
+      str << indentation << "saturationLow" << m_saturationLow << "\n";
+      str << indentation << "saturationHigh" << m_saturationHigh << "\n";
       break;
 
     case COLOR_FILTER_MODE_VALUE:
-      str << "valueLow=" << m_valueLow << "\n";
-      str << "valueHigh=" << m_valueHigh << "\n";
+      str << indentation << "valueLow=" << m_valueLow << "\n";
+      str << indentation << "valueHigh=" << m_valueHigh << "\n";
       break;
 
     default:
       break;
   }
-  
-  str << "\n";
 }
 
 int ColorFilterSettings::saturationHigh () const

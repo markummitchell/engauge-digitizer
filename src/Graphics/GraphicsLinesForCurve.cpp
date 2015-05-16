@@ -156,21 +156,23 @@ void GraphicsLinesForCurve::lineMembershipReset ()
   }
 }
 
-void GraphicsLinesForCurve::printStream (QTextStream &str) const
+void GraphicsLinesForCurve::printStream (QString indentation,
+                                         QTextStream &str) const
 {
-  str << "GraphicsLinesForCurve\n";
+  str << indentation << "GraphicsLinesForCurve\n";
 
-  str << "curve name: " << m_curveName << endl;
+  indentation += INDENTATION_DELTA;
+
+  str << indentation << "curve name: " << m_curveName << "\n";
 
   PointIdentifierToGraphicsPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
     const GraphicsPoint *point = *itr;
 
-    point->printStream (str);
+    point->printStream (indentation,
+                        str);
   }
-
-  str << "\n";
 }
 
 void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)

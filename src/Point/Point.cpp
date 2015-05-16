@@ -174,16 +174,17 @@ QPointF Point::posScreen () const
   return m_posScreen;
 }
 
-void Point::printStream(QTextStream &str) const
+void Point::printStream(QString indentation,
+                        QTextStream &str) const
 {
-  str << "Point\n";
+  str << indentation << "Point\n";
 
-  str << "identifier=" << m_identifier << "\n";
-  str << "posScreen=" << QPointFToString (m_posScreen) << "\n";
-  str << "posGraph=" << QPointFToString (m_posGraph) << "\n";
-  str << "ordinal=" << m_ordinal << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << "identifier=" << m_identifier << "\n";
+  str << indentation << "posScreen=" << QPointFToString (m_posScreen) << "\n";
+  str << indentation << "posGraph=" << QPointFToString (m_posGraph) << "\n";
+  str << indentation << "ordinal=" << m_ordinal << "\n";
 }
 
 void Point::saveXml(QXmlStreamWriter &writer) const

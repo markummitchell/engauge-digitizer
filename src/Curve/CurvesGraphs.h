@@ -62,7 +62,8 @@ public:
   int numCurves () const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Remove the Point from its Curve.
   void removePoint (const QString &pointIdentifier);

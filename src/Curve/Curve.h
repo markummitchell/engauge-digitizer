@@ -88,7 +88,8 @@ public:
   QPointF positionScreen (const QString &pointIdentifier) const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);

@@ -7,6 +7,8 @@
 
 log4cpp::Category *mainCat;
 
+const QString INDENTATION_DELTA ("  ");
+
 void initializeLogging (const QString &name,
                         const QString &filename,
                         bool isDebug)

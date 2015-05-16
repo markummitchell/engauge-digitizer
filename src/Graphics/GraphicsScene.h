@@ -13,6 +13,7 @@ class CurveStyles;
 class GraphicsPoint;
 class MainWindow;
 class PointStyle;
+class QTextStream;
 class Transformation;
 
 /// Add point and line handling to generic QGraphicsScene. The primary tasks are:
@@ -38,6 +39,10 @@ public:
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QString indentation,
+                    QTextStream &str);
 
   /// Remove specified point
   void removePoint (const QString &identifier);

@@ -178,30 +178,27 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
 
 void Curve::iterateThroughCurveSegments (const Functor2wRet<const Point&, const Point&, CallbackSearchReturn> &ftorWithCallback) const
 {
-  int index;
-  typedef QMap<double, int> MapOrdinalToIndex;
-
-  // Compile a map of ordinals to list indexes
-  MapOrdinalToIndex mapOrdinalToIndex;
+  // Loop through Points. They are assumed to be already sorted by their ordinals
   QList<Point>::const_iterator itr;
-  for (index = 0; index < m_points.count(); index++) {
+  const Point *pointBefore = 0;
+  for (itr = m_points.begin(); itr != m_points.end(); itr++) {
 
-    const Point &point = m_points [index];
-    mapOrdinalToIndex [point.ordinal()] = index;
-  }
+    const Point &point = *itr;
 
-  // Loop through Points in order of their ordinals
-  for (index = 1; index < mapOrdinalToIndex.count(); index++) {
+    if (pointBefore != 0) {
 
-    const Point &pointMinus1 = m_points [index - 1];
-    const Point &point = m_points [index];
+      // Sorting was not performed
+      ENGAUGE_ASSERT (pointBefore->ordinal () <= point.ordinal ());
 
-    CallbackSearchReturn rtn = ftorWithCallback (pointMinus1,
-                                                 point);
+      CallbackSearchReturn rtn = ftorWithCallback (*pointBefore,
+                                                   point);
 
-    if (rtn == CALLBACK_SEARCH_RETURN_INTERRUPT) {
-      break;
+      if (rtn == CALLBACK_SEARCH_RETURN_INTERRUPT) {
+        break;
+      }
+
     }
+    pointBefore = &point;
   }
 }
 
@@ -355,21 +352,25 @@ const Points Curve::points () const
   return m_points;
 }
 
-void Curve::printStream (QTextStream &str) const
+void Curve::printStream (QString indentation,
+                         QTextStream &str) const
 {
-  str << "Curve\n";
+  str << indentation << "Curve\n";
 
-  str << "curve=" << m_curveName << "\n";
+  indentation += INDENTATION_DELTA;
+
+  str << indentation << "curve=" << m_curveName << "\n";
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;
-    point.printStream (str);
+    point.printStream (indentation, 
+                       str);
   }
 
-  m_colorFilterSettings.printStream (str);
-  m_curveStyle.printStream (str);
-
-  str << "\n";
+  m_colorFilterSettings.printStream (indentation,
+                                     str);
+  m_curveStyle.printStream (indentation,
+                            str);
 }
 
 void Curve::removePoint (const QString &identifier)

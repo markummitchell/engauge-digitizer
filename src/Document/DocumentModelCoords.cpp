@@ -114,17 +114,18 @@ double DocumentModelCoords::originRadius() const
   return m_originRadius;
 }
 
-void DocumentModelCoords::printStream(QTextStream &str) const
+void DocumentModelCoords::printStream(QString indentation,
+                                      QTextStream &str) const
 {
-  str << "DocumentModelCoords\n";
+  str << indentation << "DocumentModelCoords\n";
 
-  str << "coordsType=" << coordsTypeToString (m_coordsType) << "\n";
-  str << "originRadius" << m_originRadius << "\n";
-  str << "coordScaleXTheta=" << coordScaleToString (m_coordScaleXTheta) << "\n";
-  str << "coordScaleYRadius=" << coordScaleToString (m_coordScaleYRadius) << "\n";
-  str << "coordThetaUnits=" << coordThetaUnitsToString (m_coordThetaUnits) << "\n";
+  indentation += INDENTATION_DELTA;
 
-  str << "\n";
+  str << indentation << "coordsType=" << coordsTypeToString (m_coordsType) << "\n";
+  str << indentation << "originRadius" << m_originRadius << "\n";
+  str << indentation << "coordScaleXTheta=" << coordScaleToString (m_coordScaleXTheta) << "\n";
+  str << indentation << "coordScaleYRadius=" << coordScaleToString (m_coordScaleYRadius) << "\n";
+  str << indentation << "coordThetaUnits=" << coordThetaUnitsToString (m_coordThetaUnits) << "\n";
 }
 
 void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const

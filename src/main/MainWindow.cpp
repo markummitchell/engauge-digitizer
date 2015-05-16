@@ -2411,6 +2411,10 @@ void MainWindow::updateAfterCommand (bool linesAreAlreadyUpdated)
                                linesAreAlreadyUpdated);
 
   updateControls ();
+
+  // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
+  // so proper state can be verified
+  writeCheckpointToLogFile ();
 }
 
 void MainWindow::updateAfterCommandStatusBarCoords ()
@@ -2744,4 +2748,28 @@ const GraphicsView &MainWindow::view () const
 {
   ENGAUGE_CHECK_PTR (m_view);
   return *m_view;
+}
+
+void MainWindow::writeCheckpointToLogFile ()
+{
+  // Document
+  QString checkpointDoc;
+  QTextStream strDoc (&checkpointDoc);
+  m_cmdMediator->document().printStream(INDENTATION_DELTA,
+                                        strDoc);
+
+  // Scene
+  QString checkpointScene;
+  QTextStream strScene (&checkpointScene);
+  m_scene->printStream (INDENTATION_DELTA,
+                        strScene);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::writeCheckpointToLogFile\n"
+                              << "-----------DOCUMENT CHECKPOINT START----------" << "\n"
+                              << checkpointDoc.toLatin1().data()
+                              << "------------DOCUMENT CHECKPOINT END-----------" << "\n"
+                              << "-------------SCENE CHECKPOINT START-----------" << "\n"
+                              << checkpointScene.toLatin1().data()
+                              << "--------------SCENE CHECKPOINT END------------" << "\n";
+
 }

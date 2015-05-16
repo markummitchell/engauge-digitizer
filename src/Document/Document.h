@@ -158,7 +158,8 @@ public:
   void print () const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Return an informative text message explaining why startup loading failed. Applies if successfulRead returns false
   QString reasonForUnsuccessfulRead () const;

@@ -63,7 +63,8 @@ public:
   QPointF posScreen () const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QTextStream &str) const;
+  void printStream (QString indentation,
+                    QTextStream &str) const;
 
   /// Serialize to stream
   void saveXml(QXmlStreamWriter &writer) const;
