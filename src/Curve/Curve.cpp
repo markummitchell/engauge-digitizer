@@ -355,11 +355,10 @@ const Points Curve::points () const
 void Curve::printStream (QString indentation,
                          QTextStream &str) const
 {
-  str << indentation << "Curve\n";
+  str << indentation << "Curve=" << m_curveName << "\n";
 
   indentation += INDENTATION_DELTA;
 
-  str << indentation << "curve=" << m_curveName << "\n";
   Points::const_iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
     const Point &point = *itr;

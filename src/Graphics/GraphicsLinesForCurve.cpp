@@ -121,8 +121,11 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge";
 
-  PointIdentifierToGraphicsPoint::iterator itr;
-  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+  PointIdentifierToGraphicsPoint::iterator itr, itrNext;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr = itrNext) {
+
+    itrNext = itr;
+    ++itrNext;
 
     GraphicsPoint *point = *itr;
 
@@ -170,11 +173,9 @@ void GraphicsLinesForCurve::lineMembershipReset ()
 void GraphicsLinesForCurve::printStream (QString indentation,
                                          QTextStream &str) const
 {
-  str << indentation << "GraphicsLinesForCurve\n";
+  str << indentation << "GraphicsLinesForCurve=" << m_curveName << "\n";
 
   indentation += INDENTATION_DELTA;
-
-  str << indentation << "curve name: " << m_curveName << "\n";
 
   PointIdentifierToGraphicsPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
@@ -216,6 +217,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
     graphicsPoint = scene.createPoint (point.identifier (),
                                        pointStyle,
                                        point.posScreen());
+    m_graphicsPoints [point.identifier ()] = graphicsPoint;
+
   }
 
   // Mark point as wanted
