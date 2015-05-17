@@ -1,4 +1,5 @@
 #include "GraphicsArcItem.h"
+#include <QDebug>
 #include <QPainter>
 #include <QGraphicsScene>
 
@@ -37,7 +38,9 @@ void GraphicsArcItem::paint (QPainter *painter,
                              const QStyleOptionGraphicsItem * /* option */,
                              QWidget * /* widget */)
 {
-  painter->setPen (pen ());
+  QPen thinPen (pen ().brush(), 0); // shit
+
+  painter->setPen (thinPen);
   painter->drawArc (rect(),
                     startAngle (),
                     spanAngle());

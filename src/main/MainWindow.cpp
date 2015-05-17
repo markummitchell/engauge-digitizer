@@ -1873,7 +1873,8 @@ void MainWindow::slotMouseMove (QPointF pos)
                                  coordsGraph,
                                  resolutionGraph);
 
-    updateGraphicsLinesToMatchGraphicsPoints();
+    // There used to be a call to updateGraphicsLinesToMatchGraphicsPoints here, but that resulted
+    // in hundreds of gratuitous log messages as the cursor was moved around, and nothing important happened
   }
 }
 

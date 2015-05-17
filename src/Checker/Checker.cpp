@@ -42,10 +42,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
                                       double &xMax,
                                       double &yMin) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::adjustPolarAngleRanges";
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::adjustPolarAngleRanges transformation=" << transformation;
 
   const double UNIT_LENGTH = 1.0;
 
+  QString path; // For logging
   if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
 
     // Range minimum is origin
@@ -54,6 +55,8 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
     } else {
       yMin = modelCoords.originRadius();
     }
+
+    path = QString ("yMin=%1 ").arg (yMin); // For logging
 
     // Perform special processing to account for periodicity of polar coordinates. Start with unit vectors
     // in the directions of the three axis points
@@ -77,9 +80,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
       // Point 0 is in the middle. Either or neither of points 1 and 2 may be along point 0
       if ((angleFromVectorToVector (pos0, pos1) < 0) ||
           (angleFromVectorToVector (pos0, pos2) > 0)) {
+        path += QString ("from 1=%1 through 0 to 2=%2").arg (angle1).arg (angle2);
         xMin = angle1;
         xMax = angle2;
       } else {
+        path += QString ("from 2=%1 through 0 to 1=%2").arg (angle2).arg (angle1);
         xMin = angle2;
         xMax = angle1;
       }
@@ -88,9 +93,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
       // Point 1 is in the middle. Either or neither of points 0 and 2 may be along point 1
       if ((angleFromVectorToVector (pos1, pos0) < 0) ||
           (angleFromVectorToVector (pos1, pos2) > 0)) {
+        path += QString ("from 0=%1 through 1 to 2=%2").arg (angle0).arg (angle2);
         xMin = angle0;
         xMax = angle2;
       } else {
+        path += QString ("from 2=%1 through 1 to 0=%2").arg (angle2).arg (angle0);
         xMin = angle2;
         xMax = angle0;
       }
@@ -99,9 +106,11 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
       // Point 2 is in the middle. Either or neither of points 0 and 1 may be along point 2
       if ((angleFromVectorToVector (pos2, pos0) < 0) ||
           (angleFromVectorToVector (pos2, pos1) > 0)) {
+        path += QString ("from 0=%1 through 2 to 1=%2").arg (angle0).arg (angle1);
         xMin = angle0;
         xMax = angle1;
       } else {
+        path += QString ("from 1=%1 through 2 to 0=%2").arg (angle1).arg (angle0);
         xMin = angle1;
         xMax = angle0;
       }
@@ -109,9 +118,16 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
 
     // Make sure theta is increasing
     while (xMax < xMin) {
-      xMax += modelCoords.thetaPeriod();
+
+      double thetaPeriod = modelCoords.thetaPeriod();
+
+      path += QString (" xMax+=%1").arg (thetaPeriod);
+      xMax += thetaPeriod;
+
     }
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::adjustPolarAngleRanges path=(" << path.toLatin1().data() << ")";
 }
 
 void Checker::bindItemToScene(QGraphicsItem *item) const
@@ -140,7 +156,8 @@ void Checker::createSide (int pointRadius,
                               << " xFrom=" << xFrom
                               << " yFrom=" << yFrom
                               << " xTo=" << xTo
-                              << " yTo=" << yTo;
+                              << " yTo=" << yTo
+                              << " transformation=" << transformation;
 
   // Originally a complicated algorithm tried to intercept a straight line from (xFrom,yFrom) to (xTo,yTo). That did not work well since:
   // 1) Calculations for mostly orthogonal cartesian coordinates worked less well with non-orthogonal polar coordinates
@@ -250,13 +267,16 @@ void Checker::createTransformAlign (const Transformation &transformation,
                                                                                 posXRadiusY0AlignedScreen,
                                                                                 posX0YRadiusAlignedScreen);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::TransformAlign"
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::createTransformAlign"
                               << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data()
                               << " radiusLinearCartesian=" << radiusLinearCartesian
+                              << " posXRadiusY0Screen=" << QPointFToString (posXRadiusY0Screen).toLatin1().data()
+                              << " posX0YRadiusScreen=" << QPointFToString (posX0YRadiusScreen).toLatin1().data()
                               << " ellipseXAxis=" << ellipseXAxis
                               << " ellipseYAxis=" << ellipseYAxis
                               << " posXRadiusY0AlignedScreen=" << QPointFToString (posXRadiusY0AlignedScreen).toLatin1().data()
-                              << " posX0YRadiusAlignedScreen=" << QPointFToString (posX0YRadiusAlignedScreen).toLatin1().data();
+                              << " posX0YRadiusAlignedScreen=" << QPointFToString (posX0YRadiusAlignedScreen).toLatin1().data()
+                              << " transformAlign=" << QTransformToString (transformAlign).toLatin1().data();
 }
 
 void Checker::deleteSide (SideSegments &sideSegments)
@@ -304,7 +324,8 @@ QGraphicsItem *Checker::ellipseItem(const Transformation &transformation,
                               << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
                               << " posOriginScreen=" << QPointFToString (posOriginScreen).toLatin1().data()
                               << " angleStart=" << angleStart / DEGREES_TO_RADIANS
-                              << " angleEnd=" << angleEnd / DEGREES_TO_RADIANS;
+                              << " angleEnd=" << angleEnd / DEGREES_TO_RADIANS
+                              << " transformation=" << transformation;
 
   // Compute rotate/shear transform that aligns linear cartesian graph coordinates with screen coordinates, and ellipse parameters.
   // Transform does not include scaling since that messes up the thickness of the drawn line, and does not include
@@ -444,7 +465,8 @@ void Checker::prepareForDisplay (const QList<Point> &points,
                                  const DocumentModelCoords &modelCoords,
                                  const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
+  LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay "
+                              << " transformation=" << transformation;
 
   ENGAUGE_ASSERT (points.count () == NUM_AXES_POINTS);
 

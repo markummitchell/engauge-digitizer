@@ -136,9 +136,20 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
   }
 
   // Apply line style
-  QPen pen = QPen (QBrush (ColorPaletteToQColor (lineStyle.paletteColor())),
-                   lineStyle.width());
-  setPen (pen);
+  QPen pen;
+  if (lineStyle.paletteColor() == COLOR_PALETTE_TRANSPARENT) {
+
+    pen = QPen (Qt::NoPen);
+
+  } else {
+
+    pen = QPen (QBrush (ColorPaletteToQColor (lineStyle.paletteColor())),
+                lineStyle.width());
+
+  }
+
+//  setPen (pen);
+setPen (QPen(Qt::green));
 
   updateGraphicsLinesToMatchGraphicsPoints (lineStyle);
 }

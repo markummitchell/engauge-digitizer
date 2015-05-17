@@ -7,6 +7,8 @@
 #include <QtGlobal>
 #include "Transformation.h"
 
+using namespace std;
+
 /// Max number of significant digits. Number of pixels in each direction should just fit into this
 /// number of characters.
 const int PRECISION_DIGITS = 4;
@@ -218,6 +220,39 @@ double Transformation::logToLinearRadius (double r,
 DocumentModelCoords Transformation::modelCoords() const
 {
   return m_modelCoords;
+}
+
+const Transformation &operator<<(ostringstream &strOuter,
+                                 const Transformation &transformation)
+{
+  QString text;
+  QTextStream strInner (&text);
+  transformation.printStream ("", strInner);
+
+  strOuter << text.toLatin1().data ();
+
+  return transformation;
+}
+
+void Transformation::printStream (QString indentation,
+                                  QTextStream &str) const
+{
+  str << "Transformation\n";
+
+  indentation += INDENTATION_DELTA;
+
+  if (m_transformIsDefined) {
+
+    str << indentation << "affine=" << (m_transform.isAffine() ? "yes" : "no") << " matrix=("
+        << m_transform.m11() << ", " << m_transform.m12() << ", " << m_transform.m13() << ", "
+        << m_transform.m21() << ", " << m_transform.m22() << ", " << m_transform.m23() << ", "
+        << m_transform.m31() << ", " << m_transform.m32() << ", " << m_transform.m33() << ")\n";
+
+  } else {
+
+    str << indentation << "undefined";
+
+  }
 }
 
 double Transformation::roundOffSmallValues (double value, double range)

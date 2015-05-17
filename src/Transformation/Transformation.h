@@ -72,6 +72,10 @@ public:
   /// Get method for DocumentModelCoords
   DocumentModelCoords modelCoords() const;
 
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QString indentation,
+                    QTextStream &str) const;
+
   /// Transform is defined when at least three axis points have been digitized
   bool transformIsDefined() const { return m_transformIsDefined; }
 
@@ -124,5 +128,9 @@ private:
   // Coordinates information from last time the transform was updated. Only defined if  m_transformIsDefined is true
   DocumentModelCoords m_modelCoords;
 };
+
+/// Stream operator
+const Transformation &operator<< (std::ostringstream &str,
+                                  const Transformation &transformation);
 
 #endif // TRANSFORMATION_H
