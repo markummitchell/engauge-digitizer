@@ -4,6 +4,7 @@
 #include "DigitizeStatePointMatch.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "OrdinalGenerator.h"
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QImage>
@@ -58,9 +59,16 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseRelease";
 
   // Create command to add point
+  OrdinalGenerator ordinalGenerator;
+  Document &document = context ().cmdMediator ().document ();
+  const Transformation &transformation = context ().mainWindow ().transformation();
   QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
-                                            context ().cmdMediator ().document (),
+                                            document,
                                             context ().mainWindow().selectedGraphCurve(),
-                                            posScreen);
+                                            posScreen,
+                                            ordinalGenerator.generateCurvePointOrdinal(document,
+                                                                                       transformation,
+                                                                                       posScreen,
+                                                                                       activeCurve ()));
   context().appendNewCmd(cmd);
 }

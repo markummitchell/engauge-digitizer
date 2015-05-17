@@ -10,6 +10,7 @@
 #include "EnumsToQt.h"
 #include <iostream>
 #include "Logger.h"
+#include "OrdinalGenerator.h"
 #include "Point.h"
 #include <QByteArray>
 #include <QDataStream>
@@ -145,11 +146,14 @@ void Document::addGraphCurveAtEnd (const QString &curveName)
 
 void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
-                                                    QString &identifier)
+                                                    QString &identifier,
+                                                    double ordinal)
 {
+  OrdinalGenerator ordinalGenerator;
+
   Point point (AXIS_CURVE_NAME,
                posScreen,
-               UNDEFINED_ORDINAL,
+               ordinal,
                posGraph);
   m_curveAxes->addPoint (point);
 
@@ -163,12 +167,13 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
 
 void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
-                                                    const QString &identifier)
+                                                    const QString &identifier,
+                                                    double ordinal)
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
                identifier,
-               UNDEFINED_ORDINAL,
+               ordinal,
                posGraph);
   m_curveAxes->addPoint (point);
 

@@ -128,6 +128,7 @@ HEADERS  += \
     main/MainWindow.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
+    Ordinal/OrdinalGenerator.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointIdentifierToGraphicsPoint.h \
@@ -274,6 +275,7 @@ SOURCES += \
     main/main.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
+    Ordinal/OrdinalGenerator.cpp \
     util/mmsubs.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
@@ -328,6 +330,7 @@ INCLUDEPATH += Callback \
                Logger \
                main \
                Mime \
+               Ordinal \
                Plot \
                Point \
                Settings \

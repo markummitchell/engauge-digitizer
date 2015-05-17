@@ -39,17 +39,21 @@ public:
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
+  /// \param ordinal Unique, for curve, ordinal number
   void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                             const QPointF &posGraph,
-                                            QString &identifier);
+                                            QString &identifier,
+                                            double ordinal);
 
   /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call.
   /// \param posScreen Screen coordinates from QGraphicsView
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
+  /// \param ordinal Unique, for curve, ordinal number
   void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                             const QPointF &posGraph,
-                                            const QString &identifier);
+                                            const QString &identifier,
+                                            double ordinal);
 
   /// Add a single graph point with a generated point identifier.
   void addPointGraphWithGeneratedIdentifier (const QString &curveName,

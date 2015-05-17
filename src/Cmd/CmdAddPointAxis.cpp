@@ -12,12 +12,14 @@ const QString CMD_DESCRIPTION ("Add axis point");
 CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
                                   Document &document,
                                   const QPointF &posScreen,
-                                  const QPointF &posGraph) :
+                                  const QPointF &posGraph,
+                                  double ordinal) :
   CmdAbstract (mainWindow,
                document,
                CMD_DESCRIPTION),
   m_posScreen (posScreen),
-  m_posGraph (posGraph)
+  m_posGraph (posGraph),
+  m_ordinal (ordinal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::CmdAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
@@ -40,7 +42,8 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL)) {
       ENGAUGE_ASSERT (false);
   }
 
@@ -49,6 +52,7 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
   m_posGraph.setX(attributes.value(DOCUMENT_SERIALIZE_GRAPH_X).toDouble());
   m_posGraph.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y).toDouble());
   m_identifierAdded = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+  m_ordinal = attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
 }
 
 CmdAddPointAxis::~CmdAddPointAxis ()
@@ -61,7 +65,8 @@ void CmdAddPointAxis::cmdRedo ()
 
   document().addPointAxisWithGeneratedIdentifier (m_posScreen,
                                                   m_posGraph,
-                                                  m_identifierAdded);
+                                                  m_identifierAdded,
+                                                  m_ordinal);
   document().updatePointOrdinals ();
   mainWindow().updateAfterCommand();
 }
@@ -85,5 +90,6 @@ void CmdAddPointAxis::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X, QString::number (m_posGraph.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y, QString::number (m_posGraph.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal));
   writer.writeEndElement();
 }

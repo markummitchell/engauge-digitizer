@@ -8,6 +8,7 @@
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "OrdinalGenerator.h"
 #include "PointStyle.h"
 #include <QCursor>
 #include <QImage>
@@ -114,10 +115,13 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
       } else {
 
         // Create command to add point
+        OrdinalGenerator ordinalGenerator;
+        Document &document = context ().cmdMediator ().document ();
         QUndoCommand *cmd = new CmdAddPointAxis (context ().mainWindow(),
-                                                 context ().cmdMediator ().document (),
+                                                 document,
                                                  posScreen,
-                                                 posGraph);
+                                                 posGraph,
+                                                 ordinalGenerator.generateAxisPointOrdinal(document));
         context().appendNewCmd(cmd);
       }
     }

@@ -15,7 +15,8 @@ class CmdAddPointGraph : public CmdAbstract
   CmdAddPointGraph(MainWindow &mainWindow,
                    Document &document,
                    const QString &curveName,
-                   const QPointF &posScreen);
+                   const QPointF &posScreen,
+                   double ordinal);
 
   /// Constructor for parsing error report file xml
   CmdAddPointGraph(MainWindow &mainWindow,
@@ -31,13 +32,6 @@ class CmdAddPointGraph : public CmdAbstract
 
 private:
   CmdAddPointGraph();
-
-  // Depending on CurveStyle settings, determine where in its Curve it will be inserted. This is specified as the ordinal.
-  // This is static so it is available during construction
-  static double ordinalForNewPoint (const Document &document,
-                                    const Transformation &transformation,
-                                    const QPointF &posScreen,
-                                    const QString &curveName);
 
   QString m_curveName;
   QPointF m_posScreen;

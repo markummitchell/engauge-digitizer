@@ -16,7 +16,8 @@ CallbackSearchReturn CallbackAddPointsInCurvesGraphs::callback (const QString &c
   if (curveName == AXIS_CURVE_NAME) {
     m_document.addPointAxisWithSpecifiedIdentifier (point.posScreen (),
                                                     point.posGraph (),
-                                                    identifier);
+                                                    identifier,
+                                                    point.ordinal ());
   } else {
     m_document.addPointGraphWithSpecifiedIdentifier (curveName,
                                                      point.posScreen (),

@@ -14,7 +14,8 @@ class CmdAddPointAxis : public CmdAbstract
   CmdAddPointAxis(MainWindow &mainWindow,
                   Document &document,
                   const QPointF &posScreen,
-                  const QPointF &posGraph);
+                  const QPointF &posGraph,
+                  double ordinal);
 
   /// Constructor for parsing error report file xml
   CmdAddPointAxis(MainWindow &mainWindow,
@@ -34,6 +35,7 @@ private:
   QPointF m_posScreen;
   QPointF m_posGraph;
   QString m_identifierAdded; // Point that got added
+  double m_ordinal;
 };
 
 #endif // CMD_ADD_POINT_AXIS_H

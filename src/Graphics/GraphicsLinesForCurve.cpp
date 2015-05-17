@@ -239,6 +239,9 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
 
   }
 
+  // Duplicate ordinal values will break this algorithm, so verify unique ordinal values by checking the counts
+  ENGAUGE_ASSERT (ordinalToPointIdentifier.count () == m_graphicsPoints.count ());
+
   // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals. The
   // Spline algorithm will crash with fewer than three points so it is only called when there are enough points
   QPainterPath path;

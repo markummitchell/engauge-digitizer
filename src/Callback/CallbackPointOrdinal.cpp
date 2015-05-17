@@ -14,7 +14,8 @@ CallbackPointOrdinal::CallbackPointOrdinal(const LineStyle &lineStyle,
   m_posScreen (posScreen),
   m_haveMinimumDistanceToLine (false),
   m_minimumDistanceToLine (0.0),
-  m_minimumProjectedDistanceOutsideLine (0.0)
+  m_minimumProjectedDistanceOutsideLine (0.0),
+  m_ordinal (0)
 {
 }
 
@@ -76,5 +77,5 @@ CallbackSearchReturn CallbackPointOrdinal::callback (const Point &pointStart,
 
 double CallbackPointOrdinal::ordinal () const
 {
-  return 0;
+  return m_ordinal;
 }
