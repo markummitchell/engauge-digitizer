@@ -151,8 +151,7 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 
   }
 
-//  setPen (pen);
-setPen (QPen(Qt::green));
+  setPen (pen);
 
   updateGraphicsLinesToMatchGraphicsPoints (lineStyle);
 }

@@ -49,12 +49,8 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
   QString path; // For logging
   if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
 
-    // Range minimum is origin
-    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
-      yMin = 0.0;
-    } else {
-      yMin = modelCoords.originRadius();
-    }
+    // Range minimum is at origin
+    yMin = modelCoords.originRadius();
 
     path = QString ("yMin=%1 ").arg (yMin); // For logging
 
@@ -132,7 +128,7 @@ void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
 
 void Checker::bindItemToScene(QGraphicsItem *item) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "Checker:bindItemToScene";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Checker::bindItemToScene";
 
   item->setOpacity (CHECKER_OPACITY);
   item->setZValue (Z_VALUE_IN_FRONT);
@@ -380,6 +376,8 @@ void Checker::finishActiveSegment (const DocumentModelCoords &modelCoords,
     if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
       radiusLinearCartesian = transformation.logToLinearRadius(yFrom,
                                                                modelCoords.originRadius());
+    } else {
+      radiusLinearCartesian -= modelCoords.originRadius();
     }
 
     // Draw along an arc since this is a side of constant radius, and we have polar coordinates
@@ -505,7 +503,7 @@ void Checker::prepareForDisplay (const QList<Point> &points,
                           xTo,
                           yFrom);
 
-  // Draw the bounding box as four sides
+  // Draw the bounding box as four sides. In polar plots the bottom side is zero-length, with pie shape resulting
   createSide (pointRadius, points, modelCoords, xFrom, yFrom, xFrom, yTo  , transformation, m_sideLeft);
   createSide (pointRadius, points, modelCoords, xFrom, yTo  , xTo  , yTo  , transformation, m_sideTop);
   createSide (pointRadius, points, modelCoords, xTo  , yTo  , xTo  , yFrom, transformation, m_sideRight);
