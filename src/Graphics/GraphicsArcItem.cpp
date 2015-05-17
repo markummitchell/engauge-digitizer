@@ -38,9 +38,7 @@ void GraphicsArcItem::paint (QPainter *painter,
                              const QStyleOptionGraphicsItem * /* option */,
                              QWidget * /* widget */)
 {
-  QPen thinPen (pen ().brush(), 0); // shit
-
-  painter->setPen (thinPen);
+  painter->setPen (pen ());
   painter->drawArc (rect(),
                     startAngle (),
                     spanAngle());

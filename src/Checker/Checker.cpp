@@ -253,8 +253,12 @@ void Checker::createTransformAlign (const Transformation &transformation,
                                                         posX0YRadiusScreen);
 
   // Compute arc/ellipse parameters
-  ellipseXAxis = qAbs (posXRadiusY0Screen.x() - posOriginScreen.x());
-  ellipseYAxis = qAbs (posX0YRadiusScreen.y() - posOriginScreen.y());
+  QPointF deltaXRadiusY0 = posXRadiusY0Screen - posOriginScreen;
+  QPointF deltaX0YRadius = posX0YRadiusScreen - posOriginScreen;
+  ellipseXAxis = qSqrt (deltaXRadiusY0.x () * deltaXRadiusY0.x () +
+                        deltaXRadiusY0.y () * deltaXRadiusY0.y ());
+  ellipseYAxis = qSqrt (deltaX0YRadius.x () * deltaX0YRadius.x () +
+                        deltaX0YRadius.y () * deltaX0YRadius.y ());
 
   // Compute the aligned coordinates, constrained by the rules listed above
   QPointF posXRadiusY0AlignedScreen (posOriginScreen.x() + ellipseXAxis, posOriginScreen.y());

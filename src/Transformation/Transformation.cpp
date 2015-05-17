@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <qmath.h>
 #include <QtGlobal>
+#include "QtToString.h"
 #include "Transformation.h"
 
 using namespace std;
@@ -405,7 +406,9 @@ void Transformation::update (bool fileIsLoaded,
 void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen,
                                                   const QTransform &matrixGraph)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices";
+  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices"
+                              << " matrixScreen=" << QTransformToString (matrixScreen).toLatin1().data ()
+                              << " matrixGraph=" << QTransformToString (matrixGraph).toLatin1().data();
 
   // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),
