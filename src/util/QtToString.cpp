@@ -44,7 +44,7 @@ QString QTransformToString (const QTransform &transform)
 
   QString str = QString ("   %1   %2   %3\n"
                          "   %4   %5   %6\n"
-                         "   %7   %8   %9\n")
+                         "   %7   %8   %9")
                  .arg (transform.m11 (), FIELD_WIDTH)
                  .arg (transform.m12 (), FIELD_WIDTH)
                  .arg (transform.m13 (), FIELD_WIDTH)

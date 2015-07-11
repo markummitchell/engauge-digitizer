@@ -213,7 +213,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   } else {
 
     // Point does not exist in scene so create it
-    graphicsPoint = scene.createPoint (point.identifier (),
+    graphicsPoint = scene.createPoint (m_curveName,
+                                       point.identifier (),
                                        pointStyle,
                                        point.posScreen());
     m_graphicsPoints [point.identifier ()] = graphicsPoint;
@@ -227,34 +228,48 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
 
 void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle)
 {
+  // LOG4CPP_DEBUG_S is below
+  QString ordinals, delimiter;
+  QTextStream str (&ordinals);
+
   OrdinalToPointIdentifier ordinalToPointIdentifier;
 
   // Order by ordinals locally
   PointIdentifierToGraphicsPoint::const_iterator itr;
+  str << "(";
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
     const GraphicsPoint *point = *itr;
     double ordinal = point->data (DATA_KEY_ORDINAL).toDouble();
     ordinalToPointIdentifier [ordinal] = point->data (DATA_KEY_IDENTIFIER).toString();
 
+    str << delimiter << ordinal;
+    delimiter = ", ";
   }
+  str << ")";
 
-  // Duplicate ordinal values will break this algorithm, so verify unique ordinal values by checking the counts
-  ENGAUGE_ASSERT (ordinalToPointIdentifier.count () == m_graphicsPoints.count ());
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints ordinals="
+                               << ordinals.toLatin1().data();
 
-  // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals. The
-  // Spline algorithm will crash with fewer than three points so it is only called when there are enough points
-  QPainterPath path;
-  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
-      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
-      m_graphicsPoints.count () < 3) {
+  if (lineStyle.curveConnectAs() != CONNECT_SKIP_FOR_AXIS_CURVE) {
 
-    path = drawLinesStraight (ordinalToPointIdentifier);
-  } else {
-    path = drawLinesSmooth (ordinalToPointIdentifier);
+    // Duplicate ordinal values will break this algorithm, so verify unique ordinal values by checking the counts
+    ENGAUGE_ASSERT (ordinalToPointIdentifier.count () == m_graphicsPoints.count ());
+
+    // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals. The
+    // Spline algorithm will crash with fewer than three points so it is only called when there are enough points
+    QPainterPath path;
+    if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT ||
+        lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
+        m_graphicsPoints.count () < 3) {
+
+      path = drawLinesStraight (ordinalToPointIdentifier);
+    } else {
+      path = drawLinesSmooth (ordinalToPointIdentifier);
+    }
+
+   setPath (path);
   }
-
-  setPath (path);
 }
 
 void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,

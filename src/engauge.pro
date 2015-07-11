@@ -59,7 +59,7 @@ HEADERS  += \
     Curve/CurvesGraphs.h \
     Curve/CurveStyle.h \
     Curve/CurveStyles.h \
-    include/DataKey.h \
+    util/DataKey.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
     DigitizeState/DigitizeStateColorPicker.h \
@@ -211,6 +211,7 @@ SOURCES += \
     Curve/CurvesGraphs.cpp \
     Curve/CurveStyle.cpp \
     Curve/CurveStyles.cpp \
+    util/DataKey.cpp \
     DigitizeState/DigitizeStateAbstractBase.cpp \
     DigitizeState/DigitizeStateAxis.cpp \
     DigitizeState/DigitizeStateColorPicker.cpp \

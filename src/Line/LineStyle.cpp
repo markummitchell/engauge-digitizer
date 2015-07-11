@@ -49,7 +49,7 @@ LineStyle LineStyle::defaultAxesCurve ()
 {
   return LineStyle (DEFAULT_LINE_WIDTH,
                     COLOR_PALETTE_TRANSPARENT,
-                    CONNECT_AS_FUNCTION_SMOOTH); // Same default color as used for PointStyle axes curve default
+                    CONNECT_SKIP_FOR_AXIS_CURVE); // Same default color as used for PointStyle axes curve default
 }
 
 LineStyle LineStyle::defaultGraphCurve (int /* index */)

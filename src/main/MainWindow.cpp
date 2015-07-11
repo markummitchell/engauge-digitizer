@@ -2771,6 +2771,6 @@ void MainWindow::writeCheckpointToLogFile ()
                               << "------------DOCUMENT CHECKPOINT END-----------" << "\n"
                               << "-------------SCENE CHECKPOINT START-----------" << "\n"
                               << checkpointScene.toLatin1().data()
-                              << "--------------SCENE CHECKPOINT END------------" << "\n";
+                              << "--------------SCENE CHECKPOINT END------------";
 
 }

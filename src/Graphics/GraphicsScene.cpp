@@ -37,11 +37,17 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                      *point);
 }
 
-GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
+GraphicsPoint *GraphicsScene::createPoint (const QString &curveName,
+                                           const QString &identifier,
                                            const PointStyle &pointStyle,
                                            const QPointF &posScreen)
 {
-  double ordinal = maxOrdinal () + 1;
+  double ordinal;
+  if (curveName == AXIS_CURVE_NAME) {
+    ordinal = AXIS_CURVE_ORDINAL;
+  } else {
+    ordinal = maxOrdinal () + 1; // Updated later if ordinal numbering is driven by coordinates
+  }
 
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createPoint"
                               << " identifier=" << identifier.toLatin1().data()

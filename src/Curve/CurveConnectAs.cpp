@@ -16,6 +16,9 @@ QString curveConnectAsToString (CurveConnectAs curveConnectAs)
     case CONNECT_AS_RELATION_STRAIGHT:
       return "RelationStraight";
 
+    case CONNECT_SKIP_FOR_AXIS_CURVE:
+      return "ConnectSkipForAxisCurve";
+
     default:
       return "Unknown";
   }

@@ -268,7 +268,7 @@ void Checker::createTransformAlign (const Transformation &transformation,
                                                                                 posX0YRadiusAlignedScreen);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::createTransformAlign"
-                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data()
+                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data() << endl
                               << " radiusLinearCartesian=" << radiusLinearCartesian
                               << " posXRadiusY0Screen=" << QPointFToString (posXRadiusY0Screen).toLatin1().data()
                               << " posX0YRadiusScreen=" << QPointFToString (posX0YRadiusScreen).toLatin1().data()

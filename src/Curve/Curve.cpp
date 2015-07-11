@@ -13,6 +13,7 @@
 #include "Xml.h"
 
 const QString AXIS_CURVE_NAME ("Axes");
+const int AXIS_CURVE_ORDINAL = 0;
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString TAB_DELIMITER ("\t");
 

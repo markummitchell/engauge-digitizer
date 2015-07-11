@@ -13,6 +13,7 @@
 typedef QList<Point> Points;
 
 extern const QString AXIS_CURVE_NAME;
+extern const int AXIS_CURVE_ORDINAL;
 extern const QString DEFAULT_GRAPH_CURVE_NAME;
 
 class CurvesGraphs;

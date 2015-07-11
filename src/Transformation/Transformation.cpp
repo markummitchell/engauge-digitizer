@@ -247,7 +247,7 @@ void Transformation::printStream (QString indentation,
     str << indentation << "affine=" << (m_transform.isAffine() ? "yes" : "no") << " matrix=("
         << m_transform.m11() << ", " << m_transform.m12() << ", " << m_transform.m13() << ", "
         << m_transform.m21() << ", " << m_transform.m22() << ", " << m_transform.m23() << ", "
-        << m_transform.m31() << ", " << m_transform.m32() << ", " << m_transform.m33() << ")\n";
+        << m_transform.m31() << ", " << m_transform.m32() << ", " << m_transform.m33() << ")";
 
   } else {
 
@@ -406,8 +406,8 @@ void Transformation::update (bool fileIsLoaded,
 void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen,
                                                   const QTransform &matrixGraph)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices"
-                              << " matrixScreen=" << QTransformToString (matrixScreen).toLatin1().data ()
+  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices\n"
+                              << " matrixScreen=" << QTransformToString (matrixScreen).toLatin1().data () << "\n"
                               << " matrixGraph=" << QTransformToString (matrixGraph).toLatin1().data();
 
   // Extract points from 3x3 matrices

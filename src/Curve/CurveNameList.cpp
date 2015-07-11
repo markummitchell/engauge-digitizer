@@ -158,8 +158,8 @@ int CurveNameList::rowCount (const QModelIndex & /* parent */) const
 }
 
 bool CurveNameList::setData (const QModelIndex &index,
-                              const QVariant &value,
-                              int role)
+                             const QVariant &value,
+                             int role)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData"
                               << " indexRow=" << index.row ()

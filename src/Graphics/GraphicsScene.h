@@ -33,7 +33,8 @@ public:
                           GraphicsPoint *point);
 
   /// Create one QGraphicsItem-based object that represents one Point. It is NOT added to m_graphicsLinesForCurves (see addPoint)
-  GraphicsPoint *createPoint (const QString &identifier,
+  GraphicsPoint *createPoint (const QString &curveName,
+                              const QString &identifier,
                               const PointStyle &pointStyle,
                               const QPointF &posScreen);
 
