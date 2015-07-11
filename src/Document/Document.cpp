@@ -149,8 +149,6 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     QString &identifier,
                                                     double ordinal)
 {
-  OrdinalGenerator ordinalGenerator;
-
   Point point (AXIS_CURVE_NAME,
                posScreen,
                ordinal,
@@ -160,6 +158,7 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
   identifier = point.identifier();
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithGeneratedIdentifier"
+                              << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
@@ -178,6 +177,7 @@ void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
   m_curveAxes->addPoint (point);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithSpecifiedIdentifier"
+                              << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
@@ -196,6 +196,7 @@ void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
   identifier = point.identifier();
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithGeneratedIdentifier"
+                              << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
@@ -212,6 +213,7 @@ void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
   m_curvesGraphs.addPoint (point);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithSpecifiedIdentifier"
+                              << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }

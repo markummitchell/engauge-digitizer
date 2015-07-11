@@ -1,4 +1,5 @@
 #include "CallbackCheckAddPointAxis.h"
+#include "Curve.h"
 #include "Point.h"
 
 extern const QString AXIS_CURVE_NAME;
@@ -12,7 +13,7 @@ CallbackCheckAddPointAxis::CallbackCheckAddPointAxis(const DocumentModelCoords &
   // than after since there is no safe place to do this afterwards (isError and errorMessage may be called more than once)
   Point point (AXIS_CURVE_NAME,
                posScreen,
-               UNDEFINED_ORDINAL,
+               AXIS_CURVE_ORDINAL,
                posGraph);
 
   callback (AXIS_CURVE_NAME,

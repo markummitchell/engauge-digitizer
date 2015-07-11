@@ -23,7 +23,8 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::CmdAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
+                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
+                              << " ordinal=" << ordinal;
 }
 
 CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,

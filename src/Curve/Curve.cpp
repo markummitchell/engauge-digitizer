@@ -425,10 +425,14 @@ void Curve::setCurveStyle (const CurveStyle &curveStyle)
 
 void Curve::updatePointOrdinals ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Curve::updatePointOrdinals";
+  CurveConnectAs curveConnectAs = m_curveStyle.lineStyle().curveConnectAs();
 
-  if (m_curveStyle.lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
-      m_curveStyle.lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT) {
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::updatePointOrdinals"
+                              << " curve=" << m_curveName.toLatin1().data()
+                              << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
+
+  if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
+      curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
 
     // Make sure ordinals are properly ordered
 
