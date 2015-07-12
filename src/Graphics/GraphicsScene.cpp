@@ -26,29 +26,20 @@ GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
 void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                        GraphicsPoint *point)
 {
-  const int TEMPORARY_POINT_ORDINAL = 0;
-
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addTemporaryPoint"
                               << " identifer=" << identifier.toLatin1().data();
 
   m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
                                      identifier,
-                                     TEMPORARY_POINT_ORDINAL,
                                      *point);
 }
 
 GraphicsPoint *GraphicsScene::createPoint (const QString &curveName,
                                            const QString &identifier,
                                            const PointStyle &pointStyle,
-                                           const QPointF &posScreen)
+                                           const QPointF &posScreen,
+                                           int ordinal)
 {
-  double ordinal;
-  if (curveName == AXIS_CURVE_NAME) {
-    ordinal = UNDEFINED_ORDINAL;
-  } else {
-    ordinal = maxOrdinal () + 1; // Updated later if ordinal numbering is driven by coordinates
-  }
-
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createPoint"
                               << " identifier=" << identifier.toLatin1().data()
                               << " ordinal=" << ordinal;
@@ -100,33 +91,6 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
 
   ENGAUGE_ASSERT (false);
   return 0;
-}
-
-double GraphicsScene::maxOrdinal () const
-{
-  // LOG4CPP_INFO_S is on exit
-
-  double maxOrdinal = 0;
-
-  const QList<QGraphicsItem*> &items = QGraphicsScene::items();
-  QList<QGraphicsItem*>::const_iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    const QGraphicsItem *item = *itr;
-
-    // Only look at the Points
-    bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    if (isPoint) {
-
-      // Save if max value so far
-      double ordinal = item->data (DATA_KEY_ORDINAL).toDouble ();
-      maxOrdinal = qMax (maxOrdinal, ordinal);
-    }
-  }
-
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::maxOrdinal maxOrdinal=" << maxOrdinal;
-
-  return maxOrdinal;
 }
 
 QStringList GraphicsScene::positionHasChangedPointIdentifiers () const

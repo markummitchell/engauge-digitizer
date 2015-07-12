@@ -1,6 +1,7 @@
 #include "CallbackAddPointsInCurvesGraphs.h"
 #include "CallbackCheckAddPointAxis.h"
 #include "CallbackCheckEditPointAxis.h"
+#include "CallbackNextOrdinal.h"
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
 #include "CurveStyles.h"
@@ -476,6 +477,22 @@ void Document::movePoint (const QString &pointIdentifier,
   Curve *curve = curveForCurveName (curveName);
   curve->movePoint (pointIdentifier,
                     deltaScreen);
+}
+
+int Document::nextOrdinalForCurve (const QString &curveName) const
+{
+  CallbackNextOrdinal ftor (curveName);
+
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                     &CallbackNextOrdinal::callback);
+
+  if (curveName == AXIS_CURVE_NAME) {
+    m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
+  } else {
+    m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+  }
+
+  return ftor.nextOrdinal ();
 }
 
 QPixmap Document::pixmap () const

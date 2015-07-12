@@ -22,10 +22,10 @@ public:
   /// Single constructor
   GraphicsLinesForCurves();
 
-  /// Add new point
+  /// Add new point.
+  /// The ordinal is already in the GraphicsPoint as DATA_KEY_ORDINAL
   void addPoint (const QString &curveName,
                  const QString &pointIdentifier,
-                 double ordinal,
                  GraphicsPoint &point);
 
   /// Add new curves and remove expired curves to match the specified list

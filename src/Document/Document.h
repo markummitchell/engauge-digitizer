@@ -73,13 +73,13 @@ public:
   /// See CurvesGraphs::applyTransformation.
   void applyTransformation (const Transformation &transformation);
 
-  /// Check before calling addPointAxis.
+  /// Check before calling addPointAxis. Also returns the next available ordinal number (to prevent clashes)
   void checkAddPointAxis (const QPointF &posScreen,
                           const QPointF &posGraph,
                           bool &isError,
                           QString &errorMessage);
 
-  /// Check before calling editPointAxis.
+  /// Check before calling editPointAxis
   void checkEditPointAxis (const QString &pointIdentifier,
                            const QPointF &posScreen,
                            const QPointF &posGraph,
@@ -148,6 +148,9 @@ public:
   /// See Curve::movePoint
   void movePoint (const QString &pointIdentifier,
                   const QPointF &deltaScreen);
+
+  /// Default next ordinal value for specified curve
+  int nextOrdinalForCurve (const QString &curveName) const;
 
   /// Return the image that is being digitized.
   QPixmap pixmap () const;

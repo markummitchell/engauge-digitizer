@@ -74,10 +74,12 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     // Temporary point that user can see while DlgEditPoint is active
     const Curve &curveAxes = context().cmdMediator().curveAxes();
     PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
+    int ordinal = context().cmdMediator().document().nextOrdinalForCurve (AXIS_CURVE_NAME);
     GraphicsPoint *point = context().mainWindow().scene().createPoint(AXIS_CURVE_NAME,
                                                                       Point::temporaryPointIdentifier (),
                                                                       pointStyleAxes,
-                                                                      posScreen);
+                                                                      posScreen,
+                                                                      ordinal);
 
     context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
                                                       point);
@@ -100,6 +102,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
 
       bool isError;
       QString errorMessage;
+      int nextOrdinal = context().cmdMediator().document().nextOrdinalForCurve(AXIS_CURVE_NAME);
 
       context().cmdMediator().document().checkAddPointAxis(posScreen,
                                                            posGraph,
@@ -120,7 +123,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
                                                  document,
                                                  posScreen,
                                                  posGraph,
-                                                 UNDEFINED_ORDINAL);
+                                                 nextOrdinal);
         context().appendNewCmd(cmd);
       }
     }

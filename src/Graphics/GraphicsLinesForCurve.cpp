@@ -6,6 +6,7 @@
 #include "GraphicsScene.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include "Point.h"
 #include "PointStyle.h"
 #include <QGraphicsItem>
 #include <QMap>
@@ -25,9 +26,10 @@ GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
 }
 
 void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
-                                      double ordinal,
                                       GraphicsPoint &graphicsPoint)
 {
+  int ordinal = graphicsPoint.data (DATA_KEY_ORDINAL).toInt();
+
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::addPoint"
                               << " curve=" << m_curveName.toLatin1().data()
                               << " identifier=" << pointIdentifier.toLatin1().data()
@@ -243,7 +245,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
     graphicsPoint = scene.createPoint (m_curveName,
                                        point.identifier (),
                                        pointStyle,
-                                       point.posScreen());
+                                       point.posScreen(),
+                                       point.ordinal());
     m_graphicsPoints [point.ordinal ()] = graphicsPoint;
 
   }
@@ -268,7 +271,8 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
     const GraphicsPoint *point = itr.value();
     double ordinalAsValue = point->data (DATA_KEY_ORDINAL).toDouble();
 
-    // Consistency checking
+    // Sanity checks
+    ENGAUGE_ASSERT (ordinalKey != UNDEFINED_ORDINAL);
     ENGAUGE_ASSERT (ordinalKey == ordinalAsValue);
 
     str << delimiter << ordinalKey;

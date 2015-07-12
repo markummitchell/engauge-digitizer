@@ -36,7 +36,8 @@ public:
   GraphicsPoint *createPoint (const QString &curveName,
                               const QString &identifier,
                               const PointStyle &pointStyle,
-                              const QPointF &posScreen);
+                              const QPointF &posScreen,
+                              int ordinal);
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
@@ -78,9 +79,6 @@ private:
   QString dumpCursors () const;
 
   const QGraphicsPixmapItem *image () const;
-
-  /// Compute max ordinal number on the fly which is more robust than remembering it as events unfold. Insignificantly slower.
-  double maxOrdinal () const;
 
   /// Remove expired curves and add new curves
   void updateCurves (CmdMediator &cmdMediator);
