@@ -207,10 +207,12 @@ void GraphicsLinesForCurve::printStream (QString indentation,
   OrdinalToGraphicsPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
+    double ordinalKey = itr.key();
     const GraphicsPoint *point = itr.value();
 
     point->printStream (indentation,
-                        str);
+                        str,
+                        ordinalKey);
   }
 }
 

@@ -162,30 +162,32 @@ QPointF GraphicsPoint::pos () const
 }
 
 void GraphicsPoint::printStream (QString indentation,
-                                 QTextStream &str) const
+                                 QTextStream &str,
+                                 double ordinalKey) const
 {
   str << indentation << "GraphicsPoint\n";
 
   indentation += INDENTATION_DELTA;
 
   QString identifier;
-  int ordinal;
+  int ordinalData;
   QString pointType;
   QPointF pos;
   if (m_graphicsItemEllipse == 0) {
     identifier = m_graphicsItemPolygon->data (DATA_KEY_IDENTIFIER).toString ();
-    ordinal = m_graphicsItemPolygon->data (DATA_KEY_ORDINAL).toDouble ();
+    ordinalData = m_graphicsItemPolygon->data (DATA_KEY_ORDINAL).toDouble ();
     pointType = "polygon";
     pos = m_graphicsItemPolygon->pos();
   } else {
     identifier = m_graphicsItemEllipse->data (DATA_KEY_IDENTIFIER).toString ();
-    ordinal = m_graphicsItemEllipse->data (DATA_KEY_ORDINAL).toDouble ();
+    ordinalData = m_graphicsItemEllipse->data (DATA_KEY_ORDINAL).toDouble ();
     pointType = "ellipse";
     pos = m_graphicsItemEllipse->pos();
   }
 
   str << indentation << identifier
-      << " ordinal=" << ordinal
+      << " ordinalKey=" << ordinalKey
+      << " ordinalData=" << ordinalData
       << " " << pointType << "Pos=" << QPointFToString (pos) << "\n";
 }
 
