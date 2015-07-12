@@ -120,7 +120,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
                                                  document,
                                                  posScreen,
                                                  posGraph,
-                                                 AXIS_CURVE_ORDINAL);
+                                                 UNDEFINED_ORDINAL);
         context().appendNewCmd(cmd);
       }
     }

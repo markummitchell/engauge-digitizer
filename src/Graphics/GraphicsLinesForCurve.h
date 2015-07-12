@@ -1,10 +1,9 @@
 #ifndef GRAPHICS_LINES_FOR_CURVE_H
 #define GRAPHICS_LINES_FOR_CURVE_H
 
-#include "PointIdentifierToGraphicsPoint.h"
 #include "Point.h"
+#include "OrdinalToGraphicsPoint.h"
 #include <QGraphicsPathItem>
-#include <QMap>
 
 class GraphicsPoint;
 class GraphicsScene;
@@ -12,9 +11,6 @@ class LineStyle;
 class PointStyle;
 class QTestStream;
 class Transformation;
-
-/// Order-preserving map from ordinal to pointIdentifier of Point
-typedef QMap<double, QString> OrdinalToPointIdentifier;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
 /// maintains order by key
@@ -31,6 +27,9 @@ public:
                  double ordinal,
                  GraphicsPoint &point);
 
+  ///  Get ordinal for specified identifier
+  double identifierToOrdinal (const QString &identifier) const;
+
   /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void lineMembershipPurge (const LineStyle &lineStyle);
 
@@ -42,7 +41,7 @@ public:
                     QTextStream &str) const;
 
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
-  void removePoint (const QString &identifier);
+  void removePoint (double ordinal);
 
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
@@ -58,11 +57,11 @@ public:
 
 private:
 
-  QPainterPath drawLinesSmooth (const OrdinalToPointIdentifier &ordinalToPointIdentifier);
-  QPainterPath drawLinesStraight (const OrdinalToPointIdentifier &ordinalToPointIdentifier);
+  QPainterPath drawLinesSmooth ();
+  QPainterPath drawLinesStraight ();
 
   const QString m_curveName;
-  PointIdentifierToGraphicsPoint m_graphicsPoints;
+  OrdinalToGraphicsPoint m_graphicsPoints;
 };
 
 #endif // GRAPHICS_LINES_FOR_CURVE_H

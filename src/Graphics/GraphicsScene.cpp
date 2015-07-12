@@ -44,7 +44,7 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &curveName,
 {
   double ordinal;
   if (curveName == AXIS_CURVE_NAME) {
-    ordinal = AXIS_CURVE_ORDINAL;
+    ordinal = UNDEFINED_ORDINAL;
   } else {
     ordinal = maxOrdinal () + 1; // Updated later if ordinal numbering is driven by coordinates
   }

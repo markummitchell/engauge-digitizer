@@ -29,6 +29,7 @@ Point::Point(const QString &curveName,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
                               << " curveName=" << curveName.toLatin1().data()
+                              << " identifierGenerated=" << m_identifier.toLatin1().data()
                               << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1().data()
                               << " ordinal=" << ordinal;
@@ -256,6 +257,7 @@ void Point::setIdentifierIndex (unsigned int identifierIndex)
 void Point::setOrdinal(double ordinal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::setOrdinal"
+                              << " identifier=" << m_identifier.toLatin1().data()
                               << " ordinal=" << ordinal;
 
   m_ordinal = ordinal;
@@ -264,6 +266,7 @@ void Point::setOrdinal(double ordinal)
 void Point::setPosGraph (const QPointF &posGraph)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::setPosGraph"
+                              << " identifier=" << m_identifier.toLatin1().data()
                               << " posGraph=" << QPointFToString(posGraph).toLatin1().data();
 
   m_posGraph = posGraph;
@@ -272,6 +275,7 @@ void Point::setPosGraph (const QPointF &posGraph)
 void Point::setPosScreen (const QPointF &posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::setPosScreen"
+                              << " identifier=" << m_identifier.toLatin1().data()
                               << " posScreen=" << QPointFToString(posScreen).toLatin1().data();
 
   m_posScreen = posScreen;

@@ -179,7 +179,8 @@ void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const
 
 void Curve::iterateThroughCurveSegments (const Functor2wRet<const Point&, const Point&, CallbackSearchReturn> &ftorWithCallback) const
 {
-  // Loop through Points. They are assumed to be already sorted by their ordinals
+  // Loop through Points. They are assumed to be already sorted by their ordinals, but we do NOT
+  // check the ordinal ordering since this could be called before, or while, the ordinal sorting is done
   QList<Point>::const_iterator itr;
   const Point *pointBefore = 0;
   for (itr = m_points.begin(); itr != m_points.end(); itr++) {
@@ -187,9 +188,6 @@ void Curve::iterateThroughCurveSegments (const Functor2wRet<const Point&, const 
     const Point &point = *itr;
 
     if (pointBefore != 0) {
-
-      // Sorting was not performed
-      ENGAUGE_ASSERT (pointBefore->ordinal () <= point.ordinal ());
 
       CallbackSearchReturn rtn = ftorWithCallback (*pointBefore,
                                                    point);

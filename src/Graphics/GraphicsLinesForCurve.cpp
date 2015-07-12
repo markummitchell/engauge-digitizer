@@ -17,7 +17,7 @@
 
 using namespace std;
 
-typedef QMap<double, QString> XOrThetaToPointIdentifier;
+typedef QMap<double, double> XOrThetaToOrdinal;
 
 GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
   m_curveName (curveName)
@@ -35,25 +35,30 @@ void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
                               << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
                               << " newPointCount=" << (m_graphicsPoints.count() + 1);
 
-  m_graphicsPoints [pointIdentifier] = &graphicsPoint;
+  ENGAUGE_ASSERT (!m_graphicsPoints.contains (ordinal));
+
+  ENGAUGE_ASSERT (ordinal != UNDEFINED_ORDINAL);
+
+  m_graphicsPoints [ordinal] = &graphicsPoint;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const OrdinalToPointIdentifier &ordinalToPointIdentifier)
+QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth"
+                              << " curve=" << m_curveName.toLatin1().data();
 
   QPainterPath path;
 
   // Prepare spline inputs. Note that the ordinal values may not start at 0
   vector<double> t;
   vector<SplinePair> xy;
-  OrdinalToPointIdentifier::const_iterator itr;
-  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
+  OrdinalToGraphicsPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    const QString pointIdentifier = itr.value();
-    const GraphicsPoint *point = m_graphicsPoints [pointIdentifier];
+    double ordinal = itr.key();
+    const GraphicsPoint *point = itr.value();
 
-    t.push_back (point->data (DATA_KEY_ORDINAL).toDouble ());
+    t.push_back (ordinal);
     xy.push_back (SplinePair (point->pos ().x(),
                               point->pos ().y()));
   }
@@ -66,10 +71,9 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const OrdinalToPointIdentif
 
   // Create QPainterPath through the points
   bool isFirst = true;
-  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    const QString pointIdentifier = itr.value();
-    const GraphicsPoint *point = m_graphicsPoints [pointIdentifier];
+    const GraphicsPoint *point = itr.value();
 
     if (isFirst) {
       isFirst = false;
@@ -92,19 +96,19 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const OrdinalToPointIdentif
   return path;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdentifier &ordinalToPointIdentifier)
+QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesStraight";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesStraight"
+                              << " curve=" << m_curveName.toLatin1().data();
 
   QPainterPath path;
 
   // Create QPainterPath through the points
   bool isFirst = true;
-  OrdinalToPointIdentifier::const_iterator itr;
-  for (itr = ordinalToPointIdentifier.begin(); itr != ordinalToPointIdentifier.end(); itr++) {
+  OrdinalToGraphicsPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    const QString pointIdentifier = itr.value();
-    const GraphicsPoint *point = m_graphicsPoints [pointIdentifier];
+    const GraphicsPoint *point = itr.value();
 
     if (isFirst) {
       isFirst = false;
@@ -117,11 +121,32 @@ QPainterPath GraphicsLinesForCurve::drawLinesStraight (const OrdinalToPointIdent
   return path;
 }
 
+double GraphicsLinesForCurve::identifierToOrdinal (const QString &identifier) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::identifierToOrdinal"
+                              << " identifier=" << identifier.toLatin1().data();
+
+  OrdinalToGraphicsPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    const GraphicsPoint *point = itr.value();
+
+    if (point->data (DATA_KEY_IDENTIFIER) == identifier) {
+      return itr.key();
+    }
+  }
+
+  ENGAUGE_ASSERT (false);
+
+  return 0;
+}
+
 void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge"
+                              << " curve=" << m_curveName.toLatin1().data();
 
-  PointIdentifierToGraphicsPoint::iterator itr, itrNext;
+  OrdinalToGraphicsPoint::iterator itr, itrNext;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr = itrNext) {
 
     itrNext = itr;
@@ -131,10 +156,10 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 
     if (!point->wanted ()) {
 
-      const QString pointIdentifier = itr.key ();
+      double ordinal = itr.key ();
 
       delete point;
-      m_graphicsPoints.remove (pointIdentifier);
+      m_graphicsPoints.remove (ordinal);
     }
   }
 
@@ -158,12 +183,13 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 
 void GraphicsLinesForCurve::lineMembershipReset ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipReset";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipReset"
+                              << " curve=" << m_curveName.toLatin1().data();
 
-  PointIdentifierToGraphicsPoint::iterator itr;
+  OrdinalToGraphicsPoint::iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    GraphicsPoint *point = *itr;
+    GraphicsPoint *point = itr.value();
 
     point->reset ();
   }
@@ -176,25 +202,25 @@ void GraphicsLinesForCurve::printStream (QString indentation,
 
   indentation += INDENTATION_DELTA;
 
-  PointIdentifierToGraphicsPoint::const_iterator itr;
+  OrdinalToGraphicsPoint::const_iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    const GraphicsPoint *point = *itr;
+    const GraphicsPoint *point = itr.value();
 
     point->printStream (indentation,
                         str);
   }
 }
 
-void GraphicsLinesForCurve::removePoint (const QString &pointIdentifier)
+void GraphicsLinesForCurve::removePoint (double ordinal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removePoint"
-                              << " point=" << pointIdentifier.toLatin1().data();
+                              << " point=" << ordinal;
 
-  ENGAUGE_ASSERT (m_graphicsPoints.contains (pointIdentifier));
-  GraphicsPoint *graphicsPoint = m_graphicsPoints [pointIdentifier];
+  ENGAUGE_ASSERT (m_graphicsPoints.contains (ordinal));
+  GraphicsPoint *graphicsPoint = m_graphicsPoints [ordinal];
 
-  m_graphicsPoints.remove (pointIdentifier);
+  m_graphicsPoints.remove (ordinal);
 
   delete graphicsPoint;
 }
@@ -203,12 +229,13 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                                 const PointStyle &pointStyle,
                                                 const Point &point)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand"
+                              << " curve=" << m_curveName.toLatin1().data();
 
   GraphicsPoint *graphicsPoint = 0;
-  if (m_graphicsPoints.contains (point.identifier())) {
+  if (m_graphicsPoints.contains (point.ordinal())) {
 
-    graphicsPoint = m_graphicsPoints [point.identifier()];
+    graphicsPoint = m_graphicsPoints [point.ordinal()];
 
   } else {
 
@@ -217,7 +244,7 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                        point.identifier (),
                                        pointStyle,
                                        point.posScreen());
-    m_graphicsPoints [point.identifier ()] = graphicsPoint;
+    m_graphicsPoints [point.ordinal ()] = graphicsPoint;
 
   }
 
@@ -232,29 +259,28 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
   QString ordinals, delimiter;
   QTextStream str (&ordinals);
 
-  OrdinalToPointIdentifier ordinalToPointIdentifier;
-
   // Order by ordinals locally
-  PointIdentifierToGraphicsPoint::const_iterator itr;
+  OrdinalToGraphicsPoint::const_iterator itr;
   str << "(";
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
-    const GraphicsPoint *point = *itr;
-    double ordinal = point->data (DATA_KEY_ORDINAL).toDouble();
-    ordinalToPointIdentifier [ordinal] = point->data (DATA_KEY_IDENTIFIER).toString();
+    double ordinalKey = itr.key();
+    const GraphicsPoint *point = itr.value();
+    double ordinalAsValue = point->data (DATA_KEY_ORDINAL).toDouble();
 
-    str << delimiter << ordinal;
+    // Consistency checking
+    ENGAUGE_ASSERT (ordinalKey == ordinalAsValue);
+
+    str << delimiter << ordinalKey;
     delimiter = ", ";
   }
   str << ")";
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints ordinals="
-                               << ordinals.toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints"
+                               << " curve=" << m_curveName.toLatin1().data()
+                               << " ordinals=" << ordinals.toLatin1().data();
 
   if (lineStyle.curveConnectAs() != CONNECT_SKIP_FOR_AXIS_CURVE) {
-
-    // Duplicate ordinal values will break this algorithm, so verify unique ordinal values by checking the counts
-    ENGAUGE_ASSERT (ordinalToPointIdentifier.count () == m_graphicsPoints.count ());
 
     // Draw as either straight or smoothed. The function/relation differences were handled already with ordinals. The
     // Spline algorithm will crash with fewer than three points so it is only called when there are enough points
@@ -263,9 +289,9 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
         lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
         m_graphicsPoints.count () < 3) {
 
-      path = drawLinesStraight (ordinalToPointIdentifier);
+      path = drawLinesStraight ();
     } else {
-      path = drawLinesSmooth (ordinalToPointIdentifier);
+      path = drawLinesSmooth ();
     }
 
    setPath (path);
@@ -275,17 +301,23 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
 void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineStyle,
                                                           const Transformation &transformation)
 {
-  if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
-      lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_STRAIGHT) {
+  CurveConnectAs curveConnectAs = lineStyle.curveConnectAs();
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints"
+                               << " curve=" << m_curveName.toLatin1().data()
+                               << " curveConnectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
+
+  if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
+      curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
 
     // Make sure ordinals are properly ordered
 
     // Get a map of x/theta values as keys with point identifiers as the values
-    XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
-    PointIdentifierToGraphicsPoint::iterator itrP;
+    XOrThetaToOrdinal xOrThetaToOrdinal;
+    OrdinalToGraphicsPoint::iterator itrP;
     for (itrP = m_graphicsPoints.begin(); itrP != m_graphicsPoints.end(); itrP++) {
 
-       QString pointIdentifier = itrP.key();
+       double ordinal = itrP.key();
        const GraphicsPoint *pointScreen = itrP.value();
 
        // Convert screen coordinate to graph coordinates, which gives us x/theta
@@ -293,18 +325,18 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
        transformation.transformScreenToRawGraph(pointScreen->pos (),
                                                 pointGraph);
 
-       xOrThetaToPointIdentifier [pointGraph.x()] = pointIdentifier;
+       xOrThetaToOrdinal [pointGraph.x()] = ordinal;
     }
 
     // Loop through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
-    int ordinal = 0;
-    XOrThetaToPointIdentifier::const_iterator itrX;
-    for (itrX = xOrThetaToPointIdentifier.begin(); itrX != xOrThetaToPointIdentifier.end(); itrX++) {
+    int ordinalNew = 0;
+    XOrThetaToOrdinal::const_iterator itrX;
+    for (itrX = xOrThetaToOrdinal.begin(); itrX != xOrThetaToOrdinal.end(); itrX++) {
 
-      QString pointIdentifier = itrX.value();
-      GraphicsPoint *point = m_graphicsPoints [pointIdentifier];
+      double ordinalOld = *itrX;
+      GraphicsPoint *point = m_graphicsPoints [ordinalOld];
 
-      point->setData (DATA_KEY_ORDINAL, QVariant (ordinal++)); // Override the old ordinal
+      point->setData (DATA_KEY_ORDINAL, QVariant (ordinalNew++)); // Override the old ordinal
     }
   }
 }

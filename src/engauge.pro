@@ -129,9 +129,9 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Ordinal/OrdinalGenerator.h \
+    include/OrdinalToGraphicsPoint.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
-    Point/PointIdentifierToGraphicsPoint.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \

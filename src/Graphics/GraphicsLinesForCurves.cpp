@@ -3,6 +3,7 @@
 #include "EngaugeAssert.h"
 #include "GraphicsLinesForCurve.h"
 #include "GraphicsLinesForCurves.h"
+#include "GraphicsPoint.h"
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsScene.h"
 #include <iostream>
@@ -129,7 +130,8 @@ void GraphicsLinesForCurves::removePoint(const QString &identifier)
   QString curveName = Point::curveNameFromPointIdentifier(identifier);
 
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
-  m_graphicsLinesForCurve [curveName]->removePoint(identifier);
+  double ordinal = m_graphicsLinesForCurve [curveName]->identifierToOrdinal (identifier);
+  m_graphicsLinesForCurve [curveName]->removePoint(ordinal);
 }
 
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
