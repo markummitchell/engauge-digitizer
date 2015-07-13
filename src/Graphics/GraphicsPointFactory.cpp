@@ -16,8 +16,7 @@ GraphicsPointFactory::GraphicsPointFactory()
 GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                                   const QString &identifier,
                                                   const QPointF &posScreen,
-                                                  const PointStyle &pointStyle,
-                                                  double ordinal)
+                                                  const PointStyle &pointStyle)
 {
   GraphicsPoint *item = 0;
 
@@ -30,8 +29,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
                                   pointStyle.radius (),
-                                  pointStyle.lineWidth(),
-                                  ordinal);
+                                  pointStyle.lineWidth());
       }
       break;
 
@@ -42,8 +40,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
                                   pointStyle.polygon (),
-                                  pointStyle.lineWidth(),
-                                  ordinal);
+                                  pointStyle.lineWidth());
       }
       break;
   }

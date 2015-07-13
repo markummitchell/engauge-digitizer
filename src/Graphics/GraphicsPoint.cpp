@@ -22,8 +22,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QPointF &posScreen,
                              const QColor &color,
                              unsigned int radius,
-                             double lineWidth,
-                             double ordinal) :
+                             double lineWidth) :
   GraphicsPointAbstractBase (),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),
@@ -32,8 +31,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_wanted (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
-                              << " identifier=" << identifier.toLatin1 ().data ()
-                              << " ordinal=" << ordinal;
+                              << " identifier=" << identifier.toLatin1 ().data ();
 
   m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
                                                     QRect (- radius,
@@ -44,7 +42,6 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   m_graphicsItemEllipse->setData (DATA_KEY_IDENTIFIER, identifier);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  m_graphicsItemEllipse->setData (DATA_KEY_ORDINAL, ordinal);
   m_graphicsItemEllipse->setPos (posScreen.x (),
                                  posScreen.y ());
   m_graphicsItemEllipse->setPen (QPen (QBrush (color), lineWidth));
@@ -74,8 +71,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QPointF &posScreen,
                              const QColor &color,
                              const QPolygonF &polygon,
-                             double lineWidth,
-                             double ordinal) :
+                             double lineWidth) :
   GraphicsPointAbstractBase (),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),
@@ -84,8 +80,7 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_wanted (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
-                              << " identifier=" << identifier.toLatin1 ().data ()
-                              << " ordinal=" << ordinal;
+                              << " identifier=" << identifier.toLatin1 ().data ();
 
   m_graphicsItemPolygon = new GraphicsPointPolygon (*this,
                                                     polygon);
@@ -93,7 +88,6 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
 
   m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, identifier);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  m_graphicsItemPolygon->setData (DATA_KEY_ORDINAL, ordinal);
   m_graphicsItemPolygon->setPos (posScreen.x (),
                                  posScreen.y ());
   m_graphicsItemPolygon->setPen (QPen (QBrush (color), lineWidth));
@@ -170,24 +164,20 @@ void GraphicsPoint::printStream (QString indentation,
   indentation += INDENTATION_DELTA;
 
   QString identifier;
-  int ordinalData;
   QString pointType;
   QPointF pos;
   if (m_graphicsItemEllipse == 0) {
     identifier = m_graphicsItemPolygon->data (DATA_KEY_IDENTIFIER).toString ();
-    ordinalData = m_graphicsItemPolygon->data (DATA_KEY_ORDINAL).toDouble ();
     pointType = "polygon";
     pos = m_graphicsItemPolygon->pos();
   } else {
     identifier = m_graphicsItemEllipse->data (DATA_KEY_IDENTIFIER).toString ();
-    ordinalData = m_graphicsItemEllipse->data (DATA_KEY_ORDINAL).toDouble ();
     pointType = "ellipse";
     pos = m_graphicsItemEllipse->pos();
   }
 
   str << indentation << identifier
       << " ordinalKey=" << ordinalKey
-      << " ordinalData=" << ordinalData
       << " " << pointType << "Pos=" << QPointFToString (pos) << "\n";
 }
 

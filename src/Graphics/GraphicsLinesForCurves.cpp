@@ -21,15 +21,17 @@ GraphicsLinesForCurves::GraphicsLinesForCurves()
 
 void GraphicsLinesForCurves::addPoint (const QString &curveName,
                                        const QString &pointIdentifier,
+                                       double ordinal,
                                        GraphicsPoint &point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::addPoint"
                               << " curve=" << curveName.toLatin1().data()
                               << " identifier=" << pointIdentifier.toLatin1().data()
-                              << " ordinal=" << point.data (DATA_KEY_ORDINAL).toInt()
+                              << " ordinal=" << ordinal
                               << " pos=" << QPointFToString (point.pos()).toLatin1().data();
 
   m_graphicsLinesForCurve [curveName]->addPoint (pointIdentifier,
+                                                 ordinal,
                                                  point);
 }
 

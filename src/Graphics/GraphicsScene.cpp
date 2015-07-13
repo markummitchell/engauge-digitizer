@@ -31,18 +31,16 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
 
   m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
                                      identifier,
+                                     UNDEFINED_ORDINAL,
                                      *point);
 }
 
-GraphicsPoint *GraphicsScene::createPoint (const QString &curveName,
-                                           const QString &identifier,
+GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
                                            const PointStyle &pointStyle,
-                                           const QPointF &posScreen,
-                                           int ordinal)
+                                           const QPointF &posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createPoint"
-                              << " identifier=" << identifier.toLatin1().data()
-                              << " ordinal=" << ordinal;
+                              << " identifier=" << identifier.toLatin1().data();
 
   // Ordinal value is initially computed as one plus the max ordinal seen so far. This initial ordinal value will be overridden if the
   // cordinates determine the ordinal values.
@@ -52,8 +50,7 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &curveName,
   GraphicsPoint *point = pointFactory.createPoint (*this,
                                                    identifier,
                                                    posScreen,
-                                                   pointStyle,
-                                                   ordinal);
+                                                   pointStyle);
 
   point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);

@@ -19,8 +19,7 @@ public:
   GraphicsPoint *createPoint (QGraphicsScene &scene,
                               const QString &identifier,
                               const QPointF &posScreen,
-                              const PointStyle &pointStyle,
-                              double ordinal);
+                              const PointStyle &pointStyle);
 };
 
 #endif // GRAPHICS_POINT_FACTORY_H

@@ -25,6 +25,7 @@ public:
   /// The GraphicsPoint arguments are not const since this line binds to the points, so dragging points also drags the lines.
   /// The ordinal is already in the GraphicsPoint as DATA_KEY_ORDINAL
   void addPoint (const QString &pointIdentifier,
+                 double ordinal,
                  GraphicsPoint &point);
 
   ///  Get ordinal for specified identifier

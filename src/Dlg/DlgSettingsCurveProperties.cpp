@@ -307,24 +307,21 @@ void DlgSettingsCurveProperties::drawPoints (bool isRelation,
   GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
                                                        NULL_IDENTIFIER,
                                                        POS_LEFT,
-                                                       pointStyle,
-                                                       ordinalLeft);
+                                                       pointStyle);
   pointLeft->setPointStyle (pointStyle);
 
   // Center point
   GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
                                                          NULL_IDENTIFIER,
                                                          POS_CENTER,
-                                                         pointStyle,
-                                                         ordinalCenter);
+                                                         pointStyle);
   pointCenter->setPointStyle (pointStyle);
 
   // Right point
   GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
                                                         NULL_IDENTIFIER,
                                                         POS_RIGHT,
-                                                        pointStyle,
-                                                        ordinalRight);
+                                                        pointStyle);
   pointRight->setPointStyle (pointStyle);
 }
 

@@ -38,8 +38,7 @@ public:
                 const QPointF &posScreen,
                 const QColor &color,
                 unsigned int radius,
-                double lineWidth,
-                double ordinal);
+                double lineWidth);
 
   /// Constructor of polygon point.
   GraphicsPoint(QGraphicsScene &scene,
@@ -47,8 +46,7 @@ public:
                 const QPointF &posScreen,
                 const QColor &color,
                 const QPolygonF &polygon,
-                double lineWidth,
-                double ordinal);
+                double lineWidth);
 
   /// Destructor. This remove the graphics item from the scene
   ~GraphicsPoint ();

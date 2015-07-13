@@ -2,7 +2,7 @@
 #include "GraphicsItemType.h"
 #include "SegmentLine.h"
 
-SegmentLine::SegmentLine(QGraphicsScene  &scene,
+SegmentLine::SegmentLine(QGraphicsScene  & /* scene */,
                          Segment *segment) :
   m_segment (segment)
 {

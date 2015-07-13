@@ -33,11 +33,9 @@ public:
                           GraphicsPoint *point);
 
   /// Create one QGraphicsItem-based object that represents one Point. It is NOT added to m_graphicsLinesForCurves (see addPoint)
-  GraphicsPoint *createPoint (const QString &curveName,
-                              const QString &identifier,
+  GraphicsPoint *createPoint (const QString &identifier,
                               const PointStyle &pointStyle,
-                              const QPointF &posScreen,
-                              int ordinal);
+                              const QPointF &posScreen);
 
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;

@@ -26,10 +26,9 @@ GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
 }
 
 void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
+                                      double ordinal,
                                       GraphicsPoint &graphicsPoint)
 {
-  int ordinal = graphicsPoint.data (DATA_KEY_ORDINAL).toInt();
-
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::addPoint"
                               << " curve=" << m_curveName.toLatin1().data()
                               << " identifier=" << pointIdentifier.toLatin1().data()
@@ -37,9 +36,10 @@ void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
                               << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
                               << " newPointCount=" << (m_graphicsPoints.count() + 1);
 
+  // Sanity checks, which do NOT include checking that ordinal!=UNDEFINED_ORDINAL since quite often
+  // (like with temporary point that appears immediately and before any command) there is one point
+  // with ordinal=UNDEFINED_ORDINAL
   ENGAUGE_ASSERT (!m_graphicsPoints.contains (ordinal));
-
-  ENGAUGE_ASSERT (ordinal != UNDEFINED_ORDINAL);
 
   m_graphicsPoints [ordinal] = &graphicsPoint;
 }
@@ -244,11 +244,9 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   } else {
 
     // Point does not exist in scene so create it
-    graphicsPoint = scene.createPoint (m_curveName,
-                                       point.identifier (),
+    graphicsPoint = scene.createPoint (point.identifier (),
                                        pointStyle,
-                                       point.posScreen(),
-                                       point.ordinal());
+                                       point.posScreen());
     m_graphicsPoints [point.ordinal ()] = graphicsPoint;
 
   }
@@ -270,12 +268,9 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
     double ordinalKey = itr.key();
-    const GraphicsPoint *point = itr.value();
-    double ordinalAsValue = point->data (DATA_KEY_ORDINAL).toDouble();
 
     // Sanity checks
     ENGAUGE_ASSERT (ordinalKey != UNDEFINED_ORDINAL);
-    ENGAUGE_ASSERT (ordinalKey == ordinalAsValue);
 
     str << delimiter << ordinalKey;
     delimiter = ", ";
@@ -324,17 +319,18 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
     for (itrP = m_graphicsPoints.begin(); itrP != m_graphicsPoints.end(); itrP++) {
 
        double ordinal = itrP.key();
-       const GraphicsPoint *pointScreen = itrP.value();
+       const GraphicsPoint *point = itrP.value();
 
        // Convert screen coordinate to graph coordinates, which gives us x/theta
        QPointF pointGraph;
-       transformation.transformScreenToRawGraph(pointScreen->pos (),
+       transformation.transformScreenToRawGraph(point->pos (),
                                                 pointGraph);
 
        xOrThetaToOrdinal [pointGraph.x()] = ordinal;
     }
 
     // Loop through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
+    OrdinalToGraphicsPoint temporaryList;
     int ordinalNew = 0;
     XOrThetaToOrdinal::const_iterator itrX;
     for (itrX = xOrThetaToOrdinal.begin(); itrX != xOrThetaToOrdinal.end(); itrX++) {
@@ -342,7 +338,17 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
       double ordinalOld = *itrX;
       GraphicsPoint *point = m_graphicsPoints [ordinalOld];
 
-      point->setData (DATA_KEY_ORDINAL, QVariant (ordinalNew++)); // Override the old ordinal
+      temporaryList [ordinalNew++] = point;
+    }
+
+    // Copy from temporary back to original map
+    m_graphicsPoints.clear();
+    for (itrP = temporaryList.begin(); itrP != temporaryList.end(); itrP++) {
+
+      double ordinal = itrP.key();
+      GraphicsPoint *point = itrP.value();
+
+      m_graphicsPoints [ordinal] = point;
     }
   }
 }
