@@ -406,9 +406,9 @@ void Transformation::update (bool fileIsLoaded,
 void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen,
                                                   const QTransform &matrixGraph)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices\n"
-                              << " matrixScreen=" << QTransformToString (matrixScreen).toLatin1().data () << "\n"
-                              << " matrixGraph=" << QTransformToString (matrixGraph).toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices"
+                              << " matrixScreen=\n" << QTransformToString (matrixScreen).toLatin1().data () << " "
+                              << " matrixGraph=\n" << QTransformToString (matrixGraph).toLatin1().data();
 
   // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),

@@ -40,20 +40,24 @@ QString QtCursorToString (Qt::CursorShape cursorShape)
 
 QString QTransformToString (const QTransform &transform)
 {
+  const int DATE_WIDTH = 12; // ##:##:##.### is skipped to cutting lines to remove dates does not remove any of the transform numbers
   const int FIELD_WIDTH = 12;
 
-  QString str = QString ("   %1   %2   %3\n"
-                         "   %4   %5   %6\n"
-                         "   %7   %8   %9")
-                 .arg (transform.m11 (), FIELD_WIDTH)
-                 .arg (transform.m12 (), FIELD_WIDTH)
-                 .arg (transform.m13 (), FIELD_WIDTH)
-                 .arg (transform.m21 (), FIELD_WIDTH)
-                 .arg (transform.m22 (), FIELD_WIDTH)
-                 .arg (transform.m23 (), FIELD_WIDTH)
-                 .arg (transform.m31 (), FIELD_WIDTH)
-                 .arg (transform.m32 (), FIELD_WIDTH)
-                 .arg (transform.m33 (), FIELD_WIDTH);
+  QString str = QString ("%1   %2   %3   %4\n"
+                         "%5   %6   %7   %8\n"
+                         "%9   %10   %11   %12")
+                .arg (" ", DATE_WIDTH)
+                .arg (transform.m11 (), FIELD_WIDTH)
+                .arg (transform.m12 (), FIELD_WIDTH)
+                .arg (transform.m13 (), FIELD_WIDTH)
+                .arg (" ", DATE_WIDTH)
+                .arg (transform.m21 (), FIELD_WIDTH)
+                .arg (transform.m22 (), FIELD_WIDTH)
+                .arg (transform.m23 (), FIELD_WIDTH)
+                .arg (" ", DATE_WIDTH)
+                .arg (transform.m31 (), FIELD_WIDTH)
+                .arg (transform.m32 (), FIELD_WIDTH)
+                .arg (transform.m33 (), FIELD_WIDTH);
 
   return str;
 }

@@ -881,7 +881,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
       saveErrorReportFileAndExit ("Shift+Control+E",
                                   __FILE__,
                                   __LINE__,
-                                  "assert");
+                                  "userTriggered");
     }
   }
 
@@ -1185,9 +1185,12 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
   rebuildRecentFileListForCurrentFile (fileName);
 
   QApplication::setOverrideCursor (Qt::WaitCursor);
-  QXmlStreamWriter stream(&file);
-  stream.setAutoFormatting(true);
-  m_cmdMediator->document().saveXml(stream);
+  QXmlStreamWriter writer(&file);
+  writer.setAutoFormatting(true);
+  writer.writeStartDocument();
+  writer.writeDTD("<!DOCTYPE engauge>");
+  m_cmdMediator->document().saveXml(writer);
+  writer.writeEndDocument();
   QApplication::restoreOverrideCursor ();
 
   // Notify the undo stack that the current state is now considered "clean". This will automatically trigger a
@@ -1207,108 +1210,148 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                              int line,
                                              const char *comment) const
 {
-  const bool DEEP_COPY = true;
-
   if (m_cmdMediator != 0) {
 
-    QString xmlErrorReport;
-    QXmlStreamWriter writer (&xmlErrorReport);
-    writer.setAutoFormatting(true);
+    QString reportWithoutDocument = saveErrorReportFileAndExitXml (context,
+                                                                   file,
+                                                                   line,
+                                                                   comment,
+                                                                   false);
+    QString reportWithDocument = saveErrorReportFileAndExitXml (context,
+                                                                file,
+                                                                line,
+                                                                comment,
+                                                                true);
+    DlgErrorReport dlg (reportWithoutDocument,
+                        reportWithDocument);
+    dlg.exec();
+  }
+}
 
-    // Entire error report contains metadata, commands and other details
-    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR_REPORT);
+QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
+                                                   const char *file,
+                                                   int line,
+                                                   const char *comment,
+                                                   bool includeDocument) const
+{
+  const bool DEEP_COPY = true;
 
-    // Version
-    writer.writeStartElement(DOCUMENT_SERIALIZE_APPLICATION);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
-    writer.writeEndElement();
+  QString xmlErrorReport;
+  QXmlStreamWriter writer (&xmlErrorReport);
+  writer.setAutoFormatting(true);
 
-    // Operating system
-    writer.writeStartElement(DOCUMENT_SERIALIZE_OPERATING_SYSTEM);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_ENDIAN, EndianToString (QSysInfo::ByteOrder));
-    writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_WORD_SIZE, QString::number (QSysInfo::WordSize));
-    writer.writeEndElement();
+  // Entire error report contains metadata, commands and other details
+  writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR_REPORT);
 
-    // Image
-    writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (m_cmdMediator->pixmap().width ()));
-    writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (m_cmdMediator->pixmap().height ()));
-    writer.writeEndElement();
+  // Version
+  writer.writeStartElement(DOCUMENT_SERIALIZE_APPLICATION);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
+  writer.writeEndElement();
 
-    // Placeholder for original file, before the commands in the command stack were applied
-    writer.writeStartElement(DOCUMENT_SERIALIZE_FILE);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_FILE_IMPORTED,
-                          m_originalFileWasImported ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
-    writer.writeEndElement();
-
-    // Commands
-    m_cmdMediator->saveXml(writer);
-
-    // Error
-    writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_CONTEXT, context);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_FILE, file);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_LINE, QString::number (line));
-    writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_COMMENT, comment);
-    writer.writeEndElement();
-
-    writer.writeEndElement();
-
-    // Put string into DOM
-    QDomDocument domErrorReport ("ErrorReport");
-    domErrorReport.setContent (xmlErrorReport);
-
-    // Postprocessing
-    if (!m_originalFileWasImported) {
-
-      // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents. Very early
-      // in the loading process, the original file may not be specified yet (m_originalFile is empty)
-      QDomDocument domInputFile;
-      loadInputFileForErrorReport (domInputFile);
-      QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
-      if (!domInputFile.isNull()) {
-        fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+  // Document
+  if (includeDocument) {
+    // Insert snapshot xml into writer stream, by reading from reader stream. Highest level of snapshot is DOCUMENT_SERIALIZE_APPLICATION
+    QXmlStreamReader reader (m_startingDocumentSnapshot);
+    while (!reader.atEnd ()) {
+      reader.readNext ();
+      if (reader.tokenType() != QXmlStreamReader::StartDocument &&
+          reader.tokenType() != QXmlStreamReader::EndDocument) {
+        writer.writeCurrentToken (reader);
       }
-      QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
-      if (nodesFileTo.count () > 0) {
-        QDomNode nodeFileTo = nodesFileTo.at (0);
-        nodeFileTo.appendChild (fragmentFileFrom);
-      }
+    }
+  }
 
-      // Replace DOCUMENT_SERIALIZE_IMAGE by same node with CDATA removed, since:
-      // 1) it is very big and working with smaller files, especially in emails, is easier
-      // 2) removing the image better preserves user's privacy
-      // 3) having the actual image does not help that much when debugging
-      QDomNodeList nodesDocument = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
-      for (int i = 0 ; i < nodesDocument.count(); i++) {
-        QDomNode nodeDocument = nodesDocument.at (i);
-        QDomElement elemImage = nodeDocument.firstChildElement(DOCUMENT_SERIALIZE_IMAGE);
-        if (!elemImage.isNull()) {
+  // Operating system
+  writer.writeStartElement(DOCUMENT_SERIALIZE_OPERATING_SYSTEM);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_ENDIAN, EndianToString (QSysInfo::ByteOrder));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_WORD_SIZE, QString::number (QSysInfo::WordSize));
+  writer.writeEndElement();
 
-          // Get old image attributes so we can create an empty document with the same size
-          if (elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
-              elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
+  // Image
+  writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (m_cmdMediator->pixmap().width ()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (m_cmdMediator->pixmap().height ()));
+  writer.writeEndElement();
 
-            int width = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
-            int height = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+  // Placeholder for original file, before the commands in the command stack were applied
+  writer.writeStartElement(DOCUMENT_SERIALIZE_FILE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_FILE_IMPORTED,
+                        m_originalFileWasImported ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
+  writer.writeEndElement();
 
-            QDomNode nodeReplacement;
-            QDomElement elemReplacement = nodeReplacement.toElement();
-            elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH, width);
-            elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT, height);
+  // Commands
+  m_cmdMediator->saveXml(writer);
 
-            // Replace with the new and then remove the old
-            nodeDocument.insertBefore (nodeReplacement,
-                                       elemImage);
-            nodeDocument.removeChild(elemImage);
-          }
+  // Error
+  writer.writeStartElement(DOCUMENT_SERIALIZE_ERROR);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_CONTEXT, context);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_FILE, file);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_LINE, QString::number (line));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ERROR_COMMENT, comment);
+  writer.writeEndElement();
+
+  writer.writeEndElement();
+
+  // Put string into DOM
+  QDomDocument domErrorReport ("ErrorReport");
+  domErrorReport.setContent (xmlErrorReport);
+
+  // Postprocessing
+  if (!m_originalFileWasImported) {
+
+    // Insert the original file into its placeholder, by manipulating the source and target xml as DOM documents. Very early
+    // in the loading process, the original file may not be specified yet (m_originalFile is empty)
+    QDomDocument domInputFile;
+    loadInputFileForErrorReport (domInputFile);
+    QDomDocumentFragment fragmentFileFrom = domErrorReport.createDocumentFragment();
+    if (!domInputFile.isNull()) {
+      fragmentFileFrom.appendChild (domErrorReport.importNode (domInputFile.documentElement(), DEEP_COPY));
+    }
+    QDomNodeList nodesFileTo = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_FILE);
+    if (nodesFileTo.count () > 0) {
+      QDomNode nodeFileTo = nodesFileTo.at (0);
+      nodeFileTo.appendChild (fragmentFileFrom);
+    }
+
+    // Replace DOCUMENT_SERIALIZE_IMAGE by same node with CDATA removed, since:
+    // 1) it is very big and working with smaller files, especially in emails, is easier
+    // 2) removing the image better preserves user's privacy
+    // 3) having the actual image does not help that much when debugging
+    QDomNodeList nodesDocument = domErrorReport.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
+    for (int i = 0 ; i < nodesDocument.count(); i++) {
+      QDomNode nodeDocument = nodesDocument.at (i);
+      QDomElement elemImage = nodeDocument.firstChildElement(DOCUMENT_SERIALIZE_IMAGE);
+      if (!elemImage.isNull()) {
+
+        // Get old image attributes so we can create an empty document with the same size
+        if (elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH) &&
+            elemImage.hasAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT)) {
+
+          int width = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH).toInt();
+          int height = elemImage.attribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT).toInt();
+
+          QDomNode nodeReplacement;
+          QDomElement elemReplacement = nodeReplacement.toElement();
+          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_WIDTH, width);
+          elemReplacement.setAttribute (DOCUMENT_SERIALIZE_IMAGE_HEIGHT, height);
+
+          // Replace with the new and then remove the old
+          nodeDocument.insertBefore (nodeReplacement,
+                                     elemImage);
+          nodeDocument.removeChild(elemImage);
         }
       }
     }
-
-    DlgErrorReport dlg (domErrorReport.toString());
-    dlg.exec();
   }
+
+  return domErrorReport.toString();
+}
+
+void MainWindow::saveStartingDocumentSnapshot()
+{
+  QXmlStreamWriter writer (&m_startingDocumentSnapshot);
+  writer.setAutoFormatting (true);
+  m_cmdMediator->document().saveXml (writer);
 }
 
 GraphicsScene &MainWindow::scene ()
@@ -1497,6 +1540,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   setCurrentFile(fileName);
   m_statusBar->showTemporaryMessage (temporaryMessage);
   m_statusBar->wakeUp ();
+
+  saveStartingDocumentSnapshot();
 
   updateAfterCommand(); // Replace stale points by points in new Document
 }
@@ -2765,12 +2810,15 @@ void MainWindow::writeCheckpointToLogFile ()
   m_scene->printStream (INDENTATION_DELTA,
                         strScene);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::writeCheckpointToLogFile\n"
-                              << "-----------DOCUMENT CHECKPOINT START----------" << "\n"
-                              << checkpointDoc.toLatin1().data()
-                              << "------------DOCUMENT CHECKPOINT END-----------" << "\n"
-                              << "-------------SCENE CHECKPOINT START-----------" << "\n"
-                              << checkpointScene.toLatin1().data()
-                              << "--------------SCENE CHECKPOINT END------------";
+  // Skip slow string manipulation if BEFORE call to LOG4CPP_DEBUG_S
+  if (mainCat->getPriority() == log4cpp::Priority::DEBUG) {
 
+    LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::writeCheckpointToLogFile\n"
+                                 << "-----------DOCUMENT CHECKPOINT START----------" << "\n"
+                                 << checkpointDoc.toLatin1().data()
+                                 << "------------DOCUMENT CHECKPOINT END-----------" << "\n"
+                                 << "-------------SCENE CHECKPOINT START-----------" << "\n"
+                                 << checkpointScene.toLatin1().data()
+                                 << "--------------SCENE CHECKPOINT END------------";
+  }
 }

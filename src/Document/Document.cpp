@@ -586,12 +586,8 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-void Document::saveXml(QXmlStreamWriter &writer)
+void Document::saveXml (QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::saveXml";
-
-  writer.writeStartDocument();
-  writer.writeDTD("<!DOCTYPE engauge>");
   writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
 
   // Serialize the Document image. That binary data is encoded as base64
@@ -619,7 +615,6 @@ void Document::saveXml(QXmlStreamWriter &writer)
   m_curveAxes->saveXml(writer);
   m_curvesGraphs.saveXml(writer);
   writer.writeEndElement();
-  writer.writeEndDocument();
 }
 
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)

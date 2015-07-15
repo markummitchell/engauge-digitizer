@@ -141,8 +141,8 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                  const QString &curveName,
                                                  const Point &point)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateAfterCommand"
-                              << " point=" << point.identifier().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurves::updateAfterCommand"
+                               << " point=" << point.identifier().toLatin1().data();
 
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
   m_graphicsLinesForCurve [curveName]->updateAfterCommand (scene,

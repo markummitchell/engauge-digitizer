@@ -233,8 +233,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                                 const PointStyle &pointStyle,
                                                 const Point &point)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand"
-                              << " curve=" << m_curveName.toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand"
+                               << " curve=" << m_curveName.toLatin1().data();
 
   GraphicsPoint *graphicsPoint = 0;
   if (m_graphicsPoints.contains (point.ordinal())) {

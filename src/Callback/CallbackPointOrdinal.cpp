@@ -53,7 +53,6 @@ CallbackSearchReturn CallbackPointOrdinal::callback (const Point &pointStart,
                                                 (yProjection - pointStart.posScreen().y()) * (yProjection - pointStart.posScreen().y()));
       double distanceProjectionToStop = qSqrt ((xProjection - pointStop.posScreen().x()) * (xProjection - pointStop.posScreen().x()) +
                                                (yProjection - pointStop.posScreen().y()) * (yProjection - pointStop.posScreen().y()));
-      ENGAUGE_ASSERT (pointStart.ordinal () <= pointStop.ordinal()); // Implicit assumption. For axis/graph curves the equals/less apply respectively
       if (distanceProjectionToStart < distanceProjectionToStop) {
 
         // Before start point

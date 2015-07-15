@@ -36,8 +36,8 @@ MainWindow &CmdAbstract::mainWindow ()
 
 void CmdAbstract::redo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::redo identifier=" << m_identifierIndexBeforeRedo << "->"
-                              << m_identifierIndexAfterRedo;
+  // Note that m_identifierIndexBeforeRedo and m_identifierIndexAfterRedo are not set until below (at which point they are logged)
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::redo";
 
   if (m_isFirstRedo) {
 
@@ -60,11 +60,15 @@ void CmdAbstract::redo ()
     m_identifierIndexAfterRedo = Point::identifierIndex();
 
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::redo identifierIndex=" << m_identifierIndexBeforeRedo << "->"
+                              << m_identifierIndexAfterRedo;
 }
 
 void CmdAbstract::undo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::undo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::undo identifierIndex=" << m_identifierIndexAfterRedo << "->"
+                              << m_identifierIndexBeforeRedo;
 
   Point::setIdentifierIndex (m_identifierIndexAfterRedo);
 

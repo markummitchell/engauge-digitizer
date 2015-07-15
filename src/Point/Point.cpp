@@ -119,6 +119,9 @@ QString Point::identifier() const
 
 unsigned int Point::identifierIndex ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::identifierIndex"
+                              << " identifierIndex=" << m_identifierIndex;
+
   return m_identifierIndex;
 }
 
@@ -183,6 +186,7 @@ void Point::loadXml(QXmlStreamReader &reader)
 
     LOG4CPP_INFO_S ((*mainCat)) << "Point::loadXml"
                                 << " identifier=" << m_identifier.toLatin1().data()
+                                << " identifierIndex=" << m_identifierIndex
                                 << " posScreen=" << QPointFToString (m_posScreen).toLatin1().data()
                                 << " posGraph=" << QPointFToString (m_posGraph).toLatin1().data()
                                 << " ordinal=" << m_ordinal;
@@ -251,32 +255,35 @@ void Point::saveXml(QXmlStreamWriter &writer) const
 
 void Point::setIdentifierIndex (unsigned int identifierIndex)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::setIdentifierIndex"
+                              << " identifierIndex=" << identifierIndex;
+
   m_identifierIndex = identifierIndex;
 }
 
 void Point::setOrdinal(double ordinal)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::setOrdinal"
-                              << " identifier=" << m_identifier.toLatin1().data()
-                              << " ordinal=" << ordinal;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Point::setOrdinal"
+                               << " identifier=" << m_identifier.toLatin1().data()
+                               << " ordinal=" << ordinal;
 
   m_ordinal = ordinal;
 }
 
 void Point::setPosGraph (const QPointF &posGraph)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::setPosGraph"
-                              << " identifier=" << m_identifier.toLatin1().data()
-                              << " posGraph=" << QPointFToString(posGraph).toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Point::setPosGraph"
+                               << " identifier=" << m_identifier.toLatin1().data()
+                               << " posGraph=" << QPointFToString(posGraph).toLatin1().data();
 
   m_posGraph = posGraph;
 }
 
 void Point::setPosScreen (const QPointF &posScreen)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::setPosScreen"
-                              << " identifier=" << m_identifier.toLatin1().data()
-                              << " posScreen=" << QPointFToString(posScreen).toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Point::setPosScreen"
+                               << " identifier=" << m_identifier.toLatin1().data()
+                               << " posScreen=" << QPointFToString(posScreen).toLatin1().data();
 
   m_posScreen = posScreen;
 }
@@ -291,6 +298,10 @@ QString Point::temporaryPointIdentifier ()
 
 QString Point::uniqueIdentifierGenerator (const QString &curveName)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::uniqueIdentifierGenerator"
+                              << " curveName=" << curveName.toLatin1().data()
+                              << " identifierIndex=" << m_identifierIndex;
+
   return QString ("%1%2point%3%4")
       .arg (curveName)
       .arg (POINT_IDENTIFIER_DELIMITER)

@@ -77,6 +77,7 @@ private:
   void connectSignals (MainWindow &mainWindow);
 
   Document m_document;
+
 };
 
 #endif // CMD_MEDIATOR_H

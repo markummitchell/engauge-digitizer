@@ -1,4 +1,5 @@
 #include "DlgErrorReport.h"
+#include <QCheckBox>
 #include <QCommonStyle>
 #include <QCoreApplication>
 #include <QFile>
@@ -11,12 +12,15 @@
 const QString ERROR_REPORT_FILE ("engauge_error_report.xml");
 const int MAX_BTN_WIDTH = 80;
 
-DlgErrorReport::DlgErrorReport(const QString &xml,
+DlgErrorReport::DlgErrorReport(const QString &xmlWithoutDocument,
+                               const QString &xmlWithDocument,
                                QWidget *parent) :
   QDialog (parent),
-  m_xml (xml)
+  m_xmlWithoutDocument (xmlWithoutDocument),
+  m_xmlWithDocument (xmlWithDocument)
 {
   QVBoxLayout *layout = new QVBoxLayout;
+  layout->setSizeConstraint (QLayout::SetFixedSize);
   setLayout (layout);
 
   QCommonStyle style;
@@ -24,15 +28,19 @@ DlgErrorReport::DlgErrorReport(const QString &xml,
   setWindowTitle (tr ("Error Report"));
   setWindowIcon(style.standardIcon (QStyle::SP_MessageBoxCritical));
 
-  saveFile (xml);
-
   QLabel *lblPreview = new QLabel (tr ("An unrecoverable error has occurred. Would you like to send an error report to "
                                        "the Engauge developers?\n\n"
-                                       "For your privacy, the error report will not contain your original image or any other"
-                                       "information that might be sensitive. Only details of the open Document and your "
-                                       "computer's operating system are included."));
+                                       "Adding document information to the error report greatly increases the chances of finding "
+                                       "and fixing the problems. However, document information should not be included if your document "
+                                       "contains any information that should remain private."));
   lblPreview->setWordWrap(true);
   layout->addWidget (lblPreview);
+
+  m_chkWithDocument = new QCheckBox ("Include document information");
+  m_chkWithDocument->setChecked (true);
+  updateFile ();
+  layout->addWidget (m_chkWithDocument);
+  connect (m_chkWithDocument, SIGNAL (stateChanged (int)), this, SLOT (slotDocumentCheckboxChanged (int)));
 
   QHBoxLayout *layoutButtons = new QHBoxLayout;
 
@@ -69,12 +77,26 @@ void DlgErrorReport::removeFile() const
 void DlgErrorReport::saveFile (const QString &xml) const
 {
   QFile file (errorFile());
-  if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
+  if (file.open (QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
 
     QTextStream out (&file);
     out << xml;
 
     file.close();
+  }
+}
+
+void DlgErrorReport::slotDocumentCheckboxChanged(int /* state */)
+{
+  updateFile();
+}
+
+void DlgErrorReport::updateFile()
+{
+  if (m_chkWithDocument->isChecked()) {
+    saveFile (m_xmlWithDocument);
+  } else {
+    saveFile (m_xmlWithoutDocument);
   }
 }
 

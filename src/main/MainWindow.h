@@ -239,6 +239,12 @@ private:
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   void removePixmaps();
   bool saveDocumentFile(const QString &fileName);
+  QString saveErrorReportFileAndExitXml (const char *comment,
+                                         const char *file,
+                                         int line,
+                                         const char *context,
+                                         bool includeDocument) const;
+  void saveStartingDocumentSnapshot();
   void setCurrentFile(const QString &fileName);
   void setCurrentPathFromFile (const QString &fileName);
   void setPixmap (const QPixmap &pixmap);
@@ -380,6 +386,9 @@ private:
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;
+
+  // Serialized snapshot of document at startup. This is inserted into the error report(s) unless user decides not to for privacy reasons
+  QString m_startingDocumentSnapshot;
 };
 
 #endif // MAIN_WINDOW_H
