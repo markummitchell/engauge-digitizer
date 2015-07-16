@@ -19,14 +19,84 @@ Point::Point ()
 }
 
 Point::Point(const QString &curveName,
-             const QPointF &posScreen,
-             double ordinal,
-             const QPointF posGraph) :
+             const QPointF &posScreen) :
+  m_isAxisPoint (curveName == AXIS_CURVE_NAME),
   m_identifier (uniqueIdentifierGenerator(curveName)),
   m_posScreen (posScreen),
+  m_hasPosGraph (false),
+  m_posGraph (0, 0),
+  m_hasOrdinal (false),
+  m_ordinal (0)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
+                              << " curveName=" << curveName.toLatin1().data()
+                              << " identifierGenerated=" << m_identifier.toLatin1().data()
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1().data();
+
+  ENGAUGE_ASSERT (!curveName.isEmpty ());
+}
+
+Point::Point(const QString &curveName,
+             const QPointF &posScreen,
+             const QPointF &posGraph) :
+  m_isAxisPoint (true),
+  m_identifier (uniqueIdentifierGenerator(curveName)),
+  m_posScreen (posScreen),
+  m_hasPosGraph (true),
   m_posGraph (posGraph),
+  m_hasOrdinal (false),
+  m_ordinal (0)
+{
+  ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
+                              << " curveName=" << curveName.toLatin1().data()
+                              << " identifierGenerated=" << m_identifier.toLatin1().data()
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
+                              << " posGraph=" << QPointFToString (posGraph).toLatin1().data();
+
+  ENGAUGE_ASSERT (!curveName.isEmpty ());
+}
+
+Point::Point(const QString &curveName,
+             const QString &identifier,
+             const QPointF &posScreen,
+             const QPointF &posGraph,
+             double ordinal) :
+  m_isAxisPoint (true),
+  m_identifier (identifier),
+  m_posScreen (posScreen),
+  m_hasPosGraph (true),
+  m_posGraph (posGraph),
+  m_hasOrdinal (true),
   m_ordinal (ordinal)
 {
+  ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
+                              << " curveName=" << curveName.toLatin1().data()
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
+                              << " posGraph=" << QPointFToString (posGraph).toLatin1().data()
+                              << " ordinal=" << ordinal;
+
+  ENGAUGE_ASSERT (!curveName.isEmpty ());
+}
+
+Point::Point(const QString &curveName,
+             const QPointF &posScreen,
+             const QPointF &posGraph,
+             double ordinal) :
+  m_isAxisPoint (true),
+  m_identifier (uniqueIdentifierGenerator(curveName)),
+  m_posScreen (posScreen),
+  m_hasPosGraph (true),
+  m_posGraph (posGraph),
+  m_hasOrdinal (true),
+  m_ordinal (ordinal)
+{
+  ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME);
+
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
                               << " curveName=" << curveName.toLatin1().data()
                               << " identifierGenerated=" << m_identifier.toLatin1().data()
@@ -38,23 +108,45 @@ Point::Point(const QString &curveName,
 }
 
 Point::Point(const QString &curveName,
-             const QPointF &posScreen,
              const QString &identifier,
-             double ordinal,
-             const QPointF posGraph) :
+             const QPointF &posScreen,
+             double ordinal) :
+  m_isAxisPoint (false),
   m_identifier (identifier),
   m_posScreen (posScreen),
-  m_posGraph (posGraph),
+  m_hasPosGraph (false),
+  m_posGraph (0, 0),
+  m_hasOrdinal (true),
   m_ordinal (ordinal)
 {
+  ENGAUGE_ASSERT (curveName != AXIS_CURVE_NAME);
+
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
                               << " curveName=" << curveName.toLatin1().data()
                               << " identifier=" << identifier.toLatin1().data()
                               << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1().data()
                               << " ordinal=" << ordinal;
 
   ENGAUGE_ASSERT (!curveName.isEmpty ());
+}
+
+Point::Point (const QString &curveName,
+              const QPointF &posScreen,
+              double ordinal) :
+  m_isAxisPoint (false),
+  m_identifier (uniqueIdentifierGenerator(curveName)),
+  m_posScreen (posScreen),
+  m_hasPosGraph (false),
+  m_posGraph (0, 0),
+  m_hasOrdinal (true),
+  m_ordinal (ordinal)
+{
+  ENGAUGE_ASSERT (curveName != AXIS_CURVE_NAME);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point(identifier,posScreen,posGraph,ordinal)"
+                              << " identifierGenerated=" << m_identifier.toLatin1().data()
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
+                              << " ordinal=" << ordinal;
 }
 
 Point::Point (QXmlStreamReader &reader)
@@ -65,15 +157,21 @@ Point::Point (QXmlStreamReader &reader)
 Point &Point::operator=(const Point &point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::operator="
+                              << " isAxisPoint=" << (point.isAxisPoint() ? "true" : "false")
                               << " identifier=" << point.identifier ().toLatin1().data()
                               << " posScreen=" << QPointFToString (point.posScreen ()).toLatin1().data()
-                              << " posGraph=" << QPointFToString (point.posGraph ()).toLatin1().data()
-                              << " ordinal=" << point.ordinal ();
+                              << " hasPosGraph=" << (point.hasPosGraph() ? "true" : "false")
+                              << " posGraph=" << QPointFToString (point.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
+                              << " hasOrdinal=" << (point.hasOrdinal() ? "true" : "false")
+                              << " ordinal=" << point.ordinal (SKIP_HAS_CHECK);
 
-  m_posScreen = point.posScreen ();
-  m_posGraph = point.posGraph ();
+  m_isAxisPoint = point.isAxisPoint ();
   m_identifier = point.identifier ();
-  m_ordinal = point.ordinal ();
+  m_posScreen = point.posScreen ();
+  m_hasPosGraph = point.hasPosGraph ();
+  m_posGraph = point.posGraph (SKIP_HAS_CHECK);
+  m_hasOrdinal = point.hasOrdinal ();
+  m_ordinal = point.ordinal (SKIP_HAS_CHECK);
 
   return *this;
 }
@@ -81,35 +179,37 @@ Point &Point::operator=(const Point &point)
 Point::Point (const Point &other)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point(const Point &other)"
+                              << " isAxisPoint=" << (other.isAxisPoint() ? "true" : "false")
                               << " identifier=" << other.identifier ().toLatin1().data()
                               << " posScreen=" << QPointFToString (other.posScreen ()).toLatin1().data()
-                              << " posGraph=" << QPointFToString (other.posGraph ()).toLatin1().data()
-                              << " ordinal=" << other.ordinal ();
+                              << " hasPosGraph=" << (other.hasPosGraph() ? "true" : "false")
+                              << " posGraph=" << QPointFToString (other.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
+                              << " hasOrdinal=" << (other.hasOrdinal() ? "true" : "false")
+                              << " ordinal=" << other.ordinal (SKIP_HAS_CHECK);
 
-  m_posScreen = other.posScreen ();
-  m_posGraph = other.posGraph ();
+  m_isAxisPoint = other.isAxisPoint ();
   m_identifier = other.identifier ();
-  m_ordinal = other.ordinal ();
-}
-
-Point::Point (const QString &identifier,
-              double ordinal,
-              const QPointF &posScreen) :
-  m_identifier (identifier),
-  m_posScreen (posScreen),
-  m_posGraph (0, 0),
-  m_ordinal (ordinal)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point(identifier,posScreen,posGraph,ordinal)"
-                              << " identifier=" << identifier.toLatin1().data()
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1().data()
-                              << " ordinal=" << ordinal;
+  m_posScreen = other.posScreen ();
+  m_hasPosGraph = other.hasPosGraph ();
+  m_posGraph = other.posGraph (SKIP_HAS_CHECK);
+  m_hasOrdinal = other.hasOrdinal ();
+  m_ordinal = other.ordinal (SKIP_HAS_CHECK);
 }
 
 QString Point::curveNameFromPointIdentifier (const QString &pointIdentifier)
 {
   QStringList tokens = pointIdentifier.split (POINT_IDENTIFIER_DELIMITER);
   return tokens.value (0);
+}
+
+bool Point::hasOrdinal () const
+{
+  return m_hasOrdinal;
+}
+
+bool Point::hasPosGraph () const
+{
+  return m_hasPosGraph;
 }
 
 QString Point::identifier() const
@@ -125,6 +225,11 @@ unsigned int Point::identifierIndex ()
   return m_identifierIndex;
 }
 
+bool Point::isAxisPoint() const
+{
+  return m_isAxisPoint;
+}
+
 void Point::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::loadXml";
@@ -134,12 +239,16 @@ void Point::loadXml(QXmlStreamReader &reader)
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX)) {
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT)) {
+
+    QString isAxisPoint = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT).toString();
 
     m_identifier = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString();
-    m_ordinal = attributes.value(DOCUMENT_SERIALIZE_POINT_ORDINAL).toDouble();
     m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();
+    m_isAxisPoint = (isAxisPoint == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    m_hasOrdinal = false;
+    m_hasPosGraph = false;
 
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
            (reader.name () != DOCUMENT_SERIALIZE_POINT)) {
@@ -152,7 +261,12 @@ void Point::loadXml(QXmlStreamReader &reader)
 
       if (reader.tokenType () == QXmlStreamReader::StartElement) {
 
-        if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
+        if (reader.name() == DOCUMENT_SERIALIZE_POINT_ORDINAL) {
+
+          m_hasOrdinal = true;
+          m_ordinal = attributes.value(DOCUMENT_SERIALIZE_POINT_ORDINAL).toDouble();
+
+        } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
 
           attributes = reader.attributes();
 
@@ -168,6 +282,7 @@ void Point::loadXml(QXmlStreamReader &reader)
           }
         } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH) {
 
+          m_hasPosGraph = true;
           attributes = reader.attributes();
 
           if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_X) &&
@@ -200,13 +315,21 @@ void Point::loadXml(QXmlStreamReader &reader)
   }
 }
 
-double Point::ordinal () const
+double Point::ordinal (ApplyHasCheck applyHasCheck) const
 {
+  if (applyHasCheck == KEEP_HAS_CHECK) {
+    ENGAUGE_ASSERT (m_hasOrdinal);
+  }
+
   return m_ordinal;
 }
 
-QPointF Point::posGraph () const
+QPointF Point::posGraph (ApplyHasCheck applyHasCheck) const
 {
+  if (applyHasCheck == KEEP_HAS_CHECK) {
+    ENGAUGE_ASSERT (m_hasPosGraph);
+  }
+
   return m_posGraph;
 }
 
@@ -218,14 +341,24 @@ QPointF Point::posScreen () const
 void Point::printStream(QString indentation,
                         QTextStream &str) const
 {
+  const QString UNDEFINED ("undefined");
+
   str << indentation << "Point\n";
 
   indentation += INDENTATION_DELTA;
 
   str << indentation << "identifier=" << m_identifier << "\n";
   str << indentation << "posScreen=" << QPointFToString (m_posScreen) << "\n";
-  str << indentation << "posGraph=" << QPointFToString (m_posGraph) << "\n";
-  str << indentation << "ordinal=" << m_ordinal << "\n";
+  if (m_hasPosGraph) {
+    str << indentation << "posGraph=" << QPointFToString (m_posGraph) << "\n";
+  } else {
+    str << indentation << "posGraph=" << UNDEFINED << "\n";
+  }
+  if (m_hasOrdinal) {
+    str << indentation << "ordinal=" << m_ordinal << "\n";
+  } else {
+    str << indentation << "ordinal=" << UNDEFINED << "\n";
+  }
 }
 
 void Point::saveXml(QXmlStreamWriter &writer) const
@@ -234,7 +367,11 @@ void Point::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT);
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER, m_identifier);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL, QString::number (m_ordinal));
+  if (m_hasOrdinal) {
+    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL, QString::number (m_ordinal));
+  }
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT,
+                        m_isAxisPoint ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
 
   // Variable m_identifierIndex is static, but for simplicity this is handled like other values. Those values are all
   // the same, but simplicity wins over a few extra bytes of storage
@@ -245,10 +382,12 @@ void Point::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posScreen.y()));
   writer.writeEndElement();
 
-  writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
-  writer.writeEndElement();
+  if (m_hasPosGraph) {
+    writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
+    writer.writeEndElement();
+  }
 
   writer.writeEndElement();
 }
@@ -267,6 +406,7 @@ void Point::setOrdinal(double ordinal)
                                << " identifier=" << m_identifier.toLatin1().data()
                                << " ordinal=" << ordinal;
 
+  m_hasOrdinal = true;
   m_ordinal = ordinal;
 }
 
@@ -276,6 +416,11 @@ void Point::setPosGraph (const QPointF &posGraph)
                                << " identifier=" << m_identifier.toLatin1().data()
                                << " posGraph=" << QPointFToString(posGraph).toLatin1().data();
 
+  // Curve point graph coordinates should always be computed on the fly versus stored in this class, to reduce the
+  // chances for stale information
+  ENGAUGE_ASSERT (m_isAxisPoint);
+
+  m_hasPosGraph = true;
   m_posGraph = posGraph;
 }
 

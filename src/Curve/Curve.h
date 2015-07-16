@@ -42,9 +42,6 @@ public:
   /// Add Point to this Curve.
   void addPoint (Point point);
 
-  /// Apply transformation that is stored and updated externally.
-  void applyTransformation (const Transformation &transformation);
-
   /// Return the color filter.
   ColorFilterSettings colorFilterSettings () const;
 
@@ -108,7 +105,7 @@ public:
 
   /// See CurveGraphs::updatePointOrdinals. Same algorithm as GraphicsLineForCurve::updatePointOrdinalsAfterDrag, although
   /// graph coordinates of points have been updated before this is called so the graph coordinates are not updated by this method
-  void updatePointOrdinals ();
+  void updatePointOrdinals (const Transformation &transformation);
 
 private:
   Curve();

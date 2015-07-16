@@ -446,7 +446,6 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 
     Point p (DUMMY_CURVENAME,
              pF,
-             UNDEFINED_ORDINAL,
              pF);
     points.push_back (p);
   }

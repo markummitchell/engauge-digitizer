@@ -70,9 +70,6 @@ public:
   /// Add all points identified in the specified CurvesGraphs. See also removePointsInCurvesGraphs
   void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
 
-  /// See CurvesGraphs::applyTransformation.
-  void applyTransformation (const Transformation &transformation);
-
   /// Check before calling addPointAxis. Also returns the next available ordinal number (to prevent clashes)
   void checkAddPointAxis (const QPointF &posScreen,
                           const QPointF &posGraph,
@@ -215,7 +212,7 @@ public:
 
   /// Update point ordinals after point addition/removal or dragging. See GraphicsScene::updatePointOrdinalsAfterDrag.
   /// Graph coordinates of point must be up to date
-  void updatePointOrdinals ();
+  void updatePointOrdinals (const Transformation &transformation);
 
 private:
   Document ();

@@ -38,11 +38,6 @@ CmdMediator::~CmdMediator()
 {
 }
 
-void CmdMediator::applyTransformation (const Transformation &transformation)
-{
-  m_document.applyTransformation (transformation);
-}
-
 void CmdMediator::connectSignals (MainWindow &mainWindow)
 {
   connect (this, SIGNAL (cleanChanged (bool)), &mainWindow, SLOT (slotCleanChanged (bool)));

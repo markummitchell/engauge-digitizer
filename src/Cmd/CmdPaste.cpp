@@ -62,7 +62,7 @@ void CmdPaste::cmdRedo ()
 
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (&m_mimePoints, QClipboard::Clipboard);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

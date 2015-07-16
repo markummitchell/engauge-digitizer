@@ -27,16 +27,6 @@ void CurvesGraphs::addPoint (const Point &point)
   curve->addPoint (point);
 }
 
-void CurvesGraphs::applyTransformation (const Transformation &transformation)
-{
-  CurveList::iterator itr;
-  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
-
-    Curve &curve = *itr;
-    curve.applyTransformation (transformation);
-  }
-}
-
 Curve *CurvesGraphs::curveForCurveName (const QString &curveName)
 {
   // Search for curve with matching name
@@ -234,7 +224,7 @@ void CurvesGraphs::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void CurvesGraphs::updatePointOrdinals ()
+void CurvesGraphs::updatePointOrdinals (const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::updatePointOrdinals";
 
@@ -242,6 +232,6 @@ void CurvesGraphs::updatePointOrdinals ()
   for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
 
     Curve &curve = *itr;
-    curve.updatePointOrdinals ();
+    curve.updatePointOrdinals (transformation);
   }
 }

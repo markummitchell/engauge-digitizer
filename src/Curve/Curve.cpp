@@ -56,23 +56,6 @@ void Curve::addPoint (Point point)
   m_points.push_back (point);
 }
 
-void Curve::applyTransformation (const Transformation &transformation)
-{
-  QList<Point>::iterator itr;
-  for (itr = m_points.begin (); itr != m_points.end (); itr++) {
-
-    // Get current screen coordinates
-    Point &point = *itr;
-    QPointF posScreen = point.posScreen();
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
-
-    // Overwrite old graph coordinates
-    point.setPosGraph (posGraph);
-  }
-}
-
 ColorFilterSettings Curve::colorFilterSettings () const
 {
   return m_colorFilterSettings;
@@ -421,7 +404,7 @@ void Curve::setCurveStyle (const CurveStyle &curveStyle)
   m_curveStyle = curveStyle;
 }
 
-void Curve::updatePointOrdinals ()
+void Curve::updatePointOrdinals (const Transformation &transformation)
 {
   CurveConnectAs curveConnectAs = m_curveStyle.lineStyle().curveConnectAs();
 
@@ -439,7 +422,12 @@ void Curve::updatePointOrdinals ()
     Points::iterator itr;
     for (itr = m_points.begin (); itr != m_points.end (); itr++) {
       Point &point = *itr;
-      xOrThetaToPointIdentifier [point.posGraph().x()] = point.identifier();
+
+      QPointF posGraph;
+      transformation.transformScreenToRawGraph (point.posScreen (),
+                                                posGraph);
+
+      xOrThetaToPointIdentifier [posGraph.x()] = point.identifier();
     }
 
     // Since m_points is a list (and therefore does not provide direct access to elements), we build a temporary map of

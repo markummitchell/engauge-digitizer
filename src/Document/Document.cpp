@@ -152,8 +152,8 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
-               ordinal,
-               posGraph);
+               posGraph,
+               ordinal);
   m_curveAxes->addPoint (point);
 
   identifier = point.identifier();
@@ -171,10 +171,10 @@ void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     double ordinal)
 {
   Point point (AXIS_CURVE_NAME,
-               posScreen,
                identifier,
-               ordinal,
-               posGraph);
+               posScreen,
+               posGraph,
+               ordinal);
   m_curveAxes->addPoint (point);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithSpecifiedIdentifier"
@@ -208,8 +208,8 @@ void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                                      double ordinal)
 {
   Point point (curveName,
-               posScreen,
                identifier,
+               posScreen,
                ordinal);
   m_curvesGraphs.addPoint (point);
 
@@ -227,11 +227,6 @@ void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
                                                                                                      &CallbackAddPointsInCurvesGraphs::callback);
 
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
-}
-
-void Document::applyTransformation (const Transformation &transformation)
-{
-  m_curvesGraphs.applyTransformation (transformation);
 }
 
 void Document::checkAddPointAxis (const QPointF &posScreen,
@@ -690,10 +685,10 @@ bool Document::successfulRead () const
   return m_successfulRead;
 }
 
-void Document::updatePointOrdinals ()
+void Document::updatePointOrdinals (const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::updatePointOrdinals";
 
   // The graph coordinates of all points in m_curvesGraphs must have already been updated at this point. See applyTransformation
-  m_curvesGraphs.updatePointOrdinals ();
+  m_curvesGraphs.updatePointOrdinals (transformation);
 }

@@ -65,7 +65,7 @@ void CmdEditPointAxis::cmdRedo ()
 
   document().editPointAxis (m_posGraphAfter,
                             m_pointIdentifier);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -75,7 +75,7 @@ void CmdEditPointAxis::cmdUndo ()
 
   document().editPointAxis (m_posGraphBefore,
                             m_pointIdentifier);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

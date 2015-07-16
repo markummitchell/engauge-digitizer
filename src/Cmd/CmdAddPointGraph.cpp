@@ -65,7 +65,7 @@ void CmdAddPointGraph::cmdRedo ()
                                                    m_posScreen,
                                                    m_identifierAdded,
                                                    m_ordinal);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -74,7 +74,7 @@ void CmdAddPointGraph::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
   document().removePointGraph (m_identifierAdded);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

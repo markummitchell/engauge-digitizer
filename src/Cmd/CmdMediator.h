@@ -28,9 +28,6 @@ public:
   /// Destructor
   ~CmdMediator();
 
-  /// See CurvesGraphs::applyTransformation
-  void applyTransformation (const Transformation &transformation);
-
   /// See Document::curveAxes
   const Curve &curveAxes () const;
 

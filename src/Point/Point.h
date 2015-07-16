@@ -10,6 +10,11 @@ class QXmlStreamWriter;
 
 const double UNDEFINED_ORDINAL = -1.0;
 
+enum ApplyHasCheck {
+  KEEP_HAS_CHECK,
+  SKIP_HAS_CHECK
+};
+
 /// Class that represents one digitized point. The screen-to-graph coordinate transformation is always external to this class
 class Point
 {
@@ -17,26 +22,43 @@ public:
   /// Default constructor so this class can be used inside a container
   Point ();
 
-  /// Constructor from scratch. The position, in screen coordinates, applies to the center of the Point
+  /// Constructor for Checker temporary points, before real point gets added. The position,
+  /// in screen coordinates, applies to the center of the Point
   Point (const QString &curveName,
-         const QPointF &posScreen,
-         double ordinal = UNDEFINED_ORDINAL,
-         const QPointF posGraph = QPointF (0, 0));
+         const QPointF &posScreen);
 
-  /// Constructor for specified identifier (after redo). The position, in screen coordinates, applies to the center of the Point
+  /// Constructor for temporary point used to pre-check transformation points, before real point gets added. The position,
+  /// in screen coordinates, applies to the center of the Point
   Point (const QString &curveName,
          const QPointF &posScreen,
+         const QPointF &posGraph);
+
+  /// Constructor for axis points with identifier (after redo). The position, in screen coordinates, applies to the center of the Point
+  Point (const QString &curveName,
          const QString &identifier,
-         double ordinal = UNDEFINED_ORDINAL,
-         const QPointF posGraph = QPointF (0, 0));
+         const QPointF &posScreen,
+         const QPointF &posGraph,
+         double ordinal);
+
+  /// Constructor for axis points without identifier (after redo). The position, in screen coordinates, applies to the center of the Point
+  Point (const QString &curveName,
+         const QPointF &posScreen,
+         const QPointF &posGraph,
+         double ordinal);
+
+  /// Constructor for graph points with identifier (after redo)
+  Point (const QString &curveName,
+         const QString &identifier,
+         const QPointF &posScreen,
+         double ordinal);
+
+  /// Constructor for graph points without identifier (after redo)
+  Point (const QString &curveName,
+         const QPointF &posScreen,
+         double ordinal);
 
   /// Constructor when loading from serialized xml
   Point (QXmlStreamReader &reader);
-
-  /// Constructor for creating a proxy Point outside of the Document
-  Point (const QString &identifier,
-         double ordinal,
-         const QPointF &posScreen);
 
   /// Assignment constructor.
   Point &operator=(const Point &point);
@@ -47,17 +69,26 @@ public:
   /// Parse the curve name from the specified point identifier. This does the opposite of uniqueIdentifierGenerator
   static QString curveNameFromPointIdentifier (const QString &pointIdentifier);
 
+  /// True if ordinal is defined.
+  bool hasOrdinal () const;
+
+  /// True if graph position is defined.
+  bool hasPosGraph () const;
+
   /// Unique identifier for a specific Point.
   QString identifier () const;
 
   /// Return the current index for storage in case we need to reset it later while performing a Redo.
   static unsigned int identifierIndex ();
 
-  /// Get method for ordinal.
-  double ordinal () const;
+  /// True if point is an axis point. This is used only for sanity checks
+  bool isAxisPoint () const;
 
-  /// Accessor for graph position.
-  QPointF posGraph () const;
+  /// Get method for ordinal. Skip check if copying one instance to another
+  double ordinal (ApplyHasCheck applyHasCheck = KEEP_HAS_CHECK) const;
+
+  /// Accessor for graph position. Skip check if copying one instance to another
+  QPointF posGraph (ApplyHasCheck applyHasCheck = KEEP_HAS_CHECK) const;
 
   /// Accessor for screen position
   QPointF posScreen () const;
@@ -96,9 +127,12 @@ private:
   /// than alternatives such as 64-bit guids (like Microsoft)
   static QString uniqueIdentifierGenerator(const QString &curveName);
 
+  bool m_isAxisPoint;
   QString m_identifier;
   QPointF m_posScreen;
+  bool m_hasPosGraph;
   QPointF m_posGraph;
+  bool m_hasOrdinal;
   double m_ordinal;
 
   static unsigned int m_identifierIndex; // For generating unique identifiers

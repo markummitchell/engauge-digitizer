@@ -2500,13 +2500,6 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
   }
 
-  if (m_transformation.transformIsDefined()) {
-
-    // Update transformation. This is done regardless of whether or not the transformation was defined before
-    m_cmdMediator->applyTransformation (m_transformation);
-
-  }
-
   QPoint posLocal = m_view->mapFromGlobal (QCursor::pos ()) - HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT;
   QPointF posScreen = m_view->mapToScene (posLocal);
 

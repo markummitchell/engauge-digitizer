@@ -68,7 +68,7 @@ void CmdAddPointAxis::cmdRedo ()
                                                   m_posGraph,
                                                   m_identifierAdded,
                                                   m_ordinal);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -77,7 +77,7 @@ void CmdAddPointAxis::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdUndo";
 
   document().removePointAxis (m_identifierAdded);
-  document().updatePointOrdinals ();
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

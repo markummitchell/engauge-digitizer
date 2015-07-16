@@ -13,7 +13,6 @@ CallbackCheckAddPointAxis::CallbackCheckAddPointAxis(const DocumentModelCoords &
   // than after since there is no safe place to do this afterwards (isError and errorMessage may be called more than once)
   Point point (AXIS_CURVE_NAME,
                posScreen,
-               UNDEFINED_ORDINAL,
                posGraph);
 
   callback (AXIS_CURVE_NAME,

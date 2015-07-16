@@ -26,9 +26,6 @@ public:
   /// Append new Point to the specified Curve.
   void addPoint (const Point &point);
 
-  /// Apply transformation to all curves.
-  void applyTransformation (const Transformation &transformation);
-
   /// Return the axis or graph curve for the specified curve name.
   Curve *curveForCurveName (const QString &curveName);
 
@@ -72,7 +69,7 @@ public:
   void saveXml(QXmlStreamWriter &writer) const;
 
   /// Update point ordinals to be consistent with their CurveStyle and x/theta coordinate
-  void updatePointOrdinals ();
+  void updatePointOrdinals (const Transformation &transformation);
 
 private:
 
