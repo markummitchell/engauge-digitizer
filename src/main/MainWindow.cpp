@@ -2794,24 +2794,24 @@ void MainWindow::writeCheckpointToLogFile ()
   // Document
   QString checkpointDoc;
   QTextStream strDoc (&checkpointDoc);
-  m_cmdMediator->document().printStream(INDENTATION_DELTA,
+  m_cmdMediator->document().printStream(INDENTATION_PAST_TIMESTAMP,
                                         strDoc);
 
   // Scene
   QString checkpointScene;
   QTextStream strScene (&checkpointScene);
-  m_scene->printStream (INDENTATION_DELTA,
+  m_scene->printStream (INDENTATION_PAST_TIMESTAMP,
                         strScene);
 
   // Skip slow string manipulation if BEFORE call to LOG4CPP_DEBUG_S
   if (mainCat->getPriority() == log4cpp::Priority::DEBUG) {
 
     LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::writeCheckpointToLogFile\n"
-                                 << "-----------DOCUMENT CHECKPOINT START----------" << "\n"
+                                 << "--------------DOCUMENT CHECKPOINT START----------" << "\n"
                                  << checkpointDoc.toLatin1().data()
-                                 << "------------DOCUMENT CHECKPOINT END-----------" << "\n"
-                                 << "-------------SCENE CHECKPOINT START-----------" << "\n"
+                                 << "---------------DOCUMENT CHECKPOINT END-----------" << "\n"
+                                 << "----------------SCENE CHECKPOINT START-----------" << "\n"
                                  << checkpointScene.toLatin1().data()
-                                 << "--------------SCENE CHECKPOINT END------------";
+                                 << "-----------------SCENE CHECKPOINT END------------";
   }
 }

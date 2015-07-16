@@ -7,6 +7,7 @@
 
 log4cpp::Category *mainCat;
 
+const QString INDENTATION_PAST_TIMESTAMP ("             ");
 const QString INDENTATION_DELTA ("  ");
 
 void initializeLogging (const QString &name,
