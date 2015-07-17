@@ -24,46 +24,21 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              unsigned int radius,
                              double lineWidth) :
   GraphicsPointAbstractBase (),
+  m_scene (scene),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),
   m_graphicsItemPolygon (0),
   m_shadowZeroWidthPolygon (0),
+  m_identifier (identifier),
+  m_posScreen (posScreen),
+  m_color (color),
+  m_lineWidth (lineWidth),
   m_wanted (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
                               << " identifier=" << identifier.toLatin1 ().data ();
 
-  m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
-                                                    QRect (- radius,
-                                                           - radius,
-                                                           2 * radius + 1,
-                                                           2 * radius + 1));
-  scene.addItem (m_graphicsItemEllipse);
-
-  m_graphicsItemEllipse->setData (DATA_KEY_IDENTIFIER, identifier);
-  m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  m_graphicsItemEllipse->setPos (posScreen.x (),
-                                 posScreen.y ());
-  m_graphicsItemEllipse->setPen (QPen (QBrush (color), lineWidth));
-  m_graphicsItemEllipse->setEnabled (true);
-  m_graphicsItemEllipse->setFlags (QGraphicsItem::ItemIsSelectable |
-                                   QGraphicsItem::ItemIsMovable |
-                                   QGraphicsItem::ItemSendsGeometryChanges);
-
-  m_graphicsItemEllipse->setToolTip (identifier);
-  m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-
-  // Shadow item is not selectable so it needs no stored data. Do NOT
-  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
-  m_shadowZeroWidthEllipse = new GraphicsPointEllipse (*this,
-                                                       QRect (- radius,
-                                                              - radius,
-                                                              2 * radius + 1,
-                                                              2 * radius + 1));
-  m_shadowZeroWidthEllipse->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
-
-  m_shadowZeroWidthEllipse->setPen (QPen (QBrush (color), ZERO_WIDTH));
-  m_shadowZeroWidthEllipse->setEnabled (true);
+  createPointEllipse (radius);
 }
 
 GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
@@ -73,40 +48,21 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QPolygonF &polygon,
                              double lineWidth) :
   GraphicsPointAbstractBase (),
+  m_scene (scene),
   m_graphicsItemEllipse (0),
   m_shadowZeroWidthEllipse (0),
   m_graphicsItemPolygon (0),
   m_shadowZeroWidthPolygon (0),
+  m_identifier (identifier),
+  m_posScreen (posScreen),
+  m_color (color),
+  m_lineWidth (lineWidth),
   m_wanted (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
                               << " identifier=" << identifier.toLatin1 ().data ();
 
-  m_graphicsItemPolygon = new GraphicsPointPolygon (*this,
-                                                    polygon);
-  scene.addItem (m_graphicsItemPolygon);
-
-  m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, identifier);
-  m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  m_graphicsItemPolygon->setPos (posScreen.x (),
-                                 posScreen.y ());
-  m_graphicsItemPolygon->setPen (QPen (QBrush (color), lineWidth));
-  m_graphicsItemPolygon->setEnabled (true);
-  m_graphicsItemPolygon->setFlags (QGraphicsItem::ItemIsSelectable |
-                                   QGraphicsItem::ItemIsMovable |
-                                   QGraphicsItem::ItemSendsGeometryChanges);
-
-  m_graphicsItemPolygon->setToolTip (identifier);
-  m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-
-  // Shadow item is not selectable so it needs no stored data. Do NOT
-  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
-  m_shadowZeroWidthPolygon = new GraphicsPointPolygon (*this,
-                                                       polygon);
-  m_shadowZeroWidthPolygon->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
-
-  m_shadowZeroWidthPolygon->setPen (QPen (QBrush (color), ZERO_WIDTH));
-  m_shadowZeroWidthPolygon->setEnabled (true);
+  createPointPolygon (polygon);
 }
 
 GraphicsPoint::~GraphicsPoint()
@@ -135,6 +91,74 @@ GraphicsPoint::~GraphicsPoint()
     m_shadowZeroWidthEllipse = 0;
 
   }
+}
+
+void GraphicsPoint::createPointEllipse (unsigned int radius)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
+
+  m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
+                                                    QRect (- radius,
+                                                           - radius,
+                                                           2 * radius + 1,
+                                                           2 * radius + 1));
+  m_scene.addItem (m_graphicsItemEllipse);
+
+  m_graphicsItemEllipse->setData (DATA_KEY_IDENTIFIER, m_identifier);
+  m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  m_graphicsItemEllipse->setPos (m_posScreen.x (),
+                                 m_posScreen.y ());
+  m_graphicsItemEllipse->setPen (QPen (QBrush (m_color), m_lineWidth));
+  m_graphicsItemEllipse->setEnabled (true);
+  m_graphicsItemEllipse->setFlags (QGraphicsItem::ItemIsSelectable |
+                                   QGraphicsItem::ItemIsMovable |
+                                   QGraphicsItem::ItemSendsGeometryChanges);
+
+  m_graphicsItemEllipse->setToolTip (m_identifier);
+  m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+
+  // Shadow item is not selectable so it needs no stored data. Do NOT
+  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
+  m_shadowZeroWidthEllipse = new GraphicsPointEllipse (*this,
+                                                       QRect (- radius,
+                                                              - radius,
+                                                              2 * radius + 1,
+                                                              2 * radius + 1));
+  m_shadowZeroWidthEllipse->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
+
+  m_shadowZeroWidthEllipse->setPen (QPen (QBrush (m_color), ZERO_WIDTH));
+  m_shadowZeroWidthEllipse->setEnabled (true);
+}
+
+void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::createPointPolygon";
+
+  m_graphicsItemPolygon = new GraphicsPointPolygon (*this,
+                                                    polygon);
+  m_scene.addItem (m_graphicsItemPolygon);
+
+  m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, m_identifier);
+  m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  m_graphicsItemPolygon->setPos (m_posScreen.x (),
+                                 m_posScreen.y ());
+  m_graphicsItemPolygon->setPen (QPen (QBrush (m_color), m_lineWidth));
+  m_graphicsItemPolygon->setEnabled (true);
+  m_graphicsItemPolygon->setFlags (QGraphicsItem::ItemIsSelectable |
+                                   QGraphicsItem::ItemIsMovable |
+                                   QGraphicsItem::ItemSendsGeometryChanges);
+
+  m_graphicsItemPolygon->setToolTip (m_identifier);
+  m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+
+  // Shadow item is not selectable so it needs no stored data. Do NOT
+  // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
+  m_shadowZeroWidthPolygon = new GraphicsPointPolygon (*this,
+                                                       polygon);
+  m_shadowZeroWidthPolygon->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
+
+  m_shadowZeroWidthPolygon->setPen (QPen (QBrush (m_color), ZERO_WIDTH));
+  m_shadowZeroWidthPolygon->setEnabled (true);
 }
 
 QVariant GraphicsPoint::data (int key) const
@@ -204,14 +228,46 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
   // Setting pen and radius of parent graphics items below also affects the child shadows
   // (m_shadowItemPolygon and m_shadowItemEllipse)
   if (m_graphicsItemEllipse == 0) {
-    m_graphicsItemPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
-                                         pointStyle.lineWidth()));
-    m_graphicsItemPolygon->setRadius (pointStyle.radius());
+    if (pointStyle.shape() == POINT_SHAPE_CIRCLE) {
 
+      // Transition from non-circle to circle. Deleting parent also deletes child shadow
+      delete m_graphicsItemPolygon;
+      m_graphicsItemPolygon = 0;
+      m_shadowZeroWidthPolygon = 0;
+
+      createPointEllipse (pointStyle.radius());
+
+    } else {
+
+      // Update polygon
+      m_graphicsItemPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                           pointStyle.lineWidth()));
+      m_shadowZeroWidthPolygon->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                              pointStyle.lineWidth()));
+      m_graphicsItemPolygon->setPolygon (pointStyle.polygon());
+      m_shadowZeroWidthPolygon->setPolygon (pointStyle.polygon());
+
+    }
   } else {
-    m_graphicsItemEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
-                                         pointStyle.lineWidth()));
-    m_graphicsItemEllipse->setRadius (pointStyle.radius());
+    if (pointStyle.shape() != POINT_SHAPE_CIRCLE) {
+
+      // Transition from circle to non-circlee. Deleting parent also deletes child shadow
+      delete m_graphicsItemEllipse;
+      m_graphicsItemEllipse = 0;
+      m_shadowZeroWidthEllipse = 0;
+
+      createPointPolygon (pointStyle.polygon());
+
+    } else {
+
+      // Update circle
+      m_graphicsItemEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                           pointStyle.lineWidth()));
+      m_shadowZeroWidthEllipse->setPen (QPen (ColorPaletteToQColor(pointStyle.paletteColor()),
+                                           pointStyle.lineWidth()));
+      m_graphicsItemEllipse->setRadius (pointStyle.radius());
+      m_shadowZeroWidthEllipse->setRadius (pointStyle.radius());
+    }
   }
 }
 

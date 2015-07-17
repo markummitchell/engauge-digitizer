@@ -256,6 +256,18 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   graphicsPoint->setWanted ();
 }
 
+void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateCurveStyle";
+
+  OrdinalToGraphicsPoint::const_iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+     GraphicsPoint *point = itr.value();
+     point->updateCurveStyle (curveStyle);
+  }
+}
+
 void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle)
 {
   // LOG4CPP_DEBUG_S is below

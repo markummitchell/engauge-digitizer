@@ -55,6 +55,9 @@ public:
                            const QString &curveName,
                            const Point &point);
 
+  /// Update the curve style for every curve
+  void updateCurveStyles (const CurveStyles &modelCurveStyles);
+
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles);
 

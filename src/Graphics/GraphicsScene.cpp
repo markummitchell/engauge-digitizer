@@ -231,6 +231,8 @@ void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
 void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
+
+  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles);
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,

@@ -10,6 +10,8 @@
 
 const int DEFAULT_POINT_RADIUS = 10;
 const int DEFAULT_LINE_WIDTH = 1;
+const double PI = 3.1415926535;
+const double TWO_PI = 2.0 * PI;
 
 PointStyle::PointStyle ()
 {
@@ -110,68 +112,77 @@ ColorPalette PointStyle::paletteColor () const
 
 QPolygonF PointStyle::polygon () const
 {
+  const int NUM_XY = 60;
   QVector<QPointF> points;
 
   switch (m_shape) {
 
     case POINT_SHAPE_CIRCLE:
-      ENGAUGE_ASSERT (false);
+      {
+        int xyWidth = m_radius;
+        for (int i = 0; i <= NUM_XY; i++) {
+          double angle = TWO_PI * (double) i / (double) NUM_XY;
+          double x = xyWidth * cos (angle);
+          double y = xyWidth * sin (angle);
+          points.append (QPointF (x, y));
+        }
+      }
       break;
 
     case POINT_SHAPE_CROSS:
       {
-        int component = m_radius;
+        int xyWidth = m_radius;
 
-        points.append (QPointF (-1 * component, 0));
-        points.append (QPointF (component, 0));
+        points.append (QPointF (-1 * xyWidth, 0));
+        points.append (QPointF (xyWidth, 0));
         points.append (QPointF (0, 0));
-        points.append (QPointF (0, component));
-        points.append (QPointF (0, -1 * component));
+        points.append (QPointF (0, xyWidth));
+        points.append (QPointF (0, -1 * xyWidth));
         points.append (QPointF (0, 0));
       }
       break;
 
     case POINT_SHAPE_DIAMOND:
       {
-        int component = m_radius;
+        int xyWidth = m_radius;
 
-        points.append (QPointF (0, -1 * component));
-        points.append (QPointF (-1 * component, 0));
-        points.append (QPointF (0, component));
-        points.append (QPointF (component, 0));
+        points.append (QPointF (0, -1 * xyWidth));
+        points.append (QPointF (-1 * xyWidth, 0));
+        points.append (QPointF (0, xyWidth));
+        points.append (QPointF (xyWidth, 0));
       }
       break;
 
     case POINT_SHAPE_SQUARE:
       {
-        int component = m_radius;
+        int xyWidth = m_radius;
 
-        points.append (QPointF (-1 * component, -1 * component));
-        points.append (QPointF (-1 * component, component));
-        points.append (QPointF (component, component));
-        points.append (QPointF (component, -1 * component));
+        points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
+        points.append (QPointF (-1 * xyWidth, xyWidth));
+        points.append (QPointF (xyWidth, xyWidth));
+        points.append (QPointF (xyWidth, -1 * xyWidth));
       }
       break;
 
     case POINT_SHAPE_TRIANGLE:
       {
-        int component = m_radius;
+        int xyWidth = m_radius;
 
-        points.append (QPointF (-1 * component, -1 * component));
-        points.append (QPointF (0, component));
-        points.append (QPointF (component, -1 * component));
+        points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
+        points.append (QPointF (0, xyWidth));
+        points.append (QPointF (xyWidth, -1 * xyWidth));
       }
       break;
 
     case POINT_SHAPE_X:
       {
-        int component = m_radius * qSqrt (0.5);
+        int xyWidth = m_radius * qSqrt (0.5);
 
-        points.append (QPointF (-1 * component, -1 * component));
-        points.append (QPointF (component, component));
+        points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
+        points.append (QPointF (xyWidth, xyWidth));
         points.append (QPointF (0, 0));
-        points.append (QPointF (-1 * component, component));
-        points.append (QPointF (component, -1 * component));
+        points.append (QPointF (-1 * xyWidth, xyWidth));
+        points.append (QPointF (xyWidth, -1 * xyWidth));
         points.append (QPointF (0, 0));
       }
       break;

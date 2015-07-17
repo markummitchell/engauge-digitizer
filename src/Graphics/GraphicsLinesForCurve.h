@@ -5,6 +5,7 @@
 #include "OrdinalToGraphicsPoint.h"
 #include <QGraphicsPathItem>
 
+class CurveStyle;
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
@@ -48,6 +49,9 @@ public:
   void updateAfterCommand (GraphicsScene &scene,
                            const PointStyle &pointStyle,
                            const Point &point);
+
+  /// Update the curve style for this curve
+  void updateCurveStyle (const CurveStyle &curveStyle);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle);

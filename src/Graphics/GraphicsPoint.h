@@ -3,6 +3,7 @@
 
 #include "GraphicsPointAbstractBase.h"
 #include "GraphicsPoint.h"
+#include <QColor>
 #include <QPointF>
 
 class CurveStyle;
@@ -86,6 +87,11 @@ public:
 private:
   GraphicsPoint();
 
+  void createPointEllipse (unsigned int radius); // Attributes shared by circle and polygon points are passed through member variables
+  void createPointPolygon (const QPolygonF &polygon); // Attributes shared by circle and polygon points are passed through member variables
+
+  QGraphicsScene &m_scene;
+
   // Ellipse graphics items. Unused if point is polygonal.
   GraphicsPointEllipse *m_graphicsItemEllipse;
   GraphicsPointEllipse *m_shadowZeroWidthEllipse; // Shadow item overlays the superclass instance to ensure visibility
@@ -93,6 +99,12 @@ private:
   // Polygon graphics items. Unused if point is elliptical.
   GraphicsPointPolygon *m_graphicsItemPolygon;
   GraphicsPointPolygon *m_shadowZeroWidthPolygon; // Shadow item overlays the superclass instance to ensure visibility
+
+  // Shared attributes
+  const QString m_identifier;
+  const QPointF m_posScreen;
+  const QColor m_color;
+  double m_lineWidth;
 
   // Housekeeping
   bool m_wanted;

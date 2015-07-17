@@ -150,6 +150,19 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                            point);
 }
 
+void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateCurveStyles";
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    QString curveName = itr.key();
+
+    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName));
+  }
+}
+
 void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints";
