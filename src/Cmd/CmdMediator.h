@@ -8,7 +8,6 @@
 
 class MainWindow;
 class QImage;
-class Transformation;
 
 /// Command queue stack.
 /// This class lies between the Document and the rest of the application. This approach is attractive because the

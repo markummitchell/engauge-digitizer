@@ -5,6 +5,7 @@
 #include <QPointF>
 #include <QRectF>
 #include <QString>
+#include "Transformation.h"
 
 class Point;
 
@@ -13,7 +14,7 @@ class CallbackBoundingRects
 {
 public:
   /// Single constructor
-  CallbackBoundingRects();
+  CallbackBoundingRects(const Transformation &transformation);
 
   /// Graph coordinate bounding rectangle
   QRectF boundingRectGraph (bool &isEmpty) const;
@@ -26,11 +27,13 @@ public:
                                  const Point &point);
 
 private:
+  CallbackBoundingRects();
 
   void mergeCoordinates (const QPointF &pos,
                          QRectF &boundingRect);
 
   bool m_isEmpty;
+  const Transformation m_transformation;
   QRectF m_boundingRectGraph;
   QRectF m_boundingRectScreen;
 };

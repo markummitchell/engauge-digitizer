@@ -52,6 +52,9 @@ protected:
   /// Get method for MainWindow.
   MainWindow &mainWindow ();
 
+  /// Const get method for MainWindow.
+  const MainWindow &mainWindow () const;
+
   /// Add colors in color palette to combobox, without transparent entry at end.
   void populateColorComboWithoutTransparent (QComboBox &combo);
 

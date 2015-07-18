@@ -22,6 +22,7 @@
 #include <QRadioButton>
 #include <QStackedWidget>
 #include <QVBoxLayout>
+#include "Transformation.h"
 #include "ViewPreview.h"
 
 const int STEPS_PER_CYCLE = 4; // Repeat STEPS_PER_CYLE-1 unhighlighted steps plus 1 highlighted step in each cycle
@@ -145,7 +146,7 @@ void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
 QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
                                              bool &isEmpty) const
 {
-  CallbackBoundingRects ftor;
+  CallbackBoundingRects ftor (mainWindow().transformation());
 
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                     &CallbackBoundingRects::callback);

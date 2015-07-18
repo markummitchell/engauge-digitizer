@@ -74,6 +74,11 @@ MainWindow &DlgSettingsAbstractBase::mainWindow ()
   return m_mainWindow;
 }
 
+const MainWindow &DlgSettingsAbstractBase::mainWindow () const
+{
+  return m_mainWindow;
+}
+
 void DlgSettingsAbstractBase::populateColorComboWithoutTransparent (QComboBox &combo)
 {
   combo.addItem (colorPaletteToString (COLOR_PALETTE_BLUE),

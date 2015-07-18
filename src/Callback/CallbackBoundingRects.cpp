@@ -6,8 +6,9 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
-CallbackBoundingRects::CallbackBoundingRects() :
-  m_isEmpty (true)
+CallbackBoundingRects::CallbackBoundingRects(const Transformation &transformation) :
+  m_isEmpty (true),
+  m_transformation (transformation)
 {
 }
 
@@ -25,10 +26,17 @@ QRectF CallbackBoundingRects::boundingRectScreen (bool &isEmpty) const
   return m_boundingRectScreen;
 }
 
-CallbackSearchReturn CallbackBoundingRects::callback (const QString & /* curveName */,
+CallbackSearchReturn CallbackBoundingRects::callback (const QString &curveName,
                                                       const Point &point)
 {
-  mergeCoordinates (point.posGraph(),
+  QPointF posGraph;
+  if (curveName == AXIS_CURVE_NAME) {
+    posGraph = point.posGraph(); // Axis point has graph coordinates
+  } else {
+    m_transformation.transformScreenToRawGraph (point.posScreen(),
+                                                posGraph); // Curve point has undefined graph coordinates, but they can be calculated
+  }
+  mergeCoordinates (posGraph,
                     m_boundingRectGraph);
   mergeCoordinates (point.posScreen(),
                     m_boundingRectScreen);
