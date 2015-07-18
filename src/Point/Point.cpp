@@ -14,6 +14,9 @@ unsigned int Point::m_identifierIndex = 0;
 extern const QString AXIS_CURVE_NAME;
 const QString POINT_IDENTIFIER_DELIMITER ("_");
 
+const double MISSING_ORDINAL_VALUE = 0;
+const double MISSING_POSGRAPH_VALUE = 0;
+
 Point::Point ()
 {
 }
@@ -24,9 +27,9 @@ Point::Point(const QString &curveName,
   m_identifier (uniqueIdentifierGenerator(curveName)),
   m_posScreen (posScreen),
   m_hasPosGraph (false),
-  m_posGraph (0, 0),
+  m_posGraph (MISSING_POSGRAPH_VALUE, MISSING_POSGRAPH_VALUE),
   m_hasOrdinal (false),
-  m_ordinal (0)
+  m_ordinal (MISSING_ORDINAL_VALUE)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
                               << " curveName=" << curveName.toLatin1().data()
@@ -45,7 +48,7 @@ Point::Point(const QString &curveName,
   m_hasPosGraph (true),
   m_posGraph (posGraph),
   m_hasOrdinal (false),
-  m_ordinal (0)
+  m_ordinal (MISSING_ORDINAL_VALUE)
 {
   ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME);
 
@@ -115,7 +118,7 @@ Point::Point(const QString &curveName,
   m_identifier (identifier),
   m_posScreen (posScreen),
   m_hasPosGraph (false),
-  m_posGraph (0, 0),
+  m_posGraph (MISSING_POSGRAPH_VALUE, MISSING_POSGRAPH_VALUE),
   m_hasOrdinal (true),
   m_ordinal (ordinal)
 {
@@ -137,7 +140,7 @@ Point::Point (const QString &curveName,
   m_identifier (uniqueIdentifierGenerator(curveName)),
   m_posScreen (posScreen),
   m_hasPosGraph (false),
-  m_posGraph (0, 0),
+  m_posGraph (MISSING_POSGRAPH_VALUE, MISSING_POSGRAPH_VALUE),
   m_hasOrdinal (true),
   m_ordinal (ordinal)
 {
@@ -242,13 +245,21 @@ void Point::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT)) {
 
+    m_hasOrdinal = attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL);
+    if (m_hasOrdinal) {
+      m_ordinal = attributes.value(DOCUMENT_SERIALIZE_POINT_ORDINAL).toDouble();
+    } else {
+      m_ordinal = MISSING_ORDINAL_VALUE;
+    }
+
     QString isAxisPoint = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT).toString();
 
     m_identifier = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString();
     m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();
     m_isAxisPoint = (isAxisPoint == DOCUMENT_SERIALIZE_BOOL_TRUE);
-    m_hasOrdinal = false;
     m_hasPosGraph = false;
+    m_posGraph.setX (MISSING_POSGRAPH_VALUE);
+    m_posGraph.setY (MISSING_POSGRAPH_VALUE);
 
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
            (reader.name () != DOCUMENT_SERIALIZE_POINT)) {
@@ -261,12 +272,7 @@ void Point::loadXml(QXmlStreamReader &reader)
 
       if (reader.tokenType () == QXmlStreamReader::StartElement) {
 
-        if (reader.name() == DOCUMENT_SERIALIZE_POINT_ORDINAL) {
-
-          m_hasOrdinal = true;
-          m_ordinal = attributes.value(DOCUMENT_SERIALIZE_POINT_ORDINAL).toDouble();
-
-        } else if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
+        if (reader.name() == DOCUMENT_SERIALIZE_POINT_POSITION_SCREEN) {
 
           attributes = reader.attributes();
 
