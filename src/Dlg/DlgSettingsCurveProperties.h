@@ -48,8 +48,7 @@ private:
   void createPreview (QGridLayout *layout, int &row);
   void drawLine (bool isRelation,
                  const LineStyle &lineStyle);
-  void drawPoints (bool isRelation,
-                   const PointStyle &pointStyle);
+  void drawPoints (const PointStyle &pointStyle);
   void loadForCurveName(const QString &curveName);
   void resetSceneRectangle();
   void updateControls();

@@ -89,7 +89,7 @@ public:
   bool transformIsDefined() const;
 
   /// See GraphicsScene::updateAfterCommand
-  void updateAfterCommand(bool linesAreAlreadyUpdated = false);
+  void updateAfterCommand();
 
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();

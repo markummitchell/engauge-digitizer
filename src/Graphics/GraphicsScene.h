@@ -60,8 +60,7 @@ public:
 
   /// Update the Points and their Curves after executing a command. After a mouse drag, the lines are already updated and
   /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
-  void updateAfterCommand (CmdMediator &cmdMediator,
-                           bool linesAreAlreadyUpdated);
+  void updateAfterCommand (CmdMediator &cmdMediator);
 
   /// Update curve styles after settings changed.
   void updateCurveStyles(const CurveStyles &modelCurveStyles);

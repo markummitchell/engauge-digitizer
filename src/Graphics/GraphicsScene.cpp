@@ -204,8 +204,7 @@ void GraphicsScene::showPoints (bool show,
   }
 }
 
-void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
-                                        bool linesAreAlreadyUpdated)
+void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 

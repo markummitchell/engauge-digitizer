@@ -2440,10 +2440,9 @@ bool MainWindow::transformIsDefined() const
   return m_transformation.transformIsDefined();
 }
 
-void MainWindow::updateAfterCommand (bool linesAreAlreadyUpdated)
+void MainWindow::updateAfterCommand ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommand"
-                              << " linesAreAlreadyUpdated=" << (linesAreAlreadyUpdated ? "true" : "false");
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommand";
 
   ENGAUGE_CHECK_PTR (m_cmdMediator);
 
@@ -2453,8 +2452,7 @@ void MainWindow::updateAfterCommand (bool linesAreAlreadyUpdated)
 
   // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
   // by updateAfterCommandStatusBarCoords
-  m_scene->updateAfterCommand (*m_cmdMediator,
-                               linesAreAlreadyUpdated);
+  m_scene->updateAfterCommand (*m_cmdMediator);
 
   updateControls ();
 

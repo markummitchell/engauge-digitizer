@@ -288,18 +288,9 @@ void DlgSettingsCurveProperties::drawLine (bool isRelation,
   m_scenePreview->addItem (line);
 }
 
-void DlgSettingsCurveProperties::drawPoints (bool isRelation,
-                                             const PointStyle &pointStyle)
+void DlgSettingsCurveProperties::drawPoints (const PointStyle &pointStyle)
 {
   const QString NULL_IDENTIFIER;
-  const int ORDINAL_0 = 0, ORDINAL_1 = 1, ORDINAL_2 = 2;
-
-  // Ordinals. We change the order of the center and right points from left-to-right when connecting as a relation
-  int ordinalLeft = ORDINAL_0, ordinalCenter = ORDINAL_1, ordinalRight = ORDINAL_2;
-  if (isRelation) {
-    ordinalCenter = ORDINAL_2;
-    ordinalRight = ORDINAL_1;
-  }
 
   GraphicsPointFactory pointFactory;
 
@@ -528,8 +519,7 @@ void DlgSettingsCurveProperties::updatePreview()
   bool isRelation = (lineStyle.curveConnectAs() == CONNECT_AS_RELATION_SMOOTH ||
                      lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT);
 
-  drawPoints (isRelation,
-              pointStyle);
+  drawPoints (pointStyle);
   drawLine (isRelation,
             lineStyle);
 
