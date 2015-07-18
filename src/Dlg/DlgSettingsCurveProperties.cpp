@@ -88,7 +88,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   layoutGroup->addWidget (labelLineWidth, 0, 0);
 
   m_spinLineWidth = new QSpinBox (m_groupLine);
-  m_spinLineWidth->setWhatsThis (tr ("Select a width for the lines drawn between points"));
+  m_spinLineWidth->setWhatsThis (tr ("Select a width for the lines drawn between points.\n\n"
+                                    "This applies only to graph curves. No lines are ever drawn between axis points."));
   m_spinLineWidth->setMinimum(1);
   connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
   layoutGroup->addWidget (m_spinLineWidth, 0, 1);
@@ -97,7 +98,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   layoutGroup->addWidget (labelLineColor, 1, 0);
 
   m_cmbLineColor = new QComboBox (m_groupLine);
-  m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn between points"));
+  m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn between points.\n\n"
+                                    "This applies only to graph curves. No lines are ever drawn between axis points."));
   populateColorComboWithTransparent (*m_cmbLineColor);
   connect (m_cmbLineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineColor, 1, 1);
@@ -119,7 +121,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                    "endpoints.\n\n"
                                    "Lines are drawn between successively ordered points.\n\n"
                                    "Straight curves are drawn with straight lines between successive points. Smooth curves are drawn "
-                                   "with smooth lines between successive points.\n\n"));
+                                   "with smooth lines between successive points.\n\n"
+                                    "This applies only to graph curves. No lines are ever drawn between axis points."));
   connect (m_cmbLineType, SIGNAL (activated (const QString &)), this, SLOT (slotLineType (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineType, 2, 1);
 }
@@ -392,6 +395,11 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurveStylesAfter->lineConnectAs (curveName)));
   ENGAUGE_ASSERT (indexCurveConnectAs >= 0);
   m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
+
+  // Disable line controls for axis curve since connecting with visible lines is better handled by Checker class
+  m_cmbLineColor->setEnabled (curveName != AXIS_CURVE_NAME);
+  m_spinLineWidth->setEnabled (curveName != AXIS_CURVE_NAME);
+  m_cmbLineType->setEnabled (curveName != AXIS_CURVE_NAME);
 
   updateControls();
   updatePreview();

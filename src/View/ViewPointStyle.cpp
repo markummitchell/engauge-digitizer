@@ -45,7 +45,7 @@ QPixmap ViewPointStyle::pixmap (const PointStyle &pointStyle) const
                     width (),
                     height (),
                     QBrush (COLOR_FOR_BRUSH));
-  painter.setPen (QPen (color));
+  painter.setPen (QPen (color, pointStyle.lineWidth()));
   painter.drawPolygon (polygonScaled);
 
   // Create pixmap from image
