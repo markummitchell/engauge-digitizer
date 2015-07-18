@@ -19,6 +19,9 @@ public:
   TransformationStateContext(QGraphicsScene &scene);
   virtual ~TransformationStateContext();
 
+  /// Reset, when loading a document after the first, to same state that first document was at when loaded
+  void resetOnLoad();
+
   /// Trigger a state transition to be performed immediately.
   void triggerStateTransition (TransformationState transformationState,
                                CmdMediator &cmdMediator,

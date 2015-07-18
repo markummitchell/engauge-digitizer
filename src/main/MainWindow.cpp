@@ -918,6 +918,8 @@ void MainWindow::fileImport (const QString &fileName)
 
 void MainWindow::loadCurveListFromCmdMediator ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadCurveListFromCmdMediator";
+
   m_cmbCurve->clear ();
   QStringList curvesGraphsNames = m_cmdMediator->curvesGraphsNames ();
   QStringList::iterator itr;
@@ -1349,6 +1351,8 @@ QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
 
 void MainWindow::saveStartingDocumentSnapshot()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::saveStartingDocumentSnapshot";
+
   QXmlStreamWriter writer (&m_startingDocumentSnapshot);
   writer.setAutoFormatting (true);
   m_cmdMediator->document().saveXml (writer);
@@ -1381,6 +1385,8 @@ QString MainWindow::selectedGraphCurve () const
 
 void MainWindow::setCurrentFile (const QString &fileName)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setCurrentFile";
+
   const QString PLACEHOLDER ("[*]");
 
   QString title = QString (tr ("Engauge Digitizer %1")
@@ -1423,6 +1429,8 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
 
 void MainWindow::setPixmap (const QPixmap &pixmap)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
+
   m_digitizeStateContext->setImageIsLoaded (true);
 
   updateImages (pixmap);
@@ -1522,7 +1530,11 @@ void MainWindow::setupAfterLoad (const QString &fileName,
                               << " message=" << temporaryMessage.toLatin1().data();
 
   // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
-  m_digitizeStateContext->bindToCmdMediator (m_cmdMediator);
+  m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
+
+  m_transformation.resetOnLoad();
+  m_transformationStateContext->resetOnLoad();
+  m_scene->resetOnLoad();
 
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdStackShadow, SLOT (slotUndo ()));
@@ -2750,6 +2762,8 @@ void MainWindow::updateViewedPoints ()
 
 void MainWindow::updateViewsOfSettings ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewsOfSettings";
+
   QString activeCurve = m_digitizeStateContext->activeCurve ();
 
   updateViewsOfSettings (activeCurve);

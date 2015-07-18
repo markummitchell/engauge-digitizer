@@ -219,7 +219,8 @@ void GraphicsLinesForCurve::printStream (QString indentation,
 void GraphicsLinesForCurve::removePoint (double ordinal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removePoint"
-                              << " point=" << ordinal;
+                              << " point=" << ordinal
+                              << " pointCount=" << m_graphicsPoints.count();
 
   ENGAUGE_ASSERT (m_graphicsPoints.contains (ordinal));
   GraphicsPoint *graphicsPoint = m_graphicsPoints [ordinal];
@@ -234,7 +235,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                                 const Point &point)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateAfterCommand"
-                               << " curve=" << m_curveName.toLatin1().data();
+                               << " curve=" << m_curveName.toLatin1().data()
+                               << " pointCount=" << m_graphicsPoints.count();
 
   GraphicsPoint *graphicsPoint = 0;
   if (m_graphicsPoints.contains (point.ordinal())) {

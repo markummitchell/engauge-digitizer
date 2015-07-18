@@ -52,3 +52,8 @@ void DigitizeStateEmpty::handleMouseRelease (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseRelease";
 }
+
+QString DigitizeStateEmpty::state() const
+{
+  return "DigitizeStateEmpty";
+}

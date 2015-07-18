@@ -285,3 +285,8 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilte
       ENGAUGE_ASSERT (false);
   }
 }
+
+QString DigitizeStateColorPicker::state() const
+{
+  return "DigitizeStateColorPicker";
+}

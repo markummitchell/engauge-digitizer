@@ -76,6 +76,9 @@ public:
   void printStream (QString indentation,
                     QTextStream &str) const;
 
+  /// Reset, when loading a document after the first, to same state that first document was at when loaded
+  void resetOnLoad();
+
   /// Transform is defined when at least three axis points have been digitized
   bool transformIsDefined() const { return m_transformIsDefined; }
 

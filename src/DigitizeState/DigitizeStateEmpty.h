@@ -3,7 +3,7 @@
 
 #include "DigitizeStateAbstractBase.h"
 
-/// Digitizing state before a Document has been  created. In this state, the cursor is Qt::ArrowCursor.
+/// Digitizing state before a Document has been created. In this state, the cursor is Qt::ArrowCursor.
 class DigitizeStateEmpty : public DigitizeStateAbstractBase
 {
 public:
@@ -18,6 +18,7 @@ public:
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
+  virtual QString state() const;
 
 private:
   DigitizeStateEmpty();

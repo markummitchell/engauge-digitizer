@@ -31,8 +31,9 @@ public:
   /// Append just-created QUndoCommand to command stack. This is called from DigitizeStateAbstractBase subclasses
   void appendNewCmd(QUndoCommand *cmd);
 
-  /// Bind to CmdMediator class. Binding occurs from the single instance of this class to each new CmdMediator
-  void bindToCmdMediator (CmdMediator *cmdMediator);
+  /// Bind to CmdMediator class. Binding occurs from the single instance of this class to each new CmdMediator.
+  /// Resetting makes re-initializes for documents after the first
+  void bindToCmdMediatorAndResetOnLoad (CmdMediator *cmdMediator);
 
   /// Provide CmdMediator for indirect access to the Document.
   CmdMediator &cmdMediator ();
@@ -75,6 +76,9 @@ public:
 
   /// Set the image so QGraphicsView cursor and drag mode are accessible
   void setImageIsLoaded (bool imageIsLoaded);
+
+  /// State name for debugging
+  QString state() const;
 
   /// QGraphicsView for use by DigitizeStateAbstractBase subclasses
   QGraphicsView &view();

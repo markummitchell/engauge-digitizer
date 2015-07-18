@@ -71,6 +71,9 @@ public:
   /// Update the cursor according to the current state.
   void setCursor();
 
+  /// State name for debugging
+  virtual QString state() const = 0;
+
 protected:
   /// Returns the state-specific cursor shape.
   virtual QCursor cursor () const = 0;

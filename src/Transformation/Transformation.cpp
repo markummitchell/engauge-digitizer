@@ -256,6 +256,13 @@ void Transformation::printStream (QString indentation,
   }
 }
 
+void Transformation::resetOnLoad()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::resetOnLoad";
+
+  m_transformIsDefined = false;
+}
+
 double Transformation::roundOffSmallValues (double value, double range)
 {
   if (qAbs (value) < range / qPow (10.0, PRECISION_DIGITS)) {

@@ -55,3 +55,8 @@ void DigitizeStateSegment::handleMouseRelease (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleMouseRelease";
 }
+
+QString DigitizeStateSegment::state() const
+{
+  return "DigitizeStateSegment";
+}

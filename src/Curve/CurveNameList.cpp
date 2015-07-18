@@ -18,6 +18,9 @@ int CurveNameList::columnCount (const QModelIndex & /* parent */) const
 
 bool CurveNameList::containsCurveNameCurrent (const QString &curveName) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::containsCurveNameCurrent"
+                              << " entryCount=" << m_modelCurvesEntries.count();
+
   // Search for curve with matching name
   QStringList::const_iterator itr;
   for (itr = m_modelCurvesEntries.begin (); itr != m_modelCurvesEntries.end (); itr++) {

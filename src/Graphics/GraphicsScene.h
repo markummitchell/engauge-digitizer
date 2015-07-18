@@ -47,6 +47,9 @@ public:
   /// Remove specified point
   void removePoint (const QString &identifier);
 
+  /// Reset, when loading a document after the first, to same state that first document was at when loaded
+  void resetOnLoad();
+
   /// Reset positionHasChanged flag for all items. Typically this is done as part of mousePressEvent.
   void resetPositionHasChangedFlags();
 

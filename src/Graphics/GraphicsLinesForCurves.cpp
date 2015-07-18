@@ -38,6 +38,9 @@ void GraphicsLinesForCurves::addPoint (const QString &curveName,
 void GraphicsLinesForCurves::addRemoveCurves (GraphicsScene &scene,
                                               const QStringList &curveNames)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::addRemoveCurves"
+                              << " curveCount=" << m_graphicsLinesForCurve.count();
+
   // Add new curves
   QStringList::const_iterator itrC;
   for (itrC = curveNames.begin (); itrC != curveNames.end (); itrC++) {
@@ -127,7 +130,8 @@ void GraphicsLinesForCurves::printStream (QString indentation,
 void GraphicsLinesForCurves::removePoint(const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::removePoint"
-                              << " point=" << identifier.toLatin1().data ();
+                              << " point=" << identifier.toLatin1().data ()
+                              << " curveCount=" << m_graphicsLinesForCurve.count();
 
   QString curveName = Point::curveNameFromPointIdentifier(identifier);
 
@@ -136,13 +140,21 @@ void GraphicsLinesForCurves::removePoint(const QString &identifier)
   m_graphicsLinesForCurve [curveName]->removePoint(ordinal);
 }
 
+void GraphicsLinesForCurves::resetOnLoad()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::resetOnLoad";
+
+  m_graphicsLinesForCurve.clear();
+}
+
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                  const CurveStyles &curveStyles,
                                                  const QString &curveName,
                                                  const Point &point)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurves::updateAfterCommand"
-                               << " point=" << point.identifier().toLatin1().data();
+                               << " point=" << point.identifier().toLatin1().data()
+                               << " curveCount=" << m_graphicsLinesForCurve.count();
 
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
   m_graphicsLinesForCurve [curveName]->updateAfterCommand (scene,

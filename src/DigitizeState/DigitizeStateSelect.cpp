@@ -191,6 +191,11 @@ void DigitizeStateSelect::setCursorForPoints()
   }
 }
 
+QString DigitizeStateSelect::state() const
+{
+  return "DigitizeStateSelect";
+}
+
 void DigitizeStateSelect::unsetCursorForPoints()
 {
   QList<QGraphicsItem*> items = context().mainWindow().scene().items();

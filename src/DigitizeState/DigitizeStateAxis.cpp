@@ -126,3 +126,8 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     }
   }
 }
+
+QString DigitizeStateAxis::state() const
+{
+  return "DigitizeStateAxis";
+}

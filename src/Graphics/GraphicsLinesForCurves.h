@@ -49,6 +49,9 @@ public:
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);
 
+  /// Reset, when loading a document after the first, to same state that first document was at when loaded
+  void resetOnLoad();
+
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
                            const CurveStyles &curveStyles,

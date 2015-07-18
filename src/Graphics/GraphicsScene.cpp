@@ -139,6 +139,13 @@ void GraphicsScene::removePoint (const QString &identifier)
   m_graphicsLinesForCurves.removePoint (identifier);
 }
 
+void GraphicsScene::resetOnLoad()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::resetOnLoad";
+
+  m_graphicsLinesForCurves.resetOnLoad();
+}
+
 void GraphicsScene::resetPositionHasChangedFlags()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::resetPositionHasChangedFlags";

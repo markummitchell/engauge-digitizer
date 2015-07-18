@@ -58,9 +58,18 @@ void DigitizeStateContext::appendNewCmd(QUndoCommand *cmd)
   m_cmdMediator->push (cmd);
 }
 
-void DigitizeStateContext::bindToCmdMediator (CmdMediator *cmdMediator)
+void DigitizeStateContext::bindToCmdMediatorAndResetOnLoad (CmdMediator *cmdMediator)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::bindToCmdMediatorAndResetOnLoad";
+
   m_cmdMediator = cmdMediator;
+
+  // Reset current state. At this point, the current state is DIGITIZE_STATE_EMPTY when opening the first document
+  // so for consistency we always reset it so succeeding documents work the same way. This is done without
+  if (m_currentState != DIGITIZE_STATE_EMPTY) {
+    m_requestedState = DIGITIZE_STATE_EMPTY;
+    completeRequestedStateTransitionIfExists();
+  }
 }
 
 CmdMediator &DigitizeStateContext::cmdMediator ()
@@ -173,6 +182,13 @@ void DigitizeStateContext::setImageIsLoaded(bool imageIsLoaded)
 
   m_imageIsLoaded = imageIsLoaded;
   setCursor ();
+}
+
+QString DigitizeStateContext::state() const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
+
+  return m_states [m_currentState]->state();
 }
 
 QGraphicsView &DigitizeStateContext::view()

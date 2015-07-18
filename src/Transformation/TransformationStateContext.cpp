@@ -20,6 +20,13 @@ TransformationStateContext::~TransformationStateContext()
 {
 }
 
+void TransformationStateContext::resetOnLoad ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::resetOnLoad";
+
+  m_currentState = NUM_TRANSFORMATION_STATES;
+}
+
 void TransformationStateContext::triggerStateTransition (TransformationState transformationState,
                                                          CmdMediator &cmdMediator,
                                                          const Transformation &transformation)

@@ -72,3 +72,8 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
                                                                                        activeCurve ()));
   context().appendNewCmd(cmd);
 }
+
+QString DigitizeStatePointMatch::state() const
+{
+  return "DigitizeStatePointMatch";
+}

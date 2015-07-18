@@ -94,6 +94,9 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
                                QTextStream &strHtml,
                                CurvesGraphs &curvesGraphs) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::exportToClipboard"
+                              << " hashCount=" << selectedHash.count();
+
   // This method assumes Copy is only allowed when Transformation is valid
 
   bool isFirst = true;

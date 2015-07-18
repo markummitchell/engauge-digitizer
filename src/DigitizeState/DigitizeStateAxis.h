@@ -21,6 +21,7 @@ public:
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
+  virtual QString state() const;
 
 private:
   DigitizeStateAxis();
