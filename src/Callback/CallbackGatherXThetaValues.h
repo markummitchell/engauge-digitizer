@@ -23,7 +23,7 @@ class CallbackGatherXThetaValues
 public:
   /// Single constructor.
   CallbackGatherXThetaValues(const DocumentModelExport &modelExport,
-                             const QStringList &curvesGraphsNames,
+                             const QStringList &curveNamesIncluded,
                              const Transformation &transformation);
 
   /// Callback method.

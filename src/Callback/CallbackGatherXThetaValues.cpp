@@ -5,28 +5,16 @@
 #include "Point.h"
 
 CallbackGatherXThetaValues::CallbackGatherXThetaValues(const DocumentModelExport &modelExport,
-                                                       const QStringList &curvesGraphsNames,
+                                                       const QStringList &curvesIncluded,
                                                        const Transformation &transformation) :
   m_modelExport (modelExport),
   m_transformation (transformation)
 {
-  // Build a list of curves to include by subtracting the excluded curves from the the complete list.
-  // Special case is to use only first included curve if appropriate flag is set
   QStringList::const_iterator itr;
-  for (itr = curvesGraphsNames.begin(); itr != curvesGraphsNames.end(); itr++) {
+  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
-    QString curvesGraphName = *itr;
-
-    if (!modelExport.curveNamesNotExported().contains (curvesGraphName)) {
-
-      // Not excluded which means it gets included
-      m_curveNamesIncluded [curvesGraphName] = true;
-
-      if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE) {
-        // Quick exit since once curve is all we want
-        break;
-      }
-    }
+    QString curveIncluded = *itr;
+    m_curveNamesIncluded [curveIncluded] = true;
   }
 }
 

@@ -1,6 +1,8 @@
 #ifndef EXPORT_TO_FILE_H
 #define EXPORT_TO_FILE_H
 
+#include <QStringList>
+
 class Document;
 class DocumentModelExport;
 class QTextStream;
@@ -19,6 +21,20 @@ public:
                      const Document &document,
                      const Transformation &transformation,
                      QTextStream &str) const;
+
+private:
+  QStringList curvesToInclude (const DocumentModelExport &modelExport,
+                               const QStringList &curvesGraphsNames) const;
+  void exportToFileAllPerLine (const DocumentModelExport &modelExport,
+                               const Document &document,
+                               const QStringList &curvesIncluded,
+                               const Transformation &transformation,
+                               QTextStream &str) const;
+  void exportToFileOnePerLine (const DocumentModelExport &modelExport,
+                               const Document &document,
+                               const QStringList &curvesIncluded,
+                               const Transformation &transformation,
+                               QTextStream &str) const;
 };
 
 #endif // EXPORT_TO_FILE_H
