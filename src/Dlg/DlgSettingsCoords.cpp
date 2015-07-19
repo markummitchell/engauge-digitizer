@@ -555,7 +555,9 @@ void DlgSettingsCoords::slotPolarOriginRadius(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
 
-  m_modelCoordsAfter->setOriginRadius(m_editOriginRadius->text ().toDouble ());
+  QString numberText = m_editOriginRadius->text();
+
+  m_modelCoordsAfter->setOriginRadius(numberText.toDouble ());
   updateControls();
   updatePreview();
 }
@@ -608,28 +610,41 @@ void DlgSettingsCoords::slotYRadiusLog()
 
 void DlgSettingsCoords::updateControls ()
 {
+  // LOG4CPP_INFO_S is below
+
   QString textOriginRadius = m_editOriginRadius->text();
-  int posOriginRadius;
+  int posOriginRadius = 0;
 
-  m_validatorOriginRadius->prepareForValidate (m_yRadiusLinear->isChecked () ?
-                                                 COORD_SCALE_LINEAR :
-                                                 COORD_SCALE_LOG);
-  bool goodOriginRadius = (m_validatorOriginRadius->validate (textOriginRadius, posOriginRadius) == QValidator::Acceptable);
+  m_validatorOriginRadius->prepareForValidate (COORD_SCALE_LINEAR); // Call this just before calling validate (which has fixed signature)
+  bool goodOriginRadiusLinear = (m_validatorOriginRadius->validate (textOriginRadius,
+                                                                    posOriginRadius) == QValidator::Acceptable);
+  m_validatorOriginRadius->prepareForValidate (COORD_SCALE_LOG); // Call this just before calling validate (which has fixed signature)
+  bool goodOriginRadiusLog = (m_validatorOriginRadius->validate (textOriginRadius,
+                                                                 posOriginRadius) == QValidator::Acceptable);
 
-  enableOk (goodOriginRadius);
+  bool goodOriginRadiusCurrent = (m_yRadiusLinear->isChecked () ?
+                                   goodOriginRadiusLinear :
+                                   goodOriginRadiusLog);
+  bool goodOriginRadiusOther = (m_yRadiusLinear->isChecked () ?
+                                  goodOriginRadiusLog :
+                                  goodOriginRadiusLinear);
 
-  m_btnPolar->setEnabled (!m_xThetaLog->isChecked ());
-  m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
+  enableOk (goodOriginRadiusCurrent);
+
+  m_boxCoordsType->setEnabled (!m_xThetaLog->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
+
+  m_boxXTheta->setEnabled (!m_btnPolar->isChecked ());
+  m_boxYRadius->setEnabled (goodOriginRadiusOther);
 
   if (m_editOriginRadius->isEnabled ()) {
 
     // Using red text, make it more obvious why ok button is disabled when polar coordinates/log scale/origin radius are in conflict
     QPalette palette;
     palette.setColor (QPalette::Text,
-                      goodOriginRadius ? Qt::black : Qt::red);
-   m_editOriginRadius->setPalette (palette);
+                      goodOriginRadiusCurrent ? Qt::black : Qt::red);
+    m_editOriginRadius->setPalette (palette);
   }
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
@@ -646,6 +661,12 @@ void DlgSettingsCoords::updateControls ()
   if (m_boxYRadius->title () != captionYRadius) {
     m_boxYRadius->setTitle (captionYRadius);
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::updateControls"
+                              << " goodOriginRadiusCurrent=" << (goodOriginRadiusCurrent ? "true" : "false")
+                              << " goodOriginRadiusOther=" << (goodOriginRadiusOther ? "true" : "false")
+                              << " originRadius=" << posOriginRadius
+                              << " btnPolarChecked=" << (m_btnPolar->isChecked() ? "true" : "false");
 }
 
 void DlgSettingsCoords::updatePreview()

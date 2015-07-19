@@ -15,7 +15,7 @@ QValidator::State DlgValidatorLog::validate (QString &input,
 {
   // First do standard check
   QValidator::State state = QDoubleValidator::validate (input,
-                                                 pos);
+                                                        pos);
   if (state == QValidator::Acceptable) {
 
     if (m_coordScale == COORD_SCALE_LOG) {
