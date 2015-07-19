@@ -12,6 +12,7 @@ HEADERS  += \
     Callback/CallbackBoundingRects.h \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
+    Callback/CallbackGatherXThetaValues.h \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
@@ -168,6 +169,7 @@ SOURCES += \
     Callback/CallbackBoundingRects.cpp \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
+    Callback/CallbackGatherXThetaValues.cpp \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \

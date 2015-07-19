@@ -18,6 +18,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include "Transformation.h"
 
 const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
@@ -703,6 +704,7 @@ void DlgSettingsExport::updatePreview()
   ExportToFile exportStrategy;
   exportStrategy.exportToFile (*m_modelExportAfter,
                                cmdMediator().document(),
+                               mainWindow().transformation(),
                                str);
 
   m_editPreview->setText (exportedText);

@@ -1731,6 +1731,7 @@ void MainWindow::slotFileExport ()
       ExportToFile exportStrategy;
       exportStrategy.exportToFile (cmdMediator().document().modelExport(),
                                    cmdMediator().document(),
+                                   transformation (),
                                    str);
     } else {
 
