@@ -3,14 +3,12 @@
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelExport.h"
+#include "ExportValues.h"
 #include <QHash>
-#include <QList>
 #include <QMap>
 #include "Transformation.h"
 
 class Point;
-
-typedef QList<double> Values;
 
 // Save values into container that preserves order by key (QMap)
 typedef QMap<double, bool> ValuesContainer;
@@ -31,7 +29,7 @@ public:
                                  const Point &point);
 
   /// Resulting values
-  Values xThetaValues () const;
+  ExportValues xThetaValues () const;
 
 private:
   CallbackGatherXThetaValues();

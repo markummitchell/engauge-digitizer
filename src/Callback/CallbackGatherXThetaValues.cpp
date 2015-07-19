@@ -37,7 +37,7 @@ CallbackSearchReturn CallbackGatherXThetaValues::callback (const QString &curveN
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-Values CallbackGatherXThetaValues::xThetaValues () const
+ExportValues CallbackGatherXThetaValues::xThetaValues () const
 {
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 

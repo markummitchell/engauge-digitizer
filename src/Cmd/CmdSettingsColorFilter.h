@@ -6,7 +6,7 @@
 
 class QXmlStreamReader;
 
-/// Command for DlgSettingsFilter
+/// Command for DlgSettingsColorFilter
 class CmdSettingsColorFilter : public CmdAbstract
 {
 public:

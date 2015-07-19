@@ -106,9 +106,13 @@ HEADERS  += \
     Export/ExportPointsSelectionFunctions.h \
     Export/ExportPointsSelectionRelations.h \
     Export/ExportDelimiter.h \
+    Export/ExportFileAbstractBase.h \
+    Export/ExportFileFunctions.h \
+    Export/ExportFileRelations.h \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
+    Export/ExportValue.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -255,6 +259,9 @@ SOURCES += \
     Document/DocumentSerialize.cpp \
     util/EnumsToQt.cpp \
     Export/ExportDelimiter.cpp \
+    Export/ExportFileAbstractBase.cpp \
+    Export/ExportFileFunctions.cpp \
+    Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
     Export/ExportLayoutFunctions.cpp \
     Export/ExportPointsSelectionFunctions.cpp \
