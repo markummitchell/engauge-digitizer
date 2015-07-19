@@ -633,19 +633,14 @@ void DlgSettingsCoords::updateControls ()
 
   m_boxCoordsType->setEnabled (!m_xThetaLog->isChecked ());
   m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
-  m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 
   m_boxXTheta->setEnabled (!m_btnPolar->isChecked ());
-  m_boxYRadius->setEnabled (goodOriginRadiusOther);
-
-  if (m_editOriginRadius->isEnabled ()) {
-
-    // Using red text, make it more obvious why ok button is disabled when polar coordinates/log scale/origin radius are in conflict
-    QPalette palette;
-    palette.setColor (QPalette::Text,
-                      goodOriginRadiusCurrent ? Qt::black : Qt::red);
-    m_editOriginRadius->setPalette (palette);
+  if (m_btnCartesian->isChecked()) {
+    m_boxYRadius->setEnabled (true);
+  } else {
+    m_boxYRadius->setEnabled (goodOriginRadiusOther);
   }
+  m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
                              QString ("X") :
