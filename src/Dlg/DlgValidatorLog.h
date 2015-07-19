@@ -4,15 +4,14 @@
 #include "CoordScale.h"
 #include <QDoubleValidator>
 
-/// Validator for log scale value. Zero and negative values are invalid
+/// Validator for linear or log scale. Once created for linear or log scale, this sticks with that scale and must
+/// be replaced if the scale type is changed
 class DlgValidatorLog : public QDoubleValidator
 {
 public:
   /// Single constructor
-  DlgValidatorLog(QObject *parent = 0);
-
-  /// Remember if scale is log or linear. This method is needed since CoordScale argument cannot be added to virtual validate method
-  void prepareForValidate (CoordScale coordScale);
+  DlgValidatorLog(CoordScale coordScale,
+                  QObject *parent = 0);
 
   /// Apply the standard validation with 0 as the exclusive minimum. Call setCoordScale just before calling this method
   virtual QValidator::State validate (QString &input,

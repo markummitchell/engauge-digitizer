@@ -1,13 +1,10 @@
 #include "DlgValidatorLog.h"
 
-DlgValidatorLog::DlgValidatorLog(QObject *parent) :
-  QDoubleValidator(parent)
+DlgValidatorLog::DlgValidatorLog(CoordScale coordScale,
+                                 QObject *parent) :
+  QDoubleValidator(parent),
+  m_coordScale (coordScale)
 {
-}
-
-void DlgValidatorLog::prepareForValidate (CoordScale coordScale)
-{
-  m_coordScale = coordScale;
 }
 
 QValidator::State DlgValidatorLog::validate (QString &input,

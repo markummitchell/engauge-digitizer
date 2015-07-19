@@ -66,14 +66,14 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = false, isConstraintY = false;
   if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    m_validatorGraphX = new DlgValidatorLog ();
+    m_validatorGraphX = new DlgValidatorLog (COORD_SCALE_LOG);
     isConstraintX = true;
   } else {
     m_validatorGraphX = new QDoubleValidator ();
   }
 
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    m_validatorGraphY = new DlgValidatorLog ();
+    m_validatorGraphY = new DlgValidatorLog (COORD_SCALE_LOG);
     isConstraintY = true;
   } else {
     m_validatorGraphY = new QDoubleValidator ();
