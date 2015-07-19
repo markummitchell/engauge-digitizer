@@ -366,6 +366,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
 
   loadForCurveName (mainWindow().selectedGraphCurve());
 
+  m_isDirty = false;
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
@@ -428,6 +429,8 @@ void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotCurveName";
 
+  // Dirty flag is not set when simply changing to new curve
+
   // Do nothing if combobox is getting cleared, or load has not been called yet
   if (!curveName.isEmpty () && (m_modelCurveStylesAfter != 0)) {
 
@@ -439,6 +442,8 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor color=" << lineColor.toLatin1().data();
 
+  m_isDirty = true;
+
   m_modelCurveStylesAfter->setLineColor(m_cmbCurveName->currentText(),
                                         (ColorPalette) m_cmbLineColor->currentData().toInt());
   updateControls();
@@ -448,6 +453,8 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
 void DlgSettingsCurveProperties::slotLineWidth(int width)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth width=" << width;
+
+  m_isDirty = true;
 
   m_modelCurveStylesAfter->setLineWidth(m_cmbCurveName->currentText(),
                                         width);
@@ -459,6 +466,8 @@ void DlgSettingsCurveProperties::slotLineType(const QString &lineType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType lineType=" << lineType.toLatin1().data();
 
+  m_isDirty = true;
+
   m_modelCurveStylesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
                                             (CurveConnectAs) m_cmbLineType->currentData().toInt ());
   updateControls();
@@ -468,6 +477,8 @@ void DlgSettingsCurveProperties::slotLineType(const QString &lineType)
 void DlgSettingsCurveProperties::slotPointColor(const QString &pointColor)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor pointColor=" << pointColor.toLatin1().data();
+
+  m_isDirty = true;
 
   m_modelCurveStylesAfter->setPointColor(m_cmbCurveName->currentText(),
                                          (ColorPalette) m_cmbPointColor->currentData().toInt ());
@@ -479,6 +490,8 @@ void DlgSettingsCurveProperties::slotPointLineWidth(int lineWidth)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth lineWidth=" << lineWidth;
 
+  m_isDirty = true;
+
   m_modelCurveStylesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
                                              lineWidth);
   updateControls();
@@ -489,6 +502,8 @@ void DlgSettingsCurveProperties::slotPointRadius(int radius)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius radius=" << radius;
 
+  m_isDirty = true;
+
   m_modelCurveStylesAfter->setPointRadius(m_cmbCurveName->currentText(),
                                           radius);
   updateControls();
@@ -498,6 +513,8 @@ void DlgSettingsCurveProperties::slotPointRadius(int radius)
 void DlgSettingsCurveProperties::slotPointShape(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
+
+  m_isDirty = true;
 
   m_modelCurveStylesAfter->setPointShape(m_cmbCurveName->currentText(),
                                          (PointShape) m_cmbPointShape->currentData().toInt ());
@@ -511,7 +528,7 @@ void DlgSettingsCurveProperties::updateControls()
                      !m_spinPointLineWidth->text().isEmpty () &&
                      !m_spinLineWidth->text().isEmpty ();
   m_cmbCurveName->setEnabled (isGoodState); // User needs to fix state before switching curves
-  enableOk (isGoodState);
+  enableOk (isGoodState && m_isDirty);
 }
 
 void DlgSettingsCurveProperties::updatePreview()

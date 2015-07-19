@@ -72,6 +72,8 @@ private:
 
   CurveStyles *m_modelCurveStylesBefore;
   CurveStyles *m_modelCurveStylesAfter;
+
+  bool m_isDirty;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H
