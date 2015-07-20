@@ -38,7 +38,9 @@ public:
                                 QVector<QVector<QString*> > &yRadiusValues) const;
 
   /// Output 2D y/radius array along with x/theta vector in first column
-  void outputXThetaYRadiusValues (const ExportValues &xThetaValuesMerged,
+  void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+                                  const QStringList &curvesIncluded,
+                                  const ExportValues &xThetaValuesMerged,
                                   QVector<QVector<QString*> > &yRadiusValues,
                                   const QString &delimiter,
                                   QTextStream &str) const;

@@ -10,11 +10,21 @@ CallbackGatherXThetaValues::CallbackGatherXThetaValues(const DocumentModelExport
   m_modelExport (modelExport),
   m_transformation (transformation)
 {
+  bool firstCurveForGatherXTheta = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
+
+  // Included just the first curve, or all curves depending on DocumentModelExport
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
     QString curveIncluded = *itr;
     m_curveNamesIncluded [curveIncluded] = true;
+
+    if (firstCurveForGatherXTheta) {
+
+      // We only want points belonging to the first included curve so exit this loop
+      break;
+
+    }
   }
 }
 

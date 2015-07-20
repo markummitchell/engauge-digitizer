@@ -38,11 +38,6 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &
           curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs2) {
 
         curvesToInclude.push_back (curvesGraphName);
-
-        if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE) {
-          // Quick exit since once curve is all we want
-          break;
-        }
       }
     }
   }
@@ -79,12 +74,23 @@ void ExportFileAbstractBase::initializeYRadiusValues (const QStringList &curvesI
   }
 }
 
-void ExportFileAbstractBase::outputXThetaYRadiusValues (const ExportValues &xThetaValuesMerged,
+void ExportFileAbstractBase::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+                                                        const QStringList &curvesIncluded,
+                                                        const ExportValues &xThetaValuesMerged,
                                                         QVector<QVector<QString*> > &yRadiusValues,
                                                         const QString &delimiter,
                                                         QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
+
+  // Header
+  str << modelExport.xLabel();
+  QStringList::const_iterator itrHeader;
+  for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
+    QString curveName = *itrHeader;
+    str << delimiter << curveName;
+  }
+  str << "\n";
 
   for (int row = 0; row < xThetaValuesMerged.count(); row++) {
 

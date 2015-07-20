@@ -2,7 +2,8 @@
 #include "CmdSettingsExport.h"
 #include "DocumentModelExport.h"
 #include "DlgSettingsExport.h"
-#include "ExportToFile.h"
+#include "ExportFileFunctions.h"
+#include "ExportFileRelations.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDoubleValidator>
@@ -23,6 +24,9 @@
 const int MIN_INDENT_COLUMN_WIDTH = 20;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
+
+const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
+const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Export",
@@ -300,24 +304,28 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createTabWidget";
 
-  QTabWidget *tabWidget = new QTabWidget;
-  layout->addWidget (tabWidget, row++, 0, 1, 3);
+  m_tabWidget = new QTabWidget;
+  // This gets connected below, after the tabs have been added
+  layout->addWidget (m_tabWidget, row++, 0, 1, 3);
 
   QWidget *widgetFunctions = new QWidget;
-  int indexFunctions = tabWidget->addTab (widgetFunctions, tr ("Functions"));
-  QWidget *tabFunctions = tabWidget->widget (indexFunctions);
+  int indexFunctions = m_tabWidget->addTab (widgetFunctions, tr ("Functions"));
+  QWidget *tabFunctions = m_tabWidget->widget (indexFunctions);
   tabFunctions->setWhatsThis (tr ("Functions Tab\n\n"
                                   "Controls for specifying the format of functions during export"));
   layoutFunctions = new QHBoxLayout;
   widgetFunctions->setLayout (layoutFunctions);
 
   QWidget *widgetRelations = new QWidget;
-  int indexRelations = tabWidget->addTab (widgetRelations, tr ("Relations"));
-  QWidget *tabRelations = tabWidget->widget (indexRelations);
+  int indexRelations = m_tabWidget->addTab (widgetRelations, tr ("Relations"));
+  QWidget *tabRelations = m_tabWidget->widget (indexRelations);
   tabRelations->setWhatsThis (tr ("Relations Tab\n\n"
                                   "Controls for specifying the format of relations during export"));
   layoutRelations = new QHBoxLayout;
   widgetRelations->setLayout (layoutRelations);
+
+  // Now that the tabs have been added we can connect this signal
+  connect (m_tabWidget, SIGNAL (currentChanged (int)), this, SLOT (slotTabChanged (int)));
 }
 
 void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
@@ -663,6 +671,13 @@ void DlgSettingsExport::slotRelationsPointsRaw()
   updatePreview();
 }
 
+void DlgSettingsExport::slotTabChanged (int)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotTabChanged";
+
+  updatePreview();
+}
+
 void DlgSettingsExport::slotXLabel(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotXLabel";
@@ -701,11 +716,23 @@ void DlgSettingsExport::updatePreview()
   QString exportedText;
   QTextStream str (&exportedText);
 
-  ExportToFile exportStrategy;
-  exportStrategy.exportToFile (*m_modelExportAfter,
-                               cmdMediator().document(),
-                               mainWindow().transformation(),
-                               str);
+  if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
+
+    ExportFileFunctions exportStrategy;
+    exportStrategy.exportToFile (*m_modelExportAfter,
+                                 cmdMediator().document(),
+                                 mainWindow().transformation(),
+                                 str);
+
+  } else {
+
+    ExportFileRelations exportStrategy;
+    exportStrategy.exportToFile (*m_modelExportAfter,
+                                 cmdMediator().document(),
+                                 mainWindow().transformation(),
+                                 str);
+
+  }
 
   m_editPreview->setText (exportedText);
 }

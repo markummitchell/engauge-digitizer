@@ -12,6 +12,7 @@ class QLabel;
 class QListWidget;
 class QPushButton;
 class QRadioButton;
+class QTabWidget;
 class QTextEdit;
 class QVBoxLayout;
 
@@ -48,6 +49,7 @@ private slots:
   void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval(const QString &);
   void slotRelationsPointsRaw();
+  void slotTabChanged (int);
   void slotXLabel (const QString &);
 
 protected:
@@ -69,6 +71,8 @@ private:
   void createXLabel (QHBoxLayout *layoutMisc);
   void updateControls();
   void updatePreview();
+
+  QTabWidget *m_tabWidget;
 
   QListWidget *m_listIncluded;
   QListWidget *m_listExcluded;

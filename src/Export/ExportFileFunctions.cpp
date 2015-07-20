@@ -28,15 +28,6 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportAllPerLineXThetaValuesMerged";
 
-  // Header
-  str << modelExport.xLabel();
-  QStringList::const_iterator itrHeader;
-  for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
-    QString curveName = *itrHeader;
-    str << delimiter << curveName;
-  }
-  str << "\n";
-
   int curveCount = curvesIncluded.count();
   int xThetaCount = xThetaValues.count();
   QVector<QVector<QString*> > yRadiusValues (curveCount, QVector<QString*> (xThetaCount));
@@ -50,7 +41,9 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                      xThetaValues,
                      yRadiusValues);
 
-  outputXThetaYRadiusValues (xThetaValues,
+  outputXThetaYRadiusValues (modelExport,
+                             curvesIncluded,
+                             xThetaValues,
                              yRadiusValues,
                              delimiter,
                              str);
@@ -100,7 +93,9 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                        xThetaValues,
                        yRadiusValues);
 
-    outputXThetaYRadiusValues (xThetaValues,
+    outputXThetaYRadiusValues (modelExport,
+                               curvesIncluded,
+                               xThetaValues,
                                yRadiusValues,
                                delimiter,
                                str);
