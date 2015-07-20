@@ -1,12 +1,12 @@
-#include "CallbackGatherXThetaValues.h"
+#include "CallbackGatherXThetaValuesFunctions.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsSelectionFunctions.h"
 #include "Logger.h"
 #include "Point.h"
 
-CallbackGatherXThetaValues::CallbackGatherXThetaValues(const DocumentModelExport &modelExport,
-                                                       const QStringList &curvesIncluded,
-                                                       const Transformation &transformation) :
+CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const DocumentModelExport &modelExport,
+                                                                         const QStringList &curvesIncluded,
+                                                                         const Transformation &transformation) :
   m_modelExport (modelExport),
   m_transformation (transformation)
 {
@@ -28,10 +28,10 @@ CallbackGatherXThetaValues::CallbackGatherXThetaValues(const DocumentModelExport
   }
 }
 
-CallbackSearchReturn CallbackGatherXThetaValues::callback (const QString &curveName,
-                                                           const Point &point)
+CallbackSearchReturn CallbackGatherXThetaValuesFunctions::callback (const QString &curveName,
+                                                                    const Point &point)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValues::callback"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::callback"
                                << " curveName=" << curveName.toLatin1().data()
                                << " point=" << point.identifier().toLatin1().data();
 
@@ -47,8 +47,10 @@ CallbackSearchReturn CallbackGatherXThetaValues::callback (const QString &curveN
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-ExportValues CallbackGatherXThetaValues::xThetaValues () const
+ExportValues CallbackGatherXThetaValuesFunctions::xThetaValues () const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::xThetaValues";
+
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 
     // Convert the gathered values into a periodic sequence

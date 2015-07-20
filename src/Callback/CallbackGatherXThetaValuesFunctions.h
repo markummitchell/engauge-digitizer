@@ -1,5 +1,5 @@
-#ifndef CALLBACK_GATHER_X_THETA_VALUES_H
-#define CALLBACK_GATHER_X_THETA_VALUES_H
+#ifndef CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
+#define CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelExport.h"
@@ -15,24 +15,25 @@ typedef QMap<double, bool> ValuesContainer;
 
 typedef QHash<QString, bool> CurveNamesIncluded;
 
-/// Callback for collecting X/Theta independent variables in preparation for exporting.
-class CallbackGatherXThetaValues
+/// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting.
+class CallbackGatherXThetaValuesFunctions
 {
 public:
   /// Single constructor.
-  CallbackGatherXThetaValues(const DocumentModelExport &modelExport,
-                             const QStringList &curveNamesIncluded,
-                             const Transformation &transformation);
+  CallbackGatherXThetaValuesFunctions(const DocumentModelExport &modelExport,
+                                      const QStringList &curveNamesIncluded,
+                                      const Transformation &transformation);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString &curveName,
                                  const Point &point);
 
-  /// Resulting values
+  /// Resulting values for functions.
+  /// Not applicable for relations
   ExportValues xThetaValues () const;
 
 private:
-  CallbackGatherXThetaValues();
+  CallbackGatherXThetaValuesFunctions();
 
   const DocumentModelExport m_modelExport;
   const Transformation m_transformation;
@@ -42,4 +43,4 @@ private:
   ValuesContainer m_values;
 };
 
-#endif // CALLBACK_GATHER_X_THETA_VALUES_H
+#endif // CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H

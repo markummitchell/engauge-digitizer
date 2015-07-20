@@ -1,4 +1,4 @@
-#include "CallbackGatherXThetaValues.h"
+#include "CallbackGatherXThetaValuesRelations.h"
 #include "CurveConnectAs.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
@@ -22,19 +22,6 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                               QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
-
-  // Header
-  str << modelExport.xLabel();
-  QStringList::const_iterator itrHeader;
-  for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
-    QString curveName = *itrHeader;
-    str << delimiter << curveName;
-  }
-  str << "\n";
-
-//  QVector<QVector<QString> > *vec = loadValues (document,
-//                                                curvesInclude,
-//                                                xThetaValuesMerged);
 
   ExportValues::const_iterator itr;
   for (itr = xThetaValuesMerged.begin(); itr != xThetaValuesMerged.end(); itr++) {
@@ -104,31 +91,31 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
   const QString delimiter = exportDelimiterToText (modelExport.delimiter());
 
   // Get x/theta values to be used
-  CallbackGatherXThetaValues ftor (modelExport,
-                                   curvesIncluded,
-                                   transformation);
+  CallbackGatherXThetaValuesRelations ftor (modelExport,
+                                            curvesIncluded,
+                                            transformation);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackGatherXThetaValues::callback);
+                                                                                                     &CallbackGatherXThetaValuesRelations::callback);
   document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
-  ExportValues xThetaValuesMerged = ftor.xThetaValues();
+//  ExportValues xThetaValuesMerged = ftor.xThetaValues ();
 
-  // Export in one of two layouts
-  if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
-    exportAllPerLineXThetaValuesMerged (modelExport,
-                                        document,
-                                        curvesIncluded,
-                                        xThetaValuesMerged,
-                                        delimiter,
-                                        transformation,
-                                        str);
-  } else {
-    exportOnePerLineXThetaValuesMerged (modelExport,
-                                        document,
-                                        curvesIncluded,
-                                        xThetaValuesMerged,
-                                        delimiter,
-                                        transformation,
-                                        str);
-  }
+//  // Export in one of two layouts
+//  if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
+//    exportAllPerLineXThetaValuesMerged (modelExport,
+//                                        document,
+//                                        curvesIncluded,
+//                                        xThetaValuesMerged,
+//                                        delimiter,
+//                                        transformation,
+//                                        str);
+//  } else {
+//    exportOnePerLineXThetaValuesMerged (modelExport,
+//                                        document,
+//                                        curvesIncluded,
+//                                        xThetaValuesMerged,
+//                                        delimiter,
+//                                        transformation,
+//                                        str);
+//  }
 }

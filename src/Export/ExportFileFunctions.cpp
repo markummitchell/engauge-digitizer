@@ -1,4 +1,4 @@
-#include "CallbackGatherXThetaValues.h"
+#include "CallbackGatherXThetaValuesFunctions.h"
 #include "CurveConnectAs.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
@@ -16,6 +16,19 @@ using namespace std;
 
 ExportFileFunctions::ExportFileFunctions()
 {
+}
+
+void ExportFileFunctions::destroyYRadiusValues (QVector<QVector<QString*> > &yRadiusValues) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::destroyYRadiusValues";
+
+  int colCount = yRadiusValues.count();
+  int rowCount = yRadiusValues [0].count();
+  for (int row = 0; row < rowCount; row++) {
+    for (int col = 0; col < colCount; col++) {
+      delete yRadiusValues [col] [row];
+    }
+  }
 }
 
 void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
@@ -121,14 +134,14 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
   const QString delimiter = exportDelimiterToText (modelExport.delimiter());
 
   // Get x/theta values to be used
-  CallbackGatherXThetaValues ftor (modelExport,
-                                   curvesIncluded,
-                                   transformation);
+  CallbackGatherXThetaValuesFunctions ftor (modelExport,
+                                            curvesIncluded,
+                                            transformation);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackGatherXThetaValues::callback);
+                                                                                                     &CallbackGatherXThetaValuesFunctions::callback);
   document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
-  ExportValues xThetaValuesMerged = ftor.xThetaValues();
+  ExportValues xThetaValuesMerged = ftor.xThetaValues ();
 
   // Export in one of two layouts
   if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
@@ -147,6 +160,22 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
                                         delimiter,
                                         transformation,
                                         str);
+  }
+}
+
+void ExportFileFunctions::initializeYRadiusValues (const QStringList &curvesIncluded,
+                                                   const ExportValues &xThetaValuesMerged,
+                                                   QVector<QVector<QString*> > &yRadiusValues) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::initializeYRadiusValues";
+
+  // Initialize every entry with empty string
+  int curveCount = curvesIncluded.count();
+  int xThetaCount = xThetaValuesMerged.count();
+  for (int row = 0; row < xThetaCount; row++) {
+    for (int col = 0; col < curveCount; col++) {
+      yRadiusValues [col] [row] = new QString;
+    }
   }
 }
 
@@ -350,5 +379,38 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
 
     // Save value for this row
     *(yRadiusValues [rowClosest]) = QString::number (posGraph.y());
+  }
+}
+
+void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+                                                     const QStringList &curvesIncluded,
+                                                     const ExportValues &xThetaValuesMerged,
+                                                     QVector<QVector<QString*> > &yRadiusValues,
+                                                     const QString &delimiter,
+                                                     QTextStream &str) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
+
+  // Header
+  str << modelExport.xLabel();
+  QStringList::const_iterator itrHeader;
+  for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
+    QString curveName = *itrHeader;
+    str << delimiter << curveName;
+  }
+  str << "\n";
+
+  for (int row = 0; row < xThetaValuesMerged.count(); row++) {
+
+    double xTheta = xThetaValuesMerged.at (row);
+
+    str << xTheta;
+
+    for (int col = 0; col < yRadiusValues.count(); col++) {
+
+      str << delimiter << *(yRadiusValues [col] [row]);
+    }
+
+    str << "\n";
   }
 }
