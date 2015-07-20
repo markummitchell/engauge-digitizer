@@ -101,7 +101,7 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
                                                 CONNECT_AS_RELATION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToString (modelExport.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExport.delimiter());
 
   // Get x/theta values to be used
   CallbackGatherXThetaValues ftor (modelExport,

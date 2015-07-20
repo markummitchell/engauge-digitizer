@@ -50,41 +50,41 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &
   return curvesToInclude;
 }
 
-void ExportFileAbstractBase::destroyYPhiValues (QVector<QVector<QString*> > &yPhiValues) const
+void ExportFileAbstractBase::destroyYRadiusValues (QVector<QVector<QString*> > &yRadiusValues) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::destroyYPhiValues";
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::destroyYRadiusValues";
 
-  int rowCount = yPhiValues.count();
-  int colCount = yPhiValues [0].count();
+  int colCount = yRadiusValues.count();
+  int rowCount = yRadiusValues [0].count();
   for (int row = 0; row < rowCount; row++) {
     for (int col = 0; col < colCount; col++) {
-      delete yPhiValues [row] [col];
+      delete yRadiusValues [col] [row];
     }
   }
 }
 
-void ExportFileAbstractBase::initializeYPhiValues (const QStringList &curvesIncluded,
-                                                   const ExportValues &xThetaValuesMerged,
-                                                   QVector<QVector<QString*> > &yPhiValues) const
+void ExportFileAbstractBase::initializeYRadiusValues (const QStringList &curvesIncluded,
+                                                      const ExportValues &xThetaValuesMerged,
+                                                      QVector<QVector<QString*> > &yRadiusValues) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::initializeYPhiValues";
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::initializeYRadiusValues";
 
   // Initialize every entry with empty string
   int curveCount = curvesIncluded.count();
   int xThetaCount = xThetaValuesMerged.count();
-  for (int ix = 0; ix < xThetaCount; ix++) {
-    for (int ic = 0; ic < curveCount; ic++) {
-      yPhiValues [ic] [ix] = new QString;
+  for (int row = 0; row < xThetaCount; row++) {
+    for (int col = 0; col < curveCount; col++) {
+      yRadiusValues [col] [row] = new QString;
     }
   }
 }
 
-void ExportFileAbstractBase::outputXThetaYPhiValues (const ExportValues &xThetaValuesMerged,
-                                                     QVector<QVector<QString*> > &yPhiValues,
-                                                     const QString &delimiter,
-                                                     QTextStream &str) const
+void ExportFileAbstractBase::outputXThetaYRadiusValues (const ExportValues &xThetaValuesMerged,
+                                                        QVector<QVector<QString*> > &yRadiusValues,
+                                                        const QString &delimiter,
+                                                        QTextStream &str) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYPhiValues";
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
 
   for (int row = 0; row < xThetaValuesMerged.count(); row++) {
 
@@ -92,9 +92,9 @@ void ExportFileAbstractBase::outputXThetaYPhiValues (const ExportValues &xThetaV
 
     str << xTheta;
 
-    for (int col = 0; col < yPhiValues.count(); col++) {
+    for (int col = 0; col < yRadiusValues.count(); col++) {
 
-      str << delimiter << *(yPhiValues [row] [col]);
+      str << delimiter << *(yRadiusValues [col] [row]);
     }
 
     str << "\n";

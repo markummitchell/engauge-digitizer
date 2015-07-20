@@ -101,6 +101,29 @@ void Spline::computeControlPointsForIntervals ()
   }
 }
 
+SplinePair Spline::findSplinePairForFunctionX (double x,
+                                               int numIterations) const
+{
+  SplinePair spCurrent;
+
+  double tLow = m_t[0];
+  double tHigh = m_t[m_xy.size() - 1];
+
+  double tCurrent = (tHigh + tLow) / 2.0;
+  double tDelta = (tHigh - tLow) / 4.0;
+  for (int iteration = 0; iteration < numIterations; iteration++) {
+    spCurrent = interpolateCoeff (tCurrent);
+    if (spCurrent.x() > x) {
+      tCurrent -= tDelta;
+    } else {
+      tCurrent += tDelta;
+    }
+    tDelta /= 2.0;
+  }
+
+  return spCurrent;
+}
+
 SplinePair Spline::interpolateCoeff (double t) const
 {
   ENGAUGE_ASSERT (m_elements.size() != 0);

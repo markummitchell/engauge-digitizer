@@ -22,6 +22,11 @@ class Spline
          const std::vector<SplinePair> &xy);
   virtual ~Spline();
 
+  /// Use bisection algorithm to iteratively find the SplinePair interpolated to best match the specified x value.
+  /// This assumes the curve is a function since otherwise there is the potential for multiple solutions
+  SplinePair findSplinePairForFunctionX (double x,
+                                         int numIterations) const;
+
   /// Return interpolated y for specified x. The appropriate interval is selected from the entire
   /// set of piecewise-defined intervals, then the corresponding a,b,c,d coefficients are applied
   SplinePair interpolateCoeff (double t) const;

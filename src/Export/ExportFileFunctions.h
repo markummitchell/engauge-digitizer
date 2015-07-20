@@ -29,22 +29,38 @@ private:
   void exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
-                                           const ExportValues &xThetaValuesMerged,
+                                           const ExportValues &xThetaValues,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
   void exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
-                                           const ExportValues &xThetaValuesMerged,
+                                           const ExportValues &xThetaValues,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
-  void loadYPhiValues (const Document &document,
-                       const QStringList &curvesIncluded,
-                       const Transformation &transformation,
-                       const ExportValues &xThetaValuesMerged,
-                       QVector<QVector<QString*> > &yPhiValues) const;
+  double linearlyInterpolate (const Points &points,
+                              double xThetaValue,
+                              const Transformation &transformation) const;
+  void loadYRadiusValues (const DocumentModelExport &modelExport,
+                          const Document &document,
+                          const QStringList &curvesIncluded,
+                          const Transformation &transformation,
+                          const ExportValues &xThetaValues,
+                          QVector<QVector<QString*> > &yRadiusValues) const;
+  void loadYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+                                                    const ExportValues &xThetaValues,
+                                                    const Transformation &transformation,
+                                                    QVector<QString*> &yRadiusValues) const;
+  void loadYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+                                                      const ExportValues &xThetaValues,
+                                                      const Transformation &transformation,
+                                                      QVector<QString*> &yRadiusValues) const;
+  void loadYRadiusValuesForCurveRaw (const Points &points,
+                                     const ExportValues &xThetaValues,
+                                     const Transformation &transformation,
+                                     QVector<QString*> &yRadiusValues) const;
 };
 
 #endif // EXPORT_FILE_FUNCTIONS_H
