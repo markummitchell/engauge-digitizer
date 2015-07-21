@@ -122,23 +122,27 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
 
   ExportValuesXOrY xThetaValuesMerged = ftor.xThetaValues ();
 
-  // Export in one of two layouts
-  if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
-    exportAllPerLineXThetaValuesMerged (modelExport,
-                                        document,
-                                        curvesIncluded,
-                                        xThetaValuesMerged,
-                                        delimiter,
-                                        transformation,
-                                        str);
-  } else {
-    exportOnePerLineXThetaValuesMerged (modelExport,
-                                        document,
-                                        curvesIncluded,
-                                        xThetaValuesMerged,
-                                        delimiter,
-                                        transformation,
-                                        str);
+  // Skip if every curve was a relation
+  if (xThetaValuesMerged.count() > 0) {
+
+    // Export in one of two layouts
+    if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
+      exportAllPerLineXThetaValuesMerged (modelExport,
+                                          document,
+                                          curvesIncluded,
+                                          xThetaValuesMerged,
+                                          delimiter,
+                                          transformation,
+                                          str);
+    } else {
+      exportOnePerLineXThetaValuesMerged (modelExport,
+                                          document,
+                                          curvesIncluded,
+                                          xThetaValuesMerged,
+                                          delimiter,
+                                          transformation,
+                                          str);
+    }
   }
 }
 
@@ -371,13 +375,18 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
 
   // Header
-  str << modelExport.xLabel();
-  QStringList::const_iterator itrHeader;
-  for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
-    QString curveName = *itrHeader;
-    str << delimiter << curveName;
+  if (modelExport.header() != EXPORT_HEADER_NONE) {
+    if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
+      str << gnuplotComment();
+    }
+    str << modelExport.xLabel();
+    QStringList::const_iterator itrHeader;
+    for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
+      QString curveName = *itrHeader;
+      str << delimiter << curveName;
+    }
+    str << "\n";
   }
-  str << "\n";
 
   for (int row = 0; row < xThetaValuesMerged.count(); row++) {
 

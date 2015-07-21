@@ -33,22 +33,26 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   int curveCount = curvesIncluded.count();
   int maxColumnSize = ftor.maxColumnSize(curvesIncluded);
 
-  QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
-  initializeXThetaYRadiusValues (curvesIncluded,
-                                 ftor,
-                                 xThetaYRadiusValues);
-  loadXThetaYRadiusValues (modelExport,
-                           document,
-                           curvesIncluded,
-                           ftor,
-                           transformation,
-                           xThetaYRadiusValues);
-  outputXThetaYRadiusValues (modelExport,
+  // Skip if every curve was a function
+  if (maxColumnSize > 0) {
+
+    QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
+    initializeXThetaYRadiusValues (curvesIncluded,
+                                   ftor,
+                                   xThetaYRadiusValues);
+    loadXThetaYRadiusValues (modelExport,
+                             document,
                              curvesIncluded,
-                             xThetaYRadiusValues,
-                             delimiter,
-                             str);
-  destroy2DArray (xThetaYRadiusValues);
+                             ftor,
+                             transformation,
+                             xThetaYRadiusValues);
+    outputXThetaYRadiusValues (modelExport,
+                               curvesIncluded,
+                               xThetaYRadiusValues,
+                               delimiter,
+                               str);
+    destroy2DArray (xThetaYRadiusValues);
+  }
 }
 
 void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
@@ -341,15 +345,20 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::outputXThetaYRadiusValues";
 
   // Header
-  QString delimiterForRow;
-  QStringList::const_iterator itr;
-  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
-    QString curveName = *itr;
-    str << delimiterForRow << modelExport.xLabel();
-    delimiterForRow = delimiter;
-    str << delimiterForRow << curveName;
+  if (modelExport.header() != EXPORT_HEADER_NONE) {
+    if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
+      str << gnuplotComment();
+    }
+    QString delimiterForRow;
+    QStringList::const_iterator itr;
+    for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
+      QString curveName = *itr;
+      str << delimiterForRow << modelExport.xLabel();
+      delimiterForRow = delimiter;
+      str << delimiterForRow << curveName;
+    }
+    str << "\n";
   }
-  str << "\n";
 
   for (int row = 0; row < xThetaYRadiusValues.count(); row++) {
     QString delimiterForRow;

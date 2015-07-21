@@ -52,18 +52,19 @@ int CallbackGatherXThetaValuesRelations::maxColumnSize (const QStringList &curve
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValuesRelations::maxColumnSize";
 
-  ENGAUGE_ASSERT (m_ordinals.size() > 0);
-
   int maxColumnSize = 0;
-  QStringList::const_iterator itr;
-  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
+  if (m_ordinals.size() > 0) {
 
-    QString curveIncluded = *itr;
-    ENGAUGE_ASSERT (m_ordinals.contains (curveIncluded));
-    const ExportValuesOrdinal &column = m_ordinals [curveIncluded];
+    QStringList::const_iterator itr;
+    for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
-    if (column.size() > maxColumnSize) {
-      maxColumnSize = column.size();
+      QString curveIncluded = *itr;
+      ENGAUGE_ASSERT (m_ordinals.contains (curveIncluded));
+      const ExportValuesOrdinal &column = m_ordinals [curveIncluded];
+
+      if (column.size() > maxColumnSize) {
+        maxColumnSize = column.size();
+      }
     }
   }
 

@@ -57,6 +57,11 @@ void ExportFileAbstractBase::destroy2DArray (QVector<QVector<QString*> > &array)
   }
 }
 
+QString ExportFileAbstractBase::gnuplotComment() const
+{
+  return "# ";
+}
+
 void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,
                                                   ExportHeader exportHeader,
                                                   QTextStream &str) const

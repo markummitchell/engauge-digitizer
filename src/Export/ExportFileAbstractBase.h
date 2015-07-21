@@ -30,6 +30,9 @@ public:
   /// Deallocate memory for array
   void destroy2DArray (QVector<QVector<QString*> > &array) const;
 
+  /// Gnuplot comment delimiter
+  QString gnuplotComment() const;
+
   /// Insert line(s) between successive sets of curves
   void insertLineSeparator (bool &isFirst,
                             ExportHeader exportHeader,
