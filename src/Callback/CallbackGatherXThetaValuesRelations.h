@@ -3,15 +3,17 @@
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelExport.h"
-#include "ExportValues.h"
+#include "ExportValuesOrdinal.h"
 #include <QHash>
+#include <QList>
 #include <QMap>
+#include <QString>
 #include "Transformation.h"
 
 class Point;
 
-// Save values into container that preserves order by key (QMap)
-typedef QMap<double, bool> ValuesContainer;
+// Save values into container with columns that probably have different sizes
+typedef QMap<QString, ExportValuesOrdinal> ValuesColumns;
 
 typedef QHash<QString, bool> CurveNamesIncluded;
 
@@ -28,13 +30,11 @@ public:
   CallbackSearchReturn callback (const QString &curveName,
                                  const Point &point);
 
-  /// Number of entries to be reserved. Actual entries will be directly raw data from curves or from xThetaValueStepsForRelations method.
-  /// Not applicable for functions
-  int xThetaValueCount () const;
+  /// Size of the largest column of x/theta values, in the specified curves
+  int maxColumnSize (const QStringList &curvesIncluded) const;
 
-  /// Parameters specifying x/theta values when using even increments
-  void xThetaValueSteps (double &xThetaMin,
-                         double &xThetaStep);
+  /// Resulting x/theta values for the specified curve
+  ExportValuesOrdinal ordinals (const QString &curveName) const;
 
 private:
   CallbackGatherXThetaValuesRelations();
@@ -44,7 +44,7 @@ private:
 
   CurveNamesIncluded m_curveNamesIncluded;
 
-  ValuesContainer m_values;
+  ValuesColumns m_ordinals;
 };
 
 #endif // CALLBACK_GATHER_X_THETA_VALUES_RELATIONS_H

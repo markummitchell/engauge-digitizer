@@ -41,23 +41,23 @@ CallbackSearchReturn CallbackGatherXThetaValuesFunctions::callback (const QStrin
     m_transformation.transformScreenToRawGraph (point.posScreen(),
                                                 posGraph);
 
-    m_values [posGraph.x ()] = true;
+    m_xThetaValues [posGraph.x ()] = true;
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-ExportValues CallbackGatherXThetaValuesFunctions::xThetaValues () const
+ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValues () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::xThetaValues";
 
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 
     // Convert the gathered values into a periodic sequence
-    double xThetaMin = m_values.firstKey();
-    double xThetaMax = m_values.lastKey();
+    double xThetaMin = m_xThetaValues.firstKey();
+    double xThetaMax = m_xThetaValues.lastKey();
 
-    ValuesContainer values;
+    ValuesVectorXOrY values;
     double xTheta = xThetaMin;
     while (xTheta <= xThetaMax) {
       values [xTheta] = true;
@@ -72,7 +72,7 @@ ExportValues CallbackGatherXThetaValuesFunctions::xThetaValues () const
   } else {
 
     // Return the gathered values
-    return m_values.keys();
+    return m_xThetaValues.keys();
 
   }
 }

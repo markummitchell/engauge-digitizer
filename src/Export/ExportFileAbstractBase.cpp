@@ -43,3 +43,32 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &
 
   return curvesToInclude;
 }
+
+void ExportFileAbstractBase::destroy2DArray (QVector<QVector<QString*> > &array) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::destroy2DArray";
+
+  int colCount = array.count();
+  int rowCount = array [0].count();
+  for (int row = 0; row < rowCount; row++) {
+    for (int col = 0; col < colCount; col++) {
+      delete array [col] [row];
+    }
+  }
+}
+
+void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,
+                                                  ExportHeader exportHeader,
+                                                  QTextStream &str) const
+{
+  // Insert line(s) between previous curve and this curve
+  if (isFirst) {
+    isFirst = false;
+  } else {
+    if (exportHeader == EXPORT_HEADER_GNUPLOT) {
+      str << "\n\n"; // Gnuplot requires two blank lines between curves
+    } else {
+      str << "\n"; // Single blank line
+    }
+  }
+}

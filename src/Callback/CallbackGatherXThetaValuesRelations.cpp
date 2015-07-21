@@ -1,4 +1,5 @@
 #include "CallbackGatherXThetaValuesRelations.h"
+#include "EngaugeAssert.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsSelectionFunctions.h"
 #include "Logger.h"
@@ -41,24 +42,35 @@ CallbackSearchReturn CallbackGatherXThetaValuesRelations::callback (const QStrin
     m_transformation.transformScreenToRawGraph (point.posScreen(),
                                                 posGraph);
 
-    m_values [posGraph.x ()] = true;
+    m_ordinals [curveName].push_back (posGraph.x ());
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-int CallbackGatherXThetaValuesRelations::xThetaValueCount () const
+int CallbackGatherXThetaValuesRelations::maxColumnSize (const QStringList &curvesIncluded) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesRelations::xThetaValueCount";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValuesRelations::maxColumnSize";
 
-  return 0;
+  ENGAUGE_ASSERT (m_ordinals.size() > 0);
+
+  int maxColumnSize = 0;
+  QStringList::const_iterator itr;
+  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
+
+    QString curveIncluded = *itr;
+    ENGAUGE_ASSERT (m_ordinals.contains (curveIncluded));
+    const ExportValuesOrdinal &column = m_ordinals [curveIncluded];
+
+    if (column.size() > maxColumnSize) {
+      maxColumnSize = column.size();
+    }
+  }
+
+  return maxColumnSize;
 }
 
-void CallbackGatherXThetaValuesRelations::xThetaValueSteps (double &xThetaMin,
-                                                            double &xThetaStep)
+ExportValuesOrdinal CallbackGatherXThetaValuesRelations::ordinals (const QString &curveName) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesRelations::xThetaValueSteps";
-
-  xThetaMin = 0.0;
-  xThetaStep = 0.0;
+  return m_ordinals [curveName];
 }

@@ -18,23 +18,10 @@ ExportFileFunctions::ExportFileFunctions()
 {
 }
 
-void ExportFileFunctions::destroyYRadiusValues (QVector<QVector<QString*> > &yRadiusValues) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::destroyYRadiusValues";
-
-  int colCount = yRadiusValues.count();
-  int rowCount = yRadiusValues [0].count();
-  for (int row = 0; row < rowCount; row++) {
-    for (int col = 0; col < colCount; col++) {
-      delete yRadiusValues [col] [row];
-    }
-  }
-}
-
 void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
-                                                              const ExportValues &xThetaValues,
+                                                              const ExportValuesXOrY &xThetaValues,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
                                                               QTextStream &str) const
@@ -60,13 +47,13 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                              yRadiusValues,
                              delimiter,
                              str);
-  destroyYRadiusValues (yRadiusValues);
+  destroy2DArray (yRadiusValues);
 }
 
 void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
-                                                              const ExportValues &xThetaValues,
+                                                              const ExportValuesXOrY &xThetaValues,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
                                                               QTextStream &str) const
@@ -78,16 +65,9 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
-    // Insert line(s) between previous curve and this curve
-    if (isFirst) {
-      isFirst = false;
-    } else {
-      if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
-        str << "\n\n"; // Gnuplot requires two blank lines between curves
-      } else {
-        str << "\n"; // Single blank line
-      }
-    }
+    insertLineSeparator (isFirst,
+                         modelExport.header(),
+                         str);
 
     // This curve
     const int CURVE_COUNT = 1;
@@ -105,14 +85,13 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                        transformation,
                        xThetaValues,
                        yRadiusValues);
-
     outputXThetaYRadiusValues (modelExport,
                                curvesIncluded,
                                xThetaValues,
                                yRadiusValues,
                                delimiter,
                                str);
-    destroyYRadiusValues (yRadiusValues);
+    destroy2DArray (yRadiusValues);
   }
 }
 
@@ -141,7 +120,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
                                                                                                      &CallbackGatherXThetaValuesFunctions::callback);
   document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
-  ExportValues xThetaValuesMerged = ftor.xThetaValues ();
+  ExportValuesXOrY xThetaValuesMerged = ftor.xThetaValues ();
 
   // Export in one of two layouts
   if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
@@ -164,7 +143,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
 }
 
 void ExportFileFunctions::initializeYRadiusValues (const QStringList &curvesIncluded,
-                                                   const ExportValues &xThetaValuesMerged,
+                                                   const ExportValuesXOrY &xThetaValuesMerged,
                                                    QVector<QVector<QString*> > &yRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::initializeYRadiusValues";
@@ -231,7 +210,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
                                              const Document &document,
                                              const QStringList &curvesIncluded,
                                              const Transformation &transformation,
-                                             const ExportValues &xThetaValues,
+                                             const ExportValuesXOrY &xThetaValues,
                                              QVector<QVector<QString*> > &yRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::loadYRadiusValues";
@@ -274,7 +253,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
 }
 
 void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
-                                                                       const ExportValues &xThetaValues,
+                                                                       const ExportValuesXOrY &xThetaValues,
                                                                        const Transformation &transformation,
                                                                        QVector<QString*> &yRadiusValues) const
 {
@@ -319,7 +298,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Poi
 }
 
 void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const Points &points,
-                                                                         const ExportValues &xThetaValues,
+                                                                         const ExportValuesXOrY &xThetaValues,
                                                                          const Transformation &transformation,
                                                                          QVector<QString*> &yRadiusValues) const
 {
@@ -342,7 +321,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const P
 }
 
 void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
-                                                        const ExportValues &xThetaValues,
+                                                        const ExportValuesXOrY &xThetaValues,
                                                         const Transformation &transformation,
                                                         QVector<QString*> &yRadiusValues) const
 {
@@ -384,7 +363,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
 
 void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
                                                      const QStringList &curvesIncluded,
-                                                     const ExportValues &xThetaValuesMerged,
+                                                     const ExportValuesXOrY &xThetaValuesMerged,
                                                      QVector<QVector<QString*> > &yRadiusValues,
                                                      const QString &delimiter,
                                                      QTextStream &str) const

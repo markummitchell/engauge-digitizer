@@ -113,7 +113,8 @@ HEADERS  += \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
-    Export/ExportValue.h \
+    Export/ExportValuesOrdinal.h \
+    Export/ExportValuesXOrY.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \

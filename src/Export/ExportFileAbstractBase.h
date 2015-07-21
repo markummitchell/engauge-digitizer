@@ -3,8 +3,9 @@
 
 #include "CurveConnectAs.h"
 #include "ExportFileAbstractBase.h"
-#include "ExportValues.h"
+#include "ExportHeader.h"
 #include <QStringList>
+#include <QVector>
 
 class Document;
 class DocumentModelExport;
@@ -26,6 +27,13 @@ public:
                                CurveConnectAs curveConnectAs1,
                                CurveConnectAs curveConnectAs2) const;
 
+  /// Deallocate memory for array
+  void destroy2DArray (QVector<QVector<QString*> > &array) const;
+
+  /// Insert line(s) between successive sets of curves
+  void insertLineSeparator (bool &isFirst,
+                            ExportHeader exportHeader,
+                            QTextStream &str) const;
 };
 
 #endif // EXPORT_FILE_ABSTRACT_BASE_H

@@ -3,15 +3,16 @@
 
 #include "CallbackSearchReturn.h"
 #include "DocumentModelExport.h"
-#include "ExportValues.h"
+#include "ExportValuesXOrY.h"
 #include <QHash>
 #include <QMap>
 #include "Transformation.h"
 
 class Point;
 
-// Save values into container that preserves order by key (QMap)
-typedef QMap<double, bool> ValuesContainer;
+// Save values into container that preserves order by key (QMap). These are common to all included curves
+// QMap is for fast random access
+typedef QMap<double, bool> ValuesVectorXOrY;
 
 typedef QHash<QString, bool> CurveNamesIncluded;
 
@@ -28,9 +29,8 @@ public:
   CallbackSearchReturn callback (const QString &curveName,
                                  const Point &point);
 
-  /// Resulting values for functions.
-  /// Not applicable for relations
-  ExportValues xThetaValues () const;
+  /// Resulting x/theta values for all included functions
+  ExportValuesXOrY xThetaValues () const;
 
 private:
   CallbackGatherXThetaValuesFunctions();
@@ -40,7 +40,7 @@ private:
 
   CurveNamesIncluded m_curveNamesIncluded;
 
-  ValuesContainer m_values;
+  ValuesVectorXOrY m_xThetaValues;
 };
 
 #endif // CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
