@@ -7,7 +7,12 @@
 #include "Logger.h"
 #include <QTextStream>
 #include <QVector>
+#include "Spline.h"
+#include "SplinePair.h"
 #include "Transformation.h"
+#include <vector>
+
+using namespace std;
 
 const int COLUMNS_PER_CURVE = 2;
 
@@ -245,6 +250,40 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
                                                                              const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth";
+
+  // Load spline pairs
+  vector<double> t;
+  vector<SplinePair> xy;
+
+  Points::const_iterator itrP;
+  for (itrP = points.begin(); itrP != points.end(); itrP++) {
+    const Point &point = *itrP;
+    QPointF posScreen = point.posScreen();
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (posScreen,
+                                              posGraph);
+
+    t.push_back (point.ordinal ());
+    xy.push_back (SplinePair (posGraph.x(),
+                              posGraph.y()));
+  }
+
+  // Fit a spline
+  Spline spline (t,
+                 xy);
+
+  // Get value at desired points
+  for (int row = 0; row < ftor.ordinals(curveName).count(); row++) {
+
+    double ordinal = ftor.ordinals(curveName).at (row);
+    SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
+    double xTheta = splinePairFound.x ();
+    double yRadius = splinePairFound.y ();
+
+    // Save values for this row
+    *(xThetaValues [row]) = QString::number (xTheta);
+    *(yRadiusValues [row]) = QString::number (yRadius);
+  }
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const Points &points,
