@@ -35,6 +35,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   loadXThetaYRadiusValues (modelExport,
                            document,
                            curvesIncluded,
+                           ftor,
                            transformation,
                            xThetaYRadiusValues);
   outputXThetaYRadiusValues (modelExport,
@@ -131,9 +132,64 @@ void ExportFileRelations::initializeXThetaYRadiusValues (const QStringList &curv
   }
 }
 
+QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
+                                                  double ordinal,
+                                                  const Transformation &transformation) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::linearlyInterpolate";
+
+  double xTheta = 0, yRadius = 0;
+  double ordinalBefore = 0; // Not set until ip=1
+  QPointF posGraphBefore; // Not set until ip=1
+  bool foundIt = false;
+  for (int ip = 0; ip < points.count(); ip++) {
+
+    const Point &point = points.at (ip);
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (point.posScreen(),
+                                              posGraph);
+
+    if (ordinal <= point.ordinal()) {
+
+      foundIt = true;
+      if (ip == 0) {
+
+        // Use first point
+        xTheta = posGraph.x();
+        yRadius = posGraph.y();
+
+      } else {
+
+        // Between posGraphBefore and posGraph. Note that if posGraph.x()=posGraphBefore.x() then
+        // previous iteration of loop would have been used for interpolation, and then the loop was exited
+        double s = (ordinal - ordinalBefore) / (point.ordinal() - ordinalBefore);
+        xTheta =  (1.0 - s) * posGraphBefore.x() + s * posGraph.x();
+        yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraph.y();
+      }
+
+      break;
+    }
+
+    ordinalBefore = ordinal;
+    posGraphBefore = posGraph;
+  }
+
+  if (!foundIt) {
+
+    // Use last point
+    xTheta = posGraphBefore.x();
+    yRadius = posGraphBefore.y();
+
+  }
+
+  return QPointF (xTheta,
+                  yRadius);
+}
+
 void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &modelExport,
                                                    const Document &document,
                                                    const QStringList &curvesIncluded,
+                                                   const CallbackGatherXThetaValuesRelations &ftor,
                                                    const Transformation &transformation,
                                                    QVector<QVector<QString*> > &xThetaYRadiusValues) const
 {
@@ -162,6 +218,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) {
 
         loadXThetaYRadiusValuesForCurveInterpolatedSmooth (points,
+                                                           ftor,
+                                                           curveName,
                                                            xThetaYRadiusValues [colXTheta],
                                                            xThetaYRadiusValues [colYRadius],
                                                            transformation);
@@ -169,6 +227,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
       } else {
 
         loadXThetaYRadiusValuesForCurveInterpolatedStraight (points,
+                                                             ftor,
+                                                             curveName,
                                                              xThetaYRadiusValues [colXTheta],
                                                              xThetaYRadiusValues [colYRadius],
                                                              transformation);
@@ -178,6 +238,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+                                                                             const CallbackGatherXThetaValuesRelations &ftor,
+                                                                             const QString &curveName,
                                                                              QVector<QString*> &xThetaValues,
                                                                              QVector<QString*> &yRadiusValues,
                                                                              const Transformation &transformation) const
@@ -186,11 +248,29 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+                                                                               const CallbackGatherXThetaValuesRelations &ftor,
+                                                                               const QString &curveName,
                                                                                QVector<QString*> &xThetaValues,
                                                                                QVector<QString*> &yRadiusValues,
                                                                                const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight";
+
+  // Get value at desired points
+  for (int row = 0; row < ftor.ordinals(curveName).count(); row++) {
+
+    double ordinal = ftor.ordinals(curveName).at (row);
+
+    QPointF pointInterpolated = linearlyInterpolate (points,
+                                                     ordinal,
+                                                     transformation);
+
+
+
+    // Save value for this row
+    *(xThetaValues [row]) = QString::number (pointInterpolated.x());
+    *(yRadiusValues [row]) = QString::number (pointInterpolated.y());
+  }
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &points,
@@ -199,6 +279,18 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &poin
                                                               const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw";
+
+  for (int pt = 0; pt < points.count(); pt++) {
+
+    const Point &point = points.at (pt);
+
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (point.posScreen(),
+                                              posGraph);
+
+    *(xThetaValues [pt]) = QString::number (posGraph.x());
+    *(yRadiusValues [pt]) = QString::number (posGraph.y());
+  }
 }
 
 void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
