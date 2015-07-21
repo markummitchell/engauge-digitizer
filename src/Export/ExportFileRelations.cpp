@@ -300,4 +300,26 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
                                                      QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::outputXThetaYRadiusValues";
+
+  // Header
+  QString delimiterForRow;
+  QStringList::const_iterator itr;
+  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
+    QString curveName = *itr;
+    str << delimiterForRow << modelExport.xLabel();
+    delimiterForRow = delimiter;
+    str << delimiterForRow << curveName;
+  }
+  str << "\n";
+
+  for (int row = 0; row < xThetaYRadiusValues.count(); row++) {
+    QString delimiterForRow;
+    for (int col = 0; col < xThetaYRadiusValues [0].count(); col++) {
+
+      str << delimiterForRow << *(xThetaYRadiusValues [col] [row]);
+      delimiterForRow = delimiter;
+    }
+
+    str << "\n";
+  }
 }
