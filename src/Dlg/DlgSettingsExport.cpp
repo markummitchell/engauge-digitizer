@@ -28,6 +28,8 @@ const int MAX_EDIT_WIDTH = 180;
 const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
+const double INTERVAL_BOTTOM = 1; // In pixels
+
 DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Export",
                            "DlgSettingsExport",
@@ -162,15 +164,19 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval:");
+  QLabel *labelInterval = new QLabel ("Interval (pixels):");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
   m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator;
+  m_validatorFunctionsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM);
   m_editFunctionsPointsEvenlySpacing->setValidator (m_validatorFunctionsPointsEvenlySpacing);
   m_editFunctionsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
-  m_editFunctionsPointsEvenlySpacing->setWhatsThis (tr ("Interval between successive X values when exporting at evenly spaced X values"));
+  m_editFunctionsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in pixels, between successive points in the X direction when "
+                                                        "exporting at evenly spaced X values.\n\n"
+                                                        "This parameter is specified in screen pixels rather than X units so "
+                                                        "the intervals are evenly spaced for both linear and log scaling."));
   layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
 
@@ -244,14 +250,19 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 3);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval:");
+  QLabel *labelInterval = new QLabel ("Interval (pixels):");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
   m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator;
+  m_validatorRelationsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM);
   m_editRelationsPointsEvenlySpacing->setValidator (m_validatorRelationsPointsEvenlySpacing);
   m_editRelationsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
+  m_editRelationsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in pixels, between successive points when "
+                                                        "exporting at evenly spaced (X,Y) coordinates.\n\n"
+                                                        "This parameter is specified in screen pixels rather than X and Y units so "
+                                                        "the intervals are evenly spaced for both linear and log scaling."));
   layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
 
@@ -541,9 +552,12 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval";
 
-  m_modelExportAfter->setPointsInterval(m_editFunctionsPointsEvenlySpacing->text().toDouble());
-  updateControls();
-  updatePreview();
+  // Prevent infinite loop on empty value which gets treated as zero interval
+  if (!m_editFunctionsPointsEvenlySpacing->text().isEmpty()) {
+    m_modelExportAfter->setPointsInterval(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+    updateControls();
+    updatePreview();
+  }
 }
 
 void DlgSettingsExport::slotFunctionsPointsFirstCurve()
@@ -657,9 +671,12 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
 
-  m_modelExportAfter->setRelationsInterval(m_editRelationsPointsEvenlySpacing->text().toDouble());
-  updateControls();
-  updatePreview();
+  // Prevent infinite loop on empty value which gets treated as zero interval
+  if (!m_editRelationsPointsEvenlySpacing->text().isEmpty()) {
+    m_modelExportAfter->setRelationsInterval(m_editRelationsPointsEvenlySpacing->text().toDouble());
+    updateControls();
+    updatePreview();
+  }
 }
 
 void DlgSettingsExport::slotRelationsPointsRaw()
