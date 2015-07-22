@@ -61,7 +61,7 @@ ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValues () const
     double xTheta = xThetaMin;
     while (xTheta <= xThetaMax) {
       values [xTheta] = true;
-      xTheta += m_modelExport.pointsInterval();
+      xTheta += m_modelExport.pointsIntervalFunctions();
     }
 
     // Unless the last xTheta value exactly equals xThetaMax, we add one more point so last little piece

@@ -69,6 +69,8 @@ private:
                         QHBoxLayout *&layoutRelations,
                         int &row);
   void createXLabel (QHBoxLayout *layoutMisc);
+  bool goodIntervalFunctions() const;
+  bool goodIntervalRelations() const;
   void updateControls();
   void updatePreview();
 

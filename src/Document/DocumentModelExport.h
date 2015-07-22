@@ -42,8 +42,11 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
-  /// Get method for points interval.
-  double pointsInterval () const;
+  /// Get method for points interval for functions.
+  double pointsIntervalFunctions () const;
+
+  /// Get method for relations interval for relations
+  double pointsIntervalRelations () const;
 
   /// Get method for point selection for functions.
   ExportPointsSelectionFunctions pointsSelectionFunctions() const;
@@ -54,9 +57,6 @@ public:
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,
                     QTextStream &str) const;
-
-  /// Get method for relations interval.
-  double relationsInterval () const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
@@ -72,17 +72,17 @@ public:
   /// Set method for functions layout.
   void setLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions);
 
-  /// Set method for points interval.
-  void setPointsInterval (double pointsInterval);
+  /// Set method for points interval for functions
+  void setPointsIntervalFunctions (double pointsIntervalFunctions);
+
+  /// Set method for relations interval for relations
+  void setPointsIntervalRelations (double pointsIntervalRelations);
 
   /// Set method for point selection for functions.
   void setPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions);
 
   /// Set method for point selection for relations.
   void setPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations);
-
-  /// Set method for relations interval.
-  void setRelationsInterval (double relationsInterval);
 
   /// Set method for x label.
   void setXLabel (const QString &xLabel);
@@ -96,9 +96,9 @@ private:
   QStringList m_curveNamesNotExported;
 
   ExportPointsSelectionFunctions m_pointsSelectionFunctions;
-  double m_pointsInterval;
+  double m_pointsIntervalFunctions;
   ExportPointsSelectionRelations m_pointsSelectionRelations;
-  double m_relationsInterval;
+  double m_pointsIntervalRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
   ExportHeader m_header;

@@ -30,6 +30,8 @@ const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 const double INTERVAL_BOTTOM = 1; // In pixels
 
+const QString EMPTY_PREVIEW;
+
 DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Export",
                            "DlgSettingsExport",
@@ -368,6 +370,22 @@ void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
   connect (m_editXLabel, SIGNAL (textChanged (const QString &)), this, SLOT (slotXLabel(const QString &)));
 }
 
+bool DlgSettingsExport::goodIntervalFunctions() const
+{
+  QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
+  int posFunctions;
+
+  return (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable);
+}
+
+bool DlgSettingsExport::goodIntervalRelations() const
+{
+  QString textRelations = m_editRelationsPointsEvenlySpacing->text();
+  int posRelations;
+
+  return (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
+}
+
 void DlgSettingsExport::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::handleOk";
@@ -443,8 +461,8 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   m_btnHeaderGnuplot->setChecked (header == EXPORT_HEADER_GNUPLOT);
 
   m_editXLabel->setText (m_modelExportAfter->xLabel());
-  m_editFunctionsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsInterval()));
-  m_editRelationsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->relationsInterval()));
+  m_editFunctionsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalFunctions()));
+  m_editRelationsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalRelations()));
 
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -552,11 +570,13 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval";
 
-  // Prevent infinite loop on empty value which gets treated as zero interval
-  if (!m_editFunctionsPointsEvenlySpacing->text().isEmpty()) {
-    m_modelExportAfter->setPointsInterval(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+  // Prevent infinite loop on empty and "-" values which get treated as zero interval
+  if (goodIntervalFunctions()) {
+    m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
     updateControls();
     updatePreview();
+  } else {
+    m_editPreview->setText(EMPTY_PREVIEW);
   }
 }
 
@@ -671,11 +691,13 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
 
-  // Prevent infinite loop on empty value which gets treated as zero interval
-  if (!m_editRelationsPointsEvenlySpacing->text().isEmpty()) {
-    m_modelExportAfter->setRelationsInterval(m_editRelationsPointsEvenlySpacing->text().toDouble());
+  // Prevent infinite loop on empty and "-" values which get treated as zero interval
+  if (goodIntervalRelations()) {
+    m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
     updateControls();
     updatePreview();
+  } else {
+    m_editPreview->setText (EMPTY_PREVIEW);
   }
 }
 
@@ -706,12 +728,8 @@ void DlgSettingsExport::slotXLabel(const QString &)
 
 void DlgSettingsExport::updateControls ()
 {
-  QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
-  QString textRelations = m_editRelationsPointsEvenlySpacing->text();
-  int posFunctions, posRelations;
-
-  bool isGoodState = (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable) &&
-                     (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
+  bool isGoodState = goodIntervalFunctions() &&
+                     goodIntervalRelations();
   enableOk (isGoodState);
 
   m_listIncluded->sortItems (Qt::AscendingOrder);
