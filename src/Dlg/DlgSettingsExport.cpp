@@ -28,7 +28,8 @@ const int MAX_EDIT_WIDTH = 180;
 const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
-const double INTERVAL_BOTTOM = 1; // In pixels
+const double INTERVAL_BOTTOM_X_THETA_EXCLUSIVE = 0.0; // For functions
+const double INTERVAL_BOTTOM_PIXELS_INCLUSIVE = 5; // For relations
 
 const QString EMPTY_PREVIEW;
 
@@ -160,25 +161,25 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Y's at evenly spaced X values."));
-  m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values "
-                                                      "starting with the first X value. If the last interval does not end at the last X value, "
-                                                      "the last X value will be added. Y values will be linearly interpolated if necessary"));
+  m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval (pixels):");
+  QLabel *labelInterval = new QLabel ("Interval:");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
   m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator;
-  m_validatorFunctionsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM);
+  m_validatorFunctionsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM_X_THETA_EXCLUSIVE);
   m_editFunctionsPointsEvenlySpacing->setValidator (m_validatorFunctionsPointsEvenlySpacing);
   m_editFunctionsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
-  m_editFunctionsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in pixels, between successive points in the X direction when "
-                                                        "exporting at evenly spaced X values.\n\n"
-                                                        "This parameter is specified in screen pixels rather than X units so "
-                                                        "the intervals are evenly spaced for both linear and log scaling."));
+  m_editFunctionsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in the units of X, between successive points in the X direction.\n\n"
+                                                        "If the scale is linear, then this interval is added to successive X values. If the scale is "
+                                                        "logarithmic, then this interval is multiplied to successive X values.\n\n"
+                                                        "The X values will be automatically aligned along simple numbers. If the first and/or last "
+                                                        "points are not along the aligned X values, then one or two additional points are added "
+                                                        "as necessary."));
   layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
 
@@ -246,9 +247,9 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
 
   int row = 0;
   m_btnRelationsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate X's and Y's at evenly spaced intervals."));
-  m_btnRelationsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have points evenly spaced along each relation, using interpolation "
-                                                      "for both X and Y. If the last interval does not end at the last point, the last "
-                                                      "point will be added"));
+  m_btnRelationsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have points evenly spaced along each relation, separated by the interval "
+                                                      "selected below. If the last interval does not end at the last point, then a shorter last interval "
+                                                      "is added that ends on the last point."));
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 3);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
@@ -257,14 +258,15 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
   m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator;
-  m_validatorRelationsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM);
+  m_validatorRelationsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM_PIXELS_INCLUSIVE);
   m_editRelationsPointsEvenlySpacing->setValidator (m_validatorRelationsPointsEvenlySpacing);
   m_editRelationsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in pixels, between successive points when "
                                                         "exporting at evenly spaced (X,Y) coordinates.\n\n"
                                                         "This parameter is specified in screen pixels rather than X and Y units so "
-                                                        "the intervals are evenly spaced for both linear and log scaling."));
+                                                        "the intervals are evenly spaced without concern about linear or logarithmic scaling, or "
+                                                        "whether or not the X and Y coordinates have the same units."));
   layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
 
@@ -375,7 +377,16 @@ bool DlgSettingsExport::goodIntervalFunctions() const
   QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
   int posFunctions;
 
-  return (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable);
+  bool isGood = (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable);
+
+  if (isGood) {
+
+    // Exclude the boundary
+    double value = m_editFunctionsPointsEvenlySpacing->text().toDouble();
+    isGood = (value > INTERVAL_BOTTOM_X_THETA_EXCLUSIVE);
+  }
+
+  return isGood;
 }
 
 bool DlgSettingsExport::goodIntervalRelations() const
@@ -691,14 +702,10 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
 
-  // Prevent infinite loop on empty and "-" values which get treated as zero interval
-  if (goodIntervalRelations()) {
-    m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
-    updateControls();
-    updatePreview();
-  } else {
-    m_editPreview->setText (EMPTY_PREVIEW);
-  }
+  m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
+  updateControls();
+
+  updatePreview();
 }
 
 void DlgSettingsExport::slotRelationsPointsRaw()

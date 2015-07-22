@@ -1,4 +1,6 @@
 #include "CallbackGatherXThetaValuesFunctions.h"
+#include "ExportAlignLinear.h"
+#include "ExportAlignLog.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsSelectionFunctions.h"
 #include "Logger.h"
@@ -53,21 +55,11 @@ ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValues () const
 
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 
-    // Convert the gathered values into a periodic sequence
-    double xThetaMin = m_xThetaValues.firstKey();
-    double xThetaMax = m_xThetaValues.lastKey();
-
-    ValuesVectorXOrY values;
-    double xTheta = xThetaMin;
-    while (xTheta <= xThetaMax) {
-      values [xTheta] = true;
-      xTheta += m_modelExport.pointsIntervalFunctions();
+    if (m_transformation.modelCoords().coordScaleXTheta() == COORD_SCALE_LINEAR) {
+      return xThetaValuesInterpolatePeriodicLinear ();
+    } else {
+      return xThetaValuesInterpolatePeriodicLog ();
     }
-
-    // Unless the last xTheta value exactly equals xThetaMax, we add one more point so last little piece
-    // is included
-
-    return values.keys();
 
   } else {
 
@@ -77,3 +69,76 @@ ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValues () const
   }
 }
 
+ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValuesInterpolatePeriodicLinear() const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::xThetaValuesInterpolatePeriodicLinear";
+
+  // X/theta range
+  double xThetaMin = m_xThetaValues.firstKey();
+  double xThetaMax = m_xThetaValues.lastKey();
+
+  // Compute offset that gives the simplest numbers
+  double xThetaFirstSimplestNumber;
+  ExportAlignLinear alignLinear (xThetaMin,
+                                 xThetaMax);
+  xThetaFirstSimplestNumber = alignLinear.firstSimplestNumber();
+
+  // Convert the gathered values into a periodic sequence
+  ValuesVectorXOrY values;
+  double xTheta = xThetaFirstSimplestNumber;
+  while (xTheta > xThetaMin) {
+    xTheta -= m_modelExport.pointsIntervalFunctions(); // Go backwards until reaching or passing minimum
+  }
+  if (xTheta < xThetaMin) {
+    values [xThetaMin] = true; // We passed minimum so insert point right at xThetaMin
+  }
+
+  xTheta += m_modelExport.pointsIntervalFunctions();
+  while (xTheta <= xThetaMax) {
+    values [xTheta] = true;
+    xTheta += m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+  }
+
+  if (xTheta > xThetaMax) {
+    values [xThetaMax] = xThetaMax; // We passed maximum so insert point right at xThetaMax
+  }
+
+  return values.keys();
+}
+
+ExportValuesXOrY CallbackGatherXThetaValuesFunctions::xThetaValuesInterpolatePeriodicLog() const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::xThetaValuesInterpolatePeriodicLog";
+
+  // X/theta range
+  double xThetaMin = m_xThetaValues.firstKey();
+  double xThetaMax = m_xThetaValues.lastKey();
+
+  // Compute offset that gives the simplest numbers
+  double xThetaFirstSimplestNumber;
+  ExportAlignLog alignLog (xThetaMin,
+                           xThetaMax);
+  xThetaFirstSimplestNumber = alignLog.firstSimplestNumber();
+
+  // Convert the gathered values into a periodic sequence
+  ValuesVectorXOrY values;
+  double xTheta = xThetaFirstSimplestNumber;
+  while (xTheta > xThetaMin) {
+    xTheta /= m_modelExport.pointsIntervalFunctions(); // Go backwards until reaching or passing minimum
+  }
+  if (xTheta < xThetaMin) {
+    values [xThetaMin] = true; // We passed minimum so insert point right at xThetaMin
+  }
+
+  xTheta *= m_modelExport.pointsIntervalFunctions();
+  while (xTheta <= xThetaMax) {
+    values [xTheta] = true;
+    xTheta *= m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+  }
+
+  if (xTheta > xThetaMax) {
+    values [xThetaMax] = xThetaMax; // We passed maximum so insert point right at xThetaMax
+  }
+
+  return values.keys();
+}

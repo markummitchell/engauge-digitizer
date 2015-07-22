@@ -35,6 +35,9 @@ public:
 private:
   CallbackGatherXThetaValuesFunctions();
 
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinear() const;
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLog() const;
+
   const DocumentModelExport m_modelExport;
   const Transformation m_transformation;
 

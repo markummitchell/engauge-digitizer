@@ -102,6 +102,8 @@ HEADERS  += \
     Document/DocumentSerialize.h \
     include/EngaugeAssert.h \
     util/EnumsToQt.h \
+    Export/ExportAlignLinear.h \
+    Export/ExportAlignLog.h \
     Export/ExportDelimiter.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsSelectionFunctions.h \
@@ -261,6 +263,8 @@ SOURCES += \
     Document/DocumentModelSegments.cpp \
     Document/DocumentSerialize.cpp \
     util/EnumsToQt.cpp \
+    Export/ExportAlignLinear.cpp \
+    Export/ExportAlignLog.cpp \
     Export/ExportDelimiter.cpp \
     Export/ExportFileAbstractBase.cpp \
     Export/ExportFileFunctions.cpp \
