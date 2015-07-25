@@ -6,10 +6,12 @@
 #include "ExportHeader.h"
 #include <QStringList>
 #include <QVector>
+#include <vector>
 
 class Document;
 class DocumentModelExport;
 class QTextStream;
+class SplinePair;
 class Transformation;
 
 /// Strategy base class for exporting to a file. This class provides common methods
@@ -37,6 +39,12 @@ public:
   void insertLineSeparator (bool &isFirst,
                             ExportHeader exportHeader,
                             QTextStream &str) const;
+
+  /// Load t (=ordinal) and xy (=screen position) spline pairs
+  void loadSplinePairs (const Points &points,
+                        const Transformation &transformation,
+                        std::vector<double> &t,
+                        std::vector<SplinePair> &xy) const;
 };
 
 #endif // EXPORT_FILE_ABSTRACT_BASE_H

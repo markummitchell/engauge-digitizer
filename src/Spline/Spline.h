@@ -20,6 +20,7 @@ class Spline
   /// for each interval, where P0 and P3 are the start and end points for each interval.
   Spline(const std::vector<double> &t,
          const std::vector<SplinePair> &xy);
+
   virtual ~Spline();
 
   /// Use bisection algorithm to iteratively find the SplinePair interpolated to best match the specified x value.

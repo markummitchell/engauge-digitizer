@@ -267,22 +267,12 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Poi
   // typical image size of 1024x1024 means around 10 iterations gives decent accuracy
   const int MAX_ITERATIONS = 12;
 
-  // Load spline pairs
   vector<double> t;
   vector<SplinePair> xy;
-
-  Points::const_iterator itrP;
-  for (itrP = points.begin(); itrP != points.end(); itrP++) {
-    const Point &point = *itrP;
-    QPointF posScreen = point.posScreen();
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
-
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posGraph.x(),
-                              posGraph.y()));
-  }
+  loadSplinePairs (points,
+                   transformation,
+                   t,
+                   xy);
 
   // Fit a spline
   Spline spline (t,

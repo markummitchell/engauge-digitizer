@@ -4,7 +4,10 @@
 #include "ExportFileAbstractBase.h"
 #include "Logger.h"
 #include <QTextStream>
+#include "SplinePair.h"
 #include "Transformation.h"
+
+using namespace std;
 
 ExportFileAbstractBase::ExportFileAbstractBase()
 {
@@ -75,5 +78,24 @@ void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,
     } else {
       str << "\n"; // Single blank line
     }
+  }
+}
+
+void ExportFileAbstractBase::loadSplinePairs (const Points &points,
+                                              const Transformation &transformation,
+                                              vector<double> &t,
+                                              vector<SplinePair> &xy) const
+{
+  Points::const_iterator itrP;
+  for (itrP = points.begin(); itrP != points.end(); itrP++) {
+    const Point &point = *itrP;
+    QPointF posScreen = point.posScreen();
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (posScreen,
+                                              posGraph);
+
+    t.push_back (point.ordinal ());
+    xy.push_back (SplinePair (posGraph.x(),
+                              posGraph.y()));
   }
 }

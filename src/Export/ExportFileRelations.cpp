@@ -5,6 +5,7 @@
 #include "ExportFileRelations.h"
 #include "ExportLayoutFunctions.h"
 #include "Logger.h"
+#include <qmath.h>
 #include <QTextStream>
 #include <QVector>
 #include "Spline.h"
@@ -43,7 +44,6 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
     loadXThetaYRadiusValues (modelExport,
                              document,
                              curvesIncluded,
-                             ftor,
                              transformation,
                              xThetaYRadiusValues);
     outputXThetaYRadiusValues (modelExport,
@@ -198,7 +198,6 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
 void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &modelExport,
                                                    const Document &document,
                                                    const QStringList &curvesIncluded,
-                                                   const CallbackGatherXThetaValuesRelations &ftor,
                                                    const Transformation &transformation,
                                                    QVector<QVector<QString*> > &xThetaYRadiusValues) const
 {
@@ -223,12 +222,15 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
                                           transformation);
     } else {
 
-      // Interpolation
+      // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
+      ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
+                                                          points,
+                                                          transformation);
+
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) {
 
         loadXThetaYRadiusValuesForCurveInterpolatedSmooth (points,
-                                                           ftor,
-                                                           curveName,
+                                                           ordinals,
                                                            xThetaYRadiusValues [colXTheta],
                                                            xThetaYRadiusValues [colYRadius],
                                                            transformation);
@@ -236,8 +238,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
       } else {
 
         loadXThetaYRadiusValuesForCurveInterpolatedStraight (points,
-                                                             ftor,
-                                                             curveName,
+                                                             ordinals,
                                                              xThetaYRadiusValues [colXTheta],
                                                              xThetaYRadiusValues [colYRadius],
                                                              transformation);
@@ -247,39 +248,29 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
-                                                                             const CallbackGatherXThetaValuesRelations &ftor,
-                                                                             const QString &curveName,
+                                                                             const ExportValuesOrdinal &ordinals,
                                                                              QVector<QString*> &xThetaValues,
                                                                              QVector<QString*> &yRadiusValues,
                                                                              const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth";
 
-  // Load spline pairs
   vector<double> t;
   vector<SplinePair> xy;
-
-  Points::const_iterator itrP;
-  for (itrP = points.begin(); itrP != points.end(); itrP++) {
-    const Point &point = *itrP;
-    QPointF posScreen = point.posScreen();
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
-
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posGraph.x(),
-                              posGraph.y()));
-  }
+  loadSplinePairs (points,
+                   transformation,
+                   t,
+                   xy);
 
   // Fit a spline
   Spline spline (t,
                  xy);
 
+  // Subdivide the curve into smaller segments so
   // Get value at desired points
-  for (int row = 0; row < ftor.ordinals(curveName).count(); row++) {
+  for (int row = 0; row < ordinals.count(); row++) {
 
-    double ordinal = ftor.ordinals(curveName).at (row);
+    double ordinal = ordinals.at (row);
     SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
     double xTheta = splinePairFound.x ();
     double yRadius = splinePairFound.y ();
@@ -291,8 +282,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const Points &points,
-                                                                               const CallbackGatherXThetaValuesRelations &ftor,
-                                                                               const QString &curveName,
+                                                                               const ExportValuesOrdinal &ordinals,
                                                                                QVector<QString*> &xThetaValues,
                                                                                QVector<QString*> &yRadiusValues,
                                                                                const Transformation &transformation) const
@@ -300,9 +290,9 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight";
 
   // Get value at desired points
-  for (int row = 0; row < ftor.ordinals(curveName).count(); row++) {
+  for (int row = 0; row < ordinals.count(); row++) {
 
-    double ordinal = ftor.ordinals(curveName).at (row);
+    double ordinal = ordinals.at (row);
 
     QPointF pointInterpolated = linearlyInterpolate (points,
                                                      ordinal,
@@ -334,6 +324,73 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &poin
     *(xThetaValues [pt]) = QString::number (posGraph.x());
     *(yRadiusValues [pt]) = QString::number (posGraph.y());
   }
+}
+
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsIntervalRelations,
+                                                              const Points &points,
+                                                              const Transformation &transformation) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervals";
+
+  const double NUM_SMALLER_INTERVALS = 100;
+
+  vector<double> t;
+  vector<SplinePair> xy;
+  loadSplinePairs (points,
+                   transformation,
+                   t,
+                   xy);
+
+  // Fit a spline
+  Spline spline (t,
+                 xy);
+
+  // Integrate the distances for the subintervals
+  double integratedSeparation;
+  QPointF posLast = points.first().posScreen();
+
+  // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
+  // into intervals that, as much as possible, have the desired length. Simplicity wins out over accuracy in this
+  // approach - accuracy is sacrificed to achieve simplicity
+  double tMin = t.front();
+  double tMax = t.back();
+
+  // Results. Initially empty
+  ExportValuesOrdinal ordinals;
+  ordinals [tMin] = true;
+
+  int iTLastInterval = 0;
+  for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
+
+    double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
+
+    SplinePair pairNew = spline.interpolateCoeff(t);
+
+    QPointF posNew = QPointF (pairNew.x(),
+                              pairNew.y());
+
+    QPointF posDelta = posNew - posLast;
+    integratedSeparation += qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
+
+    if (integratedSeparation > pointsIntervalRelations) {
+
+      // End of current interval, and start of next interval
+      integratedSeparation = 0;
+      ordinals [t] = true;
+      iTLastInterval = iT;
+    }
+
+    posLast = posNew;
+  }
+
+  if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
+
+    // Add last point so we end up at tMax
+    ordinals [tMax] = true;
+
+  }
+
+  return ordinals;
 }
 
 void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
