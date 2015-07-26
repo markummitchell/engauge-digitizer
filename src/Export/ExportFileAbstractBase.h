@@ -22,6 +22,9 @@ public:
   ExportFileAbstractBase();
 
  protected:
+  /// Gnuplot requires, and other graphing tools probably prefer, blank lines between successive curves
+  QString curveSeparator (const QString &string) const;
+
   /// Identify curves to include in export
   QStringList curvesToInclude (const DocumentModelExport &modelExport,
                                const Document &document,

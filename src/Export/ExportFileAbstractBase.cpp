@@ -13,6 +13,15 @@ ExportFileAbstractBase::ExportFileAbstractBase()
 {
 }
 
+QString ExportFileAbstractBase::curveSeparator (const QString &string) const
+{
+  if (string.trimmed().isEmpty()) {
+    return "";
+  } else {
+    return "\n";
+  }
+}
+
 QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &modelExport,
                                                      const Document &document,
                                                      const QStringList &curvesGraphsNames,
@@ -62,7 +71,7 @@ void ExportFileAbstractBase::destroy2DArray (QVector<QVector<QString*> > &array)
 
 QString ExportFileAbstractBase::gnuplotComment() const
 {
-  return "# ";
+  return QString ("# ");
 }
 
 void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,

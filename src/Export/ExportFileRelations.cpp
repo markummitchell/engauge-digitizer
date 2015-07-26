@@ -442,6 +442,7 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
   // Header
   if (modelExport.header() != EXPORT_HEADER_NONE) {
     if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
+      str << curveSeparator(*str.string());
       str << gnuplotComment();
     }
     QString delimiterForRow;

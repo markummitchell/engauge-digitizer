@@ -15,6 +15,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QScrollBar>
 #include <QTabWidget>
 #include <QTextEdit>
 #include <QTextStream>
@@ -22,6 +23,7 @@
 #include "Transformation.h"
 
 const int MIN_INDENT_COLUMN_WIDTH = 20;
+const int MIN_HEADER_EMPTY_COLUMN_WIDTH = 10;
 const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
@@ -109,12 +111,12 @@ void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
 }
 
-void DlgSettingsExport::createFunctionsLayout (QHBoxLayout *layoutFunctions)
+void DlgSettingsExport::createFileLayout (QHBoxLayout *layoutMisc)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFunctionsLayout";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFileLayout";
 
   QGroupBox *groupLayout = new QGroupBox (tr ("Layout"));
-  layoutFunctions->addWidget (groupLayout, 1);
+  layoutMisc->addWidget (groupLayout, 1);
 
   QVBoxLayout *layoutLayout = new QVBoxLayout;
   groupLayout->setLayout (layoutLayout);
@@ -148,19 +150,19 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->setColumnStretch (2, 1);
 
   int row = 0;
-  m_btnFunctionsPointsAllCurves = new QRadioButton (tr ("Interpolate Y's at X's from all curves"));
+  m_btnFunctionsPointsAllCurves = new QRadioButton (tr ("Interpolate Ys at Xs from all curves"));
   m_btnFunctionsPointsAllCurves->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                    "value from every curve. Y values will be linearly interpolated if necessary"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsAllCurves, SIGNAL (released()), this, SLOT (slotFunctionsPointsAllCurves()));
 
-  m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Y's at X's from first curve"));
+  m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                     "value from the first curve. Y values will be linearly interpolated if necessary"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
-  m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Y's at evenly spaced X values."));
+  m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values."));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
@@ -183,7 +185,7 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
 
-  m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw X's and Y's"));
+  m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 3);
   connect (m_btnFunctionsPointsRaw, SIGNAL (released()), this, SLOT (slotFunctionsPointsRaw()));
@@ -193,26 +195,34 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createHeader";
 
+  const int COLUMN_RADIO_BUTTONS = 0, COLUMN_EMPTY = 1, COLUMN_LABEL = 2;
+
   QGroupBox *groupHeader = new QGroupBox (tr ("Header"));
   layoutMisc->addWidget (groupHeader, 1);
 
-  QVBoxLayout *layoutHeader = new QVBoxLayout;
+  QGridLayout *layoutHeader = new QGridLayout;
+  layoutHeader->setColumnMinimumWidth(COLUMN_EMPTY,
+                                      MIN_HEADER_EMPTY_COLUMN_WIDTH);
   groupHeader->setLayout (layoutHeader);
+  int row = 0;
 
   m_btnHeaderNone = new QRadioButton (exportHeaderToString (EXPORT_HEADER_NONE));
   m_btnHeaderNone->setWhatsThis (tr ("Exported file will have no header line"));
-  layoutHeader->addWidget (m_btnHeaderNone);
+  layoutHeader->addWidget (m_btnHeaderNone, row++, COLUMN_RADIO_BUTTONS, 1, 1);
   connect (m_btnHeaderNone, SIGNAL (released ()), this, SLOT (slotHeaderNone()));
 
   m_btnHeaderSimple = new QRadioButton (exportHeaderToString (EXPORT_HEADER_SIMPLE));
   m_btnHeaderSimple->setWhatsThis (tr ("Exported file will have simple header line"));
-  layoutHeader->addWidget (m_btnHeaderSimple);
+  layoutHeader->addWidget (m_btnHeaderSimple, row++, COLUMN_RADIO_BUTTONS, 1, 1);
   connect (m_btnHeaderSimple, SIGNAL (released ()), this, SLOT (slotHeaderSimple()));
 
   m_btnHeaderGnuplot = new QRadioButton (exportHeaderToString (EXPORT_HEADER_GNUPLOT));
   m_btnHeaderGnuplot->setWhatsThis (tr ("Exported file will have gnuplot header line"));
-  layoutHeader->addWidget (m_btnHeaderGnuplot);
+  layoutHeader->addWidget (m_btnHeaderGnuplot, row++, COLUMN_RADIO_BUTTONS, 1, 1);
   connect (m_btnHeaderGnuplot, SIGNAL (released()), this, SLOT (slotHeaderGnuplot()));
+
+  createXLabel (layoutHeader,
+                COLUMN_LABEL);
 }
 
 void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
@@ -246,7 +256,7 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->setColumnStretch (2, 1);
 
   int row = 0;
-  m_btnRelationsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate X's and Y's at evenly spaced intervals."));
+  m_btnRelationsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Xs and Ys at evenly spaced intervals."));
   m_btnRelationsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have points evenly spaced along each relation, separated by the interval "
                                                       "selected below. If the last interval does not end at the last point, then a shorter last interval "
                                                       "is added that ends on the last point."));
@@ -270,7 +280,7 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
 
-  m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw X's and Y's"));
+  m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnRelationsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
   layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 0, 1, 3);
   connect (m_btnRelationsPointsRaw, SIGNAL (released()), this, SLOT (slotRelationsPointsRaw()));
@@ -287,25 +297,17 @@ QWidget *DlgSettingsExport::createSubPanel ()
   int row = 0;
   createCurveSelection (layout, row);
 
-  QHBoxLayout *layoutFunctions, *layoutRelations;
   createTabWidget (layout,
-                   layoutFunctions,
-                   layoutRelations,
                    row);
-
-  createFunctionsPointsSelection (layoutFunctions);
-  createFunctionsLayout (layoutFunctions);
-
-  createRelationsPointsSelection (layoutRelations);
 
   QWidget *widgetMisc = new QWidget;
   layout->addWidget (widgetMisc, row++, 0, 1, 3);
   QHBoxLayout *layoutMisc = new QHBoxLayout;
   widgetMisc->setLayout (layoutMisc);
 
-  createDelimiters (layoutMisc);
-  createHeader (layoutMisc);
-  createXLabel (layoutMisc);
+  createDelimiters (layoutMisc); // One row of radio buttons
+  createHeader (layoutMisc); // Two rows with radio buttons and then header label
+  createFileLayout (layoutMisc); // One row of radio buttons
 
   createPreview (layout, row);
 
@@ -313,8 +315,6 @@ QWidget *DlgSettingsExport::createSubPanel ()
 }
 
 void DlgSettingsExport::createTabWidget (QGridLayout *layout,
-                                         QHBoxLayout *&layoutFunctions,
-                                         QHBoxLayout *&layoutRelations,
                                          int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createTabWidget";
@@ -328,7 +328,7 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
   QWidget *tabFunctions = m_tabWidget->widget (indexFunctions);
   tabFunctions->setWhatsThis (tr ("Functions Tab\n\n"
                                   "Controls for specifying the format of functions during export"));
-  layoutFunctions = new QHBoxLayout;
+  QHBoxLayout *layoutFunctions = new QHBoxLayout;
   widgetFunctions->setLayout (layoutFunctions);
 
   QWidget *widgetRelations = new QWidget;
@@ -336,31 +336,30 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
   QWidget *tabRelations = m_tabWidget->widget (indexRelations);
   tabRelations->setWhatsThis (tr ("Relations Tab\n\n"
                                   "Controls for specifying the format of relations during export"));
-  layoutRelations = new QHBoxLayout;
+  QHBoxLayout *layoutRelations = new QHBoxLayout;
   widgetRelations->setLayout (layoutRelations);
 
   // Now that the tabs have been added we can connect this signal
   connect (m_tabWidget, SIGNAL (currentChanged (int)), this, SLOT (slotTabChanged (int)));
+
+  createFunctionsPointsSelection (layoutFunctions);
+  createRelationsPointsSelection (layoutRelations);
 }
 
-void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
+void DlgSettingsExport::createXLabel (QGridLayout *layoutHeader,
+                                      int colLabel)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createXLabel";
 
-  QWidget *widgetXLabel = new QWidget;
-  layoutMisc->addWidget (widgetXLabel, 1);
-
-  QVBoxLayout *layoutXLabel = new QVBoxLayout;
-  layoutXLabel->setAlignment (Qt::AlignCenter);
-  widgetXLabel->setLayout (layoutXLabel);
+  int row = 1; // Skip first row
 
   QLabel *title;
   if (true) {
-    title = new QLabel (tr ("Header X Label"));
+    title = new QLabel (tr ("X Label:"));
   } else {
-    title = new QLabel (tr ("Header Theta Label"));
+    title = new QLabel (tr ("Theta Label:"));
   }
-  layoutXLabel->addWidget (title);
+  layoutHeader->addWidget (title, row++, colLabel, 1, 1);
 
   m_editXLabel = new QLineEdit;
   if (true) {
@@ -368,7 +367,7 @@ void DlgSettingsExport::createXLabel (QHBoxLayout *layoutMisc)
   } else {
     m_editXLabel->setWhatsThis (tr ("Label in the header for theta values"));
   }
-  layoutXLabel->addWidget (m_editXLabel);
+  layoutHeader->addWidget (m_editXLabel, row++, colLabel, 1, 1);
   connect (m_editXLabel, SIGNAL (textChanged (const QString &)), this, SLOT (slotXLabel(const QString &)));
 }
 
@@ -751,10 +750,15 @@ void DlgSettingsExport::updateControls ()
 
   m_editFunctionsPointsEvenlySpacing->setEnabled (m_btnFunctionsPointsEvenlySpaced->isChecked ());
   m_editRelationsPointsEvenlySpacing->setEnabled (m_btnRelationsPointsEvenlySpaced->isChecked ());
+
+  m_editXLabel->setEnabled (!m_btnHeaderNone->isChecked());
 }
 
 void DlgSettingsExport::updatePreview()
 {
+  // Save the scroll position for continuity before and after the preview update
+  int scrollPosition = m_editPreview->verticalScrollBar()->value();
+
   QString exportedText;
   QTextStream str (&exportedText);
 
@@ -777,4 +781,7 @@ void DlgSettingsExport::updatePreview()
   }
 
   m_editPreview->setText (exportedText);
+
+  // Restore scroll position
+  m_editPreview->verticalScrollBar()->setValue (scrollPosition);
 }

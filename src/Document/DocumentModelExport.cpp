@@ -8,7 +8,7 @@
 
 const QStringList DEFAULT_CURVE_NAMES_NOT_EXPORTED;
 const double DEFAULT_POINTS_INTERVAL_FUNCTIONS = 1.0; // Although rarely the right value, value of 1 is better than 0 (=infinite loops)
-const double DEFAULT_POINTS_INTERVAL_RELATIONS = DEFAULT_POINTS_INTERVAL_FUNCTIONS;
+const double DEFAULT_POINTS_INTERVAL_RELATIONS = 10; // Pixels versus the graph coordinates used by DEFAULT_POINTS_INTERVAL_FUNCTIONS
 const QString DEFAULT_X_LABEL ("x");
 
 DocumentModelExport::DocumentModelExport() :

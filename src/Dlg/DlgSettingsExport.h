@@ -59,16 +59,15 @@ private:
 
   void createCurveSelection (QGridLayout *layout, int &row);
   void createDelimiters (QHBoxLayout *layoutMisc);
-  void createFunctionsLayout (QHBoxLayout *layout);
+  void createFileLayout (QHBoxLayout *layoutMisc);
   void createFunctionsPointsSelection (QHBoxLayout *layout);
   void createHeader (QHBoxLayout *layoutMisc);
   void createPreview (QGridLayout *layout, int &row);
   void createRelationsPointsSelection (QHBoxLayout *layout);
   void createTabWidget (QGridLayout *layout,
-                        QHBoxLayout *&layoutFunctions,
-                        QHBoxLayout *&layoutRelations,
                         int &row);
-  void createXLabel (QHBoxLayout *layoutMisc);
+  void createXLabel (QGridLayout *layoutHeader,
+                     int colLabel);
   bool goodIntervalFunctions() const;
   bool goodIntervalRelations() const;
   void updateControls();
