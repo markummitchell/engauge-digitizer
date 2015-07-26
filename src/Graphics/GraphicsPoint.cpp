@@ -271,6 +271,15 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
   }
 }
 
+void GraphicsPoint::setPos (const QPointF pos)
+{
+  if (m_graphicsItemEllipse == 0) {
+    return m_graphicsItemPolygon->setPos (pos);
+  } else {
+    return m_graphicsItemEllipse->setPos (pos);
+  }
+}
+
 void GraphicsPoint::setToolTip (const QString &toolTip)
 {
   if (m_graphicsItemEllipse == 0) {

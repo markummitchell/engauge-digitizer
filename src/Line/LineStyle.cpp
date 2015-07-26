@@ -71,7 +71,7 @@ void LineStyle::loadXml(QXmlStreamReader &reader)
 
     setWidth (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH).toInt());
     setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR).toInt());
-    setCurveConnectAs ((CurveConnectAs) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH).toInt());
+    setCurveConnectAs ((CurveConnectAs) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS).toInt());
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||

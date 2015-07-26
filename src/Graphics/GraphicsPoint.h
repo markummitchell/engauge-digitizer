@@ -72,6 +72,9 @@ public:
   /// Update the point style
   void setPointStyle (const PointStyle &pointStyle);
 
+  /// Update the position
+  void setPos (const QPointF pos);
+
   /// Proxy method for QGraphicsItem::setToolTip
   void setToolTip (const QString &toolTip);
 

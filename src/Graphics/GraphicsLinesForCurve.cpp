@@ -243,6 +243,10 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
 
     graphicsPoint = m_graphicsPoints [point.ordinal()];
 
+    // Due to ordinal renumbering, the coordinates may belong to some other point so we override
+    // them for consistent ordinal-position mapping
+    graphicsPoint->setPos (point.posScreen());
+
   } else {
 
     // Point does not exist in scene so create it
