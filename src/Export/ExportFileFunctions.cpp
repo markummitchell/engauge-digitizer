@@ -269,10 +269,10 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Poi
 
   vector<double> t;
   vector<SplinePair> xy;
-  loadSplinePairs (points,
-                   transformation,
-                   t,
-                   xy);
+  loadSplinePairsWithTransformation (points,
+                                     transformation,
+                                     t,
+                                     xy);
 
   // Fit a spline
   Spline spline (t,

@@ -40,11 +40,16 @@ public:
                             ExportHeader exportHeader,
                             QTextStream &str) const;
 
-  /// Load t (=ordinal) and xy (=screen position) spline pairs
-  void loadSplinePairs (const Points &points,
-                        const Transformation &transformation,
-                        std::vector<double> &t,
-                        std::vector<SplinePair> &xy) const;
+  /// Load t (=ordinal) and xy (=screen position) spline pairs, without any conversion to graph coordinates
+  void loadSplinePairsWithoutTransformation (const Points &points,
+                                             std::vector<double> &t,
+                                             std::vector<SplinePair> &xy) const;
+
+  /// Load t (=ordinal) and xy (=screen position) spline pairs, converting screen coordinates to graph coordinates
+  void loadSplinePairsWithTransformation (const Points &points,
+                                          const Transformation &transformation,
+                                          std::vector<double> &t,
+                                          std::vector<SplinePair> &xy) const;
 };
 
 #endif // EXPORT_FILE_ABSTRACT_BASE_H

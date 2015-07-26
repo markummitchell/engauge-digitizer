@@ -30,19 +30,16 @@ private:
   void exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
-                                           const CallbackGatherXThetaValuesRelations &ftor,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
   void exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
-                                           const CallbackGatherXThetaValuesRelations &ftor,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
   void initializeXThetaYRadiusValues (const QStringList &curvesIncluded,
-                                      const CallbackGatherXThetaValuesRelations &ftor,
                                       QVector<QVector<QString*> > &xThetaYRadiusValues) const;
   QPointF linearlyInterpolate (const Points &points,
                                double ordinal,
@@ -66,10 +63,11 @@ private:
                                            QVector<QString*> &xThetaValues,
                                            QVector<QString*> &yRadiusValues,
                                            const Transformation &transformation) const;
-
+  int maxColumnSizeAllocation (const DocumentModelExport &modelExport,
+                               const Document &document,
+                               const QStringList &curvesIncluded) const;
   ExportValuesOrdinal ordinalsAtIntervals (double pointsIntervalRelations,
-                                           const Points &points,
-                                           const Transformation &transformation) const;
+                                           const Points &points) const;
 
   /// Output 2D array with alternating x/theta and y/radius columns
   void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,

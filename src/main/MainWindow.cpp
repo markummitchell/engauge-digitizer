@@ -1733,6 +1733,7 @@ void MainWindow::slotFileExport ()
                                    cmdMediator().document(),
                                    transformation (),
                                    str);
+
     } else {
 
       QMessageBox::critical (0,

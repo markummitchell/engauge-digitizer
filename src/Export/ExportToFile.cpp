@@ -24,7 +24,7 @@ void ExportToFile::exportToFile (const DocumentModelExport &modelExport,
                                 str);
 
   ExportFileRelations exportRelations;
-  exportFunctions.exportToFile (modelExport,
+  exportRelations.exportToFile (modelExport,
                                 document,
                                 transformation,
                                 str);

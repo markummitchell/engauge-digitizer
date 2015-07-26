@@ -24,7 +24,6 @@ ExportFileRelations::ExportFileRelations()
 void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
-                                                              const CallbackGatherXThetaValuesRelations &ftor,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
                                                               QTextStream &str) const
@@ -32,14 +31,15 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
 
   int curveCount = curvesIncluded.count();
-  int maxColumnSize = ftor.maxColumnSize(curvesIncluded);
+  int maxColumnSize = maxColumnSizeAllocation (modelExport,
+                                               document,
+                                               curvesIncluded);
 
   // Skip if every curve was a function
   if (maxColumnSize > 0) {
 
     QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
     initializeXThetaYRadiusValues (curvesIncluded,
-                                   ftor,
                                    xThetaYRadiusValues);
     loadXThetaYRadiusValues (modelExport,
                              document,
@@ -58,7 +58,6 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
 void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
-                                                              const CallbackGatherXThetaValuesRelations &ftor,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
                                                               QTextStream &str) const
@@ -73,7 +72,6 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
     exportAllPerLineXThetaValuesMerged (modelExport,
                                         document,
                                         QStringList (curveIncluded),
-                                        ftor,
                                         delimiter,
                                         transformation,
                                         str);
@@ -110,7 +108,6 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
     exportAllPerLineXThetaValuesMerged (modelExport,
                                         document,
                                         curvesIncluded,
-                                        ftor,
                                         delimiter,
                                         transformation,
                                         str);
@@ -118,7 +115,6 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
     exportOnePerLineXThetaValuesMerged (modelExport,
                                         document,
                                         curvesIncluded,
-                                        ftor,
                                         delimiter,
                                         transformation,
                                         str);
@@ -126,16 +122,15 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
 }
 
 void ExportFileRelations::initializeXThetaYRadiusValues (const QStringList &curvesIncluded,
-                                                         const CallbackGatherXThetaValuesRelations &ftor,
                                                          QVector<QVector<QString*> > &xThetaYRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::initializeXThetaYRadiusValues";
 
   // Initialize every entry with empty string
   int curveCount = curvesIncluded.count();
-  int xThetaCount = ftor.maxColumnSize(curvesIncluded);
+  int xThetaCount = xThetaYRadiusValues [0].count();
   for (int row = 0; row < xThetaCount; row++) {
-    for (int col = 0; col < 2 * curveCount; col++) {
+    for (int col = 0; col < COLUMNS_PER_CURVE * curveCount; col++) {
       xThetaYRadiusValues [col] [row] = new QString;
     }
   }
@@ -203,6 +198,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValues";
 
+  // The curve processing logic here is mirrored in maxColumnSizeAllocation so the array allocations are in sync
   for (int ic = 0; ic < curvesIncluded.count(); ic++) {
 
     int colXTheta = 2 * ic;
@@ -224,10 +220,9 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
-                                                          points,
-                                                          transformation);
+                                                          points);
 
-      if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) {
+      if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
 
         loadXThetaYRadiusValuesForCurveInterpolatedSmooth (points,
                                                            ordinals,
@@ -257,10 +252,10 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 
   vector<double> t;
   vector<SplinePair> xy;
-  loadSplinePairs (points,
-                   transformation,
-                   t,
-                   xy);
+  loadSplinePairsWithTransformation (points,
+                                     transformation,
+                                     t,
+                                     xy);
 
   // Fit a spline
   Spline spline (t,
@@ -326,20 +321,54 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &poin
   }
 }
 
+int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &modelExport,
+                                                  const Document &document,
+                                                  const QStringList &curvesIncluded) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::maxColumnSizeAllocation";
+
+  int maxColumnSize = 0;
+
+  // The curve processing logic here is mirrored in loadXThetaYRadiusValues so the array allocations are in sync
+  for (int ic = 0; ic < curvesIncluded.count(); ic++) {
+
+    const QString curveName = curvesIncluded.at (ic);
+
+    const Curve *curve = document.curveForCurveName (curveName);
+    const Points points = curve->points ();
+
+    if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
+
+      // No interpolation. Raw points
+      maxColumnSize = qMax (maxColumnSize,
+                            points.count());
+
+    } else {
+
+      // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
+      ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
+                                                          points);
+
+      maxColumnSize = qMax (maxColumnSize,
+                            ordinals.count());
+    }
+  }
+
+  return maxColumnSize;
+}
+
 ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsIntervalRelations,
-                                                              const Points &points,
-                                                              const Transformation &transformation) const
+                                                              const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervals";
 
-  const double NUM_SMALLER_INTERVALS = 100;
+  const double NUM_SMALLER_INTERVALS = 1000;
 
   vector<double> t;
   vector<SplinePair> xy;
-  loadSplinePairs (points,
-                   transformation,
-                   t,
-                   xy);
+  loadSplinePairsWithoutTransformation (points,
+                                        t,
+                                        xy);
 
   // Fit a spline
   Spline spline (t,
@@ -355,10 +384,11 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
   double tMin = t.front();
   double tMax = t.back();
 
-  // Results. Initially empty
+  // Results. Initially empty, but at the end it will have values tMin, ..., tMax
   ExportValuesOrdinal ordinals;
-  ordinals [tMin] = true;
 
+  double tLast = 0.0;
+  double integratedSeparationLast = 0;
   int iTLastInterval = 0;
   for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
 
@@ -370,23 +400,31 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
                               pairNew.y());
 
     QPointF posDelta = posNew - posLast;
-    integratedSeparation += qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
+    double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
+    integratedSeparation += integratedSeparationDelta;
 
-    if (integratedSeparation > pointsIntervalRelations) {
+    if ((iT == 0) ||
+        (integratedSeparation >= pointsIntervalRelations)) {
 
-      // End of current interval, and start of next interval
-      integratedSeparation = 0;
-      ordinals [t] = true;
+      // End of current interval, and start of next interval. For better accuracy without having to crank up
+      // NUM_SMALLER_INTERVALS by orders of magnitude, we use linear interpolation
+      double sInterp = (pointsIntervalRelations - integratedSeparationLast) / (integratedSeparation - integratedSeparationLast);
+      double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
+
+      integratedSeparation = (1.0 - sInterp) * integratedSeparationDelta; // Part of delta that was not used gets applied to next interval
+      ordinals.push_back (tInterp);
       iTLastInterval = iT;
     }
 
+    tLast = t;
+    integratedSeparationLast = integratedSeparation;
     posLast = posNew;
   }
 
   if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
 
     // Add last point so we end up at tMax
-    ordinals [tMax] = true;
+    ordinals.push_back (tMax);
 
   }
 
@@ -417,9 +455,9 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
     str << "\n";
   }
 
-  for (int row = 0; row < xThetaYRadiusValues.count(); row++) {
+  for (int row = 0; row < xThetaYRadiusValues [0].count(); row++) {
     QString delimiterForRow;
-    for (int col = 0; col < xThetaYRadiusValues [0].count(); col++) {
+    for (int col = 0; col < xThetaYRadiusValues.count(); col++) {
 
       str << delimiterForRow << *(xThetaYRadiusValues [col] [row]);
       delimiterForRow = delimiter;

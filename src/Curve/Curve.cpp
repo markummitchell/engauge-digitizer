@@ -415,10 +415,10 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
                               << " curve=" << m_curveName.toLatin1().data()
                               << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 
+  // Make sure ordinals are properly ordered
+
   if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
       curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
-
-    // Make sure ordinals are properly ordered
 
     // Get a map of x/theta values as keys with point identifiers as the values
     XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
@@ -450,5 +450,21 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
       int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
       point.setOrdinal (ordinalNew);
     }
+  } else if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH ||
+             curveConnectAs == CONNECT_AS_RELATION_STRAIGHT) {
+
+    // Keep the ordinal numbering, but make sure the ordinals are evenly spaced
+    Points::iterator itr;
+    int ordinal = 0;
+    for (itr = m_points.begin(); itr != m_points.end(); itr++) {
+      Point &point = *itr;
+      point.setOrdinal (ordinal++);
+    }
+
+  } else {
+
+    LOG4CPP_ERROR_S ((*mainCat)) << "Curve::updatePointOrdinals";
+    ENGAUGE_ASSERT (false);
+
   }
 }
