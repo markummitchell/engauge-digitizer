@@ -209,7 +209,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
     const Curve *curve = document.curveForCurveName (curveName);
     const Points points = curve->points ();
 
-    if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
+    if (modelExport.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW) {
 
       // No interpolation. Raw points
       loadXThetaYRadiusValuesForCurveRaw (points,
@@ -337,7 +337,7 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &mod
     const Curve *curve = document.curveForCurveName (curveName);
     const Points points = curve->points ();
 
-    if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
+    if (modelExport.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW) {
 
       // No interpolation. Raw points
       maxColumnSize = qMax (maxColumnSize,
