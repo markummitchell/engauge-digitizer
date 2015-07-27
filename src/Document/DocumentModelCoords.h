@@ -35,11 +35,17 @@ public:
   /// Get method for coordinates type.
   CoordsType coordsType () const;
 
+  /// Get method for date format when used.
+  CoordUnitsDate coordUnitsDate () const;
+
   /// Get method for radius units.
   CoordUnitsNonPolarTheta coordUnitsRadius () const;
 
   /// Get method for theta unit.
   CoordUnitsPolarTheta coordUnitsTheta () const;
+
+  /// Get method for time format when used.
+  CoordUnitsTime coordUnitsTime () const;
 
   /// Get method for x units.
   CoordUnitsNonPolarTheta coordUnitsX () const;
@@ -67,17 +73,23 @@ public:
   /// Set method for coordinates type.
   void setCoordsType (CoordsType coordsType);
 
+  /// Set method for date units.
+  void setCoordUnitsDate (CoordUnitsDate coordUnits);
+
   /// Set method for radius units.
-  void setCoordUnitsRadius (CoordUnitsNonPolarTheta coordUnitsRadius);
+  void setCoordUnitsRadius (CoordUnitsNonPolarTheta coordUnits);
 
   /// Set method for theta units.
-  void setCoordUnitsTheta (CoordUnitsPolarTheta coordUnitsTheta);
+  void setCoordUnitsTheta (CoordUnitsPolarTheta coordUnits);
+
+  /// Set method for time units.
+  void setCoordUnitsTime (CoordUnitsTime coordUnits);
 
   /// Set method for x units.
-  void setCoordUnitsX (CoordUnitsNonPolarTheta coordUnitsX);
+  void setCoordUnitsX (CoordUnitsNonPolarTheta coordUnits);
 
   /// Set method for y units.
-  void setCoordUnitsY (CoordUnitsNonPolarTheta coordUnitsY);
+  void setCoordUnitsY (CoordUnitsNonPolarTheta coordUnits);
 
   /// Set method for origin radius in polar mode.
   void setOriginRadius (double originRadius);
@@ -95,6 +107,8 @@ private:
   CoordUnitsNonPolarTheta m_coordUnitsY; // Applies to y for cartesian coordinates
   CoordUnitsPolarTheta m_coordUnitsTheta; // Applies to theta for polar coordinates
   CoordUnitsNonPolarTheta m_coordUnitsRadius; // Applies to radius for polar coordinates
+  CoordUnitsDate m_coordUnitsDate; // Applies to date/time coordinates
+  CoordUnitsTime m_coordUnitsTime;
 };
 
 #endif // DOCUMENT_MODEL_COORDS_H

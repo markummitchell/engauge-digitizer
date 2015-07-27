@@ -67,13 +67,22 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   m_btnCartesian (0),
   m_btnPolar (0),
   m_validatorOriginRadius (0),
+  m_cmbDate (0),
+  m_cmbTime (0),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelCoordsBefore (0),
   m_modelCoordsAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::DlgSettingsCoords";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsCoords::~DlgSettingsCoords()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::~DlgSettingsCoords";
 }
 
 void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
@@ -162,6 +171,33 @@ QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
   cmdMediator.iterateThroughCurvesPointsGraphs (ftorWithCallback);
 
   return ftor.boundingRectGraph(isEmpty);
+}
+
+void DlgSettingsCoords::createDateTime (QGridLayout *layout,
+                                        int &row)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createDateTime";
+
+  QLabel *label = new QLabel("Date/Time:");
+  layout->addWidget (label, row, 1);
+
+  QWidget *widgetCombos = new QWidget;
+  layout->addWidget (widgetCombos, row++, 2);
+  QHBoxLayout *layoutCombos = new QHBoxLayout;
+  widgetCombos->setLayout (layoutCombos);
+
+  // Put date and time comboboxes into same widget
+  m_cmbDate = new QComboBox;
+  m_cmbDate->setWhatsThis ("Date format to be used for date values, and date portion of mixed date/time values, "
+                           "during input and output.\n\n"
+                           "Setting the format to an empty value results in just the time portion appearing in output.");
+  layoutCombos->addWidget (m_cmbDate);
+
+  m_cmbTime = new QComboBox;
+  m_cmbTime->setWhatsThis ("Time format to be used for time values, and time portion of mixed date/time values, "
+                           "during input and output.\n\n"
+                           "Setting the format to an empty value results in just the date portion appearing in output.");
+  layoutCombos->addWidget (m_cmbTime);
 }
 
 void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
@@ -306,6 +342,7 @@ QWidget *DlgSettingsCoords::createSubPanel ()
   createGroupCoordsType(layout, row);
   createGroupXTheta (layout, row);
   createGroupYRadius (layout, row);
+  createDateTime (layout, row);
   createPreview (layout, row);
 
   return subPanel;
@@ -513,16 +550,19 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 
   // X and Y units
   if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
-    loadUnitsComboBoxNonPolar (*m_cmbXThetaUnits,
+    loadComboBoxUnitsNonPolar (*m_cmbXThetaUnits,
                                m_modelCoordsAfter->coordUnitsX());
-    loadUnitsComboBoxNonPolar (*m_cmbYRadiusUnits,
+    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
                                m_modelCoordsAfter->coordUnitsY());
   } else {
-    loadUnitsComboBoxPolar (*m_cmbXThetaUnits,
+    loadComboBoxUnitsPolar (*m_cmbXThetaUnits,
                             m_modelCoordsAfter->coordUnitsTheta());
-    loadUnitsComboBoxNonPolar (*m_cmbYRadiusUnits,
+    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
                                m_modelCoordsAfter->coordUnitsRadius());
   }
+
+  loadComboBoxDate();
+  loadComboBoxTime ();
 
   m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
   m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
@@ -534,10 +574,50 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
-void DlgSettingsCoords::loadUnitsComboBoxNonPolar (QComboBox &cmb,
+void DlgSettingsCoords::loadComboBoxDate()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadComboBoxDate";
+
+  m_cmbDate->clear ();
+
+  m_cmbDate->addItem (coordUnitsDateToString (COORD_UNITS_DATE_SKIP),
+                      QVariant (COORD_UNITS_DATE_SKIP));
+  m_cmbDate->addItem (coordUnitsDateToString (COORD_UNITS_DATE_MONTH_DAY_YEAR),
+                      QVariant (COORD_UNITS_DATE_MONTH_DAY_YEAR));
+  m_cmbDate->addItem (coordUnitsDateToString (COORD_UNITS_DATE_DAY_MONTH_YEAR),
+                      QVariant (COORD_UNITS_DATE_DAY_MONTH_YEAR));
+  m_cmbDate->addItem (coordUnitsDateToString (COORD_UNITS_DATE_YEAR_MONTH_DAY),
+                      QVariant (COORD_UNITS_DATE_YEAR_MONTH_DAY));
+
+  int index = m_cmbDate->findData (QVariant (m_modelCoordsAfter->coordUnitsDate()));
+  m_cmbDate->setCurrentIndex (index);
+}
+
+void DlgSettingsCoords::loadComboBoxTime()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadComboBoxTime";
+
+  m_cmbTime->clear ();
+
+  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_SKIP),
+                      QVariant (COORD_UNITS_TIME_SKIP));
+  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE),
+                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE));
+  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_PM),
+                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE_PM));
+  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_SECOND),
+                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE_SECOND));
+  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_SECOND_PM),
+                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE_SECOND_PM));
+
+  int index = m_cmbTime->findData (QVariant (m_modelCoordsAfter->coordUnitsTime()));
+  m_cmbTime->setCurrentIndex (index);
+}
+
+void DlgSettingsCoords::loadComboBoxUnitsNonPolar (QComboBox &cmb,
                                                    CoordUnitsNonPolarTheta coordUnits)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadUnitsComboBoxNonPolar";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadComboBoxUnitsNonPolar";
 
   cmb.clear();
 
@@ -557,10 +637,10 @@ void DlgSettingsCoords::loadUnitsComboBoxNonPolar (QComboBox &cmb,
   cmb.setCurrentIndex (index);
 }
 
-void DlgSettingsCoords::loadUnitsComboBoxPolar (QComboBox &cmb,
+void DlgSettingsCoords::loadComboBoxUnitsPolar (QComboBox &cmb,
                                                 CoordUnitsPolarTheta coordUnits)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadUnitsComboBoxPolar";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadComboBoxUnitsPolar";
 
   cmb.clear();
 
@@ -616,6 +696,15 @@ void DlgSettingsCoords::slotCartesianPolar (bool)
   updatePreview();
 }
 
+void DlgSettingsCoords::slotDate(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotDate";
+
+  CoordUnitsDate coordUnits = (CoordUnitsDate) m_cmbDate->currentData ().toInt();
+  m_modelCoordsAfter->setCoordUnitsDate(coordUnits);
+  updatePreview();
+}
+
 void DlgSettingsCoords::slotPolarOriginRadius(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarOriginRadius";
@@ -624,6 +713,15 @@ void DlgSettingsCoords::slotPolarOriginRadius(const QString &)
 
   m_modelCoordsAfter->setOriginRadius(numberText.toDouble ());
   updateControls();
+  updatePreview();
+}
+
+void DlgSettingsCoords::slotTime(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotTime";
+
+  CoordUnitsTime coordUnits = (CoordUnitsTime) m_cmbTime->currentData ().toInt();
+  m_modelCoordsAfter->setCoordUnitsTime(coordUnits);
   updatePreview();
 }
 
@@ -746,11 +844,22 @@ void DlgSettingsCoords::updateControls ()
     m_boxYRadius->setTitle (captionYRadius);
   }
 
+  bool enableDateTime;
+  if (m_btnCartesian->isChecked()) {
+    enableDateTime = (((CoordUnitsNonPolarTheta) m_cmbXThetaUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME) ||
+                      ((CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME));
+  } else {
+    enableDateTime = ((CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME);
+  }
+  m_cmbDate->setEnabled (enableDateTime);
+  m_cmbTime->setEnabled (enableDateTime);
+
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::updateControls"
                               << " textOriginRadius=" << textOriginRadius.toLatin1().data()
                               << " goodOriginRadius=" << (goodOriginRadius ? "true" : "false")
                               << " originRadius=" << posOriginRadius
-                              << " btnPolarChecked=" << (m_btnPolar->isChecked() ? "true" : "false");
+                              << " btnPolarChecked=" << (m_btnPolar->isChecked() ? "true" : "false")
+                              << " enableDateTime=" << (enableDateTime ? "true" : "false");
 }
 
 void DlgSettingsCoords::updatePreview()

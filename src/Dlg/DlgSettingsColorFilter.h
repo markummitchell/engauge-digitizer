@@ -27,6 +27,7 @@ class DlgSettingsColorFilter : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsColorFilter(MainWindow &mainWindow);
+  virtual ~DlgSettingsColorFilter();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

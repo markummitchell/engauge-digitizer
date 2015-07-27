@@ -31,8 +31,15 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   m_modelPointMatchBefore (0),
   m_modelPointMatchAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::DlgSettingsPointMatch";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsPointMatch::~DlgSettingsPointMatch()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::~DlgSettingsPointMatch";
 }
 
 QPointF DlgSettingsPointMatch::boxPositionConstraint(const QPointF &posIn)

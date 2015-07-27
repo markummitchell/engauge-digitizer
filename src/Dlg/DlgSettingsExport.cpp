@@ -42,8 +42,15 @@ DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
   m_modelExportBefore (0),
   m_modelExportAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::DlgSettingsExport";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsExport::~DlgSettingsExport()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::~DlgSettingsExport";
 }
 
 void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)

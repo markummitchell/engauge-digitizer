@@ -21,6 +21,7 @@ class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsGridRemoval(MainWindow &mainWindow);
+  virtual ~DlgSettingsGridRemoval();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

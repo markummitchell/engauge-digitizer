@@ -37,8 +37,15 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
   m_modelAxesCheckerAfter (0),
   m_modelCoords (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::DlgSettingsAxesChecker";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsAxesChecker::~DlgSettingsAxesChecker()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::~DlgSettingsAxesChecker";
 }
 
 void DlgSettingsAxesChecker::createControls (QGridLayout *layout,

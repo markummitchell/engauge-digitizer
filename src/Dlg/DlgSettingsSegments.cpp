@@ -37,8 +37,15 @@ DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
   m_modelSegmentsBefore (0),
   m_modelSegmentsAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::DlgSettingsSegments";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsSegments::~DlgSettingsSegments()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::~DlgSettingsSegments";
 }
 
 void DlgSettingsSegments::createControls (QGridLayout *layout,

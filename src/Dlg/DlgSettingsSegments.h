@@ -21,6 +21,7 @@ class DlgSettingsSegments : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsSegments(MainWindow &mainWindow);
+  virtual ~DlgSettingsSegments();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

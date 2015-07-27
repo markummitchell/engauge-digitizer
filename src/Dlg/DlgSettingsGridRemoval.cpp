@@ -31,8 +31,15 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
   m_modelGridRemovalBefore (0),
   m_modelGridRemovalAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::DlgSettingsGridRemoval";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsGridRemoval::~DlgSettingsGridRemoval()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::~DlgSettingsGridRemoval";
 }
 
 void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)

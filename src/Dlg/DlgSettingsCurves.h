@@ -18,6 +18,7 @@ class DlgSettingsCurves : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsCurves(MainWindow &mainWindow);
+  virtual ~DlgSettingsCurves();
 
   virtual QWidget *createSubPanel ();
   void load (CmdMediator &cmdMediator);

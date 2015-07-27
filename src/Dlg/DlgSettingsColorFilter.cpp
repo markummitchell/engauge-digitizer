@@ -38,8 +38,15 @@ DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
   m_modelColorFilterBefore (0),
   m_modelColorFilterAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::DlgSettingsColorFilter";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsColorFilter::~DlgSettingsColorFilter()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::~DlgSettingsColorFilter";
 }
 
 void DlgSettingsColorFilter::createControls (QGridLayout *layout, int &row)

@@ -22,6 +22,7 @@ class DlgSettingsAxesChecker : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsAxesChecker(MainWindow &mainWindow);
+  virtual ~DlgSettingsAxesChecker();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

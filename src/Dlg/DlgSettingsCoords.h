@@ -25,13 +25,16 @@ class DlgSettingsCoords : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsCoords(MainWindow &mainWindow);
+  virtual ~DlgSettingsCoords();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 
 private slots:
   void slotCartesianPolar (bool);
+  void slotDate (const QString &);
   void slotPolarOriginRadius(const QString &);
+  void slotTime (const QString &);
   void slotUnitsXTheta(const QString &);
   void slotUnitsYRadius(const QString &);
   void slotXThetaLinear();
@@ -48,6 +51,8 @@ private:
   void annotateRadiusAtOrigin(const QFont &defaultFont);
   QRectF boundingRectGraph (CmdMediator &cmdMediator,
                             bool &isEmpty) const;
+  void createDateTime(QGridLayout *layout,
+                      int &row);
   void createGroupCoordsType(QGridLayout *layout,
                              int &row);
   void createGroupXTheta(QGridLayout *layout,
@@ -63,9 +68,11 @@ private:
   void drawPolarLinearRadius();
   void drawPolarLogRadius();
   void drawPolarTheta();
-  void loadUnitsComboBoxNonPolar (QComboBox &cmb,
+  void loadComboBoxDate();
+  void loadComboBoxTime();
+  void loadComboBoxUnitsNonPolar (QComboBox &cmb,
                                   CoordUnitsNonPolarTheta coordUnits);
-  void loadUnitsComboBoxPolar (QComboBox &cmb,
+  void loadComboBoxUnitsPolar (QComboBox &cmb,
                                CoordUnitsPolarTheta coordUnits);
   void resetSceneRectangle();
   void updateControls();
@@ -86,6 +93,9 @@ private:
   QComboBox *m_cmbYRadiusUnits;
   QLineEdit *m_editOriginRadius;
   DlgValidatorLog *m_validatorOriginRadius;
+
+  QComboBox *m_cmbDate;
+  QComboBox *m_cmbTime;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

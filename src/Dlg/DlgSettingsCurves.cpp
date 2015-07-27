@@ -18,8 +18,15 @@ DlgSettingsCurves::DlgSettingsCurves(MainWindow &mainWindow) :
                            "DlgSetingsCurves",
                            mainWindow)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::DlgSettingsCurves";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
+}
+
+DlgSettingsCurves::~DlgSettingsCurves()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::~DlgSettingsCurves";
 }
 
 void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,

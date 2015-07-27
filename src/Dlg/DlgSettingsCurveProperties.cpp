@@ -53,10 +53,17 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   m_modelCurveStylesBefore (0),
   m_modelCurveStylesAfter (0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::DlgSettingsCurveProperties";
+
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
 
   setMinimumWidth (740); // Override finishPanel width for room for m_cmbLineType and preview to be completely visible
+}
+
+DlgSettingsCurveProperties::~DlgSettingsCurveProperties()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::~DlgSettingsCurveProperties";
 }
 
 void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,

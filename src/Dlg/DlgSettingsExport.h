@@ -24,6 +24,7 @@ class DlgSettingsExport : public DlgSettingsAbstractBase
 public:
   /// Single constructor.
   DlgSettingsExport(MainWindow &mainWindow);
+  virtual ~DlgSettingsExport();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);

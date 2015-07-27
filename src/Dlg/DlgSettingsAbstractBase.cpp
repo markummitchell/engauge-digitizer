@@ -18,12 +18,17 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
   m_cmdMediator (0),
   m_dialogName (dialogName)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::DlgSettingsAbstractBase"
+                              << " name=" << m_dialogName.toLatin1().data();
+
   setWindowTitle (title);
   setModal (true);
 }
 
 DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::~DlgSettingsAbstractBase"
+                              << " name=" << m_dialogName.toLatin1().data();
 }
 
 CmdMediator &DlgSettingsAbstractBase::cmdMediator ()

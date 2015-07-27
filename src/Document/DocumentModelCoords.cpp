@@ -23,7 +23,9 @@ DocumentModelCoords::DocumentModelCoords() :
   m_coordUnitsX (COORD_UNITS_NON_POLAR_THETA_NUMBER),
   m_coordUnitsY (COORD_UNITS_NON_POLAR_THETA_NUMBER),
   m_coordUnitsTheta (COORD_UNITS_POLAR_THETA_DEGREES),
-  m_coordUnitsRadius (COORD_UNITS_NON_POLAR_THETA_NUMBER)
+  m_coordUnitsRadius (COORD_UNITS_NON_POLAR_THETA_NUMBER),
+  m_coordUnitsDate (COORD_UNITS_DATE_YEAR_MONTH_DAY),
+  m_coordUnitsTime (COORD_UNITS_TIME_HOUR_MINUTE_SECOND)
 {
 }
 
@@ -35,7 +37,9 @@ DocumentModelCoords::DocumentModelCoords(const Document &document) :
   m_coordUnitsX(document.modelCoords().coordUnitsX()),
   m_coordUnitsY(document.modelCoords().coordUnitsY()),
   m_coordUnitsTheta(document.modelCoords().coordUnitsTheta()),
-  m_coordUnitsRadius(document.modelCoords().coordUnitsRadius())
+  m_coordUnitsRadius(document.modelCoords().coordUnitsRadius()),
+  m_coordUnitsDate(document.modelCoords().coordUnitsDate()),
+  m_coordUnitsTime(document.modelCoords().coordUnitsTime())
 {
 }
 
@@ -47,7 +51,9 @@ DocumentModelCoords::DocumentModelCoords(const DocumentModelCoords &other) :
   m_coordUnitsX (other.coordUnitsX()),
   m_coordUnitsY (other.coordUnitsY()),
   m_coordUnitsTheta (other.coordUnitsTheta ()),
-  m_coordUnitsRadius (other.coordUnitsRadius ())
+  m_coordUnitsRadius (other.coordUnitsRadius ()),
+  m_coordUnitsDate (other.coordUnitsDate ()),
+  m_coordUnitsTime (other.coordUnitsTime ())
 {
 }
 
@@ -61,6 +67,8 @@ DocumentModelCoords &DocumentModelCoords::operator=(const DocumentModelCoords &o
   m_coordUnitsY = other.coordUnitsY();
   m_coordUnitsTheta = other.coordUnitsTheta();
   m_coordUnitsRadius = other.coordUnitsRadius();
+  m_coordUnitsDate = other.coordUnitsDate();
+  m_coordUnitsTime = other.coordUnitsTime();
 
   return *this;
 }
@@ -80,6 +88,11 @@ CoordsType DocumentModelCoords::coordsType () const
   return m_coordsType;
 }
 
+CoordUnitsDate DocumentModelCoords::coordUnitsDate() const
+{
+  return m_coordUnitsDate;
+}
+
 CoordUnitsNonPolarTheta DocumentModelCoords::coordUnitsRadius() const
 {
   return m_coordUnitsRadius;
@@ -88,6 +101,11 @@ CoordUnitsNonPolarTheta DocumentModelCoords::coordUnitsRadius() const
 CoordUnitsPolarTheta DocumentModelCoords::coordUnitsTheta() const
 {
   return m_coordUnitsTheta;
+}
+
+CoordUnitsTime DocumentModelCoords::coordUnitsTime() const
+{
+  return m_coordUnitsTime;
 }
 
 CoordUnitsNonPolarTheta DocumentModelCoords::coordUnitsX() const
@@ -115,7 +133,9 @@ void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_THETA) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS)) {
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME)) {
 
     setCoordsType ((CoordsType) attributes.value(DOCUMENT_SERIALIZE_COORDS_TYPE).toInt());
     setOriginRadius (attributes.value(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS).toDouble());
@@ -125,6 +145,8 @@ void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
     setCoordUnitsY ((CoordUnitsNonPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_Y).toInt());
     setCoordUnitsTheta ((CoordUnitsPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_THETA).toInt());
     setCoordUnitsRadius ((CoordUnitsNonPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS).toInt());
+    setCoordUnitsDate ((CoordUnitsDate) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE).toInt());
+    setCoordUnitsTime ((CoordUnitsTime) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME).toInt());
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -162,6 +184,8 @@ void DocumentModelCoords::printStream(QString indentation,
   str << indentation << "coordUnitsY=" << coordUnitsNonPolarThetaToString (m_coordUnitsY) << "\n";
   str << indentation << "coordUnitsTheta=" << coordUnitsPolarThetaToString (m_coordUnitsTheta) << "\n";
   str << indentation << "coordUnitsRadius=" << coordUnitsNonPolarThetaToString (m_coordUnitsRadius) << "\n";
+  str << indentation << "coordUnitsDate=" << coordUnitsDateToString (m_coordUnitsDate) << "\n";
+  str << indentation << "coordUnitsTime=" << coordUnitsTimeToString (m_coordUnitsTime) << "\n";
 }
 
 void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const
@@ -184,6 +208,10 @@ void DocumentModelCoords::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_THETA_STRING, coordUnitsPolarThetaToString (m_coordUnitsTheta));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS, QString::number (m_coordUnitsRadius));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS_STRING, coordUnitsNonPolarThetaToString (m_coordUnitsRadius));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE, QString::number (m_coordUnitsDate));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE_STRING, coordUnitsDateToString (m_coordUnitsDate));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME, QString::number (m_coordUnitsTime));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME_STRING, coordUnitsTimeToString (m_coordUnitsTime));
   writer.writeEndElement();
 }
 
@@ -202,24 +230,34 @@ void DocumentModelCoords::setCoordsType (CoordsType coordsType)
   m_coordsType = coordsType;
 }
 
-void DocumentModelCoords::setCoordUnitsRadius (CoordUnitsNonPolarTheta coordUnitsRadius)
+void DocumentModelCoords::setCoordUnitsDate(CoordUnitsDate coordUnits)
 {
-  m_coordUnitsRadius = coordUnitsRadius;
+  m_coordUnitsDate = coordUnits;
 }
 
-void DocumentModelCoords::setCoordUnitsTheta (CoordUnitsPolarTheta coordUnitsTheta)
+void DocumentModelCoords::setCoordUnitsRadius (CoordUnitsNonPolarTheta coordUnits)
 {
-  m_coordUnitsTheta = coordUnitsTheta;
+  m_coordUnitsRadius = coordUnits;
 }
 
-void DocumentModelCoords::setCoordUnitsX (CoordUnitsNonPolarTheta coordUnitsX)
+void DocumentModelCoords::setCoordUnitsTheta (CoordUnitsPolarTheta coordUnits)
 {
-  m_coordUnitsX = coordUnitsX;
+  m_coordUnitsTheta = coordUnits;
 }
 
-void DocumentModelCoords::setCoordUnitsY (CoordUnitsNonPolarTheta coordUnitsY)
+void DocumentModelCoords::setCoordUnitsTime(CoordUnitsTime coordUnits)
 {
-  m_coordUnitsY = coordUnitsY;
+  m_coordUnitsTime = coordUnits;
+}
+
+void DocumentModelCoords::setCoordUnitsX (CoordUnitsNonPolarTheta coordUnits)
+{
+  m_coordUnitsX = coordUnits;
+}
+
+void DocumentModelCoords::setCoordUnitsY (CoordUnitsNonPolarTheta coordUnits)
+{
+  m_coordUnitsY = coordUnits;
 }
 
 void DocumentModelCoords::setOriginRadius(double originRadius)
