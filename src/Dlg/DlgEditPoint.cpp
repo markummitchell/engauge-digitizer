@@ -66,12 +66,17 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
   bool isConstraintY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
-  m_validatorGraphX = new DlgValidatorEditCoord (isCartesian,
-                                                 true,
-                                                 modelCoords.coordScaleXTheta());
-  m_validatorGraphY = new DlgValidatorEditCoord (isCartesian,
-                                                 false,
-                                                 modelCoords.coordScaleYRadius());
+  if (isCartesian) {
+    m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
+                                                   modelCoords.coordUnitsX());
+    m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
+                                                   modelCoords.coordUnitsY());
+  } else {
+    m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
+                                                   modelCoords.coordUnitsTheta());
+    m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
+                                                   modelCoords.coordUnitsRadius());
+  }
 
   // Label
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8:")

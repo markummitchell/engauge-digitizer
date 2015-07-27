@@ -1,13 +1,26 @@
 #include "DlgValidatorEditCoord.h"
 
-DlgValidatorEditCoord::DlgValidatorEditCoord(bool isCartesian,
-                                             bool isXThetaElseYRadius,
-                                             CoordScale coordScale,
+const int UNUSED_VALUE = 0;
+
+DlgValidatorEditCoord::DlgValidatorEditCoord(CoordScale coordScale,
+                                             CoordUnitsNonPolarTheta coordUnits,
                                              QObject *parent) :
   QDoubleValidator(parent),
-  m_isCartesian (isCartesian),
-  m_isXThetaElseYRadius (isXThetaElseYRadius),
-  m_coordScale (coordScale)
+  m_coordScale (coordScale),
+  m_isNonPolarTheta (true),
+  m_coordUnitsNonPolarTheta (coordUnits),
+  m_coordUnitsPolarTheta ((CoordUnitsPolarTheta) UNUSED_VALUE)
+{
+}
+
+DlgValidatorEditCoord::DlgValidatorEditCoord(CoordScale coordScale,
+                                             CoordUnitsPolarTheta coordUnits,
+                                             QObject *parent) :
+  QDoubleValidator(parent),
+  m_coordScale (coordScale),
+  m_isNonPolarTheta (false),
+  m_coordUnitsNonPolarTheta ((CoordUnitsNonPolarTheta) UNUSED_VALUE),
+  m_coordUnitsPolarTheta (coordUnits)
 {
 }
 
