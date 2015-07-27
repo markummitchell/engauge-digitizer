@@ -1,6 +1,6 @@
 #include "DigitizeStateAbstractBase.h"
 #include "DlgEditPoint.h"
-#include "DlgValidatorLog.h"
+#include "DlgValidatorEditCoord.h"
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -64,20 +64,14 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
   QChar nameYR = (isCartesian ? QChar ('Y') : QChar ('R'));
 
   // Constraints on x and y are needed for log scaling
-  bool isConstraintX = false, isConstraintY = false;
-  if (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG) {
-    m_validatorGraphX = new DlgValidatorLog (COORD_SCALE_LOG);
-    isConstraintX = true;
-  } else {
-    m_validatorGraphX = new QDoubleValidator ();
-  }
-
-  if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    m_validatorGraphY = new DlgValidatorLog (COORD_SCALE_LOG);
-    isConstraintY = true;
-  } else {
-    m_validatorGraphY = new QDoubleValidator ();
-  }
+  bool isConstraintX = (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
+  bool isConstraintY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
+  m_validatorGraphX = new DlgValidatorEditCoord (isCartesian,
+                                                 true,
+                                                 modelCoords.coordScaleXTheta());
+  m_validatorGraphY = new DlgValidatorEditCoord (isCartesian,
+                                                 false,
+                                                 modelCoords.coordScaleYRadius());
 
   // Label
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8:")

@@ -5,7 +5,7 @@
 #include "CoordUnitsPolarTheta.h"
 #include "DlgSettingsAbstractBase.h"
 
-class DlgValidatorLog;
+class DlgValidatorEditCoord;
 class DocumentModelCoords;
 class QComboBox;
 class QDoubleValidator;
@@ -92,7 +92,7 @@ private:
   QRadioButton *m_yRadiusLog;
   QComboBox *m_cmbYRadiusUnits;
   QLineEdit *m_editOriginRadius;
-  DlgValidatorLog *m_validatorOriginRadius;
+  DlgValidatorEditCoord *m_validatorOriginRadius;
 
   QComboBox *m_cmbDate;
   QComboBox *m_cmbTime;

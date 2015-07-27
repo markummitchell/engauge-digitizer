@@ -2,7 +2,7 @@
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
 #include "DlgSettingsCoords.h"
-#include "DlgValidatorLog.h"
+#include "DlgValidatorEditCoord.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
@@ -26,6 +26,9 @@
 #include "ViewPreview.h"
 
 const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
+
+const bool NOT_CARTESIAN = false;
+const bool IS_Y_RADIUS = false;
 
 const int COLUMN_0 = 0;
 const int COLUMN_1 = 1;
@@ -538,7 +541,9 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_modelCoordsAfter = new DocumentModelCoords (cmdMediator.document().modelCoords());
 
   // Populate controls
-  m_validatorOriginRadius = new DlgValidatorLog (m_modelCoordsAfter->coordScaleYRadius());
+  m_validatorOriginRadius = new DlgValidatorEditCoord (NOT_CARTESIAN,
+                                                       IS_Y_RADIUS,
+                                                       m_modelCoordsAfter->coordScaleYRadius());
   m_editOriginRadius->setValidator (m_validatorOriginRadius); // Set before call to setText so validator is defined in updateControls
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 
@@ -777,7 +782,9 @@ void DlgSettingsCoords::slotYRadiusLinear()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLinear";
 
   delete m_validatorOriginRadius;
-  m_validatorOriginRadius = new DlgValidatorLog (COORD_SCALE_LINEAR);
+  m_validatorOriginRadius = new DlgValidatorEditCoord (NOT_CARTESIAN,
+                                                       IS_Y_RADIUS,
+                                                       COORD_SCALE_LINEAR);
   m_editOriginRadius->setValidator (m_validatorOriginRadius);
 
   m_modelCoordsAfter->setCoordScaleYRadius((COORD_SCALE_LINEAR));
@@ -790,7 +797,9 @@ void DlgSettingsCoords::slotYRadiusLog()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotYRadiusLog";
 
   delete m_validatorOriginRadius;
-  m_validatorOriginRadius = new DlgValidatorLog (COORD_SCALE_LOG);
+  m_validatorOriginRadius = new DlgValidatorEditCoord (NOT_CARTESIAN,
+                                                       IS_Y_RADIUS,
+                                                       COORD_SCALE_LOG);
   m_editOriginRadius->setValidator (m_validatorOriginRadius);
 
   m_modelCoordsAfter->setCoordScaleYRadius(COORD_SCALE_LOG);
@@ -820,7 +829,9 @@ void DlgSettingsCoords::updateControls ()
   } else {
 
     // Use temporary validator to see if current origin radius would be correct in other linear/log mode
-    DlgValidatorLog validatorOther (m_yRadiusLinear->isChecked () ? COORD_SCALE_LOG : COORD_SCALE_LINEAR);
+    DlgValidatorEditCoord validatorOther (m_btnCartesian->isChecked(),
+                                          IS_Y_RADIUS,
+                                          m_yRadiusLinear->isChecked () ? COORD_SCALE_LOG : COORD_SCALE_LINEAR);
     int posOriginRadiusOther;
     bool goodOriginRadiusOther = (validatorOther.validate (textOriginRadius, posOriginRadiusOther) == QValidator::Acceptable);
 

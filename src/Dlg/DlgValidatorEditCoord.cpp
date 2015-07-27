@@ -1,14 +1,18 @@
-#include "DlgValidatorLog.h"
+#include "DlgValidatorEditCoord.h"
 
-DlgValidatorLog::DlgValidatorLog(CoordScale coordScale,
-                                 QObject *parent) :
+DlgValidatorEditCoord::DlgValidatorEditCoord(bool isCartesian,
+                                             bool isXThetaElseYRadius,
+                                             CoordScale coordScale,
+                                             QObject *parent) :
   QDoubleValidator(parent),
+  m_isCartesian (isCartesian),
+  m_isXThetaElseYRadius (isXThetaElseYRadius),
   m_coordScale (coordScale)
 {
 }
 
-QValidator::State DlgValidatorLog::validate (QString &input,
-                                             int &pos) const
+QValidator::State DlgValidatorEditCoord::validate (QString &input,
+                                                   int &pos) const
 {
   // First do standard check
   QValidator::State state = QDoubleValidator::validate (input,
