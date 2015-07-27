@@ -14,6 +14,8 @@ public:
   /// Constructor for non-polar coordinate
   DlgValidatorEditCoord(CoordScale coordScale,
                         CoordUnitsNonPolarTheta coordUnits,
+                        CoordUnitsDate coordUnitsDate,
+                        CoordUnitsTime coordUnitsTime,
                         QObject *parent = 0);
 
   /// Constructor for polar coordinate
@@ -28,8 +30,14 @@ public:
 private:
   const CoordScale m_coordScale;
   const bool m_isNonPolarTheta;
-  const CoordUnitsNonPolarTheta m_coordUnitsNonPolarTheta; // Applies when m_isNonPolarTheta is true
-  const CoordUnitsPolarTheta m_coordUnitsPolarTheta; // Applies when m_isNonPolarTheta is false
+
+  // Applies when m_isNonPolarTheta is true, with date/time also requiring m_coordUnitsNonPolarTheta=COORD_UNITS_NON_POLAR_THETA_DATE_TIME
+  const CoordUnitsNonPolarTheta m_coordUnitsNonPolarTheta;
+  const CoordUnitsDate m_coordUnitsDate;
+  const CoordUnitsTime m_coordUnitsTime;
+
+  // Applies when m_isNonPolarTheta is false
+  const CoordUnitsPolarTheta m_coordUnitsPolarTheta;
 };
 
 #endif // DLG_VALIDATOR_EDIT_COORD_H

@@ -68,14 +68,20 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
   bool isConstraintY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
   if (isCartesian) {
     m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
-                                                   modelCoords.coordUnitsX());
+                                                   modelCoords.coordUnitsX(),
+                                                   modelCoords.coordUnitsDate(),
+                                                   modelCoords.coordUnitsTime());
     m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
-                                                   modelCoords.coordUnitsY());
+                                                   modelCoords.coordUnitsY(),
+                                                   modelCoords.coordUnitsDate(),
+                                                   modelCoords.coordUnitsTime());
   } else {
     m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
                                                    modelCoords.coordUnitsTheta());
     m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
-                                                   modelCoords.coordUnitsRadius());
+                                                   modelCoords.coordUnitsRadius(),
+                                                   modelCoords.coordUnitsDate(),
+                                                   modelCoords.coordUnitsTime());
   }
 
   // Label
