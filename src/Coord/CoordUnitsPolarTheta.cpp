@@ -1,4 +1,4 @@
-#include "CoordThetaUnits.h"
+#include "CoordUnitsPolarTheta.h"
 
 const QChar THETA (QChar(0x98, 0x03));
 
@@ -13,25 +13,25 @@ const QString POLAR_UNITS_GRADIANS = "Gradians";
 const QString POLAR_UNITS_RADIANS = "Radians";
 const QString POLAR_UNITS_TURNS = "Turns";
 
-QString coordThetaUnitsToString (CoordThetaUnits coordThetaUnits)
+QString coordUnitsPolarThetaToString (CoordUnitsPolarTheta coordUnitsPolarTheta)
 {
-  switch (coordThetaUnits) {
-    case COORD_THETA_UNITS_DEGREES:
+  switch (coordUnitsPolarTheta) {
+    case COORD_UNITS_POLAR_THETA_DEGREES:
       return POLAR_UNITS_DEGREES;
 
-    case COORD_THETA_UNITS_DEGREES_MINUTES:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
       return POLAR_UNITS_DEGREES_MINUTES;
 
-    case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
       return POLAR_UNITS_DEGREES_MINUTES_SECONDS;
 
-    case COORD_THETA_UNITS_GRADIANS:
+    case COORD_UNITS_POLAR_THETA_GRADIANS:
       return POLAR_UNITS_GRADIANS;
 
-    case COORD_THETA_UNITS_RADIANS:
+    case COORD_UNITS_POLAR_THETA_RADIANS:
       return POLAR_UNITS_RADIANS;
 
-    case COORD_THETA_UNITS_TURNS:
+    case COORD_UNITS_POLAR_THETA_TURNS:
       return POLAR_UNITS_TURNS;
 
     default:

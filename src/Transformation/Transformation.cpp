@@ -68,23 +68,23 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
 
     // Input coordinates are polar so convert them
     double angleRadians;
-    switch (modelCoords.coordThetaUnits())
+    switch (modelCoords.coordUnitsTheta())
     {
-      case COORD_THETA_UNITS_DEGREES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
         angleRadians = posGraphIn.x () * PI / 180.0;
         break;
 
-      case COORD_THETA_UNITS_GRADIANS:
+      case COORD_UNITS_POLAR_THETA_GRADIANS:
         angleRadians = posGraphIn.x () * PI / 200.0;
         break;
 
-      case COORD_THETA_UNITS_RADIANS:
+      case COORD_UNITS_POLAR_THETA_RADIANS:
         angleRadians = posGraphIn.x ();
         break;
 
-      case COORD_THETA_UNITS_TURNS:
+      case COORD_UNITS_POLAR_THETA_TURNS:
         angleRadians = posGraphIn.x () * 2.0 * PI;
         break;
 
@@ -111,23 +111,23 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
     // Output coordinates are to be polar so convert them
     double angleRadians = qAtan2 (posGraphIn.y (),
                                   posGraphIn.x ());
-    switch (modelCoords.coordThetaUnits())
+    switch (modelCoords.coordUnitsTheta())
     {
-      case COORD_THETA_UNITS_DEGREES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
         posGraphCartesianOrPolar.setX (angleRadians * 180.0 / PI);
         break;
 
-      case COORD_THETA_UNITS_GRADIANS:
+      case COORD_UNITS_POLAR_THETA_GRADIANS:
         posGraphCartesianOrPolar.setX (angleRadians * 200.0 / PI);
         break;
 
-      case COORD_THETA_UNITS_RADIANS:
+      case COORD_UNITS_POLAR_THETA_RADIANS:
         posGraphCartesianOrPolar.setX (angleRadians);
         break;
 
-      case COORD_THETA_UNITS_TURNS:
+      case COORD_UNITS_POLAR_THETA_TURNS:
         posGraphCartesianOrPolar.setX (angleRadians / 2.0 / PI);
         break;
 

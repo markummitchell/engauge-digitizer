@@ -1,6 +1,8 @@
 #ifndef DLG_SETTINGS_COORDS_H
 #define DLG_SETTINGS_COORDS_H
 
+#include "CoordUnitsNonPolarTheta.h"
+#include "CoordUnitsPolarTheta.h"
 #include "DlgSettingsAbstractBase.h"
 
 class DlgValidatorLog;
@@ -30,7 +32,8 @@ public:
 private slots:
   void slotCartesianPolar (bool);
   void slotPolarOriginRadius(const QString &);
-  void slotPolarUnits(const QString &);
+  void slotUnitsXTheta(const QString &);
+  void slotUnitsYRadius(const QString &);
   void slotXThetaLinear();
   void slotXThetaLog();
   void slotYRadiusLinear();
@@ -47,10 +50,10 @@ private:
                             bool &isEmpty) const;
   void createGroupCoordsType(QGridLayout *layout,
                              int &row);
-  void createGroupPolar(QGridLayout *layout,
+  void createGroupXTheta(QGridLayout *layout,
                         int &row);
-  void createGroupScale(QGridLayout *layout,
-                        int &row);
+  void createGroupYRadius(QGridLayout *layout,
+                          int &row);
   void createPreview(QGridLayout *layout,
                      int &row);
   void drawCartesianLinearX();
@@ -60,6 +63,10 @@ private:
   void drawPolarLinearRadius();
   void drawPolarLogRadius();
   void drawPolarTheta();
+  void loadUnitsComboBoxNonPolar (QComboBox &cmb,
+                                  CoordUnitsNonPolarTheta coordUnits);
+  void loadUnitsComboBoxPolar (QComboBox &cmb,
+                               CoordUnitsPolarTheta coordUnits);
   void resetSceneRectangle();
   void updateControls();
   void updatePreview();
@@ -71,14 +78,12 @@ private:
   QGroupBox *m_boxXTheta;
   QRadioButton *m_xThetaLinear;
   QRadioButton *m_xThetaLog;
+  QComboBox *m_cmbXThetaUnits;
 
   QGroupBox *m_boxYRadius;
   QRadioButton *m_yRadiusLinear;
   QRadioButton *m_yRadiusLog;
-
-  QGroupBox *m_boxPolarCoords;
-  QComboBox *m_cmbPolarUnits;
-
+  QComboBox *m_cmbYRadiusUnits;
   QLineEdit *m_editOriginRadius;
   DlgValidatorLog *m_validatorOriginRadius;
 

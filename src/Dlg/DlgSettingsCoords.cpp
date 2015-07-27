@@ -25,9 +25,16 @@
 #include "Transformation.h"
 #include "ViewPreview.h"
 
+const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
+
+const int COLUMN_0 = 0;
+const int COLUMN_1 = 1;
+
 const int STEPS_PER_CYCLE = 4; // Repeat STEPS_PER_CYLE-1 unhighlighted steps plus 1 highlighted step in each cycle
 const int STEPS_CYCLE_COUNT = 4; // Repeat one highlighted step + STEPS_UNHIGHLIGHTED_PER_HIGHLIGHTED steps this many times
 const int NUM_COORD_STEPS = 1 + STEPS_PER_CYCLE * STEPS_CYCLE_COUNT;
+
+const int MAX_WIDTH_EDIT_ORIGIN_RADIUS = 140;
 
 const int CARTESIAN_COORD_MAX = 100;
 const int CARTESIAN_COORD_MIN = -100;
@@ -75,26 +82,26 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
   for (int direction = 0; direction < 4; direction++) {
 
     QString angle;
-    CoordThetaUnits thetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData().toInt();
+    CoordUnitsPolarTheta thetaUnits = (CoordUnitsPolarTheta) m_cmbXThetaUnits->currentData().toInt();
 
     switch (thetaUnits) {
-      case COORD_THETA_UNITS_DEGREES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES:
-      case COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
         angle = QString::number (90.0 * direction);
         break;
 
-       case COORD_THETA_UNITS_GRADIANS:
+       case COORD_UNITS_POLAR_THETA_GRADIANS:
         angle = QString::number (100.0 * direction);
         break;
 
-      case COORD_THETA_UNITS_RADIANS:
+      case COORD_UNITS_POLAR_THETA_RADIANS:
         static QString radiansUnits [] = {"0", "PI / 2", "PI", "3 * PI / 2"};
         ENGAUGE_ASSERT (direction < 4);
         angle = radiansUnits [direction];
         break;
 
-      case COORD_THETA_UNITS_TURNS:
+      case COORD_UNITS_POLAR_THETA_TURNS:
         static QString turnsUnits [] = {"0", "1 / 4", "1 / 2", "3 / 4"};
         ENGAUGE_ASSERT (direction < 4);
         angle = turnsUnits [direction];
@@ -167,7 +174,7 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
 
   QVBoxLayout *layoutGroup = new QVBoxLayout (m_boxCoordsType);
 
-  QString polarButtonText = QString("Polar (R, ") + THETA + QString(")");
+  QString polarButtonText = QString("Polar (") + THETA + QString(", R)");
 
   m_btnCartesian = new QRadioButton ("Cartesian (X, Y)", m_boxCoordsType);
   m_btnCartesian->setWhatsThis (QString(tr("Select cartesian coordinates.\n\n"
@@ -183,96 +190,85 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
   layoutGroup->addWidget (m_btnPolar);
 }
 
-void DlgSettingsCoords::createGroupPolar(QGridLayout *layout,
-                                         int &row)
+void DlgSettingsCoords::createGroupXTheta (QGridLayout *layout,
+                                           int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupPolar";
-
-  m_boxPolarCoords = new QGroupBox ("Polar Coordinates");
-  layout->addWidget (m_boxPolarCoords, row++, 1, 1, 2);
-
-  QGridLayout *layoutPolar = new QGridLayout (m_boxPolarCoords);
-  m_boxPolarCoords->setLayout (layoutPolar);
-
-  QLabel *labelThetaUnits = new QLabel(THETA + QString (" Units:"));
-  layoutPolar->addWidget (labelThetaUnits, 0, 0);
-
-  m_cmbPolarUnits = new QComboBox;
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES),
-                            QVariant (COORD_THETA_UNITS_DEGREES));
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES_MINUTES),
-                            QVariant (COORD_THETA_UNITS_DEGREES_MINUTES));
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS),
-                            QVariant (COORD_THETA_UNITS_DEGREES_MINUTES_SECONDS));
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_GRADIANS),
-                            QVariant (COORD_THETA_UNITS_GRADIANS));
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_RADIANS),
-                            QVariant (COORD_THETA_UNITS_RADIANS));
-  m_cmbPolarUnits->addItem (coordThetaUnitsToString (COORD_THETA_UNITS_TURNS),
-                            QVariant (COORD_THETA_UNITS_TURNS));
-  m_cmbPolarUnits->setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
-                                              "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "
-                                              "60 minutes per degree. During input, a space must be inserted between the two numbers.\n\n"
-                                              "Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for "
-                                              "seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.\n\n"
-                                              "Gradians format uses a single real number. One complete revolution is 400 gradians.\n\n"
-                                              "Radians format uses a single real number. One complete revolution is 2*pi radians.\n\n"
-                                              "Turns format uses a single real number. One complete revolution is one turn.")));
-  connect (m_cmbPolarUnits, SIGNAL (activated (const QString &)), this, SLOT (slotPolarUnits(const QString &))); // activated() ignores code changes
-  layoutPolar->addWidget (m_cmbPolarUnits, 0, 1);
-
-  QLabel *labelOriginRadius = new QLabel("Origin radius value:");
-  layoutPolar->addWidget (labelOriginRadius, 1, 0);
-
-  m_editOriginRadius = new QLineEdit (m_boxPolarCoords);
-  m_editOriginRadius->setWhatsThis (QString(tr("Specify radius value at origin.\n\n"
-                                               "Normally the radius at the origin is 0, but a nonzero value may be applied in other cases "
-                                               "(like when the radial units are decibels).")));
-  connect (m_editOriginRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPolarOriginRadius(const QString &)));
-  layoutPolar->addWidget (m_editOriginRadius, 1, 1);
-}
-
-void DlgSettingsCoords::createGroupScale (QGridLayout *layout,
-                                          int &row)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupScale";
-
-  const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupXTheta";
 
   m_boxXTheta = new QGroupBox(OVERRIDDEN_VALUE);
-  layout->addWidget (m_boxXTheta, row, 1);
+  layout->addWidget (m_boxXTheta, row++, 1, 1, 2);
 
-  QVBoxLayout *layoutXTheta = new QVBoxLayout (m_boxXTheta);
+  QGridLayout *layoutXTheta = new QGridLayout (m_boxXTheta);
   m_boxXTheta->setLayout (layoutXTheta);
+  int rowGroup = 0;
+
+  QLabel *labelScale = new QLabel ("Scale:");
+  layoutXTheta->addWidget (labelScale, rowGroup++, COLUMN_0);
 
   m_xThetaLinear = new QRadioButton ("Linear", m_boxXTheta);
   m_xThetaLinear->setWhatsThis (QString(tr("Specifies linear scale for the X or Theta coordinate")));
   connect (m_xThetaLinear, SIGNAL (released ()), this, SLOT (slotXThetaLinear()));
-  layoutXTheta->addWidget (m_xThetaLinear);
+  layoutXTheta->addWidget (m_xThetaLinear, rowGroup++, COLUMN_0);
 
   m_xThetaLog = new QRadioButton ("Log", m_boxXTheta);
   m_xThetaLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the X or Theta coordinate.\n\n"
                                         "Log scale is not allowed if there are negative coordinates.\n\n"
                                         "Log scale is not allowed for the Theta coordinate.")));
   connect (m_xThetaLog, SIGNAL (released ()), this, SLOT (slotXThetaLog()));
-  layoutXTheta->addWidget (m_xThetaLog);
+  layoutXTheta->addWidget (m_xThetaLog, rowGroup++, COLUMN_0);
+
+  QLabel *labelThetaUnits = new QLabel("Units:");
+  layoutXTheta->addWidget (labelThetaUnits, rowGroup++, COLUMN_0);
+
+  m_cmbXThetaUnits = new QComboBox;
+  connect (m_cmbXThetaUnits, SIGNAL (activated (const QString &)), this, SLOT (slotUnitsXTheta(const QString &))); // activated() ignores code changes
+  layoutXTheta->addWidget (m_cmbXThetaUnits, rowGroup++, COLUMN_0, 1, 2);
+}
+
+void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
+                                            int &row)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupYRadius";
 
   m_boxYRadius = new QGroupBox (OVERRIDDEN_VALUE);
-  layout->addWidget (m_boxYRadius, row++, 2);
+  layout->addWidget (m_boxYRadius, row++, 1, 1, 2);
 
-  QVBoxLayout *layoutYRadius = new QVBoxLayout (m_boxYRadius);
+  QGridLayout *layoutYRadius = new QGridLayout (m_boxYRadius);
   m_boxYRadius->setLayout (layoutYRadius);
+  int rowGroup = 0;
+
+  QLabel *labelScale = new QLabel ("Scale:");
+  layoutYRadius->addWidget (labelScale, rowGroup++, COLUMN_0);
 
   m_yRadiusLinear = new QRadioButton ("Linear", m_boxYRadius);
   m_yRadiusLinear->setWhatsThis (QString(tr("Specifies linear scale for the Y or R coordinate")));
   connect (m_yRadiusLinear, SIGNAL(released()), this, SLOT (slotYRadiusLinear()));
-  layoutYRadius->addWidget (m_yRadiusLinear);
+  layoutYRadius->addWidget (m_yRadiusLinear, rowGroup++, COLUMN_0);
 
   m_yRadiusLog = new QRadioButton ("Log", m_boxYRadius);
   m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate\n\n"
                                         "Log scale is not allowed if there are negative coordinates.")));
   connect (m_yRadiusLog, SIGNAL(released ()), this, SLOT (slotYRadiusLog ()));
-  layoutYRadius->addWidget (m_yRadiusLog);
+  layoutYRadius->addWidget (m_yRadiusLog, rowGroup++, COLUMN_0);
+
+  QLabel *labelUnits = new QLabel("Units:");
+  layoutYRadius->addWidget (labelUnits, rowGroup++, COLUMN_0);
+
+  m_cmbYRadiusUnits = new QComboBox;
+  connect (m_cmbYRadiusUnits, SIGNAL (activated (const QString &)), this, SLOT (slotUnitsYRadius(const QString &))); // activated() ignores code changes
+  layoutYRadius->addWidget (m_cmbYRadiusUnits, rowGroup++, COLUMN_0, 1, 2);
+
+  rowGroup = 0;
+  QLabel *labelOriginRadius = new QLabel("Origin radius value:");
+  layoutYRadius->addWidget (labelOriginRadius, rowGroup++, COLUMN_1);
+
+  m_editOriginRadius = new QLineEdit (m_boxYRadius);
+  m_editOriginRadius->setMaximumWidth (MAX_WIDTH_EDIT_ORIGIN_RADIUS);
+  m_editOriginRadius->setWhatsThis (QString(tr("Specify radius value at origin.\n\n"
+                                               "Normally the radius at the origin is 0, but a nonzero value may be applied in other cases "
+                                               "(like when the radial units are decibels).")));
+  connect (m_editOriginRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPolarOriginRadius(const QString &)));
+  layoutYRadius->addWidget (m_editOriginRadius, rowGroup++, COLUMN_1);
 }
 
 void DlgSettingsCoords::createPreview (QGridLayout *layout,
@@ -308,8 +304,8 @@ QWidget *DlgSettingsCoords::createSubPanel ()
 
   int row = 0;
   createGroupCoordsType(layout, row);
-  createGroupScale (layout, row);
-  createGroupPolar (layout, row);
+  createGroupXTheta (layout, row);
+  createGroupYRadius (layout, row);
   createPreview (layout, row);
 
   return subPanel;
@@ -487,8 +483,10 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
                                         isEmpty);
   bool xThetaGoesNegative = !isEmpty && (rectGraph.x() <= 0);
   bool yRGoesNegative = !isEmpty && (rectGraph.y() <= 0);
-  m_boxXTheta->setEnabled (!xThetaGoesNegative);
-  m_boxYRadius->setEnabled (!yRGoesNegative);
+  m_xThetaLinear->setEnabled (!xThetaGoesNegative);
+  m_xThetaLog->setEnabled (!xThetaGoesNegative);
+  m_yRadiusLinear->setEnabled (!yRGoesNegative);
+  m_yRadiusLog->setEnabled (!yRGoesNegative);
 
   // Flush old data
   if (m_modelCoordsBefore != 0) {
@@ -513,8 +511,18 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
     m_btnPolar->setChecked (true);
   }
 
-  int indexPolarUnits = m_cmbPolarUnits->findData (QVariant (m_modelCoordsAfter->coordThetaUnits()));
-  m_cmbPolarUnits->setCurrentIndex (indexPolarUnits);
+  // X and Y units
+  if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
+    loadUnitsComboBoxNonPolar (*m_cmbXThetaUnits,
+                               m_modelCoordsAfter->coordUnitsX());
+    loadUnitsComboBoxNonPolar (*m_cmbYRadiusUnits,
+                               m_modelCoordsAfter->coordUnitsY());
+  } else {
+    loadUnitsComboBoxPolar (*m_cmbXThetaUnits,
+                            m_modelCoordsAfter->coordUnitsTheta());
+    loadUnitsComboBoxNonPolar (*m_cmbYRadiusUnits,
+                               m_modelCoordsAfter->coordUnitsRadius());
+  }
 
   m_xThetaLinear->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LINEAR);
   m_xThetaLog->setChecked (m_modelCoordsAfter->coordScaleXTheta() == COORD_SCALE_LOG);
@@ -524,6 +532,62 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   updateControls (); // Probably redundant due to the setChecked just above
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+void DlgSettingsCoords::loadUnitsComboBoxNonPolar (QComboBox &cmb,
+                                                   CoordUnitsNonPolarTheta coordUnits)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadUnitsComboBoxNonPolar";
+
+  cmb.clear();
+
+  cmb.addItem (coordUnitsNonPolarThetaToString (COORD_UNITS_NON_POLAR_THETA_NUMBER),
+               QVariant (COORD_UNITS_NON_POLAR_THETA_NUMBER));
+  cmb.addItem (coordUnitsNonPolarThetaToString (COORD_UNITS_NON_POLAR_THETA_DATE_TIME),
+               QVariant (COORD_UNITS_NON_POLAR_THETA_DATE_TIME));
+  cmb.addItem (coordUnitsNonPolarThetaToString (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS),
+               QVariant (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS));
+
+  cmb.setWhatsThis (QString (tr ("Numbers have the simplest and most general format.\n\n"
+                                 "Date and time values have date and/or time components.\n\n"
+                                 "Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for "
+                                 "seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.")));
+
+  int index = cmb.findData (coordUnits);
+  cmb.setCurrentIndex (index);
+}
+
+void DlgSettingsCoords::loadUnitsComboBoxPolar (QComboBox &cmb,
+                                                CoordUnitsPolarTheta coordUnits)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::loadUnitsComboBoxPolar";
+
+  cmb.clear();
+
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_DEGREES),
+                                             QVariant (COORD_UNITS_POLAR_THETA_DEGREES));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES),
+                                             QVariant (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS),
+                                             QVariant (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_GRADIANS),
+                                             QVariant (COORD_UNITS_POLAR_THETA_GRADIANS));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_RADIANS),
+                                             QVariant (COORD_UNITS_POLAR_THETA_RADIANS));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_TURNS),
+                                             QVariant (COORD_UNITS_POLAR_THETA_TURNS));
+
+  cmb.setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
+                                 "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "
+                                 "60 minutes per degree. During input, a space must be inserted between the two numbers.\n\n"
+                                 "Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for "
+                                 "seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.\n\n"
+                                 "Gradians format uses a single real number. One complete revolution is 400 gradians.\n\n"
+                                 "Radians format uses a single real number. One complete revolution is 2*pi radians.\n\n"
+                                 "Turns format uses a single real number. One complete revolution is one turn.")));
+
+  int index = cmb.findData (coordUnits);
+  cmb.setCurrentIndex (index);
 }
 
 void DlgSettingsCoords::resetSceneRectangle ()
@@ -563,12 +627,31 @@ void DlgSettingsCoords::slotPolarOriginRadius(const QString &)
   updatePreview();
 }
 
-void DlgSettingsCoords::slotPolarUnits(const QString &)
+void DlgSettingsCoords::slotUnitsXTheta(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotPolarUnits";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotUnitsXTheta";
 
-  CoordThetaUnits coordThetaUnits = (CoordThetaUnits) m_cmbPolarUnits->currentData ().toInt ();
-  m_modelCoordsAfter->setCoordThetaUnits(coordThetaUnits);
+  if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
+    CoordUnitsNonPolarTheta coordUnits = (CoordUnitsNonPolarTheta) m_cmbXThetaUnits->currentData ().toInt ();
+    m_modelCoordsAfter->setCoordUnitsX(coordUnits);
+  } else {
+    CoordUnitsPolarTheta coordUnits = (CoordUnitsPolarTheta) m_cmbXThetaUnits->currentData ().toInt ();
+    m_modelCoordsAfter->setCoordUnitsTheta(coordUnits);
+  }
+  updateControls ();
+  updatePreview();
+}
+
+void DlgSettingsCoords::slotUnitsYRadius(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotUnitsYRadius";
+
+  CoordUnitsNonPolarTheta coordUnits = (CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt ();
+  if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_modelCoordsAfter->setCoordUnitsY(coordUnits);
+  } else {
+    m_modelCoordsAfter->setCoordUnitsRadius(coordUnits);
+  }
   updateControls ();
   updatePreview();
 }
@@ -630,11 +713,12 @@ void DlgSettingsCoords::updateControls ()
   enableOk (goodOriginRadius);
 
   m_boxCoordsType->setEnabled (!m_xThetaLog->isChecked ());
-  m_cmbPolarUnits->setEnabled (m_btnPolar->isChecked ());
 
-  m_boxXTheta->setEnabled (!m_btnPolar->isChecked ());
+  m_xThetaLinear->setEnabled (!m_btnPolar->isChecked ());
+  m_xThetaLog->setEnabled (!m_btnPolar->isChecked ());
   if (m_btnCartesian->isChecked()) {
-    m_boxYRadius->setEnabled (true);
+    m_yRadiusLinear->setEnabled (true);
+    m_yRadiusLog->setEnabled (true);
   } else {
 
     // Use temporary validator to see if current origin radius would be correct in other linear/log mode
@@ -642,16 +726,17 @@ void DlgSettingsCoords::updateControls ()
     int posOriginRadiusOther;
     bool goodOriginRadiusOther = (validatorOther.validate (textOriginRadius, posOriginRadiusOther) == QValidator::Acceptable);
 
-    m_boxYRadius->setEnabled (goodOriginRadius && goodOriginRadiusOther);
+    m_yRadiusLinear->setEnabled (goodOriginRadius && goodOriginRadiusOther);
+    m_yRadiusLog->setEnabled (goodOriginRadius && goodOriginRadiusOther);
   }
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
                              QString ("X") :
-                             THETA) + QString (" Scale");
+                             THETA) + QString (" Coordinates");
   QString captionYRadius = (m_btnCartesian->isChecked () ?
                               QString ("Y") :
-                              QString ("R")) + QString (" Scale");
+                              QString ("R")) + QString (" Coordinates");
 
   if (m_boxXTheta->title() != captionXTheta) {
     m_boxXTheta->setTitle (captionXTheta);

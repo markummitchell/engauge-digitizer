@@ -52,7 +52,8 @@ HEADERS  += \
     Color/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
-    Coord/CoordThetaUnits.h \
+    Coord/CoordUnitsNonPolarTheta.h \
+    Coord/CoordUnitsPolarTheta.h \
     Correlation/Correlation.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
@@ -214,7 +215,8 @@ SOURCES += \
     Color/ColorPalette.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
-    Coord/CoordThetaUnits.cpp \
+    Coord/CoordUnitsNonPolarTheta.cpp \
+    Coord/CoordUnitsPolarTheta.cpp \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurveConnectAs.cpp \

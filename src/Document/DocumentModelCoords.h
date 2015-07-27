@@ -3,7 +3,8 @@
 
 #include "CoordScale.h"
 #include "CoordsType.h"
-#include "CoordThetaUnits.h"
+#include "CoordUnitsNonPolarTheta.h"
+#include "CoordUnitsPolarTheta.h"
 #include "DocumentModelAbstractBase.h"
 
 class Document;
@@ -34,8 +35,17 @@ public:
   /// Get method for coordinates type.
   CoordsType coordsType () const;
 
-  /// Get method for theta units.
-  CoordThetaUnits coordThetaUnits () const;
+  /// Get method for radius units.
+  CoordUnitsNonPolarTheta coordUnitsRadius () const;
+
+  /// Get method for theta unit.
+  CoordUnitsPolarTheta coordUnitsTheta () const;
+
+  /// Get method for x units.
+  CoordUnitsNonPolarTheta coordUnitsX () const;
+
+  /// Get method for x units.
+  CoordUnitsNonPolarTheta coordUnitsY () const;
 
   virtual void loadXml(QXmlStreamReader &reader);
 
@@ -57,8 +67,17 @@ public:
   /// Set method for coordinates type.
   void setCoordsType (CoordsType coordsType);
 
+  /// Set method for radius units.
+  void setCoordUnitsRadius (CoordUnitsNonPolarTheta coordUnitsRadius);
+
   /// Set method for theta units.
-  void setCoordThetaUnits (CoordThetaUnits coordThetaUnits);
+  void setCoordUnitsTheta (CoordUnitsPolarTheta coordUnitsTheta);
+
+  /// Set method for x units.
+  void setCoordUnitsX (CoordUnitsNonPolarTheta coordUnitsX);
+
+  /// Set method for y units.
+  void setCoordUnitsY (CoordUnitsNonPolarTheta coordUnitsY);
 
   /// Set method for origin radius in polar mode.
   void setOriginRadius (double originRadius);
@@ -72,7 +91,10 @@ private:
   double m_originRadius; // Applies to polar coordinates. Usually zero
   CoordScale m_coordScaleXTheta;
   CoordScale m_coordScaleYRadius;
-  CoordThetaUnits m_coordThetaUnits; // Applies to polar coordinates
+  CoordUnitsNonPolarTheta m_coordUnitsX; // Applies to x for cartesian coordinates
+  CoordUnitsNonPolarTheta m_coordUnitsY; // Applies to y for cartesian coordinates
+  CoordUnitsPolarTheta m_coordUnitsTheta; // Applies to theta for polar coordinates
+  CoordUnitsNonPolarTheta m_coordUnitsRadius; // Applies to radius for polar coordinates
 };
 
 #endif // DOCUMENT_MODEL_COORDS_H
