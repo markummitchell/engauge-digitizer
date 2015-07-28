@@ -43,6 +43,7 @@ void TestProjectedPoint::testProjectedPoints ()
   double xToProjectUp = 0.0, yToProjectUp = 2.0 * radiusCircle;
   double xProjectionRight, yProjectionRight, projectedDistanceOutsideLineRight;
   double xProjectionUp, yProjectionUp, projectedDistanceOutsideLineUp;
+  double distanceToLine; // Ignored
 
   // To prevent ambiguity at multiples of angleCriticalRight and angleCriticalUp, the angle step is NOT a factor of the
   // critical angles
@@ -73,7 +74,8 @@ void TestProjectedPoint::testProjectedPoints ()
                           yStop,
                           &xProjectionRight,
                           &yProjectionRight,
-                          &projectedDistanceOutsideLineRight);
+                          &projectedDistanceOutsideLineRight,
+                          &distanceToLine);
 
     // If and only if angle is between angleCritical to 180 - angleCritical, and 
     // 180 + angleCritical to 360 - angleCritical will there be a projection inside the line
@@ -98,7 +100,8 @@ void TestProjectedPoint::testProjectedPoints ()
                           yStop,
                           &xProjectionUp,
                           &yProjectionUp,
-                          &projectedDistanceOutsideLineUp);
+                          &projectedDistanceOutsideLineUp,
+                          &distanceToLine);
 
     // If and only if angle is between -angleCritical to angleCritical, and 
     // 180 - angleCritical to 180 + angleCritical will there be a projection inside the line

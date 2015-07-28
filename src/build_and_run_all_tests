@@ -10,11 +10,12 @@ fi
 # Logging
 LOGFILE="build_and_run_all_tests.log"
 rm -rf $LOGFILE
+echo "Afterwards, check $LOGFILE to verify success"
 
 # Cleanup. We do not want to force complete rebuild for each test application since that takes VERY long
-rm .moc_test/*
-rm .obj_test/*
-rm ../bin/Test*
+rm .moc_test/* 2>/dev/null
+rm .obj_test/* 2>/dev/null
+rm ../bin/Test* 2>/dev/null
 
 # Make sure correct qt installation is being used, by looking for '5.' in the version number
 VERSION5=`qmake -v | grep '5\.'`
@@ -22,6 +23,9 @@ if [ -z "$VERSION5" ]
 then
     echo "Need Qt5";
 else
+
+    # Exit immediately on first error
+    set -e 
 
     # Build tests
     for t in "${tests[@]}"
