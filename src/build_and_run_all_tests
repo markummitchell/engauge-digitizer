@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Test names. Synchronize with edit_one_test
-tests=(TestGraphCoords TestProjectedPoint TestSpline)
+# Test names. Specify a single test to run just that test
+tests=(TestGraphCoords TestProjectedPoint TestSpline TestValidators)
 if [ -n "$1" ]
 then 
     tests=("$1");

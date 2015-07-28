@@ -1,10 +1,6 @@
 #include "DlgValidatorDegreesMinutesSeconds.h"
 #include "Logger.h"
 
-const int UNUSED_VALUE = 0;
-const CoordUnitsDate UNUSED_DATE = COORD_UNITS_DATE_SKIP;
-const CoordUnitsTime UNUSED_TIME = COORD_UNITS_TIME_SKIP;
-
 DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale coordScale,
                                                                      QObject *parent) :
   DlgValidatorAbstract(parent),
