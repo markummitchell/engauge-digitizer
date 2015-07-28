@@ -1,6 +1,7 @@
 #include "DigitizeStateAbstractBase.h"
 #include "DlgEditPoint.h"
-#include "DlgValidatorEditCoord.h"
+#include "DlgValidatorAbstract.h"
+#include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -66,23 +67,19 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
   bool isConstraintY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
-  if (isCartesian) {
-    m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
-                                                   modelCoords.coordUnitsX(),
-                                                   modelCoords.coordUnitsDate(),
-                                                   modelCoords.coordUnitsTime());
-    m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
-                                                   modelCoords.coordUnitsY(),
-                                                   modelCoords.coordUnitsDate(),
-                                                   modelCoords.coordUnitsTime());
-  } else {
-    m_validatorGraphX = new DlgValidatorEditCoord (modelCoords.coordScaleXTheta(),
-                                                   modelCoords.coordUnitsTheta());
-    m_validatorGraphY = new DlgValidatorEditCoord (modelCoords.coordScaleYRadius(),
-                                                   modelCoords.coordUnitsRadius(),
-                                                   modelCoords.coordUnitsDate(),
-                                                   modelCoords.coordUnitsTime());
-  }
+  DlgValidatorFactory dlgValidatorFactory;
+  m_validatorGraphX = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (modelCoords.coordScaleXTheta(),
+                                                                                isCartesian,
+                                                                                modelCoords.coordUnitsX(),
+                                                                                modelCoords.coordUnitsTheta(),
+                                                                                modelCoords.coordUnitsDate(),
+                                                                                modelCoords.coordUnitsTime());
+  m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (modelCoords.coordScaleYRadius(),
+                                                                                isCartesian,
+                                                                                modelCoords.coordUnitsY(),
+                                                                                modelCoords.coordUnitsRadius(),
+                                                                                modelCoords.coordUnitsDate(),
+                                                                                modelCoords.coordUnitsTime());
 
   // Label
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8:")

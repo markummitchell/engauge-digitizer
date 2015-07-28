@@ -7,6 +7,7 @@
 #include <QPushButton>
 
 class DigitizeStateAbstractBase;
+class DlgValidatorAbstract;
 class DocumentModelCoords;
 class MainWindow;
 class QDoubleValidator;
@@ -45,9 +46,9 @@ private:
 
   QCursor m_cursorShape;
   QLineEdit *m_editGraphX;
-  QDoubleValidator *m_validatorGraphX;
+  DlgValidatorAbstract *m_validatorGraphX;
   QLineEdit *m_editGraphY;
-  QDoubleValidator *m_validatorGraphY;
+  DlgValidatorAbstract *m_validatorGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
 };

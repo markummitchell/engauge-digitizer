@@ -90,7 +90,11 @@ HEADERS  += \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
-    Dlg/DlgValidatorEditCoord.h \
+    Dlg/DlgValidatorAbstract.h \
+    Dlg/DlgValidatorDateTime.h \
+    Dlg/DlgValidatorDegreesMinutesSeconds.h \
+    Dlg/DlgValidatorFactory.h \
+    Dlg/DlgValidatorNumber.h \
     Document/Document.h \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
@@ -253,7 +257,11 @@ SOURCES += \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
-    Dlg/DlgValidatorEditCoord.cpp \
+    Dlg/DlgValidatorAbstract.cpp \
+    Dlg/DlgValidatorDateTime.cpp \
+    Dlg/DlgValidatorDegreesMinutesSeconds.cpp \
+    Dlg/DlgValidatorFactory.cpp \
+    Dlg/DlgValidatorNumber.cpp \
     Document/Document.cpp \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
