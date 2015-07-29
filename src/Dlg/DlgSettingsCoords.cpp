@@ -1,6 +1,8 @@
 #include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
+#include "CoordUnitsDate.h"
+#include "CoordUnitsTime.h"
 #include "DlgSettingsCoords.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
@@ -608,12 +610,8 @@ void DlgSettingsCoords::loadComboBoxTime()
                       QVariant (COORD_UNITS_TIME_SKIP));
   m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE),
                       QVariant (COORD_UNITS_TIME_HOUR_MINUTE));
-  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_PM),
-                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE_PM));
   m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_SECOND),
                       QVariant (COORD_UNITS_TIME_HOUR_MINUTE_SECOND));
-  m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_SECOND_PM),
-                      QVariant (COORD_UNITS_TIME_HOUR_MINUTE_SECOND_PM));
 
   int index = m_cmbTime->findData (QVariant (m_modelCoordsAfter->coordUnitsTime()));
   m_cmbTime->setCurrentIndex (index);

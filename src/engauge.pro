@@ -52,8 +52,10 @@ HEADERS  += \
     Color/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
+    Coord/CoordUnitsDate.h \
     Coord/CoordUnitsNonPolarTheta.h \
     Coord/CoordUnitsPolarTheta.h \
+    Coord/CoordUnitsTime.h \
     Correlation/Correlation.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
@@ -122,6 +124,8 @@ HEADERS  += \
     Export/ExportToFile.h \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
+    Format/FormatDateTime.h \
+    Format/FormatDegreesMinutesSeconds.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -219,8 +223,10 @@ SOURCES += \
     Color/ColorPalette.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
+    Coord/CoordUnitsDate.cpp \
     Coord/CoordUnitsNonPolarTheta.cpp \
     Coord/CoordUnitsPolarTheta.cpp \
+    Coord/CoordUnitsTime.cpp \
     Correlation/Correlation.cpp \
     Curve/Curve.cpp \
     Curve/CurveConnectAs.cpp \
@@ -285,6 +291,8 @@ SOURCES += \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
+    Format/FormatDateTime.cpp \
+    Format/FormatDegreesMinutesSeconds.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
@@ -350,6 +358,7 @@ INCLUDEPATH += Callback \
                Dlg \
                Document \
                Export \
+               Format \
                Graphics \
                Grid \
                img \

@@ -1,4 +1,5 @@
 #include "DlgValidatorDegreesMinutesSeconds.h"
+#include "FormatDegreesMinutesSeconds.h"
 #include "Logger.h"
 
 DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale coordScale,
@@ -12,23 +13,19 @@ DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale 
 QValidator::State DlgValidatorDegreesMinutesSeconds::validate (QString &input,
                                                                int &pos) const
 {
-  // First do standard check
-  QValidator::State state = QDoubleValidator::validate (input,
-                                                        pos);
-  if (state == QValidator::Acceptable) {
+  FormatDegreesMinutesSeconds formatDegreesMinutesSeconds;
+  bool success = false;
+  formatDegreesMinutesSeconds.parse (input,
+                                     success);
 
-    if (m_coordScale == COORD_SCALE_LOG) {
-      if (input.toDouble () < 0.0) {
+  QValidator::State state = (success ?
+                               QValidator::Acceptable :
+                               QValidator::Invalid);
 
-        // Cannot allow negative number
-        state = QValidator::Invalid;
+  if (state != QValidator::Acceptable) {
 
-      } if (input.toDouble () == 0.0) {
+    pos = 0; // Would be nice to set to a value that meant something
 
-        // Treat as a leading zero, which is legal
-        state = QValidator::Intermediate;
-      }
-    }
   }
 
   return state;

@@ -1,4 +1,5 @@
 #include "DlgValidatorDateTime.h"
+#include "FormatDateTime.h"
 #include "Logger.h"
 
 DlgValidatorDateTime::DlgValidatorDateTime(CoordScale coordScale,
@@ -16,23 +17,19 @@ DlgValidatorDateTime::DlgValidatorDateTime(CoordScale coordScale,
 QValidator::State DlgValidatorDateTime::validate (QString &input,
                                                   int &pos) const
 {
-  // First do standard check
-  QValidator::State state = QDoubleValidator::validate (input,
-                                                        pos);
-  if (state == QValidator::Acceptable) {
+  FormatDateTime formatDateTime;
+  QDateTime parsedValue = formatDateTime.parse (m_coordUnitsDate,
+                                                m_coordUnitsTime,
+                                                input);
 
-    if (m_coordScale == COORD_SCALE_LOG) {
-      if (input.toDouble () < 0.0) {
+  QValidator::State state = (parsedValue.isValid() ?
+                               QValidator::Acceptable :
+                               QValidator::Invalid);
 
-        // Cannot allow negative number
-        state = QValidator::Invalid;
+  if (state != QValidator::Acceptable) {
 
-      } if (input.toDouble () == 0.0) {
+    pos = 0; // Would be nice to set to a value that meant something
 
-        // Treat as a leading zero, which is legal
-        state = QValidator::Intermediate;
-      }
-    }
   }
 
   return state;

@@ -1,4 +1,6 @@
 #include "CmdMediator.h"
+#include "CoordUnitsDate.h"
+#include "CoordUnitsTime.h"
 #include "DocumentModelCoords.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
