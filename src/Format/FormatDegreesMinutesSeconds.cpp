@@ -1,15 +1,80 @@
 #include "FormatDegreesMinutesSeconds.h"
+#include "Logger.h"
 #include <QDoubleValidator>
+#include <qmath.h>
 #include <QRegExp>
 #include <QStringList>
+
+const int DECIMAL_TO_MINUTES = 60.0;
+const int DECIMAL_TO_SECONDS = 60.0;
 
 FormatDegreesMinutesSeconds::FormatDegreesMinutesSeconds()
 {
 }
 
-double FormatDegreesMinutesSeconds::parse (const QString &string,
-                                           bool &success) const
+QString FormatDegreesMinutesSeconds::formatOutput (CoordUnitsPolarTheta coordUnits,
+                                                   double value) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSeconds::formatOutput";
+
+  QString result;
+
+  switch (coordUnits) {
+  case COORD_UNITS_POLAR_THETA_DEGREES:
+    {
+      // For just degrees, we do not include a degrees symbol since raw numbers are probably much more useful
+      result = QString::number (coordUnits);
+    }
+    break;
+
+  case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+    {
+      // Only smallest resolution value is floating point
+      bool negative = (value < 0);
+      value = qAbs (value);
+      int degrees = qFloor (value);
+      value -= degrees;
+      double minutes = value * DECIMAL_TO_MINUTES;
+      degrees *= (negative ? -1.0 : 1.0);
+
+      result = QString ("%1\\0247 %2'")
+        .arg (degrees)
+        .arg (minutes);
+    }
+    break;
+
+  case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+    {
+      // Only smallest resolution value is floating point
+      bool negative = (value < 0);
+      value = qAbs (value);
+      int degrees = qFloor (value);
+      value -= degrees;
+      int minutes = value * DECIMAL_TO_MINUTES;
+      value -= minutes;
+      double seconds = value * DECIMAL_TO_SECONDS;
+      degrees *= (negative ? -1.0 : 1.0);
+
+      result = QString ("%1\\0247 %2' %3''")
+        .arg (degrees)
+        .arg (minutes)
+        .arg (seconds);
+    }
+    break;
+    
+  default:
+    // Gradians, radians and turns are handled as regular numbers so this class should not have been called
+    LOG4CPP_ERROR_S ((*mainCat)) << "FormatDegreesMinutesSeconds::formatOutput";
+    exit (-1);
+  }
+}
+
+double FormatDegreesMinutesSeconds::parseInput (const QString &string,
+                                                bool &success) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSeconds::parseInput"
+                              << " string=" << string.toLatin1().data();
+
   // Split on spaces
   QStringList fields = string.split (QRegExp ("\\s+"),
                                      QString::SkipEmptyParts);

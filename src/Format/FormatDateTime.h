@@ -8,6 +8,9 @@
 #include <QString>
 #include <QStringList>
 
+typedef QHash<CoordUnitsDate, QString> FormatDate;
+typedef QHash<CoordUnitsTime, QString> FormatTime;
+
 typedef QHash<CoordUnitsDate, QStringList> FormatsDate;
 typedef QHash<CoordUnitsTime, QStringList> FormatsTime;
 
@@ -17,15 +20,30 @@ class FormatDateTime {
   /// Single constructor
   FormatDateTime();
 
-  /// Parse the string into a QDateTime value. Value is invalid if the parsing failed
-  QDateTime parse (CoordUnitsDate coordUnitsDate,
-                   CoordUnitsTime coordUnitsTime,
-                   const QString &string) const;
-
+  /// Format the date/time value according to date/time format settings
+  QString formatOutput (CoordUnitsDate coordUnitsDate,
+                        CoordUnitsTime coordUnitsTime,
+                        unsigned long value) const;
+  
+  /// Parse the input string into a time value. Success flag is false if parsing failed
+  unsigned long parseInput (CoordUnitsDate coordUnitsDate,
+                            CoordUnitsTime coordUnitsTime,
+                            const QString &string,
+                            bool &success) const;
+  
  private:
 
-  FormatsDate m_formatsDate;
-  FormatsTime m_formatsTime;
+  void loadFormatsFormat();
+  void loadFormatsParse();
+
+  // For formatting output
+  FormatDate m_formatsDateFormat;
+  FormatTime m_formatsTimeFormat;
+
+  // For parsing input
+  FormatsDate m_formatsDateParse;
+  FormatsTime m_formatsTimeParse;
+
 };
 
 #endif // FORMAT_DATE_TIME_H

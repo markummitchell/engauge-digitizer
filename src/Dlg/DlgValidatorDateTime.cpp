@@ -18,11 +18,13 @@ QValidator::State DlgValidatorDateTime::validate (QString &input,
                                                   int &pos) const
 {
   FormatDateTime formatDateTime;
-  QDateTime parsedValue = formatDateTime.parse (m_coordUnitsDate,
-                                                m_coordUnitsTime,
-                                                input);
+  bool success;
+  formatDateTime.parseInput (m_coordUnitsDate,
+                             m_coordUnitsTime,
+                             input,
+                             success);
 
-  QValidator::State state = (parsedValue.isValid() ?
+  QValidator::State state = (success ?
                                QValidator::Acceptable :
                                QValidator::Invalid);
 

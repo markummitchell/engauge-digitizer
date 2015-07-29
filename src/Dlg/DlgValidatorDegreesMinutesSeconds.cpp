@@ -15,8 +15,8 @@ QValidator::State DlgValidatorDegreesMinutesSeconds::validate (QString &input,
 {
   FormatDegreesMinutesSeconds formatDegreesMinutesSeconds;
   bool success = false;
-  formatDegreesMinutesSeconds.parse (input,
-                                     success);
+  formatDegreesMinutesSeconds.parseInput (input,
+                                          success);
 
   QValidator::State state = (success ?
                                QValidator::Acceptable :
