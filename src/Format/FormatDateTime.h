@@ -22,6 +22,8 @@ class FormatDateTime {
                    CoordUnitsTime coordUnitsTime,
                    const QString &string) const;
 
+ private:
+
   FormatsDate m_formatsDate;
   FormatsTime m_formatsTime;
 };
