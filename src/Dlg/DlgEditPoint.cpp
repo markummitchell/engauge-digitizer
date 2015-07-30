@@ -3,6 +3,10 @@
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
+#include "EngaugeAssert.h"
+#include "FormatDateTime.h"
+#include "FormatDegreesMinutesSecondsNonPolarTheta.h"
+#include "FormatDegreesMinutesSecondsPolarTheta.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QDoubleValidator>
@@ -15,12 +19,15 @@
 
 const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
+const bool IS_X_THETA = true;
+const bool IS_NOT_X_THETA = false;
+
 DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,
                             const DocumentModelCoords &modelCoords,
                             const QCursor &cursorShape,
-                            QString xValue,
-                            QString yValue) :
+                            const double *xInitialValue,
+                            const double *yInitialValue) :
   QDialog (&mainWindow),
   m_cursorShape (cursorShape)
 {
@@ -43,8 +50,30 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                 modelCoords);
   createOkCancel (layout);
 
-  m_editGraphX->setText (xValue);
-  m_editGraphY->setText (yValue);
+  if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+    initializeGraphValueNonPolarTheta (xInitialValue,
+                                       modelCoords.coordUnitsX(),
+                                       modelCoords.coordUnitsDate(),
+                                       modelCoords.coordUnitsTime(),
+                                       IS_X_THETA,
+                                       *m_editGraphX);
+    initializeGraphValueNonPolarTheta (yInitialValue,
+                                       modelCoords.coordUnitsY(),
+                                       modelCoords.coordUnitsDate(),
+                                       modelCoords.coordUnitsTime(),
+                                       IS_NOT_X_THETA,
+                                       *m_editGraphY);
+  } else {
+    initializeGraphValuePolarTheta (xInitialValue,
+                                    modelCoords.coordUnitsTheta(),
+                                    *m_editGraphX);
+    initializeGraphValueNonPolarTheta (yInitialValue,
+                                       modelCoords.coordUnitsRadius(),
+                                       modelCoords.coordUnitsDate(),
+                                       modelCoords.coordUnitsTime(),
+                                       IS_NOT_X_THETA,
+                                       *m_editGraphY);
+  }
 
   updateControls ();
 }
@@ -141,6 +170,85 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
   m_btnCancel = new QPushButton (tr ("Cancel"), this);
   layout->addWidget(m_btnCancel);
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
+}
+
+void DlgEditPoint::initializeGraphValueNonPolarTheta (const double *initialValue,
+                                                      CoordUnitsNonPolarTheta coordUnits,
+                                                      CoordUnitsDate coordUnitsDate,
+                                                      CoordUnitsTime coordUnitsTime,
+                                                      bool isXTheta,
+                                                      QLineEdit &editGraph)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphValueNonPolarTheta";
+
+  if (initialValue != 0) {
+
+    switch (coordUnits) {
+      case COORD_UNITS_NON_POLAR_THETA_DATE_TIME:
+        {
+          FormatDateTime format;
+          editGraph.setText (format.formatOutput (coordUnitsDate,
+                                                  coordUnitsTime,
+                                                  *initialValue));
+        }
+        break;
+
+      case COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
+        {
+          FormatDegreesMinutesSecondsNonPolarTheta format;
+          editGraph.setText (format.formatOutput (coordUnits,
+                                                  *initialValue,
+                                                  isXTheta));
+        }
+        break;
+
+      case COORD_UNITS_NON_POLAR_THETA_NUMBER:
+        editGraph.setText (QString::number (*initialValue));
+        break;
+
+      default:
+        LOG4CPP_ERROR_S ((*mainCat)) << "DlgEditPoint::initializeGraphValueNonPolarTheta";
+        ENGAUGE_ASSERT (false);
+        break;
+    }
+
+  }
+}
+
+void DlgEditPoint::initializeGraphValuePolarTheta (const double *initialValue,
+                                                   CoordUnitsPolarTheta coordUnits,
+                                                   QLineEdit &editGraph)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphValuePolarTheta";
+
+  if (initialValue != 0) {
+
+    switch (coordUnits) {
+      case COORD_UNITS_POLAR_THETA_DEGREES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
+        {
+          FormatDegreesMinutesSecondsPolarTheta format;
+          editGraph.setText (format.formatOutput (coordUnits,
+                                                  *initialValue,
+                                                  IS_X_THETA));
+        }
+        break;
+
+      case COORD_UNITS_POLAR_THETA_GRADIANS:
+      case COORD_UNITS_POLAR_THETA_RADIANS:
+      case COORD_UNITS_POLAR_THETA_TURNS:
+        editGraph.setText (QString::number (*initialValue));
+        break;
+
+      default:
+        LOG4CPP_ERROR_S ((*mainCat)) << "DlgEditPoint::initializeGraphValuePolarTheta";
+        ENGAUGE_ASSERT (false);
+        break;
+    }
+  }
 }
 
 QPointF DlgEditPoint::posGraph () const

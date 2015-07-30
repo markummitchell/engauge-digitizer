@@ -40,16 +40,16 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
 
   QPointF posScreen = context().cmdMediator().document().positionScreen (pointIdentifier);
   QPointF posGraphBefore = context().cmdMediator().document().positionGraph (pointIdentifier);
-  QString xGraphValue = QString ("%1").arg (posGraphBefore.x ());
-  QString yGraphValue = QString ("%1").arg (posGraphBefore.y ());
 
   // Ask user for coordinates
+  double x = posGraphBefore.x();
+  double y = posGraphBefore.y();
   DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
                                        *this,
                                        context().cmdMediator().document().modelCoords(),
                                        cursor (),
-                                       xGraphValue,
-                                       yGraphValue);
+                                       &x,
+                                       &y);
   int rtn = dlg->exec ();
 
   QPointF posGraphAfter = dlg->posGraph ();

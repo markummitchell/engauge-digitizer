@@ -1,6 +1,10 @@
 #ifndef DLG_EDIT_POINT_H
 #define DLG_EDIT_POINT_H
 
+#include "CoordUnitsDate.h"
+#include "CoordUnitsNonPolarTheta.h"
+#include "CoordUnitsPolarTheta.h"
+#include "CoordUnitsTime.h"
 #include <QCursor>
 #include <QDialog>
 #include <QLineEdit>
@@ -20,12 +24,13 @@ class DlgEditPoint : public QDialog
 
 public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
+  /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPoint (MainWindow &mainWindow,
                 DigitizeStateAbstractBase &digitizeState,
                 const DocumentModelCoords &modelCoords,
                 const QCursor &cursorShape,
-                QString xValue = "",
-                QString yValue = "");
+                const double *xInitialValue = 0,
+                const double *yInitialValue = 0);
   ~DlgEditPoint ();
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
@@ -42,6 +47,15 @@ private:
   void createCoords (QVBoxLayout *layoutOuter,
                      const DocumentModelCoords &modelCoords);
   void createOkCancel (QVBoxLayout *layoutOuter);
+  void initializeGraphValueNonPolarTheta (const double *initialValue,
+                                          CoordUnitsNonPolarTheta coordUnits,
+                                          CoordUnitsDate coordUnitsDate,
+                                          CoordUnitsTime coordUnitsTime,
+                                          bool isXTheta,
+                                          QLineEdit &editGraph);
+  void initializeGraphValuePolarTheta (const double *initialValue,
+                                       CoordUnitsPolarTheta coordUnits,
+                                       QLineEdit &editGraph);
   void updateControls ();
 
   QCursor m_cursorShape;
