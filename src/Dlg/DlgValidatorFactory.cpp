@@ -44,6 +44,7 @@ DlgValidatorAbstract *DlgValidatorFactory::createWithPolar (CoordScale coordScal
     case COORD_UNITS_POLAR_THETA_DEGREES:
     case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
     case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
       return new DlgValidatorDegreesMinutesSeconds (coordScale);
 
     case COORD_UNITS_POLAR_THETA_GRADIANS:

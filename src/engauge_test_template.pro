@@ -52,6 +52,7 @@ HEADERS  += \
     Color/ColorPalette.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
+    Coord/CoordSymbol.h \
     Coord/CoordUnitsDate.h \
     Coord/CoordUnitsNonPolarTheta.h \
     Coord/CoordUnitsPolarTheta.h \
@@ -125,7 +126,9 @@ HEADERS  += \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
     Format/FormatDateTime.h \
-    Format/FormatDegreesMinutesSeconds.h \
+    Format/FormatDegreesMinutesSecondsBase.h \
+    Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
+    Format/FormatDegreesMinutesSecondsPolarTheta.h \
     Callback/functor.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -223,6 +226,7 @@ SOURCES += \
     Color/ColorPalette.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
+    Coord/CoordSymbol.cpp \
     Coord/CoordUnitsDate.cpp \
     Coord/CoordUnitsNonPolarTheta.cpp \
     Coord/CoordUnitsPolarTheta.cpp \
@@ -292,7 +296,9 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Format/FormatDateTime.cpp \
-    Format/FormatDegreesMinutesSeconds.cpp \
+    Format/FormatDegreesMinutesSecondsBase.cpp \
+    Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
+    Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \

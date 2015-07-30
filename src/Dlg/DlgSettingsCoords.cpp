@@ -103,7 +103,16 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
         angle = QString::number (90.0 * direction);
         break;
 
-       case COORD_UNITS_POLAR_THETA_GRADIANS:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
+        angle = QString::number (90.0 * direction);
+        if (direction == 1) {
+          angle = "90E";
+        } else if (direction == 3) {
+          angle = "90W";
+        }
+        break;
+
+      case COORD_UNITS_POLAR_THETA_GRADIANS:
         angle = QString::number (100.0 * direction);
         break;
 
@@ -596,6 +605,8 @@ void DlgSettingsCoords::loadComboBoxDate()
   m_cmbDate->addItem (coordUnitsDateToString (COORD_UNITS_DATE_YEAR_MONTH_DAY),
                       QVariant (COORD_UNITS_DATE_YEAR_MONTH_DAY));
 
+  ENGAUGE_ASSERT (m_cmbDate->count() == NUM_COORD_UNITS_DATE);
+
   int index = m_cmbDate->findData (QVariant (m_modelCoordsAfter->coordUnitsDate()));
   m_cmbDate->setCurrentIndex (index);
 }
@@ -612,6 +623,8 @@ void DlgSettingsCoords::loadComboBoxTime()
                       QVariant (COORD_UNITS_TIME_HOUR_MINUTE));
   m_cmbTime->addItem (coordUnitsTimeToString (COORD_UNITS_TIME_HOUR_MINUTE_SECOND),
                       QVariant (COORD_UNITS_TIME_HOUR_MINUTE_SECOND));
+
+  ENGAUGE_ASSERT (m_cmbTime->count() == NUM_COORD_UNITS_TIME);
 
   int index = m_cmbTime->findData (QVariant (m_modelCoordsAfter->coordUnitsTime()));
   m_cmbTime->setCurrentIndex (index);
@@ -630,6 +643,10 @@ void DlgSettingsCoords::loadComboBoxUnitsNonPolar (QComboBox &cmb,
                QVariant (COORD_UNITS_NON_POLAR_THETA_DATE_TIME));
   cmb.addItem (coordUnitsNonPolarThetaToString (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS),
                QVariant (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS));
+  cmb.addItem (coordUnitsNonPolarThetaToString (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW),
+               QVariant (COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW));
+
+  ENGAUGE_ASSERT (cmb.count() == NUM_COORD_UNITS_NON_POLAR_THETA);
 
   cmb.setWhatsThis (QString (tr ("Numbers have the simplest and most general format.\n\n"
                                  "Date and time values have date and/or time components.\n\n"
@@ -653,12 +670,16 @@ void DlgSettingsCoords::loadComboBoxUnitsPolar (QComboBox &cmb,
                                              QVariant (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES));
   cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS),
                                              QVariant (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS));
+  cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW),
+                                             QVariant (COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW));
   cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_GRADIANS),
                                              QVariant (COORD_UNITS_POLAR_THETA_GRADIANS));
   cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_RADIANS),
                                              QVariant (COORD_UNITS_POLAR_THETA_RADIANS));
   cmb.addItem (coordUnitsPolarThetaToString (COORD_UNITS_POLAR_THETA_TURNS),
                                              QVariant (COORD_UNITS_POLAR_THETA_TURNS));
+
+  ENGAUGE_ASSERT (cmb.count() == NUM_COORD_UNITS_POLAR_THETA);
 
   cmb.setWhatsThis (QString (tr ("Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.\n\n"
                                  "Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are "

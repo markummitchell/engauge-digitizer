@@ -1,5 +1,5 @@
 #include "DlgValidatorDegreesMinutesSeconds.h"
-#include "FormatDegreesMinutesSeconds.h"
+#include "FormatDegreesMinutesSecondsBase.h"
 #include "Logger.h"
 
 DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale coordScale,
@@ -13,7 +13,7 @@ DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale 
 QValidator::State DlgValidatorDegreesMinutesSeconds::validate (QString &input,
                                                                int &pos) const
 {
-  FormatDegreesMinutesSeconds formatDegreesMinutesSeconds;
+  FormatDegreesMinutesSecondsBase formatDegreesMinutesSeconds;
   bool success = false;
   formatDegreesMinutesSeconds.parseInput (input,
                                           success);

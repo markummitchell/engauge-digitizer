@@ -1,4 +1,5 @@
-#include "FormatDegreesMinutesSeconds.h"
+#include "CoordSymbol.h"
+#include "FormatDegreesMinutesSecondsBase.h"
 #include "Logger.h"
 #include <QDoubleValidator>
 #include <qmath.h>
@@ -8,71 +9,75 @@
 const int DECIMAL_TO_MINUTES = 60.0;
 const int DECIMAL_TO_SECONDS = 60.0;
 
-FormatDegreesMinutesSeconds::FormatDegreesMinutesSeconds()
+FormatDegreesMinutesSecondsBase::FormatDegreesMinutesSecondsBase()
 {
 }
 
-QString FormatDegreesMinutesSeconds::formatOutput (CoordUnitsPolarTheta coordUnits,
-                                                   double value) const
+FormatDegreesMinutesSecondsBase::~FormatDegreesMinutesSecondsBase()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSeconds::formatOutput";
+}
 
-  QString result;
+QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds (double value) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds"
+                              << " value=" << value;
 
-  switch (coordUnits) {
-  case COORD_UNITS_POLAR_THETA_DEGREES:
-    {
-      // For just degrees, we do not include a degrees symbol since raw numbers are probably much more useful
-      result = QString::number (coordUnits);
-    }
-    break;
+  // Only smallest resolution value is floating point
+  bool negative = (value < 0);
+  value = qAbs (value);
+  int degrees = qFloor (value);
+  value -= degrees;
+  int minutes = value * DECIMAL_TO_MINUTES;
+  value -= minutes;
+  double seconds = value * DECIMAL_TO_SECONDS;
+  degrees *= (negative ? -1.0 : 1.0);
 
-  case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
-    {
-      // Only smallest resolution value is floating point
-      bool negative = (value < 0);
-      value = qAbs (value);
-      int degrees = qFloor (value);
-      value -= degrees;
-      double minutes = value * DECIMAL_TO_MINUTES;
-      degrees *= (negative ? -1.0 : 1.0);
+  return QString ("%1%2 %3%4 %3%5")
+    .arg (degrees)
+    .arg (QChar (COORD_SYMBOL_DEGREES))
+    .arg (minutes)
+    .arg (QChar (COORD_SYMBOL_MINUTES))
+    .arg (seconds)
+    .arg (QChar (COORD_SYMBOL_SECONDS));
+}
 
-      result = QString ("%1\\0247 %2'")
-        .arg (degrees)
-        .arg (minutes);
-    }
-    break;
+QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (double value,
+                                                                                bool isNsHemisphere) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew"
+                              << " value=" << value
+                              << " isNsHemisphere=" << (isNsHemisphere ? "true" : "false");
 
-  case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
-    {
-      // Only smallest resolution value is floating point
-      bool negative = (value < 0);
-      value = qAbs (value);
-      int degrees = qFloor (value);
-      value -= degrees;
-      int minutes = value * DECIMAL_TO_MINUTES;
-      value -= minutes;
-      double seconds = value * DECIMAL_TO_SECONDS;
-      degrees *= (negative ? -1.0 : 1.0);
+  // Only smallest resolution value is floating point
+  bool negative = (value < 0);
+  value = qAbs (value);
+  int degrees = qFloor (value);
+  value -= degrees;
+  int minutes = value * DECIMAL_TO_MINUTES;
+  value -= minutes;
+  double seconds = value * DECIMAL_TO_SECONDS;
 
-      result = QString ("%1\\0247 %2' %3''")
-        .arg (degrees)
-        .arg (minutes)
-        .arg (seconds);
-    }
-    break;
-    
-  default:
-    // Gradians, radians and turns are handled as regular numbers so this class should not have been called
-    LOG4CPP_ERROR_S ((*mainCat)) << "FormatDegreesMinutesSeconds::formatOutput";
-    exit (-1);
+  QString hemisphere;
+  if (isNsHemisphere) {
+    hemisphere = (negative ? "S" : "N");
+  } else {
+    hemisphere = (negative ? "W" : "E");
   }
+
+  return QString ("%1%2 %3%4 %3%5 %6")
+    .arg (degrees)
+    .arg (QChar (COORD_SYMBOL_DEGREES))
+    .arg (minutes)
+    .arg (QChar (COORD_SYMBOL_MINUTES))
+    .arg (seconds)
+    .arg (QChar (COORD_SYMBOL_SECONDS))
+    .arg (hemisphere);
 }
 
-double FormatDegreesMinutesSeconds::parseInput (const QString &string,
-                                                bool &success) const
+double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
+                                                    bool &success) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSeconds::parseInput"
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::parseInput"
                               << " string=" << string.toLatin1().data();
 
   // Split on spaces
@@ -162,4 +167,3 @@ double FormatDegreesMinutesSeconds::parseInput (const QString &string,
 
   }
 }
-

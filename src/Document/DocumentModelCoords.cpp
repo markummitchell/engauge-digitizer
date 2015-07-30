@@ -273,6 +273,7 @@ double DocumentModelCoords::thetaPeriod () const
     case COORD_UNITS_POLAR_THETA_DEGREES:
     case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
     case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
       return 360;
 
     case COORD_UNITS_POLAR_THETA_GRADIANS:
@@ -283,7 +284,12 @@ double DocumentModelCoords::thetaPeriod () const
 
     case COORD_UNITS_POLAR_THETA_TURNS:
       return 1;
+
+    default:
+      break;
   }
+
+  LOG4CPP_ERROR_S ((*mainCat)) << "DocumentModelCoords::thetaPeriod";
 
   ENGAUGE_ASSERT(false);
   return 0;
