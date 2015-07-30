@@ -12,16 +12,10 @@ class FormatDegreesMinutesSecondsNonPolarTheta : public FormatDegreesMinutesSeco
   /// Single constructor
   FormatDegreesMinutesSecondsNonPolarTheta();
 
-  /// Format the degrees/minutes/seconds value when CoordUnitsNonPolarTheta is not 
-  /// COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW, which does not involve hemisphere
+  /// Format the degrees/minutes/seconds value. Distinguishing x/theta versus y/radius is required for N/S/E/W hemispheres
   QString formatOutput (CoordUnitsNonPolarTheta coordUnits,
-                        double value) const;
-
-  /// Format the degrees/minutes/seconds value when CoordUnitsNonPolarTheta is 
-  /// COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW, which involves hemispheres
-  QString formatOutputNsew (CoordUnitsNonPolarTheta coordUnits,
-                            double value,
-                            bool isNsHemisphere) const;
+                        double value,
+                        bool isXTheta) const;
 };
 
 #endif // FORMAT_DEGREES_MINUTES_SECONDS_NON_POLAR_THETA_H

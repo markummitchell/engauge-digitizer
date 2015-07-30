@@ -14,7 +14,8 @@ FormatDegreesMinutesSecondsPolarTheta::FormatDegreesMinutesSecondsPolarTheta()
 }
 
 QString FormatDegreesMinutesSecondsPolarTheta::formatOutput (CoordUnitsPolarTheta coordUnits,
-                                                             double value) const
+                                                             double value,
+                                                             bool isNsHemisphere) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutput";
 
@@ -32,7 +33,8 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutput (CoordUnitsPolarThet
       return formatOutputDegreesMinutesSeconds (value);
 
     case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
-      return ""; // Cannot get here due to ENGAUGE_ASSERT above
+      return formatOutputDegreesMinutesSecondsNsew (value,
+                                                    isNsHemisphere);
 
     default:
       break;
@@ -71,19 +73,4 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutputDegreesMinutes (doubl
     .arg (QChar (COORD_SYMBOL_DEGREES))
     .arg (minutes)
     .arg (QChar (COORD_SYMBOL_MINUTES));
-}
-
-QString FormatDegreesMinutesSecondsPolarTheta::formatOutputNsew (CoordUnitsPolarTheta coordUnits,
-                                                                 double value,
-                                                                 bool isNsHemisphere) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutputNsew"
-                              << " value=" << value
-                              << " isNsHemisphere=" << (isNsHemisphere ? "true" : "false");
-
-  // See if similar method without hemisphere argument should have been called
-  ENGAUGE_ASSERT (coordUnits == COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW);
-
-  return formatOutputDegreesMinutesSecondsNsew (value,
-                                                isNsHemisphere);
 }
