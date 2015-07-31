@@ -56,6 +56,11 @@ private:
   void initializeGraphValuePolarTheta (const double *initialValue,
                                        CoordUnitsPolarTheta coordUnits,
                                        QLineEdit &editGraph);
+  bool isCartesian (const DocumentModelCoords &modelCoords) const;
+  QChar nameXTheta (const DocumentModelCoords &modelCoords) const;
+  QChar nameYRadius (const DocumentModelCoords &modelCoords) const;
+  QString unitsType (const DocumentModelCoords &modelCoords,
+                     bool isXTheta) const;
   void updateControls ();
 
   QCursor m_cursorShape;

@@ -16,6 +16,7 @@ enum CoordUnitsPolarTheta {
   NUM_COORD_UNITS_POLAR_THETA
 };
 
+extern QString coordUnitsPolarThetaToBriefType (CoordUnitsPolarTheta coordUnits);
 extern QString coordUnitsPolarThetaToString (CoordUnitsPolarTheta coordUnitsPolarTheta);
 
 #endif // COORD_UNITS_POLAR_THETA_H

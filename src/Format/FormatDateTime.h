@@ -39,7 +39,8 @@ class FormatDateTime {
                        CoordUnitsDate coordUnitsDate,
                        CoordUnitsTime coordUnitsTime,
                        const QString &string,
-                       unsigned long &value,
+                       bool useQDateTimeElseQRegExp,
+                       unsigned long &value, // Set only if useQDateTimeElseQRegExp=success=true
                        bool &success) const;
   void loadFormatsFormat();
   void loadFormatsParseAcceptable();
@@ -49,12 +50,15 @@ class FormatDateTime {
   FormatDate m_formatsDateFormat;
   FormatTime m_formatsTimeFormat;
 
-  // For parsing input
+  // For parsing input, using built in Qt date/time parsing according to QDateTime
   FormatsDate m_formatsDateParseAcceptable;
-  FormatsDate m_formatsDateParseIncomplete;
   FormatsTime m_formatsTimeParseAcceptable;
-  FormatsTime m_formatsTimeParseIncomplete;
 
+  // For parsing input, after input has been found to not be Acceptable. Regular expressions are used since Qt date/time
+  // parsing of Intermediate strings does not work. Example, 'J' and 'Ja' would be rejected although they are typed
+  // in the process of entering 'Jan' for the month
+  FormatsDate m_formatsDateParseIncomplete;
+  FormatsTime m_formatsTimeParseIncomplete;
 };
 
 #endif // FORMAT_DATE_TIME_H

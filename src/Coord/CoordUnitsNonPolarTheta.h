@@ -13,6 +13,7 @@ enum CoordUnitsNonPolarTheta {
   NUM_COORD_UNITS_NON_POLAR_THETA
 };
 
+extern QString coordUnitsNonPolarThetaToBriefType (CoordUnitsNonPolarTheta coordUnits);
 extern QString coordUnitsNonPolarThetaToString (CoordUnitsNonPolarTheta coordUnits);
 
 #endif // COORD_UNITS_NON_POLAR_THETA_H

@@ -1,9 +1,38 @@
 #include "CoordSymbol.h"
 #include "CoordUnitsPolarTheta.h"
 
-QString coordUnitsPolarThetaToString (CoordUnitsPolarTheta coordUnitsPolarTheta)
+QString coordUnitsPolarThetaToBriefType (CoordUnitsPolarTheta coordUnits)
 {
-  switch (coordUnitsPolarTheta) {
+  switch (coordUnits) {
+    case COORD_UNITS_POLAR_THETA_DEGREES:
+      return "Degrees";
+
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+      return "Degrees";
+
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+      return "Degrees";
+
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
+      return "Degrees";
+
+    case COORD_UNITS_POLAR_THETA_GRADIANS:
+      return "Gradians";
+
+    case COORD_UNITS_POLAR_THETA_RADIANS:
+      return "Radians";
+
+    case COORD_UNITS_POLAR_THETA_TURNS:
+      return "Turns";
+
+    default:
+      return "Unknown";
+  }
+}
+
+QString coordUnitsPolarThetaToString (CoordUnitsPolarTheta coordUnits)
+{
+  switch (coordUnits) {
     case COORD_UNITS_POLAR_THETA_DEGREES:
       return POLAR_UNITS_DEGREES;
 
