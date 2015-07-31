@@ -7,6 +7,7 @@
 #include <QHash>
 #include <QString>
 #include <QStringList>
+#include <QValidator>
 
 typedef QHash<CoordUnitsDate, QString> FormatDate;
 typedef QHash<CoordUnitsTime, QString> FormatTime;
@@ -26,23 +27,33 @@ class FormatDateTime {
                         unsigned long value) const;
   
   /// Parse the input string into a time value. Success flag is false if parsing failed
-  unsigned long parseInput (CoordUnitsDate coordUnitsDate,
-                            CoordUnitsTime coordUnitsTime,
-                            const QString &string,
-                            bool &success) const;
+  QValidator::State parseInput (CoordUnitsDate coordUnitsDate,
+                                CoordUnitsTime coordUnitsTime,
+                                const QString &string,
+                                unsigned long &value) const;
   
  private:
 
+  void dateTimeLookup (const FormatsDate &formatsDate,
+                       const FormatsTime &formatsTime,
+                       CoordUnitsDate coordUnitsDate,
+                       CoordUnitsTime coordUnitsTime,
+                       const QString &string,
+                       unsigned long &value,
+                       bool &success) const;
   void loadFormatsFormat();
-  void loadFormatsParse();
+  void loadFormatsParseAcceptable();
+  void loadFormatsParseIncomplete();
 
   // For formatting output
   FormatDate m_formatsDateFormat;
   FormatTime m_formatsTimeFormat;
 
   // For parsing input
-  FormatsDate m_formatsDateParse;
-  FormatsTime m_formatsTimeParse;
+  FormatsDate m_formatsDateParseAcceptable;
+  FormatsDate m_formatsDateParseIncomplete;
+  FormatsTime m_formatsTimeParseAcceptable;
+  FormatsTime m_formatsTimeParseIncomplete;
 
 };
 
