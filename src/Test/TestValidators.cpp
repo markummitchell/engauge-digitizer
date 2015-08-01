@@ -31,7 +31,8 @@ void TestValidators::initTestCase ()
   w.show ();
 }
 
-void TestValidators::testDateTime ()
+bool TestValidators::stateDateTime (const QString &string,
+                                    QValidator::State expectedState)
 {
   int pos;
 
@@ -39,53 +40,81 @@ void TestValidators::testDateTime ()
                                   COORD_UNITS_DATE_YEAR_MONTH_DAY,
                                   COORD_UNITS_TIME_HOUR_MINUTE_SECOND);
 
-  QString date ("2015/01/02");
-  QString time ("01:02:03");
-  QString dateTime ("2015/01/02 01:02:03");
-  QString dateTimePm ("2015/01/02 01:02:03 PM");
-
-  QVERIFY (validator.validate (date,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (time,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (dateTime,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (dateTimePm,
-                               pos) == QValidator::Acceptable);
+  QString stringLocal = string;
+  return (validator.validate (stringLocal,
+                              pos) == expectedState);
 }
 
-void TestValidators::testDegreesMinutesSeconds ()
+bool TestValidators::stateDegreesMinutesSeconds (const QString &string,
+                                                 QValidator::State expectedState)
 {
   int pos;
 
   DlgValidatorDegreesMinutesSeconds validator (COORD_SCALE_LOG);
 
-  QString degrees ("180");
-  QString degreesMinutes ("180 10");
-  QString degreesMinutesSeconds ("180 10 20");
-
-  QVERIFY (validator.validate (degrees,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (degreesMinutes,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (degreesMinutesSeconds,
-                               pos) == QValidator::Acceptable);
+  QString stringLocal = string;
+  return (validator.validate (stringLocal,
+                               pos) == expectedState);
 }
 
-void TestValidators::testNumber ()
+bool TestValidators::stateNumber(const QString &string,
+                                 QValidator::State expectedState)
 {
   int pos;
 
   DlgValidatorNumber validator (COORD_SCALE_LOG);
 
-  QString integer ("1");
-  QString real ("1.1");
-  QString realBad ("1.1.");
+  QString stringLocal = string;
+  return (validator.validate (stringLocal,
+                               pos) == expectedState);
+}
 
-  QVERIFY (validator.validate (integer,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (real,
-                               pos) == QValidator::Acceptable);
-  QVERIFY (validator.validate (realBad,
-                               pos) != QValidator::Acceptable);
+void TestValidators::testDateTimeDate ()
+{
+  QVERIFY (stateDateTime ("2015/01/02", QValidator::Acceptable));
+}
+
+void TestValidators::testDateTimeDateTime ()
+{
+  QVERIFY (stateDateTime ("2015/01/02 01:02:03", QValidator::Acceptable));
+}
+
+void TestValidators::testDateTimeDateTimePm ()
+{
+  QVERIFY (stateDateTime ("2015/01/02 01:02:03 PM", QValidator::Acceptable));
+}
+
+void TestValidators::testDateTimeTime ()
+{
+  QVERIFY (stateDateTime ("01:02:03", QValidator::Acceptable));
+}
+
+void TestValidators::testDegreesMinutesSecondsDegrees ()
+{
+  QVERIFY (stateDegreesMinutesSeconds ("180", QValidator::Acceptable));
+}
+
+void TestValidators::testDegreesMinutesSecondsDegreesMinutes ()
+{
+  QVERIFY (stateDegreesMinutesSeconds ("180 10", QValidator::Acceptable));
+}
+
+void TestValidators::testDegreesMinutesSecondsDegreesMinutesSeconds ()
+{
+  QVERIFY (stateDegreesMinutesSeconds ("180 10 20", QValidator::Acceptable));
+}
+
+void TestValidators::testNumberInteger ()
+{
+  QVERIFY (stateNumber ("1", QValidator::Acceptable));
+}
+
+void TestValidators::testNumberReal ()
+{
+  QVERIFY (stateNumber ("1.1", QValidator::Acceptable));
+}
+
+void TestValidators::testNumberRealBad ()
+{
+  QVERIFY (stateNumber ("1.1.", QValidator::Invalid));
 }

@@ -1,10 +1,22 @@
 #!/bin/bash
 
 # Test names. Specify a single test to run just that test
-tests=(TestGraphCoords TestProjectedPoint TestSpline TestValidators)
-if [ -n "$1" ]
+tests=(TestFormats TestGraphCoords TestProjectedPoint TestSpline TestValidators)
+
+echo "Available tests: " ${tests[*]}
+
+argcount="$#"
+
+if [ $argcount -gt 0 ]
 then 
-    tests=("$1");
+    tests=("$@");
+fi
+
+echo "Selected tests: " ${tests[*]}
+
+if [ $argcount -eq 1 ]
+then
+    echo "Since a single test is selected, engauge_test.pro will not be deleted so the code can be easily rebuilt and debugged"
 fi
 
 # Logging
@@ -34,7 +46,10 @@ else
 	qmake engauge_test.pro
         make clean 2>>$LOGFILE >/dev/null
 	make all 2>>$LOGFILE >/dev/null
-        rm engauge_test.pro
+	if [ $argcount -ne 1]
+	then
+            rm engauge_test.pro
+	fi
     done
 
     # Run tests

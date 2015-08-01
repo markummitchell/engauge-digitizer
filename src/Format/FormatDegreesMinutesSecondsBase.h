@@ -2,6 +2,7 @@
 #define FORMAT_DEGREES_MINUTES_SECONDS_BASE_H
 
 #include <QString>
+#include <QValidator>
 
 /// Common input parsing and output formatting for degrees/minutes/seconds values
 class FormatDegreesMinutesSecondsBase {
@@ -12,9 +13,9 @@ class FormatDegreesMinutesSecondsBase {
 
   /// Parse the input string into a number value. Success flag is false if the parsing failed. Either signed
   /// values or hemisphere (North, South, East, West) values can be accepted irregardless of the output format
-  /// selected by the user
-  double parseInput (const QString &string,
-                     bool &success) const;
+  /// selected by the user. Leading/trailing spaces are trimmed. Leading/trailing spaces are trimmed (=ignored)
+  QValidator::State parseInput (const QString &stringUntrimmed,
+                                double &value) const;
 
  protected:
 

@@ -44,8 +44,7 @@ private slots:
   void slotTextChanged (const QString &);
 
 private:
-  void createCoords (QVBoxLayout *layoutOuter,
-                     const DocumentModelCoords &modelCoords);
+  void createCoords (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
   void initializeGraphValueNonPolarTheta (const double *initialValue,
                                           CoordUnitsNonPolarTheta coordUnits,
@@ -56,11 +55,10 @@ private:
   void initializeGraphValuePolarTheta (const double *initialValue,
                                        CoordUnitsPolarTheta coordUnits,
                                        QLineEdit &editGraph);
-  bool isCartesian (const DocumentModelCoords &modelCoords) const;
-  QChar nameXTheta (const DocumentModelCoords &modelCoords) const;
-  QChar nameYRadius (const DocumentModelCoords &modelCoords) const;
-  QString unitsType (const DocumentModelCoords &modelCoords,
-                     bool isXTheta) const;
+  bool isCartesian () const;
+  QChar nameXTheta () const;
+  QChar nameYRadius () const;
+  QString unitsType (bool isXTheta) const;
   void updateControls ();
 
   QCursor m_cursorShape;
@@ -70,6 +68,8 @@ private:
   DlgValidatorAbstract *m_validatorGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
+
+  const DocumentModelCoords &m_modelCoords;
 };
 
 #endif // DLG_EDIT_POINT_H

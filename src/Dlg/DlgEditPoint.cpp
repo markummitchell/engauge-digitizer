@@ -4,6 +4,8 @@
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
+#include "FormatCoordsUnitsNonPolarTheta.h"
+#include "FormatCoordsUnitsPolarTheta.h"
 #include "FormatDateTime.h"
 #include "FormatDegreesMinutesSecondsNonPolarTheta.h"
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
@@ -31,7 +33,8 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             const double *xInitialValue,
                             const double *yInitialValue) :
   QDialog (&mainWindow),
-  m_cursorShape (cursorShape)
+  m_cursorShape (cursorShape),
+  m_modelCoords (modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::DlgEditPoint";
 
@@ -48,33 +51,31 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   setModal(true);
   setWindowTitle (tr ("Edit Axis Point"));
 
-  createCoords (layout,
-                modelCoords);
+  createCoords (layout);
   createOkCancel (layout);
 
-  if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    initializeGraphValueNonPolarTheta (xInitialValue,
-                                       modelCoords.coordUnitsX(),
-                                       modelCoords.coordUnitsDate(),
-                                       modelCoords.coordUnitsTime(),
-                                       IS_X_THETA,
-                                       *m_editGraphX);
-    initializeGraphValueNonPolarTheta (yInitialValue,
-                                       modelCoords.coordUnitsY(),
-                                       modelCoords.coordUnitsDate(),
-                                       modelCoords.coordUnitsTime(),
-                                       IS_NOT_X_THETA,
-                                       *m_editGraphY);
+  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
+  FormatCoordsUnitsPolarTheta formatPolarTheta;
+
+  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_editGraphX->setText (formatNonPolarTheta.unformattedToFormatted (xInitialValue,
+                                                                       m_modelCoords.coordUnitsX(),
+                                                                       m_modelCoords.coordUnitsDate(),
+                                                                       m_modelCoords.coordUnitsTime(),
+                                                                       IS_X_THETA));
+    m_editGraphY->setText (formatNonPolarTheta.unformattedToFormatted (yInitialValue,
+                                                                       m_modelCoords.coordUnitsY(),
+                                                                       m_modelCoords.coordUnitsDate(),
+                                                                       m_modelCoords.coordUnitsTime(),
+                                                                       IS_NOT_X_THETA));
   } else {
-    initializeGraphValuePolarTheta (xInitialValue,
-                                    modelCoords.coordUnitsTheta(),
-                                    *m_editGraphX);
-    initializeGraphValueNonPolarTheta (yInitialValue,
-                                       modelCoords.coordUnitsRadius(),
-                                       modelCoords.coordUnitsDate(),
-                                       modelCoords.coordUnitsTime(),
-                                       IS_NOT_X_THETA,
-                                       *m_editGraphY);
+    m_editGraphX->setText (formatPolarTheta.unformattedToFormatted (xInitialValue,
+                                                                    modelCoords.coordUnitsTheta()));
+    m_editGraphY->setText (formatNonPolarTheta.unformattedToFormatted (yInitialValue,
+                                                                       m_modelCoords.coordUnitsRadius(),
+                                                                       m_modelCoords.coordUnitsDate(),
+                                                                       m_modelCoords.coordUnitsTime(),
+                                                                       IS_NOT_X_THETA));
   }
 
   updateControls ();
@@ -87,38 +88,37 @@ DlgEditPoint::~DlgEditPoint()
   emit signalSetOverrideCursor (m_cursorShape);
 }
 
-void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter,
-                                 const DocumentModelCoords &modelCoords)
+void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
 {
   // Constraints on x and y are needed for log scaling
-  bool isConstraintX = (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
-  bool isConstraintY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
+  bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
+  bool isConstraintY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
   DlgValidatorFactory dlgValidatorFactory;
-  m_validatorGraphX = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (modelCoords.coordScaleXTheta(),
-                                                                                isCartesian (modelCoords),
-                                                                                modelCoords.coordUnitsX(),
-                                                                                modelCoords.coordUnitsTheta(),
-                                                                                modelCoords.coordUnitsDate(),
-                                                                                modelCoords.coordUnitsTime());
-  m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (modelCoords.coordScaleYRadius(),
-                                                                                   isCartesian (modelCoords),
-                                                                                   modelCoords.coordUnitsY(),
-                                                                                   modelCoords.coordUnitsRadius(),
-                                                                                   modelCoords.coordUnitsDate(),
-                                                                                   modelCoords.coordUnitsTime());
+  m_validatorGraphX = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (m_modelCoords.coordScaleXTheta(),
+                                                                                isCartesian (),
+                                                                                m_modelCoords.coordUnitsX(),
+                                                                                m_modelCoords.coordUnitsTheta(),
+                                                                                m_modelCoords.coordUnitsDate(),
+                                                                                m_modelCoords.coordUnitsTime());
+  m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (m_modelCoords.coordScaleYRadius(),
+                                                                                   isCartesian (),
+                                                                                   m_modelCoords.coordUnitsY(),
+                                                                                   m_modelCoords.coordUnitsRadius(),
+                                                                                   m_modelCoords.coordUnitsDate(),
+                                                                                   m_modelCoords.coordUnitsTime());
 
   // Label, with guidance in terms of legal ranges and units
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8 as (%9, %10):")
-                        .arg (nameXTheta (modelCoords))
-                        .arg (nameYRadius (modelCoords))
+                        .arg (nameXTheta ())
+                        .arg (nameYRadius ())
                         .arg (isConstraintX || isConstraintY ? " with " : "")
-                        .arg (isConstraintX                  ? QString (nameXTheta (modelCoords)) : "")
+                        .arg (isConstraintX                  ? QString (nameXTheta ()) : "")
                         .arg (isConstraintX                  ? " > 0" : "")
                         .arg (isConstraintX && isConstraintY ? " and " : "")
-                        .arg (                 isConstraintY ? QString (nameYRadius (modelCoords)) : "")
+                        .arg (                 isConstraintY ? QString (nameYRadius ()) : "")
                         .arg (                 isConstraintY ? " > 0" : "")
-                        .arg (unitsType (modelCoords, IS_X_THETA))
-                        .arg (unitsType (modelCoords, IS_NOT_X_THETA));
+                        .arg (unitsType (IS_X_THETA))
+                        .arg (unitsType (IS_NOT_X_THETA));
   QGroupBox *panel = new QGroupBox (description, this);
   layoutOuter->addWidget (panel);
 
@@ -173,102 +173,54 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditPoint::initializeGraphValueNonPolarTheta (const double *initialValue,
-                                                      CoordUnitsNonPolarTheta coordUnits,
-                                                      CoordUnitsDate coordUnitsDate,
-                                                      CoordUnitsTime coordUnitsTime,
-                                                      bool isXTheta,
-                                                      QLineEdit &editGraph)
+bool DlgEditPoint::isCartesian () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphValueNonPolarTheta";
-
-  if (initialValue != 0) {
-
-    switch (coordUnits) {
-      case COORD_UNITS_NON_POLAR_THETA_DATE_TIME:
-        {
-          FormatDateTime format;
-          editGraph.setText (format.formatOutput (coordUnitsDate,
-                                                  coordUnitsTime,
-                                                  *initialValue));
-        }
-        break;
-
-      case COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS:
-      case COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
-        {
-          FormatDegreesMinutesSecondsNonPolarTheta format;
-          editGraph.setText (format.formatOutput (coordUnits,
-                                                  *initialValue,
-                                                  isXTheta));
-        }
-        break;
-
-      case COORD_UNITS_NON_POLAR_THETA_NUMBER:
-        editGraph.setText (QString::number (*initialValue));
-        break;
-
-      default:
-        LOG4CPP_ERROR_S ((*mainCat)) << "DlgEditPoint::initializeGraphValueNonPolarTheta";
-        ENGAUGE_ASSERT (false);
-        break;
-    }
-
-  }
+  return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
 }
 
-void DlgEditPoint::initializeGraphValuePolarTheta (const double *initialValue,
-                                                   CoordUnitsPolarTheta coordUnits,
-                                                   QLineEdit &editGraph)
+QChar DlgEditPoint::nameXTheta () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphValuePolarTheta";
-
-  if (initialValue != 0) {
-
-    switch (coordUnits) {
-      case COORD_UNITS_POLAR_THETA_DEGREES:
-      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
-      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
-      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
-        {
-          FormatDegreesMinutesSecondsPolarTheta format;
-          editGraph.setText (format.formatOutput (coordUnits,
-                                                  *initialValue,
-                                                  IS_X_THETA));
-        }
-        break;
-
-      case COORD_UNITS_POLAR_THETA_GRADIANS:
-      case COORD_UNITS_POLAR_THETA_RADIANS:
-      case COORD_UNITS_POLAR_THETA_TURNS:
-        editGraph.setText (QString::number (*initialValue));
-        break;
-
-      default:
-        LOG4CPP_ERROR_S ((*mainCat)) << "DlgEditPoint::initializeGraphValuePolarTheta";
-        ENGAUGE_ASSERT (false);
-        break;
-    }
-  }
+  return (isCartesian () ? QChar ('X') : THETA);
 }
 
-bool DlgEditPoint::isCartesian (const DocumentModelCoords &modelCoords) const
+QChar DlgEditPoint::nameYRadius () const
 {
-  return (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
-}
-
-QChar DlgEditPoint::nameXTheta (const DocumentModelCoords &modelCoords) const
-{
-  return (isCartesian (modelCoords) ? QChar ('X') : THETA);
-}
-
-QChar DlgEditPoint::nameYRadius (const DocumentModelCoords &modelCoords) const
-{
-  return (isCartesian (modelCoords) ? QChar ('Y') : QChar ('R'));
+  return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
 QPointF DlgEditPoint::posGraph () const
 {
+  double xTheta, yRadius;
+
+  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
+  FormatCoordsUnitsPolarTheta formatPolarTheta;
+
+  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+    xTheta = formatNonPolarTheta.formattedToUnformatted (m_editGraphX->text(),
+                                                         m_modelCoords.coordUnitsX(),
+                                                         m_modelCoords.coordUnitsDate(),
+                                                         m_modelCoords.coordUnitsTime(),
+                                                         IS_X_THETA);
+    yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
+                                                          m_modelCoords.coordUnitsY(),
+                                                          m_modelCoords.coordUnitsDate(),
+                                                          m_modelCoords.coordUnitsTime(),
+                                                          IS_NOT_X_THETA);
+  } else {
+    xTheta = formatPolarTheta.formattedToUnformatted (m_editGraphX->text(),
+                                                      m_modelCoords.coordUnitsTheta());
+    yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
+                                                          m_modelCoords.coordUnitsRadius(),
+                                                          m_modelCoords.coordUnitsDate(),
+                                                          m_modelCoords.coordUnitsTime(),
+                                                          IS_NOT_X_THETA);
+  }
+
+  return QPointF (xTheta,
+                  yRadius);
+
+
+
   return QPointF (m_editGraphX->text().toDouble (),
                   m_editGraphY->text().toDouble ());
 }
@@ -278,20 +230,19 @@ void DlgEditPoint::slotTextChanged (const QString &)
   updateControls ();
 }
 
-QString DlgEditPoint::unitsType (const DocumentModelCoords &modelCoords,
-                                 bool isXTheta) const
+QString DlgEditPoint::unitsType (bool isXTheta) const
 {
-  if (isCartesian (modelCoords)) {
+  if (isCartesian ()) {
     if (isXTheta) {
-      return coordUnitsNonPolarThetaToBriefType (modelCoords.coordUnitsX());
+      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsX());
     } else {
-      return coordUnitsNonPolarThetaToBriefType (modelCoords.coordUnitsY());
+      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsY());
     }
   } else {
     if (isXTheta) {
-      return coordUnitsPolarThetaToBriefType (modelCoords.coordUnitsTheta());
+      return coordUnitsPolarThetaToBriefType (m_modelCoords.coordUnitsTheta());
     } else {
-      return coordUnitsNonPolarThetaToBriefType (modelCoords.coordUnitsRadius());
+      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsRadius());
     }
   }
 }

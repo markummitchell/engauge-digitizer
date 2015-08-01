@@ -11,22 +11,11 @@ DlgValidatorDegreesMinutesSeconds::DlgValidatorDegreesMinutesSeconds(CoordScale 
 }
 
 QValidator::State DlgValidatorDegreesMinutesSeconds::validate (QString &input,
-                                                               int &pos) const
+                                                               int & /* pos */) const
 {
   FormatDegreesMinutesSecondsBase formatDegreesMinutesSeconds;
-  bool success = false;
-  formatDegreesMinutesSeconds.parseInput (input,
-                                          success);
 
-  QValidator::State state = (success ?
-                               QValidator::Acceptable :
-                               QValidator::Invalid);
-
-  if (state != QValidator::Acceptable) {
-
-    pos = 0; // Would be nice to set to a value that meant something
-
-  }
-
-  return state;
+  double value;
+  return formatDegreesMinutesSeconds.parseInput (input,
+                                                 value);
 }

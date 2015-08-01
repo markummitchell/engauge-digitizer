@@ -26,14 +26,18 @@ class FormatDateTime {
                         CoordUnitsTime coordUnitsTime,
                         double value) const;
   
-  /// Parse the input string into a time value. Success flag is false if parsing failed
+  /// Parse the input string into a time value. Success flag is false if parsing failed.
+  /// Leading/trailing spaces are trimmed (=ignored)
   QValidator::State parseInput (CoordUnitsDate coordUnitsDate,
                                 CoordUnitsTime coordUnitsTime,
-                                const QString &string,
+                                const QString &stringUntrimmed,
                                 double &value) const;
   
  private:
 
+  bool ambiguityBetweenDateAndTime (CoordUnitsDate coordUnitsDate,
+                                    CoordUnitsTime coordUnitsTime,
+                                    const QString &string) const;
   void dateTimeLookup (const FormatsDate &formatsDate,
                        const FormatsTime &formatsTime,
                        CoordUnitsDate coordUnitsDate,

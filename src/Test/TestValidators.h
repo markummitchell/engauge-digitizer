@@ -20,11 +20,25 @@ private slots:
   void cleanupTestCase ();
   void initTestCase ();
 
-  void testDateTime ();
-  void testDegreesMinutesSeconds ();
-  void testNumber ();
+  void testDateTimeDate ();
+  void testDateTimeDateTime ();
+  void testDateTimeDateTimePm ();
+  void testDateTimeTime ();
+  void testDegreesMinutesSecondsDegrees ();
+  void testDegreesMinutesSecondsDegreesMinutes ();
+  void testDegreesMinutesSecondsDegreesMinutesSeconds ();
+  void testNumberInteger ();
+  void testNumberReal ();
+  void testNumberRealBad ();
 
 private:
+
+  bool stateDateTime (const QString &string,
+                      QValidator::State expectedState);
+  bool stateDegreesMinutesSeconds (const QString &string,
+                                   QValidator::State expectedState);
+  bool stateNumber (const QString &string,
+                    QValidator::State expectedState);
 
   DlgValidatorDateTime *m_validatorDateTime;
   DlgValidatorDegreesMinutesSeconds *m_validatorDegreesMinutesSeconds;

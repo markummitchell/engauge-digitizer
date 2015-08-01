@@ -5,6 +5,7 @@
 #include <qmath.h>
 #include <QRegExp>
 #include <QStringList>
+#include <QValidator>
 
 const int DECIMAL_TO_MINUTES = 60.0;
 const int DECIMAL_TO_SECONDS = 60.0;
@@ -74,11 +75,18 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (
     .arg (hemisphere);
 }
 
-double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
-                                                    bool &success) const
+QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &stringUntrimmed,
+                                                               double &value) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::parseInput"
-                              << " string=" << string.toLatin1().data();
+                              << " string=" << stringUntrimmed.toLatin1().data();
+
+  const QString string = stringUntrimmed.trimmed ();
+
+  if (string.isEmpty()) {
+
+    return QValidator::Intermediate;
+  }
 
   // Split on spaces
   QStringList fields = string.split (QRegExp ("\\s+"),
@@ -86,7 +94,7 @@ double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
 
   QString field0, field1, field2; // Degrees, minutes and seconds components
   if (fields.count() == 0) {
-    return false; // Empty
+    return QValidator::Invalid; // Empty
   } else {
     field0 = fields.at(0);
     if (fields.count() > 1) {
@@ -94,7 +102,7 @@ double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
       if (fields.count() > 2) {
         field2 = fields.at(2);
         if (fields.count() > 3) {
-          return false;
+          return QValidator::Invalid; // Too many values
         }
       }
     }
@@ -125,27 +133,27 @@ double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
   double valueDegrees = 0, valueMinutes = 0, valueSeconds = 0;
 
   // Required degrees
-  success = (valDegrees.validate (field0,
-                                  pos) == QValidator::Acceptable);
-  if (success) {
+  QValidator::State state = valDegrees.validate (field0,
+                                                pos);
+  if (state == QValidator::Acceptable) {
 
     valueDegrees = field0.toDouble();
     
     if (fields.count() > 1) {
 
       // Optional minutes
-      success = (valMinutesOrSeconds.validate (field1,
-                                               pos) == QValidator::Acceptable);
-      if (success) {
+      state = valMinutesOrSeconds.validate (field1,
+                                            pos);
+      if (state == QValidator::Acceptable) {
 
         valueMinutes = field1.toDouble();
 
         if (fields.count() > 2) {
           
           // Optional seconds
-          success = (valMinutesOrSeconds.validate (field2,
-                                                   pos) == QValidator::Acceptable);
-          if (success) {
+          state = valMinutesOrSeconds.validate (field2,
+                                                pos);
+          if (state == QValidator::Acceptable) {
 
             valueSeconds = field2.toDouble();
 
@@ -155,15 +163,19 @@ double FormatDegreesMinutesSecondsBase::parseInput (const QString &string,
     }
   }
 
-  if (valueDegrees < 0) {
+  if (state == QValidator::Acceptable) {
+    if (valueDegrees < 0) {
 
-    // Apply the negative sign on the degrees components to minutes and seconds components also
-    return valueDegrees - valueMinutes - valueSeconds;
-
-  } else {
-
-    // All components are positive
-    return valueDegrees + valueMinutes + valueSeconds;
-
+      // Apply the negative sign on the degrees components to minutes and seconds components also
+      value = valueDegrees - valueMinutes - valueSeconds;
+      
+    } else {
+      
+      // All components are positive
+      value = valueDegrees + valueMinutes + valueSeconds;
+      
+    }
   }
+
+  return state;
 }
