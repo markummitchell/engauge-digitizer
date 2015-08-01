@@ -24,13 +24,13 @@ class FormatDateTime {
   /// Format the date/time value according to date/time format settings
   QString formatOutput (CoordUnitsDate coordUnitsDate,
                         CoordUnitsTime coordUnitsTime,
-                        unsigned long value) const;
+                        double value) const;
   
   /// Parse the input string into a time value. Success flag is false if parsing failed
   QValidator::State parseInput (CoordUnitsDate coordUnitsDate,
                                 CoordUnitsTime coordUnitsTime,
                                 const QString &string,
-                                unsigned long &value) const;
+                                double &value) const;
   
  private:
 
@@ -40,7 +40,7 @@ class FormatDateTime {
                        CoordUnitsTime coordUnitsTime,
                        const QString &string,
                        bool useQDateTimeElseQRegExp,
-                       unsigned long &value, // Set only if useQDateTimeElseQRegExp=success=true
+                       double &value, // Set only if useQDateTimeElseQRegExp=success=true
                        bool &success) const;
   void loadFormatsFormat();
   void loadFormatsParseAcceptable();

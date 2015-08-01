@@ -18,7 +18,7 @@ QValidator::State DlgValidatorDateTime::validate (QString &input,
                                                   int & /* pos */) const
 {
   FormatDateTime formatDateTime;
-  unsigned long value;
+  double value;
   return formatDateTime.parseInput (m_coordUnitsDate,
                                     m_coordUnitsTime,
                                     input,

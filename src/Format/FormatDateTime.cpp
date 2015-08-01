@@ -15,7 +15,7 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
                                      CoordUnitsTime coordUnitsTime,
                                      const QString &string,
                                      bool useQDateTimeElseQRegExp,
-                                     unsigned long &value,
+                                     double &value,
                                      bool &success) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup";
@@ -80,7 +80,7 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
 
 QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
                                       CoordUnitsTime coordUnitsTime,
-                                      unsigned long value) const
+                                      double value) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::formatOutput";
 
@@ -282,7 +282,7 @@ void FormatDateTime::loadFormatsParseIncomplete()
 QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
                                               CoordUnitsTime coordUnitsTime,
                                               const QString &string,
-                                              unsigned long &value) const
+                                              double &value) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::parseInput"
                               << " date=" << coordUnitsDateToString (coordUnitsDate).toLatin1().data()
