@@ -1,6 +1,7 @@
 #include "CallbackUpdateTransform.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
+#include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <QDebug>
 #include <qmath.h>
@@ -182,9 +183,20 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       double resolutionXGraph = qAbs ((pointGraphDelta.x () - pointGraph.x ()) / X_DELTA_PIXELS);
       double resolutionYGraph = qAbs ((pointGraphDelta.y () - pointGraph.y ()) / Y_DELTA_PIXELS);
 
+      // Formatting for date/time and degrees/minutes/seconds is only done on coordinates, and not on resolution
+      FormatCoordsUnits format;
+      QString xThetaFormatted, yRadiusFormatted;
+      format.unformattedToFormatted (pointGraph.x(),
+                                     pointGraph.y(),
+                                     m_modelCoords,
+                                     xThetaFormatted,
+                                     yRadiusFormatted,
+                                     PRECISION_DIGITS);
+
       coordsGraph = QString ("(%1, %2)")
-                    .arg (pointGraph.x(), UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS)
-                    .arg (pointGraph.y(), UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS);
+                    .arg (xThetaFormatted)
+                    .arg (yRadiusFormatted);
+
       resolutionsGraph = QString ("(%1, %2)")
                          .arg (resolutionXGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS)
                          .arg (resolutionYGraph, UNCONSTRAINED_FIELD_WIDTH, FORMAT, PRECISION_DIGITS);

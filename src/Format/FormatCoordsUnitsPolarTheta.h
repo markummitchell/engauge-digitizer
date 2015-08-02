@@ -2,6 +2,7 @@
 #define FORMAT_COORDS_UNITS_POLAR_THETA_H
 
 #include "CoordUnitsPolarTheta.h"
+#include "FormatConstants.h"
 #include <QString>
 
 /// Format conversions between unformatted and formatted for CoordUnitsPolarTheta
@@ -14,9 +15,10 @@ class FormatCoordsUnitsPolarTheta {
   double formattedToUnformatted (const QString &string,
                                  CoordUnitsPolarTheta coordUnits) const;
 
-  /// Convert simple unformatted number to formatted string. Pointer is null if value is unspecified
-  QString unformattedToFormatted (const double *value,
-                                  CoordUnitsPolarTheta coordUnits) const;
+  /// Convert simple unformatted number to formatted string
+  QString unformattedToFormatted (double valueUnformatted,
+                                  CoordUnitsPolarTheta coordUnits,
+                                  int precisionDigitsForRawNumber = DEFAULT_PRECISION) const;
 };
 
 #endif // FORMAT_COORDS_UNITS_POLAR_THETA_H

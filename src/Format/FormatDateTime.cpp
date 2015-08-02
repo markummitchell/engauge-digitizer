@@ -150,7 +150,7 @@ void FormatDateTime::loadFormatsParseAcceptable()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::loadFormatsParseAcceptable";
 
-  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, year, yearMonth, yearMonthDay;
+  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, yearMonth, yearMonthDay;
 
   // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time respectively even when skipped,
   // although there can be ambiguity with between COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
@@ -242,7 +242,10 @@ void FormatDateTime::loadFormatsParseAcceptable()
                << "MMMM/dd"
                << "MMMM-dd"
                << "MMMM dd";
-  yearMonth << "yyyy/MM" // No two digit years since QDateTime has bugs. Example, '06' becomes 1906 but then outputs it as 2106
+  yearMonth << "yyyy/M"
+            << "yyyy-M"
+            << "yyyy M"
+            << "yyyy/MM"
             << "yyyy-MM"
             << "yyyy MM"
             << "yyyy/MMM"
@@ -251,9 +254,18 @@ void FormatDateTime::loadFormatsParseAcceptable()
             << "yyyy/MMMM"
             << "yyyy-MMMM"
             << "yyyy MMMM";
-  yearMonthDay << "yyyy/MM/dd"
+  yearMonthDay << "yyyy/M/d"
+               << "yyyy-M-d"
+               << "yyyy M d"
+               << "yyyy/M/dd"
+               << "yyyy-M-dd"
+               << "yyyy M dd"
+               << "yyyy/MM/dd"
                << "yyyy-MM-dd"
                << "yyyy MM dd"
+               << "yyyy/MMM/d"
+               << "yyyy-MMM-d"
+               << "yyyy MMM d"
                << "yyyy/MMM/dd"
                << "yyyy-MMM-dd"
                << "yyyy MMM dd"

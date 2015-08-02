@@ -125,6 +125,8 @@ HEADERS  += \
     Export/ExportToFile.h \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
+    Format/FormatConstants.h \
+    Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsNonPolarTheta.h \
     Format/FormatCoordsUnitsPolarTheta.h \
     Format/FormatDateTime.h \
@@ -297,6 +299,8 @@ SOURCES += \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
+    Format/FormatConstants.cpp \
+    Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsNonPolarTheta.cpp \
     Format/FormatCoordsUnitsPolarTheta.cpp \
     Format/FormatDateTime.cpp \

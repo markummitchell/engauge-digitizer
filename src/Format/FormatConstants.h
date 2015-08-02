@@ -1,0 +1,6 @@
+#ifndef FORMAT_CONSTANTS_H
+#define FORMAT_CONSTANTS_H
+
+extern const int DEFAULT_PRECISION;
+
+#endif // FORMAT_CONSTANTS_H

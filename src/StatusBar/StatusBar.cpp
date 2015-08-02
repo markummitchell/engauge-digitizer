@@ -25,6 +25,11 @@ const QString LABEL_ZOOM_1_TO_8 ("1:8");
 const QString LABEL_ZOOM_1_TO_16 ("1:16");
 const QString LABEL_ZOOM_FILL ("Fill");
 
+const int MIN_WIDTH_COMBO_UNITS = 160;
+const int MAX_WIDTH_GROUP_UNITS = 400;
+const int MAX_SIZE_EDIT_COORDS = 550; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
+const int MAX_HEIGHT_EDIT_COORDS = 24;
+
 StatusBar::StatusBar(QStatusBar &statusBar) :
   m_statusBar (statusBar),
   m_statusBarMode (STATUS_BAR_MODE_ALWAYS),
@@ -55,7 +60,7 @@ void StatusBar::createGroupUnits ()
   m_comboUnits->addItem (LABEL_COORDS_GRAPH, QVariant (STATUS_BAR_UNITS_COORDS_GRAPH));
   m_comboUnits->addItem (LABEL_RESOLUTION_GRAPH, QVariant (STATUS_BAR_UNITS_RESOLUTION_GRAPH));
   m_comboUnits->setCurrentText (LABEL_COORDS_GRAPH);
-  m_comboUnits->setMaximumWidth (160);
+  m_comboUnits->setMaximumWidth (MIN_WIDTH_COMBO_UNITS);
   m_comboUnits->setToolTip (tr ("Select cursor coordinate values to display."));
   m_comboUnits->setWhatsThis (tr("Select Cursor Coordinate Values\n\n"
                                  "Values at cursor coordinates to display. Coordinates are in screen (pixels) or "
@@ -67,7 +72,8 @@ void StatusBar::createGroupUnits ()
   m_editCoords->setEnabled (false); // Disabled until file is opened
   m_editCoords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_editCoords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_editCoords->setMaximumSize (160, 24);
+  m_editCoords->setMinimumSize (MAX_SIZE_EDIT_COORDS, MAX_HEIGHT_EDIT_COORDS);
+  m_editCoords->setMaximumSize (MAX_SIZE_EDIT_COORDS, MAX_HEIGHT_EDIT_COORDS);
   m_editCoords->setReadOnly(true);
   m_editCoords->setToolTip (tr ("Cursor coordinate values."));
   m_editCoords->setWhatsThis (tr ("Cursor Coordinate Values\n\n"
@@ -80,7 +86,7 @@ void StatusBar::createGroupUnits ()
   QPalette *palette = new QPalette;
   palette->setColor (QPalette::Foreground, Qt::gray);
   m_groupUnits->setPalette (*palette);
-  m_groupUnits->setMaximumWidth (400);
+  m_groupUnits->setMaximumWidth (MAX_WIDTH_GROUP_UNITS);
 
   QHBoxLayout *groupLayout = new QHBoxLayout;
   m_groupUnits->setLayout (groupLayout);

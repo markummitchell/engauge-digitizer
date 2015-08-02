@@ -4,8 +4,7 @@
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
-#include "FormatCoordsUnitsNonPolarTheta.h"
-#include "FormatCoordsUnitsPolarTheta.h"
+#include "FormatCoordsUnits.h"
 #include "FormatDateTime.h"
 #include "FormatDegreesMinutesSecondsNonPolarTheta.h"
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
@@ -157,33 +156,17 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
 
-  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
-  FormatCoordsUnitsPolarTheta formatPolarTheta;
-
   QString xTheta, yRadius;
-  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+  if ((xInitialValue != 0) &&
+      (yInitialValue != 0)) {
 
-    xTheta = formatNonPolarTheta.unformattedToFormatted (xInitialValue,
-                                                         m_modelCoords.coordUnitsX(),
-                                                         m_modelCoords.coordUnitsDate(),
-                                                         m_modelCoords.coordUnitsTime(),
-                                                         IS_X_THETA);
-    yRadius = formatNonPolarTheta.unformattedToFormatted (yInitialValue,
-                                                          m_modelCoords.coordUnitsY(),
-                                                          m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime(),
-                                                          IS_NOT_X_THETA);
-
-  } else {
-
-    xTheta = formatPolarTheta.unformattedToFormatted (xInitialValue,
-                                                      m_modelCoords.coordUnitsTheta());
-    yRadius = formatNonPolarTheta.unformattedToFormatted (yInitialValue,
-                                                          m_modelCoords.coordUnitsRadius(),
-                                                          m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime(),
-                                                          IS_NOT_X_THETA);
-   }
+    FormatCoordsUnits format;
+    format.unformattedToFormatted (*xInitialValue,
+                                   *yInitialValue,
+                                   m_modelCoords,
+                                   xTheta,
+                                   yRadius);
+  }
 
    m_editGraphX->setText (xTheta);
    m_editGraphY->setText (yRadius);
@@ -208,26 +191,13 @@ QPointF DlgEditPoint::posGraph () const
 {
   double xTheta, yRadius;
 
-  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
-  FormatCoordsUnitsPolarTheta formatPolarTheta;
+  FormatCoordsUnits format;
 
-  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    xTheta = formatNonPolarTheta.formattedToUnformatted (m_editGraphX->text(),
-                                                         m_modelCoords.coordUnitsX(),
-                                                         m_modelCoords.coordUnitsDate(),
-                                                         m_modelCoords.coordUnitsTime());
-    yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
-                                                          m_modelCoords.coordUnitsY(),
-                                                          m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime());
-  } else {
-    xTheta = formatPolarTheta.formattedToUnformatted (m_editGraphX->text(),
-                                                      m_modelCoords.coordUnitsTheta());
-    yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
-                                                          m_modelCoords.coordUnitsRadius(),
-                                                          m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime());
-  }
+  format.formattedToUnformatted (m_editGraphX->text(),
+                                 m_editGraphY->text(),
+                                 m_modelCoords,
+                                 xTheta,
+                                 yRadius);
 
   return QPointF (xTheta,
                   yRadius);
