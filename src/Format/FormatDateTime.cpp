@@ -13,6 +13,8 @@ bool FormatDateTime::ambiguityBetweenDateAndTime (CoordUnitsDate coordUnitsDate,
                                                   CoordUnitsTime coordUnitsTime,
                                                   const QString &string) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::ambiguityBetweenDateAndTime";
+
   bool ambiguous = false;
 
   // There is no ambiguity if user specified either date or time as empty
@@ -76,10 +78,6 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
           QDateTime dt = QDateTime::fromString (string,
                                                 formatDateTime);
 
-          LOG4CPP_DEBUG_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
-                                       << " format=" << formatDateTime.toLatin1().data()
-                                       << " isValid=" << (dt.isValid() ? "true" : "false");
-
           if (dt.isValid() && !ambiguityBetweenDateAndTime (coordUnitsDate,
                                                             coordUnitsTime,
                                                             string)) {
@@ -87,6 +85,12 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
             success = true;
             value = dt.toTime_t();
             iterating = false; // Stop iterating
+
+            LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
+                                        << " string=" << string.toLatin1().data()
+                                        << " qDateTimeFormatMatched=" << formatDateTime.toLatin1().data()
+                                        << " value=" << value
+                                        << " stringQDateTime=" << dt.toString().toLatin1().data();
 
           }
         } else {
@@ -96,6 +100,10 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
 
             success = true; // Note that value does not get set in QRegExp case
             iterating = false; // Stop iterating
+
+            LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
+                                        << " string=" << string.toLatin1().data()
+                                        << " regExpMatched=" << formatDateTime.toLatin1().data();
 
           }
         }
@@ -108,7 +116,8 @@ QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
                                       CoordUnitsTime coordUnitsTime,
                                       double value) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::formatOutput";
+  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::formatOutput"
+                              << " value=" << value;
 
   ENGAUGE_ASSERT (m_formatsDateFormat.contains (coordUnitsDate));
   ENGAUGE_ASSERT (m_formatsTimeFormat.contains (coordUnitsTime));
@@ -141,36 +150,108 @@ void FormatDateTime::loadFormatsParseAcceptable()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::loadFormatsParseAcceptable";
 
-  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, yearMonthDay;
+  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, year, yearMonth, yearMonthDay;
 
   // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time respectively even when skipped,
   // although there can be ambiguity with between COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
   skip << "";
 
-  dayMonth << "dd/MM"
+  dayMonth << "d/M"
+           << "d-M"
+           << "d/MM"
+           << "d-MM"
+           << "d/MMM"
+           << "d-MMM"
+           << "d/MMMM"
+           << "d-MMMM"
            << "dd/M"
-           << "dd-MM"
            << "dd-M"
+           << "dd/M"
+           << "dd-M"
+           << "dd/MM"
+           << "dd-MM"
            << "dd/MMM"
            << "dd-MMM"
            << "dd/MMMM"
            << "dd-MMMM";
-  dayMonthYear << "dd/MM/yyyy" << "dd/MM/yy"
-               << "dd-MM-yyyy" << "dd-MM-yy"
-               << "dd/MMM/yyyy" << "dd/MMM/yy"
-               << "dd-MMM-yyyy" << "dd-MMM-yy"
-               << "dd MMM yyyy" << "dd MMM yy"
-               << "dd/MMMM/yyyy" << "dd/MMMM/yy"
-               << "dd-MMMM-yyyy" << "dd-MMMM-yy"
-               << "dd MMMM yyyy" << "dd MMMM yy";
-  monthDay << "MM/dd"
+  dayMonthYear << "d/M/yyyy"
+               << "d-M-yyyy"
+
+               << "d/MM/yyyy"
+               << "d-MM-yyyy"
+               << "d/MMM/yyyy"
+               << "d-MMM-yyyy"
+               << "d MMM yyyy"
+               << "d/MMMM/yyyy"
+               << "d-MMMM-yyyy"
+               << "d MMMM yyyy"
+
+               << "dd/MM/yyyy"
+               << "dd-MM-yyyy"
+               << "dd/MMM/yyyy"
+               << "dd-MMM-yyyy"
+               << "dd MMM yyyy"
+               << "dd/MMMM/yyyy"
+               << "dd-MMMM-yyyy"
+               << "dd MMMM yyyy";
+  monthDay << "M/d"
+           << "M-d"
+           << "M d"
+           << "M/dd"
+           << "M-dd"
+           << "M dd"
+           << "MM/d"
+           << "MM-d"
+           << "MM d"
+           << "MM/dd"
+           << "MM-dd"
+           << "MM dd"
+           << "MMM/d"
+           << "MMM-d"
+           << "MMM d"
+           << "MMM/dd"
+           << "MMM-dd"
            << "MMM dd"
+           << "MMMM/d"
+           << "MMMM-d"
+           << "MMMM d"
+           << "MMMM/dd"
+           << "MMMM-dd"
            << "MMMM dd";
-  monthDayYear << "MM/dd/yyyy" << "MM/dd/yy"
-               << "MM-dd-yyyy" << "MM-dd-yy" 
+  monthDayYear << "M/d/yyyy"
+               << "M-d-yyyy"
+               << "M d yyyy"
+               << "M/dd/yyyy"
+               << "M-dd-yyyy"
+               << "M dd yyyy"
+               << "MM/d/yyyy"
+               << "MM-d-yyyy"
+               << "MM d yyyy"
+               << "MM/dd/yyyy"
+               << "MM-dd-yyyy"
+               << "MM dd yyyy"
+               << "MMM/d/yyyy"
+               << "MMM-d-yyyy"
+               << "MMM d yyyy"
+               << "MMM/dd/yyyy"
+               << "MMM-dd-yyyy"
                << "MMM dd yyyy"
-               << "MMMM dd yyyy";
-  yearMonthDay << "yyyy/MM/dd" 
+               << "MMMM/d/yyyy"
+               << "MMMM-d-yyyy"
+               << "MMMM d"
+               << "MMMM/dd"
+               << "MMMM-dd"
+               << "MMMM dd";
+  yearMonth << "yyyy/MM" // No two digit years since QDateTime has bugs. Example, '06' becomes 1906 but then outputs it as 2106
+            << "yyyy-MM"
+            << "yyyy MM"
+            << "yyyy/MMM"
+            << "yyyy-MMM"
+            << "yyyy MMM"
+            << "yyyy/MMMM"
+            << "yyyy-MMMM"
+            << "yyyy MMMM";
+  yearMonthDay << "yyyy/MM/dd"
                << "yyyy-MM-dd"
                << "yyyy MM dd"
                << "yyyy/MMM/dd"
@@ -184,7 +265,7 @@ void FormatDateTime::loadFormatsParseAcceptable()
   m_formatsDateParseAcceptable [COORD_UNITS_DATE_SKIP] = skip + monthDay + monthDayYear + yearMonthDay;
   m_formatsDateParseAcceptable [COORD_UNITS_DATE_MONTH_DAY_YEAR] = skip + monthDay + monthDayYear + yearMonthDay;
   m_formatsDateParseAcceptable [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + dayMonth + dayMonthYear + yearMonthDay;
-  m_formatsDateParseAcceptable [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + monthDay + monthDayYear + yearMonthDay;
+  m_formatsDateParseAcceptable [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + yearMonth + yearMonthDay;
 
   ENGAUGE_ASSERT (m_formatsDateParseAcceptable.count () == NUM_COORD_UNITS_DATE);
 
@@ -253,8 +334,8 @@ void FormatDateTime::loadFormatsParseIncomplete()
                << "\\d{1,2} \\d{1,2} \\d{1,4} ";
   year << "\\d{1,4}"
        << "\\d{1,4} "
-       << "\\d{2,4}/"
-       << "\\d{2,4}-";
+       << "\\d{1,4}/"
+       << "\\d{1,4}-";
   yearMonth << "\\d{4}/\\d{1,2}"
             << "\\d{4}/\\d{1,2} "
             << "\\d{4}/\\d{1,2}/"
@@ -282,7 +363,7 @@ void FormatDateTime::loadFormatsParseIncomplete()
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_SKIP] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_MONTH_DAY_YEAR] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + day + dayMonth + year + yearMonth + yearMonthDay;
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
+  m_formatsDateParseIncomplete [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + year + yearMonth + yearMonthDay;
 
   ENGAUGE_ASSERT (m_formatsDateParseIncomplete.count () == NUM_COORD_UNITS_DATE);
 

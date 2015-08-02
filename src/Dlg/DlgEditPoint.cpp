@@ -54,29 +54,8 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   createCoords (layout);
   createOkCancel (layout);
 
-  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
-  FormatCoordsUnitsPolarTheta formatPolarTheta;
-
-  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_editGraphX->setText (formatNonPolarTheta.unformattedToFormatted (xInitialValue,
-                                                                       m_modelCoords.coordUnitsX(),
-                                                                       m_modelCoords.coordUnitsDate(),
-                                                                       m_modelCoords.coordUnitsTime(),
-                                                                       IS_X_THETA));
-    m_editGraphY->setText (formatNonPolarTheta.unformattedToFormatted (yInitialValue,
-                                                                       m_modelCoords.coordUnitsY(),
-                                                                       m_modelCoords.coordUnitsDate(),
-                                                                       m_modelCoords.coordUnitsTime(),
-                                                                       IS_NOT_X_THETA));
-  } else {
-    m_editGraphX->setText (formatPolarTheta.unformattedToFormatted (xInitialValue,
-                                                                    modelCoords.coordUnitsTheta()));
-    m_editGraphY->setText (formatNonPolarTheta.unformattedToFormatted (yInitialValue,
-                                                                       m_modelCoords.coordUnitsRadius(),
-                                                                       m_modelCoords.coordUnitsDate(),
-                                                                       m_modelCoords.coordUnitsTime(),
-                                                                       IS_NOT_X_THETA));
-  }
+  initializeGraphCoordinates (xInitialValue,
+                              yInitialValue);
 
   updateControls ();
 }
@@ -173,6 +152,43 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
+void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
+                                               const double *yInitialValue)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
+
+  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
+  FormatCoordsUnitsPolarTheta formatPolarTheta;
+
+  QString xTheta, yRadius;
+  if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+
+    xTheta = formatNonPolarTheta.unformattedToFormatted (xInitialValue,
+                                                         m_modelCoords.coordUnitsX(),
+                                                         m_modelCoords.coordUnitsDate(),
+                                                         m_modelCoords.coordUnitsTime(),
+                                                         IS_X_THETA);
+    yRadius = formatNonPolarTheta.unformattedToFormatted (yInitialValue,
+                                                          m_modelCoords.coordUnitsY(),
+                                                          m_modelCoords.coordUnitsDate(),
+                                                          m_modelCoords.coordUnitsTime(),
+                                                          IS_NOT_X_THETA);
+
+  } else {
+
+    xTheta = formatPolarTheta.unformattedToFormatted (xInitialValue,
+                                                      m_modelCoords.coordUnitsTheta());
+    yRadius = formatNonPolarTheta.unformattedToFormatted (yInitialValue,
+                                                          m_modelCoords.coordUnitsRadius(),
+                                                          m_modelCoords.coordUnitsDate(),
+                                                          m_modelCoords.coordUnitsTime(),
+                                                          IS_NOT_X_THETA);
+   }
+
+   m_editGraphX->setText (xTheta);
+   m_editGraphY->setText (yRadius);
+}
+
 bool DlgEditPoint::isCartesian () const
 {
   return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
@@ -199,30 +215,22 @@ QPointF DlgEditPoint::posGraph () const
     xTheta = formatNonPolarTheta.formattedToUnformatted (m_editGraphX->text(),
                                                          m_modelCoords.coordUnitsX(),
                                                          m_modelCoords.coordUnitsDate(),
-                                                         m_modelCoords.coordUnitsTime(),
-                                                         IS_X_THETA);
+                                                         m_modelCoords.coordUnitsTime());
     yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
                                                           m_modelCoords.coordUnitsY(),
                                                           m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime(),
-                                                          IS_NOT_X_THETA);
+                                                          m_modelCoords.coordUnitsTime());
   } else {
     xTheta = formatPolarTheta.formattedToUnformatted (m_editGraphX->text(),
                                                       m_modelCoords.coordUnitsTheta());
     yRadius = formatNonPolarTheta.formattedToUnformatted (m_editGraphY->text(),
                                                           m_modelCoords.coordUnitsRadius(),
                                                           m_modelCoords.coordUnitsDate(),
-                                                          m_modelCoords.coordUnitsTime(),
-                                                          IS_NOT_X_THETA);
+                                                          m_modelCoords.coordUnitsTime());
   }
 
   return QPointF (xTheta,
                   yRadius);
-
-
-
-  return QPointF (m_editGraphX->text().toDouble (),
-                  m_editGraphY->text().toDouble ());
 }
 
 void DlgEditPoint::slotTextChanged (const QString &)

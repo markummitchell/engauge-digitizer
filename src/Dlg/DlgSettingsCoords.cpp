@@ -203,12 +203,14 @@ void DlgSettingsCoords::createDateTime (QGridLayout *layout,
   m_cmbDate->setWhatsThis ("Date format to be used for date values, and date portion of mixed date/time values, "
                            "during input and output.\n\n"
                            "Setting the format to an empty value results in just the time portion appearing in output.");
+  connect (m_cmbDate, SIGNAL (activated (const QString &)), this, SLOT (slotDate (const QString &)));
   layoutCombos->addWidget (m_cmbDate);
 
   m_cmbTime = new QComboBox;
   m_cmbTime->setWhatsThis ("Time format to be used for time values, and time portion of mixed date/time values, "
                            "during input and output.\n\n"
                            "Setting the format to an empty value results in just the date portion appearing in output.");
+  connect (m_cmbTime, SIGNAL (activated (const QString &)), this, SLOT (slotTime (const QString &)));
   layoutCombos->addWidget (m_cmbTime);
 }
 
@@ -726,6 +728,7 @@ void DlgSettingsCoords::slotDate(const QString &)
 
   CoordUnitsDate coordUnits = (CoordUnitsDate) m_cmbDate->currentData ().toInt();
   m_modelCoordsAfter->setCoordUnitsDate(coordUnits);
+  updateControls();
   updatePreview();
 }
 
@@ -746,6 +749,7 @@ void DlgSettingsCoords::slotTime(const QString &)
 
   CoordUnitsTime coordUnits = (CoordUnitsTime) m_cmbTime->currentData ().toInt();
   m_modelCoordsAfter->setCoordUnitsTime(coordUnits);
+  updateControls();
   updatePreview();
 }
 

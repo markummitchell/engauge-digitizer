@@ -7,8 +7,11 @@
 #include <QStringList>
 #include <QValidator>
 
-const int DECIMAL_TO_MINUTES = 60.0;
-const int DECIMAL_TO_SECONDS = 60.0;
+const double DEGREES_TO_MINUTES = 60.0;
+const double MINUTES_TO_SECONDS = 60.0;
+const double DEGREES_TO_SECONDS = DEGREES_TO_MINUTES * MINUTES_TO_SECONDS;
+const double MINUTES_TO_DEGREES = 1.0 / DEGREES_TO_MINUTES;
+const double SECONDS_TO_DEGREES = 1.0 / (DEGREES_TO_MINUTES * MINUTES_TO_SECONDS);
 
 FormatDegreesMinutesSecondsBase::FormatDegreesMinutesSecondsBase()
 {
@@ -28,18 +31,18 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds (doub
   value = qAbs (value);
   int degrees = qFloor (value);
   value -= degrees;
-  int minutes = value * DECIMAL_TO_MINUTES;
-  value -= minutes;
-  double seconds = value * DECIMAL_TO_SECONDS;
+  int minutes = value * DEGREES_TO_MINUTES;
+  value -= minutes * MINUTES_TO_DEGREES;
+  double seconds = value * DEGREES_TO_SECONDS;
   degrees *= (negative ? -1.0 : 1.0);
 
-  return QString ("%1%2 %3%4 %3%5")
+  return QString ("%1%2 %3%4 %5%6")
     .arg (degrees)
     .arg (QChar (COORD_SYMBOL_DEGREES))
     .arg (minutes)
-    .arg (QChar (COORD_SYMBOL_MINUTES))
+    .arg (QChar (COORD_SYMBOL_MINUTES_PRIME))
     .arg (seconds)
-    .arg (QChar (COORD_SYMBOL_SECONDS));
+    .arg (QChar (COORD_SYMBOL_SECONDS_DOUBLE_PRIME));
 }
 
 QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (double value,
@@ -54,9 +57,9 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (
   value = qAbs (value);
   int degrees = qFloor (value);
   value -= degrees;
-  int minutes = value * DECIMAL_TO_MINUTES;
-  value -= minutes;
-  double seconds = value * DECIMAL_TO_SECONDS;
+  int minutes = value * DEGREES_TO_MINUTES;
+  value -= minutes * MINUTES_TO_DEGREES;
+  double seconds = value * DEGREES_TO_SECONDS;
 
   QString hemisphere;
   if (isNsHemisphere) {
@@ -65,13 +68,13 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (
     hemisphere = (negative ? "W" : "E");
   }
 
-  return QString ("%1%2 %3%4 %3%5 %6")
+  return QString ("%1%2 %3%4 %5%6 %7")
     .arg (degrees)
     .arg (QChar (COORD_SYMBOL_DEGREES))
     .arg (minutes)
-    .arg (QChar (COORD_SYMBOL_MINUTES))
+    .arg (QChar (COORD_SYMBOL_MINUTES_PRIME))
     .arg (seconds)
-    .arg (QChar (COORD_SYMBOL_SECONDS))
+    .arg (QChar (COORD_SYMBOL_SECONDS_DOUBLE_PRIME))
     .arg (hemisphere);
 }
 
@@ -108,20 +111,9 @@ QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &st
     }
   }
   
-  // Clean up degrees symbols (167 or 248 in base 10 which are 247 and 370 in base 8) and single quotes
-  QRegExp regExpDegrees ("[\\0247\\0370]$");
-  if (regExpDegrees.exactMatch (field0)) {
-    field0 = field0.left (field0.count() - 1);
-  }
-
-  // Clean up single quotes
-  QRegExp regExpQuote ("'$"), regExpQuotes ("''$");
-  if (regExpQuote.exactMatch (field1)) {
-    field1 = field1.left (field1.count() - 1);
-  }
-  if (regExpQuotes.exactMatch (field2)) {
-    field2 = field2.left (field2.count() - 1);
-  }
+  stripSymbols (field0,
+                field1,
+                field2);
 
   int pos;
 
@@ -134,7 +126,7 @@ QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &st
 
   // Required degrees
   QValidator::State state = valDegrees.validate (field0,
-                                                pos);
+                                                 pos);
   if (state == QValidator::Acceptable) {
 
     valueDegrees = field0.toDouble();
@@ -167,15 +159,60 @@ QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &st
     if (valueDegrees < 0) {
 
       // Apply the negative sign on the degrees components to minutes and seconds components also
-      value = valueDegrees - valueMinutes - valueSeconds;
+      value = valueDegrees - valueMinutes * MINUTES_TO_DEGREES - valueSeconds * SECONDS_TO_DEGREES;
       
     } else {
       
       // All components are positive
-      value = valueDegrees + valueMinutes + valueSeconds;
+      value = valueDegrees + valueMinutes * MINUTES_TO_DEGREES + valueSeconds * SECONDS_TO_DEGREES;
       
     }
   }
 
   return state;
+}
+
+void FormatDegreesMinutesSecondsBase::stripSymbols (QString &field0,
+                                                    QString &field1,
+                                                    QString &field2) const
+{
+  const int FIELD_WIDTH = 0, BASE_8 = 8, BASE_16 = 16;
+
+  // Clean up degrees symbols (167 or 248 in base 10 which are 247 and 370 in base 8) and single quotes
+  QString strExpDegrees = QString (".*\\0%1$")
+                          .arg (COORD_SYMBOL_DEGREES, FIELD_WIDTH, BASE_8);
+
+  QRegExp regExpDegrees (strExpDegrees);
+
+  if (regExpDegrees.exactMatch (field0)) {
+    field0 = field0.left (field0.count() - 1);
+  }
+
+  // Clean up minutes
+  QString strExpMinutes = QString (".*[\\0%1\\x%2]$")
+      .arg (COORD_SYMBOL_MINUTES_APOSTROPHE, FIELD_WIDTH, BASE_8)
+      .arg (COORD_SYMBOL_MINUTES_PRIME, FIELD_WIDTH, BASE_16);
+
+  QRegExp regExpMinutes (strExpMinutes);
+
+  if (regExpMinutes.exactMatch (field1)) {
+    field1 = field1.left (field1.count() - 1);
+  }
+
+  // Clean up seconds
+  QString strExpSeconds1Char = QString (".*[\\x%1\\x%2]$")
+      .arg (COORD_SYMBOL_SECONDS_DOUBLE_PRIME, FIELD_WIDTH, BASE_16)
+      .arg (COORD_SYMBOL_SECONDS_QUOTATIONS, FIELD_WIDTH, BASE_16);
+  QString strExpSeconds2Chars = QString (".*\\0%1\\0%2$")
+      .arg (COORD_SYMBOL_MINUTES_PRIME, FIELD_WIDTH, BASE_8)
+      .arg (COORD_SYMBOL_MINUTES_PRIME, FIELD_WIDTH, BASE_8);
+
+  QRegExp regExpSeconds1Char (strExpSeconds1Char), regExpSeconds2Chars (strExpSeconds2Chars);
+
+  if (regExpSeconds1Char.exactMatch (field2)) {
+    field2 = field2.left (field2.count() - 1);
+  }
+  if (regExpSeconds2Chars.exactMatch (field2)) {
+    field2 = field2.left (field2.count() - 2);
+  }
 }

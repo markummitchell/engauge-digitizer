@@ -72,5 +72,5 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutputDegreesMinutes (doubl
     .arg (degrees)
     .arg (QChar (COORD_SYMBOL_DEGREES))
     .arg (minutes)
-    .arg (QChar (COORD_SYMBOL_MINUTES));
+    .arg (QChar (COORD_SYMBOL_MINUTES_PRIME));
 }

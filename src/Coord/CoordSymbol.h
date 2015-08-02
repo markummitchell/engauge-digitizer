@@ -6,8 +6,10 @@
 #include <QString>
 
 extern const int COORD_SYMBOL_DEGREES;
-extern const int COORD_SYMBOL_MINUTES;
-extern const int COORD_SYMBOL_SECONDS;
+extern const int COORD_SYMBOL_MINUTES_PRIME;
+extern const int COORD_SYMBOL_MINUTES_APOSTROPHE;
+extern const int COORD_SYMBOL_SECONDS_DOUBLE_PRIME;
+extern const int COORD_SYMBOL_SECONDS_QUOTATIONS;
 
 extern const QChar THETA;
 

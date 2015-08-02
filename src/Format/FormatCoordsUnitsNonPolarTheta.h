@@ -16,8 +16,7 @@ class FormatCoordsUnitsNonPolarTheta {
   double formattedToUnformatted (const QString &string,
                                  CoordUnitsNonPolarTheta coordUnits,
                                  CoordUnitsDate coordUnitsDate,
-                                 CoordUnitsTime coordUnitsTime,
-                                 bool isXTheta) const;
+                                 CoordUnitsTime coordUnitsTime) const;
 
   /// Convert simple unformatted number to formatted string. Pointer is null if value is unspecified
   QString unformattedToFormatted (const double *value,

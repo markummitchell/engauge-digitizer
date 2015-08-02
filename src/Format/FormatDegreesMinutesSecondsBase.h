@@ -25,6 +25,12 @@ class FormatDegreesMinutesSecondsBase {
   /// Format as degrees, minutes and seconds with hemisphere
   QString formatOutputDegreesMinutesSecondsNsew (double value,
                                                  bool isNsHemisphere) const;
+
+ private:
+
+  void stripSymbols (QString &field0,
+                     QString &field1,
+                     QString &field2) const;
 };
 
 #endif // FORMAT_DEGREES_MINUTES_SECONDS_BASE_H

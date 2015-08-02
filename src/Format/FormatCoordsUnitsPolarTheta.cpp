@@ -12,7 +12,33 @@ double FormatCoordsUnitsPolarTheta::formattedToUnformatted (const QString &strin
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::formattedToUnformatted";
 
-  return 0.0;
+  double value;
+
+  switch (coordUnits) {
+    case COORD_UNITS_POLAR_THETA_DEGREES:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+    case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
+      {
+        FormatDegreesMinutesSecondsPolarTheta format;
+        ENGAUGE_ASSERT (format.parseInput (string,
+                                           value) == QValidator::Acceptable);
+      }
+      break;
+
+    case COORD_UNITS_POLAR_THETA_GRADIANS:
+    case COORD_UNITS_POLAR_THETA_RADIANS:
+    case COORD_UNITS_POLAR_THETA_TURNS:
+      value = string.toDouble();
+      break;
+
+    default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormattedPolarTheta";
+      ENGAUGE_ASSERT (false);
+      break;
+  }
+
+  return value;
 }
 
 QString FormatCoordsUnitsPolarTheta::unformattedToFormatted (const double *initialValue,

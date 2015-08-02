@@ -46,15 +46,8 @@ private slots:
 private:
   void createCoords (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
-  void initializeGraphValueNonPolarTheta (const double *initialValue,
-                                          CoordUnitsNonPolarTheta coordUnits,
-                                          CoordUnitsDate coordUnitsDate,
-                                          CoordUnitsTime coordUnitsTime,
-                                          bool isXTheta,
-                                          QLineEdit &editGraph);
-  void initializeGraphValuePolarTheta (const double *initialValue,
-                                       CoordUnitsPolarTheta coordUnits,
-                                       QLineEdit &editGraph);
+  void initializeGraphCoordinates (const double *xInitialValue,
+                                   const double *yInitialValue);
   bool isCartesian () const;
   QChar nameXTheta () const;
   QChar nameYRadius () const;
