@@ -8,6 +8,7 @@
 
 class CallbackGatherXThetaValuesRelations;
 class Document;
+class DocumentModelCoords;
 class DocumentModelExport;
 class QTextStream;
 class Transformation;
@@ -49,17 +50,20 @@ private:
                                 const QStringList &curvesIncluded,
                                 const Transformation &transformation,
                                 QVector<QVector<QString*> > &xThetaYRadiusValues) const;
-  void loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+  void loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                          const Points &points,
                                                           const ExportValuesOrdinal &ordinals,
                                                           QVector<QString*> &xThetaValues,
                                                           QVector<QString*> &yRadiusValues,
                                                           const Transformation &transformation) const;
-  void loadXThetaYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+  void loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                            const Points &points,
                                                             const ExportValuesOrdinal &ordinals,
                                                             QVector<QString*> &xThetaValues,
                                                             QVector<QString*> &yRadiusValues,
                                                             const Transformation &transformation) const;
-  void loadXThetaYRadiusValuesForCurveRaw (const Points &points,
+  void loadXThetaYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                           const Points &points,
                                            QVector<QString*> &xThetaValues,
                                            QVector<QString*> &yRadiusValues,
                                            const Transformation &transformation) const;

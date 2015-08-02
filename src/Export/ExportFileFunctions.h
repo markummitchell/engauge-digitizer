@@ -7,6 +7,7 @@
 #include <QVector>
 
 class Document;
+class DocumentModelCoords;
 class DocumentModelExport;
 class QTextStream;
 class Transformation;
@@ -58,21 +59,25 @@ private:
                           const Transformation &transformation,
                           const ExportValuesXOrY &xThetaValues,
                           QVector<QVector<QString*> > &yRadiusValues) const;
-  void loadYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+  void loadYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                    const Points &points,
                                                     const ExportValuesXOrY &xThetaValues,
                                                     const Transformation &transformation,
                                                     QVector<QString*> &yRadiusValues) const;
-  void loadYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+  void loadYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                      const Points &points,
                                                       const ExportValuesXOrY &xThetaValues,
                                                       const Transformation &transformation,
                                                       QVector<QString*> &yRadiusValues) const;
-  void loadYRadiusValuesForCurveRaw (const Points &points,
+  void loadYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                     const Points &points,
                                      const ExportValuesXOrY &xThetaValues,
                                      const Transformation &transformation,
                                      QVector<QString*> &yRadiusValues) const;
 
   /// Output 2D y/radius array along with x/theta vector in first column
   void outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+                                  const DocumentModelCoords &modelCoords,
                                   const QStringList &curvesIncluded,
                                   const ExportValuesXOrY &xThetaValuesMerged,
                                   QVector<QVector<QString*> > &yRadiusValues,

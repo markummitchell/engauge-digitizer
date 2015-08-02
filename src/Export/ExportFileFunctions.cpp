@@ -4,6 +4,7 @@
 #include "EngaugeAssert.h"
 #include "ExportFileFunctions.h"
 #include "ExportLayoutFunctions.h"
+#include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <QTextStream>
 #include <QVector>
@@ -42,6 +43,7 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                      yRadiusValues);
 
   outputXThetaYRadiusValues (modelExportOverride,
+                             document.modelCoords(),
                              curvesIncluded,
                              xThetaValues,
                              yRadiusValues,
@@ -86,6 +88,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                        xThetaValues,
                        yRadiusValues);
     outputXThetaYRadiusValues (modelExportOverride,
+                               document.modelCoords(),
                                curvesIncluded,
                                xThetaValues,
                                yRadiusValues,
@@ -231,7 +234,8 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
     if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
 
       // No interpolation. Raw points
-      loadYRadiusValuesForCurveRaw (points,
+      loadYRadiusValuesForCurveRaw (document.modelCoords(),
+                                    points,
                                     xThetaValues,
                                     transformation,
                                     yRadiusValues [col]);
@@ -240,14 +244,16 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
       // Interpolation
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) {
 
-        loadYRadiusValuesForCurveInterpolatedSmooth (points,
+        loadYRadiusValuesForCurveInterpolatedSmooth (document.modelCoords(),
+                                                     points,
                                                      xThetaValues,
                                                      transformation,
                                                      yRadiusValues [col]);
 
       } else {
 
-        loadYRadiusValuesForCurveInterpolatedStraight (points,
+        loadYRadiusValuesForCurveInterpolatedStraight (document.modelCoords(),
+                                                       points,
                                                        xThetaValues,
                                                        transformation,
                                                        yRadiusValues [col]);
@@ -256,7 +262,8 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
   }
 }
 
-void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                                       const Points &points,
                                                                        const ExportValuesXOrY &xThetaValues,
                                                                        const Transformation &transformation,
                                                                        QVector<QString*> &yRadiusValues) const
@@ -278,6 +285,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Poi
   Spline spline (t,
                  xy);
 
+  FormatCoordsUnits format;
+
   // Get value at desired points
   for (int row = 0; row < xThetaValues.count(); row++) {
 
@@ -286,17 +295,25 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Poi
                                                                     MAX_ITERATIONS);
     double yRadius = splinePairFound.y ();
 
-    // Save value for this row
-    *(yRadiusValues [row]) = QString::number (yRadius);
+    // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+    QString dummyXThetaOut;
+    format.unformattedToFormatted (xTheta,
+                                   yRadius,
+                                   modelCoords,
+                                   dummyXThetaOut,
+                                   *(yRadiusValues [row]));
   }
 }
 
-void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                                         const Points &points,
                                                                          const ExportValuesXOrY &xThetaValues,
                                                                          const Transformation &transformation,
                                                                          QVector<QString*> &yRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight";
+
+  FormatCoordsUnits format;
 
   // Get value at desired points
   for (int row = 0; row < xThetaValues.count(); row++) {
@@ -307,19 +324,25 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const P
                                           xThetaValue,
                                           transformation);
 
-
-
-    // Save value for this row
-    *(yRadiusValues [row]) = QString::number (yRadius);
+    // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+    QString dummyXThetaOut;
+    format.unformattedToFormatted (xThetaValue,
+                                   yRadius,
+                                   modelCoords,
+                                   dummyXThetaOut,
+                                   *(yRadiusValues [row]));
   }
 }
 
-void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
+void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                                        const Points &points,
                                                         const ExportValuesXOrY &xThetaValues,
                                                         const Transformation &transformation,
                                                         QVector<QString*> &yRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::loadYRadiusValuesForCurveRaw";
+
+  FormatCoordsUnits format;
 
   // Since the curve points may be a subset of xThetaValues (in which case the non-applicable xThetaValues will have
   // blanks for the yRadiusValues), we iterate over the smaller set
@@ -350,12 +373,18 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
       }
     }
 
-    // Save value for this row
-    *(yRadiusValues [rowClosest]) = QString::number (posGraph.y());
+    // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+    QString dummyXThetaOut;
+    format.unformattedToFormatted (posGraph.x(),
+                                   posGraph.y(),
+                                   modelCoords,
+                                   dummyXThetaOut,
+                                   *(yRadiusValues [rowClosest]));
   }
 }
 
 void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+                                                     const DocumentModelCoords &modelCoords,
                                                      const QStringList &curvesIncluded,
                                                      const ExportValuesXOrY &xThetaValuesMerged,
                                                      QVector<QVector<QString*> > &yRadiusValues,
@@ -379,11 +408,21 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
     str << "\n";
   }
 
+  FormatCoordsUnits format;
+  const double DUMMY_Y_RADIUS = 1.0;
+
   for (int row = 0; row < xThetaValuesMerged.count(); row++) {
 
     double xTheta = xThetaValuesMerged.at (row);
 
-    str << xTheta;
+    // Output x/theta value for this row
+    QString xThetaString, yRadiusString;
+    format.unformattedToFormatted (xTheta,
+                                   DUMMY_Y_RADIUS,
+                                   modelCoords,
+                                   xThetaString,
+                                   yRadiusString);
+    str << xThetaString;
 
     for (int col = 0; col < yRadiusValues.count(); col++) {
 

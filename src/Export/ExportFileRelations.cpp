@@ -4,6 +4,7 @@
 #include "EngaugeAssert.h"
 #include "ExportFileRelations.h"
 #include "ExportLayoutFunctions.h"
+#include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <qmath.h>
 #include <QTextStream>
@@ -212,7 +213,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
     if (modelExportOverride.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW) {
 
       // No interpolation. Raw points
-      loadXThetaYRadiusValuesForCurveRaw (points,
+      loadXThetaYRadiusValuesForCurveRaw (document.modelCoords(),
+                                          points,
                                           xThetaYRadiusValues [colXTheta],
                                           xThetaYRadiusValues [colYRadius],
                                           transformation);
@@ -224,7 +226,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
 
-        loadXThetaYRadiusValuesForCurveInterpolatedSmooth (points,
+        loadXThetaYRadiusValuesForCurveInterpolatedSmooth (document.modelCoords(),
+                                                           points,
                                                            ordinals,
                                                            xThetaYRadiusValues [colXTheta],
                                                            xThetaYRadiusValues [colYRadius],
@@ -232,7 +235,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 
       } else {
 
-        loadXThetaYRadiusValuesForCurveInterpolatedStraight (points,
+        loadXThetaYRadiusValuesForCurveInterpolatedStraight (document.modelCoords(),
+                                                             points,
                                                              ordinals,
                                                              xThetaYRadiusValues [colXTheta],
                                                              xThetaYRadiusValues [colYRadius],
@@ -242,7 +246,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
   }
 }
 
-void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const Points &points,
+void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                                             const Points &points,
                                                                              const ExportValuesOrdinal &ordinals,
                                                                              QVector<QString*> &xThetaValues,
                                                                              QVector<QString*> &yRadiusValues,
@@ -261,6 +266,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
   Spline spline (t,
                  xy);
 
+  FormatCoordsUnits format;
+
   // Subdivide the curve into smaller segments so
   // Get value at desired points
   for (int row = 0; row < ordinals.count(); row++) {
@@ -270,19 +277,25 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
     double xTheta = splinePairFound.x ();
     double yRadius = splinePairFound.y ();
 
-    // Save values for this row
-    *(xThetaValues [row]) = QString::number (xTheta);
-    *(yRadiusValues [row]) = QString::number (yRadius);
+    // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
+    format.unformattedToFormatted (xTheta,
+                                   yRadius,
+                                   modelCoords,
+                                   *(xThetaValues [row]),
+                                   *(yRadiusValues [row]));
   }
 }
 
-void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const Points &points,
+void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                                               const Points &points,
                                                                                const ExportValuesOrdinal &ordinals,
                                                                                QVector<QString*> &xThetaValues,
                                                                                QVector<QString*> &yRadiusValues,
                                                                                const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight";
+
+  FormatCoordsUnits format;
 
   // Get value at desired points
   for (int row = 0; row < ordinals.count(); row++) {
@@ -293,20 +306,24 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
                                                      ordinal,
                                                      transformation);
 
-
-
-    // Save value for this row
-    *(xThetaValues [row]) = QString::number (pointInterpolated.x());
-    *(yRadiusValues [row]) = QString::number (pointInterpolated.y());
+    // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
+    format.unformattedToFormatted (pointInterpolated.x(),
+                                   pointInterpolated.y(),
+                                   modelCoords,
+                                   *(xThetaValues [row]),
+                                   *(yRadiusValues [row]));
   }
 }
 
-void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &points,
+void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                                              const Points &points,
                                                               QVector<QString*> &xThetaValues,
                                                               QVector<QString*> &yRadiusValues,
                                                               const Transformation &transformation) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw";
+
+  FormatCoordsUnits format;
 
   for (int pt = 0; pt < points.count(); pt++) {
 
@@ -316,8 +333,12 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const Points &poin
     transformation.transformScreenToRawGraph (point.posScreen(),
                                               posGraph);
 
-    *(xThetaValues [pt]) = QString::number (posGraph.x());
-    *(yRadiusValues [pt]) = QString::number (posGraph.y());
+    // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
+    format.unformattedToFormatted (posGraph.x(),
+                                   posGraph.y(),
+                                   modelCoords,
+                                   *(xThetaValues [pt]),
+                                   *(yRadiusValues [pt]));
   }
 }
 
