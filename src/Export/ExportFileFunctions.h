@@ -20,21 +20,21 @@ public:
 
   /// Export Document points according to the settings. The DocumentModelExport inside the Document is ignored so
   /// DlgSettingsExport can supply its own DocumentModelExport when previewing what would be exported.
-  void exportToFile (const DocumentModelExport &modelExport,
+  void exportToFile (const DocumentModelExport &modelExportOverride,
                      const Document &document,
                      const Transformation &transformation,
                      QTextStream &str) const;
 
 private:
 
-  void exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+  void exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
                                            const ExportValuesXOrY &xThetaValues,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
-  void exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+  void exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
                                            const ExportValuesXOrY &xThetaValues,
@@ -72,7 +72,7 @@ private:
                                      QVector<QString*> &yRadiusValues) const;
 
   /// Output 2D y/radius array along with x/theta vector in first column
-  void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+  void outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
                                   const QStringList &curvesIncluded,
                                   const ExportValuesXOrY &xThetaValuesMerged,
                                   QVector<QVector<QString*> > &yRadiusValues,

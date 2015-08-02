@@ -18,7 +18,7 @@ ExportFileFunctions::ExportFileFunctions()
 {
 }
 
-void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const ExportValuesXOrY &xThetaValues,
@@ -34,14 +34,14 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
   initializeYRadiusValues (curvesIncluded,
                            xThetaValues,
                            yRadiusValues);
-  loadYRadiusValues (modelExport,
+  loadYRadiusValues (modelExportOverride,
                      document,
                      curvesIncluded,
                      transformation,
                      xThetaValues,
                      yRadiusValues);
 
-  outputXThetaYRadiusValues (modelExport,
+  outputXThetaYRadiusValues (modelExportOverride,
                              curvesIncluded,
                              xThetaValues,
                              yRadiusValues,
@@ -50,7 +50,7 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
   destroy2DArray (yRadiusValues);
 }
 
-void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const ExportValuesXOrY &xThetaValues,
@@ -66,7 +66,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
     insertLineSeparator (isFirst,
-                         modelExport.header(),
+                         modelExportOverride.header(),
                          str);
 
     // This curve
@@ -79,13 +79,13 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
     initializeYRadiusValues (curvesIncluded,
                              xThetaValues,
                              yRadiusValues);
-    loadYRadiusValues (modelExport,
+    loadYRadiusValues (modelExportOverride,
                        document,
                        curvesIncluded,
                        transformation,
                        xThetaValues,
                        yRadiusValues);
-    outputXThetaYRadiusValues (modelExport,
+    outputXThetaYRadiusValues (modelExportOverride,
                                curvesIncluded,
                                xThetaValues,
                                yRadiusValues,
@@ -95,7 +95,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
+void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExportOverride,
                                         const Document &document,
                                         const Transformation &transformation,
                                         QTextStream &str) const
@@ -103,17 +103,17 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportToFile";
 
   // Identify curves to be included
-  QStringList curvesIncluded = curvesToInclude (modelExport,
+  QStringList curvesIncluded = curvesToInclude (modelExportOverride,
                                                 document,
                                                 document.curvesGraphsNames(),
                                                 CONNECT_AS_FUNCTION_SMOOTH,
                                                 CONNECT_AS_FUNCTION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExport.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
 
   // Get x/theta values to be used
-  CallbackGatherXThetaValuesFunctions ftor (modelExport,
+  CallbackGatherXThetaValuesFunctions ftor (modelExportOverride,
                                             curvesIncluded,
                                             transformation);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
@@ -126,8 +126,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
   if (xThetaValuesMerged.count() > 0) {
 
     // Export in one of two layouts
-    if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
-      exportAllPerLineXThetaValuesMerged (modelExport,
+    if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
+      exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                           document,
                                           curvesIncluded,
                                           xThetaValuesMerged,
@@ -135,7 +135,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExport,
                                           transformation,
                                           str);
     } else {
-      exportOnePerLineXThetaValuesMerged (modelExport,
+      exportOnePerLineXThetaValuesMerged (modelExportOverride,
                                           document,
                                           curvesIncluded,
                                           xThetaValuesMerged,
@@ -210,7 +210,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
   return yRadius;
 }
 
-void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExport,
+void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExportOverride,
                                              const Document &document,
                                              const QStringList &curvesIncluded,
                                              const Transformation &transformation,
@@ -228,7 +228,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExp
     const Curve *curve = document.curveForCurveName (curveName);
     const Points points = curve->points ();
 
-    if (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
+    if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
 
       // No interpolation. Raw points
       loadYRadiusValuesForCurveRaw (points,
@@ -355,7 +355,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const Points &points,
   }
 }
 
-void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
                                                      const QStringList &curvesIncluded,
                                                      const ExportValuesXOrY &xThetaValuesMerged,
                                                      QVector<QVector<QString*> > &yRadiusValues,
@@ -365,12 +365,12 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
 
   // Header
-  if (modelExport.header() != EXPORT_HEADER_NONE) {
-    if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
+  if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
+    if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
       str << curveSeparator (*str.string());
       str << gnuplotComment();
     }
-    str << modelExport.xLabel();
+    str << modelExportOverride.xLabel();
     QStringList::const_iterator itrHeader;
     for (itrHeader = curvesIncluded.begin(); itrHeader != curvesIncluded.end(); itrHeader++) {
       QString curveName = *itrHeader;

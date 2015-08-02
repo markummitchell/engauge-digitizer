@@ -21,7 +21,7 @@ ExportFileRelations::ExportFileRelations()
 {
 }
 
-void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
@@ -31,7 +31,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
 
   int curveCount = curvesIncluded.count();
-  int maxColumnSize = maxColumnSizeAllocation (modelExport,
+  int maxColumnSize = maxColumnSizeAllocation (modelExportOverride,
                                                document,
                                                curvesIncluded);
 
@@ -41,12 +41,12 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
     QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
     initializeXThetaYRadiusValues (curvesIncluded,
                                    xThetaYRadiusValues);
-    loadXThetaYRadiusValues (modelExport,
+    loadXThetaYRadiusValues (modelExportOverride,
                              document,
                              curvesIncluded,
                              transformation,
                              xThetaYRadiusValues);
-    outputXThetaYRadiusValues (modelExport,
+    outputXThetaYRadiusValues (modelExportOverride,
                                curvesIncluded,
                                xThetaYRadiusValues,
                                delimiter,
@@ -55,7 +55,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExport,
+void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
@@ -69,7 +69,7 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
 
     QString curveIncluded = *itr;
 
-    exportAllPerLineXThetaValuesMerged (modelExport,
+    exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                         document,
                                         QStringList (curveIncluded),
                                         delimiter,
@@ -78,7 +78,7 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
+void ExportFileRelations::exportToFile (const DocumentModelExport &modelExportOverride,
                                         const Document &document,
                                         const Transformation &transformation,
                                         QTextStream &str) const
@@ -86,17 +86,17 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportToFile";
 
   // Identify curves to be included
-  QStringList curvesIncluded = curvesToInclude (modelExport,
+  QStringList curvesIncluded = curvesToInclude (modelExportOverride,
                                                 document,
                                                 document.curvesGraphsNames(),
                                                 CONNECT_AS_RELATION_SMOOTH,
                                                 CONNECT_AS_RELATION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExport.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
 
   // Get x/theta values to be used
-  CallbackGatherXThetaValuesRelations ftor (modelExport,
+  CallbackGatherXThetaValuesRelations ftor (modelExportOverride,
                                             curvesIncluded,
                                             transformation);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
@@ -104,15 +104,15 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExport,
   document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
   // Export in one of two layouts
-  if (modelExport.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
-    exportAllPerLineXThetaValuesMerged (modelExport,
+  if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
+    exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                         document,
                                         curvesIncluded,
                                         delimiter,
                                         transformation,
                                         str);
   } else {
-    exportOnePerLineXThetaValuesMerged (modelExport,
+    exportOnePerLineXThetaValuesMerged (modelExportOverride,
                                         document,
                                         curvesIncluded,
                                         delimiter,
@@ -190,7 +190,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
                   yRadius);
 }
 
-void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &modelExport,
+void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
                                                    const Document &document,
                                                    const QStringList &curvesIncluded,
                                                    const Transformation &transformation,
@@ -209,7 +209,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
     const Curve *curve = document.curveForCurveName (curveName);
     const Points points = curve->points ();
 
-    if (modelExport.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW) {
+    if (modelExportOverride.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW) {
 
       // No interpolation. Raw points
       loadXThetaYRadiusValuesForCurveRaw (points,
@@ -219,7 +219,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
     } else {
 
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
-      ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
+      ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExportOverride.pointsIntervalRelations(),
                                                           points);
 
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
@@ -431,7 +431,7 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
   return ordinals;
 }
 
-void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
                                                      const QStringList &curvesIncluded,
                                                      QVector<QVector<QString*> > &xThetaYRadiusValues,
                                                      const QString &delimiter,
@@ -440,8 +440,8 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::outputXThetaYRadiusValues";
 
   // Header
-  if (modelExport.header() != EXPORT_HEADER_NONE) {
-    if (modelExport.header() == EXPORT_HEADER_GNUPLOT) {
+  if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
+    if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
       str << curveSeparator(*str.string());
       str << gnuplotComment();
     }
@@ -449,7 +449,7 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
     QStringList::const_iterator itr;
     for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
       QString curveName = *itr;
-      str << delimiterForRow << modelExport.xLabel();
+      str << delimiterForRow << modelExportOverride.xLabel();
       delimiterForRow = delimiter;
       str << delimiterForRow << curveName;
     }

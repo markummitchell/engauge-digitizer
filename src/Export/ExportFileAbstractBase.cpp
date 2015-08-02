@@ -22,7 +22,7 @@ QString ExportFileAbstractBase::curveSeparator (const QString &string) const
   }
 }
 
-QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &modelExport,
+QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &modelExportOverride,
                                                      const Document &document,
                                                      const QStringList &curvesGraphsNames,
                                                      CurveConnectAs curveConnectAs1,
@@ -39,7 +39,7 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &
 
     QString curvesGraphName = *itr;
 
-    if (!modelExport.curveNamesNotExported().contains (curvesGraphName)) {
+    if (!modelExportOverride.curveNamesNotExported().contains (curvesGraphName)) {
 
       const Curve *curve = document.curveForCurveName(curvesGraphName);
       ENGAUGE_CHECK_PTR (curve);
