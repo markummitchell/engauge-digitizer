@@ -46,7 +46,7 @@ else
 	qmake engauge_test.pro
         make clean 2>>$LOGFILE >/dev/null
 	make all 2>>$LOGFILE >/dev/null
-	if [ $argcount -ne 1]
+	if [ $argcount -ne 1 ]
 	then
             rm engauge_test.pro
 	fi

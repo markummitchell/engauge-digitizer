@@ -86,7 +86,7 @@ void TestFormats::testDateTime2015Slash0 ()
 
 void TestFormats::testDateTime2015Slash01 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01", QValidator::Acceptable));
 }
 
 void TestFormats::testDateTime2015Slash01Slash ()
