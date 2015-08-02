@@ -200,8 +200,12 @@ void GraphicsPoint::printStream (QString indentation,
     pos = m_graphicsItemEllipse->pos();
   }
 
+  DataKey type = (DataKey) data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt();
+
   str << indentation << identifier
       << " ordinalKey=" << ordinalKey
+      << " dataIdentifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
+      << " dataType=" << dataKeyToString (type).toLatin1().data()
       << " " << pointType << "Pos=" << QPointFToString (pos) << "\n";
 }
 

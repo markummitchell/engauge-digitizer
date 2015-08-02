@@ -489,24 +489,24 @@ void MainWindow::createActionsView ()
                                                     "Filter preferences so unimportant information is hidden and important "
                                                     "information is emphasized"));
 
-  m_actionViewPointsNone = new QAction (tr ("Hide All Points"), this);
-  m_actionViewPointsNone->setCheckable (true);
-  m_actionViewPointsNone->setStatusTip (tr ("Hide all digitized points."));
-  m_actionViewPointsNone->setWhatsThis (tr ("Hide All Points\n\n"
-                                            "No digitized points are shown so the image is easier to see."));
+  m_actionViewCurvesNone = new QAction (tr ("Hide All Curves"), this);
+  m_actionViewCurvesNone->setCheckable (true);
+  m_actionViewCurvesNone->setStatusTip (tr ("Hide all digitized curves."));
+  m_actionViewCurvesNone->setWhatsThis (tr ("Hide All Curves\n\n"
+                                            "No axis points or digitized graph curves are shown so the image is easier to see."));
 
-  m_actionViewPointsCurve = new QAction (tr ("Show Selected Curve's Points"), this);
-  m_actionViewPointsCurve->setCheckable (true);
-  m_actionViewPointsCurve->setStatusTip (tr ("Show only points in the currently selected curve."));
-  m_actionViewPointsCurve->setWhatsThis (tr ("Show Curve's Points\n\n"
-                                             "Show only digitized points that belong to the currently selected curve."));
+  m_actionViewCurvesSelected = new QAction (tr ("Show Selected Curve"), this);
+  m_actionViewCurvesSelected->setCheckable (true);
+  m_actionViewCurvesSelected->setStatusTip (tr ("Show only the currently selected curve."));
+  m_actionViewCurvesSelected->setWhatsThis (tr ("Show Selected Curve\n\n"
+                                                "Show only the digitized points and line that belong to the currently selected curve."));
 
-  m_actionViewPointsAll = new QAction (tr ("Show All Points"), this);
-  m_actionViewPointsAll->setCheckable (true);
-  m_actionViewPointsAll->setChecked (true);
-  m_actionViewPointsAll->setStatusTip (tr ("Show all points."));
-  m_actionViewPointsAll->setWhatsThis (tr ("Show All Points\n\n"
-                                           "Show all digitized axis and curve points"));
+  m_actionViewCurvesAll = new QAction (tr ("Show All Curves"), this);
+  m_actionViewCurvesAll->setCheckable (true);
+  m_actionViewCurvesAll->setChecked (true);
+  m_actionViewCurvesAll->setStatusTip (tr ("Show all curves."));
+  m_actionViewCurvesAll->setWhatsThis (tr ("Show All Curves\n\n"
+                                           "Show all digitized axis points and graph curves"));
 
   m_groupBackground = new QActionGroup(this);
   m_groupBackground->addAction (m_actionViewBackgroundNone);
@@ -514,11 +514,11 @@ void MainWindow::createActionsView ()
   m_groupBackground->addAction (m_actionViewBackgroundFiltered);
   connect (m_groupBackground, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupBackground(QAction*)));
 
-  m_groupPoints = new QActionGroup(this);
-  m_groupPoints->addAction (m_actionViewPointsNone);
-  m_groupPoints->addAction (m_actionViewPointsCurve);
-  m_groupPoints->addAction (m_actionViewPointsAll);
-  connect (m_groupPoints, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupPoints(QAction*)));
+  m_groupCurves = new QActionGroup(this);
+  m_groupCurves->addAction (m_actionViewCurvesNone);
+  m_groupCurves->addAction (m_actionViewCurvesSelected);
+  m_groupCurves->addAction (m_actionViewCurvesAll);
+  connect (m_groupCurves, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupCurves(QAction*)));
 
   m_actionStatusNever = new QAction (tr ("Hide Always"), this);
   m_actionStatusNever->setCheckable(true);
@@ -700,11 +700,11 @@ void MainWindow::createMenus()
   m_menuViewBackground->addAction (m_actionViewBackgroundOriginal);
   m_menuViewBackground->addAction (m_actionViewBackgroundFiltered);
   m_menuView->addMenu (m_menuViewBackground);
-  m_menuViewPoints = new QMenu (tr ("Points"));
-  m_menuViewPoints->addAction (m_actionViewPointsNone);
-  m_menuViewPoints->addAction (m_actionViewPointsCurve);
-  m_menuViewPoints->addAction (m_actionViewPointsAll);
-  m_menuView->addMenu (m_menuViewPoints);
+  m_menuViewCurves = new QMenu (tr ("Curves"));
+  m_menuViewCurves->addAction (m_actionViewCurvesNone);
+  m_menuViewCurves->addAction (m_actionViewCurvesSelected);
+  m_menuViewCurves->addAction (m_actionViewCurvesAll);
+  m_menuView->addMenu (m_menuViewCurves);
   m_menuViewStatus = new QMenu (tr ("Status Bar"));
   m_menuViewStatus->addAction (m_actionStatusNever);
   m_menuViewStatus->addAction (m_actionStatusTemporary);
@@ -1610,7 +1610,7 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  updateViewedPoints();
+  updateViewedCurves();
   updateViewsOfSettings();
 }
 
@@ -2087,11 +2087,11 @@ void MainWindow::slotViewGroupBackground(QAction *action)
   updateViewedBackground();
 }
 
-void MainWindow::slotViewGroupPoints(QAction * /* action */)
+void MainWindow::slotViewGroupCurves(QAction * /* action */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupPoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupCurves";
 
-  updateViewedPoints ();
+  updateViewedCurves ();
 }
 
 void MainWindow::slotViewGroupStatus(QAction *action)
@@ -2572,7 +2572,7 @@ void MainWindow::updateControls ()
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
-  m_groupPoints->setEnabled (!m_currentFile.isEmpty ());
+  m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
   m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
@@ -2741,21 +2741,21 @@ void MainWindow::updateViewedBackground()
   }
 }
 
-void MainWindow::updateViewedPoints ()
+void MainWindow::updateViewedCurves ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedPoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedCurves";
 
-  if (m_actionViewPointsAll->isChecked ()) {
+  if (m_actionViewCurvesAll->isChecked ()) {
 
-    m_scene->showPoints (true, true);
+    m_scene->showCurves (true, true);
 
-  } else if (m_actionViewPointsCurve->isChecked ()) {
+  } else if (m_actionViewCurvesSelected->isChecked ()) {
 
-    m_scene->showPoints (true, false, selectedGraphCurve ());
+    m_scene->showCurves (true, false, selectedGraphCurve ());
 
-  } else if (m_actionViewPointsNone->isChecked ()) {
+  } else if (m_actionViewCurvesNone->isChecked ()) {
 
-    m_scene->showPoints (false);
+    m_scene->showCurves (false);
 
   } else {
     ENGAUGE_ASSERT (false);

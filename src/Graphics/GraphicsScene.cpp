@@ -183,10 +183,15 @@ QStringList GraphicsScene::selectedPointIdentifiers () const
   return  selectedIds;
 }
 
-void GraphicsScene::showPoints (bool show,
+void GraphicsScene::showCurves (bool show,
                                 bool showAll,
                                 const QString &curveNameWanted)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::showCurves"
+                              << " show=" << (show ? "true" : "false")
+                              << " showAll=" << (showAll ? "true" : "false")
+                              << " curve=" << curveNameWanted.toLatin1().data();
+
   const QList<QGraphicsItem*> &items = QGraphicsScene::items();
   QList<QGraphicsItem*>::const_iterator itr;
   for (itr = items.begin(); itr != items.end(); itr++) {
@@ -195,17 +200,27 @@ void GraphicsScene::showPoints (bool show,
 
     // Skip the image and only process the Points
     bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    if (isPoint) {
+    bool isCurve = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_LINE);
 
-      bool showThisPoint = show;
+    if (isPoint || isCurve) {
+
+      bool showThis = show;
       if (show && !showAll) {
         QString identifier = item->data (DATA_KEY_IDENTIFIER).toString ();
-        QString curveNameGot = Point::curveNameFromPointIdentifier (identifier);
 
-        showThisPoint = (curveNameWanted == curveNameGot);
+        if (isPoint) {
+
+          QString curveNameGot = Point::curveNameFromPointIdentifier (identifier);
+          showThis = (curveNameWanted == curveNameGot);
+
+        } else {
+
+          showThis = (curveNameWanted == identifier);
+
+        }
       }
 
-      item->setVisible (showThisPoint);
+      item->setVisible (showThis);
 
     }
   }

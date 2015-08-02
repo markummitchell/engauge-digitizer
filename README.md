@@ -9,9 +9,10 @@ Status
 ------
 This project aims to replace the 10 year old Engauge Digitizer software project that lives on sourceforge.net, with a newer version. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years.
 
-As of November 9, 2014, Engauge6 has:
-* 12,000 lines of Engauge6 C++ code and comments in github
-* A working skeleton that can be tested. No useful output is created yet though
+As of August 2015, Engauge6 has:
+
+* Almost 20,000 lines of Engauge6 C++ code and comments in github
+* Beta functionality
 * Issue tracking in the github issue tracker
 * GitHub wiki for informal communication, and GitHub issue tracker for requirements, bugs, etc.
 
@@ -25,12 +26,17 @@ Ideas for new features in Engauge6:
 2. Splash screen with tutorial video, or link to tutorial video on a webserver
 3. Upload application state/logs after a crash
 
-New features already added to Engauge2:
+New features already added to Engauge6:
 
-1. Undo/redo
-2. Single settings dialog (with tabs) that is resizable preview windows
-3. Import by drag-and-drop
-4. Replacement of Qt3 (which is at its end of life) by Qt5
-5. Much better zooming
-6. Color picking straight from the original image
-7. Uploadable error report generated when a programming error is encountered
+1. Undo/redo of all operations means recovering from mistakes and experimenting with options is painless
+2. Cubic spline interpolation between points gives more accurate curves with fewer points
+3. Graph coordinates can be specified as date and time value, or as degrees, minutes and seconds
+4. All settings dialogs are resizable so they can be enlarged as necessary to display more information
+5. Import by drag-and-drop
+6. Replacement of Qt3 (which is at its end of life) by Qt5
+7. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
+   application window is resized
+8. Color picking straight from the original image
+9. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
+   user support
+10. Test suite for regression testing minimizes code breakage as new features are added

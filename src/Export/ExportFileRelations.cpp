@@ -478,6 +478,7 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &
   }
 
   for (int row = 0; row < xThetaYRadiusValues [0].count(); row++) {
+
     QString delimiterForRow;
     for (int col = 0; col < xThetaYRadiusValues.count(); col++) {
 

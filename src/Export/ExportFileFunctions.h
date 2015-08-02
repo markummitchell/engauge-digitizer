@@ -83,6 +83,10 @@ private:
                                   QVector<QVector<QString*> > &yRadiusValues,
                                   const QString &delimiter,
                                   QTextStream &str) const;
+  // Only include rows that have at least one y/radius entry. This check is required when outputing one curve per row
+  // since the union of all x/theta values is applied to each curve
+  bool rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,
+                                     int row) const;
 };
 
 #endif // EXPORT_FILE_FUNCTIONS_H

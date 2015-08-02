@@ -20,8 +20,8 @@ void DlgFilterThread::run ()
                                              m_rgbBackground);
 
     // Connect signal to start process
-    connect (&m_dlgSettingsColorFilter, SIGNAL (signalApplyFilter (FilterMode, double, double)),
-             m_dlgFilterWorker, SLOT (slotNewParameters (FilterMode, double, double)));
+    connect (&m_dlgSettingsColorFilter, SIGNAL (signalApplyFilter (ColorFilterMode, double, double)),
+             m_dlgFilterWorker, SLOT (slotNewParameters (ColorFilterMode, double, double)));
 
     // Connect signal to return each piece of completed processing
     connect (m_dlgFilterWorker, SIGNAL (signalTransferPiece (int, QImage)),

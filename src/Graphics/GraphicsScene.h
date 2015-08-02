@@ -56,8 +56,8 @@ public:
   /// Return a list of identifiers for the currently selected points.
   QStringList selectedPointIdentifiers () const;
 
-  /// Show or hide all the Points in the Curves (if showAll is true) or just the selected Curve (if showAll is false);
-  void showPoints (bool show,
+  /// Show or hide all Curves (if showAll is true) or just the selected Curve (if showAll is false);
+  void showCurves (bool show,
                    bool showAll = false,
                    const QString &curveName = "");
 

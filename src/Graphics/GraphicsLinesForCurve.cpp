@@ -1,6 +1,7 @@
 #include "DataKey.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsItemType.h"
 #include "GraphicsLinesForCurve.h"
 #include "GraphicsPoint.h"
 #include "GraphicsScene.h"
@@ -23,6 +24,10 @@ typedef QMap<double, double> XOrThetaToOrdinal;
 GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
   m_curveName (curveName)
 {
+  setData (DATA_KEY_GRAPHICS_ITEM_TYPE,
+           GRAPHICS_ITEM_TYPE_LINE);
+  setData (DATA_KEY_IDENTIFIER,
+           QVariant (m_curveName));
 }
 
 void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
@@ -200,7 +205,11 @@ void GraphicsLinesForCurve::lineMembershipReset ()
 void GraphicsLinesForCurve::printStream (QString indentation,
                                          QTextStream &str) const
 {
-  str << indentation << "GraphicsLinesForCurve=" << m_curveName << "\n";
+  DataKey type = (DataKey) data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt();
+
+  str << indentation << "GraphicsLinesForCurve=" << m_curveName
+      << " dataIdentifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
+      << " dataType=" << dataKeyToString (type).toLatin1().data() << "\n";
 
   indentation += INDENTATION_DELTA;
 

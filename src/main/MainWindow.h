@@ -180,7 +180,7 @@ private slots:
   void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
   void slotViewGroupBackground(QAction*);
-  void slotViewGroupPoints(QAction*);
+  void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarDigitize ();
@@ -259,7 +259,7 @@ private:
   void updateImages (const QPixmap &pixmap);
   void updateRecentFileList();
   void updateViewedBackground();
-  void updateViewedPoints ();
+  void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
   void writeCheckpointToLogFile();
 
@@ -306,11 +306,11 @@ private:
   QAction *m_actionViewBackgroundNone;
   QAction *m_actionViewBackgroundOriginal;
   QAction *m_actionViewBackgroundFiltered;
-  QMenu *m_menuViewPoints;
-  QActionGroup *m_groupPoints;
-  QAction *m_actionViewPointsNone;
-  QAction *m_actionViewPointsCurve;
-  QAction *m_actionViewPointsAll;
+  QMenu *m_menuViewCurves;
+  QActionGroup *m_groupCurves;
+  QAction *m_actionViewCurvesNone;
+  QAction *m_actionViewCurvesSelected;
+  QAction *m_actionViewCurvesAll;
   QMenu *m_menuViewStatus;
   QActionGroup *m_groupStatus;
   QAction *m_actionStatusNever;

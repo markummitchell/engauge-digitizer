@@ -413,22 +413,45 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
 
   for (int row = 0; row < xThetaValuesMerged.count(); row++) {
 
-    double xTheta = xThetaValuesMerged.at (row);
+    if (rowHasAtLeastOneYRadiusEntry (yRadiusValues,
+                                      row)) {
 
-    // Output x/theta value for this row
-    QString xThetaString, yRadiusString;
-    format.unformattedToFormatted (xTheta,
-                                   DUMMY_Y_RADIUS,
-                                   modelCoords,
-                                   xThetaString,
-                                   yRadiusString);
-    str << xThetaString;
+      double xTheta = xThetaValuesMerged.at (row);
 
-    for (int col = 0; col < yRadiusValues.count(); col++) {
+      // Output x/theta value for this row
+      QString xThetaString, yRadiusString;
+      format.unformattedToFormatted (xTheta,
+                                     DUMMY_Y_RADIUS,
+                                     modelCoords,
+                                     xThetaString,
+                                     yRadiusString);
+      str << xThetaString;
 
-      str << delimiter << *(yRadiusValues [col] [row]);
+      for (int col = 0; col < yRadiusValues.count(); col++) {
+
+        str << delimiter << *(yRadiusValues [col] [row]);
+      }
+
+      str << "\n";
     }
-
-    str << "\n";
   }
+}
+
+bool ExportFileFunctions::rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,
+                                                        int row) const
+{
+  bool hasEntry = false;
+
+  for (int col = 0; col < yRadiusValues.count(); col++) {
+
+    QString entry = *(yRadiusValues [col] [row]);
+    if (!entry.isEmpty()) {
+
+      hasEntry = true;
+      break;
+
+    }
+  }
+
+  return hasEntry;
 }
