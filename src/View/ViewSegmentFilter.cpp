@@ -8,6 +8,7 @@
 #include "ViewSegmentFilter.h"
 
 const double OPACITY_WHEN_DISABLED = 0.5;
+const QColor COLOR_FOR_BRUSH_DISABLED (Qt::gray);
 
 ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :
   QLabel (parent),
@@ -109,27 +110,44 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       ENGAUGE_ASSERT (false);
   }
 
+  if (!m_enabled) {
+
+    // Change to gray scale
+    int rgbAverage = (r + g + b) / 3;
+    r = rgbAverage;
+    g = rgbAverage;
+    b = rgbAverage;
+  }
+
   return QColor (r, g, b);
 }
 
 QColor ViewSegmentFilter::colorHigh () const
 {
-  return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
-                           m_colorFilterSettings.foregroundHigh (),
-                           m_colorFilterSettings.hueHigh (),
-                           m_colorFilterSettings.intensityHigh(),
-                           m_colorFilterSettings.saturationHigh(),
-                           m_colorFilterSettings.valueHigh());
+  if (m_enabled) {
+    return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
+                             m_colorFilterSettings.foregroundHigh (),
+                             m_colorFilterSettings.hueHigh (),
+                             m_colorFilterSettings.intensityHigh(),
+                             m_colorFilterSettings.saturationHigh(),
+                             m_colorFilterSettings.valueHigh());
+  } else {
+    return QColor (COLOR_FOR_BRUSH_DISABLED);
+  }
 }
 
 QColor ViewSegmentFilter::colorLow () const
 {
-  return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
-                           m_colorFilterSettings.foregroundLow (),
-                           m_colorFilterSettings.hueLow (),
-                           m_colorFilterSettings.intensityLow(),
-                           m_colorFilterSettings.saturationLow(),
-                           m_colorFilterSettings.valueLow());
+  if (m_enabled) {
+    return colorFromSetting (m_colorFilterSettings.colorFilterMode (),
+                             m_colorFilterSettings.foregroundLow (),
+                             m_colorFilterSettings.hueLow (),
+                             m_colorFilterSettings.intensityLow(),
+                             m_colorFilterSettings.saturationLow(),
+                             m_colorFilterSettings.valueLow());
+  } else {
+    return QColor (COLOR_FOR_BRUSH_DISABLED);
+  }
 }
 
 void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
@@ -140,15 +158,6 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
 
     // Start and end points are midway up on both sides
     QLinearGradient gradient (0, height()/2, width(), height()/2);
-
-    if (!m_enabled) {
-      painter.fillRect (0,
-                        0,
-                        width(),
-                        height(),
-                        QBrush (Qt::white));
-      painter.setOpacity (OPACITY_WHEN_DISABLED); // Image below will partially pass the white background
-    }
 
     // One color at either end
     gradient.setColorAt (0.0, colorLow ());
@@ -162,7 +171,7 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
 
   } else {
 
-    painter.fillRect (0, 0, width (), height (), QBrush (Qt::white));
+    painter.fillRect (0, 0, width (), height (), QBrush (COLOR_FOR_BRUSH_DISABLED));
 
   }
 }

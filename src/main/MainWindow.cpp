@@ -1629,9 +1629,9 @@ void MainWindow::slotDigitizeAxis ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeAxis";
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_AXIS);
-  m_cmbCurve->setEnabled (false);
-  m_viewPointStyle->setEnabled (false);
-  m_viewSegmentFilter->setEnabled (false);
+  m_cmbCurve->setEnabled (false); // Graph curve is irrelevant in this mode
+  m_viewPointStyle->setEnabled (true); // Point style is important in this mode
+  m_viewSegmentFilter->setEnabled (true); // Filtering is important in this mode
 }
 
 void MainWindow::slotDigitizeColorPicker ()

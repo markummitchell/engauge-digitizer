@@ -3,9 +3,9 @@
 #include <QPainter>
 #include "ViewPointStyle.h"
 
-// Use solid background since transparent never worked, even with an alpha channel
-const QColor COLOR_FOR_BRUSH_DISABLED (Qt::gray);
+// Use solid background since transparency approach never worked, even with an alpha channel
 const QColor COLOR_FOR_BRUSH_ENABLED (Qt::white);
+const QColor COLOR_FOR_BRUSH_DISABLED (Qt::gray);
 
 ViewPointStyle::ViewPointStyle(QWidget *parent) :
   QLabel (parent),
@@ -36,6 +36,9 @@ QPixmap ViewPointStyle::pixmapForCurrentSettings () const
 
   // Color
   QColor color = ColorPaletteToQColor(m_pointStyle.paletteColor());
+  if (!m_enabled) {
+    color = QColor (Qt::black);
+  }
 
   // Image for drawing
   QImage img (width (),
@@ -49,8 +52,10 @@ QPixmap ViewPointStyle::pixmapForCurrentSettings () const
                     height (),
                     QBrush (m_enabled ? COLOR_FOR_BRUSH_ENABLED : COLOR_FOR_BRUSH_DISABLED));
 
-  painter.setPen (QPen (color, m_pointStyle.lineWidth()));
-  painter.drawPolygon (polygonScaled);
+  if (m_enabled) {
+    painter.setPen (QPen (color, m_pointStyle.lineWidth()));
+    painter.drawPolygon (polygonScaled);
+  }
 
   // Create pixmap from image
   QPixmap pixmap = QPixmap::fromImage (img);
@@ -81,7 +86,7 @@ void ViewPointStyle::unsetPointStyle ()
 
   QPixmap pEmpty (width (),
                   height ());
-  pEmpty.fill (COLOR_FOR_BRUSH_ENABLED);
+  pEmpty.fill (COLOR_FOR_BRUSH_DISABLED);
 
   setPixmap (pEmpty);
 }
