@@ -260,29 +260,33 @@ QString DlgSettingsCurves::nextCurveName () const
 
     }
 
-  } else if (!curveNameBefore.isEmpty () && endsWithNumber (curveNameBefore)) {
+  } else if (curveNameBefore.isEmpty ()) {
 
-    // Pick a name after curveNameBefore, being sure to not match curveNameAfter
-    int numberBefore = numberAtEnd (curveNameBefore);
-    int numberNew = numberBefore + 1;
-    int pos = curveNameBefore.lastIndexOf (QString::number (numberBefore));
-    if (pos >= 0) {
+    curveNameNext = DEFAULT_GRAPH_CURVE_NAME; // If necessary, this will be deconflicted below
 
-      curveNameNext = QString ("%1%2")
-                      .arg (curveNameBefore.left (pos))
-                      .arg (numberNew);
-      if (curveNameNext == curveNameAfter) {
+  } else {
 
-        // The difference between before and after is exactly one so we go to a lower level
+    curveNameNext = curveNameBefore; // This will be deconflicted below
+
+    if (endsWithNumber (curveNameBefore)) {
+
+      // Curve name ends with a number. Pick a name after curveNameBefore, being sure to not match curveNameAfter
+      int numberBefore = numberAtEnd (curveNameBefore);
+      int numberNew = numberBefore + 1;
+      int pos = curveNameBefore.lastIndexOf (QString::number (numberBefore));
+      if (pos >= 0) {
+
         curveNameNext = QString ("%1%2")
-                        .arg (curveNameBefore)
-                        .arg (DASH_ONE);
+                        .arg (curveNameBefore.left (pos))
+                        .arg (numberNew);
+        if (curveNameNext == curveNameAfter) {
 
+          // The difference between before and after is exactly one so we go to a lower level
+          curveNameNext = QString ("%1%2")
+                          .arg (curveNameBefore)
+                          .arg (DASH_ONE);
+        }
       }
-    } else {
-
-      curveNameNext = curveNameBefore; // Better than nothing
-
     }
   }
 

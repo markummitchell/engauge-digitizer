@@ -384,6 +384,7 @@ INCLUDEPATH += Callback \
                Ordinal \
                Plot \
                Point \
+               Segment \
                Settings \
                Spline \
                StatusBar \

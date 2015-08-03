@@ -69,6 +69,7 @@
 #include <QWhatsThis>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "SegmentFactory.h"
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
@@ -1040,6 +1041,7 @@ void MainWindow::loadImage (const QString &fileName,
 
   setCurrentPathFromFile (fileName);
   // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list
+  m_engaugeFile = EMPTY_FILENAME; // Forces first Save to be treated as Save As
 
   if (m_cmdMediator != 0) {
     removePixmaps ();
@@ -2724,6 +2726,11 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 
+  SegmentFactory segmentFactory (*m_scene);
+  QList<Segment*> segments;
+  segmentFactory.makeSegments (m_imageFiltered->pixmap().toImage(),
+                               modelSegments,
+                               segments);
   m_cmdMediator->document().setModelSegments(modelSegments);
 }
 
