@@ -1612,6 +1612,7 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
+  updateImages(m_cmdMediator->document().pixmap()); // Curve change likely involves a change in the filtered image
   updateViewedCurves();
   updateViewsOfSettings();
 }
@@ -1629,6 +1630,8 @@ void MainWindow::slotDigitizeAxis ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_AXIS);
   m_cmbCurve->setEnabled (false);
+  m_viewPointStyle->setEnabled (false);
+  m_viewSegmentFilter->setEnabled (false);
 }
 
 void MainWindow::slotDigitizeColorPicker ()
@@ -1637,6 +1640,8 @@ void MainWindow::slotDigitizeColorPicker ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_COLOR_PICKER);
   m_cmbCurve->setEnabled (true);
+  m_viewPointStyle->setEnabled (true);
+  m_viewSegmentFilter->setEnabled (true);
 }
 
 void MainWindow::slotDigitizeCurve ()
@@ -1645,6 +1650,8 @@ void MainWindow::slotDigitizeCurve ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
   m_cmbCurve->setEnabled (true);
+  m_viewPointStyle->setEnabled (true);
+  m_viewSegmentFilter->setEnabled (true);
 }
 
 void MainWindow::slotDigitizePointMatch ()
@@ -1653,6 +1660,8 @@ void MainWindow::slotDigitizePointMatch ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_POINT_MATCH);
   m_cmbCurve->setEnabled (true);
+  m_viewPointStyle->setEnabled (true);
+  m_viewSegmentFilter->setEnabled (true);
 }
 
 void MainWindow::slotDigitizeSegment ()
@@ -1661,6 +1670,8 @@ void MainWindow::slotDigitizeSegment ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SEGMENT);
   m_cmbCurve->setEnabled (true);
+  m_viewPointStyle->setEnabled (true);
+  m_viewSegmentFilter->setEnabled (true);
 }
 
 void MainWindow::slotDigitizeSelect ()
@@ -1669,6 +1680,8 @@ void MainWindow::slotDigitizeSelect ()
 
   m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SELECT);
   m_cmbCurve->setEnabled (false);
+  m_viewPointStyle->setEnabled (false);
+  m_viewSegmentFilter->setEnabled (false);
 }
 
 void MainWindow::slotEditCopy ()

@@ -1,5 +1,6 @@
 #include "DocumentModelSegments.h"
 #include "EngaugeAssert.h"
+#include "Logger.h"
 #include "mmsubs.h"
 #include <QGraphicsScene>
 #include <qmath.h>
@@ -11,41 +12,13 @@ Segment::Segment(QGraphicsScene &scene,
   m_scene (scene),
   m_yLast (y)
 {
-}
-
-bool Segment::pointIsCloseToLine(double xLeft,
-                                 double yLeft,
-                                 double xInt,
-                                 double yInt,
-                                 double xRight,
-                                 double yRight)
-{
-  double xProj, yProj, projectedDistanceOutsideLine, distanceToLine;
-  projectPointOntoLine(xInt, yInt, xLeft, yLeft, xRight, yRight, &xProj, &yProj, &projectedDistanceOutsideLine, &distanceToLine);
-
-  return (
-    (xInt - xProj) * (xInt - xProj) +
-    (yInt - yProj) * (yInt - yProj) < 0.5 * 0.5);
-}
-
-bool Segment::pointsAreCloseToLine(double xLeft,
-                                   double yLeft,
-                                   QList<QPoint> removedPoints,
-                                   double xRight,
-                                   double yRight)
-{
-  QList<QPoint>::iterator itr;
-  for (itr = removedPoints.begin(); itr != removedPoints.end(); ++itr) {
-    if (!pointIsCloseToLine(xLeft, yLeft, (double) (*itr).x(), (double) (*itr).y(), xRight, yRight)) {
-      return false;
-    }
-  }
-
-  return true;
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment";
 }
 
 void Segment::appendColumn(int x, int y, const DocumentModelSegments &modelSegments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::appendColumn";
+
   SegmentLine* line = new SegmentLine(m_scene, this);
   ENGAUGE_CHECK_PTR(line);
   line->setLine(QLineF (x - 1,
@@ -88,6 +61,8 @@ void Segment::createAcceptablePoint(bool *pFirst,
 
 QList<QPoint> Segment::fillPoints(const DocumentModelSegments &modelSegments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::fillPoints";
+
   if (modelSegments.fillCorners()) {
     return fillPointsFillingCorners(modelSegments);
   } else {
@@ -217,8 +192,41 @@ int Segment::lineCount() const
   return m_lines.count();
 }
 
+bool Segment::pointIsCloseToLine(double xLeft,
+                                 double yLeft,
+                                 double xInt,
+                                 double yInt,
+                                 double xRight,
+                                 double yRight)
+{
+  double xProj, yProj, projectedDistanceOutsideLine, distanceToLine;
+  projectPointOntoLine(xInt, yInt, xLeft, yLeft, xRight, yRight, &xProj, &yProj, &projectedDistanceOutsideLine, &distanceToLine);
+
+  return (
+    (xInt - xProj) * (xInt - xProj) +
+    (yInt - yProj) * (yInt - yProj) < 0.5 * 0.5);
+}
+
+bool Segment::pointsAreCloseToLine(double xLeft,
+                                   double yLeft,
+                                   QList<QPoint> removedPoints,
+                                   double xRight,
+                                   double yRight)
+{
+  QList<QPoint>::iterator itr;
+  for (itr = removedPoints.begin(); itr != removedPoints.end(); ++itr) {
+    if (!pointIsCloseToLine(xLeft, yLeft, (double) (*itr).x(), (double) (*itr).y(), xRight, yRight)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 void Segment::removeUnneededLines(int *foldedLines)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::removeUnneededLines";
+
   // Pathological case is y=0.001*x*x, since the small slope can fool a naive algorithm
   // into optimizing away all but one point at the origin and another point at the far right.
   // From this we see that we cannot simply throw away points that were optimized away since they
@@ -262,5 +270,5 @@ void Segment::removeUnneededLines(int *foldedLines)
 
 void Segment::setDocumentModelSegments (const DocumentModelSegments &modelSegments)
 {
-
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::setDocumentModelSegments";
 }

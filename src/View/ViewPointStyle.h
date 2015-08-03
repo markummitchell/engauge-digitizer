@@ -13,6 +13,9 @@ public:
   /// Single constructor.
   ViewPointStyle(QWidget *parent = 0);
 
+  /// Show the style with semi-transparency or full-transparency to indicate if associated Curve is active or not
+  void setEnabled (bool enabled);
+
   /// Apply the PointStyle of the currently selected curve.
   void setPointStyle (const PointStyle &pointStyle);
 
@@ -21,8 +24,11 @@ public:
 
 private:
 
-  QPixmap pixmap (const PointStyle &pointStyle) const;
+  QPixmap pixmapForCurrentSettings () const;
 
+  // Current settings
+  PointStyle m_pointStyle;
+  bool m_enabled;
 };
 
 #endif // VIEW_POINT_STYLE_H

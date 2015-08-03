@@ -15,13 +15,15 @@ public:
   /// Single constructor.
   ViewSegmentFilter(QWidget *parent = 0);
 
-
   /// Paint with a horizontal linear gradient.
   virtual void paintEvent(QPaintEvent *event);
 
   /// Apply the color filter of the currently selected curve. The pixmap is included so the background color can be computed.
   void setColorFilterSettings (const ColorFilterSettings &colorFilterSettings,
                                const QPixmap &pixmap);
+
+  /// Show the style with semi-transparency or full-transparency to indicate if associated Curve is active or not
+  void setEnabled (bool enabled);
 
   /// Apply no color filter
   void unsetColorFilterSettings ();
@@ -40,6 +42,8 @@ private:
   ColorFilterSettings m_colorFilterSettings;
   bool m_filterIsDefined;
   QColor m_rgbBackground;
+
+  bool m_enabled;
 };
 
 #endif // VIEW_SEGMENT_FILTER_H

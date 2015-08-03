@@ -2,14 +2,18 @@
 #include "ColorFilter.h"
 #include "ColorFilterSettings.h"
 #include "EngaugeAssert.h"
+#include "Logger.h"
 #include <QPainter>
 #include <QPixmap>
 #include "ViewSegmentFilter.h"
 
+const double OPACITY_WHEN_DISABLED = 0.5;
+
 ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :
   QLabel (parent),
   m_filterIsDefined (false),
-  m_rgbBackground (QColor (Qt::white))
+  m_rgbBackground (QColor (Qt::white)),
+  m_enabled (true)
 {
   // Note the size is set externally by the layout engine
 }
@@ -137,6 +141,15 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
     // Start and end points are midway up on both sides
     QLinearGradient gradient (0, height()/2, width(), height()/2);
 
+    if (!m_enabled) {
+      painter.fillRect (0,
+                        0,
+                        width(),
+                        height(),
+                        QBrush (Qt::white));
+      painter.setOpacity (OPACITY_WHEN_DISABLED); // Image below will partially pass the white background
+    }
+
     // One color at either end
     gradient.setColorAt (0.0, colorLow ());
     gradient.setColorAt (1.0, colorHigh ());
@@ -157,6 +170,8 @@ void ViewSegmentFilter::paintEvent(QPaintEvent * /* event */)
 void ViewSegmentFilter::setColorFilterSettings (const ColorFilterSettings &colorFilterSettings,
                                                 const QPixmap &pixmap)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "ViewSegmentFilter::setColorFilterSettings";
+
   m_colorFilterSettings = colorFilterSettings;
   m_filterIsDefined = true;
 
@@ -164,6 +179,17 @@ void ViewSegmentFilter::setColorFilterSettings (const ColorFilterSettings &color
   ColorFilter filter;
   QImage img = pixmap.toImage();
   m_rgbBackground = filter.marginColor(&img);
+
+  // Force a redraw
+  update();
+}
+
+void ViewSegmentFilter::setEnabled (bool enabled)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ViewSegmentFilter::setEnabled"
+                              << " enabled=" << (enabled ? "true" : "false");
+
+  m_enabled = enabled;
 
   // Force a redraw
   update();

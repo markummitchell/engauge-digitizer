@@ -4,20 +4,22 @@
 #include "ViewPointStyle.h"
 
 // Use solid background since transparent never worked, even with an alpha channel
-const QColor COLOR_FOR_BRUSH (Qt::white);
+const QColor COLOR_FOR_BRUSH_DISABLED (Qt::gray);
+const QColor COLOR_FOR_BRUSH_ENABLED (Qt::white);
 
 ViewPointStyle::ViewPointStyle(QWidget *parent) :
-  QLabel (parent)
+  QLabel (parent),
+  m_enabled (false)
 {
   // Note the size is set externally by the layout engine
 }
 
-QPixmap ViewPointStyle::pixmap (const PointStyle &pointStyle) const
+QPixmap ViewPointStyle::pixmapForCurrentSettings () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ViewPointStyle::pixmap";
+  LOG4CPP_INFO_S ((*mainCat)) << "ViewPointStyle::pixmapForCurrentSettings";
 
   // Polygon that is sized for the main drawing window.
-  QPolygonF polygonUnscaled = pointStyle.polygon();
+  QPolygonF polygonUnscaled = m_pointStyle.polygon();
 
   // Resize polygon to fit icon, by builiding a new scaled polygon from the unscaled polygon
   double xMinGot = polygonUnscaled.boundingRect().left();
@@ -33,19 +35,21 @@ QPixmap ViewPointStyle::pixmap (const PointStyle &pointStyle) const
   }
 
   // Color
-  QColor color = ColorPaletteToQColor(pointStyle.paletteColor());
+  QColor color = ColorPaletteToQColor(m_pointStyle.paletteColor());
 
   // Image for drawing
   QImage img (width (),
               height (),
               QImage::Format_RGB32);
   QPainter painter (&img);
+
   painter.fillRect (0,
                     0,
                     width (),
                     height (),
-                    QBrush (COLOR_FOR_BRUSH));
-  painter.setPen (QPen (color, pointStyle.lineWidth()));
+                    QBrush (m_enabled ? COLOR_FOR_BRUSH_ENABLED : COLOR_FOR_BRUSH_DISABLED));
+
+  painter.setPen (QPen (color, m_pointStyle.lineWidth()));
   painter.drawPolygon (polygonScaled);
 
   // Create pixmap from image
@@ -54,11 +58,21 @@ QPixmap ViewPointStyle::pixmap (const PointStyle &pointStyle) const
   return pixmap;
 }
 
+void ViewPointStyle::setEnabled (bool enabled)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ViewPointStyle::setEnabled"
+                              << " enabled=" << (enabled ? "true" : "false");
+
+  m_enabled = enabled;
+  setPixmap (pixmapForCurrentSettings ());
+}
+
 void ViewPointStyle::setPointStyle (const PointStyle &pointStyle)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ViewPointStyle::setPointStyle";
 
-  setPixmap (pixmap (pointStyle));
+  m_pointStyle = pointStyle;
+  setPixmap (pixmapForCurrentSettings ());
 }
 
 void ViewPointStyle::unsetPointStyle ()
@@ -67,7 +81,7 @@ void ViewPointStyle::unsetPointStyle ()
 
   QPixmap pEmpty (width (),
                   height ());
-  pEmpty.fill (COLOR_FOR_BRUSH);
+  pEmpty.fill (COLOR_FOR_BRUSH_ENABLED);
 
   setPixmap (pEmpty);
 }

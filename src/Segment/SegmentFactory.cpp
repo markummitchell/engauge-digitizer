@@ -11,6 +11,7 @@
 SegmentFactory::SegmentFactory(QGraphicsScene &scene) :
   m_scene (scene)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::SegmentFactory";
 }
 
 int SegmentFactory::adjacentRuns(bool *columnBool, int yStart, int yStop, int height)
@@ -64,6 +65,8 @@ int SegmentFactory::adjacentSegments(Segment **lastSegment, int yStart, int ySto
 
 QList<QPoint> SegmentFactory::fillPoints(const DocumentModelSegments &modelSegments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::fillPoints";
+
   QList<QPoint> list;
   QList<Segment*>::iterator itr;
   for (itr = m_segments.begin (); itr != m_segments.end(); itr++) {
@@ -88,11 +91,11 @@ void SegmentFactory::finishRun(bool *lastBool,
                                int* madeLines,
                                QList<Segment*> segments)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::finishRun"
-                               << " column=" << x
-                               << " rows=" << yStart << "-" << yStop
-                               << " runsOnLeft=" << adjacentRuns (nextBool, yStart, yStop, height)
-                               << " runsOnRight=" << adjacentSegments (lastSegment, yStart, yStop, height);
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::finishRun"
+                              << " column=" << x
+                              << " rows=" << yStart << "-" << yStop
+                              << " runsOnLeft=" << adjacentRuns (nextBool, yStart, yStop, height)
+                              << " runsOnRight=" << adjacentSegments (lastSegment, yStart, yStop, height);
 
   // When looking at adjacent columns, include pixels that touch diagonally since
   // those may also diagonally touch nearby runs in the same column (which would indicate
@@ -158,6 +161,8 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
                                    const DocumentModelSegments &modelSegments,
                                    QList<Segment*> segments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::makeSegments";
+
   // Statistics that show up in debug spew
   int madeLines = 0;
   int shortLines = 0; // Lines rejected since their segments are too short
@@ -303,6 +308,8 @@ void SegmentFactory::removeUnneededLines(Segment **lastSegment,
                                          int *shortLines,
                                          const DocumentModelSegments &modelSegments)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
+
   Segment *segLast = 0;
   for (int yLast = 0; yLast < height; yLast++) {
 

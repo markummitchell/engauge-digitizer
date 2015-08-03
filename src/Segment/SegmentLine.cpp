@@ -1,11 +1,14 @@
 #include "DataKey.h"
 #include "GraphicsItemType.h"
+#include "Logger.h"
 #include "SegmentLine.h"
 
 SegmentLine::SegmentLine(QGraphicsScene  & /* scene */,
                          Segment *segment) :
   m_segment (segment)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::SegmentLine";
+
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_SEGMENT));
 }
 
