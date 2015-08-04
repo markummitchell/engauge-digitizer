@@ -5,6 +5,7 @@
 
 class DocumentModelSegments;
 class QGraphicsScene;
+class QTextStream;
 class SegmentLine;
 
 /// Selectable piecewise-defined line that follows a filtered line in the image. Clicking on a
@@ -52,6 +53,16 @@ private:
                              double *yPrev,
                              double x,
                              double y);
+
+  /// Dump pixels into gnuplot script file with embedded data, ready for input straight into gnuplot. This
+  /// method revealed, when called from removeUnneededLines, that the algorithms have to allow for cases
+  /// when lineOld->line().p2() is not equal to lineNew->line().p1(). In those cases, one Segment is ending
+  /// and another is starting
+  void dumpToGnuplot (QTextStream &strDump,
+                      int xInt,
+                      int yInt,
+                      const SegmentLine *lineOld,
+                      const SegmentLine *lineNew) const;
 
   // Create evenly spaced points along the segment, with extrap points to fill in corners
   QList<QPoint> fillPointsFillingCorners(const DocumentModelSegments &modelSegments);

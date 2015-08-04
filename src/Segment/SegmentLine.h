@@ -13,6 +13,7 @@ public:
   /// Single constructor.
   SegmentLine(QGraphicsScene &scene,
               Segment *segment);
+  ~SegmentLine();
 
   /// Segment that owns this line
   Segment *segment() const;
