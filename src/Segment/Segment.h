@@ -2,6 +2,7 @@
 #define SEGMENT_H
 
 #include <QList>
+#include <QObject>
 
 class DocumentModelSegments;
 class QGraphicsScene;
@@ -10,8 +11,10 @@ class SegmentLine;
 
 /// Selectable piecewise-defined line that follows a filtered line in the image. Clicking on a
 /// Segment results in the immediate creation of multiple Points along that Segment.
-class Segment
+class Segment : public QObject
 { 
+  Q_OBJECT;
+
 public:
   /// Single constructor.
   Segment(QGraphicsScene &scene,
@@ -38,6 +41,13 @@ public:
   /// Set the segment properties.
   void setDocumentModelSegments (const DocumentModelSegments &modelSegments);
 
+public slots:
+  /// Slot for hover enter/leave events in the associated SegmentLines
+  void slotHover (bool hover);
+
+  /// Slot for mouse press events in the associated SegmentLines
+  void slotMouse ();
+
 private:
   Segment();
 
@@ -58,6 +68,8 @@ private:
   /// method revealed, when called from removeUnneededLines, that the algorithms have to allow for cases
   /// when lineOld->line().p2() is not equal to lineNew->line().p1(). In those cases, one Segment is ending
   /// and another is starting
+  ///
+  /// This method does nothing unless the logging level is set to DEBUG
   void dumpToGnuplot (QTextStream &strDump,
                       int xInt,
                       int yInt,

@@ -2,14 +2,13 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "mmsubs.h"
+#include <qdebug.h>
 #include <QFile>
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QTextStream>
 #include "Segment.h"
 #include "SegmentLine.h"
-
-#define ENABLE_GNUPLOT_DEBUGGING
 
 Segment::Segment(QGraphicsScene &scene,
                  int y) :
@@ -19,16 +18,29 @@ Segment::Segment(QGraphicsScene &scene,
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment";
 }
 
-void Segment::appendColumn(int x, int y, const DocumentModelSegments &modelSegments)
+void Segment::appendColumn(int x,
+                           int y,
+                           const DocumentModelSegments &modelSegments)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::appendColumn";
+  int xOld = x - 1;
+  int yOld = m_yLast;
+  int xNew = x;
+  int yNew = y;
 
-  SegmentLine* line = new SegmentLine(m_scene, this);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::appendColumn"
+                               << " segment=0x" << std::hex << (unsigned long) this << std::dec
+                               << " adding ("
+                               << xOld << "," << yOld << ") to ("
+                               << xNew << "," << yNew << ")";
+
+  SegmentLine* line = new SegmentLine(m_scene,
+                                      modelSegments,
+                                      this);
   ENGAUGE_CHECK_PTR(line);
-  line->setLine(QLineF (x - 1,
-                        m_yLast,
-                        x,
-                        y));
+  line->setLine(QLineF (xOld,
+                        yOld,
+                        xNew,
+                        yNew));
 
   // Do not show this line or its segment. this is handled later
 
@@ -69,97 +81,104 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
                              const SegmentLine *lineOld,
                              const SegmentLine *lineNew) const
 {
-  // Show "before" and "after" line info. Note that the merged line starts with lineOld->line().p1()
-  // and ends with lineNew->line().p2()
-  QString label = QString ("Old: (%1,%2) to (%3,%4), New: (%5,%6) to (%7,%8)")
-                  .arg (lineOld->line().x1())
-                  .arg (lineOld->line().y1())
-                  .arg (lineOld->line().x2())
-                  .arg (lineOld->line().y2())
-                  .arg (lineNew->line().x1())
-                  .arg (lineNew->line().y1())
-                  .arg (lineNew->line().x2())
-                  .arg (lineNew->line().y2());
+  // Only show this dump spew when logging is opened up completely
+  if (mainCat->getPriority() == log4cpp::Priority::DEBUG) {
 
-  strDump << "unset label\n";
-  strDump << "set label \"" << label << "\" at graph 0, graph 0.02\n";
-  strDump << "set grid xtics\n";
-  strDump << "set grid ytics\n";
+    // Show "before" and "after" line info. Note that the merged line starts with lineOld->line().p1()
+    // and ends with lineNew->line().p2()
+    QString label = QString ("Old: (%1,%2) to (%3,%4), New: (%5,%6) to (%7,%8)")
+                    .arg (lineOld->line().x1())
+                    .arg (lineOld->line().y1())
+                    .arg (lineOld->line().x2())
+                    .arg (lineOld->line().y2())
+                    .arg (lineNew->line().x1())
+                    .arg (lineNew->line().y1())
+                    .arg (lineNew->line().x2())
+                    .arg (lineNew->line().y2());
 
-  // Get the bounds
-  int rows = 0, cols = 0;
-  QList<SegmentLine*>::const_iterator itr;
-  for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
+    strDump << "unset label\n";
+    strDump << "set label \"" << label << "\" at graph 0, graph 0.02\n";
+    strDump << "set grid xtics\n";
+    strDump << "set grid ytics\n";
 
-    SegmentLine *line = *itr;
-    int x1 = line->line().x1();
-    int y1 = line->line().y1();
-    int x2 = line->line().x2();
-    int y2 = line->line().y2();
+    // Get the bounds
+    int rows = 0, cols = 0;
+    QList<SegmentLine*>::const_iterator itr;
+    for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
 
-    rows = qMax (rows, y1 + 1);
-    rows = qMax (rows, y2 + 1);
-    cols = qMax (cols, x1 + 1);
-    cols = qMax (cols, x2 + 1);
-  }
+      SegmentLine *line = *itr;
+      ENGAUGE_CHECK_PTR (line);
 
-  // Horizontal and vertical width is computed so merged line mostly fills the plot window,
-  // and (xInt,yInt) is at the center
-  int halfWidthX = 1.5 * qMax (qAbs (lineOld->line().dx()),
-                               qAbs (lineNew->line().dx()));
-  int halfWidthY = 1.5 * qMax (qAbs (lineOld->line().dy()),
-                               qAbs (lineNew->line().dy()));
+      int x1 = line->line().x1();
+      int y1 = line->line().y1();
+      int x2 = line->line().x2();
+      int y2 = line->line().y2();
 
-  // Zoom in so changes are easier to see
-  strDump << "set xrange [" << (xInt - halfWidthX - 1) << ":" << (xInt + halfWidthX + 1) << "]\n";
-  strDump << "set yrange [" << (yInt - halfWidthY - 1) << ":" << (yInt + halfWidthY + 1) << "]\n";
-
-  // One small curve shows xInt as horizontal line, and another shows yInt as vertical line.
-  // A small curve shows the replacement line
-  // Then two hhuge piecewise-defined curve show the pre-merge Segment pixels as two alternating colors
-  strDump << "plot \\\n"
-          << "\"-\" title \"\" with lines, \\\n"
-          << "\"-\" title \"\" with lines, \\\n"
-          << "\"-\" title \"Replacement\" with lines, \\\n"
-          << "\"-\" title \"Segment pixels Even\" with linespoints, \\\n"
-          << "\"-\" title \"Segment pixels Odd\"  with linespoints\n"
-          << xInt << " " << (yInt - halfWidthY) << "\n"
-          << xInt << " " << (yInt + halfWidthY) << "\n"
-          << "end\n"
-          << (xInt - halfWidthX) << " " << yInt << "\n"
-          << (xInt + halfWidthY) << " " << yInt << "\n"
-          << "end\n"
-          << lineOld->line().x1() << " " << lineOld->line().y1() << "\n"
-          << lineNew->line().x2() << " " << lineNew->line().y2() << "\n"
-          << "end\n";
-
-  // Fill the array from the list
-  QString even, odd;
-  QTextStream strEven (&even), strOdd (&odd);
-  for (int index = 0; index < m_lines.count(); index++) {
-
-    SegmentLine *line = m_lines.at (index);
-    int x1 = line->line().x1();
-    int y1 = line->line().y1();
-    int x2 = line->line().x2();
-    int y2 = line->line().y2();
-
-    if (index % 2 == 0) {
-      strEven << x1 << " " << y1 << "\n";
-      strEven << x2 << " " << y2 << "\n";
-      strEven << "\n";
-    } else {
-      strOdd << x1 << " " << y1 << "\n";
-      strOdd << x2 << " " << y2 << "\n";
-      strOdd << "\n";
+      rows = qMax (rows, y1 + 1);
+      rows = qMax (rows, y2 + 1);
+      cols = qMax (cols, x1 + 1);
+      cols = qMax (cols, x2 + 1);
     }
+
+    // Horizontal and vertical width is computed so merged line mostly fills the plot window,
+    // and (xInt,yInt) is at the center
+    int halfWidthX = 1.5 * qMax (qAbs (lineOld->line().dx()),
+                                 qAbs (lineNew->line().dx()));
+    int halfWidthY = 1.5 * qMax (qAbs (lineOld->line().dy()),
+                                 qAbs (lineNew->line().dy()));
+
+    // Zoom in so changes are easier to see
+    strDump << "set xrange [" << (xInt - halfWidthX - 1) << ":" << (xInt + halfWidthX + 1) << "]\n";
+    strDump << "set yrange [" << (yInt - halfWidthY - 1) << ":" << (yInt + halfWidthY + 1) << "]\n";
+
+    // One small curve shows xInt as horizontal line, and another shows yInt as vertical line.
+    // A small curve shows the replacement line
+    // Then two hhuge piecewise-defined curve show the pre-merge Segment pixels as two alternating colors
+    strDump << "plot \\\n"
+            << "\"-\" title \"\" with lines, \\\n"
+            << "\"-\" title \"\" with lines, \\\n"
+            << "\"-\" title \"Replacement\" with lines, \\\n"
+            << "\"-\" title \"Segment pixels Even\" with linespoints, \\\n"
+            << "\"-\" title \"Segment pixels Odd\"  with linespoints\n"
+            << xInt << " " << (yInt - halfWidthY) << "\n"
+            << xInt << " " << (yInt + halfWidthY) << "\n"
+            << "end\n"
+            << (xInt - halfWidthX) << " " << yInt << "\n"
+            << (xInt + halfWidthY) << " " << yInt << "\n"
+            << "end\n"
+            << lineOld->line().x1() << " " << lineOld->line().y1() << "\n"
+            << lineNew->line().x2() << " " << lineNew->line().y2() << "\n"
+            << "end\n";
+
+    // Fill the array from the list
+    QString even, odd;
+    QTextStream strEven (&even), strOdd (&odd);
+    for (int index = 0; index < m_lines.count(); index++) {
+
+      SegmentLine *line = m_lines.at (index);
+      int x1 = line->line().x1();
+      int y1 = line->line().y1();
+      int x2 = line->line().x2();
+      int y2 = line->line().y2();
+
+      if (index % 2 == 0) {
+        strEven << x1 << " " << y1 << "\n";
+        strEven << x2 << " " << y2 << "\n";
+        strEven << "\n";
+      } else {
+        strOdd << x1 << " " << y1 << "\n";
+        strOdd << x2 << " " << y2 << "\n";
+        strOdd << "\n";
+      }
+    }
+
+    strDump << even << "\n";
+    strDump << "end\n";
+    strDump << odd << "\n";
+    strDump << "end\n";
+    strDump << "pause -1 \"Hit Enter to continue\"\n";
+    strDump << flush;
   }
-  strDump << even << "\n";
-  strDump << "end\n";
-  strDump << odd << "\n";
-  strDump << "end\n";
-  strDump << "pause -1 \"Hit Enter to continue\"\n";
-  strDump << flush;
 }
 
 QList<QPoint> Segment::fillPoints(const DocumentModelSegments &modelSegments)
@@ -326,7 +345,7 @@ bool Segment::pointsAreCloseToLine(double xLeft,
   return true;
 }
 
-void Segment::removeUnneededLines(int *foldedLines)
+void Segment::removeUnneededLines (int *foldedLines)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::removeUnneededLines";
 
@@ -338,23 +357,24 @@ void Segment::removeUnneededLines(int *foldedLines)
   // into optimizing away all but one point at the origin and another point at the far right.
   // From this we see that we cannot simply throw away points that were optimized away since they
   // are needed later to see if we have diverged from the curve
-  SegmentLine *lineOlder = 0;
-  QList<SegmentLine*>::iterator itr;
+  SegmentLine *linePrevious = 0; // Previous line which corresponds to itrPrevious
+  QList<SegmentLine*>::iterator itr, itrPrevious;
   QList<QPoint> removedPoints;
   for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
 
     SegmentLine *line = *itr;
-    if (lineOlder != 0) {
+    ENGAUGE_CHECK_PTR(line);
 
-      double xLeft = lineOlder->line().x1();
-      double yLeft = lineOlder->line().y1();
-      double xInt = lineOlder->line().x2();
-      double yInt = lineOlder->line().y2();
-      ENGAUGE_CHECK_PTR(line);
+    if (linePrevious != 0) {
 
-      // If lineOlder is the last line of one Segment and line is the first line of another Segment then
+      double xLeft = linePrevious->line().x1();
+      double yLeft = linePrevious->line().y1();
+      double xInt = linePrevious->line().x2();
+      double yInt = linePrevious->line().y2();
+
+      // If linePrevious is the last line of one Segment and line is the first line of another Segment then
       // it makes no sense to remove any point so we continue the loop
-      if (lineOlder->line().p2() == line->line().p1()) {
+      if (linePrevious->line().p2() == line->line().p1()) {
 
         double xRight = line->line().x2();
         double yRight = line->line().y2();
@@ -362,20 +382,30 @@ void Segment::removeUnneededLines(int *foldedLines)
         if (pointIsCloseToLine(xLeft, yLeft, xInt, yInt, xRight, yRight) &&
           pointsAreCloseToLine(xLeft, yLeft, removedPoints, xRight, yRight)) {
 
-#ifdef ENABLE_GNUPLOT_DEBUGGING
           // Dump
           dumpToGnuplot (strDump,
                          xInt,
                          yInt,
-                         lineOlder,
+                         linePrevious,
                          line);
-#endif
 
           // Remove intermediate point, by removing older line and stretching new line to first point
           ++(*foldedLines);
+
+          LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::removeUnneededLines"
+                                       << " segment=0x" << std::hex << (unsigned long) this << std::dec
+                                       << " removing ("
+                                       << linePrevious->line().x1() << "," << linePrevious->line().y1() << ") to ("
+                                       << linePrevious->line().x2() << "," << linePrevious->line().y2() << ") "
+                                       << " and modifying ("
+                                       << line->line().x1() << "," << line->line().y1() << ") to ("
+                                       << line->line().x2() << "," << line->line().y2() << ") into ("
+                                       << xLeft << "," << yLeft << ") to ("
+                                       << xRight << "," << yRight << ")";
+
           removedPoints.append(QPoint((int) xInt, (int) yInt));
-          m_lines.removeOne(lineOlder);
-          delete lineOlder;
+          m_lines.erase (itrPrevious);
+          delete linePrevious;
 
           // New line
           line->setLine (xLeft, yLeft, xRight, yRight);
@@ -388,7 +418,13 @@ void Segment::removeUnneededLines(int *foldedLines)
       }
     }
 
-    lineOlder = line;
+    linePrevious = line;
+    itrPrevious = itr;
+
+    // This theoretically should not be needed, but for some reason modifying the last point triggers a segfault
+    if (itr == m_lines.end()) {
+      break;
+    }
   }
 
   strDump << "set terminal x11 persist\n";
@@ -397,4 +433,21 @@ void Segment::removeUnneededLines(int *foldedLines)
 void Segment::setDocumentModelSegments (const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::setDocumentModelSegments";
+}
+
+void Segment::slotHover (bool hover)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::slotHover";
+
+  QList<SegmentLine*>::iterator itr, itrPrevious;
+  for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
+
+    SegmentLine *line = *itr;
+    line->setHover(hover);
+  }
+}
+
+void Segment::slotMouse ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::slotMouse";
 }

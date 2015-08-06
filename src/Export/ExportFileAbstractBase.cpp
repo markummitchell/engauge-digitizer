@@ -3,6 +3,7 @@
 #include "EngaugeAssert.h"
 #include "ExportFileAbstractBase.h"
 #include "Logger.h"
+#include <qdebug.h>
 #include <QTextStream>
 #include "SplinePair.h"
 #include "Transformation.h"

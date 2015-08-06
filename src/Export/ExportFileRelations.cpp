@@ -6,6 +6,7 @@
 #include "ExportLayoutFunctions.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
+#include <qdebug.h>
 #include <qmath.h>
 #include <QTextStream>
 #include <QVector>
@@ -396,7 +397,7 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
                  xy);
 
   // Integrate the distances for the subintervals
-  double integratedSeparation;
+  double integratedSeparation = 0;
   QPointF posLast = points.first().posScreen();
 
   // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
@@ -407,9 +408,9 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
 
   // Results. Initially empty, but at the end it will have values tMin, ..., tMax
   ExportValuesOrdinal ordinals;
+  ordinals.push_back (tMin); // First point is always inserted
 
   double tLast = 0.0;
-  double integratedSeparationLast = 0;
   int iTLastInterval = 0;
   for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
 
@@ -424,21 +425,26 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
     double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
     integratedSeparation += integratedSeparationDelta;
 
-    if ((iT == 0) ||
-        (integratedSeparation >= pointsIntervalRelations)) {
+    while (integratedSeparation >= pointsIntervalRelations) {
 
       // End of current interval, and start of next interval. For better accuracy without having to crank up
       // NUM_SMALLER_INTERVALS by orders of magnitude, we use linear interpolation
-      double sInterp = (pointsIntervalRelations - integratedSeparationLast) / (integratedSeparation - integratedSeparationLast);
+      double sInterp;
+      if (iT == 0) {
+        sInterp = 0.0;
+      } else {
+        sInterp = (double) pointsIntervalRelations / (double) integratedSeparation;
+      }
       double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
 
-      integratedSeparation = (1.0 - sInterp) * integratedSeparationDelta; // Part of delta that was not used gets applied to next interval
+      integratedSeparation -= pointsIntervalRelations; // Part of delta that was not used gets applied to next interval
+
+      tLast = tInterp;
       ordinals.push_back (tInterp);
       iTLastInterval = iT;
     }
 
     tLast = t;
-    integratedSeparationLast = integratedSeparation;
     posLast = posNew;
   }
 

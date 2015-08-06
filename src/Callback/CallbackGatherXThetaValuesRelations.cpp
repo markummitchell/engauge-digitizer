@@ -34,15 +34,12 @@ CallbackSearchReturn CallbackGatherXThetaValuesRelations::callback (const QStrin
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValuesRelations::callback"
                                << " curveName=" << curveName.toLatin1().data()
-                               << " point=" << point.identifier().toLatin1().data();
+                               << " point=" << point.identifier().toLatin1().data()
+                               << " ordinal=" << point.ordinal ();
 
   if (m_curveNamesIncluded.contains (curveName)) {
 
-    QPointF posGraph;
-    m_transformation.transformScreenToRawGraph (point.posScreen(),
-                                                posGraph);
-
-    m_ordinals [curveName].push_back (posGraph.x ());
+    m_ordinals [curveName].push_back (point.ordinal ());
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;

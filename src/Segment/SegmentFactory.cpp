@@ -91,11 +91,11 @@ void SegmentFactory::finishRun(bool *lastBool,
                                int* madeLines,
                                QList<Segment*> segments)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::finishRun"
-                              << " column=" << x
-                              << " rows=" << yStart << "-" << yStop
-                              << " runsOnLeft=" << adjacentRuns (nextBool, yStart, yStop, height)
-                              << " runsOnRight=" << adjacentSegments (lastSegment, yStart, yStop, height);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::finishRun"
+                               << " column=" << x
+                               << " rows=" << yStart << "-" << yStop
+                               << " runsOnLeft=" << adjacentRuns (nextBool, yStart, yStop, height)
+                               << " runsOnRight=" << adjacentSegments (lastSegment, yStart, yStop, height);
 
   // When looking at adjacent columns, include pixels that touch diagonally since
   // those may also diagonally touch nearby runs in the same column (which would indicate
@@ -308,7 +308,7 @@ void SegmentFactory::removeUnneededLines(Segment **lastSegment,
                                          int *shortLines,
                                          const DocumentModelSegments &modelSegments)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
 
   Segment *segLast = 0;
   for (int yLast = 0; yLast < height; yLast++) {
