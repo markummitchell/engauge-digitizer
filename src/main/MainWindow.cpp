@@ -2680,11 +2680,11 @@ void MainWindow::updateSegments()
 
   if (m_cmdMediator != 0) {
 
-//    SegmentFactory segmentFactory (*m_scene);
-//    QList<Segment*> segments;
-//    segmentFactory.makeSegments (m_imageFiltered->pixmap().toImage(),
-//                                 m_cmdMediator->document().modelSegments(),
-//                                 segments);
+    SegmentFactory segmentFactory (*m_scene);
+    QList<Segment*> segments;
+    segmentFactory.makeSegments (m_imageFiltered->pixmap().toImage(),
+                                 m_cmdMediator->document().modelSegments(),
+                                 segments);
   }
 }
 

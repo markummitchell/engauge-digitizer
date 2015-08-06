@@ -34,10 +34,13 @@ int SegmentFactory::adjacentRuns(bool *columnBool, int yStart, int yStop, int he
 
 Segment *SegmentFactory::adjacentSegment(Segment **lastSegment, int yStart, int yStop, int height)
 {
-  for (int y = yStart - 1; y <= yStop + 1; y++) {
-    if ((0 <= y) && (y < height)) {
-      if (lastSegment [y]) {
-        return lastSegment [y];
+  if (*lastSegment != 0) {
+
+    for (int y = yStart - 1; y <= yStop + 1; y++) {
+      if ((0 <= y) && (y < height)) {
+        if (lastSegment [y]) {
+          return lastSegment [y];
+        }
       }
     }
   }
@@ -48,14 +51,18 @@ Segment *SegmentFactory::adjacentSegment(Segment **lastSegment, int yStart, int 
 int SegmentFactory::adjacentSegments(Segment **lastSegment, int yStart, int yStop, int height)
 {
   int segments = 0;
-  bool inSegment = false;
-  for (int y = yStart - 1; y <= yStop + 1; y++) {
-    if ((0 <= y) && (y < height)) {
-      if (!inSegment && lastSegment [y]) {
-        inSegment = true;
-        ++segments;
-      } else if (inSegment && !lastSegment [y]) {
-        inSegment = false;
+
+  if (*lastSegment != 0) {
+
+    bool inSegment = false;
+    for (int y = yStart - 1; y <= yStop + 1; y++) {
+      if ((0 <= y) && (y < height)) {
+        if (!inSegment && lastSegment [y]) {
+         inSegment = true;
+          ++segments;
+        } else if (inSegment && !lastSegment [y]) {
+          inSegment = false;
+        }
       }
     }
   }
@@ -310,37 +317,40 @@ void SegmentFactory::removeUnneededLines(Segment **lastSegment,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
 
-  Segment *segLast = 0;
-  for (int yLast = 0; yLast < height; yLast++) {
+  if (*lastSegment != 0) {
 
-    if (lastSegment [yLast] && (lastSegment [yLast] != segLast)) {
+    Segment *segLast = 0;
+    for (int yLast = 0; yLast < height; yLast++) {
 
-      segLast = lastSegment [yLast];
+      if (lastSegment [yLast] && (lastSegment [yLast] != segLast)) {
 
-      // If the segment is found in the current column then it is still in work so postpone processing
-      bool found = false;
-      for (int yCur = 0; yCur < height; yCur++) {
-        if (segLast == currSegment [yCur]) {
-          found = true;
-          break;
+        segLast = lastSegment [yLast];
+
+        // If the segment is found in the current column then it is still in work so postpone processing
+        bool found = false;
+        for (int yCur = 0; yCur < height; yCur++) {
+          if (segLast == currSegment [yCur]) {
+            found = true;
+            break;
+          }
         }
-      }
 
-      if (!found) {
+        if (!found) {
 
-        ENGAUGE_CHECK_PTR(segLast);
-        if (segLast->length() < (modelSegments.minLength() - 1) * modelSegments.pointSeparation()) {
+          ENGAUGE_CHECK_PTR(segLast);
+          if (segLast->length() < (modelSegments.minLength() - 1) * modelSegments.pointSeparation()) {
 
-          // Remove whole segment since it is too short
-          *shortLines += segLast->lineCount();
-          m_segments.removeOne(segLast);
-          delete segLast;
-          segLast = 0;
+            // Remove whole segment since it is too short
+            *shortLines += segLast->lineCount();
+            m_segments.removeOne(segLast);
+            delete segLast;
+            segLast = 0;
 
-        } else {
+          } else {
 
-          // Keep segment, but try to fold lines
-          segLast->removeUnneededLines(foldedLines);
+            // Keep segment, but try to fold lines
+            segLast->removeUnneededLines(foldedLines);
+          }
         }
       }
     }
