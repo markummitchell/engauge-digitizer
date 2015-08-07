@@ -98,9 +98,6 @@ public:
   /// in the Document may (and probably are) out of date with respect to the graphics points
   void updateGraphicsLinesToMatchGraphicsPoints();
 
-  /// Regenerate the Segments according to the newest settings
-  void updateSegments();
-
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
 

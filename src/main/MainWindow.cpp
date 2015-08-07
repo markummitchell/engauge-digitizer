@@ -69,7 +69,6 @@
 #include <QWhatsThis>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include "SegmentFactory.h"
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
@@ -965,8 +964,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
 
-    updateSegments();
-
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
   } else {
@@ -1058,8 +1055,6 @@ void MainWindow::loadImage (const QString &fileName,
   // Start axis mode
   m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
-
-  updateSegments();
 
   updateControls ();
 }
@@ -2674,20 +2669,6 @@ void MainWindow::updateRecentFileList()
   }
 }
 
-void MainWindow::updateSegments()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSegments";
-
-  if (m_cmdMediator != 0) {
-
-    SegmentFactory segmentFactory (*m_scene);
-    QList<Segment*> segments;
-    segmentFactory.makeSegments (m_imageFiltered->pixmap().toImage(),
-                                 m_cmdMediator->document().modelSegments(),
-                                 segments);
-  }
-}
-
 void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
@@ -2758,7 +2739,6 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 
   m_cmdMediator->document().setModelSegments(modelSegments);
-  updateSegments(); // Apply the new settings
 }
 
 void MainWindow::updateViewedBackground()

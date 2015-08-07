@@ -22,6 +22,9 @@ public:
 
 private:
   DigitizeStateSegment();
+
+  void updateSegments();
+
 };
 
 #endif // DIGITIZE_STATE_SEGMENT_H

@@ -31,15 +31,16 @@ CmdDelete::CmdDelete(MainWindow &mainWindow,
   }
 
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete"
-                              << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
+                              << " selected=(" << selected.join (", ").toLatin1 ().data () << ")";
 
+  // Export to clipboard
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
   exportStrategy.exportToClipboard (selected,
                                     mainWindow.transformIsDefined(),
                                     strCsv,
                                     strHtml,
-                              m_curvesGraphs);
+                                    m_curvesGraphs);
 }
 
 CmdDelete::CmdDelete (MainWindow &mainWindow,
