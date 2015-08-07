@@ -420,38 +420,77 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
   if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
       curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
 
-    // Get a map of x/theta values as keys with point identifiers as the values
-    XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
-    Points::iterator itr;
-    for (itr = m_points.begin (); itr != m_points.end (); itr++) {
-      Point &point = *itr;
+    updatePointOrdinalsFunctions (transformation);
 
-      QPointF posGraph;
-      transformation.transformScreenToRawGraph (point.posScreen (),
-                                                posGraph);
-
-      xOrThetaToPointIdentifier [posGraph.x()] = point.identifier();
-    }
-
-    // Since m_points is a list (and therefore does not provide direct access to elements), we build a temporary map of
-    // point identifier to ordinal, by looping through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
-    QMap<QString, double> pointIdentifierToOrdinal;
-    int ordinal = 0;
-    XOrThetaToPointIdentifier::const_iterator itrX;
-    for (itrX = xOrThetaToPointIdentifier.begin(); itrX != xOrThetaToPointIdentifier.end(); itrX++) {
-
-      QString pointIdentifier = itrX.value();
-      pointIdentifierToOrdinal [pointIdentifier] = ordinal++;
-    }
-
-    // Override the old ordinal values
-    for (itr = m_points.begin(); itr != m_points.end(); itr++) {
-      Point &point = *itr;
-      int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
-      point.setOrdinal (ordinalNew);
-    }
   } else if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH ||
              curveConnectAs == CONNECT_AS_RELATION_STRAIGHT) {
+
+    updatePointOrdinalsRelations (transformation);
+
+  } else {
+
+    LOG4CPP_ERROR_S ((*mainCat)) << "Curve::updatePointOrdinals";
+    ENGAUGE_ASSERT (false);
+
+  }
+}
+
+void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
+{
+  CurveConnectAs curveConnectAs = m_curveStyle.lineStyle().curveConnectAs();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::updatePointOrdinalsFunctions"
+                              << " curve=" << m_curveName.toLatin1().data()
+                              << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
+
+  // Get a map of x/theta values as keys with point identifiers as the values
+  XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
+  Points::iterator itr;
+  for (itr = m_points.begin (); itr != m_points.end (); itr++) {
+    Point &point = *itr;
+
+    QPointF posGraph;
+    if (transformation.transformIsDefined()) {
+
+      // Transformation is available so use it
+      transformation.transformScreenToRawGraph (point.posScreen (),
+                                                posGraph);
+    } else {
+
+      // Transformation is not available so we just use the screen coordinates. Effectively, the
+      // transformation is the identity matrix
+      posGraph= point.posScreen();
+    }
+
+    xOrThetaToPointIdentifier [posGraph.x()] = point.identifier();
+  }
+
+  // Since m_points is a list (and therefore does not provide direct access to elements), we build a temporary map of
+  // point identifier to ordinal, by looping through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
+  QMap<QString, double> pointIdentifierToOrdinal;
+  int ordinal = 0;
+  XOrThetaToPointIdentifier::const_iterator itrX;
+  for (itrX = xOrThetaToPointIdentifier.begin(); itrX != xOrThetaToPointIdentifier.end(); itrX++) {
+
+    QString pointIdentifier = itrX.value();
+    pointIdentifierToOrdinal [pointIdentifier] = ordinal++;
+  }
+
+  // Override the old ordinal values
+  for (itr = m_points.begin(); itr != m_points.end(); itr++) {
+    Point &point = *itr;
+    int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
+    point.setOrdinal (ordinalNew);
+  }
+}
+
+void Curve::updatePointOrdinalsRelations (const Transformation &transformation)
+{
+  CurveConnectAs curveConnectAs = m_curveStyle.lineStyle().curveConnectAs();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::updatePointOrdinalsRelations"
+                              << " curve=" << m_curveName.toLatin1().data()
+                              << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 
     // Keep the ordinal numbering, but make sure the ordinals are evenly spaced
     Points::iterator itr;
@@ -460,11 +499,4 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
       Point &point = *itr;
       point.setOrdinal (ordinal++);
     }
-
-  } else {
-
-    LOG4CPP_ERROR_S ((*mainCat)) << "Curve::updatePointOrdinals";
-    ENGAUGE_ASSERT (false);
-
-  }
 }

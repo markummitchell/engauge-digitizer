@@ -113,6 +113,8 @@ private:
   void loadCurvePoints(QXmlStreamReader &reader);
   void loadXml(QXmlStreamReader &reader);
   Point *pointForPointIdentifier (const QString pointIdentifier);
+  void updatePointOrdinalsFunctions (const Transformation &transformation);
+  void updatePointOrdinalsRelations (const Transformation &transformation);
 
   QString m_curveName;
   Points m_points;
