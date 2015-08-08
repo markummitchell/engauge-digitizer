@@ -14,12 +14,12 @@ public:
   ExportToClipboard();
 
   /// Export, curve-by-curve, raw data points to a string that will be copied to the clipboard.
-  /// \param selected[in] Simple list of selected points that will be exported
-  /// \param transformIsDefined[in] True if transformation is defined
-  /// \param strCsv[out] Selected points as comma separated value list
-  /// \param strHtml[out] Selected points as html
-  /// \param curvesGraphsAll[in] All points in Document
-  /// \param curvesGraphsSelected[out] Selected points as a subset of document.curvesGraphs()
+  /// \param[in] selected Simple list of selected points that will be exported
+  /// \param[in] transformIsDefined True if transformation is defined
+  /// \param[out] strCsv Selected points as comma separated value list
+  /// \param[out] strHtml Selected points as html
+  /// \param[in] curvesGraphsAll All points in Document
+  /// \param[out] curvesGraphsSelected Selected points as a subset of document.curvesGraphs()
   void exportToClipboard (const QStringList &selected,
                           bool transformIsDefined,
                           QTextStream &strCsv,

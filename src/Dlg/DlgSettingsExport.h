@@ -4,6 +4,7 @@
 #include "DlgSettingsAbstractBase.h"
 
 class DocumentModelExport;
+class QComboBox;
 class QDoubleValidator;
 class QGridLayout;
 class QHBoxLayout;
@@ -39,6 +40,7 @@ private slots:
   void slotFunctionsPointsAllCurves();
   void slotFunctionsPointsEvenlySpaced();
   void slotFunctionsPointsEvenlySpacedInterval(const QString  &);
+  void slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotFunctionsPointsFirstCurve();
   void slotFunctionsPointsRaw();
   void slotHeaderGnuplot();
@@ -49,6 +51,7 @@ private slots:
   void slotListIncluded();
   void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval(const QString &);
+  void slotRelationsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotRelationsPointsRaw();
   void slotTabChanged (int);
   void slotXLabel (const QString &);
@@ -87,6 +90,7 @@ private:
   QRadioButton *m_btnFunctionsPointsEvenlySpaced;
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
   QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
+  QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
   QRadioButton *m_btnFunctionsPointsRaw;
 
   QRadioButton *m_btnFunctionsLayoutAllCurves;
@@ -95,6 +99,7 @@ private:
   QRadioButton *m_btnRelationsPointsEvenlySpaced;
   QLineEdit *m_editRelationsPointsEvenlySpacing;
   QDoubleValidator *m_validatorRelationsPointsEvenlySpacing;
+  QComboBox *m_cmbRelationsPointsEvenlySpacingUnits;
   QRadioButton *m_btnRelationsPointsRaw;
 
   QRadioButton *m_btnDelimitersCommas;

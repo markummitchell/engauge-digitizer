@@ -6,6 +6,7 @@
 #include "ExportFileRelations.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QComboBox>
 #include <QDoubleValidator>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -154,24 +155,25 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->setColumnMinimumWidth(0, MIN_INDENT_COLUMN_WIDTH);
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
-  layoutPointsSelections->setColumnStretch (2, 1);
+  layoutPointsSelections->setColumnStretch (2, 0);
+  layoutPointsSelections->setColumnStretch (3, 1);
 
   int row = 0;
   m_btnFunctionsPointsAllCurves = new QRadioButton (tr ("Interpolate Ys at Xs from all curves"));
   m_btnFunctionsPointsAllCurves->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                    "value from every curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsAllCurves, SIGNAL (released()), this, SLOT (slotFunctionsPointsAllCurves()));
 
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                     "value from the first curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values."));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
   QLabel *labelInterval = new QLabel ("Interval:");
@@ -179,7 +181,6 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
   m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator;
-  m_validatorFunctionsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM_X_THETA_EXCLUSIVE);
   m_editFunctionsPointsEvenlySpacing->setValidator (m_validatorFunctionsPointsEvenlySpacing);
   m_editFunctionsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
@@ -189,12 +190,25 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
                                                         "The X values will be automatically aligned along simple numbers. If the first and/or last "
                                                         "points are not along the aligned X values, then one or two additional points are added "
                                                         "as necessary."));
-  layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row, 2, 1, 1, Qt::AlignLeft);
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
+
+  m_cmbFunctionsPointsEvenlySpacingUnits = new QComboBox;
+  m_cmbFunctionsPointsEvenlySpacingUnits->setWhatsThis ("Units for spacing interval.\n\n"
+                                                        "Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be "
+                                                        "consistent across the graph, even if the X scale is logarithmic.\n\n"
+                                                        "Graph units are preferred when the spacing is to depend on the X scale.");
+  m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
+  m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_PIXELS),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_PIXELS));
+  connect (m_cmbFunctionsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
+  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
   m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsRaw, SIGNAL (released()), this, SLOT (slotFunctionsPointsRaw()));
 }
 
@@ -260,36 +274,46 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->setColumnMinimumWidth(0, MIN_INDENT_COLUMN_WIDTH);
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
-  layoutPointsSelections->setColumnStretch (2, 1);
+  layoutPointsSelections->setColumnStretch (2, 0);
+  layoutPointsSelections->setColumnStretch (3, 1);
 
   int row = 0;
   m_btnRelationsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Xs and Ys at evenly spaced intervals."));
   m_btnRelationsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have points evenly spaced along each relation, separated by the interval "
                                                       "selected below. If the last interval does not end at the last point, then a shorter last interval "
                                                       "is added that ends on the last point."));
-  layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval (pixels):");
+  QLabel *labelInterval = new QLabel ("Interval:");
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
   m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator;
-  m_validatorRelationsPointsEvenlySpacing->setBottom(INTERVAL_BOTTOM_PIXELS_INCLUSIVE);
   m_editRelationsPointsEvenlySpacing->setValidator (m_validatorRelationsPointsEvenlySpacing);
   m_editRelationsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
-  m_editRelationsPointsEvenlySpacing->setWhatsThis (tr ("Interval, in pixels, between successive points when "
-                                                        "exporting at evenly spaced (X,Y) coordinates.\n\n"
-                                                        "This parameter is specified in screen pixels rather than X and Y units so "
-                                                        "the intervals are evenly spaced without concern about linear or logarithmic scaling, or "
-                                                        "whether or not the X and Y coordinates have the same units."));
-  layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row++, 2, 1, 1, Qt::AlignLeft);
+  m_editRelationsPointsEvenlySpacing->setWhatsThis (tr ("Interval between successive points when "
+                                                        "exporting at evenly spaced (X,Y) coordinates."));
+  layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row, 2, 1, 1, Qt::AlignLeft);
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
+
+  m_cmbRelationsPointsEvenlySpacingUnits = new QComboBox;
+  m_cmbRelationsPointsEvenlySpacingUnits->setWhatsThis ("Units for spacing interval.\n\n"
+                                                        "Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be "
+                                                        "consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.\n\n"
+                                                        "Graph units are usually preferred when the X and Y scales are identical.");
+  m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
+  m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_PIXELS),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_PIXELS));
+  connect (m_cmbRelationsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
+           this, SLOT (slotRelationsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
+  layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
   m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnRelationsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
-  layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 0, 1, 3);
+  layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 0, 1, 4);
   connect (m_btnRelationsPointsRaw, SIGNAL (released()), this, SLOT (slotRelationsPointsRaw()));
 }
 
@@ -597,6 +621,18 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval(const QString &)
   }
 }
 
+void DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits";
+
+  int index = m_cmbFunctionsPointsEvenlySpacingUnits->currentIndex();
+  ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt();
+
+  m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
+  updateControls();
+  updatePreview();
+}
+
 void DlgSettingsExport::slotFunctionsPointsFirstCurve()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsFirstCurve";
@@ -711,6 +747,18 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
   m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
   updateControls();
 
+  updatePreview();
+}
+
+void DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits";
+
+  int index = m_cmbRelationsPointsEvenlySpacingUnits->currentIndex();
+  ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt();
+
+  m_modelExportAfter->setPointsIntervalUnitsRelations(units);
+  updateControls();
   updatePreview();
 }
 

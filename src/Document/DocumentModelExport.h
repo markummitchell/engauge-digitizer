@@ -5,6 +5,7 @@
 #include "ExportDelimiter.h"
 #include "ExportHeader.h"
 #include "ExportLayoutFunctions.h"
+#include "ExportPointsIntervalUnits.h"
 #include "ExportPointsSelectionFunctions.h"
 #include "ExportPointsSelectionRelations.h"
 #include <QStringList>
@@ -48,6 +49,12 @@ public:
   /// Get method for relations interval for relations
   double pointsIntervalRelations () const;
 
+  /// Get method for points interval units for functions.
+  ExportPointsIntervalUnits pointsIntervalUnitsFunctions () const;
+
+  /// Get method for points interval units for relations.
+  ExportPointsIntervalUnits pointsIntervalUnitsRelations () const;
+
   /// Get method for point selection for functions.
   ExportPointsSelectionFunctions pointsSelectionFunctions() const;
 
@@ -78,6 +85,12 @@ public:
   /// Set method for relations interval for relations
   void setPointsIntervalRelations (double pointsIntervalRelations);
 
+  /// Set method for points interval units for functions
+  void setPointsIntervalUnitsFunctions (ExportPointsIntervalUnits pointsIntervalUnitsFunctions);
+
+  /// Set method for points interval units for relations
+  void setPointsIntervalUnitsRelations (ExportPointsIntervalUnits pointsIntervalUnitsRelations);
+
   /// Set method for point selection for functions.
   void setPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions);
 
@@ -97,8 +110,10 @@ private:
 
   ExportPointsSelectionFunctions m_pointsSelectionFunctions;
   double m_pointsIntervalFunctions;
+  ExportPointsIntervalUnits m_pointsIntervalUnitsFunctions;
   ExportPointsSelectionRelations m_pointsSelectionRelations;
   double m_pointsIntervalRelations;
+  ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
   ExportHeader m_header;

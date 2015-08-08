@@ -7,16 +7,20 @@
 #include "Xml.h"
 
 const QStringList DEFAULT_CURVE_NAMES_NOT_EXPORTED;
-const double DEFAULT_POINTS_INTERVAL_FUNCTIONS = 1.0; // Although rarely the right value, value of 1 is better than 0 (=infinite loops)
-const double DEFAULT_POINTS_INTERVAL_RELATIONS = 10; // Pixels versus the graph coordinates used by DEFAULT_POINTS_INTERVAL_FUNCTIONS
+const double DEFAULT_POINTS_INTERVAL_FUNCTIONS = 10; // Consistent with DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS
+const double DEFAULT_POINTS_INTERVAL_RELATIONS = 10; // Consistent with DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS
 const QString DEFAULT_X_LABEL ("x");
+const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS = EXPORT_POINTS_INTERVAL_UNITS_PIXELS; // Consistent with DEFAULT_POINTS_INTERVAL_FUNCTIONS
+const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS = EXPORT_POINTS_INTERVAL_UNITS_PIXELS; // Consistent with DEFAULT_POINTS_INTERVAL_RELATIONS
 
 DocumentModelExport::DocumentModelExport() :
   m_curveNamesNotExported (DEFAULT_CURVE_NAMES_NOT_EXPORTED),
   m_pointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
   m_pointsIntervalFunctions (DEFAULT_POINTS_INTERVAL_FUNCTIONS),
+  m_pointsIntervalUnitsFunctions (DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS),
   m_pointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
   m_pointsIntervalRelations (DEFAULT_POINTS_INTERVAL_RELATIONS),
+  m_pointsIntervalUnitsRelations (DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS),
   m_layoutFunctions (EXPORT_LAYOUT_ALL_PER_LINE),
   m_delimiter (EXPORT_DELIMITER_COMMA),
   m_header (EXPORT_HEADER_SIMPLE),
@@ -28,8 +32,10 @@ DocumentModelExport::DocumentModelExport (const Document &document) :
   m_curveNamesNotExported (document.modelExport().curveNamesNotExported()),
   m_pointsSelectionFunctions (document.modelExport().pointsSelectionFunctions()),
   m_pointsIntervalFunctions (document.modelExport().pointsIntervalFunctions()),
+  m_pointsIntervalUnitsFunctions (document.modelExport().pointsIntervalUnitsFunctions()),
   m_pointsSelectionRelations (document.modelExport().pointsSelectionRelations()),
   m_pointsIntervalRelations (document.modelExport().pointsIntervalRelations()),
+  m_pointsIntervalUnitsRelations (document.modelExport().pointsIntervalUnitsRelations()),
   m_layoutFunctions (document.modelExport().layoutFunctions()),
   m_delimiter (document.modelExport().delimiter()),
   m_header (document.modelExport().header()),
@@ -41,8 +47,10 @@ DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
   m_curveNamesNotExported (other.curveNamesNotExported()),
   m_pointsSelectionFunctions (other.pointsSelectionFunctions()),
   m_pointsIntervalFunctions (other.pointsIntervalFunctions()),
+  m_pointsIntervalUnitsFunctions (other.pointsIntervalUnitsFunctions()),
   m_pointsSelectionRelations (other.pointsSelectionRelations()),
   m_pointsIntervalRelations (other.pointsIntervalRelations()),
+  m_pointsIntervalUnitsRelations (other.pointsIntervalUnitsRelations()),
   m_layoutFunctions (other.layoutFunctions()),
   m_delimiter (other.delimiter()),
   m_header (other.header()),
@@ -56,8 +64,10 @@ DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &o
   m_curveNamesNotExported = other.curveNamesNotExported();
   m_pointsSelectionFunctions = other.pointsSelectionFunctions();
   m_pointsIntervalFunctions = other.pointsIntervalFunctions();
+  m_pointsIntervalUnitsFunctions = other.pointsIntervalUnitsFunctions();
   m_pointsSelectionRelations = other.pointsSelectionRelations();
   m_pointsIntervalRelations = other.pointsIntervalRelations();
+  m_pointsIntervalUnitsRelations = other.pointsIntervalUnitsRelations();
   m_layoutFunctions = other.layoutFunctions();
   m_delimiter = other.delimiter();
   m_header = other.header();
@@ -96,8 +106,10 @@ void DocumentModelExport::loadXml(QXmlStreamReader &reader)
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_FUNCTIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_RELATIONS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER) &&
@@ -105,8 +117,10 @@ void DocumentModelExport::loadXml(QXmlStreamReader &reader)
 
     setPointsSelectionFunctions ((ExportPointsSelectionFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS).toInt());
     setPointsIntervalFunctions (attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_FUNCTIONS).toDouble());
+    setPointsIntervalUnitsFunctions ((ExportPointsIntervalUnits) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS).toInt());
     setPointsSelectionRelations ((ExportPointsSelectionRelations) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
     setPointsIntervalRelations (attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_RELATIONS).toDouble());
+    setPointsIntervalUnitsRelations ((ExportPointsIntervalUnits) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS).toInt());
     setLayoutFunctions ((ExportLayoutFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS).toInt());
     setDelimiter ((ExportDelimiter) attributes.value (DOCUMENT_SERIALIZE_EXPORT_DELIMITER).toInt());
     setHeader ((ExportHeader) attributes.value(DOCUMENT_SERIALIZE_EXPORT_HEADER).toInt());
@@ -165,6 +179,16 @@ double DocumentModelExport::pointsIntervalRelations() const
   return m_pointsIntervalRelations;
 }
 
+ExportPointsIntervalUnits DocumentModelExport::pointsIntervalUnitsFunctions() const
+{
+  return m_pointsIntervalUnitsFunctions;
+}
+
+ExportPointsIntervalUnits DocumentModelExport::pointsIntervalUnitsRelations() const
+{
+  return m_pointsIntervalUnitsRelations;
+}
+
 ExportPointsSelectionFunctions DocumentModelExport::pointsSelectionFunctions() const
 {
   return m_pointsSelectionFunctions;
@@ -193,9 +217,13 @@ void DocumentModelExport::printStream(QString indentation,
   str << indentation << "exportPointsSelectionFunctions=" 
       << exportPointsSelectionFunctionsToString (m_pointsSelectionFunctions) << "\n";
   str << indentation << "pointsIntervalFunctions=" << m_pointsIntervalFunctions << "\n";
+  str << indentation << "pointsIntervalUnitsFunctions="
+      << exportPointsIntervalUnitsToString (m_pointsIntervalUnitsFunctions) << "\n";
   str << indentation << "exportPointsSelectionRelations=" 
       << exportPointsSelectionRelationsToString (m_pointsSelectionRelations) << "\n";
   str << indentation << "pointsIntervalRelations=" << m_pointsIntervalRelations << "\n";
+  str << indentation << "pointsIntervalUnitsRelations="
+      << exportPointsIntervalUnitsToString (m_pointsIntervalUnitsRelations) << "\n";
   str << indentation << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
   str << indentation << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
   str << indentation << "exportHeader=" << exportHeaderToString (m_header) << "\n";
@@ -210,8 +238,10 @@ void DocumentModelExport::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS, QString::number (m_pointsSelectionFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS_STRING, exportPointsSelectionFunctionsToString (m_pointsSelectionFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_FUNCTIONS, QString::number (m_pointsIntervalFunctions));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS, QString::number (m_pointsIntervalUnitsFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS, QString::number (m_pointsSelectionRelations));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_RELATIONS_STRING, exportPointsSelectionRelationsToString (m_pointsSelectionRelations));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS, QString::number (m_pointsIntervalUnitsRelations));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_RELATIONS, QString::number (m_pointsIntervalRelations));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS, QString::number (m_layoutFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS_STRING, exportLayoutFunctionsToString (m_layoutFunctions));
@@ -263,6 +293,16 @@ void DocumentModelExport::setPointsIntervalFunctions(double pointsIntervalFuncti
 void DocumentModelExport::setPointsIntervalRelations(double pointsIntervalRelations)
 {
   m_pointsIntervalRelations = pointsIntervalRelations;
+}
+
+void DocumentModelExport::setPointsIntervalUnitsFunctions(ExportPointsIntervalUnits pointsIntervalUnitsFunctions)
+{
+  m_pointsIntervalUnitsFunctions = pointsIntervalUnitsFunctions;
+}
+
+void DocumentModelExport::setPointsIntervalUnitsRelations(ExportPointsIntervalUnits pointsIntervalUnitsRelations)
+{
+  m_pointsIntervalUnitsRelations = pointsIntervalUnitsRelations;
 }
 
 void DocumentModelExport::setPointsSelectionFunctions(ExportPointsSelectionFunctions pointsSelectionFunctions)

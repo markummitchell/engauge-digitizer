@@ -114,6 +114,7 @@ HEADERS  += \
     Export/ExportAlignLog.h \
     Export/ExportDelimiter.h \
     Export/ExportLayoutFunctions.h \
+    Export/ExportPointsIntervalUnits.h \
     Export/ExportPointsSelectionFunctions.h \
     Export/ExportPointsSelectionRelations.h \
     Export/ExportDelimiter.h \
@@ -295,6 +296,7 @@ SOURCES += \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
     Export/ExportLayoutFunctions.cpp \
+    Export/ExportPointsIntervalUnits.cpp \
     Export/ExportPointsSelectionFunctions.cpp \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
