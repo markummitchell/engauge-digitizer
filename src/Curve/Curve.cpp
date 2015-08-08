@@ -425,7 +425,7 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
   } else if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH ||
              curveConnectAs == CONNECT_AS_RELATION_STRAIGHT) {
 
-    updatePointOrdinalsRelations (transformation);
+    updatePointOrdinalsRelations ();
 
   } else {
 
@@ -484,7 +484,7 @@ void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
   }
 }
 
-void Curve::updatePointOrdinalsRelations (const Transformation &transformation)
+void Curve::updatePointOrdinalsRelations ()
 {
   CurveConnectAs curveConnectAs = m_curveStyle.lineStyle().curveConnectAs();
 
