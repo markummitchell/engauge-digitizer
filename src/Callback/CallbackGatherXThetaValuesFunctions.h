@@ -35,8 +35,26 @@ public:
 private:
   CallbackGatherXThetaValuesFunctions();
 
+  void firstSimplestNumberLinear (double &xThetaFirstSimplestNumber,
+                                  double &xThetaMin,
+                                  double &xThetaMax) const;
+  void firstSimplestNumberLog (double &xThetaFirstSimplestNumber,
+                               double &xThetaMin,
+                               double &xThetaMax) const;
   ExportValuesXOrY xThetaValuesInterpolatePeriodicLinear() const;
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinearGraph (double xThetaFirstSimplestNumber,
+                                                               double xThetaMin,
+                                                               double xThetaMax) const;
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinearScreen (double xThetaFirstSimplestNumber,
+                                                                double xThetaMin,
+                                                                double xThetaMax) const;
   ExportValuesXOrY xThetaValuesInterpolatePeriodicLog() const;
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLogGraph (double xThetaFirstSimplestNumber,
+                                                            double xThetaMin,
+                                                            double xThetaMax) const;
+  ExportValuesXOrY xThetaValuesInterpolatePeriodicLogScreen (double xThetaFirstSimplestNumber,
+                                                             double xThetaMin,
+                                                             double xThetaMax) const;
 
   const DocumentModelExport m_modelExport;
   const Transformation m_transformation;

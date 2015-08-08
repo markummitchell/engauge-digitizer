@@ -200,8 +200,8 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
                                                         "Graph units are preferred when the spacing is to depend on the X scale.");
   m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
-  m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_PIXELS),
-                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_PIXELS));
+  m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_SCREEN),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbFunctionsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
   layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
@@ -305,8 +305,8 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
                                                         "Graph units are usually preferred when the X and Y scales are identical.");
   m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
-  m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_PIXELS),
-                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_PIXELS));
+  m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_SCREEN),
+                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbRelationsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotRelationsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
   layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);

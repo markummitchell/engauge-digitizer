@@ -5,7 +5,7 @@
 
 enum ExportPointsIntervalUnits {
   EXPORT_POINTS_INTERVAL_UNITS_GRAPH,
-  EXPORT_POINTS_INTERVAL_UNITS_PIXELS
+  EXPORT_POINTS_INTERVAL_UNITS_SCREEN
 };
 
 extern QString exportPointsIntervalUnitsToString (ExportPointsIntervalUnits exportPointsIntervalUnits);

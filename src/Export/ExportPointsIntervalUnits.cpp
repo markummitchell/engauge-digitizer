@@ -6,7 +6,7 @@ QString exportPointsIntervalUnitsToString (ExportPointsIntervalUnits exportPoint
   case EXPORT_POINTS_INTERVAL_UNITS_GRAPH:
     return "Graph Units";
 
-  case EXPORT_POINTS_INTERVAL_UNITS_PIXELS:
+  case EXPORT_POINTS_INTERVAL_UNITS_SCREEN:
     return "Pixels";
 
   default:
