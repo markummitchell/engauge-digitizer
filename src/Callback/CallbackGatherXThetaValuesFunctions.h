@@ -7,6 +7,7 @@
 #include <QHash>
 #include <QMap>
 #include "Transformation.h"
+#include "ValuesVectorXOrY.h"
 
 class Point;
 

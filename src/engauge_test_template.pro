@@ -126,6 +126,7 @@ HEADERS  += \
     Export/ExportToFile.h \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
+    Export/ExportXThetaValuesFunctions.h \
     Format/FormatConstants.h \
     Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsNonPolarTheta.h \
@@ -176,6 +177,7 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
+    include/ValuesVectorXOrY.h \
     util/Version.h \
     View/ViewPointStyle.h \
     View/ViewPreview.h \
@@ -301,6 +303,7 @@ SOURCES += \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
+    Export/ExportXThetaValuesFunctions.cpp \
     Format/FormatConstants.cpp \
     Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsNonPolarTheta.cpp \
