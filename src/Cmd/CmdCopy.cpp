@@ -43,6 +43,7 @@ CmdCopy::CmdCopy(MainWindow &mainWindow,
                                     mainWindow.transformIsDefined(),
                                     strCsv,
                                     strHtml,
+                                    document.curvesGraphs(),
                                     m_curvesGraphs);
 }
 

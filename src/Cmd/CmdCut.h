@@ -36,7 +36,7 @@ private:
   QString m_csv;
   QString m_html;
 
-  CurvesGraphs m_curvesGraphs;
+  CurvesGraphs m_curvesGraphsRemoved;
 };
 
 #endif // CMD_CUT_H

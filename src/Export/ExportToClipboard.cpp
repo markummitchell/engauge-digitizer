@@ -1,4 +1,5 @@
 #include "CurvesGraphs.h"
+#include "Document.h"
 #include "EngaugeAssert.h"
 #include "ExportToClipboard.h"
 #include <QStringList>
@@ -12,7 +13,8 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
                                            bool transformIsDefined,
                                            QTextStream &strCsv,
                                            QTextStream &strHtml,
-                                           CurvesGraphs &curvesGraphs) const
+                                           const CurvesGraphs &curvesGraphsAll,
+                                           CurvesGraphs &curvesGraphsSelected) const
 {
   // For speed, build a hash as a fast lookup table
   QHash<QString, bool> selectedHash;
@@ -23,17 +25,17 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
   }
 
   // Export
-  QStringList curveNames = curvesGraphs.curvesGraphsNames();
+  QStringList curveNames = curvesGraphsAll.curvesGraphsNames();
   QStringList::const_iterator itrC;
   for (itrC = curveNames.begin(); itrC != curveNames.end (); itrC++) {
 
     QString curveName = *itrC;
-    const Curve *curve = curvesGraphs.curveForCurveName(curveName);
+    const Curve *curve = curvesGraphsAll.curveForCurveName(curveName);
     ENGAUGE_CHECK_PTR (curve);
     curve->exportToClipboard (selectedHash,
                               transformIsDefined,
                               strCsv,
                               strHtml,
-                              curvesGraphs);
+                              curvesGraphsSelected);
   }
 }

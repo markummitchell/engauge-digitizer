@@ -44,7 +44,8 @@ CmdCut::CmdCut(MainWindow &mainWindow,
                                     mainWindow.transformIsDefined(),
                                     strCsv,
                                     strHtml,
-                                    m_curvesGraphs);
+                                    document.curvesGraphs(),
+                                    m_curvesGraphsRemoved);
 }
 
 CmdCut::CmdCut (MainWindow &mainWindow,
@@ -70,7 +71,7 @@ CmdCut::CmdCut (MainWindow &mainWindow,
   m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
   m_csv = attributes.value(DOCUMENT_SERIALIZE_CSV).toString();
   m_html = attributes.value(DOCUMENT_SERIALIZE_HTML).toString();
-  m_curvesGraphs.loadXml(reader);
+  m_curvesGraphsRemoved.loadXml(reader);
 }
 
 CmdCut::~CmdCut ()
@@ -92,7 +93,7 @@ void CmdCut::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
-  document().removePointsInCurvesGraphs (m_curvesGraphs);
+  document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   mainWindow().updateAfterCommand();
 }
@@ -101,7 +102,7 @@ void CmdCut::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
 
-  document().addPointsInCurvesGraphs (m_curvesGraphs);
+  document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   mainWindow().updateAfterCommand();
 }
@@ -115,6 +116,6 @@ void CmdCut::saveXml (QXmlStreamWriter &writer) const
                         m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE: DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
   writer.writeAttribute(DOCUMENT_SERIALIZE_HTML, m_html);
-  m_curvesGraphs.saveXml(writer);
+  m_curvesGraphsRemoved.saveXml(writer);
   writer.writeEndElement();
 }
