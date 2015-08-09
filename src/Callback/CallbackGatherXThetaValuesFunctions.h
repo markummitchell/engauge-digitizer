@@ -2,13 +2,13 @@
 #define CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
 
 #include "CallbackSearchReturn.h"
-#include "DocumentModelExport.h"
 #include "ExportValuesXOrY.h"
 #include <QHash>
 #include <QMap>
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
 
+class DocumentModelExport;
 class Point;
 
 // Save values into container that preserves order by key (QMap). These are common to all included curves
@@ -31,37 +31,13 @@ public:
                                  const Point &point);
 
   /// Resulting x/theta values for all included functions
-  ExportValuesXOrY xThetaValues () const;
+  ValuesVectorXOrY xThetaValuesRaw () const;
 
 private:
   CallbackGatherXThetaValuesFunctions();
 
-  void firstSimplestNumberLinear (double &xThetaFirstSimplestNumber,
-                                  double &xThetaMin,
-                                  double &xThetaMax) const;
-  void firstSimplestNumberLog (double &xThetaFirstSimplestNumber,
-                               double &xThetaMin,
-                               double &xThetaMax) const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinear() const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinearGraph (double xThetaFirstSimplestNumber,
-                                                               double xThetaMin,
-                                                               double xThetaMax) const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLinearScreen (double xThetaFirstSimplestNumber,
-                                                                double xThetaMin,
-                                                                double xThetaMax) const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLog() const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLogGraph (double xThetaFirstSimplestNumber,
-                                                            double xThetaMin,
-                                                            double xThetaMax) const;
-  ExportValuesXOrY xThetaValuesInterpolatePeriodicLogScreen (double xThetaFirstSimplestNumber,
-                                                             double xThetaMin,
-                                                             double xThetaMax) const;
-
-  const DocumentModelExport m_modelExport;
   const Transformation m_transformation;
-
   CurveNamesIncluded m_curveNamesIncluded;
-
   ValuesVectorXOrY m_xThetaValues;
 };
 

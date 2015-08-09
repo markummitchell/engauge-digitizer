@@ -1,27 +1,28 @@
-#ifndef EXPORT_X_THETA_VALUES_FUNCTIONS_H
-#define EXPORT_X_THETA_VALUES_FUNCTIONS_H
+#ifndef EXPORT_X_THETA_VALUES_MERGED_FUNCTIONS_H
+#define EXPORT_X_THETA_VALUES_MERGED_FUNCTIONS_H
 
 #include "DocumentModelExport.h"
 #include "ExportValuesXOrY.h"
+#include "Transformation.h"
 #include "ValuesVectorXOrY.h"
 
 class Point;
 class Transformation;
 
-/// Creates the set of x/theta values for exporting functions, using interpolation
-class ExportXThetaValuesFunctions
+/// Creates the set of merged x/theta values for exporting functions, using interpolation
+class ExportXThetaValuesMergedFunctions
 {
 public:
   /// Single constructor.
-  ExportXThetaValuesFunctions(const DocumentModelExport &modelExport,
-                              const ValuesVectorXOrY &xThetaValuesRaw,
-                              const Transformation &transformation);
+  ExportXThetaValuesMergedFunctions(const DocumentModelExport &modelExport,
+                                    const ValuesVectorXOrY &xThetaValuesRaw,
+                                    const Transformation &transformation);
 
   /// Resulting x/theta values for all included functions
   ExportValuesXOrY xThetaValues () const;
 
 private:
-  ExportXThetaValuesFunctions();
+  ExportXThetaValuesMergedFunctions();
 
   void firstSimplestNumberLinear (double &xThetaFirstSimplestNumber,
                                   double &xThetaMin,
@@ -33,20 +34,18 @@ private:
   ExportValuesXOrY periodicLinearGraph (double xThetaFirstSimplestNumber,
                                         double xThetaMin,
                                         double xThetaMax) const;
-  ExportValuesXOrY periodicLinearScreen (double xThetaFirstSimplestNumber,
-                                         double xThetaMin,
+  ExportValuesXOrY periodicLinearScreen (double xThetaMin,
                                          double xThetaMax) const;
   ExportValuesXOrY periodicLog() const;
   ExportValuesXOrY periodicLogGraph (double xThetaFirstSimplestNumber,
                                      double xThetaMin,
                                      double xThetaMax) const;
-  ExportValuesXOrY periodicLogScreen (double xThetaFirstSimplestNumber,
-                                      double xThetaMin,
+  ExportValuesXOrY periodicLogScreen (double xThetaMin,
                                       double xThetaMax) const;
 
   const DocumentModelExport m_modelExport;
   const ValuesVectorXOrY m_xThetaValuesRaw;
-  const bool m_isLinear;
+  const Transformation m_transformation;
 };
 
-#endif // EXPORT_X_THETA_VALUES_FUNCTIONS_H
+#endif // EXPORT_X_THETA_VALUES_MERGED_FUNCTIONS_H

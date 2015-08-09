@@ -90,37 +90,3 @@ void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,
     }
   }
 }
-
-void ExportFileAbstractBase::loadSplinePairsWithoutTransformation (const Points &points,
-                                                                   vector<double> &t,
-                                                                   vector<SplinePair> &xy) const
-{
-  Points::const_iterator itrP;
-  for (itrP = points.begin(); itrP != points.end(); itrP++) {
-    const Point &point = *itrP;
-    QPointF posScreen = point.posScreen();
-
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posScreen.x(),
-                              posScreen.y()));
-  }
-}
-
-void ExportFileAbstractBase::loadSplinePairsWithTransformation (const Points &points,
-                                                                const Transformation &transformation,
-                                                                vector<double> &t,
-                                                                vector<SplinePair> &xy) const
-{
-  Points::const_iterator itrP;
-  for (itrP = points.begin(); itrP != points.end(); itrP++) {
-    const Point &point = *itrP;
-    QPointF posScreen = point.posScreen();
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
-
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posGraph.x(),
-                              posGraph.y()));
-  }
-}

@@ -13,7 +13,6 @@ HEADERS  += \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
     Callback/CallbackGatherXThetaValuesFunctions.h \
-    Callback/CallbackGatherXThetaValuesRelations.h \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
@@ -121,7 +120,8 @@ HEADERS  += \
     Export/ExportFileAbstractBase.h \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
-    Export/ExportXThetaValuesFunctions.h \
+    Export/ExportOrdinalsFromSpline.h \
+    Export/ExportXThetaValuesMergedFunctions.h \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
@@ -197,7 +197,6 @@ SOURCES += \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
     Callback/CallbackGatherXThetaValuesFunctions.cpp \
-    Callback/CallbackGatherXThetaValuesRelations.cpp \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
@@ -298,12 +297,13 @@ SOURCES += \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
     Export/ExportLayoutFunctions.cpp \
+    Export/ExportOrdinalsFromSpline.cpp \
     Export/ExportPointsIntervalUnits.cpp \
     Export/ExportPointsSelectionFunctions.cpp \
     Export/ExportPointsSelectionRelations.cpp \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
-    Export/ExportXThetaValuesFunctions.cpp \
+    Export/ExportXThetaValuesMergedFunctions.cpp \
     Format/FormatConstants.cpp \
     Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsNonPolarTheta.cpp \

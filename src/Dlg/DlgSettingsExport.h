@@ -74,7 +74,9 @@ private:
                      int colLabel);
   bool goodIntervalFunctions() const;
   bool goodIntervalRelations() const;
+  void initializeIntervalConstraints ();
   void updateControls();
+  void updateIntervalConstraints(); // Update constraints on intervals to prevent overflows downstream (especially when value is temporarily 0)
   void updatePreview();
 
   QTabWidget *m_tabWidget;
@@ -116,6 +118,12 @@ private:
 
   DocumentModelExport *m_modelExportBefore;
   DocumentModelExport *m_modelExportAfter;
+
+  // Safe values are computed for intervals and then applied according to the current settings. This prevents
+  // accidentally generating exports with thousands of points. That causes delays and can even overflow resources
+  // with a resulting crash
+  double m_minIntervalGraph;
+  double m_minIntervalScreen;
 };
 
 #endif // DLG_SETTINGS_EXPORT_H

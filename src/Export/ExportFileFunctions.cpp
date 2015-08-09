@@ -4,6 +4,8 @@
 #include "EngaugeAssert.h"
 #include "ExportFileFunctions.h"
 #include "ExportLayoutFunctions.h"
+#include "ExportOrdinalsFromSpline.h"
+#include "ExportXThetaValuesMergedFunctions.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <QTextStream>
@@ -123,7 +125,10 @@ void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExportOv
                                                                                                      &CallbackGatherXThetaValuesFunctions::callback);
   document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
-  ExportValuesXOrY xThetaValuesMerged = ftor.xThetaValues ();
+  ExportXThetaValuesMergedFunctions exportXTheta (modelExportOverride,
+                                                  ftor.xThetaValuesRaw(),
+                                                  transformation);
+  ExportValuesXOrY xThetaValuesMerged = exportXTheta.xThetaValues ();
 
   // Skip if every curve was a relation
   if (xThetaValuesMerged.count() > 0) {
@@ -276,10 +281,12 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
 
   vector<double> t;
   vector<SplinePair> xy;
-  loadSplinePairsWithTransformation (points,
-                                     transformation,
-                                     t,
-                                     xy);
+  ExportOrdinalsFromSpline ordinalsFromSpline;
+
+  ordinalsFromSpline.loadSplinePairsWithTransformation (points,
+                                                        transformation,
+                                                        t,
+                                                        xy);
 
   // Fit a spline
   Spline spline (t,

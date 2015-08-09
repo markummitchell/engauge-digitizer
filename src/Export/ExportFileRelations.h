@@ -2,11 +2,11 @@
 #define EXPORT_FILE_RELATIONS_H
 
 #include "ExportFileAbstractBase.h"
+#include "ExportPointsIntervalUnits.h"
 #include "ExportValuesOrdinal.h"
 #include <QStringList>
 #include <QVector>
 
-class CallbackGatherXThetaValuesRelations;
 class Document;
 class DocumentModelCoords;
 class DocumentModelExport;
@@ -69,9 +69,17 @@ private:
                                            const Transformation &transformation) const;
   int maxColumnSizeAllocation (const DocumentModelExport &modelExportOverride,
                                const Document &document,
+                               const Transformation &transformation,
                                const QStringList &curvesIncluded) const;
   ExportValuesOrdinal ordinalsAtIntervals (double pointsIntervalRelations,
+                                           ExportPointsIntervalUnits pointsIntervalUnits,
+                                           const Transformation &transformation,
                                            const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsGraph (double pointsIntervalRelations,
+                                                const Transformation &transformation,
+                                                const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsScreen (double pointsIntervalRelations,
+                                                 const Points &points) const;
 
   /// Output 2D array with alternating x/theta and y/radius columns
   void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,

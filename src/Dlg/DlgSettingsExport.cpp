@@ -1,3 +1,4 @@
+#include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
 #include "CmdSettingsExport.h"
 #include "DocumentModelExport.h"
@@ -30,9 +31,6 @@ const int MAX_EDIT_WIDTH = 180;
 
 const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 const int TAB_WIDGET_INDEX_RELATIONS = 1;
-
-const double INTERVAL_BOTTOM_X_THETA_EXCLUSIVE = 0.0; // For functions
-const double INTERVAL_BOTTOM_PIXELS_INCLUSIVE = 5; // For relations
 
 const QString EMPTY_PREVIEW;
 
@@ -180,7 +178,7 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
-  m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator;
+  m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator; // Minimum value, to prevent overflow, is set later according to settings
   m_editFunctionsPointsEvenlySpacing->setValidator (m_validatorFunctionsPointsEvenlySpacing);
   m_editFunctionsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editFunctionsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
@@ -289,7 +287,7 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
-  m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator;
+  m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator; // Minimum value, to prevent overflow, is set later according to settings
   m_editRelationsPointsEvenlySpacing->setValidator (m_validatorRelationsPointsEvenlySpacing);
   m_editRelationsPointsEvenlySpacing->setMinimumWidth (MIN_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
@@ -409,13 +407,6 @@ bool DlgSettingsExport::goodIntervalFunctions() const
 
   bool isGood = (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable);
 
-  if (isGood) {
-
-    // Exclude the boundary
-    double value = m_editFunctionsPointsEvenlySpacing->text().toDouble();
-    isGood = (value > INTERVAL_BOTTOM_X_THETA_EXCLUSIVE);
-  }
-
   return isGood;
 }
 
@@ -438,6 +429,29 @@ void DlgSettingsExport::handleOk ()
   cmdMediator ().push (cmd);
 
   hide ();
+}
+
+void DlgSettingsExport::initializeIntervalConstraints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::initializeIntervalConstraints";
+
+  const int MAX_POINTS_ACROSS_RANGE = 1000;
+
+  // Get min and max of graph and screen coordinates
+  CallbackBoundingRects ftor (mainWindow().transformation());
+
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                     &CallbackBoundingRects::callback);
+  cmdMediator().iterateThroughCurvesPointsGraphs (ftorWithCallback);
+
+  // If there are no points, then interval will be zero. That special case must be handled downstream to prevent infinite loops
+  bool isEmpty;
+  double maxSizeGraph = qMax (ftor.boundingRectGraph(isEmpty).width(),
+                              ftor.boundingRectGraph(isEmpty).height());
+  double maxSizeScreen = qMax (ftor.boundingRectScreen(isEmpty).width(),
+                               ftor.boundingRectScreen(isEmpty).height());
+  m_minIntervalGraph = maxSizeGraph / MAX_POINTS_ACROSS_RANGE;
+  m_minIntervalScreen = maxSizeScreen / MAX_POINTS_ACROSS_RANGE;
 }
 
 void DlgSettingsExport::load (CmdMediator &cmdMediator)
@@ -505,7 +519,17 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   m_editFunctionsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalFunctions()));
   m_editRelationsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalRelations()));
 
+  ExportPointsIntervalUnits pointsIntervalUnitsFunctions = m_modelExportAfter->pointsIntervalUnitsRelations();
+  ExportPointsIntervalUnits pointsIntervalUnitsRelations = m_modelExportAfter->pointsIntervalUnitsRelations();
+  int indexFunctions = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsFunctions));
+  int indexRelations = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsRelations));
+  m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
+  m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);
+
+  initializeIntervalConstraints ();
+
   updateControls();
+  updateIntervalConstraints();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
 }
@@ -629,6 +653,7 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits(const QStri
   ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt();
 
   m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
+  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
   updateControls();
   updatePreview();
 }
@@ -746,7 +771,6 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
 
   m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
   updateControls();
-
   updatePreview();
 }
 
@@ -758,6 +782,7 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits(const QStri
   ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt();
 
   m_modelExportAfter->setPointsIntervalUnitsRelations(units);
+  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
   updateControls();
   updatePreview();
 }
@@ -807,6 +832,38 @@ void DlgSettingsExport::updateControls ()
   m_editRelationsPointsEvenlySpacing->setEnabled (m_btnRelationsPointsEvenlySpaced->isChecked ());
 
   m_editXLabel->setEnabled (!m_btnHeaderNone->isChecked());
+}
+
+void DlgSettingsExport::updateIntervalConstraints ()
+{
+  double functionsMin = (m_modelExportAfter->pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH ?
+                           m_minIntervalGraph :
+                           m_minIntervalScreen);
+  double relationsMin = (m_modelExportAfter->pointsIntervalUnitsRelations() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH ?
+                           m_minIntervalGraph :
+                           m_minIntervalScreen);
+
+  if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
+
+    if (m_modelExportAfter->pointsIntervalFunctions() < functionsMin) {
+
+      m_editFunctionsPointsEvenlySpacing->setText (QString::number (functionsMin));
+
+    }
+
+    m_validatorFunctionsPointsEvenlySpacing->setBottom (functionsMin);
+
+  } else {
+
+    if (m_modelExportAfter->pointsIntervalRelations() < relationsMin) {
+
+      m_editRelationsPointsEvenlySpacing->setText (QString::number (relationsMin));
+      m_validatorFunctionsPointsEvenlySpacing->setBottom (relationsMin);
+
+    }
+
+    m_validatorRelationsPointsEvenlySpacing->setBottom (relationsMin);
+  }
 }
 
 void DlgSettingsExport::updatePreview()

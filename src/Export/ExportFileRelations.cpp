@@ -1,9 +1,9 @@
-#include "CallbackGatherXThetaValuesRelations.h"
 #include "CurveConnectAs.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
 #include "ExportFileRelations.h"
 #include "ExportLayoutFunctions.h"
+#include "ExportOrdinalsFromSpline.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <qdebug.h>
@@ -35,6 +35,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   int curveCount = curvesIncluded.count();
   int maxColumnSize = maxColumnSizeAllocation (modelExportOverride,
                                                document,
+                                               transformation,
                                                curvesIncluded);
 
   // Skip if every curve was a function
@@ -96,14 +97,6 @@ void ExportFileRelations::exportToFile (const DocumentModelExport &modelExportOv
 
   // Delimiter
   const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
-
-  // Get x/theta values to be used
-  CallbackGatherXThetaValuesRelations ftor (modelExportOverride,
-                                            curvesIncluded,
-                                            transformation);
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackGatherXThetaValuesRelations::callback);
-  document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 
   // Export in one of two layouts
   if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
@@ -223,6 +216,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
 
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExportOverride.pointsIntervalRelations(),
+                                                          modelExportOverride.pointsIntervalUnitsRelations(),
+                                                          transformation,
                                                           points);
 
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
@@ -258,10 +253,12 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 
   vector<double> t;
   vector<SplinePair> xy;
-  loadSplinePairsWithTransformation (points,
-                                     transformation,
-                                     t,
-                                     xy);
+  ExportOrdinalsFromSpline ordinalsFromSpline;
+
+  ordinalsFromSpline.loadSplinePairsWithTransformation (points,
+                                                        transformation,
+                                                        t,
+                                                        xy);
 
   // Fit a spline
   Spline spline (t,
@@ -269,8 +266,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 
   FormatCoordsUnits format;
 
-  // Subdivide the curve into smaller segments so
-  // Get value at desired points
+  // Extract the points
   for (int row = 0; row < ordinals.count(); row++) {
 
     double ordinal = ordinals.at (row);
@@ -345,6 +341,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
 
 int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &modelExport,
                                                   const Document &document,
+                                                  const Transformation &transformation,
                                                   const QStringList &curvesIncluded) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::maxColumnSizeAllocation";
@@ -369,6 +366,8 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &mod
 
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
+                                                          modelExport.pointsIntervalUnitsRelations(),
+                                                          transformation,
                                                           points);
 
       maxColumnSize = qMax (maxColumnSize,
@@ -380,79 +379,74 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &mod
 }
 
 ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsIntervalRelations,
+                                                              ExportPointsIntervalUnits pointsIntervalUnits,
+                                                              const Transformation &transformation,
                                                               const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervals";
 
-  const double NUM_SMALLER_INTERVALS = 1000;
+  if (pointsIntervalUnits == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
+    return ordinalsAtIntervalsGraph (pointsIntervalRelations,
+                                     transformation,
+                                     points);
+  } else {
+    return ordinalsAtIntervalsScreen (pointsIntervalRelations,
+                                      points);
+  }
+}
 
-  vector<double> t;
-  vector<SplinePair> xy;
-  loadSplinePairsWithoutTransformation (points,
-                                        t,
-                                        xy);
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsGraph (double pointsIntervalRelations,
+                                                                   const Transformation &transformation,
+                                                                   const Points &points) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsGraph";
 
-  // Fit a spline
-  Spline spline (t,
-                 xy);
-
-  // Integrate the distances for the subintervals
-  double integratedSeparation = 0;
-  QPointF posLast = points.first().posScreen();
-
-  // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
-  // into intervals that, as much as possible, have the desired length. Simplicity wins out over accuracy in this
-  // approach - accuracy is sacrificed to achieve simplicity
-  double tMin = t.front();
-  double tMax = t.back();
-
-  // Results. Initially empty, but at the end it will have values tMin, ..., tMax
   ExportValuesOrdinal ordinals;
-  ordinals.push_back (tMin); // First point is always inserted
 
-  double tLast = 0.0;
-  int iTLastInterval = 0;
-  for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
+  // Prevent infinite loop when there are no points or will be too many points
+  if ((pointsIntervalRelations > 0) &&
+      (points.count() > 0)) {
 
-    double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
+    vector<double> t;
+    vector<SplinePair> xy;
+    ExportOrdinalsFromSpline ordinalsFromSpline;
 
-    SplinePair pairNew = spline.interpolateCoeff(t);
+    ordinalsFromSpline.loadSplinePairsWithTransformation (points,
+                                                          transformation,
+                                                          t,
+                                                          xy);
 
-    QPointF posNew = QPointF (pairNew.x(),
-                              pairNew.y());
-
-    QPointF posDelta = posNew - posLast;
-    double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
-    integratedSeparation += integratedSeparationDelta;
-
-    while (integratedSeparation >= pointsIntervalRelations) {
-
-      // End of current interval, and start of next interval. For better accuracy without having to crank up
-      // NUM_SMALLER_INTERVALS by orders of magnitude, we use linear interpolation
-      double sInterp;
-      if (iT == 0) {
-        sInterp = 0.0;
-      } else {
-        sInterp = (double) pointsIntervalRelations / (double) integratedSeparation;
-      }
-      double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
-
-      integratedSeparation -= pointsIntervalRelations; // Part of delta that was not used gets applied to next interval
-
-      tLast = tInterp;
-      ordinals.push_back (tInterp);
-      iTLastInterval = iT;
-    }
-
-    tLast = t;
-    posLast = posNew;
+    ordinals = ordinalsFromSpline.ordinalsAtIntervalsGraph (t,
+                                                            xy,
+                                                            pointsIntervalRelations);
   }
 
-  if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
+  return ordinals;
+}
 
-    // Add last point so we end up at tMax
-    ordinals.push_back (tMax);
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsScreen (double pointsIntervalRelations,
+                                                                    const Points &points) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsScreen";
 
+  // Results
+  ExportValuesOrdinal ordinals;
+
+  // Prevent infinite loop when there are no points or will be too many points
+  if ((pointsIntervalRelations > 0) &&
+      (points.count() > 0)) {
+
+    vector<double> t;
+    vector<SplinePair> xy;
+    ExportOrdinalsFromSpline ordinalsFromSpline;
+
+    ordinalsFromSpline.loadSplinePairsWithoutTransformation (points,
+                                                             t,
+                                                             xy);
+
+    ordinals = ordinalsFromSpline.ordinalsAtIntervalsGraph (t,
+                                                            xy,
+                                                            pointsIntervalRelations);
   }
 
   return ordinals;
