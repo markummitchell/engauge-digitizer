@@ -18,6 +18,7 @@ public:
   virtual void begin(DigitizeState previousState);
   virtual QCursor cursor () const;
   virtual void end();
+  virtual void handleCurveChange();
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);

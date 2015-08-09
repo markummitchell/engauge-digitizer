@@ -44,6 +44,11 @@ void DigitizeStatePointMatch::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::end";
 }
 
+void DigitizeStatePointMatch::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleCurveChange";
+}
+
 void DigitizeStatePointMatch::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

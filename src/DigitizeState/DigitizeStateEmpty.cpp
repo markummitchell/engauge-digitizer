@@ -38,6 +38,11 @@ void DigitizeStateEmpty::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::end";
 }
 
+void DigitizeStateEmpty::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleCurveChange";
+}
+
 void DigitizeStateEmpty::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

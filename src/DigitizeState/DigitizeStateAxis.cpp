@@ -49,6 +49,11 @@ void DigitizeStateAxis::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::end";
 }
 
+void DigitizeStateAxis::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleCurveChange";
+}
+
 void DigitizeStateAxis::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

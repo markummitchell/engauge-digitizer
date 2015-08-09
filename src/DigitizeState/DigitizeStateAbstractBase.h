@@ -50,6 +50,9 @@ public:
   /// Handle a right click that was intercepted earlier. This is done in the superclass since it works the same in all states.
   void handleContextMenuEvent (const QString &pointIdentifier);
 
+  /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment will generate a new set of Segments
+  virtual void handleCurveChange () = 0;
+
   /// Handle a key press that was intercepted earlier.
   virtual void handleKeyPress (Qt::Key key) = 0;
 

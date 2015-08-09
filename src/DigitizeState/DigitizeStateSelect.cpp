@@ -58,6 +58,11 @@ void DigitizeStateSelect::end ()
   unsetCursorForPoints ();
 }
 
+void DigitizeStateSelect::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleCurveChange";
+}
+
 void DigitizeStateSelect::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

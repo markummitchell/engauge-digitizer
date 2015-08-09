@@ -208,6 +208,11 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &imag
   return false;
 }
 
+void DigitizeStateColorPicker::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleCurveChange";
+}
+
 void DigitizeStateColorPicker::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

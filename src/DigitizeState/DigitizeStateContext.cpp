@@ -103,6 +103,11 @@ void DigitizeStateContext::handleContextMenuEvent (const QString &pointIdentifie
   m_states [m_currentState]->handleContextMenuEvent (pointIdentifier);
 }
 
+void DigitizeStateContext::handleCurveChange ()
+{
+  m_states [m_currentState]->handleCurveChange();
+}
+
 void DigitizeStateContext::handleKeyPress (Qt::Key key)
 {
   m_states [m_currentState]->handleKeyPress (key);

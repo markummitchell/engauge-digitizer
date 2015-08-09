@@ -2,6 +2,9 @@
 #define DIGITIZE_STATE_SEGMENT_H
 
 #include "DigitizeStateAbstractBase.h"
+#include <QList>
+
+class Segment;
 
 /// Digitizing state for creating multiple Points along a highlighted segment.
 class DigitizeStateSegment : public DigitizeStateAbstractBase
@@ -15,6 +18,7 @@ public:
   virtual void begin(DigitizeState previousState);
   virtual QCursor cursor () const;
   virtual void end();
+  virtual void handleCurveChange();
   virtual void handleKeyPress (Qt::Key key);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
@@ -23,8 +27,9 @@ public:
 private:
   DigitizeStateSegment();
 
-  void updateSegments();
+  void clearSegments();
 
+  QList<Segment*> m_segments;
 };
 
 #endif // DIGITIZE_STATE_SEGMENT_H

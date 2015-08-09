@@ -3,6 +3,7 @@
 
 #include <QList>
 
+class ColorFilter;
 class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;

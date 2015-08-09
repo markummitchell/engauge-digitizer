@@ -41,6 +41,11 @@ void DigitizeStateScale::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::end";
 }
 
+void DigitizeStateScale::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleCurveChange";
+}
+
 void DigitizeStateScale::handleKeyPress (Qt::Key key)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();

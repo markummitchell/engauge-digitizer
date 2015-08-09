@@ -41,6 +41,9 @@ public:
   /// See DigitizeStateAbstractBase::handleContextMenuEvent.
   void handleContextMenuEvent (const QString &pointIdentifier);
 
+  /// See DigitizeStateAbstractBase::handleCurveChange.
+  void handleCurveChange ();
+
   /// See DigitizeStateAbstractBase::handleKeyPress.
   void handleKeyPress (Qt::Key key);
 

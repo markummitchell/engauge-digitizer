@@ -916,6 +916,13 @@ void MainWindow::fileImport (const QString &fileName)
              image);
 }
 
+QPixmap MainWindow::imageFiltered () const
+{
+  ENGAUGE_CHECK_PTR (m_imageFiltered);
+
+  return m_imageFiltered->pixmap ();
+}
+
 void MainWindow::loadCurveListFromCmdMediator ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadCurveListFromCmdMediator";
@@ -2639,6 +2646,9 @@ void MainWindow::updateImages (const QPixmap &pixmap)
   m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
   m_imageFiltered->setData (DATA_KEY_IDENTIFIER, "view");
   m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+
+  // Now that m_imageFiltered is updated and available, update the Segments appropriately
+  m_digitizeStateContext->handleCurveChange ();
 }
 
 void MainWindow::updateRecentFileList()

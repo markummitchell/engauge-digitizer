@@ -5,6 +5,8 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
+#include "Segment.h"
+#include "SegmentFactory.h"
 
 DigitizeStateSegment::DigitizeStateSegment (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -27,6 +29,23 @@ void DigitizeStateSegment::begin (DigitizeState /* previousState */)
   setCursor();
   context().setDragMode(QGraphicsView::NoDrag);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
+
+  handleCurveChange();
+}
+
+void DigitizeStateSegment::clearSegments ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSegment::clearSegments";
+
+  QList<Segment*>::iterator itr;
+  for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
+
+    Segment *segment = *itr;
+
+    delete segment;
+  }
+
+  m_segments.clear ();
 }
 
 QCursor DigitizeStateSegment::cursor() const
@@ -39,6 +58,23 @@ QCursor DigitizeStateSegment::cursor() const
 void DigitizeStateSegment::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::end";
+}
+
+void DigitizeStateSegment::handleCurveChange()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleCurveChange";
+
+  QPixmap pixmap = context().mainWindow().imageFiltered();
+
+  GraphicsScene &scene = context().mainWindow().scene();
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+
+  clearSegments ();
+
+  // Create new segments
+  segmentFactory.makeSegments (pixmap.toImage(),
+                               context().cmdMediator().document().modelSegments(),
+                               m_segments);
 }
 
 void DigitizeStateSegment::handleKeyPress (Qt::Key key)
@@ -59,15 +95,4 @@ void DigitizeStateSegment::handleMouseRelease (QPointF /* posScreen */)
 QString DigitizeStateSegment::state() const
 {
   return "DigitizeStateSegment";
-}
-
-void DigitizeStateSegment::updateSegments()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::updateSegments";
-
-//  SegmentFactory segmentFactory (*m_scene);
-//  QList<Segment*> segments;
-//  segmentFactory.makeSegments (m_imageFiltered->pixmap().toImage(),
-//                               m_cmdMediator->document().modelSegments(),
-//                               segments);
 }
