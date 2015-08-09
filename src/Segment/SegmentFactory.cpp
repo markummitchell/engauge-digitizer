@@ -177,7 +177,7 @@ void SegmentFactory::loadSegment (SegmentVector &columnSegment,
 
 void SegmentFactory::makeSegments (const QImage &imageFiltered,
                                    const DocumentModelSegments &modelSegments,
-                                   QList<Segment*> segments)
+                                   QList<Segment*> &segments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::makeSegments";
 
@@ -290,7 +290,7 @@ void SegmentFactory::matchRunsToSegments(int x,
                                          int *madeLines,
                                          int *foldedLines,
                                          int *shortLines,
-                                         QList<Segment*> segments)
+                                         QList<Segment*> &segments)
 {
   loadSegment(currSegment,
               height);
@@ -307,14 +307,28 @@ void SegmentFactory::matchRunsToSegments(int x,
 
     if ((y + 1 >= height) || !currBool [y + 1]) {
       if (inRun) {
-        finishRun(lastBool, nextBool, lastSegment, currSegment, x, yStart, y, height, modelSegments, madeLines);
+        finishRun(lastBool,
+                  nextBool,
+                  lastSegment,
+                  currSegment,
+                  x, yStart,
+                  y,
+                  height,
+                  modelSegments,
+                  madeLines);
       }
 
       inRun = false;
     }
   }
 
-  removeUnneededLines(lastSegment, currSegment, height, foldedLines, shortLines, modelSegments, segments);
+  removeUnneededLines(lastSegment,
+                      currSegment,
+                      height,
+                      foldedLines,
+                      shortLines,
+                      modelSegments,
+                      segments);
 }
 
 void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,
@@ -323,7 +337,7 @@ void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,
                                          int *foldedLines,
                                          int *shortLines,
                                          const DocumentModelSegments &modelSegments,
-                                         QList<Segment*> segments)
+                                         QList<Segment*> &segments)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
 

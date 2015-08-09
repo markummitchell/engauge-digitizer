@@ -30,7 +30,7 @@ public:
   /// Main entry point for creating all Segments for the filtered image.
   void makeSegments (const QImage &imageFiltered,
                      const DocumentModelSegments &modelSegments,
-                     QList<Segment*> segments);
+                     QList<Segment*> &segments);
 
 private:
   SegmentFactory();
@@ -89,7 +89,7 @@ private:
                             int *madeLines,
                             int *foldedLines,
                             int *shortLine,
-                            QList<Segment*> segments);
+                            QList<Segment*> &segments);
 
   // Remove unneeded lines belonging to segments that just finished in the previous column.
   // The results of this function are displayed in the debug spew of makeSegments
@@ -99,7 +99,7 @@ private:
                            int *foldedLines,
                            int *shortLines,
                            const DocumentModelSegments &modelSegments,
-                           QList<Segment*> segments);
+                           QList<Segment*> &segments);
 
   // Scroll the boolean flags of the right column into the left column
   void scrollBool(bool *left,
