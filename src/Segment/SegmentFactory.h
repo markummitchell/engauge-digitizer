@@ -13,6 +13,10 @@ class Segment;
 typedef std::vector<Segment*> SegmentVector;
 
 /// Factory class for Segment objects. The input is the filtered image.
+///
+/// The strategy is to fill out the segments output array as each segment finishes. This makes it easy to
+/// keep too-short Segments out of the output array, versus adding every new Segment to the output array
+/// as soon as it is created
 class SegmentFactory
 {
 public:
@@ -61,8 +65,7 @@ private:
                  int yStop,
                  int height,
                  const DocumentModelSegments &modelSegments,
-                 int* madeLines,
-                 QList<Segment*> segments);
+                 int* madeLines);
 
   // Initialize one column of boolean flags using the pixels of the specified column
   void loadBool (const ColorFilter &filter,

@@ -101,6 +101,7 @@ private:
 
   // This segment is drawn as a series of line segments
   QList<SegmentLine*> m_lines;
+
 };
 
 #endif // SEGMENT_H

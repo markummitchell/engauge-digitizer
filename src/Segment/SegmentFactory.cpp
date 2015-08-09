@@ -60,7 +60,7 @@ int SegmentFactory::adjacentSegments(SegmentVector &lastSegment,
                                      int yStop,
                                      int height)
 {
-  int segments = 0;
+  int adjacentSegments = 0;
 
   bool inSegment = false;
   for (int y = yStart - 1; y <= yStop + 1; y++) {
@@ -70,14 +70,14 @@ int SegmentFactory::adjacentSegments(SegmentVector &lastSegment,
       if (!inSegment && lastSegment [y]) {
 
        inSegment = true;
-        ++segments;
+        ++adjacentSegments;
       } else if (inSegment && !lastSegment [y]) {
         inSegment = false;
       }
     }
   }
 
-  return segments;
+  return adjacentSegments;
 }
 
 QList<QPoint> SegmentFactory::fillPoints(const DocumentModelSegments &modelSegments,
@@ -106,8 +106,7 @@ void SegmentFactory::finishRun(bool *lastBool,
                                int yStop,
                                int height,
                                const DocumentModelSegments &modelSegments,
-                               int* madeLines,
-                               QList<Segment*> segments)
+                               int* madeLines)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::finishRun"
                                << " column=" << x
@@ -136,7 +135,6 @@ void SegmentFactory::finishRun(bool *lastBool,
     seg = new Segment(m_scene, (int) (0.5 + (yStart + yStop) / 2.0));
     ENGAUGE_CHECK_PTR (seg);
 
-    segments.append(seg);
   }
   else
   {
@@ -309,7 +307,7 @@ void SegmentFactory::matchRunsToSegments(int x,
 
     if ((y + 1 >= height) || !currBool [y + 1]) {
       if (inRun) {
-        finishRun(lastBool, nextBool, lastSegment, currSegment, x, yStart, y, height, modelSegments, madeLines, segments);
+        finishRun(lastBool, nextBool, lastSegment, currSegment, x, yStart, y, height, modelSegments, madeLines);
       }
 
       inRun = false;
@@ -353,18 +351,20 @@ void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,
         ENGAUGE_CHECK_PTR(segLast);
         if (segLast->length() < (modelSegments.minLength() - 1) * modelSegments.pointSeparation()) {
 
-          // Remove whole segment since it is too short
+          // Remove whole segment since it is too short. Do NOT set segLast to zero since that
+          // would cause this same segment to be deleted again in the next pixel if the segment
+          // covers more than one pixel
           *shortLines += segLast->lineCount();
-          int index = segments.indexOf (segLast);
-          segments.removeAt (index);
+          delete segLast;
           lastSegment [yLast] = 0;
- //         delete segLast;
-          segLast = 0;
 
         } else {
 
           // Keep segment, but try to fold lines
           segLast->removeUnneededLines(foldedLines);
+
+          // Add to the output array since it is done and sufficiently long
+          segments.push_back (segLast);
 
         }
       }
