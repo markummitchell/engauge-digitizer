@@ -19,6 +19,7 @@ public:
   /// Single constructor.
   Segment(QGraphicsScene &scene,
           int yLast);
+  ~Segment();
 
   /// Add some more pixels in a new column to an active segment
   void appendColumn(int x, int y, const DocumentModelSegments &modelSegments);

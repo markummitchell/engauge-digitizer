@@ -24,8 +24,8 @@ SegmentLine::SegmentLine(QGraphicsScene  &scene,
   setZValue (100.0);
   setVisible (true);
   setAcceptHoverEvents (true);
+  setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
   setFlags (QGraphicsItem::ItemIsFocusable);
-  setHover (false);
 
   connect (this, SIGNAL (signalHover (bool)), segment, SLOT (slotHover (bool)));
 }
@@ -64,9 +64,6 @@ Segment *SegmentLine::segment() const
 
 void SegmentLine::setHover (bool hover)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::setHover"
-                              << " hover=" << (hover ? "true" : "false");
-
   if (hover) {
 
     QColor color (ColorPaletteToQColor (m_modelSegments.lineColor()));

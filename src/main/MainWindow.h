@@ -64,7 +64,7 @@ public:
   virtual bool eventFilter(QObject *, QEvent *);
 
   /// Filtered image associated with the currently selected curve
-  QPixmap imageFiltered () const;
+  QImage imageFiltered () const;
 
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);

@@ -113,6 +113,7 @@ bool ColorFilter::pixelFilteredIsOn (const QImage &image,
     const int BLACK_WHITE_THRESHOLD = 255 / 2; // Put threshold in middle of range
     int gray = qGray (pixelRGB (image, x, y));
     rtn = (gray < BLACK_WHITE_THRESHOLD);
+
   }
 
   return rtn;

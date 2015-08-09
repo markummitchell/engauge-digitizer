@@ -916,11 +916,11 @@ void MainWindow::fileImport (const QString &fileName)
              image);
 }
 
-QPixmap MainWindow::imageFiltered () const
+QImage MainWindow::imageFiltered () const
 {
   ENGAUGE_CHECK_PTR (m_imageFiltered);
 
-  return m_imageFiltered->pixmap ();
+  return m_imageFiltered->pixmap ().toImage();
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()

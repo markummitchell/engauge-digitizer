@@ -15,7 +15,21 @@ Segment::Segment(QGraphicsScene &scene,
   m_scene (scene),
   m_yLast (y)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment";
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment"
+                              << " address=0x" << hex << (unsigned long) this;
+}
+
+Segment::~Segment()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::~Segment"
+                              << " address=0x" << hex << (unsigned long) this;
+
+  QList<SegmentLine*>::iterator itr;
+  for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
+
+    SegmentLine *segmentLine = *itr;
+    m_scene.removeItem (segmentLine);
+  }
 }
 
 void Segment::appendColumn(int x,

@@ -64,7 +64,7 @@ void DigitizeStateSegment::handleCurveChange()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleCurveChange";
 
-  QPixmap pixmap = context().mainWindow().imageFiltered();
+  QImage img = context().mainWindow().imageFiltered();
 
   GraphicsScene &scene = context().mainWindow().scene();
   SegmentFactory segmentFactory ((QGraphicsScene &) scene);
@@ -72,7 +72,7 @@ void DigitizeStateSegment::handleCurveChange()
   clearSegments ();
 
   // Create new segments
-  segmentFactory.makeSegments (pixmap.toImage(),
+  segmentFactory.makeSegments (img,
                                context().cmdMediator().document().modelSegments(),
                                m_segments);
 }
