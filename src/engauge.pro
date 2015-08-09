@@ -6,6 +6,11 @@ RCC_DIR = .rcc
 
 HEADERS  += \
     include/BackgroundImage.h \
+    Background/BackgroundStateAbstractBase.h \
+    Background/BackgroundStateContext.h \
+    Background/BackgroundStateCurve.h \
+    Background/BackgroundStateNone.h \
+    Background/BackgroundStateOriginal.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxesCheckerFromAxesPoints.h \
     Callback/CallbackAxisPointsAbstract.h \
@@ -190,6 +195,11 @@ HEADERS  += \
     include/ZoomFactor.h
 
 SOURCES += \
+    Background/BackgroundStateAbstractBase.cpp \
+    Background/BackgroundStateContext.cpp \
+    Background/BackgroundStateCurve.cpp \
+    Background/BackgroundStateNone.cpp \
+    Background/BackgroundStateOriginal.cpp \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxesCheckerFromAxesPoints.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \
@@ -366,7 +376,8 @@ TARGET = ../bin/engauge
 QT += core gui network printsupport widgets xml
 
 LIBS += -llog4cpp -lfftw3
-INCLUDEPATH += Callback \
+INCLUDEPATH += Background \
+               Callback \
                Checker \
                Cmd \
                Color \

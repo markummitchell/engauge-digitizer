@@ -97,7 +97,7 @@ private:
 
   QVector<DigitizeStateAbstractBase*> m_states;
   DigitizeState m_currentState;
-  DigitizeState m_requestedState; // Same as m_currentState until requestStateTransition is called
+  DigitizeState m_requestedState; // Same as m_currentState until requestDelayedStateTransition is called
 
   CmdMediator *m_cmdMediator;
 };

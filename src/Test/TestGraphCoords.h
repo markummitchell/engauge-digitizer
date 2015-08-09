@@ -20,8 +20,10 @@ private slots:
   void cleanupTestCase ();
   void initTestCase ();
 
-  void testAnyColumnsRepeat ();
-  void testThreeCollinearPoints ();
+  void testAnyColumnsRepeatNo ();
+  void testAnyColumnsRepeatYes ();
+  void testThreeCollinearPointsNo ();
+  void testThreeCollinearPointsYes ();
 
 private:
 
