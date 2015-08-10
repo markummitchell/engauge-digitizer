@@ -8,10 +8,13 @@ class BackgroundStateNone : public BackgroundStateAbstractBase
 {
  public:
   /// Single constructor
-  BackgroundStateNone(BackgroundStateContext &context);
+  BackgroundStateNone(BackgroundStateContext &context,
+                      GraphicsScene &scene);
 
   virtual void begin();
   virtual void end();
+  virtual void setPixmap (const QPixmap &pixmap);
+  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter);
 
  private:
   BackgroundStateNone();

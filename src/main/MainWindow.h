@@ -7,6 +7,7 @@
 #include <QUrl>
 #include "Transformation.h"
 
+class BackgroundStateContext;
 class CmdMediator;
 class CmdStackShadow;
 class CurveStyles;
@@ -63,7 +64,7 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
-  /// Filtered image associated with the currently selected curve
+  /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
 
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
@@ -225,6 +226,7 @@ private:
   void createMenus();
   void createScene ();
   void createSettingsDialogs ();
+  void createStateContextBackground();
   void createStateContextDigitize();
   void createStateContextTransformation();
   void createStatusBar();
@@ -240,7 +242,6 @@ private:
   void loadToolTips ();
   bool maybeSave();
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
-  void removePixmaps();
   bool saveDocumentFile(const QString &fileName);
   QString saveErrorReportFileAndExitXml (const char *comment,
                                          const char *file,
@@ -261,7 +262,6 @@ private:
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateImages (const QPixmap &pixmap);
   void updateRecentFileList();
-  void updateViewedBackground();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
   void writeCheckpointToLogFile();
@@ -353,10 +353,6 @@ private:
   GraphicsScene *m_scene;
   GraphicsView *m_view;
 
-  QGraphicsPixmapItem *m_imageNone; // White background with boundary indicating the edge of the original image
-  QGraphicsPixmapItem *m_imageUnfiltered; // Original unfiltered image
-  QGraphicsPixmapItem *m_imageFiltered; // Image produced by Filter class
-
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -379,6 +375,9 @@ private:
 
   // State machine for transformation states
   TransformationStateContext *m_transformationStateContext;
+
+  // State machine for background image
+  BackgroundStateContext *m_backgroundStateContext;
 
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
   DlgSettingsColorFilter *m_dlgSettingsColorFilter;

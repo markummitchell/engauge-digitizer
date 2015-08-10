@@ -5,12 +5,13 @@ MOC_DIR = .moc_test
 RCC_DIR = .rcc_test
 
 HEADERS  += \
-    include/BackgroundImage.h \
+    Background/BackgroundImage.h \
     Background/BackgroundStateAbstractBase.h \
     Background/BackgroundStateContext.h \
     Background/BackgroundStateCurve.h \
     Background/BackgroundStateNone.h \
     Background/BackgroundStateOriginal.h \
+    Background/BackgroundStateUnloaded.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxesCheckerFromAxesPoints.h \
     Callback/CallbackAxisPointsAbstract.h \
@@ -195,11 +196,13 @@ HEADERS  += \
     include/ZoomFactor.h
 
 SOURCES += \
+    Background/BackgroundImage.cpp \
     Background/BackgroundStateAbstractBase.cpp \
     Background/BackgroundStateContext.cpp \
     Background/BackgroundStateCurve.cpp \
     Background/BackgroundStateNone.cpp \
     Background/BackgroundStateOriginal.cpp \
+    Background/BackgroundStateUnloaded.cpp \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxesCheckerFromAxesPoints.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \

@@ -1,4 +1,5 @@
 #include "BackgroundImage.h"
+#include "BackgroundStateContext.h"
 #include "img/bannerapp_16.xpm"
 #include "img/bannerapp_32.xpm"
 #include "img/bannerapp_64.xpm"
@@ -103,11 +104,10 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_layout (0),
   m_scene (0),
   m_view (0),
-  m_imageNone (0),
-  m_imageUnfiltered (0),
-  m_imageFiltered (0),
   m_cmdMediator (0),
-  m_transformationStateContext (0)
+  m_digitizeStateContext (0),
+  m_transformationStateContext (0),
+  m_backgroundStateContext (0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -125,6 +125,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createToolBars ();
   createScene ();
   createLoadImageFromUrl ();
+  createStateContextBackground ();
   createStateContextDigitize ();
   createStateContextTransformation ();
   createSettingsDialogs ();
@@ -775,6 +776,11 @@ void MainWindow::createScene ()
   m_layout->addWidget (m_view);
 }
 
+void MainWindow::createStateContextBackground ()
+{
+  m_backgroundStateContext = new BackgroundStateContext (*this);
+}
+
 void MainWindow::createStateContextDigitize ()
 {
   m_digitizeStateContext = new DigitizeStateContext (*this,
@@ -918,9 +924,9 @@ void MainWindow::fileImport (const QString &fileName)
 
 QImage MainWindow::imageFiltered () const
 {
-  ENGAUGE_CHECK_PTR (m_imageFiltered);
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::imageFiltered";
 
-  return m_imageFiltered->pixmap ().toImage();
+  return m_backgroundStateContext->image().pixmap().toImage();
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -954,7 +960,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_currentFile = fileName; // This enables the FileSaveAs menu option
 
     if (m_cmdMediator != 0) {
-      removePixmaps ();
       delete m_cmdMediator;
       m_cmdMediator = 0;
     }
@@ -1050,7 +1055,6 @@ void MainWindow::loadImage (const QString &fileName,
   m_engaugeFile = EMPTY_FILENAME; // Forces first Save to be treated as Save As
 
   if (m_cmdMediator != 0) {
-    removePixmaps ();
     delete m_cmdMediator;
     m_cmdMediator = 0;
   }
@@ -1149,24 +1153,6 @@ void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
   settings.setValue (SETTINGS_RECENT_FILE_LIST, recentFilePaths);
 
   updateRecentFileList();
-}
-
-void MainWindow::removePixmaps ()
-{
-  if (m_imageNone != 0) {
-    m_scene->removeItem (m_imageNone);
-    m_imageNone = 0;
-  }
-
-  if (m_imageUnfiltered != 0) {
-    m_scene->removeItem (m_imageUnfiltered);
-    m_imageUnfiltered = 0;
-  }
-
-  if (m_imageFiltered != 0) {
-    m_scene->removeItem (m_imageFiltered);
-    m_imageFiltered = 0;
-  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent * /* event */)
@@ -1442,7 +1428,7 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   m_digitizeStateContext->setImageIsLoaded (true);
 
   updateImages (pixmap);
-  updateViewedBackground ();
+  m_backgroundStateContext->setPixmapForAllStates (pixmap);
 }
 
 void MainWindow::settingsRead ()
@@ -1611,7 +1597,7 @@ void MainWindow::slotCmbBackground(int currentIndex)
       break;
   }
 
-  updateViewedBackground();
+  m_backgroundStateContext->selectBackgroundImage ((BackgroundImage) currentIndex);
 }
 
 void MainWindow::slotCmbCurve(int /* currentIndex */)
@@ -2093,19 +2079,23 @@ void MainWindow::slotViewGroupBackground(QAction *action)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupBackground";
 
   // Set the combobox
+  BackgroundImage backgroundImage;
   int indexBackground;
   if (action == m_actionViewBackgroundNone) {
     indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_NONE));
+    backgroundImage = BACKGROUND_IMAGE_NONE;
   } else if (action == m_actionViewBackgroundOriginal) {
     indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_ORIGINAL));
+    backgroundImage = BACKGROUND_IMAGE_ORIGINAL;
   } else if (action == m_actionViewBackgroundFiltered) {
     indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_FILTERED));
+    backgroundImage = BACKGROUND_IMAGE_FILTERED;
   } else {
     ENGAUGE_ASSERT (false);
   }
   m_cmbBackground->setCurrentIndex (indexBackground);
 
-  updateViewedBackground();
+  m_backgroundStateContext->selectBackgroundImage (backgroundImage);
 }
 
 void MainWindow::slotViewGroupCurves(QAction * /* action */)
@@ -2313,7 +2303,7 @@ void MainWindow::slotViewZoomFill ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomFill";
 
-  m_view->fitInView (m_imageUnfiltered);
+  m_view->fitInView (&m_backgroundStateContext->image ());
   emit signalZoom(ZOOM_FILL);
 }
 
@@ -2612,40 +2602,10 @@ void MainWindow::updateImages (const QPixmap &pixmap)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImages";
 
-  removePixmaps ();
-
-  // Empty background
-  QPixmap pixmapNone (pixmap);
-  pixmapNone.fill (Qt::white);
-  m_imageNone = m_scene->addPixmap (pixmapNone);
-  m_imageNone->setData (DATA_KEY_IDENTIFIER, "view");
-  m_imageNone->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
-
-  // Unfiltered original image
-  m_imageUnfiltered = m_scene->addPixmap (pixmap);
-  m_imageUnfiltered->setData (DATA_KEY_IDENTIFIER, "view");
-  m_imageUnfiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+  m_backgroundStateContext->setPixmapForAllStates(pixmap);
 
   // Reset scene rectangle or else small image after large image will be off-center
-  m_scene->setSceneRect (m_imageUnfiltered->boundingRect ());
-
-  // Filtered image
-  ColorFilter filter;
-  QImage imageUnfiltered (pixmap.toImage ());
-  QImage imageFiltered (pixmap.width (),
-                        pixmap.height (),
-                        QImage::Format_RGB32);
-  QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
-  filter.filterImage (imageUnfiltered,
-                      imageFiltered,
-                      cmdMediator().document().modelColorFilter().colorFilterMode(selectedGraphCurve ()),
-                      cmdMediator().document().modelColorFilter().low(selectedGraphCurve ()),
-                      cmdMediator().document().modelColorFilter().high(selectedGraphCurve ()),
-                      rgbBackground);
-
-  m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
-  m_imageFiltered->setData (DATA_KEY_IDENTIFIER, "view");
-  m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+  m_scene->setSceneRect (m_backgroundStateContext->image().boundingRect ());
 
   // Now that m_imageFiltered is updated and available, update the Segments appropriately
   m_digitizeStateContext->handleCurveChange ();
@@ -2694,7 +2654,7 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
   updateImages (cmdMediator().document().pixmap());
-  updateViewedBackground ();
+  m_backgroundStateContext->updateColorFilter (modelColorFilter);
   updateViewsOfSettings();
 }
 
@@ -2749,20 +2709,6 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 
   m_cmdMediator->document().setModelSegments(modelSegments);
-}
-
-void MainWindow::updateViewedBackground()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateViewedBackground";
-
-  if (m_cmdMediator != 0) {
-
-    BackgroundImage backgroundImage = (BackgroundImage) m_cmbBackground->currentData().toInt();
-
-    m_imageNone->setVisible (backgroundImage == BACKGROUND_IMAGE_NONE);
-    m_imageUnfiltered->setVisible (backgroundImage == BACKGROUND_IMAGE_ORIGINAL);
-    m_imageFiltered->setVisible (backgroundImage == BACKGROUND_IMAGE_FILTERED);
-  }
 }
 
 void MainWindow::updateViewedCurves ()
