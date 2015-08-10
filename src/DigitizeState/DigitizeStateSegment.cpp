@@ -58,6 +58,8 @@ QCursor DigitizeStateSegment::cursor() const
 void DigitizeStateSegment::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::end";
+
+  clearSegments();
 }
 
 void DigitizeStateSegment::handleCurveChange()
