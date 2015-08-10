@@ -1527,12 +1527,14 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
   m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
 
-  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
-  m_backgroundStateContext->setPixmap (m_cmdMediator->pixmap ());
-
   m_transformation.resetOnLoad();
   m_transformationStateContext->resetOnLoad();
   m_scene->resetOnLoad();
+
+  // Set up background before loadCurveListFromCmdMediator and slotViewZoomFill which rely on the background
+  setPixmap (m_cmdMediator->pixmap ());
+  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
+  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
 
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdStackShadow, SLOT (slotUndo ()));
@@ -1544,7 +1546,7 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
   updateViewsOfSettings ();
-  setPixmap (m_cmdMediator->pixmap ());
+
   slotViewZoomFill();
 
   setCurrentFile(fileName);

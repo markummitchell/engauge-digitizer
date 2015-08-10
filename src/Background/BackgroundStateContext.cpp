@@ -24,6 +24,7 @@ BackgroundStateContext::BackgroundStateContext(MainWindow &mainWindow) :
 
   m_currentState = NUM_BACKGROUND_STATES; // Value that forces a transition right away
   requestStateTransition (BACKGROUND_STATE_UNLOADED);
+  completeRequestedStateTransitionIfExists();
 }
 
 void BackgroundStateContext::completeRequestedStateTransitionIfExists()
@@ -50,11 +51,21 @@ void BackgroundStateContext::fitInView (GraphicsView &view)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::fitInView";
 
-  if (m_currentState != NUM_BACKGROUND_STATES) {
+  // After initialization, we should be in unloaded state or some other equally valid state
+  ENGAUGE_ASSERT (m_currentState != NUM_BACKGROUND_STATES);
 
-    view.fitInView (&m_states [m_currentState]->imageItem ());
+  const QGraphicsPixmapItem *imageItem = &m_states [BACKGROUND_STATE_CURVE]->imageItem ();
 
-  }
+  double width = imageItem->boundingRect().width();
+  double height = imageItem->boundingRect().height();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::fitInView"
+                              << " state=" << m_states [m_currentState]->state ().toLatin1().data()
+                              << " boundingRect=(" << width << "x" << height << ")";
+
+  // Get the image from a state that is guaranteed to have an image
+  view.fitInView (imageItem);
+
 }
 
 QImage BackgroundStateContext::imageForCurveState () const

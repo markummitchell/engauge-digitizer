@@ -63,6 +63,9 @@ class BackgroundStateAbstractBase
   /// Update the image for this state, after the leaf class processes it appropriately
   virtual void setPixmap (const QPixmap &pixmap) = 0;
 
+  /// State name for debugging
+  virtual QString state() const = 0;
+
  protected:
 
   /// Show/hide background image

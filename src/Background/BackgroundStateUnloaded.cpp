@@ -43,3 +43,8 @@ void BackgroundStateUnloaded::setPixmap (const QPixmap & /* pixmap */)
 
   // This state has no displayed image
 }
+
+QString BackgroundStateUnloaded::state () const
+{
+  return "BackgroundStateUnloaded";
+}

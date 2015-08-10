@@ -3,6 +3,7 @@
 #include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
+#include "Logger.h"
 
 BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext &context,
                                                          GraphicsScene &scene) :
@@ -59,6 +60,9 @@ void BackgroundStateAbstractBase::setImageVisible (bool visible)
 
 void BackgroundStateAbstractBase::setProcessedPixmap (const QPixmap &pixmap)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateAbstractBase::setProcessedPixmap"
+                              << " map=(" << pixmap.width() << "x" << pixmap.height() << ")";
+
   ENGAUGE_CHECK_PTR (m_imageItem);
 
   m_imageItem->setPixmap (pixmap);

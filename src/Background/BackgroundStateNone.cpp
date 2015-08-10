@@ -53,3 +53,8 @@ void BackgroundStateNone::setPixmap (const QPixmap &pixmapOriginal)
   setProcessedPixmap (pixmapNone);
 
 }
+
+QString BackgroundStateNone::state () const
+{
+  return "BackgroundStateNone";
+}

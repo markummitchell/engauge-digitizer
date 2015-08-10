@@ -17,6 +17,7 @@ class BackgroundStateNone : public BackgroundStateAbstractBase
   virtual void setColorFilter (const DocumentModelColorFilter &colorFilter);
   virtual void setCurveSelected (const QString &curveSelected);
   virtual void setPixmap (const QPixmap &pixmap);
+  virtual QString state () const;
 
  private:
   BackgroundStateNone();

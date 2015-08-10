@@ -38,7 +38,7 @@ void BackgroundStateCurve::processImageFromSavedInputs ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::processImageFromSavedInputs";
 
-  // Make sure the selected curve has already been set
+  // Use the settings if the selected curve is known
   if (!m_curveSelected.isEmpty()) {
 
     // Filtered image
@@ -56,6 +56,12 @@ void BackgroundStateCurve::processImageFromSavedInputs ()
                         rgbBackground);
 
     setProcessedPixmap (QPixmap::fromImage (imageFiltered));
+
+  } else {
+
+    // Set the image in case BackgroundStateContext::fitInView is called, so the bounding rect is available
+    setProcessedPixmap (m_pixmapOriginal);
+
   }
 }
 
@@ -85,4 +91,9 @@ void BackgroundStateCurve::setPixmap (const QPixmap &pixmapOriginal)
 
   m_pixmapOriginal = pixmapOriginal;
   processImageFromSavedInputs ();
+}
+
+QString BackgroundStateCurve::state () const
+{
+  return "BackgroundStateCurve";
 }

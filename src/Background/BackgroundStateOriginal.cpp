@@ -51,3 +51,8 @@ void BackgroundStateOriginal::setPixmap (const QPixmap &pixmapOriginal)
   setProcessedPixmap (pixmapOriginal);
 
 }
+
+QString BackgroundStateOriginal::state () const
+{
+  return "BackgroundStateOriginal";
+}
