@@ -8,14 +8,14 @@ BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext 
                                                          GraphicsScene &scene) :
   m_context (context),
   m_scene (scene),
-  m_image (0)
+  m_imageItem (0)
 {
   // Create an image but do not show it until the appropriate state is reached
   QPixmap dummy;
-  m_image = m_scene.addPixmap (dummy);
-  m_image->setVisible (false);
-  m_image->setData (DATA_KEY_IDENTIFIER, "view");
-  m_image->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
+  m_imageItem = m_scene.addPixmap (dummy);
+  m_imageItem->setVisible (false);
+  m_imageItem->setData (DATA_KEY_IDENTIFIER, "view");
+  m_imageItem->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
 }
 
 BackgroundStateAbstractBase::~BackgroundStateAbstractBase()
@@ -32,9 +32,14 @@ const BackgroundStateContext &BackgroundStateAbstractBase::context() const
   return m_context;
 }
 
-QGraphicsPixmapItem &BackgroundStateAbstractBase::image ()
+QImage BackgroundStateAbstractBase::image () const
 {
-  return *m_image;
+  return m_image;
+}
+
+QGraphicsPixmapItem &BackgroundStateAbstractBase::imageItem () const
+{
+  return *m_imageItem;
 }
 
 GraphicsScene &BackgroundStateAbstractBase::scene()
@@ -49,12 +54,17 @@ const GraphicsScene &BackgroundStateAbstractBase::scene() const
 
 void BackgroundStateAbstractBase::setImageVisible (bool visible)
 {
-  m_image->setVisible (visible);
+  m_imageItem->setVisible (visible);
 }
 
 void BackgroundStateAbstractBase::setProcessedPixmap (const QPixmap &pixmap)
 {
-  ENGAUGE_CHECK_PTR (m_image);
+  ENGAUGE_CHECK_PTR (m_imageItem);
 
-  m_image->setPixmap (pixmap);
+  m_imageItem->setPixmap (pixmap);
+
+  // Reset scene rectangle or else small image after large image will be off-center
+  m_scene.setSceneRect (m_imageItem->boundingRect ());
+
+  m_image = pixmap.toImage();
 }

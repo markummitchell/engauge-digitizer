@@ -2,6 +2,7 @@
 #include "BackgroundStateCurve.h"
 #include "ColorFilter.h"
 #include "GraphicsScene.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include <QPixmap>
 
@@ -24,6 +25,13 @@ void BackgroundStateCurve::end()
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::end";
 
   setImageVisible (false);
+}
+
+void BackgroundStateCurve::fitInView (GraphicsView &view)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::fitInView";
+
+  view.fitInView (imageItem ().boundingRect());
 }
 
 void BackgroundStateCurve::processImageFromSavedInputs ()
@@ -57,7 +65,6 @@ void BackgroundStateCurve::setColorFilter (const DocumentModelColorFilter &model
 
   m_modelColorFilter = modelColorFilter;
   processImageFromSavedInputs ();
-
 }
 
 void BackgroundStateCurve::setCurveSelected (const QString &curveSelected)

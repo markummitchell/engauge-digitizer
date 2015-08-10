@@ -1,6 +1,7 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateOriginal.h"
 #include "GraphicsScene.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include <QPixmap>
 
@@ -23,6 +24,13 @@ void BackgroundStateOriginal::end()
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::end";
 
   setImageVisible (false);
+}
+
+void BackgroundStateOriginal::fitInView (GraphicsView &view)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::fitInView";
+
+  view.fitInView (imageItem ().boundingRect());
 }
 
 void BackgroundStateOriginal::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)

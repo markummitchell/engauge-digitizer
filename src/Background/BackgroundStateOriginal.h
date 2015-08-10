@@ -13,6 +13,7 @@ class BackgroundStateOriginal : public BackgroundStateAbstractBase
 
   virtual void begin();
   virtual void end();
+  virtual void fitInView (GraphicsView &view);
   virtual void setColorFilter (const DocumentModelColorFilter &colorFilter);
   virtual void setCurveSelected (const QString &curveSelected);
   virtual void setPixmap (const QPixmap &pixmap);

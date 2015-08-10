@@ -6,6 +6,7 @@
 #include <QVector>
 
 class DocumentModelColorFilter;
+class GraphicsView;
 class MainWindow;
 class QGraphicsPixmapItem;
 
@@ -26,8 +27,11 @@ class BackgroundStateContext
   /// Single constructor
   BackgroundStateContext(MainWindow &mainWindow);
 
-  /// Image for the current state
-  QGraphicsPixmapItem &image ();
+  /// Zoom so background fills the window
+  void fitInView (GraphicsView &view);
+
+  /// Image for the Curve state, even if the current state is different
+  QImage imageForCurveState () const;
 
   /// Initiate state transition to be performed later, when BackgroundState is off the stack
   void requestStateTransition (BackgroundState backgroundState);

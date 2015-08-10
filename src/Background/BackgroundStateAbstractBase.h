@@ -16,6 +16,7 @@ enum BackgroundState {
 class BackgroundStateContext;
 class DocumentModelColorFilter;
 class GraphicsScene;
+class GraphicsView;
 
 /// Background image state machine state base class
 class BackgroundStateAbstractBase
@@ -38,8 +39,14 @@ class BackgroundStateAbstractBase
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end() = 0;
 
+  /// Zoom so background fills the window
+  virtual void fitInView (GraphicsView &view) = 0;
+
   /// Image for the current state
-  QGraphicsPixmapItem &image ();
+  QImage image () const;
+
+  /// Graphics image item for the current state
+  QGraphicsPixmapItem &imageItem () const;
 
   /// Reference to the GraphicsScene, without const.
   GraphicsScene &scene();
@@ -72,7 +79,9 @@ class BackgroundStateAbstractBase
 
   // Each state has its own image, although only one is shown at a time. This is null if an image has not been defined yet,
   // so we can eliminate a dependency on the ordering of the state transitions and the update of the image by setPixmap
-  QGraphicsPixmapItem *m_image;
+  QGraphicsPixmapItem *m_imageItem;
+
+  QImage m_image; // Original image. This is stored in addition to m_imageItem since m_imageItem cannot be used when invisible
 };
 
 #endif // BACKGROUND_STATE_ABSTRACT_BASE_H

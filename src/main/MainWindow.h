@@ -260,7 +260,6 @@ private:
                        const QString &temporaryMessage);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
-  void updateImages (const QPixmap &pixmap);
   void updateRecentFileList();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext

@@ -926,7 +926,7 @@ QImage MainWindow::imageFiltered () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::imageFiltered";
 
-  return m_backgroundStateContext->image().pixmap().toImage();
+  return m_backgroundStateContext->imageForCurveState();
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -1429,8 +1429,6 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
   m_digitizeStateContext->setImageIsLoaded (true);
-
-  updateImages (pixmap);
   m_backgroundStateContext->setPixmap (pixmap);
 }
 
@@ -1610,7 +1608,9 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  updateImages(m_cmdMediator->document().pixmap()); // Curve change likely involves a change in the filtered image
+  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
+  m_digitizeStateContext->handleCurveChange ();
+
   updateViewedCurves();
   updateViewsOfSettings();
 }
@@ -2309,7 +2309,8 @@ void MainWindow::slotViewZoomFill ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomFill";
 
-  m_view->fitInView (&m_backgroundStateContext->image ());
+  m_backgroundStateContext->fitInView (*m_view);
+
   emit signalZoom(ZOOM_FILL);
 }
 
@@ -2604,19 +2605,6 @@ void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()
                                                     m_transformation);
 }
 
-void MainWindow::updateImages (const QPixmap &pixmap)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImages";
-
-  m_backgroundStateContext->setPixmap(pixmap);
-
-  // Reset scene rectangle or else small image after large image will be off-center
-  m_scene->setSceneRect (m_backgroundStateContext->image().boundingRect ());
-
-  // Now that m_imageFiltered is updated and available, update the Segments appropriately
-  m_digitizeStateContext->handleCurveChange ();
-}
-
 void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
@@ -2659,8 +2647,8 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
-  updateImages (cmdMediator().document().pixmap());
   m_backgroundStateContext->setColorFilter (modelColorFilter);
+  m_digitizeStateContext->handleCurveChange ();
   updateViewsOfSettings();
 }
 

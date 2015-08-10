@@ -1,6 +1,7 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateUnloaded.h"
 #include "GraphicsScene.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include <QPixmap>
 
@@ -19,6 +20,11 @@ void BackgroundStateUnloaded::begin()
 void BackgroundStateUnloaded::end()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::end";
+}
+
+void BackgroundStateUnloaded::fitInView (GraphicsView & /* view */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::fitInView";
 }
 
 void BackgroundStateUnloaded::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)

@@ -5,6 +5,7 @@
 #include "BackgroundStateUnloaded.h"
 #include "DocumentModelColorFilter.h"
 #include "EngaugeAssert.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGraphicsPixmapItem>
@@ -45,9 +46,20 @@ void BackgroundStateContext::completeRequestedStateTransitionIfExists()
   }
 }
 
-QGraphicsPixmapItem &BackgroundStateContext::image ()
+void BackgroundStateContext::fitInView (GraphicsView &view)
 {
-  return m_states [m_currentState]->image();
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::fitInView";
+
+  if (m_currentState != NUM_BACKGROUND_STATES) {
+
+    view.fitInView (&m_states [m_currentState]->imageItem ());
+
+  }
+}
+
+QImage BackgroundStateContext::imageForCurveState () const
+{
+  return m_states [BACKGROUND_STATE_CURVE]->image();
 }
 
 void BackgroundStateContext::requestStateTransition (BackgroundState backgroundState)
