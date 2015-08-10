@@ -47,20 +47,32 @@ class BackgroundStateAbstractBase
   /// Reference to the GraphicsScene, without const.
   const GraphicsScene &scene() const;
 
-  ///  Update the image for this state
+  /// Apply color filter settings
+  virtual void setColorFilter (const DocumentModelColorFilter &colorFilter) = 0;
+
+  /// Update the currently selected curve name
+  virtual void setCurveSelected (const QString &curveSelected) = 0;
+
+  /// Update the image for this state, after the leaf class processes it appropriately
   virtual void setPixmap (const QPixmap &pixmap) = 0;
 
-  /// Apply color filter settings
-  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter) = 0;
+ protected:
 
-private:
+  /// Show/hide background image
+  void setImageVisible (bool visible);
+
+  /// Save the image for this state after it has been processed by the leaf class
+  void setProcessedPixmap (const QPixmap &pixmap);
+
+ private:
   BackgroundStateAbstractBase();
 
   BackgroundStateContext &m_context;
   GraphicsScene &m_scene;
 
-  // Each state has its own image, although only one is shown at a time
-  QGraphicsPixmapItem m_image;
+  // Each state has its own image, although only one is shown at a time. This is null if an image has not been defined yet,
+  // so we can eliminate a dependency on the ordering of the state transitions and the update of the image by setPixmap
+  QGraphicsPixmapItem *m_image;
 };
 
 #endif // BACKGROUND_STATE_ABSTRACT_BASE_H

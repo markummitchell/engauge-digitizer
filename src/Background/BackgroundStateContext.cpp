@@ -86,19 +86,33 @@ void BackgroundStateContext::selectBackgroundImage (BackgroundImage backgroundIm
   completeRequestedStateTransitionIfExists ();
 }
 
-void BackgroundStateContext::setPixmapForAllStates (const QPixmap &pixmap)
+void BackgroundStateContext::setColorFilter (const DocumentModelColorFilter &modelColorFilter)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmapForAllStates";
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setColorFilter";
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setPixmap (pixmap);
+    m_states [backgroundState]->setColorFilter (modelColorFilter);
   }
 }
 
-void BackgroundStateContext::updateColorFilter (const DocumentModelColorFilter &colorFilter)
+void BackgroundStateContext::setCurveSelected (const QString &curveSelected)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::updateColorFilter";
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setCurveSelected"
+                              << " curve=" << curveSelected.toLatin1().data();
 
-  m_states [m_currentState]->updateColorFilter (colorFilter);
+  for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
+
+    m_states [backgroundState]->setCurveSelected (curveSelected);
+  }
+}
+
+void BackgroundStateContext::setPixmap (const QPixmap &pixmapOriginal)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap";
+
+  for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
+
+    m_states [backgroundState]->setPixmap (pixmapOriginal);
+  }
 }

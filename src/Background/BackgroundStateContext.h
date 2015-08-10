@@ -13,7 +13,13 @@ class QGraphicsPixmapItem;
 /// Overall strategy is that changing the currently selected curve should not affect the background
 /// image if the original image is being shown, or no image is being shown. However, if the
 /// curve-specific color filter image is being shown, then it should be replaced by the filtered
-/// image specific to the new curve
+/// image specific to the new curve.
+///
+/// Other considerations are that the processing should be robust in terms of ordering of the
+/// following incoming events:
+/// -# State transitions
+/// -# Setting of the background image
+/// -# Setting of the currently selected curve name
 class BackgroundStateContext
 {
  public:
@@ -29,11 +35,15 @@ class BackgroundStateContext
   /// Transition to the specified state. This method is used by classes outside of the state machine to trigger transitions
   void selectBackgroundImage (BackgroundImage backgroundImage);
 
-  ///  Update the images of all states, rather than just the current state
-  void setPixmapForAllStates (const QPixmap &pixmap);
+  /// Update color filter settings
+  void setColorFilter (const DocumentModelColorFilter &modelColorFilter);
 
-  /// Apply color filter settings
-  void updateColorFilter (const DocumentModelColorFilter &colorFilter);
+  /// Update the selected curve. Although this probably affects only the BACKGROUND_STATE_CURVE state, we will forward it
+  /// to all states (consistent with setPixmap)
+  void setCurveSelected (const QString &curveSelected);
+
+  /// Update the images of all states, rather than just the current state
+  void setPixmap (const QPixmap &pixmapOriginal);
 
  private:
   BackgroundStateContext();

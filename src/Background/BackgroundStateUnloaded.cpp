@@ -21,12 +21,19 @@ void BackgroundStateUnloaded::end()
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::end";
 }
 
-void BackgroundStateUnloaded::setPixmap (const QPixmap &pixmap)
+void BackgroundStateUnloaded::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setPixmap";
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setColorFilter";
 }
 
-void BackgroundStateUnloaded::updateColorFilter (const DocumentModelColorFilter & /* colorFilter */)
+void BackgroundStateUnloaded::setCurveSelected (const QString & /* curveSelected */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::updateColorFilter";
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setCurveSelected";
+}
+
+void BackgroundStateUnloaded::setPixmap (const QPixmap & /* pixmap */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setPixmap";
+
+  // This state has no displayed image
 }

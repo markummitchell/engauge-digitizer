@@ -14,19 +14,32 @@ BackgroundStateOriginal::BackgroundStateOriginal(BackgroundStateContext &context
 void BackgroundStateOriginal::begin()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::begin";
+
+  setImageVisible (true);
 }
 
 void BackgroundStateOriginal::end()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::end";
+
+  setImageVisible (false);
 }
 
-void BackgroundStateOriginal::setPixmap (const QPixmap &pixmap)
+void BackgroundStateOriginal::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setColorFilter";
+}
+
+void BackgroundStateOriginal::setCurveSelected (const QString & /* curveSelected */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setCurveSelected";
+}
+
+void BackgroundStateOriginal::setPixmap (const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setPixmap";
-}
 
-void BackgroundStateOriginal::updateColorFilter (const DocumentModelColorFilter & /* colorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::updateColorFilter";
+  // Unfiltered original image
+  setProcessedPixmap (pixmapOriginal);
+
 }

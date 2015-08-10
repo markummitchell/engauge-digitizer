@@ -941,7 +941,10 @@ void MainWindow::loadCurveListFromCmdMediator ()
     QString curvesGraphName = *itr;
     m_cmbCurve->addItem (curvesGraphName);
   }
+
+  // Arbitrarily pick the first curve
   m_cmbCurve->setCurrentIndex (0);
+  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
 }
 
 void MainWindow::loadDocumentFile (const QString &fileName)
@@ -1428,7 +1431,7 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   m_digitizeStateContext->setImageIsLoaded (true);
 
   updateImages (pixmap);
-  m_backgroundStateContext->setPixmapForAllStates (pixmap);
+  m_backgroundStateContext->setPixmap (pixmap);
 }
 
 void MainWindow::settingsRead ()
@@ -1525,6 +1528,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
   m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
+
+  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
+  m_backgroundStateContext->setPixmap (m_cmdMediator->pixmap ());
 
   m_transformation.resetOnLoad();
   m_transformationStateContext->resetOnLoad();
@@ -2602,7 +2608,7 @@ void MainWindow::updateImages (const QPixmap &pixmap)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateImages";
 
-  m_backgroundStateContext->setPixmapForAllStates(pixmap);
+  m_backgroundStateContext->setPixmap(pixmap);
 
   // Reset scene rectangle or else small image after large image will be off-center
   m_scene->setSceneRect (m_backgroundStateContext->image().boundingRect ());
@@ -2654,7 +2660,7 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
   updateImages (cmdMediator().document().pixmap());
-  m_backgroundStateContext->updateColorFilter (modelColorFilter);
+  m_backgroundStateContext->setColorFilter (modelColorFilter);
   updateViewsOfSettings();
 }
 

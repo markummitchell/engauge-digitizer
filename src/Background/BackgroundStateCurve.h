@@ -2,6 +2,7 @@
 #define BACKGROUND_STATE_CURVE_H
 
 #include "BackgroundStateAbstractBase.h"
+#include "DocumentModelColorFilter.h"
 
 /// Background image state for showing filter image from current curve
 class BackgroundStateCurve : public BackgroundStateAbstractBase
@@ -13,12 +14,19 @@ class BackgroundStateCurve : public BackgroundStateAbstractBase
 
   virtual void begin();
   virtual void end();
-  virtual void setPixmap (const QPixmap &pixmap);
-  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter);
+  virtual void setColorFilter (const DocumentModelColorFilter &colorFilter);
+  virtual void setCurveSelected (const QString &curveSelected);
+  virtual void setPixmap (const QPixmap &pixmapOriginal);
 
  private:
   BackgroundStateCurve();
 
+  void processImageFromSavedInputs();
+
+  // Data saved for use by processImageFromSavedInputs
+  QString m_curveSelected;
+  QPixmap m_pixmapOriginal;
+  DocumentModelColorFilter m_modelColorFilter;
 };
 
 #endif // BACKGROUND_STATE_CURVE_H

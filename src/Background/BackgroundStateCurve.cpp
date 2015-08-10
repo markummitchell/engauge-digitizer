@@ -1,5 +1,6 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateCurve.h"
+#include "ColorFilter.h"
 #include "GraphicsScene.h"
 #include "Logger.h"
 #include <QPixmap>
@@ -14,50 +15,67 @@ BackgroundStateCurve::BackgroundStateCurve(BackgroundStateContext &context,
 void BackgroundStateCurve::begin()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::begin";
+
+  setImageVisible (true);
 }
 
 void BackgroundStateCurve::end()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::end";
+
+  setImageVisible (false);
 }
 
-void BackgroundStateCurve::setPixmap (const QPixmap &pixmap)
+void BackgroundStateCurve::processImageFromSavedInputs ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::processImageFromSavedInputs";
+
+  // Make sure the selected curve has already been set
+  if (!m_curveSelected.isEmpty()) {
+
+    // Filtered image
+    ColorFilter filter;
+    QImage imageUnfiltered (m_pixmapOriginal.toImage ());
+    QImage imageFiltered (m_pixmapOriginal.width (),
+                          m_pixmapOriginal.height (),
+                          QImage::Format_RGB32);
+    QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
+    filter.filterImage (imageUnfiltered,
+                        imageFiltered,
+                        m_modelColorFilter.colorFilterMode(m_curveSelected),
+                        m_modelColorFilter.low(m_curveSelected),
+                        m_modelColorFilter.high(m_curveSelected),
+                        rgbBackground);
+
+    setProcessedPixmap (QPixmap::fromImage (imageFiltered));
+  }
+}
+
+void BackgroundStateCurve::setColorFilter (const DocumentModelColorFilter &modelColorFilter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setColorFilter";
+
+  m_modelColorFilter = modelColorFilter;
+  processImageFromSavedInputs ();
+
+}
+
+void BackgroundStateCurve::setCurveSelected (const QString &curveSelected)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setCurveSelected"
+                              << " curve=" << curveSelected.toLatin1().data();
+
+  if (m_curveSelected != curveSelected) {
+
+    m_curveSelected = curveSelected;
+    processImageFromSavedInputs ();
+  }
+}
+
+void BackgroundStateCurve::setPixmap (const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setPixmap";
 
-
-  // Empty background
-  QPixmap pixmapNone (pixmap);
-  pixmapNone.fill (Qt::white);
-//  m_imageNone = m_scene->addPixmap (pixmapNone);
-//  m_imageNone->setData (DATA_KEY_IDENTIFIER, "view");
-//  m_imageNone->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
-
-  // Unfiltered original image
-//  m_imageUnfiltered = m_scene->addPixmap (pixmap);
-//  m_imageUnfiltered->setData (DATA_KEY_IDENTIFIER, "view");
-//  m_imageUnfiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
-
-  // Filtered image
-//  ColorFilter filter;
-//  QImage imageUnfiltered (pixmap.toImage ());
-//  QImage imageFiltered (pixmap.width (),
-//                        pixmap.height (),
-//                        QImage::Format_RGB32);
-//  QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
-//  filter.filterImage (imageUnfiltered,
-//                      imageFiltered,
-//                      cmdMediator().document().modelColorFilter().colorFilterMode(selectedGraphCurve ()),
-//                      cmdMediator().document().modelColorFilter().low(selectedGraphCurve ()),
-//                      cmdMediator().document().modelColorFilter().high(selectedGraphCurve ()),
-//                      rgbBackground);
-//
-//  m_imageFiltered = m_scene->addPixmap (QPixmap::fromImage (imageFiltered));
-//  m_imageFiltered->setData (DATA_KEY_IDENTIFIER, "view");
-//  m_imageFiltered->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
-}
-
-void BackgroundStateCurve::updateColorFilter (const DocumentModelColorFilter & /* colorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::updateColorFilter";
+  m_pixmapOriginal = pixmapOriginal;
+  processImageFromSavedInputs ();
 }
