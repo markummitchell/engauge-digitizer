@@ -80,9 +80,9 @@ void BackgroundStateContext::requestStateTransition (BackgroundState backgroundS
   m_requestedState = backgroundState;
 }
 
-void BackgroundStateContext::selectBackgroundImage (BackgroundImage backgroundImage)
+void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::selectBackgroundImage"
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setBackgroundImage"
                               << " background=" << backgroundImageToString (backgroundImage).toLatin1().data();
 
   BackgroundState backgroundState;
@@ -123,6 +123,8 @@ void BackgroundStateContext::setCurveSelected (const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setCurveSelected"
                               << " curve=" << curveSelected.toLatin1().data();
+
+  ENGAUGE_ASSERT (!curveSelected.isEmpty ());
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 

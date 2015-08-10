@@ -37,7 +37,7 @@ class BackgroundStateContext
   void requestStateTransition (BackgroundState backgroundState);
 
   /// Transition to the specified state. This method is used by classes outside of the state machine to trigger transitions
-  void selectBackgroundImage (BackgroundImage backgroundImage);
+  void setBackgroundImage (BackgroundImage backgroundImage);
 
   /// Update color filter settings
   void setColorFilter (const DocumentModelColorFilter &modelColorFilter);

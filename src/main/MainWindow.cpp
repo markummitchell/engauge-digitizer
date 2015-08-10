@@ -944,7 +944,6 @@ void MainWindow::loadCurveListFromCmdMediator ()
 
   // Arbitrarily pick the first curve
   m_cmbCurve->setCurrentIndex (0);
-  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
 }
 
 void MainWindow::loadDocumentFile (const QString &fileName)
@@ -1531,11 +1530,6 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   m_transformationStateContext->resetOnLoad();
   m_scene->resetOnLoad();
 
-  // Set up background before loadCurveListFromCmdMediator and slotViewZoomFill which rely on the background
-  setPixmap (m_cmdMediator->pixmap ());
-  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
-  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
-
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdMediator, SLOT (undo ()));
   connect (m_actionEditUndo, SIGNAL (triggered ()), m_cmdStackShadow, SLOT (slotUndo ()));
   connect (m_actionEditRedo, SIGNAL (triggered ()), m_cmdMediator, SLOT (redo ())); // No effect until CmdMediator::undo and CmdStackShadow::slotUndo get called
@@ -1546,6 +1540,12 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
   updateViewsOfSettings ();
+
+  // Set up background before slotViewZoomFill which relies on the background
+  setPixmap (m_cmdMediator->pixmap ());
+  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
+  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
+  m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
   slotViewZoomFill();
 
@@ -1603,7 +1603,7 @@ void MainWindow::slotCmbBackground(int currentIndex)
       break;
   }
 
-  m_backgroundStateContext->selectBackgroundImage ((BackgroundImage) currentIndex);
+  m_backgroundStateContext->setBackgroundImage ((BackgroundImage) currentIndex);
 }
 
 void MainWindow::slotCmbCurve(int /* currentIndex */)
@@ -2103,7 +2103,7 @@ void MainWindow::slotViewGroupBackground(QAction *action)
   }
   m_cmbBackground->setCurrentIndex (indexBackground);
 
-  m_backgroundStateContext->selectBackgroundImage (backgroundImage);
+  m_backgroundStateContext->setBackgroundImage (backgroundImage);
 }
 
 void MainWindow::slotViewGroupCurves(QAction * /* action */)
