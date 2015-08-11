@@ -403,3 +403,18 @@ void SegmentFactory::scrollSegment(SegmentVector &left,
     left [y] = right [y];
   }
 }
+
+void SegmentFactory::clearSegments (QList<Segment*> &segments)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::clearSegments";
+
+  QList<Segment*>::iterator itr;
+  for (itr = segments.begin(); itr != segments.end(); itr++) {
+
+    Segment *segment = *itr;
+
+    delete segment;
+  }
+
+  segments.clear ();
+}

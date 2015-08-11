@@ -6,7 +6,7 @@
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
-const double DEFAULT_POINT_SEPARATION = 5;
+const double DEFAULT_POINT_SEPARATION = 20;
 const double DEFAULT_MIN_LENGTH = 5;
 const double DEFAULT_LINE_WIDTH = 4;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_GREEN);

@@ -210,13 +210,16 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
 {
   QList<QPoint> list;
 
-  if (m_lines.count() > 0)
-  {
-    double xLast = (double) m_lines.first()->line().x1();
-    double yLast = (double) m_lines.first()->line().y1();
-    double x, y;
+  if (m_lines.count() > 0) {
+
+    double xLast = m_lines.first()->line().x1();
+    double yLast = m_lines.first()->line().y1();
+    double x, xNext;
+    double y, yNext;
+    double distanceCompleted = 0.0;
 
     // Variables for createAcceptablePoint
+    bool firstPoint = true;
     double xPrev = m_lines.first()->line().x1();
     double yPrev = m_lines.first()->line().y1();
 
@@ -224,42 +227,61 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
     for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
 
       SegmentLine *line = *itr;
-      bool firstPointOfLineSegment = true;
 
       ENGAUGE_CHECK_PTR(line);
-      double xNext = (double) line->line().x2();
-      double yNext = (double) line->line().y2();
+      xNext = (double) line->line().x2();
+      yNext = (double) line->line().y2();
 
-      // distance formula
+      double xStart = (double) line->line().x1();
+      double yStart = (double) line->line().y1();
+      if (isCorner (yPrev, yStart, yNext)) {
+
+        // Insert a corner point
+        createAcceptablePoint(&firstPoint, &list, &xPrev, &yPrev, xStart, yStart);
+        distanceCompleted = 0.0;
+      }
+
+      // Distance formula
       double segmentLength = sqrt((xNext - xLast) * (xNext - xLast) + (yNext - yLast) * (yNext - yLast));
+      if (segmentLength > 0.0) {
 
-      // loop since we might need to insert multiple points within a single line. this
-      // is the case when removeUnneededLines has consolidated many segment lines
-      double distanceLeft = segmentLength;
-      double s = 0.0;
-      do
-      {
-        // coordinates of new point
-        x = (1.0 - s) * xLast + s * xNext;
-        y = (1.0 - s) * yLast + s * yNext;
+        // Loop since we might need to insert multiple points within a single line. This
+        // is the case when removeUnneededLines has consolidated many segment lines
+        while (distanceCompleted <= segmentLength) {
 
-        createAcceptablePoint(&firstPointOfLineSegment, &list, &xPrev, &yPrev, x, y);
+          double s = distanceCompleted / segmentLength;
 
-        distanceLeft -= modelSegments.pointSeparation();
+          // Coordinates of new point
+          x = (1.0 - s) * xLast + s * xNext;
+          y = (1.0 - s) * yLast + s * yNext;
 
-        s += modelSegments.pointSeparation() / segmentLength;
-      } while (distanceLeft >= modelSegments.pointSeparation());
+          createAcceptablePoint(&firstPoint, &list, &xPrev, &yPrev, x, y);
+
+          distanceCompleted += modelSegments.pointSeparation();
+        }
+
+        distanceCompleted -= segmentLength;
+      }
 
       xLast = xNext;
       yLast = yNext;
     }
-
-    // create one more point at end of last segment, if a point was not already created there
-    bool firstPointOfLineSegment = true;
-    createAcceptablePoint(&firstPointOfLineSegment, &list, &xPrev, &yPrev, xLast, yLast);
   }
 
   return list;
+}
+
+bool Segment::isCorner (double yLast,
+                        double yPrev,
+                        double yNext) const
+{
+  // Rather than deal with slopes, and a risk of dividing by zero, we just use the y deltas
+    double deltaYBefore = yPrev - yLast;
+    double deltaYAfter = yNext - yPrev;
+    bool upThenAcrossOrDown = (deltaYBefore > 0) && (deltaYAfter <= 0);
+    bool downThenAcrossOrUp = (deltaYBefore < 0) && (deltaYAfter >= 0);
+
+    return upThenAcrossOrDown || downThenAcrossOrUp;
 }
 
 QList<QPoint> Segment::fillPointsWithoutFillingCorners(const DocumentModelSegments &modelSegments)

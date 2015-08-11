@@ -27,8 +27,6 @@ public:
 private:
   DigitizeStateSegment();
 
-  void clearSegments();
-
   QList<Segment*> m_segments;
 };
 

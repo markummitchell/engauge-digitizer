@@ -16,6 +16,7 @@
 #include "QtToString.h"
 
 const double ZERO_WIDTH = 0.0;
+const double Z_VALUE = 100.0; // Put on top of Segments in DlgSettingsSegments
 
 GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QString &identifier,
@@ -104,6 +105,7 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
                                                            2 * radius + 1));
   m_scene.addItem (m_graphicsItemEllipse);
 
+  m_graphicsItemEllipse->setZValue (Z_VALUE);
   m_graphicsItemEllipse->setData (DATA_KEY_IDENTIFIER, m_identifier);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
   m_graphicsItemEllipse->setPos (m_posScreen.x (),
@@ -138,6 +140,7 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
                                                     polygon);
   m_scene.addItem (m_graphicsItemPolygon);
 
+  m_graphicsItemPolygon->setZValue (Z_VALUE);
   m_graphicsItemPolygon->setData (DATA_KEY_IDENTIFIER, m_identifier);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
   m_graphicsItemPolygon->setPos (m_posScreen.x (),

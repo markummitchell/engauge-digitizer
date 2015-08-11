@@ -77,11 +77,18 @@ private:
                       const SegmentLine *lineOld,
                       const SegmentLine *lineNew) const;
 
-  // Create evenly spaced points along the segment, with extrap points to fill in corners
+  // Create evenly spaced points along the segment, with extra points to fill in corners.This algorithm is the
+  // same as fillPointsWithoutFillingCorners except extra points are inserted at the corners
   QList<QPoint> fillPointsFillingCorners(const DocumentModelSegments &modelSegments);
 
   // Create evenly spaced points along the segment, without extra points in corners
   QList<QPoint> fillPointsWithoutFillingCorners(const DocumentModelSegments &modelSegments);
+
+  // A corner is defined as a point where the incoming slope is positive and the outgoing slope is zero
+  // or negative, or incoming slope is negative and the outgoing slope is zero or positive
+  bool isCorner (double yLast,
+                 double yPrev,
+                 double yNext) const;
 
   // Return true if point are a half pixel or less away from a line
   bool pointIsCloseToLine(double xLeft, double yLeft, double xInt, double yInt,

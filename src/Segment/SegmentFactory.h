@@ -2,6 +2,7 @@
 #define SEGMENT_FACTORY_H
 
 #include <QList>
+#include <QPointF>
 #include <vector>
 
 class ColorFilter;
@@ -22,6 +23,9 @@ class SegmentFactory
 public:
   /// Single constructor.
   SegmentFactory(QGraphicsScene &scene);
+
+  /// Remove the segments created by makeSegments
+  void clearSegments(QList<Segment*> &segments);
 
   /// Return segment fill points for all segments, for previewing
   QList<QPoint> fillPoints(const DocumentModelSegments &modelSegments,

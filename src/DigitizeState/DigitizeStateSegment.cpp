@@ -33,21 +33,6 @@ void DigitizeStateSegment::begin (DigitizeState /* previousState */)
   handleCurveChange();
 }
 
-void DigitizeStateSegment::clearSegments ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSegment::clearSegments";
-
-  QList<Segment*>::iterator itr;
-  for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
-
-    Segment *segment = *itr;
-
-    delete segment;
-  }
-
-  m_segments.clear ();
-}
-
 QCursor DigitizeStateSegment::cursor() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSegment::cursor";
@@ -59,7 +44,10 @@ void DigitizeStateSegment::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::end";
 
-  clearSegments();
+  GraphicsScene &scene = context().mainWindow().scene();
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+
+  segmentFactory.clearSegments(m_segments);
 }
 
 void DigitizeStateSegment::handleCurveChange()
@@ -71,7 +59,7 @@ void DigitizeStateSegment::handleCurveChange()
   GraphicsScene &scene = context().mainWindow().scene();
   SegmentFactory segmentFactory ((QGraphicsScene &) scene);
 
-  clearSegments ();
+  segmentFactory.clearSegments (m_segments);
 
   // Create new segments
   segmentFactory.makeSegments (img,

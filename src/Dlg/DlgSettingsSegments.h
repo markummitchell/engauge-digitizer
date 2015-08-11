@@ -2,6 +2,9 @@
 #define DLG_SETTINGS_SEGMENTS_H
 
 #include "DlgSettingsAbstractBase.h"
+#include "GraphicsPoint.h"
+#include <QImage>
+#include <QList>
 
 class DocumentModelSegments;
 class QCheckBox;
@@ -11,7 +14,10 @@ class QGraphicsScene;
 class QIntValidator;
 class QLineEdit;
 class QSpinBox;
+class Segment;
 class ViewPreview;
+
+typedef QList<GraphicsPoint*> GraphicsPoints;
 
 /// Stacked widget page for editing Segments settings, for DigitizeStateSegment.
 class DlgSettingsSegments : public DlgSettingsAbstractBase
@@ -38,9 +44,10 @@ protected:
 
 private:
 
+  void clearPoints();
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  void createPreviewImage ();
+  QImage createPreviewImage () const;
   void updateControls();
   void updatePreview();
 
@@ -57,6 +64,11 @@ private:
 
   DocumentModelSegments *m_modelSegmentsBefore;
   DocumentModelSegments *m_modelSegmentsAfter;
+
+  QList<Segment*> m_segments; // Segments extracted from image
+  GraphicsPoints m_points; // Points spread along the segments
+
+  bool m_loading; // Flag that prevents multiple preview updates during loading while controls get loaded
 };
 
 #endif // DLG_SETTINGS_SEGMENTS_H

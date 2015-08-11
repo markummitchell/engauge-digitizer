@@ -4,6 +4,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "PointStyle.h"
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDoubleValidator>
@@ -14,6 +15,8 @@
 #include <QLineEdit>
 #include <qmath.h>
 #include <QSpinBox>
+#include "Segment.h"
+#include "SegmentFactory.h"
 #include "ViewPreview.h"
 
 const int MIN_LENGTH_MIN = 1;
@@ -35,7 +38,8 @@ DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelSegmentsBefore (0),
-  m_modelSegmentsAfter (0)
+  m_modelSegmentsAfter (0),
+  m_loading (false)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::DlgSettingsSegments";
 
@@ -46,6 +50,19 @@ DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
 DlgSettingsSegments::~DlgSettingsSegments()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::~DlgSettingsSegments";
+}
+
+void DlgSettingsSegments::clearPoints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::clearPoints";
+
+  QList<GraphicsPoint*>::iterator itrP;
+  for (itrP = m_points.begin(); itrP != m_points.end(); itrP++) {
+    GraphicsPoint *point = *itrP;
+    delete point;
+  }
+
+  m_points.clear();
 }
 
 void DlgSettingsSegments::createControls (QGridLayout *layout,
@@ -129,7 +146,7 @@ void DlgSettingsSegments::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
-void DlgSettingsSegments::createPreviewImage ()
+QImage DlgSettingsSegments::createPreviewImage () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createPreviewImage";
 
@@ -183,8 +200,7 @@ void DlgSettingsSegments::createPreviewImage ()
     yLast = y;
   }
 
-  QPixmap pixmap = QPixmap::fromImage (image);
-  m_scenePreview->addPixmap (pixmap);
+  return image;
 }
 
 QWidget *DlgSettingsSegments::createSubPanel ()
@@ -203,7 +219,8 @@ QWidget *DlgSettingsSegments::createSubPanel ()
   int row = 0;
   createControls(layout, row);
   createPreview (layout, row);
-  createPreviewImage ();
+  QPixmap pixmap = QPixmap::fromImage (createPreviewImage());
+  m_scenePreview->addPixmap (pixmap);
 
   return subPanel;
 }
@@ -224,6 +241,9 @@ void DlgSettingsSegments::handleOk ()
 void DlgSettingsSegments::load (CmdMediator &cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::load";
+
+  // Loading starts here
+  m_loading = true;
 
   setCmdMediator (cmdMediator);
 
@@ -254,6 +274,9 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
   ENGAUGE_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex(indexLineColor);
+
+  // Loading finishes here
+  m_loading = false;
 
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -317,5 +340,50 @@ void DlgSettingsSegments::updateControls()
 
 void DlgSettingsSegments::updatePreview()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::updatePreview"
+                              << " loading=" << (m_loading ? "true" : "false");
 
+  const QString ARBITRARY_IDENTIFIER ("");
+  const QColor COLOR (Qt::blue);
+  const int RADIUS = 5;
+
+  if (!m_loading) {
+
+    SegmentFactory segmentFactory (*m_scenePreview);
+
+    clearPoints();
+    segmentFactory.clearSegments (m_segments);
+
+    // Create new segments
+    segmentFactory.makeSegments (createPreviewImage(),
+                                 *m_modelSegmentsAfter,
+                                 m_segments);
+
+    // Make the segment visible
+    QList<Segment*>::iterator itrS;
+    for (itrS = m_segments.begin(); itrS != m_segments.end(); itrS++) {
+      Segment *segment = *itrS;
+      segment->slotHover (true);
+    }
+
+    // Create some points
+    PointStyle pointStyle (POINT_SHAPE_CROSS,
+                           RADIUS,
+                           BRUSH_WIDTH,
+                           COLOR_PALETTE_BLUE);
+    QPolygonF polygon = pointStyle.polygon();
+    QList<QPoint> points = segmentFactory.fillPoints (*m_modelSegmentsAfter,
+                                                      m_segments);
+    QList<QPoint>::iterator itrP;
+    for (itrP = points.begin(); itrP != points.end(); itrP++) {
+      QPoint pos = *itrP;
+      GraphicsPoint *graphicsPoint = new GraphicsPoint (*m_scenePreview,
+                                                        ARBITRARY_IDENTIFIER,
+                                                        pos,
+                                                        COLOR,
+                                                        polygon,
+                                                        BRUSH_WIDTH);
+      m_points.push_back (graphicsPoint);
+    }
+  }
 }
