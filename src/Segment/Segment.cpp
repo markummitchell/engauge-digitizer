@@ -271,17 +271,32 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
   return list;
 }
 
+QPointF Segment::firstPoint () const
+{
+  // There has to be at least one SegmentLine since this only gets called when a SegmentLine is clicked on
+  ENGAUGE_ASSERT (m_lines.count () > 0);
+
+  return m_lines.first()->pos();
+}
+
+void Segment::forwardMousePress()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::forwardMousePress";
+
+  emit signalMouseClickOnSegment (firstPoint ());
+}
+
 bool Segment::isCorner (double yLast,
                         double yPrev,
                         double yNext) const
 {
   // Rather than deal with slopes, and a risk of dividing by zero, we just use the y deltas
-    double deltaYBefore = yPrev - yLast;
-    double deltaYAfter = yNext - yPrev;
-    bool upThenAcrossOrDown = (deltaYBefore > 0) && (deltaYAfter <= 0);
-    bool downThenAcrossOrUp = (deltaYBefore < 0) && (deltaYAfter >= 0);
+  double deltaYBefore = yPrev - yLast;
+  double deltaYAfter = yNext - yPrev;
+  bool upThenAcrossOrDown = (deltaYBefore > 0) && (deltaYAfter <= 0);
+  bool downThenAcrossOrUp = (deltaYBefore < 0) && (deltaYAfter >= 0);
 
-    return upThenAcrossOrDown || downThenAcrossOrUp;
+  return upThenAcrossOrDown || downThenAcrossOrUp;
 }
 
 QList<QPoint> Segment::fillPointsWithoutFillingCorners(const DocumentModelSegments &modelSegments)
@@ -481,9 +496,4 @@ void Segment::slotHover (bool hover)
     SegmentLine *line = *itr;
     line->setHover(hover);
   }
-}
-
-void Segment::slotMouse ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::slotMouse";
 }

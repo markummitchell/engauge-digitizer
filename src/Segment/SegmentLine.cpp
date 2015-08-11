@@ -56,7 +56,7 @@ void SegmentLine::mousePressEvent(QGraphicsSceneMouseEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::mousePressEvent";
 
-  emit (signalMouse ());
+  m_segment->forwardMousePress();
 }
 
 Segment *SegmentLine::segment() const

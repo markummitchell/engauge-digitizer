@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QPointF>
 
 class DocumentModelSegments;
 class QGraphicsScene;
@@ -27,6 +28,12 @@ public:
   /// Create evenly spaced points along the segment
   QList<QPoint> fillPoints(const DocumentModelSegments &modelSegments);
 
+  /// Coordinates of first point in Segment. This info can be used to uniquely identify a Segment
+  QPointF firstPoint () const;
+
+  /// Forward mouse press event from a component SegmentLine that was just clicked on
+  void forwardMousePress ();
+
   /// Get method for length in pixels
   double length() const;
 
@@ -43,11 +50,14 @@ public:
   void setDocumentModelSegments (const DocumentModelSegments &modelSegments);
 
 public slots:
+
   /// Slot for hover enter/leave events in the associated SegmentLines
   void slotHover (bool hover);
 
-  /// Slot for mouse press events in the associated SegmentLines
-  void slotMouse ();
+signals:
+
+  /// Pass mouse press event, with coordinates of first point in the Segment since that info uniquely identifies the owning Segment
+  void signalMouseClickOnSegment (QPointF posSegmentStart);
 
 private:
   Segment();

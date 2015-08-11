@@ -38,9 +38,6 @@ signals:
   /// Pass hover enter/leave events to Segment that owns this
   void signalHover (bool);
 
-  /// Pass mouse press events to Segment that owns this
-  void signalMouse ();
-
 private:
   SegmentLine();
 

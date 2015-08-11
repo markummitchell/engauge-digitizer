@@ -3,12 +3,15 @@
 
 #include "DigitizeStateAbstractBase.h"
 #include <QList>
+#include <QObject>
 
 class Segment;
 
 /// Digitizing state for creating multiple Points along a highlighted segment.
-class DigitizeStateSegment : public DigitizeStateAbstractBase
+class DigitizeStateSegment : public QObject, public DigitizeStateAbstractBase
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor.
   DigitizeStateSegment(DigitizeStateContext &context);
@@ -24,8 +27,15 @@ public:
   virtual void handleMouseRelease (QPointF posScreen);
   virtual QString state() const;
 
+public slots:
+  /// Receive signal from Segment that has been clicked on
+  void slotMouseClickOnSegment(QPointF);
+
 private:
   DigitizeStateSegment();
+
+  // Identify which Segment owns the SegmentLine that was clicked on
+  Segment *segmentFromSegmentStart (const QPointF &posSegmentStart) const;
 
   QList<Segment*> m_segments;
 };

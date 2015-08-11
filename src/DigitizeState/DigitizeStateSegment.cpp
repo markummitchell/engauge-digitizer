@@ -1,7 +1,10 @@
+#include "CmdAddPointsGraph.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateSegment.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "OrdinalGenerator.h"
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -65,6 +68,13 @@ void DigitizeStateSegment::handleCurveChange()
   segmentFactory.makeSegments (img,
                                context().cmdMediator().document().modelSegments(),
                                m_segments);
+
+  // Connect signals of the new segments
+  QList<Segment*>::iterator itr;
+  for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
+    Segment *segment = *itr;
+    connect (segment, SIGNAL (signalMouseClickOnSegment (QPointF)), this, SLOT (slotMouseClickOnSegment (QPointF)));
+  }
 }
 
 void DigitizeStateSegment::handleKeyPress (Qt::Key key)
@@ -80,6 +90,66 @@ void DigitizeStateSegment::handleMousePress (QPointF /* posScreen */)
 void DigitizeStateSegment::handleMouseRelease (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleMouseRelease";
+}
+
+Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmentStart) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart";
+
+  QList<Segment*>::const_iterator itr;
+  for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
+    Segment *segment = *itr;
+
+    if (segment->firstPoint() == posSegmentStart) {
+
+      return segment;
+    }
+  }
+
+  LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart";
+  ENGAUGE_ASSERT (false);
+  return 0;
+}
+
+void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::slotMouseClickOnSegment";
+
+  Segment *segment = segmentFromSegmentStart (posSegmentStart);
+
+  // Create single-entry list that is expected by SegmentFactory
+  QList<Segment*> segments;
+  segments.push_back (segment);
+
+  // Generate point coordinates. Nothing is created in the GraphicsScene at this point
+  GraphicsScene &scene = context().mainWindow().scene();
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+
+  QList<QPoint> points = segmentFactory.fillPoints (context().cmdMediator().document().modelSegments(),
+                                                    segments);
+
+  // Create one ordinal for each point
+  OrdinalGenerator ordinalGenerator;
+  Document &document = context ().cmdMediator ().document ();
+  const Transformation &transformation = context ().mainWindow ().transformation();
+  QList<double> ordinals;
+  QList<QPoint>::iterator itr;
+  for (itr = points.begin(); itr != points.end(); itr++) {
+
+    QPoint point = *itr;
+    ordinals << ordinalGenerator.generateCurvePointOrdinal(document,
+                                                           transformation,
+                                                           point,
+                                                           activeCurve ());
+  }
+
+  // Create command to add points
+  QUndoCommand *cmd = new CmdAddPointsGraph (context ().mainWindow(),
+                                             document,
+                                             context ().mainWindow().selectedGraphCurve(),
+                                             points,
+                                             ordinals);
+  context().appendNewCmd(cmd);
 }
 
 QString DigitizeStateSegment::state() const
