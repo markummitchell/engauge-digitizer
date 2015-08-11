@@ -13,7 +13,7 @@ double FormatCoordsUnitsNonPolarTheta::formattedToUnformatted (const QString &st
                                                                CoordUnitsDate coordUnitsDate,
                                                                CoordUnitsTime coordUnitsTime) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::formattedToUnformatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::formattedToUnformatted";
 
   double value;
 
@@ -57,7 +57,7 @@ QString FormatCoordsUnitsNonPolarTheta::unformattedToFormatted (double valueUnfo
                                                                 bool isXTheta,
                                                                 int precisionDigitsForRawNumber) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::unformattedToFormatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::unformattedToFormatted";
 
   const char FORMAT ('g');
 

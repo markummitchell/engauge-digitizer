@@ -10,7 +10,7 @@ FormatCoordsUnitsPolarTheta::FormatCoordsUnitsPolarTheta ()
 double FormatCoordsUnitsPolarTheta::formattedToUnformatted (const QString &string,
                                                             CoordUnitsPolarTheta coordUnits) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::formattedToUnformatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::formattedToUnformatted";
 
   double value;
 
@@ -45,7 +45,7 @@ QString FormatCoordsUnitsPolarTheta::unformattedToFormatted (double valueUnforma
                                                              CoordUnitsPolarTheta coordUnits,
                                                              int precisionDigitsForRawNumber) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormatted";
 
   const char FORMAT ('g');
   const bool IS_X_THETA = true;

@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QTextStream>
+#include "QtToString.h"
 #include "Segment.h"
 #include "SegmentLine.h"
 
@@ -276,7 +277,13 @@ QPointF Segment::firstPoint () const
   // There has to be at least one SegmentLine since this only gets called when a SegmentLine is clicked on
   ENGAUGE_ASSERT (m_lines.count () > 0);
 
-  return m_lines.first()->pos();
+  SegmentLine *line = m_lines.first();
+  QPointF pos = line->line().p1();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::firstPoint"
+                              << " pos=" << QPointFToString (pos).toLatin1().data();
+
+  return pos;
 }
 
 void Segment::forwardMousePress()
