@@ -83,7 +83,7 @@ const QString DIGITIZE_ACTION_AXIS_POINT (QObject::tr ("Axis Point Tool"));
 const QString DIGITIZE_ACTION_COLOR_PICKER (QObject::tr ("Color Picker Tool"));
 const QString DIGITIZE_ACTION_CURVE_POINT (QObject::tr ("Curve Point Tool"));
 const QString DIGITIZE_ACTION_POINT_MATCH (QObject::tr ("Point Match Tool"));
-const QString DIGITIZE_ACTION_SEGMENT_POINTS (QObject::tr ("Segment Points Tool"));
+const QString DIGITIZE_ACTION_SEGMENT_POINTS (QObject::tr ("Segment Fill Tool"));
 const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
 
 const QString EMPTY_FILENAME ("");
@@ -233,19 +233,19 @@ void MainWindow::createActionsDigitize ()
   m_actionDigitizeColorPicker = new QAction (iconColorPicker, DIGITIZE_ACTION_COLOR_PICKER, this);
   m_actionDigitizeColorPicker->setShortcut (QKeySequence (tr ("Shift+F6")));
   m_actionDigitizeColorPicker->setCheckable (true);
-  m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Points mode."));
-  m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Points filtering\n\n"
+  m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Fill mode."));
+  m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Fill filtering\n\n"
                                                  "Select a pixel along the currently selected curve. That pixel and its neighbors will "
                                                  "define the filter settings (color, brightness, and so on) of the currently selected curve "
-                                                 "while in Segment Points mode."));
+                                                 "while in Segment Fill mode."));
   connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
   m_actionDigitizeSegment = new QAction (iconSegment, DIGITIZE_ACTION_SEGMENT_POINTS, this);
   m_actionDigitizeSegment->setShortcut (QKeySequence (tr ("Shift+F7")));
   m_actionDigitizeSegment->setCheckable (true);
-  m_actionDigitizeSegment->setStatusTip (tr ("Digitize points along a segment of a curve."));
-  m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Segment Fill\n\n"
-                                             "Digitizes a curve or segment by placing points along the "
+  m_actionDigitizeSegment->setStatusTip (tr ("Digitize curve points along a segment of a curve."));
+  m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Curve Points With Segment Fill\n\n"
+                                             "Digitizes curve points by placing new points along the highlighted "
                                              "segment under the cursor. Use this mode to quickly digitize multiple points along a "
                                              "curve with a single click.\n\n"
                                              "New points will be assigned to the currently selected curve."));
@@ -860,9 +860,9 @@ void MainWindow::createToolBars ()
   m_viewSegmentFilter = new ViewSegmentFilter();
   m_viewSegmentFilter->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
   m_viewSegmentFilter->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Points mode"));
-  m_viewSegmentFilter->setWhatsThis (tr ("Segment Points Filter\n\n"
-                                         "View of filter for the current curve in Segment Points mode. The filter settings are only "
+  m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Fill mode"));
+  m_viewSegmentFilter->setWhatsThis (tr ("Segment Fill Filter\n\n"
+                                         "View of filter for the current curve in Segment Fill mode. The filter settings are only "
                                          "displayed in this toolbar. To changed the filter settings, "
                                          "use the Color Picker mode or the Filter Settings dialog."));
 
@@ -1100,7 +1100,7 @@ void MainWindow::loadToolTips()
     m_cmbBackground->setToolTip (tr ("Background image."));
     m_cmbCurve->setToolTip (tr ("Currently selected curve."));
     m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve."));
-    m_viewSegmentFilter->setToolTip (tr ("Segment Points filter for currently selected curve."));
+    m_viewSegmentFilter->setToolTip (tr ("Segment Fill filter for currently selected curve."));
 
   } else {
 
