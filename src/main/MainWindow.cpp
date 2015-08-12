@@ -460,7 +460,7 @@ void MainWindow::createActionsView ()
                                                "most important settings."));
   connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
 
-  m_actionViewToolTips = new QAction (tr ("View Tool Tips"), this);
+  m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
   m_actionViewToolTips->setCheckable (true);
   m_actionViewToolTips->setChecked (true);
   m_actionViewToolTips->setStatusTip (tr ("Show or hide the tool tips."));

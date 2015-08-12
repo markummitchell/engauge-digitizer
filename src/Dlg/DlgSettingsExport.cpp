@@ -523,7 +523,7 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   ExportPointsIntervalUnits pointsIntervalUnitsRelations = m_modelExportAfter->pointsIntervalUnitsRelations();
   int indexFunctions = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsFunctions));
   int indexRelations = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsRelations));
-  m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
+  m_cmbFunctionsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
   m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);
 
   initializeIntervalConstraints ();
