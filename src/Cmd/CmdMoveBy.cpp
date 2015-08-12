@@ -119,6 +119,8 @@ void CmdMoveBy::moveBy (const QPointF &deltaScreen)
     }
   }
 
+  document().updatePointOrdinals (mainWindow().transformation());
+
   // Update the lines attached to the points
   mainWindow().updateGraphicsLinesToMatchGraphicsPoints();
 }

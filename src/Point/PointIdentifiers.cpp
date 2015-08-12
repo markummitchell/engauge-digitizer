@@ -12,8 +12,8 @@ PointIdentifiers::PointIdentifiers()
 
 bool PointIdentifiers::contains(const QString &pointIdentifier) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "PointIdentifiers::contains"
-                              << " pointCount=" << m_pointIdentifiers.count();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "PointIdentifiers::contains"
+                               << " pointCount=" << m_pointIdentifiers.count();
 
   return m_pointIdentifiers.contains (pointIdentifier);
 }
