@@ -144,6 +144,12 @@ void GraphicsLinesForCurves::resetOnLoad()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::resetOnLoad";
 
+  GraphicsLinesContainer::iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin(); itr != m_graphicsLinesForCurve.end(); itr++) {
+    GraphicsLinesForCurve *curve = itr.value();
+    delete curve;
+  }
+
   m_graphicsLinesForCurve.clear();
 }
 

@@ -20,6 +20,7 @@ class GraphicsLinesForCurve : public QGraphicsPathItem
 public:
   /// Single constructor
   GraphicsLinesForCurve(const QString &curveName);
+  ~GraphicsLinesForCurve();
 
   /// Add new line.
   ///

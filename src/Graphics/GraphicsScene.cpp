@@ -141,9 +141,17 @@ void GraphicsScene::removePoint (const QString &identifier)
 
 void GraphicsScene::resetOnLoad()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::resetOnLoad";
+  // LOG4CPP_INFO_S is below
+
+  int itemsBefore = items().count();
 
   m_graphicsLinesForCurves.resetOnLoad();
+
+  int itemsAfter = items().count();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::resetOnLoad"
+                              << " itemsBefore=" << itemsBefore
+                              << " itemsAfter=" << itemsAfter;
 }
 
 void GraphicsScene::resetPositionHasChangedFlags()

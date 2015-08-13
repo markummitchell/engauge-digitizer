@@ -30,6 +30,17 @@ GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
            QVariant (m_curveName));
 }
 
+GraphicsLinesForCurve::~GraphicsLinesForCurve()
+{
+  OrdinalToGraphicsPoint::iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+    GraphicsPoint *point = itr.value();
+    delete point;
+  }
+
+  m_graphicsPoints.clear();
+}
+
 void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
                                       double ordinal,
                                       GraphicsPoint &graphicsPoint)
