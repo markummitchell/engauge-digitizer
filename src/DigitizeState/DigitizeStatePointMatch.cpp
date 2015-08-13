@@ -36,7 +36,7 @@ QCursor DigitizeStatePointMatch::cursor() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::cursor";
 
-  return QCursor (Qt::CrossCursor);
+  return QCursor (Qt::ArrowCursor);
 }
 
 void DigitizeStatePointMatch::end ()
@@ -63,19 +63,19 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseRelease";
 
-  // Create command to add point
-  OrdinalGenerator ordinalGenerator;
-  Document &document = context ().cmdMediator ().document ();
-  const Transformation &transformation = context ().mainWindow ().transformation();
-  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
-                                            document,
-                                            context ().mainWindow().selectedGraphCurve(),
-                                            posScreen,
-                                            ordinalGenerator.generateCurvePointOrdinal(document,
-                                                                                       transformation,
-                                                                                       posScreen,
-                                                                                       activeCurve ()));
-  context().appendNewCmd(cmd);
+//  // Create command to add point
+//  OrdinalGenerator ordinalGenerator;
+//  Document &document = context ().cmdMediator ().document ();
+//  const Transformation &transformation = context ().mainWindow ().transformation();
+//  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
+//                                            document,
+//                                            context ().mainWindow().selectedGraphCurve(),
+//                                            posScreen,
+//                                            ordinalGenerator.generateCurvePointOrdinal(document,
+//                                                                                       transformation,
+//                                                                                       posScreen,
+//                                                                                       activeCurve ()));
+//  context().appendNewCmd(cmd);
 }
 
 QString DigitizeStatePointMatch::state() const
