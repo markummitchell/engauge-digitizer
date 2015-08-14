@@ -51,6 +51,11 @@ void DigitizeStateScale::handleKeyPress (Qt::Key key)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
+void DigitizeStateScale::handleMouseMove (QPointF /* posScreen */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove";
+}
+
 void DigitizeStateScale::handleMousePress (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";

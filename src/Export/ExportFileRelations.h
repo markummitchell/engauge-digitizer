@@ -73,13 +73,19 @@ private:
                                const QStringList &curvesIncluded) const;
   ExportValuesOrdinal ordinalsAtIntervals (double pointsIntervalRelations,
                                            ExportPointsIntervalUnits pointsIntervalUnits,
+                                           CurveConnectAs curveConnectAs,
                                            const Transformation &transformation,
                                            const Points &points) const;
-  ExportValuesOrdinal ordinalsAtIntervalsGraph (double pointsIntervalRelations,
-                                                const Transformation &transformation,
-                                                const Points &points) const;
-  ExportValuesOrdinal ordinalsAtIntervalsScreen (double pointsIntervalRelations,
-                                                 const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
+                                                      const Transformation &transformation,
+                                                      const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsSmoothScreen (double pointsIntervalRelations,
+                                                       const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsStraightGraph (double pointsIntervalRelations,
+                                                        const Transformation &transformation,
+                                                        const Points &points) const;
+  ExportValuesOrdinal ordinalsAtIntervalsStraightScreen (double pointsIntervalRelations,
+                                                         const Points &points) const;
 
   /// Output 2D array with alternating x/theta and y/radius columns
   void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,

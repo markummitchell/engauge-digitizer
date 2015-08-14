@@ -128,7 +128,8 @@ HEADERS  += \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
     Export/ExportHeader.h \
-    Export/ExportOrdinalsFromSpline.h \
+    Export/ExportOrdinalsSmooth.h \
+    Export/ExportOrdinalsStraight.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
     Export/ExportValuesOrdinal.h \
@@ -312,7 +313,8 @@ SOURCES += \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
     Export/ExportLayoutFunctions.cpp \
-    Export/ExportOrdinalsFromSpline.cpp \
+    Export/ExportOrdinalsSmooth.cpp \
+    Export/ExportOrdinalsStraight.cpp \
     Export/ExportPointsIntervalUnits.cpp \
     Export/ExportPointsSelectionFunctions.cpp \
     Export/ExportPointsSelectionRelations.cpp \

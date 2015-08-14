@@ -4,7 +4,7 @@
 #include "EngaugeAssert.h"
 #include "ExportFileFunctions.h"
 #include "ExportLayoutFunctions.h"
-#include "ExportOrdinalsFromSpline.h"
+#include "ExportOrdinalsSmooth.h"
 #include "ExportXThetaValuesMergedFunctions.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
@@ -281,12 +281,12 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
 
   vector<double> t;
   vector<SplinePair> xy;
-  ExportOrdinalsFromSpline ordinalsFromSpline;
+  ExportOrdinalsSmooth ordinalsSmooth;
 
-  ordinalsFromSpline.loadSplinePairsWithTransformation (points,
-                                                        transformation,
-                                                        t,
-                                                        xy);
+  ordinalsSmooth.loadSplinePairsWithTransformation (points,
+                                                    transformation,
+                                                    t,
+                                                    xy);
 
   // Fit a spline
   Spline spline (t,

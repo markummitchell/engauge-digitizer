@@ -218,6 +218,11 @@ void DigitizeStateColorPicker::handleKeyPress (Qt::Key key)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
+void DigitizeStateColorPicker::handleMouseMove (QPointF /* posScreen */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseMove";
+}
+
 void DigitizeStateColorPicker::handleMousePress (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMousePress";

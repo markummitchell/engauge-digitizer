@@ -1949,6 +1949,8 @@ void MainWindow::slotMouseMove (QPointF pos)
 
     // There used to be a call to updateGraphicsLinesToMatchGraphicsPoints here, but that resulted
     // in hundreds of gratuitous log messages as the cursor was moved around, and nothing important happened
+
+    m_digitizeStateContext->handleMouseMove (pos);
   }
 }
 

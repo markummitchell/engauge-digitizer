@@ -3,6 +3,8 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class QGraphicsEllipseItem;
+
 /// Digitizing state for matching Curve Points, one at a time.
 class DigitizeStatePointMatch : public DigitizeStateAbstractBase
 {
@@ -17,12 +19,15 @@ public:
   virtual void end();
   virtual void handleCurveChange();
   virtual void handleKeyPress (Qt::Key key);
+  virtual void handleMouseMove (QPointF posScreen);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
   virtual QString state() const;
 
 private:
   DigitizeStatePointMatch();
+
+  QGraphicsEllipseItem *m_outline;
 };
 
 #endif // DIGITIZE_STATE_POINT_MATCH_H

@@ -124,6 +124,14 @@ void DigitizeStateContext::handleLeave ()
 
 }
 
+void DigitizeStateContext::handleMouseMove (QPointF pos)
+{
+  m_states [m_currentState]->handleMouseMove (pos);
+
+  completeRequestedStateTransitionIfExists();
+
+}
+
 void DigitizeStateContext::handleMousePress (QPointF pos)
 {
   m_states [m_currentState]->handleMousePress (pos);

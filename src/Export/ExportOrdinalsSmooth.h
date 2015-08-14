@@ -1,5 +1,5 @@
-#ifndef EXPORT_ORDINALS_FROM_SPLINE_H
-#define EXPORT_ORDINALS_FROM_SPLINE_H
+#ifndef EXPORT_ORDINALS_SMOOTH_H
+#define EXPORT_ORDINALS_SMOOTH_H
 
 #include "ExportValuesOrdinal.h"
 #include "Point.h"
@@ -11,12 +11,12 @@ typedef QList<Point> Points;
 
 class Transformation;
 
-/// Utility class to interpolate points spaced evenly along a piecewise defined curve
-class ExportOrdinalsFromSpline 
+/// Utility class to interpolate points spaced evenly along a piecewise defined curve with fitted spline
+class ExportOrdinalsSmooth 
 {
  public:
   /// Single constructor
-  ExportOrdinalsFromSpline ();
+  ExportOrdinalsSmooth ();
 
   /// Load t (=ordinal) and xy (=screen position) spline pairs, without any conversion to graph coordinates
   void loadSplinePairsWithoutTransformation (const Points &points,
@@ -35,4 +35,4 @@ class ExportOrdinalsFromSpline
                                                 double pointsInterval) const;
 };
 
-#endif // EXPORT_ORDINALS_FROM_SPLINE_H
+#endif // EXPORT_ORDINALS_SMOOTH_H

@@ -59,6 +59,9 @@ public:
   /// Handle leave in case an override cursor is in effect from last QDialog, by resetting the override cursor.
   virtual void handleLeave ();
 
+  /// Handle a mouse move. This is part of an experiment to see if augmenting the cursor in Point Match mode is worthwhile
+  virtual void handleMouseMove (QPointF posScreen) = 0;
+
   /// Handle a mouse press that was intercepted earlier.
   virtual void handleMousePress (QPointF pos) = 0;
 

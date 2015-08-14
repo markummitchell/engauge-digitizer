@@ -3,7 +3,8 @@
 #include "EngaugeAssert.h"
 #include "ExportFileRelations.h"
 #include "ExportLayoutFunctions.h"
-#include "ExportOrdinalsFromSpline.h"
+#include "ExportOrdinalsSmooth.h"
+#include "ExportOrdinalsStraight.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include <qdebug.h>
@@ -169,7 +170,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
       break;
     }
 
-    ordinalBefore = ordinal;
+    ordinalBefore = point.ordinal();
     posGraphBefore = posGraph;
   }
 
@@ -214,9 +215,12 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &mo
                                           transformation);
     } else {
 
+      const LineStyle &lineStyle = document.modelCurveStyles().lineStyle(curveName);
+
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExportOverride.pointsIntervalRelations(),
                                                           modelExportOverride.pointsIntervalUnitsRelations(),
+                                                          lineStyle.curveConnectAs(),
                                                           transformation,
                                                           points);
 
@@ -253,12 +257,12 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 
   vector<double> t;
   vector<SplinePair> xy;
-  ExportOrdinalsFromSpline ordinalsFromSpline;
+  ExportOrdinalsSmooth ordinalsSmooth;
 
-  ordinalsFromSpline.loadSplinePairsWithTransformation (points,
-                                                        transformation,
-                                                        t,
-                                                        xy);
+  ordinalsSmooth.loadSplinePairsWithTransformation (points,
+                                                    transformation,
+                                                    t,
+                                                    xy);
 
   // Fit a spline
   Spline spline (t,
@@ -364,9 +368,12 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &mod
 
     } else {
 
+      const LineStyle &lineStyle = document.modelCurveStyles().lineStyle(curveName);
+
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
                                                           modelExport.pointsIntervalUnitsRelations(),
+                                                          lineStyle.curveConnectAs(),
                                                           transformation,
                                                           points);
 
@@ -380,26 +387,47 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &mod
 
 ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsIntervalRelations,
                                                               ExportPointsIntervalUnits pointsIntervalUnits,
+                                                              CurveConnectAs curveConnectAs,
                                                               const Transformation &transformation,
                                                               const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervals";
 
   if (pointsIntervalUnits == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
-    return ordinalsAtIntervalsGraph (pointsIntervalRelations,
-                                     transformation,
-                                     points);
+    if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH) {
+
+      return ordinalsAtIntervalsSmoothGraph (pointsIntervalRelations,
+                                             transformation,
+                                             points);
+
+    } else {
+
+      return ordinalsAtIntervalsStraightGraph (pointsIntervalRelations,
+                                               transformation,
+                                               points);
+
+    }
   } else {
-    return ordinalsAtIntervalsScreen (pointsIntervalRelations,
-                                      points);
+
+    if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH) {
+
+      return ordinalsAtIntervalsSmoothScreen (pointsIntervalRelations,
+                                              points);
+
+    } else {
+
+      return ordinalsAtIntervalsStraightScreen (pointsIntervalRelations,
+                                                points);
+
+    }
   }
 }
 
-ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsGraph (double pointsIntervalRelations,
-                                                                   const Transformation &transformation,
-                                                                   const Points &points) const
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
+                                                                         const Transformation &transformation,
+                                                                         const Points &points) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsGraph";
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsSmoothGraph";
 
   ExportValuesOrdinal ordinals;
 
@@ -409,25 +437,26 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsGraph (double points
 
     vector<double> t;
     vector<SplinePair> xy;
-    ExportOrdinalsFromSpline ordinalsFromSpline;
+    ExportOrdinalsSmooth ordinalsSmooth;
 
-    ordinalsFromSpline.loadSplinePairsWithTransformation (points,
-                                                          transformation,
-                                                          t,
-                                                          xy);
+    ordinalsSmooth.loadSplinePairsWithTransformation (points,
+                                                      transformation,
+                                                      t,
+                                                      xy);
 
-    ordinals = ordinalsFromSpline.ordinalsAtIntervalsGraph (t,
-                                                            xy,
-                                                            pointsIntervalRelations);
+    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (t,
+                                                        xy,
+                                                        pointsIntervalRelations);
   }
 
   return ordinals;
 }
 
-ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsScreen (double pointsIntervalRelations,
-                                                                    const Points &points) const
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothScreen (double pointsIntervalRelations,
+                                                                          const Points &points) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsScreen";
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsSmoothScreen"
+                              << " pointCount=" << points.count();
 
   // Results
   ExportValuesOrdinal ordinals;
@@ -438,15 +467,59 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsScreen (double point
 
     vector<double> t;
     vector<SplinePair> xy;
-    ExportOrdinalsFromSpline ordinalsFromSpline;
+    ExportOrdinalsSmooth ordinalsSmooth;
 
-    ordinalsFromSpline.loadSplinePairsWithoutTransformation (points,
-                                                             t,
-                                                             xy);
+    ordinalsSmooth.loadSplinePairsWithoutTransformation (points,
+                                                         t,
+                                                         xy);
 
-    ordinals = ordinalsFromSpline.ordinalsAtIntervalsGraph (t,
-                                                            xy,
-                                                            pointsIntervalRelations);
+    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (t,
+                                                        xy,
+                                                        pointsIntervalRelations);
+  }
+
+  return ordinals;
+}
+
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsStraightGraph (double pointsIntervalRelations,
+                                                                           const Transformation &transformation,
+                                                                           const Points &points) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsStraightGraph";
+
+  ExportValuesOrdinal ordinals;
+
+  // Prevent infinite loop when there are no points or will be too many points
+  if ((pointsIntervalRelations > 0) &&
+      (points.count() > 0)) {
+
+    ExportOrdinalsStraight ordinalsStraight;
+
+    ordinals = ordinalsStraight.ordinalsAtIntervalsGraphWithTransformation (points,
+                                                                            transformation,
+                                                                            pointsIntervalRelations);
+  }
+
+  return ordinals;
+}
+
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsStraightScreen (double pointsIntervalRelations,
+                                                                            const Points &points) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsStraightScreen"
+                              << " pointCount=" << points.count();
+
+  // Results
+  ExportValuesOrdinal ordinals;
+
+  // Prevent infinite loop when there are no points or will be too many points
+  if ((pointsIntervalRelations > 0) &&
+      (points.count() > 0)) {
+
+    ExportOrdinalsStraight ordinalsStraight;
+
+    ordinals = ordinalsStraight.ordinalsAtIntervalsGraphWithoutTransformation (points,
+                                                                               pointsIntervalRelations);
   }
 
   return ordinals;

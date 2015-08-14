@@ -127,7 +127,8 @@ HEADERS  += \
     Export/ExportFileAbstractBase.h \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
-    Export/ExportOrdinalsFromSpline.h \
+    Export/ExportOrdinalsSmooth.h \
+    Export/ExportOrdinalsStraight.h \
     Export/ExportXThetaValuesMergedFunctions.h \
     Export/ExportHeader.h \
     Export/ExportToClipboard.h \
@@ -312,7 +313,8 @@ SOURCES += \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
     Export/ExportLayoutFunctions.cpp \
-    Export/ExportOrdinalsFromSpline.cpp \
+    Export/ExportOrdinalsSmooth.cpp \
+    Export/ExportOrdinalsStraight.cpp \
     Export/ExportPointsIntervalUnits.cpp \
     Export/ExportPointsSelectionFunctions.cpp \
     Export/ExportPointsSelectionRelations.cpp \

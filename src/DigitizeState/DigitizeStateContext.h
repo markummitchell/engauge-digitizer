@@ -50,6 +50,9 @@ public:
   /// See DigitizeStateAbstractBase::handleLeave.
   void handleLeave ();
 
+  /// See DigitizeStateAbstractBase::handleMouseMove.
+  void handleMouseMove (QPointF pos);
+
   /// See DigitizeStateAbstractBase::handleMousePress.
   void handleMousePress (QPointF pos);
 

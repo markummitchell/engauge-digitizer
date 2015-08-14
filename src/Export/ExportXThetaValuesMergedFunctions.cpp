@@ -57,20 +57,27 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinear() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLinear";
 
-  double xThetaFirstSimplestNumber, xThetaMin, xThetaMax;
-  firstSimplestNumberLinear (xThetaFirstSimplestNumber,
-                             xThetaMin,
-                             xThetaMax);
+  if (m_xThetaValuesRaw.count () > 0) {
 
-  // Assuming user picks an appropriate interval increment, numbering starting at xThetaFirstSimplestNumber 
-  // will give nice x/theta numbers
-  if (m_modelExport.pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
-    return periodicLinearGraph(xThetaFirstSimplestNumber,
+    double xThetaFirstSimplestNumber, xThetaMin, xThetaMax;
+    firstSimplestNumberLinear (xThetaFirstSimplestNumber,
                                xThetaMin,
                                xThetaMax);
+
+    // Assuming user picks an appropriate interval increment, numbering starting at xThetaFirstSimplestNumber
+    // will give nice x/theta numbers
+    if (m_modelExport.pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
+      return periodicLinearGraph(xThetaFirstSimplestNumber,
+                                 xThetaMin,
+                                 xThetaMax);
+    } else {
+      return periodicLinearScreen(xThetaMin,
+                                  xThetaMax);
+    }
   } else {
-    return periodicLinearScreen(xThetaMin,
-                                xThetaMax);
+
+    ExportValuesXOrY emptyList;
+    return emptyList;
   }
 }
 

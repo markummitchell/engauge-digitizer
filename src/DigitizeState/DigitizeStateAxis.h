@@ -20,6 +20,7 @@ public:
   virtual void end();
   virtual void handleCurveChange();
   virtual void handleKeyPress (Qt::Key key);
+  virtual void handleMouseMove (QPointF posScreen);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
   virtual QString state() const;

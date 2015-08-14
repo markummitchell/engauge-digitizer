@@ -82,6 +82,11 @@ void DigitizeStateSegment::handleKeyPress (Qt::Key key)
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
+void DigitizeStateSegment::handleMouseMove (QPointF /* posScreen */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleMouseMove";
+}
+
 void DigitizeStateSegment::handleMousePress (QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleMousePress";
