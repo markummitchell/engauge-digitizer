@@ -165,6 +165,7 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Ordinal/OrdinalGenerator.h \
+    Ordinal/OrdinalToGraphicsPoint.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointShape.h \

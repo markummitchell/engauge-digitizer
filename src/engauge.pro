@@ -127,14 +127,14 @@ HEADERS  += \
     Export/ExportFileAbstractBase.h \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
+    Export/ExportHeader.h \
     Export/ExportOrdinalsSmooth.h \
     Export/ExportOrdinalsStraight.h \
-    Export/ExportXThetaValuesMergedFunctions.h \
-    Export/ExportHeader.h \
     Export/ExportToClipboard.h \
     Export/ExportToFile.h \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
+    Export/ExportXThetaValuesMergedFunctions.h \
     Format/FormatConstants.h \
     Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsNonPolarTheta.h \
@@ -165,7 +165,7 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Ordinal/OrdinalGenerator.h \
-    include/OrdinalToGraphicsPoint.h \
+    Ordinal/OrdinalToGraphicsPoint.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointShape.h \
@@ -348,8 +348,8 @@ SOURCES += \
     main/main.cpp \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
-    Ordinal/OrdinalGenerator.cpp \
     util/mmsubs.cpp \
+    Ordinal/OrdinalGenerator.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointShape.cpp \
