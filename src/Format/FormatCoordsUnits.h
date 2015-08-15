@@ -1,10 +1,9 @@
 #ifndef FORMAT_COORDS_UNITS_H
 #define FORMAT_COORDS_UNITS_H
 
-#include "FormatConstants.h"
-
 class DocumentModelCoords;
 class QString;
+class Transformation;
 
 /// Highest-level wrapper around other Formats classes
 class FormatCoordsUnits {
@@ -19,13 +18,13 @@ class FormatCoordsUnits {
                                double &xThetaUnformatted,
                                double &yRadiusUnformatted) const;
 
-  /// Convert unformatted numeric value to formatted string
+  /// Convert unformatted numeric value to formatted string. Transformation is used to determine best resolution
   void unformattedToFormatted (double xThetaUnformatted,
                                double yRadiusUnformatted,
                                const DocumentModelCoords &modelCoords,
                                QString &xThetaFormatted,
                                QString &yRadiusFormatted,
-                               int precisionDigitsForRawNumbers = DEFAULT_PRECISION) const;
+                               const Transformation &transformation) const;
 };
 
 #endif // FORMAT_COORDS_UNITS_H

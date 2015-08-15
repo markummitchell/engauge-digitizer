@@ -1,19 +1,20 @@
 #include "EngaugeAssert.h"
-#include "FormatCoordsUnitsNonPolarTheta.h"
+#include "FormatCoordsUnitsStrategyNonPolarTheta.h"
 #include "FormatDateTime.h"
 #include "FormatDegreesMinutesSecondsNonPolarTheta.h"
 #include "Logger.h"
+#include "Transformation.h"
 
-FormatCoordsUnitsNonPolarTheta::FormatCoordsUnitsNonPolarTheta ()
+FormatCoordsUnitsStrategyNonPolarTheta::FormatCoordsUnitsStrategyNonPolarTheta ()
 {
 }
 
-double FormatCoordsUnitsNonPolarTheta::formattedToUnformatted (const QString &string,
-                                                               CoordUnitsNonPolarTheta coordUnits,
-                                                               CoordUnitsDate coordUnitsDate,
-                                                               CoordUnitsTime coordUnitsTime) const
+double FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted (const QString &string,
+                                                                       CoordUnitsNonPolarTheta coordUnits,
+                                                                       CoordUnitsDate coordUnitsDate,
+                                                                       CoordUnitsTime coordUnitsTime) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::formattedToUnformatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted";
 
   double value;
 
@@ -42,7 +43,7 @@ double FormatCoordsUnitsNonPolarTheta::formattedToUnformatted (const QString &st
       break;
 
     default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::formattedToFormatted";
+      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::formattedToFormatted";
       ENGAUGE_ASSERT (false);
       break;
   }
@@ -50,14 +51,15 @@ double FormatCoordsUnitsNonPolarTheta::formattedToUnformatted (const QString &st
   return value;
 }
 
-QString FormatCoordsUnitsNonPolarTheta::unformattedToFormatted (double valueUnformatted,
-                                                                CoordUnitsNonPolarTheta coordUnits,
-                                                                CoordUnitsDate coordUnitsDate,
-                                                                CoordUnitsTime coordUnitsTime,
-                                                                bool isXTheta,
-                                                                int precisionDigitsForRawNumber) const
+QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double valueUnformatted,
+                                                                        CoordUnitsNonPolarTheta coordUnits,
+                                                                        CoordUnitsDate coordUnitsDate,
+                                                                        CoordUnitsTime coordUnitsTime,
+                                                                        bool isXTheta,
+                                                                        const Transformation &transformation,
+                                                                        double valueUnformattedOther) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::unformattedToFormatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted";
 
   const char FORMAT ('g');
 
@@ -86,11 +88,14 @@ QString FormatCoordsUnitsNonPolarTheta::unformattedToFormatted (double valueUnfo
     case COORD_UNITS_NON_POLAR_THETA_NUMBER:
       valueFormatted = QString::number (valueUnformatted,
                                         FORMAT,
-                                        precisionDigitsForRawNumber);
+                                        precisionDigitsForRawNumber (valueUnformatted,
+                                                                     valueUnformattedOther,
+                                                                     isXTheta,
+                                                                     transformation));
       break;
 
     default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsNonPolarTheta::unformattedToFormatted";
+      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted";
       ENGAUGE_ASSERT (false);
       break;
   }

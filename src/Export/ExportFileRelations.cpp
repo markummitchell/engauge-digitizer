@@ -283,7 +283,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
                                    yRadius,
                                    modelCoords,
                                    *(xThetaValues [row]),
-                                   *(yRadiusValues [row]));
+                                   *(yRadiusValues [row]),
+                                   transformation);
   }
 }
 
@@ -312,7 +313,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
                                    pointInterpolated.y(),
                                    modelCoords,
                                    *(xThetaValues [row]),
-                                   *(yRadiusValues [row]));
+                                   *(yRadiusValues [row]),
+                                   transformation);
   }
 }
 
@@ -339,7 +341,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
                                    posGraph.y(),
                                    modelCoords,
                                    *(xThetaValues [pt]),
-                                   *(yRadiusValues [pt]));
+                                   *(yRadiusValues [pt]),
+                                   transformation);
   }
 }
 

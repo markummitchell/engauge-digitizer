@@ -95,7 +95,8 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),
                                           *this,
                                           context().cmdMediator().document().modelCoords(),
-                                          cursor ());
+                                          cursor (),
+                                          context().mainWindow().transformation());
     int rtn = dlg->exec ();
     QPointF posGraph = dlg->posGraph ();
     delete dlg;

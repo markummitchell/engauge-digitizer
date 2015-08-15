@@ -191,7 +191,7 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
                                      m_modelCoords,
                                      xThetaFormatted,
                                      yRadiusFormatted,
-                                     PRECISION_DIGITS);
+                                     *this);
 
       coordsGraph = QString ("(%1, %2)")
                     .arg (xThetaFormatted)

@@ -1,16 +1,16 @@
 #include "EngaugeAssert.h"
-#include "FormatCoordsUnitsPolarTheta.h"
+#include "FormatCoordsUnitsStrategyPolarTheta.h"
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
 #include "Logger.h"
 
-FormatCoordsUnitsPolarTheta::FormatCoordsUnitsPolarTheta ()
+FormatCoordsUnitsStrategyPolarTheta::FormatCoordsUnitsStrategyPolarTheta ()
 {
 }
 
-double FormatCoordsUnitsPolarTheta::formattedToUnformatted (const QString &string,
-                                                            CoordUnitsPolarTheta coordUnits) const
+double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QString &string,
+                                                                    CoordUnitsPolarTheta coordUnits) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::formattedToUnformatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted";
 
   double value;
 
@@ -33,7 +33,7 @@ double FormatCoordsUnitsPolarTheta::formattedToUnformatted (const QString &strin
       break;
 
     default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormattedPolarTheta";
+      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsStrategyPolarTheta::unformattedToFormattedStrategyPolarTheta";
       ENGAUGE_ASSERT (false);
       break;
   }
@@ -41,11 +41,12 @@ double FormatCoordsUnitsPolarTheta::formattedToUnformatted (const QString &strin
   return value;
 }
 
-QString FormatCoordsUnitsPolarTheta::unformattedToFormatted (double valueUnformatted,
-                                                             CoordUnitsPolarTheta coordUnits,
-                                                             int precisionDigitsForRawNumber) const
+QString FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted (double valueUnformatted,
+                                                                     CoordUnitsPolarTheta coordUnits,
+                                                                     const Transformation &transformation,
+                                                                     double valueUnformattedOther) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormatted";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted";
 
   const char FORMAT ('g');
   const bool IS_X_THETA = true;
@@ -70,11 +71,14 @@ QString FormatCoordsUnitsPolarTheta::unformattedToFormatted (double valueUnforma
     case COORD_UNITS_POLAR_THETA_TURNS:
       valueFormatted = QString::number (valueUnformatted,
                                         FORMAT,
-                                        precisionDigitsForRawNumber);
+                                        precisionDigitsForRawNumber (valueUnformatted,
+                                                                     valueUnformattedOther,
+                                                                     IS_X_THETA,
+                                                                     transformation));
       break;
 
     default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsPolarTheta::unformattedToFormattedPolarTheta";
+      LOG4CPP_ERROR_S ((*mainCat)) << "FormatCoordsUnitsStrategyPolarTheta::unformattedToFormattedStrategyPolarTheta";
       ENGAUGE_ASSERT (false);
       break;
   }

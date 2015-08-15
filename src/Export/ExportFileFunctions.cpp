@@ -48,6 +48,7 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                              document.modelCoords(),
                              curvesIncluded,
                              xThetaValues,
+                             transformation,
                              yRadiusValues,
                              delimiter,
                              str);
@@ -93,6 +94,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                document.modelCoords(),
                                curvesIncluded,
                                xThetaValues,
+                               transformation,
                                yRadiusValues,
                                delimiter,
                                str);
@@ -308,7 +310,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
                                    yRadius,
                                    modelCoords,
                                    dummyXThetaOut,
-                                   *(yRadiusValues [row]));
+                                   *(yRadiusValues [row]),
+                                   transformation);
   }
 }
 
@@ -337,7 +340,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const D
                                    yRadius,
                                    modelCoords,
                                    dummyXThetaOut,
-                                   *(yRadiusValues [row]));
+                                   *(yRadiusValues [row]),
+                                   transformation);
   }
 }
 
@@ -386,7 +390,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const DocumentModelCoord
                                    posGraph.y(),
                                    modelCoords,
                                    dummyXThetaOut,
-                                   *(yRadiusValues [rowClosest]));
+                                   *(yRadiusValues [rowClosest]),
+                                   transformation);
   }
 }
 
@@ -394,6 +399,7 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
                                                      const DocumentModelCoords &modelCoords,
                                                      const QStringList &curvesIncluded,
                                                      const ExportValuesXOrY &xThetaValuesMerged,
+                                                     const Transformation &transformation,
                                                      QVector<QVector<QString*> > &yRadiusValues,
                                                      const QString &delimiter,
                                                      QTextStream &str) const
@@ -431,7 +437,8 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &
                                      DUMMY_Y_RADIUS,
                                      modelCoords,
                                      xThetaString,
-                                     yRadiusString);
+                                     yRadiusString,
+                                     transformation);
       str << xThetaString;
 
       for (int col = 0; col < yRadiusValues.count(); col++) {

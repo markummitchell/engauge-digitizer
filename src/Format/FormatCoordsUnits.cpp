@@ -1,8 +1,9 @@
 #include "DocumentModelCoords.h"
 #include "FormatCoordsUnits.h"
-#include "FormatCoordsUnitsNonPolarTheta.h"
-#include "FormatCoordsUnitsPolarTheta.h"
+#include "FormatCoordsUnitsStrategyNonPolarTheta.h"
+#include "FormatCoordsUnitsStrategyPolarTheta.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 const bool IS_X_THETA = true;
 const bool IS_NOT_X_THETA = false;
@@ -20,8 +21,8 @@ void FormatCoordsUnits::formattedToUnformatted (const QString &xThetaFormatted,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::formattedToUnformatted";
 
-  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
-  FormatCoordsUnitsPolarTheta formatPolarTheta;
+  FormatCoordsUnitsStrategyNonPolarTheta formatNonPolarTheta;
+  FormatCoordsUnitsStrategyPolarTheta formatPolarTheta;
 
   if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
 
@@ -51,12 +52,12 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                 const DocumentModelCoords &modelCoords,
                                                 QString &xThetaFormatted,
                                                 QString &yRadiusFormatted,
-                                                int precisionDigitsForRawNumber) const
+                                                const Transformation &transformation) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::unformattedToFormatted";
 
-  FormatCoordsUnitsNonPolarTheta formatNonPolarTheta;
-  FormatCoordsUnitsPolarTheta formatPolarTheta;
+  FormatCoordsUnitsStrategyNonPolarTheta formatNonPolarTheta;
+  FormatCoordsUnitsStrategyPolarTheta formatPolarTheta;
 
   if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
 
@@ -65,24 +66,28 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                                   modelCoords.coordUnitsDate(),
                                                                   modelCoords.coordUnitsTime(),
                                                                   IS_X_THETA,
-                                                                  precisionDigitsForRawNumber);
+                                                                  transformation,
+                                                                  yRadiusUnformatted);
     yRadiusFormatted = formatNonPolarTheta.unformattedToFormatted (yRadiusUnformatted,
                                                                    modelCoords.coordUnitsY(),
                                                                    modelCoords.coordUnitsDate(),
                                                                    modelCoords.coordUnitsTime(),
                                                                    IS_NOT_X_THETA,
-                                                                   precisionDigitsForRawNumber);
+                                                                   transformation,
+                                                                   xThetaUnformatted);
     
   } else {
     
     xThetaFormatted = formatPolarTheta.unformattedToFormatted (xThetaUnformatted,
                                                                modelCoords.coordUnitsTheta(),
-                                                               precisionDigitsForRawNumber);
+                                                               transformation,
+                                                               yRadiusUnformatted);
     yRadiusFormatted = formatNonPolarTheta.unformattedToFormatted (yRadiusUnformatted,
                                                                    modelCoords.coordUnitsRadius(),
                                                                    modelCoords.coordUnitsDate(),
                                                                    modelCoords.coordUnitsTime(),
                                                                    IS_NOT_X_THETA,
-                                                                   precisionDigitsForRawNumber);
+                                                                   transformation,
+                                                                   xThetaUnformatted);
   }
 }

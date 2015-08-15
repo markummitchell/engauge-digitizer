@@ -17,6 +17,7 @@
 #include <QLabel>
 #include <QRect>
 #include <QVBoxLayout>
+#include "Transformation.h"
 
 const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
@@ -29,6 +30,7 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,
                             const DocumentModelCoords &modelCoords,
                             const QCursor &cursorShape,
+                            const Transformation &transformation,
                             const double *xInitialValue,
                             const double *yInitialValue) :
   QDialog (&mainWindow),
@@ -54,7 +56,8 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   createOkCancel (layout);
 
   initializeGraphCoordinates (xInitialValue,
-                              yInitialValue);
+                              yInitialValue,
+                              transformation);
 
   updateControls ();
 }
@@ -152,7 +155,8 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
 }
 
 void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
-                                               const double *yInitialValue)
+                                               const double *yInitialValue,
+                                               const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
 
@@ -165,7 +169,8 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
                                    *yInitialValue,
                                    m_modelCoords,
                                    xTheta,
-                                   yRadius);
+                                   yRadius,
+                                   transformation);
   }
 
    m_editGraphX->setText (xTheta);

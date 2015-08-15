@@ -1,17 +1,20 @@
-#ifndef FORMAT_COORDS_UNITS_NON_POLAR_THETA_H
-#define FORMAT_COORDS_UNITS_NON_POLAR_THETA_H
+#ifndef FORMAT_COORDS_UNITS_STRATEGY_NON_POLAR_THETA_H
+#define FORMAT_COORDS_UNITS_STRATEGY_NON_POLAR_THETA_H
 
 #include "CoordUnitsDate.h"
 #include "CoordUnitsNonPolarTheta.h"
 #include "CoordUnitsTime.h"
-#include "FormatConstants.h"
+#include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include <QString>
 
+class Transformation;
+
 /// Format conversions between unformatted and formatted for CoordUnitsNonPolarTheta
-class FormatCoordsUnitsNonPolarTheta {
+class FormatCoordsUnitsStrategyNonPolarTheta : public FormatCoordsUnitsStrategyAbstractBase
+{
  public:
   /// Single constructor
-  FormatCoordsUnitsNonPolarTheta();
+  FormatCoordsUnitsStrategyNonPolarTheta();
 
   /// Convert formatted string to simple unformatted number
   double formattedToUnformatted (const QString &string,
@@ -25,7 +28,9 @@ class FormatCoordsUnitsNonPolarTheta {
                                   CoordUnitsDate coordUnitsDate,
                                   CoordUnitsTime coordUnitsTime,
                                   bool isXTheta,
-                                  int precisionDigitsForRawNumber = DEFAULT_PRECISION) const;
+                                  const Transformation &transformation,
+                                  double valueUnformattedOther) const;
+
 };
 
-#endif // FORMAT_COORDS_UNITS_NON_POLAR_THETA_H
+#endif // FORMAT_COORDS_UNITS_STRATEGY_NON_POLAR_THETA_H

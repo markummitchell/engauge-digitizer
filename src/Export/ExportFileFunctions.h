@@ -80,6 +80,7 @@ private:
                                   const DocumentModelCoords &modelCoords,
                                   const QStringList &curvesIncluded,
                                   const ExportValuesXOrY &xThetaValuesMerged,
+                                  const Transformation &transformation,
                                   QVector<QVector<QString*> > &yRadiusValues,
                                   const QString &delimiter,
                                   QTextStream &str) const;

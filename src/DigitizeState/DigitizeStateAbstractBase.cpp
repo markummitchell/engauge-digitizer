@@ -48,6 +48,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
                                        *this,
                                        context().cmdMediator().document().modelCoords(),
                                        cursor (),
+                                       context().mainWindow().transformation(),
                                        &x,
                                        &y);
   int rtn = dlg->exec ();

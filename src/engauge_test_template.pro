@@ -135,10 +135,10 @@ HEADERS  += \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
     Export/ExportXThetaValuesMergedFunctions.h \
-    Format/FormatConstants.h \
     Format/FormatCoordsUnits.h \
-    Format/FormatCoordsUnitsNonPolarTheta.h \
-    Format/FormatCoordsUnitsPolarTheta.h \
+    Format/FormatCoordsUnitsStrategyAbstractBase.h \
+    Format/FormatCoordsUnitsStrategyNonPolarTheta.h \
+    Format/FormatCoordsUnitsStrategyPolarTheta.h \
     Format/FormatDateTime.h \
     Format/FormatDegreesMinutesSecondsBase.h \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
@@ -322,10 +322,10 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Export/ExportXThetaValuesMergedFunctions.cpp \
-    Format/FormatConstants.cpp \
     Format/FormatCoordsUnits.cpp \
-    Format/FormatCoordsUnitsNonPolarTheta.cpp \
-    Format/FormatCoordsUnitsPolarTheta.cpp \
+    Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
+    Format/FormatCoordsUnitsStrategyNonPolarTheta.cpp \
+    Format/FormatCoordsUnitsStrategyPolarTheta.cpp \
     Format/FormatDateTime.cpp \
     Format/FormatDegreesMinutesSecondsBase.cpp \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \

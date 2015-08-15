@@ -16,6 +16,7 @@ class DocumentModelCoords;
 class MainWindow;
 class QDoubleValidator;
 class QVBoxLayout;
+class Transformation;
 
 /// Dialog box for editing the information of one axis point.
 class DlgEditPoint : public QDialog
@@ -29,6 +30,7 @@ public:
                 DigitizeStateAbstractBase &digitizeState,
                 const DocumentModelCoords &modelCoords,
                 const QCursor &cursorShape,
+                const Transformation &transformation,
                 const double *xInitialValue = 0,
                 const double *yInitialValue = 0);
   ~DlgEditPoint ();
@@ -47,7 +49,8 @@ private:
   void createCoords (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
   void initializeGraphCoordinates (const double *xInitialValue,
-                                   const double *yInitialValue);
+                                   const double *yInitialValue,
+                                   const Transformation &transformation);
   bool isCartesian () const;
   QChar nameXTheta () const;
   QChar nameYRadius () const;
