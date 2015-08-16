@@ -25,8 +25,8 @@
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCoords.h"
+#include "DlgSettingsCurveNames.h"
 #include "DlgSettingsCurveProperties.h"
-#include "DlgSettingsCurves.h"
 #include "DlgSettingsExport.h"
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
@@ -389,11 +389,11 @@ void MainWindow::createActionsSettings ()
                                                      "Curves properties settings determine how each curve appears"));
   connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
 
-  m_actionSettingsCurves = new QAction (tr ("Curves"), this);
-  m_actionSettingsCurves->setStatusTip (tr ("Edit Curves settings."));
-  m_actionSettingsCurves->setWhatsThis (tr ("Curves Settings\n\n"
-                                            "Curves settings determine which curves are included in the current document"));
-  connect (m_actionSettingsCurves, SIGNAL (triggered ()), this, SLOT (slotSettingsCurves ()));
+  m_actionSettingsCurveNames = new QAction (tr ("Curve Names"), this);
+  m_actionSettingsCurveNames->setStatusTip (tr ("Edit Curve Names settings."));
+  m_actionSettingsCurveNames->setWhatsThis (tr ("Curve Names Settings\n\n"
+                                                "Curve names settings identify which curves are included in the current document"));
+  connect (m_actionSettingsCurveNames, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveNames ()));
 
   m_actionSettingsExport = new QAction (tr ("Export"), this);
   m_actionSettingsExport->setStatusTip (tr ("Edit Export settings."));
@@ -730,7 +730,7 @@ void MainWindow::createMenus()
   m_menuSettings = menuBar()->addMenu(tr ("Settings"));
   m_menuSettings->addAction (m_actionSettingsCoords);
   m_menuSettings->addAction (m_actionSettingsCurveProperties);
-  m_menuSettings->addAction (m_actionSettingsCurves);
+  m_menuSettings->addAction (m_actionSettingsCurveNames);
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsColorFilter);
   m_menuSettings->addAction (m_actionSettingsAxesChecker);
@@ -749,8 +749,8 @@ void MainWindow::createMenus()
 void MainWindow::createSettingsDialogs ()
 {
   m_dlgSettingsCoords = new DlgSettingsCoords (*this);
+  m_dlgSettingsCurveNames = new DlgSettingsCurveNames (*this);
   m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
-  m_dlgSettingsCurves = new DlgSettingsCurves (*this);
   m_dlgSettingsExport = new DlgSettingsExport (*this);
   m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
   m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
@@ -759,8 +759,8 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
 
   m_dlgSettingsCoords->setVisible (false);
+  m_dlgSettingsCurveNames->setVisible (false);
   m_dlgSettingsCurveProperties->setVisible (false);
-  m_dlgSettingsCurves->setVisible (false);
   m_dlgSettingsExport->setVisible (false);
   m_dlgSettingsColorFilter->setVisible (false);
   m_dlgSettingsAxesChecker->setVisible (false);
@@ -2024,6 +2024,14 @@ void MainWindow::slotSettingsCoords ()
   m_dlgSettingsCoords->show ();
 }
 
+void MainWindow::slotSettingsCurveNames ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
+
+  m_dlgSettingsCurveNames->load (*m_cmdMediator);
+  m_dlgSettingsCurveNames->show ();
+}
+
 void MainWindow::slotSettingsCurveProperties ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
@@ -2031,14 +2039,6 @@ void MainWindow::slotSettingsCurveProperties ()
   m_dlgSettingsCurveProperties->load (*m_cmdMediator);
   m_dlgSettingsCurveProperties->setCurveName (selectedGraphCurve ());
   m_dlgSettingsCurveProperties->show ();
-}
-
-void MainWindow::slotSettingsCurves ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
-
-  m_dlgSettingsCurves->load (*m_cmdMediator);
-  m_dlgSettingsCurves->show ();
 }
 
 void MainWindow::slotSettingsExport ()
@@ -2585,7 +2585,7 @@ void MainWindow::updateControls ()
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsCurves->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsCurveNames->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsColorFilter->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
@@ -2663,9 +2663,9 @@ void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
   m_cmdMediator->document().setModelCoords(modelCoords);
 }
 
-void MainWindow::updateSettingsCurves (const CurvesGraphs &curvesGraphs)
+void MainWindow::updateSettingsCurveNames (const CurvesGraphs &curvesGraphs)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveNames";
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();

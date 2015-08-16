@@ -42,8 +42,8 @@ HEADERS  += \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
     Cmd/CmdSettingsCoords.h \
+    Cmd/CmdSettingsCurveNames.h \
     Cmd/CmdSettingsCurveProperties.h \
-    Cmd/CmdSettingsCurves.h \
     Cmd/CmdSettingsExport.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
@@ -93,7 +93,7 @@ HEADERS  += \
     Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsColorFilter.h \
     Dlg/DlgSettingsCoords.h \
-    Dlg/DlgSettingsCurves.h \
+    Dlg/DlgSettingsCurveNames.h \
     Dlg/DlgSettingsCurveProperties.h \
     Dlg/DlgSettingsExport.h \
     Dlg/DlgSettingsGridRemoval.h \
@@ -234,8 +234,8 @@ SOURCES += \
     Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsColorFilter.cpp \
     Cmd/CmdSettingsCoords.cpp \
+    Cmd/CmdSettingsCurveNames.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
-    Cmd/CmdSettingsCurves.cpp \
     Cmd/CmdSettingsExport.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
@@ -283,7 +283,7 @@ SOURCES += \
     Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsColorFilter.cpp \
     Dlg/DlgSettingsCoords.cpp \
-    Dlg/DlgSettingsCurves.cpp \
+    Dlg/DlgSettingsCurveNames.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
     Dlg/DlgSettingsExport.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \

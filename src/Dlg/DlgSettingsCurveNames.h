@@ -1,5 +1,5 @@
-#ifndef DLG_SETTINGS_CURVES_H
-#define DLG_SETTINGS_CURVES_H
+#ifndef DLG_SETTINGS_CURVE_NAMES_H
+#define DLG_SETTINGS_CURVE_NAMES_H
 
 #include "DlgSettingsAbstractBase.h"
 #include <QItemSelection>
@@ -10,15 +10,15 @@ class QGridLayout;
 class QListView;
 class QPushButton;
 
-/// Stacked widget page for editing curves settings.
-class DlgSettingsCurves : public DlgSettingsAbstractBase
+/// Stacked widget page for editing curve names settings.
+class DlgSettingsCurveNames : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgSettingsCurves(MainWindow &mainWindow);
-  virtual ~DlgSettingsCurves();
+  DlgSettingsCurveNames(MainWindow &mainWindow);
+  virtual ~DlgSettingsCurveNames();
 
   virtual QWidget *createSubPanel ();
   void load (CmdMediator &cmdMediator);
@@ -59,4 +59,4 @@ private:
   QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
 };
 
-#endif // DLG_SETTINGS_CURVES_H
+#endif // DLG_SETTINGS_CURVE_NAMES_H

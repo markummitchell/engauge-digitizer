@@ -1,0 +1,2 @@
+insert_derived_column.py    Python script that reads in (longitude,latitude) points and output those points with a timestamp
+                            at each point that is computed assuming a constant speed through the points

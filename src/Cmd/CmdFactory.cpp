@@ -11,8 +11,8 @@
 #include "CmdSettingsAxesChecker.h"
 #include "CmdSettingsColorFilter.h"
 #include "CmdSettingsCoords.h"
+#include "CmdSettingsCurveNames.h"
 #include "CmdSettingsCurveProperties.h"
-#include "CmdSettingsCurves.h"
 #include "CmdSettingsExport.h"
 #include "CmdSettingsGridRemoval.h"
 #include "CmdSettingsPointMatch.h"
@@ -101,16 +101,16 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                  document,
                                  cmdDescription,
                                  reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_NAMES) {
+    cmd = new CmdSettingsCurveNames (mainWindow,
+                                     document,
+                                     cmdDescription,
+                                     reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES) {
     cmd = new CmdSettingsCurveProperties (mainWindow,
                                           document,
                                           cmdDescription,
                                           reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVES) {
-    cmd = new CmdSettingsCurves (mainWindow,
-                                 document,
-                                 cmdDescription,
-                                 reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT) {
     cmd = new CmdSettingsExport (mainWindow,
                                  document,

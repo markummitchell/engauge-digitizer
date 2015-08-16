@@ -1,7 +1,7 @@
 #include "CmdMediator.h"
-#include "CmdSettingsCurves.h"
+#include "CmdSettingsCurveNames.h"
 #include "CurveNameList.h"
-#include "DlgSettingsCurves.h"
+#include "DlgSettingsCurveNames.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -13,25 +13,25 @@
 #include <QPushButton>
 #include "QtToString.h"
 
-DlgSettingsCurves::DlgSettingsCurves(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curves",
-                           "DlgSetingsCurves",
+DlgSettingsCurveNames::DlgSettingsCurveNames(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Curve Names",
+                           "DlgSettingsCurveNames",
                            mainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::DlgSettingsCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::DlgSettingsCurveNames";
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
 }
 
-DlgSettingsCurves::~DlgSettingsCurves()
+DlgSettingsCurveNames::~DlgSettingsCurveNames()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::~DlgSettingsCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::~DlgSettingsCurveNames";
 }
 
-void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
-                                         const QString &curveNameOriginal,
-                                         int numPoints)
+void DlgSettingsCurveNames::appendCurveName (const QString &curveNameNew,
+                                             const QString &curveNameOriginal,
+                                             int numPoints)
 {
   ENGAUGE_CHECK_PTR (m_curveNameList);
 
@@ -42,10 +42,10 @@ void DlgSettingsCurves::appendCurveName (const QString &curveNameNew,
                    numPoints);
 }
 
-void DlgSettingsCurves::createButtons (QGridLayout *layout,
-                                       int &row)
+void DlgSettingsCurveNames::createButtons (QGridLayout *layout,
+                                           int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createButtons";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::createButtons";
 
   m_btnNew = new QPushButton ("New...");
   m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
@@ -64,10 +64,10 @@ void DlgSettingsCurves::createButtons (QGridLayout *layout,
   layout->addWidget (m_btnRemove, row++, 2, 1, 1, Qt::AlignRight);
 }
 
-void DlgSettingsCurves::createListCurves (QGridLayout *layout,
+void DlgSettingsCurveNames::createListCurves (QGridLayout *layout,
                                           int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createListCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::createListCurves";
 
   QLabel *label = new QLabel (tr ("Curve Names:"));
   layout->addWidget (label, row++, 1);
@@ -96,9 +96,9 @@ void DlgSettingsCurves::createListCurves (QGridLayout *layout,
            this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
 }
 
-QWidget *DlgSettingsCurves::createSubPanel ()
+QWidget *DlgSettingsCurveNames::createSubPanel ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::createSubPanel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::createSubPanel";
 
   const int EMPTY_COLUMN_WIDTH = 30;
   const int EMPTY_ROW_HEIGHT = 40;
@@ -126,7 +126,7 @@ QWidget *DlgSettingsCurves::createSubPanel ()
   return subPanel;
 }
 
-bool DlgSettingsCurves::endsWithNumber (const QString &str) const
+bool DlgSettingsCurveNames::endsWithNumber (const QString &str) const
 {
   bool success = false;
 
@@ -138,26 +138,26 @@ bool DlgSettingsCurves::endsWithNumber (const QString &str) const
   return success;
 }
 
-void DlgSettingsCurves::handleOk ()
+void DlgSettingsCurveNames::handleOk ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::handleOk";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::handleOk";
 
-  CmdSettingsCurves *cmd = new CmdSettingsCurves (mainWindow (),
-                                                  cmdMediator ().document(),
-                                                  *m_curveNameList);
+  CmdSettingsCurveNames *cmd = new CmdSettingsCurveNames (mainWindow (),
+                                                          cmdMediator ().document(),
+                                                          *m_curveNameList);
   cmdMediator ().push (cmd);
 
   hide ();
 }
 
-void DlgSettingsCurves::insertCurveName (int row,
-                                         const QString &curveNameNew,
-                                         const QString &curveNameOriginal,
-                                         int numPoints)
+void DlgSettingsCurveNames::insertCurveName (int row,
+                                             const QString &curveNameNew,
+                                             const QString &curveNameOriginal,
+                                             int numPoints)
 {
   if (m_curveNameList->insertRow (row)) {
 
-    LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
+    LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::insertCurveName curveName=" << curveNameNew.toLatin1 ().data ();
 
     CurveNameListEntry curvesEntry (curveNameNew,
                                     curveNameOriginal,
@@ -172,14 +172,14 @@ void DlgSettingsCurves::insertCurveName (int row,
 
   } else {
 
-    LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsCurves::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
+    LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsCurveNames::insertCurveName failed curveName=" << curveNameNew.toLatin1 ().data ();
 
   }
 }
 
-void DlgSettingsCurves::load (CmdMediator &cmdMediator)
+void DlgSettingsCurveNames::load (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::load";
 
   setCmdMediator (cmdMediator);
 
@@ -200,7 +200,7 @@ void DlgSettingsCurves::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
-QString DlgSettingsCurves::nextCurveName () const
+QString DlgSettingsCurveNames::nextCurveName () const
 {
   const QString DASH_ONE ("-1"); // Nice value to start a new range at a lower level than the current level
 
@@ -300,7 +300,7 @@ QString DlgSettingsCurves::nextCurveName () const
   return curveNameNext;
 }
 
-int DlgSettingsCurves::numberAtEnd (const QString &str) const
+int DlgSettingsCurveNames::numberAtEnd (const QString &str) const
 {
   ENGAUGE_ASSERT (endsWithNumber (str));
 
@@ -319,9 +319,9 @@ int DlgSettingsCurves::numberAtEnd (const QString &str) const
   return sign * str.mid (ch).toInt ();
 }
 
-void DlgSettingsCurves::removeSelectedCurves ()
+void DlgSettingsCurveNames::removeSelectedCurves ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::removeSelectedCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::removeSelectedCurves";
 
   for (int i = m_listCurves->selectionModel ()->selectedIndexes ().count () - 1; i >= 0; i--) {
 
@@ -331,11 +331,11 @@ void DlgSettingsCurves::removeSelectedCurves ()
   }
 }
 
-void DlgSettingsCurves::slotDataChanged (const QModelIndex &topLeft,
-                                         const QModelIndex &bottomRight,
-                                         const QVector<int> &roles)
+void DlgSettingsCurveNames::slotDataChanged (const QModelIndex &topLeft,
+                                             const QModelIndex &bottomRight,
+                                             const QVector<int> &roles)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotDataChanged"
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::slotDataChanged"
                               << " topLeft=(" << topLeft.row () << "," << topLeft.column () << ")"
                               << " bottomRight=(" << bottomRight.row () << "," << bottomRight.column () << ")"
                               << " roles=" << rolesAsString (roles).toLatin1 ().data ();
@@ -343,9 +343,9 @@ void DlgSettingsCurves::slotDataChanged (const QModelIndex &topLeft,
   updateControls ();
 }
 
-void DlgSettingsCurves::slotNew ()
+void DlgSettingsCurveNames::slotNew ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotNew";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::slotNew";
 
   const QString NO_ORIGINAL_CURVE_NAME;
   const int NO_POINTS = 0;
@@ -371,9 +371,9 @@ void DlgSettingsCurves::slotNew ()
   updateControls();
 }
 
-void DlgSettingsCurves::slotRemove ()
+void DlgSettingsCurveNames::slotRemove ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::slotRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::slotRemove";
 
   int numPoints = 0;
   for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
@@ -409,14 +409,14 @@ void DlgSettingsCurves::slotRemove ()
   updateControls();
 }
 
-void DlgSettingsCurves::slotSelectionChanged (QItemSelection, QItemSelection)
+void DlgSettingsCurveNames::slotSelectionChanged (QItemSelection, QItemSelection)
 {
   updateControls ();
 }
 
-void DlgSettingsCurves::updateControls ()
+void DlgSettingsCurveNames::updateControls ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurves::updateControls";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveNames::updateControls";
 
   enableOk (true);
 

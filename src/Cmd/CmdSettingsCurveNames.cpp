@@ -1,4 +1,4 @@
-#include "CmdSettingsCurves.h"
+#include "CmdSettingsCurveNames.h"
 #include "CurveNameList.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -8,14 +8,14 @@
 
 const QString CMD_DESCRIPTION ("Curves settings");
 
-CmdSettingsCurves::CmdSettingsCurves(MainWindow &mainWindow,
-                                     Document &document,
-                                     const CurveNameList &modelCurves) :
+CmdSettingsCurveNames::CmdSettingsCurveNames(MainWindow &mainWindow,
+                                             Document &document,
+                                             const CurveNameList &modelCurves) :
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::CmdSettingsCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::CmdSettingsCurveNames";
 
   m_curvesGraphsBefore = document.curvesGraphs ();
 
@@ -49,44 +49,44 @@ CmdSettingsCurves::CmdSettingsCurves(MainWindow &mainWindow,
   }
 }
 
-CmdSettingsCurves::CmdSettingsCurves (MainWindow &mainWindow,
-                                      Document &document,
-                                      const QString &cmdDescription,
-                                      QXmlStreamReader &reader) :
+CmdSettingsCurveNames::CmdSettingsCurveNames (MainWindow &mainWindow,
+                                              Document &document,
+                                              const QString &cmdDescription,
+                                              QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::CmdSettingsCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::CmdSettingsCurveNames";
   
   m_curvesGraphsBefore.loadXml (reader);
   m_curvesGraphsAfter.loadXml (reader);
 }
 
-CmdSettingsCurves::~CmdSettingsCurves ()
+CmdSettingsCurveNames::~CmdSettingsCurveNames ()
 {
 }
 
-void CmdSettingsCurves::cmdRedo ()
+void CmdSettingsCurveNames::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::cmdRedo";
 
-  mainWindow().updateSettingsCurves(m_curvesGraphsAfter);
+  mainWindow().updateSettingsCurveNames(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurves::cmdUndo ()
+void CmdSettingsCurveNames::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurves::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::cmdUndo";
 
-  mainWindow().updateSettingsCurves(m_curvesGraphsBefore);
+  mainWindow().updateSettingsCurveNames(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurves::saveXml (QXmlStreamWriter &writer) const
+void CmdSettingsCurveNames::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVES);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_NAMES);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   m_curvesGraphsBefore.saveXml(writer);
   m_curvesGraphsAfter.saveXml(writer);
