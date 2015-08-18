@@ -10,7 +10,7 @@ ExportToFile::ExportToFile()
 {
 }
 
-void ExportToFile::exportToFile (const DocumentModelExport &modelExport,
+void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
                                  const Document &document,
                                  const Transformation &transformation,
                                  QTextStream &str) const

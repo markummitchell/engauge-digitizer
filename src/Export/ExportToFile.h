@@ -4,7 +4,7 @@
 #include <QStringList>
 
 class Document;
-class DocumentModelExport;
+class DocumentModelExportFormat;
 class QTextStream;
 class Transformation;
 
@@ -15,9 +15,9 @@ public:
   /// Single constructor.
   ExportToFile();
 
-  /// Export Document points according to the settings. The DocumentModelExport inside the Document is ignored so
-  /// DlgSettingsExport can supply its own DocumentModelExport when previewing what would be exported.
-  void exportToFile (const DocumentModelExport &modelExport,
+  /// Export Document points according to the settings. The DocumentModelExportFormat inside the Document is ignored so
+  /// DlgSettingsExport can supply its own DocumentModelExportFormat when previewing what would be exported.
+  void exportToFile (const DocumentModelExportFormat &modelExport,
                      const Document &document,
                      const Transformation &transformation,
                      QTextStream &str) const;

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-ExportXThetaValuesMergedFunctions::ExportXThetaValuesMergedFunctions(const DocumentModelExport &modelExport,
+ExportXThetaValuesMergedFunctions::ExportXThetaValuesMergedFunctions(const DocumentModelExportFormat &modelExport,
                                                                      const ValuesVectorXOrY &xThetaValuesRaw,
                                                                      const Transformation &transformation) :
   m_modelExport (modelExport),

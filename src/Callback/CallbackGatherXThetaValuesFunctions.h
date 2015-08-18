@@ -8,7 +8,7 @@
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
 
-class DocumentModelExport;
+class DocumentModelExportFormat;
 class Point;
 
 // Save values into container that preserves order by key (QMap). These are common to all included curves
@@ -22,7 +22,7 @@ class CallbackGatherXThetaValuesFunctions
 {
 public:
   /// Single constructor.
-  CallbackGatherXThetaValuesFunctions(const DocumentModelExport &modelExport,
+  CallbackGatherXThetaValuesFunctions(const DocumentModelExportFormat &modelExport,
                                       const QStringList &curveNamesIncluded,
                                       const Transformation &transformation);
 

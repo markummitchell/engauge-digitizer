@@ -11,9 +11,9 @@
 #include "CmdSettingsAxesChecker.h"
 #include "CmdSettingsColorFilter.h"
 #include "CmdSettingsCoords.h"
-#include "CmdSettingsCurveNames.h"
+#include "CmdSettingsCurveAddRemove.h"
 #include "CmdSettingsCurveProperties.h"
-#include "CmdSettingsExport.h"
+#include "CmdSettingsExportFormat.h"
 #include "CmdSettingsGridRemoval.h"
 #include "CmdSettingsPointMatch.h"
 #include "CmdSettingsSegments.h"
@@ -101,21 +101,21 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                  document,
                                  cmdDescription,
                                  reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_NAMES) {
-    cmd = new CmdSettingsCurveNames (mainWindow,
-                                     document,
-                                     cmdDescription,
-                                     reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_ADD_REMOVE) {
+    cmd = new CmdSettingsCurveAddRemove (mainWindow,
+                                         document,
+                                         cmdDescription,
+                                         reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES) {
     cmd = new CmdSettingsCurveProperties (mainWindow,
                                           document,
                                           cmdDescription,
                                           reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT) {
-    cmd = new CmdSettingsExport (mainWindow,
-                                 document,
-                                 cmdDescription,
-                                 reader);
+    cmd = new CmdSettingsExportFormat (mainWindow,
+                                       document,
+                                       cmdDescription,
+                                       reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_GRID_REMOVAL) {
     cmd = new CmdSettingsGridRemoval (mainWindow,
                                       document,

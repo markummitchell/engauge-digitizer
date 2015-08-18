@@ -9,7 +9,7 @@
 
 class Document;
 class DocumentModelCoords;
-class DocumentModelExport;
+class DocumentModelExportFormat;
 class QTextStream;
 class Transformation;
 
@@ -20,21 +20,21 @@ public:
   /// Single constructor.
   ExportFileRelations();
 
-  /// Export Document points according to the settings. The DocumentModelExport inside the Document is ignored so
-  /// DlgSettingsExport can supply its own DocumentModelExport when previewing what would be exported.
-  void exportToFile (const DocumentModelExport &modelExportOverride,
+  /// Export Document points according to the settings. The DocumentModelExportFormat inside the Document is ignored so
+  /// DlgSettingsExport can supply its own DocumentModelExportFormat when previewing what would be exported.
+  void exportToFile (const DocumentModelExportFormat &modelExportOverride,
                      const Document &document,
                      const Transformation &transformation,
                      QTextStream &str) const;
 
 private:
-  void exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+  void exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
                                            const QString &delimiter,
                                            const Transformation &transformation,
                                            QTextStream &str) const;
-  void exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+  void exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                            const Document &document,
                                            const QStringList &curvesIncluded,
                                            const QString &delimiter,
@@ -45,7 +45,7 @@ private:
   QPointF linearlyInterpolate (const Points &points,
                                double ordinal,
                                const Transformation &transformation) const;
-  void loadXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+  void loadXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                 const Document &document,
                                 const QStringList &curvesIncluded,
                                 const Transformation &transformation,
@@ -67,7 +67,7 @@ private:
                                            QVector<QString*> &xThetaValues,
                                            QVector<QString*> &yRadiusValues,
                                            const Transformation &transformation) const;
-  int maxColumnSizeAllocation (const DocumentModelExport &modelExportOverride,
+  int maxColumnSizeAllocation (const DocumentModelExportFormat &modelExportOverride,
                                const Document &document,
                                const Transformation &transformation,
                                const QStringList &curvesIncluded) const;
@@ -88,7 +88,7 @@ private:
                                                          const Points &points) const;
 
   /// Output 2D array with alternating x/theta and y/radius columns
-  void outputXThetaYRadiusValues (const DocumentModelExport &modelExport,
+  void outputXThetaYRadiusValues (const DocumentModelExportFormat &modelExport,
                                   const QStringList &curvesIncluded,
                                   QVector<QVector<QString*> > &xThetaYRadiusValues,
                                   const QString &delimiter,

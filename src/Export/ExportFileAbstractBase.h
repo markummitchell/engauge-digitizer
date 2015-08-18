@@ -9,7 +9,7 @@
 #include <vector>
 
 class Document;
-class DocumentModelExport;
+class DocumentModelExportFormat;
 class QTextStream;
 class SplinePair;
 class Transformation;
@@ -25,8 +25,8 @@ public:
   /// Gnuplot requires, and other graphing tools probably prefer, blank lines between successive curves
   QString curveSeparator (const QString &string) const;
 
-  /// Identify curves to include in export. The specified DocumentModelExport overrides same data in Document for previewing window
-  QStringList curvesToInclude (const DocumentModelExport &modelExportOverride,
+  /// Identify curves to include in export. The specified DocumentModelExportFormat overrides same data in Document for previewing window
+  QStringList curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
                                const Document &document,
                                const QStringList &curvesGraphsNames,
                                CurveConnectAs curveConnectAs1,

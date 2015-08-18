@@ -444,7 +444,7 @@ CurveStyles Document::modelCurveStyles() const
   return modelCurveStyles;
 }
 
-DocumentModelExport Document::modelExport() const
+DocumentModelExportFormat Document::modelExport() const
 {
   return m_modelExport;
 }
@@ -660,7 +660,7 @@ void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
   }
 }
 
-void Document::setModelExport(const DocumentModelExport &modelExport)
+void Document::setModelExport(const DocumentModelExportFormat &modelExport)
 {
   m_modelExport = modelExport;
 }

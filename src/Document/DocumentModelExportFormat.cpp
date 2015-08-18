@@ -1,5 +1,5 @@
 #include "CmdMediator.h"
-#include "DocumentModelExport.h"
+#include "DocumentModelExportFormat.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include <QTextStream>
@@ -13,7 +13,7 @@ const QString DEFAULT_X_LABEL ("x");
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_FUNCTIONS
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_RELATIONS
 
-DocumentModelExport::DocumentModelExport() :
+DocumentModelExportFormat::DocumentModelExportFormat() :
   m_curveNamesNotExported (DEFAULT_CURVE_NAMES_NOT_EXPORTED),
   m_pointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
   m_pointsIntervalFunctions (DEFAULT_POINTS_INTERVAL_FUNCTIONS),
@@ -28,7 +28,7 @@ DocumentModelExport::DocumentModelExport() :
 {
 }
 
-DocumentModelExport::DocumentModelExport (const Document &document) :
+DocumentModelExportFormat::DocumentModelExportFormat (const Document &document) :
   m_curveNamesNotExported (document.modelExport().curveNamesNotExported()),
   m_pointsSelectionFunctions (document.modelExport().pointsSelectionFunctions()),
   m_pointsIntervalFunctions (document.modelExport().pointsIntervalFunctions()),
@@ -43,7 +43,7 @@ DocumentModelExport::DocumentModelExport (const Document &document) :
 {
 }
 
-DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
+DocumentModelExportFormat::DocumentModelExportFormat(const DocumentModelExportFormat &other) :
   m_curveNamesNotExported (other.curveNamesNotExported()),
   m_pointsSelectionFunctions (other.pointsSelectionFunctions()),
   m_pointsIntervalFunctions (other.pointsIntervalFunctions()),
@@ -59,7 +59,7 @@ DocumentModelExport::DocumentModelExport(const DocumentModelExport &other) :
 
 }
 
-DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &other)
+DocumentModelExportFormat &DocumentModelExportFormat::operator=(const DocumentModelExportFormat &other)
 {
   m_curveNamesNotExported = other.curveNamesNotExported();
   m_pointsSelectionFunctions = other.pointsSelectionFunctions();
@@ -76,29 +76,29 @@ DocumentModelExport &DocumentModelExport::operator=(const DocumentModelExport &o
   return *this;
 }
 
-QStringList DocumentModelExport::curveNamesNotExported() const
+QStringList DocumentModelExportFormat::curveNamesNotExported() const
 {
   return m_curveNamesNotExported;
 }
 
-ExportDelimiter DocumentModelExport::delimiter() const
+ExportDelimiter DocumentModelExportFormat::delimiter() const
 {
   return m_delimiter;
 }
 
-ExportHeader DocumentModelExport::header() const
+ExportHeader DocumentModelExportFormat::header() const
 {
   return m_header;
 }
 
-ExportLayoutFunctions DocumentModelExport::layoutFunctions() const
+ExportLayoutFunctions DocumentModelExportFormat::layoutFunctions() const
 {
   return m_layoutFunctions;
 }
 
-void DocumentModelExport::loadXml(QXmlStreamReader &reader)
+void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::loadXml";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExportFormat::loadXml";
 
   bool success = true;
 
@@ -169,40 +169,40 @@ void DocumentModelExport::loadXml(QXmlStreamReader &reader)
   }
 }
 
-double DocumentModelExport::pointsIntervalFunctions() const
+double DocumentModelExportFormat::pointsIntervalFunctions() const
 {
   return m_pointsIntervalFunctions;
 }
 
-double DocumentModelExport::pointsIntervalRelations() const
+double DocumentModelExportFormat::pointsIntervalRelations() const
 {
   return m_pointsIntervalRelations;
 }
 
-ExportPointsIntervalUnits DocumentModelExport::pointsIntervalUnitsFunctions() const
+ExportPointsIntervalUnits DocumentModelExportFormat::pointsIntervalUnitsFunctions() const
 {
   return m_pointsIntervalUnitsFunctions;
 }
 
-ExportPointsIntervalUnits DocumentModelExport::pointsIntervalUnitsRelations() const
+ExportPointsIntervalUnits DocumentModelExportFormat::pointsIntervalUnitsRelations() const
 {
   return m_pointsIntervalUnitsRelations;
 }
 
-ExportPointsSelectionFunctions DocumentModelExport::pointsSelectionFunctions() const
+ExportPointsSelectionFunctions DocumentModelExportFormat::pointsSelectionFunctions() const
 {
   return m_pointsSelectionFunctions;
 }
 
-ExportPointsSelectionRelations DocumentModelExport::pointsSelectionRelations() const
+ExportPointsSelectionRelations DocumentModelExportFormat::pointsSelectionRelations() const
 {
   return m_pointsSelectionRelations;
 }
 
-void DocumentModelExport::printStream(QString indentation,
+void DocumentModelExportFormat::printStream(QString indentation,
                                       QTextStream &str) const
 {
-  str << indentation << "DocumentModelExport\n";
+  str << indentation << "DocumentModelExportFormat\n";
 
   indentation += INDENTATION_DELTA;
 
@@ -230,9 +230,9 @@ void DocumentModelExport::printStream(QString indentation,
   str << indentation << "xLabel=" << m_xLabel << "\n";
 }
 
-void DocumentModelExport::saveXml(QXmlStreamWriter &writer) const
+void DocumentModelExportFormat::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExport::saveXml";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelExportFormat::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_EXPORT);
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS, QString::number (m_pointsSelectionFunctions));
@@ -265,62 +265,62 @@ void DocumentModelExport::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void DocumentModelExport::setCurveNamesNotExported(const QStringList &curveNamesNotExported)
+void DocumentModelExportFormat::setCurveNamesNotExported(const QStringList &curveNamesNotExported)
 {
   m_curveNamesNotExported = curveNamesNotExported;
 }
 
-void DocumentModelExport::setDelimiter(ExportDelimiter delimiter)
+void DocumentModelExportFormat::setDelimiter(ExportDelimiter delimiter)
 {
   m_delimiter = delimiter;
 }
 
-void DocumentModelExport::setHeader(ExportHeader header)
+void DocumentModelExportFormat::setHeader(ExportHeader header)
 {
   m_header = header;
 }
 
-void DocumentModelExport::setLayoutFunctions(ExportLayoutFunctions layoutFunctions)
+void DocumentModelExportFormat::setLayoutFunctions(ExportLayoutFunctions layoutFunctions)
 {
   m_layoutFunctions = layoutFunctions;
 }
 
-void DocumentModelExport::setPointsIntervalFunctions(double pointsIntervalFunctions)
+void DocumentModelExportFormat::setPointsIntervalFunctions(double pointsIntervalFunctions)
 {
   m_pointsIntervalFunctions = pointsIntervalFunctions;
 }
 
-void DocumentModelExport::setPointsIntervalRelations(double pointsIntervalRelations)
+void DocumentModelExportFormat::setPointsIntervalRelations(double pointsIntervalRelations)
 {
   m_pointsIntervalRelations = pointsIntervalRelations;
 }
 
-void DocumentModelExport::setPointsIntervalUnitsFunctions(ExportPointsIntervalUnits pointsIntervalUnitsFunctions)
+void DocumentModelExportFormat::setPointsIntervalUnitsFunctions(ExportPointsIntervalUnits pointsIntervalUnitsFunctions)
 {
   m_pointsIntervalUnitsFunctions = pointsIntervalUnitsFunctions;
 }
 
-void DocumentModelExport::setPointsIntervalUnitsRelations(ExportPointsIntervalUnits pointsIntervalUnitsRelations)
+void DocumentModelExportFormat::setPointsIntervalUnitsRelations(ExportPointsIntervalUnits pointsIntervalUnitsRelations)
 {
   m_pointsIntervalUnitsRelations = pointsIntervalUnitsRelations;
 }
 
-void DocumentModelExport::setPointsSelectionFunctions(ExportPointsSelectionFunctions pointsSelectionFunctions)
+void DocumentModelExportFormat::setPointsSelectionFunctions(ExportPointsSelectionFunctions pointsSelectionFunctions)
 {
   m_pointsSelectionFunctions = pointsSelectionFunctions;
 }
 
-void DocumentModelExport::setPointsSelectionRelations(ExportPointsSelectionRelations pointsSelectionRelations)
+void DocumentModelExportFormat::setPointsSelectionRelations(ExportPointsSelectionRelations pointsSelectionRelations)
 {
   m_pointsSelectionRelations = pointsSelectionRelations;
 }
 
-void DocumentModelExport::setXLabel (const QString &xLabel)
+void DocumentModelExportFormat::setXLabel (const QString &xLabel)
 {
   m_xLabel = xLabel;
 }
 
-QString DocumentModelExport::xLabel () const
+QString DocumentModelExportFormat::xLabel () const
 {
   return m_xLabel;
 }

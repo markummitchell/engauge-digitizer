@@ -1,7 +1,7 @@
 #ifndef EXPORT_X_THETA_VALUES_MERGED_FUNCTIONS_H
 #define EXPORT_X_THETA_VALUES_MERGED_FUNCTIONS_H
 
-#include "DocumentModelExport.h"
+#include "DocumentModelExportFormat.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
@@ -14,7 +14,7 @@ class ExportXThetaValuesMergedFunctions
 {
 public:
   /// Single constructor.
-  ExportXThetaValuesMergedFunctions(const DocumentModelExport &modelExport,
+  ExportXThetaValuesMergedFunctions(const DocumentModelExportFormat &modelExport,
                                     const ValuesVectorXOrY &xThetaValuesRaw,
                                     const Transformation &transformation);
 
@@ -43,7 +43,7 @@ private:
   ExportValuesXOrY periodicLogScreen (double xThetaMin,
                                       double xThetaMax) const;
 
-  const DocumentModelExport m_modelExport;
+  const DocumentModelExportFormat m_modelExport;
   const ValuesVectorXOrY m_xThetaValuesRaw;
   const Transformation m_transformation;
 };

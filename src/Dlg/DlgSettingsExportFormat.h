@@ -1,9 +1,9 @@
-#ifndef DLG_SETTINGS_EXPORT_H
-#define DLG_SETTINGS_EXPORT_H
+#ifndef DLG_SETTINGS_EXPORT_FORMAT_H
+#define DLG_SETTINGS_EXPORT_FORMAT_H
 
 #include "DlgSettingsAbstractBase.h"
 
-class DocumentModelExport;
+class DocumentModelExportFormat;
 class QComboBox;
 class QDoubleValidator;
 class QGridLayout;
@@ -18,14 +18,14 @@ class QTextEdit;
 class QVBoxLayout;
 
 /// Stacked widget page for editing exporting settings.
-class DlgSettingsExport : public DlgSettingsAbstractBase
+class DlgSettingsExportFormat : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgSettingsExport(MainWindow &mainWindow);
-  virtual ~DlgSettingsExport();
+  DlgSettingsExportFormat(MainWindow &mainWindow);
+  virtual ~DlgSettingsExportFormat();
 
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
@@ -116,8 +116,8 @@ private:
 
   QTextEdit *m_editPreview;
 
-  DocumentModelExport *m_modelExportBefore;
-  DocumentModelExport *m_modelExportAfter;
+  DocumentModelExportFormat *m_modelExportBefore;
+  DocumentModelExportFormat *m_modelExportAfter;
 
   // Safe values are computed for intervals and then applied according to the current settings. This prevents
   // accidentally generating exports with thousands of points. That causes delays and can even overflow resources
@@ -126,4 +126,4 @@ private:
   double m_minIntervalScreen;
 };
 
-#endif // DLG_SETTINGS_EXPORT_H
+#endif // DLG_SETTINGS_EXPORT_FORMAT_H

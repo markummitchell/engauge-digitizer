@@ -21,7 +21,7 @@ ExportFileFunctions::ExportFileFunctions()
 {
 }
 
-void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const ExportValuesXOrY &xThetaValues,
@@ -55,7 +55,7 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
   destroy2DArray (yRadiusValues);
 }
 
-void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const ExportValuesXOrY &xThetaValues,
@@ -102,7 +102,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileFunctions::exportToFile (const DocumentModelExport &modelExportOverride,
+void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelExportOverride,
                                         const Document &document,
                                         const Transformation &transformation,
                                         QTextStream &str) const
@@ -220,7 +220,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
   return yRadius;
 }
 
-void ExportFileFunctions::loadYRadiusValues (const DocumentModelExport &modelExportOverride,
+void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                              const Document &document,
                                              const QStringList &curvesIncluded,
                                              const Transformation &transformation,
@@ -395,7 +395,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveRaw (const DocumentModelCoord
   }
 }
 
-void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                                      const DocumentModelCoords &modelCoords,
                                                      const QStringList &curvesIncluded,
                                                      const ExportValuesXOrY &xThetaValuesMerged,

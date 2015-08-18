@@ -1,8 +1,8 @@
 #include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
-#include "CmdSettingsExport.h"
-#include "DocumentModelExport.h"
-#include "DlgSettingsExport.h"
+#include "CmdSettingsExportFormat.h"
+#include "DocumentModelExportFormat.h"
+#include "DlgSettingsExportFormat.h"
 #include "ExportFileFunctions.h"
 #include "ExportFileRelations.h"
 #include "Logger.h"
@@ -34,27 +34,27 @@ const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 const QString EMPTY_PREVIEW;
 
-DlgSettingsExport::DlgSettingsExport(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Export",
-                           "DlgSettingsExport",
+DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
+  DlgSettingsAbstractBase ("Export Format",
+                           "DlgSettingsExportFormat",
                            mainWindow),
   m_modelExportBefore (0),
   m_modelExportAfter (0)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::DlgSettingsExport";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::DlgSettingsExportFormat";
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel);
 }
 
-DlgSettingsExport::~DlgSettingsExport()
+DlgSettingsExportFormat::~DlgSettingsExportFormat()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::~DlgSettingsExport";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::~DlgSettingsExportFormat";
 }
 
-void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
+void DlgSettingsExportFormat::createCurveSelection (QGridLayout *layout, int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createCurveSelection";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createCurveSelection";
 
   QLabel *labelIncluded = new QLabel (tr ("Included"));
   layout->addWidget (labelIncluded, row, 0);
@@ -91,9 +91,9 @@ void DlgSettingsExport::createCurveSelection (QGridLayout *layout, int &row)
   row++;
 }
 
-void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
+void DlgSettingsExportFormat::createDelimiters (QHBoxLayout *layoutMisc)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createDelimiters";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createDelimiters";
 
   QGroupBox *groupDelimiters = new QGroupBox (tr ("Delimiters"));
   layoutMisc->addWidget (groupDelimiters, 1);
@@ -117,9 +117,9 @@ void DlgSettingsExport::createDelimiters (QHBoxLayout *layoutMisc)
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
 }
 
-void DlgSettingsExport::createFileLayout (QHBoxLayout *layoutMisc)
+void DlgSettingsExportFormat::createFileLayout (QHBoxLayout *layoutMisc)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFileLayout";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createFileLayout";
 
   QGroupBox *groupLayout = new QGroupBox (tr ("Layout"));
   layoutMisc->addWidget (groupLayout, 1);
@@ -140,9 +140,9 @@ void DlgSettingsExport::createFileLayout (QHBoxLayout *layoutMisc)
   connect (m_btnFunctionsLayoutOneCurve, SIGNAL (released()), this, SLOT (slotFunctionsLayoutOneCurve ()));
 }
 
-void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
+void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layoutFunctions)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createFunctionsPointsSelection";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createFunctionsPointsSelection";
 
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutFunctions->addWidget (groupPointsSelection, 1);
@@ -210,9 +210,9 @@ void DlgSettingsExport::createFunctionsPointsSelection (QHBoxLayout *layoutFunct
   connect (m_btnFunctionsPointsRaw, SIGNAL (released()), this, SLOT (slotFunctionsPointsRaw()));
 }
 
-void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
+void DlgSettingsExportFormat::createHeader (QHBoxLayout *layoutMisc)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createHeader";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createHeader";
 
   const int COLUMN_RADIO_BUTTONS = 0, COLUMN_EMPTY = 1, COLUMN_LABEL = 2;
 
@@ -244,9 +244,9 @@ void DlgSettingsExport::createHeader (QHBoxLayout *layoutMisc)
                 COLUMN_LABEL);
 }
 
-void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
+void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createPreview";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createPreview";
 
   QLabel *label = new QLabel (tr ("Preview"));
   layout->addWidget (label, row++, 0, 1, 3);
@@ -259,9 +259,9 @@ void DlgSettingsExport::createPreview(QGridLayout *layout, int &row)
   layout->addWidget (m_editPreview, row++, 0, 1, 3);
 }
 
-void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelations)
+void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layoutRelations)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createRelationsPointsSelection";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createRelationsPointsSelection";
 
   QGroupBox *groupPointsSelection = new QGroupBox (tr ("Points Selection"));
   layoutRelations->addWidget (groupPointsSelection);
@@ -315,9 +315,9 @@ void DlgSettingsExport::createRelationsPointsSelection (QHBoxLayout *layoutRelat
   connect (m_btnRelationsPointsRaw, SIGNAL (released()), this, SLOT (slotRelationsPointsRaw()));
 }
 
-QWidget *DlgSettingsExport::createSubPanel ()
+QWidget *DlgSettingsExportFormat::createSubPanel ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createSubPanel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createSubPanel";
 
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
@@ -343,10 +343,10 @@ QWidget *DlgSettingsExport::createSubPanel ()
   return subPanel;
 }
 
-void DlgSettingsExport::createTabWidget (QGridLayout *layout,
+void DlgSettingsExportFormat::createTabWidget (QGridLayout *layout,
                                          int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createTabWidget";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createTabWidget";
 
   m_tabWidget = new QTabWidget;
   // This gets connected below, after the tabs have been added
@@ -375,10 +375,10 @@ void DlgSettingsExport::createTabWidget (QGridLayout *layout,
   createRelationsPointsSelection (layoutRelations);
 }
 
-void DlgSettingsExport::createXLabel (QGridLayout *layoutHeader,
+void DlgSettingsExportFormat::createXLabel (QGridLayout *layoutHeader,
                                       int colLabel)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::createXLabel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createXLabel";
 
   int row = 1; // Skip first row
 
@@ -400,7 +400,7 @@ void DlgSettingsExport::createXLabel (QGridLayout *layoutHeader,
   connect (m_editXLabel, SIGNAL (textChanged (const QString &)), this, SLOT (slotXLabel(const QString &)));
 }
 
-bool DlgSettingsExport::goodIntervalFunctions() const
+bool DlgSettingsExportFormat::goodIntervalFunctions() const
 {
   QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
   int posFunctions;
@@ -410,7 +410,7 @@ bool DlgSettingsExport::goodIntervalFunctions() const
   return isGood;
 }
 
-bool DlgSettingsExport::goodIntervalRelations() const
+bool DlgSettingsExportFormat::goodIntervalRelations() const
 {
   QString textRelations = m_editRelationsPointsEvenlySpacing->text();
   int posRelations;
@@ -418,11 +418,11 @@ bool DlgSettingsExport::goodIntervalRelations() const
   return (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
 }
 
-void DlgSettingsExport::handleOk ()
+void DlgSettingsExportFormat::handleOk ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::handleOk";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::handleOk";
 
-  CmdSettingsExport *cmd = new CmdSettingsExport (mainWindow (),
+  CmdSettingsExportFormat *cmd = new CmdSettingsExportFormat (mainWindow (),
                                                   cmdMediator ().document(),
                                                   *m_modelExportBefore,
                                                   *m_modelExportAfter);
@@ -431,9 +431,9 @@ void DlgSettingsExport::handleOk ()
   hide ();
 }
 
-void DlgSettingsExport::initializeIntervalConstraints ()
+void DlgSettingsExportFormat::initializeIntervalConstraints ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::initializeIntervalConstraints";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::initializeIntervalConstraints";
 
   const int MAX_POINTS_ACROSS_RANGE = 1000;
 
@@ -454,9 +454,9 @@ void DlgSettingsExport::initializeIntervalConstraints ()
   m_minIntervalScreen = maxSizeScreen / MAX_POINTS_ACROSS_RANGE;
 }
 
-void DlgSettingsExport::load (CmdMediator &cmdMediator)
+void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::load";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::load";
 
   setCmdMediator (cmdMediator);
 
@@ -469,8 +469,8 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   }
 
   // Save new data
-  m_modelExportBefore = new DocumentModelExport (cmdMediator.document());
-  m_modelExportAfter = new DocumentModelExport (cmdMediator.document());
+  m_modelExportBefore = new DocumentModelExportFormat (cmdMediator.document());
+  m_modelExportAfter = new DocumentModelExportFormat (cmdMediator.document());
 
   // Populate controls. First load excluded curves
   m_listExcluded->clear();
@@ -534,36 +534,36 @@ void DlgSettingsExport::load (CmdMediator &cmdMediator)
   updatePreview();
 }
 
-void DlgSettingsExport::slotDelimitersCommas()
+void DlgSettingsExportFormat::slotDelimitersCommas()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersCommas";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotDelimitersCommas";
 
   m_modelExportAfter->setDelimiter(EXPORT_DELIMITER_COMMA);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotDelimitersSpaces()
+void DlgSettingsExportFormat::slotDelimitersSpaces()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersSpaces";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotDelimitersSpaces";
 
   m_modelExportAfter->setDelimiter(EXPORT_DELIMITER_SPACE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotDelimitersTabs()
+void DlgSettingsExportFormat::slotDelimitersTabs()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotDelimitersTabs";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotDelimitersTabs";
 
   m_modelExportAfter->setDelimiter(EXPORT_DELIMITER_TAB);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotExclude ()
+void DlgSettingsExportFormat::slotExclude ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotExclude";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotExclude";
 
   // Perform forward pass to get excluded curves in the proper order
   int i;
@@ -595,45 +595,45 @@ void DlgSettingsExport::slotExclude ()
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsLayoutAllCurves()
+void DlgSettingsExportFormat::slotFunctionsLayoutAllCurves()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutAllCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsLayoutAllCurves";
 
   m_modelExportAfter->setLayoutFunctions(EXPORT_LAYOUT_ALL_PER_LINE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsLayoutOneCurve()
+void DlgSettingsExportFormat::slotFunctionsLayoutOneCurve()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsLayoutOneCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsLayoutOneCurve";
 
   m_modelExportAfter->setLayoutFunctions(EXPORT_LAYOUT_ONE_PER_LINE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsPointsAllCurves()
+void DlgSettingsExportFormat::slotFunctionsPointsAllCurves()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsAllCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsAllCurves";
 
   m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsPointsEvenlySpaced()
+void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpaced()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpaced";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsEvenlySpaced";
 
   m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval(const QString &)
+void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval";
 
   // Prevent infinite loop on empty and "-" values which get treated as zero interval
   if (goodIntervalFunctions()) {
@@ -645,9 +645,9 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedInterval(const QString &)
   }
 }
 
-void DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &)
+void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits";
 
   int index = m_cmbFunctionsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt();
@@ -658,54 +658,54 @@ void DlgSettingsExport::slotFunctionsPointsEvenlySpacedIntervalUnits(const QStri
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsPointsFirstCurve()
+void DlgSettingsExportFormat::slotFunctionsPointsFirstCurve()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsFirstCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsFirstCurve";
 
   m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotFunctionsPointsRaw()
+void DlgSettingsExportFormat::slotFunctionsPointsRaw()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotFunctionsPointsRaw";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsRaw";
 
   m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_RAW);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotHeaderGnuplot()
+void DlgSettingsExportFormat::slotHeaderGnuplot()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderGnuplot";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotHeaderGnuplot";
 
   m_modelExportAfter->setHeader(EXPORT_HEADER_GNUPLOT);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotHeaderNone()
+void DlgSettingsExportFormat::slotHeaderNone()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderNone";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotHeaderNone";
 
   m_modelExportAfter->setHeader(EXPORT_HEADER_NONE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotHeaderSimple()
+void DlgSettingsExportFormat::slotHeaderSimple()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotHeaderSimple";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotHeaderSimple";
 
   m_modelExportAfter->setHeader(EXPORT_HEADER_SIMPLE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotInclude ()
+void DlgSettingsExportFormat::slotInclude ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotInclude";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotInclude";
 
   // Perform forward pass to get included curves in the proper order
   int i;
@@ -740,43 +740,43 @@ void DlgSettingsExport::slotInclude ()
   updatePreview();
 }
 
-void DlgSettingsExport::slotListExcluded()
+void DlgSettingsExportFormat::slotListExcluded()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListExcluded";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotListExcluded";
 
   updateControls();
   // Do not call updatePreview since this method changes nothing
 }
 
-void DlgSettingsExport::slotListIncluded()
+void DlgSettingsExportFormat::slotListIncluded()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotListIncluded";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotListIncluded";
 
   updateControls();
   // Do not call updatePreview since this method changes nothing
 }
 
-void DlgSettingsExport::slotRelationsPointsEvenlySpaced()
+void DlgSettingsExportFormat::slotRelationsPointsEvenlySpaced()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpaced";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsEvenlySpaced";
 
   m_modelExportAfter->setPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval(const QString &)
+void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedInterval(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedInterval";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedInterval";
 
   m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits(const QString &)
+void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits";
 
   int index = m_cmbRelationsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt();
@@ -787,32 +787,32 @@ void DlgSettingsExport::slotRelationsPointsEvenlySpacedIntervalUnits(const QStri
   updatePreview();
 }
 
-void DlgSettingsExport::slotRelationsPointsRaw()
+void DlgSettingsExportFormat::slotRelationsPointsRaw()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotRelationsPointsRaw";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsRaw";
 
   m_modelExportAfter->setPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_RAW);
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::slotTabChanged (int)
+void DlgSettingsExportFormat::slotTabChanged (int)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotTabChanged";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotTabChanged";
 
   updatePreview();
 }
 
-void DlgSettingsExport::slotXLabel(const QString &)
+void DlgSettingsExportFormat::slotXLabel(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExport::slotXLabel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotXLabel";
 
   m_modelExportAfter->setXLabel (m_editXLabel->text());
   updateControls();
   updatePreview();
 }
 
-void DlgSettingsExport::updateControls ()
+void DlgSettingsExportFormat::updateControls ()
 {
   bool isGoodState = goodIntervalFunctions() &&
                      goodIntervalRelations();
@@ -834,7 +834,7 @@ void DlgSettingsExport::updateControls ()
   m_editXLabel->setEnabled (!m_btnHeaderNone->isChecked());
 }
 
-void DlgSettingsExport::updateIntervalConstraints ()
+void DlgSettingsExportFormat::updateIntervalConstraints ()
 {
   double functionsMin = (m_modelExportAfter->pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH ?
                            m_minIntervalGraph :
@@ -866,7 +866,7 @@ void DlgSettingsExport::updateIntervalConstraints ()
   }
 }
 
-void DlgSettingsExport::updatePreview()
+void DlgSettingsExportFormat::updatePreview()
 {
   // Save the scroll position for continuity before and after the preview update
   int scrollPosition = m_editPreview->verticalScrollBar()->value();

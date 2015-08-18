@@ -27,7 +27,7 @@ class CurveNameListEntry
   /// Constructor for converting from QVariant.
   CurveNameListEntry (const QString &fromText);
 
-  /// Curve name displayed in DlgSettingsCurveNames.
+  /// Curve name displayed in DlgSettingsCurveAddRemove.
   QString curveNameCurrent () const;
 
   /// Original curve name in document. Empty if there was no original curve

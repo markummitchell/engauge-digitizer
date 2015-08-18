@@ -23,7 +23,7 @@ QString ExportFileAbstractBase::curveSeparator (const QString &string) const
   }
 }
 
-QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExport &modelExportOverride,
+QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
                                                      const Document &document,
                                                      const QStringList &curvesGraphsNames,
                                                      CurveConnectAs curveConnectAs1,

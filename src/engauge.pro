@@ -42,9 +42,9 @@ HEADERS  += \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
     Cmd/CmdSettingsCoords.h \
-    Cmd/CmdSettingsCurveNames.h \
+    Cmd/CmdSettingsCurveAddRemove.h \
     Cmd/CmdSettingsCurveProperties.h \
-    Cmd/CmdSettingsExport.h \
+    Cmd/CmdSettingsExportFormat.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
@@ -93,9 +93,9 @@ HEADERS  += \
     Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsColorFilter.h \
     Dlg/DlgSettingsCoords.h \
-    Dlg/DlgSettingsCurveNames.h \
+    Dlg/DlgSettingsCurveAddRemove.h \
     Dlg/DlgSettingsCurveProperties.h \
-    Dlg/DlgSettingsExport.h \
+    Dlg/DlgSettingsExportFormat.h \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
@@ -109,7 +109,7 @@ HEADERS  += \
     Document/DocumentModelAxesChecker.h \
     Document/DocumentModelColorFilter.h \
     Document/DocumentModelCoords.h \
-    Document/DocumentModelExport.h \
+    Document/DocumentModelExportFormat.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -234,9 +234,9 @@ SOURCES += \
     Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsColorFilter.cpp \
     Cmd/CmdSettingsCoords.cpp \
-    Cmd/CmdSettingsCurveNames.cpp \
+    Cmd/CmdSettingsCurveAddRemove.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
-    Cmd/CmdSettingsExport.cpp \
+    Cmd/CmdSettingsExportFormat.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
@@ -283,9 +283,9 @@ SOURCES += \
     Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsColorFilter.cpp \
     Dlg/DlgSettingsCoords.cpp \
-    Dlg/DlgSettingsCurveNames.cpp \
+    Dlg/DlgSettingsCurveAddRemove.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
-    Dlg/DlgSettingsExport.cpp \
+    Dlg/DlgSettingsExportFormat.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
@@ -299,7 +299,7 @@ SOURCES += \
     Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelColorFilter.cpp \
     Document/DocumentModelCoords.cpp \
-    Document/DocumentModelExport.cpp \
+    Document/DocumentModelExportFormat.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \

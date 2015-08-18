@@ -1,4 +1,4 @@
-#include "CmdSettingsCurveNames.h"
+#include "CmdSettingsCurveAddRemove.h"
 #include "CurveNameList.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -6,16 +6,16 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Curves settings");
+const QString CMD_DESCRIPTION ("Curve add/remove");
 
-CmdSettingsCurveNames::CmdSettingsCurveNames(MainWindow &mainWindow,
-                                             Document &document,
-                                             const CurveNameList &modelCurves) :
+CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove(MainWindow &mainWindow,
+                                                     Document &document,
+                                                     const CurveNameList &modelCurves) :
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::CmdSettingsCurveNames";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove";
 
   m_curvesGraphsBefore = document.curvesGraphs ();
 
@@ -49,44 +49,44 @@ CmdSettingsCurveNames::CmdSettingsCurveNames(MainWindow &mainWindow,
   }
 }
 
-CmdSettingsCurveNames::CmdSettingsCurveNames (MainWindow &mainWindow,
-                                              Document &document,
-                                              const QString &cmdDescription,
-                                              QXmlStreamReader &reader) :
+CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
+                                                      Document &document,
+                                                      const QString &cmdDescription,
+                                                      QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::CmdSettingsCurveNames";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove";
   
   m_curvesGraphsBefore.loadXml (reader);
   m_curvesGraphsAfter.loadXml (reader);
 }
 
-CmdSettingsCurveNames::~CmdSettingsCurveNames ()
+CmdSettingsCurveAddRemove::~CmdSettingsCurveAddRemove ()
 {
 }
 
-void CmdSettingsCurveNames::cmdRedo ()
+void CmdSettingsCurveAddRemove::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdRedo";
 
-  mainWindow().updateSettingsCurveNames(m_curvesGraphsAfter);
+  mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurveNames::cmdUndo ()
+void CmdSettingsCurveAddRemove::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveNames::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdUndo";
 
-  mainWindow().updateSettingsCurveNames(m_curvesGraphsBefore);
+  mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsCurveNames::saveXml (QXmlStreamWriter &writer) const
+void CmdSettingsCurveAddRemove::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_NAMES);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_ADD_REMOVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   m_curvesGraphsBefore.saveXml(writer);
   m_curvesGraphsAfter.saveXml(writer);

@@ -24,7 +24,7 @@ ExportFileRelations::ExportFileRelations()
 {
 }
 
-void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
@@ -59,7 +59,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExport &modelExportOverride,
+void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
@@ -82,7 +82,7 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
   }
 }
 
-void ExportFileRelations::exportToFile (const DocumentModelExport &modelExportOverride,
+void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelExportOverride,
                                         const Document &document,
                                         const Transformation &transformation,
                                         QTextStream &str) const
@@ -186,7 +186,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
                   yRadius);
 }
 
-void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                                    const Document &document,
                                                    const QStringList &curvesIncluded,
                                                    const Transformation &transformation,
@@ -346,7 +346,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
   }
 }
 
-int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExport &modelExport,
+int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExportFormat &modelExport,
                                                   const Document &document,
                                                   const Transformation &transformation,
                                                   const QStringList &curvesIncluded) const
@@ -528,7 +528,7 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsStraightScreen (doub
   return ordinals;
 }
 
-void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExport &modelExportOverride,
+void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                                      const QStringList &curvesIncluded,
                                                      QVector<QVector<QString*> > &xThetaYRadiusValues,
                                                      const QString &delimiter,

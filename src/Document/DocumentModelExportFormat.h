@@ -1,5 +1,5 @@
-#ifndef DOCUMENT_MODEL_EXPORT_H
-#define DOCUMENT_MODEL_EXPORT_H
+#ifndef DOCUMENT_MODEL_EXPORT_FORMAT_H
+#define DOCUMENT_MODEL_EXPORT_FORMAT_H
 
 #include "DocumentModelAbstractBase.h"
 #include "ExportDelimiter.h"
@@ -13,21 +13,21 @@
 class Document;
 class QTextStream;
 
-/// Model for DlgSettingsExport and CmdSettingsExport.
-class DocumentModelExport : public DocumentModelAbstractBase
+/// Model for DlgSettingsExportFormat and CmdSettingsExportFormat.
+class DocumentModelExportFormat : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DocumentModelExport();
+  DocumentModelExportFormat();
 
   /// Initial constructor from Document.
-  DocumentModelExport(const Document &document);
+  DocumentModelExportFormat(const Document &document);
 
   /// Copy constructor.
-  DocumentModelExport(const DocumentModelExport &other);
+  DocumentModelExportFormat(const DocumentModelExportFormat &other);
 
   /// Assignment constructor.
-  DocumentModelExport &operator=(const DocumentModelExport &other);
+  DocumentModelExportFormat &operator=(const DocumentModelExportFormat &other);
 
   /// Get method for curve names not exported.
   QStringList curveNamesNotExported() const;
@@ -120,4 +120,4 @@ private:
   QString m_xLabel;
 };
 
-#endif // DOCUMENT_MODEL_EXPORT_H
+#endif // DOCUMENT_MODEL_EXPORT_FORMAT_H

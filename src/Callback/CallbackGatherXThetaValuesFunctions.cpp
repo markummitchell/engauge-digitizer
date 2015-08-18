@@ -1,5 +1,5 @@
 #include "CallbackGatherXThetaValuesFunctions.h"
-#include "DocumentModelExport.h"
+#include "DocumentModelExportFormat.h"
 #include "ExportAlignLinear.h"
 #include "ExportAlignLog.h"
 #include "ExportLayoutFunctions.h"
@@ -7,14 +7,14 @@
 #include "Logger.h"
 #include "Point.h"
 
-CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const DocumentModelExport &modelExport,
+CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const DocumentModelExportFormat &modelExport,
                                                                          const QStringList &curvesIncluded,
                                                                          const Transformation &transformation) :
   m_transformation (transformation)
 {
   bool firstCurveForGatherXTheta = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
 
-  // Included just the first curve, or all curves depending on DocumentModelExport
+  // Included just the first curve, or all curves depending on DocumentModelExportFormat
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
