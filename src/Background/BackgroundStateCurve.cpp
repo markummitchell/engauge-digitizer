@@ -34,7 +34,7 @@ void BackgroundStateCurve::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateCurve::processImageFromSavedInputs ()
+void BackgroundStateCurve::processImageFromSavedInputs (const DocumentModelColorFilter &modelColorFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::processImageFromSavedInputs";
 
@@ -50,9 +50,9 @@ void BackgroundStateCurve::processImageFromSavedInputs ()
     QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
     filter.filterImage (imageUnfiltered,
                         imageFiltered,
-                        m_modelColorFilter.colorFilterMode(m_curveSelected),
-                        m_modelColorFilter.low(m_curveSelected),
-                        m_modelColorFilter.high(m_curveSelected),
+                        modelColorFilter.colorFilterMode(m_curveSelected),
+                        modelColorFilter.low(m_curveSelected),
+                        modelColorFilter.high(m_curveSelected),
                         rgbBackground);
 
     setProcessedPixmap (QPixmap::fromImage (imageFiltered));
@@ -65,15 +65,8 @@ void BackgroundStateCurve::processImageFromSavedInputs ()
   }
 }
 
-void BackgroundStateCurve::setColorFilter (const DocumentModelColorFilter &modelColorFilter)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setColorFilter";
-
-  m_modelColorFilter = modelColorFilter;
-  processImageFromSavedInputs ();
-}
-
-void BackgroundStateCurve::setCurveSelected (const QString &curveSelected)
+void BackgroundStateCurve::setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+                                             const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setCurveSelected"
                               << " curve=" << curveSelected.toLatin1().data();
@@ -81,19 +74,27 @@ void BackgroundStateCurve::setCurveSelected (const QString &curveSelected)
   if (m_curveSelected != curveSelected) {
 
     m_curveSelected = curveSelected;
-    processImageFromSavedInputs ();
+    processImageFromSavedInputs (modelColorFilter);
   }
 }
 
-void BackgroundStateCurve::setPixmap (const QPixmap &pixmapOriginal)
+void BackgroundStateCurve::setPixmap (const DocumentModelColorFilter &modelColorFilter,
+                                      const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setPixmap";
 
   m_pixmapOriginal = pixmapOriginal;
-  processImageFromSavedInputs ();
+  processImageFromSavedInputs (modelColorFilter);
 }
 
 QString BackgroundStateCurve::state () const
 {
   return "BackgroundStateCurve";
+}
+
+void BackgroundStateCurve::updateColorFilter (const DocumentModelColorFilter &modelColorFilter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::updateColorFilter";
+
+  processImageFromSavedInputs (modelColorFilter);
 }

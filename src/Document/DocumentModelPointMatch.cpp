@@ -22,7 +22,6 @@ DocumentModelPointMatch::DocumentModelPointMatch() :
 }
 
 DocumentModelPointMatch::DocumentModelPointMatch(const Document &document) :
-  m_minPointSeparation (document.modelPointMatch().minPointSeparation()),
   m_maxPointSize (document.modelPointMatch().maxPointSize()),
   m_paletteColorAccepted (document.modelPointMatch().paletteColorAccepted()),
   m_paletteColorCandidate (document.modelPointMatch().paletteColorCandidate()),
@@ -31,7 +30,6 @@ DocumentModelPointMatch::DocumentModelPointMatch(const Document &document) :
 }
 
 DocumentModelPointMatch::DocumentModelPointMatch(const DocumentModelPointMatch &other) :
-  m_minPointSeparation (other.minPointSeparation()),
   m_maxPointSize (other.maxPointSize()),
   m_paletteColorAccepted (other.paletteColorAccepted()),
   m_paletteColorCandidate (other.paletteColorCandidate()),
@@ -41,7 +39,6 @@ DocumentModelPointMatch::DocumentModelPointMatch(const DocumentModelPointMatch &
 
 DocumentModelPointMatch &DocumentModelPointMatch::operator=(const DocumentModelPointMatch &other)
 {
-  m_minPointSeparation = other.minPointSeparation();
   m_maxPointSize = other.maxPointSize();
   m_paletteColorAccepted = other.paletteColorAccepted();
   m_paletteColorCandidate = other.paletteColorCandidate();
@@ -58,13 +55,11 @@ void DocumentModelPointMatch::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE) &&
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED)) {
 
-    setMinPointSeparation (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION).toDouble());
     setMaxPointSize (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE).toDouble());
     setPaletteColorAccepted ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED).toInt());
     setPaletteColorCandidate ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE).toInt());
@@ -89,11 +84,6 @@ void DocumentModelPointMatch::loadXml(QXmlStreamReader &reader)
 double DocumentModelPointMatch::maxPointSize () const
 {
   return m_maxPointSize;
-}
-
-double DocumentModelPointMatch::minPointSeparation() const
-{
-  return m_minPointSeparation;
 }
 
 ColorPalette DocumentModelPointMatch::paletteColorAccepted() const
@@ -130,7 +120,6 @@ void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelPointMatch::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_MATCH);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SEPARATION, QString::number (m_minPointSeparation));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE, QString::number (m_maxPointSize));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED, QString::number (m_paletteColorAccepted));
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED_STRING, colorPaletteToString (m_paletteColorAccepted));
@@ -144,11 +133,6 @@ void DocumentModelPointMatch::saveXml(QXmlStreamWriter &writer) const
 void DocumentModelPointMatch::setMaxPointSize(double maxPointSize)
 {
   m_maxPointSize = maxPointSize;
-}
-
-void DocumentModelPointMatch::setMinPointSeparation(double minPointSeparation)
-{
-  m_minPointSeparation = minPointSeparation;
 }
 
 void DocumentModelPointMatch::setPaletteColorAccepted(ColorPalette paletteColorAccepted)

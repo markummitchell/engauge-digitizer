@@ -14,10 +14,12 @@ class BackgroundStateUnloaded : public BackgroundStateAbstractBase
   virtual void begin();
   virtual void end();
   virtual void fitInView (GraphicsView &view);
-  virtual void setColorFilter (const DocumentModelColorFilter &colorFilter);
-  virtual void setCurveSelected (const QString &curveSelected);
-  virtual void setPixmap (const QPixmap &pixmap);
+  virtual void setCurveSelected (const DocumentModelColorFilter &colorFilter,
+                                 const QString &curveSelected);
+  virtual void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+                          const QPixmap &pixmap);
   virtual QString state () const;
+  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter);
 
  private:
   BackgroundStateUnloaded();

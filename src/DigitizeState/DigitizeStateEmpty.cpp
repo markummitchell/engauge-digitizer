@@ -50,7 +50,7 @@ void DigitizeStateEmpty::handleKeyPress (Qt::Key key)
 
 void DigitizeStateEmpty::handleMouseMove (QPointF /* posScreen */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseMove";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseMove";
 }
 
 void DigitizeStateEmpty::handleMousePress (QPointF /* posScreen */)

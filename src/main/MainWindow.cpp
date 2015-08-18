@@ -1159,7 +1159,7 @@ void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
 
 void MainWindow::resizeEvent(QResizeEvent * /* event */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::resizeEvent";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::resizeEvent";
 
   if (m_actionZoomFill->isChecked ()) {
     slotViewZoomFill();
@@ -1428,7 +1428,8 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
   m_digitizeStateContext->setImageIsLoaded (true);
-  m_backgroundStateContext->setPixmap (pixmap);
+  m_backgroundStateContext->setPixmap (m_cmdMediator->document().modelColorFilter(),
+                                       pixmap);
 }
 
 void MainWindow::settingsRead ()
@@ -1543,8 +1544,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   // Set up background before slotViewZoomFill which relies on the background
   setPixmap (m_cmdMediator->pixmap ());
-  m_backgroundStateContext->setColorFilter (m_cmdMediator->document().modelColorFilter());
-  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
+  m_backgroundStateContext->setCurveSelected (m_cmdMediator->document().modelColorFilter(),
+                                              m_cmbCurve->currentText ());
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
   slotViewZoomFill();
@@ -1610,7 +1611,8 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  m_backgroundStateContext->setCurveSelected (m_cmbCurve->currentText ());
+  m_backgroundStateContext->setCurveSelected (m_cmdMediator->document().modelColorFilter(),
+                                              m_cmbCurve->currentText ());
   m_digitizeStateContext->handleCurveChange ();
 
   updateViewedCurves();
@@ -2651,7 +2653,7 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
-  m_backgroundStateContext->setColorFilter (modelColorFilter);
+  m_backgroundStateContext->updateColorFilter (modelColorFilter);
   m_digitizeStateContext->handleCurveChange ();
   updateViewsOfSettings();
 }
@@ -2794,6 +2796,6 @@ void MainWindow::writeCheckpointToLogFile ()
                                  << "---------------DOCUMENT CHECKPOINT END-----------" << "\n"
                                  << "----------------SCENE CHECKPOINT START-----------" << "\n"
                                  << checkpointScene.toLatin1().data()
-                                 << "-----------------SCENE CHECKPOINT END------------";
+                                 << "-----------------SCENE CHECKPOINT END------------" ;
   }
 }

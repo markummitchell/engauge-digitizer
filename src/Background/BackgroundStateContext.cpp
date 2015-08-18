@@ -109,17 +109,8 @@ void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage
   completeRequestedStateTransitionIfExists ();
 }
 
-void BackgroundStateContext::setColorFilter (const DocumentModelColorFilter &modelColorFilter)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setColorFilter";
-
-  for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
-
-    m_states [backgroundState]->setColorFilter (modelColorFilter);
-  }
-}
-
-void BackgroundStateContext::setCurveSelected (const QString &curveSelected)
+void BackgroundStateContext::setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+                                               const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setCurveSelected"
                               << " curve=" << curveSelected.toLatin1().data();
@@ -128,16 +119,29 @@ void BackgroundStateContext::setCurveSelected (const QString &curveSelected)
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setCurveSelected (curveSelected);
+    m_states [backgroundState]->setCurveSelected (modelColorFilter,
+                                                  curveSelected);
   }
 }
 
-void BackgroundStateContext::setPixmap (const QPixmap &pixmapOriginal)
+void BackgroundStateContext::setPixmap (const DocumentModelColorFilter &modelColorFilter,
+                                        const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap";
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setPixmap (pixmapOriginal);
+    m_states [backgroundState]->setPixmap (modelColorFilter,
+                                           pixmapOriginal);
+  }
+}
+
+void BackgroundStateContext::updateColorFilter (const DocumentModelColorFilter &modelColorFilter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::updateColorFilter";
+
+  for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
+
+    m_states [backgroundState]->updateColorFilter (modelColorFilter);
   }
 }

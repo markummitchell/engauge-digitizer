@@ -407,9 +407,11 @@ void Segment::removeUnneededLines (int *foldedLines)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::removeUnneededLines";
 
+#ifdef LOG_TO_GNUPLOT
   QFile fileDump ("Segment.out");
   fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
   QTextStream strDump (&fileDump);
+#endif
 
   // Pathological case is y=0.001*x*x, since the small slope can fool a naive algorithm
   // into optimizing away all but one point at the origin and another point at the far right.
@@ -440,12 +442,14 @@ void Segment::removeUnneededLines (int *foldedLines)
         if (pointIsCloseToLine(xLeft, yLeft, xInt, yInt, xRight, yRight) &&
           pointsAreCloseToLine(xLeft, yLeft, removedPoints, xRight, yRight)) {
 
+#ifdef LOG_TO_GNUPLOT
           // Dump
           dumpToGnuplot (strDump,
                          xInt,
                          yInt,
                          linePrevious,
                          line);
+#endif
 
           // Remove intermediate point, by removing older line and stretching new line to first point
           ++(*foldedLines);
@@ -485,7 +489,9 @@ void Segment::removeUnneededLines (int *foldedLines)
     }
   }
 
+#ifdef LOG_TO_GNUPLOT
   strDump << "set terminal x11 persist\n";
+#endif
 }
 
 void Segment::setDocumentModelSegments (const DocumentModelSegments &modelSegments)

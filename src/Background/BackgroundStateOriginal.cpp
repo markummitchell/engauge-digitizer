@@ -33,26 +33,27 @@ void BackgroundStateOriginal::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateOriginal::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setColorFilter";
-}
-
-void BackgroundStateOriginal::setCurveSelected (const QString & /* curveSelected */)
+void BackgroundStateOriginal::setCurveSelected (const DocumentModelColorFilter & /* modelColorFilter */,
+                                                const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setCurveSelected";
 }
 
-void BackgroundStateOriginal::setPixmap (const QPixmap &pixmapOriginal)
+void BackgroundStateOriginal::setPixmap (const DocumentModelColorFilter & /* modelColorFilter */,
+                                         const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setPixmap";
 
   // Unfiltered original image
   setProcessedPixmap (pixmapOriginal);
-
 }
 
 QString BackgroundStateOriginal::state () const
 {
   return "BackgroundStateOriginal";
+}
+
+void BackgroundStateOriginal::updateColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::updateColorFilter";
 }

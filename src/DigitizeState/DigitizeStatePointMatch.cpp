@@ -40,12 +40,10 @@ void DigitizeStatePointMatch::begin (DigitizeState /* previousState */)
   context().setDragMode(QGraphicsView::NoDrag);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
-  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
-
   // Add outline that will move with the cursor
   m_outline = new QGraphicsEllipseItem ();
   context().mainWindow().scene().addItem (m_outline);
-  m_outline->setPen (QPen (ColorPaletteToQColor (modelPointMatch.paletteColorCandidate())));
+  m_outline->setPen (QPen (Qt::black));
   m_outline->setVisible (false);
   m_outline->setZValue (Z_VALUE);
 }
@@ -79,16 +77,16 @@ void DigitizeStatePointMatch::handleKeyPress (Qt::Key key)
 
 void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseMove";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseMove";
 
-  const int SIZE = 20;
+  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
 
   bool pixelIsOn = true; // TODO fix this to use filtered image
   if (pixelIsOn) {
-    m_outline->setRect (posScreen.x() - SIZE / 2.0,
-                        posScreen.y() - SIZE / 2.0,
-                        SIZE,
-                        SIZE);
+    m_outline->setRect (posScreen.x() - modelPointMatch.maxPointSize() / 2.0,
+                        posScreen.y() - modelPointMatch.maxPointSize() / 2.0,
+                        modelPointMatch.maxPointSize(),
+                        modelPointMatch.maxPointSize());
     if (!m_outline->isVisible ()) {
       m_outline->setVisible (true);
     }

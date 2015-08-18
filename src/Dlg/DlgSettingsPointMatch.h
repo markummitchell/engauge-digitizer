@@ -9,7 +9,6 @@ class QComboBox;
 class QGraphicsEllipseItem;
 class QGraphicsLineItem;
 class QGraphicsPixmapItem;
-class QGraphicsRectItem;
 class QGraphicsScene;
 class QGridLayout;
 class QSpinBox;
@@ -32,7 +31,6 @@ private slots:
   void slotAcceptedPointColor (const QString &);
   void slotCandidatePointColor (const QString &);
   void slotMaxPointSize (int);
-  void slotMinPointSeparation (int);
   void slotMouseMove (QPointF pos);
   void slotRejectedPointColor (const QString &);
 
@@ -60,11 +58,6 @@ private:
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
-  QGraphicsRectItem *m_boxSize;
-  QGraphicsLineItem *m_lineTL;
-  QGraphicsLineItem *m_lineTR;
-  QGraphicsLineItem *m_lineBL;
-  QGraphicsLineItem *m_lineBR;
   QGraphicsEllipseItem *m_circle;
 
   DocumentModelPointMatch *m_modelPointMatchBefore;

@@ -33,17 +33,14 @@ void BackgroundStateNone::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateNone::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setColorFilter";
-}
-
-void BackgroundStateNone::setCurveSelected (const QString & /* curveSelected */)
+void BackgroundStateNone::setCurveSelected (const DocumentModelColorFilter & /* modelColorFilter */,
+                                            const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setCurveSelected";
 }
 
-void BackgroundStateNone::setPixmap (const QPixmap &pixmapOriginal)
+void BackgroundStateNone::setPixmap (const DocumentModelColorFilter & /* modelColorFilter */,
+                                     const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setPixmap";
 
@@ -57,4 +54,9 @@ void BackgroundStateNone::setPixmap (const QPixmap &pixmapOriginal)
 QString BackgroundStateNone::state () const
 {
   return "BackgroundStateNone";
+}
+
+void BackgroundStateNone::updateColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::updateColorFilter";
 }

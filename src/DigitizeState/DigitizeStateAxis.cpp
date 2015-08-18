@@ -61,7 +61,7 @@ void DigitizeStateAxis::handleKeyPress (Qt::Key key)
 
 void DigitizeStateAxis::handleMouseMove (QPointF /* posScreen */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleMouseMove";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::handleMouseMove";
 }
 
 void DigitizeStateAxis::handleMousePress (QPointF /* posScreen */)

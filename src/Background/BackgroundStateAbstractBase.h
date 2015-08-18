@@ -54,17 +54,19 @@ class BackgroundStateAbstractBase
   /// Reference to the GraphicsScene, without const.
   const GraphicsScene &scene() const;
 
-  /// Apply color filter settings
-  virtual void setColorFilter (const DocumentModelColorFilter &colorFilter) = 0;
-
   /// Update the currently selected curve name
-  virtual void setCurveSelected (const QString &curveSelected) = 0;
+  virtual void setCurveSelected (const DocumentModelColorFilter &colorFilter,
+                                 const QString &curveSelected) = 0;
 
   /// Update the image for this state, after the leaf class processes it appropriately
-  virtual void setPixmap (const QPixmap &pixmap) = 0;
+  virtual void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+                          const QPixmap &pixmap) = 0;
 
   /// State name for debugging
   virtual QString state() const = 0;
+
+  /// Apply color filter settings
+  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter) = 0;
 
  protected:
 

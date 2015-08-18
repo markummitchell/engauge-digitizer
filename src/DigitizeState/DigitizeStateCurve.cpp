@@ -56,7 +56,7 @@ void DigitizeStateCurve::handleKeyPress (Qt::Key key)
 
 void DigitizeStateCurve::handleMouseMove (QPointF /* posScreen */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleMouseMove";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateCurve::handleMouseMove";
 }
 
 void DigitizeStateCurve::handleMousePress (QPointF /* posScreen */)

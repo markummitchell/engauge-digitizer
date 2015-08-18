@@ -27,17 +27,14 @@ void BackgroundStateUnloaded::fitInView (GraphicsView & /* view */)
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::fitInView";
 }
 
-void BackgroundStateUnloaded::setColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setColorFilter";
-}
-
-void BackgroundStateUnloaded::setCurveSelected (const QString & /* curveSelected */)
+void BackgroundStateUnloaded::setCurveSelected (const DocumentModelColorFilter & /* modelColorFilter */,
+                                                const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setCurveSelected";
 }
 
-void BackgroundStateUnloaded::setPixmap (const QPixmap & /* pixmap */)
+void BackgroundStateUnloaded::setPixmap (const DocumentModelColorFilter & /* modelColorFilter */,
+                                         const QPixmap & /* pixmap */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setPixmap";
 
@@ -47,4 +44,9 @@ void BackgroundStateUnloaded::setPixmap (const QPixmap & /* pixmap */)
 QString BackgroundStateUnloaded::state () const
 {
   return "BackgroundStateUnloaded";
+}
+
+void BackgroundStateUnloaded::updateColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::updateColorFilter";
 }

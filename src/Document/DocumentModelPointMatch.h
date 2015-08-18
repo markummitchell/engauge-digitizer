@@ -28,9 +28,6 @@ public:
   /// Get method for max point size.
   double maxPointSize() const;
 
-  /// Get method for minimum point separation.
-  double minPointSeparation() const;
-
   /// Get method for accepted color.
   ColorPalette paletteColorAccepted() const;
 
@@ -48,9 +45,6 @@ public:
 
   /// Set method for max point size.
   void setMaxPointSize (double maxPointSize);
-
-  /// Set method for minimum point separation.
-  void setMinPointSeparation (double minPointSeparation);
 
   /// Set method for accepted color.
   void setPaletteColorAccepted(ColorPalette paletteColorAccepted);

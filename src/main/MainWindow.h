@@ -40,6 +40,7 @@ class QGraphicsLineItem;
 class QGraphicsPixmapItem;
 class QMenu;
 class QSettings;
+class QTextStream;
 class QToolBar;
 class QVBoxLayout;
 class StatusBar;

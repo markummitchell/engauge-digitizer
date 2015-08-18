@@ -39,15 +39,17 @@ class BackgroundStateContext
   /// Transition to the specified state. This method is used by classes outside of the state machine to trigger transitions
   void setBackgroundImage (BackgroundImage backgroundImage);
 
-  /// Update color filter settings
-  void setColorFilter (const DocumentModelColorFilter &modelColorFilter);
-
   /// Update the selected curve. Although this probably affects only the BACKGROUND_STATE_CURVE state, we will forward it
   /// to all states (consistent with setPixmap)
-  void setCurveSelected (const QString &curveSelected);
+  void setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+                         const QString &curveSelected);
 
   /// Update the images of all states, rather than just the current state
-  void setPixmap (const QPixmap &pixmapOriginal);
+  void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+                  const QPixmap &pixmapOriginal);
+
+  /// Apply color filter settings
+  void updateColorFilter (const DocumentModelColorFilter &colorFilter);
 
  private:
   BackgroundStateContext();

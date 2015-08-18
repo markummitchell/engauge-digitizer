@@ -16,8 +16,6 @@
 #include <QSpinBox>
 #include "ViewPreview.h"
 
-const int POINT_SEPARATION_MAX = 1024;
-const int POINT_SEPARATION_MIN = 2;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 5;
 
@@ -27,7 +25,7 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
                            mainWindow),
   m_scenePreview (0),
   m_viewPreview (0),
-  m_boxSize (0),
+  m_circle (0),
   m_modelPointMatchBefore (0),
   m_modelPointMatchAfter (0)
 {
@@ -74,20 +72,6 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
                                             int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createControls";
-
-  QLabel *labelMinPointSeparation = new QLabel ("Minimum point separation (pixels):");
-  layout->addWidget (labelMinPointSeparation, row, 1);
-
-  m_spinMinPointSeparation = new QSpinBox;
-  QString whatsThis = QString ("Select a minimum point separation in pixels.\n\n"
-                               "Matched points must be separated from existing points by at least this number of pixels.\n\n"
-                               "This value has a lower limit of %1 since overlapping points are too hard to separate")
-                      .arg (POINT_SEPARATION_MIN);
-  m_spinMinPointSeparation->setWhatsThis (whatsThis);
-  m_spinMinPointSeparation->setMinimum (POINT_SEPARATION_MIN);
-  m_spinMinPointSeparation->setMaximum (POINT_SEPARATION_MAX);
-  connect (m_spinMinPointSeparation, SIGNAL (valueChanged (int)), this, SLOT (slotMinPointSeparation (int)));
-  layout->addWidget (m_spinMinPointSeparation, row++, 2);
 
   QLabel *labelPointSize = new QLabel ("Maximum point size (pixels):");
   layout->addWidget (labelPointSize, row, 1);
@@ -180,28 +164,10 @@ void DlgSettingsPointMatch::createTemplate ()
 
   QPen pen (QBrush (Qt::black), 0);
 
-  // Create a box in the center
-  m_boxSize = new QGraphicsRectItem;
-  m_boxSize->setPen (pen);
-  m_boxSize->setZValue (100);
-  m_scenePreview->addItem (m_boxSize);
-
-  // Create one diagonal line extending from each corner of the box in the center. They are children to the
-  // box so (1) dragging the box causes the lines to get dragged and (2) deleting the box causes the lines to get deleted.
-  // These are children so they do not need to be added to the scene
-  m_lineTL = new QGraphicsLineItem (m_boxSize);
-  m_lineTR = new QGraphicsLineItem (m_boxSize);
-  m_lineBL = new QGraphicsLineItem (m_boxSize);
-  m_lineBR = new QGraphicsLineItem (m_boxSize);
-  m_lineTL->setPen (pen);
-  m_lineTR->setPen (pen);
-  m_lineBL->setPen (pen);
-  m_lineBR->setPen (pen);
-
-  // Draw a circle circumscribing the four diagonals. Like the diagonals, this is a child to the box in the center.
-  // Since this is a child it does not need to be added to the scene
-  m_circle = new QGraphicsEllipseItem (m_boxSize);
+  m_circle = new QGraphicsEllipseItem;
   m_circle->setPen (pen);
+  m_circle->setZValue (100);
+  m_scenePreview->addItem (m_circle);
 }
 
 void DlgSettingsPointMatch::handleOk ()
@@ -221,8 +187,8 @@ void DlgSettingsPointMatch::initializeBox ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::initializeBox";
 
-  m_boxSize->setPos (cmdMediator().document().pixmap().width () / 2.0,
-                     cmdMediator().document().pixmap().height () / 2.0); // Initially box is in center of preview
+  m_circle->setPos (cmdMediator().document().pixmap().width () / 2.0,
+                    cmdMediator().document().pixmap().height () / 2.0); // Initially box is in center of preview
 }
 
 void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
@@ -244,13 +210,10 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   m_modelPointMatchAfter = new DocumentModelPointMatch (cmdMediator.document());
 
   // Sanity checks. Incoming defaults must be acceptable to the local limits
-  ENGAUGE_ASSERT (POINT_SEPARATION_MIN <= m_modelPointMatchAfter->minPointSeparation());
-  ENGAUGE_ASSERT (POINT_SEPARATION_MAX > m_modelPointMatchAfter->minPointSeparation());
   ENGAUGE_ASSERT (POINT_SIZE_MIN <= m_modelPointMatchAfter->maxPointSize());
   ENGAUGE_ASSERT (POINT_SIZE_MAX > m_modelPointMatchAfter->maxPointSize());
 
   // Populate controls
-  m_spinMinPointSeparation->setValue(m_modelPointMatchAfter->minPointSeparation());
   m_spinPointSize->setValue(m_modelPointMatchAfter->maxPointSize());
 
   int indexAccepted = m_cmbAcceptedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorAccepted()));
@@ -283,10 +246,9 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
 
 double DlgSettingsPointMatch::radiusAlongDiagonal () const
 {
-  double minPointSeparation = m_modelPointMatchAfter->minPointSeparation();
   double maxPointSize = m_modelPointMatchAfter->maxPointSize();
 
-  return minPointSeparation + qSqrt (2.0) * maxPointSize / 2.0;
+  return qSqrt (2.0) * maxPointSize / 2.0;
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
@@ -317,22 +279,13 @@ void DlgSettingsPointMatch::slotMaxPointSize (int maxPointSize)
   updatePreview();
 }
 
-void DlgSettingsPointMatch::slotMinPointSeparation (int minPointSeparation)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotMinPointSeparation";
-
-  m_modelPointMatchAfter->setMinPointSeparation(minPointSeparation);
-  updateControls();
-  updatePreview();
-}
-
 void DlgSettingsPointMatch::slotMouseMove (QPointF pos)
 {
   // Move the box so it follows the mouse move, making sure to keep it entirely inside the view to
   // prevent autoresizing by QGraphicsView
   pos = boxPositionConstraint (pos);
 
-  m_boxSize->setPos (pos);
+  m_circle->setPos (pos);
 }
 
 void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
@@ -354,48 +307,13 @@ void DlgSettingsPointMatch::updatePreview()
 {
   // Geometry parameters
   double maxPointSize = m_modelPointMatchAfter->maxPointSize();
-  double minPointSeparation = m_modelPointMatchAfter->minPointSeparation();
 
   double xLeft = -1.0 * maxPointSize / 2.0;
-  double xRight = maxPointSize / 2.0;
   double yTop = -1.0 * maxPointSize / 2.0;
-  double yBottom = maxPointSize / 2.0;
-  double diagonalSide = minPointSeparation / qSqrt (2.0);
 
-  // Update box size
-  m_boxSize->setRect (xLeft,
+  // Update circle size
+  m_circle->setRect (xLeft,
                       yTop,
                       maxPointSize,
                       maxPointSize);
-
-  // Position the lines relative to the parent
-  m_lineTL->setLine (xLeft,
-                     yTop,
-                     xLeft - diagonalSide,
-                     yTop - diagonalSide);
-  m_lineTR->setLine (xRight,
-                     yTop,
-                     xRight + diagonalSide,
-                     yTop - diagonalSide);
-  m_lineBL->setLine (xLeft,
-                     yBottom,
-                     xLeft - diagonalSide,
-                     yBottom + diagonalSide);
-  m_lineBR->setLine (xRight,
-                     yBottom,
-                     xRight + diagonalSide,
-                     yBottom + diagonalSide);
-
-  // Position the circle relative to the parent
-  m_circle->setRect (-1.0 * radiusAlongDiagonal (),
-                     -1.0 * radiusAlongDiagonal (),
-                     2.0 * radiusAlongDiagonal (),
-                     2.0 * radiusAlongDiagonal ());
-
-  // Changing any of the size may have just pushed an edge outside the view, so apply the
-  // box position constraint. This is a noop if nothing extends past the box edge
-  QPointF pos = boxPositionConstraint (m_boxSize->pos ());
-  if (pos != m_boxSize->pos ()) {
-    m_boxSize->setPos (pos);
-  }
 }
