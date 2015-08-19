@@ -4,6 +4,7 @@
 #include "DigitizeStateAbstractBase.h"
 
 class QGraphicsEllipseItem;
+class QGraphicsPixmapItem;
 
 /// Digitizing state for matching Curve Points, one at a time.
 class DigitizeStatePointMatch : public DigitizeStateAbstractBase
@@ -28,6 +29,7 @@ private:
   DigitizeStatePointMatch();
 
   QGraphicsEllipseItem *m_outline;
+  QGraphicsPixmapItem *m_candidatePoint;
 };
 
 #endif // DIGITIZE_STATE_POINT_MATCH_H

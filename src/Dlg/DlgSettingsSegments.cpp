@@ -32,7 +32,7 @@ const double TWOPI = 2.0 * 3.1415926535;
 const double BRUSH_WIDTH = 2.0;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Segments",
+  DlgSettingsAbstractBase ("Segment Fill",
                            "DlgSettingsSegments",
                            mainWindow),
   m_scenePreview (0),

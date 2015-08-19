@@ -51,7 +51,6 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsLineItem>
-#include <QGraphicsPixmapItem>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
@@ -2601,6 +2600,50 @@ void MainWindow::updateControls ()
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
   m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
+}
+
+void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
+
+  switch (digitizeState) {
+    case DIGITIZE_STATE_AXIS:
+      m_actionDigitizeAxis->setChecked(true);
+      slotDigitizeAxis(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case  DIGITIZE_STATE_COLOR_PICKER:
+      m_actionDigitizeColorPicker->setChecked(true);
+      slotDigitizeColorPicker(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case  DIGITIZE_STATE_CURVE:
+      m_actionDigitizeCurve->setChecked(true);
+      slotDigitizeCurve(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case  DIGITIZE_STATE_EMPTY:
+      break;
+
+    case  DIGITIZE_STATE_POINT_MATCH:
+      m_actionDigitizePointMatch->setChecked(true);
+      slotDigitizePointMatch(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case  DIGITIZE_STATE_SEGMENT:
+      m_actionDigitizeSegment->setChecked(true);
+       slotDigitizeSegment(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case  DIGITIZE_STATE_SELECT:
+      m_actionDigitizeSelect->setChecked(true);
+      slotDigitizeSelect(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
+      break;
+  }
 }
 
 void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()

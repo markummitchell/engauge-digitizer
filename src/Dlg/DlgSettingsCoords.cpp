@@ -17,7 +17,6 @@
 #include <QGraphicsRectItem>
 #include <QGridLayout>
 #include <QGroupBox>
-#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QLineEdit>

@@ -80,7 +80,6 @@ HEADERS  += \
     DigitizeState/DigitizeStateCurve.h \
     DigitizeState/DigitizeStateEmpty.h \
     DigitizeState/DigitizeStatePointMatch.h \
-    DigitizeState/DigitizeStateScale.h \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
@@ -271,7 +270,6 @@ SOURCES += \
     DigitizeState/DigitizeStateCurve.cpp \
     DigitizeState/DigitizeStateEmpty.cpp \
     DigitizeState/DigitizeStatePointMatch.cpp \
-    DigitizeState/DigitizeStateScale.cpp \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \

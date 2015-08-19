@@ -5,7 +5,6 @@
 #include "DigitizeStateCurve.h"
 #include "DigitizeStateEmpty.h"
 #include "DigitizeStatePointMatch.h"
-#include "DigitizeStateScale.h"
 #include "DigitizeStateSegment.h"
 #include "DigitizeStateSelect.h"
 #include "EngaugeAssert.h"
@@ -32,7 +31,6 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   m_states.insert (DIGITIZE_STATE_CURVE       , new DigitizeStateCurve       (*this));
   m_states.insert (DIGITIZE_STATE_EMPTY       , new DigitizeStateEmpty       (*this));
   m_states.insert (DIGITIZE_STATE_POINT_MATCH , new DigitizeStatePointMatch  (*this));
-  m_states.insert (DIGITIZE_STATE_SCALE       , new DigitizeStateScale       (*this));
   m_states.insert (DIGITIZE_STATE_SEGMENT     , new DigitizeStateSegment     (*this));
   m_states.insert (DIGITIZE_STATE_SELECT      , new DigitizeStateSelect      (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_DIGITIZE_STATES);
@@ -95,6 +93,10 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
     DigitizeState previousState = m_currentState;
     m_currentState = m_requestedState;
     m_states [m_requestedState]->begin (previousState);
+
+    // If transition was triggered from inside the state machine then MainWindow controls need to be set accordingly
+    // as if user had clicked on a digitize button
+    mainWindow().updateDigitizeStateIfSoftwareTriggered (m_requestedState);
   }
 }
 
