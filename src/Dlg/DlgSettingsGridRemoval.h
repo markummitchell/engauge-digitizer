@@ -13,7 +13,7 @@ class QHBoxLayout;
 class QLineEdit;
 class ViewPreview;
 
-/// Stacked widget page for editing grid removal settings.
+/// Dialog for editing grid removal settings.
 class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

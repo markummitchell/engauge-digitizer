@@ -17,7 +17,7 @@ class QTabWidget;
 class QTextEdit;
 class QVBoxLayout;
 
-/// Stacked widget page for editing exporting settings.
+/// Dialog for editing exporting settings.
 class DlgSettingsExportFormat : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

@@ -24,6 +24,7 @@
 #include "DlgErrorReport.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
+#include "DlgSettingsCommon.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveAddRemove.h"
 #include "DlgSettingsCurveProperties.h"
@@ -430,6 +431,13 @@ void MainWindow::createActionsSettings ()
   m_actionSettingsSegments->setWhatsThis (tr ("Segment Fill Settings\n\n"
                                               "Segment fill settings determine how points are generated in the Segment Fill mode"));
   connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
+
+  m_actionSettingsCommon = new QAction (tr ("Common"), this);
+  m_actionSettingsCommon->setStatusTip (tr ("Edit Common settings."));
+  m_actionSettingsCommon->setWhatsThis (tr ("Common Settings\n\n"
+                                            "Common settings are changed to fine tune cursor behavior and output formatting for "
+                                            "multiple modes"));
+  connect (m_actionSettingsCommon, SIGNAL (triggered ()), this, SLOT (slotSettingsCommon ()));
 }
 
 void MainWindow::createActionsView ()
@@ -736,6 +744,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
+  m_menuSettings->addAction (m_actionSettingsCommon);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
   m_menuHelp->addAction (m_actionWhatsThis);
@@ -756,6 +765,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
+  m_dlgSettingsCommon = new DlgSettingsCommon (*this);
 
   m_dlgSettingsCoords->setVisible (false);
   m_dlgSettingsCurveAddRemove->setVisible (false);
@@ -766,6 +776,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
+  m_dlgSettingsCommon->setVisible (false);
 }
 
 void MainWindow::createScene ()
@@ -2017,6 +2028,14 @@ void MainWindow::slotSettingsColorFilter ()
   m_dlgSettingsColorFilter->show ();
 }
 
+void MainWindow::slotSettingsCommon ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCommon";
+
+  m_dlgSettingsCommon->load (*m_cmdMediator);
+  m_dlgSettingsCommon->show ();
+}
+
 void MainWindow::slotSettingsCoords ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
@@ -2593,6 +2612,7 @@ void MainWindow::updateControls ()
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsCommon->setEnabled (!m_currentFile.isEmpty ());
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
@@ -2715,6 +2735,13 @@ void MainWindow::updateSettingsCurveAddRemove (const CurvesGraphs &curvesGraphs)
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
   updateViewsOfSettings();
+}
+
+void MainWindow::updateSettingsCommon(const DocumentModelCommon &modelCommon)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCommon";
+
+  m_cmdMediator->document().setModelCommon(modelCommon);
 }
 
 void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)

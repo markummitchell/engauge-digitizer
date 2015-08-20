@@ -14,6 +14,7 @@ class CmdStackShadow;
 class CurveStyles;
 class DigitizeStateContext;
 class DlgSettingsAxesChecker;
+class DlgSettingsCommon;
 class DlgSettingsCoords;
 class DlgSettingsCurveAddRemove;
 class DlgSettingsCurveProperties;
@@ -26,6 +27,7 @@ class DocumentModelAxesChecker;
 class DocumentModelCoords;
 class DocumentModelExportFormat;
 class DocumentModelColorFilter;
+class DocumentModelCommon;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
@@ -112,6 +114,9 @@ public:
   /// Update with new color filter properties.
   void updateSettingsColorFilter(const DocumentModelColorFilter &modelColorFilter);
 
+  /// Update with new common properties.
+  void updateSettingsCommon(const DocumentModelCommon &modelCommon);
+
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
@@ -179,6 +184,7 @@ private slots:
   void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
   void slotSettingsColorFilter ();
+  void slotSettingsCommon ();
   void slotSettingsCoords ();
   void slotSettingsCurveAddRemove ();
   void slotSettingsCurveProperties ();
@@ -340,6 +346,7 @@ private:
   QMenu *m_menuSettings;
   QAction *m_actionSettingsAxesChecker;
   QAction *m_actionSettingsColorFilter;
+  QAction *m_actionSettingsCommon;
   QAction *m_actionSettingsCoords;
   QAction *m_actionSettingsCurveAddRemove;
   QAction *m_actionSettingsCurveProperties;
@@ -384,6 +391,7 @@ private:
 
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
   DlgSettingsColorFilter *m_dlgSettingsColorFilter;
+  DlgSettingsCommon *m_dlgSettingsCommon;
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveAddRemove *m_dlgSettingsCurveAddRemove;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;

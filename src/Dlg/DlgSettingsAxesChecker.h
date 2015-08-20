@@ -14,7 +14,7 @@ class QGridLayout;
 class QRadioButton;
 class ViewPreview;
 
-/// Stacked widget page for editing axes checker settings.
+/// Dialog for editing axes checker settings.
 class DlgSettingsAxesChecker : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

@@ -14,8 +14,6 @@
 #include <QImage>
 #include <QMessageBox>
 
-const int MAX_RADIUS_FOR_SEARCH = 4;
-
 DigitizeStateColorPicker::DigitizeStateColorPicker (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
 {
@@ -172,8 +170,10 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &imag
 {
   QPoint pos = posScreenPlusHalf.toPoint ();
 
+  int maxRadiusForSearch = context().cmdMediator().document().modelCommon().cursorSize();
+
   // Starting at pos, search in ever-widening squares for a non-background pixel
-  for (int radius = 0; radius < MAX_RADIUS_FOR_SEARCH; radius++) {
+  for (int radius = 0; radius < maxRadiusForSearch; radius++) {
 
     for (int xOffset = -radius; xOffset <= radius; xOffset++) {
       for (int yOffset = -radius; yOffset <= radius; yOffset++) {

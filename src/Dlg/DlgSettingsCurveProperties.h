@@ -12,7 +12,7 @@ class QGroupBox;
 class QSpinBox;
 class ViewPreview;
 
-/// Stacked widget page for editing curve properties settings.
+/// Dialog for editing curve properties settings.
 class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

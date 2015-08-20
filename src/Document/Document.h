@@ -5,6 +5,7 @@
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
 #include "DocumentModelColorFilter.h"
+#include "DocumentModelCommon.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelExportFormat.h"
 #include "DocumentModelGridRemoval.h"
@@ -124,6 +125,9 @@ public:
   /// Get method for DocumentModelColorFilter.
   DocumentModelColorFilter modelColorFilter() const;
 
+  /// Get method for DocumentModelCommon.
+  DocumentModelCommon modelCommon() const;
+
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
 
@@ -189,6 +193,9 @@ public:
   /// Set method for DocumentModelColorFilter.
   void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
 
+  /// Set method for DocumentModelCommon.
+  void setModelCommon (const DocumentModelCommon &modelCommon);
+
   /// Set method for DocumentModelCoords.
   void setModelCoords (const DocumentModelCoords &modelCoords);
 
@@ -236,6 +243,7 @@ private:
 
   // Model objects for the various settings
   DocumentModelAxesChecker m_modelAxesChecker;
+  DocumentModelCommon m_modelCommon;
   DocumentModelCoords m_modelCoords;
   // CurveStyles is not here since curve properties are stored inside the Curve class
   DocumentModelExportFormat m_modelExport;

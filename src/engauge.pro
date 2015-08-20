@@ -41,6 +41,7 @@ HEADERS  += \
     Cmd/CmdPaste.h \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
+    Cmd/CmdSettingsCommon.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveAddRemove.h \
     Cmd/CmdSettingsCurveProperties.h \
@@ -91,6 +92,7 @@ HEADERS  += \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsColorFilter.h \
+    Dlg/DlgSettingsCommon.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurveAddRemove.h \
     Dlg/DlgSettingsCurveProperties.h \
@@ -107,6 +109,7 @@ HEADERS  += \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
     Document/DocumentModelColorFilter.h \
+    Document/DocumentModelCommon.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelExportFormat.h \
     Document/DocumentModelGridRemoval.h \
@@ -232,6 +235,7 @@ SOURCES += \
     Cmd/CmdPaste.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsColorFilter.cpp \
+    Cmd/CmdSettingsCommon.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveAddRemove.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
@@ -280,6 +284,7 @@ SOURCES += \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsColorFilter.cpp \
+    Dlg/DlgSettingsCommon.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurveAddRemove.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
@@ -296,6 +301,7 @@ SOURCES += \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelColorFilter.cpp \
+    Document/DocumentModelCommon.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelExportFormat.cpp \
     Document/DocumentModelGridRemoval.cpp \

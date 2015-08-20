@@ -1,4 +1,3 @@
-#include "CmdAddPointGraph.h"
 #include "CmdMediator.h"
 #include "ColorFilter.h"
 #include "DigitizeStateContext.h"
@@ -14,6 +13,7 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
 #include <QImage>
+#include <qmath.h>
 #include <QPen>
 
 const double Z_VALUE = 200.0;
@@ -89,11 +89,11 @@ void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
                       modelPointMatch.maxPointSize());
 
   const QImage &img = context().mainWindow().imageFiltered();
-
-  ColorFilter filter;
-  bool pixelShouldBeOn = filter.pixelFilteredIsOn (img,
-                                                   posScreen.x(),
-                                                   posScreen.y());
+  int radiusLimit = context().cmdMediator().document().modelCommon().cursorSize();
+  bool pixelShouldBeOn = pixelIsOnInImage (img,
+                                           posScreen.x(),
+                                           posScreen.y(),
+                                           radiusLimit);
 
   QColor penColorIs = m_outline->pen().color();
   bool pixelIsOn = (penColorIs.red () != penColorIs.green()); // Considered on if not gray scale
@@ -164,6 +164,45 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
 //                                                                                       posScreen,
 //                                                                                       activeCurve ()));
 //  context().appendNewCmd(cmd);
+}
+
+bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,
+                                                int x,
+                                                int y,
+                                                int radiusLimit) const
+{
+  ColorFilter filter;
+
+  // Examine all nearby pixels
+  bool pixelShouldBeOn = false;
+  for (int xOffset = -radiusLimit; xOffset <= radiusLimit; xOffset++) {
+    for (int yOffset = -radiusLimit; yOffset <= radiusLimit; yOffset++) {
+
+      int radius = qSqrt (xOffset * xOffset + yOffset * yOffset);
+
+      if (radius <= radiusLimit) {
+
+        int xNearby = x + xOffset;
+        int yNearby = y + yOffset;
+
+        if ((0 <= xNearby) &&
+            (0 <= yNearby) &&
+            (xNearby < img.width()) &&
+            (yNearby < img.height())) {
+
+          if (filter.pixelFilteredIsOn (img,
+                                        xNearby,
+                                        yNearby)) {
+
+            pixelShouldBeOn = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  return pixelShouldBeOn;
 }
 
 QString DigitizeStatePointMatch::state() const

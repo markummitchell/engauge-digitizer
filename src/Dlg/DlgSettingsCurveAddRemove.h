@@ -10,7 +10,7 @@ class QGridLayout;
 class QListView;
 class QPushButton;
 
-/// Stacked widget page for editing curve names settings.
+/// Dialog for editing curve names settings.
 class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

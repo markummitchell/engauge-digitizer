@@ -14,7 +14,7 @@ class QGridLayout;
 class QSpinBox;
 class ViewPreview;
 
-/// Stacked widget page for editing point match settings, for DigitizeStatePointMatch.
+/// Dialog for editing point match settings, for DigitizeStatePointMatch.
 class DlgSettingsPointMatch : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

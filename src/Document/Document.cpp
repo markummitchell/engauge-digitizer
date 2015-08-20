@@ -89,26 +89,28 @@ Document::Document (const QString &fileName) :
           // This is a StartElement, so process it
           QString tag = reader.name().toString();
           if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-            m_modelAxesChecker.loadXml(reader);
+            m_modelAxesChecker.loadXml (reader);
+          } else if (tag == DOCUMENT_SERIALIZE_COMMON) {
+            m_modelCommon.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-            m_modelCoords.loadXml(reader);
+            m_modelCoords.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
             m_curveAxes = new Curve (reader);
           } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-            m_curvesGraphs.loadXml(reader);
+            m_curvesGraphs.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
             // Do nothing. This is the root node
           } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-            m_modelExport.loadXml(reader);
+            m_modelExport.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-            m_modelGridRemoval.loadXml(reader);
+            m_modelGridRemoval.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
             // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
             loadImage(reader);
           } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-            m_modelPointMatch.loadXml(reader);
+            m_modelPointMatch.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-            m_modelSegments.loadXml(reader);
+            m_modelSegments.loadXml (reader);
           } else {
             m_successfulRead = false;
             m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
@@ -431,6 +433,11 @@ DocumentModelColorFilter Document::modelColorFilter() const
   return modelColorFilter;
 }
 
+DocumentModelCommon Document::modelCommon() const
+{
+  return m_modelCommon;
+}
+
 DocumentModelCoords Document::modelCoords() const
 {
   return m_modelCoords;
@@ -538,6 +545,8 @@ void Document::printStream (QString indentation,
 
   m_modelAxesChecker.printStream (indentation,
                                   str);
+  m_modelCommon.printStream (indentation,
+                             str);
   m_modelCoords.printStream (indentation,
                              str);
   m_modelExport.printStream (indentation,
@@ -601,14 +610,15 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 
   // Serialize the Document variables
-  m_modelCoords.saveXml(writer);
-  m_modelExport.saveXml(writer);
-  m_modelAxesChecker.saveXml(writer);
-  m_modelGridRemoval.saveXml(writer);
-  m_modelPointMatch.saveXml(writer);
-  m_modelSegments.saveXml(writer);
-  m_curveAxes->saveXml(writer);
-  m_curvesGraphs.saveXml(writer);
+  m_modelCommon.saveXml (writer);
+  m_modelCoords.saveXml (writer);
+  m_modelExport.saveXml (writer);
+  m_modelAxesChecker.saveXml (writer);
+  m_modelGridRemoval.saveXml (writer);
+  m_modelPointMatch.saveXml (writer);
+  m_modelSegments.saveXml (writer);
+  m_curveAxes->saveXml (writer);
+  m_curvesGraphs.saveXml (writer);
   writer.writeEndElement();
 }
 
@@ -638,6 +648,11 @@ void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFil
     Curve *curve = curveForCurveName (curveName);
     curve->setColorFilterSettings (colorFilterSettings);
   }
+}
+
+void Document::setModelCommon (const DocumentModelCommon &modelCommon)
+{
+  m_modelCommon = modelCommon;
 }
 
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)

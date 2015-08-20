@@ -19,7 +19,7 @@ class ViewProfile;
 class ViewProfileDivider;
 class ViewProfileScale;
 
-/// Stacked widget page for editing filtering settings.
+/// Dialog for editing filtering settings.
 class DlgSettingsColorFilter : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

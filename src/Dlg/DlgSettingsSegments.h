@@ -19,7 +19,7 @@ class ViewPreview;
 
 typedef QList<GraphicsPoint*> GraphicsPoints;
 
-/// Stacked widget page for editing Segments settings, for DigitizeStateSegment.
+/// Dialog for editing Segments settings, for DigitizeStateSegment.
 class DlgSettingsSegments : public DlgSettingsAbstractBase
 {
   Q_OBJECT;

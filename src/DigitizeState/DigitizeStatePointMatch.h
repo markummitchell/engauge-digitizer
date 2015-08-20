@@ -28,6 +28,11 @@ public:
 private:
   DigitizeStatePointMatch();
 
+  bool pixelIsOnInImage (const QImage &img,
+                         int x,
+                         int y,
+                         int radiusLimit) const;
+
   QGraphicsEllipseItem *m_outline;
   QGraphicsPixmapItem *m_candidatePoint;
 };

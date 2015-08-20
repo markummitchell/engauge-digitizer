@@ -17,7 +17,7 @@ class QLineEdit;
 class QRadioButton;
 class ViewPreview;
 
-/// Stacked widget page for editing coordinates settings.
+/// Dialog for editing coordinates settings.
 class DlgSettingsCoords : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
