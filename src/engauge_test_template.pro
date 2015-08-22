@@ -170,6 +170,8 @@ HEADERS  += \
     Ordinal/OrdinalToGraphicsPoint.h \
     Point/Point.h \
     Point/PointIdentifiers.h \
+    Point/PointMatchAlgorithm.h \
+    Point/PointMatchTriplet.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
@@ -356,6 +358,8 @@ SOURCES += \
     Ordinal/OrdinalGenerator.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
+    Point/PointMatchAlgorithm.cpp \
+    Point/PointMatchTriplet.cpp \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \

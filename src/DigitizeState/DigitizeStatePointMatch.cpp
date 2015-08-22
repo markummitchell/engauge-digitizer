@@ -101,50 +101,34 @@ void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
     QColor penColorShouldBe (pixelShouldBeOn ? Qt::green : Qt::black);
     m_outline->setPen (QPen (penColorShouldBe));
   }
-//    if (m_candidatePoint == 0) {
-//
-//      // Use color image with alpha so non-point pixels are transparent
-//      QImage imgMask (modelPointMatch.maxPointSize(),
-//                      modelPointMatch.maxPointSize(),
-//                      QImage::Format_ARGB32);
-//      imgMask.fill (Qt::transparent);
-//
-//      for (int xOffset = 0; xOffset < modelPointMatch.maxPointSize(); xOffset++) {
-//        for (int yOffset = 0; yOffset < modelPointMatch.maxPointSize(); yOffset++) {
-//
-//          int x = posScreen.x() + xOffset;
-//          int y = posScreen.y() + yOffset;
-//          pixelIsOn = filter.pixelFilteredIsOn (img,
-//                                                x,
-//                                                y);
-//          pixelIsOn = true;
-//          if (pixelIsOn) {
-//            imgMask.setPixel (xOffset,
-//                              yOffset,
-//                              qRgb (0, 255, 0));
-//          }
-//        }
-//      }
-//
-//      QPixmap pixmap = QPixmap::fromImage (imgMask);
-//      m_candidatePoint = new QGraphicsPixmapItem (pixmap,
-//                                                  m_outline);
-//      m_candidatePoint->setVisible (true);
-//      m_candidatePoint->setZValue (Z_VALUE);
-//    }
-//    m_candidatePoint->setPos (posScreen.x(),
-//                              posScreen.y());
-//  } else {
-//    if (m_candidatePoint != 0) {
-//      context().mainWindow().scene().removeItem (m_candidatePoint);
-//      m_candidatePoint = 0;
-//    }
-//  }
 }
 
-void DigitizeStatePointMatch::handleMousePress (QPointF /* posScreen */)
+void DigitizeStatePointMatch::handleMousePress (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMousePress";
+
+  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
+  const QImage &img = context().mainWindow().imageFiltered();
+
+  QList<QPoint> samplePointPixels;
+
+  ColorFilter colorFilter;
+  for (int xOffset = 0; xOffset < modelPointMatch.maxPointSize(); xOffset++) {
+    for (int yOffset = 0; yOffset < modelPointMatch.maxPointSize(); yOffset++) {
+
+      int x = posScreen.x() + xOffset;
+      int y = posScreen.y() + yOffset;
+      bool pixelIsOn = colorFilter.pixelFilteredIsOn (img,
+                                                      x,
+                                                      y);
+
+      if (pixelIsOn) {
+
+        samplePointPixels.push_back (QPoint (xOffset,
+                                             yOffset));
+      }
+    }
+  }
 }
 
 void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
