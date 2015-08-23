@@ -63,17 +63,22 @@ void DigitizeStateSelect::handleCurveChange()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleCurveChange";
 }
 
-void DigitizeStateSelect::handleKeyPress (Qt::Key key)
+void DigitizeStateSelect::handleKeyPress (Qt::Key key,
+                                          bool atLeastOneSelectedItem)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleKeyPress"
+                              << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 
-  if (key == Qt::Key_Down ||
+  if (atLeastOneSelectedItem) {
+
+    if (key == Qt::Key_Down ||
       key == Qt::Key_Up ||
       key == Qt::Key_Left ||
       key == Qt::Key_Right) {
 
-    keyPressArrow (key);
+      keyPressArrow (key);
 
+    }
   }
 }
 

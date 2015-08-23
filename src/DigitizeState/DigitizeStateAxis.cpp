@@ -37,6 +37,21 @@ void DigitizeStateAxis::begin (DigitizeState /* previousState */)
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
+void DigitizeStateAxis::createTemporaryPoint (const QPointF &posScreen)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::createTemporaryPoint";
+
+  // Temporary point that user can see while DlgEditPoint is active
+  const Curve &curveAxes = context().cmdMediator().curveAxes();
+  PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
+  GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
+                                                                    pointStyleAxes,
+                                                                    posScreen);
+
+  context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
+                                                    point);
+}
+
 QCursor DigitizeStateAxis::cursor() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::cursor";
@@ -54,9 +69,11 @@ void DigitizeStateAxis::handleCurveChange()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleCurveChange";
 }
 
-void DigitizeStateAxis::handleKeyPress (Qt::Key key)
+void DigitizeStateAxis::handleKeyPress (Qt::Key key,
+                                        bool /* atLeastOneSelectedItem */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleKeyPress"
+                              << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
 void DigitizeStateAxis::handleMouseMove (QPointF /* posScreen */)
@@ -81,15 +98,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
 
   } else {
 
-    // Temporary point that user can see while DlgEditPoint is active
-    const Curve &curveAxes = context().cmdMediator().curveAxes();
-    PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
-    GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
-                                                                      pointStyleAxes,
-                                                                      posScreen);
-
-    context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
-                                                      point);
+    createTemporaryPoint (posScreen);
 
     // Ask user for coordinates
     DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),

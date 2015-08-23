@@ -53,7 +53,8 @@ public:
   virtual void handleCurveChange () = 0;
 
   /// Handle a key press that was intercepted earlier.
-  virtual void handleKeyPress (Qt::Key key) = 0;
+  virtual void handleKeyPress (Qt::Key key,
+                               bool atLeastOneSelectedItem) = 0;
 
   /// Handle leave in case an override cursor is in effect from last QDialog, by resetting the override cursor.
   virtual void handleLeave ();

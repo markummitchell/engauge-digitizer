@@ -43,9 +43,11 @@ void DigitizeStateEmpty::handleCurveChange()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleCurveChange";
 }
 
-void DigitizeStateEmpty::handleKeyPress (Qt::Key key)
+void DigitizeStateEmpty::handleKeyPress (Qt::Key key,
+                                         bool /* atLeastOneSelectedItem */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleKeyPress"
+                              << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
 void DigitizeStateEmpty::handleMouseMove (QPointF /* posScreen */)

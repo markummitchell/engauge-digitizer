@@ -117,9 +117,11 @@ void DigitizeStateContext::handleCurveChange ()
   m_states [m_currentState]->handleCurveChange();
 }
 
-void DigitizeStateContext::handleKeyPress (Qt::Key key)
+void DigitizeStateContext::handleKeyPress (Qt::Key key,
+                                           bool atLeastOneSelectedItem)
 {
-  m_states [m_currentState]->handleKeyPress (key);
+  m_states [m_currentState]->handleKeyPress (key,
+                                             atLeastOneSelectedItem);
 
   completeRequestedStateTransitionIfExists();
 

@@ -213,9 +213,11 @@ void DigitizeStateColorPicker::handleCurveChange()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleCurveChange";
 }
 
-void DigitizeStateColorPicker::handleKeyPress (Qt::Key key)
+void DigitizeStateColorPicker::handleKeyPress (Qt::Key key,
+                                               bool /* atLeastOneSelectedItem */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleKeyPress"
+                              << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
 void DigitizeStateColorPicker::handleMouseMove (QPointF /* posScreen */)

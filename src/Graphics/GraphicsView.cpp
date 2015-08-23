@@ -23,7 +23,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   connect (this, SIGNAL (signalContextMenuEvent (QString)), &mainWindow, SLOT (slotContextMenuEvent (QString)));
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
-  connect (this, SIGNAL (signalKeyPress (Qt::Key)), &mainWindow, SLOT (slotKeyPress (Qt::Key)));
+  connect (this, SIGNAL (signalKeyPress (Qt::Key, bool)), &mainWindow, SLOT (slotKeyPress (Qt::Key, bool)));
   connect (this, SIGNAL (signalLeave ()), &mainWindow, SLOT (slotLeave ()));
   connect (this, SIGNAL (signalMouseMove(QPointF)), &mainWindow, SLOT (slotMouseMove (QPointF)));
   connect (this, SIGNAL (signalMousePress (QPointF)), &mainWindow, SLOT (slotMousePress (QPointF)));
@@ -156,13 +156,14 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
   // Intercept up/down/left/right if any items are selected
   Qt::Key key = (Qt::Key) event->key();
 
-  if (scene ()->selectedItems ().count () &&
-      (key == Qt::Key_Down ||
-       key == Qt::Key_Left ||
-       key == Qt::Key_Right ||
-       key == Qt::Key_Up)) {
+  bool atLeastOneSelectedItem = (scene ()->selectedItems ().count () > 0);
 
-    emit signalKeyPress (key);
+  if (key == Qt::Key_Down ||
+      key == Qt::Key_Left ||
+      key == Qt::Key_Right ||
+      key == Qt::Key_Up) {
+
+    emit signalKeyPress (key, atLeastOneSelectedItem);
     event->accept();
 
   } else {

@@ -22,7 +22,8 @@ public:
   virtual QCursor cursor () const;
   virtual void end();
   virtual void handleCurveChange();
-  virtual void handleKeyPress (Qt::Key key);
+  virtual void handleKeyPress (Qt::Key key,
+                               bool atLeastOneSelectedItem);
   virtual void handleMouseMove (QPointF posScreen);
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);

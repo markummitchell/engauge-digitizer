@@ -1,10 +1,17 @@
 #include "ColorFilter.h"
 #include "DocumentModelPointMatch.h"
 #include "EngaugeAssert.h"
+#include <iostream>
 #include "Logger.h"
 #include "PointMatchAlgorithm.h"
+#include <QFile>
 #include <QImage>
 #include <qmath.h>
+#include <QTextStream>
+
+using namespace std;
+
+#define DUMP_TO_GNUPLOT true
 
 #define FOLD2DINDEX(i,j,jmax) ((i)*(jmax)+j)
 
@@ -31,7 +38,8 @@ void PointMatchAlgorithm::assembleLocalMaxima(double* image,
                                               double* sample, 
                                               double* convolution, 
                                               PointMatchList& listCreated, 
-                                              int width, int height,
+                                              int width,
+                                              int height,
                                               int sampleXCenter,
                                               int sampleYCenter,
                                               int sampleXExtent,
@@ -213,6 +221,36 @@ double PointMatchAlgorithm::correlation(double* image,
   return sum;
 }
 
+void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
+                                         int width,
+                                         int height) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::dumpToGnuplot";
+
+  QString filename ("convolution.gnuplot");
+  QFile file (filename);
+  if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
+
+    QTextStream str (&file);
+
+    str << "# I J Convolution" << endl;
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+
+        double convIJ = convolution[FOLD2DINDEX(i, j, height)];
+        str << i << " " << j << " " << convIJ << endl;
+      }
+    }
+  }
+
+  file.close();
+
+  cout << "Suggested gnuplot commands" << endl;
+  cout << "set dgrid3d 50,50" << endl;
+  cout << "set hidden3d" << endl;
+  cout << "splot """ << filename.toLatin1().data() << """ u 1:2:3 with lines" << endl;
+}
+
 QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointPixels,
                                                const QImage &imageProcessed,
                                                const DocumentModelPointMatch &modelPointMatch,
@@ -255,6 +293,12 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointP
                      width,
                      height,
                      &convolution);
+
+#ifdef DUMP_TO_GNUPLOT
+  dumpToGnuplot(convolution,
+                width,
+                height);
+#endif
 
   // Assemble local maxima, where each is the maxima centered in a region
   // having a width of sampleWidth and a height of sampleHeight

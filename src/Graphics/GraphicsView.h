@@ -58,7 +58,7 @@ signals:
   void signalDraggedImageUrl (QUrl);
 
   /// Send keypress to MainWindow for eventual processing by DigitizeStateAbstractBase subclasses.
-  void signalKeyPress (Qt::Key);
+  void signalKeyPress (Qt::Key, bool atLeastOneSelectedItem);
 
   /// Send leave to MainWindow for managing the override cursor.
   void signalLeave ();

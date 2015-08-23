@@ -11,6 +11,7 @@
 #include "MainWindow.h"
 #include "OrdinalGenerator.h"
 #include "PointMatchAlgorithm.h"
+#include "PointStyle.h"
 #include <QCursor>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
@@ -50,6 +51,40 @@ void DigitizeStatePointMatch::begin (DigitizeState /* previousState */)
   m_outline->setPen (QPen (Qt::black));
   m_outline->setVisible (true);
   m_outline->setZValue (Z_VALUE);
+}
+
+void DigitizeStatePointMatch::createPermanentPoint (const QPointF &posScreen)
+{
+  // Create command to add point
+  OrdinalGenerator ordinalGenerator;
+  Document &document = context ().cmdMediator ().document ();
+  const Transformation &transformation = context ().mainWindow ().transformation();
+  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
+                                            document,
+                                            context ().mainWindow().selectedGraphCurve(),
+                                            posScreen,
+                                            ordinalGenerator.generateCurvePointOrdinal(document,
+                                                                                       transformation,
+                                                                                       posScreen,
+                                                                                       activeCurve ()));
+  context().appendNewCmd(cmd);
+
+}
+
+void DigitizeStatePointMatch::createTemporaryPoint (const QPoint &posScreen)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::createTemporaryPoint";
+
+  // Temporary point that user can see while DlgEditPoint is active
+  const Curve &curveAxes = context().cmdMediator().curveAxes();
+  PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
+  GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
+                                                                    pointStyleAxes,
+                                                                    posScreen);
+
+  context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
+                                                    point);
+  m_posCandidatePoint = posScreen;
 }
 
 QCursor DigitizeStatePointMatch::cursor() const
@@ -103,9 +138,20 @@ void DigitizeStatePointMatch::handleCurveChange()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleCurveChange";
 }
 
-void DigitizeStatePointMatch::handleKeyPress (Qt::Key key)
+void DigitizeStatePointMatch::handleKeyPress (Qt::Key key,
+                                              bool /* atLeastOneSelectedItem */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleKeyPress key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleKeyPress"
+                              << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+
+  // The selected key button has to be compatible with GraphicsView::keyPressEvent
+  if (key == Qt::Key_Right) {
+
+    promoteCandidatePointToPermanentPoint (); // This removes the current temporary point
+
+    popCandidatePoint(); // This creates a new temporary point
+
+  }
 }
 
 void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
@@ -143,19 +189,7 @@ void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseRelease";
 
-  // Create command to add point
-  OrdinalGenerator ordinalGenerator;
-  Document &document = context ().cmdMediator ().document ();
-  const Transformation &transformation = context ().mainWindow ().transformation();
-  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
-                                            document,
-                                            context ().mainWindow().selectedGraphCurve(),
-                                            posScreen,
-                                            ordinalGenerator.generateCurvePointOrdinal(document,
-                                                                                       transformation,
-                                                                                       posScreen,
-                                                                                       activeCurve ()));
-  context().appendNewCmd(cmd);
+  createPermanentPoint (posScreen);
 
   findPointsAndShowFirstCandidate (posScreen);
 }
@@ -176,10 +210,12 @@ void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (const QPointF &po
   const Curve *curve = doc.curveForCurveName (curveName);
 
   PointMatchAlgorithm pointMatchAlgorithm;
-  pointMatchAlgorithm.findPoints (samplePointPixels,
-                                  img,
-                                  modelPointMatch,
-                                  curve->points());
+  m_candidatePoints = pointMatchAlgorithm.findPoints (samplePointPixels,
+                                                      img,
+                                                      modelPointMatch,
+                                                      curve->points());
+
+  popCandidatePoint ();
 }
 
 bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,
@@ -219,6 +255,25 @@ bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,
   }
 
   return pixelShouldBeOn;
+}
+
+void DigitizeStatePointMatch::popCandidatePoint ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::popCandidatePoint";
+
+  // Pop next point from list onto screen
+  QPoint posScreen = m_candidatePoints.first();
+  m_candidatePoints.pop_front ();
+
+  createTemporaryPoint(posScreen);
+}
+
+void DigitizeStatePointMatch::promoteCandidatePointToPermanentPoint()
+{
+  createPermanentPoint (m_posCandidatePoint);
+
+  // Remove temporary point. This is required if there already is a temporary point, before creating a new temporary point
+//  context().mainWindow().scene().removePoint (Point::temporaryPointIdentifier ());
 }
 
 QString DigitizeStatePointMatch::state() const

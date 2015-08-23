@@ -48,7 +48,8 @@ public:
   void handleCurveChange ();
 
   /// See DigitizeStateAbstractBase::handleKeyPress.
-  void handleKeyPress (Qt::Key key);
+  void handleKeyPress (Qt::Key key,
+                       bool atLeastOneSelectedItem);
 
   /// See DigitizeStateAbstractBase::handleLeave.
   void handleLeave ();

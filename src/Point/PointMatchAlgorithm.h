@@ -81,6 +81,11 @@ class PointMatchAlgorithm
                      int sampleXExtent,
                      int sampleYExtent);
 
+  // Dump to file for 3d plotting by gnuplot
+  void dumpToGnuplot (double* convolution,
+                      int width,
+                      int height) const;
+
   // Load image and imagePrime arrays
   void loadImage(const QImage &imageProcessed,
                  const DocumentModelPointMatch &modelPointMatch,

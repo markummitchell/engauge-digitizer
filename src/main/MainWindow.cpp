@@ -1924,11 +1924,15 @@ void MainWindow::slotHelpAbout()
   dlg.exec ();
 }
 
-void MainWindow::slotKeyPress (Qt::Key key)
+void MainWindow::slotKeyPress (Qt::Key key,
+                               bool atLeastOneSelectedItem)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotKeyPress key=" << QKeySequence (key).toString().toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotKeyPress"
+                              << " key=" << QKeySequence (key).toString().toLatin1 ().data ()
+                              << " atLeastOneSelectedItem=" << (atLeastOneSelectedItem ? "true" : "false");
 
-  m_digitizeStateContext->handleKeyPress (key);
+  m_digitizeStateContext->handleKeyPress (key,
+                                          atLeastOneSelectedItem);
 }
 
 void MainWindow::slotLeave ()
