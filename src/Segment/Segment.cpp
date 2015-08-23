@@ -413,7 +413,7 @@ void Segment::removeUnneededLines (int *foldedLines)
   QTextStream *strDump = 0;
   if (m_isGnuplot) {
 
-    fileDump = new QFile ("Segment.out");
+    fileDump = new QFile ("segment.gnuplot");
     fileDump->open (QIODevice::WriteOnly | QIODevice::Text);
     strDump = new QTextStream (fileDump);
 
