@@ -298,6 +298,11 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
   return 0;
 }
 
+const Points Curve::points () const
+{
+  return m_points;
+}
+
 QPointF Curve::positionGraph (const QString &pointIdentifier) const
 {
   QPointF posGraph;
@@ -330,11 +335,6 @@ QPointF Curve::positionScreen (const QString &pointIdentifier) const
   }
 
   return posScreen;
-}
-
-const Points Curve::points () const
-{
-  return m_points;
 }
 
 void Curve::printStream (QString indentation,

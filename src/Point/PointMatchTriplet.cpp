@@ -19,6 +19,12 @@ bool PointMatchTriplet::operator<(const PointMatchTriplet &other) const
   return other.correlation();
 }
 
+QPoint PointMatchTriplet::point() const
+{
+  return QPoint (m_x,
+                 m_y);
+}
+
 int PointMatchTriplet::x() const
 {
   return m_x;

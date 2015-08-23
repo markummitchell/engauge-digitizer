@@ -1,3 +1,4 @@
+#include "CmdAddPointGraph.h"
 #include "CmdMediator.h"
 #include "ColorFilter.h"
 #include "DigitizeStateContext.h"
@@ -9,6 +10,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "OrdinalGenerator.h"
+#include "PointMatchAlgorithm.h"
 #include <QCursor>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
@@ -67,6 +69,35 @@ void DigitizeStatePointMatch::end ()
   m_outline = 0;
 }
 
+QList<QPoint> DigitizeStatePointMatch::extractSamplePointPixels (const QImage &img,
+                                                                 const DocumentModelPointMatch &modelPointMatch,
+                                                                 const QPointF &posScreen) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::extractSamplePointPixels";
+
+  QList<QPoint> samplePointPixels;
+
+  ColorFilter colorFilter;
+  for (int xOffset = 0; xOffset < modelPointMatch.maxPointSize(); xOffset++) {
+    for (int yOffset = 0; yOffset < modelPointMatch.maxPointSize(); yOffset++) {
+
+      int x = posScreen.x() + xOffset;
+      int y = posScreen.y() + yOffset;
+      bool pixelIsOn = colorFilter.pixelFilteredIsOn (img,
+                                                      x,
+                                                      y);
+
+      if (pixelIsOn) {
+
+        samplePointPixels.push_back (QPoint (xOffset,
+                                             yOffset));
+      }
+    }
+  }
+
+  return samplePointPixels;
+}
+
 void DigitizeStatePointMatch::handleCurveChange()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleCurveChange";
@@ -103,51 +134,52 @@ void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
   }
 }
 
-void DigitizeStatePointMatch::handleMousePress (QPointF posScreen)
+void DigitizeStatePointMatch::handleMousePress (QPointF /* posScreen */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMousePress";
-
-  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
-  const QImage &img = context().mainWindow().imageFiltered();
-
-  QList<QPoint> samplePointPixels;
-
-  ColorFilter colorFilter;
-  for (int xOffset = 0; xOffset < modelPointMatch.maxPointSize(); xOffset++) {
-    for (int yOffset = 0; yOffset < modelPointMatch.maxPointSize(); yOffset++) {
-
-      int x = posScreen.x() + xOffset;
-      int y = posScreen.y() + yOffset;
-      bool pixelIsOn = colorFilter.pixelFilteredIsOn (img,
-                                                      x,
-                                                      y);
-
-      if (pixelIsOn) {
-
-        samplePointPixels.push_back (QPoint (xOffset,
-                                             yOffset));
-      }
-    }
-  }
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMousePress";  
 }
 
 void DigitizeStatePointMatch::handleMouseRelease (QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseRelease";
 
-//  // Create command to add point
-//  OrdinalGenerator ordinalGenerator;
-//  Document &document = context ().cmdMediator ().document ();
-//  const Transformation &transformation = context ().mainWindow ().transformation();
-//  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
-//                                            document,
-//                                            context ().mainWindow().selectedGraphCurve(),
-//                                            posScreen,
-//                                            ordinalGenerator.generateCurvePointOrdinal(document,
-//                                                                                       transformation,
-//                                                                                       posScreen,
-//                                                                                       activeCurve ()));
-//  context().appendNewCmd(cmd);
+  // Create command to add point
+  OrdinalGenerator ordinalGenerator;
+  Document &document = context ().cmdMediator ().document ();
+  const Transformation &transformation = context ().mainWindow ().transformation();
+  QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
+                                            document,
+                                            context ().mainWindow().selectedGraphCurve(),
+                                            posScreen,
+                                            ordinalGenerator.generateCurvePointOrdinal(document,
+                                                                                       transformation,
+                                                                                       posScreen,
+                                                                                       activeCurve ()));
+  context().appendNewCmd(cmd);
+
+  findPointsAndShowFirstCandidate (posScreen);
+}
+
+void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (const QPointF &posScreen)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::findPointsAndShowFirstCandidate";
+
+  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
+  const QImage &img = context().mainWindow().imageFiltered();
+
+  QList<QPoint> samplePointPixels = extractSamplePointPixels (img,
+                                                              modelPointMatch,
+                                                              posScreen);
+
+  QString curveName = activeCurve();
+  const Document &doc = context().cmdMediator().document();
+  const Curve *curve = doc.curveForCurveName (curveName);
+
+  PointMatchAlgorithm pointMatchAlgorithm;
+  pointMatchAlgorithm.findPoints (samplePointPixels,
+                                  img,
+                                  modelPointMatch,
+                                  curve->points());
 }
 
 bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,

@@ -6,11 +6,10 @@
 #include "CurveStyle.h"
 #include "functor.h"
 #include "Point.h"
+#include "Points.h"
 #include <QHash>
 #include <QList>
 #include <QString>
-
-typedef QList<Point> Points;
 
 extern const QString AXIS_CURVE_NAME;
 extern const QString DEFAULT_GRAPH_CURVE_NAME;

@@ -3,10 +3,9 @@
 
 #include "ExportValuesOrdinal.h"
 #include "Point.h"
+#include "Points.h"
 #include <QList>
 #include <QPointF>
-
-typedef QList<Point> Points;
 
 class Transformation;
 

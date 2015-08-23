@@ -2,7 +2,9 @@
 #define POINT_MATCH_ALGORITHM_H
 
 #include "fftw3.h"
+#include "Point.h"
 #include "PointMatchTriplet.h"
+#include "Points.h"
 #include <QList>
 #include <QPoint>
 
@@ -18,13 +20,15 @@ class PointMatchAlgorithm
 {
  public:
   /// Single constructor
-  PointMatchAlgorithm(const QList<QPoint> &samplePointPixels,
-                      const QImage &imageProcessed,
-                      const DocumentModelPointMatch &modelPointMatch,
-                      const QList<QPoint> &pointsExisting);
+  PointMatchAlgorithm();
+
+  /// Find points that match the specified sample point pixels. They are sorted by best-to-worst match
+  QList<QPoint> findPoints (const QList<QPoint> &samplePointPixels,
+                            const QImage &imageProcessed,
+                            const DocumentModelPointMatch &modelPointMatch,
+                            const Points &pointsExisting);
 
  private:
-  PointMatchAlgorithm();
 
   enum PixelStates
   {
@@ -80,7 +84,7 @@ class PointMatchAlgorithm
   // Load image and imagePrime arrays
   void loadImage(const QImage &imageProcessed,
                  const DocumentModelPointMatch &modelPointMatch,
-                 const QList<QPoint> &pointsExisting,
+                 const Points &pointsExisting,
                  int width,
                  int height,
                  double** image,
@@ -132,7 +136,7 @@ class PointMatchAlgorithm
   void removePixelsNearExistingPoints(double* image,
                                       int imageWidth,
                                       int imageHeight,
-                                      const QList<QPoint> &pointsExisting,
+                                      const Points &pointsExisting,
                                       int pointSeparation);
 
   // Correlate the sample point with the image, returning points in list that is sorted by correlation

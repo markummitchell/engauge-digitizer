@@ -1,6 +1,8 @@
 #ifndef POINT_MATCH_TRIPLET_H
 #define POINT_MATCH_TRIPLET_H
 
+#include <QPoint>
+
 /// Representation of one matched point as produced from the point match algorithm
 class PointMatchTriplet
 {
@@ -15,6 +17,9 @@ public:
 
   /// Get method for correlation
   double correlation() const;
+
+  /// Return (x,y) coordinates as a point
+  QPoint point() const;
 
   /// Get method for x coordinate
   int x() const;

@@ -77,6 +77,13 @@ CmdMediator &DigitizeStateContext::cmdMediator ()
   return *m_cmdMediator;
 }
 
+const CmdMediator &DigitizeStateContext::cmdMediator () const
+{
+  ENGAUGE_ASSERT (m_cmdMediator != 0);
+
+  return *m_cmdMediator;
+}
+
 void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
 {
   if (m_currentState != m_requestedState) {

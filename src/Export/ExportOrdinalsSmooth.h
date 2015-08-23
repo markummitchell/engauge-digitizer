@@ -3,11 +3,10 @@
 
 #include "ExportValuesOrdinal.h"
 #include "Point.h"
+#include "Points.h"
 #include "SplinePair.h"
 #include <QList>
 #include <vector>
-
-typedef QList<Point> Points;
 
 class Transformation;
 

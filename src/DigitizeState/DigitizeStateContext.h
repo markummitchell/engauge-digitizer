@@ -38,6 +38,9 @@ public:
   /// Provide CmdMediator for indirect access to the Document.
   CmdMediator &cmdMediator ();
 
+  /// Provide CmdMediator for indirect access to the Document.
+  const CmdMediator &cmdMediator () const;
+
   /// See DigitizeStateAbstractBase::handleContextMenuEvent.
   void handleContextMenuEvent (const QString &pointIdentifier);
 

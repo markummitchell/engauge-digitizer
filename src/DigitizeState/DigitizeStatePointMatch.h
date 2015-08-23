@@ -3,8 +3,11 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class DocumentModelPointMatch;
 class QGraphicsEllipseItem;
 class QGraphicsPixmapItem;
+class QImage;
+class QPoint;
 
 /// Digitizing state for matching Curve Points, one at a time.
 class DigitizeStatePointMatch : public DigitizeStateAbstractBase
@@ -28,6 +31,10 @@ public:
 private:
   DigitizeStatePointMatch();
 
+  QList<QPoint> extractSamplePointPixels (const QImage &img,
+                                          const DocumentModelPointMatch &modelPointMatch,
+                                          const QPointF &posScreen) const;
+  void findPointsAndShowFirstCandidate (const QPointF &posScreen);
   bool pixelIsOnInImage (const QImage &img,
                          int x,
                          int y,

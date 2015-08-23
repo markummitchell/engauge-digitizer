@@ -172,6 +172,7 @@ HEADERS  += \
     Point/PointIdentifiers.h \
     Point/PointMatchAlgorithm.h \
     Point/PointMatchTriplet.h \
+    Point/Points.h \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \

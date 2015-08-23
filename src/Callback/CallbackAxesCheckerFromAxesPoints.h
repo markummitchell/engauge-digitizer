@@ -3,10 +3,9 @@
 
 #include "CallbackSearchReturn.h"
 #include "Point.h"
+#include "Points.h"
 #include <QString>
 #include <QList>
-
-typedef QList<Point> Points;
 
 /// Callback for positioning the axes indicator according to the axes points
 class CallbackAxesCheckerFromAxesPoints

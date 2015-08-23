@@ -934,8 +934,6 @@ void MainWindow::fileImport (const QString &fileName)
 
 QImage MainWindow::imageFiltered () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::imageFiltered";
-
   return m_backgroundStateContext->imageForCurveState();
 }
 
