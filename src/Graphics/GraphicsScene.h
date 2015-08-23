@@ -44,8 +44,12 @@ public:
   void printStream (QString indentation,
                     QTextStream &str);
 
-  /// Remove specified point
+  /// Remove specified point. This aborts if the point does not exist
   void removePoint (const QString &identifier);
+
+  /// Remove temporary point if it exists. Temporary point handling is so complicated that this method quietly
+  /// allows redundant calls to this method, without complaining that the point has already been removed when called again
+  void removeTemporaryPointIfExists ();
 
   /// Reset, when loading a document after the first, to same state that first document was at when loaded
   void resetOnLoad();

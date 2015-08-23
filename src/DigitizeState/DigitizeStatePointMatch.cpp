@@ -1,10 +1,12 @@
 #include "CmdAddPointGraph.h"
 #include "CmdMediator.h"
 #include "ColorFilter.h"
+#include "CurveStyles.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStatePointMatch.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsPoint.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -17,6 +19,7 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <qmath.h>
+#include <QMessageBox>
 #include <QPen>
 
 const double Z_VALUE = 200.0;
@@ -75,12 +78,19 @@ void DigitizeStatePointMatch::createTemporaryPoint (const QPoint &posScreen)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::createTemporaryPoint";
 
+  const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
+
+  // Get point style for current graph, and then override with candidate color
+  const CurveStyles &curveStyles = context().cmdMediator().document().modelCurveStyles();
+  PointStyle pointStyle = curveStyles.pointStyle (activeCurve());
+  pointStyle.setPaletteColor (modelPointMatch.paletteColorCandidate());
+
   // Temporary point that user can see while DlgEditPoint is active
-  const Curve &curveAxes = context().cmdMediator().curveAxes();
-  PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
-                                                                    pointStyleAxes,
+                                                                    pointStyle,
                                                                     posScreen);
+
+  context().mainWindow().scene().removeTemporaryPointIfExists(); // Only one temporary point at a time is allowed
 
   context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
                                                     point);
@@ -98,6 +108,9 @@ void DigitizeStatePointMatch::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::end";
 
+  // Remove candidate point which may or may not exist at this point
+  context().mainWindow().scene().removeTemporaryPointIfExists();
+
   // Remove outline before leaving state
   ENGAUGE_CHECK_PTR (m_outline);
   context().mainWindow().scene().removeItem (m_outline);
@@ -112,9 +125,11 @@ QList<QPoint> DigitizeStatePointMatch::extractSamplePointPixels (const QImage &i
 
   QList<QPoint> samplePointPixels;
 
+  int radius = modelPointMatch.maxPointSize() / 2;
+
   ColorFilter colorFilter;
-  for (int xOffset = 0; xOffset < modelPointMatch.maxPointSize(); xOffset++) {
-    for (int yOffset = 0; yOffset < modelPointMatch.maxPointSize(); yOffset++) {
+  for (int xOffset = -radius; xOffset <= radius; xOffset++) {
+    for (int yOffset = -radius; yOffset <= radius; yOffset++) {
 
       int x = posScreen.x() + xOffset;
       int y = posScreen.y() + yOffset;
@@ -261,19 +276,27 @@ void DigitizeStatePointMatch::popCandidatePoint ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::popCandidatePoint";
 
-  // Pop next point from list onto screen
-  QPoint posScreen = m_candidatePoints.first();
-  m_candidatePoints.pop_front ();
+  if (m_candidatePoints.count() > 0) {
 
-  createTemporaryPoint(posScreen);
+    // Pop next point from list onto screen
+    QPoint posScreen = m_candidatePoints.first();
+    m_candidatePoints.pop_front ();
+
+    createTemporaryPoint(posScreen);
+
+  } else {
+
+    // No more points. Inform user
+    QMessageBox::information (0,
+                              "Point Match",
+                              "There are no more matching points");
+
+  }
 }
 
 void DigitizeStatePointMatch::promoteCandidatePointToPermanentPoint()
 {
   createPermanentPoint (m_posCandidatePoint);
-
-  // Remove temporary point. This is required if there already is a temporary point, before creating a new temporary point
-//  context().mainWindow().scene().removePoint (Point::temporaryPointIdentifier ());
 }
 
 QString DigitizeStatePointMatch::state() const

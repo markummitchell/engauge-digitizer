@@ -46,6 +46,10 @@ public:
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (double ordinal);
 
+  /// Remove temporary point if it exists. Temporary point handling is so complicated that this method quietly
+  /// allows redundant calls to this method, without complaining that the point has already been removed when called again
+  void removeTemporaryPointIfExists ();
+
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
                            const PointStyle &pointStyle,

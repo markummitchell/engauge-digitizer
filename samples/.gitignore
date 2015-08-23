@@ -3,3 +3,5 @@ engauge*log*
 *.dig
 *.tsv
 convolution.gnuplot
+image.gnuplot
+sample.gnuplot

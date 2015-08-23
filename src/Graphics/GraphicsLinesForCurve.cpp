@@ -250,6 +250,23 @@ void GraphicsLinesForCurve::removePoint (double ordinal)
   delete graphicsPoint;
 }
 
+void GraphicsLinesForCurve::removeTemporaryPointIfExists()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removeTemporaryPointIfExists";
+
+  OrdinalToGraphicsPoint::iterator itr;
+  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+
+    GraphicsPoint *graphicsPoint = itr.value();
+
+    m_graphicsPoints.remove (itr.key());
+
+    delete graphicsPoint;
+
+    break;
+  }
+}
+
 void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                                 const PointStyle &pointStyle,
                                                 const Point &point)

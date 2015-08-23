@@ -30,13 +30,6 @@ class PointMatchAlgorithm
 
  private:
 
-  enum PixelStates
-  {
-    PixelOff, // pixel is off
-    PixelOnUnscanned, // pixel is on and has not yet been scanned
-    PixelOnScanned // pixel is on and has been scanned and assigned to a maxima, so ignore it
-  };
-
   // Allocate memory for an image array and phase array pair before calculations
   void allocateMemory(double** array,
                       fftw_complex** arrayPrime,
@@ -84,7 +77,8 @@ class PointMatchAlgorithm
   // Dump to file for 3d plotting by gnuplot
   void dumpToGnuplot (double* convolution,
                       int width,
-                      int height) const;
+                      int height,
+                      const QString &filename) const;
 
   // Load image and imagePrime arrays
   void loadImage(const QImage &imageProcessed,

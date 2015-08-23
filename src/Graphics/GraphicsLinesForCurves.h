@@ -49,6 +49,10 @@ public:
   /// Remove the specified point. The act of deleting it will automatically remove it from the GraphicsScene
   void removePoint (const QString &identifier);
 
+  /// Remove temporary point if it exists. Temporary point handling is so complicated that this method quietly
+  /// allows redundant calls to this method, without complaining that the point has already been removed when called again
+  void removeTemporaryPointIfExists ();
+
   /// Reset, when loading a document after the first, to same state that first document was at when loaded
   void resetOnLoad();
 

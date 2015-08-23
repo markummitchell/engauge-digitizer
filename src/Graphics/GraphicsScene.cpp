@@ -139,6 +139,13 @@ void GraphicsScene::removePoint (const QString &identifier)
   m_graphicsLinesForCurves.removePoint (identifier);
 }
 
+void GraphicsScene::removeTemporaryPointIfExists ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removeTemporaryPointIfExists";
+
+  m_graphicsLinesForCurves.removeTemporaryPointIfExists ();
+}
+
 void GraphicsScene::resetOnLoad()
 {
   // LOG4CPP_INFO_S is below

@@ -15,6 +15,9 @@ using namespace std;
 
 #define FOLD2DINDEX(i,j,jmax) ((i)*(jmax)+j)
 
+const int PIXEL_OFF = 0; // Arbitrary value as long as different than PIXEL_ON
+const int PIXEL_ON = 1; // Arbitrary value as long as different than PIXEL_OFF
+
 PointMatchAlgorithm::PointMatchAlgorithm()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::PointMatchAlgorithm";
@@ -181,7 +184,9 @@ double PointMatchAlgorithm::correlation(double* image,
                                         int sampleXExtent,
                                         int sampleYExtent)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::correlation";
+  LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::correlation"
+                              << " x=" << x
+                              << " y=" << y;
 
   ENGAUGE_CHECK_PTR(image);
   ENGAUGE_CHECK_PTR(sample);
@@ -206,13 +211,19 @@ double PointMatchAlgorithm::correlation(double* image,
         int jSample = sampleYCenter + jDelta; // assumes sample starts at lowest column
         if ((0 <= jImage) && (jImage < height)) {
 
-          // Good correlation occurs when both pixels have the same PixelOnUnscanned value. Once an image pixel has
-          // been scanned then it should be ignored
-          if ((image [FOLD2DINDEX(iImage, jImage, height)] == PixelOnUnscanned) &&
-              (sample [FOLD2DINDEX(iSample, jSample, height)] == PixelOnUnscanned)) {
+          // Good correlation occurs when both pixels have the same value
+          if (image [FOLD2DINDEX(iImage, jImage, height)] == sample [FOLD2DINDEX(iSample, jSample, height)]) {
 
-            sum += PixelOnUnscanned;
+            sum += 1;
+
+          } else {
+
+            sum -= 1;
+
           }
+
+          // Once an image pixel has been scanned then it gets turned off - so in a sense this is a greedy algorithm
+          image [FOLD2DINDEX(iImage, jImage, height)] = PIXEL_OFF;
 	}
       }
     }
@@ -223,11 +234,11 @@ double PointMatchAlgorithm::correlation(double* image,
 
 void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
                                          int width,
-                                         int height) const
+                                         int height,
+                                         const QString &filename) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::dumpToGnuplot";
 
-  QString filename ("convolution.gnuplot");
   QFile file (filename);
   if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
 
@@ -240,15 +251,15 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
         double convIJ = convolution[FOLD2DINDEX(i, j, height)];
         str << i << " " << j << " " << convIJ << endl;
       }
+      str << endl; // pm3d likes blank lines between rows
     }
   }
 
   file.close();
 
   cout << "Suggested gnuplot commands" << endl;
-  cout << "set dgrid3d 50,50" << endl;
   cout << "set hidden3d" << endl;
-  cout << "splot """ << filename.toLatin1().data() << """ u 1:2:3 with lines" << endl;
+  cout << "splot """ << filename.toLatin1().data() << """ u 1:2:3 with pm3d" << endl;
 }
 
 QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointPixels,
@@ -295,9 +306,18 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointP
                      &convolution);
 
 #ifdef DUMP_TO_GNUPLOT
+  dumpToGnuplot(image,
+                width,
+                height,
+                "image.gnuplot");
+  dumpToGnuplot(sample,
+                width,
+                height,
+                "sample.gnuplot");
   dumpToGnuplot(convolution,
                 width,
-                height);
+                height,
+                "convolution.gnuplot");
 #endif
 
   // Assemble local maxima, where each is the maxima centered in a region
@@ -387,10 +407,14 @@ void PointMatchAlgorithm::loadSample(const QList<QPoint> &samplePointPixels,
 
   // Populate 2d sample array with same size (width x height) as image so fft transforms will have same
   // dimensions, which means their transforms can be multiplied element-to-element
-  allocateMemory(sample, samplePrime, width, height);
+  allocateMemory(sample,
+                 samplePrime,
+                 width,
+                 height);
 
   populateSampleArray(samplePointPixels,
-                      width, height,
+                      width,
+                      height,
                       sample,
                       sampleXCenter,
                       sampleYCenter,
@@ -483,11 +507,10 @@ void PointMatchAlgorithm::populateImageArray(const QImage &imageProcessed,
       bool pixelIsOn = colorFilter.pixelFilteredIsOn (imageProcessed,
                                                       x,
                                                       y);
-      PixelStates pixelState = (pixelIsOn ?
-                                  PixelOnUnscanned :
-                                  PixelOff);
 
-      (*image) [FOLD2DINDEX(x, y, height)]  = pixelState;
+      (*image) [FOLD2DINDEX(x, y, height)]  = (pixelIsOn ?
+                                                 PIXEL_ON :
+                                                 PIXEL_OFF);
     }
   }
 }
@@ -534,7 +557,7 @@ void PointMatchAlgorithm::populateSampleArray(const QList<QPoint> &samplePointPi
   int x, y;
   for (x = 0; x < width; x++) {
     for (y = 0; y < height; y++) {
-      (*sample) [FOLD2DINDEX(x, y, height)] = PixelOff;
+      (*sample) [FOLD2DINDEX(x, y, height)] = PIXEL_OFF;
     }
   }
 
@@ -546,7 +569,7 @@ void PointMatchAlgorithm::populateSampleArray(const QList<QPoint> &samplePointPi
     y = (samplePointPixels.at(i)).y() - yMin;
     ENGAUGE_ASSERT((0 < x) && (x < width));
     ENGAUGE_ASSERT((0 < y) && (y < height));
-    (*sample) [FOLD2DINDEX(x, y, height)] = PixelOnUnscanned;
+    (*sample) [FOLD2DINDEX(x, y, height)] = PIXEL_ON;
 
     xSum += x;
     ySum += y;
@@ -614,10 +637,8 @@ void PointMatchAlgorithm::removePixelsNearExistingPoints(double* image,
         // Turn off pixels in this row of pixels
         for (int x = xMin; x < xMax; x++) {
 
-          if (image [FOLD2DINDEX(x, y, imageHeight)] != PixelOff) {
+          image [FOLD2DINDEX(x, y, imageHeight)] = PIXEL_OFF;
 
-            image [FOLD2DINDEX(x, y, imageHeight)] = PixelOff;
-          }
         }
       }
     }

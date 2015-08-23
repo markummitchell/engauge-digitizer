@@ -140,6 +140,16 @@ void GraphicsLinesForCurves::removePoint(const QString &identifier)
   m_graphicsLinesForCurve [curveName]->removePoint(ordinal);
 }
 
+void GraphicsLinesForCurves::removeTemporaryPointIfExists()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::removeTemporaryPointIfExists";
+
+  QString curveName = Point::curveNameFromPointIdentifier(Point::temporaryPointIdentifier());
+
+  ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
+  m_graphicsLinesForCurve [curveName]->removeTemporaryPointIfExists ();
+}
+
 void GraphicsLinesForCurves::resetOnLoad()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::resetOnLoad";
