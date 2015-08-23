@@ -349,7 +349,8 @@ void DlgSettingsSegments::updatePreview()
 
   if (!m_loading) {
 
-    SegmentFactory segmentFactory (*m_scenePreview);
+    SegmentFactory segmentFactory (*m_scenePreview,
+                                   mainWindow().isGnuplot());
 
     clearPoints();
     segmentFactory.clearSegments (m_segments);

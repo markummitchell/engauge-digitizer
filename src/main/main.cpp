@@ -8,13 +8,15 @@ using namespace std;
 
 const QString CMD_DEBUG ("debug");
 const QString CMD_ERROR ("error");
+const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
 const QString DASH_ERROR ("-" + CMD_ERROR);
+const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 
 // Prototypes
-void parseCmdLine (int argc, char **argv, bool &isDebug, QString &errorReportFile);
+void parseCmdLine (int argc, char **argv, bool &isDebug, QString &errorReportFile, bool &isGnuplot);
 
 // Functions
 int main(int argc, char *argv[])
@@ -23,18 +25,20 @@ int main(int argc, char *argv[])
 
   QApplication a(argc, argv);
 
-  bool isDebug;
+  bool isDebug, isGnuplot;
   QString errorReportFile;
   parseCmdLine (argc,
                 argv,
                 isDebug,
-                errorReportFile);
+                errorReportFile,
+                isGnuplot);
 
   initializeLogging ("engauge",
                      "engauge.log",
                      isDebug);
 
-  MainWindow w (errorReportFile);
+  MainWindow w (errorReportFile,
+                isGnuplot);
   w.show();
 
   return a.exec();
@@ -43,7 +47,8 @@ int main(int argc, char *argv[])
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
-                   QString &errorReportFile)
+                   QString &errorReportFile,
+                   bool &isGnuplot)
 {
   const int COLUMN_WIDTH = 20;
   bool showUsage = false;
@@ -54,6 +59,7 @@ void parseCmdLine (int argc,
   // Defaults
   isDebug = false;
   errorReportFile = "";
+  isGnuplot = false;
 
   for (int i = 1; i < argc; i++) {
 
@@ -64,6 +70,8 @@ void parseCmdLine (int argc,
       isDebug = true;
     } else if (strcmp (argv [i], DASH_ERROR.toLatin1().data()) == 0) {
       nextIsErrorReportFile = true;
+    } else if (strcmp (argv [i], DASH_GNUPLOT.toLatin1().data()) == 0) {
+      isGnuplot = true;
     } else {
       showUsage = true;
     }
@@ -71,9 +79,13 @@ void parseCmdLine (int argc,
 
   if (showUsage || nextIsErrorReportFile) {
 
-    cerr << "Usage: engauge [" << DASH_DEBUG.toLatin1().data() << "] [" << DASH_ERROR.toLatin1().data() << " <file>]" << endl
+    cerr << "Usage: engauge "
+         << "[" << DASH_DEBUG.toLatin1().data() << "] "
+         << "[" << DASH_ERROR.toLatin1().data() << " <file>] "
+         << "[" << DASH_GNUPLOT.toLatin1().data() << "]" << endl
          << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Enables extra debug information" << endl
-         << "  " << DASH_ERROR.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Specifies an error report fie as input" << endl;
+         << "  " << DASH_ERROR.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Specifies an error report fie as input" << endl
+         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Output diagnostic gnuplot input files for debugging" << endl;
 
     exit (0);
   }

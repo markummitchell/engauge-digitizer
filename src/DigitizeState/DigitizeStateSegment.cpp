@@ -48,7 +48,8 @@ void DigitizeStateSegment::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::end";
 
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+                                 context().isGnuplot());
 
   segmentFactory.clearSegments(m_segments);
 }
@@ -60,7 +61,8 @@ void DigitizeStateSegment::handleCurveChange()
   QImage img = context().mainWindow().imageFiltered();
 
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+                                 context().isGnuplot());
 
   segmentFactory.clearSegments (m_segments);
 
@@ -130,7 +132,8 @@ void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)
 
   // Generate point coordinates. Nothing is created in the GraphicsScene at this point
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene);
+  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+                                 context().isGnuplot());
 
   QList<QPoint> points = segmentFactory.fillPoints (context().cmdMediator().document().modelSegments(),
                                                     segments);

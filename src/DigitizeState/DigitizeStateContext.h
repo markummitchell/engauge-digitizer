@@ -22,7 +22,8 @@ class DigitizeStateContext : public QObject
 public:
   /// Single constructor.
   DigitizeStateContext(MainWindow &mainWindow,
-                       QGraphicsView &view);
+                       QGraphicsView &view,
+                       bool isGnuplot);
   virtual ~DigitizeStateContext ();
 
   /// Curve name for active Curve. This can include AXIS_CURVE_NAME, and empty string
@@ -66,6 +67,9 @@ public:
   /// See DigitizeStateAbstractBase::handleSetOverrideCursor
   void handleSetOverrideCursor (const QCursor &cursor);
 
+  /// Get method for gnuplot flag
+  bool isGnuplot () const;
+
   /// Reference to the MainWindow, without const.
   MainWindow &mainWindow ();
 
@@ -107,6 +111,8 @@ private:
   DigitizeState m_requestedState; // Same as m_currentState until requestDelayedStateTransition is called
 
   CmdMediator *m_cmdMediator;
+
+  bool m_isGnuplot;
 };
 
 #endif // DIGITIZE_STATE_CONTEXT_H

@@ -19,7 +19,8 @@ class Segment : public QObject
 public:
   /// Single constructor.
   Segment(QGraphicsScene &scene,
-          int yLast);
+          int yLast,
+          bool isGnuplot);
   ~Segment();
 
   /// Add some more pixels in a new column to an active segment
@@ -119,6 +120,8 @@ private:
   // This segment is drawn as a series of line segments
   QList<SegmentLine*> m_lines;
 
+  // True for gnuplot input files for debugging
+  bool m_isGnuplot;
 };
 
 #endif // SEGMENT_H

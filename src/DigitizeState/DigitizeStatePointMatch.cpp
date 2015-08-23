@@ -224,7 +224,7 @@ void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (const QPointF &po
   const Document &doc = context().cmdMediator().document();
   const Curve *curve = doc.curveForCurveName (curveName);
 
-  PointMatchAlgorithm pointMatchAlgorithm;
+  PointMatchAlgorithm pointMatchAlgorithm (context().isGnuplot());
   m_candidatePoints = pointMatchAlgorithm.findPoints (samplePointPixels,
                                                       img,
                                                       modelPointMatch,

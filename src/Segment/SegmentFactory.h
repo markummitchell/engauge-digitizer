@@ -22,7 +22,8 @@ class SegmentFactory
 {
 public:
   /// Single constructor.
-  SegmentFactory(QGraphicsScene &scene);
+  SegmentFactory(QGraphicsScene &scene,
+                 bool isGnuplot);
 
   /// Remove the segments created by makeSegments
   void clearSegments(QList<Segment*> &segments);
@@ -116,6 +117,8 @@ private:
                      int height);
 
   QGraphicsScene &m_scene;
+
+  bool m_isGnuplot;
 };
 
 #endif // SEGMENT_FACTORY_H

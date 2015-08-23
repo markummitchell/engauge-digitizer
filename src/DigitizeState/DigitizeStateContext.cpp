@@ -19,11 +19,13 @@
 #include "QtToString.h"
 
 DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
-                                           QGraphicsView &view) :
+                                           QGraphicsView &view,
+                                           bool isGnuplot) :
   m_mainWindow (mainWindow),
   m_view (view),
   m_imageIsLoaded (false),
-  m_cmdMediator (0)
+  m_cmdMediator (0),
+  m_isGnuplot (isGnuplot)
 {
   // These states follow the same order as the DigitizeState enumeration
   m_states.insert (DIGITIZE_STATE_AXIS        , new DigitizeStateAxis        (*this));
@@ -161,6 +163,11 @@ void DigitizeStateContext::handleMouseRelease (QPointF pos)
 void DigitizeStateContext::handleSetOverrideCursor (const QCursor &cursor)
 {
   m_states [m_currentState]->handleSetOverrideCursor (cursor);
+}
+
+bool DigitizeStateContext::isGnuplot () const
+{
+  return m_isGnuplot;
 }
 
 MainWindow &DigitizeStateContext::mainWindow ()

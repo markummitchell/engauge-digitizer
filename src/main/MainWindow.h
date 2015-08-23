@@ -58,6 +58,7 @@ class MainWindow : public QMainWindow
 public:
   /// Single constructor.
   MainWindow(const QString &errorReportFile, // Empty if unused
+             bool isGnuplot,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -69,6 +70,9 @@ public:
 
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
+
+  /// Get method for gnuplot flag
+  bool isGnuplot() const;
 
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
@@ -402,6 +406,8 @@ private:
 
   // Serialized snapshot of document at startup. This is inserted into the error report(s) unless user decides not to for privacy reasons
   QString m_startingDocumentSnapshot;
+
+  bool m_isGnuplot;
 };
 
 #endif // MAIN_WINDOW_H

@@ -11,14 +11,13 @@
 
 using namespace std;
 
-#define DUMP_TO_GNUPLOT true
-
 #define FOLD2DINDEX(i,j,jmax) ((i)*(jmax)+j)
 
 const int PIXEL_OFF = 0; // Arbitrary value as long as different than PIXEL_ON
 const int PIXEL_ON = 1; // Arbitrary value as long as different than PIXEL_OFF
 
-PointMatchAlgorithm::PointMatchAlgorithm()
+PointMatchAlgorithm::PointMatchAlgorithm(bool isGnuplot) :
+  m_isGnuplot (isGnuplot)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::PointMatchAlgorithm";
 }
@@ -305,20 +304,21 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointP
                      height,
                      &convolution);
 
-#ifdef DUMP_TO_GNUPLOT
-  dumpToGnuplot(image,
-                width,
-                height,
-                "image.gnuplot");
-  dumpToGnuplot(sample,
-                width,
-                height,
-                "sample.gnuplot");
-  dumpToGnuplot(convolution,
-                width,
-                height,
-                "convolution.gnuplot");
-#endif
+  if (m_isGnuplot) {
+
+    dumpToGnuplot(image,
+                  width,
+                  height,
+                  "image.gnuplot");
+    dumpToGnuplot(sample,
+                  width,
+                  height,
+                  "sample.gnuplot");
+    dumpToGnuplot(convolution,
+                  width,
+                  height,
+                  "convolution.gnuplot");
+  }
 
   // Assemble local maxima, where each is the maxima centered in a region
   // having a width of sampleWidth and a height of sampleHeight

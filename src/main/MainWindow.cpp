@@ -97,6 +97,7 @@ const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 const char *VERSION_NUMBER = "6.0";
 
 MainWindow::MainWindow(const QString &errorReportFile,
+                       bool isGnuplot,
                        QWidget *parent) :
   QMainWindow(parent),
   m_engaugeFile (EMPTY_FILENAME),
@@ -107,7 +108,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_cmdMediator (0),
   m_digitizeStateContext (0),
   m_transformationStateContext (0),
-  m_backgroundStateContext (0)
+  m_backgroundStateContext (0),
+  m_isGnuplot (isGnuplot)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -794,7 +796,8 @@ void MainWindow::createStateContextBackground ()
 void MainWindow::createStateContextDigitize ()
 {
   m_digitizeStateContext = new DigitizeStateContext (*this,
-                                                     *m_view);
+                                                     *m_view,
+                                                     m_isGnuplot);
 }
 
 void MainWindow::createStateContextTransformation ()
@@ -935,6 +938,11 @@ void MainWindow::fileImport (const QString &fileName)
 QImage MainWindow::imageFiltered () const
 {
   return m_backgroundStateContext->imageForCurveState();
+}
+
+bool MainWindow::isGnuplot() const
+{
+  return m_isGnuplot;
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()

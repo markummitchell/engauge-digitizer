@@ -12,9 +12,11 @@
 #include "SegmentLine.h"
 
 Segment::Segment(QGraphicsScene &scene,
-                 int y) :
+                 int y,
+                 bool isGnuplot) :
   m_scene (scene),
-  m_yLast (y)
+  m_yLast (y),
+  m_isGnuplot (isGnuplot)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment"
                               << " address=0x" << hex << (unsigned long) this;
@@ -407,11 +409,15 @@ void Segment::removeUnneededLines (int *foldedLines)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::removeUnneededLines";
 
-#ifdef LOG_TO_GNUPLOT
-  QFile fileDump ("Segment.out");
-  fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
-  QTextStream strDump (&fileDump);
-#endif
+  QFile *fileDump = 0;
+  QTextStream *strDump = 0;
+  if (m_isGnuplot) {
+
+    fileDump = new QFile ("Segment.out");
+    fileDump->open (QIODevice::WriteOnly | QIODevice::Text);
+    strDump = new QTextStream (fileDump);
+
+  }
 
   // Pathological case is y=0.001*x*x, since the small slope can fool a naive algorithm
   // into optimizing away all but one point at the origin and another point at the far right.
@@ -442,14 +448,15 @@ void Segment::removeUnneededLines (int *foldedLines)
         if (pointIsCloseToLine(xLeft, yLeft, xInt, yInt, xRight, yRight) &&
           pointsAreCloseToLine(xLeft, yLeft, removedPoints, xRight, yRight)) {
 
-#ifdef LOG_TO_GNUPLOT
-          // Dump
-          dumpToGnuplot (strDump,
-                         xInt,
-                         yInt,
-                         linePrevious,
-                         line);
-#endif
+          if (m_isGnuplot) {
+
+            // Dump
+            dumpToGnuplot (*strDump,
+                           xInt,
+                           yInt,
+                           linePrevious,
+                           line);
+          }
 
           // Remove intermediate point, by removing older line and stretching new line to first point
           ++(*foldedLines);
@@ -489,9 +496,15 @@ void Segment::removeUnneededLines (int *foldedLines)
     }
   }
 
-#ifdef LOG_TO_GNUPLOT
-  strDump << "set terminal x11 persist\n";
-#endif
+  if (m_isGnuplot) {
+
+    // Final gnuplot processing
+    *strDump << "set terminal x11 persist\n";
+    fileDump->close ();
+    delete strDump;
+    delete fileDump;
+
+  }
 }
 
 void Segment::setDocumentModelSegments (const DocumentModelSegments &modelSegments)

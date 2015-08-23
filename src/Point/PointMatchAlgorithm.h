@@ -20,7 +20,7 @@ class PointMatchAlgorithm
 {
  public:
   /// Single constructor
-  PointMatchAlgorithm();
+  PointMatchAlgorithm(bool isGnuplot);
 
   /// Find points that match the specified sample point pixels. They are sorted by best-to-worst match
   QList<QPoint> findPoints (const QList<QPoint> &samplePointPixels,
@@ -155,6 +155,8 @@ class PointMatchAlgorithm
   int xDeltaMin(int sampleXCenter);
   int yDeltaMax(int sampleYCenter, int sampleYExtent);
   int yDeltaMin(int sampleYCenter);
+
+  bool m_isGnuplot;
 };
 
 #endif // POINT_MATCH_ALGORITHM_H

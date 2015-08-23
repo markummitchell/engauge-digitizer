@@ -10,8 +10,10 @@
 
 using namespace std;
 
-SegmentFactory::SegmentFactory(QGraphicsScene &scene) :
-  m_scene (scene)
+SegmentFactory::SegmentFactory(QGraphicsScene &scene,
+                               bool isGnuplot) :
+  m_scene (scene),
+  m_isGnuplot (isGnuplot)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::SegmentFactory";
 }
@@ -132,7 +134,9 @@ void SegmentFactory::finishRun(bool *lastBool,
   if (adjacentSegments(lastSegment, yStart, yStop, height) == 0)
   {
     // This is the start of a new segment
-    seg = new Segment(m_scene, (int) (0.5 + (yStart + yStop) / 2.0));
+    seg = new Segment(m_scene,
+                      (int) (0.5 + (yStart + yStop) / 2.0),
+                      m_isGnuplot);
     ENGAUGE_CHECK_PTR (seg);
 
   }
