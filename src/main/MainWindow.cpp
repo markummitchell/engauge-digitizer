@@ -5,6 +5,7 @@
 #include "img/bannerapp_64.xpm"
 #include "img/bannerapp_128.xpm"
 #include "img/bannerapp_256.xpm"
+#include "ChecklistGuideWizard.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -21,7 +22,6 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
-#include "DlgChecklistGuideWizard.h"
 #include "DlgErrorReport.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
@@ -1952,9 +1952,11 @@ void MainWindow::slotHelpChecklistGuideWizard ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpChecklistGuideWizard";
 
-  DlgChecklistGuideWizard *dlg = new DlgChecklistGuideWizard(*this);
+  ChecklistGuideWizard *wizard = new ChecklistGuideWizard(*this);
 
-  dlg->show();
+  wizard->exec();
+
+  delete wizard;
 }
 
 void MainWindow::slotKeyPress (Qt::Key key,
