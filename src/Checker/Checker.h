@@ -16,8 +16,6 @@ class QGraphicsScene;
 class QPolygonF;
 class Transformation;
 
-const int NUM_AXES_POINTS = 3;
-
 typedef QList<QGraphicsItem *> SideSegments;
 
 /// Box shape that is drawn through the three axis points, to temporarily (usually) or permanently (rarely)

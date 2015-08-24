@@ -380,7 +380,7 @@ void DlgSettingsCurveAddRemove::slotRemove ()
   for (int i = 0; i < m_listCurves->selectionModel ()->selectedIndexes ().count (); i++) {
 
     int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
-    QModelIndex idx = m_curveNameList->index (row, COL_NUM_POINTS);
+    QModelIndex idx = m_curveNameList->index (row, CurveNameListEntry::COL_NUM_POINTS ());
     int curvePoints = m_curveNameList->data (idx, Qt::DisplayRole).toInt ();
 
     numPoints += curvePoints;

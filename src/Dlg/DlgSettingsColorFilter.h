@@ -63,6 +63,9 @@ private:
   void createProfileAndScale (QGridLayout *layout, int &row);
   QRgb createThread (); // Returns background color
   void loadForCurveName();
+  static int PROFILE_HEIGHT_IN_ROWS () { return 6; }
+  static int PROFILE_SCENE_WIDTH () { return 100; }
+  static int PROFILE_SCENE_HEIGHT () { return 100; }
   void updateHistogram();
   void updatePreview();
 

@@ -47,9 +47,6 @@ public:
   /// save memory and improve user interface responsiveness
   void removeUnneededLines(int *foldedLines);
 
-  /// Set the segment properties.
-  void setDocumentModelSegments (const DocumentModelSegments &modelSegments);
-
 public slots:
 
   /// Slot for hover enter/leave events in the associated SegmentLines

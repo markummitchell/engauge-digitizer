@@ -325,7 +325,7 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
     double ordinalKey = itr.key();
 
     // Sanity checks
-    ENGAUGE_ASSERT (ordinalKey != UNDEFINED_ORDINAL);
+    ENGAUGE_ASSERT (ordinalKey != Point::UNDEFINED_ORDINAL ());
 
     str << delimiter << ordinalKey;
     delimiter = ", ";

@@ -8,9 +8,6 @@ class CmdMediator;
 class MainWindow;
 class QComboBox;
 
-const int MINIMUM_DIALOG_WIDTH = 350;
-const int MINIMUM_PREVIEW_HEIGHT = 200;
-
 /// Abstract base class for all Settings dialogs.
 class DlgSettingsAbstractBase : public QDialog
 {
@@ -45,6 +42,12 @@ protected:
 
   /// Process slotOk.
   virtual void handleOk () = 0;
+
+  /// Dialog layout constant that guarantees every widget has sufficient room
+  static int MINIMUM_DIALOG_WIDTH;
+
+  /// Dialog layout constant that guarantees preview has sufficent room
+  static int MINIMUM_PREVIEW_HEIGHT;
 
   /// Load settings from Document.
   virtual void load (CmdMediator &cmdMediator) = 0;

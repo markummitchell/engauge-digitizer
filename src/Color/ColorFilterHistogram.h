@@ -3,8 +3,6 @@
 
 #include <QRgb>
 
-const int HISTOGRAM_BINS = 100;
-
 class ColorFilter;
 class QColor;
 class QImage;
@@ -31,10 +29,18 @@ public:
                  const QImage &image,
                  int &maxBinCount) const;
 
+  /// Number of histogram bins
+  static int HISTOGRAM_BINS () { return 100; }
+
   /// Inverse of binFromPixel
   int valueFromBin (const ColorFilter &filter,
                     ColorFilterMode colorFilterMode,
                     int bin);
+
+private:
+
+  static int FIRST_NON_EMPTY_BIN_AT_START () { return 1; }
+  static int LAST_NON_EMPTY_BIN_AT_END () { return ColorFilterHistogram::HISTOGRAM_BINS () - 2; }
 };
 
 #endif // COLOR_FILTER_HISTOGRAM_H

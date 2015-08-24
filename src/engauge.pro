@@ -84,6 +84,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
+    Dlg/DlgChecklistGuideWizard.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgErrorReport.h \
     Dlg/DlgFilterCommand.h \
@@ -279,6 +280,7 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
+    Dlg/DlgChecklistGuideWizard.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgErrorReport.cpp \
     Dlg/DlgFilterCommand.cpp \

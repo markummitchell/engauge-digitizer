@@ -21,6 +21,7 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
+#include "DlgChecklistGuideWizard.h"
 #include "DlgErrorReport.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
@@ -360,9 +361,9 @@ void MainWindow::createActionsFile ()
 
   m_actionExit = new QAction(tr ("&Exit"), this);
   m_actionExit->setShortcut (QKeySequence::Quit);
-  m_actionExit->setStatusTip (tr ("Quits the applicaiton."));
+  m_actionExit->setStatusTip (tr ("Quits the application."));
   m_actionExit->setWhatsThis (tr ("Exit\n\n"
-                                  "Quits the applicaiton."));
+                                  "Quits the application."));
   connect (m_actionExit, SIGNAL (triggered ()), this, SLOT (close ()));
 }
 
@@ -370,6 +371,12 @@ void MainWindow::createActionsHelp ()
 {
   m_actionWhatsThis = QWhatsThis::createAction(this);
   m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
+
+  m_actionChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
+  m_actionChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard to define digitizing steps"));
+  m_actionChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
+                                                  "Use Checklist Guide Wizard to generate a checklist of steps for the current document"));
+  connect (m_actionChecklistGuideWizard, SIGNAL (triggered ()), this, SLOT (slotHelpChecklistGuideWizard ()));
 
   m_actionAbout = new QAction(tr ("About Engauge"), this);
   m_actionAbout->setStatusTip (tr ("About the application."));
@@ -451,6 +458,14 @@ void MainWindow::createActionsView ()
   m_actionViewBackground->setWhatsThis (tr ("View Background ToolBar\n\n"
                                             "Show or hide the background toolbar"));
   connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewToolBarBackground ()));
+
+  m_actionViewChecklistGuide = new QAction (tr ("Checklist Guide Toolbar"), this);
+  m_actionViewChecklistGuide->setCheckable (true);
+  m_actionViewChecklistGuide->setChecked (true);
+  m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide toolbar."));
+  m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide ToolBar\n\n"
+                                                "Show or hide the checklist guide toolbar"));
+  connect (m_actionViewChecklistGuide, SIGNAL (triggered ()), this, SLOT (slotViewToolBarChecklistGuide()));
 
   m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
@@ -701,6 +716,7 @@ void MainWindow::createMenus()
   m_menuView = menuBar()->addMenu(tr("View"));
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
+  m_menuView->addAction (m_actionViewChecklistGuide);
   m_menuView->addAction (m_actionViewSettingsViews);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
@@ -750,7 +766,7 @@ void MainWindow::createMenus()
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
   m_menuHelp->addAction (m_actionWhatsThis);
-  m_menuHelp->insertSeparator (m_actionAbout);
+  m_menuHelp->addAction (m_actionChecklistGuideWizard);
   m_menuHelp->addAction (m_actionAbout);
 
   updateRecentFileList();
@@ -1932,6 +1948,15 @@ void MainWindow::slotHelpAbout()
   dlg.exec ();
 }
 
+void MainWindow::slotHelpChecklistGuideWizard ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpChecklistGuideWizard";
+
+  DlgChecklistGuideWizard *dlg = new DlgChecklistGuideWizard(*this);
+
+  dlg->show();
+}
+
 void MainWindow::slotKeyPress (Qt::Key key,
                                bool atLeastOneSelectedItem)
 {
@@ -2191,6 +2216,11 @@ void MainWindow::slotViewToolBarSettingsViews ()
   } else {
     m_toolSettingsViews->hide();
   }
+}
+
+void MainWindow::slotViewToolBarChecklistGuide ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarChecklistGuide";
 }
 
 void MainWindow::slotViewToolTips ()

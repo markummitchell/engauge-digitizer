@@ -31,7 +31,7 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
 
   m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
                                      identifier,
-                                     UNDEFINED_ORDINAL,
+                                     Point::UNDEFINED_ORDINAL (),
                                      *point);
 }
 

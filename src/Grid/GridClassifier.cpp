@@ -9,8 +9,9 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
-const int MIN_STEP_PIXELS = 5;
-const double PEAK_HALF_WIDTH = 4;
+int GridClassifier::NUM_HISTOGRAM_BINS = 400;
+int GridClassifier::MIN_STEP_PIXELS = 5;
+double GridClassifier::PEAK_HALF_WIDTH = 4;
 
 GridClassifier::GridClassifier()
 {
@@ -31,6 +32,9 @@ void GridClassifier::classify (const QPixmap &originalPixmap,
 
   double xMin, xMax, yMin, yMax;
   double binStartX, binStepX, binStartY, binStepY;
+
+  m_binsX = new double [NUM_HISTOGRAM_BINS];
+  m_binsY = new double [NUM_HISTOGRAM_BINS];
 
   computeGraphCoordinateLimits (image,
                                 transformation,
@@ -65,6 +69,9 @@ void GridClassifier::classify (const QPixmap &originalPixmap,
                     binStartY,
                     binStepY,
                     countY);
+
+  delete m_binsX;
+  delete m_binsY;
 }
 
 void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
@@ -118,7 +125,7 @@ void GridClassifier::initializeHistogramBins ()
   }
 }
 
-void GridClassifier::loadPicketFence (double picketFence [NUM_HISTOGRAM_BINS],
+void GridClassifier::loadPicketFence (double picketFence [],
                                       int binStart,
                                       int binStep,
                                       int count,
@@ -211,7 +218,7 @@ void GridClassifier::populateHistogramBins (const QImage &image,
   }
 }
 
-void GridClassifier::searchCountSpace (double bins [NUM_HISTOGRAM_BINS],
+void GridClassifier::searchCountSpace (double bins [],
                                        double binStart,
                                        double binStep,
                                        int &countMax)

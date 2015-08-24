@@ -3,9 +3,6 @@
 #include "EngaugeAssert.h"
 #include <QImage>
 
-const int FIRST_NON_EMPTY_BIN_AT_START = 1;
-const int LAST_NON_EMPTY_BIN_AT_END = HISTOGRAM_BINS - 2;
-
 ColorFilterHistogram::ColorFilterHistogram()
 {
 }
@@ -27,7 +24,7 @@ int ColorFilterHistogram::binFromPixel (const ColorFilter &filter,
 
   if (s >= 0) {
 
-    bin = FIRST_NON_EMPTY_BIN_AT_START + s * (LAST_NON_EMPTY_BIN_AT_END - FIRST_NON_EMPTY_BIN_AT_START);
+    bin = FIRST_NON_EMPTY_BIN_AT_START () + s * (LAST_NON_EMPTY_BIN_AT_END () - FIRST_NON_EMPTY_BIN_AT_START ());
 
   }
 
@@ -42,7 +39,7 @@ void ColorFilterHistogram::generate (const ColorFilter &filter,
 {
   // Initialize histogram bins
   int bin;
-  for (bin = 0; bin < HISTOGRAM_BINS; bin++) {
+  for (bin = 0; bin < HISTOGRAM_BINS (); bin++) {
     histogramBins [bin] = 0;
   }
 
@@ -60,8 +57,8 @@ void ColorFilterHistogram::generate (const ColorFilter &filter,
                               rgbBackground);
       if (bin >= 0) {
 
-        ENGAUGE_ASSERT ((FIRST_NON_EMPTY_BIN_AT_START <= bin) &&
-                  (LAST_NON_EMPTY_BIN_AT_END >= bin));
+        ENGAUGE_ASSERT ((FIRST_NON_EMPTY_BIN_AT_START () <= bin) &&
+                        (LAST_NON_EMPTY_BIN_AT_END () >= bin));
         ++(histogramBins [bin]);
 
         if (histogramBins [bin] > maxBinCount) {
@@ -77,7 +74,7 @@ int ColorFilterHistogram::valueFromBin (const ColorFilter &filter,
                                         int bin)
 {
   // Just do everything in binFromPixel backwards
-  double s = (double) (bin - FIRST_NON_EMPTY_BIN_AT_START) / (double) (LAST_NON_EMPTY_BIN_AT_END - FIRST_NON_EMPTY_BIN_AT_START);
+  double s = (double) (bin - FIRST_NON_EMPTY_BIN_AT_START ()) / (double) (LAST_NON_EMPTY_BIN_AT_END () - FIRST_NON_EMPTY_BIN_AT_START ());
   s = qMin (qMax (s, 0.0), 1.0);
 
   return filter.zeroToOneToValue (colorFilterMode,

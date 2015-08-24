@@ -8,8 +8,6 @@ class QTextStream;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
-const double UNDEFINED_ORDINAL = -1.0;
-
 enum ApplyHasCheck {
   KEEP_HAS_CHECK,
   SKIP_HAS_CHECK
@@ -114,6 +112,9 @@ public:
 
   /// Point identifier for temporary point that is used by DigitzeStateAxis
   static QString temporaryPointIdentifier ();
+
+  /// Get method for undefined ordinal constant
+  static double UNDEFINED_ORDINAL () { return -1.0; }
 
 private:
 

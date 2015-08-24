@@ -178,6 +178,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
+  void slotHelpChecklistGuideWizard();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
   void slotMouseMove (QPointF);
@@ -202,6 +203,7 @@ private slots:
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarDigitize ();
+  void slotViewToolBarChecklistGuide ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
@@ -314,6 +316,7 @@ private:
 
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
+  QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
@@ -361,6 +364,7 @@ private:
 
   QMenu *m_menuHelp;
   QAction *m_actionAbout;
+  QAction *m_actionChecklistGuideWizard;
   QAction *m_actionWhatsThis;
 
   QVBoxLayout *m_layout;

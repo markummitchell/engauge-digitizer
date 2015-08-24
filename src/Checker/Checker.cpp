@@ -12,6 +12,8 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
+const int NUM_AXES_POINTS = 3;
+
 const QString DUMMY_CURVENAME ("dummy");
 const int Z_VALUE_IN_FRONT = 100;
 const int NO_SIDE = -1;
@@ -480,7 +482,7 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   // Get the min and max of x and y
   double xFrom, xTo, yFrom, yTo;
   int i;
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i < NUM_AXES_POINTS; i++) {
     if (i == 0) {
       xFrom = points.at(i).posGraph().x();
       xTo   = points.at(i).posGraph().x();

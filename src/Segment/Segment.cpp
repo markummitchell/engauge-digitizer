@@ -507,11 +507,6 @@ void Segment::removeUnneededLines (int *foldedLines)
   }
 }
 
-void Segment::setDocumentModelSegments (const DocumentModelSegments &modelSegments)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::setDocumentModelSegments";
-}
-
 void Segment::slotHover (bool hover)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::slotHover";

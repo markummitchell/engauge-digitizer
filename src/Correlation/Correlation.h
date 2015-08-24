@@ -1,7 +1,7 @@
 #ifndef CORRELATION_H
 #define CORRELATION_H
 
-#include <fftw3.h>
+#include "fftw3.h"
 
 /// Fast cross correlation between two functions
 class Correlation

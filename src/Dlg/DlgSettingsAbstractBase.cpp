@@ -10,6 +10,9 @@
 #include <QSpacerItem>
 #include <QVBoxLayout>
 
+int DlgSettingsAbstractBase::MINIMUM_DIALOG_WIDTH = 350;
+int DlgSettingsAbstractBase::MINIMUM_PREVIEW_HEIGHT = 200;
+
 DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
                                                  const QString &dialogName,
                                                  MainWindow &mainWindow) :

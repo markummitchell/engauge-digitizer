@@ -1,12 +1,10 @@
 #ifndef GRID_CLASSIFIER_H
 #define GRID_CLASSIFIER_H
 
+#include "ColorFilterHistogram.h"
+
 class QPixmap;
 class Transformation;
-
-// Number of histogram bins could be so large that each bin corresponds to one pixel, but computation time may then be
-// too slow when doing the correleations later on
-const int NUM_HISTOGRAM_BINS = 400;
 
 /// Classify the grid pattern in an original image.
 ///
@@ -37,6 +35,13 @@ public:
 
 private:
 
+  // Number of histogram bins could be so large that each bin corresponds to one pixel, but computation time may then be
+  // too slow when doing the correleations later on
+  static int NUM_HISTOGRAM_BINS;
+
+  static int MIN_STEP_PIXELS;
+  static double PEAK_HALF_WIDTH;
+
   void classify();
   void computeGraphCoordinateLimits (const QImage &image,
                                      const Transformation &transformation,
@@ -45,18 +50,19 @@ private:
                                      double &yMin,
                                      double &yMax);
   void initializeHistogramBins ();
-  void loadPicketFence (double picketFence [NUM_HISTOGRAM_BINS],
+  void loadPicketFence (double picketFence [],
                         int binStart,
                         int binStep,
                         int count,
                         bool isCount);
+
   void populateHistogramBins (const QImage &image,
                               const Transformation &transformation,
                               double xMin,
                               double xMax,
                               double yMin,
                               double yMax);
-  void searchCountSpace (double bins [NUM_HISTOGRAM_BINS],
+  void searchCountSpace (double bins [],
                          double binStart,
                          double binStep,
                          int &countMax);
@@ -73,8 +79,8 @@ private:
                              double &binStartY,
                              double &binStepY);
 
-  double m_binsX [NUM_HISTOGRAM_BINS];
-  double m_binsY [NUM_HISTOGRAM_BINS];
+  double *m_binsX;
+  double *m_binsY;
 };
 
 #endif // GRID_CLASSIFIER_H

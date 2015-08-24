@@ -24,10 +24,6 @@
 #include "ViewProfileDivider.h"
 #include "ViewProfileScale.h"
 
-const int PROFILE_HEIGHT_IN_ROWS = 6;
-const int PROFILE_SCENE_WIDTH = 100;
-const int PROFILE_SCENE_HEIGHT = 100;
-
 DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Filter",
                            "DlgSettingsColorFilter",
@@ -131,14 +127,14 @@ void DlgSettingsColorFilter::createProfileAndScale (QGridLayout *layout, int &ro
   layout->addWidget (labelProfile, row++, 3);
 
   m_sceneProfile = new QGraphicsScene;
-  m_sceneProfile->setSceneRect(0, 0, PROFILE_SCENE_WIDTH, PROFILE_SCENE_HEIGHT);
+  m_sceneProfile->setSceneRect(0, 0, PROFILE_SCENE_WIDTH (), PROFILE_SCENE_HEIGHT ());
 
   m_viewProfile = new ViewProfile (m_sceneProfile);
   m_viewProfile->setWhatsThis (tr ("Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust "
                                    "the range of filter parameter values that will be included in the filtered image. The clear portion will "
                                    "be included, and the shaded portion will be excluded."));
-  layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS, 1);
-  row += PROFILE_HEIGHT_IN_ROWS;
+  layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS (), 1);
+  row += PROFILE_HEIGHT_IN_ROWS ();
 
   m_scale = new ViewProfileScale;
   m_scale->setWhatsThis (tr ("This read-only box displays a graphical representation of the horizontal axis in the histogram profile above."));
@@ -286,14 +282,14 @@ void DlgSettingsColorFilter::slotCurveName(const QString & /* curveName */)
 void DlgSettingsColorFilter::slotDividerHigh (double xCenter)
 {
   m_modelColorFilterAfter->setHigh (m_cmbCurveName->currentText(),
-                               xCenter / (double) PROFILE_SCENE_WIDTH);
+                               xCenter / (double) PROFILE_SCENE_WIDTH ());
   updatePreview();
 }
 
 void DlgSettingsColorFilter::slotDividerLow (double xCenter)
 {
   m_modelColorFilterAfter->setLow (m_cmbCurveName->currentText(),
-                              xCenter / (double) PROFILE_SCENE_WIDTH);
+                              xCenter / (double) PROFILE_SCENE_WIDTH ());
   updatePreview();
 }
 
@@ -389,7 +385,7 @@ void DlgSettingsColorFilter::updateHistogram()
   // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
 
-  double histogramBins [HISTOGRAM_BINS];
+  double histogramBins [ColorFilterHistogram::HISTOGRAM_BINS ()];
 
   ColorFilter filter;
   ColorFilterHistogram filterHistogram;
@@ -403,19 +399,19 @@ void DlgSettingsColorFilter::updateHistogram()
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
   double logMaxBinCount = qLn (maxBinCount);
-  for (int bin = 1; bin < HISTOGRAM_BINS; bin++) {
+  for (int bin = 1; bin < ColorFilterHistogram::HISTOGRAM_BINS (); bin++) {
 
-    double x0 = PROFILE_SCENE_WIDTH * (bin - 1.0) / (HISTOGRAM_BINS - 1.0);
+    double x0 = PROFILE_SCENE_WIDTH () * (bin - 1.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
 
     // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
     double count0 = 1.0 + histogramBins [bin - 1];
-    double y0 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count0) / logMaxBinCount);
+    double y0 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count0) / logMaxBinCount);
 
-    double x1 = PROFILE_SCENE_WIDTH * (bin - 0.0) / (HISTOGRAM_BINS - 1.0);
+    double x1 = PROFILE_SCENE_WIDTH () * (bin - 0.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
 
     // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
     double count1 = 1.0 + histogramBins [bin];
-    double y1 = (PROFILE_SCENE_HEIGHT - 1.0) * (1.0 - qLn (count1) / logMaxBinCount);
+    double y1 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count1) / logMaxBinCount);
 
     QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
     line->setPen (QPen (QBrush (Qt::black), PEN_WIDTH));
@@ -425,15 +421,15 @@ void DlgSettingsColorFilter::updateHistogram()
   // Create low and high dividers
   m_dividerLow = new ViewProfileDivider(*m_sceneProfile,
                                         *m_viewProfile,
-                                        PROFILE_SCENE_WIDTH,
-                                        PROFILE_SCENE_HEIGHT,
-                                        PROFILE_SCENE_HEIGHT * 2.0 / 3.0,
+                                        PROFILE_SCENE_WIDTH (),
+                                        PROFILE_SCENE_HEIGHT (),
+                                        PROFILE_SCENE_HEIGHT () * 2.0 / 3.0,
                                         true);
   m_dividerHigh = new ViewProfileDivider(*m_sceneProfile,
                                          *m_viewProfile,
-                                         PROFILE_SCENE_HEIGHT,
-                                         PROFILE_SCENE_WIDTH,
-                                         PROFILE_SCENE_HEIGHT / 3.0,
+                                         PROFILE_SCENE_HEIGHT (),
+                                         PROFILE_SCENE_WIDTH (),
+                                         PROFILE_SCENE_HEIGHT () / 3.0,
                                          false);
 
   // Connect the dividers to each other since the shaded areas depend on both divides when low divider is
