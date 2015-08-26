@@ -7,12 +7,9 @@
 #include "PointStyle.h"
 #include <QCheckBox>
 #include <QComboBox>
-#include <QDoubleValidator>
-#include <QIntValidator>
 #include <QGridLayout>
 #include <QGraphicsScene>
 #include <QLabel>
-#include <QLineEdit>
 #include <qmath.h>
 #include <QSpinBox>
 #include "Segment.h"
@@ -73,29 +70,27 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   QLabel *labelMinLength = new QLabel("Minimum length (points):");
   layout->addWidget(labelMinLength, row, 1);
 
-  m_editMinLength = new QLineEdit;
-  m_editMinLength->setWhatsThis (tr ("Select a minimum number of points in a segment.\n\n"
+  m_spinMinLength = new QSpinBox;
+  m_spinMinLength->setRange (MIN_LENGTH_MIN, MIN_LENGTH_MAX);
+  m_spinMinLength->setWhatsThis (tr ("Select a minimum number of points in a segment.\n\n"
                                      "Only segments with more points will be created.\n\n"
                                      "This value should be as large as possible to reduce memory usage. This value has "
                                      "a lower limit"));
-  m_validatorMinLength = new QIntValidator (MIN_LENGTH_MIN, MIN_LENGTH_MAX);
-  m_editMinLength->setValidator (m_validatorMinLength);
-  connect (m_editMinLength, SIGNAL (textChanged (const QString &)), this, SLOT (slotMinLength (const QString &)));
-  layout->addWidget(m_editMinLength, row++, 2);
+  connect (m_spinMinLength, SIGNAL (valueChanged (const QString &)), this, SLOT (slotMinLength (const QString &)));
+  layout->addWidget(m_spinMinLength, row++, 2);
 
   QLabel *labelPointSeparation = new QLabel("Point separation (pixels):");
   layout->addWidget (labelPointSeparation, row, 1);
 
-  m_editPointSeparation = new QLineEdit;
-  m_editPointSeparation->setWhatsThis (tr ("Select a point separation in pixels.\n\n"
+  m_spinPointSeparation = new QSpinBox;
+  m_spinPointSeparation->setRange (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX);
+  m_spinPointSeparation->setWhatsThis (tr ("Select a point separation in pixels.\n\n"
                                            "Successive points added to a segment will be separated by this number of pixels. "
                                            "If Fill Corners is enabled, then additional points will be inserted at corners so some points "
                                            "will be closer.\n\n"
                                            "This value has a lower limit"));
-  m_validatorPointSeparation = new QIntValidator (POINT_SEPARATION_MIN, POINT_SEPARATION_MAX);
-  m_editPointSeparation->setValidator (m_validatorPointSeparation);
-  connect (m_editPointSeparation, SIGNAL (textChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
-  layout->addWidget (m_editPointSeparation, row++, 2);
+  connect (m_spinPointSeparation, SIGNAL (valueChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
+  layout->addWidget (m_spinPointSeparation, row++, 2);
 
   QLabel *labelFillCorners = new QLabel ("Fill corners:");
   layout->addWidget (labelFillCorners, row, 1);
@@ -266,8 +261,8 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (POINT_SEPARATION_MAX >= m_modelSegmentsAfter->pointSeparation());
 
   // Populate controls
-  m_editPointSeparation->setText (QString::number(m_modelSegmentsAfter->pointSeparation()));
-  m_editMinLength->setText (QString::number(m_modelSegmentsAfter->minLength()));
+  m_spinPointSeparation->setValue (m_modelSegmentsAfter->pointSeparation());
+  m_spinMinLength->setValue (m_modelSegmentsAfter->minLength());
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
   m_spinLineWidth->setValue (m_modelSegmentsAfter->lineWidth());
 
@@ -330,12 +325,7 @@ void DlgSettingsSegments::slotPointSeparation (const QString &pointSeparation)
 
 void DlgSettingsSegments::updateControls()
 {
-  QString textMinLength = m_editMinLength->text();
-  QString textPointSeparation = m_editPointSeparation->text();
-  int pos;
-  bool isOk = (m_validatorMinLength->validate (textMinLength, pos) == QValidator::Acceptable) &&
-              (m_validatorPointSeparation->validate (textPointSeparation, pos) == QValidator::Acceptable);
-  enableOk (isOk);
+  enableOk (true);
 }
 
 void DlgSettingsSegments::updatePreview()
