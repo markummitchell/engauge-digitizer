@@ -14,6 +14,9 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
 {
   setWindowTitle (tr ("Checklist Guide Wizard"));
   setModal (true);
+  QPixmap splash (":/engauge/img/SpreadsheetsForDoc.png");
+  setPixmap (QWizard::WatermarkPixmap, splash); // For ClassicStyle and ModernStyle
+  setPixmap (QWizard::BackgroundPixmap, splash); // For MacStyle
 
   addPage(createPageIntroduction());
   addPage(createPageStrategy());
@@ -26,8 +29,7 @@ QWizardPage *ChecklistGuideWizard::createPageCurveNames() const
 
   QWizardPage *page = new QWizardPage;
 
-  page->setTitle ("Checklist Guide Wizard");
-  page->setSubTitle ("Select curve names");
+  page->setTitle ("Select curve names");
 
   return page;
 }
@@ -38,8 +40,7 @@ QWizardPage *ChecklistGuideWizard::createPageIntroduction() const
 
   QWizardPage *page = new QWizardPage;
 
-  page->setTitle ("Checklist Guide Wizard");
-  page->setSubTitle ("Introduction");
+  page->setTitle ("Introduction");
 
   QTextEdit *edit = new QTextEdit(page);
   edit->setReadOnly (true);
@@ -65,8 +66,7 @@ QWizardPage *ChecklistGuideWizard::createPageStrategy() const
   QWizardPage *page = new QWizardPage;
 
 //  QTextEdit *edit = new QTextEdit(page);
-  page->setTitle ("Checklist Guide Wizard");
-  page->setSubTitle ("Select a strategy");
+  page->setTitle ("Select a strategy");
 
   return page;
 }
