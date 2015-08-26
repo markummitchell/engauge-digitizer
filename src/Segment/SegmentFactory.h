@@ -96,6 +96,9 @@ private:
                             int *shortLine,
                             QList<Segment*> &segments);
 
+  /// Remove any Segment with no lines. This prevents crashes in Segment::firstPoint which requires at least one line in each Segment
+  void removeEmptySegments (QList<Segment*> &segments) const;
+
   // Remove unneeded lines belonging to segments that just finished in the previous column.
   // The results of this function are displayed in the debug spew of makeSegments
   void removeUnneededLines(SegmentVector &lastSegment,

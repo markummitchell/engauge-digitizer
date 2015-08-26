@@ -27,7 +27,8 @@ class ChecklistGuideWizard : public QWizard
   ChecklistGuideWizard();
 
   QWizardPage *createPageCurveNames() const;
-  QWizardPage *createPageLinesOrPoints() const;
+  QWizardPage *createPageIntroduction() const;
+  QWizardPage *createPageStrategy() const;
   void handleOk();
 
   MainWindow &m_mainWindow;

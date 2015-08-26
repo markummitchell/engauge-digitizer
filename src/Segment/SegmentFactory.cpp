@@ -131,17 +131,16 @@ void SegmentFactory::finishRun(bool *lastBool,
   }
 
   Segment *seg;
-  if (adjacentSegments(lastSegment, yStart, yStop, height) == 0)
-  {
+  if (adjacentSegments(lastSegment, yStart, yStop, height) == 0) {
+
     // This is the start of a new segment
     seg = new Segment(m_scene,
                       (int) (0.5 + (yStart + yStop) / 2.0),
                       m_isGnuplot);
     ENGAUGE_CHECK_PTR (seg);
 
-  }
-  else
-  {
+  } else {
+
     // This is the continuation of an existing segment
     seg = adjacentSegment(lastSegment, yStart, yStop, height);
 
@@ -232,17 +231,19 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   loadBool(filter, nextBool, imageFiltered, 1);
   loadSegment(lastSegment, height);
 
-  for (int x = 0; x < width; x++)
-  {
-    if (useDlg)
-    {
-      // update progress bar
+  for (int x = 0; x < width; x++) {
+
+    if (useDlg) {
+
+      // Update progress bar
       dlg->setValue(x);
       qApp->processEvents();
 
-      if (dlg->wasCanceled())
-        // quit scanning. only existing segments will be available
+      if (dlg->wasCanceled()) {
+
+        // Quit scanning. only existing segments will be available
         break;
+      }
     }
 
     matchRunsToSegments(x,
@@ -267,11 +268,13 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
     scrollSegment(lastSegment, currSegment, height);
   }
 
-  if (useDlg)
-  {
+  if (useDlg) {
+
     dlg->setValue(width);
     delete dlg;
   }
+
+  removeEmptySegments (segments);
 
   LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::makeSegments"
                                  << " linesCreated=" << madeLines
@@ -333,6 +336,25 @@ void SegmentFactory::matchRunsToSegments(int x,
                       shortLines,
                       modelSegments,
                       segments);
+}
+
+void SegmentFactory::removeEmptySegments (QList<Segment*> &segments) const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
+
+  for (int i = segments.count(); i > 0;) {
+
+    --i;
+    Segment *segment = segments.at (i);
+
+    if (segment->lineCount () == 0) {
+
+      // Remove this Segment
+      delete segment;
+
+      segments.removeAt (i);
+    }
+  }
 }
 
 void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,

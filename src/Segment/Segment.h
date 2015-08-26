@@ -29,7 +29,8 @@ public:
   /// Create evenly spaced points along the segment
   QList<QPoint> fillPoints(const DocumentModelSegments &modelSegments);
 
-  /// Coordinates of first point in Segment. This info can be used to uniquely identify a Segment
+  /// Coordinates of first point in Segment. This info can be used to uniquely identify a Segment. This method relies
+  /// on SegmentFactory::removeEmptySegments to guarantee every Segment has at least one line
   QPointF firstPoint () const;
 
   /// Forward mouse press event from a component SegmentLine that was just clicked on

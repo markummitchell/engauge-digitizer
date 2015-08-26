@@ -276,6 +276,9 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
 
 QPointF Segment::firstPoint () const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::firstPoint"
+                              << " lineCount=" << m_lines.count();
+
   // There has to be at least one SegmentLine since this only gets called when a SegmentLine is clicked on
   ENGAUGE_ASSERT (m_lines.count () > 0);
 
@@ -290,7 +293,8 @@ QPointF Segment::firstPoint () const
 
 void Segment::forwardMousePress()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::forwardMousePress";
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::forwardMousePress"
+                              << " segmentLines=" << m_lines.count();
 
   emit signalMouseClickOnSegment (firstPoint ());
 }

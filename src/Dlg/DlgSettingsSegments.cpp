@@ -70,7 +70,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createControls";
 
-  QLabel *labelMinLength = new QLabel("Minimum length:");
+  QLabel *labelMinLength = new QLabel("Minimum length (points):");
   layout->addWidget(labelMinLength, row, 1);
 
   m_editMinLength = new QLineEdit;
@@ -83,7 +83,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_editMinLength, SIGNAL (textChanged (const QString &)), this, SLOT (slotMinLength (const QString &)));
   layout->addWidget(m_editMinLength, row++, 2);
 
-  QLabel *labelPointSeparation = new QLabel("Point separation:");
+  QLabel *labelPointSeparation = new QLabel("Point separation (pixels):");
   layout->addWidget (labelPointSeparation, row, 1);
 
   m_editPointSeparation = new QLineEdit;

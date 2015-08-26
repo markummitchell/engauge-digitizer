@@ -75,6 +75,10 @@ void DigitizeStateSegment::handleCurveChange()
   QList<Segment*>::iterator itr;
   for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
     Segment *segment = *itr;
+
+    LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleCurveChange"
+                                << " lines=" << segment->lineCount();
+
     connect (segment, SIGNAL (signalMouseClickOnSegment (QPointF)), this, SLOT (slotMouseClickOnSegment (QPointF)));
   }
 }
@@ -103,7 +107,8 @@ void DigitizeStateSegment::handleMouseRelease (QPointF /* posScreen */)
 
 Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmentStart) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart"
+                              << " segments=" << m_segments.count();
 
   QList<Segment*>::const_iterator itr;
   for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
