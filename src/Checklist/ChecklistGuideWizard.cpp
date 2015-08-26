@@ -1,3 +1,4 @@
+#include "ChecklistGuidePage.h"
 #include "ChecklistGuideWizard.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -5,8 +6,6 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QVBoxLayout>
-
-const int TRANSPARENT_ALPHA = 0;
 
 ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
   m_mainWindow (mainWindow),
@@ -27,9 +26,7 @@ QWizardPage *ChecklistGuideWizard::createPageCurveNames() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageCurveNames";
 
-  QWizardPage *page = new QWizardPage;
-
-  page->setTitle ("Select curve names");
+  QWizardPage *page = new ChecklistGuidePage ("Select curve names");
 
   return page;
 }
@@ -38,23 +35,7 @@ QWizardPage *ChecklistGuideWizard::createPageIntroduction() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageIntroduction";
 
-  QWizardPage *page = new QWizardPage;
-
-  page->setTitle ("Introduction");
-
-  QTextEdit *edit = new QTextEdit(page);
-  edit->setReadOnly (true);
-
-  QPalette palette = edit->palette ();
-  palette.setColor (QPalette::Base, QColor (0, 0, 0, TRANSPARENT_ALPHA));
-  edit->setPalette (palette);
-  edit->setFrameStyle (QFrame::NoFrame);
-
-  edit->setText ("<b>Test</b> html");
-
-  QGridLayout *layout = new QGridLayout;
-  page->setLayout (layout);
-  layout->addWidget (edit);
+  QWizardPage *page = new ChecklistGuidePage ("Introduction");
 
   return page;
 }
@@ -63,10 +44,7 @@ QWizardPage *ChecklistGuideWizard::createPageStrategy() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageStrategy";
 
-  QWizardPage *page = new QWizardPage;
-
-//  QTextEdit *edit = new QTextEdit(page);
-  page->setTitle ("Select a strategy");
+  QWizardPage *page = new ChecklistGuidePage ("Select a strategy");
 
   return page;
 }
