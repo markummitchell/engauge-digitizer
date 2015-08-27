@@ -9,6 +9,7 @@
 #include "Transformation.h"
 
 class BackgroundStateContext;
+class ChecklistGuide;
 class CmdMediator;
 class CmdStackShadow;
 class CurveStyles;
@@ -383,6 +384,7 @@ private:
   ViewPointStyle *m_viewPointStyle;
   ViewSegmentFilter *m_viewSegmentFilter;
   QToolBar *m_toolSettingsViews;
+  ChecklistGuide *m_dockChecklistGuide;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   CmdStackShadow *m_cmdStackShadow; /// Shadow of CmdMediator, for commands loaded from error report file

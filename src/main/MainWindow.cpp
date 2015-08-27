@@ -5,6 +5,7 @@
 #include "img/bannerapp_64.xpm"
 #include "img/bannerapp_128.xpm"
 #include "img/bannerapp_256.xpm"
+#include "ChecklistGuide.h"
 #include "ChecklistGuideWizard.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
@@ -48,6 +49,7 @@
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QDebug>
+#include <QDockWidget>
 #include <QDomDocument>
 #include <QKeyEvent>
 #include <QFileDialog>
@@ -461,7 +463,7 @@ void MainWindow::createActionsView ()
 
   m_actionViewChecklistGuide = new QAction (tr ("Checklist Guide Toolbar"), this);
   m_actionViewChecklistGuide->setCheckable (true);
-  m_actionViewChecklistGuide->setChecked (true);
+  m_actionViewChecklistGuide->setChecked (false);
   m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide toolbar."));
   m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide ToolBar\n\n"
                                                 "Show or hide the checklist guide toolbar"));
@@ -901,6 +903,11 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
+
+  // Checklist guide
+  m_dockChecklistGuide = new ChecklistGuide;
+  m_dockChecklistGuide->setVisible (false);
+  addDockWidget (Qt::AllDockWidgetAreas, m_dockChecklistGuide);
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -1104,6 +1111,11 @@ void MainWindow::loadImage (const QString &fileName,
     if (wizard->exec() == QDialog::Accepted) {
       QStringList curveNames = wizard->curveNames();
       bool withLines = wizard->withLines ();
+
+      m_dockChecklistGuide->setHtml (curveNames.join (", ") + (withLines ?
+                                                                 " with lines" :
+                                                                 " with points"));
+      m_actionViewChecklistGuide->setChecked (true);
     }
     delete wizard;
   }
@@ -2203,6 +2215,17 @@ void MainWindow::slotViewToolBarBackground ()
   }
 }
 
+void MainWindow::slotViewToolBarChecklistGuide ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarChecklistGuide";
+
+  if (m_actionViewChecklistGuide->isChecked ()) {
+    m_dockChecklistGuide->show();
+  } else {
+    m_dockChecklistGuide->hide();
+  }
+}
+
 void MainWindow::slotViewToolBarDigitize ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarDigitize";
@@ -2223,11 +2246,6 @@ void MainWindow::slotViewToolBarSettingsViews ()
   } else {
     m_toolSettingsViews->hide();
   }
-}
-
-void MainWindow::slotViewToolBarChecklistGuide ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarChecklistGuide";
 }
 
 void MainWindow::slotViewToolTips ()
