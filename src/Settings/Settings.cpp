@@ -9,6 +9,7 @@ const QString SETTINGS_GROUP_ENVIRONMENT ("Environment");
 const QString SETTINGS_CURRENT_DIRECTORY ("currentDirectory");
 
 // MainWindow group
+const QString SETTINGS_CHECKLIST_GUIDE_WIZARD;
 const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow");
 const QString SETTINGS_BACKGROUND_IMAGE ("backgroundImage");
 const QString SETTINGS_POS ("pos");

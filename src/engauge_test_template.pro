@@ -27,8 +27,11 @@ HEADERS  += \
     Callback/CallbackUpdateTransform.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
+    Checklist/ChecklistCurveTable.h \
     Checklist/ChecklistGuide.h \
     Checklist/ChecklistGuidePage.h \
+    Checklist/ChecklistGuidePageConclusion.h \
+    Checklist/ChecklistGuidePageCurves.h \
     Checklist/ChecklistGuideWizard.h \
     Cmd/CmdAbstract.h \
     Cmd/CmdAddPointAxis.h \
@@ -228,8 +231,11 @@ SOURCES += \
     Callback/CallbackUpdateTransform.cpp \
     Checker/Checker.cpp \
     Checker/CheckerMode.cpp \
+    Checklist/ChecklistCurveTable.cpp \
     Checklist/ChecklistGuide.cpp \
     Checklist/ChecklistGuidePage.cpp \
+    Checklist/ChecklistGuidePageConclusion.cpp \
+    Checklist/ChecklistGuidePageCurves.cpp \
     Checklist/ChecklistGuideWizard.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \

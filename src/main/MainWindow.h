@@ -178,7 +178,6 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
-  void slotHelpChecklistGuideWizard();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
   void slotMouseMove (QPointF);

@@ -373,10 +373,10 @@ void MainWindow::createActionsHelp ()
   m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
 
   m_actionChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
-  m_actionChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard to define digitizing steps"));
+  m_actionChecklistGuideWizard->setCheckable (true);
+  m_actionChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
   m_actionChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
-                                                  "Use Checklist Guide Wizard to generate a checklist of steps for the current document"));
-  connect (m_actionChecklistGuideWizard, SIGNAL (triggered ()), this, SLOT (slotHelpChecklistGuideWizard ()));
+                                                  "Use Checklist Guide Wizard during import to generate a checklist of steps for the current document"));
 
   m_actionAbout = new QAction(tr ("About Engauge"), this);
   m_actionAbout->setStatusTip (tr ("About the application."));
@@ -1097,6 +1097,17 @@ void MainWindow::loadImage (const QString &fileName,
   setupAfterLoad(fileName,
                  "File imported");
 
+  if (m_actionChecklistGuideWizard->isChecked ()) {
+
+    // Show wizard
+    ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
+    if (wizard->exec() == QDialog::Accepted) {
+      QStringList curveNames = wizard->curveNames();
+      bool withLines = wizard->withLines ();
+    }
+    delete wizard;
+  }
+
   // Start axis mode
   m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
   slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
@@ -1490,6 +1501,10 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 
+  // Checklist guide wizard
+  m_actionChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
+                                                            true).toBool ());
+
   // Background toolbar visibility
   bool viewBackgroundToolBar = settings.value (SETTINGS_VIEW_BACKGROUND_TOOLBAR,
                                                true).toBool ();
@@ -1540,6 +1555,7 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
+  settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionChecklistGuideWizard->isChecked ());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
@@ -1946,17 +1962,6 @@ void MainWindow::slotHelpAbout()
 
   DlgAbout dlg (*this);
   dlg.exec ();
-}
-
-void MainWindow::slotHelpChecklistGuideWizard ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpChecklistGuideWizard";
-
-  ChecklistGuideWizard *wizard = new ChecklistGuideWizard(*this);
-
-  wizard->exec();
-
-  delete wizard;
 }
 
 void MainWindow::slotKeyPress (Qt::Key key,

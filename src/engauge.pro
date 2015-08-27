@@ -29,6 +29,9 @@ HEADERS  += \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
     Checklist/ChecklistGuidePage.h \
+    Checklist/ChecklistGuidePageConclusion.h \
+    Checklist/ChecklistGuidePageCurves.h \
+    Checklist/ChecklistGuidePageIntro.h \
     Checklist/ChecklistGuideWizard.h \
     Cmd/CmdAbstract.h \
     Cmd/CmdAddPointAxis.h \
@@ -229,6 +232,9 @@ SOURCES += \
     Checker/CheckerMode.cpp \
     Checklist/ChecklistGuide.cpp \
     Checklist/ChecklistGuidePage.cpp \
+    Checklist/ChecklistGuidePageConclusion.cpp \
+    Checklist/ChecklistGuidePageCurves.cpp \
+    Checklist/ChecklistGuidePageIntro.cpp \
     Checklist/ChecklistGuideWizard.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \

@@ -1,10 +1,15 @@
 #include "ChecklistGuidePage.h"
+#include "ChecklistGuidePageConclusion.h"
+#include "ChecklistGuidePageCurves.h"
+#include "ChecklistGuidePageIntro.h"
 #include "ChecklistGuideWizard.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGridLayout>
+#include <QHeaderView>
 #include <QPushButton>
-#include <QTextEdit>
+#include <QRadioButton>
+#include <QTableWidget>
 #include <QVBoxLayout>
 
 ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
@@ -17,53 +22,21 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
   setPixmap (QWizard::WatermarkPixmap, splash); // For ClassicStyle and ModernStyle
   setPixmap (QWizard::BackgroundPixmap, splash); // For MacStyle
 
-  addPage(createPageIntroduction());
-  addPage(createPageStrategy());
-  addPage(createPageCurveNames());
+  m_pageIntro = new ChecklistGuidePageIntro();
+  m_pageCurves = new ChecklistGuidePageCurves();
+  m_pageConclusion = new ChecklistGuidePageConclusion();
+
+  addPage(m_pageIntro);
+  addPage(m_pageCurves);
+  addPage(m_pageConclusion);
 }
 
-QWizardPage *ChecklistGuideWizard::createPageCurveNames() const
+QStringList ChecklistGuideWizard::curveNames () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageCurveNames";
-
-  QWizardPage *page = new ChecklistGuidePage ("Select curve names");
-
-  return page;
+  return m_pageCurves->curveNames();
 }
 
-QWizardPage *ChecklistGuideWizard::createPageIntroduction() const
+bool ChecklistGuideWizard::withLines() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageIntroduction";
-
-  QWizardPage *page = new ChecklistGuidePage ("Introduction");
-
-  return page;
-}
-
-QWizardPage *ChecklistGuideWizard::createPageStrategy() const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::createPageStrategy";
-
-  QWizardPage *page = new ChecklistGuidePage ("Select a strategy");
-
-  return page;
-}
-
-void ChecklistGuideWizard::handleOk()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::handleOk";
-}
-
-void ChecklistGuideWizard::slotCancel()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::slotCancel";
-
-  hide();
-}
-
-void ChecklistGuideWizard::slotOk()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::slotOk";
-
-  handleOk();
+  return m_pageCurves->withLines();
 }

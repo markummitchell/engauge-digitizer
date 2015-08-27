@@ -1,41 +1,40 @@
 #ifndef CHECKLIST_GUIDE_WIZARD_H
 #define CHECKLIST_GUIDE_WIZARD_H
 
+#include <QStringList>
 #include <QWizard>
 
+class ChecklistGuidePageConclusion;
+class ChecklistGuidePageCurves;
+class ChecklistGuidePageIntro;
 class MainWindow;
 class QPushButton;
 
 /// Wizard for setting up the checklist guide
 class ChecklistGuideWizard : public QWizard
 {
-  Q_OBJECT;
-
  public:
   /// Single constructor
   ChecklistGuideWizard(MainWindow &mainWindow);
 
- private slots:
+  /// Wizard selection for curve names
+  QStringList curveNames () const;
 
-  /// Hide dialog
-  void slotCancel();
-
-  /// Save changes entered in dialog
-  void slotOk ();
+  /// Wizard selection of lines versus points
+  bool withLines () const;
 
  private:
   ChecklistGuideWizard();
-
-  QWizardPage *createPageCurveNames() const;
-  QWizardPage *createPageIntroduction() const;
-  QWizardPage *createPageStrategy() const;
-  void handleOk();
 
   MainWindow &m_mainWindow;
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
 
   QString m_dialogName;
+
+  ChecklistGuidePageIntro *m_pageIntro;
+  ChecklistGuidePageCurves *m_pageCurves;
+  ChecklistGuidePageConclusion *m_pageConclusion;
 };
 
 #endif // CHECKLIST_GUIDE_WIZARD_H
