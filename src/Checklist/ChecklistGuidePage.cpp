@@ -1,14 +1,12 @@
 #include "ChecklistGuidePage.h"
+#include "ChecklistLineEdit.h"
 #include "Logger.h"
 #include <QGridLayout>
 #include <QLabel>
 #include <QPalette>
 #include <QRadioButton>
-#include <QTableWidget>
-#include <QVariant>
 
 const int MAX_LAYOUT_WIDTH = 300;
-const int TRANSPARENT_ALPHA = 0;
 
 ChecklistGuidePage::ChecklistGuidePage(const QString &title) :
   m_row (0)
@@ -47,9 +45,9 @@ QRadioButton *ChecklistGuidePage::addLabelAndRadioButton (const QString &label)
   return button;
 }
 
-void ChecklistGuidePage::addTable (QTableWidget *table)
+void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addTable";
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addLineEdit";
 
-  m_layout->addWidget (table, m_row++, 0, 1, 2, Qt::AlignTop);
+  m_layout->addWidget (edit, m_row++, 0, 1, 2, Qt::AlignTop);
 }

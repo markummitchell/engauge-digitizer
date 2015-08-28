@@ -31,12 +31,15 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
   addPage(m_pageConclusion);
 }
 
-QStringList ChecklistGuideWizard::curveNames () const
+QStringList ChecklistGuideWizard::curveNames() const
 {
   return m_pageCurves->curveNames();
 }
 
-bool ChecklistGuideWizard::withLines() const
+QString ChecklistGuideWizard::html () const
 {
-  return m_pageCurves->withLines();
+  QStringList curveNames = m_pageCurves->curveNames();
+  bool withLines = m_pageCurves->withLines();
+
+  return "hello";
 }

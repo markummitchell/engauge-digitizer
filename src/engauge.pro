@@ -33,6 +33,7 @@ HEADERS  += \
     Checklist/ChecklistGuidePageCurves.h \
     Checklist/ChecklistGuidePageIntro.h \
     Checklist/ChecklistGuideWizard.h \
+    Checklist/ChecklistLineEdit.h \
     Cmd/CmdAbstract.h \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
@@ -236,6 +237,7 @@ SOURCES += \
     Checklist/ChecklistGuidePageCurves.cpp \
     Checklist/ChecklistGuidePageIntro.cpp \
     Checklist/ChecklistGuideWizard.cpp \
+    Checklist/ChecklistLineEdit.cpp \
     Cmd/CmdAbstract.cpp \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \

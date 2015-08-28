@@ -7,12 +7,21 @@
 /// Dockable text window containing checklist guide
 class ChecklistGuide : public QDockWidget
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   ChecklistGuide ();
 
+  /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
+  virtual void closeEvent(QCloseEvent *event);
+
   /// Populate the browser with html
   void setHtml (const QString &html);
+
+ signals:
+  /// Signal that this QDockWidget was just closed
+  void signalChecklistClosed();
 
  private:
 

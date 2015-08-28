@@ -1,4 +1,5 @@
 #include "ChecklistGuidePageCurves.h"
+#include "ChecklistLineEdit.h"
 #include "Logger.h"
 #include <QHeaderView>
 #include <QRadioButton>
@@ -13,21 +14,15 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves() :
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::ChecklistGuidePageCurves";
 
-  addHtml ("<p>What are the names of the curves that are to be digitized?</p>");
+  addHtml ("<p>What are the names of the curves that are to be digitized? At least one entry is required.</p>");
 
-  m_tableCurves = new QTableWidget (NUM_ROW,
-                                    NUM_COL,
-                                    this);
-  for (int i = 0; i < m_tableCurves->rowCount(); i++) {
-    m_tableCurves->setItem (i, FIRST_COL, new QTableWidgetItem (""));
+  m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
+
+  for (int i = 0; i < NUM_CURVE_NAMES(); i++) {
+    m_edit [i] = new ChecklistLineEdit;
+    connect (m_edit [i], SIGNAL (signalKeyRelease()), this, SLOT (slotTableChanged()));
+    addLineEdit (m_edit [i]);
   }
-  m_tableCurves->horizontalHeader()->hide();
-  m_tableCurves->verticalHeader()->hide();
-  m_tableCurves->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-  m_tableCurves->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-  connect (m_tableCurves, SIGNAL (itemChanged (QTableWidgetItem*)), this, SLOT (slotTableChanged (QTableWidgetItem*)));
-
-  addTable (m_tableCurves);
 
   addHtml ("<p>&nbsp;</p>");
 
@@ -43,11 +38,11 @@ QStringList ChecklistGuidePageCurves::curveNames () const
 {
   QStringList curveNames;
 
-  for (int i = 0; i < m_tableCurves->rowCount(); i++) {
-
-    if (!m_tableCurves->item (i, FIRST_COL)->text().isEmpty ()) {
-
-      curveNames << m_tableCurves->item (i, FIRST_COL)->text();
+  for (int i = 0; i < NUM_CURVE_NAMES(); i++) {
+    const QLineEdit *edit = m_edit [i];
+    QString text = edit->text();
+    if (!text.isEmpty()) {
+      curveNames << text;
     }
   }
 
@@ -58,26 +53,14 @@ bool ChecklistGuidePageCurves::isComplete () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::isComplete";
 
-  bool hasCurveData = false;
-
-  // Updated cell does not have text. See if other cells have text
-  for (int i = 0; i < m_tableCurves->rowCount(); i++) {
-    
-    if (!m_tableCurves->item (i, FIRST_COL)->text().isEmpty ()) {
-        
-      hasCurveData = true;
-      break;
-    }
-  }
-
-  return hasCurveData;
+  return !curveNames().isEmpty ();
 }
 
-void ChecklistGuidePageCurves::slotTableChanged (QTableWidgetItem * /* item */)
+void ChecklistGuidePageCurves::slotTableChanged ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::slotTableChanged";
 
-  emit completeChanged ();
+  emit completeChanged();
 }
 
 bool ChecklistGuidePageCurves::withLines() const

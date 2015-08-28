@@ -9,6 +9,13 @@ ChecklistGuide::ChecklistGuide () :
   setWidget (m_browser);
 }
 
+void ChecklistGuide::closeEvent(QCloseEvent * /* event */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::closeEvent";
+
+  emit signalChecklistClosed();
+}
+
 void ChecklistGuide::setHtml(const QString &html)
 {
   m_browser->setText (html);

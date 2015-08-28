@@ -3,10 +3,10 @@
 
 #include <QWizardPage>
 
+class ChecklistLineEdit;
 class QGridLayout;
 class QRadioButton;
 class QString;
-class QTableWidget;
 
 /// This class customizes QWizardPage for ChecklistGuideWizard
 class ChecklistGuidePage : public QWizardPage
@@ -21,8 +21,8 @@ class ChecklistGuidePage : public QWizardPage
   /// Insert radio button and corresponding label
   QRadioButton *addLabelAndRadioButton (const QString &label);
 
-  /// Insert table
-  void addTable (QTableWidget *table);
+  /// Insert line edit
+  void addLineEdit (ChecklistLineEdit *edit);
 
  private:
   ChecklistGuidePage();

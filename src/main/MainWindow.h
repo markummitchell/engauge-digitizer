@@ -155,6 +155,7 @@ public:
 private slots:
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
+  void slotChecklistClosed ();
   void slotCleanChanged (bool);
   void slotCmbBackground(int);
   void slotCmbCurve(int);  

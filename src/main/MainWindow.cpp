@@ -467,7 +467,7 @@ void MainWindow::createActionsView ()
   m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide toolbar."));
   m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide ToolBar\n\n"
                                                 "Show or hide the checklist guide toolbar"));
-  connect (m_actionViewChecklistGuide, SIGNAL (triggered ()), this, SLOT (slotViewToolBarChecklistGuide()));
+  connect (m_actionViewChecklistGuide, SIGNAL (changed ()), this, SLOT (slotViewToolBarChecklistGuide()));
 
   m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
@@ -904,10 +904,11 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
 
-  // Checklist guide
+  // Checklist guide starts out hidden
   m_dockChecklistGuide = new ChecklistGuide;
   m_dockChecklistGuide->setVisible (false);
-  addDockWidget (Qt::AllDockWidgetAreas, m_dockChecklistGuide);
+  connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
+  addDockWidget (Qt::RightDockWidgetArea, m_dockChecklistGuide);
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -1109,12 +1110,8 @@ void MainWindow::loadImage (const QString &fileName,
     // Show wizard
     ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
     if (wizard->exec() == QDialog::Accepted) {
-      QStringList curveNames = wizard->curveNames();
-      bool withLines = wizard->withLines ();
 
-      m_dockChecklistGuide->setHtml (curveNames.join (", ") + (withLines ?
-                                                                 " with lines" :
-                                                                 " with points"));
+      m_dockChecklistGuide->setHtml (wizard->html());
       m_actionViewChecklistGuide->setChecked (true);
     }
     delete wizard;
@@ -1631,6 +1628,13 @@ void MainWindow::slotCanUndoChanged (bool canUndo)
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotCanUndoChanged";
 
   m_actionEditUndo->setEnabled (canUndo);
+}
+
+void MainWindow::slotChecklistClosed()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotChecklistClosed";
+
+  m_actionViewChecklistGuide->setChecked (false);
 }
 
 void MainWindow::slotCleanChanged(bool clean)

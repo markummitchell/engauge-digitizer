@@ -17,11 +17,11 @@ class ChecklistGuideWizard : public QWizard
   /// Single constructor
   ChecklistGuideWizard(MainWindow &mainWindow);
 
-  /// Wizard selection for curve names
-  QStringList curveNames () const;
+  /// Curve names to be placed into Document
+  QStringList curveNames() const;
 
-  /// Wizard selection of lines versus points
-  bool withLines () const;
+  /// Html comprising the checklist for display
+  QString html () const;
 
  private:
   ChecklistGuideWizard();
