@@ -3,6 +3,10 @@
 
 ChecklistLineEdit::ChecklistLineEdit()
 {
+  // Fine tuning of the border which is designed to look good when QLineEdit is all by itself. In our case,
+  // the QLineEdits are stacked tightly, so we want the borders between adjacent QLineEdits to look more like
+  // spreadsheet cells
+  setStyleSheet ("QLineEdit { border-type: solid; border-color: black; border-width: 1px 1px 1px 0;}");
 }
 
 void ChecklistLineEdit::keyReleaseEvent (QKeyEvent * /* event */)
