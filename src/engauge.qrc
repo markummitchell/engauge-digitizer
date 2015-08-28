@@ -12,5 +12,7 @@
         <file>img/cursor_eyedropper.xpm</file>
         <file>img/cursor_eyedropper_mask.xpm</file>
         <file>img/SpreadsheetsForDoc.png</file>
+        <file>img/12-Button-Green.png</file>
+        <file>img/12-Button-Red.png</file>
     </qresource>
 </RCC>

@@ -906,7 +906,6 @@ void MainWindow::createToolBars ()
 
   // Checklist guide starts out hidden
   m_dockChecklistGuide = new ChecklistGuide;
-  m_dockChecklistGuide->setVisible (false);
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
   addDockWidget (Qt::RightDockWidgetArea, m_dockChecklistGuide);
 }

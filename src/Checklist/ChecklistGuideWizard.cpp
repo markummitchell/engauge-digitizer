@@ -9,7 +9,7 @@
 #include <QHeaderView>
 #include <QPushButton>
 #include <QRadioButton>
-#include <QTableWidget>
+#include <QTextStream>
 #include <QVBoxLayout>
 
 ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
@@ -41,5 +41,17 @@ QString ChecklistGuideWizard::html () const
   QStringList curveNames = m_pageCurves->curveNames();
   bool withLines = m_pageCurves->withLines();
 
-  return "hello";
+  QString html;
+  QTextStream str (&html);
+
+  str << "<p><img src="":/engauge/img/12-Button-Red.png"">Add three axis points to define the coordinate system.</p>";
+
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
+
+    QString curveName = *itr;
+    str << "<p><img src="":/engauge/img/12-Button-Red.png"">Add points for curve '" << curveName << "'</p>\n";
+  }
+
+  return html;
 }
