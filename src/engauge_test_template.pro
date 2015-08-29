@@ -28,6 +28,7 @@ HEADERS  += \
     Checker/Checker.h \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
+    Checklist/ChecklistGuideBrowser.h \
     Checklist/ChecklistGuidePage.h \
     Checklist/ChecklistGuidePageConclusion.h \
     Checklist/ChecklistGuidePageCurves.h \
@@ -232,6 +233,7 @@ SOURCES += \
     Checker/Checker.cpp \
     Checker/CheckerMode.cpp \
     Checklist/ChecklistGuide.cpp \
+    Checklist/ChecklistGuideBrowser.cpp \
     Checklist/ChecklistGuidePage.cpp \
     Checklist/ChecklistGuidePageConclusion.cpp \
     Checklist/ChecklistGuidePageCurves.cpp \

@@ -2,7 +2,8 @@
 #define CHECKLIST_GUIDE_H
 
 #include <QDockWidget>
-#include <QTextBrowser>
+
+class ChecklistGuideBrowser;
 
 /// Dockable text window containing checklist guide
 class ChecklistGuide : public QDockWidget
@@ -28,7 +29,7 @@ class ChecklistGuide : public QDockWidget
   // Display information using html, which is possible with QTextBrowser, so images can be embedded. Although the
   // format is structured as a tree, a tree widget is not used since tree widgets are not compatible with embedded images
   // (other than optional tree item icons on the left)
-  QTextBrowser *m_browser;
+  ChecklistGuideBrowser *m_browser;
 };
 
 #endif // CHECKLIST_GUIDE_H

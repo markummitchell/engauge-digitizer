@@ -1,4 +1,5 @@
 #include "ChecklistGuide.h"
+#include "ChecklistGuideBrowser.h"
 #include "Logger.h"
 #include <QTextBrowser>
 
@@ -13,7 +14,7 @@ ChecklistGuide::ChecklistGuide () :
                     "To run the Checklist Guide Wizard when an image file is imported, select the "
                     "Help / Checklist Wizard menu option."));
 
-  m_browser = new QTextBrowser;
+  m_browser = new ChecklistGuideBrowser;
   setWidget (m_browser);
 }
 
