@@ -79,19 +79,45 @@ QString ChecklistGuideWizard::html () const
     str << "<p>" << TAG_START << curveName << TAG_END << "&nbsp;Add points for curve '" << curveName << "'</p>\n";
     str << "<ul>\n";
     str << "<li>Select " << curveName << " in the drop-down list</li>\n";
-    str << "<li>Click on <img src="":/engauge/img/12-DigitSegment""> for Segment Fill mode</li>\n";
-    str << "<li>Move the cursor over the curve. If a line does not appear adjust the Color Filter settings for this curve:\n";
-    str << "  <ul>";
-    str << "  <li>Select menu option Settings / Color Filter<li>\n";
-    str << "  <li>Select the method for filtering. Hue is best if the curves if the curves have different colors</li>\n";
-    str << "  <li>Slide the green buttons back and forth until the curve is easily visible in the preview window</li>\n";
-    str << "  <li>Click on Ok</li>\n";
-    str << "  </ul></li>\n";
-    str << "<li>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</li>\n";
-    str << "</ul>\n";
+
+    if (withLines) {
+
+      str << "<li>Click on <img src="":/engauge/img/12-DigitSegment""> for Segment Fill mode</li>\n";
+      str << "<li>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve:\n";
+      str << htmlToAdjustColorFilterSettings () << "</li>\n";
+      str << "<li>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</li>\n";
+      str << "</ul>\n";
+
+    } else {
+
+      str << "<li>Click on <img src="":/engauge/img/12-DigitPointMatch""> for Point Match mode</li>\n";
+      str << "<li>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust";
+      str << "    the Color Filter settings for this curve:\n";
+      str << htmlToAdjustColorFilterSettings () << "</li>\n";
+      str << "<li>Move the cursor over a typical point in the curve again. Click on the point to start Point Matching</li>\n";
+      str << "<li>Engauge will display a candidate point. To accept that candidate point, press the Right Arrow key</li>\n";
+      str << "<li>The previous step repeats until you select a different mode</li>\n";
+      str << "</ul>\n";
+    }
   }
 
   str << "<p>" << TAG_EXPORT << "&nbsp;Export the points to a file using menu option File / Export. Congratulations!</p>\n";
+
+  return html;
+}
+
+QString ChecklistGuideWizard::htmlToAdjustColorFilterSettings () const
+{
+  QString html;
+  QTextStream str (&html);
+
+  str << "  <ul>\n";
+  str << "  <li>Select menu option Settings / Color Filter<li>\n";
+  str << "  <li>Select the method for filtering. Hue is best if the curves have different colors</li>\n";
+  str << "  <li>Slide the green buttons back and forth until the curve is easily visible in the preview window</li>\n";
+  str << "  <li>Click on Ok</li>\n";
+  str << "  <li>Return to Segment Fill mode by clicking on <img src="":/engauge/img/12-DigitSegment""></li>\n";
+  str << "  </ul>\n";
 
   return html;
 }

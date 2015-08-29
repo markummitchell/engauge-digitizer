@@ -26,6 +26,8 @@ class ChecklistGuideWizard : public QWizard
  private:
   ChecklistGuideWizard();
 
+  QString htmlToAdjustColorFilterSettings () const;
+
   MainWindow &m_mainWindow;
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
