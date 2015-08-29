@@ -12,7 +12,13 @@
         <file>img/cursor_eyedropper.xpm</file>
         <file>img/cursor_eyedropper_mask.xpm</file>
         <file>img/SpreadsheetsForDoc.png</file>
-        <file>img/12-Button-Green.png</file>
-        <file>img/12-Button-Red.png</file>
+        <file>img/16-checked.png</file>
+        <file>img/16-unchecked.png</file>
+        <file>img/12-DigitAxis.png</file>
+        <file>img/12-DigitColorPicker.png</file>
+        <file>img/12-DigitCurve.png</file>
+        <file>img/12-DigitPointMatch.png</file>
+        <file>img/12-DigitSelect.png</file>
+        <file>img/12-DigitSegment.png</file>
     </qresource>
 </RCC>
