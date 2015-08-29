@@ -49,11 +49,23 @@ QStringList ChecklistGuidePageCurves::curveNames () const
   return curveNames;
 }
 
+bool ChecklistGuidePageCurves::curveNamesAreAllUnique() const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::curveNamesAreAllUnique";
+
+  QStringList names = curveNames();
+
+  int numberDuplicatesRemoved = names.removeDuplicates();
+
+  return (numberDuplicatesRemoved == 0);
+}
+
 bool ChecklistGuidePageCurves::isComplete () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::isComplete";
 
-  return !curveNames().isEmpty ();
+  return !curveNames().isEmpty () &&
+      curveNamesAreAllUnique ();
 }
 
 void ChecklistGuidePageCurves::slotTableChanged ()

@@ -31,6 +31,7 @@ class ChecklistGuidePageCurves : public ChecklistGuidePage
 
  private:
 
+  bool curveNamesAreAllUnique() const;
   int NUM_CURVE_NAMES () const { return 6; }
 
   ChecklistLineEdit **m_edit; // Vector array of editors
