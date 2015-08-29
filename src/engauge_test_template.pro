@@ -32,6 +32,7 @@ HEADERS  += \
     Checklist/ChecklistGuidePage.h \
     Checklist/ChecklistGuidePageConclusion.h \
     Checklist/ChecklistGuidePageCurves.h \
+    Checklist/ChecklistGuidePageIntro.h \
     Checklist/ChecklistGuideWizard.h \
     Checklist/ChecklistLineEdit.h \
     Cmd/CmdAbstract.h \
@@ -237,6 +238,7 @@ SOURCES += \
     Checklist/ChecklistGuidePage.cpp \
     Checklist/ChecklistGuidePageConclusion.cpp \
     Checklist/ChecklistGuidePageCurves.cpp \
+    Checklist/ChecklistGuidePageIntro.cpp \
     Checklist/ChecklistGuideWizard.cpp \
     Checklist/ChecklistLineEdit.cpp \
     Cmd/CmdAbstract.cpp \
