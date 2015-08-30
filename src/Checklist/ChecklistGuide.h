@@ -12,8 +12,8 @@ class ChecklistGuide : public QDockWidget
   Q_OBJECT;
 
  public:
-  /// Single constructor
-  ChecklistGuide ();
+  /// Single constructor. Parent is needed or else this widget cannot be redocked after being undocked
+  ChecklistGuide (QWidget *parent);
 
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
@@ -31,6 +31,7 @@ class ChecklistGuide : public QDockWidget
   void signalChecklistClosed();
 
  private:
+  ChecklistGuide ();
 
   // Display information using html, which is possible with QTextBrowser, so images can be embedded. Although the
   // format is structured as a tree, a tree widget is not used since tree widgets are not compatible with embedded images

@@ -111,6 +111,9 @@ QString ChecklistGuideBrowser::processAhrefs (const QString &htmlBefore)
 
   QString html = htmlBefore;
 
+  // Background
+  ahref (html, NAME_BACKGROUND);
+
   // Fixed axis point hrefs
   ahref (html, NAME_AXIS1);
   ahref (html, NAME_AXIS2);
@@ -135,6 +138,8 @@ QString ChecklistGuideBrowser::processCheckboxes (const QString &htmlBefore)
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::processCheckboxes";
 
   QString html = htmlBefore;
+
+  check (html, NAME_BACKGROUND, m_checkedTags.contains (NAME_BACKGROUND));
 
   check (html, NAME_AXIS1, m_checkedTags.contains (NAME_AXIS1));
   check (html, NAME_AXIS2, m_checkedTags.contains (NAME_AXIS2));
@@ -162,6 +167,9 @@ QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore)
   // Show div associated with anchor. Since this removes the tags, applying divHide below
   // will have no effect, so we apply divHide to everything
   divShow (html, m_anchor);
+
+  // Background
+  divHide (html, NAME_BACKGROUND);
 
   // Fixed axis point tags
   divHide (html, NAME_AXIS1);
@@ -251,14 +259,6 @@ void ChecklistGuideBrowser::slotAnchorClicked (const QUrl &url)
   }
 
   refresh();
-}
-
-void ChecklistGuideBrowser::slotCleanChanged(bool clean)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::slotCleanChanged"
-                              << " clean=" << (clean ? "true" : "false");
-
-
 }
 
 void ChecklistGuideBrowser::update (const CmdMediator &cmdMediator,

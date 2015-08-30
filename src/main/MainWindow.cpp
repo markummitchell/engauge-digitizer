@@ -905,10 +905,9 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
 
-  // Checklist guide starts out hidden
-  m_dockChecklistGuide = new ChecklistGuide;
+  // Checklist guide starts out hidden. It will be positioned in settingsRead
+  m_dockChecklistGuide = new ChecklistGuide (this);
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
-  addDockWidget (Qt::RightDockWidgetArea, m_dockChecklistGuide);
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -1562,6 +1561,18 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionStatusTemporary->setChecked (statusBarMode == STATUS_BAR_MODE_TEMPORARY);
   m_actionStatusAlways->setChecked (statusBarMode == STATUS_BAR_MODE_ALWAYS);
 
+  // Checklist guide is docked or undocked. Default is undocked so  user knows it can be undocked
+  Qt::DockWidgetArea area = (Qt::DockWidgetArea) settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
+                                                                 Qt::NoDockWidgetArea).toInt();
+  addDockWidget (area,
+                 m_dockChecklistGuide);
+  if (area == Qt::NoDockWidgetArea) {
+    m_dockChecklistGuide->setFloating(true);
+    if (settings.contains (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY)) {
+      m_dockChecklistGuide->restoreGeometry (settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY).toByteArray());
+    }
+  }
+
   settings.endGroup();
 }
 
@@ -1576,6 +1587,16 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
+  if (m_dockChecklistGuide->isFloating()) {
+
+    settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, Qt::NoDockWidgetArea);
+    settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY, m_dockChecklistGuide->saveGeometry ());
+
+  } else {
+
+    settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, dockWidgetArea (m_dockChecklistGuide));
+
+  }
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionChecklistGuideWizard->isChecked ());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());

@@ -65,6 +65,9 @@ QString ChecklistGuideWizard::templateHtml () const
   QString html;
   QTextStream str (&html);
 
+  // Insert additional space between successive list items, using stylesheet
+  str << "<style type='text/css'>li { margin-top: 10px 0; }</style>";
+
   str << "<p>The coordinates are defined by creating axis points:</p>\n";
   str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;Add first of three axis points. " << TAG_AHREF_AXIS_1 << "</p>\n";
   str << TAG_DIV_AXIS_START_1;
@@ -147,6 +150,15 @@ QString ChecklistGuideWizard::templateHtml () const
   str << "<li>Congratulations!</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_EXPORT_END;
+
+  str << "<p>&nbsp;</p>\n";
+  str << "<p>Hint - The background image can be switched between the original image and filtered image. " << TAG_AHREF_BACKGROUND << "</p>\n";
+  str << TAG_DIV_BACKGROUND_START;
+  str << "<ul>\n";
+  str << "<li>Select menu option <b>View / Background / Show Original Image</b> to see the original image</li>\n";
+  str << "<li>Select menu option <b>View / Background / Show Filtered Image</b> to see the image from <b>Color Filter</b></li>\n";
+  str << "</ul>\n";
+  str << TAG_DIV_BACKGROUND_END;
 
   return html;
 }

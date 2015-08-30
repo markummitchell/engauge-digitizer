@@ -5,10 +5,13 @@
 #include "Logger.h"
 #include <QTextBrowser>
 
-ChecklistGuide::ChecklistGuide () :
+ChecklistGuide::ChecklistGuide (QWidget *parent) :
+  QDockWidget (parent),
   m_browser (0)
 {
   setVisible (false);
+  setAllowedAreas (Qt::AllDockWidgetAreas);
+  setWindowTitle ("Checklist Guide"); // Appears in title bar when undocked
   setStatusTip (tr ("Checklist Guide"));
   setWhatsThis (tr ("Checklist Guide\n\n"
                     "This box contains a checklist of step suggested by the Checklist Guide Wizard. Following "

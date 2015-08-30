@@ -5,12 +5,14 @@ const QString SETTINGS_ENGAUGE ("Engauge");
 const QString SETTINGS_DIGITIZER ("Digitizer");
 
 // Environment group
-const QString SETTINGS_GROUP_ENVIRONMENT ("Environment");
+const QString SETTINGS_GROUP_ENVIRONMENT ("Environment"); // capitalize E since this is a group string
 const QString SETTINGS_CURRENT_DIRECTORY ("currentDirectory");
 
 // MainWindow group
-const QString SETTINGS_CHECKLIST_GUIDE_WIZARD;
-const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow");
+const QString SETTINGS_CHECKLIST_GUIDE_DOCK_AREA ("checklistGuideDockArea");
+const QString SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY ("checklistGuideDockGeometry");
+const QString SETTINGS_CHECKLIST_GUIDE_WIZARD ("checklistGuideWizard");
+const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow"); // Capitalize both M and W since this is a group string
 const QString SETTINGS_BACKGROUND_IMAGE ("backgroundImage");
 const QString SETTINGS_POS ("pos");
 const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");

@@ -5,6 +5,8 @@
 
 // Settings tags for QSettings
 extern const QString SETTINGS_BACKGROUND_IMAGE;
+extern const QString SETTINGS_CHECKLIST_GUIDE_DOCK_AREA;
+extern const QString SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY;
 extern const QString SETTINGS_CHECKLIST_GUIDE_WIZARD;
 extern const QString SETTINGS_CURRENT_DIRECTORY;
 extern const QString SETTINGS_DIGITIZER;

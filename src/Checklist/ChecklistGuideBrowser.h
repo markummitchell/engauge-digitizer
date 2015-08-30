@@ -22,10 +22,6 @@ class ChecklistGuideBrowser : public QTextBrowser
   void update (const CmdMediator &cmdMediator,
                bool documentIsExported);
 
- public slots:
-  /// Receive QUndoStack::cleanChanged signal
-  void slotCleanChanged(bool);
-
  private slots:
   void slotAnchorClicked (const QUrl &url);
 
