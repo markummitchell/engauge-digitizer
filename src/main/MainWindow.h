@@ -180,6 +180,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
+  void slotHelpTutorialVideo();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
   void slotMouseMove (QPointF);
@@ -365,9 +366,10 @@ private:
   QAction *m_actionSettingsSegments;
 
   QMenu *m_menuHelp;
-  QAction *m_actionAbout;
-  QAction *m_actionChecklistGuideWizard;
-  QAction *m_actionWhatsThis;
+  QAction *m_actionHelpAbout;
+  QAction *m_actionHelpChecklistGuideWizard;
+  QAction *m_actionHelpTutorialVideo;
+  QAction *m_actionHelpWhatsThis;
 
   QVBoxLayout *m_layout;
   GraphicsScene *m_scene;

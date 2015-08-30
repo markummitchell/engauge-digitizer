@@ -49,6 +49,7 @@
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QDockWidget>
 #include <QDomDocument>
 #include <QKeyEvent>
@@ -372,19 +373,26 @@ void MainWindow::createActionsFile ()
 
 void MainWindow::createActionsHelp ()
 {
-  m_actionWhatsThis = QWhatsThis::createAction(this);
-  m_actionWhatsThis->setShortcut (QKeySequence::WhatsThis);
+  m_actionHelpWhatsThis = QWhatsThis::createAction(this);
+  m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
 
-  m_actionChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
-  m_actionChecklistGuideWizard->setCheckable (true);
-  m_actionChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
-  m_actionChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
-                                                  "Use Checklist Guide Wizard during import to generate a checklist of steps for the current document"));
+  m_actionHelpChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
+  m_actionHelpChecklistGuideWizard->setCheckable (true);
+  m_actionHelpChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
+  m_actionHelpChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
+                                                      "Use Checklist Guide Wizard during import to generate a checklist of steps "
+                                                      "for the current document"));
 
-  m_actionAbout = new QAction(tr ("About Engauge"), this);
-  m_actionAbout->setStatusTip (tr ("About the application."));
-  m_actionAbout->setWhatsThis (tr ("About Engauge\n\nAbout the application."));
-  connect (m_actionAbout, SIGNAL (triggered ()), this, SLOT (slotHelpAbout ()));
+  m_actionHelpTutorialVideo = new QAction (tr ("Tutorial Video"), this);
+  m_actionHelpTutorialVideo->setStatusTip (tr ("Play a tutorial video"));
+  m_actionHelpTutorialVideo->setWhatsThis (tr ("Tutorial Video\n\n"
+                                               "Play a tutorial video that shows the various methods of using Engauge to digitize data"));
+  connect (m_actionHelpTutorialVideo, SIGNAL (triggered ()), this, SLOT (slotHelpTutorialVideo()));
+
+  m_actionHelpAbout = new QAction(tr ("About Engauge"), this);
+  m_actionHelpAbout->setStatusTip (tr ("About the application."));
+  m_actionHelpAbout->setWhatsThis (tr ("About Engauge\n\nAbout the application."));
+  connect (m_actionHelpAbout, SIGNAL (triggered ()), this, SLOT (slotHelpAbout ()));
 }
 
 void MainWindow::createActionsSettings ()
@@ -768,9 +776,10 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCommon);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
-  m_menuHelp->addAction (m_actionWhatsThis);
-  m_menuHelp->addAction (m_actionChecklistGuideWizard);
-  m_menuHelp->addAction (m_actionAbout);
+  m_menuHelp->addAction (m_actionHelpWhatsThis);
+  m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
+  m_menuHelp->addAction (m_actionHelpTutorialVideo);
+  m_menuHelp->addAction (m_actionHelpAbout);
 
   updateRecentFileList();
 }
@@ -1104,7 +1113,7 @@ void MainWindow::loadImage (const QString &fileName,
   setupAfterLoad(fileName,
                  "File imported");
 
-  if (m_actionChecklistGuideWizard->isChecked ()) {
+  if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
     // Show wizard
     ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
@@ -1522,7 +1531,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                         QPoint (200, 200)).toPoint ());
 
   // Checklist guide wizard
-  m_actionChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
+  m_actionHelpChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
                                                             true).toBool ());
 
   // Background toolbar visibility
@@ -1605,7 +1614,7 @@ void MainWindow::settingsWrite ()
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, dockWidgetArea (m_dockChecklistGuide));
 
   }
-  settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
@@ -2026,6 +2035,14 @@ void MainWindow::slotHelpAbout()
 
   DlgAbout dlg (*this);
   dlg.exec ();
+}
+
+void MainWindow::slotHelpTutorialVideo()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpTutorialVideo";
+
+  QString url = "http://mitchellscience.net/Videos/venturi/cont_172_17_275_104.mpg";
+  QDesktopServices::openUrl (QUrl (url));
 }
 
 void MainWindow::slotKeyPress (Qt::Key key,
