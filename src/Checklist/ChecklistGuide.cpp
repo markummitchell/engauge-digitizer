@@ -1,5 +1,6 @@
 #include "ChecklistGuide.h"
 #include "ChecklistGuideBrowser.h"
+#include "CmdMediator.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QTextBrowser>
@@ -19,13 +20,13 @@ ChecklistGuide::ChecklistGuide () :
   setWidget (m_browser);
 }
 
-void ChecklistGuide::bindToDocument(Document &document)
+void ChecklistGuide::bindToCmdMediator (const CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::bindToDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::bindToCmdMediator";
 
   ENGAUGE_CHECK_PTR (m_browser);
 
-  m_browser->bindToDocument(document);
+  m_browser->bindToCmdMediator (cmdMediator);
 }
 
 void ChecklistGuide::closeEvent(QCloseEvent * /* event */)
@@ -42,9 +43,10 @@ void ChecklistGuide::setTemplateHtml (const QString &html)
   m_browser->setTemplateHtml (html);
 }
 
-void ChecklistGuide::unbindFromDocument()
+void ChecklistGuide::unbindFromCmdMediator ()
 {
   if (m_browser != 0) {
-    m_browser->unbindFromDocument();
+    m_browser->unbindFromCmdMediator ();
   }
 }
+

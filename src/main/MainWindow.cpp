@@ -1017,7 +1017,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
 
-    m_dockChecklistGuide->unbindFromDocument(); // Only applies to imports
+    m_dockChecklistGuide->unbindFromCmdMediator (); // Binding between checklist guide and CmdMediator only applies to imports
 
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
@@ -1080,7 +1080,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
   slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
-  m_dockChecklistGuide->unbindFromDocument(); // Only applies to imports
+  m_dockChecklistGuide->unbindFromCmdMediator (); // Binding between checklist guide and CmdMediator only applies to imports
 
   updateAfterCommand ();
 }
@@ -1108,7 +1108,7 @@ void MainWindow::loadImage (const QString &fileName,
   setupAfterLoad(fileName,
                  "File imported");
 
-  m_dockChecklistGuide->unbindFromDocument(); // Unbind in case bindToDocument is not called below
+  m_dockChecklistGuide->unbindFromCmdMediator (); // Unbind in case bindToCmdMediator is not called below
 
   if (m_actionChecklistGuideWizard->isChecked ()) {
 
@@ -1116,7 +1116,7 @@ void MainWindow::loadImage (const QString &fileName,
     ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
     if (wizard->exec() == QDialog::Accepted) {
 
-      m_dockChecklistGuide->bindToDocument (m_cmdMediator->document());
+      m_dockChecklistGuide->bindToCmdMediator (*m_cmdMediator);
       m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml());
       m_actionViewChecklistGuide->setChecked (true);
     }

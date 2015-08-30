@@ -4,7 +4,7 @@
 #include <QDockWidget>
 
 class ChecklistGuideBrowser;
-class Document;
+class CmdMediator;
 
 /// Dockable text window containing checklist guide
 class ChecklistGuide : public QDockWidget
@@ -15,8 +15,8 @@ class ChecklistGuide : public QDockWidget
   /// Single constructor
   ChecklistGuide ();
 
-  /// Bind to document so curve names are accessible. See also unbindFromDocument
-  void bindToDocument (Document &document);
+  /// Bind to CmdMediator so curve names are accessible from its Document. See also unbindFromCmdMediator
+  void bindToCmdMediator (const CmdMediator &cmdMediator);
 
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
@@ -24,8 +24,8 @@ class ChecklistGuide : public QDockWidget
   /// Populate the browser with template html
   void setTemplateHtml (const QString &html);
 
-  /// Prevent connection to stale Document
-  void unbindFromDocument();
+  /// Prevent connection to stale CmdMediator
+  void unbindFromCmdMediator ();
 
  signals:
   /// Signal that this QDockWidget was just closed

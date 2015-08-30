@@ -1,7 +1,7 @@
 #ifndef CHECKLIST_GUIDE_BROWSER_H
 #define CHECKLIST_GUIDE_BROWSER_H
 
-#include "Document.h"
+#include "CmdMediator.h"
 #include <QTextBrowser>
 
 /// Class that adds rudimentary tree collapse/expand functionality to QTextBrowser
@@ -13,14 +13,14 @@ class ChecklistGuideBrowser : public QTextBrowser
   /// Single constructor
   ChecklistGuideBrowser();
 
-  /// Bind to the current Document
-  void bindToDocument (Document &document);
+  /// Bind to the CmdMediator
+  void bindToCmdMediator (const CmdMediator &cmdMediator);
 
   /// Populate the browser with template html. The template html will be converted to real html
   virtual void setTemplateHtml (const QString &html);
 
-  /// Unbind to prevent connection to stale Document
-  void unbindFromDocument();
+  /// Unbind to prevent connection to stale CmdMediator
+  void unbindFromCmdMediator ();
 
  private slots:
   void slotAnchorClicked (const QUrl &url);
@@ -54,7 +54,7 @@ class ChecklistGuideBrowser : public QTextBrowser
                 const QString &anchor) const;
 
   QString m_templateHtml;
-  Document const *m_document;
+  CmdMediator const *m_cmdMediator;
 };
 
 #endif // CHECKLIST_GUIDE_BROWSER_H

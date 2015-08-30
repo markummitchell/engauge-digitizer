@@ -1,5 +1,7 @@
 #include "ChecklistGuideBrowser.h"
 #include "ChecklistTemplate.h"
+#include "CmdMediator.h"
+#include "Document.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QDebug>
@@ -7,7 +9,7 @@
 const int MIN_WIDTH_BROWSER = 340; // Make just big enough that each "More..." appears on same line
 
 ChecklistGuideBrowser::ChecklistGuideBrowser () :
-  m_document (0)
+  m_cmdMediator (0)
 {
   setOpenLinks (false); // Disable automatic link following
   setMinimumWidth(MIN_WIDTH_BROWSER);
@@ -45,11 +47,11 @@ QString ChecklistGuideBrowser::ahref (QString &html,
   return html;
 }
 
-void ChecklistGuideBrowser::bindToDocument(Document &document)
+void ChecklistGuideBrowser::bindToCmdMediator (const CmdMediator &cmdMediator)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::bindToDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::bindToCmdMediator";
 
-  m_document = &document;
+  m_cmdMediator = &cmdMediator;
 }
 
 void ChecklistGuideBrowser::check (QString &html,
@@ -66,7 +68,7 @@ void ChecklistGuideBrowser::check (QString &html,
   if (isChecked) {
     html.replace (tag, "<img src="":/engauge/img/16-checked.png"">");
   } else {
-    html.replace (tag, "<img src=""./engauge/img/16-unchecked.png"">");
+    html.replace (tag, "<img src="":/engauge/img/16-unchecked.png"">");
   }
 }
 
@@ -126,7 +128,7 @@ QString ChecklistGuideBrowser::processAhrefs (const QString &htmlBefore,
   ahref (html, NAME_AXIS3, anchor);
 
   // Curves
-  QStringList curveNames = m_document->curvesGraphsNames();
+  QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
@@ -146,27 +148,28 @@ QString ChecklistGuideBrowser::processCheckboxes (const QString &htmlBefore)
 
   QString html = htmlBefore;
 
-  if (m_document != 0) {
+  if (m_cmdMediator != 0) {
 
-    bool isAxis1 = (m_document->curveAxes().numPoints() > 0);
-    bool isAxis2 = (m_document->curveAxes().numPoints() > 1);
-    bool isAxis3 = (m_document->curveAxes().numPoints() > 2);
+    bool isAxis1 = (m_cmdMediator->document().curveAxes().numPoints() > 0);
+    bool isAxis2 = (m_cmdMediator->document().curveAxes().numPoints() > 1);
+    bool isAxis3 = (m_cmdMediator->document().curveAxes().numPoints() > 2);
 
     check (html, NAME_AXIS1, isAxis1);
     check (html, NAME_AXIS2, isAxis2);
     check (html, NAME_AXIS3, isAxis3);
 
     // Curves
-    QStringList curveNames = m_document->curvesGraphsNames();
+    QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
     QStringList::const_iterator itr;
     for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
       QString curveName = *itr;
-      bool isCurve = (m_document->curvesGraphsNumPoints (curveName) > 0);
+      bool isCurve = (m_cmdMediator->document().curvesGraphsNumPoints (curveName) > 0);
       check (html, curveName, isCurve);
     }
 
-
+    bool isDirty = m_cmdMediator->isModified();
+    check (html, NAME_EXPORT, isDirty);
   }
 
   return html;
@@ -188,10 +191,10 @@ QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore,
   divHide (html, NAME_AXIS2);
   divHide (html, NAME_AXIS3);
 
-  if (m_document != 0) {
+  if (m_cmdMediator != 0) {
 
     // Curve name tags
-    QStringList curveNames = m_document->curvesGraphsNames();
+    QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
     QStringList::const_iterator itr;
     for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
@@ -242,9 +245,9 @@ void ChecklistGuideBrowser::slotAnchorClicked (const QUrl &url)
   processTemplateHtmlAndDisplay (anchor);
 }
 
-void ChecklistGuideBrowser::unbindFromDocument()
+void ChecklistGuideBrowser::unbindFromCmdMediator ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::unbindFromDocument";
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::unbindFromCmdMediator";
 
-  m_document = 0;
+  m_cmdMediator = 0;
 }

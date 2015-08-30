@@ -47,7 +47,7 @@ QString ChecklistGuideWizard::templateHtml () const
   QString html;
   QTextStream str (&html);
 
-  str << "<p>The coordinates are first defined by creating three axis points:</p>\n";
+  str << "<p>The coordinates are defined by creating axis points:</p>\n";
   str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;Add first of three axis points. " << TAG_AHREF_AXIS_1 << "</p>\n";
   str << TAG_DIV_AXIS_START_1;
   str << "<ul>\n";
@@ -76,6 +76,7 @@ QString ChecklistGuideWizard::templateHtml () const
   str << "</ul>\n";
   str << TAG_DIV_AXIS_END_3;
 
+  str << "<p>&nbsp;</p>\n";
   str << "<p>Points are digitized along each curve:</p>\n";
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
@@ -117,6 +118,8 @@ QString ChecklistGuideWizard::templateHtml () const
     str << TAG_DIV_DELIMITER_START_SLASH << curveName << TAG_DIV_DELIMITER_END;
   }
 
+  str << "<p>&nbsp;</p>\n";
+  str << "<p>The digitized points can be exported:</p>\n";
   str << "<p>" << TAG_ANCHOR_EXPORT << "&nbsp;Export the points to a file. " << TAG_AHREF_EXPORT << "</p>\n";
   str << TAG_DIV_EXPORT_START;
   str << "<ul>\n";
