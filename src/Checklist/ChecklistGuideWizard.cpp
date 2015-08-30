@@ -72,7 +72,7 @@ QString ChecklistGuideWizard::templateHtml () const
   str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;Add first of three axis points. " << TAG_AHREF_AXIS_1 << "</p>\n";
   str << TAG_DIV_AXIS_START_1;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/12-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
+  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
   str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</li>\n";
   str << "<li>Enter the coordinates of the axis point</li>\n";
   str << "<li>Click on Ok</li>\n";
@@ -81,7 +81,7 @@ QString ChecklistGuideWizard::templateHtml () const
   str << "<p>" << TAG_ANCHOR_AXIS_2 << "&nbsp;Add second of three axis points. " << TAG_AHREF_AXIS_2 << "</p>\n";
   str << TAG_DIV_AXIS_START_2;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/12-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
+  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
   str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</li>\n";
   str << "<li>Enter the coordinates of the axis point</li>\n";
   str << "<li>Click on Ok</li>\n";
@@ -90,7 +90,7 @@ QString ChecklistGuideWizard::templateHtml () const
   str << "<p>" << TAG_ANCHOR_AXIS_3 << "&nbsp;Add third of three axis points. " << TAG_AHREF_AXIS_3 << "</p>\n";
   str << TAG_DIV_AXIS_START_3;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/12-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
+  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
   str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</li>\n";
   str << "<li>Enter the coordinates of the axis point</li>\n";
   str << "<li>Click on Ok</li>\n";
@@ -116,7 +116,7 @@ QString ChecklistGuideWizard::templateHtml () const
 
     if (withLines) {
 
-      str << "<li>Click on <img src="":/engauge/img/12-DigitSegment""> for <b>Segment Fill</b> mode</li>\n";
+      str << "<li>Click on <img src="":/engauge/img/16-DigitSegment""> for <b>Segment Fill</b> mode</li>\n";
       str << "<li>Select curve <b>" << curveName << "</b> in the drop-down list</li>\n";
       str << "<li>Move the cursor over the curve. If a line does not appear then adjust the <b>Color Filter</b> settings for this curve:\n";
       str << templateHtmlToAdjustColorFilterSettings () << "</li>\n";
@@ -125,7 +125,7 @@ QString ChecklistGuideWizard::templateHtml () const
 
     } else {
 
-      str << "<li>Click on <img src="":/engauge/img/12-DigitPointMatch""> for <b>Point Match</b> mode</li>\n";
+      str << "<li>Click on <img src="":/engauge/img/16-DigitPointMatch""> for <b>Point Match</b> mode</li>\n";
       str << "<li>Select curve <b>" << curveName << "</b> in the drop-down list</li>\n";
       str << "<li>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust";
       str << "    the <b>Color Filter</b> settings for this curve:\n";

@@ -1,14 +1,5 @@
 <RCC>
     <qresource prefix="/engauge">
-        <file>img/settings_coords.png</file>
-        <file>img/settings_curve_properties.png</file>
-        <file>img/settings_curves.png</file>
-        <file>img/settings_filter.png</file>
-        <file>img/settings_grid_display.png</file>
-        <file>img/settings_grid_removal.png</file>
-        <file>img/settings_point_match.png</file>
-        <file>img/settings_segments.png</file>
-        <file>img/settings_export.png</file>
         <file>img/cursor_eyedropper.xpm</file>
         <file>img/cursor_eyedropper_mask.xpm</file>
         <file>img/SpreadsheetsForDoc.png</file>
@@ -20,5 +11,11 @@
         <file>img/12-DigitPointMatch.png</file>
         <file>img/12-DigitSelect.png</file>
         <file>img/12-DigitSegment.png</file>
+        <file>img/16-DigitAxis.png</file>
+        <file>img/16-DigitColorPicker.png</file>
+        <file>img/16-DigitCurve.png</file>
+        <file>img/16-DigitPointMatch.png</file>
+        <file>img/16-DigitSegment.png</file>
+        <file>img/16-DigitSelect.png</file>
     </qresource>
 </RCC>

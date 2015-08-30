@@ -1564,13 +1564,21 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   // Checklist guide is docked or undocked. Default is undocked so  user knows it can be undocked
   Qt::DockWidgetArea area = (Qt::DockWidgetArea) settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
                                                                  Qt::NoDockWidgetArea).toInt();
-  addDockWidget (area,
-                 m_dockChecklistGuide);
+
   if (area == Qt::NoDockWidgetArea) {
-    m_dockChecklistGuide->setFloating(true);
+
+    addDockWidget (Qt::RightDockWidgetArea,
+                   m_dockChecklistGuide); // Add on the right to prevent error message, then immediately make undocked
+    m_dockChecklistGuide->setFloating(true); // Undock
     if (settings.contains (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY)) {
       m_dockChecklistGuide->restoreGeometry (settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY).toByteArray());
     }
+
+  } else {
+
+    addDockWidget (area,
+                   m_dockChecklistGuide);
+
   }
 
   settings.endGroup();
