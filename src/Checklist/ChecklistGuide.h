@@ -4,6 +4,7 @@
 #include <QDockWidget>
 
 class ChecklistGuideBrowser;
+class Document;
 
 /// Dockable text window containing checklist guide
 class ChecklistGuide : public QDockWidget
@@ -14,11 +15,17 @@ class ChecklistGuide : public QDockWidget
   /// Single constructor
   ChecklistGuide ();
 
+  /// Bind to document so curve names are accessible. See also unbindFromDocument
+  void bindToDocument (Document &document);
+
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
 
-  /// Populate the browser with html
-  void setHtml (const QString &html);
+  /// Populate the browser with template html
+  void setTemplateHtml (const QString &html);
+
+  /// Prevent connection to stale Document
+  void unbindFromDocument();
 
  signals:
   /// Signal that this QDockWidget was just closed

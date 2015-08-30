@@ -20,13 +20,13 @@ class ChecklistGuideWizard : public QWizard
   /// Curve names to be placed into Document
   QStringList curveNames() const;
 
-  /// Html comprising the checklist for display
-  QString html () const;
+  /// Template html comprising the checklist for display
+  QString templateHtml () const;
 
  private:
   ChecklistGuideWizard();
 
-  QString htmlToAdjustColorFilterSettings () const;
+  QString templateHtmlToAdjustColorFilterSettings () const;
 
   MainWindow &m_mainWindow;
   QPushButton *m_btnCancel;
