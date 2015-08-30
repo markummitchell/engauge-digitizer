@@ -103,6 +103,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
                        QWidget *parent) :
   QMainWindow(parent),
+  m_isDocumentExported (false),
   m_engaugeFile (EMPTY_FILENAME),
   m_currentFile (EMPTY_FILENAME),
   m_layout (0),
@@ -1017,8 +1018,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
 
-    m_dockChecklistGuide->unbindFromCmdMediator (); // Binding between checklist guide and CmdMediator only applies to imports
-
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
   } else {
@@ -1080,8 +1079,6 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
   slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
-  m_dockChecklistGuide->unbindFromCmdMediator (); // Binding between checklist guide and CmdMediator only applies to imports
-
   updateAfterCommand ();
 }
 
@@ -1108,17 +1105,26 @@ void MainWindow::loadImage (const QString &fileName,
   setupAfterLoad(fileName,
                  "File imported");
 
-  m_dockChecklistGuide->unbindFromCmdMediator (); // Unbind in case bindToCmdMediator is not called below
-
   if (m_actionChecklistGuideWizard->isChecked ()) {
 
     // Show wizard
     ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
     if (wizard->exec() == QDialog::Accepted) {
 
-      m_dockChecklistGuide->bindToCmdMediator (*m_cmdMediator);
-      m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml());
+      // Populate the checklist guide
+      m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(),
+                                             wizard->curveNames());
+
+      // Unhide the checklist guide
       m_actionViewChecklistGuide->setChecked (true);
+
+      // Update Document
+      CurvesGraphs curvesGraphs;
+      wizard->populateCurvesGraphs (curvesGraphs);
+      m_cmdMediator->document().setCurvesGraphs(curvesGraphs);
+
+      // Update the curve dropdown
+      loadCurveListFromCmdMediator();
     }
     delete wizard;
   }
@@ -1605,6 +1611,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   loadCurveListFromCmdMediator ();
   updateViewsOfSettings ();
 
+  m_isDocumentExported = false;
+
   // Set up background before slotViewZoomFill which relies on the background
   setPixmap (m_cmdMediator->pixmap ());
   m_backgroundStateContext->setCurveSelected (m_cmdMediator->document().modelColorFilter(),
@@ -1820,6 +1828,11 @@ void MainWindow::slotFileExport ()
                                    cmdMediator().document(),
                                    transformation (),
                                    str);
+
+      // Update checklist guide status
+      m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
+      m_dockChecklistGuide->update (*m_cmdMediator,
+                                    m_isDocumentExported);
 
     } else {
 
@@ -2586,6 +2599,10 @@ void MainWindow::updateAfterCommand ()
   m_scene->updateAfterCommand (*m_cmdMediator);
 
   updateControls ();
+
+  // Update checklist guide status
+  m_dockChecklistGuide->update (*m_cmdMediator,
+                                m_isDocumentExported);
 
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
   // so proper state can be verified

@@ -284,6 +284,7 @@ private:
 
   QString m_originalFile; // Original filename for error report
   bool m_originalFileWasImported; // True/false for imported/opened
+  bool m_isDocumentExported;
   QString m_engaugeFile; // Not empty when a Document is currently loaded AND it was loaded and/or saved as an Engauge file
   QString m_currentFile; // Not empty when a Document is currently loaded
 

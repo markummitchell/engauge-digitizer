@@ -4,6 +4,7 @@
 #include "ChecklistGuidePageIntro.h"
 #include "ChecklistGuideWizard.h"
 #include "ChecklistTemplate.h"
+#include "ColorFilterSettings.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGridLayout>
@@ -35,6 +36,23 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
 QStringList ChecklistGuideWizard::curveNames() const
 {
   return m_pageCurves->curveNames();
+}
+
+void ChecklistGuideWizard::populateCurvesGraphs (CurvesGraphs &curvesGraphs)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::populateCurvesGraphs";
+
+  QStringList curveNames = m_pageCurves->curveNames();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
+
+    QString curveName = *itr;
+
+    curvesGraphs.addGraphCurveAtEnd(Curve (curveName,
+                                           ColorFilterSettings::defaultFilter (),
+                                           CurveStyle (LineStyle::defaultGraphCurve (curvesGraphs.numCurves ()),
+                                                       PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()))));
+  }
 }
 
 QString ChecklistGuideWizard::templateHtml () const

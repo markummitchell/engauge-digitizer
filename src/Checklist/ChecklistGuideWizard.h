@@ -7,6 +7,7 @@
 class ChecklistGuidePageConclusion;
 class ChecklistGuidePageCurves;
 class ChecklistGuidePageIntro;
+class CurvesGraphs;
 class MainWindow;
 class QPushButton;
 
@@ -19,6 +20,9 @@ class ChecklistGuideWizard : public QWizard
 
   /// Curve names to be placed into Document
   QStringList curveNames() const;
+
+  /// Create entries in CurvesGraphs for each curve name that user provided
+  void populateCurvesGraphs (CurvesGraphs &curvesGraphs);
 
   /// Template html comprising the checklist for display
   QString templateHtml () const;

@@ -20,15 +20,6 @@ ChecklistGuide::ChecklistGuide () :
   setWidget (m_browser);
 }
 
-void ChecklistGuide::bindToCmdMediator (const CmdMediator &cmdMediator)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::bindToCmdMediator";
-
-  ENGAUGE_CHECK_PTR (m_browser);
-
-  m_browser->bindToCmdMediator (cmdMediator);
-}
-
 void ChecklistGuide::closeEvent(QCloseEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::closeEvent";
@@ -36,17 +27,22 @@ void ChecklistGuide::closeEvent(QCloseEvent * /* event */)
   emit signalChecklistClosed();
 }
 
-void ChecklistGuide::setTemplateHtml (const QString &html)
+void ChecklistGuide::setTemplateHtml (const QString &html,
+                                      const QStringList &curveNames)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::setTemplateHtml";
 
-  m_browser->setTemplateHtml (html);
+  m_browser->setTemplateHtml (html,
+                              curveNames);
 }
 
-void ChecklistGuide::unbindFromCmdMediator ()
+void ChecklistGuide::update (const CmdMediator &cmdMediator,
+                             bool documentIsExported)
 {
-  if (m_browser != 0) {
-    m_browser->unbindFromCmdMediator ();
-  }
-}
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::update";
 
+  ENGAUGE_CHECK_PTR (m_browser);
+
+  m_browser->update (cmdMediator,
+                     documentIsExported);
+}

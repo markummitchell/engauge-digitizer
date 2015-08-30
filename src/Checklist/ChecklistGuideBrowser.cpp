@@ -8,8 +8,7 @@
 
 const int MIN_WIDTH_BROWSER = 340; // Make just big enough that each "More..." appears on same line
 
-ChecklistGuideBrowser::ChecklistGuideBrowser () :
-  m_cmdMediator (0)
+ChecklistGuideBrowser::ChecklistGuideBrowser ()
 {
   setOpenLinks (false); // Disable automatic link following
   setMinimumWidth(MIN_WIDTH_BROWSER);
@@ -18,8 +17,7 @@ ChecklistGuideBrowser::ChecklistGuideBrowser () :
 }
 
 QString ChecklistGuideBrowser::ahref (QString &html,
-                                      const QString &name,
-                                      const QString &anchor) const
+                                      const QString &name) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::bindToDocument";
 
@@ -29,7 +27,7 @@ QString ChecklistGuideBrowser::ahref (QString &html,
                        .arg (TAG_AHREF_DELIMITER_END);
 
   QString link;
-  if (name == anchor) {
+  if (name == m_anchor) {
 
     // Click on this hyperlink to reload the page without details under this link, since anchor is empty
     link = QString ("<a href=""#"">Less ...</a>");
@@ -45,13 +43,6 @@ QString ChecklistGuideBrowser::ahref (QString &html,
   html.replace (expression, link);
 
   return html;
-}
-
-void ChecklistGuideBrowser::bindToCmdMediator (const CmdMediator &cmdMediator)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::bindToCmdMediator";
-
-  m_cmdMediator = &cmdMediator;
 }
 
 void ChecklistGuideBrowser::check (QString &html,
@@ -114,30 +105,27 @@ void ChecklistGuideBrowser::divShow (QString &html,
   }
 }
 
-QString ChecklistGuideBrowser::processAhrefs (const QString &htmlBefore,
-                                              const QString &anchor)
+QString ChecklistGuideBrowser::processAhrefs (const QString &htmlBefore)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::processAhrefs"
-                              << " anchor=" << anchor.toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::processAhrefs";
 
   QString html = htmlBefore;
 
   // Fixed axis point hrefs
-  ahref (html, NAME_AXIS1, anchor);
-  ahref (html, NAME_AXIS2, anchor);
-  ahref (html, NAME_AXIS3, anchor);
+  ahref (html, NAME_AXIS1);
+  ahref (html, NAME_AXIS2);
+  ahref (html, NAME_AXIS3);
 
   // Curves
-  QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
   QStringList::const_iterator itr;
-  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
+  for (itr = m_curveNames.begin(); itr != m_curveNames.end(); itr++) {
 
     QString curveName = *itr;
-    ahref (html, curveName, anchor);
+    ahref (html, curveName);
   }
 
   // Export
-  ahref (html, NAME_EXPORT, anchor);
+  ahref (html, NAME_EXPORT);
 
   return html;
 }
@@ -148,35 +136,24 @@ QString ChecklistGuideBrowser::processCheckboxes (const QString &htmlBefore)
 
   QString html = htmlBefore;
 
-  if (m_cmdMediator != 0) {
+  check (html, NAME_AXIS1, m_checkedTags.contains (NAME_AXIS1));
+  check (html, NAME_AXIS2, m_checkedTags.contains (NAME_AXIS2));
+  check (html, NAME_AXIS3, m_checkedTags.contains (NAME_AXIS3));
 
-    bool isAxis1 = (m_cmdMediator->document().curveAxes().numPoints() > 0);
-    bool isAxis2 = (m_cmdMediator->document().curveAxes().numPoints() > 1);
-    bool isAxis3 = (m_cmdMediator->document().curveAxes().numPoints() > 2);
+  // Curves
+  QStringList::const_iterator itr;
+  for (itr = m_curveNames.begin(); itr != m_curveNames.end(); itr++) {
 
-    check (html, NAME_AXIS1, isAxis1);
-    check (html, NAME_AXIS2, isAxis2);
-    check (html, NAME_AXIS3, isAxis3);
-
-    // Curves
-    QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
-    QStringList::const_iterator itr;
-    for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
-
-      QString curveName = *itr;
-      bool isCurve = (m_cmdMediator->document().curvesGraphsNumPoints (curveName) > 0);
-      check (html, curveName, isCurve);
-    }
-
-    bool isDirty = m_cmdMediator->isModified();
-    check (html, NAME_EXPORT, isDirty);
+    QString curveName = *itr;
+    check (html, curveName, m_checkedTags.contains (curveName));
   }
+
+  check (html, NAME_EXPORT, m_checkedTags.contains (NAME_EXPORT));
 
   return html;
 }
 
-QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore,
-                                            const QString &anchor)
+QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::processDivs";
 
@@ -184,23 +161,19 @@ QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore,
 
   // Show div associated with anchor. Since this removes the tags, applying divHide below
   // will have no effect, so we apply divHide to everything
-  divShow (html, anchor);
+  divShow (html, m_anchor);
 
   // Fixed axis point tags
   divHide (html, NAME_AXIS1);
   divHide (html, NAME_AXIS2);
   divHide (html, NAME_AXIS3);
 
-  if (m_cmdMediator != 0) {
+  // Curve name tags
+  QStringList::const_iterator itr;
+  for (itr = m_curveNames.begin(); itr != m_curveNames.end(); itr++) {
 
-    // Curve name tags
-    QStringList curveNames = m_cmdMediator->document().curvesGraphsNames();
-    QStringList::const_iterator itr;
-    for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
-
-      QString curveName = *itr;
-      divHide (html, curveName);
-    }
+    QString curveName = *itr;
+    divHide (html, curveName);
   }
 
   divHide (html, NAME_EXPORT);
@@ -208,46 +181,93 @@ QString ChecklistGuideBrowser::processDivs (const QString &htmlBefore,
   return html;
 }
 
-void ChecklistGuideBrowser::processTemplateHtmlAndDisplay(const QString &anchor)
+void ChecklistGuideBrowser::refresh ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::processTemplateHtmlAndDisplay"
-                              << " anchor=" << anchor.toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::refresh";
 
   QString html = m_templateHtml;
 
-  html = processAhrefs (html,
-                        anchor);
+  html = processAhrefs (html);
   html = processCheckboxes (html);
-  html = processDivs (html,
-                      anchor);
+  html = processDivs (html);
 
   QTextBrowser::setHtml (html);
 }
 
-void ChecklistGuideBrowser::setTemplateHtml (const QString &html)
+void ChecklistGuideBrowser::repopulateCheckedTags (const CmdMediator &cmdMediator,
+                                                   bool documentIsExported)
 {
-  QString NO_ANCHOR;
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::repopulateCheckedTags";
 
+  m_checkedTags.clear();
+
+  if (cmdMediator.document().curveAxes().numPoints() > 0) {
+    m_checkedTags [NAME_AXIS1] = true;
+  }
+
+  if (cmdMediator.document().curveAxes().numPoints() > 1) {
+    m_checkedTags [NAME_AXIS2] = true;
+  }
+
+  if (cmdMediator.document().curveAxes().numPoints() > 2) {
+    m_checkedTags [NAME_AXIS3] = true;
+  }
+
+  // Curves
+  QStringList::const_iterator itr;
+  for (itr = m_curveNames.begin(); itr != m_curveNames.end(); itr++) {
+
+    QString curveName = *itr;
+    if (cmdMediator.document().curvesGraphsNumPoints (curveName) > 0) {
+      m_checkedTags [curveName] = true;
+    }
+  }
+
+  // The export case is very tricky. The modified/dirty flag tells us when there are unsaved points,
+  // but for some reason the value returned by CmdMediator.isModified (which is QUndoStack::isClean)
+  // is often wrong at this point in execution. So we use a different trick - asking MainWindow if file has
+  // been saved
+  if (documentIsExported) {
+    m_checkedTags [NAME_EXPORT] = true;
+  }
+}
+
+void ChecklistGuideBrowser::setTemplateHtml (const QString &html,
+                                             const QStringList &curveNames)
+{
   m_templateHtml = html;
+  m_curveNames = curveNames;
 
-  processTemplateHtmlAndDisplay (NO_ANCHOR);
+  refresh();
 }
 
 void ChecklistGuideBrowser::slotAnchorClicked (const QUrl &url)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::slotAnchorClicked";
 
-  QString anchor;
+  m_anchor = "";
   if (url.hasFragment ()) {
-    anchor = url.fragment ();
+    m_anchor = url.fragment ();
   }
 
-  processTemplateHtmlAndDisplay (anchor);
+  refresh();
 }
 
-void ChecklistGuideBrowser::unbindFromCmdMediator ()
+void ChecklistGuideBrowser::slotCleanChanged(bool clean)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::unbindFromCmdMediator";
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::slotCleanChanged"
+                              << " clean=" << (clean ? "true" : "false");
 
-  m_cmdMediator = 0;
+
+}
+
+void ChecklistGuideBrowser::update (const CmdMediator &cmdMediator,
+                                    bool documentIsExported)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideBrowser::update";
+
+  repopulateCheckedTags(cmdMediator,
+                        documentIsExported);
+
+  refresh();
 }

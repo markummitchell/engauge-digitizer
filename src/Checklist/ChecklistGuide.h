@@ -15,17 +15,16 @@ class ChecklistGuide : public QDockWidget
   /// Single constructor
   ChecklistGuide ();
 
-  /// Bind to CmdMediator so curve names are accessible from its Document. See also unbindFromCmdMediator
-  void bindToCmdMediator (const CmdMediator &cmdMediator);
-
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
 
   /// Populate the browser with template html
-  void setTemplateHtml (const QString &html);
+  void setTemplateHtml (const QString &html,
+                        const QStringList &curveNames);
 
-  /// Prevent connection to stale CmdMediator
-  void unbindFromCmdMediator ();
+  /// Update using current CmdMediator/Document state
+  void update (const CmdMediator &cmdMediator,
+               bool documentIsExported);
 
  signals:
   /// Signal that this QDockWidget was just closed
