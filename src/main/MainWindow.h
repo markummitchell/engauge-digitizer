@@ -34,6 +34,7 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class GraphicsScene;
 class GraphicsView;
+class HelpWindow;
 class LoadImageFromUrl;
 class QAction;
 class QActionGroup;
@@ -41,7 +42,6 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
-class QHelpEngineCore;
 class QMenu;
 class QSettings;
 class QTextStream;
@@ -181,7 +181,6 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
-  void slotHelpHelp();
   void slotHelpTutorialVideo();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
@@ -241,7 +240,7 @@ private:
   void createActionsView ();
   void createCentralWidget ();
   void createCommandStackShadow ();
-  void createHelpEngine ();
+  void createHelpWindow ();
   void createIcons();
   void createLoadImageFromUrl ();
   void createMenus();
@@ -394,6 +393,8 @@ private:
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
 
+  HelpWindow *m_helpWindow;
+
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   CmdStackShadow *m_cmdStackShadow; /// Shadow of CmdMediator, for commands loaded from error report file
 
@@ -421,9 +422,6 @@ private:
   QString m_startingDocumentSnapshot;
 
   bool m_isGnuplot;
-
-  // Help engine
-  QHelpEngineCore *m_helpEngine;
 };
 
 #endif // MAIN_WINDOW_H

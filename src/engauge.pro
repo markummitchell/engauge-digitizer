@@ -168,6 +168,8 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
+    Help/HelpBrowser.h \
+    Help/HelpWindow.h \
     Line/LineStyle.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
@@ -366,6 +368,8 @@ SOURCES += \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
     Grid/GridCoordDisable.cpp \
+    Help/HelpBrowser.cpp \
+    Help/HelpWindow.cpp \
     Line/LineStyle.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
@@ -426,6 +430,7 @@ INCLUDEPATH += Background \
                Format \
                Graphics \
                Grid \
+               Help \
                img \
                include \
                Line \

@@ -41,6 +41,7 @@
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
+#include "HelpWindow.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -131,7 +132,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStatusBar ();
   createMenus ();
   createToolBars ();
-  createHelpEngine ();
+  createHelpWindow ();
   createScene ();
   createLoadImageFromUrl ();
   createStateContextBackground ();
@@ -385,21 +386,22 @@ void MainWindow::createActionsHelp ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsHelp";
 
-  m_actionHelpWhatsThis = QWhatsThis::createAction(this);
-  m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
-
-  m_actionHelpHelp = new QAction (tr ("Help"), this);
-  m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
-  m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
-                                      "Searchable help documentation"));
-  connect (m_actionHelpHelp, SIGNAL (triggered ()), this, SLOT (slotHelpHelp()));
-
   m_actionHelpChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
   m_actionHelpChecklistGuideWizard->setCheckable (true);
   m_actionHelpChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
   m_actionHelpChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
                                                       "Use Checklist Guide Wizard during import to generate a checklist of steps "
                                                       "for the current document"));
+
+  m_actionHelpWhatsThis = QWhatsThis::createAction(this);
+  m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
+
+  m_actionHelpHelp = new QAction (tr ("Help"), this);
+  m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
+  m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
+  m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
+                                      "Searchable help documentation"));
+  // This action gets connected directly to the QDockWidget when that is created
 
   m_actionHelpTutorialVideo = new QAction (tr ("Tutorial Video"), this);
   m_actionHelpTutorialVideo->setStatusTip (tr ("Play a tutorial video"));
@@ -691,9 +693,17 @@ void MainWindow::createCommandStackShadow ()
   m_cmdStackShadow = new CmdStackShadow;
 }
 
-void MainWindow::createHelpEngine ()
+void MainWindow::createHelpWindow ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpEngine";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
+
+  m_helpWindow = new HelpWindow (this);
+  m_helpWindow->hide ();
+  addDockWidget (Qt::RightDockWidgetArea,
+                 m_helpWindow); // Dock area is required by addDockWidget but immediately overridden in next line
+  m_helpWindow->setFloating (true);
+
+  connect (m_actionHelpHelp, SIGNAL (triggered ()), m_helpWindow, SLOT (show ()));
 }
 
 void MainWindow::createIcons()
@@ -811,9 +821,10 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCommon);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
+  m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
+  m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpHelp);
-  m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
   m_menuHelp->addAction (m_actionHelpTutorialVideo);
   m_menuHelp->addAction (m_actionHelpAbout);
 
@@ -2085,12 +2096,6 @@ void MainWindow::slotHelpAbout()
 
   DlgAbout dlg (*this);
   dlg.exec ();
-}
-
-void MainWindow::slotHelpHelp ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpHelp";
-
 }
 
 void MainWindow::slotHelpTutorialVideo()
