@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Manual Map Tutorial</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Digitize Map Tutorial">
+<META NAME="description" CONTENT="Tutorial explains manually digitizing maps">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Manual Map Tutorial</H2>
+<HR WIDTH="100%">
+<P>Engauge Digitizer is limited in its map capabilities. Before digitizing
+a map, you should review the 
+<A HREF="answermapconst.html">map constraints</A>.</P>
+<H3>Digitizing A Map Image</H3>
+<P>The following secion applies a Measure to a map, to get measurements. 
+A Measure is used rather than a Curve, since Curves are drawn as single valued
+functions by default. However, Measures cannot be exported. If you want to
+export digitized map data, you will have to use Curves rather than Measures.
+This should not be a problem, since you can change a Curve's properties
+from "Single Valued Function" to "Contour". Contour Curves behave just
+like Measures, while also offering export capability.</P>
+<P>The following steps digitize a map that has a scale bar:</P>
+<UL>
+<LI>Import the usgs.png case from the Samples directory, using 
+File/Import as shown.  Not shown are the other methods of importing:
+using the <A HREF="commandlineoptions.html">"-import" command line option</A>, 
+by copying and pasting, and by dragging and dropping. 
+</LI>
+<P ALIGN="center"><IMG SRC="tutormanmap1.png" ALT=""></P>
+<UL>
+<LI>By default, the processed image is shown. Since the original image
+is more useful in this particular case, we select the original image 
+by choosing View/Original Image.
+</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap2.png" ALT=""></P>
+<UL>
+<LI>Click on the Scale Bar button before entering the scale bar. This 
+will define the coordinate system</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap3.png" ALT=""></P>
+<UL>
+<LI>Click on one end of the scale bar in the picture, then drag to the other
+end of the scale bar in the picture, to create the scale bar. Enter the length.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap4.png" ALT=""></P>
+<UL>
+<LI>Bring up the Measure Geometry window by selecting the View/Measure Geometry
+menu option</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap5.png" ALT=""></P>
+<UL>
+<LI>Click on the Measure Points button before entering measure points. 
+These will contain the digitized map data</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap6.png" ALT=""></P>
+<UL>
+<LI>Click on the map to add measure points. Repeat until the map is 
+covered with a sufficient number of measure points</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap7.png" ALT=""></P>
+<UL>
+<LI>Export the measured data into a tabular text file by selecting text in 
+the <A HREF="dlgmeasuregeometry.html">measure geometry window</A>. The 
+selected text can then be copied or dragged into another application.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutormanmap8.png" ALT=""></P>
+</BODY>
+</HTML>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Map Constraints</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Map Constraints">
+<META NAME="description" CONTENT="Map constraints include projections and contours">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Map Constraints</H2>
+<HR WIDTH="100%">
+<H3>Projections</H3>
+<P>Currently, only (somewhat common) cylindrical lat/lon coordinates, 
+and (very rare) polar lat/lon coordinates are supported.</P>
+<P>Such popular projections as Lambert, Mercator and UTM are not supported,
+and any attempts to accurately digitize such projections will not succeed.</P>
+<P>In the future, a generalized warping algorithm may be added which
+would support the vast majority of map projections. Besides being
+extremely flexible, this approach would be easy to learn and work
+even in cases where details of the original map projection are not
+known. However, the disadvantages of the generalized warping
+algorithm would be that lat/lon lines must exist in the map, and
+accuracy will probably be degraded.</P>
+<H3>Open and Closed Contours</H3>
+<P>Version 1.5 of Engauge Digitizer first offered support for open and
+closed contours. The Connect As property of a curve can be changed to
+Contour, and then the points of that curve are connected according to
+their age, with one exception. Any point created along an existing contour
+line (which would have two older endpoints) is treated as if the new
+point was created sometime between the two endpoints, and inserted between
+them.</P>
+</BODY>
+</HTML>

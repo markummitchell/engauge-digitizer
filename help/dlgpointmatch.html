@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Point Match Dialog</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Point Match Dialog">
+<META NAME="description" CONTENT="Point match dialog window for setting the point match settings">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Point Match Dialog</H2>
+<HR WIDTH="100%">
+<P>
+The point match dialog controls how Point Match is applied to 
+point graphs. You can control:
+</P>
+<UL>
+<LI>Minimum point separation</LI>
+<LI>Maximum point size</LI>
+<LI>Accepted point color</LI>
+<LI>Rejected point color</LI>
+<LI>Candidate color</LI>
+</UL>
+<P>
+The minimum point separation prevents the creation of new points 
+that duplicate existing points. Otherwise, duplicate points would be
+a problem if Point Match was run more than once.
+</P>
+<P>
+The maximum point size prevents sample points from being too large. Occasionally
+a sample point will lie on top of a grid line or axis line, which confuses 
+Engauge because it is not able to distinguish the point from the grid or
+axis line. The maximum point size value limits the width and height of the
+sample point so that, at most, only a few pixels of the grid or axis line 
+are attached.
+</P>
+<P>Colors are used to distinguish accepted points, rejected points, and the
+candidate point from each other.
+</P>
+<P>
+The Preview window display the settings.
+</P>
+<P>
+An example of a point match dialog is shown below:
+</P>
+<P ALIGN="CENTER">
+&nbsp;&nbsp;&nbsp;&nbsp;<IMG ALT="" SRC="dlgpointmatch1.png">&nbsp;&nbsp;&nbsp;&nbsp;
+</P>
+</BODY>
+</HTML>

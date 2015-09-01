@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Command Line Options</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, command line options">
+<META NAME="description" CONTENT="Engauge Digitizer command line options">
+<STYLE TYPE="text/css">
+TD {vertical-align: top}
+</STYLE>
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Command Line Options</H2>
+<HR WIDTH="100%">
+<P>Engauge Digitizer accepts many command line options, and one environment
+  variable, for more flexibility and power.</P>
+
+<TABLE STYLE="PADDING: 3">
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Startup</H1></TH>
+  </TR>
+  <TR>
+    <TD>-import <i>FILE</i></TD>
+    <TD>Automatically import the specified image file at startup. Image
+    files may also be imported manually using the menu</TD>
+  </TR>
+  <TR>
+    <TD>-open <i>FILE</i></TD>
+    <TD>Automatically open the specified Engauge Digitizer document file at 
+    startup. Document files may also be opened manually using the menu</TD>
+  </TR>
+  <TR>
+    <TD>-help</TD>
+    <TD>Display a list of command line options with some brief comments, and
+    then exit</TD>
+  </TR>
+  <TR>
+    <TD>-manual <i>DIRECTORY</i></TD>
+    <TD>Look for the user manual in the specified directory. If Engauge
+    Digitizer is run in a directory other than the installation directory,
+    then the user manual directory must be specified using either this
+    command line option or the ENGAUGE_USERMANUAL environment variable.</TD>
+  </TR>
+  <TR>
+    <TD>-axes <i>XMIN</i> <i>XMAX</i> <i>YMIN</i> <i>YMAX</i></TD>
+    <TD>Scan the imported file at startup, and locate the X and Y axes. Then
+    digitize axis points assuming the X axis ranges from <i>XMIN</i> to
+    <i>XMAX</i>, and the Y axis ranges from <i>YMIN</i> to <i>YMAX</i>. The
+    X axis is assumed to be near the bottom of the image, and the Y axis
+    is assumed to be on the left side of the image. For speed, no 
+    attempt to rotate the image if it is sideways, so the digitized points
+    may require adjustment. This feature should be useful when 
+    using Perl or other scripts to digitize many images with known 
+    axes ranges. The axis points may also be digitized manually using
+    the Digitize Axis Points mode</TD>
+  </TR>
+  <TR>
+    <TD>-lazysegments</TD>
+    <TD>Postpone scanning for segments that is normally performed during
+    startup, until either the <A HREF="dlgsegments.html">Segments dialog</A>
+    is used, or the <A HREF="answerlinegraph.html">Segment Fill</A> button
+    is selected.</TD>
+  </TR>
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Shutdown</H1></TH>
+  </TR>
+  <TR>
+    <TD>-export <i>FILE</i></TD>
+    <TD>Automatically export the active document at shutdown. Documents
+    may also be exported manually using the menu.</TD>
+  </TR>
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Settings</H1></TH>
+  </TR>
+  <TR>
+    <TD>-reset</TD>
+    <TD>Reset all settings to the factory defaults. This option is a
+    fast and easy way to restore all settings to a useful configuration,
+    especially when there are problems with one or more settings.</TD>
+  </TR>
+  <TR>
+    <TD>-text</TD>
+    <TD>Load settings from a text file at startup, and save settings to
+    the same text file when done, rather than use the Windows registry.
+    That text file will be C:\Documents and Settings\All Users\Application
+    Data\engaugerc in Windows XP, and C:\Windows\All Users\Application 
+    Data\engaugerc in Windows 98 and ME. Note that the Application Data 
+    directory may be hidden, so although it will not appear when a 
+    simple 'dir' command is used, you
+    can still go into that directory using 'cd Application Data'. This
+    option has no effect in Linux and Unix because the settings are
+    always stored in a text file such as $HOME/.qt/engaugerc.</TD>
+  </TR>
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Internationalization</H1></TH>
+  </TR>
+  <TR>
+    <TD>-onlybmp</TD>
+    <TD>Import all images as bitmap (BMP) files. This is a fix for
+    Chinese Windows.</TD>
+  </TR>
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Debugging</H1></TH>
+  </TR>
+  <TR>
+    <TD>-pixels</TD>
+    <TD>Show cursor location in pixel coordinates rather than graph 
+    coordinates</TD>
+  </TR>
+  <TR>
+    <TD>-ctor</TD>
+    <TD>Trace constructor calls</TD>
+  </TR>
+  <TR>
+    <TD>-dtor</TD>
+    <TD>Trace destructor calls</TD>
+  </TR>
+  <TR>
+    <TD>-curvecmb</TD>
+    <TD>Trace curve combobox operations</TD>
+  </TR>
+  <TR>
+    <TD>-measurecmb</TD>
+    <TD>Trace measure combobox operations</TD>
+  </TR>
+  <TR>
+    <TD>-refresh</TD>
+    <TD>Trace screen refreshes</TD>
+  </TR>
+  <TR>
+    <TD>-scanning</TD>
+    <TD>Trace image scanning</TD>
+  </TR>
+
+  <TR>
+    <TH ALIGN="LEFT" COLSPAN=2><H1>Environment variables</H1></TH>
+  </TR>
+  <TR>
+    <TD>ENGAUGE_BROWSER</TD>
+    <TD>To start up the date/time converter from within Engauge Digitizer,
+    this environment variable must be set to the shell command that runs
+    a javascript-capable browser. This environment variable is not used
+    in Microsoft Windows. Examples are 'firefox', 'konqueror', ...</TD>
+  </TR>
+  <TR>
+    <TD>ENGAUGE_USERMANUAL</TD>
+    <TD>If set, this specifies the directory containing the user manual. This
+    option, like the '-manual' command line option, is used when running
+    Engauge Digitizer in a directory other than the installation 
+    directory.</TD>
+  </TR>
+</TABLE>
+</BODY>
+</HTML>

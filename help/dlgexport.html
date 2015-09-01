@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Export Setup Dialog</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Export Setup Dialog">
+<META NAME="description" CONTENT="Export setup dialog window for setting export settings">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Export Setup Dialog</H2>
+<HR WIDTH="100%">
+<P>
+The Export Setup dialog is very powerful, so that exported files can
+can be easily imported into other tools such as Excel and Gnumeric.
+</P>
+<P>
+Only curves may be exported, so this dialog ignores all measures.
+</P>
+<P>
+Every curve will be exported by default. To prevent a curve from getting
+exported, select the curve name and then click on the Exclude button. 
+Clicking on the Include button will return the curve to the export list.
+</P>
+<P>
+The curves are exported as a set of points. The user may control
+which points are exported. X values from all curves, just the first curve,
+or from the grid lines may be selected, and corresponding Y values
+will be calculated. The raw X and Y values can also be selected, although
+this format is typically less useful to other applications.
+</P>
+<P>
+Between each two fields (or entries) in the export file, there is
+a delimiter. The type of delimiter may be selected in this dialog, so 
+the exported file can be easily read into another application. Examples
+of delimiters are commas, spaces and tabs.
+</P>
+<P>
+By default, a simple header line is inserted at the top of each 
+exported file. This header line contains the names of each column
+of data. Such popular spreadsheet programs as Excel and Gnumeric
+can read the column names from the simple header line. The header
+line can be removed, or slightly changed for compatibility with
+Gnuplot. If you want complete Gnuplot compatibility, spaces should 
+be used as delimiters.
+</P>
+<P>
+An example of the export setup for a simple document is shown below:
+</P>
+<P ALIGN="CENTER">
+&nbsp;&nbsp;&nbsp;&nbsp;<IMG ALT="" SRC="dlgexport1.png">&nbsp;&nbsp;&nbsp;&nbsp;
+</P>
+</BODY>
+</HTML>

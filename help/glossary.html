@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Glossary</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, glossary">
+<META NAME="description" CONTENT="Glossary for Engauge Digitizer">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Glossary</H2>
+<HR WIDTH="100%">
+<DL>
+<DT>axis point</DT>
+<DD>Point that is added to a graph to define the scale. The two coordinate values must be defined
+for each axis point. Three axis points are needed to define the scales in the two coordinate directions</DD>
+<DT>collinear</DT>
+<DD>Collinear points lie along a straight line. The three axis points cannot
+be collinear because graph coordinates are therefore impossible to compute.</DD>
+<DT>collocated</DT>
+<DD>Collocated points are close to each other or at the same location. Multiple axis points cannot
+share the same location because graph coordinates are therefore impossible to compute,
+and should be widely separated so computed graph coordinates are most accurate.</DD>
+<DT>coordinates</DT>
+<DD>Two values used in a graph to specify position. If the coordinates are cartesian, the 
+two values are X and Y. If the coordinates are polar, the two values are the radius R and 
+the angle theta. The X, Y and R coordinates can be logarithmic</DD>
+<DT>corner</DT>
+<DD>The point at the junction of two line segments in a piecewise linear curve</DD>
+<DT>curve</DT>
+<DD>Continuous line in a graph or map. This is digitized by creating curve points along the line</DD>
+<DT>curve point</DT>
+<DD>Point that is added to a graph on top of either a curve or point in the original image</DD>
+<DT>digitize</DT>
+<DD>Process of converting non-digital data into numbers. The specific type of digitizing performed 
+by Engauge Digitizer is the conversion of graph and map images into numbers. These numbers can be 
+exported to spreadsheets and other math software</DD>
+<DT>discretize</DT>
+<DD>Process that converts each pixel of an original image into either the black foreground, or 
+the white background. The colors and grays of the original image are lost. By controlling
+discretizing, unwanted parts of the original image can be removed</DD>
+<DT>engauge</DT>
+<DD>Process of converting an image file containing a graph or map into numbers. The word 'engauge' 
+was invented to distinguish this process from other types of digitizing</DD>
+<DT>export</DT>
+<DD>Process of copying digitized information from Engauge Digitizer to other software
+or a file</DD>
+<DT>fast correlation</DT>
+<DD>A preferred method of performing template matching, which is identifying various places
+in an image where a template (or sample) appears. This method is fast because it uses a highly 
+efficient <A HREF="http://www.fftw.org">Fast Fourier Transform</A>, and is 
+therefore used by Engauge to perform point matching.</DD>
+<DT>graph</DT>
+<DD>Image having two coordinate directions. Three axis points define the scales in the two coordinate 
+directions, and the location of the origin. Graphs have either points or curves</DD>
+<DT>grid display</DT>
+<DD>Grid lines may be added to a graph after the axis points have been defined. Any errors while
+creating the axis points are usually apparent when grid lines are displayed</DD>
+<DT>grid removal</DT>
+<DD>Process that removes the grid from an original graph image so automated 
+digitizing techniques perform better</DD>
+<DT>import</DT>
+<DD>Process of loading an original graph or map image into Engauge Digitizer</DD>
+<DT>line graph</DT>
+<DD>Graph containing lines</DD>
+<DT>line segment</DT>
+<DD>Part of a straight line that lies between two end points</DD>
+<DT>map</DT>
+<DD>Image without any coordinates, and having the same scale in any direction. A scale bar defines 
+the scale in a map</DD>
+<DT>measure</DT>
+<DD>Set of one or more connected line segments that is used to measure distance and/or area
+in a graph or map</DD>
+<DT>piecewise linear</DT>
+<DD>Curve that is composed of multiple line segments. A graph of the absolute value function is 
+a simple example of a piecewise linear curve</DD>
+<DT>point graph</DT>
+<DD>Graph containing distinct points in the original image</DD>
+<DT>point match</DT>
+<DD>Automated digitizing technique used on graphs containing points. The user selects a
+representative sample point, and then similar points are automatically digitized starting with the 
+closest match</DD>
+<DT>resolution</DT>
+<DD>The distance in graph units corresponding to the pixel separation of the original image. This
+distance is displayed in the status bar, since it represents the accuracy of the graph measurements</DD>
+<DT>sample point</DT>
+<DD>The point, chosen by the user during point matching, that best represents the points to be
+matched</DD>
+<DT>scale</DT>
+<DD>Relationship between the actual distance on the graph or map, and the represented units. Typically,
+actual distance is measured in pixels on the screen, or centimeters or inches on a printout. The
+represented units may be distance, time, percent, counts, ...</DD>
+<DT>scale bar</DT>
+<DD>Line segment that defines the scale of a map</DD>
+<DT>segment</DT>
+<DD>Piece of a curve, in a graph, that can be automatically digitized using segment fill mode. A
+segment is a set of adjoining points that lie between two endpoints</DD>
+<DT>segment fill</DT>
+<DD>Process of automatically digitizing a curve in a graph, by creating curve points along 
+each segment along the curve</DD>
+<DT>select mode</DT>
+<DD>Digitizing mode in which existing points can be selected by clicking on an individual points,
+or clicking and dragging to select all points in a box. Shift-click adds a new point to the points 
+that are already selected. The control key temporarily hides points that do not belong to the
+currently selected curve.</DD>
+<DT>session</DT>
+<DD>Period of time spent using Engauge Digitizer, from starting the software to stopping it</DD>
+</DL>
+</BODY>
+</HTML>

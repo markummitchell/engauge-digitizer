@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Discretizing</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Discretizing">
+<META NAME="description" CONTENT="Discretizing a graph or map">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Discretizing</H2>
+<HR WIDTH="100%">
+<H2>What Is Discretizing?</H2>
+<P>When an image is imported, Engauge Digitizer processes that image
+  by converting each pixel into black or white. Since most images use
+  black writing on a white background, the black pixels are
+  assumed to represent curves, and the white pixels are assumed to
+  represent the background. This process of converting color images into
+  black foreground and white background is called <em>discretizing</em>.
+  The resulting processed image can be automatically digitized
+  using <A HREF="tutorautolinegraph.html#segmentfill">Segment Fill</A> and 
+  <A HREF="tutorautopointgraph.html#pointmatch">Point Match</A>.</P>
+<P>Usually the default discretizing settings correctly differentiate
+  the foreground from the background. For example, in the two images
+  below, the original image on the left gets processed into the image 
+  on the right.</P>
+<TABLE ALIGN="CENTER">
+  <TR>
+    <TD><IMG SRC="discretize_ok_before.png" ALT="OK before" WIDTH="247" HEIGHT="208"></TD>
+    <TD><IMG SRC="discretize_ok_after.png" ALT="OK after" WIDTH="247" HEIGHT="208"></TD>
+  </TR>
+  <TR>
+    <TD ALIGN="CENTER">Before discretizing</TD>
+    <TD ALIGN="CENTER">After discretizing</TD>
+  </TR>
+</TABLE>
+<P>However, an image that uses color might not get correctly digitized. In
+  the two images below, the original image on the left is processed into
+  the featureless image on the right. The relatively dark green was 
+  assumed to be part of the foreground.</P>
+<TABLE ALIGN="CENTER">
+  <TR>
+    <TD><IMG SRC="discretize_bad_color_before.png" ALT="OK before" WIDTH="247" HEIGHT="208"></TD>
+    <TD><IMG SRC="discretize_bad_color_after.png" ALT="OK after" WIDTH="247" HEIGHT="208"></TD>
+  </TR>
+  <TR>
+    <TD ALIGN="CENTER">Before discretizing</TD>
+    <TD ALIGN="CENTER">After discretizing</TD>
+  </TR>
+</TABLE>
+<P>Even a black-and-white image might be discretized in a manner that
+  is not very helpful. In the two images below, the original image on 
+  the left is processed into the image on the right. 
+  One curve is so thin it has broken up into many unconnected 
+  short segments, and the other curve is so light that it has 
+  disappeared entirely! Neither curve will be recognized
+  by the curve recognition algorithms in Engauge Digitizer.</P>
+<TABLE ALIGN="CENTER">
+  <TR>
+    <TD><IMG SRC="discretize_bad_gray_before.png" ALT="OK before" WIDTH="247" HEIGHT="208"></TD>
+    <TD><IMG SRC="discretize_bad_gray_after.png" ALT="OK after" WIDTH="247" HEIGHT="208"></TD>
+  </TR>
+  <TR>
+    <TD ALIGN="CENTER">Before discretizing</TD>
+    <TD ALIGN="CENTER">After discretizing</TD>
+  </TR>
+</TABLE>
+<H2>How Do I Control Discretizing?</H2>
+<P>By simply changing the Discretizing settings, curves can often be extracted 
+  from color, low-contrast and low-resolution images. Such images are often 
+  produced by fax machines, microfiche, cheap scanners, and excessive enlarging 
+  on the copier.</P>
+<P>Use the Settings/Discretizing dialog to experiment with various
+  discretizing settings. You can get more information about the 
+  <A HREF="dlgdiscretize.html">Discretizing dialog</A>.</P>
+</BODY>
+</HTML>

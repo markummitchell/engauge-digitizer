@@ -391,7 +391,7 @@ void MainWindow::createActionsHelp ()
   m_actionHelpChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
   m_actionHelpChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
                                                       "Use Checklist Guide Wizard during import to generate a checklist of steps "
-                                                      "for the current document"));
+                                                      "for the imported document"));
 
   m_actionHelpWhatsThis = QWhatsThis::createAction(this);
   m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);

@@ -8,9 +8,15 @@
 #include <QSplitter>
 #include <QTabWidget>
 
+const int MIN_WIDTH = 600;
+const int MIN_HEIGHT = 600;
+
 HelpWindow::HelpWindow(QWidget *parent) :
   QDockWidget (parent)
 {
+  setMinimumWidth (MIN_WIDTH);
+  setMinimumHeight (MIN_HEIGHT);
+
   QString path = QApplication::applicationDirPath() + "/documentation/engauge.qhc";
   QHelpEngine *helpEngine = new QHelpEngine (path);
   helpEngine->setupData();

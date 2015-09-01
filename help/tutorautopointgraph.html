@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Automatic Point Graph Tutorial</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Digitize Point Graph Tutorial">
+<META NAME="description" CONTENT="Tutorial explains automatically digitizing point graphs">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Automatic Point Graph Tutorial</H2>
+<HR WIDTH="100%">
+<TABLE WIDTH="80%" ALIGN="CENTER" BGCOLOR="pink"><TR><TD>
+Warning: Not all point graphs work well when automatically matching points
+in Engauge. Before going any further, you may want to read about 
+<A HREF="pointmatchrequirements.html">point match requirements</A>.
+</TD></TR></TABLE>
+<H3>Automatically Digitizing A Point Graph Image</H3>
+<P>The following steps automatically digitize a linear cartesian graph with 
+one curve.</P>
+<UL>
+<LI>Import the pointplot.bmp case from the Samples directory, using 
+File/Import as shown. Not shown are the other methods of importing:
+using the <A HREF="commandlineoptions.html">"-import" command line option</A>, 
+by copying and pasting, and by dragging and dropping</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph1.png" ALT=""></P>
+<UL>
+<LI>Click on the Axes Point button before entering axes points. These will 
+define the coordinate system</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph2.png" ALT=""></P>
+<UL>
+<LI>Click on one of the axes to add the first axes point, then enter its 
+graph coordinates</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph3.png" ALT=""></P>
+<UL>
+<LI>Click on one of the axes to add the second axes point, then enter its 
+graph coordinates</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph4.png" ALT=""></P>
+<UL>
+<LI>Click on one of the axes to add the third axes point, then enter its 
+graph coordinates</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph5.png" ALT=""></P>
+<UL>
+<LI>View the processed image by selecting the View/Processed Image
+menu option.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph6.png" ALT=""></P>
+<UL>
+<LI>Tune the discretize settings using the Settings/Discretize 
+menu option, so unwanted information in the image is removed. 
+The dialog that appears is explained at
+<A HREF="dlgdiscretize.html">Discretize Dialog</A>. For the PointPlot
+sample image shown here, the discretize settings are Intensity,
+from 90 to 99.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph7.png" ALT=""></P>
+<UL>
+<LI>Remove the grid lines from the original image using the 
+Settings/Grid Removal menu option, so unwanted information in the
+image is removed.
+The dialog that appears is explained at
+<A HREF="dlggridremoval.html">Grid Removal Dialog</A>. Note that this
+step is unnecessary for the PointPlot sample image shown here.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph8.png" ALT=""></P>
+<UL>
+<LI>Click on the <A NAME="pointmatch">Point Match</A> button.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph9.png" ALT=""></P>
+<UL>
+<LI>Click on the point in the processed image that 
+is the best example of the type of
+point you want. A blue box will appear around the candidate point that
+best matches the sample point you picked. In the example below, the
+leftmost point was chosen as the sample.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph10.png" ALT=""></P>
+<UL>
+<LI>Mark the candidate image point as either Accepted or Rejected
+by pressing the Right Arrow or Space Bar, respectively. If you
+accept the candidate point then it will turn green, otherwise it will
+turn red. A new candidate point will then be displayed. To unmark the
+previously marked point, press the Left Arrow.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph11.png" ALT=""></P>
+<UL>
+<LI>Leave Point Match mode to assign all accepted points to the
+current curve, by clicking on the Select button, or any Digitize
+toolbar button other than Point Match. If no points are acceptable, 
+reject and/or unmark all points before leaving Point Match mode.</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph12.png" ALT=""></P>
+<UL>
+<LI>Export the curve points into a tabular text file using the 
+File/Export As menu option as shown. Not shown are the other methods of
+exporting the curve points from the
+<A HREF="dlgcurvegeometry.html">curve geometry window</A>: copying and pasting,
+and dragging and dropping</LI>
+</UL>
+<P ALIGN="center"><IMG SRC="tutorautopointgraph13.png" ALT=""></P>
+</BODY>
+</HTML>

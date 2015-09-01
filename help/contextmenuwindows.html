@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Adding To Windows Explorer Context Menu</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, context menu, windows">
+<META NAME="description" CONTENT="Adding Engauge Digitizer to Windows context menu">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Adding To Windows Explorer Context Menu</H2>
+<HR WIDTH="100%">
+<H2>Introduction</H2>
+<P>In Windows Explorer a simple right-click on an image file will bring up 
+  a context menu that lists some software applications. Clicking on one 
+  of those applications starts that application, and loads the image 
+  file.</P>
+<P>Engauge Digitizer can be inserted into that context menu, where it
+  is easily available for processing image file formats such as BMP, 
+  GIF, JPEG, PNG and XPM.</P>
+<P>Frequent users of Engauge Digitizer will appreciate the speed of
+  context menus.</P>
+<H2>Steps</H2>
+<P>Follow these ten steps to add Engauge Digitizer to the Windows 
+  Explorer context menu:</P>
+<OL>
+<LI>Open up Windows Explorer</LI>
+<LI>Select <i>Tools</i> / 
+           <i>Folder Options</i> /
+           <i>File Types</i>
+<LI>Select an image file type from the list of registered file types</LI>
+<LI>Click on the <i>Advanced</i> 
+  button</LI>
+<LI>Select the <i>open</i> action</LI>
+<LI>Click on the <i>Edit</i> button</LI>
+<LI>In the "Application used to perform action" field, enter the following
+  line, being careful to include the quotation marks: 
+  <P ALIGN="CENTER">&nbsp;</P>
+  <P ALIGN="CENTER">c:\engauge\digitizer.exe -import "%1"</P>
+  <P ALIGN="CENTER">&nbsp;</P></LI>
+<LI>Click on the <i>OK</i> button
+  to finish editing the open action</LI>
+<LI>Click on the <i>OK</i> button
+  to finish modifying the file type actions</LI>
+<LI>Click on the <i>OK</i> button
+  to finish modifying folder options, or select another image file 
+  type and repeat starting at step 4</LI>
+</OL>
+<P ALIGN="CENTER"><IMG SRC="windowscontexta.jpg" ALT=""></P>
+<P ALIGN="CENTER"><IMG SRC="windowscontextb.jpg" ALT=""></P>
+<P ALIGN="CENTER"><IMG SRC="windowscontextc.jpg" ALT=""></P>
+</BODY>
+</HTML>
