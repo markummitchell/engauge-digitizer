@@ -67,6 +67,7 @@
 #include <QPrinter>
 #include <QSettings>
 #include <QTextStream>
+#include <QtHelp>
 #include <QToolBar>
 #include <QToolButton>
 #include "QtToString.h"
@@ -130,6 +131,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStatusBar ();
   createMenus ();
   createToolBars ();
+  createHelpEngine ();
   createScene ();
   createLoadImageFromUrl ();
   createStateContextBackground ();
@@ -173,6 +175,8 @@ CmdMediator &MainWindow::cmdMediator ()
 
 void MainWindow::createActions()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActions";
+
   createActionsFile ();
   createActionsEdit ();
   createActionsDigitize ();
@@ -183,6 +187,8 @@ void MainWindow::createActions()
 
 void MainWindow::createActionsDigitize ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsDigitize";
+
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
   QPixmap pixmapColorPicker (DigitColorPicker_xpm);
@@ -269,6 +275,8 @@ void MainWindow::createActionsDigitize ()
 
 void MainWindow::createActionsEdit ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsEdit";
+
   m_actionEditUndo = new QAction(tr ("&Undo"), this);
   m_actionEditUndo->setShortcut (QKeySequence::Undo);
   m_actionEditUndo->setStatusTip (tr ("Undo the last operation."));
@@ -314,6 +322,8 @@ void MainWindow::createActionsEdit ()
 
 void MainWindow::createActionsFile ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsFile";
+
   m_actionImport = new QAction(tr ("&Import"), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
   m_actionImport->setStatusTip (tr ("Creates a new document by importing an image."));
@@ -373,8 +383,16 @@ void MainWindow::createActionsFile ()
 
 void MainWindow::createActionsHelp ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsHelp";
+
   m_actionHelpWhatsThis = QWhatsThis::createAction(this);
   m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
+
+  m_actionHelpHelp = new QAction (tr ("Help"), this);
+  m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
+  m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
+                                      "Searchable help documentation"));
+  connect (m_actionHelpHelp, SIGNAL (triggered ()), this, SLOT (slotHelpHelp()));
 
   m_actionHelpChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
   m_actionHelpChecklistGuideWizard->setCheckable (true);
@@ -397,6 +415,8 @@ void MainWindow::createActionsHelp ()
 
 void MainWindow::createActionsSettings ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsSettings";
+
   m_actionSettingsCoords = new QAction (tr ("Coordinates"), this);
   m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
   m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings\n\n"
@@ -462,6 +482,8 @@ void MainWindow::createActionsSettings ()
 
 void MainWindow::createActionsView ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsView";
+
   m_actionViewBackground = new QAction (tr ("Background Toolbar"), this);
   m_actionViewBackground->setCheckable (true);
   m_actionViewBackground->setChecked (true);
@@ -654,6 +676,8 @@ void MainWindow::createActionsView ()
 
 void MainWindow::createCentralWidget ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createCentralWidget";
+
   QWidget *widget = new QWidget;
   setCentralWidget (widget);
   m_layout = new QVBoxLayout;
@@ -662,11 +686,20 @@ void MainWindow::createCentralWidget ()
 
 void MainWindow::createCommandStackShadow ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createCommandStackShadow";
+
   m_cmdStackShadow = new CmdStackShadow;
+}
+
+void MainWindow::createHelpEngine ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpEngine";
 }
 
 void MainWindow::createIcons()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createIcons";
+
   QIcon icon;
   QPixmap icon16 (bannerapp_16);
   QPixmap icon32 (bannerapp_32);
@@ -690,6 +723,8 @@ void MainWindow::createLoadImageFromUrl ()
 
 void MainWindow::createMenus()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createMenus";
+
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionOpen);
@@ -777,6 +812,7 @@ void MainWindow::createMenus()
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
   m_menuHelp->addAction (m_actionHelpWhatsThis);
+  m_menuHelp->addAction (m_actionHelpHelp);
   m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
   m_menuHelp->addAction (m_actionHelpTutorialVideo);
   m_menuHelp->addAction (m_actionHelpAbout);
@@ -786,6 +822,8 @@ void MainWindow::createMenus()
 
 void MainWindow::createSettingsDialogs ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createSettingsDialogs";
+
   m_dlgSettingsCoords = new DlgSettingsCoords (*this);
   m_dlgSettingsCurveAddRemove = new DlgSettingsCurveAddRemove (*this);
   m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
@@ -811,6 +849,8 @@ void MainWindow::createSettingsDialogs ()
 
 void MainWindow::createScene ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createScene";
+
   m_scene = new GraphicsScene (this);
   m_view = new GraphicsView (m_scene, *this);
   m_layout->addWidget (m_view);
@@ -818,11 +858,15 @@ void MainWindow::createScene ()
 
 void MainWindow::createStateContextBackground ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextBackground";
+
   m_backgroundStateContext = new BackgroundStateContext (*this);
 }
 
 void MainWindow::createStateContextDigitize ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextDigitize";
+
   m_digitizeStateContext = new DigitizeStateContext (*this,
                                                      *m_view,
                                                      m_isGnuplot);
@@ -830,6 +874,8 @@ void MainWindow::createStateContextDigitize ()
 
 void MainWindow::createStateContextTransformation ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextTransformation";
+
   ENGAUGE_CHECK_PTR (m_scene);
 
   m_transformationStateContext = new TransformationStateContext (*m_scene);
@@ -837,6 +883,8 @@ void MainWindow::createStateContextTransformation ()
 
 void MainWindow::createStatusBar ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStatusBar";
+
   m_statusBar = new StatusBar (*statusBar ());
   connect (this, SIGNAL (signalZoom(int)), m_statusBar, SLOT (slotZoom(int)));
   connect (m_statusBar, SIGNAL (signalZoom (int)), this, SLOT (slotViewZoom (int)));
@@ -844,6 +892,8 @@ void MainWindow::createStatusBar ()
 
 void MainWindow::createToolBars ()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createToolBars";
+
   const int VIEW_SIZE = 22;
 
   // Background toolbar widgets
@@ -2035,6 +2085,12 @@ void MainWindow::slotHelpAbout()
 
   DlgAbout dlg (*this);
   dlg.exec ();
+}
+
+void MainWindow::slotHelpHelp ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpHelp";
+
 }
 
 void MainWindow::slotHelpTutorialVideo()

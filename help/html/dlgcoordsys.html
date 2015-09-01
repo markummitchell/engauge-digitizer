@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Engauge Digitizer - Coordinates Dialog</TITLE>
+<META NAME="keywords" CONTENT="Engauge Digitizer, browser based documentation, online manual, Coordinates Dialog">
+<META NAME="description" CONTENT="Coordinates dialog window select coordinate system settings">
+</HEAD>
+<BODY>
+<H2>
+  <A HREF="index.html">
+    <IMG SRC="img/animation.png" ALIGN=MIDDLE ALT="" STYLE="border: 0px"></A>
+  Engauge Digitizer - Coordinates Dialog</H2>
+<HR WIDTH="100%">
+<P>
+When a scale bar is used, there is no coordinate system to worry about. 
+However, when axes points are used there are two coordinates involved.
+</P>
+<P>
+Engauge Digitizer initially assumes that the two coordinates are linear and 
+cartesian (linear X and Y). This assumption is the default since most
+graphs follow this behavior.
+</P>
+<P>
+The coordinates dialog is used to select other coordinate systems. 
+The coordinates may be polar (Angle and Radius) rather than cartesian. The
+coordinates may also be logarithmic rather than linear.
+</P>
+<H3>Cartesian Coordinates</H3>
+<P>
+Either cartesian coordinate may be either linear or logarithmic.
+</P>
+<P>
+Engauge does not need to know the units of either cartesian coordinate.
+</P>
+<H3>Polar Coordinates</H3>
+<P>
+Only the radius coordinate may be logarithmic in a polar plot.
+</P>
+<P>
+Engauge needs to know the units of the angle coordinate. By default,
+the polar angle units are degrees. They may also be changed to
+gradians or radians. In any case, the angle coordinate must be linear, and cannot 
+be logarithmic.
+</P>
+<P>
+Normally, the radius at the origin of a polar plot is zero. However, a nonzero value may be 
+appropriate if the radial units are decibels, and in some other cases.
+</P>
+<H3>Dialog</H3>
+<P>
+The coordinate system settings for a cartesian graph with linear X
+values, and logarithmic Y values, are shown below:
+</P>
+<P ALIGN="CENTER">
+&nbsp;&nbsp;&nbsp;&nbsp;<IMG ALT="" SRC="img/dlgcoordsys1.png">&nbsp;&nbsp;&nbsp;&nbsp;
+</P>
+</BODY>
+</HTML>

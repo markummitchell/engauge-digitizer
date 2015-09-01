@@ -407,7 +407,7 @@ SOURCES += \
 
 TARGET = ../bin/engauge
 
-QT += core gui network printsupport widgets xml
+QT += core gui network printsupport widgets xml help
 
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Background \

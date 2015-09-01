@@ -408,7 +408,8 @@ SOURCES += \
 
 TARGET = ../bin/TEST
 
-QT += core gui network printsupport testlib widgets xml
+QT += core gui network printsupport testlib widgets xml help
+
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Background \
                Callback \

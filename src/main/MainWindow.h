@@ -41,6 +41,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
+class QHelpEngineCore;
 class QMenu;
 class QSettings;
 class QTextStream;
@@ -180,6 +181,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
+  void slotHelpHelp();
   void slotHelpTutorialVideo();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
@@ -239,6 +241,7 @@ private:
   void createActionsView ();
   void createCentralWidget ();
   void createCommandStackShadow ();
+  void createHelpEngine ();
   void createIcons();
   void createLoadImageFromUrl ();
   void createMenus();
@@ -368,6 +371,7 @@ private:
   QMenu *m_menuHelp;
   QAction *m_actionHelpAbout;
   QAction *m_actionHelpChecklistGuideWizard;
+  QAction *m_actionHelpHelp;
   QAction *m_actionHelpTutorialVideo;
   QAction *m_actionHelpWhatsThis;
 
@@ -417,6 +421,9 @@ private:
   QString m_startingDocumentSnapshot;
 
   bool m_isGnuplot;
+
+  // Help engine
+  QHelpEngineCore *m_helpEngine;
 };
 
 #endif // MAIN_WINDOW_H

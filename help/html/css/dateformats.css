@@ -1,0 +1,33 @@
+td { 
+padding: 1px;
+border-width: 1px;
+border-color: black;
+border-style: solid;
+border-collapse: collapse;
+vertical-align: top;
+}
+td.invis {
+border-width: 0px;
+}
+td.info {
+width: 240px;
+padding-left: 5px;
+font-size: 70%;
+background-color: white;
+}
+td.mainheader {
+text-align: center;
+}
+td.header {
+width: 240px;
+padding-left: 5px;
+}
+table { 
+margin-left: auto;
+margin-right: auto;
+border-collapse: collapse;
+}
+table.colored {
+background-color: tan;
+}
+
