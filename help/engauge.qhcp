@@ -3,12 +3,12 @@
     <docFiles>
         <generate>
             <file>
-                <input>qgraphicshelpexample.qhp</input>
-                <output>qgraphicshelpexample.qch</output>
+                <input>engauge.qhp</input>
+                <output>engauge.qch</output>
             </file>
         </generate>
         <register>
-            <file>qgraphicshelpexample.qch</file>
+            <file>engauge.qch</file>
         </register>
     </docFiles>
 </QHelpCollectionProject>
