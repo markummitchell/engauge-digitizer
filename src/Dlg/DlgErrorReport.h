@@ -20,6 +20,9 @@ class DlgErrorReport : public QDialog
 
   ~DlgErrorReport();
 
+  /// Xml to be uploaded. Includes document if user has approved
+  QString xmlToUpload() const;
+
  private slots:
   void slotDocumentCheckboxChanged(int);
   void slotSend();
@@ -37,6 +40,7 @@ class DlgErrorReport : public QDialog
   QPushButton *m_btnCancel;
   QString m_xmlWithoutDocument;
   QString m_xmlWithDocument;
+  QString m_xmlToUpload; // Either m_xmlWithoutDocument or m_xmlWithDocument
 };
 
 #endif // DLG_ERROR_REPORT_H

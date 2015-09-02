@@ -177,6 +177,7 @@ HEADERS  += \
     main/MainWindow.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
+    Network/NetworkClient.h \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Point/Point.h \
@@ -378,6 +379,7 @@ SOURCES += \
     main/MainWindow.cpp \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
+    Network/NetworkClient.cpp \
     Ordinal/OrdinalGenerator.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \

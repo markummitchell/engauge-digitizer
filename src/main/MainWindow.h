@@ -36,6 +36,7 @@ class GraphicsScene;
 class GraphicsView;
 class HelpWindow;
 class LoadImageFromUrl;
+class NetworkClient;
 class QAction;
 class QActionGroup;
 class QCloseEvent;
@@ -244,6 +245,7 @@ private:
   void createIcons();
   void createLoadImageFromUrl ();
   void createMenus();
+  void createNetwork();
   void createScene ();
   void createSettingsDialogs ();
   void createStateContextBackground();
@@ -418,8 +420,9 @@ private:
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;
 
-  // Serialized snapshot of document at startup. This is inserted into the error report(s) unless user decides not to for privacy reasons
-  QString m_startingDocumentSnapshot;
+  // Crash reports
+  QString m_startingDocumentSnapshot; // Serialized snapshot of document at startup. Included in error report if user approves
+  NetworkClient *m_networkClient;
 
   bool m_isGnuplot;
 };

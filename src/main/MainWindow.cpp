@@ -45,6 +45,7 @@
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "NetworkClient.h"
 #include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
@@ -134,6 +135,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createToolBars ();
   createHelpWindow ();
   createScene ();
+  createNetwork ();
   createLoadImageFromUrl ();
   createStateContextBackground ();
   createStateContextDigitize ();
@@ -831,6 +833,13 @@ void MainWindow::createMenus()
   updateRecentFileList();
 }
 
+void MainWindow::createNetwork ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createNetwork";
+
+  m_networkClient = new NetworkClient ();
+}
+
 void MainWindow::createSettingsDialogs ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createSettingsDialogs";
@@ -1355,7 +1364,13 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                                                 true);
     DlgErrorReport dlg (reportWithoutDocument,
                         reportWithDocument);
-    dlg.exec();
+
+    // Ask user if report should be uploaded, and if the document is included when it is uploaded
+    if (dlg.exec() == QDialog::Accepted) {
+
+      // Upload the error report to the server
+      m_networkClient->uploadErrorReport (dlg.xmlToUpload());
+    }
   }
 }
 
