@@ -94,12 +94,13 @@ void DlgErrorReport::slotDocumentCheckboxChanged(int /* state */)
 void DlgErrorReport::slotSend()
 {
   // This is the one path that allows information to be sent to the server
-  setResult (QDialog::Accepted);
   if (m_chkWithDocument->isChecked()) {
     m_xmlToUpload = m_xmlWithDocument;
   } else {
     m_xmlToUpload = m_xmlWithoutDocument;
   }
+
+  done (QDialog::Accepted);
 
   close();
 }

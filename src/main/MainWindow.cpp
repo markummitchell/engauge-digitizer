@@ -837,7 +837,7 @@ void MainWindow::createNetwork ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createNetwork";
 
-  m_networkClient = new NetworkClient ();
+  m_networkClient = new NetworkClient (this);
 }
 
 void MainWindow::createSettingsDialogs ()

@@ -1,6 +1,7 @@
 #ifndef NETWORK_CLIENT_H
 #define NETWORK_CLIENT_H
 
+#include <QByteArray>
 #include <QNetworkAccessManager>
 
 class QNetworkReply;
@@ -12,7 +13,7 @@ class NetworkClient : public QNetworkAccessManager
 
  public:
   /// Single constructor
-  NetworkClient();
+  NetworkClient(QObject *parent);
 
   /// Upload the error report asynchronously
   void uploadErrorReport (const QString &report);
@@ -21,6 +22,9 @@ class NetworkClient : public QNetworkAccessManager
 
   /// Cleanup after response is returned
   void slotFinished (QNetworkReply *);
+
+ private:
+  NetworkClient();
 
 };
 

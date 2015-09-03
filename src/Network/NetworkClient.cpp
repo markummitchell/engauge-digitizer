@@ -3,9 +3,10 @@
 #include <QNetworkRequest>
 
 
-const QString SERVER_URL ("http://localhost");
+const QString SERVER_URL ("http://localhost/receive_crash_report.php");
 
-NetworkClient::NetworkClient ()
+NetworkClient::NetworkClient (QObject *parent) :
+  QNetworkAccessManager (parent)
 {
   connect (this, SIGNAL (finished (QNetworkReply *)), this, SLOT (slotFinished (QNetworkReply *)));
 }
@@ -17,14 +18,15 @@ void NetworkClient::slotFinished (QNetworkReply *reply)
 
 void NetworkClient::uploadErrorReport (const QString &report)
 {
-  // Put report into byte array
+  // Put report into byte array, which must persist until the finished signal
+  // is received according to QNetworkAccessManager::post documentation
   QByteArray postData = report.toLatin1();
 
   QNetworkRequest request (SERVER_URL);
-  request.setRawHeader (QString ("Content-Type").toLatin1(),
-                        QString ("multipart/form-data; boundary=margin").toLatin1());
-  request.setRawHeader (QString ("Content-Length").toLatin1(),
-                        QString::number (postData.length()).toLatin1());
+  request.setHeader (QNetworkRequest::ContentTypeHeader,
+                     QVariant (QString ("text/xml")));
+  request.setHeader (QNetworkRequest::ContentLengthHeader,
+                     QVariant (qulonglong (postData.size())));
 
   post(request,
        postData);
