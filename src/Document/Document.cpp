@@ -416,6 +416,10 @@ void Document::loadImage(QXmlStreamReader &reader)
     }
 
   } else {
+
+    // This point can be reached if:
+    // 1) File is broken
+    // 2) Bad character is in text, and NetworkClient::cleanXml did not do its job
     reader.raiseError ("Cannot read image data");
   }
 }

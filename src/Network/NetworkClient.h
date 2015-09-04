@@ -26,6 +26,8 @@ class NetworkClient : public QNetworkAccessManager
  private:
   NetworkClient();
 
+  QString cleanXml (const QString &before);
+
 };
 
 #endif // NETWORK_CLIENT_H
