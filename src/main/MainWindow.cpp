@@ -1600,11 +1600,20 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 {
   settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
-  // Window geometry
+  // Main window geometry
   resize (settings.value (SETTINGS_SIZE,
                           QSize (400, 400)).toSize ());
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
+
+  // Help window geometry
+  QSize helpSize = settings.value (SETTINGS_HELP_SIZE,
+                                   QSize (900, 600)).toSize();
+  m_helpWindow->resize (helpSize);
+  if (settings.contains (SETTINGS_HELP_POS)) {
+    QPoint helpPos = settings.value (SETTINGS_HELP_POS).toPoint();
+    m_helpWindow->move (helpPos);
+  }
 
   // Checklist guide wizard
   m_actionHelpChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
@@ -1680,6 +1689,8 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
+  settings.setValue (SETTINGS_HELP_SIZE, m_helpWindow->size());
+  settings.setValue (SETTINGS_HELP_POS, m_helpWindow->pos ());
   if (m_dockChecklistGuide->isFloating()) {
 
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, Qt::NoDockWidgetArea);

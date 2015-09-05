@@ -38,4 +38,3 @@ HelpWindow::HelpWindow(QWidget *parent) :
 
   setWidget (splitter);
 }
-
