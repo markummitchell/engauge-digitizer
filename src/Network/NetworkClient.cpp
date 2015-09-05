@@ -4,7 +4,7 @@
 #include <QNetworkRequest>
 
 
-const QString SERVER_URL ("http://localhost/receive_crash_report.php");
+const QString SERVER_URL ("http://engaugedigitizer.net/receive_crash_report.php");
 
 NetworkClient::NetworkClient (QObject *parent) :
   QNetworkAccessManager (parent)

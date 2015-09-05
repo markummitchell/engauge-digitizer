@@ -29,10 +29,15 @@
             <section title="Answers for users who are having problems">
                 <section title="What happened to my image?" ref="answerdiscretizing.html"></section>
                 <section title="The coordinates are wrong, how do I fix them?" ref="fixingaxispoints.html"></section>
-                <section title="The coordinates are wrong, how do I fix them?" ref="fixingaxispoints.html"></section>
             </section>         
         </toc>
         <keywords>
+	  <keyword name="Digitize line" ref="./.php"/> 
+	  <keyword name="Digitize points" ref="./.php"/> 
+	  <keyword name="Export digitized points" ref="./.php"/> 
+	  <keyword name="Import image" ref="./.php"/> 
+	  <keyword name="View filtered image" ref="./.php"/> 
+	  <keyword name="View original image" ref="./.php"/> 
         </keywords>
         <files>
             <file>animation.png</file>
@@ -68,10 +73,6 @@
             <file>dlgdiscretize.html</file>
             <file>dlgexport1.png</file>
             <file>dlgexport.html</file>
-            <file>dlggriddisplay1.png</file>
-            <file>dlggriddisplay.html</file>
-            <file>dlggridremoval1.png</file>
-            <file>dlggridremoval.html</file>
             <file>dlgmeasuregeometry1.png</file>
             <file>dlgmeasuregeometry.html</file>
             <file>dlgmeasures1.png</file>
@@ -99,7 +100,6 @@
             <file>tutorautolinegraph5.png</file>
             <file>tutorautolinegraph6.png</file>
             <file>tutorautolinegraph7.png</file>
-            <file>tutorautolinegraph8.png</file>
             <file>tutorautolinegraph9.png</file>
             <file>tutorautolinegraph.html</file>
             <file>tutorautopointgraph10.png</file>
@@ -113,7 +113,6 @@
             <file>tutorautopointgraph5.png</file>
             <file>tutorautopointgraph6.png</file>
             <file>tutorautopointgraph7.png</file>
-            <file>tutorautopointgraph8.png</file>
             <file>tutorautopointgraph9.png</file>
             <file>tutorautopointgraph.html</file>
             <file>tutormanlinegraph1.png</file>
