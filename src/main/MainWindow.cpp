@@ -80,6 +80,7 @@
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
+#include "TutorialLines.h"
 #include "Version.h"
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
@@ -134,6 +135,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createMenus ();
   createToolBars ();
   createHelpWindow ();
+  createTutorials ();
   createScene ();
   createNetwork ();
   createLoadImageFromUrl ();
@@ -397,6 +399,12 @@ void MainWindow::createActionsHelp ()
 
   m_actionHelpWhatsThis = QWhatsThis::createAction(this);
   m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
+
+  m_actionHelpTutorialVideo = new QAction (tr ("Tutorial for line graph"), this);
+  m_actionHelpTutorialVideo->setStatusTip (tr ("Play tutorial showing steps for digitizing curves with lines"));
+  m_actionHelpTutorialVideo->setWhatsThis (tr ("Line Graph Tutorial\n\n"
+                                               "Play tutorial showing steps for digitizing curves with lines between the points"));
+  connect (m_actionHelpTutorialVideo, SIGNAL (triggered ()), this, SLOT (slotHelpTutorialLines()));
 
   m_actionHelpHelp = new QAction (tr ("Help"), this);
   m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
@@ -826,6 +834,7 @@ void MainWindow::createMenus()
   m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
   m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
+  m_menuHelp->addAction (m_actionHelpTutorialVideo);
   m_menuHelp->addAction (m_actionHelpHelp);
   m_menuHelp->addAction (m_actionHelpTutorialVideo);
   m_menuHelp->addAction (m_actionHelpAbout);
@@ -987,6 +996,16 @@ void MainWindow::createToolBars ()
   // Checklist guide starts out hidden. It will be positioned in settingsRead
   m_dockChecklistGuide = new ChecklistGuide (this);
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
+}
+
+void MainWindow::createTutorials ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createTutorials";
+
+  m_tutorialLines = new TutorialLines (this);
+  m_tutorialLines->setModal (true);
+  m_tutorialLines->setMinimumSize (500, 400);
+  m_tutorialLines->hide();
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -2128,8 +2147,8 @@ void MainWindow::slotHelpTutorialVideo()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpTutorialVideo";
 
-  QString url = "http://mitchellscience.net/Videos/venturi/cont_172_17_275_104.mpg";
-  QDesktopServices::openUrl (QUrl (url));
+  m_tutorialLines->show ();
+  m_tutorialLines->exec ();
 }
 
 void MainWindow::slotKeyPress (Qt::Key key,

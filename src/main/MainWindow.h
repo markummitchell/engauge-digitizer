@@ -50,6 +50,7 @@ class QToolBar;
 class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
+class TutorialLines;
 class ViewPointStyle;
 class ViewSegmentFilter;
 
@@ -253,6 +254,7 @@ private:
   void createStateContextTransformation();
   void createStatusBar();
   void createToolBars();
+  void createTutorials();
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -372,6 +374,7 @@ private:
   QMenu *m_menuHelp;
   QAction *m_actionHelpAbout;
   QAction *m_actionHelpChecklistGuideWizard;
+  QAction *m_actionViewTutorialLines;
   QAction *m_actionHelpHelp;
   QAction *m_actionHelpTutorialVideo;
   QAction *m_actionHelpWhatsThis;
@@ -396,6 +399,7 @@ private:
   ChecklistGuide *m_dockChecklistGuide;
 
   HelpWindow *m_helpWindow;
+  TutorialLines *m_tutorialLines;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   CmdStackShadow *m_cmdStackShadow; /// Shadow of CmdMediator, for commands loaded from error report file

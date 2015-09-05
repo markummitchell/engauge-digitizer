@@ -202,6 +202,8 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
+    Tutorial/TutorialAbstract.h \
+    Tutorial/TutorialLines.h \
     include/ValuesVectorXOrY.h \
     util/Version.h \
     View/ViewPointStyle.h \
@@ -401,6 +403,8 @@ SOURCES += \
     Transformation/TransformationStateContext.cpp \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
+    Tutorial/TutorialAbstract.cpp \
+    Tutorial/TutorialLines.cpp \
     util/Version.cpp \
     View/ViewPointStyle.cpp \
     View/ViewPreview.cpp \
@@ -449,6 +453,7 @@ INCLUDEPATH += Background \
                Spline \
                StatusBar \
                Transformation \
+               Tutorial \
                util \
                View
 
