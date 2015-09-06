@@ -80,7 +80,7 @@
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
-#include "TutorialLines.h"
+#include "TutorialDlg.h"
 #include "Version.h"
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
@@ -135,7 +135,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createMenus ();
   createToolBars ();
   createHelpWindow ();
-  createTutorials ();
+  createTutorial ();
   createScene ();
   createNetwork ();
   createLoadImageFromUrl ();
@@ -400,11 +400,12 @@ void MainWindow::createActionsHelp ()
   m_actionHelpWhatsThis = QWhatsThis::createAction(this);
   m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
 
-  m_actionHelpTutorialVideo = new QAction (tr ("Tutorial for line graph"), this);
-  m_actionHelpTutorialVideo->setStatusTip (tr ("Play tutorial showing steps for digitizing curves with lines"));
-  m_actionHelpTutorialVideo->setWhatsThis (tr ("Line Graph Tutorial\n\n"
-                                               "Play tutorial showing steps for digitizing curves with lines between the points"));
-  connect (m_actionHelpTutorialVideo, SIGNAL (triggered ()), this, SLOT (slotHelpTutorialLines()));
+  m_actionHelpTutorial = new QAction (tr ("Tutorial"), this);
+  m_actionHelpTutorial->setStatusTip (tr ("Play tutorial showing steps for digitizing curves"));
+  m_actionHelpTutorial->setWhatsThis (tr ("Tutorial\n\n"
+                                          "Play tutorial showing steps for digitizing points from curves drawn with lines "
+                                          "and/or point"));
+  connect (m_actionHelpTutorial, SIGNAL (triggered ()), this, SLOT (slotHelpTutorial()));
 
   m_actionHelpHelp = new QAction (tr ("Help"), this);
   m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
@@ -412,12 +413,6 @@ void MainWindow::createActionsHelp ()
   m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
                                       "Searchable help documentation"));
   // This action gets connected directly to the QDockWidget when that is created
-
-  m_actionHelpTutorialVideo = new QAction (tr ("Tutorial Video"), this);
-  m_actionHelpTutorialVideo->setStatusTip (tr ("Play a tutorial video"));
-  m_actionHelpTutorialVideo->setWhatsThis (tr ("Tutorial Video\n\n"
-                                               "Play a tutorial video that shows the various methods of using Engauge to digitize data"));
-  connect (m_actionHelpTutorialVideo, SIGNAL (triggered ()), this, SLOT (slotHelpTutorialVideo()));
 
   m_actionHelpAbout = new QAction(tr ("About Engauge"), this);
   m_actionHelpAbout->setStatusTip (tr ("About the application."));
@@ -834,9 +829,8 @@ void MainWindow::createMenus()
   m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
   m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
-  m_menuHelp->addAction (m_actionHelpTutorialVideo);
+  m_menuHelp->addAction (m_actionHelpTutorial);
   m_menuHelp->addAction (m_actionHelpHelp);
-  m_menuHelp->addAction (m_actionHelpTutorialVideo);
   m_menuHelp->addAction (m_actionHelpAbout);
 
   updateRecentFileList();
@@ -998,14 +992,14 @@ void MainWindow::createToolBars ()
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
 }
 
-void MainWindow::createTutorials ()
+void MainWindow::createTutorial ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createTutorials";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createTutorial";
 
-  m_tutorialLines = new TutorialLines (this);
-  m_tutorialLines->setModal (true);
-  m_tutorialLines->setMinimumSize (500, 400);
-  m_tutorialLines->hide();
+  m_tutorialDlg = new TutorialDlg (this);
+  m_tutorialDlg->setModal (true);
+  m_tutorialDlg->setMinimumSize (500, 400);
+  m_tutorialDlg->hide();
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -2143,12 +2137,12 @@ void MainWindow::slotHelpAbout()
   dlg.exec ();
 }
 
-void MainWindow::slotHelpTutorialVideo()
+void MainWindow::slotHelpTutorial()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpTutorialVideo";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpTutorial";
 
-  m_tutorialLines->show ();
-  m_tutorialLines->exec ();
+  m_tutorialDlg->show ();
+  m_tutorialDlg->exec ();
 }
 
 void MainWindow::slotKeyPress (Qt::Key key,

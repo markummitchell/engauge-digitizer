@@ -10,7 +10,6 @@
 
 class CmdAbstractBase;
 class CmdMediator;
-class DigitizeStateAbstractBase;
 class MainWindow;
 class QUndoCommand;
 

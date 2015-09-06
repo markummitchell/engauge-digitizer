@@ -203,8 +203,10 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
-    Tutorial/TutorialAbstract.h \
-    Tutorial/TutorialLines.h \
+    Tutorial/TutorialDlg.h \
+    Tutorial/TutorialStateAbstractBase.h \
+    Tutorial/TutorialStateContext.h \
+    Tutorial/TutorialStateIntroduction.h \
     include/ValuesVectorXOrY.h \
     util/Version.h \
     View/ViewPointStyle.h \
@@ -404,8 +406,10 @@ SOURCES += \
     Transformation/TransformationStateContext.cpp \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
-    Tutorial/TutorialAbstract.cpp \
-    Tutorial/TutorialLines.cpp \
+    Tutorial/TutorialDlg.cpp \
+    Tutorial/TutorialStateAbstractBase.cpp \
+    Tutorial/TutorialStateContext.cpp \
+    Tutorial/TutorialStateIntroduction.cpp \
     util/Version.cpp \
     View/ViewPointStyle.cpp \
     View/ViewPreview.cpp \

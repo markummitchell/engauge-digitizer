@@ -50,7 +50,7 @@ class QToolBar;
 class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
-class TutorialLines;
+class TutorialDlg;
 class ViewPointStyle;
 class ViewSegmentFilter;
 
@@ -183,7 +183,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotHelpAbout();
-  void slotHelpTutorialVideo();
+  void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
   void slotMouseMove (QPointF);
@@ -254,7 +254,7 @@ private:
   void createStateContextTransformation();
   void createStatusBar();
   void createToolBars();
-  void createTutorials();
+  void createTutorial();
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -374,9 +374,8 @@ private:
   QMenu *m_menuHelp;
   QAction *m_actionHelpAbout;
   QAction *m_actionHelpChecklistGuideWizard;
-  QAction *m_actionViewTutorialLines;
   QAction *m_actionHelpHelp;
-  QAction *m_actionHelpTutorialVideo;
+  QAction *m_actionHelpTutorial;
   QAction *m_actionHelpWhatsThis;
 
   QVBoxLayout *m_layout;
@@ -399,7 +398,7 @@ private:
   ChecklistGuide *m_dockChecklistGuide;
 
   HelpWindow *m_helpWindow;
-  TutorialLines *m_tutorialLines;
+  TutorialDlg *m_tutorialDlg;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
   CmdStackShadow *m_cmdStackShadow; /// Shadow of CmdMediator, for commands loaded from error report file
