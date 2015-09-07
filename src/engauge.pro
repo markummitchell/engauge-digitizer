@@ -202,6 +202,9 @@ HEADERS  += \
     Transformation/TransformationStateContext.h \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
+    Tutorial/TutorialButton.h \
+    Tutorial/TutorialButtonRect.h \
+    Tutorial/TutorialButtonText.h \
     Tutorial/TutorialDlg.h \
     Tutorial/TutorialStateAbstractBase.h \
     Tutorial/TutorialStateContext.h \
@@ -405,6 +408,9 @@ SOURCES += \
     Transformation/TransformationStateContext.cpp \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
+    Tutorial/TutorialButton.cpp \
+    Tutorial/TutorialButtonRect.cpp \
+    Tutorial/TutorialButtonText.cpp \
     Tutorial/TutorialDlg.cpp \
     Tutorial/TutorialStateAbstractBase.cpp \
     Tutorial/TutorialStateContext.cpp \
