@@ -1,17 +1,24 @@
-#include "Logging.h"
+#include "Logger.h"
 #include "TutorialButton.h"
 #include "TutorialButtonRect.h"
+#include "TutorialButtonText.h"
 
-TutorialButtonRect::TutorialButtonRect (TutorialButton &tutorialbutton) :
+TutorialButtonText::TutorialButtonText (TutorialButton &tutorialButton,
+                                        const QString &text,
+                                        TutorialButtonRect *rect) :
+  QGraphicsTextItem (text,
+                     rect),
   m_tutorialButton (tutorialButton)
 {
+  setAcceptHoverEvents(true);
+  setFlag (QGraphicsItem::ItemIsSelectable);
 }
 
-void TutorialButtonRect::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
+void TutorialButtonText::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialButtonRect::mouseReleaseEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialButtonText::mouseReleaseEvent";
 
-  m_tutorialButton->handleTriggered ();
+  QGraphicsTextItem::mouseReleaseEvent (event);
+
+  m_tutorialButton.handleTriggered ();
 }
-
-

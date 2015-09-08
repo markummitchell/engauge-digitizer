@@ -1,18 +1,48 @@
 #include "EngaugeAssert.h"
+#include "Logger.h"
+#include <QTimer>
 #include "TutorialStateAbstractBase.h"
+#include "TutorialStateAxisPoints.h"
 #include "TutorialStateContext.h"
+#include "TutorialStateCurveType.h"
 #include "TutorialStateIntroduction.h"
+#include "TutorialStatePointMatch.h"
+#include "TutorialStateSegmentFill.h"
+
+const int TIMER_INTERVAL = 1;
 
 TutorialStateContext::TutorialStateContext (TutorialDlg &tutorialDlg) :
     m_tutorialDlg (tutorialDlg)
 {
+  createStates ();
+  createTimer ();
+}
+
+void TutorialStateContext::createStates ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::createStates";
+
   // These states follow the same order as the TutorialState enumeration
+  m_states.insert (TUTORIAL_STATE_AXIS_POINTS , new TutorialStateAxisPoints   (*this));
+  m_states.insert (TUTORIAL_STATE_CURVE_TYPE  , new TutorialStateCurveType    (*this));
   m_states.insert (TUTORIAL_STATE_INTRODUCTION, new TutorialStateIntroduction (*this));
+  m_states.insert (TUTORIAL_STATE_POINT_MATCH , new TutorialStatePointMatch   (*this));
+  m_states.insert (TUTORIAL_STATE_SEGMENT_FILL, new TutorialStateSegmentFill  (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_TUTORIAL_STATES);
 
   m_currentState = NUM_TUTORIAL_STATES; // Value that forces a transition right away;
-  requestStateTransition (TUTORIAL_STATE_INTRODUCTION);
+  requestImmediateStateTransition (TUTORIAL_STATE_INTRODUCTION);
   completeRequestedStateTransitionIfExists ();
+}
+
+void TutorialStateContext::createTimer ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::createTimer";
+
+  m_timer = new QTimer ();
+  m_timer->setInterval (TIMER_INTERVAL);
+  m_timer->setSingleShot (true);
+  connect (m_timer, SIGNAL (timeout ()), this, SLOT (slotTimeout ()));
 }
 
 void TutorialStateContext::completeRequestedStateTransitionIfExists ()
@@ -33,9 +63,27 @@ void TutorialStateContext::completeRequestedStateTransitionIfExists ()
   }
 }
 
-void TutorialStateContext::requestStateTransition (TutorialState tutorialState)
+void TutorialStateContext::requestDelayedStateTransition (TutorialState tutorialState)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::requestDelayedStateTransition";
+
   m_requestedState = tutorialState;
+
+  m_timer->start ();
+}
+
+void TutorialStateContext::requestImmediateStateTransition (TutorialState tutorialState)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::requestImmediateStateTransition";
+
+  m_requestedState = tutorialState;
+}
+
+void TutorialStateContext::slotTimeout()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::slotTimeout";
+
+  completeRequestedStateTransitionIfExists();
 }
 
 TutorialDlg &TutorialStateContext::tutorialDlg()

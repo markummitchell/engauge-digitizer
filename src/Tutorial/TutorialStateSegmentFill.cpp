@@ -6,16 +6,16 @@
 #include "TutorialButton.h"
 #include "TutorialDlg.h"
 #include "TutorialStateContext.h"
-#include "TutorialStateIntroduction.h"
+#include "TutorialStateSegmentFill.h"
 
-TutorialStateIntroduction::TutorialStateIntroduction (TutorialStateContext &context) : 
+TutorialStateSegmentFill::TutorialStateSegmentFill (TutorialStateContext &context) : 
   TutorialStateAbstractBase (context)
 {
 }
 
-void TutorialStateIntroduction::begin ()
+void TutorialStateSegmentFill::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateIntroduction::begin ()";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::begin ()";
 
   m_background = new QGraphicsPixmapItem (QPixmap (":/engauge/img/SpreadsheetsForDoc.png"));
   m_background->setPos (0, 0);
@@ -31,45 +31,53 @@ void TutorialStateIntroduction::begin ()
   m_text1->setPos (240, 180);
   context().tutorialDlg().scene().addItem (m_text1);
 
-  m_text2 = new QGraphicsTextItem ("The digitized curve points can be\n"
-                                   "exported, as numbers, to other software tools");
-  m_text2->setPos (210, 330);
-  context().tutorialDlg().scene().addItem (m_text2);
+  QSize backgroundSize = context().tutorialDlg().backgroundSize();
+
+  m_previous = new TutorialButton ("Previous",
+                                   context().tutorialDlg().scene());
+  m_previous->setGeometry (QPoint (buttonMargin (),
+                                   backgroundSize.height() - buttonMargin() - m_previous->size().height()));
+  connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
 
   m_next = new TutorialButton ("Next",
                                context().tutorialDlg().scene());
-  QSize backgroundSize = context().tutorialDlg().backgroundSize();
   m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
                                backgroundSize.height () - buttonMargin () - m_next->size ().height ()));
   connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
 }
 
-void TutorialStateIntroduction::end ()
+void TutorialStateSegmentFill::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateIntroduction::end ()";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::end ()";
 
   context().tutorialDlg().scene().removeItem (m_background);
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
-  context().tutorialDlg().scene().removeItem (m_text2);
   // TutorialButton removes itself from the scene
 
   delete m_background;
   delete m_text0;
   delete m_text1;
-  delete m_text2;
   delete m_next;
+  delete m_previous;
 
   m_background = 0;
   m_text0 = 0;
   m_text1 = 0;
-  m_text2 = 0;
   m_next = 0;
+  m_previous = 0;
 }
 
-void TutorialStateIntroduction::slotNext ()
+void TutorialStateSegmentFill::slotNext ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateIntroduction::slotNext";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::slotNextCurves";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_AXIS_POINTS);
+//  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
+}
+
+void TutorialStateSegmentFill::slotPrevious ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::slotPrevious";
+
+  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
 }

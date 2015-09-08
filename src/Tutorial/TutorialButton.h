@@ -16,28 +16,29 @@ class TutorialButton : public QObject
   Q_OBJECT;
 
  public:
-  /// Single constructor
-  TutorialButton(const QPoint &pos,
-                 const QString &text,
+  /// Single constructor. Position is set after creation using setGeometry
+  TutorialButton(const QString &text,
                  QGraphicsScene &scene);
+  ~TutorialButton();
 
   /// Callback to be called when button was triggered by mouse event
   void handleTriggered();
+
+  /// Set the position. This is called after creation so screen extent is available for positioning calculations
+  void setGeometry (const QPoint &pos);
+
+  /// Size of this button
+  QSize size () const;
 
  signals:
   /// Signal that button was triggered
   void signalTriggered ();
 
- private slots:
-  void slotTriggered ();
-
  private:
   TutorialButton();
 
   void createRect (QGraphicsScene &scene);
-  void createText (const QString &text,
-                   QGraphicsScene &scene);
-  void setGeometry (const QPoint &pos);
+  void createText (const QString &text);
 
   TutorialButtonRect *m_rect;
   TutorialButtonText *m_text; // Child to rectangle

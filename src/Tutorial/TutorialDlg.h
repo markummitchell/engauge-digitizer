@@ -16,6 +16,9 @@ class TutorialDlg : public QDialog
   /// Single constructor
   TutorialDlg (MainWindow *mainWindow);
 
+  /// Make geometry available for layout
+  QSize backgroundSize () const;
+
   /// Single scene the covers the entire tutorial dialog
   QGraphicsScene &scene();
 
@@ -26,7 +29,7 @@ class TutorialDlg : public QDialog
   TutorialDlg ();
 
   void createContext ();
-  void createScene();
+  void createSceneAndView();
 
   TutorialStateContext *m_context;
   QGraphicsScene *m_scene;

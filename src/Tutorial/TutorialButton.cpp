@@ -1,4 +1,5 @@
 #include "Logger.h"
+#include <qdebug.h>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
@@ -6,14 +7,21 @@
 #include "TutorialButtonRect.h"
 #include "TutorialButtonText.h"
 
-TutorialButton::TutorialButton (const QPoint &pos,
-                                const QString &text,
+const int HORIZONTAL_PADDING = 10;
+const int VERTICAL_PADDING = 5;
+const double Z_IN_FRONT = 1;
+
+TutorialButton::TutorialButton (const QString &text,
                                 QGraphicsScene &scene)
 {
   createRect (scene);
-  createText (text,
-              scene);
-  setGeometry (pos);
+  createText (text);
+}
+
+TutorialButton::~TutorialButton ()
+{
+  QGraphicsScene *scene = m_rect->scene();
+  scene->removeItem (m_rect); // This also removes m_text from the scene
 }
 
 void TutorialButton::createRect (QGraphicsScene &scene)
@@ -22,18 +30,26 @@ void TutorialButton::createRect (QGraphicsScene &scene)
   m_rect = new TutorialButtonRect (*this);
   m_rect->show ();
   m_rect->setPen (QPen (Qt::gray));
+  m_rect->setBrush (QBrush (Qt::white));
+  m_rect->setZValue (Z_IN_FRONT);
   scene.addItem (m_rect);
-  connect (m_rect, SIGNAL ())
 }
 
-void TutorialButton::createText (const QString &text,
-                                 QGraphicsScene &scene)
+void TutorialButton::createText (const QString &text)
 {
+  // Create text. There is no need to call QGraphicsScene::addItem since it gets added automatically as the
+  // child of m_rect
   m_text = new TutorialButtonText (*this,
                                    text,
                                    m_rect);
   m_text->show ();
-  scene.addItem (m_text);
+}
+
+QSize TutorialButton::size () const
+{
+  // The size of the rectangle is not updated until later so we use the size of the text
+  return QSize (m_text->boundingRect().size().width() + 2 * HORIZONTAL_PADDING,
+                m_text->boundingRect().size().height() + 2 * VERTICAL_PADDING);
 }
 
 void TutorialButton::handleTriggered()
@@ -46,9 +62,6 @@ void TutorialButton::handleTriggered()
 
 void TutorialButton::setGeometry (const QPoint &pos)
 {
-  const int HORIZONTAL_PADDING = 10;
-  const int VERTICAL_PADDING = 5;
-
   // Size the rectangle to fit the text, now that the extent of the text is known, with padding on the four sides
   m_rect->setRect(pos.x(),
                   pos.y(),

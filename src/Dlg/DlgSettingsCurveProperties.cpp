@@ -401,8 +401,10 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   m_spinLineWidth->setValue (m_modelCurveStylesAfter->lineWidth(curveName));
 
   int indexCurveConnectAs = m_cmbLineType->findData (QVariant (m_modelCurveStylesAfter->lineConnectAs (curveName)));
-  ENGAUGE_ASSERT (indexCurveConnectAs >= 0);
-  m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
+  if (indexCurveConnectAs >= 0) {
+    // Value is not CONNECT_SKIP_FOR_AXIS_CURVE
+    m_cmbLineType->setCurrentIndex (indexCurveConnectAs);
+  }
 
   // Disable line controls for axis curve since connecting with visible lines is better handled by Checker class
   m_cmbLineColor->setEnabled (curveName != AXIS_CURVE_NAME);

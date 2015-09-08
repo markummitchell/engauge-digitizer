@@ -10,6 +10,11 @@ TutorialStateAbstractBase::~TutorialStateAbstractBase()
 {
 }
 
+int TutorialStateAbstractBase::buttonMargin () const
+{
+  return 10;
+}
+
 TutorialStateContext &TutorialStateAbstractBase::context ()
 {
   return m_context;

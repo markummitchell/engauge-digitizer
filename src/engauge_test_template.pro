@@ -208,8 +208,12 @@ HEADERS  += \
     Tutorial/TutorialButtonText.h \
     Tutorial/TutorialDlg.h \
     Tutorial/TutorialStateAbstractBase.h \
+    Tutorial/TutorialStateAxisPoints.h \
     Tutorial/TutorialStateContext.h \
+    Tutorial/TutorialStateCurveType.h \
     Tutorial/TutorialStateIntroduction.h \
+    Tutorial/TutorialStatePointMatch.h \
+    Tutorial/TutorialStateSegmentFill.h \
     include/ValuesVectorXOrY.h \
     util/Version.h \
     View/ViewPointStyle.h \
@@ -415,6 +419,7 @@ SOURCES += \
     Tutorial/TutorialDlg.cpp \
     Tutorial/TutorialStateAbstractBase.cpp \
     Tutorial/TutorialStateContext.cpp \
+    Tutorial/TutorialStateCurveType.cpp \
     Tutorial/TutorialStateIntroduction.cpp \
     util/Version.cpp \
     View/ViewPointStyle.cpp \
