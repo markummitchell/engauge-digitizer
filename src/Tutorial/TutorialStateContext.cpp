@@ -1,6 +1,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QTimer>
+#include "TutorialDlg.h"
 #include "TutorialStateAbstractBase.h"
 #include "TutorialStateAxisPoints.h"
 #include "TutorialStateContext.h"
@@ -77,6 +78,13 @@ void TutorialStateContext::requestImmediateStateTransition (TutorialState tutori
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::requestImmediateStateTransition";
 
   m_requestedState = tutorialState;
+}
+
+void TutorialStateContext::setWindowTitle (const QString &panelTitle)
+{
+  QString fullTitle = QString ("Engauge Digitizer Tutorial - %1")
+                      .arg (panelTitle);
+  m_tutorialDlg.setWindowTitle (fullTitle);
 }
 
 void TutorialStateContext::slotTimeout()

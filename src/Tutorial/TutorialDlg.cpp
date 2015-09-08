@@ -14,7 +14,7 @@ const int SCENE_HEIGHT = 450;
 TutorialDlg::TutorialDlg (MainWindow *mainWindow) :
     QDialog (mainWindow)
 {
-  setWindowTitle (tr ("Engauge Digitizer Tutorial"));
+  // Window title is managed by state classes
 
   // Dialog size is determined by scene size
   QVBoxLayout *layout = new QVBoxLayout;

@@ -17,6 +17,8 @@ void TutorialStateSegmentFill::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::begin ()";
 
+  context().setWindowTitle ("Segment Fill");
+
   m_background = new QGraphicsPixmapItem (QPixmap (":/engauge/img/SpreadsheetsForDoc.png"));
   m_background->setPos (0, 0);
   context().tutorialDlg().scene().addItem (m_background);

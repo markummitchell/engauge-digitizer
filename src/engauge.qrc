@@ -17,5 +17,7 @@
         <file>img/16-DigitPointMatch.png</file>
         <file>img/16-DigitSegment.png</file>
         <file>img/16-DigitSelect.png</file>
+        <file>img/panel_axis_points.png</file>
+        <file>img/panel_lines_points.png</file>
     </qresource>
 </RCC>

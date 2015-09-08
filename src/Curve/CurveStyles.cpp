@@ -147,7 +147,7 @@ bool CurveStyles::pointIsCircle (const QString &curveName) const
 int CurveStyles::pointLineWidth (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  return m_curveStyles [curveName].lineStyle().width();
+  return m_curveStyles [curveName].pointStyle().lineWidth();
 }
 
 QPolygonF CurveStyles::pointPolygon (const QString &curveName) const
