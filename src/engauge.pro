@@ -208,6 +208,7 @@ HEADERS  += \
     Tutorial/TutorialDlg.h \
     Tutorial/TutorialStateAbstractBase.h \
     Tutorial/TutorialStateAxisPoints.h \
+    Tutorial/TutorialStateColorFilter.h \
     Tutorial/TutorialStateContext.h \
     Tutorial/TutorialStateCurveType.h \
     Tutorial/TutorialStateIntroduction.h \
@@ -418,6 +419,7 @@ SOURCES += \
     Tutorial/TutorialDlg.cpp \
     Tutorial/TutorialStateAbstractBase.cpp \
     Tutorial/TutorialStateAxisPoints.cpp \
+    Tutorial/TutorialStateColorFilter.cpp \
     Tutorial/TutorialStateContext.cpp \
     Tutorial/TutorialStateCurveType.cpp \
     Tutorial/TutorialStateIntroduction.cpp \

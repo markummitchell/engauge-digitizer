@@ -19,5 +19,6 @@
         <file>img/16-DigitSelect.png</file>
         <file>img/panel_axis_points.png</file>
         <file>img/panel_lines_points.png</file>
+        <file>img/panel_segment_fill.png</file>
     </qresource>
 </RCC>

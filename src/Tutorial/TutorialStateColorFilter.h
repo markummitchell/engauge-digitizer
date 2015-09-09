@@ -1,5 +1,5 @@
-#ifndef TUTORIAL_STATE_SEGMENT_FILL_H
-#define TUTORIAL_STATE_SEGMENT_FILL_H
+#ifndef TUTORIAL_STATE_COLOR_FILTER_H
+#define TUTORIAL_STATE_COLOR_FILTER_H
 
 #include "TutorialStateAbstractBase.h"
 
@@ -8,14 +8,14 @@ class QGraphicsTextItem;
 class TutorialButton;
 class TutorialStateContext;
 
-/// Segment fill panel discusses the digitization of points along curve lines
-class TutorialStateSegmentFill : public TutorialStateAbstractBase
+/// Color filter panel discusses the curve-specific color filtering
+class TutorialStateColorFilter : public TutorialStateAbstractBase
 {
   Q_OBJECT;
 
  public:
   /// Single constructor
-  TutorialStateSegmentFill (TutorialStateContext &context);
+  TutorialStateColorFilter (TutorialStateContext &context);
 
   virtual void begin ();
   virtual void end ();
@@ -38,4 +38,4 @@ class TutorialStateSegmentFill : public TutorialStateAbstractBase
   TutorialButton *m_next;
 };
 
-#endif // TUTORIAL_STATE_SEGMENT_FILL_H
+#endif // TUTORIAL_STATE_COLOR_FILTER_H

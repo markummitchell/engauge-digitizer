@@ -21,18 +21,19 @@ void TutorialStateAxisPoints::begin ()
   m_background = createPixmapItem (":/engauge/img/panel_axis_points.png",
                                    QPoint (0, 30));
   m_text0 = createTextItem ("Axis points are first defined to\n"
-                            "define the coordinates. Click on the\n"
-                            "Axis Points button",
+                            "define the coordinates. Step 1 -\n"
+                            "Click on the Axis Points button",
                             QPoint (320, 60));
-  m_text1 = createTextItem ("Click on an axis or grid line with\n"
-                            "known coordinates. An axis point\n"
-                            "appears, with a dialog window for\n"
-                            "entering the axis point's coordinates",
+  m_text1 = createTextItem ("Step 2 - Click on an axis or grid\n"
+                            "line with known coordinates. An axis\n"
+                            "point appears, with a dialog window\n"
+                            "for entering the axis point's\n"
+                            "coordinates",
                             QPoint (300, 210));
-  m_text2 = createTextItem ("Enter the two coordinates of the axis\n"
-                            "point and then click Ok. Repeat steps\n"
-                            "2 and 3 twice more until three axis\n"
-                            "points are created",
+  m_text2 = createTextItem ("Step 3 - Enter the two coordinates\n"
+                            "of the axis point and then click Ok.\n"
+                            "Repeat steps 2 and 3 twice more\n"
+                            "until three axis points are created",
                             QPoint (280, 320));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();

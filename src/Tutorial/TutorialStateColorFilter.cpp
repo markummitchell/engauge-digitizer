@@ -5,19 +5,19 @@
 #include <QGraphicsView>
 #include "TutorialButton.h"
 #include "TutorialDlg.h"
+#include "TutorialStateColorFilter.h"
 #include "TutorialStateContext.h"
-#include "TutorialStateSegmentFill.h"
 
-TutorialStateSegmentFill::TutorialStateSegmentFill (TutorialStateContext &context) : 
+TutorialStateColorFilter::TutorialStateColorFilter (TutorialStateContext &context) : 
   TutorialStateAbstractBase (context)
 {
 }
 
-void TutorialStateSegmentFill::begin ()
+void TutorialStateColorFilter::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::begin ()";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::begin ()";
 
-  m_title = createTitle ("Segment Fill");
+  m_title = createTitle ("Color Filter");
   m_background = createPixmapItem (":/engauge/img/panel_segment_fill.png",
                                    QPoint (0, 30));
   m_text0 = createTextItem ("Segment Fill mode places several\n"
@@ -52,9 +52,9 @@ void TutorialStateSegmentFill::begin ()
   connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
 }
 
-void TutorialStateSegmentFill::end ()
+void TutorialStateColorFilter::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::end ()";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::end ()";
 
   context().tutorialDlg().scene().removeItem (m_title);
   context().tutorialDlg().scene().removeItem (m_background);
@@ -80,16 +80,16 @@ void TutorialStateSegmentFill::end ()
   m_previous = 0;
 }
 
-void TutorialStateSegmentFill::slotNext ()
+void TutorialStateColorFilter::slotNext ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::slotNextCurves";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotNextCurves";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_COLOR_FILTER);
+//  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
 }
 
-void TutorialStateSegmentFill::slotPrevious ()
+void TutorialStateColorFilter::slotPrevious ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::slotPrevious";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotPrevious";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
+  context().requestDelayedStateTransition (TUTORIAL_STATE_SEGMENT_FILL);
 }
