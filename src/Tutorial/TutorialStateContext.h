@@ -26,9 +26,6 @@ class TutorialStateContext : public QObject
   /// the transition after execution returns from the state
   void requestImmediateStateTransition (TutorialState tutorialState);
 
-  /// Set the panel-specific window title
-  void setWindowTitle (const QString &panelTitle);
-
   /// Access to tutorial dialogs and its scene
   TutorialDlg &tutorialDlg();
 

@@ -17,31 +17,23 @@ void TutorialStateAxisPoints::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::begin ()";
 
-  context().setWindowTitle ("Axis Points");
-
-  m_background = new QGraphicsPixmapItem (QPixmap (":/engauge/img/panel_axis_points.png"));
-  m_background->setPos (0, 0);
-  context().tutorialDlg().scene().addItem (m_background);
-
-  m_text0 = new QGraphicsTextItem ("Axis points are first defined to\n"
-                                   "define the coordinates. Click on the\n"
-                                   "Axis Points button");
-  m_text0->setPos (320, 30);
-  context().tutorialDlg().scene().addItem (m_text0);
-
-  m_text1 = new QGraphicsTextItem ("Click on an axis or grid line with\n"
-                                   "known coordinates. An axis point\n"
-                                   "appears, with a dialog window for\n"
-                                   "entering the axis point's coordinates");
-  m_text1->setPos (300, 180);
-  context().tutorialDlg().scene().addItem (m_text1);
-
-  m_text2 = new QGraphicsTextItem ("Enter the two coordinates of the axis\n"
-                                   "point and then click Ok. Repeat steps\n"
-                                   "2 and 3 twice more until three axis\n"
-                                   "points are created");
-  m_text2->setPos (280, 290);
-  context().tutorialDlg().scene().addItem (m_text2);
+  m_title = createTitle ("Axis Points");
+  m_background = createPixmapItem (":/engauge/img/panel_axis_points.png",
+                                   QPoint (0, 30));
+  m_text0 = createTextItem ("Axis points are first defined to\n"
+                            "define the coordinates. Click on the\n"
+                            "Axis Points button",
+                            QPoint (320, 60));
+  m_text1 = createTextItem ("Click on an axis or grid line with\n"
+                            "known coordinates. An axis point\n"
+                            "appears, with a dialog window for\n"
+                            "entering the axis point's coordinates",
+                            QPoint (300, 210));
+  m_text2 = createTextItem ("Enter the two coordinates of the axis\n"
+                            "point and then click Ok. Repeat steps\n"
+                            "2 and 3 twice more until three axis\n"
+                            "points are created",
+                            QPoint (280, 320));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
@@ -62,12 +54,14 @@ void TutorialStateAxisPoints::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::end ()";
 
+  context().tutorialDlg().scene().removeItem (m_title);
   context().tutorialDlg().scene().removeItem (m_background);
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
   // TutorialButton removes itself from the scene
 
+  delete m_title;
   delete m_background;
   delete m_text0;
   delete m_text1;
@@ -75,6 +69,7 @@ void TutorialStateAxisPoints::end ()
   delete m_next;
   delete m_previous;
 
+  m_title = 0;
   m_background = 0;
   m_text0 = 0;
   m_text1 = 0;

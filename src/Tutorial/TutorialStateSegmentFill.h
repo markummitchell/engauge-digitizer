@@ -29,6 +29,7 @@ class TutorialStateSegmentFill : public TutorialStateAbstractBase
 
  private:
 
+  QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;
   QGraphicsTextItem *m_text1;

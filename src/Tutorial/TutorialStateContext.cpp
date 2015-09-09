@@ -80,13 +80,6 @@ void TutorialStateContext::requestImmediateStateTransition (TutorialState tutori
   m_requestedState = tutorialState;
 }
 
-void TutorialStateContext::setWindowTitle (const QString &panelTitle)
-{
-  QString fullTitle = QString ("Engauge Digitizer Tutorial - %1")
-                      .arg (panelTitle);
-  m_tutorialDlg.setWindowTitle (fullTitle);
-}
-
 void TutorialStateContext::slotTimeout()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::slotTimeout";

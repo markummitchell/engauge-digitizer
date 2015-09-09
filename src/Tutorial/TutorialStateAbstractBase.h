@@ -12,6 +12,8 @@ enum TutorialState {
   NUM_TUTORIAL_STATES
 };
 
+class QGraphicsPixmapItem;
+class QGraphicsTextItem;
 class TutorialStateContext;
 
 /// One state manages one panel of the tutorial
@@ -35,6 +37,17 @@ class TutorialStateAbstractBase : public QObject
 
   /// Context class for the tutorial state machine
   TutorialStateContext &context ();
+
+  /// Factory method for pixmap items
+  QGraphicsPixmapItem *createPixmapItem (const QString &resource,
+                                         const QPoint &pos);
+
+  /// Factory method for text items
+  QGraphicsTextItem *createTextItem (const QString &text,
+                                     const QPoint &pos);
+
+  /// Factory method for title items
+  QGraphicsTextItem *createTitle (const QString &text);
 
  private:
   TutorialStateAbstractBase();

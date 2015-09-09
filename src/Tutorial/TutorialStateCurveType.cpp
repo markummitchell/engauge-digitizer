@@ -17,29 +17,22 @@ void TutorialStateCurveType::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateCurveType::begin ()";
 
-  context().setWindowTitle ("Curve Type");
-
-  m_background = new QGraphicsPixmapItem (QPixmap (":/engauge/img/panel_lines_points.png"));
-  m_background->setPos (0, 0);
-  context().tutorialDlg().scene().addItem (m_background);
-
-  m_text0 = new QGraphicsTextItem ("The next steps depend on how the curves\n"
-                                   "are drawn, in terms of lines and points");
-  m_text0->setPos (240, 20);
-  context().tutorialDlg().scene().addItem (m_text0);
-
-  m_text1 = new QGraphicsTextItem ("If the curves are drawn\n"
-                                   "with lines then click on\n"
-                                   "Next (Lines)");
-  m_text1->setPos (265, 120);
-  context().tutorialDlg().scene().addItem (m_text1);
-
-  m_text2 = new QGraphicsTextItem ("If the curves are drawn\n"
-                                   "without lines and only\n"
-                                   "with points, then click on\n"
-                                   "Next (Points)");
-  m_text2->setPos (265, 270);
-  context().tutorialDlg().scene().addItem (m_text2);
+  m_title = createTitle ("Curve Type");
+  m_background = createPixmapItem (":/engauge/img/panel_lines_points.png",
+                                   QPoint (0, 0));
+  m_text0 = createTextItem ("The next steps depend on how the curves\n"
+                            "are drawn, in terms of lines and points",
+                            QPoint (240, 40));
+  m_text1 = createTextItem ("If the curves are drawn\n"
+                            "with lines (with or without\n"
+                            "points) then click on\n"
+                            "Next (Lines)",
+                            QPoint (265, 110));
+  m_text2 = createTextItem ("If the curves are drawn\n"
+                            "without lines and only\n"
+                            "with points, then click on\n"
+                            "Next (Points)",
+                            QPoint (265, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
@@ -66,12 +59,14 @@ void TutorialStateCurveType::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateCurveType::end ()";
 
+  context().tutorialDlg().scene().removeItem (m_title);
   context().tutorialDlg().scene().removeItem (m_background);
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
   // TutorialButton removes itself from the scene
 
+  delete m_title;
   delete m_background;
   delete m_text0;
   delete m_text1;
@@ -80,6 +75,7 @@ void TutorialStateCurveType::end ()
   delete m_nextLines;
   delete m_previous;
 
+  m_title = 0;
   m_background = 0;
   m_text0 = 0;
   m_text1 = 0;
