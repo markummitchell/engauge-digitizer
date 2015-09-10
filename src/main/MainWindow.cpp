@@ -3017,6 +3017,7 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsSegments";
 
   m_cmdMediator->document().setModelSegments(modelSegments);
+  m_digitizeStateContext->updateModelSegments(modelSegments);
 }
 
 void MainWindow::updateViewedCurves ()

@@ -151,3 +151,8 @@ QString DigitizeStateAxis::state() const
 {
   return "DigitizeStateAxis";
 }
+
+void DigitizeStateAxis::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateModelSegments";
+}

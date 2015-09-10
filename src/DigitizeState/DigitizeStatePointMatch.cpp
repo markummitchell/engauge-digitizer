@@ -303,3 +303,8 @@ QString DigitizeStatePointMatch::state() const
 {
   return "DigitizeStatePointMatch";
 }
+
+void DigitizeStatePointMatch::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::updateModelSegments";
+}

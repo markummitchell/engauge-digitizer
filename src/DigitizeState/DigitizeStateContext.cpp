@@ -7,6 +7,7 @@
 #include "DigitizeStatePointMatch.h"
 #include "DigitizeStateSegment.h"
 #include "DigitizeStateSelect.h"
+#include "DocumentModelSegments.h"
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -220,6 +221,13 @@ QString DigitizeStateContext::state() const
   ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
 
   return m_states [m_currentState]->state();
+}
+
+void DigitizeStateContext::updateModelSegments(const DocumentModelSegments &modelSegments)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::updateModelSegments";
+
+  m_states [m_currentState]->updateModelSegments (modelSegments);
 }
 
 QGraphicsView &DigitizeStateContext::view()

@@ -171,3 +171,15 @@ QString DigitizeStateSegment::state() const
 {
   return "DigitizeStateSegment";
 }
+
+void DigitizeStateSegment::updateModelSegments(const DocumentModelSegments &modelSegments)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::updateModelSegments";
+
+  QList<Segment*>::const_iterator itr;
+  for (itr = m_segments.begin(); itr != m_segments.end(); itr++) {
+    Segment *segment = *itr;
+
+    segment->updateModelSegment (modelSegments);
+  }
+}

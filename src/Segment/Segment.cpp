@@ -522,3 +522,15 @@ void Segment::slotHover (bool hover)
     line->setHover(hover);
   }
 }
+
+void Segment::updateModelSegment(const DocumentModelSegments &modelSegments)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Segment::updateModelSegment";
+
+  QList<SegmentLine*>::iterator itr;
+  for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
+
+    SegmentLine *line = *itr;
+    line->updateModelSegment (modelSegments);
+  }
+}

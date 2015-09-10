@@ -89,3 +89,8 @@ QString DigitizeStateCurve::state() const
 {
   return "DigitizeStateCurve";
 }
+
+void DigitizeStateCurve::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::updateModelSegments";
+}

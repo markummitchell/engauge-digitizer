@@ -79,3 +79,10 @@ void SegmentLine::setHover (bool hover)
 
   }
 }
+
+void SegmentLine::updateModelSegment(const DocumentModelSegments &modelSegments)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::updateModelSegment";
+
+  m_modelSegments = modelSegments;
+}

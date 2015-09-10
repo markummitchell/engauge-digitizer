@@ -34,6 +34,9 @@ public:
   /// Apply/remove highlighting triggered by hover enter/leave
   void setHover (bool hover);
 
+  /// Update this segment line with new settings
+  void updateModelSegment(const DocumentModelSegments &modelSegments);
+
 signals:
   /// Pass hover enter/leave events to Segment that owns this
   void signalHover (bool);

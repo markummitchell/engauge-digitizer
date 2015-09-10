@@ -224,6 +224,11 @@ void DigitizeStateSelect::unsetCursorForPoints()
   }
 }
 
+void DigitizeStateSelect::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::updateModelSegments";
+}
+
 double DigitizeStateSelect::zoomedToUnzoomedScreenX () const
 {
   double m11 = context().mainWindow ().view ().transform().m11 ();

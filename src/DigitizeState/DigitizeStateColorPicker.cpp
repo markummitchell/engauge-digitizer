@@ -302,3 +302,8 @@ QString DigitizeStateColorPicker::state() const
 {
   return "DigitizeStateColorPicker";
 }
+
+void DigitizeStateColorPicker::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::updateModelSegments";
+}

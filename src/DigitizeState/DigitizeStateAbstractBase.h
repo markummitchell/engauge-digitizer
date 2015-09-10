@@ -6,6 +6,7 @@
 #include <QPointF>
 
 class DigitizeStateContext;
+class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;
 class QTimer;
@@ -79,6 +80,9 @@ public:
 
   /// State name for debugging
   virtual QString state() const = 0;
+
+  /// Update the segments given the new settings
+  virtual void updateModelSegments(const DocumentModelSegments &modelSegments) = 0;
 
 protected:
   /// Returns the state-specific cursor shape.

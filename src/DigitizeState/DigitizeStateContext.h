@@ -10,6 +10,7 @@
 
 class CmdAbstractBase;
 class CmdMediator;
+class DocumentModelSegments;
 class MainWindow;
 class QUndoCommand;
 
@@ -92,6 +93,9 @@ public:
 
   /// State name for debugging
   QString state() const;
+
+  /// Update the segments given the new settings
+  void updateModelSegments(const DocumentModelSegments &modelSegments);
 
   /// QGraphicsView for use by DigitizeStateAbstractBase subclasses
   QGraphicsView &view();
