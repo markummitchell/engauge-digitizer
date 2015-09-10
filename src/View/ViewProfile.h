@@ -11,6 +11,7 @@ class ViewProfile : public QGraphicsView
 public:
   /// Single constructor.
   ViewProfile(QGraphicsScene *scene,
+              int minimumWidth,
               QWidget *parent = 0);
 
   /// Intercept resize events so the geometry can be scaled to perfectly fit into the window.

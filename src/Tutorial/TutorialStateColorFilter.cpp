@@ -18,24 +18,31 @@ void TutorialStateColorFilter::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::begin ()";
 
   m_title = createTitle ("Color Filter");
-  m_background = createPixmapItem (":/engauge/img/panel_segment_fill.png",
+  m_background = createPixmapItem (":/engauge/img/panel_color_filter.png",
                                    QPoint (0, 30));
-  m_text0 = createTextItem ("Segment Fill mode places several\n"
-                            "points all along the line segments\n"
-                            "of a curve. Step 1 - Click on the\n"
-                            "Segment Fill button",
-                            QPoint (300, 40));
-  m_text1 = createTextItem ("Step 2 - Move the cursor over\n"
-                            "a line segment in the desired\n"
-                            "curve. If a green line appears,\n"
-                            "click on it once to generate\n"
-                            "many points",
-                            QPoint (320, 115));
-  m_text2 = createTextItem ("The resulting points are shown\n"
-                            "in the figure. If a green line\n"
-                            "did not appear, the next step\n"
-                            "will produce the green lines",
-                            QPoint (320, 225));
+  m_text0 = createTextItem ("Each curve has Color Filter settings that\n"
+                            "are applied in Segment Fill mode. For\n"
+                            "black lines the defaults work well, but for\n"
+                            "colored lines the settings can be improved",
+                            QPoint (260, 30));
+  m_text1 = createTextItem ("Step 1 - Select the Settings / Color\n"
+                            "Filter menu option",
+                            QPoint (285, 115));
+  m_text2 = createTextItem ("Step 2 - Select the curve that will\n"
+                            "be given the new settings",
+                            QPoint (285, 155));
+  m_text3 = createTextItem ("Step 3 - Select the mode. Intensity is\n"
+                            "suggested for uncolored lines, and Hue\n"
+                            "is suggested for colored lines",
+                            QPoint (285, 200));
+  m_text4 = createTextItem ("Step 4 - Adjust the included range by\n"
+                            "dragging the green handles. The graph\n"
+                            "shows a histogram distribution of the\n"
+                            "values underneath, until the curve is\n"
+                            "clear in the preview window below. Click\n"
+                            "Ok when finished\n\n"
+                            "This ends the tutorial. Good luck!",
+                            QPoint (285, 280));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
@@ -44,12 +51,6 @@ void TutorialStateColorFilter::begin ()
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height() - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
-
-  m_next = new TutorialButton ("Next",
-                               context().tutorialDlg().scene());
-  m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
-                               backgroundSize.height () - buttonMargin () - m_next->size ().height ()));
-  connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
 }
 
 void TutorialStateColorFilter::end ()
@@ -61,6 +62,8 @@ void TutorialStateColorFilter::end ()
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
+  context().tutorialDlg().scene().removeItem (m_text3);
+  context().tutorialDlg().scene().removeItem (m_text4);
   // TutorialButton removes itself from the scene
 
   delete m_title;
@@ -68,7 +71,8 @@ void TutorialStateColorFilter::end ()
   delete m_text0;
   delete m_text1;
   delete m_text2;
-  delete m_next;
+  delete m_text3;
+  delete m_text4;
   delete m_previous;
 
   m_title = 0;
@@ -76,15 +80,9 @@ void TutorialStateColorFilter::end ()
   m_text0 = 0;
   m_text1 = 0;
   m_text2 = 0;
-  m_next = 0;
+  m_text3 = 0;
+  m_text4 = 0;
   m_previous = 0;
-}
-
-void TutorialStateColorFilter::slotNext ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotNextCurves";
-
-//  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
 }
 
 void TutorialStateColorFilter::slotPrevious ()

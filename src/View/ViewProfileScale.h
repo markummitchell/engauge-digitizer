@@ -11,7 +11,8 @@ class ViewProfileScale : public QLabel
 {
 public:
   /// Single constructor.
-  explicit ViewProfileScale(QWidget *parent = 0);
+  explicit ViewProfileScale(int minimumWidth,
+                            QWidget *parent = 0);
 
   /// Draw the gradient.
   virtual void paintEvent (QPaintEvent *);

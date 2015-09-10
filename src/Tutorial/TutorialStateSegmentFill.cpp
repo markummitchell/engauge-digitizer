@@ -35,7 +35,7 @@ void TutorialStateSegmentFill::begin ()
                             "in the figure. If a green line\n"
                             "did not appear, the next step\n"
                             "will produce the green lines",
-                            QPoint (320, 225));
+                            QPoint (320, 250));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 

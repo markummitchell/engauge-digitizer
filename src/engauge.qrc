@@ -20,5 +20,6 @@
         <file>img/panel_axis_points.png</file>
         <file>img/panel_lines_points.png</file>
         <file>img/panel_segment_fill.png</file>
+        <file>img/panel_color_filter.png</file>
     </qresource>
 </RCC>

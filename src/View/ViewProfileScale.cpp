@@ -2,10 +2,12 @@
 #include "ViewProfileScale.h"
 #include <QPainter>
 
-ViewProfileScale::ViewProfileScale(QWidget *parent) :
+ViewProfileScale::ViewProfileScale(int minimumWidth,
+                                   QWidget *parent) :
   QLabel (parent),
   m_colorFilterMode (COLOR_FILTER_MODE_FOREGROUND)
 {
+  setMinimumWidth(minimumWidth);
 }
 
 void ViewProfileScale::paintEvent (QPaintEvent *event)

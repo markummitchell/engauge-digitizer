@@ -9,6 +9,7 @@ const int FRAME_WIDTH = 2;
 const double SLOP_ON_SIDES = 0.5;
 
 ViewProfile::ViewProfile(QGraphicsScene *scene,
+                         int minimumWidth,
                          QWidget *parent) :
   QGraphicsView (scene, parent)
 {
@@ -18,7 +19,7 @@ ViewProfile::ViewProfile(QGraphicsScene *scene,
 
   setMinimumHeight (160);
   setMaximumHeight (160);
-  setMinimumWidth (240);
+  setMinimumWidth (minimumWidth);
 
   createFrame ();
   refit ();

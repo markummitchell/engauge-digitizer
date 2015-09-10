@@ -123,23 +123,26 @@ void DlgSettingsColorFilter::createProfileAndScale (QGridLayout *layout, int &ro
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::createProfileAndScale";
 
+  const int MINIMUM_VIEW_PROFILE_WIDTH = 70;
+
   QLabel *labelProfile = new QLabel ("Filter Parameter Histogram Profile");
   layout->addWidget (labelProfile, row++, 3);
 
   m_sceneProfile = new QGraphicsScene;
   m_sceneProfile->setSceneRect(0, 0, PROFILE_SCENE_WIDTH (), PROFILE_SCENE_HEIGHT ());
 
-  m_viewProfile = new ViewProfile (m_sceneProfile);
+  m_viewProfile = new ViewProfile (m_sceneProfile,
+                                   MINIMUM_VIEW_PROFILE_WIDTH);
   m_viewProfile->setWhatsThis (tr ("Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust "
                                    "the range of filter parameter values that will be included in the filtered image. The clear portion will "
                                    "be included, and the shaded portion will be excluded."));
   layout->addWidget (m_viewProfile, row, 3, PROFILE_HEIGHT_IN_ROWS (), 1);
   row += PROFILE_HEIGHT_IN_ROWS ();
 
-  m_scale = new ViewProfileScale;
+  m_scale = new ViewProfileScale (MINIMUM_VIEW_PROFILE_WIDTH);
   m_scale->setWhatsThis (tr ("This read-only box displays a graphical representation of the horizontal axis in the histogram profile above."));
   m_scale->setAutoFillBackground(true);
-  layout->addWidget (m_scale, row++, 3);
+  layout->addWidget (m_scale, row++, 3, 1, 1);
 }
 
 QWidget *DlgSettingsColorFilter::createSubPanel ()
