@@ -2,6 +2,7 @@
 #define DIGITIZE_STATE_POINT_MATCH_H
 
 #include "DigitizeStateAbstractBase.h"
+#include "PointMatchPixel.h"
 #include <QList>
 #include <QPoint>
 
@@ -36,9 +37,9 @@ private:
 
   void createPermanentPoint (const QPointF &posScreen);
   void createTemporaryPoint (const QPoint &posScreen);
-  QList<QPoint> extractSamplePointPixels (const QImage &img,
-                                          const DocumentModelPointMatch &modelPointMatch,
-                                          const QPointF &posScreen) const;
+  QList<PointMatchPixel> extractSamplePointPixels (const QImage &img,
+                                                   const DocumentModelPointMatch &modelPointMatch,
+                                                   const QPointF &posScreen) const;
   void findPointsAndShowFirstCandidate (const QPointF &posScreen);
   bool pixelIsOnInImage (const QImage &img,
                          int x,

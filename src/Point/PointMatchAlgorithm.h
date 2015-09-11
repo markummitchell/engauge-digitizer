@@ -3,6 +3,7 @@
 
 #include "fftw3.h"
 #include "Point.h"
+#include "PointMatchPixel.h"
 #include "PointMatchTriplet.h"
 #include "Points.h"
 #include <QList>
@@ -23,7 +24,7 @@ class PointMatchAlgorithm
   PointMatchAlgorithm(bool isGnuplot);
 
   /// Find points that match the specified sample point pixels. They are sorted by best-to-worst match
-  QList<QPoint> findPoints (const QList<QPoint> &samplePointPixels,
+  QList<QPoint> findPoints (const QList<PointMatchPixel> &samplePointPixels,
                             const QImage &imageProcessed,
                             const DocumentModelPointMatch &modelPointMatch,
                             const Points &pointsExisting);
@@ -39,16 +40,12 @@ class PointMatchAlgorithm
   // Find each local maxima that is the largest value in a region that is:
   //   1. as big as the the sample
   //   2. centered about that local maxima
-  void assembleLocalMaxima(double* image,
-                           double* sample,
-                           double* convolution,
+  void assembleLocalMaxima(double* convolution,
                            PointMatchList& listCreated,
                            int width,
                            int height,
                            int sampleXCenter,
-                           int sampleYCenter,
-                           int sampleXExtent,
-                           int sampleYExtent);
+                           int sampleYCenter);
 
   // Compute convolution in image space from phase space image and sample arrays
   void computeConvolution(fftw_complex* imagePrime,
@@ -61,18 +58,6 @@ class PointMatchAlgorithm
   void conjugateMatrix(int width,
                        int height,
                        fftw_complex* matrix);
-
-  // Correlate sample and image around specified screen location
-  double correlation(double* image,
-                     double* sample,
-                     int width,
-                     int height,
-                     int x,
-                     int y,
-                     int sampleXCenter,
-                     int sampleYCenter,
-                     int sampleXExtent,
-                     int sampleYExtent);
 
   // Dump to file for 3d plotting by gnuplot
   void dumpToGnuplot (double* convolution,
@@ -90,7 +75,7 @@ class PointMatchAlgorithm
                  fftw_complex** imagePrime);
 
   // Load sample and samplePrime arrays, and compute center location and extent
-  void loadSample(const QList<QPoint> &samplePointPixels,
+  void loadSample(const QList<PointMatchPixel> &samplePointPixels,
                   int width,
                   int height,
                   double** sample,
@@ -112,8 +97,13 @@ class PointMatchAlgorithm
   // less than 6% to get a cpu performance increase of 0% to roughly 100% or 200%
   int optimizeLengthForFft(int originalLength);
 
+  // Populate image array with processed image
+  void populateImageArray(const QImage &imageProcessed,
+                          int width, int height,
+                          double** image);
+
   // Populate sample array with sample image
-  void populateSampleArray(const QList<QPoint> &samplePointPixels,
+  void populateSampleArray(const QList<PointMatchPixel> &samplePointPixels,
                            int width,
                            int height,
                            double** sample,
@@ -121,11 +111,6 @@ class PointMatchAlgorithm
                            int* sampleYCenter,
                            int* sampleXExtent,
                            int* sampleYExtent);
-
-  // Populate image array with processed image
-  void populateImageArray(const QImage &imageProcessed,
-                          int width, int height,
-                          double** image);
 
   // Release memory for one array after finishing calculations
   void releaseImageArray(double* array);
@@ -149,12 +134,6 @@ class PointMatchAlgorithm
                  int imageWidth,
                  int imageHeight,
                  PointMatchList* pointsCreated);
-
-  // Bounds of region around sample center
-  int xDeltaMax(int sampleXCenter, int sampleXExtent);
-  int xDeltaMin(int sampleXCenter);
-  int yDeltaMax(int sampleYCenter, int sampleYExtent);
-  int yDeltaMin(int sampleYCenter);
 
   bool m_isGnuplot;
 };

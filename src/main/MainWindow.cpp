@@ -1768,6 +1768,11 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   updateAfterCommand(); // Replace stale points by points in new Document
 }
 
+void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
+{
+  m_statusBar->showTemporaryMessage (temporaryMessage);
+}
+
 void MainWindow::slotCanRedoChanged (bool canRedo)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotCanRedoChanged";

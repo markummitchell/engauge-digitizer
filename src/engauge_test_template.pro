@@ -183,6 +183,7 @@ HEADERS  += \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointMatchAlgorithm.h \
+    Point/PointMatchPixel.h \
     Point/PointMatchTriplet.h \
     Point/Points.h \
     Point/PointShape.h \
@@ -396,6 +397,7 @@ SOURCES += \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointMatchAlgorithm.cpp \
+    Point/PointMatchPixel.cpp \
     Point/PointMatchTriplet.cpp \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
@@ -425,7 +427,7 @@ SOURCES += \
     Tutorial/TutorialStateCurveType.cpp \
     Tutorial/TutorialStateIntroduction.cpp \
     Tutorial/TutorialStatePointMatch.cpp \
-    Tutorial/TutorialStateSegmentFilter.cpp \
+    Tutorial/TutorialStateSegmentFill.cpp \
     util/Version.cpp \
     View/ViewPointStyle.cpp \
     View/ViewPreview.cpp \
@@ -457,6 +459,7 @@ INCLUDEPATH += Background \
                Format \
                Graphics \
                Grid \
+               Help \
                img \
                include \
                Line \
@@ -464,6 +467,7 @@ INCLUDEPATH += Background \
                Logger \
                main \
                Mime \
+               Network \
                Ordinal \
                Plot \
                Point \

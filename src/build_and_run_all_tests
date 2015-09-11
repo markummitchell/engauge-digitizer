@@ -39,22 +39,17 @@ else
     # Exit immediately on first error
     set -e 
 
-    # Build tests
+    # Build and run each test
     for t in "${tests[@]}"
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake engauge_test.pro
         make clean 2>>$LOGFILE >/dev/null
 	make all 2>>$LOGFILE >/dev/null
+	../bin/$t
 	if [ $argcount -ne 1 ]
 	then
             rm engauge_test.pro
 	fi
-    done
-
-    # Run tests
-    for t in "${tests[@]}"
-    do
-	../bin/$t
     done
 fi

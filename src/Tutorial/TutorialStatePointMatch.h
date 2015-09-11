@@ -33,6 +33,7 @@ class TutorialStatePointMatch : public TutorialStateAbstractBase
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;
   QGraphicsTextItem *m_text1;
+  QGraphicsTextItem *m_text2;
   TutorialButton *m_previous;
   TutorialButton *m_next;
 };

@@ -97,6 +97,9 @@ public:
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
 
+  /// Show temporary message in status bar
+  void showTemporaryMessage (const QString &temporaryMessage);
+
   /// Return read-only copy of transformation
   Transformation transformation() const;
 

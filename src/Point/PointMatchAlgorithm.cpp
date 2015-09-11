@@ -13,8 +13,9 @@ using namespace std;
 
 #define FOLD2DINDEX(i,j,jmax) ((i)*(jmax)+j)
 
-const int PIXEL_OFF = 0; // Arbitrary value as long as different than PIXEL_ON
-const int PIXEL_ON = 1; // Arbitrary value as long as different than PIXEL_OFF
+const int PIXEL_OFF = -1; // Negative of PIXEL_ON so two off pixels are just as valid as two on pixels when
+                          // multiplied. One off pixel and one on pixel give +1 * -1 = -1 which reduces the correlation
+const int PIXEL_ON = 1; // Arbitrary value as long as negative of PIXEL_OFF
 
 PointMatchAlgorithm::PointMatchAlgorithm(bool isGnuplot) :
   m_isGnuplot (isGnuplot)
@@ -36,49 +37,47 @@ void PointMatchAlgorithm::allocateMemory(double** array,
   ENGAUGE_CHECK_PTR(*arrayPrime);
 }
 
-void PointMatchAlgorithm::assembleLocalMaxima(double* image,
-                                              double* sample, 
-                                              double* convolution, 
+void PointMatchAlgorithm::assembleLocalMaxima(double* convolution,
                                               PointMatchList& listCreated, 
                                               int width,
                                               int height,
                                               int sampleXCenter,
-                                              int sampleYCenter,
-                                              int sampleXExtent,
-                                              int sampleYExtent)
+                                              int sampleYCenter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::assembleLocalMaxima";
 
   // Ignore tiny correlation values near zero by applying this threshold
   const double SINGLE_PIXEL_CORRELATION = 1.0;
 
-  int iDeltaMin = xDeltaMin(sampleXCenter);
-  int iDeltaMax = xDeltaMax(sampleXCenter, sampleXExtent);
-  int jDeltaMin = yDeltaMin(sampleYCenter);
-  int jDeltaMax = yDeltaMax(sampleYCenter, sampleYExtent);
-
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
 
       double convIJ = convolution[FOLD2DINDEX(i, j, height)];
 
-      // Loop through neighboring points
+      // Loop through nearest neighbor points
       bool isLocalMax = true;
-      for (int iDelta= iDeltaMin; iDelta < iDeltaMax; iDelta++) {
+      for (int iDelta = -1; (iDelta <= 1) && isLocalMax; iDelta++) {
 
         int iNeighbor = i + iDelta;
         if ((0 <= iNeighbor) && (iNeighbor < width)) {
 
-          for (int jDelta = jDeltaMin; jDelta < jDeltaMax; jDelta++) {
+          for (int jDelta = -1; (jDelta <= 1) && isLocalMax; jDelta++) {
 
             int jNeighbor = j + jDelta;
             if ((0 <= jNeighbor) && (jNeighbor < height)) {
 
-              if ((convolution [FOLD2DINDEX(iNeighbor, jNeighbor, height)] >= convIJ) &&
-                  (iNeighbor != i || jNeighbor != j)) {
+              double convNeighbor = convolution[FOLD2DINDEX(iNeighbor, jNeighbor, height)];
+              if (convIJ < convNeighbor) {
 
                 isLocalMax = false;
-                break;
+
+              } else if (convIJ == convNeighbor) {
+
+                // Rare situation. In the event of a tie, the lower row/column wins (an arbitrary convention)
+                if ((jDelta < 0) || (jDelta == 0 && iDelta < 0)) {
+
+                  isLocalMax = false;
+                }
               }
             }
           }
@@ -88,28 +87,9 @@ void PointMatchAlgorithm::assembleLocalMaxima(double* image,
       if (isLocalMax && (convIJ > SINGLE_PIXEL_CORRELATION)) {
 
         // Save new local maximum
-
-        int x = i + sampleXCenter;
-        int y = j + sampleYCenter;
-
-        // Correlation stored in convIJ is not used since fast convolution is meant to be performed once (it is global and slow),
-        // and later on we may want to redo local correlations when a maximum is removed and it overlaps another maxima. So, the
-        // manually-computed correlation value is assigned to this maximum. Computation of manual convolutions is not too slow
-        // because there are typically less than 200 of them
-        double corr = correlation(image,
-                                  sample,
-                                  width,
-                                  height,
-                                  x,
-                                  y,
-                                  sampleXCenter,
-                                  sampleYCenter,
-                                  sampleXExtent,
-                                  sampleYExtent);
-
-        PointMatchTriplet t (x,
-                             y,
-                             corr);
+        PointMatchTriplet t (i + sampleXCenter,
+                             j + sampleYCenter,
+                             convolution [FOLD2DINDEX(i, j, height)]);
 
         listCreated.append(t);
       }
@@ -172,65 +152,6 @@ void PointMatchAlgorithm::conjugateMatrix(int width,
   }
 }
 
-double PointMatchAlgorithm::correlation(double* image,
-                                        double* sample,
-                                        int width,
-                                        int height,
-                                        int x,
-                                        int y,
-                                        int sampleXCenter,
-                                        int sampleYCenter,
-                                        int sampleXExtent,
-                                        int sampleYExtent)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::correlation"
-                              << " x=" << x
-                              << " y=" << y;
-
-  ENGAUGE_CHECK_PTR(image);
-  ENGAUGE_CHECK_PTR(sample);
-
-  int iDeltaMin = xDeltaMin(sampleXCenter);
-  int iDeltaMax = xDeltaMax(sampleXCenter, sampleXExtent);
-  int jDeltaMin = yDeltaMin(sampleYCenter);
-  int jDeltaMax = yDeltaMax(sampleYCenter, sampleYExtent);
-
-  // Highest correlation value corresponds to image pixels centered around (x,y) matching the sample pixels centered
-  // around (sampleXCenter,sampleYCenter)
-  double sum = 0.0;
-  for (int iDelta = iDeltaMin; iDelta < iDeltaMax; iDelta++) {
-
-    int iImage = x + iDelta;
-    int iSample = sampleXCenter + iDelta; // assumes sample starts at lowest row
-    if ((0 <= iImage) && (iImage < width)) {
-
-      for (int jDelta = jDeltaMin; jDelta < jDeltaMax; jDelta++) {
-
-        int jImage = y + jDelta;
-        int jSample = sampleYCenter + jDelta; // assumes sample starts at lowest column
-        if ((0 <= jImage) && (jImage < height)) {
-
-          // Good correlation occurs when both pixels have the same value
-          if (image [FOLD2DINDEX(iImage, jImage, height)] == sample [FOLD2DINDEX(iSample, jSample, height)]) {
-
-            sum += 1;
-
-          } else {
-
-            sum -= 1;
-
-          }
-
-          // Once an image pixel has been scanned then it gets turned off - so in a sense this is a greedy algorithm
-          image [FOLD2DINDEX(iImage, jImage, height)] = PIXEL_OFF;
-	}
-      }
-    }
-  }
-
-  return sum;
-}
-
 void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
                                          int width,
                                          int height,
@@ -242,6 +163,11 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
   if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
 
     QTextStream str (&file);
+
+    str << "# Suggested gnuplot commands:" << endl;
+    str << "#       set hidden3d" << endl;
+    str << "#       splot \"" << filename << "\" u 1:2:3 with pm3d" << endl;
+    str << endl;
 
     str << "# I J Convolution" << endl;
     for (int i = 0; i < width; i++) {
@@ -255,13 +181,9 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
   }
 
   file.close();
-
-  cout << "Suggested gnuplot commands" << endl;
-  cout << "set hidden3d" << endl;
-  cout << "splot """ << filename.toLatin1().data() << """ u 1:2:3 with pm3d" << endl;
 }
 
-QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointPixels,
+QList<QPoint> PointMatchAlgorithm::findPoints (const QList<PointMatchPixel> &samplePointPixels,
                                                const QImage &imageProcessed,
                                                const DocumentModelPointMatch &modelPointMatch,
                                                const Points &pointsExisting)
@@ -323,16 +245,12 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<QPoint> &samplePointP
   // Assemble local maxima, where each is the maxima centered in a region
   // having a width of sampleWidth and a height of sampleHeight
   PointMatchList listCreated;
-  assembleLocalMaxima(image,
-                      sample,
-                      convolution,
+  assembleLocalMaxima(convolution,
                       listCreated,
                       width,
                       height,
                       sampleXCenter,
-                      sampleYCenter,
-                      sampleXExtent,
-                      sampleYExtent);
+                      sampleYCenter);
   qSort (listCreated);
 
   // Copy sorted match points to output
@@ -393,7 +311,7 @@ void PointMatchAlgorithm::loadImage(const QImage &imageProcessed,
   fftw_execute(pImage);
 }
 
-void PointMatchAlgorithm::loadSample(const QList<QPoint> &samplePointPixels,
+void PointMatchAlgorithm::loadSample(const QList<PointMatchPixel> &samplePointPixels,
                                      int width,
                                      int height,
                                      double** sample,
@@ -515,7 +433,7 @@ void PointMatchAlgorithm::populateImageArray(const QImage &imageProcessed,
   }
 }
 
-void PointMatchAlgorithm::populateSampleArray(const QList<QPoint> &samplePointPixels,
+void PointMatchAlgorithm::populateSampleArray(const QList<PointMatchPixel> &samplePointPixels,
                                               int width,
                                               int height,
                                               double** sample,
@@ -532,8 +450,8 @@ void PointMatchAlgorithm::populateSampleArray(const QList<QPoint> &samplePointPi
   int xMin = width, yMin = height, xMax = 0, yMax = 0;
   for (i = 0; i < (unsigned int) samplePointPixels.size(); i++) {
 
-    int x = (samplePointPixels.at(i)).x();
-    int y = (samplePointPixels.at(i)).y();
+    int x = (samplePointPixels.at(i)).xOffset();
+    int y = (samplePointPixels.at(i)).yOffset();
     if (first || (x < xMin))
       xMin = x;
     if (first || (x > xMax))
@@ -561,23 +479,34 @@ void PointMatchAlgorithm::populateSampleArray(const QList<QPoint> &samplePointPi
     }
   }
 
-  int xSum = 0, ySum = 0;
+  // We compute the center of mass of the on pixels. This means user does not have to precisely align
+  // the encompassing circle when selecting the sample point, since surrounding off pixels will not
+  // affect the center of mass computed only from on pixels
+  double xSumOn = 0, ySumOn = 0, countOn = 0;
+
   for (i = 0; i < (unsigned int) samplePointPixels.size(); i++) {
 
     // Place, quite arbitrarily, the sample image up against the top left corner
-    x = (samplePointPixels.at(i)).x() - xMin;
-    y = (samplePointPixels.at(i)).y() - yMin;
+    x = (samplePointPixels.at(i)).xOffset() - xMin;
+    y = (samplePointPixels.at(i)).yOffset() - yMin;
     ENGAUGE_ASSERT((0 < x) && (x < width));
     ENGAUGE_ASSERT((0 < y) && (y < height));
-    (*sample) [FOLD2DINDEX(x, y, height)] = PIXEL_ON;
 
-    xSum += x;
-    ySum += y;
+    bool pixelIsOn = samplePointPixels.at(i).pixelIsOn();
+
+    (*sample) [FOLD2DINDEX(x, y, height)] = (pixelIsOn ? PIXEL_ON : PIXEL_OFF);
+
+    if (pixelIsOn) {
+      xSumOn += x;
+      ySumOn += y;
+      ++countOn;
+    }
   }
 
   // Compute location of center of mass, which will represent the center of the point
-  *sampleXCenter = (int) ((double) xSum / (double) samplePointPixels.size() + 0.5);
-  *sampleYCenter = (int) ((double) ySum / (double) samplePointPixels.size() + 0.5);
+  countOn = qMax (1.0, countOn);
+  *sampleXCenter = (int) (0.5 + xSumOn / countOn);
+  *sampleYCenter = (int) (0.5 + ySumOn / countOn);
 
   // Dimensions of portion of array actually used by sample (rest is empty)
   *sampleXExtent = xMax - xMin + 1;
@@ -643,24 +572,4 @@ void PointMatchAlgorithm::removePixelsNearExistingPoints(double* image,
       }
     }
   }
-}
-
-int PointMatchAlgorithm::xDeltaMax(int sampleXCenter, int sampleXExtent)
-{
-  return (int) sampleXExtent - (int) sampleXCenter;
-}
-
-int PointMatchAlgorithm::xDeltaMin(int sampleXCenter)
-{
-  return -1 * (int) sampleXCenter;
-}
-
-int PointMatchAlgorithm::yDeltaMax(int sampleYCenter, int sampleYExtent)
-{
-  return (int) sampleYExtent - (int) sampleYCenter;
-}
-
-int PointMatchAlgorithm::yDeltaMin(int sampleYCenter)
-{
-  return -1 * (int) sampleYCenter;
 }

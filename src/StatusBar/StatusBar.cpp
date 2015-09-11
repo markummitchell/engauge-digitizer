@@ -25,6 +25,8 @@ const QString LABEL_ZOOM_1_TO_8 ("1:8");
 const QString LABEL_ZOOM_1_TO_16 ("1:16");
 const QString LABEL_ZOOM_FILL ("Fill");
 
+const int TEMPORARY_MESSAGE_LIFETIME = 5000; // Milliseconds. Two seconds is too fast even when the text is anticipated
+
 const int MIN_WIDTH_COMBO_UNITS = 160;
 const int MAX_WIDTH_GROUP_UNITS = 400;
 const int MAX_SIZE_EDIT_COORDS = 550; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
@@ -165,7 +167,7 @@ void StatusBar::showTemporaryMessage(const QString &message)
       m_timer->setSingleShot(true);
       m_timer->start (0);
     }
-    m_statusBar.showMessage (message, 2000);
+    m_statusBar.showMessage (message, TEMPORARY_MESSAGE_LIFETIME);
   }
 }
 

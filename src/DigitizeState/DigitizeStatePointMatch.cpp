@@ -14,6 +14,7 @@
 #include "OrdinalGenerator.h"
 #include "PointMatchAlgorithm.h"
 #include "PointStyle.h"
+#include <QApplication>
 #include <QCursor>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
@@ -117,30 +118,38 @@ void DigitizeStatePointMatch::end ()
   m_outline = 0;
 }
 
-QList<QPoint> DigitizeStatePointMatch::extractSamplePointPixels (const QImage &img,
-                                                                 const DocumentModelPointMatch &modelPointMatch,
-                                                                 const QPointF &posScreen) const
+QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const QImage &img,
+                                                                          const DocumentModelPointMatch &modelPointMatch,
+                                                                          const QPointF &posScreen) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::extractSamplePointPixels";
 
-  QList<QPoint> samplePointPixels;
+  // All points inside modelPointMatch.maxPointSize() are collected, whether or not they
+  // are on or off. Originally only the on points were collected, but obvious mismatches
+  // were happening (example, 3x3 point would appear to be found in several places inside 8x32 rectangle)
+  QList<PointMatchPixel> samplePointPixels;
 
-  int radius = modelPointMatch.maxPointSize() / 2;
+  int radiusMax = modelPointMatch.maxPointSize() / 2;
 
   ColorFilter colorFilter;
-  for (int xOffset = -radius; xOffset <= radius; xOffset++) {
-    for (int yOffset = -radius; yOffset <= radius; yOffset++) {
+  for (int xOffset = -radiusMax; xOffset <= radiusMax; xOffset++) {
+    for (int yOffset = -radiusMax; yOffset <= radiusMax; yOffset++) {
 
       int x = posScreen.x() + xOffset;
       int y = posScreen.y() + yOffset;
-      bool pixelIsOn = colorFilter.pixelFilteredIsOn (img,
-                                                      x,
-                                                      y);
+      int radius = qSqrt (xOffset * xOffset + yOffset * yOffset);
 
-      if (pixelIsOn) {
+      if (radius <= radiusMax) {
 
-        samplePointPixels.push_back (QPoint (xOffset,
-                                             yOffset));
+        bool pixelIsOn = colorFilter.pixelFilteredIsOn (img,
+                                                        x,
+                                                        y);
+
+        PointMatchPixel point (xOffset,
+                               yOffset,
+                               pixelIsOn);
+
+        samplePointPixels.push_back (point);
       }
     }
   }
@@ -216,19 +225,25 @@ void DigitizeStatePointMatch::findPointsAndShowFirstCandidate (const QPointF &po
   const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
   const QImage &img = context().mainWindow().imageFiltered();
 
-  QList<QPoint> samplePointPixels = extractSamplePointPixels (img,
-                                                              modelPointMatch,
-                                                              posScreen);
+  QList<PointMatchPixel> samplePointPixels = extractSamplePointPixels (img,
+                                                                       modelPointMatch,
+                                                                       posScreen);
 
   QString curveName = activeCurve();
   const Document &doc = context().cmdMediator().document();
   const Curve *curve = doc.curveForCurveName (curveName);
+
+  // The point match algorithm takes a few seconds, so set the cursor so user knows we are processing
+  QApplication::setOverrideCursor(Qt::WaitCursor);
 
   PointMatchAlgorithm pointMatchAlgorithm (context().isGnuplot());
   m_candidatePoints = pointMatchAlgorithm.findPoints (samplePointPixels,
                                                       img,
                                                       modelPointMatch,
                                                       curve->points());
+
+  QApplication::restoreOverrideCursor(); // Heavy duty processing has finished
+  context().mainWindow().showTemporaryMessage ("Right arrow adds next matched point");
 
   popCandidatePoint ();
 }

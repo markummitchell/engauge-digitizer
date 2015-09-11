@@ -183,6 +183,7 @@ HEADERS  += \
     Point/Point.h \
     Point/PointIdentifiers.h \
     Point/PointMatchAlgorithm.h \
+    Point/PointMatchPixel.h \
     Point/PointMatchTriplet.h \
     Point/Points.h \
     Point/PointShape.h \
@@ -396,6 +397,7 @@ SOURCES += \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointMatchAlgorithm.cpp \
+    Point/PointMatchPixel.cpp \
     Point/PointMatchTriplet.cpp \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
