@@ -2843,6 +2843,7 @@ void MainWindow::updateControls ()
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
+  m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 

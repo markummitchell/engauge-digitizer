@@ -1,5 +1,6 @@
 #include "ChecklistGuidePageCurves.h"
 #include "ChecklistLineEdit.h"
+#include "Curve.h"
 #include "Logger.h"
 #include <QHeaderView>
 #include <QRadioButton>
@@ -23,6 +24,8 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves() :
     connect (m_edit [i], SIGNAL (signalKeyRelease()), this, SLOT (slotTableChanged()));
     addLineEdit (m_edit [i]);
   }
+
+  m_edit [0]->setText (DEFAULT_GRAPH_CURVE_NAME); // Simple default name
 
   addHtml ("<p>&nbsp;</p>");
 

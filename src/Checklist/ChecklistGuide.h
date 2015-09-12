@@ -15,6 +15,9 @@ class ChecklistGuide : public QDockWidget
   /// Single constructor. Parent is needed or else this widget cannot be redocked after being undocked
   ChecklistGuide (QWidget *parent);
 
+  /// When browser is empty, it is pointless to show it
+  bool browserIsEmpty () const;
+
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
 

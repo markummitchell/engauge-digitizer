@@ -69,6 +69,8 @@ private:
 
   QPainterPath drawLinesSmooth ();
   QPainterPath drawLinesStraight ();
+  bool needOrdinalRenumbering () const; // True if m_graphicsPoints ordinal keys need renumbering
+  void renumberOrdinals(); // Renumbers m_graphicsPoints ordinal keys
 
   const QString m_curveName;
   OrdinalToGraphicsPoint m_graphicsPoints;

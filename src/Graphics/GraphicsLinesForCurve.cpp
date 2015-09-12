@@ -213,6 +213,26 @@ void GraphicsLinesForCurve::lineMembershipReset ()
   }
 }
 
+bool GraphicsLinesForCurve::needOrdinalRenumbering () const
+{
+  // Ordinals should be 0, 1, ...
+  bool needRenumbering = false;
+  for (int ordinalKeyWanted = 0; ordinalKeyWanted < m_graphicsPoints.count(); ordinalKeyWanted++) {
+
+    double ordinalKeyGot = m_graphicsPoints.keys().at (ordinalKeyWanted);
+
+    // Sanity checks
+    ENGAUGE_ASSERT (ordinalKeyGot != Point::UNDEFINED_ORDINAL ());
+
+    if (ordinalKeyWanted != ordinalKeyGot) {
+      needRenumbering = true;
+      break;
+    }
+  }
+
+  return needRenumbering;
+}
+
 void GraphicsLinesForCurve::printStream (QString indentation,
                                          QTextStream &str) const
 {
@@ -267,6 +287,30 @@ void GraphicsLinesForCurve::removeTemporaryPointIfExists()
   }
 }
 
+void GraphicsLinesForCurve::renumberOrdinals ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::renumberOrdinals";
+
+  int ordinalKeyWanted;
+
+  // Ordinals should be 0, 1, and so on. Assigning a list to QMap::keys has no effect, so the
+  // approach is to copy to a temporary list and then copy back
+  QList<GraphicsPoint*> points;
+  for (ordinalKeyWanted = 0; ordinalKeyWanted < m_graphicsPoints.count(); ordinalKeyWanted++) {
+
+    GraphicsPoint *graphicsPoint = m_graphicsPoints.values().at (ordinalKeyWanted);
+    points << graphicsPoint;
+  }
+
+  m_graphicsPoints.clear ();
+
+  for (ordinalKeyWanted = 0; ordinalKeyWanted < points.count(); ordinalKeyWanted++) {
+
+    GraphicsPoint *graphicsPoint = points.at (ordinalKeyWanted);
+    m_graphicsPoints [ordinalKeyWanted] = graphicsPoint;
+  }
+}
+
 void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                                 const PointStyle &pointStyle,
                                                 const Point &point)
@@ -313,28 +357,18 @@ void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
 
 void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle)
 {
-  // LOG4CPP_DEBUG_S is below
-  QString ordinals, delimiter;
-  QTextStream str (&ordinals);
+  // LOG4CPP_INFO_S is below
 
-  // Order by ordinals locally
-  OrdinalToGraphicsPoint::const_iterator itr;
-  str << "(";
-  for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+  bool needRenumbering = needOrdinalRenumbering ();
+  if (needRenumbering) {
 
-    double ordinalKey = itr.key();
+    renumberOrdinals();
 
-    // Sanity checks
-    ENGAUGE_ASSERT (ordinalKey != Point::UNDEFINED_ORDINAL ());
-
-    str << delimiter << ordinalKey;
-    delimiter = ", ";
   }
-  str << ")";
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints"
-                               << " curve=" << m_curveName.toLatin1().data()
-                               << " ordinals=" << ordinals.toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints"
+                              << " numberPoints=" << m_graphicsPoints.count()
+                              << " ordinalRenumbering=" << (needRenumbering ? "true" : "false");
 
   if (lineStyle.curveConnectAs() != CONNECT_SKIP_FOR_AXIS_CURVE) {
 

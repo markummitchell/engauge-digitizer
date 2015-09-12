@@ -23,6 +23,11 @@ ChecklistGuide::ChecklistGuide (QWidget *parent) :
   setWidget (m_browser);
 }
 
+bool ChecklistGuide::browserIsEmpty () const
+{
+  return m_browser->toPlainText().isEmpty();
+}
+
 void ChecklistGuide::closeEvent(QCloseEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuide::closeEvent";
