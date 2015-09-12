@@ -1946,43 +1946,51 @@ void MainWindow::slotFileExport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileExport";
 
-  const int SELECTED_FILTER = 0;
-  QString filter = QString ("Text CSV (*.%1);;Text TSV (*.%2);;All files (*.*)")
-                   .arg (CSV_FILENAME_EXTENSION)
-                   .arg (TSV_FILENAME_EXTENSION);
-  QString defaultFileName = QString ("%1/%2.%3")
-                            .arg (QDir::currentPath ())
-                            .arg (m_currentFile)
-                            .arg (CSV_FILENAME_EXTENSION);
-  QString fileName = QFileDialog::getSaveFileName (this,
-                                                   tr("Export"),
-                                                   defaultFileName,
-                                                   filter,
-                                                   SELECTED_FILTER);
-  if (!fileName.isEmpty ()) {
+  if (m_transformation.transformIsDefined()) {
 
-    QFile file (fileName);
-    if (file.open(QIODevice::WriteOnly)) {
+    const int SELECTED_FILTER = 0;
+    QString filter = QString ("Text CSV (*.%1);;Text TSV (*.%2);;All files (*.*)")
+                     .arg (CSV_FILENAME_EXTENSION)
+                     .arg (TSV_FILENAME_EXTENSION);
+    QString defaultFileName = QString ("%1/%2.%3")
+                              .arg (QDir::currentPath ())
+                              .arg (m_currentFile)
+                              .arg (CSV_FILENAME_EXTENSION);
+    QString fileName = QFileDialog::getSaveFileName (this,
+                                                     tr("Export"),
+                                                     defaultFileName,
+                                                     filter,
+                                                     SELECTED_FILTER);
+    if (!fileName.isEmpty ()) {
 
-      QTextStream str (&file);
+      QFile file (fileName);
+      if (file.open(QIODevice::WriteOnly)) {
 
-      ExportToFile exportStrategy;
-      exportStrategy.exportToFile (cmdMediator().document().modelExport(),
-                                   cmdMediator().document(),
-                                   transformation (),
-                                   str);
+        QTextStream str (&file);
 
-      // Update checklist guide status
-      m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
-      m_dockChecklistGuide->update (*m_cmdMediator,
-                                    m_isDocumentExported);
+        ExportToFile exportStrategy;
+        exportStrategy.exportToFile (cmdMediator().document().modelExport(),
+                                     cmdMediator().document(),
+                                     transformation (),
+                                     str);
 
-    } else {
+        // Update checklist guide status
+        m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
+        m_dockChecklistGuide->update (*m_cmdMediator,
+                                      m_isDocumentExported);
 
-      QMessageBox::critical (0,
-                             engaugeWindowTitle(),
-                             tr ("Unable to export to file ") + fileName);
+      } else {
+
+        QMessageBox::critical (0,
+                               engaugeWindowTitle(),
+                               tr ("Unable to export to file ") + fileName);
+      }
     }
+  } else {
+    QMessageBox::information (0,
+                              engaugeWindowTitle(),
+                              tr ("Export can only be performed after three axis points have been created, "
+                                  "so the coordinates are defined"));
   }
 }
 
