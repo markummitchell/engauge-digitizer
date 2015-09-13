@@ -28,6 +28,7 @@ echo "Afterwards, check $LOGFILE to verify success"
 rm .moc_test/* 2>/dev/null
 rm .obj_test/* 2>/dev/null
 rm ../bin/Test* 2>/dev/null
+echo "Rebuilding..."
 
 # Make sure correct qt installation is being used, by looking for '5.' in the version number
 VERSION5=`qmake -v | grep '5\.'`
@@ -44,7 +45,6 @@ else
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake engauge_test.pro
-        make clean 2>>$LOGFILE >/dev/null
 	make all 2>>$LOGFILE >/dev/null
 	../bin/$t
 	if [ $argcount -ne 1 ]
