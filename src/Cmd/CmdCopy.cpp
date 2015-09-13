@@ -25,21 +25,12 @@ CmdCopy::CmdCopy(MainWindow &mainWindow,
               CMD_DESCRIPTION),
   m_transformIsDefined (mainWindow.transformIsDefined())
 {
-  QStringList selected;
-  QStringList::const_iterator itr;
-  for (itr = selectedPointIdentifiers.begin (); itr != selectedPointIdentifiers.end (); itr++) {
-
-    QString selectedPointIdentifier = *itr;
-
-    selected << selectedPointIdentifier;
-  }
-
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::CmdCopy"
-                              << " selected=" << selected.join (", ").toLatin1 ().data () << ")";
+                              << " selected=" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
 
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
-  exportStrategy.exportToClipboard (selected,
+  exportStrategy.exportToClipboard (selectedPointIdentifiers,
                                     mainWindow.transformIsDefined(),
                                     strCsv,
                                     strHtml,

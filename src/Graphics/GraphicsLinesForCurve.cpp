@@ -52,11 +52,6 @@ void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
                               << " pos=" << QPointFToString (graphicsPoint.pos()).toLatin1().data()
                               << " newPointCount=" << (m_graphicsPoints.count() + 1);
 
-  // Sanity checks, which do NOT include checking that ordinal!=UNDEFINED_ORDINAL since quite often
-  // (like with temporary point that appears immediately and before any command) there is one point
-  // with ordinal=UNDEFINED_ORDINAL
-  ENGAUGE_ASSERT (!m_graphicsPoints.contains (ordinal));
-
   m_graphicsPoints [ordinal] = &graphicsPoint;
 }
 
@@ -325,8 +320,11 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
     graphicsPoint = m_graphicsPoints [point.ordinal()];
 
     // Due to ordinal renumbering, the coordinates may belong to some other point so we override
-    // them for consistent ordinal-position mapping
+    // them for consistent ordinal-position mapping. Updating the identifier also was added for
+    // better logging (i.e. consistency between Document and GraphicsScene dumps), but happened
+    // to fix a bug with the wrong set of points getting deleted from Cut and Delete
     graphicsPoint->setPos (point.posScreen());
+    graphicsPoint->setData (DATA_KEY_IDENTIFIER, point.identifier());
 
   } else {
 

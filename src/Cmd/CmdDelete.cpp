@@ -21,22 +21,13 @@ CmdDelete::CmdDelete(MainWindow &mainWindow,
               document,
               CMD_DESCRIPTION)
 {
-  QStringList selected;
-  QStringList::const_iterator itr;
-  for (itr = selectedPointIdentifiers.begin (); itr != selectedPointIdentifiers.end (); itr++) {
-
-    QString selectedPointIdentifier = *itr;
-
-    selected << selectedPointIdentifier;
-  }
-
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete"
-                              << " selected=(" << selected.join (", ").toLatin1 ().data () << ")";
+                              << " selected=(" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
 
   // Export to clipboard
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
-  exportStrategy.exportToClipboard (selected,
+  exportStrategy.exportToClipboard (selectedPointIdentifiers,
                                     mainWindow.transformIsDefined(),
                                     strCsv,
                                     strHtml,
