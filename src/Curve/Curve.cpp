@@ -4,6 +4,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
+#include "PointComparator.h"
 #include <QDebug>
 #include <QMap>
 #include <QTextStream>
@@ -415,7 +416,7 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
                               << " curve=" << m_curveName.toLatin1().data()
                               << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 
-  // Make sure ordinals are properly ordered
+  // Make sure ordinals are properly ordered. Sorting is done afterward
 
   if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
       curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
@@ -433,6 +434,10 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
     ENGAUGE_ASSERT (false);
 
   }
+
+  qSort (m_points.begin(),
+         m_points.end(),
+         PointComparator());
 }
 
 void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)

@@ -92,6 +92,7 @@ void CmdCopy::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -99,6 +100,7 @@ void CmdCopy::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdUndo";
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

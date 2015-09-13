@@ -176,9 +176,12 @@ void GraphicsScene::resetPositionHasChangedFlags()
 
 QStringList GraphicsScene::selectedPointIdentifiers () const
 {
-  QStringList selectedIds;
+  const QList<QGraphicsItem*> &items = QGraphicsScene::selectedItems();
 
-  const QList<QGraphicsItem*> &items = QGraphicsScene::items();
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::selectedPointIdentifiers"
+                              << " selectedItems=" << items.count();
+
+  QStringList selectedIds;
   QList<QGraphicsItem*>::const_iterator itr;
   for (itr = items.begin(); itr != items.end(); itr++) {
 
@@ -186,8 +189,7 @@ QStringList GraphicsScene::selectedPointIdentifiers () const
 
     // Skip the image and only keep the Points
     bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    bool isSelected = item->isSelected ();
-    if (isPoint && isSelected) {
+    if (isPoint) {
 
       // Add Point to the list
       selectedIds << item->data(DATA_KEY_IDENTIFIER).toString ();

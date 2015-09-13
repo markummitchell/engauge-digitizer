@@ -95,6 +95,7 @@ void CmdCut::cmdRedo ()
 
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -104,6 +105,7 @@ void CmdCut::cmdUndo ()
 
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 

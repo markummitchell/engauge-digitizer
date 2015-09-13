@@ -181,6 +181,7 @@ HEADERS  += \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Point/Point.h \
+    Point/PointComparator.h \
     Point/PointIdentifiers.h \
     Point/PointMatchAlgorithm.h \
     Point/PointMatchPixel.h \

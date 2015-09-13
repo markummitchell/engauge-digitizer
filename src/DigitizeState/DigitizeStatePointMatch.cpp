@@ -180,7 +180,7 @@ void DigitizeStatePointMatch::handleKeyPress (Qt::Key key,
 
 void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseMove";
+//  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::handleMouseMove";
 
   const DocumentModelPointMatch &modelPointMatch = context().cmdMediator().document().modelPointMatch();
 

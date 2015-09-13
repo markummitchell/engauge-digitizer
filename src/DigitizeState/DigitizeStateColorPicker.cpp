@@ -222,7 +222,7 @@ void DigitizeStateColorPicker::handleKeyPress (Qt::Key key,
 
 void DigitizeStateColorPicker::handleMouseMove (QPointF /* posScreen */)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseMove";
+//  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseMove";
 }
 
 void DigitizeStateColorPicker::handleMousePress (QPointF /* posScreen */)

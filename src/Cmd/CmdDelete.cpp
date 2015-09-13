@@ -80,6 +80,7 @@ void CmdDelete::cmdRedo ()
 
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
@@ -89,6 +90,7 @@ void CmdDelete::cmdUndo ()
 
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
+  document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
