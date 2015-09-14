@@ -35,7 +35,8 @@ void TutorialStateChecklistWizardAbstract::begin ()
                             "digitized.",
                             QPoint (285, 175));
   m_text3 = createTextItem ("Additional options are available in\n"
-                            "the various Settings menus.",
+                            "the various Settings menus.\n\n"
+                            "This ends the tutorial. Good luck!",
                             QPoint (285, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();

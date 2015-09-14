@@ -31,8 +31,7 @@ void TutorialStateSegmentFill::begin ()
   m_text2 = createTextItem ("Step 3 - Move the cursor over a line\n"
                             "segment in the desired curve. If a\n"
                             "green line appears, click on it once\n"
-                            "to generate many points.\n\n"
-                            "This ends the tutorial. Good luck!",
+                            "to generate many points.",
                             QPoint (300, 220));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();

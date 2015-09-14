@@ -36,8 +36,7 @@ void TutorialStatePointMatch::begin ()
                             "matched point with a yellow cross.\n"
                             "Press the Right Arrow key to accept\n"
                             "the matched point. Repeat this step\n"
-                            "until there are no more points.\n\n"
-                            "This ends the tutorial. Good luck!",
+                            "until there are no more points.",
                             QPoint (320, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
