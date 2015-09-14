@@ -211,6 +211,9 @@ HEADERS  += \
     Tutorial/TutorialDlg.h \
     Tutorial/TutorialStateAbstractBase.h \
     Tutorial/TutorialStateAxisPoints.h \
+    Tutorial/TutorialStateChecklistWizardAbstract.h \
+    Tutorial/TutorialStateChecklistWizardLines.h \
+    Tutorial/TutorialStateChecklistWizardPoints.h \
     Tutorial/TutorialStateColorFilter.h \
     Tutorial/TutorialStateContext.h \
     Tutorial/TutorialStateCurveSelection.h \
@@ -425,6 +428,9 @@ SOURCES += \
     Tutorial/TutorialDlg.cpp \
     Tutorial/TutorialStateAbstractBase.cpp \
     Tutorial/TutorialStateAxisPoints.cpp \
+    Tutorial/TutorialStateChecklistWizardAbstract.cpp \
+    Tutorial/TutorialStateChecklistWizardLines.cpp \
+    Tutorial/TutorialStateChecklistWizardPoints.cpp \
     Tutorial/TutorialStateColorFilter.cpp \
     Tutorial/TutorialStateContext.cpp \
     Tutorial/TutorialStateCurveSelection.cpp \

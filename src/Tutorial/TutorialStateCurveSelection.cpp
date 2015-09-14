@@ -40,7 +40,7 @@ void TutorialStateCurveSelection::begin ()
                             QPoint (250, 200));
   m_text3 = createTextItem ("If the current curve is no longer visible\n"
                             "in the filtered image, then change the\n"
-                            "current Color Filter settings. In the figure\n"
+                            "current Color Filter settings. In the figure,\n"
                             "the orange points have disappeared.",
                             QPoint (250, 330));
 
@@ -75,7 +75,7 @@ void TutorialStateCurveSelection::end ()
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
   context().tutorialDlg().scene().removeItem (m_text3);
-  // TutorialButton removes itself from the scene
+  // TutorialButtons removes themselves from the scene
 
   delete m_title;
   delete m_background;

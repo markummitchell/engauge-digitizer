@@ -21,6 +21,9 @@ class TutorialStatePointMatch : public TutorialStateAbstractBase
   virtual void end ();
 
  public slots:
+  /// Slot called when next button is triggered
+  void slotNext();
+
   /// Slot called to return to previous panel
   void slotPrevious();
 
@@ -33,6 +36,7 @@ class TutorialStatePointMatch : public TutorialStateAbstractBase
   QGraphicsTextItem *m_text2;
   QGraphicsTextItem *m_text3;
   TutorialButton *m_previous;
+  TutorialButton *m_next;
 };
 
 #endif // TUTORIAL_STATE_POINT_MATCH_H

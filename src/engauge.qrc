@@ -23,5 +23,6 @@
         <file>img/panel_color_filter.png</file>
         <file>img/panel_point_match.png</file>
         <file>img/panel_curve_selection.png</file>
+        <file>img/panel_checklist.png</file>
     </qresource>
 </RCC>

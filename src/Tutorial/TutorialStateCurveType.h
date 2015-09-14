@@ -38,8 +38,8 @@ class TutorialStateCurveType : public TutorialStateAbstractBase
   QGraphicsTextItem *m_text1;
   QGraphicsTextItem *m_text2;
   TutorialButton *m_previous;
-  TutorialButton *m_nextCurves;
   TutorialButton *m_nextLines;
+  TutorialButton *m_nextPoints;
 };
 
 #endif // TUTORIAL_STATE_CURVE_TYPE_H

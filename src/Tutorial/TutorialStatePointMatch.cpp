@@ -47,6 +47,12 @@ void TutorialStatePointMatch::begin ()
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height() - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
+
+  m_next = new TutorialButton ("Next",
+                               context().tutorialDlg().scene());
+  m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
+                               backgroundSize.height () - buttonMargin () - m_next->size ().height ()));
+  connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
 }
 
 void TutorialStatePointMatch::end ()
@@ -59,7 +65,7 @@ void TutorialStatePointMatch::end ()
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
   context().tutorialDlg().scene().removeItem (m_text3);
-  // TutorialButton removes itself from the scene
+  // TutorialButtons removes themselves from the scene
 
   delete m_title;
   delete m_background;
@@ -67,6 +73,7 @@ void TutorialStatePointMatch::end ()
   delete m_text1;
   delete m_text2;
   delete m_text3;
+  delete m_next;
   delete m_previous;
 
   m_title = 0;
@@ -75,7 +82,15 @@ void TutorialStatePointMatch::end ()
   m_text1 = 0;
   m_text2 = 0;
   m_text3 = 0;
+  m_next = 0;
   m_previous = 0;
+}
+
+void TutorialStatePointMatch::slotNext ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStatePointMatch::slotNext";
+
+  context().requestDelayedStateTransition (TUTORIAL_STATE_CHECKLIST_WIZARD_POINTS);
 }
 
 void TutorialStatePointMatch::slotPrevious ()

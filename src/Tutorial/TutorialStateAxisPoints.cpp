@@ -60,7 +60,7 @@ void TutorialStateAxisPoints::end ()
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
-  // TutorialButton removes itself from the scene
+  // TutorialButtons removes themselves from the scene
 
   delete m_title;
   delete m_background;

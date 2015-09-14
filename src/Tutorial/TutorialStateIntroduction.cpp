@@ -30,9 +30,10 @@ void TutorialStateIntroduction::begin ()
                             "exported, as numbers, to other software tools.",
                             QPoint (210, 330));
 
+  QSize backgroundSize = context().tutorialDlg().backgroundSize();
+
   m_next = new TutorialButton ("Next",
                                context().tutorialDlg().scene());
-  QSize backgroundSize = context().tutorialDlg().backgroundSize();
   m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
                                backgroundSize.height () - buttonMargin () - m_next->size ().height ()));
   connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
@@ -47,7 +48,7 @@ void TutorialStateIntroduction::end ()
   context().tutorialDlg().scene().removeItem (m_text0);
   context().tutorialDlg().scene().removeItem (m_text1);
   context().tutorialDlg().scene().removeItem (m_text2);
-  // TutorialButton removes itself from the scene
+  // TutorialButtons removes themselves from the scene
 
   delete m_title;
   delete m_background;

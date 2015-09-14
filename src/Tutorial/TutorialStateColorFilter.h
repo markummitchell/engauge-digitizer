@@ -22,7 +22,7 @@ class TutorialStateColorFilter : public TutorialStateAbstractBase
 
  public slots:
   /// Slot called to return to previous panel
-  void slotPrevious();
+  void slotBack();
 
  private:
 
@@ -33,7 +33,7 @@ class TutorialStateColorFilter : public TutorialStateAbstractBase
   QGraphicsTextItem *m_text2;
   QGraphicsTextItem *m_text3;
   QGraphicsTextItem *m_text4;
-  TutorialButton *m_previous;
+  TutorialButton *m_back;
 };
 
 #endif // TUTORIAL_STATE_COLOR_FILTER_H

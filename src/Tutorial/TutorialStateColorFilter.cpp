@@ -27,29 +27,29 @@ void TutorialStateColorFilter::begin ()
                             QPoint (260, 30));
   m_text1 = createTextItem ("Step 1 - Select the Settings / Color\n"
                             "Filter menu option.",
-                            QPoint (285, 125));
+                            QPoint (285, 115));
   m_text2 = createTextItem ("Step 2 - Select the curve that will\n"
                             "be given the new settings.",
-                            QPoint (285, 175));
+                            QPoint (285, 165));
   m_text3 = createTextItem ("Step 3 - Select the mode. Intensity is\n"
                             "suggested for uncolored lines, and Hue\n"
                             "is suggested for colored lines.",
-                            QPoint (285, 200));
+                            QPoint (285, 210));
   m_text4 = createTextItem ("Step 4 - Adjust the included range by\n"
-                            "dragging the green handles. The graph\n"
-                            "shows a histogram distribution of the\n"
-                            "values underneath, until the curve is\n"
-                            "clear in the preview window below. Click\n"
-                            "Ok when finished.",
+                            "dragging the green handles, until the\n"
+                            "curve is clear in the preview window\n"
+                            "below. The graph shows a histogram\n"
+                            "distribution of the values underneath.\n"
+                            "Click Ok when finished.",
                             QPoint (285, 280));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
-  m_previous = new TutorialButton ("Previous",
-                                   context().tutorialDlg().scene());
-  m_previous->setGeometry (QPoint (buttonMargin (),
-                                   backgroundSize.height() - buttonMargin() - m_previous->size().height()));
-  connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
+  m_back = new TutorialButton ("Back",
+                               context().tutorialDlg().scene());
+  m_back->setGeometry (QPoint (backgroundSize.width () / 2 - m_back->size().width () / 2,
+                               backgroundSize.height() - buttonMargin() - m_back->size().height()));
+  connect (m_back, SIGNAL (signalTriggered ()), this, SLOT (slotBack ()));
 }
 
 void TutorialStateColorFilter::end ()
@@ -63,7 +63,7 @@ void TutorialStateColorFilter::end ()
   context().tutorialDlg().scene().removeItem (m_text2);
   context().tutorialDlg().scene().removeItem (m_text3);
   context().tutorialDlg().scene().removeItem (m_text4);
-  // TutorialButton removes itself from the scene
+  // TutorialButtons removes themselves from the scene
 
   delete m_title;
   delete m_background;
@@ -72,7 +72,7 @@ void TutorialStateColorFilter::end ()
   delete m_text2;
   delete m_text3;
   delete m_text4;
-  delete m_previous;
+  delete m_back;
 
   m_title = 0;
   m_background = 0;
@@ -81,12 +81,12 @@ void TutorialStateColorFilter::end ()
   m_text2 = 0;
   m_text3 = 0;
   m_text4 = 0;
-  m_previous = 0;
+  m_back = 0;
 }
 
-void TutorialStateColorFilter::slotPrevious ()
+void TutorialStateColorFilter::slotBack ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotPrevious";
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotBack";
 
   context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_SELECTION);
 }
