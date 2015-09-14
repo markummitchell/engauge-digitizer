@@ -83,7 +83,7 @@ void TutorialStateAxisPoints::slotNext ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::slotNextCurves";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_TYPE);
+  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_SELECTION);
 }
 
 void TutorialStateAxisPoints::slotPrevious ()

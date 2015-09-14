@@ -23,25 +23,24 @@ void TutorialStateColorFilter::begin ()
   m_text0 = createTextItem ("Each curve has Color Filter settings that\n"
                             "are applied in Segment Fill mode. For\n"
                             "black lines the defaults work well, but for\n"
-                            "colored lines the settings can be improved",
+                            "colored lines the settings can be improved.",
                             QPoint (260, 30));
   m_text1 = createTextItem ("Step 1 - Select the Settings / Color\n"
-                            "Filter menu option",
-                            QPoint (285, 115));
+                            "Filter menu option.",
+                            QPoint (285, 125));
   m_text2 = createTextItem ("Step 2 - Select the curve that will\n"
-                            "be given the new settings",
-                            QPoint (285, 155));
+                            "be given the new settings.",
+                            QPoint (285, 175));
   m_text3 = createTextItem ("Step 3 - Select the mode. Intensity is\n"
                             "suggested for uncolored lines, and Hue\n"
-                            "is suggested for colored lines",
+                            "is suggested for colored lines.",
                             QPoint (285, 200));
   m_text4 = createTextItem ("Step 4 - Adjust the included range by\n"
                             "dragging the green handles. The graph\n"
                             "shows a histogram distribution of the\n"
                             "values underneath, until the curve is\n"
                             "clear in the preview window below. Click\n"
-                            "Ok when finished\n\n"
-                            "This ends the tutorial. Good luck!",
+                            "Ok when finished.",
                             QPoint (285, 280));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
@@ -89,5 +88,5 @@ void TutorialStateColorFilter::slotPrevious ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateColorFilter::slotPrevious";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_SEGMENT_FILL);
+  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_SELECTION);
 }

@@ -21,17 +21,17 @@ void TutorialStateCurveType::begin ()
   m_background = createPixmapItem (":/engauge/img/panel_lines_points.png",
                                    QPoint (0, 0));
   m_text0 = createTextItem ("The next steps depend on how the curves\n"
-                            "are drawn, in terms of lines and points",
+                            "are drawn, in terms of lines and points.",
                             QPoint (240, 40));
   m_text1 = createTextItem ("If the curves are drawn\n"
                             "with lines (with or without\n"
                             "points) then click on\n"
-                            "Next (Lines)",
+                            "Next (Lines).",
                             QPoint (265, 110));
   m_text2 = createTextItem ("If the curves are drawn\n"
                             "without lines and only\n"
                             "with points, then click on\n"
-                            "Next (Points)",
+                            "Next (Points).",
                             QPoint (265, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
@@ -103,5 +103,5 @@ void TutorialStateCurveType::slotPrevious ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateCurveType::slotNextCurves";
 
-  context().requestDelayedStateTransition (TUTORIAL_STATE_AXIS_POINTS);
+  context().requestDelayedStateTransition (TUTORIAL_STATE_CURVE_SELECTION);
 }

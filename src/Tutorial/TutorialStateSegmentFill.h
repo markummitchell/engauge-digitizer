@@ -21,9 +21,6 @@ class TutorialStateSegmentFill : public TutorialStateAbstractBase
   virtual void end ();
 
  public slots:
-  /// Slot called when next button is triggered
-  void slotNext();
-
   /// Slot called to return to previous panel
   void slotPrevious();
 
@@ -35,7 +32,6 @@ class TutorialStateSegmentFill : public TutorialStateAbstractBase
   QGraphicsTextItem *m_text1;
   QGraphicsTextItem *m_text2;
   TutorialButton *m_previous;
-  TutorialButton *m_next;
 };
 
 #endif // TUTORIAL_STATE_SEGMENT_FILL_H

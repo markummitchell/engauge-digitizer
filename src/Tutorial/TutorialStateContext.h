@@ -9,6 +9,8 @@ class QTimer;
 class TutorialDlg;
 
 /// Context class for tutorial state machine. Each state represents one panel in the tutorial
+/// Tutorial assumptions:
+/// -# Dealing with multiple curves is postponed until the end of the tutorial.
 class TutorialStateContext : public QObject
 {
   Q_OBJECT;

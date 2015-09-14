@@ -213,6 +213,7 @@ HEADERS  += \
     Tutorial/TutorialStateAxisPoints.h \
     Tutorial/TutorialStateColorFilter.h \
     Tutorial/TutorialStateContext.h \
+    Tutorial/TutorialStateCurveSelection.h \
     Tutorial/TutorialStateCurveType.h \
     Tutorial/TutorialStateIntroduction.h \
     Tutorial/TutorialStatePointMatch.h \
@@ -425,6 +426,7 @@ SOURCES += \
     Tutorial/TutorialStateAxisPoints.cpp \
     Tutorial/TutorialStateColorFilter.cpp \
     Tutorial/TutorialStateContext.cpp \
+    Tutorial/TutorialStateCurveSelection.cpp \
     Tutorial/TutorialStateCurveType.cpp \
     Tutorial/TutorialStateIntroduction.cpp \
     Tutorial/TutorialStatePointMatch.cpp \

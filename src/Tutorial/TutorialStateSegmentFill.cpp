@@ -23,19 +23,17 @@ void TutorialStateSegmentFill::begin ()
   m_text0 = createTextItem ("Segment Fill mode places several\n"
                             "points all along the line segments\n"
                             "of a curve. Step 1 - Click on the\n"
-                            "Segment Fill button",
+                            "Segment Fill button.",
                             QPoint (300, 40));
-  m_text1 = createTextItem ("Step 2 - Move the cursor over\n"
-                            "a line segment in the desired\n"
-                            "curve. If a green line appears,\n"
-                            "click on it once to generate\n"
-                            "many points",
-                            QPoint (320, 115));
-  m_text2 = createTextItem ("The resulting points are shown\n"
-                            "in the figure. If a green line\n"
-                            "did not appear, the next step\n"
-                            "will produce the green lines",
-                            QPoint (320, 250));
+  m_text1 = createTextItem ("Step 2 - Select the curve the new\n"
+                            "points will belong to.",
+                            QPoint (300, 140));
+  m_text2 = createTextItem ("Step 3 - Move the cursor over a line\n"
+                            "segment in the desired curve. If a\n"
+                            "green line appears, click on it once\n"
+                            "to generate many points.\n\n"
+                            "This ends the tutorial. Good luck!",
+                            QPoint (300, 220));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
@@ -44,12 +42,6 @@ void TutorialStateSegmentFill::begin ()
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height() - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
-
-  m_next = new TutorialButton ("Next",
-                               context().tutorialDlg().scene());
-  m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
-                               backgroundSize.height () - buttonMargin () - m_next->size ().height ()));
-  connect (m_next, SIGNAL (signalTriggered ()), this, SLOT (slotNext ()));
 }
 
 void TutorialStateSegmentFill::end ()
@@ -68,7 +60,6 @@ void TutorialStateSegmentFill::end ()
   delete m_text0;
   delete m_text1;
   delete m_text2;
-  delete m_next;
   delete m_previous;
 
   m_title = 0;
@@ -76,15 +67,7 @@ void TutorialStateSegmentFill::end ()
   m_text0 = 0;
   m_text1 = 0;
   m_text2 = 0;
-  m_next = 0;
   m_previous = 0;
-}
-
-void TutorialStateSegmentFill::slotNext ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::slotNextCurves";
-
-  context().requestDelayedStateTransition (TUTORIAL_STATE_COLOR_FILTER);
 }
 
 void TutorialStateSegmentFill::slotPrevious ()

@@ -6,6 +6,7 @@
 #include "TutorialStateAxisPoints.h"
 #include "TutorialStateColorFilter.h"
 #include "TutorialStateContext.h"
+#include "TutorialStateCurveSelection.h"
 #include "TutorialStateCurveType.h"
 #include "TutorialStateIntroduction.h"
 #include "TutorialStatePointMatch.h"
@@ -25,12 +26,13 @@ void TutorialStateContext::createStates ()
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::createStates";
 
   // These states follow the same order as the TutorialState enumeration
-  m_states.insert (TUTORIAL_STATE_AXIS_POINTS  , new TutorialStateAxisPoints   (*this));
-  m_states.insert (TUTORIAL_STATE_COLOR_FILTER , new TutorialStateColorFilter  (*this));
-  m_states.insert (TUTORIAL_STATE_CURVE_TYPE   , new TutorialStateCurveType    (*this));
-  m_states.insert (TUTORIAL_STATE_INTRODUCTION , new TutorialStateIntroduction (*this));
-  m_states.insert (TUTORIAL_STATE_POINT_MATCH  , new TutorialStatePointMatch   (*this));
-  m_states.insert (TUTORIAL_STATE_SEGMENT_FILL , new TutorialStateSegmentFill  (*this));
+  m_states.insert (TUTORIAL_STATE_AXIS_POINTS    , new TutorialStateAxisPoints     (*this));
+  m_states.insert (TUTORIAL_STATE_COLOR_FILTER   , new TutorialStateColorFilter    (*this));
+  m_states.insert (TUTORIAL_STATE_CURVE_SELECTION, new TutorialStateCurveSelection (*this));
+  m_states.insert (TUTORIAL_STATE_CURVE_TYPE     , new TutorialStateCurveType      (*this));
+  m_states.insert (TUTORIAL_STATE_INTRODUCTION   , new TutorialStateIntroduction   (*this));
+  m_states.insert (TUTORIAL_STATE_POINT_MATCH    , new TutorialStatePointMatch     (*this));
+  m_states.insert (TUTORIAL_STATE_SEGMENT_FILL   , new TutorialStateSegmentFill    (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_TUTORIAL_STATES);
 
   m_currentState = NUM_TUTORIAL_STATES; // Value that forces a transition right away;

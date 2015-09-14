@@ -21,13 +21,13 @@ void TutorialStateIntroduction::begin ()
   m_background = createPixmapItem (":/engauge/img/SpreadsheetsForDoc.png",
                                    QPoint (0, 0));
   m_text0 = createTextItem ("Engauge Digitizer starts with\n"
-                            "images of graphs and maps",
+                            "images of graphs and maps.",
                             QPoint (200, 40));
   m_text1 = createTextItem ("You create (or digitize) points along\n"
-                            "the graph and map curves",
+                            "the graph and map curves.",
                             QPoint (240, 180));
   m_text2 = createTextItem ("The digitized curve points can be\n"
-                            "exported, as numbers, to other software tools",
+                            "exported, as numbers, to other software tools.",
                             QPoint (210, 330));
 
   m_next = new TutorialButton ("Next",
