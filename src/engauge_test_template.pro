@@ -98,6 +98,7 @@ HEADERS  += \
     Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
+    Dlg/DlgRequiresTransform.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsColorFilter.h \
@@ -321,6 +322,7 @@ SOURCES += \
     Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
+    Dlg/DlgRequiresTransform.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsColorFilter.cpp \

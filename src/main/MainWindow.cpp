@@ -24,6 +24,7 @@
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
 #include "DlgErrorReport.h"
+#include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCommon.h"
@@ -1987,10 +1988,8 @@ void MainWindow::slotFileExport ()
       }
     }
   } else {
-    QMessageBox::information (0,
-                              engaugeWindowTitle(),
-                              tr ("Export can only be performed after three axis points have been created, "
-                                  "so the coordinates are defined"));
+    DlgRequiresTransform dlg ("Export");
+    dlg.exec ();
   }
 }
 
@@ -2301,8 +2300,13 @@ void MainWindow::slotSettingsExportFormat ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsExportFormat";
 
-  m_dlgSettingsExportFormat->load (*m_cmdMediator);
-  m_dlgSettingsExportFormat->show ();
+  if (transformIsDefined()) {
+    m_dlgSettingsExportFormat->load (*m_cmdMediator);
+    m_dlgSettingsExportFormat->show ();
+  } else {
+    DlgRequiresTransform dlg ("Export settings");
+    dlg.exec();
+  }
 }
 
 void MainWindow::slotSettingsGridRemoval ()

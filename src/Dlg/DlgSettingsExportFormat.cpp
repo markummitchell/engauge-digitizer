@@ -874,22 +874,29 @@ void DlgSettingsExportFormat::updatePreview()
   QString exportedText;
   QTextStream str (&exportedText);
 
-  if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
+  if (mainWindow().transformation().transformIsDefined()) {
 
-    ExportFileFunctions exportStrategy;
-    exportStrategy.exportToFile (*m_modelExportAfter,
-                                 cmdMediator().document(),
-                                 mainWindow().transformation(),
-                                 str);
+    // Transformaiton is defined so we can create a preview
+    if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
 
+      ExportFileFunctions exportStrategy;
+      exportStrategy.exportToFile (*m_modelExportAfter,
+                                   cmdMediator().document(),
+                                    mainWindow().transformation(),
+                                   str);
+
+    } else {
+
+      ExportFileRelations exportStrategy;
+      exportStrategy.exportToFile (*m_modelExportAfter,
+                                   cmdMediator().document(),
+                                   mainWindow().transformation(),
+                                   str);
+
+    }
   } else {
 
-    ExportFileRelations exportStrategy;
-    exportStrategy.exportToFile (*m_modelExportAfter,
-                                 cmdMediator().document(),
-                                 mainWindow().transformation(),
-                                 str);
-
+    str << "Preview is unavailable until axis points are defined.";
   }
 
   m_editPreview->setText (exportedText);
