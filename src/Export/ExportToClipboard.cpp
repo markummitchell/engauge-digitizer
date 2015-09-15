@@ -13,6 +13,7 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
                                            const Transformation &transformation,
                                            QTextStream &strCsv,
                                            QTextStream &strHtml,
+                                           const Curve &curveAxis,
                                            const CurvesGraphs &curvesGraphsAll,
                                            CurvesGraphs &curvesGraphsSelected) const
 {
@@ -24,18 +25,31 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
     selectedHash [pointIdentifier] = false;
   }
 
-  // Export
+  // List of curve names. Although we do not want axis points to be exported to the real
+  // clipboard, leaving out the axis curve would result in axis points not getting
+  // deleted. So we include the axis curve
   QStringList curveNames = curvesGraphsAll.curvesGraphsNames();
+  curveNames << AXIS_CURVE_NAME;
+
+  // Export
   QStringList::const_iterator itrC;
   for (itrC = curveNames.begin(); itrC != curveNames.end (); itrC++) {
 
     QString curveName = *itrC;
-    const Curve *curve = curvesGraphsAll.curveForCurveName(curveName);
-    ENGAUGE_CHECK_PTR (curve);
-    curve->exportToClipboard (selectedHash,
-                              transformation,
-                              strCsv,
-                              strHtml,
-                              curvesGraphsSelected);
+    if (curveName == AXIS_CURVE_NAME) {
+      curveAxis.exportToClipboard (selectedHash,
+                                   transformation,
+                                   strCsv,
+                                   strHtml,
+                                   curvesGraphsSelected);
+    } else {
+      const Curve *curve = curvesGraphsAll.curveForCurveName(curveName);
+      ENGAUGE_CHECK_PTR (curve);
+      curve->exportToClipboard (selectedHash,
+                                transformation,
+                                strCsv,
+                                strHtml,
+                                curvesGraphsSelected);
+    }
   }
 }

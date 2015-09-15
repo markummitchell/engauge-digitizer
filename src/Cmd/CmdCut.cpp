@@ -35,6 +35,7 @@ CmdCut::CmdCut(MainWindow &mainWindow,
                                     mainWindow.transformation(),
                                     strCsv,
                                     strHtml,
+                                    document.curveAxes(),
                                     document.curvesGraphs(),
                                     m_curvesGraphsRemoved);
 }

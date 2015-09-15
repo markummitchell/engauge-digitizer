@@ -1,6 +1,7 @@
 #ifndef EXPORT_TO_CLIPBOARD_H
 #define EXPORT_TO_CLIPBOARD_H
 
+class Curve;
 class CurvesGraphs;
 class Document;
 class QStringList;
@@ -19,12 +20,14 @@ public:
   /// \param[in] transformation Transformation which may or may not be defined
   /// \param[out] strCsv Selected points as comma separated value list
   /// \param[out] strHtml Selected points as html
-  /// \param[in] curvesGraphsAll All points in Document
+  /// \param[in] curveAxis Axis curve in the Document and its points
+  /// \param[in] curvesGraphsAll All graph curves in the Document and their points
   /// \param[out] curvesGraphsSelected Selected points as a subset of document.curvesGraphs()
   void exportToClipboard (const QStringList &selected,
                           const Transformation &transformation,
                           QTextStream &strCsv,
                           QTextStream &strHtml,
+                          const Curve &curveAxis,
                           const CurvesGraphs &curvesGraphsAll,
                           CurvesGraphs &curvesGraphsSelected) const;
 };
