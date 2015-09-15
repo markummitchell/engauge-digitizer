@@ -90,7 +90,7 @@ void Curve::editPoint (const QPointF &posGraph,
 }
 
 void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
-                               bool transformIsDefined,
+                               const Transformation &transformation,
                                QTextStream &strCsv,
                                QTextStream &strHtml,
                                CurvesGraphs &curvesGraphs) const
@@ -129,15 +129,20 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
         curvesGraphs.addGraphCurveAtEnd(curve);
       }
 
-      double x = point.posScreen ().x (), y = point.posScreen ().y ();
-      if (transformIsDefined) {
-        x = point.posGraph ().x ();
-        y = point.posGraph ().y ();
+      // Start with screen coordinates
+      QPointF pos = point.posScreen();
+      if (transformation.transformIsDefined()) {
+
+        // Replace with graph coordinates which are almost always more useful
+        QPointF posGraph;
+        transformation.transformScreenToRawGraph(pos,
+                                                 posGraph);
+        pos = posGraph;
       }
 
       // Add point to text going to clipboard
-      strCsv << x << TAB_DELIMITER << y << "\n";
-      strHtml << "<tr><td>" << x << "</td><td>" << y << "</td></tr>\n";
+      strCsv << pos.x() << TAB_DELIMITER << pos.y() << "\n";
+      strHtml << "<tr><td>" << pos.x() << "</td><td>" << pos.y() << "</td></tr>\n";
 
       // Add point to list for undo/redo
       curvesGraphs.curveForCurveName (m_curveName)->addPoint (point);

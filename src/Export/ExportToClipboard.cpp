@@ -10,7 +10,7 @@ ExportToClipboard::ExportToClipboard()
 }
 
 void ExportToClipboard::exportToClipboard (const QStringList &selected,
-                                           bool transformIsDefined,
+                                           const Transformation &transformation,
                                            QTextStream &strCsv,
                                            QTextStream &strHtml,
                                            const CurvesGraphs &curvesGraphsAll,
@@ -33,7 +33,7 @@ void ExportToClipboard::exportToClipboard (const QStringList &selected,
     const Curve *curve = curvesGraphsAll.curveForCurveName(curveName);
     ENGAUGE_CHECK_PTR (curve);
     curve->exportToClipboard (selectedHash,
-                              transformIsDefined,
+                              transformation,
                               strCsv,
                               strHtml,
                               curvesGraphsSelected);

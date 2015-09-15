@@ -56,7 +56,7 @@ public:
 
   /// Export points in this Curve found in the specified point list.
   void exportToClipboard (const QHash<QString, bool> &selectedHash,
-                          bool transformIsDefined,
+                          const Transformation &transformation,
                           QTextStream &strCsv,
                           QTextStream &strHtml,
                           CurvesGraphs &curvesGraphs) const;

@@ -28,7 +28,7 @@ CmdDelete::CmdDelete(MainWindow &mainWindow,
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
   exportStrategy.exportToClipboard (selectedPointIdentifiers,
-                                    mainWindow.transformIsDefined(),
+                                    mainWindow.transformation(),
                                     strCsv,
                                     strHtml,
                                     document.curvesGraphs(),
