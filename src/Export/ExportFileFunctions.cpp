@@ -409,7 +409,7 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
   // Header
   if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
     if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
-      str << curveSeparator (*str.string());
+      str << curveSeparator (str.string());
       str << gnuplotComment();
     }
     str << modelExportOverride.xLabel();

@@ -14,13 +14,18 @@ ExportFileAbstractBase::ExportFileAbstractBase()
 {
 }
 
-QString ExportFileAbstractBase::curveSeparator (const QString &string) const
+QString ExportFileAbstractBase::curveSeparator (const QString *string) const
 {
-  if (string.trimmed().isEmpty()) {
-    return "";
-  } else {
-    return "\n";
+  QString separator = "";
+
+  if (string != 0) {
+
+    if (!string->trimmed().isEmpty()) {
+      return "\n";
+    }
   }
+
+  return separator;
 }
 
 QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
