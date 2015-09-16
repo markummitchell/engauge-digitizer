@@ -178,8 +178,16 @@ QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
 
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                     &CallbackBoundingRects::callback);
+
+  // There may or may one, two or three axis points. Even if all three are not defined (so
+  // transformation is not defined), we can still get coordinates if there are one or two
   cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
-  cmdMediator.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+
+  // If the transformation is not defined, then there are no graph coordinates to extract
+  // from the graph curves (and probably trigger an assert)
+  if (mainWindow().transformIsDefined()) {
+    cmdMediator.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+  }
 
   return ftor.boundingRectGraph(isEmpty);
 }
