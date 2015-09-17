@@ -850,8 +850,13 @@ void DlgSettingsCoords::updateControls ()
   QString textOriginRadius = m_editOriginRadius->text();
   int posOriginRadius = 0;
 
-  bool goodOriginRadius = (m_validatorOriginRadius->validate (textOriginRadius,
-                                                              posOriginRadius) == QValidator::Acceptable);
+  bool goodOriginRadius = true; // Cartesian coordinates do not use origin radius
+  if (m_editOriginRadius->isEnabled ()) {
+
+    // Origin radius must be greater than zero
+    goodOriginRadius = (m_validatorOriginRadius->validate (textOriginRadius,
+                                                           posOriginRadius) == QValidator::Acceptable);
+  }
 
   enableOk (goodOriginRadius);
 

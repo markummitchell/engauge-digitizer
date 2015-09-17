@@ -16,7 +16,7 @@ using namespace std;
 const int PRECISION_DIGITS = 4;
 
 const double PI = 3.1415926535;
-const double LOG_OFFSET = 1;
+const double ZERO_OFFSET_AFTER_LOG = 1; // Log of this value is zero
 
 Transformation::Transformation() :
   m_transformIsDefined (false)
@@ -312,13 +312,16 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+    double offset;
     if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
       // Cartesian
-      pointRawGraph.setY (qExp (pointRawGraph.y()));
+      offset = ZERO_OFFSET_AFTER_LOG;
     } else {
       // Polar radius
-      pointRawGraph.setY (qExp (pointRawGraph.y() + qLn (m_modelCoords.originRadius ())));
+      offset = m_modelCoords.originRadius();
     }
+
+    pointRawGraph.setY (qExp (pointRawGraph.y() + qLn (offset)));
   }
 }
 
@@ -356,8 +359,13 @@ void Transformation::transformRawGraphToLinearCartesianGraph (const QPointF &poi
   }
 
   if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-    y = logToLinearRadius (y,
-                           m_modelCoords.originRadius());
+    if (m_modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+      y = logToLinearRadius (y,
+                             m_modelCoords.originRadius());
+    } else {
+      y = logToLinearRadius (y,
+                             ZERO_OFFSET_AFTER_LOG);
+    }
   }
 
   // Apply polar coordinates if appropriate. Note range coordinate has just been transformed if it has log scaling
