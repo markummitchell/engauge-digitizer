@@ -106,7 +106,7 @@ void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
     // For affine polar coordinates, easiest approach is to assume the full circle
     xMin = 0.0;
     xMax = transformation.modelCoords().thetaPeriod();
-    yMin = 0.0;
+    yMin = transformation.modelCoords().originRadius();
     yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
 
   }

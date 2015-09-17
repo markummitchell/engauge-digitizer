@@ -74,6 +74,7 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
       case COORD_UNITS_POLAR_THETA_DEGREES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
         angleRadians = posGraphIn.x () * PI / 180.0;
         break;
 
@@ -117,6 +118,7 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
       case COORD_UNITS_POLAR_THETA_DEGREES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
+      case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
         posGraphCartesianOrPolar.setX (angleRadians * 180.0 / PI);
         break;
 
@@ -287,6 +289,9 @@ double Transformation::roundOffSmallValues (double value, double range)
 void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &pointLinearCartesianGraph,
                                                               QPointF &pointRawGraph) const
 {
+  // WARNING - the code in this method must mirror the code in transformRawGraphToLinearCartesianGraph. In
+  //           other words, making a change here without a corresponding change there will produce a bug
+
   pointRawGraph = pointLinearCartesianGraph;
 
   // Apply polar coordinates if appropriate
@@ -296,7 +301,7 @@ void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &poi
   }
 
   // Apply linear offset to radius if appropriate
-  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) ||
+  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
       (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR)) {
     pointRawGraph.setY (pointRawGraph.y() + m_modelCoords.originRadius());
   }
@@ -333,11 +338,14 @@ QTransform Transformation::transformMatrix () const
 void Transformation::transformRawGraphToLinearCartesianGraph (const QPointF &pointRaw,
                                                               QPointF &pointLinearCartesian) const
 {
+  // WARNING - the code in this method must mirror the code in transformLinearCartesianGraphToRawGraph. In
+  //           other words, making a change here without a corresponding change there will produce a bug
+
   double x = pointRaw.x();
   double y = pointRaw.y();
 
   // Apply linear offset to radius if appropriate
-  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) ||
+  if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
       (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR)) {
     y -= m_modelCoords.originRadius();
   }
@@ -425,9 +433,7 @@ void Transformation::update (bool fileIsLoaded,
 void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen,
                                                   const QTransform &matrixGraph)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices"
-                              << " matrixScreen=\n" << QTransformToString (matrixScreen).toLatin1().data () << " "
-                              << " matrixGraph=\n" << QTransformToString (matrixGraph).toLatin1().data();
+  // LOG4CPP_INFO_S is below
 
   // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),
@@ -452,4 +458,40 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                              QPointF (pointGraphLinearCart0.x(), pointGraphLinearCart0.y()),
                                                              QPointF (pointGraphLinearCart1.x(), pointGraphLinearCart1.y()),
                                                              QPointF (pointGraphLinearCart2.x(), pointGraphLinearCart2.y()));
+
+  // Logging
+  QTransform matrixGraphLinear (pointGraphLinearCart0.x(),
+                                pointGraphLinearCart1.x(),
+                                pointGraphLinearCart2.x(),
+                                pointGraphLinearCart0.y(),
+                                pointGraphLinearCart1.y(),
+                                pointGraphLinearCart2.y(),
+                                1.0,
+                                1.0);
+
+  QPointF pointScreenRoundTrip0, pointScreenRoundTrip1, pointScreenRoundTrip2;
+  transformRawGraphToScreen (pointGraphRaw0,
+                             pointScreenRoundTrip0);
+  transformRawGraphToScreen (pointGraphRaw1,
+                             pointScreenRoundTrip1);
+  transformRawGraphToScreen (pointGraphRaw2,
+                             pointScreenRoundTrip2);
+
+  QPointF pointScreen0 (matrixScreen.m11(),
+                        matrixScreen.m21());
+  QPointF pointScreen1 (matrixScreen.m12(),
+                        matrixScreen.m22());
+  QPointF pointScreen2 (matrixScreen.m13(),
+                        matrixScreen.m23());
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Transformation::updateTransformFromMatrices"
+                              << " matrixScreen=\n" << QTransformToString (matrixScreen).toLatin1().data () << " "
+                              << " matrixGraphRaw=\n" << QTransformToString (matrixGraph).toLatin1().data() << " "
+                              << " matrixGraphLinear=\n" << QTransformToString (matrixGraphLinear).toLatin1().data() << "\n"
+                              << " originalScreen0=" << QPointFToString (pointScreen0).toLatin1().data() << "\n"
+                              << " originalScreen1=" << QPointFToString (pointScreen1).toLatin1().data() << "\n"
+                              << " originalScreen2=" << QPointFToString (pointScreen2).toLatin1().data() << "\n"
+                              << " roundTripScreen0=" << QPointFToString (pointScreenRoundTrip0).toLatin1().data() << "\n"
+                              << " roundTripScreen1=" << QPointFToString (pointScreenRoundTrip1).toLatin1().data() << "\n"
+                              << " roundTripScreen2=" << QPointFToString (pointScreenRoundTrip2).toLatin1().data() << "\n";
 }
