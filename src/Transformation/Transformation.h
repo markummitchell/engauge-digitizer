@@ -22,6 +22,9 @@
 /// other points
 class Transformation
 {
+  // For unit testing
+  friend class TestTransformation;
+
 public:
   /// Default constructor. This is marked as undefined until the proper number of axis points are added
   Transformation();
@@ -117,6 +120,9 @@ private:
 
   // No need to display values like 1E-17 when it is insignificant relative to the range
   double roundOffSmallValues (double value, double range);
+
+  // Model coords are set upon entry from CmdMediator
+  void setModelCoords (const DocumentModelCoords &modelCoords);
 
   // Compute transform from screen and graph points. The 3x3 matrices are handled as QTransform since QMatrix is deprecated
   void updateTransformFromMatrices (const QTransform &matrixScreen,

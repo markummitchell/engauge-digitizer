@@ -286,6 +286,11 @@ double Transformation::roundOffSmallValues (double value, double range)
   return value;
 }
 
+void Transformation::setModelCoords (const DocumentModelCoords &modelCoords)
+{
+  m_modelCoords = modelCoords;
+}
+
 void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &pointLinearCartesianGraph,
                                                               QPointF &pointRawGraph) const
 {
@@ -420,7 +425,7 @@ void Transformation::update (bool fileIsLoaded,
 
   } else {
 
-    m_modelCoords = cmdMediator.document().modelCoords();
+    setModelCoords (cmdMediator.document().modelCoords());
 
     CallbackUpdateTransform ftor (m_modelCoords);
 
@@ -428,9 +433,7 @@ void Transformation::update (bool fileIsLoaded,
                                                                                                       &CallbackUpdateTransform::callback);
     cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
 
-    m_transformIsDefined = ftor.transformIsDefined ();
-
-    if (m_transformIsDefined) {
+    if (ftor.transformIsDefined ()) {
 
       updateTransformFromMatrices (ftor.matrixScreen(),
                                    ftor.matrixGraph());
@@ -442,6 +445,8 @@ void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen
                                                   const QTransform &matrixGraph)
 {
   // LOG4CPP_INFO_S is below
+
+  m_transformIsDefined = true;
 
   // Extract points from 3x3 matrices
   QPointF pointGraphRaw0 (matrixGraph.m11(),
