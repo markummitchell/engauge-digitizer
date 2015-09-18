@@ -1,4 +1,0 @@
-#!/bin/bash
-
-wc -l $(find . -name '*.cpp' -o -name '*.h' | sort | grep -v functor | grep -v moc | grep -v qrc | grep -v deprecated
-)
