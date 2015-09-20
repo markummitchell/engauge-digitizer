@@ -74,6 +74,8 @@ HEADERS  += \
     Coord/CoordUnitsPolarTheta.h \
     Coord/CoordUnitsTime.h \
     Correlation/Correlation.h \
+    Cursor/CursorFactory.h \
+    Cursor/CursorSize.h \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurveNameList.h \
@@ -301,6 +303,8 @@ SOURCES += \
     Coord/CoordUnitsPolarTheta.cpp \
     Coord/CoordUnitsTime.cpp \
     Correlation/Correlation.cpp \
+    Cursor/CursorFactory.cpp \
+    Cursor/CursorSize.cpp \
     Curve/Curve.cpp \
     Curve/CurveConnectAs.cpp \
     Curve/CurveNameList.cpp \
@@ -462,6 +466,7 @@ INCLUDEPATH += Background \
                Color \
                Coord \
                Correlation \
+               Cursor \
                Curve \
                DigitizeState \
                Dlg \

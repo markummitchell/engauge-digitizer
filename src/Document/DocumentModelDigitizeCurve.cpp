@@ -8,30 +8,30 @@
 
 const bool DEFAULT_CURSOR_STANDARD_CROSS = true;
 const int DEFAULT_CURSOR_INNER_RADIUS = 5;
-const int DEFAULT_CURSOR_LINE_LENGTH = 10;
 const int DEFAULT_CURSOR_LINE_WIDTH = 2;
+const CursorSize DEFAULT_CURSOR_SIZE = CURSOR_SIZE_32;
 
 DocumentModelDigitizeCurve::DocumentModelDigitizeCurve() :
   m_cursorStandardCross (DEFAULT_CURSOR_STANDARD_CROSS),
   m_cursorInnerRadius (DEFAULT_CURSOR_INNER_RADIUS),
-  m_cursorLineLength (DEFAULT_CURSOR_LINE_LENGTH),
-  m_cursorLineWidth (DEFAULT_CURSOR_LINE_WIDTH)
+  m_cursorLineWidth (DEFAULT_CURSOR_LINE_WIDTH),
+  m_cursorSize (DEFAULT_CURSOR_SIZE)
 {
 }
 
 DocumentModelDigitizeCurve::DocumentModelDigitizeCurve(const Document &document) :
   m_cursorStandardCross (document.modelDigitizeCurve().cursorStandardCross()),
   m_cursorInnerRadius (document.modelDigitizeCurve().cursorInnerRadius()),
-  m_cursorLineLength (document.modelDigitizeCurve().cursorLineLength()),
-  m_cursorLineWidth (document.modelDigitizeCurve().cursorLineWidth())
+  m_cursorLineWidth (document.modelDigitizeCurve().cursorLineWidth()),
+  m_cursorSize (document.modelDigitizeCurve().cursorSize())
 {
 }
 
 DocumentModelDigitizeCurve::DocumentModelDigitizeCurve(const DocumentModelDigitizeCurve &other) :
   m_cursorStandardCross (other.cursorStandardCross()),
   m_cursorInnerRadius (other.cursorInnerRadius()),
-  m_cursorLineLength (other.cursorLineLength ()),
-  m_cursorLineWidth (other.cursorLineWidth())
+  m_cursorLineWidth (other.cursorLineWidth()),
+  m_cursorSize (other.cursorSize ())
 {
 }
 
@@ -39,8 +39,8 @@ DocumentModelDigitizeCurve &DocumentModelDigitizeCurve::operator=(const Document
 {
   m_cursorStandardCross = other.cursorStandardCross();
   m_cursorInnerRadius = other.cursorInnerRadius();
-  m_cursorLineLength = other.cursorLineLength ();
   m_cursorLineWidth = other.cursorLineWidth();
+  m_cursorSize = other.cursorSize ();
 
   return *this;
 }
@@ -50,14 +50,14 @@ int DocumentModelDigitizeCurve::cursorInnerRadius() const
   return m_cursorInnerRadius;
 }
 
-int DocumentModelDigitizeCurve::cursorLineLength() const
-{
-  return m_cursorLineLength;
-}
-
 int DocumentModelDigitizeCurve::cursorLineWidth() const
 {
   return m_cursorLineWidth;
+}
+
+CursorSize DocumentModelDigitizeCurve::cursorSize() const
+{
+  return m_cursorSize;
 }
 
 bool DocumentModelDigitizeCurve::cursorStandardCross () const
@@ -74,16 +74,16 @@ void DocumentModelDigitizeCurve::loadXml(QXmlStreamReader &reader)
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_INNER_RADIUS) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_LENGTH) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_WIDTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_LINE_WIDTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_SIZE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_STANDARD_CROSS)) {
 
     // Boolean values
     QString standardCrossValue = attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_STANDARD_CROSS).toString();
 
     setCursorInnerRadius (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_INNER_RADIUS).toInt());
-    setCursorLineLength (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_LENGTH).toInt());
-    setCursorLineWidth (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_WIDTH).toInt());
+    setCursorLineWidth (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_LINE_WIDTH).toInt());
+    setCursorSize ((CursorSize) attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_SIZE).toInt());
     setCursorStandardCross (standardCrossValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
 
     // Read until end of this subtree
@@ -111,7 +111,7 @@ void DocumentModelDigitizeCurve::printStream(QString indentation,
 
   str << indentation << "cursorStandardCross=" << (m_cursorStandardCross ? "true" : "false") << "\n";
   str << indentation << "cursorInnerRadius=" << m_cursorInnerRadius << "\n";
-  str << indentation << "cursorLineLength=" << m_cursorLineLength << "\n";
+  str << indentation << "cursorSize=" << m_cursorSize << "\n";
   str << indentation << "cursorLineWidth=" << m_cursorLineWidth << "\n";
 }
 
@@ -121,8 +121,8 @@ void DocumentModelDigitizeCurve::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_DIGITIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_INNER_RADIUS, QString::number (m_cursorInnerRadius));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_LENGTH, QString::number (m_cursorLineLength));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_LINE_WIDTH, QString::number (m_cursorLineWidth));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_LINE_WIDTH, QString::number (m_cursorLineWidth));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_SIZE, QString::number (m_cursorSize));
   writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_STANDARD_CROSS, m_cursorStandardCross ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
@@ -134,14 +134,14 @@ void DocumentModelDigitizeCurve::setCursorInnerRadius (int cursorInnerRadius)
   m_cursorInnerRadius = cursorInnerRadius;
 }
 
-void DocumentModelDigitizeCurve::setCursorLineLength (int cursorLineLength)
-{
-  m_cursorLineLength = cursorLineLength;
-}
-
 void DocumentModelDigitizeCurve::setCursorLineWidth (int cursorLineWidth)
 {
   m_cursorLineWidth = cursorLineWidth;
+}
+
+void DocumentModelDigitizeCurve::setCursorSize (CursorSize cursorSize)
+{
+  m_cursorSize = cursorSize;
 }
 
 void DocumentModelDigitizeCurve::setCursorStandardCross (bool cursorStandardCross)

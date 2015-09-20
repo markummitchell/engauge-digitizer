@@ -26,7 +26,7 @@ echo "Afterwards, check $LOGFILE to verify success"
 
 # Cleanup. We do not want to force complete rebuild for each test application since that takes VERY long
 rm .moc_test/* 2>/dev/null
-rm .obj_test/* 2>/dev/null
+rm .objs_test/* 2>/dev/null
 rm ../bin/Test* 2>/dev/null
 echo "Rebuilding..."
 

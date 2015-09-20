@@ -1,6 +1,7 @@
 #ifndef DOCUMENT_MODEL_DIGITIZE_CURVE_H
 #define DOCUMENT_MODEL_DIGITIZE_CURVE_H
 
+#include "CursorSize.h"
 #include "DocumentModelAbstractBase.h"
 
 class Document;
@@ -23,16 +24,16 @@ public:
   /// Assignment constructor.
   DocumentModelDigitizeCurve &operator=(const DocumentModelDigitizeCurve &other);
 
-  /// Set method for cursor inner radius.
+  /// Get method for cursor inner radius.
   int cursorInnerRadius () const;
 
-  /// Set method for cursor line length.
-  int cursorLineLength () const;
-
-  /// Set method for cursor line width.
+  /// Get method for cursor line width.
   int cursorLineWidth () const;
 
-  /// Set method for cursor type.
+  /// Get method for cursor size.
+  CursorSize cursorSize () const;
+
+  /// Get method for cursor type.
   bool cursorStandardCross () const;
 
   virtual void loadXml(QXmlStreamReader &reader);
@@ -46,11 +47,11 @@ public:
   /// Set method for cursor inner radius.
   void setCursorInnerRadius (int innerRadius);
 
-  /// Set method for cursor line length.
-  void setCursorLineLength (int lineLength);
-
   /// Set method for cursor line width.
   void setCursorLineWidth (int lineWidth);
+
+  /// Set method for cursor size.
+  void setCursorSize (CursorSize cursorSize);
 
   /// Set method for cursor type.
   void setCursorStandardCross (bool cursorStandardCross);
@@ -59,8 +60,8 @@ private:
 
   bool m_cursorStandardCross;
   int m_cursorInnerRadius;
-  int m_cursorLineLength;
   int m_cursorLineWidth;
+  CursorSize m_cursorSize;
 };
 
 #endif // DOCUMENT_MODEL_DIGITIZE_CURVE_H

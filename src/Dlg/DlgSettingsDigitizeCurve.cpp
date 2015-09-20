@@ -1,20 +1,21 @@
 #include "CmdMediator.h"
 #include "CmdSettingsDigitizeCurve.h"
+#include "CursorFactory.h"
+#include "CursorSize.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DocumentModelDigitizeCurve.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "PointStyle.h"
-#include <QBitmap>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QGraphicsPixmapItem>
 #include <QGridLayout>
 #include <QGraphicsScene>
+#include <QGroupBox>
 #include <QLabel>
 #include <qmath.h>
-#include <QPixmap>
 #include <QRadioButton>
 #include <QSpinBox>
 #include "Segment.h"
@@ -23,6 +24,12 @@
 
 const int IMAGE_WIDTH = 100;
 const int IMAGE_HEIGHT = 100;
+
+const int INNER_RADIUS_MAX = 64;
+const int INNER_RADIUS_MIN = 0;
+const int LINE_LENGTH_MIN = 2; // Min length of one line in the cursor, in pixels
+const int LINE_WIDTH_MAX = 32;
+const int LINE_WIDTH_MIN = 1;
 
 DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Digitize Curve",
@@ -44,54 +51,61 @@ DlgSettingsDigitizeCurve::~DlgSettingsDigitizeCurve()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::~DlgSettingsDigitizeCurve";
 }
 
-const int INNER_RADIUS_MAX = 64;
-const int INNER_RADIUS_MIN = 0;
-const int LINE_LENGTH_MAX = 64;
-const int LINE_LENGTH_MIN = 2;
-const int LINE_WIDTH_MAX = 32;
-const int LINE_WIDTH_MIN = 1;
-
 void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
                                                int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::createControls";
 
-  QLabel *labelCursorType = new QLabel("Cursor type:");
-  layout->addWidget (labelCursorType, row, 1);
+  m_boxCursor = new QGroupBox ("Cursor");
+  layout->addWidget (m_boxCursor, row++, 1, 1, 2);
 
-  m_btnCursorStandard = new QRadioButton ("Standard cross");
-  layout->addWidget (m_btnCursorStandard, row++, 2);
-  connect (m_btnCursorStandard, SIGNAL (toggled (bool)), this, SLOT (slotCursorStandard(bool)));
+  // Layout inside cursor group box
+  QGridLayout *layoutCursor = new QGridLayout;
+  m_boxCursor->setLayout (layoutCursor);
+  int rowCursor = 0;
 
-  m_btnCursorCustom = new QRadioButton ("Custom cross");
-  layout->addWidget (m_btnCursorCustom, row++, 2);
-  connect (m_btnCursorCustom, SIGNAL (toggled (bool)), this, SLOT (slotCursorCustom(bool)));
+  QLabel *labelCursorType = new QLabel("Type:");
+  layoutCursor->addWidget (labelCursorType, rowCursor, 0);
+
+  m_btnStandard = new QRadioButton ("Standard cross");
+  m_btnStandard->setWhatsThis (tr ("Selects the standard cross cursor"));
+  layoutCursor->addWidget (m_btnStandard, rowCursor++, 1);
+  connect (m_btnStandard, SIGNAL (toggled (bool)), this, SLOT (slotCursorStandard(bool)));
+
+  m_btnCustom = new QRadioButton ("Custom cross");
+  m_btnCustom->setWhatsThis (tr ("Selects a custom cursor based on the settings selected below"));
+  layoutCursor->addWidget (m_btnCustom, rowCursor++, 1);
+  connect (m_btnCustom, SIGNAL (toggled (bool)), this, SLOT (slotCursorCustom(bool)));
+
+  QLabel *labelSize = new QLabel("Size (pixels):");
+  layoutCursor->addWidget (labelSize, rowCursor, 0);
+
+  m_cmbSize = new QComboBox;
+  m_cmbSize->addItem (QString::number (CursorSizeToPixels (CURSOR_SIZE_16)), QVariant (CURSOR_SIZE_16));
+  m_cmbSize->addItem (QString::number (CursorSizeToPixels (CURSOR_SIZE_32)), QVariant (CURSOR_SIZE_32));
+  m_cmbSize->addItem (QString::number (CursorSizeToPixels (CURSOR_SIZE_48)), QVariant (CURSOR_SIZE_48));
+  m_cmbSize->addItem (QString::number (CursorSizeToPixels (CURSOR_SIZE_64)), QVariant (CURSOR_SIZE_64));
+  ENGAUGE_ASSERT (m_cmbSize->count() == NUM_CURSOR_SIZES);
+  m_cmbSize->setWhatsThis (tr ("Horizontal and vertical size of the cursor in pixels"));
+  layoutCursor->addWidget (m_cmbSize, rowCursor++, 1);
+  connect (m_cmbSize, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (slotCursorSize (const QString &)));
 
   QLabel *labelInnerRadius = new QLabel("Inner radius (pixels):");
-  layout->addWidget (labelInnerRadius, row, 1);
+  layoutCursor->addWidget (labelInnerRadius, rowCursor, 0);
 
   m_spinInnerRadius = new QSpinBox;
   m_spinInnerRadius->setRange (INNER_RADIUS_MIN, INNER_RADIUS_MAX);
   m_spinInnerRadius->setWhatsThis (tr ("Radius of circle at the center of the cursor that will remain empty"));
-  layout->addWidget (m_spinInnerRadius, row++, 2);
+  layoutCursor->addWidget (m_spinInnerRadius, rowCursor++, 1);
   connect (m_spinInnerRadius, SIGNAL (valueChanged(const QString &)), this, SLOT (slotCursorInnerRadius (const QString &)));
 
-  QLabel *labelLineLength = new QLabel("Line length (pixels):");
-  layout->addWidget (labelLineLength, row, 1);
-
-  m_spinLineLength = new QSpinBox;
-  m_spinLineLength->setRange (LINE_LENGTH_MIN, LINE_LENGTH_MAX);
-  m_spinLineLength->setWhatsThis (tr ("Length of each arm of the cross of the cursor"));
-  layout->addWidget (m_spinLineLength, row++, 2);
-  connect (m_spinLineLength, SIGNAL (valueChanged(const QString &)), this, SLOT (slotCursorLineLength (const QString &)));
-
   QLabel *labelLineWidth = new QLabel("Line width (pixels):");
-  layout->addWidget (labelLineWidth, row, 1);
+  layoutCursor->addWidget (labelLineWidth, rowCursor, 0);
 
   m_spinLineWidth = new QSpinBox;
   m_spinLineWidth->setRange (LINE_WIDTH_MIN, LINE_WIDTH_MAX);
   m_spinLineWidth->setWhatsThis (tr ("Width of each arm of the cross of the cursor"));
-  layout->addWidget (m_spinLineWidth, row++, 2);
+  layoutCursor->addWidget (m_spinLineWidth, rowCursor++, 1);
   connect (m_spinLineWidth, SIGNAL (valueChanged(const QString &)), this, SLOT (slotCursorLineWidth (const QString &)));
 }
 
@@ -110,8 +124,7 @@ void DlgSettingsDigitizeCurve::createPreview (QGridLayout *layout,
                                IMAGE_HEIGHT);
 
   m_viewPreview = new ViewPreview (m_scenePreview, this);
-  m_viewPreview->setWhatsThis (tr ("Preview window shows the shortest line that can be segment filled, "
-                                   "and the effects of current settings on segments and points generated by segment fill"));
+  m_viewPreview->setWhatsThis (tr ("Preview window showing the currently selected cursor"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
@@ -173,16 +186,15 @@ void DlgSettingsDigitizeCurve::load (CmdMediator &cmdMediator)
   // Sanity checks. Incoming defaults must be acceptable to the local limits
   ENGAUGE_ASSERT (INNER_RADIUS_MIN <= m_modelDigitizeCurveAfter->cursorInnerRadius ());
   ENGAUGE_ASSERT (INNER_RADIUS_MAX >= m_modelDigitizeCurveAfter->cursorInnerRadius ());
-  ENGAUGE_ASSERT (LINE_LENGTH_MIN <= m_modelDigitizeCurveAfter->cursorLineLength ());
-  ENGAUGE_ASSERT (LINE_LENGTH_MAX >= m_modelDigitizeCurveAfter->cursorLineLength ());
   ENGAUGE_ASSERT (LINE_WIDTH_MIN <= m_modelDigitizeCurveAfter->cursorLineWidth ());
   ENGAUGE_ASSERT (LINE_WIDTH_MAX >= m_modelDigitizeCurveAfter->cursorLineWidth ());
 
   // Populate controls
-  m_btnCursorStandard->setChecked (m_modelDigitizeCurveAfter->cursorStandardCross());
-  m_btnCursorCustom->setChecked (!m_modelDigitizeCurveAfter->cursorStandardCross());
+  m_btnStandard->setChecked (m_modelDigitizeCurveAfter->cursorStandardCross());
+  m_btnCustom->setChecked (!m_modelDigitizeCurveAfter->cursorStandardCross());
   m_spinInnerRadius->setValue (m_modelDigitizeCurveAfter->cursorInnerRadius());
-  m_spinLineLength->setValue (m_modelDigitizeCurveAfter->cursorLineLength());
+  int index = m_cmbSize->findData (QVariant (m_modelDigitizeCurveAfter->cursorSize()));
+  m_cmbSize->setCurrentIndex (index);
   m_spinLineWidth->setValue (m_modelDigitizeCurveAfter->cursorLineWidth());
 
   updateControls();
@@ -208,20 +220,20 @@ void DlgSettingsDigitizeCurve::slotCursorInnerRadius (const QString &)
   updatePreview();
 }
 
-void DlgSettingsDigitizeCurve::slotCursorLineLength (const QString &)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::slotCursorLineLength";
-
-  m_modelDigitizeCurveAfter->setCursorLineLength (m_spinLineLength->value());
-  updateControls();
-  updatePreview();
-}
-
 void DlgSettingsDigitizeCurve::slotCursorLineWidth (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::slotCursorLineWidth";
 
   m_modelDigitizeCurveAfter->setCursorLineWidth (m_spinLineWidth->value());
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsDigitizeCurve::slotCursorSize (const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::slotCursorSize";
+
+  m_modelDigitizeCurveAfter->setCursorSize ((CursorSize) m_cmbSize->currentData().toInt());
   updateControls();
   updatePreview();
 }
@@ -237,70 +249,21 @@ void DlgSettingsDigitizeCurve::slotCursorStandard (bool)
 
 void DlgSettingsDigitizeCurve::updateControls()
 {
-  enableOk (true);
+  // Cursor has to fit into current extent
+  bool isGoodState = 2 * (m_modelDigitizeCurveAfter->cursorInnerRadius() + LINE_LENGTH_MIN) <=
+                     CursorSizeToPixels (m_modelDigitizeCurveAfter->cursorSize());
+  enableOk (isGoodState);
 
-  m_spinInnerRadius->setEnabled (m_btnCursorCustom->isChecked());
-  m_spinLineLength->setEnabled (m_btnCursorCustom->isChecked());
-  m_spinLineWidth->setEnabled (m_btnCursorCustom->isChecked());
+  m_spinInnerRadius->setEnabled (m_btnCustom->isChecked());
+  m_cmbSize->setEnabled (m_btnCustom->isChecked());
+  m_spinLineWidth->setEnabled (m_btnCustom->isChecked());
 }
 
 void DlgSettingsDigitizeCurve::updatePreview()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::updatePreview";
 
-  // To prevent hideous drawing errors when the line is thicker, we
-  // leave a padding region around the outside equal in size to the line width
-  int innerRadius = m_modelDigitizeCurveAfter->cursorInnerRadius();
-  int lineLength = m_modelDigitizeCurveAfter->cursorLineLength();
-  int lineWidth = m_modelDigitizeCurveAfter->cursorLineWidth();
-  int halfLineWidth = lineWidth / 2;
-  int halfHeightAndWidth = innerRadius + lineLength + lineWidth;
-  int heightAndWidth = 2 * halfHeightAndWidth;
-
-  if (m_btnCursorStandard->isChecked()) {
-
-    // Standard cursor
-    m_viewPreview->setCursor (QCursor (Qt::CrossCursor));
-
-  } else {
-
-    // Custom cursor
-    const int BACKGROUND_COLOR = Qt::white, FOREGROUND_COLOR = Qt::black;
-
-    // Cursor is created with pic image (which has nontrivial pen) masked by picMask image
-    // (which has single color pen)
-    QPixmap picMask (heightAndWidth,
-                     heightAndWidth);
-    QPainter picMaskPaint (&picMask);
-    picMask.fill (QColor (BACKGROUND_COLOR));
-
-    QPen pen (QBrush (FOREGROUND_COLOR),
-              m_modelDigitizeCurveAfter->cursorLineWidth());
-    picMaskPaint.setPen (pen);
-
-    picMaskPaint.drawLine (QPointF (halfHeightAndWidth,
-                                    halfHeightAndWidth - innerRadius - halfLineWidth),
-                           QPointF (halfHeightAndWidth,
-                                    lineWidth)); // Up
-    picMaskPaint.drawLine (QPointF (halfHeightAndWidth - innerRadius - halfLineWidth,
-                                    halfHeightAndWidth),
-                           QPointF (lineWidth,
-                                    halfHeightAndWidth)); // Left
-    picMaskPaint.drawLine (QPointF (halfHeightAndWidth,
-                                    halfHeightAndWidth + innerRadius + halfLineWidth),
-                           QPointF (halfHeightAndWidth,
-                                    heightAndWidth - 1 - lineWidth)); // Down
-    picMaskPaint.drawLine (QPointF (halfHeightAndWidth + innerRadius + halfLineWidth,
-                                    halfHeightAndWidth),
-                           QPointF (heightAndWidth - 1 - lineWidth,
-                                    halfHeightAndWidth)); // Right
-
-    QPixmap pic (heightAndWidth,
-                 heightAndWidth);
-    pic.fill (QColor (FOREGROUND_COLOR));
-
-    QCursor cursor (pic.createMaskFromColor(QColor (BACKGROUND_COLOR)),
-                    picMask.createMaskFromColor(QColor (BACKGROUND_COLOR)));
-    m_viewPreview->setCursor (cursor);
-  }
+  CursorFactory cursorFactory;
+  QCursor cursor = cursorFactory.generate (*m_modelDigitizeCurveAfter);
+  m_viewPreview->setCursor (cursor);
 }

@@ -5,9 +5,11 @@
 
 class DocumentModelDigitizeCurve;
 class QCheckBox;
+class QComboBox;
 class QGridLayout;
 class QGraphicsPixmapItem;
 class QGraphicsScene;
+class QGroupBox;
 class QRadioButton;
 class QSpinBox;
 class ViewPreview;
@@ -29,9 +31,9 @@ public:
 
 private slots:
   void slotCursorCustom (bool);
-  void slotCursorLineLength (const QString &);
-  void slotCursorLineWidth (const QString &);
   void slotCursorInnerRadius (const QString &);
+  void slotCursorLineWidth (const QString &);
+  void slotCursorSize (const QString &);
   void slotCursorStandard (bool);
 
 protected:
@@ -44,10 +46,11 @@ private:
   void updateControls();
   void updatePreview();
 
-  QRadioButton *m_btnCursorStandard;
-  QRadioButton *m_btnCursorCustom;
+  QGroupBox *m_boxCursor;
+  QRadioButton *m_btnStandard;
+  QRadioButton *m_btnCustom;
+  QComboBox *m_cmbSize;
   QSpinBox *m_spinInnerRadius;
-  QSpinBox *m_spinLineLength;
   QSpinBox *m_spinLineWidth;
 
   QGraphicsScene *m_scenePreview;
