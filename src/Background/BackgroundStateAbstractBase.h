@@ -15,8 +15,10 @@ enum BackgroundState {
 
 class BackgroundStateContext;
 class DocumentModelColorFilter;
+class DocumentModelGridRemoval;
 class GraphicsScene;
 class GraphicsView;
+class Transformation;
 
 /// Background image state machine state base class
 class BackgroundStateAbstractBase
@@ -55,18 +57,24 @@ class BackgroundStateAbstractBase
   const GraphicsScene &scene() const;
 
   /// Update the currently selected curve name
-  virtual void setCurveSelected (const DocumentModelColorFilter &colorFilter,
+  virtual void setCurveSelected (const Transformation &transformation,
+                                 const DocumentModelGridRemoval &modelGridRemoval,
+                                 const DocumentModelColorFilter &colorFilter,
                                  const QString &curveSelected) = 0;
 
   /// Update the image for this state, after the leaf class processes it appropriately
-  virtual void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+  virtual void setPixmap (const Transformation &transformation,
+                          const DocumentModelGridRemoval &modelGridRemoval,
+                          const DocumentModelColorFilter &modelColorFilter,
                           const QPixmap &pixmap) = 0;
 
   /// State name for debugging
   virtual QString state() const = 0;
 
   /// Apply color filter settings
-  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter) = 0;
+  virtual void updateColorFilter (const Transformation &transformation,
+                                  const DocumentModelGridRemoval &modelGridRemoval,
+                                  const DocumentModelColorFilter &modelColorFilter) = 0;
 
  protected:
 

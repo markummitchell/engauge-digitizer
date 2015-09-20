@@ -6,9 +6,11 @@
 #include <QVector>
 
 class DocumentModelColorFilter;
+class DocumentModelGridRemoval;
 class GraphicsView;
 class MainWindow;
 class QGraphicsPixmapItem;
+class Transformation;
 
 /// Context class that manages the background image state machine.
 /// Overall strategy is that changing the currently selected curve should not affect the background
@@ -41,15 +43,21 @@ class BackgroundStateContext
 
   /// Update the selected curve. Although this probably affects only the BACKGROUND_STATE_CURVE state, we will forward it
   /// to all states (consistent with setPixmap)
-  void setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+  void setCurveSelected (const Transformation &transformation,
+                         const DocumentModelGridRemoval &modelGridRemoval,
+                         const DocumentModelColorFilter &modelColorFilter,
                          const QString &curveSelected);
 
   /// Update the images of all states, rather than just the current state
-  void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+  void setPixmap (const Transformation &transformation,
+                  const DocumentModelGridRemoval &modelGridRemoval,
+                  const DocumentModelColorFilter &modelColorFilter,
                   const QPixmap &pixmapOriginal);
 
   /// Apply color filter settings
-  void updateColorFilter (const DocumentModelColorFilter &colorFilter);
+  void updateColorFilter (const Transformation &transformation,
+                          const DocumentModelGridRemoval &modelGridRemoval,
+                          const DocumentModelColorFilter &colorFilter);
 
  private:
   BackgroundStateContext();

@@ -1,10 +1,13 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateCurve.h"
 #include "ColorFilter.h"
+#include "DocumentModelColorFilter.h"
+#include "DocumentModelGridRemoval.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include <QPixmap>
+#include "Transformation.h"
 
 BackgroundStateCurve::BackgroundStateCurve(BackgroundStateContext &context,
                                            GraphicsScene &scene) :
@@ -34,7 +37,9 @@ void BackgroundStateCurve::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateCurve::processImageFromSavedInputs (const DocumentModelColorFilter &modelColorFilter)
+void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &transformation,
+                                                        const DocumentModelGridRemoval &modelGridRemoval,
+                                                        const DocumentModelColorFilter &modelColorFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::processImageFromSavedInputs";
 
@@ -65,7 +70,9 @@ void BackgroundStateCurve::processImageFromSavedInputs (const DocumentModelColor
   }
 }
 
-void BackgroundStateCurve::setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+void BackgroundStateCurve::setCurveSelected (const Transformation &transformation,
+                                             const DocumentModelGridRemoval &modelGridRemoval,
+                                             const DocumentModelColorFilter &modelColorFilter,
                                              const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setCurveSelected"
@@ -74,17 +81,23 @@ void BackgroundStateCurve::setCurveSelected (const DocumentModelColorFilter &mod
   if (m_curveSelected != curveSelected) {
 
     m_curveSelected = curveSelected;
-    processImageFromSavedInputs (modelColorFilter);
+    processImageFromSavedInputs (transformation,
+                                 modelGridRemoval,
+                                 modelColorFilter);
   }
 }
 
-void BackgroundStateCurve::setPixmap (const DocumentModelColorFilter &modelColorFilter,
+void BackgroundStateCurve::setPixmap (const Transformation &transformation,
+                                      const DocumentModelGridRemoval &modelGridRemoval,
+                                      const DocumentModelColorFilter &modelColorFilter,
                                       const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setPixmap";
 
   m_pixmapOriginal = pixmapOriginal;
-  processImageFromSavedInputs (modelColorFilter);
+  processImageFromSavedInputs (transformation,
+                               modelGridRemoval,
+                               modelColorFilter);
 }
 
 QString BackgroundStateCurve::state () const
@@ -92,9 +105,13 @@ QString BackgroundStateCurve::state () const
   return "BackgroundStateCurve";
 }
 
-void BackgroundStateCurve::updateColorFilter (const DocumentModelColorFilter &modelColorFilter)
+void BackgroundStateCurve::updateColorFilter (const Transformation &transformation,
+                                              const DocumentModelGridRemoval &modelGridRemoval,
+                                              const DocumentModelColorFilter &modelColorFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::updateColorFilter";
 
-  processImageFromSavedInputs (modelColorFilter);
+  processImageFromSavedInputs (transformation,
+                               modelGridRemoval,
+                               modelColorFilter);
 }

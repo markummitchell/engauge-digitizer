@@ -4,11 +4,13 @@
 #include "BackgroundStateOriginal.h"
 #include "BackgroundStateUnloaded.h"
 #include "DocumentModelColorFilter.h"
+#include "DocumentModelGridRemoval.h"
 #include "EngaugeAssert.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGraphicsPixmapItem>
+#include "Transformation.h"
 
 BackgroundStateContext::BackgroundStateContext(MainWindow &mainWindow) :
   m_mainWindow (mainWindow)
@@ -109,7 +111,9 @@ void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage
   completeRequestedStateTransitionIfExists ();
 }
 
-void BackgroundStateContext::setCurveSelected (const DocumentModelColorFilter &modelColorFilter,
+void BackgroundStateContext::setCurveSelected (const Transformation &transformation,
+                                               const DocumentModelGridRemoval &modelGridRemoval,
+                                               const DocumentModelColorFilter &modelColorFilter,
                                                const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setCurveSelected"
@@ -119,29 +123,39 @@ void BackgroundStateContext::setCurveSelected (const DocumentModelColorFilter &m
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setCurveSelected (modelColorFilter,
+    m_states [backgroundState]->setCurveSelected (transformation,
+                                                  modelGridRemoval,
+                                                  modelColorFilter,
                                                   curveSelected);
   }
 }
 
-void BackgroundStateContext::setPixmap (const DocumentModelColorFilter &modelColorFilter,
+void BackgroundStateContext::setPixmap (const Transformation &transformation,
+                                        const DocumentModelGridRemoval &modelGridRemoval,
+                                        const DocumentModelColorFilter &modelColorFilter,
                                         const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap";
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setPixmap (modelColorFilter,
+    m_states [backgroundState]->setPixmap (transformation,
+                                           modelGridRemoval,
+                                           modelColorFilter,
                                            pixmapOriginal);
   }
 }
 
-void BackgroundStateContext::updateColorFilter (const DocumentModelColorFilter &modelColorFilter)
+void BackgroundStateContext::updateColorFilter (const Transformation &transformation,
+                                                const DocumentModelGridRemoval &modelGridRemoval,
+                                                const DocumentModelColorFilter &modelColorFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::updateColorFilter";
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->updateColorFilter (modelColorFilter);
+    m_states [backgroundState]->updateColorFilter (transformation,
+                                                   modelGridRemoval,
+                                                   modelColorFilter);
   }
 }

@@ -1601,7 +1601,9 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
   m_digitizeStateContext->setImageIsLoaded (true);
-  m_backgroundStateContext->setPixmap (m_cmdMediator->document().modelColorFilter(),
+  m_backgroundStateContext->setPixmap (m_transformation,
+                                       m_cmdMediator->document().modelGridRemoval(),
+                                       m_cmdMediator->document().modelColorFilter(),
                                        pixmap);
 }
 
@@ -1765,7 +1767,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   // Set up background before slotViewZoomFill which relies on the background
   setPixmap (m_cmdMediator->pixmap ());
-  m_backgroundStateContext->setCurveSelected (m_cmdMediator->document().modelColorFilter(),
+  m_backgroundStateContext->setCurveSelected (m_transformation,
+                                              m_cmdMediator->document().modelGridRemoval(),
+                                              m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
@@ -1844,7 +1848,9 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  m_backgroundStateContext->setCurveSelected (m_cmdMediator->document().modelColorFilter(),
+  m_backgroundStateContext->setCurveSelected (m_transformation,
+                                              m_cmdMediator->document().modelGridRemoval(),
+                                              m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
   m_digitizeStateContext->handleCurveChange ();
 
@@ -2992,7 +2998,9 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
-  m_backgroundStateContext->updateColorFilter (modelColorFilter);
+  m_backgroundStateContext->updateColorFilter (m_transformation,
+                                               m_cmdMediator->document().modelGridRemoval(),
+                                               modelColorFilter);
   m_digitizeStateContext->handleCurveChange ();
   updateViewsOfSettings();
 }

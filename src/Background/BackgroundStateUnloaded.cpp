@@ -1,5 +1,7 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateUnloaded.h"
+#include "DocumentModelColorFilter.h"
+#include "DocumentModelGridRemoval.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -27,13 +29,17 @@ void BackgroundStateUnloaded::fitInView (GraphicsView & /* view */)
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::fitInView";
 }
 
-void BackgroundStateUnloaded::setCurveSelected (const DocumentModelColorFilter & /* modelColorFilter */,
+void BackgroundStateUnloaded::setCurveSelected (const Transformation & /* transformation */,
+                                                const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                                const DocumentModelColorFilter & /* modelColorFilter */,
                                                 const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setCurveSelected";
 }
 
-void BackgroundStateUnloaded::setPixmap (const DocumentModelColorFilter & /* modelColorFilter */,
+void BackgroundStateUnloaded::setPixmap (const Transformation & /* transformation */,
+                                         const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                         const DocumentModelColorFilter & /* modelColorFilter */,
                                          const QPixmap & /* pixmap */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setPixmap";
@@ -46,7 +52,9 @@ QString BackgroundStateUnloaded::state () const
   return "BackgroundStateUnloaded";
 }
 
-void BackgroundStateUnloaded::updateColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+void BackgroundStateUnloaded::updateColorFilter (const Transformation & /* transformation */,
+                                                 const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                                 const DocumentModelColorFilter & /* modelColorFilter */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::updateColorFilter";
 }

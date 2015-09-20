@@ -1,5 +1,7 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateNone.h"
+#include "DocumentModelColorFilter.h"
+#include "DocumentModelGridRemoval.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -33,13 +35,17 @@ void BackgroundStateNone::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateNone::setCurveSelected (const DocumentModelColorFilter & /* modelColorFilter */,
+void BackgroundStateNone::setCurveSelected (const Transformation & /* transformation */,
+                                            const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                            const DocumentModelColorFilter & /* modelColorFilter */,
                                             const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setCurveSelected";
 }
 
-void BackgroundStateNone::setPixmap (const DocumentModelColorFilter & /* modelColorFilter */,
+void BackgroundStateNone::setPixmap (const Transformation & /* transformation */,
+                                     const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                     const DocumentModelColorFilter & /* modelColorFilter */,
                                      const QPixmap &pixmapOriginal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setPixmap";
@@ -56,7 +62,9 @@ QString BackgroundStateNone::state () const
   return "BackgroundStateNone";
 }
 
-void BackgroundStateNone::updateColorFilter (const DocumentModelColorFilter & /* modelColorFilter */)
+void BackgroundStateNone::updateColorFilter (const Transformation & /* transformation */,
+                                             const DocumentModelGridRemoval & /* modelGridRemoval */,
+                                             const DocumentModelColorFilter & /* modelColorFilter */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::updateColorFilter";
 }

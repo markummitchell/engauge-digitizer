@@ -14,12 +14,18 @@ class BackgroundStateNone : public BackgroundStateAbstractBase
   virtual void begin();
   virtual void end();
   virtual void fitInView (GraphicsView &view);
-  virtual void setCurveSelected (const DocumentModelColorFilter &colorFilter,
+  virtual void setCurveSelected (const Transformation &transformation,
+                                 const DocumentModelGridRemoval &modelGridRemoval,
+                                 const DocumentModelColorFilter &colorFilter,
                                  const QString &curveSelected);
-  virtual void setPixmap (const DocumentModelColorFilter &modelColorFilter,
+  virtual void setPixmap (const Transformation &transformation,
+                          const DocumentModelGridRemoval &modelGridRemoval,
+                          const DocumentModelColorFilter &modelColorFilter,
                           const QPixmap &pixmap);
   virtual QString state () const;
-  virtual void updateColorFilter (const DocumentModelColorFilter &colorFilter);
+  virtual void updateColorFilter (const Transformation &transformation,
+                                  const DocumentModelGridRemoval &modelGridRemoval,
+                                  const DocumentModelColorFilter &colorFilter);
 
  private:
   BackgroundStateNone();
