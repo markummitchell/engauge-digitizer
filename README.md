@@ -23,7 +23,6 @@ Features
 Ideas for new features in Engauge6:
 
 1. Call OpenCV (or ?) to automatically recognize axes and axis coordinates
-2. Splash screen with tutorial video, or link to tutorial video on a webserver
 
 New features already added to Engauge6:
 
