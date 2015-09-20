@@ -54,8 +54,8 @@ HEADERS  += \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveAddRemove.h \
     Cmd/CmdSettingsCurveProperties.h \
+    Cmd/CmdSettingsDigitizeCurve.h \
     Cmd/CmdSettingsExportFormat.h \
-    Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
@@ -106,8 +106,8 @@ HEADERS  += \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurveAddRemove.h \
     Dlg/DlgSettingsCurveProperties.h \
+    Dlg/DlgSettingsDigitizeCurve.h \
     Dlg/DlgSettingsExportFormat.h \
-    Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
     Dlg/DlgValidatorAbstract.h \
@@ -121,8 +121,8 @@ HEADERS  += \
     Document/DocumentModelColorFilter.h \
     Document/DocumentModelCommon.h \
     Document/DocumentModelCoords.h \
+    Document/DocumentModelDigitizeCurve.h \
     Document/DocumentModelExportFormat.h \
-    Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
     Document/DocumentSerialize.h \
@@ -283,8 +283,8 @@ SOURCES += \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveAddRemove.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
+    Cmd/CmdSettingsDigitizeCurve.cpp \
     Cmd/CmdSettingsExportFormat.cpp \
-    Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
@@ -333,8 +333,8 @@ SOURCES += \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurveAddRemove.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
+    Dlg/DlgSettingsDigitizeCurve.cpp \
     Dlg/DlgSettingsExportFormat.cpp \
-    Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
     Dlg/DlgValidatorAbstract.cpp \
@@ -348,8 +348,8 @@ SOURCES += \
     Document/DocumentModelColorFilter.cpp \
     Document/DocumentModelCommon.cpp \
     Document/DocumentModelCoords.cpp \
+    Document/DocumentModelDigitizeCurve.cpp \
     Document/DocumentModelExportFormat.cpp \
-    Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
     Document/DocumentSerialize.cpp \

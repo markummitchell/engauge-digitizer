@@ -3,6 +3,7 @@
 #include "ColorFilterSettings.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
+#include "GridCoordDisable.h"
 #include "Logger.h"
 #include <QTextStream>
 #include <QXmlStreamWriter>

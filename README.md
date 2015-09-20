@@ -1,4 +1,4 @@
-<h1>This Software Is Not Yet Operational!</h1>
+<h1>This Software Is In Beta Test! All feedback welcome</h1>
 
 engauge6
 ========
@@ -9,10 +9,10 @@ Status
 ------
 This project aims to replace the 10 year old Engauge Digitizer software project that lives on sourceforge.net, with a newer version. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years.
 
-As of August 2015, Engauge6 has:
+As of September 2015, Engauge6 has:
 
-* Almost 20,000 lines of Engauge6 C++ code and comments in github
-* Beta functionality
+* Over 25,000 lines of Engauge6 C++ code in github
+* Beta functionality - so user testing is welcome (does anybody want Grid Removal that earlier versions provided?)
 * Issue tracking in the github issue tracker
 * GitHub wiki for informal communication, and GitHub issue tracker for requirements, bugs, etc.
 

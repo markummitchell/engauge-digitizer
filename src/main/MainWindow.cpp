@@ -31,8 +31,8 @@
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveAddRemove.h"
 #include "DlgSettingsCurveProperties.h"
+#include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
-#include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "DocumentSerialize.h"
@@ -443,6 +443,12 @@ void MainWindow::createActionsSettings ()
                                                      "Curves properties settings determine how each curve appears"));
   connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
 
+  m_actionSettingsDigitizeCurve = new QAction (tr ("Digitize Curve"), this);
+  m_actionSettingsDigitizeCurve->setStatusTip (tr ("Edit Digitize Curve settings."));
+  m_actionSettingsDigitizeCurve->setWhatsThis (tr ("Digitize Curve Settings\n\n"
+                                                   "Digitize Curve settings determine how points are digitized in Digitize Curve mode"));
+  connect (m_actionSettingsDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotSettingsDigitizeCurve ()));
+
   m_actionSettingsExport = new QAction (tr ("Export Format"), this);
   m_actionSettingsExport->setStatusTip (tr ("Edit Export Format settings."));
   m_actionSettingsExport->setWhatsThis (tr ("Export Format Settings\n\n"
@@ -460,13 +466,6 @@ void MainWindow::createActionsSettings ()
   m_actionSettingsAxesChecker->setWhatsThis (tr ("Axes Checker Settings\n\n"
                                                  "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
   connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
-
-  m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
-  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
-  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings\n\n"
-                                                 "Grid removal simplifies the graphs for easier Point Matching and Segment Filling, when "
-                                                 "Color Filtering is not enough."));
-  connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
 
   m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
   m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
@@ -818,10 +817,10 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsCoords);
   m_menuSettings->addAction (m_actionSettingsCurveAddRemove);
   m_menuSettings->addAction (m_actionSettingsCurveProperties);
+  m_menuSettings->addAction (m_actionSettingsDigitizeCurve);
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsColorFilter);
   m_menuSettings->addAction (m_actionSettingsAxesChecker);
-  m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
   m_menuSettings->addAction (m_actionSettingsCommon);
@@ -851,10 +850,10 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCoords = new DlgSettingsCoords (*this);
   m_dlgSettingsCurveAddRemove = new DlgSettingsCurveAddRemove (*this);
   m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
+  m_dlgSettingsDigitizeCurve = new DlgSettingsDigitizeCurve (*this);
   m_dlgSettingsExportFormat = new DlgSettingsExportFormat (*this);
   m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
   m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
-  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
   m_dlgSettingsCommon = new DlgSettingsCommon (*this);
@@ -862,10 +861,10 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsCoords->setVisible (false);
   m_dlgSettingsCurveAddRemove->setVisible (false);
   m_dlgSettingsCurveProperties->setVisible (false);
+  m_dlgSettingsDigitizeCurve->setVisible (false);
   m_dlgSettingsExportFormat->setVisible (false);
   m_dlgSettingsColorFilter->setVisible (false);
   m_dlgSettingsAxesChecker->setVisible (false);
-  m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
   m_dlgSettingsCommon->setVisible (false);
@@ -2296,6 +2295,14 @@ void MainWindow::slotSettingsCurveProperties ()
   m_dlgSettingsCurveProperties->show ();
 }
 
+void MainWindow::slotSettingsDigitizeCurve ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsDigitizeCurve";
+
+  m_dlgSettingsDigitizeCurve->load (*m_cmdMediator);
+  m_dlgSettingsDigitizeCurve->show ();
+}
+
 void MainWindow::slotSettingsExportFormat ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsExportFormat";
@@ -2307,14 +2314,6 @@ void MainWindow::slotSettingsExportFormat ()
     DlgRequiresTransform dlg ("Export settings");
     dlg.exec();
   }
-}
-
-void MainWindow::slotSettingsGridRemoval ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGridRemoval";
-
-  m_dlgSettingsGridRemoval->load (*m_cmdMediator);
-  m_dlgSettingsGridRemoval->show ();
 }
 
 void MainWindow::slotSettingsPointMatch ()
@@ -2862,10 +2861,10 @@ void MainWindow::updateControls ()
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveAddRemove->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsDigitizeCurve->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsColorFilter->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCommon->setEnabled (!m_currentFile.isEmpty ());
@@ -3009,18 +3008,18 @@ void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
   updateViewsOfSettings();
 }
 
+void MainWindow::updateSettingsDigitizeCurve(const DocumentModelDigitizeCurve &modelDigitizeCurve)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsDigitizeCurve";
+
+  m_cmdMediator->document().setModelDigitizeCurve(modelDigitizeCurve);
+}
+
 void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &modelExport)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExportFormat";
 
   m_cmdMediator->document().setModelExport (modelExport);
-}
-
-void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
-
-  m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
 }
 
 void MainWindow::updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch)

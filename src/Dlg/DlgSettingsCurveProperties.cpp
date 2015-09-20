@@ -415,7 +415,8 @@ void DlgSettingsCurveProperties::loadForCurveName (const QString &curveName)
   updatePreview();
 }
 
-void DlgSettingsCurveProperties::resetSceneRectangle () {
+void DlgSettingsCurveProperties::resetSceneRectangle ()
+{
 
   QRect rect (0.0,
               0.0,
