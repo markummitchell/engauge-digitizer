@@ -28,6 +28,8 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::begin";
 
+  setModelGridRemoval (cmdMediator,
+                       transformation);
   updateAxesChecker (cmdMediator,
                      transformation);
 }
@@ -38,6 +40,30 @@ void TransformationStateDefined::end(CmdMediator & /* cmdMediator */,
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
 
   m_axesChecker->setVisible (false);
+}
+
+void TransformationStateDefined::setModelGridRemoval (CmdMediator &cmdMediator,
+                                                      const Transformation &transformation)
+{
+  // Initialize grid removal settings so user does not have to
+  int countX, countY;
+  double startX, startY, stepX, stepY;
+  GridClassifier gridClassifier;
+  gridClassifier.classify (cmdMediator.document().pixmap(),
+                           transformation,
+                           countX,
+                           startX,
+                           stepX,
+                           countY,
+                           startY,
+                           stepY);
+  DocumentModelGridRemoval modelGridRemoval (startX,
+                                             startY,
+                                             stepX,
+                                             stepY,
+                                             countX,
+                                             countY);
+  cmdMediator.document().setModelGridRemoval (modelGridRemoval);
 }
 
 void TransformationStateDefined::slotTimeout()

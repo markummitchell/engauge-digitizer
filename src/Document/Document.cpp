@@ -104,6 +104,8 @@ Document::Document (const QString &fileName) :
             // Do nothing. This is the root node
           } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
             m_modelExport.loadXml (reader);
+          } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+            m_modelGridRemoval.loadXml (reader);
           } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
             // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
             loadImage(reader);
@@ -465,6 +467,11 @@ DocumentModelExportFormat Document::modelExport() const
   return m_modelExport;
 }
 
+DocumentModelGridRemoval Document::modelGridRemoval() const
+{
+  return m_modelGridRemoval;
+}
+
 DocumentModelPointMatch Document::modelPointMatch() const
 {
   return m_modelPointMatch;
@@ -557,6 +564,8 @@ void Document::printStream (QString indentation,
                                     str);
   m_modelExport.printStream (indentation,
                              str);
+  m_modelGridRemoval.printStream (indentation,
+                                  str);
   m_modelPointMatch.printStream (indentation,
                                  str);
   m_modelSegments.printStream (indentation,
@@ -619,6 +628,7 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   m_modelDigitizeCurve.saveXml (writer);
   m_modelExport.saveXml (writer);
   m_modelAxesChecker.saveXml (writer);
+  m_modelGridRemoval.saveXml (writer);
   m_modelPointMatch.saveXml (writer);
   m_modelSegments.saveXml (writer);
   m_curveAxes->saveXml (writer);
@@ -687,6 +697,11 @@ void Document::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDig
 void Document::setModelExport(const DocumentModelExportFormat &modelExport)
 {
   m_modelExport = modelExport;
+}
+
+void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
+{
+  m_modelGridRemoval = modelGridRemoval;
 }
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)

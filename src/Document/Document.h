@@ -9,6 +9,7 @@
 #include "DocumentModelCoords.h"
 #include "DocumentModelDigitizeCurve.h"
 #include "DocumentModelExportFormat.h"
+#include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "PointStyle.h"
@@ -140,6 +141,9 @@ public:
   /// Get method for DocumentModelExportFormat.
   DocumentModelExportFormat modelExport() const;
 
+  /// Get method for DocumentModelGridRemoval.
+  DocumentModelGridRemoval modelGridRemoval() const;
+
   /// Get method for DocumentModelPointMatch.
   DocumentModelPointMatch modelPointMatch() const;
 
@@ -208,6 +212,9 @@ public:
   /// Set method for DocumentModelExportFormat.
   void setModelExport(const DocumentModelExportFormat &modelExport);
 
+  /// Set method for DocumentModelGridRemoval.
+  void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
+
   /// Set method for DocumentModelPointMatch.
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
 
@@ -243,12 +250,13 @@ private:
 
   // Model objects for the various settings
   DocumentModelAxesChecker m_modelAxesChecker;
+  // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
   DocumentModelCommon m_modelCommon;
   DocumentModelCoords m_modelCoords;
   // CurveStyles is not here since curve properties are stored inside the Curve class
   DocumentModelDigitizeCurve m_modelDigitizeCurve;
   DocumentModelExportFormat m_modelExport;
-  // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
+  DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;
 };

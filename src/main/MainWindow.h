@@ -15,21 +15,23 @@ class CmdStackShadow;
 class CurveStyles;
 class DigitizeStateContext;
 class DlgSettingsAxesChecker;
+class DlgSettingsColorFilter;
 class DlgSettingsCommon;
 class DlgSettingsCoords;
 class DlgSettingsCurveAddRemove;
 class DlgSettingsCurveProperties;
 class DlgSettingsDigitizeCurve;
 class DlgSettingsExportFormat;
-class DlgSettingsColorFilter;
+class DlgSettingsGridRemoval;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
 class DocumentModelAxesChecker;
+class DocumentModelColorFilter;
+class DocumentModelCommon;
 class DocumentModelCoords;
 class DocumentModelDigitizeCurve;
 class DocumentModelExportFormat;
-class DocumentModelColorFilter;
-class DocumentModelCommon;
+class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
 class GraphicsScene;
@@ -143,6 +145,9 @@ public:
   /// Update with new export properties.
   void updateSettingsExportFormat(const DocumentModelExportFormat &modelExport);
 
+  /// Update with new grid removal properties.
+  void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
+
   /// Update with new point match properties.
   void updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch);
 
@@ -203,6 +208,7 @@ private slots:
   void slotSettingsCurveProperties ();
   void slotSettingsDigitizeCurve ();
   void slotSettingsExportFormat ();
+  void slotSettingsGridRemoval ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
@@ -371,6 +377,7 @@ private:
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsDigitizeCurve;
   QAction *m_actionSettingsExport;
+  QAction *m_actionSettingsGridRemoval;
   QAction *m_actionSettingsPointMatch;
   QAction *m_actionSettingsSegments;
 
@@ -423,6 +430,7 @@ private:
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsDigitizeCurve * m_dlgSettingsDigitizeCurve;
   DlgSettingsExportFormat *m_dlgSettingsExportFormat;
+  DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;
 

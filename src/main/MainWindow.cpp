@@ -33,6 +33,7 @@
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
+#include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "DocumentSerialize.h"
@@ -468,6 +469,13 @@ void MainWindow::createActionsSettings ()
                                                  "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
   connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
 
+  m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
+  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
+  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings\n\n"
+                                                 "Grid removal simplifies the graphs for easier Point Matching and Segment Filling, when "
+                                                 "Color Filtering is not enough."));
+  connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
+
   m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
   m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
   m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings\n\n"
@@ -822,6 +830,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsColorFilter);
   m_menuSettings->addAction (m_actionSettingsAxesChecker);
+  m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
   m_menuSettings->addAction (m_actionSettingsCommon);
@@ -855,6 +864,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsExportFormat = new DlgSettingsExportFormat (*this);
   m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
   m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
+  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
   m_dlgSettingsCommon = new DlgSettingsCommon (*this);
@@ -866,6 +876,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsExportFormat->setVisible (false);
   m_dlgSettingsColorFilter->setVisible (false);
   m_dlgSettingsAxesChecker->setVisible (false);
+  m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
   m_dlgSettingsCommon->setVisible (false);
@@ -2317,6 +2328,14 @@ void MainWindow::slotSettingsExportFormat ()
   }
 }
 
+void MainWindow::slotSettingsGridRemoval ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGridRemoval";
+
+  m_dlgSettingsGridRemoval->load (*m_cmdMediator);
+  m_dlgSettingsGridRemoval->show ();
+}
+
 void MainWindow::slotSettingsPointMatch ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsPointMatch";
@@ -2866,6 +2885,7 @@ void MainWindow::updateControls ()
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsColorFilter->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCommon->setEnabled (!m_currentFile.isEmpty ());
@@ -3022,6 +3042,13 @@ void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &mod
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsExportFormat";
 
   m_cmdMediator->document().setModelExport (modelExport);
+}
+
+void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
+
+  m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
 }
 
 void MainWindow::updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch)
