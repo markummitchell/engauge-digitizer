@@ -1,4 +1,4 @@
-<h1>This Software Is In Beta Test! All feedback welcome</h1>
+<h2>This Software Is In Beta Test! All feedback welcome</h2>
 
 engauge6
 ========
@@ -12,7 +12,7 @@ This project aims to replace the 10 year old Engauge Digitizer software project 
 As of September 2015, Engauge6 has:
 
 * Over 25,000 lines of Engauge6 C++ code in github
-* Beta functionality - so user testing is welcome (does anybody want Grid Removal that earlier versions provided?)
+* Beta functionality - so user testing is welcome
 * Issue tracking in the github issue tracker
 * GitHub wiki for informal communication, and GitHub issue tracker for requirements, bugs, etc.
 
