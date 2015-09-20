@@ -10,6 +10,7 @@
 
 class CmdAbstractBase;
 class CmdMediator;
+class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class MainWindow;
 class QUndoCommand;
@@ -93,6 +94,9 @@ public:
 
   /// State name for debugging
   QString state() const;
+
+  /// Update the digitize curve settings
+  void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
 
   /// Update the segments given the new settings
   void updateModelSegments(const DocumentModelSegments &modelSegments);

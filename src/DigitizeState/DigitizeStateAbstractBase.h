@@ -6,6 +6,7 @@
 #include <QPointF>
 
 class DigitizeStateContext;
+class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;
@@ -80,6 +81,9 @@ public:
 
   /// State name for debugging
   virtual QString state() const = 0;
+
+  /// Update the digitize curve settings
+  virtual void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve) = 0;
 
   /// Update the segments given the new settings
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments) = 0;

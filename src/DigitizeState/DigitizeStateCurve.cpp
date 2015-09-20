@@ -1,5 +1,6 @@
 #include "CmdAddPointGraph.h"
 #include "CmdMediator.h"
+#include "CursorFactory.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateCurve.h"
 #include "Logger.h"
@@ -36,7 +37,10 @@ QCursor DigitizeStateCurve::cursor() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateCurve::cursor";
 
-  return QCursor (Qt::CrossCursor);
+  CursorFactory cursorFactory;
+  QCursor cursor = cursorFactory.generate (context().cmdMediator().document().modelDigitizeCurve());
+
+  return cursor;
 }
 
 void DigitizeStateCurve::end ()
@@ -88,6 +92,13 @@ void DigitizeStateCurve::handleMouseRelease (QPointF posScreen)
 QString DigitizeStateCurve::state() const
 {
   return "DigitizeStateCurve";
+}
+
+void DigitizeStateCurve::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::updateModelDigitizeCurve";
+
+  setCursor();
 }
 
 void DigitizeStateCurve::updateModelSegments(const DocumentModelSegments & /* modelSegments */)

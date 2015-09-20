@@ -1,5 +1,6 @@
 #include "CmdAddPointAxis.h"
 #include "CmdMediator.h"
+#include "CursorFactory.h"
 #include "DigitizeStateAxis.h"
 #include "DigitizeStateContext.h"
 #include "DlgEditPoint.h"
@@ -56,7 +57,10 @@ QCursor DigitizeStateAxis::cursor() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::cursor";
 
-  return QCursor (Qt::CrossCursor);
+  CursorFactory cursorFactory;
+  QCursor cursor = cursorFactory.generate (context().cmdMediator().document().modelDigitizeCurve());
+
+  return cursor;
 }
 
 void DigitizeStateAxis::end ()
@@ -150,6 +154,13 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
 QString DigitizeStateAxis::state() const
 {
   return "DigitizeStateAxis";
+}
+
+void DigitizeStateAxis::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateModelDigitizeCurve";
+
+  setCursor();
 }
 
 void DigitizeStateAxis::updateModelSegments(const DocumentModelSegments & /* modelSegments */)

@@ -70,6 +70,11 @@ QString DigitizeStateEmpty::state() const
   return "DigitizeStateEmpty";
 }
 
+void DigitizeStateEmpty::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::updateModelDigitizeCurve";
+}
+
 void DigitizeStateEmpty::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::updateModelSegments";

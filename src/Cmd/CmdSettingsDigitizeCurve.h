@@ -1,5 +1,5 @@
-#ifndef CMD_DIGITIZE_CURVE_SEGMENTS_H
-#define CMD_DIGITIZE_CURVE_SEGMENTS_H
+#ifndef CMD_SETTINGS_DIGITIZE_CURVE_H
+#define CMD_SETTINGS_DIGITIZE_CURVE_H
 
 #include "CmdAbstract.h"
 #include "DocumentModelDigitizeCurve.h"
@@ -35,4 +35,4 @@ private:
   DocumentModelDigitizeCurve m_modelDigitizeCurveAfter;
 };
 
-#endif // CMD_DIGITIZE_CURVE_SEGMENTS_H
+#endif // CMD_SETTINGS_DIGITIZE_CURVE_H

@@ -223,6 +223,13 @@ QString DigitizeStateContext::state() const
   return m_states [m_currentState]->state();
 }
 
+void DigitizeStateContext::updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::updateModelDigitizeCurve";
+
+  m_states [m_currentState]->updateModelDigitizeCurve (modelDigitizeCurve);
+}
+
 void DigitizeStateContext::updateModelSegments(const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::updateModelSegments";

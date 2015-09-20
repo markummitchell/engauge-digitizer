@@ -25,6 +25,7 @@ public:
   virtual void handleMousePress (QPointF posScreen);
   virtual void handleMouseRelease (QPointF posScreen);
   virtual QString state() const;
+  virtual void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);
 
 private:

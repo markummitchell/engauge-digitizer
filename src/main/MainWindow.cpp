@@ -444,9 +444,10 @@ void MainWindow::createActionsSettings ()
   connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
 
   m_actionSettingsDigitizeCurve = new QAction (tr ("Digitize Curve"), this);
-  m_actionSettingsDigitizeCurve->setStatusTip (tr ("Edit Digitize Curve settings."));
-  m_actionSettingsDigitizeCurve->setWhatsThis (tr ("Digitize Curve Settings\n\n"
-                                                   "Digitize Curve settings determine how points are digitized in Digitize Curve mode"));
+  m_actionSettingsDigitizeCurve->setStatusTip (tr ("Edit Digitize Axis and Graph Curve settings."));
+  m_actionSettingsDigitizeCurve->setWhatsThis (tr ("Digitize Axis and Graph Curve Settings\n\n"
+                                                   "Digitize Curve settings determine how points are digitized in Digitize Axis Point and "
+                                                   "Digitize Graph Point modes"));
   connect (m_actionSettingsDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotSettingsDigitizeCurve ()));
 
   m_actionSettingsExport = new QAction (tr ("Export Format"), this);
@@ -3013,6 +3014,7 @@ void MainWindow::updateSettingsDigitizeCurve(const DocumentModelDigitizeCurve &m
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsDigitizeCurve";
 
   m_cmdMediator->document().setModelDigitizeCurve(modelDigitizeCurve);
+  m_digitizeStateContext->updateModelDigitizeCurve (modelDigitizeCurve);
 }
 
 void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &modelExport)
