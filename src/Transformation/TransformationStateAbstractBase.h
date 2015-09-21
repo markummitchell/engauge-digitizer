@@ -4,6 +4,7 @@
 class CmdMediator;
 class DocumentModelAxesChecker;
 class QColor;
+class QString;
 class Transformation;
 class TransformationStateContext;
 
@@ -24,7 +25,8 @@ public:
 
   /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state
   virtual void begin(CmdMediator &cmdMediator,
-                     const Transformation &transformation) = 0;
+                     const Transformation &transformation,
+                     const QString &selectedGraphCurve) = 0;
 
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end(CmdMediator &cmdMediator,

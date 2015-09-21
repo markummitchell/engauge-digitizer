@@ -1,6 +1,7 @@
 #include "CmdMediator.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include <QImage>
 #include "Transformation.h"
 #include "TransformationStateContext.h"
 #include "TransformationStateUndefined.h"
@@ -12,7 +13,8 @@ TransformationStateUndefined::TransformationStateUndefined(TransformationStateCo
 }
 
 void TransformationStateUndefined::begin(CmdMediator & /* cmdMediator */,
-                                         const Transformation & /* transformation */)
+                                         const Transformation & /* transformation */,
+                                         const QString & /* selectedGraphCurve */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::begin";
 }

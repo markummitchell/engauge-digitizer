@@ -152,6 +152,7 @@ HEADERS  += \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
     Export/ExportXThetaValuesMergedFunctions.h \
+    Filter/Filter.h \
     Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsStrategyAbstractBase.h \
     Format/FormatCoordsUnitsStrategyNonPolarTheta.h \
@@ -174,6 +175,7 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
+    Grid/GridRemoval.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Line/LineStyle.h \
@@ -380,6 +382,7 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Export/ExportXThetaValuesMergedFunctions.cpp \
+    Filter/Filter.cpp \
     Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
     Format/FormatCoordsUnitsStrategyNonPolarTheta.cpp \
@@ -400,6 +403,7 @@ SOURCES += \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
     Grid/GridCoordDisable.cpp \
+    Grid/GridRemoval.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Line/LineStyle.cpp \
@@ -478,6 +482,7 @@ INCLUDEPATH += Background \
                Dlg \
                Document \
                Export \
+               Filter \
                Format \
                Graphics \
                Grid \

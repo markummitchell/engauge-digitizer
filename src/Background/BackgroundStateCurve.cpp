@@ -1,8 +1,8 @@
 #include "BackgroundStateContext.h"
 #include "BackgroundStateCurve.h"
-#include "ColorFilter.h"
 #include "DocumentModelColorFilter.h"
 #include "DocumentModelGridRemoval.h"
+#include "FilterImage.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -46,21 +46,15 @@ void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &tr
   // Use the settings if the selected curve is known
   if (!m_curveSelected.isEmpty()) {
 
-    // Filtered image
-    ColorFilter filter;
-    QImage imageUnfiltered (m_pixmapOriginal.toImage ());
-    QImage imageFiltered (m_pixmapOriginal.width (),
-                          m_pixmapOriginal.height (),
-                          QImage::Format_RGB32);
-    QRgb rgbBackground = filter.marginColor (&imageUnfiltered);
-    filter.filterImage (imageUnfiltered,
-                        imageFiltered,
-                        modelColorFilter.colorFilterMode(m_curveSelected),
-                        modelColorFilter.low(m_curveSelected),
-                        modelColorFilter.high(m_curveSelected),
-                        rgbBackground);
+    // Generate filtered image
+    FilterImage filterImage;
+    QPixmap pixmapFiltered = filterImage.filter (m_pixmapOriginal.toImage(),
+                                                 transformation,
+                                                 m_curveSelected,
+                                                 modelColorFilter,
+                                                 modelGridRemoval);
 
-    setProcessedPixmap (QPixmap::fromImage (imageFiltered));
+    setProcessedPixmap (pixmapFiltered);
 
   } else {
 
@@ -78,13 +72,12 @@ void BackgroundStateCurve::setCurveSelected (const Transformation &transformatio
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setCurveSelected"
                               << " curve=" << curveSelected.toLatin1().data();
 
-  if (m_curveSelected != curveSelected) {
-
-    m_curveSelected = curveSelected;
-    processImageFromSavedInputs (transformation,
-                                 modelGridRemoval,
-                                 modelColorFilter);
-  }
+  // Even if m_curveSelected equals curveSelected we update the image, since the transformation
+  // may have changed
+  m_curveSelected = curveSelected;
+  processImageFromSavedInputs (transformation,
+                               modelGridRemoval,
+                               modelColorFilter);
 }
 
 void BackgroundStateCurve::setPixmap (const Transformation &transformation,

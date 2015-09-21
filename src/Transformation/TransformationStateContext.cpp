@@ -2,6 +2,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include <QImage>
 #include "TransformationStateAbstractBase.h"
 #include "TransformationStateContext.h"
 #include "TransformationStateDefined.h"
@@ -29,7 +30,8 @@ void TransformationStateContext::resetOnLoad ()
 
 void TransformationStateContext::triggerStateTransition (TransformationState transformationState,
                                                          CmdMediator &cmdMediator,
-                                                         const Transformation &transformation)
+                                                         const Transformation &transformation,
+                                                         const QString &selectedGraphCurve)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::triggerStateTransition";
 
@@ -46,7 +48,8 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
 
     // Start the requested state
     m_states[m_currentState]->begin(cmdMediator,
-                                    transformation);
+                                    transformation,
+                                    selectedGraphCurve);
   }
 }
 

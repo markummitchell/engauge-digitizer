@@ -469,11 +469,11 @@ void MainWindow::createActionsSettings ()
                                                  "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
   connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
 
-  m_actionSettingsGridRemoval = new QAction (tr ("Grid Removal"), this);
-  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Removal settings."));
-  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Removal Settings\n\n"
-                                                 "Grid removal simplifies the graphs for easier Point Matching and Segment Filling, when "
-                                                 "Color Filtering is not enough."));
+  m_actionSettingsGridRemoval = new QAction (tr ("Grid Line Removal"), this);
+  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Line Removal settings."));
+  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Line Removal Settings\n\n"
+                                                 "Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when "
+                                                 "Color Filtering is not able to separate grid lines from curve lines."));
   connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
 
   m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
@@ -1765,7 +1765,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   m_isDocumentExported = false;
 
-  // Set up background before slotViewZoomFill which relies on the background
+  // Set up background before slotViewZoomFill which relies on the background. At this point
+  // the transformation is undefined (unless the code is changed) so grid removal will not work
+  // but updateTransformationAndItsDependencies will call this again to fix that issue
   setPixmap (m_cmdMediator->pixmap ());
   m_backgroundStateContext->setCurveSelected (m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
@@ -2808,7 +2810,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
   Transformation m_transformationBefore (m_transformation);
 
-  m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
+  updateTransformationAndItsDependencies();
 
   // Trigger state transitions for transformation if appropriate
   if (!m_transformationBefore.transformIsDefined() && m_transformation.transformIsDefined()) {
@@ -2816,14 +2818,16 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
     // Transition from undefined to defined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
                                                          cmdMediator(),
-                                                         m_transformation);
+                                                         m_transformation,
+                                                         selectedGraphCurve());
 
   } else if (m_transformationBefore.transformIsDefined() && !m_transformation.transformIsDefined()) {
 
     // Transition from defined to undefined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
                                                          cmdMediator(),
-                                                         m_transformation);
+                                                         m_transformation,
+                                                         selectedGraphCurve());
 
   } else if (m_transformation.transformIsDefined() && (m_transformationBefore != m_transformation)) {
 
@@ -3072,6 +3076,17 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
 
   m_cmdMediator->document().setModelSegments(modelSegments);
   m_digitizeStateContext->updateModelSegments(modelSegments);
+}
+
+void MainWindow::updateTransformationAndItsDependencies()
+{
+  m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
+
+  // Grid removal is affected by new transformation
+  m_backgroundStateContext->setCurveSelected (m_transformation,
+                                              m_cmdMediator->document().modelGridRemoval(),
+                                              m_cmdMediator->document().modelColorFilter(),
+                                              m_cmbCurve->currentText ());
 }
 
 void MainWindow::updateViewedCurves ()

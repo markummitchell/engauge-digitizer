@@ -11,10 +11,10 @@ class QTextStream;
 class DocumentModelGridRemoval : public DocumentModelAbstractBase
 {
 public:
-  /// Default constructor.
+  /// Default constructor. The stable flag is set to false
   DocumentModelGridRemoval();
 
-  /// Constructor fed by GridClassifier.
+  /// Constructor fed by GridClassifier. The stable flag is set to true
   DocumentModelGridRemoval (double startX,
                             double startY,
                             double stepX,
@@ -99,6 +99,10 @@ public:
   /// Set method for y stop.
   void setStopY(double stopY);
 
+  /// Get method for stable flag. The flag is false to let the settings get automatically updated, until the
+  /// user selects settings - at which point the stable flag is set to true
+  bool stable() const;
+
   /// Get method for x start.
   double startX() const;
 
@@ -119,6 +123,9 @@ public:
 
 private:
 
+  void setStable (bool stable);
+
+  bool m_stable;
   bool m_removeDefinedGridLines;
   double m_closeDistance;
   GridCoordDisable m_gridCoordDisableX;

@@ -13,6 +13,7 @@ const int DEFAULT_COUNT = 2;
 const double DEFAULT_NON_COUNT = 0.0;
 
 DocumentModelGridRemoval::DocumentModelGridRemoval() :
+  m_stable (false),
   m_removeDefinedGridLines (false),
   m_closeDistance (CLOSE_DISTANCE_DEFAULT),
   m_gridCoordDisableX (GRID_COORD_DISABLE_COUNT),
@@ -35,6 +36,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval (double startX,
                                                     double stepY,
                                                     int countX,
                                                     int countY) :
+  m_stable (true),
   m_removeDefinedGridLines (false),
   m_closeDistance (CLOSE_DISTANCE_DEFAULT),
   m_gridCoordDisableX (GRID_COORD_DISABLE_COUNT),
@@ -46,11 +48,13 @@ DocumentModelGridRemoval::DocumentModelGridRemoval (double startX,
   m_countY (countY),
   m_startY (startY),
   m_stepY (stepY),
-  m_stopY (startY + (countY - 1.0) * stepY)
+  m_stopY (startY + (countY - 1.0) * stepY),
+  m_removeParallelToAxes (false)
 {
 }
 
 DocumentModelGridRemoval::DocumentModelGridRemoval(const Document &document) :
+  m_stable (document.modelGridRemoval().stable()),
   m_removeDefinedGridLines (document.modelGridRemoval().removeDefinedGridLines()),
   m_closeDistance (document.modelGridRemoval().closeDistance()),
   m_gridCoordDisableX (document.modelGridRemoval().gridCoordDisableX()),
@@ -68,6 +72,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval(const Document &document) :
 }
 
 DocumentModelGridRemoval::DocumentModelGridRemoval(const DocumentModelGridRemoval &other) :
+  m_stable (other.stable()),
   m_removeDefinedGridLines (other.removeDefinedGridLines()),
   m_closeDistance (other.closeDistance()),
   m_gridCoordDisableX (other.gridCoordDisableX()),
@@ -86,6 +91,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval(const DocumentModelGridRemova
 
 DocumentModelGridRemoval &DocumentModelGridRemoval::operator=(const DocumentModelGridRemoval &other)
 {
+  m_stable = other.stable();
   m_removeDefinedGridLines = other.removeDefinedGridLines();
   m_closeDistance = other.closeDistance();
   m_gridCoordDisableX = other.gridCoordDisableX();
@@ -136,7 +142,8 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES) &&
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STABLE) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X) &&
@@ -151,9 +158,11 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES)) {
 
     // Boolean values
+    QString stableValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STABLE).toString();
     QString definedValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES).toString();
     QString parallelValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES).toString();
 
+    setStable (stableValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setRemoveDefinedGridLines (definedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setCloseDistance (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE).toDouble());
     setGridCoordDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X).toInt());
@@ -191,6 +200,7 @@ void DocumentModelGridRemoval::printStream(QString indentation,
 
   indentation += INDENTATION_DELTA;
 
+  str << indentation << "stable=" << (m_stable ? "true" : "false") << "\n";
   str << indentation << "removeDefinedGridLines=" << (m_removeDefinedGridLines ? "true" : "false") << "\n";
   str << indentation << "closeDistance=" << m_closeDistance << "\n";
   str << indentation << "gridCoordDisableX=" << gridCoordDisableToString (m_gridCoordDisableX) << "\n";
@@ -221,6 +231,9 @@ void DocumentModelGridRemoval::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridRemoval::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_REMOVAL);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STABLE, m_stable ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES, m_removeDefinedGridLines ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
@@ -279,6 +292,11 @@ void DocumentModelGridRemoval::setRemoveParallelToAxes (bool removeParallelToAxe
   m_removeParallelToAxes = removeParallelToAxes;
 }
 
+void DocumentModelGridRemoval::setStable (bool stable)
+{
+  m_stable = stable;
+}
+
 void DocumentModelGridRemoval::setStartX(double startX)
 {
   m_startX = startX;
@@ -307,6 +325,11 @@ void DocumentModelGridRemoval::setStopX(double stopX)
 void DocumentModelGridRemoval::setStopY(double stopY)
 {
   m_stopY = stopY;
+}
+
+bool DocumentModelGridRemoval::stable () const
+{
+  return m_stable;
 }
 
 double DocumentModelGridRemoval::startX() const

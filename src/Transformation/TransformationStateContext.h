@@ -25,7 +25,8 @@ public:
   /// Trigger a state transition to be performed immediately.
   void triggerStateTransition (TransformationState transformationState,
                                CmdMediator &cmdMediator,
-                               const Transformation &transformation);
+                               const Transformation &transformation,
+                               const QString &selectedGraphCurve);
 
   /// Apply the new DocumentModelAxesChecker
   void updateAxesChecker (CmdMediator &cmdMediator,

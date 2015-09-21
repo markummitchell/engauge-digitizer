@@ -3,9 +3,11 @@
 #include "CmdMediator.h"
 #include "Document.h"
 #include "EnumsToQt.h"
+#include "FilterImage.h"
 #include "GridClassifier.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include <QImage>
 #include <QTimer>
 #include "Transformation.h"
 #include "TransformationStateContext.h"
@@ -24,12 +26,20 @@ TransformationStateDefined::TransformationStateDefined(TransformationStateContex
 }
 
 void TransformationStateDefined::begin(CmdMediator &cmdMediator,
-                                       const Transformation &transformation)
+                                       const Transformation &transformation,
+                                       const QString &selectedGraphCurve)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::begin";
 
-  setModelGridRemoval (cmdMediator,
-                       transformation);
+  if (!cmdMediator.document().modelGridRemoval().stable()) {
+
+    // Initialie or update the grid removal settings since they are not stable yet
+    initializeModelGridRemoval (cmdMediator,
+                                transformation,
+                                selectedGraphCurve);
+
+  }
+
   updateAxesChecker (cmdMediator,
                      transformation);
 }
@@ -42,14 +52,25 @@ void TransformationStateDefined::end(CmdMediator & /* cmdMediator */,
   m_axesChecker->setVisible (false);
 }
 
-void TransformationStateDefined::setModelGridRemoval (CmdMediator &cmdMediator,
-                                                      const Transformation &transformation)
+void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMediator,
+                                                             const Transformation &transformation,
+                                                             const QString &selectedGraphCurve)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::initializeModelGridRemoval";
+
+  // Generate filtered image
+  FilterImage filterImage;
+  QPixmap pixmapFiltered = filterImage.filter (cmdMediator.document().pixmap().toImage(),
+                                               transformation,
+                                               selectedGraphCurve,
+                                               cmdMediator.document().modelColorFilter(),
+                                               cmdMediator.document().modelGridRemoval());
+
   // Initialize grid removal settings so user does not have to
   int countX, countY;
   double startX, startY, stepX, stepY;
   GridClassifier gridClassifier;
-  gridClassifier.classify (cmdMediator.document().pixmap(),
+  gridClassifier.classify (pixmapFiltered,
                            transformation,
                            countX,
                            startX,

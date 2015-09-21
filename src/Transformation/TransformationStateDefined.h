@@ -19,7 +19,8 @@ public:
                              QGraphicsScene &scene);
 
   virtual void begin(CmdMediator &cmdMediator,
-                     const Transformation &transformation);
+                     const Transformation &transformation,
+                     const QString &selectedGraphCurve);
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation);
   virtual void updateAxesChecker (CmdMediator &cmdMediator,
@@ -31,8 +32,9 @@ private slots:
 private:
   TransformationStateDefined();
 
-  void setModelGridRemoval (CmdMediator &cmdMediator,
-                            const Transformation &transformation);
+  void initializeModelGridRemoval (CmdMediator &cmdMediator,
+                                   const Transformation &transformation,
+                                   const QString &selectedGraphCurve);
   void startTimer (const DocumentModelAxesChecker &modelAxesChecker);
 
   // As a QGraphicsItem subclass, the Checker is deleted by the QGraphicsScene so it must be a pointer

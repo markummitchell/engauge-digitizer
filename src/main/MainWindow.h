@@ -294,6 +294,7 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
+  void updateTransformationAndItsDependencies();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
   void writeCheckpointToLogFile();

@@ -12,7 +12,8 @@ public:
                                QGraphicsScene &scene);
 
   virtual void begin(CmdMediator &cmdMediator,
-                     const Transformation &transformation);
+                     const Transformation &transformation,
+                     const QString &selectedGraphCurve);
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation);
   virtual void updateAxesChecker (CmdMediator &cmdMediator,

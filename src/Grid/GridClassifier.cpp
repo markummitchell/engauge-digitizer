@@ -5,7 +5,7 @@
 #include "GridClassifier.h"
 #include "Logger.h"
 #include <QDebug>
-#include <QPixmap>
+#include <QImage>
 #include "QtToString.h"
 #include "Transformation.h"
 
