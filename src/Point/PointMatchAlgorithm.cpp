@@ -159,6 +159,8 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::dumpToGnuplot";
 
+  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+
   QFile file (filename);
   if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
 

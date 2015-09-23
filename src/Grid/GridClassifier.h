@@ -24,7 +24,8 @@ public:
   GridClassifier();
 
   /// Classify the specified image, and return the most probably x and y grid settings.
-  void classify (const QPixmap &originalPixmap,
+  void classify (bool isGnuplot,
+                 const QPixmap &originalPixmap,
                  const Transformation &transformation,
                  int &countX,
                  double &startX,
@@ -37,11 +38,14 @@ private:
 
   // Number of histogram bins could be so large that each bin corresponds to one pixel, but computation time may then be
   // too slow when doing the correleations later on
-  static int NUM_HISTOGRAM_BINS;
+  static int NUM_PIXELS_PER_HISTOGRAM_BINS;
 
   static int MIN_STEP_PIXELS;
   static double PEAK_HALF_WIDTH;
 
+  int binFromCoordinate (double coord,
+                         double coordMin,
+                         double coordMax) const; // Inverse of coordinateFromBin
   void classify();
   void computeGraphCoordinateLimits (const QImage &image,
                                      const Transformation &transformation,
@@ -49,13 +53,23 @@ private:
                                      double &xMax,
                                      double &yMin,
                                      double &yMax);
+  double coordinateFromBin (int bin,
+                            double coordMin,
+                            double coordMax) const; // Inverse of binFromCoordinate
+  void dumpGnuplot(double xMin,
+                   double xMax,
+                   double yMin,
+                   double yMax) const;
+  void dumpGnuplotCoordinate (const QString &filename,
+                              const double *bins,
+                              double coordinateMin,
+                              double coordinateMax) const;
   void initializeHistogramBins ();
   void loadPicketFence (double picketFence [],
                         int binStart,
                         int binStep,
                         int count,
                         bool isCount);
-
   void populateHistogramBins (const QImage &image,
                               const Transformation &transformation,
                               double xMin,
@@ -81,6 +95,8 @@ private:
 
   double *m_binsX;
   double *m_binsY;
+
+  int m_numHistogramBins; // More bins improve accuracy but slow computation. Controlled by NUM_PIXELS_PER_HISTOGRAM_BINS
 };
 
 #endif // GRID_CLASSIFIER_H

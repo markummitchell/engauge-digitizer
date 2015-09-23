@@ -70,7 +70,8 @@ void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMed
   int countX, countY;
   double startX, startY, stepX, stepY;
   GridClassifier gridClassifier;
-  gridClassifier.classify (pixmapFiltered,
+  gridClassifier.classify (context().isGnuplot(),
+                           pixmapFiltered,
                            transformation,
                            countX,
                            startX,

@@ -913,7 +913,8 @@ void MainWindow::createStateContextTransformation ()
 
   ENGAUGE_CHECK_PTR (m_scene);
 
-  m_transformationStateContext = new TransformationStateContext (*m_scene);
+  m_transformationStateContext = new TransformationStateContext (*m_scene,
+                                                                 m_isGnuplot);
 }
 
 void MainWindow::createStatusBar ()

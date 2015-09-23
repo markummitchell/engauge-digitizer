@@ -1,5 +1,6 @@
 #include "DocumentModelSegments.h"
 #include "EngaugeAssert.h"
+#include <iostream>
 #include "Logger.h"
 #include "mmsubs.h"
 #include <qdebug.h>
@@ -417,7 +418,11 @@ void Segment::removeUnneededLines (int *foldedLines)
   QTextStream *strDump = 0;
   if (m_isGnuplot) {
 
-    fileDump = new QFile ("segment.gnuplot");
+    QString filename ("segment.gnuplot");
+
+    std::cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+
+    fileDump = new QFile (filename);
     fileDump->open (QIODevice::WriteOnly | QIODevice::Text);
     strDump = new QTextStream (fileDump);
 

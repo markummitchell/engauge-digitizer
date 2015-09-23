@@ -283,6 +283,9 @@ void DlgSettingsGridRemoval::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::handleOk";
 
+  // Set the stable flag
+  m_modelGridRemovalAfter->setStable ();
+
   CmdSettingsGridRemoval *cmd = new CmdSettingsGridRemoval (mainWindow (),
                                                             cmdMediator ().document(),
                                                             *m_modelGridRemovalBefore,

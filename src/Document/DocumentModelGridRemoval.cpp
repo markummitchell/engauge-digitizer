@@ -36,7 +36,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval (double startX,
                                                     double stepY,
                                                     int countX,
                                                     int countY) :
-  m_stable (true),
+  m_stable (false),
   m_removeDefinedGridLines (false),
   m_closeDistance (CLOSE_DISTANCE_DEFAULT),
   m_gridCoordDisableX (GRID_COORD_DISABLE_COUNT),
@@ -290,6 +290,11 @@ void DocumentModelGridRemoval::setRemoveDefinedGridLines (bool removeDefinedGrid
 void DocumentModelGridRemoval::setRemoveParallelToAxes (bool removeParallelToAxes)
 {
   m_removeParallelToAxes = removeParallelToAxes;
+}
+
+void DocumentModelGridRemoval::setStable ()
+{
+  m_stable = true;
 }
 
 void DocumentModelGridRemoval::setStable (bool stable)

@@ -7,14 +7,14 @@
 class Document;
 class QTextStream;
 
-/// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval.
+/// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval. The settings are unstable until the user approves
 class DocumentModelGridRemoval : public DocumentModelAbstractBase
 {
 public:
-  /// Default constructor. The stable flag is set to false
+  /// Default constructor.
   DocumentModelGridRemoval();
 
-  /// Constructor fed by GridClassifier. The stable flag is set to true
+  /// Constructor fed by GridClassifier.
   DocumentModelGridRemoval (double startX,
                             double startY,
                             double stepX,
@@ -81,6 +81,9 @@ public:
   /// Set method for removing lines parallel to axes.
   void setRemoveParallelToAxes (bool removeParallelToAxes);
 
+  /// Set the stable flag to true. This public version has no argument since it cannot be undone
+  void setStable ();
+
   /// Set method for x start.
   void setStartX(double startX);
 
@@ -123,7 +126,7 @@ public:
 
 private:
 
-  void setStable (bool stable);
+  void setStable (bool stable); // Private version is for initialization
 
   bool m_stable;
   bool m_removeDefinedGridLines;

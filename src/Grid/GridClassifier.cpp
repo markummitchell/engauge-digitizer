@@ -3,21 +3,39 @@
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "GridClassifier.h"
+#include <iostream>
 #include "Logger.h"
 #include <QDebug>
+#include <QFile>
 #include <QImage>
 #include "QtToString.h"
 #include "Transformation.h"
 
-int GridClassifier::NUM_HISTOGRAM_BINS = 400;
+int GridClassifier::NUM_PIXELS_PER_HISTOGRAM_BINS = 2;
 int GridClassifier::MIN_STEP_PIXELS = 5;
 double GridClassifier::PEAK_HALF_WIDTH = 4;
+
+using namespace std;
 
 GridClassifier::GridClassifier()
 {
 }
 
-void GridClassifier::classify (const QPixmap &originalPixmap,
+int GridClassifier::binFromCoordinate (double coord,
+                                       double coordMin,
+                                       double coordMax) const
+{
+  ENGAUGE_ASSERT (coordMin < coordMax);
+  ENGAUGE_ASSERT (coordMin <= coord);
+  ENGAUGE_ASSERT (coord <= coordMax);
+
+  int bin = 0.5 + (m_numHistogramBins - 1.0) * (coord - coordMin) / (coordMax - coordMin);
+
+  return bin;
+}
+
+void GridClassifier::classify (bool isGnuplot,
+                               const QPixmap &originalPixmap,
                                const Transformation &transformation,
                                int &countX,
                                double &startX,
@@ -30,11 +48,13 @@ void GridClassifier::classify (const QPixmap &originalPixmap,
 
   QImage image = originalPixmap.toImage ();
 
+  m_numHistogramBins = image.width() * NUM_PIXELS_PER_HISTOGRAM_BINS;
+
   double xMin, xMax, yMin, yMax;
   double binStartX, binStepX, binStartY, binStepY;
 
-  m_binsX = new double [NUM_HISTOGRAM_BINS];
-  m_binsY = new double [NUM_HISTOGRAM_BINS];
+  m_binsX = new double [m_numHistogramBins];
+  m_binsY = new double [m_numHistogramBins];
 
   computeGraphCoordinateLimits (image,
                                 transformation,
@@ -49,6 +69,12 @@ void GridClassifier::classify (const QPixmap &originalPixmap,
                          xMax,
                          yMin,
                          yMax);
+  if (isGnuplot) {
+    dumpGnuplot (xMin,
+                 xMax,
+                 yMin,
+                 yMax);
+  }
   searchStartStepSpace (xMin,
                         xMax,
                         yMin,
@@ -115,11 +141,56 @@ void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
   ENGAUGE_ASSERT (yMin < yMax);
 }
 
+double GridClassifier::coordinateFromBin (int bin,
+                                          double coordMin,
+                                          double coordMax) const
+{
+  ENGAUGE_ASSERT (bin < m_numHistogramBins);
+  ENGAUGE_ASSERT (coordMin < coordMax);
+
+  return coordMin + (coordMax - coordMin) * (double) bin / ((double) m_numHistogramBins - 1.0);
+}
+
+void GridClassifier::dumpGnuplot(double xMin,
+                                 double xMax,
+                                 double yMin,
+                                 double yMax) const
+{
+  dumpGnuplotCoordinate ("gridclassifier_x.gnuplot",
+                         m_binsX,
+                         xMin,
+                         xMax);
+  dumpGnuplotCoordinate ("gridclassifier_y.gnuplot",
+                         m_binsY,
+                         yMin,
+                         yMax);
+}
+
+void GridClassifier::dumpGnuplotCoordinate (const QString &filename,
+                                            const double *bins,
+                                            double coordinateMin,
+                                            double coordinateMax) const
+{
+  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+
+  QFile fileDump (filename);
+  fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
+  QTextStream strDump (&fileDump);
+
+  for (int bin = 0; bin < m_numHistogramBins; bin++) {
+
+    double coordinate = coordinateFromBin (bin,
+                                           coordinateMin,
+                                           coordinateMax);
+    strDump << coordinate << " " << bins [bin] << "\n";
+  }
+}
+
 void GridClassifier::initializeHistogramBins ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::initializeHistogramBins";
 
-  for (int bin = 0; bin < NUM_HISTOGRAM_BINS; bin++) {
+  for (int bin = 0; bin < m_numHistogramBins; bin++) {
     m_binsX [bin] = 0;
     m_binsY [bin] = 0;
   }
@@ -131,16 +202,35 @@ void GridClassifier::loadPicketFence (double picketFence [],
                                       int count,
                                       bool isCount)
 {
+  const double PEAK_HEIGHT = 1.0; // Arbitrary height, since normalization will counteract any change to this value
+
   // Count argument is optional
   int binStop = 0;
   if (isCount) {
     binStop = binStart + count * binStep;
+  } else {
+
+    // Compute count, for normalization, assuming that we repeat until the end of the array
+    count = (m_numHistogramBins - binStart) / binStep;
   }
 
-  for (int bin = 0; bin < NUM_HISTOGRAM_BINS; bin++) {
+  QString filename = QString ("picket_fence_%1_%2_%3")
+                     .arg (binStart)
+                     .arg (binStep)
+                     .arg (count);
+  QFile fileDump (filename);
+  fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
+  QTextStream strDump (&fileDump);
 
-    // If nothing is happening, bin is zero
-    picketFence [bin] = 0;
+  // Area under function before normalization. AreaUnnormalized + NUM_HISTOGRAM_BINS * normalizationOffset = 0
+  double areaUnnormalized = count * PEAK_HEIGHT * PEAK_HALF_WIDTH;
+  double normalizationOffset = -1.0 * areaUnnormalized / m_numHistogramBins;
+
+  for (int bin = 0; bin < m_numHistogramBins; bin++) {
+
+    // If nothing is happening, bin is small negative so correlation with unit function is zero. In other
+    // words, the function is normalized
+    picketFence [bin] = normalizationOffset;
 
     if ((bin < binStop) || !isCount) {
 
@@ -151,15 +241,17 @@ void GridClassifier::loadPicketFence (double picketFence [],
       if (modValue < PEAK_HALF_WIDTH) {
 
         // Map 0 to PEAK_HALF_WIDTH to 1 to 0
-        picketFence [bin] = 1.0 - (double) modValue / PEAK_HALF_WIDTH;
+        picketFence [bin] = 1.0 - (double) modValue / PEAK_HALF_WIDTH + normalizationOffset;
 
       } else if (binStep - modValue < PEAK_HALF_WIDTH) {
 
         // Map binStep-0 to binStep-PEAK_HALF_WIDTH to 1 to 0
-        picketFence [bin] = 1.0 - (double) (binStep - modValue) / PEAK_HALF_WIDTH;
+        picketFence [bin] = 1.0 - (double) (binStep - modValue) / PEAK_HALF_WIDTH + normalizationOffset;
 
       }
     }
+
+    strDump << picketFence [bin] << "\n";
   }
 }
 
@@ -199,17 +291,17 @@ void GridClassifier::populateHistogramBins (const QImage &image,
           }
         }
 
-        int binX = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.x() - xMin) / (xMax - xMin);
-        int binY = (NUM_HISTOGRAM_BINS - 1.0) * (posGraph.y() - yMin) / (yMax - yMin);
+        int binX = binFromCoordinate (posGraph.x(), xMin, xMax);
+        int binY = binFromCoordinate (posGraph.y(), yMin, yMax);
 
         ENGAUGE_ASSERT (0 <= binX);
         ENGAUGE_ASSERT (0 <= binY);
-        ENGAUGE_ASSERT (binX < 2 * NUM_HISTOGRAM_BINS);
-        ENGAUGE_ASSERT (binY < 2 * NUM_HISTOGRAM_BINS);
+        ENGAUGE_ASSERT (binX < m_numHistogramBins);
+        ENGAUGE_ASSERT (binY < m_numHistogramBins);
 
         // Roundoff error in log scaling may let bin go just outside legal range
-        binX = qMin (binX, NUM_HISTOGRAM_BINS - 1);
-        binY = qMin (binY, NUM_HISTOGRAM_BINS - 1);
+        binX = qMin (binX, m_numHistogramBins - 1);
+        binY = qMin (binY, m_numHistogramBins - 1);
 
         ++m_binsX [binX];
         ++m_binsY [binY];
@@ -226,11 +318,11 @@ void GridClassifier::searchCountSpace (double bins [],
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchCountSpace";
 
   // Loop though the space of possible counts
-  Correlation correlation (NUM_HISTOGRAM_BINS);
-  double picketFence [NUM_HISTOGRAM_BINS];
+  Correlation correlation (m_numHistogramBins);
+  double picketFence [m_numHistogramBins];
   double corr, corrMax;
   bool isFirst = true;
-  int countStop = 1 + (NUM_HISTOGRAM_BINS - binStart) / binStep;
+  int countStop = 1 + (m_numHistogramBins - binStart) / binStep;
   for (int count = 2; count <= countStop; count++) {
 
     loadPicketFence (picketFence,
@@ -239,7 +331,7 @@ void GridClassifier::searchCountSpace (double bins [],
                      count,
                      true);
 
-    correlation.correlateWithoutShift (NUM_HISTOGRAM_BINS,
+    correlation.correlateWithoutShift (m_numHistogramBins,
                                        bins,
                                        picketFence,
                                        corr);
@@ -268,12 +360,12 @@ void GridClassifier::searchStartStepSpace (double xMin,
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchStartStepSpace";
 
   // Loop though the space of possible gridlines using the independent variables (start,step).
-  Correlation correlation (NUM_HISTOGRAM_BINS);
-  double picketFence [NUM_HISTOGRAM_BINS];
+  Correlation correlation (m_numHistogramBins);
+  double picketFence [m_numHistogramBins];
   int binStartX, binStartY;
   double corrX, corrY, corrXMax, corrYMax;
   bool isFirst = true;
-  for (int binStep = MIN_STEP_PIXELS; binStep < NUM_HISTOGRAM_BINS; binStep++) {
+  for (int binStep = MIN_STEP_PIXELS; binStep < m_numHistogramBins; binStep++) {
 
     const int BIN_START = 0;
     loadPicketFence (picketFence,
@@ -282,12 +374,12 @@ void GridClassifier::searchStartStepSpace (double xMin,
                      0,
                      false);
 
-    correlation.correlateWithShift (NUM_HISTOGRAM_BINS,
+    correlation.correlateWithShift (m_numHistogramBins,
                                     m_binsX,
                                     picketFence,
                                     binStartX,
                                     corrX);
-    correlation.correlateWithShift (NUM_HISTOGRAM_BINS,
+    correlation.correlateWithShift (m_numHistogramBins,
                                     m_binsY,
                                     picketFence,
                                     binStartY,
@@ -307,8 +399,13 @@ void GridClassifier::searchStartStepSpace (double xMin,
   }
 
   // Convert from bins back to graph coordinates
-  startX = xMin + binStartXMax / (NUM_HISTOGRAM_BINS - 1.0) * (xMax - xMin);
-  startY = yMin + binStartYMax / (NUM_HISTOGRAM_BINS - 1.0) * (yMax - yMin);
-  stepX = binStepXMax / (NUM_HISTOGRAM_BINS - 1.0) * (xMax - xMin);
-  stepY = binStepYMax / (NUM_HISTOGRAM_BINS - 1.0) * (yMax - yMin);
+  startX = coordinateFromBin (binStartXMax,
+                              xMin,
+                              xMax);
+  startY = coordinateFromBin (binStartYMax,
+                              yMin,
+                              yMax);
+
+  stepX = binStepXMax / (m_numHistogramBins - 1.0) * (xMax - xMin);
+  stepY = binStepYMax / (m_numHistogramBins - 1.0) * (yMax - yMin);
 }

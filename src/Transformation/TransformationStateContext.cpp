@@ -8,7 +8,9 @@
 #include "TransformationStateDefined.h"
 #include "TransformationStateUndefined.h"
 
-TransformationStateContext::TransformationStateContext(QGraphicsScene &scene)
+TransformationStateContext::TransformationStateContext(QGraphicsScene &scene,
+                                                       bool isGnuplot) :
+  m_isGnuplot (isGnuplot)
 {
   m_states.insert (TRANSFORMATION_STATE_DEFINED  , new TransformationStateDefined   (*this, scene));
   m_states.insert (TRANSFORMATION_STATE_UNDEFINED, new TransformationStateUndefined (*this, scene));
@@ -19,6 +21,11 @@ TransformationStateContext::TransformationStateContext(QGraphicsScene &scene)
 
 TransformationStateContext::~TransformationStateContext()
 {
+}
+
+bool TransformationStateContext::isGnuplot() const
+{
+  return m_isGnuplot;
 }
 
 void TransformationStateContext::resetOnLoad ()
