@@ -56,20 +56,18 @@ private:
   double coordinateFromBin (int bin,
                             double coordMin,
                             double coordMax) const; // Inverse of binFromCoordinate
-  void dumpGnuplot(double xMin,
-                   double xMax,
-                   double yMin,
-                   double yMax) const;
   void dumpGnuplotCoordinate (const QString &filename,
                               const double *bins,
                               double coordinateMin,
-                              double coordinateMax) const;
+                              double coordinateMax,
+                              int binStart,
+                              int binStep) const;
   void initializeHistogramBins ();
   void loadPicketFence (double picketFence [],
                         int binStart,
                         int binStep,
                         int count,
-                        bool isCount);
+                        bool isCount) const;
   void populateHistogramBins (const QImage &image,
                               const Transformation &transformation,
                               double xMin,
@@ -80,7 +78,8 @@ private:
                          double binStart,
                          double binStep,
                          int &countMax);
-  void searchStartStepSpace (double xMin,
+  void searchStartStepSpace (bool isGnuplot,
+                             double xMin,
                              double xMax,
                              double yMin,
                              double yMax,
