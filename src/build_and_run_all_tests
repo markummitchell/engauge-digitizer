@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Test names. Specify a single test to run just that test
-tests=(TestFormats TestGraphCoords TestProjectedPoint TestSpline TestTransformation TestValidators)
+tests=(TestCorrelation TestFormats TestGraphCoords TestProjectedPoint TestSpline TestTransformation TestValidators)
 
 echo "Available tests: " ${tests[*]}
 

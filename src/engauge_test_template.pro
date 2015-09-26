@@ -152,7 +152,7 @@ HEADERS  += \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
     Export/ExportXThetaValuesMergedFunctions.h \
-    Filter/Filter.h \
+    Filter/FilterImage.h \
     Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsStrategyAbstractBase.h \
     Format/FormatCoordsUnitsStrategyNonPolarTheta.h \
@@ -382,7 +382,7 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Export/ExportXThetaValuesMergedFunctions.cpp \
-    Filter/Filter.cpp \
+    Filter/FilterImage.cpp \
     Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
     Format/FormatCoordsUnitsStrategyNonPolarTheta.cpp \
