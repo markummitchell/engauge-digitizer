@@ -221,16 +221,19 @@ void GridClassifier::loadPicketFence (double picketFence [],
 {
   const double PEAK_HEIGHT = 1.0; // Arbitrary height, since normalization will counteract any change to this value
 
-  // Count argument is optional
+  // Count argument is optional. Note that binStart already excludes PEAK_HALF_WIDTH bins at start,
+  // and we also exclude PEAK_HALF_WIDTH bins at the end
+  ENGAUGE_ASSERT (binStart >= PEAK_HALF_WIDTH);
   if (!isCount) {
-    count = (m_numHistogramBins - binStart) / binStep;
+    count = 1 + (m_numHistogramBins - binStart - PEAK_HALF_WIDTH) / binStep;
   }
 
   // Bins that we need to worry about
   int binStartMinusHalfWidth = binStart - PEAK_HALF_WIDTH;
-  int binStopPlusHalfWidth = (binStart + count * binStep) + PEAK_HALF_WIDTH;
+  int binStopPlusHalfWidth = (binStart + (count - 1) * binStep) + PEAK_HALF_WIDTH;
 
-  // Area under function before normalization. AreaUnnormalized + NUM_HISTOGRAM_BINS * normalizationOffset = 0
+  // To normalize, we compute the area under the picket fence. Constraint is
+  // areaUnnormalized + NUM_HISTOGRAM_BINS * normalizationOffset = 0
   double areaUnnormalized = count * PEAK_HEIGHT * PEAK_HALF_WIDTH;
   double normalizationOffset = -1.0 * areaUnnormalized / m_numHistogramBins;
 
@@ -244,7 +247,7 @@ void GridClassifier::loadPicketFence (double picketFence [],
         (bin <= binStopPlusHalfWidth)) {
 
       // Closest peak
-      int ordinalClosestPeak = (int) (0.5 + (bin - binStart) / binStep);
+      int ordinalClosestPeak = (int) ((bin - binStart + binStep / 2) / binStep);
       int binClosestPeak = binStart + ordinalClosestPeak * binStep;
 
       // Distance from closest peak is used to define an isosceles triangle
@@ -320,7 +323,9 @@ void GridClassifier::searchCountSpace (double bins [],
                                        double binStep,
                                        int &countMax)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchCountSpace";
+  LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchCountSpace"
+                              << " start=" << binStart
+                              << " step=" << binStep;
 
   // Loop though the space of possible counts
   Correlation correlation (m_numHistogramBins);
@@ -374,7 +379,7 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
 
   // We do not explicitly search(=loop) through binStart here, since Correlation::correlateWithShift will take
   // care of that for us. So, we set up the picket fence with binStart arbitrarily set to zero
-  const int BIN_START_UNSHIFTED = 0;
+  const int BIN_START_UNSHIFTED = PEAK_HALF_WIDTH;
 
   // Step search starts out small, and stops at value that gives count substantially greater than 2
   for (int binStep = MIN_STEP_PIXELS; binStep < m_numHistogramBins / 4; binStep++) {
@@ -382,7 +387,7 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
     loadPicketFence (picketFence,
                      BIN_START_UNSHIFTED,
                      binStep,
-                     0,
+                     PEAK_HALF_WIDTH,
                      false);
 
     correlation.correlateWithShift (m_numHistogramBins,

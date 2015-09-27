@@ -1,5 +1,6 @@
 engauge*log
 engauge*log*
+gridclassifier_*
 *.dig
 *.tsv
 convolution.gnuplot
