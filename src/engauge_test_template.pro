@@ -1,3 +1,7 @@
+# engauge_test_template.pro : Builds make files for testing engauge executable
+#
+# Directions are in INSTALL
+
 TEMPLATE    = app
 CONFIG      = qt warn_on thread debug testcase debug
 OBJECTS_DIR = .objs_test

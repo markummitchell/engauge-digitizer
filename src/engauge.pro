@@ -1,3 +1,7 @@
+# engauge.pro : Builds make files for engauge executable
+#
+# Directions are in INSTALL
+
 TEMPLATE    = app
 CONFIG      = qt warn_on thread debug
 OBJECTS_DIR = .objs
