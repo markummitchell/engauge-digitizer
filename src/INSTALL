@@ -1,0 +1,71 @@
+Steps to build and run engauge executable:
+------------------------------------------
+These steps build and run the standard engauge executable for digitizing data.
+
+1) Install open source version 5 of the Qt toolkit. This is probably
+   available for your operating systems as a source tarball, or many packages.
+   If there is a development version of qt5, that should be installed as 
+   a minimum
+
+     --Package(s)--     --Comment--
+     *qt5-dev*          Qt version 5 toolkit for building engauge
+
+2) Install package dependencies using your package manager. Different packages
+   may be substituted, or additional packages added, according to the feedback
+   supplied in step #3:
+
+     --Package(s)--     --Comment--
+     libfftw3-dev       For computing fourier transforms. Tested with 3.3.3-7
+     liblog4cpp-dev     For logging. Tested with 1.0.4
+     libpng12-dev       For png image files (optional)
+     libjpeg-dev        For jpeg image files (optional)
+
+3) Run qmake on this file to generate make files. The qmake executable will
+   display what functionality will, and what functionality will not, be 
+   included in engauge as a function of the currently installed packages.
+
+     > qmake engauge.pro
+
+4) Build the executable using the make files from the previous step:
+
+     > make
+
+5) Generate the help files
+
+     > ../help/build
+
+6) Run engauge
+
+     > ../bin/engauge
+
+Steps to build engauge test executables and perform tests
+---------------------------------------------------------
+These steps build and test engauge.
+
+1) Verify the standard version of engauge executable can be built and run
+
+2) Build and test. Every line PASS/FAIL line should say PASS
+
+     > ./build_and_run_all_tests
+
+Steps to generate doxygen documentation
+---------------------------------------
+This generates doxygen documentation
+
+1) Run doxygen
+
+     > doxygen
+
+2) Open engauge6/doc/doxygen/html/index.html in your browser
+
+Steps to generate a software metrics report
+-------------------------------------------
+This generates doxygen documentation
+
+1) Run cccc
+
+     > docccc
+
+2) Open engauge6/doc/cccc/index.html in your browser
+
+
