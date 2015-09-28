@@ -3,7 +3,10 @@
 # Directions are in INSTALL
 
 TEMPLATE    = app
+
+# Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of include/library files
 CONFIG      = qt warn_on thread debug
+
 OBJECTS_DIR = .objs
 MOC_DIR = .moc
 RCC_DIR = .rcc

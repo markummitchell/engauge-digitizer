@@ -44,7 +44,9 @@ These steps build and test engauge.
 
 1) Verify the standard version of engauge executable can be built and run
 
-2) Build and test. Every line PASS/FAIL line should say PASS
+2) Build and test. Every line PASS/FAIL line should say PASS. If no PASS/FAIL lines
+   appear then the build probably failed, in which case the build_and_run_all_tests.log
+   file can be examined to identify the build issues
 
      > ./build_and_run_all_tests
 
