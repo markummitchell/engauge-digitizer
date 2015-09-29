@@ -24,6 +24,7 @@ These steps build and run the standard engauge executable for digitizing data.
    display what functionality will, and what functionality will not, be 
    included in engauge as a function of the currently installed packages.
 
+     > cd src
      > qmake engauge.pro
 
 4) Build the executable using the make files from the previous step:
@@ -48,6 +49,7 @@ These steps build and test engauge.
    appear then the build probably failed, in which case the build_and_run_all_tests.log
    file can be examined to identify the build issues
 
+     > cd src
      > ./build_and_run_all_tests
 
 Steps to generate doxygen documentation
@@ -56,6 +58,7 @@ This generates doxygen documentation
 
 1) Run doxygen
 
+     > cd src
      > doxygen
 
 2) Open engauge6/doc/doxygen/html/index.html in your browser
@@ -66,8 +69,7 @@ This generates doxygen documentation
 
 1) Run cccc
 
+     > cd src
      > docccc
 
 2) Open engauge6/doc/cccc/index.html in your browser
-
-
