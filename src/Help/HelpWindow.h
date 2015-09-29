@@ -13,6 +13,8 @@ class HelpWindow : public QDockWidget
  private:
   HelpWindow ();
 
+  QString helpPath() const;
+
 };
 
 #endif // HELP_WINDOW_H
