@@ -14,6 +14,11 @@
 int GridClassifier::NUM_PIXELS_PER_HISTOGRAM_BINS = 1;
 double GridClassifier::PEAK_HALF_WIDTH = 4;
 int GridClassifier::MIN_STEP_PIXELS = 4 * GridClassifier::PEAK_HALF_WIDTH; // Step includes down ramp, flat part, up ramp
+const QString GNUPLOT_DELIMITER ("\t");
+
+// We set up the picket fence with binStart arbitrarily set close to zero. Peak is
+// not exactly at zero since we want to include the left side of the first peak.
+int GridClassifier::BIN_START_UNSHIFTED = GridClassifier::PEAK_HALF_WIDTH;
 
 using namespace std;
 
@@ -151,13 +156,28 @@ double GridClassifier::coordinateFromBin (int bin,
   return coordMin + (coordMax - coordMin) * (double) bin / ((double) m_numHistogramBins - 1.0);
 }
 
-void GridClassifier::dumpGnuplotCoordinate (const QString &filename,
+void GridClassifier::copyVectorToVector (const double from [],
+                                         double to []) const
+{
+  for (int bin = 0; bin < m_numHistogramBins; bin++) {
+    to [bin] = from [bin];
+  }
+}
+
+void GridClassifier::dumpGnuplotCoordinate (const QString &coordinateLabel,
+                                            double corr,
                                             const double *bins,
                                             double coordinateMin,
                                             double coordinateMax,
                                             int binStart,
                                             int binStep) const
 {
+  QString filename = QString ("gridclassifier_%1_corr%2_startMax%3_stepMax%4.gnuplot")
+                            .arg (coordinateLabel)
+                            .arg (corr, 8, 'f', 3, '0')
+                            .arg (binStart)
+                            .arg (binStep);
+
   cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
 
   QFile fileDump (filename);
@@ -165,7 +185,6 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &filename,
   QTextStream strDump (&fileDump);
 
   int bin;
-  const QString DELIMITER ("\t");
 
   // For consistent scaling, get the max bin count
   int binCountMax = 0;
@@ -186,10 +205,10 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &filename,
 
   // Header
   strDump << "bin"
-          << DELIMITER << "coordinate"
-          << DELIMITER << "binCount"
-          << DELIMITER << "startStep"
-          << DELIMITER << "picketFence" << "\n";
+          << GNUPLOT_DELIMITER << "coordinate"
+          << GNUPLOT_DELIMITER << "binCount"
+          << GNUPLOT_DELIMITER << "startStep"
+          << GNUPLOT_DELIMITER << "picketFence" << "\n";
 
   // Data, with one row per coordinate value
   for (bin = 0; bin < m_numHistogramBins; bin++) {
@@ -199,13 +218,57 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &filename,
                                            coordinateMax);
     double startStepValue (((bin - binStart) % binStep == 0) ? 1 : 0);
     strDump << bin
-            << DELIMITER << coordinate
-            << DELIMITER << bins [bin]
-            << DELIMITER << binCountMax * startStepValue
-            << DELIMITER << binCountMax * picketFence [bin] << "\n";
+            << GNUPLOT_DELIMITER << coordinate
+            << GNUPLOT_DELIMITER << bins [bin]
+            << GNUPLOT_DELIMITER << binCountMax * startStepValue
+            << GNUPLOT_DELIMITER << binCountMax * picketFence [bin] << "\n";
   }
 
   delete picketFence;
+}
+
+void GridClassifier::dumpGnuplotCorrelations (const QString &coordinateLabel,
+                                              double valueMin,
+                                              double valueMax,
+                                              const double signalA [],
+                                              const double signalB [],
+                                              const double correlations [])
+{
+  QString filename = QString ("gridclassifier_%1_correlations.gnuplot")
+                            .arg (coordinateLabel);
+
+  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+
+  QFile fileDump (filename);
+  fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
+  QTextStream strDump (&fileDump);
+
+  int bin;
+
+  // Compute max values so curves can be normalized to the same heights
+  double signalAMax = 1, signalBMax = 1, correlationsMax = 1;
+  for (bin = 0; bin < m_numHistogramBins; bin++) {
+    if (bin == 0 || signalA [bin] > signalAMax) {
+      signalAMax = signalA [bin];
+    }
+    if (bin == 0 || signalB [bin] > signalBMax) {
+      signalBMax = signalB [bin];
+    }
+    if (bin == 0 || correlations [bin] > correlationsMax) {
+      correlationsMax = correlations [bin];
+    }
+  }
+
+  // Output normalized curves
+  for (int bin = 0; bin < m_numHistogramBins; bin++) {
+
+    strDump << coordinateFromBin (bin,
+                                  valueMin,
+                                  valueMax)
+            << GNUPLOT_DELIMITER << signalA [bin] / signalAMax
+            << GNUPLOT_DELIMITER << signalB [bin] / signalBMax
+            << GNUPLOT_DELIMITER << correlations [bin] / correlationsMax << "\n";
+  }
 }
 
 void GridClassifier::initializeHistogramBins ()
@@ -371,6 +434,11 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchStartStepSpace";
 
+  // Correlations are tracked for logging
+  double signalA [m_numHistogramBins];
+  double signalB [m_numHistogramBins];
+  double correlations [m_numHistogramBins], correlationsMax [m_numHistogramBins];
+
   // Loop though the space of possible gridlines using the independent variables (start,step).
   Correlation correlation (m_numHistogramBins);
   double picketFence [m_numHistogramBins];
@@ -379,8 +447,7 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   bool isFirst = true;
 
   // We do not explicitly search(=loop) through binStart here, since Correlation::correlateWithShift will take
-  // care of that for us. So, we set up the picket fence with binStart arbitrarily set to zero
-  const int BIN_START_UNSHIFTED = PEAK_HALF_WIDTH;
+  // care of that for us
 
   // Step search starts out small, and stops at value that gives count substantially greater than 2
   for (int binStep = MIN_STEP_PIXELS; binStep < m_numHistogramBins / 4; binStep++) {
@@ -395,20 +462,22 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                                     bins,
                                     picketFence,
                                     binStart,
-                                    corr);
+                                    corr,
+                                    correlations);
     if (isFirst || (corr > corrMax)) {
-      binStartMax = binStart;
+
+      binStartMax = binStart + BIN_START_UNSHIFTED + 1; // Compensate for the shift performed inside loadPicketFence
       binStepMax = binStep;
       corrMax = corr;
+      copyVectorToVector (bins, signalA);
+      copyVectorToVector (picketFence, signalB);
+      copyVectorToVector (correlations, correlationsMax);
 
       // Output a gnuplot file. We should see the correlation values consistently increasing
       if (isGnuplot) {
-        QString filenameGnuplot = QString ("gridclassifier_%1_corr%2_startMax%3_stepMax%4.gnuplot")
-                                  .arg (coordinateLabel)
-                                  .arg (corr, 8, 'f', 3, '0')
-                                  .arg (binStartMax)
-                                  .arg (binStepMax);
-        dumpGnuplotCoordinate(filenameGnuplot,
+
+        dumpGnuplotCoordinate(coordinateLabel,
+                              corr,
                               bins,
                               valueMin,
                               valueMax,
@@ -428,4 +497,11 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                                    valueMin,
                                    valueMax);
   step = next - start;
+
+  dumpGnuplotCorrelations (coordinateLabel,
+                           valueMin,
+                           valueMax,
+                           signalA,
+                           signalB,
+                           correlationsMax);
 }

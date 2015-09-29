@@ -12,12 +12,13 @@ public:
   ~Correlation();
 
   /// Return the shift in function1 that best aligns that function with function2. The functions
-  /// are normalized internally.
+  /// are normalized internally. The correlations vector, as a function of shift, is returned for logging
   void correlateWithShift (int N,
                            const double function1 [],
                            const double function2 [],
                            int &binStartMax,
-                           double &corrMax) const;
+                           double &corrMax,
+                           double correlations []) const;
 
   /// Return the correlation of the two functions, without any shift. The functions
   /// are normalized internally.

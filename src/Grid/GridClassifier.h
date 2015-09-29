@@ -42,6 +42,7 @@ private:
 
   static int MIN_STEP_PIXELS;
   static double PEAK_HALF_WIDTH;
+  static int BIN_START_UNSHIFTED;
 
   int binFromCoordinate (double coord,
                          double coordMin,
@@ -56,12 +57,21 @@ private:
   double coordinateFromBin (int bin,
                             double coordMin,
                             double coordMax) const; // Inverse of binFromCoordinate
-  void dumpGnuplotCoordinate (const QString &filename,
+  void copyVectorToVector (const double from [],
+                           double to []) const;
+  void dumpGnuplotCoordinate (const QString &coordinateLabel,
+                              double corr,
                               const double *bins,
                               double coordinateMin,
                               double coordinateMax,
                               int binStart,
                               int binStep) const;
+  void dumpGnuplotCorrelations (const QString &coordinateLabel,
+                                double valueMin,
+                                double valueMax,
+                                const double signalA [],
+                                const double signalB [],
+                                const double correlationsMax []);
   void initializeHistogramBins ();
   void loadPicketFence (double picketFence [],
                         int binStart,

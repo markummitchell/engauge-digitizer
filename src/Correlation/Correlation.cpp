@@ -40,7 +40,8 @@ void Correlation::correlateWithShift (int N,
                                       const double function1 [],
                                       const double function2 [],
                                       int &binStartMax,
-                                      double &corrMax) const
+                                      double &corrMax,
+                                      double correlations []) const
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "Correlation::correlateWithShift";
 
@@ -105,6 +106,9 @@ void Correlation::correlateWithShift (int N,
       binStartMax = i0AtLeft;
       corrMax = corr;
     }
+
+    // Save for, if enabled, external logging
+    correlations [i0AtLeft] = corr;
   }
 }
 
