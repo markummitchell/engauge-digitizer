@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2015 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> -->
+<application>
+  <id type="desktop">engauge-digitizer.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Engauge Digitizer</name>
+  <summary>Convert an image file showing a graph or map into numbers</summary>
+  <description>
+    <p>
+      This open source digitizing software converts an image file
+      showing a graph or map into numbers. The image file can come
+      from a scanner, digital camera, or a screen-shot. The numbers
+      can be read on the screen and written or copied to a
+      spreadsheet. The process starts with an image file containing a
+      graph or map. The final result is digitized data that can be
+      used by other tools such as spreadsheet and numerical computation
+      programs.
+    </p>
+    <p>
+      Here are some real-life examples:
+    </p>
+    <ul>
+      <li>
+        You need to recreate graphs in some decades-old documents in
+        a modern format
+      </li>
+      <li>
+        You are a graduate student gathering historical data from
+        charts for your project
+      </li>
+      <li>
+        You are a webmaster with visitor statistics charts and you
+        want to do statistical analyses
+      </li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">http://digitizer.sourceforge.net/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
+    <screenshot>http://digitizer.sourceforge.net/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
+    <screenshot>http://digitizer.sourceforge.net/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
+  </screenshots>
+  <url type="homepage">http://digitizer.sourceforge.net/</url>
+  <updatecontact>zbyszek@in.waw.pl</updatecontact>
+</application>
