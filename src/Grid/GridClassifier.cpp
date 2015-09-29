@@ -70,16 +70,21 @@ void GridClassifier::classify (bool isGnuplot,
                          yMin,
                          yMax);
   searchStartStepSpace (isGnuplot,
+                        m_binsX,
+                        "x",
                         xMin,
                         xMax,
-                        yMin,
-                        yMax,
                         startX,
                         stepX,
+                        binStartX,
+                        binStepX);
+  searchStartStepSpace (isGnuplot,
+                        m_binsY,
+                        "y",
+                        yMin,
+                        yMax,
                         startY,
                         stepY,
-                        binStartX,
-                        binStepX,
                         binStartY,
                         binStepY);
   searchCountSpace (m_binsX,
@@ -355,26 +360,22 @@ void GridClassifier::searchCountSpace (double bins [],
 }
 
 void GridClassifier::searchStartStepSpace (bool isGnuplot,
-                                           double xMin,
-                                           double xMax,
-                                           double yMin,
-                                           double yMax,
-                                           double &startX,
-                                           double &stepX,
-                                           double &startY,
-                                           double &stepY,
-                                           double &binStartXMax,
-                                           double &binStepXMax,
-                                           double &binStartYMax,
-                                           double &binStepYMax)
+                                           double bins [],
+                                           const QString &coordinateLabel,
+                                           double valueMin,
+                                           double valueMax,
+                                           double &start,
+                                           double &step,
+                                           double &binStartMax,
+                                           double &binStepMax)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchStartStepSpace";
 
   // Loop though the space of possible gridlines using the independent variables (start,step).
   Correlation correlation (m_numHistogramBins);
   double picketFence [m_numHistogramBins];
-  int binStartX, binStartY;
-  double corrX, corrY, corrXMax, corrYMax;
+  int binStart;
+  double corr, corrMax;
   bool isFirst = true;
 
   // We do not explicitly search(=loop) through binStart here, since Correlation::correlateWithShift will take
@@ -391,51 +392,27 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                      false);
 
     correlation.correlateWithShift (m_numHistogramBins,
-                                    m_binsX,
+                                    bins,
                                     picketFence,
-                                    binStartX,
-                                    corrX);
-    correlation.correlateWithShift (m_numHistogramBins,
-                                    m_binsY,
-                                    picketFence,
-                                    binStartY,
-                                    corrY);
-    if (isFirst || (corrX > corrXMax)) {
-      binStartXMax = binStartX;
-      binStepXMax = binStep;
-      corrXMax = corrX;
+                                    binStart,
+                                    corr);
+    if (isFirst || (corr > corrMax)) {
+      binStartMax = binStart;
+      binStepMax = binStep;
+      corrMax = corr;
 
       // Output a gnuplot file. We should see the correlation values consistently increasing
       if (isGnuplot) {
-        QString filenameGnuplotX = QString ("gridclassifier_x_corr%1_startMax%2_stepMax%3.gnuplot")
-                                   .arg (corrX, 8, 'f', 3, '0')
-                                   .arg (binStartXMax)
-                                   .arg (binStepXMax);
-        dumpGnuplotCoordinate(filenameGnuplotX,
-                                m_binsX,
-                                xMin,
-                                xMax,
-                                binStartX,
-                                binStep);
-      }
-    }
-
-    if (isFirst || (corrY > corrYMax)) {
-      binStartYMax = binStartY;
-      binStepYMax = binStep;
-      corrYMax = corrY;
-
-      // Output a gnuplot file. We should see the correlation values consistently increasing
-      if (isGnuplot) {
-        QString filenameGnuplotY = QString ("gridclassifier_y_corr%1_startMax%2_stepMax%3.gnuplot")
-                                   .arg (corrY, 8, 'f', 3, '0')
-                                   .arg (binStartYMax)
-                                   .arg (binStepYMax);
-        dumpGnuplotCoordinate(filenameGnuplotY,
-                              m_binsY,
-                              yMin,
-                              yMax,
-                              binStartY,
+        QString filenameGnuplot = QString ("gridclassifier_%1_corr%2_startMax%3_stepMax%4.gnuplot")
+                                  .arg (coordinateLabel)
+                                  .arg (corr, 8, 'f', 3, '0')
+                                  .arg (binStartMax)
+                                  .arg (binStepMax);
+        dumpGnuplotCoordinate(filenameGnuplot,
+                              bins,
+                              valueMin,
+                              valueMax,
+                              binStart,
                               binStep);
       }
     }
@@ -444,19 +421,11 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   }
 
   // Convert from bins back to graph coordinates
-  startX = coordinateFromBin (binStartXMax,
-                              xMin,
-                              xMax);
-  startY = coordinateFromBin (binStartYMax,
-                              yMin,
-                              yMax);
-  double nextX = coordinateFromBin (binStartXMax + binStepXMax,
-                                    xMin,
-                                    xMax);
-  double nextY = coordinateFromBin (binStartYMax + binStepYMax,
-                                    yMin,
-                                    yMax);
-
-  stepX = nextX - startX;
-  stepY = nextY - startY;
+  start = coordinateFromBin (binStartMax,
+                             valueMin,
+                             valueMax);
+  double next = coordinateFromBin (binStartMax + binStepMax,
+                                   valueMin,
+                                   valueMax);
+  step = next - start;
 }

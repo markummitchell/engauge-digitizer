@@ -79,18 +79,14 @@ private:
                          double binStep,
                          int &countMax);
   void searchStartStepSpace (bool isGnuplot,
-                             double xMin,
-                             double xMax,
-                             double yMin,
-                             double yMax,
-                             double &startX,
-                             double &stepX,
-                             double &startY,
-                             double &stepY,
-                             double &binStartX,
-                             double &binStepX,
-                             double &binStartY,
-                             double &binStepY);
+                             double bins [],
+                             const QString &coordinateLabel,
+                             double valueMin,
+                             double valueMax,
+                             double &start,
+                             double &step,
+                             double &binStart,
+                             double &binStep);
 
   double *m_binsX;
   double *m_binsY;
