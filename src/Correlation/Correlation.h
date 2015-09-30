@@ -3,7 +3,8 @@
 
 #include "fftw3.h"
 
-/// Fast cross correlation between two functions
+/// Fast cross correlation between two functions. We do not use complex.h along with fftw3.h since then the
+/// complex numbers will be native, which would then require platform-dependent code
 class Correlation
 {
 public:

@@ -1,4 +1,5 @@
 #include "EngaugeAssert.h"
+#include "GridHealer.h"
 #include "GridRemoval.h"
 #include "Logger.h"
 #include <qdebug.h>
@@ -42,6 +43,7 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
                               << " transformationIsDefined=" << (transformation.transformIsDefined() ? "true" : "false")
                               << " removeDefinedGridLines=" << (modelGridRemoval.removeDefinedGridLines() ? "true" : "false");
 
+  GridHealer gridHealer (imageBefore);
   QImage image = imageBefore;
 
   // Make sure grid line removal is wanted, and possible. Otherwise all processing is skipped
@@ -64,7 +66,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
 
       removeLine (posScreenMin,
                   posScreenMax,
-                  image);
+                  image,
+                  gridHealer);
     }
 
     double xGraphMin = modelGridRemoval.startX();
@@ -83,7 +86,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
 
       removeLine (posScreenMin,
                   posScreenMax,
-                  image);
+                  image,
+                  gridHealer);
     }
   }
 
@@ -92,7 +96,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
 
 void GridRemoval::removeLine (const QPointF &posMin,
                               const QPointF &posMax,
-                              QImage &image)
+                              QImage &image,
+                              GridHealer &gridHealer)
 {
   double w = image.width() - 1; // Inclusive width = exclusive width - 1
   double h = image.height() - 1; // Inclusive height = exclusive height - 1
@@ -134,6 +139,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
         for (int yOffset = -1; yOffset <= 1; yOffset++) {
           int y = (int) (0.5 + yLine + yOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
+//          gridHealer.erasePixel (x, y);
         }
       }
     } else {
@@ -149,6 +155,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
           int x = (int) (0.5 + xLine + xOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
+//          gridHealer.erasePixel (x, y);
         }
       }
     }

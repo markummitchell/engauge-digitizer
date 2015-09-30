@@ -1,4 +1,3 @@
-#include <complex.h>
 #include "Correlation.h"
 #include "EngaugeAssert.h"
 #include "fftw3.h"
@@ -71,14 +70,18 @@ void Correlation::correlateWithShift (int N,
   // array, and with zeros after for the second array
   for (i = 0; i < N - 1; i++) {
 
-    m_signalA [i] = 0.0;
-    m_signalB [i + N] = 0.0;
+    m_signalA [i] [0] = 0.0;
+    m_signalA [i] [1] = 0.0;
+    m_signalB [i + N] [0] = 0.0;
+    m_signalB [i + N] [1] = 0.0;
 
   }
   for (i = 0; i < N; i++) {
 
-    m_signalA [i + N - 1] = (function1 [i] - additiveNormalization1) * multiplicativeNormalization1;
-    m_signalB [i] = (function2 [i] - additiveNormalization2) * multiplicativeNormalization2;
+    m_signalA [i + N - 1] [0] = (function1 [i] - additiveNormalization1) * multiplicativeNormalization1;
+    m_signalA [i + N - 1] [1] = 0.0;
+    m_signalB [i] [0] = (function2 [i] - additiveNormalization2) * multiplicativeNormalization2;
+    m_signalB [i] [1] = 0.0;
 
   }
 
@@ -86,9 +89,16 @@ void Correlation::correlateWithShift (int N,
   fftw_execute(m_planB);
 
   // Correlation in frequency space
-  fftw_complex scale = 1.0/(2.0 * N - 1.0);
+  fftw_complex scale = {1.0/(2.0 * N - 1.0), 0.0};
   for (i = 0; i < 2 * N - 1; i++) {
-    m_out[i] = m_outA[i] * conj(m_outB[i]) * scale;
+    // Multiple m_outA [i] * conj (m_outB) * scale
+    fftw_complex term1 = {m_outA [i] [0], m_outA [i] [1]};
+    fftw_complex term2 = {m_outB [i] [0], m_outB [i] [1] * -1.0};
+    fftw_complex term3 = {scale [0], scale [1]};
+    fftw_complex terms12 = {term1 [0] * term2 [0] - term1 [1] * term2 [1],
+                            term1 [0] * term2 [1] + term1 [1] * term2 [0]};
+    m_out [i] [0] = terms12 [0] * term3 [0] - terms12 [1] * term3 [1];
+    m_out [i] [1] = terms12 [0] * term3 [1] + terms12 [1] * term3 [0];
   }
 
   fftw_execute(m_planX);
@@ -99,8 +109,8 @@ void Correlation::correlateWithShift (int N,
   for (int i0AtLeft = 0; i0AtLeft < N; i0AtLeft++) {
 
     int i0AtCenter = (i0AtLeft + N) % (2 * N - 1);
-    fftw_complex shifted = m_outShifted [i0AtCenter];
-    double corr = qSqrt (creal (shifted) * creal (shifted) + cimag (shifted) * cimag (shifted));
+    fftw_complex shifted = {m_outShifted [i0AtCenter] [0], m_outShifted [i0AtCenter] [1]};
+    double corr = qSqrt (shifted [0] * shifted [0] + shifted [1] * shifted [1]);
 
     if ((i0AtLeft == 0) || (corr > corrMax)) {
       binStartMax = i0AtLeft;
