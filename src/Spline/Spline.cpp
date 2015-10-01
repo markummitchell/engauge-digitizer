@@ -157,6 +157,7 @@ SplinePair Spline::interpolateControlPoints (double t) const
 
   // Input argument is out of bounds
   ENGAUGE_ASSERT (false);
+  return m_t[0];
 }
 
 SplinePair Spline::p1 (unsigned int i) const
