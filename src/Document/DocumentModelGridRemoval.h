@@ -55,9 +55,6 @@ public:
   /// Get method for removing defined grid lines.
   bool removeDefinedGridLines () const;
 
-  /// Get method for removing lines parallel to axes.
-  bool removeParallelToAxes () const;
-
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for close distance.
@@ -77,9 +74,6 @@ public:
 
   /// Set method for removing defined grid lines.
   void setRemoveDefinedGridLines (bool removeDefinedGridLines);
-
-  /// Set method for removing lines parallel to axes.
-  void setRemoveParallelToAxes (bool removeParallelToAxes);
 
   /// Set the stable flag to true. This public version has no argument since it cannot be undone
   void setStable ();
@@ -141,8 +135,6 @@ private:
   double m_startY;
   double m_stepY;
   double m_stopY;
-
-  bool m_removeParallelToAxes;
 };
 
 #endif // DOCUMENT_MODEL_GRID_REMOVAL_H

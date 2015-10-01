@@ -241,19 +241,6 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
-void DlgSettingsGridRemoval::createRemoveParallel (QGridLayout *layout, int &row)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveParallel";
-
-  m_chkRemoveParallel = new QCheckBox ("Remove thin lines parallel to the axes");
-  m_chkRemoveParallel->setWhatsThis ("Check this box to remove thin lines that are parallel to the axes.\n\n"
-                                     "This option is only available when the axis points have all been defined.\n\n"
-                                     "This option works especially well if the gridlines in the original image are thinner "
-                                     "than the curve lines");
-  connect (m_chkRemoveParallel, SIGNAL (stateChanged (int)), this, SLOT (slotRemoveParallel (int)));
-  layout->addWidget (m_chkRemoveParallel, row++, 1, 1, 3);
-}
-
 QWidget *DlgSettingsGridRemoval::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createSubPanel";
@@ -273,7 +260,6 @@ QWidget *DlgSettingsGridRemoval::createSubPanel ()
 
   int row = 0;
   createRemoveGridLines (layout, row);
-  createRemoveParallel (layout, row);
   createPreview (layout, row);
 
   return subPanel;
@@ -338,8 +324,6 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_editStepY->setText(QString::number(m_modelGridRemovalAfter->stepY()));
   m_editStopY->setText(QString::number(m_modelGridRemovalAfter->stopY()));
 
-  m_chkRemoveParallel->setChecked (m_modelGridRemovalAfter->removeParallelToAxes());
-
   m_scenePreview->clear();
   m_scenePreview->addPixmap (cmdMediator.document().pixmap());
 
@@ -400,15 +384,6 @@ void DlgSettingsGridRemoval::slotRemoveGridLines (int state)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveGridLines";
 
   m_modelGridRemovalAfter->setRemoveDefinedGridLines(state == Qt::Checked);
-  updateControls();
-  updatePreview();
-}
-
-void DlgSettingsGridRemoval::slotRemoveParallel (int state)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotRemoveParallel";
-
-  m_modelGridRemovalAfter->setRemoveParallelToAxes(state == Qt::Checked);
   updateControls();
   updatePreview();
 }

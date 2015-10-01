@@ -42,8 +42,6 @@ private slots:
   void slotStepY(const QString &);
   void slotStopY(const QString &);
 
-  void slotRemoveParallel (int);
-
 protected:
   virtual void handleOk ();
 
@@ -52,7 +50,6 @@ private:
   void createRemoveGridLines (QGridLayout *layout, int &row);
   void createRemoveGridLinesX (QGridLayout *layoutGridLines, int &row);
   void createRemoveGridLinesY (QGridLayout *layoutGridLines, int &row);
-  void createRemoveParallel (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void updateControls ();
   void updatePreview();
@@ -80,8 +77,6 @@ private:
   QDoubleValidator *m_validatorStartY;
   QDoubleValidator *m_validatorStepY;
   QDoubleValidator *m_validatorStopY;
-
-  QCheckBox *m_chkRemoveParallel;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

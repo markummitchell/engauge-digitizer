@@ -25,8 +25,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval() :
   m_countY (DEFAULT_COUNT),
   m_startY (DEFAULT_NON_COUNT),
   m_stepY (DEFAULT_NON_COUNT),
-  m_stopY (DEFAULT_NON_COUNT),
-  m_removeParallelToAxes (false)
+  m_stopY (DEFAULT_NON_COUNT)
 {
 }
 
@@ -48,8 +47,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval (double startX,
   m_countY (countY),
   m_startY (startY),
   m_stepY (stepY),
-  m_stopY (startY + (countY - 1.0) * stepY),
-  m_removeParallelToAxes (false)
+  m_stopY (startY + (countY - 1.0) * stepY)
 {
 }
 
@@ -66,8 +64,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval(const Document &document) :
   m_countY (document.modelGridRemoval().countY()),
   m_startY (document.modelGridRemoval().startY()),
   m_stepY (document.modelGridRemoval().stepY()),
-  m_stopY (document.modelGridRemoval().stopY()),
-  m_removeParallelToAxes (document.modelGridRemoval().removeParallelToAxes())
+  m_stopY (document.modelGridRemoval().stopY())
 {
 }
 
@@ -84,8 +81,7 @@ DocumentModelGridRemoval::DocumentModelGridRemoval(const DocumentModelGridRemova
   m_countY (other.countY()),
   m_startY (other.startY()),
   m_stepY (other.stepY()),
-  m_stopY (other.stopY()),
-  m_removeParallelToAxes (other.removeParallelToAxes())
+  m_stopY (other.stopY())
 {
 }
 
@@ -104,7 +100,6 @@ DocumentModelGridRemoval &DocumentModelGridRemoval::operator=(const DocumentMode
   m_startY = other.startY();
   m_stepY = other.stepY();
   m_stopY = other.stopY();
-  m_removeParallelToAxes = other.removeParallelToAxes();
 
   return *this;
 }
@@ -154,13 +149,11 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES)) {
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y)) {
 
     // Boolean values
     QString stableValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STABLE).toString();
     QString definedValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_DEFINED_GRID_LINES).toString();
-    QString parallelValue = attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES).toString();
 
     setStable (stableValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setRemoveDefinedGridLines (definedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
@@ -175,7 +168,6 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
     setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y).toDouble());
     setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y).toDouble());
     setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y).toDouble());
-    setRemoveParallelToAxes (parallelValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -213,17 +205,11 @@ void DocumentModelGridRemoval::printStream(QString indentation,
   str << indentation << "startY=" << m_startY << "\n";
   str << indentation << "stepY=" << m_stepY << "\n";
   str << indentation << "stopY=" << m_stopY << "\n";
-  str << indentation << "removeParallelToAxes=" << (m_removeParallelToAxes ? "true" : "false") << "\n";
 }
 
 bool DocumentModelGridRemoval::removeDefinedGridLines () const
 {
   return m_removeDefinedGridLines;
-}
-
-bool DocumentModelGridRemoval::removeParallelToAxes () const
-{
-  return m_removeParallelToAxes;
 }
 
 void DocumentModelGridRemoval::saveXml(QXmlStreamWriter &writer) const
@@ -250,9 +236,6 @@ void DocumentModelGridRemoval::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y, QString::number (m_startY));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y, QString::number (m_stepY));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_Y, QString::number (m_stopY));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_REMOVAL_REMOVE_PARALLEL_TO_AXES, m_removeParallelToAxes ?
-                          DOCUMENT_SERIALIZE_BOOL_TRUE :
-                          DOCUMENT_SERIALIZE_BOOL_FALSE);
 
   writer.writeEndElement();
 }
@@ -285,11 +268,6 @@ void DocumentModelGridRemoval::setGridCoordDisableY (GridCoordDisable gridCoordD
 void DocumentModelGridRemoval::setRemoveDefinedGridLines (bool removeDefinedGridLines)
 {
   m_removeDefinedGridLines = removeDefinedGridLines;
-}
-
-void DocumentModelGridRemoval::setRemoveParallelToAxes (bool removeParallelToAxes)
-{
-  m_removeParallelToAxes = removeParallelToAxes;
 }
 
 void DocumentModelGridRemoval::setStable ()
