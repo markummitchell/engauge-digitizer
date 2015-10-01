@@ -6,7 +6,7 @@
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
-const double CLOSE_DISTANCE_DEFAULT = 5.0;
+const double CLOSE_DISTANCE_DEFAULT = 10.0;
 
 // These defaults should always be overwritten when Document coordinates are defined
 const int DEFAULT_COUNT = 2;

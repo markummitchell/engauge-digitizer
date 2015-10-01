@@ -1,3 +1,4 @@
+#include "DocumentModelGridRemoval.h"
 #include "EngaugeAssert.h"
 #include "GridHealer.h"
 #include "GridRemoval.h"
@@ -43,12 +44,14 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
                               << " transformationIsDefined=" << (transformation.transformIsDefined() ? "true" : "false")
                               << " removeDefinedGridLines=" << (modelGridRemoval.removeDefinedGridLines() ? "true" : "false");
 
-  GridHealer gridHealer (imageBefore);
   QImage image = imageBefore;
 
   // Make sure grid line removal is wanted, and possible. Otherwise all processing is skipped
   if (modelGridRemoval.removeDefinedGridLines() &&
       transformation.transformIsDefined()) {
+
+    GridHealer gridHealer (imageBefore,
+                           modelGridRemoval);
 
     double yGraphMin = modelGridRemoval.startY();
     double yGraphMax = modelGridRemoval.stopY();
@@ -89,6 +92,9 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
                   image,
                   gridHealer);
     }
+
+    // Apply the healing process to the image
+    gridHealer.heal (image);
   }
 
   return QPixmap::fromImage (image);
@@ -139,7 +145,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
         for (int yOffset = -1; yOffset <= 1; yOffset++) {
           int y = (int) (0.5 + yLine + yOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
-//          gridHealer.erasePixel (x, y);
+          gridHealer.erasePixel (x, y);
         }
       }
     } else {
@@ -155,7 +161,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
           int x = (int) (0.5 + xLine + xOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
-//          gridHealer.erasePixel (x, y);
+          gridHealer.erasePixel (x, y);
         }
       }
     }

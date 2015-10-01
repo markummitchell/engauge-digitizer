@@ -5,6 +5,7 @@
 #include <QPointF>
 #include <QVector>
 
+class DocumentModelGridRemoval;
 class QImage;
 
 enum PixelState {
@@ -12,6 +13,7 @@ enum PixelState {
   PIXEL_STATE_FOREGROUND, /// Foreground pixel in original image. May become PIXEL_STATE_REMOVED or PIXEL_STATE_BOUNDARY
   PIXEL_STATE_REMOVED,    /// Pixel removed because it belonged to a grid line
   PIXEL_STATE_ADJACENT,   /// Foreground pixel adjacent to a PIXEL_STATE_REMOVED
+  PIXEL_STATE_HEALED,     /// Removed pixel that has been filled so a line crosses the gap from a removed grid line
   NUM_PIXEL_STATES
 };
 
@@ -30,12 +32,13 @@ class GridHealer
 {
  public:
   /// Single constructor
-  GridHealer(const QImage &imageBefore);
+  GridHealer(const QImage &imageBefore,
+             const DocumentModelGridRemoval &modelGridRemoval);
 
   /// Remember that pixel was erased since it belongs to an grid line. In the image, erasure
   /// correponds to a foreground pixel being changed to the background color
-  void erasePixel (int x,
-                   int y);
+  void erasePixel (int xCol,
+                   int yRow);
 
   /// Heal the broken curve lines by spanning the gaps across the newly-removed grid lines
   void heal (QImage &imageToHeal);
@@ -62,6 +65,8 @@ class GridHealer
 
   /// Hash table that returns a pixel in each group
   GroupNumberToPoint m_groupNumberToPixel;
+
+  DocumentModelGridRemoval m_modelGridRemoval;
 };
 
 #endif // GRID_HEALER_H
