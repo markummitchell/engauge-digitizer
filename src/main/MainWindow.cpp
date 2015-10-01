@@ -2390,9 +2390,13 @@ void MainWindow::slotViewGroupBackground(QAction *action)
     backgroundImage = BACKGROUND_IMAGE_FILTERED;
   } else {
     ENGAUGE_ASSERT (false);
-  }
-  m_cmbBackground->setCurrentIndex (indexBackground);
 
+    // Defaults if assert is disabled so execution continues
+    indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_ORIGINAL));
+    backgroundImage = BACKGROUND_IMAGE_ORIGINAL;
+  }
+
+  m_cmbBackground->setCurrentIndex (indexBackground);
   m_backgroundStateContext->setBackgroundImage (backgroundImage);
 }
 

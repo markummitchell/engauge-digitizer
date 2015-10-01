@@ -132,6 +132,8 @@ double ColorFilterSettings::high () const
 
     default:
       ENGAUGE_ASSERT (false);
+      return (double) (m_intensityHigh - INTENSITY_MIN) /
+          (double) (INTENSITY_MAX - INTENSITY_MIN); // Default when asserts are disabled
   }
 }
 
@@ -230,6 +232,8 @@ double ColorFilterSettings::low () const
 
     default:
       ENGAUGE_ASSERT (false);
+      return (double) (m_intensityLow - INTENSITY_MIN) /
+          (double) (INTENSITY_MAX - INTENSITY_MIN); // Default when asserts are disabled
   }
 }
 

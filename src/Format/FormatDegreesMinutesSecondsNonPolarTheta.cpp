@@ -36,5 +36,6 @@ QString FormatDegreesMinutesSecondsNonPolarTheta::formatOutput (CoordUnitsNonPol
 
   LOG4CPP_ERROR_S ((*mainCat)) << "FormatDegreesMinutesSecondsNonPolarTheta::formatOutput";
   ENGAUGE_ASSERT (false);
+  return "";
 }
 

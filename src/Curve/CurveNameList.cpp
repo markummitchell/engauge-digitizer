@@ -67,7 +67,8 @@ QVariant CurveNameList::data (const QModelIndex &index,
     return curvesEntry.numPoints ();
   } else {
     ENGAUGE_ASSERT (false);
-  }
+    return curvesEntry.curveNameOriginal(); // Default if asserts are disabled
+ }
 }
 
 
