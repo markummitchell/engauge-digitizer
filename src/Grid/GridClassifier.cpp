@@ -498,10 +498,12 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                                    valueMax);
   step = next - start;
 
-  dumpGnuplotCorrelations (coordinateLabel,
-                           valueMin,
-                           valueMax,
-                           signalA,
-                           signalB,
-                           correlationsMax);
+  if (isGnuplot) {
+    dumpGnuplotCorrelations (coordinateLabel,
+                             valueMin,
+                             valueMax,
+                             signalA,
+                             signalB,
+                             correlationsMax);
+  }
 }
