@@ -44,6 +44,9 @@
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "HelpWindow.h"
+#ifdef ENGAUGE_JPEG2000
+#include "Jpeg2000.h"
+#endif // ENGAUGE_JPEG2000
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -1046,7 +1049,17 @@ void MainWindow::fileImport (const QString &fileName)
   m_originalFileWasImported = true;
 
   QImage image;
-  if (!image.load (fileName)) {
+  bool loaded = false;
+#ifdef ENGAUGE_JPEG2000
+  Jpeg2000 jpeg2000;
+  loaded = jpeg2000.load (fileName,
+                          image);
+#endif // ENGAUGE_JPEG2000
+  if (!loaded) {
+    loaded = image.load (fileName);
+  }
+
+  if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
                           tr("Cannot read file %1.").
@@ -2023,16 +2036,21 @@ void MainWindow::slotFileImport ()
     QTextStream str (&filter);
 
     // Compile a list of supported formats into a filter
-    str << "Image Files (";
+    QList<QByteArray>::const_iterator itr;
     QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QList<QByteArray>::iterator itr;
-    QString delimiter;
+    QStringList supportedImageFormatStrings;
     for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
       QByteArray arr = *itr;
-      str << delimiter << "*." << arr.data ();
-      delimiter = " ";
+      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
+      supportedImageFormatStrings << extensionAsWildcard;
     }
-    str << ")";
+#ifdef ENGAUGE_JPEG2000
+    supportedImageFormatStrings << "*.jp2";
+#endif // ENGAUGE_JPEG2000
+
+    supportedImageFormatStrings.sort();
+
+    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
 
     // Allow selection of files with strange suffixes in case the file extension was changed. Since
     // the default is the first filter, we add this afterwards (it is the off-nominal case)

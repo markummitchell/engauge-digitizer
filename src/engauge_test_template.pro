@@ -4,8 +4,12 @@
 
 TEMPLATE    = app
 
-# Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of include/library files
-CONFIG      = qt warn_on thread debug testcase debug
+# CONFIG comments:
+# 1) Add 'jpeg2000' to build in support for JPEG2000 input file. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
+#    environment variables
+# 2) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+#    include/library files in an automated and platform-independent manner
+CONFIG      = qt warn_on thread debug testcase debug 
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test
@@ -519,3 +523,39 @@ INCLUDEPATH += Background \
 
 RESOURCES += \
     engauge.qrc
+
+jpeg2000 {
+    CONFIG(debug,debug|release) {
+      message(Building debug version with support for JPEG2000 files)
+    } else {
+      message(Building release version with support for JPEG2000 files)
+    }
+    _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
+    _JPEG2000_LIB = $$(JPEG2000_LIB)
+    isEmpty(_JPEG2000_INCLUDE) {
+      error("JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+    } else {
+      isEmpty(_JPEG2000_LIB) {
+        error("JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+      }
+    }
+    DEFINES += "ENGAUGE_JPEG2000"
+    INCLUDEPATH += Jpeg2000 \
+                   $$(JPEG2000_INCLUDE)
+    LIBS += -L$$(JPEG2000_LIB) -lopenjp2
+
+    HEADERS += Jpeg2000/color.h \
+               Jpeg2000/convert.h \
+               Jpeg2000/format_defs.h
+
+    SOURCES += Jpeg2000/color.c \
+               Jpeg2000/convert.c \
+               Jpeg2000/Jpeg2000.cpp
+
+} else {
+    CONFIG(debug,debug|release) {
+      message(Building debug version without support for JPEG2000 files)
+    } else {
+      message(Building release version without support for JPEG2000 files)
+    }
+}

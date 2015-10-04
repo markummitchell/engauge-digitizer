@@ -85,7 +85,7 @@ void TestCorrelation::testShiftSinusoidNonPowerOf2 ()
   const int INDEX_MAX = 200, INDEX_SHIFT = 50;
 
   int binStartMax;
-  double function1 [N], function2 [N];
+  double function1 [N], function2 [N], correlations [N];
   double corrMax;
 
   Correlation correlation (N);
@@ -99,7 +99,8 @@ void TestCorrelation::testShiftSinusoidNonPowerOf2 ()
                                   function1,
                                   function2,
                                   binStartMax,
-                                  corrMax);
+                                  corrMax,
+                                  correlations);
 
   QVERIFY (binStartMax = INDEX_SHIFT);
 }
@@ -110,7 +111,7 @@ void TestCorrelation::testShiftSinusoidPowerOf2 ()
   const int INDEX_MAX = 200, INDEX_SHIFT = 50;
 
   int binStartMax;
-  double function1 [N], function2 [N];
+  double function1 [N], function2 [N], correlations [N];
   double corrMax;
 
   Correlation correlation (N);
@@ -124,7 +125,8 @@ void TestCorrelation::testShiftSinusoidPowerOf2 ()
                                   function1,
                                   function2,
                                   binStartMax,
-                                  corrMax);
+                                  corrMax,
+                                  correlations);
 
   QVERIFY (binStartMax = INDEX_SHIFT);
 }
@@ -135,7 +137,7 @@ void TestCorrelation::testShiftThreeTrianglesNonPowerOf2 ()
   const int INDEX_MAX = 200, INDEX_SHIFT = 50;
 
   int binStartMax;
-  double function1 [N], function2 [N];
+  double function1 [N], function2 [N], correlations [N];
   double corrMax;
 
   Correlation correlation (N);
@@ -149,7 +151,8 @@ void TestCorrelation::testShiftThreeTrianglesNonPowerOf2 ()
                                   function1,
                                   function2,
                                   binStartMax,
-                                  corrMax);
+                                  corrMax,
+                                  correlations);
 
   QVERIFY (binStartMax = INDEX_SHIFT);
 }
@@ -160,7 +163,7 @@ void TestCorrelation::testShiftThreeTrianglesPowerOf2 ()
   const int INDEX_MAX = 200, INDEX_SHIFT = 50;
 
   int binStartMax;
-  double function1 [N], function2 [N];
+  double function1 [N], function2 [N], correlations [N];
   double corrMax;
 
   Correlation correlation (N);
@@ -174,7 +177,8 @@ void TestCorrelation::testShiftThreeTrianglesPowerOf2 ()
                                   function1,
                                   function2,
                                   binStartMax,
-                                  corrMax);
+                                  corrMax,
+                                  correlations);
 
   QVERIFY (binStartMax = INDEX_SHIFT);
 }
