@@ -2045,7 +2045,8 @@ void MainWindow::slotFileImport ()
       supportedImageFormatStrings << extensionAsWildcard;
     }
 #ifdef ENGAUGE_JPEG2000
-    supportedImageFormatStrings << "*.jp2";
+    Jpeg2000 jpeg2000;
+    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
 #endif // ENGAUGE_JPEG2000
 
     supportedImageFormatStrings.sort();

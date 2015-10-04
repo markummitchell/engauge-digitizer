@@ -9,7 +9,7 @@ TEMPLATE    = app
 #    environment variables
 # 2) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner
-CONFIG      = qt warn_on thread debug testcase debug 
+CONFIG      = qt warn_on thread debug testcase debug jpeg2000
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test
@@ -544,13 +544,16 @@ jpeg2000 {
                    $$(JPEG2000_INCLUDE)
     LIBS += -L$$(JPEG2000_LIB) -lopenjp2
 
-    HEADERS += Jpeg2000/color.h \
-               Jpeg2000/convert.h \
-               Jpeg2000/format_defs.h
+    HEADERS += Jpeg2000/Jpeg2000.h \
+               Jpeg2000/Jpeg2000Callbacks.h \
+               Jpeg2000/Jpeg2000Color.h \
+               Jpeg2000/Jpeg2000Convert.h \
+               Jpeg2000/Jpeg2000FormatDefs.h               
 
-    SOURCES += Jpeg2000/color.c \
-               Jpeg2000/convert.c \
-               Jpeg2000/Jpeg2000.cpp
+    SOURCES += Jpeg2000/Jpeg2000.cpp \
+               Jpeg2000/Jpeg2000Callbacks.cpp \
+               Jpeg2000/Jpeg2000Color.cpp \
+               Jpeg2000/Jpeg2000Convert.cpp                
 
 } else {
     CONFIG(debug,debug|release) {

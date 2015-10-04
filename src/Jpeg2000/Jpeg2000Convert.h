@@ -34,10 +34,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef __J2K_CONVERT_H
-#define __J2K_CONVERT_H
+#ifndef JPEG2000_CONVERT_H
+#define JPEG2000_CONVERT_H
 
-int imagetopnm(opj_image_t *image, const char *outfile);
+extern int imagetopnm(opj_image_t *image, const char *outfile);
 
-#endif /* __J2K_CONVERT_H */
+#endif // JPEG2000_CONVERT_H
 

@@ -43,7 +43,7 @@
 #include <ctype.h>
 
 #include "openjpeg.h"
-#include "convert.h"
+#include "Jpeg2000Convert.h"
 
 /* -->> -->> -->> -->>
 
@@ -61,7 +61,6 @@ int imagetopnm(opj_image_t * image, const char *outfile)
   int fails, two, has_alpha, triple;
   int prec, v;
   FILE *fdest = NULL;
-  const char *tmp = outfile;
   char *destname;
 
   alpha = NULL;
@@ -268,4 +267,3 @@ int imagetopnm(opj_image_t * image, const char *outfile)
 
   return 0;
 }/* imagetopnm() */
-

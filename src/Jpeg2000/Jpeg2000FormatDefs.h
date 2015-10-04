@@ -35,10 +35,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _OPJ_COLOR_H_
-#define _OPJ_COLOR_H_
+#ifndef JPEG2000_FORMAT_DEFS_H
+#define JPEG2000_FORMAT_DEFS_H
 
-extern void color_sycc_to_rgb(opj_image_t *img);
-extern void color_apply_icc_profile(opj_image_t *image);
+#define J2K_CFMT 0
+#define JP2_CFMT 1
+#define JPT_CFMT 2
 
-#endif /* _OPJ_COLOR_H_ */
+#define PXM_DFMT 10
+#define PGX_DFMT 11
+#define BMP_DFMT 12
+#define YUV_DFMT 13
+#define TIF_DFMT 14
+#define RAW_DFMT 15 /* MSB / Big Endian */
+#define TGA_DFMT 16
+#define PNG_DFMT 17
+#define RAWL_DFMT 18 /* LSB / Little Endian */
+
+#endif // JPEG2000_FORMAT_DEFS_H
