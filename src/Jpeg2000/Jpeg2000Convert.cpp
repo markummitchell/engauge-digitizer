@@ -37,33 +37,26 @@
  */
 //#include "opj_apps_config.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
+#include "Logger.h"
 #include "openjpeg.h"
 #include "Jpeg2000Convert.h"
+#include <QBuffer>
+#include <QDataStream>
+#include <QDebug>
+#include <string.h>
 
-/* -->> -->> -->> -->>
-
-   PNM IMAGE FORMAT
-
-   <<-- <<-- <<-- <<-- */
-
-int imagetopnm(opj_image_t * image, const char *outfile) 
+int imagetopnm(opj_image_t * image,
+               QBuffer &buffer)
 {
-  int *red, *green, *blue, *alpha;
+  int *red, *green, *blue, *alpha = NULL;
   int wr, hr, max;
   int i;
   unsigned int compno, ncomp;
   int adjustR, adjustG, adjustB, adjustA;
-  int fails, two, has_alpha, triple;
+  int two, has_alpha, triple;
   int prec, v;
-  FILE *fdest = NULL;
-  char *destname;
-
-  alpha = NULL;
+  char bufferLocal[1024];
+  QDataStream str (&buffer);
 
   if((prec = (int)image->comps[0].prec) > 16)
   {
@@ -71,7 +64,7 @@ int imagetopnm(opj_image_t * image, const char *outfile)
             "\n\t: refused.\n",__FILE__,__LINE__,prec);
     return 1;
   }
-  two = has_alpha = 0; fails = 1;
+  two = has_alpha = 0;
   ncomp = image->numcomps;
 
   if (ncomp == 2 /* GRAYA */
@@ -84,13 +77,6 @@ int imagetopnm(opj_image_t * image, const char *outfile)
           && image->comps[1].prec == image->comps[2].prec
           ))
   {
-    fdest = fopen(outfile, "wb");
-
-    if (!fdest)
-    {
-      fprintf(stderr, "ERROR -> failed to open %s for writing\n", outfile);
-      return fails;
-    }
     two = (prec > 8);
     triple = (ncomp > 2);
     wr = (int)image->comps[0].w; hr = (int)image->comps[0].h;
@@ -109,17 +95,31 @@ int imagetopnm(opj_image_t * image, const char *outfile)
     {
       const char *tt = (triple?"RGB_ALPHA":"GRAYSCALE_ALPHA");
 
-      fprintf(fdest, "P7\n# OpenJPEG-%s\nWIDTH %d\nHEIGHT %d\nDEPTH %d\n"
-              "MAXVAL %d\nTUPLTYPE %s\nENDHDR\n", opj_version(),
-              wr, hr, ncomp, max, tt);
+      sprintf(bufferLocal,
+              "P7\n# OpenJPEG-%s\nWIDTH %d\nHEIGHT %d\nDEPTH %d\n"
+              "MAXVAL %d\nTUPLTYPE %s\nENDHDR\n",
+              opj_version(),
+              wr,
+              hr,
+              ncomp,
+              max,
+              tt);
+      str.writeRawData (bufferLocal,
+                        strlen (bufferLocal));
       alpha = image->comps[ncomp - 1].data;
       adjustA = (image->comps[ncomp - 1].sgnd ?
                  1 << (image->comps[ncomp - 1].prec - 1) : 0);
     }
     else
     {
-      fprintf(fdest, "P6\n# OpenJPEG-%s\n%d %d\n%d\n",
-              opj_version(), wr, hr, max);
+      sprintf(bufferLocal,
+              "P6\n# OpenJPEG-%s\n%d %d\n%d\n",
+              opj_version(),
+              wr,
+              hr,
+              max);
+      str.writeRawData (bufferLocal,
+                        strlen (bufferLocal));
       adjustA = 0;
     }
     adjustR = (image->comps[0].sgnd ? 1 << (image->comps[0].prec - 1) : 0);
@@ -138,19 +138,34 @@ int imagetopnm(opj_image_t * image, const char *outfile)
         v = *red + adjustR; ++red;
         if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-        fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c%c",
+                (unsigned char)(v>>8),
+                (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          2);
 
         if(triple)
         {
           v = *green + adjustG; ++green;
           if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-          fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+          sprintf(bufferLocal,
+                  "%c%c",
+                  (unsigned char)(v>>8),
+                  (unsigned char)v);
+          str.writeRawData  (bufferLocal,
+                             2);
 
           v =  *blue + adjustB; ++blue;
           if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-          fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+          sprintf(bufferLocal,
+                  "%c%c",
+                  (unsigned char)(v>>8),
+                  (unsigned char)v);
+          str.writeRawData (bufferLocal,
+                            2);
 
         }/* if(triple) */
 
@@ -159,7 +174,12 @@ int imagetopnm(opj_image_t * image, const char *outfile)
           v = *alpha + adjustA; ++alpha;
           if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-          fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+          sprintf(bufferLocal,
+                  "%c%c",
+                  (unsigned char)(v>>8),
+                  (unsigned char)v);
+          str.writeRawData (bufferLocal,
+                            2);
         }
         continue;
 
@@ -169,65 +189,68 @@ int imagetopnm(opj_image_t * image, const char *outfile)
       v = *red++;
       if(v > 255) v = 255; else if(v < 0) v = 0;
 
-      fprintf(fdest, "%c", (unsigned char)v);
+      sprintf(bufferLocal,
+              "%c",
+              (unsigned char)v);
+      str.writeRawData (bufferLocal,
+                        1);
       if(triple)
       {
 	v = *green++;
 	if(v > 255) v = 255; else if(v < 0) v = 0;
 
-	fprintf(fdest, "%c", (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c",
+                (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          1);
 	v = *blue++;
 	if(v > 255) v = 255; else if(v < 0) v = 0;
 
-	fprintf(fdest, "%c", (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c",
+                (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          1);
       }
       if(has_alpha)
       {
 	v = *alpha++;
 	if(v > 255) v = 255; else if(v < 0) v = 0;
 
-	fprintf(fdest, "%c", (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c",
+                (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          1);
       }
     }	/* for(i */
 
-    fclose(fdest); return 0;
+    return 0;
   }
 
   /* YUV or MONO: */
 
   if (image->numcomps > ncomp)
   {
-    fprintf(stderr,"WARNING -> [PGM file] Only the first component\n");
-    fprintf(stderr,"           is written to the file\n");
+    LOG4CPP_WARN_S ((*mainCat)) << "imagetopnm will only use the first component";
   }
-  destname = (char*)malloc(strlen(outfile) + 8);
 
   for (compno = 0; compno < ncomp; compno++)
   {
-    if (ncomp > 1)
-    {
-      const size_t olen = strlen(outfile);
-      const size_t dotpos = olen - 4;
-
-      strncpy(destname, outfile, dotpos);
-      sprintf(destname+dotpos, "_%d.pgm", compno);
-    }
-    else
-      sprintf(destname, "%s", outfile);
-
-    fdest = fopen(destname, "wb");
-    if (!fdest)
-    {
-      fprintf(stderr, "ERROR -> failed to open %s for writing\n", destname);
-      free(destname);
-      return 1;
-    }
-    wr = (int)image->comps[compno].w; hr = (int)image->comps[compno].h;
+    wr = (int)image->comps[compno].w;
+    hr = (int)image->comps[compno].h;
     prec = (int)image->comps[compno].prec;
     max = (1<<prec) - 1;
 
-    fprintf(fdest, "P5\n#OpenJPEG-%s\n%d %d\n%d\n",
-            opj_version(), wr, hr, max);
+    sprintf(bufferLocal,
+            "P5\n#OpenJPEG-%s\n%d %d\n%d\n",
+            opj_version(),
+            wr,
+            hr,
+            max);
+    str.writeRawData (bufferLocal,
+                      strlen (bufferLocal));
 
     red = image->comps[compno].data;
     adjustR =
@@ -240,14 +263,22 @@ int imagetopnm(opj_image_t * image, const char *outfile)
         v = *red + adjustR; ++red;
         if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-        fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c%c",
+                (unsigned char)(v>>8), (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          2);
 
         if(has_alpha)
         {
           v = *alpha++;
           if(v > 65535) v = 65535; else if(v < 0) v = 0;
 
-          fprintf(fdest, "%c%c",(unsigned char)(v>>8), (unsigned char)v);
+          sprintf(bufferLocal,
+                  "%c%c",
+                  (unsigned char)(v>>8), (unsigned char)v);
+          str.writeRawData (bufferLocal,
+                            2);
         }
       }/* for(i */
     }
@@ -258,12 +289,14 @@ int imagetopnm(opj_image_t * image, const char *outfile)
 	v = *red + adjustR; ++red;
 	if(v > 255) v = 255; else if(v < 0) v = 0;
 
-        fprintf(fdest, "%c", (unsigned char)v);
+        sprintf(bufferLocal,
+                "%c",
+                (unsigned char)v);
+        str.writeRawData (bufferLocal,
+                          1);
       }
     }
-    fclose(fdest);
   } /* for (compno */
-  free(destname);
 
   return 0;
 }/* imagetopnm() */

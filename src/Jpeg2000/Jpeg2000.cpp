@@ -3,6 +3,8 @@
 #include "Jpeg2000Color.h"
 #include "Jpeg2000FormatDefs.h"
 #include "Logger.h"
+#include <QBuffer>
+#include <QFile>
 #include <QImage>
 #include <QString>
 
@@ -255,12 +257,27 @@ bool Jpeg2000::load (const QString &filename,
 
   // Transform into ppm image in memory
   bool success = true;
+  QBuffer buffer;
+  buffer.open (QBuffer::WriteOnly);
   if (imagetopnm (image,
-                  "bogus.ppm")) {
+                  buffer)) {
     LOG4CPP_ERROR_S ((*mainCat)) << "Jpeg2000::load failed to generate new image";
     success = false;
+
+  } else {
+
+    // Intermediate file for debugging
+//    QFile file ("jpeg2000.ppm");
+//    file.open (QIODevice::WriteOnly);
+//    file.write (buffer.data());
+//    file.close ();
+
+    // Create output
+    imageResult.loadFromData(buffer.data());
+
   }
 
+  // Deallocate
   if (inCodec) {
     opj_destroy_codec (inCodec);
   }

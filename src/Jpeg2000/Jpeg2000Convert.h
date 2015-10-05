@@ -37,7 +37,10 @@
 #ifndef JPEG2000_CONVERT_H
 #define JPEG2000_CONVERT_H
 
-extern int imagetopnm(opj_image_t *image, const char *outfile);
+class QBuffer;
+
+extern int imagetopnm(opj_image_t *image,
+                      QBuffer &buffer);
 
 #endif // JPEG2000_CONVERT_H
 
