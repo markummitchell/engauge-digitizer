@@ -9,7 +9,7 @@ TEMPLATE    = app
 #    environment variables
 # 2) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner
-CONFIG      = qt warn_on thread debug testcase debug jpeg2000
+CONFIG      = qt warn_on thread debug testcase debug
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test

@@ -17,15 +17,19 @@ These steps build and run the standard engauge executable for digitizing data.
      --Package(s)--     --Comment--
      libfftw3-dev       For computing fourier transforms. Tested with 3.3.3-7
      liblog4cpp-dev     For logging. Tested with 1.0.4
-     libpng12-dev       For png image files (optional)
-     libjpeg-dev        For jpeg image files (optional)
+     libpng12-dev       For reading png image files (optional)
+     libjpeg-dev        For reading jpeg image files (optional)
+     libopenjpeg-dev    For reading jpeg2000 image files (optional)
 
 3) Run qmake on this file to generate make files. The qmake executable will
-   display what functionality will, and what functionality will not, be 
-   included in engauge as a function of the currently installed packages.
+   display what functionality will, and what functionality will not, be included 
+   in engauge as a function of the currently installed packages.
 
      > cd src
      > qmake engauge.pro
+
+   By default, the debug version will be built by qmake. To build a release version
+   instead, set environment variable ENGAUGE_RELEASE=1 before running qmake.
 
 4) Build the executable using the make files from the previous step:
 

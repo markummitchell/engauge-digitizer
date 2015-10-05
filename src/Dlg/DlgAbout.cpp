@@ -29,5 +29,9 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
                      "<p>FFTW 3.X.X Links</p>"
                      "<ul>"
                      "<li><a href='http://www.fftw.org'>Project page</a></li>"
+                     "</ul>"
+                     "<p>OpenJPEG 2.X Links</p>"
+                     "<ul>"
+                     "<li><a href='http://www.openjpeg.org'>Project page</a></li>"
                      "</ul>")));
 }
