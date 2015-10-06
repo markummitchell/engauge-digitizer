@@ -19,7 +19,8 @@ These steps build and run the standard engauge executable for digitizing data.
      liblog4cpp-dev     For logging. Tested with 1.0.4
      libpng12-dev       For reading png image files (optional)
      libjpeg-dev        For reading jpeg image files (optional)
-     libopenjpeg-dev    For reading jpeg2000 image files (optional)
+     libopenjpeg-dev    For reading jpeg2000 image files (optional). Compiles
+                        with version 2.1.7 but not with version 2.1.3
 
 3) Run qmake on this file to generate make files. The qmake executable will
    display what functionality will, and what functionality will not, be included 

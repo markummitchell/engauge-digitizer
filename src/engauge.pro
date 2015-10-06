@@ -1,20 +1,28 @@
 # engauge.pro : Builds make files for engauge executable
 #
-# Directions are in INSTALL
+# Instructions are in the INSTALL file, with some comments about setting the configuration variable 'CONFIG' included below
 
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Add 'jpeg2000' to build in support for JPEG2000 input file. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
+# 1) Remove 'debug' in the CONFIG= line or set environment variable ENGAUGE_RELEASE=1 to create a release version 
+#    without debug information
+# 2) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
 #    environment variables
-# 2) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
-#    include/library files in an automated and platform-independent manner
+# 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+#    include/library files in an automated and platform-independent manner, so it will not be removed
 CONFIG      = qt warn_on thread debug
 
 _ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
 isEmpty(_ENGAUGE_RELEASE) {
 } else {
 CONFIG -= debug
+# Comments:
+# 1) Release version has warnings enabled so they can be removed
+# 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
+# 3) -Wuninitialized requires O1, O2 or O3 optimization
+DEFINES += QT_NO_DEBUG 
+QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable 
 }
 
 OBJECTS_DIR = .objs
@@ -566,3 +574,4 @@ jpeg2000 {
       message(Building release version without support for JPEG2000 files)
     }
 }
+

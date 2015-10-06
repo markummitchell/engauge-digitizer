@@ -133,7 +133,7 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
 
     QGraphicsTextItem *textAngle = m_scenePreview->addText (angle);
     textAngle->setFont (QFont (defaultFont.defaultFamily(), FONT_SIZE));
-    double x, y;
+    double x = 0, y = 0; // Initialized to prevent compiler warning
     switch (direction) {
       case 0:
         x = CARTESIAN_COORD_MAX - textAngle->boundingRect().width ();

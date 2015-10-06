@@ -1,14 +1,16 @@
 # engauge_test_template.pro : Builds make files for testing engauge executable
 #
-# Directions are in INSTALL
+# Instructions are in the INSTALL file, with some comments about setting the configuration variable 'CONFIG' included below
 
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Add 'jpeg2000' to build in support for JPEG2000 input file. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
+# 1) Remove 'debug' in the CONFIG= line or set environment variable ENGAUGE_RELEASE=1 to create a release version 
+#    without debug information
+# 2) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
 #    environment variables
-# 2) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
-#    include/library files in an automated and platform-independent manner
+# 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+#    include/library files in an automated and platform-independent manner, so it will not be removed
 CONFIG      = qt warn_on thread debug testcase debug
 
 OBJECTS_DIR = .objs_test

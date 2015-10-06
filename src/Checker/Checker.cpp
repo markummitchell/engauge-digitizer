@@ -479,8 +479,8 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   deleteSide (m_sideRight);
   deleteSide (m_sideBottom);
 
-  // Get the min and max of x and y
-  double xFrom, xTo, yFrom, yTo;
+  // Get the min and max of x and y. We initialize yTo to prevent compiler warning
+  double xFrom, xTo, yFrom, yTo = 0;
   int i;
   for (i = 0; i < NUM_AXES_POINTS; i++) {
     if (i == 0) {

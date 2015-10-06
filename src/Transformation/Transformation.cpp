@@ -68,7 +68,7 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
   if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
 
     // Input coordinates are polar so convert them
-    double angleRadians;
+    double angleRadians = 0; // Initialized to prevent compiler warning
     switch (modelCoords.coordUnitsTheta())
     {
       case COORD_UNITS_POLAR_THETA_DEGREES:
