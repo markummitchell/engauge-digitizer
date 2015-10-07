@@ -116,15 +116,19 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
         break;
 
       case COORD_UNITS_POLAR_THETA_RADIANS:
-        static QString radiansUnits [] = {"0", "PI / 2", "PI", "3 * PI / 2"};
-        ENGAUGE_ASSERT (direction < 4);
-        angle = radiansUnits [direction];
+        {
+          static QString radiansUnits [] = {"0", "PI / 2", "PI", "3 * PI / 2"};
+          ENGAUGE_ASSERT (direction < 4);
+          angle = radiansUnits [direction];
+        }
         break;
 
       case COORD_UNITS_POLAR_THETA_TURNS:
-        static QString turnsUnits [] = {"0", "1 / 4", "1 / 2", "3 / 4"};
-        ENGAUGE_ASSERT (direction < 4);
-        angle = turnsUnits [direction];
+        {
+          static QString turnsUnits [] = {"0", "1 / 4", "1 / 2", "3 / 4"};
+          ENGAUGE_ASSERT (direction < 4);
+          angle = turnsUnits [direction];
+        }
         break;
 
       default:

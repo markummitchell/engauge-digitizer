@@ -388,7 +388,7 @@ void DlgSettingsColorFilter::updateHistogram()
   // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
 
-  double histogramBins [ColorFilterHistogram::HISTOGRAM_BINS ()];
+  double *histogramBins = new double [ColorFilterHistogram::HISTOGRAM_BINS ()];
 
   ColorFilter filter;
   ColorFilterHistogram filterHistogram;
@@ -479,6 +479,8 @@ void DlgSettingsColorFilter::updateHistogram()
     ENGAUGE_ASSERT (false);
 
   }
+
+  free (histogramBins);
 }
 
 void DlgSettingsColorFilter::updatePreview ()

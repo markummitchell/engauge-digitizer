@@ -533,6 +533,10 @@ INCLUDEPATH += Background \
                util \
                View
 
+win32-msvc* {
+INCLUDEPATH += $(FFTW_HOME)/api $(LOG4CPP_HOME)/include
+}
+
 RESOURCES += \
     engauge.qrc
 
@@ -574,4 +578,3 @@ jpeg2000 {
       message(Building release version without support for JPEG2000 files)
     }
 }
-
