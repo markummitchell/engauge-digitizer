@@ -397,7 +397,7 @@ void GridClassifier::searchCountSpace (double bins [],
 
   // Loop though the space of possible counts
   Correlation correlation (m_numHistogramBins);
-  double picketFence [m_numHistogramBins];
+  double *picketFence = new double [m_numHistogramBins];
   double corr, corrMax;
   bool isFirst = true;
   int countStop = 1 + (m_numHistogramBins - binStart) / binStep;
@@ -420,6 +420,8 @@ void GridClassifier::searchCountSpace (double bins [],
 
     isFirst = false;
   }
+
+  free (picketFence);
 }
 
 void GridClassifier::searchStartStepSpace (bool isGnuplot,
@@ -435,13 +437,14 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   LOG4CPP_INFO_S ((*mainCat)) << "GridClassifier::searchStartStepSpace";
 
   // Correlations are tracked for logging
-  double signalA [m_numHistogramBins];
-  double signalB [m_numHistogramBins];
-  double correlations [m_numHistogramBins], correlationsMax [m_numHistogramBins];
+  double *signalA = new double [m_numHistogramBins];
+  double *signalB = new double [m_numHistogramBins];
+  double *correlations = new double [m_numHistogramBins];
+  double *correlationsMax = new double [m_numHistogramBins];
 
   // Loop though the space of possible gridlines using the independent variables (start,step).
   Correlation correlation (m_numHistogramBins);
-  double picketFence [m_numHistogramBins];
+  double *picketFence = new double [m_numHistogramBins];
   int binStart;
   double corr, corrMax;
   bool isFirst = true;
@@ -506,4 +509,10 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                              signalB,
                              correlationsMax);
   }
+
+  free (signalA);
+  free (signalB);
+  free (correlations);
+  free (correlationsMax);
+  free (picketFence);
 }

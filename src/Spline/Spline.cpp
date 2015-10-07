@@ -38,7 +38,7 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
                                               const std::vector<SplinePair> &xy)
 {
   int i, j;
-  int n = xy.size() - 1;
+  int n = (int) xy.size() - 1;
 
   m_t = t;
   m_xy = xy;
@@ -80,7 +80,7 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
 
 void Spline::computeControlPointsForIntervals ()
 {
-  int n = m_xy.size() - 1;
+  int n = (int) m_xy.size() - 1;
 
   for (int i = 0; i < n; i++) {
     const SplineCoeff &element = m_elements[i];

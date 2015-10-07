@@ -85,7 +85,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
     }
 
     // Generate histogram
-    double histogramBins [ColorFilterHistogram::HISTOGRAM_BINS ()];
+    double *histogramBins = new double [ColorFilterHistogram::HISTOGRAM_BINS ()];
 
     ColorFilterHistogram filterHistogram;
     int maxBinCount;
@@ -127,6 +127,8 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
                               curveName,
                               lowerValue,
                               upperValue);
+
+    free (histogramBins);
 
   } else {
 
