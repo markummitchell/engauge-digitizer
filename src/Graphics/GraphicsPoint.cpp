@@ -98,11 +98,12 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
 
+  const int radiusSigned = radius; // Radius must be signed before multiplying by -1 below, for Visual Studio
   m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
-                                                    QRect (- radius,
-                                                           - radius,
-                                                           2 * radius + 1,
-                                                           2 * radius + 1));
+                                                    QRect (- radiusSigned,
+                                                           - radiusSigned,
+                                                           2 * radiusSigned + 1,
+                                                           2 * radiusSigned + 1));
   m_scene.addItem (m_graphicsItemEllipse);
 
   m_graphicsItemEllipse->setZValue (Z_VALUE);
@@ -122,10 +123,10 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
   // Shadow item is not selectable so it needs no stored data. Do NOT
   // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
   m_shadowZeroWidthEllipse = new GraphicsPointEllipse (*this,
-                                                       QRect (- radius,
-                                                              - radius,
-                                                              2 * radius + 1,
-                                                              2 * radius + 1));
+                                                       QRect (- radiusSigned,
+                                                              - radiusSigned,
+                                                              2 * radiusSigned + 1,
+                                                              2 * radiusSigned + 1));
   m_shadowZeroWidthEllipse->setParentItem(m_graphicsItemPolygon); // Dragging parent also drags child
 
   m_shadowZeroWidthEllipse->setPen (QPen (QBrush (m_color), ZERO_WIDTH));
