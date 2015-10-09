@@ -156,9 +156,9 @@ double ColorFilter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
   switch (colorFilterMode) {
     case COLOR_FILTER_MODE_FOREGROUND:
       {
-        double distance = qSqrt (pow (pixel.red()   - qRed   (rgbBackground), 2) +
-                                 pow (pixel.green() - qGreen (rgbBackground), 2) +
-                                 pow (pixel.blue()  - qBlue  (rgbBackground), 2));
+        double distance = qSqrt (pow ((double) pixel.red()   - qRed   (rgbBackground), 2) +
+                                 pow ((double) pixel.green() - qGreen (rgbBackground), 2) +
+                                 pow ((double) pixel.blue()  - qBlue  (rgbBackground), 2));
         s = distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
       }
       break;
@@ -174,10 +174,10 @@ double ColorFilter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
 
     case COLOR_FILTER_MODE_INTENSITY:
       {
-        double distance = qSqrt (pow (pixel.red(), 2) +
-                                 pow (pixel.green(), 2) +
-                                 pow (pixel.blue(), 2));
-        s = distance / qSqrt (255 * 255 + 255 * 255 + 255 * 255);
+        double distance = qSqrt (pow ((double) pixel.red(), 2) +
+                                 pow ((double) pixel.green(), 2) +
+                                 pow ((double) pixel.blue(), 2));
+        s = distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
       }
       break;
 
