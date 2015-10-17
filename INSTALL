@@ -1,6 +1,50 @@
-Steps to build and run engauge executable:
-------------------------------------------
-These steps build and run the standard engauge executable for digitizing data.
+Windows - Steps to build and run engauge executable:
+----------------------------------------------------
+These steps build and run, in Microsoft Windows, the standard engauge executable for digitizing data.
+
+1) Install the MinGW version of the Qt Open Source toolkit from http://www.qt.io. Since the default
+   Qt Open Source download supports Microsoft Visual Studio rather than MinGW, careful navigation
+   of the Qt website is required to find, and then download, the Qt installation package that
+   explicitly targets the MinGW compiler. The MinGW compiler provides the correct header files and system
+   functions (unlike Visual Studio).
+
+   Note that the MinGW version of the Qt Open Source toolkit provides both Qt and MinGW. There is no
+   need to install a standalone version of MinGW.
+
+   Qt Open Source 5.5.1 has been tested with Engauge.
+
+2) Download and build log4cpp from http://log4cpp.sourceforge.net. Version 1.1 was tested with Engauge. 
+   The following minor changes were required for the code to compile:
+  
+   2a) In config-MinGW32.h, comment out '#define int64_t __int64' to prevent 'long long long is too long for gcc'
+   2b) In DailyRollingFileAppender.cpp, insert '#include <time.h>'
+   2c) In DailyRollingFileAppender.cpp, replace 'time(X)' by 'time_t(X)' where X is the argument
+   2d) In DailyRollingFileAppender.cpp, replace 'localtime_s(X,Y)' by 'localtime(Y)' where X and Y are arguments
+
+   Then following the normal configure, make and make install steps.
+
+3) Download and build fftw from http://www.fftw.org. Version 3.3.4 was tested with Engauge.
+   
+   Then following the normal configure, make and make install steps.
+
+4) Set LOG4CPP_HOME and FFTW_HOME environment variables to point to the installation directories of 
+   log4cpp and fftw in the previous steps.
+
+5) Build engauge using either the command line approach, or qtcreator. The command line approach is:
+
+   5a) qmake engauge.pro
+   5b) make
+
+   The qtcreator approach is
+
+   5a) qtcreator
+   5b) File / Open / open engauge.pro
+   5c) Build / BuildAll
+   5d) Run 
+
+Linux - Steps to build and run engauge executable:
+--------------------------------------------------
+These steps build and run, in Linux, the standard engauge executable for digitizing data.
 
 1) Install open source version 5 of the Qt toolkit. This is probably
    available for your operating systems as a source tarball, or many packages.
@@ -44,9 +88,9 @@ These steps build and run the standard engauge executable for digitizing data.
 
      > ../bin/engauge
 
-Steps to build engauge test executables and perform tests
+Linux - Steps to build engauge test executables and perform tests
 ---------------------------------------------------------
-These steps build and test engauge.
+These steps build and test engauge, in Linux.
 
 1) Verify the standard version of engauge executable can be built and run
 

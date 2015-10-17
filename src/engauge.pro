@@ -493,8 +493,11 @@ TARGET = ../bin/engauge
 
 QT += core gui network printsupport widgets xml help
 
-#LIBS += -L$$(FFTW_HOME) -L$$(LOG4CPP_HOME) -llog4cpp -lfftw3
+win32-g++* {
+LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
+}
 LIBS += -llog4cpp -lfftw3
+
 INCLUDEPATH += Background \
                Callback \
                Checker \
@@ -534,9 +537,9 @@ INCLUDEPATH += Background \
                util \
                View
 
-win32-msvc* {
-INCLUDEPATH += $(FFTW_HOME)/api $(LOG4CPP_HOME)/include
-QMAKE_CXXFLAGS += /EHsc
+win32-g++* {
+INCLUDEPATH += $$(FFTW_HOME)/include \
+               $$(LOG4CPP_HOME)/include
 }
 
 RESOURCES += \
