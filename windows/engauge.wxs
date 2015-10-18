@@ -24,11 +24,13 @@
 	      <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='staging/engauge.exe' KeyPath='yes'>
 		<Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
 	      </File>
+	      <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='staging/Qt5CLucene.dll'      />
 	      <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='staging/Qt5Core.dll'         />
 	      <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='staging/Qt5Gui.dll'          />
 	      <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='staging/Qt5Help.dll'         />
 	      <File Id='network'      Name='Qt5Network.dll'      DiskId='1' Source='staging/Qt5Network.dll'      />
 	      <File Id='printsupport' Name='Qt5PrintSupport.dll' DiskId='1' Source='staging/Qt5PrintSupport.dll' />
+	      <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='staging/Qt5Sql.dll'          />
 	      <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='staging/Qt5Widgets.dll'      />
 	      <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='staging/Qt5Xml.dll'          />
 	      <File Id='gcc'          Name='libgcc_s_dw2-1.dll'  DiskId='1' Source='staging/libgcc_s_dw2-1.dll'  />

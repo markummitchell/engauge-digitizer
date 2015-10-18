@@ -16,11 +16,13 @@ echo "Copying executable from $FROMEXE"
 cp $FROMEXE                         staging
 
 echo "Copying DLL libraries from $FROMDLL"
+cp $FROMDLL/Qt5CLucene.dll          staging 
 cp $FROMDLL/Qt5Core.dll             staging 
 cp $FROMDLL/Qt5Gui.dll              staging 
 cp $FROMDLL/Qt5Help.dll             staging 
 cp $FROMDLL/Qt5Network.dll          staging 
 cp $FROMDLL/Qt5PrintSupport.dll     staging 
+cp $FROMDLL/Qt5Sql.dll              staging 
 cp $FROMDLL/Qt5Widgets.dll          staging 
 cp $FROMDLL/Qt5Xml.dll              staging
 cp $FROMDLL/libgcc_s_dw2-1.dll      staging
