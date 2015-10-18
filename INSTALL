@@ -13,6 +13,9 @@ These steps build and run, in Microsoft Windows, the standard engauge executable
 
    Qt Open Source 5.5.1 has been tested with Engauge.
 
+   HINT - At this point, the MSYS shell is available by clicking on the msys.bat shortcut on the Windows
+          desktop. The MSYS shell is preferred over the Cygwin shell (if you have installed Cygwin earlier).
+
 2) Download and build log4cpp from http://log4cpp.sourceforge.net. Version 1.1 was tested with Engauge. 
    The following minor changes were required for the code to compile:
   

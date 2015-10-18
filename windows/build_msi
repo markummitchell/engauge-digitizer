@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+export FROMEXE="$HOME/engauge6/bin/engauge.exe"
+export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+
+ls -ls $FROMEXE | awk '{print $7,$8,$9,$10}'
+ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}'
+ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
+
+read -p 'If the input files are up to date, press Enter to continue'
+
+echo "Copy executable from $FROMEXE"
+cp $FROMEXE                         staging
+
+echo "Copying help files"
+cp $FROMQCH                         staging
+cp $FROMQHC                         staging
+
+echo "Copying icon file"
+cp $FROMICO                         staging
+
+echo "Compiling"
+candle.exe engauge.wxs
+
+echo "Creating MSI"
+light.exe engauge.wixobj

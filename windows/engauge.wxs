@@ -2,9 +2,42 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
     <Product Name='Foobar 1.0' Manufacturer='Acme Ltd.'
         Id='1FBCEF62-3E8D-4E44-A0B5-0F066BAB900D' 
-        UpgradeCode='YOURGUID-7349-453F-94F6-BCB5110BA4FD'
-        Language='1033' Codepage='1252' Version='1.0.0'>
-    <Package Id='*' Keywords='Installer' Description="Acme's Foobar 1.0 Installer"
-        Comments='Foobar is a registered trademark of Acme Ltd.' Manufacturer='Acme Ltd.'
-        InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+        UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
+	Language='1033' Codepage='1252' Version='1.0.0'>
+      <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
+	       Comments='Foobar is a registered trademark of Acme Ltd.' Manufacturer='engauge software team'
+	       InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+      <Media Id='1' Cabinet='engauge.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
+      <Property Id='DiskPrompt' Value="Engauge Digitizer Installation [1]" />
+      <Directory Id='TARGETDIR' Name='SourceDir'>
+	<Directory Id='ProgramFilesFolder' Name='PFiles'>
+	  <Directory Id='EngaugeDigitizer' Name='Engauge Digitizer'>
+	    <Component Id='MainExecutable' Guid='{5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F}'>
+	      <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='staging/engauge.exe' KeyPath='yes'>
+		<Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engaugeico' IconIndex='0' Advertise='yes' />
+	      </File>
+            </Component>
+	    <Component Id='qch' Guid='34F27B58-56AC-4380-9B85-131DED5BA593'>
+	      <File Id='qch' Name='qch' DiskId='1' Source='staging/engauge.qch' KeyPath='yes' />
+            </Component>
+	    <Component Id='qhc' Guid='5E9775B5-ACBD-47E4-B578-52689410BB38'>
+	      <File Id='qhc' Name='qhc' DiskId='1' Source='staging/engauge.qhc' KeyPath='yes' />
+            </Component>
+	  </Directory>
+	</Directory>
+	<Directory Id='ProgramMenuFolder' Name='Programs'>
+	  <Directory Id='ProgramMenuDir' Name='Engauge Digitizer'>
+	    <Component Id='ProgramMenuDir' Guid='{2FD05FCA-8337-4E5B-9186-43A9A791D274}'>
+	      <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+	      <RegistryValue Root='HKCU' Key='Software\Engauge Digitizer' Type='string' Value='' KeyPath='yes' />
+	    </Component>
+	  </Directory>
+	</Directory>
+	<Directory Id='DesktopFolder' Name='Desktop' />
+      </Directory> 
+      <Feature Id='Complete' Level='1'>
+	<ComponentRef Id='MainExecutable' />
+      </Feature>
+      <Icon Id='engaugeico' SourceFile='staging/digitizer.ico' />
+    </Product>
 </Wix>
