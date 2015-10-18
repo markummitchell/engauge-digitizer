@@ -4,6 +4,7 @@ export FROMEXE="$HOME/engauge6/bin/engauge.exe"
 export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
 export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
 export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+export FROMDLL="/C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/bin"
 
 ls -ls $FROMEXE | awk '{print $7,$8,$9,$10}'
 ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}'
@@ -11,8 +12,20 @@ ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
 
 read -p 'If the input files are up to date, press Enter to continue'
 
-echo "Copy executable from $FROMEXE"
+echo "Copying executable from $FROMEXE"
 cp $FROMEXE                         staging
+
+echo "Copying DLL libraries from $FROMDLL"
+cp $FROMDLL/Qt5Core.dll             staging 
+cp $FROMDLL/Qt5Gui.dll              staging 
+cp $FROMDLL/Qt5Help.dll             staging 
+cp $FROMDLL/Qt5Network.dll          staging 
+cp $FROMDLL/Qt5PrintSupport.dll     staging 
+cp $FROMDLL/Qt5Widgets.dll          staging 
+cp $FROMDLL/Qt5Xml.dll              staging
+cp $FROMDLL/libgcc_s_dw2-1.dll      staging
+cp $FROMDLL/libstdc++-6.dll         staging
+cp $FROMDLL/libwinpthread-1.dll     staging
 
 echo "Copying help files"
 cp $FROMQCH                         staging
