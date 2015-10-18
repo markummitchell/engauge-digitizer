@@ -494,7 +494,7 @@ TARGET = ../bin/engauge
 QT += core gui network printsupport widgets xml help
 
 win32-g++* {
-CONFIG -= console
+CONFIG += windows
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
 }
 LIBS += -llog4cpp -lfftw3
