@@ -49,7 +49,7 @@
 	</Directory>
 	<Directory Id='DesktopFolder' Name='Desktop'>
 	  <Component Id='ApplicationShortcutDesktop' Guid="*">
-	    <Shortcut Id='ApplicationDesktopShortcut' Name='Engauge Digitizer' Description='Convert graph images to data' Target='[MYAPPDIRPROPERTY]engauge.exe' WorkingDirectory='MYAPPDIRPROPERTY' />
+	    <Shortcut Id='ApplicationDesktopShortcut' Name='Engauge Digitizer' Description='Convert graph images to data' Target='[MYAPPDIRPROPERTY]engauge.exe' WorkingDirectory='MYAPPDIRPROPERTY' Icon='engauge.ico' />
 	    <RemoveFolder Id='DesktopFolder' On='uninstall' />
 	    <RegistryValue Root='HKCU' Key='Software/EngaugeDigitizer' Name='installed' Type='integer' Value='1' KeyPath='yes' />
 	  </Component>
