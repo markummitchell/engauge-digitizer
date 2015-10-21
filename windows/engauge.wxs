@@ -3,7 +3,7 @@
     <Product Name='Engauge Digitizer' Manufacturer='Engauge Open Source Developers'
         Id='1FBCEF62-3E8D-4E44-A0B5-0F066BAB900D' 
         UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
-	Language='1033' Codepage='1252' Version='1.0.0'>
+	Language='1033' Codepage='1252' Version='6.0'>
       <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
 	       Comments='Engauge Digitizer is available from Sourceforge.net' Manufacturer='Engauge Open Source Developers'
 	       InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
