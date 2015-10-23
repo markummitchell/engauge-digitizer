@@ -1,4 +1,4 @@
 engauge.msi
-engauge.wixobj
+*.wixobj
 engauge.wixpdb
 staging

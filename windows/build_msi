@@ -3,6 +3,8 @@
 export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
 export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
 export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+export FROMDLL="/C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/bin"
+
 ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}'
 ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
 
@@ -10,8 +12,11 @@ read -p 'If the help input files are up to date, press Enter to continue'
 
 echo "***Copying help input files"
 mkdir -p documentation
-cp $FROMQCH  documentation
-cp $FROMQHC  documentation
+cp $FROMQCH  ../bin/documentation
+cp $FROMQHC  ../bin/documentation
+
+echo "***Copying DLL libraries from $FROMDLL"
+cp $FROMDLL/libwinpthread-1.dll ../bin/
 
 echo "***Copying icon file"
 cp $FROMICO  ../bin
@@ -32,5 +37,6 @@ echo "***Rebuilding release directory" &&
 windeployqt -release ../bin/engauge.exe &&
 echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
+candle.exe WixUI_InstallDir_NoLicense.wxs &&
 echo "***Creating MSI" &&
-light.exe -ext WixUIExtension engauge.wixobj
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o engauge.msi
