@@ -12,95 +12,95 @@
       <Directory Id='TARGETDIR' Name='SourceDir'>
 	<Directory Id='ProgramFilesFolder' Name='PFiles'>
 	  <Directory Id='MYAPPDIRPROPERTY' Name='Engauge Digitizer'>
-	    <Component Id='MainExecutable' Guid='{5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F}'>
-	      <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='staging/engauge.exe' KeyPath='yes'>
+	    <Component Id='MainExecutable' Guid='5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F'>
+	      <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='../bin/engauge.exe' KeyPath='yes'>
 		<Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
 	      </File>
-	      <File Id='d3dcompiler'  Name='D3Dcompiler_47.dll'  DiskId='1' Source='D3Dcompiler_47.dll'          />
-	      <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='Qt5CLucene.dll'      />
-	      <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='Qt5Core.dll'         />
-	      <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='Qt5Gui.dll'          />
-	      <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='Qt5Help.dll'         />
-	      <File Id='network'      Name='Qt5Network.dll'      DiskId='1' Source='Qt5Network.dll'      />
-	      <File Id='printsupport' Name='Qt5PrintSupport.dll' DiskId='1' Source='Qt5PrintSupport.dll' />
-	      <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='Qt5Sql.dll'          />
-	      <File Id='svg'          Name='Qt5Svg.dll'          DiskId='1' Source='Qt5Svg.dll'          />
-	      <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='Qt5Widgets.dll'      />
-	      <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='Qt5Xml.dll'          />
-	      <File Id='egl'          Name='libEGL.dll'          DiskId='1' Source='libEGL.dll'          />
-	      <File Id='gles'         Name='libGLESV2.dll'       DiskId='1' Source='libGLESV2.dll'       />
-	      <File Id='gcc'          Name='libgcc_s_dw2-1.dll'  DiskId='1' Source='libgcc_s_dw2-1.dll'  />
-	      <File Id='stdc'         Name='libstdc++-6.dll'     DiskId='1' Source='libstdc++-6.dll'     />
-	      <File Id='opengl'       Name='opengl32sw.dll'      DiskId='1' Source='opengl32sw.dll'      />
+	      <File Id='d3dcompiler'  Name='D3Dcompiler_47.dll'  DiskId='1' Source='../bin/D3Dcompiler_47.dll'          />
+	      <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='../bin/Qt5CLucene.dll'      />
+	      <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='../bin/Qt5Core.dll'         />
+	      <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='../bin/Qt5Gui.dll'          />
+	      <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='../bin/Qt5Help.dll'         />
+	      <File Id='network'      Name='Qt5Network.dll'      DiskId='1' Source='../bin/Qt5Network.dll'      />
+	      <File Id='printsupport' Name='Qt5PrintSupport.dll' DiskId='1' Source='../bin/Qt5PrintSupport.dll' />
+	      <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='../bin/Qt5Sql.dll'          />
+	      <File Id='svg'          Name='Qt5Svg.dll'          DiskId='1' Source='../bin/Qt5Svg.dll'          />
+	      <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='../bin/Qt5Widgets.dll'      />
+	      <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='../bin/Qt5Xml.dll'          />
+	      <File Id='egl'          Name='libEGL.dll'          DiskId='1' Source='../bin/libEGL.dll'          />
+	      <File Id='gles'         Name='libGLESV2.dll'       DiskId='1' Source='../bin/libGLESV2.dll'       />
+	      <File Id='gcc'          Name='libgcc_s_dw2-1.dll'  DiskId='1' Source='../bin/libgcc_s_dw2-1.dll'  />
+	      <File Id='stdc'         Name='libstdc++-6.dll'     DiskId='1' Source='../bin/libstdc++-6.dll'     />
+	      <File Id='opengl'       Name='opengl32sw.dll'      DiskId='1' Source='../bin/opengl32sw.dll'      />
             </Component>
-	    <Directory Id='bearer' Name='documentation'>
+	    <Directory Id='bearer' Name='bearer'>
 	      <Component Id='bearer' Guid='C7385BF7-2EF9-499A-90FF-17C3F8D4C708'>
-		<File Id='generic'  Name='qgenericbearer.dll'    DiskId='1' Source='bearer/qgenericbearer.dll'          />
-		<File Id='native'   Name='qnativewifibearer.dll' DiskId='1' Source='bearer/qnativewifibearer.dll'       />
+		<File Id='generic'  Name='qgenericbearer.dll'    DiskId='1' Source='../bin/bearer/qgenericbearer.dll'          />
+		<File Id='native'   Name='qnativewifibearer.dll' DiskId='1' Source='../bin/bearer/qnativewifibearer.dll'       />
 	      </Component>
 	    </Directory>
 	    <Directory Id='documentation' Name='documentation'>
 	      <Component Id='documentation' Guid='34F27B58-56AC-4380-9B85-131DED5BA593'>
-		<File Id='qch' Name='engauge.qch' DiskId='1' Source='documentation/engauge.qch' />
-		<File Id='qhc' Name='engauge.qhc' DiskId='1' Source='documentation/engauge.qhc' />
+		<File Id='qch' Name='engauge.qch' DiskId='1' Source='../bin/documentation/engauge.qch' />
+		<File Id='qhc' Name='engauge.qhc' DiskId='1' Source='../bin/documentation/engauge.qhc' />
 	      </Component>
 	    </Directory>
 	    <Directory Id='iconengines' Name='iconengines'>
-	      <Component Id='documentation' Guid='ADE56F32-F33D-4315-ADEA-244EAD400CC2'>
-		<File Id='svg' Name='qsvgicon.dll' DiskId='1' Source='iconengines/qsvgicon.dll' KeyPath='yes' />
+	      <Component Id='iconengines' Guid='ADE56F32-F33D-4315-ADEA-244EAD400CC2'>
+		<File Id='svgicon' Name='qsvgicon.dll' DiskId='1' Source='../bin/iconengines/qsvgicon.dll' KeyPath='yes' />
 	      </Component>
 	    </Directory>
 	    <Directory Id='imageformats' Name='imageformats'>
 	      <Component Id='imageformats' Guid='94F1114F-216F-4409-AAC6-1B4ADCB3AC32'>
-		<File Id='qdds'  Name='qdds.dll'     DiskId='1' Source='imageformats/qdds.dll'  />
-		<File Id='qgif'  Name='qgif.dll'     DiskId='1' Source='imageformats/qgif.dll'  />
-		<File Id='qicns' Name='qicns.dll'    DiskId='1' Source='imageformats/qicns.dll' />
-		<File Id='qico'  Name='qico.dll'     DiskId='1' Source='imageformats/qico.dll'  />
-		<File Id='qjp2'  Name='qjp2.dll'     DiskId='1' Source='imageformats/qjp2.dll'  />
-		<File Id='qjpeg' Name='qjpeg.dll'    DiskId='1' Source='imageformats/qjpeg.dll' />
-		<File Id='qmng'  Name='qmng.dll'     DiskId='1' Source='imageformats/qmng.dll'  />
-		<File Id='qsvg'  Name='qsvg.dll'     DiskId='1' Source='imageformats/qsvg.dll'  />
-		<File Id='qtga'  Name='qtga.dll'     DiskId='1' Source='imageformats/qtga.dll'  />
-		<File Id='qtiff' Name='qtiff.dll'    DiskId='1' Source='imageformats/qtiff.dll' />
-		<File Id='qwbmp' Name='qwbmp.dll'    DiskId='1' Source='imageformats/qwbmp.dll' />
-		<File Id='qwebp' Name='qwebp.dll'    DiskId='1' Source='imageformats/qwebp.dll' />
+		<File Id='qdds'  Name='qdds.dll'     DiskId='1' Source='../bin/imageformats/qdds.dll'  />
+		<File Id='qgif'  Name='qgif.dll'     DiskId='1' Source='../bin/imageformats/qgif.dll'  />
+		<File Id='qicns' Name='qicns.dll'    DiskId='1' Source='../bin/imageformats/qicns.dll' />
+		<File Id='qico'  Name='qico.dll'     DiskId='1' Source='../bin/imageformats/qico.dll'  />
+		<File Id='qjp2'  Name='qjp2.dll'     DiskId='1' Source='../bin/imageformats/qjp2.dll'  />
+		<File Id='qjpeg' Name='qjpeg.dll'    DiskId='1' Source='../bin/imageformats/qjpeg.dll' />
+		<File Id='qmng'  Name='qmng.dll'     DiskId='1' Source='../bin/imageformats/qmng.dll'  />
+		<File Id='qsvg'  Name='qsvg.dll'     DiskId='1' Source='../bin/imageformats/qsvg.dll'  />
+		<File Id='qtga'  Name='qtga.dll'     DiskId='1' Source='../bin/imageformats/qtga.dll'  />
+		<File Id='qtiff' Name='qtiff.dll'    DiskId='1' Source='../bin/imageformats/qtiff.dll' />
+		<File Id='qwbmp' Name='qwbmp.dll'    DiskId='1' Source='../bin/imageformats/qwbmp.dll' />
+		<File Id='qwebp' Name='qwebp.dll'    DiskId='1' Source='../bin/imageformats/qwebp.dll' />
 	      </Component>
 	    </Directory>
 	    <Directory Id='platforms' Name='platforms'>
 	      <Component Id='platforms' Guid='679FF2A9-FB70-47ED-BA76-7CDC68367777'>
-		<File Id='win'   Name='qwindows.dll' DiskId='1' Source='platforms/qwindows.dll' KeyPath='yes' />
+		<File Id='win'   Name='qwindows.dll' DiskId='1' Source='../bin/platforms/qwindows.dll' KeyPath='yes' />
 	      </Component>
 	    </Directory>
 	    <Directory Id='printsupport' Name='printsupport'>
 	      <Component Id='printsupport' Guid='39CBE62C-09FA-4D88-B3F0-1691B91DC5C3'>
-		<File Id='win'   Name='windowsprintersupport.dll' DiskId='1' Source='printsupport/windowsprintersupport.dll' KeyPath='yes' />
+		<File Id='winprint' Name='windowsprintersupport.dll' DiskId='1' Source='../bin/printsupport/windowsprintersupport.dll' KeyPath='yes' />
 	      </Component>
 	    </Directory>
 	    <Directory Id='sqldrivers' Name='sqldrivers'>
 	      <Component Id='sqldrivers' Guid='642778D3-ED5F-47CA-9978-671DF3B472D0'>
-		<File Id='qsqlite'    Name='qsqlite.dll'   DiskId='1' Source='sqldrivers/qsqlite.dll'   />
-		<File Id='qsqlmysql'  Name='qsqlmysql.dll' DiskId='1' Source='sqldrivers/qsqlmysql.dll' />
-		<File Id='qsqlodbc'   Name='qsqlodbc.dll'  DiskId='1' Source='sqldrivers/qsqlodbc.dll'  />
-		<File Id='qsqlpsql'   Name='qsqlpsql.dll'  DiskId='1' Source='sqldrivers/qsqlpsql.dll'  />
+		<File Id='qsqlite'    Name='qsqlite.dll'   DiskId='1' Source='../bin/sqldrivers/qsqlite.dll'   />
+		<File Id='qsqlmysql'  Name='qsqlmysql.dll' DiskId='1' Source='../bin/sqldrivers/qsqlmysql.dll' />
+		<File Id='qsqlodbc'   Name='qsqlodbc.dll'  DiskId='1' Source='../bin/sqldrivers/qsqlodbc.dll'  />
+		<File Id='qsqlpsql'   Name='qsqlpsql.dll'  DiskId='1' Source='../bin/sqldrivers/qsqlpsql.dll'  />
 	      </Component>
 	    </Directory>
 	    <Directory Id='translations' Name='translations'>
 	      <Component Id='translations' Guid='A9AD2B5C-8B4F-48E5-819A-D38C4EA11153'>
-		<File Id='qt_ca'  Name='qt_ca.qm'  DiskId='1' Source='qt_ca.qm'  />
-		<File Id='qt_cs'  Name='qt_cs.qm'  DiskId='1' Source='qt_cs.qm'  />
-		<File Id='qt_de'  Name='qt_de.qm'  DiskId='1' Source='qt_de.qm'  />
-		<File Id='qt_en'  Name='qt_en.qm'  DiskId='1' Source='qt_en.qm'  />
-		<File Id='qt_fi'  Name='qt_fi.qm'  DiskId='1' Source='qt_fi.qm'  />
-		<File Id='qt_fr'  Name='qt_fr.qm'  DiskId='1' Source='qt_fr.qm'  />
-		<File Id='qt_he'  Name='qt_he.qm'  DiskId='1' Source='qt_he.qm'  />
-		<File Id='qt_hu'  Name='qt_hu.qm'  DiskId='1' Source='qt_hu.qm'  />
-		<File Id='qt_it'  Name='qt_it.qm'  DiskId='1' Source='qt_it.qm'  />
-		<File Id='qt_ja'  Name='qt_ja.qm'  DiskId='1' Source='qt_ja.qm'  />
-		<File Id='qt_ko'  Name='qt_ko.qm'  DiskId='1' Source='qt_ko.qm'  />
-		<File Id='qt_lv'  Name='qt_lv.qm'  DiskId='1' Source='qt_lv.qm'  />
-		<File Id='qt_ru'  Name='qt_ru.qm'  DiskId='1' Source='qt_ru.qm'  />
-		<File Id='qt_sk'  Name='qt_sk.qm'  DiskId='1' Source='qt_sk.qm'  />
-		<File Id='qt_uk'  Name='qt_uk.qm'  DiskId='1' Source='qt_uk.qm'  />
+		<File Id='qt_ca'  Name='qt_ca.qm'  DiskId='1' Source='../bin/translations/qt_ca.qm'  />
+		<File Id='qt_cs'  Name='qt_cs.qm'  DiskId='1' Source='../bin/translations/qt_cs.qm'  />
+		<File Id='qt_de'  Name='qt_de.qm'  DiskId='1' Source='../bin/translations/qt_de.qm'  />
+		<File Id='qt_en'  Name='qt_en.qm'  DiskId='1' Source='../bin/translations/qt_en.qm'  />
+		<File Id='qt_fi'  Name='qt_fi.qm'  DiskId='1' Source='../bin/translations/qt_fi.qm'  />
+		<File Id='qt_fr'  Name='qt_fr.qm'  DiskId='1' Source='../bin/translations/qt_fr.qm'  />
+		<File Id='qt_he'  Name='qt_he.qm'  DiskId='1' Source='../bin/translations/qt_he.qm'  />
+		<File Id='qt_hu'  Name='qt_hu.qm'  DiskId='1' Source='../bin/translations/qt_hu.qm'  />
+		<File Id='qt_it'  Name='qt_it.qm'  DiskId='1' Source='../bin/translations/qt_it.qm'  />
+		<File Id='qt_ja'  Name='qt_ja.qm'  DiskId='1' Source='../bin/translations/qt_ja.qm'  />
+		<File Id='qt_ko'  Name='qt_ko.qm'  DiskId='1' Source='../bin/translations/qt_ko.qm'  />
+		<File Id='qt_lv'  Name='qt_lv.qm'  DiskId='1' Source='../bin/translations/qt_lv.qm'  />
+		<File Id='qt_ru'  Name='qt_ru.qm'  DiskId='1' Source='../bin/translations/qt_ru.qm'  />
+		<File Id='qt_sk'  Name='qt_sk.qm'  DiskId='1' Source='../bin/translations/qt_sk.qm'  />
+		<File Id='qt_uk'  Name='qt_uk.qm'  DiskId='1' Source='../bin/translations/qt_uk.qm'  />
 	      </Component>
 	    </Directory>
 	  </Directory>
@@ -125,10 +125,18 @@
 	<ComponentRef Id='ProgramMenuDir' />
 	<ComponentRef Id='MainExecutable' />
 	<ComponentRef Id='ApplicationShortcutDesktop' />
-	<ComponentRef Id='qch' />
-	<ComponentRef Id='qhc' />
+	<ComponentRef Id='bearer'        />
+	<ComponentRef Id='documentation' />
+	<ComponentRef Id='iconengines'   />
+	<ComponentRef Id='imageformats'  />
+	<ComponentRef Id='platforms'     />
+	<ComponentRef Id='printsupport'  />
+	<ComponentRef Id='sqldrivers'    />
+	<ComponentRef Id='translations'  />
       </Feature>
-      <Icon Id='engauge.ico' SourceFile='staging/digitizer.ico' />
+      <Icon Id='engauge.ico' SourceFile='../bin/digitizer.ico' />
       <Property Id='ARPPRODUCTION' Value='engauge.ico' />
+      <Property Id="WIXUI_INSTALLDIR" Value="MYAPPDIRPROPERTY" />
+      <UIRef Id="WixUI_InstallDir" />
     </Product>
 </Wix>

@@ -1,5 +1,21 @@
 #!/usr/bin/bash
 
+export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}'
+ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
+
+read -p 'If the help input files are up to date, press Enter to continue'
+
+echo "***Copying help input files"
+mkdir -p documentation
+cp $FROMQCH  documentation
+cp $FROMQHC  documentation
+
+echo "***Copying icon file"
+cp $FROMICO  ../bin
+
 # Notes:
 # 1) Need gcc 4 at /C/cygwin/bin rather than gcc 3 at /usr/bin to prevent 'unrecognized command line
 #    option -fno-keep-inline-dllexport'
@@ -17,4 +33,4 @@ windeployqt -release ../bin/engauge.exe &&
 echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
 echo "***Creating MSI" &&
-light.exe engauge.wixobj
+light.exe -ext WixUIExtension engauge.wixobj
