@@ -1,3 +1,4 @@
+*.dll
 engauge
 engauge.exe
 engauge_error_report.xml
@@ -5,3 +6,10 @@ engauge_test
 *.log
 *.pdb
 Test*
+bearer
+iconengines
+imageformats
+platforms
+printsupport
+sqldrivers
+translations
