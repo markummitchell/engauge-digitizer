@@ -39,4 +39,4 @@ echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
 candle.exe WixUI_InstallDir_NoLicense.wxs &&
 echo "***Creating MSI" &&
-light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o engauge.msi
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-64-bit-installer-6_0.msi
