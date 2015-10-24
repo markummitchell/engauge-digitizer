@@ -26,7 +26,7 @@ cp $FROMICO  ../bin
 #    option -fno-keep-inline-dllexport'
 # 2) Running 'make -j 4' exhausts system resources which hangs the build
 # 3) windeployqt builds the release files in the same directory as the executable
-export PATH=/C/MinGW/bin:$PATH &&
+export PATH=/C/QtOpenSource/Qt5.5.1/Tools/mingw492_32/bin:$PATH &&
 echo "***Rebuilding release executable" &&
 cd ../src &&
 qmake engauge.pro &&
