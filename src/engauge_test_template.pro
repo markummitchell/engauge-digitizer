@@ -528,9 +528,9 @@ RESOURCES += \
 
 jpeg2000 {
     CONFIG(debug,debug|release) {
-      message(Building debug version with support for JPEG2000 files)
+      message(Building debug version with internal support for JPEG2000 files)
     } else {
-      message(Building release version with support for JPEG2000 files)
+      message(Building release version with internal support for JPEG2000 files)
     }
     _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
     _JPEG2000_LIB = $$(JPEG2000_LIB)
@@ -559,8 +559,8 @@ jpeg2000 {
 
 } else {
     CONFIG(debug,debug|release) {
-      message(Building debug version without support for JPEG2000 files)
+      message(Building debug version without internal support for JPEG2000 files)
     } else {
-      message(Building release version without support for JPEG2000 files)
+      message(Building release version without internal support for JPEG2000 files)
     }
 }

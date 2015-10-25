@@ -44,6 +44,13 @@ QString HelpWindow::helpPath() const
   // Possible locations of help file. Each entry is first tried as is, and then with
   // applicationDirPath as a prefix. Each entry should probably start with a slash
   QStringList paths;
+#ifdef HELPDIR
+#define QUOTE(string) _QUOTE(string)
+#define _QUOTE(string) #string
+  QString path = QString ("%1/engauge.qhc")
+    .arg (QUOTE (HELPDIR));
+  paths << path;
+#endif
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
 

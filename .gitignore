@@ -1,1 +1,6 @@
 \#*
+engauge.log
+engauge.pro.user
+Makefile*
+object_script.engauge
+qrc_*
