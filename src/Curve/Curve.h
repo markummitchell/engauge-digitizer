@@ -15,6 +15,7 @@ extern const QString AXIS_CURVE_NAME;
 extern const QString DEFAULT_GRAPH_CURVE_NAME;
 
 class CurvesGraphs;
+class QDataStream;
 class QTextStream;
 class QXmlStreamReader;
 class QXmlStreamWriter;
@@ -28,6 +29,9 @@ public:
   Curve(const QString &curveName,
         const ColorFilterSettings &colorFilterSettings,
         const CurveStyle &curveStyle);
+
+  /// Constructor from serialized binary pre-version 6 file
+  Curve  (QDataStream &str);
 
   /// Constructor for use when loading from serialized xml
   Curve (QXmlStreamReader &reader);

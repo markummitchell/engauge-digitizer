@@ -1,10 +1,12 @@
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "CurveStyle.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
 #include "PointComparator.h"
+#include <QDataStream>
 #include <QDebug>
 #include <QMap>
 #include <QTextStream>
@@ -35,6 +37,54 @@ Curve::Curve (const Curve &curve) :
   m_colorFilterSettings (curve.colorFilterSettings ()),
   m_curveStyle (curve.curveStyle ())
 {
+}
+
+Curve::Curve (QDataStream &str)
+{
+  qint32 int32, xScreen, yScreen;
+  double xGraph, yGraph;
+
+  str >> m_curveName;
+  str >> int32;
+  m_curveStyle.setPointShape((PointShape) int32);
+  str >> int32;
+  m_curveStyle.setPointRadius(int32);
+  str >> int32; // Point line size
+  str >> int32;
+  m_curveStyle.setPointColor((ColorPalette) int32);
+  str >> int32; // Point interior color
+  str >> int32;
+  m_curveStyle.setLineWidth(int32);
+  str >> int32;
+  m_curveStyle.setLineColor((ColorPalette) int32);
+  str >> int32;
+  m_curveStyle.setLineConnectAs((CurveConnectAs) int32);
+
+  str >> int32;
+  int count = int32;
+  for (int i = 0; i < count; i++) {
+
+    str >> xScreen;
+    str >> yScreen;
+    str >> xGraph;
+    str >> yGraph;
+    if (m_curveName == AXIS_CURVE_NAME) {
+
+      // Axis point, with graph coordinates set by user and managed here
+      Point point (m_curveName,
+                   QPointF (xScreen, yScreen),
+                   QPointF (xGraph, yGraph));
+
+      addPoint(point);
+    } else {
+
+      // Curve point, with graph coordinates managed elsewhere
+      Point point (m_curveName,
+                   QPointF (xScreen, yScreen));
+
+      addPoint(point);
+    }
+  }
 }
 
 Curve::Curve (QXmlStreamReader &reader)

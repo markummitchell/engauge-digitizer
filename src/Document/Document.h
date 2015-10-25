@@ -235,6 +235,8 @@ private:
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadCurvesGraphs(QXmlStreamReader &reader);
   void loadImage(QXmlStreamReader &reader);
+  void loadPostVersion5 (const QString &fileName);
+  void loadPreVersion6 (const QString &fileName);
 
   // Metadata
   QString m_name;

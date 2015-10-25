@@ -52,7 +52,10 @@ public:
   /// Apply functor to Points on all of the Curves.
   void iterateThroughCurvesPoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
-  /// Load from serialized file
+  /// Load from serialized binary pre-version 6 file
+  void loadPreVersion6 (QDataStream &str);
+
+  /// Load from serialized xml post-version 5 file
   void loadXml(QXmlStreamReader &reader);
 
   /// Current number of graphs curves.
