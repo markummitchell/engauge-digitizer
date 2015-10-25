@@ -4,7 +4,7 @@ read -e -p "Installation directory [/usr/local/engauge]:" -i "/usr/local/engauge
 
 PARENTDIR=$INSTALLDIR/..
 
-# First cp duplicates the recursive second cp, but gives a second tidy error about privileges if there is a privilege problem
+# First cp duplicates the recursive second cp, but gives a single tidy error about privileges if there is a privilege problem
 mkdir -p $INSTALLDIR &&
 cp engauge $INSTALLDIR &&
 cp -r . $INSTALLDIR &&
