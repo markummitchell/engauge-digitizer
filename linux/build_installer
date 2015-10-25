@@ -1,0 +1,84 @@
+#!/bin/bash
+
+export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+export FROMEXE="$HOME/engauge6/bin/engauge"
+
+ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}' 
+ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}' 
+
+read -p 'If the help input files are up to date, press Enter to continue'
+
+export STAGINGDIR=engauge
+export DOCDIR=$STAGINGDIR/documentation
+export IMAGEDIR=$STAGINGDIR/imageformats
+export PLATFORMSDIR=$STAGINGDIR/platforms
+export SQLDIR=$STAGINGDIR/sqldrivers
+
+rm -rf $STAGINGDIR
+
+mkdir -p $STAGINGDIR
+mkdir -p $DOCDIR
+mkdir -p $IMAGEDIR
+mkdir -p $PLATFORMSDIR
+mkdir -p $SQLDIR
+
+echo "***Copying executable"
+cp $FROMEXE $STAGINGDIR
+
+echo "***Copying help input files"
+cp $FROMQCH $STAGINGDIR/documentation
+cp $FROMQHC $STAGINGDIR/documentation
+
+echo "***Copying icon file"
+cp $FROMICO $STAGINGDIR
+
+echo "***Copying libraries"
+cp /lib/ld-linux.so.2                                                $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqgif.so       $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqico.so       $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqjpeg.so      $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqmng.so       $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqsvg.so       $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqtga.so       $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqtiff.so      $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqwbmp.so      $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/libxcb-image.so.0                         $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-icccm.so.4                         $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-render-util.so.0                   $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-sync.so.1                          $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-xkb.so.1                           $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxkbcommon-x11.so.0                     $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxkbcommon.so.0                         $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/platforms/libqxcb.so          $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libfftw3.so.3           $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libicudata.so.52        $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libicui18n.so.52        $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libicuuc.so.52          $STAGINGDIR
+cp /usr/lib/liblog4cpp.so.5                        $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5CLucene.so.5      $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Core.so.5         $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5DBus.so.5         $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Gui.so.5          $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Help.so.5         $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Network.so.5      $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5PrintSupport.so.5 $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Sql.so.5          $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Svg.so.5          $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Widgets.so.5      $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libQt5Xml.so.5          $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/qt5/plugins/sqldrivers/libqsqlite.so $SQLDIR
+
+echo "***Rebuilding release executable" &&
+export ENGAUGE_RELEASE=1 &&
+cd ../src &&
+qmake engauge.pro &&
+make clean &&
+make &&
+cd ../linux
+
+echo "***Compiling installer"
+cp startup_script.run $STAGINGDIR
+# './' prefix is needed before script so script is found during installation (especially if running sudo)
+makeself engauge/ digit-exe-linux-64-bits-installer-6_0.run "Engauge Digitizer" ./startup_script.run

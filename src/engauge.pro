@@ -5,11 +5,12 @@
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Remove 'debug' in the CONFIG= line or set environment variable ENGAUGE_RELEASE=1 to create a release version 
-#    without debug information
-# 2) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
-#    environment variables
-# 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+# 1) Set environment variable ENGAUGE_RELEASE=1 to create a release version  without debug information. Releases use
+#    dynamic linking to allow plugins (like Qt Help Collection and some image format libraries)
+# 2) Remove 'debug' in the CONFIG= line to build without debug information, when not creating a release
+# 3) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
+#    environment variables. At some point, Qt may provide its own support for this format, at which point this can be skipped
+# 4) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
 CONFIG      = qt warn_on thread debug
 
@@ -21,7 +22,7 @@ CONFIG -= debug
 # 1) Release version has warnings enabled so they can be removed
 # 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
 # 3) -Wuninitialized requires O1, O2 or O3 optimization
-DEFINES += QT_NO_DEBUG 
+DEFINES += QT_NO_DEBUG
 QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable
 }
 
@@ -548,9 +549,9 @@ RESOURCES += \
 
 jpeg2000 {
     CONFIG(debug,debug|release) {
-      message(Building debug version with support for JPEG2000 files)
+      message(Building dynamic debug version with support for JPEG2000 files)
     } else {
-      message(Building release version with support for JPEG2000 files)
+      message(Building static release version with support for JPEG2000 files)
     }
     _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
     _JPEG2000_LIB = $$(JPEG2000_LIB)

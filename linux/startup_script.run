@@ -1,0 +1,18 @@
+#!/bin/bash
+
+read -e -p "Installation directory [/usr/local/engauge]:" -i "/usr/local/engauge" INSTALLDIR
+
+PARENTDIR=$INSTALLDIR/..
+
+# First cp duplicates the recursive second cp, but gives a second tidy error about privileges if there is a privilege problem
+mkdir -p $INSTALLDIR &&
+cp engauge $INSTALLDIR &&
+cp -r . $INSTALLDIR &&
+EXECEXE=$INSTALLDIR/engauge.exe &&
+EXECSCRIPT=$INSTALLDIR/engauge &&
+mv $INSTALLDIR/engauge $EXECEXE &&
+echo "export LD_LIBRARY_PATH=$INSTALLDIR:$INSTALLDIR/platforms" >$EXECSCRIPT &&
+echo "$EXECEXE"                                                 >>$EXECSCRIPT &&
+chmod -R 755 $PARENTDIR &&
+chmod +x $EXECSCRIPT &&
+echo "Engauge Digitizer has been installed. Your PATH should include $INSTALLDIR"
