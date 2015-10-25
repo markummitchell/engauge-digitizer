@@ -33,4 +33,4 @@ New features in Engauge6:
 
 Contributors
 ------------
-Thanks to Zbigniew Jędrzejewski-Szmek, Tamás Nagy, Baurzhan Muftakhidinov, and other contributors and users!
+Thanks to Zbigniew Jędrzejewski-Szmek, Tamás Nagy, Baurzhan Muftakhidinov, Tobias Winchen and other contributors and users!
