@@ -513,8 +513,8 @@ void Document::loadPreVersion6 (const QString &fileName)
       }
     }
 
-    str >> int32;
-    m_modelGridRemoval.setRemoveDefinedGridLines(int32);
+    // Stable flag in m_modelGridRemoval is set below after points are read in
+    str >> int32; // Remove thin lines parallel to axes
     str >> dbl; // Thin thickness
     str >> int32;
     m_modelGridRemoval.setRemoveDefinedGridLines(int32);
@@ -600,8 +600,20 @@ void Document::loadPreVersion6 (const QString &fileName)
     str >> int32; // Value threshold high
 
     m_curveAxes = new Curve (str);
-    Curve curveScale (str); // Dropped on floor
+    Curve curveScale (str); // Scales are dropped on the floor
     m_curvesGraphs.loadPreVersion6 (str);
+
+    // Information from curves and points can affect some data structures that were (mostly) set earlier
+    if (m_curveAxes->numPoints () > 2) {
+      m_modelGridRemoval.setStable();
+    }
+
+    // Axes formatting
+    CurveStyle curveStyle = m_curveAxes->curveStyle();
+    LineStyle lineStyle = curveStyle.lineStyle();
+    lineStyle.setPaletteColor (COLOR_PALETTE_TRANSPARENT);
+    curveStyle.setLineStyle(lineStyle);
+    m_curveAxes->setCurveStyle(curveStyle);
   }
 }
 

@@ -5,6 +5,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
+#include <qdebug.h>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
@@ -152,7 +153,6 @@ void CurvesGraphs::loadPreVersion6(QDataStream &str)
   str >> numberCurvesGraphs;
   for (i = 0; i < numberCurvesGraphs; i++) {
     Curve curve (str);
-
     m_curvesGraphs.append (curve);
   }
 

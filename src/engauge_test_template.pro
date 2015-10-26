@@ -197,6 +197,7 @@ HEADERS  += \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
     main/MainWindow.h \
+    util/MigrateToVersion6.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Network/NetworkClient.h \
@@ -426,6 +427,7 @@ SOURCES += \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
     main/MainWindow.cpp \
+    util/MigrateToVersion6.cpp \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
     Network/NetworkClient.cpp \

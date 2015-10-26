@@ -4,6 +4,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include "MigrateToVersion6.h"
 #include "Point.h"
 #include "PointComparator.h"
 #include <QDataStream>
@@ -41,27 +42,30 @@ Curve::Curve (const Curve &curve) :
 
 Curve::Curve (QDataStream &str)
 {
+  MigrateToVersion6 migrate;
+
   qint32 int32, xScreen, yScreen;
   double xGraph, yGraph;
 
   str >> m_curveName;
   str >> int32;
-  m_curveStyle.setPointShape((PointShape) int32);
+  m_curveStyle.setPointShape(migrate.pointShape (int32));
   str >> int32;
   m_curveStyle.setPointRadius(int32);
   str >> int32; // Point line size
   str >> int32;
-  m_curveStyle.setPointColor((ColorPalette) int32);
+  m_curveStyle.setPointColor(migrate.colorPalette (int32));
   str >> int32; // Point interior color
   str >> int32;
   m_curveStyle.setLineWidth(int32);
   str >> int32;
-  m_curveStyle.setLineColor((ColorPalette) int32);
+  m_curveStyle.setLineColor(migrate.colorPalette (int32));
   str >> int32;
-  m_curveStyle.setLineConnectAs((CurveConnectAs) int32);
+  m_curveStyle.setLineConnectAs(migrate.curveConnectAs (int32));
 
   str >> int32;
   int count = int32;
+  int ordinal = 0;
   for (int i = 0; i < count; i++) {
 
     str >> xScreen;
@@ -74,6 +78,7 @@ Curve::Curve (QDataStream &str)
       Point point (m_curveName,
                    QPointF (xScreen, yScreen),
                    QPointF (xGraph, yGraph));
+      point.setOrdinal (ordinal++);
 
       addPoint(point);
     } else {
@@ -81,6 +86,7 @@ Curve::Curve (QDataStream &str)
       // Curve point, with graph coordinates managed elsewhere
       Point point (m_curveName,
                    QPointF (xScreen, yScreen));
+      point.setOrdinal (ordinal++);
 
       addPoint(point);
     }
