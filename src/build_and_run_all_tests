@@ -5,6 +5,9 @@ tests=(TestCorrelation TestFormats TestGraphCoords TestProjectedPoint TestSpline
 
 echo "Available tests: " ${tests[*]}
 
+# Need gcc 4 at /C/cygwin/bin rather than gcc 3 at /usr/bin to prevent 'unrecognized command line
+# option -fno-keep-inline-dllexport'
+PATH=/C/QtOpenSource/Qt5.5.1/Tools/mingw492_32/bin:$PATH
 argcount="$#"
 
 if [ $argcount -gt 0 ]
