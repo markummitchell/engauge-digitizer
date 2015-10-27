@@ -1797,7 +1797,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
                                               m_cmbCurve->currentText ());
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
-  slotViewZoomFill();
+  // Preference for issue #25 is 100% rather than fill mode
+  slotViewZoom1To1 ();
 
   setCurrentFile(fileName);
   m_statusBar->showTemporaryMessage (temporaryMessage);
@@ -1988,25 +1989,28 @@ void MainWindow::slotFileClose()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileClose";
 
-  // Transition from defined to undefined. This must be after the clearing of the screen
-  // since the axes checker screen item (and maybe others) must still exist
-  m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
-                                                       cmdMediator(),
-                                                       m_transformation,
-                                                       selectedGraphCurve());
+  if (maybeSave ()) {
 
-  // Remove screen objects
-  m_scene->resetOnLoad ();
+    // Transition from defined to undefined. This must be after the clearing of the screen
+    // since the axes checker screen item (and maybe others) must still exist
+    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+                                                         cmdMediator(),
+                                                         m_transformation,
+                                                         selectedGraphCurve());
 
-  // Remove background
-  m_backgroundStateContext->close ();
+    // Remove screen objects
+    m_scene->resetOnLoad ();
 
-  // Deallocate Document
-  delete m_cmdMediator;
-  m_cmdMediator = 0;
-  m_engaugeFile = "";
+    // Remove background
+    m_backgroundStateContext->close ();
 
-  updateControls();
+    // Deallocate Document
+    delete m_cmdMediator;
+    m_cmdMediator = 0;
+    m_engaugeFile = "";
+
+    updateControls();
+  }
 }
 
 void MainWindow::slotFileExport ()
