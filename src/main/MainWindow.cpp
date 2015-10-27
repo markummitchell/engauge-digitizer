@@ -131,7 +131,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   setCurrentFile ("");
   createIcons();
-  setWindowFlags (Qt::WindowContextHelpButtonHint);
+  setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
   setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();
