@@ -12,6 +12,7 @@
 unsigned int Point::m_identifierIndex = 0;
 
 extern const QString AXIS_CURVE_NAME;
+extern const QString DUMMY_CURVE_NAME;
 const QString POINT_IDENTIFIER_DELIMITER ("_");
 
 const double MISSING_ORDINAL_VALUE = 0;
@@ -50,7 +51,8 @@ Point::Point(const QString &curveName,
   m_hasOrdinal (false),
   m_ordinal (MISSING_ORDINAL_VALUE)
 {
-  ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME);
+  ENGAUGE_ASSERT (curveName == AXIS_CURVE_NAME ||
+                  curveName == DUMMY_CURVE_NAME);
 
   LOG4CPP_INFO_S ((*mainCat)) << "Point::Point"
                               << " curveName=" << curveName.toLatin1().data()

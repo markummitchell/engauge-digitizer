@@ -14,7 +14,7 @@
 
 const int NUM_AXES_POINTS = 3;
 
-const QString DUMMY_CURVENAME ("dummy");
+extern const QString DUMMY_CURVE_NAME;
 const int Z_VALUE_IN_FRONT = 100;
 const int NO_SIDE = -1;
 
@@ -446,7 +446,7 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 
     const QPointF &pF = *itr;
 
-    Point p (DUMMY_CURVENAME,
+    Point p (DUMMY_CURVE_NAME,
              pF,
              pF);
     points.push_back (p);

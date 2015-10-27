@@ -47,14 +47,12 @@ void DlgSettingsCurveAddRemove::createButtons (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createButtons";
 
-  m_btnNew = new QPushButton ("New...");
-  m_btnNew->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
-                              "If a curve is selected then the new curve will be inserted just before it, otherwise the new curve "
-                              "will be added at the end.\n\n"
+  m_btnAdd = new QPushButton ("Add...");
+  m_btnAdd->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
                               "Every curve name must be unique"));
-  m_btnNew->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
-  connect (m_btnNew, SIGNAL (released ()), this, SLOT (slotNew()));
-  layout->addWidget (m_btnNew, row, 1, 1, 1, Qt::AlignLeft);
+  m_btnAdd->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  connect (m_btnAdd, SIGNAL (released ()), this, SLOT (slotNew()));
+  layout->addWidget (m_btnAdd, row, 1, 1, 1, Qt::AlignLeft);
 
   m_btnRemove = new QPushButton ("Remove");
   m_btnRemove->setWhatsThis (tr ("Removes the currently selected curve from the curve list.\n\n"
@@ -353,21 +351,9 @@ void DlgSettingsCurveAddRemove::slotNew ()
 
   QString curveNameSuggestion = nextCurveName ();
 
-  if (m_listCurves->selectionModel ()->selectedIndexes ().count () == 1) {
-
-    QModelIndex idx = m_listCurves->selectionModel ()->selectedIndexes ().at (0);
-    insertCurveName (idx.row (),
-                     curveNameSuggestion,
-                     NO_ORIGINAL_CURVE_NAME,
-                     NO_POINTS);
-
-  } else {
-
-    appendCurveName (curveNameSuggestion,
-                     NO_ORIGINAL_CURVE_NAME,
-                     NO_POINTS);
-
-  }
+  appendCurveName (curveNameSuggestion,
+                   NO_ORIGINAL_CURVE_NAME,
+                   NO_POINTS);
 
   updateControls();
 }
@@ -425,18 +411,6 @@ void DlgSettingsCurveAddRemove::updateControls ()
 
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_curveNameList->rowCount ();
-
-  if (numSelectedItems < 2 ) {
-
-    // Add or Insert is possible
-    m_btnNew->setEnabled (true);
-    m_btnNew->setText (numSelectedItems == 0 ? "Add" : "Insert");
-
-  } else {
-
-    // Placement of new curve would be ambigous
-    m_btnNew->setEnabled (false);
-  }
 
   // Leave at least one curve
   m_btnRemove->setEnabled ((numSelectedItems > 0) && (numSelectedItems < numItems));

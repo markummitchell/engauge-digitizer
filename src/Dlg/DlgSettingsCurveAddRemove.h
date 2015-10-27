@@ -51,7 +51,7 @@ private:
   void removeSelectedCurves();
   void updateControls ();
 
-  QPushButton *m_btnNew;
+  QPushButton *m_btnAdd;
   QPushButton *m_btnRemove;
   QPushButton *m_btnRename;
 

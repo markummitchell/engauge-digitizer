@@ -607,13 +607,6 @@ void Document::loadPreVersion6 (const QString &fileName)
     if (m_curveAxes->numPoints () > 2) {
       m_modelGridRemoval.setStable();
     }
-
-    // Axes formatting
-    CurveStyle curveStyle = m_curveAxes->curveStyle();
-    LineStyle lineStyle = curveStyle.lineStyle();
-    lineStyle.setPaletteColor (COLOR_PALETTE_TRANSPARENT);
-    curveStyle.setLineStyle(lineStyle);
-    m_curveAxes->setCurveStyle(curveStyle);
   }
 }
 

@@ -13,6 +13,7 @@
 
 extern const QString AXIS_CURVE_NAME;
 extern const QString DEFAULT_GRAPH_CURVE_NAME;
+extern const QString DUMMY_CURVE_NAME;
 
 class CurvesGraphs;
 class QDataStream;

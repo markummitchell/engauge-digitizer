@@ -19,6 +19,7 @@
 const QString AXIS_CURVE_NAME ("Axes");
 const int AXIS_CURVE_ORDINAL = 0;
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
+const QString DUMMY_CURVE_NAME ("dummy");
 const QString TAB_DELIMITER ("\t");
 
 typedef QMap<double, QString> XOrThetaToPointIdentifier;
@@ -59,7 +60,11 @@ Curve::Curve (QDataStream &str)
   str >> int32;
   m_curveStyle.setLineWidth(int32);
   str >> int32;
-  m_curveStyle.setLineColor(migrate.colorPalette (int32));
+  if (m_curveName == AXIS_CURVE_NAME) {
+    m_curveStyle.setLineColor(migrate.colorPalette (int32));
+  } else {
+    m_curveStyle.setLineColor(COLOR_PALETTE_TRANSPARENT);
+  }
   str >> int32;
   m_curveStyle.setLineConnectAs(migrate.curveConnectAs (int32));
 
@@ -77,8 +82,8 @@ Curve::Curve (QDataStream &str)
       // Axis point, with graph coordinates set by user and managed here
       Point point (m_curveName,
                    QPointF (xScreen, yScreen),
-                   QPointF (xGraph, yGraph));
-      point.setOrdinal (ordinal++);
+                   QPointF (xGraph, yGraph),
+                   ordinal++);
 
       addPoint(point);
     } else {
