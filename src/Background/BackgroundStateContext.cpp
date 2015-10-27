@@ -29,6 +29,15 @@ BackgroundStateContext::BackgroundStateContext(MainWindow &mainWindow) :
   completeRequestedStateTransitionIfExists();
 }
 
+void BackgroundStateContext::close()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::close";
+
+  // It is safe to transition to the new state immediately since no BackgroundState classes are on the stack
+  requestStateTransition (BACKGROUND_STATE_UNLOADED);
+  completeRequestedStateTransitionIfExists ();
+}
+
 void BackgroundStateContext::completeRequestedStateTransitionIfExists()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::completeRequestedStateTransitionIfExists";

@@ -53,7 +53,8 @@ Curve::Curve (QDataStream &str)
   m_curveStyle.setPointShape(migrate.pointShape (int32));
   str >> int32;
   m_curveStyle.setPointRadius(int32);
-  str >> int32; // Point line size
+  str >> int32;
+  m_curveStyle.setPointLineWidth (int32);
   str >> int32;
   m_curveStyle.setPointColor(migrate.colorPalette (int32));
   str >> int32; // Point interior color

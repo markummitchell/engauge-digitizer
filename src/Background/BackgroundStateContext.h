@@ -29,6 +29,9 @@ class BackgroundStateContext
   /// Single constructor
   BackgroundStateContext(MainWindow &mainWindow);
 
+  /// Open Document is being closed so remove the background
+  void close();
+
   /// Zoom so background fills the window
   void fitInView (GraphicsView &view);
 

@@ -86,7 +86,6 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
     }
   }
 
-  ENGAUGE_ASSERT (false);
   return 0;
 }
 

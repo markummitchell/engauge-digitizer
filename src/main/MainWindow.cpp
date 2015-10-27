@@ -355,6 +355,13 @@ void MainWindow::createActionsFile ()
     m_actionRecentFiles.append (recentFileAction);
   }
 
+  m_actionClose = new QAction(tr ("&Close"), this);
+  m_actionClose->setShortcut (QKeySequence::Close);
+  m_actionClose->setStatusTip (tr ("Closes the open document document."));
+  m_actionClose->setWhatsThis (tr ("Close Document\n\n"
+                                   "Closes the open document."));
+  connect (m_actionClose, SIGNAL (triggered ()), this, SLOT (slotFileClose ()));
+
   m_actionSave = new QAction(tr ("&Save"), this);
   m_actionSave->setShortcut (QKeySequence::Save);
   m_actionSave->setStatusTip (tr ("Saves the current document."));
@@ -760,6 +767,7 @@ void MainWindow::createMenus()
     m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
   }
   m_menuFile->addMenu (m_menuFileOpenRecent);
+  m_menuFile->addAction (m_actionClose);
   m_menuFile->insertSeparator (m_actionSave);
   m_menuFile->addAction (m_actionSave);
   m_menuFile->addAction (m_actionSaveAs);
@@ -1976,6 +1984,31 @@ void MainWindow::slotEditPaste ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPaste";
 }
 
+void MainWindow::slotFileClose()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileClose";
+
+  // Transition from defined to undefined. This must be after the clearing of the screen
+  // since the axes checker screen item (and maybe others) must still exist
+  m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+                                                       cmdMediator(),
+                                                       m_transformation,
+                                                       selectedGraphCurve());
+
+  // Remove screen objects
+  m_scene->resetOnLoad ();
+
+  // Remove background
+  m_backgroundStateContext->close ();
+
+  // Deallocate Document
+  delete m_cmdMediator;
+  m_cmdMediator = 0;
+  m_engaugeFile = "";
+
+  updateControls();
+}
+
 void MainWindow::slotFileExport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileExport";
@@ -2883,6 +2916,7 @@ void MainWindow::updateControls ()
 
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
+  m_actionClose->setEnabled (!m_engaugeFile.isEmpty ());
   m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionExport->setEnabled (!m_currentFile.isEmpty ());
