@@ -107,8 +107,6 @@ const QString TSV_FILENAME_EXTENSION ("tsv");
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
-const char *VERSION_NUMBER = "6.0";
-
 MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
                        QWidget *parent) :
@@ -131,7 +129,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   setCurrentFile ("");
   createIcons();
-  setWindowFlags (Qt::WindowContextHelpButtonHint);
+  setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
   setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();
