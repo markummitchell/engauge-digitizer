@@ -10,6 +10,10 @@ ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
 
 read -p 'If the help input files are up to date, press Enter to continue'
 
+fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp
+
+read -p 'If the version number is correct, press Enter to continue'
+
 echo "***Copying help input files"
 mkdir -p documentation
 cp $FROMQCH  ../bin/documentation
@@ -29,15 +33,15 @@ cp $FROMICO  ../bin
 echo "***Rebuilding release executable" &&
 export PATH=/C/QtOpenSource/Qt5.5.1/Tools/mingw492_32/bin:$PATH &&
 export ENGAUGE_RELEASE=1 &&
-cd ../src &&
+cd .. &&
 qmake engauge.pro &&
 make clean &&
 make &&
-cd ../windows &&
+cd windows &&
 echo "***Rebuilding release directory" &&
 windeployqt -release ../bin/engauge.exe &&
 echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
 candle.exe WixUI_InstallDir_NoLicense.wxs &&
 echo "***Creating MSI" &&
-light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-64-bit-installer-6_0.msi
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-32-bit-installer-6_0.msi
