@@ -1998,6 +1998,10 @@ void MainWindow::slotFileClose()
                                                          m_transformation,
                                                          selectedGraphCurve());
 
+    // Transition to empty state so an inadvertent mouse press does not trigger, for example,
+    // the creation of an axis point on a non-existent GraphicsScene (=crash)
+    m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_EMPTY);
+
     // Remove screen objects
     m_scene->resetOnLoad ();
 
@@ -2920,7 +2924,7 @@ void MainWindow::updateControls ()
 
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
-  m_actionClose->setEnabled (!m_engaugeFile.isEmpty ());
+  m_actionClose->setEnabled (!m_currentFile.isEmpty ());
   m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionExport->setEnabled (!m_currentFile.isEmpty ());
