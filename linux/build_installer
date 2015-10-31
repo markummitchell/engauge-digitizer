@@ -10,6 +10,10 @@ ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
 
 read -p 'If the help input files are up to date, press Enter to continue'
 
+fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp
+
+read -p 'If the version number is correct, press Enter to continue'
+
 export STAGINGDIR=engauge
 export DOCDIR=$STAGINGDIR/documentation
 export IMAGEDIR=$STAGINGDIR/imageformats
@@ -72,13 +76,13 @@ cp /usr/lib/i386-linux-gnu/qt5/plugins/sqldrivers/libqsqlite.so $SQLDIR
 
 echo "***Rebuilding release executable" &&
 export ENGAUGE_RELEASE=1 &&
-cd ../src &&
+cd .. &&
 qmake engauge.pro &&
 make clean &&
 make &&
-cd ../linux
+cd linux
 
 echo "***Compiling installer"
 cp startup_script.run $STAGINGDIR
 # './' prefix is needed before script so script is found during installation (especially if running sudo)
-makeself engauge/ digit-exe-linux-64-bits-installer-6_0.run "Engauge Digitizer" ./startup_script.run
+makeself engauge/ digit-exe-debian-linux-32-bit-installer-6_0.run "Engauge Digitizer" ./startup_script.run
