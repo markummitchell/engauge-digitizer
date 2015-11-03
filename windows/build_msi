@@ -10,9 +10,12 @@ ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
 
 read -p 'If the help input files are up to date, press Enter to continue'
 
-fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp
+VERSION_NUMBER=`fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp | awk -F '"' '{print $2}'`
+echo "Version number=$VERSION_NUMBER"
 
 read -p 'If the version number is correct, press Enter to continue'
+
+VERSION_NUMBER=`echo $VERSION_NUMBER | sed 's/\./_/g'`
 
 echo "***Copying help input files"
 mkdir -p documentation
@@ -44,4 +47,4 @@ echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
 candle.exe WixUI_InstallDir_NoLicense.wxs &&
 echo "***Creating MSI" &&
-light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-32-bit-installer-6_0.msi
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-32-bit-installer-$VERSION_NUMBER.msi
