@@ -2006,6 +2006,9 @@ void MainWindow::slotFileClose()
     // Remove background
     m_backgroundStateContext->close ();
 
+    // Remove scroll bars if they exist
+    m_scene->setSceneRect (QRectF (0, 0, 1, 1));
+
     // Deallocate Document
     delete m_cmdMediator;
     m_cmdMediator = 0;
