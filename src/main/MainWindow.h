@@ -188,6 +188,7 @@ private slots:
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
   void slotFileOpen();
+  void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected

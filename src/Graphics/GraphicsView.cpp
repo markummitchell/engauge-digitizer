@@ -1,4 +1,5 @@
 #include "DataKey.h"
+#include "Document.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -6,6 +7,7 @@
 #include "Point.h"
 #include <QApplication>
 #include <QDebug>
+#include <QDropEvent>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsPolygonItem>
 #include <QGraphicsScene>
@@ -21,6 +23,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   QGraphicsView (scene)
 {
   connect (this, SIGNAL (signalContextMenuEvent (QString)), &mainWindow, SLOT (slotContextMenuEvent (QString)));
+  connect (this, SIGNAL (signalDraggedDigFile (QString)), &mainWindow, SLOT (slotFileOpenDraggedDigFile (QString)));
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
   connect (this, SIGNAL (signalKeyPress (Qt::Key, bool)), &mainWindow, SLOT (slotKeyPress (Qt::Key, bool)));
@@ -101,7 +104,10 @@ void GraphicsView::dragMoveEvent (QDragMoveEvent *event)
 
 void GraphicsView::dropEvent (QDropEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent"
+                              << " formats=" << event->mimeData()->formats().join (", ").toLatin1().data();
+
+  const QString MIME_FORMAT_TEXT_PLAIN ("text/plain");
 
   // This code is not specific to a digitizing state so it is implemented here
 
@@ -115,14 +121,22 @@ void GraphicsView::dropEvent (QDropEvent *event)
     str << " url=" << url.toString () << " ";
   }
 
-  if (event->mimeData ()->hasImage ()) {
+  if (loadsAsDigFile (event->mimeData()->data (MIME_FORMAT_TEXT_PLAIN))) {
+
+    LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::dropEvent dig file";
+    QUrl url (event->mimeData()->data(MIME_FORMAT_TEXT_PLAIN));
+    emit signalDraggedDigFile (url.toLocalFile());
+    event->acceptProposedAction();
+
+  } else if (event->mimeData ()->hasImage ()) {
 
     // This branch never seems to get executed, but will be kept in case it ever applies (since hasUrls branch is messier and less reliable)
     QImage image = qvariant_cast<QImage> (event->mimeData ()->imageData ());
     LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent image";
     emit signalDraggedImage (image);
 
-  } else if (event->mimeData ()->hasUrls ()) {
+  } else if (event->mimeData ()->hasUrls () &&
+             event->mimeData ()->urls().count () > 0) {
 
     // Sometimes images can be dragged in, but sometimes the url points to an html page that
     // contains just the image, in which case importing will fail
@@ -180,6 +194,16 @@ void GraphicsView::leaveEvent (QEvent *event)
   emit signalLeave ();
 
   QGraphicsView::leaveEvent (event);
+}
+
+bool GraphicsView::loadsAsDigFile (const QString &urlString) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::loadsAsDigFile";
+
+  QUrl url (urlString);
+  Document document (url.toLocalFile());
+
+  return document.successfulRead();
 }
 
 void GraphicsView::mouseMoveEvent (QMouseEvent *event)

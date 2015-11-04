@@ -2155,6 +2155,13 @@ void MainWindow::slotFileOpen()
   }
 }
 
+void MainWindow::slotFileOpenDraggedDigFile (QString fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileOpenDraggedDigFile";
+
+  loadDocumentFile (fileName);
+}
+
 void MainWindow::slotFilePrint()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFilePrint";

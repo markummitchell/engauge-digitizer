@@ -19,6 +19,7 @@
 #include <QXmlStreamReader>
 
 class Curve;
+class QByteArray;
 class QImage;
 class QTransform;
 class QXmlStreamWriter;
@@ -231,12 +232,13 @@ public:
 private:
   Document ();
 
+  bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
   Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadCurvesGraphs(QXmlStreamReader &reader);
   void loadImage(QXmlStreamReader &reader);
-  void loadPostVersion5 (const QString &fileName);
-  void loadPreVersion6 (const QString &fileName);
+  void loadPostVersion5 (QXmlStreamReader &reader);
+  void loadPreVersion6 (QDataStream &str);
 
   // Metadata
   QString m_name;

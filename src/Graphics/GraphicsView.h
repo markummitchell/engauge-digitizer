@@ -6,6 +6,7 @@
 #include <QUrl>
 
 class MainWindow;
+class QByteArray;
 class QGraphicsPixmapItem;
 class QGraphicsScene;
 
@@ -51,6 +52,9 @@ signals:
   /// Send right click on axis point to MainWindow for editing.
   void signalContextMenuEvent (QString pointIdentifier);
 
+  /// Send dragged dig file to MainWindow for import. This comes from dragging an engauge dig file
+  void signalDraggedDigFile (QString);
+
   /// Send dragged image to MainWindow for import. This typically comes from dragging a file
   void signalDraggedImage (QImage);
 
@@ -76,6 +80,7 @@ private:
   GraphicsView();
 
   bool inBounds (const QPointF &posScreen);
+  bool loadsAsDigFile (const QString &urlString) const;
 };
 
 #endif // GRAPHICSVIEW_H
