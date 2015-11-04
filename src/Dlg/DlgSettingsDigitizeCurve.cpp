@@ -123,7 +123,9 @@ void DlgSettingsDigitizeCurve::createPreview (QGridLayout *layout,
                                IMAGE_WIDTH,
                                IMAGE_HEIGHT);
 
-  m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview = new ViewPreview (m_scenePreview,
+                                   ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
+                                   this);
   m_viewPreview->setWhatsThis (tr ("Preview window showing the currently selected cursor"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

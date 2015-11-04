@@ -10,8 +10,16 @@ class ViewPreview : public QGraphicsView
   Q_OBJECT;
 
 public:
+
+  /// Prevent aspect ratio distortion in certain previews by providing fixed 1:1 aspect ratio option
+  enum ViewAspectRatio {
+    VIEW_ASPECT_RATIO_VARIABLE,
+    VIEW_ASPECT_RATIO_ONE_TO_ONE
+  };
+
   /// Single constructor.
   ViewPreview(QGraphicsScene *scene,
+              ViewAspectRatio viewAspectRatio,
               QWidget *parent = 0);
 
   /// Intercept cursor move events and forward them
@@ -26,6 +34,8 @@ signals:
 
 private:
   ViewPreview();
+
+  ViewAspectRatio m_viewAspectRatio;
 };
 
 #endif // VIEW_PREVIEW_H

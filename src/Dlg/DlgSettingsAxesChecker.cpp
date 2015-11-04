@@ -143,7 +143,9 @@ void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);
-  m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview = new ViewPreview (m_scenePreview,
+                                   ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
+                                   this);
   m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the displayed axes checker"));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

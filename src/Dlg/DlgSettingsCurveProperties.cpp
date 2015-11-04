@@ -205,7 +205,9 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);
-  m_viewPreview = new ViewPreview (m_scenePreview, this);
+  m_viewPreview = new ViewPreview (m_scenePreview,
+                                   ViewPreview::VIEW_ASPECT_RATIO_ONE_TO_ONE,
+                                   this);
   m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect the points and line of the selected curve.\n\n"
                                    "The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A "
                                    "function can have only one Y value, at most, for any X value, but a relation can have multiple Y values "
