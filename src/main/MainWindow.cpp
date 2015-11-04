@@ -2012,6 +2012,7 @@ void MainWindow::slotFileClose()
     // Deallocate Document
     delete m_cmdMediator;
     m_cmdMediator = 0;
+    m_currentFile = "";
     m_engaugeFile = "";
 
     updateControls();
