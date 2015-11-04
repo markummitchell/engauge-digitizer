@@ -61,17 +61,17 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
   QWidget *panelButtons = new QWidget (this);
   QHBoxLayout *buttonLayout = new QHBoxLayout (panelButtons);
 
-  m_btnCancel = new QPushButton (tr ("Cancel"));
-  buttonLayout->addWidget (m_btnCancel);
-  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (slotCancel ()));
-
-  QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
-  buttonLayout->addItem (spacer);
-
   m_btnOk = new QPushButton (tr ("Ok"));
   m_btnOk->setEnabled (false); // Nothing to save initially
   buttonLayout->addWidget (m_btnOk);
   connect (m_btnOk, SIGNAL (released ()), this, SLOT (slotOk ()));
+
+  QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
+  buttonLayout->addItem (spacer);
+
+  m_btnCancel = new QPushButton (tr ("Cancel"));
+  buttonLayout->addWidget (m_btnCancel);
+  connect (m_btnCancel, SIGNAL (released ()), this, SLOT (slotCancel ()));
 
   panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
