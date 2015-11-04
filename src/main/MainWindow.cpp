@@ -2923,7 +2923,7 @@ void MainWindow::updateControls ()
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
   m_actionClose->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSave->setEnabled (!m_engaugeFile.isEmpty ());
+  m_actionSave->setEnabled (!m_currentFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
   m_actionExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionPrint->setEnabled (!m_currentFile.isEmpty ());
