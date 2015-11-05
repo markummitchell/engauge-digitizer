@@ -1,0 +1,109 @@
+#!/usr/bin/bash
+
+export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
+export FROMDLL="/C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/bin"
+
+ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}'
+ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}'
+
+read -p 'If the help input files are up to date, press Enter to continue'
+
+VERSION_NUMBER=`fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp | awk -F '"' '{print $2}'`
+echo "Version number=$VERSION_NUMBER"
+
+read -p 'If the version number is correct, press Enter to continue'
+
+VERSION_NUMBER=`echo $VERSION_NUMBER | sed 's/\./_/g'`
+
+echo "***Copying help input files"
+mkdir -p documentation
+cp $FROMQCH  ../bin/documentation
+cp $FROMQHC  ../bin/documentation
+
+echo "***Copying DLL libraries from $FROMDLL"
+cp $FROMDLL/libwinpthread-1.dll ../bin/
+
+echo "***Copying icon file"
+cp $FROMICO  ../bin
+
+# Notes:
+# 1) Need gcc 4 at /C/cygwin/bin rather than gcc 3 at /usr/bin to prevent 'unrecognized command line
+#    option -fno-keep-inline-dllexport'
+# 2) Running 'make -j 4' exhausts system resources which hangs the build
+# 3) windeployqt builds the release files in the same directory as the executable
+echo "***Rebuilding release executable" &&
+export PATH=/C/QtOpenSource/Qt5.5.1/Tools/mingw492_32/bin:$PATH &&
+export ENGAUGE_RELEASE=1 &&
+cd .. &&
+qmake engauge.pro &&
+make clean &&
+make &&
+cd windows &&
+echo "***Rebuilding release directory" &&
+windeployqt -release ../bin/engauge.exe &&
+echo "***Compiling release files" &&
+candle.exe engauge.wxs &&
+candle.exe WixUI_InstallDir_NoLicense.wxs &&
+echo "***Creating MSI" &&
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-32-bit-installer-$VERSION_NUMBER.msi
+
+echo "***Copying files for creating zip file" 
+mkdir -p "Engauge Digitizer/bearer"
+mkdir -p "Engauge Digitizer/documentation"
+mkdir -p "Engauge Digitizer/iconengines"
+mkdir -p "Engauge Digitizer/imageformats"
+mkdir -p "Engauge Digitizer/platforms"
+mkdir -p "Engauge Digitizer/printsupport"
+mkdir -p "Engauge Digitizer/sqldrivers"
+mkdir -p "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/bearer/qgenericbearer.dll "Engauge Digitizer/bearer"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/bearer/qnativewifibearer.dll "Engauge Digitizer/bearer"
+cp $FROMQCH "Engauge Digitizer/documentation"
+cp $FROMQHC "Engauge Digitizer/documentation"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/iconengines/qsvgicon.dll "Engauge Digitizer/iconengines"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qdds.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qgif.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qicns.dll "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qico.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qjp2.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qjpeg.dll "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qmng.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qsvg.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qtga.dll  "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qtiff.dll "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qwbmp.dll "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/imageformats/qwebp.dll "Engauge Digitizer/imageformats"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/platforms/qwindows.dll "Engauge Digitizer/platforms"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/printsupport/windowsprintersupport.dll "Engauge Digitizer/printsupport"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/sqldrivers/qsqlite.dll   "Engauge Digitizer/sqldrivers"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/sqldrivers/qsqlmysql.dll "Engauge Digitizer/sqldrivers"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/plugins/sqldrivers/qsqlodbc.dll  "Engauge Digitizer/sqldrivers"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_ca.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_cs.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_de.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_en.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_fi.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_fr.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_he.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_hu.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_it.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_ja.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_ko.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_lv.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_ru.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_sk.qm  "Engauge Digitizer/translations"
+cp /C/QtOpenSource/Qt5.5.1/5.5/mingw492_32/translations/qt_uk.qm  "Engauge Digitizer/translations"
+cp ../bin/D3Dcompiler_47.dll  "Engauge Digitizer"
+cp ../bin/engauge.exe         "Engauge Digitizer"
+cp ../bin/libEGL.dll          "Engauge Digitizer"
+cp ../bin/libgcc_s_dw2-1.dll  "Engauge Digitizer"
+cp ../bin/libGLESV2.dll       "Engauge Digitizer"
+cp ../bin/libstdc++-6.dll     "Engauge Digitizer"
+cp ../bin/libwinpthread-1.dll "Engauge Digitizer"
+cp ../bin/opengl32sw.dll      "Engauge Digitizer"
+cp ../bin/Qt5*.dll            "Engauge Digitizer"
+
+echo "***Building zip file"
+/C/cygwin64/bin/zip -r digit-exe-windows-32-bit-zip-file-$VERSION_NUMBER.zip "Engauge Digitizer"
