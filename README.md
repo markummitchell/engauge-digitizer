@@ -1,15 +1,11 @@
 engauge6
 ========
 
-The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data 
-points from those graphs. The resulting data points are usually used as input to other software applications. 
-Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
+The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
 
-Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent releases are available here 
-for Linux and Windows. 
+Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent releases are available here for Linux and Windows. 
 
-This tool is widely used. Users range from one-time users digitizing a single image file, to large government  
-and commercial organizations managing databases of thousands of image files.
+This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
 Versions
 --------
@@ -18,9 +14,7 @@ access privileges.
 
 Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.
 
-Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software
-project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is
-disappearing. Engauge6 uses the new Qt5 library which should be available for many years, and also offers many new features.
+Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years, and also offers many new features.
 
 Developers and users are encouraged to offer their suggestions and comments!
 
