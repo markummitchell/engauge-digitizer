@@ -16,7 +16,7 @@ SegmentLine::SegmentLine(QGraphicsScene  &scene,
   m_segment (segment)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentLine::SegmentLine"
-                               << " address=0x" << std::hex << (unsigned long) this;
+                               << " address=0x" << std::hex << (qintptr) this;
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_SEGMENT));
 
@@ -35,7 +35,7 @@ SegmentLine::SegmentLine(QGraphicsScene  &scene,
 SegmentLine::~SegmentLine ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentLine::~SegmentLine"
-                               << " address=0x" << std::hex << (unsigned long) this;
+                               << " address=0x" << std::hex << (qintptr) this;
 }
 
 void SegmentLine::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
