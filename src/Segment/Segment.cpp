@@ -20,13 +20,13 @@ Segment::Segment(QGraphicsScene &scene,
   m_isGnuplot (isGnuplot)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment"
-                              << " address=0x" << hex << (unsigned long) this;
+                              << " address=0x" << hex << (quintptr) this;
 }
 
 Segment::~Segment()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::~Segment"
-                              << " address=0x" << hex << (unsigned long) this;
+                              << " address=0x" << hex << (quintptr) this;
 
   QList<SegmentLine*>::iterator itr;
   for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
@@ -46,7 +46,7 @@ void Segment::appendColumn(int x,
   int yNew = y;
 
   LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::appendColumn"
-                               << " segment=0x" << std::hex << (unsigned long) this << std::dec
+                               << " segment=0x" << std::hex << (quintptr) this << std::dec
                                << " adding ("
                                << xOld << "," << yOld << ") to ("
                                << xNew << "," << yNew << ")";
@@ -471,7 +471,7 @@ void Segment::removeUnneededLines (int *foldedLines)
           ++(*foldedLines);
 
           LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::removeUnneededLines"
-                                       << " segment=0x" << std::hex << (unsigned long) this << std::dec
+                                       << " segment=0x" << std::hex << (quintptr) this << std::dec
                                        << " removing ("
                                        << linePrevious->line().x1() << "," << linePrevious->line().y1() << ") to ("
                                        << linePrevious->line().x2() << "," << linePrevious->line().y2() << ") "
