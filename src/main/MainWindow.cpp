@@ -47,6 +47,7 @@
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
+#include "LoadFileInfo.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -75,6 +76,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QtHelp>
+#include <QTimer>
 #include <QToolBar>
 #include <QToolButton>
 #include "QtToString.h"
@@ -109,6 +111,7 @@ const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
+                       QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
@@ -157,6 +160,11 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(initialPath,
                         errorReportFile);
+  } else {
+
+    // Save file names for later, after gui becomes available. The file names are dropped if error report file is specified
+    // since only one of the two modes is available at any time, for simplicity
+    m_loadStartupFiles = loadStartupFiles;
   }
 }
 
@@ -1807,6 +1815,23 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   updateAfterCommand(); // Replace stale points by points in new Document
 }
 
+void MainWindow::showEvent (QShowEvent *event)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::showEvent"
+                              << " files=" << m_loadStartupFiles.join (",").toLatin1().data();
+
+  QMainWindow::showEvent (event);
+
+  if (m_loadStartupFiles.count() > 0) {
+
+    m_timerLoadStartupFiles = new QTimer;
+    m_timerLoadStartupFiles->setSingleShot (true);
+    connect (m_timerLoadStartupFiles, SIGNAL (timeout ()), this, SLOT (slotLoadStartupFiles ()));
+    m_timerLoadStartupFiles->start (0); // Zero delay still waits until execution finishes and gui is available
+
+  }
+}
+
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
@@ -2262,6 +2287,27 @@ void MainWindow::slotLeave ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotLeave";
 
   m_digitizeStateContext->handleLeave ();
+}
+
+void MainWindow::slotLoadStartupFiles ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotLoadStartupFiles";
+
+  ENGAUGE_ASSERT (m_loadStartupFiles.count() > 0);
+
+  QString fileName = m_loadStartupFiles [0];
+
+  // Load next file into this instance of Engauge
+  LoadFileInfo loadFileInfo;
+  if (loadFileInfo.loadsAsDigFile(fileName)) {
+
+    loadDocumentFile (fileName);
+
+  } else {
+
+    fileImport (fileName);
+
+  }
 }
 
 void MainWindow::slotMouseMove (QPointF pos)

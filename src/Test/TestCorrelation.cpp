@@ -21,13 +21,15 @@ void TestCorrelation::initTestCase ()
   const QString NO_ERROR_REPORT_LOG_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool DEBUG_FLAG = false;
+  const QStringList NO_LOAD_STARTUP_FILES;
 
   initializeLogging ("engauge_test",
                      "engauge_test.log",
                      DEBUG_FLAG);
 
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
-                NO_GNUPLOT_LOG_FILES);
+                NO_GNUPLOT_LOG_FILES,
+                NO_LOAD_STARTUP_FILES);
   w.show ();
 }
 

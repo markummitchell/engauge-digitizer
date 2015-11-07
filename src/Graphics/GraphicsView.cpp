@@ -1,7 +1,7 @@
 #include "DataKey.h"
-#include "Document.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
+#include "LoadFileInfo.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "Point.h"
@@ -104,12 +104,7 @@ void GraphicsView::dragMoveEvent (QDragMoveEvent *event)
 
 void GraphicsView::dropEvent (QDropEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent"
-                              << " formats=" << event->mimeData()->formats().join (", ").toLatin1().data();
-
   const QString MIME_FORMAT_TEXT_PLAIN ("text/plain");
-
-  // This code is not specific to a digitizing state so it is implemented here
 
   // Urls from text/uri-list
   QList<QUrl> urlList = event->mimeData ()->urls ();
@@ -121,10 +116,21 @@ void GraphicsView::dropEvent (QDropEvent *event)
     str << " url=" << url.toString () << " ";
   }
 
-  if (loadsAsDigFile (event->mimeData()->data (MIME_FORMAT_TEXT_PLAIN))) {
+  QString textPlain (event->mimeData()->data (MIME_FORMAT_TEXT_PLAIN));
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent"
+                              << " formats=(" << event->mimeData()->formats().join (", ").toLatin1().data() << ")"
+                              << " hasUrls=" << (event->mimeData()->hasUrls() ? "yes" : "no")
+                              << " urlCount=" << urlList.count()
+                              << " urls=(" << urls.toLatin1().data() << ")"
+                              << " text=" << textPlain.toLatin1().data()
+                              << " hasImage=" << (event->mimeData()->hasImage() ? "yes" : "no");
+
+  LoadFileInfo loadFileInfo;
+  if (loadFileInfo.loadsAsDigFile (textPlain)) {
 
     LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::dropEvent dig file";
-    QUrl url (event->mimeData()->data(MIME_FORMAT_TEXT_PLAIN));
+    QUrl url (textPlain);
     emit signalDraggedDigFile (url.toLocalFile());
     event->acceptProposedAction();
 
@@ -136,7 +142,7 @@ void GraphicsView::dropEvent (QDropEvent *event)
     emit signalDraggedImage (image);
 
   } else if (event->mimeData ()->hasUrls () &&
-             event->mimeData ()->urls().count () > 0) {
+             urlList.count () > 0) {
 
     // Sometimes images can be dragged in, but sometimes the url points to an html page that
     // contains just the image, in which case importing will fail
@@ -194,16 +200,6 @@ void GraphicsView::leaveEvent (QEvent *event)
   emit signalLeave ();
 
   QGraphicsView::leaveEvent (event);
-}
-
-bool GraphicsView::loadsAsDigFile (const QString &urlString) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::loadsAsDigFile";
-
-  QUrl url (urlString);
-  Document document (url.toLocalFile());
-
-  return document.successfulRead();
 }
 
 void GraphicsView::mouseMoveEvent (QMouseEvent *event)

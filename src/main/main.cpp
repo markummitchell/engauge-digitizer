@@ -10,13 +10,19 @@ const QString CMD_DEBUG ("debug");
 const QString CMD_ERROR ("error");
 const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
+const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
 const QString DASH_ERROR ("-" + CMD_ERROR);
 const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 
 // Prototypes
-void parseCmdLine (int argc, char **argv, bool &isDebug, QString &errorReportFile, bool &isGnuplot);
+void parseCmdLine (int argc,
+                   char **argv,
+                   bool &isDebug,
+                   QString &errorReportFile,
+                   bool &isGnuplot,
+                   QStringList &loadStartupFiles);
 
 // Functions
 int main(int argc, char *argv[])
@@ -27,18 +33,21 @@ int main(int argc, char *argv[])
 
   bool isDebug, isGnuplot;
   QString errorReportFile;
+  QStringList loadStartupFiles;
   parseCmdLine (argc,
                 argv,
                 isDebug,
                 errorReportFile,
-                isGnuplot);
+                isGnuplot,
+                loadStartupFiles);
 
   initializeLogging ("engauge",
                      "engauge.log",
                      isDebug);
 
   MainWindow w (errorReportFile,
-                isGnuplot);
+                isGnuplot,
+                loadStartupFiles);
   w.show();
 
   return a.exec();
@@ -48,7 +57,8 @@ void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
                    QString &errorReportFile,
-                   bool &isGnuplot)
+                   bool &isGnuplot,
+                   QStringList &loadStartupFiles)
 {
   const int COLUMN_WIDTH = 20;
   bool showUsage = false;
@@ -72,8 +82,12 @@ void parseCmdLine (int argc,
       nextIsErrorReportFile = true;
     } else if (strcmp (argv [i], DASH_GNUPLOT.toLatin1().data()) == 0) {
       isGnuplot = true;
+    } else if (strcmp (argv [i], DASH_HELP.toLatin1().data()) == 0) {
+      showUsage = true; // User requested help
+    } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
+      showUsage = true; // User entered an unrecognized token
     } else {
-      showUsage = true;
+      loadStartupFiles << argv [i]; // Save file name
     }
   }
 
@@ -82,10 +96,14 @@ void parseCmdLine (int argc,
     cerr << "Usage: engauge "
          << "[" << DASH_DEBUG.toLatin1().data() << "] "
          << "[" << DASH_ERROR.toLatin1().data() << " <file>] "
-         << "[" << DASH_GNUPLOT.toLatin1().data() << "]" << endl
+         << "[" << DASH_GNUPLOT.toLatin1().data() << "] "
+         << "[" << DASH_HELP.toLatin1().data() << "] "
+         << "[<load_file1>] [<load_file2>] ..." << endl
          << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Enables extra debug information" << endl
          << "  " << DASH_ERROR.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Specifies an error report fie as input" << endl
-         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Output diagnostic gnuplot input files for debugging" << endl;
+         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Output diagnostic gnuplot input files for debugging" << endl
+         << "  " << DASH_HELP.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Show this help information" << endl
+         << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "File to be imported or opened at startup" << endl;
 
     exit (0);
   }

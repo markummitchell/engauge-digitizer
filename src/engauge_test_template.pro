@@ -193,6 +193,7 @@ HEADERS  += \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Line/LineStyle.h \
+    Load/LoadFileInfo.h \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
@@ -423,6 +424,7 @@ SOURCES += \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Line/LineStyle.cpp \
+    Load/LoadFileInfo.cpp \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \

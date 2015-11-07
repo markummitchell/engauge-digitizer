@@ -80,7 +80,7 @@ private:
   GraphicsView();
 
   bool inBounds (const QPointF &posScreen);
-  bool loadsAsDigFile (const QString &urlString) const;
+
 };
 
 #endif // GRAPHICSVIEW_H

@@ -48,6 +48,7 @@ class QGraphicsLineItem;
 class QMenu;
 class QSettings;
 class QTextStream;
+class QTimer;
 class QToolBar;
 class QVBoxLayout;
 class StatusBar;
@@ -65,6 +66,7 @@ public:
   /// Single constructor.
   MainWindow(const QString &errorReportFile, // Empty if unused
              bool isGnuplot,
+             QStringList loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -98,6 +100,9 @@ public:
 
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
+
+  /// Processing performed after gui becomes available
+  virtual void showEvent(QShowEvent *);
 
   /// Show temporary message in status bar
   void showTemporaryMessage (const QString &temporaryMessage);
@@ -196,6 +201,7 @@ private slots:
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
   void slotLeave ();
+  void slotLoadStartupFiles ();
   void slotMouseMove (QPointF);
   void slotMousePress (QPointF);
   void slotMouseRelease (QPointF);
@@ -443,6 +449,10 @@ private:
   NetworkClient *m_networkClient;
 
   bool m_isGnuplot;
+
+  // File names to be loaded at startup. Only one is loaded into the current instance, with external instances created for the other files
+  QTimer *m_timerLoadStartupFiles;
+  QStringList m_loadStartupFiles;
 };
 
 #endif // MAIN_WINDOW_H
