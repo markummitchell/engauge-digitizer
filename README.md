@@ -1,15 +1,20 @@
-<h2>This Software Is In Beta Test! All feedback welcome</h2>
-
 engauge6
 ========
 
-Rewrite of Engauge Digitizer from Qt3/Qt4 to Qt5
+The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
+
+Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent releases are available here for Linux and Windows. 
+
+This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
 Versions
 --------
-October 25, 2015, version 6.0 is being upgraded to be able to read older Digitizer documents for issue #20. Upgrades for Linux package maintainers have been added.
+Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
+access privileges.
 
-October 23, 2015, version 6.0 of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years, and also offers many new features.
+Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.
+
+Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years, and also offers many new features.
 
 Developers and users are encouraged to offer their suggestions and comments!
 
@@ -18,20 +23,21 @@ Features
 New features in Engauge6:
 
 1. Undo/redo of all operations means recovering from mistakes and experimenting with options is painless
-2. Wizard provides an interactive tutorial to explain the basic steps
-3. Wizard creates a checklist guide to interactively leads user through steps from file import to file export
-4. Cubic spline interpolation between points gives more accurate curves with fewer points
-5. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
-6. Graph coordinates can be specified as date and time value, or as degrees, minutes and seconds
-7. All settings dialogs are resizable so they can be enlarged as necessary to display more information
-8. Import by drag-and-drop
-9. Replacement of Qt3 (which is at its end of life) by Qt5
-10. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
+2. MSI installer for Windows operating system
+3. Wizard provides an interactive tutorial to explain the basic steps
+4. Wizard creates a checklist guide to interactively leads user through steps from file import to file export
+5. Cubic spline interpolation between points gives more accurate curves with fewer points
+6. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
+7. Graph coordinates can be specified as date and time value, or as degrees, minutes and seconds
+8. All settings dialogs are resizable so they can be enlarged as necessary to display more information
+9. Import by drag-and-drop
+10. Replacement of Qt3 (which is at its end of life) by Qt5
+11. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
     application window is resized
-11. Color picking straight from the original image
-12. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
+12. Color picking straight from the original image
+13. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
     user support
-13. Test suite for regression testing minimizes code breakage as new features are added
+14. Test suite for regression testing minimizes code breakage as new features are added
 
 Contributors
 ------------
