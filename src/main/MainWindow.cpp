@@ -1054,7 +1054,9 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
 void MainWindow::fileImport (const QString &fileName)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport fileName=" << fileName.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
+                              << " fileName=" << fileName.toLatin1 ().data ()
+                              << " curDir=" << QDir::currentPath().toLatin1().data();
 
   QString originalFileOld = m_originalFile;
   bool originalFileWasImported = m_originalFileWasImported;
@@ -2295,7 +2297,8 @@ void MainWindow::slotLoadStartupFiles ()
 
   ENGAUGE_ASSERT (m_loadStartupFiles.count() > 0);
 
-  QString fileName = m_loadStartupFiles [0];
+  QString fileName = m_loadStartupFiles.front(); // Get next file name
+  m_loadStartupFiles.pop_front(); // Remove next file name
 
   // Load next file into this instance of Engauge
   LoadFileInfo loadFileInfo;
@@ -2307,6 +2310,14 @@ void MainWindow::slotLoadStartupFiles ()
 
     fileImport (fileName);
 
+  }
+
+  if (m_loadStartupFiles.count() > 0) {
+
+    // Fork off another instance of this application to handle the remaining files recursively
+    QProcess *process = new QProcess (this);
+    process->start (QCoreApplication::applicationFilePath(),
+                    m_loadStartupFiles);
   }
 }
 
