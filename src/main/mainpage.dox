@@ -13,6 +13,9 @@ Major features added since version Engauge Digitizer 5.2 include:
 - Undo/redo makes recovering from mistakes easy
 - Easier and more powerful zooming
 - Improved drag-and-drop
+- Wizard provides an interactive tutorial to explain the basic steps
+- Wizard creates a checklist guide to interactively leads user through steps from file import to file export
+- MSI installer for Windows operating system
 
 For developers
 --------------
@@ -29,6 +32,7 @@ The code takes advantage of some powerful open source toolkits:
 - <a href="http://fftw.org"><b>FFTW</b></a> provides a fast-fourier transform (FFT) for faster image processing, 
   especially cross-correlations
 - <a href="http://log4cpp.sourceforge.net"><b>Log4cpp</b></a> provides configurable logging
+- <a href="http://www.openjpeg.org"><b>OpenJPEG</b></a> supports JPEG2000 images on systems without support for that format
 
 The code is architected with some important design patterns:
 
