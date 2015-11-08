@@ -30,11 +30,13 @@ void ChecklistGuidePage::addHtml (const QString &html)
   m_layout->addWidget (label, m_row++, 0, 1, 2, Qt::AlignTop);
 }
 
-QRadioButton *ChecklistGuidePage::addLabelAndRadioButton (const QString &label)
+QRadioButton *ChecklistGuidePage::addLabelAndRadioButton (const QString &label,
+                                                          const QString &whatsThis)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addLabelAndRadioButton";
 
   QRadioButton *button = new QRadioButton;
+  button->setWhatsThis (whatsThis);
   m_layout->addWidget (button, m_row, 0, 1, 1, Qt::AlignTop);
 
   QLabel *lbl = new QLabel (label);
@@ -44,7 +46,8 @@ QRadioButton *ChecklistGuidePage::addLabelAndRadioButton (const QString &label)
   return button;
 }
 
-void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit)
+void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit,
+                                      const QString &whatsThis)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addLineEdit";
 
@@ -63,6 +66,7 @@ void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit)
     m_layout->addWidget (m_checklineLineEditContainer, m_row++, 0, 1, 2, Qt::AlignTop);
   }
 
+  edit->setWhatsThis (whatsThis);
   m_checklineLineEditLayout->addWidget (edit);
 
   // Windows border is missing on left side so border is made complete here

@@ -20,10 +20,12 @@ class ChecklistGuidePage : public QWizardPage
   void addHtml (const QString &html);
 
   /// Insert radio button and corresponding label
-  QRadioButton *addLabelAndRadioButton (const QString &label);
+  QRadioButton *addLabelAndRadioButton (const QString &label,
+                                        const QString &whatsThis);
 
   /// Insert line edit
-  void addLineEdit (ChecklistLineEdit *edit);
+  void addLineEdit (ChecklistLineEdit *edit,
+                    const QString &whatsThis);
 
  private:
   ChecklistGuidePage();
