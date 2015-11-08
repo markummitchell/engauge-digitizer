@@ -45,6 +45,7 @@ The code is architected with some important design patterns:
   in the GraphicsView. Delegates, representing the document, interact with the Model and View
 - <b>State pattern</b> isolates each digitizing mode into one state, with a context class acting as a container and single 
   class for interfacing across the state machine boundary
+- <b>Strategy pattern</b> encapsulates code chunks when the chunk to be used depends on the current context 
 
 Code development has been moved from sourceforge.net to github.com, and Doxygen documentation has been added. 
 */
