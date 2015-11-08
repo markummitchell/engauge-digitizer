@@ -7,8 +7,6 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
-const int MAX_LAYOUT_WIDTH = 300;
-
 ChecklistGuidePage::ChecklistGuidePage(const QString &title) :
   m_row (0),
   m_checklineLineEditContainer (0),
@@ -41,7 +39,6 @@ QRadioButton *ChecklistGuidePage::addLabelAndRadioButton (const QString &label)
 
   QLabel *lbl = new QLabel (label);
   lbl->setWordWrap(true);
-  lbl->setMaximumWidth(MAX_LAYOUT_WIDTH);
   m_layout->addWidget (lbl, m_row++, 1, 1, 1, Qt::AlignTop);
 
   return button;
@@ -51,7 +48,11 @@ void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addLineEdit";
 
+  bool isFirst = false;
+
   if (m_checklineLineEditContainer == 0) {
+
+    isFirst = true;
 
     // This is the first ChecklistLineEdit, so we create a container for it and any more that get added
     m_checklineLineEditLayout = new QVBoxLayout;
@@ -63,4 +64,13 @@ void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit)
   }
 
   m_checklineLineEditLayout->addWidget (edit);
+
+  // Windows border is missing on left side so border is made complete here
+  QString style = QString ("QLineEdit { "
+                           "border-left : 1px solid gray; "
+                           "border-right: 1px solid gray; "
+                           "border-top:   %1px solid gray; "
+                           "border-bottom:1px solid gray; }")
+          .arg (isFirst ? 1 : 0);
+  edit->setStyleSheet (style);
 }
