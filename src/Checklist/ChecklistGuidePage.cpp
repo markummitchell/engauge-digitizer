@@ -27,7 +27,6 @@ void ChecklistGuidePage::addHtml (const QString &html)
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePage::addHtml";
 
   QLabel *label = new QLabel (html);
-  label->setMaximumWidth(MAX_LAYOUT_WIDTH);
   label->setWordWrap (true);
 
   m_layout->addWidget (label, m_row++, 0, 1, 2, Qt::AlignTop);
