@@ -2314,10 +2314,11 @@ void MainWindow::slotLoadStartupFiles ()
 
   if (m_loadStartupFiles.count() > 0) {
 
-    // Fork off another instance of this application to handle the remaining files recursively
+    // Fork off another instance of this application to handle the remaining files recursively. New process
+    // is detached so killing/terminating this process does not automatically kill the child process(es) also
     QProcess *process = new QProcess (this);
-    process->start (QCoreApplication::applicationFilePath(),
-                    m_loadStartupFiles);
+    process->startDetached (QCoreApplication::applicationFilePath(),
+                            m_loadStartupFiles);
   }
 }
 
