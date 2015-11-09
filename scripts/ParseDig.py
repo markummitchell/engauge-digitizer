@@ -1,9 +1,9 @@
 from xml.etree import ElementTree
-from collections import defaultdict
+from DefaultListOrderedDict import DefaultListOrderedDict
 import numpy as np
 
 class ParseDig:
-    curves = defaultdict (list) # Hash table of curve name to lists, with each list consisting of graph points
+    curves = DefaultListOrderedDict () # Hash table of curve name to lists, with each list consisting of graph points
     def __init__(self, digFile):
         with open(digFile, 'rt') as f:
             tree = ElementTree.parse (f)

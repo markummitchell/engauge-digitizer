@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
   initializeLogging ("engauge",
                      "engauge.log",
                      isDebug);
+  LOG4CPP_INFO_S ((*mainCat)) << "main args=" << QApplication::arguments().join (" ").toLatin1().data();
 
   MainWindow w (errorReportFile,
                 isGnuplot,
