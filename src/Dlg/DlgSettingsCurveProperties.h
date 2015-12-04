@@ -75,6 +75,11 @@ private:
   CurveStyles *m_modelCurveStylesAfter;
 
   bool m_isDirty;
+
+  // Strategy for saving of curve style effects:
+  // 1) Remember current curve name when a curve style modification is made
+  // 2) On OK, save the curve style, for the last modified curve, as the default
+  QString m_curveNameLastModified;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H
