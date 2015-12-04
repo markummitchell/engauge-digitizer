@@ -13,7 +13,7 @@ unsigned int Point::m_identifierIndex = 0;
 
 extern const QString AXIS_CURVE_NAME;
 extern const QString DUMMY_CURVE_NAME;
-const QString POINT_IDENTIFIER_DELIMITER ("_");
+const QString POINT_IDENTIFIER_DELIMITER ("\t"); // Character that could never be entered when editing curve names
 
 const double MISSING_ORDINAL_VALUE = 0;
 const double MISSING_POSGRAPH_VALUE = 0;
