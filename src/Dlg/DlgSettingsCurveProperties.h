@@ -37,6 +37,7 @@ private slots:
   void slotPointLineWidth (int);
   void slotPointRadius(int);
   void slotPointShape(const QString &);
+  void slotSaveDefault();
 
 protected:
   virtual void handleOk ();
@@ -47,6 +48,8 @@ private:
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  void createSaveDefault (QGridLayout *layout,
+                          int &row);
   void drawLine (bool isRelation,
                  const LineStyle &lineStyle);
   void drawPoints (const PointStyle &pointStyle);
@@ -68,6 +71,8 @@ private:
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbLineType;
 
+  QPushButton *m_btnSaveDefault;
+
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
@@ -75,11 +80,6 @@ private:
   CurveStyles *m_modelCurveStylesAfter;
 
   bool m_isDirty;
-
-  // Strategy for saving of curve style effects:
-  // 1) Remember current curve name when a curve style modification is made
-  // 2) On OK, save the curve style, for the last modified curve, as the default
-  QString m_curveNameLastModified;
 };
 
 #endif // DLG_SETTINGS_CURVE_PROPERTIES_H

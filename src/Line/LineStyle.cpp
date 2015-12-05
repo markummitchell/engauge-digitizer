@@ -1,18 +1,30 @@
 #include "DocumentSerialize.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include <QSettings>
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "Settings.h"
 #include "Xml.h"
 
-const int DEFAULT_LINE_WIDTH = 1;
+const ColorPalette DEFAULT_LINE_COLOR_AXES = COLOR_PALETTE_TRANSPARENT; // Same default color as used for PointStyle axes curve default
+const ColorPalette DEFAULT_LINE_COLOR_GRAPH = COLOR_PALETTE_BLUE;       // Same default color as used for PointStyle axes curve default
+const CurveConnectAs DEFAULT_LINE_CONNECT_AS_AXES = CONNECT_SKIP_FOR_AXIS_CURVE;
+const CurveConnectAs DEFAULT_LINE_CONNECT_AS_GRAPH = CONNECT_AS_FUNCTION_SMOOTH;
+const int DEFAULT_LINE_WIDTH_AXES = 0;
+const int DEFAULT_LINE_WIDTH_GRAPH = 1;
 
-LineStyle::LineStyle () :
-  m_width (0),
-  m_paletteColor (COLOR_PALETTE_TRANSPARENT),
-  m_curveConnectAs (CONNECT_AS_FUNCTION_SMOOTH)
+LineStyle::LineStyle ()
 {
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_AXES);
+  m_width = settings.value (SETTINGS_CURVE_STYLE_LINE_WIDTH,
+                            DEFAULT_LINE_WIDTH_AXES).toInt();
+  m_paletteColor = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_LINE_COLOR,
+                                                  DEFAULT_LINE_COLOR_AXES).toInt();
+  m_curveConnectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_STYLE_LINE_CONNECT_AS,
+                                                      DEFAULT_LINE_CONNECT_AS_AXES).toInt();
 }
 
 LineStyle::LineStyle (unsigned int width,
@@ -47,16 +59,34 @@ CurveConnectAs LineStyle::curveConnectAs () const
 
 LineStyle LineStyle::defaultAxesCurve ()
 {
-  return LineStyle (DEFAULT_LINE_WIDTH,
-                    COLOR_PALETTE_TRANSPARENT,
-                    CONNECT_SKIP_FOR_AXIS_CURVE); // Same default color as used for PointStyle axes curve default
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_AXES);
+  int width = settings.value (SETTINGS_CURVE_STYLE_LINE_WIDTH,
+                              DEFAULT_LINE_WIDTH_AXES).toInt();
+  ColorPalette color = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_LINE_COLOR,
+                                                      DEFAULT_LINE_COLOR_AXES).toInt();
+  CurveConnectAs connectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_STYLE_LINE_CONNECT_AS,
+                                                              DEFAULT_LINE_CONNECT_AS_AXES).toInt();
+
+  return LineStyle (width,
+                    color,
+                    connectAs);
 }
 
 LineStyle LineStyle::defaultGraphCurve (int /* index */)
 {
-  return LineStyle (DEFAULT_LINE_WIDTH,
-                    COLOR_PALETTE_BLUE,
-                    CONNECT_AS_FUNCTION_SMOOTH); // Same default color as used for PointStyle graph curves default
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_GRAPH);
+  int width = settings.value (SETTINGS_CURVE_STYLE_LINE_WIDTH,
+                              DEFAULT_LINE_WIDTH_GRAPH).toInt();
+  ColorPalette color = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_LINE_COLOR,
+                                                      DEFAULT_LINE_COLOR_GRAPH).toInt();
+  CurveConnectAs connectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_STYLE_LINE_CONNECT_AS,
+                                                              DEFAULT_LINE_CONNECT_AS_GRAPH).toInt();
+
+  return LineStyle (width,
+                    color,
+                    connectAs);
 }
 
 void LineStyle::loadXml(QXmlStreamReader &reader)

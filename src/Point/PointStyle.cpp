@@ -3,13 +3,18 @@
 #include "Logger.h"
 #include "PointStyle.h"
 #include <qmath.h>
+#include <QSettings>
 #include <QTextStream>
 #include <QtToString.h>
 #include <QXmlStreamWriter>
+#include "Settings.h"
 #include "Xml.h"
 
+const ColorPalette DEFAULT_POINT_COLOR_AXES = COLOR_PALETTE_RED;
+const ColorPalette DEFAULT_POINT_COLOR_GRAPH = COLOR_PALETTE_BLUE;
+const int DEFAULT_POINT_LINE_WIDTH = 1;
 const int DEFAULT_POINT_RADIUS = 10;
-const int DEFAULT_LINE_WIDTH = 1;
+const PointShape DEFAULT_POINT_SHAPE_AXIS = POINT_SHAPE_CROSS;
 const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
 
@@ -48,14 +53,28 @@ PointStyle &PointStyle::operator=(const PointStyle &other)
 
 PointStyle PointStyle::defaultAxesCurve ()
 {
-  return PointStyle (POINT_SHAPE_CROSS,
-                     DEFAULT_POINT_RADIUS,
-                     DEFAULT_LINE_WIDTH,
-                     COLOR_PALETTE_RED);
+  // Get settings if available, otherwise use defaults
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_AXES);
+  PointShape shape = (PointShape) settings.value (SETTINGS_CURVE_STYLE_POINT_SHAPE,
+                                                  DEFAULT_POINT_SHAPE_AXIS).toInt();
+  int radius = settings.value (SETTINGS_CURVE_STYLE_POINT_RADIUS,
+                               DEFAULT_POINT_RADIUS).toInt();
+  int pointLineWidth = settings.value (SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH,
+                                       DEFAULT_POINT_LINE_WIDTH).toInt();
+  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_POINT_COLOR,
+                                                           DEFAULT_POINT_COLOR_AXES).toInt();
+  settings.endGroup ();
+
+  return PointStyle (shape,
+                     radius,
+                     pointLineWidth,
+                     pointColor);
 }
 
 PointStyle PointStyle::defaultGraphCurve (int index)
 {
+  // Shape is always computed on the fly
   PointShape shape = POINT_SHAPE_CROSS;
   static PointShape pointShapes [] = {POINT_SHAPE_CROSS,
                                       POINT_SHAPE_X,
@@ -63,10 +82,21 @@ PointStyle PointStyle::defaultGraphCurve (int index)
                                       POINT_SHAPE_SQUARE};
   shape = pointShapes [index % 4];
 
+  // Get settings if available, otherwise use defaults
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_GRAPH);
+  int radius = settings.value (SETTINGS_CURVE_STYLE_POINT_RADIUS,
+                               DEFAULT_POINT_RADIUS).toInt();
+  int pointLineWidth = settings.value (SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH,
+                                       DEFAULT_POINT_LINE_WIDTH).toInt();
+  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_POINT_COLOR,
+                                                           DEFAULT_POINT_COLOR_GRAPH).toInt();
+  settings.endGroup ();
+
   return PointStyle (shape,
-                     DEFAULT_POINT_RADIUS,
-                     DEFAULT_LINE_WIDTH,
-                     COLOR_PALETTE_BLUE);
+                     radius,
+                     pointLineWidth,
+                     pointColor);
 }
 
 bool PointStyle::isCircle () const

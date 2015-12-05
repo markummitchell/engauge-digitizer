@@ -36,6 +36,9 @@ const QString CONNECT_AS_FUNCTION_STRAIGHT_STR ("Function - Straight");
 const QString CONNECT_AS_RELATION_SMOOTH_STR ("Relation - Smooth");
 const QString CONNECT_AS_RELATION_STRAIGHT_STR ("Relation - Straight");
 
+const QString SAVE_DEFAULT_AXES ("Save as axes defaults");
+const QString SAVE_DEFAULT_GRAPH ("Save as graph defaults");
+
 const double PREVIEW_WIDTH = 100.0;
 const double PREVIEW_HEIGHT = 100.0;
 
@@ -199,7 +202,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
 }
 
 void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
-                                                       int &row)
+                                                int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createPreview";
 
@@ -222,6 +225,22 @@ void DlgSettingsCurveProperties::createPreview (QGridLayout *layout,
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 }
 
+void DlgSettingsCurveProperties::createSaveDefault (QGridLayout *layout,
+                                                    int &row)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createSaveDefault";
+
+  m_btnSaveDefault = new QPushButton; // Text will be set in updateControls
+  m_btnSaveDefault->setWhatsThis (tr ("Click to save current settings as the permanent defaults.\n\n"
+                                      "If saving axes settings, all current settings will be used for "
+                                      "future axes.\n\n"
+                                      "If saving graph settings, all current settings except the point style will be used for "
+                                      "future graphs. The point style will be selected automatically."));
+  m_btnSaveDefault->setMinimumWidth (200); // Make big enough so toggling text does not resize the button
+  connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
+  layout->addWidget (m_btnSaveDefault, row++, 1, 1, 2, Qt::AlignHCenter);
+}
+
 QWidget *DlgSettingsCurveProperties::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createSubPanel";
@@ -233,11 +252,10 @@ QWidget *DlgSettingsCurveProperties::createSubPanel ()
   int row = 0;
   createCurveName (layout, row);
 
-  int rowLeft = row, rowRight = row;
+  int rowLeft = row, rowRight = row++;
   createPoint (layout, rowLeft);
   createLine (layout, rowRight);
-
-  row = qMax (rowLeft, rowRight);
+  createSaveDefault (layout, row);
   createPreview (layout, row);
 
   layout->setColumnStretch(0, 1); // Empty first column
@@ -337,26 +355,6 @@ void DlgSettingsCurveProperties::handleOk ()
   ENGAUGE_CHECK_PTR (m_modelCurveStylesBefore);
   ENGAUGE_CHECK_PTR (m_modelCurveStylesAfter);
 
-  if (!m_curveNameLastModified.isEmpty ()) {
-
-    // Save settings in the likely chance that next curve will have similar attributes
-    QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-    settings.beginGroup (SETTINGS_GROUP_DLG_CURVE_PROPERTIES);
-    settings.setValue (SETTINGS_LINE_COLOR,
-                       m_modelCurveStylesAfter->lineColor(m_curveNameLastModified));
-    settings.setValue (SETTINGS_LINE_CONNECT_AS,
-                       m_modelCurveStylesAfter->lineConnectAs(m_curveNameLastModified));
-    settings.setValue (SETTINGS_LINE_WIDTH,
-                       m_modelCurveStylesAfter->lineWidth(m_curveNameLastModified));
-    settings.setValue (SETTINGS_POINT_COLOR,
-                       m_modelCurveStylesAfter->pointColor (m_curveNameLastModified));
-    settings.setValue (SETTINGS_POINT_LINE_WIDTH,
-                       m_modelCurveStylesAfter->pointLineWidth(m_curveNameLastModified));
-    settings.setValue (SETTINGS_POINT_RADIUS,
-                       m_modelCurveStylesAfter->pointRadius(m_curveNameLastModified));
-    settings.endGroup ();
-  }
-
   CmdSettingsCurveProperties *cmd = new CmdSettingsCurveProperties (mainWindow (),
                                                                     cmdMediator ().document(),
                                                                     *m_modelCurveStylesBefore,
@@ -398,7 +396,6 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   loadForCurveName (mainWindow().selectedGraphCurve());
 
   m_isDirty = false;
-  m_curveNameLastModified = "";
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
@@ -478,7 +475,6 @@ void DlgSettingsCurveProperties::slotLineColor(const QString &lineColor)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineColor color=" << lineColor.toLatin1().data();
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setLineColor(m_cmbCurveName->currentText(),
                                         (ColorPalette) m_cmbLineColor->currentData().toInt());
@@ -491,7 +487,6 @@ void DlgSettingsCurveProperties::slotLineWidth(int width)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineWidth width=" << width;
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setLineWidth(m_cmbCurveName->currentText(),
                                         width);
@@ -504,7 +499,6 @@ void DlgSettingsCurveProperties::slotLineType(const QString &lineType)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotLineType lineType=" << lineType.toLatin1().data();
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setLineConnectAs(m_cmbCurveName->currentText(),
                                             (CurveConnectAs) m_cmbLineType->currentData().toInt ());
@@ -517,7 +511,6 @@ void DlgSettingsCurveProperties::slotPointColor(const QString &pointColor)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointColor pointColor=" << pointColor.toLatin1().data();
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setPointColor(m_cmbCurveName->currentText(),
                                          (ColorPalette) m_cmbPointColor->currentData().toInt ());
@@ -530,7 +523,6 @@ void DlgSettingsCurveProperties::slotPointLineWidth(int lineWidth)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointLineWidth lineWidth=" << lineWidth;
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setPointLineWidth(m_cmbCurveName->currentText(),
                                              lineWidth);
@@ -543,7 +535,6 @@ void DlgSettingsCurveProperties::slotPointRadius(int radius)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointRadius radius=" << radius;
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setPointRadius(m_cmbCurveName->currentText(),
                                           radius);
@@ -556,12 +547,45 @@ void DlgSettingsCurveProperties::slotPointShape(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotPointShape";
 
   m_isDirty = true;
-  m_curveNameLastModified = m_cmbCurveName->currentText();
 
   m_modelCurveStylesAfter->setPointShape(m_cmbCurveName->currentText(),
                                          (PointShape) m_cmbPointShape->currentData().toInt ());
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsCurveProperties::slotSaveDefault()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::slotSaveDefault";
+
+  QString curve = m_cmbCurveName->currentText ();
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  if (curve == AXIS_CURVE_NAME) {
+
+    settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_AXES);
+
+  } else {
+
+    settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_GRAPH);
+
+  }
+
+  settings.setValue (SETTINGS_CURVE_STYLE_POINT_SHAPE,
+                     m_modelCurveStylesAfter->pointShape(curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_LINE_COLOR,
+                     m_modelCurveStylesAfter->lineColor(curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_LINE_CONNECT_AS,
+                     m_modelCurveStylesAfter->lineConnectAs(curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_LINE_WIDTH,
+                     m_modelCurveStylesAfter->lineWidth(curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_POINT_COLOR,
+                     m_modelCurveStylesAfter->pointColor (curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH,
+                     m_modelCurveStylesAfter->pointLineWidth(curve));
+  settings.setValue (SETTINGS_CURVE_STYLE_POINT_RADIUS,
+                     m_modelCurveStylesAfter->pointRadius(curve));
+  settings.endGroup ();
 }
 
 void DlgSettingsCurveProperties::updateControls()
@@ -571,6 +595,12 @@ void DlgSettingsCurveProperties::updateControls()
                      !m_spinLineWidth->text().isEmpty ();
   m_cmbCurveName->setEnabled (isGoodState); // User needs to fix state before switching curves
   enableOk (isGoodState && m_isDirty);
+
+  if (m_cmbCurveName->currentText() == AXIS_CURVE_NAME) {
+    m_btnSaveDefault->setText (SAVE_DEFAULT_AXES);
+  } else {
+    m_btnSaveDefault->setText (SAVE_DEFAULT_GRAPH);
+  }
 }
 
 void DlgSettingsCurveProperties::updatePreview()
