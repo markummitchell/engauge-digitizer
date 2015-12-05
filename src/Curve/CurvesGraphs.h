@@ -65,6 +65,9 @@ public:
   void printStream (QString indentation,
                     QTextStream &str) const;
 
+  /// Remove all Points from all Curves
+  void removeAllPoints ();
+
   /// Remove the Point from its Curve.
   void removePoint (const QString &pointIdentifier);
 

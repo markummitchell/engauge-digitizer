@@ -223,6 +223,18 @@ void CurvesGraphs::printStream (QString indentation,
   }
 }
 
+void CurvesGraphs::removeAllPoints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurvesGraphs::removeAllPoints";
+
+  CurveList::iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    Curve &curve = *itr;
+    curve.removeAllPoints ();
+  }
+}
+
 void CurvesGraphs::removePoint (const QString &pointIdentifier)
 {
   QString curveName = Point::curveNameFromPointIdentifier(pointIdentifier);

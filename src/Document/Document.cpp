@@ -392,6 +392,9 @@ bool Document::loadCurvesFile(const QString &curvesFile)
       curvesGraphs.loadXml (reader);
       success = true;
 
+      // Remove any points
+      curvesGraphs.removeAllPoints ();
+
       // Override the default CurvesGraphs
       setCurvesGraphs (curvesGraphs);
     }

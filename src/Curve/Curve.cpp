@@ -425,6 +425,15 @@ void Curve::printStream (QString indentation,
                             str);
 }
 
+void Curve::removeAllPoints ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::removeAllPoints";
+
+  while (m_points.count() > 0) {
+    m_points.removeLast();
+  }
+}
+
 void Curve::removePoint (const QString &identifier)
 {
   // Search for point with matching identifier

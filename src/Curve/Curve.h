@@ -92,6 +92,9 @@ public:
   void printStream (QString indentation,
                     QTextStream &str) const;
 
+  /// Remove all Points
+  void removeAllPoints ();
+
   /// Perform the opposite of addPointAtEnd.
   void removePoint (const QString &identifier);
 
