@@ -121,6 +121,9 @@ public:
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
+  /// Load the curve names in the specified Engauge file into the current document. This is called near the end of the import process only
+  bool loadCurvesFile (const QString &curvesFile);
+
   /// Get method for DocumentModelAxesChecker.
   DocumentModelAxesChecker modelAxesChecker() const;
 

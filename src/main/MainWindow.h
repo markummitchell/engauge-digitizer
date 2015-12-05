@@ -64,7 +64,8 @@ class MainWindow : public QMainWindow
 
 public:
   /// Single constructor.
-  MainWindow(const QString &errorReportFile, // Empty if unused
+  MainWindow(const QString &curvesFile, // Empty if unused
+             const QString &errorReportFile, // Empty if unused
              bool isGnuplot,
              QStringList loadStartupFiles,
              QWidget *parent = 0);
@@ -310,6 +311,7 @@ private:
   QString m_originalFile; // Original filename for error report
   bool m_originalFileWasImported; // True/false for imported/opened
   bool m_isDocumentExported;
+  QString m_curvesFile; // Not empty when there is an Engauge file whose curves are to be used for any imported files
   QString m_engaugeFile; // Not empty when a Document is currently loaded AND it was loaded and/or saved as an Engauge file
   QString m_currentFile; // Not empty when a Document is currently loaded
 

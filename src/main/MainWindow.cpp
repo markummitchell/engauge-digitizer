@@ -109,12 +109,14 @@ const QString TSV_FILENAME_EXTENSION ("tsv");
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
-MainWindow::MainWindow(const QString &errorReportFile,
+MainWindow::MainWindow(const QString &curvesFile,
+                       const QString &errorReportFile,
                        bool isGnuplot,
                        QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
+  m_curvesFile (curvesFile),
   m_engaugeFile (EMPTY_FILENAME),
   m_currentFile (EMPTY_FILENAME),
   m_layout (0),
@@ -1223,7 +1225,21 @@ void MainWindow::loadImage (const QString &fileName,
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
                                               image);
-  QApplication::restoreOverrideCursor();
+  if (!m_curvesFile.isEmpty()) {
+    bool success = cmdMediator->loadCurvesFile (m_curvesFile);
+    QApplication::restoreOverrideCursor();
+    if (!success) {
+      QString msg = QString("Curves file %1 specified in the command line could not be read")
+                    .arg (m_curvesFile);
+      QMessageBox::warning (this,
+                            engaugeWindowTitle(),
+                            msg,
+                            QMessageBox::Ok);
+
+    }
+  } else {
+     QApplication::restoreOverrideCursor();
+  }
 
   setCurrentPathFromFile (fileName);
   // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list

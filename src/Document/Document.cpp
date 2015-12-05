@@ -4,6 +4,7 @@
 #include "CallbackNextOrdinal.h"
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
+#include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -365,6 +366,38 @@ void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QStrin
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+}
+
+bool Document::loadCurvesFile(const QString &curvesFile)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadCurvesFile";
+
+  // Strategy:
+  // 1) Extract CurvesGraphs subtree from the curves file
+  // 2) Replace the CurvesGraphs in Document
+
+  bool success = false;
+
+  // Get the CurvesGraphs subtree. We know the file exists since that was tested in parseCmdLine
+  QFile file (curvesFile);
+  file.open (QIODevice::ReadOnly | QIODevice::Text);
+  QXmlStreamReader reader (&file);
+  while (!reader.atEnd()) {
+    reader.readNextStartElement ();
+    QString tag = reader.name().toString();
+    if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+
+      // Found the subtree
+      CurvesGraphs curvesGraphs;
+      curvesGraphs.loadXml (reader);
+      success = true;
+
+      // Override the default CurvesGraphs
+      setCurvesGraphs (curvesGraphs);
+    }
+  }
+
+  return success;
 }
 
 void Document::loadImage(QXmlStreamReader &reader)
