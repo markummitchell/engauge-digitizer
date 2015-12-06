@@ -23,6 +23,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Transformation.h"
+#include "Version.h"
 #include "Xml.h"
 
 const int FOUR_BYTES = 4;
@@ -846,6 +847,10 @@ void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 void Document::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
+
+  // Version number is tacked onto DOCUMENT_SERIALIZE_DOCUMENT since the alternative  (creating a new start element)
+  // causes the code to complain during loading
+  writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
 
   // Serialize the Document image. That binary data is encoded as base64
   QByteArray array;
