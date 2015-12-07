@@ -234,6 +234,7 @@ HEADERS  += \
     src/Segment/SegmentFactory.h \
     src/Segment/SegmentLine.h \
     src/Settings/Settings.h \
+    src/Settings/SettingsForGraph.h \
     src/Spline/Spline.h \
     src/Spline/SplineCoeff.h \
     src/Spline/SplinePair.h \
@@ -462,6 +463,7 @@ SOURCES += \
     src/Segment/SegmentFactory.cpp \
     src/Segment/SegmentLine.cpp \
     src/Settings/Settings.cpp \
+    src/Settings/SettingsForGraph.cpp \
     src/Spline/Spline.cpp \
     src/Spline/SplineCoeff.cpp \
     src/Spline/SplinePair.cpp \
