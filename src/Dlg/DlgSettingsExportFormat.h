@@ -27,6 +27,7 @@ public:
   DlgSettingsExportFormat(MainWindow &mainWindow);
   virtual ~DlgSettingsExportFormat();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 

@@ -22,6 +22,7 @@
 #include <QtToString.h>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "SettingsForGraph.h"
 #include "Transformation.h"
 #include "Version.h"
 #include "Xml.h"
@@ -42,7 +43,10 @@ Document::Document (const QImage &image) :
 
   m_pixmap.convertFromImage (image);
 
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (DEFAULT_GRAPH_CURVE_NAME,
+  SettingsForGraph settingsForGraph;
+  QString curveName = settingsForGraph.defaultCurveName (1,
+                                                         DEFAULT_GRAPH_CURVE_NAME);
+  m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
                                             ColorFilterSettings::defaultFilter (),
                                             CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
                                                         PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));

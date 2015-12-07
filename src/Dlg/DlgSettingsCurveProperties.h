@@ -22,6 +22,7 @@ public:
   DlgSettingsCurveProperties(MainWindow &mainWindow);
   virtual ~DlgSettingsCurveProperties();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 
@@ -48,8 +49,6 @@ private:
   void createLine (QGridLayout *layout, int &row);
   void createPoint (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
-  void createSaveDefault (QGridLayout *layout,
-                          int &row);
   void drawLine (bool isRelation,
                  const LineStyle &lineStyle);
   void drawPoints (const PointStyle &pointStyle);

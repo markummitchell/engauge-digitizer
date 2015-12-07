@@ -122,6 +122,10 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
+void DlgSettingsSegments::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsSegments::createPreview (QGridLayout *layout,
                                          int &row)
 {

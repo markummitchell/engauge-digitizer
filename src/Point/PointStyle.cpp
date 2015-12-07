@@ -8,6 +8,7 @@
 #include <QtToString.h>
 #include <QXmlStreamWriter>
 #include "Settings.h"
+#include "SettingsForGraph.h"
 #include "Xml.h"
 
 const ColorPalette DEFAULT_POINT_COLOR_AXES = COLOR_PALETTE_RED;
@@ -55,14 +56,14 @@ PointStyle PointStyle::defaultAxesCurve ()
 {
   // Get settings if available, otherwise use defaults
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_AXES);
-  PointShape shape = (PointShape) settings.value (SETTINGS_CURVE_STYLE_POINT_SHAPE,
+  settings.beginGroup (SETTINGS_GROUP_CURVE_AXES);
+  PointShape shape = (PointShape) settings.value (SETTINGS_CURVE_POINT_SHAPE,
                                                   DEFAULT_POINT_SHAPE_AXIS).toInt();
-  int radius = settings.value (SETTINGS_CURVE_STYLE_POINT_RADIUS,
+  int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
                                DEFAULT_POINT_RADIUS).toInt();
-  int pointLineWidth = settings.value (SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH,
+  int pointLineWidth = settings.value (SETTINGS_CURVE_POINT_LINE_WIDTH,
                                        DEFAULT_POINT_LINE_WIDTH).toInt();
-  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_POINT_COLOR,
+  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_POINT_COLOR,
                                                            DEFAULT_POINT_COLOR_AXES).toInt();
   settings.endGroup ();
 
@@ -82,14 +83,18 @@ PointStyle PointStyle::defaultGraphCurve (int index)
                                       POINT_SHAPE_SQUARE};
   shape = pointShapes [index % 4];
 
+  SettingsForGraph settingsForGraph;
+  int indexOneBased = index + 1;
+  QString groupName = settingsForGraph.groupNameForNthCurve (indexOneBased);
+
   // Get settings if available, otherwise use defaults
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-  settings.beginGroup (SETTINGS_GROUP_CURVE_STYLE_GRAPH);
-  int radius = settings.value (SETTINGS_CURVE_STYLE_POINT_RADIUS,
+  settings.beginGroup (groupName);
+  int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
                                DEFAULT_POINT_RADIUS).toInt();
-  int pointLineWidth = settings.value (SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH,
+  int pointLineWidth = settings.value (SETTINGS_CURVE_POINT_LINE_WIDTH,
                                        DEFAULT_POINT_LINE_WIDTH).toInt();
-  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_STYLE_POINT_COLOR,
+  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_POINT_COLOR,
                                                            DEFAULT_POINT_COLOR_GRAPH).toInt();
   settings.endGroup ();
 

@@ -332,6 +332,10 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   layoutYRadius->addWidget (m_editOriginRadius, rowGroup++, COLUMN_1);
 }
 
+void DlgSettingsCoords::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsCoords::createPreview (QGridLayout *layout,
                                        int &row)
 {

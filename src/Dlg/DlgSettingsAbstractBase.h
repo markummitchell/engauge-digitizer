@@ -7,6 +7,7 @@
 class CmdMediator;
 class MainWindow;
 class QComboBox;
+class QHBoxLayout;
 
 /// Abstract base class for all Settings dialogs.
 class DlgSettingsAbstractBase : public QDialog
@@ -23,6 +24,9 @@ public:
 protected:
   /// Provide access to Document information wrapped inside CmdMediator.
   CmdMediator &cmdMediator ();
+
+  /// Let subclass define an optional Save As Default button
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout) = 0;
 
   /// Create dialog-specific panel to which base class will add Ok and Cancel buttons.
   virtual QWidget *createSubPanel () = 0;

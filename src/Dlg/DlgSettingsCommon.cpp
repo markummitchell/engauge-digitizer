@@ -62,6 +62,10 @@ void DlgSettingsCommon::createControls (QGridLayout *layout,
   layout->addWidget (m_spinExtraPrecision, row++, 2);
 }
 
+void DlgSettingsCommon::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 QWidget *DlgSettingsCommon::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCommon::createSubPanel";

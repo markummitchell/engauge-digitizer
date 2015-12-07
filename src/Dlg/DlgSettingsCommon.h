@@ -17,6 +17,7 @@ public:
   DlgSettingsCommon(MainWindow &mainWindow);
   virtual ~DlgSettingsCommon();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 

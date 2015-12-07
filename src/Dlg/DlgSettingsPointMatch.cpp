@@ -116,6 +116,10 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbCandidatePointColor, row++, 2);
 }
 
+void DlgSettingsPointMatch::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
                                            int &row)
 {

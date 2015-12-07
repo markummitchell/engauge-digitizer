@@ -95,6 +95,10 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbLineColor, row++, 2);
 }
 
+void DlgSettingsAxesChecker::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsAxesChecker::createPoints ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createPoints";

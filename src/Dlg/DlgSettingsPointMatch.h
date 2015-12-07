@@ -24,6 +24,7 @@ public:
   DlgSettingsPointMatch(MainWindow &mainWindow);
   virtual ~DlgSettingsPointMatch();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 

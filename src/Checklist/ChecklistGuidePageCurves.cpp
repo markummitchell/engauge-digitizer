@@ -5,6 +5,7 @@
 #include <QHeaderView>
 #include <QRadioButton>
 #include <QTableWidget>
+#include "SettingsForGraph.h"
 
 const int FIRST_COL = 0;
 const int NUM_COL = 1;
@@ -30,7 +31,11 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves() :
                  WHATS_THIS_CURVE);
   }
 
-  m_edit [0]->setText (DEFAULT_GRAPH_CURVE_NAME); // Simple default name
+  SettingsForGraph settingsForGraph;
+  QString curveName = settingsForGraph.defaultCurveName (1,
+                                                         DEFAULT_GRAPH_CURVE_NAME);
+
+  m_edit [0]->setText (curveName);
 
   addHtml ("<p>&nbsp;</p>");
 

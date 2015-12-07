@@ -5,13 +5,18 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QCheckBox>
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
 #include <QListView>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
+#include <QSpacerItem>
 #include "QtToString.h"
+#include "Settings.h"
+#include "SettingsForGraph.h"
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("Curve Add/Remove",
@@ -94,12 +99,24 @@ void DlgSettingsCurveAddRemove::createListCurves (QGridLayout *layout,
            this, SLOT (slotSelectionChanged (QItemSelection, QItemSelection)));
 }
 
+void DlgSettingsCurveAddRemove::createOptionalSaveDefault (QHBoxLayout *layout)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createOptionalSaveDefault";
+
+  m_btnSaveDefault = new QPushButton ("Save As Default");
+  m_btnSaveDefault->setWhatsThis (tr ("Save the curve names for use as defaults for future graph curves."));
+  connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
+  layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
+
+  QSpacerItem *spacer = new QSpacerItem (40, 2);
+  layout->addItem (spacer);
+}
+
 QWidget *DlgSettingsCurveAddRemove::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createSubPanel";
 
   const int EMPTY_COLUMN_WIDTH = 30;
-  const int EMPTY_ROW_HEIGHT = 40;
 
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
@@ -115,11 +132,6 @@ QWidget *DlgSettingsCurveAddRemove::createSubPanel ()
   layout->setColumnStretch (2, 1); // Remove
   layout->setColumnStretch (3, 0); // Empty last column
   layout->setColumnMinimumWidth (3, EMPTY_COLUMN_WIDTH);
-
-  layout->setRowStretch (0, 0); // Empty first row
-  layout->setRowMinimumHeight (0, EMPTY_ROW_HEIGHT);
-  layout->setRowStretch (row, 0); // Empty last row
-  layout->setRowMinimumHeight (row, EMPTY_ROW_HEIGHT);
 
   return subPanel;
 }
@@ -239,7 +251,7 @@ QString DlgSettingsCurveAddRemove::nextCurveName () const
 
   }
 
-  // New curve name
+  // New curve name computed from previous curve name
   QString curveNameNext;
   if (curveNameBefore.isEmpty () && !curveNameAfter.isEmpty () && endsWithNumber (curveNameAfter)) {
 
@@ -288,6 +300,12 @@ QString DlgSettingsCurveAddRemove::nextCurveName () const
       }
     }
   }
+
+  // Curve name from settings takes precedence
+  SettingsForGraph settingsForGraph;
+  int indexOneBasedNext = numItems + 1;
+  curveNameNext = settingsForGraph.defaultCurveName (indexOneBasedNext,
+                                                     curveNameNext);
 
   // At this point we have curveNameNext which does not conflict with curveNameBefore or
   // curveNameAfter, but it may in rare cases conflict with some other curve name. We keep
@@ -394,6 +412,30 @@ void DlgSettingsCurveAddRemove::slotRemove ()
   }
 
   updateControls();
+}
+
+void DlgSettingsCurveAddRemove::slotSaveDefault()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::slotSaveDefault";
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+
+  for (int row = 0; row < m_curveNameList->rowCount (); row++) {
+
+    QModelIndex idxCurrent = m_curveNameList->index (row, 0);
+
+    QString curveNameCurrent = m_curveNameList->data (idxCurrent).toString ();
+
+    int indexOneBased = row + 1;
+
+    SettingsForGraph settingsForGraph;
+    QString groupName = settingsForGraph.groupNameForNthCurve (indexOneBased);
+
+    settings.beginGroup (groupName);
+    settings.setValue (SETTINGS_CURVE_NAME,
+                       curveNameCurrent);
+    settings.endGroup ();
+  }
 }
 
 void DlgSettingsCurveAddRemove::slotSelectionChanged (QItemSelection, QItemSelection)

@@ -29,6 +29,7 @@ public:
   DlgSettingsColorFilter(MainWindow &mainWindow);
   virtual ~DlgSettingsColorFilter();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
 

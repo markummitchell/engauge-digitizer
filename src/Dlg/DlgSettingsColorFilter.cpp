@@ -101,6 +101,10 @@ void DlgSettingsColorFilter::createControls (QGridLayout *layout, int &row)
   layout->addWidget (m_btnValue, row++, 1);
 }
 
+void DlgSettingsColorFilter::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsColorFilter::createPreview (QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::createPreview";

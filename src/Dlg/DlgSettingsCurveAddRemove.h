@@ -20,6 +20,7 @@ public:
   DlgSettingsCurveAddRemove(MainWindow &mainWindow);
   virtual ~DlgSettingsCurveAddRemove();
 
+  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   void load (CmdMediator &cmdMediator);
 
@@ -29,6 +30,7 @@ private slots:
                         const QVector<int> &roles);
   void slotNew ();
   void slotRemove ();
+  void slotSaveDefault();
   void slotSelectionChanged (QItemSelection, QItemSelection);
 
 protected:
@@ -51,12 +53,14 @@ private:
   void removeSelectedCurves();
   void updateControls ();
 
+  CurveNameList *m_curveNameList; // Model for m_listCurves
+  QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
+
   QPushButton *m_btnAdd;
   QPushButton *m_btnRemove;
   QPushButton *m_btnRename;
 
-  CurveNameList *m_curveNameList; // Model for m_listCurves
-  QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
+  QPushButton *m_btnSaveDefault;
 };
 
 #endif // DLG_SETTINGS_CURVE_ADD_REMOVE_H

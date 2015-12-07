@@ -61,19 +61,30 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
   QWidget *panelButtons = new QWidget (this);
   QHBoxLayout *buttonLayout = new QHBoxLayout (panelButtons);
 
+  createOptionalSaveDefault(buttonLayout);
+
+  QHBoxLayout *layoutRightSide = new QHBoxLayout;
+
+  QWidget *widgetRightSide = new QWidget;
+  widgetRightSide->setLayout (layoutRightSide);
+  buttonLayout->addWidget (widgetRightSide);
+
+  QSpacerItem *spacerExpanding = new QSpacerItem (40, 5, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  layoutRightSide->addItem (spacerExpanding);
+
   m_btnOk = new QPushButton (tr ("Ok"));
   m_btnOk->setEnabled (false); // Nothing to save initially
-  buttonLayout->addWidget (m_btnOk);
+  layoutRightSide->addWidget (m_btnOk, 0, Qt::AlignRight);
   connect (m_btnOk, SIGNAL (released ()), this, SLOT (slotOk ()));
 
-  QSpacerItem *spacer = new QSpacerItem (40, 5, QSizePolicy::Minimum, QSizePolicy::Minimum);
-  buttonLayout->addItem (spacer);
+  QSpacerItem *spacerFixed = new QSpacerItem (40, 5, QSizePolicy::Fixed, QSizePolicy::Fixed);
+  layoutRightSide->addItem (spacerFixed);
 
   m_btnCancel = new QPushButton (tr ("Cancel"));
-  buttonLayout->addWidget (m_btnCancel);
+  layoutRightSide->addWidget (m_btnCancel, 0, Qt::AlignRight);
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (slotCancel ()));
 
-  panelLayout->addWidget (panelButtons, STRETCH_ON, Qt::AlignRight);
+  panelLayout->addWidget (panelButtons, STRETCH_ON);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
 }
 

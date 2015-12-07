@@ -42,6 +42,10 @@ DlgSettingsGridRemoval::~DlgSettingsGridRemoval()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::~DlgSettingsGridRemoval";
 }
 
+void DlgSettingsGridRemoval::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createPreview";

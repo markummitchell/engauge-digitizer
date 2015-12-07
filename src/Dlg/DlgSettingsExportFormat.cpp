@@ -244,6 +244,10 @@ void DlgSettingsExportFormat::createHeader (QHBoxLayout *layoutMisc)
                 COLUMN_LABEL);
 }
 
+void DlgSettingsExportFormat::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createPreview";

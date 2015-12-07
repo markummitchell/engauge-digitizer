@@ -25,13 +25,15 @@ const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR ("viewSettingsViewsToolBar");
 const QString SETTINGS_VIEW_STATUS_BAR ("viewStatusBar");
 const QString SETTINGS_VIEW_TOOL_TIPS ("viewToolTips");
 
-// CurveStyle group. Note that point shape is ignored for graph curves since it is, usually, unique for each curve
-const QString SETTINGS_CURVE_STYLE_LINE_COLOR ("lineColor");
-const QString SETTINGS_CURVE_STYLE_LINE_CONNECT_AS ("lineConnectAs");
-const QString SETTINGS_CURVE_STYLE_LINE_WIDTH ("lineWIdth");
-const QString SETTINGS_CURVE_STYLE_POINT_COLOR ("pointColor");
-const QString SETTINGS_CURVE_STYLE_POINT_LINE_WIDTH ("pointLineWidth");
-const QString SETTINGS_CURVE_STYLE_POINT_RADIUS ("pointRadius");
-const QString SETTINGS_CURVE_STYLE_POINT_SHAPE ("pointShape");
-const QString SETTINGS_GROUP_CURVE_STYLE_AXES ("CurveStyleAxes");
-const QString SETTINGS_GROUP_CURVE_STYLE_GRAPH ("CurveStyleGraph");
+// Curve styles and names group. Note that point shape is ignored for graph curves since it is, usually, unique for each curve
+const QString SETTINGS_CURVE_LINE_COLOR ("lineColor");
+const QString SETTINGS_CURVE_LINE_CONNECT_AS ("lineConnectAs");
+const QString SETTINGS_CURVE_LINE_WIDTH ("lineWidth");
+const QString SETTINGS_CURVE_NAME ("name");
+const QString SETTINGS_CURVE_POINT_COLOR ("pointColor");
+const QString SETTINGS_CURVE_POINT_LINE_WIDTH ("pointLineWidth");
+const QString SETTINGS_CURVE_POINT_RADIUS ("pointRadius");
+const QString SETTINGS_CURVE_POINT_SHAPE ("pointShape");
+const QString SETTINGS_GROUP_CURVE_AXES ("CurveAxes");
+const QString SETTINGS_GROUP_CURVE_GRAPH ("CurveGraph#");
+const QString SETTINGS_GROUP_CURVE_GRAPH_PLACEHOLDER ("#"); // Field in SETTINGS_GROUP_CURVE_STYLE_GRAPH

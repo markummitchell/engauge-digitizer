@@ -109,6 +109,10 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   connect (m_spinLineWidth, SIGNAL (valueChanged(const QString &)), this, SLOT (slotCursorLineWidth (const QString &)));
 }
 
+void DlgSettingsDigitizeCurve::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+{
+}
+
 void DlgSettingsDigitizeCurve::createPreview (QGridLayout *layout,
                                          int &row)
 {
