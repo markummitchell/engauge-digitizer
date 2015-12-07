@@ -88,15 +88,6 @@ void CmdMediator::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QSt
   return m_document.iterateThroughCurvesPointsGraphs (ftorWithCallback);
 }
 
-bool CmdMediator::loadCurvesFile (const QString &curvesFile)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::loadCurvesFile";
-
-  ENGAUGE_ASSERT (!curvesFile.isEmpty ());
-
-  return m_document.loadCurvesFile (curvesFile);
-}
-
 QPixmap CmdMediator::pixmap () const
 {
   ENGAUGE_ASSERT (m_document.successfulRead ());
