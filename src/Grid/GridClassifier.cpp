@@ -224,7 +224,7 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &coordinateLabel,
             << GNUPLOT_DELIMITER << binCountMax * picketFence [bin] << "\n";
   }
 
-  delete picketFence;
+  delete [] picketFence;
 }
 
 void GridClassifier::dumpGnuplotCorrelations (const QString &coordinateLabel,
