@@ -277,10 +277,7 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth";
 
-  // Iteration accuracy versus number of iterations 8->256, 10->1024, 12->4096. Single pixel accuracy out of
-  // typical image size of 1024x1024 means around 10 iterations gives decent accuracy
-  const int MAX_ITERATIONS = 12;
-
+  // Convert screen coordinates to graph coordinates, in vectors suitable for spline fitting
   vector<double> t;
   vector<SplinePair> xy;
   ExportOrdinalsSmooth ordinalsSmooth;
@@ -290,28 +287,75 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
                                                     t,
                                                     xy);
 
-  // Fit a spline
-  Spline spline (t,
-                 xy);
-
+  // Formatting
   FormatCoordsUnits format;
+  QString dummyXThetaOut;
 
-  // Get value at desired points
-  for (int row = 0; row < xThetaValues.count(); row++) {
+  if (points.count() == 0) {
 
-    double xTheta = xThetaValues.at (row);
-    SplinePair splinePairFound = spline.findSplinePairForFunctionX (xTheta,
-                                                                    MAX_ITERATIONS);
-    double yRadius = splinePairFound.y ();
+    // Since there are no values, leave the field empty
+    for (int row = 0; row < xThetaValues.count(); row++) {
+      *(yRadiusValues [row]) = "";
+    }
 
-    // Save y/radius value for this row into yRadiusValues, after appropriate formatting
-    QString dummyXThetaOut;
-    format.unformattedToFormatted (xTheta,
-                                   yRadius,
-                                   modelCoords,
-                                   dummyXThetaOut,
-                                   *(yRadiusValues [row]),
-                                   transformation);
+  } else if (points.count() == 1 ||
+             points.count() == 2) {
+
+    // Apply the single value everywhere (N=1) or do linear interpolation (N=2)
+    for (int row = 0; row < xThetaValues.count(); row++) {
+
+      double xTheta = xThetaValues.at (row);
+      double yRadius;
+      if (points.count() == 1) {
+        yRadius = xy.at (0).y ();
+      } else {
+        double x0 = xy.at (0).x ();
+        double x1 = xy.at (1).x ();
+        double y0 = xy.at (0).y ();
+        double y1 = xy.at (1).y ();
+        if (x0 == x1) {
+          // Cannot do linear interpolation using two points at the same x value
+          yRadius = xy.at (0).y ();
+        } else {
+          double s = (xTheta - x0) / (x1 - x0);
+          yRadius = (1.0 - s) * y0 + s * y1;
+        }
+      }
+      format.unformattedToFormatted (xTheta,
+                                     yRadius,
+                                     modelCoords,
+                                     dummyXThetaOut,
+                                     *(yRadiusValues [row]),
+                                     transformation);
+    }
+
+  } else {
+
+    // Iteration accuracy versus number of iterations 8->256, 10->1024, 12->4096. Single pixel accuracy out of
+    // typical image size of 1024x1024 means around 10 iterations gives decent accuracy
+    const int MAX_ITERATIONS = 12;
+
+    // Fit a spline
+    Spline spline (t,
+                   xy);
+
+    // Get value at desired points
+    for (int row = 0; row < xThetaValues.count(); row++) {
+
+      double xTheta = xThetaValues.at (row);
+      SplinePair splinePairFound = spline.findSplinePairForFunctionX (xTheta,
+                                                                      MAX_ITERATIONS);
+      double yRadius = splinePairFound.y ();
+
+      // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+      QString dummyXThetaOut;
+      format.unformattedToFormatted (xTheta,
+                                     yRadius,
+                                     modelCoords,
+                                     dummyXThetaOut,
+                                     *(yRadiusValues [row]),
+                                     transformation);
+    }
   }
 }
 
