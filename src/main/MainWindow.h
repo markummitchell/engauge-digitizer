@@ -168,6 +168,9 @@ public:
   /// View for the QImage and QGraphicsItems, without const.
   const GraphicsView &view () const;
 
+  /// Convert wheel events into zoom in/out
+  virtual void wheelEvent(QWheelEvent *event);
+
 private slots:
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);

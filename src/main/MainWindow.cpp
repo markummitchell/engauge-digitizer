@@ -3285,6 +3285,23 @@ const GraphicsView &MainWindow::view () const
   return *m_view;
 }
 
+void MainWindow::wheelEvent(QWheelEvent *event)
+{
+  const int ANGLE_THRESHOLD = 15; // From QWheelEvent documentation
+  const int DELTAS_PER_DEGREE = 8; // From QWheelEvent documentation
+
+  QPoint numDegrees = event->angleDelta() / DELTAS_PER_DEGREE;
+  if (numDegrees.y() >= ANGLE_THRESHOLD) {
+    // Rotated forwards away from the user, which means zoom out
+    slotViewZoomOut();
+    event->ignore();
+  } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
+    // Rotated backwards towards the user, which means zoom in
+    slotViewZoomIn();
+    event->ignore();
+  }
+}
+
 void MainWindow::writeCheckpointToLogFile ()
 {
   // Document

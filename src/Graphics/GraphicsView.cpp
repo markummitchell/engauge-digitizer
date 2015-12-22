@@ -41,14 +41,18 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   horizontalScrollBar()->setCursor (QCursor (Qt::ArrowCursor));
 
   // Skip setStatusTip here since that will overwrite much more important messages, and trigger gratuitous showing of status bar
-  setWhatsThis (tr ("Document\n\n"
+  setWhatsThis (tr ("Main Window\n\n"
                     "After an image file is imported, or an Engauge Document opened, an image appears in this area. "
                     "Points are added to the image.\n\n"
                     "If the image is a graph with two axes and one or more curves, then three axis points must be "
                     "created along those axes. Just put two axis points on one axis and a third axis point on the other "
                     "axis, as far apart as possible for higher accuracy. Then curve points can be added along the curves.\n\n"
                     "If the image is a map with a scale to define length, then two axis points must be "
-                    "created at either end of the scale. Then curve points can be added."));
+                    "created at either end of the scale. Then curve points can be added.\n\n"
+                    "Zooming the image in or out is performed using any of several methods:\n"
+                    "1) rotating the mouse wheel when the cursor is outside of the image\n"
+                    "2) pressing the minus or plus keys\n"
+                    "3) selecting a new zoom setting from the View/Zoom menu"));
 }
 
 GraphicsView::~GraphicsView()
