@@ -226,29 +226,37 @@ void GraphicsView::mousePressEvent (QMouseEvent *event)
 
   QPointF posScreen = mapToScene (event->pos ());
 
-  if (inBounds (posScreen)) {
+  if (!inBounds (posScreen)) {
 
-    emit signalMousePress (posScreen);
-
+    // Set to out-of-bounds value
+    posScreen = QPointF (-1.0, -1.0);
   }
+
+  emit signalMousePress (posScreen);
 
   QGraphicsView::mousePressEvent (event);
 }
 
 void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::mouseReleaseEvent";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::mouseReleaseEvent signalMouseRelease";
 
   QPointF posScreen = mapToScene (event->pos ());
 
-  // Skip if any of the following is true:
-  // 1) Out of bounds
-  // 2) Right click
+  if (!inBounds (posScreen)) {
+
+    // Set to out-of-bounds value
+    posScreen = QPointF (-1.0, -1.0);
+  }
+
+  // Send a signal, unless this is a right click. We still send if out of bounds since
+  // a click-and-drag often ends out of bounds (and user is unlikely to expect different
+  // behavior when endpoint is outside, versus inside, the image boundary)
   int bitFlag = (event->buttons () & Qt::RightButton);
   bool isRightClick = (bitFlag != 0);
 
-  if (inBounds (posScreen) &&
-      !isRightClick) {
+  if (!isRightClick) {
+
 
     emit signalMouseRelease (posScreen);
 

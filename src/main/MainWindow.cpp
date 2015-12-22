@@ -2985,7 +2985,8 @@ void MainWindow::updateAfterMouseRelease ()
 
 void MainWindow::updateControls ()
 {
-//  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateControls";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateControls"
+                              << " selectedItems=" << m_scene->selectedItems().count();
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
