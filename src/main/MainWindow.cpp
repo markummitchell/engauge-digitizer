@@ -2361,7 +2361,17 @@ void MainWindow::slotMouseRelease (QPointF pos)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotMouseRelease";
 
-  m_digitizeStateContext->handleMouseRelease (pos);
+  if (pos.x() < 0 || pos.y() < 0) {
+
+    // Cursor is outside the image so drop this event. However, call updateControls since this may be
+    // a click-and-drag to select in which case the controls (especially Copy and Cut) reflect the new selection
+    updateControls ();
+
+  } else {
+
+    // Cursor is within the image so process this as a normal mouse release
+    m_digitizeStateContext->handleMouseRelease (pos);
+  }
 }
 
 void MainWindow::slotRecentFileAction ()
