@@ -8,17 +8,20 @@
 #include "Xml.h"
 
 MainWindowModel::MainWindowModel() :
+  m_zoomFactor (ZOOM_FILL),
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)
 {
 }
 
 MainWindowModel::MainWindowModel(const MainWindowModel &other) :
+  m_zoomFactor (other.zoomFactor()),
   m_zoomControl (other.zoomControl())
 {
 }
 
 MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
 {
+  m_zoomFactor = other.zoomFactor();
   m_zoomControl = other.zoomControl();
 
   return *this;
@@ -54,6 +57,7 @@ void MainWindowModel::printStream(QString indentation,
 
   indentation += INDENTATION_DELTA;
 
+  str << indentation << "zoomFactor=" << m_zoomFactor << "\n";
   str << indentation << "zoomControl=" << m_zoomControl << "\n";
 }
 
@@ -70,7 +74,17 @@ void MainWindowModel::setZoomControl (ZoomControl zoomControl)
   m_zoomControl = zoomControl;
 }
 
+void MainWindowModel::setZoomFactor (ZoomFactor zoomFactor)
+{
+  m_zoomFactor = zoomFactor;
+}
+
 ZoomControl MainWindowModel::zoomControl () const
 {
   return m_zoomControl;
+}
+
+ZoomFactor MainWindowModel::zoomFactor () const
+{
+  return m_zoomFactor;
 }

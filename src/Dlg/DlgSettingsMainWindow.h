@@ -29,6 +29,7 @@ public:
 
 private slots:
   void slotZoomControl (const QString);
+  void slotZoomFactor (const QString);
 
 protected:
   virtual void handleOk ();
@@ -39,6 +40,7 @@ private:
                        int &row);
   void updateControls();
 
+  QComboBox *m_cmbZoomFactor;
   QComboBox *m_cmbZoomControl;
 
   MainWindowModel *m_modelMainWindowBefore;

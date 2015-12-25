@@ -25,6 +25,7 @@ const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR ("viewSettingsViewsToolBar");
 const QString SETTINGS_VIEW_STATUS_BAR ("viewStatusBar");
 const QString SETTINGS_VIEW_TOOL_TIPS ("viewToolTips");
 const QString SETTINGS_ZOOM_CONTROL ("zoomControl");
+const QString SETTINGS_ZOOM_FACTOR ("zoomFactor");
 
 // Curve styles and names group. Note that point shape is ignored for graph curves since it is, usually, unique for each curve
 const QString SETTINGS_CURVE_LINE_COLOR ("lineColor");

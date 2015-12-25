@@ -1743,7 +1743,9 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   }
 
-  // Main window settings
+  // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25
+  m_mainWindowModel.setZoomFactor ((ZoomFactor) settings.value (SETTINGS_ZOOM_FACTOR,
+                                                                QVariant (ZOOM_FILL)).toInt());
   m_mainWindowModel.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
                                                                   QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
   updateSettingsMainWindow();
@@ -1781,6 +1783,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
+  settings.setValue (SETTINGS_ZOOM_FACTOR, m_mainWindowModel.zoomFactor());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
   settings.endGroup ();
 }
@@ -1822,8 +1825,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
                                               m_cmbCurve->currentText ());
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
-  // Preference for issue #25 is 100% rather than fill mode
-  slotViewZoom1To1 ();
+  // Initial zoom factor
+  slotViewZoom (m_mainWindowModel.zoomFactor());
 
   setCurrentFile(fileName);
   m_statusBar->showTemporaryMessage (temporaryMessage);
