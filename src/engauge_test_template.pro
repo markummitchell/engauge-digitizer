@@ -259,7 +259,10 @@ HEADERS  += \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
     util/Xml.h \
-    include/ZoomFactor.h
+    Zoom/ZoomControl.h \
+    Zoom/ZoomFactor.h \
+    Zoom/ZoomFactorInitial.h\
+    Zoom/ZoomLabels.h
 
 SOURCES += \
     Background/BackgroundImage.cpp \
@@ -488,7 +491,8 @@ SOURCES += \
     View/ViewProfileParameters.cpp \
     View/ViewProfileScale.cpp \
     View/ViewSegmentFilter.cpp \
-    util/Xml.cpp
+    util/Xml.cpp \
+    Zoom/ZoomLabels.cpp
 
 TARGET = ../bin/TEST
 
@@ -538,7 +542,8 @@ INCLUDEPATH += Background \
                Transformation \
                Tutorial \
                util \
-               View
+               View \
+               Zoom
 
 win32-g++* {
 INCLUDEPATH += $$(FFTW_HOME)/include \

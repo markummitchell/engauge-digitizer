@@ -93,6 +93,7 @@
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
+#include "ZoomFactorInitial.h"
 
 // These constants are used for the menu item text AND for tooltip text
 const QString DIGITIZE_ACTION_AXIS_POINT (QObject::tr ("Axis Point Tool"));
@@ -171,6 +172,65 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::applyZoomFactorAfterLoad()
+{
+  ZoomFactor zoomFactor;
+
+  switch (m_mainWindowModel.zoomFactorInitial())
+  {
+    case ZOOM_INITIAL_16_TO_1:
+      zoomFactor = ZOOM_16_TO_1;
+      break;
+
+    case ZOOM_INITIAL_8_TO_1:
+      zoomFactor = ZOOM_8_TO_1;
+      break;
+
+    case ZOOM_INITIAL_4_TO_1:
+      zoomFactor = ZOOM_4_TO_1;
+      break;
+
+    case ZOOM_INITIAL_2_TO_1:
+      zoomFactor = ZOOM_2_TO_1;
+      break;
+
+    case ZOOM_INITIAL_1_TO_1:
+      zoomFactor = ZOOM_1_TO_1;
+      break;
+
+    case ZOOM_INITIAL_1_TO_2:
+      zoomFactor = ZOOM_1_TO_2;
+      break;
+
+    case ZOOM_INITIAL_1_TO_4:
+      zoomFactor = ZOOM_1_TO_4;
+      break;
+
+    case ZOOM_INITIAL_1_TO_8:
+      zoomFactor = ZOOM_1_TO_8;
+      break;
+
+    case ZOOM_INITIAL_1_TO_16:
+      zoomFactor = ZOOM_1_TO_16;
+      break;
+
+    case ZOOM_INITIAL_FILL:
+      zoomFactor = ZOOM_FILL;
+      break;
+
+    case ZOOM_INITIAL_PREVIOUS:
+      zoomFactor = currentZoomFactor();
+      break;
+
+    default:
+      ENGAUGE_ASSERT (false);
+      zoomFactor = currentZoomFactor();
+      break;
+  }
+
+  slotViewZoom (zoomFactor);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -1043,6 +1103,32 @@ void MainWindow::createTutorial ()
   m_tutorialDlg->hide();
 }
 
+ZoomFactor MainWindow::currentZoomFactor () const
+{
+  if (m_actionZoom1To1->isChecked()) {
+    return ZOOM_1_TO_1;
+  } else if (m_actionZoom1To2->isChecked()) {
+    return ZOOM_1_TO_2;
+  } else if (m_actionZoom1To4->isChecked()) {
+    return ZOOM_1_TO_4;
+  } else if (m_actionZoom1To8->isChecked()) {
+    return ZOOM_1_TO_8;
+  } else if (m_actionZoom1To16->isChecked()) {
+    return ZOOM_1_TO_16;
+  } else if (m_actionZoom2To1->isChecked()) {
+    return ZOOM_2_TO_1;
+  } else if (m_actionZoom4To1->isChecked()) {
+    return ZOOM_4_TO_1;
+  } else if (m_actionZoom8To1->isChecked()) {
+    return ZOOM_8_TO_1;
+  } else if (m_actionZoom16To1->isChecked()) {
+    return ZOOM_16_TO_1;
+  } else if (m_actionZoomFill->isChecked()) {
+    return ZOOM_FILL;
+  } else {
+    ENGAUGE_ASSERT (false);
+  }
+}
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
   if (event->type () == QEvent::KeyPress) {
@@ -1743,9 +1829,11 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   }
 
-  // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25
-  m_mainWindowModel.setZoomFactor ((ZoomFactor) settings.value (SETTINGS_ZOOM_FACTOR,
-                                                                QVariant (ZOOM_FILL)).toInt());
+  // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25.
+  slotViewZoom ((ZoomFactor) settings.value (SETTINGS_ZOOM_FACTOR,
+                                             QVariant (ZOOM_1_TO_1)).toInt());
+  m_mainWindowModel.setZoomFactorInitial((ZoomFactorInitial) settings.value (SETTINGS_ZOOM_FACTOR_INITIAL,
+                                                                             QVariant (DEFAULT_ZOOM_FACTOR_INITIAL)).toInt());
   m_mainWindowModel.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
                                                                   QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
   updateSettingsMainWindow();
@@ -1783,8 +1871,9 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
-  settings.setValue (SETTINGS_ZOOM_FACTOR, m_mainWindowModel.zoomFactor());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
+  settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
+  settings.setValue (SETTINGS_ZOOM_FACTOR_INITIAL, m_mainWindowModel.zoomFactorInitial());
   settings.endGroup ();
 }
 
@@ -1825,8 +1914,7 @@ void MainWindow::setupAfterLoad (const QString &fileName,
                                               m_cmbCurve->currentText ());
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
-  // Initial zoom factor
-  slotViewZoom (m_mainWindowModel.zoomFactor());
+  applyZoomFactorAfterLoad(); // Zoom factor must be reapplied after background image is set, to have any effect
 
   setCurrentFile(fileName);
   m_statusBar->showTemporaryMessage (temporaryMessage);

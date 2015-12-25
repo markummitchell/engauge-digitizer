@@ -274,8 +274,10 @@ HEADERS  += \
     src/View/ViewProfileScale.h \
     src/View/ViewSegmentFilter.h \
     src/util/Xml.h \
-    src/include/ZoomControl.h \
-    src/include/ZoomFactor.h
+    src/Zoom/ZoomControl.h \
+    src/Zoom/ZoomFactor.h \
+    src/Zoom/ZoomFactorInitial.h \
+    src/Zoom/ZoomLabels.h
 
 SOURCES += \
     src/Background/BackgroundImage.cpp \
@@ -504,7 +506,8 @@ SOURCES += \
     src/View/ViewProfileParameters.cpp \
     src/View/ViewProfileScale.cpp \
     src/View/ViewSegmentFilter.cpp \
-    src/util/Xml.cpp
+    src/util/Xml.cpp \
+    src/Zoom/ZoomLabels.cpp
 
 TARGET = bin/engauge
 
@@ -554,7 +557,8 @@ INCLUDEPATH += src \
                src/Transformation \
                src/Tutorial \
                src/util \
-               src/View
+               src/View \
+               src/Zoom
 
 win32-g++* {
 INCLUDEPATH += $$(FFTW_HOME)/include \

@@ -51,5 +51,6 @@ extern const QString SETTINGS_VIEW_STATUS_BAR;
 extern const QString SETTINGS_VIEW_TOOL_TIPS;
 extern const QString SETTINGS_ZOOM_CONTROL;
 extern const QString SETTINGS_ZOOM_FACTOR;
+extern const QString SETTINGS_ZOOM_FACTOR_INITIAL;
 
 #endif // SETTINGS_H

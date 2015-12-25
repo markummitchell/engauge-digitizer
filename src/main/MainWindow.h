@@ -9,6 +9,7 @@
 #include <QUrl>
 #include "Transformation.h"
 #include "ZoomControl.h"
+#include "ZoomFactor.h"
 
 class BackgroundStateContext;
 class ChecklistGuide;
@@ -259,6 +260,7 @@ signals:
 private:
   MainWindow();
 
+  void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
   void createActions();
   void createActionsDigitize ();
@@ -282,6 +284,7 @@ private:
   void createStatusBar();
   void createToolBars();
   void createTutorial();
+  ZoomFactor currentZoomFactor () const;
   void fileImport (const QString &fileName);
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);

@@ -4,7 +4,7 @@
 #include "DocumentModelAbstractBase.h"
 #include <QString>
 #include "ZoomControl.h"
-#include "ZoomFactor.h"
+#include "ZoomFactorInitial.h"
 
 class QTextStream;
 
@@ -35,18 +35,19 @@ public:
   void setZoomControl (ZoomControl zoomControl);
 
   /// Set method for initial zoom factor
-  void setZoomFactor (ZoomFactor zoomFactor);
+  void setZoomFactorInitial (ZoomFactorInitial zoomFactorInitial);
 
   /// Get method for zoom control
   ZoomControl zoomControl () const;
 
   /// Get method for initial zoom factor
-  ZoomFactor zoomFactor () const;
+  ZoomFactorInitial zoomFactorInitial () const;
 
 private:
 
-  ZoomFactor m_zoomFactor;
   ZoomControl m_zoomControl;
+  ZoomFactorInitial m_zoomFactorInitial;
+
 };
 
 #endif // MAIN_WINDOW_MODEL_H

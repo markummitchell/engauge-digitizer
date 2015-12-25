@@ -6,23 +6,24 @@
 #include "QtToString.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
+#include "ZoomFactorInitial.h"
 
 MainWindowModel::MainWindowModel() :
-  m_zoomFactor (ZOOM_FILL),
-  m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)
+  m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
+  m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL)
 {
 }
 
 MainWindowModel::MainWindowModel(const MainWindowModel &other) :
-  m_zoomFactor (other.zoomFactor()),
-  m_zoomControl (other.zoomControl())
+  m_zoomControl (other.zoomControl()),
+  m_zoomFactorInitial (other.zoomFactorInitial())
 {
 }
 
 MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
 {
-  m_zoomFactor = other.zoomFactor();
   m_zoomControl = other.zoomControl();
+  m_zoomFactorInitial = other.zoomFactorInitial();
 
   return *this;
 }
@@ -57,8 +58,8 @@ void MainWindowModel::printStream(QString indentation,
 
   indentation += INDENTATION_DELTA;
 
-  str << indentation << "zoomFactor=" << m_zoomFactor << "\n";
   str << indentation << "zoomControl=" << m_zoomControl << "\n";
+  str << indentation << "zoomFactorInitial=" << m_zoomFactorInitial << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -74,9 +75,9 @@ void MainWindowModel::setZoomControl (ZoomControl zoomControl)
   m_zoomControl = zoomControl;
 }
 
-void MainWindowModel::setZoomFactor (ZoomFactor zoomFactor)
+void MainWindowModel::setZoomFactorInitial(ZoomFactorInitial zoomFactorInitial)
 {
-  m_zoomFactor = zoomFactor;
+  m_zoomFactorInitial = zoomFactorInitial;
 }
 
 ZoomControl MainWindowModel::zoomControl () const
@@ -84,7 +85,7 @@ ZoomControl MainWindowModel::zoomControl () const
   return m_zoomControl;
 }
 
-ZoomFactor MainWindowModel::zoomFactor () const
+ZoomFactorInitial MainWindowModel::zoomFactorInitial() const
 {
-  return m_zoomFactor;
+  return m_zoomFactorInitial;
 }

@@ -15,6 +15,8 @@
 #include <QSpinBox>
 #include "Settings.h"
 #include "ZoomControl.h"
+#include "ZoomFactorInitial.h"
+#include "ZoomLabels.h"
 
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   DlgSettingsAbstractBase ("MainWindow",
@@ -43,11 +45,21 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (labelZoomFactor, row, 1);
 
   m_cmbZoomFactor = new QComboBox;
-  m_cmbZoomFactor->addItem ("1:1" , QVariant (ZOOM_1_TO_1));
-  m_cmbZoomFactor->addItem ("Fill", QVariant (ZOOM_FILL));
-  m_cmbZoomFactor->setWhatsThis (tr ("Initial Zoom\n\n"
-                                     "Select the zoom factor to be applied when the first document is loaded"));
-  connect (m_cmbZoomFactor, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomFactor (const QString)));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_16_TO_1  , QVariant (ZOOM_INITIAL_16_TO_1));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_8_TO_1   , QVariant (ZOOM_INITIAL_8_TO_1));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_4_TO_1   , QVariant (ZOOM_INITIAL_4_TO_1));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_2_TO_1   , QVariant (ZOOM_INITIAL_2_TO_1));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_1   , QVariant (ZOOM_INITIAL_1_TO_1));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_2   , QVariant (ZOOM_INITIAL_1_TO_2));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_4   , QVariant (ZOOM_INITIAL_1_TO_4));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_8   , QVariant (ZOOM_INITIAL_1_TO_8));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_16  , QVariant (ZOOM_INITIAL_1_TO_16));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_FILL     , QVariant (ZOOM_INITIAL_FILL));
+  m_cmbZoomFactor->addItem (LABEL_ZOOM_PREVIOUS , QVariant (ZOOM_INITIAL_PREVIOUS));
+  m_cmbZoomFactor->setWhatsThis(tr ("Initial Zoom\n\n"
+                                    "Select the initial zoom factor when a new document is loaded. Either the previous "
+                                    "zoom can be kept, or the specified zoom can be applied."));
+  connect (m_cmbZoomFactor, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomFactor(const QString)));
   layout->addWidget (m_cmbZoomFactor, row++, 2);
 
   QLabel *labelZoomControl = new QLabel ("Zoom control:");
@@ -127,9 +139,10 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_modelMainWindowAfter = new MainWindowModel (modelMainWindow);
 
   // Populate controls
-  int index = m_cmbZoomFactor->findData (m_modelMainWindowAfter->zoomFactor());
+  int index = m_cmbZoomFactor->findData (m_modelMainWindowAfter->zoomFactorInitial());
   m_cmbZoomFactor->setCurrentIndex (index);
-  m_cmbZoomControl->setCurrentIndex (m_modelMainWindowAfter->zoomControl());
+  index = m_cmbZoomControl->findData (m_modelMainWindowAfter->zoomControl());
+  m_cmbZoomControl->setCurrentIndex (index);
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -145,9 +158,9 @@ void DlgSettingsMainWindow::slotZoomControl(const QString)
 
 void DlgSettingsMainWindow::slotZoomFactor(const QString)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotZoomFactor";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWIndow::slotZoomFactor";
 
-  m_modelMainWindowAfter->setZoomFactor ((ZoomFactor) m_cmbZoomFactor->currentData().toInt());
+  m_modelMainWindowAfter->setZoomFactorInitial((ZoomFactorInitial) m_cmbZoomFactor->currentData().toInt());
   updateControls();
 }
 
