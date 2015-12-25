@@ -18,10 +18,12 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QScrollBar>
+#include <QSettings>
 #include <QTabWidget>
 #include <QTextEdit>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include "Settings.h"
 #include "Transformation.h"
 
 const int MIN_INDENT_COLUMN_WIDTH = 20;
@@ -244,8 +246,14 @@ void DlgSettingsExportFormat::createHeader (QHBoxLayout *layoutMisc)
                 COLUMN_LABEL);
 }
 
-void DlgSettingsExportFormat::createOptionalSaveDefault (QHBoxLayout * /* layout */)
+void DlgSettingsExportFormat::createOptionalSaveDefault (QHBoxLayout *layout)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createOptionalSaveDefault";
+
+  m_btnSaveDefault = new QPushButton ("Save As Default");
+  m_btnSaveDefault->setWhatsThis (tr ("Save the settings for use as future defaults."));
+  connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
+  layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
 }
 
 void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
@@ -798,6 +806,37 @@ void DlgSettingsExportFormat::slotRelationsPointsRaw()
   m_modelExportAfter->setPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_RAW);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsExportFormat::slotSaveDefault()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotSaveDefault";
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_EXPORT);
+
+  settings.setValue (SETTINGS_EXPORT_DELIMITER,
+                     QVariant (m_modelExportAfter->delimiter()));
+  settings.setValue (SETTINGS_EXPORT_HEADER,
+                     QVariant (m_modelExportAfter->header()));
+  settings.setValue (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,
+                     QVariant (m_modelExportAfter->layoutFunctions()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_FUNCTIONS,
+                     QVariant (m_modelExportAfter->pointsIntervalFunctions()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_RELATIONS,
+                     QVariant (m_modelExportAfter->pointsIntervalUnitsRelations()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS,
+                     QVariant (m_modelExportAfter->pointsIntervalUnitsFunctions()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS,
+                     QVariant (m_modelExportAfter->pointsIntervalUnitsRelations()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS,
+                     QVariant (m_modelExportAfter->pointsSelectionFunctions()));
+  settings.setValue (SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS,
+                     QVariant (m_modelExportAfter->pointsSelectionFunctions()));
+  settings.setValue (SETTINGS_EXPORT_X_LABEL,
+                     QVariant (m_modelExportAfter->xLabel()));
+
+  settings.endGroup ();
 }
 
 void DlgSettingsExportFormat::slotTabChanged (int)

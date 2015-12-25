@@ -54,6 +54,7 @@ private slots:
   void slotRelationsPointsEvenlySpacedInterval(const QString &);
   void slotRelationsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotRelationsPointsRaw();
+  void slotSaveDefault();
   void slotTabChanged (int);
   void slotXLabel (const QString &);
 
@@ -116,6 +117,8 @@ private:
   QLineEdit *m_editXLabel;
 
   QTextEdit *m_editPreview;
+
+  QPushButton *m_btnSaveDefault;
 
   DocumentModelExportFormat *m_modelExportBefore;
   DocumentModelExportFormat *m_modelExportAfter;

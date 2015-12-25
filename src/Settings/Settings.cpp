@@ -40,6 +40,20 @@ const QString SETTINGS_GROUP_CURVE_GRAPH ("CurveGraph#");
 const QString SETTINGS_GROUP_CURVE_GRAPH_PLACEHOLDER ("#"); // Field in SETTINGS_GROUP_CURVE_STYLE_GRAPH
 
 // General group
-const QString SETTINGS_GROUP_GENERAL ("GeneralEngauge"); // "General" group name is reserved for ungrouped settings
 const QString SETTINGS_GENERAL_CURSOR_SIZE ("cursorSize");
 const QString SETTINGS_GENERAL_EXTRA_PRECISION ("extraPrecision");
+const QString SETTINGS_GROUP_GENERAL ("GeneralEngauge"); // "General" group name is reserved for ungrouped settings
+
+// Export group
+const QString SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED ("curveNamesNotExported");
+const QString SETTINGS_EXPORT_DELIMITER ("delimiter");
+const QString SETTINGS_EXPORT_HEADER ("header");
+const QString SETTINGS_EXPORT_LAYOUT_FUNCTIONS ("layoutFunctions");
+const QString SETTINGS_EXPORT_POINTS_INTERVAL_FUNCTIONS ("pointsIntervalFunctions");
+const QString SETTINGS_EXPORT_POINTS_INTERVAL_RELATIONS ("pointsIntervalRelations");
+const QString SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS ("pointsIntervalUnitsFunctions");
+const QString SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS ("pointsIntervalUnitsRelations");
+const QString SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS ("pointsSelectionFunctions");
+const QString SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS ("pointsSelectionRelations");
+const QString SETTINGS_EXPORT_X_LABEL ("xLabel");
+const QString SETTINGS_GROUP_EXPORT ("Export");

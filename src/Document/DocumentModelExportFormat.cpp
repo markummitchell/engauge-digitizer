@@ -2,8 +2,10 @@
 #include "DocumentModelExportFormat.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QSettings>
 #include <QTextStream>
 #include <QXmlStreamWriter>
+#include "Settings.h"
 #include "Xml.h"
 
 const QStringList DEFAULT_CURVE_NAMES_NOT_EXPORTED;
@@ -13,19 +15,33 @@ const QString DEFAULT_X_LABEL ("x");
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_FUNCTIONS
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_RELATIONS
 
-DocumentModelExportFormat::DocumentModelExportFormat() :
-  m_curveNamesNotExported (DEFAULT_CURVE_NAMES_NOT_EXPORTED),
-  m_pointsSelectionFunctions (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES),
-  m_pointsIntervalFunctions (DEFAULT_POINTS_INTERVAL_FUNCTIONS),
-  m_pointsIntervalUnitsFunctions (DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS),
-  m_pointsSelectionRelations (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE),
-  m_pointsIntervalRelations (DEFAULT_POINTS_INTERVAL_RELATIONS),
-  m_pointsIntervalUnitsRelations (DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS),
-  m_layoutFunctions (EXPORT_LAYOUT_ALL_PER_LINE),
-  m_delimiter (EXPORT_DELIMITER_COMMA),
-  m_header (EXPORT_HEADER_SIMPLE),
-  m_xLabel (DEFAULT_X_LABEL)
+DocumentModelExportFormat::DocumentModelExportFormat()
 {
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (SETTINGS_GROUP_EXPORT);
+
+  m_curveNamesNotExported = settings.value (SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED,
+                                            QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
+  m_delimiter = (ExportDelimiter) settings.value (SETTINGS_EXPORT_DELIMITER,
+                                                  QVariant (EXPORT_DELIMITER_COMMA)).toInt();
+  m_header = (ExportHeader) settings.value (SETTINGS_EXPORT_HEADER,
+                                            QVariant (EXPORT_HEADER_SIMPLE)).toInt();
+  m_layoutFunctions = (ExportLayoutFunctions) settings.value (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,
+                                                              QVariant (EXPORT_LAYOUT_ALL_PER_LINE)).toInt();
+  m_pointsIntervalFunctions = settings.value (SETTINGS_EXPORT_POINTS_INTERVAL_FUNCTIONS,
+                                              QVariant (DEFAULT_POINTS_INTERVAL_FUNCTIONS)).toDouble();
+  m_pointsIntervalRelations = settings.value (SETTINGS_EXPORT_POINTS_INTERVAL_RELATIONS,
+                                              QVariant (DEFAULT_POINTS_INTERVAL_RELATIONS)).toDouble();
+  m_pointsIntervalUnitsFunctions = (ExportPointsIntervalUnits) settings.value (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS,
+                                                                               QVariant (DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS)).toInt();
+  m_pointsIntervalUnitsRelations = (ExportPointsIntervalUnits) settings.value (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS,
+                                                                               QVariant (DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS)).toInt();
+  m_pointsSelectionFunctions = (ExportPointsSelectionFunctions) settings.value (SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS,
+                                                                                QVariant (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES)).toInt();
+  m_pointsSelectionRelations = (ExportPointsSelectionRelations) settings.value (SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS,
+                                                                                QVariant (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE)).toInt();
+  m_xLabel = settings.value (SETTINGS_EXPORT_X_LABEL,
+                             QVariant (DEFAULT_X_LABEL)).toString();
 }
 
 DocumentModelExportFormat::DocumentModelExportFormat (const Document &document) :
