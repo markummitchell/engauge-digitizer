@@ -79,13 +79,14 @@ HEADERS  += \
     src/Cmd/CmdPaste.h \
     src/Cmd/CmdSettingsAxesChecker.h \
     src/Cmd/CmdSettingsColorFilter.h \
-    src/Cmd/CmdSettingsCommon.h \
     src/Cmd/CmdSettingsCoords.h \
     src/Cmd/CmdSettingsCurveAddRemove.h \
     src/Cmd/CmdSettingsCurveProperties.h \
     src/Cmd/CmdSettingsDigitizeCurve.h \
     src/Cmd/CmdSettingsExportFormat.h \
+    src/Cmd/CmdSettingsGeneral.h \
     src/Cmd/CmdSettingsGridRemoval.h \
+    src/Cmd/CmdSettingsMainWindow.h \
     src/Cmd/CmdSettingsPointMatch.h \
     src/Cmd/CmdSettingsSegments.h \
     src/Cmd/CmdStackShadow.h \
@@ -134,13 +135,14 @@ HEADERS  += \
     src/Dlg/DlgSettingsAbstractBase.h \
     src/Dlg/DlgSettingsAxesChecker.h \
     src/Dlg/DlgSettingsColorFilter.h \
-    src/Dlg/DlgSettingsCommon.h \
     src/Dlg/DlgSettingsCoords.h \
     src/Dlg/DlgSettingsCurveAddRemove.h \
     src/Dlg/DlgSettingsCurveProperties.h \
     src/Dlg/DlgSettingsDigitizeCurve.h \
     src/Dlg/DlgSettingsExportFormat.h \
+    src/Dlg/DlgSettingsGeneral.h \
     src/Dlg/DlgSettingsGridRemoval.h \
+    src/Dlg/DlgSettingsMainWindow.h \
     src/Dlg/DlgSettingsPointMatch.h \
     src/Dlg/DlgSettingsSegments.h \
     src/Dlg/DlgValidatorAbstract.h \
@@ -152,10 +154,10 @@ HEADERS  += \
     src/Document/DocumentModelAbstractBase.h \
     src/Document/DocumentModelAxesChecker.h \
     src/Document/DocumentModelColorFilter.h \
-    src/Document/DocumentModelCommon.h \
     src/Document/DocumentModelCoords.h \
     src/Document/DocumentModelDigitizeCurve.h \
     src/Document/DocumentModelExportFormat.h \
+    src/Document/DocumentModelGeneral.h \
     src/Document/DocumentModelGridRemoval.h \
     src/Document/DocumentModelPointMatch.h \
     src/Document/DocumentModelSegments.h \
@@ -214,6 +216,7 @@ HEADERS  += \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/main/MainWindow.h \
+    src/main/MainWindowModel.h \
     src/util/MigrateToVersion6.h \
     src/Mime/MimePoints.h \
     src/util/mmsubs.h \
@@ -271,6 +274,7 @@ HEADERS  += \
     src/View/ViewProfileScale.h \
     src/View/ViewSegmentFilter.h \
     src/util/Xml.h \
+    src/include/ZoomControl.h \
     src/include/ZoomFactor.h
 
 SOURCES += \
@@ -318,13 +322,14 @@ SOURCES += \
     src/Cmd/CmdPaste.cpp \
     src/Cmd/CmdSettingsAxesChecker.cpp \
     src/Cmd/CmdSettingsColorFilter.cpp \
-    src/Cmd/CmdSettingsCommon.cpp \
     src/Cmd/CmdSettingsCoords.cpp \
     src/Cmd/CmdSettingsCurveAddRemove.cpp \
     src/Cmd/CmdSettingsCurveProperties.cpp \
     src/Cmd/CmdSettingsDigitizeCurve.cpp \
     src/Cmd/CmdSettingsExportFormat.cpp \
+    src/Cmd/CmdSettingsGeneral.cpp \
     src/Cmd/CmdSettingsGridRemoval.cpp \
+    src/Cmd/CmdSettingsMainWindow.cpp \
     src/Cmd/CmdSettingsPointMatch.cpp \
     src/Cmd/CmdSettingsSegments.cpp \
     src/Cmd/CmdStackShadow.cpp \
@@ -371,13 +376,14 @@ SOURCES += \
     src/Dlg/DlgSettingsAbstractBase.cpp \
     src/Dlg/DlgSettingsAxesChecker.cpp \
     src/Dlg/DlgSettingsColorFilter.cpp \
-    src/Dlg/DlgSettingsCommon.cpp \
     src/Dlg/DlgSettingsCoords.cpp \
     src/Dlg/DlgSettingsCurveAddRemove.cpp \
     src/Dlg/DlgSettingsCurveProperties.cpp \
     src/Dlg/DlgSettingsDigitizeCurve.cpp \
     src/Dlg/DlgSettingsExportFormat.cpp \
+    src/Dlg/DlgSettingsGeneral.cpp \
     src/Dlg/DlgSettingsGridRemoval.cpp \
+    src/Dlg/DlgSettingsMainWindow.cpp \
     src/Dlg/DlgSettingsPointMatch.cpp \
     src/Dlg/DlgSettingsSegments.cpp \
     src/Dlg/DlgValidatorAbstract.cpp \
@@ -389,10 +395,10 @@ SOURCES += \
     src/Document/DocumentModelAbstractBase.cpp \
     src/Document/DocumentModelAxesChecker.cpp \
     src/Document/DocumentModelColorFilter.cpp \
-    src/Document/DocumentModelCommon.cpp \
     src/Document/DocumentModelCoords.cpp \
     src/Document/DocumentModelDigitizeCurve.cpp \
     src/Document/DocumentModelExportFormat.cpp \
+    src/Document/DocumentModelGeneral.cpp \
     src/Document/DocumentModelGridRemoval.cpp \
     src/Document/DocumentModelPointMatch.cpp \
     src/Document/DocumentModelSegments.cpp \
@@ -446,6 +452,7 @@ SOURCES += \
     src/Logger/LoggerUpload.cpp \
     src/main/main.cpp \
     src/main/MainWindow.cpp \
+    src/main/MainWindowModel.cpp \
     src/util/MigrateToVersion6.cpp \
     src/Mime/MimePoints.cpp \
     src/util/mmsubs.cpp \

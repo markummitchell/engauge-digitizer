@@ -190,7 +190,7 @@ void DigitizeStatePointMatch::handleMouseMove (QPointF posScreen)
                       modelPointMatch.maxPointSize());
 
   const QImage &img = context().mainWindow().imageFiltered();
-  int radiusLimit = context().cmdMediator().document().modelCommon().cursorSize();
+  int radiusLimit = context().cmdMediator().document().modelGeneral().cursorSize();
   bool pixelShouldBeOn = pixelIsOnInImage (img,
                                            posScreen.x(),
                                            posScreen.y(),

@@ -63,13 +63,14 @@ HEADERS  += \
     Cmd/CmdPaste.h \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
-    Cmd/CmdSettingsCommon.h \
     Cmd/CmdSettingsCoords.h \
     Cmd/CmdSettingsCurveAddRemove.h \
     Cmd/CmdSettingsCurveProperties.h \
     Cmd/CmdSettingsDigitizeCurve.h \
     Cmd/CmdSettingsExportFormat.h \
+    Cmd/CmdSettingsGeneral.h \
     Cmd/CmdSettingsGridRemoval.h \
+    Cmd/CmdSettingsMainWindow.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
@@ -118,13 +119,14 @@ HEADERS  += \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
     Dlg/DlgSettingsColorFilter.h \
-    Dlg/DlgSettingsCommon.h \
     Dlg/DlgSettingsCoords.h \
     Dlg/DlgSettingsCurveAddRemove.h \
     Dlg/DlgSettingsCurveProperties.h \
     Dlg/DlgSettingsDigitizeCurve.h \
     Dlg/DlgSettingsExportFormat.h \
+    Dlg/DlgSettingsGeneral.h \
     Dlg/DlgSettingsGridRemoval.h \
+    Dlg/DlgSettingsMainWindow.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
     Dlg/DlgValidatorAbstract.h \
@@ -136,10 +138,10 @@ HEADERS  += \
     Document/DocumentModelAbstractBase.h \
     Document/DocumentModelAxesChecker.h \
     Document/DocumentModelColorFilter.h \
-    Document/DocumentModelCommon.h \
     Document/DocumentModelCoords.h \
     Document/DocumentModelDigitizeCurve.h \
     Document/DocumentModelExportFormat.h \
+    Document/DocumentModelGeneral.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -198,6 +200,7 @@ HEADERS  += \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
     main/MainWindow.h \
+    main/MainWindowModel.h \
     util/MigrateToVersion6.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
@@ -218,6 +221,7 @@ HEADERS  += \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
     Settings/Settings.h \
+    Settings/SettingsForGraph.h \
     Spline/Spline.h \
     Spline/SplineCoeff.h \
     Spline/SplinePair.h \
@@ -302,13 +306,14 @@ SOURCES += \
     Cmd/CmdPaste.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsColorFilter.cpp \
-    Cmd/CmdSettingsCommon.cpp \
     Cmd/CmdSettingsCoords.cpp \
     Cmd/CmdSettingsCurveAddRemove.cpp \
     Cmd/CmdSettingsCurveProperties.cpp \
     Cmd/CmdSettingsDigitizeCurve.cpp \
     Cmd/CmdSettingsExportFormat.cpp \
+    Cmd/CmdSettingsGeneral.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
+    Cmd/CmdSettingsMainWindow.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
@@ -355,13 +360,14 @@ SOURCES += \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
     Dlg/DlgSettingsColorFilter.cpp \
-    Dlg/DlgSettingsCommon.cpp \
     Dlg/DlgSettingsCoords.cpp \
     Dlg/DlgSettingsCurveAddRemove.cpp \
     Dlg/DlgSettingsCurveProperties.cpp \
     Dlg/DlgSettingsDigitizeCurve.cpp \
     Dlg/DlgSettingsExportFormat.cpp \
+    Dlg/DlgSettingsGeneral.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
+    Dlg/DlgSettingsMainWindow.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
     Dlg/DlgValidatorAbstract.cpp \
@@ -373,10 +379,10 @@ SOURCES += \
     Document/DocumentModelAbstractBase.cpp \
     Document/DocumentModelAxesChecker.cpp \
     Document/DocumentModelColorFilter.cpp \
-    Document/DocumentModelCommon.cpp \
     Document/DocumentModelCoords.cpp \
     Document/DocumentModelDigitizeCurve.cpp \
     Document/DocumentModelExportFormat.cpp \
+    Document/DocumentModelGeneral.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
@@ -429,6 +435,7 @@ SOURCES += \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
     main/MainWindow.cpp \
+    main/MainWindowModel.cpp \
     util/MigrateToVersion6.cpp \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
@@ -446,6 +453,7 @@ SOURCES += \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
     Settings/Settings.cpp \
+    Settings/SettingsForGraph.cpp \
     Spline/Spline.cpp \
     Spline/SplineCoeff.cpp \
     Spline/SplinePair.cpp \

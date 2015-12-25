@@ -3,10 +3,12 @@
 
 #include "BackgroundImage.h"
 #include "DigitizeStateAbstractBase.h"
+#include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
 #include <QUrl>
 #include "Transformation.h"
+#include "ZoomControl.h"
 
 class BackgroundStateContext;
 class ChecklistGuide;
@@ -16,21 +18,22 @@ class CurveStyles;
 class DigitizeStateContext;
 class DlgSettingsAxesChecker;
 class DlgSettingsColorFilter;
-class DlgSettingsCommon;
 class DlgSettingsCoords;
 class DlgSettingsCurveAddRemove;
 class DlgSettingsCurveProperties;
 class DlgSettingsDigitizeCurve;
 class DlgSettingsExportFormat;
+class DlgSettingsGeneral;
 class DlgSettingsGridRemoval;
+class DlgSettingsMainWindow;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
 class DocumentModelAxesChecker;
 class DocumentModelColorFilter;
-class DocumentModelCommon;
 class DocumentModelCoords;
 class DocumentModelDigitizeCurve;
 class DocumentModelExportFormat;
+class DocumentModelGeneral;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
@@ -132,9 +135,6 @@ public:
   /// Update with new color filter properties.
   void updateSettingsColorFilter(const DocumentModelColorFilter &modelColorFilter);
 
-  /// Update with new common properties.
-  void updateSettingsCommon(const DocumentModelCommon &modelCommon);
-
   /// Update with new coordinate properties.
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
@@ -150,8 +150,14 @@ public:
   /// Update with new export properties.
   void updateSettingsExportFormat(const DocumentModelExportFormat &modelExport);
 
+  /// Update with new general properties.
+  void updateSettingsGeneral(const DocumentModelGeneral &modelGeneral);
+
   /// Update with new grid removal properties.
   void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
+
+  /// Update with new main window properties.
+  void updateSettingsMainWindow(const MainWindowModel &modelMainWindow);
 
   /// Update with new point match properties.
   void updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch);
@@ -213,13 +219,14 @@ private slots:
   void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
   void slotSettingsColorFilter ();
-  void slotSettingsCommon ();
   void slotSettingsCoords ();
   void slotSettingsCurveAddRemove ();
   void slotSettingsCurveProperties ();
   void slotSettingsDigitizeCurve ();
   void slotSettingsExportFormat ();
+  void slotSettingsGeneral ();
   void slotSettingsGridRemoval ();
+  void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
   void slotUndoTextChanged (const QString &);
@@ -305,6 +312,7 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
+  void updateSettingsMainWindow();
   void updateTransformationAndItsDependencies();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
@@ -384,13 +392,14 @@ private:
   QMenu *m_menuSettings;
   QAction *m_actionSettingsAxesChecker;
   QAction *m_actionSettingsColorFilter;
-  QAction *m_actionSettingsCommon;
   QAction *m_actionSettingsCoords;
   QAction *m_actionSettingsCurveAddRemove;
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsDigitizeCurve;
   QAction *m_actionSettingsExport;
+  QAction *m_actionSettingsGeneral;
   QAction *m_actionSettingsGridRemoval;
+  QAction *m_actionSettingsMainWindow;
   QAction *m_actionSettingsPointMatch;
   QAction *m_actionSettingsSegments;
 
@@ -437,13 +446,14 @@ private:
 
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
   DlgSettingsColorFilter *m_dlgSettingsColorFilter;
-  DlgSettingsCommon *m_dlgSettingsCommon;
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveAddRemove *m_dlgSettingsCurveAddRemove;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsDigitizeCurve * m_dlgSettingsDigitizeCurve;
   DlgSettingsExportFormat *m_dlgSettingsExportFormat;
+  DlgSettingsGeneral *m_dlgSettingsGeneral;
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
+  DlgSettingsMainWindow *m_dlgSettingsMainWindow;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;
 
@@ -451,7 +461,9 @@ private:
   QString m_startingDocumentSnapshot; // Serialized snapshot of document at startup. Included in error report if user approves
   NetworkClient *m_networkClient;
 
-  bool m_isGnuplot;
+  // Main window settings
+  bool m_isGnuplot; // From command line
+  MainWindowModel m_mainWindowModel; // From settings file or DlgSettingsMainWindow
 
   // File names to be loaded at startup. Only one is loaded into the current instance, with external instances created for the other files
   QTimer *m_timerLoadStartupFiles;

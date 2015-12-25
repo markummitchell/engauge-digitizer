@@ -19,10 +19,13 @@ extern const QString SETTINGS_CURVE_POINT_RADIUS;
 extern const QString SETTINGS_CURVE_POINT_SHAPE;
 extern const QString SETTINGS_DIGITIZER;
 extern const QString SETTINGS_ENGAUGE;
+extern const QString SETTINGS_GENERAL_CURSOR_SIZE;
+extern const QString SETTINGS_GENERAL_EXTRA_PRECISION;
 extern const QString SETTINGS_GROUP_CURVE_AXES;
 extern const QString SETTINGS_GROUP_CURVE_GRAPH;
 extern const QString SETTINGS_GROUP_CURVE_GRAPH_PLACEHOLDER;
 extern const QString SETTINGS_GROUP_ENVIRONMENT;
+extern const QString SETTINGS_GROUP_GENERAL;
 extern const QString SETTINGS_GROUP_MAIN_WINDOW;
 extern const QString SETTINGS_HELP_POS;
 extern const QString SETTINGS_HELP_SIZE;
@@ -34,5 +37,6 @@ extern const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR;
 extern const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR;
 extern const QString SETTINGS_VIEW_STATUS_BAR;
 extern const QString SETTINGS_VIEW_TOOL_TIPS;
+extern const QString SETTINGS_ZOOM_CONTROL;
 
 #endif // SETTINGS_H

@@ -172,7 +172,7 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &imag
 {
   QPoint pos = posScreenPlusHalf.toPoint ();
 
-  int maxRadiusForSearch = context().cmdMediator().document().modelCommon().cursorSize();
+  int maxRadiusForSearch = context().cmdMediator().document().modelGeneral().cursorSize();
 
   // Starting at pos, search in ever-widening squares for a non-background pixel
   for (int radius = 0; radius < maxRadiusForSearch; radius++) {

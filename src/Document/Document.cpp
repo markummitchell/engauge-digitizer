@@ -450,8 +450,6 @@ void Document::loadPostVersion5 (QXmlStreamReader &reader)
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
           m_modelAxesChecker.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_COMMON) {
-          m_modelCommon.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
           m_modelCoords.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
@@ -464,6 +462,8 @@ void Document::loadPostVersion5 (QXmlStreamReader &reader)
           // Do nothing. This is the root node
         } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
           m_modelExport.loadXml (reader);
+        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+          m_modelGeneral.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
           m_modelGridRemoval.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
@@ -475,7 +475,7 @@ void Document::loadPostVersion5 (QXmlStreamReader &reader)
          m_modelSegments.loadXml (reader);
         } else {
           m_successfulRead = false;
-          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tokenType);
+          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
           break;
         }
       }
@@ -649,11 +649,6 @@ DocumentModelColorFilter Document::modelColorFilter() const
   return modelColorFilter;
 }
 
-DocumentModelCommon Document::modelCommon() const
-{
-  return m_modelCommon;
-}
-
 DocumentModelCoords Document::modelCoords() const
 {
   return m_modelCoords;
@@ -675,6 +670,11 @@ DocumentModelDigitizeCurve Document::modelDigitizeCurve() const
 DocumentModelExportFormat Document::modelExport() const
 {
   return m_modelExport;
+}
+
+DocumentModelGeneral Document::modelGeneral() const
+{
+  return m_modelGeneral;
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
@@ -766,13 +766,13 @@ void Document::printStream (QString indentation,
 
   m_modelAxesChecker.printStream (indentation,
                                   str);
-  m_modelCommon.printStream (indentation,
-                             str);
   m_modelCoords.printStream (indentation,
                              str);
   m_modelDigitizeCurve.printStream (indentation,
                                     str);
   m_modelExport.printStream (indentation,
+                             str);
+  m_modelGeneral.printStream (indentation,
                              str);
   m_modelGridRemoval.printStream (indentation,
                                   str);
@@ -837,7 +837,7 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 
   // Serialize the Document variables
-  m_modelCommon.saveXml (writer);
+  m_modelGeneral.saveXml (writer);
   m_modelCoords.saveXml (writer);
   m_modelDigitizeCurve.saveXml (writer);
   m_modelExport.saveXml (writer);
@@ -878,11 +878,6 @@ void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFil
   }
 }
 
-void Document::setModelCommon (const DocumentModelCommon &modelCommon)
-{
-  m_modelCommon = modelCommon;
-}
-
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 {
   m_modelCoords = modelCoords;
@@ -911,6 +906,11 @@ void Document::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDig
 void Document::setModelExport(const DocumentModelExportFormat &modelExport)
 {
   m_modelExport = modelExport;
+}
+
+void Document::setModelGeneral (const DocumentModelGeneral &modelGeneral)
+{
+  m_modelGeneral = modelGeneral;
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

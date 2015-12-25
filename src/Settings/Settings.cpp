@@ -24,6 +24,7 @@ const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR ("viewDigitizeToolBar");
 const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR ("viewSettingsViewsToolBar");
 const QString SETTINGS_VIEW_STATUS_BAR ("viewStatusBar");
 const QString SETTINGS_VIEW_TOOL_TIPS ("viewToolTips");
+const QString SETTINGS_ZOOM_CONTROL ("zoomControl");
 
 // Curve styles and names group. Note that point shape is ignored for graph curves since it is, usually, unique for each curve
 const QString SETTINGS_CURVE_LINE_COLOR ("lineColor");
@@ -37,3 +38,8 @@ const QString SETTINGS_CURVE_POINT_SHAPE ("pointShape");
 const QString SETTINGS_GROUP_CURVE_AXES ("CurveAxes");
 const QString SETTINGS_GROUP_CURVE_GRAPH ("CurveGraph#");
 const QString SETTINGS_GROUP_CURVE_GRAPH_PLACEHOLDER ("#"); // Field in SETTINGS_GROUP_CURVE_STYLE_GRAPH
+
+// General group
+const QString SETTINGS_GROUP_GENERAL ("GeneralEngauge"); // "General" group name is reserved for ungrouped settings
+const QString SETTINGS_GENERAL_CURSOR_SIZE ("cursorSize");
+const QString SETTINGS_GENERAL_EXTRA_PRECISION ("extraPrecision");

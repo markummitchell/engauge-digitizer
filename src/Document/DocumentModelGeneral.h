@@ -1,26 +1,26 @@
-#ifndef DOCUMENT_MODEL_COMMON_H
-#define DOCUMENT_MODEL_COMMON_H
+#ifndef DOCUMENT_MODEL_GENERAL_H
+#define DOCUMENT_MODEL_GENERAL_H
 
 #include "DocumentModelAbstractBase.h"
 
 class Document;
 class QTextStream;
 
-/// Model for DlgSettingsCommon and CmdSettingsCommon.
-class DocumentModelCommon : public DocumentModelAbstractBase
+/// Model for DlgSettingsGeneral and CmdSettingsGeneral.
+class DocumentModelGeneral : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DocumentModelCommon();
+  DocumentModelGeneral();
 
   /// Initial constructor from Document.
-  DocumentModelCommon(const Document &document);
+  DocumentModelGeneral(const Document &document);
 
   /// Copy constructor.
-  DocumentModelCommon(const DocumentModelCommon &other);
+  DocumentModelGeneral(const DocumentModelGeneral &other);
 
   /// Assignment constructor.
-  DocumentModelCommon &operator=(const DocumentModelCommon &other);
+  DocumentModelGeneral &operator=(const DocumentModelGeneral &other);
 
   /// Get method for effective cursor size
   int cursorSize() const;
@@ -48,4 +48,4 @@ private:
   int m_extraPrecision;
 };
 
-#endif // DOCUMENT_MODEL_COMMON_H
+#endif // DOCUMENT_MODEL_GENERAL_H

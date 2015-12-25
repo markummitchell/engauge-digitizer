@@ -27,13 +27,14 @@
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
-#include "DlgSettingsCommon.h"
 #include "DlgSettingsCoords.h"
 #include "DlgSettingsCurveAddRemove.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
+#include "DlgSettingsGeneral.h"
 #include "DlgSettingsGridRemoval.h"
+#include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "DocumentSerialize.h"
@@ -504,12 +505,18 @@ void MainWindow::createActionsSettings ()
                                               "Segment fill settings determine how points are generated in the Segment Fill mode"));
   connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
 
-  m_actionSettingsCommon = new QAction (tr ("Common"), this);
-  m_actionSettingsCommon->setStatusTip (tr ("Edit Common settings."));
-  m_actionSettingsCommon->setWhatsThis (tr ("Common Settings\n\n"
-                                            "Common settings are changed to fine tune cursor behavior and output formatting for "
-                                            "multiple modes"));
-  connect (m_actionSettingsCommon, SIGNAL (triggered ()), this, SLOT (slotSettingsCommon ()));
+  m_actionSettingsGeneral = new QAction (tr ("General"), this);
+  m_actionSettingsGeneral->setStatusTip (tr ("Edit General settings."));
+  m_actionSettingsGeneral->setWhatsThis (tr ("General Settings\n\n"
+                                             "General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects "
+                                             "both Color Picker and Point Match modes"));
+  connect (m_actionSettingsGeneral, SIGNAL (triggered ()), this, SLOT (slotSettingsGeneral ()));
+
+  m_actionSettingsMainWindow = new QAction (tr ("Main Window"), this);
+  m_actionSettingsMainWindow->setStatusTip (tr ("Edit Main Window settings."));
+  m_actionSettingsMainWindow->setWhatsThis (tr ("Main Window Settings\n\n"
+                                                "Main window settings affect the user interface and are not specific to any document"));
+  connect (m_actionSettingsMainWindow, SIGNAL (triggered ()), this, SLOT (slotSettingsMainWindow ()));
 }
 
 void MainWindow::createActionsView ()
@@ -634,12 +641,12 @@ void MainWindow::createActionsView ()
 
   m_actionZoomOut = new QAction (tr ("Zoom Out"), this);
   m_actionZoomOut->setStatusTip (tr ("Zoom out"));
-  m_actionZoomOut->setShortcut (tr ("-"));
+  // setShortCut is called by updateSettingsMainWindow
   connect (m_actionZoomOut, SIGNAL (triggered ()), this, SLOT (slotViewZoomOut ()));
 
   m_actionZoomIn = new QAction (tr ("Zoom In"), this);
   m_actionZoomIn->setStatusTip (tr ("Zoom in"));
-  m_actionZoomIn->setShortcut (tr ("+"));
+  // setShortCut is called by updateSettingsMainWindow
   connect (m_actionZoomIn, SIGNAL (triggered ()), this, SLOT (slotViewZoomIn ()));
 
   m_actionZoom16To1 = new QAction (tr ("16:1 (1600%)"), this);
@@ -850,7 +857,9 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
-  m_menuSettings->addAction (m_actionSettingsCommon);
+  m_menuSettings->insertSeparator (m_actionSettingsGeneral);
+  m_menuSettings->addAction (m_actionSettingsGeneral);
+  m_menuSettings->addAction (m_actionSettingsMainWindow);
 
   m_menuHelp = menuBar()->addMenu(tr("&Help"));
   m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
@@ -884,7 +893,8 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
-  m_dlgSettingsCommon = new DlgSettingsCommon (*this);
+  m_dlgSettingsGeneral = new DlgSettingsGeneral (*this);
+  m_dlgSettingsMainWindow = new DlgSettingsMainWindow (*this);
 
   m_dlgSettingsCoords->setVisible (false);
   m_dlgSettingsCurveAddRemove->setVisible (false);
@@ -896,7 +906,8 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
-  m_dlgSettingsCommon->setVisible (false);
+  m_dlgSettingsGeneral->setVisible (false);
+  m_dlgSettingsMainWindow->setVisible (false);
 }
 
 void MainWindow::createScene ()
@@ -1732,6 +1743,11 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   }
 
+  // Main window settings
+  m_mainWindowModel.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
+                                                                  QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
+  updateSettingsMainWindow();
+
   settings.endGroup();
 }
 
@@ -1765,6 +1781,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
+  settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
   settings.endGroup ();
 }
 
@@ -2420,14 +2437,6 @@ void MainWindow::slotSettingsColorFilter ()
   m_dlgSettingsColorFilter->show ();
 }
 
-void MainWindow::slotSettingsCommon ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCommon";
-
-  m_dlgSettingsCommon->load (*m_cmdMediator);
-  m_dlgSettingsCommon->show ();
-}
-
 void MainWindow::slotSettingsCoords ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCoords";
@@ -2474,6 +2483,14 @@ void MainWindow::slotSettingsExportFormat ()
   }
 }
 
+void MainWindow::slotSettingsGeneral ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGeneral";
+
+  m_dlgSettingsGeneral->load (*m_cmdMediator);
+  m_dlgSettingsGeneral->show ();
+}
+
 void MainWindow::slotSettingsGridRemoval ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGridRemoval";
@@ -2496,6 +2513,15 @@ void MainWindow::slotSettingsSegments ()
 
   m_dlgSettingsSegments->load (*m_cmdMediator);
   m_dlgSettingsSegments->show ();
+}
+
+void MainWindow::slotSettingsMainWindow ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsMainWindow";
+
+  m_dlgSettingsMainWindow->loadMainWindowModel (*m_cmdMediator,
+                                                m_mainWindowModel);
+  m_dlgSettingsMainWindow->show ();
 }
 
 void MainWindow::slotUndoTextChanged (const QString &text)
@@ -3042,7 +3068,8 @@ void MainWindow::updateControls ()
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsCommon->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGeneral->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsMainWindow->setEnabled (!m_currentFile.isEmpty ());
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
@@ -3169,13 +3196,6 @@ void MainWindow::updateSettingsCurveAddRemove (const CurvesGraphs &curvesGraphs)
   updateViewsOfSettings();
 }
 
-void MainWindow::updateSettingsCommon(const DocumentModelCommon &modelCommon)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCommon";
-
-  m_cmdMediator->document().setModelCommon(modelCommon);
-}
-
 void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
@@ -3200,11 +3220,44 @@ void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &mod
   m_cmdMediator->document().setModelExport (modelExport);
 }
 
+void MainWindow::updateSettingsGeneral(const DocumentModelGeneral &modelGeneral)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGeneral";
+
+  m_cmdMediator->document().setModelGeneral(modelGeneral);
+}
+
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
 
   m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
+}
+
+void MainWindow::updateSettingsMainWindow()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsMainWindow";
+
+  if (m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_ONLY ||
+      m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) {
+
+    m_actionZoomIn->setShortcut (tr (""));
+    m_actionZoomOut->setShortcut (tr (""));
+
+  } else {
+
+    m_actionZoomIn->setShortcut (tr ("+"));
+    m_actionZoomOut->setShortcut (tr ("-"));
+
+  }
+}
+
+void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsMainWindow";
+
+  m_mainWindowModel = modelMainWindow;
+  updateSettingsMainWindow();
 }
 
 void MainWindow::updateSettingsPointMatch(const DocumentModelPointMatch &modelPointMatch)
@@ -3301,14 +3354,23 @@ void MainWindow::wheelEvent(QWheelEvent *event)
   const int DELTAS_PER_DEGREE = 8; // From QWheelEvent documentation
 
   QPoint numDegrees = event->angleDelta() / DELTAS_PER_DEGREE;
-  if (numDegrees.y() >= ANGLE_THRESHOLD) {
-    // Rotated forwards away from the user, which means zoom out
-    slotViewZoomOut();
-    event->ignore();
-  } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
-    // Rotated backwards towards the user, which means zoom in
-    slotViewZoomIn();
-    event->ignore();
+
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::wheelEvent"
+                              << " degrees=" << numDegrees.y()
+                              << " phase=" << event->phase();
+
+  if (m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
+      m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS) {
+
+    if (numDegrees.y() >= ANGLE_THRESHOLD) {
+      // Rotated forwards away from the user, which means zoom out
+      slotViewZoomOut();
+      event->accept();
+    } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
+      // Rotated backwards towards the user, which means zoom in
+      slotViewZoomIn();
+      event->accept();
+    }
   }
 }
 

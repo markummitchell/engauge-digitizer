@@ -5,10 +5,10 @@
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
 #include "DocumentModelColorFilter.h"
-#include "DocumentModelCommon.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelDigitizeCurve.h"
 #include "DocumentModelExportFormat.h"
+#include "DocumentModelGeneral.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
@@ -130,9 +130,6 @@ public:
   /// Get method for DocumentModelColorFilter.
   DocumentModelColorFilter modelColorFilter() const;
 
-  /// Get method for DocumentModelCommon.
-  DocumentModelCommon modelCommon() const;
-
   /// Get method for DocumentModelCoords.
   DocumentModelCoords modelCoords () const;
 
@@ -144,6 +141,9 @@ public:
 
   /// Get method for DocumentModelExportFormat.
   DocumentModelExportFormat modelExport() const;
+
+  /// Get method for DocumentModelGeneral.
+  DocumentModelGeneral modelGeneral() const;
 
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
@@ -201,9 +201,6 @@ public:
   /// Set method for DocumentModelColorFilter.
   void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
 
-  /// Set method for DocumentModelCommon.
-  void setModelCommon (const DocumentModelCommon &modelCommon);
-
   /// Set method for DocumentModelCoords.
   void setModelCoords (const DocumentModelCoords &modelCoords);
 
@@ -215,6 +212,9 @@ public:
 
   /// Set method for DocumentModelExportFormat.
   void setModelExport(const DocumentModelExportFormat &modelExport);
+
+  /// Set method for DocumentModelGeneral.
+  void setModelGeneral (const DocumentModelGeneral &modelGeneral);
 
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
@@ -257,11 +257,11 @@ private:
   // Model objects for the various settings
   DocumentModelAxesChecker m_modelAxesChecker;
   // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
-  DocumentModelCommon m_modelCommon;
   DocumentModelCoords m_modelCoords;
   // CurveStyles is not here since curve properties are stored inside the Curve class
   DocumentModelDigitizeCurve m_modelDigitizeCurve;
   DocumentModelExportFormat m_modelExport;
+  DocumentModelGeneral m_modelGeneral;
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;
