@@ -376,7 +376,7 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   }
 
   // Save new data
-  m_modelCurveStylesBefore = new CurveStyles (cmdMediator.document());
+  m_modelCurveStylesBefore = new CurveStyles (cmdMediator.curve);
   m_modelCurveStylesAfter = new CurveStyles (cmdMediator.document());
 
   // Populate controls. First load curve name combobox. The curve-specific controls get loaded in slotCurveName

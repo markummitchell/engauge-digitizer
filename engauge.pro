@@ -193,6 +193,8 @@ HEADERS  += \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.h \
     src/Callback/functor.h \
+    src/Graph/Graph.h \
+    src/Graph/GraphContext.h \
     src/Graphics/GraphicsArcItem.h \
     src/Graphics/GraphicsItemType.h \
     src/Graphics/GraphicsLinesForCurve.h \
@@ -431,6 +433,8 @@ SOURCES += \
     src/Format/FormatDegreesMinutesSecondsBase.cpp \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    src/Graph/Graph.cpp \
+    src/Graph/GraphContext.cpp \
     src/Graphics/GraphicsArcItem.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
     src/Graphics/GraphicsLinesForCurves.cpp \
@@ -536,6 +540,7 @@ INCLUDEPATH += src \
                src/Export \
                src/Filter \
                src/Format \
+               src/Graph \
                src/Graphics \
                src/Grid \
                src/Help \

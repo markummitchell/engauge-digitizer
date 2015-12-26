@@ -230,8 +230,8 @@ void DlgSettingsColorFilter::load (CmdMediator &cmdMediator)
   }
 
   // Save new data
-  m_modelColorFilterBefore = new DocumentModelColorFilter (cmdMediator.document());
-  m_modelColorFilterAfter = new DocumentModelColorFilter (cmdMediator.document());
+  m_modelColorFilterBefore = new DocumentModelColorFilter (cmdMediator.document().modelColorFilter());
+  m_modelColorFilterAfter = new DocumentModelColorFilter (cmdMediator.document().modelColorFilter());
 
   // Populate controls. First load curve name combobox. The curve-specific controls get loaded in slotCurveName
   m_cmbCurveName->clear ();

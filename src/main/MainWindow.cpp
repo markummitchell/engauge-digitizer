@@ -403,10 +403,17 @@ void MainWindow::createActionsFile ()
 
   m_actionImport = new QAction(tr ("&Import"), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
-  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image."));
+  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image with a single graph."));
   m_actionImport->setWhatsThis (tr ("New Document\n\n"
-                                    "Creates a new document by importing an image."));
+                                    "Creates a new document by importing an image with a single graph."));
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
+
+  m_actionImportMultigraph = new QAction(tr ("Import &Multigraph"), this);
+  m_actionImportMultigraph->setShortcut (tr ("Ctrl+M"));
+  m_actionImportMultigraph->setStatusTip (tr ("Creates a new document by importing an image with multiple graphs."));
+  m_actionImportMultigraph->setWhatsThis (tr ("New Document\n\n"
+                                              "Creates a new document by importing an image with multiple graphs."));
+  connect (m_actionImportMultigraph, SIGNAL (triggered ()), this, SLOT (slotFileImportMultigraph ()));
 
   m_actionOpen = new QAction(tr ("&Open"), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
@@ -615,6 +622,14 @@ void MainWindow::createActionsView ()
                                                "Show or hide the settings views toolbar. These views graphically show the "
                                                "most important settings."));
   connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
+
+  m_actionViewGraph = new QAction (tr ("Graph"), this);
+  m_actionViewGraph->setCheckable (true);
+  m_actionViewGraph->setChecked (false);
+  m_actionViewGraph->setStatusTip (tr ("Show or hide the graph toolbar."));
+  m_actionViewGraph->setWhatsThis (tr ("View Graph ToolBar\n\n"
+                                       "Show or hide the graph selection toolbar. This toolbar is useful when the document has multiple graphs."));
+  connect (m_actionViewGraph, SIGNAL (triggered ()), this, SLOT (slotViewToolBarGraph()));
 
   m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
   m_actionViewToolTips->setCheckable (true);
@@ -834,6 +849,7 @@ void MainWindow::createMenus()
 
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
+  m_menuFile->addAction (m_actionImportMultigraph);
   m_menuFile->addAction (m_actionOpen);
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
@@ -872,6 +888,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewChecklistGuide);
   m_menuView->addAction (m_actionViewSettingsViews);
+  m_menuView->addAction (m_actionViewGraph);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
@@ -1087,6 +1104,15 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
+
+  // Graph toolbar
+  m_cmbGraph = new QComboBox;
+  m_cmbGraph->setStatusTip (tr ("Currently selected graph"));
+  m_cmbGraph->setWhatsThis (tr ("Selected Graph\n\n"
+                                "Currently selected graph. This is used to switch between graphs in documents with multiple graphs"));
+  m_toolGraph = new QToolBar (tr ("Graph"), this);
+  m_toolGraph->addWidget (m_cmbGraph);
+  addToolBar (m_toolGraph);
 
   // Checklist guide starts out hidden. It will be positioned in settingsRead
   m_dockChecklistGuide = new ChecklistGuide (this);
@@ -1795,6 +1821,12 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionViewSettingsViews->setChecked (viewSettingsViewsToolBar);
   m_toolSettingsViews->setVisible (viewSettingsViewsToolBar);
 
+  // Graph toolbar visibility
+  bool viewGraphToolbar = settings.value (SETTINGS_VIEW_GRAPH_TOOLBAR,
+                                          false).toBool ();
+  m_actionViewGraph->setChecked (viewGraphToolbar);
+  m_toolGraph->setVisible (viewGraphToolbar);
+
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
                                       true).toBool ();
@@ -1870,6 +1902,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
+  settings.setValue (SETTINGS_VIEW_GRAPH_TOOLBAR, m_actionViewGraph->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
@@ -2206,6 +2239,8 @@ void MainWindow::slotFileExport ()
 
 void MainWindow::slotFileImport ()
 {
+  // This method should perform the same steps as MainWindow::slotFileImport, except for the support there for multiple graphs
+
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImport";
 
   if (maybeSave ()) {
@@ -2268,6 +2303,51 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 
   loadImage (fileName,
              image);
+}
+
+void MainWindow::slotFileImportMultigraph ()
+{
+  // This method should perform the same steps as MainWindow::slotFileImport, except for the support here for multiple graphs
+
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportMultigraph";
+
+  if (maybeSave ()) {
+
+    QString filter;
+    QTextStream str (&filter);
+
+    // Compile a list of supported formats into a filter
+    QList<QByteArray>::const_iterator itr;
+    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
+    QStringList supportedImageFormatStrings;
+    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
+      QByteArray arr = *itr;
+      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
+      supportedImageFormatStrings << extensionAsWildcard;
+    }
+#ifdef ENGAUGE_JPEG2000
+    Jpeg2000 jpeg2000;
+    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
+#endif // ENGAUGE_JPEG2000
+
+    supportedImageFormatStrings.sort();
+
+    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
+
+    // Allow selection of files with strange suffixes in case the file extension was changed. Since
+    // the default is the first filter, we add this afterwards (it is the off-nominal case)
+    str << ";; All Files (*.*)";
+
+    QString fileName = QFileDialog::getOpenFileName (this,
+                                                     tr("Import Image"),
+                                                     QDir::currentPath (),
+                                                     filter);
+    if (!fileName.isEmpty ()) {
+
+      fileImport (fileName);
+
+    }
+  }
 }
 
 void MainWindow::slotFileOpen()
@@ -2706,6 +2786,17 @@ void MainWindow::slotViewToolBarDigitize ()
     m_toolDigitize->show();
   } else {
     m_toolDigitize->hide();
+  }
+}
+
+void MainWindow::slotViewToolBarGraph ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGraph";
+
+  if (m_actionViewGraph->isChecked ()) {
+    m_toolGraph->show();
+  } else {
+    m_toolGraph->hide();
   }
 }
 

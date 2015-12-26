@@ -21,6 +21,7 @@ const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");
 const QString SETTINGS_SIZE ("size");
 const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR ("viewBackgroundToolBar");
 const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR ("viewDigitizeToolBar");
+const QString SETTINGS_VIEW_GRAPH_TOOLBAR ("viewGraphToolBar");
 const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR ("viewSettingsViewsToolBar");
 const QString SETTINGS_VIEW_STATUS_BAR ("viewStatusBar");
 const QString SETTINGS_VIEW_TOOL_TIPS ("viewToolTips");
