@@ -199,6 +199,7 @@ private slots:
   void slotFileClose ();
   void slotFileExport ();
   void slotFileImport();
+  void slotFileImportMultigraph();
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
@@ -235,8 +236,9 @@ private slots:
   void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
-  void slotViewToolBarDigitize ();
   void slotViewToolBarChecklistGuide ();
+  void slotViewToolBarDigitize ();
+  void slotViewToolBarGraph ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
@@ -329,6 +331,7 @@ private:
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
+  QAction *m_actionImportMultigraph;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;
@@ -361,6 +364,7 @@ private:
   QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewSettingsViews;
+  QAction *m_actionViewGraph;
   QAction *m_actionViewToolTips;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
@@ -431,6 +435,9 @@ private:
   ViewSegmentFilter *m_viewSegmentFilter;
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
+
+  QComboBox *m_cmbGraph;
+  QToolBar *m_toolGraph;
 
   HelpWindow *m_helpWindow;
   TutorialDlg *m_tutorialDlg;

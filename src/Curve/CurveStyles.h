@@ -6,7 +6,7 @@
 #include <QHash>
 #include <QString>
 
-class Document;
+class Graph;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
@@ -20,7 +20,7 @@ public:
   CurveStyles();
 
   /// Initial constructor from Document.
-  CurveStyles(const Document &document);
+  CurveStyles(const Graph &graph);
 
   /// Copy constructor.
   CurveStyles (const CurveStyles &other);

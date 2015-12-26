@@ -30,11 +30,7 @@
 const int FOUR_BYTES = 4;
 
 Document::Document (const QImage &image) :
-  m_name ("untitled"),
-  m_curveAxes (new Curve (AXIS_CURVE_NAME,
-                          ColorFilterSettings::defaultFilter (),
-                          CurveStyle (LineStyle::defaultAxesCurve(),
-                                      PointStyle::defaultAxesCurve ())))
+  m_name ("untitled")
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::Document"
                               << " image=" << image.width() << "x" << image.height();
@@ -42,19 +38,10 @@ Document::Document (const QImage &image) :
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
   m_pixmap.convertFromImage (image);
-
-  SettingsForGraph settingsForGraph;
-  QString curveName = settingsForGraph.defaultCurveName (1,
-                                                         DEFAULT_GRAPH_CURVE_NAME);
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
-                                            ColorFilterSettings::defaultFilter (),
-                                            CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
-                                                        PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
 }
 
 Document::Document (const QString &fileName) :
-  m_name (fileName),
-  m_curveAxes (0)
+  m_name (fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::Document"
                               << " fileName=" << fileName.toLatin1().data();
@@ -113,10 +100,7 @@ Document::Document (const QString &fileName) :
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
-  m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
-                                             ColorFilterSettings::defaultFilter (),
-                                             CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
-                                                         PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
+  m_graph.addGraphCurveAtEnd  (curveName);
 }
 
 void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -124,19 +108,10 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     QString &identifier,
                                                     double ordinal)
 {
-  Point point (AXIS_CURVE_NAME,
-               posScreen,
-               posGraph,
-               ordinal);
-  m_curveAxes->addPoint (point);
-
-  identifier = point.identifier();
-
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithGeneratedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  m_graph.addPointAxisWithGeneratedIdentifier(posScreen,
+                                              posGraph,
+                                              identifier,
+                                              ordinal);
 }
 
 void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
@@ -144,18 +119,10 @@ void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QString &identifier,
                                                     double ordinal)
 {
-  Point point (AXIS_CURVE_NAME,
-               identifier,
-               posScreen,
-               posGraph,
-               ordinal);
-  m_curveAxes->addPoint (point);
-
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithSpecifiedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  m_graph.addPointAxisWithSpecifiedIdentifier(posScreen,
+                                              posGraph,
+                                              identifier,
+                                              ordinal);
 }
 
 void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -163,17 +130,10 @@ void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                      QString &identifier,
                                                      double ordinal)
 {
-  Point point (curveName,
-               posScreen,
-               ordinal);
-  m_curvesGraphs.addPoint (point);
-
-  identifier = point.identifier();
-
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithGeneratedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  m_graph.addPointGraphWithGeneratedIdentifier(curveName,
+                                               posScreen,
+                                               identifier,
+                                               ordinal);
 }
 
 void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
@@ -181,26 +141,15 @@ void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                                      const QString &identifier,
                                                      double ordinal)
 {
-  Point point (curveName,
-               identifier,
-               posScreen,
-               ordinal);
-  m_curvesGraphs.addPoint (point);
-
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointGraphWithSpecifiedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  m_graph.addPointGraphWithSpecifiedIdentifier(curveName,
+                                               posScreen,
+                                               identifier,
+                                               ordinal);
 }
 
 void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
-  CallbackAddPointsInCurvesGraphs ftor (*this);
-
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackAddPointsInCurvesGraphs::callback);
-
-  curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+  m_graph.addPointsInCurvesGraphs(curvesGraphs);
 }
 
 bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const
@@ -220,20 +169,10 @@ void Document::checkAddPointAxis (const QPointF &posScreen,
                                   bool &isError,
                                   QString &errorMessage)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::checkAddPointAxis"
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
-
-  CallbackCheckAddPointAxis ftor (m_modelCoords,
-                                  posScreen,
-                                  posGraph);
-
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackCheckAddPointAxis::callback);
-  m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
-
-  isError = ftor.isError ();
-  errorMessage = ftor.errorMessage ();
+  m_graph.checkAddPointAxis(posScreen,
+                            posGraph,
+                            isError,
+                            errorMessage);
 }
 
 void Document::checkEditPointAxis (const QString &pointIdentifier,
@@ -242,79 +181,48 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
                                    bool &isError,
                                    QString &errorMessage)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::checkEditPointAxis"
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
-
-  CallbackCheckEditPointAxis ftor (m_modelCoords,
-                                   pointIdentifier,
-                                   posScreen,
-                                   posGraph);
-
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackCheckEditPointAxis::callback);
-  m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
-
-  isError = ftor.isError ();
-  errorMessage = ftor.errorMessage ();
+  m_graph.checkEditPointAxis(pointIdentifier,
+                             posScreen,
+                             posGraph,
+                             isError,
+                             errorMessage);
 }
 
 const Curve &Document::curveAxes () const
 {
-  ENGAUGE_CHECK_PTR (m_curveAxes);
-
-  return *m_curveAxes;
+  return m_graph.curveAxes();
 }
 
 Curve *Document::curveForCurveName (const QString &curveName)
 {
-  if (curveName == AXIS_CURVE_NAME) {
-
-    return m_curveAxes;
-
-  } else {
-
-    return m_curvesGraphs.curveForCurveName (curveName);
-
-  }
+  return m_graph.curveForCurveName(curveName);
 }
 
 const Curve *Document::curveForCurveName (const QString &curveName) const
 {
-  if (curveName == AXIS_CURVE_NAME) {
-
-    return m_curveAxes;
-
-  } else {
-
-    return m_curvesGraphs.curveForCurveName (curveName);
-
-  }
+  return m_graph.curveForCurveName (curveName);
 }
 
 const CurvesGraphs &Document::curvesGraphs () const
 {
-  return m_curvesGraphs;
+  return m_graph.curvesGraphs();
 }
 
 QStringList Document::curvesGraphsNames() const
 {
-  return m_curvesGraphs.curvesGraphsNames();
+  return m_graph.curvesGraphsNames();
 }
 
 int Document::curvesGraphsNumPoints(const QString &curveName) const
 {
-  return m_curvesGraphs.curvesGraphsNumPoints(curveName);
+  return m_graph.curvesGraphsNumPoints(curveName);
 }
 
 void Document::editPointAxis (const QPointF &posGraph,
                               const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::editPointAxis posGraph=("
-                              << posGraph.x () << ", " << posGraph.y () << ") identifier="
-                              << identifier.toLatin1 ().data ();
-
-  m_curveAxes->editPoint (posGraph,
-                          identifier);
+  m_graph.editPointAxis(posGraph,
+                        identifier);
 }
 
 void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
@@ -336,41 +244,29 @@ void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  ENGAUGE_CHECK_PTR (m_curveAxes);
-
-  m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
+  m_graph.iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  ENGAUGE_CHECK_PTR (m_curveAxes);
-
-  m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
+  m_graph.iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void Document::iterateThroughCurveSegments (const QString &curveName,
                                             const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  if (curveName == AXIS_CURVE_NAME) {
-    m_curveAxes->iterateThroughCurveSegments(ftorWithCallback);
-  } else {
-    m_curvesGraphs.iterateThroughCurveSegments(curveName,
-                                               ftorWithCallback);
-  }
+  m_graph.iterateThroughCurveSegments(curveName,
+                                      ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  ENGAUGE_CHECK_PTR (m_curveAxes);
-
-  m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+  m_graph.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  ENGAUGE_CHECK_PTR (m_curveAxes);
-
-  m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+  m_graph.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 void Document::loadImage(QXmlStreamReader &reader)
@@ -448,36 +344,36 @@ void Document::loadPostVersion5 (QXmlStreamReader &reader)
 
         // This is a StartElement, so process it
         QString tag = reader.name().toString();
-        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-          m_modelAxesChecker.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-          m_modelCoords.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-          m_curveAxes = new Curve (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-          m_curvesGraphs.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
-          m_modelDigitizeCurve.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-          // Do nothing. This is the root node
-        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-          m_modelExport.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
-          m_modelGeneral.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-          m_modelGridRemoval.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-          loadImage(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-          m_modelPointMatch.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-         m_modelSegments.loadXml (reader);
-        } else {
-          m_successfulRead = false;
-          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
-          break;
-        }
+//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+//          m_modelAxesChecker.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+//          m_modelCoords.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+//          m_curveAxes = new Curve (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+//          m_curvesGraphs.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
+//          m_modelDigitizeCurve.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+//          // Do nothing. This is the root node
+//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+//          m_modelExport.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+//          m_modelGeneral.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+//          m_modelGridRemoval.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
+//          loadImage(reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+//          m_modelPointMatch.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+//         m_modelSegments.loadXml (reader);
+//        } else {
+//          m_successfulRead = false;
+//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+//          break;
+//        }
       }
     }
   }
@@ -498,224 +394,204 @@ void Document::loadPreVersion6 (QDataStream &str)
   double dbl, versionDouble, radius = 0.0;
   QString st;
 
-  str >> int32; // Magic number
-  str >> versionDouble;
-  str >> st; // Version string
-  str >> int32; // Background
-  str >> m_pixmap;
-  str >> m_name;
-  str >> st; // CurveCmbText selection
-  str >> st; // MeasureCmbText selection
-  str >> int32;
-  m_modelCoords.setCoordsType((CoordsType) int32);
-  if (versionDouble >= 3) {
-    str >> (double &) radius;
-  }
-  m_modelCoords.setOriginRadius(radius);
-  str >> int32;
-  m_modelCoords.setCoordUnitsRadius(COORD_UNITS_NON_POLAR_THETA_NUMBER);
-  m_modelCoords.setCoordUnitsTheta((CoordUnitsPolarTheta) int32);
-  str >> int32;
-  m_modelCoords.setCoordScaleXTheta((CoordScale) int32);
-  str >> int32;
-  m_modelCoords.setCoordScaleYRadius((CoordScale) int32);
-
-  str >> int32;
-  m_modelExport.setDelimiter((ExportDelimiter) int32);
-  str >> int32;
-  m_modelExport.setLayoutFunctions((ExportLayoutFunctions) int32);
-  str >> int32;
-  m_modelExport.setPointsSelectionFunctions((ExportPointsSelectionFunctions) int32);
-  m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
-  str >> int32;
-  m_modelExport.setHeader((ExportHeader) int32);
-  if (versionDouble >= 5.2) {
-    str >> st; // X label
-    if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-      m_modelExport.setXLabel(st);
-    }
-    str >> st; // Theta label
-    if (m_modelCoords.coordsType() == COORDS_TYPE_POLAR) {
-      m_modelExport.setXLabel(st);
-    }
-  }
-
-  // Stable flag in m_modelGridRemoval is set below after points are read in
-  str >> int32; // Remove thin lines parallel to axes
-  str >> dbl; // Thin thickness
-  str >> int32;
-  m_modelGridRemoval.setRemoveDefinedGridLines(int32);
-  str >> int32; // Initialized
-  str >> int32;
-  m_modelGridRemoval.setCountX(int32);
-  str >> int32;
-  m_modelGridRemoval.setCountY(int32);
-  str >> int32;
-  m_modelGridRemoval.setGridCoordDisableX((GridCoordDisable) int32);
-  str >> int32;
-  m_modelGridRemoval.setGridCoordDisableY((GridCoordDisable) int32);
-  str >> dbl;
-  m_modelGridRemoval.setStartX(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setStartY(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setStepX(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setStepY(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setStopX(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setStopY(dbl);
-  str >> dbl;
-  m_modelGridRemoval.setCloseDistance(dbl);
-  str >> int32; // Boolean remove color flag
-  if (versionDouble >= 5) {
-    QColor color;
-    str >> color;
-  } else {
-    str >> int32; // Rgb color
-  }
-  str >> int32; // Foreground threshold low
-  str >> int32; // Foreground threshold high
-  str >> dbl; // Gap separation
-
-  str >> int32; // Grid display is initialized flag
-  str >> int32; // X count
-  str >> int32; // Y count
-  str >> int32; // X parameter
-  str >> int32; // Y parameter
-  str >> dbl; // X start
-  str >> dbl; // Y start
-  str >> dbl; // X step
-  str >> dbl; // Y step
-  str >> dbl; // X stop
-  str >> dbl; // Y stop
-
-  str >> int32;
-  m_modelSegments.setMinLength(int32);
-  str >> int32;
-  m_modelSegments.setPointSeparation(int32);
-  str >> int32;
-  m_modelSegments.setLineWidth(int32);
-  str >> int32;
-  m_modelSegments.setLineColor((ColorPalette) int32);
-
-  str >> int32; // Point separation
-  str >> int32;
-  m_modelPointMatch.setMaxPointSize(int32);
-  str >> int32;
-  m_modelPointMatch.setPaletteColorAccepted((ColorPalette) int32);
-  str >> int32;
-  m_modelPointMatch.setPaletteColorRejected((ColorPalette) int32);
-  if (versionDouble < 4) {
-    m_modelPointMatch.setPaletteColorCandidate(COLOR_PALETTE_BLUE);
-  } else {
-    str >> int32;
-    m_modelPointMatch.setPaletteColorCandidate((ColorPalette) int32);
-  }
-
-  str >> int32; // Discretize method
-  str >> int32; // Intensity threshold low
-  str >> int32; // Intensity threshold high
-  str >> int32; // Foreground threshold low
-  str >> int32; // Foreground threshold high
-  str >> int32; // Hue threshold low
-  str >> int32; // Hue threshold high
-  str >> int32; // Saturation threshold low
-  str >> int32; // Saturation threshold high
-  str >> int32; // Value threshold low
-  str >> int32; // Value threshold high
-
-  m_curveAxes = new Curve (str);
-  Curve curveScale (str); // Scales are dropped on the floor
-  m_curvesGraphs.loadPreVersion6 (str);
-
-  // Information from curves and points can affect some data structures that were (mostly) set earlier
-  if (m_curveAxes->numPoints () > 2) {
-    m_modelGridRemoval.setStable();
-  }
+//  str >> int32; // Magic number
+//  str >> versionDouble;
+//  str >> st; // Version string
+//  str >> int32; // Background
+//  str >> m_pixmap;
+//  str >> m_name;
+//  str >> st; // CurveCmbText selection
+//  str >> st; // MeasureCmbText selection
+//  str >> int32;
+//  m_modelCoords.setCoordsType((CoordsType) int32);
+//  if (versionDouble >= 3) {
+//    str >> (double &) radius;
+//  }
+//  m_modelCoords.setOriginRadius(radius);
+//  str >> int32;
+//  m_modelCoords.setCoordUnitsRadius(COORD_UNITS_NON_POLAR_THETA_NUMBER);
+//  m_modelCoords.setCoordUnitsTheta((CoordUnitsPolarTheta) int32);
+//  str >> int32;
+//  m_modelCoords.setCoordScaleXTheta((CoordScale) int32);
+//  str >> int32;
+//  m_modelCoords.setCoordScaleYRadius((CoordScale) int32);
+//
+//  str >> int32;
+//  m_modelExport.setDelimiter((ExportDelimiter) int32);
+//  str >> int32;
+//  m_modelExport.setLayoutFunctions((ExportLayoutFunctions) int32);
+//  str >> int32;
+//  m_modelExport.setPointsSelectionFunctions((ExportPointsSelectionFunctions) int32);
+//  m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
+//  str >> int32;
+//  m_modelExport.setHeader((ExportHeader) int32);
+//  if (versionDouble >= 5.2) {
+//    str >> st; // X label
+//    if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+//      m_modelExport.setXLabel(st);
+//    }
+//    str >> st; // Theta label
+//    if (m_modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+//      m_modelExport.setXLabel(st);
+//    }
+//  }
+//
+//  // Stable flag in m_modelGridRemoval is set below after points are read in
+//  str >> int32; // Remove thin lines parallel to axes
+//  str >> dbl; // Thin thickness
+//  str >> int32;
+//  m_modelGridRemoval.setRemoveDefinedGridLines(int32);
+//  str >> int32; // Initialized
+//  str >> int32;
+//  m_modelGridRemoval.setCountX(int32);
+//  str >> int32;
+//  m_modelGridRemoval.setCountY(int32);
+//  str >> int32;
+//  m_modelGridRemoval.setGridCoordDisableX((GridCoordDisable) int32);
+//  str >> int32;
+//  m_modelGridRemoval.setGridCoordDisableY((GridCoordDisable) int32);
+//  str >> dbl;
+//  m_modelGridRemoval.setStartX(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setStartY(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setStepX(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setStepY(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setStopX(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setStopY(dbl);
+//  str >> dbl;
+//  m_modelGridRemoval.setCloseDistance(dbl);
+//  str >> int32; // Boolean remove color flag
+//  if (versionDouble >= 5) {
+//    QColor color;
+//    str >> color;
+//  } else {
+//    str >> int32; // Rgb color
+//  }
+//  str >> int32; // Foreground threshold low
+//  str >> int32; // Foreground threshold high
+//  str >> dbl; // Gap separation
+//
+//  str >> int32; // Grid display is initialized flag
+//  str >> int32; // X count
+//  str >> int32; // Y count
+//  str >> int32; // X parameter
+//  str >> int32; // Y parameter
+//  str >> dbl; // X start
+//  str >> dbl; // Y start
+//  str >> dbl; // X step
+//  str >> dbl; // Y step
+//  str >> dbl; // X stop
+//  str >> dbl; // Y stop
+//
+//  str >> int32;
+//  m_modelSegments.setMinLength(int32);
+//  str >> int32;
+//  m_modelSegments.setPointSeparation(int32);
+//  str >> int32;
+//  m_modelSegments.setLineWidth(int32);
+//  str >> int32;
+//  m_modelSegments.setLineColor((ColorPalette) int32);
+//
+//  str >> int32; // Point separation
+//  str >> int32;
+//  m_modelPointMatch.setMaxPointSize(int32);
+//  str >> int32;
+//  m_modelPointMatch.setPaletteColorAccepted((ColorPalette) int32);
+//  str >> int32;
+//  m_modelPointMatch.setPaletteColorRejected((ColorPalette) int32);
+//  if (versionDouble < 4) {
+//    m_modelPointMatch.setPaletteColorCandidate(COLOR_PALETTE_BLUE);
+//  } else {
+//    str >> int32;
+//    m_modelPointMatch.setPaletteColorCandidate((ColorPalette) int32);
+//  }
+//
+//  str >> int32; // Discretize method
+//  str >> int32; // Intensity threshold low
+//  str >> int32; // Intensity threshold high
+//  str >> int32; // Foreground threshold low
+//  str >> int32; // Foreground threshold high
+//  str >> int32; // Hue threshold low
+//  str >> int32; // Hue threshold high
+//  str >> int32; // Saturation threshold low
+//  str >> int32; // Saturation threshold high
+//  str >> int32; // Value threshold low
+//  str >> int32; // Value threshold high
+//
+//  m_curveAxes = new Curve (str);
+//  Curve curveScale (str); // Scales are dropped on the floor
+//  m_curvesGraphs.loadPreVersion6 (str);
+//
+//  // Information from curves and points can affect some data structures that were (mostly) set earlier
+//  if (m_curveAxes->numPoints () > 2) {
+//    m_modelGridRemoval.setStable();
+//  }
 }
 
 DocumentModelAxesChecker Document::modelAxesChecker() const
 {
-  return m_modelAxesChecker;
+  return m_graph.modelAxesChecker();
 }
 
 DocumentModelColorFilter Document::modelColorFilter() const
 {
-  // Construct a curve-specific model
-  DocumentModelColorFilter modelColorFilter(*this);
-
-  return modelColorFilter;
+  return m_graph.modelColorFilter();
 }
 
 DocumentModelCoords Document::modelCoords() const
 {
-  return m_modelCoords;
+  return m_graph.modelCoords();
 }
 
 CurveStyles Document::modelCurveStyles() const
 {
-  // Construct a curve-specific model
-  CurveStyles modelCurveStyles(*this);
-
-  return modelCurveStyles;
+  return m_graph.modelCurveStyles();
 }
 
 DocumentModelDigitizeCurve Document::modelDigitizeCurve() const
 {
-  return m_modelDigitizeCurve;
+  return m_graph.modelDigitizeCurve();
 }
 
 DocumentModelExportFormat Document::modelExport() const
 {
-  return m_modelExport;
+  return m_graph.modelExport();
 }
 
 DocumentModelGeneral Document::modelGeneral() const
 {
-  return m_modelGeneral;
+  return m_graph.modelGeneral();
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
 {
-  return m_modelGridRemoval;
+  return m_graph.modelGridRemoval();
 }
 
 DocumentModelPointMatch Document::modelPointMatch() const
 {
-  return m_modelPointMatch;
+  return m_graph.modelPointMatch();
 }
 
 DocumentModelSegments Document::modelSegments() const
 {
-  return m_modelSegments;
+  return m_graph.modelSegments();
 }
 
 void Document::movePoint (const QString &pointIdentifier,
                           const QPointF &deltaScreen)
 {
-  QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-
-  Curve *curve = curveForCurveName (curveName);
-  curve->movePoint (pointIdentifier,
-                    deltaScreen);
+  m_graph.movePoint (pointIdentifier,
+                     deltaScreen);
 }
 
 int Document::nextOrdinalForCurve (const QString &curveName) const
 {
-  CallbackNextOrdinal ftor (curveName);
-
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackNextOrdinal::callback);
-
-  if (curveName == AXIS_CURVE_NAME) {
-    m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
-  } else {
-    m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
-  }
-
-  return ftor.nextOrdinal ();
+  return m_graph.nextOrdinalForCurve(curveName);
 }
 
 QPixmap Document::pixmap () const
@@ -725,18 +601,12 @@ QPixmap Document::pixmap () const
 
 QPointF Document::positionGraph (const QString &pointIdentifier) const
 {
-  QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-
-  const Curve *curve = curveForCurveName (curveName);
-  return curve->positionGraph (pointIdentifier);
+  return m_graph.positionGraph(pointIdentifier);
 }
 
 QPointF Document::positionScreen (const QString &pointIdentifier) const
 {
-  QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-
-  const Curve *curve = curveForCurveName (curveName);
-  return curve->positionScreen (pointIdentifier);
+  return m_graph.positionScreen(pointIdentifier);
 }
 
 void Document::print () const
@@ -759,27 +629,8 @@ void Document::printStream (QString indentation,
   str << indentation << "name=" << m_name << "\n";
   str << indentation << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
 
-  m_curveAxes->printStream (indentation,
-                            str);
-  m_curvesGraphs.printStream (indentation,
-                              str);
-
-  m_modelAxesChecker.printStream (indentation,
-                                  str);
-  m_modelCoords.printStream (indentation,
-                             str);
-  m_modelDigitizeCurve.printStream (indentation,
-                                    str);
-  m_modelExport.printStream (indentation,
-                             str);
-  m_modelGeneral.printStream (indentation,
-                             str);
-  m_modelGridRemoval.printStream (indentation,
-                                  str);
-  m_modelPointMatch.printStream (indentation,
-                                 str);
-  m_modelSegments.printStream (indentation,
-                               str);
+  m_graph.printStream(indentation,
+                      str);
 }
 
 QString Document::reasonForUnsuccessfulRead () const
@@ -791,16 +642,12 @@ QString Document::reasonForUnsuccessfulRead () const
 
 void Document::removePointAxis (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::removePointAxis identifier=" << identifier.toLatin1 ().data ();
-
-  m_curveAxes->removePoint (identifier);
+  m_graph.removePointAxis(identifier);
 }
 
 void Document::removePointGraph (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::removePointGraph identifier=" << identifier.toLatin1 ().data ();
-
-  m_curvesGraphs.removePoint (identifier);
+  m_graph.removePointGraph(identifier);
 }
 
 void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
@@ -837,29 +684,27 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 
   // Serialize the Document variables
-  m_modelGeneral.saveXml (writer);
-  m_modelCoords.saveXml (writer);
-  m_modelDigitizeCurve.saveXml (writer);
-  m_modelExport.saveXml (writer);
-  m_modelAxesChecker.saveXml (writer);
-  m_modelGridRemoval.saveXml (writer);
-  m_modelPointMatch.saveXml (writer);
-  m_modelSegments.saveXml (writer);
-  m_curveAxes->saveXml (writer);
-  m_curvesGraphs.saveXml (writer);
-  writer.writeEndElement();
+//  m_modelGeneral.saveXml (writer);
+//  m_modelCoords.saveXml (writer);
+//  m_modelDigitizeCurve.saveXml (writer);
+//  m_modelExport.saveXml (writer);
+//  m_modelAxesChecker.saveXml (writer);
+//  m_modelGridRemoval.saveXml (writer);
+//  m_modelPointMatch.saveXml (writer);
+//  m_modelSegments.saveXml (writer);
+//  m_curveAxes->saveXml (writer);
+//  m_curvesGraphs.saveXml (writer);
+//  writer.writeEndElement();
 }
 
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
-
-  m_curvesGraphs = curvesGraphs;
+  m_graph.setCurvesGraphs(curvesGraphs);
 }
 
 void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
-  m_modelAxesChecker = modelAxesChecker;
+  m_graph.setModelAxesChecker(modelAxesChecker);
 }
 
 void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
@@ -880,7 +725,7 @@ void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFil
 
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 {
-  m_modelCoords = modelCoords;
+  m_graph.setModelCoords(modelCoords);
 }
 
 void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
@@ -900,32 +745,32 @@ void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 
 void Document::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {
-  m_modelDigitizeCurve = modelDigitizeCurve;
+  m_graph.setModelDigitizeCurve(modelDigitizeCurve);
 }
 
 void Document::setModelExport(const DocumentModelExportFormat &modelExport)
 {
-  m_modelExport = modelExport;
+  m_graph.setModelExport (modelExport);
 }
 
 void Document::setModelGeneral (const DocumentModelGeneral &modelGeneral)
 {
-  m_modelGeneral = modelGeneral;
+  m_graph.setModelGeneral(modelGeneral);
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
-  m_modelGridRemoval = modelGridRemoval;
+  m_graph.setModelGridRemoval(modelGridRemoval);
 }
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
-  m_modelPointMatch = modelPointMatch;
+  m_graph.setModelPointMatch(modelPointMatch);
 }
 
 void Document::setModelSegments(const DocumentModelSegments &modelSegments)
 {
-  m_modelSegments = modelSegments;
+  setModelSegments (modelSegments);
 }
 
 bool Document::successfulRead () const
@@ -935,8 +780,5 @@ bool Document::successfulRead () const
 
 void Document::updatePointOrdinals (const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::updatePointOrdinals";
-
-  // The graph coordinates of all points in m_curvesGraphs must have already been updated at this point. See applyTransformation
-  m_curvesGraphs.updatePointOrdinals (transformation);
+  m_graph.updatePointOrdinals(transformation);
 }

@@ -2,6 +2,7 @@
 #include "DocumentModelColorFilter.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
+#include "Graph.h"
 #include "Logger.h"
 #include <QTextStream>
 #include <QXmlStreamWriter>
@@ -11,19 +12,19 @@ DocumentModelColorFilter::DocumentModelColorFilter()
 {
 }
 
-DocumentModelColorFilter::DocumentModelColorFilter(const Document &document)
+DocumentModelColorFilter::DocumentModelColorFilter(const Graph &graph)
 {
   // Axis curve
-  const Curve &curveAxes = document.curveAxes();
+  const Curve &curveAxes = graph.curveAxes();
   m_colorFilterSettingsList [AXIS_CURVE_NAME] = curveAxes.colorFilterSettings ();
 
   // Graph curves
-  QStringList graphCurveNames = document.curvesGraphsNames();
+  QStringList graphCurveNames = graph.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
 
     const QString &graphCurveName = *itr;
-    const Curve *graphCurve = document.curveForCurveName(graphCurveName);
+    const Curve *graphCurve = graph.curveForCurveName(graphCurveName);
     m_colorFilterSettingsList [graphCurveName] = graphCurve->colorFilterSettings();
   }
 }

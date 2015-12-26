@@ -2,6 +2,7 @@
 #include "CurveStyles.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
+#include "Graph.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QXmlStreamReader>
@@ -12,20 +13,20 @@ CurveStyles::CurveStyles()
 {
 }
 
-CurveStyles::CurveStyles (const Document &document)
+CurveStyles::CurveStyles (const Graph &graph)
 {
   // Axis curve
-  const Curve &curveAxes = document.curveAxes();
+  const Curve &curveAxes = graph.curveAxes();
   m_curveStyles [AXIS_CURVE_NAME].setLineStyle (curveAxes.curveStyle().lineStyle());
   m_curveStyles [AXIS_CURVE_NAME].setPointStyle (curveAxes.curveStyle().pointStyle());
 
   // Graph curves
-  QStringList graphCurveNames = document.curvesGraphsNames();
+  QStringList graphCurveNames = graph.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
 
     const QString &graphCurveName = *itr;
-    const Curve *graphCurve = document.curveForCurveName(graphCurveName);
+    const Curve *graphCurve = graph.curveForCurveName(graphCurveName);
     m_curveStyles [graphCurveName].setLineStyle (graphCurve->curveStyle().lineStyle());
     m_curveStyles [graphCurveName].setPointStyle (graphCurve->curveStyle().pointStyle());
   }

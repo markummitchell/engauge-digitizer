@@ -1,5 +1,5 @@
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
@@ -12,7 +12,6 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
-#include "Graph.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -26,15 +25,15 @@ class QTransform;
 class QXmlStreamWriter;
 class Transformation;
 
-/// Storage of one imported image and the data attached to that image
-class Document
+/// Storage of data belonging to one graph. There can be one or more graphs in a Document
+class Graph
 {
 public:
-  /// Constructor for imported images and dragged images
-  Document (const QImage &image);
+  /// Single constructor
+  Graph ();
 
-  /// Constructor for opened Documents, and error report files. The specified file is opened and read
-  Document (const QString &fileName);
+  /// Constructor for opened Graphs, and error report files. The specified file is opened and read
+  Graph (const QString &fileName);
 
   /// Add new graph curve to the list of existing graph curves.
   void addGraphCurveAtEnd (const QString &curveName);
@@ -65,7 +64,7 @@ public:
                                              QString &generatedIentifier,
                                              double ordinal);
 
-  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Document.
+  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Graph.
   void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                              const QPointF &posScreen,
                                              const QString &identifier,
@@ -89,6 +88,9 @@ public:
 
   /// Get method for axis curve.
   const Curve &curveAxes () const;
+
+  /// See CurvesGraphs::curveForCurveName, although this also works for AXIS_CURVE_NAME.
+  Curve *curveForCurveName (const QString &curveName);
 
   /// See CurvesGraphs::curveForCurveNames, although this also works for AXIS_CURVE_NAME.
   const Curve *curveForCurveName (const QString &curveName) const;
@@ -122,7 +124,7 @@ public:
   /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
   void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 
-  /// Load the curve names in the specified Engauge file into the current document. This is called near the end of the import process only
+  /// Load the curve names in the specified Engauge file into the current graph. This is called near the end of the import process only
   bool loadCurvesFile (const QString &curvesFile);
 
   /// Get method for DocumentModelAxesChecker.
@@ -162,9 +164,6 @@ public:
   /// Default next ordinal value for specified curve
   int nextOrdinalForCurve (const QString &curveName) const;
 
-  /// Return the image that is being digitized.
-  QPixmap pixmap () const;
-
   /// See Curve::positionGraph.
   QPointF positionGraph (const QString &pointIdentifier) const;
 
@@ -190,7 +189,7 @@ public:
   /// Remove all points identified in the specified CurvesGraphs. See also addPointsInCurvesGraphs
   void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
 
-  /// Save document to xml
+  /// Save graph to xml
   void saveXml (QXmlStreamWriter &writer) const;
 
   /// Let CmdAbstract classes overwrite CurvesGraphs.
@@ -234,25 +233,30 @@ public:
   void updatePointOrdinals (const Transformation &transformation);
 
 private:
-  Document ();
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
-  Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
-  void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
-  void loadImage(QXmlStreamReader &reader);
   void loadPostVersion5 (QXmlStreamReader &reader);
   void loadPreVersion6 (QDataStream &str);
-
-  // Metadata
-  QString m_name;
-  QPixmap m_pixmap;
 
   // Read variables
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
 
-  Graph m_graph;
+  // Curves
+  Curve *m_curveAxes;
+  CurvesGraphs m_curvesGraphs;
 
+  // Model objects for the various settings
+  DocumentModelAxesChecker m_modelAxesChecker;
+  // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
+  DocumentModelCoords m_modelCoords;
+  // CurveStyles is not here since curve properties are stored inside the Curve class
+  DocumentModelDigitizeCurve m_modelDigitizeCurve;
+  DocumentModelExportFormat m_modelExport;
+  DocumentModelGeneral m_modelGeneral;
+  DocumentModelGridRemoval m_modelGridRemoval;
+  DocumentModelPointMatch m_modelPointMatch;
+  DocumentModelSegments m_modelSegments;
 };
 
-#endif // DOCUMENT_H
+#endif // GRAPH_H
