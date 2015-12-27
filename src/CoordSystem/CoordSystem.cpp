@@ -3,13 +3,13 @@
 #include "CallbackCheckEditPointAxis.h"
 #include "CallbackNextOrdinal.h"
 #include "CallbackRemovePointsInCurvesGraphs.h"
+#include "CoordSystem.h"
 #include "Curve.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
-#include "Graph.h"
 #include <iostream>
 #include "Logger.h"
 #include "OrdinalGenerator.h"
@@ -29,74 +29,74 @@
 
 const int FOUR_BYTES = 4;
 
-Graph::Graph () :
+CoordSystem::CoordSystem () :
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           ColorFilterSettings::defaultFilter (),
                           CurveStyle (LineStyle::defaultAxesCurve(),
                                       PointStyle::defaultAxesCurve ())))
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::Graph";
+                          {
+                            LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
 
-  SettingsForGraph settingsForGraph;
-  QString curveName = settingsForGraph.defaultCurveName (1,
-                                                         DEFAULT_GRAPH_CURVE_NAME);
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
-                                            ColorFilterSettings::defaultFilter (),
-                                            CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
-                                                        PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
-}
+                            SettingsForGraph settingsForGraph;
+                            QString curveName = settingsForGraph.defaultCurveName (1,
+                                                                                   DEFAULT_GRAPH_CURVE_NAME);
+                            m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
+                                                                      ColorFilterSettings::defaultFilter (),
+                                                                      CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
+                                                                                  PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
+                          }
 
-void Graph::addGraphCurveAtEnd (const QString &curveName)
-{
-  m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
-                                             ColorFilterSettings::defaultFilter (),
-                                             CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
-                                                         PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
-}
+                                                                      void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
+                                                                      {
+                                                                        m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
+                                                                                                                   ColorFilterSettings::defaultFilter (),
+                                                                                                                   CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
+                                                                                                                               PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
+                                                                      }
 
-void Graph::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
-                                                    const QPointF &posGraph,
-                                                    QString &identifier,
-                                                    double ordinal)
-{
-  Point point (AXIS_CURVE_NAME,
-               posScreen,
-               posGraph,
-               ordinal);
-  m_curveAxes->addPoint (point);
+                                                                                                                   void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
+                                                                                                                                                                          const QPointF &posGraph,
+                                                                                                                                                                          QString &identifier,
+                                                                                                                                                                          double ordinal)
+                                                                                                                   {
+                                                                                                                     Point point (AXIS_CURVE_NAME,
+                                                                                                                                  posScreen,
+                                                                                                                                  posGraph,
+                                                                                                                                  ordinal);
+                                                                                                                     m_curveAxes->addPoint (point);
 
-  identifier = point.identifier();
+                                                                                                                     identifier = point.identifier();
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::addPointAxisWithGeneratedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
-}
+                                                                                                                     LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithGeneratedIdentifier"
+                                                                                                                                                 << " ordinal=" << ordinal
+                                                                                                                                                 << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
+                                                                                                                                                 << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
+                                                                                                                                                 << " identifier=" << identifier.toLatin1 ().data ();
+                                                                                                                   }
 
-void Graph::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
-                                                    const QPointF &posGraph,
-                                                    const QString &identifier,
-                                                    double ordinal)
-{
-  Point point (AXIS_CURVE_NAME,
-               identifier,
-               posScreen,
-               posGraph,
-               ordinal);
-  m_curveAxes->addPoint (point);
+                                                                                                                   void CoordSystem::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
+                                                                                                                                                                          const QPointF &posGraph,
+                                                                                                                                                                          const QString &identifier,
+                                                                                                                                                                          double ordinal)
+                                                                      {
+                                                                        Point point (AXIS_CURVE_NAME,
+                                                                                     identifier,
+                                                                                     posScreen,
+                                                                                     posGraph,
+                                                                                     ordinal);
+                                                                        m_curveAxes->addPoint (point);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::addPointAxisWithSpecifiedIdentifier"
-                              << " ordinal=" << ordinal
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                              << " identifier=" << identifier.toLatin1 ().data ();
-}
+                                                                        LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithSpecifiedIdentifier"
+                                                                                                    << " ordinal=" << ordinal
+                                                                                                    << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
+                                                                                                    << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
+                                                                                                    << " identifier=" << identifier.toLatin1 ().data ();
+                                                                      }
 
-void Graph::addPointGraphWithGeneratedIdentifier (const QString &curveName,
-                                                     const QPointF &posScreen,
-                                                     QString &identifier,
-                                                     double ordinal)
+void CoordSystem::addPointGraphWithGeneratedIdentifier (const QString &curveName,
+                                                        const QPointF &posScreen,
+                                                        QString &identifier,
+                                                        double ordinal)
 {
   Point point (curveName,
                posScreen,
@@ -105,16 +105,16 @@ void Graph::addPointGraphWithGeneratedIdentifier (const QString &curveName,
 
   identifier = point.identifier();
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::addPointGraphWithGeneratedIdentifier"
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointGraphWithGeneratedIdentifier"
                               << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
 
-void Graph::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
-                                                  const QPointF &posScreen,
-                                                  const QString &identifier,
-                                                  double ordinal)
+void CoordSystem::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
+                                                        const QPointF &posScreen,
+                                                        const QString &identifier,
+                                                        double ordinal)
 {
   Point point (curveName,
                identifier,
@@ -122,13 +122,13 @@ void Graph::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                ordinal);
   m_curvesGraphs.addPoint (point);
 
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::addPointGraphWithSpecifiedIdentifier"
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointGraphWithSpecifiedIdentifier"
                               << " ordinal=" << ordinal
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " identifier=" << identifier.toLatin1 ().data ();
 }
 
-void Graph::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
+void CoordSystem::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
   CallbackAddPointsInCurvesGraphs ftor (*this);
 
@@ -138,7 +138,7 @@ void Graph::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-bool Graph::bytesIndicatePreVersion6 (const QByteArray &bytes) const
+bool CoordSystem::bytesIndicatePreVersion6 (const QByteArray &bytes) const
 {
   QByteArray preVersion6MagicNumber;
   preVersion6MagicNumber.resize (FOUR_BYTES);
@@ -150,12 +150,12 @@ bool Graph::bytesIndicatePreVersion6 (const QByteArray &bytes) const
   return (bytes == preVersion6MagicNumber);
 }
 
-void Graph::checkAddPointAxis (const QPointF &posScreen,
-                                  const QPointF &posGraph,
-                                  bool &isError,
-                                  QString &errorMessage)
+void CoordSystem::checkAddPointAxis (const QPointF &posScreen,
+                                     const QPointF &posGraph,
+                                     bool &isError,
+                                     QString &errorMessage)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::checkAddPointAxis"
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::checkAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
 
@@ -171,13 +171,13 @@ void Graph::checkAddPointAxis (const QPointF &posScreen,
   errorMessage = ftor.errorMessage ();
 }
 
-void Graph::checkEditPointAxis (const QString &pointIdentifier,
-                                   const QPointF &posScreen,
-                                   const QPointF &posGraph,
-                                   bool &isError,
-                                   QString &errorMessage)
+void CoordSystem::checkEditPointAxis (const QString &pointIdentifier,
+                                      const QPointF &posScreen,
+                                      const QPointF &posGraph,
+                                      bool &isError,
+                                      QString &errorMessage)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::checkEditPointAxis"
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::checkEditPointAxis"
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
 
   CallbackCheckEditPointAxis ftor (m_modelCoords,
@@ -193,14 +193,14 @@ void Graph::checkEditPointAxis (const QString &pointIdentifier,
   errorMessage = ftor.errorMessage ();
 }
 
-const Curve &Graph::curveAxes () const
+const Curve &CoordSystem::curveAxes () const
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   return *m_curveAxes;
 }
 
-Curve *Graph::curveForCurveName (const QString &curveName)
+Curve *CoordSystem::curveForCurveName (const QString &curveName)
 {
   if (curveName == AXIS_CURVE_NAME) {
 
@@ -213,7 +213,7 @@ Curve *Graph::curveForCurveName (const QString &curveName)
   }
 }
 
-const Curve *Graph::curveForCurveName (const QString &curveName) const
+const Curve *CoordSystem::curveForCurveName (const QString &curveName) const
 {
   if (curveName == AXIS_CURVE_NAME) {
 
@@ -226,25 +226,25 @@ const Curve *Graph::curveForCurveName (const QString &curveName) const
   }
 }
 
-const CurvesGraphs &Graph::curvesGraphs () const
+const CurvesGraphs &CoordSystem::curvesGraphs () const
 {
   return m_curvesGraphs;
 }
 
-QStringList Graph::curvesGraphsNames() const
+QStringList CoordSystem::curvesGraphsNames() const
 {
   return m_curvesGraphs.curvesGraphsNames();
 }
 
-int Graph::curvesGraphsNumPoints(const QString &curveName) const
+int CoordSystem::curvesGraphsNumPoints(const QString &curveName) const
 {
   return m_curvesGraphs.curvesGraphsNumPoints(curveName);
 }
 
-void Graph::editPointAxis (const QPointF &posGraph,
-                              const QString &identifier)
+void CoordSystem::editPointAxis (const QPointF &posGraph,
+                                 const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::editPointAxis posGraph=("
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::editPointAxis posGraph=("
                               << posGraph.x () << ", " << posGraph.y () << ") identifier="
                               << identifier.toLatin1 ().data ();
 
@@ -252,22 +252,22 @@ void Graph::editPointAxis (const QPointF &posGraph,
                           identifier);
 }
 
-void Graph::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
+void CoordSystem::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
-void Graph::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
+void CoordSystem::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curveAxes->iterateThroughCurvePoints (ftorWithCallback);
 }
 
-void Graph::iterateThroughCurveSegments (const QString &curveName,
-                                            const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
+void CoordSystem::iterateThroughCurveSegments (const QString &curveName,
+                                               const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   if (curveName == AXIS_CURVE_NAME) {
     m_curveAxes->iterateThroughCurveSegments(ftorWithCallback);
@@ -277,30 +277,30 @@ void Graph::iterateThroughCurveSegments (const QString &curveName,
   }
 }
 
-void Graph::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
+void CoordSystem::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-void Graph::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
+void CoordSystem::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);
 
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-bool Graph::loadCurvesFile(const QString & /* curvesFile */)
+bool CoordSystem::loadCurvesFile(const QString & /* curvesFile */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::loadCurvesFile";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadCurvesFile";
 
   return true;
 }
 
-void Graph::loadPostVersion5 (QXmlStreamReader &reader)
+void CoordSystem::loadPostVersion5 (QXmlStreamReader &reader)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::loadPostVersion5";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadPostVersion5";
 
   // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
   // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
@@ -315,7 +315,7 @@ void Graph::loadPostVersion5 (QXmlStreamReader &reader)
     if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
         (tokenType == QXmlStreamReader::StartElement)) {
 
-//      generateEmptyPixmap (reader.attributes());
+      //      generateEmptyPixmap (reader.attributes());
     }
 
     // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
@@ -358,11 +358,11 @@ void Graph::loadPostVersion5 (QXmlStreamReader &reader)
           m_modelGridRemoval.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-//          loadImage(reader);
+          //          loadImage(reader);
         } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
           m_modelPointMatch.loadXml (reader);
         } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-         m_modelSegments.loadXml (reader);
+          m_modelSegments.loadXml (reader);
         } else {
           m_successfulRead = false;
           m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
@@ -380,9 +380,9 @@ void Graph::loadPostVersion5 (QXmlStreamReader &reader)
   // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
 }
 
-void Graph::loadPreVersion6 (QDataStream &str)
+void CoordSystem::loadPreVersion6 (QDataStream &str)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::loadPreVersion6";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadPreVersion6";
 
   qint32 int32;
   double dbl, versionDouble, radius = 0.0;
@@ -392,8 +392,8 @@ void Graph::loadPreVersion6 (QDataStream &str)
   str >> versionDouble;
   str >> st; // Version string
   str >> int32; // Background
-//  str >> m_pixmap;
-//  str >> m_name;
+  //  str >> m_pixmap;
+  //  str >> m_name;
   str >> st; // CurveCmbText selection
   str >> st; // MeasureCmbText selection
   str >> int32;
@@ -526,12 +526,12 @@ void Graph::loadPreVersion6 (QDataStream &str)
   }
 }
 
-DocumentModelAxesChecker Graph::modelAxesChecker() const
+DocumentModelAxesChecker CoordSystem::modelAxesChecker() const
 {
   return m_modelAxesChecker;
 }
 
-DocumentModelColorFilter Graph::modelColorFilter() const
+DocumentModelColorFilter CoordSystem::modelColorFilter() const
 {
   // Construct a curve-specific model
   DocumentModelColorFilter modelColorFilter(*this);
@@ -539,12 +539,12 @@ DocumentModelColorFilter Graph::modelColorFilter() const
   return modelColorFilter;
 }
 
-DocumentModelCoords Graph::modelCoords() const
+DocumentModelCoords CoordSystem::modelCoords() const
 {
   return m_modelCoords;
 }
 
-CurveStyles Graph::modelCurveStyles() const
+CurveStyles CoordSystem::modelCurveStyles() const
 {
   // Construct a curve-specific model
   CurveStyles modelCurveStyles(*this);
@@ -552,38 +552,38 @@ CurveStyles Graph::modelCurveStyles() const
   return modelCurveStyles;
 }
 
-DocumentModelDigitizeCurve Graph::modelDigitizeCurve() const
+DocumentModelDigitizeCurve CoordSystem::modelDigitizeCurve() const
 {
   return m_modelDigitizeCurve;
 }
 
-DocumentModelExportFormat Graph::modelExport() const
+DocumentModelExportFormat CoordSystem::modelExport() const
 {
   return m_modelExport;
 }
 
-DocumentModelGeneral Graph::modelGeneral() const
+DocumentModelGeneral CoordSystem::modelGeneral() const
 {
   return m_modelGeneral;
 }
 
-DocumentModelGridRemoval Graph::modelGridRemoval() const
+DocumentModelGridRemoval CoordSystem::modelGridRemoval() const
 {
   return m_modelGridRemoval;
 }
 
-DocumentModelPointMatch Graph::modelPointMatch() const
+DocumentModelPointMatch CoordSystem::modelPointMatch() const
 {
   return m_modelPointMatch;
 }
 
-DocumentModelSegments Graph::modelSegments() const
+DocumentModelSegments CoordSystem::modelSegments() const
 {
   return m_modelSegments;
 }
 
-void Graph::movePoint (const QString &pointIdentifier,
-                          const QPointF &deltaScreen)
+void CoordSystem::movePoint (const QString &pointIdentifier,
+                             const QPointF &deltaScreen)
 {
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
 
@@ -592,7 +592,7 @@ void Graph::movePoint (const QString &pointIdentifier,
                     deltaScreen);
 }
 
-int Graph::nextOrdinalForCurve (const QString &curveName) const
+int CoordSystem::nextOrdinalForCurve (const QString &curveName) const
 {
   CallbackNextOrdinal ftor (curveName);
 
@@ -608,7 +608,7 @@ int Graph::nextOrdinalForCurve (const QString &curveName) const
   return ftor.nextOrdinal ();
 }
 
-QPointF Graph::positionGraph (const QString &pointIdentifier) const
+QPointF CoordSystem::positionGraph (const QString &pointIdentifier) const
 {
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
 
@@ -616,7 +616,7 @@ QPointF Graph::positionGraph (const QString &pointIdentifier) const
   return curve->positionGraph (pointIdentifier);
 }
 
-QPointF Graph::positionScreen (const QString &pointIdentifier) const
+QPointF CoordSystem::positionScreen (const QString &pointIdentifier) const
 {
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
 
@@ -624,7 +624,7 @@ QPointF Graph::positionScreen (const QString &pointIdentifier) const
   return curve->positionScreen (pointIdentifier);
 }
 
-void Graph::print () const
+void CoordSystem::print () const
 {
   QString text;
   QTextStream str (&text);
@@ -634,15 +634,15 @@ void Graph::print () const
   std::cerr << text.toLatin1().data();
 }
 
-void Graph::printStream (QString indentation,
-                            QTextStream &str) const
+void CoordSystem::printStream (QString indentation,
+                               QTextStream &str) const
 {
   str << indentation << "Graph\n";
 
   indentation += INDENTATION_DELTA;
 
-//  str << indentation << "name=" << m_name << "\n";
-//  str << indentation << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
+  //  str << indentation << "name=" << m_name << "\n";
+  //  str << indentation << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
 
   m_curveAxes->printStream (indentation,
                             str);
@@ -658,7 +658,7 @@ void Graph::printStream (QString indentation,
   m_modelExport.printStream (indentation,
                              str);
   m_modelGeneral.printStream (indentation,
-                             str);
+                              str);
   m_modelGridRemoval.printStream (indentation,
                                   str);
   m_modelPointMatch.printStream (indentation,
@@ -667,28 +667,28 @@ void Graph::printStream (QString indentation,
                                str);
 }
 
-QString Graph::reasonForUnsuccessfulRead () const
+QString CoordSystem::reasonForUnsuccessfulRead () const
 {
   ENGAUGE_ASSERT (!m_successfulRead);
 
   return m_reasonForUnsuccessfulRead;
 }
 
-void Graph::removePointAxis (const QString &identifier)
+void CoordSystem::removePointAxis (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::removePointAxis identifier=" << identifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::removePointAxis identifier=" << identifier.toLatin1 ().data ();
 
   m_curveAxes->removePoint (identifier);
 }
 
-void Graph::removePointGraph (const QString &identifier)
+void CoordSystem::removePointGraph (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::removePointGraph identifier=" << identifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::removePointGraph identifier=" << identifier.toLatin1 ().data ();
 
   m_curvesGraphs.removePoint (identifier);
 }
 
-void Graph::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
+void CoordSystem::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
   CallbackRemovePointsInCurvesGraphs ftor (*this);
 
@@ -698,7 +698,7 @@ void Graph::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
-void Graph::saveXml (QXmlStreamWriter &writer) const
+void CoordSystem::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
 
@@ -709,14 +709,14 @@ void Graph::saveXml (QXmlStreamWriter &writer) const
   // Serialize the Document image. That binary data is encoded as base64
   QByteArray array;
   QDataStream str (&array, QIODevice::WriteOnly);
-//  QImage img = m_pixmap.toImage ();
-//  str << img;
+  //  QImage img = m_pixmap.toImage ();
+  //  str << img;
   writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
 
   // Image width and height are explicitly inserted for error reports, since the CDATA is removed
   // but we still want the image size for reconstructing the error(s)
-//  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (img.width()));
-//  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
+  //  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (img.width()));
+  //  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
 
   writer.writeCDATA (array.toBase64 ());
   writer.writeEndElement();
@@ -735,19 +735,19 @@ void Graph::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
-void Graph::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
+void CoordSystem::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::setCurvesGraphs";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::setCurvesGraphs";
 
   m_curvesGraphs = curvesGraphs;
 }
 
-void Graph::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
+void CoordSystem::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
   m_modelAxesChecker = modelAxesChecker;
 }
 
-void Graph::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
+void CoordSystem::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
 {
   // Save the CurveFilter for each Curve
   ColorFilterSettingsList::const_iterator itr;
@@ -763,12 +763,12 @@ void Graph::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter
   }
 }
 
-void Graph::setModelCoords (const DocumentModelCoords &modelCoords)
+void CoordSystem::setModelCoords (const DocumentModelCoords &modelCoords)
 {
   m_modelCoords = modelCoords;
 }
 
-void Graph::setModelCurveStyles(const CurveStyles &modelCurveStyles)
+void CoordSystem::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 {
   // Save the LineStyle and PointStyle for each Curve
   QStringList curveNames = modelCurveStyles.curveNames();
@@ -783,44 +783,44 @@ void Graph::setModelCurveStyles(const CurveStyles &modelCurveStyles)
   }
 }
 
-void Graph::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
+void CoordSystem::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {
   m_modelDigitizeCurve = modelDigitizeCurve;
 }
 
-void Graph::setModelExport(const DocumentModelExportFormat &modelExport)
+void CoordSystem::setModelExport(const DocumentModelExportFormat &modelExport)
 {
   m_modelExport = modelExport;
 }
 
-void Graph::setModelGeneral (const DocumentModelGeneral &modelGeneral)
+void CoordSystem::setModelGeneral (const DocumentModelGeneral &modelGeneral)
 {
   m_modelGeneral = modelGeneral;
 }
 
-void Graph::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
+void CoordSystem::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   m_modelGridRemoval = modelGridRemoval;
 }
 
-void Graph::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
+void CoordSystem::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
   m_modelPointMatch = modelPointMatch;
 }
 
-void Graph::setModelSegments(const DocumentModelSegments &modelSegments)
+void CoordSystem::setModelSegments(const DocumentModelSegments &modelSegments)
 {
   m_modelSegments = modelSegments;
 }
 
-bool Graph::successfulRead () const
+bool CoordSystem::successfulRead () const
 {
   return m_successfulRead;
 }
 
-void Graph::updatePointOrdinals (const Transformation &transformation)
+void CoordSystem::updatePointOrdinals (const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Graph::updatePointOrdinals";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::updatePointOrdinals";
 
   // The graph coordinates of all points in m_curvesGraphs must have already been updated at this point. See applyTransformation
   m_curvesGraphs.updatePointOrdinals (transformation);

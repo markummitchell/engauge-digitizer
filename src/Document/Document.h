@@ -1,6 +1,7 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
+#include "CoordSystemContext.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
@@ -12,13 +13,13 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
-#include "GraphContext.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
 #include <QString>
 #include <QXmlStreamReader>
 
+class CoordSystem;
 class Curve;
 class QByteArray;
 class QImage;
@@ -87,6 +88,9 @@ public:
                            bool &isError,
                            QString &errorMessage);
 
+  /// Currently active CoordSystem
+  const CoordSystem &coordSystem() const;
+
   /// Get method for axis curve.
   const Curve &curveAxes () const;
 
@@ -105,9 +109,6 @@ public:
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
-
-  /// Currently active Graph
-  const Graph &graph() const;
 
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
@@ -254,7 +255,7 @@ private:
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
 
-  GraphContext m_graphContext;
+  CoordSystemContext m_coordSystemContext;
 };
 
 #endif // DOCUMENT_H

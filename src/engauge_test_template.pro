@@ -53,12 +53,12 @@ HEADERS  += \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
     Cmd/CmdAddPointsGraph.h \
+    Cmd/CmdCoordSystem.h \
     Cmd/CmdCopy.h \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
     Cmd/CmdEditPointAxis.h \
     Cmd/CmdFactory.h \
-    Cmd/CmdGraph.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
@@ -85,6 +85,9 @@ HEADERS  += \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
     Coord/CoordSymbol.h \
+    CoordSystem/CoordSystem.h \
+    CoordSystem/CoordSystemContext.h \
+    CoordSystem/CoordSystemInterface.h \
     Coord/CoordUnitsDate.h \
     Coord/CoordUnitsNonPolarTheta.h \
     Coord/CoordUnitsPolarTheta.h \
@@ -178,9 +181,6 @@ HEADERS  += \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     Format/FormatDegreesMinutesSecondsPolarTheta.h \
     Callback/functor.h \
-    Graph/Graph.h \
-    Graph/GraphContext.h \
-    Graph/GraphInterface.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsLinesForCurve.h \
@@ -303,12 +303,12 @@ SOURCES += \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
     Cmd/CmdAddPointsGraph.cpp \
+    Cmd/CmdCoordSystem.cpp \
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
     Cmd/CmdEditPointAxis.cpp \
     Cmd/CmdFactory.cpp \
-    Cmd/CmdGraph.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
@@ -333,6 +333,9 @@ SOURCES += \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
     Coord/CoordSymbol.cpp \
+    CoordSystem/CoordSystem.cpp \
+    CoordSystem/CoordSystemContext.cpp \
+    CoordSystem/CoordSystemInterface.cpp \
     Coord/CoordUnitsDate.cpp \
     Coord/CoordUnitsNonPolarTheta.cpp \
     Coord/CoordUnitsPolarTheta.cpp \
@@ -421,9 +424,6 @@ SOURCES += \
     Format/FormatDegreesMinutesSecondsBase.cpp \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
-    Graph/Graph.cpp \
-    Graph/GraphContext.cpp \
-    Graph/GraphInterface.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
@@ -519,6 +519,7 @@ INCLUDEPATH += Background \
                Cmd \
                Color \
                Coord \
+               CoordSystem \
                Correlation \
                Cursor \
                Curve \
@@ -528,7 +529,6 @@ INCLUDEPATH += Background \
                Export \
                Filter \
                Format \
-               Graph \
                Graphics \
                Grid \
                Help \

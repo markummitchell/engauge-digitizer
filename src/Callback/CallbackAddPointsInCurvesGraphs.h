@@ -3,7 +3,7 @@
 
 #include "CallbackSearchReturn.h"
 
-class Graph;
+class CoordSystem;
 class Point;
 class QString;
 
@@ -12,7 +12,7 @@ class CallbackAddPointsInCurvesGraphs
 {
 public:
   /// Single constructor.
-  CallbackAddPointsInCurvesGraphs(Graph &graph);
+  CallbackAddPointsInCurvesGraphs(CoordSystem &coordSystem);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString &curveName,
@@ -21,7 +21,7 @@ public:
 private:
   CallbackAddPointsInCurvesGraphs ();
 
-  Graph &m_graph;
+  CoordSystem &m_coordSystem;
 };
 
 #endif // CALLBACK_ADD_POINTS_IN_CURVES_GRAPHS_H

@@ -8,7 +8,7 @@
 // Lookup-table by curve name
 typedef QHash<QString, ColorFilterSettings> ColorFilterSettingsList;
 
-class Graph;
+class CoordSystem;
 class QTextStream;
 
 /// Model for DlgSettingsColorFilter and CmdSettingsColorFilter.
@@ -21,8 +21,8 @@ public:
   /// Copy constructor.
   DocumentModelColorFilter(const DocumentModelColorFilter &other);
 
-  /// Initial constructor from Graph.
-  DocumentModelColorFilter(const Graph &graph);
+  /// Initial constructor from CoordSystem.
+  DocumentModelColorFilter(const CoordSystem &coordSystem);
 
   /// Assignment constructor.
   DocumentModelColorFilter &operator=(const DocumentModelColorFilter &other);

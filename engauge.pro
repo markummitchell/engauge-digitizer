@@ -69,12 +69,12 @@ HEADERS  += \
     src/Cmd/CmdAddPointAxis.h \
     src/Cmd/CmdAddPointGraph.h \
     src/Cmd/CmdAddPointsGraph.h \
+    src/Cmd/CmdCoordSystem.h \
     src/Cmd/CmdCopy.h \
     src/Cmd/CmdCut.h \
     src/Cmd/CmdDelete.h \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdFactory.h \
-    src/Cmd/CmdGraph.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPaste.h \
@@ -101,6 +101,9 @@ HEADERS  += \
     src/Coord/CoordScale.h \
     src/Coord/CoordsType.h \
     src/Coord/CoordSymbol.h \
+    src/CoordSystem/CoordSystem.h \
+    src/CoordSystem/CoordSystemContext.h \
+    src/CoordSystem/CoordSystemInterface.h \
     src/Coord/CoordUnitsDate.h \
     src/Coord/CoordUnitsNonPolarTheta.h \
     src/Coord/CoordUnitsPolarTheta.h \
@@ -194,9 +197,6 @@ HEADERS  += \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.h \
     src/Callback/functor.h \
-    src/Graph/Graph.h \
-    src/Graph/GraphContext.h \
-    src/Graph/GraphInterface.h \
     src/Graphics/GraphicsArcItem.h \
     src/Graphics/GraphicsItemType.h \
     src/Graphics/GraphicsLinesForCurve.h \
@@ -318,12 +318,12 @@ SOURCES += \
     src/Cmd/CmdAddPointAxis.cpp \
     src/Cmd/CmdAddPointGraph.cpp \
     src/Cmd/CmdAddPointsGraph.cpp \
+    src/Cmd/CmdCoordSystem.cpp \
     src/Cmd/CmdCopy.cpp \
     src/Cmd/CmdCut.cpp \
     src/Cmd/CmdDelete.cpp \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdFactory.cpp \
-    src/Cmd/CmdGraph.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdPaste.cpp \
@@ -348,6 +348,9 @@ SOURCES += \
     src/Coord/CoordScale.cpp \
     src/Coord/CoordsType.cpp \
     src/Coord/CoordSymbol.cpp \
+    src/CoordSystem/CoordSystem.cpp \
+    src/CoordSystem/CoordSystemContext.cpp \
+    src/CoordSystem/CoordSystemInterface.cpp \
     src/Coord/CoordUnitsDate.cpp \
     src/Coord/CoordUnitsNonPolarTheta.cpp \
     src/Coord/CoordUnitsPolarTheta.cpp \
@@ -436,9 +439,6 @@ SOURCES += \
     src/Format/FormatDegreesMinutesSecondsBase.cpp \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
-    src/Graph/Graph.cpp \
-    src/Graph/GraphContext.cpp \
-    src/Graph/GraphInterface.cpp \
     src/Graphics/GraphicsArcItem.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
     src/Graphics/GraphicsLinesForCurves.cpp \
@@ -535,6 +535,7 @@ INCLUDEPATH += src \
                src/Cmd \
                src/Color \
                src/Coord \
+               src/CoordSystem \
                src/Correlation \
                src/Cursor \
                src/Curve \
@@ -544,7 +545,6 @@ INCLUDEPATH += src \
                src/Export \
                src/Filter \
                src/Format \
-               src/Graph \
                src/Graphics \
                src/Grid \
                src/Help \

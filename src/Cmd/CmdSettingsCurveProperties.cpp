@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Curve Properties settings");
+const QString CMD_DESCRIPTION ("Curve Properties Settings");
 
 CmdSettingsCurveProperties::CmdSettingsCurveProperties(MainWindow &mainWindow,
                                                        Document &document,

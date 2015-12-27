@@ -1,10 +1,10 @@
 #include "CallbackRemovePointsInCurvesGraphs.h"
-#include "Graph.h"
+#include "CoordSystem.h"
 
 extern const QString AXIS_CURVE_NAME;
 
-CallbackRemovePointsInCurvesGraphs::CallbackRemovePointsInCurvesGraphs(Graph &graph) :
-  m_graph (graph)
+CallbackRemovePointsInCurvesGraphs::CallbackRemovePointsInCurvesGraphs(CoordSystem &coordSystem) :
+  m_coordSystem (coordSystem)
 {
 }
 
@@ -12,9 +12,9 @@ CallbackSearchReturn CallbackRemovePointsInCurvesGraphs::callback (const QString
                                                                    const Point &point)
 {
   if (curveName == AXIS_CURVE_NAME) {
-    m_graph.removePointAxis (point.identifier());
+    m_coordSystem.removePointAxis (point.identifier());
   } else {
-    m_graph.removePointGraph (point.identifier());
+    m_coordSystem.removePointGraph (point.identifier());
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;

@@ -1,17 +1,17 @@
-#ifndef GRAPH_CONTEXT_H
-#define GRAPH_CONTEXT_H
+#ifndef COORD_SYSTEM_CONTEXT_H
+#define COORD_SYSTEM_CONTEXT_H
 
-#include "Graph.h"
-#include "GraphInterface.h"
+#include "CoordSystem.h"
+#include "CoordSystemInterface.h"
 
 /// This class plays the role of context class in a state machine, although the 'states' are actually different
-/// instantiations of the Graph class. At any point in time, one Graph is active (as selected by the user)
-class GraphContext : public GraphInterface
+/// instantiations of the CoordSystem class. At any point in time, one CoordSystem is active (as selected by the user)
+class CoordSystemContext : public CoordSystemInterface
 {
  public:
   /// Single constructor
-  GraphContext();
-  ~GraphContext();
+  CoordSystemContext();
+  ~CoordSystemContext();
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -40,6 +40,10 @@ class GraphContext : public GraphInterface
                                    const QPointF &posGraph,
                                    bool &isError,
                                    QString &errorMessage);
+
+  /// Current CoordSystem
+  const CoordSystem &coordSystem () const;
+
   virtual const Curve &curveAxes () const;
   virtual Curve *curveForCurveName (const QString &curveName);
   virtual const Curve *curveForCurveName (const QString &curveName) const;
@@ -48,10 +52,6 @@ class GraphContext : public GraphInterface
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
-
-  /// Current Graph
-  const Graph &graph () const;
-
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual void iterateThroughCurveSegments (const QString &curveName,
@@ -98,7 +98,8 @@ class GraphContext : public GraphInterface
 
  private:
 
-  Graph m_graph;
+  CoordSystem m_coordSystem;
+
 };
 
-#endif // GRAPH_CONTEXT_H
+#endif // COORD_SYSTEM_CONTEXT_H

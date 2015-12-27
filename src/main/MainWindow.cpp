@@ -623,13 +623,15 @@ void MainWindow::createActionsView ()
                                                "most important settings."));
   connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
 
-  m_actionViewGraph = new QAction (tr ("Graph"), this);
-  m_actionViewGraph->setCheckable (true);
-  m_actionViewGraph->setChecked (false);
-  m_actionViewGraph->setStatusTip (tr ("Show or hide the graph toolbar."));
-  m_actionViewGraph->setWhatsThis (tr ("View Graph ToolBar\n\n"
-                                       "Show or hide the graph selection toolbar. This toolbar is useful when the document has multiple graphs."));
-  connect (m_actionViewGraph, SIGNAL (triggered ()), this, SLOT (slotViewToolBarGraph()));
+  m_actionViewCoordSystem = new QAction (tr ("Coordinate System Toolbar"), this);
+  m_actionViewCoordSystem->setCheckable (true);
+  m_actionViewCoordSystem->setChecked (false);
+  m_actionViewCoordSystem->setStatusTip (tr ("Show or hide the coordinate system toolbar."));
+  m_actionViewCoordSystem->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
+                                             "Show or hide the coordinate system selection toolbar. This toolbar is used "
+                                             "to select the current coordinate system when the document has multiple "
+                                             "coordinate systems."));
+  connect (m_actionViewCoordSystem, SIGNAL (triggered ()), this, SLOT (slotViewToolBarCoordSystem()));
 
   m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
   m_actionViewToolTips->setCheckable (true);
@@ -888,7 +890,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewChecklistGuide);
   m_menuView->addAction (m_actionViewSettingsViews);
-  m_menuView->addAction (m_actionViewGraph);
+  m_menuView->addAction (m_actionViewCoordSystem);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
@@ -1105,15 +1107,16 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
 
-  // Graph toolbar
-  m_cmbGraph = new QComboBox;
-  m_cmbGraph->setStatusTip (tr ("Currently selected graph"));
-  m_cmbGraph->setWhatsThis (tr ("Selected Graph\n\n"
-                                "Currently selected graph. This is used to switch between graphs in documents with multiple graphs"));
-  connect (m_cmbGraph, SIGNAL (activated (int)), this, SLOT (slotGraph(int)));
-  m_toolGraph = new QToolBar (tr ("Graph"), this);
-  m_toolGraph->addWidget (m_cmbGraph);
-  addToolBar (m_toolGraph);
+  // Coordinate system toolbar
+  m_cmbCoordSystem = new QComboBox;
+  m_cmbCoordSystem->setStatusTip (tr ("Currently selected coordinate system"));
+  m_cmbCoordSystem->setWhatsThis (tr ("Selected Coordinate System\n\n"
+                                      "Currently selected coordinate system. This is used to switch between coordinate systems "
+                                      "in documents with multiple coordinate systems"));
+  connect (m_cmbCoordSystem, SIGNAL (activated (int)), this, SLOT (slotCoordSystem (int)));
+  m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
+  m_toolCoordSystem->addWidget (m_cmbCoordSystem);
+  addToolBar (m_toolCoordSystem);
 
   // Checklist guide starts out hidden. It will be positioned in settingsRead
   m_dockChecklistGuide = new ChecklistGuide (this);
@@ -1822,11 +1825,11 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionViewSettingsViews->setChecked (viewSettingsViewsToolBar);
   m_toolSettingsViews->setVisible (viewSettingsViewsToolBar);
 
-  // Graph toolbar visibility
-  bool viewGraphToolbar = settings.value (SETTINGS_VIEW_GRAPH_TOOLBAR,
-                                          false).toBool ();
-  m_actionViewGraph->setChecked (viewGraphToolbar);
-  m_toolGraph->setVisible (viewGraphToolbar);
+  // Coordinate system toolbar visibility
+  bool viewCoordSystemToolbar = settings.value (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR,
+                                                false).toBool ();
+  m_actionViewCoordSystem->setChecked (viewCoordSystemToolbar);
+  m_toolCoordSystem->setVisible (viewCoordSystemToolbar);
 
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
@@ -1903,7 +1906,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
-  settings.setValue (SETTINGS_VIEW_GRAPH_TOOLBAR, m_actionViewGraph->isChecked ());
+  settings.setValue (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR, m_actionViewCoordSystem->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
@@ -2055,6 +2058,11 @@ void MainWindow::slotContextMenuEvent (QString pointIdentifier)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
 
   m_digitizeStateContext->handleContextMenuEvent (pointIdentifier);
+}
+
+void MainWindow::slotCoordSystem(int)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCoordSystem";
 }
 
 void MainWindow::slotDigitizeAxis ()
@@ -2446,11 +2454,6 @@ bool MainWindow::slotFileSaveAs()
   return false;
 }
 
-void MainWindow::slotGraph(int)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGraph";
-}
-
 void MainWindow::slotHelpAbout()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpAbout";
@@ -2784,6 +2787,17 @@ void MainWindow::slotViewToolBarChecklistGuide ()
   }
 }
 
+void MainWindow::slotViewToolBarCoordSystem ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarCoordSystem";
+
+  if (m_actionViewCoordSystem->isChecked ()) {
+    m_toolCoordSystem->show();
+  } else {
+    m_toolCoordSystem->hide();
+  }
+}
+
 void MainWindow::slotViewToolBarDigitize ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarDigitize";
@@ -2792,17 +2806,6 @@ void MainWindow::slotViewToolBarDigitize ()
     m_toolDigitize->show();
   } else {
     m_toolDigitize->hide();
-  }
-}
-
-void MainWindow::slotViewToolBarGraph ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGraph";
-
-  if (m_actionViewGraph->isChecked ()) {
-    m_toolGraph->show();
-  } else {
-    m_toolGraph->hide();
   }
 }
 

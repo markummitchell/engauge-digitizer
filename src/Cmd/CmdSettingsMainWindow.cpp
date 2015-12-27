@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Main window settings");
+const QString CMD_DESCRIPTION ("Main Window Settings");
 
 CmdSettingsMainWindow::CmdSettingsMainWindow(MainWindow &mainWindow,
                                              Document &document,

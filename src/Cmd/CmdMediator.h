@@ -27,6 +27,9 @@ public:
   /// Destructor
   ~CmdMediator();
 
+  /// Provide the current CoordSystem to commands with read-only access, primarily for undo/redo processing.
+  const CoordSystem &coordSystem () const;
+
   /// See Document::curveAxes
   const Curve &curveAxes () const;
 
@@ -41,9 +44,6 @@ public:
 
   /// Provide the Document to commands with read-only access, primarily for undo/redo processing.
   const Document &document () const;
-
-  /// Provide the current Graph to commands with read-only access, primarily for undo/redo processing.
-  const Graph &graph () const;
 
   /// Dirty flag. Document is dirty if there are any unsaved changes. The dirty flag is pushed (rather than pulled from this method) through
   /// the QUndoStack::cleanChanged signal

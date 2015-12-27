@@ -1,12 +1,12 @@
 #include "CmdAbstract.h"
 #include "CmdAddPointAxis.h"
 #include "CmdAddPointGraph.h"
+#include "CmdCoordSystem.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
 #include "CmdEditPointAxis.h"
 #include "CmdFactory.h"
-#include "CmdGraph.h"
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
 #include "CmdSettingsAxesChecker.h"
@@ -59,6 +59,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COORD_SYSTEM) {
+    cmd = new CmdCoordSystem (mainWindow,
+                              document, 
+                              cmdDescription,
+                              reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COPY) {
     cmd = new CmdCopy (mainWindow,
                        document,
@@ -79,11 +84,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GRAPH) {
-    cmd = new CmdGraph (mainWindow,
-                        document, 
-                        cmdDescription,
-                        read);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,

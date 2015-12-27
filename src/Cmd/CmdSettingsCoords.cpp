@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Coordinate settings");
+const QString CMD_DESCRIPTION ("Coordinate Settings");
 
 CmdSettingsCoords::CmdSettingsCoords(MainWindow &mainWindow,
                                      Document &document,

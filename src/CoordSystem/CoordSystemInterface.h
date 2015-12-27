@@ -1,5 +1,5 @@
-#ifndef GRAPH_INTERFACE_H
-#define GRAPH_INTERFACE_H
+#ifndef COORD_SYSTEM_INTERFACE_H
+#define COORD_SYSTEM_INTERFACE_H
 
 #include "CallbackSearchReturn.h"
 #include "CurveStyles.h"
@@ -22,13 +22,13 @@ class QString;
 class QStringList;
 class Transformation;
 
-/// Interface common to GraphContext and Graph classes
-class GraphInterface
+/// Interface common to CoordSystemContext and CoordSystem classes
+class CoordSystemInterface
 {
 public:
   /// Single constructor
-  GraphInterface ();
-  virtual ~GraphInterface ();
+  CoordSystemInterface ();
+  virtual ~CoordSystemInterface ();
 
   /// Add new graph curve to the list of existing graph curves.
   virtual void addGraphCurveAtEnd (const QString &curveName) = 0;
@@ -228,4 +228,4 @@ public:
   virtual void updatePointOrdinals (const Transformation &transformation) = 0;
 };
 
-#endif // GRAPH_INTERFACE_H
+#endif // COORD_SYSTEM_INTERFACE_H

@@ -1,6 +1,7 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef COORD_SYSTEM_H
+#define COORD_SYSTEM_H
 
+#include "CoordSystemInterface.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
@@ -12,7 +13,6 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
-#include "GraphInterface.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -26,15 +26,16 @@ class QTransform;
 class QXmlStreamWriter;
 class Transformation;
 
-/// Storage of data belonging to one graph. There can be one or more graphs in a Document
-class Graph : public GraphInterface
+/// Storage of data belonging to one coordinate system. There can be one or more coordinate systems per graph, and one or
+/// more graphs in the image belonging to a Document
+class CoordSystem : public CoordSystemInterface
 {
 public:
   /// Default constructor
-  Graph ();
+  CoordSystem ();
 
   /// Constructor for opened Graphs, and error report files. The specified file is opened and read
-  Graph (const QString &fileName);
+  CoordSystem (const QString &fileName);
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -142,4 +143,4 @@ private:
   DocumentModelSegments m_modelSegments;
 };
 
-#endif // GRAPH_H
+#endif // COORD_SYSTEM_H

@@ -43,6 +43,11 @@ void CmdMediator::connectSignals (MainWindow &mainWindow)
   connect (this, SIGNAL (cleanChanged (bool)), &mainWindow, SLOT (slotCleanChanged (bool)));
 }
 
+const CoordSystem &CmdMediator::coordSystem() const
+{
+  return m_document.coordSystem();
+}
+
 const Curve &CmdMediator::curveAxes () const
 {
   return m_document.curveAxes ();
@@ -66,11 +71,6 @@ Document &CmdMediator::document()
 const Document &CmdMediator::document() const
 {
   return m_document;
-}
-
-const Graph &CmdMediator::graph() const
-{
-  return m_document.graph();
 }
 
 bool CmdMediator::isModified () const

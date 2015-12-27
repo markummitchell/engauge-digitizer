@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Point Match settings");
+const QString CMD_DESCRIPTION ("Point Match Settings");
 
 CmdSettingsPointMatch::CmdSettingsPointMatch(MainWindow &mainWindow,
                                              Document &document,

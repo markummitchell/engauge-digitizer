@@ -1,8 +1,8 @@
 #include "CmdMediator.h"
+#include "CoordSystem.h"
 #include "CurveStyles.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
-#include "Graph.h"
 #include "Logger.h"
 #include <QDebug>
 #include <QXmlStreamReader>
@@ -13,20 +13,20 @@ CurveStyles::CurveStyles()
 {
 }
 
-CurveStyles::CurveStyles (const Graph &graph)
+CurveStyles::CurveStyles (const CoordSystem &coordSystem)
 {
   // Axis curve
-  const Curve &curveAxes = graph.curveAxes();
+  const Curve &curveAxes = coordSystem.curveAxes();
   m_curveStyles [AXIS_CURVE_NAME].setLineStyle (curveAxes.curveStyle().lineStyle());
   m_curveStyles [AXIS_CURVE_NAME].setPointStyle (curveAxes.curveStyle().pointStyle());
 
   // Graph curves
-  QStringList graphCurveNames = graph.curvesGraphsNames();
+  QStringList graphCurveNames = coordSystem.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
 
     const QString &graphCurveName = *itr;
-    const Curve *graphCurve = graph.curveForCurveName(graphCurveName);
+    const Curve *graphCurve = coordSystem.curveForCurveName(graphCurveName);
     m_curveStyles [graphCurveName].setLineStyle (graphCurve->curveStyle().lineStyle());
     m_curveStyles [graphCurveName].setPointStyle (graphCurve->curveStyle().pointStyle());
   }

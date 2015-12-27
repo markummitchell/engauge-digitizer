@@ -186,6 +186,7 @@ private slots:
   void slotCmbBackground(int);
   void slotCmbCurve(int);  
   void slotContextMenuEvent (QString);
+  void slotCoordSystem(int);
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
@@ -208,7 +209,6 @@ private slots:
   void slotFilePrint();
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
-  void slotGraph(int);
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
@@ -238,8 +238,8 @@ private slots:
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
+  void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
-  void slotViewToolBarGraph ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
@@ -363,9 +363,9 @@ private:
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
   QAction *m_actionViewChecklistGuide;
+  QAction *m_actionViewCoordSystem;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewSettingsViews;
-  QAction *m_actionViewGraph;
   QAction *m_actionViewToolTips;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
@@ -437,8 +437,8 @@ private:
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
 
-  QComboBox *m_cmbGraph;
-  QToolBar *m_toolGraph;
+  QComboBox *m_cmbCoordSystem;
+  QToolBar *m_toolCoordSystem;
 
   HelpWindow *m_helpWindow;
   TutorialDlg *m_tutorialDlg;
