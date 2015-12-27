@@ -17,6 +17,7 @@ const QString DOCUMENT_SERIALIZE_CMD_CUT ("CmdCut");
 const QString DOCUMENT_SERIALIZE_CMD_DELETE ("CmdDelete");
 const QString DOCUMENT_SERIALIZE_CMD_DESCRIPTION ("Description");
 const QString DOCUMENT_SERIALIZE_CMD_EDIT_POINT_AXIS ("CmdEditPointAxis");
+const QString DOCUMENT_SERIALIZE_CMD_GRAPH ("CmdGraph");
 const QString DOCUMENT_SERIALIZE_CMD_MEDIATOR ("CmdMediator");
 const QString DOCUMENT_SERIALIZE_CMD_MOVE_BY ("CmdMoveBy");
 const QString DOCUMENT_SERIALIZE_CMD_PASTE ("CmdPaste");

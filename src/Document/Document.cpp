@@ -100,7 +100,7 @@ Document::Document (const QString &fileName) :
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
 {
-  m_graph.addGraphCurveAtEnd  (curveName);
+  m_graphContext.addGraphCurveAtEnd  (curveName);
 }
 
 void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -108,10 +108,10 @@ void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     QString &identifier,
                                                     double ordinal)
 {
-  m_graph.addPointAxisWithGeneratedIdentifier(posScreen,
-                                              posGraph,
-                                              identifier,
-                                              ordinal);
+  m_graphContext.addPointAxisWithGeneratedIdentifier(posScreen,
+                                                     posGraph,
+                                                     identifier,
+                                                     ordinal);
 }
 
 void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
@@ -119,10 +119,10 @@ void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QString &identifier,
                                                     double ordinal)
 {
-  m_graph.addPointAxisWithSpecifiedIdentifier(posScreen,
-                                              posGraph,
-                                              identifier,
-                                              ordinal);
+  m_graphContext.addPointAxisWithSpecifiedIdentifier(posScreen,
+                                                     posGraph,
+                                                     identifier,
+                                                     ordinal);
 }
 
 void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -130,10 +130,10 @@ void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                      QString &identifier,
                                                      double ordinal)
 {
-  m_graph.addPointGraphWithGeneratedIdentifier(curveName,
-                                               posScreen,
-                                               identifier,
-                                               ordinal);
+  m_graphContext.addPointGraphWithGeneratedIdentifier(curveName,
+                                                      posScreen,
+                                                      identifier,
+                                                      ordinal);
 }
 
 void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
@@ -141,15 +141,15 @@ void Document::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                                      const QString &identifier,
                                                      double ordinal)
 {
-  m_graph.addPointGraphWithSpecifiedIdentifier(curveName,
-                                               posScreen,
-                                               identifier,
-                                               ordinal);
+  m_graphContext.addPointGraphWithSpecifiedIdentifier(curveName,
+                                                      posScreen,
+                                                      identifier,
+                                                      ordinal);
 }
 
 void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
-  m_graph.addPointsInCurvesGraphs(curvesGraphs);
+  m_graphContext.addPointsInCurvesGraphs(curvesGraphs);
 }
 
 bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const
@@ -169,10 +169,10 @@ void Document::checkAddPointAxis (const QPointF &posScreen,
                                   bool &isError,
                                   QString &errorMessage)
 {
-  m_graph.checkAddPointAxis(posScreen,
-                            posGraph,
-                            isError,
-                            errorMessage);
+  m_graphContext.checkAddPointAxis(posScreen,
+                                   posGraph,
+                                   isError,
+                                   errorMessage);
 }
 
 void Document::checkEditPointAxis (const QString &pointIdentifier,
@@ -181,47 +181,47 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
                                    bool &isError,
                                    QString &errorMessage)
 {
-  m_graph.checkEditPointAxis(pointIdentifier,
-                             posScreen,
-                             posGraph,
-                             isError,
-                             errorMessage);
+  m_graphContext.checkEditPointAxis(pointIdentifier,
+                                    posScreen,
+                                    posGraph,
+                                    isError,
+                                    errorMessage);
 }
 
 const Curve &Document::curveAxes () const
 {
-  return m_graph.curveAxes();
+  return m_graphContext.curveAxes();
 }
 
 Curve *Document::curveForCurveName (const QString &curveName)
 {
-  return m_graph.curveForCurveName(curveName);
+  return m_graphContext.curveForCurveName(curveName);
 }
 
 const Curve *Document::curveForCurveName (const QString &curveName) const
 {
-  return m_graph.curveForCurveName (curveName);
+  return m_graphContext.curveForCurveName (curveName);
 }
 
 const CurvesGraphs &Document::curvesGraphs () const
 {
-  return m_graph.curvesGraphs();
+  return m_graphContext.curvesGraphs();
 }
 
 QStringList Document::curvesGraphsNames() const
 {
-  return m_graph.curvesGraphsNames();
+  return m_graphContext.curvesGraphsNames();
 }
 
 int Document::curvesGraphsNumPoints(const QString &curveName) const
 {
-  return m_graph.curvesGraphsNumPoints(curveName);
+  return m_graphContext.curvesGraphsNumPoints(curveName);
 }
 
 void Document::editPointAxis (const QPointF &posGraph,
                               const QString &identifier)
 {
-  m_graph.editPointAxis(posGraph,
+  m_graphContext.editPointAxis(posGraph,
                         identifier);
 }
 
@@ -242,31 +242,36 @@ void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
   m_pixmap = QPixmap (width, height);
 }
 
+const Graph &Document::graph() const
+{
+  return m_graphContext.graph();
+}
+
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  m_graph.iterateThroughCurvePointsAxes(ftorWithCallback);
+  m_graphContext.iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  m_graph.iterateThroughCurvePointsAxes(ftorWithCallback);
+  m_graphContext.iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void Document::iterateThroughCurveSegments (const QString &curveName,
                                             const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  m_graph.iterateThroughCurveSegments(curveName,
+  m_graphContext.iterateThroughCurveSegments(curveName,
                                       ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
-  m_graph.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+  m_graphContext.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 void Document::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
-  m_graph.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+  m_graphContext.iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 void Document::loadImage(QXmlStreamReader &reader)
@@ -534,64 +539,64 @@ void Document::loadPreVersion6 (QDataStream &str)
 
 DocumentModelAxesChecker Document::modelAxesChecker() const
 {
-  return m_graph.modelAxesChecker();
+  return m_graphContext.modelAxesChecker();
 }
 
 DocumentModelColorFilter Document::modelColorFilter() const
 {
-  return m_graph.modelColorFilter();
+  return m_graphContext.modelColorFilter();
 }
 
 DocumentModelCoords Document::modelCoords() const
 {
-  return m_graph.modelCoords();
+  return m_graphContext.modelCoords();
 }
 
 CurveStyles Document::modelCurveStyles() const
 {
-  return m_graph.modelCurveStyles();
+  return m_graphContext.modelCurveStyles();
 }
 
 DocumentModelDigitizeCurve Document::modelDigitizeCurve() const
 {
-  return m_graph.modelDigitizeCurve();
+  return m_graphContext.modelDigitizeCurve();
 }
 
 DocumentModelExportFormat Document::modelExport() const
 {
-  return m_graph.modelExport();
+  return m_graphContext.modelExport();
 }
 
 DocumentModelGeneral Document::modelGeneral() const
 {
-  return m_graph.modelGeneral();
+  return m_graphContext.modelGeneral();
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
 {
-  return m_graph.modelGridRemoval();
+  return m_graphContext.modelGridRemoval();
 }
 
 DocumentModelPointMatch Document::modelPointMatch() const
 {
-  return m_graph.modelPointMatch();
+  return m_graphContext.modelPointMatch();
 }
 
 DocumentModelSegments Document::modelSegments() const
 {
-  return m_graph.modelSegments();
+  return m_graphContext.modelSegments();
 }
 
 void Document::movePoint (const QString &pointIdentifier,
                           const QPointF &deltaScreen)
 {
-  m_graph.movePoint (pointIdentifier,
+  m_graphContext.movePoint (pointIdentifier,
                      deltaScreen);
 }
 
 int Document::nextOrdinalForCurve (const QString &curveName) const
 {
-  return m_graph.nextOrdinalForCurve(curveName);
+  return m_graphContext.nextOrdinalForCurve(curveName);
 }
 
 QPixmap Document::pixmap () const
@@ -601,12 +606,12 @@ QPixmap Document::pixmap () const
 
 QPointF Document::positionGraph (const QString &pointIdentifier) const
 {
-  return m_graph.positionGraph(pointIdentifier);
+  return m_graphContext.positionGraph(pointIdentifier);
 }
 
 QPointF Document::positionScreen (const QString &pointIdentifier) const
 {
-  return m_graph.positionScreen(pointIdentifier);
+  return m_graphContext.positionScreen(pointIdentifier);
 }
 
 void Document::print () const
@@ -629,7 +634,7 @@ void Document::printStream (QString indentation,
   str << indentation << "name=" << m_name << "\n";
   str << indentation << "pixmap=" << m_pixmap.width() << "x" <<  m_pixmap.height() << "\n";
 
-  m_graph.printStream(indentation,
+  m_graphContext.printStream(indentation,
                       str);
 }
 
@@ -642,22 +647,17 @@ QString Document::reasonForUnsuccessfulRead () const
 
 void Document::removePointAxis (const QString &identifier)
 {
-  m_graph.removePointAxis(identifier);
+  m_graphContext.removePointAxis(identifier);
 }
 
 void Document::removePointGraph (const QString &identifier)
 {
-  m_graph.removePointGraph(identifier);
+  m_graphContext.removePointGraph(identifier);
 }
 
 void Document::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
-  CallbackRemovePointsInCurvesGraphs ftor (*this);
-
-  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                     &CallbackRemovePointsInCurvesGraphs::callback);
-
-  curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
+  m_graphContext.removePointsInCurvesGraphs(curvesGraphs);
 }
 
 void Document::saveXml (QXmlStreamWriter &writer) const
@@ -699,12 +699,12 @@ void Document::saveXml (QXmlStreamWriter &writer) const
 
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
-  m_graph.setCurvesGraphs(curvesGraphs);
+  m_graphContext.setCurvesGraphs(curvesGraphs);
 }
 
 void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
-  m_graph.setModelAxesChecker(modelAxesChecker);
+  m_graphContext.setModelAxesChecker(modelAxesChecker);
 }
 
 void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
@@ -725,7 +725,7 @@ void Document::setModelColorFilter(const DocumentModelColorFilter &modelColorFil
 
 void Document::setModelCoords (const DocumentModelCoords &modelCoords)
 {
-  m_graph.setModelCoords(modelCoords);
+  m_graphContext.setModelCoords(modelCoords);
 }
 
 void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
@@ -745,27 +745,27 @@ void Document::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 
 void Document::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {
-  m_graph.setModelDigitizeCurve(modelDigitizeCurve);
+  m_graphContext.setModelDigitizeCurve(modelDigitizeCurve);
 }
 
 void Document::setModelExport(const DocumentModelExportFormat &modelExport)
 {
-  m_graph.setModelExport (modelExport);
+  m_graphContext.setModelExport (modelExport);
 }
 
 void Document::setModelGeneral (const DocumentModelGeneral &modelGeneral)
 {
-  m_graph.setModelGeneral(modelGeneral);
+  m_graphContext.setModelGeneral(modelGeneral);
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
-  m_graph.setModelGridRemoval(modelGridRemoval);
+  m_graphContext.setModelGridRemoval(modelGridRemoval);
 }
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
-  m_graph.setModelPointMatch(modelPointMatch);
+  m_graphContext.setModelPointMatch(modelPointMatch);
 }
 
 void Document::setModelSegments(const DocumentModelSegments &modelSegments)
@@ -780,5 +780,5 @@ bool Document::successfulRead () const
 
 void Document::updatePointOrdinals (const Transformation &transformation)
 {
-  m_graph.updatePointOrdinals(transformation);
+  m_graphContext.updatePointOrdinals(transformation);
 }

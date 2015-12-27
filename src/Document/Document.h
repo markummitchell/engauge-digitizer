@@ -12,7 +12,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
-#include "Graph.h"
+#include "GraphContext.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -105,6 +105,9 @@ public:
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
+
+  /// Currently active Graph
+  const Graph &graph() const;
 
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
@@ -251,8 +254,7 @@ private:
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
 
-  Graph m_graph;
-
+  GraphContext m_graphContext;
 };
 
 #endif // DOCUMENT_H

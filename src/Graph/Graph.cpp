@@ -291,6 +291,13 @@ void Graph::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &
   m_curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
+bool Graph::loadCurvesFile(const QString & /* curvesFile */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Graph::loadCurvesFile";
+
+  return true;
+}
+
 void Graph::loadPostVersion5 (QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Graph::loadPostVersion5";

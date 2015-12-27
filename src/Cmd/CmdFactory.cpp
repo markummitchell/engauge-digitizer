@@ -6,6 +6,7 @@
 #include "CmdDelete.h"
 #include "CmdEditPointAxis.h"
 #include "CmdFactory.h"
+#include "CmdGraph.h"
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
 #include "CmdSettingsAxesChecker.h"
@@ -78,6 +79,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GRAPH) {
+    cmd = new CmdGraph (mainWindow,
+                        document, 
+                        cmdDescription,
+                        read);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,

@@ -1110,6 +1110,7 @@ void MainWindow::createToolBars ()
   m_cmbGraph->setStatusTip (tr ("Currently selected graph"));
   m_cmbGraph->setWhatsThis (tr ("Selected Graph\n\n"
                                 "Currently selected graph. This is used to switch between graphs in documents with multiple graphs"));
+  connect (m_cmbGraph, SIGNAL (activated (int)), this, SLOT (slotGraph(int)));
   m_toolGraph = new QToolBar (tr ("Graph"), this);
   m_toolGraph->addWidget (m_cmbGraph);
   addToolBar (m_toolGraph);
@@ -2443,6 +2444,11 @@ bool MainWindow::slotFileSaveAs()
   }
 
   return false;
+}
+
+void MainWindow::slotGraph(int)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGraph";
 }
 
 void MainWindow::slotHelpAbout()

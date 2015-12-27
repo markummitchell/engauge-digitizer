@@ -12,6 +12,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
+#include "GraphInterface.h"
 #include "PointStyle.h"
 #include <QList>
 #include <QPixmap>
@@ -26,211 +27,93 @@ class QXmlStreamWriter;
 class Transformation;
 
 /// Storage of data belonging to one graph. There can be one or more graphs in a Document
-class Graph
+class Graph : public GraphInterface
 {
 public:
-  /// Single constructor
+  /// Default constructor
   Graph ();
 
   /// Constructor for opened Graphs, and error report files. The specified file is opened and read
   Graph (const QString &fileName);
 
-  /// Add new graph curve to the list of existing graph curves.
-  void addGraphCurveAtEnd (const QString &curveName);
-
-  /// Add a single axis point with a generated point identifier. Call this after checkAddPointAxis to guarantee success in this call.
-  /// \param posScreen Screen coordinates from QGraphicsView
-  /// \param posGraph Graph coordiantes from user
-  /// \param identifier Identifier for new axis point
-  /// \param ordinal Unique, for curve, ordinal number
-  void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
-                                            const QPointF &posGraph,
-                                            QString &identifier,
-                                            double ordinal);
-
-  /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call.
-  /// \param posScreen Screen coordinates from QGraphicsView
-  /// \param posGraph Graph coordiantes from user
-  /// \param identifier Identifier for new axis point
-  /// \param ordinal Unique, for curve, ordinal number
-  void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
-                                            const QPointF &posGraph,
-                                            const QString &identifier,
-                                            double ordinal);
-
-  /// Add a single graph point with a generated point identifier.
-  void addPointGraphWithGeneratedIdentifier (const QString &curveName,
-                                             const QPointF &posScreen,
-                                             QString &generatedIentifier,
-                                             double ordinal);
-
-  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Graph.
-  void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
-                                             const QPointF &posScreen,
-                                             const QString &identifier,
-                                             double ordinal);
-
-  /// Add all points identified in the specified CurvesGraphs. See also removePointsInCurvesGraphs
-  void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
-
-  /// Check before calling addPointAxis. Also returns the next available ordinal number (to prevent clashes)
-  void checkAddPointAxis (const QPointF &posScreen,
-                          const QPointF &posGraph,
-                          bool &isError,
-                          QString &errorMessage);
-
-  /// Check before calling editPointAxis
-  void checkEditPointAxis (const QString &pointIdentifier,
-                           const QPointF &posScreen,
-                           const QPointF &posGraph,
-                           bool &isError,
-                           QString &errorMessage);
-
-  /// Get method for axis curve.
-  const Curve &curveAxes () const;
-
-  /// See CurvesGraphs::curveForCurveName, although this also works for AXIS_CURVE_NAME.
-  Curve *curveForCurveName (const QString &curveName);
-
-  /// See CurvesGraphs::curveForCurveNames, although this also works for AXIS_CURVE_NAME.
-  const Curve *curveForCurveName (const QString &curveName) const;
-
-  /// Make all Curves available, read only, for CmdAbstract classes only.
-  const CurvesGraphs &curvesGraphs () const;
-
-  /// See CurvesGraphs::curvesGraphsNames.
-  QStringList curvesGraphsNames () const;
-
-  /// See CurvesGraphs::curvesGraphsNumPoints.
-  int curvesGraphsNumPoints (const QString &curveName) const;
-
-  /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
-  void editPointAxis (const QPointF &posGraph,
-                      const QString &identifier);
-
-  /// See Curve::iterateThroughCurvePoints, for the axes curve.
-  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
-
-  /// See Curve::iterateThroughCurvePoints, for the axes curve.
-  void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-
-  /// See Curve::iterateThroughCurveSegments, for any axes or graph curve
-  void iterateThroughCurveSegments (const QString &curveName,
-                                    const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-
-  /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
-  void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
-
-  /// See Curve::iterateThroughCurvePoints, for all the graphs curves.
-  void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-
-  /// Load the curve names in the specified Engauge file into the current graph. This is called near the end of the import process only
-  bool loadCurvesFile (const QString &curvesFile);
-
-  /// Get method for DocumentModelAxesChecker.
-  DocumentModelAxesChecker modelAxesChecker() const;
-
-  /// Get method for DocumentModelColorFilter.
-  DocumentModelColorFilter modelColorFilter() const;
-
-  /// Get method for DocumentModelCoords.
-  DocumentModelCoords modelCoords () const;
-
-  /// Get method for CurveStyles.
-  CurveStyles modelCurveStyles() const;
-
-  /// Get method for DocumentModelDigitizeCurve.
-  DocumentModelDigitizeCurve modelDigitizeCurve() const;
-
-  /// Get method for DocumentModelExportFormat.
-  DocumentModelExportFormat modelExport() const;
-
-  /// Get method for DocumentModelGeneral.
-  DocumentModelGeneral modelGeneral() const;
-
-  /// Get method for DocumentModelGridRemoval.
-  DocumentModelGridRemoval modelGridRemoval() const;
-
-  /// Get method for DocumentModelPointMatch.
-  DocumentModelPointMatch modelPointMatch() const;
-
-  /// Get method for DocumentModelSegments.
-  DocumentModelSegments modelSegments() const;
-
-  /// See Curve::movePoint
-  void movePoint (const QString &pointIdentifier,
-                  const QPointF &deltaScreen);
-
-  /// Default next ordinal value for specified curve
-  int nextOrdinalForCurve (const QString &curveName) const;
-
-  /// See Curve::positionGraph.
-  QPointF positionGraph (const QString &pointIdentifier) const;
-
-  /// See Curve::positionScreen.
-  QPointF positionScreen (const QString &pointIdentifier) const;
-
-  /// Debugging method for printing directly from symbolic debugger
-  void print () const;
-
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
-
-  /// Return an informative text message explaining why startup loading failed. Applies if successfulRead returns false
-  QString reasonForUnsuccessfulRead () const;
-
-  /// Perform the opposite of addPointAxis.
-  void removePointAxis (const QString &identifier);
-
-  /// Perform the opposite of addPointGraph.
-  void removePointGraph (const QString &identifier);
-
-  /// Remove all points identified in the specified CurvesGraphs. See also addPointsInCurvesGraphs
-  void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
-
-  /// Save graph to xml
-  void saveXml (QXmlStreamWriter &writer) const;
-
-  /// Let CmdAbstract classes overwrite CurvesGraphs.
-  void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
-
-  /// Set method for DocumentModelAxesChecker.
-  void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
-
-  /// Set method for DocumentModelColorFilter.
-  void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
-
-  /// Set method for DocumentModelCoords.
-  void setModelCoords (const DocumentModelCoords &modelCoords);
-
-  /// Set method for CurveStyles.
-  void setModelCurveStyles(const CurveStyles &modelCurveStyles);
-
-  /// Set method for DocumentModelDigitizeCurve.
-  void setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
-
-  /// Set method for DocumentModelExportFormat.
-  void setModelExport(const DocumentModelExportFormat &modelExport);
-
-  /// Set method for DocumentModelGeneral.
-  void setModelGeneral (const DocumentModelGeneral &modelGeneral);
-
-  /// Set method for DocumentModelGridRemoval.
-  void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
-
-  /// Set method for DocumentModelPointMatch.
+  virtual void addGraphCurveAtEnd (const QString &curveName);
+  virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
+                                                    const QPointF &posGraph,
+                                                    QString &identifier,
+                                                    double ordinal);
+  virtual void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
+                                                    const QPointF &posGraph,
+                                                    const QString &identifier,
+                                                    double ordinal);
+  virtual void addPointGraphWithGeneratedIdentifier (const QString &curveName,
+                                                     const QPointF &posScreen,
+                                                     QString &generatedIentifier,
+                                                     double ordinal);
+  virtual void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
+                                                     const QPointF &posScreen,
+                                                     const QString &identifier,
+                                                     double ordinal);
+  virtual void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
+  virtual void checkAddPointAxis (const QPointF &posScreen,
+                                  const QPointF &posGraph,
+                                  bool &isError,
+                                  QString &errorMessage);
+  virtual void checkEditPointAxis (const QString &pointIdentifier,
+                                   const QPointF &posScreen,
+                                   const QPointF &posGraph,
+                                   bool &isError,
+                                   QString &errorMessage);
+  virtual const Curve &curveAxes () const;
+  virtual Curve *curveForCurveName (const QString &curveName);
+  virtual const Curve *curveForCurveName (const QString &curveName) const;
+  virtual const CurvesGraphs &curvesGraphs () const;
+  virtual QStringList curvesGraphsNames () const;
+  virtual int curvesGraphsNumPoints (const QString &curveName) const;
+  virtual void editPointAxis (const QPointF &posGraph,
+                              const QString &identifier);
+  virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+  virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+  virtual void iterateThroughCurveSegments (const QString &curveName,
+                                            const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+  virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
+  virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
+  virtual bool loadCurvesFile (const QString &curvesFile);
+  virtual DocumentModelAxesChecker modelAxesChecker() const;
+  virtual DocumentModelColorFilter modelColorFilter() const;
+  virtual DocumentModelCoords modelCoords () const;
+  virtual CurveStyles modelCurveStyles() const;
+  virtual DocumentModelDigitizeCurve modelDigitizeCurve() const;
+  virtual DocumentModelExportFormat modelExport() const;
+  virtual DocumentModelGeneral modelGeneral() const;
+  virtual DocumentModelGridRemoval modelGridRemoval() const;
+  virtual DocumentModelPointMatch modelPointMatch() const;
+  virtual DocumentModelSegments modelSegments() const;
+  virtual void movePoint (const QString &pointIdentifier,
+                          const QPointF &deltaScreen);
+  virtual int nextOrdinalForCurve (const QString &curveName) const;
+  virtual QPointF positionGraph (const QString &pointIdentifier) const;
+  virtual QPointF positionScreen (const QString &pointIdentifier) const;
+  virtual void print () const;
+  virtual void printStream (QString indentation,
+                            QTextStream &str) const;
+  virtual QString reasonForUnsuccessfulRead () const;
+  virtual void removePointAxis (const QString &identifier);
+  virtual void removePointGraph (const QString &identifier);
+  virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
+  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
+  virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
+  virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
+  virtual void setModelCoords (const DocumentModelCoords &modelCoords);
+  virtual void setModelCurveStyles(const CurveStyles &modelCurveStyles);
+  virtual void setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  virtual void setModelExport(const DocumentModelExportFormat &modelExport);
+  virtual void setModelGeneral (const DocumentModelGeneral &modelGeneral);
+  virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
-
-  /// Set method for DocumentModelSegments.
-  void setModelSegments(const DocumentModelSegments &modelSegments);
-
-  /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
-  bool successfulRead () const;
-
-  /// Update point ordinals after point addition/removal or dragging. See GraphicsScene::updatePointOrdinalsAfterDrag.
-  /// Graph coordinates of point must be up to date
-  void updatePointOrdinals (const Transformation &transformation);
+  virtual void setModelSegments(const DocumentModelSegments &modelSegments);
+  virtual bool successfulRead () const;
+  virtual void updatePointOrdinals (const Transformation &transformation);
 
 private:
 

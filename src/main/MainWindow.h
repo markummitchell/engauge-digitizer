@@ -208,6 +208,7 @@ private slots:
   void slotFilePrint();
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
+  void slotGraph(int);
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);

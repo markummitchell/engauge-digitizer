@@ -74,6 +74,7 @@ HEADERS  += \
     src/Cmd/CmdDelete.h \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdFactory.h \
+    src/Cmd/CmdGraph.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPaste.h \
@@ -195,6 +196,7 @@ HEADERS  += \
     src/Callback/functor.h \
     src/Graph/Graph.h \
     src/Graph/GraphContext.h \
+    src/Graph/GraphInterface.h \
     src/Graphics/GraphicsArcItem.h \
     src/Graphics/GraphicsItemType.h \
     src/Graphics/GraphicsLinesForCurve.h \
@@ -321,6 +323,7 @@ SOURCES += \
     src/Cmd/CmdDelete.cpp \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdFactory.cpp \
+    src/Cmd/CmdGraph.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdPaste.cpp \
@@ -435,6 +438,7 @@ SOURCES += \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
     src/Graph/Graph.cpp \
     src/Graph/GraphContext.cpp \
+    src/Graph/GraphInterface.cpp \
     src/Graphics/GraphicsArcItem.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
     src/Graphics/GraphicsLinesForCurves.cpp \

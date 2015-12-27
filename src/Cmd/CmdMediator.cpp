@@ -68,6 +68,11 @@ const Document &CmdMediator::document() const
   return m_document;
 }
 
+const Graph &CmdMediator::graph() const
+{
+  return m_document.graph();
+}
+
 bool CmdMediator::isModified () const
 {
   return !isClean();
