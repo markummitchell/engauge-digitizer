@@ -2,6 +2,7 @@
 #define DOCUMENT_H
 
 #include "CoordSystemContext.h"
+#include "CoordSystemIndex.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
@@ -32,7 +33,8 @@ class Document
 {
 public:
   /// Constructor for imported images and dragged images
-  Document (const QImage &image);
+  Document (unsigned int numberCoordSystem,
+            const QImage &image);
 
   /// Constructor for opened Documents, and error report files. The specified file is opened and read
   Document (const QString &fileName);
@@ -90,6 +92,12 @@ public:
 
   /// Currently active CoordSystem
   const CoordSystem &coordSystem() const;
+
+  /// Number of CoordSystem
+  unsigned int coordSystemCount() const;
+
+  /// Index of current active CoordSystem
+  CoordSystemIndex coordSystemIndex() const;
 
   /// Get method for axis curve.
   const Curve &curveAxes () const;
@@ -196,6 +204,9 @@ public:
 
   /// Save document to xml
   void saveXml (QXmlStreamWriter &writer) const;
+
+  /// Set the index of current active CoordSystem
+  void setCoordSystemIndex(CoordSystemIndex coordSystemIndex);
 
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);

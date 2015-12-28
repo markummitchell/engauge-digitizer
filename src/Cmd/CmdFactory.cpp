@@ -1,7 +1,6 @@
 #include "CmdAbstract.h"
 #include "CmdAddPointAxis.h"
 #include "CmdAddPointGraph.h"
-#include "CmdCoordSystem.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -9,6 +8,7 @@
 #include "CmdFactory.h"
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
+#include "CmdSelectCoordSystem.h"
 #include "CmdSettingsAxesChecker.h"
 #include "CmdSettingsColorFilter.h"
 #include "CmdSettingsCoords.h"
@@ -59,11 +59,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COORD_SYSTEM) {
-    cmd = new CmdCoordSystem (mainWindow,
-                              document, 
-                              cmdDescription,
-                              reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COPY) {
     cmd = new CmdCopy (mainWindow,
                        document,
@@ -94,6 +89,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                         document,
                         cmdDescription,
                         reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SELECT_COORD_SYSTEM) {
+    cmd = new CmdSelectCoordSystem (mainWindow,
+                                    document, 
+                                    cmdDescription,
+                                    reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_AXES_CHECKER) {
     cmd = new CmdSettingsAxesChecker (mainWindow,
                                       document,

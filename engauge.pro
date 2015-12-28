@@ -69,7 +69,6 @@ HEADERS  += \
     src/Cmd/CmdAddPointAxis.h \
     src/Cmd/CmdAddPointGraph.h \
     src/Cmd/CmdAddPointsGraph.h \
-    src/Cmd/CmdCoordSystem.h \
     src/Cmd/CmdCopy.h \
     src/Cmd/CmdCut.h \
     src/Cmd/CmdDelete.h \
@@ -78,6 +77,7 @@ HEADERS  += \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPaste.h \
+    src/Cmd/CmdSelectCoordSystem.h \
     src/Cmd/CmdSettingsAxesChecker.h \
     src/Cmd/CmdSettingsColorFilter.h \
     src/Cmd/CmdSettingsCoords.h \
@@ -103,6 +103,7 @@ HEADERS  += \
     src/Coord/CoordSymbol.h \
     src/CoordSystem/CoordSystem.h \
     src/CoordSystem/CoordSystemContext.h \
+    src/CoordSystem/CoordSystemIndex.h \
     src/CoordSystem/CoordSystemInterface.h \
     src/Coord/CoordUnitsDate.h \
     src/Coord/CoordUnitsNonPolarTheta.h \
@@ -130,6 +131,7 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateSegment.h \
     src/DigitizeState/DigitizeStateSelect.h \
     src/Dlg/DlgAbout.h \
+    src/Dlg/DlgCoordSystemCount.h \
     src/Dlg/DlgEditPoint.h \
     src/Dlg/DlgErrorReport.h \
     src/Dlg/DlgFilterCommand.h \
@@ -318,7 +320,6 @@ SOURCES += \
     src/Cmd/CmdAddPointAxis.cpp \
     src/Cmd/CmdAddPointGraph.cpp \
     src/Cmd/CmdAddPointsGraph.cpp \
-    src/Cmd/CmdCoordSystem.cpp \
     src/Cmd/CmdCopy.cpp \
     src/Cmd/CmdCut.cpp \
     src/Cmd/CmdDelete.cpp \
@@ -327,6 +328,7 @@ SOURCES += \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdPaste.cpp \
+    src/Cmd/CmdSelectCoordSystem.cpp \
     src/Cmd/CmdSettingsAxesChecker.cpp \
     src/Cmd/CmdSettingsColorFilter.cpp \
     src/Cmd/CmdSettingsCoords.cpp \
@@ -377,6 +379,7 @@ SOURCES += \
     src/DigitizeState/DigitizeStateSegment.cpp \
     src/DigitizeState/DigitizeStateSelect.cpp \
     src/Dlg/DlgAbout.cpp \
+    src/Dlg/DlgCoordSystemCount.cpp \
     src/Dlg/DlgEditPoint.cpp \
     src/Dlg/DlgErrorReport.cpp \
     src/Dlg/DlgFilterCommand.cpp \

@@ -1,19 +1,38 @@
 #include "CoordSystemContext.h"
 #include "Logger.h"
 
-CoordSystemContext::CoordSystemContext()
+const CoordSystemIndex DEFAULT_COORD_SYSTEM_INDEX = 0;
+
+CoordSystemContext::CoordSystemContext() :
+  m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
 {
+  // The CoordSystem vector will be populated when the file is read
+}
+
+CoordSystemContext::CoordSystemContext(unsigned int numberCoordSystem) :
+  m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
+{
+  // The CoordSystem vector is populated with defaults here
+  for (unsigned int i = 0; i < numberCoordSystem; i++) {
+    m_coordSystems.push_back (new CoordSystem ());
+  }
 }
 
 CoordSystemContext::~CoordSystemContext()
 {
+  for (int i = 0; i < m_coordSystems.count(); i++) {
+    CoordSystem *coordSystem = m_coordSystems.at (i);
+    delete coordSystem;
+  }
+
+  m_coordSystems.clear ();
 }
 
 void CoordSystemContext::addGraphCurveAtEnd (const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addGraphCurveAtEnd";
 
-  m_coordSystem.addGraphCurveAtEnd(curveName);
+  m_coordSystems [m_coordSystemIndex]->addGraphCurveAtEnd(curveName);
 }
 
 void CoordSystemContext::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -23,10 +42,10 @@ void CoordSystemContext::addPointAxisWithGeneratedIdentifier (const QPointF &pos
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointAxisWithGeneratedIdentifier";
 
-  m_coordSystem.addPointAxisWithGeneratedIdentifier(posScreen,
-                                                    posGraph,
-                                                    identifier,
-                                                    ordinal);
+  m_coordSystems [m_coordSystemIndex]->addPointAxisWithGeneratedIdentifier(posScreen,
+                                                                           posGraph,
+                                                                           identifier,
+                                                                           ordinal);
 }
 
 void CoordSystemContext::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
@@ -36,10 +55,10 @@ void CoordSystemContext::addPointAxisWithSpecifiedIdentifier (const QPointF &pos
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointAxisWithSpecifiedIdentifier";
 
-  m_coordSystem.addPointAxisWithSpecifiedIdentifier(posScreen,
-                                                    posGraph,
-                                                    identifier,
-                                                    ordinal);
+  m_coordSystems [m_coordSystemIndex]->addPointAxisWithSpecifiedIdentifier(posScreen,
+                                                                          posGraph,
+                                                                          identifier,
+                                                                          ordinal);
 }
 
 void CoordSystemContext::addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -49,10 +68,10 @@ void CoordSystemContext::addPointGraphWithGeneratedIdentifier (const QString &cu
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointGraphWithGeneratedIdentifier";
 
-  m_coordSystem.addPointGraphWithGeneratedIdentifier(curveName,
-                                                     posScreen,
-                                                     generatedIdentifier,
-                                                     ordinal);
+  m_coordSystems [m_coordSystemIndex]->addPointGraphWithGeneratedIdentifier(curveName,
+                                                                            posScreen,
+                                                                            generatedIdentifier,
+                                                                            ordinal);
 }
 
 void CoordSystemContext::addPointGraphWithSpecifiedIdentifier (const QString &curveName,
@@ -62,17 +81,17 @@ void CoordSystemContext::addPointGraphWithSpecifiedIdentifier (const QString &cu
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointGraphWithSpecifiedIdentifier";
 
-  m_coordSystem.addPointGraphWithSpecifiedIdentifier(curveName,
-                                                     posScreen,
-                                                     identifier,
-                                                     ordinal);
+  m_coordSystems [m_coordSystemIndex]->addPointGraphWithSpecifiedIdentifier(curveName,
+                                                                            posScreen,
+                                                                            identifier,
+                                                                            ordinal);
 }
 
 void CoordSystemContext::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointsInCurvesGraphs";
 
-  m_coordSystem.addPointsInCurvesGraphs(curvesGraphs);
+  m_coordSystems [m_coordSystemIndex]->addPointsInCurvesGraphs(curvesGraphs);
 }
 
 void CoordSystemContext::checkAddPointAxis (const QPointF &posScreen,
@@ -82,10 +101,10 @@ void CoordSystemContext::checkAddPointAxis (const QPointF &posScreen,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::checkAddPointAxis";
 
-  m_coordSystem.checkAddPointAxis(posScreen,
-                                  posGraph,
-                                  isError,
-                                  errorMessage);
+  m_coordSystems [m_coordSystemIndex]->checkAddPointAxis(posScreen,
+                                                         posGraph,
+                                                         isError,
+                                                         errorMessage);
 }
 
 void CoordSystemContext::checkEditPointAxis (const QString &pointIdentifier,
@@ -96,60 +115,70 @@ void CoordSystemContext::checkEditPointAxis (const QString &pointIdentifier,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::checkEditPointAxis";
 
-  m_coordSystem.checkEditPointAxis(pointIdentifier,
-                                   posScreen,
-                                   posGraph,
-                                   isError,
-                                   errorMessage);
+  m_coordSystems [m_coordSystemIndex]->checkEditPointAxis(pointIdentifier,
+                                                          posScreen,
+                                                          posGraph,
+                                                          isError,
+                                                          errorMessage);
 }
 
 const CoordSystem &CoordSystemContext::coordSystem () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::coordSystem";
 
-  return m_coordSystem;
+  return *(m_coordSystems [m_coordSystemIndex]);
+}
+
+unsigned int CoordSystemContext::coordSystemCount() const
+{
+  return m_coordSystems.count();
+}
+
+CoordSystemIndex CoordSystemContext::coordSystemIndex () const
+{
+  return m_coordSystemIndex;
 }
 
 const Curve &CoordSystemContext::curveAxes () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curveAxes";
 
-  return m_coordSystem.curveAxes();
+  return m_coordSystems [m_coordSystemIndex]->curveAxes();
 }
 
 Curve *CoordSystemContext::curveForCurveName (const QString &curveName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curveForCurveName";
 
-  return m_coordSystem.curveForCurveName(curveName);
+  return m_coordSystems [m_coordSystemIndex]->curveForCurveName(curveName);
 }
 
 const Curve *CoordSystemContext::curveForCurveName (const QString &curveName) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curveForCurveName";
 
-  return m_coordSystem.curveForCurveName(curveName);
+  return m_coordSystems [m_coordSystemIndex]->curveForCurveName(curveName);
 }
 
 const CurvesGraphs &CoordSystemContext::curvesGraphs () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curvesGraphs";
 
-  return m_coordSystem.curvesGraphs();
+  return m_coordSystems [m_coordSystemIndex]->curvesGraphs();
 }
 
 QStringList CoordSystemContext::curvesGraphsNames () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curvesGraphsNames";
 
-  return m_coordSystem.curvesGraphsNames();
+  return m_coordSystems [m_coordSystemIndex]->curvesGraphsNames();
 }
 
 int CoordSystemContext::curvesGraphsNumPoints (const QString &curveName) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curvesGraphsNumPoints";
 
-  return m_coordSystem.curvesGraphsNumPoints(curveName);
+  return m_coordSystems [m_coordSystemIndex]->curvesGraphsNumPoints(curveName);
 }
 
 void CoordSystemContext::editPointAxis (const QPointF &posGraph,
@@ -157,22 +186,22 @@ void CoordSystemContext::editPointAxis (const QPointF &posGraph,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::editPointAxis";
 
-  m_coordSystem.editPointAxis(posGraph,
-                              identifier);
+  m_coordSystems [m_coordSystemIndex]->editPointAxis(posGraph,
+                                                     identifier);
 }
 
 void CoordSystemContext::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurvePointsAxes";
 
-  m_coordSystem.iterateThroughCurvePointsAxes(ftorWithCallback);
+  m_coordSystems [m_coordSystemIndex]->iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void CoordSystemContext::iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurvePointsAxes";
 
-  m_coordSystem.iterateThroughCurvePointsAxes(ftorWithCallback);
+  m_coordSystems [m_coordSystemIndex]->iterateThroughCurvePointsAxes(ftorWithCallback);
 }
 
 void CoordSystemContext::iterateThroughCurveSegments (const QString &curveName,
@@ -180,99 +209,99 @@ void CoordSystemContext::iterateThroughCurveSegments (const QString &curveName,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurveSegments";
 
-  m_coordSystem.iterateThroughCurveSegments(curveName,
-                                            ftorWithCallback);
+  m_coordSystems [m_coordSystemIndex]->iterateThroughCurveSegments(curveName,
+                                                                   ftorWithCallback);
 }
 
 void CoordSystemContext::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurvesPointsGraphs";
 
-  m_coordSystem.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+  m_coordSystems [m_coordSystemIndex]->iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 void CoordSystemContext::iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurvesPointsGraphs";
 
-  m_coordSystem.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+  m_coordSystems [m_coordSystemIndex]->iterateThroughCurvesPointsGraphs(ftorWithCallback);
 }
 
 bool CoordSystemContext::loadCurvesFile (const QString &curvesFile)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadCurvesFile";
 
-  return m_coordSystem.loadCurvesFile (curvesFile);
+  return m_coordSystems [m_coordSystemIndex]->loadCurvesFile (curvesFile);
 }
 
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelAxesChecker";
 
-  return m_coordSystem.modelAxesChecker();
+  return m_coordSystems [m_coordSystemIndex]->modelAxesChecker();
 }
 
 DocumentModelColorFilter CoordSystemContext::modelColorFilter() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelColorFilter";
 
-  return m_coordSystem.modelColorFilter();
+  return m_coordSystems [m_coordSystemIndex]->modelColorFilter();
 }
 
 DocumentModelCoords CoordSystemContext::modelCoords () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelCoords";
 
-  return m_coordSystem.modelCoords();
+  return m_coordSystems [m_coordSystemIndex]->modelCoords();
 }
 
 CurveStyles CoordSystemContext::modelCurveStyles() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelCurveStyles";
 
-  return m_coordSystem.modelCurveStyles();
+  return m_coordSystems [m_coordSystemIndex]->modelCurveStyles();
 }
 
 DocumentModelDigitizeCurve CoordSystemContext::modelDigitizeCurve() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelDigitizeCurve";
 
-  return m_coordSystem.modelDigitizeCurve();
+  return m_coordSystems [m_coordSystemIndex]->modelDigitizeCurve();
 }
 
 DocumentModelExportFormat CoordSystemContext::modelExport() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelExport";
 
-  return m_coordSystem.modelExport();
+  return m_coordSystems [m_coordSystemIndex]->modelExport();
 }
 
 DocumentModelGeneral CoordSystemContext::modelGeneral() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelGeneral";
 
-  return m_coordSystem.modelGeneral();
+  return m_coordSystems [m_coordSystemIndex]->modelGeneral();
 }
 
 DocumentModelGridRemoval CoordSystemContext::modelGridRemoval() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelGridRemoval";
 
-  return m_coordSystem.modelGridRemoval();
+  return m_coordSystems [m_coordSystemIndex]->modelGridRemoval();
 }
 
 DocumentModelPointMatch CoordSystemContext::modelPointMatch() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelPointMatch";
 
-  return m_coordSystem.modelPointMatch();
+  return m_coordSystems [m_coordSystemIndex]->modelPointMatch();
 }
 
 DocumentModelSegments CoordSystemContext::modelSegments() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelSegments";
 
-  return m_coordSystem.modelSegments();
+  return m_coordSystems [m_coordSystemIndex]->modelSegments();
 }
 
 void CoordSystemContext::movePoint (const QString &pointIdentifier,
@@ -280,36 +309,36 @@ void CoordSystemContext::movePoint (const QString &pointIdentifier,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::movePoint";
 
-  return m_coordSystem.movePoint(pointIdentifier,
-                                 deltaScreen);
+  return m_coordSystems [m_coordSystemIndex]->movePoint(pointIdentifier,
+                                                        deltaScreen);
 }
 
 int CoordSystemContext::nextOrdinalForCurve (const QString &curveName) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::nextOrdinalForCurve";
 
-  return m_coordSystem.nextOrdinalForCurve(curveName);
+  return m_coordSystems [m_coordSystemIndex]->nextOrdinalForCurve(curveName);
 }
 
 QPointF CoordSystemContext::positionGraph (const QString &pointIdentifier) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::positionGraph";
 
-  return m_coordSystem.positionGraph(pointIdentifier);
+  return m_coordSystems [m_coordSystemIndex]->positionGraph(pointIdentifier);
 }
 
 QPointF CoordSystemContext::positionScreen (const QString &pointIdentifier) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addGraphCurveAtEnd";
 
-  return m_coordSystem.positionScreen(pointIdentifier);
+  return m_coordSystems [m_coordSystemIndex]->positionScreen(pointIdentifier);
 }
 
 void CoordSystemContext::print () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::print";
 
-  return m_coordSystem.print();
+  return m_coordSystems [m_coordSystemIndex]->print();
 }
 
 void CoordSystemContext::printStream (QString indentation,
@@ -317,132 +346,139 @@ void CoordSystemContext::printStream (QString indentation,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::printStream";
 
-  m_coordSystem.printStream(indentation,
-                            str);
+  m_coordSystems [m_coordSystemIndex]->printStream(indentation,
+                                                   str);
 }
 
 QString CoordSystemContext::reasonForUnsuccessfulRead () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::reasonForUnsuccessfulRead";
 
-  return m_coordSystem.reasonForUnsuccessfulRead();
+  return m_coordSystems [m_coordSystemIndex]->reasonForUnsuccessfulRead();
 }
 
 void CoordSystemContext::removePointAxis (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::removePointAxis";
 
-  m_coordSystem.removePointAxis(identifier);
+  m_coordSystems [m_coordSystemIndex]->removePointAxis(identifier);
 }
 
 void CoordSystemContext::removePointGraph (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::removePointGraph";
 
-  m_coordSystem.removePointGraph(identifier);
+  m_coordSystems [m_coordSystemIndex]->removePointGraph(identifier);
 }
 
 void CoordSystemContext::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::removePointsInCurvesGraphs";
 
-  m_coordSystem.removePointsInCurvesGraphs(curvesGraphs);
+  m_coordSystems [m_coordSystemIndex]->removePointsInCurvesGraphs(curvesGraphs);
 }
 
 void CoordSystemContext::saveXml (QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::saveXml";
 
-  m_coordSystem.saveXml (writer);
+  m_coordSystems [m_coordSystemIndex]->saveXml (writer);
+}
+
+void CoordSystemContext::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCoordSystemIndex";
+
+  m_coordSystemIndex = coordSystemIndex;
 }
 
 void CoordSystemContext::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCurvesGraphs";
 
-  m_coordSystem.setCurvesGraphs(curvesGraphs);
+  m_coordSystems [m_coordSystemIndex]->setCurvesGraphs(curvesGraphs);
 }
 
 void CoordSystemContext::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelAxesChecker";
 
-  m_coordSystem.setModelAxesChecker(modelAxesChecker);
+  m_coordSystems [m_coordSystemIndex]->setModelAxesChecker(modelAxesChecker);
 }
 
 void CoordSystemContext::setModelColorFilter(const DocumentModelColorFilter &modelColorFilter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelColorFilter";
 
-  m_coordSystem.setModelColorFilter(modelColorFilter);
+  m_coordSystems [m_coordSystemIndex]->setModelColorFilter(modelColorFilter);
 }
 
 void CoordSystemContext::setModelCoords (const DocumentModelCoords &modelCoords)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelCoords";
 
-  m_coordSystem.setModelCoords(modelCoords);
+  m_coordSystems [m_coordSystemIndex]->setModelCoords(modelCoords);
 }
 
 void CoordSystemContext::setModelCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelCurveStyles";
 
-  m_coordSystem.setModelCurveStyles(modelCurveStyles);
+  m_coordSystems [m_coordSystemIndex]->setModelCurveStyles(modelCurveStyles);
 }
 
 void CoordSystemContext::setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelDigitizeCurve";
 
-  m_coordSystem.setModelDigitizeCurve(modelDigitizeCurve);
+  m_coordSystems [m_coordSystemIndex]->setModelDigitizeCurve(modelDigitizeCurve);
 }
 
 void CoordSystemContext::setModelExport(const DocumentModelExportFormat &modelExport)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelExport";
 
-  m_coordSystem.setModelExport (modelExport);
+  m_coordSystems [m_coordSystemIndex]->setModelExport (modelExport);
 }
 
 void CoordSystemContext::setModelGeneral (const DocumentModelGeneral &modelGeneral)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelGeneral";
 
-  m_coordSystem.setModelGeneral(modelGeneral);
+  m_coordSystems [m_coordSystemIndex]->setModelGeneral(modelGeneral);
 }
 
 void CoordSystemContext::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelGridRemoval";
 
-  m_coordSystem.setModelGridRemoval(modelGridRemoval);
+  m_coordSystems [m_coordSystemIndex]->setModelGridRemoval(modelGridRemoval);
 }
 
 void CoordSystemContext::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelPointMatch";
 
-  m_coordSystem.setModelPointMatch(modelPointMatch);
+  m_coordSystems [m_coordSystemIndex]->setModelPointMatch(modelPointMatch);
 }
 
 void CoordSystemContext::setModelSegments(const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelSegments";
 
-  m_coordSystem.setModelSegments(modelSegments);
+  m_coordSystems [m_coordSystemIndex]->setModelSegments(modelSegments);
 }
 
 bool CoordSystemContext::successfulRead () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::successfulRead";
 
-  return m_coordSystem.successfulRead();
+  return m_coordSystems [m_coordSystemIndex]->successfulRead();
 }
 
 void CoordSystemContext::updatePointOrdinals (const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::updatePointOrdinals";
 
-  m_coordSystem.updatePointOrdinals(transformation);
+  m_coordSystems [m_coordSystemIndex]->updatePointOrdinals(transformation);
 }

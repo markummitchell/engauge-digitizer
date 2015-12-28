@@ -19,7 +19,8 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
   QDialog (&mainWindow),
   m_mainWindow (mainWindow),
   m_cmdMediator (0),
-  m_dialogName (dialogName)
+  m_dialogName (dialogName),
+  m_disableOkAtStartup (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::DlgSettingsAbstractBase"
                               << " name=" << m_dialogName.toLatin1().data();
@@ -136,9 +137,16 @@ void DlgSettingsAbstractBase::setCmdMediator (CmdMediator &cmdMediator)
   m_cmdMediator = &cmdMediator;
 }
 
+void DlgSettingsAbstractBase::setDisableOkAtStartup(bool disableOkAtStartup)
+{
+  m_disableOkAtStartup = disableOkAtStartup;
+}
+
 void DlgSettingsAbstractBase::showEvent (QShowEvent * /* event */)
 {
-  m_btnOk->setEnabled (false);
+  if (m_disableOkAtStartup) {
+    m_btnOk->setEnabled (false);
+  }
 
   QSettings settings;
   if (settings.contains (m_dialogName)) {

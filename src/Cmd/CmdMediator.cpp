@@ -17,8 +17,10 @@
 #include "Xml.h"
 
 CmdMediator::CmdMediator (MainWindow &mainWindow,
+                          unsigned int numberCoordSystem,
                           const QImage &image) :
-  m_document (image)
+  m_document (numberCoordSystem,
+              image)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMediator::CmdMediator image=" << image.width() << "x" << image.height ();
 

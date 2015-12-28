@@ -71,6 +71,9 @@ protected:
   /// Store CmdMediator for easy access by the leaf class.
   void setCmdMediator (CmdMediator &cmdMediator);
 
+  /// Override the default Ok button behavior applied in showEvent
+  void setDisableOkAtStartup(bool disableOkAtStartup);
+
 private slots:
   /// Do preparation before dialog is displayed.
   virtual void showEvent (QShowEvent *event);
@@ -92,6 +95,7 @@ private:
   QPushButton *m_btnOk;
 
   const QString m_dialogName;
+  bool m_disableOkAtStartup;
 };
 
 #endif // DLG_SETTINGS_ABSTRACT_BASE_H

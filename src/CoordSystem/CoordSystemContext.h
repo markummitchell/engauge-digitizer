@@ -2,15 +2,23 @@
 #define COORD_SYSTEM_CONTEXT_H
 
 #include "CoordSystem.h"
+#include "CoordSystemIndex.h"
 #include "CoordSystemInterface.h"
+#include <QVector>
+
+typedef QVector<CoordSystem*> CoordSystems;
 
 /// This class plays the role of context class in a state machine, although the 'states' are actually different
 /// instantiations of the CoordSystem class. At any point in time, one CoordSystem is active (as selected by the user)
 class CoordSystemContext : public CoordSystemInterface
 {
  public:
-  /// Single constructor
+  /// Default constructor for constructing from opened file
   CoordSystemContext();
+
+  /// Nondefault constructor for constructing from imported file
+  CoordSystemContext(unsigned int numberCoordSystem);
+
   ~CoordSystemContext();
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
@@ -43,6 +51,12 @@ class CoordSystemContext : public CoordSystemInterface
 
   /// Current CoordSystem
   const CoordSystem &coordSystem () const;
+
+  /// Number of CoordSystem
+  unsigned int coordSystemCount() const;
+
+  /// Index of current CoordSystem
+  CoordSystemIndex coordSystemIndex () const;
 
   virtual const Curve &curveAxes () const;
   virtual Curve *curveForCurveName (const QString &curveName);
@@ -82,6 +96,10 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void removePointGraph (const QString &identifier);
   virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
   virtual void saveXml (QXmlStreamWriter &writer) const;
+
+  /// Index of current CoordSystem
+  void setCoordSystemIndex (CoordSystemIndex coordSystemIndex);
+
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
   virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
   virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
@@ -98,7 +116,8 @@ class CoordSystemContext : public CoordSystemInterface
 
  private:
 
-  CoordSystem m_coordSystem;
+  CoordSystemIndex m_coordSystemIndex;
+  CoordSystems m_coordSystems;
 
 };
 

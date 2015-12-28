@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include "BackgroundImage.h"
+#include "CoordSystemIndex.h"
 #include "DigitizeStateAbstractBase.h"
 #include "MainWindowModel.h"
 #include <QCursor>
@@ -123,6 +124,9 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
+  /// Select a different CoordSystem
+  void updateCoordSystem(CoordSystemIndex coordSystemIndex);
+
   /// After software-triggered state transition, this method manually triggers the action as if user had clicked on digitize button
   void updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState);
 
@@ -200,10 +204,10 @@ private slots:
   void slotFileClose ();
   void slotFileExport ();
   void slotFileImport();
-  void slotFileImportMultigraph();
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
+  void slotFileImportMultiCoordSystem();
   void slotFileOpen();
   void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
@@ -288,12 +292,16 @@ private:
   void createToolBars();
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
-  void fileImport (const QString &fileName);
+  void fileImport (unsigned int numberCoordSystem,
+                   const QString &fileName);
+  void fileImportWithPrompts (bool isMultiCoordSystem);
+  void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
   void loadErrorReportFile(const QString &initialPath,
                            const QString &errorReportFile);
-  void loadImage (const QString &fileName,
+  void loadImage (unsigned int numberCoordSystem,
+                  const QString &fileName,
                   const QImage &image);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
@@ -332,7 +340,7 @@ private:
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
-  QAction *m_actionImportMultigraph;
+  QAction *m_actionImportMultiCoordSystem;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;

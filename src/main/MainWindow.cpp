@@ -11,6 +11,7 @@
 #include "CmdCut.h"
 #include "CmdDelete.h"
 #include "CmdMediator.h"
+#include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
 #include "Curve.h"
@@ -23,6 +24,7 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
+#include "DlgCoordSystemCount.h"
 #include "DlgErrorReport.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
@@ -110,6 +112,7 @@ const QString CSV_FILENAME_EXTENSION ("csv");
 const QString TSV_FILENAME_EXTENSION ("tsv");
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
+const unsigned int ONE_COORDINATE_SYSTEM = 1;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
@@ -403,17 +406,18 @@ void MainWindow::createActionsFile ()
 
   m_actionImport = new QAction(tr ("&Import"), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
-  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image with a single graph."));
+  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image with a single coordinate system."));
   m_actionImport->setWhatsThis (tr ("New Document\n\n"
-                                    "Creates a new document by importing an image with a single graph."));
+                                    "Creates a new document by importing an image with a single coordinate system."));
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
 
-  m_actionImportMultigraph = new QAction(tr ("Import &Multigraph"), this);
-  m_actionImportMultigraph->setShortcut (tr ("Ctrl+M"));
-  m_actionImportMultigraph->setStatusTip (tr ("Creates a new document by importing an image with multiple graphs."));
-  m_actionImportMultigraph->setWhatsThis (tr ("New Document\n\n"
-                                              "Creates a new document by importing an image with multiple graphs."));
-  connect (m_actionImportMultigraph, SIGNAL (triggered ()), this, SLOT (slotFileImportMultigraph ()));
+  m_actionImportMultiCoordSystem = new QAction(tr ("Import &Multiple Coordinate Systems"), this);
+  m_actionImportMultiCoordSystem->setShortcut (tr ("Ctrl+M"));
+  m_actionImportMultiCoordSystem->setStatusTip (tr ("Creates a new document by importing an image with multiple coordinate systems."));
+  m_actionImportMultiCoordSystem->setWhatsThis (tr ("New Document\n\n"
+                                                    "Creates a new document by importing an image with multiple coordinate systems. The "
+                                                    "number of coordinate systems is permanently set during import. "));
+  connect (m_actionImportMultiCoordSystem, SIGNAL (triggered ()), this, SLOT (slotFileImportMultiCoordSystem ()));
 
   m_actionOpen = new QAction(tr ("&Open"), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
@@ -851,7 +855,7 @@ void MainWindow::createMenus()
 
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
-  m_menuFile->addAction (m_actionImportMultigraph);
+  m_menuFile->addAction (m_actionImportMultiCoordSystem);
   m_menuFile->addAction (m_actionOpen);
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
@@ -1179,7 +1183,8 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
-void MainWindow::fileImport (const QString &fileName)
+void MainWindow::fileImport (unsigned int numberCoordSystem,
+                             const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
@@ -1215,8 +1220,65 @@ void MainWindow::fileImport (const QString &fileName)
     return;
   }
 
-  loadImage (fileName,
+  loadImage (numberCoordSystem,
+             fileName,
              image);
+}
+
+void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts";
+
+  if (maybeSave ()) {
+
+    int numberCoordSystem = 1;
+    if (isMultiCoordSystem) {
+      DlgCoordSystemCount dlgCoordSystem (*this);
+      dlgCoordSystem.exec();
+
+      if (dlgCoordSystem.result() == QDialog::Rejected) {
+        return;
+      }
+
+      numberCoordSystem = dlgCoordSystem.numberCoordSystem();
+    }
+
+    QString filter;
+    QTextStream str (&filter);
+
+    // Compile a list of supported formats into a filter
+    QList<QByteArray>::const_iterator itr;
+    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
+    QStringList supportedImageFormatStrings;
+    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
+      QByteArray arr = *itr;
+      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
+      supportedImageFormatStrings << extensionAsWildcard;
+    }
+#ifdef ENGAUGE_JPEG2000
+    Jpeg2000 jpeg2000;
+    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
+#endif // ENGAUGE_JPEG2000
+
+    supportedImageFormatStrings.sort();
+
+    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
+
+    // Allow selection of files with strange suffixes in case the file extension was changed. Since
+    // the default is the first filter, we add this afterwards (it is the off-nominal case)
+    str << ";; All Files (*.*)";
+
+    QString fileName = QFileDialog::getOpenFileName (this,
+                                                     tr("Import Image"),
+                                                     QDir::currentPath (),
+                                                     filter);
+    if (!fileName.isEmpty ()) {
+
+      fileImport (numberCoordSystem,
+                  fileName);
+
+    }
+  }
 }
 
 QImage MainWindow::imageFiltered () const
@@ -1227,6 +1289,27 @@ QImage MainWindow::imageFiltered () const
 bool MainWindow::isGnuplot() const
 {
   return m_isGnuplot;
+}
+
+void MainWindow::loadCoordSystemListFromCmdMediator ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadCoordSystemListFromCmdMediator";
+
+  m_cmbCoordSystem->clear();
+
+  unsigned int numberCoordSystem = m_cmdMediator->document().coordSystemCount();
+
+  for (unsigned int i = 0; i < numberCoordSystem; i++) {
+    int index1Based = i + 1;
+    m_cmbCoordSystem->addItem (QString::number (index1Based),
+                               QVariant (i));
+  }
+
+  // Always start with the first entry selected
+  m_cmbCoordSystem->setCurrentIndex (0);
+
+  // Disable the control if there is only one entry. Hopefully the user will not even notice it, thus simplifying the interface
+  m_cmbCoordSystem->setEnabled (m_cmbCoordSystem->count() > 1);
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -1342,13 +1425,17 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   updateAfterCommand ();
 }
 
-void MainWindow::loadImage (const QString &fileName,
+void MainWindow::loadImage (unsigned int numberCoordSystem,
+                            const QString &fileName,
                             const QImage &image)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage fileName=" << fileName.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
+                              << " numberCoordSystem=" << numberCoordSystem
+                              << " fileName=" << fileName.toLatin1 ().data ();
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
+                                              numberCoordSystem,
                                               image);
   QApplication::restoreOverrideCursor();
 
@@ -1385,6 +1472,9 @@ void MainWindow::loadImage (const QString &fileName,
 
       // Update the curve dropdown
       loadCurveListFromCmdMediator();
+
+      // Update the CoordSystem dropdown
+      loadCoordSystemListFromCmdMediator();
     }
     delete wizard;
   }
@@ -1937,6 +2027,7 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
+  loadCoordSystemListFromCmdMediator ();
   updateViewsOfSettings ();
 
   m_isDocumentExported = false;
@@ -2060,9 +2151,15 @@ void MainWindow::slotContextMenuEvent (QString pointIdentifier)
   m_digitizeStateContext->handleContextMenuEvent (pointIdentifier);
 }
 
-void MainWindow::slotCoordSystem(int)
+void MainWindow::slotCoordSystem(int index)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCoordSystem";
+
+  CmdSelectCoordSystem *cmd = new CmdSelectCoordSystem (*this,
+                                                        m_cmdMediator->document(),
+                                                        index);
+
+  cmdMediator ().push (cmd);
 }
 
 void MainWindow::slotDigitizeAxis ()
@@ -2248,54 +2345,17 @@ void MainWindow::slotFileExport ()
 
 void MainWindow::slotFileImport ()
 {
-  // This method should perform the same steps as MainWindow::slotFileImport, except for the support there for multiple graphs
-
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImport";
 
-  if (maybeSave ()) {
-
-    QString filter;
-    QTextStream str (&filter);
-
-    // Compile a list of supported formats into a filter
-    QList<QByteArray>::const_iterator itr;
-    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QStringList supportedImageFormatStrings;
-    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
-      QByteArray arr = *itr;
-      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
-      supportedImageFormatStrings << extensionAsWildcard;
-    }
-#ifdef ENGAUGE_JPEG2000
-    Jpeg2000 jpeg2000;
-    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
-#endif // ENGAUGE_JPEG2000
-
-    supportedImageFormatStrings.sort();
-
-    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
-
-    // Allow selection of files with strange suffixes in case the file extension was changed. Since
-    // the default is the first filter, we add this afterwards (it is the off-nominal case)
-    str << ";; All Files (*.*)";
-
-    QString fileName = QFileDialog::getOpenFileName (this,
-                                                     tr("Import Image"),
-                                                     QDir::currentPath (),
-                                                     filter);
-    if (!fileName.isEmpty ()) {
-
-      fileImport (fileName);
-
-    }
-  }
+  fileImportWithPrompts (false);
 }
 
 void MainWindow::slotFileImportDraggedImage(QImage image)
-{
+{  
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImage";
 
-  loadImage ("",
+  loadImage (ONE_COORDINATE_SYSTEM,
+             "",
              image);
 }
 
@@ -2310,53 +2370,16 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImage fileName=" << fileName.toLatin1 ().data ();
 
-  loadImage (fileName,
+  loadImage (ONE_COORDINATE_SYSTEM,
+             fileName,
              image);
 }
 
-void MainWindow::slotFileImportMultigraph ()
+void MainWindow::slotFileImportMultiCoordSystem ()
 {
-  // This method should perform the same steps as MainWindow::slotFileImport, except for the support here for multiple graphs
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportMultiCoordSystem";
 
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportMultigraph";
-
-  if (maybeSave ()) {
-
-    QString filter;
-    QTextStream str (&filter);
-
-    // Compile a list of supported formats into a filter
-    QList<QByteArray>::const_iterator itr;
-    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QStringList supportedImageFormatStrings;
-    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
-      QByteArray arr = *itr;
-      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
-      supportedImageFormatStrings << extensionAsWildcard;
-    }
-#ifdef ENGAUGE_JPEG2000
-    Jpeg2000 jpeg2000;
-    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
-#endif // ENGAUGE_JPEG2000
-
-    supportedImageFormatStrings.sort();
-
-    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
-
-    // Allow selection of files with strange suffixes in case the file extension was changed. Since
-    // the default is the first filter, we add this afterwards (it is the off-nominal case)
-    str << ";; All Files (*.*)";
-
-    QString fileName = QFileDialog::getOpenFileName (this,
-                                                     tr("Import Image"),
-                                                     QDir::currentPath (),
-                                                     filter);
-    if (!fileName.isEmpty ()) {
-
-      fileImport (fileName);
-
-    }
-  }
+  fileImportWithPrompts (true);
 }
 
 void MainWindow::slotFileOpen()
@@ -2490,6 +2513,8 @@ void MainWindow::slotLeave ()
 
 void MainWindow::slotLoadStartupFiles ()
 {
+  const unsigned int ONE_COORDINATE_SYSTEM = 1;
+
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotLoadStartupFiles";
 
   ENGAUGE_ASSERT (m_loadStartupFiles.count() > 0);
@@ -2505,7 +2530,8 @@ void MainWindow::slotLoadStartupFiles ()
 
   } else {
 
-    fileImport (fileName);
+    fileImport (ONE_COORDINATE_SYSTEM,
+                fileName);
 
   }
 
@@ -3268,6 +3294,13 @@ void MainWindow::updateControls ()
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
   m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
+}
+
+void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCoordSystem";
+
+  m_cmdMediator->document().setCoordSystemIndex (coordSystemIndex);
 }
 
 void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState)
