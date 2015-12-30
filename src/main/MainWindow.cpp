@@ -1127,6 +1127,7 @@ ZoomFactor MainWindow::currentZoomFactor () const
     return ZOOM_FILL;
   } else {
     ENGAUGE_ASSERT (false);
+    return ZOOM_1_TO_1;
   }
 }
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
