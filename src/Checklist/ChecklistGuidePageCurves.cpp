@@ -11,8 +11,8 @@ const int FIRST_COL = 0;
 const int NUM_COL = 1;
 const int NUM_ROW = 6;
 
-ChecklistGuidePageCurves::ChecklistGuidePageCurves() :
-  ChecklistGuidePage ("Curves")
+ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
+  ChecklistGuidePage (title)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::ChecklistGuidePageCurves";
 

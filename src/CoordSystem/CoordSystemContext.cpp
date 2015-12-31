@@ -399,6 +399,14 @@ void CoordSystemContext::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   m_coordSystems [m_coordSystemIndex]->setCurvesGraphs(curvesGraphs);
 }
 
+void CoordSystemContext::setCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                                          const CurvesGraphs &curvesGraphs)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCurvesGraphs";
+
+  m_coordSystems [coordSystemIndex]->setCurvesGraphs(curvesGraphs);
+}
+
 void CoordSystemContext::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelAxesChecker";

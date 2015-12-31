@@ -14,7 +14,7 @@ class ChecklistGuidePageCurves : public ChecklistGuidePage
 
  public:
   /// Single constructor
-  ChecklistGuidePageCurves ();
+  ChecklistGuidePageCurves (const QString &title);
 
   /// Wizard selection for curve names
   QStringList curveNames () const;
@@ -30,6 +30,7 @@ class ChecklistGuidePageCurves : public ChecklistGuidePage
   bool withLines() const;
 
  private:
+  ChecklistGuidePageCurves ();
 
   bool curveNamesAreAllUnique() const;
   int NUM_CURVE_NAMES () const { return 6; }

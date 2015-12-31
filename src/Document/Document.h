@@ -211,6 +211,10 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
+  /// Let CmdAbstract classes overwrite CurvesGraphs.
+  void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                        const CurvesGraphs &curvesGraphs);
+
   /// Set method for DocumentModelAxesChecker.
   void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
 

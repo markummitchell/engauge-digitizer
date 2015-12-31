@@ -207,7 +207,7 @@ private slots:
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
-  void slotFileImportMultiCoordSystem();
+  void slotFileImportImageCustom();
   void slotFileOpen();
   void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
@@ -340,7 +340,7 @@ private:
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
-  QAction *m_actionImportMultiCoordSystem;
+  QAction *m_actionImportCustomImage;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;

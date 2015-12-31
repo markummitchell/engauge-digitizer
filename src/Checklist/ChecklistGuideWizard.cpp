@@ -5,6 +5,7 @@
 #include "ChecklistGuideWizard.h"
 #include "ChecklistTemplate.h"
 #include "ColorFilterSettings.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QGridLayout>
@@ -14,7 +15,8 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 
-ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
+ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow,
+                                            unsigned int numberCoordSystem) :
   m_mainWindow (mainWindow),
   m_dialogName ("ChecklistGuide")
 {
@@ -25,24 +27,50 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow) :
   setPixmap (QWizard::BackgroundPixmap, splash); // For MacStyle
 
   m_pageIntro = new ChecklistGuidePageIntro();
-  m_pageCurves = new ChecklistGuidePageCurves();
-  m_pageConclusion = new ChecklistGuidePageConclusion();
-
   addPage(m_pageIntro);
-  addPage(m_pageCurves);
+
+  for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < numberCoordSystem; coordSystemIndex++) {
+    m_pageCurves.push_back (new ChecklistGuidePageCurves(pageCurvesTitle (coordSystemIndex, numberCoordSystem)));
+    addPage(m_pageCurves.last());
+  }
+
+  m_pageConclusion = new ChecklistGuidePageConclusion();
   addPage(m_pageConclusion);
 }
 
-QStringList ChecklistGuideWizard::curveNames() const
+QStringList ChecklistGuideWizard::curveNames(CoordSystemIndex coordSystemIndex) const
 {
-  return m_pageCurves->curveNames();
+  return m_pageCurves [coordSystemIndex]->curveNames();
 }
 
-void ChecklistGuideWizard::populateCurvesGraphs (CurvesGraphs &curvesGraphs)
+QString ChecklistGuideWizard::pageCurvesTitle (CoordSystemIndex coordSystemIndex,
+                                               unsigned int numberCoordSystem) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::pageCurvesTitle";
+
+  ENGAUGE_ASSERT (coordSystemIndex < numberCoordSystem);
+
+  if (numberCoordSystem == 1) {
+
+    // Single curve needs no index information
+    return "Curves";
+
+  } else {
+
+    // One of multiple curves needs index information
+    unsigned int indexOneBased = coordSystemIndex + 1;
+    return QString ("Curves for coordinate system %1")
+        .arg (indexOneBased);
+
+  }
+}
+
+void ChecklistGuideWizard::populateCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                                                 CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::populateCurvesGraphs";
 
-  QStringList curveNames = m_pageCurves->curveNames();
+  QStringList curveNames = m_pageCurves [coordSystemIndex]->curveNames();
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
@@ -55,12 +83,12 @@ void ChecklistGuideWizard::populateCurvesGraphs (CurvesGraphs &curvesGraphs)
   }
 }
 
-QString ChecklistGuideWizard::templateHtml () const
+QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::templateHtml";
 
-  QStringList curveNames = m_pageCurves->curveNames();
-  bool withLines = m_pageCurves->withLines();
+  QStringList curveNames = m_pageCurves [coordSystemIndex]->curveNames();
+  bool withLines = m_pageCurves [coordSystemIndex]->withLines();
 
   QString html;
   QTextStream str (&html);

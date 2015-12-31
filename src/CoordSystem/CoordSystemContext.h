@@ -100,7 +100,9 @@ class CoordSystemContext : public CoordSystemInterface
   /// Index of current CoordSystem
   void setCoordSystemIndex (CoordSystemIndex coordSystemIndex);
 
-  virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
+  void setCurvesGraphs (const CurvesGraphs &curvesGraphs); // Applies to current coordinate system
+  virtual void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                                const CurvesGraphs &curvesGraphs); // This works independent of the current coordinate system
   virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
   virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
   virtual void setModelCoords (const DocumentModelCoords &modelCoords);
