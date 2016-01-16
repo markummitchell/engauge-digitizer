@@ -83,13 +83,15 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                                                                                 m_modelCoords.coordUnitsX(),
                                                                                 m_modelCoords.coordUnitsTheta(),
                                                                                 m_modelCoords.coordUnitsDate(),
-                                                                                m_modelCoords.coordUnitsTime());
+                                                                                m_modelCoords.coordUnitsTime(),
+                                                                                m_modelMainWindow.locale());
   m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (m_modelCoords.coordScaleYRadius(),
                                                                                    isCartesian (),
                                                                                    m_modelCoords.coordUnitsY(),
                                                                                    m_modelCoords.coordUnitsRadius(),
                                                                                    m_modelCoords.coordUnitsDate(),
-                                                                                   m_modelCoords.coordUnitsTime());
+                                                                                   m_modelCoords.coordUnitsTime(),
+                                                                                   m_modelMainWindow.locale());
 
   // Label, with guidance in terms of legal ranges and units
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8 as (%9, %10):")

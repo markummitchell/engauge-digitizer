@@ -573,7 +573,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_validatorOriginRadius = dlgValidatorFactory.createWithNonPolar (m_modelCoordsAfter->coordScaleYRadius(),
                                                                     m_modelCoordsAfter->coordUnitsRadius(),
                                                                     m_modelCoordsAfter->coordUnitsDate(),
-                                                                    m_modelCoordsAfter->coordUnitsTime());
+                                                                    m_modelCoordsAfter->coordUnitsTime(),
+                                                                    mainWindow().modelMainWindow().locale());
   m_editOriginRadius->setValidator (m_validatorOriginRadius); // Set before call to setText so validator is defined in updateControls
   m_editOriginRadius->setText (QString::number (m_modelCoordsAfter->originRadius ()));
 
@@ -827,7 +828,8 @@ void DlgSettingsCoords::slotYRadiusLinear()
   m_validatorOriginRadius = dlgValidatorFactory.createWithNonPolar (COORD_SCALE_LINEAR,
                                                                     m_modelCoordsAfter->coordUnitsRadius(),
                                                                     m_modelCoordsAfter->coordUnitsDate(),
-                                                                    m_modelCoordsAfter->coordUnitsTime());
+                                                                    m_modelCoordsAfter->coordUnitsTime(),
+                                                                    mainWindow().modelMainWindow().locale());
   m_editOriginRadius->setValidator (m_validatorOriginRadius);
 
   m_modelCoordsAfter->setCoordScaleYRadius((COORD_SCALE_LINEAR));
@@ -845,7 +847,8 @@ void DlgSettingsCoords::slotYRadiusLog()
   m_validatorOriginRadius = dlgValidatorFactory.createWithNonPolar (COORD_SCALE_LOG,
                                                                     m_modelCoordsAfter->coordUnitsRadius(),
                                                                     m_modelCoordsAfter->coordUnitsDate(),
-                                                                    m_modelCoordsAfter->coordUnitsTime());
+                                                                    m_modelCoordsAfter->coordUnitsTime(),
+                                                                    mainWindow().modelMainWindow().locale());
   m_editOriginRadius->setValidator (m_validatorOriginRadius);
 
   m_modelCoordsAfter->setCoordScaleYRadius(COORD_SCALE_LOG);
@@ -884,7 +887,8 @@ void DlgSettingsCoords::updateControls ()
     DlgValidatorAbstract *dlg = dlgValidatorFactory.createWithNonPolar (m_yRadiusLinear->isChecked () ? COORD_SCALE_LOG : COORD_SCALE_LINEAR,
                                                                         m_modelCoordsAfter->coordUnitsRadius(),
                                                                         m_modelCoordsAfter->coordUnitsDate(),
-                                                                        m_modelCoordsAfter->coordUnitsTime());
+                                                                        m_modelCoordsAfter->coordUnitsTime(),
+                                                                        mainWindow().modelMainWindow().locale());
     int posOriginRadiusOther;
     bool goodOriginRadiusOther = (dlg->validate (textOriginRadius, posOriginRadiusOther) == QValidator::Acceptable);
 
