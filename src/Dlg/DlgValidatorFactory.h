@@ -6,6 +6,7 @@
 #include "CoordUnitsPolarTheta.h"
 
 class DlgValidatorAbstract;
+class QLocale;
 
 /// Validator factory
 class DlgValidatorFactory
@@ -20,7 +21,8 @@ public:
                                                                  CoordUnitsNonPolarTheta coordUnitsCartesian,
                                                                  CoordUnitsNonPolarTheta coordUnitsPolar,
                                                                  CoordUnitsDate coordUnitsDate,
-                                                                 CoordUnitsTime coordUnitsTime) const;
+                                                                 CoordUnitsTime coordUnitsTime,
+                                                                 const QLocale &locale) const;
 
   /// Factory method for generating validators for either cartesian or polar case, when polar format is specified by CoordUnitsPolarTheta
   DlgValidatorAbstract *createCartesianOrPolarWithPolarPolar (CoordScale coordScale,
@@ -28,17 +30,20 @@ public:
                                                               CoordUnitsNonPolarTheta coordUnitsCartesian,
                                                               CoordUnitsPolarTheta coordUnitsPolar,
                                                               CoordUnitsDate coordUnitsDate,
-                                                              CoordUnitsTime coordUnitsTime) const;
+                                                              CoordUnitsTime coordUnitsTime,
+                                                              const QLocale &locale) const;
 
   /// Factory method for generating validators when cartesian/polar case handling is handled externally, and format is specified by CoordUnitsNonPolarTheta
   DlgValidatorAbstract *createWithNonPolar (CoordScale coordScale,
                                             CoordUnitsNonPolarTheta coordUnits,
                                             CoordUnitsDate coordUnitsDate,
-                                            CoordUnitsTime coordUnitsTime) const;
+                                            CoordUnitsTime coordUnitsTime,
+                                            const QLocale &locale) const;
 
   /// Factory method for generating validators when cartesian/polar case handling is handled externally, and format is specified by CoordUnitsNonPolarTheta
   DlgValidatorAbstract *createWithPolar (CoordScale coordScale,
-                                         CoordUnitsPolarTheta coordUnits) const;
+                                         CoordUnitsPolarTheta coordUnits,
+                                         const QLocale &locale) const;
 };
 
 #endif // DLG_VALIDATOR_FACTORY_H
