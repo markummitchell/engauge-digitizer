@@ -2,12 +2,14 @@
 #include "FormatCoordsUnitsStrategyPolarTheta.h"
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
 #include "Logger.h"
+#include <QLocale>
 
 FormatCoordsUnitsStrategyPolarTheta::FormatCoordsUnitsStrategyPolarTheta ()
 {
 }
 
 double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QString &string,
+                                                                    const QLocale &locale,
                                                                     CoordUnitsPolarTheta coordUnits) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted";
@@ -29,7 +31,7 @@ double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QStrin
     case COORD_UNITS_POLAR_THETA_GRADIANS:
     case COORD_UNITS_POLAR_THETA_RADIANS:
     case COORD_UNITS_POLAR_THETA_TURNS:
-      value = string.toDouble();
+      value = locale.toDouble(string);
       break;
 
     default:
@@ -42,6 +44,7 @@ double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QStrin
 }
 
 QString FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted (double valueUnformatted,
+                                                                     const QLocale &locale,
                                                                      CoordUnitsPolarTheta coordUnits,
                                                                      const Transformation &transformation,
                                                                      double valueUnformattedOther) const
@@ -69,7 +72,7 @@ QString FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted (double valu
     case COORD_UNITS_POLAR_THETA_GRADIANS:
     case COORD_UNITS_POLAR_THETA_RADIANS:
     case COORD_UNITS_POLAR_THETA_TURNS:
-      valueFormatted = QString::number (valueUnformatted,
+      valueFormatted = locale.toString (valueUnformatted,
                                         FORMAT,
                                         precisionDigitsForRawNumber (valueUnformatted,
                                                                      valueUnformattedOther,

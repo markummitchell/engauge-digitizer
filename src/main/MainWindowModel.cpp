@@ -2,6 +2,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindowModel.h"
+#include <QLocale>
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamWriter>
@@ -12,9 +13,11 @@ MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL)
 {
+  // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
 
 MainWindowModel::MainWindowModel(const MainWindowModel &other) :
+  m_locale (other.locale()),
   m_zoomControl (other.zoomControl()),
   m_zoomFactorInitial (other.zoomFactorInitial())
 {
@@ -22,6 +25,7 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
 
 MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
 {
+  m_locale = other.locale();
   m_zoomControl = other.zoomControl();
   m_zoomFactorInitial = other.zoomFactorInitial();
 
@@ -33,8 +37,6 @@ void MainWindowModel::loadXml(QXmlStreamReader &reader)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindowModel::loadXml";
 
   bool success = true;
-
-  QXmlStreamAttributes attributes = reader.attributes();
 
   // Read until end of this subtree
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -51,6 +53,11 @@ void MainWindowModel::loadXml(QXmlStreamReader &reader)
   }
 }
 
+QLocale MainWindowModel::locale () const
+{
+  return m_locale;
+}
+
 void MainWindowModel::printStream(QString indentation,
                                      QTextStream &str) const
 {
@@ -58,6 +65,7 @@ void MainWindowModel::printStream(QString indentation,
 
   indentation += INDENTATION_DELTA;
 
+  str << indentation << "locale=" << m_locale.name() << "\n";
   str << indentation << "zoomControl=" << m_zoomControl << "\n";
   str << indentation << "zoomFactorInitial=" << m_zoomFactorInitial << "\n";
 }
@@ -68,6 +76,20 @@ void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_MAIN_WINDOW);
   writer.writeEndElement();
+}
+
+void MainWindowModel::setLocale (QLocale::Language language,
+                                 QLocale::Country country)
+{
+  QLocale locale (language,
+                  country);
+
+  m_locale = locale;
+}
+
+void MainWindowModel::setLocale (const QLocale &locale)
+{
+  m_locale = locale;
 }
 
 void MainWindowModel::setZoomControl (ZoomControl zoomControl)

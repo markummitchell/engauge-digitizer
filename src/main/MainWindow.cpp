@@ -178,7 +178,7 @@ void MainWindow::applyZoomFactorAfterLoad()
 {
   ZoomFactor zoomFactor;
 
-  switch (m_mainWindowModel.zoomFactorInitial())
+  switch (m_modelMainWindow.zoomFactorInitial())
   {
     case ZOOM_INITIAL_16_TO_1:
       zoomFactor = ZOOM_16_TO_1;
@@ -1434,6 +1434,11 @@ bool MainWindow::maybeSave()
   return true;
 }
 
+MainWindowModel MainWindow::modelMainWindow () const
+{
+  return m_modelMainWindow;
+}
+
 void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::rebuildRecentFileListForCurrentFile";
@@ -1830,12 +1835,22 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   }
 
-  // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25.
+  // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25. Some or all
+  // settings are saved to the application AND saved to m_modelMainWindow for use in DlgSettingsMainWindow
+  QLocale localeDefault;
+  QLocale::Language language = (QLocale::Language) settings.value (SETTINGS_LOCALE_LANGUAGE,
+                                                                   QVariant (localeDefault.language())).toInt();
+  QLocale::Country country = (QLocale::Country) settings.value (SETTINGS_LOCALE_COUNTRY,
+                                                                QVariant (localeDefault.country())).toInt();
+  QLocale locale (language,
+                  country);
   slotViewZoom ((ZoomFactor) settings.value (SETTINGS_ZOOM_FACTOR,
                                              QVariant (ZOOM_1_TO_1)).toInt());
-  m_mainWindowModel.setZoomFactorInitial((ZoomFactorInitial) settings.value (SETTINGS_ZOOM_FACTOR_INITIAL,
+  m_modelMainWindow.setLocale (locale);
+
+  m_modelMainWindow.setZoomFactorInitial((ZoomFactorInitial) settings.value (SETTINGS_ZOOM_FACTOR_INITIAL,
                                                                              QVariant (DEFAULT_ZOOM_FACTOR_INITIAL)).toInt());
-  m_mainWindowModel.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
+  m_modelMainWindow.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
                                                                   QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
   updateSettingsMainWindow();
 
@@ -1866,15 +1881,17 @@ void MainWindow::settingsWrite ()
 
   }
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
+  settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
-  settings.setValue (SETTINGS_ZOOM_CONTROL, m_mainWindowModel.zoomControl());
+  settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
-  settings.setValue (SETTINGS_ZOOM_FACTOR_INITIAL, m_mainWindowModel.zoomFactorInitial());
+  settings.setValue (SETTINGS_ZOOM_FACTOR_INITIAL, m_modelMainWindow.zoomFactorInitial());
   settings.endGroup ();
 }
 
@@ -2184,6 +2201,7 @@ void MainWindow::slotFileExport ()
         ExportToFile exportStrategy;
         exportStrategy.exportToFile (cmdMediator().document().modelExport(),
                                      cmdMediator().document(),
+                                     m_modelMainWindow,
                                      transformation (),
                                      str);
 
@@ -2612,7 +2630,7 @@ void MainWindow::slotSettingsMainWindow ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsMainWindow";
 
   m_dlgSettingsMainWindow->loadMainWindowModel (*m_cmdMediator,
-                                                m_mainWindowModel);
+                                                m_modelMainWindow);
   m_dlgSettingsMainWindow->show ();
 }
 
@@ -3330,8 +3348,8 @@ void MainWindow::updateSettingsMainWindow()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsMainWindow";
 
-  if (m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_ONLY ||
-      m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) {
+  if (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_ONLY ||
+      m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) {
 
     m_actionZoomIn->setShortcut (tr (""));
     m_actionZoomOut->setShortcut (tr (""));
@@ -3348,7 +3366,7 @@ void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsMainWindow";
 
-  m_mainWindowModel = modelMainWindow;
+  m_modelMainWindow = modelMainWindow;
   updateSettingsMainWindow();
 }
 
@@ -3369,7 +3387,9 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
 
 void MainWindow::updateTransformationAndItsDependencies()
 {
-  m_transformation.update (!m_currentFile.isEmpty (), *m_cmdMediator);
+  m_transformation.update (!m_currentFile.isEmpty (),
+                           *m_cmdMediator,
+                           m_modelMainWindow);
 
   // Grid removal is affected by new transformation
   m_backgroundStateContext->setCurveSelected (m_transformation,
@@ -3451,8 +3471,8 @@ void MainWindow::wheelEvent(QWheelEvent *event)
                               << " degrees=" << numDegrees.y()
                               << " phase=" << event->phase();
 
-  if (m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
-      m_mainWindowModel.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS) {
+  if (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
+      m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS) {
 
     if (numDegrees.y() >= ANGLE_THRESHOLD) {
       // Rotated forwards away from the user, which means zoom out

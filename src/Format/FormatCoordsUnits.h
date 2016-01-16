@@ -2,6 +2,7 @@
 #define FORMAT_COORDS_UNITS_H
 
 class DocumentModelCoords;
+class MainWindowModel;
 class QString;
 class Transformation;
 
@@ -15,6 +16,7 @@ class FormatCoordsUnits {
   void formattedToUnformatted (const QString &xThetaFormatted,
                                const QString &yRadiusFormatted,
                                const DocumentModelCoords &modelCoords,
+                               const MainWindowModel &mainWindowModel,
                                double &xThetaUnformatted,
                                double &yRadiusUnformatted) const;
 
@@ -22,6 +24,7 @@ class FormatCoordsUnits {
   void unformattedToFormatted (double xThetaUnformatted,
                                double yRadiusUnformatted,
                                const DocumentModelCoords &modelCoords,
+                               const MainWindowModel &mainWindowModel,
                                QString &xThetaFormatted,
                                QString &yRadiusFormatted,
                                const Transformation &transformation) const;

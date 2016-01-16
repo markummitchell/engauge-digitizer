@@ -26,6 +26,7 @@ ExportFileRelations::ExportFileRelations()
 
 void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
+                                                              const MainWindowModel &modelMainWindow,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
@@ -47,6 +48,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                    xThetaYRadiusValues);
     loadXThetaYRadiusValues (modelExportOverride,
                              document,
+                             modelMainWindow,
                              curvesIncluded,
                              transformation,
                              xThetaYRadiusValues);
@@ -61,6 +63,7 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
 
 void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                                               const Document &document,
+                                                              const MainWindowModel &modelMainWindow,
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
@@ -75,6 +78,7 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
 
     exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                         document,
+                                        modelMainWindow,
                                         QStringList (curveIncluded),
                                         delimiter,
                                         transformation,
@@ -84,6 +88,7 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
 
 void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelExportOverride,
                                         const Document &document,
+                                        const MainWindowModel &modelMainWindow,
                                         const Transformation &transformation,
                                         QTextStream &str) const
 {
@@ -103,6 +108,7 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
   if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
     exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                         document,
+                                        modelMainWindow,
                                         curvesIncluded,
                                         delimiter,
                                         transformation,
@@ -110,6 +116,7 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
   } else {
     exportOnePerLineXThetaValuesMerged (modelExportOverride,
                                         document,
+                                        modelMainWindow,
                                         curvesIncluded,
                                         delimiter,
                                         transformation,
@@ -188,6 +195,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
 
 void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                                    const Document &document,
+                                                   const MainWindowModel &modelMainWindow,
                                                    const QStringList &curvesIncluded,
                                                    const Transformation &transformation,
                                                    QVector<QVector<QString*> > &xThetaYRadiusValues) const
@@ -209,6 +217,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
 
       // No interpolation. Raw points
       loadXThetaYRadiusValuesForCurveRaw (document.modelCoords(),
+                                          modelMainWindow,
                                           points,
                                           xThetaYRadiusValues [colXTheta],
                                           xThetaYRadiusValues [colYRadius],
@@ -227,6 +236,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
 
         loadXThetaYRadiusValuesForCurveInterpolatedSmooth (document.modelCoords(),
+                                                           modelMainWindow,
                                                            points,
                                                            ordinals,
                                                            xThetaYRadiusValues [colXTheta],
@@ -236,6 +246,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
       } else {
 
         loadXThetaYRadiusValuesForCurveInterpolatedStraight (document.modelCoords(),
+                                                             modelMainWindow,
                                                              points,
                                                              ordinals,
                                                              xThetaYRadiusValues [colXTheta],
@@ -247,6 +258,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                                             const MainWindowModel &modelMainWindow,
                                                                              const Points &points,
                                                                              const ExportValuesOrdinal &ordinals,
                                                                              QVector<QString*> &xThetaValues,
@@ -282,6 +294,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
     format.unformattedToFormatted (xTheta,
                                    yRadius,
                                    modelCoords,
+                                   modelMainWindow,
                                    *(xThetaValues [row]),
                                    *(yRadiusValues [row]),
                                    transformation);
@@ -289,6 +302,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                                               const MainWindowModel &modelMainWindow,
                                                                                const Points &points,
                                                                                const ExportValuesOrdinal &ordinals,
                                                                                QVector<QString*> &xThetaValues,
@@ -312,6 +326,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
     format.unformattedToFormatted (pointInterpolated.x(),
                                    pointInterpolated.y(),
                                    modelCoords,
+                                   modelMainWindow,
                                    *(xThetaValues [row]),
                                    *(yRadiusValues [row]),
                                    transformation);
@@ -319,6 +334,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                                              const MainWindowModel &modelMainWindow,
                                                               const Points &points,
                                                               QVector<QString*> &xThetaValues,
                                                               QVector<QString*> &yRadiusValues,
@@ -340,6 +356,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
     format.unformattedToFormatted (posGraph.x(),
                                    posGraph.y(),
                                    modelCoords,
+                                   modelMainWindow,
                                    *(xThetaValues [pt]),
                                    *(yRadiusValues [pt]),
                                    transformation);

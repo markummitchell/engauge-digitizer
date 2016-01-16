@@ -7,6 +7,7 @@
 #include "ExportFileRelations.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowModel.h"
 #include <QComboBox>
 #include <QDoubleValidator>
 #include <QGridLayout>
@@ -925,7 +926,8 @@ void DlgSettingsExportFormat::updatePreview()
       ExportFileFunctions exportStrategy;
       exportStrategy.exportToFile (*m_modelExportAfter,
                                    cmdMediator().document(),
-                                    mainWindow().transformation(),
+                                   mainWindow().modelMainWindow(),
+                                   mainWindow().transformation(),
                                    str);
 
     } else {
@@ -933,6 +935,7 @@ void DlgSettingsExportFormat::updatePreview()
       ExportFileRelations exportStrategy;
       exportStrategy.exportToFile (*m_modelExportAfter,
                                    cmdMediator().document(),
+                                   mainWindow().modelMainWindow(),
                                    mainWindow().transformation(),
                                    str);
 

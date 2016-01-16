@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_MODEL_H
 
 #include "DocumentModelAbstractBase.h"
+#include <QLocale>
 #include <QString>
 #include "ZoomControl.h"
 #include "ZoomFactorInitial.h"
@@ -25,11 +26,21 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
+  /// Get method for locale
+  QLocale locale() const;
+
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,
                     QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
+
+  /// Set method for locale given attributes
+  void setLocale (QLocale::Language language,
+                  QLocale::Country country);
+
+  /// Set method for locale given locale object
+  void setLocale (const QLocale &locale);
 
   /// Set method for zoom control
   void setZoomControl (ZoomControl zoomControl);
@@ -45,6 +56,7 @@ public:
 
 private:
 
+  QLocale m_locale;
   ZoomControl m_zoomControl;
   ZoomFactorInitial m_zoomFactorInitial;
 

@@ -5,6 +5,7 @@
 #include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include <QString>
 
+class QLocale;
 class Transformation;
 
 /// Format conversions between unformatted and formatted for CoordUnitsStrategyPolarTheta
@@ -15,10 +16,12 @@ class FormatCoordsUnitsStrategyPolarTheta : public FormatCoordsUnitsStrategyAbst
 
   /// Convert formatted string to simple unformatted number
   double formattedToUnformatted (const QString &string,
+                                 const QLocale &locale,
                                  CoordUnitsPolarTheta coordUnits) const;
 
   /// Convert simple unformatted number to formatted string
   QString unformattedToFormatted (double valueUnformatted,
+                                  const QLocale &locale,
                                   CoordUnitsPolarTheta coordUnits,
                                   const Transformation &transformation,
                                   double valueUnformattedOther) const;
