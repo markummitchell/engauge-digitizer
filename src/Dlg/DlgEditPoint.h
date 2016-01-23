@@ -14,6 +14,7 @@ class DigitizeStateAbstractBase;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
 class MainWindow;
+class MainWindowModel;
 class QDoubleValidator;
 class QVBoxLayout;
 class Transformation;
@@ -29,6 +30,7 @@ public:
   DlgEditPoint (MainWindow &mainWindow,
                 DigitizeStateAbstractBase &digitizeState,
                 const DocumentModelCoords &modelCoords,
+                const MainWindowModel &modelMainWindow,
                 const QCursor &cursorShape,
                 const Transformation &transformation,
                 const double *xInitialValue = 0,
@@ -66,6 +68,7 @@ private:
   QPushButton *m_btnCancel;
 
   const DocumentModelCoords &m_modelCoords;
+  const MainWindowModel &m_modelMainWindow;
 };
 
 #endif // DLG_EDIT_POINT_H

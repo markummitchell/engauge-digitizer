@@ -925,7 +925,8 @@ void DlgSettingsExportFormat::updatePreview()
       ExportFileFunctions exportStrategy;
       exportStrategy.exportToFile (*m_modelExportAfter,
                                    cmdMediator().document(),
-                                    mainWindow().transformation(),
+                                   mainWindow().modelMainWindow(),
+                                   mainWindow().transformation(),
                                    str);
 
     } else {
@@ -933,6 +934,7 @@ void DlgSettingsExportFormat::updatePreview()
       ExportFileRelations exportStrategy;
       exportStrategy.exportToFile (*m_modelExportAfter,
                                    cmdMediator().document(),
+                                   mainWindow().modelMainWindow(),
                                    mainWindow().transformation(),
                                    str);
 

@@ -10,6 +10,7 @@
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowModel.h"
 #include <QDoubleValidator>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -29,13 +30,15 @@ const bool IS_NOT_X_THETA = false;
 DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             DigitizeStateAbstractBase &digitizeState,
                             const DocumentModelCoords &modelCoords,
+                            const MainWindowModel &modelMainWindow,
                             const QCursor &cursorShape,
                             const Transformation &transformation,
                             const double *xInitialValue,
                             const double *yInitialValue) :
   QDialog (&mainWindow),
   m_cursorShape (cursorShape),
-  m_modelCoords (modelCoords)
+  m_modelCoords (modelCoords),
+  m_modelMainWindow (modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::DlgEditPoint";
 
@@ -80,13 +83,15 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                                                                                 m_modelCoords.coordUnitsX(),
                                                                                 m_modelCoords.coordUnitsTheta(),
                                                                                 m_modelCoords.coordUnitsDate(),
-                                                                                m_modelCoords.coordUnitsTime());
+                                                                                m_modelCoords.coordUnitsTime(),
+                                                                                m_modelMainWindow.locale());
   m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (m_modelCoords.coordScaleYRadius(),
                                                                                    isCartesian (),
                                                                                    m_modelCoords.coordUnitsY(),
                                                                                    m_modelCoords.coordUnitsRadius(),
                                                                                    m_modelCoords.coordUnitsDate(),
-                                                                                   m_modelCoords.coordUnitsTime());
+                                                                                   m_modelCoords.coordUnitsTime(),
+                                                                                   m_modelMainWindow.locale());
 
   // Label, with guidance in terms of legal ranges and units
   QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8 as (%9, %10):")
@@ -168,6 +173,7 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
     format.unformattedToFormatted (*xInitialValue,
                                    *yInitialValue,
                                    m_modelCoords,
+                                   m_modelMainWindow,
                                    xTheta,
                                    yRadius,
                                    transformation);
@@ -201,6 +207,7 @@ QPointF DlgEditPoint::posGraph () const
   format.formattedToUnformatted (m_editGraphX->text(),
                                  m_editGraphY->text(),
                                  m_modelCoords,
+                                 m_modelMainWindow,
                                  xTheta,
                                  yRadius);
 

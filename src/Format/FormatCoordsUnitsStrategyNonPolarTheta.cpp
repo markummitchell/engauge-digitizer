@@ -3,6 +3,7 @@
 #include "FormatDateTime.h"
 #include "FormatDegreesMinutesSecondsNonPolarTheta.h"
 #include "Logger.h"
+#include <QLocale>
 #include "Transformation.h"
 
 FormatCoordsUnitsStrategyNonPolarTheta::FormatCoordsUnitsStrategyNonPolarTheta ()
@@ -10,6 +11,7 @@ FormatCoordsUnitsStrategyNonPolarTheta::FormatCoordsUnitsStrategyNonPolarTheta (
 }
 
 double FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted (const QString &string,
+                                                                       const QLocale &locale,
                                                                        CoordUnitsNonPolarTheta coordUnits,
                                                                        CoordUnitsDate coordUnitsDate,
                                                                        CoordUnitsTime coordUnitsTime) const
@@ -39,7 +41,7 @@ double FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted (const QSt
       break;
 
     case COORD_UNITS_NON_POLAR_THETA_NUMBER:
-      value = string.toDouble ();
+      value = locale.toDouble (string);
       break;
 
     default:
@@ -52,6 +54,7 @@ double FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted (const QSt
 }
 
 QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double valueUnformatted,
+                                                                        const QLocale &locale,
                                                                         CoordUnitsNonPolarTheta coordUnits,
                                                                         CoordUnitsDate coordUnitsDate,
                                                                         CoordUnitsTime coordUnitsTime,
@@ -86,7 +89,7 @@ QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double v
       break;
 
     case COORD_UNITS_NON_POLAR_THETA_NUMBER:
-      valueFormatted = QString::number (valueUnformatted,
+      valueFormatted = locale.toString (valueUnformatted,
                                         FORMAT,
                                         precisionDigitsForRawNumber (valueUnformatted,
                                                                      valueUnformattedOther,

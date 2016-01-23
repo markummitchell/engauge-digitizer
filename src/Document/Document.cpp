@@ -770,20 +770,8 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
 
   writer.writeCDATA (array.toBase64 ());
+  m_coordSystemContext.saveXml (writer);
   writer.writeEndElement();
-
-  // Serialize the Document variables
-//  m_modelGeneral.saveXml (writer);
-//  m_modelCoords.saveXml (writer);
-//  m_modelDigitizeCurve.saveXml (writer);
-//  m_modelExport.saveXml (writer);
-//  m_modelAxesChecker.saveXml (writer);
-//  m_modelGridRemoval.saveXml (writer);
-//  m_modelPointMatch.saveXml (writer);
-//  m_modelSegments.saveXml (writer);
-//  m_curveAxes->saveXml (writer);
-//  m_curvesGraphs.saveXml (writer);
-//  writer.writeEndElement();
 }
 
 void Document::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)

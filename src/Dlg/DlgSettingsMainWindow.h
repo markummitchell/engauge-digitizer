@@ -2,6 +2,7 @@
 #define DLG_SETTINGS_MAIN_WINDOW_H
 
 #include "DlgSettingsAbstractBase.h"
+#include <QLocale>
 
 class QComboBox;
 class QGridLayout;
@@ -28,6 +29,7 @@ public:
                             const MainWindowModel &modelMainWindow);
 
 private slots:
+  void slotLocale (int index);
   void slotZoomControl (const QString);
   void slotZoomFactor (const QString);
 
@@ -38,10 +40,13 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
+  QString localeLabel (QLocale::Language lang,
+                       QLocale::Country country) const;
   void updateControls();
 
   QComboBox *m_cmbZoomFactor;
   QComboBox *m_cmbZoomControl;
+  QComboBox *m_cmbLocale;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

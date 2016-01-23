@@ -47,6 +47,7 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (const QString &pointIden
   DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
                                        *this,
                                        context().cmdMediator().document().modelCoords(),
+                                       context().mainWindow().modelMainWindow(),
                                        cursor (),
                                        context().mainWindow().transformation(),
                                        &x,

@@ -4,16 +4,66 @@
 #include "DlgValidatorFactory.h"
 #include "DlgValidatorNumber.h"
 #include "Logger.h"
+#include <QLocale>
 
 DlgValidatorFactory::DlgValidatorFactory()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::DlgValidatorFactory";
 }
 
+DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,
+                                                                                    bool isCartesian,
+                                                                                    CoordUnitsNonPolarTheta coordUnitsCartesian,
+                                                                                    CoordUnitsNonPolarTheta coordUnitsPolar,
+                                                                                    CoordUnitsDate coordUnitsDate,
+                                                                                    CoordUnitsTime coordUnitsTime,
+                                                                                    const QLocale &locale) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar";
+
+  if (isCartesian) {
+    return createWithNonPolar (coordScale,
+                               coordUnitsCartesian,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  } else {
+    return createWithNonPolar (coordScale,
+                               coordUnitsPolar,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  }
+}
+
+DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithPolarPolar (CoordScale coordScale,
+                                                                                 bool isCartesian,
+                                                                                 CoordUnitsNonPolarTheta coordUnitsCartesian,
+                                                                                 CoordUnitsPolarTheta coordUnitsPolar,
+                                                                                 CoordUnitsDate coordUnitsDate,
+                                                                                 CoordUnitsTime coordUnitsTime,
+                                                                                 const QLocale &locale) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithPolarPolar";
+
+  if (isCartesian) {
+    return createWithNonPolar (coordScale,
+                               coordUnitsCartesian,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  } else {
+    return createWithPolar (coordScale,
+                            coordUnitsPolar,
+                            locale);
+  }
+}
+
 DlgValidatorAbstract *DlgValidatorFactory::createWithNonPolar (CoordScale coordScale,
                                                                CoordUnitsNonPolarTheta coordUnits,
                                                                CoordUnitsDate coordUnitsDate,
-                                                               CoordUnitsTime coordUnitsTime) const
+                                                               CoordUnitsTime coordUnitsTime,
+                                                               const QLocale &locale) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createWithNonPolar";
 
@@ -27,7 +77,8 @@ DlgValidatorAbstract *DlgValidatorFactory::createWithNonPolar (CoordScale coordS
       return new DlgValidatorDegreesMinutesSeconds (coordScale);
 
     case COORD_UNITS_NON_POLAR_THETA_NUMBER:
-      return new DlgValidatorNumber(coordScale);
+      return new DlgValidatorNumber(coordScale,
+                                    locale);
 
     default:
       LOG4CPP_ERROR_S ((*mainCat)) << "DlgValidatorFactory::createWithNonPolar";
@@ -36,7 +87,8 @@ DlgValidatorAbstract *DlgValidatorFactory::createWithNonPolar (CoordScale coordS
 }
 
 DlgValidatorAbstract *DlgValidatorFactory::createWithPolar (CoordScale coordScale,
-                                                            CoordUnitsPolarTheta coordUnits) const
+                                                            CoordUnitsPolarTheta coordUnits,
+                                                            const QLocale &locale) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createWithPolar";
 
@@ -50,52 +102,11 @@ DlgValidatorAbstract *DlgValidatorFactory::createWithPolar (CoordScale coordScal
     case COORD_UNITS_POLAR_THETA_GRADIANS:
     case COORD_UNITS_POLAR_THETA_RADIANS:
     case COORD_UNITS_POLAR_THETA_TURNS:
-      return new DlgValidatorNumber (coordScale);
+      return new DlgValidatorNumber (coordScale,
+                                     locale);
 
     default:
       LOG4CPP_ERROR_S ((*mainCat)) << "DlgValidatorFactory::createWithNonPolar";
       exit (-1);
-  }
-}
-
-DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,
-                                                                                    bool isCartesian,
-                                                                                    CoordUnitsNonPolarTheta coordUnitsCartesian,
-                                                                                    CoordUnitsNonPolarTheta coordUnitsPolar,
-                                                                                    CoordUnitsDate coordUnitsDate,
-                                                                                    CoordUnitsTime coordUnitsTime) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar";
-
-  if (isCartesian) {
-    return createWithNonPolar (coordScale,
-                               coordUnitsCartesian,
-                               coordUnitsDate,
-                               coordUnitsTime);
-  } else {
-    return createWithNonPolar (coordScale,
-                               coordUnitsPolar,
-                               coordUnitsDate,
-                               coordUnitsTime);
-  }
-}
-
-DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithPolarPolar (CoordScale coordScale,
-                                                                                 bool isCartesian,
-                                                                                 CoordUnitsNonPolarTheta coordUnitsCartesian,
-                                                                                 CoordUnitsPolarTheta coordUnitsPolar,
-                                                                                 CoordUnitsDate coordUnitsDate,
-                                                                                 CoordUnitsTime coordUnitsTime) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithPolarPolar";
-
-  if (isCartesian) {
-    return createWithNonPolar (coordScale,
-                               coordUnitsCartesian,
-                               coordUnitsDate,
-                               coordUnitsTime);
-  } else {
-    return createWithPolar (coordScale,
-                            coordUnitsPolar);
   }
 }

@@ -7,6 +7,7 @@
 #include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include <QString>
 
+class QLocale;
 class Transformation;
 
 /// Format conversions between unformatted and formatted for CoordUnitsNonPolarTheta
@@ -18,12 +19,14 @@ class FormatCoordsUnitsStrategyNonPolarTheta : public FormatCoordsUnitsStrategyA
 
   /// Convert formatted string to simple unformatted number
   double formattedToUnformatted (const QString &string,
+                                 const QLocale &locale,
                                  CoordUnitsNonPolarTheta coordUnits,
                                  CoordUnitsDate coordUnitsDate,
                                  CoordUnitsTime coordUnitsTime) const;
 
   /// Convert simple unformatted number to formatted string
   QString unformattedToFormatted (double valueUnformatted,
+                                  const QLocale &locale,
                                   CoordUnitsNonPolarTheta coordUnits,
                                   CoordUnitsDate coordUnitsDate,
                                   CoordUnitsTime coordUnitsTime,

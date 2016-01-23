@@ -3,6 +3,7 @@
 
 #include "CmdMediator.h"
 #include "DocumentModelCoords.h"
+#include "MainWindowModel.h"
 #include <QPointF>
 #include <QString>
 #include <QTransform>
@@ -114,7 +115,8 @@ public:
 
   /// Update transform by iterating through the axis points.
   void update (bool fileIsLoaded,
-               const CmdMediator &cmdMediator);
+               const CmdMediator &cmdMediator,
+               const MainWindowModel &modelMainWindow);
 
 private:
 
@@ -122,7 +124,8 @@ private:
   double roundOffSmallValues (double value, double range);
 
   // Model coords are set upon entry from CmdMediator
-  void setModelCoords (const DocumentModelCoords &modelCoords);
+  void setModelCoords (const DocumentModelCoords &modelCoords,
+                       const MainWindowModel &modelMainWindow);
 
   // Compute transform from screen and graph points. The 3x3 matrices are handled as QTransform since QMatrix is deprecated
   void updateTransformFromMatrices (const QTransform &matrixScreen,
@@ -136,6 +139,9 @@ private:
 
   // Coordinates information from last time the transform was updated. Only defined if  m_transformIsDefined is true
   DocumentModelCoords m_modelCoords;
+
+  // Formatting information
+  MainWindowModel m_modelMainWindow;
 };
 
 /// Stream operator

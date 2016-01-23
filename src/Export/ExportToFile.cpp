@@ -12,6 +12,7 @@ ExportToFile::ExportToFile()
 
 void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
                                  const Document &document,
+                                 const MainWindowModel &modelMainWindow,
                                  const Transformation &transformation,
                                  QTextStream &str) const
 {
@@ -20,12 +21,14 @@ void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
   ExportFileFunctions exportFunctions;
   exportFunctions.exportToFile (modelExport,
                                 document,
+                                modelMainWindow,
                                 transformation,
                                 str);
 
   ExportFileRelations exportRelations;
   exportRelations.exportToFile (modelExport,
                                 document,
+                                modelMainWindow,
                                 transformation,
                                 str);
 }

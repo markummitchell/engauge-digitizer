@@ -41,6 +41,8 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::createControls";
 
+  const int COLUMN0 = 0;
+
   QLabel *labelZoomFactor = new QLabel ("Initial zoom:");
   layout->addWidget (labelZoomFactor, row, 1);
 
@@ -74,6 +76,30 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                       "Select which inputs are used to zoom in and out."));
   connect (m_cmbZoomControl, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomControl(const QString)));
   layout->addWidget (m_cmbZoomControl, row++, 2);
+
+  QLabel *labelLocale = new QLabel ("Locale:");
+  layout->addWidget (labelLocale, row, 1);
+
+  // Initialization of combobox is liberated from Qt Calendar example
+  m_cmbLocale = new QComboBox;
+  m_cmbLocale->setWhatsThis(tr ("Locale\n\n"
+                                "Select the locale that will be used when converting between numbers and strings. "
+                                "This affects the use of commas or periods as group delimiters in each number entered "
+                                "by the user, displayed in the user interface, or exported to a file."));
+  for (int indexLang = QLocale::C; indexLang <= QLocale::LastLanguage; indexLang++) {
+    QLocale::Language lang = static_cast<QLocale::Language> (indexLang);
+    QList<QLocale::Country> countries = QLocale::countriesForLanguage(lang);
+    for (int indexCountry = 0; indexCountry < countries.count(); indexCountry++) {
+      QLocale::Country country = countries.at(indexCountry);
+      QString label = localeLabel (lang,
+                                   country);
+      QLocale locale (lang, country);
+      m_cmbLocale->addItem (label, locale);
+    }
+  }
+  m_cmbLocale->model()->sort(COLUMN0); // Sort the new entries
+  connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
+  layout->addWidget (m_cmbLocale, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -143,9 +169,29 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_cmbZoomFactor->setCurrentIndex (index);
   index = m_cmbZoomControl->findData (m_modelMainWindowAfter->zoomControl());
   m_cmbZoomControl->setCurrentIndex (index);
+  QString locLabel = localeLabel (m_modelMainWindowAfter->locale().language(),
+                                  m_modelMainWindowBefore->locale().country());
+  index = m_cmbLocale->findText (locLabel);
+  m_cmbLocale->setCurrentIndex(index);
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+QString DlgSettingsMainWindow::localeLabel (QLocale::Language lang,
+                                            QLocale::Country country) const
+{
+  return QString ("%1/%2")
+      .arg (QLocale::languageToString (lang))
+      .arg (QLocale::countryToString(country));
+}
+
+void DlgSettingsMainWindow::slotLocale (int index)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotLocale";
+
+  m_modelMainWindowAfter->setLocale (m_cmbLocale->itemData (index).toLocale());
+  updateControls();
 }
 
 void DlgSettingsMainWindow::slotZoomControl(const QString)

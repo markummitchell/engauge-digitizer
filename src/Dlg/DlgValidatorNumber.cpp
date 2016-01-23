@@ -2,9 +2,11 @@
 #include "Logger.h"
 
 DlgValidatorNumber::DlgValidatorNumber(CoordScale coordScale,
+                                       const QLocale &locale,
                                        QObject *parent) :
   DlgValidatorAbstract(parent),
-  m_coordScale (coordScale)
+  m_coordScale (coordScale),
+  m_locale (locale)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorNumber::DlgValidatorNumber";
 }
@@ -13,8 +15,10 @@ QValidator::State DlgValidatorNumber::validate (QString &input,
                                                 int &pos) const
 {
   // First do standard check
-  QValidator::State state = QDoubleValidator::validate (input,
-                                                        pos);
+  QDoubleValidator validator;
+  validator.setLocale (m_locale);
+  QValidator::State state = validator.validate (input,
+                                                pos);
   if (state == QValidator::Acceptable) {
 
     if (m_coordScale == COORD_SCALE_LOG) {
