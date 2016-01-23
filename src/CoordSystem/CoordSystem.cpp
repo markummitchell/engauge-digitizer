@@ -34,64 +34,64 @@ CoordSystem::CoordSystem () :
                           ColorFilterSettings::defaultFilter (),
                           CurveStyle (LineStyle::defaultAxesCurve(),
                                       PointStyle::defaultAxesCurve ())))
-                          {
-                            LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
 
-                            SettingsForGraph settingsForGraph;
-                            QString curveName = settingsForGraph.defaultCurveName (1,
-                                                                                   DEFAULT_GRAPH_CURVE_NAME);
-                            m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
-                                                                      ColorFilterSettings::defaultFilter (),
-                                                                      CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
-                                                                                  PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
-                          }
+  SettingsForGraph settingsForGraph;
+  QString curveName = settingsForGraph.defaultCurveName (1,
+                                                         DEFAULT_GRAPH_CURVE_NAME);
+  m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
+                                            ColorFilterSettings::defaultFilter (),
+                                            CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
+                                                        PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
+}
 
-                                                                      void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
-                                                                      {
-                                                                        m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
-                                                                                                                   ColorFilterSettings::defaultFilter (),
-                                                                                                                   CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
-                                                                                                                               PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
-                                                                      }
+void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
+{
+  m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,
+                                             ColorFilterSettings::defaultFilter (),
+                                             CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
+                                                         PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
+}
 
-                                                                                                                   void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
-                                                                                                                                                                          const QPointF &posGraph,
-                                                                                                                                                                          QString &identifier,
-                                                                                                                                                                          double ordinal)
-                                                                                                                   {
-                                                                                                                     Point point (AXIS_CURVE_NAME,
-                                                                                                                                  posScreen,
-                                                                                                                                  posGraph,
-                                                                                                                                  ordinal);
-                                                                                                                     m_curveAxes->addPoint (point);
+void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
+                                                       const QPointF &posGraph,
+                                                       QString &identifier,
+                                                       double ordinal)
+{
+  Point point (AXIS_CURVE_NAME,
+               posScreen,
+               posGraph,
+               ordinal);
+  m_curveAxes->addPoint (point);
 
-                                                                                                                     identifier = point.identifier();
+  identifier = point.identifier();
 
-                                                                                                                     LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithGeneratedIdentifier"
-                                                                                                                                                 << " ordinal=" << ordinal
-                                                                                                                                                 << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                                                                                                                                                 << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                                                                                                                                                 << " identifier=" << identifier.toLatin1 ().data ();
-                                                                                                                   }
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithGeneratedIdentifier"
+                              << " ordinal=" << ordinal
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
+                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
+                              << " identifier=" << identifier.toLatin1 ().data ();
+}
 
-                                                                                                                   void CoordSystem::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
-                                                                                                                                                                          const QPointF &posGraph,
-                                                                                                                                                                          const QString &identifier,
-                                                                                                                                                                          double ordinal)
-                                                                      {
-                                                                        Point point (AXIS_CURVE_NAME,
-                                                                                     identifier,
-                                                                                     posScreen,
-                                                                                     posGraph,
-                                                                                     ordinal);
-                                                                        m_curveAxes->addPoint (point);
+void CoordSystem::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
+                                                       const QPointF &posGraph,
+                                                       const QString &identifier,
+                                                       double ordinal)
+{
+  Point point (AXIS_CURVE_NAME,
+               identifier,
+               posScreen,
+               posGraph,
+               ordinal);
+  m_curveAxes->addPoint (point);
 
-                                                                        LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithSpecifiedIdentifier"
-                                                                                                    << " ordinal=" << ordinal
-                                                                                                    << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                                                                                                    << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                                                                                                    << " identifier=" << identifier.toLatin1 ().data ();
-                                                                      }
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithSpecifiedIdentifier"
+                              << " ordinal=" << ordinal
+                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
+                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
+                              << " identifier=" << identifier.toLatin1 ().data ();
+}
 
 void CoordSystem::addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                         const QPointF &posScreen,

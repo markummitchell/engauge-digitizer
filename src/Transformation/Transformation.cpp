@@ -191,6 +191,7 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       format.unformattedToFormatted (pointGraph.x(),
                                      pointGraph.y(),
                                      m_modelCoords,
+                                     m_modelMainWindow,
                                      xThetaFormatted,
                                      yRadiusFormatted,
                                      *this);
@@ -286,9 +287,11 @@ double Transformation::roundOffSmallValues (double value, double range)
   return value;
 }
 
-void Transformation::setModelCoords (const DocumentModelCoords &modelCoords)
+void Transformation::setModelCoords (const DocumentModelCoords &modelCoords,
+                                     const MainWindowModel &modelMainWindow)
 {
   m_modelCoords = modelCoords;
+  m_modelMainWindow = modelMainWindow;
 }
 
 void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &pointLinearCartesianGraph,
@@ -415,7 +418,8 @@ void Transformation::transformScreenToRawGraph (const QPointF &coordScreen,
 }
 
 void Transformation::update (bool fileIsLoaded,
-                             const CmdMediator &cmdMediator)
+                             const CmdMediator &cmdMediator,
+                             const MainWindowModel &modelMainWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Transformation::update";
 
@@ -425,7 +429,8 @@ void Transformation::update (bool fileIsLoaded,
 
   } else {
 
-    setModelCoords (cmdMediator.document().modelCoords());
+    setModelCoords (cmdMediator.document().modelCoords(),
+                    modelMainWindow);
 
     CallbackUpdateTransform ftor (m_modelCoords);
 

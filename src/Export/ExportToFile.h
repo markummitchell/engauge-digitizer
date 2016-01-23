@@ -5,6 +5,7 @@
 
 class Document;
 class DocumentModelExportFormat;
+class MainWindowModel;
 class QTextStream;
 class Transformation;
 
@@ -19,6 +20,7 @@ public:
   /// DlgSettingsExport can supply its own DocumentModelExportFormat when previewing what would be exported.
   void exportToFile (const DocumentModelExportFormat &modelExport,
                      const Document &document,
+                     const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
                      QTextStream &str) const;
 

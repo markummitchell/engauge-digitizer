@@ -87,6 +87,9 @@ public:
   /// Get method for gnuplot flag
   bool isGnuplot() const;
 
+  /// Get method for main window model
+  MainWindowModel modelMainWindow () const;
+
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
@@ -188,9 +191,9 @@ private slots:
   void slotChecklistClosed ();
   void slotCleanChanged (bool);
   void slotCmbBackground(int);
-  void slotCmbCurve(int);  
+  void slotCmbCoordSystem(int);
+  void slotCmbCurve(int);
   void slotContextMenuEvent (QString);
-  void slotCoordSystem(int);
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
@@ -482,7 +485,7 @@ private:
 
   // Main window settings
   bool m_isGnuplot; // From command line
-  MainWindowModel m_mainWindowModel; // From settings file or DlgSettingsMainWindow
+  MainWindowModel m_modelMainWindow; // From settings file or DlgSettingsMainWindow
 
   // File names to be loaded at startup. Only one is loaded into the current instance, with external instances created for the other files
   QTimer *m_timerLoadStartupFiles;

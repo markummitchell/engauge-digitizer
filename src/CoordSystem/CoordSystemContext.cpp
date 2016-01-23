@@ -382,7 +382,9 @@ void CoordSystemContext::saveXml (QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::saveXml";
 
-  m_coordSystems [m_coordSystemIndex]->saveXml (writer);
+  for (int index = 0; index < m_coordSystems.count(); index++) {
+    m_coordSystems [m_coordSystemIndex]->saveXml (writer);
+  }
 }
 
 void CoordSystemContext::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)

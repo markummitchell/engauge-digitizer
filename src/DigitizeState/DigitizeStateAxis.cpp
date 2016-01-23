@@ -108,6 +108,7 @@ void DigitizeStateAxis::handleMouseRelease (QPointF posScreen)
     DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),
                                           *this,
                                           context().cmdMediator().document().modelCoords(),
+                                          context().mainWindow().modelMainWindow(),
                                           cursor (),
                                           context().mainWindow().transformation());
     int rtn = dlg->exec ();
