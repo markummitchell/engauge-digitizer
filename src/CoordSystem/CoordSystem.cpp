@@ -700,26 +700,7 @@ void CoordSystem::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 
 void CoordSystem::saveXml (QXmlStreamWriter &writer) const
 {
-  writer.writeStartElement(DOCUMENT_SERIALIZE_DOCUMENT);
-
-  // Version number is tacked onto DOCUMENT_SERIALIZE_DOCUMENT since the alternative  (creating a new start element)
-  // causes the code to complain during loading
-  writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
-
-  // Serialize the Document image. That binary data is encoded as base64
-  QByteArray array;
-  QDataStream str (&array, QIODevice::WriteOnly);
-  //  QImage img = m_pixmap.toImage ();
-  //  str << img;
-  writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
-
-  // Image width and height are explicitly inserted for error reports, since the CDATA is removed
-  // but we still want the image size for reconstructing the error(s)
-  //  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (img.width()));
-  //  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
-
-  writer.writeCDATA (array.toBase64 ());
-  writer.writeEndElement();
+  writer.writeStartElement(DOCUMENT_SERIALIZE_COORD_SYSTEM);
 
   // Serialize the Document variables
   m_modelGeneral.saveXml (writer);
