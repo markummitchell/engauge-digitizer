@@ -144,4 +144,4 @@ cp ../bin/opengl32sw.dll      "Engauge Digitizer"
 cp ../bin/Qt5*.dll            "Engauge Digitizer"
 #
 echo "***Building zip file"
-/C/cygwin64/bin/zip -r digit-exe-windows-32-bit-zip-file-$VERSION_NUMBER_CODE.zip "Engauge Digitizer"
+/C/cygwin64/bin/zip -r digit-exe-windows-32-bit-without-installer-file-$VERSION_NUMBER_CODE.zip "Engauge Digitizer"
