@@ -38,6 +38,7 @@ class DocumentModelGeneral;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
+class ExportToFile;
 class GraphicsScene;
 class GraphicsView;
 class HelpWindow;
@@ -298,6 +299,9 @@ private:
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
+  DocumentModelExportFormat modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
+                                                 const ExportToFile &exportStrategy,
+                                                 const QString &selectedNameFilter) const;
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   bool saveDocumentFile(const QString &fileName);
   QString saveErrorReportFileAndExitXml (const char *comment,

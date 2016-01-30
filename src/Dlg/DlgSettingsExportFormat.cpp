@@ -98,24 +98,27 @@ void DlgSettingsExportFormat::createDelimiters (QHBoxLayout *layoutMisc)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createDelimiters";
 
-  QGroupBox *groupDelimiters = new QGroupBox (tr ("Delimiters"));
+  QGroupBox *groupDelimiters = new QGroupBox (tr ("Default Delimiters"));
   layoutMisc->addWidget (groupDelimiters, 1);
 
   QVBoxLayout *layoutDelimiters = new QVBoxLayout;
   groupDelimiters->setLayout (layoutDelimiters);
 
   m_btnDelimitersCommas = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_COMMA));
-  m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values"));
+  m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values.\n\n"
+                                           "This setting is overridden for TSV files"));
   layoutDelimiters->addWidget (m_btnDelimitersCommas);
   connect (m_btnDelimitersCommas, SIGNAL (released ()), this, SLOT (slotDelimitersCommas()));
 
   m_btnDelimitersSpaces = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_SPACE));
-  m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values"));
+  m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values.\n\n"
+                                           "This setting is overridden for CSV and TSV files"));
   layoutDelimiters->addWidget (m_btnDelimitersSpaces);
   connect (m_btnDelimitersSpaces, SIGNAL (released ()), this, SLOT (slotDelimitersSpaces()));
 
   m_btnDelimitersTabs = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_TAB));
-  m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values"));
+  m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values.\n\n"
+                                         "This setting is overridden for CSV files"));
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
 }
