@@ -9,6 +9,12 @@ class MainWindowModel;
 class QTextStream;
 class Transformation;
 
+enum ExportToFileExtension {
+  EXPORT_TO_FILE_EXTENSION_CSV,
+  EXPORT_TO_FILE_EXTENSION_TSV,
+  EXPORT_TO_FILE_EXTENSION_DEFAULT
+};
+
 /// Strategy class for exporting to a file. This strategy is external to the Document class so that class is simpler.
 class ExportToFile
 {
@@ -23,6 +29,18 @@ public:
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
                      QTextStream &str) const;
+
+  /// File extension for csv export files
+  QString fileExtensionCsv () const;
+
+  /// File extension for tsv export files
+  QString fileExtensionTsv () const;
+
+  /// QFileDialog filter for CSV files
+  QString filterCsv () const;
+
+  /// QFileDialog filter for TSV files
+  QString filterTsv () const;
 
 };
 
