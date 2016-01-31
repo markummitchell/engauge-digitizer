@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Grid Removal Settings");
+const QString CMD_DESCRIPTION ("Grid Removal settings");
 
 CmdSettingsGridRemoval::CmdSettingsGridRemoval(MainWindow &mainWindow,
                                                Document &document,

@@ -8,7 +8,7 @@
 #include "QtToString.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Edit Axis Point");
+const QString CMD_DESCRIPTION ("Edit axis point");
 
 CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
                                     Document &document,

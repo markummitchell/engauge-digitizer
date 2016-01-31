@@ -9,7 +9,7 @@
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
-const QString CMD_DESCRIPTION ("Add Graph Points");
+const QString CMD_DESCRIPTION ("Add graph points");
 
 CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
                                       Document &document,

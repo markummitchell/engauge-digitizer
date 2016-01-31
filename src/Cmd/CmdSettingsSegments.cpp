@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Segments Settings");
+const QString CMD_DESCRIPTION ("Segments settings");
 
 CmdSettingsSegments::CmdSettingsSegments(MainWindow &mainWindow,
                                          Document &document,

@@ -24,7 +24,7 @@ private:
   DlgValidatorNumber();
 
   const CoordScale m_coordScale;
-  QLocale m_locale;
+  const QLocale m_locale;
 };
 
 #endif // DLG_VALIDATOR_NUMBER_H

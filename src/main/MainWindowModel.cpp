@@ -13,7 +13,7 @@ MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL)
 {
-  // Locale member variable m_locale is initialized to default locale when default constructor is used
+  // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
 
 MainWindowModel::MainWindowModel(const MainWindowModel &other) :

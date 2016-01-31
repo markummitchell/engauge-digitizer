@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Export Settings");
+const QString CMD_DESCRIPTION ("Export settings");
 
 CmdSettingsExportFormat::CmdSettingsExportFormat(MainWindow &mainWindow,
                                                  Document &document,

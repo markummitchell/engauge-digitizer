@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Axes Checker Settings");
+const QString CMD_DESCRIPTION ("Axes checker settings");
 
 CmdSettingsAxesChecker::CmdSettingsAxesChecker(MainWindow &mainWindow,
                                                Document &document,

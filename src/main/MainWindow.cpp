@@ -108,8 +108,6 @@ const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
 const QString EMPTY_FILENAME ("");
 const QString ENGAUGE_FILENAME_DESCRIPTION ("Engauge Document");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
-const QString CSV_FILENAME_EXTENSION ("csv");
-const QString TSV_FILENAME_EXTENSION ("tsv");
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 const unsigned int ONE_COORDINATE_SYSTEM = 1;
@@ -1160,6 +1158,7 @@ ZoomFactor MainWindow::currentZoomFactor () const
     return ZOOM_FILL;
   } else {
     ENGAUGE_ASSERT (false);
+    return ZOOM_1_TO_1;
   }
 }
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -1556,6 +1555,31 @@ bool MainWindow::maybeSave()
   }
 
   return true;
+}
+
+DocumentModelExportFormat MainWindow::modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
+                                                           const ExportToFile &exportStrategy,
+                                                           const QString &fileName) const
+{
+  DocumentModelExportFormat modelExportFormatAfter = modelExportFormatBefore;
+
+  // Extract file extensions
+  QString csvExtension = QString (".%1")
+                         .arg (exportStrategy.fileExtensionCsv());
+  QString tsvExtension = QString (".%1")
+                         .arg (exportStrategy.fileExtensionTsv());
+  QString fileExtensionVersusCsv = fileName.right (csvExtension.size());
+  QString fileExtensionVersusTsv = fileName.right (tsvExtension.size());
+
+  // Override if CSV or TSV was selected. We cannot use QFileDialog::selecedNameFilter() since that is
+  // broken in Linux, so we use the file extension
+  if (csvExtension.compare (fileExtensionVersusCsv, Qt::CaseInsensitive) == 0) {
+    modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_COMMA);
+  } else if (tsvExtension.compare (fileExtensionVersusTsv, Qt::CaseInsensitive) == 0) {
+    modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_TAB);
+  }
+
+  return modelExportFormatAfter;
 }
 
 MainWindowModel MainWindow::modelMainWindow () const
@@ -2320,19 +2344,21 @@ void MainWindow::slotFileExport ()
 
   if (m_transformation.transformIsDefined()) {
 
-    const int SELECTED_FILTER = 0;
-    QString filter = QString ("Text CSV (*.%1);;Text TSV (*.%2);;All files (*.*)")
-                     .arg (CSV_FILENAME_EXTENSION)
-                     .arg (TSV_FILENAME_EXTENSION);
+    const int SELECTED_FILTER_IS_CSV = 0;
+    ExportToFile exportStrategy;
+    QString filter = QString ("%1;;%2;;All files (*.*)")
+                     .arg (exportStrategy.filterCsv ())
+                     .arg (exportStrategy.filterTsv ());
     QString defaultFileName = QString ("%1/%2.%3")
                               .arg (QDir::currentPath ())
                               .arg (m_currentFile)
-                              .arg (CSV_FILENAME_EXTENSION);
-    QString fileName = QFileDialog::getSaveFileName (this,
-                                                     tr("Export"),
-                                                     defaultFileName,
-                                                     filter,
-                                                     SELECTED_FILTER);
+                              .arg (exportStrategy.fileExtensionCsv ());
+    QFileDialog dlg;
+    QString fileName = dlg.getSaveFileName (this,
+                                            tr("Export"),
+                                            defaultFileName,
+                                            filter,
+                                            SELECTED_FILTER_IS_CSV);
     if (!fileName.isEmpty ()) {
 
       QFile file (fileName);
@@ -2340,8 +2366,10 @@ void MainWindow::slotFileExport ()
 
         QTextStream str (&file);
 
-        ExportToFile exportStrategy;
-        exportStrategy.exportToFile (cmdMediator().document().modelExport(),
+        DocumentModelExportFormat modelExportFormat = modelExportOverride (cmdMediator().document().modelExport(),
+                                                                           exportStrategy,
+                                                                           fileName);
+        exportStrategy.exportToFile (modelExportFormat,
                                      cmdMediator().document(),
                                      m_modelMainWindow,
                                      transformation (),
@@ -2535,8 +2563,6 @@ void MainWindow::slotLeave ()
 
 void MainWindow::slotLoadStartupFiles ()
 {
-  const unsigned int ONE_COORDINATE_SYSTEM = 1;
-
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotLoadStartupFiles";
 
   ENGAUGE_ASSERT (m_loadStartupFiles.count() > 0);
@@ -3496,10 +3522,6 @@ void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &model
 void MainWindow::updateSettingsMainWindow()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsMainWindow";
-
-  // Save locale as the default
-  QLocale locale (m_modelMainWindow.locale());
-  setLocale (locale);
 
   if (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_ONLY ||
       m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) {

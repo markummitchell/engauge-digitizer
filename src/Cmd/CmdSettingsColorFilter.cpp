@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Filter Settings");
+const QString CMD_DESCRIPTION ("Filter settings");
 
 CmdSettingsColorFilter::CmdSettingsColorFilter(MainWindow &mainWindow,
                                                Document &document,

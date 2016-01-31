@@ -7,7 +7,7 @@
 #include "QtToString.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Add Graph Point");
+const QString CMD_DESCRIPTION ("Add graph point");
 
 CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
                                     Document &document,

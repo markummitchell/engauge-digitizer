@@ -7,7 +7,7 @@
 #include "QtToString.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Add Axis Point");
+const QString CMD_DESCRIPTION ("Add axis point");
 
 CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
                                   Document &document,

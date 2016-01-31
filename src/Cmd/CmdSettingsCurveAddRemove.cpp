@@ -6,7 +6,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("Curve Add/Remove");
+const QString CMD_DESCRIPTION ("Curve add/remove");
 
 CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove(MainWindow &mainWindow,
                                                      Document &document,

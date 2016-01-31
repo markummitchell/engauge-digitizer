@@ -1,5 +1,7 @@
 #include "DlgValidatorNumber.h"
 #include "Logger.h"
+#include <QDoubleValidator>
+#include <QLocale>
 
 DlgValidatorNumber::DlgValidatorNumber(CoordScale coordScale,
                                        const QLocale &locale,
