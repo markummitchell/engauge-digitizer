@@ -11,6 +11,54 @@ DlgValidatorFactory::DlgValidatorFactory()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::DlgValidatorFactory";
 }
 
+DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,
+                                                                                    bool isCartesian,
+                                                                                    CoordUnitsNonPolarTheta coordUnitsCartesian,
+                                                                                    CoordUnitsNonPolarTheta coordUnitsPolar,
+                                                                                    CoordUnitsDate coordUnitsDate,
+                                                                                    CoordUnitsTime coordUnitsTime,
+                                                                                    const QLocale &locale) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar";
+
+  if (isCartesian) {
+    return createWithNonPolar (coordScale,
+                               coordUnitsCartesian,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  } else {
+    return createWithNonPolar (coordScale,
+                               coordUnitsPolar,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  }
+}
+
+DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithPolarPolar (CoordScale coordScale,
+                                                                                 bool isCartesian,
+                                                                                 CoordUnitsNonPolarTheta coordUnitsCartesian,
+                                                                                 CoordUnitsPolarTheta coordUnitsPolar,
+                                                                                 CoordUnitsDate coordUnitsDate,
+                                                                                 CoordUnitsTime coordUnitsTime,
+                                                                                 const QLocale &locale) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithPolarPolar";
+
+  if (isCartesian) {
+    return createWithNonPolar (coordScale,
+                               coordUnitsCartesian,
+                               coordUnitsDate,
+                               coordUnitsTime,
+                               locale);
+  } else {
+    return createWithPolar (coordScale,
+                            coordUnitsPolar,
+                            locale);
+  }
+}
+
 DlgValidatorAbstract *DlgValidatorFactory::createWithNonPolar (CoordScale coordScale,
                                                                CoordUnitsNonPolarTheta coordUnits,
                                                                CoordUnitsDate coordUnitsDate,
@@ -60,53 +108,5 @@ DlgValidatorAbstract *DlgValidatorFactory::createWithPolar (CoordScale coordScal
     default:
       LOG4CPP_ERROR_S ((*mainCat)) << "DlgValidatorFactory::createWithNonPolar";
       exit (-1);
-  }
-}
-
-DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,
-                                                                                    bool isCartesian,
-                                                                                    CoordUnitsNonPolarTheta coordUnitsCartesian,
-                                                                                    CoordUnitsNonPolarTheta coordUnitsPolar,
-                                                                                    CoordUnitsDate coordUnitsDate,
-                                                                                    CoordUnitsTime coordUnitsTime,
-                                                                                    const QLocale &locale) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar";
-
-  if (isCartesian) {
-    return createWithNonPolar (coordScale,
-                               coordUnitsCartesian,
-                               coordUnitsDate,
-                               coordUnitsTime,
-                               locale);
-  } else {
-    return createWithNonPolar (coordScale,
-                               coordUnitsPolar,
-                               coordUnitsDate,
-                               coordUnitsTime,
-                               locale);
-  }
-}
-
-DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithPolarPolar (CoordScale coordScale,
-                                                                                 bool isCartesian,
-                                                                                 CoordUnitsNonPolarTheta coordUnitsCartesian,
-                                                                                 CoordUnitsPolarTheta coordUnitsPolar,
-                                                                                 CoordUnitsDate coordUnitsDate,
-                                                                                 CoordUnitsTime coordUnitsTime,
-                                                                                 const QLocale &locale) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::createCartesianOrPolarWithPolarPolar";
-
-  if (isCartesian) {
-    return createWithNonPolar (coordScale,
-                               coordUnitsCartesian,
-                               coordUnitsDate,
-                               coordUnitsTime,
-                               locale);
-  } else {
-    return createWithPolar (coordScale,
-                            coordUnitsPolar,
-                            locale);
   }
 }

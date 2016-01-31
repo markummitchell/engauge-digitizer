@@ -399,14 +399,14 @@ void MainWindow::createActionsFile ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsFile";
 
-  m_actionImport = new QAction(tr ("&Import"), this);
+  m_actionImport = new QAction(tr ("&Import..."), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
   m_actionImport->setStatusTip (tr ("Creates a new document by importing an image."));
   m_actionImport->setWhatsThis (tr ("New Document\n\n"
                                     "Creates a new document by importing an image."));
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
 
-  m_actionOpen = new QAction(tr ("&Open"), this);
+  m_actionOpen = new QAction(tr ("&Open..."), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
   m_actionOpen->setStatusTip (tr ("Opens an existing document."));
   m_actionOpen->setWhatsThis (tr ("Open Document\n\n"
@@ -434,21 +434,21 @@ void MainWindow::createActionsFile ()
                                   "Saves the current document."));
   connect (m_actionSave, SIGNAL (triggered ()), this, SLOT (slotFileSave ()));
 
-  m_actionSaveAs = new QAction(tr ("Save As"), this);
+  m_actionSaveAs = new QAction(tr ("Save As..."), this);
   m_actionSaveAs->setShortcut (QKeySequence::SaveAs);
   m_actionSaveAs->setStatusTip (tr ("Saves the current document under a new filename."));
   m_actionSaveAs->setWhatsThis (tr ("Save Document As\n\n"
                                     "Saves the current document under a new filename."));
   connect (m_actionSaveAs, SIGNAL (triggered ()), this, SLOT (slotFileSaveAs ()));
 
-  m_actionExport = new QAction (tr ("Export"), this);
+  m_actionExport = new QAction (tr ("Export..."), this);
   m_actionExport->setShortcut (tr ("Ctrl+E"));
   m_actionExport->setStatusTip (tr ("Exports the current document into a text file."));
   m_actionExport->setWhatsThis (tr ("Export Document\n\n"
                                     "Exports the current document into a text file."));
   connect (m_actionExport, SIGNAL (triggered ()), this, SLOT (slotFileExport ()));
 
-  m_actionPrint = new QAction (tr ("&Print"), this);
+  m_actionPrint = new QAction (tr ("&Print..."), this);
   m_actionPrint->setShortcut (QKeySequence::Print);
   m_actionPrint->setStatusTip (tr ("Print the current document."));
   m_actionPrint->setWhatsThis (tr ("Print Document\n\n"
@@ -501,76 +501,76 @@ void MainWindow::createActionsSettings ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsSettings";
 
-  m_actionSettingsCoords = new QAction (tr ("Coordinates"), this);
+  m_actionSettingsCoords = new QAction (tr ("Coordinates..."), this);
   m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
   m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings\n\n"
                                             "Coordinate settings determine how the graph coordinates are mapped to the pixels in the image"));
   connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
 
-  m_actionSettingsCurveAddRemove = new QAction (tr ("Add/Remove Curve"), this);
+  m_actionSettingsCurveAddRemove = new QAction (tr ("Add/Remove Curve..."), this);
   m_actionSettingsCurveAddRemove->setStatusTip (tr ("Add or Remove Curves."));
   m_actionSettingsCurveAddRemove->setWhatsThis (tr ("Add/Remove Curve\n\n"
                                                     "Add/Remove Curve settings control which curves are included in the current document"));
   connect (m_actionSettingsCurveAddRemove, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveAddRemove ()));
 
-  m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties"), this);
+  m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties..."), this);
   m_actionSettingsCurveProperties->setStatusTip (tr ("Edit Curve Properties settings."));
   m_actionSettingsCurveProperties->setWhatsThis (tr ("Curve Properties Settings\n\n"
                                                      "Curves properties settings determine how each curve appears"));
   connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
 
-  m_actionSettingsDigitizeCurve = new QAction (tr ("Digitize Curve"), this);
+  m_actionSettingsDigitizeCurve = new QAction (tr ("Digitize Curve..."), this);
   m_actionSettingsDigitizeCurve->setStatusTip (tr ("Edit Digitize Axis and Graph Curve settings."));
   m_actionSettingsDigitizeCurve->setWhatsThis (tr ("Digitize Axis and Graph Curve Settings\n\n"
                                                    "Digitize Curve settings determine how points are digitized in Digitize Axis Point and "
                                                    "Digitize Graph Point modes"));
   connect (m_actionSettingsDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotSettingsDigitizeCurve ()));
 
-  m_actionSettingsExport = new QAction (tr ("Export Format"), this);
+  m_actionSettingsExport = new QAction (tr ("Export Format..."), this);
   m_actionSettingsExport->setStatusTip (tr ("Edit Export Format settings."));
   m_actionSettingsExport->setWhatsThis (tr ("Export Format Settings\n\n"
                                             "Export format settings affect how exported files are formatted"));
   connect (m_actionSettingsExport, SIGNAL (triggered ()), this, SLOT (slotSettingsExportFormat ()));
 
-  m_actionSettingsColorFilter = new QAction (tr ("Color Filter"), this);
+  m_actionSettingsColorFilter = new QAction (tr ("Color Filter..."), this);
   m_actionSettingsColorFilter->setStatusTip (tr ("Edit Color Filter settings."));
   m_actionSettingsColorFilter->setWhatsThis (tr ("Color Filter Settings\n\n"
                                                  "Color filtering simplifies the graphs for easier Point Matching and Segment Filling"));
   connect (m_actionSettingsColorFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsColorFilter ()));
 
-  m_actionSettingsAxesChecker = new QAction (tr ("Axes Checker"), this);
+  m_actionSettingsAxesChecker = new QAction (tr ("Axes Checker..."), this);
   m_actionSettingsAxesChecker->setStatusTip (tr ("Edit Axes Checker settings."));
   m_actionSettingsAxesChecker->setWhatsThis (tr ("Axes Checker Settings\n\n"
                                                  "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
   connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
 
-  m_actionSettingsGridRemoval = new QAction (tr ("Grid Line Removal"), this);
+  m_actionSettingsGridRemoval = new QAction (tr ("Grid Line Removal..."), this);
   m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Line Removal settings."));
   m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Line Removal Settings\n\n"
                                                  "Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when "
                                                  "Color Filtering is not able to separate grid lines from curve lines."));
   connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
 
-  m_actionSettingsPointMatch = new QAction (tr ("Point Match"), this);
+  m_actionSettingsPointMatch = new QAction (tr ("Point Match..."), this);
   m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
   m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings\n\n"
                                                 "Point match settings determine how points are matched while in Point Match mode"));
   connect (m_actionSettingsPointMatch, SIGNAL (triggered ()), this, SLOT (slotSettingsPointMatch ()));
 
-  m_actionSettingsSegments = new QAction (tr ("Segment Fill"), this);
+  m_actionSettingsSegments = new QAction (tr ("Segment Fill..."), this);
   m_actionSettingsSegments->setStatusTip (tr ("Edit Segment Fill settings."));
   m_actionSettingsSegments->setWhatsThis (tr ("Segment Fill Settings\n\n"
                                               "Segment fill settings determine how points are generated in the Segment Fill mode"));
   connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
 
-  m_actionSettingsGeneral = new QAction (tr ("General"), this);
+  m_actionSettingsGeneral = new QAction (tr ("General..."), this);
   m_actionSettingsGeneral->setStatusTip (tr ("Edit General settings."));
   m_actionSettingsGeneral->setWhatsThis (tr ("General Settings\n\n"
                                              "General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects "
                                              "both Color Picker and Point Match modes"));
   connect (m_actionSettingsGeneral, SIGNAL (triggered ()), this, SLOT (slotSettingsGeneral ()));
 
-  m_actionSettingsMainWindow = new QAction (tr ("Main Window"), this);
+  m_actionSettingsMainWindow = new QAction (tr ("Main Window..."), this);
   m_actionSettingsMainWindow->setStatusTip (tr ("Edit Main Window settings."));
   m_actionSettingsMainWindow->setWhatsThis (tr ("Main Window Settings\n\n"
                                                 "Main window settings affect the user interface and are not specific to any document"));
@@ -3301,8 +3301,17 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsAxesChecker";
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
-  m_transformationStateContext->updateAxesChecker (*m_cmdMediator,
-                                                   m_transformation);
+  if (m_transformation.transformIsDefined()) {
+    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+                                                         *m_cmdMediator,
+                                                         m_transformation,
+                                                         m_cmbCurve->currentText());
+  } else {
+    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+                                                         *m_cmdMediator,
+                                                         m_transformation,
+                                                         m_cmbCurve->currentText());
+  }
 }
 
 void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &modelColorFilter)

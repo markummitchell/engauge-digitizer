@@ -239,8 +239,8 @@ private slots:
   void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
-  void slotViewToolBarDigitize ();
   void slotViewToolBarChecklistGuide ();
+  void slotViewToolBarDigitize ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
