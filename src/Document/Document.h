@@ -32,12 +32,15 @@ class Transformation;
 class Document
 {
 public:
-  /// Constructor for imported images and dragged images
-  Document (unsigned int numberCoordSystem,
-            const QImage &image);
+  /// Constructor for imported images and dragged images. Only one coordinate system is create - others are added later externally
+  Document (const QImage &image);
 
   /// Constructor for opened Documents, and error report files. The specified file is opened and read
   Document (const QString &fileName);
+
+  /// Add some number (0 or more) of additional coordinate systems. This is only safe to call during import
+  /// and before any changes have been made to the Document
+  void addCoordSystems(unsigned int numberCoordSystemToAdd);
 
   /// Add new graph curve to the list of existing graph curves.
   void addGraphCurveAtEnd (const QString &curveName);

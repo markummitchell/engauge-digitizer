@@ -16,10 +16,10 @@ class CoordSystemContext : public CoordSystemInterface
   /// Default constructor for constructing from opened file
   CoordSystemContext();
 
-  /// Nondefault constructor for constructing from imported file
-  CoordSystemContext(unsigned int numberCoordSystem);
-
   ~CoordSystemContext();
+
+  /// Add specified number of coordinate systems to the original one created by the constructor
+  void addCoordSystems(unsigned int numberCoordSystemToAdd);
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,

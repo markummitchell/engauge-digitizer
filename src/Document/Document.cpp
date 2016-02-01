@@ -29,13 +29,10 @@
 
 const int FOUR_BYTES = 4;
 
-Document::Document (unsigned int numberCoordSystem,
-                    const QImage &image) :
-  m_coordSystemContext (numberCoordSystem),
+Document::Document (const QImage &image) :
   m_name ("untitled")
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::Document"
-                              << " numberCoordSystem=" << numberCoordSystem
                               << " image=" << image.width() << "x" << image.height();
 
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
@@ -99,6 +96,14 @@ Document::Document (const QString &fileName) :
                                   .arg (fileName);
 
   }
+}
+
+void Document::addCoordSystems(unsigned int numberCoordSystemToAdd)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addCoordSystems"
+                              << " toAdd=" << numberCoordSystemToAdd;
+
+  m_coordSystemContext.addCoordSystems(numberCoordSystemToAdd);
 }
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
