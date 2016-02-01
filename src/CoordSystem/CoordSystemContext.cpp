@@ -6,16 +6,7 @@ const CoordSystemIndex DEFAULT_COORD_SYSTEM_INDEX = 0;
 CoordSystemContext::CoordSystemContext() :
   m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
 {
-  // The CoordSystem vector will be populated when the file is read
-}
-
-CoordSystemContext::CoordSystemContext(unsigned int numberCoordSystem) :
-  m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
-{
-  // The CoordSystem vector is populated with defaults here
-  for (unsigned int i = 0; i < numberCoordSystem; i++) {
-    m_coordSystems.push_back (new CoordSystem ());
-  }
+  m_coordSystems.push_back (new CoordSystem ());
 }
 
 CoordSystemContext::~CoordSystemContext()
@@ -26,6 +17,14 @@ CoordSystemContext::~CoordSystemContext()
   }
 
   m_coordSystems.clear ();
+}
+
+void CoordSystemContext::addCoordSystems(unsigned int numberCoordSystemToAdd)
+{
+  // The CoordSystem vector is populated with defaults here
+  for (unsigned int i = 0; i < numberCoordSystemToAdd; i++) {
+    m_coordSystems.push_back (new CoordSystem ());
+  }
 }
 
 void CoordSystemContext::addGraphCurveAtEnd (const QString &curveName)

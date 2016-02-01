@@ -108,9 +108,10 @@ const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
 const QString EMPTY_FILENAME ("");
 const QString ENGAUGE_FILENAME_DESCRIPTION ("Engauge Document");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
+const bool NO_MULTI_COORD_SYSTEM = false;
+const bool YES_MULTI_COORD_SYSTEM = true;
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
-const unsigned int ONE_COORDINATE_SYSTEM = 1;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
@@ -1181,8 +1182,8 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
-void MainWindow::fileImport (unsigned int numberCoordSystem,
-                             const QString &fileName)
+void MainWindow::fileImport (const QString &fileName,
+                             bool isMultiCoordSystem)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
@@ -1218,9 +1219,9 @@ void MainWindow::fileImport (unsigned int numberCoordSystem,
     return;
   }
 
-  loadImage (numberCoordSystem,
-             fileName,
-             image);
+  loadImage (fileName,
+             image,
+             isMultiCoordSystem);
 }
 
 void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
@@ -1228,18 +1229,6 @@ void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts";
 
   if (maybeSave ()) {
-
-    int numberCoordSystem = 1;
-    if (isMultiCoordSystem) {
-      DlgCoordSystemCount dlgCoordSystem (*this);
-      dlgCoordSystem.exec();
-
-      if (dlgCoordSystem.result() == QDialog::Rejected) {
-        return;
-      }
-
-      numberCoordSystem = dlgCoordSystem.numberCoordSystem();
-    }
 
     QString filter;
     QTextStream str (&filter);
@@ -1272,9 +1261,9 @@ void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
                                                      filter);
     if (!fileName.isEmpty ()) {
 
-      fileImport (numberCoordSystem,
-                  fileName);
-
+      // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
+      fileImport (fileName,
+                  isMultiCoordSystem);
     }
   }
 }
@@ -1349,7 +1338,8 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     m_cmdMediator = cmdMediator;
     setupAfterLoad(fileName,
-                   "File opened");
+                   "File opened",
+                   NO_MULTI_COORD_SYSTEM);
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1414,7 +1404,8 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   QDir::setCurrent(originalPath);
 
   setupAfterLoad(errorReportFile,
-                 "Error report opened");
+                 "Error report opened",
+                 NO_MULTI_COORD_SYSTEM);
 
   // Start select mode
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1423,17 +1414,15 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   updateAfterCommand ();
 }
 
-void MainWindow::loadImage (unsigned int numberCoordSystem,
-                            const QString &fileName,
-                            const QImage &image)
+void MainWindow::loadImage (const QString &fileName,
+                            const QImage &image,
+                            bool isMultiCoordSystem)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
-                              << " numberCoordSystem=" << numberCoordSystem
                               << " fileName=" << fileName.toLatin1 ().data ();
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
-                                              numberCoordSystem,
                                               image);
   QApplication::restoreOverrideCursor();
 
@@ -1448,16 +1437,17 @@ void MainWindow::loadImage (unsigned int numberCoordSystem,
 
   m_cmdMediator = cmdMediator;
   setupAfterLoad(fileName,
-                 "File imported");
+                 "File imported",
+                 isMultiCoordSystem);
 
   if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
     // Show wizard
     ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
-                                                             numberCoordSystem);
+                                                             m_cmdMediator->document().coordSystemCount());
     if (wizard->exec() == QDialog::Accepted) {
 
-      for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < numberCoordSystem; coordSystemIndex++) {
+      for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
 
         // Populate the checklist guide
         m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
@@ -2050,13 +2040,31 @@ void MainWindow::settingsWrite ()
 }
 
 void MainWindow::setupAfterLoad (const QString &fileName,
-                                 const QString &temporaryMessage)
+                                 const QString &temporaryMessage ,
+                                 bool isMultiCoordSystem)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
                               << " file=" << fileName.toLatin1().data()
                               << " message=" << temporaryMessage.toLatin1().data();
 
-  // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
+  // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
+
+  setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
+
+  // Image is visible now so the user can refer to it when we ask for the number of coordinate systems
+  unsigned int numberCoordSystem = 1;
+  if (isMultiCoordSystem) {
+    DlgCoordSystemCount dlgCoordSystem (*this);
+    dlgCoordSystem.exec();
+
+    if (dlgCoordSystem.result() == QDialog::Rejected) {
+      return;
+    }
+
+    numberCoordSystem = dlgCoordSystem.numberCoordSystem();
+    m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
+  }
+
   m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
 
   m_transformation.resetOnLoad();
@@ -2077,10 +2085,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   m_isDocumentExported = false;
 
-  // Set up background before slotViewZoomFill which relies on the background. At this point
+  // Background must be set (by setPixmap) before slotViewZoomFill which relies on the background. At this point
   // the transformation is undefined (unless the code is changed) so grid removal will not work
   // but updateTransformationAndItsDependencies will call this again to fix that issue
-  setPixmap (m_cmdMediator->pixmap ());
   m_backgroundStateContext->setCurveSelected (m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
@@ -2404,9 +2411,9 @@ void MainWindow::slotFileImportDraggedImage(QImage image)
 {  
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImage";
 
-  loadImage (ONE_COORDINATE_SYSTEM,
-             "",
-             image);
+  loadImage ("",
+             image,
+             NO_MULTI_COORD_SYSTEM);
 }
 
 void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
@@ -2420,16 +2427,16 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImage fileName=" << fileName.toLatin1 ().data ();
 
-  loadImage (ONE_COORDINATE_SYSTEM,
-             fileName,
-             image);
+  loadImage (fileName,
+             image,
+             NO_MULTI_COORD_SYSTEM);
 }
 
 void MainWindow::slotFileImportImageCustom ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImageCustom";
 
-  fileImportWithPrompts (true);
+  fileImportWithPrompts (YES_MULTI_COORD_SYSTEM);
 }
 
 void MainWindow::slotFileOpen()
@@ -2578,8 +2585,8 @@ void MainWindow::slotLoadStartupFiles ()
 
   } else {
 
-    fileImport (ONE_COORDINATE_SYSTEM,
-                fileName);
+    fileImport (fileName,
+                NO_MULTI_COORD_SYSTEM);
 
   }
 

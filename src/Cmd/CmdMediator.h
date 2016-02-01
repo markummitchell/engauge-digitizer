@@ -16,9 +16,8 @@ class QImage;
 class CmdMediator : public QUndoStack
 {
 public:
-  /// Constructor for imported images and dragged images.
+  /// Constructor for imported images and dragged images. Only one coordinate system is created but others can be added later
   CmdMediator (MainWindow &mainWindow,
-               unsigned int numberCoordSystem,
                const QImage &image);
 
   /// Constructor for opened Documents and error report files. The specified xml file is opened and read.
