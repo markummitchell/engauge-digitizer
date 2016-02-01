@@ -3359,6 +3359,10 @@ void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
   updateTransformationAndItsDependencies(); // Transformation state may have changed
   updateSettingsAxesChecker(m_cmdMediator->document().modelAxesChecker()); // Axes checker dependes on transformation state
 
+  // Nice trick for showing that a new coordinate system is in effect is to show the axes checker
+  m_transformationStateContext->updateAxesChecker (*m_cmdMediator,
+                                                   m_transformation);
+
   updateAfterCommand();
 }
 
