@@ -75,10 +75,10 @@ private:
 
   QStatusBar &m_statusBar;
 
-  QComboBox *m_comboZoom;
+  QComboBox *m_cmbZoom;
 
   QFrame *m_groupUnits; /// Use this like a QGroupBox but without external padding
-  QComboBox *m_comboUnits;
+  QComboBox *m_cmbUnits;
   QTextEdit *m_editCoords;
 
   QString m_coordsScreen; /// Text for m_editCoords
