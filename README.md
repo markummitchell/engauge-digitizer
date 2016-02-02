@@ -39,6 +39,15 @@ New features in Engauge6:
     user support
 14. Test suite for regression testing minimizes code breakage as new features are added
 
+Installation
+------------
+Engauge can be installed using packages for all popular distributions of Linux (easiest method), or by downloading
+pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge6
+project at github.com, in the Releases page. The final option for installing is to build the software from the source
+code (very difficult). Building the software from the source code is accomplished by following the steps in the INSTALL 
+file that is found in the main directory. The build process can take as little as 15 minutes in Linux or as long as 
+several hours in Microsoft Windows.
+
 Contributors
 ------------
 Thanks to Zbigniew Jędrzejewski-Szmek, Tamás Nagy, Baurzhan Muftakhidinov, Tobias Winchen and other contributors and users!
