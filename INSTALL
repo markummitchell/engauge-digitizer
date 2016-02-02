@@ -1,3 +1,6 @@
+This file gives details for building Engauge from source code. If you would like to use Engauge immediately,
+it is recommended that you download a pre-built release from https://github.com/markummitchell/engauge6/releases.
+
 Windows - Steps to build and run engauge executable:
 ----------------------------------------------------
 These steps build and run, in Microsoft Windows, the standard engauge executable for digitizing data.
