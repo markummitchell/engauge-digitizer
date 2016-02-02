@@ -28,12 +28,15 @@
 #include "Xml.h"
 
 const int FOUR_BYTES = 4;
+const int NOMINAL_COORD_SYSTEM_COUNT = 1;
 
 Document::Document (const QImage &image) :
   m_name ("untitled")
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::Document"
                               << " image=" << image.width() << "x" << image.height();
+
+  m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
 
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
@@ -61,6 +64,7 @@ Document::Document (const QString &fileName) :
       if (file->open (QIODevice::ReadOnly)) {
         QDataStream str (file);
 
+        m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
         loadPreVersion6 (str);
 
       } else {
@@ -76,7 +80,7 @@ Document::Document (const QString &fileName) :
 
         QXmlStreamReader reader (file);
 
-        loadPostVersion5 (reader);
+        loadVersion6 (reader);
 
         // Close and deactivate
         file->close ();
@@ -375,88 +379,6 @@ void Document::loadImage(QXmlStreamReader &reader)
   }
 }
 
-void Document::loadPostVersion5 (QXmlStreamReader &reader)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadPostVersion5";
-
-  // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
-  // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
-  bool inDocumentSubtree = false;
-
-  // Import from xml. Loop to end of data or error condition occurs, whichever is first
-  while (!reader.atEnd() &&
-         !reader.hasError()) {
-    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
-
-    // Special processing of DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT, for an error report file
-    if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
-        (tokenType == QXmlStreamReader::StartElement)) {
-
-      generateEmptyPixmap (reader.attributes());
-    }
-
-    // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
-    if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
-        (tokenType == QXmlStreamReader::StartElement)) {
-
-      inDocumentSubtree = true;
-
-    } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
-               (tokenType == QXmlStreamReader::EndElement)) {
-
-      // Exit out of loop immediately
-      break;
-    }
-
-    if (inDocumentSubtree) {
-
-      // Iterate to next StartElement
-      if (tokenType == QXmlStreamReader::StartElement) {
-
-        // This is a StartElement, so process it
-        QString tag = reader.name().toString();
-//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-//          m_modelAxesChecker.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-//          m_modelCoords.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-//          m_curveAxes = new Curve (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-//          m_curvesGraphs.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
-//          m_modelDigitizeCurve.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-//          // Do nothing. This is the root node
-//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-//          m_modelExport.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
-//          m_modelGeneral.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-//          m_modelGridRemoval.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-//          loadImage(reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-//          m_modelPointMatch.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-//         m_modelSegments.loadXml (reader);
-//        } else {
-//          m_successfulRead = false;
-//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
-//          break;
-//        }
-      }
-    }
-  }
-  if (reader.hasError ()) {
-
-    m_successfulRead = false;
-    m_reasonForUnsuccessfulRead = reader.errorString();
-  }
-
-  // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
-}
-
 void Document::loadPreVersion6 (QDataStream &str)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::loadPreVersion6";
@@ -601,6 +523,170 @@ void Document::loadPreVersion6 (QDataStream &str)
 //  if (m_curveAxes->numPoints () > 2) {
 //    m_modelGridRemoval.setStable();
 //  }
+}
+
+void Document::loadVersion6 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion6";
+
+  // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
+  // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
+  bool inDocumentSubtree = false;
+
+  // Import from xml. Loop to end of data or error condition occurs, whichever is first
+  while (!reader.atEnd() &&
+         !reader.hasError()) {
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    // Special processing of DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT, for an error report file
+    if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
+        (tokenType == QXmlStreamReader::StartElement)) {
+
+      generateEmptyPixmap (reader.attributes());
+    }
+
+    // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
+    if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+        (tokenType == QXmlStreamReader::StartElement)) {
+
+      inDocumentSubtree = true;
+
+    } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+               (tokenType == QXmlStreamReader::EndElement)) {
+
+      // Exit out of loop immediately
+      break;
+    }
+
+    if (inDocumentSubtree) {
+
+      // Iterate to next StartElement
+      if (tokenType == QXmlStreamReader::StartElement) {
+
+        // This is a StartElement, so process it
+        QString tag = reader.name().toString();
+//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+//          m_modelAxesChecker.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+//          m_modelCoords.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+//          m_curveAxes = new Curve (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+//          m_curvesGraphs.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
+//          m_modelDigitizeCurve.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+//          // Do nothing. This is the root node
+//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+//          m_modelExport.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+//          m_modelGeneral.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+//          m_modelGridRemoval.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
+//          loadImage(reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+//          m_modelPointMatch.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+//         m_modelSegments.loadXml (reader);
+//        } else {
+//          m_successfulRead = false;
+//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+//          break;
+//        }
+      }
+    }
+  }
+  if (reader.hasError ()) {
+
+    m_successfulRead = false;
+    m_reasonForUnsuccessfulRead = reader.errorString();
+  }
+
+  // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
+}
+
+void Document::loadVersion7 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion7";
+
+  // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
+  // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
+  bool inDocumentSubtree = false;
+
+  // Import from xml. Loop to end of data or error condition occurs, whichever is first
+  while (!reader.atEnd() &&
+         !reader.hasError()) {
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    // Special processing of DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT, for an error report file
+    if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
+        (tokenType == QXmlStreamReader::StartElement)) {
+
+      generateEmptyPixmap (reader.attributes());
+    }
+
+    // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
+    if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+        (tokenType == QXmlStreamReader::StartElement)) {
+
+      inDocumentSubtree = true;
+
+    } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+               (tokenType == QXmlStreamReader::EndElement)) {
+
+      // Exit out of loop immediately
+      break;
+    }
+
+    if (inDocumentSubtree) {
+
+      // Iterate to next StartElement
+      if (tokenType == QXmlStreamReader::StartElement) {
+
+        // This is a StartElement, so process it
+        QString tag = reader.name().toString();
+//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+//          m_modelAxesChecker.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+//          m_modelCoords.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+//          m_curveAxes = new Curve (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+//          m_curvesGraphs.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
+//          m_modelDigitizeCurve.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+//          // Do nothing. This is the root node
+//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+//          m_modelExport.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+//          m_modelGeneral.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+//          m_modelGridRemoval.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
+//          loadImage(reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+//          m_modelPointMatch.loadXml (reader);
+//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+//         m_modelSegments.loadXml (reader);
+//        } else {
+//          m_successfulRead = false;
+//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+//          break;
+//        }
+      }
+    }
+  }
+  if (reader.hasError ()) {
+
+    m_successfulRead = false;
+    m_reasonForUnsuccessfulRead = reader.errorString();
+  }
+
+  // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
 }
 
 DocumentModelAxesChecker Document::modelAxesChecker() const

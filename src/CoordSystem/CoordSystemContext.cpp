@@ -6,7 +6,6 @@ const CoordSystemIndex DEFAULT_COORD_SYSTEM_INDEX = 0;
 CoordSystemContext::CoordSystemContext() :
   m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
 {
-  m_coordSystems.push_back (new CoordSystem ());
 }
 
 CoordSystemContext::~CoordSystemContext()
