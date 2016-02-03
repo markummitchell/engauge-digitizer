@@ -252,7 +252,8 @@ void CoordSystemContext::loadVersion7 (QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion7";
 
-  m_coordSystems [m_coordSystems.count() - 1]->loadVersion7 (reader);
+  int indexLast = m_coordSystems.count() - 1;
+  m_coordSystems [indexLast]->loadVersion7 (reader);
 }
 
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const
@@ -404,7 +405,7 @@ void CoordSystemContext::saveXml (QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::saveXml";
 
   for (int index = 0; index < m_coordSystems.count(); index++) {
-    m_coordSystems [m_coordSystemIndex]->saveXml (writer);
+    m_coordSystems [index]->saveXml (writer);
   }
 }
 

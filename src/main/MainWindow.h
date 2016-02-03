@@ -271,6 +271,11 @@ signals:
 private:
   MainWindow();
 
+  enum MultiCoordSystemQuery {
+    MULTI_COORD_SYSTEM_QUERY_NO,
+    MULTI_COORD_SYSTEM_QUERY_YES
+  };
+
   void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
   void createActions();
@@ -297,8 +302,8 @@ private:
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
   void fileImport (const QString &fileName,
-                   bool isMultiCoordSystemQuery);
-  void fileImportWithPrompts (bool isMultiCoordSystemQuery);
+                   MultiCoordSystemQuery multiCoordSystemQuery);
+  void fileImportWithPrompts (MultiCoordSystemQuery multiCoordSystemQuery);
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -306,7 +311,7 @@ private:
                            const QString &errorReportFile);
   void loadImage (const QString &fileName,
                   const QImage &image,
-                  bool isMultiCoordSystemQuery);
+                  MultiCoordSystemQuery multiCoordSystemQuery);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
@@ -330,7 +335,7 @@ private:
   void settingsWrite ();
   void setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
-                       bool isMultiCoordSystemQuery);
+                       MultiCoordSystemQuery multiCoordSystemQuery);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();

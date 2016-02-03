@@ -108,8 +108,6 @@ const QString DIGITIZE_ACTION_SELECT (QObject::tr ("Select Tool"));
 const QString EMPTY_FILENAME ("");
 const QString ENGAUGE_FILENAME_DESCRIPTION ("Engauge Document");
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
-const bool NO_MULTI_COORD_SYSTEM = false;
-const bool YES_MULTI_COORD_SYSTEM = true;
 
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
@@ -1183,7 +1181,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 }
 
 void MainWindow::fileImport (const QString &fileName,
-                             bool isMultiCoordSystemQuery)
+                             MultiCoordSystemQuery multiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
@@ -1221,10 +1219,10 @@ void MainWindow::fileImport (const QString &fileName,
 
   loadImage (fileName,
              image,
-             isMultiCoordSystemQuery);
+             multiCoordSystemQuery);
 }
 
-void MainWindow::fileImportWithPrompts (bool isMultiCoordSystemQuery)
+void MainWindow::fileImportWithPrompts (MultiCoordSystemQuery multiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts";
 
@@ -1263,7 +1261,7 @@ void MainWindow::fileImportWithPrompts (bool isMultiCoordSystemQuery)
 
       // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
       fileImport (fileName,
-                  isMultiCoordSystemQuery);
+                  multiCoordSystemQuery);
     }
   }
 }
@@ -1339,7 +1337,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_cmdMediator = cmdMediator;
     setupAfterLoad(fileName,
                    "File opened",
-                   NO_MULTI_COORD_SYSTEM);
+                   MULTI_COORD_SYSTEM_QUERY_NO);
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1405,7 +1403,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
 
   setupAfterLoad(errorReportFile,
                  "Error report opened",
-                 NO_MULTI_COORD_SYSTEM);
+                 MULTI_COORD_SYSTEM_QUERY_NO);
 
   // Start select mode
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1416,7 +1414,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
 
 void MainWindow::loadImage (const QString &fileName,
                             const QImage &image,
-                            bool isMultiCoordSystemQuery)
+                            MultiCoordSystemQuery multiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
                               << " fileName=" << fileName.toLatin1 ().data ();
@@ -1438,7 +1436,7 @@ void MainWindow::loadImage (const QString &fileName,
   m_cmdMediator = cmdMediator;
   setupAfterLoad(fileName,
                  "File imported",
-                 isMultiCoordSystemQuery);
+                 multiCoordSystemQuery);
 
   if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
@@ -2041,7 +2039,7 @@ void MainWindow::settingsWrite ()
 
 void MainWindow::setupAfterLoad (const QString &fileName,
                                  const QString &temporaryMessage ,
-                                 bool isMultiCoordSystemQuery)
+                                 MultiCoordSystemQuery multiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
                               << " file=" << fileName.toLatin1().data()
@@ -2053,7 +2051,7 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
   // may already have multiple CoordSystem if user loaded a file that had multiple CoordSystem entries
-  if (isMultiCoordSystemQuery) {
+  if (multiCoordSystemQuery == MULTI_COORD_SYSTEM_QUERY_YES) {
     DlgCoordSystemCount dlgCoordSystem (*this);
     dlgCoordSystem.exec();
 
@@ -2404,7 +2402,7 @@ void MainWindow::slotFileImport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImport";
 
-  fileImportWithPrompts (false);
+  fileImportWithPrompts (MULTI_COORD_SYSTEM_QUERY_NO);
 }
 
 void MainWindow::slotFileImportDraggedImage(QImage image)
@@ -2413,7 +2411,7 @@ void MainWindow::slotFileImportDraggedImage(QImage image)
 
   loadImage ("",
              image,
-             NO_MULTI_COORD_SYSTEM);
+             MULTI_COORD_SYSTEM_QUERY_NO);
 }
 
 void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
@@ -2429,14 +2427,14 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 
   loadImage (fileName,
              image,
-             NO_MULTI_COORD_SYSTEM);
+             MULTI_COORD_SYSTEM_QUERY_NO);
 }
 
 void MainWindow::slotFileImportImageCustom ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImageCustom";
 
-  fileImportWithPrompts (YES_MULTI_COORD_SYSTEM);
+  fileImportWithPrompts (MULTI_COORD_SYSTEM_QUERY_YES);
 }
 
 void MainWindow::slotFileOpen()
@@ -2586,7 +2584,7 @@ void MainWindow::slotLoadStartupFiles ()
   } else {
 
     fileImport (fileName,
-                NO_MULTI_COORD_SYSTEM);
+                MULTI_COORD_SYSTEM_QUERY_NO);
 
   }
 
