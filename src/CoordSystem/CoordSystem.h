@@ -21,8 +21,10 @@
 
 class Curve;
 class QByteArray;
+class QDataStream;
 class QImage;
 class QTransform;
+class QXmlStreamReader;
 class QXmlStreamWriter;
 class Transformation;
 
@@ -79,6 +81,13 @@ public:
   virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
   virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual bool loadCurvesFile (const QString &curvesFile);
+
+  /// Load from file in pre-version 6 format
+  void loadPreVersion6 (QDataStream &str,
+                        double version);
+  /// Load from file in version 6 format
+  void loadVersion6 (QXmlStreamReader &reader);
+
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;
   virtual DocumentModelCoords modelCoords () const;
@@ -119,8 +128,6 @@ public:
 private:
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
-  void loadPostVersion5 (QXmlStreamReader &reader);
-  void loadPreVersion6 (QDataStream &str);
 
   // Read variables
   bool m_successfulRead;

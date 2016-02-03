@@ -6,6 +6,10 @@
 #include "CoordSystemInterface.h"
 #include <QVector>
 
+class QDataStream;
+class QXmlStreamReader;
+class QXmlStreamWriter;
+
 typedef QVector<CoordSystem*> CoordSystems;
 
 /// This class plays the role of context class in a state machine, although the 'states' are actually different
@@ -73,6 +77,13 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
   virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual bool loadCurvesFile (const QString &curvesFile);
+
+  /// Load from file in pre-version 6 format
+  void loadPreVersion6 (QDataStream &str,
+                        double version);
+  /// Load from file in version 6 format
+  void loadVersion6 (QXmlStreamReader &reader);
+
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;
   virtual DocumentModelCoords modelCoords () const;

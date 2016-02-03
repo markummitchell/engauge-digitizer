@@ -298,107 +298,20 @@ bool CoordSystem::loadCurvesFile(const QString & /* curvesFile */)
   return true;
 }
 
-void CoordSystem::loadPostVersion5 (QXmlStreamReader &reader)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadPostVersion5";
-
-  // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
-  // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
-  bool inDocumentSubtree = false;
-
-  // Import from xml. Loop to end of data or error condition occurs, whichever is first
-  while (!reader.atEnd() &&
-         !reader.hasError()) {
-    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
-
-    // Special processing of DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT, for an error report file
-    if ((reader.name() == DOCUMENT_SERIALIZE_IMAGE) &&
-        (tokenType == QXmlStreamReader::StartElement)) {
-
-      //      generateEmptyPixmap (reader.attributes());
-    }
-
-    // Branching to skip non-Document nodes, with the exception of any DOCUMENT_SERIALIZE_IMAGE outside DOCUMENT_SERIALIZE_DOCUMENT
-    if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
-        (tokenType == QXmlStreamReader::StartElement)) {
-
-      inDocumentSubtree = true;
-
-    } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
-               (tokenType == QXmlStreamReader::EndElement)) {
-
-      // Exit out of loop immediately
-      break;
-    }
-
-    if (inDocumentSubtree) {
-
-      // Iterate to next StartElement
-      if (tokenType == QXmlStreamReader::StartElement) {
-
-        // This is a StartElement, so process it
-        QString tag = reader.name().toString();
-        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-          m_modelAxesChecker.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-          m_modelCoords.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-          m_curveAxes = new Curve (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-          m_curvesGraphs.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
-          m_modelDigitizeCurve.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-          // Do nothing. This is the root node
-        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-          m_modelExport.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
-          m_modelGeneral.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-          m_modelGridRemoval.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-          //          loadImage(reader);
-        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-          m_modelPointMatch.loadXml (reader);
-        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-          m_modelSegments.loadXml (reader);
-        } else {
-          m_successfulRead = false;
-          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
-          break;
-        }
-      }
-    }
-  }
-  if (reader.hasError ()) {
-
-    m_successfulRead = false;
-    m_reasonForUnsuccessfulRead = reader.errorString();
-  }
-
-  // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
-}
-
-void CoordSystem::loadPreVersion6 (QDataStream &str)
+void CoordSystem::loadPreVersion6 (QDataStream &str,
+                                   double version)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadPreVersion6";
 
   qint32 int32;
-  double dbl, versionDouble, radius = 0.0;
+  double dbl, radius = 0.0;
   QString st;
 
-  str >> int32; // Magic number
-  str >> versionDouble;
-  str >> st; // Version string
-  str >> int32; // Background
-  //  str >> m_pixmap;
-  //  str >> m_name;
   str >> st; // CurveCmbText selection
   str >> st; // MeasureCmbText selection
   str >> int32;
   m_modelCoords.setCoordsType((CoordsType) int32);
-  if (versionDouble >= 3) {
+  if (version >= 3) {
     str >> (double &) radius;
   }
   m_modelCoords.setOriginRadius(radius);
@@ -419,7 +332,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str)
   m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
   str >> int32;
   m_modelExport.setHeader((ExportHeader) int32);
-  if (versionDouble >= 5.2) {
+  if (version >= 5.2) {
     str >> st; // X label
     if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
       m_modelExport.setXLabel(st);
@@ -459,7 +372,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str)
   str >> dbl;
   m_modelGridRemoval.setCloseDistance(dbl);
   str >> int32; // Boolean remove color flag
-  if (versionDouble >= 5) {
+  if (version >= 5) {
     QColor color;
     str >> color;
   } else {
@@ -497,7 +410,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str)
   m_modelPointMatch.setPaletteColorAccepted((ColorPalette) int32);
   str >> int32;
   m_modelPointMatch.setPaletteColorRejected((ColorPalette) int32);
-  if (versionDouble < 4) {
+  if (version < 4) {
     m_modelPointMatch.setPaletteColorCandidate(COLOR_PALETTE_BLUE);
   } else {
     str >> int32;
@@ -523,6 +436,60 @@ void CoordSystem::loadPreVersion6 (QDataStream &str)
   // Information from curves and points can affect some data structures that were (mostly) set earlier
   if (m_curveAxes->numPoints () > 2) {
     m_modelGridRemoval.setStable();
+  }
+}
+
+void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion6";
+
+  // Import from xml. Loop to end of data or error condition occurs, whichever is first
+  while (!reader.atEnd() &&
+         !reader.hasError()) {
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
+               (tokenType == QXmlStreamReader::EndElement)) {
+
+      // Exit out of loop immediately
+      break;
+    }
+
+    // Iterate to next StartElement
+    if (tokenType == QXmlStreamReader::StartElement) {
+
+      // This is a StartElement, so process it
+      QString tag = reader.name().toString();
+      if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+        m_modelAxesChecker.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+        m_modelCoords.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+        m_curveAxes = new Curve (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+        m_curvesGraphs.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
+        m_modelDigitizeCurve.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+        // Do nothing. This is the root node
+      } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+        m_modelExport.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+        m_modelGeneral.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+        m_modelGridRemoval.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+        ENGAUGE_ASSERT (false); // The image should have been read before this method was called
+      } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+        m_modelPointMatch.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+        m_modelSegments.loadXml (reader);
+      } else {
+        m_successfulRead = false;
+        m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+        break;
+      }
+    }
   }
 }
 

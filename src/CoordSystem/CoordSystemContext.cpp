@@ -232,6 +232,22 @@ bool CoordSystemContext::loadCurvesFile (const QString &curvesFile)
   return m_coordSystems [m_coordSystemIndex]->loadCurvesFile (curvesFile);
 }
 
+void CoordSystemContext::loadPreVersion6 (QDataStream &str,
+                                          double version)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadPreVersion6";
+
+  m_coordSystems [m_coordSystemIndex]->loadPreVersion6 (str,
+                                                        version);
+}
+
+void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion6";
+
+  m_coordSystems [m_coordSystemIndex]->loadVersion6 (reader);
+}
+
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelAxesChecker";

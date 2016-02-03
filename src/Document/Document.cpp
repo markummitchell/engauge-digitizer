@@ -80,6 +80,7 @@ Document::Document (const QString &fileName) :
 
         QXmlStreamReader reader (file);
 
+        m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
         loadVersion6 (reader);
 
         // Close and deactivate
@@ -384,145 +385,18 @@ void Document::loadPreVersion6 (QDataStream &str)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::loadPreVersion6";
 
   qint32 int32;
-  double dbl, versionDouble, radius = 0.0;
+  double version;
   QString st;
 
-//  str >> int32; // Magic number
-//  str >> versionDouble;
-//  str >> st; // Version string
-//  str >> int32; // Background
-//  str >> m_pixmap;
-//  str >> m_name;
-//  str >> st; // CurveCmbText selection
-//  str >> st; // MeasureCmbText selection
-//  str >> int32;
-//  m_modelCoords.setCoordsType((CoordsType) int32);
-//  if (versionDouble >= 3) {
-//    str >> (double &) radius;
-//  }
-//  m_modelCoords.setOriginRadius(radius);
-//  str >> int32;
-//  m_modelCoords.setCoordUnitsRadius(COORD_UNITS_NON_POLAR_THETA_NUMBER);
-//  m_modelCoords.setCoordUnitsTheta((CoordUnitsPolarTheta) int32);
-//  str >> int32;
-//  m_modelCoords.setCoordScaleXTheta((CoordScale) int32);
-//  str >> int32;
-//  m_modelCoords.setCoordScaleYRadius((CoordScale) int32);
-//
-//  str >> int32;
-//  m_modelExport.setDelimiter((ExportDelimiter) int32);
-//  str >> int32;
-//  m_modelExport.setLayoutFunctions((ExportLayoutFunctions) int32);
-//  str >> int32;
-//  m_modelExport.setPointsSelectionFunctions((ExportPointsSelectionFunctions) int32);
-//  m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
-//  str >> int32;
-//  m_modelExport.setHeader((ExportHeader) int32);
-//  if (versionDouble >= 5.2) {
-//    str >> st; // X label
-//    if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-//      m_modelExport.setXLabel(st);
-//    }
-//    str >> st; // Theta label
-//    if (m_modelCoords.coordsType() == COORDS_TYPE_POLAR) {
-//      m_modelExport.setXLabel(st);
-//    }
-//  }
-//
-//  // Stable flag in m_modelGridRemoval is set below after points are read in
-//  str >> int32; // Remove thin lines parallel to axes
-//  str >> dbl; // Thin thickness
-//  str >> int32;
-//  m_modelGridRemoval.setRemoveDefinedGridLines(int32);
-//  str >> int32; // Initialized
-//  str >> int32;
-//  m_modelGridRemoval.setCountX(int32);
-//  str >> int32;
-//  m_modelGridRemoval.setCountY(int32);
-//  str >> int32;
-//  m_modelGridRemoval.setGridCoordDisableX((GridCoordDisable) int32);
-//  str >> int32;
-//  m_modelGridRemoval.setGridCoordDisableY((GridCoordDisable) int32);
-//  str >> dbl;
-//  m_modelGridRemoval.setStartX(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setStartY(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setStepX(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setStepY(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setStopX(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setStopY(dbl);
-//  str >> dbl;
-//  m_modelGridRemoval.setCloseDistance(dbl);
-//  str >> int32; // Boolean remove color flag
-//  if (versionDouble >= 5) {
-//    QColor color;
-//    str >> color;
-//  } else {
-//    str >> int32; // Rgb color
-//  }
-//  str >> int32; // Foreground threshold low
-//  str >> int32; // Foreground threshold high
-//  str >> dbl; // Gap separation
-//
-//  str >> int32; // Grid display is initialized flag
-//  str >> int32; // X count
-//  str >> int32; // Y count
-//  str >> int32; // X parameter
-//  str >> int32; // Y parameter
-//  str >> dbl; // X start
-//  str >> dbl; // Y start
-//  str >> dbl; // X step
-//  str >> dbl; // Y step
-//  str >> dbl; // X stop
-//  str >> dbl; // Y stop
-//
-//  str >> int32;
-//  m_modelSegments.setMinLength(int32);
-//  str >> int32;
-//  m_modelSegments.setPointSeparation(int32);
-//  str >> int32;
-//  m_modelSegments.setLineWidth(int32);
-//  str >> int32;
-//  m_modelSegments.setLineColor((ColorPalette) int32);
-//
-//  str >> int32; // Point separation
-//  str >> int32;
-//  m_modelPointMatch.setMaxPointSize(int32);
-//  str >> int32;
-//  m_modelPointMatch.setPaletteColorAccepted((ColorPalette) int32);
-//  str >> int32;
-//  m_modelPointMatch.setPaletteColorRejected((ColorPalette) int32);
-//  if (versionDouble < 4) {
-//    m_modelPointMatch.setPaletteColorCandidate(COLOR_PALETTE_BLUE);
-//  } else {
-//    str >> int32;
-//    m_modelPointMatch.setPaletteColorCandidate((ColorPalette) int32);
-//  }
-//
-//  str >> int32; // Discretize method
-//  str >> int32; // Intensity threshold low
-//  str >> int32; // Intensity threshold high
-//  str >> int32; // Foreground threshold low
-//  str >> int32; // Foreground threshold high
-//  str >> int32; // Hue threshold low
-//  str >> int32; // Hue threshold high
-//  str >> int32; // Saturation threshold low
-//  str >> int32; // Saturation threshold high
-//  str >> int32; // Value threshold low
-//  str >> int32; // Value threshold high
-//
-//  m_curveAxes = new Curve (str);
-//  Curve curveScale (str); // Scales are dropped on the floor
-//  m_curvesGraphs.loadPreVersion6 (str);
-//
-//  // Information from curves and points can affect some data structures that were (mostly) set earlier
-//  if (m_curveAxes->numPoints () > 2) {
-//    m_modelGridRemoval.setStable();
-//  }
+  str >> int32; // Magic number
+  str >> version;
+  str >> st; // Version string
+  str >> int32; // Background
+  str >> m_pixmap;
+  str >> m_name;
+
+  m_coordSystemContext.loadPreVersion6 (str,
+                                        version);
 }
 
 void Document::loadVersion6 (QXmlStreamReader &reader)
@@ -565,36 +439,16 @@ void Document::loadVersion6 (QXmlStreamReader &reader)
 
         // This is a StartElement, so process it
         QString tag = reader.name().toString();
-//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-//          m_modelAxesChecker.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-//          m_modelCoords.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-//          m_curveAxes = new Curve (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-//          m_curvesGraphs.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
-//          m_modelDigitizeCurve.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-//          // Do nothing. This is the root node
-//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-//          m_modelExport.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
-//          m_modelGeneral.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-//          m_modelGridRemoval.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-//          loadImage(reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-//          m_modelPointMatch.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-//         m_modelSegments.loadXml (reader);
-//        } else {
-//          m_successfulRead = false;
-//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
-//          break;
-//        }
+        if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
+          loadImage(reader);
+
+          // Now that we have the image at the DOCUMENT_SERIALIZE_DOCUMENT level, we read the rest at this level into CoordSystem
+          m_coordSystemContext.loadVersion6 (reader);
+
+          // Reading of DOCUMENT_SERIALIZE_DOCUMENT has just finished, so the reading has finished
+          break;
+        }
       }
     }
   }
