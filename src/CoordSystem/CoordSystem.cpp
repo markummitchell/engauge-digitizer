@@ -493,6 +493,60 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
   }
 }
 
+void CoordSystem::loadVersion7 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion7";
+
+  // Import from xml. Loop to end of data or error condition occurs, whichever is first
+  while (!reader.atEnd() &&
+         !reader.hasError()) {
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if ((reader.name() == DOCUMENT_SERIALIZE_COORD_SYSTEM) &&
+               (tokenType == QXmlStreamReader::EndElement)) {
+
+      // Exit out of loop immediately
+      break;
+    }
+
+    // Iterate to next StartElement
+    if (tokenType == QXmlStreamReader::StartElement) {
+
+      // This is a StartElement, so process it
+      QString tag = reader.name().toString();
+      if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
+        m_modelAxesChecker.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
+        m_modelCoords.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+        m_curveAxes = new Curve (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
+        m_curvesGraphs.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
+        m_modelDigitizeCurve.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
+        // Do nothing. This is the root node
+      } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
+        m_modelExport.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
+        m_modelGeneral.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
+        m_modelGridRemoval.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+        ENGAUGE_ASSERT (false); // The image should have been read before this method was called
+      } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
+        m_modelPointMatch.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
+        m_modelSegments.loadXml (reader);
+      } else {
+        m_successfulRead = false;
+        m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+        break;
+      }
+    }
+  }
+}
+
 DocumentModelAxesChecker CoordSystem::modelAxesChecker() const
 {
   return m_modelAxesChecker;

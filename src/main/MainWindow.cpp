@@ -1183,7 +1183,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 }
 
 void MainWindow::fileImport (const QString &fileName,
-                             bool isMultiCoordSystem)
+                             bool isMultiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
@@ -1221,10 +1221,10 @@ void MainWindow::fileImport (const QString &fileName,
 
   loadImage (fileName,
              image,
-             isMultiCoordSystem);
+             isMultiCoordSystemQuery);
 }
 
-void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
+void MainWindow::fileImportWithPrompts (bool isMultiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts";
 
@@ -1263,7 +1263,7 @@ void MainWindow::fileImportWithPrompts (bool isMultiCoordSystem)
 
       // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
       fileImport (fileName,
-                  isMultiCoordSystem);
+                  isMultiCoordSystemQuery);
     }
   }
 }
@@ -1416,7 +1416,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
 
 void MainWindow::loadImage (const QString &fileName,
                             const QImage &image,
-                            bool isMultiCoordSystem)
+                            bool isMultiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
                               << " fileName=" << fileName.toLatin1 ().data ();
@@ -1438,7 +1438,7 @@ void MainWindow::loadImage (const QString &fileName,
   m_cmdMediator = cmdMediator;
   setupAfterLoad(fileName,
                  "File imported",
-                 isMultiCoordSystem);
+                 isMultiCoordSystemQuery);
 
   if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
@@ -2041,7 +2041,7 @@ void MainWindow::settingsWrite ()
 
 void MainWindow::setupAfterLoad (const QString &fileName,
                                  const QString &temporaryMessage ,
-                                 bool isMultiCoordSystem)
+                                 bool isMultiCoordSystemQuery)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
                               << " file=" << fileName.toLatin1().data()
@@ -2051,9 +2051,9 @@ void MainWindow::setupAfterLoad (const QString &fileName,
 
   setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
 
-  // Image is visible now so the user can refer to it when we ask for the number of coordinate systems
-  unsigned int numberCoordSystem = 1;
-  if (isMultiCoordSystem) {
+  // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
+  // may already have multiple CoordSystem if user loaded a file that had multiple CoordSystem entries
+  if (isMultiCoordSystemQuery) {
     DlgCoordSystemCount dlgCoordSystem (*this);
     dlgCoordSystem.exec();
 
@@ -2061,7 +2061,7 @@ void MainWindow::setupAfterLoad (const QString &fileName,
       return;
     }
 
-    numberCoordSystem = dlgCoordSystem.numberCoordSystem();
+    int numberCoordSystem = dlgCoordSystem.numberCoordSystem();
     m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
   }
 

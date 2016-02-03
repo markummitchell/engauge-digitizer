@@ -81,8 +81,10 @@ class CoordSystemContext : public CoordSystemInterface
   /// Load from file in pre-version 6 format
   void loadPreVersion6 (QDataStream &str,
                         double version);
-  /// Load from file in version 6 format
+  /// Load from file in version 6 format, into the single CoordSystem
   void loadVersion6 (QXmlStreamReader &reader);
+  /// Load one CoordSystem from file in version 7 format, into the most recent CoordSystem which was just created before the call to this method
+  void loadVersion7 (QXmlStreamReader &reader);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;

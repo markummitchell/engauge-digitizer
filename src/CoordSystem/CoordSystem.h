@@ -87,6 +87,8 @@ public:
                         double version);
   /// Load from file in version 6 format
   void loadVersion6 (QXmlStreamReader &reader);
+  /// Load from file in version 7 format
+  void loadVersion7 (QXmlStreamReader &reader);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;
