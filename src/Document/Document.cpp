@@ -522,6 +522,9 @@ void Document::loadVersion7 (QFile *file)
         if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
           m_coordSystemContext.addCoordSystems (ONE_COORDINATE_SYSTEM);
           m_coordSystemContext.loadVersion7 (reader);
+        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
+          loadImage(reader);
         }
       }
     }
@@ -707,8 +710,9 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (img.height()));
 
   writer.writeCDATA (array.toBase64 ());
-  m_coordSystemContext.saveXml (writer);
   writer.writeEndElement();
+
+  m_coordSystemContext.saveXml (writer);
 }
 
 void Document::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)

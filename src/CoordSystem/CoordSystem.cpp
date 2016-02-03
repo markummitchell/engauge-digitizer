@@ -470,8 +470,6 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
         m_curvesGraphs.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
         m_modelDigitizeCurve.loadXml (reader);
-      } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-        // Do nothing. This is the root node
       } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
         m_modelExport.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
@@ -524,8 +522,6 @@ void CoordSystem::loadVersion7 (QXmlStreamReader &reader)
         m_curvesGraphs.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
         m_modelDigitizeCurve.loadXml (reader);
-      } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-        // Do nothing. This is the root node
       } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
         m_modelExport.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
