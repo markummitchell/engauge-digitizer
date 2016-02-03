@@ -171,6 +171,9 @@ void CurvesGraphs::loadXml(QXmlStreamReader &reader)
 
   bool success = true;
 
+  // Remove previous Curves. There is a DEFAULT_GRAPH_CURVE_NAME by default
+  m_curvesGraphs.clear();
+
   // Read until end of this subtree
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
   (reader.name() != DOCUMENT_SERIALIZE_CURVES_GRAPHS)){
