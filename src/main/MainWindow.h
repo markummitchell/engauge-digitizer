@@ -297,8 +297,8 @@ private:
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
   void fileImport (const QString &fileName,
-                   bool isMultiCoordSystem);
-  void fileImportWithPrompts (bool isMultiCoordSystem);
+                   bool isMultiCoordSystemQuery);
+  void fileImportWithPrompts (bool isMultiCoordSystemQuery);
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -306,7 +306,7 @@ private:
                            const QString &errorReportFile);
   void loadImage (const QString &fileName,
                   const QImage &image,
-                  bool isMultiCoordSystem);
+                  bool isMultiCoordSystemQuery);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
@@ -330,7 +330,7 @@ private:
   void settingsWrite ();
   void setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
-                       bool isMultiCoordSystem);
+                       bool isMultiCoordSystemQuery);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();

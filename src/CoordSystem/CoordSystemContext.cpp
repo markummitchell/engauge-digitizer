@@ -248,6 +248,13 @@ void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader)
   m_coordSystems [m_coordSystemIndex]->loadVersion6 (reader);
 }
 
+void CoordSystemContext::loadVersion7 (QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion7";
+
+  m_coordSystems [m_coordSystems.count() - 1]->loadVersion7 (reader);
+}
+
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelAxesChecker";

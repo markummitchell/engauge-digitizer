@@ -17,6 +17,7 @@
 #include <QByteArray>
 #include <QDataStream>
 #include <QDebug>
+#include <QDomDocument>
 #include <QFile>
 #include <QImage>
 #include <QtToString.h>
@@ -29,6 +30,7 @@
 
 const int FOUR_BYTES = 4;
 const int NOMINAL_COORD_SYSTEM_COUNT = 1;
+const int VERSION_6 = 6;
 
 Document::Document (const QImage &image) :
   m_name ("untitled")
@@ -78,10 +80,17 @@ Document::Document (const QString &fileName) :
       QFile *file = new QFile (fileName);
       if (file->open (QIODevice::ReadOnly | QIODevice::Text)) {
 
-        QXmlStreamReader reader (file);
+        int version = versionFromFile (file);
+        switch (version)
+        {
+          case VERSION_6:
+            loadVersion6 (file);
+            break;
 
-        m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
-        loadVersion6 (reader);
+          default:
+            loadVersion7 (file);
+            break;
+        }
 
         // Close and deactivate
         file->close ();
@@ -399,9 +408,14 @@ void Document::loadPreVersion6 (QDataStream &str)
                                         version);
 }
 
-void Document::loadVersion6 (QXmlStreamReader &reader)
+void Document::loadVersion6 (QFile *file)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion6";
+
+  QXmlStreamReader reader (file);
+
+  // Create the single CoordSystem used in versions before version 7
+  m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
 
   // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
   // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
@@ -461,9 +475,13 @@ void Document::loadVersion6 (QXmlStreamReader &reader)
   // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
 }
 
-void Document::loadVersion7 (QXmlStreamReader &reader)
+void Document::loadVersion7 (QFile *file)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion7";
+
+  const int ONE_COORDINATE_SYSTEM = 1;
+
+  QXmlStreamReader reader (file);
 
   // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
   // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
@@ -501,36 +519,10 @@ void Document::loadVersion7 (QXmlStreamReader &reader)
 
         // This is a StartElement, so process it
         QString tag = reader.name().toString();
-//        if (tag == DOCUMENT_SERIALIZE_AXES_CHECKER){
-//          m_modelAxesChecker.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
-//          m_modelCoords.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
-//          m_curveAxes = new Curve (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
-//          m_curvesGraphs.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DIGITIZE_CURVE) {
-//          m_modelDigitizeCurve.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_DOCUMENT) {
-//          // Do nothing. This is the root node
-//        } else if (tag == DOCUMENT_SERIALIZE_EXPORT) {
-//          m_modelExport.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
-//          m_modelGeneral.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
-//          m_modelGridRemoval.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
-//          // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
-//          loadImage(reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
-//          m_modelPointMatch.loadXml (reader);
-//        } else if (tag == DOCUMENT_SERIALIZE_SEGMENTS) {
-//         m_modelSegments.loadXml (reader);
-//        } else {
-//          m_successfulRead = false;
-//          m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
-//          break;
-//        }
+        if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
+          m_coordSystemContext.addCoordSystems (ONE_COORDINATE_SYSTEM);
+          m_coordSystemContext.loadVersion7 (reader);
+        }
       }
     }
   }
@@ -843,4 +835,26 @@ void Document::updatePointOrdinals (const Transformation &transformation)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::updatePointOrdinals";
 
   m_coordSystemContext.updatePointOrdinals(transformation);
+}
+
+int Document::versionFromFile (QFile *file) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::versionFromFile";
+
+  int version = VERSION_6; // Use default if tag is missing
+
+  QDomDocument doc;
+  if (doc.setContent (file)) {
+
+    QDomNodeList nodes = doc.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
+    if (nodes.count() > 0) {
+      QDomNode node = nodes.at (0);
+      QDomElement elem = node.toElement();
+      version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble();
+    }
+  }
+
+  file->seek (0); // Go back to beginning
+
+  return version;
 }

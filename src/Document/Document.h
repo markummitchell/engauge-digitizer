@@ -23,6 +23,7 @@
 class CoordSystem;
 class Curve;
 class QByteArray;
+class QFile;
 class QImage;
 class QTransform;
 class QXmlStreamWriter;
@@ -263,8 +264,9 @@ private:
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadImage(QXmlStreamReader &reader);
   void loadPreVersion6 (QDataStream &str);
-  void loadVersion6 (QXmlStreamReader &reader);
-  void loadVersion7 (QXmlStreamReader &reader);
+  void loadVersion6 (QFile *file);
+  void loadVersion7 (QFile *file);
+  int versionFromFile (QFile *file) const;
 
   // Metadata
   QString m_name;
