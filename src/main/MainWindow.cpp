@@ -2201,7 +2201,6 @@ void MainWindow::slotFileExport ()
 
   if (m_transformation.transformIsDefined()) {
 
-    const int SELECTED_FILTER_IS_CSV = 0;
     ExportToFile exportStrategy;
     QString filter = QString ("%1;;%2;;All files (*.*)")
                      .arg (exportStrategy.filterCsv ())
@@ -2211,11 +2210,12 @@ void MainWindow::slotFileExport ()
                               .arg (m_currentFile)
                               .arg (exportStrategy.fileExtensionCsv ());
     QFileDialog dlg;
+    QString filterCsv = exportStrategy.filterCsv ();
     QString fileName = dlg.getSaveFileName (this,
                                             tr("Export"),
                                             defaultFileName,
                                             filter,
-                                            SELECTED_FILTER_IS_CSV);
+                                            &filterCsv);
     if (!fileName.isEmpty ()) {
 
       QFile file (fileName);
