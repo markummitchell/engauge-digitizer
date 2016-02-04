@@ -37,6 +37,9 @@ public:
                               const PointStyle &pointStyle,
                               const QPointF &posScreen);
 
+  /// Hide all graphics items, except background image, in preparation for preview during IMPORT_TYPE_ADVANCED
+  void hideAllItemsExceptImage();
+
   /// Return a list of identifiers for the points that have moved since the last call to resetPositionHasChanged.
   QStringList positionHasChangedPointIdentifiers () const;
 

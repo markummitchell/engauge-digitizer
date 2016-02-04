@@ -63,7 +63,7 @@ void BackgroundStateAbstractBase::setProcessedPixmap (const QPixmap &pixmap)
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateAbstractBase::setProcessedPixmap"
                               << " map=(" << pixmap.width() << "x" << pixmap.height() << ")";
 
-  ENGAUGE_CHECK_PTR (m_imageItem);
+  ENGAUGE_CHECK_PTR(m_imageItem);
 
   m_imageItem->setPixmap (pixmap);
 

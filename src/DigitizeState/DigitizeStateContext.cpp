@@ -25,7 +25,6 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   m_mainWindow (mainWindow),
   m_view (view),
   m_imageIsLoaded (false),
-  m_cmdMediator (0),
   m_isGnuplot (isGnuplot)
 {
   // These states follow the same order as the DigitizeState enumeration
@@ -39,7 +38,8 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
   ENGAUGE_ASSERT (m_states.size () == NUM_DIGITIZE_STATES);
 
   m_currentState = NUM_DIGITIZE_STATES; // Value that forces a transition right away
-  requestImmediateStateTransition (DIGITIZE_STATE_EMPTY);
+  requestImmediateStateTransition (mainWindow.cmdMediator(),
+                                   DIGITIZE_STATE_EMPTY);
 }
 
 DigitizeStateContext::~DigitizeStateContext()
@@ -51,43 +51,15 @@ QString DigitizeStateContext::activeCurve () const
   return m_states [m_currentState]->activeCurve ();
 }
 
-void DigitizeStateContext::appendNewCmd(QUndoCommand *cmd)
+void DigitizeStateContext::appendNewCmd(CmdMediator *cmdMediator,
+                                        QUndoCommand *cmd)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::appendNewCmd";
 
-  ENGAUGE_ASSERT (m_cmdMediator != 0);
-  m_cmdMediator->push (cmd);
+  cmdMediator->push (cmd);
 }
 
-void DigitizeStateContext::bindToCmdMediatorAndResetOnLoad (CmdMediator *cmdMediator)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::bindToCmdMediatorAndResetOnLoad";
-
-  m_cmdMediator = cmdMediator;
-
-  // Reset current state. At this point, the current state is DIGITIZE_STATE_EMPTY when opening the first document
-  // so for consistency we always reset it so succeeding documents work the same way. This is done without
-  if (m_currentState != DIGITIZE_STATE_EMPTY) {
-    m_requestedState = DIGITIZE_STATE_EMPTY;
-    completeRequestedStateTransitionIfExists();
-  }
-}
-
-CmdMediator &DigitizeStateContext::cmdMediator ()
-{
-  ENGAUGE_ASSERT (m_cmdMediator != 0);
-
-  return *m_cmdMediator;
-}
-
-const CmdMediator &DigitizeStateContext::cmdMediator () const
-{
-  ENGAUGE_ASSERT (m_cmdMediator != 0);
-
-  return *m_cmdMediator;
-}
-
-void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
+void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator)
 {
   if (m_currentState != m_requestedState) {
 
@@ -102,7 +74,8 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
     // Start the new state
     DigitizeState previousState = m_currentState;
     m_currentState = m_requestedState;
-    m_states [m_requestedState]->begin (previousState);
+    m_states [m_requestedState]->begin (cmdMediator,
+                                        previousState);
 
     // If transition was triggered from inside the state machine then MainWindow controls need to be set accordingly
     // as if user had clicked on a digitize button
@@ -110,60 +83,72 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists ()
   }
 }
 
-void DigitizeStateContext::handleContextMenuEvent (const QString &pointIdentifier)
+void DigitizeStateContext::handleContextMenuEvent (CmdMediator *cmdMediator,
+                                                   const QString &pointIdentifier)
 {
-  m_states [m_currentState]->handleContextMenuEvent (pointIdentifier);
+  m_states [m_currentState]->handleContextMenuEvent (cmdMediator,
+                                                     pointIdentifier);
 }
 
-void DigitizeStateContext::handleCurveChange ()
+void DigitizeStateContext::handleCurveChange (CmdMediator *cmdMediator)
 {
-  m_states [m_currentState]->handleCurveChange();
+  m_states [m_currentState]->handleCurveChange(cmdMediator);
 }
 
-void DigitizeStateContext::handleKeyPress (Qt::Key key,
+void DigitizeStateContext::handleKeyPress (CmdMediator *cmdMediator,
+                                           Qt::Key key,
                                            bool atLeastOneSelectedItem)
 {
-  m_states [m_currentState]->handleKeyPress (key,
+  m_states [m_currentState]->handleKeyPress (cmdMediator,
+                                             key,
                                              atLeastOneSelectedItem);
 
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 
 }
 
-void DigitizeStateContext::handleLeave ()
+void DigitizeStateContext::handleLeave (CmdMediator *cmdMediator)
 {
-  m_states [m_currentState]->handleLeave ();
+  m_states [m_currentState]->handleLeave (cmdMediator);
 
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 
 }
 
-void DigitizeStateContext::handleMouseMove (QPointF pos)
+void DigitizeStateContext::handleMouseMove (CmdMediator *cmdMediator,
+                                            QPointF pos)
 {
-  m_states [m_currentState]->handleMouseMove (pos);
+  m_states [m_currentState]->handleMouseMove (cmdMediator,
+                                              pos);
 
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 
 }
 
-void DigitizeStateContext::handleMousePress (QPointF pos)
+void DigitizeStateContext::handleMousePress (CmdMediator *cmdMediator,
+                                             QPointF pos)
 {
-  m_states [m_currentState]->handleMousePress (pos);
+  m_states [m_currentState]->handleMousePress (cmdMediator,
+                                               pos);
 
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 
 }
 
-void DigitizeStateContext::handleMouseRelease (QPointF pos)
+void DigitizeStateContext::handleMouseRelease (CmdMediator *cmdMediator,
+                                               QPointF pos)
 {
-  m_states [m_currentState]->handleMouseRelease (pos);
+  m_states [m_currentState]->handleMouseRelease (cmdMediator,
+                                                 pos);
 
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 }
 
-void DigitizeStateContext::handleSetOverrideCursor (const QCursor &cursor)
+void DigitizeStateContext::handleSetOverrideCursor (CmdMediator *cmdMediator,
+                                                    const QCursor &cursor)
 {
-  m_states [m_currentState]->handleSetOverrideCursor (cursor);
+  m_states [m_currentState]->handleSetOverrideCursor (cmdMediator,
+                                                      cursor);
 }
 
 bool DigitizeStateContext::isGnuplot () const
@@ -186,17 +171,32 @@ void DigitizeStateContext::requestDelayedStateTransition (DigitizeState digitize
   m_requestedState = digitizeState;
 }
 
-void DigitizeStateContext::requestImmediateStateTransition (DigitizeState digitizeState)
+void DigitizeStateContext::requestImmediateStateTransition (CmdMediator *cmdMediator,
+                                                            DigitizeState digitizeState)
 {
   m_requestedState = digitizeState;
-  completeRequestedStateTransitionIfExists();
+  completeRequestedStateTransitionIfExists(cmdMediator);
 }
 
-void DigitizeStateContext::setCursor ()
+void DigitizeStateContext::resetOnLoad (CmdMediator *cmdMediator)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::resetOnLoad";
+
+  // Reset current state. At this point, the current state is DIGITIZE_STATE_EMPTY when opening the first document
+  // so for consistency we always reset it so succeeding documents work the same way
+  if (m_currentState != DIGITIZE_STATE_EMPTY) {
+    m_requestedState = DIGITIZE_STATE_EMPTY;
+    completeRequestedStateTransitionIfExists(cmdMediator);
+  }
+}
+
+void DigitizeStateContext::setCursor (CmdMediator *cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::setCursor";
 
-  m_states [m_currentState]->setCursor ();
+  ENGAUGE_ASSERT(m_currentState < m_states.count());
+
+  m_states [m_currentState]->setCursor (cmdMediator);
 }
 
 void DigitizeStateContext::setDragMode (QGraphicsView::DragMode dragMode)
@@ -208,12 +208,13 @@ void DigitizeStateContext::setDragMode (QGraphicsView::DragMode dragMode)
   }
 }
 
-void DigitizeStateContext::setImageIsLoaded(bool imageIsLoaded)
+void DigitizeStateContext::setImageIsLoaded(CmdMediator *cmdMediator,
+                                            bool imageIsLoaded)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::setImageIsLoaded";
 
   m_imageIsLoaded = imageIsLoaded;
-  setCursor ();
+  setCursor (cmdMediator);
 }
 
 QString DigitizeStateContext::state() const
@@ -223,16 +224,22 @@ QString DigitizeStateContext::state() const
   return m_states [m_currentState]->state();
 }
 
-void DigitizeStateContext::updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve)
+void DigitizeStateContext::updateModelDigitizeCurve (CmdMediator *cmdMediator,
+                                                     const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::updateModelDigitizeCurve";
 
-  m_states [m_currentState]->updateModelDigitizeCurve (modelDigitizeCurve);
+  ENGAUGE_ASSERT(m_currentState < m_states.count());
+
+  m_states [m_currentState]->updateModelDigitizeCurve (cmdMediator,
+                                                       modelDigitizeCurve);
 }
 
 void DigitizeStateContext::updateModelSegments(const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::updateModelSegments";
+
+  ENGAUGE_ASSERT(m_currentState < m_states.count());
 
   m_states [m_currentState]->updateModelSegments (modelSegments);
 }

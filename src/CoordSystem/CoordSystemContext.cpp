@@ -1,4 +1,5 @@
 #include "CoordSystemContext.h"
+#include "EngaugeAssert.h"
 #include "Logger.h"
 
 const CoordSystemIndex DEFAULT_COORD_SYSTEM_INDEX = 0;
@@ -6,20 +7,27 @@ const CoordSystemIndex DEFAULT_COORD_SYSTEM_INDEX = 0;
 CoordSystemContext::CoordSystemContext() :
   m_coordSystemIndex (DEFAULT_COORD_SYSTEM_INDEX)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::CoordSystemContext";
 }
 
 CoordSystemContext::~CoordSystemContext()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::~CoordSystemContext";
+
   for (int i = 0; i < m_coordSystems.count(); i++) {
     CoordSystem *coordSystem = m_coordSystems.at (i);
     delete coordSystem;
   }
 
   m_coordSystems.clear ();
+  m_coordSystemIndex = 0;
 }
 
 void CoordSystemContext::addCoordSystems(unsigned int numberCoordSystemToAdd)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addCoordSystems"
+                              << " numberToAdd=" << numberCoordSystemToAdd;
+
   // The CoordSystem vector is populated with defaults here
   for (unsigned int i = 0; i < numberCoordSystemToAdd; i++) {
     m_coordSystems.push_back (new CoordSystem ());
@@ -411,7 +419,10 @@ void CoordSystemContext::saveXml (QXmlStreamWriter &writer) const
 
 void CoordSystemContext::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCoordSystemIndex";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCoordSystemIndex"
+                              << " index=" << coordSystemIndex;
+
+  ENGAUGE_ASSERT(coordSystemIndex < (unsigned int) m_coordSystems.count());
 
   m_coordSystemIndex = coordSystemIndex;
 }

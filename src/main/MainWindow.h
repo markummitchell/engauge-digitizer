@@ -77,7 +77,7 @@ public:
   ~MainWindow();
 
   /// Accessor for commands to process the Document.
-  CmdMediator &cmdMediator();
+  CmdMediator *cmdMediator();
 
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
@@ -208,10 +208,10 @@ private slots:
   void slotFileClose ();
   void slotFileExport ();
   void slotFileImport();
+  void slotFileImportAdvanced();
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
-  void slotFileImportImageCustom();
   void slotFileOpen();
   void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
@@ -271,9 +271,9 @@ signals:
 private:
   MainWindow();
 
-  enum MultiCoordSystemQuery {
-    MULTI_COORD_SYSTEM_QUERY_NO,
-    MULTI_COORD_SYSTEM_QUERY_YES
+  enum ImportType {
+    IMPORT_TYPE_SIMPLE,
+    IMPORT_TYPE_ADVANCED
   };
 
   void applyZoomFactorAfterLoad();
@@ -302,16 +302,16 @@ private:
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
   void fileImport (const QString &fileName,
-                   MultiCoordSystemQuery multiCoordSystemQuery);
-  void fileImportWithPrompts (MultiCoordSystemQuery multiCoordSystemQuery);
+                   ImportType ImportType);
+  void fileImportWithPrompts (ImportType ImportType);
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
   void loadErrorReportFile(const QString &initialPath,
                            const QString &errorReportFile);
-  void loadImage (const QString &fileName,
+  bool loadImage (const QString &fileName,
                   const QImage &image,
-                  MultiCoordSystemQuery multiCoordSystemQuery);
+                  ImportType ImportType);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
@@ -333,9 +333,9 @@ private:
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
-  void setupAfterLoad (const QString &fileName,
+  bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
-                       MultiCoordSystemQuery multiCoordSystemQuery);
+                       ImportType ImportType);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
@@ -353,7 +353,7 @@ private:
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
-  QAction *m_actionImportCustomImage;
+  QAction *m_actionImportAdvanced;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;

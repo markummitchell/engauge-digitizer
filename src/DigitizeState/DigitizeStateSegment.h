@@ -18,21 +18,27 @@ public:
   virtual ~DigitizeStateSegment();
 
   virtual QString activeCurve () const;
-  virtual void begin(DigitizeState previousState);
-  virtual QCursor cursor () const;
+  virtual void begin(CmdMediator *cmdMediator,
+                     DigitizeState previousState);
+  virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
-  virtual void handleCurveChange();
-  virtual void handleKeyPress (Qt::Key key,
+  virtual void handleCurveChange(CmdMediator *cmdMediator);
+  virtual void handleKeyPress (CmdMediator *cmdMediator,
+                               Qt::Key key,
                                bool atLeastOneSelectedItem);
-  virtual void handleMouseMove (QPointF posScreen);
-  virtual void handleMousePress (QPointF posScreen);
-  virtual void handleMouseRelease (QPointF posScreen);
+  virtual void handleMouseMove (CmdMediator *cmdMediator,
+                                QPointF posScreen);
+  virtual void handleMousePress (CmdMediator *cmdMediator,
+                                 QPointF posScreen);
+  virtual void handleMouseRelease (CmdMediator *cmdMediator,
+                                   QPointF posScreen);
   virtual QString state() const;
-  virtual void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
+                                         const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);
 
 public slots:
-  /// Receive signal from Segment that has been clicked on
+  /// Receive signal from Segment that has been clicked on. The CmdMediator from the begin method will be used
   void slotMouseClickOnSegment(QPointF);
 
 private:
@@ -42,6 +48,7 @@ private:
   Segment *segmentFromSegmentStart (const QPointF &posSegmentStart) const;
 
   QList<Segment*> m_segments;
+  CmdMediator *m_cmdMediator;
 };
 
 #endif // DIGITIZE_STATE_SEGMENT_H

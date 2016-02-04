@@ -243,11 +243,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
   }
 }
 
-CmdMediator &MainWindow::cmdMediator ()
+CmdMediator *MainWindow::cmdMediator ()
 {
-  ENGAUGE_CHECK_PTR (m_cmdMediator);
-
-  return *m_cmdMediator;
+  // We do not check m_cmdMediator with ENGAUGE_CHECK_PTR since calling code is expected to deal with null pointer at startup
+  return m_cmdMediator;
 }
 
 void MainWindow::createActions()
@@ -408,12 +407,12 @@ void MainWindow::createActionsFile ()
                                     "Creates a new document by importing an image with a single coordinate system."));
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
 
-  m_actionImportCustomImage = new QAction(tr ("Import Custom Image..."), this);
-  m_actionImportCustomImage->setStatusTip (tr ("Creates a new document by importing an image with support for multiple coordinate systems."));
-  m_actionImportCustomImage->setWhatsThis (tr ("Import Custom Image\n\n"
-                                               "Creates a new document by importing an image with support for multiple coordinate systems. The "
-                                               "number of coordinate systems is permanently set during import. "));
-  connect (m_actionImportCustomImage, SIGNAL (triggered ()), this, SLOT (slotFileImportImageCustom ()));
+  m_actionImportAdvanced = new QAction(tr ("Import (Advanced)..."), this);
+  m_actionImportAdvanced->setStatusTip (tr ("Creates a new document by importing an image with support for multiple coordinate systems."));
+  m_actionImportAdvanced->setWhatsThis (tr ("Import (Advanced)\n\n"
+                                            "Creates a new document by importing an image with support for multiple coordinate systems. The "
+                                            "number of coordinate systems is permanently set during import. "));
+  connect (m_actionImportAdvanced, SIGNAL (triggered ()), this, SLOT (slotFileImportAdvanced ()));
 
   m_actionOpen = new QAction(tr ("&Open..."), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
@@ -851,7 +850,7 @@ void MainWindow::createMenus()
 
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
-  m_menuFile->addAction (m_actionImportCustomImage);
+  m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionOpen);
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
@@ -1181,17 +1180,26 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 }
 
 void MainWindow::fileImport (const QString &fileName,
-                             MultiCoordSystemQuery multiCoordSystemQuery)
+                             ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
-                              << " curDir=" << QDir::currentPath().toLatin1().data();
+                              << " curDir=" << QDir::currentPath().toLatin1().data()
+                              << " importType=" << importType;
 
   QString originalFileOld = m_originalFile;
   bool originalFileWasImported = m_originalFileWasImported;
 
   m_originalFile = fileName; // Make this available for logging in case an error occurs during the load
   m_originalFileWasImported = true;
+
+  if (importType == IMPORT_TYPE_ADVANCED) {
+
+    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
+    // when previewing for IMAGE_TYPE_ADVANCED. We do not call slotFileClose since that calls GraphicsScene::resetOnLoad which
+    // will erase the screen AFTER the preview image is loaded for IMPORT_TYPE_ADVANCED
+    m_scene->hideAllItemsExceptImage();
+  }
 
   QImage image;
   bool loaded = false;
@@ -1214,17 +1222,36 @@ void MainWindow::fileImport (const QString &fileName,
     m_originalFile = originalFileOld;
     m_originalFileWasImported = originalFileWasImported;
 
-    return;
-  }
+  } else {
 
-  loadImage (fileName,
-             image,
-             multiCoordSystemQuery);
+    loaded = loadImage (fileName,
+                        image,
+                        importType);
+
+    if (!loaded) {
+
+      // Failed
+      if (importType == IMPORT_TYPE_ADVANCED) {
+
+        // User cancelled after another file was imported so it could be previewed. In anticipation of the loading-for-preview,
+        // we closed the current Document at the top of this method so we cannot reload. So, the only option is to close again
+        // so the half-imported current Document is removed
+        slotFileClose();
+
+      } else {
+
+        // Reset
+        m_originalFile = originalFileOld;
+        m_originalFileWasImported = originalFileWasImported;
+      }
+    }
+  }
 }
 
-void MainWindow::fileImportWithPrompts (MultiCoordSystemQuery multiCoordSystemQuery)
+void MainWindow::fileImportWithPrompts (ImportType importType)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts"
+                              << " importType=" << importType;
 
   if (maybeSave ()) {
 
@@ -1261,7 +1288,7 @@ void MainWindow::fileImportWithPrompts (MultiCoordSystemQuery multiCoordSystemQu
 
       // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
       fileImport (fileName,
-                  multiCoordSystemQuery);
+                  importType);
     }
   }
 }
@@ -1337,7 +1364,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_cmdMediator = cmdMediator;
     setupAfterLoad(fileName,
                    "File opened",
-                   MULTI_COORD_SYSTEM_QUERY_NO);
+                   IMPORT_TYPE_SIMPLE);
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1403,7 +1430,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
 
   setupAfterLoad(errorReportFile,
                  "Error report opened",
-                 MULTI_COORD_SYSTEM_QUERY_NO);
+                 IMPORT_TYPE_SIMPLE);
 
   // Start select mode
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1412,12 +1439,13 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   updateAfterCommand ();
 }
 
-void MainWindow::loadImage (const QString &fileName,
+bool MainWindow::loadImage (const QString &fileName,
                             const QImage &image,
-                            MultiCoordSystemQuery multiCoordSystemQuery)
+                            ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
-                              << " fileName=" << fileName.toLatin1 ().data ();
+                              << " fileName=" << fileName.toLatin1 ().data ()
+                              << " importType=" << importType;
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
@@ -1434,48 +1462,52 @@ void MainWindow::loadImage (const QString &fileName,
   }
 
   m_cmdMediator = cmdMediator;
-  setupAfterLoad(fileName,
-                 "File imported",
-                 multiCoordSystemQuery);
+  bool accepted = setupAfterLoad(fileName,
+                                 "File imported",
+                                 importType);
 
-  if (m_actionHelpChecklistGuideWizard->isChecked ()) {
+  if (accepted) {
+    if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
-    // Show wizard
-    ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
-                                                             m_cmdMediator->document().coordSystemCount());
-    if (wizard->exec() == QDialog::Accepted) {
+      // Show wizard
+      ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
+                                                               m_cmdMediator->document().coordSystemCount());
+      if (wizard->exec() == QDialog::Accepted) {
 
-      for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
+        for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
 
-        // Populate the checklist guide
-        m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
-                                               wizard->curveNames(coordSystemIndex));
+          // Populate the checklist guide
+          m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
+                                                 wizard->curveNames(coordSystemIndex));
 
-        // Update Document
-        CurvesGraphs curvesGraphs;
-        wizard->populateCurvesGraphs (coordSystemIndex,
-                                      curvesGraphs);
-        m_cmdMediator->document().setCurvesGraphs(coordSystemIndex,
-                                                  curvesGraphs);
+          // Update Document
+          CurvesGraphs curvesGraphs;
+          wizard->populateCurvesGraphs (coordSystemIndex,
+                                        curvesGraphs);
+          m_cmdMediator->document().setCurvesGraphs(coordSystemIndex,
+                                                    curvesGraphs);
+        }
+
+        // Unhide the checklist guide
+        m_actionViewChecklistGuide->setChecked (true);
+
+        // Update the curve dropdown
+        loadCurveListFromCmdMediator();
+
+        // Update the CoordSystem dropdown
+        loadCoordSystemListFromCmdMediator();
       }
-
-      // Unhide the checklist guide
-      m_actionViewChecklistGuide->setChecked (true);
-
-      // Update the curve dropdown
-      loadCurveListFromCmdMediator();
-
-      // Update the CoordSystem dropdown
-      loadCoordSystemListFromCmdMediator();
+      delete wizard;
     }
-    delete wizard;
+
+    // Start axis mode
+    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
+    slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
+
+    updateControls ();
   }
 
-  // Start axis mode
-  m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
-  slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
-
-  updateControls ();
+  return accepted;
 }
 
 void MainWindow::loadInputFileForErrorReport(QDomDocument &domInputFile) const
@@ -1869,7 +1901,8 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
-  m_digitizeStateContext->setImageIsLoaded (true);
+  m_digitizeStateContext->setImageIsLoaded (m_cmdMediator,
+                                            true);
   m_backgroundStateContext->setPixmap (m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
@@ -2037,33 +2070,36 @@ void MainWindow::settingsWrite ()
   settings.endGroup ();
 }
 
-void MainWindow::setupAfterLoad (const QString &fileName,
+bool MainWindow::setupAfterLoad (const QString &fileName,
                                  const QString &temporaryMessage ,
-                                 MultiCoordSystemQuery multiCoordSystemQuery)
+                                 ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
                               << " file=" << fileName.toLatin1().data()
-                              << " message=" << temporaryMessage.toLatin1().data();
+                              << " message=" << temporaryMessage.toLatin1().data()
+                              << " importType=" << importType;
 
   // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
 
+  m_digitizeStateContext->resetOnLoad (m_cmdMediator); // Before setPixmap
   setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
 
   // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
   // may already have multiple CoordSystem if user loaded a file that had multiple CoordSystem entries
-  if (multiCoordSystemQuery == MULTI_COORD_SYSTEM_QUERY_YES) {
+  if (importType == IMPORT_TYPE_ADVANCED) {
+
+    applyZoomFactorAfterLoad(); // Apply the currently selected zoom factor
+
     DlgCoordSystemCount dlgCoordSystem (*this);
     dlgCoordSystem.exec();
 
     if (dlgCoordSystem.result() == QDialog::Rejected) {
-      return;
+      return false;
     }
 
     int numberCoordSystem = dlgCoordSystem.numberCoordSystem();
     m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
   }
-
-  m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
 
   m_transformation.resetOnLoad();
   m_transformationStateContext->resetOnLoad();
@@ -2101,6 +2137,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   saveStartingDocumentSnapshot();
 
   updateAfterCommand(); // Replace stale points by points in new Document
+
+  return true;
 }
 
 void MainWindow::showEvent (QShowEvent *event)
@@ -2188,7 +2226,7 @@ void MainWindow::slotCmbCoordSystem(int index)
                                                         m_cmdMediator->document(),
                                                         index);
 
-  cmdMediator ().push (cmd);
+  m_cmdMediator->push (cmd);
 }
 
 void MainWindow::slotCmbCurve(int /* index */)
@@ -2199,7 +2237,7 @@ void MainWindow::slotCmbCurve(int /* index */)
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
-  m_digitizeStateContext->handleCurveChange ();
+  m_digitizeStateContext->handleCurveChange (m_cmdMediator);
 
   updateViewedCurves();
   updateViewsOfSettings();
@@ -2209,14 +2247,16 @@ void MainWindow::slotContextMenuEvent (QString pointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
 
-  m_digitizeStateContext->handleContextMenuEvent (pointIdentifier);
+  m_digitizeStateContext->handleContextMenuEvent (m_cmdMediator,
+                                                  pointIdentifier);
 }
 
 void MainWindow::slotDigitizeAxis ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeAxis";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_AXIS);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_AXIS);
   m_cmbCurve->setEnabled (false); // Graph curve is irrelevant in this mode
   m_viewPointStyle->setEnabled (true); // Point style is important in this mode
   m_viewSegmentFilter->setEnabled (true); // Filtering is important in this mode
@@ -2226,7 +2266,8 @@ void MainWindow::slotDigitizeColorPicker ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeColorPicker";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_COLOR_PICKER);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_COLOR_PICKER);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2236,7 +2277,8 @@ void MainWindow::slotDigitizeCurve ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeCurve";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_CURVE);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2246,7 +2288,8 @@ void MainWindow::slotDigitizePointMatch ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizePointMatch";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_POINT_MATCH);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_POINT_MATCH);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2256,7 +2299,8 @@ void MainWindow::slotDigitizeSegment ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSegment";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SEGMENT);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_SEGMENT);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2266,7 +2310,8 @@ void MainWindow::slotDigitizeSelect ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSelect";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SELECT);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_SELECT);
   m_cmbCurve->setEnabled (false);
   m_viewPointStyle->setEnabled (false);
   m_viewSegmentFilter->setEnabled (false);
@@ -2279,7 +2324,8 @@ void MainWindow::slotEditCopy ()
   CmdCopy *cmd = new CmdCopy (*this,
                               m_cmdMediator->document(),
                               m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditCut ()
@@ -2289,7 +2335,8 @@ void MainWindow::slotEditCut ()
   CmdCut *cmd = new CmdCut (*this,
                             m_cmdMediator->document(),
                             m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditDelete ()
@@ -2299,7 +2346,8 @@ void MainWindow::slotEditDelete ()
   CmdDelete *cmd = new CmdDelete (*this,
                                   m_cmdMediator->document(),
                                   m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditPaste ()
@@ -2316,13 +2364,14 @@ void MainWindow::slotFileClose()
     // Transition from defined to undefined. This must be after the clearing of the screen
     // since the axes checker screen item (and maybe others) must still exist
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
     // Transition to empty state so an inadvertent mouse press does not trigger, for example,
     // the creation of an axis point on a non-existent GraphicsScene (=crash)
-    m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_EMPTY);
+    m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                             DIGITIZE_STATE_EMPTY);
 
     // Remove screen objects
     m_scene->resetOnLoad ();
@@ -2371,11 +2420,11 @@ void MainWindow::slotFileExport ()
 
         QTextStream str (&file);
 
-        DocumentModelExportFormat modelExportFormat = modelExportOverride (cmdMediator().document().modelExport(),
+        DocumentModelExportFormat modelExportFormat = modelExportOverride (m_cmdMediator->document().modelExport(),
                                                                            exportStrategy,
                                                                            fileName);
         exportStrategy.exportToFile (modelExportFormat,
-                                     cmdMediator().document(),
+                                     m_cmdMediator->document(),
                                      m_modelMainWindow,
                                      transformation (),
                                      str);
@@ -2402,16 +2451,24 @@ void MainWindow::slotFileImport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImport";
 
-  fileImportWithPrompts (MULTI_COORD_SYSTEM_QUERY_NO);
+  fileImportWithPrompts (IMPORT_TYPE_SIMPLE);
+}
+
+void MainWindow::slotFileImportAdvanced ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportAdvanced";
+
+  fileImportWithPrompts (IMPORT_TYPE_ADVANCED);
 }
 
 void MainWindow::slotFileImportDraggedImage(QImage image)
 {  
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImage";
 
+  // No need to check return value from loadImage since there are no prompts that give the user a chance to cancel
   loadImage ("",
              image,
-             MULTI_COORD_SYSTEM_QUERY_NO);
+             IMPORT_TYPE_SIMPLE);
 }
 
 void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
@@ -2425,16 +2482,10 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImage fileName=" << fileName.toLatin1 ().data ();
 
+  // No need to check return value from loadImage since there are no prompts that give the user a chance to cancel
   loadImage (fileName,
              image,
-             MULTI_COORD_SYSTEM_QUERY_NO);
-}
-
-void MainWindow::slotFileImportImageCustom ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImageCustom";
-
-  fileImportWithPrompts (MULTI_COORD_SYSTEM_QUERY_YES);
+             IMPORT_TYPE_SIMPLE);
 }
 
 void MainWindow::slotFileOpen()
@@ -2555,7 +2606,8 @@ void MainWindow::slotKeyPress (Qt::Key key,
                               << " key=" << QKeySequence (key).toString().toLatin1 ().data ()
                               << " atLeastOneSelectedItem=" << (atLeastOneSelectedItem ? "true" : "false");
 
-  m_digitizeStateContext->handleKeyPress (key,
+  m_digitizeStateContext->handleKeyPress (m_cmdMediator,
+                                          key,
                                           atLeastOneSelectedItem);
 }
 
@@ -2563,7 +2615,7 @@ void MainWindow::slotLeave ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotLeave";
 
-  m_digitizeStateContext->handleLeave ();
+  m_digitizeStateContext->handleLeave (m_cmdMediator);
 }
 
 void MainWindow::slotLoadStartupFiles ()
@@ -2584,7 +2636,7 @@ void MainWindow::slotLoadStartupFiles ()
   } else {
 
     fileImport (fileName,
-                MULTI_COORD_SYSTEM_QUERY_NO);
+                IMPORT_TYPE_SIMPLE);
 
   }
 
@@ -2620,7 +2672,8 @@ void MainWindow::slotMouseMove (QPointF pos)
     // There used to be a call to updateGraphicsLinesToMatchGraphicsPoints here, but that resulted
     // in hundreds of gratuitous log messages as the cursor was moved around, and nothing important happened
 
-    m_digitizeStateContext->handleMouseMove (pos);
+    m_digitizeStateContext->handleMouseMove (m_cmdMediator,
+                                             pos);
   }
 }
 
@@ -2630,7 +2683,8 @@ void MainWindow::slotMousePress (QPointF pos)
 
   m_scene->resetPositionHasChangedFlags();
 
-  m_digitizeStateContext->handleMousePress (pos);
+  m_digitizeStateContext->handleMousePress (m_cmdMediator,
+                                            pos);
 }
 
 void MainWindow::slotMouseRelease (QPointF pos)
@@ -2646,7 +2700,8 @@ void MainWindow::slotMouseRelease (QPointF pos)
   } else {
 
     // Cursor is within the image so process this as a normal mouse release
-    m_digitizeStateContext->handleMouseRelease (pos);
+    m_digitizeStateContext->handleMouseRelease (m_cmdMediator,
+                                                pos);
   }
 }
 
@@ -2677,7 +2732,8 @@ void MainWindow::slotSetOverrideCursor (QCursor cursor)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
 
-  m_digitizeStateContext->handleSetOverrideCursor (cursor);
+  m_digitizeStateContext->handleSetOverrideCursor (m_cmdMediator,
+                                                   cursor);
 }
 
 void MainWindow::slotSettingsAxesChecker ()
@@ -3255,7 +3311,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // Transition from undefined to defined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
@@ -3263,7 +3319,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // Transition from defined to undefined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
@@ -3271,7 +3327,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // There was not a define/undefined or undefined/defined transition, but the transformation changed so we
     // need to update the Checker
-    m_transformationStateContext->updateAxesChecker(cmdMediator(),
+    m_transformationStateContext->updateAxesChecker(*m_cmdMediator,
                                                     m_transformation);
 
   }
@@ -3470,7 +3526,7 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   m_backgroundStateContext->updateColorFilter (m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
                                                modelColorFilter);
-  m_digitizeStateContext->handleCurveChange ();
+  m_digitizeStateContext->handleCurveChange (m_cmdMediator);
   updateViewsOfSettings();
 }
 
@@ -3504,7 +3560,8 @@ void MainWindow::updateSettingsDigitizeCurve(const DocumentModelDigitizeCurve &m
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsDigitizeCurve";
 
   m_cmdMediator->document().setModelDigitizeCurve(modelDigitizeCurve);
-  m_digitizeStateContext->updateModelDigitizeCurve (modelDigitizeCurve);
+  m_digitizeStateContext->updateModelDigitizeCurve (m_cmdMediator,
+                                                    modelDigitizeCurve);
 }
 
 void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &modelExport)

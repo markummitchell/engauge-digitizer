@@ -28,11 +28,12 @@ QString DigitizeStateColorPicker::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateColorPicker::begin (DigitizeState previousState)
+void DigitizeStateColorPicker::begin (CmdMediator *cmdMediator,
+                                      DigitizeState previousState)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::begin";
 
-  setCursor();
+  setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
 
   // Save current state stuff so it can be restored afterwards
@@ -42,7 +43,8 @@ void DigitizeStateColorPicker::begin (DigitizeState previousState)
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
-bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
+bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
+                                                       const QPointF &posScreen,
                                                        const QString &curveName,
                                                        DocumentModelColorFilter &modelColorFilterAfter)
 {
@@ -52,14 +54,15 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
 
   // Filter for background color now, and then later, once filter mode is set, processing of image
   ColorFilter filter;
-  QImage image = context().cmdMediator().document().pixmap().toImage();
+  QImage image = cmdMediator->document().pixmap().toImage();
   QRgb rgbBackground = filter.marginColor(&image);
 
   // Adjust screen position so truncation gives round-up behavior
   QPointF posScreenPlusHalf = posScreen - QPointF (0.5, 0.5);
 
   QColor pixel;
-  rtn = findNearestNonBackgroundPixel (image,
+  rtn = findNearestNonBackgroundPixel (cmdMediator,
+                                       image,
                                        posScreenPlusHalf,
                                        rgbBackground,
                                        pixel);
@@ -141,7 +144,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (const QPointF &posScreen,
   return rtn;
 }
 
-QCursor DigitizeStateColorPicker::cursor() const
+QCursor DigitizeStateColorPicker::cursor(CmdMediator * /* cmdMediator */) const
 {
   // Hot point is at the point of the eye dropper
   const int HOT_X_IN_BITMAP = 8;
@@ -165,14 +168,15 @@ void DigitizeStateColorPicker::end ()
   context().mainWindow().selectOriginal(m_previousBackground);
 }
 
-bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &image,
+bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (CmdMediator *cmdMediator,
+                                                              const QImage &image,
                                                               const QPointF &posScreenPlusHalf,
                                                               const QRgb &rgbBackground,
                                                               QColor &pixel)
 {
   QPoint pos = posScreenPlusHalf.toPoint ();
 
-  int maxRadiusForSearch = context().cmdMediator().document().modelGeneral().cursorSize();
+  int maxRadiusForSearch = cmdMediator->document().modelGeneral().cursorSize();
 
   // Starting at pos, search in ever-widening squares for a non-background pixel
   for (int radius = 0; radius < maxRadiusForSearch; radius++) {
@@ -210,35 +214,40 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (const QImage &imag
   return false;
 }
 
-void DigitizeStateColorPicker::handleCurveChange()
+void DigitizeStateColorPicker::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleCurveChange";
 }
 
-void DigitizeStateColorPicker::handleKeyPress (Qt::Key key,
+void DigitizeStateColorPicker::handleKeyPress (CmdMediator * /* cmdMediator */,
+                                               Qt::Key key,
                                                bool /* atLeastOneSelectedItem */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
-void DigitizeStateColorPicker::handleMouseMove (QPointF /* posScreen */)
+void DigitizeStateColorPicker::handleMouseMove (CmdMediator * /* cmdMediator */,
+                                                QPointF /* posScreen */)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseMove";
 }
 
-void DigitizeStateColorPicker::handleMousePress (QPointF /* posScreen */)
+void DigitizeStateColorPicker::handleMousePress (CmdMediator * /* cmdMediator */,
+                                                 QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMousePress";
 }
 
-void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
+void DigitizeStateColorPicker::handleMouseRelease (CmdMediator *cmdMediator,
+                                                   QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleMouseRelease";
 
-  DocumentModelColorFilter modelColorFilterBefore = context().cmdMediator().document().modelColorFilter();
-  DocumentModelColorFilter modelColorFilterAfter = context().cmdMediator().document().modelColorFilter();
-  if (computeFilterFromPixel (posScreen,
+  DocumentModelColorFilter modelColorFilterBefore = cmdMediator->document().modelColorFilter();
+  DocumentModelColorFilter modelColorFilterAfter = cmdMediator->document().modelColorFilter();
+  if (computeFilterFromPixel (cmdMediator,
+                              posScreen,
                               context().mainWindow().selectedGraphCurve(),
                               modelColorFilterAfter)) {
 
@@ -247,10 +256,11 @@ void DigitizeStateColorPicker::handleMouseRelease (QPointF posScreen)
 
     // Create command to change segment filter
     QUndoCommand *cmd = new CmdSettingsColorFilter (context ().mainWindow(),
-                                                    context ().cmdMediator ().document (),
+                                                    cmdMediator->document (),
                                                     modelColorFilterBefore,
                                                     modelColorFilterAfter);
-    context().appendNewCmd(cmd);
+    context().appendNewCmd(cmdMediator,
+                           cmd);
   }
 }
 
@@ -305,7 +315,8 @@ QString DigitizeStateColorPicker::state() const
   return "DigitizeStateColorPicker";
 }
 
-void DigitizeStateColorPicker::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+void DigitizeStateColorPicker::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,
+                                                         const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::updateModelDigitizeCurve";
 }

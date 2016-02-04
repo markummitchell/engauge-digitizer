@@ -72,6 +72,25 @@ QString GraphicsScene::dumpCursors () const
   return dump;
 }
 
+void GraphicsScene::hideAllItemsExceptImage()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::hideAllItemsExceptImage";
+
+  for (int index = 0; index < QGraphicsScene::items().count(); index++) {
+    QGraphicsItem *item = QGraphicsScene::items().at(index);
+
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt() == GRAPHICS_ITEM_TYPE_IMAGE) {
+
+      item->show();
+
+    } else {
+
+      item->hide();
+
+    }
+  }
+}
+
 const QGraphicsPixmapItem *GraphicsScene::image () const
 {
   // Loop through items in scene to find the image
