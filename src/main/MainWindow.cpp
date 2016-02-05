@@ -1196,9 +1196,11 @@ void MainWindow::fileImport (const QString &fileName,
   if (importType == IMPORT_TYPE_ADVANCED) {
 
     // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
-    // when previewing for IMAGE_TYPE_ADVANCED. We do not call slotFileClose since that calls GraphicsScene::resetOnLoad which
-    // will erase the screen AFTER the preview image is loaded for IMPORT_TYPE_ADVANCED
-    m_scene->hideAllItemsExceptImage();
+    // when previewing for IMAGE_TYPE_ADVANCED
+    slotFileClose();
+
+    // Restore the background just closed by slotFileClose. This is required so when the image is loaded for preview, it will appear
+    m_backgroundStateContext->setBackgroundImage(BACKGROUND_IMAGE_ORIGINAL);
   }
 
   QImage image;
@@ -2398,7 +2400,6 @@ void MainWindow::slotFileExport ()
 
   if (m_transformation.transformIsDefined()) {
 
-    const int SELECTED_FILTER_IS_CSV = 0;
     ExportToFile exportStrategy;
     QString filter = QString ("%1;;%2;;All files (*.*)")
                      .arg (exportStrategy.filterCsv ())
@@ -2408,11 +2409,12 @@ void MainWindow::slotFileExport ()
                               .arg (m_currentFile)
                               .arg (exportStrategy.fileExtensionCsv ());
     QFileDialog dlg;
+    QString filterCsv = exportStrategy.filterCsv ();
     QString fileName = dlg.getSaveFileName (this,
                                             tr("Export"),
                                             defaultFileName,
                                             filter,
-                                            SELECTED_FILTER_IS_CSV);
+                                            &filterCsv);
     if (!fileName.isEmpty ()) {
 
       QFile file (fileName);
