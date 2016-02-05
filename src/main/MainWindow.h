@@ -52,6 +52,7 @@ class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
 class QMenu;
+class QPushButton;
 class QSettings;
 class QTextStream;
 class QTimer;
@@ -187,6 +188,7 @@ public:
   virtual void wheelEvent(QWheelEvent *event);
 
 private slots:
+  void slotBtnShowAll();
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
   void slotChecklistClosed ();
@@ -459,6 +461,7 @@ private:
   ChecklistGuide *m_dockChecklistGuide;
 
   QComboBox *m_cmbCoordSystem;
+  QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
   HelpWindow *m_helpWindow;

@@ -1108,13 +1108,28 @@ void MainWindow::createToolBars ()
 
   // Coordinate system toolbar
   m_cmbCoordSystem = new QComboBox;
+  m_cmbCoordSystem->setEnabled (false);
   m_cmbCoordSystem->setStatusTip (tr ("Currently selected coordinate system"));
   m_cmbCoordSystem->setWhatsThis (tr ("Selected Coordinate System\n\n"
                                       "Currently selected coordinate system. This is used to switch between coordinate systems "
                                       "in documents with multiple coordinate systems"));
   connect (m_cmbCoordSystem, SIGNAL (activated (int)), this, SLOT (slotCmbCoordSystem (int)));
+
+  m_btnShowAll = new QPushButton(tr ("Show All"));
+  m_btnShowAll->setEnabled (false);
+  m_btnShowAll->setAcceptDrops(false);
+  m_btnShowAll->setStatusTip (tr ("Show all coordinate systems"));
+  m_btnShowAll->setWhatsThis (tr ("Show All Coordinate Systems\n\n"
+                                  "When pushed, this button shows all coordinate systems, although only items belonging to the "
+                                  "currently active coordinate system can be modified. When not pushed, this button shows only the "
+                                  "currently active coordinate system."));
+  m_btnShowAll->setCheckable(true);
+  connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAll ()));
+
   m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
   m_toolCoordSystem->addWidget (m_cmbCoordSystem);
+  m_toolCoordSystem->addWidget (m_btnShowAll);
+
   addToolBar (m_toolCoordSystem);
 
   // Checklist guide starts out hidden. It will be positioned in settingsRead
@@ -1322,8 +1337,10 @@ void MainWindow::loadCoordSystemListFromCmdMediator ()
   // Always start with the first entry selected
   m_cmbCoordSystem->setCurrentIndex (0);
 
-  // Disable the control if there is only one entry. Hopefully the user will not even notice it, thus simplifying the interface
-  m_cmbCoordSystem->setEnabled (m_cmbCoordSystem->count() > 1);
+  // Disable the controls if there is only one entry. Hopefully the user will not even notice it, thus simplifying the interface
+  bool enable = (m_cmbCoordSystem->count() > 1);
+  m_cmbCoordSystem->setEnabled (enable);
+  m_btnShowAll->setEnabled (enable);
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -2163,6 +2180,11 @@ void MainWindow::showEvent (QShowEvent *event)
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
+}
+
+void MainWindow::slotBtnShowAll ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAll";
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)
