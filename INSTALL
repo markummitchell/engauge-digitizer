@@ -36,17 +36,19 @@ These steps build and run, in Microsoft Windows, the standard engauge executable
 4) Set LOG4CPP_HOME and FFTW_HOME environment variables to point to the installation directories of 
    log4cpp and fftw in the previous steps.
 
-5) Build engauge using either the command line approach, or qtcreator. The command line approach is:
+5) Build engauge using either the command line approach, or qtcreator. 
 
-   5a) qmake engauge.pro
-   5b) make
+   The command line approach is run from the highest level Engauge directory:
 
-   The qtcreator approach is
+   > qmake engauge.pro
+   > make
 
-   5a) qtcreator
-   5b) File / Open / open engauge.pro
-   5c) Build / BuildAll
-   5d) Run 
+   Alternately, you can use the qtcreator approach instead:
+
+   > qtcreator
+   > File / Open / open engauge.pro
+   > Build / BuildAll
+   > Run 
 
 Linux - Steps to build and run engauge executable:
 --------------------------------------------------
@@ -93,9 +95,9 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
 
 4) Run qmake on this file to generate make files. The qmake executable will
    display what functionality will, and what functionality will not, be included 
-   in engauge as a function of the currently installed packages.
+   in engauge as a function of the currently installed packages. Run this qmake
+   command in the highest level Engauge directory:
 
-     > cd src
      > qmake engauge.pro
 
    By default, the debug version will be built by qmake. To build a release version
