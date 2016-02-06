@@ -24,21 +24,22 @@ QString DigitizeStateCurve::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateCurve::begin (DigitizeState /* previousState */)
+void DigitizeStateCurve::begin (CmdMediator *cmdMediator,
+                                DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::begin";
 
-  setCursor();
+  setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
-QCursor DigitizeStateCurve::cursor() const
+QCursor DigitizeStateCurve::cursor(CmdMediator *cmdMediator) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateCurve::cursor";
 
   CursorFactory cursorFactory;
-  QCursor cursor = cursorFactory.generate (context().cmdMediator().document().modelDigitizeCurve());
+  QCursor cursor = cursorFactory.generate (cmdMediator->document().modelDigitizeCurve());
 
   return cursor;
 }
@@ -48,35 +49,39 @@ void DigitizeStateCurve::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::end";
 }
 
-void DigitizeStateCurve::handleCurveChange()
+void DigitizeStateCurve::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleCurveChange";
 }
 
-void DigitizeStateCurve::handleKeyPress (Qt::Key key,
+void DigitizeStateCurve::handleKeyPress (CmdMediator * /* cmdMediator */,
+                                         Qt::Key key,
                                          bool /* atLeastOneSelectedItem */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
-void DigitizeStateCurve::handleMouseMove (QPointF /* posScreen */)
+void DigitizeStateCurve::handleMouseMove (CmdMediator * /* cmdMediator */,
+                                          QPointF /* posScreen */)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateCurve::handleMouseMove";
 }
 
-void DigitizeStateCurve::handleMousePress (QPointF /* posScreen */)
+void DigitizeStateCurve::handleMousePress (CmdMediator * /* cmdMediator */,
+                                           QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleMousePress";
 }
 
-void DigitizeStateCurve::handleMouseRelease (QPointF posScreen)
+void DigitizeStateCurve::handleMouseRelease (CmdMediator *cmdMediator,
+                                             QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::handleMouseRelease";
 
   // Create command to add point
   OrdinalGenerator ordinalGenerator;
-  Document &document = context ().cmdMediator ().document ();
+  Document &document = cmdMediator->document ();
   const Transformation &transformation = context ().mainWindow ().transformation();
   QUndoCommand *cmd = new CmdAddPointGraph (context ().mainWindow(),
                                             document,
@@ -86,7 +91,8 @@ void DigitizeStateCurve::handleMouseRelease (QPointF posScreen)
                                                                                        transformation,
                                                                                        posScreen,
                                                                                        activeCurve ()));
-  context().appendNewCmd(cmd);
+  context().appendNewCmd(cmdMediator,
+                         cmd);
 }
 
 QString DigitizeStateCurve::state() const
@@ -94,11 +100,12 @@ QString DigitizeStateCurve::state() const
   return "DigitizeStateCurve";
 }
 
-void DigitizeStateCurve::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+void DigitizeStateCurve::updateModelDigitizeCurve (CmdMediator *cmdMediator,
+                                                   const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::updateModelDigitizeCurve";
 
-  setCursor();
+  setCursor(cmdMediator);
 }
 
 void DigitizeStateCurve::updateModelSegments(const DocumentModelSegments & /* modelSegments */)

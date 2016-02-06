@@ -1,6 +1,8 @@
 #ifndef CHECKLIST_GUIDE_WIZARD_H
 #define CHECKLIST_GUIDE_WIZARD_H
 
+#include "CoordSystemIndex.h"
+#include <QList>
 #include <QStringList>
 #include <QWizard>
 
@@ -16,30 +18,35 @@ class ChecklistGuideWizard : public QWizard
 {
  public:
   /// Single constructor
-  ChecklistGuideWizard(MainWindow &mainWindow);
+  ChecklistGuideWizard(MainWindow &mainWindow,
+                       unsigned int numberCoordSystem);
 
   /// Curve names to be placed into Document
-  QStringList curveNames() const;
+  QStringList curveNames(CoordSystemIndex coordSystemIndex) const;
 
   /// Create entries in CurvesGraphs for each curve name that user provided
-  void populateCurvesGraphs (CurvesGraphs &curvesGraphs);
+  void populateCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                             CurvesGraphs &curvesGraphs);
 
   /// Template html comprising the checklist for display
-  QString templateHtml () const;
+  QString templateHtml (CoordSystemIndex coordSystemIndex) const;
 
  private:
   ChecklistGuideWizard();
 
+  QString pageCurvesTitle (CoordSystemIndex coordSystemIndex,
+                           unsigned int numberCoordSystem) const;
   QString templateHtmlToAdjustColorFilterSettings () const;
 
   MainWindow &m_mainWindow;
+
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
 
   QString m_dialogName;
 
   ChecklistGuidePageIntro *m_pageIntro;
-  ChecklistGuidePageCurves *m_pageCurves;
+  QList<ChecklistGuidePageCurves *> m_pageCurves; // One page per coordinate system
   ChecklistGuidePageConclusion *m_pageConclusion;
 };
 

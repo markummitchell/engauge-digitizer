@@ -47,6 +47,7 @@ extern const QString SETTINGS_POS;
 extern const QString SETTINGS_RECENT_FILE_LIST;
 extern const QString SETTINGS_SIZE;
 extern const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR;
+extern const QString SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR;
 extern const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR;
 extern const QString SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR;
 extern const QString SETTINGS_VIEW_STATUS_BAR;

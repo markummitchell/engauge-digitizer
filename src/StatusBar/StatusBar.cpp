@@ -55,9 +55,9 @@ void StatusBar::createGroupUnits ()
   m_cmbUnits->setMaximumWidth (MIN_WIDTH_COMBO_UNITS);
   m_cmbUnits->setToolTip (tr ("Select cursor coordinate values to display."));
   m_cmbUnits->setWhatsThis (tr("Select Cursor Coordinate Values\n\n"
-                                 "Values at cursor coordinates to display. Coordinates are in screen (pixels) or "
-                                 "graph units. Resolution (which is the number of graph units per pixel) is "
-                                 "in graph units. Graph units are only available after axis points have been defined."));
+                               "Values at cursor coordinates to display. Coordinates are in screen (pixels) or "
+                               "graph units. Resolution (which is the number of graph units per pixel) is "
+                               "in graph units. Graph units are only available after axis points have been defined."));
   connect (m_cmbUnits, SIGNAL (activated(const QString &)), this, SLOT (slotComboUnits (const QString &))); // activated() ignores code changes
 
   m_editCoords = new QTextEdit;

@@ -16,7 +16,7 @@ class QImage;
 class CmdMediator : public QUndoStack
 {
 public:
-  /// Constructor for imported images and dragged images.
+  /// Constructor for imported images and dragged images. Only one coordinate system is created but others can be added later
   CmdMediator (MainWindow &mainWindow,
                const QImage &image);
 
@@ -26,6 +26,9 @@ public:
 
   /// Destructor
   ~CmdMediator();
+
+  /// Provide the current CoordSystem to commands with read-only access, primarily for undo/redo processing.
+  const CoordSystem &coordSystem () const;
 
   /// See Document::curveAxes
   const Curve &curveAxes () const;

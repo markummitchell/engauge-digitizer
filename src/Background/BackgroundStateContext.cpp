@@ -144,7 +144,9 @@ void BackgroundStateContext::setPixmap (const Transformation &transformation,
                                         const DocumentModelColorFilter &modelColorFilter,
                                         const QPixmap &pixmapOriginal)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap";
+  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap"
+                              << " image=" << pixmapOriginal.width() << "x" << pixmapOriginal.height()
+                              << " currentState=" << m_states [m_currentState]->state().toLatin1().data();
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 

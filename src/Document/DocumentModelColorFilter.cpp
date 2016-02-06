@@ -1,4 +1,5 @@
 #include "CmdMediator.h"
+#include "CoordSystem.h"
 #include "DocumentModelColorFilter.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -11,19 +12,19 @@ DocumentModelColorFilter::DocumentModelColorFilter()
 {
 }
 
-DocumentModelColorFilter::DocumentModelColorFilter(const Document &document)
+DocumentModelColorFilter::DocumentModelColorFilter(const CoordSystem &coordSystem)
 {
   // Axis curve
-  const Curve &curveAxes = document.curveAxes();
+  const Curve &curveAxes = coordSystem.curveAxes();
   m_colorFilterSettingsList [AXIS_CURVE_NAME] = curveAxes.colorFilterSettings ();
 
   // Graph curves
-  QStringList graphCurveNames = document.curvesGraphsNames();
+  QStringList graphCurveNames = coordSystem.curvesGraphsNames();
   QStringList::const_iterator itr;
   for (itr = graphCurveNames.begin (); itr != graphCurveNames.end (); itr++) {
 
     const QString &graphCurveName = *itr;
-    const Curve *graphCurve = document.curveForCurveName(graphCurveName);
+    const Curve *graphCurve = coordSystem.curveForCurveName(graphCurveName);
     m_colorFilterSettingsList [graphCurveName] = graphCurve->colorFilterSettings();
   }
 }

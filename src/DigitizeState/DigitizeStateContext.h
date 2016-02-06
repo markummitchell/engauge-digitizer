@@ -9,7 +9,6 @@
 #include <QVector>
 
 class CmdAbstractBase;
-class CmdMediator;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class MainWindow;
@@ -31,42 +30,39 @@ public:
   QString activeCurve () const;
 
   /// Append just-created QUndoCommand to command stack. This is called from DigitizeStateAbstractBase subclasses
-  void appendNewCmd(QUndoCommand *cmd);
-
-  /// Bind to CmdMediator class. Binding occurs from the single instance of this class to each new CmdMediator.
-  /// Resetting makes re-initializes for documents after the first
-  void bindToCmdMediatorAndResetOnLoad (CmdMediator *cmdMediator);
-
-  /// Provide CmdMediator for indirect access to the Document.
-  CmdMediator &cmdMediator ();
-
-  /// Provide CmdMediator for indirect access to the Document.
-  const CmdMediator &cmdMediator () const;
+  void appendNewCmd(CmdMediator *cmdMediator,
+                    QUndoCommand *cmd);
 
   /// See DigitizeStateAbstractBase::handleContextMenuEvent.
-  void handleContextMenuEvent (const QString &pointIdentifier);
+  void handleContextMenuEvent (CmdMediator *cmdMediator,
+                               const QString &pointIdentifier);
 
   /// See DigitizeStateAbstractBase::handleCurveChange.
-  void handleCurveChange ();
+  void handleCurveChange (CmdMediator *cmdMediator);
 
   /// See DigitizeStateAbstractBase::handleKeyPress.
-  void handleKeyPress (Qt::Key key,
+  void handleKeyPress (CmdMediator *cmdMediator,
+                       Qt::Key key,
                        bool atLeastOneSelectedItem);
 
   /// See DigitizeStateAbstractBase::handleLeave.
-  void handleLeave ();
+  void handleLeave (CmdMediator *cmdMediator);
 
   /// See DigitizeStateAbstractBase::handleMouseMove.
-  void handleMouseMove (QPointF pos);
+  void handleMouseMove (CmdMediator *cmdMediator,
+                        QPointF pos);
 
   /// See DigitizeStateAbstractBase::handleMousePress.
-  void handleMousePress (QPointF pos);
+  void handleMousePress (CmdMediator *cmdMediator,
+                         QPointF pos);
 
   /// See DigitizeStateAbstractBase::handleMouseRelease.
-  void handleMouseRelease (QPointF pos);
+  void handleMouseRelease (CmdMediator *cmdMediator,
+                           QPointF pos);
 
   /// See DigitizeStateAbstractBase::handleSetOverrideCursor
-  void handleSetOverrideCursor (const QCursor &cursor);
+  void handleSetOverrideCursor (CmdMediator *cmdMediator,
+                                const QCursor &cursor);
 
   /// Get method for gnuplot flag
   bool isGnuplot () const;
@@ -81,22 +77,28 @@ public:
   void requestDelayedStateTransition (DigitizeState digitizeState);
 
   /// Perform immediate state transition. Called from outside state machine
-  void requestImmediateStateTransition (DigitizeState digitizeState);
+  void requestImmediateStateTransition (CmdMediator *cmdMediator,
+                                        DigitizeState digitizeState);
+
+  /// Resetting makes re-initializes for documents after the first
+  void resetOnLoad (CmdMediator *cmdMediator);
 
   /// Set cursor after asking state for the new cursor shape.
-  void setCursor ();
+  void setCursor (CmdMediator *cmdMediator);
 
   /// Set QGraphicsView drag mode (in m_view). Called from DigitizeStateAbstractBase subclasses
   void setDragMode (QGraphicsView::DragMode dragMode);
 
   /// Set the image so QGraphicsView cursor and drag mode are accessible
-  void setImageIsLoaded (bool imageIsLoaded);
+  void setImageIsLoaded (CmdMediator *cmdMediator,
+                         bool imageIsLoaded);
 
   /// State name for debugging
   QString state() const;
 
   /// Update the digitize curve settings
-  void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  void updateModelDigitizeCurve (CmdMediator *cmdMediator,
+                                 const DocumentModelDigitizeCurve &modelDigitizeCurve);
 
   /// Update the segments given the new settings
   void updateModelSegments(const DocumentModelSegments &modelSegments);
@@ -107,7 +109,7 @@ public:
 private:
   DigitizeStateContext();
 
-  void completeRequestedStateTransitionIfExists ();
+  void completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator);
 
   MainWindow &m_mainWindow;
   QGraphicsView &m_view;
@@ -116,8 +118,6 @@ private:
   QVector<DigitizeStateAbstractBase*> m_states;
   DigitizeState m_currentState;
   DigitizeState m_requestedState; // Same as m_currentState until requestDelayedStateTransition is called
-
-  CmdMediator *m_cmdMediator;
 
   bool m_isGnuplot;
 };

@@ -61,6 +61,7 @@ HEADERS  += \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
+    Cmd/CmdSelectCoordSystem.h \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
     Cmd/CmdSettingsCoords.h \
@@ -84,6 +85,10 @@ HEADERS  += \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
     Coord/CoordSymbol.h \
+    CoordSystem/CoordSystem.h \
+    CoordSystem/CoordSystemContext.h \
+    CoordSystem/CoordSystemIndex.h \
+    CoordSystem/CoordSystemInterface.h \
     Coord/CoordUnitsDate.h \
     Coord/CoordUnitsNonPolarTheta.h \
     Coord/CoordUnitsPolarTheta.h \
@@ -110,6 +115,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
+    Dlg/DlgCoordSystemCount.h \
     Dlg/DlgEditPoint.h \
     Dlg/DlgErrorReport.h \
     Dlg/DlgFilterCommand.h \
@@ -177,6 +183,10 @@ HEADERS  += \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     Format/FormatDegreesMinutesSecondsPolarTheta.h \
     Callback/functor.h \
+    Ghosts/GhostEllipse.h \
+    Ghosts/GhostPath.h \
+    Ghosts/GhostPolygon.h \
+    Ghosts/Ghosts.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsLinesForCurve.h \
@@ -307,6 +317,7 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
+    Cmd/CmdSelectCoordSystem.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
     Cmd/CmdSettingsColorFilter.cpp \
     Cmd/CmdSettingsCoords.cpp \
@@ -328,6 +339,9 @@ SOURCES += \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
     Coord/CoordSymbol.cpp \
+    CoordSystem/CoordSystem.cpp \
+    CoordSystem/CoordSystemContext.cpp \
+    CoordSystem/CoordSystemInterface.cpp \
     Coord/CoordUnitsDate.cpp \
     Coord/CoordUnitsNonPolarTheta.cpp \
     Coord/CoordUnitsPolarTheta.cpp \
@@ -354,6 +368,7 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
+    Dlg/DlgCoordSystemCount.cpp \
     Dlg/DlgEditPoint.cpp \
     Dlg/DlgErrorReport.cpp \
     Dlg/DlgFilterCommand.cpp \
@@ -416,6 +431,10 @@ SOURCES += \
     Format/FormatDegreesMinutesSecondsBase.cpp \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    Ghosts/GhostEllipse.cpp \
+    Ghosts/GhostPath.cpp \
+    Ghosts/GhostPolygon.cpp \
+    Ghosts/Ghosts.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
@@ -511,6 +530,7 @@ INCLUDEPATH += Background \
                Cmd \
                Color \
                Coord \
+               CoordSystem \
                Correlation \
                Cursor \
                Curve \
@@ -520,6 +540,7 @@ INCLUDEPATH += Background \
                Export \
                Filter \
                Format \
+               Ghosts \
                Graphics \
                Grid \
                Help \

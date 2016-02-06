@@ -1,6 +1,8 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
+#include "CoordSystemContext.h"
+#include "CoordSystemIndex.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
 #include "DocumentModelAxesChecker.h"
@@ -18,8 +20,10 @@
 #include <QString>
 #include <QXmlStreamReader>
 
+class CoordSystem;
 class Curve;
 class QByteArray;
+class QFile;
 class QImage;
 class QTransform;
 class QXmlStreamWriter;
@@ -29,11 +33,15 @@ class Transformation;
 class Document
 {
 public:
-  /// Constructor for imported images and dragged images
+  /// Constructor for imported images and dragged images. Only one coordinate system is create - others are added later externally
   Document (const QImage &image);
 
   /// Constructor for opened Documents, and error report files. The specified file is opened and read
   Document (const QString &fileName);
+
+  /// Add some number (0 or more) of additional coordinate systems. This is only safe to call during import
+  /// and before any changes have been made to the Document
+  void addCoordSystems(unsigned int numberCoordSystemToAdd);
 
   /// Add new graph curve to the list of existing graph curves.
   void addGraphCurveAtEnd (const QString &curveName);
@@ -85,6 +93,15 @@ public:
                            const QPointF &posGraph,
                            bool &isError,
                            QString &errorMessage);
+
+  /// Currently active CoordSystem
+  const CoordSystem &coordSystem() const;
+
+  /// Number of CoordSystem
+  unsigned int coordSystemCount() const;
+
+  /// Index of current active CoordSystem
+  CoordSystemIndex coordSystemIndex() const;
 
   /// Get method for axis curve.
   const Curve &curveAxes () const;
@@ -192,8 +209,15 @@ public:
   /// Save document to xml
   void saveXml (QXmlStreamWriter &writer) const;
 
+  /// Set the index of current active CoordSystem
+  void setCoordSystemIndex(CoordSystemIndex coordSystemIndex);
+
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
+
+  /// Let CmdAbstract classes overwrite CurvesGraphs.
+  void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                        const CurvesGraphs &curvesGraphs);
 
   /// Set method for DocumentModelAxesChecker.
   void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
@@ -239,8 +263,10 @@ private:
   Curve *curveForCurveName (const QString &curveName); // For use by Document only. External classes should use functors
   void generateEmptyPixmap(const QXmlStreamAttributes &attributes);
   void loadImage(QXmlStreamReader &reader);
-  void loadPostVersion5 (QXmlStreamReader &reader);
   void loadPreVersion6 (QDataStream &str);
+  void loadVersion6 (QFile *file);
+  void loadVersion7 (QFile *file);
+  int versionFromFile (QFile *file) const;
 
   // Metadata
   QString m_name;
@@ -250,21 +276,7 @@ private:
   bool m_successfulRead;
   QString m_reasonForUnsuccessfulRead;
 
-  // Curves
-  Curve *m_curveAxes;
-  CurvesGraphs m_curvesGraphs;
-
-  // Model objects for the various settings
-  DocumentModelAxesChecker m_modelAxesChecker;
-  // DocumentModelColorFilter is not here since filtering settings are stored inside the Curve class
-  DocumentModelCoords m_modelCoords;
-  // CurveStyles is not here since curve properties are stored inside the Curve class
-  DocumentModelDigitizeCurve m_modelDigitizeCurve;
-  DocumentModelExportFormat m_modelExport;
-  DocumentModelGeneral m_modelGeneral;
-  DocumentModelGridRemoval m_modelGridRemoval;
-  DocumentModelPointMatch m_modelPointMatch;
-  DocumentModelSegments m_modelSegments;
+  CoordSystemContext m_coordSystemContext;
 };
 
 #endif // DOCUMENT_H

@@ -15,23 +15,30 @@ public:
   virtual ~DigitizeStateAxis();
 
   virtual QString activeCurve () const;
-  virtual void begin(DigitizeState previousState);
-  virtual QCursor cursor () const;
+  virtual void begin(CmdMediator *cmdMediator,
+                     DigitizeState previousState);
+  virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
-  virtual void handleCurveChange();
-  virtual void handleKeyPress (Qt::Key key,
+  virtual void handleCurveChange(CmdMediator *cmdMediator);
+  virtual void handleKeyPress (CmdMediator *cmdMediator,
+                               Qt::Key key,
                                bool atLeastOneSelectedItem);
-  virtual void handleMouseMove (QPointF posScreen);
-  virtual void handleMousePress (QPointF posScreen);
-  virtual void handleMouseRelease (QPointF posScreen);
+  virtual void handleMouseMove (CmdMediator *cmdMediator,
+                                QPointF posScreen);
+  virtual void handleMousePress (CmdMediator *cmdMediator,
+                                 QPointF posScreen);
+  virtual void handleMouseRelease (CmdMediator *cmdMediator,
+                                   QPointF posScreen);
   virtual QString state() const;
-  virtual void updateModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
+                                         const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);
 
 private:
   DigitizeStateAxis();
 
-  void createTemporaryPoint (const QPointF &posScreen);
+  void createTemporaryPoint (CmdMediator *cmdMediator,
+                             const QPointF &posScreen);
 };
 
 #endif // DIGITIZE_STATE_AXIS_H

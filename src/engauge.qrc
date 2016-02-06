@@ -24,5 +24,7 @@
         <file>img/panel_point_match.png</file>
         <file>img/panel_curve_selection.png</file>
         <file>img/panel_checklist.png</file>
+        <file>img/icon_show_all.png</file>
+        <file>img/icon_print_all.png</file>
     </qresource>
 </RCC>

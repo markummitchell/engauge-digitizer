@@ -18,15 +18,16 @@ QString DigitizeStateEmpty::activeCurve () const
   return "";
 }
 
-void DigitizeStateEmpty::begin (DigitizeState /* previousState */)
+void DigitizeStateEmpty::begin (CmdMediator *cmdMediator,
+                                DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
-  setCursor();
+  setCursor(cmdMediator);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
-QCursor DigitizeStateEmpty::cursor() const
+QCursor DigitizeStateEmpty::cursor(CmdMediator * /* cmdMediator */) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEmpty::cursor";
 
@@ -38,29 +39,33 @@ void DigitizeStateEmpty::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::end";
 }
 
-void DigitizeStateEmpty::handleCurveChange()
+void DigitizeStateEmpty::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleCurveChange";
 }
 
-void DigitizeStateEmpty::handleKeyPress (Qt::Key key,
+void DigitizeStateEmpty::handleKeyPress (CmdMediator * /* cmdMediator */,
+                                         Qt::Key key,
                                          bool /* atLeastOneSelectedItem */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
-void DigitizeStateEmpty::handleMouseMove (QPointF /* posScreen */)
+void DigitizeStateEmpty::handleMouseMove (CmdMediator * /* cmdMediator */,
+                                          QPointF /* posScreen */)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseMove";
 }
 
-void DigitizeStateEmpty::handleMousePress (QPointF /* posScreen */)
+void DigitizeStateEmpty::handleMousePress (CmdMediator * /* cmdMediator */,
+                                           QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMousePress";
 }
 
-void DigitizeStateEmpty::handleMouseRelease (QPointF /* posScreen */)
+void DigitizeStateEmpty::handleMouseRelease (CmdMediator * /* cmdMediator */,
+                                             QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseRelease";
 }
@@ -70,7 +75,8 @@ QString DigitizeStateEmpty::state() const
   return "DigitizeStateEmpty";
 }
 
-void DigitizeStateEmpty::updateModelDigitizeCurve (const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
+void DigitizeStateEmpty::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,
+                                                   const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::updateModelDigitizeCurve";
 }

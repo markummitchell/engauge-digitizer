@@ -43,6 +43,11 @@ void CmdMediator::connectSignals (MainWindow &mainWindow)
   connect (this, SIGNAL (cleanChanged (bool)), &mainWindow, SLOT (slotCleanChanged (bool)));
 }
 
+const CoordSystem &CmdMediator::coordSystem() const
+{
+  return m_document.coordSystem();
+}
+
 const Curve &CmdMediator::curveAxes () const
 {
   return m_document.curveAxes ();

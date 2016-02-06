@@ -31,7 +31,7 @@ double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QStrin
     case COORD_UNITS_POLAR_THETA_GRADIANS:
     case COORD_UNITS_POLAR_THETA_RADIANS:
     case COORD_UNITS_POLAR_THETA_TURNS:
-      value = locale.toDouble(string);
+      value = locale.toDouble (string);
       break;
 
     default:

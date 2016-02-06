@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include <QXmlStreamReader>
 
-const QString CMD_DESCRIPTION ("DigitizeCurve settings");
+const QString CMD_DESCRIPTION ("Digitize Curve settings");
 
 CmdSettingsDigitizeCurve::CmdSettingsDigitizeCurve(MainWindow &mainWindow,
                                                    Document &document,

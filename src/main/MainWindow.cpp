@@ -11,6 +11,7 @@
 #include "CmdCut.h"
 #include "CmdDelete.h"
 #include "CmdMediator.h"
+#include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
 #include "Curve.h"
@@ -23,6 +24,7 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
+#include "DlgCoordSystemCount.h"
 #include "DlgErrorReport.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
@@ -41,6 +43,7 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "ExportToFile.h"
+#include "Ghosts.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -124,7 +127,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_digitizeStateContext (0),
   m_transformationStateContext (0),
   m_backgroundStateContext (0),
-  m_isGnuplot (isGnuplot)
+  m_isGnuplot (isGnuplot),
+  m_ghosts (0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -241,11 +245,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
   }
 }
 
-CmdMediator &MainWindow::cmdMediator ()
+CmdMediator *MainWindow::cmdMediator ()
 {
-  ENGAUGE_CHECK_PTR (m_cmdMediator);
-
-  return *m_cmdMediator;
+  // We do not check m_cmdMediator with ENGAUGE_CHECK_PTR since calling code is expected to deal with null pointer at startup
+  return m_cmdMediator;
 }
 
 void MainWindow::createActions()
@@ -401,10 +404,17 @@ void MainWindow::createActionsFile ()
 
   m_actionImport = new QAction(tr ("&Import..."), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
-  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image."));
-  m_actionImport->setWhatsThis (tr ("New Document\n\n"
-                                    "Creates a new document by importing an image."));
+  m_actionImport->setStatusTip (tr ("Creates a new document by importing an image with a single coordinate system."));
+  m_actionImport->setWhatsThis (tr ("Import Image\n\n"
+                                    "Creates a new document by importing an image with a single coordinate system."));
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
+
+  m_actionImportAdvanced = new QAction(tr ("Import (Advanced)..."), this);
+  m_actionImportAdvanced->setStatusTip (tr ("Creates a new document by importing an image with support for multiple coordinate systems."));
+  m_actionImportAdvanced->setWhatsThis (tr ("Import (Advanced)\n\n"
+                                            "Creates a new document by importing an image with support for multiple coordinate systems. The "
+                                            "number of coordinate systems is permanently set during import. "));
+  connect (m_actionImportAdvanced, SIGNAL (triggered ()), this, SLOT (slotFileImportAdvanced ()));
 
   m_actionOpen = new QAction(tr ("&Open..."), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
@@ -613,6 +623,16 @@ void MainWindow::createActionsView ()
                                                "Show or hide the settings views toolbar. These views graphically show the "
                                                "most important settings."));
   connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
+
+  m_actionViewCoordSystem = new QAction (tr ("Coordinate System Toolbar"), this);
+  m_actionViewCoordSystem->setCheckable (true);
+  m_actionViewCoordSystem->setChecked (false);
+  m_actionViewCoordSystem->setStatusTip (tr ("Show or hide the coordinate system toolbar."));
+  m_actionViewCoordSystem->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
+                                             "Show or hide the coordinate system selection toolbar. This toolbar is used "
+                                             "to select the current coordinate system when the document has multiple "
+                                             "coordinate systems."));
+  connect (m_actionViewCoordSystem, SIGNAL (triggered ()), this, SLOT (slotViewToolBarCoordSystem()));
 
   m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
   m_actionViewToolTips->setCheckable (true);
@@ -832,6 +852,7 @@ void MainWindow::createMenus()
 
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
+  m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionOpen);
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
@@ -870,6 +891,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewChecklistGuide);
   m_menuView->addAction (m_actionViewSettingsViews);
+  m_menuView->addAction (m_actionViewCoordSystem);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
@@ -1086,6 +1108,38 @@ void MainWindow::createToolBars ()
   m_toolSettingsViews->addWidget (m_viewSegmentFilter);
   addToolBar (m_toolSettingsViews);
 
+  // Coordinate system toolbar
+  m_cmbCoordSystem = new QComboBox;
+  m_cmbCoordSystem->setEnabled (false);
+  m_cmbCoordSystem->setStatusTip (tr ("Currently selected coordinate system"));
+  m_cmbCoordSystem->setWhatsThis (tr ("Selected Coordinate System\n\n"
+                                      "Currently selected coordinate system. This is used to switch between coordinate systems "
+                                      "in documents with multiple coordinate systems"));
+  connect (m_cmbCoordSystem, SIGNAL (activated (int)), this, SLOT (slotCmbCoordSystem (int)));
+
+  m_btnShowAll = new QPushButton(QIcon(":/engauge/img/icon_show_all.png"), "");
+  m_btnShowAll->setEnabled (false);
+  m_btnShowAll->setAcceptDrops(false);
+  m_btnShowAll->setStatusTip (tr ("Show all coordinate systems"));
+  m_btnShowAll->setWhatsThis (tr ("Show All Coordinate Systems\n\n"
+                                  "When pushed, this button shows all digitized points and lines for all coordinate systems."));
+  connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAllPressed ()));
+  connect (m_btnShowAll, SIGNAL (released ()), this, SLOT (slotBtnShowAllReleased ()));
+
+  m_btnPrintAll = new QPushButton(QIcon(":/engauge/img/icon_print_all.png"), "");
+  m_btnPrintAll->setEnabled (false);
+  m_btnPrintAll->setAcceptDrops(false);
+  m_btnPrintAll->setStatusTip (tr ("Print all coordinate systems"));
+  m_btnPrintAll->setWhatsThis (tr ("Print All Coordinate Systems\n\n"
+                                  "When pushed, this button Prints all digitized points and lines for all coordinate systems."));
+  connect (m_btnPrintAll, SIGNAL (pressed ()), this, SLOT (slotBtnPrintAll ()));
+
+  m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
+  m_toolCoordSystem->addWidget (m_cmbCoordSystem);
+  m_toolCoordSystem->addWidget (m_btnShowAll);
+  m_toolCoordSystem->addWidget (m_btnPrintAll);
+  addToolBar (m_toolCoordSystem);
+
   // Checklist guide starts out hidden. It will be positioned in settingsRead
   m_dockChecklistGuide = new ChecklistGuide (this);
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
@@ -1148,17 +1202,29 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
-void MainWindow::fileImport (const QString &fileName)
+void MainWindow::fileImport (const QString &fileName,
+                             ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImport"
                               << " fileName=" << fileName.toLatin1 ().data ()
-                              << " curDir=" << QDir::currentPath().toLatin1().data();
+                              << " curDir=" << QDir::currentPath().toLatin1().data()
+                              << " importType=" << importType;
 
   QString originalFileOld = m_originalFile;
   bool originalFileWasImported = m_originalFileWasImported;
 
   m_originalFile = fileName; // Make this available for logging in case an error occurs during the load
   m_originalFileWasImported = true;
+
+  if (importType == IMPORT_TYPE_ADVANCED) {
+
+    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
+    // when previewing for IMAGE_TYPE_ADVANCED
+    slotFileClose();
+
+    // Restore the background just closed by slotFileClose. This is required so when the image is loaded for preview, it will appear
+    m_backgroundStateContext->setBackgroundImage(BACKGROUND_IMAGE_ORIGINAL);
+  }
 
   QImage image;
   bool loaded = false;
@@ -1181,11 +1247,113 @@ void MainWindow::fileImport (const QString &fileName)
     m_originalFile = originalFileOld;
     m_originalFileWasImported = originalFileWasImported;
 
-    return;
+  } else {
+
+    loaded = loadImage (fileName,
+                        image,
+                        importType);
+
+    if (!loaded) {
+
+      // Failed
+      if (importType == IMPORT_TYPE_ADVANCED) {
+
+        // User cancelled after another file was imported so it could be previewed. In anticipation of the loading-for-preview,
+        // we closed the current Document at the top of this method so we cannot reload. So, the only option is to close again
+        // so the half-imported current Document is removed
+        slotFileClose();
+
+      } else {
+
+        // Reset
+        m_originalFile = originalFileOld;
+        m_originalFileWasImported = originalFileWasImported;
+      }
+    }
+  }
+}
+
+void MainWindow::fileImportWithPrompts (ImportType importType)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts"
+                              << " importType=" << importType;
+
+  if (maybeSave ()) {
+
+    QString filter;
+    QTextStream str (&filter);
+
+    // Compile a list of supported formats into a filter
+    QList<QByteArray>::const_iterator itr;
+    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
+    QStringList supportedImageFormatStrings;
+    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
+      QByteArray arr = *itr;
+      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
+      supportedImageFormatStrings << extensionAsWildcard;
+    }
+#ifdef ENGAUGE_JPEG2000
+    Jpeg2000 jpeg2000;
+    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
+#endif // ENGAUGE_JPEG2000
+
+    supportedImageFormatStrings.sort();
+
+    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
+
+    // Allow selection of files with strange suffixes in case the file extension was changed. Since
+    // the default is the first filter, we add this afterwards (it is the off-nominal case)
+    str << ";; All Files (*.*)";
+
+    QString fileName = QFileDialog::getOpenFileName (this,
+                                                     tr("Import Image"),
+                                                     QDir::currentPath (),
+                                                     filter);
+    if (!fileName.isEmpty ()) {
+
+      // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
+      fileImport (fileName,
+                  importType);
+    }
+  }
+}
+
+void MainWindow::ghostsCreate ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::ghostsCreate";
+
+  ENGAUGE_ASSERT (m_ghosts == 0);
+  m_ghosts = new Ghosts (m_cmdMediator->document().coordSystemIndex());
+
+  for (unsigned int index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
+
+    // Skip this coordinate system if it is the selected coordinate system since it will be displayed anyway, so no ghosts are required
+    if (index != m_ghosts->coordSystemIndexToBeRestored ()) {
+
+      updateCoordSystem (index);
+
+      // Take a snapshot of the graphics items
+      m_ghosts->captureGraphicsItems (*m_scene);
+    }
   }
 
-  loadImage (fileName,
-             image);
+  // Restore the coordinate system that was originally selected, so its points/lines are visible
+  updateCoordSystem (m_ghosts->coordSystemIndexToBeRestored ());
+
+  // Make visible ghosts
+  m_ghosts->createGhosts (*m_scene);
+}
+
+void MainWindow::ghostsDestroy ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::ghostsDestroy";
+
+  ENGAUGE_CHECK_PTR (m_ghosts);
+
+  m_ghosts->destroyGhosts(*m_scene);
+
+  delete m_ghosts;
+  m_ghosts = 0;
 }
 
 QImage MainWindow::imageFiltered () const
@@ -1196,6 +1364,30 @@ QImage MainWindow::imageFiltered () const
 bool MainWindow::isGnuplot() const
 {
   return m_isGnuplot;
+}
+
+void MainWindow::loadCoordSystemListFromCmdMediator ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadCoordSystemListFromCmdMediator";
+
+  m_cmbCoordSystem->clear();
+
+  unsigned int numberCoordSystem = m_cmdMediator->document().coordSystemCount();
+
+  for (unsigned int i = 0; i < numberCoordSystem; i++) {
+    int index1Based = i + 1;
+    m_cmbCoordSystem->addItem (QString::number (index1Based),
+                               QVariant (i));
+  }
+
+  // Always start with the first entry selected
+  m_cmbCoordSystem->setCurrentIndex (0);
+
+  // Disable the controls if there is only one entry. Hopefully the user will not even notice it, thus simplifying the interface
+  bool enable = (m_cmbCoordSystem->count() > 1);
+  m_cmbCoordSystem->setEnabled (enable);
+  m_btnShowAll->setEnabled (enable);
+  m_btnPrintAll->setEnabled (enable);
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -1237,7 +1429,8 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     m_cmdMediator = cmdMediator;
     setupAfterLoad(fileName,
-                   "File opened");
+                   "File opened",
+                   IMPORT_TYPE_SIMPLE);
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1302,7 +1495,8 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   QDir::setCurrent(originalPath);
 
   setupAfterLoad(errorReportFile,
-                 "Error report opened");
+                 "Error report opened",
+                 IMPORT_TYPE_SIMPLE);
 
   // Start select mode
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1311,10 +1505,13 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
   updateAfterCommand ();
 }
 
-void MainWindow::loadImage (const QString &fileName,
-                            const QImage &image)
+bool MainWindow::loadImage (const QString &fileName,
+                            const QImage &image,
+                            ImportType importType)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage fileName=" << fileName.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImage"
+                              << " fileName=" << fileName.toLatin1 ().data ()
+                              << " importType=" << importType;
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
@@ -1331,38 +1528,52 @@ void MainWindow::loadImage (const QString &fileName,
   }
 
   m_cmdMediator = cmdMediator;
-  setupAfterLoad(fileName,
-                 "File imported");
+  bool accepted = setupAfterLoad(fileName,
+                                 "File imported",
+                                 importType);
 
-  if (m_actionHelpChecklistGuideWizard->isChecked ()) {
+  if (accepted) {
+    if (m_actionHelpChecklistGuideWizard->isChecked ()) {
 
-    // Show wizard
-    ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this);
-    if (wizard->exec() == QDialog::Accepted) {
+      // Show wizard
+      ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
+                                                               m_cmdMediator->document().coordSystemCount());
+      if (wizard->exec() == QDialog::Accepted) {
 
-      // Populate the checklist guide
-      m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(),
-                                             wizard->curveNames());
+        for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
 
-      // Unhide the checklist guide
-      m_actionViewChecklistGuide->setChecked (true);
+          // Populate the checklist guide
+          m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
+                                                 wizard->curveNames(coordSystemIndex));
 
-      // Update Document
-      CurvesGraphs curvesGraphs;
-      wizard->populateCurvesGraphs (curvesGraphs);
-      m_cmdMediator->document().setCurvesGraphs(curvesGraphs);
+          // Update Document
+          CurvesGraphs curvesGraphs;
+          wizard->populateCurvesGraphs (coordSystemIndex,
+                                        curvesGraphs);
+          m_cmdMediator->document().setCurvesGraphs(coordSystemIndex,
+                                                    curvesGraphs);
+        }
 
-      // Update the curve dropdown
-      loadCurveListFromCmdMediator();
+        // Unhide the checklist guide
+        m_actionViewChecklistGuide->setChecked (true);
+
+        // Update the curve dropdown
+        loadCurveListFromCmdMediator();
+
+        // Update the CoordSystem dropdown
+        loadCoordSystemListFromCmdMediator();
+      }
+      delete wizard;
     }
-    delete wizard;
+
+    // Start axis mode
+    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
+    slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
+
+    updateControls ();
   }
 
-  // Start axis mode
-  m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
-  slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
-
-  updateControls ();
+  return accepted;
 }
 
 void MainWindow::loadInputFileForErrorReport(QDomDocument &domInputFile) const
@@ -1756,7 +1967,8 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
-  m_digitizeStateContext->setImageIsLoaded (true);
+  m_digitizeStateContext->setImageIsLoaded (m_cmdMediator,
+                                            true);
   m_backgroundStateContext->setPixmap (m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
@@ -1824,6 +2036,12 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionViewSettingsViews->setChecked (viewSettingsViewsToolBar);
   m_toolSettingsViews->setVisible (viewSettingsViewsToolBar);
 
+  // Coordinate system toolbar visibility
+  bool viewCoordSystemToolbar = settings.value (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR,
+                                                false).toBool ();
+  m_actionViewCoordSystem->setChecked (viewCoordSystemToolbar);
+  m_toolCoordSystem->setVisible (viewCoordSystemToolbar);
+
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
                                       true).toBool ();
@@ -1870,7 +2088,6 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   slotViewZoom ((ZoomFactor) settings.value (SETTINGS_ZOOM_FACTOR,
                                              QVariant (ZOOM_1_TO_1)).toInt());
   m_modelMainWindow.setLocale (locale);
-
   m_modelMainWindow.setZoomFactorInitial((ZoomFactorInitial) settings.value (SETTINGS_ZOOM_FACTOR_INITIAL,
                                                                              QVariant (DEFAULT_ZOOM_FACTOR_INITIAL)).toInt());
   m_modelMainWindow.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
@@ -1911,6 +2128,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
+  settings.setValue (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR, m_actionViewCoordSystem->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
@@ -1918,15 +2136,36 @@ void MainWindow::settingsWrite ()
   settings.endGroup ();
 }
 
-void MainWindow::setupAfterLoad (const QString &fileName,
-                                 const QString &temporaryMessage)
+bool MainWindow::setupAfterLoad (const QString &fileName,
+                                 const QString &temporaryMessage ,
+                                 ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
                               << " file=" << fileName.toLatin1().data()
-                              << " message=" << temporaryMessage.toLatin1().data();
+                              << " message=" << temporaryMessage.toLatin1().data()
+                              << " importType=" << importType;
 
-  // Next line assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
-  m_digitizeStateContext->bindToCmdMediatorAndResetOnLoad (m_cmdMediator);
+  // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
+
+  m_digitizeStateContext->resetOnLoad (m_cmdMediator); // Before setPixmap
+  setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
+
+  // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
+  // may already have multiple CoordSystem if user loaded a file that had multiple CoordSystem entries
+  if (importType == IMPORT_TYPE_ADVANCED) {
+
+    applyZoomFactorAfterLoad(); // Apply the currently selected zoom factor
+
+    DlgCoordSystemCount dlgCoordSystem (*this);
+    dlgCoordSystem.exec();
+
+    if (dlgCoordSystem.result() == QDialog::Rejected) {
+      return false;
+    }
+
+    int numberCoordSystem = dlgCoordSystem.numberCoordSystem();
+    m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
+  }
 
   m_transformation.resetOnLoad();
   m_transformationStateContext->resetOnLoad();
@@ -1941,14 +2180,14 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   connect (m_cmdMediator, SIGNAL (redoTextChanged (const QString &)), this, SLOT (slotRedoTextChanged (const QString &)));
   connect (m_cmdMediator, SIGNAL (undoTextChanged (const QString &)), this, SLOT (slotUndoTextChanged (const QString &)));
   loadCurveListFromCmdMediator ();
+  loadCoordSystemListFromCmdMediator ();
   updateViewsOfSettings ();
 
   m_isDocumentExported = false;
 
-  // Set up background before slotViewZoomFill which relies on the background. At this point
+  // Background must be set (by setPixmap) before slotViewZoomFill which relies on the background. At this point
   // the transformation is undefined (unless the code is changed) so grid removal will not work
   // but updateTransformationAndItsDependencies will call this again to fix that issue
-  setPixmap (m_cmdMediator->pixmap ());
   m_backgroundStateContext->setCurveSelected (m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
@@ -1964,6 +2203,8 @@ void MainWindow::setupAfterLoad (const QString &fileName,
   saveStartingDocumentSnapshot();
 
   updateAfterCommand(); // Replace stale points by points in new Document
+
+  return true;
 }
 
 void MainWindow::showEvent (QShowEvent *event)
@@ -1986,6 +2227,39 @@ void MainWindow::showEvent (QShowEvent *event)
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
+}
+
+void MainWindow::slotBtnPrintAll ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnPrintAll";
+
+  ghostsCreate ();
+
+  QPrinter printer (QPrinter::HighResolution);
+  QPrintDialog dlg (&printer, this);
+  if (dlg.exec() == QDialog::Accepted) {
+    QPainter painter (&printer);
+    m_view->render (&painter);
+    painter.end();
+  }
+
+  ghostsDestroy ();
+}
+
+void MainWindow::slotBtnShowAllPressed ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllPressed";
+
+  // Start of press-release sequence
+  ghostsCreate ();
+}
+
+void MainWindow::slotBtnShowAllReleased ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllReleased";
+
+  // End of press-release sequence
+  ghostsDestroy ();
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)
@@ -2043,7 +2317,18 @@ void MainWindow::slotCmbBackground(int currentIndex)
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) currentIndex);
 }
 
-void MainWindow::slotCmbCurve(int /* currentIndex */)
+void MainWindow::slotCmbCoordSystem(int index)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCoordSystem";
+
+  CmdSelectCoordSystem *cmd = new CmdSelectCoordSystem (*this,
+                                                        m_cmdMediator->document(),
+                                                        index);
+
+  m_cmdMediator->push (cmd);
+}
+
+void MainWindow::slotCmbCurve(int /* index */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
@@ -2051,7 +2336,7 @@ void MainWindow::slotCmbCurve(int /* currentIndex */)
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
-  m_digitizeStateContext->handleCurveChange ();
+  m_digitizeStateContext->handleCurveChange (m_cmdMediator);
 
   updateViewedCurves();
   updateViewsOfSettings();
@@ -2061,14 +2346,16 @@ void MainWindow::slotContextMenuEvent (QString pointIdentifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
 
-  m_digitizeStateContext->handleContextMenuEvent (pointIdentifier);
+  m_digitizeStateContext->handleContextMenuEvent (m_cmdMediator,
+                                                  pointIdentifier);
 }
 
 void MainWindow::slotDigitizeAxis ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeAxis";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_AXIS);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_AXIS);
   m_cmbCurve->setEnabled (false); // Graph curve is irrelevant in this mode
   m_viewPointStyle->setEnabled (true); // Point style is important in this mode
   m_viewSegmentFilter->setEnabled (true); // Filtering is important in this mode
@@ -2078,7 +2365,8 @@ void MainWindow::slotDigitizeColorPicker ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeColorPicker";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_COLOR_PICKER);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_COLOR_PICKER);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2088,7 +2376,8 @@ void MainWindow::slotDigitizeCurve ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeCurve";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_CURVE);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_CURVE);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2098,7 +2387,8 @@ void MainWindow::slotDigitizePointMatch ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizePointMatch";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_POINT_MATCH);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_POINT_MATCH);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2108,7 +2398,8 @@ void MainWindow::slotDigitizeSegment ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSegment";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SEGMENT);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_SEGMENT);
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
@@ -2118,7 +2409,8 @@ void MainWindow::slotDigitizeSelect ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeSelect";
 
-  m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_SELECT);
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_SELECT);
   m_cmbCurve->setEnabled (false);
   m_viewPointStyle->setEnabled (false);
   m_viewSegmentFilter->setEnabled (false);
@@ -2131,7 +2423,8 @@ void MainWindow::slotEditCopy ()
   CmdCopy *cmd = new CmdCopy (*this,
                               m_cmdMediator->document(),
                               m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditCut ()
@@ -2141,7 +2434,8 @@ void MainWindow::slotEditCut ()
   CmdCut *cmd = new CmdCut (*this,
                             m_cmdMediator->document(),
                             m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditDelete ()
@@ -2151,7 +2445,8 @@ void MainWindow::slotEditDelete ()
   CmdDelete *cmd = new CmdDelete (*this,
                                   m_cmdMediator->document(),
                                   m_scene->selectedPointIdentifiers ());
-  m_digitizeStateContext->appendNewCmd (cmd);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditPaste ()
@@ -2168,13 +2463,14 @@ void MainWindow::slotFileClose()
     // Transition from defined to undefined. This must be after the clearing of the screen
     // since the axes checker screen item (and maybe others) must still exist
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
     // Transition to empty state so an inadvertent mouse press does not trigger, for example,
     // the creation of an axis point on a non-existent GraphicsScene (=crash)
-    m_digitizeStateContext->requestImmediateStateTransition (DIGITIZE_STATE_EMPTY);
+    m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                             DIGITIZE_STATE_EMPTY);
 
     // Remove screen objects
     m_scene->resetOnLoad ();
@@ -2223,11 +2519,11 @@ void MainWindow::slotFileExport ()
 
         QTextStream str (&file);
 
-        DocumentModelExportFormat modelExportFormat = modelExportOverride (cmdMediator().document().modelExport(),
+        DocumentModelExportFormat modelExportFormat = modelExportOverride (m_cmdMediator->document().modelExport(),
                                                                            exportStrategy,
                                                                            fileName);
         exportStrategy.exportToFile (modelExportFormat,
-                                     cmdMediator().document(),
+                                     m_cmdMediator->document(),
                                      m_modelMainWindow,
                                      transformation (),
                                      str);
@@ -2254,51 +2550,24 @@ void MainWindow::slotFileImport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImport";
 
-  if (maybeSave ()) {
+  fileImportWithPrompts (IMPORT_TYPE_SIMPLE);
+}
 
-    QString filter;
-    QTextStream str (&filter);
+void MainWindow::slotFileImportAdvanced ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportAdvanced";
 
-    // Compile a list of supported formats into a filter
-    QList<QByteArray>::const_iterator itr;
-    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QStringList supportedImageFormatStrings;
-    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
-      QByteArray arr = *itr;
-      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
-      supportedImageFormatStrings << extensionAsWildcard;
-    }
-#ifdef ENGAUGE_JPEG2000
-    Jpeg2000 jpeg2000;
-    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
-#endif // ENGAUGE_JPEG2000
-
-    supportedImageFormatStrings.sort();
-
-    str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
-
-    // Allow selection of files with strange suffixes in case the file extension was changed. Since
-    // the default is the first filter, we add this afterwards (it is the off-nominal case)
-    str << ";; All Files (*.*)";
-
-    QString fileName = QFileDialog::getOpenFileName (this,
-                                                     tr("Import Image"),
-                                                     QDir::currentPath (),
-                                                     filter);
-    if (!fileName.isEmpty ()) {
-
-      fileImport (fileName);
-
-    }
-  }
+  fileImportWithPrompts (IMPORT_TYPE_ADVANCED);
 }
 
 void MainWindow::slotFileImportDraggedImage(QImage image)
-{
+{  
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImage";
 
+  // No need to check return value from loadImage since there are no prompts that give the user a chance to cancel
   loadImage ("",
-             image);
+             image,
+             IMPORT_TYPE_SIMPLE);
 }
 
 void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
@@ -2312,8 +2581,10 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImage fileName=" << fileName.toLatin1 ().data ();
 
+  // No need to check return value from loadImage since there are no prompts that give the user a chance to cancel
   loadImage (fileName,
-             image);
+             image,
+             IMPORT_TYPE_SIMPLE);
 }
 
 void MainWindow::slotFileOpen()
@@ -2434,7 +2705,8 @@ void MainWindow::slotKeyPress (Qt::Key key,
                               << " key=" << QKeySequence (key).toString().toLatin1 ().data ()
                               << " atLeastOneSelectedItem=" << (atLeastOneSelectedItem ? "true" : "false");
 
-  m_digitizeStateContext->handleKeyPress (key,
+  m_digitizeStateContext->handleKeyPress (m_cmdMediator,
+                                          key,
                                           atLeastOneSelectedItem);
 }
 
@@ -2442,7 +2714,7 @@ void MainWindow::slotLeave ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotLeave";
 
-  m_digitizeStateContext->handleLeave ();
+  m_digitizeStateContext->handleLeave (m_cmdMediator);
 }
 
 void MainWindow::slotLoadStartupFiles ()
@@ -2462,7 +2734,8 @@ void MainWindow::slotLoadStartupFiles ()
 
   } else {
 
-    fileImport (fileName);
+    fileImport (fileName,
+                IMPORT_TYPE_SIMPLE);
 
   }
 
@@ -2498,7 +2771,8 @@ void MainWindow::slotMouseMove (QPointF pos)
     // There used to be a call to updateGraphicsLinesToMatchGraphicsPoints here, but that resulted
     // in hundreds of gratuitous log messages as the cursor was moved around, and nothing important happened
 
-    m_digitizeStateContext->handleMouseMove (pos);
+    m_digitizeStateContext->handleMouseMove (m_cmdMediator,
+                                             pos);
   }
 }
 
@@ -2508,7 +2782,8 @@ void MainWindow::slotMousePress (QPointF pos)
 
   m_scene->resetPositionHasChangedFlags();
 
-  m_digitizeStateContext->handleMousePress (pos);
+  m_digitizeStateContext->handleMousePress (m_cmdMediator,
+                                            pos);
 }
 
 void MainWindow::slotMouseRelease (QPointF pos)
@@ -2524,7 +2799,8 @@ void MainWindow::slotMouseRelease (QPointF pos)
   } else {
 
     // Cursor is within the image so process this as a normal mouse release
-    m_digitizeStateContext->handleMouseRelease (pos);
+    m_digitizeStateContext->handleMouseRelease (m_cmdMediator,
+                                                pos);
   }
 }
 
@@ -2555,7 +2831,8 @@ void MainWindow::slotSetOverrideCursor (QCursor cursor)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
 
-  m_digitizeStateContext->handleSetOverrideCursor (cursor);
+  m_digitizeStateContext->handleSetOverrideCursor (m_cmdMediator,
+                                                   cursor);
 }
 
 void MainWindow::slotSettingsAxesChecker ()
@@ -2741,6 +3018,17 @@ void MainWindow::slotViewToolBarChecklistGuide ()
     m_dockChecklistGuide->show();
   } else {
     m_dockChecklistGuide->hide();
+  }
+}
+
+void MainWindow::slotViewToolBarCoordSystem ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarCoordSystem";
+
+  if (m_actionViewCoordSystem->isChecked ()) {
+    m_toolCoordSystem->show();
+  } else {
+    m_toolCoordSystem->hide();
   }
 }
 
@@ -3122,7 +3410,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // Transition from undefined to defined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
@@ -3130,7 +3418,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // Transition from defined to undefined
     m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
-                                                         cmdMediator(),
+                                                         *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
 
@@ -3138,7 +3426,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
 
     // There was not a define/undefined or undefined/defined transition, but the transformation changed so we
     // need to update the Checker
-    m_transformationStateContext->updateAxesChecker(cmdMediator(),
+    m_transformationStateContext->updateAxesChecker(*m_cmdMediator,
                                                     m_transformation);
 
   }
@@ -3214,6 +3502,21 @@ void MainWindow::updateControls ()
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
   m_actionZoomOut->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
+}
+
+void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCoordSystem";
+
+  m_cmdMediator->document().setCoordSystemIndex (coordSystemIndex);
+  updateTransformationAndItsDependencies(); // Transformation state may have changed
+  updateSettingsAxesChecker(m_cmdMediator->document().modelAxesChecker()); // Axes checker dependes on transformation state
+
+  // Nice trick for showing that a new coordinate system is in effect is to show the axes checker
+  m_transformationStateContext->updateAxesChecker (*m_cmdMediator,
+                                                   m_transformation);
+
+  updateAfterCommand();
 }
 
 void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState)
@@ -3322,7 +3625,7 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   m_backgroundStateContext->updateColorFilter (m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
                                                modelColorFilter);
-  m_digitizeStateContext->handleCurveChange ();
+  m_digitizeStateContext->handleCurveChange (m_cmdMediator);
   updateViewsOfSettings();
 }
 
@@ -3356,7 +3659,8 @@ void MainWindow::updateSettingsDigitizeCurve(const DocumentModelDigitizeCurve &m
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsDigitizeCurve";
 
   m_cmdMediator->document().setModelDigitizeCurve(modelDigitizeCurve);
-  m_digitizeStateContext->updateModelDigitizeCurve (modelDigitizeCurve);
+  m_digitizeStateContext->updateModelDigitizeCurve (m_cmdMediator,
+                                                    modelDigitizeCurve);
 }
 
 void MainWindow::updateSettingsExportFormat(const DocumentModelExportFormat &modelExport)

@@ -78,29 +78,28 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbZoomControl, row++, 2);
 
   QLabel *labelLocale = new QLabel ("Locale:");
-    layout->addWidget (labelLocale, row, 1);
+  layout->addWidget (labelLocale, row, 1);
 
-    // Initialization of combobox is liberated from Qt Calendar example
-    m_cmbLocale = new QComboBox;
-    m_cmbLocale->setWhatsThis(tr ("Locale\n\n"
-                                  "Select the locale that will be used when converting between numbers and strings. "
-                                  "This affects the use of commas or periods as group delimiters in each number entered "
-                                  "by the user, displayed in the user interface, or exported to a file."));
-    for (int indexLang = QLocale::C; indexLang <= QLocale::LastLanguage; indexLang++) {
-      QLocale::Language lang = static_cast<QLocale::Language> (indexLang);
-      QList<QLocale::Country> countries = QLocale::countriesForLanguage(lang);
-      for (int indexCountry = 0; indexCountry < countries.count(); indexCountry++) {
-        QLocale::Country country = countries.at(indexCountry);
-        QString label = localeLabel (lang,
-                                     country);
-        QLocale locale (lang, country);
-        m_cmbLocale->addItem (label, locale);
-      }
+  // Initialization of combobox is liberated from Qt Calendar example
+  m_cmbLocale = new QComboBox;
+  m_cmbLocale->setWhatsThis(tr ("Locale\n\n"
+                                "Select the locale that will be used when converting between numbers and strings. "
+                                "This affects the use of commas or periods as group delimiters in each number entered "
+                                "by the user, displayed in the user interface, or exported to a file."));
+  for (int indexLang = QLocale::C; indexLang <= QLocale::LastLanguage; indexLang++) {
+    QLocale::Language lang = static_cast<QLocale::Language> (indexLang);
+    QList<QLocale::Country> countries = QLocale::countriesForLanguage(lang);
+    for (int indexCountry = 0; indexCountry < countries.count(); indexCountry++) {
+      QLocale::Country country = countries.at(indexCountry);
+      QString label = localeLabel (lang,
+                                   country);
+      QLocale locale (lang, country);
+      m_cmbLocale->addItem (label, locale);
     }
-    m_cmbLocale->model()->sort(COLUMN0); // Sort the new entries
-    connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
-    layout->addWidget (m_cmbLocale, row++, 2);
-
+  }
+  m_cmbLocale->model()->sort(COLUMN0); // Sort the new entries
+  connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
+  layout->addWidget (m_cmbLocale, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)

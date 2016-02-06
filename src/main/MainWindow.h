@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include "BackgroundImage.h"
+#include "CoordSystemIndex.h"
 #include "DigitizeStateAbstractBase.h"
 #include "MainWindowModel.h"
 #include <QCursor>
@@ -39,6 +40,7 @@ class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
+class Ghosts;
 class GraphicsScene;
 class GraphicsView;
 class HelpWindow;
@@ -51,6 +53,7 @@ class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
 class QMenu;
+class QPushButton;
 class QSettings;
 class QTextStream;
 class QTimer;
@@ -76,7 +79,7 @@ public:
   ~MainWindow();
 
   /// Accessor for commands to process the Document.
-  CmdMediator &cmdMediator();
+  CmdMediator *cmdMediator();
 
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
@@ -126,6 +129,9 @@ public:
 
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
+
+  /// Select a different CoordSystem
+  void updateCoordSystem(CoordSystemIndex coordSystemIndex);
 
   /// After software-triggered state transition, this method manually triggers the action as if user had clicked on digitize button
   void updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState);
@@ -183,12 +189,16 @@ public:
   virtual void wheelEvent(QWheelEvent *event);
 
 private slots:
+  void slotBtnPrintAll();
+  void slotBtnShowAllPressed();
+  void slotBtnShowAllReleased();
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
   void slotChecklistClosed ();
   void slotCleanChanged (bool);
   void slotCmbBackground(int);
-  void slotCmbCurve(int);  
+  void slotCmbCoordSystem(int);
+  void slotCmbCurve(int);
   void slotContextMenuEvent (QString);
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
@@ -203,6 +213,7 @@ private slots:
   void slotFileClose ();
   void slotFileExport ();
   void slotFileImport();
+  void slotFileImportAdvanced();
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
@@ -240,6 +251,7 @@ private slots:
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
+  void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
@@ -263,6 +275,11 @@ signals:
 
 private:
   MainWindow();
+
+  enum ImportType {
+    IMPORT_TYPE_SIMPLE,
+    IMPORT_TYPE_ADVANCED
+  };
 
   void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
@@ -289,13 +306,19 @@ private:
   void createToolBars();
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
-  void fileImport (const QString &fileName);
+  void fileImport (const QString &fileName,
+                   ImportType ImportType);
+  void fileImportWithPrompts (ImportType ImportType);
+  void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
+  void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
+  void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
   void loadErrorReportFile(const QString &initialPath,
                            const QString &errorReportFile);
-  void loadImage (const QString &fileName,
-                  const QImage &image);
+  bool loadImage (const QString &fileName,
+                  const QImage &image,
+                  ImportType ImportType);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
@@ -317,8 +340,9 @@ private:
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
-  void setupAfterLoad (const QString &fileName,
-                       const QString &temporaryMessage);
+  bool setupAfterLoad (const QString &fileName,
+                       const QString &temporaryMessage,
+                       ImportType ImportType);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
@@ -336,6 +360,7 @@ private:
 
   QMenu *m_menuFile;
   QAction *m_actionImport;
+  QAction *m_actionImportAdvanced;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;
@@ -366,6 +391,7 @@ private:
   QMenu *m_menuView;
   QAction *m_actionViewBackground;
   QAction *m_actionViewChecklistGuide;
+  QAction *m_actionViewCoordSystem;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
@@ -439,6 +465,11 @@ private:
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
 
+  QComboBox *m_cmbCoordSystem;
+  QPushButton *m_btnPrintAll;
+  QPushButton *m_btnShowAll;
+  QToolBar *m_toolCoordSystem;
+
   HelpWindow *m_helpWindow;
   TutorialDlg *m_tutorialDlg;
 
@@ -478,6 +509,9 @@ private:
   // File names to be loaded at startup. Only one is loaded into the current instance, with external instances created for the other files
   QTimer *m_timerLoadStartupFiles;
   QStringList m_loadStartupFiles;
+
+  // Ghosts that are created for seeing all coordinate systems at once, when there are multiple coordinate systems
+  Ghosts *m_ghosts;
 };
 
 #endif // MAIN_WINDOW_H
