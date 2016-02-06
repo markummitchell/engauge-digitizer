@@ -631,7 +631,9 @@ void MainWindow::createActionsView ()
   m_actionViewCoordSystem->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
                                              "Show or hide the coordinate system selection toolbar. This toolbar is used "
                                              "to select the current coordinate system when the document has multiple "
-                                             "coordinate systems."));
+                                             "coordinate systems. This toolbar is also used to view and print all coordinate "
+                                             "systems.\n\n"
+                                             "This toolbar is disabled when there is only one coordinate system."));
   connect (m_actionViewCoordSystem, SIGNAL (triggered ()), this, SLOT (slotViewToolBarCoordSystem()));
 
   m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
