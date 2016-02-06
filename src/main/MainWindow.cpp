@@ -1115,21 +1115,27 @@ void MainWindow::createToolBars ()
                                       "in documents with multiple coordinate systems"));
   connect (m_cmbCoordSystem, SIGNAL (activated (int)), this, SLOT (slotCmbCoordSystem (int)));
 
-  m_btnShowAll = new QPushButton(tr ("Show All"));
+  m_btnShowAll = new QPushButton(QIcon(":/engauge/img/icon_show_all.png"), "");
   m_btnShowAll->setEnabled (false);
   m_btnShowAll->setAcceptDrops(false);
   m_btnShowAll->setStatusTip (tr ("Show all coordinate systems"));
   m_btnShowAll->setWhatsThis (tr ("Show All Coordinate Systems\n\n"
-                                  "When pushed, this button shows all coordinate systems, although only items belonging to the "
-                                  "currently active coordinate system can be modified. When not pushed, this button shows only the "
-                                  "currently active coordinate system."));
-  m_btnShowAll->setCheckable(true);
-  connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAll ()));
+                                  "When pushed, this button shows all digitized points and lines for all coordinate systems."));
+  connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAllPressed ()));
+  connect (m_btnShowAll, SIGNAL (released ()), this, SLOT (slotBtnShowAllReleased ()));
+
+  m_btnPrintAll = new QPushButton(QIcon(":/engauge/img/icon_print_all.png"), "");
+  m_btnPrintAll->setEnabled (false);
+  m_btnPrintAll->setAcceptDrops(false);
+  m_btnPrintAll->setStatusTip (tr ("Print all coordinate systems"));
+  m_btnPrintAll->setWhatsThis (tr ("Print All Coordinate Systems\n\n"
+                                  "When pushed, this button Prints all digitized points and lines for all coordinate systems."));
+  connect (m_btnPrintAll, SIGNAL (pressed ()), this, SLOT (slotBtnPrintAll ()));
 
   m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
   m_toolCoordSystem->addWidget (m_cmbCoordSystem);
   m_toolCoordSystem->addWidget (m_btnShowAll);
-
+  m_toolCoordSystem->addWidget (m_btnPrintAll);
   addToolBar (m_toolCoordSystem);
 
   // Checklist guide starts out hidden. It will be positioned in settingsRead
@@ -1341,6 +1347,7 @@ void MainWindow::loadCoordSystemListFromCmdMediator ()
   bool enable = (m_cmbCoordSystem->count() > 1);
   m_cmbCoordSystem->setEnabled (enable);
   m_btnShowAll->setEnabled (enable);
+  m_btnPrintAll->setEnabled (enable);
 }
 
 void MainWindow::loadCurveListFromCmdMediator ()
@@ -2182,9 +2189,27 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
   m_statusBar->showTemporaryMessage (temporaryMessage);
 }
 
-void MainWindow::slotBtnShowAll ()
+void MainWindow::slotBtnPrintAll ()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAll";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnPrintAll";
+
+  QPrinter printer (QPrinter::HighResolution);
+  QPrintDialog dlg (&printer, this);
+  if (dlg.exec() == QDialog::Accepted) {
+    QPainter painter (&printer);
+    m_view->render (&painter);
+    painter.end();
+  }
+}
+
+void MainWindow::slotBtnShowAllPressed ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllPressed";
+}
+
+void MainWindow::slotBtnShowAllReleased ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllReleased";
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)

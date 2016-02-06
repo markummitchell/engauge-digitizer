@@ -188,7 +188,9 @@ public:
   virtual void wheelEvent(QWheelEvent *event);
 
 private slots:
-  void slotBtnShowAll();
+  void slotBtnPrintAll();
+  void slotBtnShowAllPressed();
+  void slotBtnShowAllReleased();
   void slotCanRedoChanged (bool);
   void slotCanUndoChanged (bool);
   void slotChecklistClosed ();
@@ -461,6 +463,7 @@ private:
   ChecklistGuide *m_dockChecklistGuide;
 
   QComboBox *m_cmbCoordSystem;
+  QPushButton *m_btnPrintAll;
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
