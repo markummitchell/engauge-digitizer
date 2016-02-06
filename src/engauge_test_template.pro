@@ -183,6 +183,9 @@ HEADERS  += \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     Format/FormatDegreesMinutesSecondsPolarTheta.h \
     Callback/functor.h \
+    Ghosts/GhostEllipse.h \
+    Ghosts/GhostPath.h \
+    Ghosts/GhostPolygon.h \
     Ghosts/Ghosts.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemType.h \
@@ -428,6 +431,9 @@ SOURCES += \
     Format/FormatDegreesMinutesSecondsBase.cpp \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    Ghosts/GhostEllipse.cpp \
+    Ghosts/GhostPath.cpp \
+    Ghosts/GhostPolygon.cpp \
     Ghosts/Ghosts.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsLinesForCurve.cpp \

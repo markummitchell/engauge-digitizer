@@ -1329,9 +1329,19 @@ void MainWindow::ghostsCreate ()
 
     // Skip this coordinate system if it is the selected coordinate system since it will be displayed anyway, so no ghosts are required
     if (index != m_ghosts->coordSystemIndexToBeRestored ()) {
+
       updateCoordSystem (index);
+
+      // Take a snapshot of the graphics items
+      m_ghosts->captureGraphicsItems (*m_scene);
     }
   }
+
+  // Restore the coordinate system that was originally selected, so its points/lines are visible
+  updateCoordSystem (m_ghosts->coordSystemIndexToBeRestored ());
+
+  // Make visible ghosts
+  m_ghosts->createGhosts (*m_scene);
 }
 
 void MainWindow::ghostsDestroy ()
@@ -1340,7 +1350,7 @@ void MainWindow::ghostsDestroy ()
 
   ENGAUGE_CHECK_PTR (m_ghosts);
 
-  updateCoordSystem (m_ghosts->coordSystemIndexToBeRestored ());
+  m_ghosts->destroyGhosts(*m_scene);
 
   delete m_ghosts;
   m_ghosts = 0;
@@ -2240,6 +2250,7 @@ void MainWindow::slotBtnShowAllPressed ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllPressed";
 
+  // Start of press-release sequence
   ghostsCreate ();
 }
 
@@ -2247,6 +2258,7 @@ void MainWindow::slotBtnShowAllReleased ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllReleased";
 
+  // End of press-release sequence
   ghostsDestroy ();
 }
 
