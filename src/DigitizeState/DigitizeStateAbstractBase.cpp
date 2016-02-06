@@ -65,11 +65,11 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
     bool isError;
     QString errorMessage;
 
-    context().mainWindow().cmdMediator().document().checkEditPointAxis(pointIdentifier,
-                                                                       posScreen,
-                                                                       posGraphAfter,
-                                                                       isError,
-                                                                       errorMessage);
+    context().mainWindow().cmdMediator()->document().checkEditPointAxis(pointIdentifier,
+                                                                        posScreen,
+                                                                        posGraphAfter,
+                                                                        isError,
+                                                                        errorMessage);
 
     if (isError) {
 

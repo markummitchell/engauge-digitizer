@@ -40,6 +40,7 @@ class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
+class Ghosts;
 class GraphicsScene;
 class GraphicsView;
 class HelpWindow;
@@ -308,6 +309,8 @@ private:
   void fileImport (const QString &fileName,
                    ImportType ImportType);
   void fileImportWithPrompts (ImportType ImportType);
+  void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
+  void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -506,6 +509,9 @@ private:
   // File names to be loaded at startup. Only one is loaded into the current instance, with external instances created for the other files
   QTimer *m_timerLoadStartupFiles;
   QStringList m_loadStartupFiles;
+
+  // Ghosts that are created for seeing all coordinate systems at once, when there are multiple coordinate systems
+  Ghosts *m_ghosts;
 };
 
 #endif // MAIN_WINDOW_H

@@ -60,7 +60,7 @@ void CmdStackShadow::slotRedo ()
     m_cmdList.pop_front();
 
     if (m_mainWindow != 0) {
-       m_mainWindow->cmdMediator().push(cmd);
+       m_mainWindow->cmdMediator()->push(cmd);
     }
   }
 }

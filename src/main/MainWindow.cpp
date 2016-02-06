@@ -43,6 +43,7 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "ExportToFile.h"
+#include "Ghosts.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -126,7 +127,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_digitizeStateContext (0),
   m_transformationStateContext (0),
   m_backgroundStateContext (0),
-  m_isGnuplot (isGnuplot)
+  m_isGnuplot (isGnuplot),
+  m_ghosts (0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -1316,6 +1318,34 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
   }
 }
 
+void MainWindow::ghostsCreate ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::ghostsCreate";
+
+  ENGAUGE_ASSERT (m_ghosts == 0);
+  m_ghosts = new Ghosts (m_cmdMediator->document().coordSystemIndex());
+
+  for (unsigned int index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
+
+    // Skip this coordinate system if it is the selected coordinate system since it will be displayed anyway, so no ghosts are required
+    if (index != m_ghosts->coordSystemIndexToBeRestored ()) {
+      updateCoordSystem (index);
+    }
+  }
+}
+
+void MainWindow::ghostsDestroy ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::ghostsDestroy";
+
+  ENGAUGE_CHECK_PTR (m_ghosts);
+
+  updateCoordSystem (m_ghosts->coordSystemIndexToBeRestored ());
+
+  delete m_ghosts;
+  m_ghosts = 0;
+}
+
 QImage MainWindow::imageFiltered () const
 {
   return m_backgroundStateContext->imageForCurveState();
@@ -2193,6 +2223,8 @@ void MainWindow::slotBtnPrintAll ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnPrintAll";
 
+  ghostsCreate ();
+
   QPrinter printer (QPrinter::HighResolution);
   QPrintDialog dlg (&printer, this);
   if (dlg.exec() == QDialog::Accepted) {
@@ -2200,16 +2232,22 @@ void MainWindow::slotBtnPrintAll ()
     m_view->render (&painter);
     painter.end();
   }
+
+  ghostsDestroy ();
 }
 
 void MainWindow::slotBtnShowAllPressed ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllPressed";
+
+  ghostsCreate ();
 }
 
 void MainWindow::slotBtnShowAllReleased ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotBtnShowAllReleased";
+
+  ghostsDestroy ();
 }
 
 void MainWindow::slotCanRedoChanged (bool canRedo)

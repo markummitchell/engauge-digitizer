@@ -20,7 +20,7 @@ CmdSelectCoordSystem::CmdSelectCoordSystem(MainWindow &mainWindow,
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION),
-  m_coordSystemIndexBefore (mainWindow.cmdMediator().document().coordSystemIndex()),
+  m_coordSystemIndexBefore (document.coordSystemIndex()),
   m_coordSystemIndexAfter (coordSystemIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSelectCoordSystem::CmdSelectCoordSystem";
