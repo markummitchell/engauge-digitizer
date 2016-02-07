@@ -62,6 +62,9 @@ public:
 
 protected:
 
+  /// Number of axes points required for the transformation
+  DocumentAxesPointsRequired documentAxesPointsRequired() const;
+
   /// This value is checked after iterating to see what was wrong if the axis data was incorrect.
   QString errorMessage () const { return m_errorMessage; }
 

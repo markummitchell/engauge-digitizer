@@ -288,5 +288,6 @@ void DlgSettingsAxesChecker::updatePreview()
   m_checker->prepareForDisplay (polygon,
                                 ZERO_RADIUS_SINCE_NO_POINTS,
                                 *m_modelAxesCheckerAfter,
-                                *m_modelCoords);
+                                *m_modelCoords,
+                                mainWindow().cmdMediator()->document().documentAxesPointsRequired());
 }

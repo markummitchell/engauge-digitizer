@@ -194,6 +194,13 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
 
   } else {
 
+    if ((m_screenInputsX.count() == 2) &&
+        (m_screenInputsY.count() == 2)) {
+
+      // Done, although an error may intrude
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+    }
+
     // Error checking
     if (anyPointsRepeatPair (m_screenInputsX) ||
         anyPointsRepeatPair (m_screenInputsY)) {
@@ -227,6 +234,11 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
   return rtn;
 }
 
+DocumentAxesPointsRequired CallbackAxisPointsAbstract::documentAxesPointsRequired() const
+{
+  return m_documentAxesPointsRequired;
+}
+
 void CallbackAxisPointsAbstract::loadTransforms3 ()
 {
   // Screen coordinates
@@ -251,13 +263,10 @@ void CallbackAxisPointsAbstract::loadTransforms4 ()
   double x4Screen = m_screenInputsY.at(1).x();
   double y4Screen = m_screenInputsY.at(1).y();
 
+  // Each of the four axes points has only one coordinate
   double x1Graph = m_graphOutputsX.at(0);
-  double y1Graph = m_graphOutputsX.at(0);
   double x2Graph = m_graphOutputsX.at(1);
-  double y2Graph = m_graphOutputsX.at(1);
-//  double x3Graph = m_graphOutputsY.at(0);
-//  double y3Graph = m_graphOutputsY.at(0);
-//  double x4Graph = m_graphOutputsY.at(1);
+  double y3Graph = m_graphOutputsY.at(0);
   double y4Graph = m_graphOutputsY.at(1);
 
   // Intersect the two lines of the two axes. The lines are defined parametrically for the screen coordinates, with
@@ -275,30 +284,66 @@ void CallbackAxisPointsAbstract::loadTransforms4 ()
   double A11 = y4Screen - y3Screen;
   double b0 = x1Screen - x3Screen;
   double b1 = y1Screen - y3Screen;
-  double numerator = (b0 * A11 - A01 * b1);
+  double numeratorx = (b0 * A11 - A01 * b1);
+  double numeratory = (A00 * b1 - b0 * A10);
   double denominator = (A00 * A11 - A01 * A10);
-  double sx = numerator / denominator;
+  double sx = numeratorx / denominator;
+  double sy = numeratory / denominator;
 
   // Intersection point. For the graph coordinates, the initial implementation assumes cartesian and linear coordinates
   double xIntScreen = (1.0 - sx) * x1Screen + sx * x2Screen;
-  double yIntScreen = (1.0 - sx) * y1Screen + sx * y2Screen;
+  double yIntScreen = (1.0 - sy) * y3Screen + sy * y4Screen;
   double xIntGraph = (1.0 - sx) * x1Graph + sx * x2Graph;
-  double yIntGraph = (1.0 - sx) * y1Graph + sx * y2Graph;
+  double yIntGraph = (1.0 - sy) * y3Graph + sy * y4Graph;
+
+  // Distances of 4 axis points from interception
+  double distance1 = qSqrt ((x1Screen - xIntScreen) * (x1Screen - xIntScreen) +
+                            (y1Screen - yIntScreen) * (y1Screen - yIntScreen));
+  double distance2 = qSqrt ((x2Screen - xIntScreen) * (x2Screen - xIntScreen) +
+                            (y2Screen - yIntScreen) * (y2Screen - yIntScreen));
+  double distance3 = qSqrt ((x3Screen - xIntScreen) * (x3Screen - xIntScreen) +
+                            (y3Screen - yIntScreen) * (y3Screen - yIntScreen));
+  double distance4 = qSqrt ((x4Screen - xIntScreen) * (x4Screen - xIntScreen) +
+                            (y4Screen - yIntScreen) * (y4Screen - yIntScreen));
 
   // We now have too many data points with both x and y coordinates:
-  // (xIntGraph,yIntGraph) (xIntGraph,y3) (xIntGraph,y4) (x1,yIntGraph) (x2,yIntGraph)
-  // so we pick just 3
-  // (xIntGraph,yIntGraph)                (xIntGraph,y4)                (x2,yIntGraph)
+  // (xInt,yInt) (xInt,y3) (xInt,y4) (x1,yInt) (x2,yInt)
+  // so we pick just 3, making sure that those 3 are widely separated
+  // (xInt,yInt) (x axis point furthest from xInt,yInt) (y axis point furthest from xInt,yInt)
+  double xFurthestXAxisScreen, yFurthestXAxisScreen, xFurthestYAxisScreen, yFurthestYAxisScreen;
+  double xFurthestXAxisGraph, yFurthestXAxisGraph, xFurthestYAxisGraph, yFurthestYAxisGraph;
+  if (distance1 < distance2) {
+    xFurthestXAxisScreen = x2Screen;
+    yFurthestXAxisScreen = y2Screen;
+    xFurthestXAxisGraph = x2Graph;
+    yFurthestXAxisGraph = yIntGraph;
+  } else {
+    xFurthestXAxisScreen = x1Screen;
+    yFurthestXAxisScreen = y1Screen;
+    xFurthestXAxisGraph = x1Graph;
+    yFurthestXAxisGraph = yIntGraph;
+  }
+  if (distance3 < distance4) {
+    xFurthestYAxisScreen = x4Screen;
+    yFurthestYAxisScreen = y4Screen;
+    xFurthestYAxisGraph = xIntGraph;
+    yFurthestYAxisGraph = y4Graph;
+  } else {
+    xFurthestYAxisScreen = x3Screen;
+    yFurthestYAxisScreen = y3Screen;
+    xFurthestYAxisGraph = xIntGraph;
+    yFurthestYAxisGraph = y3Graph;
+  }
 
   // Screen coordinates
-  m_screenInputsTransform = QTransform (xIntScreen, xIntScreen, x2Screen,
-                                        yIntScreen, y4Screen  , y2Screen,
-                                        1.0       , 1.0       , 1.0     );
+  m_screenInputsTransform = QTransform (xIntScreen, xFurthestXAxisScreen, xFurthestYAxisScreen,
+                                        yIntScreen, yFurthestXAxisScreen, yFurthestYAxisScreen,
+                                        1.0       , 1.0                 , 1.0                 );
 
   // Graph coordinates
-  m_graphOutputsTransform = QTransform (xIntGraph, xIntGraph, x2Graph,
-                                        yIntGraph, y4Graph  , y2Graph,
-                                        1.0      , 1.0      , 1.0    );
+  m_graphOutputsTransform = QTransform (xIntGraph, xFurthestXAxisGraph, xFurthestYAxisGraph,
+                                        yIntGraph, yFurthestXAxisGraph, yFurthestYAxisGraph,
+                                        1.0      , 1.0                , 1.0                );
 }
 
 QTransform CallbackAxisPointsAbstract::matrixGraph () const

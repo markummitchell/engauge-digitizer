@@ -84,7 +84,7 @@ public:
   void resetOnLoad();
 
   /// Transform is defined when at least three axis points have been digitized
-  bool transformIsDefined() const { return m_transformIsDefined; }
+  bool transformIsDefined() const;
 
   /// Transform from linear cartesian graph coordinates to cartesian, polar, linear, log coordinates
   void transformLinearCartesianGraphToRawGraph (const QPointF &coordGraph,

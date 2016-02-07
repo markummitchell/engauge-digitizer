@@ -121,7 +121,8 @@ void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
                                     cmdMediator.document().modelCurveStyles().pointRadius(AXIS_CURVE_NAME),
                                     cmdMediator.document().modelAxesChecker(),
                                     cmdMediator.document().modelCoords(),
-                                    transformation);
+                                    transformation,
+                                    cmdMediator.document().documentAxesPointsRequired());
   m_axesChecker->setVisible (true);
   startTimer (cmdMediator.document().modelAxesChecker());
 }

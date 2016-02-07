@@ -294,6 +294,11 @@ void Transformation::setModelCoords (const DocumentModelCoords &modelCoords,
   m_modelMainWindow = modelMainWindow;
 }
 
+bool Transformation::transformIsDefined() const
+{
+  return m_transformIsDefined;
+}
+
 void Transformation::transformLinearCartesianGraphToRawGraph (const QPointF &pointLinearCartesianGraph,
                                                               QPointF &pointRawGraph) const
 {

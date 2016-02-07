@@ -10,5 +10,9 @@ CallbackUpdateTransform::CallbackUpdateTransform(const DocumentModelCoords &mode
 
 bool CallbackUpdateTransform::transformIsDefined () const
 {
-  return !isError () && (numberAxisPoints () == 3);
+  if (documentAxesPointsRequired () == DOCUMENT_AXES_POINTS_REQUIRED_3) {
+    return !isError () && (numberAxisPoints () == 3);
+  } else {
+    return !isError () && (numberAxisPoints () == 4);
+  }
 }
