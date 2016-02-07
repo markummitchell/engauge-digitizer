@@ -52,6 +52,7 @@ public:
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
   /// \param ordinal Unique, for curve, ordinal number
+  /// \param isXOnly True if point has only an x coordinate
   void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                             const QPointF &posGraph,
                                             QString &identifier,
@@ -63,6 +64,7 @@ public:
   /// \param posGraph Graph coordiantes from user
   /// \param identifier Identifier for new axis point
   /// \param ordinal Unique, for curve, ordinal number
+  /// \param isXOnly True if point has only an x coordinate
   void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                             const QPointF &posGraph,
                                             const QString &identifier,
