@@ -23,6 +23,8 @@
                 <section title="How do I get information out of Engauge?" ref="answerout.html"></section>
                 <section title="How do I get better accuracy in the numbers from Engauge?" ref="betteraccuracy.html"></section>
                 <section title="How can I add Engauge Digitizer to the Windows Explorer context menu?" ref="contextmenuwindows.html"></section>
+                <section title="How can I work with multiple coordinate systems in the same graph?" ref="answermultiplecoordsystems.html"></section>
+                <section title="How can I work with floating axes, which have one unknown coordinae?" ref="answerfloatingaxes.html"></section>
                 <section title="What are the command line options?" ref="commandlineoptions.html"></section>
                 <section title="What other help options are available?" ref="answerother.html"></section>
             </section>
@@ -32,20 +34,27 @@
             </section>         
         </toc>
         <keywords>
-	  <keyword name="Digitize line" ref="./.php"/> 
-	  <keyword name="Digitize points" ref="./.php"/> 
-	  <keyword name="Export digitized points" ref="./.php"/> 
-	  <keyword name="Import image" ref="./.php"/> 
-	  <keyword name="View filtered image" ref="./.php"/> 
-	  <keyword name="View original image" ref="./.php"/> 
+	  <keyword name="Accuracy" ref="betteraccuracy.html"/> 
+	  <keyword name="Dialogs" ref="dialogs.html"/> 
+	  <keyword name="Digitize line" ref="answerlinegraph.html"/> 
+	  <keyword name="Digitize points" ref="answerpointgraph.html"/> 
+	  <keyword name="Discretizing" ref="answerdiscretizing.html"/> 
+	  <keyword name="Export digitized points" ref="dlgexport.html"/> 
+	  <keyword name="Floating axes" ref="answerfloatingaxes.html"/> 
+	  <keyword name="Line graph" ref="answerlinegraph.html"/> 
+	  <keyword name="Multiple coordinate systems" ref="answermultiplecoordsystems.html"/> 
+	  <keyword name="Point graph" ref="answerpointgraph.html"/> 
+	  <keyword name="Select mode" ref="answerselectmode.html"/> 
         </keywords>
         <files>
             <file>animation.png</file>
             <file>answerdiscretizing.html</file>
+            <file>answerfloatingaxes.html</file>
             <file>answerlinegraph.html</file>
             <file>answermapconst.html</file>
             <file>answermap.html</file>
             <file>answermeasuring.html</file>
+            <file>answermultiplecoordsystems.html</file>
             <file>answerother.html</file>
             <file>answerout.html</file>
             <file>answerpointgraph.html</file>

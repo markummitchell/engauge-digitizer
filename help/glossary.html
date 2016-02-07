@@ -22,6 +22,9 @@ be collinear because graph coordinates are therefore impossible to compute.</DD>
 <DD>Collocated points are close to each other or at the same location. Multiple axis points cannot
 share the same location because graph coordinates are therefore impossible to compute,
 and should be widely separated so computed graph coordinates are most accurate.</DD>
+<DT>coordinate system</DT>
+<DD>A coordinate system is defined by a pair of x and y axes. A graph with multiple coordinate systems
+is digitized using the advanced <A HREF="answermultiplecoordsystems.html">Multiple Coordinate System</A> steps.</DD>
 <DT>coordinates</DT>
 <DD>Two values used in a graph to specify position. If the coordinates are cartesian, the 
 two values are X and Y. If the coordinates are polar, the two values are the radius R and 
@@ -51,9 +54,14 @@ or a file</DD>
 in an image where a template (or sample) appears. This method is fast because it uses a highly 
 efficient <A HREF="http://www.fftw.org">Fast Fourier Transform</A>, and is 
 therefore used by Engauge to perform point matching.</DD>
+<DT>floating axis</DT>
+<DD>A floating axis is an x axis with unknown y value, or y axis with unknown x value. A graph with a
+floating axis is digitized according to <A HREF="answerfloatingaxes.html">Floating Axes</A>.</DD>
 <DT>graph</DT>
-<DD>Image having two coordinate directions. Three axis points define the scales in the two coordinate 
-directions, and the location of the origin. Graphs have either points or curves</DD>
+<DD>Image that normally has one coordinate system consisting of two coordinate directions. Three 
+axis points define the scales in the two coordinate 
+directions, and the location of the origin. Graphs have either points or curves. An image may also
+have multiple coordinate systems.</DD>
 <DT>grid display</DT>
 <DD>Grid lines may be added to a graph after the axis points have been defined. Any errors while
 creating the axis points are usually apparent when grid lines are displayed</DD>
