@@ -5,6 +5,7 @@
 #include "CoordUnitsNonPolarTheta.h"
 #include "CoordUnitsPolarTheta.h"
 #include "CoordUnitsTime.h"
+#include "DocumentAxesPointsRequired.h"
 #include <QCursor>
 #include <QDialog>
 #include <QLineEdit>
@@ -33,12 +34,13 @@ public:
                 const MainWindowModel &modelMainWindow,
                 const QCursor &cursorShape,
                 const Transformation &transformation,
+                DocumentAxesPointsRequired documentAxesPointsRequired,
                 const double *xInitialValue = 0,
                 const double *yInitialValue = 0);
   ~DlgEditPoint ();
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
-  QPointF posGraph () const;
+  QPointF posGraph (bool &isXOnly) const;
 
 signals:
   /// Send a signal to trigger the setting of the override cursor.
@@ -66,6 +68,8 @@ private:
   DlgValidatorAbstract *m_validatorGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
+
+  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 
   const DocumentModelCoords &m_modelCoords;
   const MainWindowModel &m_modelMainWindow;

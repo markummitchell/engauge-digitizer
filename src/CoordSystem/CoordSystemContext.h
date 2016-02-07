@@ -4,6 +4,7 @@
 #include "CoordSystem.h"
 #include "CoordSystemIndex.h"
 #include "CoordSystemInterface.h"
+#include "DocumentAxesPointsRequired.h"
 #include <QVector>
 
 class QDataStream;
@@ -29,11 +30,13 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     QString &identifier,
-                                                    double ordinal);
+                                                    double ordinal,
+                                                    bool isXOnly);
   virtual void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     const QString &identifier,
-                                                    double ordinal);
+                                                    double ordinal,
+                                                    bool isXOnly);
   virtual void addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                      const QPointF &posScreen,
                                                      QString &generatedIentifier,
@@ -46,7 +49,8 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void checkAddPointAxis (const QPointF &posScreen,
                                   const QPointF &posGraph,
                                   bool &isError,
-                                  QString &errorMessage);
+                                  QString &errorMessage,
+                                  bool isXOnly);
   virtual void checkEditPointAxis (const QString &pointIdentifier,
                                    const QPointF &posScreen,
                                    const QPointF &posGraph,
@@ -84,7 +88,8 @@ class CoordSystemContext : public CoordSystemInterface
   /// Load from file in version 6 format, into the single CoordSystem
   void loadVersion6 (QXmlStreamReader &reader);
   /// Load one CoordSystem from file in version 7 format, into the most recent CoordSystem which was just created before the call to this method
-  void loadVersion7 (QXmlStreamReader &reader);
+  void loadVersion7 (QXmlStreamReader &reader,
+                     DocumentAxesPointsRequired documentAxesPointsRequired);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;

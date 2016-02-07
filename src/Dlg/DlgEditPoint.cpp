@@ -2,6 +2,7 @@
 #include "DlgEditPoint.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
+#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "FormatCoordsUnits.h"
@@ -33,10 +34,12 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             const MainWindowModel &modelMainWindow,
                             const QCursor &cursorShape,
                             const Transformation &transformation,
+                            DocumentAxesPointsRequired documentAxesPointsRequired,
                             const double *xInitialValue,
                             const double *yInitialValue) :
   QDialog (&mainWindow),
   m_cursorShape (cursorShape),
+  m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
 {
@@ -198,7 +201,7 @@ QChar DlgEditPoint::nameYRadius () const
   return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
-QPointF DlgEditPoint::posGraph () const
+QPointF DlgEditPoint::posGraph (bool &isXOnly) const
 {
   double xTheta, yRadius;
 
@@ -210,6 +213,9 @@ QPointF DlgEditPoint::posGraph () const
                                  m_modelMainWindow,
                                  xTheta,
                                  yRadius);
+
+  // If yRadius value is empty then this is the xTheta value only
+  isXOnly = m_editGraphY->text().isEmpty();
 
   return QPointF (xTheta,
                   yRadius);
@@ -239,13 +245,29 @@ QString DlgEditPoint::unitsType (bool isXTheta) const
 
 void DlgEditPoint::updateControls ()
 {
-  // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();
-  int posX, posY;
-  m_btnOk->setEnabled (!textX.isEmpty () &&
-                       !textY.isEmpty () &&
-                       (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
-                       (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
-}
 
+  int posX, posY;
+
+  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_4) {
+
+    bool gotX = (!textX.isEmpty() &&
+                 (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable));
+    bool gotY = (!textY.isEmpty() &&
+                 (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
+
+    // Check for not empty in one coordinate and for valid number in the other coordinate
+    m_btnOk->setEnabled ((textX.isEmpty() && gotY) ||
+                         (textY.isEmpty() && gotX));
+
+  } else {
+
+    // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
+    m_btnOk->setEnabled (!textX.isEmpty () &&
+                         !textY.isEmpty () &&
+                         (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
+                         (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
+
+  }
+}

@@ -432,7 +432,8 @@ void Transformation::update (bool fileIsLoaded,
     setModelCoords (cmdMediator.document().modelCoords(),
                     modelMainWindow);
 
-    CallbackUpdateTransform ftor (m_modelCoords);
+    CallbackUpdateTransform ftor (m_modelCoords,
+                                  cmdMediator.document().documentAxesPointsRequired());
 
     Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                       &CallbackUpdateTransform::callback);

@@ -448,7 +448,8 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 
     Point p (DUMMY_CURVE_NAME,
              pF,
-             pF);
+             pF,
+             false);
     points.push_back (p);
   }
 

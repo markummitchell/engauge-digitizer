@@ -2167,6 +2167,7 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
 
     int numberCoordSystem = dlgImportAdvanced.numberCoordSystem();
     m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
+    m_cmdMediator->setDocumentAxesPointsRequired (dlgImportAdvanced.documentAxesPointsRequired());
   }
 
   m_transformation.resetOnLoad();

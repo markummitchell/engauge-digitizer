@@ -2,9 +2,14 @@
 #define CALLBACK_AXIS_POINTS_ABSTRACT
 
 #include "CallbackSearchReturn.h"
+#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelCoords.h"
+#include <QList>
 #include <QString>
 #include <QTransform>
+
+typedef QList<QPointF> CoordPairVector;
+typedef QList<double> CoordSingleVector;
 
 class Point;
 
@@ -28,7 +33,8 @@ class CallbackAxisPointsAbstract
 
 public:
   /// Constructor for when all of the existing axis points are to be processed as is.
-  CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords);
+  CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
+                             DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// Constructor for when the data for one of the existing axis points is to be locally overwritten.
   CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
@@ -64,12 +70,22 @@ protected:
   bool isError () const { return m_isError; }
 
   /// Number of axis points which is less than 3 if the axes curve is incomplete.
-  unsigned int numberAxisPoints () const { return m_numberAxisPoints; }
+  unsigned int numberAxisPoints () const;
 
 private:
 
-  bool anyColumnsRepeat (double m [3] [3], int numberColumns);
-  bool threePointsAreCollinear (double m [3] [3], int numberColumns);
+  bool anyPointsRepeatPair (const CoordPairVector &vector) const;
+  bool anyPointsRepeatSingle (const CoordSingleVector &vector) const;
+  CallbackSearchReturn callbackRequire3AxisPoints (const QPointF &posScreen,
+                                                   const QPointF &posGraph);
+  CallbackSearchReturn callbackRequire4AxisPoints (bool isXOnly,
+                                                   const QPointF &posScreen,
+                                                   const QPointF &posGraph);
+  void computeTransforms3();
+  void computeTransforms4();
+  void loadTransforms3();
+  void loadTransforms4();
+  bool threePointsAreCollinear (const QTransform &transform);
 
   // Coordinates information that will be applied to the coordinates before they are used to compute the transformation
   DocumentModelCoords m_modelCoords;
@@ -79,10 +95,21 @@ private:
   QPointF m_posScreenOverride;
   QPointF m_posGraphOverride;
 
-  int m_numberAxisPoints;
-  QTransform m_screenInputs;
-  QTransform m_graphOutputs;
+  // Storage of (x,y) axes points for DOCUMENT_AXES_POINTS_REQUIRED_3
+  CoordPairVector m_screenInputs;
+  CoordPairVector m_graphOutputs;
 
+  // Storage of (x) and (y) axes points for DOCUMENT_AXES_POINTS_REQUIRED_4
+  CoordPairVector m_screenInputsX; // Accumulated screen coordinates for x axis points
+  CoordPairVector m_screenInputsY; // Accumulated screen coordinates for y axis points
+  CoordSingleVector m_graphOutputsX; // Accumulated x values for x axis points
+  CoordSingleVector m_graphOutputsY; // Accumulated y values for y axis points
+
+  // Transforms computed from DOCUMENT_AXES_POINTS_REQUIRED_3 or DOCUMENT_AXES_POINTS_REQUIRED_4 variables
+  QTransform m_screenInputsTransform;
+  QTransform m_graphOutputsTransform;
+
+  // Errors
   bool m_isError;
   QString m_errorMessage;
 
@@ -91,6 +118,9 @@ private:
   double m_yGraphLow;
   double m_xGraphHigh;
   double m_yGraphHigh;
+
+  // Either 3 points (each having x AND y coordinates) or 4 points (each having x OR y coordinate) define the transform
+  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 };
 
 #endif // CALLBACK_AXIS_POINTS_ABSTRACT

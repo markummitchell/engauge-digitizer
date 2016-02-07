@@ -84,7 +84,8 @@ Curve::Curve (QDataStream &str)
       Point point (m_curveName,
                    QPointF (xScreen, yScreen),
                    QPointF (xGraph, yGraph),
-                   ordinal++);
+                   ordinal++,
+                   false);
 
       addPoint(point);
     } else {

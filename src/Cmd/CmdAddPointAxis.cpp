@@ -13,13 +13,15 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
                                   Document &document,
                                   const QPointF &posScreen,
                                   const QPointF &posGraph,
-                                  double ordinal) :
+                                  double ordinal,
+                                  bool isXOnly) :
   CmdAbstract (mainWindow,
                document,
                CMD_DESCRIPTION),
   m_posScreen (posScreen),
   m_posGraph (posGraph),
-  m_ordinal (ordinal)
+  m_ordinal (ordinal),
+  m_isXOnly (isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::CmdAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
@@ -44,9 +46,13 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL)) {
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
       ENGAUGE_ASSERT (false);
   }
+
+  // Boolean values
+  QString isXOnlyValue = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
 
   m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
   m_posScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
@@ -54,6 +60,7 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
   m_posGraph.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y).toDouble());
   m_identifierAdded = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
   m_ordinal = attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
+  m_isXOnly = (isXOnlyValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
 }
 
 CmdAddPointAxis::~CmdAddPointAxis ()
@@ -67,7 +74,8 @@ void CmdAddPointAxis::cmdRedo ()
   document().addPointAxisWithGeneratedIdentifier (m_posScreen,
                                                   m_posGraph,
                                                   m_identifierAdded,
-                                                  m_ordinal);
+                                                  m_ordinal,
+                                                  m_isXOnly);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
@@ -92,5 +100,8 @@ void CmdAddPointAxis::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y, QString::number (m_posGraph.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
   writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY, m_isXOnly ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeEndElement();
 }

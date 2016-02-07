@@ -14,13 +14,15 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
                                     Document &document,
                                     const QString &pointIdentifier,
                                     const QPointF &posGraphBefore,
-                                    const QPointF &posGraphAfter) :
+                                    const QPointF &posGraphAfter,
+                                    bool isXOnly) :
   CmdAbstract (mainWindow,
                document,
                CMD_DESCRIPTION),
   m_pointIdentifier (pointIdentifier),
   m_posGraphBefore (posGraphBefore),
-  m_posGraphAfter (posGraphAfter)
+  m_posGraphAfter (posGraphAfter),
+  m_isXOnly (isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::CmdEditPointAxis point="
                               << pointIdentifier.toLatin1 ().data ()
@@ -44,15 +46,20 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X_AFTER) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
       ENGAUGE_ASSERT (false);
   }
+
+  // Boolean values
+  QString isXOnlyValue = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
 
   m_posGraphBefore.setX(attributes.value(DOCUMENT_SERIALIZE_GRAPH_X_BEFORE).toDouble());
   m_posGraphBefore.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE).toDouble());
   m_posGraphAfter.setX(attributes.value(DOCUMENT_SERIALIZE_GRAPH_X_AFTER).toDouble());
   m_posGraphAfter.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER).toDouble());
   m_pointIdentifier = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+  m_isXOnly = (isXOnlyValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
 }
 
 CmdEditPointAxis::~CmdEditPointAxis ()
@@ -89,5 +96,8 @@ void CmdEditPointAxis::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE, QString::number (m_posGraphBefore.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X_AFTER, QString::number (m_posGraphAfter.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER, QString::number (m_posGraphAfter.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY, m_isXOnly ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeEndElement();
 }

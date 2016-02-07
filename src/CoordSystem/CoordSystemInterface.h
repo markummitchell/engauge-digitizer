@@ -41,7 +41,8 @@ public:
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     QString &identifier,
-                                                    double ordinal) = 0;
+                                                    double ordinal,
+                                                    bool isXOnly) = 0;
 
   /// Add a single axis point with the specified point identifier. Call this after checkAddPointAxis to guarantee success in this call.
   /// \param posScreen Screen coordinates from QGraphicsView
@@ -51,7 +52,8 @@ public:
   virtual void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     const QString &identifier,
-                                                    double ordinal) = 0;
+                                                    double ordinal,
+                                                    bool isXOnly) = 0;
 
   /// Add a single graph point with a generated point identifier.
   virtual void addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -72,7 +74,8 @@ public:
   virtual void checkAddPointAxis (const QPointF &posScreen,
                                   const QPointF &posGraph,
                                   bool &isError,
-                                  QString &errorMessage) = 0;
+                                  QString &errorMessage,
+                                  bool isXOnly) = 0;
 
   /// Check before calling editPointAxis
   virtual void checkEditPointAxis (const QString &pointIdentifier,

@@ -117,9 +117,12 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
                                           cmdMediator->document().modelCoords(),
                                           context().mainWindow().modelMainWindow(),
                                           cursor (cmdMediator),
-                                          context().mainWindow().transformation());
+                                          context().mainWindow().transformation(),
+                                          cmdMediator->document().documentAxesPointsRequired());
     int rtn = dlg->exec ();
-    QPointF posGraph = dlg->posGraph ();
+
+    bool isXOnly;
+    QPointF posGraph = dlg->posGraph (isXOnly);
     delete dlg;
 
     // Remove temporary point
@@ -134,9 +137,10 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
       int nextOrdinal = cmdMediator->document().nextOrdinalForCurve(AXIS_CURVE_NAME);
 
       cmdMediator->document().checkAddPointAxis(posScreen,
-                                                           posGraph,
-                                                           isError,
-                                                           errorMessage);
+                                                posGraph,
+                                                isError,
+                                                errorMessage,
+                                                isXOnly);
 
       if (isError) {
 
@@ -152,7 +156,8 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
                                                  document,
                                                  posScreen,
                                                  posGraph,
-                                                 nextOrdinal);
+                                                 nextOrdinal,
+                                                 isXOnly);
         context().appendNewCmd(cmdMediator,
                                cmd);
       }

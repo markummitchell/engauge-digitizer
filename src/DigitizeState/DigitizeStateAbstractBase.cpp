@@ -51,11 +51,13 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
                                        context().mainWindow().modelMainWindow(),
                                        cursor (cmdMediator),
                                        context().mainWindow().transformation(),
+                                       cmdMediator->document().documentAxesPointsRequired(),
                                        &x,
                                        &y);
   int rtn = dlg->exec ();
 
-  QPointF posGraphAfter = dlg->posGraph ();
+  bool isXOnly;
+  QPointF posGraphAfter = dlg->posGraph (isXOnly);
   delete dlg;
 
   if (rtn == QDialog::Accepted) {
@@ -84,7 +86,8 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
                                                     cmdMediator->document(),
                                                     pointIdentifier,
                                                     posGraphBefore,
-                                                    posGraphAfter);
+                                                    posGraphAfter,
+                                                    isXOnly);
       context().appendNewCmd(cmdMediator,
                              cmd);
     }

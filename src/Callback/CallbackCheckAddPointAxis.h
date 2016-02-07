@@ -15,7 +15,9 @@ public:
   /// Single constructor.
   CallbackCheckAddPointAxis(const DocumentModelCoords &modelCoords,
                             const QPointF &posScreen,
-                            const QPointF &posGraph);
+                            const QPointF &posGraph,
+                            DocumentAxesPointsRequired documentAxesPointsRequired,
+                            bool isXOnly);
 
   /// True if an error occurred during iteration.
   bool isError () const;

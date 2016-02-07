@@ -14,7 +14,8 @@ class CallbackUpdateTransform : public CallbackAxisPointsAbstract
 {
 public:
   /// Single constructor.
-  CallbackUpdateTransform(const DocumentModelCoords &modelCoords);
+  CallbackUpdateTransform(const DocumentModelCoords &modelCoords,
+                          DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// True if enough Points were available to create a Transformation. Except for the node count, all other
   /// failure modes are caught externally so user gets immediate feedback as soon as bad axis point data appears

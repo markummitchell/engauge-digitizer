@@ -44,27 +44,31 @@ void CoordSystemContext::addGraphCurveAtEnd (const QString &curveName)
 void CoordSystemContext::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                               const QPointF &posGraph,
                                                               QString &identifier,
-                                                              double ordinal)
+                                                              double ordinal,
+                                                              bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointAxisWithGeneratedIdentifier";
 
   m_coordSystems [m_coordSystemIndex]->addPointAxisWithGeneratedIdentifier(posScreen,
                                                                            posGraph,
                                                                            identifier,
-                                                                           ordinal);
+                                                                           ordinal,
+                                                                           isXOnly);
 }
 
 void CoordSystemContext::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                               const QPointF &posGraph,
                                                               const QString &identifier,
-                                                              double ordinal)
+                                                              double ordinal,
+                                                              bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addPointAxisWithSpecifiedIdentifier";
 
   m_coordSystems [m_coordSystemIndex]->addPointAxisWithSpecifiedIdentifier(posScreen,
-                                                                          posGraph,
-                                                                          identifier,
-                                                                          ordinal);
+                                                                           posGraph,
+                                                                           identifier,
+                                                                           ordinal,
+                                                                           isXOnly);
 }
 
 void CoordSystemContext::addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -103,14 +107,16 @@ void CoordSystemContext::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
 void CoordSystemContext::checkAddPointAxis (const QPointF &posScreen,
                                             const QPointF &posGraph,
                                             bool &isError,
-                                            QString &errorMessage)
+                                            QString &errorMessage,
+                                            bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::checkAddPointAxis";
 
   m_coordSystems [m_coordSystemIndex]->checkAddPointAxis(posScreen,
                                                          posGraph,
                                                          isError,
-                                                         errorMessage);
+                                                         errorMessage,
+                                                         isXOnly);
 }
 
 void CoordSystemContext::checkEditPointAxis (const QString &pointIdentifier,
@@ -256,12 +262,14 @@ void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader)
   m_coordSystems [m_coordSystemIndex]->loadVersion6 (reader);
 }
 
-void CoordSystemContext::loadVersion7 (QXmlStreamReader &reader)
+void CoordSystemContext::loadVersion7 (QXmlStreamReader &reader,
+                                       DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion7";
 
   int indexLast = m_coordSystems.count() - 1;
-  m_coordSystems [indexLast]->loadVersion7 (reader);
+  m_coordSystems [indexLast]->loadVersion7 (reader,
+                                            documentAxesPointsRequired);
 }
 
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const

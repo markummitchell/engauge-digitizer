@@ -4,6 +4,7 @@
 #include "CoordSystemInterface.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
+#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelAxesChecker.h"
 #include "DocumentModelColorFilter.h"
 #include "DocumentModelCoords.h"
@@ -43,11 +44,13 @@ public:
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     QString &identifier,
-                                                    double ordinal);
+                                                    double ordinal,
+                                                    bool isXOnly);
   virtual void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     const QString &identifier,
-                                                    double ordinal);
+                                                    double ordinal,
+                                                    bool isXOnly);
   virtual void addPointGraphWithGeneratedIdentifier (const QString &curveName,
                                                      const QPointF &posScreen,
                                                      QString &generatedIentifier,
@@ -60,7 +63,8 @@ public:
   virtual void checkAddPointAxis (const QPointF &posScreen,
                                   const QPointF &posGraph,
                                   bool &isError,
-                                  QString &errorMessage);
+                                  QString &errorMessage,
+                                  bool isXOnly);
   virtual void checkEditPointAxis (const QString &pointIdentifier,
                                    const QPointF &posScreen,
                                    const QPointF &posGraph,
@@ -88,7 +92,8 @@ public:
   /// Load from file in version 6 format
   void loadVersion6 (QXmlStreamReader &reader);
   /// Load from file in version 7 format
-  void loadVersion7 (QXmlStreamReader &reader);
+  void loadVersion7 (QXmlStreamReader &reader,
+                     DocumentAxesPointsRequired documentAxesPointsRequired);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;
@@ -150,6 +155,9 @@ private:
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;
+
+  // Save the number of required axes points
+  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 };
 
 #endif // COORD_SYSTEM_H

@@ -57,12 +57,14 @@ void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
 void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                        const QPointF &posGraph,
                                                        QString &identifier,
-                                                       double ordinal)
+                                                       double ordinal,
+                                                       bool isXOnly)
 {
   Point point (AXIS_CURVE_NAME,
                posScreen,
                posGraph,
-               ordinal);
+               ordinal,
+               isXOnly);
   m_curveAxes->addPoint (point);
 
   identifier = point.identifier();
@@ -77,13 +79,15 @@ void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
 void CoordSystem::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                        const QPointF &posGraph,
                                                        const QString &identifier,
-                                                       double ordinal)
+                                                       double ordinal,
+                                                       bool isXOnly)
 {
   Point point (AXIS_CURVE_NAME,
                identifier,
                posScreen,
                posGraph,
-               ordinal);
+               ordinal,
+               isXOnly);
   m_curveAxes->addPoint (point);
 
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::addPointAxisWithSpecifiedIdentifier"
@@ -153,7 +157,8 @@ bool CoordSystem::bytesIndicatePreVersion6 (const QByteArray &bytes) const
 void CoordSystem::checkAddPointAxis (const QPointF &posScreen,
                                      const QPointF &posGraph,
                                      bool &isError,
-                                     QString &errorMessage)
+                                     QString &errorMessage,
+                                     bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::checkAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
@@ -161,7 +166,9 @@ void CoordSystem::checkAddPointAxis (const QPointF &posScreen,
 
   CallbackCheckAddPointAxis ftor (m_modelCoords,
                                   posScreen,
-                                  posGraph);
+                                  posGraph,
+                                  m_documentAxesPointsRequired,
+                                  isXOnly);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackCheckAddPointAxis::callback);
@@ -307,6 +314,8 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   double dbl, radius = 0.0;
   QString st;
 
+  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+
   str >> st; // CurveCmbText selection
   str >> st; // MeasureCmbText selection
   str >> int32;
@@ -443,6 +452,8 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion6";
 
+  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+
   // Import from xml. Loop to end of data or error condition occurs, whichever is first
   while (!reader.atEnd() &&
          !reader.hasError()) {
@@ -491,9 +502,12 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
   }
 }
 
-void CoordSystem::loadVersion7 (QXmlStreamReader &reader)
+void CoordSystem::loadVersion7 (QXmlStreamReader &reader,
+                                DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion7";
+
+  m_documentAxesPointsRequired = documentAxesPointsRequired;
 
   // Import from xml. Loop to end of data or error condition occurs, whichever is first
   while (!reader.atEnd() &&

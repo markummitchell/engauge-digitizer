@@ -130,27 +130,31 @@ void Document::addGraphCurveAtEnd (const QString &curveName)
 void Document::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     QString &identifier,
-                                                    double ordinal)
+                                                    double ordinal,
+                                                    bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithGeneratedIdentifier";
 
   m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen,
                                                            posGraph,
                                                            identifier,
-                                                           ordinal);
+                                                           ordinal,
+                                                           isXOnly);
 }
 
 void Document::addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
                                                     const QPointF &posGraph,
                                                     const QString &identifier,
-                                                    double ordinal)
+                                                    double ordinal,
+                                                    bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointAxisWithSpecifiedIdentifier";
 
   m_coordSystemContext.addPointAxisWithSpecifiedIdentifier(posScreen,
                                                            posGraph,
                                                            identifier,
-                                                           ordinal);
+                                                           ordinal,
+                                                           isXOnly);
 }
 
 void Document::addPointGraphWithGeneratedIdentifier (const QString &curveName,
@@ -203,14 +207,16 @@ bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const
 void Document::checkAddPointAxis (const QPointF &posScreen,
                                   const QPointF &posGraph,
                                   bool &isError,
-                                  QString &errorMessage)
+                                  QString &errorMessage,
+                                  bool isXOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::checkAddPointAxis";
 
   m_coordSystemContext.checkAddPointAxis(posScreen,
                                          posGraph,
                                          isError,
-                                         errorMessage);
+                                         errorMessage,
+                                         isXOnly);
 }
 
 void Document::checkEditPointAxis (const QString &pointIdentifier,
@@ -289,6 +295,11 @@ int Document::curvesGraphsNumPoints(const QString &curveName) const
   LOG4CPP_INFO_S ((*mainCat)) << "Document::curvesGraphsNumPoints";
 
   return m_coordSystemContext.curvesGraphsNumPoints(curveName);
+}
+
+DocumentAxesPointsRequired Document::documentAxesPointsRequired () const
+{
+  return m_documentAxesPointsRequired;
 }
 
 void Document::editPointAxis (const QPointF &posGraph,
@@ -532,7 +543,8 @@ void Document::loadVersion7 (QFile *file)
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
           m_coordSystemContext.addCoordSystems (ONE_COORDINATE_SYSTEM);
-          m_coordSystemContext.loadVersion7 (reader);
+          m_coordSystemContext.loadVersion7 (reader,
+                                             m_documentAxesPointsRequired);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
           loadImage(reader);
