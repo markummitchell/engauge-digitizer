@@ -217,6 +217,23 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
   }
 }
 
+bool Curve::isXOnly(const QString &pointIdentifier) const
+{
+  // Search for point with matching identifier
+  Points::const_iterator itr;
+  for (itr = m_points.begin (); itr != m_points.end (); itr++) {
+    const Point &point = *itr;
+    if (pointIdentifier == point.identifier ()) {
+      return point.isXOnly();
+      break;
+    }
+  }
+
+  ENGAUGE_ASSERT (false);
+
+  return false;
+}
+
 void Curve::iterateThroughCurvePoints (const Functor2wRet<const QString &, const Point&, CallbackSearchReturn> &ftorWithCallback) const
 {
   QList<Point>::const_iterator itr;

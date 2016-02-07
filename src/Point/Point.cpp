@@ -171,6 +171,28 @@ Point::Point (QXmlStreamReader &reader)
   loadXml(reader);
 }
 
+Point::Point (const Point &other)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point(const Point &other)"
+                              << " isAxisPoint=" << (other.isAxisPoint() ? "true" : "false")
+                              << " identifier=" << other.identifier ().toLatin1().data()
+                              << " posScreen=" << QPointFToString (other.posScreen ()).toLatin1().data()
+                              << " hasPosGraph=" << (other.hasPosGraph() ? "true" : "false")
+                              << " posGraph=" << QPointFToString (other.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
+                              << " hasOrdinal=" << (other.hasOrdinal() ? "true" : "false")
+                              << " ordinal=" << other.ordinal (SKIP_HAS_CHECK)
+                              << " isXOnly=" << other.isXOnly ();
+
+  m_isAxisPoint = other.isAxisPoint ();
+  m_identifier = other.identifier ();
+  m_posScreen = other.posScreen ();
+  m_hasPosGraph = other.hasPosGraph ();
+  m_posGraph = other.posGraph (SKIP_HAS_CHECK);
+  m_hasOrdinal = other.hasOrdinal ();
+  m_ordinal = other.ordinal (SKIP_HAS_CHECK);
+  m_isXOnly = other.isXOnly ();
+}
+
 Point &Point::operator=(const Point &point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::operator="
@@ -189,28 +211,9 @@ Point &Point::operator=(const Point &point)
   m_posGraph = point.posGraph (SKIP_HAS_CHECK);
   m_hasOrdinal = point.hasOrdinal ();
   m_ordinal = point.ordinal (SKIP_HAS_CHECK);
+  m_isXOnly = point.isXOnly ();
 
   return *this;
-}
-
-Point::Point (const Point &other)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::Point(const Point &other)"
-                              << " isAxisPoint=" << (other.isAxisPoint() ? "true" : "false")
-                              << " identifier=" << other.identifier ().toLatin1().data()
-                              << " posScreen=" << QPointFToString (other.posScreen ()).toLatin1().data()
-                              << " hasPosGraph=" << (other.hasPosGraph() ? "true" : "false")
-                              << " posGraph=" << QPointFToString (other.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
-                              << " hasOrdinal=" << (other.hasOrdinal() ? "true" : "false")
-                              << " ordinal=" << other.ordinal (SKIP_HAS_CHECK);
-
-  m_isAxisPoint = other.isAxisPoint ();
-  m_identifier = other.identifier ();
-  m_posScreen = other.posScreen ();
-  m_hasPosGraph = other.hasPosGraph ();
-  m_posGraph = other.posGraph (SKIP_HAS_CHECK);
-  m_hasOrdinal = other.hasOrdinal ();
-  m_ordinal = other.ordinal (SKIP_HAS_CHECK);
 }
 
 QString Point::curveNameFromPointIdentifier (const QString &pointIdentifier)

@@ -78,6 +78,7 @@ public:
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
+  bool isXOnly (const QString &pointIdentifier) const; // Applies to axes points only
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual void iterateThroughCurveSegments (const QString &curveName,

@@ -328,6 +328,11 @@ void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
   m_pixmap = QPixmap (width, height);
 }
 
+bool Document::isXOnly (const QString &pointIdentifier) const
+{
+  return m_coordSystemContext.isXOnly (pointIdentifier);
+}
+
 void Document::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::iterateThroughCurvePointsAxes";

@@ -194,9 +194,6 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
 
   } else {
 
-    // Default assumes there are enough axis points
-    rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
-
     // Error checking
     if (anyPointsRepeatPair (m_screenInputsX) ||
         anyPointsRepeatPair (m_screenInputsY)) {

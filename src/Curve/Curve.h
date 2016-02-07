@@ -66,6 +66,9 @@ public:
                           QTextStream &strHtml,
                           CurvesGraphs &curvesGraphs) const;
 
+  /// Determine if specified point has just x coordinate. Otherwise has just y coordinate, or both x and y coordinates
+  bool isXOnly (const QString &pointIdentifier) const;
+
   /// Apply functor to Points on Curve.
   void iterateThroughCurvePoints (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
 

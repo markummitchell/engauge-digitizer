@@ -17,7 +17,8 @@ CallbackSearchReturn CallbackAddPointsInCurvesGraphs::callback (const QString &c
     m_coordSystem.addPointAxisWithSpecifiedIdentifier (point.posScreen (),
                                                        point.posGraph (),
                                                        identifier,
-                                                       point.ordinal ());
+                                                       point.ordinal (),
+                                                       point.isXOnly ());
   } else {
     m_coordSystem.addPointGraphWithSpecifiedIdentifier (curveName,
                                                         point.posScreen (),

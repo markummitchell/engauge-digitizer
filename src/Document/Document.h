@@ -131,6 +131,9 @@ public:
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
 
+  /// See Curve::isXOnly
+  bool isXOnly (const QString &pointIdentifier) const;
+
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
 

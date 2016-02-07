@@ -35,6 +35,7 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
                             const QCursor &cursorShape,
                             const Transformation &transformation,
                             DocumentAxesPointsRequired documentAxesPointsRequired,
+                            bool isXOnly,
                             const double *xInitialValue,
                             const double *yInitialValue) :
   QDialog (&mainWindow),
@@ -44,6 +45,10 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   m_modelMainWindow (modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::DlgEditPoint";
+
+  // Either one or two coordinates are desired
+  bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
+  bool isY = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || !isXOnly;
 
   // To guarantee the override cursor is always removed, we call removeOverrideCursor here rather than in the code that
   // allocates this DlgEditPoint. The digitizeState argument is otherwise unused.
@@ -63,7 +68,9 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
 
   initializeGraphCoordinates (xInitialValue,
                               yInitialValue,
-                              transformation);
+                              transformation,
+                              isX,
+                              isY);
 
   updateControls ();
 }
@@ -164,7 +171,9 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
 
 void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
                                                const double *yInitialValue,
-                                               const Transformation &transformation)
+                                               const Transformation &transformation,
+                                               bool isX,
+                                               bool isY)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
 
@@ -182,8 +191,17 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
                                    transformation);
   }
 
-   m_editGraphX->setText (xTheta);
-   m_editGraphY->setText (yRadius);
+  if (isX) {
+    m_editGraphX->setText (xTheta);
+  } else {
+    m_editGraphX->setText ("");
+  }
+
+  if (isY) {
+    m_editGraphY->setText (yRadius);
+  } else {
+    m_editGraphY->setText ("");
+  }
 }
 
 bool DlgEditPoint::isCartesian () const

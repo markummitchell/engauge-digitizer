@@ -35,6 +35,7 @@ public:
                 const QCursor &cursorShape,
                 const Transformation &transformation,
                 DocumentAxesPointsRequired documentAxesPointsRequired,
+                bool isXOnly = false,
                 const double *xInitialValue = 0,
                 const double *yInitialValue = 0);
   ~DlgEditPoint ();
@@ -54,7 +55,9 @@ private:
   void createOkCancel (QVBoxLayout *layoutOuter);
   void initializeGraphCoordinates (const double *xInitialValue,
                                    const double *yInitialValue,
-                                   const Transformation &transformation);
+                                   const Transformation &transformation,
+                                   bool isX,
+                                   bool isY);
   bool isCartesian () const;
   QChar nameXTheta () const;
   QChar nameYRadius () const;

@@ -74,6 +74,10 @@ class CoordSystemContext : public CoordSystemInterface
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
+
+  /// True/false if y/x value is empty
+  bool isXOnly (const QString &pointIdentifier) const;
+
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual void iterateThroughCurveSegments (const QString &curveName,

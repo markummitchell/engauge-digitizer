@@ -41,10 +41,12 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
 
   QPointF posScreen = cmdMediator->document().positionScreen (pointIdentifier);
   QPointF posGraphBefore = cmdMediator->document().positionGraph (pointIdentifier);
+  bool isXOnly = cmdMediator->document().isXOnly (pointIdentifier);
 
   // Ask user for coordinates
   double x = posGraphBefore.x();
   double y = posGraphBefore.y();
+
   DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
                                        *this,
                                        cmdMediator->document().modelCoords(),
@@ -52,12 +54,12 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
                                        cursor (cmdMediator),
                                        context().mainWindow().transformation(),
                                        cmdMediator->document().documentAxesPointsRequired(),
+                                       isXOnly,
                                        &x,
                                        &y);
   int rtn = dlg->exec ();
 
-  bool isXOnly;
-  QPointF posGraphAfter = dlg->posGraph (isXOnly);
+  QPointF posGraphAfter = dlg->posGraph (isXOnly); // This call returns new values for isXOnly and the graph position
   delete dlg;
 
   if (rtn == QDialog::Accepted) {

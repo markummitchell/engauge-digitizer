@@ -259,6 +259,11 @@ void CoordSystem::editPointAxis (const QPointF &posGraph,
                           identifier);
 }
 
+bool CoordSystem::isXOnly (const QString &pointIdentifier) const
+{
+  return m_curveAxes->isXOnly (pointIdentifier);
+}
+
 void CoordSystem::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   ENGAUGE_CHECK_PTR (m_curveAxes);

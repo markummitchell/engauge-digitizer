@@ -202,6 +202,13 @@ void CoordSystemContext::editPointAxis (const QPointF &posGraph,
                                                      identifier);
 }
 
+bool CoordSystemContext::isXOnly (const QString &pointIdentifier) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::isXOnly";
+
+  return m_coordSystems [m_coordSystemIndex]->isXOnly (pointIdentifier);
+}
+
 void CoordSystemContext::iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::iterateThroughCurvePointsAxes";
