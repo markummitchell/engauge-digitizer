@@ -131,12 +131,12 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateSegment.h \
     src/DigitizeState/DigitizeStateSelect.h \
     src/Dlg/DlgAbout.h \
-    src/Dlg/DlgCoordSystemCount.h \
     src/Dlg/DlgEditPoint.h \
     src/Dlg/DlgErrorReport.h \
     src/Dlg/DlgFilterCommand.h \
     src/Dlg/DlgFilterThread.h \
     src/Dlg/DlgFilterWorker.h \
+    src/Dlg/DlgImportAdvanced.h \
     src/Dlg/DlgRequiresTransform.h \
     src/Dlg/DlgSettingsAbstractBase.h \
     src/Dlg/DlgSettingsAxesChecker.h \
@@ -157,6 +157,7 @@ HEADERS  += \
     src/Dlg/DlgValidatorFactory.h \
     src/Dlg/DlgValidatorNumber.h \
     src/Document/Document.h \
+    src/Document/DocumentAxesPointsRequired.h \
     src/Document/DocumentModelAbstractBase.h \
     src/Document/DocumentModelAxesChecker.h \
     src/Document/DocumentModelColorFilter.h \
@@ -383,12 +384,12 @@ SOURCES += \
     src/DigitizeState/DigitizeStateSegment.cpp \
     src/DigitizeState/DigitizeStateSelect.cpp \
     src/Dlg/DlgAbout.cpp \
-    src/Dlg/DlgCoordSystemCount.cpp \
     src/Dlg/DlgEditPoint.cpp \
     src/Dlg/DlgErrorReport.cpp \
     src/Dlg/DlgFilterCommand.cpp \
     src/Dlg/DlgFilterThread.cpp \
     src/Dlg/DlgFilterWorker.cpp \
+    src/Dlg/DlgImportAdvanced.cpp \
     src/Dlg/DlgRequiresTransform.cpp \
     src/Dlg/DlgSettingsAbstractBase.cpp \
     src/Dlg/DlgSettingsAxesChecker.cpp \

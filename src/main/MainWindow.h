@@ -4,6 +4,7 @@
 #include "BackgroundImage.h"
 #include "CoordSystemIndex.h"
 #include "DigitizeStateAbstractBase.h"
+#include "DocumentAxesPointsRequired.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>

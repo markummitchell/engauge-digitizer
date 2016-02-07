@@ -5,6 +5,7 @@
 #include "CoordSystemIndex.h"
 #include "CurvesGraphs.h"
 #include "CurveStyles.h"
+#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelAxesChecker.h"
 #include "DocumentModelColorFilter.h"
 #include "DocumentModelCoords.h"
@@ -36,7 +37,7 @@ public:
   /// Constructor for imported images and dragged images. Only one coordinate system is create - others are added later externally
   Document (const QImage &image);
 
-  /// Constructor for opened Documents, and error report files. The specified file is opened and read
+  /// Constructor for opened Documents, and error report files. The specified file is opened and read.
   Document (const QString &fileName);
 
   /// Add some number (0 or more) of additional coordinate systems. This is only safe to call during import
@@ -219,6 +220,10 @@ public:
   void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
                         const CurvesGraphs &curvesGraphs);
 
+  /// Set the number of axes points required. This is called during the Document creation process, after imported images have
+  /// been previewed or loaded files have had at least some xml parsing
+  void setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired);
+
   /// Set method for DocumentModelAxesChecker.
   void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
 
@@ -271,6 +276,9 @@ private:
   // Metadata
   QString m_name;
   QPixmap m_pixmap;
+
+  // Number of axes points used is set during creation/import
+  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 
   // Read variables
   bool m_successfulRead;

@@ -3,6 +3,7 @@
 
 #include "CoordsType.h"
 #include "Document.h"
+#include "DocumentAxesPointsRequired.h"
 #include "PointStyle.h"
 #include <QUndoStack>
 
@@ -16,7 +17,7 @@ class QImage;
 class CmdMediator : public QUndoStack
 {
 public:
-  /// Constructor for imported images and dragged images. Only one coordinate system is created but others can be added later
+  /// Constructor for imported images and dragged images. Only one coordinate system is created but others can be added later.
   CmdMediator (MainWindow &mainWindow,
                const QImage &image);
 
@@ -66,6 +67,10 @@ public:
 
   /// Serialize to xml
   void saveXml(QXmlStreamWriter &writer) const;
+
+  /// Set the number of axes points required. This is called during the Document creation process, after imported images have
+  /// been previewed or loaded files have had at least some xml parsing
+  void setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// Wrapper for Document::successfulRead
   bool successfulRead () const;

@@ -118,6 +118,11 @@ void CmdMediator::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
+void CmdMediator::setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired)
+{
+  m_document.setDocumentAxesPointsRequired (documentAxesPointsRequired);
+}
+
 bool CmdMediator::successfulRead () const
 {
   return m_document.successfulRead();

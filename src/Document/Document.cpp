@@ -397,6 +397,8 @@ void Document::loadPreVersion6 (QDataStream &str)
   double version;
   QString st;
 
+  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+
   str >> int32; // Magic number
   str >> version;
   str >> st; // Version string
@@ -413,6 +415,8 @@ void Document::loadVersion6 (QFile *file)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion6";
 
   QXmlStreamReader reader (file);
+
+  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
 
   // Create the single CoordSystem used in versions before version 7
   m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
@@ -504,6 +508,13 @@ void Document::loadVersion7 (QFile *file)
         (tokenType == QXmlStreamReader::StartElement)) {
 
       inDocumentSubtree = true;
+
+      QXmlStreamAttributes attributes = reader.attributes();
+      if (attributes.hasAttribute (DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED)) {
+        m_documentAxesPointsRequired = (DocumentAxesPointsRequired) attributes.value (DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED).toInt();
+      } else {
+        m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+      }
 
     } else if ((reader.name() == DOCUMENT_SERIALIZE_DOCUMENT) &&
                (tokenType == QXmlStreamReader::EndElement)) {
@@ -697,6 +708,9 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   // causes the code to complain during loading
   writer.writeAttribute(DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, VERSION_NUMBER);
 
+  // Number of axes points required
+  writer.writeAttribute(DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED, QString::number (m_documentAxesPointsRequired));
+
   // Serialize the Document image. That binary data is encoded as base64
   QByteArray array;
   QDataStream str (&array, QIODevice::WriteOnly);
@@ -736,6 +750,13 @@ void Document::setCurvesGraphs (CoordSystemIndex coordSystemIndex,
 
   m_coordSystemContext.setCurvesGraphs(coordSystemIndex,
                                        curvesGraphs);
+}
+
+void Document::setDocumentAxesPointsRequired(DocumentAxesPointsRequired documentAxesPointsRequired)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setDocumentAxesPointsRequired";
+
+  m_documentAxesPointsRequired = documentAxesPointsRequired;
 }
 
 void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)

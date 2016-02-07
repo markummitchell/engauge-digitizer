@@ -24,8 +24,8 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
-#include "DlgCoordSystemCount.h"
 #include "DlgErrorReport.h"
+#include "DlgImportAdvanced.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
@@ -2158,14 +2158,14 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
 
     applyZoomFactorAfterLoad(); // Apply the currently selected zoom factor
 
-    DlgCoordSystemCount dlgCoordSystem (*this);
-    dlgCoordSystem.exec();
+    DlgImportAdvanced dlgImportAdvanced (*this);
+    dlgImportAdvanced.exec();
 
-    if (dlgCoordSystem.result() == QDialog::Rejected) {
+    if (dlgImportAdvanced.result() == QDialog::Rejected) {
       return false;
     }
 
-    int numberCoordSystem = dlgCoordSystem.numberCoordSystem();
+    int numberCoordSystem = dlgImportAdvanced.numberCoordSystem();
     m_cmdMediator->document().addCoordSystems (numberCoordSystem - 1);
   }
 
