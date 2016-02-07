@@ -260,10 +260,11 @@ void Point::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
+  // Note that DOCUMENT_SERIALIZE_POINT_IS_X_ONLY is optional since it is not used in Version 6
+  // but is used in Version 7
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT)) {
 
     m_hasOrdinal = attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_ORDINAL);
     if (m_hasOrdinal) {
@@ -273,7 +274,10 @@ void Point::loadXml(QXmlStreamReader &reader)
     }
 
     QString isAxisPoint = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_AXIS_POINT).toString();
-    QString isXOnly = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
+    QString isXOnly; // Default is anything but DOCUMENT_SERIALIZE_BOOL_TRUE
+    if (attributes.hasAttribute (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
+      isXOnly = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
+    }
 
     m_identifier = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString();
     m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();

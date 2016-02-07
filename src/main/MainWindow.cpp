@@ -1124,7 +1124,7 @@ void MainWindow::createToolBars ()
   m_btnShowAll->setAcceptDrops(false);
   m_btnShowAll->setStatusTip (tr ("Show all coordinate systems"));
   m_btnShowAll->setWhatsThis (tr ("Show All Coordinate Systems\n\n"
-                                  "When pushed, this button shows all digitized points and lines for all coordinate systems."));
+                                  "When pressed and held, this button shows all digitized points and lines for all coordinate systems."));
   connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAllPressed ()));
   connect (m_btnShowAll, SIGNAL (released ()), this, SLOT (slotBtnShowAllReleased ()));
 
@@ -1133,7 +1133,7 @@ void MainWindow::createToolBars ()
   m_btnPrintAll->setAcceptDrops(false);
   m_btnPrintAll->setStatusTip (tr ("Print all coordinate systems"));
   m_btnPrintAll->setWhatsThis (tr ("Print All Coordinate Systems\n\n"
-                                  "When pushed, this button Prints all digitized points and lines for all coordinate systems."));
+                                  "When pressed, this button Prints all digitized points and lines for all coordinate systems."));
   connect (m_btnPrintAll, SIGNAL (pressed ()), this, SLOT (slotBtnPrintAll ()));
 
   m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
