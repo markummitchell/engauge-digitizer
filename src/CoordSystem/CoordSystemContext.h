@@ -24,7 +24,8 @@ class CoordSystemContext : public CoordSystemInterface
   ~CoordSystemContext();
 
   /// Add specified number of coordinate systems to the original one created by the constructor
-  void addCoordSystems(unsigned int numberCoordSystemToAdd);
+  void addCoordSystems(DocumentAxesPointsRequired documentAxesPointsRequired,
+                       unsigned int numberCoordSystemToAdd);
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,

@@ -34,8 +34,8 @@ class Transformation;
 class CoordSystem : public CoordSystemInterface
 {
 public:
-  /// Default constructor
-  CoordSystem ();
+  /// Single constructor
+  CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// Constructor for opened Graphs, and error report files. The specified file is opened and read
   CoordSystem (const QString &fileName);
@@ -138,6 +138,7 @@ public:
   virtual void updatePointOrdinals (const Transformation &transformation);
 
 private:
+  CoordSystem();
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
 

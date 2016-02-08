@@ -4,11 +4,13 @@
 CallbackCheckEditPointAxis::CallbackCheckEditPointAxis(const DocumentModelCoords &modelCoords,
                                                        const QString &pointIdentifier,
                                                        const QPointF &posScreen,
-                                                       const QPointF &posGraph) :
+                                                       const QPointF &posGraph,
+                                                       DocumentAxesPointsRequired documentAxesPointsRequired) :
   CallbackAxisPointsAbstract (modelCoords,
                               pointIdentifier,
                               posScreen,
-                              posGraph)
+                              posGraph,
+                              documentAxesPointsRequired)
 {
 }
 

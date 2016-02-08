@@ -17,12 +17,14 @@ CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords
 CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
                                                        const QString pointIdentifierOverride,
                                                        const QPointF &posScreenOverride,
-                                                       const QPointF &posGraphOverride) :
+                                                       const QPointF &posGraphOverride,
+                                                       DocumentAxesPointsRequired documentAxesPointsRequired) :
   m_modelCoords (modelCoords),
   m_pointIdentifierOverride (pointIdentifierOverride),
   m_posScreenOverride (posScreenOverride),
   m_posGraphOverride (posGraphOverride),
-  m_isError (false)
+  m_isError (false),
+  m_documentAxesPointsRequired (documentAxesPointsRequired)
 {
 }
 

@@ -29,11 +29,12 @@
 
 const int FOUR_BYTES = 4;
 
-CoordSystem::CoordSystem () :
+CoordSystem::CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired) :
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           ColorFilterSettings::defaultFilter (),
                           CurveStyle (LineStyle::defaultAxesCurve(),
-                                      PointStyle::defaultAxesCurve ())))
+                                      PointStyle::defaultAxesCurve ()))),
+  m_documentAxesPointsRequired (documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
 
@@ -190,7 +191,8 @@ void CoordSystem::checkEditPointAxis (const QString &pointIdentifier,
   CallbackCheckEditPointAxis ftor (m_modelCoords,
                                    pointIdentifier,
                                    posScreen,
-                                   posGraph);
+                                   posGraph,
+                                   m_documentAxesPointsRequired);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackCheckEditPointAxis::callback);

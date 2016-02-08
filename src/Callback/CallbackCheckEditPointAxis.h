@@ -16,7 +16,8 @@ public:
   CallbackCheckEditPointAxis(const DocumentModelCoords &modelCoords,
                              const QString &pointIdentifier,
                              const QPointF &posScreen,
-                             const QPointF &posGraph);
+                             const QPointF &posGraph,
+                             DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// True if an error occurred during iteration.
   bool isError () const;

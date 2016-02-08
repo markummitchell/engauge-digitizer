@@ -40,7 +40,8 @@ public:
   CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
                              const QString pointIdentifierOverride,
                              const QPointF &posGraphOverride,
-                             const QPointF &posScreenOverride);
+                             const QPointF &posScreenOverride,
+                             DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString &curveName,

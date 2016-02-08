@@ -23,14 +23,15 @@ CoordSystemContext::~CoordSystemContext()
   m_coordSystemIndex = 0;
 }
 
-void CoordSystemContext::addCoordSystems(unsigned int numberCoordSystemToAdd)
+void CoordSystemContext::addCoordSystems(DocumentAxesPointsRequired documentAxesPointsRequired,
+                                         unsigned int numberCoordSystemToAdd)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addCoordSystems"
                               << " numberToAdd=" << numberCoordSystemToAdd;
 
   // The CoordSystem vector is populated with defaults here
   for (unsigned int i = 0; i < numberCoordSystemToAdd; i++) {
-    m_coordSystems.push_back (new CoordSystem ());
+    m_coordSystems.push_back (new CoordSystem (documentAxesPointsRequired));
   }
 }
 
