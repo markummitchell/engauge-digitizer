@@ -43,8 +43,9 @@ Installation
 ------------
 Engauge can be installed using packages for all popular distributions of Linux (easiest method), or by downloading
 pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge6
-project at github.com, in the [Releases page](https://github.com/markummitchell/engauge6/releases). The final option for installing is to build the software from the source
-code (very difficult). Building the software from the source code is accomplished by following the steps in the INSTALL 
+project at github.com, in the [Releases page](https://github.com/markummitchell/engauge6/releases). The final option 
+for installing is to build the software from the source
+code (very difficult). Building the software from the source code is accomplished by following the steps in the BUILD
 file that is found in the main directory. The build process can take as little as 15 minutes in Linux or as long as 
 several hours in Microsoft Windows.
 
