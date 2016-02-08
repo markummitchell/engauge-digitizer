@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Coordinate settings");
 
@@ -31,8 +32,37 @@ CmdSettingsCoords::CmdSettingsCoords (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::CmdSettingsCoords";
   
-  m_modelCoordsBefore.loadXml (reader);
-  m_modelCoordsAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_COORDS)) {
+
+      if (isBefore) {
+
+        m_modelCoordsBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelCoordsAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsCoords::~CmdSettingsCoords ()

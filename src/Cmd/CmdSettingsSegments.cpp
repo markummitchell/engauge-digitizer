@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Segments settings");
 
@@ -30,8 +31,37 @@ CmdSettingsSegments::CmdSettingsSegments (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsSegments::CmdSettingsSegments";
 
-  m_modelSegmentsBefore.loadXml (reader);
-  m_modelSegmentsAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_SEGMENTS)) {
+
+      if (isBefore) {
+
+        m_modelSegmentsBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelSegmentsAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsSegments::~CmdSettingsSegments ()

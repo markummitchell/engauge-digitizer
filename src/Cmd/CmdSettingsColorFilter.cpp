@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Filter settings");
 
@@ -30,8 +31,37 @@ CmdSettingsColorFilter::CmdSettingsColorFilter (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsColorFilter::CmdSettingsColorFilter";
 
-  m_modelColorFilterBefore.loadXml (reader);
-  m_modelColorFilterAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_FILTER)) {
+
+      if (isBefore) {
+
+        m_modelColorFilterBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelColorFilterAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsColorFilter::~CmdSettingsColorFilter ()

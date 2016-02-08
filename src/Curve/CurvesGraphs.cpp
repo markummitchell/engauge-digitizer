@@ -178,6 +178,12 @@ void CurvesGraphs::loadXml(QXmlStreamReader &reader)
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
   (reader.name() != DOCUMENT_SERIALIZE_CURVES_GRAPHS)){
 
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
     if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
         (reader.name () == DOCUMENT_SERIALIZE_CURVE)) {
 
@@ -185,18 +191,6 @@ void CurvesGraphs::loadXml(QXmlStreamReader &reader)
 
       m_curvesGraphs.push_back (curve);
 
-    } else {
-
-      loadNextFromReader(reader);
-      if (reader.hasError()) {
-        // No need to set success flag, which raises the error, since error was already raised. Just
-        // need to exit loop immediately
-        break;
-      }
-      if (reader.atEnd()) {
-        success = false;
-        break;
-      }
     }
   }
 

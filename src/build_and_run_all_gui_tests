@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FILES=../test/*.xml
+
+for f in $FILES
+do
+    echo "Processing $f"
+    ../bin/engauge -regression $f
+done
+

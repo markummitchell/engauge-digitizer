@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Curve add/remove");
 
@@ -58,9 +59,38 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove";
-  
-  m_curvesGraphsBefore.loadXml (reader);
-  m_curvesGraphsAfter.loadXml (reader);
+
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_CURVES_GRAPHS)) {
+
+      if (isBefore) {
+
+        m_curvesGraphsBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_curvesGraphsAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsCurveAddRemove::~CmdSettingsCurveAddRemove ()

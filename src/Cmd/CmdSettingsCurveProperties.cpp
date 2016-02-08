@@ -5,6 +5,7 @@
 #include "MainWindow.h"
 #include <QDebug>
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Curve Properties settings");
 
@@ -31,8 +32,37 @@ CmdSettingsCurveProperties::CmdSettingsCurveProperties (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::CmdSettingsCurveProperties";
   
-  m_modelCurveStylesBefore.loadXml (reader);
-  m_modelCurveStylesAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_CURVE_STYLES)) {
+
+      if (isBefore) {
+
+        m_modelCurveStylesBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelCurveStylesAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsCurveProperties::~CmdSettingsCurveProperties ()

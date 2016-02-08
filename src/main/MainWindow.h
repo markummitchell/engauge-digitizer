@@ -75,6 +75,7 @@ public:
   /// Single constructor.
   MainWindow(const QString &errorReportFile, // Empty if unused
              bool isGnuplot,
+             bool isRegression,
              QStringList loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
@@ -246,6 +247,7 @@ private slots:
   void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
+  void slotTimeoutRegression ();
   void slotUndoTextChanged (const QString &);
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
@@ -307,6 +309,8 @@ private:
   void createToolBars();
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
+  void fileExport(const QString &fileName,
+                  ExportToFile exportStrategy);
   void fileImport (const QString &fileName,
                    ImportType ImportType);
   void fileImportWithPrompts (ImportType ImportType);
@@ -343,6 +347,7 @@ private:
   bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
                        ImportType ImportType);
+  void startRegressionTest(const QString &errorReportFile);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
@@ -512,6 +517,12 @@ private:
 
   // Ghosts that are created for seeing all coordinate systems at once, when there are multiple coordinate systems
   Ghosts *m_ghosts;
+
+  // Timer for regression testing. This is first started by the constructor for this class, but the first timeout
+  // (and all succeeding timeouts) will be from after QMainWindow::exec is called. Each timeout results in one command
+  // from the command stack getting executed
+  QTimer *m_timerRegression;
+  QString m_regressionFile;
 };
 
 #endif // MAIN_WINDOW_H

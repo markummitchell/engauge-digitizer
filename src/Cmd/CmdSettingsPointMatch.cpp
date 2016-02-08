@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Point Match settings");
 
@@ -30,8 +31,37 @@ CmdSettingsPointMatch::CmdSettingsPointMatch (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::CmdSettingsPointMatch";
 
-  m_modelPointMatchBefore.loadXml (reader);
-  m_modelPointMatchAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_POINT_MATCH)) {
+
+      if (isBefore) {
+
+        m_modelPointMatchBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelPointMatchAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsPointMatch::~CmdSettingsPointMatch ()

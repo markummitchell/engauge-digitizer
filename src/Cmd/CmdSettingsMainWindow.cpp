@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Main window settings");
 
@@ -30,8 +31,37 @@ CmdSettingsMainWindow::CmdSettingsMainWindow(MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsMainWindow::CmdSettingsMainWindow";
 
-  m_modelMainWindowBefore.loadXml (reader);
-  m_modelMainWindowAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_MAIN_WINDOW)) {
+
+      if (isBefore) {
+
+        m_modelMainWindowBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelMainWindowAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsMainWindow::~CmdSettingsMainWindow ()

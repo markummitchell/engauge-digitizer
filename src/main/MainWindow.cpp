@@ -114,6 +114,7 @@ const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
+                       bool isRegression,
                        QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
@@ -128,7 +129,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_transformationStateContext (0),
   m_backgroundStateContext (0),
   m_isGnuplot (isGnuplot),
-  m_ghosts (0)
+  m_ghosts (0),
+  m_timerRegression(0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -164,6 +166,9 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(initialPath,
                         errorReportFile);
+    if (isRegression) {
+      startRegressionTest(errorReportFile);
+    }
   } else {
 
     // Save file names for later, after gui becomes available. The file names are dropped if error report file is specified
@@ -1202,6 +1207,39 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   }
 
   return QObject::eventFilter (target, event);
+}
+
+void MainWindow::fileExport(const QString &fileName,
+                            ExportToFile exportStrategy)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileExport"
+                              << " fileName=" << fileName.toLatin1().data();
+
+  QFile file (fileName);
+  if (file.open(QIODevice::WriteOnly)) {
+
+    QTextStream str (&file);
+
+    DocumentModelExportFormat modelExportFormat = modelExportOverride (m_cmdMediator->document().modelExport(),
+                                                                       exportStrategy,
+                                                                       fileName);
+    exportStrategy.exportToFile (modelExportFormat,
+                                 m_cmdMediator->document(),
+                                 m_modelMainWindow,
+                                 transformation (),
+                                 str);
+
+    // Update checklist guide status
+    m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
+    m_dockChecklistGuide->update (*m_cmdMediator,
+                                  m_isDocumentExported);
+
+  } else {
+
+    QMessageBox::critical (0,
+                           engaugeWindowTitle(),
+                           tr ("Unable to export to file ") + fileName);
+  }
 }
 
 void MainWindow::fileImport (const QString &fileName,
@@ -2501,31 +2539,8 @@ void MainWindow::slotFileExport ()
                                             &filterCsv);
     if (!fileName.isEmpty ()) {
 
-      QFile file (fileName);
-      if (file.open(QIODevice::WriteOnly)) {
-
-        QTextStream str (&file);
-
-        DocumentModelExportFormat modelExportFormat = modelExportOverride (m_cmdMediator->document().modelExport(),
-                                                                           exportStrategy,
-                                                                           fileName);
-        exportStrategy.exportToFile (modelExportFormat,
-                                     m_cmdMediator->document(),
-                                     m_modelMainWindow,
-                                     transformation (),
-                                     str);
-
-        // Update checklist guide status
-        m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
-        m_dockChecklistGuide->update (*m_cmdMediator,
-                                      m_isDocumentExported);
-
-      } else {
-
-        QMessageBox::critical (0,
-                               engaugeWindowTitle(),
-                               tr ("Unable to export to file ") + fileName);
-      }
+      fileExport(fileName,
+                 exportStrategy);
     }
   } else {
     DlgRequiresTransform dlg ("Export");
@@ -2923,6 +2938,31 @@ void MainWindow::slotSettingsMainWindow ()
   m_dlgSettingsMainWindow->loadMainWindowModel (*m_cmdMediator,
                                                 m_modelMainWindow);
   m_dlgSettingsMainWindow->show ();
+}
+
+void MainWindow::slotTimeoutRegression()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutRegression"
+                              << " cmdStackIndex=" << m_cmdMediator->index()
+                              << " cmdStackCount=" << m_cmdMediator->count();
+
+  if (m_cmdStackShadow->canRedo()) {
+
+    m_cmdStackShadow->slotRedo();
+
+  } else {
+
+    ExportToFile exportStrategy;
+
+    // Output the regression test results
+    fileExport (m_regressionFile,
+                exportStrategy);
+
+    // Regression test has finished so exit. We unset the dirty flag so there is no prompt
+    m_cmdMediator->setClean();
+    close();
+
+  }
 }
 
 void MainWindow::slotUndoTextChanged (const QString &text)
@@ -3342,6 +3382,21 @@ void MainWindow::slotViewZoomOut ()
     m_actionZoom16To1->setChecked (true);
     slotViewZoom16To1 ();
   }
+}
+
+void MainWindow::startRegressionTest(const QString &errorReportFile)
+{
+  const int REGRESSION_INTERVAL = 400; // Milliseconds
+
+  // Save output/export file name
+  m_regressionFile = errorReportFile;
+  m_regressionFile = m_regressionFile.replace (".xml", ".csv_actual");
+
+  m_timerRegression = new QTimer();
+  m_timerRegression->setSingleShot(false);
+  connect (m_timerRegression, SIGNAL (timeout()), this, SLOT (slotTimeoutRegression()));
+
+  m_timerRegression->start(REGRESSION_INTERVAL);
 }
 
 Transformation MainWindow::transformation() const

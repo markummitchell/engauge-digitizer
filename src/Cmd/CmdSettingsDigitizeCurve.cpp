@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Digitize Curve settings");
 
@@ -30,8 +31,37 @@ CmdSettingsDigitizeCurve::CmdSettingsDigitizeCurve (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsDigitizeCurve::CmdSettingsDigitizeCurve";
 
-  m_modelDigitizeCurveBefore.loadXml (reader);
-  m_modelDigitizeCurveAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_DIGITIZE_CURVE)) {
+
+      if (isBefore) {
+
+        m_modelDigitizeCurveBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelDigitizeCurveAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsDigitizeCurve::~CmdSettingsDigitizeCurve ()

@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Grid Removal settings");
 
@@ -30,8 +31,37 @@ CmdSettingsGridRemoval::CmdSettingsGridRemoval (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGridRemoval::CmdSettingsGridRemoval";
 
-  m_modelGridRemovalBefore.loadXml (reader);
-  m_modelGridRemovalAfter.loadXml (reader);
+  bool success = true;
+
+  // Read until end of this subtree
+  bool isBefore = true;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+    loadNextFromReader(reader);
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+
+    if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_GRID_REMOVAL)) {
+
+      if (isBefore) {
+
+        m_modelGridRemovalBefore.loadXml (reader);
+        isBefore = false;
+
+      } else {
+
+        m_modelGridRemovalAfter.loadXml (reader);
+
+      }
+    }
+  }
+
+  if (!success) {
+    reader.raiseError ("Cannot read coordinates data");
+  }
 }
 
 CmdSettingsGridRemoval::~CmdSettingsGridRemoval()
