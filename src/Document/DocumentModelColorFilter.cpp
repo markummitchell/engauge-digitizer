@@ -120,7 +120,10 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
 
   m_colorFilterSettingsList.clear();
 
-  while ((reader.tokenType() != QXmlStreamReader::EndElement) &&
+  // A mistake was made, and the DOCUMENT_SERIALIZE_FILTER tag was used for DocumentModelColorFilter,
+  // and DOCUMENT_SERIALIZE_COLOR_FILTER is used for ColorFilterSettings. Too late to change now.
+  bool inFilter = false;
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
          (reader.name() != DOCUMENT_SERIALIZE_FILTER)) {
     loadNextFromReader(reader);
     if (reader.atEnd()) {
@@ -129,8 +132,14 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
     }
 
     if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
-        (reader.name() == DOCUMENT_SERIALIZE_COLOR_FILTER)) {
-      
+        (reader.name() == DOCUMENT_SERIALIZE_FILTER)) {
+
+      inFilter = true;
+    }
+
+    if (inFilter && ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+                     (reader.name() == DOCUMENT_SERIALIZE_COLOR_FILTER))) {
+
       QXmlStreamAttributes attributes = reader.attributes();
 
       if (attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME)) {
@@ -150,6 +159,9 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
   if (!success) {
     reader.raiseError("Cannot read filter data");
   }
+
+  // Read past the end token from the first settings so that is not confused with the end token from the after settings
+  loadNextFromReader(reader);
 }
 
 double DocumentModelColorFilter::low (const QString &curveName) const
@@ -179,8 +191,12 @@ void DocumentModelColorFilter::saveXml(QXmlStreamWriter &writer) const
   // Loop through filters
   ColorFilterSettingsList::const_iterator itr;
   for (itr = m_colorFilterSettingsList.begin (); itr != m_colorFilterSettingsList.end (); itr++) {
-    const ColorFilterSettings &colorFilterSettings = *itr;
-    colorFilterSettings.saveXml(writer);
+
+    QString curveName = itr.key();
+    const ColorFilterSettings &colorFilterSettings = itr.value();
+
+    colorFilterSettings.saveXml(writer,
+                                curveName);
   }
 
   writer.writeEndElement();

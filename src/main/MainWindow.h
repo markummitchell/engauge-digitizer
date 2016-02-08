@@ -331,8 +331,7 @@ private:
   QString saveErrorReportFileAndExitXml (const char *comment,
                                          const char *file,
                                          int line,
-                                         const char *context,
-                                         bool includeDocument) const;
+                                         const char *context) const;
   void saveStartingDocumentSnapshot();
   void setCurrentFile(const QString &fileName);
   void setCurrentPathFromFile (const QString &fileName);

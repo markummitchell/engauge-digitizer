@@ -82,7 +82,8 @@ public:
   int saturationLow () const;
 
   /// Save curve filter to stream.
-  void saveXml(QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer,
+               const QString &curveName) const;
 
   /// Set method for filter mode.
   void setColorFilterMode(ColorFilterMode colorFilterMode);

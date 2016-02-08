@@ -1,6 +1,7 @@
 #include "CmdAbstract.h"
 #include "CmdAddPointAxis.h"
 #include "CmdAddPointGraph.h"
+#include "CmdAddPointsGraph.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -59,6 +60,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_ADD_POINTS_GRAPH) {
+    cmd = new CmdAddPointsGraph (mainWindow,
+                                 document,
+                                 cmdDescription,
+                                 reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COPY) {
     cmd = new CmdCopy (mainWindow,
                        document,

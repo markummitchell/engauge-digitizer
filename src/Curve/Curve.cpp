@@ -462,7 +462,8 @@ void Curve::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CURVE_NAME, m_curveName);
-  m_colorFilterSettings.saveXml (writer);
+  m_colorFilterSettings.saveXml (writer,
+                                 m_curveName);
   m_curveStyle.saveXml (writer,
                         m_curveName);
 

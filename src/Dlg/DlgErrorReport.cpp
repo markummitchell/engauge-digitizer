@@ -12,12 +12,11 @@
 const QString ERROR_REPORT_FILE ("engauge_error_report.xml");
 const int MAX_BTN_WIDTH = 80;
 
-DlgErrorReport::DlgErrorReport(const QString &xmlWithoutDocument,
-                               const QString &xmlWithDocument,
+DlgErrorReport::DlgErrorReport(const QString &xml,
                                QWidget *parent) :
   QDialog (parent),
-  m_xmlWithoutDocument (xmlWithoutDocument),
-  m_xmlWithDocument (xmlWithDocument)
+  m_xmlOriginal (xml),
+  m_xmlAnonymized (xml)
 {
   QVBoxLayout *layout = new QVBoxLayout;
   layout->setSizeConstraint (QLayout::SetFixedSize);
@@ -30,17 +29,17 @@ DlgErrorReport::DlgErrorReport(const QString &xmlWithoutDocument,
 
   QLabel *lblPreview = new QLabel (tr ("An unrecoverable error has occurred. Would you like to send an error report to "
                                        "the Engauge developers?\n\n"
-                                       "Adding document information to the error report greatly increases the chances of finding "
-                                       "and fixing the problems. However, document information should not be included if your document "
-                                       "contains any information that should remain private."));
+                                       "The original document can be sent as part of the error report, which increases the "
+                                       "chances of finding and fixing the problem(s). However, if any information is private "
+                                       "then an anonymized version of the document will be sent."));
   lblPreview->setWordWrap(true);
   layout->addWidget (lblPreview);
 
-  m_chkWithDocument = new QCheckBox ("Include document information");
-  m_chkWithDocument->setChecked (true);
+  m_chkOriginal = new QCheckBox ("Include original document information, otherwize anonymize the information");
+  m_chkOriginal->setChecked (true);
   updateFile ();
-  layout->addWidget (m_chkWithDocument);
-  connect (m_chkWithDocument, SIGNAL (stateChanged (int)), this, SLOT (slotDocumentCheckboxChanged (int)));
+  layout->addWidget (m_chkOriginal);
+  connect (m_chkOriginal, SIGNAL (stateChanged (int)), this, SLOT (slotDocumentCheckboxChanged (int)));
 
   QHBoxLayout *layoutButtons = new QHBoxLayout;
 
@@ -94,10 +93,10 @@ void DlgErrorReport::slotDocumentCheckboxChanged(int /* state */)
 void DlgErrorReport::slotSend()
 {
   // This is the one path that allows information to be sent to the server
-  if (m_chkWithDocument->isChecked()) {
-    m_xmlToUpload = m_xmlWithDocument;
+  if (m_chkOriginal->isChecked()) {
+    m_xmlToUpload = m_xmlOriginal;
   } else {
-    m_xmlToUpload = m_xmlWithoutDocument;
+    m_xmlToUpload = m_xmlAnonymized;
   }
 
   done (QDialog::Accepted);
@@ -107,10 +106,10 @@ void DlgErrorReport::slotSend()
 
 void DlgErrorReport::updateFile()
 {
-  if (m_chkWithDocument->isChecked()) {
-    saveFile (m_xmlWithDocument);
+  if (m_chkOriginal->isChecked()) {
+    saveFile (m_xmlOriginal);
   } else {
-    saveFile (m_xmlWithoutDocument);
+    saveFile (m_xmlAnonymized);
   }
 }
 

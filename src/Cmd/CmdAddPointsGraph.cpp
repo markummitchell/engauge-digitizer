@@ -66,14 +66,14 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
 
       if (attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) &&
           attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) &&
-          attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X) &&
-          attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y)) {
+          attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) &&
+          attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y)) {
 
         m_identifiersAdded << attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
         m_ordinals << attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
 
-        QPoint point (attributes.value(DOCUMENT_SERIALIZE_GRAPH_X).toInt(),
-                      attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y).toInt());
+        QPoint point (attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toInt(),
+                      attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toInt());
         m_points << point;
       }
     }

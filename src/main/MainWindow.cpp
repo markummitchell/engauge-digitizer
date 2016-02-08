@@ -1746,18 +1746,11 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
 {
   if (m_cmdMediator != 0) {
 
-    QString reportWithoutDocument = saveErrorReportFileAndExitXml (context,
-                                                                   file,
-                                                                   line,
-                                                                   comment,
-                                                                   false);
-    QString reportWithDocument = saveErrorReportFileAndExitXml (context,
-                                                                file,
-                                                                line,
-                                                                comment,
-                                                                true);
-    DlgErrorReport dlg (reportWithoutDocument,
-                        reportWithDocument);
+    QString report = saveErrorReportFileAndExitXml (context,
+                                                    file,
+                                                    line,
+                                                    comment);
+    DlgErrorReport dlg (report);
 
     // Ask user if report should be uploaded, and if the document is included when it is uploaded
     if (dlg.exec() == QDialog::Accepted) {
@@ -1771,8 +1764,7 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
 QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
                                                    const char *file,
                                                    int line,
-                                                   const char *comment,
-                                                   bool includeDocument) const
+                                                   const char *comment) const
 {
   const bool DEEP_COPY = true;
 
@@ -1789,15 +1781,13 @@ QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
   writer.writeEndElement();
 
   // Document
-  if (includeDocument) {
-    // Insert snapshot xml into writer stream, by reading from reader stream. Highest level of snapshot is DOCUMENT_SERIALIZE_APPLICATION
-    QXmlStreamReader reader (m_startingDocumentSnapshot);
-    while (!reader.atEnd ()) {
-      reader.readNext ();
-      if (reader.tokenType() != QXmlStreamReader::StartDocument &&
-          reader.tokenType() != QXmlStreamReader::EndDocument) {
-        writer.writeCurrentToken (reader);
-      }
+  // Insert snapshot xml into writer stream, by reading from reader stream. Highest level of snapshot is DOCUMENT_SERIALIZE_APPLICATION
+  QXmlStreamReader reader (m_startingDocumentSnapshot);
+  while (!reader.atEnd ()) {
+    reader.readNext ();
+    if (reader.tokenType() != QXmlStreamReader::StartDocument &&
+        reader.tokenType() != QXmlStreamReader::EndDocument) {
+      writer.writeCurrentToken (reader);
     }
   }
 
@@ -1805,12 +1795,6 @@ QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
   writer.writeStartElement(DOCUMENT_SERIALIZE_OPERATING_SYSTEM);
   writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_ENDIAN, EndianToString (QSysInfo::ByteOrder));
   writer.writeAttribute(DOCUMENT_SERIALIZE_OPERATING_SYSTEM_WORD_SIZE, QString::number (QSysInfo::WordSize));
-  writer.writeEndElement();
-
-  // Image
-  writer.writeStartElement(DOCUMENT_SERIALIZE_IMAGE);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_WIDTH, QString::number (m_cmdMediator->pixmap().width ()));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_IMAGE_HEIGHT, QString::number (m_cmdMediator->pixmap().height ()));
   writer.writeEndElement();
 
   // Placeholder for original file, before the commands in the command stack were applied
