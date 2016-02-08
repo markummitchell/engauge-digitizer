@@ -290,11 +290,20 @@ void CallbackAxisPointsAbstract::loadTransforms4 ()
   double sx = numeratorx / denominator;
   double sy = numeratory / denominator;
 
-  // Intersection point. For the graph coordinates, the initial implementation assumes cartesian and linear coordinates
+  // Intersection point. For the graph coordinates, the initial implementation assumes cartesian coordinates
   double xIntScreen = (1.0 - sx) * x1Screen + sx * x2Screen;
   double yIntScreen = (1.0 - sy) * y3Screen + sy * y4Screen;
-  double xIntGraph = (1.0 - sx) * x1Graph + sx * x2Graph;
-  double yIntGraph = (1.0 - sy) * y3Graph + sy * y4Graph;
+  double xIntGraph, yIntGraph;
+  if (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
+    xIntGraph = (1.0 - sx) * x1Graph + sx * x2Graph;
+  } else {
+    xIntGraph = qExp ((1.0 - sx) * qLn (x1Graph) + sx * qLn (x2Graph));
+  }
+  if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
+    yIntGraph = (1.0 - sy) * y3Graph + sy * y4Graph;
+  } else {
+    yIntGraph = qExp ((1.0 - sy) * qLn (y3Graph) + sy * qLn (y4Graph));
+  }
 
   // Distances of 4 axis points from interception
   double distance1 = qSqrt ((x1Screen - xIntScreen) * (x1Screen - xIntScreen) +

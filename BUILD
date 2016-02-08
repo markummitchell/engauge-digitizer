@@ -59,6 +59,11 @@ These steps build and run, in Microsoft Windows, the standard engauge executable
    > Build / BuildAll
    > Run 
 
+6) Build the help file
+
+   > cd help
+   > build
+
 Linux - Steps to build and run engauge executable:
 --------------------------------------------------
 These steps build and run, in Linux, the standard engauge executable for digitizing data.

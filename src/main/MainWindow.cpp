@@ -410,10 +410,10 @@ void MainWindow::createActionsFile ()
   connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
 
   m_actionImportAdvanced = new QAction(tr ("Import (Advanced)..."), this);
-  m_actionImportAdvanced->setStatusTip (tr ("Creates a new document by importing an image with support for multiple coordinate systems."));
+  m_actionImportAdvanced->setStatusTip (tr ("Creates a new document by importing an image with support for advanced feaures."));
   m_actionImportAdvanced->setWhatsThis (tr ("Import (Advanced)\n\n"
-                                            "Creates a new document by importing an image with support for multiple coordinate systems. The "
-                                            "number of coordinate systems is permanently set during import. "));
+                                            "Creates a new document by importing an image with support for advanced feaures. In "
+                                            "advanced mode, there can be multiple coordinate systems and/or floating axes."));
   connect (m_actionImportAdvanced, SIGNAL (triggered ()), this, SLOT (slotFileImportAdvanced ()));
 
   m_actionOpen = new QAction(tr ("&Open..."), this);

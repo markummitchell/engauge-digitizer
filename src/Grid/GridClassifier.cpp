@@ -469,23 +469,29 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                                     correlations);
     if (isFirst || (corr > corrMax)) {
 
-      binStartMax = binStart + BIN_START_UNSHIFTED + 1; // Compensate for the shift performed inside loadPicketFence
-      binStepMax = binStep;
-      corrMax = corr;
-      copyVectorToVector (bins, signalA);
-      copyVectorToVector (picketFence, signalB);
-      copyVectorToVector (correlations, correlationsMax);
+      int binStartMaxNext = binStart + BIN_START_UNSHIFTED + 1; // Compensate for the shift performed inside loadPicketFence
 
-      // Output a gnuplot file. We should see the correlation values consistently increasing
-      if (isGnuplot) {
+      // Make sure binStartMax never goes out of bounds
+      if (binStartMaxNext < m_numHistogramBins) {
 
-        dumpGnuplotCoordinate(coordinateLabel,
-                              corr,
-                              bins,
-                              valueMin,
-                              valueMax,
-                              binStart,
-                              binStep);
+        binStartMax = binStartMaxNext;
+        binStepMax = binStep;
+        corrMax = corr;
+        copyVectorToVector (bins, signalA);
+        copyVectorToVector (picketFence, signalB);
+        copyVectorToVector (correlations, correlationsMax);
+
+        // Output a gnuplot file. We should see the correlation values consistently increasing
+        if (isGnuplot) {
+
+           dumpGnuplotCoordinate(coordinateLabel,
+                                corr,
+                                bins,
+                                valueMin,
+                                valueMax,
+                                binStart,
+                                binStep);
+        }
       }
     }
 

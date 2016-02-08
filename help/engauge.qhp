@@ -24,7 +24,7 @@
                 <section title="How do I get better accuracy in the numbers from Engauge?" ref="betteraccuracy.html"></section>
                 <section title="How can I add Engauge Digitizer to the Windows Explorer context menu?" ref="contextmenuwindows.html"></section>
                 <section title="How can I work with multiple coordinate systems in the same graph?" ref="answermultiplecoordsystems.html"></section>
-                <section title="How can I work with floating axes, which have one unknown coordinae?" ref="answerfloatingaxes.html"></section>
+                <section title="How can I work with floating axes, which have one unknown coordinate?" ref="answerfloatingaxes.html"></section>
                 <section title="What are the command line options?" ref="commandlineoptions.html"></section>
                 <section title="What other help options are available?" ref="answerother.html"></section>
             </section>
