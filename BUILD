@@ -135,12 +135,17 @@ These steps build and test engauge, in Linux.
 
 1) Verify the standard version of engauge executable can be built and run
 
-2) Build and test. Every line PASS/FAIL line should say PASS. If no PASS/FAIL lines
-   appear then the build probably failed, in which case the build_and_run_all_tests.log
-   file can be examined to identify the build issues
+2) Run the command-line tests. Every line PASS/FAIL line should say PASS. If 
+   no PASS/FAIL lines appear then the build probably failed, in which case the 
+   build_and_run_all_cli_tests.log file can be examined to identify the build issues
 
      > cd src
-     > ./build_and_run_all_tests
+     > ./build_and_run_all_cli_tests
+
+3) Run the graphical user interface tests.
+
+     > cd src (if not already in that directory)
+     > ./build_and_run_all_gui_tests
 
 Steps to generate doxygen documentation
 ---------------------------------------
