@@ -4,6 +4,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <qdebug.h>
 #include "QtToString.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -53,7 +54,7 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
     }
 
     if ((reader.tokenType() == QXmlStreamReader::EndElement) &
-        (reader.name() == DOCUMENT_SERIALIZE_POINTS)) {
+        (reader.name() == DOCUMENT_SERIALIZE_CMD)) {
       break;
     }
 

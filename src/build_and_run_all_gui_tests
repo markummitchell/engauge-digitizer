@@ -1,10 +1,21 @@
 #!/bin/bash
 
-FILES=../test/*.xml
+XML_FILES=../test/*.xml
 
-for f in $FILES
+for xml in $XML_FILES
 do
-    echo "Processing $f"
-    ../bin/engauge -regression $f
+    # Run regression test
+    ../bin/engauge -regression $xml
+
+    # Compare actual and desired output files
+    ROOT=${xml/.xml/}
+    CSV="$ROOT.csv"
+    CSV_ACTUAL="$ROOT.csv_actual"
+    if cmp $CSV $CSV_ACTUAL;
+    then
+	echo "PASS: $ROOT"
+    else
+	echo "FAIL: $ROOT"
+    fi
 done
 

@@ -4,16 +4,20 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QStringList>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
 DocumentModelColorFilter::DocumentModelColorFilter()
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::DocumentModelColorFilter";
 }
 
 DocumentModelColorFilter::DocumentModelColorFilter(const CoordSystem &coordSystem)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::DocumentModelColorFilter";
+
   // Axis curve
   const Curve &curveAxes = coordSystem.curveAxes();
   m_colorFilterSettingsList [AXIS_CURVE_NAME] = curveAxes.colorFilterSettings ();
@@ -72,42 +76,77 @@ const ColorFilterSettingsList &DocumentModelColorFilter::colorFilterSettingsList
 
 int DocumentModelColorFilter::foregroundHigh (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::foregroundHigh"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].foregroundHigh();
 }
 
 int DocumentModelColorFilter::foregroundLow (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::foregroundLow"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].foregroundLow();
 }
 
 double DocumentModelColorFilter::high (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::high"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].high();
 }
 
 int DocumentModelColorFilter::hueHigh (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::hueHigh"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].hueHigh();
 }
 
 int DocumentModelColorFilter::hueLow (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::hueLow"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].hueLow();
 }
 
 int DocumentModelColorFilter::intensityHigh (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::intensityHigh"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].intensityHigh();
 }
 
 int DocumentModelColorFilter::intensityLow (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::intensityLow"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].intensityLow();
 }
@@ -132,7 +171,7 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
     }
 
     if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
-        (reader.name() == DOCUMENT_SERIALIZE_FILTER)) {
+        (reader.name() == DOCUMENT_SERIALIZE_COLOR_FILTER)) {
 
       inFilter = true;
     }
@@ -166,24 +205,39 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
 
 double DocumentModelColorFilter::low (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::low"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].low();
 }
 
 int DocumentModelColorFilter::saturationHigh (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::saturationHigh"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].saturationHigh();
 }
 
 int DocumentModelColorFilter::saturationLow (const QString &curveName) const
 {
+  QStringList curveNames (m_colorFilterSettingsList.keys());
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::saturationLow"
+                            << " curve=" << curveName.toLatin1().data()
+                            << " curves=" << curveNames.join(",").toLatin1().data();
+
   ENGAUGE_ASSERT (m_colorFilterSettingsList.contains (curveName));
   return m_colorFilterSettingsList [curveName].saturationLow();
 }
 
 void DocumentModelColorFilter::saveXml(QXmlStreamWriter &writer) const
-{
+{  
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelColorFilter::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_FILTER);
