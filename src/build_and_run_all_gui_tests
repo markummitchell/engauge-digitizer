@@ -23,7 +23,7 @@ do
       actual=${EXPECTED/expected/actual}
       if [[ COUNT -gt 1 ]]; 
       then
-	  COUNTERSTRING="[$COUNTER]";
+	  COUNTERSTRING="[$COUNTER/$COUNT]";
       else
 	  COUNTERSTRING="";
       fi
@@ -57,7 +57,7 @@ do
       actual=${EXPECTED/expected/actual}
       if [[ COUNT -gt 1 ]]; 
       then
-	  COUNTERSTRING="[$COUNTER]";
+	  COUNTERSTRING="[$COUNTER/$COUNT]";
       else
 	  COUNTERSTRING="";
       fi
