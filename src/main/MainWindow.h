@@ -73,9 +73,10 @@ class MainWindow : public QMainWindow
 
 public:
   /// Single constructor.
-  MainWindow(const QString &errorReportFile, // Empty if unused
+  MainWindow(const QString &errorReportFile, // Empty if unused, otherwise the error report file is imported
+             const QString &regressionOpenFile, // Empty if unused, otherwise the regression file is loaded
              bool isGnuplot,
-             bool isRegression,
+             bool isRegressionImport, // Requires errorReportFile
              QStringList loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
@@ -347,7 +348,7 @@ private:
   bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
                        ImportType ImportType);
-  void startRegressionTest(const QString &errorReportFile);
+  void startRegressionTest(const QString &regressionInputFile);
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();

@@ -113,8 +113,9 @@ const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
+                       const QString &regressionOpenFile,
                        bool isGnuplot,
-                       bool isRegression,
+                       bool isRegressionImport,
                        QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
@@ -166,9 +167,12 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(initialPath,
                         errorReportFile);
-    if (isRegression) {
+    if (isRegressionImport) {
       startRegressionTest(errorReportFile);
     }
+  } else if (!regressionOpenFile.isEmpty()) {
+    loadDocumentFile (regressionOpenFile);
+    startRegressionTest(regressionOpenFile);
   } else {
 
     // Save file names for later, after gui becomes available. The file names are dropped if error report file is specified
@@ -2954,9 +2958,17 @@ void MainWindow::slotTimeoutRegression()
 
     ExportToFile exportStrategy;
 
-    // Output the regression test results
-    fileExport (m_regressionFile,
-                exportStrategy);
+    // Output the regression test results. One file is output for every coordinate system
+    for (CoordSystemIndex index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
+
+      updateCoordSystem (index); // Switch to the specified coordinate system
+
+      QString regressionFile = QString ("%1_%2")
+                               .arg (m_regressionFile)
+                               .arg (index + 1); // Append the coordinate system index
+      fileExport (regressionFile,
+                  exportStrategy);
+    }
 
     // Regression test has finished so exit. We unset the dirty flag so there is no prompt
     m_cmdMediator->setClean();
@@ -3384,13 +3396,14 @@ void MainWindow::slotViewZoomOut ()
   }
 }
 
-void MainWindow::startRegressionTest(const QString &errorReportFile)
+void MainWindow::startRegressionTest(const QString &regressionInputFile)
 {
   const int REGRESSION_INTERVAL = 400; // Milliseconds
 
   // Save output/export file name
-  m_regressionFile = errorReportFile;
-  m_regressionFile = m_regressionFile.replace (".xml", ".csv_actual");
+  m_regressionFile = regressionInputFile;
+  m_regressionFile = m_regressionFile.replace (".xml", ".csv_actual"); // Applies when extension is xml
+  m_regressionFile = m_regressionFile.replace (".dig", ".csv_actual"); // Applies when extension is dig
 
   m_timerRegression = new QTimer();
   m_timerRegression->setSingleShot(false);

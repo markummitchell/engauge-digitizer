@@ -1,21 +1,73 @@
 #!/bin/bash
 
-XML_FILES=../test/*.xml
+IMPORT_FILES=../test/*.xml
+OPEN_FILES=../test/*.dig
 
-for xml in $XML_FILES
+echo "Tests of digitizing of imported files"
+for xml in $IMPORT_FILES
 do
     # Run regression test
-    ../bin/engauge -regression $xml
+    ../bin/engauge -regressionimport $xml
 
-    # Compare actual and desired output files
-    ROOT=${xml/.xml/}
-    CSV="$ROOT.csv"
-    CSV_ACTUAL="$ROOT.csv_actual"
-    if cmp $CSV $CSV_ACTUAL;
-    then
-	echo "PASS: $ROOT"
-    else
-	echo "FAIL: $ROOT"
-    fi
+    # Compare actual and desired output files. There is one pair for each coordinate system
+    root=${xml/.xml/}
+    EXPECTED_FILES=../test/$root.csv_expected_*
+    COUNT=0
+    COUNTER=1
+    for EXPECTED in $EXPECTED_FILES
+    do
+      let COUNT=COUNT+1;
+    done
+    for EXPECTED in $EXPECTED_FILES
+    do
+      actual=${EXPECTED/expected/actual}
+      if [[ COUNT -gt 1 ]]; 
+      then
+	  COUNTERSTRING="[$COUNTER]";
+      else
+	  COUNTERSTRING="";
+      fi
+      if cmp $EXPECTED $actual
+      then
+        echo "PASS   : $root $COUNTERSTRING"
+      else
+        echo "FAIL   : $root $COUNTERSTRING"
+      fi
+      let COUNTER=COUNTER+1
+    done
+done
+
+echo "Tests of file loading for supported versions"
+for dig in $OPEN_FILES
+do
+    # Run regression test
+    ../bin/engauge -regressionimport $dig
+
+    # Compare actual and desired output files. There is one pair for each coordinate system
+    root=${dig/.dig/}
+    EXPECTED_FILES=../test/$root.csv_expected_*
+    COUNT=0
+    COUNTER=1
+    for EXPECTED in $EXPECTED_FILES
+    do
+      let COUNT=COUNT+1;
+    done
+    for EXPECTED in $EXPECTED_FILES
+    do
+      actual=${EXPECTED/expected/actual}
+      if [[ COUNT -gt 1 ]]; 
+      then
+	  COUNTERSTRING="[$COUNTER]";
+      else
+	  COUNTERSTRING="";
+      fi
+      if cmp $EXPECTED $actual
+      then
+        echo "PASS   : $root $COUNTERSTRING"
+      else
+        echo "FAIL   : $root $COUNTERSTRING"
+      fi
+      let COUNTER=COUNTER+1
+    done
 done
 
