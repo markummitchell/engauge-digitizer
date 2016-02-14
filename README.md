@@ -21,26 +21,24 @@ Developers and users are encouraged to offer their suggestions and comments!
 
 Features
 --------
-New features in Engauge6:
+Features in Engauge6:
 
-1. Undo/redo of all operations means recovering from mistakes and experimenting with options is painless
-2. MSI installer for Windows operating system
-3. Wizard provides an interactive tutorial to explain the basic steps
-4. Wizard creates a checklist guide to interactively leads user through steps from file import to file export
-5. Cubic spline interpolation between points gives more accurate curves with fewer points
-6. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
-7. Graph coordinates can be specified as date and time value, or as degrees, minutes and seconds
-8. Multiple coordinate systems in the same image can be digitized in advanced mode
-9. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
-10. All settings dialogs are resizable so they can be enlarged as necessary to display more information
-11. Import by drag-and-drop
-12. Replacement of Qt3 (which is at its end of life) by Qt5
-13. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
-    application window is resized
-14. Color picking straight from the original image
-15. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
-    user support
-16. Test suite for regression testing minimizes code breakage as new features are added
+1. Automated line and point extraction rapidly digitizes data
+2. Image processing for separating important details from background information
+3. Undo/redo of all operations means recovering from mistakes and experimenting with options is painless
+4. MSI installer for Windows operating system
+5. Wizard provides an interactive tutorial to explain the basic steps
+6. Wizard creates a checklist guide to interactively leads user through steps from file import to file export
+7. Cubic spline interpolation between points gives more accurate curves with fewer points
+8. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
+9. Graph coordinates can be specified as date and time values, or as degrees, minutes and seconds
+10. Import by drag-and-drop
+11. Test suite for regression testing minimizes code breakage as new features are added
+
+Features coming in upcoming version 7:
+
+1. Multiple coordinate systems in the same image can be digitized in advanced mode
+2. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
 
 Installation
 ------------
