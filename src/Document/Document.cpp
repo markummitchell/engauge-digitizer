@@ -31,6 +31,7 @@
 const int FOUR_BYTES = 4;
 const int NOMINAL_COORD_SYSTEM_COUNT = 1;
 const int VERSION_6 = 6;
+const int VERSION_7 = 7;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -91,8 +92,15 @@ Document::Document (const QString &fileName) :
             loadVersion6 (file);
             break;
 
-          default:
+          case VERSION_7:
             loadVersion7 (file);
+            break;
+
+          default:
+            m_successfulRead = false;
+            m_reasonForUnsuccessfulRead = QString ("Engauge %1 cannot read newer files from version %2 of Engauge")
+                                          .arg (VERSION_NUMBER)
+                                          .arg (version);
             break;
         }
 

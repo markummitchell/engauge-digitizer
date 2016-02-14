@@ -3,7 +3,8 @@ engauge6
 
 The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
 
-Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent releases are available here for Linux and Windows. 
+Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent 
+[releases](https://github.com/markummitchell/engauge6/releases) are available for Linux and Windows. 
 
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
@@ -29,15 +30,17 @@ New features in Engauge6:
 5. Cubic spline interpolation between points gives more accurate curves with fewer points
 6. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
 7. Graph coordinates can be specified as date and time value, or as degrees, minutes and seconds
-8. All settings dialogs are resizable so they can be enlarged as necessary to display more information
-9. Import by drag-and-drop
-10. Replacement of Qt3 (which is at its end of life) by Qt5
-11. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
+8. Multiple coordinate systems in the same image can be digitized in advanced mode
+9. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
+10. All settings dialogs are resizable so they can be enlarged as necessary to display more information
+11. Import by drag-and-drop
+12. Replacement of Qt3 (which is at its end of life) by Qt5
+13. Much better zooming, with a fill mode that automatically zooms in on image features, and rezooms when the
     application window is resized
-12. Color picking straight from the original image
-13. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
+14. Color picking straight from the original image
+15. Uploadable error report generated when a programming error is encountered, for identifying problems and improving
     user support
-14. Test suite for regression testing minimizes code breakage as new features are added
+16. Test suite for regression testing minimizes code breakage as new features are added
 
 Installation
 ------------
