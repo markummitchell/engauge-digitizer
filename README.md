@@ -8,8 +8,8 @@ Engauge Digitizer is distributed with most Linux distributions. Downloads of the
 
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
-Versions
---------
+Released Versions
+-----------------
 Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
 access privileges.
 
@@ -21,7 +21,7 @@ Developers and users are encouraged to offer their suggestions and comments!
 
 Features
 --------
-Features in Engauge6:
+Features in released versions of Engauge6:
 
 1. Automated line and point extraction rapidly digitizes data
 2. Image processing for separating important details from background information
