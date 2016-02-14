@@ -77,6 +77,7 @@ private:
                                CoordUnitsPolarTheta coordUnits);
   void resetSceneRectangle();
   void updateControls();
+  void updateCoordUnits();
   void updatePreview();
 
   QGroupBox *m_boxCoordsType;

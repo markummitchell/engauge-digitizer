@@ -584,19 +584,7 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
     m_btnPolar->setChecked (true);
   }
 
-  // X and Y units
-  if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
-    loadComboBoxUnitsNonPolar (*m_cmbXThetaUnits,
-                               m_modelCoordsAfter->coordUnitsX());
-    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
-                               m_modelCoordsAfter->coordUnitsY());
-  } else {
-    loadComboBoxUnitsPolar (*m_cmbXThetaUnits,
-                            m_modelCoordsAfter->coordUnitsTheta());
-    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
-                               m_modelCoordsAfter->coordUnitsRadius());
-  }
-
+  updateCoordUnits(); // Call after checking m_btnCartesian or m_btnPolar
   loadComboBoxDate();
   loadComboBoxTime ();
 
@@ -736,6 +724,7 @@ void DlgSettingsCoords::slotCartesianPolar (bool)
   } else {
     m_modelCoordsAfter->setCoordsType(COORDS_TYPE_POLAR);
   }
+  updateCoordUnits();
   updateControls();
   updatePreview();
 }
@@ -930,6 +919,22 @@ void DlgSettingsCoords::updateControls ()
                               << " originRadius=" << posOriginRadius
                               << " btnPolarChecked=" << (m_btnPolar->isChecked() ? "true" : "false")
                               << " enableDateTime=" << (enableDateTime ? "true" : "false");
+}
+
+void DlgSettingsCoords::updateCoordUnits()
+{
+  // X and Y units
+  if (m_btnCartesian->isChecked()) {
+    loadComboBoxUnitsNonPolar (*m_cmbXThetaUnits,
+                               m_modelCoordsAfter->coordUnitsX());
+    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
+                               m_modelCoordsAfter->coordUnitsY());
+  } else {
+    loadComboBoxUnitsPolar (*m_cmbXThetaUnits,
+                            m_modelCoordsAfter->coordUnitsTheta());
+    loadComboBoxUnitsNonPolar (*m_cmbYRadiusUnits,
+                               m_modelCoordsAfter->coordUnitsRadius());
+  }
 }
 
 void DlgSettingsCoords::updatePreview()

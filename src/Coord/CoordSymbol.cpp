@@ -8,7 +8,7 @@ const int COORD_SYMBOL_SECONDS_QUOTATIONS = 0x22; // Ascii
 
 const QChar THETA (QChar(0x98, 0x03));
 
-const QString POLAR_UNITS_DEGREES = QString("Degrees (DDD.DDDDD") + QChar(0260) + QString (")");
+const QString POLAR_UNITS_DEGREES = QString("Degrees (DDD.DDDDD)");
 const QString POLAR_UNITS_DEGREES_MINUTES = QString("Degrees Minutes (DDD") + QChar(COORD_SYMBOL_DEGREES) +
                                             QString(" MM.MMM") + QChar(COORD_SYMBOL_MINUTES_PRIME) +
                                             QString(")");

@@ -6,7 +6,7 @@
 extern const QChar THETA;
 
 enum CoordUnitsPolarTheta {
-  COORD_UNITS_POLAR_THETA_DEGREES,
+  COORD_UNITS_POLAR_THETA_DEGREES, // Degrees symbol is optional on input, and not included on output for easier postprocessing
   COORD_UNITS_POLAR_THETA_DEGREES_MINUTES,
   COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS,
   COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW,
