@@ -10,6 +10,7 @@
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
+#include "CmdDigitizeStateNext.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
@@ -1199,6 +1200,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 
     QKeyEvent *eventKeyPress = (QKeyEvent *) event;
 
+    // Special shortcuts. All of these are probably only useful for debugging and/or regression testing
     if ((eventKeyPress->key() == Qt::Key_E) &&
         ((eventKeyPress->modifiers() & Qt::ShiftModifier) != 0) &&
         ((eventKeyPress->modifiers() & Qt::ControlModifier) != 0)) {
@@ -1207,6 +1209,16 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                                   __FILE__,
                                   __LINE__,
                                   "userTriggered");
+
+    } else if ((eventKeyPress->key() == Qt::Key_N) &&
+               ((eventKeyPress->modifiers() & Qt::ShiftModifier) != 0) &&
+               ((eventKeyPress->modifiers() & Qt::ControlModifier) != 0)) {
+
+      // Save a command (which appears in the error report file) that will transition to the next state.
+      CmdDigitizeStateNext *cmd = new CmdDigitizeStateNext (*this,
+                                                            m_cmdMediator->document());
+
+      m_cmdMediator->push (cmd);
     }
   }
 
@@ -3615,6 +3627,44 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
     default:
       LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
       break;
+  }
+}
+
+void MainWindow::updateDigitizeStateNext()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStateNext";
+
+  if (m_actionDigitizeSelect->isChecked()) {
+    m_actionDigitizeAxis->setChecked(true);
+  } else if (m_actionDigitizeAxis->isChecked()) {
+    m_actionDigitizeCurve->setChecked(true);
+  } else if (m_actionDigitizeCurve->isChecked()) {
+    m_actionDigitizePointMatch->setChecked(true);
+  } else if (m_actionDigitizePointMatch->isChecked()) {
+    m_actionDigitizeColorPicker->setChecked(true);
+  } else if (m_actionDigitizeColorPicker->isChecked()) {
+    m_actionDigitizeSegment->setChecked(true);
+  } else if (m_actionDigitizeSegment->isChecked()) {
+    m_actionDigitizeSelect->setChecked(true);
+  }
+}
+
+void MainWindow::updateDigitizeStatePrevious()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStatePrevious";
+
+  if (m_actionDigitizeSelect->isChecked()) {
+    m_actionDigitizeSegment->setChecked(true);
+  } else if (m_actionDigitizeAxis->isChecked()) {
+    m_actionDigitizeSelect->setChecked(true);
+  } else if (m_actionDigitizeCurve->isChecked()) {
+    m_actionDigitizeAxis->setChecked(true);
+  } else if (m_actionDigitizePointMatch->isChecked()) {
+    m_actionDigitizeCurve->setChecked(true);
+  } else if (m_actionDigitizeColorPicker->isChecked()) {
+    m_actionDigitizePointMatch->setChecked(true);
+  } else if (m_actionDigitizeSegment->isChecked()) {
+    m_actionDigitizeColorPicker->setChecked(true);
   }
 }
 

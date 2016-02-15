@@ -81,7 +81,7 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read points");
+    reader.raiseError ("Cannot read graph points");
   }
 }
 

@@ -60,7 +60,7 @@ CmdSettingsMainWindow::CmdSettingsMainWindow(MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read coordinates data");
+    reader.raiseError ("Cannot read main window settings");
   }
 }
 

@@ -61,7 +61,7 @@ CmdSettingsExportFormat::CmdSettingsExportFormat (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read coordinates data");
+    reader.raiseError ("Cannot read export format settings");
   }
 }
 

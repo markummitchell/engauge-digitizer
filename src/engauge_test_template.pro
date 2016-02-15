@@ -56,6 +56,7 @@ HEADERS  += \
     Cmd/CmdCopy.h \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
+    Cmd/CmdDigitizeStateNext.h \
     Cmd/CmdEditPointAxis.h \
     Cmd/CmdFactory.h \
     Cmd/CmdMediator.h \
@@ -313,6 +314,7 @@ SOURCES += \
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
+    Cmd/CmdDigitizeStateNext.cpp \
     Cmd/CmdEditPointAxis.cpp \
     Cmd/CmdFactory.cpp \
     Cmd/CmdMediator.cpp \

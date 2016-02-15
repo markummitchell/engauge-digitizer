@@ -60,7 +60,7 @@ CmdSettingsPointMatch::CmdSettingsPointMatch (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read coordinates data");
+    reader.raiseError ("Cannot read point match settings");
   }
 }
 

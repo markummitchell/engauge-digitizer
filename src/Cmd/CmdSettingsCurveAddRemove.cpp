@@ -89,7 +89,7 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read coordinates data");
+    reader.raiseError ("Cannot read curve add/remove settings");
   }
 }
 
