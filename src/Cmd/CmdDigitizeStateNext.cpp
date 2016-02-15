@@ -40,7 +40,7 @@ CmdDigitizeStateNext::CmdDigitizeStateNext (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read debug command");
+    reader.raiseError ("Cannot read digitize state next command");
   }
 }
 

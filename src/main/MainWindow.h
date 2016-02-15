@@ -133,6 +133,9 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
+  /// Apply a mouse click at the specified point
+  void updateClickOnPoint (const QPointF &point);
+
   /// Select a different CoordSystem
   void updateCoordSystem(CoordSystemIndex coordSystemIndex);
 

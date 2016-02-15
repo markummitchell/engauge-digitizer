@@ -53,6 +53,7 @@ HEADERS  += \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
     Cmd/CmdAddPointsGraph.h \
+    Cmd/CmdClickOnPoint.h \
     Cmd/CmdCopy.h \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
@@ -311,6 +312,7 @@ SOURCES += \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
     Cmd/CmdAddPointsGraph.cpp \
+    Cmd/CmdClickOnPoint.cpp \
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
