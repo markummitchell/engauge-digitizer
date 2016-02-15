@@ -9,7 +9,8 @@ QTEST_MAIN (TestGraphCoords)
 TestGraphCoords::TestGraphCoords(QObject *parent) :
   QObject(parent)
 {
-  m_callback = new CallbackUpdateTransform (m_modelCoords);
+  m_callback = new CallbackUpdateTransform (m_modelCoords,
+                                            DOCUMENT_AXES_POINTS_REQUIRED_3);
 }
 
 void TestGraphCoords::cleanupTestCase ()
@@ -21,7 +22,7 @@ void TestGraphCoords::initTestCase ()
   const QString NO_ERROR_REPORT_LOG_FILE;
   const QString NO_REGRESSION_OPEN_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
-  const bool NO_REGRESSION_IMPORT = false,
+  const bool NO_REGRESSION_IMPORT = false;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -39,80 +40,43 @@ void TestGraphCoords::initTestCase ()
 
 void TestGraphCoords::testAnyColumnsRepeatNo ()
 {
-  double m [3] [3];
+  CoordPairVector vector;
 
-  // No points repeat
-  m [0] [0] = 100;
-  m [1] [0] = 100;
-  m [2] [0] = 1;
+  vector.push_back (QPointF (100, 100));
+  vector.push_back (QPointF (300, 100));
+  vector.push_back (QPointF (200, 200));
 
-  m [0] [1] = 300;
-  m [1] [1] = 100;
-  m [2] [1] = 1;
-
-  m [0] [2] = 200;
-  m [1] [2] = 200;
-  m [2] [2] = 1;
-
-  QVERIFY (!m_callback->anyColumnsRepeat (m, 3));
+  QVERIFY (!m_callback->anyPointsRepeatPair (vector));
 }
 
 void TestGraphCoords::testAnyColumnsRepeatYes ()
 {
-  double m [3] [3];
+  CoordPairVector vector;
 
   // First two points repeat
-  m [0] [0] = 100;
-  m [1] [0] = 100;
-  m [2] [0] = 1;
+  vector.push_back (QPointF (100, 100));
+  vector.push_back (QPointF (100, 100));
+  vector.push_back (QPointF (200, 200));
 
-  m [0] [1] = 100;
-  m [1] [1] = 100;
-  m [2] [1] = 1;
-
-  m [0] [2] = 200;
-  m [1] [2] = 200;
-  m [2] [2] = 1;
-
-  QVERIFY (m_callback->anyColumnsRepeat (m, 3));
+  QVERIFY (m_callback->anyPointsRepeatPair (vector));
 }
 
 void TestGraphCoords::testThreeCollinearPointsNo ()
 {
-  double m [3] [3];
-
   // Points are not collinear
-  m [0] [0] = 100;
-  m [1] [0] = 100;
-  m [2] [0] = 1;
+  QTransform m (100, 300, 200,
+                100, 150, 200,
+                1  , 1  , 1  );
 
-  m [0] [1] = 300;
-  m [1] [1] = 150;
-  m [2] [1] = 1;
-
-  m [0] [2] = 200;
-  m [1] [2] = 200;
-  m [2] [2] = 1;
-
-  QVERIFY (!m_callback->threePointsAreCollinear (m, 3));
+  QVERIFY (!m_callback->threePointsAreCollinear (m));
 }
 
 void TestGraphCoords::testThreeCollinearPointsYes ()
 {
-  double m [3] [3];
-
   // Points are collinear
-  m [0] [0] = 100;
-  m [1] [0] = 100;
-  m [2] [0] = 1;
+  QTransform m (100, 150, 200,
+                100, 150, 200,
+                1  , 1  , 1  );
 
-  m [0] [1] = 150;
-  m [1] [1] = 150;
-  m [2] [1] = 1;
-
-  m [0] [2] = 200;
-  m [1] [2] = 200;
-  m [2] [2] = 1;
-
-  QVERIFY (m_callback->threePointsAreCollinear (m, 3));
+  QVERIFY (m_callback->threePointsAreCollinear (m));
 }

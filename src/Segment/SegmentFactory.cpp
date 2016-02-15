@@ -180,7 +180,8 @@ void SegmentFactory::loadSegment (SegmentVector &columnSegment,
 
 void SegmentFactory::makeSegments (const QImage &imageFiltered,
                                    const DocumentModelSegments &modelSegments,
-                                   QList<Segment*> &segments)
+                                   QList<Segment*> &segments,
+                                   bool useDlg)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "SegmentFactory::makeSegments";
 
@@ -188,9 +189,6 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   int madeLines = 0;
   int shortLines = 0; // Lines rejected since their segments are too short
   int foldedLines = 0; // Lines rejected since they could be into other lines
-
-  // debugging with modal progress dialog box is problematic so make switchable
-  const bool useDlg = true;
 
   // For each new column of pixels, loop through the runs. a run is defined as
   // one or more colored pixels that are all touching, with one uncolored pixel or the

@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <qmath.h>
+#include <QStringList>
 #include <QtTest/QtTest>
 #include "Test/TestCorrelation.h"
 

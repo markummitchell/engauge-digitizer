@@ -69,11 +69,9 @@ HEADERS  += \
     src/Cmd/CmdAddPointAxis.h \
     src/Cmd/CmdAddPointGraph.h \
     src/Cmd/CmdAddPointsGraph.h \
-    src/Cmd/CmdClickOnPoint.h \
     src/Cmd/CmdCopy.h \
     src/Cmd/CmdCut.h \
     src/Cmd/CmdDelete.h \
-    src/Cmd/CmdDigitizeStateNext.h \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdFactory.h \
     src/Cmd/CmdMediator.h \
@@ -327,11 +325,9 @@ SOURCES += \
     src/Cmd/CmdAddPointAxis.cpp \
     src/Cmd/CmdAddPointGraph.cpp \
     src/Cmd/CmdAddPointsGraph.cpp \
-    src/Cmd/CmdClickOnPoint.cpp \
     src/Cmd/CmdCopy.cpp \
     src/Cmd/CmdCut.cpp \
     src/Cmd/CmdDelete.cpp \
-    src/Cmd/CmdDigitizeStateNext.cpp \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdFactory.cpp \
     src/Cmd/CmdMediator.cpp \

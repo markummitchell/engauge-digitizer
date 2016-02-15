@@ -133,20 +133,11 @@ public:
   /// Call MainWindow::updateControls (which is private) after the very specific case - a mouse press/release.
   void updateAfterMouseRelease();
 
-  /// Apply a mouse click at the specified point
-  void updateClickOnPoint (const QPointF &point);
-
   /// Select a different CoordSystem
   void updateCoordSystem(CoordSystemIndex coordSystemIndex);
 
   /// After software-triggered state transition, this method manually triggers the action as if user had clicked on digitize button
   void updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeState);
-
-  /// Transition from the Nth state in DigitizeState to the N+1th state. This is for
-  void updateDigitizeStateNext();
-
-  /// Transition from the Nth state in DigitizeState to the N-1th state
-  void updateDigitizeStatePrevious();
 
   /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, and such. The points
   /// in the Document may (and probably are) out of date with respect to the graphics points

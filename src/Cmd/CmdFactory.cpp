@@ -2,11 +2,9 @@
 #include "CmdAddPointAxis.h"
 #include "CmdAddPointGraph.h"
 #include "CmdAddPointsGraph.h"
-#include "CmdClickOnPoint.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
-#include "CmdDigitizeStateNext.h"
 #include "CmdEditPointAxis.h"
 #include "CmdFactory.h"
 #include "CmdMoveBy.h"
@@ -67,11 +65,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                  document,
                                  cmdDescription,
                                  reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_CLICK_ON_POINT) {
-    cmd = new CmdClickOnPoint (mainWindow,
-                               document,
-                               cmdDescription,
-                               reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_COPY) {
     cmd = new CmdCopy (mainWindow,
                        document,
@@ -87,11 +80,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                          document,
                          cmdDescription,
                          reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_DIGITIZE_STATE_NEXT) {
-    cmd = new CmdDigitizeStateNext (mainWindow,
-                                    document,
-                                    cmdDescription,
-                                    reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_EDIT_POINT_AXIS) {
     cmd = new CmdEditPointAxis (mainWindow,
                                 document,

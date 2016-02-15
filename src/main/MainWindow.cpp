@@ -7,11 +7,9 @@
 #include "img/bannerapp_256.xpm"
 #include "ChecklistGuide.h"
 #include "ChecklistGuideWizard.h"
-#include "CmdClickOnPoint.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
-#include "CmdDigitizeStateNext.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
@@ -1211,29 +1209,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
                                   __FILE__,
                                   __LINE__,
                                   "userTriggered");
-
-    } else if ((eventKeyPress->key() == Qt::Key_N) &&
-               ((eventKeyPress->modifiers() & Qt::ShiftModifier) != 0) &&
-               ((eventKeyPress->modifiers() & Qt::ControlModifier) != 0)) {
-
-      // Save a command (which appears in the error report file) that will transition to the next state.
-      CmdDigitizeStateNext *cmd = new CmdDigitizeStateNext (*this,
-                                                            m_cmdMediator->document());
-
-      m_cmdMediator->push (cmd);
-
-    } else if ((eventKeyPress->key() == Qt::Key_P) &&
-               ((eventKeyPress->modifiers() & Qt::ShiftModifier) != 0) &&
-               ((eventKeyPress->modifiers() & Qt::ControlModifier) != 0)) {
-
-      // Save a command (which appears in the error report file) that will put a point at the current cursor position.
-      QPoint cursorPos = cursor().pos();
-      QPointF localPos = m_view->mapFromGlobal (cursorPos);
-      CmdClickOnPoint *cmd = new CmdClickOnPoint (*this,
-                                                  m_cmdMediator->document(),
-                                                  localPos);
-
-      m_cmdMediator->push (cmd);
 
     }
   }
@@ -3527,33 +3502,6 @@ void MainWindow::updateAfterMouseRelease ()
   updateControls ();
 }
 
-void MainWindow::updateClickOnPoint (const QPointF &point)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterMouseRelease";
-
-  QPoint pointLocal = point.toPoint();
-
-  // Mouse press event is preferred by DigitizeStateSegment
-  QMouseEvent *event = new QMouseEvent (QEvent::MouseButtonPress,
-                                        pointLocal,
-                                        m_view->mapToGlobal (pointLocal),
-                                        Qt::LeftButton,
-                                        Qt::LeftButton,
-                                        Qt::NoModifier);
-
-  m_view->mousePressEvent (event);
-
-  // Mouse release event is preferred by DigitizeStateAxis and DigitizeStateCurve
-  event = new QMouseEvent (QEvent::MouseButtonRelease,
-                           pointLocal,
-                           m_view->mapToGlobal (pointLocal),
-                           Qt::LeftButton,
-                           Qt::LeftButton,
-                           Qt::NoModifier);
-
-  m_view->mouseReleaseEvent (event);
-}
-
 void MainWindow::updateControls ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateControls"
@@ -3670,56 +3618,6 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
     default:
       LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
       break;
-  }
-}
-
-void MainWindow::updateDigitizeStateNext()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStateNext";
-
-  if (m_actionDigitizeSelect->isChecked()) {
-    m_actionDigitizeAxis->setChecked(true);
-    slotDigitizeAxis();
-  } else if (m_actionDigitizeAxis->isChecked()) {
-    m_actionDigitizeCurve->setChecked(true);
-    slotDigitizeCurve();
-  } else if (m_actionDigitizeCurve->isChecked()) {
-    m_actionDigitizePointMatch->setChecked(true);
-    slotDigitizePointMatch();
-  } else if (m_actionDigitizePointMatch->isChecked()) {
-    m_actionDigitizeColorPicker->setChecked(true);
-    slotDigitizeColorPicker();
-  } else if (m_actionDigitizeColorPicker->isChecked()) {
-    m_actionDigitizeSegment->setChecked(true);
-    slotDigitizeSegment();
-  } else if (m_actionDigitizeSegment->isChecked()) {
-    m_actionDigitizeSelect->setChecked(true);
-    slotDigitizeSelect();
-  }
-}
-
-void MainWindow::updateDigitizeStatePrevious()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStatePrevious";
-
-  if (m_actionDigitizeSelect->isChecked()) {
-    m_actionDigitizeSegment->setChecked(true);
-    slotDigitizeSegment();
-  } else if (m_actionDigitizeAxis->isChecked()) {
-    m_actionDigitizeSelect->setChecked(true);
-    slotDigitizeSelect();
-  } else if (m_actionDigitizeCurve->isChecked()) {
-    m_actionDigitizeAxis->setChecked(true);
-    slotDigitizeAxis();
-  } else if (m_actionDigitizePointMatch->isChecked()) {
-    m_actionDigitizeCurve->setChecked(true);
-    slotDigitizeCurve();
-  } else if (m_actionDigitizeColorPicker->isChecked()) {
-    m_actionDigitizePointMatch->setChecked(true);
-    slotDigitizePointMatch();
-  } else if (m_actionDigitizeSegment->isChecked()) {
-    m_actionDigitizeColorPicker->setChecked(true);
-    slotDigitizeColorPicker();
   }
 }
 

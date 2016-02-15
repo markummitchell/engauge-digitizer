@@ -35,7 +35,8 @@ public:
   /// Main entry point for creating all Segments for the filtered image.
   void makeSegments (const QImage &imageFiltered,
                      const DocumentModelSegments &modelSegments,
-                     QList<Segment*> &segments);
+                     QList<Segment*> &segments,
+                     bool useDlg = true);
 
 private:
   SegmentFactory();
