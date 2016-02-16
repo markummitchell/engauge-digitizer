@@ -1,6 +1,7 @@
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowModel.h"
 #include <qmath.h>
 #include <QtTest/QtTest>
 #include "Test/TestTransformation.h"
@@ -66,7 +67,9 @@ void TestTransformation::initTransformation (const QPointF &s0,
                           1.0, 1.0, 1.0);
 
   Transformation t;
-  t.setModelCoords (modelCoords);
+  MainWindowModel mainWindowModel;
+  t.setModelCoords (modelCoords,
+                    mainWindowModel);
   t.updateTransformFromMatrices(matrixScreen,
                                 matrixGraph);
 

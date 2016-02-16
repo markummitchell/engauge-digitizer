@@ -69,8 +69,10 @@ bool TestValidators::stateNumber(const QString &string,
                                  QValidator::State expectedState)
 {
   int pos;
+  const QLocale locale;
 
-  DlgValidatorNumber validator (COORD_SCALE_LOG);
+  DlgValidatorNumber validator (COORD_SCALE_LOG,
+                                locale);
 
   QString stringLocal = string;
   return (validator.validate (stringLocal,
