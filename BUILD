@@ -23,7 +23,7 @@ These steps build and run, in Microsoft Windows, the standard engauge executable
    Note that the MinGW version of the Qt Open Source toolkit provides both Qt and MinGW. There is no
    need to install a standalone version of MinGW.
 
-   Qt Open Source 5.5.1 has been tested with Engauge.
+   Qt Open Source 5.2.1 and 5.5.1 have been tested with Engauge.
 
    HINT - At this point, the MSYS shell is available by clicking on the msys.bat shortcut on the Windows
           desktop. The MSYS shell is preferred over the Cygwin shell (if you have installed Cygwin earlier).
