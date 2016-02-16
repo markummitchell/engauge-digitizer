@@ -16,17 +16,11 @@ The point match dialog controls how Point Match is applied to
 point graphs. You can control:
 </P>
 <UL>
-<LI>Minimum point separation</LI>
 <LI>Maximum point size</LI>
 <LI>Accepted point color</LI>
 <LI>Rejected point color</LI>
 <LI>Candidate color</LI>
 </UL>
-<P>
-The minimum point separation prevents the creation of new points 
-that duplicate existing points. Otherwise, duplicate points would be
-a problem if Point Match was run more than once.
-</P>
 <P>
 The maximum point size prevents sample points from being too large. Occasionally
 a sample point will lie on top of a grid line or axis line, which confuses 
@@ -34,6 +28,10 @@ Engauge because it is not able to distinguish the point from the grid or
 axis line. The maximum point size value limits the width and height of the
 sample point so that, at most, only a few pixels of the grid or axis line 
 are attached.
+</P>
+<P STYLE="background: pink; margin-left: 40px; margin-right: 40px">HINT - For the best point matching,
+make the maximum point size as small as possible.
+The best size is just large enough to include the entire sample point in the point match circle.
 </P>
 <P>Colors are used to distinguish accepted points, rejected points, and the
 candidate point from each other.

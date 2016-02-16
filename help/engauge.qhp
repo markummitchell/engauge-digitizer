@@ -16,9 +16,7 @@
                 <section title="What is discretizing?" ref="answerdiscretizing.html"></section>
                 <section title="What are the general steps for digitizing line graphs?" ref="answerlinegraph.html"></section>
                 <section title="What are the general steps for digitizing point graphs?" ref="answerpointgraph.html"></section>
-                <section title="What are the general steps for digitizing maps?" ref="answermap.html"></section>
                 <section title="How can I select objects in Select mode?" ref="answerselectmode.html"></section>
-                <section title="What are the constraints when working with maps?" ref="answermapconst.html"></section>
                 <section title="How do the various dialog boxes work?" ref="dialogs.html"></section>
                 <section title="How do I get information out of Engauge?" ref="answerout.html"></section>
                 <section title="How do I get better accuracy in the numbers from Engauge?" ref="betteraccuracy.html"></section>
@@ -51,8 +49,6 @@
             <file>answerdiscretizing.html</file>
             <file>answerfloatingaxes.html</file>
             <file>answerlinegraph.html</file>
-            <file>answermapconst.html</file>
-            <file>answermap.html</file>
             <file>answermeasuring.html</file>
             <file>answermultiplecoordsystems.html</file>
             <file>answerother.html</file>
@@ -133,15 +129,6 @@
             <file>tutormanlinegraph7.png</file>
             <file>tutormanlinegraph8.png</file>
             <file>tutormanlinegraph.html</file>
-            <file>tutormanmap1.png</file>
-            <file>tutormanmap2.png</file>
-            <file>tutormanmap3.png</file>
-            <file>tutormanmap4.png</file>
-            <file>tutormanmap5.png</file>
-            <file>tutormanmap6.png</file>
-            <file>tutormanmap7.png</file>
-            <file>tutormanmap8.png</file>
-            <file>tutormanmap.html</file>
             <file>tutormanpointgraph1.png</file>
             <file>tutormanpointgraph2.png</file>
             <file>tutormanpointgraph3.png</file>

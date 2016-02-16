@@ -52,7 +52,9 @@ class PointMatchAlgorithm
                           fftw_complex* samplePrime,
                           int width,
                           int height,
-                          double** convolution);
+                          double** convolution,
+                          int sampleXCenter,
+                          int sampleYCenter);
 
   // In-place replacement of matrix by its complex conjugate
   void conjugateMatrix(int width,
