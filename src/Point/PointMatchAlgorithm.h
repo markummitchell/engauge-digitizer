@@ -43,9 +43,7 @@ class PointMatchAlgorithm
   void assembleLocalMaxima(double* convolution,
                            PointMatchList& listCreated,
                            int width,
-                           int height,
-                           int sampleXCenter,
-                           int sampleYCenter);
+                           int height);
 
   // Compute convolution in image space from phase space image and sample arrays
   void computeConvolution(fftw_complex* imagePrime,

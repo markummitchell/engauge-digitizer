@@ -40,9 +40,7 @@ void PointMatchAlgorithm::allocateMemory(double** array,
 void PointMatchAlgorithm::assembleLocalMaxima(double* convolution,
                                               PointMatchList& listCreated, 
                                               int width,
-                                              int height,
-                                              int sampleXCenter,
-                                              int sampleYCenter)
+                                              int height)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::assembleLocalMaxima";
 
@@ -277,9 +275,7 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<PointMatchPixel> &sam
   assembleLocalMaxima(convolution,
                       listCreated,
                       width,
-                      height,
-                      sampleXCenter,
-                      sampleYCenter);
+                      height);
   qSort (listCreated);
 
   // Copy sorted match points to output

@@ -15,6 +15,7 @@ script:
  - qmake engauge.pro
  - make
  - cd help && ./build && cd ..
+ - cd src && ./build_and_run_all_cli_tests && cd ..
  - cd src && ./build_and_run_all_gui_tests && cd ..
  
 after_success:
