@@ -1,0 +1,21 @@
+dist: trusty
+
+language: cpp
+
+before_script:
+ - "export DISPLAY=:99.0"
+ - "sh -e /etc/init.d/xvfb start"
+ - sleep 3 
+
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb
+
+script:
+ - qmake engauge.pro
+ - make
+ - cd help && ./build && cd ..
+ - cd src && ./build_and_run_all_gui_tests && cd ..
+ 
+after_success:
+ - file bin/engauge*
