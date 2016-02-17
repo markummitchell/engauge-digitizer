@@ -17,6 +17,10 @@ script:
  - cd help && ./build && cd ..
  - cd src && ./build_and_run_all_cli_tests && cd ..
  - cd src && ./build_and_run_all_gui_tests && cd ..
+ - cd test && cat -n polar_linear_linear_3curve.csv_expected_1 && cd ..
+ - cd test && cat -n polar_linear_linear_3curve.csv_actual_1 && cd ..
+ - cd test && cat -n version7.csv_expected_1 && cd ..
+ - cd test && cat -n version7.csv_actual_1 && cd ..
  
 after_success:
  - file bin/engauge*
