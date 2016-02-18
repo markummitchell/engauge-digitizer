@@ -347,8 +347,10 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
   } else {
 
     // Iteration accuracy versus number of iterations 8->256, 10->1024, 12->4096. Single pixel accuracy out of
-    // typical image size of 1024x1024 means around 10 iterations gives decent accuracy
-    const int MAX_ITERATIONS = 12;
+    // typical image size of 1024x1024 means around 10 iterations gives decent accuracy for numbers much bigger
+    // than 1. A value of 12 gave some differences in the least significant figures of numbers like 10^-3 in
+    // the regression tests. Toggling between 30 and 32 made no difference in the regression tests.
+    const int MAX_ITERATIONS = 32;
 
     // Fit a spline
     Spline spline (t,
