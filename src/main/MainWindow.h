@@ -212,7 +212,10 @@ private slots:
   void slotEditCopy ();
   void slotEditCut ();
   void slotEditDelete ();
+  void slotEditMenu ();
   void slotEditPaste ();
+  void slotEditPasteAsNew ();
+  void slotEditPasteAsNewAdvanced ();
   void slotFileClose ();
   void slotFileExport ();
   void slotFileImport();
@@ -313,8 +316,9 @@ private:
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);
   void fileImport (const QString &fileName,
-                   ImportType ImportType);
-  void fileImportWithPrompts (ImportType ImportType);
+                   ImportType ImportType); /// Same steps as filePaste but with import from file
+  void fileImportWithPrompts (ImportType ImportType); /// Wrapper around fileImport that adds user prompt(s)
+  void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
@@ -384,6 +388,8 @@ private:
   QAction *m_actionEditCopy;
   QAction *m_actionEditPaste;
   QAction *m_actionEditDelete;
+  QAction *m_actionEditPasteAsNew;
+  QAction *m_actionEditPasteAsNewAdvanced;
 
   QMenu *m_menuDigitize;
   QActionGroup *m_groupDigitize;

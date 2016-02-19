@@ -406,6 +406,18 @@ void MainWindow::createActionsEdit ()
   m_actionEditDelete->setWhatsThis (tr ("Delete\n\n"
                                         "Deletes the selected points, after copying them to the clipboard."));
   connect (m_actionEditDelete, SIGNAL (triggered ()), this, SLOT (slotEditDelete ()));
+
+  m_actionEditPasteAsNew = new QAction (tr ("Paste As New"), this);
+  m_actionEditPasteAsNew->setStatusTip (tr ("Pastes an image from the clipboard."));
+  m_actionEditPasteAsNew->setWhatsThis (tr ("Paste as New\n\n"
+                                            "Creates a new document by pasting an image from the clipboard."));
+  connect (m_actionEditPasteAsNew, SIGNAL (triggered ()), this, SLOT (slotEditPasteAsNew ()));
+
+  m_actionEditPasteAsNewAdvanced = new QAction (tr ("Paste As New (Advanced)..."), this);
+  m_actionEditPasteAsNewAdvanced->setStatusTip (tr ("Pastes an image from the clipboard, in advanced mode."));
+  m_actionEditPasteAsNewAdvanced->setWhatsThis (tr ("Paste as New (Advanced)\n\n"
+                                                    "Creates a new document by pasting an image from the clipboard, in advanced mode."));
+  connect (m_actionEditPasteAsNewAdvanced, SIGNAL (triggered ()), this, SLOT (slotEditPasteAsNewAdvanced ()));
 }
 
 void MainWindow::createActionsFile ()
@@ -882,6 +894,7 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionExit);
 
   m_menuEdit = menuBar()->addMenu(tr("&Edit"));
+  connect (m_menuEdit, SIGNAL (aboutToShow ()), this, SLOT (slotEditMenu ()));
   m_menuEdit->addAction (m_actionEditUndo);
   m_menuEdit->addAction (m_actionEditRedo);
   m_menuEdit->insertSeparator (m_actionEditCut);
@@ -889,6 +902,9 @@ void MainWindow::createMenus()
   m_menuEdit->addAction (m_actionEditCopy);
   m_menuEdit->addAction (m_actionEditPaste);
   m_menuEdit->addAction (m_actionEditDelete);
+  m_menuEdit->insertSeparator (m_actionEditPasteAsNew);
+  m_menuEdit->addAction (m_actionEditPasteAsNew);
+  m_menuEdit->addAction (m_actionEditPasteAsNewAdvanced);
 
   m_menuDigitize = menuBar()->addMenu(tr("Digitize"));
   m_menuDigitize->addAction (m_actionDigitizeSelect);
@@ -1361,6 +1377,72 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
       // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
       fileImport (fileName,
                   importType);
+    }
+  }
+}
+
+void MainWindow::filePaste (ImportType importType)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::filePaste"
+                              << " importType=" << importType;
+
+  QString originalFileOld = m_originalFile;
+  bool originalFileWasImported = m_originalFileWasImported;
+
+  QString fileName ("clipboard");
+  m_originalFile = fileName; // Make this available for logging in case an error occurs during the load
+  m_originalFileWasImported = true;
+
+  if (importType == IMPORT_TYPE_ADVANCED) {
+
+    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
+    // when previewing for IMAGE_TYPE_ADVANCED
+    slotFileClose();
+
+    // Restore the background just closed by slotFileClose. This is required so when the image is loaded for preview, it will appear
+    m_backgroundStateContext->setBackgroundImage(BACKGROUND_IMAGE_ORIGINAL);
+  }
+
+  // An image was in the clipboard when this method was called but it may have disappeared
+  QImage image = QApplication::clipboard()->image();
+
+  bool loaded = false;
+  if (!loaded) {
+    loaded = !image.isNull();
+  }
+
+  if (!loaded) {
+    QMessageBox::warning (this,
+                          engaugeWindowTitle(),
+                          tr("Cannot read file %1.").
+                          arg(fileName));
+
+    // Reset
+    m_originalFile = originalFileOld;
+    m_originalFileWasImported = originalFileWasImported;
+
+  } else {
+
+    loaded = loadImage (fileName,
+                        image,
+                        importType);
+
+    if (!loaded) {
+
+      // Failed
+      if (importType == IMPORT_TYPE_ADVANCED) {
+
+        // User cancelled after another file was imported so it could be previewed. In anticipation of the loading-for-preview,
+        // we closed the current Document at the top of this method so we cannot reload. So, the only option is to close again
+        // so the half-imported current Document is removed
+        slotFileClose();
+
+      } else {
+
+        // Reset
+        m_originalFile = originalFileOld;
+        m_originalFileWasImported = originalFileWasImported;
+      }
     }
   }
 }
@@ -2481,9 +2563,31 @@ void MainWindow::slotEditDelete ()
                                         cmd);
 }
 
+void MainWindow::slotEditMenu ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditMenu";
+
+  m_actionEditPasteAsNew->setEnabled (!QApplication::clipboard()->image().isNull());
+  m_actionEditPasteAsNewAdvanced->setEnabled (!QApplication::clipboard()->image().isNull());
+}
+
 void MainWindow::slotEditPaste ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPaste";
+}
+
+void MainWindow::slotEditPasteAsNew ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPasteAsNew";
+
+  filePaste (IMPORT_TYPE_SIMPLE);
+}
+
+void MainWindow::slotEditPasteAsNewAdvanced ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPasteAsNewAdvanced";
+
+  filePaste (IMPORT_TYPE_ADVANCED);
 }
 
 void MainWindow::slotFileClose()
@@ -3528,6 +3632,7 @@ void MainWindow::updateControls ()
   m_actionEditCopy->setEnabled (m_scene->selectedItems().count () > 0);
   m_actionEditPaste->setEnabled (false);
   m_actionEditDelete->setEnabled (m_scene->selectedItems().count () > 0);
+  // m_actionEditPasteAsNew and m_actionEditPasteAsNewAdvanced are updated when m_menuEdit is about to be shown
 
   m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
