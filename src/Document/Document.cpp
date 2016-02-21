@@ -899,6 +899,7 @@ int Document::versionFromFile (QFile *file) const
   LOG4CPP_INFO_S ((*mainCat)) << "Document::versionFromFile";
 
   int version = VERSION_6; // Use default if tag is missing
+  QString version_string = QString::number(VERSION_6);
 
   QDomDocument doc;
   if (doc.setContent (file)) {
@@ -907,7 +908,7 @@ int Document::versionFromFile (QFile *file) const
     if (nodes.count() > 0) {
       QDomNode node = nodes.at (0);
       QDomElement elem = node.toElement();
-      version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble();
+      version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER, version_string).toDouble();
     }
   }
 
