@@ -128,8 +128,6 @@ void BackgroundStateContext::setCurveSelected (const Transformation &transformat
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setCurveSelected"
                               << " curve=" << curveSelected.toLatin1().data();
 
-  ENGAUGE_ASSERT (!curveSelected.isEmpty ());
-
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
     m_states [backgroundState]->setCurveSelected (transformation,

@@ -2258,9 +2258,15 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
                               << " message=" << temporaryMessage.toLatin1().data()
                               << " importType=" << importType;
 
+  const QString EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING; // For bootstrapping the preview
+
   // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
 
   m_digitizeStateContext->resetOnLoad (m_cmdMediator); // Before setPixmap
+  m_backgroundStateContext->setCurveSelected (m_transformation,
+                                              m_cmdMediator->document().modelGridRemoval(),
+                                              m_cmdMediator->document().modelColorFilter(),
+                                              EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING); // Before setPixmap
   setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
 
   // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
@@ -2301,7 +2307,8 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
 
   // Background must be set (by setPixmap) before slotViewZoomFill which relies on the background. At this point
   // the transformation is undefined (unless the code is changed) so grid removal will not work
-  // but updateTransformationAndItsDependencies will call this again to fix that issue
+  // but updateTransformationAndItsDependencies will call this again to fix that issue. Note that the selected
+  // curve name was set (by setCurveSelected) earlier before the call to setPixmap
   m_backgroundStateContext->setCurveSelected (m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
@@ -2619,9 +2626,12 @@ void MainWindow::slotFileClose()
 
     // Deallocate Document
     delete m_cmdMediator;
+
+    // Remove file information
     m_cmdMediator = 0;
     m_currentFile = "";
     m_engaugeFile = "";
+    setWindowTitle (engaugeWindowTitle ());
 
     updateControls();
   }
