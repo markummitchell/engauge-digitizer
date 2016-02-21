@@ -41,6 +41,7 @@ Features coming in upcoming version 7:
 
 1. Multiple coordinate systems in the same image can be digitized in advanced mode
 2. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
+3. File import by pasting
 
 Installation
 ------------

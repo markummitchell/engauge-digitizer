@@ -3974,18 +3974,21 @@ void MainWindow::wheelEvent(QWheelEvent *event)
                               << " degrees=" << numDegrees.y()
                               << " phase=" << event->phase();
 
-  if (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
-      m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS) {
+  // Criteria:
+  // 1) User has enabled wheel zoom control
+  // 2) Angle is over a threshold to eliminate false events from just touching wheel
+  if (((event->modifiers() & Qt::ControlModifier) != 0) &&
+      (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
+      m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
 
     if (numDegrees.y() >= ANGLE_THRESHOLD) {
-      // Rotated forwards away from the user, which means zoom out
-      slotViewZoomOut();
-      event->accept();
-    } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
       // Rotated backwards towards the user, which means zoom in
       slotViewZoomIn();
       event->accept();
-    }
+    } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
+      // Rotated forwards away from the user, which means zoom out
+      slotViewZoomOut();
+      event->accept();    }
   }
 }
 
