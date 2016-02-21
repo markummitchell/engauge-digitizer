@@ -626,6 +626,7 @@ void CoordSystem::movePoint (const QString &pointIdentifier,
   QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
 
   Curve *curve = curveForCurveName (curveName);
+  ENGAUGE_ASSERT (curve != 0);
   curve->movePoint (pointIdentifier,
                     deltaScreen);
 }

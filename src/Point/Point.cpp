@@ -13,7 +13,8 @@ unsigned int Point::m_identifierIndex = 0;
 
 extern const QString AXIS_CURVE_NAME;
 extern const QString DUMMY_CURVE_NAME;
-const QString POINT_IDENTIFIER_DELIMITER ("\t"); // Character that could never be entered when editing curve names
+const QString POINT_IDENTIFIER_DELIMITER_SAFE ("\t"); // Character that could never be entered when editing curve names
+const QString POINT_IDENTIFIER_DELIMITER_XML ("_"); // From incoming xml that does not like tabs
 
 const double MISSING_ORDINAL_VALUE = 0;
 const double MISSING_POSGRAPH_VALUE = 0;
@@ -218,7 +219,20 @@ Point &Point::operator=(const Point &point)
 
 QString Point::curveNameFromPointIdentifier (const QString &pointIdentifier)
 {
-  QStringList tokens = pointIdentifier.split (POINT_IDENTIFIER_DELIMITER);
+  QStringList tokens;
+
+  if (pointIdentifier.contains (POINT_IDENTIFIER_DELIMITER_SAFE)) {
+
+    tokens = pointIdentifier.split (POINT_IDENTIFIER_DELIMITER_SAFE);
+
+  } else {
+
+    // Yes, this is a hack - underscores could have been inserted by user (in the curve name) and/or this source code,
+    // but there are many dig files laying around that have underscores so we need to support them
+    tokens = pointIdentifier.split (POINT_IDENTIFIER_DELIMITER_XML);
+
+  }
+
   return tokens.value (0);
 }
 
@@ -474,7 +488,7 @@ QString Point::temporaryPointIdentifier ()
 {
   return QString ("%1%2%3")
       .arg (AXIS_CURVE_NAME)
-      .arg (POINT_IDENTIFIER_DELIMITER)
+      .arg (POINT_IDENTIFIER_DELIMITER_SAFE)
       .arg (0);
 }
 
@@ -486,7 +500,7 @@ QString Point::uniqueIdentifierGenerator (const QString &curveName)
 
   return QString ("%1%2point%3%4")
       .arg (curveName)
-      .arg (POINT_IDENTIFIER_DELIMITER)
-      .arg (POINT_IDENTIFIER_DELIMITER)
+      .arg (POINT_IDENTIFIER_DELIMITER_SAFE)
+      .arg (POINT_IDENTIFIER_DELIMITER_SAFE)
       .arg (m_identifierIndex++);
 }

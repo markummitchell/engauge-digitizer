@@ -906,8 +906,14 @@ int Document::versionFromFile (QFile *file) const
     QDomNodeList nodes = doc.elementsByTagName (DOCUMENT_SERIALIZE_DOCUMENT);
     if (nodes.count() > 0) {
       QDomNode node = nodes.at (0);
-      QDomElement elem = node.toElement();
-      version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble();
+
+      QDomNamedNodeMap attributes = node.attributes();
+
+      if (attributes.contains (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER)) {
+
+        QDomElement elem = node.toElement();
+        version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble();
+      }
     }
   }
 
