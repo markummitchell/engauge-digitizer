@@ -543,7 +543,9 @@ win32-msvc* {
 QMAKE_CXXFLAGS += -EHsc
 LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
 } else {
+win32-g++* {
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
+}
 LIBS += -llog4cpp -lfftw3
 }
 
