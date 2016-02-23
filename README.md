@@ -1,5 +1,4 @@
 [![Travis build Status](https://travis-ci.org/markummitchell/engauge6.svg?branch=master)](https://travis-ci.org/markummitchell/engauge6) 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/aab6535f7d5808abb7b539a1de9c2032e5b9dd95/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge6/branch/master)
 
 engauge6
 ========
