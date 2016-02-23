@@ -147,10 +147,12 @@ bool CoordSystem::bytesIndicatePreVersion6 (const QByteArray &bytes) const
 {
   QByteArray preVersion6MagicNumber;
   preVersion6MagicNumber.resize (FOUR_BYTES);
-  preVersion6MagicNumber[0] = 0x00;
-  preVersion6MagicNumber[1] = 0x00;
-  preVersion6MagicNumber[2] = 0xCA;
-  preVersion6MagicNumber[3] = 0xFE;
+
+  // Windows compiler gives warning if 0x## is used instead of '\x##' below
+  preVersion6MagicNumber[0] = '\x00';
+  preVersion6MagicNumber[1] = '\x00';
+  preVersion6MagicNumber[2] = '\xCA';
+  preVersion6MagicNumber[3] = '\xFE';
 
   return (bytes == preVersion6MagicNumber);
 }

@@ -2866,9 +2866,8 @@ void MainWindow::slotLoadStartupFiles ()
 
     // Fork off another instance of this application to handle the remaining files recursively. New process
     // is detached so killing/terminating this process does not automatically kill the child process(es) also
-    QProcess *process = new QProcess (this);
-    process->startDetached (QCoreApplication::applicationFilePath(),
-                            m_loadStartupFiles);
+    QProcess::startDetached (QCoreApplication::applicationFilePath(),
+                             m_loadStartupFiles);
   }
 }
 
