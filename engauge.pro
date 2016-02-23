@@ -26,7 +26,9 @@ CONFIG -= debug
 # 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
 # 3) -Wuninitialized requires O1, O2 or O3 optimization
 DEFINES += QT_NO_DEBUG
+*-g++* {
 QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable
+}
 }
 
 OBJECTS_DIR = src/.objs
@@ -533,11 +535,19 @@ TARGET = bin/engauge
 
 QT += core gui network printsupport widgets xml help
 
-win32-g++* {
+win32-* {
 CONFIG += windows
+}
+
+win32-msvc* {
+QMAKE_CXXFLAGS += -EHsc
+LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+} else {
+win32-g++* {
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
 }
 LIBS += -llog4cpp -lfftw3
+}
 
 INCLUDEPATH += src \
                src/Background \
@@ -582,7 +592,7 @@ INCLUDEPATH += src \
                src/View \
                src/Zoom
 
-win32-g++* {
+win32-* {
 INCLUDEPATH += $$(FFTW_HOME)/include \
                $$(LOG4CPP_HOME)/include
 }
