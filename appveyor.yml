@@ -1,0 +1,32 @@
+init:
+  - C:\"Program Files (x86)"\"Microsoft Visual Studio 12.0"\VC\vcvarsall.bat x86
+
+install:
+  - set QTDIR=C:\Qt\5.5\msvc2013
+  - set PATH=%PATH%;%QTDIR%\bin
+  - cd C:\projects\engauge6
+  - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
+  - 7z x log4cpp-1.1.1.zip -aoa
+  - mkdir fftw-3.3.4-dll32
+  - cd fftw-3.3.4-dll32
+  - curl -fsSLO 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4-dll32.zip'
+  - 7z x fftw-3.3.4-dll32.zip -aoa
+  - lib /def:libfftw3-3.def
+  - lib /def:libfftw3f-3.def
+  - lib /def:libfftw3l-3.def
+  - mkdir include
+  - mkdir lib
+  - move fftw3.h include
+  - move *dll lib
+  - move *def lib
+  - move *lib lib
+
+build_script:
+  - cd C:\projects\engauge6
+  - set ENGAUGE_RELEASE=1
+  - set LOG4CPP_HOME=C:\projects\engauge6\log4cpp-1.1.1
+  - set FFTW_HOME=C:\projects\engauge6\fftw-3.3.4-dll32
+  - qmake engauge.pro
+  - move Makefile Makefile.orig
+  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', '.lib' } > Makefile
+  - nmake
