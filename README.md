@@ -1,4 +1,5 @@
-Travis [![Build Status](https://travis-ci.org/markummitchell/engauge6.svg?branch=master)](https://travis-ci.org/markummitchell/engauge6) AppVeyor [![Build status](https://ci.appveyor.com/api/projects/status/github/engauge6/markummitchell?svg=true)](https://ci.appveyor.com/api/projects/status/github/engauge6/)
+[![Linux build Status](https://travis-ci.org/markummitchell/engauge6.svg?branch=master)](https://travis-ci.org/markummitchell/engauge6) 
+[![Windows build status](https://ci.appveyor.com/api/projects/status/1624606/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge6/branch/master)
 
 engauge6
 ========
