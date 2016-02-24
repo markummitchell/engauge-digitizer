@@ -881,7 +881,7 @@ void Document::setModelSegments(const DocumentModelSegments &modelSegments)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelSegments";
 
-  setModelSegments (modelSegments);
+  m_coordSystemContext.setModelSegments (modelSegments);
 }
 
 bool Document::successfulRead () const
