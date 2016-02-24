@@ -40,7 +40,9 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME)) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute %1")
+                      .arg (DOCUMENT_SERIALIZE_CURVE_NAME));
   }
 
   m_curveName = attributes.value(DOCUMENT_SERIALIZE_CURVE_NAME).toString();

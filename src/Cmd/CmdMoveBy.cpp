@@ -11,6 +11,7 @@
 #include <QGraphicsItem>
 #include <QtToString.h>
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
                      Document &document,
@@ -51,7 +52,10 @@ CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
 
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA) ) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1 and/or %2")
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_X_DELTA)
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y_DELTA));
   }
 
   m_deltaScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X_DELTA).toDouble());

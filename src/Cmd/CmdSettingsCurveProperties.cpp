@@ -40,6 +40,9 @@ CmdSettingsCurveProperties::CmdSettingsCurveProperties (MainWindow &mainWindow,
   (reader.name() != DOCUMENT_SERIALIZE_CMD)){
     loadNextFromReader(reader);
     if (reader.atEnd()) {
+      xmlExitWithError (reader,
+                        QString ("Reached end of file before finding end element for %1")
+                        .arg (DOCUMENT_SERIALIZE_CMD));
       success = false;
       break;
     }

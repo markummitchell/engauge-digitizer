@@ -41,6 +41,7 @@ class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
+class FileCmdScript;
 class Ghosts;
 class GraphicsScene;
 class GraphicsView;
@@ -73,13 +74,31 @@ class MainWindow : public QMainWindow
 
 public:
   /// Single constructor.
-  MainWindow(const QString &errorReportFile, // Empty if unused, otherwise the error report file is imported
-             const QString &regressionOpenFile, // Empty if unused, otherwise the regression file is loaded
+  /// \param errorReportFile Optional error report file to be read at startup. Empty if unused. Incompatible with fileCmdScript
+  /// \param fileCmdScriptFile Optional file command script file to be read at startup. Empty if unused. Incompatible with errorReportFile
+  /// \param isRegressionTest True if errorReportFile or fileCmdScript is for regression testing, in which case it is executed and the program exits
+  /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
+  /// \param loadStartupFiles Zero or more Engauge document files to load at startup. A separate instance of Engauge is created for each file
+  /// \param parent Optional parent widget for this widget
+  MainWindow(const QString &errorReportFile,
+             const QString &fileCmdScriptFile,
+             bool isRegressionTest,
              bool isGnuplot,
-             bool isRegressionImport, // Requires errorReportFile
              QStringList loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
+
+  /// Close file. This is called from a file script command
+  void cmdFileClose();
+
+  /// Export file. This is called from a file script command
+  void cmdFileExport(const QString &fileName);
+
+  /// Import file. This is called from a file script command
+  void cmdFileImport(const QString &fileName);
+
+  /// Open file. This is called from a file script command
+  void cmdFileOpen(const QString &fileName);
 
   /// Accessor for commands to process the Document.
   CmdMediator *cmdMediator();
@@ -251,7 +270,8 @@ private slots:
   void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
-  void slotTimeoutRegression ();
+  void slotTimeoutRegressionErrorReport ();
+  void slotTimeoutRegressionFileCmdScript ();
   void slotUndoTextChanged (const QString &);
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
@@ -313,6 +333,8 @@ private:
   void createToolBars();
   void createTutorial();
   ZoomFactor currentZoomFactor () const;
+  void exportAllCoordinateSystems();
+  QString exportFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);
   void fileImport (const QString &fileName,
@@ -352,7 +374,8 @@ private:
   bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
                        ImportType ImportType);
-  void startRegressionTest(const QString &regressionInputFile);
+  void startRegressionTestErrorReport (const QString &regressionInputFile);
+  void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateRecentFileList();
@@ -525,10 +548,12 @@ private:
   // Ghosts that are created for seeing all coordinate systems at once, when there are multiple coordinate systems
   Ghosts *m_ghosts;
 
-  // Timer for regression testing. This is first started by the constructor for this class, but the first timeout
+  // Timers for regression testing. Neither or one is first started by the constructor for this class, but the first timeout
   // (and all succeeding timeouts) will be from after QMainWindow::exec is called. Each timeout results in one command
   // from the command stack getting executed
-  QTimer *m_timerRegression;
+  QTimer *m_timerRegressionErrorReport;
+  FileCmdScript *m_fileCmdScript;
+  QTimer *m_timerRegressionFileCmdScript;
   QString m_regressionFile;
 };
 

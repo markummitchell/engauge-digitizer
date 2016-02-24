@@ -26,9 +26,7 @@ CONFIG -= debug
 # 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
 # 3) -Wuninitialized requires O1, O2 or O3 optimization
 DEFINES += QT_NO_DEBUG
-*-g++* {
 QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable
-}
 }
 
 OBJECTS_DIR = src/.objs
@@ -192,6 +190,14 @@ HEADERS  += \
     src/Export/ExportValuesOrdinal.h \
     src/Export/ExportValuesXOrY.h \
     src/Export/ExportXThetaValuesMergedFunctions.h \
+    src/FileCmd/FileCmdAbstract.h \
+    src/FileCmd/FileCmdClose.h \
+    src/FileCmd/FileCmdExport.h \
+    src/FileCmd/FileCmdFactory.h \
+    src/FileCmd/FileCmdImport.h \
+    src/FileCmd/FileCmdOpen.h \
+    src/FileCmd/FileCmdScript.h \
+    src/FileCmd/FileCmdSerialize.h \
     src/Filter/FilterImage.h \
     src/Format/FormatCoordsUnits.h \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.h \
@@ -440,6 +446,14 @@ SOURCES += \
     src/Export/ExportToClipboard.cpp \
     src/Export/ExportToFile.cpp \
     src/Export/ExportXThetaValuesMergedFunctions.cpp \
+    src/FileCmd/FileCmdAbstract.cpp \
+    src/FileCmd/FileCmdClose.cpp \
+    src/FileCmd/FileCmdExport.cpp \
+    src/FileCmd/FileCmdFactory.cpp \
+    src/FileCmd/FileCmdImport.cpp \
+    src/FileCmd/FileCmdOpen.cpp \
+    src/FileCmd/FileCmdScript.cpp \
+    src/FileCmd/FileCmdSerialize.cpp \
     src/Filter/FilterImage.cpp \
     src/Format/FormatCoordsUnits.cpp \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
@@ -535,19 +549,11 @@ TARGET = bin/engauge
 
 QT += core gui network printsupport widgets xml help
 
-win32-* {
-CONFIG += windows
-}
-
-win32-msvc* {
-QMAKE_CXXFLAGS += -EHsc
-LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
-} else {
 win32-g++* {
+CONFIG += windows
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
 }
 LIBS += -llog4cpp -lfftw3
-}
 
 INCLUDEPATH += src \
                src/Background \
@@ -565,6 +571,7 @@ INCLUDEPATH += src \
                src/Dlg \
                src/Document \
                src/Export \
+               src/FileCmd \
                src/Filter \
                src/Format \
                src/Ghosts \
@@ -592,7 +599,7 @@ INCLUDEPATH += src \
                src/View \
                src/Zoom
 
-win32-* {
+win32-g++* {
 INCLUDEPATH += $$(FFTW_HOME)/include \
                $$(LOG4CPP_HOME)/include
 }

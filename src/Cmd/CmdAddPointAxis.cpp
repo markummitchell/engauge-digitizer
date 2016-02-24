@@ -6,6 +6,7 @@
 #include "MainWindow.h"
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Add axis point");
 
@@ -48,7 +49,15 @@ CmdAddPointAxis::CmdAddPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1, %2, %3, %4, %5, %6 and/or %7")
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_X)
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y)
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_X)
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y)
+                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
+                      .arg (DOCUMENT_SERIALIZE_ORDINAL)
+                      .arg (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY));
   }
 
   // Boolean values

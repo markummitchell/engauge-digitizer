@@ -6,6 +6,7 @@
 #include "MainWindow.h"
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Add graph point");
 
@@ -43,7 +44,13 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1, %2, %3, %4 and/or %5")
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_X)
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y)
+                      .arg (DOCUMENT_SERIALIZE_CURVE_NAME)
+                      .arg (DOCUMENT_SERIALIZE_ORDINAL)
+                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER));
   }
 
   m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());

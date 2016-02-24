@@ -43,6 +43,7 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "ExportToFile.h"
+#include "FileCmdScript.h"
 #include "Ghosts.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
@@ -114,9 +115,9 @@ const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
-                       const QString &regressionOpenFile,
+                       const QString &fileCmdScriptFile,
+                       bool isRegressionTest,
                        bool isGnuplot,
-                       bool isRegressionImport,
                        QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
@@ -132,7 +133,9 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_backgroundStateContext (0),
   m_isGnuplot (isGnuplot),
   m_ghosts (0),
-  m_timerRegression(0)
+  m_timerRegressionErrorReport(0),
+  m_fileCmdScript (0),
+  m_timerRegressionFileCmdScript(0)
 {
   LoggerUpload::bindToMainWindow(this);
 
@@ -168,12 +171,12 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(initialPath,
                         errorReportFile);
-    if (isRegressionImport) {
-      startRegressionTest(errorReportFile);
+    if (isRegressionTest) {
+      startRegressionTestErrorReport(errorReportFile);
     }
-  } else if (!regressionOpenFile.isEmpty()) {
-    loadDocumentFile (regressionOpenFile);
-    startRegressionTest(regressionOpenFile);
+  } else if (!fileCmdScriptFile.isEmpty()) {
+    m_fileCmdScript = new FileCmdScript (fileCmdScriptFile);
+    startRegressionTestFileCmdScript();
   } else {
 
     // Save file names for later, after gui becomes available. The file names are dropped if error report file is specified
@@ -253,6 +256,40 @@ void MainWindow::closeEvent(QCloseEvent *event)
   } else {
     event->ignore ();
   }
+}
+
+void MainWindow::cmdFileClose()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileClose";
+
+  setWindowModified (false); // Prevent popup query asking if changes should be saved
+  slotFileClose();
+}
+
+void MainWindow::cmdFileExport(const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileExport";
+
+  ExportToFile exportStrategy;
+  fileExport(fileName,
+             exportStrategy);
+}
+
+void MainWindow::cmdFileImport(const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileImport";
+
+  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  fileImport (fileName,
+              IMPORT_TYPE_SIMPLE);
+}
+
+void MainWindow::cmdFileOpen(const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileOpen";
+
+  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  loadDocumentFile(fileName);
 }
 
 CmdMediator *MainWindow::cmdMediator ()
@@ -1232,6 +1269,35 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
+void MainWindow::exportAllCoordinateSystems()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems";
+
+  ExportToFile exportStrategy;
+
+  // Output the regression test results. One file is output for every coordinate system
+  for (CoordSystemIndex index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
+
+    updateCoordSystem (index); // Switch to the specified coordinate system
+
+    QString regressionFile = QString ("%1_%2")
+                             .arg (m_regressionFile)
+                             .arg (index + 1); // Append the coordinate system index
+    fileExport (regressionFile,
+                exportStrategy);
+  }
+}
+
+QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) const
+{
+  QString outFileName = fileName;
+
+  outFileName = outFileName.replace (".xml", ".csv_actual"); // Applies when extension is xml
+  outFileName = outFileName.replace (".dig", ".csv_actual"); // Applies when extension is dig
+
+  return outFileName;
+}
+
 void MainWindow::fileExport(const QString &fileName,
                             ExportToFile exportStrategy)
 {
@@ -1662,7 +1728,10 @@ bool MainWindow::loadImage (const QString &fileName,
                                  importType);
 
   if (accepted) {
-    if (m_actionHelpChecklistGuideWizard->isChecked ()) {
+
+    // Show the wizard if user selected it and we are not running a script
+    if (m_actionHelpChecklistGuideWizard->isChecked () &&
+        (m_fileCmdScript == 0)) {
 
       // Show wizard
       ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
@@ -3060,9 +3129,9 @@ void MainWindow::slotSettingsMainWindow ()
   m_dlgSettingsMainWindow->show ();
 }
 
-void MainWindow::slotTimeoutRegression()
+void MainWindow::slotTimeoutRegressionErrorReport ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutRegression"
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutRegressionErrorReport"
                               << " cmdStackIndex=" << m_cmdMediator->index()
                               << " cmdStackCount=" << m_cmdMediator->count();
 
@@ -3072,22 +3141,36 @@ void MainWindow::slotTimeoutRegression()
 
   } else {
 
-    ExportToFile exportStrategy;
-
-    // Output the regression test results. One file is output for every coordinate system
-    for (CoordSystemIndex index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
-
-      updateCoordSystem (index); // Switch to the specified coordinate system
-
-      QString regressionFile = QString ("%1_%2")
-                               .arg (m_regressionFile)
-                               .arg (index + 1); // Append the coordinate system index
-      fileExport (regressionFile,
-                  exportStrategy);
-    }
+    exportAllCoordinateSystems ();
 
     // Regression test has finished so exit. We unset the dirty flag so there is no prompt
     m_cmdMediator->setClean();
+    close();
+
+  }
+}
+
+void MainWindow::slotTimeoutRegressionFileCmdScript ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutRegressionFileCmdScript";
+
+  if (m_fileCmdScript->canRedo()) {
+
+    m_fileCmdScript->redo(*this);
+
+  } else {
+
+    // Script file might already have closed the Document so export only if last was not closed
+    if (m_cmdMediator != 0) {
+
+      exportAllCoordinateSystems ();
+
+      // We unset the dirty flag so there is no "Save changes?" prompt
+      m_cmdMediator->setClean();
+
+    }
+
+    // Regression test has finished so exit
     close();
 
   }
@@ -3512,20 +3595,33 @@ void MainWindow::slotViewZoomOut ()
   }
 }
 
-void MainWindow::startRegressionTest(const QString &regressionInputFile)
+void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFile)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
+
   const int REGRESSION_INTERVAL = 400; // Milliseconds
 
   // Save output/export file name
-  m_regressionFile = regressionInputFile;
-  m_regressionFile = m_regressionFile.replace (".xml", ".csv_actual"); // Applies when extension is xml
-  m_regressionFile = m_regressionFile.replace (".dig", ".csv_actual"); // Applies when extension is dig
+  m_regressionFile = exportFilenameFromInputFilename (regressionInputFile);
 
-  m_timerRegression = new QTimer();
-  m_timerRegression->setSingleShot(false);
-  connect (m_timerRegression, SIGNAL (timeout()), this, SLOT (slotTimeoutRegression()));
+  m_timerRegressionErrorReport = new QTimer();
+  m_timerRegressionErrorReport->setSingleShot(false);
+  connect (m_timerRegressionErrorReport, SIGNAL (timeout()), this, SLOT (slotTimeoutRegressionErrorReport()));
 
-  m_timerRegression->start(REGRESSION_INTERVAL);
+  m_timerRegressionErrorReport->start(REGRESSION_INTERVAL);
+}
+
+void MainWindow::startRegressionTestFileCmdScript()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestFileCmdScript";
+
+  const int REGRESSION_INTERVAL = 400; // Milliseconds
+
+  m_timerRegressionFileCmdScript = new QTimer();
+  m_timerRegressionFileCmdScript->setSingleShot(false);
+  connect (m_timerRegressionFileCmdScript, SIGNAL (timeout()), this, SLOT (slotTimeoutRegressionFileCmdScript()));
+
+  m_timerRegressionFileCmdScript->start(REGRESSION_INTERVAL);
 }
 
 Transformation MainWindow::transformation() const

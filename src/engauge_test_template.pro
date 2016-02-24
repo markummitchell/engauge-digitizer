@@ -174,6 +174,14 @@ HEADERS  += \
     Export/ExportValuesOrdinal.h \
     Export/ExportValuesXOrY.h \
     Export/ExportXThetaValuesMergedFunctions.h \
+    FileCmd/FileCmdAbstract.h \
+    FileCmd/FileCmdClose.h \
+    FileCmd/FileCmdExport.h \
+    FileCmd/FileCmdFactory.h \
+    FileCmd/FileCmdImport.h \
+    FileCmd/FileCmdOpen.h \
+    FileCmd/FileCmdSerialize.h \
+    FileCmd/FileCmdScript.h \
     Filter/FilterImage.h \
     Format/FormatCoordsUnits.h \
     Format/FormatCoordsUnitsStrategyAbstractBase.h \
@@ -423,6 +431,14 @@ SOURCES += \
     Export/ExportToClipboard.cpp \
     Export/ExportToFile.cpp \
     Export/ExportXThetaValuesMergedFunctions.cpp \
+    FileCmd/FileCmdAbstract.cpp \
+    FileCmd/FileCmdClose.cpp \
+    FileCmd/FileCmdExport.cpp \
+    FileCmd/FileCmdFactory.cpp \
+    FileCmd/FileCmdImport.cpp \
+    FileCmd/FileCmdOpen.cpp \
+    FileCmd/FileCmdSerialize.cpp \
+    FileCmd/FileCmdScript.cpp \
     Filter/FilterImage.cpp \
     Format/FormatCoordsUnits.cpp \
     Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
@@ -539,6 +555,7 @@ INCLUDEPATH += Background \
                Dlg \
                Document \
                Export \
+               FileCmd \
                Filter \
                Format \
                Ghosts \

@@ -14,6 +14,7 @@
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Cut");
 
@@ -55,7 +56,11 @@ CmdCut::CmdCut (MainWindow &mainWindow,
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_CSV) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_HTML)) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1, %2 and/or %3")
+                      .arg (DOCUMENT_SERIALIZE_TRANSFORM_DEFINED)
+                      .arg (DOCUMENT_SERIALIZE_CSV)
+                      .arg (DOCUMENT_SERIALIZE_HTML));
   }
 
   QString defined = attributes.value(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED).toString();

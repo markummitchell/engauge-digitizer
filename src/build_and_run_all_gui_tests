@@ -1,73 +1,43 @@
 #!/bin/bash
 
-IMPORT_FILES=../test/*.xml
-OPEN_FILES=../test/*.dig
+SCRIPTS=../test/*.test.commandline
 
-echo "Tests of digitizing of imported files"
-for xml in $IMPORT_FILES
+for script in $SCRIPTS
 do
     # Run regression test
-    ../bin/engauge -regressionimport $xml
+    commandLine=`cat $script`
+    ../bin/engauge $commandLine
 
-    # Compare actual and desired output files. There is one pair for each coordinate system
-    root=${xml/.xml/}
-    EXPECTED_FILES=../test/$root.csv_expected_*
-    COUNT=0
-    COUNTER=1
-    for EXPECTED in $EXPECTED_FILES
-    do
-      let COUNT=COUNT+1;
-    done
-    for EXPECTED in $EXPECTED_FILES
-    do
-      actual=${EXPECTED/expected/actual}
-      if [[ COUNT -gt 1 ]]; 
-      then
-	  COUNTERSTRING="[$COUNTER/$COUNT]";
-      else
-	  COUNTERSTRING="";
-      fi
-      if cmp $EXPECTED $actual
-      then
-        echo "PASS   : $root $COUNTERSTRING"
-      else
-        echo "FAIL   : $root $COUNTERSTRING"
-      fi
-      let COUNTER=COUNTER+1
-    done
-done
+    # File command scripts do not generate output files so we are done if command line does not have 'errorreport'
+    if [[ $commandLine == *errorreport* ]]
+    then
 
-echo "Tests of file loading for supported versions"
-for dig in $OPEN_FILES
-do
-    # Run regression test
-    ../bin/engauge -regressionimport $dig
-
-    # Compare actual and desired output files. There is one pair for each coordinate system
-    root=${dig/.dig/}
-    EXPECTED_FILES=../test/$root.csv_expected_*
-    COUNT=0
-    COUNTER=1
-    for EXPECTED in $EXPECTED_FILES
-    do
-      let COUNT=COUNT+1;
-    done
-    for EXPECTED in $EXPECTED_FILES
-    do
-      actual=${EXPECTED/expected/actual}
-      if [[ COUNT -gt 1 ]]; 
-      then
-	  COUNTERSTRING="[$COUNTER/$COUNT]";
-      else
-	  COUNTERSTRING="";
-      fi
-      if cmp $EXPECTED $actual
-      then
-        echo "PASS   : $root $COUNTERSTRING"
-      else
-        echo "FAIL   : $root $COUNTERSTRING"
-      fi
-      let COUNTER=COUNTER+1
-    done
+	# Compare actual and desired output files. There is one pair for each coordinate system
+	root=${script/.test.commandline/}
+	EXPECTED_FILES=../test/$root.csv_expected_*
+	COUNT=0
+	COUNTER=1
+	for EXPECTED in $EXPECTED_FILES
+	do
+	    let COUNT=COUNT+1;
+	done
+	for EXPECTED in $EXPECTED_FILES
+	do
+	    actual=${EXPECTED/expected/actual}
+	    if [[ COUNT -gt 1 ]]; 
+	    then
+		COUNTERSTRING="[$COUNTER/$COUNT]";
+	    else
+		COUNTERSTRING="";
+	    fi
+	    if cmp $EXPECTED $actual
+	    then
+		echo "PASS   : $root $COUNTERSTRING"
+	    else
+		echo "FAIL   : $root $COUNTERSTRING"
+	    fi
+	    let COUNTER=COUNTER+1
+	done
+    fi
 done
 

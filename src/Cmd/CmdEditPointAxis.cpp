@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Edit axis point");
 
@@ -48,7 +49,14 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
-      ENGAUGE_ASSERT (false);
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1, %2, %3, %4, %5 and/or %6")
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_X_BEFORE)
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE)
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_X_AFTER)
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y_AFTER)
+                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
+                      .arg (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY));
   }
 
   // Boolean values
