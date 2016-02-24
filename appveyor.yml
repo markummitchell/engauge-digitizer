@@ -30,3 +30,20 @@ build_script:
   - move Makefile Makefile.orig
   - ps: gc Makefile.orig | %{ $_ -replace '551.lib', '.lib' } > Makefile
   - nmake
+
+after_build:
+  - cd C:\projects\engauge6
+  - mkdir engauge-build
+  - mkdir engauge-build\platforms
+  - copy %QTDIR%\plugins\platforms\qwindows.dll engauge-build\platforms
+  - copy bin\engauge.exe engauge-build
+  - copy log4cpp-1.1.1\lib\log4cpp.dll engauge-build
+  - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll engauge-build
+  - cd %QTDIR%\bin
+  - for %%I in (Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll) do copy %%I C:\projects\engauge6\engauge-build
+  - cd C:\projects\engauge6
+  - 7z a engauge-build.zip engauge-build
+
+artifacts:
+  - path: engauge-build.zip
+    name: engauge-build
