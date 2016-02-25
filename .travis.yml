@@ -2,21 +2,50 @@ dist: trusty
 
 language: cpp
 
+matrix:
+  include:
+    - os: linux
+    - os: osx
+      env: ARCH="x86_64"
+      compiler: "clang"
+     
 before_script:
- - "export DISPLAY=:99.0"
- - "sh -e /etc/init.d/xvfb start"
- - sleep 3 
+ - if [ `uname` = "Linux" ]; then
+     export DISPLAY=:99.0;
+     sh -e /etc/init.d/xvfb start;
+     sleep 3;
+   fi
 
 before_install:
- - sudo apt-get update -qq
- - sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb
+ - if [ `uname` = "Linux" ]; then
+     sudo apt-get update -qq;
+     sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
+   elif [ `uname` = "Darwin" ]; then
+     brew update;
+     brew install qt5 fftw log4cpp;
+     export QT5BREWHOME=`brew --prefix qt5`;
+   fi
 
 script:
+ - export ENGAUGE_RELEASE=1
+ - if [ `uname` = "Darwin" ]; then
+    export CPPFLAGS="-I$QT5BREWHOME/include";
+    export LDFLAGS="-L$QT5BREWHOME/lib";
+    export PATH=$QT5BREWHOME/bin:$PATH;
+   fi
  - qmake engauge.pro
+#hacks
+ - if [ `uname` = "Darwin" ]; then
+    sed -ibak '/^LIBS/s/-lQt5/-framework Qt/g' Makefile;
+    sed -ibak2 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' Makefile;
+   fi
  - make
- - cd help && ./build && cd ..
- - cd src && ./build_and_run_all_cli_tests && cd ..
- - cd src && ./build_and_run_all_gui_tests && cd ..
+#no tests on OSX
+ - if [ `uname` = "Linux" ]; then
+    cd help && ./build && cd ..;
+    cd src && ./build_and_run_all_cli_tests && cd ..;
+    cd src && ./build_and_run_all_gui_tests && cd ..;
+   fi
  
 after_success:
  - file bin/engauge*
