@@ -5,8 +5,13 @@ language: cpp
 matrix:
   include:
     - os: linux
+    - os: linux
+      env: ENGAUGE_RELEASE="1"
     - os: osx
       env: ARCH="x86_64"
+      compiler: "clang"
+    - os: osx
+      env: ARCH="x86_64" ENGAUGE_RELEASE="1"
       compiler: "clang"
      
 before_script:
@@ -27,7 +32,6 @@ before_install:
    fi
 
 script:
- - export ENGAUGE_RELEASE=1
  - if [ `uname` = "Darwin" ]; then
     export CPPFLAGS="-I$QT5BREWHOME/include";
     export LDFLAGS="-L$QT5BREWHOME/lib";
