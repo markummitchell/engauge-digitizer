@@ -1,10 +1,15 @@
 init:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 12.0"\VC\vcvarsall.bat x86
 
+environment:
+  matrix:
+    - ENGAUGE_RELEASE: "1"
+    - NOT_ENGAUGE_RELEASE: "1"
+
 install:
   - set QTDIR=C:\Qt\5.5\msvc2013
   - set PATH=%PATH%;%QTDIR%\bin
-  - cd C:\projects\engauge6
+  - cd %APPVEYOR_BUILD_FOLDER%
   - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
   - 7z x log4cpp-1.1.1.zip -aoa
   - mkdir fftw-3.3.4-dll32
@@ -22,17 +27,16 @@ install:
   - move *lib lib
 
 build_script:
-  - cd C:\projects\engauge6
-  - set ENGAUGE_RELEASE=1
-  - set LOG4CPP_HOME=C:\projects\engauge6\log4cpp-1.1.1
-  - set FFTW_HOME=C:\projects\engauge6\fftw-3.3.4-dll32
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\log4cpp-1.1.1
+  - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.4-dll32
   - qmake engauge.pro
   - move Makefile Makefile.orig
   - ps: gc Makefile.orig | %{ $_ -replace '551.lib', '.lib' } > Makefile
   - nmake
 
 after_build:
-  - cd C:\projects\engauge6
+  - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir engauge-build
   - mkdir engauge-build\platforms
   - mkdir engauge-build\imageformats
@@ -50,8 +54,8 @@ after_build:
   - copy log4cpp-1.1.1\lib\log4cpp.dll engauge-build
   - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll engauge-build
   - cd %QTDIR%\bin
-  - for %%I in (Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll) do copy %%I C:\projects\engauge6\engauge-build
-  - cd C:\projects\engauge6
+  - for %%I in (Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll) do copy %%I %APPVEYOR_BUILD_FOLDER%\engauge-build
+  - cd %APPVEYOR_BUILD_FOLDER%
   - 7z a engauge-build.zip engauge-build
 
 artifacts:
