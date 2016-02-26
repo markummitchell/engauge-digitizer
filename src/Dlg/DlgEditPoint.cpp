@@ -131,7 +131,9 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
   m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is X. For polar plots this is the radius R."));
+                                  "For cartesian plots this is X. For polar plots this is the radius R.\n\n"
+                                  "The expected format of the coordinate value is determined by the locale setting. If "
+                                  "typed values are not recognized as expected, check the local setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphX, 0);
   connect (m_editGraphX, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
 
@@ -144,7 +146,9 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
   m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For plot plots this is the angle Theta."));
+                                  "For cartesian plots this is Y. For plot plots this is the angle Theta.\n\n"
+                                  "The expected format of the coordinate value is determined by the locale setting. If "
+                                  "typed values are not recognized as expected, check the local setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphY, 0);
   connect (m_editGraphY, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
 
