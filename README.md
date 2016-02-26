@@ -4,6 +4,8 @@
 engauge6
 ========
 
+[![Join the chat at https://gitter.im/markummitchell/engauge6](https://badges.gitter.im/markummitchell/engauge6.svg)](https://gitter.im/markummitchell/engauge6?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
 
 Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent 
