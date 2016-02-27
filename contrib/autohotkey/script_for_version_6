@@ -1,0 +1,31 @@
+; Features courtesy of np-8, for Engauge version 6:
+;    Zoom in/out with Ctrl+Mouse Wheel
+;    WASD keys for moving in the window
+;    Q/E for zoom in/out
+;    Use 1,2,3,4,5 & 6 to select tools instead of Shift-F2, ... etc.
+
+`#MaxHotkeysPerInterval 200
+#HotkeyInterval 500
+
+#IfWinActive, Engauge Digitizer
+
+; Zoom in and out with control+mouse wheel
+^WheelDown::Send {-}
+^WheelUp::Send {+}
+
+; WASD-keys for moving in the window
+; and Q/E for zooming
+a::SendInput !{WheelUp}
+d::SendInput !{WheelDown}
+w::SendInput {WheelUp}
+s::SendInput {WheelDown}
+q::Send {-}
+e::Send {+}
+
+; Shorcuts for the tools
+1::SendInput +{F2}
+2::SendInput +{F3}
+3::SendInput +{F4}
+4::SendInput +{F5}
+5::SendInput +{F6}
+6::SendInput +{F7}`
