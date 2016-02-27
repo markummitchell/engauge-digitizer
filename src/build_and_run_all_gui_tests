@@ -30,7 +30,6 @@ do
 	    else
 		COUNTERSTRING="";
 	    fi
-	    echo "<$EXPECTED>" "$actual" `pwd`
 	    if cmp $EXPECTED $actual
 	    then
 		echo "PASS   : $root $COUNTERSTRING"
