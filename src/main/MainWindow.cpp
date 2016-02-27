@@ -137,6 +137,9 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (0),
   m_timerRegressionFileCmdScript(0)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
+                              << " curDir=" << QDir::currentPath().toLatin1().data();
+
   LoggerUpload::bindToMainWindow(this);
 
   QString initialPath = QDir::currentPath();

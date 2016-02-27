@@ -120,7 +120,14 @@ void parseCmdLine (int argc,
     } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
       showUsage = true; // User entered an unrecognized token
     } else {
-      loadStartupFiles << argv [i]; // Save file name
+      // MainWindow will change current directory (which is often some obscure application directory),
+      // so relative paths must be changed in advance to absolute so the files can still be found
+      QString fileName = argv [i];
+      QFileInfo fInfo (fileName);
+      if (fInfo.isRelative()) {
+        fileName = fInfo.absoluteFilePath();
+      }
+      loadStartupFiles << fileName; // Save file name
     }
   }
 
