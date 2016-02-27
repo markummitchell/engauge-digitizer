@@ -1,7 +1,7 @@
 <Script>
-  <Cmd Type="CmdFileOpen" FileName="../test/version6.dig" />
+  <Cmd Type="CmdFileOpen" FileName="../test/version6_1.dig" />
   <Cmd Type="CmdFileClose" />
-  <Cmd Type="CmdFileOpen" FileName="../test/version6.dig" />
+  <Cmd Type="CmdFileOpen" FileName="../test/version6_1.dig" />
   <Cmd Type="CmdFileClose" />
 </Script>
 
