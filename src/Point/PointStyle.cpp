@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "PointStyle.h"
 #include <qmath.h>
+#include <QObject>
 #include <QSettings>
 #include <QTextStream>
 #include <QtToString.h>
@@ -136,7 +137,7 @@ void PointStyle::loadXml(QXmlStreamReader &reader)
       loadNextFromReader(reader);
     }
   } else {
-    reader.raiseError ("Cannot read point style data");
+    reader.raiseError (QObject::tr ("Cannot read point style data"));
   }
 }
 

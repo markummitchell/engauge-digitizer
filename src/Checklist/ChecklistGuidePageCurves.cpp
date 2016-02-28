@@ -16,11 +16,11 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::ChecklistGuidePageCurves";
 
-  const QString WHATS_THIS_CURVE ("Curve name. Empty if unused.");
-  const QString WHATS_THIS_LINES ("Draw lines between points in each curve.");
-  const QString WHATS_THIS_POINTS ("Draw points in each curve, without lines between the points.");
+  const QString WHATS_THIS_CURVE (tr ("Curve name. Empty if unused."));
+  const QString WHATS_THIS_LINES (tr ("Draw lines between points in each curve."));
+  const QString WHATS_THIS_POINTS (tr ("Draw points in each curve, without lines between the points."));
 
-  addHtml ("<p>What are the names of the curves that are to be digitized? At least one entry is required.</p>");
+  addHtml (tr ("<p>What are the names of the curves that are to be digitized? At least one entry is required.</p>"));
 
   m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
 
@@ -39,11 +39,11 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
 
   addHtml ("<p>&nbsp;</p>");
 
-  addHtml ("<p>How are those curves drawn?</p>");
+  addHtml (tr ("<p>How are those curves drawn?</p>"));
 
-  m_btnLines = addLabelAndRadioButton ("With lines (with or without points)",
+  m_btnLines = addLabelAndRadioButton (tr ("With lines (with or without points)"),
                                        WHATS_THIS_LINES);
-  m_btnPoints = addLabelAndRadioButton ("With points only (no lines between points)",
+  m_btnPoints = addLabelAndRadioButton (tr ("With points only (no lines between points)"),
                                         WHATS_THIS_POINTS);
 
   m_btnLines->setChecked (true); // Default encourages digitizing using the lines, since that is easier

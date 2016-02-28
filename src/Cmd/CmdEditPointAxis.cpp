@@ -50,12 +50,14 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1, %2, %3, %4, %5 and/or %6")
+                      QString ("%1 %2, %3, %4, %5, %6 %7 %8")
+                      .arg (QObject::tr ("Missing attribute(s)"))
                       .arg (DOCUMENT_SERIALIZE_GRAPH_X_BEFORE)
                       .arg (DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE)
                       .arg (DOCUMENT_SERIALIZE_GRAPH_X_AFTER)
                       .arg (DOCUMENT_SERIALIZE_GRAPH_Y_AFTER)
                       .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
+                      .arg (QObject::tr ("and/or"))
                       .arg (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY));
   }
 

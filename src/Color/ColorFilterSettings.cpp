@@ -202,7 +202,7 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read curve filter data");
+    reader.raiseError (QObject::tr ("Cannot read curve filter data"));
   }
 }
 

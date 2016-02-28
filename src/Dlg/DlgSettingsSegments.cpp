@@ -67,7 +67,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createControls";
 
-  QLabel *labelMinLength = new QLabel("Minimum length (points):");
+  QLabel *labelMinLength = new QLabel(tr ("Minimum length (points):"));
   layout->addWidget(labelMinLength, row, 1);
 
   m_spinMinLength = new QSpinBox;
@@ -79,7 +79,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_spinMinLength, SIGNAL (valueChanged (const QString &)), this, SLOT (slotMinLength (const QString &)));
   layout->addWidget(m_spinMinLength, row++, 2);
 
-  QLabel *labelPointSeparation = new QLabel("Point separation (pixels):");
+  QLabel *labelPointSeparation = new QLabel(tr ("Point separation (pixels):"));
   layout->addWidget (labelPointSeparation, row, 1);
 
   m_spinPointSeparation = new QSpinBox;
@@ -92,7 +92,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_spinPointSeparation, SIGNAL (valueChanged (const QString &)), this, SLOT (slotPointSeparation (const QString &)));
   layout->addWidget (m_spinPointSeparation, row++, 2);
 
-  QLabel *labelFillCorners = new QLabel ("Fill corners:");
+  QLabel *labelFillCorners = new QLabel (tr ("Fill corners:"));
   layout->addWidget (labelFillCorners, row, 1);
 
   m_chkFillCorners = new QCheckBox;
@@ -103,7 +103,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_chkFillCorners, SIGNAL (stateChanged (int)), this, SLOT (slotFillCorners (int)));
   layout->addWidget (m_chkFillCorners, row++, 2);
 
-  QLabel *labelLineWidth = new QLabel("Line width:");
+  QLabel *labelLineWidth = new QLabel(tr ("Line width:"));
   layout->addWidget (labelLineWidth, row, 1);
 
   m_spinLineWidth = new QSpinBox;
@@ -112,7 +112,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
   layout->addWidget (m_spinLineWidth, row++, 2);
 
-  QLabel *labelLineColor = new QLabel("Line color:");
+  QLabel *labelLineColor = new QLabel(tr ("Line color:"));
   layout->addWidget (labelLineColor, row, 1);
 
   m_cmbLineColor = new QComboBox;
@@ -131,7 +131,7 @@ void DlgSettingsSegments::createPreview (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::createPreview";
 
-  QLabel *labelPreview = new QLabel ("Preview");
+  QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);

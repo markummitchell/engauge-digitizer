@@ -50,7 +50,7 @@ void DlgSettingsGridRemoval::createPreview (QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createPreview";
 
-  QLabel *labelPreview = new QLabel ("Preview");
+  QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 5);
 
   m_scenePreview = new QGraphicsScene (this);
@@ -68,20 +68,20 @@ void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &ro
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLines";
 
-  m_chkRemoveGridLines = new QCheckBox ("Remove pixels close to defined grid lines");
-  m_chkRemoveGridLines->setWhatsThis ("Check this box to have pixels close to regularly spaced gridlines removed.\n\n"
-                                      "This option is only available when the axis points have all been defined.");
+  m_chkRemoveGridLines = new QCheckBox (tr ("Remove pixels close to defined grid lines"));
+  m_chkRemoveGridLines->setWhatsThis (tr ("Check this box to have pixels close to regularly spaced gridlines removed.\n\n"
+                                          "This option is only available when the axis points have all been defined."));
   connect (m_chkRemoveGridLines, SIGNAL (stateChanged (int)), this, SLOT (slotRemoveGridLines (int)));
   layout->addWidget (m_chkRemoveGridLines, row++, 1, 1, 3);
 
-  QLabel *labelCloseDistance = new QLabel ("Close distance (pixels):");
+  QLabel *labelCloseDistance = new QLabel (tr ("Close distance (pixels):"));
   layout->addWidget (labelCloseDistance, row, 2);
 
   m_editCloseDistance = new QLineEdit;
-  m_editCloseDistance->setWhatsThis ("Set closeness distance in pixels.\n\n"
-                                     "Pixels that are closer to the regularly spaced gridlines, than this distance, "
-                                     "will be removed.\n\n"
-                                     "This value cannot be negative. A zero value disables this feature. Decimal values are allowed");
+  m_editCloseDistance->setWhatsThis (tr ("Set closeness distance in pixels.\n\n"
+                                         "Pixels that are closer to the regularly spaced gridlines, than this distance, "
+                                         "will be removed.\n\n"
+                                         "This value cannot be negative. A zero value disables this feature. Decimal values are allowed"));
   m_validatorCloseDistance = new QDoubleValidator (CLOSE_DISTANCE_MIN, CLOSE_DISTANCE_MAX, CLOSE_DECIMALS);
   m_editCloseDistance->setValidator (m_validatorCloseDistance);
   connect (m_editCloseDistance, SIGNAL (textChanged (const QString &)), this, SLOT (slotCloseDistance (const QString &)));
@@ -95,9 +95,9 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLinesX";
 
-  QString titleX = "X Grid Lines";
+  QString titleX = tr ("X Grid Lines");
   if (false) {
-    titleX = QString (QChar (0x98, 0x03)) + QString (" Grid Lines");
+    titleX = QString (QChar (0x98, 0x03)) + QString (" %1").arg (tr ("Grid Lines"));
   }
   QGroupBox *groupX = new QGroupBox (titleX);
   layout->addWidget (groupX, row, 2);
@@ -105,14 +105,14 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupX->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel ("Disable:");
+  QLabel *labelDisable = new QLabel (tr ("Disable:"));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableX = new QComboBox;
-  m_cmbDisableX->setWhatsThis ("Disabled value.\n\n"
-                               "The X grid lines are specified using only three values at a time. For flexibility, four values "
-                               "are offered so you must chose which value is disabled. Once disabled, that value is simply "
-                               "updated as the other values change");
+  m_cmbDisableX->setWhatsThis (tr ("Disabled value.\n\n"
+                                   "The X grid lines are specified using only three values at a time. For flexibility, four values "
+                                   "are offered so you must chose which value is disabled. Once disabled, that value is simply "
+                                   "updated as the other values change"));
   m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_COUNT),
                          QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableX->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_START),
@@ -124,45 +124,45 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_cmbDisableX, SIGNAL (activated (const QString &)), this, SLOT (slotDisableX (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
-  QLabel *labelCount = new QLabel ("Count:");
+  QLabel *labelCount = new QLabel (tr ("Count:"));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountX = new QLineEdit;
-  m_editCountX->setWhatsThis ("Number of X grid lines.\n\n"
-                              "The number of X grid lines must be entered as an integer greater than zero");
+  m_editCountX->setWhatsThis (tr ("Number of X grid lines.\n\n"
+                                  "The number of X grid lines must be entered as an integer greater than zero"));
   m_validatorCountX = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
   m_editCountX->setValidator (m_validatorCountX);
   connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
-  QLabel *labelStart = new QLabel ("Start:");
+  QLabel *labelStart = new QLabel (tr ("Start:"));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartX = new QLineEdit;
-  m_editStartX->setWhatsThis ("Value of the first X grid line.\n\n"
-                              "The start value cannot be greater than the stop value");
+  m_editStartX->setWhatsThis (tr ("Value of the first X grid line.\n\n"
+                                  "The start value cannot be greater than the stop value"));
   m_validatorStartX = new QDoubleValidator;
   m_editStartX->setValidator (m_validatorStartX);
   connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
-  QLabel *labelStep = new QLabel ("Step:");
+  QLabel *labelStep = new QLabel (tr ("Step:"));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepX = new QLineEdit;
-  m_editStepX->setWhatsThis ("Difference in value between two successive X grid lines.\n\n"
-                             "The step value must be greater than zero");
+  m_editStepX->setWhatsThis (tr ("Difference in value between two successive X grid lines.\n\n"
+                                 "The step value must be greater than zero"));
   m_validatorStepX = new QDoubleValidator;
   m_editStepX->setValidator (m_validatorStepX);
   connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
-  QLabel *labelStop = new QLabel ("Stop:");
+  QLabel *labelStop = new QLabel (tr ("Stop:"));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopX = new QLineEdit;
-  m_editStopX->setWhatsThis ("Value of the last X grid line.\n\n"
-                             "The stop value cannot be less than the start value");
+  m_editStopX->setWhatsThis (tr ("Value of the last X grid line.\n\n"
+                                 "The stop value cannot be less than the start value"));
   m_validatorStopX = new QDoubleValidator;
   m_editStopX->setValidator (m_validatorStopX);
   connect (m_editStopX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopX (const QString &)));
@@ -173,9 +173,9 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createRemoveGridLinesY";
 
-  QString titleY = "Y Grid Lines";
+  QString titleY = tr ("Y Grid Lines");
   if (false) {
-    titleY = QString ("R Grid Lines");
+    titleY = QString (tr ("R Grid Lines"));
   }
   QGroupBox *groupY = new QGroupBox (titleY);
   layout->addWidget (groupY, row++, 3);
@@ -183,14 +183,14 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupY->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel ("Disable:");
+  QLabel *labelDisable = new QLabel (tr ("Disable:"));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableY = new QComboBox;
-  m_cmbDisableY->setWhatsThis ("Disabled value.\n\n"
-                               "The Y grid lines are specified using only three values at a time. For flexibility, four values "
-                               "are offered so you must chose which value is disabled. Once disabled, that value is simply "
-                               "updated as the other values change");
+  m_cmbDisableY->setWhatsThis (tr ("Disabled value.\n\n"
+                                   "The Y grid lines are specified using only three values at a time. For flexibility, four values "
+                                   "are offered so you must chose which value is disabled. Once disabled, that value is simply "
+                                   "updated as the other values change"));
   m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_COUNT),
                          QVariant (GRID_COORD_DISABLE_COUNT));
   m_cmbDisableY->addItem(gridCoordDisableToString (GRID_COORD_DISABLE_START),
@@ -202,45 +202,45 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_cmbDisableY, SIGNAL (activated (const QString &)), this, SLOT (slotDisableY (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
-  QLabel *labelCount = new QLabel ("Count:");
+  QLabel *labelCount = new QLabel (tr ("Count:"));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountY = new QLineEdit;
-  m_editCountY->setWhatsThis ("Number of Y grid lines.\n\n"
-                              "The number of Y grid lines must be entered as an integer greater than zero");
+  m_editCountY->setWhatsThis (tr ("Number of Y grid lines.\n\n"
+                                  "The number of Y grid lines must be entered as an integer greater than zero"));
   m_validatorCountY = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
   m_editCountY->setValidator (m_validatorCountY);
   connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
-  QLabel *labelStart = new QLabel ("Start:");
+  QLabel *labelStart = new QLabel (tr ("Start:"));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartY = new QLineEdit;
-  m_editStartY->setWhatsThis ("Value of the first Y grid line.\n\n"
-                              "The start value cannot be greater than the stop value");
+  m_editStartY->setWhatsThis (tr ("Value of the first Y grid line.\n\n"
+                                  "The start value cannot be greater than the stop value"));
   m_validatorStartY = new QDoubleValidator;
   m_editStartY->setValidator (m_validatorStartY);
   connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
-  QLabel *labelStep = new QLabel ("Step:");
+  QLabel *labelStep = new QLabel (tr ("Step:"));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepY = new QLineEdit;
-  m_editStepY->setWhatsThis ("Difference in value between two successive Y grid lines.\n\n"
-                             "The step value must be greater than zero");
+  m_editStepY->setWhatsThis (tr ("Difference in value between two successive Y grid lines.\n\n"
+                                 "The step value must be greater than zero"));
   m_validatorStepY = new QDoubleValidator;
   m_editStepY->setValidator (m_validatorStepY);
   connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
-  QLabel *labelStop = new QLabel ("Stop:");
+  QLabel *labelStop = new QLabel (tr ("Stop:"));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopY = new QLineEdit;
-  m_editStopY->setWhatsThis ("Value of the last Y grid line.\n\n"
-                             "The stop value cannot be less than the start value");
+  m_editStopY->setWhatsThis (tr ("Value of the last Y grid line.\n\n"
+                                 "The stop value cannot be less than the start value"));
   m_validatorStopY = new QDoubleValidator;
   m_editStopY->setValidator (m_validatorStopY);
   connect (m_editStopY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopY (const QString &)));

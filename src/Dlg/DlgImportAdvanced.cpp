@@ -37,7 +37,7 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   int row = 0;
 
   // Coordinate system count
-  QLabel *labelCoordCount = new QLabel ("Coordinate System Count:");
+  QLabel *labelCoordCount = new QLabel (tr ("Coordinate System Count:"));
   layout->addWidget (labelCoordCount, row, 1);
 
   m_spinCoordSystemCount = new QSpinBox;
@@ -51,7 +51,7 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   layout->addWidget (m_spinCoordSystemCount, row++, 2);
 
   // Axes point count
-  QLabel *labelPointCount = new QLabel ("Axes Points Count:");
+  QLabel *labelPointCount = new QLabel (tr ("Axes Points Count:"));
   layout->addWidget (labelPointCount, row, 1);
 
   m_btnAxesPointCount3 = new QRadioButton (tr ("3 points"));

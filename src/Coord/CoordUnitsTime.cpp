@@ -1,18 +1,19 @@
 #include "CoordUnitsTime.h"
+#include <QObject>
 
 QString coordUnitsTimeToString (CoordUnitsTime coordUnits)
 {
   switch (coordUnits) {
     case COORD_UNITS_TIME_HOUR_MINUTE:
-      return "HH:MM";
+      return QObject::tr ("HH:MM");
 
     case COORD_UNITS_TIME_HOUR_MINUTE_SECOND:
-      return "HH:MM:SS";
+      return QObject::tr ("HH:MM:SS");
 
     case COORD_UNITS_TIME_SKIP:
       return "";
 
     default:
-      return "unknown";
+      return QObject::tr ("unknown");
   }
 }

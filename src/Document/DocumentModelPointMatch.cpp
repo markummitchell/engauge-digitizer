@@ -2,6 +2,7 @@
 #include "DocumentModelPointMatch.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QObject>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -77,7 +78,7 @@ void DocumentModelPointMatch::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read point match data");
+    reader.raiseError (QObject::tr ("Cannot read point match data"));
   }
 }
 

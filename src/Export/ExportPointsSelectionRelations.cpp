@@ -1,15 +1,16 @@
 #include "ExportPointsSelectionRelations.h"
+#include <QObject>
 
 extern QString exportPointsSelectionRelationsToString (ExportPointsSelectionRelations exportPointsSelectionRelations)
 {
   switch (exportPointsSelectionRelations) {
     case EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE:
-      return "Interpolate";
+      return QObject::tr ("Interpolate");
 
     case EXPORT_POINTS_SELECTION_RELATIONS_RAW:
-      return "Raw";
+      return QObject::tr ("Raw");
 
     default:
-      return "Unknown";
+      return QObject::tr ("Unknown");
   }
 }

@@ -23,9 +23,9 @@ HelpWindow::HelpWindow(QWidget *parent) :
 
   QTabWidget *tabs = new QTabWidget;
   tabs->addTab (helpEngine->contentWidget(),
-                "Contents");
+                tr ("Contents"));
   tabs->addTab (helpEngine->indexWidget(),
-                "Index");
+                tr ("Index"));
 
   HelpBrowser *browser = new HelpBrowser (helpEngine);
   browser->setSource (QUrl ("qthelp://engaugedigitizer.net/doc/index.html"));

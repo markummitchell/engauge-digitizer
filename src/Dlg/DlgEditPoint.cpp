@@ -104,7 +104,8 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                                                                                    m_modelMainWindow.locale());
 
   // Label, with guidance in terms of legal ranges and units
-  QString description = QString ("Graph Coordinates (%1, %2)%3%4%5%6%7%8 as (%9, %10):")
+  QString description = QString ("%1 (%2, %3)%4%5%6%7%8%9 %10 (%11, %12):")
+                        .arg (tr ("Graph Coordinates"))
                         .arg (nameXTheta ())
                         .arg (nameYRadius ())
                         .arg (isConstraintX || isConstraintY ? " with " : "")
@@ -113,6 +114,7 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                         .arg (isConstraintX && isConstraintY ? " and " : "")
                         .arg (                 isConstraintY ? QString (nameYRadius ()) : "")
                         .arg (                 isConstraintY ? " > 0" : "")
+                        .arg (tr ("as"))
                         .arg (unitsType (IS_X_THETA))
                         .arg (unitsType (IS_NOT_X_THETA));
   QGroupBox *panel = new QGroupBox (description, this);

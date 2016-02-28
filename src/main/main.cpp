@@ -6,6 +6,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFileInfo>
+#include <QObject>
 #include <QProcessEnvironment>
 
 using namespace std;
@@ -185,13 +186,20 @@ void parseCmdLine (int argc,
          << "[" << DASH_HELP.toLatin1().data() << "] "
          << "[" << DASH_REGRESSION.toLatin1().data() << "] "
          << "[<load_file1>] [<load_file2>] ..." << endl
-         << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Enables extra debug information. Used for debugging" << endl
-         << "  " << DASH_ERROR_REPORT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Specifies an error report file as input. Used for debugging and testing" << endl
-         << "  " << DASH_FILE_CMD_SCRIPT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Specifies a file command script file as input. Used for debugging and testing" << endl
-         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Output diagnostic gnuplot input files. Used for debugging" << endl
-         << "  " << DASH_HELP.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Show this help information" << endl
-         << "  " << DASH_REGRESSION.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "Executes the error report file or file command script. Used for regression testing" << endl
-         << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data() << "File(s) to be imported or opened at startup" << endl;
+         << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data() << endl
+         << "  " << DASH_ERROR_REPORT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data() << endl
+         << "  " << DASH_FILE_CMD_SCRIPT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Specifies a file command script file as input. Used for debugging and testing").toLatin1().data() << endl
+         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Output diagnostic gnuplot input files. Used for debugging").toLatin1().data() << endl
+         << "  " << DASH_HELP.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Show this help information").toLatin1().data() << endl
+         << "  " << DASH_REGRESSION.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Executes the error report file or file command script. Used for regression testing").toLatin1().data() << endl
+         << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data() << endl;
 
     exit (0);
   }

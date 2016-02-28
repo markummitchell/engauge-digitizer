@@ -43,7 +43,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
 
   const int COLUMN0 = 0;
 
-  QLabel *labelZoomFactor = new QLabel ("Initial zoom:");
+  QLabel *labelZoomFactor = new QLabel (tr ("Initial zoom:"));
   layout->addWidget (labelZoomFactor, row, 1);
 
   m_cmbZoomFactor = new QComboBox;
@@ -64,20 +64,20 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbZoomFactor, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomFactor(const QString)));
   layout->addWidget (m_cmbZoomFactor, row++, 2);
 
-  QLabel *labelZoomControl = new QLabel ("Zoom control:");
+  QLabel *labelZoomControl = new QLabel (tr ("Zoom control:"));
   layout->addWidget (labelZoomControl, row, 1);
 
   m_cmbZoomControl = new QComboBox;
-  m_cmbZoomControl->addItem ("Menu only"                     , QVariant (ZOOM_CONTROL_MENU_ONLY));
-  m_cmbZoomControl->addItem ("Menu and mouse wheel"          , QVariant (ZOOM_CONTROL_MENU_WHEEL));
-  m_cmbZoomControl->addItem ("Menu and +/- keys"             , QVariant (ZOOM_CONTROL_MENU_PLUSMINUS));
-  m_cmbZoomControl->addItem ("Menu, mouse wheel and +/- keys", QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS));
+  m_cmbZoomControl->addItem (tr ("Menu only"                     ), QVariant (ZOOM_CONTROL_MENU_ONLY));
+  m_cmbZoomControl->addItem (tr ("Menu and mouse wheel"          ), QVariant (ZOOM_CONTROL_MENU_WHEEL));
+  m_cmbZoomControl->addItem (tr ("Menu and +/- keys"             ), QVariant (ZOOM_CONTROL_MENU_PLUSMINUS));
+  m_cmbZoomControl->addItem (tr ("Menu, mouse wheel and +/- keys"), QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS));
   m_cmbZoomControl->setWhatsThis (tr ("Zoom Control\n\n"
                                       "Select which inputs are used to zoom in and out."));
   connect (m_cmbZoomControl, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomControl(const QString)));
   layout->addWidget (m_cmbZoomControl, row++, 2);
 
-  QLabel *labelLocale = new QLabel ("Locale:");
+  QLabel *labelLocale = new QLabel (tr ("Locale:"));
   layout->addWidget (labelLocale, row, 1);
 
   // Initialization of combobox is liberated from Qt Calendar example

@@ -195,7 +195,7 @@ void CurvesGraphs::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read graph curves data");
+    reader.raiseError (QObject::tr ("Cannot read graph curves data"));
   }
 }
 

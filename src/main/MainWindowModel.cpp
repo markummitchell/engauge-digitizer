@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "MainWindowModel.h"
 #include <QLocale>
+#include <QObject>
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamWriter>
@@ -49,7 +50,7 @@ void MainWindowModel::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read main window data");
+    reader.raiseError (QObject::tr ("Cannot read main window data"));
   }
 }
 

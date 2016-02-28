@@ -52,14 +52,14 @@ void DlgSettingsCurveAddRemove::createButtons (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createButtons";
 
-  m_btnAdd = new QPushButton ("Add...");
+  m_btnAdd = new QPushButton (tr ("Add..."));
   m_btnAdd->setWhatsThis (tr ("Adds a new curve to the curve list. The curve name can be edited in the curve name list.\n\n"
                               "Every curve name must be unique"));
   m_btnAdd->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   connect (m_btnAdd, SIGNAL (released ()), this, SLOT (slotNew()));
   layout->addWidget (m_btnAdd, row, 1, 1, 1, Qt::AlignLeft);
 
-  m_btnRemove = new QPushButton ("Remove");
+  m_btnRemove = new QPushButton (tr ("Remove"));
   m_btnRemove->setWhatsThis (tr ("Removes the currently selected curve from the curve list.\n\n"
                                  "There must always be at least one curve"));
   m_btnRemove->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -103,7 +103,7 @@ void DlgSettingsCurveAddRemove::createOptionalSaveDefault (QHBoxLayout *layout)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createOptionalSaveDefault";
 
-  m_btnSaveDefault = new QPushButton ("Save As Default");
+  m_btnSaveDefault = new QPushButton (tr ("Save As Default"));
   m_btnSaveDefault->setWhatsThis (tr ("Save the curve names for use as defaults for future graph curves."));
   connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
   layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
@@ -395,13 +395,19 @@ void DlgSettingsCurveAddRemove::slotRemove ()
 
     QString msg;
     if (m_listCurves->selectionModel ()->selectedIndexes ().count () == 1) {
-      msg = QString ("Removing this curve will also remove %1 points. Continue?").arg (numPoints);
+      msg = QString ("%1 %2 %3")
+            .arg (tr ("Removing this curve will also remove"))
+            .arg (numPoints)
+            .arg (tr ("points. Continue?"));
     } else {
-      msg = QString ("Removing these curves will also remove %1 points. Continue?").arg (numPoints);
+      msg = QString ("%1 %2 %3")
+            .arg (tr ("Removing these curves will also remove"))
+            .arg (numPoints)
+            .arg (tr ("points. Continue?"));
     }
 
     rtn = QMessageBox::warning (0,
-                                "Curves With Points",
+                                tr ("Curves With Points"),
                                 msg,
                                 QMessageBox::Ok,
                                 QMessageBox::Cancel);

@@ -69,7 +69,8 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
     loadNextFromReader(reader);
     if (reader.atEnd()) {
       xmlExitWithError (reader,
-                        QString ("Reached end of file before finding end element for %1")
+                        QString ("%1 %2")
+                        .arg (QObject::tr ("Reached end of file before finding end element for"))
                         .arg (DOCUMENT_SERIALIZE_CMD));
       success = false;
       break;

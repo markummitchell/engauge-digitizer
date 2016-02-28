@@ -16,6 +16,8 @@ class QPushButton;
 /// Wizard for setting up the checklist guide
 class ChecklistGuideWizard : public QWizard
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   ChecklistGuideWizard(MainWindow &mainWindow,

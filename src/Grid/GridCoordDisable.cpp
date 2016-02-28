@@ -1,21 +1,22 @@
 #include "GridCoordDisable.h"
+#include <QObject>
 
 QString gridCoordDisableToString (GridCoordDisable gridCoordDisable)
 {
   switch (gridCoordDisable) {
     case GRID_COORD_DISABLE_COUNT:
-      return "Count";
+      return QObject::tr ("Count");
 
     case GRID_COORD_DISABLE_START:
-      return "Start";
+      return QObject::tr ("Start");
 
     case GRID_COORD_DISABLE_STEP:
-      return "Step";
+      return QObject::tr ("Step");
 
     case GRID_COORD_DISABLE_STOP:
-      return "Stop";
+      return QObject::tr ("Stop");
 
     default:
-      return "Unknown";
+      return QObject::tr ("Unknown");
   }
 }

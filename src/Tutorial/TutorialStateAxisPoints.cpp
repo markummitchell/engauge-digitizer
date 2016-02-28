@@ -17,34 +17,34 @@ void TutorialStateAxisPoints::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::begin ()";
 
-  m_title = createTitle ("Axis Points");
+  m_title = createTitle (tr ("Axis Points"));
   m_background = createPixmapItem (":/engauge/img/panel_axis_points.png",
                                    QPoint (0, 30));
-  m_text0 = createTextItem ("Axis points are first defined to\n"
-                            "define the coordinates. Step 1 -\n"
-                            "Click on the Axis Points button",
+  m_text0 = createTextItem (tr ("Axis points are first defined to\n"
+                                "define the coordinates. Step 1 -\n"
+                                "Click on the Axis Points button"),
                             QPoint (320, 60));
-  m_text1 = createTextItem ("Step 2 - Click on an axis or grid\n"
-                            "line with known coordinates. An axis\n"
-                            "point appears, with a dialog window\n"
-                            "for entering the axis point's\n"
-                            "coordinates",
+  m_text1 = createTextItem (tr ("Step 2 - Click on an axis or grid\n"
+                                "line with known coordinates. An axis\n"
+                                "point appears, with a dialog window\n"
+                                "for entering the axis point's\n"
+                                "coordinates"),
                             QPoint (300, 210));
-  m_text2 = createTextItem ("Step 3 - Enter the two coordinates\n"
-                            "of the axis point and then click Ok.\n"
-                            "Repeat steps 2 and 3 twice more\n"
-                            "until three axis points are created",
+  m_text2 = createTextItem (tr ("Step 3 - Enter the two coordinates\n"
+                                "of the axis point and then click Ok.\n"
+                                "Repeat steps 2 and 3 twice more\n"
+                                "until three axis points are created"),
                             QPoint (280, 320));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
-  m_previous = new TutorialButton ("Previous",
+  m_previous = new TutorialButton (tr ("Previous"),
                                    context().tutorialDlg().scene());
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height() - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
 
-  m_next = new TutorialButton ("Next",
+  m_next = new TutorialButton (tr ("Next"),
                                context().tutorialDlg().scene());
   m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
                                backgroundSize.height () - buttonMargin () - m_next->size ().height ()));

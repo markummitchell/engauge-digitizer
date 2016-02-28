@@ -504,7 +504,10 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
         m_modelSegments.loadXml (reader);
       } else {
         m_successfulRead = false;
-        m_reasonForUnsuccessfulRead = QString ("Unexpected xml token '%1' encountered").arg (tag);
+        m_reasonForUnsuccessfulRead = QString ("%1 '%2' %3")
+                                      .arg (QObject::tr ("Unexpected xml token"))
+                                      .arg (tag)
+                                      .arg ("encountered");
         break;
       }
     }

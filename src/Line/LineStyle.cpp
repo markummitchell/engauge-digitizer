@@ -1,6 +1,7 @@
 #include "DocumentSerialize.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include <QObject>
 #include <QSettings>
 #include <QTextStream>
 #include <QXmlStreamReader>
@@ -114,7 +115,7 @@ void LineStyle::loadXml(QXmlStreamReader &reader)
       loadNextFromReader(reader);
     }
   } else {
-    reader.raiseError ("Cannot read line style data");
+    reader.raiseError (QObject::tr ("Cannot read line style data"));
   }
 }
 

@@ -196,7 +196,7 @@ void DocumentModelColorFilter::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError("Cannot read filter data");
+    reader.raiseError(QObject::tr ("Cannot read filter data"));
   }
 
   // Read past the end token from the first settings so that is not confused with the end token from the after settings

@@ -8,6 +8,8 @@ class MainWindow;
 /// About Engauge dialog. This provides a hidden shortcut for triggering ENGAUGE_ASSERT
 class DlgAbout : public QMessageBox
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   DlgAbout(MainWindow  &mainWindow);

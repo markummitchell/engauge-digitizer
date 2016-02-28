@@ -2,6 +2,7 @@
 #include "DocumentModelDigitizeCurve.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QObject>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -98,7 +99,7 @@ void DocumentModelDigitizeCurve::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read digitize curve data");
+    reader.raiseError (QObject::tr ("Cannot read digitize curve data"));
   }
 }
 

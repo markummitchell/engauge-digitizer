@@ -20,6 +20,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QImage>
+#include <QObject>
 #include <QtToString.h>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -77,7 +78,7 @@ Document::Document (const QString &fileName) :
       } else {
 
         m_successfulRead = false;
-        m_reasonForUnsuccessfulRead = "Operating system says file is not readable";
+        m_reasonForUnsuccessfulRead = QObject::tr ("Operating system says file is not readable");
 
       }
     } else {
@@ -98,9 +99,11 @@ Document::Document (const QString &fileName) :
 
           default:
             m_successfulRead = false;
-            m_reasonForUnsuccessfulRead = QString ("Engauge %1 cannot read newer files from version %2 of Engauge")
+            m_reasonForUnsuccessfulRead = QString ("Engauge %1 %2 %3 %4 Engauge")
                                           .arg (VERSION_NUMBER)
-                                          .arg (version);
+                                          .arg (QObject::tr ("cannot read newer files from version"))
+                                          .arg (version)
+                                          .arg (QObject::tr ("of"));
             break;
         }
 
@@ -112,14 +115,16 @@ Document::Document (const QString &fileName) :
       } else {
 
         m_successfulRead = false;
-        m_reasonForUnsuccessfulRead = "Operating system says file is not readable";
+        m_reasonForUnsuccessfulRead = QObject::tr ("Operating system says file is not readable");
       }
     }
   } else {
     file->close ();
     m_successfulRead = false;
-    m_reasonForUnsuccessfulRead = QString ("File '%1' was not found")
-                                  .arg (fileName);
+    m_reasonForUnsuccessfulRead = QString ("%1 '%2' %3")
+                                  .arg (QObject::tr ("File"))
+                                  .arg (fileName)
+                                  .arg (QObject::tr ("was not found"));
 
   }
 }
@@ -416,7 +421,7 @@ void Document::loadImage(QXmlStreamReader &reader)
     // This point can be reached if:
     // 1) File is broken
     // 2) Bad character is in text, and NetworkClient::cleanXml did not do its job
-    reader.raiseError ("Cannot read image data");
+    reader.raiseError (QObject::tr ("Cannot read image data"));
   }
 }
 

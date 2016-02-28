@@ -38,7 +38,7 @@ void DlgSettingsGeneral::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::createControls";
 
-  QLabel *labelCursorSize = new QLabel ("Cursor size (pixels):");
+  QLabel *labelCursorSize = new QLabel (tr ("Cursor size (pixels):"));
   layout->addWidget (labelCursorSize, row, 1);
 
   m_spinCursorSize = new QSpinBox;
@@ -50,7 +50,7 @@ void DlgSettingsGeneral::createControls (QGridLayout *layout,
   connect (m_spinCursorSize, SIGNAL (valueChanged (int)), this, SLOT (slotCursorSize (int)));
   layout->addWidget (m_spinCursorSize, row++, 2);
 
-  QLabel *labelExtraPrecision = new QLabel ("Extra precision (digits):");
+  QLabel *labelExtraPrecision = new QLabel (tr ("Extra precision (digits):"));
   layout->addWidget (labelExtraPrecision, row, 1);
 
   m_spinExtraPrecision = new QSpinBox;
@@ -70,7 +70,7 @@ void DlgSettingsGeneral::createOptionalSaveDefault (QHBoxLayout *layout)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::createOptionalSaveDefault";
 
-  m_btnSaveDefault = new QPushButton ("Save As Default");
+  m_btnSaveDefault = new QPushButton (tr ("Save As Default"));
   m_btnSaveDefault->setWhatsThis (tr ("Save the settings for use as future defaults, according to the curve name selection."));
   connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
   layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);

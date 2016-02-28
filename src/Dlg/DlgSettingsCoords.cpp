@@ -201,7 +201,7 @@ void DlgSettingsCoords::createDateTime (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createDateTime";
 
-  QLabel *label = new QLabel("Date/Time:");
+  QLabel *label = new QLabel(tr ("Date/Time:"));
   layout->addWidget (label, row, 1);
 
   QWidget *widgetCombos = new QWidget;
@@ -211,16 +211,16 @@ void DlgSettingsCoords::createDateTime (QGridLayout *layout,
 
   // Put date and time comboboxes into same widget
   m_cmbDate = new QComboBox;
-  m_cmbDate->setWhatsThis ("Date format to be used for date values, and date portion of mixed date/time values, "
-                           "during input and output.\n\n"
-                           "Setting the format to an empty value results in just the time portion appearing in output.");
+  m_cmbDate->setWhatsThis (tr ("Date format to be used for date values, and date portion of mixed date/time values, "
+                               "during input and output.\n\n"
+                               "Setting the format to an empty value results in just the time portion appearing in output."));
   connect (m_cmbDate, SIGNAL (activated (const QString &)), this, SLOT (slotDate (const QString &)));
   layoutCombos->addWidget (m_cmbDate);
 
   m_cmbTime = new QComboBox;
-  m_cmbTime->setWhatsThis ("Time format to be used for time values, and time portion of mixed date/time values, "
-                           "during input and output.\n\n"
-                           "Setting the format to an empty value results in just the date portion appearing in output.");
+  m_cmbTime->setWhatsThis (tr ("Time format to be used for time values, and time portion of mixed date/time values, "
+                               "during input and output.\n\n"
+                               "Setting the format to an empty value results in just the date portion appearing in output."));
   connect (m_cmbTime, SIGNAL (activated (const QString &)), this, SLOT (slotTime (const QString &)));
   layoutCombos->addWidget (m_cmbTime);
 }
@@ -230,14 +230,14 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupCoordsType";
 
-  m_boxCoordsType = new QGroupBox("Coordinates Types");
+  m_boxCoordsType = new QGroupBox(tr ("Coordinates Types"));
   layout->addWidget (m_boxCoordsType, row++, 1, 1, 2);
 
   QVBoxLayout *layoutGroup = new QVBoxLayout (m_boxCoordsType);
 
-  QString polarButtonText = QString("Polar (") + THETA + QString(", R)");
+  QString polarButtonText = QString(tr ("Polar") + " (") + THETA + QString(", " + tr ("R") + ")");
 
-  m_btnCartesian = new QRadioButton ("Cartesian (X, Y)", m_boxCoordsType);
+  m_btnCartesian = new QRadioButton (tr ("Cartesian (X, Y)"), m_boxCoordsType);
   m_btnCartesian->setWhatsThis (QString(tr("Select cartesian coordinates.\n\n"
                                            "The X and Y coordinates will be used")));
   connect (m_btnCartesian, SIGNAL (toggled(bool)), this, SLOT (slotCartesianPolar (bool)));
@@ -263,22 +263,22 @@ void DlgSettingsCoords::createGroupXTheta (QGridLayout *layout,
   m_boxXTheta->setLayout (layoutXTheta);
   int rowGroup = 0;
 
-  QLabel *labelScale = new QLabel ("Scale:");
+  QLabel *labelScale = new QLabel (tr ("Scale:"));
   layoutXTheta->addWidget (labelScale, rowGroup++, COLUMN_0);
 
-  m_xThetaLinear = new QRadioButton ("Linear", m_boxXTheta);
+  m_xThetaLinear = new QRadioButton (tr ("Linear"), m_boxXTheta);
   m_xThetaLinear->setWhatsThis (QString(tr("Specifies linear scale for the X or Theta coordinate")));
   connect (m_xThetaLinear, SIGNAL (released ()), this, SLOT (slotXThetaLinear()));
   layoutXTheta->addWidget (m_xThetaLinear, rowGroup++, COLUMN_0);
 
-  m_xThetaLog = new QRadioButton ("Log", m_boxXTheta);
+  m_xThetaLog = new QRadioButton (tr ("Log"), m_boxXTheta);
   m_xThetaLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the X or Theta coordinate.\n\n"
                                         "Log scale is not allowed if there are negative coordinates.\n\n"
                                         "Log scale is not allowed for the Theta coordinate.")));
   connect (m_xThetaLog, SIGNAL (released ()), this, SLOT (slotXThetaLog()));
   layoutXTheta->addWidget (m_xThetaLog, rowGroup++, COLUMN_0);
 
-  QLabel *labelThetaUnits = new QLabel("Units:");
+  QLabel *labelThetaUnits = new QLabel(tr ("Units:"));
   layoutXTheta->addWidget (labelThetaUnits, rowGroup++, COLUMN_0);
 
   m_cmbXThetaUnits = new QComboBox;
@@ -298,21 +298,21 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   m_boxYRadius->setLayout (layoutYRadius);
   int rowGroup = 0;
 
-  QLabel *labelScale = new QLabel ("Scale:");
+  QLabel *labelScale = new QLabel (tr ("Scale:"));
   layoutYRadius->addWidget (labelScale, rowGroup++, COLUMN_0);
 
-  m_yRadiusLinear = new QRadioButton ("Linear", m_boxYRadius);
+  m_yRadiusLinear = new QRadioButton (tr ("Linear"), m_boxYRadius);
   m_yRadiusLinear->setWhatsThis (QString(tr("Specifies linear scale for the Y or R coordinate")));
   connect (m_yRadiusLinear, SIGNAL(released()), this, SLOT (slotYRadiusLinear()));
   layoutYRadius->addWidget (m_yRadiusLinear, rowGroup++, COLUMN_0);
 
-  m_yRadiusLog = new QRadioButton ("Log", m_boxYRadius);
+  m_yRadiusLog = new QRadioButton (tr ("Log"), m_boxYRadius);
   m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate\n\n"
-                                        "Log scale is not allowed if there are negative coordinates.")));
+                                         "Log scale is not allowed if there are negative coordinates.")));
   connect (m_yRadiusLog, SIGNAL(released ()), this, SLOT (slotYRadiusLog ()));
   layoutYRadius->addWidget (m_yRadiusLog, rowGroup++, COLUMN_0);
 
-  QLabel *labelUnits = new QLabel("Units:");
+  QLabel *labelUnits = new QLabel(tr ("Units:"));
   layoutYRadius->addWidget (labelUnits, rowGroup++, COLUMN_0);
 
   m_cmbYRadiusUnits = new QComboBox;
@@ -320,7 +320,7 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   layoutYRadius->addWidget (m_cmbYRadiusUnits, rowGroup++, COLUMN_0, 1, 2);
 
   rowGroup = 0;
-  QLabel *labelOriginRadius = new QLabel("Origin radius value:");
+  QLabel *labelOriginRadius = new QLabel(tr ("Origin radius value:"));
   layoutYRadius->addWidget (labelOriginRadius, rowGroup++, COLUMN_1);
 
   m_editOriginRadius = new QLineEdit (m_boxYRadius);
@@ -341,7 +341,7 @@ void DlgSettingsCoords::createPreview (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createPreview";
 
-  QLabel *labelPreview = new QLabel ("Preview");
+  QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);
@@ -889,11 +889,13 @@ void DlgSettingsCoords::updateControls ()
   m_editOriginRadius->setEnabled (m_btnPolar->isChecked ());
 
   QString captionXTheta = (m_btnCartesian->isChecked () ?
-                             QString ("X") :
-                             THETA) + QString (" Coordinates");
+                             QString (tr ("X")) :
+                             THETA) + QString (" %1")
+                          .arg (tr ("Coordinates"));
   QString captionYRadius = (m_btnCartesian->isChecked () ?
-                              QString ("Y") :
-                              QString ("R")) + QString (" Coordinates");
+                              QString (tr ("Y")) :
+                              QString (tr ("R"))) + QString (" %1")
+                           .arg (tr ("Coordinates"));
 
   if (m_boxXTheta->title() != captionXTheta) {
     m_boxXTheta->setTitle (captionXTheta);

@@ -5,6 +5,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <QObject>
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamWriter>
@@ -162,7 +163,7 @@ void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read coordinates data");
+    reader.raiseError (QObject::tr ("Cannot read coordinates data"));
   }
 }
 

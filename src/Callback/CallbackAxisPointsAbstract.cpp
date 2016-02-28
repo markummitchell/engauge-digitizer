@@ -114,25 +114,25 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
     if (anyPointsRepeatPair (m_screenInputs)) {
 
       m_isError = true;
-      m_errorMessage = "New axis point cannot be at the same screen position as an exisiting axis point";
+      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an exisiting axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if (anyPointsRepeatPair (m_graphOutputs)) {
 
       m_isError = true;
-      m_errorMessage = "New axis point cannot have the same graph coordinates as an existing axis point";
+      m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if ((numberPoints == 3) && threePointsAreCollinear (m_screenInputsTransform)) {
 
       m_isError = true;
-      m_errorMessage = "No more than two axis points can lie along the same line on the screen";
+      m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line on the screen");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if ((numberPoints == 3) && threePointsAreCollinear (m_graphOutputsTransform)) {
 
       m_isError = true;
-      m_errorMessage = "No more than two axis points can lie along the same line in graph coordinates";
+      m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line in graph coordinates");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     }
@@ -185,13 +185,13 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
   if (m_screenInputsX.count() > 2) {
 
     m_isError = true;
-    m_errorMessage = "Too many x axis points. There should only be two";
+    m_errorMessage = QObject::tr ("Too many x axis points. There should only be two");
     rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
   } else if (m_screenInputsY.count() > 2) {
 
     m_isError = true;
-    m_errorMessage = "Too many y axis points. There should only be two";
+    m_errorMessage = QObject::tr ("Too many y axis points. There should only be two");
     rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
   } else {
@@ -208,26 +208,26 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
         anyPointsRepeatPair (m_screenInputsY)) {
 
       m_isError = true;
-      m_errorMessage = "New axis point cannot be at the same screen position as an exisiting axis point";
+      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an exisiting axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if (anyPointsRepeatSingle (m_graphOutputsX) ||
                anyPointsRepeatSingle (m_graphOutputsY)) {
 
       m_isError = true;
-      m_errorMessage = "New axis point cannot have the same graph coordinates as an existing axis point";
+      m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if ((numberPoints == 4) && threePointsAreCollinear (m_screenInputsTransform)) {
 
       m_isError = true;
-      m_errorMessage = "No more than two axis points can lie along the same line on the screen";
+      m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line on the screen");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if ((numberPoints == 4) && threePointsAreCollinear (m_graphOutputsTransform)) {
 
       m_isError = true;
-      m_errorMessage = "No more than two axis points can lie along the same line in graph coordinates";
+      m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line in graph coordinates");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     }
