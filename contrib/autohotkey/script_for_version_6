@@ -1,4 +1,7 @@
-; Features courtesy of np-8, for Engauge version 6:
+; Autohotkey script for version 6 of Engauge
+; Copyright (C) 2016 np-8
+
+; Features:
 ;    Zoom in/out with Ctrl+Mouse Wheel
 ;    WASD keys for moving in the window
 ;    Q/E for zoom in/out
