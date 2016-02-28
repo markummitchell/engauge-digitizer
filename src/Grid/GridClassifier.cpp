@@ -452,8 +452,9 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   // We do not explicitly search(=loop) through binStart here, since Correlation::correlateWithShift will take
   // care of that for us
 
-  // Step search starts out small, and stops at value that gives count substantially greater than 2
-  for (int binStep = MIN_STEP_PIXELS; binStep < m_numHistogramBins / 4; binStep++) {
+  // Step search starts out small, and stops at value that gives count substantially greater than 2. Freakishly small
+  // images need to have MIN_STEP_PIXELS overridden so the loop iterates at least once
+  for (int binStep = qMin (MIN_STEP_PIXELS, m_numHistogramBins / 8); binStep < m_numHistogramBins / 4; binStep++) {
 
     loadPicketFence (picketFence,
                      BIN_START_UNSHIFTED,
