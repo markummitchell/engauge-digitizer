@@ -17,38 +17,38 @@ void TutorialStateCurveType::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateCurveType::begin ()";
 
-  m_title = createTitle ("Curve Type");
+  m_title = createTitle (tr ("Curve Type"));
   m_background = createPixmapItem (":/engauge/img/panel_lines_points.png",
                                    QPoint (0, 0));
-  m_text0 = createTextItem ("The next steps depend on how the curves\n"
-                            "are drawn, in terms of lines and points.",
+  m_text0 = createTextItem (tr ("The next steps depend on how the curves\n"
+                                "are drawn, in terms of lines and points."),
                             QPoint (240, 40));
-  m_text1 = createTextItem ("If the curves are drawn\n"
-                            "with lines (with or without\n"
-                            "points) then click on\n"
-                            "Next (Lines).",
+  m_text1 = createTextItem (tr ("If the curves are drawn\n"
+                                "with lines (with or without\n"
+                                "points) then click on\n"
+                                "Next (Lines)."),
                             QPoint (265, 110));
-  m_text2 = createTextItem ("If the curves are drawn\n"
-                            "without lines and only\n"
-                            "with points, then click on\n"
-                            "Next (Points).",
+  m_text2 = createTextItem (tr ("If the curves are drawn\n"
+                                "without lines and only\n"
+                                "with points, then click on\n"
+                                "Next (Points)."),
                             QPoint (265, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
-  m_previous = new TutorialButton ("Previous",
+  m_previous = new TutorialButton (tr ("Previous"),
                                    context().tutorialDlg().scene());
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height () - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
 
-  m_nextLines = new TutorialButton ("Next (Lines)",
+  m_nextLines = new TutorialButton (tr ("Next (Lines)"),
                                      context().tutorialDlg().scene());
   m_nextLines->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_nextLines->size ().width (),
                                      backgroundSize.height () / 3.0 - m_nextLines->size ().height () / 2.0));
   connect (m_nextLines, SIGNAL (signalTriggered ()), this, SLOT (slotNextCurves ()));
 
-  m_nextPoints = new TutorialButton ("Next (Points)",
+  m_nextPoints = new TutorialButton (tr ("Next (Points)"),
                                     context().tutorialDlg().scene());
   m_nextPoints->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_nextPoints->size ().width (),
                                     backgroundSize.height () * 2.0 / 3.0 - m_nextPoints->size ().height () / 2.0));

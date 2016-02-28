@@ -53,13 +53,14 @@ QString ChecklistGuideWizard::pageCurvesTitle (CoordSystemIndex coordSystemIndex
   if (numberCoordSystem == 1) {
 
     // Single curve needs no index information
-    return "Curves";
+    return tr ("Curves");
 
   } else {
 
     // One of multiple curves needs index information
     unsigned int indexOneBased = coordSystemIndex + 1;
-    return QString ("Curves for coordinate system %1")
+    return QString ("%1 %2")
+        .arg (QObject::tr ("Curves for coordinate system"))
         .arg (indexOneBased);
 
   }
@@ -96,37 +97,37 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
   // Insert additional space between successive list items, using stylesheet
   str << "<style type='text/css'>li { margin-top: 10px 0; }</style>";
 
-  str << "<p>The coordinates are defined by creating axis points:</p>\n";
-  str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;Add first of three axis points. " << TAG_AHREF_AXIS_1 << "</p>\n";
+  str << "<p>" << tr ("The coordinates are defined by creating axis points:") << "</p>\n";
+  str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;" << tr ("Add first of three axis points.") << " " << TAG_AHREF_AXIS_1 << "</p>\n";
   str << TAG_DIV_AXIS_START_1;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
-  str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</li>\n";
-  str << "<li>Enter the coordinates of the axis point</li>\n";
-  str << "<li>Click on Ok</li>\n";
+  str << "<li>" << tr ("Click on") << " <img src="":/engauge/img/16-DigitAxis""> " << tr ("for <b>Axis Points</b> mode") << "</li>\n";
+  str << "<li>" << tr ("Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates") << "</li>\n";
+  str << "<li>" << tr ("Enter the coordinates of the axis point") << "</li>\n";
+  str << "<li>" << tr ("Click on Ok") << "</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_AXIS_END_1;
-  str << "<p>" << TAG_ANCHOR_AXIS_2 << "&nbsp;Add second of three axis points. " << TAG_AHREF_AXIS_2 << "</p>\n";
+  str << "<p>" << TAG_ANCHOR_AXIS_2 << "&nbsp;" << tr ("Add second of three axis points.") << " " << TAG_AHREF_AXIS_2 << "</p>\n";
   str << TAG_DIV_AXIS_START_2;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
-  str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</li>\n";
-  str << "<li>Enter the coordinates of the axis point</li>\n";
-  str << "<li>Click on Ok</li>\n";
+  str << "<li>" << tr ("Click on") << " <img src="":/engauge/img/16-DigitAxis""> " << tr ("for <b>Axis Points</b> mode") << "</li>\n";
+  str << "<li>" << tr ("Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point") << "</li>\n";
+  str << "<li>" << tr ("Enter the coordinates of the axis point") << "</li>\n";
+  str << "<li>" << tr ("Click on Ok") << "</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_AXIS_END_2;
-  str << "<p>" << TAG_ANCHOR_AXIS_3 << "&nbsp;Add third of three axis points. " << TAG_AHREF_AXIS_3 << "</p>\n";
+  str << "<p>" << TAG_ANCHOR_AXIS_3 << "&nbsp;" << tr ("Add third of three axis points.") << " " << TAG_AHREF_AXIS_3 << "</p>\n";
   str << TAG_DIV_AXIS_START_3;
   str << "<ul>\n";
-  str << "<li>Click on <img src="":/engauge/img/16-DigitAxis""> for <b>Axis Points</b> mode</li>\n";
-  str << "<li>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</li>\n";
-  str << "<li>Enter the coordinates of the axis point</li>\n";
-  str << "<li>Click on Ok</li>\n";
+  str << "<li>" << tr ("Click on") << " <img src="":/engauge/img/16-DigitAxis""> " << tr ("for <b>Axis Points</b> mode") << "</li>\n";
+  str << "<li>" << tr ("Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points") << "</li>\n";
+  str << "<li>" << tr ("Enter the coordinates of the axis point") << "</li>\n";
+  str << "<li>" << tr ("Click on Ok") << "</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_AXIS_END_3;
 
   str << "<p>&nbsp;</p>\n";
-  str << "<p>Points are digitized along each curve:</p>\n";
+  str << "<p>" << tr ("Points are digitized along each curve:") << "</p>\n";
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
@@ -138,29 +139,29 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
                         .arg (TAG_AHREF_DELIMITER_END);
 
     str << "<p>" << TAG_ANCHOR_DELIMITER_START << curveName << TAG_ANCHOR_DELIMITER_END
-        << "&nbsp;Add points for curve <b>" << curveName << "</b>. " << tagACurve << "</p>\n";
+        << "&nbsp;" << tr ("Add points for curve") << " <b>" << curveName << "</b>. " << tagACurve << "</p>\n";
     str << TAG_DIV_DELIMITER_START << curveName << TAG_DIV_DELIMITER_END;
     str << "<ul>\n";
 
     if (withLines) {
 
-      str << "<li>Click on <img src="":/engauge/img/16-DigitSegment""> for <b>Segment Fill</b> mode</li>\n";
-      str << "<li>Select curve <b>" << curveName << "</b> in the drop-down list</li>\n";
-      str << "<li>Move the cursor over the curve. If a line does not appear then adjust the <b>Color Filter</b> settings for this curve:\n";
+      str << "<li>" << tr ("Click on") << " <img src="":/engauge/img/16-DigitSegment""> " << tr ("for <b>Segment Fill</b> mode") << "</li>\n";
+      str << "<li>" << tr ("Select curve") << " <b>" << curveName << "</b> " << tr ("in the drop-down list") << "</li>\n";
+      str << "<li>" << tr ("Move the cursor over the curve. If a line does not appear then adjust the <b>Color Filter</b> settings for this curve") << ":\n";
       str << templateHtmlToAdjustColorFilterSettings () << "</li>\n";
-      str << "<li>Move the cursor over the curve again. When the <b>Segment Fill</b> line appears, click on it to generate points</li>\n";
+      str << "<li>" << tr ("Move the cursor over the curve again. When the <b>Segment Fill</b> line appears, click on it to generate points") << "</li>\n";
       str << "</ul>\n";
 
     } else {
 
-      str << "<li>Click on <img src="":/engauge/img/16-DigitPointMatch""> for <b>Point Match</b> mode</li>\n";
-      str << "<li>Select curve <b>" << curveName << "</b> in the drop-down list</li>\n";
-      str << "<li>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust";
-      str << "    the <b>Color Filter</b> settings for this curve:\n";
+      str << "<li>" << tr ("Click on") << " <img src="":/engauge/img/16-DigitPointMatch""> " << tr ("for <b>Point Match</b> mode") << "</li>\n";
+      str << "<li>" << tr ("Select curve") << " <b>" << curveName << "</b> " << tr ("in the drop-down list") << "</li>\n";
+      str << "<li>" << tr ("Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust "
+                           "the <b>Color Filter</b> settings for this curve") << ":\n";
       str << templateHtmlToAdjustColorFilterSettings () << "</li>\n";
-      str << "<li>Move the cursor over a typical point in the curve again. Click on the point to start point matching</li>\n";
-      str << "<li>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</li>\n";
-      str << "<li>The previous step repeats until you select a different mode</li>\n";
+      str << "<li>" << tr ("Move the cursor over a typical point in the curve again. Click on the point to start point matching") << "</li>\n";
+      str << "<li>" << tr ("Engauge will display a candidate point. To accept that candidate point, press the right arrow key") << "</li>\n";
+      str << "<li>" << tr ("The previous step repeats until you select a different mode") << "</li>\n";
       str << "</ul>\n";
     }
 
@@ -168,23 +169,23 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
   }
 
   str << "<p>&nbsp;</p>\n";
-  str << "<p>The digitized points can be exported:</p>\n";
-  str << "<p>" << TAG_ANCHOR_EXPORT << "&nbsp;Export the points to a file. " << TAG_AHREF_EXPORT << "</p>\n";
+  str << "<p>" << tr ("The digitized points can be exported") << ":</p>\n";
+  str << "<p>" << TAG_ANCHOR_EXPORT << "&nbsp;" << tr ("Export the points to a file") << ". " << TAG_AHREF_EXPORT << "</p>\n";
   str << TAG_DIV_EXPORT_START;
   str << "<ul>\n";
-  str << "<li>Select menu option <b>File / Export</b></li>\n";
-  str << "<li>Enter the file name</li>\n";
-  str << "<li>Click on Ok</li>\n";
-  str << "<li>Congratulations!</li>\n";
+  str << "<li>" << tr ("Select menu option <b>File / Export</b>") << "</li>\n";
+  str << "<li>" << tr ("Enter the file name") << "</li>\n";
+  str << "<li>" << tr ("Click on Ok") << "</li>\n";
+  str << "<li>" << tr ("Congratulations!") << "</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_EXPORT_END;
 
   str << "<p>&nbsp;</p>\n";
-  str << "<p>Hint - The background image can be switched between the original image and filtered image. " << TAG_AHREF_BACKGROUND << "</p>\n";
+  str << "<p>" << tr ("Hint - The background image can be switched between the original image and filtered image.") << " " << TAG_AHREF_BACKGROUND << "</p>\n";
   str << TAG_DIV_BACKGROUND_START;
   str << "<ul>\n";
-  str << "<li>Select menu option <b>View / Background / Show Original Image</b> to see the original image</li>\n";
-  str << "<li>Select menu option <b>View / Background / Show Filtered Image</b> to see the image from <b>Color Filter</b></li>\n";
+  str << "<li>" << tr ("Select menu option <b>View / Background / Show Original Image</b> to see the original image") << "</li>\n";
+  str << "<li>" << tr ("Select menu option <b>View / Background / Show Filtered Image</b> to see the image from <b>Color Filter</b>") << "</li>\n";
   str << "</ul>\n";
   str << TAG_DIV_BACKGROUND_END;
 
@@ -199,10 +200,10 @@ QString ChecklistGuideWizard::templateHtmlToAdjustColorFilterSettings () const
   QTextStream str (&html);
 
   str << "  <ul>\n";
-  str << "  <li>Select menu option <b>Settings / Color Filter</b><li>\n";
-  str << "  <li>Select the method for filtering. Hue is best if the curves have different colors</li>\n";
-  str << "  <li>Slide the green buttons back and forth until the curve is easily visible in the preview window</li>\n";
-  str << "  <li>Click on Ok</li>\n";
+  str << "  <li>" << tr ("Select menu option <b>Settings / Color Filter</b>") << "<li>\n";
+  str << "  <li>" << tr ("Select the method for filtering. Hue is best if the curves have different colors") << "</li>\n";
+  str << "  <li>" << tr ("Slide the green buttons back and forth until the curve is easily visible in the preview window") << "</li>\n";
+  str << "  <li>" << tr ("Click on Ok") << "</li>\n";
   str << "  </ul>\n";
 
   return html;

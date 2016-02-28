@@ -19,7 +19,9 @@ FileCmdOpen::FileCmdOpen (QXmlStreamReader &reader) :
 
   if (!attributes.hasAttribute(FILE_CMD_SERIALIZE_FILENAME)) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute %1").arg (FILE_CMD_SERIALIZE_FILENAME));
+                      QString ("%1 %2")
+                      .arg (QObject::tr ("Missing attribute"))
+                      .arg (FILE_CMD_SERIALIZE_FILENAME));
   }
 
   m_filename = attributes.value(FILE_CMD_SERIALIZE_FILENAME).toString();

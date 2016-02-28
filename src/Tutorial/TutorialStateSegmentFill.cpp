@@ -17,32 +17,32 @@ void TutorialStateSegmentFill::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateSegmentFill::begin ()";
 
-  m_title = createTitle ("Segment Fill");
+  m_title = createTitle (tr ("Segment Fill"));
   m_background = createPixmapItem (":/engauge/img/panel_segment_fill.png",
                                    QPoint (0, 30));
-  m_text0 = createTextItem ("Segment Fill mode places several\n"
-                            "points all along the line segments\n"
-                            "of a curve. Step 1 - Click on the\n"
-                            "Segment Fill button.",
+  m_text0 = createTextItem (tr ("Segment Fill mode places several\n"
+                                "points all along the line segments\n"
+                                "of a curve. Step 1 - Click on the\n"
+                                "Segment Fill button."),
                             QPoint (300, 40));
-  m_text1 = createTextItem ("Step 2 - Select the curve the new\n"
-                            "points will belong to.",
+  m_text1 = createTextItem (tr ("Step 2 - Select the curve the new\n"
+                                "points will belong to."),
                             QPoint (300, 140));
-  m_text2 = createTextItem ("Step 3 - Move the cursor over a line\n"
-                            "segment in the desired curve. If a\n"
-                            "green line appears, click on it once\n"
-                            "to generate many points.",
+  m_text2 = createTextItem (tr ("Step 3 - Move the cursor over a line\n"
+                                "segment in the desired curve. If a\n"
+                                "green line appears, click on it once\n"
+                                "to generate many points."),
                             QPoint (300, 220));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
-  m_previous = new TutorialButton ("Previous",
+  m_previous = new TutorialButton (tr ("Previous"),
                                    context().tutorialDlg().scene());
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height() - buttonMargin() - m_previous->size().height()));
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
 
-  m_next = new TutorialButton ("Next",
+  m_next = new TutorialButton (tr ("Next"),
                                context().tutorialDlg().scene());
   m_next->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_next->size ().width (),
                                backgroundSize.height () - buttonMargin () - m_next->size ().height ()));

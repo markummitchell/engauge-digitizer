@@ -2,6 +2,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QObject>
 #include <QTextStream>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -181,7 +182,7 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read grid removal data");
+    reader.raiseError (QObject::tr ("Cannot read grid removal data"));
   }
 }
 

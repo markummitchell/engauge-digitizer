@@ -73,7 +73,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createControls";
 
-  QLabel *labelPointSize = new QLabel ("Maximum point size (pixels):");
+  QLabel *labelPointSize = new QLabel (tr ("Maximum point size (pixels):"));
   layout->addWidget (labelPointSize, row, 1);
 
   m_spinPointSize = new QSpinBox;
@@ -88,7 +88,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_spinPointSize, SIGNAL (valueChanged (int)), this, SLOT (slotMaxPointSize (int)));
   layout->addWidget (m_spinPointSize, row++, 2);
 
-  QLabel *labelAcceptedPointColor = new QLabel ("Accepted point color:");
+  QLabel *labelAcceptedPointColor = new QLabel (tr ("Accepted point color:"));
   layout->addWidget (labelAcceptedPointColor, row, 1);
 
   m_cmbAcceptedPointColor = new QComboBox;
@@ -97,7 +97,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_cmbAcceptedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbAcceptedPointColor, row++, 2);
 
-  QLabel *labelRejectedPointColor = new QLabel ("Rejected point color:");
+  QLabel *labelRejectedPointColor = new QLabel (tr ("Rejected point color:"));
   layout->addWidget (labelRejectedPointColor, row, 1);
 
   m_cmbRejectedPointColor = new QComboBox;
@@ -106,7 +106,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_cmbRejectedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotRejectedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbRejectedPointColor, row++, 2);
 
-  QLabel *labelCandidatePointColor = new QLabel ("Candidate point color:");
+  QLabel *labelCandidatePointColor = new QLabel (tr ("Candidate point color:"));
   layout->addWidget (labelCandidatePointColor, row, 1);
 
   m_cmbCandidatePointColor = new QComboBox;
@@ -125,7 +125,7 @@ void DlgSettingsPointMatch::createPreview (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createPreview";
 
-  QLabel *labelPreview = new QLabel ("Preview");
+  QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);

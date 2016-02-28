@@ -54,7 +54,7 @@ void LoadImageFromUrl::slotFinished ()
     QString message;
     QTextStream str (&message);
 
-    str << "Unable to download image from " << urlWithoutScheme;
+    str << tr ("Unable to download image from") << " " << urlWithoutScheme;
 
     QMessageBox::critical (&m_mainWindow,
                            engaugeWindowTitle(),
@@ -86,7 +86,7 @@ void LoadImageFromUrl::startLoadImage (const QUrl &url)
       QString message;
       QTextStream str (&message);
 
-      str << "Unable to load image from " << url.toLocalFile ();
+      str << tr ("Unable to load image from") << " " << url.toLocalFile ();
 
       QMessageBox::critical (&m_mainWindow,
                              engaugeWindowTitle(),

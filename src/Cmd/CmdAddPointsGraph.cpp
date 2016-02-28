@@ -41,7 +41,8 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
 
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME)) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute %1")
+                      QString ("%1 %2")
+                      .arg (QObject::tr ("Missing attribute"))
                       .arg (DOCUMENT_SERIALIZE_CURVE_NAME));
   }
 
@@ -83,7 +84,7 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read graph points");
+    reader.raiseError (QObject::tr ("Cannot read graph points"));
   }
 }
 

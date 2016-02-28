@@ -2,6 +2,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "Point.h"
+#include <QObject>
 #include <QStringList>
 #include <QTextStream>
 #include "QtToString.h"
@@ -360,7 +361,7 @@ void Point::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError("Cannot read point data");
+    reader.raiseError(QObject::tr ("Cannot read point data"));
   }
 }
 

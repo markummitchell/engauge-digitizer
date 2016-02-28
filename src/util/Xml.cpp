@@ -1,6 +1,7 @@
 #include "Logger.h"
 #include <QFileDevice>
 #include <QMessageBox>
+#include <QObject>
 #include "QtToString.h"
 #include "Xml.h"
 
@@ -23,24 +24,28 @@ void xmlExitWithError (QXmlStreamReader &reader,
   QFileDevice *fileDevice = dynamic_cast<QFileDevice*> (reader.device());
   if (fileDevice == 0) {
 
-    context = QString ("String at line %1: ")
+    context = QString ("%1 %2: ")
+              .arg (QObject::tr ("Start at line"))
               .arg (reader.lineNumber());
 
   } else {
 
-    context = QString ("File %1 at line %2: ")
+    context = QString ("%1 %2 %3 %4: ")
+              .arg (QObject::tr ("File"))
               .arg (fileDevice->fileName())
+              .arg (QObject::tr ("at line"))
               .arg (reader.lineNumber());
 
   }
 
   // Context plus original message gets displayed
-  QString adornedMsg = QString ("%1%2. Quitting")
+  QString adornedMsg = QString ("%1%2. %3")
                        .arg (context)
-                       .arg (message);
+                       .arg (message)
+                       .arg (QObject::tr ("Quitting"));
 
   QMessageBox::critical (0,
-                         "Error reading xml",
+                         QObject::tr ("Error reading xml"),
                          adornedMsg);
 
   LOG4CPP_ERROR_S ((*mainCat)) << "xmlExitWithError error='" << adornedMsg.toLatin1().data() << "'";

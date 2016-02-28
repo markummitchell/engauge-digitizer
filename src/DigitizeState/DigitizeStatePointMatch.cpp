@@ -315,8 +315,8 @@ void DigitizeStatePointMatch::popCandidatePoint (CmdMediator *cmdMediator)
 
     // No more points. Inform user
     QMessageBox::information (0,
-                              "Point Match",
-                              "There are no more matching points");
+                              QObject::tr ("Point Match"),
+                              QObject::tr ("There are no more matching points"));
 
   }
 }

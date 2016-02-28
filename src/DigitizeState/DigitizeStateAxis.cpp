@@ -103,8 +103,8 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
   if (context().mainWindow().transformIsDefined()) {
 
     QMessageBox::warning (0,
-                          "Application",
-                          "Three axis points have been defined, and no more are needed or allowed.");
+                          QObject::tr ("Application"),
+                          QObject::tr ("Three axis points have been defined, and no more are needed or allowed."));
 
   } else {
 
@@ -145,7 +145,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
       if (isError) {
 
         QMessageBox::warning (0,
-                              "Application",
+                              QObject::tr ("Application"),
                               errorMessage);
 
       } else {

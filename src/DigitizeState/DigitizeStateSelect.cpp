@@ -12,12 +12,13 @@
 #include <QCursor>
 #include <QGraphicsItem>
 #include <QImage>
+#include <QObject>
 #include <QtToString.h>
 
-const QString MOVE_TEXT_DOWN ("Move down");
-const QString MOVE_TEXT_LEFT ("Move left");
-const QString MOVE_TEXT_RIGHT ("Move right");
-const QString MOVE_TEXT_UP ("Move up");
+const QString MOVE_TEXT_DOWN (QObject::tr ("Move down"));
+const QString MOVE_TEXT_LEFT (QObject::tr ("Move left"));
+const QString MOVE_TEXT_RIGHT (QObject::tr ("Move right"));
+const QString MOVE_TEXT_UP (QObject::tr ("Move up"));
 
 DigitizeStateSelect::DigitizeStateSelect (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)

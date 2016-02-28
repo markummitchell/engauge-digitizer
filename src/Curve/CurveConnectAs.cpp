@@ -1,25 +1,26 @@
 #include "CurveConnectAs.h"
+#include <QObject>
 
 QString curveConnectAsToString (CurveConnectAs curveConnectAs)
 {
   switch (curveConnectAs) {
 
     case CONNECT_AS_FUNCTION_SMOOTH:
-      return "FunctionSmooth";
+      return QObject::tr ("FunctionSmooth");
 
     case CONNECT_AS_FUNCTION_STRAIGHT:
-      return "FunctionStraight";
+      return QObject::tr ("FunctionStraight");
 
     case CONNECT_AS_RELATION_SMOOTH:
-      return "RelationSmooth";
+      return QObject::tr ("RelationSmooth");
 
     case CONNECT_AS_RELATION_STRAIGHT:
-      return "RelationStraight";
+      return QObject::tr ("RelationStraight");
 
     case CONNECT_SKIP_FOR_AXIS_CURVE:
-      return "ConnectSkipForAxisCurve";
+      return QObject::tr ("ConnectSkipForAxisCurve");
 
     default:
-      return "Unknown";
+      return QObject::tr ("Unknown");
   }
 }

@@ -2,6 +2,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "PointIdentifiers.h"
+#include <QObject>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include "Xml.h"
@@ -77,7 +78,7 @@ void PointIdentifiers::loadXml (QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read point identifiers");
+    reader.raiseError (QObject::tr ("Cannot read point identifiers"));
   }
 }
 

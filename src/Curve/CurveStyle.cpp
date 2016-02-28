@@ -60,7 +60,7 @@ QString CurveStyle::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read curve style data");
+    reader.raiseError (QObject::tr ("Cannot read curve style data"));
   }
 
   return curveName;

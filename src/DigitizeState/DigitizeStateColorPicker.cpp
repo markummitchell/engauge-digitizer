@@ -136,8 +136,8 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
   } else {
 
     QMessageBox::warning (0,
-                          "Color Picker",
-                          "Sorry, but the color picker point must be near a non-background pixel. Please try again.");
+                          QObject::tr ("Color Picker"),
+                          QObject::tr ("Sorry, but the color picker point must be near a non-background pixel. Please try again."));
 
   }
 

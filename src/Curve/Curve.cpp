@@ -300,7 +300,7 @@ void Curve::loadCurvePoints(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError("Cannot read curve data");
+    reader.raiseError(QObject::tr ("Cannot read curve data"));
   }
 }
 
@@ -352,7 +352,7 @@ void Curve::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read curve data");
+    reader.raiseError (QObject::tr ("Cannot read curve data"));
   }
 }
 

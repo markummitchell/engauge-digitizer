@@ -53,8 +53,10 @@ CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA) ) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1 and/or %2")
+                      QString ("%1 %2 %3 %4")
+                      .arg (QObject::tr ("Missing attribute(s)"))
                       .arg (DOCUMENT_SERIALIZE_SCREEN_X_DELTA)
+                      .arg (QObject::tr ("and/or"))
                       .arg (DOCUMENT_SERIALIZE_SCREEN_Y_DELTA));
   }
 

@@ -57,9 +57,11 @@ CmdCut::CmdCut (MainWindow &mainWindow,
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_CSV) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_HTML)) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1, %2 and/or %3")
+                      QString ("%1 %2, %3 %4 %5")
+                      .arg (QObject::tr ("Missing argument(s)"))
                       .arg (DOCUMENT_SERIALIZE_TRANSFORM_DEFINED)
                       .arg (DOCUMENT_SERIALIZE_CSV)
+                      .arg (QObject::tr ("and/or"))
                       .arg (DOCUMENT_SERIALIZE_HTML));
   }
 

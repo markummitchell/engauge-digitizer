@@ -180,7 +180,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval:");
+  QLabel *labelInterval = new QLabel (tr ("Interval:"));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
@@ -198,10 +198,10 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
 
   m_cmbFunctionsPointsEvenlySpacingUnits = new QComboBox;
-  m_cmbFunctionsPointsEvenlySpacingUnits->setWhatsThis ("Units for spacing interval.\n\n"
-                                                        "Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be "
-                                                        "consistent across the graph, even if the X scale is logarithmic.\n\n"
-                                                        "Graph units are preferred when the spacing is to depend on the X scale.");
+  m_cmbFunctionsPointsEvenlySpacingUnits->setWhatsThis (tr ("Units for spacing interval.\n\n"
+                                                            "Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be "
+                                                            "consistent across the graph, even if the X scale is logarithmic.\n\n"
+                                                            "Graph units are preferred when the spacing is to depend on the X scale."));
   m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
   m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_SCREEN),
@@ -254,7 +254,7 @@ void DlgSettingsExportFormat::createOptionalSaveDefault (QHBoxLayout *layout)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createOptionalSaveDefault";
 
-  m_btnSaveDefault = new QPushButton ("Save As Default");
+  m_btnSaveDefault = new QPushButton (tr ("Save As Default"));
   m_btnSaveDefault->setWhatsThis (tr ("Save the settings for use as future defaults."));
   connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
   layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
@@ -299,7 +299,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel ("Interval:");
+  QLabel *labelInterval = new QLabel (tr ("Interval:"));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
@@ -313,10 +313,10 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
 
   m_cmbRelationsPointsEvenlySpacingUnits = new QComboBox;
-  m_cmbRelationsPointsEvenlySpacingUnits->setWhatsThis ("Units for spacing interval.\n\n"
-                                                        "Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be "
-                                                        "consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.\n\n"
-                                                        "Graph units are usually preferred when the X and Y scales are identical.");
+  m_cmbRelationsPointsEvenlySpacingUnits->setWhatsThis (tr ("Units for spacing interval.\n\n"
+                                                            "Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be "
+                                                            "consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.\n\n"
+                                                            "Graph units are usually preferred when the X and Y scales are identical."));
   m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
   m_cmbRelationsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_SCREEN),

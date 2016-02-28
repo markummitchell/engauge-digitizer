@@ -1117,9 +1117,9 @@ void MainWindow::createToolBars ()
                                      "1) No background which highlights points\n"
                                      "2) Original image which shows everything\n"
                                      "3) Filtered image which highlights important details"));
-  m_cmbBackground->addItem ("No background", QVariant (BACKGROUND_IMAGE_NONE));
-  m_cmbBackground->addItem ("Original image", QVariant (BACKGROUND_IMAGE_ORIGINAL));
-  m_cmbBackground->addItem ("Filtered image", QVariant (BACKGROUND_IMAGE_FILTERED));
+  m_cmbBackground->addItem (tr ("No background"), QVariant (BACKGROUND_IMAGE_NONE));
+  m_cmbBackground->addItem (tr ("Original image"), QVariant (BACKGROUND_IMAGE_ORIGINAL));
+  m_cmbBackground->addItem (tr ("Filtered image"), QVariant (BACKGROUND_IMAGE_FILTERED));
   // selectBackgroundOriginal needs currentIndexChanged
   connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
 
@@ -1372,8 +1372,9 @@ void MainWindow::fileImport (const QString &fileName,
   if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          tr("Cannot read file %1.").
-                          arg(fileName));
+                          QString("%1 %2.")
+                          .arg (tr ("Cannot read file"))
+                          .arg(fileName));
 
     // Reset
     m_originalFile = originalFileOld;
@@ -1483,8 +1484,9 @@ void MainWindow::filePaste (ImportType importType)
   if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          tr("Cannot read file %1.").
-                          arg(fileName));
+                          QString("%1 %2.")
+                          .arg (tr ("Cannot read file"))
+                          .arg(fileName));
 
     // Reset
     m_originalFile = originalFileOld;
@@ -1644,9 +1646,10 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          tr("Cannot read file %1:\n%2.").
-                          arg(fileName).
-                          arg(cmdMediator->reasonForUnsuccessfulRead ()));
+                          QString("%1 %2:\n%3.")
+                          .arg (tr ("Cannot read file"))
+                          .arg(fileName)
+                          .arg(cmdMediator->reasonForUnsuccessfulRead ()));
     delete cmdMediator;
 
   }
@@ -1673,7 +1676,7 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
 
     QMessageBox::critical (this,
                            engaugeWindowTitle(),
-                           tr ("File not found: ") + fileInfo.absoluteFilePath());
+                           tr ("File not found:") + " " + fileInfo.absoluteFilePath());
     exit (-1);
   }
 
@@ -1727,7 +1730,7 @@ bool MainWindow::loadImage (const QString &fileName,
 
   m_cmdMediator = cmdMediator;
   bool accepted = setupAfterLoad(fileName,
-                                 "File imported",
+                                 tr ("File imported"),
                                  importType);
 
   if (accepted) {
@@ -1909,9 +1912,10 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
   if (!file.open(QFile::WriteOnly)) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          tr ("Cannot write file %1: \n%2.").
-                          arg(fileName).
-                          arg(file.errorString()));
+                          QString ("%1 %2: \n%3.")
+                          .arg(tr ("Cannot write file"))
+                          .arg(fileName)
+                          .arg(file.errorString()));
     return false;
   }
 

@@ -17,31 +17,31 @@ void TutorialStateChecklistWizardAbstract::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateChecklistWizardAbstract::begin ()";
 
-  m_title = createTitle ("Checklist Wizard and Checklist Guide");
+  m_title = createTitle (tr ("Checklist Wizard and Checklist Guide"));
   m_background = createPixmapItem (":/engauge/img/panel_checklist.png",
                                    QPoint (0, 30));
-  m_text0 = createTextItem ("For new Engauge users, a Checklist Wizard\n"
-                            "is available when importing an image file.\n"
-                            "This wizard produces a helpful checklist of\n"
-                            "steps to follow to digitize the image file.",
+  m_text0 = createTextItem (tr ("For new Engauge users, a Checklist Wizard\n"
+                                "is available when importing an image file.\n"
+                                "This wizard produces a helpful checklist of\n"
+                                "steps to follow to digitize the image file."),
                             QPoint (260, 30));
-  m_text1 = createTextItem ("Step 1 - Enable the menu option Help /\n"
-                            "Checklist Guide Wizard.",
+  m_text1 = createTextItem (tr ("Step 1 - Enable the menu option Help /\n"
+                                "Checklist Guide Wizard."),
                             QPoint (285, 125));
-  m_text2 = createTextItem ("Step 2 - Import the file using File /\n"
-                            "Import. The Checklist Wizard will appear\n"
-                            "and ask some simple questions to\n"
-                            "determine how the image can be\n"
-                            "digitized.",
+  m_text2 = createTextItem (tr ("Step 2 - Import the file using File /\n"
+                                "Import. The Checklist Wizard will appear\n"
+                                "and ask some simple questions to\n"
+                                "determine how the image can be\n"
+                                "digitized."),
                             QPoint (285, 175));
-  m_text3 = createTextItem ("Additional options are available in\n"
-                            "the various Settings menus.\n\n"
-                            "This ends the tutorial. Good luck!",
+  m_text3 = createTextItem (tr ("Additional options are available in\n"
+                                "the various Settings menus.\n\n"
+                                "This ends the tutorial. Good luck!"),
                             QPoint (285, 270));
 
   QSize backgroundSize = context().tutorialDlg().backgroundSize();
 
-  m_previous = new TutorialButton ("Previous",
+  m_previous = new TutorialButton (tr ("Previous"),
                                    context().tutorialDlg().scene());
   m_previous->setGeometry (QPoint (buttonMargin (),
                                    backgroundSize.height () - buttonMargin() - m_previous->size().height()));

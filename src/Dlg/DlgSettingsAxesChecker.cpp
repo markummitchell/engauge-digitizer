@@ -60,11 +60,11 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   groupBox->setLayout (layoutLifetime);
 
   int rowLifetime = 0;
-  m_btnNever = new QRadioButton ("Do not show", groupBox);
+  m_btnNever = new QRadioButton (tr ("Do not show"), groupBox);
   m_btnNever->setWhatsThis (tr ("Never show axes checker."));
   layoutLifetime->addWidget (m_btnNever, rowLifetime++, 0, 1, 2);
 
-  m_btnNSeconds = new QRadioButton ("Show for a number of seconds", groupBox);
+  m_btnNSeconds = new QRadioButton (tr ("Show for a number of seconds"), groupBox);
   m_btnNSeconds->setWhatsThis (tr ("Show axes checker for a number of seconds after changing axes points."));
   layoutLifetime->addWidget (m_btnNSeconds, rowLifetime, 0, 1, 1);
 
@@ -75,7 +75,7 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   layoutLifetime->addWidget (m_cmbSeconds, rowLifetime++, 1);
   connect (m_cmbSeconds, SIGNAL (activated (const QString &)), this, SLOT (slotSeconds (const QString &))); // activated() ignores code changes
 
-  m_btnForever = new QRadioButton ("Show always", groupBox);
+  m_btnForever = new QRadioButton (tr ("Show always"), groupBox);
   m_btnForever->setWhatsThis (tr ("Always show axes checker."));
   layoutLifetime->addWidget (m_btnForever, rowLifetime++, 0, 1, 2);
 
@@ -85,7 +85,7 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   m_groupMode->addButton (m_btnForever);
   connect (m_groupMode, SIGNAL (buttonReleased (QAbstractButton*)), this, SLOT (slotGroupMode (QAbstractButton*)));
 
-  QLabel *labelLineColor = new QLabel ("Line color:");
+  QLabel *labelLineColor = new QLabel (tr ("Line color:"));
   layout->addWidget (labelLineColor, row, 1);
 
   m_cmbLineColor = new QComboBox;
@@ -143,7 +143,7 @@ void DlgSettingsAxesChecker::createPreview (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createPreview";
 
-  QLabel *labelPreview = new QLabel ("Preview");
+  QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 4);
 
   m_scenePreview = new QGraphicsScene (this);

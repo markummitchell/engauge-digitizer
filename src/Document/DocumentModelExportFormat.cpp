@@ -2,6 +2,7 @@
 #include "DocumentModelExportFormat.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include  <QObject>
 #include <QSettings>
 #include <QTextStream>
 #include <QXmlStreamWriter>
@@ -181,7 +182,7 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read export data");
+    reader.raiseError (QObject::tr ("Cannot read export data"));
   }
 }
 

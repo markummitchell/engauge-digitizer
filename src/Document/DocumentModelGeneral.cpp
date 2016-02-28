@@ -2,6 +2,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentSerialize.h"
 #include "Logger.h"
+#include <QObject>
 #include <QSettings>
 #include <QTextStream>
 #include "QtToString.h"
@@ -83,7 +84,7 @@ void DocumentModelGeneral::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read general data");
+    reader.raiseError (QObject::tr ("Cannot read general data"));
   }
 }
 
