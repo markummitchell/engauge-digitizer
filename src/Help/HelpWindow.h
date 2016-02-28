@@ -6,6 +6,8 @@
 /// Dockable help window
 class HelpWindow : public QDockWidget
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   HelpWindow (QWidget *parent);

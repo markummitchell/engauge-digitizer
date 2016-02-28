@@ -6,6 +6,8 @@
 /// This class uses the validation method of the Conclusion page to perform final processing for ChecklistGuideWizard
 class ChecklistGuidePageConclusion : public ChecklistGuidePage
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   ChecklistGuidePageConclusion ();

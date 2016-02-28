@@ -11,6 +11,8 @@ class TutorialStateContext;
 /// Abstract class that supports checklist wizard panels
 class TutorialStateChecklistWizardAbstract : public TutorialStateAbstractBase
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   TutorialStateChecklistWizardAbstract (TutorialStateContext &context);

@@ -6,6 +6,8 @@
 /// This class sets up the introduction page
 class ChecklistGuidePageIntro : public ChecklistGuidePage
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor
   ChecklistGuidePageIntro ();
