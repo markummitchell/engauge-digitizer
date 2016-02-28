@@ -3,7 +3,10 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QApplication>
+#include <QCoreApplication>
+#include <QDir>
 #include <QFileInfo>
+#include <QProcessEnvironment>
 
 using namespace std;
 
@@ -20,9 +23,13 @@ const QString DASH_FILE_CMD_SCRIPT ("-" + CMD_FILE_CMD_SCRIPT);
 const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
+const QString ENGAUGE_LOG_FILE ("engauge.log");
 
 // Prototypes
 bool checkFileExists (const QString &file);
+QString engaugeLogFilename ();
+bool engaugeLogFilenameAttempt (const QString &path,
+                                QString &pathAndFile);
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
@@ -37,6 +44,43 @@ bool checkFileExists (const QString &file)
 {
   QFileInfo check (file);
   return check.exists() && check.isFile();
+}
+
+QString engaugeLogFilename()
+{
+  QProcessEnvironment env;
+  QString pathAndFile;
+
+  // Make multiple attempts until a directory is found where the log file can be written
+  if (!engaugeLogFilenameAttempt (QCoreApplication::applicationDirPath(), pathAndFile)) {
+    if (!engaugeLogFilenameAttempt (env.value ("HOME"), pathAndFile)) {
+      if (!engaugeLogFilenameAttempt (env.value ("TEMP"), pathAndFile)) {
+        pathAndFile = ENGAUGE_LOG_FILE; // Current directory will have to do
+      }
+    }
+  }
+
+  return pathAndFile;
+}
+
+bool engaugeLogFilenameAttempt (const QString &path,
+                                QString &pathAndFile)
+{
+  bool success = false;
+
+  // Test if file can be opened. Checking permissions on directory is unreliable in Windows/OSX
+  pathAndFile = QString ("%1%2%3")
+                         .arg (path)
+                         .arg (QDir::separator())
+                         .arg (ENGAUGE_LOG_FILE);
+  QFile file (pathAndFile);
+  if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    // Success
+    file.close();
+    success = true;
+  }
+
+  return success;
 }
 
 int main(int argc, char *argv[])
@@ -58,7 +102,7 @@ int main(int argc, char *argv[])
                 loadStartupFiles);
 
   initializeLogging ("engauge",
-                     "engauge.log",
+                     engaugeLogFilename(),
                      isDebug);
   LOG4CPP_INFO_S ((*mainCat)) << "main args=" << QApplication::arguments().join (" ").toLatin1().data();
 
