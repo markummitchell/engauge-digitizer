@@ -1,4 +1,4 @@
-[![Travis build Status](https://travis-ci.org/markummitchell/engauge6.svg?branch=master)](https://travis-ci.org/markummitchell/engauge6) 
+[![Travis build Status](https://travis-ci.org/markummitchell/engauge-digitizer.svg?branch=master)](https://travis-ci.org/markummitchell/engauge-digitizer) 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/1o7p8iu8qxq0p7ri/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master)
 
 engauge-digitizer
