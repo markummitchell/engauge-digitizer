@@ -3528,6 +3528,18 @@ void MainWindow::slotViewZoomIn ()
   }
 }
 
+void MainWindow::slotViewZoomInFromWheelEvent ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomInFromWheelEvent";
+
+  if ((m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) ||
+      (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
+
+    // Forward this event
+    slotViewZoomIn ();
+  }
+}
+
 void MainWindow::slotViewZoomOut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomOut";
@@ -3599,6 +3611,18 @@ void MainWindow::slotViewZoomOut ()
   } else if (goto16To1) {
     m_actionZoom16To1->setChecked (true);
     slotViewZoom16To1 ();
+  }
+}
+
+void MainWindow::slotViewZoomOutFromWheelEvent ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomOutFromWheelEvent";
+
+  if ((m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) ||
+      (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
+
+    // Forward this event
+    slotViewZoomOut ();
   }
 }
 
@@ -4073,35 +4097,6 @@ const GraphicsView &MainWindow::view () const
 {
   ENGAUGE_CHECK_PTR (m_view);
   return *m_view;
-}
-
-void MainWindow::wheelEvent(QWheelEvent *event)
-{
-  const int ANGLE_THRESHOLD = 15; // From QWheelEvent documentation
-  const int DELTAS_PER_DEGREE = 8; // From QWheelEvent documentation
-
-  QPoint numDegrees = event->angleDelta() / DELTAS_PER_DEGREE;
-
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::wheelEvent"
-                              << " degrees=" << numDegrees.y()
-                              << " phase=" << event->phase();
-
-  // Criteria:
-  // 1) User has enabled wheel zoom control
-  // 2) Angle is over a threshold to eliminate false events from just touching wheel
-  if (((event->modifiers() & Qt::ControlModifier) != 0) &&
-      (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL ||
-      m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
-
-    if (numDegrees.y() >= ANGLE_THRESHOLD) {
-      // Rotated backwards towards the user, which means zoom in
-      slotViewZoomIn();
-      event->accept();
-    } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
-      // Rotated forwards away from the user, which means zoom out
-      slotViewZoomOut();
-      event->accept();    }
-  }
 }
 
 void MainWindow::writeCheckpointToLogFile ()

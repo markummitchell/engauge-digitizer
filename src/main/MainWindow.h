@@ -207,9 +207,6 @@ public:
   /// View for the QImage and QGraphicsItems, without const.
   const GraphicsView &view () const;
 
-  /// Convert wheel events into zoom in/out
-  virtual void wheelEvent(QWheelEvent *event);
-
 private slots:
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
@@ -294,7 +291,9 @@ private slots:
   void slotViewZoom (int);
   void slotViewZoomFill ();
   void slotViewZoomIn ();
+  void slotViewZoomInFromWheelEvent ();
   void slotViewZoomOut ();
+  void slotViewZoomOutFromWheelEvent ();
 
 signals:
   /// Send zoom selection, picked from menu or keystroke, to StatusBar.

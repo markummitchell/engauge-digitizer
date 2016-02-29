@@ -48,6 +48,9 @@ public:
   /// Intercept mouse release events to move one or more Points.
   virtual void mouseReleaseEvent (QMouseEvent *event);
 
+  /// Convert wheel events into zoom in/out
+  virtual void wheelEvent(QWheelEvent *event);
+
 signals:
   /// Send right click on axis point to MainWindow for editing.
   void signalContextMenuEvent (QString pointIdentifier);
@@ -75,6 +78,12 @@ signals:
 
   /// Send mouse release to MainWindow for moving Points.
   void signalMouseRelease (QPointF);
+
+  /// Send wheel event to MainWindow for zooming in
+  void signalViewZoomIn();
+
+  /// Send wheel event to MainWindow for zooming out
+  void signalViewZoomOut();
 
 private:
   GraphicsView();

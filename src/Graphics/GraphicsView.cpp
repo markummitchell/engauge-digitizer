@@ -31,6 +31,8 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   connect (this, SIGNAL (signalMouseMove(QPointF)), &mainWindow, SLOT (slotMouseMove (QPointF)));
   connect (this, SIGNAL (signalMousePress (QPointF)), &mainWindow, SLOT (slotMousePress (QPointF)));
   connect (this, SIGNAL (signalMouseRelease (QPointF)), &mainWindow, SLOT (slotMouseRelease (QPointF)));
+  connect (this, SIGNAL (signalViewZoomIn ()), &mainWindow, SLOT (slotViewZoomInFromWheelEvent ()));
+  connect (this, SIGNAL (signalViewZoomOut ()), &mainWindow, SLOT (slotViewZoomOutFromWheelEvent ()));
 
   setMouseTracking (true);
   setAcceptDrops (true);
@@ -267,4 +269,44 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
   }
 
   QGraphicsView::mouseReleaseEvent (event);
+}
+
+void GraphicsView::wheelEvent(QWheelEvent *event)
+{
+  const int ANGLE_THRESHOLD = 15; // From QWheelEvent documentation
+  const int DELTAS_PER_DEGREE = 8; // From QWheelEvent documentation
+
+  QPoint numDegrees = event->angleDelta() / DELTAS_PER_DEGREE;
+
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::wheelEvent"
+                              << " degrees=" << numDegrees.y()
+                              << " phase=" << event->phase();
+
+  // Criteria:
+  // 1) User has enabled wheel zoom control (but that is not known here so MainWindow will handle that part)
+  //    in slotViewZoomInFromWheelEvent and slotViewZoomOutFromWheelEvent
+  // 2) Angle is over a threshold to eliminate false events from just touching wheel
+  if ((event->modifiers() & Qt::ControlModifier) != 0) {
+
+    if (numDegrees.y() >= ANGLE_THRESHOLD) {
+
+      // Rotated backwards towards the user, which means zoom in
+      emit signalViewZoomIn();
+
+    } else if (numDegrees.y() <= -ANGLE_THRESHOLD) {
+
+      // Rotated forwards away from the user, which means zoom out
+      emit signalViewZoomOut();
+
+    }
+
+    // Accept the event as long as Control key was used and we are capturing wheel event
+    event->accept();
+
+  } else {
+
+    // Let non-Control events manage scrolling
+    QGraphicsView::wheelEvent (event);
+
+  }
 }
