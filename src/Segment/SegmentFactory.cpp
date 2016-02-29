@@ -205,7 +205,7 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   int width = imageFiltered.width();
   int height = imageFiltered.height();
 
-  QProgressDialog* dlg;
+  QProgressDialog* dlg = 0;
   if (useDlg)
   {
 
