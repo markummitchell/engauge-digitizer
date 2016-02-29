@@ -33,7 +33,7 @@ const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
 const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
-const int TAB_WIDGET_INDEX_RELATIONS = 1;
+//const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 const QString EMPTY_PREVIEW;
 

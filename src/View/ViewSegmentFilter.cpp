@@ -7,7 +7,6 @@
 #include <QPixmap>
 #include "ViewSegmentFilter.h"
 
-const double OPACITY_WHEN_DISABLED = 0.5;
 const QColor COLOR_FOR_BRUSH_DISABLED (Qt::gray);
 
 ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :

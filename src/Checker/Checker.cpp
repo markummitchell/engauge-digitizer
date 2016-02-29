@@ -17,7 +17,6 @@ const int NUM_AXES_POINTS_4 = 4;
 
 extern const QString DUMMY_CURVE_NAME;
 const int Z_VALUE_IN_FRONT = 100;
-const int NO_SIDE = -1;
 
 // To emphasize that the axis lines are still there, we make these checker somewhat transparent
 const double CHECKER_OPACITY = 0.6;
@@ -31,7 +30,6 @@ const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
 const double DEGREES_TO_RADIANS = PI / 180.0;
 const double RADIANS_TO_TICS = 5760 / TWO_PI;
-const double RADIANS_TO_DEGREES = 180.0 / PI;
 
 Checker::Checker(QGraphicsScene &scene) :
   m_scene (scene)

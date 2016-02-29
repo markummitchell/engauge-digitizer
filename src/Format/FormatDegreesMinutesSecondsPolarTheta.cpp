@@ -7,7 +7,6 @@
 #include <QStringList>
 
 const int DECIMAL_TO_MINUTES = 60.0;
-const int DECIMAL_TO_SECONDS = 60.0;
 
 FormatDegreesMinutesSecondsPolarTheta::FormatDegreesMinutesSecondsPolarTheta()
 {

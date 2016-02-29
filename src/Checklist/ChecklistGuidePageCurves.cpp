@@ -7,10 +7,6 @@
 #include <QTableWidget>
 #include "SettingsForGraph.h"
 
-const int FIRST_COL = 0;
-const int NUM_COL = 1;
-const int NUM_ROW = 6;
-
 ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
   ChecklistGuidePage (title)
 {

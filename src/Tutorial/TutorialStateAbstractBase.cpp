@@ -5,7 +5,7 @@
 #include "TutorialStateAbstractBase.h"
 #include "TutorialStateContext.h"
 
-const int DELTA_FONT_SIZE = 2;
+//const int DELTA_FONT_SIZE = 2;
 const int TITLE_PADDING = 5;
 const double Z_TITLE = 2.0; // On top of everything else
 
