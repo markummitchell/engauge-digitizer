@@ -1,15 +1,15 @@
 [![Travis build Status](https://travis-ci.org/markummitchell/engauge6.svg?branch=master)](https://travis-ci.org/markummitchell/engauge6) 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/4j5imk47yyn4ejjr/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge6/branch/master)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/4j5imk47yyn4ejjr/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master)
 
-engauge6
-========
+engauge-digitizer
+=================
 
-[![Join the chat at https://gitter.im/markummitchell/engauge6](https://badges.gitter.im/markummitchell/engauge6.svg)](https://gitter.im/markummitchell/engauge6?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/markummitchell/engauge-digitizer](https://badges.gitter.im/markummitchell/engauge-digitizer.svg)](https://gitter.im/markummitchell/engauge-digitizer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
 
 Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent 
-[releases](https://github.com/markummitchell/engauge6/releases) are available for Linux and Windows. 
+[releases](https://github.com/markummitchell/engauge-digitizer/releases) are available for Linux and Windows. 
 
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
@@ -20,13 +20,13 @@ access privileges.
 
 Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.
 
-Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge6 uses the new Qt5 library which should be available for many years, and also offers many new features.
+Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many new features.
 
 Developers and users are encouraged to offer their suggestions and comments!
 
 Features
 --------
-Features in released versions of Engauge6:
+Features in released versions of Engauge-Digitizer:
 
 1. Automated line and point extraction rapidly digitizes data
 2. Image processing for separating important details from background information
@@ -49,8 +49,8 @@ Features coming in upcoming version 7:
 Installation
 ------------
 Engauge can be installed using packages for all popular distributions of Linux (easiest method), or by downloading
-pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge6
-project at github.com, in the [Releases page](https://github.com/markummitchell/engauge6/releases). The final option 
+pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge-digitizer
+project at github.com, in the [Releases page](https://github.com/markummitchell/engauge-digitizer/releases). The final option 
 for installing is to build the software from the source
 code (very difficult). Building the software from the source code is accomplished by following the steps in the BUILD
 file that is found in the main directory. The build process can take as little as 15 minutes in Linux or as long as 
