@@ -5,10 +5,10 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll
-      QTLIBEXT: '.lib'
+      QTLIBEXTTOREPLACE: '.lib'
     - NOT_ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucened.dll Qt5Cored.dll Qt5Guid.dll Qt5Helpd.dll Qt5Networkd.dll Qt5PrintSupportd.dll Qt5Sqld.dll Qt5Widgetsd.dll Qt5Xmld.dll
-      QTLIBEXT: 'd.lib'
+      QTLIBEXTTOREPLACE: 'd.lib'
 
 install:
   - set QTDIR=C:\Qt\5.5\msvc2013
@@ -36,7 +36,9 @@ build_script:
   - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.4-dll32
   - qmake engauge.pro
   - move Makefile Makefile.orig
-  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $QTLIBEXT } > Makefile
+  - echo "Fix Makefile"
+  - echo %QTLIBEXTTOREPLACE%
+  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $QTLIBEXTTOREPLACE } > Makefile
   - nmake
 
 after_build:
