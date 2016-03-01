@@ -5,10 +5,10 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll
-      QTLIBEXTTOREPLACE: '.lib'
+      QTLIBEXT: '.lib'
     - NOT_ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucened.dll Qt5Cored.dll Qt5Guid.dll Qt5Helpd.dll Qt5Networkd.dll Qt5PrintSupportd.dll Qt5Sqld.dll Qt5Widgetsd.dll Qt5Xmld.dll
-      QTLIBEXTTOREPLACE: 'd.lib'
+      QTLIBEXT: 'd.lib'
 
 install:
   - set QTDIR=C:\Qt\5.5\msvc2013
@@ -38,7 +38,7 @@ build_script:
   - move Makefile Makefile.orig
   - echo "Fix Makefile"
   - echo %QTLIBEXTTOREPLACE%
-  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $QTLIBEXTTOREPLACE } > Makefile
+  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $Env:QTLIBEXT } > Makefile
   - nmake
 
 after_build:
@@ -60,6 +60,7 @@ after_build:
   - copy bin\engauge.exe engauge-build
   - copy log4cpp-1.1.1\lib\log4cpp.dll engauge-build
   - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll engauge-build
+  - copy LICENSE engauge-build
   - cd %QTDIR%\bin
   - for %%I in (%QTLIBS%) do copy %%I %APPVEYOR_BUILD_FOLDER%\engauge-build
   - cd %APPVEYOR_BUILD_FOLDER%
