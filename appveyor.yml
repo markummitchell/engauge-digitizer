@@ -64,7 +64,7 @@ after_build:
   - cd %QTDIR%\bin
   - for %%I in (%QTLIBS%) do copy %%I %APPVEYOR_BUILD_FOLDER%\engauge-build
   - cd %APPVEYOR_BUILD_FOLDER%
-  - cd build
+  - cd help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
   - move engauge.qch ..\engauge-build\documentation
   - move engauge.qhc ..\engauge-build\documentation
