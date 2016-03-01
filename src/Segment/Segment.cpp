@@ -505,7 +505,7 @@ void Segment::removeUnneededLines (int *foldedLines)
     }
   }
 
-  if (m_isGnuplot) {
+  if (strDump != 0) {
 
     // Final gnuplot processing
     *strDump << "set terminal x11 persist\n";

@@ -421,7 +421,7 @@ void GridClassifier::searchCountSpace (double bins [],
     isFirst = false;
   }
 
-  free (picketFence);
+  delete picketFence;
 }
 
 void GridClassifier::searchStartStepSpace (bool isGnuplot,
@@ -446,7 +446,7 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   Correlation correlation (m_numHistogramBins);
   double *picketFence = new double [m_numHistogramBins];
   int binStart;
-  double corr, corrMax;
+  double corr = 0, corrMax = 0;
   bool isFirst = true;
 
   // We do not explicitly search(=loop) through binStart here, since Correlation::correlateWithShift will take
@@ -517,9 +517,9 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                              correlationsMax);
   }
 
-  free (signalA);
-  free (signalB);
-  free (correlations);
-  free (correlationsMax);
-  free (picketFence);
+  delete signalA;
+  delete signalB;
+  delete correlations;
+  delete correlationsMax;
+  delete picketFence;
 }
