@@ -5,8 +5,10 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll
+      QTLIBEXT: '.lib'
     - NOT_ENGAUGE_RELEASE: "1"
       QTLIBS: Qt5CLucened.dll Qt5Cored.dll Qt5Guid.dll Qt5Helpd.dll Qt5Networkd.dll Qt5PrintSupportd.dll Qt5Sqld.dll Qt5Widgetsd.dll Qt5Xmld.dll
+      QTLIBEXT: 'd.lib'
 
 install:
   - set QTDIR=C:\Qt\5.5\msvc2013
@@ -34,19 +36,20 @@ build_script:
   - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.4-dll32
   - qmake engauge.pro
   - move Makefile Makefile.orig
-  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', '.lib' } > Makefile
+  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
   - nmake
 
 after_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - mkdir engauge-build
+  - mkdir engauge-build\documentation
   - mkdir engauge-build\platforms
   - mkdir engauge-build\imageformats
   - mkdir engauge-build\printsupport
   - mkdir engauge-build\sqldrivers
   - mkdir engauge-build\iconengines
   - mkdir engauge-build\bearer
-  - copy %QTDIR%\plugins\platforms\qwindows.dll engauge-build\platforms
+  - copy %QTDIR%\plugins\platforms\qwindows*.dll engauge-build\platforms
   - copy %QTDIR%\plugins\imageformats\*.dll engauge-build\imageformats
   - copy %QTDIR%\plugins\printsupport\*.dll engauge-build\printsupport
   - copy %QTDIR%\plugins\sqldrivers\*.dll engauge-build\sqldrivers
@@ -58,6 +61,11 @@ after_build:
   - cd %QTDIR%\bin
   - for %%I in (%QTLIBS%) do copy %%I %APPVEYOR_BUILD_FOLDER%\engauge-build
   - cd %APPVEYOR_BUILD_FOLDER%
+  - cd build
+  - qcollectiongenerator engauge.qhcp -o engauge.qhc
+  - move engauge.qch ..\engauge-build\documentation
+  - move engauge.qhc ..\engauge-build\documentation
+  - cd ..
   - 7z a engauge-build.zip engauge-build
 
 artifacts:
