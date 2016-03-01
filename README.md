@@ -13,7 +13,7 @@ Engauge Digitizer is distributed with most Linux distributions. Downloads of the
 
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
-Interested in translating Engauge to another language? We welcome translations of file engauge.ts to [linguist](http://doc.qt.io/qt-5/linguist-programmers.html "other languages").
+Interested in translating Engauge to another language? We welcome translations of file engauge.ts to [other languages](http://doc.qt.io/qt-5/linguist-programmers.html).
 
 Released Versions
 -----------------
