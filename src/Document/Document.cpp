@@ -590,70 +590,70 @@ void Document::loadVersion7 (QFile *file)
 
 DocumentModelAxesChecker Document::modelAxesChecker() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelAxesChecker";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelAxesChecker";
 
   return m_coordSystemContext.modelAxesChecker();
 }
 
 DocumentModelColorFilter Document::modelColorFilter() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelColorFilter";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelColorFilter";
 
   return m_coordSystemContext.modelColorFilter();
 }
 
 DocumentModelCoords Document::modelCoords() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelCoords";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelCoords";
 
   return m_coordSystemContext.modelCoords();
 }
 
 CurveStyles Document::modelCurveStyles() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelCurveStyles";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelCurveStyles";
 
   return m_coordSystemContext.modelCurveStyles();
 }
 
 DocumentModelDigitizeCurve Document::modelDigitizeCurve() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelDigitizeCurve";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelDigitizeCurve";
 
   return m_coordSystemContext.modelDigitizeCurve();
 }
 
 DocumentModelExportFormat Document::modelExport() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelExport";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelExport";
 
   return m_coordSystemContext.modelExport();
 }
 
 DocumentModelGeneral Document::modelGeneral() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelGeneral";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGeneral";
 
   return m_coordSystemContext.modelGeneral();
 }
 
 DocumentModelGridRemoval Document::modelGridRemoval() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelGridRemoval";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGridRemoval";
 
   return m_coordSystemContext.modelGridRemoval();
 }
 
 DocumentModelPointMatch Document::modelPointMatch() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelPointMatch";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelPointMatch";
 
   return m_coordSystemContext.modelPointMatch();
 }
 
 DocumentModelSegments Document::modelSegments() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::modelSegments";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelSegments";
 
   return m_coordSystemContext.modelSegments();
 }

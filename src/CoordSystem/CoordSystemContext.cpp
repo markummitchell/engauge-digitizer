@@ -282,70 +282,70 @@ void CoordSystemContext::loadVersion7 (QXmlStreamReader &reader,
 
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelAxesChecker";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelAxesChecker";
 
   return m_coordSystems [m_coordSystemIndex]->modelAxesChecker();
 }
 
 DocumentModelColorFilter CoordSystemContext::modelColorFilter() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelColorFilter";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelColorFilter";
 
   return m_coordSystems [m_coordSystemIndex]->modelColorFilter();
 }
 
 DocumentModelCoords CoordSystemContext::modelCoords () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelCoords";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelCoords";
 
   return m_coordSystems [m_coordSystemIndex]->modelCoords();
 }
 
 CurveStyles CoordSystemContext::modelCurveStyles() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelCurveStyles";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelCurveStyles";
 
   return m_coordSystems [m_coordSystemIndex]->modelCurveStyles();
 }
 
 DocumentModelDigitizeCurve CoordSystemContext::modelDigitizeCurve() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelDigitizeCurve";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelDigitizeCurve";
 
   return m_coordSystems [m_coordSystemIndex]->modelDigitizeCurve();
 }
 
 DocumentModelExportFormat CoordSystemContext::modelExport() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelExport";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelExport";
 
   return m_coordSystems [m_coordSystemIndex]->modelExport();
 }
 
 DocumentModelGeneral CoordSystemContext::modelGeneral() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelGeneral";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelGeneral";
 
   return m_coordSystems [m_coordSystemIndex]->modelGeneral();
 }
 
 DocumentModelGridRemoval CoordSystemContext::modelGridRemoval() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelGridRemoval";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelGridRemoval";
 
   return m_coordSystems [m_coordSystemIndex]->modelGridRemoval();
 }
 
 DocumentModelPointMatch CoordSystemContext::modelPointMatch() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelPointMatch";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelPointMatch";
 
   return m_coordSystems [m_coordSystemIndex]->modelPointMatch();
 }
 
 DocumentModelSegments CoordSystemContext::modelSegments() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::modelSegments";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelSegments";
 
   return m_coordSystems [m_coordSystemIndex]->modelSegments();
 }

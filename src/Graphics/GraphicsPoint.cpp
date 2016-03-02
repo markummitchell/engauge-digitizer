@@ -220,9 +220,9 @@ void GraphicsPoint::reset ()
 
 void GraphicsPoint::setData (int key, const QVariant &data)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::setData"
-                              << " key=" << dataKeyToString ((DataKey) key).toLatin1().data()
-                              << " data=" << data.toString().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::setData"
+                               << " key=" << dataKeyToString ((DataKey) key).toLatin1().data()
+                               << " data=" << data.toString().toLatin1().data();
 
   if (m_graphicsItemEllipse == 0) {
     m_graphicsItemPolygon->setData (key, data);

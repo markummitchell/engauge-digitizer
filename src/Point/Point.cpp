@@ -197,14 +197,14 @@ Point::Point (const Point &other)
 
 Point &Point::operator=(const Point &point)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Point::operator="
-                              << " isAxisPoint=" << (point.isAxisPoint() ? "true" : "false")
-                              << " identifier=" << point.identifier ().toLatin1().data()
-                              << " posScreen=" << QPointFToString (point.posScreen ()).toLatin1().data()
-                              << " hasPosGraph=" << (point.hasPosGraph() ? "true" : "false")
-                              << " posGraph=" << QPointFToString (point.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
-                              << " hasOrdinal=" << (point.hasOrdinal() ? "true" : "false")
-                              << " ordinal=" << point.ordinal (SKIP_HAS_CHECK);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Point::operator="
+                               << " isAxisPoint=" << (point.isAxisPoint() ? "true" : "false")
+                               << " identifier=" << point.identifier ().toLatin1().data()
+                               << " posScreen=" << QPointFToString (point.posScreen ()).toLatin1().data()
+                               << " hasPosGraph=" << (point.hasPosGraph() ? "true" : "false")
+                               << " posGraph=" << QPointFToString (point.posGraph (SKIP_HAS_CHECK)).toLatin1().data()
+                               << " hasOrdinal=" << (point.hasOrdinal() ? "true" : "false")
+                               << " ordinal=" << point.ordinal (SKIP_HAS_CHECK);
 
   m_isAxisPoint = point.isAxisPoint ();
   m_identifier = point.identifier ();
