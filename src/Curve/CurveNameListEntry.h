@@ -20,6 +20,7 @@ class CurveNameListEntry
   CurveNameListEntry (const QString &curveNameCurrent,
                       const QString &curveNameOriginal,
                       int numPoints);
+
   /// Constructor for converting from QVariant.
   CurveNameListEntry (const QString &fromText);
 
@@ -40,9 +41,6 @@ class CurveNameListEntry
 
   /// Number of points in curve.
   int numPoints () const;
-
-  /// Serialize into stream
-  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for current curve name.
   void setCurveNameCurrent (const QString &curveNameCurrent);

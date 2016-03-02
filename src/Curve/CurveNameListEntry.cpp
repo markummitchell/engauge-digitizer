@@ -47,17 +47,6 @@ int CurveNameListEntry::numPoints () const
   return m_numPoints;
 }
 
-void CurveNameListEntry::saveXml(QXmlStreamWriter &writer) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameListEntry::saveXml";
-
-  writer.writeStartElement(DOCUMENT_SERIALIZE_CURVES_ENTRY);
-  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_CURVE_NAME_CURRENT, m_curveNameCurrent);
-  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_CURVE_NAME_ORIGINAL, m_curveNameOriginal);
-  writer.writeAttribute (DOCUMENT_SERIALIZE_CURVES_ENTRY_NUM_POINTS, QString::number (m_numPoints));
-  writer.writeEndElement();
-}
-
 void CurveNameListEntry::setCurveNameCurrent (const QString &curveNameCurrent)
 {
   m_curveNameCurrent = curveNameCurrent;

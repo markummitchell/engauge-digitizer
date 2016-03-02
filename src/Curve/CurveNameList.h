@@ -45,6 +45,10 @@ public:
 
 private:
 
+  /// Ensure curve names are never duplicated or else nasty bugs will appear when duplicates occur
+  bool curveNamesWillBeUnique(const QString &value,
+                              int row) const;
+
   /// Store entries as QStrings for easy translation into QVariants. Use CurveNameListEntry to translate
   QStringList m_modelCurvesEntries;
 };
