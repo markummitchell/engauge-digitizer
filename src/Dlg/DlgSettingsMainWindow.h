@@ -30,6 +30,7 @@ public:
 
 private slots:
   void slotLocale (int index);
+  void slotRecentFileClear ();
   void slotZoomControl (const QString);
   void slotZoomFactor (const QString);
 
@@ -47,6 +48,7 @@ private:
   QComboBox *m_cmbZoomFactor;
   QComboBox *m_cmbZoomControl;
   QComboBox *m_cmbLocale;
+  QPushButton *m_btnRecentClear;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

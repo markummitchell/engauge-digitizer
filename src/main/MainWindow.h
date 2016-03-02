@@ -253,6 +253,7 @@ private slots:
   void slotMousePress (QPointF);
   void slotMouseRelease (QPointF);
   void slotRecentFileAction ();
+  void slotRecentFileClear ();
   void slotRedoTextChanged (const QString &);
   void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();

@@ -37,7 +37,7 @@ DlgSettingsMainWindow::~DlgSettingsMainWindow()
 }
 
 void DlgSettingsMainWindow::createControls (QGridLayout *layout,
-                                               int &row)
+                                            int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::createControls";
 
@@ -100,6 +100,17 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_cmbLocale->model()->sort(COLUMN0); // Sort the new entries
   connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
   layout->addWidget (m_cmbLocale, row++, 2);
+
+  QLabel *labelRecent = new QLabel (tr ("Recent file list:"));
+  layout->addWidget (labelRecent, row, 1);
+
+  m_btnRecentClear = new QPushButton (tr ("Clear"));
+  m_btnRecentClear->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  m_btnRecentClear->setWhatsThis (tr ("Recent File List Clear\n\n"
+                                      "Clear the recent file list in the File menu."));
+  connect (m_btnRecentClear, SIGNAL (pressed ()), &mainWindow(), SLOT (slotRecentFileClear ()));
+  connect (m_btnRecentClear, SIGNAL (pressed ()), this, SLOT (slotRecentFileClear()));
+  layout->addWidget (m_btnRecentClear, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -191,6 +202,13 @@ void DlgSettingsMainWindow::slotLocale (int index)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotLocale";
 
   m_modelMainWindowAfter->setLocale (m_cmbLocale->itemData (index).toLocale());
+  updateControls();
+}
+
+void DlgSettingsMainWindow::slotRecentFileClear()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotRecentFileClear";
+
   updateControls();
 }
 

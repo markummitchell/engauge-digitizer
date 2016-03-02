@@ -3014,6 +3014,19 @@ void MainWindow::slotRecentFileAction ()
   }
 }
 
+void MainWindow::slotRecentFileClear ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotRecentFileClear";
+
+  QStringList emptyList;
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.setValue (SETTINGS_RECENT_FILE_LIST,
+                     emptyList);
+
+  updateRecentFileList();
+}
+
 void MainWindow::slotRedoTextChanged (const QString &text)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotRedoTextChanged";
