@@ -3,8 +3,6 @@
 #include "Document.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
-#include "GraphicsItemType.h"
-#include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MimePoints.h"
@@ -64,6 +62,7 @@ void CmdPaste::cmdRedo ()
   clipboard->setMimeData (&m_mimePoints, QClipboard::Clipboard);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  resetSelection(m_copiedPoints);
 }
 
 void CmdPaste::cmdUndo ()
@@ -72,6 +71,7 @@ void CmdPaste::cmdUndo ()
                               << " pasting=" << m_copiedPoints.count ();
 
   mainWindow().updateAfterCommand();
+  resetSelection(m_copiedPoints);
 }
 
 void CmdPaste::saveXml (QXmlStreamWriter &writer) const

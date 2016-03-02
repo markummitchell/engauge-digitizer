@@ -1,6 +1,7 @@
 #ifndef CMD_ABSTRACT_H
 #define CMD_ABSTRACT_H
 
+#include "PointIdentifiers.h"
 #include <QUndoCommand>
 
 class Document;
@@ -36,6 +37,10 @@ protected:
 
   /// Return the MainWindow so it can be updated by this command as a last step.
   MainWindow &mainWindow ();
+
+  /// Since the set of selected points has probably changed, changed that set back to the specified set. This
+  /// lets the user move selected point(s) repeatedly using arrow keys. Also provides expected behavior when pasting
+  void resetSelection(const PointIdentifiers &pointIdentifiersToSelect);
 
 private:
   CmdAbstract();

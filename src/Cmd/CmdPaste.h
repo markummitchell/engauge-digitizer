@@ -26,7 +26,7 @@ public:
   virtual ~CmdPaste();
 
   virtual void cmdRedo ();
-  virtual void cmdUndo ();
+  virtual void cmdUndo (); 
   virtual void saveXml (QXmlStreamWriter &writer) const;
 
 private:

@@ -1,8 +1,13 @@
 #include "CmdAbstract.h"
+#include "DataKey.h"
 #include "Document.h"
+#include "GraphicsItemType.h"
+#include "GraphicsScene.h"
+#include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "Point.h"
+#include <QGraphicsItem>
 
 CmdAbstract::CmdAbstract(MainWindow &mainWindow,
                          Document &document,
@@ -63,6 +68,27 @@ void CmdAbstract::redo ()
 
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::redo identifierIndex=" << m_identifierIndexBeforeRedo << "->"
                               << m_identifierIndexAfterRedo;
+}
+
+void CmdAbstract::resetSelection(const PointIdentifiers &pointIdentifiersToSelect)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::resetSelection";
+
+  QList<QGraphicsItem *> items = mainWindow().view().items();
+  QList<QGraphicsItem *>::iterator itrS;
+  for (itrS = items.begin (); itrS != items.end (); itrS++) {
+
+    QGraphicsItem *item = *itrS;
+    bool selected = false;
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT) {
+
+      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+
+      selected = pointIdentifiersToSelect.contains (pointIdentifier);
+    }
+
+    item->setSelected (selected);
+  }
 }
 
 void CmdAbstract::undo ()

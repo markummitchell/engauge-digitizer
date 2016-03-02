@@ -4,7 +4,6 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
-#include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -77,6 +76,7 @@ void CmdMoveBy::cmdRedo ()
 
   moveBy (m_deltaScreen);
   mainWindow().updateAfterCommand();
+  resetSelection(m_movedPoints);
 }
 
 void CmdMoveBy::cmdUndo ()
@@ -87,6 +87,7 @@ void CmdMoveBy::cmdUndo ()
 
   moveBy (-1.0 * m_deltaScreen);
   mainWindow().updateAfterCommand();
+  resetSelection(m_movedPoints);
 }
 
 void CmdMoveBy::moveBy (const QPointF &deltaScreen)
