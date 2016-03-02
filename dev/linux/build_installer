@@ -1,16 +1,16 @@
 #!/bin/bash
 
-export FROMQCH="$HOME/engauge6/bin/documentation/engauge.qch"
-export FROMQHC="$HOME/engauge6/bin/documentation/engauge.qhc"
-export FROMICO="$HOME/engauge6/src/img/digitizer.ico"
-export FROMEXE="$HOME/engauge6/bin/engauge"
+export FROMQCH="$HOME/engauge-digitizer/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge-digitizer/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge-digitizer/src/img/digitizer.ico"
+export FROMEXE="$HOME/engauge-digitizer/bin/engauge"
 
 ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}' 
 ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}' 
 
 read -p 'If the help input files are up to date, press Enter to continue'
 
-VERSION_NUMBER_CODE=`fgrep -e 'char *VERSION_NUMBER' ../src/util/Version.cpp | awk -F '"' '{print $2}'`
+VERSION_NUMBER_CODE=`fgrep -e 'char *VERSION_NUMBER' ../../src/util/Version.cpp | awk -F '"' '{print $2}'`
 VERSION_NUMBER_WIX=`fgrep -e 'Version' ../windows/engauge.wxs | grep -v Installer | awk -F "'" '{print $2}'`
 echo "Version number in C++ code (Version.cpp)=$VERSION_NUMBER_CODE"
 echo "Version number in Windows WiX installer (engauge.wxs)=$VERSION_NUMBER_WIX"
