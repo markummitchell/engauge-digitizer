@@ -80,7 +80,7 @@ void DlgSettingsCurveAddRemove::createListCurves (QGridLayout *layout,
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
   m_listCurves = new QListView;
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
-                                  "Click on a curve name to edit it.\n\n"
+                                  "Click on a curve name to edit it. Each curve name must be unique.\n\n"
                                   "Reorder curves by dragging them around."));
   m_listCurves->setMinimumHeight (200);
   m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
