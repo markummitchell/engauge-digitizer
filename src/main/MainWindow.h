@@ -389,13 +389,16 @@ private:
   void updateTransformationAndItsDependencies();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext
+  void updateWindowTitle ();
   void writeCheckpointToLogFile();
 
   QString m_originalFile; // Original filename for error report
   bool m_originalFileWasImported; // True/false for imported/opened
   bool m_isDocumentExported;
   QString m_engaugeFile; // Not empty when a Document is currently loaded AND it was loaded and/or saved as an Engauge file
-  QString m_currentFile; // Not empty when a Document is currently loaded
+  QString m_currentFile; // Not empty when a Document is currently loaded. No path or file extension
+  QString m_currentFileWithPathAndFileExtension; // Adds path and file extension to m_currentFile. For display
+  MainTitleBarFormat m_titleBarFormat;
 
   QMenu *m_menuFile;
   QAction *m_actionImport;

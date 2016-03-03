@@ -236,6 +236,7 @@ HEADERS  += \
     src/Load/LoadImageFromUrl.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
+    src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
     src/util/MigrateToVersion6.h \

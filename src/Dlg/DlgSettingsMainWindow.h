@@ -10,6 +10,7 @@
 #include "DlgSettingsAbstractBase.h"
 #include <QLocale>
 
+class QCheckBox;
 class QComboBox;
 class QGridLayout;
 class QPushButton;
@@ -35,6 +36,7 @@ public:
                             const MainWindowModel &modelMainWindow);
 
 private slots:
+  void slotTitleBarFormat(bool);
   void slotLocale (int index);
   void slotRecentFileClear ();
   void slotZoomControl (const QString);
@@ -55,6 +57,7 @@ private:
   QComboBox *m_cmbZoomControl;
   QComboBox *m_cmbLocale;
   QPushButton *m_btnRecentClear;
+  QCheckBox *m_chkTitleBarFormat;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

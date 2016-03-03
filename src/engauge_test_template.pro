@@ -218,6 +218,7 @@ HEADERS  += \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
+    main/MainTitleBarFormat.h \
     main/MainWindow.h \
     main/MainWindowModel.h \
     util/MigrateToVersion6.h \

@@ -61,6 +61,7 @@
 #include "LoadFileInfo.h"
 #include "LoadImageFromUrl.h"
 #include "Logger.h"
+#include "MainTitleBarFormat.h"
 #include "MainWindow.h"
 #include "NetworkClient.h"
 #include <QAction>
@@ -2118,29 +2119,18 @@ void MainWindow::setCurrentFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setCurrentFile";
 
-  const QString PLACEHOLDER ("[*]");
-
-  QString title = QString (tr ("Engauge Digitizer %1")
-                           .arg (VERSION_NUMBER));
-
-  QString fileNameStripped = fileName;
+  QString fileNameStripped;
   if (!fileName.isEmpty()) {
 
     // Strip out path and file extension
     QFileInfo fileInfo (fileName);
     fileNameStripped = fileInfo.baseName();
-
-    title += QString (": %1")
-             .arg (fileNameStripped);
   }
 
   m_currentFile = fileNameStripped;
+  m_currentFileWithPathAndFileExtension = fileName;
 
-  // To prevent "QWidget::setWindowModified: The window title does not contain a [*] placeholder" warnings,
-  // we always append a placeholder
-  title += PLACEHOLDER;
-
-  setWindowTitle (title);
+  updateWindowTitle ();
 }
 
 void MainWindow::setCurrentPathFromFile (const QString &fileName)
@@ -2287,6 +2277,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                              QVariant (DEFAULT_ZOOM_FACTOR_INITIAL)).toInt());
   m_modelMainWindow.setZoomControl ((ZoomControl) settings.value (SETTINGS_ZOOM_CONTROL,
                                                                   QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
+  m_modelMainWindow.setMainTitleBarFormat ((MainTitleBarFormat) settings.value (SETTINGS_MAIN_TITLE_BAR_FORMAT,
+                                                                                QVariant (MAIN_TITLE_BAR_FORMAT_PATH)).toInt());
   updateSettingsMainWindow();
 
   settings.endGroup();
@@ -2328,6 +2320,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
   settings.setValue (SETTINGS_ZOOM_FACTOR_INITIAL, m_modelMainWindow.zoomFactorInitial());
+  settings.setValue (SETTINGS_MAIN_TITLE_BAR_FORMAT, m_modelMainWindow.mainTitleBarFormat());
   settings.endGroup ();
 }
 
@@ -4018,6 +4011,8 @@ void MainWindow::updateSettingsMainWindow()
     m_actionZoomOut->setShortcut (tr ("-"));
 
   }
+
+  updateWindowTitle();
 }
 
 void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)
@@ -4104,6 +4099,42 @@ void MainWindow::updateViewsOfSettings (const QString &activeCurve)
                                                  m_cmdMediator->pixmap ());
 
   }
+}
+
+void MainWindow::updateWindowTitle ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateWindowTitle";
+
+  const QString PLACEHOLDER ("[*]");
+
+  QString title = QString (tr ("Engauge Digitizer %1")
+                           .arg (VERSION_NUMBER));
+
+  QString fileNameMaybeStripped;
+  if (!m_currentFileWithPathAndFileExtension.isEmpty()) {
+
+    QFileInfo fileInfo (m_currentFileWithPathAndFileExtension);
+
+    switch (m_modelMainWindow.mainTitleBarFormat())
+    {
+      case MAIN_TITLE_BAR_FORMAT_NO_PATH:
+        fileNameMaybeStripped = fileInfo.baseName(); // Remove file extension and path for "clean look"
+        break;
+
+      case MAIN_TITLE_BAR_FORMAT_PATH:
+        fileNameMaybeStripped = m_currentFileWithPathAndFileExtension;
+        break;
+    }
+
+    title += QString (": %1")
+             .arg (fileNameMaybeStripped);
+  }
+
+  // To prevent "QWidget::setWindowModified: The window title does not contain a [*] placeholder" warnings,
+  // we always append a placeholder
+  title += PLACEHOLDER;
+
+  setWindowTitle (title);
 }
 
 GraphicsView &MainWindow::view ()

@@ -10,6 +10,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
+#include <QCheckBox>
 #include <QComboBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -117,6 +118,16 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_btnRecentClear, SIGNAL (pressed ()), &mainWindow(), SLOT (slotRecentFileClear ()));
   connect (m_btnRecentClear, SIGNAL (pressed ()), this, SLOT (slotRecentFileClear()));
   layout->addWidget (m_btnRecentClear, row++, 2);
+
+  QLabel *labelTitleBarFormat = new QLabel (tr ("Include title bar path:"));
+  layout->addWidget (labelTitleBarFormat, row, 1);
+
+  m_chkTitleBarFormat = new QCheckBox;
+  m_chkTitleBarFormat->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  m_chkTitleBarFormat->setWhatsThis (tr ("Title Bar Filename\n\n"
+                                         "Includes or excludes the path and file extension from the filename in the title bar."));
+  connect (m_chkTitleBarFormat, SIGNAL (toggled (bool)), this, SLOT (slotTitleBarFormat(bool)));
+  layout->addWidget (m_chkTitleBarFormat, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -148,9 +159,9 @@ void DlgSettingsMainWindow::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::handleOk";
 
   CmdSettingsMainWindow *cmd = new CmdSettingsMainWindow (mainWindow (),
-                                                                cmdMediator ().document(),
-                                                                *m_modelMainWindowBefore,
-                                                                *m_modelMainWindowAfter);
+                                                          cmdMediator ().document(),
+                                                          *m_modelMainWindowBefore,
+                                                          *m_modelMainWindowAfter);
   cmdMediator ().push (cmd);
 
   hide ();
@@ -163,7 +174,7 @@ void DlgSettingsMainWindow::load (CmdMediator & /* cmdMediator */)
 }
 
 void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
-                                                       const MainWindowModel &modelMainWindow)
+                                                 const MainWindowModel &modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::loadMainWindowModel";
 
@@ -190,6 +201,7 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
                                   m_modelMainWindowBefore->locale().country());
   index = m_cmbLocale->findText (locLabel);
   m_cmbLocale->setCurrentIndex(index);
+  m_chkTitleBarFormat->setChecked (m_modelMainWindowAfter->mainTitleBarFormat() == MAIN_TITLE_BAR_FORMAT_PATH);
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -215,6 +227,17 @@ void DlgSettingsMainWindow::slotRecentFileClear()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotRecentFileClear";
 
+  // The signal that triggered the call to this method was also sent to MainWindow to clear the list there
+  updateControls();
+}
+
+void DlgSettingsMainWindow::slotTitleBarFormat(bool)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotTitleBarFormat";
+
+  m_modelMainWindowAfter->setMainTitleBarFormat(m_chkTitleBarFormat->isChecked() ?
+                                                MAIN_TITLE_BAR_FORMAT_PATH :
+                                                MAIN_TITLE_BAR_FORMAT_NO_PATH);
   updateControls();
 }
 

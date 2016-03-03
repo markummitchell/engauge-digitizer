@@ -8,6 +8,7 @@
 #define MAIN_WINDOW_MODEL_H
 
 #include "DocumentModelAbstractBase.h"
+#include "MainTitleBarFormat.h"
 #include <QLocale>
 #include <QString>
 #include "ZoomControl.h"
@@ -35,6 +36,9 @@ public:
   /// Get method for locale
   QLocale locale() const;
 
+  /// Get method for MainWindow titlebar filename format
+  MainTitleBarFormat mainTitleBarFormat () const;
+
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,
                     QTextStream &str) const;
@@ -47,6 +51,9 @@ public:
 
   /// Set method for locale given locale object
   void setLocale (const QLocale &locale);
+
+  /// Set method for MainWindow titlebar filename format
+  void setMainTitleBarFormat (MainTitleBarFormat mainTitleBarFormat);
 
   /// Set method for zoom control
   void setZoomControl (ZoomControl zoomControl);
@@ -65,6 +72,7 @@ private:
   QLocale m_locale;
   ZoomControl m_zoomControl;
   ZoomFactorInitial m_zoomFactorInitial;
+  MainTitleBarFormat m_mainTitleBarFormat;
 
 };
 

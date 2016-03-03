@@ -18,7 +18,8 @@
 
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
-  m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL)
+  m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
+  m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -26,7 +27,8 @@ MainWindowModel::MainWindowModel() :
 MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_locale (other.locale()),
   m_zoomControl (other.zoomControl()),
-  m_zoomFactorInitial (other.zoomFactorInitial())
+  m_zoomFactorInitial (other.zoomFactorInitial()),
+  m_mainTitleBarFormat (other.mainTitleBarFormat())
 {
 }
 
@@ -35,6 +37,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_locale = other.locale();
   m_zoomControl = other.zoomControl();
   m_zoomFactorInitial = other.zoomFactorInitial();
+  m_mainTitleBarFormat = other.mainTitleBarFormat();
 
   return *this;
 }
@@ -65,6 +68,11 @@ QLocale MainWindowModel::locale () const
   return m_locale;
 }
 
+MainTitleBarFormat MainWindowModel::mainTitleBarFormat() const
+{
+  return m_mainTitleBarFormat;
+}
+
 void MainWindowModel::printStream(QString indentation,
                                      QTextStream &str) const
 {
@@ -75,6 +83,9 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "locale=" << m_locale.name() << "\n";
   str << indentation << "zoomControl=" << m_zoomControl << "\n";
   str << indentation << "zoomFactorInitial=" << m_zoomFactorInitial << "\n";
+  str << indentation << "mainWindowTitleBarFormat=" << (m_mainTitleBarFormat == MAIN_TITLE_BAR_FORMAT_NO_PATH ?
+                                                        "NoPath" :
+                                                        "Path");
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -97,6 +108,11 @@ void MainWindowModel::setLocale (QLocale::Language language,
 void MainWindowModel::setLocale (const QLocale &locale)
 {
   m_locale = locale;
+}
+
+void MainWindowModel::setMainTitleBarFormat(MainTitleBarFormat mainTitleBarFormat)
+{
+  m_mainTitleBarFormat = mainTitleBarFormat;
 }
 
 void MainWindowModel::setZoomControl (ZoomControl zoomControl)
