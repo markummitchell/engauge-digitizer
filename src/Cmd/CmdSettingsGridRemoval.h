@@ -7,26 +7,23 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsGridRemoval
-class CmdSettingsGridRemoval : public CmdAbstract
-{
+class CmdSettingsGridRemoval : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsGridRemoval(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsGridRemoval(MainWindow &mainWindow, Document &document,
                          const DocumentModelGridRemoval &modelGridRemovalBefore,
                          const DocumentModelGridRemoval &modelGridRemovalAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsGridRemoval(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsGridRemoval(MainWindow &mainWindow, Document &document,
                          const QString &cmdDescription,
                          QXmlStreamReader &reader);
 
   virtual ~CmdSettingsGridRemoval();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsGridRemoval();

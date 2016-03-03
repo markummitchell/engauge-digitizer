@@ -9,26 +9,24 @@ class TutorialButton;
 class TutorialStateContext;
 
 /// Point match panel discusses the matching of points in curves without lines
-class TutorialStatePointMatch : public TutorialStateAbstractBase
-{
+class TutorialStatePointMatch : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStatePointMatch (TutorialStateContext &context);
+  TutorialStatePointMatch(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called when next button is triggered
   void slotNext();
 
   /// Slot called to return to previous panel
   void slotPrevious();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;

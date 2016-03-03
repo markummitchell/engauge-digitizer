@@ -6,13 +6,10 @@
 #include <QPolygon>
 
 /// Ghost for a QGraphicsPolygonItem
-class GhostPolygon
-{
- public:
+class GhostPolygon {
+public:
   /// Initial constructor
-  GhostPolygon(const QPolygonF &polygon,
-               const QPen &pen,
-               const QBrush &brush);
+  GhostPolygon(const QPolygonF &polygon, const QPen &pen, const QBrush &brush);
   ~GhostPolygon();
 
   /// Copy constructor
@@ -30,7 +27,7 @@ class GhostPolygon
   /// Get method for polygon
   QPolygonF polygon() const;
 
- private:
+private:
   GhostPolygon();
 
   QPolygonF m_polygon;

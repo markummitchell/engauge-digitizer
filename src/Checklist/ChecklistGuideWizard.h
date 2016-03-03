@@ -14,31 +14,29 @@ class MainWindow;
 class QPushButton;
 
 /// Wizard for setting up the checklist guide
-class ChecklistGuideWizard : public QWizard
-{
+class ChecklistGuideWizard : public QWizard {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  ChecklistGuideWizard(MainWindow &mainWindow,
-                       unsigned int numberCoordSystem);
+  ChecklistGuideWizard(MainWindow &mainWindow, unsigned int numberCoordSystem);
 
   /// Curve names to be placed into Document
   QStringList curveNames(CoordSystemIndex coordSystemIndex) const;
 
   /// Create entries in CurvesGraphs for each curve name that user provided
-  void populateCurvesGraphs (CoordSystemIndex coordSystemIndex,
-                             CurvesGraphs &curvesGraphs);
+  void populateCurvesGraphs(CoordSystemIndex coordSystemIndex,
+                            CurvesGraphs &curvesGraphs);
 
   /// Template html comprising the checklist for display
-  QString templateHtml (CoordSystemIndex coordSystemIndex) const;
+  QString templateHtml(CoordSystemIndex coordSystemIndex) const;
 
- private:
+private:
   ChecklistGuideWizard();
 
-  QString pageCurvesTitle (CoordSystemIndex coordSystemIndex,
-                           unsigned int numberCoordSystem) const;
-  QString templateHtmlToAdjustColorFilterSettings () const;
+  QString pageCurvesTitle(CoordSystemIndex coordSystemIndex,
+                          unsigned int numberCoordSystem) const;
+  QString templateHtmlToAdjustColorFilterSettings() const;
 
   MainWindow &m_mainWindow;
 
@@ -48,7 +46,8 @@ class ChecklistGuideWizard : public QWizard
   QString m_dialogName;
 
   ChecklistGuidePageIntro *m_pageIntro;
-  QList<ChecklistGuidePageCurves *> m_pageCurves; // One page per coordinate system
+  QList<ChecklistGuidePageCurves *>
+      m_pageCurves; // One page per coordinate system
   ChecklistGuidePageConclusion *m_pageConclusion;
 };
 

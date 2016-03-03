@@ -18,8 +18,7 @@ class QRadioButton;
 class ViewPreview;
 
 /// Dialog for editing coordinates settings.
-class DlgSettingsCoords : public DlgSettingsAbstractBase
-{
+class DlgSettingsCoords : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -27,15 +26,15 @@ public:
   DlgSettingsCoords(MainWindow &mainWindow);
   virtual ~DlgSettingsCoords();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotCartesianPolar (bool);
-  void slotDate (const QString &);
+  void slotCartesianPolar(bool);
+  void slotDate(const QString &);
   void slotPolarOriginRadius(const QString &);
-  void slotTime (const QString &);
+  void slotTime(const QString &);
   void slotUnitsXTheta(const QString &);
   void slotUnitsYRadius(const QString &);
   void slotXThetaLinear();
@@ -44,24 +43,17 @@ private slots:
   void slotYRadiusLog();
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
   void annotateAngles(const QFont &defaultFont);
   void annotateRadiusAtOrigin(const QFont &defaultFont);
-  QRectF boundingRectGraph (CmdMediator &cmdMediator,
-                            bool &isEmpty) const;
-  void createDateTime(QGridLayout *layout,
-                      int &row);
-  void createGroupCoordsType(QGridLayout *layout,
-                             int &row);
-  void createGroupXTheta(QGridLayout *layout,
-                        int &row);
-  void createGroupYRadius(QGridLayout *layout,
-                          int &row);
-  void createPreview(QGridLayout *layout,
-                     int &row);
+  QRectF boundingRectGraph(CmdMediator &cmdMediator, bool &isEmpty) const;
+  void createDateTime(QGridLayout *layout, int &row);
+  void createGroupCoordsType(QGridLayout *layout, int &row);
+  void createGroupXTheta(QGridLayout *layout, int &row);
+  void createGroupYRadius(QGridLayout *layout, int &row);
+  void createPreview(QGridLayout *layout, int &row);
   void drawCartesianLinearX();
   void drawCartesianLinearY();
   void drawCartesianLogX();
@@ -71,10 +63,9 @@ private:
   void drawPolarTheta();
   void loadComboBoxDate();
   void loadComboBoxTime();
-  void loadComboBoxUnitsNonPolar (QComboBox &cmb,
-                                  CoordUnitsNonPolarTheta coordUnits);
-  void loadComboBoxUnitsPolar (QComboBox &cmb,
-                               CoordUnitsPolarTheta coordUnits);
+  void loadComboBoxUnitsNonPolar(QComboBox &cmb,
+                                 CoordUnitsNonPolarTheta coordUnits);
+  void loadComboBoxUnitsPolar(QComboBox &cmb, CoordUnitsPolarTheta coordUnits);
   void resetSceneRectangle();
   void updateControls();
   void updateCoordUnits();

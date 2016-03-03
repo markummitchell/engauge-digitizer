@@ -15,7 +15,8 @@ enum ZoomFactorInitial {
   ZOOM_INITIAL_PREVIOUS
 };
 
-// ZOOM_INITIAL_PREVIOUS is default according to the principle of least surprises for the user interface.
+// ZOOM_INITIAL_PREVIOUS is default according to the principle of least
+// surprises for the user interface.
 const ZoomFactorInitial DEFAULT_ZOOM_FACTOR_INITIAL = ZOOM_INITIAL_PREVIOUS;
 
 #endif // ZOOM_FACTOR_INITIAL_H

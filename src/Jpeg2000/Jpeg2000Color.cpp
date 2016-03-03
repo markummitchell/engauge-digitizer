@@ -1,6 +1,6 @@
 /*
- * The copyright in this software is being made available under the 2-clauses 
- * BSD License, included below. This software may be subject to other third 
+ * The copyright in this software is being made available under the 2-clauses
+ * BSD License, included below. This software may be subject to other third
  * party and contributor rights, including patent rights, and no such rights
  * are granted under this license.
  *
@@ -8,7 +8,7 @@
  * Copyright (c) 2002-2014, Professor Benoit Macq
  * Copyright (c) 2001-2003, David Janssens
  * Copyright (c) 2002-2003, Yannick Verschueren
- * Copyright (c) 2003-2007, Francois-Olivier Devaux 
+ * Copyright (c) 2003-2007, Francois-Olivier Devaux
  * Copyright (c) 2003-2014, Antonin Descampe
  * Copyright (c) 2005, Herve Drolon, FreeImage Team
  * All rights reserved.
@@ -62,228 +62,275 @@
   B: 0.999823  1.77204       -8.04142e-06  :Cr - 2^(prec - 1)
 
   -----------------------------------------------------------*/
-void sycc_to_rgb(int offset, int upb, int y, int cb, int cr,
-                 int *out_r, int *out_g, int *out_b)
-{
+void sycc_to_rgb(int offset, int upb, int y, int cb, int cr, int *out_r,
+                 int *out_g, int *out_b) {
   int r, g, b;
 
-  cb -= offset; cr -= offset;
+  cb -= offset;
+  cr -= offset;
   r = y + (int)(1.402 * (float)cr);
-  if(r < 0) r = 0; else if(r > upb) r = upb; *out_r = r;
+  if (r < 0)
+    r = 0;
+  else if (r > upb)
+    r = upb;
+  *out_r = r;
 
   g = y - (int)(0.344 * (float)cb + 0.714 * (float)cr);
-  if(g < 0) g = 0; else if(g > upb) g = upb; *out_g = g;
+  if (g < 0)
+    g = 0;
+  else if (g > upb)
+    g = upb;
+  *out_g = g;
 
   b = y + (int)(1.772 * (float)cb);
-  if(b < 0) b = 0; else if(b > upb) b = upb; *out_b = b;
+  if (b < 0)
+    b = 0;
+  else if (b > upb)
+    b = upb;
+  *out_b = b;
 }
 
-void sycc444_to_rgb(opj_image_t *img)
-{
+void sycc444_to_rgb(opj_image_t *img) {
   int *d0, *d1, *d2, *r, *g, *b;
   const int *y, *cb, *cr;
   int maxw, maxh, max, i, offset, upb;
 
   i = (int)img->comps[0].prec;
-  offset = 1<<(i - 1); upb = (1<<i)-1;
+  offset = 1 << (i - 1);
+  upb = (1 << i) - 1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = (int)img->comps[0].w;
+  maxh = (int)img->comps[0].h;
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = (int *)malloc(sizeof(int) * (size_t)max);
+  d1 = g = (int *)malloc(sizeof(int) * (size_t)max);
+  d2 = b = (int *)malloc(sizeof(int) * (size_t)max);
 
-  for(i = 0; i < max; ++i)
-  {
-    sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);	
+  for (i = 0; i < max; ++i) {
+    sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);
 
-    ++y; ++cb; ++cr; ++r; ++g; ++b;
-  }	
-  free(img->comps[0].data); img->comps[0].data = d0;
-  free(img->comps[1].data); img->comps[1].data = d1;
-  free(img->comps[2].data); img->comps[2].data = d2;
+    ++y;
+    ++cb;
+    ++cr;
+    ++r;
+    ++g;
+    ++b;
+  }
+  free(img->comps[0].data);
+  img->comps[0].data = d0;
+  free(img->comps[1].data);
+  img->comps[1].data = d1;
+  free(img->comps[2].data);
+  img->comps[2].data = d2;
 
-}/* sycc444_to_rgb() */
+} /* sycc444_to_rgb() */
 
-void sycc422_to_rgb(opj_image_t *img)
-{	
+void sycc422_to_rgb(opj_image_t *img) {
   int *d0, *d1, *d2, *r, *g, *b;
   const int *y, *cb, *cr;
   int maxw, maxh, max, offset, upb;
   int i, j;
 
   i = (int)img->comps[0].prec;
-  offset = 1<<(i - 1); upb = (1<<i)-1;
+  offset = 1 << (i - 1);
+  upb = (1 << i) - 1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = (int)img->comps[0].w;
+  maxh = (int)img->comps[0].h;
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = (int *)malloc(sizeof(int) * (size_t)max);
+  d1 = g = (int *)malloc(sizeof(int) * (size_t)max);
+  d2 = b = (int *)malloc(sizeof(int) * (size_t)max);
 
-  for(i=0; i < maxh; ++i)
-  {
-    for(j=0; j < maxw; j += 2)
-    {
+  for (i = 0; i < maxh; ++i) {
+    for (j = 0; j < maxw; j += 2) {
       sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);
 
-      ++y; ++r; ++g; ++b;
+      ++y;
+      ++r;
+      ++g;
+      ++b;
 
       sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);
 
-      ++y; ++r; ++g; ++b; ++cb; ++cr;
+      ++y;
+      ++r;
+      ++g;
+      ++b;
+      ++cb;
+      ++cr;
     }
   }
-  free(img->comps[0].data); img->comps[0].data = d0;
-  free(img->comps[1].data); img->comps[1].data = d1;
-  free(img->comps[2].data); img->comps[2].data = d2;
+  free(img->comps[0].data);
+  img->comps[0].data = d0;
+  free(img->comps[1].data);
+  img->comps[1].data = d1;
+  free(img->comps[2].data);
+  img->comps[2].data = d2;
 
 #if defined(USE_JPWL) || defined(USE_MJ2)
-  img->comps[1].w = maxw; img->comps[1].h = maxh;
-  img->comps[2].w = maxw; img->comps[2].h = maxh;
+  img->comps[1].w = maxw;
+  img->comps[1].h = maxh;
+  img->comps[2].w = maxw;
+  img->comps[2].h = maxh;
 #else
-  img->comps[1].w = (OPJ_UINT32)maxw; img->comps[1].h = (OPJ_UINT32)maxh;
-  img->comps[2].w = (OPJ_UINT32)maxw; img->comps[2].h = (OPJ_UINT32)maxh;
+  img->comps[1].w = (OPJ_UINT32)maxw;
+  img->comps[1].h = (OPJ_UINT32)maxh;
+  img->comps[2].w = (OPJ_UINT32)maxw;
+  img->comps[2].h = (OPJ_UINT32)maxh;
 #endif
   img->comps[1].dx = img->comps[0].dx;
   img->comps[2].dx = img->comps[0].dx;
   img->comps[1].dy = img->comps[0].dy;
   img->comps[2].dy = img->comps[0].dy;
 
-}/* sycc422_to_rgb() */
+} /* sycc422_to_rgb() */
 
-void sycc420_to_rgb(opj_image_t *img)
-{
+void sycc420_to_rgb(opj_image_t *img) {
   int *d0, *d1, *d2, *r, *g, *b, *nr, *ng, *nb;
   const int *y, *cb, *cr, *ny;
   int maxw, maxh, max, offset, upb;
   int i, j;
 
   i = (int)img->comps[0].prec;
-  offset = 1<<(i - 1); upb = (1<<i)-1;
+  offset = 1 << (i - 1);
+  upb = (1 << i) - 1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = (int)img->comps[0].w;
+  maxh = (int)img->comps[0].h;
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = (int *)malloc(sizeof(int) * (size_t)max);
+  d1 = g = (int *)malloc(sizeof(int) * (size_t)max);
+  d2 = b = (int *)malloc(sizeof(int) * (size_t)max);
 
-  for(i=0; i < maxh; i += 2)
-  {
+  for (i = 0; i < maxh; i += 2) {
     ny = y + maxw;
-    nr = r + maxw; ng = g + maxw; nb = b + maxw;
+    nr = r + maxw;
+    ng = g + maxw;
+    nb = b + maxw;
 
-    for(j=0; j < maxw;  j += 2)
-    {
+    for (j = 0; j < maxw; j += 2) {
       sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);
 
-      ++y; ++r; ++g; ++b;
+      ++y;
+      ++r;
+      ++g;
+      ++b;
 
       sycc_to_rgb(offset, upb, *y, *cb, *cr, r, g, b);
 
-      ++y; ++r; ++g; ++b;
+      ++y;
+      ++r;
+      ++g;
+      ++b;
 
       sycc_to_rgb(offset, upb, *ny, *cb, *cr, nr, ng, nb);
 
-      ++ny; ++nr; ++ng; ++nb;
+      ++ny;
+      ++nr;
+      ++ng;
+      ++nb;
 
       sycc_to_rgb(offset, upb, *ny, *cb, *cr, nr, ng, nb);
 
-      ++ny; ++nr; ++ng; ++nb; ++cb; ++cr;
+      ++ny;
+      ++nr;
+      ++ng;
+      ++nb;
+      ++cb;
+      ++cr;
     }
-    y += maxw; r += maxw; g += maxw; b += maxw;
+    y += maxw;
+    r += maxw;
+    g += maxw;
+    b += maxw;
   }
-  free(img->comps[0].data); img->comps[0].data = d0;
-  free(img->comps[1].data); img->comps[1].data = d1;
-  free(img->comps[2].data); img->comps[2].data = d2;
+  free(img->comps[0].data);
+  img->comps[0].data = d0;
+  free(img->comps[1].data);
+  img->comps[1].data = d1;
+  free(img->comps[2].data);
+  img->comps[2].data = d2;
 
 #if defined(USE_JPWL) || defined(USE_MJ2)
-  img->comps[1].w = maxw; img->comps[1].h = maxh;
-  img->comps[2].w = maxw; img->comps[2].h = maxh;
+  img->comps[1].w = maxw;
+  img->comps[1].h = maxh;
+  img->comps[2].w = maxw;
+  img->comps[2].h = maxh;
 #else
-  img->comps[1].w = (OPJ_UINT32)maxw; img->comps[1].h = (OPJ_UINT32)maxh;
-  img->comps[2].w = (OPJ_UINT32)maxw; img->comps[2].h = (OPJ_UINT32)maxh;
+  img->comps[1].w = (OPJ_UINT32)maxw;
+  img->comps[1].h = (OPJ_UINT32)maxh;
+  img->comps[2].w = (OPJ_UINT32)maxw;
+  img->comps[2].h = (OPJ_UINT32)maxh;
 #endif
   img->comps[1].dx = img->comps[0].dx;
   img->comps[2].dx = img->comps[0].dx;
   img->comps[1].dy = img->comps[0].dy;
   img->comps[2].dy = img->comps[0].dy;
 
-}/* sycc420_to_rgb() */
+} /* sycc420_to_rgb() */
 
-void color_sycc_to_rgb(opj_image_t *img)
-{
-  if(img->numcomps < 3) 
-  {
+void color_sycc_to_rgb(opj_image_t *img) {
+  if (img->numcomps < 3) {
     img->color_space = OPJ_CLRSPC_GRAY;
     return;
   }
 
-  if((img->comps[0].dx == 1)
-     && (img->comps[1].dx == 2)
-     && (img->comps[2].dx == 2)
-     && (img->comps[0].dy == 1)
-     && (img->comps[1].dy == 2)
-     && (img->comps[2].dy == 2))/* horizontal and vertical sub-sample */
+  if ((img->comps[0].dx == 1) && (img->comps[1].dx == 2) &&
+      (img->comps[2].dx == 2) && (img->comps[0].dy == 1) &&
+      (img->comps[1].dy == 2) &&
+      (img->comps[2].dy == 2)) /* horizontal and vertical sub-sample */
   {
     sycc420_to_rgb(img);
-  }
-  else {
-    if((img->comps[0].dx == 1)
-       && (img->comps[1].dx == 2)
-       && (img->comps[2].dx == 2)
-       && (img->comps[0].dy == 1)
-       && (img->comps[1].dy == 1)
-       && (img->comps[2].dy == 1))/* horizontal sub-sample only */
+  } else {
+    if ((img->comps[0].dx == 1) && (img->comps[1].dx == 2) &&
+        (img->comps[2].dx == 2) && (img->comps[0].dy == 1) &&
+        (img->comps[1].dy == 1) &&
+        (img->comps[2].dy == 1)) /* horizontal sub-sample only */
     {
       sycc422_to_rgb(img);
-    }
-    else {
-      if((img->comps[0].dx == 1)
-         && (img->comps[1].dx == 1)
-         && (img->comps[2].dx == 1)
-         && (img->comps[0].dy == 1)
-         && (img->comps[1].dy == 1)
-         && (img->comps[2].dy == 1))/* no sub-sample */
+    } else {
+      if ((img->comps[0].dx == 1) && (img->comps[1].dx == 1) &&
+          (img->comps[2].dx == 1) && (img->comps[0].dy == 1) &&
+          (img->comps[1].dy == 1) &&
+          (img->comps[2].dy == 1)) /* no sub-sample */
       {
-	sycc444_to_rgb(img);
-      }
-      else
-      {
-	fprintf(stderr,"%s:%d:color_sycc_to_rgb\n\tCAN NOT CONVERT\n",
-                __FILE__,__LINE__);
-	return;
+        sycc444_to_rgb(img);
+      } else {
+        fprintf(stderr, "%s:%d:color_sycc_to_rgb\n\tCAN NOT CONVERT\n",
+                __FILE__, __LINE__);
+        return;
       }
     }
   }
   img->color_space = OPJ_CLRSPC_SRGB;
-}/* color_sycc_to_rgb() */
+} /* color_sycc_to_rgb() */
 
 #if defined(OPJ_HAVE_LIBLCMS2) || defined(OPJ_HAVE_LIBLCMS1)
 #ifdef OPJ_HAVE_LIBLCMS1
 /* Bob Friesenhahn proposed:*/
-#define cmsSigXYZData   icSigXYZData
-#define cmsSigLabData   icSigLabData
-#define cmsSigCmykData  icSigCmykData
+#define cmsSigXYZData icSigXYZData
+#define cmsSigLabData icSigLabData
+#define cmsSigCmykData icSigCmykData
 #define cmsSigYCbCrData icSigYCbCrData
-#define cmsSigLuvData   icSigLuvData
-#define cmsSigGrayData  icSigGrayData
-#define cmsSigRgbData   icSigRgbData
+#define cmsSigLuvData icSigLuvData
+#define cmsSigGrayData icSigGrayData
+#define cmsSigRgbData icSigRgbData
 #define cmsUInt32Number DWORD
 
 #define cmsColorSpaceSignature icColorSpaceSignature
@@ -291,8 +338,7 @@ void color_sycc_to_rgb(opj_image_t *img)
 
 #endif /* OPJ_HAVE_LIBLCMS1 */
 
-void color_apply_icc_profile(opj_image_t *image)
-{
+void color_apply_icc_profile(opj_image_t *image) {
   cmsHPROFILE in_prof, out_prof;
   cmsHTRANSFORM transform;
   cmsColorSpaceSignature in_space, out_space;
@@ -301,62 +347,53 @@ void color_apply_icc_profile(opj_image_t *image)
   int prec, i, max, max_w, max_h;
   OPJ_COLOR_SPACE oldspace;
 
-  in_prof = 
-  cmsOpenProfileFromMem(image->icc_profile_buf, image->icc_profile_len);
+  in_prof =
+      cmsOpenProfileFromMem(image->icc_profile_buf, image->icc_profile_len);
 
-  if(in_prof == NULL) return;
+  if (in_prof == NULL)
+    return;
 
   in_space = cmsGetPCS(in_prof);
   out_space = cmsGetColorSpace(in_prof);
   intent = cmsGetHeaderRenderingIntent(in_prof);
 
-	
   max_w = (int)image->comps[0].w;
   max_h = (int)image->comps[0].h;
   prec = (int)image->comps[0].prec;
   oldspace = image->color_space;
 
-  if(out_space == cmsSigRgbData) /* enumCS 16 */
+  if (out_space == cmsSigRgbData) /* enumCS 16 */
   {
-    if( prec <= 8 )
-    {
+    if (prec <= 8) {
       in_type = TYPE_RGB_8;
       out_type = TYPE_RGB_8;
-    }
-    else
-    {
+    } else {
       in_type = TYPE_RGB_16;
       out_type = TYPE_RGB_16;
     }
     out_prof = cmsCreate_sRGBProfile();
     image->color_space = OPJ_CLRSPC_SRGB;
+  } else if (out_space == cmsSigGrayData) /* enumCS 17 */
+  {
+    in_type = TYPE_GRAY_8;
+    out_type = TYPE_RGB_8;
+    out_prof = cmsCreate_sRGBProfile();
+    image->color_space = OPJ_CLRSPC_SRGB;
+  } else if (out_space == cmsSigYCbCrData) /* enumCS 18 */
+  {
+    in_type = TYPE_YCbCr_16;
+    out_type = TYPE_RGB_16;
+    out_prof = cmsCreate_sRGBProfile();
+    image->color_space = OPJ_CLRSPC_SRGB;
+  } else {
+    return;
   }
-  else
-    if(out_space == cmsSigGrayData) /* enumCS 17 */
-    {
-      in_type = TYPE_GRAY_8;
-      out_type = TYPE_RGB_8;
-      out_prof = cmsCreate_sRGBProfile();
-      image->color_space = OPJ_CLRSPC_SRGB;
-    }
-    else
-      if(out_space == cmsSigYCbCrData) /* enumCS 18 */
-      {
-	in_type = TYPE_YCbCr_16;
-	out_type = TYPE_RGB_16;
-	out_prof = cmsCreate_sRGBProfile();
-	image->color_space = OPJ_CLRSPC_SRGB;
-      }
-      else
-      {
-	return;
-      }
 
   (void)prec;
   (void)in_space;
 
-  transform = cmsCreateTransform(in_prof, in_type,
-                                 out_prof, out_type, intent, 0);
+  transform =
+      cmsCreateTransform(in_prof, in_type, out_prof, out_type, intent, 0);
 
 #ifdef OPJ_HAVE_LIBLCMS2
   /* Possible for: LCMS_VERSION >= 2000 :*/
@@ -364,8 +401,7 @@ void color_apply_icc_profile(opj_image_t *image)
   cmsCloseProfile(out_prof);
 #endif
 
-  if(transform == NULL)
-  {
+  if (transform == NULL) {
     image->color_space = oldspace;
 #ifdef OPJ_HAVE_LIBLCMS1
     cmsCloseProfile(in_prof);
@@ -374,25 +410,24 @@ void color_apply_icc_profile(opj_image_t *image)
     return;
   }
 
-  if(image->numcomps > 2)/* RGB, RGBA */
+  if (image->numcomps > 2) /* RGB, RGBA */
   {
-    if( prec <= 8 )
-    {
+    if (prec <= 8) {
       unsigned char *inbuf, *outbuf, *in, *out;
       max = max_w * max_h;
-      nr_samples = (cmsUInt32Number)max * 3 * (cmsUInt32Number)sizeof(unsigned char);
-      in = inbuf = (unsigned char*)malloc(nr_samples);
-      out = outbuf = (unsigned char*)malloc(nr_samples);
+      nr_samples =
+          (cmsUInt32Number)max * 3 * (cmsUInt32Number)sizeof(unsigned char);
+      in = inbuf = (unsigned char *)malloc(nr_samples);
+      out = outbuf = (unsigned char *)malloc(nr_samples);
 
       r = image->comps[0].data;
       g = image->comps[1].data;
       b = image->comps[2].data;
 
-      for(i = 0; i < max; ++i)
-      {
-	*in++ = (unsigned char)*r++;
-	*in++ = (unsigned char)*g++;
-	*in++ = (unsigned char)*b++;
+      for (i = 0; i < max; ++i) {
+        *in++ = (unsigned char)*r++;
+        *in++ = (unsigned char)*g++;
+        *in++ = (unsigned char)*b++;
       }
 
       cmsDoTransform(transform, inbuf, outbuf, (cmsUInt32Number)max);
@@ -401,31 +436,29 @@ void color_apply_icc_profile(opj_image_t *image)
       g = image->comps[1].data;
       b = image->comps[2].data;
 
-      for(i = 0; i < max; ++i)
-      {
-	*r++ = (int)*out++;
-	*g++ = (int)*out++;
-	*b++ = (int)*out++;
+      for (i = 0; i < max; ++i) {
+        *r++ = (int)*out++;
+        *g++ = (int)*out++;
+        *b++ = (int)*out++;
       }
-      free(inbuf); free(outbuf);
-    }
-    else
-    {
+      free(inbuf);
+      free(outbuf);
+    } else {
       unsigned short *inbuf, *outbuf, *in, *out;
       max = max_w * max_h;
-      nr_samples = (cmsUInt32Number)max * 3 * (cmsUInt32Number)sizeof(unsigned short);
-      in = inbuf = (unsigned short*)malloc(nr_samples);
-      out = outbuf = (unsigned short*)malloc(nr_samples);
+      nr_samples =
+          (cmsUInt32Number)max * 3 * (cmsUInt32Number)sizeof(unsigned short);
+      in = inbuf = (unsigned short *)malloc(nr_samples);
+      out = outbuf = (unsigned short *)malloc(nr_samples);
 
       r = image->comps[0].data;
       g = image->comps[1].data;
       b = image->comps[2].data;
 
-      for(i = 0; i < max; ++i)
-      {
-	*in++ = (unsigned short)*r++;
-	*in++ = (unsigned short)*g++;
-	*in++ = (unsigned short)*b++;
+      for (i = 0; i < max; ++i) {
+        *in++ = (unsigned short)*r++;
+        *in++ = (unsigned short)*g++;
+        *in++ = (unsigned short)*b++;
       }
 
       cmsDoTransform(transform, inbuf, outbuf, (cmsUInt32Number)max);
@@ -434,41 +467,39 @@ void color_apply_icc_profile(opj_image_t *image)
       g = image->comps[1].data;
       b = image->comps[2].data;
 
-      for(i = 0; i < max; ++i)
-      {
-	*r++ = (int)*out++;
-	*g++ = (int)*out++;
-	*b++ = (int)*out++;
+      for (i = 0; i < max; ++i) {
+        *r++ = (int)*out++;
+        *g++ = (int)*out++;
+        *b++ = (int)*out++;
       }
-      free(inbuf); free(outbuf);
+      free(inbuf);
+      free(outbuf);
     }
-  }
-  else /* GRAY, GRAYA */
+  } else /* GRAY, GRAYA */
   {
     unsigned char *in, *inbuf, *out, *outbuf;
     max = max_w * max_h;
     nr_samples = (cmsUInt32Number)max * 3 * sizeof(unsigned char);
-    in = inbuf = (unsigned char*)malloc(nr_samples);
-    out = outbuf = (unsigned char*)malloc(nr_samples);
+    in = inbuf = (unsigned char *)malloc(nr_samples);
+    out = outbuf = (unsigned char *)malloc(nr_samples);
 
-    image->comps = (opj_image_comp_t*)
-    realloc(image->comps, (image->numcomps+2)*sizeof(opj_image_comp_t));
+    image->comps = (opj_image_comp_t *)realloc(
+        image->comps, (image->numcomps + 2) * sizeof(opj_image_comp_t));
 
-    if(image->numcomps == 2)
+    if (image->numcomps == 2)
       image->comps[3] = image->comps[1];
 
     image->comps[1] = image->comps[0];
     image->comps[2] = image->comps[0];
 
-    image->comps[1].data = (int*)calloc((size_t)max, sizeof(int));
-    image->comps[2].data = (int*)calloc((size_t)max, sizeof(int));
+    image->comps[1].data = (int *)calloc((size_t)max, sizeof(int));
+    image->comps[2].data = (int *)calloc((size_t)max, sizeof(int));
 
     image->numcomps += 2;
 
     r = image->comps[0].data;
 
-    for(i = 0; i < max; ++i)
-    {
+    for (i = 0; i < max; ++i) {
       *in++ = (unsigned char)*r++;
     }
     cmsDoTransform(transform, inbuf, outbuf, (cmsUInt32Number)max);
@@ -477,13 +508,15 @@ void color_apply_icc_profile(opj_image_t *image)
     g = image->comps[1].data;
     b = image->comps[2].data;
 
-    for(i = 0; i < max; ++i)
-    {
-      *r++ = (int)*out++; *g++ = (int)*out++; *b++ = (int)*out++;
+    for (i = 0; i < max; ++i) {
+      *r++ = (int)*out++;
+      *g++ = (int)*out++;
+      *b++ = (int)*out++;
     }
-    free(inbuf); free(outbuf);
+    free(inbuf);
+    free(outbuf);
 
-  }/* if(image->numcomps */
+  } /* if(image->numcomps */
 
   cmsDeleteTransform(transform);
 
@@ -491,6 +524,6 @@ void color_apply_icc_profile(opj_image_t *image)
   cmsCloseProfile(in_prof);
   cmsCloseProfile(out_prof);
 #endif
-}/* color_apply_icc_profile() */
+} /* color_apply_icc_profile() */
 
 #endif /* OPJ_HAVE_LIBLCMS2 || OPJ_HAVE_LIBLCMS1 */

@@ -14,11 +14,12 @@ class QRadioButton;
 class QSpinBox;
 class ViewPreview;
 
-/// Dialog for editing DigitizeStateCurve settings. The preview window would should the selected
-/// cursor in the center, but there is no way to access the image of Qt::CrossCursor (QCursor::pixmap
+/// Dialog for editing DigitizeStateCurve settings. The preview window would
+/// should the selected
+/// cursor in the center, but there is no way to access the image of
+/// Qt::CrossCursor (QCursor::pixmap
 /// only works for custom cursors that were defined by a QPixmap)
-class DlgSettingsDigitizeCurve : public DlgSettingsAbstractBase
-{
+class DlgSettingsDigitizeCurve : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -26,24 +27,23 @@ public:
   DlgSettingsDigitizeCurve(MainWindow &mainWindow);
   virtual ~DlgSettingsDigitizeCurve();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotCursorCustom (bool);
-  void slotCursorInnerRadius (const QString &);
-  void slotCursorLineWidth (const QString &);
-  void slotCursorSize (const QString &);
-  void slotCursorStandard (bool);
+  void slotCursorCustom(bool);
+  void slotCursorInnerRadius(const QString &);
+  void slotCursorLineWidth(const QString &);
+  void slotCursorSize(const QString &);
+  void slotCursorStandard(bool);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createControls (QGridLayout *layout, int &row);
-  void createPreview (QGridLayout *layout, int &row);
+  void createControls(QGridLayout *layout, int &row);
+  void createPreview(QGridLayout *layout, int &row);
   void updateControls();
   void updatePreview();
 

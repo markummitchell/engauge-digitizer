@@ -9,25 +9,21 @@
 class QXmlStreamReader;
 
 /// Command for moving all selected Points by a specified translation.
-class CmdPaste : public CmdAbstract
-{
+class CmdPaste : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdPaste(MainWindow &mainWindow,
-           Document &document,
+  CmdPaste(MainWindow &mainWindow, Document &document,
            const QStringList &selectedPointIdentifiers);
 
   /// Constructor for parsing error report file xml
-  CmdPaste(MainWindow &mainWindow,
-           Document &document,
-           const QString &cmdDescription,
-           QXmlStreamReader &reader);
+  CmdPaste(MainWindow &mainWindow, Document &document,
+           const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdPaste();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo (); 
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdPaste();

@@ -3,42 +3,44 @@
 
 #include <QMimeData>
 
-/// Custom mime type for separate treatment of graph coordinates and, when there is no transform, points coordinates.
-class MimePoints : public QMimeData
-{
+/// Custom mime type for separate treatment of graph coordinates and, when there
+/// is no transform, points coordinates.
+class MimePoints : public QMimeData {
 public:
-  /// Default constructor. Initial contents are overwritten by other constructors.
+  /// Default constructor. Initial contents are overwritten by other
+  /// constructors.
   MimePoints();
 
-  /// Constructor when graph coordinates are available because the transformation is defined.
-  MimePoints(const QString &csvGraph,
-             const QString &htmlGraph);
+  /// Constructor when graph coordinates are available because the
+  /// transformation is defined.
+  MimePoints(const QString &csvGraph, const QString &htmlGraph);
 
-  /// Constructor when transformation is not defined. This data is not meant to leave this application
-  MimePoints (const QString &csvPoints);
+  /// Constructor when transformation is not defined. This data is not meant to
+  /// leave this application
+  MimePoints(const QString &csvPoints);
 
   /// Assignment operator.
   MimePoints &operator=(const MimePoints &other);
 
   /// Destructor.
-  virtual ~MimePoints ();
+  virtual ~MimePoints();
 
   /// Get method for csvGraph.
-  QString csvGraph () const;
+  QString csvGraph() const;
 
   /// Get method for csvPoints.
-  QString csvPoints () const;
+  QString csvPoints() const;
 
   /// Available formats, which depend on whether or not the transform is defined
   virtual QStringList formats() const;
 
   /// Get methjod for htmlGraph.
-  QString htmlGraph () const;
+  QString htmlGraph() const;
 
 protected:
   /// Returns a variant with the data for the specified format.
-  virtual QVariant retrieveData (const QString &format,
-                                 QVariant::Type preferredType) const;
+  virtual QVariant retrieveData(const QString &format,
+                                QVariant::Type preferredType) const;
 
 private:
   QString m_csvGraph;

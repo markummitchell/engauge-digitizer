@@ -7,26 +7,23 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsColorFilter
-class CmdSettingsColorFilter : public CmdAbstract
-{
+class CmdSettingsColorFilter : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsColorFilter(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsColorFilter(MainWindow &mainWindow, Document &document,
                          const DocumentModelColorFilter &modelColorFilterBefore,
                          const DocumentModelColorFilter &modelColorFilterAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsColorFilter(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsColorFilter(MainWindow &mainWindow, Document &document,
                          const QString &cmdDescription,
                          QXmlStreamReader &reader);
 
   virtual ~CmdSettingsColorFilter();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsColorFilter();

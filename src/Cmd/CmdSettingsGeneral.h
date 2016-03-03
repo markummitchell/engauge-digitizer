@@ -7,27 +7,23 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsGeneral
-class CmdSettingsGeneral : public CmdAbstract
-{
+class CmdSettingsGeneral : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsGeneral(MainWindow &mainWindow,
-                    Document &document,
-                    const DocumentModelGeneral &modelGeneralBefore,
-                    const DocumentModelGeneral &modelGeneralAfter);
+  CmdSettingsGeneral(MainWindow &mainWindow, Document &document,
+                     const DocumentModelGeneral &modelGeneralBefore,
+                     const DocumentModelGeneral &modelGeneralAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsGeneral(MainWindow &mainWindow,
-                    Document &document,
-                    const QString &cmdDescription,
-                    QXmlStreamReader &reader);
+  CmdSettingsGeneral(MainWindow &mainWindow, Document &document,
+                     const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdSettingsGeneral();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
-  
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
+
 private:
   CmdSettingsGeneral();
 

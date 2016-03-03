@@ -5,8 +5,7 @@
 #include <QString>
 
 /// Abstract validator for all numeric formats
-class DlgValidatorAbstract : public QDoubleValidator
-{
+class DlgValidatorAbstract : public QDoubleValidator {
 public:
   /// Single constructor
   DlgValidatorAbstract(QObject *parent = 0);
@@ -14,11 +13,9 @@ public:
   virtual ~DlgValidatorAbstract();
 
   /// Validate according to the numeric format specific to the leaf class
-  virtual QValidator::State validate (QString &input,
-                                      int &pos) const = 0;
+  virtual QValidator::State validate(QString &input, int &pos) const = 0;
 
 private:
-
 };
 
 #endif // DLG_VALIDATOR_ABSTRACT_H

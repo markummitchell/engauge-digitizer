@@ -1,23 +1,13 @@
 #include "GhostPolygon.h"
 
-GhostPolygon::GhostPolygon(const QPolygonF &polygon,
-                           const QPen &pen,
-                           const QBrush &brush) :
-  m_polygon (polygon),
-  m_pen (pen),
-  m_brush (brush)
-{
-}
+GhostPolygon::GhostPolygon(const QPolygonF &polygon, const QPen &pen,
+                           const QBrush &brush)
+    : m_polygon(polygon), m_pen(pen), m_brush(brush) {}
 
-GhostPolygon::GhostPolygon(const GhostPolygon &other) :
-  m_polygon (other.polygon ()),
-  m_pen (other.pen()),
-  m_brush (other.brush())
-{
-}
+GhostPolygon::GhostPolygon(const GhostPolygon &other)
+    : m_polygon(other.polygon()), m_pen(other.pen()), m_brush(other.brush()) {}
 
-GhostPolygon &GhostPolygon::operator=(const GhostPolygon &other)
-{
+GhostPolygon &GhostPolygon::operator=(const GhostPolygon &other) {
   m_polygon = other.polygon();
   m_pen = other.pen();
   m_brush = other.brush();
@@ -25,21 +15,10 @@ GhostPolygon &GhostPolygon::operator=(const GhostPolygon &other)
   return *this;
 }
 
-GhostPolygon::~GhostPolygon()
-{
-}
+GhostPolygon::~GhostPolygon() {}
 
-QBrush GhostPolygon::brush() const
-{
-  return m_brush;
-}
+QBrush GhostPolygon::brush() const { return m_brush; }
 
-QPen GhostPolygon::pen() const
-{
-  return m_pen;
-}
+QPen GhostPolygon::pen() const { return m_pen; }
 
-QPolygonF GhostPolygon::polygon() const
-{
-  return m_polygon;
-}
+QPolygonF GhostPolygon::polygon() const { return m_polygon; }

@@ -6,6 +6,6 @@
 class GraphicsPoint;
 
 // Use QMap, which keeps the keys sorted, to map ordinal to GraphicsPoint
-typedef QMap<double, GraphicsPoint*> OrdinalToGraphicsPoint;
+typedef QMap<double, GraphicsPoint *> OrdinalToGraphicsPoint;
 
 #endif // ORDINAL_TO_GRAPHICS_POINT_H

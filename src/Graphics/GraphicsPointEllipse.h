@@ -7,14 +7,13 @@
 class GraphicsPoint;
 
 /// This class add event handling to QGraphicsEllipseItem
-class GraphicsPointEllipse : public QGraphicsEllipseItem
-{
+class GraphicsPointEllipse : public QGraphicsEllipseItem {
 public:
   /// Single constructor
-  GraphicsPointEllipse(GraphicsPoint &graphicsPoint,
-                       const QRect &rect);
+  GraphicsPointEllipse(GraphicsPoint &graphicsPoint, const QRect &rect);
 
-  /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
+  /// Intercept moves by dragging so moved items can be identified. This
+  /// replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
   /// Update the radius
   void setRadius(int radius);

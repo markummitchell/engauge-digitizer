@@ -14,8 +14,7 @@ class QLineEdit;
 class ViewPreview;
 
 /// Dialog for editing grid removal settings.
-class DlgSettingsGridRemoval : public DlgSettingsAbstractBase
-{
+class DlgSettingsGridRemoval : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -23,12 +22,12 @@ public:
   DlgSettingsGridRemoval(MainWindow &mainWindow);
   virtual ~DlgSettingsGridRemoval();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotRemoveGridLines (int);
+  void slotRemoveGridLines(int);
   void slotCloseDistance(const QString &);
 
   void slotDisableX(const QString &);
@@ -44,15 +43,14 @@ private slots:
   void slotStopY(const QString &);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createRemoveGridLines (QGridLayout *layout, int &row);
-  void createRemoveGridLinesX (QGridLayout *layoutGridLines, int &row);
-  void createRemoveGridLinesY (QGridLayout *layoutGridLines, int &row);
-  void createPreview (QGridLayout *layout, int &row);
-  void updateControls ();
+  void createRemoveGridLines(QGridLayout *layout, int &row);
+  void createRemoveGridLinesX(QGridLayout *layoutGridLines, int &row);
+  void createRemoveGridLinesY(QGridLayout *layoutGridLines, int &row);
+  void createPreview(QGridLayout *layout, int &row);
+  void updateControls();
   void updatePreview();
 
   QCheckBox *m_chkRemoveGridLines;

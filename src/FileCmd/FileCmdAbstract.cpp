@@ -3,16 +3,9 @@
 #include "MainWindow.h"
 #include <QMessageBox>
 
-FileCmdAbstract::FileCmdAbstract(const QString &cmdDescription) :
-  m_cmdDescription (cmdDescription)
-{
-}
+FileCmdAbstract::FileCmdAbstract(const QString &cmdDescription)
+    : m_cmdDescription(cmdDescription) {}
 
-FileCmdAbstract::~FileCmdAbstract()
-{
-}
+FileCmdAbstract::~FileCmdAbstract() {}
 
-QString FileCmdAbstract::cmdDescription() const
-{
-  return m_cmdDescription;
-}
+QString FileCmdAbstract::cmdDescription() const { return m_cmdDescription; }

@@ -7,50 +7,53 @@
 #include <QTableWidget>
 #include "SettingsForGraph.h"
 
-ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
-  ChecklistGuidePage (title)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::ChecklistGuidePageCurves";
+ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title)
+    : ChecklistGuidePage(title) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "ChecklistGuidePageCurves::ChecklistGuidePageCurves";
 
-  const QString WHATS_THIS_CURVE (tr ("Curve name. Empty if unused."));
-  const QString WHATS_THIS_LINES (tr ("Draw lines between points in each curve."));
-  const QString WHATS_THIS_POINTS (tr ("Draw points in each curve, without lines between the points."));
+  const QString WHATS_THIS_CURVE(tr("Curve name. Empty if unused."));
+  const QString WHATS_THIS_LINES(
+      tr("Draw lines between points in each curve."));
+  const QString WHATS_THIS_POINTS(
+      tr("Draw points in each curve, without lines between the points."));
 
-  addHtml (tr ("<p>What are the names of the curves that are to be digitized? At least one entry is required.</p>"));
+  addHtml(tr("<p>What are the names of the curves that are to be digitized? At "
+             "least one entry is required.</p>"));
 
-  m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
+  m_edit = new ChecklistLineEdit *[NUM_CURVE_NAMES()];
 
   for (int i = 0; i < NUM_CURVE_NAMES(); i++) {
-    m_edit [i] = new ChecklistLineEdit;
-    connect (m_edit [i], SIGNAL (signalKeyRelease()), this, SLOT (slotTableChanged()));
-    addLineEdit (m_edit [i],
-                 WHATS_THIS_CURVE);
+    m_edit[i] = new ChecklistLineEdit;
+    connect(m_edit[i], SIGNAL(signalKeyRelease()), this,
+            SLOT(slotTableChanged()));
+    addLineEdit(m_edit[i], WHATS_THIS_CURVE);
   }
 
   SettingsForGraph settingsForGraph;
-  QString curveName = settingsForGraph.defaultCurveName (1,
-                                                         DEFAULT_GRAPH_CURVE_NAME);
+  QString curveName =
+      settingsForGraph.defaultCurveName(1, DEFAULT_GRAPH_CURVE_NAME);
 
-  m_edit [0]->setText (curveName);
+  m_edit[0]->setText(curveName);
 
-  addHtml ("<p>&nbsp;</p>");
+  addHtml("<p>&nbsp;</p>");
 
-  addHtml (tr ("<p>How are those curves drawn?</p>"));
+  addHtml(tr("<p>How are those curves drawn?</p>"));
 
-  m_btnLines = addLabelAndRadioButton (tr ("With lines (with or without points)"),
-                                       WHATS_THIS_LINES);
-  m_btnPoints = addLabelAndRadioButton (tr ("With points only (no lines between points)"),
-                                        WHATS_THIS_POINTS);
+  m_btnLines = addLabelAndRadioButton(tr("With lines (with or without points)"),
+                                      WHATS_THIS_LINES);
+  m_btnPoints = addLabelAndRadioButton(
+      tr("With points only (no lines between points)"), WHATS_THIS_POINTS);
 
-  m_btnLines->setChecked (true); // Default encourages digitizing using the lines, since that is easier
+  m_btnLines->setChecked(true); // Default encourages digitizing using the
+                                // lines, since that is easier
 }
 
-QStringList ChecklistGuidePageCurves::curveNames () const
-{
+QStringList ChecklistGuidePageCurves::curveNames() const {
   QStringList curveNames;
 
   for (int i = 0; i < NUM_CURVE_NAMES(); i++) {
-    const QLineEdit *edit = m_edit [i];
+    const QLineEdit *edit = m_edit[i];
     QString text = edit->text();
     if (!text.isEmpty()) {
       curveNames << text;
@@ -60,9 +63,9 @@ QStringList ChecklistGuidePageCurves::curveNames () const
   return curveNames;
 }
 
-bool ChecklistGuidePageCurves::curveNamesAreAllUnique() const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::curveNamesAreAllUnique";
+bool ChecklistGuidePageCurves::curveNamesAreAllUnique() const {
+  LOG4CPP_INFO_S((*mainCat))
+      << "ChecklistGuidePageCurves::curveNamesAreAllUnique";
 
   QStringList names = curveNames();
 
@@ -71,22 +74,18 @@ bool ChecklistGuidePageCurves::curveNamesAreAllUnique() const
   return (numberDuplicatesRemoved == 0);
 }
 
-bool ChecklistGuidePageCurves::isComplete () const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::isComplete";
+bool ChecklistGuidePageCurves::isComplete() const {
+  LOG4CPP_INFO_S((*mainCat)) << "ChecklistGuidePageCurves::isComplete";
 
-  return !curveNames().isEmpty () &&
-      curveNamesAreAllUnique ();
+  return !curveNames().isEmpty() && curveNamesAreAllUnique();
 }
 
-void ChecklistGuidePageCurves::slotTableChanged ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageCurves::slotTableChanged";
+void ChecklistGuidePageCurves::slotTableChanged() {
+  LOG4CPP_INFO_S((*mainCat)) << "ChecklistGuidePageCurves::slotTableChanged";
 
   emit completeChanged();
 }
 
-bool ChecklistGuidePageCurves::withLines() const
-{
+bool ChecklistGuidePageCurves::withLines() const {
   return m_btnLines->isChecked();
 }

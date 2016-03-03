@@ -7,26 +7,22 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsCoords
-class CmdSettingsCoords : public CmdAbstract
-{
+class CmdSettingsCoords : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsCoords(MainWindow &mainWindow,
-                    Document &document,
+  CmdSettingsCoords(MainWindow &mainWindow, Document &document,
                     const DocumentModelCoords &modelCoordsBefore,
                     const DocumentModelCoords &modelCoordsAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsCoords(MainWindow &mainWindow,
-                    Document &document,
-                    const QString &cmdDescription,
-                    QXmlStreamReader &reader);
+  CmdSettingsCoords(MainWindow &mainWindow, Document &document,
+                    const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdSettingsCoords();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsCoords();

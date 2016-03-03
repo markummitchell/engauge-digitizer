@@ -6,13 +6,10 @@
 #include <QRectF>
 
 /// Ghost for a QGraphicsEllipseItem
-class GhostEllipse
-{
- public:
+class GhostEllipse {
+public:
   /// Initial constructor
-  GhostEllipse(const QRectF &rect,
-               const QPen &pen,
-               const QBrush &brush);
+  GhostEllipse(const QRectF &rect, const QPen &pen, const QBrush &brush);
   ~GhostEllipse();
 
   /// Copy constructor
@@ -22,15 +19,15 @@ class GhostEllipse
   GhostEllipse &operator=(const GhostEllipse &other);
 
   /// Get method for brush
-  QBrush brush () const;
+  QBrush brush() const;
 
   /// Get method for pen
-  QPen pen () const;
+  QPen pen() const;
 
   /// Get method for bounding rectangle
   QRectF rect() const;
 
- private:
+private:
   GhostEllipse();
 
   QRectF m_rect;

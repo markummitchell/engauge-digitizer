@@ -10,6 +10,6 @@ enum CoordUnitsTime {
   NUM_COORD_UNITS_TIME
 };
 
-extern QString coordUnitsTimeToString (CoordUnitsTime coordUnits);
+extern QString coordUnitsTimeToString(CoordUnitsTime coordUnits);
 
 #endif // COORD_UNITS_TIME_H

@@ -12,56 +12,48 @@ class QGraphicsPixmapItem;
 class QImage;
 
 /// Digitizing state for matching Curve Points, one at a time.
-class DigitizeStatePointMatch : public DigitizeStateAbstractBase
-{
+class DigitizeStatePointMatch : public DigitizeStateAbstractBase {
 public:
   /// Single constructor.
   DigitizeStatePointMatch(DigitizeStateContext &context);
   virtual ~DigitizeStatePointMatch();
 
-  virtual QString activeCurve () const;
-  virtual void begin(CmdMediator *cmdMediator,
-                     DigitizeState previousState);
-  virtual QCursor cursor (CmdMediator *cmdMediator) const;
+  virtual QString activeCurve() const;
+  virtual void begin(CmdMediator *cmdMediator, DigitizeState previousState);
+  virtual QCursor cursor(CmdMediator *cmdMediator) const;
   virtual void end();
   virtual void handleCurveChange(CmdMediator *cmdMediator);
-  virtual void handleKeyPress (CmdMediator *cmdMediator,
-                               Qt::Key key,
-                               bool atLeastOneSelectedItem);
-  virtual void handleMouseMove (CmdMediator *cmdMediator,
-                                QPointF posScreen);
-  virtual void handleMousePress (CmdMediator *cmdMediator,
-                                 QPointF posScreen);
-  virtual void handleMouseRelease (CmdMediator *cmdMediator,
-                                   QPointF posScreen);
+  virtual void handleKeyPress(CmdMediator *cmdMediator, Qt::Key key,
+                              bool atLeastOneSelectedItem);
+  virtual void handleMouseMove(CmdMediator *cmdMediator, QPointF posScreen);
+  virtual void handleMousePress(CmdMediator *cmdMediator, QPointF posScreen);
+  virtual void handleMouseRelease(CmdMediator *cmdMediator, QPointF posScreen);
   virtual QString state() const;
-  virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
-                                         const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  virtual void updateModelDigitizeCurve(
+      CmdMediator *cmdMediator,
+      const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);
 
 private:
   DigitizeStatePointMatch();
 
-  void createPermanentPoint (CmdMediator *cmdMediator,
-                             const QPointF &posScreen);
-  void createTemporaryPoint (CmdMediator *cmdMediator,
-                             const QPoint &posScreen);
-  QList<PointMatchPixel> extractSamplePointPixels (const QImage &img,
-                                                   const DocumentModelPointMatch &modelPointMatch,
-                                                   const QPointF &posScreen) const;
-  void findPointsAndShowFirstCandidate (CmdMediator *cmdMediator,
-                                        const QPointF &posScreen);
-  bool pixelIsOnInImage (const QImage &img,
-                         int x,
-                         int y,
-                         int radiusLimit) const;
-  void popCandidatePoint (CmdMediator *cmdMediator);
+  void createPermanentPoint(CmdMediator *cmdMediator, const QPointF &posScreen);
+  void createTemporaryPoint(CmdMediator *cmdMediator, const QPoint &posScreen);
+  QList<PointMatchPixel>
+  extractSamplePointPixels(const QImage &img,
+                           const DocumentModelPointMatch &modelPointMatch,
+                           const QPointF &posScreen) const;
+  void findPointsAndShowFirstCandidate(CmdMediator *cmdMediator,
+                                       const QPointF &posScreen);
+  bool pixelIsOnInImage(const QImage &img, int x, int y, int radiusLimit) const;
+  void popCandidatePoint(CmdMediator *cmdMediator);
   void promoteCandidatePointToPermanentPoint(CmdMediator *cmdMediator);
 
   QGraphicsEllipseItem *m_outline;
   QGraphicsPixmapItem *m_candidatePoint;
 
-  // Candidate points sorted from best match to worst match. Once accepted, each is removed since there
+  // Candidate points sorted from best match to worst match. Once accepted, each
+  // is removed since there
   // is now an "official" point in the Document and GraphicsScene
   QList<QPoint> m_candidatePoints;
 

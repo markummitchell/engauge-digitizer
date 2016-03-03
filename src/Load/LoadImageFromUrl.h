@@ -10,9 +10,9 @@
 class MainWindow;
 class QUrl;
 
-/// Load QImage from url. This is trivial for a file, but requires an asynchronous download step for http urls.
-class LoadImageFromUrl : public QObject
-{
+/// Load QImage from url. This is trivial for a file, but requires an
+/// asynchronous download step for http urls.
+class LoadImageFromUrl : public QObject {
   Q_OBJECT;
 
 public:
@@ -21,20 +21,21 @@ public:
   ~LoadImageFromUrl();
 
   /// Start the asynchronous loading of an image from the specified url.
-  void startLoadImage (const QUrl &url);
+  void startLoadImage(const QUrl &url);
 
 private slots:
-  void slotFinished ();
-  void slotReadData ();
+  void slotFinished();
+  void slotReadData();
 
 signals:
-  /// Send the imported image to MainWindow. This completes the asynchronous loading of the image
-  void signalImportImage (QString, QImage);
+  /// Send the imported image to MainWindow. This completes the asynchronous
+  /// loading of the image
+  void signalImportImage(QString, QImage);
 
 private:
   LoadImageFromUrl();
 
-  void deallocate ();
+  void deallocate();
 
   MainWindow &m_mainWindow;
   QUrl m_url;

@@ -1,9 +1,8 @@
 #include "CursorSize.h"
 #include "EngaugeAssert.h"
 
-int CursorSizeToPixels (CursorSize cursorSize)
-{
-  ENGAUGE_ASSERT (cursorSize < NUM_CURSOR_SIZES);
+int CursorSizeToPixels(CursorSize cursorSize) {
+  ENGAUGE_ASSERT(cursorSize < NUM_CURSOR_SIZES);
 
   switch (cursorSize) {
   case CURSOR_SIZE_16:
@@ -22,6 +21,6 @@ int CursorSizeToPixels (CursorSize cursorSize)
     break;
   }
 
-  ENGAUGE_ASSERT (false);
+  ENGAUGE_ASSERT(false);
   return 0;
 }

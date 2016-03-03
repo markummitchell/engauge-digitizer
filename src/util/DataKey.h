@@ -7,10 +7,12 @@
 enum DataKey {
   DATA_KEY_IDENTIFIER,           ///> Unique identifier for QGraphicsItem object
   DATA_KEY_GRAPHICS_ITEM_TYPE,   ///> Item type (i.e. image versus point)
-  DATA_KEY_POSITION_HAS_CHANGED, ///> True if item has changed since last mousePressEvent
-  DATA_KEY_GHOST                 ///> True if item is a temporary ghost. False or undefined otherwise
+  DATA_KEY_POSITION_HAS_CHANGED, ///> True if item has changed since last
+                                 ///mousePressEvent
+  DATA_KEY_GHOST ///> True if item is a temporary ghost. False or undefined
+                 ///otherwise
 };
 
-extern QString dataKeyToString (DataKey dataKey);
+extern QString dataKeyToString(DataKey dataKey);
 
 #endif // DATA_KEY_H

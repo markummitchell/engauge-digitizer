@@ -11,27 +11,28 @@
 class DocumentModelExportFormat;
 class Point;
 
-// Save values into container that preserves order by key (QMap). These are common to all included curves
+// Save values into container that preserves order by key (QMap). These are
+// common to all included curves
 // QMap is for fast random access
 typedef QMap<double, bool> ValuesVectorXOrY;
 
 typedef QHash<QString, bool> CurveNamesIncluded;
 
-/// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting.
-class CallbackGatherXThetaValuesFunctions
-{
+/// Callback for collecting X/Theta independent variables, for functions, in
+/// preparation for exporting.
+class CallbackGatherXThetaValuesFunctions {
 public:
   /// Single constructor.
-  CallbackGatherXThetaValuesFunctions(const DocumentModelExportFormat &modelExport,
-                                      const QStringList &curveNamesIncluded,
-                                      const Transformation &transformation);
+  CallbackGatherXThetaValuesFunctions(
+      const DocumentModelExportFormat &modelExport,
+      const QStringList &curveNamesIncluded,
+      const Transformation &transformation);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString &curveName, const Point &point);
 
   /// Resulting x/theta values for all included functions
-  ValuesVectorXOrY xThetaValuesRaw () const;
+  ValuesVectorXOrY xThetaValuesRaw() const;
 
 private:
   CallbackGatherXThetaValuesFunctions();

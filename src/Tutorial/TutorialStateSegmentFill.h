@@ -9,26 +9,24 @@ class TutorialButton;
 class TutorialStateContext;
 
 /// Segment fill panel discusses the digitization of points along curve lines
-class TutorialStateSegmentFill : public TutorialStateAbstractBase
-{
+class TutorialStateSegmentFill : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateSegmentFill (TutorialStateContext &context);
+  TutorialStateSegmentFill(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called when next button is triggered
   void slotNext();
 
   /// Slot called to return to previous panel
   void slotPrevious();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;

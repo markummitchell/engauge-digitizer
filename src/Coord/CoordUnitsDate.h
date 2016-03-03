@@ -11,6 +11,6 @@ enum CoordUnitsDate {
   NUM_COORD_UNITS_DATE
 };
 
-extern QString coordUnitsDateToString (CoordUnitsDate coordUnits);
+extern QString coordUnitsDateToString(CoordUnitsDate coordUnits);
 
 #endif // COORD_UNITS_DATE_H

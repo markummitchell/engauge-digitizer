@@ -1,59 +1,58 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 
-QColor ColorPaletteToQColor (ColorPalette color) {
+QColor ColorPaletteToQColor(ColorPalette color) {
   switch (color) {
-    case COLOR_PALETTE_BLACK:
-      return QColor (Qt::black);
-      break;
+  case COLOR_PALETTE_BLACK:
+    return QColor(Qt::black);
+    break;
 
-    case COLOR_PALETTE_BLUE:
-      return QColor (Qt::blue);
-      break;
+  case COLOR_PALETTE_BLUE:
+    return QColor(Qt::blue);
+    break;
 
-    case COLOR_PALETTE_CYAN:
-      return QColor (Qt::cyan);
-      break;
+  case COLOR_PALETTE_CYAN:
+    return QColor(Qt::cyan);
+    break;
 
-    case COLOR_PALETTE_GOLD:
-      return QColor (255, 215, 0);
-      break;
+  case COLOR_PALETTE_GOLD:
+    return QColor(255, 215, 0);
+    break;
 
-    case COLOR_PALETTE_GREEN:
-      return QColor (Qt::green);
-      break;
+  case COLOR_PALETTE_GREEN:
+    return QColor(Qt::green);
+    break;
 
-    case COLOR_PALETTE_MAGENTA:
-      return QColor (255, 0, 255);
-      break;
+  case COLOR_PALETTE_MAGENTA:
+    return QColor(255, 0, 255);
+    break;
 
-    case COLOR_PALETTE_RED:
-      return QColor (Qt::red);
-      break;
+  case COLOR_PALETTE_RED:
+    return QColor(Qt::red);
+    break;
 
-    case COLOR_PALETTE_YELLOW:
-      return QColor (255, 255, 0);
-      break;
+  case COLOR_PALETTE_YELLOW:
+    return QColor(255, 255, 0);
+    break;
 
-    case COLOR_PALETTE_TRANSPARENT:
-      return QColor (Qt::transparent);
-      break;
+  case COLOR_PALETTE_TRANSPARENT:
+    return QColor(Qt::transparent);
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
 
-  ENGAUGE_ASSERT (false);
-  return QColor (Qt::black);
+  ENGAUGE_ASSERT(false);
+  return QColor(Qt::black);
 }
 
-QString EndianToString (QSysInfo::Endian endian)
-{
+QString EndianToString(QSysInfo::Endian endian) {
   switch (endian) {
-    case QSysInfo::BigEndian:
-      return "BigEndian";
-    case QSysInfo::LittleEndian:
-      return "LittleEndian";
+  case QSysInfo::BigEndian:
+    return "BigEndian";
+  case QSysInfo::LittleEndian:
+    return "LittleEndian";
   }
 
   return "<Unknown>";

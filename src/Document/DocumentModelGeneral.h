@@ -7,8 +7,7 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsGeneral and CmdSettingsGeneral.
-class DocumentModelGeneral : public DocumentModelAbstractBase
-{
+class DocumentModelGeneral : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelGeneral();
@@ -26,24 +25,23 @@ public:
   int cursorSize() const;
 
   /// Get method for extra digits of precsion
-  int extraPrecision () const;
+  int extraPrecision() const;
 
   virtual void loadXml(QXmlStreamReader &reader);
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for effective cursor size
-  void setCursorSize (int cursorSize);
+  void setCursorSize(int cursorSize);
 
   /// Set method for extra digits of precision
-  void setExtraPrecision (int extraPrecision);
+  void setExtraPrecision(int extraPrecision);
 
 private:
-
   int m_cursorSize;
   int m_extraPrecision;
 };

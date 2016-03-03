@@ -3,14 +3,12 @@
 
 #include <QPoint>
 
-/// Representation of one matched point as produced from the point match algorithm
-class PointMatchTriplet
-{
+/// Representation of one matched point as produced from the point match
+/// algorithm
+class PointMatchTriplet {
 public:
   /// Single constructor
-  PointMatchTriplet(int x,
-                    int y,
-                    double correlation);
+  PointMatchTriplet(int x, int y, double correlation);
 
   /// Comparison operator for sorting lists of this class using qSort
   bool operator<(const PointMatchTriplet &other) const;

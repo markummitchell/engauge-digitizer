@@ -9,8 +9,7 @@ class QPushButton;
 class QSpinBox;
 
 /// Dialog for editing general settings.
-class DlgSettingsGeneral : public DlgSettingsAbstractBase
-{
+class DlgSettingsGeneral : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -18,22 +17,20 @@ public:
   DlgSettingsGeneral(MainWindow &mainWindow);
   virtual ~DlgSettingsGeneral();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotCursorSize (int);
-  void slotExtraPrecision (int);
+  void slotCursorSize(int);
+  void slotExtraPrecision(int);
   void slotSaveDefault();
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createControls (QGridLayout *layout,
-                       int &row);
+  void createControls(QGridLayout *layout, int &row);
   void updateControls();
 
   QSpinBox *m_spinCursorSize;

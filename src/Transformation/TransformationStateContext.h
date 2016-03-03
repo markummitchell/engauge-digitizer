@@ -9,37 +9,39 @@ class DocumentModelAxesChecker;
 class QGraphicsScene;
 class Transformation;
 
-/// Context class for transformation state machine. This removes some tricky state processing from MainWindow.
-/// Unlike typical state machines, the transitions are driven directly from the outside rather than indirectly
-/// by events that are processed by the states (this has triggerStateTransition rather than requestStateTransition)
-class TransformationStateContext
-{
+/// Context class for transformation state machine. This removes some tricky
+/// state processing from MainWindow.
+/// Unlike typical state machines, the transitions are driven directly from the
+/// outside rather than indirectly
+/// by events that are processed by the states (this has triggerStateTransition
+/// rather than requestStateTransition)
+class TransformationStateContext {
 public:
   /// Single constructor.
-  TransformationStateContext(QGraphicsScene &scene,
-                             bool isGnuplot);
+  TransformationStateContext(QGraphicsScene &scene, bool isGnuplot);
   virtual ~TransformationStateContext();
 
   /// Flag for gnuplot debug files
-  bool isGnuplot () const;
+  bool isGnuplot() const;
 
-  /// Reset, when loading a document after the first, to same state that first document was at when loaded
+  /// Reset, when loading a document after the first, to same state that first
+  /// document was at when loaded
   void resetOnLoad();
 
   /// Trigger a state transition to be performed immediately.
-  void triggerStateTransition (TransformationState transformationState,
-                               CmdMediator &cmdMediator,
-                               const Transformation &transformation,
-                               const QString &selectedGraphCurve);
+  void triggerStateTransition(TransformationState transformationState,
+                              CmdMediator &cmdMediator,
+                              const Transformation &transformation,
+                              const QString &selectedGraphCurve);
 
   /// Apply the new DocumentModelAxesChecker
-  void updateAxesChecker (CmdMediator &cmdMediator,
-                          const Transformation &transformation);
+  void updateAxesChecker(CmdMediator &cmdMediator,
+                         const Transformation &transformation);
 
 private:
   TransformationStateContext();
 
-  QVector<TransformationStateAbstractBase*> m_states;
+  QVector<TransformationStateAbstractBase *> m_states;
   TransformationState m_currentState;
   bool m_isGnuplot;
 };

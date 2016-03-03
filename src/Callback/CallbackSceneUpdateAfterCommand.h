@@ -9,18 +9,18 @@ class GraphicsLinesForCurves;
 class GraphicsScene;
 class Point;
 
-/// Callback for updating the QGraphicsItems in the scene after a command may have modified Points in Curves.
-class CallbackSceneUpdateAfterCommand
-{
+/// Callback for updating the QGraphicsItems in the scene after a command may
+/// have modified Points in Curves.
+class CallbackSceneUpdateAfterCommand {
 public:
   /// Single constructor.
-  CallbackSceneUpdateAfterCommand(GraphicsLinesForCurves &graphicsLinesForCurves,
-                                  GraphicsScene &scene,
-                                  const Document &document);
+  CallbackSceneUpdateAfterCommand(
+      GraphicsLinesForCurves &graphicsLinesForCurves, GraphicsScene &scene,
+      const Document &document);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString & /* curveName */,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString & /* curveName */,
+                                const Point &point);
 
 private:
   CallbackSceneUpdateAfterCommand();

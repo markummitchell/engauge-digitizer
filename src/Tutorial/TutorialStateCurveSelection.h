@@ -8,19 +8,19 @@ class QGraphicsTextItem;
 class TutorialButton;
 class TutorialStateContext;
 
-/// Curve selection panel discusses how to select a curve, and perform setup on the selected curve
-class TutorialStateCurveSelection : public TutorialStateAbstractBase
-{
+/// Curve selection panel discusses how to select a curve, and perform setup on
+/// the selected curve
+class TutorialStateCurveSelection : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateCurveSelection (TutorialStateContext &context);
+  TutorialStateCurveSelection(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called when settings button is triggered
   void slotColorFilter();
 
@@ -30,8 +30,7 @@ class TutorialStateCurveSelection : public TutorialStateAbstractBase
   /// Slot called to return to previous panel
   void slotPrevious();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;
@@ -39,7 +38,7 @@ class TutorialStateCurveSelection : public TutorialStateAbstractBase
   QGraphicsTextItem *m_text2;
   QGraphicsTextItem *m_text3;
   TutorialButton *m_previous;
-  TutorialButton *m_colorFilter;  
+  TutorialButton *m_colorFilter;
   TutorialButton *m_next;
 };
 

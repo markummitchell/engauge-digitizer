@@ -7,10 +7,11 @@
 class Document;
 class QTextStream;
 
-/// Model for DlgSettingsDigitizeCurve and CmdSettingsDigitizeCurve. No color is involved because
-/// the documentation in QCursor suggests that not all platforms support colored cursors
-class DocumentModelDigitizeCurve : public DocumentModelAbstractBase
-{
+/// Model for DlgSettingsDigitizeCurve and CmdSettingsDigitizeCurve. No color is
+/// involved because
+/// the documentation in QCursor suggests that not all platforms support colored
+/// cursors
+class DocumentModelDigitizeCurve : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelDigitizeCurve();
@@ -22,42 +23,42 @@ public:
   DocumentModelDigitizeCurve(const DocumentModelDigitizeCurve &other);
 
   /// Assignment constructor.
-  DocumentModelDigitizeCurve &operator=(const DocumentModelDigitizeCurve &other);
+  DocumentModelDigitizeCurve &
+  operator=(const DocumentModelDigitizeCurve &other);
 
   /// Get method for cursor inner radius.
-  int cursorInnerRadius () const;
+  int cursorInnerRadius() const;
 
   /// Get method for cursor line width.
-  int cursorLineWidth () const;
+  int cursorLineWidth() const;
 
   /// Get method for cursor size.
-  CursorSize cursorSize () const;
+  CursorSize cursorSize() const;
 
   /// Get method for cursor type.
-  bool cursorStandardCross () const;
+  bool cursorStandardCross() const;
 
   virtual void loadXml(QXmlStreamReader &reader);
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for cursor inner radius.
-  void setCursorInnerRadius (int innerRadius);
+  void setCursorInnerRadius(int innerRadius);
 
   /// Set method for cursor line width.
-  void setCursorLineWidth (int lineWidth);
+  void setCursorLineWidth(int lineWidth);
 
   /// Set method for cursor size.
-  void setCursorSize (CursorSize cursorSize);
+  void setCursorSize(CursorSize cursorSize);
 
   /// Set method for cursor type.
-  void setCursorStandardCross (bool cursorStandardCross);
+  void setCursorStandardCross(bool cursorStandardCross);
 
 private:
-
   bool m_cursorStandardCross;
   int m_cursorInnerRadius;
   int m_cursorLineWidth;

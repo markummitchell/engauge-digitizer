@@ -7,28 +7,22 @@
 class QXmlStreamReader;
 
 /// Command for adding one axis point.
-class CmdAddPointAxis : public CmdAbstract
-{
- public:
+class CmdAddPointAxis : public CmdAbstract {
+public:
   /// Constructor for normal creation
-  CmdAddPointAxis(MainWindow &mainWindow,
-                  Document &document,
-                  const QPointF &posScreen,
-                  const QPointF &posGraph,
-                  double ordinal,
-                  bool isXOnly);
+  CmdAddPointAxis(MainWindow &mainWindow, Document &document,
+                  const QPointF &posScreen, const QPointF &posGraph,
+                  double ordinal, bool isXOnly);
 
   /// Constructor for parsing error report file xml
-  CmdAddPointAxis(MainWindow &mainWindow,
-                  Document &document,
-                  const QString &cmdDescription,
-                  QXmlStreamReader &reader);
+  CmdAddPointAxis(MainWindow &mainWindow, Document &document,
+                  const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdAddPointAxis();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdAddPointAxis();

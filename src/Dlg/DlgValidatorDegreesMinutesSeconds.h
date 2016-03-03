@@ -6,17 +6,15 @@
 #include "CoordUnitsPolarTheta.h"
 #include "DlgValidatorAbstract.h"
 
-/// Validator for angles in real degrees, integer degrees and real minutes, or integer degrees with integer minutes with 
+/// Validator for angles in real degrees, integer degrees and real minutes, or
+/// integer degrees with integer minutes with
 /// real seconds
-class DlgValidatorDegreesMinutesSeconds : public DlgValidatorAbstract
-{
+class DlgValidatorDegreesMinutesSeconds : public DlgValidatorAbstract {
 public:
   /// Single constructor
-  DlgValidatorDegreesMinutesSeconds(CoordScale coordScale,
-                                    QObject *parent = 0);
+  DlgValidatorDegreesMinutesSeconds(CoordScale coordScale, QObject *parent = 0);
 
-  virtual QValidator::State validate (QString &input,
-                                      int &pos) const;
+  virtual QValidator::State validate(QString &input, int &pos) const;
 
 private:
   DlgValidatorDegreesMinutesSeconds();

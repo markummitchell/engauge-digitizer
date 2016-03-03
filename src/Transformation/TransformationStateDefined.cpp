@@ -15,114 +15,97 @@
 
 const int SECONDS_TO_MILLISECONDS = 1000.0;
 
-TransformationStateDefined::TransformationStateDefined(TransformationStateContext &context,
-                                                       QGraphicsScene &scene) :
-  TransformationStateAbstractBase (context),
-  m_axesChecker (new Checker (scene)),
-  m_timer (new QTimer)
-{
-  m_timer->setSingleShot (true);
-  connect (m_timer, SIGNAL (timeout()), this, SLOT (slotTimeout()));
+TransformationStateDefined::TransformationStateDefined(
+    TransformationStateContext &context, QGraphicsScene &scene)
+    : TransformationStateAbstractBase(context),
+      m_axesChecker(new Checker(scene)), m_timer(new QTimer) {
+  m_timer->setSingleShot(true);
+  connect(m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
 }
 
 void TransformationStateDefined::begin(CmdMediator &cmdMediator,
                                        const Transformation &transformation,
-                                       const QString &selectedGraphCurve)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::begin";
+                                       const QString &selectedGraphCurve) {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateDefined::begin";
 
   if (!cmdMediator.document().modelGridRemoval().stable()) {
 
-    // Initialie or update the grid removal settings since they are not stable yet
-    initializeModelGridRemoval (cmdMediator,
-                                transformation,
-                                selectedGraphCurve);
-
+    // Initialie or update the grid removal settings since they are not stable
+    // yet
+    initializeModelGridRemoval(cmdMediator, transformation, selectedGraphCurve);
   }
 
-  updateAxesChecker (cmdMediator,
-                     transformation);
+  updateAxesChecker(cmdMediator, transformation);
 }
 
-void TransformationStateDefined::end(CmdMediator & /* cmdMediator */,
-                                     const Transformation & /* transformation */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
+void TransformationStateDefined::end(
+    CmdMediator & /* cmdMediator */,
+    const Transformation & /* transformation */) {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateDefined::end";
 
-  m_axesChecker->setVisible (false);
+  m_axesChecker->setVisible(false);
 }
 
-void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMediator,
-                                                             const Transformation &transformation,
-                                                             const QString &selectedGraphCurve)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::initializeModelGridRemoval";
+void TransformationStateDefined::initializeModelGridRemoval(
+    CmdMediator &cmdMediator, const Transformation &transformation,
+    const QString &selectedGraphCurve) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "TransformationStateDefined::initializeModelGridRemoval";
 
   // Generate filtered image
   FilterImage filterImage;
-  QPixmap pixmapFiltered = filterImage.filter (cmdMediator.document().pixmap().toImage(),
-                                               transformation,
-                                               selectedGraphCurve,
-                                               cmdMediator.document().modelColorFilter(),
-                                               cmdMediator.document().modelGridRemoval());
+  QPixmap pixmapFiltered = filterImage.filter(
+      cmdMediator.document().pixmap().toImage(), transformation,
+      selectedGraphCurve, cmdMediator.document().modelColorFilter(),
+      cmdMediator.document().modelGridRemoval());
 
   // Initialize grid removal settings so user does not have to
   int countX, countY;
   double startX, startY, stepX, stepY;
   GridClassifier gridClassifier;
-  gridClassifier.classify (context().isGnuplot(),
-                           pixmapFiltered,
-                           transformation,
-                           countX,
-                           startX,
-                           stepX,
-                           countY,
-                           startY,
-                           stepY);
-  DocumentModelGridRemoval modelGridRemoval (startX,
-                                             startY,
-                                             stepX,
-                                             stepY,
-                                             countX,
-                                             countY);
-  cmdMediator.document().setModelGridRemoval (modelGridRemoval);
+  gridClassifier.classify(context().isGnuplot(), pixmapFiltered, transformation,
+                          countX, startX, stepX, countY, startY, stepY);
+  DocumentModelGridRemoval modelGridRemoval(startX, startY, stepX, stepY,
+                                            countX, countY);
+  cmdMediator.document().setModelGridRemoval(modelGridRemoval);
 }
 
-void TransformationStateDefined::slotTimeout()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::slotTimeout";
+void TransformationStateDefined::slotTimeout() {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateDefined::slotTimeout";
 
-  m_axesChecker->setVisible (false);
+  m_axesChecker->setVisible(false);
 }
 
-void TransformationStateDefined::startTimer (const DocumentModelAxesChecker &modelAxesChecker)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::startTimer";
+void TransformationStateDefined::startTimer(
+    const DocumentModelAxesChecker &modelAxesChecker) {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateDefined::startTimer";
 
-  m_axesChecker->setVisible (modelAxesChecker.checkerMode () != CHECKER_MODE_NEVER);
+  m_axesChecker->setVisible(modelAxesChecker.checkerMode() !=
+                            CHECKER_MODE_NEVER);
 
-  if (modelAxesChecker.checkerMode () == CHECKER_MODE_N_SECONDS) {
+  if (modelAxesChecker.checkerMode() == CHECKER_MODE_N_SECONDS) {
 
     // Start timer
-    int milliseconds = modelAxesChecker.checkerSeconds() * SECONDS_TO_MILLISECONDS;
-    m_timer->start (milliseconds);
+    int milliseconds =
+        modelAxesChecker.checkerSeconds() * SECONDS_TO_MILLISECONDS;
+    m_timer->start(milliseconds);
   }
 }
 
-void TransformationStateDefined::updateAxesChecker (CmdMediator &cmdMediator,
-                                                    const Transformation &transformation)
-{
+void TransformationStateDefined::updateAxesChecker(
+    CmdMediator &cmdMediator, const Transformation &transformation) {
   CallbackAxesCheckerFromAxesPoints ftor;
-  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackAxesCheckerFromAxesPoints::callback);
-  cmdMediator.iterateThroughCurvePointsAxes (ftorWithCallback);
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn>
+      ftorWithCallback =
+          functor_ret(ftor, &CallbackAxesCheckerFromAxesPoints::callback);
+  cmdMediator.iterateThroughCurvePointsAxes(ftorWithCallback);
 
-  m_axesChecker->prepareForDisplay (ftor.points(),
-                                    cmdMediator.document().modelCurveStyles().pointRadius(AXIS_CURVE_NAME),
-                                    cmdMediator.document().modelAxesChecker(),
-                                    cmdMediator.document().modelCoords(),
-                                    transformation,
-                                    cmdMediator.document().documentAxesPointsRequired());
-  m_axesChecker->setVisible (true);
-  startTimer (cmdMediator.document().modelAxesChecker());
+  m_axesChecker->prepareForDisplay(
+      ftor.points(),
+      cmdMediator.document().modelCurveStyles().pointRadius(AXIS_CURVE_NAME),
+      cmdMediator.document().modelAxesChecker(),
+      cmdMediator.document().modelCoords(), transformation,
+      cmdMediator.document().documentAxesPointsRequired());
+  m_axesChecker->setVisible(true);
+  startTimer(cmdMediator.document().modelAxesChecker());
 }

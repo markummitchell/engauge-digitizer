@@ -9,34 +9,30 @@ class QGraphicsScene;
 class QGraphicsPolygonItem;
 class QGraphicsView;
 
-/// Divider that can be dragged, in a dialog QGraphicsView. Click on the paddle to drag.
+/// Divider that can be dragged, in a dialog QGraphicsView. Click on the paddle
+/// to drag.
 /// There are three parts:
-/// -# Paddle which is the superclass of this class, since we catch its events so dragging works
+/// -# Paddle which is the superclass of this class, since we catch its events
+/// so dragging works
 /// -# Divider which is a vertical line
 /// -# Shaded area that extends from xAnchor to the divider
-class ViewProfileDivider : public QObject, public QGraphicsRectItem
-{
+class ViewProfileDivider : public QObject, public QGraphicsRectItem {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  ViewProfileDivider (QGraphicsScene &scene,
-                      QGraphicsView &view,
-                      int sceneWidth,
-                      int sceneHeight,
-                      int yCenter,
-                      bool isLowerBoundary);
+  ViewProfileDivider(QGraphicsScene &scene, QGraphicsView &view, int sceneWidth,
+                     int sceneHeight, int yCenter, bool isLowerBoundary);
 
-  /// Intercept changes so divider movement can be restricted to horizontal direction only.
-  virtual QVariant itemChange (GraphicsItemChange change, const QVariant &value);
+  /// Intercept changes so divider movement can be restricted to horizontal
+  /// direction only.
+  virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
   /// Save paddle position at start of click-and-drag.
   virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
   /// Set the position by specifying the new x coordinate.
-  void setX (double x,
-             double xLow,
-             double xHigh);
+  void setX(double x, double xLow, double xHigh);
 
 private slots:
   /// Notify other divider this one moved.
@@ -44,25 +40,26 @@ private slots:
 
 signals:
   /// Signal used when divider is dragged and m_isLowerBoundary is true.
-  void signalMovedLow (double xSceneOther);
+  void signalMovedLow(double xSceneOther);
 
   /// Signal used when divider is dragged and m_isLowerBoundary is false.
-  void signalMovedHigh (double xSceneOther);
+  void signalMovedHigh(double xSceneOther);
 
 private:
-  ViewProfileDivider ();
+  ViewProfileDivider();
 
-  void sendSignalMoved ();
+  void sendSignalMoved();
 
   // Update geoemtries since one of the dividers (this or the other) moved
-  void updateGeometryDivider ();
-  void updateGeometryNonPaddle ();
-  void updateGeometryPaddle ();
+  void updateGeometryDivider();
+  void updateGeometryNonPaddle();
+  void updateGeometryPaddle();
 
   QGraphicsView &m_view;
   int m_yCenter;
-  double m_xScene; // X coordinae of this divider
-  double m_xSceneOther; // X coordinate of other divider. Used when the two dividers have moved past each other so there
+  double m_xScene;      // X coordinae of this divider
+  double m_xSceneOther; // X coordinate of other divider. Used when the two
+                        // dividers have moved past each other so there
                         // are two unshaded areas
   QGraphicsLineItem *m_divider;
   QGraphicsRectItem *m_shadedArea;

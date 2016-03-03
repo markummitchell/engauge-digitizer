@@ -18,8 +18,7 @@ class QTextEdit;
 class QVBoxLayout;
 
 /// Dialog for editing exporting settings.
-class DlgSettingsExportFormat : public DlgSettingsAbstractBase
-{
+class DlgSettingsExportFormat : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -27,9 +26,9 @@ public:
   DlgSettingsExportFormat(MainWindow &mainWindow);
   virtual ~DlgSettingsExportFormat();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
   void slotDelimitersCommas();
@@ -40,7 +39,7 @@ private slots:
   void slotFunctionsLayoutOneCurve();
   void slotFunctionsPointsAllCurves();
   void slotFunctionsPointsEvenlySpaced();
-  void slotFunctionsPointsEvenlySpacedInterval(const QString  &);
+  void slotFunctionsPointsEvenlySpacedInterval(const QString &);
   void slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotFunctionsPointsFirstCurve();
   void slotFunctionsPointsRaw();
@@ -55,30 +54,29 @@ private slots:
   void slotRelationsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotRelationsPointsRaw();
   void slotSaveDefault();
-  void slotTabChanged (int);
-  void slotXLabel (const QString &);
+  void slotTabChanged(int);
+  void slotXLabel(const QString &);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createCurveSelection (QGridLayout *layout, int &row);
-  void createDelimiters (QHBoxLayout *layoutMisc);
-  void createFileLayout (QHBoxLayout *layoutMisc);
-  void createFunctionsPointsSelection (QHBoxLayout *layout);
-  void createHeader (QHBoxLayout *layoutMisc);
-  void createPreview (QGridLayout *layout, int &row);
-  void createRelationsPointsSelection (QHBoxLayout *layout);
-  void createTabWidget (QGridLayout *layout,
-                        int &row);
-  void createXLabel (QGridLayout *layoutHeader,
-                     int colLabel);
+  void createCurveSelection(QGridLayout *layout, int &row);
+  void createDelimiters(QHBoxLayout *layoutMisc);
+  void createFileLayout(QHBoxLayout *layoutMisc);
+  void createFunctionsPointsSelection(QHBoxLayout *layout);
+  void createHeader(QHBoxLayout *layoutMisc);
+  void createPreview(QGridLayout *layout, int &row);
+  void createRelationsPointsSelection(QHBoxLayout *layout);
+  void createTabWidget(QGridLayout *layout, int &row);
+  void createXLabel(QGridLayout *layoutHeader, int colLabel);
   bool goodIntervalFunctions() const;
   bool goodIntervalRelations() const;
-  void initializeIntervalConstraints ();
+  void initializeIntervalConstraints();
   void updateControls();
-  void updateIntervalConstraints(); // Update constraints on intervals to prevent overflows downstream (especially when value is temporarily 0)
+  void updateIntervalConstraints(); // Update constraints on intervals to
+                                    // prevent overflows downstream (especially
+                                    // when value is temporarily 0)
   void updatePreview();
 
   QTabWidget *m_tabWidget;
@@ -123,8 +121,10 @@ private:
   DocumentModelExportFormat *m_modelExportBefore;
   DocumentModelExportFormat *m_modelExportAfter;
 
-  // Safe values are computed for intervals and then applied according to the current settings. This prevents
-  // accidentally generating exports with thousands of points. That causes delays and can even overflow resources
+  // Safe values are computed for intervals and then applied according to the
+  // current settings. This prevents
+  // accidentally generating exports with thousands of points. That causes
+  // delays and can even overflow resources
   // with a resulting crash
   double m_minIntervalGraph;
   double m_minIntervalScreen;

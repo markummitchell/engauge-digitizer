@@ -8,6 +8,7 @@ enum ExportPointsSelectionRelations {
   EXPORT_POINTS_SELECTION_RELATIONS_RAW
 };
 
-extern QString exportPointsSelectionRelationsToString (ExportPointsSelectionRelations exportPointsSelectionRelations);
+extern QString exportPointsSelectionRelationsToString(
+    ExportPointsSelectionRelations exportPointsSelectionRelations);
 
 #endif // EXPORT_POINTS_SELECTION_RELATIONS_H

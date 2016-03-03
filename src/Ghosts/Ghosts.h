@@ -11,15 +11,18 @@
 
 class QGraphicsScene;
 
-/// Class for showing points and lines for all coordinate systems simultaneously, even though
-/// the code normally only allows graphical items for once coordinate system to be visible at a time
+/// Class for showing points and lines for all coordinate systems
+/// simultaneously, even though
+/// the code normally only allows graphical items for once coordinate system to
+/// be visible at a time
 ///
-/// QGraphicsLineItems are ignored since those are just used for the AxesChecker, and
-/// QGraphicsPixmapItems are ignored since those are just used for the background. The
+/// QGraphicsLineItems are ignored since those are just used for the
+/// AxesChecker, and
+/// QGraphicsPixmapItems are ignored since those are just used for the
+/// background. The
 /// other QGraphicsItem subclasses are captured and converted into ghosts.
-class Ghosts
-{
- public:
+class Ghosts {
+public:
   /// Single constructor
   Ghosts(unsigned int coordSystemIndexToBeRestored);
   ~Ghosts();
@@ -28,15 +31,15 @@ class Ghosts
   unsigned int coordSystemIndexToBeRestored() const;
 
   /// Take a snapshot of the graphics items
-  void captureGraphicsItems (QGraphicsScene &scene);
+  void captureGraphicsItems(QGraphicsScene &scene);
 
   /// Create ghosts from the path/rect/polygon lists
-  void createGhosts (QGraphicsScene &scene);
+  void createGhosts(QGraphicsScene &scene);
 
   /// Destory ghosts. Called at end of algorithm
-  void destroyGhosts (QGraphicsScene &scene);
+  void destroyGhosts(QGraphicsScene &scene);
 
- private:
+private:
   Ghosts();
 
   unsigned int m_coordSystemIndexToBeRestored;

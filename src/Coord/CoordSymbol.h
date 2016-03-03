@@ -1,7 +1,8 @@
 #ifndef COORD_SYMBOL_H
 #define COORD_SYMBOL_H
 
-/// Mathematical symbols for degrees, minutes, seconds input/outputs from/to users
+/// Mathematical symbols for degrees, minutes, seconds input/outputs from/to
+/// users
 
 #include <QString>
 
@@ -22,4 +23,3 @@ extern const QString POLAR_UNITS_RADIANS;
 extern const QString POLAR_UNITS_TURNS;
 
 #endif // COORD_SYMBOL_H
-

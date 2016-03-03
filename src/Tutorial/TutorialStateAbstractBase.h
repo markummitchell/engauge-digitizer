@@ -21,39 +21,37 @@ class QGraphicsTextItem;
 class TutorialStateContext;
 
 /// One state manages one panel of the tutorial
-class TutorialStateAbstractBase : public QObject
-{
- public:
+class TutorialStateAbstractBase : public QObject {
+public:
   /// Single constructor
   TutorialStateAbstractBase(TutorialStateContext &context);
   virtual ~TutorialStateAbstractBase();
 
   /// Transition into this state
-  virtual void begin () = 0;
+  virtual void begin() = 0;
 
   /// Transition out of this state
-  virtual void end () = 0;
+  virtual void end() = 0;
 
- protected:
-
-  /// Buttons are placed up against bottom side, and left or right side, separated by this margin
-  int buttonMargin () const;
+protected:
+  /// Buttons are placed up against bottom side, and left or right side,
+  /// separated by this margin
+  int buttonMargin() const;
 
   /// Context class for the tutorial state machine
-  TutorialStateContext &context ();
+  TutorialStateContext &context();
 
   /// Factory method for pixmap items
-  QGraphicsPixmapItem *createPixmapItem (const QString &resource,
-                                         const QPoint &pos);
+  QGraphicsPixmapItem *createPixmapItem(const QString &resource,
+                                        const QPoint &pos);
 
   /// Factory method for text items
-  QGraphicsTextItem *createTextItem (const QString &text,
-                                     const QPoint &pos);
+  QGraphicsTextItem *createTextItem(const QString &text, const QPoint &pos);
 
   /// Factory method for title items
-  QGraphicsTextItem *createTitle (const QString &text);
+  QGraphicsTextItem *createTitle(const QString &text);
 
- private:
+private:
   TutorialStateAbstractBase();
 
   TutorialStateContext &m_context;

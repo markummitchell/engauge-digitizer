@@ -8,8 +8,7 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsSegments and CmdSettingsSegments.
-class DocumentModelSegments : public DocumentModelAbstractBase
-{
+class DocumentModelSegments : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelSegments();
@@ -24,7 +23,7 @@ public:
   DocumentModelSegments &operator=(const DocumentModelSegments &other);
 
   /// Get method for fill corners.
-  bool fillCorners () const;
+  bool fillCorners() const;
 
   /// Get method for line color.
   ColorPalette lineColor() const;
@@ -40,20 +39,20 @@ public:
   /// Get method for point separation.
   double pointSeparation() const;
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for fill corners.
-  void setFillCorners (bool fillCorners);
+  void setFillCorners(bool fillCorners);
 
   /// Set method for line color.
   void setLineColor(ColorPalette lineColor);
 
   /// Set method for line width.
-  void setLineWidth (double lineWidth);
+  void setLineWidth(double lineWidth);
 
   /// Set method for min length.
   void setMinLength(double minLength);
@@ -62,7 +61,6 @@ public:
   void setPointSeparation(double pointSeparation);
 
 private:
-
   double m_pointSeparation;
   double m_minLength;
   bool m_fillCorners;

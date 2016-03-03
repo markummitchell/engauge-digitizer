@@ -9,18 +9,17 @@ class TutorialButton;
 class TutorialStateContext;
 
 /// Curve type state/panel lets user select the curve type (lines or points)
-class TutorialStateCurveType : public TutorialStateAbstractBase
-{
+class TutorialStateCurveType : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateCurveType (TutorialStateContext &context);
+  TutorialStateCurveType(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called when next button for curves is triggered
   void slotNextCurves();
 
@@ -28,10 +27,9 @@ class TutorialStateCurveType : public TutorialStateAbstractBase
   void slotNextLines();
 
   /// Slot called to return to previous panel
-  void slotPrevious ();
+  void slotPrevious();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;

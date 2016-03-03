@@ -11,8 +11,7 @@ class QListView;
 class QPushButton;
 
 /// Dialog for editing curve names settings.
-class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase
-{
+class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -20,41 +19,38 @@ public:
   DlgSettingsCurveAddRemove(MainWindow &mainWindow);
   virtual ~DlgSettingsCurveAddRemove();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotDataChanged (const QModelIndex &topLeft,
-                        const QModelIndex &bottomRight,
-                        const QVector<int> &roles);
-  void slotNew ();
-  void slotRemove ();
+  void slotDataChanged(const QModelIndex &topLeft,
+                       const QModelIndex &bottomRight,
+                       const QVector<int> &roles);
+  void slotNew();
+  void slotRemove();
   void slotSaveDefault();
-  void slotSelectionChanged (QItemSelection, QItemSelection);
+  void slotSelectionChanged(QItemSelection, QItemSelection);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void appendCurveName (const QString &curveNameNew,
-                        const QString &curveNameOriginal,
-                        int numPoints);
-  void createButtons (QGridLayout *layout, int &row);
-  void createListCurves (QGridLayout *layout, int &row);
-  bool endsWithNumber (const QString &str) const;
-  void insertCurveName (int row,
-                        const QString &curveNameNew,
-                        const QString &curveNameOriginal,
-                        int numPoints);
-  QString nextCurveName () const; // Pick good curve name to go at currentRow()
-  int numberAtEnd (const QString &str) const;
+  void appendCurveName(const QString &curveNameNew,
+                       const QString &curveNameOriginal, int numPoints);
+  void createButtons(QGridLayout *layout, int &row);
+  void createListCurves(QGridLayout *layout, int &row);
+  bool endsWithNumber(const QString &str) const;
+  void insertCurveName(int row, const QString &curveNameNew,
+                       const QString &curveNameOriginal, int numPoints);
+  QString nextCurveName() const; // Pick good curve name to go at currentRow()
+  int numberAtEnd(const QString &str) const;
   void removeSelectedCurves();
-  void updateControls ();
+  void updateControls();
 
   CurveNameList *m_curveNameList; // Model for m_listCurves
-  QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
+  QListView *m_listCurves; // Use QListView instead of QListWidget so validators
+                           // can be used
 
   QPushButton *m_btnAdd;
   QPushButton *m_btnRemove;

@@ -4,13 +4,14 @@
 class GraphicsLine;
 class LineStyle;
 
-/// Base class for adding identifiers to graphics items that represent Points. Identifiers are needed
-/// to distinguish which nodes are selected from those that are not selected. Each identifier is stored
+/// Base class for adding identifiers to graphics items that represent Points.
+/// Identifiers are needed
+/// to distinguish which nodes are selected from those that are not selected.
+/// Each identifier is stored
 /// as a data item in QGraphicsItem.
 ///
 /// This abstract base class no longer does anything.
-class GraphicsPointAbstractBase
-{
+class GraphicsPointAbstractBase {
 public:
   /// Single constructor.
   GraphicsPointAbstractBase();

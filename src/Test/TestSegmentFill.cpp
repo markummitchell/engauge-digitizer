@@ -14,22 +14,15 @@
 #include "SplinePair.h"
 #include "Test/TestSegmentFill.h"
 
-QTEST_MAIN (TestSegmentFill)
+QTEST_MAIN(TestSegmentFill)
 
 using namespace std;
 
-TestSegmentFill::TestSegmentFill(QObject *parent) :
-  QObject(parent)
-{
-}
+TestSegmentFill::TestSegmentFill(QObject *parent) : QObject(parent) {}
 
-void TestSegmentFill::cleanupTestCase ()
-{
+void TestSegmentFill::cleanupTestCase() {}
 
-}
-
-void TestSegmentFill::initTestCase ()
-{
+void TestSegmentFill::initTestCase() {
   const QString NO_ERROR_REPORT_LOG_FILE;
   const QString NO_REGRESSION_OPEN_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
@@ -37,62 +30,55 @@ void TestSegmentFill::initTestCase ()
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
-  initializeLogging ("engauge_test",
-                     "engauge_test.log",
-                     DEBUG_FLAG);
+  initializeLogging("engauge_test", "engauge_test.log", DEBUG_FLAG);
 
-  MainWindow m (NO_ERROR_REPORT_LOG_FILE,
-                NO_REGRESSION_OPEN_FILE,
-                NO_GNUPLOT_LOG_FILES,
-                NO_REGRESSION_IMPORT,
-                NO_LOAD_STARTUP_FILES);
-  m.show ();
+  MainWindow m(NO_ERROR_REPORT_LOG_FILE, NO_REGRESSION_OPEN_FILE,
+               NO_GNUPLOT_LOG_FILES, NO_REGRESSION_IMPORT,
+               NO_LOAD_STARTUP_FILES);
+  m.show();
 }
 
-void TestSegmentFill::testFindSegments()
-{
+void TestSegmentFill::testFindSegments() {
   const bool NO_GNUPLOT = false;
   const bool NO_DLG = false;
-  const QString OUT_FILE_ACTUAL ("../test/test_segment_fill.gnuplot_actual");
-  const QString OUT_FILE_EXPECTED ("../test/test_segment_fill.gnuplot_expected");
+  const QString OUT_FILE_ACTUAL("../test/test_segment_fill.gnuplot_actual");
+  const QString OUT_FILE_EXPECTED("../test/test_segment_fill.gnuplot_expected");
 
-  QList<Segment*> segments;
+  QList<Segment *> segments;
 
-  QImage img ("../samples/corners.png");
+  QImage img("../samples/corners.png");
 
   QGraphicsScene *scene = new QGraphicsScene;
-  SegmentFactory segmentFactory (*scene,
-                                 NO_GNUPLOT);
+  SegmentFactory segmentFactory(*scene, NO_GNUPLOT);
 
   DocumentModelSegments modelSegments;
 
-  segmentFactory.clearSegments (segments);
+  segmentFactory.clearSegments(segments);
 
-  // This will crash if dialog box appears since QApplication is not executing and therefore cannot process events
-  segmentFactory.makeSegments (img,
-                               modelSegments,
-                               segments,
-                               NO_DLG);
+  // This will crash if dialog box appears since QApplication is not executing
+  // and therefore cannot process events
+  segmentFactory.makeSegments(img, modelSegments, segments, NO_DLG);
 
   // Open output file
-  QFile out (OUT_FILE_ACTUAL);
-  QTextStream outStr (&out);
+  QFile out(OUT_FILE_ACTUAL);
+  QTextStream outStr(&out);
 
   out.open(QIODevice::WriteOnly | QIODevice::Text);
 
   // Output to file
   for (int indexS = 0; indexS < segments.count(); indexS++) {
-    Segment* segment = segments [indexS];
+    Segment *segment = segments[indexS];
 
-    QList<QPoint> points = segment->fillPoints (modelSegments);
+    QList<QPoint> points = segment->fillPoints(modelSegments);
 
     // Skip segments with only one point since they are apparently random
     if (points.count() > 1) {
 
       for (int indexP = 0; indexP < points.count(); indexP++) {
-        QPoint point = points [indexP];
-      
-        // Output in gnuplot format for plotting. A space precedes each field. This can be plotted with
+        QPoint point = points[indexP];
+
+        // Output in gnuplot format for plotting. A space precedes each field.
+        // This can be plotted with
         //    plot "../test/test_segment_fill.gnuplot_actual" w lp
         outStr << point.x() << " " << point.y() << endl;
       }
@@ -105,15 +91,16 @@ void TestSegmentFill::testFindSegments()
   out.close();
 
   // Hash values
-  QCryptographicHash hashActual (QCryptographicHash::Sha1);
-  QCryptographicHash hashExpected (QCryptographicHash::Sha1);
-  QFile fileActual (OUT_FILE_ACTUAL);
-  QFile fileExpected (OUT_FILE_EXPECTED);
+  QCryptographicHash hashActual(QCryptographicHash::Sha1);
+  QCryptographicHash hashExpected(QCryptographicHash::Sha1);
+  QFile fileActual(OUT_FILE_ACTUAL);
+  QFile fileExpected(OUT_FILE_EXPECTED);
 
   bool success = false;
-  if (fileActual.open(QIODevice::ReadOnly) && fileExpected.open(QIODevice::ReadOnly)) {
-    hashActual.addData (fileActual.readAll());
-    hashExpected.addData (fileExpected.readAll());
+  if (fileActual.open(QIODevice::ReadOnly) &&
+      fileExpected.open(QIODevice::ReadOnly)) {
+    hashActual.addData(fileActual.readAll());
+    hashExpected.addData(fileExpected.readAll());
     QByteArray signatureActual = hashActual.result();
     QByteArray signatureExpected = hashExpected.result();
 
@@ -121,5 +108,5 @@ void TestSegmentFill::testFindSegments()
     success = (signatureActual == signatureExpected);
   }
 
-  QVERIFY (success);
+  QVERIFY(success);
 }

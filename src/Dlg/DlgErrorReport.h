@@ -6,32 +6,32 @@
 class QCheckBox;
 class QPushButton;
 
-/// Dialog for sending error report. Even if it is not sent, the information is available while this dialog
+/// Dialog for sending error report. Even if it is not sent, the information is
+/// available while this dialog
 /// is open, as a file in the executable directory
-class DlgErrorReport : public QDialog
-{
+class DlgErrorReport : public QDialog {
   Q_OBJECT;
 
- public:
-  /// Single constructor. With the original data, the extra context improves debugging. With anonymization, user privacy is maintained
-  DlgErrorReport (const QString &xmlWithImage,
-                  QWidget *parent = 0);
+public:
+  /// Single constructor. With the original data, the extra context improves
+  /// debugging. With anonymization, user privacy is maintained
+  DlgErrorReport(const QString &xmlWithImage, QWidget *parent = 0);
 
   ~DlgErrorReport();
 
   /// Xml to be uploaded. Includes document if user has approved
   QString xmlToUpload() const;
 
- private slots:
+private slots:
   void slotDocumentCheckboxChanged(int);
   void slotSend();
 
- private:
-  DlgErrorReport ();
+private:
+  DlgErrorReport();
 
-  QString errorFile () const;
-  void removeFile () const;
-  void saveFile (const QString &xml) const;
+  QString errorFile() const;
+  void removeFile() const;
+  void saveFile(const QString &xml) const;
   void updateFile();
 
   QCheckBox *m_chkOriginal;

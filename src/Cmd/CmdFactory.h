@@ -7,17 +7,14 @@ class MainWindow;
 class QXmlStreamReader;
 
 /// Factory for CmdAbstractBase objects
-class CmdFactory
-{
+class CmdFactory {
 public:
   /// Single constructor
-  CmdFactory ();
+  CmdFactory();
 
   /// Factory method. Input is the xml node from an error report file
-  CmdAbstract *createCmd (MainWindow &mainWindow,
-                          Document &document,
-                          QXmlStreamReader &reader);
-
+  CmdAbstract *createCmd(MainWindow &mainWindow, Document &document,
+                         QXmlStreamReader &reader);
 };
 
 #endif // CMD_FACTORY_H

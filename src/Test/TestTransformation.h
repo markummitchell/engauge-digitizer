@@ -5,38 +5,35 @@
 #include <QObject>
 #include <QPointF>
 
-/// Unit test of transformation class. Checking mostly involves verifying forward/reverse are inverses of each other
-class TestTransformation : public QObject
-{
+/// Unit test of transformation class. Checking mostly involves verifying
+/// forward/reverse are inverses of each other
+class TestTransformation : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
   explicit TestTransformation(QObject *parent = 0);
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
+  void cleanupTestCase();
+  void initTestCase();
 
-  void testCartesianLinearLinear ();
-  void testCartesianLinearLog ();
-  void testCartesianLogLinear ();
-  void testCartesianLogLog ();
-  void testPolarLinear ();
-  void testPolarLogOffset1 ();
-  void testPolarLogOffset10 ();
+  void testCartesianLinearLinear();
+  void testCartesianLinearLog();
+  void testCartesianLogLinear();
+  void testCartesianLogLog();
+  void testPolarLinear();
+  void testPolarLogOffset1();
+  void testPolarLogOffset10();
 
 private:
   DocumentModelCoords modelCoordsDefault() const;
 
-  double differenceMagnitude (const QPointF &vector1,
-                              const QPointF &vector2) const;
-  void initTransformation (const QPointF &s0,
-                           const QPointF &s1,
-                           const QPointF &s2,
-                           const QPointF &g0,
-                           const QPointF &g1,
-                           const QPointF &g2,
-                           const DocumentModelCoords &modelCoords);
+  double differenceMagnitude(const QPointF &vector1,
+                             const QPointF &vector2) const;
+  void initTransformation(const QPointF &s0, const QPointF &s1,
+                          const QPointF &s2, const QPointF &g0,
+                          const QPointF &g1, const QPointF &g2,
+                          const DocumentModelCoords &modelCoords);
 
   QPointF m_g0Transformed;
   QPointF m_g1Transformed;

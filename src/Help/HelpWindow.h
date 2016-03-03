@@ -4,19 +4,17 @@
 #include <QDockWidget>
 
 /// Dockable help window
-class HelpWindow : public QDockWidget
-{
+class HelpWindow : public QDockWidget {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  HelpWindow (QWidget *parent);
+  HelpWindow(QWidget *parent);
 
- private:
-  HelpWindow ();
+private:
+  HelpWindow();
 
   QString helpPath() const;
-
 };
 
 #endif // HELP_WINDOW_H

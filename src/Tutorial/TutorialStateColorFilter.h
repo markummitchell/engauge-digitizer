@@ -9,23 +9,21 @@ class TutorialButton;
 class TutorialStateContext;
 
 /// Color filter panel discusses the curve-specific color filtering
-class TutorialStateColorFilter : public TutorialStateAbstractBase
-{
+class TutorialStateColorFilter : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateColorFilter (TutorialStateContext &context);
+  TutorialStateColorFilter(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called to return to previous panel
   void slotBack();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;

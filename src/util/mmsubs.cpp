@@ -5,30 +5,27 @@
 
 const double PI = 3.1415926535;
 
-double angleBetweenVectors (const QPointF &v1,
-                            const QPointF &v2)
-{
-  double v1Mag = qSqrt (v1.x() * v1.x() + v1.y() * v1.y());
-  double v2Mag = qSqrt (v2.x() * v2.x() + v2.y() * v2.y());
+double angleBetweenVectors(const QPointF &v1, const QPointF &v2) {
+  double v1Mag = qSqrt(v1.x() * v1.x() + v1.y() * v1.y());
+  double v2Mag = qSqrt(v2.x() * v2.x() + v2.y() * v2.y());
 
   double angle = 0;
   if ((v1Mag > 0) || (v2Mag > 0)) {
 
     double cosArg = (v1.x() * v2.x() + v1.y() * v2.y()) / (v1Mag * v2Mag);
-    cosArg = qMin (qMax (cosArg, -1.0), 1.0);
-    angle = qAcos (cosArg);
+    cosArg = qMin(qMax(cosArg, -1.0), 1.0);
+    angle = qAcos(cosArg);
   }
 
   return angle;
 }
 
-double angleFromVectorToVector (const QPointF &vFrom,
-                                const QPointF &vTo)
-{
-  double angleFrom = qAtan2 (vFrom.y(), vFrom.x());
-  double angleTo   = qAtan2 (vTo.y()  , vTo.x());
+double angleFromVectorToVector(const QPointF &vFrom, const QPointF &vTo) {
+  double angleFrom = qAtan2(vFrom.y(), vFrom.x());
+  double angleTo = qAtan2(vTo.y(), vTo.x());
 
-  // Rotate both angles to put from vector along x axis. Note that angleFrom-angleFrom is zero,
+  // Rotate both angles to put from vector along x axis. Note that
+  // angleFrom-angleFrom is zero,
   // and angleTo-angleFrom is -pi to +pi radians
   double angleSeparation = angleTo - angleFrom;
 
@@ -42,76 +39,68 @@ double angleFromVectorToVector (const QPointF &vFrom,
   return angleSeparation;
 }
 
-QRgb pixelRGB(const QImage &image, int x, int y)
-{
-  switch (image.depth())
-  {
-    case 1:
-      return pixelRGB1(image, x, y);
-    case 8:
-      return pixelRGB8(image, x, y);
-    default:
-      return pixelRGB32(image, x, y);
+QRgb pixelRGB(const QImage &image, int x, int y) {
+  switch (image.depth()) {
+  case 1:
+    return pixelRGB1(image, x, y);
+  case 8:
+    return pixelRGB8(image, x, y);
+  default:
+    return pixelRGB32(image, x, y);
   }
 }
 
-QRgb pixelRGB1(const QImage &image1Bit, int x, int y)
-{
+QRgb pixelRGB1(const QImage &image1Bit, int x, int y) {
   unsigned int bit;
-  if (image1Bit.format () == QImage::Format_MonoLSB) {
-    bit = *(image1Bit.scanLine (y) + (x >> 3)) & (1 << (x & 7));
+  if (image1Bit.format() == QImage::Format_MonoLSB) {
+    bit = *(image1Bit.scanLine(y) + (x >> 3)) & (1 << (x & 7));
   } else {
-    bit = *(image1Bit.scanLine (y) + (x >> 3)) & (1 << (7 - (x & 7)));
+    bit = *(image1Bit.scanLine(y) + (x >> 3)) & (1 << (7 - (x & 7)));
   }
 
   unsigned int tableIndex = ((bit == 0) ? 0 : 1);
   return image1Bit.color(tableIndex);
 }
 
-QRgb pixelRGB8(const QImage &image8Bit, int x, int y)
-{
+QRgb pixelRGB8(const QImage &image8Bit, int x, int y) {
   unsigned int tableIndex = *(image8Bit.scanLine(y) + x);
   return image8Bit.color(tableIndex);
 }
 
-QRgb pixelRGB32(const QImage &image32Bit, int x, int y)
-{
-  unsigned int* p = (unsigned int *) image32Bit.scanLine(y) + x;
+QRgb pixelRGB32(const QImage &image32Bit, int x, int y) {
+  unsigned int *p = (unsigned int *)image32Bit.scanLine(y) + x;
   return *p;
 }
 
-void projectPointOntoLine(double xToProject,
-                          double yToProject,
-                          double xStart,
-                          double yStart,
-                          double xStop,
-                          double yStop,
-                          double *xProjection,
-                          double *yProjection,
+void projectPointOntoLine(double xToProject, double yToProject, double xStart,
+                          double yStart, double xStop, double yStop,
+                          double *xProjection, double *yProjection,
                           double *projectedDistanceOutsideLine,
-                          double *distanceToLine)
-{
+                          double *distanceToLine) {
   double s;
-  if (qAbs (yStart - yStop) > qAbs (xStart - xStop)) {
+  if (qAbs(yStart - yStop) > qAbs(xStart - xStop)) {
 
-    // More vertical than horizontal. Compute slope and intercept of y=slope*x+yintercept line through (xToProject, yToProject)
+    // More vertical than horizontal. Compute slope and intercept of
+    // y=slope*x+yintercept line through (xToProject, yToProject)
     double slope = (xStop - xStart) / (yStart - yStop);
     double yintercept = yToProject - slope * xToProject;
 
-    // Intersect projected point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
+    // Intersect projected point line (slope-intercept form) with start-stop
+    // line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
     s = (slope * xStart + yintercept - yStart) /
-      (yStop - yStart + slope * (xStart - xStop));
+        (yStop - yStart + slope * (xStart - xStop));
 
   } else {
 
-    // More horizontal than vertical. Compute slope and intercept of x=slope*y+xintercept line through (xToProject, yToProject)
+    // More horizontal than vertical. Compute slope and intercept of
+    // x=slope*y+xintercept line through (xToProject, yToProject)
     double slope = (yStop - yStart) / (xStart - xStop);
     double xintercept = xToProject - slope * yToProject;
 
-    // Intersect projected point line (slope-intercept form) with start-stop line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
+    // Intersect projected point line (slope-intercept form) with start-stop
+    // line (parametric form x=(1-s)*x1+s*x2, y=(1-s)*y1+s*y2)
     s = (slope * yStart + xintercept - xStart) /
-      (xStop - xStart + slope * (yStart - yStop));
-
+        (xStop - xStart + slope * (yStart - yStop));
   }
 
   *xProjection = (1.0 - s) * xStart + s * xStop;
@@ -119,10 +108,11 @@ void projectPointOntoLine(double xToProject,
 
   if (s < 0) {
 
-    *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStart) * (*xProjection - xStart) +
-                                           (*yProjection - yStart) * (*yProjection - yStart));
-    *distanceToLine = qSqrt ((xToProject - xStart) * (xToProject - xStart) +
-                             (yToProject - yStart) * (yToProject - yStart));
+    *projectedDistanceOutsideLine =
+        qSqrt((*xProjection - xStart) * (*xProjection - xStart) +
+              (*yProjection - yStart) * (*yProjection - yStart));
+    *distanceToLine = qSqrt((xToProject - xStart) * (xToProject - xStart) +
+                            (yToProject - yStart) * (yToProject - yStart));
 
     // Bring projection point to inside line
     *xProjection = xStart;
@@ -130,10 +120,11 @@ void projectPointOntoLine(double xToProject,
 
   } else if (s > 1) {
 
-    *projectedDistanceOutsideLine = qSqrt ((*xProjection - xStop) * (*xProjection - xStop) +
-                                           (*yProjection - yStop) * (*yProjection - yStop));
-    *distanceToLine = qSqrt ((xToProject - xStop) * (xToProject - xStop) +
-                             (yToProject - yStop) * (yToProject - yStop));
+    *projectedDistanceOutsideLine =
+        qSqrt((*xProjection - xStop) * (*xProjection - xStop) +
+              (*yProjection - yStop) * (*yProjection - yStop));
+    *distanceToLine = qSqrt((xToProject - xStop) * (xToProject - xStop) +
+                            (yToProject - yStop) * (yToProject - yStop));
 
     // Bring projection point to inside line
     *xProjection = xStop;
@@ -141,66 +132,56 @@ void projectPointOntoLine(double xToProject,
 
   } else {
 
-    *distanceToLine = qSqrt ((xToProject - *xProjection) * (xToProject - *xProjection) +
-                             (yToProject - *yProjection) * (yToProject - *yProjection));
+    *distanceToLine =
+        qSqrt((xToProject - *xProjection) * (xToProject - *xProjection) +
+              (yToProject - *yProjection) * (yToProject - *yProjection));
 
     // Projected point is aleady inside line
     *projectedDistanceOutsideLine = 0.0;
-
   }
 }
 
-void setPixelRGB(QImage &image, int x, int y, QRgb q)
-{
-  switch (image.depth())
-  {
-    case 1:
-      setPixelRGB1(image, x, y, q);
-      return;
-    case 8:
-      setPixelRGB8(image, x, y, q);
-      return;
-    case 32:
-      setPixelRGB32(image, x, y, q);
-      return;
+void setPixelRGB(QImage &image, int x, int y, QRgb q) {
+  switch (image.depth()) {
+  case 1:
+    setPixelRGB1(image, x, y, q);
+    return;
+  case 8:
+    setPixelRGB8(image, x, y, q);
+    return;
+  case 32:
+    setPixelRGB32(image, x, y, q);
+    return;
   }
 }
 
-void setPixelRGB1(QImage &image1Bit, int x, int y, QRgb q)
-{
+void setPixelRGB1(QImage &image1Bit, int x, int y, QRgb q) {
   for (int index = 0; index < image1Bit.colorCount(); index++) {
-    if (q == image1Bit.color(index))
-    {
-      if (image1Bit.format () == QImage::Format_MonoLSB)
-      {
-        *(image1Bit.scanLine (y) + (x >> 3)) &= ~(1 << (x & 7));
+    if (q == image1Bit.color(index)) {
+      if (image1Bit.format() == QImage::Format_MonoLSB) {
+        *(image1Bit.scanLine(y) + (x >> 3)) &= ~(1 << (x & 7));
         if (index > 0)
-          *(image1Bit.scanLine (y) + (x >> 3)) |= index << (x & 7);
-      }
-      else
-      {
-        *(image1Bit.scanLine (y) + (x >> 3)) &= ~(1 << (7 - (x & 7)));
+          *(image1Bit.scanLine(y) + (x >> 3)) |= index << (x & 7);
+      } else {
+        *(image1Bit.scanLine(y) + (x >> 3)) &= ~(1 << (7 - (x & 7)));
         if (index > 0)
-          *(image1Bit.scanLine (y) + (x >> 3)) |= index << (7 - (x & 7));
+          *(image1Bit.scanLine(y) + (x >> 3)) |= index << (7 - (x & 7));
       }
       return;
     }
   }
 }
 
-void setPixelRGB8(QImage &image8Bit, int x, int y, QRgb q)
-{
+void setPixelRGB8(QImage &image8Bit, int x, int y, QRgb q) {
   for (int index = 0; index < image8Bit.colorCount(); index++) {
-    if (q == image8Bit.color(index))
-    {
+    if (q == image8Bit.color(index)) {
       *(image8Bit.scanLine(y) + x) = index;
       return;
     }
   }
 }
 
-void setPixelRGB32(QImage &image32Bit, int x, int y, QRgb q)
-{
-  int* p = (int *)image32Bit.scanLine(y) + x;
+void setPixelRGB32(QImage &image32Bit, int x, int y, QRgb q) {
+  int *p = (int *)image32Bit.scanLine(y) + x;
   *p = q;
 }

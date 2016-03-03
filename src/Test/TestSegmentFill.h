@@ -4,8 +4,7 @@
 #include <QObject>
 
 /// Unit test of segment fill feature
-class TestSegmentFill : public QObject
-{
+class TestSegmentFill : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
@@ -14,11 +13,10 @@ public:
 signals:
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
+  void cleanupTestCase();
+  void initTestCase();
 
-  void testFindSegments ();
-
+  void testFindSegments();
 };
 
 #endif // TEST_SEGMENT_H

@@ -20,8 +20,7 @@ class ViewProfileDivider;
 class ViewProfileScale;
 
 /// Dialog for editing filtering settings.
-class DlgSettingsColorFilter : public DlgSettingsAbstractBase
-{
+class DlgSettingsColorFilter : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -29,25 +28,25 @@ public:
   DlgSettingsColorFilter(MainWindow &mainWindow);
   virtual ~DlgSettingsColorFilter();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 public slots:
-  /// Receive processed piece of preview image, to be inserted at xLeft to xLeft+pixmap.width().
-  void slotTransferPiece (int xLeft,
-                          QImage image);
+  /// Receive processed piece of preview image, to be inserted at xLeft to
+  /// xLeft+pixmap.width().
+  void slotTransferPiece(int xLeft, QImage image);
 
 signals:
-  /// Send filter parameters to DlgFilterThread and DlgFilterWorker for processing.
-  void signalApplyFilter (ColorFilterMode colorFilterMode,
-                          double low,
-                          double high);
+  /// Send filter parameters to DlgFilterThread and DlgFilterWorker for
+  /// processing.
+  void signalApplyFilter(ColorFilterMode colorFilterMode, double low,
+                         double high);
 
 private slots:
   void slotCurveName(const QString &curveName);
-  void slotDividerHigh (double);
-  void slotDividerLow (double);
+  void slotDividerHigh(double);
+  void slotDividerLow(double);
   void slotForeground();
   void slotHue();
   void slotIntensity();
@@ -55,18 +54,17 @@ private slots:
   void slotValue();
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createControls (QGridLayout *layout, int &row);
-  void createPreview (QGridLayout *layout, int &row);
-  void createProfileAndScale (QGridLayout *layout, int &row);
-  QRgb createThread (); // Returns background color
+  void createControls(QGridLayout *layout, int &row);
+  void createPreview(QGridLayout *layout, int &row);
+  void createProfileAndScale(QGridLayout *layout, int &row);
+  QRgb createThread(); // Returns background color
   void loadForCurveName();
-  static int PROFILE_HEIGHT_IN_ROWS () { return 6; }
-  static int PROFILE_SCENE_WIDTH () { return 100; }
-  static int PROFILE_SCENE_HEIGHT () { return 100; }
+  static int PROFILE_HEIGHT_IN_ROWS() { return 6; }
+  static int PROFILE_SCENE_WIDTH() { return 100; }
+  static int PROFILE_SCENE_HEIGHT() { return 100; }
   void updateHistogram();
   void updatePreview();
 
@@ -87,7 +85,8 @@ private:
   ViewProfileDivider *m_dividerLow;
   ViewProfileDivider *m_dividerHigh;
 
-  // Apply filter parameters to preview image in a separate thread so dragging the dividers in the profile
+  // Apply filter parameters to preview image in a separate thread so dragging
+  // the dividers in the profile
   // will not be slowed down by the filter parameter processing
   DlgFilterThread *m_filterThread;
 

@@ -8,53 +8,47 @@
 
 using namespace std;
 
-ExportOrdinalsSmooth::ExportOrdinalsSmooth ()
-{
-}
+ExportOrdinalsSmooth::ExportOrdinalsSmooth() {}
 
-void ExportOrdinalsSmooth::loadSplinePairsWithoutTransformation (const Points &points,
-                                                                 vector<double> &t,
-                                                                 vector<SplinePair> &xy) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportOrdinalsSmooth::loadSplinePairsWithoutTransformation";
+void ExportOrdinalsSmooth::loadSplinePairsWithoutTransformation(
+    const Points &points, vector<double> &t, vector<SplinePair> &xy) const {
+  LOG4CPP_INFO_S((*mainCat))
+      << "ExportOrdinalsSmooth::loadSplinePairsWithoutTransformation";
 
   Points::const_iterator itrP;
   for (itrP = points.begin(); itrP != points.end(); itrP++) {
     const Point &point = *itrP;
     QPointF posScreen = point.posScreen();
 
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posScreen.x(),
-                              posScreen.y()));
+    t.push_back(point.ordinal());
+    xy.push_back(SplinePair(posScreen.x(), posScreen.y()));
   }
 }
 
-void ExportOrdinalsSmooth::loadSplinePairsWithTransformation (const Points &points,
-                                                              const Transformation &transformation,
-                                                              vector<double> &t,
-                                                              vector<SplinePair> &xy) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportOrdinalsSmooth::loadSplinePairsWithTransformation";
+void ExportOrdinalsSmooth::loadSplinePairsWithTransformation(
+    const Points &points, const Transformation &transformation,
+    vector<double> &t, vector<SplinePair> &xy) const {
+  LOG4CPP_INFO_S((*mainCat))
+      << "ExportOrdinalsSmooth::loadSplinePairsWithTransformation";
 
   Points::const_iterator itrP;
   for (itrP = points.begin(); itrP != points.end(); itrP++) {
     const Point &point = *itrP;
     QPointF posScreen = point.posScreen();
     QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
+    transformation.transformScreenToRawGraph(posScreen, posGraph);
 
-    t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posGraph.x(),
-                              posGraph.y()));
+    t.push_back(point.ordinal());
+    xy.push_back(SplinePair(posGraph.x(), posGraph.y()));
   }
 }
 
-ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector<double> &t,
-                                                                    const vector<SplinePair> &xy,
-                                                                    double pointsInterval) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportOrdinalsSmooth::ordinalsAtIntervalsGraph";
+ExportValuesOrdinal
+ExportOrdinalsSmooth::ordinalsAtIntervalsGraph(const vector<double> &t,
+                                               const vector<SplinePair> &xy,
+                                               double pointsInterval) const {
+  LOG4CPP_INFO_S((*mainCat))
+      << "ExportOrdinalsSmooth::ordinalsAtIntervalsGraph";
 
   const double NUM_SMALLER_INTERVALS = 1000;
 
@@ -62,16 +56,16 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
   ExportValuesOrdinal ordinals;
 
   // Fit a spline
-  Spline spline (t,
-                 xy);
+  Spline spline(t, xy);
 
   // Integrate the distances for the subintervals
   double integratedSeparation = 0;
-  QPointF posLast (xy [0].x(),
-                   xy [0].y());
+  QPointF posLast(xy[0].x(), xy[0].y());
 
-  // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
-  // into intervals that, as much as possible, have the desired length. Simplicity wins out over accuracy in this
+  // Simplest method to find the intervals is to break up the curve into many
+  // smaller intervals, and then aggregate them
+  // into intervals that, as much as possible, have the desired length.
+  // Simplicity wins out over accuracy in this
   // approach - accuracy is sacrificed to achieve simplicity
   double tMin = t.front();
   double tMax = t.back();
@@ -84,29 +78,32 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
 
     SplinePair pairNew = spline.interpolateCoeff(t);
 
-    QPointF posNew = QPointF (pairNew.x(),
-                              pairNew.y());
+    QPointF posNew = QPointF(pairNew.x(), pairNew.y());
 
     QPointF posDelta = posNew - posLast;
-    double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
+    double integratedSeparationDelta =
+        qSqrt(posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
     integratedSeparation += integratedSeparationDelta;
 
     while (integratedSeparation >= pointsInterval) {
 
-      // End of current interval, and start of next interval. For better accuracy without having to crank up
-      // the number of points by orders of magnitude, we use linear interpolation
+      // End of current interval, and start of next interval. For better
+      // accuracy without having to crank up
+      // the number of points by orders of magnitude, we use linear
+      // interpolation
       double sInterp;
       if (iT == 0) {
         sInterp = 0.0;
       } else {
-        sInterp = (double) pointsInterval / (double) integratedSeparation;
+        sInterp = (double)pointsInterval / (double)integratedSeparation;
       }
       double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
 
-      integratedSeparation -= pointsInterval; // Part of delta that was not used gets applied to next interval
+      integratedSeparation -= pointsInterval; // Part of delta that was not used
+                                              // gets applied to next interval
 
       tLast = tInterp;
-      ordinals.push_back (tInterp);
+      ordinals.push_back(tInterp);
       iTLastInterval = iT;
     }
 
@@ -117,8 +114,7 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
   if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
 
     // Add last point so we end up at tMax
-    ordinals.push_back (tMax);
-
+    ordinals.push_back(tMax);
   }
 
   return ordinals;

@@ -8,61 +8,54 @@
 #include <QPixmap>
 #include "Transformation.h"
 
-BackgroundStateOriginal::BackgroundStateOriginal(BackgroundStateContext &context,
-                                                 GraphicsScene &scene) :
-  BackgroundStateAbstractBase(context,
-                              scene)
-{
+BackgroundStateOriginal::BackgroundStateOriginal(
+    BackgroundStateContext &context, GraphicsScene &scene)
+    : BackgroundStateAbstractBase(context, scene) {}
+
+void BackgroundStateOriginal::begin() {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::begin";
+
+  setImageVisible(true);
 }
 
-void BackgroundStateOriginal::begin()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::begin";
+void BackgroundStateOriginal::end() {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::end";
 
-  setImageVisible (true);
+  setImageVisible(false);
 }
 
-void BackgroundStateOriginal::end()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::end";
+void BackgroundStateOriginal::fitInView(GraphicsView &view) {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::fitInView";
 
-  setImageVisible (false);
+  view.fitInView(imageItem().boundingRect());
 }
 
-void BackgroundStateOriginal::fitInView (GraphicsView &view)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::fitInView";
-
-  view.fitInView (imageItem ().boundingRect());
+void BackgroundStateOriginal::setCurveSelected(
+    const Transformation & /* transformation */,
+    const DocumentModelGridRemoval & /* modelGridRemoval */,
+    const DocumentModelColorFilter & /* modelColorFilter */,
+    const QString & /* curveSelected */) {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::setCurveSelected";
 }
 
-void BackgroundStateOriginal::setCurveSelected (const Transformation & /* transformation */,
-                                                const DocumentModelGridRemoval & /* modelGridRemoval */,
-                                                const DocumentModelColorFilter & /* modelColorFilter */,
-                                                const QString & /* curveSelected */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setCurveSelected";
-}
-
-void BackgroundStateOriginal::setPixmap (const Transformation & /* transformation */,
-                                         const DocumentModelGridRemoval & /* modelGridRemoval */,
-                                         const DocumentModelColorFilter & /* modelColorFilter */,
-                                         const QPixmap &pixmapOriginal)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setPixmap";
+void BackgroundStateOriginal::setPixmap(
+    const Transformation & /* transformation */,
+    const DocumentModelGridRemoval & /* modelGridRemoval */,
+    const DocumentModelColorFilter & /* modelColorFilter */,
+    const QPixmap &pixmapOriginal) {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::setPixmap";
 
   // Unfiltered original image
-  setProcessedPixmap (pixmapOriginal);
+  setProcessedPixmap(pixmapOriginal);
 }
 
-QString BackgroundStateOriginal::state () const
-{
+QString BackgroundStateOriginal::state() const {
   return "BackgroundStateOriginal";
 }
 
-void BackgroundStateOriginal::updateColorFilter (const Transformation & /* transformation */,
-                                                 const DocumentModelGridRemoval & /* modelGridRemoval */,
-                                                 const DocumentModelColorFilter & /* modelColorFilter */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::updateColorFilter";
+void BackgroundStateOriginal::updateColorFilter(
+    const Transformation & /* transformation */,
+    const DocumentModelGridRemoval & /* modelGridRemoval */,
+    const DocumentModelColorFilter & /* modelColorFilter */) {
+  LOG4CPP_INFO_S((*mainCat)) << "BackgroundStateOriginal::updateColorFilter";
 }
