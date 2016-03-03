@@ -51,7 +51,7 @@ private:
   void
   initializeYRadiusValues(const QStringList &curvesIncluded,
                           const ExportValuesXOrY &xThetaValuesMerged,
-                          QVector<QVector<QString *>> &yRadiusValues) const;
+                          QVector<QVector<QString *> > &yRadiusValues) const;
 
   double linearlyInterpolate(const Points &points, double xThetaValue,
                              const Transformation &transformation) const;
@@ -61,7 +61,7 @@ private:
                          const QStringList &curvesIncluded,
                          const Transformation &transformation,
                          const ExportValuesXOrY &xThetaValues,
-                         QVector<QVector<QString *>> &yRadiusValues) const;
+                         QVector<QVector<QString *> > &yRadiusValues) const;
   void loadYRadiusValuesForCurveInterpolatedSmooth(
       const DocumentModelCoords &modelCoords,
       const MainWindowModel &modelMainWindow, const Points &points,
@@ -94,7 +94,7 @@ private:
   // required when outputing one curve per row
   // since the union of all x/theta values is applied to each curve
   bool
-  rowHasAtLeastOneYRadiusEntry(const QVector<QVector<QString *>> &yRadiusValues,
+  rowHasAtLeastOneYRadiusEntry(const QVector<QVector<QString *> > &yRadiusValues,
                                int row) const;
 };
 
