@@ -2,14 +2,18 @@ init:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 12.0"\VC\vcvarsall.bat x86
 
 environment:
+  global:
+      QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
+      QTLIBS: Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
+
   matrix:
     - ENGAUGE_RELEASE: "1"
-      QTLIBS: Qt5CLucene.dll Qt5Core.dll Qt5Gui.dll Qt5Help.dll Qt5Network.dll Qt5PrintSupport.dll Qt5Sql.dll Qt5Widgets.dll Qt5Xml.dll
       QTLIBEXT: '.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
-    - QTLIBS: Qt5CLucened.dll Qt5Cored.dll Qt5Guid.dll Qt5Helpd.dll Qt5Networkd.dll Qt5PrintSupportd.dll Qt5Sqld.dll Qt5Widgetsd.dll Qt5Xmld.dll
-      QTLIBEXT: 'd.lib'
+      RESULTDIR: engauge-build
+    - QTLIBEXT: 'd.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-debug-1.1.1.zip'
+      RESULTDIR: engauge-build-debug
 
 install:
   - set QTDIR=C:\Qt\5.5\msvc2013
@@ -42,34 +46,26 @@ build_script:
 
 after_build:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - mkdir engauge-build
-  - mkdir engauge-build\documentation
-  - mkdir engauge-build\platforms
-  - mkdir engauge-build\imageformats
-  - mkdir engauge-build\printsupport
-  - mkdir engauge-build\sqldrivers
-  - mkdir engauge-build\iconengines
-  - mkdir engauge-build\bearer
-  - copy %QTDIR%\plugins\platforms\qwindows*.dll engauge-build\platforms
-  - copy %QTDIR%\plugins\imageformats\*.dll engauge-build\imageformats
-  - copy %QTDIR%\plugins\printsupport\*.dll engauge-build\printsupport
-  - copy %QTDIR%\plugins\sqldrivers\*.dll engauge-build\sqldrivers
-  - copy %QTDIR%\plugins\iconengines\*.dll engauge-build\iconengines
-  - copy %QTDIR%\plugins\bearer\*.dll engauge-build\bearer
-  - copy bin\engauge.exe engauge-build
-  - copy log4cpp-1.1.1\lib\log4cpp.dll engauge-build
-  - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll engauge-build
-  - copy LICENSE engauge-build
-  - cd %QTDIR%\bin
-  - for %%I in (%QTLIBS%) do copy %%I %APPVEYOR_BUILD_FOLDER%\engauge-build
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - cd help
+  - mkdir %RESULTDIR%
+  - mkdir %RESULTDIR%\documentation
+  - for %%I in (%QTDIRS%) do mkdir %RESULTDIR%\%%I
+#  - copy %QTDIR%\plugins\platforms\qwindows*.dll engauge-build\platforms
+  - if defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*.dll %RESULTDIR%\%%I)
+  - if defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I.dll %RESULTDIR%)
+  - if defined ENGAUGE_RELEASE (del /S *d.dll)
+  - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.* %RESULTDIR%\%%I)
+  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
+  - copy bin\engauge.exe %RESULTDIR%
+  - copy log4cpp-1.1.1\lib\log4cpp.dll %RESULTDIR%
+  - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll %RESULTDIR%
+  - copy LICENSE %RESULTDIR%
+  - cd %APPVEYOR_BUILD_FOLDER%\help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
-  - move engauge.qch ..\engauge-build\documentation
-  - move engauge.qhc ..\engauge-build\documentation
+  - move engauge.qch ..\%RESULTDIR%\documentation
+  - move engauge.qhc ..\%RESULTDIR%\documentation
   - cd ..
-  - 7z a engauge-build.zip engauge-build
+  - 7z a %RESULTDIR%.zip %RESULTDIR%
 
 artifacts:
-  - path: engauge-build.zip
-    name: engauge-build
+  - path: engauge-build*.zip
+    name: engauge-build-result
