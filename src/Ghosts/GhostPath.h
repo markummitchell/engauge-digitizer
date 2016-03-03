@@ -6,13 +6,10 @@
 #include <QPen>
 
 /// Ghost for a QGraphicsPathItem
-class GhostPath
-{
- public:
+class GhostPath {
+public:
   /// Initial constructor
-  GhostPath(const QPainterPath &path,
-            const QPen &pen,
-            const QBrush &brush);
+  GhostPath(const QPainterPath &path, const QPen &pen, const QBrush &brush);
   ~GhostPath();
 
   /// Copy constructor
@@ -30,7 +27,7 @@ class GhostPath
   /// Get method for pen
   QPen pen() const;
 
- private:
+private:
   GhostPath();
 
   QPainterPath m_path;

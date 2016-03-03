@@ -5,19 +5,17 @@
 
 class QHelpEngine;
 
-/// Text browser with resource loading enhanced for use as help text browser 
-class HelpBrowser : public QTextBrowser
-{
- public:
+/// Text browser with resource loading enhanced for use as help text browser
+class HelpBrowser : public QTextBrowser {
+public:
   /// Single constructor
-  HelpBrowser (QHelpEngine *engine,
-               QWidget *parent = 0);
+  HelpBrowser(QHelpEngine *engine, QWidget *parent = 0);
 
   /// Load resources
-  QVariant loadResource (int type, const QUrl &url);
+  QVariant loadResource(int type, const QUrl &url);
 
- private:
-  HelpBrowser ();
+private:
+  HelpBrowser();
 
   QHelpEngine *m_engine;
 };

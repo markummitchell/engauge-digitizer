@@ -15,8 +15,7 @@ class QRadioButton;
 class ViewPreview;
 
 /// Dialog for editing axes checker settings.
-class DlgSettingsAxesChecker : public DlgSettingsAbstractBase
-{
+class DlgSettingsAxesChecker : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -24,23 +23,22 @@ public:
   DlgSettingsAxesChecker(MainWindow &mainWindow);
   virtual ~DlgSettingsAxesChecker();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotGroupMode (QAbstractButton*);
+  void slotGroupMode(QAbstractButton *);
   void slotLineColor(const QString &);
-  void slotSeconds (const QString &);
+  void slotSeconds(const QString &);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createControls (QGridLayout *layout, int &row);
-  void createPoints ();
-  void createPreview (QGridLayout *layout, int &row);
+  void createControls(QGridLayout *layout, int &row);
+  void createPoints();
+  void createPreview(QGridLayout *layout, int &row);
   void updateControls();
   void updatePreview();
 

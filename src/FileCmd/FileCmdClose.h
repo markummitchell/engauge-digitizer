@@ -6,15 +6,14 @@
 class QXmlStreamReader;
 
 /// Command for closing a file
-class FileCmdClose : public FileCmdAbstract
-{
+class FileCmdClose : public FileCmdAbstract {
 public:
   /// Constructor for parsing file script xml
   FileCmdClose(QXmlStreamReader &reader);
 
   virtual ~FileCmdClose();
 
-  virtual void redo (MainWindow &mainWindow);
+  virtual void redo(MainWindow &mainWindow);
 
 private:
   FileCmdClose();

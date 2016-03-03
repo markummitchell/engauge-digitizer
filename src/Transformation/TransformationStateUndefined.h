@@ -4,8 +4,7 @@
 #include "TransformationStateAbstractBase.h"
 
 /// Class to not show transformation since transformation is undefined.
-class TransformationStateUndefined : public TransformationStateAbstractBase
-{
+class TransformationStateUndefined : public TransformationStateAbstractBase {
 public:
   /// Single constructor.
   TransformationStateUndefined(TransformationStateContext &context,
@@ -16,8 +15,8 @@ public:
                      const QString &selectedGraphCurve);
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation);
-  virtual void updateAxesChecker (CmdMediator &cmdMediator,
-                                  const Transformation &transformation);
+  virtual void updateAxesChecker(CmdMediator &cmdMediator,
+                                 const Transformation &transformation);
 
 private:
   TransformationStateUndefined();

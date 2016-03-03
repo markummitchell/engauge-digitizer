@@ -207,9 +207,9 @@ void main()
 
 //******************************************************************
 ///////////////////////////////////////////////////////////////////*
-//WARNING - no need to read past this point, lest confusion ensue. *
-//Only the curious need explore further - but remember                           *
-//about that cat!                                                                                                                                        *
+// WARNING - no need to read past this point, lest confusion ensue. *
+// Only the curious need explore further - but remember *
+// about that cat! *
 ///////////////////////////////////////////////////////////////////*
 //******************************************************************
 
@@ -258,14 +258,13 @@ void foo(const Functor<int> &f)
 // Note: if you are porting to another compiler that is having trouble you
 // can try defining some of these flags as well:
 
-
-#if defined(_MSC_VER)  
-#define RHCB_CANT_PASS_MEMFUNC_BY_REFERENCE     //like it says
+#if defined(_MSC_VER)
+#define RHCB_CANT_PASS_MEMFUNC_BY_REFERENCE // like it says
 //#define RHCB_CANT_OVERLOAD_ON_CONSTNESS               //of mem funcs
-#define RHCB_CANT_INIT_REFERENCE_CTOR_STYLE     //int i;int &ir(i); //MS falls down
-//#define RHCB_WONT_PERFORM_PTR_CONVERSION              //of 0 to ptr-to-any-type
+#define RHCB_CANT_INIT_REFERENCE_CTOR_STYLE // int i;int &ir(i); //MS falls down
+//#define RHCB_WONT_PERFORM_PTR_CONVERSION              //of 0 to
+//ptr-to-any-type
 #endif
-
 
 // Don't touch this stuff
 #if defined(RHCB_CANT_PASS_MEMFUNC_BY_REFERENCE)
@@ -288,811 +287,729 @@ void foo(const Functor<int> &f)
 
 ////////////////////////////// THE CODE //////////////////////////
 
-//change these when your compiler gets bool
-typedef bool    RHCB_BOOL;
+// change these when your compiler gets bool
+typedef bool RHCB_BOOL;
 
 //#include <string.h> //for memstuff
 //#include <stddef.h> //for size_t
 
-//typeless representation of a function and optional object
+// typeless representation of a function and optional object
 typedef void (*PtrToFunc)();
 
 class FunctorBase {
 public:
-        //Note: ctors are protected
-       
-        //for evaluation in conditionals - can the functor be called?
-        operator RHCB_BOOL()const{return callee||func;}
-       
-        //Now you can put them in containers _and_ remove them!
-        //Source for these 3 is in callback.cpp
-        friend bool     operator==(const FunctorBase &lhs,const FunctorBase &rhs);
-        friend bool     operator!=(const FunctorBase &lhs,const FunctorBase &rhs);
-        friend bool     operator<(const FunctorBase &lhs,const FunctorBase &rhs);
-       
-        //The rest below for implementation use only !
-       
-        class DummyInit{
-        };
-       
-        typedef void (FunctorBase::*PMemFunc)();
-        enum {MEM_FUNC_SIZE = sizeof(PMemFunc)};
-       
-        PtrToFunc       getFunc() const {return func;}
-        void *getCallee() const {return callee;}
-        const char *getMemFunc() const {return memFunc;}
-       
-        protected:
-                ////////////////////////////////////////////////////////////////
-                // Note: this code depends on all ptr-to-mem-funcs being same size
-                // If that is not the case then make memFunc as large as largest
-                ////////////////////////////////////////////////////////////////
-        union{
-                PtrToFunc func;
-                char memFunc[MEM_FUNC_SIZE*2]; // Make sure we support multiple inheritance.
-        };
-        void *callee;
-               
-        FunctorBase() : func(0),callee(0) {}
-        FunctorBase(const void *c,PtrToFunc f, const void *mf,size_t sz) : callee((void *)c)
-        {
-                if (c)  //must be callee/memfunc
-                {
-                        assert(sz <= MEM_FUNC_SIZE * 2);
-                        memcpy(memFunc,mf,sz);
-                        if(sz<MEM_FUNC_SIZE)    //zero-out the rest, if any, so comparisons work
-                        {
-                                memset(memFunc+sz,0,MEM_FUNC_SIZE-sz);
-                        }
-                }
-                else    //must be ptr-to-func
-                {
-                        func = f;
-                }
-        }
+  // Note: ctors are protected
+
+  // for evaluation in conditionals - can the functor be called?
+  operator RHCB_BOOL() const { return callee || func; }
+
+  // Now you can put them in containers _and_ remove them!
+  // Source for these 3 is in callback.cpp
+  friend bool operator==(const FunctorBase &lhs, const FunctorBase &rhs);
+  friend bool operator!=(const FunctorBase &lhs, const FunctorBase &rhs);
+  friend bool operator<(const FunctorBase &lhs, const FunctorBase &rhs);
+
+  // The rest below for implementation use only !
+
+  class DummyInit {};
+
+  typedef void (FunctorBase::*PMemFunc)();
+  enum { MEM_FUNC_SIZE = sizeof(PMemFunc) };
+
+  PtrToFunc getFunc() const { return func; }
+  void *getCallee() const { return callee; }
+  const char *getMemFunc() const { return memFunc; }
+
+protected:
+  ////////////////////////////////////////////////////////////////
+  // Note: this code depends on all ptr-to-mem-funcs being same size
+  // If that is not the case then make memFunc as large as largest
+  ////////////////////////////////////////////////////////////////
+  union {
+    PtrToFunc func;
+    char memFunc[MEM_FUNC_SIZE *
+                 2]; // Make sure we support multiple inheritance.
+  };
+  void *callee;
+
+  FunctorBase() : func(0), callee(0) {}
+  FunctorBase(const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : callee((void *)c) {
+    if (c) // must be callee/memfunc
+    {
+      assert(sz <= MEM_FUNC_SIZE * 2);
+      memcpy(memFunc, mf, sz);
+      if (sz < MEM_FUNC_SIZE) // zero-out the rest, if any, so comparisons work
+      {
+        memset(memFunc + sz, 0, MEM_FUNC_SIZE - sz);
+      }
+    } else // must be ptr-to-func
+    {
+      func = f;
+    }
+  }
 };
 
-
 /************************* no arg - no return *******************/
-class Functor0:public FunctorBase{
+class Functor0 : public FunctorBase {
 public:
-        Functor0(RHCB_DUMMY_INIT = 0){}
-        void operator()()const
-                {
-                thunk(*this);
-                }
+  Functor0(RHCB_DUMMY_INIT = 0) {}
+  void operator()() const { thunk(*this); }
+
 protected:
-        typedef void (*Thunk)(const FunctorBase &);
-        Functor0(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef void (*Thunk)(const FunctorBase &);
+  Functor0(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
 template <class Callee, class MemFunc>
-class CBMemberTranslator0:public Functor0{
+class CBMemberTranslator0 : public Functor0 {
 public:
-        CBMemberTranslator0(Callee &c,const MemFunc &m):
-                Functor0(thunk,&c,0,&m,sizeof(MemFunc)){}
-        static void thunk(const FunctorBase &ftor)
-                {
-                Callee *callee = (Callee *)ftor.getCallee();
-                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                (callee->*memFunc)();
-                }
+  CBMemberTranslator0(Callee &c, const MemFunc &m)
+      : Functor0(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (callee->*memFunc)();
+  }
 };
 
-template <class Func>
-class CBFunctionTranslator0:public Functor0{
+template <class Func> class CBFunctionTranslator0 : public Functor0 {
 public:
-        CBFunctionTranslator0(Func f):Functor0(thunk,0,(PtrToFunc)f,0,0){}
-        static void thunk(const FunctorBase &ftor)
-                {
-                (Func(ftor.getFunc()))();
-                }
+  CBFunctionTranslator0(Func f) : Functor0(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static void thunk(const FunctorBase &ftor) { (Func(ftor.getFunc()))(); }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class CallType>
-inline CBMemberTranslator0<Callee,void (CallType::*)()>
-functor( Callee &c,void (CallType::* RHCB_CONST_REF f)())
-{
-        typedef void (CallType::*MemFunc)();
-        return CBMemberTranslator0<Callee,MemFunc>(c,f);
+template <class Callee, class CallType>
+inline CBMemberTranslator0<Callee, void (CallType::*)()>
+functor(Callee &c, void (CallType::*RHCB_CONST_REF f)()) {
+  typedef void (CallType::*MemFunc)();
+  return CBMemberTranslator0<Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class CallType>
-inline CBMemberTranslator0<const Callee,void (CallType::*)()const>
-functor(const Callee &c,void (CallType::* RHCB_CONST_REF f)()const)
-{
-        typedef void (CallType::*MemFunc)()const;
-        return CBMemberTranslator0<const Callee,MemFunc>(c,f);
+template <class Callee, class CallType>
+inline CBMemberTranslator0<const Callee, void (CallType::*)() const>
+functor(const Callee &c, void (CallType::*RHCB_CONST_REF f)() const) {
+  typedef void (CallType::*MemFunc)() const;
+  return CBMemberTranslator0<const Callee, MemFunc>(c, f);
 }
 
-inline CBFunctionTranslator0<void (*)()>
-functor(void (*f)())
-{
-        return CBFunctionTranslator0<void (*)()>(f);
+inline CBFunctionTranslator0<void (*)()> functor(void (*f)()) {
+  return CBFunctionTranslator0<void (*)()>(f);
 }
 
 /************************* no arg - with return *******************/
-template <class RT>
-class Functor0wRet:public FunctorBase{
+template <class RT> class Functor0wRet : public FunctorBase {
 public:
-        Functor0wRet(RHCB_DUMMY_INIT = 0){}
-        RT operator()()const
-                {
-                return RHCB_BC4_RET_BUG(thunk(*this));
-                }
+  Functor0wRet(RHCB_DUMMY_INIT = 0) {}
+  RT operator()() const { return RHCB_BC4_RET_BUG(thunk(*this)); }
+
 protected:
-        typedef RT (*Thunk)(const FunctorBase &);
-        Functor0wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef RT (*Thunk)(const FunctorBase &);
+  Functor0wRet(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class RT,class Callee, class MemFunc>
-class CBMemberTranslator0wRet:public Functor0wRet<RT>{
+template <class RT, class Callee, class MemFunc>
+class CBMemberTranslator0wRet : public Functor0wRet<RT> {
 public:
-        CBMemberTranslator0wRet(Callee &c,const MemFunc &m):
-                        Functor0wRet<RT>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((callee->*memFunc)());
-                        }
+  CBMemberTranslator0wRet(Callee &c, const MemFunc &m)
+      : Functor0wRet<RT>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((callee->*memFunc)());
+  }
 };
 
-template <class RT,class Func>
-class CBFunctionTranslator0wRet:public Functor0wRet<RT>{
+template <class RT, class Func>
+class CBFunctionTranslator0wRet : public Functor0wRet<RT> {
 public:
-        CBFunctionTranslator0wRet(Func f):Functor0wRet<RT>(thunk,0,(PtrToFunc)f,0,0){}
-        static RT thunk(const FunctorBase &ftor)
-                {
-                return (Func(ftor.getFunc()))();
-                }
+  CBFunctionTranslator0wRet(Func f)
+      : Functor0wRet<RT>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static RT thunk(const FunctorBase &ftor) { return (Func(ftor.getFunc()))(); }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class RT,class Callee,class CallType>
-inline CBMemberTranslator0wRet<RT,Callee,RT (CallType::*)()>
-functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)())
-{
-        typedef RT (CallType::*MemFunc)();
-        return CBMemberTranslator0wRet<RT,Callee,MemFunc>(c,f);
+template <class RT, class Callee, class CallType>
+inline CBMemberTranslator0wRet<RT, Callee, RT (CallType::*)()>
+functor(Callee &c, RT (CallType::*RHCB_CONST_REF f)()) {
+  typedef RT (CallType::*MemFunc)();
+  return CBMemberTranslator0wRet<RT, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class RT,class Callee,class CallType>
-inline CBMemberTranslator0wRet<RT,const Callee,RT (CallType::*)()const>
-functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)()const)
-{
-        typedef RT (CallType::*MemFunc)()const;
-        return CBMemberTranslator0wRet<RT,const Callee,MemFunc>(c,f);
+template <class RT, class Callee, class CallType>
+inline CBMemberTranslator0wRet<RT, const Callee, RT (CallType::*)() const>
+functor(const Callee &c, RT (CallType::*RHCB_CONST_REF f)() const) {
+  typedef RT (CallType::*MemFunc)() const;
+  return CBMemberTranslator0wRet<RT, const Callee, MemFunc>(c, f);
 }
 
 template <class RT>
-inline CBFunctionTranslator0wRet<RT,RT (*)()>
-functor( RT (*f)() )
-{
-        return CBFunctionTranslator0wRet<RT,RT (*)()>(f);
+inline CBFunctionTranslator0wRet<RT, RT (*)()> functor(RT (*f)()) {
+  return CBFunctionTranslator0wRet<RT, RT (*)()>(f);
 }
 
 /************************* one arg - no return *******************/
-template <class P1>
-class Functor1:public FunctorBase {
+template <class P1> class Functor1 : public FunctorBase {
 public:
-        Functor1(RHCB_DUMMY_INIT = 0){}
-        void operator()(P1 p1)const
-                {
-                thunk(*this,p1);
-                }
-        //for STL
-        typedef P1 argument_type;
-        typedef void result_type;
+  Functor1(RHCB_DUMMY_INIT = 0) {}
+  void operator()(P1 p1) const { thunk(*this, p1); }
+  // for STL
+  typedef P1 argument_type;
+  typedef void result_type;
+
 protected:
-        typedef void (*Thunk)(const FunctorBase &,P1);
-        Functor1(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef void (*Thunk)(const FunctorBase &, P1);
+  Functor1(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class Callee, class MemFunc>
-class CBMemberTranslator1:public Functor1<P1>{
+template <class P1, class Callee, class MemFunc>
+class CBMemberTranslator1 : public Functor1<P1> {
 public:
-        CBMemberTranslator1(Callee &c,const MemFunc &m):
-                        Functor1<P1>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (callee->*memFunc)(p1);
-                        }
+  CBMemberTranslator1(Callee &c, const MemFunc &m)
+      : Functor1<P1>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (callee->*memFunc)(p1);
+  }
 };
 
-template <class P1,class Func>
-class CBFunctionTranslator1:public Functor1<P1>{
+template <class P1, class Func>
+class CBFunctionTranslator1 : public Functor1<P1> {
 public:
-        CBFunctionTranslator1(Func f):Functor1<P1>(thunk,0,(PtrToFunc)f,0,0){}
-        static void thunk(const FunctorBase &ftor,P1 p1)
-                {
-                (Func(ftor.getFunc()))(p1);
-                }
+  CBFunctionTranslator1(Func f) : Functor1<P1>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static void thunk(const FunctorBase &ftor, P1 p1) {
+    (Func(ftor.getFunc()))(p1);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class Callee,class CallType>
-inline CBMemberTranslator1<P1,Callee,void (CallType::*)(P1)>
-functor(Callee &c,void (CallType::* RHCB_CONST_REF f)(P1))
-{
-        typedef void (CallType::*MemFunc)(P1);
-        return CBMemberTranslator1<P1,Callee,MemFunc>(c,f);
+template <class P1, class Callee, class CallType>
+inline CBMemberTranslator1<P1, Callee, void (CallType::*)(P1)>
+functor(Callee &c, void (CallType::*RHCB_CONST_REF f)(P1)) {
+  typedef void (CallType::*MemFunc)(P1);
+  return CBMemberTranslator1<P1, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class CallType,class P1,class RT>
-inline CBMemberTranslator1<P1,const Callee,RT (CallType::*)(P1)const>
-functor(const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1)const)
-{
-        typedef RT (CallType::*MemFunc)(P1)const;
-        return CBMemberTranslator1<P1,const Callee,MemFunc>(c,f);
+template <class Callee, class CallType, class P1, class RT>
+inline CBMemberTranslator1<P1, const Callee, RT (CallType::*)(P1) const>
+functor(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1) const) {
+  typedef RT (CallType::*MemFunc)(P1) const;
+  return CBMemberTranslator1<P1, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1>
-inline CBFunctionTranslator1<P1,RT (*)(P1)>
-functor( RT (*f)(P1) )
-{
-        return CBFunctionTranslator1<P1,RT (*)(P1)>(f);
+template <class RT, class P1>
+inline CBFunctionTranslator1<P1, RT (*)(P1)> functor(RT (*f)(P1)) {
+  return CBFunctionTranslator1<P1, RT (*)(P1)>(f);
 }
 
-template <class P1,class MemFunc>
-class CBMemberOf1stArgTranslator1:public Functor1<P1>{
+template <class P1, class MemFunc>
+class CBMemberOf1stArgTranslator1 : public Functor1<P1> {
 public:
-        CBMemberOf1stArgTranslator1(const MemFunc &m):
-                        Functor1<P1>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (p1.*memFunc)();
-                        }
+  CBMemberOf1stArgTranslator1(const MemFunc &m)
+      : Functor1<P1>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (p1.*memFunc)();
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class RT,class P1,class CallType>
-inline CBMemberOf1stArgTranslator1<P1,RT (CallType::*)()>
-functor( RT (CallType::* RHCB_CONST_REF f)())
-{
-        typedef RT (CallType::*MemFunc)();
-        return CBMemberOf1stArgTranslator1<P1,MemFunc>(f);
+template <class RT, class P1, class CallType>
+inline CBMemberOf1stArgTranslator1<P1, RT (CallType::*)()>
+functor(RT (CallType::*RHCB_CONST_REF f)()) {
+  typedef RT (CallType::*MemFunc)();
+  return CBMemberOf1stArgTranslator1<P1, MemFunc>(f);
 }
 #endif
 
-template <class RT,class P1,class CallType>
-inline CBMemberOf1stArgTranslator1<P1,RT (CallType::*)()const>
-functor( RT (CallType::* RHCB_CONST_REF f)()const)
-{
-        typedef RT (CallType::*MemFunc)()const;
-        return CBMemberOf1stArgTranslator1<P1,MemFunc>(f);
+template <class RT, class P1, class CallType>
+inline CBMemberOf1stArgTranslator1<P1, RT (CallType::*)() const>
+functor(RT (CallType::*RHCB_CONST_REF f)() const) {
+  typedef RT (CallType::*MemFunc)() const;
+  return CBMemberOf1stArgTranslator1<P1, MemFunc>(f);
 }
 /************************* one arg - with return *******************/
-template <class P1,class RT>
-class Functor1wRet:public FunctorBase{
+template <class P1, class RT> class Functor1wRet : public FunctorBase {
 public:
-        Functor1wRet(RHCB_DUMMY_INIT = 0){}
-        RT operator()(P1 p1)const
-                {
-                return RHCB_BC4_RET_BUG(thunk(*this,p1));
-                }
-        //for STL
-        typedef P1 argument_type;
-        typedef RT result_type;
+  Functor1wRet(RHCB_DUMMY_INIT = 0) {}
+  RT operator()(P1 p1) const { return RHCB_BC4_RET_BUG(thunk(*this, p1)); }
+  // for STL
+  typedef P1 argument_type;
+  typedef RT result_type;
+
 protected:
-        typedef RT (*Thunk)(const FunctorBase &,P1);
-        Functor1wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef RT (*Thunk)(const FunctorBase &, P1);
+  Functor1wRet(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class RT,class Callee, class MemFunc>
-class CBMemberTranslator1wRet:public Functor1wRet<P1,RT>{
+template <class P1, class RT, class Callee, class MemFunc>
+class CBMemberTranslator1wRet : public Functor1wRet<P1, RT> {
 public:
-        CBMemberTranslator1wRet(Callee &c,const MemFunc &m):
-                        Functor1wRet<P1,RT>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((callee->*memFunc)(p1));
-                        }
+  CBMemberTranslator1wRet(Callee &c, const MemFunc &m)
+      : Functor1wRet<P1, RT>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((callee->*memFunc)(p1));
+  }
 };
 
-template <class P1,class RT,class Func>
-class CBFunctionTranslator1wRet:public Functor1wRet<P1,RT>{
+template <class P1, class RT, class Func>
+class CBFunctionTranslator1wRet : public Functor1wRet<P1, RT> {
 public:
-        CBFunctionTranslator1wRet(Func f):
-                        Functor1wRet<P1,RT>(thunk,0,(PtrToFunc)f,0,0){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1)
-                        {
-                                return (Func(ftor.getFunc()))(p1);
-                        }
+  CBFunctionTranslator1wRet(Func f)
+      : Functor1wRet<P1, RT>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1) {
+    return (Func(ftor.getFunc()))(p1);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class RT,class CallType,class P1>
-inline CBMemberTranslator1wRet<P1,RT,Callee,RT (CallType::*)(P1)>
-functor_ret( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1))
-{
-        typedef RT (CallType::*MemFunc)(P1);
-        return CBMemberTranslator1wRet<P1,RT,Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1>
+inline CBMemberTranslator1wRet<P1, RT, Callee, RT (CallType::*)(P1)>
+functor_ret(Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1)) {
+  typedef RT (CallType::*MemFunc)(P1);
+  return CBMemberTranslator1wRet<P1, RT, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1>
-inline CBMemberTranslator1wRet<P1,RT,const Callee,RT (CallType::*)(P1)const>
-functor_ret( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1)const )
-{
-        typedef RT (CallType::*MemFunc)(P1)const;
-        return CBMemberTranslator1wRet<P1,RT,const Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1>
+inline CBMemberTranslator1wRet<P1, RT, const Callee, RT (CallType::*)(P1) const>
+functor_ret(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1) const) {
+  typedef RT (CallType::*MemFunc)(P1) const;
+  return CBMemberTranslator1wRet<P1, RT, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1>
-inline CBFunctionTranslator1wRet<P1,RT,RT (*)(P1)>
-functor_ret( RT (*f)(P1) )
-{
-        return CBFunctionTranslator1wRet<P1,RT,RT (*)(P1)>(f);
+template <class RT, class P1>
+inline CBFunctionTranslator1wRet<P1, RT, RT (*)(P1)> functor_ret(RT (*f)(P1)) {
+  return CBFunctionTranslator1wRet<P1, RT, RT (*)(P1)>(f);
 }
 
-template <class P1,class RT,class MemFunc>
-class CBMemberOf1stArgTranslator1wRet:public Functor1wRet<P1,RT>{
+template <class P1, class RT, class MemFunc>
+class CBMemberOf1stArgTranslator1wRet : public Functor1wRet<P1, RT> {
 public:
-        CBMemberOf1stArgTranslator1wRet(const MemFunc &m):
-                        Functor1wRet<P1,RT>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((p1.*memFunc)());
-                        }
+  CBMemberOf1stArgTranslator1wRet(const MemFunc &m)
+      : Functor1wRet<P1, RT>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((p1.*memFunc)());
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class RT,class CallType>
-inline CBMemberOf1stArgTranslator1wRet<P1,RT,RT (CallType::*)()>
-functor_ret( RT (CallType::* RHCB_CONST_REF f )())
-{
-        typedef RT (CallType::*MemFunc)();
-        return CBMemberOf1stArgTranslator1wRet<P1,RT,MemFunc>(f);
+template <class P1, class RT, class CallType>
+inline CBMemberOf1stArgTranslator1wRet<P1, RT, RT (CallType::*)()>
+functor_ret(RT (CallType::*RHCB_CONST_REF f)()) {
+  typedef RT (CallType::*MemFunc)();
+  return CBMemberOf1stArgTranslator1wRet<P1, RT, MemFunc>(f);
 }
 #endif
 
-template <class P1,class RT,class CallType>
-inline CBMemberOf1stArgTranslator1wRet<P1,RT,RT (CallType::*)()const>
-functor_ret( RT (CallType::* RHCB_CONST_REF f)()const )
-{
-        typedef RT (CallType::*MemFunc)()const;
-        return CBMemberOf1stArgTranslator1wRet<P1,RT,MemFunc>(f);
+template <class P1, class RT, class CallType>
+inline CBMemberOf1stArgTranslator1wRet<P1, RT, RT (CallType::*)() const>
+functor_ret(RT (CallType::*RHCB_CONST_REF f)() const) {
+  typedef RT (CallType::*MemFunc)() const;
+  return CBMemberOf1stArgTranslator1wRet<P1, RT, MemFunc>(f);
 }
 
 /************************* two args - no return *******************/
-template <class P1,class P2>
-class Functor2:public FunctorBase{
+template <class P1, class P2> class Functor2 : public FunctorBase {
 public:
-        Functor2(RHCB_DUMMY_INIT = 0){}
-        void operator()(P1 p1,P2 p2)const
-                {
-                thunk(*this,p1,p2);
-                }
-        //for STL
-        typedef P1 first_argument_type;
-        typedef P2 second_argument_type;
-        typedef void result_type;
+  Functor2(RHCB_DUMMY_INIT = 0) {}
+  void operator()(P1 p1, P2 p2) const { thunk(*this, p1, p2); }
+  // for STL
+  typedef P1 first_argument_type;
+  typedef P2 second_argument_type;
+  typedef void result_type;
+
 protected:
-        typedef void (*Thunk)(const FunctorBase &,P1,P2);
-        Functor2(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef void (*Thunk)(const FunctorBase &, P1, P2);
+  Functor2(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class P2,class Callee, class MemFunc>
-class CBMemberTranslator2:public Functor2<P1,P2>{
+template <class P1, class P2, class Callee, class MemFunc>
+class CBMemberTranslator2 : public Functor2<P1, P2> {
 public:
-        CBMemberTranslator2(Callee &c,const MemFunc &m):
-                        Functor2<P1,P2>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (callee->*memFunc)(p1,p2);
-                        }
+  CBMemberTranslator2(Callee &c, const MemFunc &m)
+      : Functor2<P1, P2>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (callee->*memFunc)(p1, p2);
+  }
 };
 
-template <class P1,class P2,class Func>
-class CBFunctionTranslator2:public Functor2<P1,P2>{
+template <class P1, class P2, class Func>
+class CBFunctionTranslator2 : public Functor2<P1, P2> {
 public:
-        CBFunctionTranslator2(Func f):Functor2<P1,P2>(thunk,0,(PtrToFunc)f,0,0){}
-        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                {
-                (Func(ftor.getFunc()))(p1,p2);
-                }
+  CBFunctionTranslator2(Func f)
+      : Functor2<P1, P2>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    (Func(ftor.getFunc()))(p1, p2);
+  }
 };
 
 //#if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-//template <class Callee,class RT,class CallType,class P1,class P2>
-//inline CBMemberTranslator2<P1,P2,Callee,RT (CallType::*)(P1,P2)>
-//functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2) )
+// template <class Callee,class RT,class CallType,class P1,class P2>
+// inline CBMemberTranslator2<P1,P2,Callee,RT (CallType::*)(P1,P2)>
+// functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2) )
 //{
 //        typedef RT (CallType::*MemFunc)(P1,P2);
 //        return CBMemberTranslator2<P1,P2,Callee,MemFunc>(c,f);
 //}
 //#endif
 
-template <class Callee,class RT,class CallType,class P1,class P2>
-inline CBMemberTranslator2<P1,P2,const Callee,
-RT (CallType::*)(P1,P2)const>
-functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2)const;
-        return CBMemberTranslator2<P1,P2,const Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2>
+inline CBMemberTranslator2<P1, P2, const Callee, RT (CallType::*)(P1, P2) const>
+functor(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2) const;
+  return CBMemberTranslator2<P1, P2, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1,class P2>
-inline CBFunctionTranslator2<P1,P2,RT (*)(P1,P2)>
-functor( RT (*f)(P1,P2))
-{
-        return CBFunctionTranslator2<P1,P2,RT (*)(P1,P2)>(f);
+template <class RT, class P1, class P2>
+inline CBFunctionTranslator2<P1, P2, RT (*)(P1, P2)> functor(RT (*f)(P1, P2)) {
+  return CBFunctionTranslator2<P1, P2, RT (*)(P1, P2)>(f);
 }
 
-template <class P1,class P2,class MemFunc>
-class CBMemberOf1stArgTranslator2:public Functor2<P1,P2>{
+template <class P1, class P2, class MemFunc>
+class CBMemberOf1stArgTranslator2 : public Functor2<P1, P2> {
 public:
-        CBMemberOf1stArgTranslator2(const MemFunc &m):
-                        Functor2<P1,P2>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (p1.*memFunc)(p2);
-                        }
+  CBMemberOf1stArgTranslator2(const MemFunc &m)
+      : Functor2<P1, P2>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (p1.*memFunc)(p2);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class RT,class CallType>
-inline CBMemberOf1stArgTranslator2<P1,P2,RT (CallType::*)(P1)>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1))
-{
-        typedef RT (CallType::*MemFunc)(P1);
-        return CBMemberOf1stArgTranslator2<P1,P2,MemFunc>(f);
+template <class P1, class P2, class RT, class CallType>
+inline CBMemberOf1stArgTranslator2<P1, P2, RT (CallType::*)(P1)>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1)) {
+  typedef RT (CallType::*MemFunc)(P1);
+  return CBMemberOf1stArgTranslator2<P1, P2, MemFunc>(f);
 }
 #endif
 
-template <class P1,class P2,class RT,class CallType>
-inline CBMemberOf1stArgTranslator2<P1,P2,RT (CallType::*)(P1)const>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1)const)
-{
-        typedef RT (CallType::*MemFunc)(P1)const;
-        return CBMemberOf1stArgTranslator2<P1,P2,MemFunc>(f);
+template <class P1, class P2, class RT, class CallType>
+inline CBMemberOf1stArgTranslator2<P1, P2, RT (CallType::*)(P1) const>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1) const) {
+  typedef RT (CallType::*MemFunc)(P1) const;
+  return CBMemberOf1stArgTranslator2<P1, P2, MemFunc>(f);
 }
-
 
 /************************* two args - with return *******************/
-template <class P1,class P2,class RT>
-class Functor2wRet:public FunctorBase{
+template <class P1, class P2, class RT>
+class Functor2wRet : public FunctorBase {
 public:
-        Functor2wRet(RHCB_DUMMY_INIT = 0){}
-        RT operator()(P1 p1,P2 p2)const
-                {
-                return RHCB_BC4_RET_BUG(thunk(*this,p1,p2));
-                }
-        //for STL
-        typedef P1 first_argument_type;
-        typedef P2 second_argument_type;
-        typedef RT result_type;
+  Functor2wRet(RHCB_DUMMY_INIT = 0) {}
+  RT operator()(P1 p1, P2 p2) const {
+    return RHCB_BC4_RET_BUG(thunk(*this, p1, p2));
+  }
+  // for STL
+  typedef P1 first_argument_type;
+  typedef P2 second_argument_type;
+  typedef RT result_type;
+
 protected:
-        typedef RT (*Thunk)(const FunctorBase &,P1,P2);
-        Functor2wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef RT (*Thunk)(const FunctorBase &, P1, P2);
+  Functor2wRet(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class P2,class RT,class Callee, class MemFunc>
-class CBMemberTranslator2wRet:public Functor2wRet<P1,P2,RT>{
+template <class P1, class P2, class RT, class Callee, class MemFunc>
+class CBMemberTranslator2wRet : public Functor2wRet<P1, P2, RT> {
 public:
-        CBMemberTranslator2wRet(Callee &c,const MemFunc &m):
-                        Functor2wRet<P1,P2,RT>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((callee->*memFunc)(p1,p2));
-                        }
+  CBMemberTranslator2wRet(Callee &c, const MemFunc &m)
+      : Functor2wRet<P1, P2, RT>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((callee->*memFunc)(p1, p2));
+  }
 };
 
-template <class P1,class P2,class RT,class Func>
-class CBFunctionTranslator2wRet:public Functor2wRet<P1,P2,RT>{
+template <class P1, class P2, class RT, class Func>
+class CBFunctionTranslator2wRet : public Functor2wRet<P1, P2, RT> {
 public:
-        CBFunctionTranslator2wRet(Func f):
-                        Functor2wRet<P1,P2,RT>(thunk,0,(PtrToFunc)f,0,0){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                        {
-                                return (Func(ftor.getFunc()))(p1,p2);
-                        }
+  CBFunctionTranslator2wRet(Func f)
+      : Functor2wRet<P1, P2, RT>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    return (Func(ftor.getFunc()))(p1, p2);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class RT,class CallType,class P1,class P2>
-inline CBMemberTranslator2wRet<P1,P2,RT,Callee,
-RT (CallType::*)(P1,P2)>
-functor_ret( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2))
-{
-        typedef RT (CallType::*MemFunc)(P1,P2);
-        return CBMemberTranslator2wRet<P1,P2,RT,Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2>
+inline CBMemberTranslator2wRet<P1, P2, RT, Callee, RT (CallType::*)(P1, P2)>
+functor_ret(Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2)) {
+  typedef RT (CallType::*MemFunc)(P1, P2);
+  return CBMemberTranslator2wRet<P1, P2, RT, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2>
-inline CBMemberTranslator2wRet<P1,P2,RT,const Callee,
-RT (CallType::*)(P1,P2)const>
-functor_ret( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2)const;
-        return CBMemberTranslator2wRet<P1,P2,RT,const Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2>
+inline CBMemberTranslator2wRet<P1, P2, RT, const Callee,
+                               RT (CallType::*)(P1, P2) const>
+functor_ret(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2) const;
+  return CBMemberTranslator2wRet<P1, P2, RT, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1,class P2>
-inline CBFunctionTranslator2wRet<P1,P2,RT,RT (*)(P1,P2)>
-functor_ret( RT (*f)(P1,P2))
-{
-        return CBFunctionTranslator2wRet<P1,P2,RT,RT (*)(P1,P2)>(f);
+template <class RT, class P1, class P2>
+inline CBFunctionTranslator2wRet<P1, P2, RT, RT (*)(P1, P2)>
+    functor_ret(RT (*f)(P1, P2)) {
+  return CBFunctionTranslator2wRet<P1, P2, RT, RT (*)(P1, P2)>(f);
 }
 
-template <class P1,class P2,class RT,class MemFunc>
-class CBMemberOf1stArgTranslator2wRet:public Functor2wRet<P1,P2,RT>{
+template <class P1, class P2, class RT, class MemFunc>
+class CBMemberOf1stArgTranslator2wRet : public Functor2wRet<P1, P2, RT> {
 public:
-        CBMemberOf1stArgTranslator2wRet(const MemFunc &m):
-                        Functor2wRet<P1,P2,RT>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((p1.*memFunc)(p2));
-                        }
+  CBMemberOf1stArgTranslator2wRet(const MemFunc &m)
+      : Functor2wRet<P1, P2, RT>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((p1.*memFunc)(p2));
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class RT,class CallType>
-inline CBMemberOf1stArgTranslator2wRet<P1,P2,RT,RT (CallType::*)(P1)>
-functor_ret( RT (CallType::* RHCB_CONST_REF f)(P1))
-{
-        typedef RT (CallType::*MemFunc)(P1);
-        return CBMemberOf1stArgTranslator2wRet<P1,P2,RT,MemFunc>(f);
+template <class P1, class P2, class RT, class CallType>
+inline CBMemberOf1stArgTranslator2wRet<P1, P2, RT, RT (CallType::*)(P1)>
+functor_ret(RT (CallType::*RHCB_CONST_REF f)(P1)) {
+  typedef RT (CallType::*MemFunc)(P1);
+  return CBMemberOf1stArgTranslator2wRet<P1, P2, RT, MemFunc>(f);
 }
 #endif
 
-template <class P1,class P2,class RT,class CallType>
-inline CBMemberOf1stArgTranslator2wRet<P1,P2,RT,RT (CallType::*)(P1)const>
-functor_ret( RT (CallType::* RHCB_CONST_REF f)(P1)const)
-{
-        typedef RT (CallType::*MemFunc)(P1)const;
-        return CBMemberOf1stArgTranslator2wRet<P1,P2,RT,MemFunc>(f);
+template <class P1, class P2, class RT, class CallType>
+inline CBMemberOf1stArgTranslator2wRet<P1, P2, RT, RT (CallType::*)(P1) const>
+functor_ret(RT (CallType::*RHCB_CONST_REF f)(P1) const) {
+  typedef RT (CallType::*MemFunc)(P1) const;
+  return CBMemberOf1stArgTranslator2wRet<P1, P2, RT, MemFunc>(f);
 }
-
 
 /************************ three args - no return *******************/
-template <class P1,class P2,class P3>
-class Functor3:public FunctorBase{
+template <class P1, class P2, class P3> class Functor3 : public FunctorBase {
 public:
-        Functor3(RHCB_DUMMY_INIT = 0){}
-        void operator()(P1 p1,P2 p2,P3 p3)const
-                {
-                thunk(*this,p1,p2,p3);
-                }
+  Functor3(RHCB_DUMMY_INIT = 0) {}
+  void operator()(P1 p1, P2 p2, P3 p3) const { thunk(*this, p1, p2, p3); }
+
 protected:
-        typedef void (*Thunk)(const FunctorBase &,P1,P2,P3);
-        Functor3(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef void (*Thunk)(const FunctorBase &, P1, P2, P3);
+  Functor3(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class P2,class P3,class Callee, class MemFunc>
-class CBMemberTranslator3:public Functor3<P1,P2,P3>{
+template <class P1, class P2, class P3, class Callee, class MemFunc>
+class CBMemberTranslator3 : public Functor3<P1, P2, P3> {
 public:
-        CBMemberTranslator3(Callee &c,const MemFunc &m):
-                        Functor3<P1,P2,P3>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (callee->*memFunc)(p1,p2,p3);
-                        }
+  CBMemberTranslator3(Callee &c, const MemFunc &m)
+      : Functor3<P1, P2, P3>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (callee->*memFunc)(p1, p2, p3);
+  }
 };
 
-template <class P1,class P2,class P3,class Func>
-class CBFunctionTranslator3:public Functor3<P1,P2,P3>{
+template <class P1, class P2, class P3, class Func>
+class CBFunctionTranslator3 : public Functor3<P1, P2, P3> {
 public:
-        CBFunctionTranslator3(Func f):Functor3<P1,P2,P3>(thunk,0,(PtrToFunc)f,0,0){}
-        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                {
-                (Func(ftor.getFunc()))(p1,p2,p3);
-                }
+  CBFunctionTranslator3(Func f)
+      : Functor3<P1, P2, P3>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    (Func(ftor.getFunc()))(p1, p2, p3);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class RT,class CallType,class P1,class P2,class P3>
-inline CBMemberTranslator3<P1,P2,P3,Callee,
-RT (CallType::*)(P1,P2,P3)>
-functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3))
-{
-        typedef RT (CallType::*MemFunc)(P1,P2,P3);
-        return CBMemberTranslator3<P1,P2,P3,Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2, class P3>
+inline CBMemberTranslator3<P1, P2, P3, Callee, RT (CallType::*)(P1, P2, P3)>
+functor(Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2, P3)) {
+  typedef RT (CallType::*MemFunc)(P1, P2, P3);
+  return CBMemberTranslator3<P1, P2, P3, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2,class P3>
-inline CBMemberTranslator3<P1,P2,P3,const Callee,
-RT (CallType::*)(P1,P2,P3)const>
-functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2,P3)const;
-        return CBMemberTranslator3<P1,P2,P3,const Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2, class P3>
+inline CBMemberTranslator3<P1, P2, P3, const Callee,
+                           RT (CallType::*)(P1, P2, P3) const>
+functor(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2, P3) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2, P3) const;
+  return CBMemberTranslator3<P1, P2, P3, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1,class P2,class P3>
-inline CBFunctionTranslator3<P1,P2,P3,RT (*)(P1,P2,P3)>
-functor( RT (*f)(P1,P2,P3))
-{
-        return CBFunctionTranslator3<P1,P2,P3,RT (*)(P1,P2,P3)>(f);
+template <class RT, class P1, class P2, class P3>
+inline CBFunctionTranslator3<P1, P2, P3, RT (*)(P1, P2, P3)>
+    functor(RT (*f)(P1, P2, P3)) {
+  return CBFunctionTranslator3<P1, P2, P3, RT (*)(P1, P2, P3)>(f);
 }
 
-template <class P1,class P2,class P3,class MemFunc>
-class CBMemberOf1stArgTranslator3:public Functor3<P1,P2,P3>{
+template <class P1, class P2, class P3, class MemFunc>
+class CBMemberOf1stArgTranslator3 : public Functor3<P1, P2, P3> {
 public:
-        CBMemberOf1stArgTranslator3(const MemFunc &m):
-                        Functor3<P1,P2,P3>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                (p1.*memFunc)(p2,p3);
-                        }
+  CBMemberOf1stArgTranslator3(const MemFunc &m)
+      : Functor3<P1, P2, P3>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {}
+  static void thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    (p1.*memFunc)(p2, p3);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class P3,class RT,class CallType>
-inline CBMemberOf1stArgTranslator3<P1,P2,P3,RT (CallType::*)(P1,P2)>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1,P2))
-{
-        typedef RT (CallType::*MemFunc)(P1,P2);
-        return CBMemberOf1stArgTranslator3<P1,P2,P3,MemFunc>(f);
+template <class P1, class P2, class P3, class RT, class CallType>
+inline CBMemberOf1stArgTranslator3<P1, P2, P3, RT (CallType::*)(P1, P2)>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1, P2)) {
+  typedef RT (CallType::*MemFunc)(P1, P2);
+  return CBMemberOf1stArgTranslator3<P1, P2, P3, MemFunc>(f);
 }
 #endif
 
-template <class P1,class P2,class P3,class RT,class CallType>
-inline CBMemberOf1stArgTranslator3<P1,P2,P3,RT (CallType::*)(P1,P2)const>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1,P2)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2)const;
-        return CBMemberOf1stArgTranslator3<P1,P2,P3,MemFunc>(f);
+template <class P1, class P2, class P3, class RT, class CallType>
+inline CBMemberOf1stArgTranslator3<P1, P2, P3, RT (CallType::*)(P1, P2) const>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1, P2) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2) const;
+  return CBMemberOf1stArgTranslator3<P1, P2, P3, MemFunc>(f);
 }
-
 
 /************************* three args - with return *******************/
-template <class P1,class P2,class P3,class RT>
-class Functor3wRet:public FunctorBase{
+template <class P1, class P2, class P3, class RT>
+class Functor3wRet : public FunctorBase {
 public:
-        Functor3wRet(RHCB_DUMMY_INIT = 0){}
-        RT operator()(P1 p1,P2 p2,P3 p3)const
-                {
-                return RHCB_BC4_RET_BUG(thunk(*this,p1,p2,p3));
-                }
+  Functor3wRet(RHCB_DUMMY_INIT = 0) {}
+  RT operator()(P1 p1, P2 p2, P3 p3) const {
+    return RHCB_BC4_RET_BUG(thunk(*this, p1, p2, p3));
+  }
+
 protected:
-        typedef RT (*Thunk)(const FunctorBase &,P1,P2,P3);
-        Functor3wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
-                FunctorBase(c,f,mf,sz),thunk(t){}
+  typedef RT (*Thunk)(const FunctorBase &, P1, P2, P3);
+  Functor3wRet(Thunk t, const void *c, PtrToFunc f, const void *mf, size_t sz)
+      : FunctorBase(c, f, mf, sz), thunk(t) {}
+
 private:
-        Thunk thunk;
+  Thunk thunk;
 };
 
-template <class P1,class P2,class P3,
-class RT,class Callee, class MemFunc>
-class CBMemberTranslator3wRet:public Functor3wRet<P1,P2,P3,RT>{
+template <class P1, class P2, class P3, class RT, class Callee, class MemFunc>
+class CBMemberTranslator3wRet : public Functor3wRet<P1, P2, P3, RT> {
 public:
-        CBMemberTranslator3wRet(Callee &c,const MemFunc &m):
-                        Functor3wRet<P1,P2,P3,RT>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                        {
-                                Callee *callee = (Callee *)ftor.getCallee();
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((callee->*memFunc)(p1,p2,p3));
-                        }
+  CBMemberTranslator3wRet(Callee &c, const MemFunc &m)
+      : Functor3wRet<P1, P2, P3, RT>(thunk, &c, 0, &m, sizeof(MemFunc)) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    Callee *callee = (Callee *)ftor.getCallee();
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((callee->*memFunc)(p1, p2, p3));
+  }
 };
 
-template <class P1,class P2,class P3,class RT,class Func>
-class CBFunctionTranslator3wRet:public Functor3wRet<P1,P2,P3,RT>{
+template <class P1, class P2, class P3, class RT, class Func>
+class CBFunctionTranslator3wRet : public Functor3wRet<P1, P2, P3, RT> {
 public:
-        CBFunctionTranslator3wRet(Func f):
-                        Functor3wRet<P1,P2,P3,RT>(thunk,0,(PtrToFunc)f,0,0){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                        {
-                                return (Func(ftor.getFunc()))(p1,p2,p3);
-                        }
+  CBFunctionTranslator3wRet(Func f)
+      : Functor3wRet<P1, P2, P3, RT>(thunk, 0, (PtrToFunc)f, 0, 0) {}
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    return (Func(ftor.getFunc()))(p1, p2, p3);
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class P3,class RT,class Callee,class CallType>
-inline CBMemberTranslator3wRet<P1,P2,P3,RT,Callee,
-RT (CallType::*)(P1,P2,P3)>
-functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3))
-{
-        typedef RT (CallType::*MemFunc)(P1,P2,P3);
-        return CBMemberTranslator3wRet<P1,P2,P3,RT,Callee,MemFunc>(c,f);
+template <class P1, class P2, class P3, class RT, class Callee, class CallType>
+inline CBMemberTranslator3wRet<P1, P2, P3, RT, Callee,
+                               RT (CallType::*)(P1, P2, P3)>
+functor(Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2, P3)) {
+  typedef RT (CallType::*MemFunc)(P1, P2, P3);
+  return CBMemberTranslator3wRet<P1, P2, P3, RT, Callee, MemFunc>(c, f);
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2,class P3>
-inline CBMemberTranslator3wRet<P1,P2,P3,RT,const Callee,
-RT (CallType::*)(P1,P2,P3)const>
-functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2,P3)const;
-        return CBMemberTranslator3wRet<P1,P2,P3,RT,const Callee,MemFunc>(c,f);
+template <class Callee, class RT, class CallType, class P1, class P2, class P3>
+inline CBMemberTranslator3wRet<P1, P2, P3, RT, const Callee,
+                               RT (CallType::*)(P1, P2, P3) const>
+functor(const Callee &c, RT (CallType::*RHCB_CONST_REF f)(P1, P2, P3) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2, P3) const;
+  return CBMemberTranslator3wRet<P1, P2, P3, RT, const Callee, MemFunc>(c, f);
 }
 
-template <class RT,class P1,class P2,class P3>
-inline CBFunctionTranslator3wRet<P1,P2,P3,RT,RT (*)(P1,P2,P3)>
-functor( RT (*f)(P1,P2,P3) )
-{
-        return CBFunctionTranslator3wRet<P1,P2,P3,RT,RT (*)(P1,P2,P3)>(f);
+template <class RT, class P1, class P2, class P3>
+inline CBFunctionTranslator3wRet<P1, P2, P3, RT, RT (*)(P1, P2, P3)>
+    functor(RT (*f)(P1, P2, P3)) {
+  return CBFunctionTranslator3wRet<P1, P2, P3, RT, RT (*)(P1, P2, P3)>(f);
 }
 
-template <class P1,class P2,class P3,class RT,class MemFunc>
-class CBMemberOf1stArgTranslator3wRet:public Functor3wRet<P1,P2,P3,RT>{
+template <class P1, class P2, class P3, class RT, class MemFunc>
+class CBMemberOf1stArgTranslator3wRet : public Functor3wRet<P1, P2, P3, RT> {
 public:
-        CBMemberOf1stArgTranslator3wRet(const MemFunc &m):
-                        Functor3wRet<P1,P2,P3,RT>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3)
-                        {
-                                MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((p1.*memFunc)(p2,p3));
-                        }
+  CBMemberOf1stArgTranslator3wRet(const MemFunc &m)
+      : Functor3wRet<P1, P2, P3, RT>(thunk, (void *)1, 0, &m, sizeof(MemFunc)) {
+  }
+  static RT thunk(const FunctorBase &ftor, P1 p1, P2 p2, P3 p3) {
+    MemFunc &memFunc RHCB_CTOR_STYLE_INIT(
+        *(MemFunc *)(void *)(ftor.getMemFunc()));
+    return RHCB_BC4_RET_BUG((p1.*memFunc)(p2, p3));
+  }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class P3,class RT,class CallType>
-inline CBMemberOf1stArgTranslator3wRet<P1,P2,P3,RT,RT (CallType::*)(P1,P2)>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1,P2))
-{
-        typedef RT (CallType::*MemFunc)(P1,P2);
-        return CBMemberOf1stArgTranslator3wRet<P1,P2,P3,RT,MemFunc>(f);
+template <class P1, class P2, class P3, class RT, class CallType>
+inline CBMemberOf1stArgTranslator3wRet<P1, P2, P3, RT, RT (CallType::*)(P1, P2)>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1, P2)) {
+  typedef RT (CallType::*MemFunc)(P1, P2);
+  return CBMemberOf1stArgTranslator3wRet<P1, P2, P3, RT, MemFunc>(f);
 }
 #endif
 
-template <class P1,class P2,class P3,class RT,class CallType>
-inline CBMemberOf1stArgTranslator3wRet<P1,P2,P3,RT,
-RT (CallType::*)(P1,P2)const>
-functor( RT (CallType::* RHCB_CONST_REF f)(P1,P2)const)
-{
-        typedef RT (CallType::*MemFunc)(P1,P2)const;
-        return CBMemberOf1stArgTranslator3wRet<P1,P2,P3,RT,MemFunc>(f);
+template <class P1, class P2, class P3, class RT, class CallType>
+inline CBMemberOf1stArgTranslator3wRet<P1, P2, P3, RT,
+                                       RT (CallType::*)(P1, P2) const>
+functor(RT (CallType::*RHCB_CONST_REF f)(P1, P2) const) {
+  typedef RT (CallType::*MemFunc)(P1, P2) const;
+  return CBMemberOf1stArgTranslator3wRet<P1, P2, P3, RT, MemFunc>(f);
 }
-
 
 /************************* four args - no return *******************
 template <class P1,class P2,class P3,class P4>
@@ -1117,11 +1034,13 @@ class CBMemberTranslator4:public Functor4<P1,P2,P3,P4>{
 public:
         CBMemberTranslator4(Callee &c,const MemFunc &m):
                         Functor4<P1,P2,P3,P4>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 Callee *callee = (Callee *)ftor.getCallee();
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
                                 (callee->*memFunc)(p1,p2,p3,p4);
                         }
 };
@@ -1131,14 +1050,16 @@ class CBFunctionTranslator4:public Functor4<P1,P2,P3,P4>{
 public:
         CBFunctionTranslator4(Func f):
                         Functor4<P1,P2,P3,P4>(thunk,0,(PtrToFunc)f,0,0){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 (Func(ftor.getFunc()))(p1,p2,p3,p4);
                         }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class RT,class CallType,class P1,class P2,class P3,class P4>
+template <class Callee,class RT,class CallType,class P1,class P2,class P3,class
+P4>
 inline CBMemberTranslator4<P1,P2,P3,P4,Callee,
 RT (CallType::*)(P1,P2,P3,P4)>
 functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4))
@@ -1148,7 +1069,8 @@ functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4))
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2,class P3,class P4>
+template <class Callee,class RT,class CallType,class P1,class P2,class P3,class
+P4>
 inline CBMemberTranslator4<P1,P2,P3,P4,const Callee,
 RT (CallType::*)(P1,P2,P3,P4)const>
 functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4)const)
@@ -1168,11 +1090,14 @@ template <class P1,class P2,class P3,class P4,class MemFunc>
 class CBMemberOf1stArgTranslator4:public Functor4<P1,P2,P3,P4>{
 public:
         CBMemberOf1stArgTranslator4(const MemFunc &m):
-                        Functor4<P1,P2,P3,P4>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        Functor4<P1,P2,P3,P4>(thunk,(void
+*)1,0,&m,sizeof(MemFunc)){}
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
                                 (p1.*memFunc)(p2,p3,p4);
                         }
 };
@@ -1208,23 +1133,28 @@ public:
                 }
 protected:
         typedef RT (*Thunk)(const FunctorBase &,P1,P2,P3,P4);
-        Functor4wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t sz):
+        Functor4wRet(Thunk t,const void *c,PtrToFunc f,const void *mf,size_t
+sz):
                 FunctorBase(c,f,mf,sz),thunk(t){}
 private:
         Thunk thunk;
 };
 
-template <class P1,class P2,class P3,class P4,class RT,class Callee, class MemFunc>
+template <class P1,class P2,class P3,class P4,class RT,class Callee, class
+MemFunc>
 class CBMemberTranslator4wRet:public Functor4wRet<P1,P2,P3,P4,RT>{
 public:
         CBMemberTranslator4wRet(Callee &c,const MemFunc &m):
                         Functor4wRet<P1,P2,P3,P4,RT>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 Callee *callee = (Callee *)ftor.getCallee();
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((callee->*memFunc)(p1,p2,p3,p4));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
+                                return
+RHCB_BC4_RET_BUG((callee->*memFunc)(p1,p2,p3,p4));
                         }
 };
 
@@ -1233,14 +1163,16 @@ class CBFunctionTranslator4wRet:public Functor4wRet<P1,P2,P3,P4,RT>{
 public:
         CBFunctionTranslator4wRet(Func f):
                         Functor4wRet<P1,P2,P3,P4,RT>(thunk,0,(PtrToFunc)f,0,0){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 return (Func(ftor.getFunc()))(p1,p2,p3,p4);
                         }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class P1,class P2,class P3,class P4,class RT,class Callee,class CallType>
+template <class P1,class P2,class P3,class P4,class RT,class Callee,class
+CallType>
 inline CBMemberTranslator4wRet<P1,P2,P3,P4,RT,Callee,
 RT (CallType::*)(P1,P2,P3,P4)>
 functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4))
@@ -1250,13 +1182,15 @@ functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4))
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2,class P3,class P4>
+template <class Callee,class RT,class CallType,class P1,class P2,class P3,class
+P4>
 inline CBMemberTranslator4wRet<P1,P2,P3,P4,RT,const Callee,
 RT (CallType::*)(P1,P2,P3,P4)const>
 functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4)const)
 {
         typedef RT (CallType::*MemFunc)(P1,P2,P3,P4)const;
-        return CBMemberTranslator4wRet<P1,P2,P3,P4,RT,const Callee,MemFunc>(c,f);
+        return CBMemberTranslator4wRet<P1,P2,P3,P4,RT,const
+Callee,MemFunc>(c,f);
 }
 
 template <class RT,class P1,class P2,class P3,class P4>
@@ -1272,12 +1206,16 @@ template <class P1,class P2,class P3,class P4,class RT,class MemFunc>
 class CBMemberOf1stArgTranslator4wRet:public Functor4wRet<P1,P2,P3,P4,RT>{
 public:
         CBMemberOf1stArgTranslator4wRet(const MemFunc &m):
-                        Functor4wRet<P1,P2,P3,P4,RT>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4)
+                        Functor4wRet<P1,P2,P3,P4,RT>(thunk,(void
+*)1,0,&m,sizeof(MemFunc)){}
+                        static RT thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4)
                         {
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
-                                return RHCB_BC4_RET_BUG((p1.*memFunc)(p2,p3,p4));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
+                                return
+RHCB_BC4_RET_BUG((p1.*memFunc)(p2,p3,p4));
                         }
 };
 
@@ -1326,11 +1264,13 @@ class CBMemberTranslator5:public Functor5<P1,P2,P3,P4,P5>{
 public:
         CBMemberTranslator5(Callee &c,const MemFunc &m):
                         Functor5<P1,P2,P3,P4,P5>(thunk,&c,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4,P5 p5)
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4,P5 p5)
                         {
                                 Callee *callee = (Callee *)ftor.getCallee();
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
                                 (callee->*memFunc)(p1,p2,p3,p4,p5);
                         }
 };
@@ -1340,14 +1280,16 @@ class CBFunctionTranslator5:public Functor5<P1,P2,P3,P4,P5>{
 public:
         CBFunctionTranslator5(Func f):
                         Functor5<P1,P2,P3,P4,P5>(thunk,0,(PtrToFunc)f,0,0){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4,P5 p5)
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4,P5 p5)
                         {
                                 (Func(ftor.getFunc()))(p1,p2,p3,p4,p5);
                         }
 };
 
 #if !defined(RHCB_CANT_OVERLOAD_ON_CONSTNESS)
-template <class Callee,class RT,class CallType,class P1,class P2,class P3,class P4,class P5>
+template <class Callee,class RT,class CallType,class P1,class P2,class P3,class
+P4,class P5>
 inline CBMemberTranslator5<P1,P2,P3,P4,P5,Callee,
 RT (CallType::*)(P1,P2,P3,P4,P5)>
 functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4,P5))
@@ -1357,7 +1299,8 @@ functor( Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4,P5))
 }
 #endif
 
-template <class Callee,class RT,class CallType,class P1,class P2,class P3,class P4,class P5>
+template <class Callee,class RT,class CallType,class P1,class P2,class P3,class
+P4,class P5>
 inline CBMemberTranslator5<P1,P2,P3,P4,P5,const Callee,
 RT (CallType::*)(P1,P2,P3,P4,P5)const>
 functor( const Callee &c,RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4,P5)const)
@@ -1377,11 +1320,14 @@ template <class P1,class P2,class P3,class P4,class P5,class MemFunc>
 class CBMemberOf1stArgTranslator5:public Functor5<P1,P2,P3,P4,P5>{
 public:
         CBMemberOf1stArgTranslator5(const MemFunc &m):
-                        Functor5<P1,P2,P3,P4,P5>(thunk,(void *)1,0,&m,sizeof(MemFunc)){}
-                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3 p3,P4 p4,P5 p5)
+                        Functor5<P1,P2,P3,P4,P5>(thunk,(void
+*)1,0,&m,sizeof(MemFunc)){}
+                        static void thunk(const FunctorBase &ftor,P1 p1,P2 p2,P3
+p3,P4 p4,P5 p5)
                         {
                                 MemFunc &memFunc RHCB_CTOR_STYLE_INIT
-                                        (*(MemFunc*)(void *)(ftor.getMemFunc()));
+                                        (*(MemFunc*)(void
+*)(ftor.getMemFunc()));
                                 (p1.*memFunc)(p2,p3,p4,p5);
                         }
 };
@@ -1411,42 +1357,38 @@ functor( RT (CallType::* RHCB_CONST_REF f)(P1,P2,P3,P4)const)
 // Inlines.
 //
 ///////////////////////////////////////////////////////////////////////////////
-inline bool operator==(const FunctorBase &lhs,const FunctorBase &rhs)
-{
-        if (!lhs.callee)        {
-                if (rhs.callee) return false;
-                return lhs.func == rhs.func;
-        }       else {
-                if (!rhs.callee) return false;
-                return lhs.callee == rhs.callee &&
-                        !memcmp(lhs.memFunc,rhs.memFunc,FunctorBase::MEM_FUNC_SIZE);
-                }
+inline bool operator==(const FunctorBase &lhs, const FunctorBase &rhs) {
+  if (!lhs.callee) {
+    if (rhs.callee)
+      return false;
+    return lhs.func == rhs.func;
+  } else {
+    if (!rhs.callee)
+      return false;
+    return lhs.callee == rhs.callee &&
+           !memcmp(lhs.memFunc, rhs.memFunc, FunctorBase::MEM_FUNC_SIZE);
+  }
 }
 
-inline bool operator!=(const FunctorBase &lhs,const FunctorBase &rhs)
-{
-        return !(lhs == rhs);
+inline bool operator!=(const FunctorBase &lhs, const FunctorBase &rhs) {
+  return !(lhs == rhs);
 }
 
-inline bool operator<(const FunctorBase &lhs,const FunctorBase &rhs)
-{
-        //must order across funcs and callee/memfuncs, funcs are first
-        if(!lhs.callee)
-                {
-                if(rhs.callee)
-                        return true;
-                else
-                        return lhs.func < rhs.func;
-                }
-        else
-                {
-                if(!rhs.callee)
-                        return false;
-                if(lhs.callee != rhs.callee)
-                        return lhs.callee < rhs.callee;
-                else
-                        return memcmp(lhs.memFunc,rhs.memFunc,FunctorBase::MEM_FUNC_SIZE)<0;
-                }
+inline bool operator<(const FunctorBase &lhs, const FunctorBase &rhs) {
+  // must order across funcs and callee/memfuncs, funcs are first
+  if (!lhs.callee) {
+    if (rhs.callee)
+      return true;
+    else
+      return lhs.func < rhs.func;
+  } else {
+    if (!rhs.callee)
+      return false;
+    if (lhs.callee != rhs.callee)
+      return lhs.callee < rhs.callee;
+    else
+      return memcmp(lhs.memFunc, rhs.memFunc, FunctorBase::MEM_FUNC_SIZE) < 0;
+  }
 }
 
 /*
@@ -1463,7 +1405,8 @@ public:
         // Remvoe functor from list.
         void Remove( const FUNCTOR &f )
         {
-                typename Container::iterator it = std::find( m_functors.begin(),m_functors.end(),f );
+                typename Container::iterator it = std::find(
+m_functors.begin(),m_functors.end(),f );
                 if (it != m_functors.end())
                 {
                         #undef erase
@@ -1477,7 +1420,8 @@ public:
         //////////////////////////////////////////////////////////////////////////
         void Call()
         {
-                for (typename Container::iterator it = m_functors.begin(); it != m_functors.end(); ++it)
+                for (typename Container::iterator it = m_functors.begin(); it !=
+m_functors.end(); ++it)
                 {
                         (*it)();
                 }
@@ -1486,7 +1430,8 @@ public:
         template <class T1>
         void Call( const T1 &param1 )
         {
-                for (typename Container::iterator it = m_functors.begin(); it != m_functors.end(); ++it)
+                for (typename Container::iterator it = m_functors.begin(); it !=
+m_functors.end(); ++it)
                 {
                         (*it)( param1 );
                 }
@@ -1495,7 +1440,8 @@ public:
         template <class T1,class T2>
         void Call( const T1 &param1,const T2 &param2 )
         {
-                for (typename Container::iterator it = m_functors.begin(); it != m_functors.end(); ++it)
+                for (typename Container::iterator it = m_functors.begin(); it !=
+m_functors.end(); ++it)
                 {
                         (*it)( param1,param2 );
                 }
@@ -1504,7 +1450,8 @@ public:
         template <class T1,class T2,class T3>
         void Call( const T1 &param1,const T2 &param2,const T3 &param3 )
         {
-                for (typename Container::iterator it = m_functors.begin(); it != m_functors.end(); ++it)
+                for (typename Container::iterator it = m_functors.begin(); it !=
+m_functors.end(); ++it)
                 {
                         (*it)( param1,param2,param3 );
                 }

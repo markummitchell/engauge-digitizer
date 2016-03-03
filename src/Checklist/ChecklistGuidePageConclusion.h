@@ -3,18 +3,17 @@
 
 #include "ChecklistGuidePage.h"
 
-/// This class uses the validation method of the Conclusion page to perform final processing for ChecklistGuideWizard
-class ChecklistGuidePageConclusion : public ChecklistGuidePage
-{
+/// This class uses the validation method of the Conclusion page to perform
+/// final processing for ChecklistGuideWizard
+class ChecklistGuidePageConclusion : public ChecklistGuidePage {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  ChecklistGuidePageConclusion ();
+  ChecklistGuidePageConclusion();
 
   /// Perform final processing
-  virtual bool validatePage ();
-
+  virtual bool validatePage();
 };
 
 #endif // CHECKLIST_GUIDE_PAGE_CONCLUSION_H

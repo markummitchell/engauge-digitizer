@@ -8,18 +8,16 @@
 class Point;
 
 /// Callback for computing the next ordinal for a new point
-class CallbackNextOrdinal
-{
+class CallbackNextOrdinal {
 public:
   /// Single constructor
   CallbackNextOrdinal(const QString &curveName);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString &curveName, const Point &point);
 
   /// Computed next ordinal
-  double nextOrdinal () const;
+  double nextOrdinal() const;
 
 private:
   CallbackNextOrdinal();

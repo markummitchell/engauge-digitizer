@@ -8,32 +8,27 @@
 #include <QXmlStreamReader>
 #include "Xml.h"
 
-const QString CMD_DESCRIPTION ("Export File");
+const QString CMD_DESCRIPTION("Export File");
 
-FileCmdExport::FileCmdExport (QXmlStreamReader &reader) :
-  FileCmdAbstract (CMD_DESCRIPTION)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FileCmdExport::FileCmdExport";
+FileCmdExport::FileCmdExport(QXmlStreamReader &reader)
+    : FileCmdAbstract(CMD_DESCRIPTION) {
+  LOG4CPP_INFO_S((*mainCat)) << "FileCmdExport::FileCmdExport";
 
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (!attributes.hasAttribute(FILE_CMD_SERIALIZE_FILENAME)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2")
-                      .arg (QObject::tr ("Missing attribute"))
-                      .arg (FILE_CMD_SERIALIZE_FILENAME));
+    xmlExitWithError(reader, QString("%1 %2")
+                                 .arg(QObject::tr("Missing attribute"))
+                                 .arg(FILE_CMD_SERIALIZE_FILENAME));
   }
 
   m_filename = attributes.value(FILE_CMD_SERIALIZE_FILENAME).toString();
 }
 
-FileCmdExport::~FileCmdExport ()
-{
-}
+FileCmdExport::~FileCmdExport() {}
 
-void FileCmdExport::redo (MainWindow &mainWindow)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FileCmdExport::redo";
+void FileCmdExport::redo(MainWindow &mainWindow) {
+  LOG4CPP_INFO_S((*mainCat)) << "FileCmdExport::redo";
 
-  mainWindow.cmdFileExport (m_filename);
+  mainWindow.cmdFileExport(m_filename);
 }

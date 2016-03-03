@@ -9,25 +9,21 @@
 class QXmlStreamReader;
 
 /// Command for deleting all selected Points.
-class CmdDelete : public CmdAbstract
-{
+class CmdDelete : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdDelete(MainWindow &mainWindow,
-            Document &document,
+  CmdDelete(MainWindow &mainWindow, Document &document,
             const QStringList &selectedPointIdentifiers);
 
   /// Constructor for parsing error report file xml
-  CmdDelete(MainWindow &mainWindow,
-            Document &document,
-            const QString &cmdDescription,
-            QXmlStreamReader &reader);
+  CmdDelete(MainWindow &mainWindow, Document &document,
+            const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdDelete();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdDelete();

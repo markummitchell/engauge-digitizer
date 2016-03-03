@@ -8,22 +8,21 @@
 class DocumentModelCoords;
 class Point;
 
-/// Callback for sanity checking the screen and graph coordinates of an axis point, before it is added to the axes curve.
-class CallbackCheckAddPointAxis : public CallbackAxisPointsAbstract
-{
+/// Callback for sanity checking the screen and graph coordinates of an axis
+/// point, before it is added to the axes curve.
+class CallbackCheckAddPointAxis : public CallbackAxisPointsAbstract {
 public:
   /// Single constructor.
-  CallbackCheckAddPointAxis(const DocumentModelCoords &modelCoords,
-                            const QPointF &posScreen,
-                            const QPointF &posGraph,
-                            DocumentAxesPointsRequired documentAxesPointsRequired,
-                            bool isXOnly);
+  CallbackCheckAddPointAxis(
+      const DocumentModelCoords &modelCoords, const QPointF &posScreen,
+      const QPointF &posGraph,
+      DocumentAxesPointsRequired documentAxesPointsRequired, bool isXOnly);
 
   /// True if an error occurred during iteration.
-  bool isError () const;
+  bool isError() const;
 
   /// Error message that explains the problem indicated by isError.
-  QString errorMessage () const;
+  QString errorMessage() const;
 
 private:
   CallbackCheckAddPointAxis();

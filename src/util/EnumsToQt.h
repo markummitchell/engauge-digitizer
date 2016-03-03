@@ -7,7 +7,7 @@
 #include <QSysInfo>
 #include <QXmlStreamReader>
 
-extern QColor ColorPaletteToQColor (ColorPalette color);
-extern QString EndianToString (QSysInfo::Endian endian);
+extern QColor ColorPaletteToQColor(ColorPalette color);
+extern QString EndianToString(QSysInfo::Endian endian);
 
 #endif // ENUMS_TO_QT_H

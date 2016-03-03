@@ -16,6 +16,6 @@ enum ColorPalette {
   NUM_PALETTE_COLORS
 };
 
-extern QString colorPaletteToString (ColorPalette colorPalette);
+extern QString colorPaletteToString(ColorPalette colorPalette);
 
 #endif // COLOR_PALETTE_H

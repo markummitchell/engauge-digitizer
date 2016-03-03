@@ -7,17 +7,13 @@
 #include "DlgValidatorAbstract.h"
 
 /// Validator for numeric value expressed as date and/or time
-class DlgValidatorDateTime : public DlgValidatorAbstract
-{
+class DlgValidatorDateTime : public DlgValidatorAbstract {
 public:
   /// Single constructor
-  DlgValidatorDateTime(CoordScale coordScale,
-                       CoordUnitsDate coordUnitsDate,
-                       CoordUnitsTime coordUnitsTime,
-                       QObject *parent = 0);
+  DlgValidatorDateTime(CoordScale coordScale, CoordUnitsDate coordUnitsDate,
+                       CoordUnitsTime coordUnitsTime, QObject *parent = 0);
 
-  virtual QValidator::State validate (QString &input,
-                                      int &pos) const;
+  virtual QValidator::State validate(QString &input, int &pos) const;
 
 private:
   DlgValidatorDateTime();

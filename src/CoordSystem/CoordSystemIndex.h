@@ -5,4 +5,3 @@
 typedef unsigned int CoordSystemIndex;
 
 #endif // COORD_SYSTEM_INDEX_H
-

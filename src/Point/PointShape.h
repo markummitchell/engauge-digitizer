@@ -12,6 +12,6 @@ enum PointShape {
   POINT_SHAPE_X
 };
 
-extern QString pointShapeToString (PointShape pointShape);
+extern QString pointShapeToString(PointShape pointShape);
 
 #endif // POINT_SHAPE_H

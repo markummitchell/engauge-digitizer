@@ -10,6 +10,6 @@ enum BackgroundImage {
   BACKGROUND_IMAGE_FILTERED
 };
 
-extern QString backgroundImageToString (BackgroundImage backgroundImage);
+extern QString backgroundImageToString(BackgroundImage backgroundImage);
 
 #endif // BACKGROUND_IMAGE_H

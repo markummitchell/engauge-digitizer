@@ -5,18 +5,18 @@
 
 class TutorialButton;
 
-/// This class customizes QGraphicsRectItem so it performs a callback after a mouse event
-class TutorialButtonRect : public QGraphicsRectItem
-{
- public:
+/// This class customizes QGraphicsRectItem so it performs a callback after a
+/// mouse event
+class TutorialButtonRect : public QGraphicsRectItem {
+public:
   /// Single constructor
-  TutorialButtonRect (TutorialButton &tutorialButton);
+  TutorialButtonRect(TutorialButton &tutorialButton);
 
   /// Forward mouse event to TutorialButton
-  virtual void mouseReleaseEvent (QGraphicsSceneMouseEvent *event);
+  virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
- private:
-  TutorialButtonRect ();
+private:
+  TutorialButtonRect();
 
   TutorialButton &m_tutorialButton;
 };

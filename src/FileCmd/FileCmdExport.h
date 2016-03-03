@@ -6,15 +6,14 @@
 class QXmlStreamReader;
 
 /// Command for exporting a file
-class FileCmdExport : public FileCmdAbstract
-{
+class FileCmdExport : public FileCmdAbstract {
 public:
   /// Constructor for parsing file script xml
   FileCmdExport(QXmlStreamReader &reader);
 
   virtual ~FileCmdExport();
 
-  virtual void redo (MainWindow &mainWindow);
+  virtual void redo(MainWindow &mainWindow);
 
 private:
   FileCmdExport();

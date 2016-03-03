@@ -11,94 +11,103 @@ class QDataStream;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
-typedef QVector<CoordSystem*> CoordSystems;
+typedef QVector<CoordSystem *> CoordSystems;
 
-/// This class plays the role of context class in a state machine, although the 'states' are actually different
-/// instantiations of the CoordSystem class. At any point in time, one CoordSystem is active (as selected by the user)
-class CoordSystemContext : public CoordSystemInterface
-{
- public:
+/// This class plays the role of context class in a state machine, although the
+/// 'states' are actually different
+/// instantiations of the CoordSystem class. At any point in time, one
+/// CoordSystem is active (as selected by the user)
+class CoordSystemContext : public CoordSystemInterface {
+public:
   /// Default constructor for constructing from opened file
   CoordSystemContext();
 
   ~CoordSystemContext();
 
-  /// Add specified number of coordinate systems to the original one created by the constructor
+  /// Add specified number of coordinate systems to the original one created by
+  /// the constructor
   void addCoordSystems(DocumentAxesPointsRequired documentAxesPointsRequired,
                        unsigned int numberCoordSystemToAdd);
 
-  virtual void addGraphCurveAtEnd (const QString &curveName);
-  virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
-                                                    const QPointF &posGraph,
-                                                    QString &identifier,
-                                                    double ordinal,
-                                                    bool isXOnly);
-  virtual void addPointAxisWithSpecifiedIdentifier (const QPointF &posScreen,
-                                                    const QPointF &posGraph,
+  virtual void addGraphCurveAtEnd(const QString &curveName);
+  virtual void addPointAxisWithGeneratedIdentifier(const QPointF &posScreen,
+                                                   const QPointF &posGraph,
+                                                   QString &identifier,
+                                                   double ordinal,
+                                                   bool isXOnly);
+  virtual void addPointAxisWithSpecifiedIdentifier(const QPointF &posScreen,
+                                                   const QPointF &posGraph,
+                                                   const QString &identifier,
+                                                   double ordinal,
+                                                   bool isXOnly);
+  virtual void addPointGraphWithGeneratedIdentifier(const QString &curveName,
+                                                    const QPointF &posScreen,
+                                                    QString &generatedIentifier,
+                                                    double ordinal);
+  virtual void addPointGraphWithSpecifiedIdentifier(const QString &curveName,
+                                                    const QPointF &posScreen,
                                                     const QString &identifier,
-                                                    double ordinal,
-                                                    bool isXOnly);
-  virtual void addPointGraphWithGeneratedIdentifier (const QString &curveName,
-                                                     const QPointF &posScreen,
-                                                     QString &generatedIentifier,
-                                                     double ordinal);
-  virtual void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
-                                                     const QPointF &posScreen,
-                                                     const QString &identifier,
-                                                     double ordinal);
-  virtual void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
-  virtual void checkAddPointAxis (const QPointF &posScreen,
-                                  const QPointF &posGraph,
-                                  bool &isError,
-                                  QString &errorMessage,
-                                  bool isXOnly);
-  virtual void checkEditPointAxis (const QString &pointIdentifier,
-                                   const QPointF &posScreen,
-                                   const QPointF &posGraph,
-                                   bool &isError,
-                                   QString &errorMessage);
+                                                    double ordinal);
+  virtual void addPointsInCurvesGraphs(CurvesGraphs &curvesGraphs);
+  virtual void checkAddPointAxis(const QPointF &posScreen,
+                                 const QPointF &posGraph, bool &isError,
+                                 QString &errorMessage, bool isXOnly);
+  virtual void checkEditPointAxis(const QString &pointIdentifier,
+                                  const QPointF &posScreen,
+                                  const QPointF &posGraph, bool &isError,
+                                  QString &errorMessage);
 
   /// Current CoordSystem
-  const CoordSystem &coordSystem () const;
+  const CoordSystem &coordSystem() const;
 
   /// Number of CoordSystem
   unsigned int coordSystemCount() const;
 
   /// Index of current CoordSystem
-  CoordSystemIndex coordSystemIndex () const;
+  CoordSystemIndex coordSystemIndex() const;
 
-  virtual const Curve &curveAxes () const;
-  virtual Curve *curveForCurveName (const QString &curveName);
-  virtual const Curve *curveForCurveName (const QString &curveName) const;
-  virtual const CurvesGraphs &curvesGraphs () const;
-  virtual QStringList curvesGraphsNames () const;
-  virtual int curvesGraphsNumPoints (const QString &curveName) const;
-  virtual void editPointAxis (const QPointF &posGraph,
-                              const QString &identifier);
+  virtual const Curve &curveAxes() const;
+  virtual Curve *curveForCurveName(const QString &curveName);
+  virtual const Curve *curveForCurveName(const QString &curveName) const;
+  virtual const CurvesGraphs &curvesGraphs() const;
+  virtual QStringList curvesGraphsNames() const;
+  virtual int curvesGraphsNumPoints(const QString &curveName) const;
+  virtual void editPointAxis(const QPointF &posGraph,
+                             const QString &identifier);
 
   /// True/false if y/x value is empty
-  bool isXOnly (const QString &pointIdentifier) const;
+  bool isXOnly(const QString &pointIdentifier) const;
 
-  virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
-  virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString  &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-  virtual void iterateThroughCurveSegments (const QString &curveName,
-                                            const Functor2wRet<const Point &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-  virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);
-  virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
-  virtual bool loadCurvesFile (const QString &curvesFile);
+  virtual void iterateThroughCurvePointsAxes(
+      const Functor2wRet<const QString &, const Point &, CallbackSearchReturn>
+          &ftorWithCallback);
+  virtual void iterateThroughCurvePointsAxes(
+      const Functor2wRet<const QString &, const Point &, CallbackSearchReturn>
+          &ftorWithCallback) const;
+  virtual void iterateThroughCurveSegments(
+      const QString &curveName,
+      const Functor2wRet<const Point &, const Point &, CallbackSearchReturn>
+          &ftorWithCallback) const;
+  virtual void iterateThroughCurvesPointsGraphs(
+      const Functor2wRet<const QString &, const Point &, CallbackSearchReturn>
+          &ftorWithCallback);
+  virtual void iterateThroughCurvesPointsGraphs(
+      const Functor2wRet<const QString &, const Point &, CallbackSearchReturn>
+          &ftorWithCallback) const;
+  virtual bool loadCurvesFile(const QString &curvesFile);
 
   /// Load from file in pre-version 6 format
-  void loadPreVersion6 (QDataStream &str,
-                        double version);
+  void loadPreVersion6(QDataStream &str, double version);
   /// Load from file in version 6 format, into the single CoordSystem
-  void loadVersion6 (QXmlStreamReader &reader);
-  /// Load one CoordSystem from file in version 7 format, into the most recent CoordSystem which was just created before the call to this method
-  void loadVersion7 (QXmlStreamReader &reader,
-                     DocumentAxesPointsRequired documentAxesPointsRequired);
+  void loadVersion6(QXmlStreamReader &reader);
+  /// Load one CoordSystem from file in version 7 format, into the most recent
+  /// CoordSystem which was just created before the call to this method
+  void loadVersion7(QXmlStreamReader &reader,
+                    DocumentAxesPointsRequired documentAxesPointsRequired);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;
-  virtual DocumentModelCoords modelCoords () const;
+  virtual DocumentModelCoords modelCoords() const;
   virtual CurveStyles modelCurveStyles() const;
   virtual DocumentModelDigitizeCurve modelDigitizeCurve() const;
   virtual DocumentModelExportFormat modelExport() const;
@@ -106,45 +115,47 @@ class CoordSystemContext : public CoordSystemInterface
   virtual DocumentModelGridRemoval modelGridRemoval() const;
   virtual DocumentModelPointMatch modelPointMatch() const;
   virtual DocumentModelSegments modelSegments() const;
-  virtual void movePoint (const QString &pointIdentifier,
-                          const QPointF &deltaScreen);
-  virtual int nextOrdinalForCurve (const QString &curveName) const;
-  virtual QPointF positionGraph (const QString &pointIdentifier) const;
-  virtual QPointF positionScreen (const QString &pointIdentifier) const;
-  virtual void print () const;
-  virtual void printStream (QString indentation,
-                            QTextStream &str) const;
-  virtual QString reasonForUnsuccessfulRead () const;
-  virtual void removePointAxis (const QString &identifier);
-  virtual void removePointGraph (const QString &identifier);
-  virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void movePoint(const QString &pointIdentifier,
+                         const QPointF &deltaScreen);
+  virtual int nextOrdinalForCurve(const QString &curveName) const;
+  virtual QPointF positionGraph(const QString &pointIdentifier) const;
+  virtual QPointF positionScreen(const QString &pointIdentifier) const;
+  virtual void print() const;
+  virtual void printStream(QString indentation, QTextStream &str) const;
+  virtual QString reasonForUnsuccessfulRead() const;
+  virtual void removePointAxis(const QString &identifier);
+  virtual void removePointGraph(const QString &identifier);
+  virtual void removePointsInCurvesGraphs(CurvesGraphs &curvesGraphs);
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Index of current CoordSystem
-  void setCoordSystemIndex (CoordSystemIndex coordSystemIndex);
+  void setCoordSystemIndex(CoordSystemIndex coordSystemIndex);
 
   /// Applies to current coordinate system
-  void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
-                        const CurvesGraphs &curvesGraphs);
-  virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs); // Applies to current coordinate system
-  virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
-  virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
-  virtual void setModelCoords (const DocumentModelCoords &modelCoords);
+  void setCurvesGraphs(CoordSystemIndex coordSystemIndex,
+                       const CurvesGraphs &curvesGraphs);
+  virtual void setCurvesGraphs(
+      const CurvesGraphs &curvesGraphs); // Applies to current coordinate system
+  virtual void
+  setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
+  virtual void
+  setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
+  virtual void setModelCoords(const DocumentModelCoords &modelCoords);
   virtual void setModelCurveStyles(const CurveStyles &modelCurveStyles);
-  virtual void setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
+  virtual void
+  setModelDigitizeCurve(const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void setModelExport(const DocumentModelExportFormat &modelExport);
-  virtual void setModelGeneral (const DocumentModelGeneral &modelGeneral);
-  virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
+  virtual void setModelGeneral(const DocumentModelGeneral &modelGeneral);
+  virtual void
+  setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
-  virtual bool successfulRead () const;
-  virtual void updatePointOrdinals (const Transformation &transformation);
+  virtual bool successfulRead() const;
+  virtual void updatePointOrdinals(const Transformation &transformation);
 
- private:
-
+private:
   CoordSystemIndex m_coordSystemIndex;
   CoordSystems m_coordSystems;
-
 };
 
 #endif // COORD_SYSTEM_CONTEXT_H

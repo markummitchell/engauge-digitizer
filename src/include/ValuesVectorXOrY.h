@@ -3,7 +3,8 @@
 
 #include <QMap>
 
-// Save values into container that preserves order by key (QMap). These are common to all included curves
+// Save values into container that preserves order by key (QMap). These are
+// common to all included curves
 // QMap is for fast random access
 typedef QMap<double, bool> ValuesVectorXOrY;
 

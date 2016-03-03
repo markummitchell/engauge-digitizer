@@ -2,18 +2,16 @@
 #include "FormatDateTime.h"
 #include "Logger.h"
 
-FormatDateTime::FormatDateTime()
-{
+FormatDateTime::FormatDateTime() {
   loadFormatsFormat();
   loadFormatsParseAcceptable();
   loadFormatsParseIncomplete();
 }
 
-bool FormatDateTime::ambiguityBetweenDateAndTime (CoordUnitsDate coordUnitsDate,
-                                                  CoordUnitsTime coordUnitsTime,
-                                                  const QString &string) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::ambiguityBetweenDateAndTime";
+bool FormatDateTime::ambiguityBetweenDateAndTime(CoordUnitsDate coordUnitsDate,
+                                                 CoordUnitsTime coordUnitsTime,
+                                                 const QString &string) const {
+  LOG4CPP_INFO_S((*mainCat)) << "FormatDateTime::ambiguityBetweenDateAndTime";
 
   bool ambiguous = false;
 
@@ -22,11 +20,12 @@ bool FormatDateTime::ambiguityBetweenDateAndTime (CoordUnitsDate coordUnitsDate,
       coordUnitsTime != COORD_UNITS_TIME_SKIP) {
 
     // See if there is just a single number
-    QStringList fields = string.trimmed().split(QRegExp ("[/- :]"));
+    QStringList fields = string.trimmed().split(QRegExp("[/- :]"));
 
     if (fields.count() == 1) {
 
-      // There is a single number. Since there are no attached delimiters to differentiate a date versus
+      // There is a single number. Since there are no attached delimiters to
+      // differentiate a date versus
       // a time, this means the number is ambiguous
       ambiguous = true;
     }
@@ -35,38 +34,40 @@ bool FormatDateTime::ambiguityBetweenDateAndTime (CoordUnitsDate coordUnitsDate,
   return ambiguous;
 }
 
-void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
-                                     const FormatsTime &formatsTimeAll,
-                                     CoordUnitsDate coordUnitsDate,
-                                     CoordUnitsTime coordUnitsTime,
-                                     const QString &string,
-                                     bool useQDateTimeElseQRegExp,
-                                     double &value,
-                                     bool &success) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup";
+void FormatDateTime::dateTimeLookup(const FormatsDate &formatsDateAll,
+                                    const FormatsTime &formatsTimeAll,
+                                    CoordUnitsDate coordUnitsDate,
+                                    CoordUnitsTime coordUnitsTime,
+                                    const QString &string,
+                                    bool useQDateTimeElseQRegExp, double &value,
+                                    bool &success) const {
+  LOG4CPP_INFO_S((*mainCat)) << "FormatDateTime::dateTimeLookup";
 
   success = false;
 
-  ENGAUGE_ASSERT (formatsDateAll.contains (coordUnitsDate));
-  ENGAUGE_ASSERT (formatsTimeAll.contains (coordUnitsTime));
+  ENGAUGE_ASSERT(formatsDateAll.contains(coordUnitsDate));
+  ENGAUGE_ASSERT(formatsTimeAll.contains(coordUnitsTime));
 
-  QStringList formatsDate = formatsDateAll [coordUnitsDate];
-  QStringList formatsTime = formatsTimeAll [coordUnitsTime];
+  QStringList formatsDate = formatsDateAll[coordUnitsDate];
+  QStringList formatsTime = formatsTimeAll[coordUnitsTime];
 
   // Loop through the legal date/time combinations
   QStringList::const_iterator itrDate, itrTime;
   bool iterating = true;
-  for (itrDate = formatsDate.begin(); itrDate != formatsDate.end() && iterating; itrDate++) {
+  for (itrDate = formatsDate.begin(); itrDate != formatsDate.end() && iterating;
+       itrDate++) {
 
     QString formatDate = *itrDate;
 
-    for (itrTime = formatsTime.begin(); itrTime != formatsTime.end() && iterating; itrTime++) {
+    for (itrTime = formatsTime.begin();
+         itrTime != formatsTime.end() && iterating; itrTime++) {
 
       QString formatTime = *itrTime;
 
-      // Insert space as separator only if needed. Do not use trim around here since formatDate may or may not end in a space
-      QString separator = (!formatDate.isEmpty() && !formatTime.isEmpty() ? " " : "");
+      // Insert space as separator only if needed. Do not use trim around here
+      // since formatDate may or may not end in a space
+      QString separator =
+          (!formatDate.isEmpty() && !formatTime.isEmpty() ? " " : "");
 
       QString formatDateTime = formatDate + separator + formatTime;
 
@@ -75,36 +76,35 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
         // Try parsing according to the current format
         if (useQDateTimeElseQRegExp) {
 
-          QDateTime dt = QDateTime::fromString (string,
-                                                formatDateTime);
+          QDateTime dt = QDateTime::fromString(string, formatDateTime);
 
-          if (dt.isValid() && !ambiguityBetweenDateAndTime (coordUnitsDate,
-                                                            coordUnitsTime,
-                                                            string)) {
+          if (dt.isValid() &&
+              !ambiguityBetweenDateAndTime(coordUnitsDate, coordUnitsTime,
+                                           string)) {
 
             success = true;
             value = dt.toTime_t();
             iterating = false; // Stop iterating
 
-            LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
-                                        << " string=" << string.toLatin1().data()
-                                        << " qDateTimeFormatMatched=" << formatDateTime.toLatin1().data()
-                                        << " value=" << value
-                                        << " stringQDateTime=" << dt.toString().toLatin1().data();
-
+            LOG4CPP_INFO_S((*mainCat))
+                << "FormatDateTime::dateTimeLookup"
+                << " string=" << string.toLatin1().data()
+                << " qDateTimeFormatMatched="
+                << formatDateTime.toLatin1().data() << " value=" << value
+                << " stringQDateTime=" << dt.toString().toLatin1().data();
           }
         } else {
 
-          QRegExp reg (formatDateTime);
+          QRegExp reg(formatDateTime);
           if (reg.exactMatch(string)) {
 
             success = true; // Note that value does not get set in QRegExp case
             iterating = false; // Stop iterating
 
-            LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
-                                        << " string=" << string.toLatin1().data()
-                                        << " regExpMatched=" << formatDateTime.toLatin1().data();
-
+            LOG4CPP_INFO_S((*mainCat))
+                << "FormatDateTime::dateTimeLookup"
+                << " string=" << string.toLatin1().data()
+                << " regExpMatched=" << formatDateTime.toLatin1().data();
           }
         }
       }
@@ -112,48 +112,49 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
   }
 }
 
-QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
-                                      CoordUnitsTime coordUnitsTime,
-                                      double value) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::formatOutput"
-                              << " value=" << value;
+QString FormatDateTime::formatOutput(CoordUnitsDate coordUnitsDate,
+                                     CoordUnitsTime coordUnitsTime,
+                                     double value) const {
+  LOG4CPP_INFO_S((*mainCat)) << "FormatDateTime::formatOutput"
+                             << " value=" << value;
 
-  ENGAUGE_ASSERT (m_formatsDateFormat.contains (coordUnitsDate));
-  ENGAUGE_ASSERT (m_formatsTimeFormat.contains (coordUnitsTime));
+  ENGAUGE_ASSERT(m_formatsDateFormat.contains(coordUnitsDate));
+  ENGAUGE_ASSERT(m_formatsTimeFormat.contains(coordUnitsTime));
 
-  QString format = m_formatsDateFormat [coordUnitsDate] + " " + m_formatsTimeFormat [coordUnitsTime];
+  QString format = m_formatsDateFormat[coordUnitsDate] + " " +
+                   m_formatsTimeFormat[coordUnitsTime];
   format = format.trimmed();
 
-  QDateTime dt = QDateTime::fromTime_t (value);
+  QDateTime dt = QDateTime::fromTime_t(value);
 
-  return dt.toString (format);
+  return dt.toString(format);
 }
 
-void FormatDateTime::loadFormatsFormat()
-{
-  m_formatsDateFormat [COORD_UNITS_DATE_SKIP] = "";
-  m_formatsDateFormat [COORD_UNITS_DATE_MONTH_DAY_YEAR] = "MM/dd/yyyy";
-  m_formatsDateFormat [COORD_UNITS_DATE_DAY_MONTH_YEAR] = "dd/MM/yyyy";
-  m_formatsDateFormat [COORD_UNITS_DATE_YEAR_MONTH_DAY] = "yyyy/MM/dd";
+void FormatDateTime::loadFormatsFormat() {
+  m_formatsDateFormat[COORD_UNITS_DATE_SKIP] = "";
+  m_formatsDateFormat[COORD_UNITS_DATE_MONTH_DAY_YEAR] = "MM/dd/yyyy";
+  m_formatsDateFormat[COORD_UNITS_DATE_DAY_MONTH_YEAR] = "dd/MM/yyyy";
+  m_formatsDateFormat[COORD_UNITS_DATE_YEAR_MONTH_DAY] = "yyyy/MM/dd";
 
-  ENGAUGE_ASSERT (m_formatsDateFormat.count () == NUM_COORD_UNITS_DATE);
+  ENGAUGE_ASSERT(m_formatsDateFormat.count() == NUM_COORD_UNITS_DATE);
 
-  m_formatsTimeFormat [COORD_UNITS_TIME_SKIP] = "";
-  m_formatsTimeFormat [COORD_UNITS_TIME_HOUR_MINUTE] = "hh/mm";
-  m_formatsTimeFormat [COORD_UNITS_TIME_HOUR_MINUTE_SECOND] = "hh:mm:ss";
+  m_formatsTimeFormat[COORD_UNITS_TIME_SKIP] = "";
+  m_formatsTimeFormat[COORD_UNITS_TIME_HOUR_MINUTE] = "hh/mm";
+  m_formatsTimeFormat[COORD_UNITS_TIME_HOUR_MINUTE_SECOND] = "hh:mm:ss";
 
-  ENGAUGE_ASSERT (m_formatsTimeFormat.count () == NUM_COORD_UNITS_TIME);
+  ENGAUGE_ASSERT(m_formatsTimeFormat.count() == NUM_COORD_UNITS_TIME);
 }
 
-void FormatDateTime::loadFormatsParseAcceptable()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::loadFormatsParseAcceptable";
+void FormatDateTime::loadFormatsParseAcceptable() {
+  LOG4CPP_INFO_S((*mainCat)) << "FormatDateTime::loadFormatsParseAcceptable";
 
-  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, yearMonth, yearMonthDay;
+  QStringList skip, dayMonth, dayMonthYear, monthDay, monthDayYear, yearMonth,
+      yearMonthDay;
 
-  // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time respectively even when skipped,
-  // although there can be ambiguity with between COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
+  // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time
+  // respectively even when skipped,
+  // although there can be ambiguity with between
+  // COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
   skip << "";
 
   dayMonth << "d/M"
@@ -273,15 +274,21 @@ void FormatDateTime::loadFormatsParseAcceptable()
                << "yyyy-MMMM-dd"
                << "yyyy MMMM dd";
 
-  // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as month/day
-  m_formatsDateParseAcceptable [COORD_UNITS_DATE_SKIP] = skip + monthDay + monthDayYear + yearMonthDay;
-  m_formatsDateParseAcceptable [COORD_UNITS_DATE_MONTH_DAY_YEAR] = skip + monthDay + monthDayYear + yearMonthDay;
-  m_formatsDateParseAcceptable [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + dayMonth + dayMonthYear + yearMonthDay;
-  m_formatsDateParseAcceptable [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + yearMonth + yearMonthDay;
+  // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as
+  // month/day
+  m_formatsDateParseAcceptable[COORD_UNITS_DATE_SKIP] =
+      skip + monthDay + monthDayYear + yearMonthDay;
+  m_formatsDateParseAcceptable[COORD_UNITS_DATE_MONTH_DAY_YEAR] =
+      skip + monthDay + monthDayYear + yearMonthDay;
+  m_formatsDateParseAcceptable[COORD_UNITS_DATE_DAY_MONTH_YEAR] =
+      skip + dayMonth + dayMonthYear + yearMonthDay;
+  m_formatsDateParseAcceptable[COORD_UNITS_DATE_YEAR_MONTH_DAY] =
+      skip + yearMonth + yearMonthDay;
 
-  ENGAUGE_ASSERT (m_formatsDateParseAcceptable.count () == NUM_COORD_UNITS_DATE);
+  ENGAUGE_ASSERT(m_formatsDateParseAcceptable.count() == NUM_COORD_UNITS_DATE);
 
-  QStringList hour, hourMinute, hourMinuteSecond, hourMinutePm, hourMinuteSecondPm;
+  QStringList hour, hourMinute, hourMinuteSecond, hourMinutePm,
+      hourMinuteSecondPm;
 
   hour << "hh";
   hourMinute << "hh:mm";
@@ -295,24 +302,33 @@ void FormatDateTime::loadFormatsParseAcceptable()
                      << "hh:mm:ssa"
                      << "hh:mm:ss a";
 
-  m_formatsTimeParseAcceptable [COORD_UNITS_TIME_SKIP] = skip + hour + hourMinute + hourMinuteSecond + hourMinutePm + hourMinuteSecondPm;
-  m_formatsTimeParseAcceptable [COORD_UNITS_TIME_HOUR_MINUTE] = skip + hour + hourMinute + hourMinutePm + hourMinuteSecond + hourMinuteSecondPm;
-  m_formatsTimeParseAcceptable [COORD_UNITS_TIME_HOUR_MINUTE_SECOND] = skip + hour + hourMinute + hourMinutePm + hourMinuteSecond + hourMinuteSecondPm;
+  m_formatsTimeParseAcceptable[COORD_UNITS_TIME_SKIP] =
+      skip + hour + hourMinute + hourMinuteSecond + hourMinutePm +
+      hourMinuteSecondPm;
+  m_formatsTimeParseAcceptable[COORD_UNITS_TIME_HOUR_MINUTE] =
+      skip + hour + hourMinute + hourMinutePm + hourMinuteSecond +
+      hourMinuteSecondPm;
+  m_formatsTimeParseAcceptable[COORD_UNITS_TIME_HOUR_MINUTE_SECOND] =
+      skip + hour + hourMinute + hourMinutePm + hourMinuteSecond +
+      hourMinuteSecondPm;
 
-  ENGAUGE_ASSERT (m_formatsTimeParseAcceptable.count () == NUM_COORD_UNITS_TIME);
+  ENGAUGE_ASSERT(m_formatsTimeParseAcceptable.count() == NUM_COORD_UNITS_TIME);
 }
 
-void FormatDateTime::loadFormatsParseIncomplete()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::loadFormatsParseIncomplete";
+void FormatDateTime::loadFormatsParseIncomplete() {
+  LOG4CPP_INFO_S((*mainCat)) << "FormatDateTime::loadFormatsParseIncomplete";
 
-  QStringList skip, day, dayMonth, month, monthDay, monthDayYear, year, yearMonth, yearMonthDay;
+  QStringList skip, day, dayMonth, month, monthDay, monthDayYear, year,
+      yearMonth, yearMonthDay;
 
-  // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time respectively even when skipped,
-  // although there can be ambiguity with between COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
+  // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time
+  // respectively even when skipped,
+  // although there can be ambiguity with between
+  // COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
   skip << "";
 
-  // IMPORTANT! Be sure to include complete date values since the date, which goes before the time, will be
+  // IMPORTANT! Be sure to include complete date values since the date, which
+  // goes before the time, will be
   //            complete when the time is getting
   day << "\\d{1,2}"
       << "\\d{1,2}/"
@@ -370,16 +386,23 @@ void FormatDateTime::loadFormatsParseIncomplete()
                << "\\d{4}/[a-zA-Z]{1,12}/\\d{1,2}"
                << "\\d{4}-[a-zA-Z]{1,12}-\\d{1,2}";
 
-  // For every entry, the possible states leading up to the Acceptable states in m_formatsDateParseIncomplete are all included.
-  // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as month/day.
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_SKIP] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_MONTH_DAY_YEAR] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + day + dayMonth + year + yearMonth + yearMonthDay;
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + year + yearMonth + yearMonthDay;
+  // For every entry, the possible states leading up to the Acceptable states in
+  // m_formatsDateParseIncomplete are all included.
+  // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as
+  // month/day.
+  m_formatsDateParseIncomplete[COORD_UNITS_DATE_SKIP] =
+      skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
+  m_formatsDateParseIncomplete[COORD_UNITS_DATE_MONTH_DAY_YEAR] =
+      skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
+  m_formatsDateParseIncomplete[COORD_UNITS_DATE_DAY_MONTH_YEAR] =
+      skip + day + dayMonth + year + yearMonth + yearMonthDay;
+  m_formatsDateParseIncomplete[COORD_UNITS_DATE_YEAR_MONTH_DAY] =
+      skip + year + yearMonth + yearMonthDay;
 
-  ENGAUGE_ASSERT (m_formatsDateParseIncomplete.count () == NUM_COORD_UNITS_DATE);
+  ENGAUGE_ASSERT(m_formatsDateParseIncomplete.count() == NUM_COORD_UNITS_DATE);
 
-  QStringList hour, hourMinute, hourMinuteAmPm, hourMinuteSecond,  hourMinuteSecondAmPm;
+  QStringList hour, hourMinute, hourMinuteAmPm, hourMinuteSecond,
+      hourMinuteSecondAmPm;
 
   hour << "\\d{1,2}"
        << "\\d{1,2}:";
@@ -391,32 +414,30 @@ void FormatDateTime::loadFormatsParseIncomplete()
                    << "\\d{1,2}:\\d{1,2}:\\d{1,2} ";
   hourMinuteSecondAmPm << "\\d{1,2}:\\d{1,2}:\\d{1,2} [aApP]";
 
-  // For every entry, the possible states leading up to the Acceptable states in m_formatsTimeParseIncomplete are all included.
-  m_formatsTimeParseIncomplete [COORD_UNITS_TIME_SKIP] = skip +
-                                                         hour +
-                                                         hourMinute + hourMinuteAmPm +
-                                                         hourMinuteSecond + hourMinuteSecondAmPm;
-  m_formatsTimeParseIncomplete [COORD_UNITS_TIME_HOUR_MINUTE] = skip +
-                                                                hour +
-                                                                hourMinute + hourMinuteAmPm +
-                                                                hourMinuteSecond + hourMinuteSecondAmPm;
-  m_formatsTimeParseIncomplete [COORD_UNITS_TIME_HOUR_MINUTE_SECOND] = skip +
-                                                                       hour +
-                                                                       hourMinute + hourMinuteAmPm +
-                                                                       hourMinuteSecond + hourMinuteSecondAmPm;
+  // For every entry, the possible states leading up to the Acceptable states in
+  // m_formatsTimeParseIncomplete are all included.
+  m_formatsTimeParseIncomplete[COORD_UNITS_TIME_SKIP] =
+      skip + hour + hourMinute + hourMinuteAmPm + hourMinuteSecond +
+      hourMinuteSecondAmPm;
+  m_formatsTimeParseIncomplete[COORD_UNITS_TIME_HOUR_MINUTE] =
+      skip + hour + hourMinute + hourMinuteAmPm + hourMinuteSecond +
+      hourMinuteSecondAmPm;
+  m_formatsTimeParseIncomplete[COORD_UNITS_TIME_HOUR_MINUTE_SECOND] =
+      skip + hour + hourMinute + hourMinuteAmPm + hourMinuteSecond +
+      hourMinuteSecondAmPm;
 
-  ENGAUGE_ASSERT (m_formatsTimeParseIncomplete.count () == NUM_COORD_UNITS_TIME);
+  ENGAUGE_ASSERT(m_formatsTimeParseIncomplete.count() == NUM_COORD_UNITS_TIME);
 }
 
-QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
-                                              CoordUnitsTime coordUnitsTime,
-                                              const QString &stringUntrimmed,
-                                              double &value) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::parseInput"
-                              << " date=" << coordUnitsDateToString (coordUnitsDate).toLatin1().data()
-                              << " time=" << coordUnitsTimeToString (coordUnitsTime).toLatin1().data()
-                              << " string=" << stringUntrimmed.toLatin1().data();
+QValidator::State FormatDateTime::parseInput(CoordUnitsDate coordUnitsDate,
+                                             CoordUnitsTime coordUnitsTime,
+                                             const QString &stringUntrimmed,
+                                             double &value) const {
+  LOG4CPP_INFO_S((*mainCat))
+      << "FormatDateTime::parseInput"
+      << " date=" << coordUnitsDateToString(coordUnitsDate).toLatin1().data()
+      << " time=" << coordUnitsTimeToString(coordUnitsTime).toLatin1().data()
+      << " string=" << stringUntrimmed.toLatin1().data();
 
   const bool USE_QREGEXP = true, DO_NOT_USE_QREGEXP = false;
 
@@ -433,33 +454,22 @@ QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
 
     // First see if value is acceptable
     bool success = false;
-    dateTimeLookup (m_formatsDateParseAcceptable,
-                    m_formatsTimeParseAcceptable,
-                    coordUnitsDate,
-                    coordUnitsTime,
-                    string,
-                    USE_QREGEXP,
-                    value,
-                    success);
+    dateTimeLookup(m_formatsDateParseAcceptable, m_formatsTimeParseAcceptable,
+                   coordUnitsDate, coordUnitsTime, string, USE_QREGEXP, value,
+                   success);
     if (success) {
-      
+
       state = QValidator::Acceptable;
-      
+
     } else {
-      
+
       // Not acceptable, but perhaps it is just incomplete
-      dateTimeLookup (m_formatsDateParseIncomplete,
-                    m_formatsTimeParseIncomplete,
-                      coordUnitsDate,
-                      coordUnitsTime,
-                      string,
-                      DO_NOT_USE_QREGEXP,
-                      value,
-                      success);
+      dateTimeLookup(m_formatsDateParseIncomplete, m_formatsTimeParseIncomplete,
+                     coordUnitsDate, coordUnitsTime, string, DO_NOT_USE_QREGEXP,
+                     value, success);
       if (success) {
-        
+
         state = QValidator::Intermediate;
-        
       }
     }
   }

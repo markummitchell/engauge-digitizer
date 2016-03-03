@@ -12,6 +12,6 @@ enum ColorFilterMode {
   NUM_COLOR_FILTER_MODES
 };
 
-extern QString colorFilterModeToString (ColorFilterMode colorFilterMode);
+extern QString colorFilterModeToString(ColorFilterMode colorFilterMode);
 
 #endif // COLOR_FILTER_MODE_H

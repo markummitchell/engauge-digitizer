@@ -6,30 +6,29 @@
 #include "LineStyle.h"
 #include "PointStyle.h"
 
-/// Internal settings for one curve, such as LineStyle, PointStyle and CurveFilter. These settings are used only
+/// Internal settings for one curve, such as LineStyle, PointStyle and
+/// CurveFilter. These settings are used only
 /// internally by Curve, and are not related to the DlgSettings classes at all
-class CurveSettingsInt
-{
- public:
+class CurveSettingsInt {
+public:
   /// Single constructor.
   CurveSettingsInt(const ColorFilterSettings &colorFilterSettings,
-                   const PointStyle &pointStyle,
-                   const LineStyle &lineStyle,
+                   const PointStyle &pointStyle, const LineStyle &lineStyle,
                    CurveConnectAs curveConnectAs);
 
   /// Get method for connection method.
-  CurveConnectAs curveConnectAs () const;
+  CurveConnectAs curveConnectAs() const;
 
   /// Get method for color filter.
-  ColorFilterSettings colorFilterSettings () const;
+  ColorFilterSettings colorFilterSettings() const;
 
   /// Get method for line style.
-  LineStyle lineStyle () const;
+  LineStyle lineStyle() const;
 
   /// Get method for point style.
-  PointStyle pointStyle () const;
+  PointStyle pointStyle() const;
 
- private:
+private:
   CurveSettingsInt();
 
   ColorFilterSettings m_colorFilterSettings;

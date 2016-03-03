@@ -11,8 +11,6 @@ enum CurveConnectAs {
   CONNECT_SKIP_FOR_AXIS_CURVE
 };
 
-extern QString curveConnectAsToString (CurveConnectAs curveConnectAs);
+extern QString curveConnectAsToString(CurveConnectAs curveConnectAs);
 
 #endif // CURVE_CONNECT_AS
-
-

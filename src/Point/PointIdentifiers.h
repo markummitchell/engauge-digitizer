@@ -9,9 +9,9 @@ class QXmlStreamWriter;
 
 typedef QHash<QString, bool> PointIdentifiersInternal;
 
-/// Hash table class that tracks point identifiers as the key, with a corresponding boolean value
-class PointIdentifiers
-{
+/// Hash table class that tracks point identifiers as the key, with a
+/// corresponding boolean value
+class PointIdentifiers {
 public:
   /// Single constructor
   PointIdentifiers();
@@ -22,25 +22,24 @@ public:
   /// Number of entries
   int count() const;
 
-  /// Get key for index. This involves copying of all the keys and is therefore slower than using key lookup, so
+  /// Get key for index. This involves copying of all the keys and is therefore
+  /// slower than using key lookup, so
   /// should not be used for extremely numerous point sets
-  QString getKey (int i) const;
+  QString getKey(int i) const;
 
   /// Get value for key
-  bool getValue (const QString &pointIdentifier) const;
+  bool getValue(const QString &pointIdentifier) const;
 
   /// Load from serialized xml
-  void loadXml (QXmlStreamReader &reader);
+  void loadXml(QXmlStreamReader &reader);
 
   /// Serialize table to xml
-  void saveXml (QXmlStreamWriter &writer) const;
+  void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set key/value pair
-  void setKeyValue (const QString &pointIdentifier,
-                    bool value);
+  void setKeyValue(const QString &pointIdentifier, bool value);
 
 private:
-
   PointIdentifiersInternal m_pointIdentifiers;
 };
 

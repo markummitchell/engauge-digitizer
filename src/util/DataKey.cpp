@@ -1,7 +1,6 @@
 #include "DataKey.h"
 
-QString dataKeyToString (DataKey dataKey)
-{
+QString dataKeyToString(DataKey dataKey) {
   switch (dataKey) {
 
   case DATA_KEY_IDENTIFIER:

@@ -21,34 +21,37 @@ class GraphicsView;
 class Transformation;
 
 /// Background image state machine state base class
-class BackgroundStateAbstractBase
-{
- public:
+class BackgroundStateAbstractBase {
+public:
   /// Single constructor
   BackgroundStateAbstractBase(BackgroundStateContext &context,
                               GraphicsScene &scene);
   ~BackgroundStateAbstractBase();
 
-  /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state.
+  /// Method that is called at the exact moment a state is entered. Typically
+  /// called just after end for the previous state.
   virtual void begin() = 0;
 
-  /// Reference to the BackgroundStateContext that contains all the BackgroundStateAbstractBase subclasses, without const.
+  /// Reference to the BackgroundStateContext that contains all the
+  /// BackgroundStateAbstractBase subclasses, without const.
   BackgroundStateContext &context();
 
-  /// Reference to the BackgroundStateContext that contains all the BackgroundStateAbstractBase subclasses, without const.
+  /// Reference to the BackgroundStateContext that contains all the
+  /// BackgroundStateAbstractBase subclasses, without const.
   const BackgroundStateContext &context() const;
 
-  /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
+  /// Method that is called at the exact moment a state is exited. Typically
+  /// called just before begin for the next state
   virtual void end() = 0;
 
   /// Zoom so background fills the window
-  virtual void fitInView (GraphicsView &view) = 0;
+  virtual void fitInView(GraphicsView &view) = 0;
 
   /// Image for the current state
-  QImage image () const;
+  QImage image() const;
 
   /// Graphics image item for the current state
-  QGraphicsPixmapItem &imageItem () const;
+  QGraphicsPixmapItem &imageItem() const;
 
   /// Reference to the GraphicsScene, without const.
   GraphicsScene &scene();
@@ -57,44 +60,50 @@ class BackgroundStateAbstractBase
   const GraphicsScene &scene() const;
 
   /// Update the currently selected curve name
-  virtual void setCurveSelected (const Transformation &transformation,
-                                 const DocumentModelGridRemoval &modelGridRemoval,
-                                 const DocumentModelColorFilter &colorFilter,
-                                 const QString &curveSelected) = 0;
+  virtual void
+  setCurveSelected(const Transformation &transformation,
+                   const DocumentModelGridRemoval &modelGridRemoval,
+                   const DocumentModelColorFilter &colorFilter,
+                   const QString &curveSelected) = 0;
 
-  /// Update the image for this state, after the leaf class processes it appropriately
-  virtual void setPixmap (const Transformation &transformation,
-                          const DocumentModelGridRemoval &modelGridRemoval,
-                          const DocumentModelColorFilter &modelColorFilter,
-                          const QPixmap &pixmap) = 0;
+  /// Update the image for this state, after the leaf class processes it
+  /// appropriately
+  virtual void setPixmap(const Transformation &transformation,
+                         const DocumentModelGridRemoval &modelGridRemoval,
+                         const DocumentModelColorFilter &modelColorFilter,
+                         const QPixmap &pixmap) = 0;
 
   /// State name for debugging
   virtual QString state() const = 0;
 
   /// Apply color filter settings
-  virtual void updateColorFilter (const Transformation &transformation,
-                                  const DocumentModelGridRemoval &modelGridRemoval,
-                                  const DocumentModelColorFilter &modelColorFilter) = 0;
+  virtual void
+  updateColorFilter(const Transformation &transformation,
+                    const DocumentModelGridRemoval &modelGridRemoval,
+                    const DocumentModelColorFilter &modelColorFilter) = 0;
 
- protected:
-
+protected:
   /// Show/hide background image
-  void setImageVisible (bool visible);
+  void setImageVisible(bool visible);
 
-  /// Save the image for this state after it has been processed by the leaf class
-  void setProcessedPixmap (const QPixmap &pixmap);
+  /// Save the image for this state after it has been processed by the leaf
+  /// class
+  void setProcessedPixmap(const QPixmap &pixmap);
 
- private:
+private:
   BackgroundStateAbstractBase();
 
   BackgroundStateContext &m_context;
   GraphicsScene &m_scene;
 
-  // Each state has its own image, although only one is shown at a time. This is null if an image has not been defined yet,
-  // so we can eliminate a dependency on the ordering of the state transitions and the update of the image by setPixmap
+  // Each state has its own image, although only one is shown at a time. This is
+  // null if an image has not been defined yet,
+  // so we can eliminate a dependency on the ordering of the state transitions
+  // and the update of the image by setPixmap
   QGraphicsPixmapItem *m_imageItem;
 
-  QImage m_image; // Original image. This is stored in addition to m_imageItem since m_imageItem cannot be used when invisible
+  QImage m_image; // Original image. This is stored in addition to m_imageItem
+                  // since m_imageItem cannot be used when invisible
 };
 
 #endif // BACKGROUND_STATE_ABSTRACT_BASE_H

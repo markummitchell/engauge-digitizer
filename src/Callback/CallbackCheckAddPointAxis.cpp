@@ -4,31 +4,24 @@
 
 extern const QString AXIS_CURVE_NAME;
 
-CallbackCheckAddPointAxis::CallbackCheckAddPointAxis(const DocumentModelCoords &modelCoords,
-                                                     const QPointF &posScreen,
-                                                     const QPointF &posGraph,
-                                                     DocumentAxesPointsRequired documentAxesPointsRequired,
-                                                     bool isXOnly) :
-  CallbackAxisPointsAbstract (modelCoords,
-                              documentAxesPointsRequired)
-{
-  // Insert an extra Point as if it already was in the axes curve. This is done before iterating rather
-  // than after since there is no safe place to do this afterwards (isError and errorMessage may be called more than once)
-  Point point (AXIS_CURVE_NAME,
-               posScreen,
-               posGraph,
-               isXOnly);
+CallbackCheckAddPointAxis::CallbackCheckAddPointAxis(
+    const DocumentModelCoords &modelCoords, const QPointF &posScreen,
+    const QPointF &posGraph,
+    DocumentAxesPointsRequired documentAxesPointsRequired, bool isXOnly)
+    : CallbackAxisPointsAbstract(modelCoords, documentAxesPointsRequired) {
+  // Insert an extra Point as if it already was in the axes curve. This is done
+  // before iterating rather
+  // than after since there is no safe place to do this afterwards (isError and
+  // errorMessage may be called more than once)
+  Point point(AXIS_CURVE_NAME, posScreen, posGraph, isXOnly);
 
-  callback (AXIS_CURVE_NAME,
-            point);
+  callback(AXIS_CURVE_NAME, point);
 }
 
-bool CallbackCheckAddPointAxis::isError () const
-{
-  return CallbackAxisPointsAbstract::isError ();
+bool CallbackCheckAddPointAxis::isError() const {
+  return CallbackAxisPointsAbstract::isError();
 }
 
-QString CallbackCheckAddPointAxis::errorMessage () const
-{
-  return CallbackAxisPointsAbstract::errorMessage ();
+QString CallbackCheckAddPointAxis::errorMessage() const {
+  return CallbackAxisPointsAbstract::errorMessage();
 }

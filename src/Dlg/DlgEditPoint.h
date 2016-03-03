@@ -21,48 +21,46 @@ class QVBoxLayout;
 class Transformation;
 
 /// Dialog box for editing the information of one axis point.
-class DlgEditPoint : public QDialog
-{
+class DlgEditPoint : public QDialog {
   Q_OBJECT;
 
 public:
-  /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
-  /// If initial values are unspecified then the value fields will be initially empty
-  DlgEditPoint (MainWindow &mainWindow,
-                DigitizeStateAbstractBase &digitizeState,
-                const DocumentModelCoords &modelCoords,
-                const MainWindowModel &modelMainWindow,
-                const QCursor &cursorShape,
-                const Transformation &transformation,
-                DocumentAxesPointsRequired documentAxesPointsRequired,
-                bool isXOnly = false,
-                const double *xInitialValue = 0,
-                const double *yInitialValue = 0);
-  ~DlgEditPoint ();
+  /// Constructor for existing point which already has graph coordinates (which
+  /// may be changed using this dialog).
+  /// If initial values are unspecified then the value fields will be initially
+  /// empty
+  DlgEditPoint(MainWindow &mainWindow, DigitizeStateAbstractBase &digitizeState,
+               const DocumentModelCoords &modelCoords,
+               const MainWindowModel &modelMainWindow,
+               const QCursor &cursorShape, const Transformation &transformation,
+               DocumentAxesPointsRequired documentAxesPointsRequired,
+               bool isXOnly = false, const double *xInitialValue = 0,
+               const double *yInitialValue = 0);
+  ~DlgEditPoint();
 
-  /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
-  QPointF posGraph (bool &isXOnly) const;
+  /// Return the graph coordinates position specified by the user. Only applies
+  /// if dialog was accepted
+  QPointF posGraph(bool &isXOnly) const;
 
 signals:
   /// Send a signal to trigger the setting of the override cursor.
-  void signalSetOverrideCursor (QCursor);
+  void signalSetOverrideCursor(QCursor);
 
 private slots:
-  void slotTextChanged (const QString &);
+  void slotTextChanged(const QString &);
 
 private:
-  void createCoords (QVBoxLayout *layoutOuter);
-  void createOkCancel (QVBoxLayout *layoutOuter);
-  void initializeGraphCoordinates (const double *xInitialValue,
-                                   const double *yInitialValue,
-                                   const Transformation &transformation,
-                                   bool isX,
-                                   bool isY);
-  bool isCartesian () const;
-  QChar nameXTheta () const;
-  QChar nameYRadius () const;
-  QString unitsType (bool isXTheta) const;
-  void updateControls ();
+  void createCoords(QVBoxLayout *layoutOuter);
+  void createOkCancel(QVBoxLayout *layoutOuter);
+  void initializeGraphCoordinates(const double *xInitialValue,
+                                  const double *yInitialValue,
+                                  const Transformation &transformation,
+                                  bool isX, bool isY);
+  bool isCartesian() const;
+  QChar nameXTheta() const;
+  QChar nameYRadius() const;
+  QString unitsType(bool isXTheta) const;
+  void updateControls();
 
   QCursor m_cursorShape;
   QLineEdit *m_editGraphX;

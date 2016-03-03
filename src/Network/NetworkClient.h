@@ -7,27 +7,25 @@
 class QNetworkReply;
 
 /// Client for interacting with Engauge server
-class NetworkClient : public QNetworkAccessManager
-{
+class NetworkClient : public QNetworkAccessManager {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
   NetworkClient(QObject *parent);
 
   /// Upload the error report asynchronously
-  void uploadErrorReport (const QString &report);
+  void uploadErrorReport(const QString &report);
 
- public slots:
+public slots:
 
   /// Cleanup after response is returned
-  void slotFinished (QNetworkReply *);
+  void slotFinished(QNetworkReply *);
 
- private:
+private:
   NetworkClient();
 
-  QString cleanXml (const QString &before);
-
+  QString cleanXml(const QString &before);
 };
 
 #endif // NETWORK_CLIENT_H

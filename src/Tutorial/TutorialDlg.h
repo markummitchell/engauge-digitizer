@@ -8,16 +8,17 @@ class QGraphicsScene;
 class QGraphicsView;
 class TutorialStateContext;
 
-/// Tutorial using a strategy like a comic strip with decision points deciding which panels appear.
-/// This is implemented as a QGraphicsScene with states in charge of managing the contents of the scene
-class TutorialDlg : public QDialog
-{
- public:
+/// Tutorial using a strategy like a comic strip with decision points deciding
+/// which panels appear.
+/// This is implemented as a QGraphicsScene with states in charge of managing
+/// the contents of the scene
+class TutorialDlg : public QDialog {
+public:
   /// Single constructor
-  TutorialDlg (MainWindow *mainWindow);
+  TutorialDlg(MainWindow *mainWindow);
 
   /// Make geometry available for layout
-  QSize backgroundSize () const;
+  QSize backgroundSize() const;
 
   /// Single scene the covers the entire tutorial dialog
   QGraphicsScene &scene();
@@ -25,10 +26,10 @@ class TutorialDlg : public QDialog
   /// Single view that displays the single scene
   QGraphicsView &view();
 
- private:
-  TutorialDlg ();
+private:
+  TutorialDlg();
 
-  void createContext ();
+  void createContext();
   void createSceneAndView();
 
   TutorialStateContext *m_context;

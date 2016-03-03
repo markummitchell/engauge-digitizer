@@ -10,16 +10,15 @@ class QSpinBox;
 class QString;
 
 /// Dialog for setting the advanced parameters in a newly imported Document
-class DlgImportAdvanced : public DlgSettingsAbstractBase
-{
+class DlgImportAdvanced : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
   DlgImportAdvanced(MainWindow &mainWindow);
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
 
   /// Number of axes points selected by user
   DocumentAxesPointsRequired documentAxesPointsRequired() const;
@@ -28,13 +27,13 @@ class DlgImportAdvanced : public DlgSettingsAbstractBase
   virtual void load(CmdMediator &cmdMediator);
 
   /// Number of coordinate systems selected by user
-  unsigned int numberCoordSystem () const;
+  unsigned int numberCoordSystem() const;
 
- private slots:
+private slots:
   void slotAxesPointCount(bool);
   void slotCoordSystemCount(const QString &);
 
- private:
+private:
   DlgImportAdvanced();
 
   QSpinBox *m_spinCoordSystemCount;

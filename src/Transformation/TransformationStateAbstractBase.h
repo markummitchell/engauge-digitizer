@@ -15,30 +15,33 @@ enum TransformationState {
   NUM_TRANSFORMATION_STATES
 };
 
-/// Base class for all transformation states. This serves as an interface to TransformationStateContext
-class TransformationStateAbstractBase
-{
+/// Base class for all transformation states. This serves as an interface to
+/// TransformationStateContext
+class TransformationStateAbstractBase {
 public:
   /// Single constructor.
   TransformationStateAbstractBase(TransformationStateContext &context);
   virtual ~TransformationStateAbstractBase();
 
-  /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state
+  /// Method that is called at the exact moment a state is entered. Typically
+  /// called just after end for the previous state
   virtual void begin(CmdMediator &cmdMediator,
                      const Transformation &transformation,
                      const QString &selectedGraphCurve) = 0;
 
-  /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
+  /// Method that is called at the exact moment a state is exited. Typically
+  /// called just before begin for the next state
   virtual void end(CmdMediator &cmdMediator,
                    const Transformation &transformation) = 0;
 
   /// Apply the new DocumentModelAxesChecker
-  virtual void updateAxesChecker (CmdMediator &cmdMediator,
-                                  const Transformation &transformation) = 0;
+  virtual void updateAxesChecker(CmdMediator &cmdMediator,
+                                 const Transformation &transformation) = 0;
 
 protected:
-  /// Reference to the TransformationStateContext that contains all the TransformationStateAbstractBase subclasses, without const.
-  TransformationStateContext &context ();
+  /// Reference to the TransformationStateContext that contains all the
+  /// TransformationStateAbstractBase subclasses, without const.
+  TransformationStateContext &context();
 
 private:
   TransformationStateAbstractBase();

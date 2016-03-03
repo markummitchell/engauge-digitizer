@@ -3,22 +3,18 @@
 #include "TutorialButtonRect.h"
 #include "TutorialButtonText.h"
 
-TutorialButtonText::TutorialButtonText (TutorialButton &tutorialButton,
-                                        const QString &text,
-                                        TutorialButtonRect *rect) :
-  QGraphicsTextItem (text,
-                     rect),
-  m_tutorialButton (tutorialButton)
-{
+TutorialButtonText::TutorialButtonText(TutorialButton &tutorialButton,
+                                       const QString &text,
+                                       TutorialButtonRect *rect)
+    : QGraphicsTextItem(text, rect), m_tutorialButton(tutorialButton) {
   setAcceptHoverEvents(true);
-  setFlag (QGraphicsItem::ItemIsSelectable);
+  setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
-void TutorialButtonText::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TutorialButtonText::mouseReleaseEvent";
+void TutorialButtonText::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
+  LOG4CPP_INFO_S((*mainCat)) << "TutorialButtonText::mouseReleaseEvent";
 
-  QGraphicsTextItem::mouseReleaseEvent (event);
+  QGraphicsTextItem::mouseReleaseEvent(event);
 
-  m_tutorialButton.handleTriggered ();
+  m_tutorialButton.handleTriggered();
 }

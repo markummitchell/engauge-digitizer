@@ -14,8 +14,7 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsExportFormat and CmdSettingsExportFormat.
-class DocumentModelExportFormat : public DocumentModelAbstractBase
-{
+class DocumentModelExportFormat : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelExportFormat();
@@ -44,16 +43,16 @@ public:
   virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for points interval for functions.
-  double pointsIntervalFunctions () const;
+  double pointsIntervalFunctions() const;
 
   /// Get method for relations interval for relations
-  double pointsIntervalRelations () const;
+  double pointsIntervalRelations() const;
 
   /// Get method for points interval units for functions.
-  ExportPointsIntervalUnits pointsIntervalUnitsFunctions () const;
+  ExportPointsIntervalUnits pointsIntervalUnitsFunctions() const;
 
   /// Get method for points interval units for relations.
-  ExportPointsIntervalUnits pointsIntervalUnitsRelations () const;
+  ExportPointsIntervalUnits pointsIntervalUnitsRelations() const;
 
   /// Get method for point selection for functions.
   ExportPointsSelectionFunctions pointsSelectionFunctions() const;
@@ -61,9 +60,9 @@ public:
   /// Get method for point selection for relations.
   ExportPointsSelectionRelations pointsSelectionRelations() const;
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
@@ -80,32 +79,36 @@ public:
   void setLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions);
 
   /// Set method for points interval for functions
-  void setPointsIntervalFunctions (double pointsIntervalFunctions);
+  void setPointsIntervalFunctions(double pointsIntervalFunctions);
 
   /// Set method for relations interval for relations
-  void setPointsIntervalRelations (double pointsIntervalRelations);
+  void setPointsIntervalRelations(double pointsIntervalRelations);
 
   /// Set method for points interval units for functions
-  void setPointsIntervalUnitsFunctions (ExportPointsIntervalUnits pointsIntervalUnitsFunctions);
+  void setPointsIntervalUnitsFunctions(
+      ExportPointsIntervalUnits pointsIntervalUnitsFunctions);
 
   /// Set method for points interval units for relations
-  void setPointsIntervalUnitsRelations (ExportPointsIntervalUnits pointsIntervalUnitsRelations);
+  void setPointsIntervalUnitsRelations(
+      ExportPointsIntervalUnits pointsIntervalUnitsRelations);
 
   /// Set method for point selection for functions.
-  void setPointsSelectionFunctions(ExportPointsSelectionFunctions exportPointsSelectionFunctions);
+  void setPointsSelectionFunctions(
+      ExportPointsSelectionFunctions exportPointsSelectionFunctions);
 
   /// Set method for point selection for relations.
-  void setPointsSelectionRelations(ExportPointsSelectionRelations exportPointsSelectionRelations);
+  void setPointsSelectionRelations(
+      ExportPointsSelectionRelations exportPointsSelectionRelations);
 
   /// Set method for x label.
-  void setXLabel (const QString &xLabel);
+  void setXLabel(const QString &xLabel);
 
   /// Get method for x label.
-  QString xLabel () const;
+  QString xLabel() const;
 
 private:
-
-  // Curves to be excluded from export. New curves will not appear in this so they will be exported by default.
+  // Curves to be excluded from export. New curves will not appear in this so
+  // they will be exported by default.
   QStringList m_curveNamesNotExported;
 
   ExportPointsSelectionFunctions m_pointsSelectionFunctions;

@@ -7,8 +7,7 @@
 #include <QObject>
 
 /// Unit tests of validators
-class TestValidators : public QObject
-{
+class TestValidators : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
@@ -17,28 +16,25 @@ public:
 signals:
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
+  void cleanupTestCase();
+  void initTestCase();
 
-  void testDateTimeDate ();
-  void testDateTimeDateTime ();
-  void testDateTimeDateTimePm ();
-  void testDateTimeTime ();
-  void testDegreesMinutesSecondsDegrees ();
-  void testDegreesMinutesSecondsDegreesMinutes ();
-  void testDegreesMinutesSecondsDegreesMinutesSeconds ();
-  void testNumberInteger ();
-  void testNumberReal ();
-  void testNumberRealBad ();
+  void testDateTimeDate();
+  void testDateTimeDateTime();
+  void testDateTimeDateTimePm();
+  void testDateTimeTime();
+  void testDegreesMinutesSecondsDegrees();
+  void testDegreesMinutesSecondsDegreesMinutes();
+  void testDegreesMinutesSecondsDegreesMinutesSeconds();
+  void testNumberInteger();
+  void testNumberReal();
+  void testNumberRealBad();
 
 private:
-
-  bool stateDateTime (const QString &string,
-                      QValidator::State expectedState);
-  bool stateDegreesMinutesSeconds (const QString &string,
-                                   QValidator::State expectedState);
-  bool stateNumber (const QString &string,
-                    QValidator::State expectedState);
+  bool stateDateTime(const QString &string, QValidator::State expectedState);
+  bool stateDegreesMinutesSeconds(const QString &string,
+                                  QValidator::State expectedState);
+  bool stateNumber(const QString &string, QValidator::State expectedState);
 
   DlgValidatorDateTime *m_validatorDateTime;
   DlgValidatorDegreesMinutesSeconds *m_validatorDegreesMinutesSeconds;

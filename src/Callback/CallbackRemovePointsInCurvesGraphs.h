@@ -7,19 +7,18 @@ class CoordSystem;
 class Point;
 class QString;
 
-/// Callback that is used when iterating through a read-only CurvesGraphs to remove corresponding points in Document.
-class CallbackRemovePointsInCurvesGraphs
-{
+/// Callback that is used when iterating through a read-only CurvesGraphs to
+/// remove corresponding points in Document.
+class CallbackRemovePointsInCurvesGraphs {
 public:
   /// Single constructor.
   CallbackRemovePointsInCurvesGraphs(CoordSystem &coordSystem);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString &curveName, const Point &point);
 
 private:
-  CallbackRemovePointsInCurvesGraphs ();
+  CallbackRemovePointsInCurvesGraphs();
 
   CoordSystem &m_coordSystem;
 };

@@ -7,19 +7,18 @@ class CoordSystem;
 class Point;
 class QString;
 
-/// Callback that is used when iterating through a read-only CurvesGraphs to add corresponding points in Document.
-class CallbackAddPointsInCurvesGraphs
-{
+/// Callback that is used when iterating through a read-only CurvesGraphs to add
+/// corresponding points in Document.
+class CallbackAddPointsInCurvesGraphs {
 public:
   /// Single constructor.
   CallbackAddPointsInCurvesGraphs(CoordSystem &coordSystem);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString &curveName, const Point &point);
 
 private:
-  CallbackAddPointsInCurvesGraphs ();
+  CallbackAddPointsInCurvesGraphs();
 
   CoordSystem &m_coordSystem;
 };

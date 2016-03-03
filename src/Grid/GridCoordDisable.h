@@ -10,6 +10,6 @@ enum GridCoordDisable {
   GRID_COORD_DISABLE_STOP
 };
 
-extern QString gridCoordDisableToString (GridCoordDisable gridCoordDisable);
+extern QString gridCoordDisableToString(GridCoordDisable gridCoordDisable);
 
 #endif // GRID_COORD_DISABLE_H

@@ -1,23 +1,13 @@
 #include "GhostPath.h"
 
-GhostPath::GhostPath(const QPainterPath &path,
-                     const QPen &pen,
-                     const QBrush &brush) :
-  m_path (path),
-  m_pen (pen),
-  m_brush (brush)
-{
-}
+GhostPath::GhostPath(const QPainterPath &path, const QPen &pen,
+                     const QBrush &brush)
+    : m_path(path), m_pen(pen), m_brush(brush) {}
 
-GhostPath::GhostPath(const GhostPath &other) :
-  m_path (other.path ()),
-  m_pen (other.pen()),
-  m_brush (other.brush ())
-{
-}
+GhostPath::GhostPath(const GhostPath &other)
+    : m_path(other.path()), m_pen(other.pen()), m_brush(other.brush()) {}
 
-GhostPath &GhostPath::operator=(const GhostPath &other)
-{
+GhostPath &GhostPath::operator=(const GhostPath &other) {
   m_path = other.path();
   m_pen = other.pen();
   m_brush = other.brush();
@@ -25,21 +15,10 @@ GhostPath &GhostPath::operator=(const GhostPath &other)
   return *this;
 }
 
-GhostPath::~GhostPath()
-{
-}
+GhostPath::~GhostPath() {}
 
-QBrush GhostPath::brush() const
-{
-  return m_brush;
-}
+QBrush GhostPath::brush() const { return m_brush; }
 
-QPainterPath GhostPath::path() const
-{
-  return m_path;
-}
+QPainterPath GhostPath::path() const { return m_path; }
 
-QPen GhostPath::pen() const
-{
-  return m_pen;
-}
+QPen GhostPath::pen() const { return m_pen; }

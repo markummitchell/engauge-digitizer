@@ -7,43 +7,40 @@
 #include <QXmlStreamReader>
 #include "Xml.h"
 
-const QString CMD_DESCRIPTION ("Export settings");
+const QString CMD_DESCRIPTION("Export settings");
+
+CmdSettingsExportFormat::CmdSettingsExportFormat(
+    MainWindow &mainWindow, Document &document,
+    const DocumentModelExportFormat &modelExportBefore,
+    const DocumentModelExportFormat &modelExportAfter)
+    : CmdAbstract(mainWindow, document, CMD_DESCRIPTION),
+      m_modelExportBefore(modelExportBefore),
+      m_modelExportAfter(modelExportAfter) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "CmdSettingsExportFormat::CmdSettingsExportFormat";
+}
 
 CmdSettingsExportFormat::CmdSettingsExportFormat(MainWindow &mainWindow,
                                                  Document &document,
-                                                 const DocumentModelExportFormat &modelExportBefore,
-                                                 const DocumentModelExportFormat &modelExportAfter) :
-  CmdAbstract(mainWindow,
-              document,
-              CMD_DESCRIPTION),
-  m_modelExportBefore (modelExportBefore),
-  m_modelExportAfter (modelExportAfter)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::CmdSettingsExportFormat";
-}
-
-CmdSettingsExportFormat::CmdSettingsExportFormat (MainWindow &mainWindow,
-                                                  Document &document,
-                                                  const QString &cmdDescription,
-                                                  QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::CmdSettingsExportFormat";
+                                                 const QString &cmdDescription,
+                                                 QXmlStreamReader &reader)
+    : CmdAbstract(mainWindow, document, cmdDescription) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "CmdSettingsExportFormat::CmdSettingsExportFormat";
 
   bool success = true;
 
   // Read until end of this subtree
   bool isBefore = true;
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-  (reader.name() != DOCUMENT_SERIALIZE_CMD)){
+         (reader.name() != DOCUMENT_SERIALIZE_CMD)) {
     loadNextFromReader(reader);
     if (reader.atEnd()) {
-      xmlExitWithError (reader,
-                        QString ("%1 %2")
-                        .arg (QObject::tr ("Reached end of file before finding end element for"))
-                        .arg (DOCUMENT_SERIALIZE_CMD));
+      xmlExitWithError(
+          reader, QString("%1 %2")
+                      .arg(QObject::tr(
+                          "Reached end of file before finding end element for"))
+                      .arg(DOCUMENT_SERIALIZE_CMD));
       success = false;
       break;
     }
@@ -53,48 +50,44 @@ CmdSettingsExportFormat::CmdSettingsExportFormat (MainWindow &mainWindow,
 
       if (isBefore) {
 
-        m_modelExportBefore.loadXml (reader);
+        m_modelExportBefore.loadXml(reader);
         isBefore = false;
 
       } else {
 
-        m_modelExportAfter.loadXml (reader);
-
+        m_modelExportAfter.loadXml(reader);
       }
     }
   }
 
   if (!success) {
-    reader.raiseError ("Cannot read export format settings");
+    reader.raiseError("Cannot read export format settings");
   }
 }
 
-CmdSettingsExportFormat::~CmdSettingsExportFormat ()
-{
-}
+CmdSettingsExportFormat::~CmdSettingsExportFormat() {}
 
-void CmdSettingsExportFormat::cmdRedo ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdRedo";
+void CmdSettingsExportFormat::cmdRedo() {
+  LOG4CPP_INFO_S((*mainCat)) << "CmdSettingsExportFormat::cmdRedo";
 
   mainWindow().updateSettingsExportFormat(m_modelExportAfter);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsExportFormat::cmdUndo ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdUndo";
+void CmdSettingsExportFormat::cmdUndo() {
+  LOG4CPP_INFO_S((*mainCat)) << "CmdSettingsExportFormat::cmdUndo";
 
   mainWindow().updateSettingsExportFormat(m_modelExportBefore);
   mainWindow().updateAfterCommand();
 }
 
-void CmdSettingsExportFormat::saveXml (QXmlStreamWriter &writer) const
-{
+void CmdSettingsExportFormat::saveXml(QXmlStreamWriter &writer) const {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
-  m_modelExportBefore.saveXml (writer);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE,
+                        DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION,
+                        QUndoCommand::text());
+  m_modelExportBefore.saveXml(writer);
   m_modelExportAfter.saveXml(writer);
   writer.writeEndElement();
 }

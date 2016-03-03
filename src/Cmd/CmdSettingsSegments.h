@@ -7,26 +7,22 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsSegments
-class CmdSettingsSegments : public CmdAbstract
-{
+class CmdSettingsSegments : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsSegments(MainWindow &mainWindow,
-                      Document &document,
+  CmdSettingsSegments(MainWindow &mainWindow, Document &document,
                       const DocumentModelSegments &modelSegmentsBefore,
                       const DocumentModelSegments &modelSegmentsAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsSegments(MainWindow &mainWindow,
-                      Document &document,
-                      const QString &cmdDescription,
-                      QXmlStreamReader &reader);
+  CmdSettingsSegments(MainWindow &mainWindow, Document &document,
+                      const QString &cmdDescription, QXmlStreamReader &reader);
 
   virtual ~CmdSettingsSegments();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsSegments();

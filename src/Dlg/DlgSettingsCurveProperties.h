@@ -13,8 +13,7 @@ class QSpinBox;
 class ViewPreview;
 
 /// Dialog for editing curve properties settings.
-class DlgSettingsCurveProperties : public DlgSettingsAbstractBase
-{
+class DlgSettingsCurveProperties : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -22,12 +21,13 @@ public:
   DlgSettingsCurveProperties(MainWindow &mainWindow);
   virtual ~DlgSettingsCurveProperties();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
-  /// Load information for the specified curve name. When called externally, the load method must have been called first.
-  void setCurveName (const QString &curveName);
+  /// Load information for the specified curve name. When called externally, the
+  /// load method must have been called first.
+  void setCurveName(const QString &curveName);
 
 private slots:
   void slotCurveName(const QString &);
@@ -35,23 +35,21 @@ private slots:
   void slotLineType(const QString &);
   void slotLineWidth(int);
   void slotPointColor(const QString &);
-  void slotPointLineWidth (int);
+  void slotPointLineWidth(int);
   void slotPointRadius(int);
   void slotPointShape(const QString &);
   void slotSaveDefault();
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
-  void createCurveName (QGridLayout *layout, int &row);
-  void createLine (QGridLayout *layout, int &row);
-  void createPoint (QGridLayout *layout, int &row);
-  void createPreview (QGridLayout *layout, int &row);
-  void drawLine (bool isRelation,
-                 const LineStyle &lineStyle);
-  void drawPoints (const PointStyle &pointStyle);
+  void createCurveName(QGridLayout *layout, int &row);
+  void createLine(QGridLayout *layout, int &row);
+  void createPoint(QGridLayout *layout, int &row);
+  void createPreview(QGridLayout *layout, int &row);
+  void drawLine(bool isRelation, const LineStyle &lineStyle);
+  void drawPoints(const PointStyle &pointStyle);
   void loadForCurveName(const QString &curveName);
   void resetSceneRectangle();
   void updateControls();

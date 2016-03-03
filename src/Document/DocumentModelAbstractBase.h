@@ -6,9 +6,9 @@
 class QTextStream;
 class QXmlStreamWriter;
 
-/// Abstract base class for document models. This class enforces a common interface for the leaf subclasses.
-class DocumentModelAbstractBase
-{
+/// Abstract base class for document models. This class enforces a common
+/// interface for the leaf subclasses.
+class DocumentModelAbstractBase {
 public:
   /// Single constructor.
   DocumentModelAbstractBase();
@@ -17,7 +17,6 @@ public:
   virtual ~DocumentModelAbstractBase();
 
 protected:
-
   /// Load model from serialized xml
   virtual void loadXml(QXmlStreamReader &reader) = 0;
 

@@ -3,13 +3,12 @@
 
 #include "ColorFilterMode.h"
 
-/// Command pattern object for receiving new parameters in DlgFilterWorker from GUI thread.
-class DlgFilterCommand
-{
+/// Command pattern object for receiving new parameters in DlgFilterWorker from
+/// GUI thread.
+class DlgFilterCommand {
 public:
   /// Initial constructor.
-  DlgFilterCommand(ColorFilterMode colorFilterMode,
-                   double low0To1,
+  DlgFilterCommand(ColorFilterMode colorFilterMode, double low0To1,
                    double high0To1);
 
   /// Copy constructor.
@@ -22,10 +21,10 @@ public:
   ColorFilterMode colorFilterMode() const;
 
   /// Get method for high value.
-  double high0To1 () const;
+  double high0To1() const;
 
   /// Get method for low value.
-  double low0To1 () const;
+  double low0To1() const;
 
 private:
   DlgFilterCommand();

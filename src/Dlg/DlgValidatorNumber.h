@@ -8,17 +8,15 @@
 #include <QLocale>
 
 /// Validator for generic (=simple) numbers
-class DlgValidatorNumber : public DlgValidatorAbstract
-{
+class DlgValidatorNumber : public DlgValidatorAbstract {
 public:
   /// Single constructor
-  DlgValidatorNumber(CoordScale coordScale,
-                     const QLocale &locale,
+  DlgValidatorNumber(CoordScale coordScale, const QLocale &locale,
                      QObject *parent = 0);
 
-  /// Apply the standard validation with 0 as the exclusive minimum. Call setCoordScale just before calling this method
-  virtual QValidator::State validate (QString &input,
-                                      int &pos) const;
+  /// Apply the standard validation with 0 as the exclusive minimum. Call
+  /// setCoordScale just before calling this method
+  virtual QValidator::State validate(QString &input, int &pos) const;
 
 private:
   DlgValidatorNumber();

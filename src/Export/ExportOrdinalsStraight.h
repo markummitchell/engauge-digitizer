@@ -9,22 +9,22 @@
 
 class Transformation;
 
-/// Utility class to interpolate points spaced evenly along a piecewise defined curve with line segments between points
-class ExportOrdinalsStraight 
-{
- public:
+/// Utility class to interpolate points spaced evenly along a piecewise defined
+/// curve with line segments between points
+class ExportOrdinalsStraight {
+public:
   /// Single constructor
-  ExportOrdinalsStraight ();
+  ExportOrdinalsStraight();
 
   /// Compute ordinals, without any conversion to graph coordinates
-  ExportValuesOrdinal ordinalsAtIntervalsGraphWithoutTransformation (const Points &points,
-                                                                     double pointsInterval) const;
+  ExportValuesOrdinal
+  ordinalsAtIntervalsGraphWithoutTransformation(const Points &points,
+                                                double pointsInterval) const;
 
   /// Compute ordinals, converting screen coordinates to graph coordinates
-  ExportValuesOrdinal ordinalsAtIntervalsGraphWithTransformation (const Points &points,
-                                                                  const Transformation &transformation,
-                                                                  double pointsInterval) const;
-  
+  ExportValuesOrdinal ordinalsAtIntervalsGraphWithTransformation(
+      const Points &points, const Transformation &transformation,
+      double pointsInterval) const;
 };
 
 #endif // EXPORT_ORDINALS_STRAIGHT_H

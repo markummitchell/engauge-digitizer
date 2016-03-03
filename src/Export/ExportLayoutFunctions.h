@@ -8,6 +8,7 @@ enum ExportLayoutFunctions {
   EXPORT_LAYOUT_ONE_PER_LINE
 };
 
-extern QString exportLayoutFunctionsToString (ExportLayoutFunctions exportLayoutFunctions);
+extern QString
+exportLayoutFunctionsToString(ExportLayoutFunctions exportLayoutFunctions);
 
 #endif // EXPORT_LAYOUT_FUNCTIONS_H

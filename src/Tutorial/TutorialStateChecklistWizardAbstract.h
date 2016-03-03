@@ -9,15 +9,14 @@ class TutorialButton;
 class TutorialStateContext;
 
 /// Abstract class that supports checklist wizard panels
-class TutorialStateChecklistWizardAbstract : public TutorialStateAbstractBase
-{
+class TutorialStateChecklistWizardAbstract : public TutorialStateAbstractBase {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateChecklistWizardAbstract (TutorialStateContext &context);
+  TutorialStateChecklistWizardAbstract(TutorialStateContext &context);
 
- protected:
+protected:
   /// Common begin processing
   void begin();
 
@@ -27,8 +26,7 @@ class TutorialStateChecklistWizardAbstract : public TutorialStateAbstractBase
   /// Previous button for hooking up button to slot
   TutorialButton *previous();
 
- private:
-
+private:
   QGraphicsTextItem *m_title;
   QGraphicsPixmapItem *m_background;
   QGraphicsTextItem *m_text0;

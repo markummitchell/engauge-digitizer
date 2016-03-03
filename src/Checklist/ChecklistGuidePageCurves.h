@@ -8,37 +8,35 @@ class ChecklistLineEdit;
 class QRadioButton;
 
 /// This class adds validation to the Curves page
-class ChecklistGuidePageCurves : public ChecklistGuidePage
-{
+class ChecklistGuidePageCurves : public ChecklistGuidePage {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  ChecklistGuidePageCurves (const QString &title);
+  ChecklistGuidePageCurves(const QString &title);
 
   /// Wizard selection for curve names
-  QStringList curveNames () const;
+  QStringList curveNames() const;
 
   /// Validate the contents of this page
-  virtual bool isComplete () const;
+  virtual bool isComplete() const;
 
- public slots:
+public slots:
   /// Update after curve table update
-  void slotTableChanged ();
+  void slotTableChanged();
 
   /// Drawn with lines, else points
   bool withLines() const;
 
- private:
-  ChecklistGuidePageCurves ();
+private:
+  ChecklistGuidePageCurves();
 
   bool curveNamesAreAllUnique() const;
-  int NUM_CURVE_NAMES () const { return 6; }
+  int NUM_CURVE_NAMES() const { return 6; }
 
   ChecklistLineEdit **m_edit; // Vector array of editors
   QRadioButton *m_btnLines;
   QRadioButton *m_btnPoints;
-
 };
 
 #endif // CHECKLIST_GUIDE_PAGE_CURVES_H

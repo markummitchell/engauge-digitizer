@@ -7,38 +7,37 @@
 
 log4cpp::Category *mainCat;
 
-const QString INDENTATION_PAST_TIMESTAMP ("             ");
-const QString INDENTATION_DELTA ("  ");
+const QString INDENTATION_PAST_TIMESTAMP("             ");
+const QString INDENTATION_DELTA("  ");
 
-void initializeLogging (const QString &name,
-                        const QString &filename,
-                        bool isDebug)
-{
-  const size_t MAX_FILE_SIZE_BYTES = 6 * 1024 * 1024; // Size that should satisfy most email servers
+void initializeLogging(const QString &name, const QString &filename,
+                       bool isDebug) {
+  const size_t MAX_FILE_SIZE_BYTES =
+      6 * 1024 * 1024; // Size that should satisfy most email servers
   const unsigned int MAX_BACKUP_INDEX = 2;
   const bool APPEND_TO_PREVIOUS_FILE = false;
 
-  log4cpp::RollingFileAppender *appender = new log4cpp::RollingFileAppender (name.toStdString (),
-                                                                             filename.toStdString (),
-                                                                             MAX_FILE_SIZE_BYTES,
-                                                                             MAX_BACKUP_INDEX,
-                                                                             APPEND_TO_PREVIOUS_FILE);
+  log4cpp::RollingFileAppender *appender = new log4cpp::RollingFileAppender(
+      name.toStdString(), filename.toStdString(), MAX_FILE_SIZE_BYTES,
+      MAX_BACKUP_INDEX, APPEND_TO_PREVIOUS_FILE);
 
-  log4cpp::PatternLayout *layout = new log4cpp::PatternLayout ();
-  layout->setConversionPattern ("%d{%H:%M:%S.%l} %-5p %c - %m%n");
-  appender->setLayout (layout);
+  log4cpp::PatternLayout *layout = new log4cpp::PatternLayout();
+  layout->setConversionPattern("%d{%H:%M:%S.%l} %-5p %c - %m%n");
+  appender->setLayout(layout);
 
-  mainCat = &log4cpp::Category::getRoot ();
+  mainCat = &log4cpp::Category::getRoot();
 
   // Levels are EMERG, FATAL, ALERT, CRIT, ERROR, WARN, NOTICE, INFO, DEBUG.
   //
-  // Most trace logging is at INFO level, but methods that are called extremely often (like mouse
-  // moves and status bar updates) are at the lower DEBUG level so they are rarely seen
+  // Most trace logging is at INFO level, but methods that are called extremely
+  // often (like mouse
+  // moves and status bar updates) are at the lower DEBUG level so they are
+  // rarely seen
   if (isDebug) {
-    mainCat->setPriority (log4cpp::Priority::DEBUG);
+    mainCat->setPriority(log4cpp::Priority::DEBUG);
   } else {
-    mainCat->setPriority (log4cpp::Priority::INFO);
+    mainCat->setPriority(log4cpp::Priority::INFO);
   }
 
-  mainCat->addAppender (appender);
+  mainCat->addAppender(appender);
 }

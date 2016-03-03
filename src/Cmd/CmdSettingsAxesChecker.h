@@ -7,26 +7,23 @@
 class QXmlStreamReader;
 
 /// Command for DlgSettingsAxesChecker
-class CmdSettingsAxesChecker : public CmdAbstract
-{
+class CmdSettingsAxesChecker : public CmdAbstract {
 public:
   /// Constructor for normal creation
-  CmdSettingsAxesChecker(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsAxesChecker(MainWindow &mainWindow, Document &document,
                          const DocumentModelAxesChecker &modelAxesCheckerBefore,
                          const DocumentModelAxesChecker &modelAxesCheckerAfter);
 
   /// Constructor for parsing error report file xml
-  CmdSettingsAxesChecker(MainWindow &mainWindow,
-                         Document &document,
+  CmdSettingsAxesChecker(MainWindow &mainWindow, Document &document,
                          const QString &cmdDescription,
                          QXmlStreamReader &reader);
 
   virtual ~CmdSettingsAxesChecker();
 
-  virtual void cmdRedo ();
-  virtual void cmdUndo ();
-  virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual void cmdRedo();
+  virtual void cmdUndo();
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
 private:
   CmdSettingsAxesChecker();

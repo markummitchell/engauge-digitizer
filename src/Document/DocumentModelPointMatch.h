@@ -8,8 +8,7 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsPointMatch and CmdSettingsPointMatch.
-class DocumentModelPointMatch : public DocumentModelAbstractBase
-{
+class DocumentModelPointMatch : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelPointMatch();
@@ -37,14 +36,14 @@ public:
   /// Get method for rejected color.
   ColorPalette paletteColorRejected() const;
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for max point size.
-  void setMaxPointSize (double maxPointSize);
+  void setMaxPointSize(double maxPointSize);
 
   /// Set method for accepted color.
   void setPaletteColorAccepted(ColorPalette paletteColorAccepted);
@@ -56,7 +55,6 @@ public:
   void setPaletteColorRejected(ColorPalette paletteColorRejected);
 
 private:
-
   double m_minPointSeparation;
   double m_maxPointSize;
   ColorPalette m_paletteColorAccepted;

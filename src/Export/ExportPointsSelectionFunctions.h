@@ -10,6 +10,7 @@ enum ExportPointsSelectionFunctions {
   EXPORT_POINTS_SELECTION_FUNCTIONS_RAW
 };
 
-extern QString exportPointsSelectionFunctionsToString (ExportPointsSelectionFunctions exportPointsSelectionFunctions);
+extern QString exportPointsSelectionFunctionsToString(
+    ExportPointsSelectionFunctions exportPointsSelectionFunctions);
 
 #endif // EXPORT_POINTS_SELECTION_FUNCTIONS_H

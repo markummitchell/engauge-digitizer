@@ -4,8 +4,7 @@
 #include <QObject>
 
 /// Unit test of spline library
-class TestProjectedPoint : public QObject
-{
+class TestProjectedPoint : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
@@ -14,10 +13,10 @@ public:
 signals:
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
+  void cleanupTestCase();
+  void initTestCase();
 
-  void testProjectedPoints ();
+  void testProjectedPoints();
 };
 
 #endif // TEST_PROJECTED_POINT_H

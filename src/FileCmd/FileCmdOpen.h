@@ -6,15 +6,14 @@
 class QXmlStreamReader;
 
 /// Command for opening a file
-class FileCmdOpen : public FileCmdAbstract
-{
+class FileCmdOpen : public FileCmdAbstract {
 public:
   /// Constructor for parsing file script xml
   FileCmdOpen(QXmlStreamReader &reader);
 
   virtual ~FileCmdOpen();
 
-  virtual void redo (MainWindow &mainWindow);
+  virtual void redo(MainWindow &mainWindow);
 
 private:
   FileCmdOpen();

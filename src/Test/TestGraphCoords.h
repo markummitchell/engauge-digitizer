@@ -7,8 +7,7 @@
 class CallbackUpdateTransform;
 
 /// Unit tests of graph coordinate sanity checking
-class TestGraphCoords : public QObject
-{
+class TestGraphCoords : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
@@ -17,16 +16,15 @@ public:
 signals:
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
+  void cleanupTestCase();
+  void initTestCase();
 
-  void testAnyColumnsRepeatNo ();
-  void testAnyColumnsRepeatYes ();
-  void testThreeCollinearPointsNo ();
-  void testThreeCollinearPointsYes ();
+  void testAnyColumnsRepeatNo();
+  void testAnyColumnsRepeatYes();
+  void testThreeCollinearPointsNo();
+  void testThreeCollinearPointsYes();
 
 private:
-
   DocumentModelCoords m_modelCoords;
   CallbackUpdateTransform *m_callback;
 };

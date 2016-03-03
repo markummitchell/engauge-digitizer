@@ -25,64 +25,68 @@ enum DigitizeState {
   NUM_DIGITIZE_STATES
 };
 
-/// Base class for all digitizing states. This serves as an interface to DigitizeStateContext
-class DigitizeStateAbstractBase
-{
+/// Base class for all digitizing states. This serves as an interface to
+/// DigitizeStateContext
+class DigitizeStateAbstractBase {
 public:
   /// Single constructor.
   DigitizeStateAbstractBase(DigitizeStateContext &context);
-  virtual ~DigitizeStateAbstractBase ();
+  virtual ~DigitizeStateAbstractBase();
 
   /// Name of the active Curve. This can include AXIS_CURVE_NAME
-  virtual QString activeCurve () const = 0;
+  virtual QString activeCurve() const = 0;
 
-  /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state.
-  /// The previousState value is used by DigitizeStateColorPicker to return to the previous state
-  virtual void begin(CmdMediator *cmdMediator,
-                     DigitizeState previousState) = 0;
+  /// Method that is called at the exact moment a state is entered. Typically
+  /// called just after end for the previous state.
+  /// The previousState value is used by DigitizeStateColorPicker to return to
+  /// the previous state
+  virtual void begin(CmdMediator *cmdMediator, DigitizeState previousState) = 0;
 
-  /// Reference to the DigitizeStateContext that contains all the DigitizeStateAbstractBase subclasses, without const.
+  /// Reference to the DigitizeStateContext that contains all the
+  /// DigitizeStateAbstractBase subclasses, without const.
   DigitizeStateContext &context();
 
-  /// Reference to the DigitizeStateContext that contains all the DigitizeStateAbstractBase subclasses, without const.
+  /// Reference to the DigitizeStateContext that contains all the
+  /// DigitizeStateAbstractBase subclasses, without const.
   const DigitizeStateContext &context() const;
 
-  /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
+  /// Method that is called at the exact moment a state is exited. Typically
+  /// called just before begin for the next state
   virtual void end() = 0;
 
-  /// Handle a right click that was intercepted earlier. This is done in the superclass since it works the same in all states.
-  void handleContextMenuEvent (CmdMediator *cmdMediator,
-                               const QString &pointIdentifier);
+  /// Handle a right click that was intercepted earlier. This is done in the
+  /// superclass since it works the same in all states.
+  void handleContextMenuEvent(CmdMediator *cmdMediator,
+                              const QString &pointIdentifier);
 
-  /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment will generate a new set of Segments
-  virtual void handleCurveChange (CmdMediator *cmdMediator) = 0;
+  /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment
+  /// will generate a new set of Segments
+  virtual void handleCurveChange(CmdMediator *cmdMediator) = 0;
 
   /// Handle a key press that was intercepted earlier.
-  virtual void handleKeyPress (CmdMediator *cmdMediator,
-                               Qt::Key key,
-                               bool atLeastOneSelectedItem) = 0;
+  virtual void handleKeyPress(CmdMediator *cmdMediator, Qt::Key key,
+                              bool atLeastOneSelectedItem) = 0;
 
-  /// Handle leave in case an override cursor is in effect from last QDialog, by resetting the override cursor.
-  virtual void handleLeave (CmdMediator *cmdMediator);
+  /// Handle leave in case an override cursor is in effect from last QDialog, by
+  /// resetting the override cursor.
+  virtual void handleLeave(CmdMediator *cmdMediator);
 
-  /// Handle a mouse move. This is part of an experiment to see if augmenting the cursor in Point Match mode is worthwhile
-  virtual void handleMouseMove (CmdMediator *cmdMediator,
-                                QPointF posScreen) = 0;
+  /// Handle a mouse move. This is part of an experiment to see if augmenting
+  /// the cursor in Point Match mode is worthwhile
+  virtual void handleMouseMove(CmdMediator *cmdMediator, QPointF posScreen) = 0;
 
   /// Handle a mouse press that was intercepted earlier.
-  virtual void handleMousePress (CmdMediator *cmdMediator,
-                                 QPointF pos) = 0;
+  virtual void handleMousePress(CmdMediator *cmdMediator, QPointF pos) = 0;
 
   /// Handle a mouse release that was intercepted earlier.
-  virtual void handleMouseRelease (CmdMediator *cmdMediator,
-                                   QPointF pos) = 0;
+  virtual void handleMouseRelease(CmdMediator *cmdMediator, QPointF pos) = 0;
 
   /// Handle the command to set the override cursor
-  void handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                const QCursor &cursor);
+  void handleSetOverrideCursor(CmdMediator *cmdMediator, const QCursor &cursor);
 
-  /// Remove the override cursor if it is in use. This is called after a leave event, and prior to displaying a QDialog
-  void removeOverrideCursor ();
+  /// Remove the override cursor if it is in use. This is called after a leave
+  /// event, and prior to displaying a QDialog
+  void removeOverrideCursor();
 
   /// Update the cursor according to the current state.
   void setCursor(CmdMediator *cmdMediator);
@@ -91,22 +95,26 @@ public:
   virtual QString state() const = 0;
 
   /// Update the digitize curve settings
-  virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
-                                         const DocumentModelDigitizeCurve &modelDigitizeCurve) = 0;
+  virtual void updateModelDigitizeCurve(
+      CmdMediator *cmdMediator,
+      const DocumentModelDigitizeCurve &modelDigitizeCurve) = 0;
 
   /// Update the segments given the new settings
-  virtual void updateModelSegments(const DocumentModelSegments &modelSegments) = 0;
+  virtual void
+  updateModelSegments(const DocumentModelSegments &modelSegments) = 0;
 
 protected:
   /// Returns the state-specific cursor shape.
-  virtual QCursor cursor (CmdMediator *cmdMediator) const = 0;
+  virtual QCursor cursor(CmdMediator *cmdMediator) const = 0;
 
 private:
   DigitizeStateAbstractBase();
 
   DigitizeStateContext &m_context;
 
-  bool m_isOverrideCursor; // Checking QApplication::overrideCursor()==0 is unreliable so this tracks the override cursor state
+  bool m_isOverrideCursor; // Checking QApplication::overrideCursor()==0 is
+                           // unreliable so this tracks the override cursor
+                           // state
 };
 
 #endif // DIGITIZE_STATE_ABSTRACT_BASE_H

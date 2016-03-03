@@ -15,8 +15,7 @@ class QSpinBox;
 class ViewPreview;
 
 /// Dialog for editing point match settings, for DigitizeStatePointMatch.
-class DlgSettingsPointMatch : public DlgSettingsAbstractBase
-{
+class DlgSettingsPointMatch : public DlgSettingsAbstractBase {
   Q_OBJECT;
 
 public:
@@ -24,30 +23,27 @@ public:
   DlgSettingsPointMatch(MainWindow &mainWindow);
   virtual ~DlgSettingsPointMatch();
 
-  virtual void createOptionalSaveDefault (QHBoxLayout *layout);
-  virtual QWidget *createSubPanel ();
-  virtual void load (CmdMediator &cmdMediator);
+  virtual void createOptionalSaveDefault(QHBoxLayout *layout);
+  virtual QWidget *createSubPanel();
+  virtual void load(CmdMediator &cmdMediator);
 
 private slots:
-  void slotAcceptedPointColor (const QString &);
-  void slotCandidatePointColor (const QString &);
-  void slotMaxPointSize (int);
-  void slotMouseMove (QPointF pos);
-  void slotRejectedPointColor (const QString &);
+  void slotAcceptedPointColor(const QString &);
+  void slotCandidatePointColor(const QString &);
+  void slotMaxPointSize(int);
+  void slotMouseMove(QPointF pos);
+  void slotRejectedPointColor(const QString &);
 
 protected:
-  virtual void handleOk ();
+  virtual void handleOk();
 
 private:
-
   QPointF boxPositionConstraint(const QPointF &posIn);
-  void createControls (QGridLayout *layout,
-                       int &row);
-  void createPreview(QGridLayout *layout,
-                     int &row);
+  void createControls(QGridLayout *layout, int &row);
+  void createPreview(QGridLayout *layout, int &row);
   void createTemplate();
   void initializeBox();
-  double radiusAlongDiagonal () const;
+  double radiusAlongDiagonal() const;
   void updateControls();
   void updatePreview();
 

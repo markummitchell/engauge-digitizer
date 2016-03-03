@@ -8,19 +8,20 @@ class QGraphicsTextItem;
 class TutorialButton;
 class TutorialStateContext;
 
-/// Checklist wizard panel for points discusses the checklist wizard, and returns to TRANSITION_STATE_POINT_MATCH
-class TutorialStateChecklistWizardPoints : public TutorialStateChecklistWizardAbstract
-{
+/// Checklist wizard panel for points discusses the checklist wizard, and
+/// returns to TRANSITION_STATE_POINT_MATCH
+class TutorialStateChecklistWizardPoints
+    : public TutorialStateChecklistWizardAbstract {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  TutorialStateChecklistWizardPoints (TutorialStateContext &context);
+  TutorialStateChecklistWizardPoints(TutorialStateContext &context);
 
-  virtual void begin ();
-  virtual void end ();
+  virtual void begin();
+  virtual void end();
 
- public slots:
+public slots:
   /// Slot called to return to previous panel
   void slotPrevious();
 };

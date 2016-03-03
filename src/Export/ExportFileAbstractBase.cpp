@@ -10,12 +10,9 @@
 
 using namespace std;
 
-ExportFileAbstractBase::ExportFileAbstractBase()
-{
-}
+ExportFileAbstractBase::ExportFileAbstractBase() {}
 
-QString ExportFileAbstractBase::curveSeparator (const QString *string) const
-{
+QString ExportFileAbstractBase::curveSeparator(const QString *string) const {
   QString separator = "";
 
   if (string != 0) {
@@ -28,33 +25,33 @@ QString ExportFileAbstractBase::curveSeparator (const QString *string) const
   return separator;
 }
 
-QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
-                                                     const Document &document,
-                                                     const QStringList &curvesGraphsNames,
-                                                     CurveConnectAs curveConnectAs1,
-                                                     CurveConnectAs curveConnectAs2) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::curvesToInclude";
+QStringList ExportFileAbstractBase::curvesToInclude(
+    const DocumentModelExportFormat &modelExportOverride,
+    const Document &document, const QStringList &curvesGraphsNames,
+    CurveConnectAs curveConnectAs1, CurveConnectAs curveConnectAs2) const {
+  LOG4CPP_INFO_S((*mainCat)) << "ExportFileAbstractBase::curvesToInclude";
 
   QStringList curvesToInclude;
 
-  // Build a list of curves to include by subtracting the excluded curves from the the complete list.
+  // Build a list of curves to include by subtracting the excluded curves from
+  // the the complete list.
   // Special case is to use only first included curve if appropriate flag is set
   QStringList::const_iterator itr;
   for (itr = curvesGraphsNames.begin(); itr != curvesGraphsNames.end(); itr++) {
 
     QString curvesGraphName = *itr;
 
-    if (!modelExportOverride.curveNamesNotExported().contains (curvesGraphName)) {
+    if (!modelExportOverride.curveNamesNotExported().contains(
+            curvesGraphName)) {
 
       const Curve *curve = document.curveForCurveName(curvesGraphName);
-      ENGAUGE_CHECK_PTR (curve);
+      ENGAUGE_CHECK_PTR(curve);
 
       // Not excluded which means it gets included, but only if it is a function
       if (curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs1 ||
           curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs2) {
 
-        curvesToInclude.push_back (curvesGraphName);
+        curvesToInclude.push_back(curvesGraphName);
       }
     }
   }
@@ -62,28 +59,24 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFo
   return curvesToInclude;
 }
 
-void ExportFileAbstractBase::destroy2DArray (QVector<QVector<QString*> > &array) const
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::destroy2DArray";
+void ExportFileAbstractBase::destroy2DArray(
+    QVector<QVector<QString *>> &array) const {
+  LOG4CPP_INFO_S((*mainCat)) << "ExportFileAbstractBase::destroy2DArray";
 
   int colCount = array.count();
-  int rowCount = array [0].count();
+  int rowCount = array[0].count();
   for (int row = 0; row < rowCount; row++) {
     for (int col = 0; col < colCount; col++) {
-      delete array [col] [row];
+      delete array[col][row];
     }
   }
 }
 
-QString ExportFileAbstractBase::gnuplotComment() const
-{
-  return QString ("# ");
-}
+QString ExportFileAbstractBase::gnuplotComment() const { return QString("# "); }
 
-void ExportFileAbstractBase::insertLineSeparator (bool &isFirst,
-                                                  ExportHeader exportHeader,
-                                                  QTextStream &str) const
-{
+void ExportFileAbstractBase::insertLineSeparator(bool &isFirst,
+                                                 ExportHeader exportHeader,
+                                                 QTextStream &str) const {
   // Insert line(s) between previous curve and this curve
   if (isFirst) {
     isFirst = false;

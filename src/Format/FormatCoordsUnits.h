@@ -8,26 +8,27 @@ class Transformation;
 
 /// Highest-level wrapper around other Formats classes
 class FormatCoordsUnits {
- public:
+public:
   /// Single constructor
-  FormatCoordsUnits ();
+  FormatCoordsUnits();
 
   /// Convert formatted string to unformatted numeric value
-  void formattedToUnformatted (const QString &xThetaFormatted,
-                               const QString &yRadiusFormatted,
-                               const DocumentModelCoords &modelCoords,
-                               const MainWindowModel &mainWindowModel,
-                               double &xThetaUnformatted,
-                               double &yRadiusUnformatted) const;
+  void formattedToUnformatted(const QString &xThetaFormatted,
+                              const QString &yRadiusFormatted,
+                              const DocumentModelCoords &modelCoords,
+                              const MainWindowModel &mainWindowModel,
+                              double &xThetaUnformatted,
+                              double &yRadiusUnformatted) const;
 
-  /// Convert unformatted numeric value to formatted string. Transformation is used to determine best resolution
-  void unformattedToFormatted (double xThetaUnformatted,
-                               double yRadiusUnformatted,
-                               const DocumentModelCoords &modelCoords,
-                               const MainWindowModel &mainWindowModel,
-                               QString &xThetaFormatted,
-                               QString &yRadiusFormatted,
-                               const Transformation &transformation) const;
+  /// Convert unformatted numeric value to formatted string. Transformation is
+  /// used to determine best resolution
+  void unformattedToFormatted(double xThetaUnformatted,
+                              double yRadiusUnformatted,
+                              const DocumentModelCoords &modelCoords,
+                              const MainWindowModel &mainWindowModel,
+                              QString &xThetaFormatted,
+                              QString &yRadiusFormatted,
+                              const Transformation &transformation) const;
 };
 
 #endif // FORMAT_COORDS_UNITS_H

@@ -6,29 +6,28 @@
 #include "TransformationStateContext.h"
 #include "TransformationStateUndefined.h"
 
-TransformationStateUndefined::TransformationStateUndefined(TransformationStateContext &context,
-                                                           QGraphicsScene & /* scene */) :
-  TransformationStateAbstractBase (context)
-{
+TransformationStateUndefined::TransformationStateUndefined(
+    TransformationStateContext &context, QGraphicsScene & /* scene */)
+    : TransformationStateAbstractBase(context) {}
+
+void TransformationStateUndefined::begin(
+    CmdMediator & /* cmdMediator */,
+    const Transformation & /* transformation */,
+    const QString & /* selectedGraphCurve */) {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateUndefined::begin";
 }
 
-void TransformationStateUndefined::begin(CmdMediator & /* cmdMediator */,
-                                         const Transformation & /* transformation */,
-                                         const QString & /* selectedGraphCurve */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::begin";
+void TransformationStateUndefined::end(
+    CmdMediator & /* cmdMediator */,
+    const Transformation & /* transformation */) {
+  LOG4CPP_INFO_S((*mainCat)) << "TransformationStateUndefined::end";
 }
 
-void TransformationStateUndefined::end(CmdMediator & /* cmdMediator */,
-                                       const Transformation & /* transformation */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::end";
-}
-
-void TransformationStateUndefined::updateAxesChecker (CmdMediator & /* cmdMediator */,
-                                                           const Transformation & /* transformation */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateUndefined::updateAxesChecker";
+void TransformationStateUndefined::updateAxesChecker(
+    CmdMediator & /* cmdMediator */,
+    const Transformation & /* transformation */) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "TransformationStateUndefined::updateAxesChecker";
 
   // Noop
 }

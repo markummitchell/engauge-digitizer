@@ -7,22 +7,15 @@
 #include <QUrl>
 #include "Version.h"
 
-LoadImageFromUrl::LoadImageFromUrl (MainWindow &mainWindow) :
-  m_mainWindow (mainWindow),
-  m_http (this),
-  m_reply (0),
-  m_buffer (0)
-{
-  connect (this, SIGNAL (signalImportImage (QString, QImage)), &m_mainWindow, SLOT (slotFileImportImage (QString, QImage)));
+LoadImageFromUrl::LoadImageFromUrl(MainWindow &mainWindow)
+    : m_mainWindow(mainWindow), m_http(this), m_reply(0), m_buffer(0) {
+  connect(this, SIGNAL(signalImportImage(QString, QImage)), &m_mainWindow,
+          SLOT(slotFileImportImage(QString, QImage)));
 }
 
-LoadImageFromUrl::~LoadImageFromUrl ()
-{
-  deallocate ();
-}
+LoadImageFromUrl::~LoadImageFromUrl() { deallocate(); }
 
-void LoadImageFromUrl::deallocate ()
-{
+void LoadImageFromUrl::deallocate() {
   if (m_reply != 0) {
     delete m_reply;
     m_reply = 0;
@@ -34,80 +27,71 @@ void LoadImageFromUrl::deallocate ()
   }
 }
 
-void LoadImageFromUrl::slotFinished ()
-{
+void LoadImageFromUrl::slotFinished() {
   // Download has just finished
 
-  QString urlWithoutScheme = m_url.toString (QUrl::RemoveScheme);
+  QString urlWithoutScheme = m_url.toString(QUrl::RemoveScheme);
 
   // Import
   QImage image;
-  if (image.loadFromData (*m_buffer)) {
+  if (image.loadFromData(*m_buffer)) {
 
-    emit signalImportImage (urlWithoutScheme,
-                            image);
+    emit signalImportImage(urlWithoutScheme, image);
   } else {
 
-    // Images embedded in web pages produce html in m_buffer. No easy way to fix that. Even
+    // Images embedded in web pages produce html in m_buffer. No easy way to fix
+    // that. Even
     // gimp fails in the same situations so we just show an error
 
     QString message;
-    QTextStream str (&message);
+    QTextStream str(&message);
 
-    str << tr ("Unable to download image from") << " " << urlWithoutScheme;
+    str << tr("Unable to download image from") << " " << urlWithoutScheme;
 
-    QMessageBox::critical (&m_mainWindow,
-                           engaugeWindowTitle(),
-                           message,
-                           QMessageBox::Ok);
+    QMessageBox::critical(&m_mainWindow, engaugeWindowTitle(), message,
+                          QMessageBox::Ok);
   }
 }
 
-void LoadImageFromUrl::startLoadImage (const QUrl &url)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "LoadImageFromUrl::startLoadImage url=" << url.toString ().toLatin1 ().data ();
+void LoadImageFromUrl::startLoadImage(const QUrl &url) {
+  LOG4CPP_INFO_S((*mainCat)) << "LoadImageFromUrl::startLoadImage url="
+                             << url.toString().toLatin1().data();
 
   m_url = url;
-  if (url.isLocalFile ()) {
+  if (url.isLocalFile()) {
 
-    QFileInfo fileInfo (url.toLocalFile ());
+    QFileInfo fileInfo(url.toLocalFile());
 
     // Load local file. This is done synchronously
     QImage image;
-    if (image.load (url.toLocalFile ())) {
+    if (image.load(url.toLocalFile())) {
 
-      emit signalImportImage (fileInfo.fileName (),
-                              image);
+      emit signalImportImage(fileInfo.fileName(), image);
 
     } else {
 
       // Probably a bad file type
 
       QString message;
-      QTextStream str (&message);
+      QTextStream str(&message);
 
-      str << tr ("Unable to load image from") << " " << url.toLocalFile ();
+      str << tr("Unable to load image from") << " " << url.toLocalFile();
 
-      QMessageBox::critical (&m_mainWindow,
-                             engaugeWindowTitle(),
-                             message,
-                             QMessageBox::Ok);
+      QMessageBox::critical(&m_mainWindow, engaugeWindowTitle(), message,
+                            QMessageBox::Ok);
     }
 
   } else {
 
     // Asynchronous read from url
-    deallocate ();
+    deallocate();
     m_buffer = new QByteArray;
-    QNetworkRequest request (url);
-    m_reply = m_http.get (request);
+    QNetworkRequest request(url);
+    m_reply = m_http.get(request);
 
-    connect (m_reply, SIGNAL (readyRead()), this, SLOT (slotReadData()));
-    connect (m_reply, SIGNAL (finished ()), this, SLOT (slotFinished ()));
+    connect(m_reply, SIGNAL(readyRead()), this, SLOT(slotReadData()));
+    connect(m_reply, SIGNAL(finished()), this, SLOT(slotFinished()));
   }
 }
 
-void LoadImageFromUrl::slotReadData ()
-{
-  *m_buffer += m_reply->readAll ();
-}
+void LoadImageFromUrl::slotReadData() { *m_buffer += m_reply->readAll(); }

@@ -4,8 +4,7 @@
 #include <QObject>
 
 /// Unit tests of fast correlation algorithm
-class TestCorrelation : public QObject
-{
+class TestCorrelation : public QObject {
   Q_OBJECT
 public:
   /// Single constructor.
@@ -14,22 +13,17 @@ public:
 signals:
 
 private slots:
-  void cleanupTestCase ();
-  void initTestCase ();
-  void loadSinusoid (double function [],
-                     int n,
-                     int center) const;
-  void loadThreeTriangles (double function [],
-                           int n,
-                           int center) const;
+  void cleanupTestCase();
+  void initTestCase();
+  void loadSinusoid(double function[], int n, int center) const;
+  void loadThreeTriangles(double function[], int n, int center) const;
 
-  void testShiftSinusoidNonPowerOf2 ();
-  void testShiftSinusoidPowerOf2 ();
-  void testShiftThreeTrianglesNonPowerOf2 ();
-  void testShiftThreeTrianglesPowerOf2 ();
+  void testShiftSinusoidNonPowerOf2();
+  void testShiftSinusoidPowerOf2();
+  void testShiftThreeTrianglesNonPowerOf2();
+  void testShiftThreeTrianglesPowerOf2();
 
 private:
-
 };
 
 #endif // TEST_CORRELATION_H

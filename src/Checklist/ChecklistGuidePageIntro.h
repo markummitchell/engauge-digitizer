@@ -4,14 +4,12 @@
 #include "ChecklistGuidePage.h"
 
 /// This class sets up the introduction page
-class ChecklistGuidePageIntro : public ChecklistGuidePage
-{
+class ChecklistGuidePageIntro : public ChecklistGuidePage {
   Q_OBJECT;
 
- public:
+public:
   /// Single constructor
-  ChecklistGuidePageIntro ();
-
+  ChecklistGuidePageIntro();
 };
 
 #endif // CHECKLIST_GUIDE_PAGE_INTRO_H

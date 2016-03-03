@@ -16,56 +16,45 @@
 #include <QXmlStreamReader>
 #include "Xml.h"
 
-const QString CMD_DESCRIPTION ("Cut");
+const QString CMD_DESCRIPTION("Cut");
 
-CmdCut::CmdCut(MainWindow &mainWindow,
-               Document &document,
-               const QStringList &selectedPointIdentifiers) :
-  CmdAbstract(mainWindow,
-              document,
-              CMD_DESCRIPTION),
-  m_transformIsDefined (mainWindow.transformIsDefined())
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::CmdCut"
-                              << " selected=(" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
+CmdCut::CmdCut(MainWindow &mainWindow, Document &document,
+               const QStringList &selectedPointIdentifiers)
+    : CmdAbstract(mainWindow, document, CMD_DESCRIPTION),
+      m_transformIsDefined(mainWindow.transformIsDefined()) {
+  LOG4CPP_INFO_S((*mainCat))
+      << "CmdCut::CmdCut"
+      << " selected=(" << selectedPointIdentifiers.join(", ").toLatin1().data()
+      << ")";
 
   // Export to clipboard
   ExportToClipboard exportStrategy;
-  QTextStream strCsv (&m_csv), strHtml (&m_html);
-  exportStrategy.exportToClipboard (selectedPointIdentifiers,
-                                    mainWindow.transformation(),
-                                    strCsv,
-                                    strHtml,
-                                    document.curveAxes(),
-                                    document.curvesGraphs(),
-                                    m_curvesGraphsRemoved);
+  QTextStream strCsv(&m_csv), strHtml(&m_html);
+  exportStrategy.exportToClipboard(
+      selectedPointIdentifiers, mainWindow.transformation(), strCsv, strHtml,
+      document.curveAxes(), document.curvesGraphs(), m_curvesGraphsRemoved);
 }
 
-CmdCut::CmdCut (MainWindow &mainWindow,
-                Document &document,
-                const QString &cmdDescription,
-                QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::CmdCut";
+CmdCut::CmdCut(MainWindow &mainWindow, Document &document,
+               const QString &cmdDescription, QXmlStreamReader &reader)
+    : CmdAbstract(mainWindow, document, cmdDescription) {
+  LOG4CPP_INFO_S((*mainCat)) << "CmdCut::CmdCut";
 
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_CSV) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_HTML)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2, %3 %4 %5")
-                      .arg (QObject::tr ("Missing argument(s)"))
-                      .arg (DOCUMENT_SERIALIZE_TRANSFORM_DEFINED)
-                      .arg (DOCUMENT_SERIALIZE_CSV)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_HTML));
+    xmlExitWithError(reader, QString("%1 %2, %3 %4 %5")
+                                 .arg(QObject::tr("Missing argument(s)"))
+                                 .arg(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED)
+                                 .arg(DOCUMENT_SERIALIZE_CSV)
+                                 .arg(QObject::tr("and/or"))
+                                 .arg(DOCUMENT_SERIALIZE_HTML));
   }
 
-  QString defined = attributes.value(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED).toString();
+  QString defined =
+      attributes.value(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED).toString();
 
   m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
   m_csv = attributes.value(DOCUMENT_SERIALIZE_CSV).toString();
@@ -73,48 +62,45 @@ CmdCut::CmdCut (MainWindow &mainWindow,
   m_curvesGraphsRemoved.loadXml(reader);
 }
 
-CmdCut::~CmdCut ()
-{
-}
+CmdCut::~CmdCut() {}
 
-void CmdCut::cmdRedo ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdRedo";
+void CmdCut::cmdRedo() {
+  LOG4CPP_INFO_S((*mainCat)) << "CmdCut::cmdRedo";
 
   MimePoints *mimePoints;
   if (m_transformIsDefined) {
-    mimePoints = new MimePoints (m_csv,
-                                 m_html);
+    mimePoints = new MimePoints(m_csv, m_html);
   } else {
-    mimePoints = new MimePoints (m_csv);
+    mimePoints = new MimePoints(m_csv);
   }
 
   QClipboard *clipboard = QApplication::clipboard();
-  clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
+  clipboard->setMimeData(mimePoints, QClipboard::Clipboard);
 
-  document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
+  document().removePointsInCurvesGraphs(m_curvesGraphsRemoved);
 
-  document().updatePointOrdinals (mainWindow().transformation());
+  document().updatePointOrdinals(mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
-void CmdCut::cmdUndo ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
+void CmdCut::cmdUndo() {
+  LOG4CPP_INFO_S((*mainCat)) << "CmdCut::cmdUndo";
 
-  document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
+  document().addPointsInCurvesGraphs(m_curvesGraphsRemoved);
 
-  document().updatePointOrdinals (mainWindow().transformation());
+  document().updatePointOrdinals(mainWindow().transformation());
   mainWindow().updateAfterCommand();
 }
 
-void CmdCut::saveXml (QXmlStreamWriter &writer) const
-{
+void CmdCut::saveXml(QXmlStreamWriter &writer) const {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_CUT);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE,
+                        DOCUMENT_SERIALIZE_CMD_CUT);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION,
+                        QUndoCommand::text());
   writer.writeAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED,
-                        m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE: DOCUMENT_SERIALIZE_BOOL_FALSE);
+                        m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE
+                                             : DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
   writer.writeAttribute(DOCUMENT_SERIALIZE_HTML, m_html);
   m_curvesGraphsRemoved.saveXml(writer);

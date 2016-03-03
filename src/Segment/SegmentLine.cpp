@@ -9,80 +9,69 @@
 
 const double ZVALUE_SEGMENT = 50; // Less than z value for GraphicsPoint
 
-SegmentLine::SegmentLine(QGraphicsScene  &scene,
+SegmentLine::SegmentLine(QGraphicsScene &scene,
                          const DocumentModelSegments &modelSegments,
-                         Segment *segment) :
-  m_modelSegments (modelSegments),
-  m_segment (segment)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentLine::SegmentLine"
-                               << " address=0x" << std::hex << (quintptr) this;
+                         Segment *segment)
+    : m_modelSegments(modelSegments), m_segment(segment) {
+  LOG4CPP_DEBUG_S((*mainCat)) << "SegmentLine::SegmentLine"
+                              << " address=0x" << std::hex << (quintptr) this;
 
-  setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_SEGMENT));
+  setData(DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant(GRAPHICS_ITEM_TYPE_SEGMENT));
 
   // Make this transparent now, but always visible so hover events work
-  scene.addItem (this);
-  setPen (QPen (Qt::transparent));
-  setZValue (ZVALUE_SEGMENT);
-  setVisible (true);
-  setAcceptHoverEvents (true);
-  setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
-  setFlags (QGraphicsItem::ItemIsFocusable);
+  scene.addItem(this);
+  setPen(QPen(Qt::transparent));
+  setZValue(ZVALUE_SEGMENT);
+  setVisible(true);
+  setAcceptHoverEvents(true);
+  setHover(false); // Initially the cursor is not hovering over this object.
+                   // Later a hover event will change this state
+  setFlags(QGraphicsItem::ItemIsFocusable);
 
-  connect (this, SIGNAL (signalHover (bool)), segment, SLOT (slotHover (bool)));
+  connect(this, SIGNAL(signalHover(bool)), segment, SLOT(slotHover(bool)));
 }
 
-SegmentLine::~SegmentLine ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentLine::~SegmentLine"
-                               << " address=0x" << std::hex << (quintptr) this;
+SegmentLine::~SegmentLine() {
+  LOG4CPP_DEBUG_S((*mainCat)) << "SegmentLine::~SegmentLine"
+                              << " address=0x" << std::hex << (quintptr) this;
 }
 
-void SegmentLine::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::hoverEnterEvent";
+void SegmentLine::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */) {
+  LOG4CPP_INFO_S((*mainCat)) << "SegmentLine::hoverEnterEvent";
 
-  emit (signalHover (true));
+  emit(signalHover(true));
 }
 
-void SegmentLine::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::hoverLeaveEvent";
+void SegmentLine::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */) {
+  LOG4CPP_INFO_S((*mainCat)) << "SegmentLine::hoverLeaveEvent";
 
-  emit (signalHover (false));
+  emit(signalHover(false));
 }
 
-void SegmentLine::mousePressEvent(QGraphicsSceneMouseEvent * /* event */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::mousePressEvent";
+void SegmentLine::mousePressEvent(QGraphicsSceneMouseEvent * /* event */) {
+  LOG4CPP_INFO_S((*mainCat)) << "SegmentLine::mousePressEvent";
 
   m_segment->forwardMousePress();
 }
 
-Segment *SegmentLine::segment() const
-{
-  return m_segment;
-}
+Segment *SegmentLine::segment() const { return m_segment; }
 
-void SegmentLine::setHover (bool hover)
-{
+void SegmentLine::setHover(bool hover) {
   if (hover) {
 
-    QColor color (ColorPaletteToQColor (m_modelSegments.lineColor()));
+    QColor color(ColorPaletteToQColor(m_modelSegments.lineColor()));
 
-    setPen (QPen (QBrush (color),
-                  m_modelSegments.lineWidth()));
+    setPen(QPen(QBrush(color), m_modelSegments.lineWidth()));
 
   } else {
 
-    setPen (QPen (Qt::transparent));
-
+    setPen(QPen(Qt::transparent));
   }
 }
 
-void SegmentLine::updateModelSegment(const DocumentModelSegments &modelSegments)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "SegmentLine::updateModelSegment";
+void SegmentLine::updateModelSegment(
+    const DocumentModelSegments &modelSegments) {
+  LOG4CPP_INFO_S((*mainCat)) << "SegmentLine::updateModelSegment";
 
   m_modelSegments = modelSegments;
 }

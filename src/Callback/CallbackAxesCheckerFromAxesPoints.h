@@ -8,21 +8,18 @@
 #include <QList>
 
 /// Callback for positioning the axes indicator according to the axes points
-class CallbackAxesCheckerFromAxesPoints
-{
+class CallbackAxesCheckerFromAxesPoints {
 public:
   /// Single constructor.
   CallbackAxesCheckerFromAxesPoints();
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  CallbackSearchReturn callback(const QString &curveName, const Point &point);
 
   /// Return the collected points as a polygon, in screen coordinates.
-  Points points () const;
+  Points points() const;
 
 private:
-
   Points m_points;
 };
 

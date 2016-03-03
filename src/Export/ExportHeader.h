@@ -9,6 +9,6 @@ enum ExportHeader {
   EXPORT_HEADER_GNUPLOT
 };
 
-extern QString exportHeaderToString (ExportHeader exportHeader);
+extern QString exportHeaderToString(ExportHeader exportHeader);
 
 #endif // EXPORT_HEADER_H

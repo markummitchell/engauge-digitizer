@@ -7,20 +7,16 @@
 class Document;
 class QTextStream;
 
-/// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval. The settings are unstable until the user approves
-class DocumentModelGridRemoval : public DocumentModelAbstractBase
-{
+/// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval. The settings
+/// are unstable until the user approves
+class DocumentModelGridRemoval : public DocumentModelAbstractBase {
 public:
   /// Default constructor.
   DocumentModelGridRemoval();
 
   /// Constructor fed by GridClassifier.
-  DocumentModelGridRemoval (double startX,
-                            double startY,
-                            double stepX,
-                            double stepY,
-                            int countX,
-                            int countY);
+  DocumentModelGridRemoval(double startX, double startY, double stepX,
+                           double stepY, int countX, int countY);
 
   /// Initial constructor from Document.
   DocumentModelGridRemoval(const Document &document);
@@ -41,24 +37,24 @@ public:
   int countY() const;
 
   /// Get method for x coord parameter to disable.
-  GridCoordDisable gridCoordDisableX () const;
+  GridCoordDisable gridCoordDisableX() const;
 
   /// Get method for y coord parameter to disable.
-  GridCoordDisable gridCoordDisableY () const;
+  GridCoordDisable gridCoordDisableY() const;
 
   virtual void loadXml(QXmlStreamReader &reader);
 
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
+  /// Debugging method that supports print method of this class and printStream
+  /// method of some other class(es)
+  void printStream(QString indentation, QTextStream &str) const;
 
   /// Get method for removing defined grid lines.
-  bool removeDefinedGridLines () const;
+  bool removeDefinedGridLines() const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for close distance.
-  void setCloseDistance (double closeDistance);
+  void setCloseDistance(double closeDistance);
 
   /// Set method for x count.
   void setCountX(int countX);
@@ -67,16 +63,17 @@ public:
   void setCountY(int countY);
 
   /// Set method for x coord parameter to disable.
-  void setGridCoordDisableX (GridCoordDisable gridCoordDisable);
+  void setGridCoordDisableX(GridCoordDisable gridCoordDisable);
 
   /// Set method for y coord parameter to disable.
-  void setGridCoordDisableY (GridCoordDisable gridCoordDisable);
+  void setGridCoordDisableY(GridCoordDisable gridCoordDisable);
 
   /// Set method for removing defined grid lines.
-  void setRemoveDefinedGridLines (bool removeDefinedGridLines);
+  void setRemoveDefinedGridLines(bool removeDefinedGridLines);
 
-  /// Set the stable flag to true. This public version has no argument since it cannot be undone
-  void setStable ();
+  /// Set the stable flag to true. This public version has no argument since it
+  /// cannot be undone
+  void setStable();
 
   /// Set method for x start.
   void setStartX(double startX);
@@ -96,7 +93,8 @@ public:
   /// Set method for y stop.
   void setStopY(double stopY);
 
-  /// Get method for stable flag. The flag is false to let the settings get automatically updated, until the
+  /// Get method for stable flag. The flag is false to let the settings get
+  /// automatically updated, until the
   /// user selects settings - at which point the stable flag is set to true
   bool stable() const;
 
@@ -119,8 +117,7 @@ public:
   double stopY() const;
 
 private:
-
-  void setStable (bool stable); // Private version is for initialization
+  void setStable(bool stable); // Private version is for initialization
 
   bool m_stable;
   bool m_removeDefinedGridLines;
