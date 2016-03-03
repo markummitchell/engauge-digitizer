@@ -4,7 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CmdSettingsMainWindow.h"
 #include "DlgSettingsMainWindow.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
@@ -158,11 +157,7 @@ void DlgSettingsMainWindow::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::handleOk";
 
-  CmdSettingsMainWindow *cmd = new CmdSettingsMainWindow (mainWindow (),
-                                                          cmdMediator ().document(),
-                                                          *m_modelMainWindowBefore,
-                                                          *m_modelMainWindowAfter);
-  cmdMediator ().push (cmd);
+  mainWindow().updateSettingsMainWindow (*m_modelMainWindowAfter);
 
   hide ();
 }

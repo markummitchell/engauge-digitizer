@@ -16,9 +16,10 @@
 
 class QTextStream;
 
-/// Model for DlgSettingsMainWindow and CmdSettingsMainWindow. Unlike the other models (DocumentModel*) this
-/// data is not saved and loaded within the document, so no xml or working with the Document class is involved. Instead,
-/// the settings are saved using QSettings. Method involving xml/Document (from DocumentModelAbstractBase) are stubbed out
+/// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
+/// loaded within the document, so no xml or working with the Document class is involved. Also, there is
+/// no associated Cmd. Instead, the settings are saved using QSettings. Method involving xml/Document 
+/// (from DocumentModelAbstractBase) are stubbed out
 class MainWindowModel : public DocumentModelAbstractBase
 {
 public:

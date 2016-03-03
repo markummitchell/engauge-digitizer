@@ -71,7 +71,6 @@ HEADERS  += \
     Cmd/CmdSettingsExportFormat.h \
     Cmd/CmdSettingsGeneral.h \
     Cmd/CmdSettingsGridRemoval.h \
-    Cmd/CmdSettingsMainWindow.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
@@ -337,7 +336,6 @@ SOURCES += \
     Cmd/CmdSettingsExportFormat.cpp \
     Cmd/CmdSettingsGeneral.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
-    Cmd/CmdSettingsMainWindow.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \

@@ -24,7 +24,6 @@
 #include "CmdSettingsDigitizeCurve.h"
 #include "CmdSettingsExportFormat.h"
 #include "CmdSettingsGridRemoval.h"
-#include "CmdSettingsMainWindow.h"
 #include "CmdSettingsPointMatch.h"
 #include "CmdSettingsSegments.h"
 #include "Document.h"
@@ -146,11 +145,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                       document,
                                       cmdDescription,
                                       reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_MAIN_WINDOW) {
-    cmd = new CmdSettingsMainWindow (mainWindow,
-                                     document,
-                                     cmdDescription,
-                                     reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_POINT_MATCH) {
     cmd = new CmdSettingsPointMatch (mainWindow,
                                      document,
