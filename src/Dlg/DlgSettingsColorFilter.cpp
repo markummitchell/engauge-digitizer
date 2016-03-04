@@ -31,7 +31,7 @@
 #include "ViewProfileScale.h"
 
 DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Filter",
+  DlgSettingsAbstractBase (tr ("Color Filter"),
                            "DlgSettingsColorFilter",
                            mainWindow),
   m_scenePreview (0),

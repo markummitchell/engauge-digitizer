@@ -22,7 +22,7 @@
 #include "Settings.h"
 
 DlgSettingsGeneral::DlgSettingsGeneral(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("General",
+  DlgSettingsAbstractBase (tr ("General"),
                            "DlgSettingsGeneral",
                            mainWindow),
   m_modelGeneralBefore (0),

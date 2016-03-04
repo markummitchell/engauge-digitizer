@@ -25,7 +25,7 @@
 #include "SettingsForGraph.h"
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curve Add/Remove",
+  DlgSettingsAbstractBase (tr ("Curve Add/Remove"),
                            "DlgSettingsCurveAddRemove",
                            mainWindow)
 {

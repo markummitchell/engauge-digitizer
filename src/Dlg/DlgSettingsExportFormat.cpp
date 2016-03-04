@@ -44,7 +44,7 @@ const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 const QString EMPTY_PREVIEW;
 
 DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Export Format",
+  DlgSettingsAbstractBase (tr ("Export Format"),
                            "DlgSettingsExportFormat",
                            mainWindow),
   m_modelExportBefore (0),

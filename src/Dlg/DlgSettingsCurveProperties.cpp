@@ -56,7 +56,7 @@ const QPointF POS_RIGHT (2.0 * PREVIEW_WIDTH / 3.0,
                          PREVIEW_HEIGHT * 2.0 / 3.0);
 
 DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Curve Properties",
+  DlgSettingsAbstractBase (tr ("Curve Properties"),
                            "DlgSettingsCurveProperties",
                            mainWindow),
   m_scenePreview (0),

@@ -38,7 +38,7 @@ const int LINE_WIDTH_MAX = 32;
 const int LINE_WIDTH_MIN = 1;
 
 DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Digitize Curve",
+  DlgSettingsAbstractBase (tr ("Digitize Curve"),
                            "DlgSettingsDigitizeCurve",
                            mainWindow),
   m_scenePreview (0),

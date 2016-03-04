@@ -13,7 +13,7 @@
 #include <QSpinBox>
 
 DlgImportAdvanced::DlgImportAdvanced(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Import Advanced",
+  DlgSettingsAbstractBase (tr ("Import Advanced"),
                            "DlgImportAdvanced",
                            mainWindow)
 {

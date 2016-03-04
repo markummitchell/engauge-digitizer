@@ -25,7 +25,7 @@
 #include "ZoomLabels.h"
 
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("MainWindow",
+  DlgSettingsAbstractBase (tr ("Main Window"),
                            "DlgSettingsMainWindow",
                            mainWindow),
   m_modelMainWindowBefore (0),

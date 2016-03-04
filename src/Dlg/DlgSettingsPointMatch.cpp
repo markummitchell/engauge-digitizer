@@ -26,7 +26,7 @@ const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 5;
 
 DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase ("Point Match",
+  DlgSettingsAbstractBase (tr ("Point Match"),
                            "DlgSettingsPointMatch",
                            mainWindow),
   m_scenePreview (0),
