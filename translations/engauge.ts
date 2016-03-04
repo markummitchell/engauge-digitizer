@@ -387,6 +387,11 @@ The original document can be sent as part of the error report, which increases t
 <context>
     <name>DlgImportAdvanced</name>
     <message>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="16"/>
+        <source>Import Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="46"/>
         <source>Coordinate System Count:</source>
         <translation type="unfinished"></translation>
@@ -456,6 +461,11 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAxesChecker</name>
     <message>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="38"/>
+        <source>Axes Checker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="62"/>
         <source>Axes Checker Lifetime</source>
         <translation type="unfinished"></translation>
@@ -513,6 +523,11 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 </context>
 <context>
     <name>DlgSettingsColorFilter</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="34"/>
+        <source>Color Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="58"/>
         <source>Curve Name:</source>
@@ -747,6 +762,7 @@ Turns format uses a single real number. One complete revolution is one turn.</so
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="72"/>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="900"/>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="904"/>
         <source>Coordinates</source>
@@ -760,6 +776,11 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 </context>
 <context>
     <name>DlgSettingsCurveAddRemove</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="28"/>
+        <source>Curve Add/Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="61"/>
         <source>Add...</source>
@@ -832,6 +853,11 @@ Reorder curves by dragging them around.</source>
 </context>
 <context>
     <name>DlgSettingsCurveProperties</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="59"/>
+        <source>Curve Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="85"/>
         <source>Curve Name:</source>
@@ -959,6 +985,11 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
 <context>
     <name>DlgSettingsDigitizeCurve</name>
     <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41"/>
+        <source>Digitize Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65"/>
         <source>Cursor</source>
         <translation type="unfinished"></translation>
@@ -1031,6 +1062,11 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
 </context>
 <context>
     <name>DlgSettingsExportFormat</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="47"/>
+        <source>Export Format</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="68"/>
         <source>Included</source>
@@ -1308,6 +1344,11 @@ Controls for specifying the format of relations during export</source>
 <context>
     <name>DlgSettingsGeneral</name>
     <message>
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="25"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47"/>
         <source>Cursor size (pixels):</source>
         <translation type="unfinished"></translation>
@@ -1348,6 +1389,11 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 </context>
 <context>
     <name>DlgSettingsGridRemoval</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="32"/>
+        <source>Grid Removal</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="59"/>
         <source>Preview</source>
@@ -1508,85 +1554,90 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="53"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="28"/>
+        <source>Main Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="52"/>
         <source>Initial zoom:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="67"/>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="73"/>
         <source>Zoom control:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="77"/>
         <source>Menu only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="79"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78"/>
         <source>Menu and mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="79"/>
         <source>Menu and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="81"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="81"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
         <source>Locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale
 
 Select the locale that will be used when converting between numbers and strings. This affects the use of commas or periods as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="111"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
         <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="114"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="121"/>
         <source>Include title bar path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="126"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -1595,6 +1646,11 @@ Includes or excludes the path and file extension from the filename in the title 
 </context>
 <context>
     <name>DlgSettingsPointMatch</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="29"/>
+        <source>Point Match</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="82"/>
         <source>Maximum point size (pixels):</source>
@@ -1656,6 +1712,11 @@ The points are separated by the point separation value, and the maximum point si
 </context>
 <context>
     <name>DlgSettingsSegments</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="38"/>
+        <source>Segment Fill</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="76"/>
         <source>Minimum length (points):</source>
@@ -3208,7 +3269,6 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsExportFormat.cpp" line="51"/>
         <location filename="../src/Cmd/CmdSettingsGeneral.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridRemoval.cpp" line="50"/>
-        <location filename="../src/Cmd/CmdSettingsMainWindow.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
@@ -3358,7 +3418,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurvesGraphs.cpp" line="204"/>
+        <location filename="../src/Curve/CurvesGraphs.cpp" line="200"/>
+        <source>DUPLICATE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Curve/CurvesGraphs.cpp" line="214"/>
         <source>Cannot read graph curves data</source>
         <translation type="unfinished"></translation>
     </message>
