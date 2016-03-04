@@ -110,6 +110,9 @@ public:
   /// Serialize to stream
   void saveXml(QXmlStreamWriter &writer) const;
 
+  /// Update the point identifer to match the specified curve name
+  void setCurveName (const QString &curveName);
+
   /// Reset the current index while performing a Redo.
   static void setIdentifierIndex (unsigned int identifierIndex);
 

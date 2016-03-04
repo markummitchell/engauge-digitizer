@@ -492,6 +492,13 @@ void Curve::setColorFilterSettings (const ColorFilterSettings &colorFilterSettin
 void Curve::setCurveName (const QString &curveName)
 {
   m_curveName = curveName;
+
+  // Pass to member objects
+  QList<Point>::iterator itr;
+  for (itr = m_points.begin(); itr != m_points.end(); itr++) {
+    Point &point = *itr;
+    point.setCurveName (curveName);
+  }
 }
 
 void Curve::setCurveStyle (const CurveStyle &curveStyle)

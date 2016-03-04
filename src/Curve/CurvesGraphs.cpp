@@ -195,6 +195,16 @@ void CurvesGraphs::loadXml(QXmlStreamReader &reader)
 
       Curve curve (reader);
 
+      // Version 6 of Engauge let users create multiple curves with the same name. Reading a file with duplicate
+      // curve names can result in crashes and/or corruption, so we prevent deconflict duplicate curve names here
+      QString DUPLICATE = QString ("-%1").arg (QObject::tr ("DUPLICATE"));
+      QString curveName = curve.curveName();
+      while (curvesGraphsNames().contains (curveName)) {
+        curveName += DUPLICATE;
+      }
+      curve.setCurveName (curveName); // No effect if curve name was not a duplicate
+
+      // Add the curve
       m_curvesGraphs.push_back (curve);
 
     }

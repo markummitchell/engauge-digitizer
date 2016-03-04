@@ -450,6 +450,13 @@ void Point::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
+void Point::setCurveName(const QString &curveNameNew)
+{
+  // Replace the old curve name at the start of the string
+  QString curveNameOld = Point::curveNameFromPointIdentifier (m_identifier);
+  m_identifier = curveNameNew  + m_identifier.mid (curveNameOld.length());
+}
+
 void Point::setIdentifierIndex (unsigned int identifierIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Point::setIdentifierIndex"
