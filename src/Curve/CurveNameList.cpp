@@ -41,32 +41,38 @@ bool CurveNameList::containsCurveNameCurrent (const QString &curveName) const
   return false;
 }
 
-bool CurveNameList::curveNamesWillBeUnique(const QString &value,
+bool CurveNameList::curveNameIsAcceptable (const QString &curveNameNew,
                                            int row) const
 {
-  bool success = true;
+  // First test is to verify curve name is not empty
+  bool success = (!curveNameNew.isEmpty ());
 
-  for (int row1 = 0; row1 < m_modelCurvesEntries.count(); row1++) {
+  if (success) {
 
-    // Use table entry except for the one row that gets overridden
-    CurveNameListEntry curvesEntry1 (m_modelCurvesEntries [row1]); // Retrieve entry
-    QString curveNameCurrent1 = (row1 == row ?
-                                 value :
-                                 curvesEntry1.curveNameCurrent());
+    // First test was passed. Second test is to check for duplication
 
-    for (int row2 = row1 + 1; row2 < m_modelCurvesEntries.count(); row2++) {
+    for (int row1 = 0; row1 < m_modelCurvesEntries.count(); row1++) {
 
       // Use table entry except for the one row that gets overridden
-      CurveNameListEntry curvesEntry2 (m_modelCurvesEntries [row2]); // Retrieve entry
-      QString curveNameCurrent2 = (row2 == row ?
-                                   value :
-                                   curvesEntry2.curveNameCurrent());
+      CurveNameListEntry curvesEntry1 (m_modelCurvesEntries [row1]); // Retrieve entry
+      QString curveNameCurrent1 = (row1 == row ?
+                                   curveNameNew :
+                                   curvesEntry1.curveNameCurrent());
 
-      if (curveNameCurrent1 == curveNameCurrent2) {
+      for (int row2 = row1 + 1; row2 < m_modelCurvesEntries.count(); row2++) {
 
-        // Duplicate!
-        success = false;
-        break;
+        // Use table entry except for the one row that gets overridden
+        CurveNameListEntry curvesEntry2 (m_modelCurvesEntries [row2]); // Retrieve entry
+        QString curveNameCurrent2 = (row2 == row ?
+                                     curveNameNew :
+                                     curvesEntry2.curveNameCurrent());
+
+        if (curveNameCurrent1 == curveNameCurrent2) {
+
+          // Duplicate!
+          success = false;
+          break;
+        }
       }
     }
   }
@@ -228,7 +234,7 @@ bool CurveNameList::setData (const QModelIndex &index,
 
       if (index.column () == 0) {
         curvesEntry.setCurveNameCurrent (value.toString ());
-        success = curveNamesWillBeUnique(value.toString (),
+        success = curveNameIsAcceptable (value.toString (),
                                          row);
       } else if (index.column () == 1) {
         curvesEntry.setCurveNameOriginal (value.toString ());

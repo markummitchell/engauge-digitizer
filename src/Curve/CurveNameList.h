@@ -51,8 +51,8 @@ public:
 
 private:
 
-  /// Ensure curve names are never duplicated or else nasty bugs will appear when duplicates occur
-  bool curveNamesWillBeUnique(const QString &value,
+  /// Ensure curve names are never duplicated or else nasty bugs will appear when duplicates occur. Also prevent empty curve names
+  bool curveNameIsAcceptable (const QString &curveNameNew,
                               int row) const;
 
   /// Store entries as QStrings for easy translation into QVariants. Use CurveNameListEntry to translate
