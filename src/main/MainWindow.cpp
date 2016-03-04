@@ -650,6 +650,7 @@ void MainWindow::createActionsSettings ()
   connect (m_actionSettingsGeneral, SIGNAL (triggered ()), this, SLOT (slotSettingsGeneral ()));
 
   m_actionSettingsMainWindow = new QAction (tr ("Main Window..."), this);
+  m_actionSettingsMainWindow->setEnabled (true);
   m_actionSettingsMainWindow->setStatusTip (tr ("Edit Main Window settings."));
   m_actionSettingsMainWindow->setWhatsThis (tr ("Main Window Settings\n\n"
                                                 "Main window settings affect the user interface and are not specific to any document"));
@@ -3805,7 +3806,6 @@ void MainWindow::updateControls ()
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGeneral->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsMainWindow->setEnabled (!m_currentFile.isEmpty ());
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
