@@ -2,7 +2,7 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <Product Name='Engauge Digitizer' 
            Manufacturer='Engauge Open Source Developers'
-	   Id='1FBCEF62-3E8D-4E44-A0B5-0F066BAB900D' 
+	   Id='3E24D032-1183-4CE1-A30A-F2E3A7D702B0'
 	   UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
 	   Language='1033' Codepage='1252' 
            Version='7.0'>
