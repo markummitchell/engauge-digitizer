@@ -14,18 +14,17 @@ Interested in translating Engauge to another language? We welcome translations o
 
 Released Versions
 -----------------
-Engauge Digitizer is distributed with most Linux distributions. More recent  
-[releases](https://github.com/markummitchell/engauge-digitizer/releases) may be available for 
-Linux and Windows operating systems as downloads.
+Engauge Digitizer is distributed with most Linux distributions. [Releases](https://github.com/markummitchell/engauge-digitizer/releases) are also available for 
+Linux and Windows operating systems as downloads:
 
-Version 7.0 (3/5/2016 ) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or (2) axes with only one know coordinate (floating axes). Files can also be imported by copying and pasting.
+* Version 7.0 (3/5/2016 ) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or (2) axes with only one know coordinate (floating axes). Files can also be imported by copying and pasting.
 
-Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
+* Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
 access privileges.
 
-Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.
+* Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.
 
-Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many new features.
+* Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many new features.
 
 Developers and users are encouraged to offer their suggestions and comments!
 
