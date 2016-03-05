@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 #
-# ENGDIR is directory above the current directory
+# ENGDIR is two levels above the current directory
 DIR=`pwd`
-export ENGDIR=${DIR%/*}
+export ENGDIR=${DIR%/*/*}
 export QTBINDIR=`qtpaths --binaries-dir`
 export QTPLUGINSDIR=`qtpaths --plugin-dir`
 export QTTRANSDIR="${QTPLUGINSDIR%/*}/translations"
@@ -78,9 +78,9 @@ sed 's/-lQt/-lQt5/g' Makefile >Makefile~ &&
 sed 's/551//g' Makefile~ >Makefile &&
 mingw32-make clean &&
 mingw32-make &&
-cd windows &&
+cd dev/windows &&
 echo "***Rebuilding release directory" &&
-windeployqt -release ../bin/engauge.exe &&
+windeployqt -release ../../bin/engauge.exe &&
 echo "***Compiling release files" &&
 candle.exe engauge.wxs &&
 candle.exe WixUI_InstallDir_NoLicense.wxs &&
@@ -133,16 +133,16 @@ cp $QTTRANSDIR/qt_lv.qm  "Engauge Digitizer/translations"
 cp $QTTRANSDIR/qt_ru.qm  "Engauge Digitizer/translations"
 cp $QTTRANSDIR/qt_sk.qm  "Engauge Digitizer/translations"
 cp $QTTRANSDIR/qt_uk.qm  "Engauge Digitizer/translations"
-cp ../LICENSE                 "Engauge Digitizer"
-cp ../bin/D3Dcompiler_47.dll  "Engauge Digitizer"
-cp ../bin/engauge.exe         "Engauge Digitizer"
-cp ../bin/libEGL.dll          "Engauge Digitizer"
-cp ../bin/libgcc_s_dw2-1.dll  "Engauge Digitizer"
-cp ../bin/libGLESV2.dll       "Engauge Digitizer"
-cp ../bin/libstdc++-6.dll     "Engauge Digitizer"
-cp ../bin/libwinpthread-1.dll "Engauge Digitizer"
-cp ../bin/opengl32sw.dll      "Engauge Digitizer"
-cp ../bin/Qt5*.dll            "Engauge Digitizer"
+cp ../../LICENSE                 "Engauge Digitizer"
+cp ../../bin/D3Dcompiler_47.dll  "Engauge Digitizer"
+cp ../../bin/engauge.exe         "Engauge Digitizer"
+cp ../../bin/libEGL.dll          "Engauge Digitizer"
+cp ../../bin/libgcc_s_dw2-1.dll  "Engauge Digitizer"
+cp ../../bin/libGLESV2.dll       "Engauge Digitizer"
+cp ../../bin/libstdc++-6.dll     "Engauge Digitizer"
+cp ../../bin/libwinpthread-1.dll "Engauge Digitizer"
+cp ../../bin/opengl32sw.dll      "Engauge Digitizer"
+cp ../../bin/Qt5*.dll            "Engauge Digitizer"
 #
 echo "***Building zip file"
 /C/cygwin64/bin/zip -r digit-exe-windows-32-bit-without-installer-file-$VERSION_NUMBER_CODE.zip "Engauge Digitizer"
