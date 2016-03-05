@@ -13,10 +13,12 @@ Engauge Digitizer is distributed with most Linux distributions. Downloads of the
 
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
-Interested in translating Engauge to another language? We welcome translations of file engauge.ts to [other languages](http://doc.qt.io/qt-5/linguist-programmers.html).
+Interested in translating Engauge to another language? We welcome translations of file engauge.ts to [other languages](https://github.com/markummitchell/engauge-digitizer/issues/85) using [linguist](http://doc.qt.io/qt-5/linguist-programmers.html).
 
 Released Versions
 -----------------
+Version 7.0 (3/5/2016 ) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or (2) axes with only one know coordinate (floating axes). Files can also be imported by copying and pasting.
+
 Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
 access privileges.
 
@@ -39,14 +41,11 @@ Features in released versions of Engauge-Digitizer:
 7. Cubic spline interpolation between points gives more accurate curves with fewer points
 8. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
 9. Graph coordinates can be specified as date and time values, or as degrees, minutes and seconds
-10. Import by drag-and-drop
+10. Import by drag-and-drop and pasting
 11. Test suite for regression testing minimizes code breakage as new features are added
-
-Features coming in upcoming version 7:
-
-1. Multiple coordinate systems in the same image can be digitized in advanced mode
-2. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
-3. File import by pasting
+12. Multiple coordinate systems in the same image can be digitized in advanced mode
+13. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
+14. File import by pasting
 
 Installation
 ------------
