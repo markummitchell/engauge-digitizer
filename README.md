@@ -26,8 +26,6 @@ access privileges.
 
 * Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many new features.
 
-Developers and users are encouraged to offer their suggestions and comments!
-
 Features
 --------
 Features in released versions of Engauge-Digitizer:
