@@ -81,11 +81,11 @@ cp /usr/lib/i386-linux-gnu/qt5/plugins/sqldrivers/libqsqlite.so $SQLDIR
 
 echo "***Rebuilding release executable" &&
 export ENGAUGE_RELEASE=1 &&
-cd .. &&
+cd ../.. &&
 qmake engauge.pro &&
 make clean &&
 make &&
-cd linux
+cd dev/linux
 
 echo "***Compiling installer"
 cp startup_script.run $STAGINGDIR

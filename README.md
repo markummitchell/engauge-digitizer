@@ -8,15 +8,16 @@ engauge-digitizer
 
 The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs.
 
-Engauge Digitizer is distributed with most Linux distributions. Downloads of the most recent 
-[releases](https://github.com/markummitchell/engauge-digitizer/releases) are available for Linux and Windows. 
-
 This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.
 
 Interested in translating Engauge to another language? We welcome translations of file engauge.ts to [other languages](https://github.com/markummitchell/engauge-digitizer/issues/85) using [linguist](http://doc.qt.io/qt-5/linguist-programmers.html).
 
 Released Versions
 -----------------
+Engauge Digitizer is distributed with most Linux distributions. More recent  
+[releases](https://github.com/markummitchell/engauge-digitizer/releases) may be available for 
+Linux and Windows operating systems as downloads.
+
 Version 7.0 (3/5/2016 ) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or (2) axes with only one know coordinate (floating axes). Files can also be imported by copying and pasting.
 
 Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
