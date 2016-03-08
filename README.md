@@ -39,11 +39,10 @@ Features in released versions of Engauge-Digitizer:
 7. Cubic spline interpolation between points gives more accurate curves with fewer points
 8. Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes
 9. Graph coordinates can be specified as date and time values, or as degrees, minutes and seconds
-10. Import by drag-and-drop and pasting
+10. File import and data export by drag-and-drop and copy/paste
 11. Test suite for regression testing minimizes code breakage as new features are added
 12. Multiple coordinate systems in the same image can be digitized in advanced mode
 13. Axes with only one known coordinate (floating axes) can be digitized in advanced mode
-14. File import by pasting
 
 Installation
 ------------
