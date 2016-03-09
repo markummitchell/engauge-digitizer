@@ -36,9 +36,9 @@
     </ul>
   </description>
   <screenshots>
-    <screenshot type="default">https://github.com/markummitchell/engauge6/blob/master/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
-    <screenshot>https://github.com/markummitchell/engauge6/blob/master/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
-    <screenshot>https://github.com/markummitchell/engauge6/blob/master/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
+    <screenshot type="default">https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
+    <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
+    <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
   </screenshots>
   <url type="homepage">http://digitizer.sourceforge.net/</url>
   <updatecontact>zbyszek@in.waw.pl</updatecontact>
