@@ -107,8 +107,8 @@ void GridClassifier::classify (bool isGnuplot,
                     binStepY,
                     countY);
 
-  delete m_binsX;
-  delete m_binsY;
+  delete [] m_binsX;
+  delete [] m_binsY;
 }
 
 void GridClassifier::computeGraphCoordinateLimits (const QImage &image,
@@ -427,7 +427,7 @@ void GridClassifier::searchCountSpace (double bins [],
     isFirst = false;
   }
 
-  delete picketFence;
+  delete [] picketFence;
 }
 
 void GridClassifier::searchStartStepSpace (bool isGnuplot,
@@ -460,6 +460,8 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
 
   // Step search starts out small, and stops at value that gives count substantially greater than 2. Freakishly small
   // images need to have MIN_STEP_PIXELS overridden so the loop iterates at least once
+  binStartMax = BIN_START_UNSHIFTED + 1; // In case search below ever fails
+  binStepMax = qMin (MIN_STEP_PIXELS, m_numHistogramBins / 8); // In case search below ever fails
   for (int binStep = qMin (MIN_STEP_PIXELS, m_numHistogramBins / 8); binStep < m_numHistogramBins / 4; binStep++) {
 
     loadPicketFence (picketFence,
@@ -492,12 +494,12 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
         if (isGnuplot) {
 
            dumpGnuplotCoordinate(coordinateLabel,
-                                corr,
-                                bins,
-                                valueMin,
-                                valueMax,
-                                binStart,
-                                binStep);
+                                 corr,
+                                 bins,
+                                 valueMin,
+                                 valueMax,
+                                 binStart,
+                                 binStep);
         }
       }
     }
@@ -523,9 +525,9 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
                              correlationsMax);
   }
 
-  delete signalA;
-  delete signalB;
-  delete correlations;
-  delete correlationsMax;
-  delete picketFence;
+  delete [] signalA;
+  delete [] signalB;
+  delete [] correlations;
+  delete [] correlationsMax;
+  delete [] picketFence;
 }

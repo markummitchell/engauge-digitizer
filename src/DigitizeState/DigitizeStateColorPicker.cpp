@@ -137,7 +137,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
                               lowerValue,
                               upperValue);
 
-    delete histogramBins;
+    delete [] histogramBins;
 
   } else {
 

@@ -351,11 +351,12 @@ void SegmentFactory::removeEmptySegments (QList<Segment*> &segments) const
     --i;
     Segment *segment = segments.at (i);
 
+    // False positive warning from scan-build in next line can be ignored - it is a bug in that tool regarding loop unrolling
     if (segment->lineCount () == 0) {
 
       // Remove this Segment
       delete segment;
-
+      
       segments.removeAt (i);
     }
   }
