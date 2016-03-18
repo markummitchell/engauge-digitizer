@@ -16,6 +16,9 @@
 #include "Xml.h"
 #include "ZoomFactorInitial.h"
 
+// Prevent comma ambiguity with group separator commas and field delimiting commas
+const QLocale::NumberOption HIDE_GROUP_SEPARATOR = QLocale::OmitGroupSeparator;
+
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
@@ -101,6 +104,7 @@ void MainWindowModel::setLocale (QLocale::Language language,
 {
   QLocale locale (language,
                   country);
+  locale.setNumberOptions(HIDE_GROUP_SEPARATOR);
 
   m_locale = locale;
 }
@@ -108,6 +112,7 @@ void MainWindowModel::setLocale (QLocale::Language language,
 void MainWindowModel::setLocale (const QLocale &locale)
 {
   m_locale = locale;
+  m_locale.setNumberOptions(HIDE_GROUP_SEPARATOR);
 }
 
 void MainWindowModel::setMainTitleBarFormat(MainTitleBarFormat mainTitleBarFormat)

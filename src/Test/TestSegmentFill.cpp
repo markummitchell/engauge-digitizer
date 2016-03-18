@@ -58,6 +58,9 @@ void TestSegmentFill::testFindSegments()
 
   QList<Segment*> segments;
 
+  // The relative paths in this method will fail unless the directory is correct
+  QDir::setCurrent (QApplication::applicationDirPath());
+
   QImage img ("../samples/corners.png");
 
   QGraphicsScene *scene = new QGraphicsScene;

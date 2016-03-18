@@ -112,21 +112,28 @@ void DlgSettingsExportFormat::createDelimiters (QHBoxLayout *layoutMisc)
 
   m_btnDelimitersCommas = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_COMMA));
   m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values.\n\n"
-                                           "This setting is overridden for TSV files"));
+                                           "This setting is overridden for tab-separated value files, "
+                                           "which have .TSV file extensions."));
   layoutDelimiters->addWidget (m_btnDelimitersCommas);
   connect (m_btnDelimitersCommas, SIGNAL (released ()), this, SLOT (slotDelimitersCommas()));
 
   m_btnDelimitersSpaces = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_SPACE));
   m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values.\n\n"
-                                           "This setting is overridden for CSV and TSV files"));
+                                           "This setting is overridden for comma-separated value and tab-separated value files, "
+                                           "which have .CSV and .TSV file extensions respectively."));
   layoutDelimiters->addWidget (m_btnDelimitersSpaces);
   connect (m_btnDelimitersSpaces, SIGNAL (released ()), this, SLOT (slotDelimitersSpaces()));
 
   m_btnDelimitersTabs = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_TAB));
   m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values.\n\n"
-                                         "This setting is overridden for CSV files"));
+                                         "This setting is overridden for comma-separated value files, "
+                                         "which have .CSV file extensions."));
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
+
+  QLabel *labelExtensions = new QLabel (tr ("(For files without .csv/.tsv extensions)"));
+  labelExtensions->setWordWrap(true);
+  layoutDelimiters->addWidget (labelExtensions);
 }
 
 void DlgSettingsExportFormat::createFileLayout (QHBoxLayout *layoutMisc)
