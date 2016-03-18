@@ -49,6 +49,9 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
+  /// Get method for csv/tsv format override
+  bool overrideCsvTsv () const;
+
   /// Get method for points interval for functions.
   double pointsIntervalFunctions () const;
 
@@ -84,6 +87,9 @@ public:
 
   /// Set method for functions layout.
   void setLayoutFunctions(ExportLayoutFunctions exportLayoutFunctions);
+
+  /// Set method for csv/tsv format override
+  void setOverrideCsvTsv (bool overrideCsvTsv);
 
   /// Set method for points interval for functions
   void setPointsIntervalFunctions (double pointsIntervalFunctions);
@@ -122,6 +128,7 @@ private:
   ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
+  bool m_overrideCsvTsv;
   ExportHeader m_header;
   QString m_xLabel;
 };

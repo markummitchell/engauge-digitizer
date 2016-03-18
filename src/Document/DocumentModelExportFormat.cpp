@@ -31,6 +31,8 @@ DocumentModelExportFormat::DocumentModelExportFormat()
                                             QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
   m_delimiter = (ExportDelimiter) settings.value (SETTINGS_EXPORT_DELIMITER,
                                                   QVariant (EXPORT_DELIMITER_COMMA)).toInt();
+  m_overrideCsvTsv = settings.value (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
+                                     QVariant (true)).toBool();
   m_header = (ExportHeader) settings.value (SETTINGS_EXPORT_HEADER,
                                             QVariant (EXPORT_HEADER_SIMPLE)).toInt();
   m_layoutFunctions = (ExportLayoutFunctions) settings.value (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,
@@ -61,6 +63,7 @@ DocumentModelExportFormat::DocumentModelExportFormat (const Document &document) 
   m_pointsIntervalUnitsRelations (document.modelExport().pointsIntervalUnitsRelations()),
   m_layoutFunctions (document.modelExport().layoutFunctions()),
   m_delimiter (document.modelExport().delimiter()),
+  m_overrideCsvTsv (document.modelExport().overrideCsvTsv()),
   m_header (document.modelExport().header()),
   m_xLabel (document.modelExport().xLabel())
 {
@@ -76,6 +79,7 @@ DocumentModelExportFormat::DocumentModelExportFormat(const DocumentModelExportFo
   m_pointsIntervalUnitsRelations (other.pointsIntervalUnitsRelations()),
   m_layoutFunctions (other.layoutFunctions()),
   m_delimiter (other.delimiter()),
+  m_overrideCsvTsv (other.overrideCsvTsv()),
   m_header (other.header()),
   m_xLabel (other.xLabel ())
 {
@@ -93,6 +97,7 @@ DocumentModelExportFormat &DocumentModelExportFormat::operator=(const DocumentMo
   m_pointsIntervalUnitsRelations = other.pointsIntervalUnitsRelations();
   m_layoutFunctions = other.layoutFunctions();
   m_delimiter = other.delimiter();
+  m_overrideCsvTsv = other.overrideCsvTsv();
   m_header = other.header();
   m_xLabel = other.xLabel();
 
@@ -146,6 +151,13 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
     setPointsIntervalUnitsRelations ((ExportPointsIntervalUnits) attributes.value(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS).toInt());
     setLayoutFunctions ((ExportLayoutFunctions) attributes.value(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS).toInt());
     setDelimiter ((ExportDelimiter) attributes.value (DOCUMENT_SERIALIZE_EXPORT_DELIMITER).toInt());
+    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV)) {
+
+      // Boolean value
+      QString stringOverrideCsvTsv = attributes.value (DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV).toString();
+
+      setOverrideCsvTsv(stringOverrideCsvTsv == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    }
     setHeader ((ExportHeader) attributes.value(DOCUMENT_SERIALIZE_EXPORT_HEADER).toInt());
     setXLabel (attributes.value(DOCUMENT_SERIALIZE_EXPORT_X_LABEL).toString());
 
@@ -190,6 +202,11 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
   if (!success) {
     reader.raiseError (QObject::tr ("Cannot read export data"));
   }
+}
+
+bool DocumentModelExportFormat::overrideCsvTsv() const
+{
+  return m_overrideCsvTsv;
 }
 
 double DocumentModelExportFormat::pointsIntervalFunctions() const
@@ -249,6 +266,7 @@ void DocumentModelExportFormat::printStream(QString indentation,
       << exportPointsIntervalUnitsToString (m_pointsIntervalUnitsRelations) << "\n";
   str << indentation << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
   str << indentation << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
+  str << indentation << "overrideCsvTsv=" << (m_overrideCsvTsv ? "true" : "false") << "\n";
   str << indentation << "exportHeader=" << exportHeaderToString (m_header) << "\n";
   str << indentation << "xLabel=" << m_xLabel << "\n";
 }
@@ -269,6 +287,9 @@ void DocumentModelExportFormat::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS, QString::number (m_layoutFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS_STRING, exportLayoutFunctionsToString (m_layoutFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER, QString::number (m_delimiter));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV, m_overrideCsvTsv ?
+                          DOCUMENT_SERIALIZE_BOOL_TRUE :
+                          DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_STRING, exportDelimiterToString (m_delimiter));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER, QString::number (m_header));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER_STRING, exportHeaderToString (m_header));
@@ -306,6 +327,11 @@ void DocumentModelExportFormat::setHeader(ExportHeader header)
 void DocumentModelExportFormat::setLayoutFunctions(ExportLayoutFunctions layoutFunctions)
 {
   m_layoutFunctions = layoutFunctions;
+}
+
+void DocumentModelExportFormat::setOverrideCsvTsv(bool overrideCsvTsv)
+{
+  m_overrideCsvTsv = overrideCsvTsv;
 }
 
 void DocumentModelExportFormat::setPointsIntervalFunctions(double pointsIntervalFunctions)

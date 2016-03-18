@@ -10,6 +10,7 @@
 #include "DlgSettingsAbstractBase.h"
 
 class DocumentModelExportFormat;
+class QCheckBox;
 class QComboBox;
 class QDoubleValidator;
 class QGridLayout;
@@ -56,6 +57,7 @@ private slots:
   void slotInclude();
   void slotListExcluded();
   void slotListIncluded();
+  void slotOverrideCsvTsv(int);
   void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval(const QString &);
   void slotRelationsPointsEvenlySpacedIntervalUnits(const QString &);
@@ -115,6 +117,7 @@ private:
   QRadioButton *m_btnDelimitersCommas;
   QRadioButton *m_btnDelimitersSpaces;
   QRadioButton *m_btnDelimitersTabs;
+  QCheckBox *m_chkOverrideCsvTsv;
 
   QRadioButton *m_btnHeaderNone;
   QRadioButton *m_btnHeaderSimple;

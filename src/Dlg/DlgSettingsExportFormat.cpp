@@ -14,6 +14,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
+#include <QCheckBox>
 #include <QComboBox>
 #include <QDoubleValidator>
 #include <QGridLayout>
@@ -104,36 +105,34 @@ void DlgSettingsExportFormat::createDelimiters (QHBoxLayout *layoutMisc)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createDelimiters";
 
-  QGroupBox *groupDelimiters = new QGroupBox (tr ("Default Delimiters"));
+  QGroupBox *groupDelimiters = new QGroupBox (tr ("Delimiters"));
   layoutMisc->addWidget (groupDelimiters, 1);
 
   QVBoxLayout *layoutDelimiters = new QVBoxLayout;
   groupDelimiters->setLayout (layoutDelimiters);
 
   m_btnDelimitersCommas = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_COMMA));
-  m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values.\n\n"
-                                           "This setting is overridden for tab-separated value files, "
-                                           "which have .TSV file extensions."));
+  m_btnDelimitersCommas->setWhatsThis (tr ("Exported file will have commas between adjacent values, unless overridden by tabs in TSV files."));
   layoutDelimiters->addWidget (m_btnDelimitersCommas);
   connect (m_btnDelimitersCommas, SIGNAL (released ()), this, SLOT (slotDelimitersCommas()));
 
   m_btnDelimitersSpaces = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_SPACE));
-  m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values.\n\n"
-                                           "This setting is overridden for comma-separated value and tab-separated value files, "
-                                           "which have .CSV and .TSV file extensions respectively."));
+  m_btnDelimitersSpaces->setWhatsThis (tr ("Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, "
+                                           "or tabs in TSV files."));
   layoutDelimiters->addWidget (m_btnDelimitersSpaces);
   connect (m_btnDelimitersSpaces, SIGNAL (released ()), this, SLOT (slotDelimitersSpaces()));
 
   m_btnDelimitersTabs = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_TAB));
-  m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values.\n\n"
-                                         "This setting is overridden for comma-separated value files, "
-                                         "which have .CSV file extensions."));
+  m_btnDelimitersTabs->setWhatsThis (tr ("Exported file will have tabs between adjacent values, unless overridden by commas in CSV files."));
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
 
-  QLabel *labelExtensions = new QLabel (tr ("(For files without .csv/.tsv extensions)"));
-  labelExtensions->setWordWrap(true);
-  layoutDelimiters->addWidget (labelExtensions);
+  m_chkOverrideCsvTsv = new QCheckBox (tr ("Override in CSV/TSV files"));
+  m_chkOverrideCsvTsv->setWhatsThis (tr ("Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs "
+                                         "respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting "
+                                         "to every file."));
+  connect (m_chkOverrideCsvTsv, SIGNAL (stateChanged (int)), this, SLOT (slotOverrideCsvTsv(int)));
+  layoutDelimiters->addWidget (m_chkOverrideCsvTsv);
 }
 
 void DlgSettingsExportFormat::createFileLayout (QHBoxLayout *layoutMisc)
@@ -539,6 +538,8 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnDelimitersSpaces->setChecked (delimiter == EXPORT_DELIMITER_SPACE);
   m_btnDelimitersTabs->setChecked (delimiter == EXPORT_DELIMITER_TAB);
 
+  m_chkOverrideCsvTsv->setChecked (m_modelExportAfter->overrideCsvTsv());
+
   ExportHeader header = m_modelExportAfter->header ();
   m_btnHeaderNone->setChecked (header == EXPORT_HEADER_NONE);
   m_btnHeaderSimple->setChecked (header == EXPORT_HEADER_SIMPLE);
@@ -783,6 +784,15 @@ void DlgSettingsExportFormat::slotListIncluded()
 
   updateControls();
   // Do not call updatePreview since this method changes nothing
+}
+
+void DlgSettingsExportFormat::slotOverrideCsvTsv(int)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotOverrideCsvTsv";
+
+  m_modelExportAfter->setOverrideCsvTsv(m_chkOverrideCsvTsv->isChecked());
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsExportFormat::slotRelationsPointsEvenlySpaced()
