@@ -1,0 +1,9 @@
+<Script>
+  <Cmd Type="CmdFileOpen" FileName="../test/version7.1_1.dig" />
+  <Cmd Type="CmdFileClose" />
+  <Cmd Type="CmdFileOpen" FileName="../test/version7.1_1.dig" />
+  <Cmd Type="CmdFileClose" />
+  <Cmd Type="CmdFileImport" FileName="../samples/huge.png" />
+  <Cmd Type="CmdFileClose" />
+</Script>
+

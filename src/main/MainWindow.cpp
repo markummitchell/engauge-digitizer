@@ -1861,20 +1861,24 @@ DocumentModelExportFormat MainWindow::modelExportOverride (const DocumentModelEx
 {
   DocumentModelExportFormat modelExportFormatAfter = modelExportFormatBefore;
 
-  // Extract file extensions
-  QString csvExtension = QString (".%1")
-                         .arg (exportStrategy.fileExtensionCsv());
-  QString tsvExtension = QString (".%1")
-                         .arg (exportStrategy.fileExtensionTsv());
-  QString fileExtensionVersusCsv = fileName.right (csvExtension.size());
-  QString fileExtensionVersusTsv = fileName.right (tsvExtension.size());
+  // See if delimiter setting overrides commas/tabs for files with csv/tsv file extensions respectively
+  if (!modelExportFormatAfter.overrideCsvTsv()) {
 
-  // Override if CSV or TSV was selected. We cannot use QFileDialog::selecedNameFilter() since that is
-  // broken in Linux, so we use the file extension
-  if (csvExtension.compare (fileExtensionVersusCsv, Qt::CaseInsensitive) == 0) {
-    modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_COMMA);
-  } else if (tsvExtension.compare (fileExtensionVersusTsv, Qt::CaseInsensitive) == 0) {
-    modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_TAB);
+    // Extract file extensions
+    QString csvExtension = QString (".%1")
+                           .arg (exportStrategy.fileExtensionCsv());
+    QString tsvExtension = QString (".%1")
+                           .arg (exportStrategy.fileExtensionTsv());
+    QString fileExtensionVersusCsv = fileName.right (csvExtension.size());
+    QString fileExtensionVersusTsv = fileName.right (tsvExtension.size());
+
+    // Override if CSV or TSV was selected. We cannot use QFileDialog::selectedNameFilter() since that is
+    // broken in Linux, so we use the file extension
+    if (csvExtension.compare (fileExtensionVersusCsv, Qt::CaseInsensitive) == 0) {
+      modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_COMMA);
+    } else if (tsvExtension.compare (fileExtensionVersusTsv, Qt::CaseInsensitive) == 0) {
+      modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_TAB);
+    }
   }
 
   return modelExportFormatAfter;

@@ -9,6 +9,8 @@
 
 #include <QString>
 
+/// Delimiter values that may or may not be overridden by DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV
+/// for CSV and TSV files
 enum ExportDelimiter {
   EXPORT_DELIMITER_COMMA,
   EXPORT_DELIMITER_SPACE,
