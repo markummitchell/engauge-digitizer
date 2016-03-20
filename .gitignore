@@ -1,3 +1,5 @@
+.DS_store
+.qmake.stash
 \#*
 digit-exe-windows-*
 engauge.log

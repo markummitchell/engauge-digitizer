@@ -548,9 +548,28 @@ SOURCES += \
 
 TARGET = bin/engauge
 
-QT += core gui network printsupport widgets xml help
+macx-* {
+target.path = engauge/engauge
+INSTALLS += target
+QT += core gui help network printsupport widgets xml
+INCLUDEPATH += \
+/usr/local/Cellar/fftw/3.3.4_1/include \
+/usr/local/Cellar/log4cpp/1.1.1/include \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
+LIBS += -L/usr/local/Cellar/fftw/3.3.4_1/lib -L/usr/local/Cellar/log4cpp/1.1.1/lib -framework CoreFoundation
+}
+
+#linux-* {
+#QT += core gui network printsupport widgets xml help
+#}
 
 win32-* {
+QT += core gui network printsupport widgets xml help
 CONFIG += windows
 }
 
