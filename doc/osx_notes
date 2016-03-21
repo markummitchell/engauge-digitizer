@@ -1,0 +1,29 @@
+log4cpp
+-------
+
+./configure \
+--prefix=/Users/mark/log4cpp CXX=/usr/bin/g++ \
+CXXFLAGS="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include -arch x86_64 -Xarch_x86_64 \
+-DLOG4CPP_HAVE_SSTREAM"
+
+make
+make install
+
+fftw (NOTE THE -enabled-shared!)
+--------------------------------
+./configure \
+--prefix=/Users/mark/fftw-3.3.4 \
+--enable-shared \
+CXX=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ \
+CXXFLAGS="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include"
+
+qmake -config release engauge.pro
+
+engauge
+-------
+source dev/osx/macosx_setup
+(edit engauge.pro and comment out CONFIG= line)
+qmake -config release engauge.pro
+(edit engauge.pro and restore CONFIG= line)
+make
+cp -r bin/documentation engauge.app/Contents/MacOS
