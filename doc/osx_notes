@@ -27,3 +27,16 @@ qmake -config release engauge.pro
 (edit engauge.pro and restore CONFIG= line)
 make
 cp -r bin/documentation engauge.app/Contents/MacOS
+
+icons
+-----
+use gimp to create dev/osx/iconset subdirectory
+iconutil -c icns digitizer.iconset
+cp digitizer.icns engauge-digitizer/engauge.app/Contents/Resources
+
+deploy
+------
+Next step adds libraries to application bundle:
+$QT_DIR/bin/macdeployqt engauge.app -dmg
+
+
