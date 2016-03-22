@@ -2187,7 +2187,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   // Main window geometry
   resize (settings.value (SETTINGS_SIZE,
-                          QSize (400, 400)).toSize ());
+                          QSize (600, 600)).toSize ());
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 
@@ -2254,7 +2254,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
     addDockWidget (Qt::RightDockWidgetArea,
                    m_dockChecklistGuide); // Add on the right to prevent error message, then immediately make undocked
-    m_dockChecklistGuide->setFloating(true); // Undock
+    m_dockChecklistGuide->setFloating(false); // Undocked is too easy to miss so start docked
     if (settings.contains (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY)) {
       m_dockChecklistGuide->restoreGeometry (settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY).toByteArray());
     }
