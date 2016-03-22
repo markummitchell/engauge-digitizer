@@ -15,5 +15,7 @@ ChecklistGuidePageIntro::ChecklistGuidePageIntro() :
   addHtml (tr ("<p>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines "
                "to define the coordinates.</p>"
                "<p>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you "
-               "can obtain digitized data points in an exported file.</p>"));
+               "can obtain digitized data points in an exported file. This wizard also provides a quick summary of the "
+               "most useful features of Engauge.</p>"
+               "<p>New users are encouraged to use this wizard.</p>"));
 }
