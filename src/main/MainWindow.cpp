@@ -2187,7 +2187,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   // Main window geometry
   resize (settings.value (SETTINGS_SIZE,
-                          QSize (400, 400)).toSize ());
+                          QSize (600, 600)).toSize ());
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 

@@ -1,4 +1,12 @@
 #!/usr/bin/python
+#
+# Usage - python insert_derived_column.py <csv file>
+# Purpose - This script reads in a table of (longitude,latitude) data points, and then
+#           outputs a set of evenly spaced waypoints through those points assuming a constant
+#           velocity (variable velocityMps)
+# Installation requirements - 1) sudo apt-get install python
+#                             2) sudo apt-get install python-dev (or python-devel)
+#                             3) sudo pip install numpy
 
 from datetime import datetime, timedelta
 import fileinput
@@ -66,7 +74,10 @@ for line in fileinput.input():
             # Output
             timestamp = curDateTime.strftime ('"%j %Y %H:%M:%S.%f"')
             fields.insert (0, timestamp)
+
+            # Use one of the following lines. The first is for python2, and the second is for python3
             print ', '.join (str (x) for x in fields)
+            #print (', '.join (str (x) for x in fields))
 
         # Update for next iteration
         timeTraveledS = xyzDeltaMag / velocityMps
