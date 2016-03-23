@@ -2254,7 +2254,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                  Qt::NoDockWidgetArea).toInt();
 
   if (area == Qt::NoDockWidgetArea) {
-std::cerr << "shit1\n";
+
     addDockWidget (Qt::RightDockWidgetArea,
                    m_dockChecklistGuide); // Add on the right to prevent error message, then immediately make undocked
     m_dockChecklistGuide->setFloating(DOCKED_EQUALS_NOT_FLOATING);
@@ -2263,7 +2263,7 @@ std::cerr << "shit1\n";
     }
 
   } else {
-std::cerr << "shit2\n";
+
     addDockWidget (area,
                    m_dockChecklistGuide);
 
