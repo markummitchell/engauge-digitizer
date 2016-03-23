@@ -13,9 +13,8 @@
 #
 # More comments are in the INSTALL file, and below
 
-TEMPLATE    = app
-
-CONFIG      = qt warn_on thread debug
+# Comment out this CONFIG line in OSX to produce an OSX application bundle
+CONFIG = qt warn_on thread debug
 
 _ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
 isEmpty(_ENGAUGE_RELEASE) {
@@ -546,11 +545,33 @@ SOURCES += \
     src/util/Xml.cpp \
     src/Zoom/ZoomLabels.cpp
 
-TARGET = bin/engauge
+macx-* {
+CONFIG += app_bundle
+QMAKE_CXXFLAGS += "-stdlib=libc++"
+QMAKE_LFLAGS += "-stdlib=libc++"
+QT += core gui help network printsupport widgets xml
+INCLUDEPATH += \
+/usr/local/Cellar/fftw/3.3.4_1/include \
+/usr/local/Cellar/log4cpp/1.1.1/include \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
+LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundation
+}
 
+linux-* {
+TEMPLATE = app
+TARGET = bin/engauge
 QT += core gui network printsupport widgets xml help
+}
 
 win32-* {
+TEMPLATE = app
+TARGET = bin/engauge
+QT += core gui network printsupport widgets xml help
 CONFIG += windows
 }
 

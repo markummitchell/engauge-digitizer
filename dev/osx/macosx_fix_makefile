@@ -1,0 +1,20 @@
+# NOT FOR USE WHEN BUILDING AN APPLICATION BUNDLE!
+#
+# This script is for building regular application with, or without, qtcreator
+#
+# This script is called, between the qmake and make steps, from 3 places
+# 1) Outside of qtcreator manually
+# 2) In qtcreator as step 2 in Debug build proces, with Command=/usr/bin/env, Args='bash macosx_fix_makefile', Working DIrectory='${builddir}/dev/osx"
+# 3) In qtcreator as step 2 in Release build proces, with Command=/usr/bin/env, Args='bash macosx_fix_makefile', Working DIrectory='${builddir}/dev/osx"
+
+FILE=Makefile
+if [ ! -f $FILE ]; then
+	FILE=../../Makefile
+fi
+
+/usr/bin/sed -ibak '/^LIBS/s/-lQt5/-framework Qt/g' $FILE &&
+/usr/bin/sed -ibak 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' $FILE &&
+/usr/bin/sed -ibak 's|-F/usr/local/Cellar/fftw|-L/usr/local/Cellar/fftw|' $FILE &&
+/usr/bin/sed -ibak 's|-F/usr/local/Cellar/log4cpp|-L/usr/local/Cellar/log4cpp|' $FILE
+
+# Check out 'qmake -spec macx-xcode engauge.pro' at http://doc.qt.io/qt-5/qmake-platform-notes.html

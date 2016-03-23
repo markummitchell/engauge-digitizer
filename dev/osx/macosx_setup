@@ -1,0 +1,7 @@
+# Building $HOME/Qt/5.5/clang_64 puts installation into /usr/local/Qt-5.5.1 
+# BUT THAT FAILED with include files not working
+#export QT_DIR=/usr/local/Qt-5.5.1
+#export PATH=$QT_DIR/bin:$PATH
+
+export QT_DIR=/usr/local/Cellar/qt5/5.5.1_2
+export PATH=$QT_DIR/bin:$PATH

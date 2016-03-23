@@ -1,5 +1,8 @@
+.DS_store
+.qmake.stash
 \#*
 digit-exe-windows-*
+engauge
 engauge.log
 engauge.pro.user
 Makefile*
@@ -7,3 +10,5 @@ object_script.engauge
 qrc_*
 make.exe.stackdump
 Engauge Digitizer
+engauge.app
+engauge.dmg

@@ -2246,7 +2246,10 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionStatusTemporary->setChecked (statusBarMode == STATUS_BAR_MODE_TEMPORARY);
   m_actionStatusAlways->setChecked (statusBarMode == STATUS_BAR_MODE_ALWAYS);
 
-  // Checklist guide is docked or undocked. Default is undocked so  user knows it can be undocked
+  // Checklist guide is docked or undocked. Default is docked so it does not get overlooked by the user (which
+  // can happen if it opens elsewhere). The user may not know it can be undocked, but at least can resize or
+  // hide it if he/she needs more room for the main window.
+  const bool DOCKED_EQUALS_NOT_FLOATING = false;
   Qt::DockWidgetArea area = (Qt::DockWidgetArea) settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
                                                                  Qt::NoDockWidgetArea).toInt();
 
@@ -2254,7 +2257,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
     addDockWidget (Qt::RightDockWidgetArea,
                    m_dockChecklistGuide); // Add on the right to prevent error message, then immediately make undocked
-    m_dockChecklistGuide->setFloating(false); // Undocked is too easy to miss so start docked
+    m_dockChecklistGuide->setFloating(DOCKED_EQUALS_NOT_FLOATING);
     if (settings.contains (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY)) {
       m_dockChecklistGuide->restoreGeometry (settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY).toByteArray());
     }
