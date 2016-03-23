@@ -2,6 +2,7 @@
 .qmake.stash
 \#*
 digit-exe-windows-*
+engauge
 engauge.log
 engauge.pro.user
 Makefile*
