@@ -28,7 +28,7 @@ before_install:
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew install homebrew/versions/qt55 fftw log4cpp;
-     export QT5BREWHOME=`brew --prefix qt5`;
+     export QT5BREWHOME=`brew --prefix homebrew/versions/qt5`;
    fi
 
 script:
