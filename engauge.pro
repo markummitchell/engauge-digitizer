@@ -553,12 +553,12 @@ QT += core gui help network printsupport widgets xml
 INCLUDEPATH += \
 /usr/local/Cellar/fftw/3.3.4_1/include \
 /usr/local/Cellar/log4cpp/1.1.1/include \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
+/usr/local/Cellar/qt5/5.6.0/lib/QtCore.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.6.0/lib/QtHelp.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.6.0/lib/QtNetwork.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.6.0/lib/QtPrintSupport.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.6.0/lib/QtWidgets.framework/Versions/5/Headers \
+/usr/local/Cellar/qt5/5.6.0/lib/QtXml.framework/Versions/5/Headers
 LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundation
 }
 
