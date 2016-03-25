@@ -15,6 +15,7 @@
 
 # Comment out this CONFIG line in OSX to produce an OSX application bundle
 CONFIG = qt warn_on thread debug
+QT += core gui help network printsupport widgets xml
 
 _ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
 isEmpty(_ENGAUGE_RELEASE) {
@@ -549,7 +550,6 @@ macx-* {
 CONFIG += app_bundle
 QMAKE_CXXFLAGS += "-stdlib=libc++"
 QMAKE_LFLAGS += "-stdlib=libc++"
-QT += core gui help network printsupport widgets xml
 INCLUDEPATH += \
 /usr/local/Cellar/fftw/3.3.4_1/include \
 /usr/local/Cellar/log4cpp/1.1.1/include \
@@ -565,13 +565,11 @@ LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundat
 linux-* {
 TEMPLATE = app
 TARGET = bin/engauge
-QT += core gui network printsupport widgets xml help
 }
 
 win32-* {
 TEMPLATE = app
 TARGET = bin/engauge
-QT += core gui network printsupport widgets xml help
 CONFIG += windows
 }
 
