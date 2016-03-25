@@ -13,10 +13,10 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
-#include <QLibraryInfo>
 #include <QObject>
 #include <QProcessEnvironment>
 #include <QTranslator>
+#include "TranslatorContainer.h"
 
 using namespace std;
 
@@ -40,7 +40,6 @@ bool checkFileExists (const QString &file);
 QString engaugeLogFilename ();
 bool engaugeLogFilenameAttempt (const QString &path,
                                 QString &pathAndFile);
-void loadTranslations(QApplication &app);
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
@@ -94,25 +93,6 @@ bool engaugeLogFilenameAttempt (const QString &path,
   return success;
 }
 
-void loadTranslations(QApplication &app,
-                      QTranslator **translatorGeneric,
-                      QTranslator **translatorEngauge)
-{
-  QString locale = QLocale::system().name();
-
-  // Basic translations, like buttons in QWizard
-  *translatorGeneric = new QTranslator;
-  (*translatorGeneric)->load ("qt_" + locale,
-                              QLibraryInfo::location (QLibraryInfo::TranslationsPath));
-  app.installTranslator(*translatorGeneric);
-
-  // Engauge-specific translations
-  *translatorEngauge = new QTranslator;
-  (*translatorEngauge)->load ("engauge_" + locale,
-                              QCoreApplication::applicationDirPath () + "/translations");
-  app.installTranslator (*translatorEngauge);
-}
-
 int main(int argc, char *argv[])
 {
   qRegisterMetaType<ColorFilterMode> ("ColorFilterMode");
@@ -120,10 +100,7 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   // Translations
-  QTranslator *translatorGeneric, *translatorEngauge; // Must exist permanently so these go on the heap
-  loadTranslations(app,
-                   &translatorGeneric,
-                   &translatorEngauge);
+  TranslatorContainer translators; // Must exist permanently
 
   // Command line
   bool isDebug, isGnuplot, isRegressionTest;
