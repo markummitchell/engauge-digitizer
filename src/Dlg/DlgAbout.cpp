@@ -30,7 +30,7 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
                      "<p>Engauge Digitizer Links<p>"
                      "<ul>"
                      "<li><a href='https://github.com/markummitchell/engauge-digitizer'>Project Home Page</a></li>"
-                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum<a></li>"
+                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum</a></li>"
                      "</ul>"
                      "<p>FFTW 3.X.X Links</p>"
                      "<ul>"
