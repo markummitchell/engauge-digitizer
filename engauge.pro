@@ -560,16 +560,12 @@ INCLUDEPATH += \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
 LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundation
-}
-
-linux-* {
+} else {
 TEMPLATE = app
 TARGET = bin/engauge
 }
 
 win32-* {
-TEMPLATE = app
-TARGET = bin/engauge
 CONFIG += windows
 }
 
