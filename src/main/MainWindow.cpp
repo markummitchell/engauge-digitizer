@@ -107,15 +107,6 @@
 #include "ZoomFactor.h"
 #include "ZoomFactorInitial.h"
 
-// These constants are used for the menu item text AND for tooltip text. They are char* instead of QStrings
-// so they get updated when the language changes
-const char *DIGITIZE_ACTION_AXIS_POINT ("Axis Point Tool");
-const char *DIGITIZE_ACTION_COLOR_PICKER ("Color Picker Tool");
-const char *DIGITIZE_ACTION_CURVE_POINT ("Curve Point Tool");
-const char *DIGITIZE_ACTION_POINT_MATCH ("Point Match Tool");
-const char *DIGITIZE_ACTION_SEGMENT_POINTS ("Segment Fill Tool");
-const char *DIGITIZE_ACTION_SELECT ("Select Tool");
-
 const QString EMPTY_FILENAME ("");
 const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
@@ -339,7 +330,7 @@ void MainWindow::createActionsDigitize ()
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
 
-  m_actionDigitizeSelect = new QAction (iconSelect, tr (DIGITIZE_ACTION_SELECT), this);
+  m_actionDigitizeSelect = new QAction (iconSelect, tr ("Select Tool"), this);
   m_actionDigitizeSelect->setShortcut (QKeySequence (tr ("Shift+F2")));
   m_actionDigitizeSelect->setCheckable (true);
   m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
@@ -347,7 +338,7 @@ void MainWindow::createActionsDigitize ()
                                             "Select points on the screen."));
   connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
 
-  m_actionDigitizeAxis = new QAction (iconAxis, tr (DIGITIZE_ACTION_AXIS_POINT), this);
+  m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point Tool"), this);
   m_actionDigitizeAxis->setShortcut (QKeySequence (tr ("Shift+F3")));
   m_actionDigitizeAxis->setCheckable (true);
   m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
@@ -358,7 +349,7 @@ void MainWindow::createActionsDigitize ()
                                           "the graph coordinates."));
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
 
-  m_actionDigitizeCurve = new QAction (iconCurve, tr (DIGITIZE_ACTION_CURVE_POINT), this);
+  m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
   m_actionDigitizeCurve->setShortcut (QKeySequence (tr ("Shift+F4")));
   m_actionDigitizeCurve->setCheckable (true);
   m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
@@ -369,7 +360,7 @@ void MainWindow::createActionsDigitize ()
                                            "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
 
-  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr (DIGITIZE_ACTION_POINT_MATCH), this);
+  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match Tool"), this);
   m_actionDigitizePointMatch->setShortcut (QKeySequence (tr ("Shift+F5")));
   m_actionDigitizePointMatch->setCheckable (true);
   m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
@@ -379,7 +370,7 @@ void MainWindow::createActionsDigitize ()
                                                 "New points will be assigned to the currently selected curve."));
   connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
 
-  m_actionDigitizeColorPicker = new QAction (iconColorPicker, tr (DIGITIZE_ACTION_COLOR_PICKER), this);
+  m_actionDigitizeColorPicker = new QAction (iconColorPicker, tr ("Color Picker Tool"), this);
   m_actionDigitizeColorPicker->setShortcut (QKeySequence (tr ("Shift+F6")));
   m_actionDigitizeColorPicker->setCheckable (true);
   m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Fill mode."));
@@ -389,7 +380,7 @@ void MainWindow::createActionsDigitize ()
                                                  "while in Segment Fill mode."));
   connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
 
-  m_actionDigitizeSegment = new QAction (iconSegment, tr (DIGITIZE_ACTION_SEGMENT_POINTS), this);
+  m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Fill Tool"), this);
   m_actionDigitizeSegment->setShortcut (QKeySequence (tr ("Shift+F7")));
   m_actionDigitizeSegment->setCheckable (true);
   m_actionDigitizeSegment->setStatusTip (tr ("Digitize curve points along a segment of a curve."));
@@ -1811,12 +1802,12 @@ void MainWindow::loadToolTips()
   if (m_actionViewToolTips->isChecked ()) {
 
     // Show tool tips
-    m_actionDigitizeSelect->setToolTip (tr (DIGITIZE_ACTION_SELECT));
-    m_actionDigitizeAxis->setToolTip (tr (DIGITIZE_ACTION_AXIS_POINT));
-    m_actionDigitizeCurve->setToolTip (tr (DIGITIZE_ACTION_CURVE_POINT));
-    m_actionDigitizePointMatch->setToolTip (tr (DIGITIZE_ACTION_POINT_MATCH));
-    m_actionDigitizeColorPicker->setToolTip (tr (DIGITIZE_ACTION_COLOR_PICKER));
-    m_actionDigitizeSegment->setToolTip (tr (DIGITIZE_ACTION_SEGMENT_POINTS));
+    m_actionDigitizeSelect->setToolTip (m_actionDigitizeSelect->text());
+    m_actionDigitizeAxis->setToolTip (m_actionDigitizeAxis->text());
+    m_actionDigitizeCurve->setToolTip (m_actionDigitizeCurve->text());
+    m_actionDigitizePointMatch->setToolTip (m_actionDigitizePointMatch->text());
+    m_actionDigitizeColorPicker->setToolTip (m_actionDigitizeColorPicker->text());
+    m_actionDigitizeSegment->setToolTip (m_actionDigitizeSegment->text());
     m_cmbBackground->setToolTip (tr ("Background image."));
     m_cmbCurve->setToolTip (tr ("Currently selected curve."));
     m_viewPointStyle->setToolTip (tr ("Point style for currently selected curve."));
