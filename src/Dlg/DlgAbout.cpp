@@ -15,7 +15,7 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
   setWindowTitle (tr ("About Engauge"));
   setTextFormat (Qt::RichText);
   setText (QString ("%1 %2 %3 %4")
-           .arg (tr ("<p>Engauge Digitizer</b>"))
+           .arg (tr ("<p>Engauge Digitizer</p>"))
            .arg (tr ("Version"))
            .arg (VERSION_NUMBER)
            .arg (tr ("</p><p>&copy; 2014 Mark Mitchell</p>"

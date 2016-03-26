@@ -288,8 +288,8 @@ Para ejecutar el Asistente de Guía Lista de verificación cuando se importa un 
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="18"/>
-        <source>&lt;p&gt;Engauge Digitizer&lt;/b&gt;</source>
-        <translation>&lt;p&gt;Engauge Digitizer&lt;/b&gt;</translation>
+        <source>&lt;p&gt;Engauge Digitizer&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Engauge Digitizer&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="19"/>
