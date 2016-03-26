@@ -269,6 +269,7 @@ HEADERS  += \
     src/Transformation/TransformationStateContext.h \
     src/Transformation/TransformationStateDefined.h \
     src/Transformation/TransformationStateUndefined.h \
+    src/Translator/TranslatorContainer.h \
     src/Tutorial/TutorialButton.h \
     src/Tutorial/TutorialButtonRect.h \
     src/Tutorial/TutorialButtonText.h \
@@ -519,6 +520,7 @@ SOURCES += \
     src/Transformation/TransformationStateContext.cpp \
     src/Transformation/TransformationStateDefined.cpp \
     src/Transformation/TransformationStateUndefined.cpp \
+    src/Translator/TranslatorContainer.cpp \
     src/Tutorial/TutorialButton.cpp \
     src/Tutorial/TutorialButtonRect.cpp \
     src/Tutorial/TutorialButtonText.cpp \
@@ -618,6 +620,7 @@ INCLUDEPATH += src \
                src/Spline \
                src/StatusBar \
                src/Transformation \
+               src/Translator \
                src/Tutorial \
                src/util \
                src/View \
@@ -669,3 +672,30 @@ jpeg2000 {
       message(Building release version without internal support for JPEG2000 files)
     }
 }
+
+# Translation file names are 'engauge_XX_YY' where:
+#   XX = two letter language codes in column '639-1' at https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+#   YY = two letter country codes in column 'ISO 3166-2' at https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+#
+# ar_eg = Arabic Egypt
+# de_de = German Germany 
+# es_es = Spanish Spain
+# fr_fr = French France
+# hi_in = Hindi India
+# ja_jp = Japanese Japan
+# kk_kz = Kazakh Kazakhstan 
+# pt_br = Portuguese Brazil
+# ru_ru = Russian Federation
+# zh_cn = Chinese  
+#
+# Run lupdate to merge new text into translation files
+TRANSLATIONS = translations/engauge_ar_eg.ts \
+               translations/engauge_de_de.ts \
+               translations/engauge_es_es.ts \
+               translations/engauge_fr_fr.ts \               
+               translations/engauge_hi_in.ts \               
+               translations/engauge_ja_jp.ts \               
+               translations/engauge_kk_kz.ts \
+               translations/engauge_pt_br.ts \
+               translations/engauge_ru_ru.ts \
+               translations/engauge_zh_cn.ts

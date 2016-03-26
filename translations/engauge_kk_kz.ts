@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="kk_KZ">
 <context>
     <name>ChecklistGuide</name>
     <message>
@@ -23,7 +23,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <name>ChecklistGuidePageConclusion</name>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="15"/>
-        <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;</source>
+        <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color=&quot;red&quot;&gt;Why does the imported image look different?&lt;/font&gt; After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -69,7 +69,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <name>ChecklistGuidePageIntro</name>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="15"/>
-        <source>&lt;p&gt;Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.&lt;/p&gt;&lt;p&gt;This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file.&lt;/p&gt;</source>
+        <source>&lt;p&gt;Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.&lt;/p&gt;&lt;p&gt;This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.&lt;/p&gt;&lt;p&gt;New users are encouraged to use this wizard.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -87,185 +87,190 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106"/>
-        <source>The coordinates are defined by creating axis points:</source>
+        <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107"/>
+        <source>The coordinates are defined by creating axis points:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108"/>
         <source>Add first of three axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="110"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="119"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="154"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="163"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
         <source>Click on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="110"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="119"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
         <source>for &lt;b&gt;Axis Points&lt;/b&gt; mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
-        <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130"/>
-        <source>Enter the coordinates of the axis point</source>
+        <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212"/>
+        <source>Enter the coordinates of the axis point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="132"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213"/>
         <source>Click on Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="116"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117"/>
         <source>Add second of three axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121"/>
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="125"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126"/>
         <source>Add third of three axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130"/>
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137"/>
         <source>Points are digitized along each curve:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="148"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149"/>
         <source>Add points for curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="154"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
         <source>for &lt;b&gt;Segment Fill&lt;/b&gt; mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>Select curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>in the drop-down list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157"/>
         <source>Move the cursor over the curve. If a line does not appear then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="158"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159"/>
         <source>Move the cursor over the curve again. When the &lt;b&gt;Segment Fill&lt;/b&gt; line appears, click on it to generate points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="163"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
         <source>for &lt;b&gt;Point Match&lt;/b&gt; mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166"/>
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="168"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169"/>
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170"/>
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171"/>
         <source>The previous step repeats until you select a different mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="178"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179"/>
         <source>The digitized points can be exported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180"/>
         <source>Export the points to a file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183"/>
         <source>Select menu option &lt;b&gt;File / Export&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184"/>
         <source>Enter the file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186"/>
         <source>Congratulations!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="190"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191"/>
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="193"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194"/>
         <source>Select menu option &lt;b&gt;View / Background / Show Original Image&lt;/b&gt; to see the original image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195"/>
         <source>Select menu option &lt;b&gt;View / Background / Show Filtered Image&lt;/b&gt; to see the image from &lt;b&gt;Color Filter&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="209"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
         <source>Select menu option &lt;b&gt;Settings / Color Filter&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211"/>
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212"/>
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,7 +284,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="18"/>
-        <source>&lt;p&gt;&lt;b&gt;Engauge Digitizer&lt;/b&gt;</source>
+        <source>&lt;p&gt;Engauge Digitizer&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -289,7 +294,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21"/>
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as &quot;inverse graphing&quot;. When you &quot;engauge&quot; a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;http://digitizer.sourceforge.net&apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;http://sourceforge.net/forum/forum.php?forum_id=229857&apos;&gt;Help Forum&lt;a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;http://sourceforge.net/forum/forum.php?forum_id=229856&apos;&gt;Open Discussion Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;http://www.fftw.org&apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;http://www.openjpeg.org&apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as &quot;inverse graphing&quot;. When you &quot;engauge&quot; a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://github.com/markummitchell/engauge-digitizer&apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://gitter.im/markummitchell/engauge-digitizer&apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;http://www.fftw.org&apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;http://www.openjpeg.org&apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -605,6 +610,13 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="900"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="904"/>
+        <source>Coordinates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="210"/>
         <source>Date/Time:</source>
         <translation type="unfinished"></translation>
@@ -759,13 +771,6 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="898"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="72"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="900"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="904"/>
-        <source>Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1063,147 +1068,151 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="47"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="48"/>
         <source>Export Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="68"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="69"/>
         <source>Included</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="71"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="72"/>
         <source>Not included</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="75"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="76"/>
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="83"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84"/>
         <source>List of curves to be excluded from the exported file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="88"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="89"/>
         <source>&lt;&lt;Include</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="91"/>
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95"/>
         <source>Exclude&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97"/>
         <source>Move the currently selected curve(s) from the included list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="107"/>
-        <source>Default Delimiters</source>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108"/>
+        <source>Delimiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114"/>
-        <source>Exported file will have commas between adjacent values.
-
-This setting is overridden for TSV files</source>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115"/>
+        <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="120"/>
-        <source>Exported file will have spaces between adjacent values.
-
-This setting is overridden for CSV and TSV files</source>
+        <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="126"/>
-        <source>Exported file will have tabs between adjacent values.
-
-This setting is overridden for CSV files</source>
+        <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="136"/>
-        <source>Layout</source>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="130"/>
+        <source>Override in CSV/TSV files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="131"/>
+        <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142"/>
-        <source>All curves on each line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="143"/>
-        <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
+        <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148"/>
-        <source>One curve on each line</source>
+        <source>All curves on each line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="149"/>
+        <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="154"/>
+        <source>One curve on each line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155"/>
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="288"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="294"/>
         <source>Points Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="172"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="178"/>
         <source>Interpolate Ys at Xs from all curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179"/>
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="178"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="184"/>
         <source>Interpolate Ys at Xs from first curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="185"/>
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190"/>
         <source>Interpolate Ys at evenly spaced X values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="185"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="191"/>
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314"/>
         <source>Interval:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="197"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="203"/>
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -1212,7 +1221,7 @@ The X values will be automatically aligned along simple numbers. If the first an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="207"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -1221,74 +1230,74 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="334"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="340"/>
         <source>Raw Xs and Ys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="335"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="226"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="341"/>
         <source>Exported file will have only original X and Y values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="231"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237"/>
         <source>Header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="241"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247"/>
         <source>Exported file will have no header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="252"/>
         <source>Exported file will have simple header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="251"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="257"/>
         <source>Exported file will have gnuplot header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269"/>
         <source>Save As Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270"/>
         <source>Save the settings for use as future defaults.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="273"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="279"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="278"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="284"/>
         <source>Preview window shows how current settings affect the exported file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307"/>
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="302"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308"/>
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="316"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="322"/>
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="322"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="328"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -1297,46 +1306,46 @@ Graph units are usually preferred when the X and Y scales are identical.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="378"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="384"/>
         <source>Functions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386"/>
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="392"/>
         <source>Relations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="394"/>
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415"/>
         <source>X Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="411"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="417"/>
         <source>Theta Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="417"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423"/>
         <source>Label in the header for x values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="419"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="425"/>
         <source>Label in the header for theta values</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1611,33 +1620,35 @@ Select which inputs are used to zoom in and out.</source>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale
 
-Select the locale that will be used when converting between numbers and strings. This affects the use of commas or periods as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
+Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
+
+The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="112"/>
         <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="117"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="123"/>
         <source>Include title bar path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="126"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -1836,51 +1847,66 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="342"/>
+        <location filename="../src/main/MainWindow.cpp" line="333"/>
+        <source>Select Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="334"/>
         <source>Shift+F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="344"/>
+        <location filename="../src/main/MainWindow.cpp" line="336"/>
         <source>Select points on screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="345"/>
+        <location filename="../src/main/MainWindow.cpp" line="337"/>
         <source>Select
 
 Select points on the screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="350"/>
+        <location filename="../src/main/MainWindow.cpp" line="341"/>
+        <source>Axis Point Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="342"/>
         <source>Shift+F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="352"/>
+        <location filename="../src/main/MainWindow.cpp" line="344"/>
         <source>Digitize axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="353"/>
+        <location filename="../src/main/MainWindow.cpp" line="345"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="361"/>
+        <location filename="../src/main/MainWindow.cpp" line="352"/>
+        <source>Curve Point Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="353"/>
         <source>Shift+F4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="363"/>
+        <location filename="../src/main/MainWindow.cpp" line="355"/>
         <source>Digitize curve points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="364"/>
+        <location filename="../src/main/MainWindow.cpp" line="356"/>
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -1889,17 +1915,22 @@ New points will be assigned to the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="372"/>
+        <location filename="../src/main/MainWindow.cpp" line="363"/>
+        <source>Point Match Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="364"/>
         <source>Shift+F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="374"/>
+        <location filename="../src/main/MainWindow.cpp" line="366"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="375"/>
+        <location filename="../src/main/MainWindow.cpp" line="367"/>
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -1908,34 +1939,44 @@ New points will be assigned to the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="382"/>
+        <location filename="../src/main/MainWindow.cpp" line="373"/>
+        <source>Color Picker Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="374"/>
         <source>Shift+F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="384"/>
+        <location filename="../src/main/MainWindow.cpp" line="376"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="385"/>
+        <location filename="../src/main/MainWindow.cpp" line="377"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="392"/>
+        <location filename="../src/main/MainWindow.cpp" line="383"/>
+        <source>Segment Fill Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="384"/>
         <source>Shift+F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="394"/>
+        <location filename="../src/main/MainWindow.cpp" line="386"/>
         <source>Digitize curve points along a segment of a curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="395"/>
+        <location filename="../src/main/MainWindow.cpp" line="387"/>
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -1944,656 +1985,658 @@ New points will be assigned to the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="415"/>
+        <location filename="../src/main/MainWindow.cpp" line="407"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="417"/>
+        <location filename="../src/main/MainWindow.cpp" line="409"/>
         <source>Undo the last operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="418"/>
+        <location filename="../src/main/MainWindow.cpp" line="410"/>
         <source>Undo
 
 Undo the last operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="422"/>
+        <location filename="../src/main/MainWindow.cpp" line="414"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="424"/>
+        <location filename="../src/main/MainWindow.cpp" line="416"/>
         <source>Redo the last operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="425"/>
+        <location filename="../src/main/MainWindow.cpp" line="417"/>
         <source>Redo
 
 Redo the last operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="429"/>
+        <location filename="../src/main/MainWindow.cpp" line="421"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="431"/>
+        <location filename="../src/main/MainWindow.cpp" line="423"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="432"/>
+        <location filename="../src/main/MainWindow.cpp" line="424"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="436"/>
+        <location filename="../src/main/MainWindow.cpp" line="428"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="438"/>
+        <location filename="../src/main/MainWindow.cpp" line="430"/>
         <source>Copies the selected points to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="439"/>
+        <location filename="../src/main/MainWindow.cpp" line="431"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="443"/>
+        <location filename="../src/main/MainWindow.cpp" line="435"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="445"/>
+        <location filename="../src/main/MainWindow.cpp" line="437"/>
         <source>Pastes the selected points from the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="446"/>
+        <location filename="../src/main/MainWindow.cpp" line="438"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="450"/>
+        <location filename="../src/main/MainWindow.cpp" line="442"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="452"/>
+        <location filename="../src/main/MainWindow.cpp" line="444"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="453"/>
+        <location filename="../src/main/MainWindow.cpp" line="445"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="457"/>
+        <location filename="../src/main/MainWindow.cpp" line="449"/>
         <source>Paste As New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="458"/>
+        <location filename="../src/main/MainWindow.cpp" line="450"/>
         <source>Pastes an image from the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="459"/>
+        <location filename="../src/main/MainWindow.cpp" line="451"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="463"/>
+        <location filename="../src/main/MainWindow.cpp" line="455"/>
         <source>Paste As New (Advanced)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="464"/>
+        <location filename="../src/main/MainWindow.cpp" line="456"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="465"/>
+        <location filename="../src/main/MainWindow.cpp" line="457"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="474"/>
+        <location filename="../src/main/MainWindow.cpp" line="466"/>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="475"/>
+        <location filename="../src/main/MainWindow.cpp" line="467"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="476"/>
-        <source>Creates a new document by importing an image with a single coordinate system.</source>
+        <location filename="../src/main/MainWindow.cpp" line="468"/>
+        <source>Creates a new document by importing an simple image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477"/>
+        <location filename="../src/main/MainWindow.cpp" line="469"/>
         <source>Import Image
 
-Creates a new document by importing an image with a single coordinate system.</source>
+Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
+
+For more complicated images with multiple coordinate systems, and/or floating axes, Import (Advanced) is used instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481"/>
+        <location filename="../src/main/MainWindow.cpp" line="476"/>
         <source>Import (Advanced)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="482"/>
+        <location filename="../src/main/MainWindow.cpp" line="477"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="483"/>
+        <location filename="../src/main/MainWindow.cpp" line="478"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="488"/>
+        <location filename="../src/main/MainWindow.cpp" line="483"/>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="490"/>
+        <location filename="../src/main/MainWindow.cpp" line="485"/>
         <source>Opens an existing document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="491"/>
+        <location filename="../src/main/MainWindow.cpp" line="486"/>
         <source>Open Document
 
 Opens an existing document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="502"/>
+        <location filename="../src/main/MainWindow.cpp" line="497"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="504"/>
+        <location filename="../src/main/MainWindow.cpp" line="499"/>
         <source>Closes the open document document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="505"/>
+        <location filename="../src/main/MainWindow.cpp" line="500"/>
         <source>Close Document
 
 Closes the open document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="509"/>
+        <location filename="../src/main/MainWindow.cpp" line="504"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="511"/>
+        <location filename="../src/main/MainWindow.cpp" line="506"/>
         <source>Saves the current document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="512"/>
+        <location filename="../src/main/MainWindow.cpp" line="507"/>
         <source>Save Document
 
 Saves the current document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="516"/>
+        <location filename="../src/main/MainWindow.cpp" line="511"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="518"/>
+        <location filename="../src/main/MainWindow.cpp" line="513"/>
         <source>Saves the current document under a new filename.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="519"/>
+        <location filename="../src/main/MainWindow.cpp" line="514"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="523"/>
+        <location filename="../src/main/MainWindow.cpp" line="518"/>
         <source>Export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="524"/>
+        <location filename="../src/main/MainWindow.cpp" line="519"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="525"/>
+        <location filename="../src/main/MainWindow.cpp" line="520"/>
         <source>Exports the current document into a text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="526"/>
+        <location filename="../src/main/MainWindow.cpp" line="521"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="530"/>
+        <location filename="../src/main/MainWindow.cpp" line="525"/>
         <source>&amp;Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="532"/>
+        <location filename="../src/main/MainWindow.cpp" line="527"/>
         <source>Print the current document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="533"/>
+        <location filename="../src/main/MainWindow.cpp" line="528"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="537"/>
+        <location filename="../src/main/MainWindow.cpp" line="532"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="539"/>
+        <location filename="../src/main/MainWindow.cpp" line="534"/>
         <source>Quits the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="540"/>
+        <location filename="../src/main/MainWindow.cpp" line="535"/>
         <source>Exit
 
 Quits the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="549"/>
+        <location filename="../src/main/MainWindow.cpp" line="544"/>
         <source>Checklist Guide Wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="551"/>
+        <location filename="../src/main/MainWindow.cpp" line="546"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="552"/>
+        <location filename="../src/main/MainWindow.cpp" line="547"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="559"/>
+        <location filename="../src/main/MainWindow.cpp" line="554"/>
         <source>Tutorial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="560"/>
+        <location filename="../src/main/MainWindow.cpp" line="555"/>
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="561"/>
+        <location filename="../src/main/MainWindow.cpp" line="556"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="566"/>
+        <location filename="../src/main/MainWindow.cpp" line="561"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="568"/>
+        <location filename="../src/main/MainWindow.cpp" line="563"/>
         <source>Help documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="569"/>
+        <location filename="../src/main/MainWindow.cpp" line="564"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="573"/>
+        <location filename="../src/main/MainWindow.cpp" line="568"/>
         <source>About Engauge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="574"/>
+        <location filename="../src/main/MainWindow.cpp" line="569"/>
         <source>About the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="575"/>
+        <location filename="../src/main/MainWindow.cpp" line="570"/>
         <source>About Engauge
 
 About the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="583"/>
+        <location filename="../src/main/MainWindow.cpp" line="578"/>
         <source>Coordinates...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="584"/>
+        <location filename="../src/main/MainWindow.cpp" line="579"/>
         <source>Edit Coordinate settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="585"/>
+        <location filename="../src/main/MainWindow.cpp" line="580"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589"/>
+        <location filename="../src/main/MainWindow.cpp" line="584"/>
         <source>Add/Remove Curve...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590"/>
+        <location filename="../src/main/MainWindow.cpp" line="585"/>
         <source>Add or Remove Curves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591"/>
+        <location filename="../src/main/MainWindow.cpp" line="586"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="595"/>
+        <location filename="../src/main/MainWindow.cpp" line="590"/>
         <source>Curve Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="596"/>
+        <location filename="../src/main/MainWindow.cpp" line="591"/>
         <source>Edit Curve Properties settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="597"/>
+        <location filename="../src/main/MainWindow.cpp" line="592"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="601"/>
+        <location filename="../src/main/MainWindow.cpp" line="596"/>
         <source>Digitize Curve...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="602"/>
+        <location filename="../src/main/MainWindow.cpp" line="597"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="603"/>
+        <location filename="../src/main/MainWindow.cpp" line="598"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="608"/>
+        <location filename="../src/main/MainWindow.cpp" line="603"/>
         <source>Export Format...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="609"/>
+        <location filename="../src/main/MainWindow.cpp" line="604"/>
         <source>Edit Export Format settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="610"/>
+        <location filename="../src/main/MainWindow.cpp" line="605"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="614"/>
+        <location filename="../src/main/MainWindow.cpp" line="609"/>
         <source>Color Filter...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="615"/>
+        <location filename="../src/main/MainWindow.cpp" line="610"/>
         <source>Edit Color Filter settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="616"/>
+        <location filename="../src/main/MainWindow.cpp" line="611"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="620"/>
+        <location filename="../src/main/MainWindow.cpp" line="615"/>
         <source>Axes Checker...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="621"/>
+        <location filename="../src/main/MainWindow.cpp" line="616"/>
         <source>Edit Axes Checker settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="622"/>
+        <location filename="../src/main/MainWindow.cpp" line="617"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626"/>
+        <location filename="../src/main/MainWindow.cpp" line="621"/>
         <source>Grid Line Removal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="627"/>
+        <location filename="../src/main/MainWindow.cpp" line="622"/>
         <source>Edit Grid Line Removal settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628"/>
+        <location filename="../src/main/MainWindow.cpp" line="623"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="633"/>
+        <location filename="../src/main/MainWindow.cpp" line="628"/>
         <source>Point Match...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634"/>
+        <location filename="../src/main/MainWindow.cpp" line="629"/>
         <source>Edit Point Match settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="635"/>
+        <location filename="../src/main/MainWindow.cpp" line="630"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="639"/>
+        <location filename="../src/main/MainWindow.cpp" line="634"/>
         <source>Segment Fill...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="640"/>
+        <location filename="../src/main/MainWindow.cpp" line="635"/>
         <source>Edit Segment Fill settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="641"/>
+        <location filename="../src/main/MainWindow.cpp" line="636"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="645"/>
+        <location filename="../src/main/MainWindow.cpp" line="640"/>
         <source>General...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="646"/>
+        <location filename="../src/main/MainWindow.cpp" line="641"/>
         <source>Edit General settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="647"/>
+        <location filename="../src/main/MainWindow.cpp" line="642"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="652"/>
+        <location filename="../src/main/MainWindow.cpp" line="647"/>
         <source>Main Window...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="653"/>
+        <location filename="../src/main/MainWindow.cpp" line="649"/>
         <source>Edit Main Window settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="654"/>
+        <location filename="../src/main/MainWindow.cpp" line="650"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663"/>
+        <location filename="../src/main/MainWindow.cpp" line="659"/>
         <source>Background Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="666"/>
+        <location filename="../src/main/MainWindow.cpp" line="662"/>
         <source>Show or hide the background toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="667"/>
+        <location filename="../src/main/MainWindow.cpp" line="663"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671"/>
+        <location filename="../src/main/MainWindow.cpp" line="667"/>
         <source>Checklist Guide Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="674"/>
+        <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Show or hide the checklist guide toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675"/>
+        <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>View Checklist Guide ToolBar
 
 Show or hide the checklist guide toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="679"/>
+        <location filename="../src/main/MainWindow.cpp" line="675"/>
         <source>Digitizing Tools Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="682"/>
+        <location filename="../src/main/MainWindow.cpp" line="678"/>
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="683"/>
+        <location filename="../src/main/MainWindow.cpp" line="679"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="687"/>
+        <location filename="../src/main/MainWindow.cpp" line="683"/>
         <source>Settings Views Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="690"/>
+        <location filename="../src/main/MainWindow.cpp" line="686"/>
         <source>Show or hide the settings views toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="691"/>
+        <location filename="../src/main/MainWindow.cpp" line="687"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="696"/>
+        <location filename="../src/main/MainWindow.cpp" line="692"/>
         <source>Coordinate System Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="699"/>
+        <location filename="../src/main/MainWindow.cpp" line="695"/>
         <source>Show or hide the coordinate system toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="700"/>
+        <location filename="../src/main/MainWindow.cpp" line="696"/>
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -2602,68 +2645,68 @@ This toolbar is disabled when there is only one coordinate system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708"/>
+        <location filename="../src/main/MainWindow.cpp" line="704"/>
         <source>Tool Tips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="711"/>
+        <location filename="../src/main/MainWindow.cpp" line="707"/>
         <source>Show or hide the tool tips.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712"/>
+        <location filename="../src/main/MainWindow.cpp" line="708"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="716"/>
+        <location filename="../src/main/MainWindow.cpp" line="712"/>
         <source>No Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="718"/>
+        <location filename="../src/main/MainWindow.cpp" line="714"/>
         <source>Do not show the image underneath the points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="719"/>
+        <location filename="../src/main/MainWindow.cpp" line="715"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="722"/>
+        <location filename="../src/main/MainWindow.cpp" line="718"/>
         <source>Show Original Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="724"/>
+        <location filename="../src/main/MainWindow.cpp" line="720"/>
         <source>Show the original image underneath the points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="725"/>
+        <location filename="../src/main/MainWindow.cpp" line="721"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="728"/>
+        <location filename="../src/main/MainWindow.cpp" line="724"/>
         <source>Show Filtered Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="731"/>
+        <location filename="../src/main/MainWindow.cpp" line="727"/>
         <source>Show the filtered image underneath the points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="732"/>
+        <location filename="../src/main/MainWindow.cpp" line="728"/>
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -2672,284 +2715,284 @@ The filtered image is created from the original image according to the Filter pr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="738"/>
+        <location filename="../src/main/MainWindow.cpp" line="734"/>
         <source>Hide All Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="740"/>
+        <location filename="../src/main/MainWindow.cpp" line="736"/>
         <source>Hide all digitized curves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="741"/>
+        <location filename="../src/main/MainWindow.cpp" line="737"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="744"/>
+        <location filename="../src/main/MainWindow.cpp" line="740"/>
         <source>Show Selected Curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="746"/>
+        <location filename="../src/main/MainWindow.cpp" line="742"/>
         <source>Show only the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="747"/>
+        <location filename="../src/main/MainWindow.cpp" line="743"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="750"/>
+        <location filename="../src/main/MainWindow.cpp" line="746"/>
         <source>Show All Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="753"/>
+        <location filename="../src/main/MainWindow.cpp" line="749"/>
         <source>Show all curves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="754"/>
+        <location filename="../src/main/MainWindow.cpp" line="750"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="769"/>
+        <location filename="../src/main/MainWindow.cpp" line="765"/>
         <source>Hide Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="771"/>
+        <location filename="../src/main/MainWindow.cpp" line="767"/>
         <source>Always hide the status bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="772"/>
+        <location filename="../src/main/MainWindow.cpp" line="768"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="774"/>
+        <location filename="../src/main/MainWindow.cpp" line="770"/>
         <source>Show Temporary Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="776"/>
+        <location filename="../src/main/MainWindow.cpp" line="772"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="777"/>
+        <location filename="../src/main/MainWindow.cpp" line="773"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="779"/>
+        <location filename="../src/main/MainWindow.cpp" line="775"/>
         <source>Show Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="781"/>
+        <location filename="../src/main/MainWindow.cpp" line="777"/>
         <source>Always show the status bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="782"/>
+        <location filename="../src/main/MainWindow.cpp" line="778"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="791"/>
+        <location filename="../src/main/MainWindow.cpp" line="787"/>
         <source>Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="792"/>
+        <location filename="../src/main/MainWindow.cpp" line="788"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="796"/>
+        <location filename="../src/main/MainWindow.cpp" line="792"/>
         <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="797"/>
+        <location filename="../src/main/MainWindow.cpp" line="793"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="801"/>
+        <location filename="../src/main/MainWindow.cpp" line="797"/>
         <source>16:1 (1600%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="803"/>
+        <location filename="../src/main/MainWindow.cpp" line="799"/>
         <source>Zoom 16:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="806"/>
+        <location filename="../src/main/MainWindow.cpp" line="802"/>
         <source>8:1 (800%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="808"/>
+        <location filename="../src/main/MainWindow.cpp" line="804"/>
         <source>Zoom 8:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="811"/>
+        <location filename="../src/main/MainWindow.cpp" line="807"/>
         <source>4:1 (400%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="813"/>
+        <location filename="../src/main/MainWindow.cpp" line="809"/>
         <source>Zoom 4:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="816"/>
+        <location filename="../src/main/MainWindow.cpp" line="812"/>
         <source>2:1 (200%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="818"/>
+        <location filename="../src/main/MainWindow.cpp" line="814"/>
         <source>Zoom 2:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="821"/>
+        <location filename="../src/main/MainWindow.cpp" line="817"/>
         <source>1:1 (100%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="824"/>
+        <location filename="../src/main/MainWindow.cpp" line="820"/>
         <source>Zoom 6:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="827"/>
+        <location filename="../src/main/MainWindow.cpp" line="823"/>
         <source>1:2 (50%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="829"/>
+        <location filename="../src/main/MainWindow.cpp" line="825"/>
         <source>Zoom 1:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="832"/>
+        <location filename="../src/main/MainWindow.cpp" line="828"/>
         <source>1:4 (25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="834"/>
+        <location filename="../src/main/MainWindow.cpp" line="830"/>
         <source>Zoom 1:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="837"/>
+        <location filename="../src/main/MainWindow.cpp" line="833"/>
         <source>1:8 (12.5%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="839"/>
+        <location filename="../src/main/MainWindow.cpp" line="835"/>
         <source>Zoom 1:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="842"/>
+        <location filename="../src/main/MainWindow.cpp" line="838"/>
         <source>1:16 (6.25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="844"/>
+        <location filename="../src/main/MainWindow.cpp" line="840"/>
         <source>Zoom 1:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="847"/>
+        <location filename="../src/main/MainWindow.cpp" line="843"/>
         <source>Fill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="849"/>
+        <location filename="../src/main/MainWindow.cpp" line="845"/>
         <source>Zoom with stretching to fill window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="924"/>
+        <location filename="../src/main/MainWindow.cpp" line="920"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="928"/>
+        <location filename="../src/main/MainWindow.cpp" line="924"/>
         <source>Open &amp;Recent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="943"/>
+        <location filename="../src/main/MainWindow.cpp" line="939"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="956"/>
+        <location filename="../src/main/MainWindow.cpp" line="952"/>
         <source>Digitize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="964"/>
+        <location filename="../src/main/MainWindow.cpp" line="960"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="973"/>
-        <location filename="../src/main/MainWindow.cpp" line="1134"/>
+        <location filename="../src/main/MainWindow.cpp" line="969"/>
+        <location filename="../src/main/MainWindow.cpp" line="1130"/>
         <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978"/>
+        <location filename="../src/main/MainWindow.cpp" line="974"/>
         <source>Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="983"/>
+        <location filename="../src/main/MainWindow.cpp" line="979"/>
         <source>Status Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="988"/>
+        <location filename="../src/main/MainWindow.cpp" line="984"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1004"/>
+        <location filename="../src/main/MainWindow.cpp" line="1000"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1019"/>
+        <location filename="../src/main/MainWindow.cpp" line="1015"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1121"/>
+        <location filename="../src/main/MainWindow.cpp" line="1117"/>
         <source>Select background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1122"/>
+        <location filename="../src/main/MainWindow.cpp" line="1118"/>
         <source>Selected Background
 
 Select background image:
@@ -2959,156 +3002,156 @@ Select background image:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1127"/>
+        <location filename="../src/main/MainWindow.cpp" line="1123"/>
         <source>No background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1128"/>
+        <location filename="../src/main/MainWindow.cpp" line="1124"/>
         <source>Original image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1129"/>
+        <location filename="../src/main/MainWindow.cpp" line="1125"/>
         <source>Filtered image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142"/>
+        <location filename="../src/main/MainWindow.cpp" line="1138"/>
         <source>Select curve for new points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143"/>
+        <location filename="../src/main/MainWindow.cpp" line="1139"/>
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1148"/>
+        <location filename="../src/main/MainWindow.cpp" line="1144"/>
         <source>Drawing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1164"/>
+        <location filename="../src/main/MainWindow.cpp" line="1160"/>
         <source>Points style for the currently selected curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1165"/>
+        <location filename="../src/main/MainWindow.cpp" line="1161"/>
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1173"/>
+        <location filename="../src/main/MainWindow.cpp" line="1169"/>
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1174"/>
+        <location filename="../src/main/MainWindow.cpp" line="1170"/>
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1180"/>
+        <location filename="../src/main/MainWindow.cpp" line="1176"/>
         <source>Views</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1189"/>
+        <location filename="../src/main/MainWindow.cpp" line="1185"/>
         <source>Currently selected coordinate system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1190"/>
+        <location filename="../src/main/MainWindow.cpp" line="1186"/>
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1198"/>
+        <location filename="../src/main/MainWindow.cpp" line="1194"/>
         <source>Show all coordinate systems</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1199"/>
+        <location filename="../src/main/MainWindow.cpp" line="1195"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1207"/>
+        <location filename="../src/main/MainWindow.cpp" line="1203"/>
         <source>Print all coordinate systems</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1208"/>
+        <location filename="../src/main/MainWindow.cpp" line="1204"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1212"/>
+        <location filename="../src/main/MainWindow.cpp" line="1208"/>
         <source>Coordinate System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1340"/>
+        <location filename="../src/main/MainWindow.cpp" line="1336"/>
         <source>Unable to export to file </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1383"/>
-        <location filename="../src/main/MainWindow.cpp" line="1495"/>
-        <location filename="../src/main/MainWindow.cpp" line="1657"/>
+        <location filename="../src/main/MainWindow.cpp" line="1379"/>
+        <location filename="../src/main/MainWindow.cpp" line="1491"/>
+        <location filename="../src/main/MainWindow.cpp" line="1653"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1449"/>
+        <location filename="../src/main/MainWindow.cpp" line="1445"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1686"/>
+        <location filename="../src/main/MainWindow.cpp" line="1682"/>
         <source>File not found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1740"/>
+        <location filename="../src/main/MainWindow.cpp" line="1736"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1815"/>
+        <location filename="../src/main/MainWindow.cpp" line="1811"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1816"/>
+        <location filename="../src/main/MainWindow.cpp" line="1812"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1817"/>
+        <location filename="../src/main/MainWindow.cpp" line="1813"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1818"/>
+        <location filename="../src/main/MainWindow.cpp" line="1814"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1843"/>
+        <location filename="../src/main/MainWindow.cpp" line="1839"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
@@ -3119,28 +3162,28 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4110"/>
-        <source>Engauge Digitizer %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="2732"/>
+        <location filename="../src/main/MainWindow.cpp" line="2736"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2801"/>
+        <location filename="../src/main/MainWindow.cpp" line="2805"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4010"/>
+        <location filename="../src/main/MainWindow.cpp" line="4013"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4011"/>
+        <location filename="../src/main/MainWindow.cpp" line="4014"/>
         <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="4113"/>
+        <source>Engauge Digitizer %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3430,7 +3473,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="112"/>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="154"/>
-        <source>Application</source>
+        <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3531,7 +3574,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="191"/>
+        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="203"/>
         <source>Cannot read export data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3712,72 +3755,42 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="111"/>
-        <source>Axis Point Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="112"/>
-        <source>Color Picker Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="113"/>
-        <source>Curve Point Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="114"/>
-        <source>Point Match Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="115"/>
-        <source>Segment Fill Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="116"/>
-        <source>Select Tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="62"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="65"/>
         <source>Cannot read main window data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="196"/>
+        <location filename="../src/main/main.cpp" line="205"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="198"/>
+        <location filename="../src/main/main.cpp" line="207"/>
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="200"/>
+        <location filename="../src/main/main.cpp" line="209"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="202"/>
+        <location filename="../src/main/main.cpp" line="211"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="204"/>
+        <location filename="../src/main/main.cpp" line="213"/>
         <source>Show this help information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="206"/>
+        <location filename="../src/main/main.cpp" line="215"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="208"/>
+        <location filename="../src/main/main.cpp" line="217"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation type="unfinished"></translation>
     </message>
