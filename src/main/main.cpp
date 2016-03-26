@@ -15,7 +15,6 @@
 #include <QFileInfo>
 #include <QObject>
 #include <QProcessEnvironment>
-#include <QTranslator>
 #include "TranslatorContainer.h"
 
 using namespace std;
@@ -100,7 +99,7 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   // Translations
-  TranslatorContainer translators; // Must exist permanently
+  TranslatorContainer translatorContainer (app); // Must exist until execution terminates
 
   // Command line
   bool isDebug, isGnuplot, isRegressionTest;

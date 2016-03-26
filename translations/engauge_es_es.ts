@@ -1774,23 +1774,35 @@ Seleccionar qué insumos se utiliza para acercar y alejar .</translation>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale
 
-Select the locale that will be used when converting between numbers and strings. This affects the use of commas or periods as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
+Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
+
+The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
         <translation>Lugar
+
+Seleccione la configuración regional que se utiliza en los números (inmediatamente ) , y el idioma de la interfaz de usuario ( después de reiniciar ) .
+
+La configuración regional determina cómo se formatean los números . En concreto , comas o por períodos serán utilizados como delimitadores de grupo en cada número introducido por el usuario, que aparece en la interfaz de usuario , o exportar a un archivo .</translation>
+    </message>
+    <message>
+        <source>Locale
+
+Select the locale that will be used when converting between numbers and strings. This affects the use of commas or periods as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
+        <translation type="vanished">Lugar
 
 Seleccione la configuración regional que se utiliza cuando la conversión entre números y cadenas . Esto afecta el uso de comas o puntos como delimitadores de grupo en cada número introducido por el usuario, que aparece en la interfaz de usuario , o exportar a un archivo .</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="112"/>
         <source>Recent file list:</source>
         <translation>Lista de archivos recientes :</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
         <source>Clear</source>
         <translation>Claro</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="117"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -1799,12 +1811,12 @@ Clear the recent file list in the File menu.</source>
 Borrar la lista de archivos recientes en el menú Archivo .</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="123"/>
         <source>Include title bar path:</source>
         <translation>Incluir el trazado de la barra de título :</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="126"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -3481,27 +3493,27 @@ Do you want to save your changes?</source>
         <translation>No se puede escribir el archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2735"/>
+        <location filename="../src/main/MainWindow.cpp" line="2736"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2804"/>
+        <location filename="../src/main/MainWindow.cpp" line="2805"/>
         <source>Open Document</source>
         <translation>Abrir documento</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4012"/>
+        <location filename="../src/main/MainWindow.cpp" line="4013"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4013"/>
+        <location filename="../src/main/MainWindow.cpp" line="4014"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4112"/>
+        <location filename="../src/main/MainWindow.cpp" line="4113"/>
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4107,37 +4119,37 @@ Do you want to save your changes?</source>
         <translation>No se puede leer los datos principales de la ventana</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="209"/>
+        <location filename="../src/main/main.cpp" line="205"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Permite la información de depuración extra. Se utiliza para la depuración</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="211"/>
+        <location filename="../src/main/main.cpp" line="207"/>
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>Especifica un archivo de informe de errores como entrada. Se utiliza para la depuración y pruebas</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="213"/>
+        <location filename="../src/main/main.cpp" line="209"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Especifica un archivo de secuencia de comandos de archivo como entrada . Se utiliza para la depuración y pruebas</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="215"/>
+        <location filename="../src/main/main.cpp" line="211"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Salida de los archivos de entrada gnuplot diagnóstico. Se utiliza para la depuración</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="217"/>
+        <location filename="../src/main/main.cpp" line="213"/>
         <source>Show this help information</source>
         <translation>Mostrar esta información de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="219"/>
+        <location filename="../src/main/main.cpp" line="215"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Ejecuta la secuencia de comandos de archivo de informe de errores o archivo . Se utiliza para las pruebas de regresión</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="221"/>
+        <location filename="../src/main/main.cpp" line="217"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation>Archivo (s) que se importa o se abre en el arranque</translation>
     </message>

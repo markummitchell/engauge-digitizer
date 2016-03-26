@@ -2265,7 +2265,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   }
 
   // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25. Some or all
-  // settings are saved to the application AND saved to m_modelMainWindow for use in DlgSettingsMainWindow
+  // settings are saved to the application AND saved to m_modelMainWindow for use in DlgSettingsMainWindow. Note that
+  // TranslatorContainer has previously extracted the locale from the settings
   QLocale localeDefault;
   QLocale::Language language = (QLocale::Language) settings.value (SETTINGS_LOCALE_LANGUAGE,
                                                                    QVariant (localeDefault.language())).toInt();

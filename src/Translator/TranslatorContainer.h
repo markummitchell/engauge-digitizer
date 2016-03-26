@@ -1,6 +1,7 @@
 #ifndef TRANSLATOR_CONTAINER_H
 #define TRANSLATOR_CONTAINER_H
 
+class QApplication;
 class QTranslator;
 
 /// Class that stores QTranslator objects for the duration of application execution
@@ -8,9 +9,10 @@ class TranslatorContainer
 {
  public:
   /// Single constructor
-  TranslatorContainer();
+  TranslatorContainer(QApplication &app);
 
  private:
+  TranslatorContainer();
 
   // Translator for generic strings, like buttons in QWizard pages (which are inaccessible through *.tm files
   QTranslator *m_translatorGeneric;

@@ -1620,33 +1620,35 @@ Select which inputs are used to zoom in and out.</source>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale
 
-Select the locale that will be used when converting between numbers and strings. This affects the use of commas or periods as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
+Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
+
+The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="112"/>
         <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="117"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="123"/>
         <source>Include title bar path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="126"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -3160,27 +3162,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2735"/>
+        <location filename="../src/main/MainWindow.cpp" line="2736"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2804"/>
+        <location filename="../src/main/MainWindow.cpp" line="2805"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4012"/>
+        <location filename="../src/main/MainWindow.cpp" line="4013"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4013"/>
+        <location filename="../src/main/MainWindow.cpp" line="4014"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4112"/>
+        <location filename="../src/main/MainWindow.cpp" line="4113"/>
         <source>Engauge Digitizer %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3758,37 +3760,37 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="209"/>
+        <location filename="../src/main/main.cpp" line="205"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="211"/>
+        <location filename="../src/main/main.cpp" line="207"/>
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="213"/>
+        <location filename="../src/main/main.cpp" line="209"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="215"/>
+        <location filename="../src/main/main.cpp" line="211"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="217"/>
+        <location filename="../src/main/main.cpp" line="213"/>
         <source>Show this help information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="219"/>
+        <location filename="../src/main/main.cpp" line="215"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="221"/>
+        <location filename="../src/main/main.cpp" line="217"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation type="unfinished"></translation>
     </message>
