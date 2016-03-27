@@ -27,9 +27,12 @@ TranslatorContainer::TranslatorContainer(QApplication &app)
                              QLibraryInfo::location (QLibraryInfo::TranslationsPath));
   app.installTranslator (m_translatorGeneric);
 
-  // Engauge-specific translators
+  // Engauge-specific translators. As documented in engauge.pro, the country-specific engauge_XX_YY locale is loaded
+  // if available, otherwise engauge_XX is loaded if available
+  QString delimiters ("._");
   m_translatorEngauge = new QTranslator;
   m_translatorEngauge->load ("engauge_" + locale.name().toLower(),
-                             QCoreApplication::applicationDirPath () + "/translations");
+                             QCoreApplication::applicationDirPath () + "/translations",
+                             delimiters);
   app.installTranslator (m_translatorEngauge);
 }

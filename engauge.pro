@@ -673,29 +673,39 @@ jpeg2000 {
     }
 }
 
-# Translation file names are 'engauge_XX_YY' where:
+# People interested in translating a language can contact the developers for help. 
+# 
+# Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:
 #   XX = two letter language codes in column '639-1' at https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 #   YY = two letter country codes in column 'ISO 3166-2' at https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-#
-# ar_eg = Arabic Egypt
-# de_de = German Germany 
-# es_es = Spanish Spain
-# fr_fr = French France
-# hi_in = Hindi India
-# ja_jp = Japanese Japan
-# kk_kz = Kazakh Kazakhstan 
-# pt_br = Portuguese Brazil
-# ru_ru = Russian Federation
-# zh_cn = Chinese  
-#
-# Run lupdate to merge new text into translation files
-TRANSLATIONS = translations/engauge_ar_eg.ts \
-               translations/engauge_de_de.ts \
-               translations/engauge_es_es.ts \
-               translations/engauge_fr_fr.ts \               
-               translations/engauge_hi_in.ts \               
-               translations/engauge_ja_jp.ts \               
-               translations/engauge_kk_kz.ts \
-               translations/engauge_pt_br.ts \
-               translations/engauge_ru_ru.ts \
-               translations/engauge_zh_cn.ts
+# where XX and YY are:
+#   ar = Arabic     Egypt=_eg
+#   de = German     Germany=_de
+#   es = Spanish    Spain=_es
+#   fr = French     France=_fr
+#   hi = Hindi      India=_in
+#   it = Italian    Italy=_it
+#   ja = Japanese   Japan=_jp
+#   kk = Kazakh     Kazakhstan=_kz
+#   ko = Korean     SouthKorea=_kr
+#   pt = Portuguese Brazil=_br
+#   ru = Russian    Federation=_ru
+#   zh = Chinese    China=_cn
+# When the user picks an (XX_YY) locale in Settings / Main Window and restarts Engauge, Engauge follows these steps to load:
+#   1) 'engauge_XX_YY' is loaded if it exists and locale loading finishes
+#   2) 'engauge_XX' is loaded if it exists and step 1 failed, and locale loading finishes
+#   3) the default locale is loaded and steps 1 and 2 failed
+# In other words, translations specific to a country are loaded if available, otherwise translations for a language
+# (which often apply to multiple countries) are loaded.
+TRANSLATIONS = translations/engauge_ar.ts \
+               translations/engauge_de.ts \
+               translations/engauge_es.ts \
+               translations/engauge_fr.ts \               
+               translations/engauge_hi.ts \               
+               translations/engauge_it.ts \               
+               translations/engauge_ja.ts \               
+               translations/engauge_kk.ts \
+               translations/engauge_ko.ts \
+               translations/engauge_pt.ts \
+               translations/engauge_ru.ts \
+               translations/engauge_zh.ts
