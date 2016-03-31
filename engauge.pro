@@ -681,6 +681,7 @@ jpeg2000 {
 # where XX and YY are:
 #   ar = Arabic     Egypt=_eg
 #   de = German     Germany=_de
+#   en = English    USA=us
 #   es = Spanish    Spain=_es
 #   fr = French     France=_fr
 #   hi = Hindi      India=_in
@@ -699,6 +700,7 @@ jpeg2000 {
 # (which often apply to multiple countries) are loaded.
 TRANSLATIONS = translations/engauge_ar.ts \
                translations/engauge_de.ts \
+               translations/engauge_en.ts \
                translations/engauge_es.ts \
                translations/engauge_fr.ts \               
                translations/engauge_hi.ts \               
