@@ -174,7 +174,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
     loadErrorReportFile(initialPath,
                         errorReportFile);
     if (isRegressionTest) {
-      startRegressionTestErrorReport(errorReportFile);
+      startRegressionTestErrorReport(initialPath,
+                                     errorReportFile);
     }
   } else if (!fileCmdScriptFile.isEmpty()) {
     m_fileCmdScript = new FileCmdScript (fileCmdScriptFile);
@@ -1331,6 +1332,9 @@ void MainWindow::fileExport(const QString &fileName,
 
   } else {
 
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::fileExport"
+                                 << " file=" << fileName.toLatin1().data()
+                                 << " curDir=" << QDir::currentPath().toLatin1().data();
     QMessageBox::critical (0,
                            engaugeWindowTitle(),
                            tr ("Unable to export to file ") + fileName);
@@ -3642,14 +3646,21 @@ void MainWindow::slotViewZoomOutFromWheelEvent ()
   }
 }
 
-void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFile)
+void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
+                                                const QString &regressionInputFile)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
 
   const int REGRESSION_INTERVAL = 400; // Milliseconds
 
+  // Need absolute path since QDir::currentPath has been changed already so the
+  // current path is not predictable
+  QString absoluteRegressionInputFile = QString ("%1/%2")
+                                        .arg (initialPath)
+                                        .arg (regressionInputFile);
+
   // Save output/export file name
-  m_regressionFile = exportFilenameFromInputFilename (regressionInputFile);
+  m_regressionFile = exportFilenameFromInputFilename (absoluteRegressionInputFile);
 
   m_timerRegressionErrorReport = new QTimer();
   m_timerRegressionErrorReport->setSingleShot(false);

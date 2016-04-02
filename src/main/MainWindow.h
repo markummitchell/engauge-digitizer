@@ -380,7 +380,8 @@ private:
   bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
                        ImportType ImportType);
-  void startRegressionTestErrorReport (const QString &regressionInputFile);
+  void startRegressionTestErrorReport (const QString &initialPath,
+                                       const QString &regressionInputFile);
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
