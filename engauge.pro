@@ -552,6 +552,7 @@ macx-* {
 CONFIG += app_bundle
 QMAKE_CXXFLAGS += "-stdlib=libc++"
 QMAKE_LFLAGS += "-stdlib=libc++"
+INCLUDEPATH += -isystem /usr/local/Cellar/qt5/5.6.0/lib/QtPrintSupport.framework/Headers
 LIBS += -framework CoreFoundation
 } else {
 TEMPLATE = app
