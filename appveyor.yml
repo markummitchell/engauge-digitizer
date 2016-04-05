@@ -16,7 +16,7 @@ environment:
       RESULTDIR: engauge-build-debug
 
 install:
-  - set QTDIR=C:\Qt\5.5\msvc2013
+  - set QTDIR=C:\Qt\5.6\msvc2013
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - curl -fsSL %LOG4CPPDLLINK% -o log4cpp-1.1.1.zip
