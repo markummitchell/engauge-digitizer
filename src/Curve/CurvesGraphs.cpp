@@ -155,6 +155,9 @@ void CurvesGraphs::loadPreVersion6(QDataStream &str)
 
   int i;
 
+  // Remove previous Curves. There is a DEFAULT_GRAPH_CURVE_NAME by default
+  m_curvesGraphs.clear();
+
   qint32 numberCurvesGraphs;
   str >> numberCurvesGraphs;
   for (i = 0; i < numberCurvesGraphs; i++) {

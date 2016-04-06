@@ -48,6 +48,7 @@ Curve::Curve (const Curve &curve) :
 
 Curve::Curve (QDataStream &str)
 {
+  const int CONVERT_ENUM_TO_RADIUS = 6;
   MigrateToVersion6 migrate;
 
   qint32 int32, xScreen, yScreen;
@@ -57,7 +58,7 @@ Curve::Curve (QDataStream &str)
   str >> int32;
   m_curveStyle.setPointShape(migrate.pointShape (int32));
   str >> int32;
-  m_curveStyle.setPointRadius(int32);
+  m_curveStyle.setPointRadius(int32 + CONVERT_ENUM_TO_RADIUS);
   str >> int32;
   m_curveStyle.setPointLineWidth (int32);
   str >> int32;

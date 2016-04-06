@@ -356,7 +356,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
   str >> int32;
   m_modelExport.setHeader((ExportHeader) int32);
-  if (version >= 5.2) {
+  if (version >= 5.1) {
     str >> st; // X label
     if (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
       m_modelExport.setXLabel(st);
