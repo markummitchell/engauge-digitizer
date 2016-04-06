@@ -15,6 +15,7 @@
 
 # Comment out this CONFIG line in OSX to produce an OSX application bundle
 CONFIG = qt warn_on thread debug
+QT += core gui help network printsupport widgets xml
 
 _ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
 isEmpty(_ENGAUGE_RELEASE) {
@@ -268,6 +269,7 @@ HEADERS  += \
     src/Transformation/TransformationStateContext.h \
     src/Transformation/TransformationStateDefined.h \
     src/Transformation/TransformationStateUndefined.h \
+    src/Translator/TranslatorContainer.h \
     src/Tutorial/TutorialButton.h \
     src/Tutorial/TutorialButtonRect.h \
     src/Tutorial/TutorialButtonText.h \
@@ -518,6 +520,7 @@ SOURCES += \
     src/Transformation/TransformationStateContext.cpp \
     src/Transformation/TransformationStateDefined.cpp \
     src/Transformation/TransformationStateUndefined.cpp \
+    src/Translator/TranslatorContainer.cpp \
     src/Tutorial/TutorialButton.cpp \
     src/Tutorial/TutorialButtonRect.cpp \
     src/Tutorial/TutorialButtonText.cpp \
@@ -549,7 +552,6 @@ macx-* {
 CONFIG += app_bundle
 QMAKE_CXXFLAGS += "-stdlib=libc++"
 QMAKE_LFLAGS += "-stdlib=libc++"
-QT += core gui help network printsupport widgets xml
 INCLUDEPATH += \
 /usr/local/Cellar/fftw/3.3.4_1/include \
 /usr/local/Cellar/log4cpp/1.1.1/include \
@@ -560,18 +562,12 @@ INCLUDEPATH += \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
 LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundation
-}
-
-linux-* {
+} else {
 TEMPLATE = app
 TARGET = bin/engauge
-QT += core gui network printsupport widgets xml help
 }
 
 win32-* {
-TEMPLATE = app
-TARGET = bin/engauge
-QT += core gui network printsupport widgets xml help
 CONFIG += windows
 }
 
@@ -624,6 +620,7 @@ INCLUDEPATH += src \
                src/Spline \
                src/StatusBar \
                src/Transformation \
+               src/Translator \
                src/Tutorial \
                src/util \
                src/View \
@@ -675,3 +672,42 @@ jpeg2000 {
       message(Building release version without internal support for JPEG2000 files)
     }
 }
+
+# People interested in translating a language can contact the developers for help. 
+# 
+# Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:
+#   XX = two letter language codes in column '639-1' at https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+#   YY = two letter country codes in column 'ISO 3166-2' at https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+# where XX and YY are:
+#   ar = Arabic     Egypt=_eg
+#   de = German     Germany=_de
+#   en = English    USA=us
+#   es = Spanish    Spain=_es
+#   fr = French     France=_fr
+#   hi = Hindi      India=_in
+#   it = Italian    Italy=_it
+#   ja = Japanese   Japan=_jp
+#   kk = Kazakh     Kazakhstan=_kz
+#   ko = Korean     SouthKorea=_kr
+#   pt = Portuguese Brazil=_br
+#   ru = Russian    Federation=_ru
+#   zh = Chinese    China=_cn
+# When the user picks an (XX_YY) locale in Settings / Main Window and restarts Engauge, Engauge follows these steps to load:
+#   1) 'engauge_XX_YY' is loaded if it exists and locale loading finishes
+#   2) 'engauge_XX' is loaded if it exists and step 1 failed, and locale loading finishes
+#   3) the default locale is loaded and steps 1 and 2 failed
+# In other words, translations specific to a country are loaded if available, otherwise translations for a language
+# (which often apply to multiple countries) are loaded.
+TRANSLATIONS = translations/engauge_ar.ts \
+               translations/engauge_de.ts \
+               translations/engauge_en.ts \
+               translations/engauge_es.ts \
+               translations/engauge_fr.ts \               
+               translations/engauge_hi.ts \               
+               translations/engauge_it.ts \               
+               translations/engauge_ja.ts \               
+               translations/engauge_kk.ts \
+               translations/engauge_ko.ts \
+               translations/engauge_pt.ts \
+               translations/engauge_ru.ts \
+               translations/engauge_zh.ts

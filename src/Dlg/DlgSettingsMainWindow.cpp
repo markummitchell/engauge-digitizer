@@ -89,8 +89,10 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   // Initialization of combobox is liberated from Qt Calendar example
   m_cmbLocale = new QComboBox;
   m_cmbLocale->setWhatsThis(tr ("Locale\n\n"
-                                "Select the locale that will be used when converting between numbers and strings. "
-                                "This affects the use of commas or periods as group delimiters in each number entered "
+                                "Select the locale that will be used in numbers (immediately), and the language in the user "
+                                "interface (after restart).\n\n"
+                                "The locale determines how numbers are formatted. Specifically, either commas or "
+                                "periods will be used as group delimiters in each number entered "
                                 "by the user, displayed in the user interface, or exported to a file."));
   for (int indexLang = QLocale::C; indexLang <= QLocale::LastLanguage; indexLang++) {
     QLocale::Language lang = static_cast<QLocale::Language> (indexLang);

@@ -430,20 +430,38 @@ void DlgSettingsExportFormat::createXLabel (QGridLayout *layoutHeader,
 
 bool DlgSettingsExportFormat::goodIntervalFunctions() const
 {
+  // LOG4CPP_INFO_S is below
+
   QString textFunctions = m_editFunctionsPointsEvenlySpacing->text();
   int posFunctions;
 
   bool isGood = (m_validatorFunctionsPointsEvenlySpacing->validate (textFunctions, posFunctions) == QValidator::Acceptable);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::goodIntervalFunctions"
+                              << " text=" << textFunctions.toLatin1().data()
+                              << " good=" << (isGood ? "true" : "false")
+                              << " bottom=" << m_validatorFunctionsPointsEvenlySpacing->bottom()
+                              << " top=" << m_validatorFunctionsPointsEvenlySpacing->top();
 
   return isGood;
 }
 
 bool DlgSettingsExportFormat::goodIntervalRelations() const
 {
+  // LOG4CPP_INFO_S is below
+
   QString textRelations = m_editRelationsPointsEvenlySpacing->text();
   int posRelations;
 
-  return (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
+  bool isGood = (m_validatorRelationsPointsEvenlySpacing->validate (textRelations, posRelations) == QValidator::Acceptable);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::goodIntervalRelations"
+                              << " text=" << textRelations.toLatin1().data()
+                              << " good=" << (isGood ? "true" : "false")
+                              << " bottom=" << m_validatorRelationsPointsEvenlySpacing->bottom()
+                              << " top=" << m_validatorRelationsPointsEvenlySpacing->top();
+
+  return isGood;
 }
 
 void DlgSettingsExportFormat::handleOk ()
@@ -463,7 +481,7 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::initializeIntervalConstraints";
 
-  const int MAX_POINTS_ACROSS_RANGE = 1000;
+  const int MAX_POINTS_ACROSS_RANGE = 5000;
 
   // Get min and max of graph and screen coordinates
   CallbackBoundingRects ftor (mainWindow().transformation());
@@ -546,12 +564,13 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnHeaderGnuplot->setChecked (header == EXPORT_HEADER_GNUPLOT);
 
   m_editXLabel->setText (m_modelExportAfter->xLabel());
+
   m_editFunctionsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalFunctions()));
   m_editRelationsPointsEvenlySpacing->setText (QString::number (m_modelExportAfter->pointsIntervalRelations()));
 
-  ExportPointsIntervalUnits pointsIntervalUnitsFunctions = m_modelExportAfter->pointsIntervalUnitsRelations();
+  ExportPointsIntervalUnits pointsIntervalUnitsFunctions = m_modelExportAfter->pointsIntervalUnitsFunctions();
   ExportPointsIntervalUnits pointsIntervalUnitsRelations = m_modelExportAfter->pointsIntervalUnitsRelations();
-  int indexFunctions = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsFunctions));
+  int indexFunctions = m_cmbFunctionsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsFunctions));
   int indexRelations = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (pointsIntervalUnitsRelations));
   m_cmbFunctionsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
   m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);

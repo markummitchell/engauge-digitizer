@@ -20,6 +20,7 @@ read -p 'If the version numbers are correct, press Enter to continue'
 VERSION_NUMBER_CODE=`echo $VERSION_NUMBER_CODE | sed 's/\./_/g'`
 
 export STAGINGDIR=engauge
+export TRANSLATIONSDIR=engauge/translations
 export DOCDIR=$STAGINGDIR/documentation
 export IMAGEDIR=$STAGINGDIR/imageformats
 export PLATFORMSDIR=$STAGINGDIR/platforms
@@ -28,6 +29,7 @@ export SQLDIR=$STAGINGDIR/sqldrivers
 rm -rf $STAGINGDIR
 
 mkdir -p $STAGINGDIR
+mkdir -p $TRANSLATIONSDIR
 mkdir -p $DOCDIR
 mkdir -p $IMAGEDIR
 mkdir -p $PLATFORMSDIR
@@ -42,6 +44,10 @@ cp $FROMQHC $STAGINGDIR/documentation
 
 echo "***Copying icon file"
 cp $FROMICO $STAGINGDIR
+
+echo "***Building translations"
+lrelease ../../engauge.pro
+mv ../../translations/*.qm $TRANSLATIONSDIR
 
 echo "***Copying libraries"
 cp /lib/ld-linux.so.2                                                $STAGINGDIR

@@ -1,3 +1,9 @@
+Mac OSX
+-------
+Option 1) OSX 10.X 64 bit distributions can execute the DMG file 
+
+Option 2) Engauge can be built from source code. This requires a lot of effort and is not recommended.
+
 Debian Distributions
 --------------------
 Option 1) Debian-based distributions, such as Ubuntu and Kubuntu, do not currently offer the newest Engauge Digitizer as 

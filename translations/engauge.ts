@@ -279,7 +279,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="18"/>
-        <source>&lt;p&gt;Engauge Digitizer&lt;/b&gt;</source>
+        <source>&lt;p&gt;&lt;b&gt;Engauge Digitizer&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

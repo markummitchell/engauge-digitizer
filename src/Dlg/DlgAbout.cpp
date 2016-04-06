@@ -15,7 +15,7 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
   setWindowTitle (tr ("About Engauge"));
   setTextFormat (Qt::RichText);
   setText (QString ("%1 %2 %3 %4")
-           .arg (tr ("<p>Engauge Digitizer</b>"))
+           .arg (tr ("<p>Engauge Digitizer</p>"))
            .arg (tr ("Version"))
            .arg (VERSION_NUMBER)
            .arg (tr ("</p><p>&copy; 2014 Mark Mitchell</p>"
@@ -30,7 +30,7 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
                      "<p>Engauge Digitizer Links<p>"
                      "<ul>"
                      "<li><a href='https://github.com/markummitchell/engauge-digitizer'>Project Home Page</a></li>"
-                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum<a></li>"
+                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum</a></li>"
                      "</ul>"
                      "<p>FFTW 3.X.X Links</p>"
                      "<ul>"

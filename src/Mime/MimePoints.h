@@ -8,6 +8,8 @@
 #define MIME_POINTS_H
 
 #include <QMimeData>
+#include <QString>
+#include <QStringList>
 
 /// Custom mime type for separate treatment of graph coordinates and, when there is no transform, points coordinates.
 class MimePoints : public QMimeData

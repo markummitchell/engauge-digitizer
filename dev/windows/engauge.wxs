@@ -5,7 +5,7 @@
 	   Id='3E24D032-1183-4CE1-A30A-F2E3A7D702B0'
 	   UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
 	   Language='1033' Codepage='1252' 
-           Version='7.0'>
+           Version='7.2'>
     <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
 	     Comments='Engauge Digitizer is available from github.com' Manufacturer='Engauge Open Source Developers'
 	     InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />

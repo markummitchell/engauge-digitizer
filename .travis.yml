@@ -27,8 +27,8 @@ before_install:
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
    elif [ `uname` = "Darwin" ]; then
      brew update;
-     brew install qt5 fftw log4cpp;
-     export QT5BREWHOME=`brew --prefix qt5`;
+     brew install homebrew/versions/qt55 fftw log4cpp;
+     export QT5BREWHOME=`brew --prefix homebrew/versions/qt55`;
    fi
 
 script:
@@ -44,11 +44,14 @@ script:
     sed -ibak2 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' Makefile;
    fi
  - make
-#no tests on OSX
+ - cd help && ./build && cd ..;
+ - if [ `uname` = "Darwin" ]; then
+    cp engauge bin;
+   fi
+ - cd src && ./build_and_run_all_gui_tests && cd ..;
+#no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
-    cd help && ./build && cd ..;
     cd src && ./build_and_run_all_cli_tests && cd ..;
-    cd src && ./build_and_run_all_gui_tests && cd ..;
    fi
  
 after_success:

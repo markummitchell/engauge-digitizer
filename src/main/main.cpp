@@ -10,10 +10,12 @@
 #include "MainWindow.h"
 #include <QApplication>
 #include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QObject>
 #include <QProcessEnvironment>
+#include "TranslatorContainer.h"
 
 using namespace std;
 
@@ -94,8 +96,12 @@ int main(int argc, char *argv[])
 {
   qRegisterMetaType<ColorFilterMode> ("ColorFilterMode");
 
-  QApplication a(argc, argv);
+  QApplication app(argc, argv);
 
+  // Translations
+  TranslatorContainer translatorContainer (app); // Must exist until execution terminates
+
+  // Command line
   bool isDebug, isGnuplot, isRegressionTest;
   QString errorReportFile, fileCmdScriptFile;
   QStringList loadStartupFiles;
@@ -108,11 +114,13 @@ int main(int argc, char *argv[])
                 isGnuplot,
                 loadStartupFiles);
 
+  // Logging
   initializeLogging ("engauge",
                      engaugeLogFilename(),
                      isDebug);
   LOG4CPP_INFO_S ((*mainCat)) << "main args=" << QApplication::arguments().join (" ").toLatin1().data();
 
+  // Create and show main window
   MainWindow w (errorReportFile,
                 fileCmdScriptFile,
                 isRegressionTest,
@@ -120,7 +128,8 @@ int main(int argc, char *argv[])
                 loadStartupFiles);
   w.show();
 
-  return a.exec();
+  // Event loop
+  return app.exec();
 }
 
 void parseCmdLine (int argc,
