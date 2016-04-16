@@ -8,10 +8,12 @@
 #include "HelpWindow.h"
 #include "Logger.h"
 #include <QApplication>
+#include <QDir>
 #include <QFile>
 #include <QHelpContentWidget>
 #include <QHelpEngine>
 #include <QHelpIndexWidget>
+#include <QMessageBox>
 #include <QSplitter>
 #include <QTabWidget>
 
@@ -59,6 +61,7 @@ QString HelpWindow::helpPath() const
 #endif
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
+  paths << "bin";
 
   QStringList::iterator itr;
   for (itr = paths.begin(); itr != paths.end(); itr++) {
