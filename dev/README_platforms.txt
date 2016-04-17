@@ -4,20 +4,18 @@ Option 1) OSX 10.X 64 bit distributions can execute the DMG file
 
 Option 2) Engauge can be built from source code. This requires a lot of effort and is not recommended.
 
-Debian Distributions
---------------------
-Option 1) Debian-based distributions, such as Ubuntu and Kubuntu, do not currently offer the newest Engauge Digitizer as 
-          packages (although this will hopefully change soon). So, the debian installer 
-          (digit-exe-debian-linux-32-bit-installer-X_Y.run) is released for installing into Debian systems. 
+Linux Distributions
+-------------------
+Option 1) Many Linux distributions already offer Engauge Digitizer as packages. For these distributions, Engauge Digitizer
+          can be installed by using the distribution's package manager (yum, apt-get, ...).
+
+Option 2) The AppImage release file can be downloaded and executed on all 32 and 64 bit Linux distributions. No 
+          installation process is required because the file is completely self-contained.
+
+Option 3) The Debian installer (digit-exe-debian-linux-32-bit-installer-X_Y.run) is released for installing into Debian systems. 
           The Debian installer included in this release has been tested in 32 and 64 bit Kubuntu and Knoppix.
 
-Option 2) Engauge can be built from source code. This requires a lot of effort and is not recommended.
-
-Red Hat Distributions
----------------------
-Option 1) Red Hat-based distributions, such as Fedora and Centos, offer the newest Engauge Digitizer as packages.
-
-Option 2) Engauge can be built from source code. This requires a lot of effort and is not recommended.
+Option 4) Engauge can be built from source code. This requires a lot of effort and is not recommended.
 
 Windows
 -------
