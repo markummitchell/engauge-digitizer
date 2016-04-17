@@ -1,6 +1,7 @@
 Mac OSX
 -------
-Option 1) OSX 10.X 64 bit distributions can execute the DMG file 
+Option 1) OSX 10.X 64 bit distributions can execute the DMG file. This option may not work if security software
+          like Gatekeeper is operating.
 
 Option 2) Engauge can be built from source code. This requires a lot of effort and is not recommended.
 
@@ -9,8 +10,18 @@ Linux Distributions
 Option 1) Many Linux distributions already offer Engauge Digitizer as packages. For these distributions, Engauge Digitizer
           can be installed by using the distribution's package manager (yum, apt-get, ...).
 
-Option 2) The AppImage release file can be downloaded and executed on all 32 and 64 bit Linux distributions. No 
-          installation process is required because the file is completely self-contained.
+Option 2) The AppImage release file can be downloaded and executed on all 32 and 64 bit Linux distributions. No installation
+          step is required before executing the AppImage. However, if an error message appears mentioning that 
+          'Fuse is not installed' then the fuse package must be installed. The commands to install that package on 
+ 	  some systems are:
+
+            On Ubuntu/Kubuntu distributions
+              sudo apt-get install fuse
+              sudo modprobe fuse
+              sudo usermod -a -G fuse $USER
+
+            On openSUSE:
+              sudo zypper install fuse
 
 Option 3) The Debian installer (digit-exe-debian-linux-32-bit-installer-X_Y.run) is released for installing into Debian systems. 
           The Debian installer included in this release has been tested in 32 and 64 bit Kubuntu and Knoppix.
