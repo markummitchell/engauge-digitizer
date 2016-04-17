@@ -19,6 +19,7 @@ Option 2) The AppImage release file can be downloaded and executed on all 32 and
               sudo apt-get install fuse
               sudo modprobe fuse
               sudo usermod -a -G fuse $USER
+              (log out and log back in so your account is immediately able to use fuse, and run Engauge Digitizer)
 
             On openSUSE:
               sudo zypper install fuse
