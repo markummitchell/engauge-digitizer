@@ -36,7 +36,10 @@ HelpWindow::HelpWindow(QWidget *parent) :
                 tr ("Index"));
 
   HelpBrowser *browser = new HelpBrowser (helpEngine);
+
+  // URL is constructed from <namespace>, <virtualFolder> and <file> in engauge.qhp
   browser->setSource (QUrl ("qthelp://engaugedigitizer.net/doc/index.html"));
+
   connect (helpEngine->contentWidget (), SIGNAL (linkActivated (QUrl)), browser, SLOT (setSource (QUrl)));
   connect (helpEngine->indexWidget (), SIGNAL (linkActivated (QUrl, QString)), browser, SLOT (setSource (QUrl)));
 
@@ -61,7 +64,6 @@ QString HelpWindow::helpPath() const
 #endif
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
-  paths << "bin";
 
   QStringList::iterator itr;
   for (itr = paths.begin(); itr != paths.end(); itr++) {
