@@ -7,32 +7,37 @@
 
 TranslatorContainer::TranslatorContainer(QApplication &app)
 {
-  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-  settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
-
-  // Get the locale settings outside of the settings retrieval methods in MainWindow
+  // For some reason, some built-in strings get translated into German by the first call to installTranslator above,
+  // when the locale is english. So we skip translation for english
   QLocale localeDefault;
-  QLocale::Language language = (QLocale::Language) settings.value (SETTINGS_LOCALE_LANGUAGE,
-                                                                   QVariant (localeDefault.language())).toInt();
-  QLocale::Country country = (QLocale::Country) settings.value (SETTINGS_LOCALE_COUNTRY,
-                                                                QVariant (localeDefault.country())).toInt();
-  QLocale locale (language,
-                  country);
+  if (localeDefault.name().toLower() != "en_us") {
 
-  settings.endGroup();
+    QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+    settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
-  // Basic translators, like buttons in QWizard
-  m_translatorGeneric = new QTranslator;
-  m_translatorGeneric->load ("qt_" + locale.name().toLower(),
-                             QLibraryInfo::location (QLibraryInfo::TranslationsPath));
-  app.installTranslator (m_translatorGeneric);
+    // Get the locale settings outside of the settings retrieval methods in MainWindow
+    QLocale::Language language = (QLocale::Language) settings.value (SETTINGS_LOCALE_LANGUAGE,
+                                                                     QVariant (localeDefault.language())).toInt();
+    QLocale::Country country = (QLocale::Country) settings.value (SETTINGS_LOCALE_COUNTRY,
+                                                                  QVariant (localeDefault.country())).toInt();
+    QLocale locale (language,
+                    country);
 
-  // Engauge-specific translators. As documented in engauge.pro, the country-specific engauge_XX_YY locale is loaded
-  // if available, otherwise engauge_XX is loaded if available
-  QString delimiters ("._");
-  m_translatorEngauge = new QTranslator;
-  m_translatorEngauge->load ("engauge_" + locale.name().toLower(),
-                             QCoreApplication::applicationDirPath () + "/translations",
-                             delimiters);
-  app.installTranslator (m_translatorEngauge);
+    settings.endGroup();
+
+    // Basic translators, like buttons in QWizard
+    m_translatorGeneric = new QTranslator;
+    m_translatorGeneric->load ("qt_" + locale.name().toLower(),
+                               QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+    app.installTranslator (m_translatorGeneric);
+
+    // Engauge-specific translators. As documented in engauge.pro, the country-specific engauge_XX_YY locale is loaded
+    // if available, otherwise engauge_XX is loaded if available
+    QString delimiters ("._");
+    m_translatorEngauge = new QTranslator;
+    m_translatorEngauge->load ("engauge_" + locale.name().toLower(),
+                               QCoreApplication::applicationDirPath () + "/translations",
+                               delimiters);
+    app.installTranslator (m_translatorEngauge);
+  }
 }
