@@ -75,7 +75,7 @@ export ENGAUGE_RELEASE=1 &&
 cd ../.. &&
 qmake engauge.pro &&
 sed 's/-lQt/-lQt5/g' Makefile >Makefile~ &&
-sed 's/551//g' Makefile~ >Makefile &&
+sed 's/Qt55/Qt5/g' Makefile~ >Makefile &&
 mingw32-make clean &&
 mingw32-make &&
 cd dev/windows &&
@@ -105,9 +105,7 @@ cp $QTPLUGINSDIR/imageformats/qdds.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qgif.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qicns.dll "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qico.dll  "Engauge Digitizer/imageformats"
-cp $QTPLUGINSDIR/imageformats/qjp2.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qjpeg.dll "Engauge Digitizer/imageformats"
-cp $QTPLUGINSDIR/imageformats/qmng.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qsvg.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qtga.dll  "Engauge Digitizer/imageformats"
 cp $QTPLUGINSDIR/imageformats/qtiff.dll "Engauge Digitizer/imageformats"
@@ -117,7 +115,7 @@ cp $QTPLUGINSDIR/platforms/qwindows.dll "Engauge Digitizer/platforms"
 cp $QTPLUGINSDIR/printsupport/windowsprintersupport.dll "Engauge Digitizer/printsupport"
 cp $QTPLUGINSDIR/sqldrivers/qsqlite.dll   "Engauge Digitizer/sqldrivers"
 cp $QTPLUGINSDIR/sqldrivers/qsqlmysql.dll "Engauge Digitizer/sqldrivers"
-cp $QTPLUGINSDIR/sqldrivers/qsqlodbc.dll  "Engauge Digitizer/sqldrivers"
+cp $QTPLUGINSDIR/sqldrivers/qsqlpsql.dll "Engauge Digitizer/sqldrivers"
 cp $QTTRANSDIR/*.qm  "Engauge Digitizer/translations"
 cp ../../LICENSE                 "Engauge Digitizer"
 cp ../../bin/D3Dcompiler_47.dll  "Engauge Digitizer"
