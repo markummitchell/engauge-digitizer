@@ -12,3 +12,5 @@ make.exe.stackdump
 Engauge Digitizer
 engauge.app
 engauge.dmg
+engauge.pkg
+engauge.app.dSYM

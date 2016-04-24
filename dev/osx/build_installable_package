@@ -1,0 +1,63 @@
+#!/bin/bash
+
+function signArray {
+    array=("$@")
+    for i in "${array[@]}"
+    do
+	signFile "$i"
+    done
+}
+
+function signFile {
+    # sandboxing is triggered and controlled by engauge.entitlements file, which was created in 
+    # code for a dummy project
+    file="$1"
+    echo "$file"
+    codesign \
+	-s "3rd Party Mac Developer Application: Mark Mitchell" \
+	--entitlements dev/osx/engauge.entitlements \
+	"$file"
+}
+
+function signFramework {
+    vc="engauge.app/Contents/Frameworks/$1.framework/Versions/Current/$1"
+    signFile "$vc"
+}
+
+# remove old build
+rm -rf engauge.app 2>/dev/null
+
+# Make into engauge.app
+make 
+
+# Debug symbols are not dropped for now
+dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
+
+# Insert Qt libraries
+macdeployqt engauge.app -appstore-compliant
+
+# Code signing
+frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
+for i in "${frameworks[@]}"
+do
+    signFramework $i
+done
+
+signArray `find engauge.app | grep '/Frameworks/lib'`
+signArray `find engauge.app | grep '/documentation/engauge'`
+signArray `find engauge.app | grep '/translations/engauge_'`
+signArray `find engauge.app | grep '/PlugIns/bearers/lib'`
+signArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
+signArray `find engauge.app | grep '/PlugIns/platforms/lib'`
+signArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
+signArray `find engauge.app | grep '/PlugIns/sqldrivers/lib'`
+
+# remove log file
+rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
+
+# build package
+productbuild --component engauge.app /Applications engauge.pkg
+
+# test the built package
+echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
+sudo installer -store -pkg engauge.pkg -target /
