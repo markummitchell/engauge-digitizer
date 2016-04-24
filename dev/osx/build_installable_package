@@ -1,14 +1,14 @@
 #!/bin/bash
 
-function signArray {
+function signAppArray {
     array=("$@")
     for i in "${array[@]}"
     do
-	signFile "$i"
+	signAppFile "$i"
     done
 }
 
-function signFile {
+function signAppFile {
     # sandboxing is triggered and controlled by engauge.entitlements file, which was created in 
     # code for a dummy project
     file="$1"
@@ -19,19 +19,44 @@ function signFile {
 	"$file"
 }
 
-function signFramework {
+function signAppFramework {
     vc="engauge.app/Contents/Frameworks/$1.framework/Versions/Current/$1"
-    signFile "$vc"
+    signAppFile "$vc"
 }
 
-# remove old build
-rm -rf engauge.app 2>/dev/null
+function signPkgFile {
+    file="$1"
+    echo "$file"
+    codesign --deep \
+	-s "3rd Party Mac Developer Installer: Mark Mitchell" \
+	"$file"
+}
+
+# Make sure environment variables are correctly set
+exe=`which macdeployqt`
+if [ -z "$exe" ]; then
+    echo "'source dev/osx/macosx_setup' must be run before this script"
+    exit
+fi
+
+# Remove old build. Need root privileges
+sudo rm -rf engauge.app 2>/dev/null
 
 # Make into engauge.app
 make 
 
-# Debug symbols are not dropped for now
+# Debug symbols are just dropped for now
 dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
+
+# Manually insert version numbering
+echo "In another window:"
+echo "1. source dev/osx/macosx_setup"
+echo "2. sudo <editor> engauge.app/Contents/Info.plist"
+echo "3. add CFBundleVersion=#.#"
+echo "4. add CFBundleShortVersionString=#.#, then press any key to continue"
+echo "5. add LSApplicationCategoryType=public.app-category.utilities"
+echo "6. change CFBundleIdentifier to 'Digitizer' consistent with relevant App ID for OSX"
+read -p "Press any key to continue"
 
 # Insert Qt libraries
 macdeployqt engauge.app -appstore-compliant
@@ -40,17 +65,18 @@ macdeployqt engauge.app -appstore-compliant
 frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
-    signFramework $i
+    signAppFramework $i
 done
 
-signArray `find engauge.app | grep '/Frameworks/lib'`
-signArray `find engauge.app | grep '/documentation/engauge'`
-signArray `find engauge.app | grep '/translations/engauge_'`
-signArray `find engauge.app | grep '/PlugIns/bearers/lib'`
-signArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
-signArray `find engauge.app | grep '/PlugIns/platforms/lib'`
-signArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
-signArray `find engauge.app | grep '/PlugIns/sqldrivers/lib'`
+signAppArray `find engauge.app | grep '/Frameworks/lib'`
+signAppArray `find engauge.app | grep '/documentation/engauge'`
+signAppArray `find engauge.app | grep '/translations/engauge_'`
+signAppArray `find engauge.app | grep '/PlugIns/bearers/lib'`
+signAppArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
+signAppArray `find engauge.app | grep '/PlugIns/platforms/lib'`
+signAppArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
+signAppArray `find engauge.app | grep '/PlugIns/sqldrivers/lib'`
+signAppFile engauge.app/Contents/MacOS/engauge
 
 # remove log file
 rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
@@ -58,6 +84,11 @@ rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
 # build package
 productbuild --component engauge.app /Applications engauge.pkg
 
+# sign package
+#signPkgFile engauge.pkg
+
 # test the built package
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
 sudo installer -store -pkg engauge.pkg -target /
+
+echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload"
