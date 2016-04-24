@@ -24,14 +24,6 @@ function signAppFramework {
     signAppFile "$vc"
 }
 
-function signPkgFile {
-    file="$1"
-    echo "$file"
-    codesign --deep \
-	-s "3rd Party Mac Developer Installer: Mark Mitchell" \
-	"$file"
-}
-
 # Make sure environment variables are correctly set
 exe=`which macdeployqt`
 if [ -z "$exe" ]; then
@@ -52,10 +44,8 @@ dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
 echo "In another window:"
 echo "1. source dev/osx/macosx_setup"
 echo "2. sudo <editor> engauge.app/Contents/Info.plist"
-echo "3. add CFBundleVersion=#.#"
-echo "4. add CFBundleShortVersionString=#.#, then press any key to continue"
-echo "5. add LSApplicationCategoryType=public.app-category.utilities"
-echo "6. change CFBundleIdentifier to 'Digitizer' consistent with relevant App ID for OSX"
+echo "3. remove existing CFBundleIdentifier entry"
+echo "4. insert dev/osx/engauge_delta_for_Info.plist"
 read -p "Press any key to continue"
 
 # Insert Qt libraries
@@ -71,7 +61,7 @@ done
 signAppArray `find engauge.app | grep '/Frameworks/lib'`
 signAppArray `find engauge.app | grep '/documentation/engauge'`
 signAppArray `find engauge.app | grep '/translations/engauge_'`
-signAppArray `find engauge.app | grep '/PlugIns/bearers/lib'`
+signAppArray `find engauge.app | grep '/PlugIns/bearer/lib'`
 signAppArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
 signAppArray `find engauge.app | grep '/PlugIns/platforms/lib'`
 signAppArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
@@ -85,10 +75,11 @@ rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
 productbuild --component engauge.app /Applications engauge.pkg
 
 # sign package
-#signPkgFile engauge.pkg
+productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" engauge.pkg engauge.pkg.signed
+mv engauge.pkg.signed engauge.pkg
 
 # test the built package
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
 sudo installer -store -pkg engauge.pkg -target /
 
-echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload"
+echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to uploadengauge.pkg.signed"
