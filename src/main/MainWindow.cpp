@@ -3555,8 +3555,13 @@ void MainWindow::slotViewZoomInFromWheelEvent ()
   if ((m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) ||
       (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
 
+    // Anchor the zoom to the cursor position
+    m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
     // Forward this event
     slotViewZoomIn ();
+
+    m_view->setTransformationAnchor(QGraphicsView::NoAnchor);
   }
 }
 
@@ -3641,8 +3646,13 @@ void MainWindow::slotViewZoomOutFromWheelEvent ()
   if ((m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL) ||
       (m_modelMainWindow.zoomControl() == ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)) {
 
+    // Anchor the zoom to the cursor position
+    m_view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
     // Forward this event
     slotViewZoomOut ();
+
+    m_view->setTransformationAnchor(QGraphicsView::NoAnchor);
   }
 }
 
