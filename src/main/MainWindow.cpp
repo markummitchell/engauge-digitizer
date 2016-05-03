@@ -41,6 +41,7 @@
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
 #include "DlgSettingsGeneral.h"
+#include "DlgSettingsGridDisplay.h"
 #include "DlgSettingsGridRemoval.h"
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
@@ -619,6 +620,13 @@ void MainWindow::createActionsSettings ()
                                                  "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
   connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
 
+  m_actionSettingsGridDisplay = new QAction (tr ("Grid Line Display..."), this);
+  m_actionSettingsGridDisplay->setStatusTip (tr ("Edit Grid Line Display settings."));
+  m_actionSettingsGridDisplay->setWhatsThis (tr ("Grid Line Display Settings\n\n"
+                                                 "Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. "
+                                                 "In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions."));
+  connect (m_actionSettingsGridDisplay, SIGNAL (triggered ()), this, SLOT (slotSettingsGridDisplay ()));
+
   m_actionSettingsGridRemoval = new QAction (tr ("Grid Line Removal..."), this);
   m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Line Removal settings."));
   m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Line Removal Settings\n\n"
@@ -1006,6 +1014,7 @@ void MainWindow::createMenus()
   m_menuSettings->addAction (m_actionSettingsExport);
   m_menuSettings->addAction (m_actionSettingsColorFilter);
   m_menuSettings->addAction (m_actionSettingsAxesChecker);
+  m_menuSettings->addAction (m_actionSettingsGridDisplay);
   m_menuSettings->addAction (m_actionSettingsGridRemoval);
   m_menuSettings->addAction (m_actionSettingsPointMatch);
   m_menuSettings->addAction (m_actionSettingsSegments);
@@ -1042,6 +1051,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsExportFormat = new DlgSettingsExportFormat (*this);
   m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
   m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
+  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*this);
   m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
   m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
   m_dlgSettingsSegments = new DlgSettingsSegments (*this);
@@ -1055,6 +1065,7 @@ void MainWindow::createSettingsDialogs ()
   m_dlgSettingsExportFormat->setVisible (false);
   m_dlgSettingsColorFilter->setVisible (false);
   m_dlgSettingsAxesChecker->setVisible (false);
+  m_dlgSettingsGridDisplay->setVisible (false);
   m_dlgSettingsGridRemoval->setVisible (false);
   m_dlgSettingsPointMatch->setVisible (false);
   m_dlgSettingsSegments->setVisible (false);
@@ -3123,6 +3134,14 @@ void MainWindow::slotSettingsGeneral ()
   m_dlgSettingsGeneral->show ();
 }
 
+void MainWindow::slotSettingsGridDisplay()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGridDisplay";
+
+  m_dlgSettingsGridDisplay->load (*m_cmdMediator);
+  m_dlgSettingsGridDisplay->show ();
+}
+
 void MainWindow::slotSettingsGridRemoval ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGridRemoval";
@@ -3826,6 +3845,7 @@ void MainWindow::updateControls ()
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsColorFilter->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGridDisplay->setEnabled (!m_currentFile.isEmpty () && m_transformation.transformIsDefined());
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
@@ -4010,6 +4030,13 @@ void MainWindow::updateSettingsGeneral(const DocumentModelGeneral &modelGeneral)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGeneral";
 
   m_cmdMediator->document().setModelGeneral(modelGeneral);
+}
+
+void MainWindow::updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
+
+  m_cmdMediator->document().setModelGridDisplay(modelGridDisplay);
 }
 
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

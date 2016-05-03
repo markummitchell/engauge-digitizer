@@ -408,23 +408,23 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
 
   str >> int32; // Grid display is initialized flag
   str >> int32;
-  m_modelGridDisplay.setXCount(int32);
+  m_modelGridDisplay.setCountX(int32);
   str >> int32;
-  m_modelGridDisplay.setYCount(int32);
+  m_modelGridDisplay.setCountY(int32);
   str >> int32; // X parameter
   str >> int32; // Y parameter
   str >> dbl;
-  m_modelGridDisplay.setXStart (dbl);
+  m_modelGridDisplay.setStartX (dbl);
   str >> dbl;
-  m_modelGridDisplay.setYStart (dbl);
+  m_modelGridDisplay.setStartY (dbl);
   str >> dbl;
-  m_modelGridDisplay.setXStep (dbl);
+  m_modelGridDisplay.setStepX (dbl);
   str >> dbl;
-  m_modelGridDisplay.setYStep (dbl);
+  m_modelGridDisplay.setStepY (dbl);
   str >> dbl;
-  m_modelGridDisplay.setXStop (dbl);
+  m_modelGridDisplay.setStopX (dbl);
   str >> dbl;
-  m_modelGridDisplay.setYStop (dbl);
+  m_modelGridDisplay.setStopY (dbl);
 
   str >> int32;
   m_modelSegments.setMinLength(int32);

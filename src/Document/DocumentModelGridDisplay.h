@@ -29,9 +29,6 @@ public:
   /// Assignment constructor.
   DocumentModelGridDisplay &operator=(const DocumentModelGridDisplay &other);
 
-  /// Get method for linear/log scale on x/theta.
-  CoordScale coordScaleXTheta () const;
-
   /// Get method for initialized flag.
   bool initialized () const;
 
@@ -43,84 +40,84 @@ public:
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
+  /// Get method for x grid line count.
+  unsigned int countX () const;
+
+  /// Get method for y grid line count.
+  unsigned int countY () const;
+
+  /// Get method for x grid line disabled variable.
+  GridCoordDisable disableX () const;
+
+  /// Get method for y grid line disabled variable.
+  GridCoordDisable disableY () const;
+
+  /// Set method for x grid line count.
+  void setCountX (unsigned int countX);
+
+  /// Set method for y grid line count.
+  void setCountY (unsigned int countY);
+
+  /// Set method for x grid line disabled variable.
+  void setDisableX (GridCoordDisable disableX);
+
+  /// Set method for y grid line disabled variable.
+  void setDisableY (GridCoordDisable disableY);
+
   /// Set method for initialized flag.
   void setInitialized (bool initialized);
 
-  /// Set method for x grid line count.
-  void setXCount (unsigned int xCount);
-
-  /// Set method for x grid line disabled variable.
-  void setXDisable (GridCoordDisable xDisable);
-
   /// Set method for x grid line lower bound (inclusive).
-  void setXStart (double xStart);
-
-  /// Set method for x grid line increment.
-  void setXStep (double xStep);
-
-  /// Set method for x grid line upper bound (inclusive).
-  void setXStop (double xStop);
-
-  /// Set method for y grid line count.
-  void setYCount (unsigned int yCount);
-
-  /// Set method for y grid line disabled variable.
-  void setYDisable (GridCoordDisable yDisable);
+  void setStartX (double startX);
 
   /// Set method for y grid line lower bound (inclusive).
-  void setYStart (double yStart);
+  void setStartY (double yStart);
+
+  /// Set method for x grid line increment.
+  void setStepX (double stepX);
 
   /// Set method for y grid line increment.
-  void setYStep (double yStep);
+  void setStepY (double yStep);
+
+  /// Set method for x grid line upper bound (inclusive).
+  void setStopX (double stopX);
 
   /// Set method for y grid line upper bound (inclusive).
-  void setYStop (double yStop);
-
-  /// Get method for x grid line count.
-  unsigned int xCount () const;
-
-  /// Get method for x grid line disabled variable.
-  GridCoordDisable xDisable () const;
+  void setStopY (double yStop);
 
   /// Get method for x grid line lower bound (inclusive).
-  double xStart () const;
-
-  /// Get method for x grid line increment.
-  double xStep () const;
-
-  /// Get method for x grid line upper bound (inclusive).
-  double xStop () const;
-
-  /// Get method for y grid line count.
-  unsigned int yCount () const;
-
-  /// Get method for y grid line disabled variable.
-  GridCoordDisable yDisable () const;
+  double startX () const;
 
   /// Get method for y grid line lower bound (inclusive).
-  double yStart () const;
+  double startY () const;
+
+  /// Get method for x grid line increment.
+  double stepX () const;
 
   /// Get method for y grid line increment.
-  double yStep () const;
+  double stepY () const;
+
+  /// Get method for x grid line upper bound (inclusive).
+  double stopX () const;
 
   /// Get method for y grid line upper bound (inclusive).
-  double yStop () const;
+  double stopY () const;
 
 private:
 
   bool m_initialized;
 
-  GridCoordDisable m_xDisable;
-  unsigned int m_xCount;
-  double m_xStart;
-  double m_xStep;
-  double m_xStop;
+  GridCoordDisable m_disableX;
+  unsigned int m_countX;
+  double m_startX;
+  double m_stepX;
+  double m_stopX;
 
-  GridCoordDisable m_yDisable;
-  unsigned int m_yCount;
-  double m_yStart;
-  double m_yStep;
-  double m_yStop;
+  GridCoordDisable m_disableY;
+  unsigned int m_countY;
+  double m_startY;
+  double m_stepY;
+  double m_stopY;
 };
 
 #endif // DOCUMENT_MODEL_GRID_DISPLAY

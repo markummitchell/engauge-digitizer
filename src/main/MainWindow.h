@@ -33,6 +33,7 @@ class DlgSettingsCurveProperties;
 class DlgSettingsDigitizeCurve;
 class DlgSettingsExportFormat;
 class DlgSettingsGeneral;
+class DlgSettingsGridDisplay;
 class DlgSettingsGridRemoval;
 class DlgSettingsMainWindow;
 class DlgSettingsPointMatch;
@@ -43,6 +44,7 @@ class DocumentModelCoords;
 class DocumentModelDigitizeCurve;
 class DocumentModelExportFormat;
 class DocumentModelGeneral;
+class DocumentModelGridDisplay;
 class DocumentModelGridRemoval;
 class DocumentModelPointMatch;
 class DocumentModelSegments;
@@ -192,6 +194,9 @@ public:
   /// Update with new general properties.
   void updateSettingsGeneral(const DocumentModelGeneral &modelGeneral);
 
+  /// Update with new grid display properties.
+  void updateSettingsGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
+
   /// Update with new grid removal properties.
   void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
@@ -270,6 +275,7 @@ private slots:
   void slotSettingsDigitizeCurve ();
   void slotSettingsExportFormat ();
   void slotSettingsGeneral ();
+  void slotSettingsGridDisplay ();
   void slotSettingsGridRemoval ();
   void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
@@ -479,6 +485,7 @@ private:
   QAction *m_actionSettingsDigitizeCurve;
   QAction *m_actionSettingsExport;
   QAction *m_actionSettingsGeneral;
+  QAction *m_actionSettingsGridDisplay;
   QAction *m_actionSettingsGridRemoval;
   QAction *m_actionSettingsMainWindow;
   QAction *m_actionSettingsPointMatch;
@@ -538,6 +545,7 @@ private:
   DlgSettingsDigitizeCurve * m_dlgSettingsDigitizeCurve;
   DlgSettingsExportFormat *m_dlgSettingsExportFormat;
   DlgSettingsGeneral *m_dlgSettingsGeneral;
+  DlgSettingsGridDisplay *m_dlgSettingsGridDisplay;
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
   DlgSettingsMainWindow *m_dlgSettingsMainWindow;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;

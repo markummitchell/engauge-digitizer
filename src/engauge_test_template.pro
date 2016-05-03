@@ -70,6 +70,7 @@ HEADERS  += \
     Cmd/CmdSettingsDigitizeCurve.h \
     Cmd/CmdSettingsExportFormat.h \
     Cmd/CmdSettingsGeneral.h \
+    Cmd/CmdSettingsGridDisplay.h \
     Cmd/CmdSettingsGridRemoval.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
@@ -130,6 +131,7 @@ HEADERS  += \
     Dlg/DlgSettingsDigitizeCurve.h \
     Dlg/DlgSettingsExportFormat.h \
     Dlg/DlgSettingsGeneral.h \
+    Dlg/DlgSettingsGridDisplay.h \
     Dlg/DlgSettingsGridRemoval.h \
     Dlg/DlgSettingsMainWindow.h \
     Dlg/DlgSettingsPointMatch.h \
@@ -337,6 +339,7 @@ SOURCES += \
     Cmd/CmdSettingsDigitizeCurve.cpp \
     Cmd/CmdSettingsExportFormat.cpp \
     Cmd/CmdSettingsGeneral.cpp \
+    Cmd/CmdSettingsGridDisplay.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
@@ -394,6 +397,7 @@ SOURCES += \
     Dlg/DlgSettingsDigitizeCurve.cpp \
     Dlg/DlgSettingsExportFormat.cpp \
     Dlg/DlgSettingsGeneral.cpp \
+    Dlg/DlgSettingsGridDisplay.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
     Dlg/DlgSettingsMainWindow.cpp \
     Dlg/DlgSettingsPointMatch.cpp \

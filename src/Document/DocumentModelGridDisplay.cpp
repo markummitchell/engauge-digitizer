@@ -22,43 +22,69 @@ DocumentModelGridDisplay::DocumentModelGridDisplay() :
 
 DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
   m_initialized (document.modelGridDisplay().initialized()),
-  m_xCount (document.modelGridDisplay().xCount()),
-  m_xStart (document.modelGridDisplay().xStart()),
-  m_xStep (document.modelGridDisplay().xStep()),
-  m_xStop (document.modelGridDisplay().xStop()),
-  m_yCount (document.modelGridDisplay().yCount()),
-  m_yStart (document.modelGridDisplay().yStart()),
-  m_yStep (document.modelGridDisplay().yStep()),
-  m_yStop (document.modelGridDisplay().yStop())
+  m_disableX (document.modelGridDisplay().disableX()),
+  m_countX (document.modelGridDisplay().countX()),
+  m_startX (document.modelGridDisplay().startX()),
+  m_stepX (document.modelGridDisplay().stepX()),
+  m_stopX (document.modelGridDisplay().stopX()),
+  m_disableY (document.modelGridDisplay().disableY()),
+  m_countY (document.modelGridDisplay().countY()),
+  m_startY (document.modelGridDisplay().startY()),
+  m_stepY (document.modelGridDisplay().stepY()),
+  m_stopY (document.modelGridDisplay().stopY())
 {
 }
 
 DocumentModelGridDisplay::DocumentModelGridDisplay(const DocumentModelGridDisplay &other) :
   m_initialized(other.initialized()),
-  m_xCount (other.xCount()),
-  m_xStart (other.xStart()),
-  m_xStep (other.xStep()),
-  m_xStop (other.xStop()),
-  m_yCount (other.yCount()),
-  m_yStart (other.yStart()),
-  m_yStep (other.yStep()),
-  m_yStop (other.yStop())
+  m_disableX (other.disableX()),
+  m_countX (other.countX()),
+  m_startX (other.startX()),
+  m_stepX (other.stepX()),
+  m_stopX (other.stopX()),
+  m_disableY (other.disableY()),
+  m_countY (other.countY()),
+  m_startY (other.startY()),
+  m_stepY (other.stepY()),
+  m_stopY (other.stopY())
 {
 }
 
 DocumentModelGridDisplay &DocumentModelGridDisplay::operator=(const DocumentModelGridDisplay &other)
 {
   m_initialized = other.initialized();
-  m_xCount = other.xCount();
-  m_xStart = other.xStart();
-  m_xStep = other.xStep();
-  m_xStop = other.xStop();
-  m_yCount = other.yCount();
-  m_yStart = other.yStart();
-  m_yStep = other.yStep();
-  m_yStop = other.yStop();
+  m_disableX = other.disableX();
+  m_countX = other.countX();
+  m_startX = other.startX();
+  m_stepX = other.stepX();
+  m_stopX = other.stopX();
+  m_disableY = other.disableY();
+  m_countY = other.countY();
+  m_startY = other.startY();
+  m_stepY = other.stepY();
+  m_stopY = other.stopY();
 
   return *this;
+}
+
+unsigned int DocumentModelGridDisplay::countX () const
+{
+  return m_countX;
+}
+
+unsigned int DocumentModelGridDisplay::countY () const
+{
+  return m_countY;
+}
+
+GridCoordDisable DocumentModelGridDisplay::disableX () const
+{
+  return m_disableX;
+}
+
+GridCoordDisable DocumentModelGridDisplay::disableY () const
+{
+  return m_disableY;
 }
 
 bool DocumentModelGridDisplay::initialized() const
@@ -75,13 +101,13 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
   QXmlStreamAttributes attributes = reader.attributes();
 
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y)) {
@@ -90,16 +116,16 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
     QString initializedValue = attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED).toString();
 
     setInitialized (initializedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
-    setXCount (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X).toInt());
-    setXDisable ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X).toInt());
-    setXStart (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X).toDouble());
-    setXStep (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X).toDouble());
-    setXStop (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X).toDouble());
-    setYCount (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y).toInt());
-    setYDisable ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y).toInt());
-    setYStart (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y).toDouble());
-    setYStep (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y).toDouble());
-    setYStop (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y).toDouble());
+    setDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X).toInt());
+    setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X).toInt());
+    setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X).toDouble());
+    setStepX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X).toDouble());
+    setStopX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X).toDouble());
+    setDisableY ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y).toInt());
+    setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y).toInt());
+    setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y).toDouble());
+    setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y).toDouble());
+    setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y).toDouble());
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -125,16 +151,16 @@ void DocumentModelGridDisplay::printStream(QString indentation,
   indentation += INDENTATION_DELTA;
 
   str << indentation << "initialized=" << (m_initialized ? "true" : "false") << "\n";
-  str << indentation << "xDisable=" << m_xDisable << "\n";
-  str << indentation << "xCount=" << m_xCount << "\n";
-  str << indentation << "xStart=" << m_xStart << "\n";
-  str << indentation << "xStep=" << m_xStep << "\n";
-  str << indentation << "xStop=" << m_xStop << "\n";
-  str << indentation << "yDisable=" << m_yDisable << "\n";
-  str << indentation << "yCount=" << m_yCount << "\n";
-  str << indentation << "yStart=" << m_yStart << "\n";
-  str << indentation << "yStep=" << m_yStep << "\n";
-  str << indentation << "yStop=" << m_yStop << "\n";
+  str << indentation << "disableX=" << m_disableX << "\n";
+  str << indentation << "countX=" << m_countX << "\n";
+  str << indentation << "startX=" << m_startX << "\n";
+  str << indentation << "stepX=" << m_stepX << "\n";
+  str << indentation << "stopX=" << m_stopX << "\n";
+  str << indentation << "disableY=" << m_disableY << "\n";
+  str << indentation << "countY=" << m_countY << "\n";
+  str << indentation << "startY=" << m_startY << "\n";
+  str << indentation << "stepY=" << m_stepY << "\n";
+  str << indentation << "stopY=" << m_stopY << "\n";
 }
 
 void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
@@ -145,17 +171,37 @@ void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED, m_initialized ?
                             DOCUMENT_SERIALIZE_BOOL_TRUE :
                             DOCUMENT_SERIALIZE_BOOL_FALSE);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X, QString::number (m_xDisable));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X, QString::number (m_xCount));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X, QString::number  (m_xStart));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X, QString::number (m_xStep));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X, QString::number (m_xStop));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y, QString::number (m_yDisable));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y, QString::number (m_yCount));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y, QString::number  (m_yStart));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y, QString::number (m_yStep));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y, QString::number (m_yStop));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X, QString::number (m_disableX));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X, QString::number (m_countX));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X, QString::number  (m_startX));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X, QString::number (m_stepX));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X, QString::number (m_stopX));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y, QString::number (m_disableY));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y, QString::number (m_countY));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y, QString::number  (m_startY));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y, QString::number (m_stepY));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y, QString::number (m_stopY));
   writer.writeEndElement();
+}
+
+void DocumentModelGridDisplay::setCountX (unsigned int countX)
+{
+  m_countX = countX;
+}
+
+void DocumentModelGridDisplay::setCountY (unsigned int countY)
+{
+  m_countY = countY;
+}
+
+void DocumentModelGridDisplay::setDisableX (GridCoordDisable disableX)
+{
+  m_disableX = disableX;
+}
+
+void DocumentModelGridDisplay::setDisableY (GridCoordDisable disableY)
+{
+  m_disableY = disableY;
 }
 
 void DocumentModelGridDisplay::setInitialized(bool initialized)
@@ -163,102 +209,62 @@ void DocumentModelGridDisplay::setInitialized(bool initialized)
   m_initialized = initialized;
 }
 
-void DocumentModelGridDisplay::setXCount (unsigned int xCount)
+void DocumentModelGridDisplay::setStartX (double startX)
 {
-  m_xCount = xCount;
+  m_startX = startX;
 }
 
-void DocumentModelGridDisplay::setXDisable (GridCoordDisable xDisable)
+void DocumentModelGridDisplay::setStartY (double startY)
 {
-  m_xDisable = xDisable;
+  m_startY = startY;
 }
 
-void DocumentModelGridDisplay::setXStart (double xStart)
+void DocumentModelGridDisplay::setStepX (double stepX)
 {
-  m_xStart = xStart;
+  m_stepX = stepX;
 }
 
-void DocumentModelGridDisplay::setXStep (double xStep)
+void DocumentModelGridDisplay::setStepY (double stepY)
 {
-  m_xStep = xStep;
+  m_stepY = stepY;
 }
 
-void DocumentModelGridDisplay::setXStop (double xStop)
+void DocumentModelGridDisplay::setStopX (double stopX)
 {
-  m_xStop = xStop;
+  m_stopX = stopX;
 }
 
-void DocumentModelGridDisplay::setYCount (unsigned int yCount)
+void DocumentModelGridDisplay::setStopY (double stopY)
 {
-  m_yCount = yCount;
+  m_stopY = stopY;
 }
 
-void DocumentModelGridDisplay::setYDisable (GridCoordDisable yDisable)
+double DocumentModelGridDisplay::startX() const
 {
-  m_yDisable = yDisable;
+  return m_startX;
 }
 
-void DocumentModelGridDisplay::setYStart (double yStart)
+double DocumentModelGridDisplay::startY() const
 {
-  m_yStart = yStart;
+  return m_startY;
 }
 
-void DocumentModelGridDisplay::setYStep (double yStep)
+double DocumentModelGridDisplay::stepX() const
 {
-  m_yStep = yStep;
+  return m_stepX;
 }
 
-void DocumentModelGridDisplay::setYStop (double yStop)
+double DocumentModelGridDisplay::stepY() const
 {
-  m_yStop = yStop;
+  return m_stepY;
 }
 
-unsigned int DocumentModelGridDisplay::xCount () const
+double DocumentModelGridDisplay::stopX() const
 {
-  return m_xCount;
+  return m_stopX;
 }
 
-GridCoordDisable DocumentModelGridDisplay::xDisable () const
+double DocumentModelGridDisplay::stopY() const
 {
-  return m_xDisable;
-}
-
-double DocumentModelGridDisplay::xStart() const
-{
-  return m_xStart;
-}
-
-double DocumentModelGridDisplay::xStep() const
-{
-  return m_xStep;
-}
-
-double DocumentModelGridDisplay::xStop() const
-{
-  return m_xStop;
-}
-
-unsigned int DocumentModelGridDisplay::yCount () const
-{
-  return m_yCount;
-}
-
-GridCoordDisable DocumentModelGridDisplay::yDisable () const
-{
-  return m_yDisable;
-}
-
-double DocumentModelGridDisplay::yStart() const
-{
-  return m_yStart;
-}
-
-double DocumentModelGridDisplay::yStep() const
-{
-  return m_yStep;
-}
-
-double DocumentModelGridDisplay::yStop() const
-{
-  return m_yStop;
+  return m_stopY;
 }
