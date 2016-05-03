@@ -148,6 +148,7 @@ HEADERS  += \
     Document/DocumentModelDigitizeCurve.h \
     Document/DocumentModelExportFormat.h \
     Document/DocumentModelGeneral.h \
+    Document/DocumentModelGridDisplay.h \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
@@ -410,6 +411,7 @@ SOURCES += \
     Document/DocumentModelDigitizeCurve.cpp \
     Document/DocumentModelExportFormat.cpp \
     Document/DocumentModelGeneral.cpp \
+    Document/DocumentModelGridDisplay.cpp \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
