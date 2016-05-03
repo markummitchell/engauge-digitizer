@@ -18,6 +18,7 @@
 #include "DocumentModelDigitizeCurve.h"
 #include "DocumentModelExportFormat.h"
 #include "DocumentModelGeneral.h"
+#include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
@@ -180,6 +181,9 @@ public:
   /// Get method for DocumentModelGeneral.
   DocumentModelGeneral modelGeneral() const;
 
+  /// Get method for DocumentModelGridDisplay.
+  DocumentModelGridDisplay modelGridDisplay() const;
+
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
 
@@ -261,6 +265,9 @@ public:
 
   /// Set method for DocumentModelGeneral.
   void setModelGeneral (const DocumentModelGeneral &modelGeneral);
+
+  /// Set method for DocumentModelGridDisplay.
+  void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
 
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);

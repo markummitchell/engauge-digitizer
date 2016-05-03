@@ -109,6 +109,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual DocumentModelDigitizeCurve modelDigitizeCurve() const;
   virtual DocumentModelExportFormat modelExport() const;
   virtual DocumentModelGeneral modelGeneral() const;
+  virtual DocumentModelGridDisplay modelGridDisplay() const;
   virtual DocumentModelGridRemoval modelGridRemoval() const;
   virtual DocumentModelPointMatch modelPointMatch() const;
   virtual DocumentModelSegments modelSegments() const;
@@ -140,6 +141,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void setModelExport(const DocumentModelExportFormat &modelExport);
   virtual void setModelGeneral (const DocumentModelGeneral &modelGeneral);
+  virtual void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);

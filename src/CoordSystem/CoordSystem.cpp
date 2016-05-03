@@ -407,16 +407,24 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> dbl; // Gap separation
 
   str >> int32; // Grid display is initialized flag
-  str >> int32; // X count
-  str >> int32; // Y count
+  str >> int32;
+  m_modelGridDisplay.setXCount(int32);
+  str >> int32;
+  m_modelGridDisplay.setYCount(int32);
   str >> int32; // X parameter
   str >> int32; // Y parameter
-  str >> dbl; // X start
-  str >> dbl; // Y start
-  str >> dbl; // X step
-  str >> dbl; // Y step
-  str >> dbl; // X stop
-  str >> dbl; // Y stop
+  str >> dbl;
+  m_modelGridDisplay.setXStart (dbl);
+  str >> dbl;
+  m_modelGridDisplay.setYStart (dbl);
+  str >> dbl;
+  m_modelGridDisplay.setXStep (dbl);
+  str >> dbl;
+  m_modelGridDisplay.setYStep (dbl);
+  str >> dbl;
+  m_modelGridDisplay.setXStop (dbl);
+  str >> dbl;
+  m_modelGridDisplay.setYStop (dbl);
 
   str >> int32;
   m_modelSegments.setMinLength(int32);
@@ -616,6 +624,11 @@ DocumentModelGeneral CoordSystem::modelGeneral() const
   return m_modelGeneral;
 }
 
+DocumentModelGridDisplay CoordSystem::modelGridDisplay() const
+{
+  return m_modelGridDisplay;
+}
+
 DocumentModelGridRemoval CoordSystem::modelGridRemoval() const
 {
   return m_modelGridRemoval;
@@ -709,6 +722,8 @@ void CoordSystem::printStream (QString indentation,
                              str);
   m_modelGeneral.printStream (indentation,
                               str);
+  m_modelGridDisplay.printStream (indentation,
+                                  str);
   m_modelGridRemoval.printStream (indentation,
                                   str);
   m_modelPointMatch.printStream (indentation,
@@ -758,6 +773,7 @@ void CoordSystem::saveXml (QXmlStreamWriter &writer) const
   m_modelDigitizeCurve.saveXml (writer);
   m_modelExport.saveXml (writer);
   m_modelAxesChecker.saveXml (writer);
+  m_modelGridDisplay.saveXml (writer);
   m_modelGridRemoval.saveXml (writer);
   m_modelPointMatch.saveXml (writer);
   m_modelSegments.saveXml (writer);
@@ -827,6 +843,11 @@ void CoordSystem::setModelExport(const DocumentModelExportFormat &modelExport)
 void CoordSystem::setModelGeneral (const DocumentModelGeneral &modelGeneral)
 {
   m_modelGeneral = modelGeneral;
+}
+
+void CoordSystem::setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
+{
+  m_modelGridDisplay = modelGridDisplay;
 }
 
 void CoordSystem::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

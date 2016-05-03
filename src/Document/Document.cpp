@@ -643,6 +643,13 @@ DocumentModelGeneral Document::modelGeneral() const
   return m_coordSystemContext.modelGeneral();
 }
 
+DocumentModelGridDisplay Document::modelGridDisplay() const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGridDisplay";
+
+  return m_coordSystemContext.modelGridDisplay();
+}
+
 DocumentModelGridRemoval Document::modelGridRemoval() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGridRemoval";
@@ -872,6 +879,13 @@ void Document::setModelGeneral (const DocumentModelGeneral &modelGeneral)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelGeneral";
 
   m_coordSystemContext.setModelGeneral(modelGeneral);
+}
+
+void Document::setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelGridDisplay";
+
+  m_coordSystemContext.setModelGridDisplay(modelGridDisplay);
 }
 
 void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)

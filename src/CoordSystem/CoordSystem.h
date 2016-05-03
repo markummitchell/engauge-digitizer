@@ -17,6 +17,7 @@
 #include "DocumentModelDigitizeCurve.h"
 #include "DocumentModelExportFormat.h"
 #include "DocumentModelGeneral.h"
+#include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
@@ -113,6 +114,7 @@ public:
   virtual DocumentModelDigitizeCurve modelDigitizeCurve() const;
   virtual DocumentModelExportFormat modelExport() const;
   virtual DocumentModelGeneral modelGeneral() const;
+  virtual DocumentModelGridDisplay modelGridDisplay() const;
   virtual DocumentModelGridRemoval modelGridRemoval() const;
   virtual DocumentModelPointMatch modelPointMatch() const;
   virtual DocumentModelSegments modelSegments() const;
@@ -137,6 +139,7 @@ public:
   virtual void setModelDigitizeCurve (const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void setModelExport(const DocumentModelExportFormat &modelExport);
   virtual void setModelGeneral (const DocumentModelGeneral &modelGeneral);
+  virtual void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
@@ -164,6 +167,7 @@ private:
   DocumentModelDigitizeCurve m_modelDigitizeCurve;
   DocumentModelExportFormat m_modelExport;
   DocumentModelGeneral m_modelGeneral;
+  DocumentModelGridDisplay m_modelGridDisplay;
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;

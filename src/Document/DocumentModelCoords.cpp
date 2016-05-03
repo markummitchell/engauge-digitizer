@@ -186,7 +186,7 @@ void DocumentModelCoords::printStream(QString indentation,
   indentation += INDENTATION_DELTA;
 
   str << indentation << "coordsType=" << coordsTypeToString (m_coordsType) << "\n";
-  str << indentation << "originRadius" << m_originRadius << "\n";
+  str << indentation << "originRadius=" << m_originRadius << "\n";
   str << indentation << "coordScaleXTheta=" << coordScaleToString (m_coordScaleXTheta) << "\n";
   str << indentation << "coordScaleYRadius=" << coordScaleToString (m_coordScaleYRadius) << "\n";
   str << indentation << "coordUnitsX=" << coordUnitsNonPolarThetaToString (m_coordUnitsX) << "\n";
