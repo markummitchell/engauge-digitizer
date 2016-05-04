@@ -294,7 +294,7 @@ private:
   void loadImage(QXmlStreamReader &reader);
   void loadPreVersion6 (QDataStream &str);
   void loadVersion6 (QFile *file);
-  void loadVersion7 (QFile *file);
+  void loadVersions7AndUp (QFile *file);
   int versionFromFile (QFile *file) const;
 
   // Metadata

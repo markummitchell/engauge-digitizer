@@ -39,6 +39,7 @@ const int FOUR_BYTES = 4;
 const int NOMINAL_COORD_SYSTEM_COUNT = 1;
 const int VERSION_6 = 6;
 const int VERSION_7 = 7;
+const int VERSION_8 = 8;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -100,7 +101,8 @@ Document::Document (const QString &fileName) :
             break;
 
           case VERSION_7:
-            loadVersion7 (file);
+          case VERSION_8:
+            loadVersions7AndUp (file);
             break;
 
           default:
@@ -522,9 +524,9 @@ void Document::loadVersion6 (QFile *file)
   // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
 }
 
-void Document::loadVersion7 (QFile *file)
+void Document::loadVersions7AndUp (QFile *file)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersion7";
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::loadVersions7AndUp";
 
   const int ONE_COORDINATE_SYSTEM = 1;
 
@@ -576,8 +578,8 @@ void Document::loadVersion7 (QFile *file)
         if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
           m_coordSystemContext.addCoordSystems (m_documentAxesPointsRequired,
                                                 ONE_COORDINATE_SYSTEM);
-          m_coordSystemContext.loadVersion7 (reader,
-                                             m_documentAxesPointsRequired);
+          m_coordSystemContext.loadVersions7AndUp (reader,
+                                                   m_documentAxesPointsRequired);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
           loadImage(reader);

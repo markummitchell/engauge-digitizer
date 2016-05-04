@@ -406,13 +406,16 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> int32; // Foreground threshold high
   str >> dbl; // Gap separation
 
-  str >> int32; // Grid display is initialized flag
+  str >> int32;
+  m_modelGridDisplay.setInitialized(int32);
   str >> int32;
   m_modelGridDisplay.setCountX(int32);
   str >> int32;
   m_modelGridDisplay.setCountY(int32);
-  str >> int32; // X parameter
-  str >> int32; // Y parameter
+  str >> int32;
+  m_modelGridDisplay.setDisableX((GridCoordDisable) int32);
+  str >> int32;
+  m_modelGridDisplay.setDisableY((GridCoordDisable) int32);
   str >> dbl;
   m_modelGridDisplay.setStartX (dbl);
   str >> dbl;
@@ -528,10 +531,10 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
   }
 }
 
-void CoordSystem::loadVersion7 (QXmlStreamReader &reader,
-                                DocumentAxesPointsRequired documentAxesPointsRequired)
+void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader,
+                                      DocumentAxesPointsRequired documentAxesPointsRequired)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion7";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersions7AndUp";
 
   m_documentAxesPointsRequired = documentAxesPointsRequired;
 
@@ -566,6 +569,8 @@ void CoordSystem::loadVersion7 (QXmlStreamReader &reader,
         m_modelExport.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GENERAL || tag == DOCUMENT_SERIALIZE_COMMON) {
         m_modelGeneral.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GRID_DISPLAY) {
+        m_modelGridDisplay.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
         m_modelGridRemoval.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {

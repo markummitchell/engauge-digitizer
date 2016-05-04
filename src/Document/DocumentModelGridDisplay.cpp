@@ -168,7 +168,7 @@ void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridDisplay::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_DISPLAY);
-  writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED, m_initialized ?
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED, m_initialized ?
                             DOCUMENT_SERIALIZE_BOOL_TRUE :
                             DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X, QString::number (m_disableX));
