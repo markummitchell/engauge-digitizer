@@ -37,6 +37,16 @@ sudo rm -rf engauge.app 2>/dev/null
 # Make into engauge.app
 make 
 
+# Help
+cd help
+./build
+cd ..
+mkdir -p engauge.app/Contents/Resources/documentation
+cp -r bin/documentation/engauge.* engauge.app/Contents/Resources/documentation
+
+# Icons
+cp src/img/digitizer.icns engauge.app/Contents/Resources/
+
 # Debug symbols are just dropped for now
 dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
 
@@ -44,8 +54,10 @@ dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
 echo "In another window:"
 echo "1. source dev/osx/macosx_setup"
 echo "2. sudo <editor> engauge.app/Contents/Info.plist"
-echo "3. remove existing CFBundleIdentifier entry"
-echo "4. insert dev/osx/engauge_deltas_for_Info.plist"
+echo "3. for key CFBundleIconFile, insert 'digitizer.icns' for the string"
+echo "4. remove existing CFBundleIdentifier entry"
+echo "5. insert dev/osx/engauge_deltas_for_Info.plist"
+echo "6. if resubmitting to app store, append/add .1 to version number"
 read -p "Press any key to continue"
 
 # Insert Qt libraries

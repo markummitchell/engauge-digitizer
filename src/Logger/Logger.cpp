@@ -25,7 +25,7 @@ void initializeLogging (const QString &name,
 {
   LayoutAppender *appender = 0;
 
-#ifdef __APPLE__
+#ifdef OSX
 
   // Log to memory, where the log messages will be ignored, rather than write to a file and violate the Apple application sandbox
   appender = dynamic_cast<LayoutAppender*> (new StringQueueAppender (name.toStdString ()));
