@@ -45,7 +45,7 @@ echo "In another window:"
 echo "1. source dev/osx/macosx_setup"
 echo "2. sudo <editor> engauge.app/Contents/Info.plist"
 echo "3. remove existing CFBundleIdentifier entry"
-echo "4. insert dev/osx/engauge_delta_for_Info.plist"
+echo "4. insert dev/osx/engauge_deltas_for_Info.plist"
 read -p "Press any key to continue"
 
 # Insert Qt libraries
@@ -82,4 +82,4 @@ mv engauge.pkg.signed engauge.pkg
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
 sudo installer -store -pkg engauge.pkg -target /
 
-echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to uploadengauge.pkg.signed"
+echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload engauge.pkg"
