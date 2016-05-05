@@ -718,6 +718,15 @@ void MainWindow::createActionsView ()
                                           "Show or hide the tool tips"));
   connect (m_actionViewToolTips, SIGNAL (triggered ()), this, SLOT (slotViewToolTips()));
 
+  m_actionViewGridLines = new QAction (tr ("Grid Lines"), this);
+  m_actionViewGridLines->setCheckable (true);
+  m_actionViewGridLines->setChecked (false);
+  m_actionViewGridLines->setStatusTip (tr ("Show or hide grid lines."));
+  m_actionViewGridLines->setWhatsThis (tr ("View Grid Lines\n\n"
+                                           "Show or hide grid lines that are added for accurate adjustments of the axes points, "
+                                           "which can improve accuracy in distorted graphs"));
+  connect (m_actionViewGridLines, SIGNAL (triggered ()), this, SLOT (slotViewGridLines()));
+
   m_actionViewBackgroundNone = new QAction (tr ("No Background"), this);
   m_actionViewBackgroundNone->setCheckable (true);
   m_actionViewBackgroundNone->setStatusTip (tr ("Do not show the image underneath the points."));
@@ -974,6 +983,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewCoordSystem);
   m_menuView->insertSeparator (m_actionViewToolTips);
   m_menuView->addAction (m_actionViewToolTips);
+  m_menuView->addAction (m_actionViewGridLines);
   m_menuView->insertSeparator (m_actionViewBackgroundNone);
   m_menuViewBackground = new QMenu (tr ("Background"));
   m_menuViewBackground->addAction (m_actionViewBackgroundNone);
@@ -3233,6 +3243,11 @@ void MainWindow::slotUndoTextChanged (const QString &text)
   m_actionEditUndo->setText (completeText);
 }
 
+void MainWindow::slotViewGridLines ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGridLines";
+}
+
 void MainWindow::slotViewGroupBackground(QAction *action)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupBackground";
@@ -3832,7 +3847,12 @@ void MainWindow::updateControls ()
   m_actionDigitizeColorPicker->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
-
+  if (m_transformation.transformIsDefined()) {
+    m_actionViewGridLines->setEnabled (true);
+  } else {
+    m_actionViewGridLines->setEnabled (false);
+    m_actionViewGridLines->setChecked (false);
+  }
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
@@ -4091,9 +4111,21 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
 
 void MainWindow::updateTransformationAndItsDependencies()
 {
+  bool definedBefore = m_transformation.transformIsDefined();
+
   m_transformation.update (!m_currentFile.isEmpty (),
                            *m_cmdMediator,
                            m_modelMainWindow);
+
+  bool definedAfter = m_transformation.transformIsDefined();
+
+  if (!definedBefore &&
+      definedAfter &&
+      !m_cmdMediator->document().modelGridDisplay().initialized()) {
+
+    // Initialize the grid display since transformation has been initialized for the first time
+    m_cmdMediator->document().initializeGridDisplay(m_transformation);
+  }
 
   // Grid removal is affected by new transformation
   m_backgroundStateContext->setCurveSelected (m_transformation,

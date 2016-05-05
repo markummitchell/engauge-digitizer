@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "CallbackAddPointsInCurvesGraphs.h"
+#include "CallbackBoundingRects.h"
 #include "CallbackCheckAddPointAxis.h"
 #include "CallbackCheckEditPointAxis.h"
 #include "CallbackNextOrdinal.h"
@@ -16,6 +17,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GridInitializer.h"
 #include <iostream>
 #include "Logger.h"
 #include "OrdinalGenerator.h"
@@ -354,6 +356,33 @@ void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
   }
 
   m_pixmap = QPixmap (width, height);
+}
+
+void Document::initializeGridDisplay (const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::initializeGridDisplay";
+
+  ENGAUGE_ASSERT (!m_coordSystemContext.modelGridDisplay().initialized());
+
+  // Get graph coordinate bounds
+  CallbackBoundingRects ftor (transformation);
+
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                     &CallbackBoundingRects::callback);
+
+  iterateThroughCurvePointsAxes (ftorWithCallback);
+
+  // Initialize. Note that if there are no graph points then these next steps have no effect
+  bool isEmpty;
+  QRectF boundingRectGraph =  ftor.boundingRectGraph(isEmpty);
+  if (!isEmpty) {
+
+    GridInitializer gridInitializer;
+
+    DocumentModelGridDisplay modelGridDisplay = gridInitializer.initialize (boundingRectGraph,
+                                                                            modelCoords());
+    m_coordSystemContext.setModelGridDisplay (modelGridDisplay);
+  }
 }
 
 bool Document::isXOnly (const QString &pointIdentifier) const

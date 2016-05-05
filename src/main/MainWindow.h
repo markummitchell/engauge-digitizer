@@ -283,6 +283,7 @@ private slots:
   void slotTimeoutRegressionErrorReport ();
   void slotTimeoutRegressionFileCmdScript ();
   void slotUndoTextChanged (const QString &);
+  void slotViewGridLines ();
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
@@ -446,6 +447,7 @@ private:
   QAction *m_actionViewDigitize;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
+  QAction *m_actionViewGridLines;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;

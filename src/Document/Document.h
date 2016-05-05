@@ -138,6 +138,9 @@ public:
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
 
+  /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
+  void initializeGridDisplay (const Transformation &transformation);
+
   /// See Curve::isXOnly
   bool isXOnly (const QString &pointIdentifier) const;
 
