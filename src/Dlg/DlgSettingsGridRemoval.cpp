@@ -328,7 +328,7 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_editStepX->setText(QString::number(m_modelGridRemovalAfter->stepX()));
   m_editStopX->setText(QString::number(m_modelGridRemovalAfter->stopX()));
 
-  int indexDisableY = m_cmbDisableX->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
+  int indexDisableY = m_cmbDisableY->findData (QVariant (m_modelGridRemovalAfter->gridCoordDisableY()));
   m_cmbDisableY->setCurrentIndex (indexDisableY);
 
   m_editCountY->setText(QString::number(m_modelGridRemovalAfter->countY()));
