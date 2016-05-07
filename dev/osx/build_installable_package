@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function signAppArray {
-    array=("$@")
+    array=($@)
     for i in "${array[@]}"
     do
 	signAppFile "$i"
@@ -16,11 +16,11 @@ function signAppFile {
     codesign \
 	-s "3rd Party Mac Developer Application: Mark Mitchell" \
 	--entitlements dev/osx/engauge.entitlements \
-	"$file"
+	"Engauge Digitizer.app/$file"
 }
 
 function signAppFramework {
-    vc="engauge.app/Contents/Frameworks/$1.framework/Versions/Current/$1"
+    vc=/Contents/Frameworks/$1.framework/Versions/Current/$1
     signAppFile "$vc"
 }
 
@@ -32,36 +32,36 @@ if [ -z "$exe" ]; then
 fi
 
 # Remove old build. Need root privileges
-sudo rm -rf engauge.app 2>/dev/null
+sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
-# Make into engauge.app
+# Make into Engauge Digitizer.app
 make 
 
 # Help
 cd help
 ./build
 cd ..
-mkdir -p engauge.app/Contents/Resources/documentation
-cp -r bin/documentation/engauge.* engauge.app/Contents/Resources/documentation
+mkdir -p Engauge\ Digitizer.app/Contents/Resources/documentation
+cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources/documentation
 
 # Icons
-cp src/img/digitizer.icns engauge.app/Contents/Resources/
+cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
 
 # Debug symbols are just dropped for now
-dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
+dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Digitizer.app.dSYM
 
 # Manually insert version numbering
 echo "In another window:"
-echo "1. source dev/osx/macosx_setup"
-echo "2. sudo <editor> engauge.app/Contents/Info.plist"
-echo "3. for key CFBundleIconFile, insert 'digitizer.icns' for the string"
-echo "4. remove existing CFBundleIdentifier entry"
-echo "5. insert dev/osx/engauge_deltas_for_Info.plist"
-echo "6. if resubmitting to app store, append/add .1 to version number"
+echo '1. source dev/osx/macosx_setup'
+echo '2. cp dev/osx/Info.plist_valid "Engauge Digitizer.app/Contents/Info.plist"'
+echo '3. (if resubmitting to app store) sudo <editor> "Engauge Digitizer.app/Contents/Info.plist"'
+echo '4. (if resubmitting to app store, append/add .1 to version number)'
+echo '5. (if resubmitting to app store, save the file and exit)'
 read -p "Press any key to continue"
 
-# Insert Qt libraries
-macdeployqt engauge.app -appstore-compliant
+# Insert Qt libraries. Log4cpp library does not get processed so we manually copy first
+macdeployqt Engauge\ Digitizer.app -appstore-compliant
+cp "${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib" Engauge\ Digitizer.app/Contents/Frameworks
 
 # Code signing
 frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
@@ -70,28 +70,28 @@ do
     signAppFramework $i
 done
 
-signAppArray `find engauge.app | grep '/Frameworks/lib'`
-signAppArray `find engauge.app | grep '/documentation/engauge'`
-signAppArray `find engauge.app | grep '/translations/engauge_'`
-signAppArray `find engauge.app | grep '/PlugIns/bearer/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/platforms/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/sqldrivers/lib'`
-signAppFile engauge.app/Contents/MacOS/engauge
+signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/documentation/engauge'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/translations/engauge_'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
+signAppFile /Contents/MacOS/Engauge\ Digitizer
 
 # remove log file
-rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
+rm Engauge\ Digitizer.app/Contents/MacOS/engauge.log 2>/dev/null
 
 # build package
-productbuild --component engauge.app /Applications engauge.pkg
+productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
 
 # sign package
-productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" engauge.pkg engauge.pkg.signed
-mv engauge.pkg.signed engauge.pkg
+productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" Engauge\ Digitizer.pkg Engauge\ Digitizer.pkg.signed
+mv Engauge\ Digitizer.pkg.signed Engauge\ Digitizer.pkg
 
 # test the built package
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
-sudo installer -store -pkg engauge.pkg -target /
+sudo installer -store -pkg Engauge\ Digitizer.pkg -target /
 
-echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload engauge.pkg"
+echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload Engauge Digitizer.pkg"

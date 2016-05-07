@@ -9,7 +9,6 @@
 #include <log4cpp/PropertyConfigurator.hh>
 #include "Logger.h"
 #include <log4cpp/RollingFileAppender.hh>
-#include <log4cpp/StringQueueAppender.hh>
 #include <QString>
 
 log4cpp::Category *mainCat;
@@ -25,13 +24,6 @@ void initializeLogging (const QString &name,
 {
   LayoutAppender *appender = 0;
 
-#ifdef OSX
-
-  // Log to memory, where the log messages will be ignored, rather than write to a file and violate the Apple application sandbox
-  appender = dynamic_cast<LayoutAppender*> (new StringQueueAppender (name.toStdString ()));
-
-#else
-
   const size_t MAX_FILE_SIZE_BYTES = 6 * 1024 * 1024; // Size that should satisfy most email servers
   const unsigned int MAX_BACKUP_INDEX = 2;
   const bool APPEND_TO_PREVIOUS_FILE = false;
@@ -42,7 +34,6 @@ void initializeLogging (const QString &name,
                                                                      MAX_FILE_SIZE_BYTES,
                                                                      MAX_BACKUP_INDEX,
                                                                      APPEND_TO_PREVIOUS_FILE));
-#endif
                                            
   PatternLayout *layout = new PatternLayout ();
   layout->setConversionPattern ("%d{%H:%M:%S.%l} %-5p %c - %m%n");

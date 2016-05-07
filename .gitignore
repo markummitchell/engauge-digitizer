@@ -10,6 +10,9 @@ object_script.engauge
 qrc_*
 make.exe.stackdump
 Engauge Digitizer
+Engauge Digitizer.app
+Engauge Digitizer.app.dSYM
+Engauge Digitizer.pkg
 engauge.app
 engauge.dmg
 engauge.pkg
