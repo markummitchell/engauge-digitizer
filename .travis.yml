@@ -44,6 +44,7 @@ script:
  - if [ `uname` = "Darwin" ]; then
     sed -ibak '/^LIBS/s/-lQt5/-framework Qt/g' Makefile;
     sed -ibak2 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' Makefile;
+    sed -ibak3 's|-F/usr/local/Cellar/log4cpp|-L/usr/local/Cellar/log4cpp|g' Makefile;
    fi
  - make
  - cd help && ./build && cd ..;
