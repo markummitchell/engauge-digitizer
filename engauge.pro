@@ -549,6 +549,8 @@ SOURCES += \
 macx-* {
 
 CONFIG += app_bundle
+QMAKE_CXXFLAGS += "-stdlib=libc++"
+QMAKE_LFLAGS += "-stdlib=libc++"
 INCLUDEPATH += \
 $$(FFTW_HOME)/include \
 $$(LOG4CPP_HOME)/include \
