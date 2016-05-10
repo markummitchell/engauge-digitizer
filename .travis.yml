@@ -49,7 +49,7 @@ script:
  - make
  - cd help && ./build && cd ..;
  - if [ `uname` = "Darwin" ]; then
-    cp engauge bin;
+    cp Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer bin/engauge;
    fi
  - cd src && ./build_and_run_all_gui_tests && cd ..;
 #no cli tests on OSX
