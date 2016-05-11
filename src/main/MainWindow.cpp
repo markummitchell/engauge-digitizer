@@ -2874,9 +2874,13 @@ bool MainWindow::slotFileSaveAs()
   filters << filterAll;
 
   QFileDialog dlg(this);
+  dlg.setFileMode (QFileDialog::AnyFile);
   dlg.selectNameFilter (filterDigitizer);
   dlg.setNameFilters (filters);
+#ifndef OSX
+  // Prevent hang in OSX
   dlg.setWindowModality(Qt::WindowModal);
+#endif
   dlg.setAcceptMode(QFileDialog::AcceptSave);
   dlg.selectFile(filenameDefault);
   if (dlg.exec()) {

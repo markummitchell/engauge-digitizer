@@ -57,8 +57,10 @@ bool checkFileExists (const QString &file)
 
 QString engaugeLogFilename()
 {
+  QString pathAndFile; // Return empty value in OSX which is unused
+
+#ifndef OSX
   QProcessEnvironment env;
-  QString pathAndFile;
 
   // Make multiple attempts until a directory is found where the log file can be written
   if (!engaugeLogFilenameAttempt (QCoreApplication::applicationDirPath(), pathAndFile)) {
@@ -68,6 +70,7 @@ QString engaugeLogFilename()
       }
     }
   }
+#endif
 
   return pathAndFile;
 }

@@ -549,7 +549,7 @@ SOURCES += \
 macx-* {
 
 CONFIG += app_bundle
-QMAKE_CXXFLAGS += "-stdlib=libc++"
+QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++"
 QMAKE_LFLAGS += "-stdlib=libc++"
 INCLUDEPATH += \
 $$(FFTW_HOME)/include \

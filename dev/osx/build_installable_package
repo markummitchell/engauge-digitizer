@@ -41,8 +41,13 @@ make
 cd help
 ./build
 cd ..
-mkdir -p Engauge\ Digitizer.app/Contents/Resources/documentation
-cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources/documentation
+mkdir -p Engauge\ Digitizer.app/Contents/MacOS/documentation
+cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/MacOS/documentation
+
+# Translations. Qt-in-OSX bug requires translation files in directory above executable
+lrelease engauge.pro
+mkdir -p Engauge\ Digitizer.app/Contents/MacOS/translations
+mv translations/*.qm Engauge\ Digitizer.app/Contents/MacOS/translations
 
 # Icons
 cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
@@ -59,9 +64,13 @@ echo '4. (if resubmitting to app store, append/add .1 to version number)'
 echo '5. (if resubmitting to app store, save the file and exit)'
 read -p "Press any key to continue"
 
-# Insert Qt libraries. Log4cpp library does not get processed so we manually copy first
+# Insert Qt libraries. Log4cpp library does not get processed so we manually copy first. The
+# error 'ERROR No file at /usr/lib/log4cpp.1.dylib' is a bug in macdeployqt that is claimed to 
+# not cause any problems, but copying a library to /usr/lib or creating symlink does not work
+# due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
+# copy the file just after macdeployqt
 macdeployqt Engauge\ Digitizer.app -appstore-compliant
-cp "${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib" Engauge\ Digitizer.app/Contents/Frameworks
+cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
 # Code signing
 frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
