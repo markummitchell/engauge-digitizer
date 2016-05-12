@@ -13,7 +13,6 @@
 #include <QHelpContentWidget>
 #include <QHelpEngine>
 #include <QHelpIndexWidget>
-#include <QMessageBox>
 #include <QSplitter>
 #include <QTabWidget>
 
@@ -63,6 +62,7 @@ QString HelpWindow::helpPath() const
   paths << path;
 #endif
   paths << "/documentation/engauge.qhc";
+  paths << "/../Resources/documentation/engauge.qhc"; // For OSX
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
 
   QStringList::iterator itr;

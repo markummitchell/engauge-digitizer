@@ -548,7 +548,9 @@ SOURCES += \
 
 macx-* {
 
+# Change += to -= for app_bundle to debug in QtCreator
 CONFIG += app_bundle
+
 QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++"
 QMAKE_LFLAGS += "-stdlib=libc++"
 INCLUDEPATH += \

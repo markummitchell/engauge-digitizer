@@ -27,12 +27,19 @@ function signAppFramework {
 # Make sure environment variables are correctly set
 exe=`which macdeployqt`
 if [ -z "$exe" ]; then
-    echo "'source dev/osx/macosx_setup' must be run before this script"
+    echo "'source dev/osx/macosx_setup' must be run before this script. Quitting"
     exit
 fi
 
 # Remove old build. Need root privileges
 sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
+
+# Verify there is no log file
+filetest=`find . -name engauge.log`
+if [ -n "$filetest" ]; then
+    echo "File engauge.log exists which will break the sandbox. Quitting"
+    exit
+fi
 
 # Make into Engauge Digitizer.app
 make 
@@ -41,13 +48,13 @@ make
 cd help
 ./build
 cd ..
-mkdir -p Engauge\ Digitizer.app/Contents/MacOS/documentation
-cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/MacOS/documentation
+mkdir -p Engauge\ Digitizer.app/Contents/Resources/documentation
+cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources/documentation
 
 # Translations. Qt-in-OSX bug requires translation files in directory above executable
 lrelease engauge.pro
-mkdir -p Engauge\ Digitizer.app/Contents/MacOS/translations
-mv translations/*.qm Engauge\ Digitizer.app/Contents/MacOS/translations
+mkdir -p Engauge\ Digitizer.app/Contents/Resources/translations
+mv translations/*.qm Engauge\ Digitizer.app/Contents/Resources/translations
 
 # Icons
 cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
@@ -56,13 +63,13 @@ cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
 dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Digitizer.app.dSYM
 
 # Manually insert version numbering
-echo "In another window:"
-echo '1. source dev/osx/macosx_setup'
-echo '2. cp dev/osx/Info.plist_valid "Engauge Digitizer.app/Contents/Info.plist"'
-echo '3. (if resubmitting to app store) sudo <editor> "Engauge Digitizer.app/Contents/Info.plist"'
-echo '4. (if resubmitting to app store, append/add .1 to version number)'
-echo '5. (if resubmitting to app store, save the file and exit)'
+cp dev/osx/Info.plist_valid Engauge\ Digitizer.app/Contents/Info.plist
+echo "If submitting to app store, then in another window..."
+echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
+echo '2. append/add .1 to version number)'
+echo '3. save the file and exit)'
 read -p "Press any key to continue"
+echo 'Ignore error about /usr/lib/log4cpp... in the next line'
 
 # Insert Qt libraries. Log4cpp library does not get processed so we manually copy first. The
 # error 'ERROR No file at /usr/lib/log4cpp.1.dylib' is a bug in macdeployqt that is claimed to 
@@ -89,8 +96,11 @@ signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | s
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
 signAppFile /Contents/MacOS/Engauge\ Digitizer
 
-# remove log file
-rm Engauge\ Digitizer.app/Contents/MacOS/engauge.log 2>/dev/null
+echo "******************************************************************************"
+echo "* If previous line says 'code object is not signed at all' then stop and fix *"
+echo "******************************************************************************"
+
+# make sure there is no log file
 
 # build package
 productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
