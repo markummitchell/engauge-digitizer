@@ -15,7 +15,7 @@
 	<key>com.apple.security.files.downloads.read-write</key>
 	<false/>
 	<key>com.apple.security.files.user-selected.read-only</key>
-	<true/>
+	<false/>
 	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>
 	<key>com.apple.security.network.client</key>

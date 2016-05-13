@@ -9,7 +9,7 @@
 #include "Logger.h"
 #include <QApplication>
 #include <QDir>
-#include <QFile>
+#include <QFileInfo>
 #include <QHelpContentWidget>
 #include <QHelpEngine>
 #include <QHelpIndexWidget>
@@ -70,14 +70,14 @@ QString HelpWindow::helpPath() const
 
     QString pathAsIs = *itr;
 
-    QFile fileAsIs (pathAsIs);
+    QFileInfo fileAsIs (pathAsIs);
     if (fileAsIs.exists()) {
       return pathAsIs;
     }
 
     QString pathWithPrefix = QApplication::applicationDirPath() + pathAsIs;
 
-    QFile fileWithPrefix (pathWithPrefix);
+    QFileInfo fileWithPrefix (pathWithPrefix);
     if (fileWithPrefix.exists()) {
       return pathWithPrefix;
     }
