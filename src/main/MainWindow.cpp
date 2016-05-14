@@ -4111,21 +4111,9 @@ void MainWindow::updateSettingsSegments(const DocumentModelSegments &modelSegmen
 
 void MainWindow::updateTransformationAndItsDependencies()
 {
-  bool definedBefore = m_transformation.transformIsDefined();
-
   m_transformation.update (!m_currentFile.isEmpty (),
                            *m_cmdMediator,
                            m_modelMainWindow);
-
-  bool definedAfter = m_transformation.transformIsDefined();
-
-  if (!definedBefore &&
-      definedAfter &&
-      !m_cmdMediator->document().modelGridDisplay().initialized()) {
-
-    // Initialize the grid display since transformation has been initialized for the first time
-    m_cmdMediator->document().initializeGridDisplay(m_transformation);
-  }
 
   // Grid removal is affected by new transformation
   m_backgroundStateContext->setCurveSelected (m_transformation,

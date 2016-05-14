@@ -37,9 +37,17 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::begin";
 
+  if (!cmdMediator.document().modelGridDisplay().stable()) {
+
+    // Initialize or update the grid display settings since they are not stable yet
+    initializeModelGridDisplay (cmdMediator,
+                                transformation);
+
+  }
+
   if (!cmdMediator.document().modelGridRemoval().stable()) {
 
-    // Initialie or update the grid removal settings since they are not stable yet
+    // Initialize or update the grid removal settings since they are not stable yet
     initializeModelGridRemoval (cmdMediator,
                                 transformation,
                                 selectedGraphCurve);
@@ -56,6 +64,12 @@ void TransformationStateDefined::end(CmdMediator & /* cmdMediator */,
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateDefined::end";
 
   m_axesChecker->setVisible (false);
+}
+
+void TransformationStateDefined::initializeModelGridDisplay (CmdMediator &cmdMediator,
+                                                             const Transformation &transformation)
+{
+  cmdMediator.document().initializeGridDisplay (transformation);
 }
 
 void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMediator,

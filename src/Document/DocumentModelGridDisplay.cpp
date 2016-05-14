@@ -16,12 +16,22 @@
 #include "Xml.h"
 
 DocumentModelGridDisplay::DocumentModelGridDisplay() :
-  m_initialized (false)
+  m_stable (false),
+  m_disableX (GRID_COORD_DISABLE_COUNT),
+  m_countX (2),
+  m_startX (0.0),
+  m_stepX (0.0),
+  m_stopX (1.0),
+  m_disableY (GRID_COORD_DISABLE_COUNT),
+  m_countY (2),
+  m_startY (0.0),
+  m_stepY (1.0),
+  m_stopY (1.0)
 {
 }
 
 DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
-  m_initialized (document.modelGridDisplay().initialized()),
+  m_stable (document.modelGridDisplay().stable()),
   m_disableX (document.modelGridDisplay().disableX()),
   m_countX (document.modelGridDisplay().countX()),
   m_startX (document.modelGridDisplay().startX()),
@@ -36,7 +46,7 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
 }
 
 DocumentModelGridDisplay::DocumentModelGridDisplay(const DocumentModelGridDisplay &other) :
-  m_initialized(other.initialized()),
+  m_stable(other.stable()),
   m_disableX (other.disableX()),
   m_countX (other.countX()),
   m_startX (other.startX()),
@@ -52,7 +62,7 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const DocumentModelGridDispla
 
 DocumentModelGridDisplay &DocumentModelGridDisplay::operator=(const DocumentModelGridDisplay &other)
 {
-  m_initialized = other.initialized();
+  m_stable = other.stable();
   m_disableX = other.disableX();
   m_countX = other.countX();
   m_startX = other.startX();
@@ -87,11 +97,6 @@ GridCoordDisable DocumentModelGridDisplay::disableY () const
   return m_disableY;
 }
 
-bool DocumentModelGridDisplay::initialized() const
-{
-  return m_initialized;
-}
-
 void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridDisplay::loadXml";
@@ -100,7 +105,7 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED) &&
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X) &&
@@ -112,10 +117,10 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y)) {
 
-    // Boolean value
-    QString initializedValue = attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED).toString();
+    // Boolean values
+    QString stableValue = attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE).toString();
 
-    setInitialized (initializedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    setStable (stableValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X).toInt());
     setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X).toInt());
     setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X).toDouble());
@@ -150,7 +155,7 @@ void DocumentModelGridDisplay::printStream(QString indentation,
 
   indentation += INDENTATION_DELTA;
 
-  str << indentation << "initialized=" << (m_initialized ? "true" : "false") << "\n";
+  str << indentation << "stable=" << (m_stable ? "true" : "false") << "\n";
   str << indentation << "disableX=" << m_disableX << "\n";
   str << indentation << "countX=" << m_countX << "\n";
   str << indentation << "startX=" << m_startX << "\n";
@@ -168,7 +173,7 @@ void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridDisplay::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GRID_DISPLAY);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_INITIALIZED, m_initialized ?
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE, m_stable ?
                             DOCUMENT_SERIALIZE_BOOL_TRUE :
                             DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X, QString::number (m_disableX));
@@ -204,9 +209,9 @@ void DocumentModelGridDisplay::setDisableY (GridCoordDisable disableY)
   m_disableY = disableY;
 }
 
-void DocumentModelGridDisplay::setInitialized(bool initialized)
+void DocumentModelGridDisplay::setStable(bool stable)
 {
-  m_initialized = initialized;
+  m_stable = stable;
 }
 
 void DocumentModelGridDisplay::setStartX (double startX)
@@ -237,6 +242,11 @@ void DocumentModelGridDisplay::setStopX (double stopX)
 void DocumentModelGridDisplay::setStopY (double stopY)
 {
   m_stopY = stopY;
+}
+
+bool DocumentModelGridDisplay::stable() const
+{
+  return m_stable;
 }
 
 double DocumentModelGridDisplay::startX() const

@@ -407,7 +407,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> dbl; // Gap separation
 
   str >> int32;
-  m_modelGridDisplay.setInitialized(int32);
+  m_modelGridDisplay.setStable(int32);
   str >> int32;
   m_modelGridDisplay.setCountX(int32);
   str >> int32;

@@ -106,6 +106,7 @@ DocumentModelGridDisplay GridInitializer::initialize (const QRectF &boundingRect
              step,
              count);
 
+  modelGridDisplay.setDisableX (GRID_COORD_DISABLE_COUNT);
   modelGridDisplay.setCountX (count);
   modelGridDisplay.setStartX (start);
   modelGridDisplay.setStepX (step);
@@ -120,12 +121,13 @@ DocumentModelGridDisplay GridInitializer::initialize (const QRectF &boundingRect
              step,
              count);
 
+  modelGridDisplay.setDisableY (GRID_COORD_DISABLE_COUNT);
   modelGridDisplay.setCountY (count);
   modelGridDisplay.setStartY (start);
   modelGridDisplay.setStepY (step);
   modelGridDisplay.setStopY (stop);
 
-  modelGridDisplay.setInitialized (true);
+  modelGridDisplay.setStable (true);
 
   return modelGridDisplay;
 }

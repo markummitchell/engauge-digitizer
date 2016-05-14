@@ -362,7 +362,7 @@ void Document::initializeGridDisplay (const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::initializeGridDisplay";
 
-  ENGAUGE_ASSERT (!m_coordSystemContext.modelGridDisplay().initialized());
+  ENGAUGE_ASSERT (!m_coordSystemContext.modelGridDisplay().stable());
 
   // Get graph coordinate bounds
   CallbackBoundingRects ftor (transformation);

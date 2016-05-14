@@ -38,6 +38,8 @@ private slots:
 private:
   TransformationStateDefined();
 
+  void initializeModelGridDisplay (CmdMediator &cmdMediator,
+                                   const Transformation &transformation);
   void initializeModelGridRemoval (CmdMediator &cmdMediator,
                                    const Transformation &transformation,
                                    const QString &selectedGraphCurve);

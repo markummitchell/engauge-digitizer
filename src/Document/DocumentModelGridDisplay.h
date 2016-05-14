@@ -29,17 +29,6 @@ public:
   /// Assignment constructor.
   DocumentModelGridDisplay &operator=(const DocumentModelGridDisplay &other);
 
-  /// Get method for initialized flag.
-  bool initialized () const;
-
-  virtual void loadXml(QXmlStreamReader &reader);
-
-  /// Debugging method that supports print method of this class and printStream method of some other class(es)
-  void printStream (QString indentation,
-                    QTextStream &str) const;
-
-  virtual void saveXml(QXmlStreamWriter &writer) const;
-
   /// Get method for x grid line count.
   unsigned int countX () const;
 
@@ -51,6 +40,14 @@ public:
 
   /// Get method for y grid line disabled variable.
   GridCoordDisable disableY () const;
+
+  virtual void loadXml(QXmlStreamReader &reader);
+
+  /// Debugging method that supports print method of this class and printStream method of some other class(es)
+  void printStream (QString indentation,
+                    QTextStream &str) const;
+
+  virtual void saveXml(QXmlStreamWriter &writer) const;
 
   /// Set method for x grid line count.
   void setCountX (unsigned int countX);
@@ -64,8 +61,8 @@ public:
   /// Set method for y grid line disabled variable.
   void setDisableY (GridCoordDisable disableY);
 
-  /// Set method for initialized flag.
-  void setInitialized (bool initialized);
+  /// Set method for stable flag.
+  void setStable (bool stable);
 
   /// Set method for x grid line lower bound (inclusive).
   void setStartX (double startX);
@@ -84,6 +81,10 @@ public:
 
   /// Set method for y grid line upper bound (inclusive).
   void setStopY (double yStop);
+
+  /// Get method for stable flag. The flag is false to let the settings get automatically updated, until the
+  /// user selects settings - at which point the stable flag is set to true
+  bool stable() const;
 
   /// Get method for x grid line lower bound (inclusive).
   double startX () const;
@@ -105,8 +106,7 @@ public:
 
 private:
 
-  bool m_initialized;
-
+  bool m_stable;
   GridCoordDisable m_disableX;
   unsigned int m_countX;
   double m_startX;

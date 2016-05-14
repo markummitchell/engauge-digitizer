@@ -260,7 +260,7 @@ void DlgSettingsGridDisplay::handleOk ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::handleOk";
 
   // Set the initialized flag
-  m_modelGridDisplayAfter->setInitialized (true);
+  m_modelGridDisplayAfter->setStable (true);
 
   CmdSettingsGridDisplay *cmd = new CmdSettingsGridDisplay (mainWindow (),
                                                             cmdMediator ().document(),
