@@ -139,6 +139,11 @@ MainWindow::MainWindow(const QString &errorReportFile,
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
 
+#ifdef OSX
+  qApp->setApplicationName ("Engauge Digitizer");
+  qApp->setOrganizationDomain ("Mark Mitchell");
+#endif
+
   LoggerUpload::bindToMainWindow(this);
 
   QString initialPath = QDir::currentPath();

@@ -53,6 +53,8 @@ QString HelpWindow::helpPath() const
 {
   // Possible locations of help file. Each entry is first tried as is, and then with
   // applicationDirPath as a prefix. Each entry should probably start with a slash
+
+#ifndef OSX
   QStringList paths;
 #ifdef HELPDIR
 #define QUOTE(string) _QUOTE(string)
@@ -82,6 +84,8 @@ QString HelpWindow::helpPath() const
       return pathWithPrefix;
     }
   }
+#endif
 
   return ""; // Empty file, since help file was never found, will simply result in empty help contents
 }
+
