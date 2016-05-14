@@ -100,7 +100,8 @@ echo "**************************************************************************
 echo "* If previous line says 'code object is not signed at all' then stop and fix *"
 echo "******************************************************************************"
 
-# make sure there is no log file
+# list entitlements
+codesign -d --entitlements - Engauge\ Digitizer.app
 
 # build package
 productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
