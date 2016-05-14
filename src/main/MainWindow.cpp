@@ -490,12 +490,14 @@ void MainWindow::createActionsFile ()
                                   "Opens an existing document."));
   connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
 
+#ifndef OSX
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     QAction *recentFileAction = new QAction (this);
     recentFileAction->setVisible (true);
     connect (recentFileAction, SIGNAL (triggered ()), this, SLOT (slotRecentFileAction ()));
     m_actionRecentFiles.append (recentFileAction);
   }
+#endif 
 
   m_actionClose = new QAction(tr ("&Close"), this);
   m_actionClose->setShortcut (QKeySequence::Close);
@@ -928,11 +930,13 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionOpen);
+#ifndef OSX
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
   }
   m_menuFile->addMenu (m_menuFileOpenRecent);
+#endif
   m_menuFile->addAction (m_actionClose);
   m_menuFile->insertSeparator (m_actionSave);
   m_menuFile->addAction (m_actionSave);
@@ -1284,6 +1288,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
+#ifndef OSX
 void MainWindow::exportAllCoordinateSystems()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems";
@@ -1302,6 +1307,7 @@ void MainWindow::exportAllCoordinateSystems()
                 exportStrategy);
   }
 }
+#endif
 
 QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) const
 {
@@ -2742,6 +2748,8 @@ void MainWindow::slotFileExport ()
     QString filter = QString ("%1;;%2;;All files (*.*)")
                      .arg (exportStrategy.filterCsv ())
                      .arg (exportStrategy.filterTsv ());
+
+    // OSX sandbox requires, for the default, a non-empty filename
     QString defaultFileName = QString ("%1/%2.%3")
                               .arg (QDir::currentPath ())
                               .arg (m_currentFile)
@@ -3184,7 +3192,9 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
 
   } else {
 
+#ifndef OSX
     exportAllCoordinateSystems ();
+#endif
 
     // Regression test has finished so exit. We unset the dirty flag so there is no prompt
     m_cmdMediator->setClean();
@@ -3206,7 +3216,9 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
     // Script file might already have closed the Document so export only if last was not closed
     if (m_cmdMediator != 0) {
 
+#ifndef OSX
       exportAllCoordinateSystems ();
+#endif
 
       // We unset the dirty flag so there is no "Save changes?" prompt
       m_cmdMediator->setClean();
@@ -3792,8 +3804,10 @@ void MainWindow::updateControls ()
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
+#ifndef OSX
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
+#endif
   m_actionClose->setEnabled (!m_currentFile.isEmpty ());
   m_actionSave->setEnabled (!m_currentFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
@@ -3916,6 +3930,7 @@ void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
 
+#ifndef OSX
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   QStringList recentFilePaths = settings.value(SETTINGS_RECENT_FILE_LIST).toStringList();
 
@@ -3938,6 +3953,7 @@ void MainWindow::updateRecentFileList()
   for (i = count; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_actionRecentFiles.at (i)->setVisible (false);
   }
+#endif
 }
 
 void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)

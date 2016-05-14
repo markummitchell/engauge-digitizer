@@ -1,0 +1,2 @@
+Sample file for Import: https://github.com/markummitchell/engauge-digitizer/blob/master/samples/gnuplot_x_y_lines_grid.png
+Sample file for Open: https://github.com/markummitchell/engauge-digitizer/blob/master/test/version7_1.dig

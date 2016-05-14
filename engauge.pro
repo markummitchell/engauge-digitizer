@@ -551,8 +551,8 @@ macx-* {
 # Change += to -= for app_bundle to debug in QtCreator
 CONFIG += app_bundle
 
-QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++"
-QMAKE_LFLAGS += "-stdlib=libc++"
+QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++ -gdwarf-2"
+QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
 INCLUDEPATH += \
 $$(FFTW_HOME)/include \
 $$(LOG4CPP_HOME)/include \
