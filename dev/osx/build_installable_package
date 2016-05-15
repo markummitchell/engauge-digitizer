@@ -59,6 +59,9 @@ mv translations/*.qm Engauge\ Digitizer.app/Contents/Resources/translations
 # Icons
 cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
 
+# License
+cp LICENSE Engauge\ Digitizer.app/Contents/Resources/
+
 # Debug symbols are just dropped for now
 dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Digitizer.app.dSYM
 
@@ -79,7 +82,7 @@ echo 'Ignore error about /usr/lib/log4cpp... in the next line'
 macdeployqt Engauge\ Digitizer.app -appstore-compliant
 cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
-# Code signing
+# Signing
 frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
@@ -100,18 +103,25 @@ echo "**************************************************************************
 echo "* If previous line says 'code object is not signed at all' then stop and fix *"
 echo "******************************************************************************"
 
-# list entitlements
-codesign -d --entitlements - Engauge\ Digitizer.app
-
-# build package
+# Build package
 productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
 
-# sign package
+# Sign package
 productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" Engauge\ Digitizer.pkg Engauge\ Digitizer.pkg.signed
 mv Engauge\ Digitizer.pkg.signed Engauge\ Digitizer.pkg
 
-# test the built package
+# Code signing checks. Note that spctl seems to give false alarms, while codesign seems to be happy
+#spctl --assess --type execute Engauge\ Digitizer.app 2>&1 | grep -i rejected
+#spctl --assess --type install Engauge\ Digitizer.app 2>&1 | grep -i rejected
+echo "******************** codesign validations ************************"
+codesign --verbose --deep --strict Engauge\ Digitizer.app
+echo "******************** codesign entitlements ***********************"
+codesign --display --verbose=4 --entitlements - Engauge\ Digitizer.app
+echo "******************************************************************"
+
+# Test the built package
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
 sudo installer -store -pkg Engauge\ Digitizer.pkg -target /
 
 echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload Engauge Digitizer.pkg"
+
