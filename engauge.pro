@@ -231,6 +231,8 @@ HEADERS  += \
     src/Grid/GridCoordDisable.h \
     src/Grid/GridHealer.h \
     src/Grid/GridInitializer.h \
+    src/Grid/GridLine.h \
+    src/Grid/GridLineFactory.h \
     src/Grid/GridRemoval.h \
     src/Help/HelpBrowser.h \
     src/Help/HelpWindow.h \
@@ -490,6 +492,7 @@ SOURCES += \
     src/Grid/GridCoordDisable.cpp \
     src/Grid/GridHealer.cpp \
     src/Grid/GridInitializer.cpp \
+    src/Grid/GridLineFactory.cpp \
     src/Grid/GridRemoval.cpp \
     src/Help/HelpBrowser.cpp \
     src/Help/HelpWindow.cpp \
