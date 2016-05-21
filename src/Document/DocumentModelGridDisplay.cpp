@@ -15,6 +15,8 @@
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
+const ColorPalette DEFAULT_COLOR = COLOR_PALETTE_BLACK;
+
 DocumentModelGridDisplay::DocumentModelGridDisplay() :
   m_stable (false),
   m_disableX (GRID_COORD_DISABLE_COUNT),
@@ -26,7 +28,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay() :
   m_countY (2),
   m_startY (0.0),
   m_stepY (1.0),
-  m_stopY (1.0)
+  m_stopY (1.0),
+  m_paletteColor (DEFAULT_COLOR)
 {
 }
 
@@ -41,7 +44,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
   m_countY (document.modelGridDisplay().countY()),
   m_startY (document.modelGridDisplay().startY()),
   m_stepY (document.modelGridDisplay().stepY()),
-  m_stopY (document.modelGridDisplay().stopY())
+  m_stopY (document.modelGridDisplay().stopY()),
+  m_paletteColor (document.modelGridDisplay().paletteColor())
 {
 }
 
@@ -56,7 +60,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const DocumentModelGridDispla
   m_countY (other.countY()),
   m_startY (other.startY()),
   m_stepY (other.stepY()),
-  m_stopY (other.stopY())
+  m_stopY (other.stopY()),
+  m_paletteColor (other.paletteColor())
 {
 }
 
@@ -73,6 +78,7 @@ DocumentModelGridDisplay &DocumentModelGridDisplay::operator=(const DocumentMode
   m_startY = other.startY();
   m_stepY = other.stepY();
   m_stopY = other.stopY();
+  m_paletteColor = other.paletteColor();
 
   return *this;
 }
@@ -115,7 +121,8 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y) &&
-      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y)) {
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR)) {
 
     // Boolean values
     QString stableValue = attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE).toString();
@@ -131,6 +138,7 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
     setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y).toDouble());
     setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y).toDouble());
     setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y).toDouble());
+    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR).toInt());
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -146,6 +154,11 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
   if (!success) {
     reader.raiseError (QObject::tr ("Cannot read grid display data"));
   }
+}
+
+ColorPalette DocumentModelGridDisplay::paletteColor() const
+{
+  return m_paletteColor;
 }
 
 void DocumentModelGridDisplay::printStream(QString indentation,
@@ -166,6 +179,7 @@ void DocumentModelGridDisplay::printStream(QString indentation,
   str << indentation << "startY=" << m_startY << "\n";
   str << indentation << "stepY=" << m_stepY << "\n";
   str << indentation << "stopY=" << m_stopY << "\n";
+  str << indentation << "color=" << colorPaletteToString (m_paletteColor) << "\n";
 }
 
 void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
@@ -186,6 +200,8 @@ void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y, QString::number  (m_startY));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y, QString::number (m_stepY));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y, QString::number (m_stopY));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR, QString::number (m_paletteColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR_STRING, colorPaletteToString (m_paletteColor));
   writer.writeEndElement();
 }
 
@@ -207,6 +223,11 @@ void DocumentModelGridDisplay::setDisableX (GridCoordDisable disableX)
 void DocumentModelGridDisplay::setDisableY (GridCoordDisable disableY)
 {
   m_disableY = disableY;
+}
+
+void DocumentModelGridDisplay::setPaletteColor(ColorPalette paletteColor)
+{
+  m_paletteColor = paletteColor;
 }
 
 void DocumentModelGridDisplay::setStable(bool stable)

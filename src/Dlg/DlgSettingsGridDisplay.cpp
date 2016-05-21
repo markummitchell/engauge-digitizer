@@ -8,7 +8,10 @@
 #include "CmdSettingsGridDisplay.h"
 #include "DlgSettingsGridDisplay.h"
 #include "EngaugeAssert.h"
+#include "EnumsToQt.h"
 #include "GridInitializer.h"
+#include "GridLineFactory.h"
+#include "GridLineStyle.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCheckBox>
@@ -46,12 +49,31 @@ DlgSettingsGridDisplay::~DlgSettingsGridDisplay()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::~DlgSettingsGridDisplay";
 }
 
-void DlgSettingsGridDisplay::createDisplayGridLines (QGridLayout *layout, int &row)
+void DlgSettingsGridDisplay::createDisplayCommon (QGridLayout *layout, int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::createDisplayGridLines";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::createDisplayCommon";
 
-  createDisplayGridLinesX (layout, row);
-  createDisplayGridLinesY (layout, row);
+  QWidget *widgetCommon = new QWidget;
+  layout->addWidget (widgetCommon, row++, 2, 1, 2);
+
+  QGridLayout *layoutCommon = new QGridLayout;
+  widgetCommon->setLayout (layoutCommon);
+  int rowCommon = 0;
+
+  QLabel *labelColor = new QLabel (tr ("Color:"));
+  layoutCommon->addWidget (labelColor, rowCommon, 1);
+
+  m_cmbColor = new QComboBox;
+  m_cmbColor->setWhatsThis (tr ("Select a color for the lines"));
+  populateColorComboWithoutTransparent (*m_cmbColor);
+  connect (m_cmbColor, SIGNAL (activated (const QString &)), this, SLOT (slotColor (const QString &))); // activated() ignores code changes
+  layoutCommon->addWidget (m_cmbColor, rowCommon++, 2);
+
+  // Make sure there is an empty column, for padding, on the left and right sides
+  layoutCommon->setColumnStretch (0, 1);
+  layoutCommon->setColumnStretch (1, 0);
+  layoutCommon->setColumnStretch (2, 0);
+  layoutCommon->setColumnStretch (3, 1);
 }
 
 void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &row)
@@ -95,7 +117,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
                                   "The number of X grid lines must be entered as an integer greater than zero"));
   m_validatorCountX = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
   m_editCountX->setValidator (m_validatorCountX);
-  connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
+  connect (m_editCountX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
   QLabel *labelStart = new QLabel (tr ("Start:"));
@@ -106,7 +128,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
                                   "The start value cannot be greater than the stop value"));
   m_validatorStartX = new QDoubleValidator;
   m_editStartX->setValidator (m_validatorStartX);
-  connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
+  connect (m_editStartX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
   QLabel *labelStep = new QLabel (tr ("Step:"));
@@ -117,7 +139,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
                                  "The step value must be greater than zero"));
   m_validatorStepX = new QDoubleValidator;
   m_editStepX->setValidator (m_validatorStepX);
-  connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
+  connect (m_editStepX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
   QLabel *labelStop = new QLabel (tr ("Stop:"));
@@ -128,7 +150,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
                                  "The stop value cannot be less than the start value"));
   m_validatorStopX = new QDoubleValidator;
   m_editStopX->setValidator (m_validatorStopX);
-  connect (m_editStopX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopX (const QString &)));
+  connect (m_editStopX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStopX (const QString &)));
   layoutGroup->addWidget (m_editStopX, 4, 1);
 }
 
@@ -173,7 +195,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
                                   "The number of Y grid lines must be entered as an integer greater than zero"));
   m_validatorCountY = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
   m_editCountY->setValidator (m_validatorCountY);
-  connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
+  connect (m_editCountY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
   QLabel *labelStart = new QLabel (tr ("Start:"));
@@ -184,7 +206,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
                                   "The start value cannot be greater than the stop value"));
   m_validatorStartY = new QDoubleValidator;
   m_editStartY->setValidator (m_validatorStartY);
-  connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
+  connect (m_editStartY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
   QLabel *labelStep = new QLabel (tr ("Step:"));
@@ -195,7 +217,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
                                  "The step value must be greater than zero"));
   m_validatorStepY = new QDoubleValidator;
   m_editStepY->setValidator (m_validatorStepY);
-  connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
+  connect (m_editStepY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
   QLabel *labelStop = new QLabel (tr ("Stop:"));
@@ -206,7 +228,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
                                  "The stop value cannot be less than the start value"));
   m_validatorStopY = new QDoubleValidator;
   m_editStopY->setValidator (m_validatorStopY);
-  connect (m_editStopY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStopY (const QString &)));
+  connect (m_editStopY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStopY (const QString &)));
   layoutGroup->addWidget (m_editStopY, 4, 1);
 }
 
@@ -250,7 +272,9 @@ QWidget *DlgSettingsGridDisplay::createSubPanel ()
   layout->setColumnStretch(4, 1); // Empty last column
 
   int row = 0;
-  createDisplayGridLines (layout, row);
+  createDisplayGridLinesX (layout, row);
+  createDisplayGridLinesY (layout, row);
+  createDisplayCommon (layout, row);
   createPreview (layout, row);
 
   return subPanel;
@@ -307,11 +331,23 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   m_editStepY->setText(QString::number(m_modelGridDisplayAfter->stepY()));
   m_editStopY->setText(QString::number(m_modelGridDisplayAfter->stopY()));
 
-  m_scenePreview->clear();
+  int indexColor = m_cmbColor->findData(QVariant(m_modelGridDisplayAfter->paletteColor()));
+  ENGAUGE_ASSERT (indexColor >= 0);
+  m_cmbColor->setCurrentIndex(indexColor);
+
   m_scenePreview->addPixmap (cmdMediator.document().pixmap());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+  updatePreview();
+}
+
+void DlgSettingsGridDisplay::slotColor (QString const &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotColor";
+
+  m_modelGridDisplayAfter->setPaletteColor((ColorPalette) m_cmbColor->currentData().toInt());
+  updateControls();
   updatePreview();
 }
 
@@ -536,4 +572,70 @@ void DlgSettingsGridDisplay::updateDisplayedVariableY ()
 
 void DlgSettingsGridDisplay::updatePreview ()
 {
+  const double ZERO_POINT_RADIUS = 0.0; // Standard grid lines have no empty areas at their intersections
+
+  m_gridLines.clear ();
+
+  QString countX = m_editCountX->text();
+  QString countY = m_editCountY->text();
+  QString startX = m_editStartX->text();
+  QString startY = m_editStartY->text();
+  QString stepX = m_editStepX->text();
+  QString stepY = m_editStepY->text();
+  QString stopX = m_editStopX->text();
+  QString stopY = m_editStopY->text();
+
+  // Skip if either:
+  // 1) field is empty
+  // 2) there is an empty field to prevent infinite loop
+  int pos;
+  if (!countX.isEmpty() &&
+      !countY.isEmpty() &&
+      !startX.isEmpty() &&
+      !startY.isEmpty() &&
+      !stepX.isEmpty() &&
+      !stepY.isEmpty() &&
+      !stopX.isEmpty() &&
+      !stopY.isEmpty() &&
+      m_validatorCountX->validate(countX, pos) == QValidator::Acceptable &&
+      m_validatorCountY->validate(countY, pos) == QValidator::Acceptable &&
+      m_validatorStartX->validate(startX, pos) == QValidator::Acceptable &&
+      m_validatorStartY->validate(startY, pos) == QValidator::Acceptable &&
+      m_validatorStepX->validate(stepX, pos) == QValidator::Acceptable &&
+      m_validatorStepY->validate(stepY, pos) == QValidator::Acceptable &&
+      m_validatorStopX->validate(stopX, pos) == QValidator::Acceptable &&
+      m_validatorStopY->validate(stopY, pos) == QValidator::Acceptable) {
+
+    QList<Point> emptyPoints;
+
+    GridLineFactory factory (*m_scenePreview,
+                             ZERO_POINT_RADIUS,
+                             emptyPoints,
+                             cmdMediator ().document ().modelCoords(),
+                             mainWindow ().transformation());
+
+    double startX = m_modelGridDisplayAfter->startX ();
+    double startY = m_modelGridDisplayAfter->startY ();
+    double stepX  = m_modelGridDisplayAfter->stepX  ();
+    double stepY  = m_modelGridDisplayAfter->stepY  ();
+    double stopX  = m_modelGridDisplayAfter->stopX  ();
+    double stopY  = m_modelGridDisplayAfter->stopY  ();
+
+    QColor color (ColorPaletteToQColor ((ColorPalette) m_cmbColor->currentData().toInt()));
+    QPen pen (QPen (color,
+                    GRID_LINE_WIDTH,
+                    GRID_LINE_STYLE));
+
+    for (double x = startX; x <= stopX; x += stepX) {
+      GridLine *gridLine = factory.createGridLine (x, startY, x, stopY);
+      gridLine->setPen (pen);
+      m_gridLines.add (gridLine);
+    }
+
+    for (double y = startY; y <= stopY; y += stepY) {
+      GridLine *gridLine = factory.createGridLine (startX, y, stopX, y);
+      gridLine->setPen (pen);
+      m_gridLines.add (gridLine);
+    }
+  }
 }

@@ -21,7 +21,8 @@ class Transformation;
 class GridLineFactory
 {
 public:
-  /// Single constructor for DlgSettingsAxesGridLineFactory, which does not have an explicit transformation. The identity transformation is assumed
+  /// Single constructor for DlgSettingsAxesGridLineFactory, which does not have an explicit transformation. The identity transformation is
+  /// assumed. The points array is used when constructed by the Checker
   GridLineFactory(QGraphicsScene &scene,
                   int pointRadius,
                   const QList<Point> &points,
@@ -30,14 +31,10 @@ public:
 
   /// Create grid line, either along constant X/theta or constant Y/radius side. Line goes from pointFromGraph to pointToGraph.
   /// If the coordinates are polar, we go clockwise from pointFromGraph to pointToGraph (as set up by adjustPolarAngleRange).
-  void createGridLine (double xFrom,
-                       double yFrom,
-                       double xTo,
-                       double yTo,
-                       GridLine &gridLine);
-
-  /// Deallocate the graphics items associated with the specified grid line. This is static so it can be used without calling the constructor
-  static void deleteSide (GridLine &gridLine);
+  GridLine *createGridLine (double xFrom,
+                            double yFrom,
+                            double xTo,
+                            double yTo);
 
 private:
   GridLineFactory();
@@ -60,8 +57,7 @@ private:
                              GridLine &gridLine) const;
   QGraphicsItem *lineItem (const QPointF &posStartScreen,
                            const QPointF &posEndScreen) const;
-  double minScreenDistanceFromPoints (const QPointF &posScreen,
-                                      const QList<Point> &points);
+  double minScreenDistanceFromPoints (const QPointF &posScreen);
 
   QGraphicsScene &m_scene;
   const int m_pointRadius;

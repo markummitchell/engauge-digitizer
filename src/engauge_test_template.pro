@@ -215,6 +215,8 @@ HEADERS  += \
     Grid/GridInitializer.h \
     Grid/GridLine.h \
     Grid/GridLineFactory.h \
+    Grid/GridLines.h \
+    Grid/GridLineStyle.h \
     Grid/GridRemoval.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
@@ -475,7 +477,9 @@ SOURCES += \
     Grid/GridCoordDisable.cpp \
     Grid/GridHealer.cpp \
     Grid/GridInitializer.cpp \
+    Grid/GridLine.cpp \
     Grid/GridLineFactory.cpp \
+    Grid/GridLines.cpp \
     Grid/GridRemoval.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \

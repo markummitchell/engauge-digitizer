@@ -50,17 +50,18 @@ void GridLineFactory::bindItemToScene(QGraphicsItem *item) const
   m_scene.addItem (item);
 }
 
-void GridLineFactory::createGridLine (double xFrom,
-                                      double yFrom,
-                                      double xTo,
-                                      double yTo,
-                                      GridLine &gridLines)
+GridLine *GridLineFactory::createGridLine (double xFrom,
+                                           double yFrom,
+                                           double xTo,
+                                           double yTo)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::createGridLine"
                               << " xFrom=" << xFrom
                               << " yFrom=" << yFrom
                               << " xTo=" << xTo
                               << " yTo=" << yTo;
+
+  GridLine *gridLine = new GridLine ();
 
   // Originally a complicated algorithm tried to intercept a straight line from (xFrom,yFrom) to (xTo,yTo). That did not work well since:
   // 1) Calculations for mostly orthogonal cartesian coordinates worked less well with non-orthogonal polar coordinates
@@ -97,8 +98,7 @@ void GridLineFactory::createGridLine (double xFrom,
     m_transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
                                                 pointScreen);
 
-    double distanceToNearestPoint = minScreenDistanceFromPoints (pointScreen,
-                                                                 m_points);
+    double distanceToNearestPoint = minScreenDistanceFromPoints (pointScreen);
     if ((distanceToNearestPoint < m_pointRadius) ||
         (i == NUM_STEPS)) {
 
@@ -110,7 +110,7 @@ void GridLineFactory::createGridLine (double xFrom,
                               pointScreen,
                               yFrom,
                               yTo,
-                              gridLines);
+                              *gridLine);
         stateSegmentIsActive = false;
 
       }
@@ -126,6 +126,8 @@ void GridLineFactory::createGridLine (double xFrom,
       }
     }
   }
+
+  return gridLine;
 }
 
 void GridLineFactory::createTransformAlign (const Transformation &transformation,
@@ -182,18 +184,6 @@ void GridLineFactory::createTransformAlign (const Transformation &transformation
                               << " posXRadiusY0AlignedScreen=" << QPointFToString (posXRadiusY0AlignedScreen).toLatin1().data()
                               << " posX0YRadiusAlignedScreen=" << QPointFToString (posX0YRadiusAlignedScreen).toLatin1().data()
                               << " transformAlign=" << QTransformToString (transformAlign).toLatin1().data();
-}
-
-void GridLineFactory::deleteSide (GridLine &gridLines)
-{
-  for (int i = 0; i < gridLines.count(); i++) {
-    QGraphicsItem *item = gridLines [i];
-    if (item != 0) {
-      delete item;
-    }
-  }
-
-  gridLines.clear();
 }
 
 QGraphicsItem *GridLineFactory::ellipseItem (const Transformation &transformation,
@@ -262,7 +252,7 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
                                             const QPointF &posEndScreen,
                                             double yFrom,
                                             double yTo,
-                                            GridLine &gridLines) const
+                                            GridLine &gridLine) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::finishActiveGridLine"
                               << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
@@ -296,7 +286,7 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
                      posEndScreen);
   }
 
-  gridLines.push_back (item);
+  gridLine.add (item);
   bindItemToScene (item);
 }
 
@@ -311,12 +301,11 @@ QGraphicsItem *GridLineFactory::lineItem (const QPointF &posStartScreen,
                                         posEndScreen));
 }
 
-double GridLineFactory::minScreenDistanceFromPoints (const QPointF &posScreen,
-                                                     const QList<Point> &points)
+double GridLineFactory::minScreenDistanceFromPoints (const QPointF &posScreen)
 {
   double minDistance = 0;
-  for (int i = 0; i < points.count (); i++) {
-    const Point &pointCenter = points.at (i);
+  for (int i = 0; i < m_points.count (); i++) {
+    const Point &pointCenter = m_points.at (i);
 
     double dx = posScreen.x() - pointCenter.posScreen().x();
     double dy = posScreen.y() - pointCenter.posScreen().y();

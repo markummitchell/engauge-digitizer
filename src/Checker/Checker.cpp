@@ -176,10 +176,7 @@ void Checker::prepareForDisplay (const QList<Point> &points,
                   (points.count () == NUM_AXES_POINTS_4));
 
   // Remove previous lines
-  GridLineFactory::deleteSide (m_sideLeft);
-  GridLineFactory::deleteSide (m_sideTop);
-  GridLineFactory::deleteSide (m_sideRight);
-  GridLineFactory::deleteSide (m_sideBottom);
+  m_gridLines.clear ();
 
   bool fourPoints = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_4);
 
@@ -231,50 +228,17 @@ void Checker::prepareForDisplay (const QList<Point> &points,
                            points,
                            modelCoords,
                            transformation);
-  factory.createGridLine (xFrom, yFrom, xFrom, yTo  , m_sideLeft);
-  factory.createGridLine (xFrom, yTo  , xTo  , yTo  , m_sideTop);
-  factory.createGridLine (xTo  , yTo  , xTo  , yFrom, m_sideRight);
-  factory.createGridLine (xTo  , yFrom, xFrom, yFrom, m_sideBottom);
+  m_gridLines.add (factory.createGridLine (xFrom, yFrom, xFrom, yTo  ));
+  m_gridLines.add (factory.createGridLine (xFrom, yTo  , xTo  , yTo  ));
+  m_gridLines.add (factory.createGridLine (xTo  , yTo  , xTo  , yFrom));
+  m_gridLines.add (factory.createGridLine (xTo  , yFrom, xFrom, yFrom));
 
   updateModelAxesChecker (modelAxesChecker);
 }
 
-void Checker::setLineColor (GridLine &gridLines,
-                            const QPen &pen)
-{
-  for (int i = 0; i < gridLines.count(); i++) {
-    QGraphicsItem *item = gridLines [i];
-    if (item != 0) {
-
-      // Downcast since QGraphicsItem does not have a pen
-      QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
-      QGraphicsEllipseItem *itemArc = dynamic_cast<QGraphicsEllipseItem*> (item);
-      if (itemLine != 0) {
-        itemLine->setPen (pen);
-      } else if (itemArc != 0) {
-        itemArc->setPen (pen);
-      }
-    }
-  }
-}
-
 void Checker::setVisible (bool visible)
 {
-  setVisibleSide (m_sideLeft, visible);
-  setVisibleSide (m_sideTop, visible);
-  setVisibleSide (m_sideRight, visible);
-  setVisibleSide (m_sideBottom, visible);
-}
-
-void Checker::setVisibleSide (GridLine &gridLines,
-                              bool visible)
-{
-  for (int i = 0; i < gridLines.count(); i++) {
-    QGraphicsItem *item = gridLines [i];
-    if (item != 0) {
-      item->setVisible (visible);
-    }
-  }
+  m_gridLines.setVisible (visible);
 }
 
 void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesChecker)
@@ -282,8 +246,5 @@ void Checker::updateModelAxesChecker (const DocumentModelAxesChecker &modelAxesC
   QColor color = ColorPaletteToQColor (modelAxesChecker.lineColor());
   QPen pen (QBrush (color), CHECKER_POINTS_WIDTH);
 
-  setLineColor (m_sideLeft, pen);
-  setLineColor (m_sideTop, pen);
-  setLineColor (m_sideRight, pen);
-  setLineColor (m_sideBottom, pen);
+  m_gridLines.setPen (pen);
 }

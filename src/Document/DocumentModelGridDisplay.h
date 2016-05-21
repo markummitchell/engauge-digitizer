@@ -7,6 +7,7 @@
 #ifndef DOCUMENT_MODEL_GRID_DISPLAY
 #define DOCUMENT_MODEL_GRID_DISPLAY
 
+#include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
 #include "GridCoordDisable.h"
 
@@ -43,6 +44,9 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
+  /// Get method for color.
+  ColorPalette paletteColor() const;
+
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,
                     QTextStream &str) const;
@@ -60,6 +64,9 @@ public:
 
   /// Set method for y grid line disabled variable.
   void setDisableY (GridCoordDisable disableY);
+
+  /// Set method for color.
+  void setPaletteColor(ColorPalette paletteColor);
 
   /// Set method for stable flag.
   void setStable (bool stable);
@@ -118,6 +125,8 @@ private:
   double m_startY;
   double m_stepY;
   double m_stopY;
+
+  ColorPalette m_paletteColor;
 };
 
 #endif // DOCUMENT_MODEL_GRID_DISPLAY

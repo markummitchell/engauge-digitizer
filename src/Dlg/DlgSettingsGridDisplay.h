@@ -8,6 +8,7 @@
 #define DLG_SETTINGS_GRID_DISPLAY_H
 
 #include "DlgSettingsAbstractBase.h"
+#include "GridLines.h"
 
 class DocumentModelGridDisplay;
 class QCheckBox;
@@ -35,6 +36,8 @@ public:
 
 private slots:
 
+  void slotColor (const QString &);
+
   void slotDisableX(const QString &);
   void slotCountX(const QString &);
   void slotStartX(const QString &);
@@ -52,7 +55,7 @@ protected:
 
 private:
 
-  void createDisplayGridLines (QGridLayout *layout, int &row);
+  void createDisplayCommon (QGridLayout *layout, int &row);
   void createDisplayGridLinesX (QGridLayout *layoutGridLines, int &row);
   void createDisplayGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createPreview (QGridLayout *layout, int &row);
@@ -80,6 +83,10 @@ private:
   QDoubleValidator *m_validatorStartY;
   QDoubleValidator *m_validatorStepY;
   QDoubleValidator *m_validatorStopY;
+
+  QComboBox *m_cmbColor;
+
+  GridLines m_gridLines;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

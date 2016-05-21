@@ -325,7 +325,7 @@ void DlgSettingsPointMatch::updatePreview()
 
   // Update circle size
   m_circle->setRect (xLeft,
-                      yTop,
-                      maxPointSize,
-                      maxPointSize);
+                     yTop,
+                     maxPointSize,
+                     maxPointSize);
 }

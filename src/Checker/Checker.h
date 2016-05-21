@@ -10,6 +10,7 @@
 #include "CheckerMode.h"
 #include "DocumentAxesPointsRequired.h"
 #include "GridLine.h"
+#include "GridLines.h"
 #include <QColor>
 #include <QList>
 #include <QPainterPath>
@@ -76,13 +77,10 @@ private:
   void setLineColor (GridLine &gridLine,
                      const QPen &pen);
 
-  void setVisibleSide (GridLine &gridLine,
-                       bool visible);
-
   QGraphicsScene &m_scene;
 
   // These grid lines are QGraphicsLineItem line segments or QGraphicsEllipseItem arc segments. Together they
-  // make up a box shape in cartesian coordinates.
+  // make up a box (cartesian) or annular (polar) shape in cartesian coordinates.
   //
   // A major complication is that drawing the box with just four lines from corner to corner results in extremely
   // thick lines through the axes points, which obscures the axis point unacceptably. So, each side is drawn with
@@ -90,10 +88,7 @@ private:
   // 1) corner1 to either point1 or corner2 (whichever comes first)
   // 2) unused, or point1 to either point2 or corner2 (whichever comes first)
   // 3) unused point2 to corner2
-  GridLine m_sideLeft;
-  GridLine m_sideTop;
-  GridLine m_sideRight;
-  GridLine m_sideBottom;
+  GridLines m_gridLines;
 };
 
 #endif // CHECKER_H
