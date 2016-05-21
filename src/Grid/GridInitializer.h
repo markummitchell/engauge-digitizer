@@ -13,9 +13,36 @@ class GridInitializer
   /// Single constructor
   GridInitializer();
 
+  /// Compute axis scale count from the other axis parameters
+  int computeCount (bool linearAxis,
+                    double start,
+                    double stop,
+                    double step) const;
+
+  /// Compute axis scale start from the other axis parameters
+  double computeStart (bool linearAxis,
+                       double stop,
+                       double step,
+                       int count) const;
+
+  /// Compute axis scale step from the other axis parameters
+  double computeStep (bool linearAxis,
+                      double start,
+                      double stop,
+                      int count) const;
+
+  /// Compute axis scale stop from the other axis parameters
+  double computeStop (bool linearAxis,
+                      double start,
+                      double step,
+                      int count) const;
+
   /// Initialize given the boundaries of the graph coordinates 
   DocumentModelGridDisplay initialize (const QRectF &boundingRectGraph,
                                        const DocumentModelCoords &modelCoords) const;
+
+  /// Compute power of 10 for input value, rounding down to nearest integer solution of value>=10**solution
+  int valuePower (double value) const;
 
  private:
 
@@ -32,9 +59,6 @@ class GridInitializer
 
   double roundOffToPower (double arg,
                           int roundOffPower) const;
-
-  // Compute power of 10 for input value, rounding down to nearest integer solution of value>=10**solution
-  int valuePower (double value) const;
 
   const QRectF m_boundingRectGraph;
 };

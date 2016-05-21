@@ -57,6 +57,8 @@ private:
   void createDisplayGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createPreview (QGridLayout *layout, int &row);
   void updateControls ();
+  void updateDisplayedVariableX ();
+  void updateDisplayedVariableY ();
   void updatePreview();
 
   QComboBox *m_cmbDisableX;

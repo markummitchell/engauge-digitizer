@@ -27,16 +27,14 @@ void GridInitializer::axisScale (double xMin,
   const int nDigitsPrecision = 8;
 
   // sort the input values
-  if (xMin > xMax)
-  {
+  if (xMin > xMax) {
     double xTemp = xMin;
     xMin = xMax;
     xMax = xTemp;
   }
 
   // Scale the coordinates logarithmically if log flag is set
-  if (!linearAxis)
-  {
+  if (!linearAxis) {
     ENGAUGE_ASSERT(xMin > 0);
     ENGAUGE_ASSERT(xMax > 0);
     xMin = log10(xMin);
@@ -46,34 +44,35 @@ void GridInitializer::axisScale (double xMin,
   // Round off average to first significant digit of range
   xAverage = (xMin + xMax) / 2.0;
   xRange = xMax - xMin;
-  if (xRange == 0)
-  xRange = fabs (xAverage / 10.0); // for null range use arbitrary range
+  if (xRange == 0) {
+    xRange = fabs (xAverage / 10.0); // for null range use arbitrary range
+  }
   nDigitRange = valuePower (xRange);
   xDelta = pow ((double) 10.0, (double) nDigitRange);
   xAverageRoundedUp = xDelta * floor ((xAverage + xDelta / 2.0) / xDelta);
 
-
-  if (xRange > range_epsilon)
-  {
+  if (xRange > range_epsilon) {
     // Adjust stepsize if more points are needed, accounting for roundoff
-    while (fabs (xRange / xDelta) <= 2.000001)
+    while (fabs (xRange / xDelta) <= 2.000001) {
       xDelta /= 2.0;
+    }
   }
 
   // Go down until min point is included
   xStart = xAverageRoundedUp;
-  while (xStart > xMin)
+  while (xStart > xMin) {
     xStart -= xDelta;
+  }
 
   // Go up until max point is included
   xStop = xAverageRoundedUp;
-  while (xStop < xMax)
+  while (xStop < xMax) {
     xStop += xDelta;
+  }
 
   xCount = 1 + (int) floor ((xStop - xStart) / xDelta + 0.5);
 
-  if (!linearAxis)
-  {
+  if (!linearAxis) {
     // Convert from log scale back to linear scale
     xStart = pow((double) 10.0, xStart);
     xStop = pow((double) 10.0, xStop);
@@ -85,6 +84,90 @@ void GridInitializer::axisScale (double xMin,
   xStart = roundOffToPower(xStart, power);
   xStop = roundOffToPower(xStop, power);
   xDelta = roundOffToPower(xDelta, power);
+}
+
+int GridInitializer::computeCount (bool linearAxis,
+                                   double start,
+                                   double stop,
+                                   double step) const
+{
+  int count;
+
+  if (linearAxis) {
+    if (step == 0) {
+      count = 1;
+    } else {
+      count = (int) (1.0 + (stop - start) / step);
+    }
+  } else {
+    if ((start <= 0) || (step <= 0.0)) {
+      count = 1;
+    } else {
+      count = (int) (1.0 + log10 (stop / start) / log10 (step));
+    }
+  }
+
+  return count;
+}
+
+double GridInitializer::computeStart (bool linearAxis,
+                                      double stop,
+                                      double step,
+                                      int count) const
+{
+  double start;
+
+  if (linearAxis) {
+    start = stop - step * (count - 1);
+  } else {
+    start = stop / pow (step, (double) (count - 1));
+  }
+
+  return start;
+}
+
+double GridInitializer::computeStep (bool linearAxis,
+                                     double start,
+                                     double stop,
+                                     int count) const
+{
+  double step;
+
+  if (linearAxis) {
+    if (count > 1) {
+      step = (stop - start) / (count - 1);
+    } else {
+      step = stop - start;
+    }
+  } else {
+    if (start <= 0.0) {
+      step = 1.0;
+    } else {
+      if (count > 1) {
+        step = pow (stop / start, (double) 1.0 / (count - 1));
+      } else {
+        step = stop / start;
+      }
+    }
+  }
+
+  return step;
+}
+
+double GridInitializer::computeStop (bool linearAxis,
+                                     double start,
+                                     double step,
+                                     int count) const
+{
+  double stop;
+
+  if (linearAxis) {
+    stop = start + step * (count - 1);
+  } else {
+    stop = start * pow (step, (double) (count - 1));
+  }
+
+  return stop;
 }
 
 DocumentModelGridDisplay GridInitializer::initialize (const QRectF &boundingRectGraph,
@@ -144,8 +227,9 @@ int GridInitializer::valuePower(double value) const
   const int minPower = -30; // MAX_DOUBLE is 10^38
 
   double avalue = fabs(value);
-  if (avalue < pow(10.0, minPower))
+  if (avalue < pow(10.0, minPower)) {
     return minPower;
-  else
+  } else {
     return (int) floor (log10 (avalue));
+  }
 }
