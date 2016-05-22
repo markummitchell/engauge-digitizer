@@ -78,15 +78,11 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::createDisplayGridLinesX";
 
-  QString titleX = tr ("X Grid Lines");
-  if (false) {
-    titleX = QString (QChar (0x98, 0x03)) + QString (" %1").arg (tr ("Grid Lines"));
-  }
-  QGroupBox *groupX = new QGroupBox (titleX);
-  layout->addWidget (groupX, row, 2);
+  m_groupX = new QGroupBox; // Text is added at load time at which point current context is known
+  layout->addWidget (m_groupX, row, 2);
 
   QGridLayout *layoutGroup = new QGridLayout;
-  groupX->setLayout (layoutGroup);
+  m_groupX->setLayout (layoutGroup);
 
   QLabel *labelDisable = new QLabel (tr ("Disable:"));
   layoutGroup->addWidget (labelDisable, 0, 0);
@@ -156,15 +152,11 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::createDisplayGridLinesY";
 
-  QString titleY = tr ("Y Grid Lines");
-  if (false) {
-    titleY = QString (tr ("R Grid Lines"));
-  }
-  QGroupBox *groupY = new QGroupBox (titleY);
-  layout->addWidget (groupY, row++, 3);
+  m_groupY = new QGroupBox; // Text is added at load time at which point current context is known
+  layout->addWidget (m_groupY, row++, 3);
 
   QGridLayout *layoutGroup = new QGridLayout;
-  groupY->setLayout (layoutGroup);
+  m_groupY->setLayout (layoutGroup);
 
   QLabel *labelDisable = new QLabel (tr ("Disable:"));
   layoutGroup->addWidget (labelDisable, 0, 0);
@@ -307,6 +299,19 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   if (m_modelGridDisplayAfter != 0) {
     delete m_modelGridDisplayAfter;
   }
+
+  // Display cartesian or polar headers as appropriate
+  QString titleX = tr ("X Grid Lines");
+  if (cmdMediator.document ().modelCoords().coordsType() == COORDS_TYPE_POLAR) {
+    titleX = QString (QChar (0x98, 0x03)) + QString (" %1").arg (tr ("Grid Lines"));
+  }
+  m_groupX->setTitle (titleX);
+
+  QString titleY = tr ("Y Grid Lines");
+  if (cmdMediator.document ().modelCoords().coordsType() == COORDS_TYPE_POLAR) {
+    titleY = QString (tr ("Radius Grid Lines"));
+  }
+  m_groupY->setTitle (titleY);
 
   // Save new data
   m_modelGridDisplayBefore = new DocumentModelGridDisplay (cmdMediator.document());
@@ -451,6 +456,39 @@ void DlgSettingsGridDisplay::slotStopY(const QString &stopY)
   updatePreview();
 }
 
+bool DlgSettingsGridDisplay::textItemsAreValid () const
+{
+  QString textCountX = m_editCountX->text();
+  QString textCountY = m_editCountY->text();
+  QString textStartX = m_editStartX->text();
+  QString textStartY = m_editStartY->text();
+  QString textStepX = m_editStepX->text();
+  QString textStepY = m_editStepY->text();
+  QString textStopX = m_editStopX->text();
+  QString textStopY = m_editStopY->text();
+
+  // To prevent an infinite loop, skip if either:
+  // 1) a field is empty
+  // 2) value in a field is malformed
+  int pos;
+  return (!textCountX.isEmpty() &&
+      !textCountY.isEmpty() &&
+      !textStartX.isEmpty() &&
+      !textStartY.isEmpty() &&
+      !textStepX.isEmpty() &&
+      !textStepY.isEmpty() &&
+      !textStopX.isEmpty() &&
+      !textStopY.isEmpty() &&
+      m_validatorCountX->validate(textCountX, pos) == QValidator::Acceptable &&
+      m_validatorCountY->validate(textCountY, pos) == QValidator::Acceptable &&
+      m_validatorStartX->validate(textStartX, pos) == QValidator::Acceptable &&
+      m_validatorStartY->validate(textStartY, pos) == QValidator::Acceptable &&
+      m_validatorStepX->validate(textStepX, pos) == QValidator::Acceptable &&
+      m_validatorStepY->validate(textStepY, pos) == QValidator::Acceptable &&
+      m_validatorStopX->validate(textStopX, pos) == QValidator::Acceptable &&
+      m_validatorStopY->validate(textStopY, pos) == QValidator::Acceptable);
+}
+
 void DlgSettingsGridDisplay::updateControls ()
 {
   GridCoordDisable disableX = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
@@ -465,25 +503,7 @@ void DlgSettingsGridDisplay::updateControls ()
   m_editStepY->setEnabled (disableY != GRID_COORD_DISABLE_STEP);
   m_editStopY->setEnabled (disableY != GRID_COORD_DISABLE_STOP);
 
-  QString textCountX = m_editCountX->text();
-  QString textStartX = m_editStartX->text();
-  QString textStepX = m_editStepX->text();
-  QString textStopX = m_editStopX->text();
-  QString textCountY = m_editCountY->text();
-  QString textStartY = m_editStartY->text();
-  QString textStepY = m_editStepY->text();
-  QString textStopY = m_editStopY->text();
-
-  int pos;
-  bool isOk = (m_validatorCountX->validate (textCountX, pos) == QValidator::Acceptable) &&
-              (m_validatorStartX->validate (textStartX, pos) == QValidator::Acceptable) &&
-              (m_validatorStepX->validate (textStepX, pos) == QValidator::Acceptable) &&
-              (m_validatorStopX->validate (textStopX, pos) == QValidator::Acceptable) &&
-              (m_validatorCountY->validate (textCountY, pos) == QValidator::Acceptable) &&
-              (m_validatorStartY->validate (textStartY, pos) == QValidator::Acceptable) &&
-              (m_validatorStepY->validate (textStepY, pos) == QValidator::Acceptable) &&
-              (m_validatorStopY->validate (textStopY, pos) == QValidator::Acceptable);
-  enableOk (isOk);
+  enableOk (textItemsAreValid ());
 }
 
 void DlgSettingsGridDisplay::updateDisplayedVariableX ()
@@ -572,35 +592,7 @@ void DlgSettingsGridDisplay::updatePreview ()
 {
   m_gridLines.clear ();
 
-  QString countX = m_editCountX->text();
-  QString countY = m_editCountY->text();
-  QString startX = m_editStartX->text();
-  QString startY = m_editStartY->text();
-  QString stepX = m_editStepX->text();
-  QString stepY = m_editStepY->text();
-  QString stopX = m_editStopX->text();
-  QString stopY = m_editStopY->text();
-
-  // To prevent an infinite loop, skip if either:
-  // 1) a field is empty
-  // 2) value in a field is malformed
-  int pos;
-  if (!countX.isEmpty() &&
-      !countY.isEmpty() &&
-      !startX.isEmpty() &&
-      !startY.isEmpty() &&
-      !stepX.isEmpty() &&
-      !stepY.isEmpty() &&
-      !stopX.isEmpty() &&
-      !stopY.isEmpty() &&
-      m_validatorCountX->validate(countX, pos) == QValidator::Acceptable &&
-      m_validatorCountY->validate(countY, pos) == QValidator::Acceptable &&
-      m_validatorStartX->validate(startX, pos) == QValidator::Acceptable &&
-      m_validatorStartY->validate(startY, pos) == QValidator::Acceptable &&
-      m_validatorStepX->validate(stepX, pos) == QValidator::Acceptable &&
-      m_validatorStepY->validate(stepY, pos) == QValidator::Acceptable &&
-      m_validatorStopX->validate(stopX, pos) == QValidator::Acceptable &&
-      m_validatorStopY->validate(stopY, pos) == QValidator::Acceptable) {
+  if (textItemsAreValid ()) {
 
     GridLineFactory factory (*m_scenePreview,
                              cmdMediator ().document ().modelCoords(),

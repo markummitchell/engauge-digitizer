@@ -16,6 +16,7 @@ class QComboBox;
 class QDoubleValidator;
 class QGraphicsScene;
 class QGridLayout;
+class QGroupBox;
 class QHBoxLayout;
 class QLineEdit;
 class ViewPreview;
@@ -59,11 +60,13 @@ private:
   void createDisplayGridLinesX (QGridLayout *layoutGridLines, int &row);
   void createDisplayGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createPreview (QGridLayout *layout, int &row);
+  bool textItemsAreValid () const;
   void updateControls ();
   void updateDisplayedVariableX ();
   void updateDisplayedVariableY ();
   void updatePreview();
 
+  QGroupBox *m_groupX;
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;
   QLineEdit *m_editStartX;
@@ -74,6 +77,7 @@ private:
   QDoubleValidator *m_validatorStepX;
   QDoubleValidator *m_validatorStopX;
 
+  QGroupBox *m_groupY;
   QComboBox *m_cmbDisableY;
   QLineEdit *m_editCountY;
   QLineEdit *m_editStartY;
