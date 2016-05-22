@@ -282,7 +282,7 @@ void DlgSettingsGridDisplay::handleOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::handleOk";
 
-  // Set the initialized flag
+  // Set the stable flag
   m_modelGridDisplayAfter->setStable (true);
 
   CmdSettingsGridDisplay *cmd = new CmdSettingsGridDisplay (mainWindow (),

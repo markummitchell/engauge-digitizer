@@ -10,6 +10,10 @@
 #include <QGraphicsEllipseItem>
 
 /// Draw an arc as an ellipse but without lines from the center to the start and end points
+///
+/// Originally this class overrode QGraphicsEllipseItem::boundingRect and called QGraphicsScene::boundingRect.
+/// However, that led to an infinite loop since QGraphicsScene::boundingRect looped back around to
+/// QGraphicsEllipseItem::boundingRect
 class GraphicsArcItem : public QGraphicsEllipseItem
 {
 public:
@@ -23,10 +27,6 @@ public:
   /// Constructor with coordinates specified as rectangle
   GraphicsArcItem(const QRectF &rect,
                   QGraphicsItem *parent = 0);
-
-  /// QGraphicsEllipseItem ignored transformation when computing bounding rectangle, although it should
-  /// so we must make boundingRect smarter
-  virtual QRectF boundingRect() const;
 
   /// Paint without interior fill
   virtual void paint (QPainter *painter,

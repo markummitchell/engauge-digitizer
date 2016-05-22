@@ -28,6 +28,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QImage>
+#include <qmath.h>
 #include <QObject>
 #include <QtToString.h>
 #include <QXmlStreamReader>
@@ -381,6 +382,13 @@ void Document::initializeGridDisplay (const Transformation &transformation)
 
     DocumentModelGridDisplay modelGridDisplay = gridInitializer.initialize (boundingRectGraph,
                                                                             modelCoords());
+
+    if ((modelCoords().coordsType() == COORDS_TYPE_POLAR) && !modelGridDisplay.stable()) {
+
+      overridePolarCoordinateSettings (transformation,
+                                       modelGridDisplay);
+    }
+
     m_coordSystemContext.setModelGridDisplay (modelGridDisplay);
   }
 }
@@ -714,6 +722,35 @@ int Document::nextOrdinalForCurve (const QString &curveName) const
   LOG4CPP_INFO_S ((*mainCat)) << "Document::nextOrdinalForCurve";
 
   return m_coordSystemContext.nextOrdinalForCurve(curveName);
+}
+
+void Document::overridePolarCoordinateSettings (const Transformation &transformation,
+                                                DocumentModelGridDisplay &modelGridDisplay)
+{
+  ENGAUGE_ASSERT (modelCoords().coordsType() == COORDS_TYPE_POLAR);
+  ENGAUGE_ASSERT (!modelGridDisplay.stable());
+
+  // We make sure the angular range is over the entire circle, which is probably useful
+  // unless the orgin is very close to a corner of the graph, in which case the large range does not hurt anything
+  modelGridDisplay.setStartX (0.0);
+  modelGridDisplay.setStopX (360.0);
+
+  // We extend the range to cover the four corners of the image, since otherwise
+  // areas around at least some graph corners are not covered by the grid lines
+  QPointF posTL, posBL, posTR, posBR;
+  transformation.transformScreenToRawGraph (QPointF (0                , m_pixmap.height ()), posTL);
+  transformation.transformScreenToRawGraph (QPointF (0                , 0                 ), posBL);
+  transformation.transformScreenToRawGraph (QPointF (m_pixmap.width (), m_pixmap.height ()), posTR);
+  transformation.transformScreenToRawGraph (QPointF (m_pixmap.width (), 0                 ), posBR);
+
+  double radiusTL = qSqrt (posTL.x () * posTL.x () + posTL.y () * posTL.y ());
+  double radiusBL = qSqrt (posBL.x () * posBL.x () + posBL.y () * posBL.y ());
+  double radiusTR = qSqrt (posTR.x () * posTR.x () + posTR.y () * posTR.y ());
+  double radiusBR = qSqrt (posBR.x () * posBR.x () + posBR.y () * posBR.y ());
+
+  double radius = qMax (qMax (qMax (radiusTL, radiusBL), radiusTR), radiusBR);
+
+  modelGridDisplay.setStopY (radius);
 }
 
 QPixmap Document::pixmap () const

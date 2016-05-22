@@ -35,7 +35,8 @@ GridLineFactory::GridLineFactory(QGraphicsScene &scene,
   m_scene (scene),
   m_pointRadius (0.0),
   m_modelCoords (modelCoords),
-  m_transformation (transformation)
+  m_transformation (transformation),
+  m_isChecker (false)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
                               << " transformation=" << transformation;
@@ -43,18 +44,19 @@ GridLineFactory::GridLineFactory(QGraphicsScene &scene,
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
                                  int pointRadius,
-                                 const QList<Point> &points,
+                                 const QList<Point> &pointsToIsolate,
                                  const DocumentModelCoords &modelCoords,
                                  const Transformation &transformation) :
   m_scene (scene),
   m_pointRadius (pointRadius),
-  m_points (points),
+  m_pointsToIsolate (pointsToIsolate),
   m_modelCoords (modelCoords),
-  m_transformation (transformation)
+  m_transformation (transformation),
+  m_isChecker (true)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
                               << " pointRadius=" << pointRadius
-                              << " points=" << points.count()
+                              << " pointsToIsolate=" << pointsToIsolate.count()
                               << " transformation=" << transformation;
 }
 
@@ -64,7 +66,9 @@ void GridLineFactory::bindItemToScene(QGraphicsItem *item) const
 
   item->setOpacity (CHECKER_OPACITY);
   item->setZValue (Z_VALUE_IN_FRONT);
-  item->setToolTip (QObject::tr ("Axes checker. If this does not align with the axes, then the axes points should be checked"));
+  if (m_isChecker) {
+    item->setToolTip (QObject::tr ("Axes checker. If this does not align with the axes, then the axes points should be checked"));
+  }
 
   m_scene.addItem (item);
 }
@@ -360,8 +364,8 @@ QGraphicsItem *GridLineFactory::lineItem (const QPointF &posStartScreen,
 double GridLineFactory::minScreenDistanceFromPoints (const QPointF &posScreen)
 {
   double minDistance = 0;
-  for (int i = 0; i < m_points.count (); i++) {
-    const Point &pointCenter = m_points.at (i);
+  for (int i = 0; i < m_pointsToIsolate.count (); i++) {
+    const Point &pointCenter = m_pointsToIsolate.at (i);
 
     double dx = posScreen.x() - pointCenter.posScreen().x();
     double dy = posScreen.y() - pointCenter.posScreen().y();

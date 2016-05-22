@@ -21,6 +21,9 @@ class Transformation;
 /// Factory class for generating the points, composed of QGraphicsItem objects, along a GridLine
 ///
 /// For polar coordinates, the grid lines will appear as an annular segments.
+///
+/// For the Checker class, a set of Points can be specified which will be isolated by having grid lines stop at a
+/// specified distance (or radius) from each point
 class GridLineFactory
 {
 public:
@@ -29,10 +32,10 @@ public:
                   const DocumentModelCoords &modelCoords,
                   const Transformation &transformation);
 
-  /// Constructor for use by Checker, which has points that affect the layout of the grid
+  /// Constructor for use by Checker, which has points that are isolated
   GridLineFactory(QGraphicsScene &scene,
                   int pointRadius,
-                  const QList<Point> &points,
+                  const QList<Point> &pointsToIsolate,
                   const DocumentModelCoords &modelCoords,
                   const Transformation &transformation);
 
@@ -72,10 +75,10 @@ private:
 
   QGraphicsScene &m_scene;
   const int m_pointRadius;
-  const QList<Point> m_points;
+  const QList<Point> m_pointsToIsolate;
   const DocumentModelCoords m_modelCoords;
   const Transformation &m_transformation;
-
+  bool m_isChecker;
 };
 
 #endif // GRID_LINE_FACTORY_H

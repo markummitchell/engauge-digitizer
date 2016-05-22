@@ -48,22 +48,21 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TransformationStateContext::triggerStateTransition";
 
-  // Transition if we are not already at the requested state
-  if (transformationState != m_currentState) {
+  // Transition even if we are already at the requested state (transformationState == m_currentState) to
+  // allow self-transitions. Those allow clean refreshing of the axis checker
 
-    // End the current state if there is one
-    if (m_currentState != NUM_TRANSFORMATION_STATES) {
-      m_states[m_currentState]->end(cmdMediator,
-                                    transformation);
-    }
-
-    m_currentState = transformationState;
-
-    // Start the requested state
-    m_states[m_currentState]->begin(cmdMediator,
-                                    transformation,
-                                    selectedGraphCurve);
+  // End the current state if there is one
+  if (m_currentState != NUM_TRANSFORMATION_STATES) {
+    m_states[m_currentState]->end(cmdMediator,
+                                  transformation);
   }
+
+  m_currentState = transformationState;
+
+  // Start the requested state
+  m_states[m_currentState]->begin(cmdMediator,
+                                  transformation,
+                                  selectedGraphCurve);
 }
 
 void TransformationStateContext::updateAxesChecker (CmdMediator &cmdMediator,
