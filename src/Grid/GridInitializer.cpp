@@ -3,6 +3,8 @@
 #include "GridInitializer.h"
 #include "Logger.h"
 #include <math.h>
+#include <qmath.h>
+#include "Transformation.h"
 
 GridInitializer::GridInitializer ()
 {
@@ -170,10 +172,10 @@ double GridInitializer::computeStop (bool linearAxis,
   return stop;
 }
 
-DocumentModelGridDisplay GridInitializer::initialize (const QRectF &boundingRectGraph,
-                                                      const DocumentModelCoords &modelCoords) const
+DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QRectF &boundingRectGraph,
+                                                                        const DocumentModelCoords &modelCoords) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridInitializer::initalize";
+  LOG4CPP_INFO_S ((*mainCat)) << "GridInitializer::initializeWithNarrowCoverage";
 
   DocumentModelGridDisplay modelGridDisplay;
 
@@ -213,6 +215,74 @@ DocumentModelGridDisplay GridInitializer::initialize (const QRectF &boundingRect
   modelGridDisplay.setStable (true);
 
   return modelGridDisplay;
+}
+
+DocumentModelGridDisplay GridInitializer::initializeWithWidePolarCoverage (const QRectF &boundingRectGraph,
+                                                                           const DocumentModelCoords &modelCoords,
+                                                                           const Transformation &transformation,
+                                                                           const QSize &imageSize) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GridInitializer::initializeWithWidePolarCoverage";
+
+  DocumentModelGridDisplay modelGridDisplay = initializeWithNarrowCoverage (boundingRectGraph,
+                                                                            modelCoords);
+
+  if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {
+
+    overridePolarCoordinateSettings (modelCoords,
+                                     transformation,
+                                     modelGridDisplay,
+                                     imageSize);
+  }
+
+  return modelGridDisplay;
+}
+
+void GridInitializer::overridePolarCoordinateSettings (const DocumentModelCoords &modelCoords,
+                                                       const Transformation &transformation,
+                                                       DocumentModelGridDisplay &modelGridDisplay,
+                                                       const QSize &imageSize) const
+{
+  ENGAUGE_ASSERT (modelCoords.coordsType() == COORDS_TYPE_POLAR);
+
+  // We make sure the angular range is over the entire circle, which is probably useful
+  // unless the orgin is very close to a corner of the graph, in which case the large range does not hurt anything
+  double startX = 0.0;
+  double stopX = 360.0;
+  double stepX = 30.0;
+  int countX = (int) (0.5 + (stopX - startX) / stepX);
+  modelGridDisplay.setStartX (startX);
+  modelGridDisplay.setStepX (stepX);
+  modelGridDisplay.setStopX (stopX);
+  modelGridDisplay.setCountX (countX);
+
+  // We extend the range to cover the four corners of the image, since otherwise
+  // areas around at least some graph corners are not covered by the grid lines
+  QPointF posTL, posBL, posTR, posBR;
+  transformation.transformScreenToRawGraph (QPointF (0                 , imageSize.height ()), posTL);
+  transformation.transformScreenToRawGraph (QPointF (0                 , 0                  ), posBL);
+  transformation.transformScreenToRawGraph (QPointF (imageSize.width (), imageSize.height ()), posTR);
+  transformation.transformScreenToRawGraph (QPointF (imageSize.width (), 0                  ), posBR);
+
+  double radiusTL = qSqrt (posTL.x () * posTL.x () + posTL.y () * posTL.y ());
+  double radiusBL = qSqrt (posBL.x () * posBL.x () + posBL.y () * posBL.y ());
+  double radiusTR = qSqrt (posTR.x () * posTR.x () + posTR.y () * posTR.y ());
+  double radiusBR = qSqrt (posBR.x () * posBR.x () + posBR.y () * posBR.y ());
+
+  double radius = qMax (qMax (qMax (radiusTL, radiusBL), radiusTR), radiusBR);
+
+  double startY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
+                     0.0 :
+                     modelCoords.originRadius());
+  double stopY = radius;
+  double stepY = modelGridDisplay.stepY ();
+  int countY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
+                 (int) (0.5 + (stopY - startY) / stepY) :
+                 (int) (0.5 + (qLn (stopY) - qLn (startY)) / qLn (stepY)));
+
+  modelGridDisplay.setStartY (startY);
+  modelGridDisplay.setStopY (stopY);
+  modelGridDisplay.setCountY (countY);
 }
 
 double GridInitializer::roundOffToPower(double arg,

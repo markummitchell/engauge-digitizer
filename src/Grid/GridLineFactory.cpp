@@ -156,7 +156,11 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
 void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
                                                           GridLines &gridLines)
 {
-  if (m_transformation.transformIsDefined()) {
+  // At a minimum the transformation must be defined. Also, there is a brief interval between the definition of
+  // the transformation and the initialization of modelGridDisplay (at which point this method gets called again) and
+  // we do not want to create grid lines during that brief interval
+  if (m_transformation.transformIsDefined() &&
+      modelGridDisplay.stable()) {
 
     double startX = modelGridDisplay.startX ();
     double startY = modelGridDisplay.startY ();
@@ -173,14 +177,16 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
                       GRID_LINE_WIDTH,
                       GRID_LINE_STYLE));
 
-      for (double x = startX; x <= stopX; x += stepX) {
+      bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
+      for (double x = startX; x <= stopX; (isLinearX ? x += stepX : x *= stepX)) {
 
         GridLine *gridLine = createGridLine (x, startY, x, stopY);
         gridLine->setPen (pen);
         gridLines.add (gridLine);
       }
 
-      for (double y = startY; y <= stopY; y += stepY) {
+      bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
+      for (double y = startY; y <= stopY; (isLinearY ? y += stepY : y *= stepY)) {
 
         GridLine *gridLine = createGridLine (startX, y, stopX, y);
         gridLine->setPen (pen);

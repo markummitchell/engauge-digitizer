@@ -298,8 +298,6 @@ private:
   void loadPreVersion6 (QDataStream &str);
   void loadVersion6 (QFile *file);
   void loadVersions7AndUp (QFile *file);
-  void overridePolarCoordinateSettings (const Transformation &transformation,
-                                        DocumentModelGridDisplay &modelGridDisplay); // Adjust grid lines for polar coordinates
   int versionFromFile (QFile *file) const;
 
   // Metadata

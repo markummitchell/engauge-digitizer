@@ -34,6 +34,9 @@ public:
   /// Intercept resize events so we can rescale to the graphics items just fit into the resized window.
   virtual void resizeEvent(QResizeEvent *event);
 
+  /// Intercept wheel event and discard it so accidentally moving the wheel does not move drawn items out of view
+  virtual void wheelEvent (QWheelEvent *event);
+
 signals:
   /// Forward the mouse move events
   void signalMouseMove (QPointF pos);
@@ -42,6 +45,7 @@ private:
   ViewPreview();
 
   ViewAspectRatio m_viewAspectRatio;
+
 };
 
 #endif // VIEW_PREVIEW_H

@@ -136,7 +136,8 @@ void DlgSettingsDigitizeCurve::createPreview (QGridLayout *layout,
   m_viewPreview = new ViewPreview (m_scenePreview,
                                    ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
                                    this);
-  m_viewPreview->setWhatsThis (tr ("Preview window showing the currently selected cursor"));
+  m_viewPreview->setWhatsThis (tr ("Preview window showing the currently selected cursor.\n\n"
+                                   "Drag the cursor over this area to see the effects of the current settings on the cursor shape."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);

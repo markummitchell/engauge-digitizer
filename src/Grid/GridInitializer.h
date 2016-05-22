@@ -5,6 +5,9 @@
 #include <QRectF>
 
 class DocumentModelCoords;
+class QSize;
+
+class Transformation;
 
 /// This class initializes the count, start, step and stop parameters for one coordinate (either x/theta or y/range)
 class GridInitializer
@@ -37,9 +40,18 @@ class GridInitializer
                       double step,
                       int count) const;
 
-  /// Initialize given the boundaries of the graph coordinates 
-  DocumentModelGridDisplay initialize (const QRectF &boundingRectGraph,
-                                       const DocumentModelCoords &modelCoords) const;
+  /// Initialize given the boundaries of the graph coordinates. The output is useful for the Checker class
+  DocumentModelGridDisplay initializeWithNarrowCoverage (const QRectF &boundingRectGraph,
+                                                         const DocumentModelCoords &modelCoords) const;
+
+  /// Initialize given the boundaries of the graph coordinates, and then extra processing for polar coordinates:
+  /// -# radial range expanded to cover the center (to remove hole at center) to the image corners
+  ///    (to guarantee coverage at corners of graph)
+  /// -# angular range is expanded to cover the entire circle (so coverage is total for all directions)
+  DocumentModelGridDisplay initializeWithWidePolarCoverage (const QRectF &boundingRectGraph,
+                                                            const DocumentModelCoords &modelCoords,
+                                                            const Transformation &transformation,
+                                                            const QSize &imageSize) const;
 
   /// Compute power of 10 for input value, rounding down to nearest integer solution of value>=10**solution
   int valuePower (double value) const;
@@ -57,6 +69,10 @@ class GridInitializer
                   double &xDelta,
                   int &count) const;
 
+  void overridePolarCoordinateSettings (const DocumentModelCoords &modelCoords,
+                                        const Transformation &transformation,
+                                        DocumentModelGridDisplay &modelGridDisplay,
+                                        const QSize &imageSize) const; // Adjust grid lines for polar coordinates
   double roundOffToPower (double arg,
                           int roundOffPower) const;
 

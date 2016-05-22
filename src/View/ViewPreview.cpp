@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include "ViewPreview.h"
@@ -33,9 +34,29 @@ void ViewPreview::resizeEvent(QResizeEvent *event)
 
   } else {
 
-    // Make image fit the new window size. This is needed since QGraphicsView ignores layout stretching
-    fitInView (scene()->itemsBoundingRect ());
+    // Make image fit the new window size by using fitInView. This is needed since QGraphicsView ignores layout stretching.
+    // If there is an image then we use its extent, so DlgSettingsGridDisplay with polar coordinates (which can extend well
+    // outside of image) does not end up with tiny image with wasted space around it
+    bool foundImage = false;
+    for (int i = 0; i < scene()->items().count (); i++) {
+      const QGraphicsItem *item = scene()->items().at (i);
+      const QGraphicsPixmapItem *itemPixmap = dynamic_cast<const QGraphicsPixmapItem*> (item);
+      if (itemPixmap != 0) {
+        foundImage = true;
+        fitInView (itemPixmap->boundingRect());
+      }
+    }
+
+    if (!foundImage) {
+      // Use the extent of everything
+      fitInView (scene()->itemsBoundingRect ());
+    }
 
     QGraphicsView::resizeEvent (event);
   }
+}
+
+void ViewPreview::wheelEvent (QWheelEvent *event)
+{
+  event->accept ();
 }
