@@ -8,10 +8,8 @@
 #include "CmdSettingsGridDisplay.h"
 #include "DlgSettingsGridDisplay.h"
 #include "EngaugeAssert.h"
-#include "EnumsToQt.h"
 #include "GridInitializer.h"
 #include "GridLineFactory.h"
-#include "GridLineStyle.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCheckBox>
@@ -572,8 +570,6 @@ void DlgSettingsGridDisplay::updateDisplayedVariableY ()
 
 void DlgSettingsGridDisplay::updatePreview ()
 {
-  const double ZERO_POINT_RADIUS = 0.0; // Standard grid lines have no empty areas at their intersections
-
   m_gridLines.clear ();
 
   QString countX = m_editCountX->text();
@@ -585,9 +581,9 @@ void DlgSettingsGridDisplay::updatePreview ()
   QString stopX = m_editStopX->text();
   QString stopY = m_editStopY->text();
 
-  // Skip if either:
-  // 1) field is empty
-  // 2) there is an empty field to prevent infinite loop
+  // To prevent an infinite loop, skip if either:
+  // 1) a field is empty
+  // 2) value in a field is malformed
   int pos;
   if (!countX.isEmpty() &&
       !countY.isEmpty() &&
@@ -606,36 +602,11 @@ void DlgSettingsGridDisplay::updatePreview ()
       m_validatorStopX->validate(stopX, pos) == QValidator::Acceptable &&
       m_validatorStopY->validate(stopY, pos) == QValidator::Acceptable) {
 
-    QList<Point> emptyPoints;
-
     GridLineFactory factory (*m_scenePreview,
-                             ZERO_POINT_RADIUS,
-                             emptyPoints,
                              cmdMediator ().document ().modelCoords(),
                              mainWindow ().transformation());
 
-    double startX = m_modelGridDisplayAfter->startX ();
-    double startY = m_modelGridDisplayAfter->startY ();
-    double stepX  = m_modelGridDisplayAfter->stepX  ();
-    double stepY  = m_modelGridDisplayAfter->stepY  ();
-    double stopX  = m_modelGridDisplayAfter->stopX  ();
-    double stopY  = m_modelGridDisplayAfter->stopY  ();
-
-    QColor color (ColorPaletteToQColor ((ColorPalette) m_cmbColor->currentData().toInt()));
-    QPen pen (QPen (color,
-                    GRID_LINE_WIDTH,
-                    GRID_LINE_STYLE));
-
-    for (double x = startX; x <= stopX; x += stepX) {
-      GridLine *gridLine = factory.createGridLine (x, startY, x, stopY);
-      gridLine->setPen (pen);
-      m_gridLines.add (gridLine);
-    }
-
-    for (double y = startY; y <= stopY; y += stepY) {
-      GridLine *gridLine = factory.createGridLine (startX, y, stopX, y);
-      gridLine->setPen (pen);
-      m_gridLines.add (gridLine);
-    }
+    factory.createGridLinesForEvenlySpacedGrid (*m_modelGridDisplayAfter,
+                                                m_gridLines);
   }
 }

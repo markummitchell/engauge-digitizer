@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "Checker.h"
+#include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GridLineFactory.h"

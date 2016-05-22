@@ -11,6 +11,7 @@
 #include "CoordSystemIndex.h"
 #include "DigitizeStateAbstractBase.h"
 #include "DocumentAxesPointsRequired.h"
+#include "GridLines.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -392,6 +393,7 @@ private:
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateGridLines();
   void updateRecentFileList();
   void updateSettingsMainWindow();
   void updateTransformationAndItsDependencies();
@@ -575,6 +577,10 @@ private:
   FileCmdScript *m_fileCmdScript;
   QTimer *m_timerRegressionFileCmdScript;
   QString m_regressionFile;
+
+  // Grid lines
+  GridLines m_gridLines;
+
 };
 
 #endif // MAIN_WINDOW_H

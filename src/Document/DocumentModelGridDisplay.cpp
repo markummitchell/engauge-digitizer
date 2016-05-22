@@ -22,7 +22,7 @@ DocumentModelGridDisplay::DocumentModelGridDisplay() :
   m_disableX (GRID_COORD_DISABLE_COUNT),
   m_countX (2),
   m_startX (0.0),
-  m_stepX (0.0),
+  m_stepX (1.0),
   m_stopX (1.0),
   m_disableY (GRID_COORD_DISABLE_COUNT),
   m_countY (2),

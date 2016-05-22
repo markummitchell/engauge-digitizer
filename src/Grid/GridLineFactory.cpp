@@ -4,8 +4,14 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "DocumentModelCoords.h"
+#include "DocumentModelGridDisplay.h"
+#include "EngaugeAssert.h"
+#include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "GridLineFactory.h"
+#include "GridLines.h"
+#include "GridLineStyle.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include <qmath.h>
@@ -24,18 +30,31 @@ const double DEGREES_TO_RADIANS = PI / 180.0;
 const double RADIANS_TO_TICS = 5760 / TWO_PI;
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
+                                 const DocumentModelCoords &modelCoords,
+                                 const Transformation &transformation) :
+  m_scene (scene),
+  m_pointRadius (0.0),
+  m_modelCoords (modelCoords),
+  m_transformation (transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
+                              << " transformation=" << transformation;
+}
+
+GridLineFactory::GridLineFactory(QGraphicsScene &scene,
                                  int pointRadius,
                                  const QList<Point> &points,
-                                 const DocumentModelCoords &m_modelCoords,
+                                 const DocumentModelCoords &modelCoords,
                                  const Transformation &transformation) :
   m_scene (scene),
   m_pointRadius (pointRadius),
   m_points (points),
-  m_modelCoords (m_modelCoords),
+  m_modelCoords (modelCoords),
   m_transformation (transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
                               << " pointRadius=" << pointRadius
+                              << " points=" << points.count()
                               << " transformation=" << transformation;
 }
 
@@ -128,6 +147,43 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
   }
 
   return gridLine;
+}
+
+void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                                          GridLines &gridLines)
+{
+  if (m_transformation.transformIsDefined()) {
+
+    double startX = modelGridDisplay.startX ();
+    double startY = modelGridDisplay.startY ();
+    double stepX  = modelGridDisplay.stepX  ();
+    double stepY  = modelGridDisplay.stepY  ();
+    double stopX  = modelGridDisplay.stopX  ();
+    double stopY  = modelGridDisplay.stopY  ();
+
+    if (stepX != 0 &&
+        stepY != 0) {
+
+      QColor color (ColorPaletteToQColor (modelGridDisplay.paletteColor()));
+      QPen pen (QPen (color,
+                      GRID_LINE_WIDTH,
+                      GRID_LINE_STYLE));
+
+      for (double x = startX; x <= stopX; x += stepX) {
+
+        GridLine *gridLine = createGridLine (x, startY, x, stopY);
+        gridLine->setPen (pen);
+        gridLines.add (gridLine);
+      }
+
+      for (double y = startY; y <= stopY; y += stepY) {
+
+        GridLine *gridLine = createGridLine (startX, y, stopX, y);
+        gridLine->setPen (pen);
+        gridLines.add (gridLine);
+      }
+    }
+  }
 }
 
 void GridLineFactory::createTransformAlign (const Transformation &transformation,

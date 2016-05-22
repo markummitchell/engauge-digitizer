@@ -12,7 +12,10 @@
 #include <QList>
 
 class DocumentModelCoords;
+class DocumentModelGridDisplay;
+class GridLines;
 class QGraphicsScene;
+class QTransform;
 class Transformation;
 
 /// Factory class for generating the points, composed of QGraphicsItem objects, along a GridLine
@@ -21,8 +24,12 @@ class Transformation;
 class GridLineFactory
 {
 public:
-  /// Single constructor for DlgSettingsAxesGridLineFactory, which does not have an explicit transformation. The identity transformation is
-  /// assumed. The points array is used when constructed by the Checker
+  /// Simple constructor for general use (i.e. not by Checker)
+  GridLineFactory(QGraphicsScene &scene,
+                  const DocumentModelCoords &modelCoords,
+                  const Transformation &transformation);
+
+  /// Constructor for use by Checker, which has points that affect the layout of the grid
   GridLineFactory(QGraphicsScene &scene,
                   int pointRadius,
                   const QList<Point> &points,
@@ -35,6 +42,10 @@ public:
                             double yFrom,
                             double xTo,
                             double yTo);
+
+  /// Create a rectangular (cartesian) or annular (polar) grid of evenly spaced grid lines.
+  void createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                           GridLines &gridLines);
 
 private:
   GridLineFactory();
@@ -61,8 +72,8 @@ private:
 
   QGraphicsScene &m_scene;
   const int m_pointRadius;
-  const QList<Point> &m_points;
-  const DocumentModelCoords &m_modelCoords;
+  const QList<Point> m_points;
+  const DocumentModelCoords m_modelCoords;
   const Transformation &m_transformation;
 
 };

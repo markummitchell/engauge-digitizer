@@ -55,6 +55,7 @@
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
+#include "GridLineFactory.h"
 #include "HelpWindow.h"
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
@@ -1668,6 +1669,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
 
+    updateGridLines ();
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
   } else {
@@ -2737,6 +2739,7 @@ void MainWindow::slotFileClose()
     m_engaugeFile = "";
     setWindowTitle (engaugeWindowTitle ());
 
+    m_gridLines.clear();
     updateControls();
   }
 }
@@ -3246,6 +3249,8 @@ void MainWindow::slotUndoTextChanged (const QString &text)
 void MainWindow::slotViewGridLines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGridLines";
+
+  updateGridLines ();
 }
 
 void MainWindow::slotViewGroupBackground(QAction *action)
@@ -3946,6 +3951,23 @@ void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()
                                                     m_transformation);
 }
 
+void MainWindow::updateGridLines ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGridLines";
+
+  // Remove old grid lines
+  m_gridLines.clear ();
+
+  // Create new grid lines
+  GridLineFactory factory (*m_scene,
+                           m_cmdMediator->document().modelCoords(),
+                           m_transformation);
+  factory.createGridLinesForEvenlySpacedGrid (m_cmdMediator->document().modelGridDisplay(),
+                                              m_gridLines);
+
+  m_gridLines.setVisible (m_actionViewGridLines->isChecked());
+}
+
 void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
@@ -4115,11 +4137,15 @@ void MainWindow::updateTransformationAndItsDependencies()
                            *m_cmdMediator,
                            m_modelMainWindow);
 
-  // Grid removal is affected by new transformation
+  // Grid removal is affected by new transformation above
   m_backgroundStateContext->setCurveSelected (m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
+
+  // Grid display is also affected by new transformation above, if there was a transition into defined state
+  // in which case that transition triggered the initialization of the grid display parameters
+  updateGridLines();
 }
 
 void MainWindow::updateViewedCurves ()
