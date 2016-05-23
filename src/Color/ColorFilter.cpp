@@ -6,6 +6,11 @@
 
 #include "ColorConstants.h"
 #include "ColorFilter.h"
+#include "ColorFilterStrategyForeground.h"
+#include "ColorFilterStrategyHue.h"
+#include "ColorFilterStrategyIntensity.h"
+#include "ColorFilterStrategySaturation.h"
+#include "ColorFilterStrategyValue.h"
 #include "EngaugeAssert.h"
 #include "mmsubs.h"
 #include <QDebug>
@@ -14,6 +19,7 @@
 
 ColorFilter::ColorFilter()
 {
+  createStrategies ();
 }
 
 bool ColorFilter::colorCompare (QRgb rgb1,
@@ -21,6 +27,15 @@ bool ColorFilter::colorCompare (QRgb rgb1,
 {
   const long MASK = 0xf0f0f0f0;
   return (rgb1 & MASK) == (rgb2 & MASK);
+}
+
+void ColorFilter::createStrategies ()
+{
+  m_strategies [COLOR_FILTER_MODE_FOREGROUND] = new ColorFilterStrategyForeground ();
+  m_strategies [COLOR_FILTER_MODE_HUE       ] = new ColorFilterStrategyHue        ();
+  m_strategies [COLOR_FILTER_MODE_INTENSITY ] = new ColorFilterStrategyIntensity  ();
+  m_strategies [COLOR_FILTER_MODE_SATURATION] = new ColorFilterStrategySaturation ();
+  m_strategies [COLOR_FILTER_MODE_VALUE     ] = new ColorFilterStrategyValue      ();
 }
 
 void ColorFilter::filterImage (const QImage &imageOriginal,
@@ -157,90 +172,30 @@ double ColorFilter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
                                                 const QColor &pixel,
                                                 QRgb rgbBackground) const
 {
-  double s = 0.0;
+  if (m_strategies.contains (colorFilterMode)) {
 
-  switch (colorFilterMode) {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      {
-        double distance = qSqrt (pow ((double) pixel.red()   - qRed   (rgbBackground), 2) +
-                                 pow ((double) pixel.green() - qGreen (rgbBackground), 2) +
-                                 pow ((double) pixel.blue()  - qBlue  (rgbBackground), 2));
-        s = distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
-      }
-      break;
+    return m_strategies [colorFilterMode]->pixelToZeroToOne (pixel,
+                                                             rgbBackground);
 
-    case COLOR_FILTER_MODE_HUE:
-      {
-        s = pixel.hueF();
-        if (s < 0) {
-          // Color is achromatic (r=g=b) so it has no hue
-        }
-      }
-      break;
+  } else {
 
-    case COLOR_FILTER_MODE_INTENSITY:
-      {
-        double distance = qSqrt (pow ((double) pixel.red(), 2) +
-                                 pow ((double) pixel.green(), 2) +
-                                 pow ((double) pixel.blue(), 2));
-        s = distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
-      }
-      break;
+    ENGAUGE_ASSERT (false);
+    return 0.0;
 
-    case COLOR_FILTER_MODE_SATURATION:
-      s = pixel.saturationF();
-      break;
-
-    case COLOR_FILTER_MODE_VALUE:
-      s = pixel.valueF();
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
   }
-
-  return s;
 }
 
 int ColorFilter::zeroToOneToValue (ColorFilterMode colorFilterMode,
                                    double s) const
 {
-  int value = 0;
+  if (m_strategies.contains (colorFilterMode)) {
 
-  switch (colorFilterMode) {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      {
-        value = FOREGROUND_MIN + s * (FOREGROUND_MAX - FOREGROUND_MIN);
-      }
-      break;
+    return m_strategies [colorFilterMode]->zeroToOneToValue (s);
 
-    case COLOR_FILTER_MODE_HUE:
-      {
-        value = HUE_MIN + s * (HUE_MAX - HUE_MIN);
-      }
-      break;
+  } else {
 
-    case COLOR_FILTER_MODE_INTENSITY:
-      {
-        value = INTENSITY_MIN + s * (INTENSITY_MAX - INTENSITY_MIN);
-      }
-      break;
+    ENGAUGE_ASSERT (false);
+    return 0;
 
-    case COLOR_FILTER_MODE_SATURATION:
-      {
-        value = SATURATION_MIN + s * (SATURATION_MAX - SATURATION_MIN);
-      }
-      break;
-
-    case COLOR_FILTER_MODE_VALUE:
-      {
-        value = VALUE_MIN + s * (VALUE_MAX - VALUE_MIN);
-      }
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
   }
-
-  return value;
 }

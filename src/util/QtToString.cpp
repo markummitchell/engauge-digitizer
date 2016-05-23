@@ -9,7 +9,9 @@
 #include <QTransform>
 #include "QtToString.h"
 
-static QHash<int, QString> rolesAsStringsLookupTable; // For logging
+static QHash<Qt::CursorShape, QString> cursorShapesLookupTable;
+static QHash<int, QString> rolesAsStringsLookupTable;
+static QHash<QXmlStreamReader::TokenType, QString> xmlTokenTypeLookupTable;
 
 QString QPointFToString (const QPointF &pos)
 {
@@ -22,27 +24,24 @@ QString QPointFToString (const QPointF &pos)
 
 QString QtCursorToString (Qt::CursorShape cursorShape)
 {
-  switch (cursorShape) {
-    case Qt::ArrowCursor:
-      return "Qt::ArrowCursor";
-      break;
+  if (cursorShapesLookupTable.count () == 0) {
 
-    case Qt::BitmapCursor:
-      return "Qt::BitmapCursor";
-      break;
-
-    case Qt::CrossCursor:
-      return "Qt::CrossCursor";
-      break;
-
-    case Qt::WaitCursor:
-      return "Qt::WaitCursor";
-      break;
-
-    default:
-      return "Qt::<unknown>";
-      break;
+    // Initialize
+    cursorShapesLookupTable [Qt::ArrowCursor] = "Qt::ArrowCursor";
+    cursorShapesLookupTable [Qt::BitmapCursor] = "Qt::BitmapCursor";
+    cursorShapesLookupTable [Qt::CrossCursor] = "Qt::CrossCursor";
+    cursorShapesLookupTable [Qt::WaitCursor] = "Qt::WaitCursor";
   }
+
+  if (cursorShapesLookupTable.contains (cursorShape)) {
+
+    return cursorShapesLookupTable [cursorShape];
+
+  } else {
+
+    return "Qt::<unknown>";
+
+  } 
 }
 
 QString QTransformToString (const QTransform &transform)
@@ -70,39 +69,38 @@ QString QTransformToString (const QTransform &transform)
 
 QString QXmlStreamReaderTokenTypeToString (QXmlStreamReader::TokenType tokenType)
 {
-  switch (tokenType) {
-    case QXmlStreamReader::Characters:
-      return "Characters";
-    case QXmlStreamReader::Comment:
-      return "Comment";
-    case QXmlStreamReader::DTD:
-      return "DTD";
-    case QXmlStreamReader::EndDocument:
-      return "EndDocument";
-    case QXmlStreamReader::EndElement:
-      return "EndElement";
-    case QXmlStreamReader::EntityReference:
-      return "EntityReference";
-    case QXmlStreamReader::Invalid:
-      return "Invalid";
-    case QXmlStreamReader::NoToken:
-      return "NoToken";
-    case QXmlStreamReader::ProcessingInstruction:
-      return "ProcessingInstruction";
-    case QXmlStreamReader::StartDocument:
-      return "StartDocument";
-    case QXmlStreamReader::StartElement:
-      return "StartElement";
+  if (xmlTokenTypeLookupTable.count () == 0) {
+
+    // Initialize
+    xmlTokenTypeLookupTable [QXmlStreamReader::Characters] = "Characters";
+    xmlTokenTypeLookupTable [QXmlStreamReader::Comment] = "Comment";
+    xmlTokenTypeLookupTable [QXmlStreamReader::DTD] = "DTD";
+    xmlTokenTypeLookupTable [QXmlStreamReader::EndDocument] = "EndDocument";
+    xmlTokenTypeLookupTable [QXmlStreamReader::EndElement] = "EndElement";
+    xmlTokenTypeLookupTable [QXmlStreamReader::EntityReference] = "EntityReference";
+    xmlTokenTypeLookupTable [QXmlStreamReader::Invalid] = "Invalid";
+    xmlTokenTypeLookupTable [QXmlStreamReader::NoToken] = "NoToken";
+    xmlTokenTypeLookupTable [QXmlStreamReader::ProcessingInstruction] = "ProcessingInstruction";
+    xmlTokenTypeLookupTable [QXmlStreamReader::StartDocument] = "StartDocument";
+    xmlTokenTypeLookupTable [QXmlStreamReader::StartElement] = "StartElement";
   }
 
-  return "<Unknown>";
+  if (xmlTokenTypeLookupTable.contains (tokenType)) {
+
+    return xmlTokenTypeLookupTable [tokenType];
+
+  } else {
+
+    return "<Unknown>";
+
+  } 
 }
 
 QString roleAsString (int role)
 {
   if (rolesAsStringsLookupTable.count () == 0) {
 
-    // List from qnamespace.h
+    // Initialize with list from qnamespace.h
     rolesAsStringsLookupTable [Qt::AccessibleDescriptionRole] = "AccessibleDescriptionRole";
     rolesAsStringsLookupTable [Qt::AccessibleTextRole] = "AccessibleTextRole";
     rolesAsStringsLookupTable [Qt::BackgroundRole] = "BackgroundRole";

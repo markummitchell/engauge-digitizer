@@ -6,61 +6,56 @@
 
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include <QHash>
+#include <QString>
 
-QColor ColorPaletteToQColor (ColorPalette color) {
-  switch (color) {
-    case COLOR_PALETTE_BLACK:
-      return QColor (Qt::black);
-      break;
+static QHash<ColorPalette, QColor> colorPaletteLookupTable;
+static QHash<QSysInfo::Endian, QString> endianLookupTable;
 
-    case COLOR_PALETTE_BLUE:
-      return QColor (Qt::blue);
-      break;
+QColor ColorPaletteToQColor (ColorPalette color)
+{
+  if (colorPaletteLookupTable.count() == 0) {
 
-    case COLOR_PALETTE_CYAN:
-      return QColor (Qt::cyan);
-      break;
-
-    case COLOR_PALETTE_GOLD:
-      return QColor (255, 215, 0);
-      break;
-
-    case COLOR_PALETTE_GREEN:
-      return QColor (Qt::green);
-      break;
-
-    case COLOR_PALETTE_MAGENTA:
-      return QColor (255, 0, 255);
-      break;
-
-    case COLOR_PALETTE_RED:
-      return QColor (Qt::red);
-      break;
-
-    case COLOR_PALETTE_YELLOW:
-      return QColor (255, 255, 0);
-      break;
-
-    case COLOR_PALETTE_TRANSPARENT:
-      return QColor (Qt::transparent);
-      break;
-
-    default:
-      break;
+    // Initialize
+    colorPaletteLookupTable [COLOR_PALETTE_BLACK] = QColor (Qt::black);
+    colorPaletteLookupTable [COLOR_PALETTE_BLUE] = QColor (Qt::blue);
+    colorPaletteLookupTable [COLOR_PALETTE_CYAN] = QColor (Qt::cyan);
+    colorPaletteLookupTable [COLOR_PALETTE_GOLD] = QColor (255, 215, 0);
+    colorPaletteLookupTable [COLOR_PALETTE_GREEN] = QColor (Qt::green);
+    colorPaletteLookupTable [COLOR_PALETTE_MAGENTA] = QColor (255, 0, 255);
+    colorPaletteLookupTable [COLOR_PALETTE_RED] = QColor (Qt::red);
+    colorPaletteLookupTable [COLOR_PALETTE_YELLOW] = QColor (255, 255, 0);
+    colorPaletteLookupTable [COLOR_PALETTE_TRANSPARENT] = QColor (Qt::transparent);
   }
 
-  ENGAUGE_ASSERT (false);
-  return QColor (Qt::black);
+  if (colorPaletteLookupTable.contains (color)) {
+
+    return colorPaletteLookupTable [color];
+
+  } else {
+
+    ENGAUGE_ASSERT (false);
+    return colorPaletteLookupTable [COLOR_PALETTE_BLACK];
+
+  }
 }
 
 QString EndianToString (QSysInfo::Endian endian)
 {
-  switch (endian) {
-    case QSysInfo::BigEndian:
-      return "BigEndian";
-    case QSysInfo::LittleEndian:
-      return "LittleEndian";
+  if (endianLookupTable.count() == 0) {
+
+    // Initialize
+    endianLookupTable [QSysInfo::BigEndian] = "BigEndian";
+    endianLookupTable [QSysInfo::LittleEndian] = "LittleEndian";
   }
 
-  return "<Unknown>";
+  if (endianLookupTable.contains (endian)) {
+
+    return endianLookupTable [endian];
+
+  } else {
+
+    return "<Unknown>";
+
+  }
 }

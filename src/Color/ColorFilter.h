@@ -10,8 +10,10 @@
 #include "ColorFilterEntry.h"
 #include "ColorFilterMode.h"
 #include <QList>
+#include <QMap>
 #include <QRgb>
 
+class ColorFilterStrategyAbstractBase;
 class QImage;
 
 /// Class for filtering image to remove unimportant information.
@@ -62,10 +64,16 @@ public:
 
 private:
 
+  void createStrategies ();
+
   typedef QList<ColorFilterEntry> ColorList;
 
   void mergePixelIntoColorCounts (QRgb pixel,
                                   ColorList &colorCounts) const;
+
+  // Strategies for mode-specific computations
+  QMap<ColorFilterMode, ColorFilterStrategyAbstractBase*> m_strategies;
+
 };
 
 #endif // COLOR_FILTER_H
