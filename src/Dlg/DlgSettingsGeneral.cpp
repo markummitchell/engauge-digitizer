@@ -44,7 +44,7 @@ void DlgSettingsGeneral::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::createControls";
 
-  QLabel *labelCursorSize = new QLabel (tr ("Cursor size (pixels):"));
+  QLabel *labelCursorSize = new QLabel (tr ("Effective cursor size (pixels):"));
   layout->addWidget (labelCursorSize, row, 1);
 
   m_spinCursorSize = new QSpinBox;

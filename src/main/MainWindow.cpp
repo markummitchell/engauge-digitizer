@@ -165,6 +165,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStateContextTransformation ();
   createSettingsDialogs ();
   createCommandStackShadow ();
+  createZoomMap ();
   updateControls ();
 
   settingsRead ();
@@ -197,57 +198,15 @@ MainWindow::~MainWindow()
 void MainWindow::applyZoomFactorAfterLoad()
 {
   ZoomFactor zoomFactor;
+  ZoomFactorInitial zoomFactorInitial = m_modelMainWindow.zoomFactorInitial();
 
-  switch (m_modelMainWindow.zoomFactorInitial())
-  {
-    case ZOOM_INITIAL_16_TO_1:
-      zoomFactor = ZOOM_16_TO_1;
-      break;
-
-    case ZOOM_INITIAL_8_TO_1:
-      zoomFactor = ZOOM_8_TO_1;
-      break;
-
-    case ZOOM_INITIAL_4_TO_1:
-      zoomFactor = ZOOM_4_TO_1;
-      break;
-
-    case ZOOM_INITIAL_2_TO_1:
-      zoomFactor = ZOOM_2_TO_1;
-      break;
-
-    case ZOOM_INITIAL_1_TO_1:
-      zoomFactor = ZOOM_1_TO_1;
-      break;
-
-    case ZOOM_INITIAL_1_TO_2:
-      zoomFactor = ZOOM_1_TO_2;
-      break;
-
-    case ZOOM_INITIAL_1_TO_4:
-      zoomFactor = ZOOM_1_TO_4;
-      break;
-
-    case ZOOM_INITIAL_1_TO_8:
-      zoomFactor = ZOOM_1_TO_8;
-      break;
-
-    case ZOOM_INITIAL_1_TO_16:
-      zoomFactor = ZOOM_1_TO_16;
-      break;
-
-    case ZOOM_INITIAL_FILL:
-      zoomFactor = ZOOM_FILL;
-      break;
-
-    case ZOOM_INITIAL_PREVIOUS:
-      zoomFactor = currentZoomFactor();
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
-      zoomFactor = currentZoomFactor();
-      break;
+  if (m_zoomMap.contains (zoomFactorInitial)) {
+    zoomFactor = m_zoomMap [zoomFactorInitial];
+  } else if (zoomFactorInitial == ZOOM_INITIAL_PREVIOUS) {
+    zoomFactor = currentZoomFactor ();
+  } else {
+    ENGAUGE_ASSERT (false);
+    zoomFactor = currentZoomFactor();
   }
 
   slotViewZoom (zoomFactor);
@@ -1247,6 +1206,22 @@ void MainWindow::createTutorial ()
   m_tutorialDlg->setModal (true);
   m_tutorialDlg->setMinimumSize (500, 400);
   m_tutorialDlg->hide();
+}
+
+void MainWindow::createZoomMap ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createZoomMap";
+
+  m_zoomMap [ZOOM_INITIAL_16_TO_1] = ZOOM_16_TO_1;
+  m_zoomMap [ZOOM_INITIAL_8_TO_1] = ZOOM_8_TO_1;
+  m_zoomMap [ZOOM_INITIAL_4_TO_1] = ZOOM_4_TO_1;
+  m_zoomMap [ZOOM_INITIAL_2_TO_1] = ZOOM_2_TO_1;
+  m_zoomMap [ZOOM_INITIAL_1_TO_1] = ZOOM_1_TO_1;
+  m_zoomMap [ZOOM_INITIAL_1_TO_2] = ZOOM_1_TO_2;
+  m_zoomMap [ZOOM_INITIAL_1_TO_4] = ZOOM_1_TO_4;
+  m_zoomMap [ZOOM_INITIAL_1_TO_8] = ZOOM_1_TO_8;
+  m_zoomMap [ZOOM_INITIAL_1_TO_16] = ZOOM_1_TO_16;
+  m_zoomMap [ZOOM_INITIAL_FILL] = ZOOM_FILL;
 }
 
 ZoomFactor MainWindow::currentZoomFactor () const

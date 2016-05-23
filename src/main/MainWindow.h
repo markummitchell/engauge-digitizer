@@ -15,10 +15,12 @@
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
+#include <QMap>
 #include <QUrl>
 #include "Transformation.h"
 #include "ZoomControl.h"
 #include "ZoomFactor.h"
+#include "ZoomFactorInitial.h"
 
 class BackgroundStateContext;
 class ChecklistGuide;
@@ -346,6 +348,7 @@ private:
   void createStatusBar();
   void createToolBars();
   void createTutorial();
+  void createZoomMap ();
   ZoomFactor currentZoomFactor () const;
   void exportAllCoordinateSystems();
   QString exportFilenameFromInputFilename (const QString &fileName) const;
@@ -581,6 +584,8 @@ private:
   // Grid lines
   GridLines m_gridLines;
 
+  // Map between zoom enumerations. This eliminates the need for a switch statement
+  QMap<ZoomFactorInitial, ZoomFactor> m_zoomMap;
 };
 
 #endif // MAIN_WINDOW_H

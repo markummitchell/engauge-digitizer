@@ -99,6 +99,12 @@ HEADERS  += \
     src/Color/ColorFilterHistogram.h \
     src/Color/ColorFilterMode.h \
     src/Color/ColorFilterSettings.h \
+    src/Color/ColorFilterSettingsStrategyAbstractBase.h \
+    src/Color/ColorFilterSettingsStrategyForeground.h \
+    src/Color/ColorFilterSettingsStrategyHue.h \
+    src/Color/ColorFilterSettingsStrategyIntensity.h \
+    src/Color/ColorFilterSettingsStrategySaturation.h \
+    src/Color/ColorFilterSettingsStrategyValue.h \
     src/Color/ColorPalette.h \
     src/Coord/CoordScale.h \
     src/Coord/CoordsType.h \
@@ -370,6 +376,12 @@ SOURCES += \
     src/Color/ColorFilterHistogram.cpp \
     src/Color/ColorFilterMode.cpp \
     src/Color/ColorFilterSettings.cpp \
+    src/Color/ColorFilterSettingsStrategyAbstractBase.cpp \
+    src/Color/ColorFilterSettingsStrategyForeground.cpp \
+    src/Color/ColorFilterSettingsStrategyHue.cpp \
+    src/Color/ColorFilterSettingsStrategyIntensity.cpp \
+    src/Color/ColorFilterSettingsStrategySaturation.cpp \
+    src/Color/ColorFilterSettingsStrategyValue.cpp \
     src/Color/ColorPalette.cpp \
     src/Coord/CoordScale.cpp \
     src/Coord/CoordsType.cpp \

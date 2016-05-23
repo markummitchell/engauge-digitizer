@@ -7,7 +7,9 @@
 #ifndef COLOR_FILTER_SETTINGS_H
 #define COLOR_FILTER_SETTINGS_H
 
+#include "ColorFilterSettingsStrategyAbstractBase.h"
 #include "ColorFilterMode.h"
+#include <QMap>
 
 class QTextStream;
 class QXmlStreamReader;
@@ -138,6 +140,8 @@ public:
 
 private:
 
+  void createStrategies ();
+
   ColorFilterMode m_colorFilterMode;
   int m_intensityLow;
   int m_intensityHigh;
@@ -149,6 +153,9 @@ private:
   int m_saturationHigh;
   int m_valueLow;
   int m_valueHigh;
+
+  // Strategies for mode-specific computations
+  QMap<ColorFilterMode, ColorFilterSettingsStrategyAbstractBase*> m_strategies;
 };
 
 #endif // COLOR_FILTER_SETTINGS_H

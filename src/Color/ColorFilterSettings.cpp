@@ -7,6 +7,12 @@
 #include "CmdMediator.h"
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
+#include "ColorFilterSettingsStrategyAbstractBase.h"
+#include "ColorFilterSettingsStrategyForeground.h"
+#include "ColorFilterSettingsStrategyHue.h"
+#include "ColorFilterSettingsStrategyIntensity.h"
+#include "ColorFilterSettingsStrategySaturation.h"
+#include "ColorFilterSettingsStrategyValue.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "GridCoordDisable.h"
@@ -28,6 +34,7 @@ ColorFilterSettings::ColorFilterSettings() :
   m_valueLow (VALUE_LOW_DEFAULT),
   m_valueHigh (VALUE_HIGH_DEFAULT)
 {
+  createStrategies ();
 }
 
 ColorFilterSettings::ColorFilterSettings(ColorFilterMode colorFilterMode,
@@ -53,6 +60,7 @@ ColorFilterSettings::ColorFilterSettings(ColorFilterMode colorFilterMode,
   m_valueLow (valueLow),
   m_valueHigh (valueHigh)
 {
+  createStrategies ();
 }
 
 ColorFilterSettings::ColorFilterSettings(const ColorFilterSettings &other) :
@@ -68,11 +76,13 @@ ColorFilterSettings::ColorFilterSettings(const ColorFilterSettings &other) :
   m_valueLow (other.valueLow()),
   m_valueHigh (other.valueHigh())
 {
+  createStrategies ();
 }
 
 ColorFilterSettings::ColorFilterSettings(QXmlStreamReader &reader)
 {
   loadXml(reader);
+  createStrategies ();
 }
 
 ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &other)
@@ -89,12 +99,23 @@ ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &o
   m_valueLow = other.valueLow();
   m_valueHigh = other.valueHigh();
 
+  createStrategies ();
+
   return *this;
 }
 
 ColorFilterMode ColorFilterSettings::colorFilterMode() const
 {
   return m_colorFilterMode;
+}
+
+void ColorFilterSettings::createStrategies ()
+{
+  m_strategies [COLOR_FILTER_MODE_FOREGROUND] = new ColorFilterSettingsStrategyForeground ();
+  m_strategies [COLOR_FILTER_MODE_HUE       ] = new ColorFilterSettingsStrategyHue        ();
+  m_strategies [COLOR_FILTER_MODE_INTENSITY ] = new ColorFilterSettingsStrategyIntensity  ();
+  m_strategies [COLOR_FILTER_MODE_SATURATION] = new ColorFilterSettingsStrategySaturation ();
+  m_strategies [COLOR_FILTER_MODE_VALUE     ] = new ColorFilterSettingsStrategyValue      ();
 }
 
 ColorFilterSettings ColorFilterSettings::defaultFilter ()
@@ -114,32 +135,11 @@ int ColorFilterSettings::foregroundLow () const
 
 double ColorFilterSettings::high () const
 {
-  switch (m_colorFilterMode)
-  {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      return (double) (m_foregroundHigh - FOREGROUND_MIN) /
-          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
-
-    case COLOR_FILTER_MODE_HUE:
-      return (double) (m_hueHigh - HUE_MIN) /
-          ((double) HUE_MAX - HUE_MIN);
-
-    case COLOR_FILTER_MODE_INTENSITY:
-      return (double) (m_intensityHigh - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN);
-
-    case COLOR_FILTER_MODE_SATURATION:
-      return (double) (m_saturationHigh - SATURATION_MIN) /
-          (double) (SATURATION_MAX - SATURATION_MIN);
-
-    case COLOR_FILTER_MODE_VALUE:
-      return (double) (m_valueHigh - VALUE_MIN) /
-          (double) (VALUE_MAX - VALUE_MIN);
-
-    default:
-      ENGAUGE_ASSERT (false);
-      return (double) (m_intensityHigh - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN); // Default when asserts are disabled
+  if (m_strategies.contains (m_colorFilterMode)) {
+    return m_strategies [m_colorFilterMode]->high (*this);
+  } else {
+    ENGAUGE_ASSERT (false);
+    return m_strategies [COLOR_FILTER_MODE_INTENSITY]->high (*this);
   }
 }
 
@@ -214,32 +214,11 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
 
 double ColorFilterSettings::low () const
 {
-  switch (m_colorFilterMode)
-  {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      return (double) (m_foregroundLow - FOREGROUND_MIN) /
-          (double) (FOREGROUND_MAX - FOREGROUND_MIN);
-
-    case COLOR_FILTER_MODE_HUE:
-      return (double) (m_hueLow - HUE_MIN) /
-          ((double) HUE_MAX - HUE_MIN);
-
-    case COLOR_FILTER_MODE_INTENSITY:
-      return (double) (m_intensityLow - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN);
-
-    case COLOR_FILTER_MODE_SATURATION:
-      return (double) (m_saturationLow - SATURATION_MIN) /
-          (double) (SATURATION_MAX - SATURATION_MIN);
-
-    case COLOR_FILTER_MODE_VALUE:
-      return (double) (m_valueLow - VALUE_MIN) /
-          (double) (VALUE_MAX - VALUE_MIN);
-
-    default:
-      ENGAUGE_ASSERT (false);
-      return (double) (m_intensityLow - INTENSITY_MIN) /
-          (double) (INTENSITY_MAX - INTENSITY_MIN); // Default when asserts are disabled
+  if (m_strategies.contains (m_colorFilterMode)) {
+    return m_strategies [m_colorFilterMode]->low (*this);
+  } else {
+    ENGAUGE_ASSERT (false);
+    return m_strategies [COLOR_FILTER_MODE_INTENSITY]->low (*this);
   }
 }
 
@@ -250,34 +229,10 @@ void ColorFilterSettings::printStream (QString indentation,
 
   indentation += INDENTATION_DELTA;
 
-  switch (m_colorFilterMode) {
-    case COLOR_FILTER_MODE_INTENSITY:
-      str << indentation << "intensityLow=" << m_intensityLow << "\n";
-      str << indentation << "intensityHigh=" << m_intensityHigh << "\n";
-      break;
-
-    case COLOR_FILTER_MODE_FOREGROUND:
-      str << indentation << "foregroundLow=" << m_foregroundLow << "\n";
-      str << indentation << "foregroundHigh=" << m_foregroundHigh << "\n";
-      break;
-
-    case COLOR_FILTER_MODE_HUE:
-      str << indentation << "hueLow=" << m_hueLow << "\n";
-      str << indentation << "hueHigh=" << m_hueHigh << "\n";
-      break;
-
-    case COLOR_FILTER_MODE_SATURATION:
-      str << indentation << "saturationLow" << m_saturationLow << "\n";
-      str << indentation << "saturationHigh" << m_saturationHigh << "\n";
-      break;
-
-    case COLOR_FILTER_MODE_VALUE:
-      str << indentation << "valueLow=" << m_valueLow << "\n";
-      str << indentation << "valueHigh=" << m_valueHigh << "\n";
-      break;
-
-    default:
-      break;
+  if (m_strategies.contains (m_colorFilterMode)) {
+    return m_strategies [m_colorFilterMode]->printStream (*this,
+                                                          indentation,
+                                                          str);
   }
 }
 
@@ -332,29 +287,11 @@ void ColorFilterSettings::setForegroundLow (int foregroundLow)
 
 void ColorFilterSettings::setHigh (double s0To1)
 {
-  switch (m_colorFilterMode) {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_HUE:
-      setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_INTENSITY:
-      setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_SATURATION:
-      setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_VALUE:
-      setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
+  if (m_strategies.contains (m_colorFilterMode)) {
+    return m_strategies [m_colorFilterMode]->setHigh (*this,
+                                                      s0To1);
+  } else {
+    ENGAUGE_ASSERT (false);
   }
 }
 
@@ -384,29 +321,11 @@ void ColorFilterSettings::setIntensityLow (int intensityLow)
 
 void ColorFilterSettings::setLow (double s0To1)
 {
-  switch (m_colorFilterMode) {
-    case COLOR_FILTER_MODE_FOREGROUND:
-      setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_HUE:
-      setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_INTENSITY:
-      setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_SATURATION:
-      setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
-      break;
-
-    case COLOR_FILTER_MODE_VALUE:
-      setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
+  if (m_strategies.contains (m_colorFilterMode)) {
+    return m_strategies [m_colorFilterMode]->setLow (*this,
+                                                     s0To1);
+  } else {
+    ENGAUGE_ASSERT (false);
   }
 }
 
