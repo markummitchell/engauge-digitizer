@@ -74,9 +74,15 @@ public:
   /// Serialize to xml
   void saveXml(QXmlStreamWriter &writer) const;
 
+  /// Currently selected curve name. This is used to set the selected curve combobox in MainWindow
+  QString selectedCurveName () const;
+
   /// Set the number of axes points required. This is called during the Document creation process, after imported images have
   /// been previewed or loaded files have had at least some xml parsing
   void setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired);
+
+  /// Save curve name that is selected for the current coordinate system, for the next time the coordinate system reappears
+  void setSelectedCurveName (const QString &selectedCurveName);
 
   /// Wrapper for Document::successfulRead
   bool successfulRead () const;

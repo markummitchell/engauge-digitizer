@@ -27,21 +27,23 @@ class BackgroundStateCurve : public BackgroundStateAbstractBase
   virtual void setPixmap (const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &modelColorFilter,
-                          const QPixmap &pixmapOriginal);
+                          const QPixmap &pixmapOriginal,
+                          const QString &curveSelected);
   virtual QString state () const;
   virtual void updateColorFilter (const Transformation &transformation,
                                   const DocumentModelGridRemoval &modelGridRemoval,
-                                  const DocumentModelColorFilter &colorFilter);
+                                  const DocumentModelColorFilter &colorFilter,
+                                  const QString &curveSelected);
 
  private:
   BackgroundStateCurve();
 
   void processImageFromSavedInputs(const Transformation &transformation,
                                    const DocumentModelGridRemoval &modelGridRemoval,
-                                   const DocumentModelColorFilter &modelColorFilter);
+                                   const DocumentModelColorFilter &modelColorFilter,
+                                   const QString &curveSelected);
 
   // Data saved for use by processImageFromSavedInputs
-  QString m_curveSelected;
   QPixmap m_pixmapOriginal;
 };
 

@@ -52,7 +52,8 @@ void BackgroundStateNone::setCurveSelected (const Transformation & /* transforma
 void BackgroundStateNone::setPixmap (const Transformation & /* transformation */,
                                      const DocumentModelGridRemoval & /* modelGridRemoval */,
                                      const DocumentModelColorFilter & /* modelColorFilter */,
-                                     const QPixmap &pixmapOriginal)
+                                     const QPixmap &pixmapOriginal,
+                                     const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setPixmap";
 
@@ -70,7 +71,8 @@ QString BackgroundStateNone::state () const
 
 void BackgroundStateNone::updateColorFilter (const Transformation & /* transformation */,
                                              const DocumentModelGridRemoval & /* modelGridRemoval */,
-                                             const DocumentModelColorFilter & /* modelColorFilter */)
+                                             const DocumentModelColorFilter & /* modelColorFilter */,
+                                             const QString & /* curveSelected */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::updateColorFilter";
 }

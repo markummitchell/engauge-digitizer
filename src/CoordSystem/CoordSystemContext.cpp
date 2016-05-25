@@ -446,6 +446,11 @@ void CoordSystemContext::saveXml (QXmlStreamWriter &writer) const
   }
 }
 
+QString CoordSystemContext::selectedCurveName () const
+{
+  return m_coordSystems [m_coordSystemIndex]->selectedCurveName();
+}
+
 void CoordSystemContext::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCoordSystemIndex"
@@ -546,6 +551,11 @@ void CoordSystemContext::setModelSegments(const DocumentModelSegments &modelSegm
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelSegments";
 
   m_coordSystems [m_coordSystemIndex]->setModelSegments(modelSegments);
+}
+
+void CoordSystemContext::setSelectedCurveName(const QString &selectedCurveName)
+{
+  m_coordSystems [m_coordSystemIndex]->setSelectedCurveName(selectedCurveName);
 }
 
 bool CoordSystemContext::successfulRead () const

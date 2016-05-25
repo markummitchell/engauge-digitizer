@@ -72,7 +72,8 @@ class BackgroundStateAbstractBase
   virtual void setPixmap (const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &modelColorFilter,
-                          const QPixmap &pixmap) = 0;
+                          const QPixmap &pixmap,
+                          const QString &curveSelected) = 0;
 
   /// State name for debugging
   virtual QString state() const = 0;
@@ -80,7 +81,8 @@ class BackgroundStateAbstractBase
   /// Apply color filter settings
   virtual void updateColorFilter (const Transformation &transformation,
                                   const DocumentModelGridRemoval &modelGridRemoval,
-                                  const DocumentModelColorFilter &modelColorFilter) = 0;
+                                  const DocumentModelColorFilter &modelColorFilter,
+                                  const QString &curveSelected) = 0;
 
  protected:
 

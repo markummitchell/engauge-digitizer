@@ -244,8 +244,8 @@ DocumentModelCoords Transformation::modelCoords() const
   return m_modelCoords;
 }
 
-const Transformation &operator<<(ostringstream &strOuter,
-                                 const Transformation &transformation)
+ostringstream &operator<<(ostringstream &strOuter,
+                          const Transformation &transformation)
 {
   QString text;
   QTextStream strInner (&text);
@@ -253,7 +253,7 @@ const Transformation &operator<<(ostringstream &strOuter,
 
   strOuter << text.toLatin1().data ();
 
-  return transformation;
+  return strOuter;
 }
 
 void Transformation::printStream (QString indentation,

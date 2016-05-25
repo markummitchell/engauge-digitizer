@@ -36,17 +36,20 @@ script:
     export CPPFLAGS="-I$QT5BREWHOME/include";
     export LDFLAGS="-L$QT5BREWHOME/lib";
     export PATH=$QT5BREWHOME/bin:$PATH;
+    export FFTW_HOME="/usr/local/Cellar/fftw/3.3.4_1";
+    export LOG4CPP_HOME="/usr/local/Cellar/log4cpp/1.1.1";
    fi
  - qmake engauge.pro
 #hacks
  - if [ `uname` = "Darwin" ]; then
     sed -ibak '/^LIBS/s/-lQt5/-framework Qt/g' Makefile;
     sed -ibak2 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' Makefile;
+    sed -ibak3 's|-F/usr/local/Cellar/log4cpp|-L/usr/local/Cellar/log4cpp|g' Makefile;
    fi
  - make
  - cd help && ./build && cd ..;
  - if [ `uname` = "Darwin" ]; then
-    cp engauge bin;
+    cp Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer bin/engauge;
    fi
  - cd src && ./build_and_run_all_gui_tests && cd ..;
 #no cli tests on OSX

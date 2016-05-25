@@ -124,9 +124,19 @@ void CmdMediator::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
+QString CmdMediator::selectedCurveName () const
+{
+  return m_document.selectedCurveName ();
+}
+
 void CmdMediator::setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   m_document.setDocumentAxesPointsRequired (documentAxesPointsRequired);
+}
+
+void CmdMediator::setSelectedCurveName(const QString &selectedCurveName)
+{
+  m_document.setSelectedCurveName (selectedCurveName);
 }
 
 bool CmdMediator::successfulRead () const

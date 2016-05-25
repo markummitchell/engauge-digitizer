@@ -131,6 +131,7 @@ public:
   virtual void removePointGraph (const QString &identifier);
   virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
   virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual QString selectedCurveName () const;
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
   virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
   virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);
@@ -143,6 +144,7 @@ public:
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
+  virtual void setSelectedCurveName(const QString &selectedCurveName);
   virtual bool successfulRead () const;
   virtual void updatePointOrdinals (const Transformation &transformation);
 
@@ -150,6 +152,7 @@ private:
   CoordSystem();
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
+  void resetSelectedCurveNameIfNecessary ();
 
   // Read variables
   bool m_successfulRead;
@@ -174,6 +177,9 @@ private:
 
   // Save the number of required axes points
   DocumentAxesPointsRequired m_documentAxesPointsRequired;
+
+  // Each coordinate systems manages its own selected curve name
+  QString m_selectedCurveName;
 };
 
 #endif // COORD_SYSTEM_H

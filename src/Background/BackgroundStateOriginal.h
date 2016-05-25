@@ -27,11 +27,13 @@ class BackgroundStateOriginal : public BackgroundStateAbstractBase
   virtual void setPixmap (const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &modelColorFilter,
-                          const QPixmap &pixmap);
+                          const QPixmap &pixmap,
+                          const QString &curveSelected);
   virtual QString state () const;
   virtual void updateColorFilter (const Transformation &transformation,
                                   const DocumentModelGridRemoval &modelGridRemoval,
-                                  const DocumentModelColorFilter &colorFilter);
+                                  const DocumentModelColorFilter &colorFilter,
+                                  const QString &curveSelected);
 
  private:
   BackgroundStateOriginal();

@@ -234,6 +234,9 @@ public:
   /// Save document to xml
   void saveXml (QXmlStreamWriter &writer) const;
 
+  /// Currently selected curve name. This is used to set the selected curve combobox in MainWindow
+  QString selectedCurveName () const;
+
   /// Set the index of current active CoordSystem
   void setCoordSystemIndex(CoordSystemIndex coordSystemIndex);
 
@@ -280,6 +283,9 @@ public:
 
   /// Set method for DocumentModelSegments.
   void setModelSegments(const DocumentModelSegments &modelSegments);
+
+  /// Save curve name that is selected for the current coordinate system, for the next time the coordinate system reappears
+  void setSelectedCurveName (const QString &selectedCurveName);
 
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   bool successfulRead () const;

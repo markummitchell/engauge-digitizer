@@ -350,7 +350,9 @@ private:
   void createTutorial();
   void createZoomMap ();
   ZoomFactor currentZoomFactor () const;
+#ifndef OSX
   void exportAllCoordinateSystems();
+#endif
   QString exportFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);

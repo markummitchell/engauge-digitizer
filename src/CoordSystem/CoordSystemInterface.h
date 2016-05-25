@@ -202,6 +202,9 @@ public:
   /// Save graph to xml
   virtual void saveXml (QXmlStreamWriter &writer) const = 0;
 
+  /// Currently selected curve name. This is used to set the selected curve combobox in MainWindow
+  virtual QString selectedCurveName () const = 0;
+
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs) = 0;
 
@@ -237,6 +240,9 @@ public:
 
   /// Set method for DocumentModelSegments.
   virtual void setModelSegments(const DocumentModelSegments &modelSegments) = 0;
+
+  /// Save curve name that is selected for the current coordinate system, for the next time the coordinate system reappears
+  virtual void setSelectedCurveName(const QString &selectedCurveName) = 0;
 
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   virtual bool successfulRead () const = 0;

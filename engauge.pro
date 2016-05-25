@@ -13,8 +13,6 @@
 #
 # More comments are in the INSTALL file, and below
 
-# Comment out this CONFIG line in OSX to produce an OSX application bundle
-CONFIG = qt warn_on thread debug
 QT += core gui help network printsupport widgets xml
 
 _ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
@@ -588,22 +586,30 @@ SOURCES += \
     src/Zoom/ZoomLabels.cpp
 
 macx-* {
+
+# Change += to -= for app_bundle to debug in QtCreator
 CONFIG += app_bundle
-QMAKE_CXXFLAGS += "-stdlib=libc++"
-QMAKE_LFLAGS += "-stdlib=libc++"
+
+QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++ -gdwarf-2"
+QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
 INCLUDEPATH += \
-/usr/local/Cellar/fftw/3.3.4_1/include \
-/usr/local/Cellar/log4cpp/1.1.1/include \
+$$(FFTW_HOME)/include \
+$$(LOG4CPP_HOME)/include \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
-LIBS += -L/$$(HOME)/fftw-3.3.4/lib -L$$(HOME)/log4cpp/lib -framework CoreFoundation
+LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
+TARGET = "Engauge Digitizer"
+
 } else {
+
+CONFIG = qt warn_on thread debug
 TEMPLATE = app
 TARGET = bin/engauge
+
 }
 
 win32-* {
@@ -617,7 +623,7 @@ LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell3
 win32-g++* {
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
 }
-LIBS += -llog4cpp -lfftw3
+LIBS += -lfftw3 -llog4cpp
 }
 
 INCLUDEPATH += src \

@@ -61,12 +61,14 @@ class BackgroundStateContext
   void setPixmap (const Transformation &transformation,
                   const DocumentModelGridRemoval &modelGridRemoval,
                   const DocumentModelColorFilter &modelColorFilter,
-                  const QPixmap &pixmapOriginal);
+                  const QPixmap &pixmapOriginal,
+                  const QString &curveSelected);
 
   /// Apply color filter settings
   void updateColorFilter (const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
-                          const DocumentModelColorFilter &colorFilter);
+                          const DocumentModelColorFilter &colorFilter,
+                          const QString &curveSelected);
 
  private:
   BackgroundStateContext();

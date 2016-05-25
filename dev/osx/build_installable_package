@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function signAppArray {
-    array=("$@")
+    array=($@)
     for i in "${array[@]}"
     do
 	signAppFile "$i"
@@ -16,70 +16,112 @@ function signAppFile {
     codesign \
 	-s "3rd Party Mac Developer Application: Mark Mitchell" \
 	--entitlements dev/osx/engauge.entitlements \
-	"$file"
+	"Engauge Digitizer.app/$file"
 }
 
 function signAppFramework {
-    vc="engauge.app/Contents/Frameworks/$1.framework/Versions/Current/$1"
+    vc=/Contents/Frameworks/$1.framework/Versions/Current/$1
     signAppFile "$vc"
 }
 
 # Make sure environment variables are correctly set
 exe=`which macdeployqt`
 if [ -z "$exe" ]; then
-    echo "'source dev/osx/macosx_setup' must be run before this script"
+    echo "'source dev/osx/macosx_setup' must be run before this script. Quitting"
     exit
 fi
 
 # Remove old build. Need root privileges
-sudo rm -rf engauge.app 2>/dev/null
+sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
-# Make into engauge.app
+# Verify there is no log file
+filetest=`find . -name engauge.log`
+if [ -n "$filetest" ]; then
+    echo "File engauge.log exists which will break the sandbox. Quitting"
+    exit
+fi
+
+# Make into Engauge Digitizer.app
 make 
 
+# Help
+cd help
+./build
+cd ..
+mkdir -p Engauge\ Digitizer.app/Contents/Resources/documentation
+cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources/documentation
+
+# Translations. Qt-in-OSX bug requires translation files in directory above executable
+lrelease engauge.pro
+mkdir -p Engauge\ Digitizer.app/Contents/Resources/translations
+mv translations/*.qm Engauge\ Digitizer.app/Contents/Resources/translations
+
+# Icons
+cp src/img/digitizer.icns Engauge\ Digitizer.app/Contents/Resources/
+
+# License
+cp LICENSE Engauge\ Digitizer.app/Contents/Resources/
+
 # Debug symbols are just dropped for now
-dsymutil engauge.app/Contents/MacOS/engauge -o engauge.app.dSYM
+dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Digitizer.app.dSYM
 
 # Manually insert version numbering
-echo "In another window:"
-echo "1. source dev/osx/macosx_setup"
-echo "2. sudo <editor> engauge.app/Contents/Info.plist"
-echo "3. remove existing CFBundleIdentifier entry"
-echo "4. insert dev/osx/engauge_delta_for_Info.plist"
+cp dev/osx/Info.plist_valid Engauge\ Digitizer.app/Contents/Info.plist
+echo "If submitting to app store, then in another window..."
+echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
+echo '2. append/add .1 to version number)'
+echo '3. save the file and exit)'
 read -p "Press any key to continue"
+echo 'Ignore error about /usr/lib/log4cpp... in the next line'
 
-# Insert Qt libraries
-macdeployqt engauge.app -appstore-compliant
+# Insert Qt libraries. Log4cpp library does not get processed so we manually copy first. The
+# error 'ERROR No file at /usr/lib/log4cpp.1.dylib' is a bug in macdeployqt that is claimed to 
+# not cause any problems, but copying a library to /usr/lib or creating symlink does not work
+# due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
+# copy the file just after macdeployqt
+macdeployqt Engauge\ Digitizer.app -appstore-compliant
+cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
-# Code signing
+# Signing
 frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
     signAppFramework $i
 done
 
-signAppArray `find engauge.app | grep '/Frameworks/lib'`
-signAppArray `find engauge.app | grep '/documentation/engauge'`
-signAppArray `find engauge.app | grep '/translations/engauge_'`
-signAppArray `find engauge.app | grep '/PlugIns/bearer/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/imageformats/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/platforms/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/printsupport/lib'`
-signAppArray `find engauge.app | grep '/PlugIns/sqldrivers/lib'`
-signAppFile engauge.app/Contents/MacOS/engauge
+signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/documentation/engauge'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/translations/engauge_'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
+signAppFile /Contents/MacOS/Engauge\ Digitizer
 
-# remove log file
-rm engauge.app/Contents/MacOS/engauge.log 2>/dev/null
+echo "******************************************************************************"
+echo "* If previous line says 'code object is not signed at all' then stop and fix *"
+echo "******************************************************************************"
 
-# build package
-productbuild --component engauge.app /Applications engauge.pkg
+# Build package
+productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
 
-# sign package
-productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" engauge.pkg engauge.pkg.signed
-mv engauge.pkg.signed engauge.pkg
+# Sign package
+productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" Engauge\ Digitizer.pkg Engauge\ Digitizer.pkg.signed
+mv Engauge\ Digitizer.pkg.signed Engauge\ Digitizer.pkg
 
-# test the built package
+# Code signing checks. Note that spctl seems to give false alarms, while codesign seems to be happy
+#spctl --assess --type execute Engauge\ Digitizer.app 2>&1 | grep -i rejected
+#spctl --assess --type install Engauge\ Digitizer.app 2>&1 | grep -i rejected
+echo "******************** codesign validations ************************"
+codesign --verbose --deep --strict Engauge\ Digitizer.app
+echo "******************** codesign entitlements ***********************"
+codesign --display --verbose=4 --entitlements - Engauge\ Digitizer.app
+echo "******************************************************************"
+
+# Test the built package
 echo "Testing the built package. Output should have lines like 0% complete, 20% complete, ..., 100% complete"
-sudo installer -store -pkg engauge.pkg -target /
+sudo installer -store -pkg Engauge\ Digitizer.pkg -target /
 
-echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to uploadengauge.pkg.signed"
+echo "Assuming the test results show '0% complete, ..., 100% complete', open Xcode and then select Xcode / Open Developer Tools / Application Loader to upload Engauge Digitizer.pkg"
+

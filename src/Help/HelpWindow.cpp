@@ -9,11 +9,10 @@
 #include "Logger.h"
 #include <QApplication>
 #include <QDir>
-#include <QFile>
+#include <QFileInfo>
 #include <QHelpContentWidget>
 #include <QHelpEngine>
 #include <QHelpIndexWidget>
-#include <QMessageBox>
 #include <QSplitter>
 #include <QTabWidget>
 
@@ -54,6 +53,8 @@ QString HelpWindow::helpPath() const
 {
   // Possible locations of help file. Each entry is first tried as is, and then with
   // applicationDirPath as a prefix. Each entry should probably start with a slash
+
+#ifndef OSX
   QStringList paths;
 #ifdef HELPDIR
 #define QUOTE(string) _QUOTE(string)
@@ -63,6 +64,7 @@ QString HelpWindow::helpPath() const
   paths << path;
 #endif
   paths << "/documentation/engauge.qhc";
+  paths << "/../Resources/documentation/engauge.qhc"; // For OSX
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
 
   QStringList::iterator itr;
@@ -70,18 +72,20 @@ QString HelpWindow::helpPath() const
 
     QString pathAsIs = *itr;
 
-    QFile fileAsIs (pathAsIs);
+    QFileInfo fileAsIs (pathAsIs);
     if (fileAsIs.exists()) {
       return pathAsIs;
     }
 
     QString pathWithPrefix = QApplication::applicationDirPath() + pathAsIs;
 
-    QFile fileWithPrefix (pathWithPrefix);
+    QFileInfo fileWithPrefix (pathWithPrefix);
     if (fileWithPrefix.exists()) {
       return pathWithPrefix;
     }
   }
+#endif
 
   return ""; // Empty file, since help file was never found, will simply result in empty help contents
 }
+

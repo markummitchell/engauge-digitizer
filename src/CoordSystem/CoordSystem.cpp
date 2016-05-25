@@ -51,6 +51,8 @@ CoordSystem::CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired)
                                             ColorFilterSettings::defaultFilter (),
                                             CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
                                                         PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
@@ -59,6 +61,8 @@ void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
                                              ColorFilterSettings::defaultFilter (),
                                              CurveStyle (LineStyle::defaultGraphCurve(m_curvesGraphs.numCurves()),
                                                          PointStyle::defaultGraphCurve(m_curvesGraphs.numCurves()))));
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 void CoordSystem::addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -472,6 +476,8 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   if (m_curveAxes->numPoints () > 2) {
     m_modelGridRemoval.setStable();
   }
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
@@ -529,6 +535,8 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
       }
     }
   }
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader,
@@ -586,6 +594,8 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader,
       }
     }
   }
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 DocumentModelAxesChecker CoordSystem::modelAxesChecker() const
@@ -768,6 +778,17 @@ void CoordSystem::removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   curvesGraphs.iterateThroughCurvesPoints (ftorWithCallback);
 }
 
+void CoordSystem::resetSelectedCurveNameIfNecessary ()
+{
+  if (m_selectedCurveName.isEmpty () ||
+      curveForCurveName (m_selectedCurveName) == 0) {
+
+    // Selected curve name is empty, or the curve has been removed so we pick another. The first is arbitrarily picked
+    m_selectedCurveName = m_curvesGraphs.curvesGraphsNames().first();
+  }
+
+}
+
 void CoordSystem::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_COORD_SYSTEM);
@@ -787,11 +808,18 @@ void CoordSystem::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 }
 
+QString CoordSystem::selectedCurveName () const
+{
+  return m_selectedCurveName;
+}
+
 void CoordSystem::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::setCurvesGraphs";
 
   m_curvesGraphs = curvesGraphs;
+
+  resetSelectedCurveNameIfNecessary ();
 }
 
 void CoordSystem::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
@@ -868,6 +896,11 @@ void CoordSystem::setModelPointMatch(const DocumentModelPointMatch &modelPointMa
 void CoordSystem::setModelSegments(const DocumentModelSegments &modelSegments)
 {
   m_modelSegments = modelSegments;
+}
+
+void CoordSystem::setSelectedCurveName(const QString &selectedCurveName)
+{
+  m_selectedCurveName = selectedCurveName;
 }
 
 bool CoordSystem::successfulRead () const

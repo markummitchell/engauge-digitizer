@@ -151,7 +151,7 @@ private:
 };
 
 /// Stream operator
-const Transformation &operator<< (std::ostringstream &str,
-                                  const Transformation &transformation);
+std::ostringstream &operator<< (std::ostringstream &str,
+                               const Transformation &transformation);
 
 #endif // TRANSFORMATION_H

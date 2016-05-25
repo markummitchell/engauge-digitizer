@@ -141,13 +141,20 @@ MainWindow::MainWindow(const QString &errorReportFile,
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
 
+#ifdef OSX
+  qApp->setApplicationName ("Engauge Digitizer");
+  qApp->setOrganizationDomain ("Mark Mitchell");
+#endif
+
   LoggerUpload::bindToMainWindow(this);
 
   QString initialPath = QDir::currentPath();
 
   setCurrentFile ("");
   createIcons();
+#ifndef OSX
   setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
+#endif
   setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();
@@ -449,12 +456,14 @@ void MainWindow::createActionsFile ()
                                   "Opens an existing document."));
   connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
 
+#ifndef OSX
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     QAction *recentFileAction = new QAction (this);
     recentFileAction->setVisible (true);
     connect (recentFileAction, SIGNAL (triggered ()), this, SLOT (slotRecentFileAction ()));
     m_actionRecentFiles.append (recentFileAction);
   }
+#endif 
 
   m_actionClose = new QAction(tr ("&Close"), this);
   m_actionClose->setShortcut (QKeySequence::Close);
@@ -520,12 +529,14 @@ void MainWindow::createActionsHelp ()
                                           "and/or point"));
   connect (m_actionHelpTutorial, SIGNAL (triggered ()), this, SLOT (slotHelpTutorial()));
 
+#ifndef OSX
   m_actionHelpHelp = new QAction (tr ("Help"), this);
   m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
   m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
   m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
                                       "Searchable help documentation"));
   // This action gets connected directly to the QDockWidget when that is created
+#endif
 
   m_actionHelpAbout = new QAction(tr ("About Engauge"), this);
   m_actionHelpAbout->setStatusTip (tr ("About the application."));
@@ -857,6 +868,7 @@ void MainWindow::createHelpWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
 
+#ifndef OSX
   m_helpWindow = new HelpWindow (this);
   m_helpWindow->hide ();
   addDockWidget (Qt::RightDockWidgetArea,
@@ -864,6 +876,7 @@ void MainWindow::createHelpWindow ()
   m_helpWindow->setFloating (true);
 
   connect (m_actionHelpHelp, SIGNAL (triggered ()), m_helpWindow, SLOT (show ()));
+#endif
 }
 
 void MainWindow::createIcons()
@@ -899,11 +912,13 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionOpen);
+#ifndef OSX
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
   }
   m_menuFile->addMenu (m_menuFileOpenRecent);
+#endif
   m_menuFile->addAction (m_actionClose);
   m_menuFile->insertSeparator (m_actionSave);
   m_menuFile->addAction (m_actionSave);
@@ -997,7 +1012,9 @@ void MainWindow::createMenus()
   m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpTutorial);
+#ifndef OSX
   m_menuHelp->addAction (m_actionHelpHelp);
+#endif
   m_menuHelp->addAction (m_actionHelpAbout);
 
   updateRecentFileList();
@@ -1273,6 +1290,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
+#ifndef OSX
 void MainWindow::exportAllCoordinateSystems()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems";
@@ -1291,6 +1309,7 @@ void MainWindow::exportAllCoordinateSystems()
                 exportStrategy);
   }
 }
+#endif
 
 QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) const
 {
@@ -1607,8 +1626,8 @@ void MainWindow::loadCurveListFromCmdMediator ()
     m_cmbCurve->addItem (curvesGraphName);
   }
 
-  // Arbitrarily pick the first curve
-  m_cmbCurve->setCurrentIndex (0);
+  // Select the curve that is associated with the current coordinate system
+  m_cmbCurve->setCurrentText (m_cmdMediator->selectedCurveName ());
 }
 
 void MainWindow::loadDocumentFile (const QString &fileName)
@@ -2159,7 +2178,8 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   m_backgroundStateContext->setPixmap (m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
-                                       pixmap);
+                                       pixmap,
+                                       m_cmbCurve->currentText());
 }
 
 void MainWindow::settingsRead ()
@@ -2188,6 +2208,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 
+#ifndef OSX
   // Help window geometry
   QSize helpSize = settings.value (SETTINGS_HELP_SIZE,
                                    QSize (900, 600)).toSize();
@@ -2196,6 +2217,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
     QPoint helpPos = settings.value (SETTINGS_HELP_POS).toPoint();
     m_helpWindow->move (helpPos);
   }
+#endif 
 
   // Checklist guide wizard
   m_actionHelpChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
@@ -2301,8 +2323,10 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
+#ifndef OSX
   settings.setValue (SETTINGS_HELP_SIZE, m_helpWindow->size());
   settings.setValue (SETTINGS_HELP_POS, m_helpWindow->pos ());
+#endif
   if (m_dockChecklistGuide->isFloating()) {
 
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, Qt::NoDockWidgetArea);
@@ -2539,6 +2563,7 @@ void MainWindow::slotCmbCurve(int /* index */)
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
   m_digitizeStateContext->handleCurveChange (m_cmdMediator);
+  m_cmdMediator->setSelectedCurveName (m_cmbCurve->currentText ()); // Save for next time current coordinate system returns
 
   updateViewedCurves();
   updateViewsOfSettings();
@@ -2729,6 +2754,8 @@ void MainWindow::slotFileExport ()
     QString filter = QString ("%1;;%2;;All files (*.*)")
                      .arg (exportStrategy.filterCsv ())
                      .arg (exportStrategy.filterTsv ());
+
+    // OSX sandbox requires, for the default, a non-empty filename
     QString defaultFileName = QString ("%1/%2.%3")
                               .arg (QDir::currentPath ())
                               .arg (m_currentFile)
@@ -2873,9 +2900,13 @@ bool MainWindow::slotFileSaveAs()
   filters << filterAll;
 
   QFileDialog dlg(this);
+  dlg.setFileMode (QFileDialog::AnyFile);
   dlg.selectNameFilter (filterDigitizer);
   dlg.setNameFilters (filters);
+#ifndef OSX
+  // Prevent hang in OSX
   dlg.setWindowModality(Qt::WindowModal);
+#endif
   dlg.setAcceptMode(QFileDialog::AcceptSave);
   dlg.selectFile(filenameDefault);
   if (dlg.exec()) {
@@ -3175,7 +3206,9 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
 
   } else {
 
+#ifndef OSX
     exportAllCoordinateSystems ();
+#endif
 
     // Regression test has finished so exit. We unset the dirty flag so there is no prompt
     m_cmdMediator->setClean();
@@ -3197,7 +3230,9 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
     // Script file might already have closed the Document so export only if last was not closed
     if (m_cmdMediator != 0) {
 
+#ifndef OSX
       exportAllCoordinateSystems ();
+#endif
 
       // We unset the dirty flag so there is no "Save changes?" prompt
       m_cmdMediator->setClean();
@@ -3800,8 +3835,10 @@ void MainWindow::updateControls ()
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
+#ifndef OSX
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
+#endif
   m_actionClose->setEnabled (!m_currentFile.isEmpty ());
   m_actionSave->setEnabled (!m_currentFile.isEmpty ());
   m_actionSaveAs->setEnabled (!m_currentFile.isEmpty ());
@@ -3863,7 +3900,11 @@ void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCoordSystem";
 
+  // Set current curve in the Document and in the MainWindow combobox together so they are in sync. Setting
+  // the selected curve prevents a crash in updateTransformationAndItsDependencies
   m_cmdMediator->document().setCoordSystemIndex (coordSystemIndex);
+  loadCurveListFromCmdMediator ();
+
   updateTransformationAndItsDependencies(); // Transformation state may have changed
   updateSettingsAxesChecker(m_cmdMediator->document().modelAxesChecker()); // Axes checker dependes on transformation state
 
@@ -3947,6 +3988,7 @@ void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
 
+#ifndef OSX
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   QStringList recentFilePaths = settings.value(SETTINGS_RECENT_FILE_LIST).toStringList();
 
@@ -3969,6 +4011,7 @@ void MainWindow::updateRecentFileList()
   for (i = count; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_actionRecentFiles.at (i)->setVisible (false);
   }
+#endif
 }
 
 void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)
@@ -3996,7 +4039,8 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
   m_backgroundStateContext->updateColorFilter (m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
-                                               modelColorFilter);
+                                               modelColorFilter,
+                                               m_cmbCurve->currentText());
   m_digitizeStateContext->handleCurveChange (m_cmdMediator);
   updateViewsOfSettings();
 }

@@ -5,3 +5,5 @@
 
 export QTDIR=/usr/local/Cellar/qt5/5.5.1_2
 export PATH=$QTDIR/bin:$PATH
+
+export LOG4CPP_HOME=$HOME/log4cpp_null
