@@ -1629,8 +1629,8 @@ void MainWindow::loadCurveListFromCmdMediator ()
     m_cmbCurve->addItem (curvesGraphName);
   }
 
-  // Arbitrarily pick the first curve
-  m_cmbCurve->setCurrentIndex (0);
+  // Select the curve that is associated with the current coordinate system
+  m_cmbCurve->setCurrentText (m_cmdMediator->selectedCurveName ());
 }
 
 void MainWindow::loadDocumentFile (const QString &fileName)
@@ -2180,7 +2180,8 @@ void MainWindow::setPixmap (const QPixmap &pixmap)
   m_backgroundStateContext->setPixmap (m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
-                                       pixmap);
+                                       pixmap,
+                                       m_cmbCurve->currentText());
 }
 
 void MainWindow::settingsRead ()
@@ -2564,6 +2565,7 @@ void MainWindow::slotCmbCurve(int /* index */)
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
   m_digitizeStateContext->handleCurveChange (m_cmdMediator);
+  m_cmdMediator->setSelectedCurveName (m_cmbCurve->currentText ()); // Save for next time current coordinate system returns
 
   updateViewedCurves();
   updateViewsOfSettings();
@@ -3868,7 +3870,11 @@ void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCoordSystem";
 
+  // Set current curve in the Document and in the MainWindow combobox together so they are in sync. Setting
+  // the selected curve prevents a crash in updateTransformationAndItsDependencies
   m_cmdMediator->document().setCoordSystemIndex (coordSystemIndex);
+  loadCurveListFromCmdMediator ();
+
   updateTransformationAndItsDependencies(); // Transformation state may have changed
   updateSettingsAxesChecker(m_cmdMediator->document().modelAxesChecker()); // Axes checker dependes on transformation state
 
@@ -3986,7 +3992,8 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
   m_backgroundStateContext->updateColorFilter (m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
-                                               modelColorFilter);
+                                               modelColorFilter,
+                                               m_cmbCurve->currentText());
   m_digitizeStateContext->handleCurveChange (m_cmdMediator);
   updateViewsOfSettings();
 }

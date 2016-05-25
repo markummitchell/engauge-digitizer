@@ -45,18 +45,19 @@ void BackgroundStateCurve::fitInView (GraphicsView &view)
 
 void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &transformation,
                                                         const DocumentModelGridRemoval &modelGridRemoval,
-                                                        const DocumentModelColorFilter &modelColorFilter)
+                                                        const DocumentModelColorFilter &modelColorFilter,
+                                                        const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::processImageFromSavedInputs";
 
   // Use the settings if the selected curve is known
-  if (!m_curveSelected.isEmpty()) {
+  if (!curveSelected.isEmpty()) {
 
     // Generate filtered image
     FilterImage filterImage;
     QPixmap pixmapFiltered = filterImage.filter (m_pixmapOriginal.toImage(),
                                                  transformation,
-                                                 m_curveSelected,
+                                                 curveSelected,
                                                  modelColorFilter,
                                                  modelGridRemoval);
 
@@ -80,23 +81,25 @@ void BackgroundStateCurve::setCurveSelected (const Transformation &transformatio
 
   // Even if m_curveSelected equals curveSelected we update the image, since the transformation
   // may have changed
-  m_curveSelected = curveSelected;
   processImageFromSavedInputs (transformation,
                                modelGridRemoval,
-                               modelColorFilter);
+                               modelColorFilter,
+                               curveSelected);
 }
 
 void BackgroundStateCurve::setPixmap (const Transformation &transformation,
                                       const DocumentModelGridRemoval &modelGridRemoval,
                                       const DocumentModelColorFilter &modelColorFilter,
-                                      const QPixmap &pixmapOriginal)
+                                      const QPixmap &pixmapOriginal,
+                                      const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setPixmap";
 
   m_pixmapOriginal = pixmapOriginal;
   processImageFromSavedInputs (transformation,
                                modelGridRemoval,
-                               modelColorFilter);
+                               modelColorFilter,
+                               curveSelected);
 }
 
 QString BackgroundStateCurve::state () const
@@ -106,11 +109,13 @@ QString BackgroundStateCurve::state () const
 
 void BackgroundStateCurve::updateColorFilter (const Transformation &transformation,
                                               const DocumentModelGridRemoval &modelGridRemoval,
-                                              const DocumentModelColorFilter &modelColorFilter)
+                                              const DocumentModelColorFilter &modelColorFilter,
+                                              const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::updateColorFilter";
 
   processImageFromSavedInputs (transformation,
                                modelGridRemoval,
-                               modelColorFilter);
+                               modelColorFilter,
+                               curveSelected);
 }

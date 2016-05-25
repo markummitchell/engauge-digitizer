@@ -146,7 +146,8 @@ void BackgroundStateContext::setCurveSelected (const Transformation &transformat
 void BackgroundStateContext::setPixmap (const Transformation &transformation,
                                         const DocumentModelGridRemoval &modelGridRemoval,
                                         const DocumentModelColorFilter &modelColorFilter,
-                                        const QPixmap &pixmapOriginal)
+                                        const QPixmap &pixmapOriginal,
+                                        const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setPixmap"
                               << " image=" << pixmapOriginal.width() << "x" << pixmapOriginal.height()
@@ -157,13 +158,15 @@ void BackgroundStateContext::setPixmap (const Transformation &transformation,
     m_states [backgroundState]->setPixmap (transformation,
                                            modelGridRemoval,
                                            modelColorFilter,
-                                           pixmapOriginal);
+                                           pixmapOriginal,
+                                           curveSelected);
   }
 }
 
 void BackgroundStateContext::updateColorFilter (const Transformation &transformation,
                                                 const DocumentModelGridRemoval &modelGridRemoval,
-                                                const DocumentModelColorFilter &modelColorFilter)
+                                                const DocumentModelColorFilter &modelColorFilter,
+                                                const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::updateColorFilter";
 
@@ -171,6 +174,7 @@ void BackgroundStateContext::updateColorFilter (const Transformation &transforma
 
     m_states [backgroundState]->updateColorFilter (transformation,
                                                    modelGridRemoval,
-                                                   modelColorFilter);
+                                                   modelColorFilter,
+                                                   curveSelected);
   }
 }

@@ -125,6 +125,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void removePointGraph (const QString &identifier);
   virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
   virtual void saveXml (QXmlStreamWriter &writer) const;
+  virtual QString selectedCurveName () const;
 
   /// Index of current CoordSystem
   void setCoordSystemIndex (CoordSystemIndex coordSystemIndex);
@@ -143,6 +144,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
+  virtual void setSelectedCurveName(const QString &selectedCurveName);
   virtual bool successfulRead () const;
   virtual void updatePointOrdinals (const Transformation &transformation);
 
