@@ -136,6 +136,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_ghosts (0),
   m_timerRegressionErrorReport(0),
   m_fileCmdScript (0),
+  m_isRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
@@ -183,7 +184,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(initialPath,
                         errorReportFile);
-    if (isRegressionTest) {
+    if (m_isRegressionTest) {
       startRegressionTestErrorReport(initialPath,
                                      errorReportFile);
     }
@@ -1975,7 +1976,9 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                              int line,
                                              const char *comment) const
 {
-  if (m_cmdMediator != 0) {
+  // Skip if currently performing a regression test - in which case the preferred behavior is to let the current test fail and
+  // continue on to execute the remaining tests
+  if ((m_cmdMediator != 0) && !m_isRegressionTest) {
 
     QString report = saveErrorReportFileAndExitXml (context,
                                                     file,

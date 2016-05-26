@@ -580,6 +580,7 @@ private:
   // from the command stack getting executed
   QTimer *m_timerRegressionErrorReport;
   FileCmdScript *m_fileCmdScript;
+  bool m_isRegressionTest;
   QTimer *m_timerRegressionFileCmdScript;
   QString m_regressionFile;
 
