@@ -6,6 +6,7 @@
 
 #include "Logger.h"
 #include <QHash>
+#include <QLocale>
 #include <QTransform>
 #include "QtToString.h"
 
@@ -42,6 +43,13 @@ QString QtCursorToString (Qt::CursorShape cursorShape)
     return "Qt::<unknown>";
 
   } 
+}
+
+QString QLocaleToString (const QLocale &locale)
+{
+  return QString ("%1/%2")
+      .arg (QLocale::languageToString (locale.language()))
+      .arg (QLocale::countryToString(locale.country()));
 }
 
 QString QTransformToString (const QTransform &transform)

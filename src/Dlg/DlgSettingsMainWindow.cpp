@@ -19,6 +19,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSpinBox>
+#include "QtToString.h"
 #include "Settings.h"
 #include "ZoomControl.h"
 #include "ZoomFactorInitial.h"
@@ -99,9 +100,8 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
     QList<QLocale::Country> countries = QLocale::countriesForLanguage(lang);
     for (int indexCountry = 0; indexCountry < countries.count(); indexCountry++) {
       QLocale::Country country = countries.at(indexCountry);
-      QString label = localeLabel (lang,
-                                   country);
       QLocale locale (lang, country);
+      QString label = QLocaleToString (locale);
       m_cmbLocale->addItem (label, locale);
     }
   }
@@ -194,22 +194,13 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_cmbZoomFactor->setCurrentIndex (index);
   index = m_cmbZoomControl->findData (m_modelMainWindowAfter->zoomControl());
   m_cmbZoomControl->setCurrentIndex (index);
-  QString locLabel = localeLabel (m_modelMainWindowAfter->locale().language(),
-                                  m_modelMainWindowBefore->locale().country());
+  QString locLabel = QLocaleToString (m_modelMainWindowAfter->locale());
   index = m_cmbLocale->findText (locLabel);
   m_cmbLocale->setCurrentIndex(index);
   m_chkTitleBarFormat->setChecked (m_modelMainWindowAfter->mainTitleBarFormat() == MAIN_TITLE_BAR_FORMAT_PATH);
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
-}
-
-QString DlgSettingsMainWindow::localeLabel (QLocale::Language lang,
-                                            QLocale::Country country) const
-{
-  return QString ("%1/%2")
-      .arg (QLocale::languageToString (lang))
-      .arg (QLocale::countryToString(country));
 }
 
 void DlgSettingsMainWindow::slotLocale (int index)
