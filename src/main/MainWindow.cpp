@@ -153,9 +153,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   setCurrentFile ("");
   createIcons();
-#ifndef OSX
   setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
-#endif
   setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();
@@ -530,14 +528,12 @@ void MainWindow::createActionsHelp ()
                                           "and/or point"));
   connect (m_actionHelpTutorial, SIGNAL (triggered ()), this, SLOT (slotHelpTutorial()));
 
-#ifndef OSX
   m_actionHelpHelp = new QAction (tr ("Help"), this);
   m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
   m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
   m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
                                       "Searchable help documentation"));
   // This action gets connected directly to the QDockWidget when that is created
-#endif
 
   m_actionHelpAbout = new QAction(tr ("About Engauge"), this);
   m_actionHelpAbout->setStatusTip (tr ("About the application."));
@@ -869,7 +865,6 @@ void MainWindow::createHelpWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
 
-#ifndef OSX
   m_helpWindow = new HelpWindow (this);
   m_helpWindow->hide ();
   addDockWidget (Qt::RightDockWidgetArea,
@@ -877,7 +872,6 @@ void MainWindow::createHelpWindow ()
   m_helpWindow->setFloating (true);
 
   connect (m_actionHelpHelp, SIGNAL (triggered ()), m_helpWindow, SLOT (show ()));
-#endif
 }
 
 void MainWindow::createIcons()
@@ -1013,9 +1007,7 @@ void MainWindow::createMenus()
   m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpTutorial);
-#ifndef OSX
   m_menuHelp->addAction (m_actionHelpHelp);
-#endif
   m_menuHelp->addAction (m_actionHelpAbout);
 
   updateRecentFileList();
@@ -2211,7 +2203,6 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   move (settings.value (SETTINGS_POS,
                         QPoint (200, 200)).toPoint ());
 
-#ifndef OSX
   // Help window geometry
   QSize helpSize = settings.value (SETTINGS_HELP_SIZE,
                                    QSize (900, 600)).toSize();
@@ -2220,7 +2211,6 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
     QPoint helpPos = settings.value (SETTINGS_HELP_POS).toPoint();
     m_helpWindow->move (helpPos);
   }
-#endif 
 
   // Checklist guide wizard
   m_actionHelpChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
@@ -2326,10 +2316,8 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
-#ifndef OSX
   settings.setValue (SETTINGS_HELP_SIZE, m_helpWindow->size());
   settings.setValue (SETTINGS_HELP_POS, m_helpWindow->pos ());
-#endif
   if (m_dockChecklistGuide->isFloating()) {
 
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, Qt::NoDockWidgetArea);
