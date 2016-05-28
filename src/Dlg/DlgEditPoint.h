@@ -58,6 +58,7 @@ private slots:
 
 private:
   void createCoords (QVBoxLayout *layoutOuter);
+  void createHint (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
   void initializeGraphCoordinates (const double *xInitialValue,
                                    const double *yInitialValue,

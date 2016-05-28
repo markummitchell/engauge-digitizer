@@ -24,6 +24,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QRect>
+#include "QtToString.h"
 #include <QVBoxLayout>
 #include "Transformation.h"
 
@@ -70,6 +71,7 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   setWindowTitle (tr ("Edit Axis Point"));
 
   createCoords (layout);
+  createHint (layout);
   createOkCancel (layout);
 
   initializeGraphCoordinates (xInitialValue,
@@ -162,6 +164,25 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
 
   QLabel *labelGraphParRight = new QLabel (tr (")"), this);
   layout->addWidget(labelGraphParRight, 0);
+}
+
+void DlgEditPoint::createHint (QVBoxLayout *layoutOuter)
+{
+  // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
+  // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
+
+  QWidget *widget = new QWidget;
+  layoutOuter->addWidget (widget, 0, Qt::AlignCenter);
+
+  QHBoxLayout *layout = new QHBoxLayout;
+  widget->setLayout (layout);
+
+  QString locale = QLocaleToString (m_modelMainWindow.locale ());
+  QString hint = QString ("%1: %2")
+                 .arg (tr ("Number format"))
+                 .arg (locale);
+  QLabel *label = new QLabel (hint);
+  layout->addWidget (label);
 }
 
 void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)

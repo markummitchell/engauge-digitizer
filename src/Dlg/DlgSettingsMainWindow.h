@@ -49,8 +49,6 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
-  QString localeLabel (QLocale::Language lang,
-                       QLocale::Country country) const;
   void updateControls();
 
   QComboBox *m_cmbZoomFactor;
