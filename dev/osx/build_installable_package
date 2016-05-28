@@ -51,7 +51,7 @@ cd ..
 mkdir -p Engauge\ Digitizer.app/Contents/Resources/documentation
 cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources/documentation
 
-# Translations. Qt-in-OSX bug requires translation files in directory above executable
+# Translations
 lrelease engauge.pro
 mkdir -p Engauge\ Digitizer.app/Contents/Resources/translations
 mv translations/*.qm Engauge\ Digitizer.app/Contents/Resources/translations
@@ -91,7 +91,7 @@ done
 
 signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/documentation/engauge'    | sed 's/Engauge\ Digitizer\.app//g'`
-signAppArray `find Engauge\ Digitizer.app | grep '/translations/engauge_'    | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/engauge_'                 | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
