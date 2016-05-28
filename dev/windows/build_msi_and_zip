@@ -3,9 +3,9 @@
 # ENGDIR is two levels above the current directory
 DIR=`pwd`
 export ENGDIR=${DIR%/*/*}
+export ENGTRANSDIR="$ENGDIR/translations"
 export QTBINDIR=`qtpaths --binaries-dir`
 export QTPLUGINSDIR=`qtpaths --plugin-dir`
-export QTTRANSDIR="${QTPLUGINSDIR%/*}/translations"
 if [ -z "$QTBINDIR" ]; then
     echo "qtpaths utility is not in PATH, which should be pointing to the Qt5 bin directory"
     exit
@@ -14,7 +14,7 @@ fi
 echo "Engauge:         $ENGDIR"
 echo "Qt binaries:     $QTBINDIR"
 echo "Qt plugins:      $QTPLUGINSDIR"
-echo "Qt translations: $QTTRANSDIR"
+echo "Translations:    $ENGTRANSDIR"
 #
 echo " "
 where g++
@@ -73,6 +73,7 @@ echo "***Rebuilding release executable" &&
 export PATH="$QTBINDIR:$PATH"
 export ENGAUGE_RELEASE=1 &&
 cd ../.. &&
+lrelease engauge.pro &&
 qmake engauge.pro &&
 sed 's/-lQt/-lQt5/g' Makefile >Makefile~ &&
 sed 's/Qt55/Qt5/g' Makefile~ >Makefile &&
@@ -117,6 +118,7 @@ cp $QTPLUGINSDIR/sqldrivers/qsqlite.dll   "Engauge Digitizer/sqldrivers"
 cp $QTPLUGINSDIR/sqldrivers/qsqlmysql.dll "Engauge Digitizer/sqldrivers"
 cp $QTPLUGINSDIR/sqldrivers/qsqlpsql.dll "Engauge Digitizer/sqldrivers"
 cp $QTTRANSDIR/*.qm  "Engauge Digitizer/translations"
+cp $ENGTRANSDIR/*.qm "Engauge Digitizer/translations"
 cp ../../LICENSE                 "Engauge Digitizer"
 cp ../../bin/D3Dcompiler_47.dll  "Engauge Digitizer"
 cp ../../bin/engauge.exe         "Engauge Digitizer"
