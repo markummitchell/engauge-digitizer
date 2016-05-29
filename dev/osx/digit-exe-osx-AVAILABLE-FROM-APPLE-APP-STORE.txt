@@ -1,0 +1,2 @@
+For compatibility with Apple System Integrity Protection (SIP), Engauge can
+be downloaded from the Apple App Store.
