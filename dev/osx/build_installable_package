@@ -79,7 +79,7 @@ echo 'Ignore error about /usr/lib/log4cpp... in the next line'
 # not cause any problems, but copying a library to /usr/lib or creating symlink does not work
 # due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
 # copy the file just after macdeployqt
-macdeployqt Engauge\ Digitizer.app -appstore-compliant
+macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg
 cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
 # Signing
