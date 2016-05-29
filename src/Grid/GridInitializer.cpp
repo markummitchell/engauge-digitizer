@@ -75,17 +75,21 @@ void GridInitializer::axisScale (double xMin,
   xCount = 1 + (int) floor ((xStop - xStart) / xDelta + 0.5);
 
   if (!linearAxis) {
-    // Convert from log scale back to linear scale
+
+    // Convert from log scale back to linear scale. We make sure to keep numbers like 10^-8 unmolested
     xStart = pow((double) 10.0, xStart);
     xStop = pow((double) 10.0, xStop);
     xDelta = pow((double) 10.0, xDelta);
-  }
 
-  // Roundoff to eliminate epsilons of 10^-10
-  int power = valuePower (xDelta) - nDigitsPrecision;
-  xStart = roundOffToPower(xStart, power);
-  xStop = roundOffToPower(xStop, power);
-  xDelta = roundOffToPower(xDelta, power);
+  } else {
+
+    // Roundoff to eliminate epsilons of 10^-10
+    int power = valuePower (xDelta) - nDigitsPrecision;
+    xStart = roundOffToPower(xStart, power);
+    xStop = roundOffToPower(xStop, power);
+    xDelta = roundOffToPower(xDelta, power);
+
+  }
 }
 
 int GridInitializer::computeCount (bool linearAxis,
