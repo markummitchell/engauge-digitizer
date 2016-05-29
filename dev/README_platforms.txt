@@ -3,10 +3,7 @@ Mac OSX
 Option 1) Download Engauge Digitizer from the Apple App Store. This option involves familiar steps that rarely have
           problems with security software such as Gatekeeper.
 
-Option 2) OSX 10.X 64 bit distributions can execute the DMG file downloaded from github. This option may not work if 
-          security software like Gatekeeper is operating.
-
-Option 3) Engauge can be built from source code. This requires a lot of time and effort and is not recommended.
+Option 2) Engauge can be built from source code. This requires a lot of time and effort and is not recommended.
 
 Linux Distributions
 -------------------
