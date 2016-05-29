@@ -64,11 +64,13 @@ void CmdPaste::cmdRedo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::cmdRedo"
                               << " pasting=" << m_copiedPoints.count ();
 
+  saveOrCheckPreCommandDocumentState  (document ());
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (&m_mimePoints, QClipboard::Clipboard);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
   resetSelection(m_copiedPoints);
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdPaste::cmdUndo ()
@@ -76,8 +78,10 @@ void CmdPaste::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPaste::cmdUndo"
                               << " pasting=" << m_copiedPoints.count ();
 
+  saveOrCheckPostCommandDocumentState (document ());
   mainWindow().updateAfterCommand();
   resetSelection(m_copiedPoints);
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdPaste::saveXml (QXmlStreamWriter &writer) const

@@ -97,16 +97,20 @@ void CmdCopy::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdCopy::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdCopy::saveXml (QXmlStreamWriter &writer) const

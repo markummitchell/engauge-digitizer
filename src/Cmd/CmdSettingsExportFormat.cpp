@@ -83,16 +83,20 @@ void CmdSettingsExportFormat::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   mainWindow().updateSettingsExportFormat(m_modelExportAfter);
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdSettingsExportFormat::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   mainWindow().updateSettingsExportFormat(m_modelExportBefore);
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdSettingsExportFormat::saveXml (QXmlStreamWriter &writer) const

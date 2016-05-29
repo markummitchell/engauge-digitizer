@@ -83,10 +83,12 @@ void CmdDelete::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdDelete::cmdUndo ()
@@ -95,8 +97,10 @@ void CmdDelete::cmdUndo ()
 
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdDelete::saveXml (QXmlStreamWriter &writer) const

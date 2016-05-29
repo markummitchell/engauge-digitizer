@@ -47,6 +47,7 @@ HEADERS  += \
     src/Callback/CallbackBoundingRects.h \
     src/Callback/CallbackCheckAddPointAxis.h \
     src/Callback/CallbackCheckEditPointAxis.h \
+    src/Callback/CallbackDocumentHash.h \
     src/Callback/CallbackGatherXThetaValuesFunctions.h \
     src/Callback/CallbackNextOrdinal.h \
     src/Callback/CallbackPointOrdinal.h \
@@ -171,6 +172,8 @@ HEADERS  += \
     src/Dlg/DlgValidatorNumber.h \
     src/Document/Document.h \
     src/Document/DocumentAxesPointsRequired.h \
+    src/Document/DocumentHash.h \
+    src/Document/DocumentHashGenerator.h \
     src/Document/DocumentModelAbstractBase.h \
     src/Document/DocumentModelAxesChecker.h \
     src/Document/DocumentModelColorFilter.h \
@@ -333,6 +336,7 @@ SOURCES += \
     src/Callback/CallbackBoundingRects.cpp \
     src/Callback/CallbackCheckAddPointAxis.cpp \
     src/Callback/CallbackCheckEditPointAxis.cpp \
+    src/Callback/CallbackDocumentHash.cpp \
     src/Callback/CallbackGatherXThetaValuesFunctions.cpp \
     src/Callback/CallbackNextOrdinal.cpp \
     src/Callback/CallbackPointOrdinal.cpp \
@@ -452,6 +456,7 @@ SOURCES += \
     src/Dlg/DlgValidatorFactory.cpp \
     src/Dlg/DlgValidatorNumber.cpp \
     src/Document/Document.cpp \
+    src/Document/DocumentHashGenerator.cpp \
     src/Document/DocumentModelAbstractBase.cpp \
     src/Document/DocumentModelAxesChecker.cpp \
     src/Document/DocumentModelColorFilter.cpp \

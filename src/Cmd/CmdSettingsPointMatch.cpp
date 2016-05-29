@@ -82,16 +82,20 @@ void CmdSettingsPointMatch::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   mainWindow().updateSettingsPointMatch(m_modelPointMatchAfter);
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdSettingsPointMatch::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   mainWindow().updateSettingsPointMatch(m_modelPointMatchBefore);
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdSettingsPointMatch::saveXml (QXmlStreamWriter &writer) const

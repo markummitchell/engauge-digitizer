@@ -7,6 +7,8 @@
 #include "CmdAbstract.h"
 #include "DataKey.h"
 #include "Document.h"
+#include "DocumentHashGenerator.h"
+#include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -95,6 +97,52 @@ void CmdAbstract::resetSelection(const PointIdentifiers &pointIdentifiersToSelec
 
     item->setSelected (selected);
   }
+}
+
+void CmdAbstract::saveOrCheckPostCommandDocumentState (const Document &document)
+{
+  // LOG4CPP_INFO_S is below
+
+  DocumentHashGenerator documentHashGenerator;
+  DocumentHash documentHash = documentHashGenerator.generate (document);
+
+  if (m_documentHashPost.count() == 0) {
+
+    // This is the first time through here so save the initial value
+    m_documentHashPost = documentHash;
+
+  } else {
+
+    // This is not the first time through here so compare the current value to the initial value
+    ENGAUGE_ASSERT (documentHash == m_documentHashPost);
+
+  }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPostCommandDocumentState stateHash=" << m_documentHashPost.data ();
+
+}
+
+void CmdAbstract::saveOrCheckPreCommandDocumentState (const Document &document)
+{
+  // LOG4CPP_INFO_S is below
+
+  DocumentHashGenerator documentHashGenerator;
+  DocumentHash documentHash = documentHashGenerator.generate (document);
+
+  if (m_documentHashPre.count() == 0) {
+
+    // This is the first time through here so save the initial value
+    m_documentHashPre = documentHash;
+
+  } else {
+
+    // This is not the first time through here so compare the current value to the initial value
+    ENGAUGE_ASSERT (documentHash == m_documentHashPre);
+
+  }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPreCommandDocumentState stateHash=" << m_documentHashPre.data ();
+
 }
 
 void CmdAbstract::undo ()

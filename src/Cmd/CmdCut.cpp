@@ -98,20 +98,24 @@ void CmdCut::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdCut::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState (document ());
 }
 
 void CmdCut::saveXml (QXmlStreamWriter &writer) const

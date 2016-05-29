@@ -86,6 +86,7 @@ void CmdAddPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().addPointAxisWithGeneratedIdentifier (m_posScreen,
                                                   m_posGraph,
                                                   m_identifierAdded,
@@ -93,15 +94,18 @@ void CmdAddPointAxis::cmdRedo ()
                                                   m_isXOnly);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdAddPointAxis::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().removePointAxis (m_identifierAdded);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdAddPointAxis::saveXml (QXmlStreamWriter &writer) const

@@ -74,21 +74,25 @@ void CmdAddPointGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().addPointGraphWithGeneratedIdentifier (m_curveName,
                                                    m_posScreen,
                                                    m_identifierAdded,
                                                    m_ordinal);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdAddPointGraph::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().removePointGraph (m_identifierAdded);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdAddPointGraph::saveXml (QXmlStreamWriter &writer) const

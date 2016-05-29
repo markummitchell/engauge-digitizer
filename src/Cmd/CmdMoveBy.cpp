@@ -80,9 +80,11 @@ void CmdMoveBy::cmdRedo ()
                               << " deltaScreen=" << QPointFToString (m_deltaScreen).toLatin1().data()
                               << " moving=" << m_movedPoints.count ();
 
+  saveOrCheckPreCommandDocumentState  (document ());
   moveBy (m_deltaScreen);
   mainWindow().updateAfterCommand();
   resetSelection(m_movedPoints);
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdMoveBy::cmdUndo ()
@@ -91,9 +93,11 @@ void CmdMoveBy::cmdUndo ()
                               << " deltaScreen=" << QPointFToString (-1.0 * m_deltaScreen).toLatin1().data()
                               << " moving=" << m_movedPoints.count ();
 
+  saveOrCheckPostCommandDocumentState (document ());
   moveBy (-1.0 * m_deltaScreen);
   mainWindow().updateAfterCommand();
   resetSelection(m_movedPoints);
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdMoveBy::moveBy (const QPointF &deltaScreen)

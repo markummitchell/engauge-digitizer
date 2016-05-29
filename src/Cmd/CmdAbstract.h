@@ -7,6 +7,7 @@
 #ifndef CMD_ABSTRACT_H
 #define CMD_ABSTRACT_H
 
+#include "DocumentHash.h"
 #include "PointIdentifiers.h"
 #include <QUndoCommand>
 
@@ -48,6 +49,16 @@ protected:
   /// lets the user move selected point(s) repeatedly using arrow keys. Also provides expected behavior when pasting
   void resetSelection(const PointIdentifiers &pointIdentifiersToSelect);
 
+  /// Save, when called the first time, a hash value representing the state of the Document. Then on succeeding calls
+  /// the hash is recomputed and compared to the original value to check for consistency. This "post" method is called
+  /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPreCommandDocumentState
+  void saveOrCheckPostCommandDocumentState (const Document &document);
+
+  /// Save, when called the first time, a hash value representing the state of the Document. Then on succeeding calls
+  /// the hash is recomputed and compared to the original value to check for consistency. This "pre" method is called
+  /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPostCommandDocumentState
+  void saveOrCheckPreCommandDocumentState (const Document &document);
+
 private:
   CmdAbstract();
 
@@ -61,6 +72,10 @@ private:
   bool m_isFirstRedo;
   unsigned int m_identifierIndexBeforeRedo;
   unsigned int m_identifierIndexAfterRedo;
+
+  // Hash value that represents Document state before and after CmdAbstract::redo
+  DocumentHash m_documentHashPost;
+  DocumentHash m_documentHashPre;
 };
 
 #endif // CMD_ABSTRACT_H

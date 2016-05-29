@@ -150,7 +150,7 @@ private:
   QPointF m_posGraph;
   bool m_hasOrdinal;
   double m_ordinal;
-  bool m_isXOnly; // For DOCUMENT_AXES_POINTS_REQUIRED_4, true/false when x/y coordinate is undefed
+  bool m_isXOnly; // For DOCUMENT_AXES_POINTS_REQUIRED_4, true/false when x/y coordinate is undefined
 
   static unsigned int m_identifierIndex; // For generating unique identifiers
 };

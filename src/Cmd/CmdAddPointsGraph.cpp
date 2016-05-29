@@ -102,6 +102,7 @@ void CmdAddPointsGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointsGraph::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   for (int index = 0; index < m_points.count(); index++) {
 
     QString identifierAdded;
@@ -114,17 +115,20 @@ void CmdAddPointsGraph::cmdRedo ()
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdAddPointsGraph::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointsGraph::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   for (int index = 0; index < m_points.count(); index++) {
     document().removePointGraph (m_identifiersAdded [index]);
   }
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdAddPointsGraph::saveXml (QXmlStreamWriter &writer) const

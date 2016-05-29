@@ -86,20 +86,24 @@ void CmdEditPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdRedo";
 
+  saveOrCheckPreCommandDocumentState  (document ());
   document().editPointAxis (m_posGraphAfter,
                             m_pointIdentifier);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPostCommandDocumentState (document ());
 }
 
 void CmdEditPointAxis::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdUndo";
 
+  saveOrCheckPostCommandDocumentState (document ());
   document().editPointAxis (m_posGraphBefore,
                             m_pointIdentifier);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  saveOrCheckPreCommandDocumentState  (document ());
 }
 
 void CmdEditPointAxis::saveXml (QXmlStreamWriter &writer) const
