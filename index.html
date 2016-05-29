@@ -1,122 +1,162 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="icon" type="image/vnd.microsoft.icon" href="images/digitizer.ico">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'/>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="images/digitizer.ico"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
 
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
     <title>Engauge Digitizer</title>
   </head>
-
+  
   <body>
     <div id="container">
       <div class="inner">
+	
+	<header>
+	  <h1>Engauge Digitizer</h1>
+	  <h2>Extracts data points from images of graphs</h2>
+	</header>
+	
+	<section id="downloads" class="clearfix">
+	  <a href="https://github.com/markummitchell/engauge-digitizer/releases" id="releases" class="button"><span>Latest Releases</span></a>
+	  <a href="https://github.com/markummitchell/engauge-digitizer" id="view-on-github" class="button"><span>View on GitHub</span></a>
+	</section>
 
-        <header>
-          <h1>Engauge Digitizer</h1>
-          <h2>Extracts data points from images of graphs</h2>
-        </header>
+	<hr/>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/markummitchell/engauge-digitizer/releases" id="releases" class="button"><span>Latest Releases</span></a>
-          <a href="https://github.com/markummitchell/engauge-digitizer" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <div>
-          <p style="float: left"><a href="https://gitter.im/markummitchell/engauge-digitizer?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/markummitchell/engauge-digitizer.svg" alt="Join the chat at https://gitter.im/markummitchell/engauge-digitizer"></a></p><p style="float: right"><a href="https://travis-ci.org/markummitchell/engauge-digitizer"><img src="https://travis-ci.org/markummitchell/engauge-digitizer.svg?branch=master" alt="Travis build Status"></a> 
-            <a href="https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master"><img src="https://ci.appveyor.com/api/projects/status/1o7p8iu8qxq0p7ri/branch/master?svg=true" alt="AppVeyor build status"></a>
-          </p>
-          </div>
-          <div style="clear: both"></div>
-<p>The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs. The process is shown below - an image file is imported, digitized within Engauge, and exported as a table of numeric data to a text file. Work can be saved into an Engauge DIG file.</p>
-
-<p><img src="images/ProcessFlowchart.png" alt="process flowchart" /></p>
-
-<p>This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing databases of thousands of image files.</p>
-
-<p>Interested in translating Engauge to another language? We welcome translations of file translations/engauge.ts to <a href="https://github.com/markummitchell/engauge-digitizer/issues/85">other languages</a> using <a href="http://doc.qt.io/qt-5/linguist-translators.html">linguist</a> installed on your computer, or your browser at <a href="https://www.transifex.com/engauge-digitizer/engauge-digitizer/">Transifex</a>.</p>
-
-<p style="text-align: center"><a target="_blank" style="text-decoration:none; color:black; font-size:66%" href="https://www.transifex.com/projects/p/engauge-digitizer/resource/engauge_ents/" 
-title="See more information on Transifex.com">Top translations: engauge-digitizer</a><br/>
-<img border="0" src="https://www.transifex.com/projects/p/engauge-digitizer/resource/engauge_ents/chart/image_png"/><br/></p>
-
-<h2>
-<a id="released-versions" class="anchor" href="#released-versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Released Versions</h2>
-
-<p>Engauge Digitizer is distributed with most Linux distributions and through the Apple App Store (as Engauge Digitizer). 
-<a href="https://github.com/markummitchell/engauge-digitizer/releases">Releases</a> are also available for 
-Linux and Windows operating systems as downloads:</p>
-
-<ul>
-<li><p>Version 8.0 (5/28/2016) adds grid line display for fine adjustments, fixes multi-coordinate systems, and supports OSX 
-releases from the Apple App Store.</p></li>
-<li><p>Version 7.2 (4/5/2016) fixes loading of version 5.1 files and frozen export settings dialogs.</p></li>
-<li><p>Version 7.1 (3/25/2016) offers extra control over the export format, and support for the OSX operating system.</p></li>
-<li><p>Version 7.0 (3/5/2016) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or 
-(2) axes with only one known coordinate (floating axes). Files can also be imported by copying and pasting.</p></li>
-<li><p>Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator
-access privileges.</p></li>
-<li><p>Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.</p></li>
-<li><p>Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer 
-software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on 
-is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many 
-new features.</p></li>
-</ul>
-
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
-
-<p>Features in released versions of Engauge-Digitizer:</p>
-
-<ol>
-<li>Automated line and point extraction rapidly digitizes data</li>
-<li>Image processing for separating important details from background information</li>
-<li>Undo/redo of all operations means recovering from mistakes and experimenting with options is painless</li>
-<li>MSI installer for Windows operating system</li>
-<li>Wizard provides an interactive tutorial to explain the basic steps</li>
-<li>Wizard creates a checklist guide to interactively leads user through steps from file import to file export</li>
-<li>Cubic spline interpolation between points gives more accurate curves with fewer points</li>
-<li>Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes</li>
-<li>Graph coordinates can be specified as date and time values, or as degrees, minutes and seconds</li>
-<li>File import and data export by drag-and-drop and copy/paste</li>
-<li>Test suite for regression testing minimizes code breakage as new features are added</li>
-<li>Multiple coordinate systems in the same image can be digitized in advanced mode</li>
-<li>Axes with only one known coordinate (floating axes) can be digitized in advanced mode</li>
-</ol>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>Engauge can be installed using packages for all popular distributions of Linux (easiest method), or by downloading
-pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge-digitizer
-project at github.com, in the <a href="https://github.com/markummitchell/engauge-digitizer/releases">Releases page</a>. The final option 
-for installing is to build the software from the source
-code (very difficult). Building the software from the source code is accomplished by following the steps in the BUILD
-file that is found in the main directory. The build process can take as little as 15 minutes in Linux or as long as 
-several hours in Microsoft Windows.</p>
-
-<h2>
-<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h2>
-
-<p>Thanks to Zbigniew Jędrzejewski-Szmek, Tamás Nagy, Baurzhan Muftakhidinov, Tobias Winchen and other contributors and users!</p>
-        </section>
-
-        <footer>
-          Engauge Digitizer is maintained by <a href="https://github.com/markummitchell">markummitchell</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
+	<section id="main_content">
+	  <div>
+	    <p style="float: left">
+	      <a href="https://gitter.im/markummitchell/engauge-digitizer?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">
+		<img src="https://badges.gitter.im/markummitchell/engauge-digitizer.svg" alt="Join the chat at https://gitter.im/markummitchell/engauge-digitizer"/>
+	      </a>
+	    </p>
+	    <p style="float: right">
+	    <a href="https://travis-ci.org/markummitchell/engauge-digitizer">
+	      <img src="https://travis-ci.org/markummitchell/engauge-digitizer.svg?branch=master" alt="Travis build Status"/>
+	    </a>
+	    <a href="https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master">
+	      <img src="https://ci.appveyor.com/api/projects/status/1o7p8iu8qxq0p7ri/branch/master?svg=true" alt="AppVeyor build status"/>
+	    </a>
+	    </p>
+	  </div>
+	  <div style="clear: both"></div>
+	  <p>
+	    The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting
+	    data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data 
+	    points to graphs. The process is shown below - an image file is imported, digitized within Engauge, and exported as a table of numeric data to a text file. 
+	    Work can be saved into an Engauge DIG file.
+	  </p>
+	  <p>
+	    <img src="images/ProcessFlowchart.png" alt="process flowchart" />
+	  </p>
+	  <p>
+	    This tool is widely used. Users range from one-time users digitizing a single image file, to large government and commercial organizations managing
+	    databases of thousands of image files.
+	  </p>
+	  <p>
+	    Interested in translating Engauge to another language? We welcome translations of file translations/engauge.ts to 
+	    <a href="https://github.com/markummitchell/engauge-digitizer/issues/85">other languages</a> using 
+	    <a href="http://doc.qt.io/qt-5/linguist-translators.html">linguist</a> 
+	    installed on your computer, or your browser at <a href="https://www.transifex.com/engauge-digitizer/engauge-digitizer/">Transifex</a>.
+	  </p>
+	  <p style="text-align: center">
+	    <a target="_blank" style="text-decoration:none; color:black; font-size:66%" href="https://www.transifex.com/projects/p/engauge-digitizer/resource/engauge_ents/" 
+	       title="See more information on Transifex.com">Top translations: engauge-digitizer</a><br/>
+	    <img border="0" src="https://www.transifex.com/projects/p/engauge-digitizer/resource/engauge_ents/chart/image_png"/><br/>
+	  </p>
+	  <h2>
+	    <a id="released-versions" class="anchor" href="#released-versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Released Versions
+	  </h2>
+	  <p>
+	    Engauge Digitizer is distributed with most Linux distributions and through the Apple App Store (as Engauge Digitizer). 
+	    <a href="https://github.com/markummitchell/engauge-digitizer/releases">Releases</a> are also available for 
+	    Linux and Windows operating systems as downloads:
+	  </p>
+	  <ul>
+	    <li>
+	      <p>Version 8.0 (5/28/2016) adds grid line display for fine adjustments, fixes multi-coordinate systems, and supports OSX 
+		releases from the Apple App Store.</p>
+	    </li>
+	    <li>
+	      <p>Version 7.2 (4/5/2016) fixes loading of version 5.1 files and frozen export settings dialogs.</p>
+	    </li>
+	    <li>
+	      <p>Version 7.1 (3/25/2016) offers extra control over the export format, and support for the OSX operating system.</p>
+	    </li>
+	    <li>
+	      <p>
+		Version 7.0 (3/5/2016) offers an advanced import mode for (1) multiple coordinate systems in the same image and/or 
+		(2) axes with only one known coordinate (floating axes). Files can also be imported by copying and pasting.
+	      </p>
+	    </li>
+	    <li>
+	      <p>Version 6.2 (11/4/2015) now accepts dragged DIG files, and adds a ZIP file for installing in Windows without administrator access privileges.</p>
+	    </li>
+	    <li><p>Version 6.1 (10/31/2015) can load DIG files from earlier versions of Engauge Digitizer.</p></li>
+	    <li>
+	      <p>
+		Version 6.0 (10/23/2015) of Engauge 6 was released. This is a major rewrite of the 10 year old Engauge Digitizer 
+		software project that lives on sourceforge.net. The replacement is required since the Qt3 toolkit that Engauge relies on 
+		is disappearing. Engauge-Digitizer uses the new Qt5 library which should be available for many years, and also offers many 
+		new features.
+	      </p>
+	    </li>
+	  </ul>
+	  <h2>
+	    <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features
+	  </h2>
+	  <p>Features in released versions of Engauge-Digitizer:</p>
+	  <ol>
+	    <li>Grid lines are displayed for fine adjustments of the axis points that define the coordinate systems</li>
+	    <li>Automated line and point extraction rapidly digitizes data</li>
+	    <li>Image processing for separating important details from background information</li>
+	    <li>Undo/redo of all operations means recovering from mistakes and experimenting with options is painless</li>
+	    <li>MSI installer for Windows operating system</li>
+	    <li>Wizard provides an interactive tutorial to explain the basic steps</li>
+	    <li>Wizard creates a checklist guide to interactively leads user through steps from file import to file export</li>
+	    <li>Cubic spline interpolation between points gives more accurate curves with fewer points</li>
+	    <li>Axes Checker briefly highlights the axes when they are defined or modified, to reveal entry mistakes</li>
+	    <li>Graph coordinates can be specified as date and time values, or as degrees, minutes and seconds</li>
+	    <li>File import and data export by drag-and-drop and copy/paste</li>
+	    <li>Test suite for regression testing minimizes code breakage as new features are added</li>
+	    <li>Multiple coordinate systems in the same image can be digitized in advanced mode</li>
+	    <li>Axes with only one known coordinate (floating axes) can be digitized in advanced mode</li>
+	  </ol>
+	  <h2>
+	    <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation
+	  </h2>
+	  <p>
+	    Engauge can be installed using repository packages for popular Linux distributions of Linux or the Apple App Store for OSX (easiest methods), or by downloading
+	    pre-built binaries for Windows and Linux (slightly less easy). The pre-built binaries are available from the engauge-digitizer
+	    project at github.com, in the <a href="https://github.com/markummitchell/engauge-digitizer/releases">Releases page</a>. The final option 
+	    for installing is to build the software from the source
+	    code (very difficult). Building the software from the source code is accomplished by following the steps in the BUILD
+n	    file that is found in the main directory. The build process can take as little as one hour in Linux or as long as 
+	    several hours in Microsoft Windows.
+	  </p>
+	  <h2>
+	    <a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors
+	  </h2>
+	  <p>
+	    Many thanks to <a href="https://github.com/keszybz">Zbigniew Jędrzejewski-Szmek</a>, 
+	    <a href="https://github.com/crayxt">Baurzhan Muftakhidinov</a> and Tobias Winchen for software development.
+	    Thanks to our translators for language translations. Finally, thanks to users to asking questions and providing excellent 
+	    feedback.
+	  </p>
+	</section>
+	<footer>
+	  Engauge Digitizer is maintained by <a href="https://github.com/markummitchell">markummitchell</a><br/>
+	  This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by 
+	  <a href="https://twitter.com/jasonlong">Jason Long</a>.
+	</footer>
       </div>
     </div>
   </body>
