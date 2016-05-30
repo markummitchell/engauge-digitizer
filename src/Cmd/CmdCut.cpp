@@ -112,11 +112,8 @@ void CmdCut::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
-
-  document().updatePointOrdinals (mainWindow().transformation());
-  mainWindow().updateAfterCommand();
   restoreDocumentState (document ());
+  mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

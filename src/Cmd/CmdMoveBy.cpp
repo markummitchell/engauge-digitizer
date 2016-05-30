@@ -95,10 +95,9 @@ void CmdMoveBy::cmdUndo ()
                               << " moving=" << m_movedPoints.count ();
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  moveBy (-1.0 * m_deltaScreen);
+  restoreDocumentState (document ());
   mainWindow().updateAfterCommand();
   resetSelection(m_movedPoints);
-  restoreDocumentState (document ());
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

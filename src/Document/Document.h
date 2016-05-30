@@ -246,10 +246,6 @@ public:
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 
-  /// Let CmdAbstract classes overwrite CurvesGraphs.
-  void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
-                        const CurvesGraphs &curvesGraphs);
-
   /// Set the number of axes points required. This is called during the Document creation process, after imported images have
   /// been previewed or loaded files have had at least some xml parsing
   void setDocumentAxesPointsRequired (DocumentAxesPointsRequired documentAxesPointsRequired);

@@ -63,6 +63,7 @@ HEADERS  += \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPaste.h \
     Cmd/CmdPointChangeBase.h \
+    Cmd/CmdRedoForTest.h \
     Cmd/CmdSelectCoordSystem.h \
     Cmd/CmdSettingsAxesChecker.h \
     Cmd/CmdSettingsColorFilter.h \
@@ -77,6 +78,7 @@ HEADERS  += \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
+    Cmd/CmdUndoForTest.h \
     Color/ColorConstants.h \
     Color/ColorFilter.h \
     Color/ColorFilterEntry.h \
@@ -352,6 +354,7 @@ SOURCES += \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdPaste.cpp \
+    Cmd/CmdRedoForTest.cpp \
     Cmd/CmdPointChangeBase.cpp \
     Cmd/CmdSelectCoordSystem.cpp \
     Cmd/CmdSettingsAxesChecker.cpp \
@@ -367,6 +370,7 @@ SOURCES += \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
+    Cmd/CmdUndoForTest.cpp \
     Color/ColorFilter.cpp \
     Color/ColorFilterHistogram.cpp \
     Color/ColorFilterMode.cpp \

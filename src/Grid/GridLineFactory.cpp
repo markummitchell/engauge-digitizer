@@ -38,8 +38,8 @@ GridLineFactory::GridLineFactory(QGraphicsScene &scene,
   m_transformation (transformation),
   m_isChecker (false)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
-                              << " transformation=" << transformation;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
+                               << " transformation=" << transformation;
 }
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
@@ -54,10 +54,10 @@ GridLineFactory::GridLineFactory(QGraphicsScene &scene,
   m_transformation (transformation),
   m_isChecker (true)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
-                              << " pointRadius=" << pointRadius
-                              << " pointsToIsolate=" << pointsToIsolate.count()
-                              << " transformation=" << transformation;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
+                               << " pointRadius=" << pointRadius
+                               << " pointsToIsolate=" << pointsToIsolate.count()
+                               << " transformation=" << transformation;
 }
 
 void GridLineFactory::bindItemToScene(QGraphicsItem *item) const
@@ -78,11 +78,11 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
                                            double xTo,
                                            double yTo)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::createGridLine"
-                              << " xFrom=" << xFrom
-                              << " yFrom=" << yFrom
-                              << " xTo=" << xTo
-                              << " yTo=" << yTo;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::createGridLine"
+                               << " xFrom=" << xFrom
+                               << " yFrom=" << yFrom
+                               << " xTo=" << xTo
+                               << " yTo=" << yTo;
 
   GridLine *gridLine = new GridLine ();
 
@@ -320,11 +320,11 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
                                             double yTo,
                                             GridLine &gridLine) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::finishActiveGridLine"
-                              << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
-                              << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
-                              << " yFrom=" << yFrom
-                              << " yTo=" << yTo;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::finishActiveGridLine"
+                               << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
+                               << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
+                               << " yFrom=" << yFrom
+                               << " yTo=" << yTo;
 
   QGraphicsItem *item;
   if ((m_modelCoords.coordsType() == COORDS_TYPE_POLAR) &&
@@ -359,9 +359,9 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
 QGraphicsItem *GridLineFactory::lineItem (const QPointF &posStartScreen,
                                           const QPointF &posEndScreen) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::lineItem"
-                              << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
-                              << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::lineItem"
+                               << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
+                               << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data();
 
   return new QGraphicsLineItem (QLineF (posStartScreen,
                                         posEndScreen));

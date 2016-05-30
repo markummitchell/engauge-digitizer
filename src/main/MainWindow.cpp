@@ -112,7 +112,7 @@
 const QString EMPTY_FILENAME ("");
 const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
-
+const int REGRESSION_INTERVAL = 4000; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
@@ -1771,8 +1771,7 @@ bool MainWindow::loadImage (const QString &fileName,
           CurvesGraphs curvesGraphs;
           wizard->populateCurvesGraphs (coordSystemIndex,
                                         curvesGraphs);
-          m_cmdMediator->document().setCurvesGraphs(coordSystemIndex,
-                                                    curvesGraphs);
+          m_cmdMediator->document().setCurvesGraphs(curvesGraphs);
         }
 
         // Unhide the checklist guide
@@ -3701,8 +3700,6 @@ void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
 
-  const int REGRESSION_INTERVAL = 400; // Milliseconds
-
   // Need absolute path since QDir::currentPath has been changed already so the
   // current path is not predictable
   QString absoluteRegressionInputFile = QString ("%1/%2")
@@ -3722,8 +3719,6 @@ void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
 void MainWindow::startRegressionTestFileCmdScript()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestFileCmdScript";
-
-  const int REGRESSION_INTERVAL = 400; // Milliseconds
 
   m_timerRegressionFileCmdScript = new QTimer();
   m_timerRegressionFileCmdScript->setSingleShot(false);

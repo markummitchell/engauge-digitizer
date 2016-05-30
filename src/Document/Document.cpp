@@ -842,15 +842,6 @@ void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
   m_coordSystemContext.setCurvesGraphs(curvesGraphs);
 }
 
-void Document::setCurvesGraphs (CoordSystemIndex coordSystemIndex,
-                                const CurvesGraphs &curvesGraphs)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
-
-  m_coordSystemContext.setCurvesGraphs(coordSystemIndex,
-                                       curvesGraphs);
-}
-
 void Document::setDocumentAxesPointsRequired(DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setDocumentAxesPointsRequired";

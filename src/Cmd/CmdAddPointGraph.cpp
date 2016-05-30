@@ -90,10 +90,8 @@ void CmdAddPointGraph::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  document().removePointGraph (m_identifierAdded);
-  document().updatePointOrdinals (mainWindow().transformation());
-  mainWindow().updateAfterCommand();
   restoreDocumentState (document ());
+  mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

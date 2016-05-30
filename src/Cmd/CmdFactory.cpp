@@ -15,6 +15,7 @@
 #include "CmdFactory.h"
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
+#include "CmdRedoForTest.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdSettingsAxesChecker.h"
 #include "CmdSettingsColorFilter.h"
@@ -26,6 +27,7 @@
 #include "CmdSettingsGridRemoval.h"
 #include "CmdSettingsPointMatch.h"
 #include "CmdSettingsSegments.h"
+#include "CmdUndoForTest.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -100,6 +102,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                         document,
                         cmdDescription,
                         reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_REDO_FOR_TEST) {
+    cmd = new CmdRedoForTest (mainWindow,
+                              document,
+                              cmdDescription,
+                              reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SELECT_COORD_SYSTEM) {
     cmd = new CmdSelectCoordSystem (mainWindow,
                                     document, 
@@ -155,6 +162,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                    document,
                                    cmdDescription,
                                    reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_UNDO_FOR_TEST) {
+    cmd = new CmdUndoForTest (mainWindow,
+                              document,
+                              cmdDescription,
+                              reader);
   } else {
 
     // Invalid xml

@@ -42,8 +42,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_lineWidth (lineWidth),
   m_wanted (true)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
+                               << " identifier=" << identifier.toLatin1 ().data ();
 
   createPointEllipse (radius);
 }
@@ -66,15 +66,15 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_lineWidth (lineWidth),
   m_wanted (true)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
-                              << " identifier=" << identifier.toLatin1 ().data ();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
+                               << " identifier=" << identifier.toLatin1 ().data ();
 
   createPointPolygon (polygon);
 }
 
 GraphicsPoint::~GraphicsPoint()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::~GraphicsPoint";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::~GraphicsPoint";
 
   if (m_graphicsItemEllipse == 0) {
 
@@ -102,7 +102,7 @@ GraphicsPoint::~GraphicsPoint()
 
 void GraphicsPoint::createPointEllipse (unsigned int radius)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
 
   const int radiusSigned = radius; // Radius must be signed before multiplying by -1 below, for Visual Studio
   m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
@@ -141,7 +141,7 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
 
 void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPoint::createPointPolygon";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointPolygon";
 
   m_graphicsItemPolygon = new GraphicsPointPolygon (*this,
                                                     polygon);

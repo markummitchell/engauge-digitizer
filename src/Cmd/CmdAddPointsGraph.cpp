@@ -124,12 +124,8 @@ void CmdAddPointsGraph::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointsGraph::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  for (int index = 0; index < m_points.count(); index++) {
-    document().removePointGraph (m_identifiersAdded [index]);
-  }
-  document().updatePointOrdinals (mainWindow().transformation());
-  mainWindow().updateAfterCommand();
   restoreDocumentState (document ());
+  mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

@@ -103,10 +103,8 @@ void CmdAddPointAxis::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  document().removePointAxis (m_identifierAdded);
-  document().updatePointOrdinals (mainWindow().transformation());
-  mainWindow().updateAfterCommand();
   restoreDocumentState (document ());
+  mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

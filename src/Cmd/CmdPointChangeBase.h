@@ -31,7 +31,10 @@ public:
 
 protected:
 
+  /// Restore the document previously saved by saveDocumentState
   void restoreDocumentState (Document &document) const;
+
+  /// Save the document state for restoration by restoreDocumentState
   void saveDocumentState (const Document &document);
 
 private:

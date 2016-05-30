@@ -100,11 +100,8 @@ void CmdEditPointAxis::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  document().editPointAxis (m_posGraphBefore,
-                            m_pointIdentifier);
-  document().updatePointOrdinals (mainWindow().transformation());
-  mainWindow().updateAfterCommand();
   restoreDocumentState (document ());
+  mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 

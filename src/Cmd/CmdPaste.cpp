@@ -80,9 +80,9 @@ void CmdPaste::cmdUndo ()
                               << " pasting=" << m_copiedPoints.count ();
 
   saveOrCheckPostCommandDocumentStateHash (document ());
+  restoreDocumentState (document ());
   mainWindow().updateAfterCommand();
   resetSelection(m_copiedPoints);
-  restoreDocumentState (document ());
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
