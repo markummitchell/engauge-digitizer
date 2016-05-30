@@ -112,7 +112,7 @@
 const QString EMPTY_FILENAME ("");
 const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
-const int REGRESSION_INTERVAL = 4000; // Milliseconds
+const int REGRESSION_INTERVAL = 400; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
@@ -3699,6 +3699,12 @@ void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
                                                 const QString &regressionInputFile)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
+
+  // In order for point-deleting commands to work (CmdCut, CmdDelete) in the regression tests, we need to
+  // reset the Point identifier index here:
+  // 1) after loading of the file which has increased the index value to greater than 0
+  // 2) before running any commands since those commands implicitly assume the index is zero
+  Point::setIdentifierIndex(0);
 
   // Need absolute path since QDir::currentPath has been changed already so the
   // current path is not predictable

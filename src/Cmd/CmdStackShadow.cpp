@@ -42,6 +42,10 @@ void CmdStackShadow::loadCommands (MainWindow &mainWindow,
   // Save pointer to MainWindow
   m_mainWindow = &mainWindow;
 
+  // Signals for hack that allows script to perform redo/undo
+  connect (this, SIGNAL (signalRedo ()), mainWindow.cmdMediator(), SLOT (redo ()));
+  connect (this, SIGNAL (signalUndo ()), mainWindow.cmdMediator(), SLOT (undo ()));
+
   // Load commands
   CmdFactory factory;
   while (!reader.atEnd() && !reader.hasError()) {
@@ -78,13 +82,13 @@ void CmdStackShadow::slotRedo ()
 
         // Redo command is a special case. Redo of this command is equivalent to redo of the last command on the command stack
         // (which will never be CmdRedoForTest or CmdUndoForTest since they are never passed onto that command stack)
-        m_mainWindow->cmdMediator()->redo();
+        emit (signalRedo ());
 
       } else if (cmdUndoForTest != 0) {
 
         // Undo command is a special case. Redo of this command is equivalent to undo of the last command on the command stack
         // (which will never be CmdRedoForTest or CmdUndoForTest since they are never passed onto that command stack)
-        m_mainWindow->cmdMediator()->undo();
+        emit (signalUndo ());
 
       } else {
 

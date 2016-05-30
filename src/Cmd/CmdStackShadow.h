@@ -50,6 +50,13 @@ public slots:
   /// Throw away every command since trying to reconcile two different command stacks after an undo is too dangerous
   void slotUndo ();
 
+signals:
+  /// Signal used to emulate a shift-control-z redo command from user during testing
+  void signalRedo();
+
+  /// Signal used to emulate a shift-z undo command from user during testing
+  void signalUndo();
+
 private:
 
   MainWindow *m_mainWindow;
