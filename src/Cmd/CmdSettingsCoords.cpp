@@ -83,20 +83,20 @@ void CmdSettingsCoords::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCoords(m_modelCoordsAfter);
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsCoords::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCoords(m_modelCoordsBefore);
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsCoords::saveXml (QXmlStreamWriter &writer) const

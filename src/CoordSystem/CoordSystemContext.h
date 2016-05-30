@@ -132,9 +132,9 @@ class CoordSystemContext : public CoordSystemInterface
   /// Index of current CoordSystem
   void setCoordSystemIndex (CoordSystemIndex coordSystemIndex);
 
-  /// Applies to current coordinate system
-  void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
-                        const CurvesGraphs &curvesGraphs);
+  virtual void setCurveAxes (const Curve &curveAxes);
+  virtual void setCurvesGraphs (CoordSystemIndex coordSystemIndex,
+                                const CurvesGraphs &curvesGraphs);
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs); // Applies to current coordinate system
   virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
   virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);

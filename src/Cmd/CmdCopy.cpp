@@ -33,7 +33,7 @@ CmdCopy::CmdCopy(MainWindow &mainWindow,
   m_transformIsDefined (mainWindow.transformIsDefined())
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::CmdCopy"
-                              << " selected=" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
+                              << " selected=" << selectedPointIdentifiers.count ();
 
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
@@ -97,20 +97,20 @@ void CmdCopy::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdCopy::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdCopy::saveXml (QXmlStreamWriter &writer) const

@@ -82,20 +82,20 @@ void CmdSettingsGeneral::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGeneral::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGeneral(m_modelGeneralAfter);
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsGeneral::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGeneral::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGeneral(m_modelGeneralBefore);
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsGeneral::saveXml (QXmlStreamWriter &writer) const

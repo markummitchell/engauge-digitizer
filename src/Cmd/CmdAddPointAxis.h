@@ -7,13 +7,13 @@
 #ifndef CMD_ADD_POINT_AXIS_H
 #define CMD_ADD_POINT_AXIS_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include <QPointF>
 
 class QXmlStreamReader;
 
 /// Command for adding one axis point.
-class CmdAddPointAxis : public CmdAbstract
+class CmdAddPointAxis : public CmdPointChangeBase
 {
  public:
   /// Constructor for normal creation

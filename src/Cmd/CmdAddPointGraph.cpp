@@ -21,9 +21,9 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
                                     const QString &curveName,
                                     const QPointF &posScreen,
                                     double ordinal) :
-  CmdAbstract (mainWindow,
-               document,
-               CMD_DESCRIPTION),
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      CMD_DESCRIPTION),
   m_curveName (curveName),
   m_posScreen (posScreen),
   m_ordinal (ordinal)
@@ -37,9 +37,9 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
                                     Document &document,
                                     const QString &cmdDescription,
                                     QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::CmdAddPointGraph";
 
@@ -74,25 +74,27 @@ void CmdAddPointGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
+  saveDocumentState (document ());
   document().addPointGraphWithGeneratedIdentifier (m_curveName,
                                                    m_posScreen,
                                                    m_identifierAdded,
                                                    m_ordinal);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdAddPointGraph::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   document().removePointGraph (m_identifierAdded);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  restoreDocumentState (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdAddPointGraph::saveXml (QXmlStreamWriter &writer) const

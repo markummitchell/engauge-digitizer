@@ -111,20 +111,20 @@ void CmdSettingsCurveAddRemove::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsCurveAddRemove::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdSettingsCurveAddRemove::saveXml (QXmlStreamWriter &writer) const

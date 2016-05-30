@@ -24,12 +24,12 @@ const QString CMD_DESCRIPTION ("Delete");
 CmdDelete::CmdDelete(MainWindow &mainWindow,
                      Document &document,
                      const QStringList &selectedPointIdentifiers) :
-  CmdAbstract(mainWindow,
-              document,
-              CMD_DESCRIPTION)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      CMD_DESCRIPTION)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete"
-                              << " selected=(" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
+                              << " selected=" << selectedPointIdentifiers.count ();
 
   // Export to clipboard
   ExportToClipboard exportStrategy;
@@ -47,9 +47,9 @@ CmdDelete::CmdDelete (MainWindow &mainWindow,
                       Document &document,
                       const QString &cmdDescription,
                       QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete";
 
@@ -83,24 +83,26 @@ void CmdDelete::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
+  saveDocumentState (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdDelete::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdUndo";
 
+  saveOrCheckPostCommandDocumentStateHash (document ());
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
-  saveOrCheckPostCommandDocumentState (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  restoreDocumentState (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdDelete::saveXml (QXmlStreamWriter &writer) const

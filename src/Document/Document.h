@@ -240,6 +240,9 @@ public:
   /// Set the index of current active CoordSystem
   void setCoordSystemIndex(CoordSystemIndex coordSystemIndex);
 
+  /// Let CmdAbstract classes overwrite axes Curve.
+  void setCurveAxes (const Curve &curveAxes);
+
   /// Let CmdAbstract classes overwrite CurvesGraphs.
   void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
 

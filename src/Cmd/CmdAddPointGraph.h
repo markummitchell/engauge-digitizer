@@ -7,14 +7,14 @@
 #ifndef CMD_ADD_POINT_GRAPH_H
 #define CMD_ADD_POINT_GRAPH_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include <QPointF>
 
 class QXmlStreamReader;
 class Transformation;
 
 /// Command for adding one graph point.
-class CmdAddPointGraph : public CmdAbstract
+class CmdAddPointGraph : public CmdPointChangeBase
 {
  public:
   /// Constructor for normal creation

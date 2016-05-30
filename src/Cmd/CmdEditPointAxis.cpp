@@ -23,9 +23,9 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
                                     const QPointF &posGraphBefore,
                                     const QPointF &posGraphAfter,
                                     bool isXOnly) :
-  CmdAbstract (mainWindow,
-               document,
-               CMD_DESCRIPTION),
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      CMD_DESCRIPTION),
   m_pointIdentifier (pointIdentifier),
   m_posGraphBefore (posGraphBefore),
   m_posGraphAfter (posGraphAfter),
@@ -41,9 +41,9 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
                                     Document &document,
                                     const QString &cmdDescription,
                                     QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::CmdEditPointAxis";
 
@@ -86,24 +86,26 @@ void CmdEditPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdRedo";
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
+  saveDocumentState (document ());
   document().editPointAxis (m_posGraphAfter,
                             m_pointIdentifier);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdEditPointAxis::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   document().editPointAxis (m_posGraphBefore,
                             m_pointIdentifier);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState  (document ());
+  restoreDocumentState (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdEditPointAxis::saveXml (QXmlStreamWriter &writer) const

@@ -7,7 +7,7 @@
 #ifndef CMD_CUT_H
 #define CMD_CUT_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include "CurvesGraphs.h"
 #include <QHash>
 #include <QStringList>
@@ -15,7 +15,7 @@
 class QXmlStreamReader;
 
 /// Command for cutting all selected Points.
-class CmdCut : public CmdAbstract
+class CmdCut : public CmdPointChangeBase
 {
 public:
   /// Constructor for normal creation
@@ -43,6 +43,7 @@ private:
   QString m_html;
 
   CurvesGraphs m_curvesGraphsRemoved;
+
 };
 
 #endif // CMD_CUT_H

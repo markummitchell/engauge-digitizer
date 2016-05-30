@@ -99,7 +99,7 @@ void CmdAbstract::resetSelection(const PointIdentifiers &pointIdentifiersToSelec
   }
 }
 
-void CmdAbstract::saveOrCheckPostCommandDocumentState (const Document &document)
+void CmdAbstract::saveOrCheckPostCommandDocumentStateHash (const Document &document)
 {
   // LOG4CPP_INFO_S is below
 
@@ -118,11 +118,11 @@ void CmdAbstract::saveOrCheckPostCommandDocumentState (const Document &document)
 
   }
 
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPostCommandDocumentState stateHash=" << m_documentHashPost.data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPostCommandDocumentStateHash stateHash=" << m_documentHashPost.data ();
 
 }
 
-void CmdAbstract::saveOrCheckPreCommandDocumentState (const Document &document)
+void CmdAbstract::saveOrCheckPreCommandDocumentStateHash (const Document &document)
 {
   // LOG4CPP_INFO_S is below
 
@@ -141,7 +141,7 @@ void CmdAbstract::saveOrCheckPreCommandDocumentState (const Document &document)
 
   }
 
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPreCommandDocumentState stateHash=" << m_documentHashPre.data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::saveOrCheckPreCommandDocumentStateHash stateHash=" << m_documentHashPre.data ();
 
 }
 

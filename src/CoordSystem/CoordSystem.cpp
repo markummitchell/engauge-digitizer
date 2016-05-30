@@ -813,6 +813,18 @@ QString CoordSystem::selectedCurveName () const
   return m_selectedCurveName;
 }
 
+void CoordSystem::setCurveAxes (const Curve &curveAxes)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::setCurveAxes";
+
+  if (m_curveAxes != 0) {
+    delete m_curveAxes;
+    m_curveAxes = 0;
+  }
+
+  m_curveAxes = new Curve (curveAxes);
+}
+
 void CoordSystem::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::setCurvesGraphs";

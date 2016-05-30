@@ -7,7 +7,7 @@
 #ifndef CMD_MOVE_BY_H
 #define CMD_MOVE_BY_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include "PointIdentifiers.h"
 #include <QPointF>
 #include <QStringList>
@@ -15,7 +15,7 @@
 class QXmlStreamReader;
 
 /// Command for moving all selected Points by a specified translation.
-class CmdMoveBy : public CmdAbstract
+class CmdMoveBy : public CmdPointChangeBase
 {
 public:
   /// Constructor for normal creation

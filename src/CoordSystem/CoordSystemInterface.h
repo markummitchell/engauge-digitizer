@@ -205,7 +205,10 @@ public:
   /// Currently selected curve name. This is used to set the selected curve combobox in MainWindow
   virtual QString selectedCurveName () const = 0;
 
-  /// Let CmdAbstract classes overwrite CurvesGraphs.
+  /// Let CmdAbstract classes overwrite axes Curve. Applies to current coordinate system
+  virtual void setCurveAxes (const Curve &curveAxes) = 0;
+
+  /// Let CmdAbstract classes overwrite CurvesGraphs. Applies to current coordinate system
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs) = 0;
 
   /// Set method for DocumentModelAxesChecker.

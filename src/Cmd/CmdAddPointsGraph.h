@@ -7,7 +7,7 @@
 #ifndef CMD_ADD_POINTS_GRAPH_H
 #define CMD_ADD_POINTS_GRAPH_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include <QList>
 #include <QPointF>
 #include <QStringList>
@@ -16,7 +16,7 @@ class QXmlStreamReader;
 class Transformation;
 
 /// Command for adding one or more graph points. This is for Segment Fill mode
-class CmdAddPointsGraph : public CmdAbstract
+class CmdAddPointsGraph : public CmdPointChangeBase
 {
  public:
   /// Constructor for normal creation

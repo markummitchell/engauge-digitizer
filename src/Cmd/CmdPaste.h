@@ -7,7 +7,7 @@
 #ifndef CMD_PASTE_H
 #define CMD_PASTE_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include "MimePoints.h"
 #include "PointIdentifiers.h"
 #include <QStringList>
@@ -15,7 +15,7 @@
 class QXmlStreamReader;
 
 /// Command for moving all selected Points by a specified translation.
-class CmdPaste : public CmdAbstract
+class CmdPaste : public CmdPointChangeBase
 {
 public:
   /// Constructor for normal creation

@@ -461,6 +461,13 @@ void CoordSystemContext::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)
   m_coordSystemIndex = coordSystemIndex;
 }
 
+void CoordSystemContext::setCurveAxes (const Curve &curveAxes)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCurveAxes";
+
+  m_coordSystems [m_coordSystemIndex]->setCurveAxes(curveAxes);
+}
+
 void CoordSystemContext::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setCurvesGraphs";

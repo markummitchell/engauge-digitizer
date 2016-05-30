@@ -7,14 +7,14 @@
 #ifndef CMD_EDIT_POINT_AXIS_H
 #define CMD_EDIT_POINT_AXIS_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include <QPointF>
 
 class QXmlStreamReader;
 
 /// Command for editing the graph coordinates one axis point. The screen coordinates are
 /// handled by another command
-class CmdEditPointAxis : public CmdAbstract
+class CmdEditPointAxis : public CmdPointChangeBase
 {
  public:
   /// Constructor for normal creation

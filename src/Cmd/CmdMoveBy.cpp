@@ -23,9 +23,9 @@ CmdMoveBy::CmdMoveBy(MainWindow &mainWindow,
                      const QPointF &deltaScreen,
                      const QString &moveText,
                      const QStringList &selectedPointIdentifiers) :
-  CmdAbstract(mainWindow,
-              document,
-              moveText),
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      moveText),
   m_deltaScreen (deltaScreen)
 {
   QStringList selected; // For debug
@@ -47,9 +47,9 @@ CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
                       Document &document,
                       const QString &cmdDescription,
                       QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdMoveBy::CmdMoveBy";
 
@@ -80,11 +80,12 @@ void CmdMoveBy::cmdRedo ()
                               << " deltaScreen=" << QPointFToString (m_deltaScreen).toLatin1().data()
                               << " moving=" << m_movedPoints.count ();
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
+  saveDocumentState (document ());
   moveBy (m_deltaScreen);
   mainWindow().updateAfterCommand();
   resetSelection(m_movedPoints);
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdMoveBy::cmdUndo ()
@@ -93,11 +94,12 @@ void CmdMoveBy::cmdUndo ()
                               << " deltaScreen=" << QPointFToString (-1.0 * m_deltaScreen).toLatin1().data()
                               << " moving=" << m_movedPoints.count ();
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   moveBy (-1.0 * m_deltaScreen);
   mainWindow().updateAfterCommand();
   resetSelection(m_movedPoints);
-  saveOrCheckPreCommandDocumentState  (document ());
+  restoreDocumentState (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdMoveBy::moveBy (const QPointF &deltaScreen)

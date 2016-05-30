@@ -132,6 +132,7 @@ public:
   virtual void removePointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
   virtual void saveXml (QXmlStreamWriter &writer) const;
   virtual QString selectedCurveName () const;
+  virtual void setCurveAxes (const Curve &curveAxes);
   virtual void setCurvesGraphs (const CurvesGraphs &curvesGraphs);
   virtual void setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
   virtual void setModelColorFilter(const DocumentModelColorFilter &modelColorFilter);

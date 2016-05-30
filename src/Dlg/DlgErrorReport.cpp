@@ -41,7 +41,7 @@ DlgErrorReport::DlgErrorReport(const QString &xml,
   lblPreview->setWordWrap(true);
   layout->addWidget (lblPreview);
 
-  m_chkOriginal = new QCheckBox (tr ("Include original document information, otherwize anonymize the information"));
+  m_chkOriginal = new QCheckBox (tr ("Include original document information, otherwise anonymize the information"));
   m_chkOriginal->setChecked (true);
   updateFile ();
   layout->addWidget (m_chkOriginal);

@@ -7,7 +7,7 @@
 #ifndef CMD_DELETE_H
 #define CMD_DELETE_H
 
-#include "CmdAbstract.h"
+#include "CmdPointChangeBase.h"
 #include "CurvesGraphs.h"
 #include <QHash>
 #include <QStringList>
@@ -15,7 +15,7 @@
 class QXmlStreamReader;
 
 /// Command for deleting all selected Points.
-class CmdDelete : public CmdAbstract
+class CmdDelete : public CmdPointChangeBase
 {
 public:
   /// Constructor for normal creation

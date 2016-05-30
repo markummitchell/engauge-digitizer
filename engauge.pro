@@ -78,6 +78,7 @@ HEADERS  += \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPaste.h \
+    src/Cmd/CmdPointChangeBase.h \
     src/Cmd/CmdSelectCoordSystem.h \
     src/Cmd/CmdSettingsAxesChecker.h \
     src/Cmd/CmdSettingsColorFilter.h \
@@ -366,6 +367,7 @@ SOURCES += \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdPaste.cpp \
+    src/Cmd/CmdPointChangeBase.cpp \
     src/Cmd/CmdSelectCoordSystem.cpp \
     src/Cmd/CmdSettingsAxesChecker.cpp \
     src/Cmd/CmdSettingsColorFilter.cpp \

@@ -27,13 +27,13 @@ const QString CMD_DESCRIPTION ("Cut");
 CmdCut::CmdCut(MainWindow &mainWindow,
                Document &document,
                const QStringList &selectedPointIdentifiers) :
-  CmdAbstract(mainWindow,
-              document,
-              CMD_DESCRIPTION),
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      CMD_DESCRIPTION),
   m_transformIsDefined (mainWindow.transformIsDefined())
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::CmdCut"
-                              << " selected=(" << selectedPointIdentifiers.join (", ").toLatin1 ().data () << ")";
+                              << " selected=" << selectedPointIdentifiers.count ();
 
   // Export to clipboard
   ExportToClipboard exportStrategy;
@@ -51,9 +51,9 @@ CmdCut::CmdCut (MainWindow &mainWindow,
                 Document &document,
                 const QString &cmdDescription,
                 QXmlStreamReader &reader) :
-  CmdAbstract (mainWindow,
-               document,
-               cmdDescription)
+  CmdPointChangeBase (mainWindow,
+                      document,
+                      cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::CmdCut";
 
@@ -98,24 +98,26 @@ void CmdCut::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
 
-  saveOrCheckPreCommandDocumentState  (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
+  saveDocumentState (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
 void CmdCut::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
 
-  saveOrCheckPostCommandDocumentState (document ());
+  saveOrCheckPostCommandDocumentStateHash (document ());
   document().addPointsInCurvesGraphs (m_curvesGraphsRemoved);
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
-  saveOrCheckPreCommandDocumentState (document ());
+  restoreDocumentState (document ());
+  saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
 void CmdCut::saveXml (QXmlStreamWriter &writer) const

@@ -52,12 +52,12 @@ protected:
   /// Save, when called the first time, a hash value representing the state of the Document. Then on succeeding calls
   /// the hash is recomputed and compared to the original value to check for consistency. This "post" method is called
   /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPreCommandDocumentState
-  void saveOrCheckPostCommandDocumentState (const Document &document);
+  void saveOrCheckPostCommandDocumentStateHash (const Document &document);
 
   /// Save, when called the first time, a hash value representing the state of the Document. Then on succeeding calls
   /// the hash is recomputed and compared to the original value to check for consistency. This "pre" method is called
   /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPostCommandDocumentState
-  void saveOrCheckPreCommandDocumentState (const Document &document);
+  void saveOrCheckPreCommandDocumentStateHash (const Document &document);
 
 private:
   CmdAbstract();

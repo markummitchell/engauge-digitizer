@@ -828,6 +828,13 @@ void Document::setCoordSystemIndex(CoordSystemIndex coordSystemIndex)
   m_coordSystemContext.setCoordSystemIndex (coordSystemIndex);
 }
 
+void Document::setCurveAxes (const Curve &curveAxes)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurveAxes";
+
+  m_coordSystemContext.setCurveAxes (curveAxes);
+}
+
 void Document::setCurvesGraphs (const CurvesGraphs &curvesGraphs)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setCurvesGraphs";
