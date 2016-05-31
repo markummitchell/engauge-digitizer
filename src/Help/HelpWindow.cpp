@@ -63,7 +63,7 @@ QString HelpWindow::helpPath() const
   paths << path;
 #endif
 #ifdef OSX
-  paths << "/../Resources/documentation/engauge.qhc";
+  paths << "/../Resources/engauge.qhc";
 #else
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
