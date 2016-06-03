@@ -1,26 +1,30 @@
 # engauge.pro : Builds make files for engauge executable
 #
 # Comments:
-# 1) Set environment variable ENGAUGE_RELEASE=1 to create a release version  without debug information. Releases use
-#    dynamic linking to allow plugins (like Qt Help Collection and some image format libraries)
-# 2) Remove 'debug' in the CONFIG= line to build without debug information, when not creating a release
-# 3) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
-#    environment variables. At some point, Qt may provide its own support for this format, at which point this can be skipped
-# 4) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+# 1) This builds 'release' executables by default, to greatly reduce the chances of a 'debug' build getting deployed.
+#    To get a 'debug' build, add 'CONFIG=debug' to the qmake command line:
+#        qmake CONFIG=debug
+# 2) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and 
+#    JPEG2000_LIB environment variables. At some point, Qt may provide its own support for this format, at which point 
+#    this can be skipped
+#        qmake CONFIG+=jpeg2000
+#        qmake "CONFIG+=debug jpeg2000"
+# 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
-# 5) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
+# 4) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
 #    qmake "DEFINES+=HELPDIR=<directory>". The <directory> is absolute or relative to the application executable directory
 #
 # More comments are in the INSTALL file, and below
 
 QT += core gui help network printsupport widgets xml
 
-_ENGAUGE_RELEASE = $$(ENGAUGE_RELEASE)
-isEmpty(_ENGAUGE_RELEASE) {
+CONFIG(debug,debug|release){
+# Debug version:
+
 } else {
-CONFIG -= debug
-# Comments:
-# 1) Release version has warnings enabled so they can be removed
+
+# Release version:
+# 1) Release version has warnings enabled so they can be removed as a convenience for downstream package maintainers
 # 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
 # 3) -Wuninitialized requires O1, O2 or O3 optimization
 DEFINES += QT_NO_DEBUG
@@ -617,7 +621,7 @@ TARGET = "Engauge Digitizer"
 
 } else {
 
-CONFIG = qt warn_on thread debug
+CONFIG += qt warn_on thread
 TEMPLATE = app
 TARGET = bin/engauge
 
@@ -696,19 +700,29 @@ jpeg2000 {
     } else {
       message(Building static release version with internal support for JPEG2000 files)
     }
+    _OPENJPEG_INCLUDE = $$(OPENJPEG_INCLUDE)
+    _OPENJPEG_LIB = $$(OPENJPEG_LIB)
     _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
     _JPEG2000_LIB = $$(JPEG2000_LIB)
-    isEmpty(_JPEG2000_INCLUDE) {
-      error("JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+    isEmpty(_OPENJPEG_INCLUDE) {
+      error("OPENJPEG_INCLUDE, OPENJPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
     } else {
-      isEmpty(_JPEG2000_LIB) {
-        error("JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+      isEmpty(_OPENJPEG_LIB) {
+        error("OPENJPEG_INCLUDE, OPENJPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+      } else {
+        isEmpty(_JPEG2000_INCLUDE) {
+          error("JPEG_INCLUDE, JPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+        } else {
+          isEmpty(_JPEG2000_LIB) {
+            error("JPEG_INCLUDE, JPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+          }
+        }
       }
     }
     DEFINES += "ENGAUGE_JPEG2000"
-    INCLUDEPATH += Jpeg2000 \
+    INCLUDEPATH += $$(OPENJPEG_INCLUDE) \
                    $$(JPEG2000_INCLUDE)
-    LIBS += -L$$(JPEG2000_LIB) -lopenjp2
+    LIBS += -L$$(OPENJPEG_LIB) -L$$(JPEG2000_LIB) -lopenjp2
 
     HEADERS += src/Jpeg2000/Jpeg2000.h \
                src/Jpeg2000/Jpeg2000Callbacks.h \

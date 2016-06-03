@@ -5,13 +5,13 @@
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Remove 'debug' in the CONFIG= line or set environment variable ENGAUGE_RELEASE=1 to create a release version 
-#    without debug information
-# 2) Add 'jpeg2000' to the CONFIG= line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and JPEG2000_LIB 
-#    environment variables
+# 1) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE 
+#    and JPEG2000_LIB environment variables
+#       qmake CONFIG+=jpeg2000
+#       qmake "CONFIG+=debug jpeg2000"
 # 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
-CONFIG      = qt warn_on thread debug testcase debug
+CONFIG      = qt warn_on thread testcase 
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test
