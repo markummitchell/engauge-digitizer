@@ -23,7 +23,8 @@ These steps build and run, in Microsoft Windows, the standard engauge executable
    Note that the MinGW version of the Qt Open Source toolkit provides both Qt and MinGW. There is no
    need to install a standalone version of MinGW.
 
-   Qt Open Source 5.2.1 and 5.5.1 have been tested with Engauge.
+   Qt Open Source 5.2.1 and 5.5.1 have been tested with Engauge. Qt Versions 5.1 and older do not offer
+   features, that were added in version 5.2, that are required to build Engauge.
 
    HINT - At this point, the MSYS shell is available by clicking on the msys.bat shortcut on the Windows
           desktop. The MSYS shell is preferred over the Cygwin shell (if you have installed Cygwin earlier).
@@ -109,13 +110,17 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
 
 4) Run qmake on this file to generate make files. The qmake executable will
    display what functionality will, and what functionality will not, be included 
-   in engauge as a function of the currently installed packages. Run this qmake
-   command in the highest level Engauge directory:
+   in engauge as a function of the currently installed packages. Run one of these
+   qmake commands in the highest level Engauge directory:
 
-     > qmake engauge.pro
+     > qmake engauge.pro                       (for release version)
 
-   By default, the debug version will be built by qmake. To build a release version
-   instead, set environment variable ENGAUGE_RELEASE=1 before running qmake.
+   or
+
+     > qmake CONFIG+=debug engauge.pro         (for debug version)
+
+   By default, the release version will be built by qmake. To build a debug version
+   instead, add "CONFIG+=debug" to the qmake command line.
 
 5) Build the executable using the make files from the previous step:
 
