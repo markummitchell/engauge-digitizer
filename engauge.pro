@@ -623,7 +623,8 @@ TARGET = "Engauge Digitizer"
 
 CONFIG += qt warn_on thread
 TEMPLATE = app
-TARGET = bin/engauge
+TARGET = engauge
+DESTDIR = bin
 
 }
 
