@@ -142,7 +142,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
 
-#ifdef OSX
+#if defined(OSX_DEBUG) || defined(OSX_RELEASE)
   qApp->setApplicationName ("Engauge Digitizer");
   qApp->setOrganizationDomain ("Mark Mitchell");
 #endif
@@ -455,7 +455,7 @@ void MainWindow::createActionsFile ()
                                   "Opens an existing document."));
   connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
 
-#ifndef OSX
+#ifndef OSX_RELEASE
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     QAction *recentFileAction = new QAction (this);
     recentFileAction->setVisible (true);
@@ -907,7 +907,7 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionOpen);
-#ifndef OSX
+#ifndef OSX_RELEASE
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
@@ -1283,7 +1283,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
-#ifndef OSX
+#ifndef OSX_RELEASE
 void MainWindow::exportAllCoordinateSystems()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems";
@@ -2893,7 +2893,8 @@ bool MainWindow::slotFileSaveAs()
   dlg.setFileMode (QFileDialog::AnyFile);
   dlg.selectNameFilter (filterDigitizer);
   dlg.setNameFilters (filters);
-#ifndef OSX
+#if defined(OSX_DEBUG) || defined(OSX_RELEASE)
+#else
   // Prevent hang in OSX
   dlg.setWindowModality(Qt::WindowModal);
 #endif
@@ -3196,7 +3197,7 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
 
   } else {
 
-#ifndef OSX
+#ifndef OSX_RELEASE
     exportAllCoordinateSystems ();
 #endif
 
@@ -3220,7 +3221,7 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
     // Script file might already have closed the Document so export only if last was not closed
     if (m_cmdMediator != 0) {
 
-#ifndef OSX
+#ifndef OSX_RELEASE
       exportAllCoordinateSystems ();
 #endif
 
@@ -3827,7 +3828,7 @@ void MainWindow::updateControls ()
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
-#ifndef OSX
+#ifndef OSX_RELEASE
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
 #endif
@@ -3980,7 +3981,7 @@ void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
 
-#ifndef OSX
+#ifndef OSX_RELEASE
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   QStringList recentFilePaths = settings.value(SETTINGS_RECENT_FILE_LIST).toStringList();
 

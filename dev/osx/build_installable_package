@@ -31,17 +31,12 @@ if [ -z "$exe" ]; then
     exit
 fi
 
-# Remove old build. Need root privileges
+# Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
+# engauge.log file, which would other break the sandbox
 sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
-# Verify there is no log file
-filetest=`find . -name engauge.log`
-if [ -n "$filetest" ]; then
-    echo "File engauge.log exists which will break the sandbox. Quitting"
-    exit
-fi
-
 # Make into Engauge Digitizer.app
+qmake engauge.pro
 make 
 
 # Help

@@ -19,18 +19,16 @@
 QT += core gui help network printsupport widgets xml
 
 CONFIG(debug,debug|release){
-# Debug version:
-
+  # Debug version:
 } else {
-
-# Release version:
-# 1) Release version has warnings enabled so they can be removed as a convenience for downstream package maintainers
-# 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
-# 3) -Wuninitialized requires O1, O2 or O3 optimization
-DEFINES += QT_NO_DEBUG
-*-g++* {
-QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable
-}
+  # Release version:
+  # 1) Release version has warnings enabled so they can be removed as a convenience for downstream package maintainers
+  # 2) Full coverage requires disabling of ENGAUGE_ASSERT by setting QT_NO_DEBUG
+  # 3) -Wuninitialized requires O1, O2 or O3 optimization
+  DEFINES += QT_NO_DEBUG
+  *-g++* {
+    QMAKE_CXXFLAGS_WARN_ON += -Wreturn-type -O1 -Wuninitialized -Wunused-variable
+  }
 }
 
 OBJECTS_DIR = src/.objs
@@ -601,45 +599,46 @@ SOURCES += \
     src/Zoom/ZoomLabels.cpp
 
 macx-* {
+  CONFIG(debug,debug|release){
+    CONFIG -= app_bundle
+    TARGET = engauge
+    DESTDIR = bin
+    QMAKE_CXXFLAGS += "-DOSX_DEBUG -stdlib=libc++ -gdwarf-2"
+  } else {
+    CONFIG += app_bundle
+    TARGET = "Engauge Digitizer"
+    QMAKE_CXXFLAGS += "-DOSX_RELEASE -stdlib=libc++ -gdwarf-2"
+  }
 
-# Change += to -= for app_bundle to debug in QtCreator
-CONFIG += app_bundle
-
-QMAKE_CXXFLAGS += "-DOSX -stdlib=libc++ -gdwarf-2"
-QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
-INCLUDEPATH += \
-$$(FFTW_HOME)/include \
-$$(LOG4CPP_HOME)/include \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
-/usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
-LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
-TARGET = "Engauge Digitizer"
-
+  QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
+  INCLUDEPATH += $$(FFTW_HOME)/include \
+                 $$(LOG4CPP_HOME)/include \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
+  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
 } else {
-
-CONFIG += qt warn_on thread
-TEMPLATE = app
-TARGET = engauge
-DESTDIR = bin
-
+  CONFIG += qt warn_on thread
+  TEMPLATE = app
+  TARGET = engauge
+  DESTDIR = bin
 }
 
 win32-* {
-CONFIG += windows
+  CONFIG += windows
 }
 
 win32-msvc* {
-QMAKE_CXXFLAGS += -EHsc
-LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+  QMAKE_CXXFLAGS += -EHsc
+  LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
 } else {
-win32-g++* {
-LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
-}
-LIBS += -lfftw3 -llog4cpp
+  win32-g++* {
+    LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
+  }
+  LIBS += -lfftw3 -llog4cpp
 }
 
 INCLUDEPATH += src \
@@ -688,12 +687,11 @@ INCLUDEPATH += src \
                src/Zoom
 
 win32-* {
-INCLUDEPATH += $$(FFTW_HOME)/include \
-               $$(LOG4CPP_HOME)/include
+  INCLUDEPATH += $$(FFTW_HOME)/include \
+                 $$(LOG4CPP_HOME)/include
 }
 
-RESOURCES += \
-    src/engauge.qrc
+RESOURCES += src/engauge.qrc
 
 jpeg2000 {
     CONFIG(debug,debug|release) {
