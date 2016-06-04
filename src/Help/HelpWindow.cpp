@@ -54,6 +54,14 @@ QString HelpWindow::helpPath() const
   // Possible locations of help file. Each entry is first tried as is, and then with
   // applicationDirPath as a prefix. Each entry should probably start with a slash
 
+#ifdef OSX_RELEASE
+
+  // Use hardcoded help file location for OSX since the QFileInfo search below breaks the sandbox
+  return "/../Resources/engauge.qhc";
+
+#else
+
+  // When not dealing with the OSX sandbox, we use a QFileInfo search to allow some flexibility in the help file location
   QStringList paths;
 #ifdef HELPDIR
 #define QUOTE(string) _QUOTE(string)
@@ -62,12 +70,8 @@ QString HelpWindow::helpPath() const
     .arg (QUOTE (HELPDIR));
   paths << path;
 #endif
-#ifdef OSX_RELEASE
-  paths << "/../Resources/engauge.qhc";
-#else
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
-#endif
 
   QStringList::iterator itr;
   for (itr = paths.begin(); itr != paths.end(); itr++) {
@@ -88,5 +92,6 @@ QString HelpWindow::helpPath() const
   }
 
   return ""; // Empty file, since help file was never found, will simply result in empty help contents
+#endif
 }
 
