@@ -37,6 +37,7 @@ sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
 # Make into Engauge Digitizer.app
 qmake engauge.pro
+make clean
 make 
 
 # Help
@@ -61,6 +62,7 @@ dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Di
 
 # Manually insert version numbering
 cp dev/osx/Info.plist_valid Engauge\ Digitizer.app/Contents/Info.plist
+egrep '>\d+\.\d' Engauge\ Digitizer.app/Contents/Info.plist
 echo "If submitting to app store, then in another window..."
 echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
 echo '2. append/add .1 to version number)'

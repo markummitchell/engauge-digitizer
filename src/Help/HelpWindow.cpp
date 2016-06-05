@@ -4,6 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#ifdef OSX_RELEASE
+#include <CoreFoundation/CFBundle.h>
+#endif
 #include "HelpBrowser.h"
 #include "HelpWindow.h"
 #include "Logger.h"
@@ -56,8 +59,19 @@ QString HelpWindow::helpPath() const
 
 #ifdef OSX_RELEASE
 
-  // Use hardcoded help file location for OSX since the QFileInfo search below breaks the sandbox
-  return "/../Resources/engauge.qhc";
+  // Use hardcoded help file location for OSX since the QFileInfo search below breaks the sandbox. This uses the
+  // approach from http://stackoverflow.com/questions/8768217/how-can-i-find-the-path-to-a-file-in-an-application-bundle-nsbundle-using-c
+  CFBundleRef mainBundle = CFBundleGetMainBundle ();
+
+  CFURLRef imageUrl = CFBundleCopyResourceURL (mainBundle, CFSTR ("engauge"), CFSTR ("qhc"), NULL);
+
+  CFStringRef imagePath = CFURLCopyFileSystemPath (imageUrl, kCFURLPOSIXPathStyle);
+
+  CFStringEncoding encodingMethod = CFStringGetSystemEncoding ();
+
+  const char *path = CFStringGetCStringPtr (imagePath, encodingMethod);
+
+  return path;
 
 #else
 
