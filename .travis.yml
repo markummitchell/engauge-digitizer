@@ -51,9 +51,6 @@ script:
    fi
  - make
  - cd help && ./build && cd ..;
- - if [ `uname` = "Darwin" -a "$BUILD_DEBUG" != "1" ]; then
-    cp Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer bin/engauge;
-   fi
  - if [ `uname` = "Darwin" -a "$BUILD_DEBUG" = "1" ]; then
     cp $FFTW_HOME/lib/lib* src;
     cp $LOG4CPP_HOME/lib/lib* src;
