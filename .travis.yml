@@ -58,7 +58,10 @@ script:
     cp $FFTW_HOME/lib/lib* src;
     cp $LOG4CPP_HOME/lib/lib* src;
    fi
- - cd src && ./build_and_run_all_gui_tests && cd ..;
+#no gui tests on OSX for release version
+ - if [ `uname` != "Darwin" -o "$BUILD_DEBUG" = "1" ]; then
+    cd src && ./build_and_run_all_gui_tests && cd ..;
+   fi
 #no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
     cd src && ./build_and_run_all_cli_tests && cd ..;
