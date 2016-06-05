@@ -6,12 +6,12 @@ matrix:
   include:
     - os: linux
     - os: linux
-      env: ENGAUGE_RELEASE="1"
+      env: BUILD_DEBUG="1"
     - os: osx
       env: ARCH="x86_64"
       compiler: "clang"
     - os: osx
-      env: ARCH="x86_64" ENGAUGE_RELEASE="1"
+      env: ARCH="x86_64" BUILD_DEBUG="1"
       compiler: "clang"
      
 before_script:
@@ -39,7 +39,10 @@ script:
     export FFTW_HOME="/usr/local/Cellar/fftw/3.3.4_1";
     export LOG4CPP_HOME="/usr/local/Cellar/log4cpp/1.1.1";
    fi
- - qmake engauge.pro
+ - if [ "$BUILD_DEBUG" -eq "1" ]; then
+    export BUILD_FLAGS="CONFIG+=debug"
+   fi
+ - qmake $BUILD_FLAGS engauge.pro
 #hacks
  - if [ `uname` = "Darwin" ]; then
     sed -ibak '/^LIBS/s/-lQt5/-framework Qt/g' Makefile;
