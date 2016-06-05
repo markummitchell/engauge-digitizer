@@ -40,7 +40,7 @@ script:
     export LOG4CPP_HOME="/usr/local/Cellar/log4cpp/1.1.1";
    fi
  - if [ "$BUILD_DEBUG" -eq "1" ]; then
-    export BUILD_FLAGS="CONFIG+=debug"
+    export BUILD_FLAGS="CONFIG+=debug";
    fi
  - qmake $BUILD_FLAGS engauge.pro
 #hacks
