@@ -12,7 +12,7 @@ Spline::Spline(const std::vector<double> &t,
                const std::vector<SplinePair> &xy)
 {
   ENGAUGE_ASSERT (t.size() == xy.size());
-  ENGAUGE_ASSERT (xy.size() >= 3);
+  ENGAUGE_ASSERT (xy.size() > 0); // Need at least one point for this class to not fail with a crash
 
   checkTIncrements (t);
   computeCoefficientsForIntervals (t, xy);
@@ -37,44 +37,56 @@ void Spline::checkTIncrements (const std::vector<double> &t) const
 void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
                                               const std::vector<SplinePair> &xy)
 {
-  int i, j;
-  int n = (int) xy.size() - 1;
+  if (xy.size() > 1) {
 
-  m_t = t;
-  m_xy = xy;
+    // There are enough points to compute the coefficients
+    int i, j;
+    int n = (int) xy.size() - 1;
 
-  vector<SplinePair> b(n), d(n), a(n), c(n+1), l(n+1), u(n+1), z(n+1);
-  vector<SplinePair> h(n+1);
+    m_t = t;
+    m_xy = xy;
 
-  l[0] = SplinePair (1.0);
-  u[0] = SplinePair (0.0);
-  z[0] = SplinePair (0.0);
-  h[0] = t[1] - t[0];
+    vector<SplinePair> b(n), d(n), a(n), c(n+1), l(n+1), u(n+1), z(n+1);
+    vector<SplinePair> h(n+1);
 
-  for (i = 1; i < n; i++) {
-    h[i] = t[i+1] - t[i];
-    l[i] = SplinePair (2.0) * (t[i+1] - t[i-1]) - h[i-1] * u[i-1];
-    u[i] = h[i] / l[i];
-    a[i] = (SplinePair (3.0) / h[i]) * (xy[i+1] - xy[i]) - (SplinePair (3.0) / h[i-1]) * (xy[i] - xy[i-1]);
-    z[i] = (a[i] - h[i-1] * z[i-1]) / l[i];
-  }
+    l[0] = SplinePair (1.0);
+    u[0] = SplinePair (0.0);
+    z[0] = SplinePair (0.0);
+    h[0] = t[1] - t[0];
 
-  l[n] = SplinePair (1.0);
-  z[n] = SplinePair (0.0);
-  c[n] = SplinePair (0.0);
+    for (i = 1; i < n; i++) {
+      h[i] = t[i+1] - t[i];
+      l[i] = SplinePair (2.0) * (t[i+1] - t[i-1]) - h[i-1] * u[i-1];
+      u[i] = h[i] / l[i];
+      a[i] = (SplinePair (3.0) / h[i]) * (xy[i+1] - xy[i]) - (SplinePair (3.0) / h[i-1]) * (xy[i] - xy[i-1]);
+      z[i] = (a[i] - h[i-1] * z[i-1]) / l[i];
+    }
 
-  for (j = n - 1; j >= 0; j--) {
-    c[j] = z[j] - u[j] * c[j+1];
-    b[j] = (xy[j+1] - xy[j]) / (h[j]) - (h[j] * (c[j+1] + SplinePair (2.0) * c[j])) / SplinePair (3.0);
-    d[j] = (c[j+1] - c[j]) / (SplinePair (3.0) * h[j]);
-  }
+    l[n] = SplinePair (1.0);
+    z[n] = SplinePair (0.0);
+    c[n] = SplinePair (0.0);
 
-  for (i = 0; i < n; i++) {
-    m_elements.push_back(SplineCoeff(t[i],
-                                     xy[i],
-                                     b[i],
-                                     c[i],
-                                     d[i]));
+    for (j = n - 1; j >= 0; j--) {
+      c[j] = z[j] - u[j] * c[j+1];
+      b[j] = (xy[j+1] - xy[j]) / (h[j]) - (h[j] * (c[j+1] + SplinePair (2.0) * c[j])) / SplinePair (3.0);
+      d[j] = (c[j+1] - c[j]) / (SplinePair (3.0) * h[j]);
+    }
+
+    for (i = 0; i < n; i++) {
+      m_elements.push_back(SplineCoeff(t[i],
+                                       xy[i],
+                                       b[i],
+                                       c[i],
+                                       d[i]));
+    }
+  } else {
+
+    // There is only one point so we have to hack a coefficient entry
+    m_elements.push_back(SplineCoeff(t[0],
+                                     xy[0],
+                                     0.0,
+                                     0.0,
+                                     0.0));
   }
 }
 
