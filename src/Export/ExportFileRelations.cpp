@@ -282,28 +282,32 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
                                                     t,
                                                     xy);
 
-  // Fit a spline
-  Spline spline (t,
-                 xy);
+  // Spline class requires at least one point
+  if (xy.size() > 0) {
 
-  FormatCoordsUnits format;
+    // Fit a spline
+    Spline spline (t,
+                   xy);
 
-  // Extract the points
-  for (int row = 0; row < ordinals.count(); row++) {
+    FormatCoordsUnits format;
 
-    double ordinal = ordinals.at (row);
-    SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
-    double xTheta = splinePairFound.x ();
-    double yRadius = splinePairFound.y ();
+    // Extract the points
+    for (int row = 0; row < ordinals.count(); row++) {
 
-    // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
-    format.unformattedToFormatted (xTheta,
-                                   yRadius,
-                                   modelCoords,
-                                   modelMainWindow,
-                                   *(xThetaValues [row]),
-                                   *(yRadiusValues [row]),
-                                   transformation);
+      double ordinal = ordinals.at (row);
+      SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
+      double xTheta = splinePairFound.x ();
+      double yRadius = splinePairFound.y ();
+
+      // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
+      format.unformattedToFormatted (xTheta,
+                                     yRadius,
+                                     modelCoords,
+                                     modelMainWindow,
+                                     *(xThetaValues [row]),
+                                     *(yRadiusValues [row]),
+                                     transformation);
+    }
   }
 }
 

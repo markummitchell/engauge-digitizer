@@ -67,64 +67,68 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
   // Results. Initially empty, but at the end it will have tMin, ..., tMax
   ExportValuesOrdinal ordinals;
 
-  // Fit a spline
-  Spline spline (t,
-                 xy);
+  // Spline class requires at least one point
+  if (xy.size() > 0) {
 
-  // Integrate the distances for the subintervals
-  double integratedSeparation = 0;
-  QPointF posLast (xy [0].x(),
-                   xy [0].y());
+    // Fit a spline
+    Spline spline (t,
+                   xy);
 
-  // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
-  // into intervals that, as much as possible, have the desired length. Simplicity wins out over accuracy in this
-  // approach - accuracy is sacrificed to achieve simplicity
-  double tMin = t.front();
-  double tMax = t.back();
+    // Integrate the distances for the subintervals
+    double integratedSeparation = 0;
+    QPointF posLast (xy [0].x(),
+                     xy [0].y());
 
-  double tLast = 0.0;
-  int iTLastInterval = 0;
-  for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
+    // Simplest method to find the intervals is to break up the curve into many smaller intervals, and then aggregate them
+    // into intervals that, as much as possible, have the desired length. Simplicity wins out over accuracy in this
+    // approach - accuracy is sacrificed to achieve simplicity
+    double tMin = t.front();
+    double tMax = t.back();
 
-    double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
+    double tLast = 0.0;
+    int iTLastInterval = 0;
+    for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
 
-    SplinePair pairNew = spline.interpolateCoeff(t);
+      double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
 
-    QPointF posNew = QPointF (pairNew.x(),
-                              pairNew.y());
+      SplinePair pairNew = spline.interpolateCoeff(t);
 
-    QPointF posDelta = posNew - posLast;
-    double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
-    integratedSeparation += integratedSeparationDelta;
+      QPointF posNew = QPointF (pairNew.x(),
+                                pairNew.y());
 
-    while (integratedSeparation >= pointsInterval) {
+      QPointF posDelta = posNew - posLast;
+      double integratedSeparationDelta = qSqrt (posDelta.x() * posDelta.x() + posDelta.y() * posDelta.y());
+      integratedSeparation += integratedSeparationDelta;
 
-      // End of current interval, and start of next interval. For better accuracy without having to crank up
-      // the number of points by orders of magnitude, we use linear interpolation
-      double sInterp;
-      if (iT == 0) {
-        sInterp = 0.0;
-      } else {
-        sInterp = (double) pointsInterval / (double) integratedSeparation;
+      while (integratedSeparation >= pointsInterval) {
+
+        // End of current interval, and start of next interval. For better accuracy without having to crank up
+        // the number of points by orders of magnitude, we use linear interpolation
+        double sInterp;
+        if (iT == 0) {
+          sInterp = 0.0;
+        } else {
+          sInterp = (double) pointsInterval / (double) integratedSeparation;
+        }
+        double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
+
+        integratedSeparation -= pointsInterval; // Part of delta that was not used gets applied to next interval
+
+        tLast = tInterp;
+        ordinals.push_back (tInterp);
+        iTLastInterval = iT;
       }
-      double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
 
-      integratedSeparation -= pointsInterval; // Part of delta that was not used gets applied to next interval
-
-      tLast = tInterp;
-      ordinals.push_back (tInterp);
-      iTLastInterval = iT;
+      tLast = t;
+      posLast = posNew;
     }
 
-    tLast = t;
-    posLast = posNew;
-  }
+    if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
 
-  if (iTLastInterval < NUM_SMALLER_INTERVALS - 1) {
+      // Add last point so we end up at tMax
+      ordinals.push_back (tMax);
 
-    // Add last point so we end up at tMax
-    ordinals.push_back (tMax);
-
+    }
   }
 
   return ordinals;
