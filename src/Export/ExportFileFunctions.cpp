@@ -191,7 +191,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
                                                  double xThetaValue,
                                                  const Transformation &transformation) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
+  //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
 
   double yRadius = 0;
   QPointF posGraphBefore; // Not set until ip=1

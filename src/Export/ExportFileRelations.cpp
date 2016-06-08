@@ -149,7 +149,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
                                                   double ordinal,
                                                   const Transformation &transformation) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::linearlyInterpolate";
+  //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::linearlyInterpolate";
 
   double xTheta = 0, yRadius = 0;
   double ordinalBefore = 0; // Not set until ip=1

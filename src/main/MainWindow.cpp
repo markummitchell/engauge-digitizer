@@ -1636,7 +1636,6 @@ void MainWindow::loadDocumentFile (const QString &fileName)
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
                                               fileName);
-  QApplication::restoreOverrideCursor();
 
   if (cmdMediator->successfulRead ()) {
 
@@ -1665,7 +1664,11 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     updateGridLines ();
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
+    QApplication::restoreOverrideCursor();
+
   } else {
+
+    QApplication::restoreOverrideCursor();
 
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
