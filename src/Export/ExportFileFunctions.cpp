@@ -130,7 +130,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                                 CONNECT_AS_FUNCTION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter(),
+                                                   modelExportOverride.header() == EXPORT_HEADER_GNUPLOT);
 
   // Get x/theta values to be used
   CallbackGatherXThetaValuesFunctions ftor (modelExportOverride,
