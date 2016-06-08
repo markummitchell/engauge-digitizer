@@ -870,7 +870,7 @@ void DlgSettingsExportFormat::slotSaveDefault()
   settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_FUNCTIONS,
                      QVariant (m_modelExportAfter->pointsIntervalFunctions()));
   settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_RELATIONS,
-                     QVariant (m_modelExportAfter->pointsIntervalUnitsRelations()));
+                     QVariant (m_modelExportAfter->pointsIntervalRelations()));
   settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS,
                      QVariant (m_modelExportAfter->pointsIntervalUnitsFunctions()));
   settings.setValue (SETTINGS_EXPORT_POINTS_INTERVAL_UNITS_RELATIONS,
@@ -878,7 +878,7 @@ void DlgSettingsExportFormat::slotSaveDefault()
   settings.setValue (SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS,
                      QVariant (m_modelExportAfter->pointsSelectionFunctions()));
   settings.setValue (SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS,
-                     QVariant (m_modelExportAfter->pointsSelectionFunctions()));
+                     QVariant (m_modelExportAfter->pointsSelectionRelations()));
   settings.setValue (SETTINGS_EXPORT_X_LABEL,
                      QVariant (m_modelExportAfter->xLabel()));
 
@@ -947,7 +947,6 @@ void DlgSettingsExportFormat::updateIntervalConstraints ()
     if (m_modelExportAfter->pointsIntervalRelations() < relationsMin) {
 
       m_editRelationsPointsEvenlySpacing->setText (QString::number (relationsMin));
-      m_validatorFunctionsPointsEvenlySpacing->setBottom (relationsMin);
 
     }
 

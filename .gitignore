@@ -1,5 +1,6 @@
 .DS_store
 .qmake.stash
+object_script.*
 \#*
 digit-exe-windows-*
 engauge

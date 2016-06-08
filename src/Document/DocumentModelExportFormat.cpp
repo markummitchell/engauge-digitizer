@@ -83,7 +83,6 @@ DocumentModelExportFormat::DocumentModelExportFormat(const DocumentModelExportFo
   m_header (other.header()),
   m_xLabel (other.xLabel ())
 {
-
 }
 
 DocumentModelExportFormat &DocumentModelExportFormat::operator=(const DocumentModelExportFormat &other)
