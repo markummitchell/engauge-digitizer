@@ -629,6 +629,7 @@ macx-* {
 
 win32-* {
   CONFIG += windows
+  QMAKE_LFLAGS += -Wl,--stack,32000000
 }
 
 win32-msvc* {

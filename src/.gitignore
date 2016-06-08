@@ -15,3 +15,4 @@ engauge_test.pro.user
 Makefile*
 object_script.*
 qrc_*
+target_wrapper.sh
