@@ -108,7 +108,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                                 CONNECT_AS_RELATION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter(),
+                                                   modelExportOverride.header() == EXPORT_HEADER_GNUPLOT);
 
   // Export in one of two layouts
   if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {

@@ -18,6 +18,7 @@ enum ExportDelimiter {
 };
 
 extern QString exportDelimiterToString (ExportDelimiter exportDelimiter); // Text appearing in logging/debugging
-extern QString exportDelimiterToText (ExportDelimiter exportDelimiter); // Text appearing in exported file
+extern QString exportDelimiterToText (ExportDelimiter exportDelimiter,
+                                      bool isGnuplot); // Text appearing in exported file
 
 #endif // EXPORT_DELIMITER_H
