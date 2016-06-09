@@ -138,6 +138,9 @@ Document::Document (const QString &fileName) :
                                   .arg (QObject::tr ("was not found"));
 
   }
+
+  // See documentation for CoordSystemContext::setStable
+  m_coordSystemContext.setStableAfterLoad ();
 }
 
 void Document::addCoordSystems(unsigned int numberCoordSystemToAdd)

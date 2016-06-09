@@ -915,6 +915,12 @@ void CoordSystem::setSelectedCurveName(const QString &selectedCurveName)
   m_selectedCurveName = selectedCurveName;
 }
 
+void CoordSystem::setStableAfterLoad ()
+{
+  m_modelGridDisplay.setStable (true);
+  m_modelGridRemoval.setStable ();
+}
+
 bool CoordSystem::successfulRead () const
 {
   return m_successfulRead;
