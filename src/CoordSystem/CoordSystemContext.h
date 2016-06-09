@@ -146,7 +146,6 @@ class CoordSystemContext : public CoordSystemInterface
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
   virtual void setSelectedCurveName(const QString &selectedCurveName);
-  virtual void setStableAfterLoad ();
   virtual bool successfulRead () const;
   virtual void updatePointOrdinals (const Transformation &transformation);
 

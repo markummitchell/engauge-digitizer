@@ -557,13 +557,6 @@ void CoordSystemContext::setSelectedCurveName(const QString &selectedCurveName)
   m_coordSystems [m_coordSystemIndex]->setSelectedCurveName(selectedCurveName);
 }
 
-void CoordSystemContext::setStableAfterLoad ()
-{
-  for (int i = 0; i < m_coordSystems.count(); i++) {
-    m_coordSystems [i]->setStableAfterLoad ();
-  }
-}
-
 bool CoordSystemContext::successfulRead () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::successfulRead";

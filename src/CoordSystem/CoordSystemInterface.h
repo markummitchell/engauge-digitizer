@@ -247,14 +247,6 @@ public:
   /// Save curve name that is selected for the current coordinate system, for the next time the coordinate system reappears
   virtual void setSelectedCurveName(const QString &selectedCurveName) = 0;
 
-  /// Any unstable flags are set to stable when loading a saved DIG file since:
-  /// -* For huge (6000x3000 pixels) files, the grid removal parameters would otherwise be continually
-  ///    updated (like when the DIG file is loaded) which results in frequent 30 second delays that probably
-  ///    would probably not be helpful for most users (=those not doing grid removal)
-  /// -* Because of the previous point, we can consider the act of saving the file to be the same as
-  ///    accepting the current settings
-  virtual void setStableAfterLoad () = 0;
-
   /// Return true if startup loading succeeded. If the loading failed then reasonForUnsuccessfulRed will explain why
   virtual bool successfulRead () const = 0;
 
