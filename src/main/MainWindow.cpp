@@ -66,6 +66,10 @@
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
 #include "NetworkClient.h"
+#ifdef ENGAUGE_PDF
+#include "Pdf.h"
+#endif // ENGAUGE_PDF
+#include "PdfResolution.h"
 #include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
@@ -1376,11 +1380,23 @@ void MainWindow::fileImport (const QString &fileName,
 
   QImage image;
   bool loaded = false;
+
 #ifdef ENGAUGE_JPEG2000
   Jpeg2000 jpeg2000;
   loaded = jpeg2000.load (fileName,
                           image);
 #endif // ENGAUGE_JPEG2000
+
+#ifdef ENGAUGE_PDF
+  if (!loaded) {
+    
+    Pdf pdf;
+    loaded = pdf.load (fileName,
+                       image,
+                       m_modelMainWindow.pdfResolution());
+  }
+#endif // ENGAUGE_PDF
+
   if (!loaded) {
     loaded = image.load (fileName);
   }
@@ -1445,6 +1461,10 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
     Jpeg2000 jpeg2000;
     supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
 #endif // ENGAUGE_JPEG2000
+
+#ifdef ENGAUGE_PDF
+    supportedImageFormatStrings << "*.pdf";
+#endif // ENGAUGE_PDF
 
     supportedImageFormatStrings.sort();
 
@@ -2299,6 +2319,9 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                   QVariant (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS)).toInt());
   m_modelMainWindow.setMainTitleBarFormat ((MainTitleBarFormat) settings.value (SETTINGS_MAIN_TITLE_BAR_FORMAT,
                                                                                 QVariant (MAIN_TITLE_BAR_FORMAT_PATH)).toInt());
+  m_modelMainWindow.setPdfResolution (settings.value (SETTINGS_IMPORT_PDF_RESOLUTION,
+                                                      QVariant (DEFAULT_IMPORT_PDF_RESOLUTION)).toInt ());
+
   updateSettingsMainWindow();
 
   settings.endGroup();
@@ -2328,6 +2351,7 @@ void MainWindow::settingsWrite ()
 
   }
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());

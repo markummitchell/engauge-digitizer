@@ -5,14 +5,18 @@
 #    To get a 'debug' build, add 'CONFIG=debug' to the qmake command line:
 #        qmake CONFIG=debug
 # 2) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and 
-#    JPEG2000_LIB environment variables. At some point, Qt may provide its own support for this format, at which point 
-#    this can be skipped
+#    JPEG2000_LIB environment variables, and previous installation of jpeg2000 development package. At some point, Qt may 
+#    provide its own support for this format, at which point this can be skipped
 #        qmake CONFIG+=jpeg2000
 #        qmake "CONFIG+=debug jpeg2000"
-# 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
-#    include/library files in an automated and platform-independent manner, so it will not be removed
+# 3) Add 'pdf' to the qmake command line to include support for PDF input files. Requires POPPLER_INCLUDE and
+#    POPPLER_LIB environment variables, and previous installation of the poppler development package.
+#        qmake CONFIG+=pdf
+#        qmake "CONFIG+=debug pdf"
 # 4) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
 #    qmake "DEFINES+=HELPDIR=<directory>". The <directory> is absolute or relative to the application executable directory
+# 5) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+#    include/library files in an automated and platform-independent manner, so it will not be removed
 #
 # More comments are in the INSTALL file, and below
 
@@ -270,6 +274,7 @@ HEADERS  += \
     src/Network/NetworkClient.h \
     src/Ordinal/OrdinalGenerator.h \
     src/Ordinal/OrdinalToGraphicsPoint.h \
+    src/Pdf/PdfResolution.h \
     src/Point/Point.h \
     src/Point/PointComparator.h \
     src/Point/PointIdentifiers.h \
@@ -548,6 +553,7 @@ SOURCES += \
     src/util/mmsubs.cpp \
     src/Network/NetworkClient.cpp \
     src/Ordinal/OrdinalGenerator.cpp \
+    src/Pdf/PdfResolution.cpp \
     src/Point/Point.cpp \
     src/Point/PointIdentifiers.cpp \
     src/Point/PointMatchAlgorithm.cpp \
@@ -673,6 +679,7 @@ INCLUDEPATH += src \
                src/Mime \
                src/Network \
                src/Ordinal \
+               src/Pdf \
                src/Plot \
                src/Point \
                src/Segment \
@@ -693,12 +700,14 @@ win32-* {
 
 RESOURCES += src/engauge.qrc
 
+CONFIG(debug,debug|release) {
+  message("Build type:       debug")
+} else {
+  message("Build type:       release")
+}
+
 jpeg2000 {
-    CONFIG(debug,debug|release) {
-      message(Building dynamic debug version with internal support for JPEG2000 files)
-    } else {
-      message(Building static release version with internal support for JPEG2000 files)
-    }
+    message("JPEG2000 support: yes")
     _OPENJPEG_INCLUDE = $$(OPENJPEG_INCLUDE)
     _OPENJPEG_LIB = $$(OPENJPEG_LIB)
     _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
@@ -722,7 +731,6 @@ jpeg2000 {
     INCLUDEPATH += $$(OPENJPEG_INCLUDE) \
                    $$(JPEG2000_INCLUDE)
     LIBS += -L$$(OPENJPEG_LIB) -L$$(JPEG2000_LIB) -lopenjp2
-
     HEADERS += src/Jpeg2000/Jpeg2000.h \
                src/Jpeg2000/Jpeg2000Callbacks.h \
                src/Jpeg2000/Jpeg2000Color.h \
@@ -735,11 +743,28 @@ jpeg2000 {
                src/Jpeg2000/Jpeg2000Convert.cpp
 
 } else {
-    CONFIG(debug,debug|release) {
-      message(Building debug version without internal support for JPEG2000 files)
+    message("JPEG2000 support: no")
+}
+
+pdf {
+    message("PDF support:      yes")
+    _POPPLER_INCLUDE = $$(POPPLER_INCLUDE)
+    _POPPLER_LIB = $$(POPPLER_LIB)
+    isEmpty(_POPPLER_INCLUDE) {
+      error("POPPLER_INCLUDE and POPPLER_LIB environment variables must be defined")
     } else {
-      message(Building release version without internal support for JPEG2000 files)
+      isEmpty(_POPPLER_LIB) {
+        error("POPPLER_INCLUDE and POPPLER_LIB environment variables must be defined")
+      }
     }
+    DEFINES += "ENGAUGE_PDF"
+    LIBS += -L$$(POPPLER_LIB) -lpoppler-qt5
+    INCLUDEPATH += $$(POPPLER_INCLUDE)
+    HEADERS += src/Pdf/Pdf.h
+    SOURCES += src/Pdf/Pdf.cpp
+
+} else {
+    message("PDF support:      no")
 }
 
 # People interested in translating a language can contact the developers for help. 

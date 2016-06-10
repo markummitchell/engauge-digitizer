@@ -40,6 +40,9 @@ public:
   /// Get method for MainWindow titlebar filename format
   MainTitleBarFormat mainTitleBarFormat () const;
 
+  /// Get method for resolution of imported PDF files, in dots per inch
+  int pdfResolution () const;
+
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,
                     QTextStream &str) const;
@@ -55,6 +58,9 @@ public:
 
   /// Set method for MainWindow titlebar filename format
   void setMainTitleBarFormat (MainTitleBarFormat mainTitleBarFormat);
+
+  /// Set method for resolution of imported PDF files, in dots per inch
+  void setPdfResolution (int resolution);
 
   /// Set method for zoom control
   void setZoomControl (ZoomControl zoomControl);
@@ -74,6 +80,7 @@ private:
   ZoomControl m_zoomControl;
   ZoomFactorInitial m_zoomFactorInitial;
   MainTitleBarFormat m_mainTitleBarFormat;
+  int m_pdfResolution;
 
 };
 

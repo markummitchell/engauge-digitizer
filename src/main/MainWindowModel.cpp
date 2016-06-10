@@ -8,6 +8,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindowModel.h"
+#include "PdfResolution.h"
 #include <QLocale>
 #include <QObject>
 #include <QTextStream>
@@ -22,7 +23,8 @@ const QLocale::NumberOption HIDE_GROUP_SEPARATOR = QLocale::OmitGroupSeparator;
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
-  m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH)
+  m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH),
+  m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -31,7 +33,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_locale (other.locale()),
   m_zoomControl (other.zoomControl()),
   m_zoomFactorInitial (other.zoomFactorInitial()),
-  m_mainTitleBarFormat (other.mainTitleBarFormat())
+  m_mainTitleBarFormat (other.mainTitleBarFormat()),
+  m_pdfResolution (other.pdfResolution())
 {
 }
 
@@ -41,6 +44,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_zoomControl = other.zoomControl();
   m_zoomFactorInitial = other.zoomFactorInitial();
   m_mainTitleBarFormat = other.mainTitleBarFormat();
+  m_pdfResolution = other.pdfResolution();
 
   return *this;
 }
@@ -76,6 +80,11 @@ MainTitleBarFormat MainWindowModel::mainTitleBarFormat() const
   return m_mainTitleBarFormat;
 }
 
+int MainWindowModel::pdfResolution() const
+{
+  return m_pdfResolution;
+}
+
 void MainWindowModel::printStream(QString indentation,
                                      QTextStream &str) const
 {
@@ -88,7 +97,8 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "zoomFactorInitial=" << m_zoomFactorInitial << "\n";
   str << indentation << "mainWindowTitleBarFormat=" << (m_mainTitleBarFormat == MAIN_TITLE_BAR_FORMAT_NO_PATH ?
                                                         "NoPath" :
-                                                        "Path");
+                                                        "Path") << "\n";
+  str << indentation << "pdfResolution=" << m_pdfResolution << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -118,6 +128,11 @@ void MainWindowModel::setLocale (const QLocale &locale)
 void MainWindowModel::setMainTitleBarFormat(MainTitleBarFormat mainTitleBarFormat)
 {
   m_mainTitleBarFormat = mainTitleBarFormat;
+}
+
+void MainWindowModel::setPdfResolution(int resolution)
+{
+  m_pdfResolution = resolution;
 }
 
 void MainWindowModel::setZoomControl (ZoomControl zoomControl)

@@ -5,10 +5,14 @@
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE 
-#    and JPEG2000_LIB environment variables
+# 1) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and
+#    JPEG2000_LIB environment variables, and previous installation of the jpeg2000 development package
 #       qmake CONFIG+=jpeg2000
 #       qmake "CONFIG+=debug jpeg2000"
+# 2) Add 'pdf' to the qmake command line to include support for PDF input files. Requires POPPLER_INCLUDE and
+#    POPPLER_LIB environment variables, and previous installation of the poppler development package
+#       qmake CONFIG+=pdf
+#       qmake "CONFIG+=debug pdf"
 # 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
 CONFIG      = qt warn_on thread testcase 
@@ -252,6 +256,7 @@ HEADERS  += \
     Network/NetworkClient.h \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
+    Pdf/PdfResolution.h \
     Point/Point.h \
     Point/PointComparator.h \
     Point/PointIdentifiers.h \
@@ -530,6 +535,7 @@ SOURCES += \
     util/mmsubs.cpp \
     Network/NetworkClient.cpp \
     Ordinal/OrdinalGenerator.cpp \
+    Pdf/PdfResolution.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointMatchAlgorithm.cpp \
@@ -626,6 +632,7 @@ INCLUDEPATH += Background \
                Mime \
                Network \
                Ordinal \
+               Pdf \
                Plot \
                Point \
                Segment \
@@ -653,12 +660,14 @@ INCLUDEPATH += $$(FFTW_HOME)/include \
 RESOURCES += \
     engauge.qrc
 
+CONFIG(debug,debug|release) {
+  message("Build type:       debug")
+} else {
+  message("Build type:       release")
+}
+
 jpeg2000 {
-    CONFIG(debug,debug|release) {
-      message(Building debug version with internal support for JPEG2000 files)
-    } else {
-      message(Building release version with internal support for JPEG2000 files)
-    }
+    message("JPEG2000 support: yes")
     _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
     _JPEG2000_LIB = $$(JPEG2000_LIB)
     isEmpty(_JPEG2000_INCLUDE) {
@@ -685,9 +694,26 @@ jpeg2000 {
                Jpeg2000/Jpeg2000Convert.cpp                
 
 } else {
-    CONFIG(debug,debug|release) {
-      message(Building debug version without internal support for JPEG2000 files)
+    message("JPEG2000 support: no")
+}
+
+pdf {
+    message("PDF support:      yes")
+    _POPPLER_INCLUDE = $$(POPPLER_INCLUDE)
+    _POPPLER_LIB = $$(POPPLER_LIB)
+    isEmpty(_POPPLER_INCLUDE) {
+      error("POPPLER_INCLUDE and POPPLER_LIB environment variables must be defined")
     } else {
-      message(Building release version without internal support for JPEG2000 files)
+      isEmpty(_POPPLER_LIB) {
+        error("POPPLER_INCLUDE and POPPLER_LIB environment variables must be defined")
+      }
     }
+    DEFINES += "ENGAUGE_PDF"
+    INCLUDEPATH += $$(POPPLER_INCLUDE)
+    LIBS += -L$$(POPPLE_LIB) -lpoppler-qt5
+    HEADERS += Pdf/Pdf.h
+    SOURCES += Pdf/Pdf.cpp
+
+} else {
+    message("PDF support:      no")
 }
