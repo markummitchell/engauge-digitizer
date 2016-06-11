@@ -4,13 +4,19 @@
 # 1) This builds 'release' executables by default, to greatly reduce the chances of a 'debug' build getting deployed.
 #    To get a 'debug' build, add 'CONFIG=debug' to the qmake command line:
 #        qmake CONFIG=debug
-# 2) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and 
-#    JPEG2000_LIB environment variables, and previous installation of jpeg2000 development package. At some point, Qt may 
-#    provide its own support for this format, at which point this can be skipped
+# 2) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires:
+#        1) previous installation of OpenJPEG 2.1 development package
+#        2) OPENJPEG_INCLUDE environment variable pointing to directory with openjpeg.h
+#        3) OPENJPEG_LIB environment variable pointing to directory with libopenjp2.so
+#    Sample command lines:
 #        qmake CONFIG+=jpeg2000
 #        qmake "CONFIG+=debug jpeg2000"
-# 3) Add 'pdf' to the qmake command line to include support for PDF input files. Requires POPPLER_INCLUDE and
-#    POPPLER_LIB environment variables, and previous installation of the poppler development package.
+#    At some point, Qt may provide its own support for this format, at which point this can be skipped
+# 3) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
+#        1) previous installation of the poppler-qt5 development package.
+#        2) POPPLER_INCLUDE environment variable pointing to directory containing Document.h
+#        3) POPPLER_LIB environment variable pointing to directory containing libpoppler-qt5.so
+#    Sample command lines:
 #        qmake CONFIG+=pdf
 #        qmake "CONFIG+=debug pdf"
 # 4) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
@@ -711,37 +717,28 @@ jpeg2000 {
     message("JPEG2000 support: yes")
     _OPENJPEG_INCLUDE = $$(OPENJPEG_INCLUDE)
     _OPENJPEG_LIB = $$(OPENJPEG_LIB)
-    _JPEG2000_INCLUDE = $$(JPEG2000_INCLUDE)
-    _JPEG2000_LIB = $$(JPEG2000_LIB)
     isEmpty(_OPENJPEG_INCLUDE) {
-      error("OPENJPEG_INCLUDE, OPENJPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
+      error("OPENJPEG_INCLUDE and OPENJPEG_LIB environment variables must be defined")
     } else {
       isEmpty(_OPENJPEG_LIB) {
-        error("OPENJPEG_INCLUDE, OPENJPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
-      } else {
-        isEmpty(_JPEG2000_INCLUDE) {
-          error("JPEG_INCLUDE, JPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
-        } else {
-          isEmpty(_JPEG2000_LIB) {
-            error("JPEG_INCLUDE, JPEG_LIB, JPEG2000_INCLUDE and JPEG2000_LIB environment variables must be defined")
-          }
-        }
+        error("OPENJPEG_INCLUDE and OPENJPEG_LIB environment variables must be defined")
       }
     }
     DEFINES += "ENGAUGE_JPEG2000"
     INCLUDEPATH += $$(OPENJPEG_INCLUDE) \
-                   $$(JPEG2000_INCLUDE)
-    LIBS += -L$$(OPENJPEG_LIB) -L$$(JPEG2000_LIB) -lopenjp2
+                   src/Jpeg2000
+    LIBS += -L$$(OPENJPEG_LIB) -lopenjp2
     HEADERS += src/Jpeg2000/Jpeg2000.h \
                src/Jpeg2000/Jpeg2000Callbacks.h \
                src/Jpeg2000/Jpeg2000Color.h \
                src/Jpeg2000/Jpeg2000Convert.h \
                src/Jpeg2000/Jpeg2000FormatDefs.h
-
     SOURCES += src/Jpeg2000/Jpeg2000.cpp \
                src/Jpeg2000/Jpeg2000Callbacks.cpp \
                src/Jpeg2000/Jpeg2000Color.cpp \
                src/Jpeg2000/Jpeg2000Convert.cpp
+    QMAKE_LFLAGS += -Wl,-rpath=\'\$\$ORIGIN\'
+    QMAKE_POST_LINK += cp $$(OPENJPEG_LIB)/libopenjp2.so.7 bin
 
 } else {
     message("JPEG2000 support: no")

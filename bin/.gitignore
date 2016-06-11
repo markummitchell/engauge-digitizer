@@ -4,6 +4,7 @@ engauge
 engauge.exe
 engauge_error_report.xml
 engauge_test
+lib*
 *.log
 *.log.*
 *.pdb

@@ -24,32 +24,36 @@ bool Pdf::load (const QString &fileName,
   const int X_TOP_LEFT = 0, Y_TOP_LEFT = 0;
   const int WIDTH = -1, HEIGHT = -1; // Negative values give full page
 
-  // Try to read the file
-  Document *document = Document::load (fileName);
+  // Simple check to prevent complaints from poppler code
+  if (fileName.right (4).toLower () == ".pdf") {
 
-  if (document != 0) {
-    if (!document->isLocked ()) {
-
-      Page *page = document->page (FIRST_PAGE);
-      if (page != 0) {
-
-        image = page->renderToImage (resolution,
-                                     resolution,
-                                     X_TOP_LEFT,
-                                     Y_TOP_LEFT,
-                                     WIDTH,
-                                     HEIGHT);
-        if (!image.isNull ()) {
-
-          // Success!
-          success = true;
+    // Try to read the file
+    Document *document = Document::load (fileName);
+    
+    if (document != 0) {
+      if (!document->isLocked ()) {
+        
+        Page *page = document->page (FIRST_PAGE);
+        if (page != 0) {
+          
+          image = page->renderToImage (resolution,
+                                       resolution,
+                                       X_TOP_LEFT,
+                                       Y_TOP_LEFT,
+                                       WIDTH,
+                                       HEIGHT);
+          if (!image.isNull ()) {
+            
+            // Success!
+            success = true;
+          }
+          
+          delete page;
         }
-
-        delete page;
       }
+      
+      delete document;
     }
-
-    delete document;
   }
 
   return success;

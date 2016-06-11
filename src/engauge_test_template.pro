@@ -5,12 +5,18 @@
 TEMPLATE    = app
 
 # CONFIG comments:
-# 1) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires JPEG2000_INCLUDE and
-#    JPEG2000_LIB environment variables, and previous installation of the jpeg2000 development package
+# 1) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires
+#       1) previous installation of the jpeg2000 development package
+#       2) JPEG2000_INCLUDE environment variable pointing to directory containing openjpeg.h
+#       3) JPEG2000_LIB environment variable pointing to directory containing libopenjp2.so
+#    Sample command lines
 #       qmake CONFIG+=jpeg2000
 #       qmake "CONFIG+=debug jpeg2000"
-# 2) Add 'pdf' to the qmake command line to include support for PDF input files. Requires POPPLER_INCLUDE and
-#    POPPLER_LIB environment variables, and previous installation of the poppler development package
+# 2) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
+#       1) previous installation of the poppler-qt5 development package
+#       2) POPPLER_INCLUDE environment variable pointing to directory containing Document.h
+#       3) POPPLER_LIB environment variable pointing to directory containing libpoppler-qt5.so
+#    Sample command lines
 #       qmake CONFIG+=pdf
 #       qmake "CONFIG+=debug pdf"
 # 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
