@@ -4,9 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifdef OSX_RELEASE
-#include <CoreFoundation/CFBundle.h>
-#endif
 #include "HelpBrowser.h"
 #include "HelpWindow.h"
 #include "Logger.h"
@@ -28,6 +25,7 @@ HelpWindow::HelpWindow(QWidget *parent) :
   setMinimumWidth (MIN_WIDTH);
   setMinimumHeight (MIN_HEIGHT);
 
+#ifndef OSX_RELEASE
   QHelpEngine *helpEngine = new QHelpEngine (helpPath());
   helpEngine->setupData();
 
@@ -50,32 +48,15 @@ HelpWindow::HelpWindow(QWidget *parent) :
   splitter->insertWidget (1, browser);
 
   setWidget (splitter);
+#endif
 }
 
+#ifndef OSX_RELEASE
 QString HelpWindow::helpPath() const
 {
   // Possible locations of help file. Each entry is first tried as is, and then with
-  // applicationDirPath as a prefix. Each entry should probably start with a slash
-
-#ifdef OSX_RELEASE
-
-  // Use hardcoded help file location for OSX since the QFileInfo search below breaks the sandbox. This uses the
-  // approach from http://stackoverflow.com/questions/8768217/how-can-i-find-the-path-to-a-file-in-an-application-bundle-nsbundle-using-c
-  CFBundleRef mainBundle = CFBundleGetMainBundle ();
-
-  CFURLRef imageUrl = CFBundleCopyResourceURL (mainBundle, CFSTR ("engauge"), CFSTR ("qhc"), NULL);
-
-  CFStringRef imagePath = CFURLCopyFileSystemPath (imageUrl, kCFURLPOSIXPathStyle);
-
-  CFStringEncoding encodingMethod = CFStringGetSystemEncoding ();
-
-  const char *path = CFStringGetCStringPtr (imagePath, encodingMethod);
-
-  return path;
-
-#else
-
-  // When not dealing with the OSX sandbox, we use a QFileInfo search to allow some flexibility in the help file location
+  // applicationDirPath as a prefix. Each entry should probably start with a slash. This
+  // search approach offers some flexibility in the help file location
   QStringList paths;
 #ifdef HELPDIR
 #define QUOTE(string) _QUOTE(string)
@@ -106,6 +87,5 @@ QString HelpWindow::helpPath() const
   }
 
   return ""; // Empty file, since help file was never found, will simply result in empty help contents
-#endif
 }
-
+#endif

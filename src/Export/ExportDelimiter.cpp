@@ -24,11 +24,16 @@ QString exportDelimiterToString (ExportDelimiter exportDelimiter)
   }
 }
 
-QString exportDelimiterToText (ExportDelimiter exportDelimiter)
+QString exportDelimiterToText (ExportDelimiter exportDelimiter,
+                               bool isGnuplot)
 {
   switch (exportDelimiter) {
     case EXPORT_DELIMITER_COMMA:
-      return ",";
+      if (isGnuplot) {
+        return ", "; // Gnuplot needs a space
+      } else {
+        return ",";
+      }
 
     case EXPORT_DELIMITER_SPACE:
       return " ";

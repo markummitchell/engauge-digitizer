@@ -108,7 +108,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                                 CONNECT_AS_RELATION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter(),
+                                                   modelExportOverride.header() == EXPORT_HEADER_GNUPLOT);
 
   // Export in one of two layouts
   if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
@@ -149,7 +150,7 @@ QPointF ExportFileRelations::linearlyInterpolate (const Points &points,
                                                   double ordinal,
                                                   const Transformation &transformation) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::linearlyInterpolate";
+  //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::linearlyInterpolate";
 
   double xTheta = 0, yRadius = 0;
   double ordinalBefore = 0; // Not set until ip=1
@@ -282,28 +283,32 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
                                                     t,
                                                     xy);
 
-  // Fit a spline
-  Spline spline (t,
-                 xy);
+  // Spline class requires at least one point
+  if (xy.size() > 0) {
 
-  FormatCoordsUnits format;
+    // Fit a spline
+    Spline spline (t,
+                   xy);
 
-  // Extract the points
-  for (int row = 0; row < ordinals.count(); row++) {
+    FormatCoordsUnits format;
 
-    double ordinal = ordinals.at (row);
-    SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
-    double xTheta = splinePairFound.x ();
-    double yRadius = splinePairFound.y ();
+    // Extract the points
+    for (int row = 0; row < ordinals.count(); row++) {
 
-    // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
-    format.unformattedToFormatted (xTheta,
-                                   yRadius,
-                                   modelCoords,
-                                   modelMainWindow,
-                                   *(xThetaValues [row]),
-                                   *(yRadiusValues [row]),
-                                   transformation);
+      double ordinal = ordinals.at (row);
+      SplinePair splinePairFound = spline.interpolateCoeff(ordinal);
+      double xTheta = splinePairFound.x ();
+      double yRadius = splinePairFound.y ();
+
+      // Save values for this row into xThetaValues and yRadiusValues, after appropriate formatting
+      format.unformattedToFormatted (xTheta,
+                                     yRadius,
+                                     modelCoords,
+                                     modelMainWindow,
+                                     *(xThetaValues [row]),
+                                     *(yRadiusValues [row]),
+                                     transformation);
+    }
   }
 }
 

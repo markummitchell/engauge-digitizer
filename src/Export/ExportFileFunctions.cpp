@@ -130,7 +130,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                                 CONNECT_AS_FUNCTION_STRAIGHT);
 
   // Delimiter
-  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter());
+  const QString delimiter = exportDelimiterToText (modelExportOverride.delimiter(),
+                                                   modelExportOverride.header() == EXPORT_HEADER_GNUPLOT);
 
   // Get x/theta values to be used
   CallbackGatherXThetaValuesFunctions ftor (modelExportOverride,
@@ -191,7 +192,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
                                                  double xThetaValue,
                                                  const Transformation &transformation) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
+  //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
 
   double yRadius = 0;
   QPointF posGraphBefore; // Not set until ip=1
@@ -358,27 +359,31 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
     // the regression tests. Toggling between 30 and 32 made no difference in the regression tests.
     const int MAX_ITERATIONS = 32;
 
-    // Fit a spline
-    Spline spline (t,
-                   xy);
+    // Spline class requires at least one point
+    if (xy.size() > 0) {
 
-    // Get value at desired points
-    for (int row = 0; row < xThetaValues.count(); row++) {
+      // Fit a spline
+      Spline spline (t,
+                     xy);
 
-      double xTheta = xThetaValues.at (row);
-      SplinePair splinePairFound = spline.findSplinePairForFunctionX (xTheta,
-                                                                      MAX_ITERATIONS);
-      double yRadius = splinePairFound.y ();
+      // Get value at desired points
+      for (int row = 0; row < xThetaValues.count(); row++) {
 
-      // Save y/radius value for this row into yRadiusValues, after appropriate formatting
-      QString dummyXThetaOut;
-      format.unformattedToFormatted (xTheta,
-                                     yRadius,
-                                     modelCoords,
-                                     modelMainWindow,
-                                     dummyXThetaOut,
-                                     *(yRadiusValues [row]),
-                                     transformation);
+        double xTheta = xThetaValues.at (row);
+        SplinePair splinePairFound = spline.findSplinePairForFunctionX (xTheta,
+                                                                        MAX_ITERATIONS);
+        double yRadius = splinePairFound.y ();
+
+        // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+        QString dummyXThetaOut;
+        format.unformattedToFormatted (xTheta,
+                                       yRadius,
+                                       modelCoords,
+                                       modelMainWindow,
+                                       dummyXThetaOut,
+                                       *(yRadiusValues [row]),
+                                       transformation);
+      }
     }
   }
 }

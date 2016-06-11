@@ -9,7 +9,10 @@
 
 #include <QDockWidget>
 
-/// Dockable help window
+/// Dockable help window. Despite a lot of work trying to work with the OSX sandbox, support for the
+/// sandbox was never completed since QHelpEngine requires WRITE-access to the collection file. Even
+/// trying to create a temporary directory does not work since copying would involve QHelpEngine::copyCollectionFile
+/// which copys from the CURRENT collection file (versus just some arbitrary file name)
 class HelpWindow : public QDockWidget
 {
   Q_OBJECT;
@@ -21,7 +24,9 @@ class HelpWindow : public QDockWidget
  private:
   HelpWindow ();
 
+#ifndef OSX_RELEASE
   QString helpPath() const;
+#endif
 
 };
 
