@@ -10,17 +10,33 @@
 #include "FileCmdSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QDir>
 #include <QFile>
+#include <QMessageBox>
 #include <QXmlStreamReader>
 #include "Xml.h"
 
 FileCmdScript::FileCmdScript(const QString &fileCmdScriptFile)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "FileCmdScript::FileCmdScript"
+                              << " curDir=" << QDir::currentPath().toLatin1().data();
+
   // Read commands into stack. The file is known to exist since it was checked in parseCmdLine
   QFile file (fileCmdScriptFile);
 
   QXmlStreamReader reader (&file);
-  file.open(QIODevice::ReadOnly | QIODevice::Text);
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+
+    QString msg = QString ("%1 %2 %3 %4")
+      .arg (QObject::tr ("Cannot read script file"))
+      .arg (fileCmdScriptFile)
+      .arg (QObject::tr ("from directory"))
+      .arg (QDir::currentPath());
+    QMessageBox::critical (0,
+                           "Script File",
+                           msg);
+    exit (-1);
+  }
 
   // Load commands
   FileCmdFactory factory;

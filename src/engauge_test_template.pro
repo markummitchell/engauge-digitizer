@@ -21,7 +21,7 @@ TEMPLATE    = app
 #       qmake "CONFIG+=debug pdf"
 # 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
-CONFIG      = qt warn_on thread testcase 
+CONFIG      += qt warn_on thread testcase 
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test
@@ -197,6 +197,7 @@ HEADERS  += \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
     Export/ExportHeader.h \
+    Export/ExportImageForRegression.h \
     Export/ExportOrdinalsSmooth.h \
     Export/ExportOrdinalsStraight.h \
     Export/ExportToClipboard.h \
@@ -479,6 +480,7 @@ SOURCES += \
     Export/ExportFileFunctions.cpp \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \
+    Export/ExportImageForRegression.cpp \
     Export/ExportLayoutFunctions.cpp \
     Export/ExportOrdinalsSmooth.cpp \
     Export/ExportOrdinalsStraight.cpp \
@@ -716,7 +718,7 @@ pdf {
     }
     DEFINES += "ENGAUGE_PDF"
     INCLUDEPATH += $$(POPPLER_INCLUDE)
-    LIBS += -L$$(POPPLE_LIB) -lpoppler-qt5
+    LIBS += -L$$(POPPLE_LIB) -lpoppler -lpoppler-qt5
     HEADERS += Pdf/Pdf.h
     SOURCES += Pdf/Pdf.cpp
 

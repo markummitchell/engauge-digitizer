@@ -1,11 +1,33 @@
 #!/bin/bash
 
-# Script that runs command-line tests
+# Description: Script that runs command-line tests
+#
+# Usage: build_and_run_all_cli_tests [jpeg2000] [pdf]
+#
+# where: jpeg2000 = run jpeg2000 test(s). Requires CONFIG+=jpeg2000 in qmake build
+#        pdf      = run pdf test(s). Requires CONFIG+=pdf in qmake build
 
 # Test names. Specify a single test to run just that test
 tests=(TestCorrelation TestFormats TestGraphCoords TestProjectedPoint TestSegmentFill TestSpline TestTransformation TestValidators)
 
 echo "Available tests: " ${tests[*]}
+
+# Pass script arguments to qmake
+CONFIGARGS=""
+while test $# -gt 0
+do
+    case "$1" in
+	jpeg2000) CONFIGARGS="jpeg2000 $CONFIGARGS"
+	    ;;
+        pdf) CONFIGARGS="pdf $CONFIGARGS"
+            ;;
+    esac
+    shift
+done
+
+if [ -n "$CONFIGARGS" ]; then
+    CONFIGARGS="CONFIG+=$CONFIGARGS"
+fi
 
 # Need gcc 4 at /C/cygwin/bin rather than gcc 3 at /usr/bin to prevent 'unrecognized command line
 # option -fno-keep-inline-dllexport'
@@ -49,7 +71,7 @@ else
     for t in "${tests[@]}"
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
-	qmake engauge_test.pro
+	qmake $CONFIGARGS engauge_test.pro
 	make all 2>>$LOGFILE >/dev/null
 	../bin/$t
 	if [ $argcount -ne 1 ]

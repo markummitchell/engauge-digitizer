@@ -206,6 +206,7 @@ HEADERS  += \
     src/Export/ExportAlignLinear.h \
     src/Export/ExportAlignLog.h \
     src/Export/ExportDelimiter.h \
+    src/Export/ExportImageForRegression.h \
     src/Export/ExportLayoutFunctions.h \
     src/Export/ExportPointsIntervalUnits.h \
     src/Export/ExportPointsSelectionFunctions.h \
@@ -496,6 +497,7 @@ SOURCES += \
     src/Export/ExportFileFunctions.cpp \
     src/Export/ExportFileRelations.cpp \
     src/Export/ExportHeader.cpp \
+    src/Export/ExportImageForRegression.cpp \
     src/Export/ExportLayoutFunctions.cpp \
     src/Export/ExportOrdinalsSmooth.cpp \
     src/Export/ExportOrdinalsStraight.cpp \
@@ -756,7 +758,7 @@ pdf {
       }
     }
     DEFINES += "ENGAUGE_PDF"
-    LIBS += -L$$(POPPLER_LIB) -lpoppler-qt5
+    LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     HEADERS += src/Pdf/Pdf.h
     SOURCES += src/Pdf/Pdf.cpp

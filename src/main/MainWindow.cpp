@@ -49,6 +49,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "ExportImageForRegression.h"
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
 #include "Ghosts.h"
@@ -153,7 +154,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   LoggerUpload::bindToMainWindow(this);
 
-  QString initialPath = QDir::currentPath();
+  m_startupDirectory = QDir::currentPath();
 
   setCurrentFile ("");
   createIcons();
@@ -178,17 +179,20 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createZoomMap ();
   updateControls ();
 
-  settingsRead ();
+  settingsRead (); // This changes the current directory when not regression testing
   setCurrentFile ("");
   setUnifiedTitleAndToolBarOnMac(true);
 
   installEventFilter(this);
+
+  // Start regression scripting if appropriate. Regression scripts assume current directory is the original
+  // current directory, so we temporarily reset the current directory
+  QString originalPath = QDir::currentPath();
+  QDir::setCurrent (m_startupDirectory);
   if (!errorReportFile.isEmpty()) {
-    loadErrorReportFile(initialPath,
-                        errorReportFile);
+    loadErrorReportFile(errorReportFile);
     if (m_isRegressionTest) {
-      startRegressionTestErrorReport(initialPath,
-                                     errorReportFile);
+      startRegressionTestErrorReport(errorReportFile);
     }
   } else if (!fileCmdScriptFile.isEmpty()) {
     m_fileCmdScript = new FileCmdScript (fileCmdScriptFile);
@@ -199,6 +203,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
     // since only one of the two modes is available at any time, for simplicity
     m_loadStartupFiles = loadStartupFiles;
   }
+  QDir::setCurrent (originalPath);
 }
 
 MainWindow::~MainWindow()
@@ -1296,9 +1301,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 #ifndef OSX_RELEASE
 void MainWindow::exportAllCoordinateSystems()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems";
-
-  ExportToFile exportStrategy;
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems curDir=" << QDir::currentPath().toLatin1().data();
 
   // Output the regression test results. One file is output for every coordinate system
   for (CoordSystemIndex index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
@@ -1308,8 +1311,21 @@ void MainWindow::exportAllCoordinateSystems()
     QString regressionFile = QString ("%1_%2")
                              .arg (m_regressionFile)
                              .arg (index + 1); // Append the coordinate system index
-    fileExport (regressionFile,
-                exportStrategy);
+
+    // Normally we just export to a file, but when regression testing the export will fail since coordinates are not defined. To
+    // get an export file when regression testing, we just output the image size
+    if (m_isRegressionTest && !m_transformation.transformIsDefined()) {
+
+      ExportImageForRegression exportStrategy (m_cmdMediator->pixmap ());
+      exportStrategy.fileExport (regressionFile);
+
+    } else {
+
+      ExportToFile exportStrategy;
+
+      fileExport (regressionFile,
+                  exportStrategy);
+    }
   }
 }
 #endif
@@ -1320,6 +1336,7 @@ QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) co
 
   outFileName = outFileName.replace (".xml", ".csv_actual"); // Applies when extension is xml
   outFileName = outFileName.replace (".dig", ".csv_actual"); // Applies when extension is dig
+  outFileName = outFileName.replace (".pdf", ".csv_actual"); // Applies when extension is pdf
 
   return outFileName;
 }
@@ -1328,6 +1345,7 @@ void MainWindow::fileExport(const QString &fileName,
                             ExportToFile exportStrategy)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileExport"
+                              << " curDir=" << QDir::currentPath().toLatin1().data()
                               << " fileName=" << fileName.toLatin1().data();
 
   QFile file (fileName);
@@ -1410,9 +1428,11 @@ void MainWindow::fileImport (const QString &fileName,
   if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2.")
+                          QString("%1 %2 %3 %4.")
                           .arg (tr ("Cannot read file"))
-                          .arg(fileName));
+                          .arg (fileName)
+                          .arg (tr ("from directory"))
+                          .arg (QDir::currentPath()));
 
     // Reset
     m_originalFile = originalFileOld;
@@ -1526,9 +1546,11 @@ void MainWindow::filePaste (ImportType importType)
   if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2.")
+                          QString("%1 %2 %3 %4.")
                           .arg (tr ("Cannot read file"))
-                          .arg(fileName));
+                          .arg (fileName)
+                          .arg (tr ("from directory"))
+                          .arg (QDir::currentPath ()));
 
     // Reset
     m_originalFile = originalFileOld;
@@ -1692,28 +1714,21 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2:\n%3.")
+                          QString("%1 %2 %3 %4:\n%5.")
                           .arg (tr ("Cannot read file"))
-                          .arg(fileName)
+                          .arg (fileName)
+                          .arg (tr ("from directory"))
+                          .arg (QDir::currentPath ())
                           .arg(cmdMediator->reasonForUnsuccessfulRead ()));
     delete cmdMediator;
 
   }
 }
 
-void MainWindow::loadErrorReportFile(const QString &initialPath,
-                                     const QString &errorReportFile)
+void MainWindow::loadErrorReportFile(const QString &errorReportFile)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadErrorReportFile"
-                              << " path=" << initialPath.toLatin1().data()
                               << " file=" << errorReportFile.toLatin1().data();
-
-  // The default path has been changed from its original executable-based initial value to the last directory used
-  // according to the settings. Since the executable-based directory is much more stable, and we want a predictable
-  // directory in the likely event that the error report file has a relative path, we temporarily switch the default path
-  // back to the executable-based initial value
-  QString originalPath = QDir::currentPath();
-  QDir::setCurrent(initialPath);
 
   QFile file (errorReportFile);
   if (!file.exists()) {
@@ -1737,9 +1752,6 @@ void MainWindow::loadErrorReportFile(const QString &initialPath,
                                   m_cmdMediator->document(),
                                   reader);
   file.close();
-
-  // Reset the original path now that the error report file has been read in
-  QDir::setCurrent(originalPath);
 
   setupAfterLoad(errorReportFile,
                  "Error report opened",
@@ -3230,7 +3242,13 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
 
   if (m_cmdStackShadow->canRedo()) {
 
+    // Always reset current directory before the command. This guarantees the upcoming redo step will work
+    QDir::setCurrent (m_startupDirectory);
+
     m_cmdStackShadow->slotRedo();
+
+    // Always reset current directory after the command. This guarantees the final export to file will work
+    QDir::setCurrent (m_startupDirectory);
 
   } else {
 
@@ -3251,7 +3269,13 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
 
   if (m_fileCmdScript->canRedo()) {
 
+    // Always reset current directory before the command. This guarantees the upcoming redo step will work
+    QDir::setCurrent (m_startupDirectory);
+
     m_fileCmdScript->redo(*this);
+
+    // Always reset current directory after the command. This guarantees the final export to file will work
+    QDir::setCurrent (m_startupDirectory);
 
   } else {
 
@@ -3733,8 +3757,7 @@ void MainWindow::slotViewZoomOutFromWheelEvent ()
   }
 }
 
-void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
-                                                const QString &regressionInputFile)
+void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFile)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
 
@@ -3744,14 +3767,8 @@ void MainWindow::startRegressionTestErrorReport(const QString &initialPath,
   // 2) before running any commands since those commands implicitly assume the index is zero
   Point::setIdentifierIndex(0);
 
-  // Need absolute path since QDir::currentPath has been changed already so the
-  // current path is not predictable
-  QString absoluteRegressionInputFile = QString ("%1/%2")
-                                        .arg (initialPath)
-                                        .arg (regressionInputFile);
-
   // Save output/export file name
-  m_regressionFile = exportFilenameFromInputFilename (absoluteRegressionInputFile);
+  m_regressionFile = exportFilenameFromInputFilename (regressionInputFile);
 
   m_timerRegressionErrorReport = new QTimer();
   m_timerRegressionErrorReport->setSingleShot(false);

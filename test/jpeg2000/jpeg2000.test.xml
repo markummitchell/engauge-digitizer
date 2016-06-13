@@ -1,0 +1,3 @@
+<Script>
+  <Cmd Type="CmdFileImport" FileName="../test/jpeg2000/jpeg2000.jp2" />
+</Script>

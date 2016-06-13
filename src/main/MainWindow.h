@@ -365,8 +365,7 @@ private:
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
-  void loadErrorReportFile(const QString &initialPath,
-                           const QString &errorReportFile);
+  void loadErrorReportFile(const QString &errorReportFile);
   bool loadImage (const QString &fileName,
                   const QImage &image,
                   ImportType ImportType);
@@ -393,8 +392,7 @@ private:
   bool setupAfterLoad (const QString &fileName,
                        const QString &temporaryMessage,
                        ImportType ImportType);
-  void startRegressionTestErrorReport (const QString &initialPath,
-                                       const QString &regressionInputFile);
+  void startRegressionTestErrorReport (const QString &regressionInputFile);
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
@@ -583,6 +581,9 @@ private:
   bool m_isRegressionTest;
   QTimer *m_timerRegressionFileCmdScript;
   QString m_regressionFile;
+  QString m_startupDirectory; // Used to restore original directory just before outputing regression test results, since
+                              // directory changes when settings are read, and also when files are opened or imported.
+                              // Restoring the directory means relative paths in the regression scripts will work consistently
 
   // Grid lines
   GridLines m_gridLines;
