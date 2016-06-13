@@ -36,7 +36,7 @@ install:
   - move *def lib
   - move *lib lib
   - cd %APPVEYOR_BUILD_FOLDER%
-  - curl -fsSLO https://dl.dropboxusercontent.com/u/1147076/libpoppler-qt5-0.43.zip -o libpoppler-qt5-0.43.zip
+  - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/libpoppler-qt5-0.43.zip' -o libpoppler-qt5-0.43.zip
   - 7z x libpoppler-qt5-0.43.zip -aoa
 
 build_script:
