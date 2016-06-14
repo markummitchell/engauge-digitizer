@@ -114,6 +114,11 @@ void DlgSettingsCurveAddRemove::createOptionalSaveDefault (QHBoxLayout *layout)
   connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
   layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
 
+  m_btnResetDefault = new QPushButton (tr ("Reset Default"));
+  m_btnResetDefault->setWhatsThis (tr ("Reset the defaults for future graph curves to the original settings."));
+  connect (m_btnResetDefault, SIGNAL (released ()), this, SLOT (slotResetDefault()));
+  layout->addWidget (m_btnResetDefault, 0, Qt::AlignRight);
+
   QSpacerItem *spacer = new QSpacerItem (40, 2);
   layout->addItem (spacer);
 }
@@ -424,6 +429,29 @@ void DlgSettingsCurveAddRemove::slotRemove ()
   }
 
   updateControls();
+}
+
+void DlgSettingsCurveAddRemove::slotResetDefault()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::slotResetDefault";
+
+  const QString REMOVE_ALL_SETTINGS_IN_GROUP; // Empty string
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+
+  int indexOneBased = 1;
+
+  SettingsForGraph settingsForGraph;
+  QString groupName = settingsForGraph.groupNameForNthCurve (indexOneBased);
+  while (settings.childGroups().contains (groupName)) {
+
+    settings.beginGroup (groupName);
+    settings.remove (REMOVE_ALL_SETTINGS_IN_GROUP); // Remove this group by removing its settings
+    settings.endGroup ();
+
+    ++indexOneBased;
+    groupName = settingsForGraph.groupNameForNthCurve (indexOneBased);
+  }
 }
 
 void DlgSettingsCurveAddRemove::slotSaveDefault()

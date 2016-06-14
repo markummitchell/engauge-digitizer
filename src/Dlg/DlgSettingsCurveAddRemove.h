@@ -36,6 +36,7 @@ private slots:
                         const QVector<int> &roles);
   void slotNew ();
   void slotRemove ();
+  void slotResetDefault();
   void slotSaveDefault();
   void slotSelectionChanged (QItemSelection, QItemSelection);
 
@@ -66,6 +67,7 @@ private:
   QPushButton *m_btnRemove;
   QPushButton *m_btnRename;
 
+  QPushButton *m_btnResetDefault;
   QPushButton *m_btnSaveDefault;
 };
 
