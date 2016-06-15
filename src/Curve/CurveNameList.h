@@ -55,6 +55,9 @@ private:
   bool curveNameIsAcceptable (const QString &curveNameNew,
                               int row) const;
 
+  /// Search method that finds the first occurrence of the specified value. If value is not found then Invalid is returned
+  QModelIndex indexForValue (const QVariant &value) const;
+
   /// Store entries as QStrings for easy translation into QVariants. Use CurveNameListEntry to translate
   QStringList m_modelCurvesEntries;
 };

@@ -141,6 +141,25 @@ Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
   }
 }
 
+QModelIndex CurveNameList::indexForValue (const QVariant &value) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::indexForValue";
+
+  for (int row = 0; row < rowCount(); row++) {
+
+    QModelIndex indexSearch = index (row, 0);
+
+    if (data (indexSearch) == value) {
+
+      return indexSearch;
+
+    }
+  }
+
+  QModelIndex invalid;
+  return invalid;
+}
+
 bool CurveNameList::insertRows (int row,
                                 int count,
                                 const QModelIndex &parent)
@@ -219,6 +238,22 @@ bool CurveNameList::setData (const QModelIndex &index,
 
   bool success = false;
 
+  // In a copy maneuver, the old entry must be identified and removed
+  if (index.column () == 0 && role == Qt::DisplayRole) {
+    QModelIndex indexToRemove = indexForValue (value); // Returns Invalid if no duplicate entry was found
+    beginRemoveRows (QModelIndex (),
+                     indexToRemove.row(),
+                     indexToRemove.row());
+
+    m_modelCurvesEntries.removeAt (indexToRemove.row ());
+
+    endRemoveRows ();
+
+    emit dataChanged (indexToRemove,
+                      indexToRemove);
+  }
+
+  // Process the new entry
   int row = index.row ();
   if (row < m_modelCurvesEntries.count ()) {
 
