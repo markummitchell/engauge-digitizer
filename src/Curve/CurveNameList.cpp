@@ -50,7 +50,6 @@ bool CurveNameList::curveNameIsAcceptable (const QString &curveNameNew,
   if (success) {
 
     // First test was passed. Second test is to check for duplication
-
     for (int row1 = 0; row1 < m_modelCurvesEntries.count(); row1++) {
 
       // Use table entry except for the one row that gets overridden
@@ -81,7 +80,7 @@ bool CurveNameList::curveNameIsAcceptable (const QString &curveNameNew,
 }
 
 QVariant CurveNameList::data (const QModelIndex &index,
-                               int role) const
+                              int role) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::data"
                                << " isRoot=" << (index.isValid () ? "no" : "yes")
@@ -124,7 +123,8 @@ Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
 
   if (index.isValid ()) {
 
-    // Not root item
+    // Not root item. ItemIsDropEnabled is unwanted during dragging since dragged entry would overwrite
+    // another entry if user forgets to drop into the space between successive entries
     return QAbstractTableModel::flags (index) |
         Qt::ItemIsDragEnabled |
         Qt::ItemIsEnabled |
@@ -135,14 +135,15 @@ Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
 
     // Root item
     return QAbstractTableModel::flags (index) |
+        Qt::ItemIsDragEnabled |
         Qt::ItemIsDropEnabled;
 
   }
 }
 
 bool CurveNameList::insertRows (int row,
-                                 int count,
-                                 const QModelIndex &parent)
+                                int count,
+                                const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
@@ -173,8 +174,8 @@ bool CurveNameList::insertRows (int row,
 }
 
 bool CurveNameList::removeRows (int row,
-                                 int count,
-                                 const QModelIndex &parent)
+                                int count,
+                                const QModelIndex &parent)
 {
   bool skip = (count != 1 || row < 0 || row > rowCount () || parent.isValid());
 
@@ -212,6 +213,7 @@ bool CurveNameList::setData (const QModelIndex &index,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData"
                               << " indexRow=" << index.row ()
+                              << " indexCol=" << index.column ()
                               << " value=" << (value.isValid () ? "valid" : "invalid")
                               << " role=" << roleAsString (role).toLatin1 ().data ();
 
@@ -220,7 +222,7 @@ bool CurveNameList::setData (const QModelIndex &index,
   int row = index.row ();
   if (row < m_modelCurvesEntries.count ()) {
 
-    success = true; // This method will be successful except in the rare case when a curve name is a duplicate
+    success = true;
 
     if (!value.isValid () && (role == Qt::EditRole)) {
 
@@ -233,9 +235,16 @@ bool CurveNameList::setData (const QModelIndex &index,
       CurveNameListEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
 
       if (index.column () == 0) {
-        curvesEntry.setCurveNameCurrent (value.toString ());
-        success = curveNameIsAcceptable (value.toString (),
-                                         row);
+
+        // Skip curve name uniqueness check for Qt::DisplayRole since that role is used when dragging
+        // curve from one place to another, since for a short time the new curve name will coexist
+        // with the old curve name (until the old entry is removed)
+        if ((role != Qt::DisplayRole) ||
+            (curveNameIsAcceptable (value.toString(),
+                                    row))) {
+          success = true;
+          curvesEntry.setCurveNameCurrent (value.toString ());
+        }
       } else if (index.column () == 1) {
         curvesEntry.setCurveNameOriginal (value.toString ());
       } else if (index.column () == 2) {

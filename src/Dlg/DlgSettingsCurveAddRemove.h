@@ -15,8 +15,11 @@ class CurveNameList;
 class QGridLayout;
 class QListView;
 class QPushButton;
+class QTableView;
 
 /// Dialog for editing curve names settings.
+///
+/// The debug macro DLG_SETTINGS_DEBUG can be temporarily set to see the hidden columns
 class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
@@ -55,13 +58,20 @@ private:
                         const QString &curveNameNew,
                         const QString &curveNameOriginal,
                         int numPoints);
+  int newIndexFromSelection () const;
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   void removeSelectedCurves();
+  void selectCurveName (const QString &curveWanted);
   void updateControls ();
 
   CurveNameList *m_curveNameList; // Model for m_listCurves
+
+#ifdef DLG_SETTINGS_DEBUG
+  QTableView *m_listCurves; // While debugging, the 3 columns in each row are visible to make the operations more clear
+#else
   QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
+#endif
 
   QPushButton *m_btnAdd;
   QPushButton *m_btnRemove;

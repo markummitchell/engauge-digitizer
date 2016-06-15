@@ -20,9 +20,12 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSpacerItem>
+#include <QTableView>
 #include "QtToString.h"
 #include "Settings.h"
 #include "SettingsForGraph.h"
+
+const int FIRST_COLUMN = 0;
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Curve Add/Remove"),
@@ -84,19 +87,26 @@ void DlgSettingsCurveAddRemove::createListCurves (QGridLayout *layout,
   m_curveNameList = new CurveNameList;
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems
+#ifdef DLG_SETTINGS_DEBUG
+  m_listCurves = new QTableView;
+#else
   m_listCurves = new QListView;
+#endif
+
   m_listCurves->setWhatsThis (tr ("List of the curves belonging to this document.\n\n"
                                   "Click on a curve name to edit it. Each curve name must be unique.\n\n"
                                   "Reorder curves by dragging them around."));
   m_listCurves->setMinimumHeight (200);
-  m_listCurves->setSelectionMode (QAbstractItemView::ExtendedSelection);
+  m_listCurves->setSelectionMode (QAbstractItemView::SingleSelection);
   m_listCurves->setDefaultDropAction (Qt::MoveAction);
-  m_listCurves->setDragDropOverwriteMode (true);
+  m_listCurves->setDragDropOverwriteMode (false);
   m_listCurves->setDragEnabled (true);
   m_listCurves->setDropIndicatorShown (true);
   m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
+#ifndef DLG_SETTINGS_DEBUG
   m_listCurves->setViewMode (QListView::ListMode);
   m_listCurves->setMovement (QListView::Snap);
+#endif
   m_listCurves->setModel (m_curveNameList);
   layout->addWidget (m_listCurves, row++, 1, 1, 2);
   connect (m_curveNameList, SIGNAL (dataChanged (const QModelIndex &, const QModelIndex &, const QVector<int> &)),
@@ -219,7 +229,32 @@ void DlgSettingsCurveAddRemove::load (CmdMediator &cmdMediator)
                      cmdMediator.curvesGraphsNumPoints (curveName));
   }
 
+  selectCurveName (curveNames.first());
+
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+int DlgSettingsCurveAddRemove::newIndexFromSelection () const
+{
+  int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
+  int numItems = m_listCurves->model ()->rowCount ();
+
+  // Determine index where new entry will be inserted
+  int newIndex = -1;
+  if ((numSelectedItems == 0) &&
+      (numItems > 0)) {
+
+    // Append after list which has at least one entry
+    newIndex = numItems;
+
+  } else if (numSelectedItems == 1) {
+
+    // Insert after the selected index
+    newIndex = 1 + m_listCurves->selectionModel ()->selectedIndexes ().at (0).row ();
+
+  }
+
+  return newIndex;
 }
 
 QString DlgSettingsCurveAddRemove::nextCurveName () const
@@ -228,36 +263,21 @@ QString DlgSettingsCurveAddRemove::nextCurveName () const
 
   ENGAUGE_CHECK_PTR (m_listCurves);
 
-  int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
+  int newIndex = newIndexFromSelection ();
   int numItems = m_listCurves->model ()->rowCount ();
-
-  // Determine index where new entry will be inserted
-  int currentIndex = -1;
-  if ((numSelectedItems == 0) &&
-      (numItems > 0)) {
-
-    // Append after list which has at least one entry
-    currentIndex = numItems;
-
-  } else if (numSelectedItems == 1) {
-
-    // Insert before the selected index
-    currentIndex = m_listCurves->selectionModel ()->selectedIndexes ().at (0).row ();
-
-  }
 
   // Curves names of existing before/after curves
   QString curveNameBefore, curveNameAfter;
-  if (currentIndex > 0) {
+  if (newIndex > 0) {
 
-    QModelIndex index = m_curveNameList->index (currentIndex - 1, 0);
+    QModelIndex index = m_curveNameList->index (newIndex - 1, 0);
     curveNameBefore = m_curveNameList->data (index).toString ();
 
   }
 
-  if ((0 <= currentIndex) && (currentIndex < numItems)) {
+  if ((0 <= newIndex) && (newIndex < numItems)) {
 
-    QModelIndex index = m_curveNameList->index (currentIndex, 0);
+    QModelIndex index = m_curveNameList->index (newIndex, 0);
     curveNameAfter = m_curveNameList->data (index).toString ();
 
   }
@@ -351,11 +371,61 @@ void DlgSettingsCurveAddRemove::removeSelectedCurves ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::removeSelectedCurves";
 
+  ENGAUGE_ASSERT (m_listCurves->selectionModel ()->selectedIndexes ().count () > 0); // Also guarantees number of indexes > 0
+
+  // Identify the first index after the last selected index
+  QString firstCurveAfter; // Empty case means there was no index afer the last selected index
+  for (int row = m_listCurves->model()->rowCount() - 1; row >= 0; row--) {
+
+    QModelIndex indexCurrent = m_listCurves->model()->index(row, FIRST_COLUMN);
+    if (indexCurrent == m_listCurves->selectionModel()->selectedIndexes().last()) {
+
+      // This is the last selected index, which will be removed below. Exit immediately with firstCurveAfter set
+      break;
+    }
+
+    firstCurveAfter = indexCurrent.data().toString();
+  }
+
+  // Delete the selected indexes from last to first
   for (int i = m_listCurves->selectionModel ()->selectedIndexes ().count () - 1; i >= 0; i--) {
 
     int row = m_listCurves->selectionModel ()->selectedIndexes ().at (i).row ();
 
     m_curveNameList->removeRow (row);
+  }
+
+  if (firstCurveAfter.isEmpty ()) {
+
+    // Select the last remaining curve. These steps seem more complicated than necessary
+    int numItems = m_listCurves->model()->rowCount();
+    QModelIndex indexLast = m_listCurves->model()->index (numItems - 1, FIRST_COLUMN);
+    firstCurveAfter = m_listCurves->model()->data (indexLast).toString();
+
+  }
+
+
+  // Select an item
+  selectCurveName(firstCurveAfter);
+}
+
+void DlgSettingsCurveAddRemove::selectCurveName (const QString &curveWanted)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::selectCurveName"
+                              << " curve=" << curveWanted.toLatin1().data();
+
+  for (int row = 0; m_listCurves->model()->rowCount(); row++) {
+
+    QModelIndex index = m_listCurves->model()->index (row, FIRST_COLUMN);
+    QString curveGot = index.data ().toString ();
+
+    if (curveWanted == curveGot) {
+
+      // Found the curve we want to select
+      m_listCurves->setCurrentIndex (index);
+      break;
+
+    }
   }
 }
 
@@ -366,7 +436,8 @@ void DlgSettingsCurveAddRemove::slotDataChanged (const QModelIndex &topLeft,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::slotDataChanged"
                               << " topLeft=(" << topLeft.row () << "," << topLeft.column () << ")"
                               << " bottomRight=(" << bottomRight.row () << "," << bottomRight.column () << ")"
-                              << " roles=" << rolesAsString (roles).toLatin1 ().data ();
+                              << " roles=" << rolesAsString (roles).toLatin1 ().data ()
+                              << " defaultDragOption=" << (m_listCurves->defaultDropAction() == Qt::MoveAction ? "MoveAction" : "CopyAction");
 
   updateControls ();
 }
@@ -380,9 +451,14 @@ void DlgSettingsCurveAddRemove::slotNew ()
 
   QString curveNameSuggestion = nextCurveName ();
 
-  appendCurveName (curveNameSuggestion,
+  int row = newIndexFromSelection();
+
+  insertCurveName (row,
+                   curveNameSuggestion,
                    NO_ORIGINAL_CURVE_NAME,
                    NO_POINTS);
+
+  selectCurveName (curveNameSuggestion);
 
   updateControls();
 }
