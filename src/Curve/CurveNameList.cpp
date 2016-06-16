@@ -294,8 +294,17 @@ bool CurveNameList::setData (const QModelIndex &index,
 
           if (role == Qt::EditRole) {
 
-            curvesEntry.setCurveNameCurrent (value.toString ());
-            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+            // Does new curve name meet the requirements
+            if (curveNameIsAcceptable (value.toString (),
+                                       row)) {
+
+              curvesEntry.setCurveNameCurrent (value.toString ());
+              m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+
+            } else {
+
+              success = false;
+            }
 
           } else if ((role == Qt::DisplayRole) ||
                      (curveNameIsAcceptable (value.toString(),
