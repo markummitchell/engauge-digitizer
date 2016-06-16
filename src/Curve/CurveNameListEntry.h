@@ -45,6 +45,9 @@ class CurveNameListEntry
   /// Original curve name in document. Empty if there was no original curve
   QString curveNameOriginal () const;
 
+  /// Return true if entry is unpopulated. This is true between insertRows (where added to model) and setData (where fields are set)
+  bool entryHasNotBeenPopulated () const;
+
   /// Number of points in curve.
   int numPoints () const;
 

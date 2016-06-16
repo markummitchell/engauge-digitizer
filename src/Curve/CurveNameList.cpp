@@ -13,6 +13,10 @@
 #include <QVariant>
 #include <QXmlStreamWriter>
 
+const QString PIPE ("|");
+const QString SPACE (" ");
+const QString TAB ("\t");
+
 CurveNameList::CurveNameList()
 {
 }
@@ -118,9 +122,6 @@ QVariant CurveNameList::data (const QModelIndex &index,
 
 Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
 {
-  // Only the root item can accept drops, or else dragging one entry onto another
-  // would result in the drop target getting overwritten
-
   if (index.isValid ()) {
 
     // Not root item. ItemIsDropEnabled is unwanted during dragging since dragged entry would overwrite
@@ -135,13 +136,13 @@ Qt::ItemFlags CurveNameList::flags (const QModelIndex &index) const
 
     // Root item
     return QAbstractTableModel::flags (index) |
-        Qt::ItemIsDragEnabled |
         Qt::ItemIsDropEnabled;
 
   }
 }
 
-QModelIndex CurveNameList::indexForValue (const QVariant &value) const
+QModelIndex CurveNameList::indexForValue (const QModelIndex &indexToSkip,
+                                          const QVariant &value) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::indexForValue";
 
@@ -149,10 +150,13 @@ QModelIndex CurveNameList::indexForValue (const QVariant &value) const
 
     QModelIndex indexSearch = index (row, 0);
 
-    if (data (indexSearch) == value) {
+    if (indexToSkip != indexSearch) {
 
-      return indexSearch;
+      if (data (indexSearch) == value) {
 
+        return indexSearch;
+
+      }
     }
   }
 
@@ -169,14 +173,22 @@ bool CurveNameList::insertRows (int row,
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::insertRows"
                               << " row=" << row
                               << " count=" << count
+                              << " parentRow=" << parent.row()
+                              << " parentCol=" << parent.column()
                               << " isRoot=" << (parent.isValid () ? "no" : "yes")
                               << " skip=" << (skip ? "yes" : "no");
 
   if (skip) {
 
-    // Parent should be root item which is not valid
+    // Comments:
+    // 1) Row=-1 means the drag is AFTER the last entry. Although this method can deal with that easily by treating it
+    //    as a drag to row=rowCount(), the later call to setData will fail since the row gets set to 0 (which is ambiguous
+    //    with a drag to the 0th entry)
+    // 2) Valid parent means we are not adding to the root node, which is what we want to do
     return false;
   }
+
+  QString before = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
 
   beginInsertRows (QModelIndex (),
                    row,
@@ -188,6 +200,12 @@ bool CurveNameList::insertRows (int row,
                                emptyCurvesEntry.toString ());
 
   endInsertRows ();
+
+  QString after = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
+
+  LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::insertRows"
+                              << " before=" << before.toLatin1().data()
+                              << " after=" << after.toLatin1().data();
 
   return true;
 }
@@ -226,6 +244,17 @@ int CurveNameList::rowCount (const QModelIndex & /* parent */) const
   return count;
 }
 
+bool CurveNameList::rowIsUnpopulated (int row) const
+{
+  // Special case - in a drag to the white space after the last entry (and NOT to the legal drop line just after
+  //                the last entry), our insertRows method has already rejected the insert. In this case, at this
+  //                point row=0 so we need to check if variable 'row' points to an empty entry (empty+empty+0) or
+  //                to a fully-populated entry (nonempty+maybeEmpty+number)
+  QString fields = m_modelCurvesEntries.at (row);
+  CurveNameListEntry entryAtRow (fields);
+  return entryAtRow.entryHasNotBeenPopulated ();
+}
+
 bool CurveNameList::setData (const QModelIndex &index,
                              const QVariant &value,
                              int role)
@@ -233,69 +262,77 @@ bool CurveNameList::setData (const QModelIndex &index,
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData"
                               << " indexRow=" << index.row ()
                               << " indexCol=" << index.column ()
-                              << " value=" << (value.isValid () ? "valid" : "invalid")
+                              << " indexValid=" << (index.isValid() ? "valid" : "invalid")
+                              << " valueValid=" << (value.isValid () ? "valid" : "invalid")
+                              << " value=" << value.toString().toLatin1().data()
                               << " role=" << roleAsString (role).toLatin1 ().data ();
 
   bool success = false;
 
-  // In a copy maneuver, the old entry must be identified and removed
-  if (index.column () == 0 && role == Qt::DisplayRole) {
-    QModelIndex indexToRemove = indexForValue (value); // Returns Invalid if no duplicate entry was found
-    beginRemoveRows (QModelIndex (),
-                     indexToRemove.row(),
-                     indexToRemove.row());
+  if (index.isValid()) {
 
-    m_modelCurvesEntries.removeAt (indexToRemove.row ());
+    // Process the new entry
+    int row = index.row ();
+    if (row < m_modelCurvesEntries.count ()) {
 
-    endRemoveRows ();
+      // Variable 'row' points to an empty entry (created by insertRows) so we populate it here
+      success = true;
 
-    emit dataChanged (indexToRemove,
-                      indexToRemove);
-  }
+      QString before = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
 
-  // Process the new entry
-  int row = index.row ();
-  if (row < m_modelCurvesEntries.count ()) {
+      if (!value.isValid () && (role == Qt::EditRole)) {
 
-    success = true;
+        // Remove the entry
+        m_modelCurvesEntries.removeAt (row);
 
-    if (!value.isValid () && (role == Qt::EditRole)) {
-
-      // Remove the entry
-      m_modelCurvesEntries.removeAt (row);
-
-    } else {
-
-      // Modify the entry
-      CurveNameListEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
-
-      if (index.column () == 0) {
-
-        // Skip curve name uniqueness check for Qt::DisplayRole since that role is used when dragging
-        // curve from one place to another, since for a short time the new curve name will coexist
-        // with the old curve name (until the old entry is removed)
-        if ((role != Qt::DisplayRole) ||
-            (curveNameIsAcceptable (value.toString(),
-                                    row))) {
-          success = true;
-          curvesEntry.setCurveNameCurrent (value.toString ());
-        }
-      } else if (index.column () == 1) {
-        curvesEntry.setCurveNameOriginal (value.toString ());
-      } else if (index.column () == 2) {
-        curvesEntry.setNumPoints (value.toInt ());
       } else {
-        ENGAUGE_ASSERT (false);
-      }
 
-      if (success) {
-        m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
-      }
-    }
+        // Modify the entry
+        CurveNameListEntry curvesEntry (m_modelCurvesEntries [row]); // Retrieve entry
 
-    if (success) {
-      emit dataChanged (index,
-                        index);
+        if (index.column () == 0) {
+
+          // Skip curve name uniqueness check for Qt::DisplayRole since that role is used when dragging
+          // curve from one place to another, since for a short time the new curve name will coexist
+          // with the old curve name (until the old entry is removed)
+          if ((role == Qt::DisplayRole) ||
+              (curveNameIsAcceptable (value.toString(),
+                                      row))) {
+
+            if (rowIsUnpopulated (row)) {
+              success = true;
+              curvesEntry.setCurveNameCurrent (value.toString ());
+              curvesEntry.setNumPoints (0);
+              m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+              tryToRemoveOriginalCopy (index,
+                                       value,
+                                       role);
+            } else {
+              success = false;
+            }
+          } else if (index.column () == 1) {
+            curvesEntry.setCurveNameOriginal (value.toString ());
+            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+          } else if (index.column () == 2) {
+            curvesEntry.setNumPoints (value.toInt ());
+            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+          } else {
+            ENGAUGE_ASSERT (false);
+          }
+        }
+
+        if (success) {
+          emit dataChanged (index,
+                            index);
+        }
+
+        QString after = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
+
+        LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData setting"
+                                    << " before=" << before.toLatin1().data()
+                                    << " after=" << after.toLatin1().data();
+
+      }
     }
   }
 
@@ -305,4 +342,36 @@ bool CurveNameList::setData (const QModelIndex &index,
 Qt::DropActions CurveNameList::supportedDropActions () const
 {
   return Qt::MoveAction;
+}
+
+void CurveNameList::tryToRemoveOriginalCopy (const QModelIndex &index,
+                                             const QVariant &value,
+                                             int role)
+{
+  // After the copy part of a move maneuver, the old entry must be identified and removed
+  if (index.column () == 0 && role == Qt::DisplayRole) {
+    QModelIndex indexToRemove = indexForValue (index,
+                                               value); // Returns Invalid if no duplicate entry was found
+    if (indexToRemove.isValid()) {
+
+      QString before = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
+
+      beginRemoveRows (QModelIndex (),
+                       indexToRemove.row(),
+                   indexToRemove.row());
+      m_modelCurvesEntries.removeAt (indexToRemove.row ());
+      endRemoveRows ();
+
+      emit dataChanged (indexToRemove,
+                        indexToRemove);
+
+      QString after = m_modelCurvesEntries.join (PIPE).replace (TAB, SPACE);
+
+      LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::setData removed"
+                                  << " indexRow=" << indexToRemove.row ()
+                                  << " indexCol=" << indexToRemove.column ()
+                                  << " before=" << before.toLatin1().data()
+                                  << " after=" << after.toLatin1().data();
+    }
+  }
 }

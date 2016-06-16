@@ -11,12 +11,13 @@
 #include <QStringList>
 #include <QXmlStreamWriter>
 
+const int NUM_POINTS_UNDEFINED = -1; // Negative value indicates row is not yet been populated (since actual range is 0 or more)
 const QString DELIMITER ("\t");
 
 CurveNameListEntry::  CurveNameListEntry () :
   m_curveNameCurrent (""),
   m_curveNameOriginal (""),
-  m_numPoints (0)
+  m_numPoints (NUM_POINTS_UNDEFINED)
 {
 }
 
@@ -46,6 +47,11 @@ QString CurveNameListEntry::curveNameCurrent () const
 QString CurveNameListEntry::curveNameOriginal () const
 {
   return m_curveNameOriginal;
+}
+
+bool CurveNameListEntry::entryHasNotBeenPopulated () const
+{
+  return m_numPoints < 0; // See comment about NUM_POINTS_UNDEFINED
 }
 
 int CurveNameListEntry::numPoints () const

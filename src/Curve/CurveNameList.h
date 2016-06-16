@@ -56,7 +56,16 @@ private:
                               int row) const;
 
   /// Search method that finds the first occurrence of the specified value. If value is not found then Invalid is returned
-  QModelIndex indexForValue (const QVariant &value) const;
+  QModelIndex indexForValue (const QModelIndex &indexToSkip,
+                             const QVariant &value) const;
+
+  /// Return true if row has not yet been unpopulated
+  bool rowIsUnpopulated (int row) const;
+
+  /// Remove original copy after it has been replicated as part of a move operation
+  void tryToRemoveOriginalCopy(const QModelIndex &index,
+                               const QVariant &value,
+                               int role);
 
   /// Store entries as QStrings for easy translation into QVariants. Use CurveNameListEntry to translate
   QStringList m_modelCurvesEntries;
