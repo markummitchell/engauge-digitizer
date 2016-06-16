@@ -292,12 +292,18 @@ bool CurveNameList::setData (const QModelIndex &index,
 
         if (index.column () == 0) {
 
-          // Skip curve name uniqueness check for Qt::DisplayRole since that role is used when dragging
-          // curve from one place to another, since for a short time the new curve name will coexist
-          // with the old curve name (until the old entry is removed)
-          if ((role == Qt::DisplayRole) ||
-              (curveNameIsAcceptable (value.toString(),
-                                      row))) {
+          if (role == Qt::EditRole) {
+
+            curvesEntry.setCurveNameCurrent (value.toString ());
+            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+
+          } else if ((role == Qt::DisplayRole) ||
+                     (curveNameIsAcceptable (value.toString(),
+                                             row))) {
+
+            // Above we skipped curve name uniqueness check for Qt::DisplayRole since that role is used when dragging
+            // curve from one place to another, since for a short time the new curve name will coexist
+            // with the old curve name (until the old entry is removed)
 
             if (rowIsUnpopulated (row)) {
               success = true;
@@ -310,15 +316,15 @@ bool CurveNameList::setData (const QModelIndex &index,
             } else {
               success = false;
             }
-          } else if (index.column () == 1) {
-            curvesEntry.setCurveNameOriginal (value.toString ());
-            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
-          } else if (index.column () == 2) {
-            curvesEntry.setNumPoints (value.toInt ());
-            m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
-          } else {
-            ENGAUGE_ASSERT (false);
           }
+        } else if (index.column () == 1) {
+          curvesEntry.setCurveNameOriginal (value.toString ());
+          m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+        } else if (index.column () == 2) {
+          curvesEntry.setNumPoints (value.toInt ());
+          m_modelCurvesEntries [row] = curvesEntry.toString (); // Save update entry
+        } else {
+          ENGAUGE_ASSERT (false);
         }
 
         if (success) {
