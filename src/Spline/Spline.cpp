@@ -121,6 +121,33 @@ SplinePair Spline::findSplinePairForFunctionX (double x,
   double tLow = m_t[0];
   double tHigh = m_t[m_xy.size() - 1];
 
+  // This method implicitly assumes that the x values are monotonically increasing
+
+  // Extrapolation that is performed if x is out of bounds. As a starting point, we assume that the t
+  // values and x values behave the same, which is linearly. This assumption works best when user
+  // has set the points so the spline line is linear at the endpoints - which is also preferred since
+  // higher order polynomials are typically unstable and can "explode" off into unwanted directions
+  double x0 = interpolateCoeff (m_t[0]).x();
+  double xNm1 = interpolateCoeff (m_t[m_xy.size() - 1]).x();
+  if (x < x0) {
+
+    // Extrapolate with x < x(0) < x(N-1) which correspond to s, s0 and sNm1
+    double x1 = interpolateCoeff (m_t[1]).x();
+    double tStart = (x - x0) / (x1 - x0); // This is less than zero. x=x0 for t=0 and x=x1 for t=1
+    tLow = 2.0 * tStart;
+    tHigh = 0.0;
+
+  } else if (xNm1 < x) {
+
+    // Extrapolate with x(0) < x(N-1) < x which correspond to s0, sNm1 and s
+    double xNm2 = interpolateCoeff (m_t[m_xy.size() - 2]).x();
+    double tStart = tHigh + (x - xNm1) / (xNm1 - xNm2); // This is greater than one. x=xNm2 for t=0 and x=xNm1 for t=1
+    tLow = m_xy.size() - 1;
+    tHigh = tHigh + 2.0 * (tStart - tLow);
+
+   }
+
+  // Interpolation using bisection search
   double tCurrent = (tHigh + tLow) / 2.0;
   double tDelta = (tHigh - tLow) / 4.0;
   for (int iteration = 0; iteration < numIterations; iteration++) {

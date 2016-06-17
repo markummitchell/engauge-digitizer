@@ -141,7 +141,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_ghosts (0),
   m_timerRegressionErrorReport(0),
   m_fileCmdScript (0),
-  m_isRegressionTest (isRegressionTest),
+  m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
@@ -191,7 +191,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   QDir::setCurrent (m_startupDirectory);
   if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
-    if (m_isRegressionTest) {
+    if (m_isErrorReportRegressionTest) {
       startRegressionTestErrorReport(errorReportFile);
     }
   } else if (!fileCmdScriptFile.isEmpty()) {
@@ -1299,9 +1299,9 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
 }
 
 #ifndef OSX_RELEASE
-void MainWindow::exportAllCoordinateSystems()
+void MainWindow::exportAllCoordinateSystemsAfterRegressionTests()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystems curDir=" << QDir::currentPath().toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystemsAfterRegressionTests curDir=" << QDir::currentPath().toLatin1().data();
 
   // Output the regression test results. One file is output for every coordinate system
   for (CoordSystemIndex index = 0; index < m_cmdMediator->document().coordSystemCount(); index++) {
@@ -1314,7 +1314,7 @@ void MainWindow::exportAllCoordinateSystems()
 
     // Normally we just export to a file, but when regression testing the export will fail since coordinates are not defined. To
     // get an export file when regression testing, we just output the image size
-    if (m_isRegressionTest && !m_transformation.transformIsDefined()) {
+    if (m_isErrorReportRegressionTest && !m_transformation.transformIsDefined()) {
 
       ExportImageForRegression exportStrategy (m_cmdMediator->pixmap ());
       exportStrategy.fileExport (regressionFile);
@@ -2010,7 +2010,7 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
 {
   // Skip if currently performing a regression test - in which case the preferred behavior is to let the current test fail and
   // continue on to execute the remaining tests
-  if ((m_cmdMediator != 0) && !m_isRegressionTest) {
+  if ((m_cmdMediator != 0) && !m_isErrorReportRegressionTest) {
 
     QString report = saveErrorReportFileAndExitXml (context,
                                                     file,
@@ -3253,7 +3253,7 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
   } else {
 
 #ifndef OSX_RELEASE
-    exportAllCoordinateSystems ();
+    exportAllCoordinateSystemsAfterRegressionTests ();
 #endif
 
     // Regression test has finished so exit. We unset the dirty flag so there is no prompt
@@ -3283,7 +3283,7 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
     if (m_cmdMediator != 0) {
 
 #ifndef OSX_RELEASE
-      exportAllCoordinateSystems ();
+      exportAllCoordinateSystemsAfterRegressionTests ();
 #endif
 
       // We unset the dirty flag so there is no "Save changes?" prompt

@@ -351,7 +351,7 @@ private:
   void createZoomMap ();
   ZoomFactor currentZoomFactor () const;
 #ifndef OSX_RELEASE
-  void exportAllCoordinateSystems();
+  void exportAllCoordinateSystemsAfterRegressionTests();
 #endif
   QString exportFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
@@ -578,7 +578,7 @@ private:
   // from the command stack getting executed
   QTimer *m_timerRegressionErrorReport;
   FileCmdScript *m_fileCmdScript;
-  bool m_isRegressionTest;
+  bool m_isErrorReportRegressionTest;
   QTimer *m_timerRegressionFileCmdScript;
   QString m_regressionFile;
   QString m_startupDirectory; // Used to restore original directory just before outputing regression test results, since
