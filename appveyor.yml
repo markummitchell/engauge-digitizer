@@ -7,11 +7,12 @@ environment:
       QTLIBS: Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
   matrix:
-    - ENGAUGE_CONFIG: "pdf"
+    - ENGAUGE_RELEASE: 1
+      ENGAUGE_CONFIG: "pdf"
       QTLIBEXT: '.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
       RESULTDIR: engauge-build
-    - ENGAUGE_CONFIG: "pdf debug"
+    - ENGAUGE_CONFIG: "debug pdf"
       QTLIBEXT: 'd.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-debug-1.1.1.zip'
       RESULTDIR: engauge-build-debug
