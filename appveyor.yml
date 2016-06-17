@@ -36,15 +36,15 @@ install:
   - move *def lib
   - move *lib lib
   - cd %APPVEYOR_BUILD_FOLDER%
-  - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/libpoppler-qt5-0.43.zip' -o libpoppler-qt5-0.43.zip
-  - 7z x libpoppler-qt5-0.43.zip -aoa
+  - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/poppler-lib-qt5.zip' -o poppler-lib-qt5.zip
+  - 7z x poppler-lib-qt5.zip -aoa
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\log4cpp-1.1.1
   - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.4-dll32
-  - set POPPLER_INCLUDE=%APPVEYOR_BUILD_FOLDER%\libpoppler-qt5-0.43\include\poppler\qt5
-  - set POPPLER_LIB=%APPVEYOR_BUILD_FOLDER%\libpoppler-qt5-0.43
+  - set POPPLER_INCLUDE=%APPVEYOR_BUILD_FOLDER%\poppler-lib-qt5\include\poppler\qt5
+  - set POPPLER_LIB=%APPVEYOR_BUILD_FOLDER%\poppler-lib-qt5
   - qmake engauge.pro CONFIG+=%ENGAUGE_CONFIG%
   - move Makefile Makefile.orig
   - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $Env:QTLIBEXT } > Makefile
@@ -67,7 +67,7 @@ after_build:
   - copy bin\engauge.exe %RESULTDIR%
   - copy log4cpp-1.1.1\lib\log4cpp.dll %RESULTDIR%
   - copy fftw-3.3.4-dll32\lib\libfftw3-3.dll %RESULTDIR%
-  - copy %APPVEYOR_BUILD_FOLDER%\libpoppler-qt5-0.43\libpoppler-qt5.dll %RESULTDIR%
+  - copy %APPVEYOR_BUILD_FOLDER%\poppler-lib-qt5\*.dll %RESULTDIR%
   - copy LICENSE %RESULTDIR%
   - cd %APPVEYOR_BUILD_FOLDER%\help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
