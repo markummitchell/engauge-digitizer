@@ -2204,17 +2204,21 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
   }
 }
 
-void MainWindow::setPixmap (const QPixmap &pixmap)
+void MainWindow::setPixmap (const QString &curveSelected,
+                            const QPixmap &pixmap)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setPixmap";
 
   m_digitizeStateContext->setImageIsLoaded (m_cmdMediator,
                                             true);
+
+  // We cannot reliably use m_cmbCurve->currentText below for the selected curve since that control
+  // can be pointing to a curve that no longer exists so this method requires curveSelected as an argument
   m_backgroundStateContext->setPixmap (m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
-                                       m_cmbCurve->currentText());
+                                       curveSelected);
 }
 
 void MainWindow::settingsRead ()
@@ -2411,7 +2415,8 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING); // Before setPixmap
-  setPixmap (m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
+  setPixmap (m_cmdMediator->document().curvesGraphsNames().first(),
+             m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
 
   // Image is visible now so the user can refer to it when we ask for the number of coordinate systems. Note that the Document
   // may already have multiple CoordSystem if user loaded a file that had multiple CoordSystem entries

@@ -384,7 +384,8 @@ private:
   void saveStartingDocumentSnapshot();
   void setCurrentFile(const QString &fileName);
   void setCurrentPathFromFile (const QString &fileName);
-  void setPixmap (const QPixmap &pixmap);
+  void setPixmap (const QString &curveSelected,
+                  const QPixmap &pixmap);
   void settingsRead ();
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
