@@ -194,31 +194,31 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
 {
   //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
 
+  // If point is within the range of the function points then interpolation will be used, otherwise
+  // extrapolation will be used
   double yRadius = 0;
   QPointF posGraphBefore; // Not set until ip=1
   bool foundIt = false;
-  for (int ip = 0; ip < points.count(); ip++) {
+  for (int ip = 0; !foundIt && (ip < points.count()); ip++) {
 
     const Point &point = points.at (ip);
     QPointF posGraph;
     transformation.transformScreenToRawGraph (point.posScreen(),
-                                                posGraph);
+                                              posGraph);
 
-    if (xThetaValue <= posGraph.x()) {
+    // Cases where we have found it at this point in the code
+    // (1) interpolation case where (xBefore < xThetaValue < xAfter)
+    // (2) extrapolation case where (xThetaValue < xBefore < xAfter and ip=0) for which we delay finding it until ip=1 so we have
+    //     two points for extrapolating. This case is why we have the subtle test for ip>0 in the next line
+    if (xThetaValue <= posGraph.x() && (ip > 0)) {
 
       foundIt = true;
-      if (ip == 0) {
 
-        // Use first point
-        yRadius = posGraph.y();
-
-      } else {
-
-        // Between posGraphBefore and posGraph. Note that if posGraph.x()=posGraphBefore.x() then
-        // previous iteration of loop would have been used for interpolation, and then the loop was exited
-        double s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
-        yRadius = (1.0 -s) * posGraphBefore.y() + s * posGraph.y();
-      }
+      // Case 1 comments: xThetaValue is between posGraphBefore and posGraph. Note that if posGraph.x()=posGraphBefore.x() then
+      // previous iteration of loop would have been used for interpolation, and then the loop was exited. Range of s is 0<s<1
+      // Case 2 comments: Range of s is s<0
+      double s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
+      yRadius = (1.0 -s) * posGraphBefore.y() + s * posGraph.y();
 
       break;
     }
@@ -228,9 +228,31 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
 
   if (!foundIt) {
 
-    // Use last point
-    yRadius = posGraphBefore.y();
+    if (points.count() > 1) {
 
+      // Extrapolation will be used since point is out of the range of the function points. Specifically, it is greater than the
+      // last x value in the function. Range of s is 1<s
+      int N = points.count();
+      const Point &pointLast = points.at (N - 1);
+      const Point &pointBefore = points.at (N - 2);
+      QPointF posGraphLast;
+      transformation.transformScreenToRawGraph (pointLast.posScreen(),
+                                                posGraphLast);
+      transformation.transformScreenToRawGraph (pointBefore.posScreen(),
+                                                posGraphBefore);
+      double s = (xThetaValue - posGraphBefore.x()) / (posGraphLast.x() - posGraphBefore.x());
+      yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraphLast.y();
+
+    } else if (points.count() == 1) {
+
+      // Just use the single point
+      yRadius = posGraphBefore.y();
+
+    } else {
+
+      ENGAUGE_ASSERT (false);
+
+    }
   }
 
   return yRadius;
