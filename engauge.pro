@@ -758,7 +758,7 @@ pdf {
       }
     }
     DEFINES += "ENGAUGE_PDF"
-    LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
+    LIBS += -L$$(POPPLER_LIB) -lpoppler-qt5
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     HEADERS += src/Pdf/Pdf.h
     SOURCES += src/Pdf/Pdf.cpp
