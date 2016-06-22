@@ -1,0 +1,123 @@
+<ErrorReport>
+ <Application VersionNumber="8.2"/>
+ <Document AxesPointsRequired="0" VersionNumber="8.2">
+  <Image Height="252" Width="1221"><![CDATA[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]]></Image>
+  <CoordSystem>
+   <General ExtraPrecision="1" CursorSize="3"/>
+   <Coords ScaleYRadiusString="Linear" ScaleYRadius="0" UnitsDate="3" UnitsDateString="YYYY/MM/DD" UnitsRadius="0" UnitsThetaString="Degrees (DDD.DDDDD)" UnitsTimeString="HH:MM:SS" ScaleXThetaString="Linear" UnitsX="0" UnitsY="0" Coords="0" UnitsRadiusString="Number" Type="0" UnitsTime="2" ScaleXTheta="0" UnitsTheta="0" UnitsYString="Number" TypeString="Cartesian" UnitsXString="Number"/>
+   <DigitizeCurve CursorInnerRadius="5" CursorStandardCross="True" CursorSize="1" CursorLineWidth="2"/>
+   <Export DelimiterString="Commas" LayoutFunctionsString="OnePerLine" PointsIntervalRelations="1" Header="1" HeaderString="Simple" PointsSelectionRelationsString="Unknown" PointsSelectionFunctions="3" PointsIntervalUnitsFunctions="1" PointsSelectionFunctionsString="Raw" OverrideCsvTsv="True" LayoutFunctions="1" PointsIntervalFunctions="10" PointsSelectionRelations="3" PointsIntervalUnitsRelations="1" Delimiter="0" XLabel="x">
+    <CurveNamesNotExported/>
+   </Export>
+   <AxesChecker LineColor="6" Mode="1" Seconds="3"/>
+   <GridDisplay ColorString="Black" Stable="False" DisableX="0" StepX="1" DisableY="0" StepY="1" CountX="2" StartX="0" Color="0" CountY="2" StartY="0" StopX="1" StopY="1"/>
+   <GridRemoval CoordDisableYString="Count" CoordDisableXString="Count" Stable="False" StepX="0" DefinedGridLines="False" StepY="0" CoordDisableX="0" CountX="2" StartX="0" CoordDisableY="0" CountY="2" StartY="0" StopX="0" CloseDistance="10" StopY="0"/>
+   <PointMatch ColorCandidateString="Yellow" ColorAcceptedString="Green" ColorCandidate="7" ColorRejectedString="Red" PointSize="48" ColorRejected="6" ColorAccepted="4"/>
+   <Segments FillCorners="False" LineColor="4" MinLength="2" LineWidth="4" LineColorString="Green" PointSeparation="25"/>
+   <Curve CurveName="Axes">
+    <ColorFilter CurveName="Axes" HueHigh="360" Mode="2" IntensityLow="0" SaturationLow="50" ForegroundLow="0" ModeString="Intensity" IntensityHigh="50" ValueHigh="50" ForegroundHigh="10" ValueLow="0" HueLow="180" SaturationHigh="100"/>
+    <CurveStyle CurveName="Axes">
+     <LineStyle ColorString="Transparent" ConnectAsString="ConnectSkipForAxisCurve" ConnectAs="4" Color="8" Width="0"/>
+     <PointStyle ShapeString="Cross" ColorString="Red" LineWidth="1" Shape="1" Radius="10" Color="6"/>
+    </CurveStyle>
+    <CurvePoints/>
+   </Curve>
+   <CurvesGraphs>
+    <Curve CurveName="Curve1">
+     <ColorFilter CurveName="Curve1" HueHigh="360" Mode="2" IntensityLow="0" SaturationLow="50" ForegroundLow="0" ModeString="Intensity" IntensityHigh="50" ValueHigh="50" ForegroundHigh="10" ValueLow="0" HueLow="180" SaturationHigh="100"/>
+     <CurveStyle CurveName="Curve1">
+      <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+      <PointStyle ShapeString="Cross" ColorString="Blue" LineWidth="1" Shape="1" Radius="10" Color="1"/>
+     </CurveStyle>
+     <CurvePoints/>
+    </Curve>
+   </CurvesGraphs>
+  </CoordSystem>
+  <OperatingSystem WordSize="32" Endian="LittleEndian"/>
+  <File Imported="True"/>
+  <CmdMediator>
+   <Cmd Description="Curve add/remove" Type="CmdSettingsCurveAddRemove">
+    <CurvesGraphs>
+     <Curve CurveName="Curve1">
+      <ColorFilter CurveName="Curve1" HueHigh="360" Mode="2" IntensityLow="0" SaturationLow="50" ForegroundLow="0" ModeString="Intensity" IntensityHigh="50" ValueHigh="50" ForegroundHigh="10" ValueLow="0" HueLow="180" SaturationHigh="100"/>
+      <CurveStyle CurveName="Curve1">
+       <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+       <PointStyle ShapeString="Cross" ColorString="Blue" LineWidth="1" Shape="1" Radius="10" Color="1"/>
+      </CurveStyle>
+      <CurvePoints/>
+     </Curve>
+    </CurvesGraphs>
+    <CurvesGraphs>
+     <Curve CurveName="red">
+      <ColorFilter CurveName="red" HueHigh="360" Mode="2" IntensityLow="0" SaturationLow="50" ForegroundLow="0" ModeString="Intensity" IntensityHigh="50" ValueHigh="50" ForegroundHigh="10" ValueLow="0" HueLow="180" SaturationHigh="100"/>
+      <CurveStyle CurveName="red">
+       <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+       <PointStyle ShapeString="Cross" ColorString="Blue" LineWidth="1" Shape="1" Radius="10" Color="1"/>
+      </CurveStyle>
+      <CurvePoints/>
+     </Curve>
+     <Curve CurveName="green">
+      <ColorFilter CurveName="green" HueHigh="360" Mode="2" IntensityLow="0" SaturationLow="50" ForegroundLow="0" ModeString="Intensity" IntensityHigh="50" ValueHigh="50" ForegroundHigh="10" ValueLow="0" HueLow="180" SaturationHigh="100"/>
+      <CurveStyle CurveName="green">
+       <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+       <PointStyle ShapeString="X" ColorString="Blue" LineWidth="1" Shape="5" Radius="10" Color="1"/>
+      </CurveStyle>
+      <CurvePoints/>
+     </Curve>
+    </CurvesGraphs>
+   </Cmd>
+   <Cmd Description="Curve Properties settings" Type="CmdSettingsCurveProperties">
+    <CurveStyles>
+     <CurveStyle CurveName="green">
+      <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+      <PointStyle ShapeString="X" ColorString="Blue" LineWidth="1" Shape="5" Radius="10" Color="1"/>
+     </CurveStyle>
+     <CurveStyle CurveName="red">
+      <LineStyle ColorString="Blue" ConnectAsString="FunctionSmooth" ConnectAs="0" Color="1" Width="1"/>
+      <PointStyle ShapeString="Cross" ColorString="Blue" LineWidth="1" Shape="1" Radius="10" Color="1"/>
+     </CurveStyle>
+     <CurveStyle CurveName="Axes">
+      <LineStyle ColorString="Transparent" ConnectAsString="ConnectSkipForAxisCurve" ConnectAs="4" Color="8" Width="0"/>
+      <PointStyle ShapeString="Cross" ColorString="Red" LineWidth="1" Shape="1" Radius="10" Color="6"/>
+     </CurveStyle>
+    </CurveStyles>
+    <CurveStyles>
+     <CurveStyle CurveName="green">
+      <LineStyle ColorString="Green" ConnectAsString="RelationSmooth" ConnectAs="2" Color="4" Width="1"/>
+      <PointStyle ShapeString="X" ColorString="Green" LineWidth="1" Shape="5" Radius="10" Color="4"/>
+     </CurveStyle>
+     <CurveStyle CurveName="red">
+      <LineStyle ColorString="Red" ConnectAsString="RelationSmooth" ConnectAs="2" Color="6" Width="1"/>
+      <PointStyle ShapeString="Cross" ColorString="Red" LineWidth="1" Shape="1" Radius="10" Color="6"/>
+     </CurveStyle>
+     <CurveStyle CurveName="Axes">
+      <LineStyle ColorString="Transparent" ConnectAsString="ConnectSkipForAxisCurve" ConnectAs="4" Color="8" Width="0"/>
+      <PointStyle ShapeString="Cross" ColorString="Red" LineWidth="1" Shape="1" Radius="10" Color="6"/>
+     </CurveStyle>
+    </CurveStyles>
+   </Cmd>
+   <Cmd Description="Add axis point" Ordinal="1" IsXOnly="False" Type="CmdAddPointAxis" Identifier="Axes&#x9;point&#x9;1" ScreenX="493.404" GraphX="0" ScreenY="109.88" GraphY="0"/>
+   <Cmd Description="Add axis point" Ordinal="2" IsXOnly="False" Type="CmdAddPointAxis" Identifier="Axes&#x9;point&#x9;3" ScreenX="1200.85" GraphX="6" ScreenY="109.88" GraphY="0"/>
+   <Cmd Description="Add axis point" Ordinal="3" IsXOnly="False" Type="CmdAddPointAxis" Identifier="Axes&#x9;point&#x9;5" ScreenX="493.404" GraphX="0" ScreenY="20.7258" GraphY="3"/>
+   <Cmd Description="Add graph point" Ordinal="1" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;6" ScreenX="138.292" ScreenY="140.475"/>
+   <Cmd Description="Add graph point" Ordinal="1" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;7" ScreenX="257.126" ScreenY="129.619"/>
+   <Cmd Description="Add graph point" Ordinal="2.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;8" ScreenX="375.265" ScreenY="119.749"/>
+   <Cmd Description="Add graph point" Ordinal="3.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;9" ScreenX="494.098" ScreenY="109.551"/>
+   <Cmd Description="Add graph point" Ordinal="4.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;10" ScreenX="610.847" ScreenY="98.3655"/>
+   <Cmd Description="Add graph point" Ordinal="5.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;11" ScreenX="728.986" ScreenY="89.154"/>
+   <Cmd Description="Add graph point" Ordinal="6.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;12" ScreenX="847.125" ScreenY="80.2715"/>
+   <Cmd Description="Add graph point" Ordinal="7.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;13" ScreenX="965.959" ScreenY="69.4151"/>
+   <Cmd Description="Add graph point" Ordinal="8.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;14" ScreenX="1082.71" ScreenY="59.2167"/>
+   <Cmd Description="Add graph point" Ordinal="9.5" CurveName="red" Type="CmdAddPointGraph" Identifier="red&#x9;point&#x9;15" ScreenX="1200.85" ScreenY="50.3342"/>
+   <Cmd Description="Add graph point" Ordinal="1" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;16" ScreenX="20.848" ScreenY="230.287"/>
+   <Cmd Description="Add graph point" Ordinal="1" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;17" ScreenX="138.987" ScreenY="200.021"/>
+   <Cmd Description="Add graph point" Ordinal="2.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;18" ScreenX="257.821" ScreenY="170.084"/>
+   <Cmd Description="Add graph point" Ordinal="3.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;19" ScreenX="375.96" ScreenY="140.475"/>
+   <Cmd Description="Add graph point" Ordinal="4.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;20" ScreenX="494.098" ScreenY="109.88"/>
+   <Cmd Description="Add graph point" Ordinal="5.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;21" ScreenX="611.542" ScreenY="80.2715"/>
+   <Cmd Description="Add graph point" Ordinal="6.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;22" ScreenX="729.681" ScreenY="50.0052"/>
+   <Cmd Description="Add graph point" Ordinal="7.5" CurveName="green" Type="CmdAddPointGraph" Identifier="green&#x9;point&#x9;23" ScreenX="847.82" ScreenY="20.3969"/>
+  </CmdMediator>
+  <Error Line="1292" Context="Shift+Control+E" Comment="userTriggered" File="src/main/MainWindow.cpp"/>
+ </Document>
+</ErrorReport>
