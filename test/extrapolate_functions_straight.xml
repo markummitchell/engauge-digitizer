@@ -110,7 +110,7 @@
    <Cmd ScreenX="138.292" CurveName="green" ScreenY="140.804" Type="CmdAddPointGraph" Ordinal="1" Identifier="green&#x9;point&#x9;6" Description="Add graph point"/>
    <Cmd ScreenX="257.126" CurveName="green" ScreenY="129.948" Type="CmdAddPointGraph" Ordinal="1" Identifier="green&#x9;point&#x9;7" Description="Add graph point"/>
    <Cmd ScreenX="375.96" CurveName="green" ScreenY="120.407" Type="CmdAddPointGraph" Ordinal="2.5" Identifier="green&#x9;point&#x9;8" Description="Add graph point"/>
-   <Cmd ScreenX="492.014" CurveName="green" ScreenY="110.209" Type="CmdAddPointGraph" Ordinal="3.5" Identifier="green&#x9;point&#x9;9" Description="Add graph point"/>
+   <Cmd ScreenX="492.0" CurveName="green" ScreenY="110.2" Type="CmdAddPointGraph" Ordinal="3.5" Identifier="green&#x9;point&#x9;9" Description="Add graph point"/>
    <Cmd ScreenX="611.542" CurveName="green" ScreenY="98.3655" Type="CmdAddPointGraph" Ordinal="4.5" Identifier="green&#x9;point&#x9;10" Description="Add graph point"/>
    <Cmd ScreenX="729.681" CurveName="green" ScreenY="90.141" Type="CmdAddPointGraph" Ordinal="5.5" Identifier="green&#x9;point&#x9;11" Description="Add graph point"/>
    <Cmd ScreenX="847.82" CurveName="green" ScreenY="80.6005" Type="CmdAddPointGraph" Ordinal="6.5" Identifier="green&#x9;point&#x9;12" Description="Add graph point"/>
