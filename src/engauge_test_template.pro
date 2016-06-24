@@ -147,7 +147,6 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgImportAdvanced.h \
-    Dlg/DlgPdfFrame.h \
     Dlg/DlgRequiresTransform.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
@@ -439,7 +438,6 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgImportAdvanced.cpp \
-    Dlg/DlgPdfFrame.cpp \
     Dlg/DlgRequiresTransform.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
@@ -721,8 +719,10 @@ pdf {
     DEFINES += "ENGAUGE_PDF"
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     LIBS += -L$$(POPPLE_LIB) -lpoppler -lpoppler-qt5
-    HEADERS += Pdf/Pdf.h
-    SOURCES += Pdf/Pdf.cpp
+    HEADERS += Dlg/DlgPdfFrame.h \
+               Pdf/Pdf.h
+    SOURCES += Dlg/DlgPdfFrame.cpp \
+               Pdf/Pdf.cpp
 
 } else {
     message("PDF support:      no")
