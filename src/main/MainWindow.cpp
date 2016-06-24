@@ -1415,9 +1415,17 @@ void MainWindow::fileImport (const QString &fileName,
   if (!loaded) {
     
     Pdf pdf;
-    loaded = pdf.load (fileName,
-                       image,
-                       m_modelMainWindow.pdfResolution());
+    PdfReturn pdfReturn = pdf.load (fileName,
+                                    image,
+                                    m_modelMainWindow.pdfResolution());
+    if (pdfReturn == PDF_RETURN_CANCELED) {
+
+      // User canceled so exit immediately
+      return;
+
+    }
+
+    loaded = (pdfReturn == PDF_RETURN_SUCCESS);
   }
 #endif // ENGAUGE_PDF
 
@@ -1426,13 +1434,14 @@ void MainWindow::fileImport (const QString &fileName,
   }
 
   if (!loaded) {
+    QString msg = QString("%1 %2 %3 %4.")
+                  .arg (tr ("Cannot read file"))
+                  .arg (fileName)
+                  .arg (tr ("from directory"))
+                  .arg (QDir::currentPath());
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2 %3 %4.")
-                          .arg (tr ("Cannot read file"))
-                          .arg (fileName)
-                          .arg (tr ("from directory"))
-                          .arg (QDir::currentPath()));
+                          msg);
 
     // Reset
     m_originalFile = originalFileOld;

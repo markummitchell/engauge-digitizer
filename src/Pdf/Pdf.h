@@ -10,6 +10,13 @@
 class QImage;
 class QString;
 
+/// Return values from load operation
+enum PdfReturn {
+  PDF_RETURN_CANCELED,
+  PDF_RETURN_FAILED,
+  PDF_RETURN_SUCCESS
+};
+
 /// Wrapper around the Poppler library. Engauge uses that library to read and import PDF files.
 ///
 /// This class is only compiled and linked in when ENGAUGE_PDF is defined, since it links to the optional poppler library.
@@ -20,9 +27,9 @@ public:
   Pdf();
 
   /// Try to load the specified file. Success is indicated in the function return value
-  bool load (const QString &fileName,
-             QImage &image,
-             int resolution) const;
+  PdfReturn load (const QString &fileName,
+                  QImage &image,
+                  int resolution) const;
 
 private:
 

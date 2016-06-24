@@ -147,6 +147,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgImportAdvanced.h \
+    Dlg/DlgPdfFrame.h \
     Dlg/DlgRequiresTransform.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
@@ -438,6 +439,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgImportAdvanced.cpp \
+    Dlg/DlgPdfFrame.cpp \
     Dlg/DlgRequiresTransform.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \

@@ -74,3 +74,7 @@ const QString SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS ("pointsSelectionFuncti
 const QString SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS ("pointsSelectionRelations");
 const QString SETTINGS_EXPORT_X_LABEL ("xLabel");
 const QString SETTINGS_GROUP_EXPORT ("Export");
+
+// Pdf group
+const QString SETTINGS_PDF_POS ("pos");
+const QString SETTINGS_GROUP_PDF ("Pdf");

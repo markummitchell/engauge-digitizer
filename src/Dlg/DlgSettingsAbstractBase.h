@@ -53,14 +53,14 @@ protected:
   /// Process slotOk.
   virtual void handleOk () = 0;
 
+  /// Load settings from Document.
+  virtual void load (CmdMediator &cmdMediator) = 0;
+
   /// Dialog layout constant that guarantees every widget has sufficient room
   static int MINIMUM_DIALOG_WIDTH;
 
   /// Dialog layout constant that guarantees preview has sufficent room
   static int MINIMUM_PREVIEW_HEIGHT;
-
-  /// Load settings from Document.
-  virtual void load (CmdMediator &cmdMediator) = 0;
 
   /// Get method for MainWindow.
   MainWindow &mainWindow ();
@@ -81,8 +81,6 @@ protected:
   void setDisableOkAtStartup(bool disableOkAtStartup);
 
 private slots:
-  /// Do preparation before dialog is displayed.
-  virtual void showEvent (QShowEvent *event);
 
   /// Hide dialog.
   void slotCancel();
@@ -94,6 +92,9 @@ private:
   DlgSettingsAbstractBase();
 
   void saveGeometryToSettings ();
+
+  /// Do preparation before dialog is displayed.
+  virtual void showEvent (QShowEvent *event);
 
   MainWindow &m_mainWindow;
   CmdMediator *m_cmdMediator; // Cannot be const since Document gets a command pushed if dialog is ok'ed
