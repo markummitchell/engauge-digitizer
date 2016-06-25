@@ -28,11 +28,16 @@ public:
   /// Intercept the drags and process them, which is the whole point of handles
   virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
+  /// Temporarily disable event handling so code can move this object without triggering a cascade of events
+  void setDisableEventsWhileMovingAutomatically (bool disable);
+
 private:
   PdfFrameHandle();
 
   PdfFrame &m_pdfFrame;
   int m_orientationFlags; // From PdfFrame constants
+
+  bool m_disableEventsWhileMovingAutomatically;
 };
 
 #endif // PDF_FRAME_HANDLE_H

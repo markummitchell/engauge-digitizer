@@ -23,6 +23,12 @@ void ViewPreview::mouseMoveEvent(QMouseEvent *event)
   QPointF pos = mapToScene (event->pos ());
 
   emit signalMouseMove (pos);
+
+  // Normally we would need to call QGraphicsView::mouseMoveEvent at this point so that the mouse move event could be handled,
+  // but this is unwanted since:
+  // 1) Everywhere, except the pdf import preview, there is nothing to drag
+  // 2) Dragging of PdfFrameHandle objects in the pdf import preview is handled indirectly by PdfFrame
+  QGraphicsView::mouseMoveEvent (event);
 }
 
 void ViewPreview::resizeEvent(QResizeEvent *event)
