@@ -9,6 +9,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "poppler-qt5.h"
+#include <QApplication>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -28,7 +29,7 @@ int DlgPdfFrame::MINIMUM_PREVIEW_HEIGHT = 200;
 const int X_TOP_LEFT = 0, Y_TOP_LEFT = 0;
 const int WIDTH = -1, HEIGHT = -1; // Negative values give full page
 const int FIRST_PAGE_1_BASED = 1;
-const int SMALLEST_DELAY_MS = 500;
+const int SMALLEST_DELAY_MS = 500; // Below 500 triggers "double jump" bug in linux
 
 DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
                          int resolution) :
@@ -223,6 +224,9 @@ void DlgPdfFrame::slotPage (int page)
                               << " page=" << page
                               << " stepBy=" << m_spinPage->singleStep ();
 
+  // Show wait cursor until slow calculations are over
+  QApplication::setOverrideCursor (Qt::WaitCursor);
+
   m_timer->start (SMALLEST_DELAY_MS);
 }
 
@@ -242,4 +246,7 @@ void DlgPdfFrame::updatePreview ()
   m_image = loadImage (m_spinPage->value ());
   QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
   m_scenePreview->addItem (pixmap);
+
+  // Calculations for preview updating are now over
+  QApplication::restoreOverrideCursor ();
 }
