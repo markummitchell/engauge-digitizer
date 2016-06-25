@@ -761,9 +761,13 @@ pdf {
     LIBS += -L$$(POPPLER_LIB) -lpoppler-qt5
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     HEADERS += src/Dlg/DlgPdfFrame.h \
-               src/Pdf/Pdf.h
+               src/Pdf/Pdf.h \
+               src/Pdf/PdfFrame.h \
+               src/Pdf/PdfFrameHandle.h
     SOURCES += src/Dlg/DlgPdfFrame.cpp \
-               src/Pdf/Pdf.cpp
+               src/Pdf/Pdf.cpp \
+               src/Pdf/PdfFrame.cpp \
+               src/Pdf/PdfFrameHandle.cpp
 
 } else {
     message("PDF support:      no")

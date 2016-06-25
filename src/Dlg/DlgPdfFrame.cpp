@@ -8,6 +8,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "PdfFrame.h"
 #include "poppler-qt5.h"
 #include <QApplication>
 #include <QGraphicsPixmapItem>
@@ -34,7 +35,8 @@ const int SMALLEST_DELAY_MS = 500; // Below 500 triggers "double jump" bug in li
 DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
                          int resolution) :
   m_document (document),
-  m_resolution (resolution)
+  m_resolution (resolution),
+  m_pixmap (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::DlgPdfFrame";
 
@@ -51,7 +53,6 @@ DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
   createPageSpinner (layout, row);
   createPreview (layout, row);
   finishPanel (subPanel);
-  initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
   updatePreview ();
 
   // Bring the two middle columns together
@@ -71,10 +72,13 @@ void DlgPdfFrame::createPageSpinner (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::createPageSpinner";
 
+  const int MIN_WIDTH_SPINNER = 90;
+
   QLabel *labelPage = new QLabel (tr ("Page:"));
   layout->addWidget (labelPage, row, 1, 1, 1);
 
   m_spinPage = new QSpinBox;
+  m_spinPage->setMinimumWidth (MIN_WIDTH_SPINNER);
   m_spinPage->setWhatsThis (tr ("Page number that will be imported"));
   m_spinPage->setRange (1, m_document.numPages());
   layout->addWidget (m_spinPage, row++, 2, 1, 1);
@@ -98,6 +102,16 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
+
+  // More preview initialization
+  initializeFrameGeometryAndPixmapAndFrame (); // Before first call to updatePreview
+}
+
+void DlgPdfFrame::createPdfFrame (const QRectF &imageRect)
+{
+  // Create frame that shows what will be included, and what will be excluded, during the import
+  m_pdfFrame = new PdfFrame (*m_scenePreview,
+                             imageRect);
 }
 
 void DlgPdfFrame::createTimer ()
@@ -151,7 +165,7 @@ QImage DlgPdfFrame::image () const
   return m_image;
 }
 
-void DlgPdfFrame::initializeFrameGeometryAndPixmap ()
+void DlgPdfFrame::initializeFrameGeometryAndPixmapAndFrame ()
 {
   m_image = loadImage (FIRST_PAGE_1_BASED);
   QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
@@ -159,6 +173,8 @@ void DlgPdfFrame::initializeFrameGeometryAndPixmap ()
 
   // Force resize so image fills preview area. We do this only once initially for speed
   m_viewPreview->setSceneRect (pixmap->boundingRect ());
+
+  createPdfFrame (pixmap->boundingRect());
 }
 
 QImage DlgPdfFrame::loadImage (int page1Based) const
@@ -241,11 +257,13 @@ void DlgPdfFrame::updatePreview ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::updatePreview";
 
-  m_scenePreview->clear ();
+  if (m_pixmap != 0) {
+    m_scenePreview->removeItem (m_pixmap);
+  }
 
   m_image = loadImage (m_spinPage->value ());
-  QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
-  m_scenePreview->addItem (pixmap);
+  m_pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
+  m_scenePreview->addItem (m_pixmap);
 
   // Calculations for preview updating are now over
   QApplication::restoreOverrideCursor ();

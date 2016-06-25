@@ -11,11 +11,14 @@
 #include <QImage>
 #include <QObject>
 
+class PdfFrame;
 namespace Poppler {
   class Document;
 }
+class QGraphicsPixmapItem;
 class QGridLayout;
 class QGraphicsScene;
+class QRectF;
 class QSpinBox;
 class QString;
 class QTimer;
@@ -57,11 +60,12 @@ private:
 
   void createPageSpinner (QGridLayout *layout,
                           int &row);
+  void createPdfFrame (const QRectF &imageRect);
   void createPreview (QGridLayout *layout,
                       int &row);
   void createTimer ();
   void finishPanel (QWidget *subPanel);
-  void initializeFrameGeometryAndPixmap ();
+  void initializeFrameGeometryAndPixmapAndFrame ();
   QImage loadImage (int page1Based) const;
 
   /// Dialog layout constant that guarantees every widget has sufficient room
@@ -80,10 +84,13 @@ private:
   QTimer *m_timer;
   const Poppler::Document &m_document;
   int m_resolution;
-  QImage m_image;
+  QImage m_image; // Needed so it can be passed to external code when this dialog has finished successfully
+  QGraphicsPixmapItem *m_pixmap; // Needed so old image can be removed just before new one gets added
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+
+  PdfFrame *m_pdfFrame;
 };
 
 #endif // DLG_PDF_FRAME_H
