@@ -60,12 +60,12 @@ private:
 
   void createPageSpinner (QGridLayout *layout,
                           int &row);
-  void createPdfFrame (const QRectF &imageRect);
+  void createPdfFrame ();
   void createPreview (QGridLayout *layout,
                       int &row);
   void createTimer ();
   void finishPanel (QWidget *subPanel);
-  void initializeFrameGeometryAndPixmapAndFrame ();
+  void initializeFrameGeometryAndPixmap ();
   QImage loadImage (int page1Based) const;
 
   /// Dialog layout constant that guarantees every widget has sufficient room

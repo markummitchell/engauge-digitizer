@@ -97,21 +97,23 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
   m_viewPreview = new ViewPreview (m_scenePreview,
                                    ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
                                    this);
-  m_viewPreview->setWhatsThis (tr ("Preview window that shows how current settings affect pdf import"));
+  m_viewPreview->setWhatsThis (tr ("Preview window that allows the user to crop the picture to the area containing the graph "
+                                   "that will be imported, and also shows how current settings affect pdf import."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
   layout->addWidget (m_viewPreview, row++, 0, 1, 4);
 
   // More preview initialization
-  initializeFrameGeometryAndPixmapAndFrame (); // Before first call to updatePreview
+  initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
+  createPdfFrame ();
 }
 
-void DlgPdfFrame::createPdfFrame (const QRectF &imageRect)
+void DlgPdfFrame::createPdfFrame ()
 {
   // Create frame that shows what will be included, and what will be excluded, during the import
   m_pdfFrame = new PdfFrame (*m_scenePreview,
-                             imageRect);
+                             *m_viewPreview);
 }
 
 void DlgPdfFrame::createTimer ()
@@ -162,10 +164,15 @@ void DlgPdfFrame::finishPanel (QWidget *subPanel)
 
 QImage DlgPdfFrame::image () const
 {
-  return m_image;
+  // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
+  // portion is to be returned
+  ENGAUGE_ASSERT (m_pdfFrame != 0);
+  QRectF rectFramePixels = m_pdfFrame->frameRect ();
+
+  return m_image.copy (rectFramePixels.toRect ());
 }
 
-void DlgPdfFrame::initializeFrameGeometryAndPixmapAndFrame ()
+void DlgPdfFrame::initializeFrameGeometryAndPixmap ()
 {
   m_image = loadImage (FIRST_PAGE_1_BASED);
   QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
@@ -173,8 +180,6 @@ void DlgPdfFrame::initializeFrameGeometryAndPixmapAndFrame ()
 
   // Force resize so image fills preview area. We do this only once initially for speed
   m_viewPreview->setSceneRect (pixmap->boundingRect ());
-
-  createPdfFrame (pixmap->boundingRect());
 }
 
 QImage DlgPdfFrame::loadImage (int page1Based) const
@@ -191,6 +196,8 @@ QImage DlgPdfFrame::loadImage (int page1Based) const
                                  Y_TOP_LEFT,
                                  WIDTH,
                                  HEIGHT);
+
+    delete page;
   }
 
   return image;

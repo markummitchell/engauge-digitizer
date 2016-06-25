@@ -1417,7 +1417,8 @@ void MainWindow::fileImport (const QString &fileName,
     Pdf pdf;
     PdfReturn pdfReturn = pdf.load (fileName,
                                     image,
-                                    m_modelMainWindow.pdfResolution());
+                                    m_modelMainWindow.pdfResolution(),
+                                    m_isErrorReportRegressionTest);
     if (pdfReturn == PDF_RETURN_CANCELED) {
 
       // User canceled so exit immediately

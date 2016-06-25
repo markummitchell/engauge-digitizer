@@ -718,7 +718,7 @@ pdf {
     }
     DEFINES += "ENGAUGE_PDF"
     INCLUDEPATH += $$(POPPLER_INCLUDE)
-    LIBS += -L$$(POPPLE_LIB) -lpoppler -lpoppler-qt5
+    LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
     HEADERS += Dlg/DlgPdfFrame.h \
                Pdf/Pdf.h \
                Pdf/PdfFrame.h \

@@ -4,60 +4,79 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "Logger.h"
 #include "PdfFrame.h"
 #include "PdfFrameHandle.h"
+#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QRect>
+#include "QtToString.h"
+#include "ViewPreview.h"
+
+const int Z_BOX = 50; // Under box and over background image
+const int Z_HANDLE = 100; // Over box and background image
 
 PdfFrame::PdfFrame (QGraphicsScene &scene,
-                    const QRectF &imageRect)
+                    ViewPreview &view) :
+  m_view (view)
 {
-  const double MARGIN_PERCENT = 10.0;
+  createWidgets (scene);
+}
 
-  double marginHor = imageRect.width()  * MARGIN_PERCENT / 100.0;
-  double marginVer = imageRect.height() * MARGIN_PERCENT / 100.0;
+void PdfFrame::createWidgets(QGraphicsScene &scene)
+{
+  const double MARGIN_PERCENT = 5.0;
+  const int ZERO_WIDTH_IS_ALWAYS_VISIBLE = 0;
 
-  QRectF box (imageRect.left() + marginHor,
-              imageRect.top()  + marginVer,
-              imageRect.width() - 2 * marginHor,
-              imageRect.height() - 2 * marginVer);
-  QPointF topCenter    = (box.topLeft()     + box.topRight()   ) / 2.0;
-  QPointF rightCenter  = (box.topRight()    + box.bottomRight()) / 2.0;
-  QPointF bottomCenter = (box.bottomRight() + box.bottomLeft() ) / 2.0;
-  QPointF leftCenter   = (box.bottomLeft()  + box.topLeft()    ) / 2.0;
+  int marginHor = m_view.width()  * MARGIN_PERCENT / 100.0;
+  int marginVer = m_view.height() * MARGIN_PERCENT / 100.0;
 
-  m_handleTL     = new PdfFrameHandle (scene, imageRect, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this);
-  m_handleTop    = new PdfFrameHandle (scene, imageRect, topCenter        , PDF_FRAME_CENTER | PDF_FRAME_TOP    , *this);
-  m_handleTR     = new PdfFrameHandle (scene, imageRect, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this);
-  m_handleRight  = new PdfFrameHandle (scene, imageRect, rightCenter      , PDF_FRAME_RIGHT  | PDF_FRAME_MIDDLE , *this);
-  m_handleBR     = new PdfFrameHandle (scene, imageRect, box.bottomRight(), PDF_FRAME_RIGHT  | PDF_FRAME_BOTTOM , *this);
-  m_handleBottom = new PdfFrameHandle (scene, imageRect, bottomCenter     , PDF_FRAME_CENTER | PDF_FRAME_BOTTOM , *this);
-  m_handleBL     = new PdfFrameHandle (scene, imageRect, box.bottomLeft() , PDF_FRAME_LEFT   | PDF_FRAME_BOTTOM , *this);
-  m_handleLeft   = new PdfFrameHandle (scene, imageRect, leftCenter       , PDF_FRAME_LEFT   | PDF_FRAME_MIDDLE , *this);
+  QRect box (m_view.rect().left() + marginHor,
+             m_view.rect().top()  + marginVer,
+             m_view.rect().width() - 2 * marginHor,
+             m_view.rect().height() - 2 * marginVer);
+
+  m_handleTL     = new PdfFrameHandle (scene, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this, Z_HANDLE);
+  m_handleTR     = new PdfFrameHandle (scene, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this, Z_HANDLE);
+  m_handleBR     = new PdfFrameHandle (scene, box.bottomRight(), PDF_FRAME_RIGHT  | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
+  m_handleBL     = new PdfFrameHandle (scene, box.bottomLeft() , PDF_FRAME_LEFT   | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
+
+  m_box = new QGraphicsRectItem;
+  m_box->setZValue (Z_BOX);
+  m_box->setPen (QPen (QBrush (Qt::gray), ZERO_WIDTH_IS_ALWAYS_VISIBLE));
+  scene.addItem (m_box);
+
+  updateBox ();
 }
 
 void PdfFrame::disableEventsWhileMovingAutomatically ()
 {
   m_handleTL->setDisableEventsWhileMovingAutomatically (true);
-  m_handleTop->setDisableEventsWhileMovingAutomatically (true);
   m_handleTR->setDisableEventsWhileMovingAutomatically (true);
-  m_handleRight->setDisableEventsWhileMovingAutomatically (true);
   m_handleBR->setDisableEventsWhileMovingAutomatically (true);
-  m_handleBottom->setDisableEventsWhileMovingAutomatically (true);
   m_handleBL->setDisableEventsWhileMovingAutomatically (true);
-  m_handleLeft->setDisableEventsWhileMovingAutomatically (true);
 }
 
 void PdfFrame::enableEventsWhileMovingAutomatically ()
 {
   m_handleTL->setDisableEventsWhileMovingAutomatically (false);
-  m_handleTop->setDisableEventsWhileMovingAutomatically (false);
   m_handleTR->setDisableEventsWhileMovingAutomatically (false);
-  m_handleRight->setDisableEventsWhileMovingAutomatically (false);
   m_handleBR->setDisableEventsWhileMovingAutomatically (false);
-  m_handleBottom->setDisableEventsWhileMovingAutomatically (false);
   m_handleBL->setDisableEventsWhileMovingAutomatically (false);
-  m_handleLeft->setDisableEventsWhileMovingAutomatically (false);
+}
+
+QRectF PdfFrame::frameRect () const
+{
+  // The x(), y(), pos(), rect() and boundingRect() will return coordinates assuming origin at the initial position of
+  // each handle. So to get the coordinates in the window reference frame it takes a two step process like
+  // QGraphicsRectItem::mapRectToScene (QGraphicsRectItem::rect())
+
+  QRectF rectTL = m_handleTL->mapRectToScene (m_handleTL->boundingRect());
+  QRectF rectBR = m_handleBR->mapRectToScene (m_handleBR->boundingRect());
+
+  QRectF rectUnited = rectTL.united (rectBR);
+
+  return rectUnited;
 }
 
 void PdfFrame::moveBL (const QPointF &newPos,
@@ -65,22 +84,17 @@ void PdfFrame::moveBL (const QPointF &newPos,
 {
   disableEventsWhileMovingAutomatically();
 
-  m_handleTL->moveBy (newPos.x() - oldPos.x(),
+  double deltaX = newPos.x() - oldPos.x();
+  double deltaY = newPos.y() - oldPos.y();
+
+  m_handleTL->moveBy (deltaX,
                       0);
   m_handleBR->moveBy (0,
-                      newPos.y() - oldPos.y());
-
-  m_handleLeft->setPos (m_handleTL->x(),
-                        (m_handleTL->y() + m_handleBL->y()) / 2.0);
-  m_handleBottom->setPos ((m_handleBL->x() + m_handleBR->x()) / 2.0,
-                          m_handleBL->y());
-
-  m_handleTop->setPos (m_handleBottom->x(),
-                       m_handleTop->y());
-  m_handleRight->setPos (m_handleRight->x(),
-                         m_handleLeft->y());
+                      deltaY);
 
   enableEventsWhileMovingAutomatically();
+
+  updateBox();
 }
 
 void PdfFrame::moveBR (const QPointF &newPos,
@@ -88,76 +102,17 @@ void PdfFrame::moveBR (const QPointF &newPos,
 {
   disableEventsWhileMovingAutomatically();
 
-  m_handleBL->moveBy (0,
-                      newPos.y() - oldPos.y());
-  m_handleTR->moveBy (newPos.x() - oldPos.x(),
-                      0);
-
-  m_handleBottom->setPos ((m_handleBL->x() + m_handleBR->x()) / 2.0,
-                          m_handleBR->y());
-  m_handleRight->setPos (m_handleBR->x(),
-                         (m_handleBR->y() + m_handleTR->y()) / 2.0);
-
-  m_handleLeft->setPos (m_handleLeft->x(),
-                        m_handleRight->y());
-  m_handleTop->setPos (m_handleBottom->x(),
-                       m_handleTop->y());
-
-  enableEventsWhileMovingAutomatically();
-}
-
-void PdfFrame::moveBottom (const QPointF &newPos,
-                           const QPointF &oldPos)
-{
-  disableEventsWhileMovingAutomatically();
+  double deltaX = newPos.x() - oldPos.x();
+  double deltaY = newPos.y() - oldPos.y();
 
   m_handleBL->moveBy (0,
-                      newPos.y() - oldPos.y());
-  m_handleBR->moveBy (0,
-                      newPos.y() - oldPos.y());
-
-  m_handleLeft->setPos (m_handleLeft->x(),
-                        (m_handleTL->y() + m_handleBL->y()) / 2.0);
-  m_handleRight->setPos (m_handleRight->x(),
-                         (m_handleTR->y() + m_handleBR->y()) / 2.0);
+                      deltaY);
+  m_handleTR->moveBy (deltaX,
+                      0);
 
   enableEventsWhileMovingAutomatically();
-}
 
-void PdfFrame::moveLeft (const QPointF &newPos,
-                         const QPointF &oldPos)
-{
-  disableEventsWhileMovingAutomatically();
-
-  m_handleTL->moveBy (newPos.x() - oldPos.x(),
-                      0);
-  m_handleBL->moveBy (newPos.x() - oldPos.x(),
-                      0);
-
-  m_handleTop->setPos ((m_handleTL->x() + m_handleTR->x()) / 2.0,
-                       m_handleTop->y());
-  m_handleBottom->setPos ((m_handleBL->x() + m_handleBR->x()) / 2.0,
-                          m_handleBottom->y());
-
-  enableEventsWhileMovingAutomatically();
-}
-
-void PdfFrame::moveRight (const QPointF &newPos,
-                          const QPointF &oldPos)
-{
-  disableEventsWhileMovingAutomatically();
-
-  m_handleTR->moveBy (newPos.x() - oldPos.x(),
-                      0);
-  m_handleBR->moveBy (newPos.x() - oldPos.x(),
-                      0);
-
-  m_handleTop->setPos ((m_handleTL->x() + m_handleTR->x()) / 2.0,
-                       m_handleTop->y());
-  m_handleBottom->setPos ((m_handleBL->x() + m_handleBR->x()) / 2.0,
-                          m_handleBottom->y());
-
-  enableEventsWhileMovingAutomatically();
+  updateBox();
 }
 
 void PdfFrame::moveTL (const QPointF &newPos,
@@ -165,40 +120,17 @@ void PdfFrame::moveTL (const QPointF &newPos,
 {
   disableEventsWhileMovingAutomatically();
 
-  m_handleBL->moveBy (newPos.x() - oldPos.x(),
+  double deltaX = newPos.x() - oldPos.x();
+  double deltaY = newPos.y() - oldPos.y();
+
+  m_handleBL->moveBy (deltaX,
                       0);
   m_handleTR->moveBy (0,
-                      newPos.y() - oldPos.y());
-
-  m_handleLeft->setPos (m_handleTL->x(),
-                        (m_handleTL->y() + m_handleBL->y()) / 2.0);
-  m_handleTop->setPos ((m_handleTL->x() + m_handleTR->x()) / 2.0,
-                       m_handleTL->y());
-
-  m_handleRight->setPos (m_handleRight->x(),
-                         m_handleLeft->y());
-  m_handleBottom->setPos (m_handleTop->x(),
-                          m_handleBottom->y());
+                      deltaY);
 
   enableEventsWhileMovingAutomatically();
-}
 
-void PdfFrame::moveTop (const QPointF &newPos,
-                        const QPointF &oldPos)
-{
-  disableEventsWhileMovingAutomatically();
-
-  m_handleTL->moveBy (0,
-                      newPos.y() - oldPos.y());
-  m_handleTR->moveBy (0,
-                      newPos.y() - oldPos.y());
-
-  m_handleLeft->setPos (m_handleLeft->x(),
-                        (m_handleTL->y() + m_handleBL->y()) / 2.0);
-  m_handleRight->setPos (m_handleRight->x(),
-                         (m_handleTR->y() + m_handleBR->y()) / 2.0);
-
-  enableEventsWhileMovingAutomatically();
+  updateBox();
 }
 
 void PdfFrame::moveTR (const QPointF &newPos,
@@ -206,20 +138,32 @@ void PdfFrame::moveTR (const QPointF &newPos,
 {
   disableEventsWhileMovingAutomatically();
 
+  double deltaX = newPos.x() - oldPos.x();
+  double deltaY = newPos.y() - oldPos.y();
+
   m_handleTL->moveBy (0,
-                      newPos.y() - oldPos.y());
-  m_handleBR->moveBy (newPos.x() - oldPos.x(),
+                      deltaY);
+  m_handleBR->moveBy (deltaX,
                       0);
 
-  m_handleTop->setPos ((m_handleTL->x() + m_handleTR->x()) / 2.0,
-                       m_handleTR->y());
-  m_handleRight->setPos (newPos.x() - oldPos.x(),
-                         (m_handleTR->y() + m_handleBR->y()) / 2.0);
-
-  m_handleLeft->setPos (m_handleLeft->x(),
-                        m_handleRight->y());
-  m_handleBottom->setPos (m_handleTop->x(),
-                          m_handleBottom->y());
-
   enableEventsWhileMovingAutomatically();
+
+  updateBox();
+}
+
+void PdfFrame::updateBox ()
+{
+  QRectF rectUnited = frameRect ();
+
+  // Adjust by one pixel in both horizontal and vertical directions so bottom/right handles end on the box
+  rectUnited.setWidth (rectUnited.width () - 1);
+  rectUnited.setHeight (rectUnited.height () - 1);
+
+  m_box->setRect (rectUnited);
+}
+
+QSize PdfFrame::windowSize () const
+{
+  return QSize (m_view.scene()->width(),
+                m_view.scene()->height());
 }

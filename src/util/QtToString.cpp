@@ -23,6 +23,17 @@ QString QPointFToString (const QPointF &pos)
   return str;
 }
 
+QString QRectFToString (const QRectF &rectF)
+{
+  QString str = QString ("(%1x%2+%3+%4)")
+                .arg (rectF.width())
+                .arg (rectF.height())
+                .arg (rectF.x())
+                .arg (rectF.y());
+
+  return str;
+}
+
 QString QtCursorToString (Qt::CursorShape cursorShape)
 {
   if (cursorShapesLookupTable.count () == 0) {

@@ -28,10 +28,18 @@ public:
 
   /// Try to load the specified file. Success is indicated in the function return value
   PdfReturn load (const QString &fileName,
-                  QImage &image,
-                  int resolution) const;
+                            QImage &image,
+                            int resolution,
+                            bool isErrorReportRegressionTest) const;
 
 private:
+
+  PdfReturn loadForTesting (const QString &fileName,
+                            QImage &image,
+                            int resolution) const; // No dialog is used during testing. Entire first page will be loaded
+  PdfReturn loadNotTesting (const QString &fileName,
+                            QImage &image,
+                            int resolution) const; // Dialog is used when not testing
 
 };
 

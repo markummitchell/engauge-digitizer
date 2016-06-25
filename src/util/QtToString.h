@@ -16,8 +16,9 @@ class QLocale;
 class QPointF;
 class QTransform;
 
-extern QString QPointFToString (const QPointF &pos);
 extern QString QLocaleToString (const QLocale &locale);
+extern QString QPointFToString (const QPointF &pos);
+extern QString QRectFToString (const QRectF &rectF);
 extern QString QtCursorToString (Qt::CursorShape cursorShape);
 extern QString QTransformToString (const QTransform &transform);
 extern QString QXmlStreamReaderTokenTypeToString (QXmlStreamReader::TokenType tokenType);
