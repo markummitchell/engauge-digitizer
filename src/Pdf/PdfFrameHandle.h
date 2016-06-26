@@ -41,7 +41,7 @@ private:
   int m_orientationFlags; // From PdfFrame constants
 
   bool m_disableEventsWhileMovingAutomatically;
-
+  QGraphicsScene &m_scene;
 };
 
 #endif // PDF_FRAME_HANDLE_H

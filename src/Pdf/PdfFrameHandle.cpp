@@ -18,7 +18,8 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
                                 int zValue) :
   m_pdfFrame (pdfFrame),
   m_orientationFlags (orientationFlags),
-  m_disableEventsWhileMovingAutomatically (false)
+  m_disableEventsWhileMovingAutomatically (false),
+  m_scene (scene)
 {
   const double SUBTLE_OPACITY = 0.2;
 
@@ -58,11 +59,34 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
 
   if (change == ItemPositionChange && scene()) {
 
+    QPointF sizeAsPointF (boundingRect().size().width(),
+                          boundingRect().size().height());
+
     // New position is in the value argument
-    QPointF newPos = value.toPointF();
+    QPointF newPosTL = valueFiltered.toPointF();
+    QPointF newPosBR = newPosTL + sizeAsPointF;
     QPointF oldPos = pos ();
 
-    // Skip moving of other handles if event handling is (temporarily) off, to prevent an infinite loop
+    // Skip moving of this handle if it will go outside of the window
+    QRectF rectWindow = m_scene.sceneRect();
+    if (!rectWindow.contains (newPosTL)) {
+
+      // Keep the item inside the scene rectangle
+      newPosTL.setX (qMin (rectWindow.right(), qMax (newPosTL.x(), rectWindow.left())));
+      newPosTL.setY (qMin (rectWindow.bottom(), qMax (newPosTL.y(), rectWindow.top())));
+
+      valueFiltered = newPosTL;
+    } else if (!rectWindow.contains (newPosBR)) {
+
+      // Keep the item inside the scene rectangle
+      newPosBR.setX (qMin (rectWindow.right(), qMax (newPosBR.x(), rectWindow.left())));
+      newPosBR.setY (qMin (rectWindow.bottom(), qMax (newPosBR.y(), rectWindow.top())));
+
+      valueFiltered = newPosBR - sizeAsPointF;
+    }
+
+    // Skip moving of other handles, in response to the move of this handle, if event handling is (temporarily) off,
+    // to prevent an infinite loop
     if (!m_disableEventsWhileMovingAutomatically) {
 
       bool left   = ((m_orientationFlags & PdfFrame::PDF_FRAME_LEFT  ) != 0);
@@ -71,13 +95,13 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
       bool bottom = ((m_orientationFlags & PdfFrame::PDF_FRAME_BOTTOM) != 0);
 
       if (left && top) {
-        m_pdfFrame.moveTL (newPos, oldPos);
+        m_pdfFrame.moveTL (newPosTL, oldPos);
       } else if (right && top) {
-        m_pdfFrame.moveTR (newPos, oldPos);
+        m_pdfFrame.moveTR (newPosTL, oldPos);
       } else if (right && bottom) {
-        m_pdfFrame.moveBR (newPos, oldPos);
+        m_pdfFrame.moveBR (newPosTL, oldPos);
       } else if (left && bottom) {
-        m_pdfFrame.moveBL (newPos, oldPos);
+        m_pdfFrame.moveBL (newPosTL, oldPos);
       }
     }
   }
