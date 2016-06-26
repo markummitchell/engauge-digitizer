@@ -5,35 +5,36 @@
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Engauge Digitizer</name>
-  <summary>Convert an image file showing a graph or map into numbers</summary>
   <description>
-    <p>
-      This open source digitizing software converts an image file
-      showing a graph or map into numbers. The image file can come
-      from a scanner, digital camera, or a screen-shot. The numbers
-      can be read on the screen and written or copied to a
-      spreadsheet. The process starts with an image file containing a
-      graph or map. The final result is digitized data that can be
-      used by other tools such as spreadsheet and numerical computation
-      programs.
-    </p>
-    <p>
-      Here are some real-life examples:
-    </p>
-    <ul>
-      <li>
-        You need to recreate graphs in some decades-old documents in
-        a modern format
-      </li>
-      <li>
-        You are a graduate student gathering historical data from
-        charts for your project
-      </li>
-      <li>
-        You are a webmaster with visitor statistics charts and you
-        want to do statistical analyses
-      </li>
-    </ul>
+		<p>
+			The Engauge Digitizer tool assists in interactively extracting numbers
+			from images of graphs. Conceptually, it is thus the opposite of a
+			graphing tool that converts data points to graphs. It provides asistance
+			in enhancing the image quality and matching the data points. Engauge
+			Digitizer is used by individuals such as grad students and researchers as
+			well engineers and employeers in large government and commercial
+			organizations for processing single files  but also managing databases of
+			thousands of image files. 
+		</p>
+			
+		<p>
+			Features of engauge include:
+		</p>
+		<ul>
+			<li> Automatic grid line removal</li>
+			<li> Automatic point and axis matching</li>
+			<li> Automatic curve tracing</li>
+			<li> Image processing for separating important details from background information </li>
+			<li> A wizard providing an interactive tutorial to explain the basic steps </li>
+			<li> Multiple coordinate systems in the same image can be digitized in advanced mode</li>
+			<li> Cubic spline interpolation between points gives more accurate curves with fewer points </li>
+			<li> Handling of cartesian, polar, linear and logarithmic graphs</li>
+			<li> Support for drag-and-drop and copy-and-paste</li>
+			<li> Context sensitive help, user manual and tutorials explaining every feature</li>
+			<li> Preview windows to give immediate feedback while modifying settings</li>
+			<li> Automated line and point extraction to rapidly digitizes data </li>
+	</ul>
+
   </description>
   <screenshots>
     <screenshot type="default">https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
