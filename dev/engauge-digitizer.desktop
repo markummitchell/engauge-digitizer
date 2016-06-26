@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Engauge-digitizer
+Type=Application
+Comment=Extracts data points from images of graphs
+TryExec=engauge
+Exec=engauge %F
+MimeType=text/plain
+Categories=Education;Science;DataVisualization;
+Icon=/usr/share/pixmaps/engauge-digitizer.xpm
+Keywords=Analog-Digital Converter;
