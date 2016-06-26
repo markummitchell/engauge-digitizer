@@ -28,13 +28,13 @@ void PdfFrame::createWidgets(QGraphicsScene &scene)
   const double MARGIN_PERCENT = 5.0;
   const int ZERO_WIDTH_IS_ALWAYS_VISIBLE = 0;
 
-  int marginHor = m_view.width()  * MARGIN_PERCENT / 100.0;
-  int marginVer = m_view.height() * MARGIN_PERCENT / 100.0;
+  int marginHor = scene.width()  * MARGIN_PERCENT / 100.0;
+  int marginVer = scene.height() * MARGIN_PERCENT / 100.0;
 
-  QRect box (m_view.rect().left() + marginHor,
-             m_view.rect().top()  + marginVer,
-             m_view.rect().width() - 2 * marginHor,
-             m_view.rect().height() - 2 * marginVer);
+  QRect box (scene.sceneRect().left() + marginHor,
+             scene.sceneRect().top()  + marginVer,
+             scene.sceneRect().width() - 2 * marginHor,
+             scene.sceneRect().height() - 2 * marginVer);
 
   m_handleTL     = new PdfFrameHandle (scene, m_view, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this, Z_HANDLE);
   m_handleTR     = new PdfFrameHandle (scene, m_view, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this, Z_HANDLE);

@@ -99,7 +99,7 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
                                    this);
   m_viewPreview->setWhatsThis (tr ("Preview window that shows what part of the image will be imported. "
                                    "The image portion inside the rectangular frame will be imported from the currently selected page. "
-                                   "The frame can be moved and resized by dragging the handles."));
+                                   "The frame can be moved and resized by dragging the corner handles."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);

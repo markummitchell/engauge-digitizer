@@ -44,15 +44,36 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
 
   // Fill with nice color for better visibility
   setBrush (QBrush (Qt::blue));
+  setPen (QPen (Qt::transparent));
   setVisible (true);
   setZValue (zValue);
   setOpacity (SUBTLE_OPACITY);
-  setPos (pointReference);
+  setPos (pointReference); // Point position is handled in scene/view coordinates
 
   // Add to scene
   scene.addItem (this);
 
-  updateAfterResize();
+  QSize handleSize = m_pdfFrame.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
+
+  // Adjust positions of handles that are not at the top left so handles are laid out symmetrically
+  QPointF pointPos = pointReference;
+  if ((orientationFlags && PdfFrame::PDF_FRAME_LEFT) != 0) {
+    pointPos.setX (pointPos.x() - handleSize.width() / 2.0);
+  } else if ((orientationFlags && PdfFrame::PDF_FRAME_RIGHT) != 0) {
+    pointPos.setX (pointPos.x() + handleSize.width() / 2.0);
+  }
+  if ((orientationFlags && PdfFrame::PDF_FRAME_TOP) != 0) {
+    pointPos.setY (pointPos.y() - handleSize.height() / 2.0);
+  } else if ((orientationFlags && PdfFrame::PDF_FRAME_BOTTOM) != 0) {
+    pointPos.setY (pointPos.y() + handleSize.height() / 2.0);
+  }
+
+  // Start with geometry. Since point positions are handled in scene/view coordinates, we have to convert
+  // to local coordinates for the rectangle
+  QPointF topLeftLocal = mapFromScene (pointPos);
+
+  setRect (QRectF (topLeftLocal,
+                   handleSize));
 }
 
 QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
@@ -115,15 +136,4 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
 void PdfFrameHandle::setDisableEventsWhileMovingAutomatically (bool disable)
 {
   m_disableEventsWhileMovingAutomatically = disable;
-}
-
-void PdfFrameHandle::updateAfterResize ()
-{
-  QSize handleSize = m_pdfFrame.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
-
-  // Start with geometry
-  QPointF topLeft = pos();
-
-  setRect (QRectF (topLeft,
-                   handleSize));
 }

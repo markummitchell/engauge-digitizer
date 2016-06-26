@@ -37,8 +37,6 @@ public:
 private:
   PdfFrameHandle();
 
-  void updateAfterResize();
-
   PdfFrame &m_pdfFrame;
   int m_orientationFlags; // From PdfFrame constants
 
