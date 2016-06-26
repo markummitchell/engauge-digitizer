@@ -97,8 +97,9 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
   m_viewPreview = new ViewPreview (m_scenePreview,
                                    ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
                                    this);
-  m_viewPreview->setWhatsThis (tr ("Preview window that allows the user to crop the picture to the area containing the graph "
-                                   "that will be imported, and also shows how current settings affect pdf import."));
+  m_viewPreview->setWhatsThis (tr ("Preview window that shows what part of the image will be imported. "
+                                   "The image portion inside the rectangular frame will be imported from the currently selected page. "
+                                   "The frame can be moved and resized by dragging the handles."));
   m_viewPreview->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_viewPreview->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);

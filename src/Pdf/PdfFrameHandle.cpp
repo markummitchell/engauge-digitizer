@@ -8,10 +8,12 @@
 #include "PdfFrameHandle.h"
 #include <QBrush>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 
 const double HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE = 30;
 
 PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
+                                QGraphicsView &view,
                                 const QPointF &pointReference,
                                 int orientationFlags,
                                 PdfFrame &pdfFrame,
@@ -19,7 +21,8 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
   m_pdfFrame (pdfFrame),
   m_orientationFlags (orientationFlags),
   m_disableEventsWhileMovingAutomatically (false),
-  m_scene (scene)
+  m_scene (scene),
+  m_view (view)
 {
   const double SUBTLE_OPACITY = 0.2;
 
@@ -63,26 +66,26 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
                           boundingRect().size().height());
 
     // New position is in the value argument
-    QPointF newPosTL = valueFiltered.toPointF();
-    QPointF newPosBR = newPosTL + sizeAsPointF;
+    QPointF newPos = valueFiltered.toPointF();
     QPointF oldPos = pos ();
+
+    // This sequence is from http://www.qtcentre.org/threads/47248-How-to-efficiently-get-position-of-a-QGraphicsItem-in-view-coordinates
+    QRectF newRectItem (newPos,
+                        QSize (boundingRect().size().width(),
+                               boundingRect().size().height()));
+    QPolygonF newRectScene = mapToScene (newRectItem);
+    QPolygon newRectView = m_view.mapFromScene (newRectScene.boundingRect());
 
     // Skip moving of this handle if it will go outside of the window
     QRectF rectWindow = m_scene.sceneRect();
-    if (!rectWindow.contains (newPosTL)) {
+    if (!rectWindow.contains (newRectView.boundingRect())) {
 
       // Keep the item inside the scene rectangle
-      newPosTL.setX (qMin (rectWindow.right(), qMax (newPosTL.x(), rectWindow.left())));
-      newPosTL.setY (qMin (rectWindow.bottom(), qMax (newPosTL.y(), rectWindow.top())));
+      newPos.setX (qMin (rectWindow.right(), qMax (newPos.x(), rectWindow.left())));
+      newPos.setY (qMin (rectWindow.bottom(), qMax (newPos.y(), rectWindow.top())));
 
-      valueFiltered = newPosTL;
-    } else if (!rectWindow.contains (newPosBR)) {
+      valueFiltered = (newPos);
 
-      // Keep the item inside the scene rectangle
-      newPosBR.setX (qMin (rectWindow.right(), qMax (newPosBR.x(), rectWindow.left())));
-      newPosBR.setY (qMin (rectWindow.bottom(), qMax (newPosBR.y(), rectWindow.top())));
-
-      valueFiltered = newPosBR - sizeAsPointF;
     }
 
     // Skip moving of other handles, in response to the move of this handle, if event handling is (temporarily) off,
@@ -95,13 +98,13 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
       bool bottom = ((m_orientationFlags & PdfFrame::PDF_FRAME_BOTTOM) != 0);
 
       if (left && top) {
-        m_pdfFrame.moveTL (newPosTL, oldPos);
+        m_pdfFrame.moveTL (newPos, oldPos);
       } else if (right && top) {
-        m_pdfFrame.moveTR (newPosTL, oldPos);
+        m_pdfFrame.moveTR (newPos, oldPos);
       } else if (right && bottom) {
-        m_pdfFrame.moveBR (newPosTL, oldPos);
+        m_pdfFrame.moveBR (newPos, oldPos);
       } else if (left && bottom) {
-        m_pdfFrame.moveBL (newPosTL, oldPos);
+        m_pdfFrame.moveBL (newPos, oldPos);
       }
     }
   }

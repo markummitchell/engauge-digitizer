@@ -11,6 +11,7 @@
 
 class PdfFrame;
 class QGraphicsScene;
+class QGraphicsView;
 class QPointF;
 class QRectF;
 
@@ -20,6 +21,7 @@ class PdfFrameHandle : public QGraphicsRectItem
 public:
   /// Single constructor
   PdfFrameHandle(QGraphicsScene &scene,
+                 QGraphicsView &view,
                  const QPointF &pointReference,
                  int orientationFlags,
                  PdfFrame &pdfFrame,
@@ -42,6 +44,7 @@ private:
 
   bool m_disableEventsWhileMovingAutomatically;
   QGraphicsScene &m_scene;
+  QGraphicsView &m_view;
 };
 
 #endif // PDF_FRAME_HANDLE_H

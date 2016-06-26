@@ -36,10 +36,10 @@ void PdfFrame::createWidgets(QGraphicsScene &scene)
              m_view.rect().width() - 2 * marginHor,
              m_view.rect().height() - 2 * marginVer);
 
-  m_handleTL     = new PdfFrameHandle (scene, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this, Z_HANDLE);
-  m_handleTR     = new PdfFrameHandle (scene, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this, Z_HANDLE);
-  m_handleBR     = new PdfFrameHandle (scene, box.bottomRight(), PDF_FRAME_RIGHT  | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
-  m_handleBL     = new PdfFrameHandle (scene, box.bottomLeft() , PDF_FRAME_LEFT   | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
+  m_handleTL     = new PdfFrameHandle (scene, m_view, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this, Z_HANDLE);
+  m_handleTR     = new PdfFrameHandle (scene, m_view, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this, Z_HANDLE);
+  m_handleBR     = new PdfFrameHandle (scene, m_view, box.bottomRight(), PDF_FRAME_RIGHT  | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
+  m_handleBL     = new PdfFrameHandle (scene, m_view, box.bottomLeft() , PDF_FRAME_LEFT   | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
 
   m_box = new QGraphicsRectItem;
   m_box->setZValue (Z_BOX);
