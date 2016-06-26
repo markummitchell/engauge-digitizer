@@ -9,6 +9,7 @@
 #include <QBrush>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QStyleOptionGraphicsItem>
 
 const double HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE = 30;
 
@@ -42,9 +43,8 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemSendsScenePositionChanges);
 
-  // Fill with nice color for better visibility
+  // Fill with nice color for better visibility. Note that the pen is disabled by overriding the paint method
   setBrush (QBrush (Qt::blue));
-  setPen (QPen (Qt::transparent));
   setVisible (true);
   setZValue (zValue);
   setOpacity (SUBTLE_OPACITY);
@@ -131,6 +131,14 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
   }
 
   return QGraphicsItem::itemChange(change, valueFiltered);
+}
+
+void PdfFrameHandle::paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+  // Temporarily remove the selected option
+  QStyleOptionGraphicsItem scrubbed (*option);
+  scrubbed.state &= ~QStyle::State_Selected;
+  QGraphicsRectItem::paint (painter, &scrubbed, widget);
 }
 
 void PdfFrameHandle::setDisableEventsWhileMovingAutomatically (bool disable)

@@ -30,6 +30,8 @@ public:
   /// Intercept the drags and process them, which is the whole point of handles
   virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
+  /// Override the paint method so the dashed-border-when-selected can be removed
+  virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
   /// Temporarily disable event handling so code can move this object without triggering a cascade of events
   void setDisableEventsWhileMovingAutomatically (bool disable);
