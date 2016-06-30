@@ -947,6 +947,13 @@ void Document::setModelSegments(const DocumentModelSegments &modelSegments)
   m_coordSystemContext.setModelSegments (modelSegments);
 }
 
+void Document::setPixmap(const QImage &image)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setPixmap";
+
+  m_pixmap = QPixmap::fromImage (image);
+}
+
 void Document::setSelectedCurveName(const QString &selectedCurveName)
 {
   m_coordSystemContext.setSelectedCurveName (selectedCurveName);

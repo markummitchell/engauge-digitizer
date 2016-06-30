@@ -457,6 +457,14 @@ void MainWindow::createActionsFile ()
                                             "advanced mode, there can be multiple coordinate systems and/or floating axes."));
   connect (m_actionImportAdvanced, SIGNAL (triggered ()), this, SLOT (slotFileImportAdvanced ()));
 
+  m_actionImportImageReplace = new QAction (tr ("Import (Image Replace)..."), this);
+  m_actionImportImageReplace->setStatusTip (tr ("Imports a new image into the current document, replacing the existing image."));
+  m_actionImportImageReplace->setWhatsThis (tr ("Import (Image Replace)\n\n"
+                                                "Imports a new image into the current document. The existing image is replaced, "
+                                                "and all curves in the document are preserved. This operation is useful for applying "
+                                                "the axis points and other settings from an existing document to a different image."));
+  connect (m_actionImportImageReplace, SIGNAL (triggered ()), this, SLOT (slotFileImportImageReplace ()));
+
   m_actionOpen = new QAction(tr ("&Open..."), this);
   m_actionOpen->setShortcut (QKeySequence::Open);
   m_actionOpen->setStatusTip (tr ("Opens an existing document."));
@@ -919,6 +927,7 @@ void MainWindow::createMenus()
   m_menuFile = menuBar()->addMenu(tr("&File"));
   m_menuFile->addAction (m_actionImport);
   m_menuFile->addAction (m_actionImportAdvanced);
+  m_menuFile->addAction (m_actionImportImageReplace);
   m_menuFile->addAction (m_actionOpen);
 #ifndef OSX_RELEASE
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
@@ -1394,7 +1403,7 @@ void MainWindow::fileImport (const QString &fileName,
 
   if (importType == IMPORT_TYPE_ADVANCED) {
 
-    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
+    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoadNewDocument
     // when previewing for IMAGE_TYPE_ADVANCED
     slotFileClose();
 
@@ -1479,7 +1488,14 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileImportWithPrompts"
                               << " importType=" << importType;
 
-  if (maybeSave ()) {
+  // Skip maybeSave method for IMPORT_TYPE_REPLACE_IMAGE since open file dialog is enough to allow user to cancel the operation, and
+  // since no information is lost in that case
+  bool okToContinue = true;
+  if (importType != IMPORT_TYPE_IMAGE_REPLACE) {
+    okToContinue = maybeSave ();
+  }
+
+  if (okToContinue) {
 
     QString filter;
     QTextStream str (&filter);
@@ -1537,7 +1553,7 @@ void MainWindow::filePaste (ImportType importType)
 
   if (importType == IMPORT_TYPE_ADVANCED) {
 
-    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoad
+    // Remove any existing points, axes checker(s) and such from the previous Document so they do not appear in setupAfterLoadNewDocument
     // when previewing for IMAGE_TYPE_ADVANCED
     slotFileClose();
 
@@ -1701,9 +1717,9 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     }
 
     m_cmdMediator = cmdMediator;
-    setupAfterLoad(fileName,
-                   "File opened",
-                   IMPORT_TYPE_SIMPLE);
+    setupAfterLoadNewDocument (fileName,
+                               "File opened",
+                               IMPORT_TYPE_SIMPLE);
 
     // Start select mode
     m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1763,9 +1779,9 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
                                   reader);
   file.close();
 
-  setupAfterLoad(errorReportFile,
-                 "Error report opened",
-                 IMPORT_TYPE_SIMPLE);
+  setupAfterLoadNewDocument (errorReportFile,
+                             "Error report opened",
+                             IMPORT_TYPE_SIMPLE);
 
   // Start select mode
   m_actionDigitizeSelect->setChecked (true); // We assume user wants to first select existing stuff
@@ -1782,6 +1798,30 @@ bool MainWindow::loadImage (const QString &fileName,
                               << " fileName=" << fileName.toLatin1 ().data ()
                               << " importType=" << importType;
 
+  bool success;
+  if (importType == IMPORT_TYPE_IMAGE_REPLACE) {
+    success = loadImageReplacingImage (fileName,
+                                       image,
+                                       importType);
+  } else {
+    success = loadImageNewDocument (fileName,
+                                    image,
+                                    importType);
+  }
+
+  return success;
+}
+
+bool MainWindow::loadImageNewDocument (const QString &fileName,
+                                       const QImage &image,
+                                       ImportType importType)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImageNewDocument"
+                              << " fileName=" << fileName.toLatin1 ().data ()
+                              << " importType=" << importType;
+
+  ENGAUGE_ASSERT (importType != IMPORT_TYPE_IMAGE_REPLACE);
+
   QApplication::setOverrideCursor(Qt::WaitCursor);
   CmdMediator *cmdMediator = new CmdMediator (*this,
                                               image);
@@ -1797,9 +1837,9 @@ bool MainWindow::loadImage (const QString &fileName,
   }
 
   m_cmdMediator = cmdMediator;
-  bool accepted = setupAfterLoad(fileName,
-                                 tr ("File imported"),
-                                 importType);
+  bool accepted = setupAfterLoadNewDocument (fileName,
+                                             tr ("File imported"),
+                                             importType);
 
   if (accepted) {
 
@@ -1843,6 +1883,33 @@ bool MainWindow::loadImage (const QString &fileName,
 
     updateControls ();
   }
+
+  return accepted;
+}
+
+bool MainWindow::loadImageReplacingImage (const QString &fileName,
+                                          const QImage &image,
+                                          ImportType importType)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadImageReplacingImage"
+                              << " fileName=" << fileName.toLatin1 ().data ()
+                              << " importType=" << importType;
+
+  ENGAUGE_ASSERT (importType == IMPORT_TYPE_IMAGE_REPLACE);
+
+  setCurrentPathFromFile (fileName);
+  // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list
+  m_engaugeFile = EMPTY_FILENAME; // Forces first Save to be treated as Save As
+
+  ENGAUGE_ASSERT (m_cmdMediator != 0); // Menu option should only be available when a document is currently open
+
+  m_cmdMediator->document().setPixmap (image);
+
+  bool accepted = setupAfterLoadReplacingImage (fileName,
+                                                tr ("File imported"),
+                                                importType);
+
+  // No checklist guide wizard is displayed when just replacing the image
 
   return accepted;
 }
@@ -2407,14 +2474,17 @@ void MainWindow::settingsWrite ()
   settings.endGroup ();
 }
 
-bool MainWindow::setupAfterLoad (const QString &fileName,
-                                 const QString &temporaryMessage ,
-                                 ImportType importType)
+bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
+                                            const QString &temporaryMessage ,
+                                            ImportType importType)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoad"
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoadNewDocument"
                               << " file=" << fileName.toLatin1().data()
                               << " message=" << temporaryMessage.toLatin1().data()
                               << " importType=" << importType;
+
+  // The steps in this method should theoretically be a superset of the steps in setupAfterLoadNewDocument. Therefore, any
+  // changes to this method should be considered for application to the other method also
 
   const QString EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING; // For bootstrapping the preview
 
@@ -2472,6 +2542,40 @@ bool MainWindow::setupAfterLoad (const QString &fileName,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
+  m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
+
+  applyZoomFactorAfterLoad(); // Zoom factor must be reapplied after background image is set, to have any effect
+
+  setCurrentFile(fileName);
+  m_statusBar->showTemporaryMessage (temporaryMessage);
+  m_statusBar->wakeUp ();
+
+  saveStartingDocumentSnapshot();
+
+  updateAfterCommand(); // Replace stale points by points in new Document
+
+  return true;
+}
+
+bool MainWindow::setupAfterLoadReplacingImage (const QString &fileName,
+                                               const QString &temporaryMessage ,
+                                               ImportType importType)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setupAfterLoadReplacingImage"
+                              << " file=" << fileName.toLatin1().data()
+                              << " message=" << temporaryMessage.toLatin1().data()
+                              << " importType=" << importType;
+
+  // The steps in this method should theoretically be just a subset of the steps in setupAfterLoadNewDocument
+
+  // After this point there should be no commands in CmdMediator, since we effectively have a new document
+  m_cmdMediator->clear();
+
+  setPixmap (m_cmdMediator->document().curvesGraphsNames().first(),
+             m_cmdMediator->pixmap ()); // Set background immediately so it is visible as a preview when any dialogs are displayed
+
+  m_isDocumentExported = false;
+
   m_backgroundStateContext->setBackgroundImage ((BackgroundImage) m_cmbBackground->currentIndex ());
 
   applyZoomFactorAfterLoad(); // Zoom factor must be reapplied after background image is set, to have any effect
@@ -2871,6 +2975,13 @@ void MainWindow::slotFileImportImage(QString fileName, QImage image)
   loadImage (fileName,
              image,
              IMPORT_TYPE_SIMPLE);
+}
+
+void MainWindow::slotFileImportImageReplace ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportImageReplace";
+
+  fileImportWithPrompts (IMPORT_TYPE_IMAGE_REPLACE);
 }
 
 void MainWindow::slotFileOpen()
@@ -3897,6 +4008,7 @@ void MainWindow::updateControls ()
 
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
+  m_actionImportImageReplace->setEnabled (m_cmdMediator != 0);
 #ifndef OSX_RELEASE
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry

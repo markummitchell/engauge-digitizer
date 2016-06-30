@@ -283,6 +283,9 @@ public:
   /// Set method for DocumentModelSegments.
   void setModelSegments(const DocumentModelSegments &modelSegments);
 
+  /// Set method for the background pixmap
+  void setPixmap (const QImage &image);
+
   /// Save curve name that is selected for the current coordinate system, for the next time the coordinate system reappears
   void setSelectedCurveName (const QString &selectedCurveName);
 

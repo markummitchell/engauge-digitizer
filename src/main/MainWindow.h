@@ -253,6 +253,7 @@ private slots:
   void slotFileImportDraggedImage(QImage);
   void slotFileImportDraggedImageUrl(QUrl);
   void slotFileImportImage(QString, QImage);
+  void slotFileImportImageReplace();
   void slotFileOpen();
   void slotFileOpenDraggedDigFile (QString);
   void slotFilePrint();
@@ -321,7 +322,8 @@ private:
 
   enum ImportType {
     IMPORT_TYPE_SIMPLE,
-    IMPORT_TYPE_ADVANCED
+    IMPORT_TYPE_ADVANCED,
+    IMPORT_TYPE_IMAGE_REPLACE
   };
 
   void applyZoomFactorAfterLoad();
@@ -369,6 +371,12 @@ private:
   bool loadImage (const QString &fileName,
                   const QImage &image,
                   ImportType ImportType);
+  bool loadImageNewDocument (const QString &fileName,
+                             const QImage &image,
+                             ImportType ImportType);
+  bool loadImageReplacingImage (const QString &fileName,
+                                const QImage &image,
+                                ImportType ImportType);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
@@ -390,9 +398,12 @@ private:
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();
-  bool setupAfterLoad (const QString &fileName,
-                       const QString &temporaryMessage,
-                       ImportType ImportType);
+  bool setupAfterLoadNewDocument (const QString &fileName,
+                                  const QString &temporaryMessage,
+                                  ImportType ImportType);
+  bool setupAfterLoadReplacingImage (const QString &fileName,
+                                     const QString &temporaryMessage,
+                                     ImportType ImportType);
   void startRegressionTestErrorReport (const QString &regressionInputFile);
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
@@ -417,6 +428,7 @@ private:
   QMenu *m_menuFile;
   QAction *m_actionImport;
   QAction *m_actionImportAdvanced;
+  QAction *m_actionImportImageReplace;
   QAction *m_actionOpen;
   QMenu *m_menuFileOpenRecent;
   QList<QAction*> m_actionRecentFiles;
