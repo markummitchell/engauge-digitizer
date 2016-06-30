@@ -17,10 +17,13 @@ BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext 
   m_scene (scene),
   m_imageItem (0)
 {
+  const int Z_VALUE_BACKGROUND = 0;
+
   // Create an image but do not show it until the appropriate state is reached
   QPixmap dummy;
   m_imageItem = m_scene.addPixmap (dummy);
   m_imageItem->setVisible (false);
+  m_imageItem->setZValue (Z_VALUE_BACKGROUND);
   m_imageItem->setData (DATA_KEY_IDENTIFIER, "view");
   m_imageItem->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_IMAGE);
 }
