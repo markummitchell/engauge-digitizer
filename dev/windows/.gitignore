@@ -6,3 +6,7 @@ engauge*.wixpdb
 staging
 Engauge Digitizer
 build_msi_and_zip~
+engauge-build
+engauge-build.7z
+fftw-3.3.4-dll32
+log4cpp-1.1.1*
