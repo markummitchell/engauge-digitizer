@@ -50,14 +50,12 @@ nmake
 
 cd "%APPVEYOR_BUILD_FOLDER%"
 mkdir "%RESULTDIR%"\documentation
-foreach (%%I in %QTDIRS%) { 
-  mkdir "%RESULTDIR%\%%I" 
-}
-if defined ENGAUGE_RELEASE for (%%I in %QTDIRS%) { copy %QTDIR%\plugins\%%I\*.dll "%RESULTDIR%\%%I" }
-if defined ENGAUGE_RELEASE for (%%I in %QTLIBS%) { copy %QTDIR%\bin\%%I.dll "%RESULTDIR%" }
+for %%I in (%QTDIRS%) do mkdir "%RESULTDIR%\%%I" 
+if defined ENGAUGE_RELEASE for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*.dll "%RESULTDIR%\%%I"
+if defined ENGAUGE_RELEASE for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I.dll "%RESULTDIR%"
 if defined ENGAUGE_RELEASE del /S *d.dll
-if not defined ENGAUGE_RELEASE for (%%I in %QTDIRS%) { copy %QTDIR%\plugins\%%I\*d.dll "%RESULTDIR%\%%I" }
-if not defined ENGAUGE_RELEASE for (%%I in %QTLIBS%) { copy %QTDIR%\bin\%%I*d.dll "%RESULTDIR%" }
+if not defined ENGAUGE_RELEASE for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll "%RESULTDIR%\%%I"
+if not defined ENGAUGE_RELEASE for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll "%RESULTDIR%"
 copy bin\engauge.exe "%RESULTDIR%"
 copy log4cpp-1.1.1\lib\log4cpp.dll "%RESULTDIR%"
 copy fftw-3.3.4-dll32\lib\libfftw3-3.dll "%RESULTDIR%"
@@ -65,7 +63,7 @@ copy "%APPVEYOR_BUILD_FOLDER%"\poppler-qt5\*.dll "%RESULTDIR%"
 copy LICENSE "%RESULTDIR%"
 cd "%APPVEYOR_BUILD_FOLDER%"\help
 qcollectiongenerator engauge.qhcp -o engauge.qhc
-move engauge.qch ..\"%RESULTDIR%"\documentation
-move engauge.qhc ..\"%RESULTDIR%"\documentation
+move engauge.qch "%RESULTDIR%"\documentation
+move engauge.qhc "%RESULTDIR%"\documentation
 cd ..
 7z a "%RESULTDIR%.7z" "%RESULTDIR%"
