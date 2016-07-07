@@ -337,7 +337,8 @@ HEADERS  += \
     src/Zoom/ZoomControl.h \
     src/Zoom/ZoomFactor.h \
     src/Zoom/ZoomFactorInitial.h \
-    src/Zoom/ZoomLabels.h
+    src/Zoom/ZoomLabels.h \
+    src/util/ZValues.h
 
 SOURCES += \
     src/Background/BackgroundImage.cpp \
@@ -610,7 +611,8 @@ SOURCES += \
     src/View/ViewProfileScale.cpp \
     src/View/ViewSegmentFilter.cpp \
     src/util/Xml.cpp \
-    src/Zoom/ZoomLabels.cpp
+    src/Zoom/ZoomLabels.cpp \
+    src/util/ZValues.cpp
 
 macx-* {
   CONFIG(debug,debug|release){

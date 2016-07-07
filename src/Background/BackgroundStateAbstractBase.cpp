@@ -10,6 +10,7 @@
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "Logger.h"
+#include "ZValues.h"
 
 BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext &context,
                                                          GraphicsScene &scene) :
@@ -17,8 +18,6 @@ BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext 
   m_scene (scene),
   m_imageItem (0)
 {
-  const int Z_VALUE_BACKGROUND = 0;
-
   // Create an image but do not show it until the appropriate state is reached
   QPixmap dummy;
   m_imageItem = m_scene.addPixmap (dummy);

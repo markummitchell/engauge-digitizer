@@ -22,6 +22,7 @@
 #include "QtToString.h"
 #include "Spline.h"
 #include "Transformation.h"
+#include "ZValues.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ typedef QMap<double, double> XOrThetaToOrdinal;
 GraphicsLinesForCurve::GraphicsLinesForCurve(const QString &curveName) :
   m_curveName (curveName)
 {
+  setZValue (Z_VALUE_CURVE);
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE,
            GRAPHICS_ITEM_TYPE_LINE);
   setData (DATA_KEY_IDENTIFIER,
