@@ -95,7 +95,7 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
 
   m_scenePreview = new QGraphicsScene (this);
   m_viewPreview = new ViewPreview (m_scenePreview,
-                                   ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
+                                   ViewPreview::VIEW_ASPECT_RATIO_ONE_TO_ONE,
                                    this);
   m_viewPreview->setWhatsThis (tr ("Preview window that shows what part of the image will be imported. "
                                    "The image portion inside the rectangular frame will be imported from the currently selected page. "
@@ -236,6 +236,9 @@ void DlgPdfFrame::slotCancel ()
 void DlgPdfFrame::slotOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotOk";
+
+  // Restore cursor in case updatePreview did not already restore it for some reason
+  QApplication::restoreOverrideCursor ();
 
   setResult (QDialog::Accepted);
   saveGeometryToSettings();
