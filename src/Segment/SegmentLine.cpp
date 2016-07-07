@@ -12,8 +12,7 @@
 #include <QPen>
 #include "Segment.h"
 #include "SegmentLine.h"
-
-const double ZVALUE_SEGMENT = 50; // Less than z value for GraphicsPoint
+#include "ZValues.h"
 
 SegmentLine::SegmentLine(QGraphicsScene  &scene,
                          const DocumentModelSegments &modelSegments,
@@ -29,7 +28,7 @@ SegmentLine::SegmentLine(QGraphicsScene  &scene,
   // Make this transparent now, but always visible so hover events work
   scene.addItem (this);
   setPen (QPen (Qt::transparent));
-  setZValue (ZVALUE_SEGMENT);
+  setZValue (Z_VALUE_CURVE);
   setVisible (true);
   setAcceptHoverEvents (true);
   setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state

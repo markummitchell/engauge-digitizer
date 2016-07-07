@@ -320,7 +320,8 @@ HEADERS  += \
     Zoom/ZoomControl.h \
     Zoom/ZoomFactor.h \
     Zoom/ZoomFactorInitial.h\
-    Zoom/ZoomLabels.h
+    Zoom/ZoomLabels.h \
+    util/ZValues.h
 
 SOURCES += \
     Background/BackgroundImage.cpp \
@@ -593,7 +594,8 @@ SOURCES += \
     View/ViewProfileScale.cpp \
     View/ViewSegmentFilter.cpp \
     util/Xml.cpp \
-    Zoom/ZoomLabels.cpp
+    Zoom/ZoomLabels.cpp \
+    util/ZValues.cpp
 
 TARGET = ../bin/TEST
 
