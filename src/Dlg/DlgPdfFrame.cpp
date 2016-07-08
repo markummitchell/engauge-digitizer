@@ -228,6 +228,9 @@ void DlgPdfFrame::slotCancel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotCancel";
 
+  // Restore cursor in case updatePreview has not already completed and then restored it
+  QApplication::restoreOverrideCursor ();
+
   setResult (QDialog::Rejected);
   saveGeometryToSettings();
   hide();
@@ -237,7 +240,7 @@ void DlgPdfFrame::slotOk ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotOk";
 
-  // Restore cursor in case updatePreview did not already restore it for some reason
+  // Restore cursor in case updatePreview has not already completed and then restored it
   QApplication::restoreOverrideCursor ();
 
   setResult (QDialog::Accepted);
