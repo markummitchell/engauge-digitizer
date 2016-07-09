@@ -73,6 +73,7 @@ void DlgSettingsExportFormat::createCurveSelection (QGridLayout *layout, int &ro
   layout->addWidget (labelExcluded, row++, 2);
 
   m_listIncluded = new QListWidget;
+  m_listIncluded->setSortingEnabled (false); // Preserve order from Document
   m_listIncluded->setWhatsThis (tr ("List of curves to be included in the exported file.\n\n"
                                     "The order of the curves here does not affect the order in the exported file. That "
                                     "order is determined by the Curves settings."));
@@ -81,6 +82,7 @@ void DlgSettingsExportFormat::createCurveSelection (QGridLayout *layout, int &ro
   connect (m_listIncluded, SIGNAL (itemSelectionChanged ()), this, SLOT (slotListIncluded()));
 
   m_listExcluded = new QListWidget;
+  m_listExcluded->setSortingEnabled (false); // Preserve order from Document
   m_listExcluded->setWhatsThis (tr ("List of curves to be excluded from the exported file"));
   m_listExcluded->setSelectionMode (QAbstractItemView::MultiSelection);
   layout->addWidget (m_listExcluded, row++, 2, 4, 1);
@@ -906,9 +908,6 @@ void DlgSettingsExportFormat::updateControls ()
   bool isGoodState = goodIntervalFunctions() &&
                      goodIntervalRelations();
   enableOk (isGoodState);
-
-  m_listIncluded->sortItems (Qt::AscendingOrder);
-  m_listExcluded->sortItems (Qt::AscendingOrder);
 
   int selectedForInclude = m_listExcluded->selectedItems().count();
   int selectedForExclude = m_listIncluded->selectedItems().count();
