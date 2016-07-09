@@ -147,6 +147,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgImportAdvanced.h \
+    Dlg/DlgImportCroppingNonPdf.h \
     Dlg/DlgRequiresTransform.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
@@ -442,6 +443,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgImportAdvanced.cpp \
+    Dlg/DlgImportCroppingNonPdf.cpp \
     Dlg/DlgRequiresTransform.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
@@ -727,12 +729,12 @@ pdf {
     DEFINES += "ENGAUGE_PDF"
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
-    HEADERS += Dlg/DlgPdfFrame.h \
+    HEADERS += Dlg/DlgImportCroppingPdf.h \
                Import/ImportCroppingUtilPdf.h \
                Pdf/Pdf.h \
                Pdf/PdfFrame.h \
                Pdf/PdfFrameHandle.h
-    SOURCES += Dlg/DlgPdfFrame.cpp \
+    SOURCES += Dlg/DlgImportCroppingPdf.cpp \
                Import/ImportCroppingUtilPdf.cpp \
                Pdf/Pdf.cpp \
                Pdf/PdfFrame.cpp \

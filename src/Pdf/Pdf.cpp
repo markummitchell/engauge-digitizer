@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DlgPdfFrame.h"
+#include "DlgImportCroppingPdf.h"
 #include "ImportCroppingUtilPdf.h"
 #include "Pdf.h"
 #include "poppler-qt5.h"
@@ -62,8 +62,8 @@ PdfReturn Pdf::loadWithCropping (Document *document,
   PdfReturn pdfReturn = PDF_RETURN_FAILED;
 
   // Get page and extent
-  DlgPdfFrame dlg (*document,
-                   resolution);
+  DlgImportCroppingPdf dlg (*document,
+                            resolution);
   if (dlg.exec() == QDialog::Accepted) {
 
     // Returned image is null if it could not be read

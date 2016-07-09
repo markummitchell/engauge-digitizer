@@ -4,12 +4,10 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DlgPdfFrame.h"
+#include "DlgImportCroppingNonPdf.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "PdfFrame.h"
-#include "poppler-qt5.h"
 #include <QApplication>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
@@ -23,22 +21,15 @@
 #include "Settings.h"
 #include "ViewPreview.h"
 
-using namespace Poppler;
-
-int DlgPdfFrame::MINIMUM_DIALOG_WIDTH = 350;
-int DlgPdfFrame::MINIMUM_PREVIEW_HEIGHT = 200;
+int DlgImportCroppingNonPdf::MINIMUM_DIALOG_WIDTH = 350;
+int DlgImportCroppingNonPdf::MINIMUM_PREVIEW_HEIGHT = 200;
 const int X_TOP_LEFT = 0, Y_TOP_LEFT = 0;
 const int WIDTH = -1, HEIGHT = -1; // Negative values give full page
-const int FIRST_PAGE_1_BASED = 1;
-const int SMALLEST_DELAY_MS = 500; // Below 500 triggers "double jump" bug in linux
 
-DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
-                         int resolution) :
-  m_document (document),
-  m_resolution (resolution),
+DlgImportCroppingNonPdf::DlgImportCroppingNonPdf() :
   m_pixmap (0)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::DlgPdfFrame";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::DlgImportCroppingNonPdf";
 
   setWindowTitle (tr ("PDF Frame"));
   setModal (true);
@@ -49,8 +40,6 @@ DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
 
   int row = 0;
 
-  createTimer ();
-  createPageSpinner (layout, row);
   createPreview (layout, row);
   finishPanel (subPanel);
   updatePreview ();
@@ -62,33 +51,15 @@ DlgPdfFrame::DlgPdfFrame(const Poppler::Document &document,
   layout->setColumnStretch (3, 1);
 }
 
-DlgPdfFrame::~DlgPdfFrame()
+DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::~DlgPdfFrame";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf";
 }
 
-void DlgPdfFrame::createPageSpinner (QGridLayout *layout,
-                                     int &row)
+void DlgImportCroppingNonPdf::createPreview (QGridLayout *layout,
+                                             int &row)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::createPageSpinner";
-
-  const int MIN_WIDTH_SPINNER = 90;
-
-  QLabel *labelPage = new QLabel (tr ("Page:"));
-  layout->addWidget (labelPage, row, 1, 1, 1);
-
-  m_spinPage = new QSpinBox;
-  m_spinPage->setMinimumWidth (MIN_WIDTH_SPINNER);
-  m_spinPage->setWhatsThis (tr ("Page number that will be imported"));
-  m_spinPage->setRange (1, m_document.numPages());
-  layout->addWidget (m_spinPage, row++, 2, 1, 1);
-  connect (m_spinPage, SIGNAL (valueChanged (int)), this, SLOT (slotPage (int)));
-}
-
-void DlgPdfFrame::createPreview (QGridLayout *layout,
-                                 int &row)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::createPreview";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::createPreview";
 
   QLabel *labelPreview = new QLabel (tr ("Preview"));
   layout->addWidget (labelPreview, row++, 0, 1, 1, Qt::AlignLeft);
@@ -107,24 +78,9 @@ void DlgPdfFrame::createPreview (QGridLayout *layout,
 
   // More preview initialization
   initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
-  createPdfFrame ();
 }
 
-void DlgPdfFrame::createPdfFrame ()
-{
-  // Create frame that shows what will be included, and what will be excluded, during the import
-  m_pdfFrame = new PdfFrame (*m_scenePreview,
-                             *m_viewPreview);
-}
-
-void DlgPdfFrame::createTimer ()
-{
-  m_timer = new QTimer;
-  m_timer->setSingleShot (true);
-  connect (m_timer, SIGNAL (timeout ()), this, SLOT (slotTimeout ()));
-}
-
-void DlgPdfFrame::finishPanel (QWidget *subPanel)
+void DlgImportCroppingNonPdf::finishPanel (QWidget *subPanel)
 {
   const int STRETCH_OFF = 0, STRETCH_ON = 1;
 
@@ -163,19 +119,17 @@ void DlgPdfFrame::finishPanel (QWidget *subPanel)
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
 }
 
-QImage DlgPdfFrame::image () const
+QImage DlgImportCroppingNonPdf::image () const
 {
   // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
   // portion is to be returned
-  ENGAUGE_ASSERT (m_pdfFrame != 0);
-  QRectF rectFramePixels = m_pdfFrame->frameRect ();
 
-  return m_image.copy (rectFramePixels.toRect ());
+  return m_image;
 }
 
-void DlgPdfFrame::initializeFrameGeometryAndPixmap ()
+void DlgImportCroppingNonPdf::initializeFrameGeometryAndPixmap ()
 {
-  m_image = loadImage (FIRST_PAGE_1_BASED);
+  m_image = loadImage ();
   QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
   m_scenePreview->addItem (pixmap);
 
@@ -183,28 +137,14 @@ void DlgPdfFrame::initializeFrameGeometryAndPixmap ()
   m_viewPreview->setSceneRect (pixmap->boundingRect ());
 }
 
-QImage DlgPdfFrame::loadImage (int page1Based) const
+QImage DlgImportCroppingNonPdf::loadImage () const
 {
   QImage image;
-
-  int page0Based = page1Based - 1;
-  Page *page = m_document.page (page0Based);
-  if (page != 0) {
-
-    image = page->renderToImage (m_resolution,
-                                 m_resolution,
-                                 X_TOP_LEFT,
-                                 Y_TOP_LEFT,
-                                 WIDTH,
-                                 HEIGHT);
-
-    delete page;
-  }
 
   return image;
 }
 
-void DlgPdfFrame::saveGeometryToSettings()
+void DlgImportCroppingNonPdf::saveGeometryToSettings()
 {
   // Store the settings for use by showEvent
   QSettings settings;
@@ -213,7 +153,7 @@ void DlgPdfFrame::saveGeometryToSettings()
   settings.endGroup();
 }
 
-void DlgPdfFrame::showEvent (QShowEvent * /* event */)
+void DlgImportCroppingNonPdf::showEvent (QShowEvent * /* event */)
 {
   QSettings settings;
   settings.beginGroup (SETTINGS_GROUP_PDF);
@@ -224,9 +164,9 @@ void DlgPdfFrame::showEvent (QShowEvent * /* event */)
   }
 }
 
-void DlgPdfFrame::slotCancel ()
+void DlgImportCroppingNonPdf::slotCancel ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotCancel";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::slotCancel";
 
   // Restore cursor in case updatePreview has not already completed and then restored it
   QApplication::restoreOverrideCursor ();
@@ -236,9 +176,9 @@ void DlgPdfFrame::slotCancel ()
   hide();
 }
 
-void DlgPdfFrame::slotOk ()
+void DlgImportCroppingNonPdf::slotOk ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotOk";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::slotOk";
 
   // Restore cursor in case updatePreview has not already completed and then restored it
   QApplication::restoreOverrideCursor ();
@@ -248,34 +188,15 @@ void DlgPdfFrame::slotOk ()
   hide();
 }
 
-void DlgPdfFrame::slotPage (int page)
+void DlgImportCroppingNonPdf::updatePreview ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotPage"
-                              << " page=" << page
-                              << " stepBy=" << m_spinPage->singleStep ();
-
-  // Show wait cursor until slow calculations are over
-  QApplication::setOverrideCursor (Qt::WaitCursor);
-
-  m_timer->start (SMALLEST_DELAY_MS);
-}
-
-void DlgPdfFrame::slotTimeout ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::slotTimeout";
-
-  updatePreview ();
-}
-
-void DlgPdfFrame::updatePreview ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgPdfFrame::updatePreview";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::updatePreview";
 
   if (m_pixmap != 0) {
     m_scenePreview->removeItem (m_pixmap);
   }
 
-  m_image = loadImage (m_spinPage->value ());
+  m_image = loadImage ();
   m_pixmap = new QGraphicsPixmapItem (QPixmap::fromImage (m_image));
   m_scenePreview->addItem (m_pixmap);
 
