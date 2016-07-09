@@ -50,6 +50,7 @@ extern const QString SETTINGS_GROUP_MAIN_WINDOW;
 extern const QString SETTINGS_GROUP_PDF;
 extern const QString SETTINGS_HELP_POS;
 extern const QString SETTINGS_HELP_SIZE;
+extern const QString SETTINGS_IMPORT_CROPPING;
 extern const QString SETTINGS_IMPORT_PDF_RESOLUTION;
 extern const QString SETTINGS_LOCALE_COUNTRY;
 extern const QString SETTINGS_LOCALE_LANGUAGE;

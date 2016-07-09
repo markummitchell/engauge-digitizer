@@ -2425,6 +2425,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                                 QVariant (MAIN_TITLE_BAR_FORMAT_PATH)).toInt());
   m_modelMainWindow.setPdfResolution (settings.value (SETTINGS_IMPORT_PDF_RESOLUTION,
                                                       QVariant (DEFAULT_IMPORT_PDF_RESOLUTION)).toInt ());
+  m_modelMainWindow.setImportCropping ((ImportCropping) settings.value (SETTINGS_IMPORT_CROPPING,
+                                                                        QVariant (DEFAULT_IMPORT_CROPPING)).toInt ());
 
   updateSettingsMainWindow();
 
@@ -2457,6 +2459,7 @@ void MainWindow::settingsWrite ()
 
   }
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());

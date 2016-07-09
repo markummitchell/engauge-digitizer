@@ -6,6 +6,7 @@
 
 #include "CmdMediator.h"
 #include "DocumentSerialize.h"
+#include "ImportCroppingUtilBase.h"
 #include "Logger.h"
 #include "MainWindowModel.h"
 #include "PdfResolution.h"
@@ -24,7 +25,8 @@ MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
   m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH),
-  m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION)
+  m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION),
+  m_importCropping (DEFAULT_IMPORT_CROPPING)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -34,7 +36,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_zoomControl (other.zoomControl()),
   m_zoomFactorInitial (other.zoomFactorInitial()),
   m_mainTitleBarFormat (other.mainTitleBarFormat()),
-  m_pdfResolution (other.pdfResolution())
+  m_pdfResolution (other.pdfResolution()),
+  m_importCropping (other.importCropping())
 {
 }
 
@@ -45,8 +48,14 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_zoomFactorInitial = other.zoomFactorInitial();
   m_mainTitleBarFormat = other.mainTitleBarFormat();
   m_pdfResolution = other.pdfResolution();
+  m_importCropping = other.importCropping();
 
   return *this;
+}
+
+ImportCropping MainWindowModel::importCropping() const
+{
+  return m_importCropping;
 }
 
 void MainWindowModel::loadXml(QXmlStreamReader &reader)
@@ -99,6 +108,7 @@ void MainWindowModel::printStream(QString indentation,
                                                         "NoPath" :
                                                         "Path") << "\n";
   str << indentation << "pdfResolution=" << m_pdfResolution << "\n";
+  str << indentation << "importCropping=" << ImportCroppingUtilBase::importCroppingToString (m_importCropping).toLatin1().data() << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -107,6 +117,11 @@ void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_MAIN_WINDOW);
   writer.writeEndElement();
+}
+
+void MainWindowModel::setImportCropping (ImportCropping importCropping)
+{
+  m_importCropping = importCropping;
 }
 
 void MainWindowModel::setLocale (QLocale::Language language,

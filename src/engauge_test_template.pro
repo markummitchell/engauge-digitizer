@@ -249,6 +249,9 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
+    Import/ImportCropping.h \
+    Import/ImportCroppingUtilBase.h \
+    Import/ImportCroppingUtilNonPdf.h \
     Line/LineStyle.h \
     Load/LoadFileInfo.h \
     Load/LoadImageFromUrl.h \
@@ -532,6 +535,8 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
+    Import/ImportCroppingUtilBase.cpp \
+    Import/ImportCroppingUtilNonPdf.cpp \
     Line/LineStyle.cpp \
     Load/LoadFileInfo.cpp \
     Load/LoadImageFromUrl.cpp \
@@ -634,6 +639,7 @@ INCLUDEPATH += Background \
                Grid \
                Help \
                img \
+               Import \
                include \
                Line \
                Load \
@@ -722,10 +728,12 @@ pdf {
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
     HEADERS += Dlg/DlgPdfFrame.h \
+               Import/ImportCroppingUtilPdf.h \
                Pdf/Pdf.h \
                Pdf/PdfFrame.h \
                Pdf/PdfFrameHandle.h
     SOURCES += Dlg/DlgPdfFrame.cpp \
+               Import/ImportCroppingUtilPdf.cpp \
                Pdf/Pdf.cpp \
                Pdf/PdfFrame.cpp \
                Pdf/PdfFrameHandle.cpp

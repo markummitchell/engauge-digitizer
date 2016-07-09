@@ -8,6 +8,7 @@
 #define MAIN_WINDOW_MODEL_H
 
 #include "DocumentModelAbstractBase.h"
+#include "ImportCropping.h"
 #include "MainTitleBarFormat.h"
 #include <QLocale>
 #include <QString>
@@ -34,6 +35,9 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
+  /// Get method for import cropping
+  ImportCropping importCropping () const;
+
   /// Get method for locale
   QLocale locale() const;
 
@@ -55,6 +59,9 @@ public:
 
   /// Set method for locale given locale object
   void setLocale (const QLocale &locale);
+
+  /// Set method for import cropping
+  void setImportCropping (ImportCropping importCropping);
 
   /// Set method for MainWindow titlebar filename format
   void setMainTitleBarFormat (MainTitleBarFormat mainTitleBarFormat);
@@ -81,6 +88,7 @@ private:
   ZoomFactorInitial m_zoomFactorInitial;
   MainTitleBarFormat m_mainTitleBarFormat;
   int m_pdfResolution;
+  ImportCropping m_importCropping;
 
 };
 

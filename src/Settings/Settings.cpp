@@ -57,6 +57,7 @@ const QString SETTINGS_GENERAL_EXTRA_PRECISION ("extraPrecision");
 const QString SETTINGS_GROUP_GENERAL ("GeneralEngauge"); // "General" group name is reserved for ungrouped settings
 
 // Import group
+const QString SETTINGS_IMPORT_CROPPING ("Cropping");
 const QString SETTINGS_IMPORT_PDF_RESOLUTION ("PdfResolution");
 const QString SETTINGS_GROUP_IMPORT ("Import");
 

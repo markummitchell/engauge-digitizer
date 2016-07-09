@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "DlgPdfFrame.h"
+#include "ImportCroppingUtilPdf.h"
 #include "Pdf.h"
 #include "poppler-qt5.h"
 #include <QImage>
@@ -25,20 +26,63 @@ PdfReturn Pdf::load (const QString &fileName,
                      int resolution,
                      bool isErrorReportRegressionTest) const
 {
-  if (isErrorReportRegressionTest) {
-    return loadForTesting (fileName,
-                           image,
-                           resolution);
+  Document *document = 0;
+
+  ImportCroppingUtilPdf importCroppingUtil;
+  bool cropping = importCroppingUtil.applyImportCropping (isErrorReportRegressionTest,
+                                                          fileName,
+                                                          document);
+
+  PdfReturn rtn;
+  if (cropping) {
+
+    rtn = loadWithCropping (document,
+                            image,
+                            resolution);
+
   } else {
-    return loadNotTesting (fileName,
-                           image,
-                           resolution);
+
+    rtn = loadWithoutCropping (fileName,
+                               image,
+                               resolution);
+
   }
+
+  if (document != 0) {
+    delete document;
+  }
+
+  return rtn;
 }
 
-PdfReturn Pdf::loadForTesting (const QString &fileName,
-                               QImage &image,
-                               int resolution) const
+PdfReturn Pdf::loadWithCropping (Document *document,
+                                 QImage &image,
+                                 int resolution) const
+{
+  PdfReturn pdfReturn = PDF_RETURN_FAILED;
+
+  // Get page and extent
+  DlgPdfFrame dlg (*document,
+                   resolution);
+  if (dlg.exec() == QDialog::Accepted) {
+
+    // Returned image is null if it could not be read
+    image = dlg.image ();
+
+    if (!image.isNull()) {
+      pdfReturn = PDF_RETURN_SUCCESS;
+    }
+
+  } else {
+    pdfReturn = PDF_RETURN_CANCELED;
+  }
+
+  return pdfReturn;
+}
+
+PdfReturn Pdf::loadWithoutCropping (const QString &fileName,
+                                    QImage &image,
+                                    int resolution) const
 {
   PdfReturn pdfReturn = PDF_RETURN_FAILED;
 
@@ -66,45 +110,6 @@ PdfReturn Pdf::loadForTesting (const QString &fileName,
           }
 
           delete page;
-        }
-      }
-
-      delete document;
-    }
-  }
-
-  return pdfReturn;
-}
-
-PdfReturn Pdf::loadNotTesting (const QString &fileName,
-                               QImage &image,
-                               int resolution) const
-{
-  PdfReturn pdfReturn = PDF_RETURN_FAILED;
-
-  // Simple check to prevent complaints from poppler code
-  if (fileName.right (4).toLower () == ".pdf") {
-
-    // Try to read the file
-    Document *document = Document::load (fileName);
-    
-    if (document != 0) {
-      if (!document->isLocked ()) {
-
-        // Get page and extent
-        DlgPdfFrame dlg (*document,
-                         resolution);
-        if (dlg.exec() == QDialog::Accepted) {
-
-          // Returned image is null if it could not be read
-          image = dlg.image ();
-
-          if (!image.isNull()) {
-            pdfReturn = PDF_RETURN_SUCCESS;
-          }
-
-        } else {
-          pdfReturn = PDF_RETURN_CANCELED;
         }
       }
 
