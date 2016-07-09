@@ -14,7 +14,7 @@
 namespace Poppler {
   class Document;
 }
-class PdfFrame;
+class PdfCropping;
 class QGraphicsPixmapItem;
 class QGridLayout;
 class QGraphicsScene;
@@ -60,7 +60,7 @@ private:
 
   void createPageSpinner (QGridLayout *layout,
                           int &row);
-  void createPdfFrame ();
+  void createPdfCropping ();
   void createPreview (QGridLayout *layout,
                       int &row);
   void createTimer ();
@@ -90,7 +90,7 @@ private:
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
 
-  PdfFrame *m_pdfFrame;
+  PdfCropping *m_pdfCropping;
 };
 
 #endif // DLG_IMPORT_CROPPING_PDF_H

@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef PDF_FRAME_H
-#define PDF_FRAME_H
+#ifndef PDF_CROPPING_H
+#define PDF_CROPPING_H
 
 #include <QRect>
 #include <QSize>
@@ -21,12 +21,12 @@ class ViewPreview;
 /// Originally there were 4 handles at the corners and 4 handles at the middles of the sides, but dragging
 /// the corner handles did not result in 1/2 the movement at the middle handles. The middle handles were deemed
 /// not worth the effort
-class PdfFrame
+class PdfCropping
 {
 public:
   /// Single constructor
-  PdfFrame(QGraphicsScene &scene,
-           ViewPreview &view);
+  PdfCropping(QGraphicsScene &scene,
+              ViewPreview &view);
 
   /// Frame rectangle selected by user
   QRectF frameRect () const;
@@ -47,16 +47,16 @@ public:
   void moveTR (const QPointF &newPos,
                const QPointF &oldPos);
 
-  static const int PDF_FRAME_BOTTOM = 1; ///< Bit flag when handle is aligned with bottom edge at reference point
-  static const int PDF_FRAME_LEFT   = 2; ///< Bit flag when handle is aligned with left edge at reference point
-  static const int PDF_FRAME_RIGHT  = 4; ///< Bit flag when handle is aligned with right edge at reference point
-  static const int PDF_FRAME_TOP    = 8; ///< Bit flag when handle is aligned with top edge at reference point
+  static const int PDF_CROPPING_BOTTOM = 1; ///< Bit flag when handle is aligned with bottom edge at reference point
+  static const int PDF_CROPPING_LEFT   = 2; ///< Bit flag when handle is aligned with left edge at reference point
+  static const int PDF_CROPPING_RIGHT  = 4; ///< Bit flag when handle is aligned with right edge at reference point
+  static const int PDF_CROPPING_TOP    = 8; ///< Bit flag when handle is aligned with top edge at reference point
 
   /// Size of window in scene coordinates
   QSize windowSize () const;
 
 private:
-  PdfFrame();
+  PdfCropping ();
 
   void createWidgets (QGraphicsScene &scene);
   void disableEventsWhileMovingAutomatically();
@@ -77,4 +77,4 @@ private:
 
 };
 
-#endif // PDF_FRAME_H
+#endif // PDF_CROPPING_H

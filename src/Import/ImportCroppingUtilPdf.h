@@ -7,8 +7,13 @@
 #ifndef IMPORT_CROPPING_UTIL_PDF_H
 #define IMPORT_CROPPING_UTIL_PDF_H
 
+#include "ImportCropping.h"
 #include "ImportCroppingUtilBase.h"
-#include "poppler-qt5.h"
+#include <QString>
+
+namespace Poppler {
+  class Document;
+}
 
 /// Import of pdf files
 class ImportCroppingUtilPdf : public ImportCroppingUtilBase
@@ -23,6 +28,7 @@ public:
   /// For speed, the Document is returned if cropping is to be performed so the file needs to be read only once
   bool applyImportCropping (bool isRegression,
                             const QString &fileName,
+                            ImportCropping importCropping,
                             Poppler::Document *&document) const;
 
 };

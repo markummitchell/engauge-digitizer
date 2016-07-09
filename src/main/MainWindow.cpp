@@ -1427,6 +1427,7 @@ void MainWindow::fileImport (const QString &fileName,
     PdfReturn pdfReturn = pdf.load (fileName,
                                     image,
                                     m_modelMainWindow.pdfResolution(),
+                                    m_modelMainWindow.importCropping(),
                                     m_isErrorReportRegressionTest);
     if (pdfReturn == PDF_RETURN_CANCELED) {
 

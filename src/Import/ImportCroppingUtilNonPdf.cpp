@@ -5,26 +5,19 @@
  ******************************************************************************************************/
 
 #include "ImportCroppingUtilNonPdf.h"
-#include <QSettings>
-#include "Settings.h"
 
 ImportCroppingUtilNonPdf::ImportCroppingUtilNonPdf()
 {
 }
 
-bool ImportCroppingUtilNonPdf::applyImportCropping (bool isRegression) const
+bool ImportCroppingUtilNonPdf::applyImportCropping (bool isRegression,
+                                                    ImportCropping importCropping) const
 {
   bool cropping = true;
 
   if (!isRegression) {
 
-    QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-    settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
-
-    ImportCropping importCroppingInput = (ImportCropping) settings.value (SETTINGS_IMPORT_CROPPING,
-                                                                          QVariant (DEFAULT_IMPORT_CROPPING)).toInt();
-
-    cropping = (importCroppingInput == IMPORT_CROPPING_ALWAYS);
+    cropping = (importCropping == IMPORT_CROPPING_ALWAYS);
   }
 
   return cropping;

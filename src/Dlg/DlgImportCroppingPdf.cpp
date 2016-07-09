@@ -8,7 +8,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "PdfFrame.h"
+#include "PdfCropping.h"
 #include "poppler-qt5.h"
 #include <QApplication>
 #include <QGraphicsPixmapItem>
@@ -40,7 +40,7 @@ DlgImportCroppingPdf::DlgImportCroppingPdf(const Poppler::Document &document,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingPdf::DlgImportCroppingPdf";
 
-  setWindowTitle (tr ("PDF Frame"));
+  setWindowTitle (tr ("PDF Import Cropping"));
   setModal (true);
 
   QWidget *subPanel = new QWidget ();
@@ -107,14 +107,14 @@ void DlgImportCroppingPdf::createPreview (QGridLayout *layout,
 
   // More preview initialization
   initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
-  createPdfFrame ();
+  createPdfCropping ();
 }
 
-void DlgImportCroppingPdf::createPdfFrame ()
+void DlgImportCroppingPdf::createPdfCropping ()
 {
   // Create frame that shows what will be included, and what will be excluded, during the import
-  m_pdfFrame = new PdfFrame (*m_scenePreview,
-                             *m_viewPreview);
+  m_pdfCropping = new PdfCropping (*m_scenePreview,
+                                   *m_viewPreview);
 }
 
 void DlgImportCroppingPdf::createTimer ()
@@ -167,8 +167,8 @@ QImage DlgImportCroppingPdf::image () const
 {
   // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
   // portion is to be returned
-  ENGAUGE_ASSERT (m_pdfFrame != 0);
-  QRectF rectFramePixels = m_pdfFrame->frameRect ();
+  ENGAUGE_ASSERT (m_pdfCropping != 0);
+  QRectF rectFramePixels = m_pdfCropping->frameRect ();
 
   return m_image.copy (rectFramePixels.toRect ());
 }

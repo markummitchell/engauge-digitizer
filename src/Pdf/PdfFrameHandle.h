@@ -9,13 +9,13 @@
 
 #include <QGraphicsRectItem>
 
-class PdfFrame;
+class PdfCropping;
 class QGraphicsScene;
 class QGraphicsView;
 class QPointF;
 class QRectF;
 
-/// This class acts as a single handle for the PdfFrame class
+/// This class acts as a single handle for the PdfCropping class
 class PdfFrameHandle : public QGraphicsRectItem
 {
 public:
@@ -24,7 +24,7 @@ public:
                  QGraphicsView &view,
                  const QPointF &pointReference,
                  int orientationFlags,
-                 PdfFrame &pdfFrame,
+                 PdfCropping &pdfCropping,
                  int zValue);
 
   /// Intercept the drags and process them, which is the whole point of handles
@@ -39,8 +39,8 @@ public:
 private:
   PdfFrameHandle();
 
-  PdfFrame &m_pdfFrame;
-  int m_orientationFlags; // From PdfFrame constants
+  PdfCropping &m_pdfCropping;
+  int m_orientationFlags; // From PdfCropping constants
 
   bool m_disableEventsWhileMovingAutomatically;
   QGraphicsScene &m_scene;

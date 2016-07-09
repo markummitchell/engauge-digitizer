@@ -7,6 +7,7 @@
 #ifndef IMPORT_CROPPING_UTIL_NON_PDF_H
 #define IMPORT_CROPPING_UTIL_NON_PDF_H
 
+#include "ImportCropping.h"
 #include "ImportCroppingUtilBase.h"
 
 /// Import of non-pdf files
@@ -17,7 +18,8 @@ public:
   ImportCroppingUtilNonPdf();
 
   /// Skip cropping dialog during regression testing, otherwise crop if it is always turned on
-  bool applyImportCropping (bool isRegression) const;
+  bool applyImportCropping (bool isRegression,
+                            ImportCropping importCropping) const;
 
 };
 

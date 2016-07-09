@@ -773,12 +773,12 @@ pdf {
     HEADERS += src/Dlg/DlgImportCroppingPdf.h \
                src/Import/ImportCroppingUtilPdf.h \
                src/Pdf/Pdf.h \
-               src/Pdf/PdfFrame.h \
+               src/Pdf/PdfCropping.h \
                src/Pdf/PdfFrameHandle.h
     SOURCES += src/Dlg/DlgImportCroppingPdf.cpp \
                src/Import/ImportCroppingUtilPdf.cpp \
                src/Pdf/Pdf.cpp \
-               src/Pdf/PdfFrame.cpp \
+               src/Pdf/PdfCropping.cpp \
                src/Pdf/PdfFrameHandle.cpp
 
 } else {

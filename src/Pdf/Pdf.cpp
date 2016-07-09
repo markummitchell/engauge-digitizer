@@ -24,6 +24,7 @@ Pdf::Pdf ()
 PdfReturn Pdf::load (const QString &fileName,
                      QImage &image,
                      int resolution,
+                     ImportCropping importCropping,
                      bool isErrorReportRegressionTest) const
 {
   Document *document = 0;
@@ -31,6 +32,7 @@ PdfReturn Pdf::load (const QString &fileName,
   ImportCroppingUtilPdf importCroppingUtil;
   bool cropping = importCroppingUtil.applyImportCropping (isErrorReportRegressionTest,
                                                           fileName,
+                                                          importCropping,
                                                           document);
 
   PdfReturn rtn;

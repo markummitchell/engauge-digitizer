@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "PdfFrame.h"
+#include "PdfCropping.h"
 #include "PdfFrameHandle.h"
 #include <QBrush>
 #include <QGraphicsScene>
@@ -17,9 +17,9 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
                                 QGraphicsView &view,
                                 const QPointF &pointReference,
                                 int orientationFlags,
-                                PdfFrame &pdfFrame,
+                                PdfCropping &pdfCropping,
                                 int zValue) :
-  m_pdfFrame (pdfFrame),
+  m_pdfCropping (pdfCropping),
   m_orientationFlags (orientationFlags),
   m_disableEventsWhileMovingAutomatically (false),
   m_scene (scene),
@@ -38,7 +38,7 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
   // The solution is to have constant-size handles WITHOUT ItemIgnoresTransformations. This means resizing the window
   // also involves resizing the handles, but everything else is pretty easy
   //
-  // ItemIgnoresTransformations flag must agree with the QGraphicsRectItem used for the frame box by PdfFrame
+  // ItemIgnoresTransformations flag must agree with the QGraphicsRectItem used for the frame box by PdfCropping
   setFlags (QGraphicsItem::ItemIsMovable |
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemSendsScenePositionChanges);
@@ -53,18 +53,18 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
   // Add to scene
   scene.addItem (this);
 
-  QSize handleSize = m_pdfFrame.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
+  QSize handleSize = m_pdfCropping.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
 
   // Adjust positions of handles that are not at the top left so handles are laid out symmetrically
   QPointF pointPos = pointReference;
-  if ((orientationFlags && PdfFrame::PDF_FRAME_LEFT) != 0) {
+  if ((orientationFlags && PdfCropping::PDF_CROPPING_LEFT) != 0) {
     pointPos.setX (pointPos.x() - handleSize.width() / 2.0);
-  } else if ((orientationFlags && PdfFrame::PDF_FRAME_RIGHT) != 0) {
+  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_RIGHT) != 0) {
     pointPos.setX (pointPos.x() + handleSize.width() / 2.0);
   }
-  if ((orientationFlags && PdfFrame::PDF_FRAME_TOP) != 0) {
+  if ((orientationFlags && PdfCropping::PDF_CROPPING_TOP) != 0) {
     pointPos.setY (pointPos.y() - handleSize.height() / 2.0);
-  } else if ((orientationFlags && PdfFrame::PDF_FRAME_BOTTOM) != 0) {
+  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_BOTTOM) != 0) {
     pointPos.setY (pointPos.y() + handleSize.height() / 2.0);
   }
 
@@ -113,19 +113,19 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
     // to prevent an infinite loop
     if (!m_disableEventsWhileMovingAutomatically) {
 
-      bool left   = ((m_orientationFlags & PdfFrame::PDF_FRAME_LEFT  ) != 0);
-      bool right  = ((m_orientationFlags & PdfFrame::PDF_FRAME_RIGHT ) != 0);
-      bool top    = ((m_orientationFlags & PdfFrame::PDF_FRAME_TOP   ) != 0);
-      bool bottom = ((m_orientationFlags & PdfFrame::PDF_FRAME_BOTTOM) != 0);
+      bool left   = ((m_orientationFlags & PdfCropping::PDF_CROPPING_LEFT  ) != 0);
+      bool right  = ((m_orientationFlags & PdfCropping::PDF_CROPPING_RIGHT ) != 0);
+      bool top    = ((m_orientationFlags & PdfCropping::PDF_CROPPING_TOP   ) != 0);
+      bool bottom = ((m_orientationFlags & PdfCropping::PDF_CROPPING_BOTTOM) != 0);
 
       if (left && top) {
-        m_pdfFrame.moveTL (newPos, oldPos);
+        m_pdfCropping.moveTL (newPos, oldPos);
       } else if (right && top) {
-        m_pdfFrame.moveTR (newPos, oldPos);
+        m_pdfCropping.moveTR (newPos, oldPos);
       } else if (right && bottom) {
-        m_pdfFrame.moveBR (newPos, oldPos);
+        m_pdfCropping.moveBR (newPos, oldPos);
       } else if (left && bottom) {
-        m_pdfFrame.moveBL (newPos, oldPos);
+        m_pdfCropping.moveBL (newPos, oldPos);
       }
     }
   }

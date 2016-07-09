@@ -7,6 +7,8 @@
 #ifndef PDF_H
 #define PDF_H
 
+#include "ImportCropping.h"
+
 namespace Poppler {
   class Document;
 }
@@ -33,6 +35,7 @@ public:
   PdfReturn load (const QString &fileName,
                   QImage &image,
                   int resolution,
+                  ImportCropping importCropping,
                   bool isErrorReportRegressionTest) const;
 
 private:
