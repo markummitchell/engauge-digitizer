@@ -36,10 +36,11 @@ public:
                             const MainWindowModel &modelMainWindow);
 
 private slots:
-  void slotTitleBarFormat(bool);
+  void slotImportCropping (int index);
   void slotLocale (int index);
   void slotPdfResolution (const QString);
   void slotRecentFileClear ();
+  void slotTitleBarFormat(bool);
   void slotZoomControl (const QString);
   void slotZoomFactor (const QString);
 
@@ -55,6 +56,7 @@ private:
   QComboBox *m_cmbZoomFactor;
   QComboBox *m_cmbZoomControl;
   QComboBox *m_cmbLocale;
+  QComboBox *m_cmbImportCropping;
   QPushButton *m_btnRecentClear;
   QCheckBox *m_chkTitleBarFormat;
   QComboBox *m_cmbPdfResolution;

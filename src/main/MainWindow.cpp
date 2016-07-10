@@ -67,6 +67,7 @@
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
 #include "NetworkClient.h"
+#include "NonPdf.h"
 #ifdef ENGAUGE_PDF
 #include "Pdf.h"
 #endif // ENGAUGE_PDF
@@ -1427,6 +1428,7 @@ void MainWindow::fileImport (const QString &fileName,
     PdfReturn pdfReturn = pdf.load (fileName,
                                     image,
                                     m_modelMainWindow.pdfResolution(),
+                                    m_modelMainWindow.importCropping(),
                                     m_isErrorReportRegressionTest);
     if (pdfReturn == PDF_RETURN_CANCELED) {
 
@@ -1440,7 +1442,19 @@ void MainWindow::fileImport (const QString &fileName,
 #endif // ENGAUGE_PDF
 
   if (!loaded) {
-    loaded = image.load (fileName);
+    NonPdf nonPdf;
+    NonPdfReturn nonPdfReturn = nonPdf.load (fileName,
+                                             image,
+                                             m_modelMainWindow.importCropping(),
+                                             m_isErrorReportRegressionTest);
+    if (nonPdfReturn == NON_PDF_RETURN_CANCELED) {
+
+      // User canceled so exit immediately
+      return;
+
+    }
+
+    loaded = (nonPdfReturn == NON_PDF_RETURN_SUCCESS);
   }
 
   if (!loaded) {
@@ -2425,6 +2439,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                                 QVariant (MAIN_TITLE_BAR_FORMAT_PATH)).toInt());
   m_modelMainWindow.setPdfResolution (settings.value (SETTINGS_IMPORT_PDF_RESOLUTION,
                                                       QVariant (DEFAULT_IMPORT_PDF_RESOLUTION)).toInt ());
+  m_modelMainWindow.setImportCropping ((ImportCropping) settings.value (SETTINGS_IMPORT_CROPPING,
+                                                                        QVariant (DEFAULT_IMPORT_CROPPING)).toInt ());
 
   updateSettingsMainWindow();
 
@@ -2457,6 +2473,7 @@ void MainWindow::settingsWrite ()
 
   }
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());

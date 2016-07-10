@@ -147,6 +147,7 @@ HEADERS  += \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
     Dlg/DlgImportAdvanced.h \
+    Dlg/DlgImportCroppingNonPdf.h \
     Dlg/DlgRequiresTransform.h \
     Dlg/DlgSettingsAbstractBase.h \
     Dlg/DlgSettingsAxesChecker.h \
@@ -249,6 +250,9 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
+    Import/ImportCropping.h \
+    Import/ImportCroppingUtilBase.h \
+    Import/ImportCroppingUtilNonPdf.h \
     Line/LineStyle.h \
     Load/LoadFileInfo.h \
     Load/LoadImageFromUrl.h \
@@ -261,6 +265,9 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Network/NetworkClient.h \
+    NonPdf/NonPdf.h \
+    NonPdf/NonPdfCropping.h \
+    NonPdf/NonPdfFrameHandle.h \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Pdf/PdfResolution.h \
@@ -439,6 +446,7 @@ SOURCES += \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \
     Dlg/DlgImportAdvanced.cpp \
+    Dlg/DlgImportCroppingNonPdf.cpp \
     Dlg/DlgRequiresTransform.cpp \
     Dlg/DlgSettingsAbstractBase.cpp \
     Dlg/DlgSettingsAxesChecker.cpp \
@@ -532,6 +540,8 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
+    Import/ImportCroppingUtilBase.cpp \
+    Import/ImportCroppingUtilNonPdf.cpp \
     Line/LineStyle.cpp \
     Load/LoadFileInfo.cpp \
     Load/LoadImageFromUrl.cpp \
@@ -543,6 +553,9 @@ SOURCES += \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
     Network/NetworkClient.cpp \
+    NonPdf/NonPdf.cpp \
+    NonPdf/NonPdfCropping.cpp \
+    NonPdf/NonPdfFrameHandle.cpp \
     Ordinal/OrdinalGenerator.cpp \
     Pdf/PdfResolution.cpp \
     Point/Point.cpp \
@@ -634,6 +647,7 @@ INCLUDEPATH += Background \
                Grid \
                Help \
                img \
+               Import \
                include \
                Line \
                Load \
@@ -641,6 +655,7 @@ INCLUDEPATH += Background \
                main \
                Mime \
                Network \
+               NonPdf \
                Ordinal \
                Pdf \
                Plot \
@@ -721,13 +736,15 @@ pdf {
     DEFINES += "ENGAUGE_PDF"
     INCLUDEPATH += $$(POPPLER_INCLUDE)
     LIBS += -L$$(POPPLER_LIB) -lpoppler -lpoppler-qt5
-    HEADERS += Dlg/DlgPdfFrame.h \
+    HEADERS += Dlg/DlgImportCroppingPdf.h \
+               Import/ImportCroppingUtilPdf.h \
                Pdf/Pdf.h \
-               Pdf/PdfFrame.h \
+               Pdf/PdfCropping.h \
                Pdf/PdfFrameHandle.h
-    SOURCES += Dlg/DlgPdfFrame.cpp \
+    SOURCES += Dlg/DlgImportCroppingPdf.cpp \
+               Import/ImportCroppingUtilPdf.cpp \
                Pdf/Pdf.cpp \
-               Pdf/PdfFrame.cpp \
+               Pdf/PdfCropping.cpp \
                Pdf/PdfFrameHandle.cpp
 
 } else {

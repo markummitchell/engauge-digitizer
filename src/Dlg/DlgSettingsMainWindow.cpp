@@ -6,6 +6,8 @@
 
 #include "DlgSettingsMainWindow.h"
 #include "EngaugeAssert.h"
+#include "ImportCropping.h"
+#include "ImportCroppingUtilBase.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
@@ -109,6 +111,21 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
   layout->addWidget (m_cmbLocale, row++, 2);
 
+  QLabel *labelImportCropping = new QLabel (tr ("Import cropping:"));
+  layout->addWidget (labelImportCropping, row, 1);
+
+  m_cmbImportCropping = new QComboBox;
+  m_cmbImportCropping->setWhatsThis (tr ("Import Cropping\n\n"
+                                         "Enables or disables cropping of the imported image when importing. Cropping the image is useful "
+                                         "for removing unimportant information around a graph, but less useful when the graph already fills "
+                                         "the entire image."));
+  ImportCroppingUtilBase importCroppingUtil;
+  m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_NEVER), IMPORT_CROPPING_NEVER);
+  m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_MULTIPAGE_PDFS), IMPORT_CROPPING_MULTIPAGE_PDFS);
+  m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_ALWAYS), IMPORT_CROPPING_ALWAYS);
+  connect (m_cmbImportCropping, SIGNAL (currentIndexChanged (int)), this, SLOT (slotImportCropping (int)));
+  layout->addWidget (m_cmbImportCropping, row++, 2);
+
 #ifdef ENGAUGE_PDF
   QLabel *labelPdfResolution = new QLabel (tr ("Import PDF resolution (dots per inch):"));
   layout->addWidget (labelPdfResolution, row, 1);
@@ -190,6 +207,14 @@ void DlgSettingsMainWindow::load (CmdMediator & /* cmdMediator */)
   ENGAUGE_ASSERT (false);
 }
 
+void DlgSettingsMainWindow::slotImportCropping (int index)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotImportCropping";
+
+  m_modelMainWindowAfter->setImportCropping ((ImportCropping) m_cmbImportCropping->itemData (index).toInt ());
+  updateControls();
+}
+
 void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
                                                  const MainWindowModel &modelMainWindow)
 {
@@ -217,6 +242,8 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   QString locLabel = QLocaleToString (m_modelMainWindowAfter->locale());
   index = m_cmbLocale->findText (locLabel);
   m_cmbLocale->setCurrentIndex(index);
+  index = m_cmbImportCropping->findData (m_modelMainWindowAfter->importCropping());
+  m_cmbImportCropping->setCurrentIndex (index);
   m_chkTitleBarFormat->setChecked (m_modelMainWindowAfter->mainTitleBarFormat() == MAIN_TITLE_BAR_FORMAT_PATH);
   index = m_cmbPdfResolution->findData (m_modelMainWindowAfter->pdfResolution());
   m_cmbPdfResolution->setCurrentIndex(index);

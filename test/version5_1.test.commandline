@@ -1,1 +1,1 @@
--filecmdscript ../test/version5_1.test.xml
+-filecmdscript ../test/version5_1.test.xml -regression

@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "PdfCropping.h"
-#include "PdfFrameHandle.h"
+#include "NonPdfCropping.h"
+#include "NonPdfFrameHandle.h"
 #include <QBrush>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -13,13 +13,13 @@
 
 const double HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE = 30;
 
-PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
-                                QGraphicsView &view,
-                                const QPointF &pointReference,
-                                int orientationFlags,
-                                PdfCropping &pdfCropping,
-                                int zValue) :
-  m_pdfCropping (pdfCropping),
+NonPdfFrameHandle::NonPdfFrameHandle (QGraphicsScene &scene,
+                                      QGraphicsView &view,
+                                      const QPointF &pointReference,
+                                      int orientationFlags,
+                                      NonPdfCropping &nonPdfCropping,
+                                      int zValue) :
+  m_nonPdfCropping (nonPdfCropping),
   m_orientationFlags (orientationFlags),
   m_disableEventsWhileMovingAutomatically (false),
   m_scene (scene),
@@ -53,18 +53,18 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
   // Add to scene
   scene.addItem (this);
 
-  QSize handleSize = m_pdfCropping.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
+  QSize handleSize = m_nonPdfCropping.windowSize() / HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE;
 
   // Adjust positions of handles that are not at the top left so handles are laid out symmetrically
   QPointF pointPos = pointReference;
-  if ((orientationFlags && PdfCropping::PDF_CROPPING_LEFT) != 0) {
+  if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_LEFT) != 0) {
     pointPos.setX (pointPos.x() - handleSize.width() / 2.0);
-  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_RIGHT) != 0) {
+  } else if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_RIGHT) != 0) {
     pointPos.setX (pointPos.x() + handleSize.width() / 2.0);
   }
-  if ((orientationFlags && PdfCropping::PDF_CROPPING_TOP) != 0) {
+  if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_TOP) != 0) {
     pointPos.setY (pointPos.y() - handleSize.height() / 2.0);
-  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_BOTTOM) != 0) {
+  } else if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_BOTTOM) != 0) {
     pointPos.setY (pointPos.y() + handleSize.height() / 2.0);
   }
 
@@ -76,8 +76,8 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
                    handleSize));
 }
 
-QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
-                                     const QVariant &value)
+QVariant NonPdfFrameHandle::itemChange (GraphicsItemChange change,
+                                        const QVariant &value)
 {
   QVariant valueFiltered = value;
 
@@ -113,19 +113,19 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
     // to prevent an infinite loop
     if (!m_disableEventsWhileMovingAutomatically) {
 
-      bool left   = ((m_orientationFlags & PdfCropping::PDF_CROPPING_LEFT  ) != 0);
-      bool right  = ((m_orientationFlags & PdfCropping::PDF_CROPPING_RIGHT ) != 0);
-      bool top    = ((m_orientationFlags & PdfCropping::PDF_CROPPING_TOP   ) != 0);
-      bool bottom = ((m_orientationFlags & PdfCropping::PDF_CROPPING_BOTTOM) != 0);
+      bool left   = ((m_orientationFlags & NonPdfCropping::NON_PDF_CROPPING_LEFT  ) != 0);
+      bool right  = ((m_orientationFlags & NonPdfCropping::NON_PDF_CROPPING_RIGHT ) != 0);
+      bool top    = ((m_orientationFlags & NonPdfCropping::NON_PDF_CROPPING_TOP   ) != 0);
+      bool bottom = ((m_orientationFlags & NonPdfCropping::NON_PDF_CROPPING_BOTTOM) != 0);
 
       if (left && top) {
-        m_pdfCropping.moveTL (newPos, oldPos);
+        m_nonPdfCropping.moveTL (newPos, oldPos);
       } else if (right && top) {
-        m_pdfCropping.moveTR (newPos, oldPos);
+        m_nonPdfCropping.moveTR (newPos, oldPos);
       } else if (right && bottom) {
-        m_pdfCropping.moveBR (newPos, oldPos);
+        m_nonPdfCropping.moveBR (newPos, oldPos);
       } else if (left && bottom) {
-        m_pdfCropping.moveBL (newPos, oldPos);
+        m_nonPdfCropping.moveBL (newPos, oldPos);
       }
     }
   }
@@ -133,7 +133,7 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
   return QGraphicsItem::itemChange(change, valueFiltered);
 }
 
-void PdfFrameHandle::paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void NonPdfFrameHandle::paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
   // Temporarily remove the selected option
   QStyleOptionGraphicsItem scrubbed (*option);
@@ -141,7 +141,7 @@ void PdfFrameHandle::paint (QPainter *painter, const QStyleOptionGraphicsItem *o
   QGraphicsRectItem::paint (painter, &scrubbed, widget);
 }
 
-void PdfFrameHandle::setDisableEventsWhileMovingAutomatically (bool disable)
+void NonPdfFrameHandle::setDisableEventsWhileMovingAutomatically (bool disable)
 {
   m_disableEventsWhileMovingAutomatically = disable;
 }

@@ -5,8 +5,8 @@
  ******************************************************************************************************/
 
 #include "Logger.h"
-#include "PdfFrame.h"
-#include "PdfFrameHandle.h"
+#include "NonPdfCropping.h"
+#include "NonPdfFrameHandle.h"
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QRect>
@@ -16,14 +16,14 @@
 const int Z_BOX = 50; // Under box and over background image
 const int Z_HANDLE = 100; // Over box and background image
 
-PdfFrame::PdfFrame (QGraphicsScene &scene,
-                    ViewPreview &view) :
+NonPdfCropping::NonPdfCropping (QGraphicsScene &scene,
+                                ViewPreview &view) :
   m_view (view)
 {
   createWidgets (scene);
 }
 
-void PdfFrame::createWidgets(QGraphicsScene &scene)
+void NonPdfCropping::createWidgets(QGraphicsScene &scene)
 {
   const double MARGIN_PERCENT = 5.0;
   const int ZERO_WIDTH_IS_ALWAYS_VISIBLE = 0;
@@ -36,10 +36,10 @@ void PdfFrame::createWidgets(QGraphicsScene &scene)
              scene.sceneRect().width() - 2 * marginHor,
              scene.sceneRect().height() - 2 * marginVer);
 
-  m_handleTL     = new PdfFrameHandle (scene, m_view, box.topLeft()    , PDF_FRAME_LEFT   | PDF_FRAME_TOP    , *this, Z_HANDLE);
-  m_handleTR     = new PdfFrameHandle (scene, m_view, box.topRight()   , PDF_FRAME_RIGHT  | PDF_FRAME_TOP    , *this, Z_HANDLE);
-  m_handleBR     = new PdfFrameHandle (scene, m_view, box.bottomRight(), PDF_FRAME_RIGHT  | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
-  m_handleBL     = new PdfFrameHandle (scene, m_view, box.bottomLeft() , PDF_FRAME_LEFT   | PDF_FRAME_BOTTOM , *this, Z_HANDLE);
+  m_handleTL = new NonPdfFrameHandle (scene, m_view, box.topLeft()    , NON_PDF_CROPPING_LEFT   | NON_PDF_CROPPING_TOP    , *this, Z_HANDLE);
+  m_handleTR = new NonPdfFrameHandle (scene, m_view, box.topRight()   , NON_PDF_CROPPING_RIGHT  | NON_PDF_CROPPING_TOP    , *this, Z_HANDLE);
+  m_handleBR = new NonPdfFrameHandle (scene, m_view, box.bottomRight(), NON_PDF_CROPPING_RIGHT  | NON_PDF_CROPPING_BOTTOM , *this, Z_HANDLE);
+  m_handleBL = new NonPdfFrameHandle (scene, m_view, box.bottomLeft() , NON_PDF_CROPPING_LEFT   | NON_PDF_CROPPING_BOTTOM , *this, Z_HANDLE);
 
   m_box = new QGraphicsRectItem;
   m_box->setZValue (Z_BOX);
@@ -49,7 +49,7 @@ void PdfFrame::createWidgets(QGraphicsScene &scene)
   updateBox ();
 }
 
-void PdfFrame::disableEventsWhileMovingAutomatically ()
+void NonPdfCropping::disableEventsWhileMovingAutomatically ()
 {
   m_handleTL->setDisableEventsWhileMovingAutomatically (true);
   m_handleTR->setDisableEventsWhileMovingAutomatically (true);
@@ -57,7 +57,7 @@ void PdfFrame::disableEventsWhileMovingAutomatically ()
   m_handleBL->setDisableEventsWhileMovingAutomatically (true);
 }
 
-void PdfFrame::enableEventsWhileMovingAutomatically ()
+void NonPdfCropping::enableEventsWhileMovingAutomatically ()
 {
   m_handleTL->setDisableEventsWhileMovingAutomatically (false);
   m_handleTR->setDisableEventsWhileMovingAutomatically (false);
@@ -65,7 +65,7 @@ void PdfFrame::enableEventsWhileMovingAutomatically ()
   m_handleBL->setDisableEventsWhileMovingAutomatically (false);
 }
 
-QRectF PdfFrame::frameRect () const
+QRectF NonPdfCropping::frameRect () const
 {
   // The x(), y(), pos(), rect() and boundingRect() will return coordinates assuming origin at the initial position of
   // each handle. So to get the coordinates in the window reference frame it takes a two step process like
@@ -79,8 +79,8 @@ QRectF PdfFrame::frameRect () const
   return rectUnited;
 }
 
-void PdfFrame::moveBL (const QPointF &newPos,
-                       const QPointF &oldPos)
+void NonPdfCropping::moveBL (const QPointF &newPos,
+                             const QPointF &oldPos)
 {
   disableEventsWhileMovingAutomatically();
 
@@ -97,8 +97,8 @@ void PdfFrame::moveBL (const QPointF &newPos,
   updateBox();
 }
 
-void PdfFrame::moveBR (const QPointF &newPos,
-                       const QPointF &oldPos)
+void NonPdfCropping::moveBR (const QPointF &newPos,
+                             const QPointF &oldPos)
 {
   disableEventsWhileMovingAutomatically();
 
@@ -115,8 +115,8 @@ void PdfFrame::moveBR (const QPointF &newPos,
   updateBox();
 }
 
-void PdfFrame::moveTL (const QPointF &newPos,
-                       const QPointF &oldPos)
+void NonPdfCropping::moveTL (const QPointF &newPos,
+                             const QPointF &oldPos)
 {
   disableEventsWhileMovingAutomatically();
 
@@ -133,8 +133,8 @@ void PdfFrame::moveTL (const QPointF &newPos,
   updateBox();
 }
 
-void PdfFrame::moveTR (const QPointF &newPos,
-                       const QPointF &oldPos)
+void NonPdfCropping::moveTR (const QPointF &newPos,
+                             const QPointF &oldPos)
 {
   disableEventsWhileMovingAutomatically();
 
@@ -151,7 +151,7 @@ void PdfFrame::moveTR (const QPointF &newPos,
   updateBox();
 }
 
-void PdfFrame::updateBox ()
+void NonPdfCropping::updateBox ()
 {
   QRectF rectUnited = frameRect ();
 
@@ -162,7 +162,7 @@ void PdfFrame::updateBox ()
   m_box->setRect (rectUnited);
 }
 
-QSize PdfFrame::windowSize () const
+QSize NonPdfCropping::windowSize () const
 {
   return QSize (m_view.scene()->width(),
                 m_view.scene()->height());

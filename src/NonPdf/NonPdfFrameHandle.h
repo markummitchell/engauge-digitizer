@@ -4,28 +4,28 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef PDF_FRAME_HANDLE_H
-#define PDF_FRAME_HANDLE_H
+#ifndef NON_PDF_FRAME_HANDLE_H
+#define NON_PDF_FRAME_HANDLE_H
 
 #include <QGraphicsRectItem>
 
-class PdfCropping;
+class NonPdfCropping;
 class QGraphicsScene;
 class QGraphicsView;
 class QPointF;
 class QRectF;
 
-/// This class acts as a single handle for the PdfCropping class
-class PdfFrameHandle : public QGraphicsRectItem
+/// This class acts as a single handle for the NonPdfCropping class
+class NonPdfFrameHandle : public QGraphicsRectItem
 {
 public:
   /// Single constructor
-  PdfFrameHandle(QGraphicsScene &scene,
-                 QGraphicsView &view,
-                 const QPointF &pointReference,
-                 int orientationFlags,
-                 PdfCropping &pdfCropping,
-                 int zValue);
+  NonPdfFrameHandle(QGraphicsScene &scene,
+                    QGraphicsView &view,
+                    const QPointF &pointReference,
+                    int orientationFlags,
+                    NonPdfCropping &nonPdfCropping,
+                    int zValue);
 
   /// Intercept the drags and process them, which is the whole point of handles
   virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value);
@@ -37,9 +37,9 @@ public:
   void setDisableEventsWhileMovingAutomatically (bool disable);
 
 private:
-  PdfFrameHandle();
+  NonPdfFrameHandle();
 
-  PdfCropping &m_pdfCropping;
+  NonPdfCropping &m_nonPdfCropping;
   int m_orientationFlags; // From PdfCropping constants
 
   bool m_disableEventsWhileMovingAutomatically;
@@ -47,4 +47,4 @@ private:
   QGraphicsView &m_view;
 };
 
-#endif // PDF_FRAME_HANDLE_H
+#endif // NON_PDF_FRAME_HANDLE_H

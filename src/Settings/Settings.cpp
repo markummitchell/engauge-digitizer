@@ -57,8 +57,9 @@ const QString SETTINGS_GENERAL_EXTRA_PRECISION ("extraPrecision");
 const QString SETTINGS_GROUP_GENERAL ("GeneralEngauge"); // "General" group name is reserved for ungrouped settings
 
 // Import group
-const QString SETTINGS_IMPORT_PDF_RESOLUTION ("PdfResolution");
 const QString SETTINGS_GROUP_IMPORT ("Import");
+const QString SETTINGS_IMPORT_CROPPING ("Cropping");
+const QString SETTINGS_IMPORT_PDF_RESOLUTION ("PdfResolution");
 
 // Export group
 const QString SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED ("curveNamesNotExported");
@@ -75,6 +76,6 @@ const QString SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS ("pointsSelectionRelati
 const QString SETTINGS_EXPORT_X_LABEL ("xLabel");
 const QString SETTINGS_GROUP_EXPORT ("Export");
 
-// Pdf group
-const QString SETTINGS_PDF_POS ("pos");
-const QString SETTINGS_GROUP_PDF ("Pdf");
+// Dialogs for import cropping group
+const QString SETTINGS_GROUP_IMPORT_CROPPING ("ImportCropping");
+const QString SETTINGS_IMPORT_CROPPING_POS ("pos");
