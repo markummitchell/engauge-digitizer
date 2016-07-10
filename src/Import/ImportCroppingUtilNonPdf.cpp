@@ -13,7 +13,7 @@ ImportCroppingUtilNonPdf::ImportCroppingUtilNonPdf()
 bool ImportCroppingUtilNonPdf::applyImportCropping (bool isRegression,
                                                     ImportCropping importCropping) const
 {
-  bool cropping = true;
+  bool cropping = false;
 
   if (!isRegression) {
 

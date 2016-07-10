@@ -40,7 +40,7 @@ DlgImportCroppingPdf::DlgImportCroppingPdf(const Poppler::Document &document,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingPdf::DlgImportCroppingPdf";
 
-  setWindowTitle (tr ("PDF Import Cropping"));
+  setWindowTitle (tr ("PDF File Import Cropping"));
   setModal (true);
 
   QWidget *subPanel = new QWidget ();
@@ -85,6 +85,13 @@ void DlgImportCroppingPdf::createPageSpinner (QGridLayout *layout,
   connect (m_spinPage, SIGNAL (valueChanged (int)), this, SLOT (slotPage (int)));
 }
 
+void DlgImportCroppingPdf::createPdfCropping ()
+{
+  // Create frame that shows what will be included, and what will be excluded, during the import
+  m_pdfCropping = new PdfCropping (*m_scenePreview,
+                                   *m_viewPreview);
+}
+
 void DlgImportCroppingPdf::createPreview (QGridLayout *layout,
                                           int &row)
 {
@@ -108,13 +115,6 @@ void DlgImportCroppingPdf::createPreview (QGridLayout *layout,
   // More preview initialization
   initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
   createPdfCropping ();
-}
-
-void DlgImportCroppingPdf::createPdfCropping ()
-{
-  // Create frame that shows what will be included, and what will be excluded, during the import
-  m_pdfCropping = new PdfCropping (*m_scenePreview,
-                                   *m_viewPreview);
 }
 
 void DlgImportCroppingPdf::createTimer ()
@@ -208,19 +208,19 @@ void DlgImportCroppingPdf::saveGeometryToSettings()
 {
   // Store the settings for use by showEvent
   QSettings settings;
-  settings.beginGroup (SETTINGS_GROUP_PDF);
-  settings.setValue (SETTINGS_PDF_POS, saveGeometry ());
+  settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
+  settings.setValue (SETTINGS_IMPORT_CROPPING_POS, saveGeometry ());
   settings.endGroup();
 }
 
 void DlgImportCroppingPdf::showEvent (QShowEvent * /* event */)
 {
   QSettings settings;
-  settings.beginGroup (SETTINGS_GROUP_PDF);
-  if (settings.contains (SETTINGS_PDF_POS)) {
+  settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
+  if (settings.contains (SETTINGS_IMPORT_CROPPING_POS)) {
 
     // Restore the settings that were stored by the last call to saveGeometryToSettings
-    restoreGeometry (settings.value (SETTINGS_PDF_POS).toByteArray ());
+    restoreGeometry (settings.value (SETTINGS_IMPORT_CROPPING_POS).toByteArray ());
   }
 }
 

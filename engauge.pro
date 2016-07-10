@@ -283,6 +283,9 @@ HEADERS  += \
     src/Mime/MimePoints.h \
     src/util/mmsubs.h \
     src/Network/NetworkClient.h \
+    src/NonPdf/NonPdf.h \
+    src/NonPdf/NonPdfCropping.h \
+    src/NonPdf/NonPdfFrameHandle.h \
     src/Ordinal/OrdinalGenerator.h \
     src/Ordinal/OrdinalToGraphicsPoint.h \
     src/Pdf/PdfResolution.h \
@@ -568,6 +571,9 @@ SOURCES += \
     src/Mime/MimePoints.cpp \
     src/util/mmsubs.cpp \
     src/Network/NetworkClient.cpp \
+    src/NonPdf/NonPdf.cpp \
+    src/NonPdf/NonPdfCropping.cpp \
+    src/NonPdf/NonPdfFrameHandle.cpp \
     src/Ordinal/OrdinalGenerator.cpp \
     src/Pdf/PdfResolution.cpp \
     src/Point/Point.cpp \
@@ -697,6 +703,7 @@ INCLUDEPATH += src \
                src/main \
                src/Mime \
                src/Network \
+               src/NonPdf \
                src/Ordinal \
                src/Pdf \
                src/Plot \

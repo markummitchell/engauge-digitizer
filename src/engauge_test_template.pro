@@ -265,6 +265,9 @@ HEADERS  += \
     Mime/MimePoints.h \
     util/mmsubs.h \
     Network/NetworkClient.h \
+    NonPdf/NonPdf.h \
+    NonPdf/NonPdfCropping.h \
+    NonPdf/NonPdfFrameHandle.h \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Pdf/PdfResolution.h \
@@ -550,6 +553,9 @@ SOURCES += \
     Mime/MimePoints.cpp \
     util/mmsubs.cpp \
     Network/NetworkClient.cpp \
+    NonPdf/NonPdf.cpp \
+    NonPdf/NonPdfCropping.cpp \
+    NonPdf/NonPdfFrameHandle.cpp \
     Ordinal/OrdinalGenerator.cpp \
     Pdf/PdfResolution.cpp \
     Point/Point.cpp \
@@ -649,6 +655,7 @@ INCLUDEPATH += Background \
                main \
                Mime \
                Network \
+               NonPdf \
                Ordinal \
                Pdf \
                Plot \

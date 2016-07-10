@@ -67,6 +67,7 @@
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
 #include "NetworkClient.h"
+#include "NonPdf.h"
 #ifdef ENGAUGE_PDF
 #include "Pdf.h"
 #endif // ENGAUGE_PDF
@@ -1441,7 +1442,19 @@ void MainWindow::fileImport (const QString &fileName,
 #endif // ENGAUGE_PDF
 
   if (!loaded) {
-    loaded = image.load (fileName);
+    NonPdf nonPdf;
+    NonPdfReturn nonPdfReturn = nonPdf.load (fileName,
+                                             image,
+                                             m_modelMainWindow.importCropping(),
+                                             m_isErrorReportRegressionTest);
+    if (nonPdfReturn == NON_PDF_RETURN_CANCELED) {
+
+      // User canceled so exit immediately
+      return;
+
+    }
+
+    loaded = (nonPdfReturn == NON_PDF_RETURN_SUCCESS);
   }
 
   if (!loaded) {

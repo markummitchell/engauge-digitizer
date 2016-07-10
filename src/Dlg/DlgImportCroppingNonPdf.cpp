@@ -8,6 +8,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "NonPdfCropping.h"
 #include <QApplication>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
@@ -26,12 +27,13 @@ int DlgImportCroppingNonPdf::MINIMUM_PREVIEW_HEIGHT = 200;
 const int X_TOP_LEFT = 0, Y_TOP_LEFT = 0;
 const int WIDTH = -1, HEIGHT = -1; // Negative values give full page
 
-DlgImportCroppingNonPdf::DlgImportCroppingNonPdf() :
+DlgImportCroppingNonPdf::DlgImportCroppingNonPdf(const QString &fileName) :
+  m_fileName (fileName),
   m_pixmap (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::DlgImportCroppingNonPdf";
 
-  setWindowTitle (tr ("PDF Frame"));
+  setWindowTitle (tr ("Image File Import Cropping"));
   setModal (true);
 
   QWidget *subPanel = new QWidget ();
@@ -56,6 +58,13 @@ DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf";
 }
 
+void DlgImportCroppingNonPdf::createNonPdfCropping ()
+{
+  // Create frame that shows what will be included, and what will be excluded, during the import
+  m_nonPdfCropping = new NonPdfCropping (*m_scenePreview,
+                                         *m_viewPreview);
+}
+
 void DlgImportCroppingNonPdf::createPreview (QGridLayout *layout,
                                              int &row)
 {
@@ -78,6 +87,7 @@ void DlgImportCroppingNonPdf::createPreview (QGridLayout *layout,
 
   // More preview initialization
   initializeFrameGeometryAndPixmap (); // Before first call to updatePreview
+  createNonPdfCropping ();
 }
 
 void DlgImportCroppingNonPdf::finishPanel (QWidget *subPanel)
@@ -123,8 +133,10 @@ QImage DlgImportCroppingNonPdf::image () const
 {
   // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
   // portion is to be returned
+  ENGAUGE_ASSERT (m_nonPdfCropping != 0);
+  QRectF rectFramePixels = m_nonPdfCropping->frameRect ();
 
-  return m_image;
+  return m_image.copy (rectFramePixels.toRect ());
 }
 
 void DlgImportCroppingNonPdf::initializeFrameGeometryAndPixmap ()
@@ -140,6 +152,7 @@ void DlgImportCroppingNonPdf::initializeFrameGeometryAndPixmap ()
 QImage DlgImportCroppingNonPdf::loadImage () const
 {
   QImage image;
+  image.load (m_fileName);
 
   return image;
 }
@@ -148,19 +161,19 @@ void DlgImportCroppingNonPdf::saveGeometryToSettings()
 {
   // Store the settings for use by showEvent
   QSettings settings;
-  settings.beginGroup (SETTINGS_GROUP_PDF);
-  settings.setValue (SETTINGS_PDF_POS, saveGeometry ());
+  settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
+  settings.setValue (SETTINGS_IMPORT_CROPPING_POS, saveGeometry ());
   settings.endGroup();
 }
 
 void DlgImportCroppingNonPdf::showEvent (QShowEvent * /* event */)
 {
   QSettings settings;
-  settings.beginGroup (SETTINGS_GROUP_PDF);
-  if (settings.contains (SETTINGS_PDF_POS)) {
+  settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
+  if (settings.contains (SETTINGS_IMPORT_CROPPING_POS)) {
 
     // Restore the settings that were stored by the last call to saveGeometryToSettings
-    restoreGeometry (settings.value (SETTINGS_PDF_POS).toByteArray ());
+    restoreGeometry (settings.value (SETTINGS_IMPORT_CROPPING_POS).toByteArray ());
   }
 }
 

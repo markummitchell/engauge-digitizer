@@ -11,6 +11,7 @@
 #include <QImage>
 #include <QObject>
 
+class NonPdfCropping;
 class QGraphicsPixmapItem;
 class QGridLayout;
 class QGraphicsScene;
@@ -26,7 +27,7 @@ class DlgImportCroppingNonPdf : public QDialog
 
 public:
   /// Single constructor.
-  DlgImportCroppingNonPdf ();
+  DlgImportCroppingNonPdf (const QString &fileName);
   virtual ~DlgImportCroppingNonPdf ();
 
   /// Image that was selected. Value is null if loading failed
@@ -44,7 +45,9 @@ private slots:
   void slotOk ();
 
 private:
+  DlgImportCroppingNonPdf ();
 
+  void createNonPdfCropping();
   void createPreview (QGridLayout *layout,
                       int &row);
   void finishPanel (QWidget *subPanel);
@@ -63,11 +66,14 @@ private:
   QPushButton *m_btnCancel;
   QPushButton *m_btnOk;
 
+  const QString &m_fileName;
   QImage m_image; // Needed so it can be passed to external code when this dialog has finished successfully
   QGraphicsPixmapItem *m_pixmap; // Needed so old image can be removed just before new one gets added
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;
+
+  NonPdfCropping *m_nonPdfCropping;
 };
 
 #endif // DLG_IMPORT_CROPPING_NON_PDF_H

@@ -8,6 +8,7 @@
 #include "ImportCroppingUtilPdf.h"
 #include "Pdf.h"
 #include "poppler-qt5.h"
+#include <QApplication>
 #include <QImage>
 #include <QString>
 
@@ -36,6 +37,7 @@ PdfReturn Pdf::load (const QString &fileName,
                                                           document);
 
   PdfReturn rtn;
+  QApplication::setOverrideCursor(Qt::BusyCursor); // Since loading can be slow
   if (cropping) {
 
     rtn = loadWithCropping (document,
@@ -49,6 +51,7 @@ PdfReturn Pdf::load (const QString &fileName,
                                resolution);
 
   }
+  QApplication::restoreOverrideCursor();
 
   if (document != 0) {
     delete document;
@@ -63,7 +66,7 @@ PdfReturn Pdf::loadWithCropping (Document *document,
 {
   PdfReturn pdfReturn = PDF_RETURN_FAILED;
 
-  // Get page and extent
+  // Get page and extent. At this point it is always true that the image can be read
   DlgImportCroppingPdf dlg (*document,
                             resolution);
   if (dlg.exec() == QDialog::Accepted) {
