@@ -5,7 +5,7 @@ set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Q
 
 set ENGAUGE_CONFIG='pdf'
 set QTLIBEXT='.lib'
-set LOG4CPPDLLINK="https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip"
+set LOG4CPPDLLINK="https://dl.dropboxusercontent.com/s/gyqcfg2xpm4jjby/log4cpp_null.zip"
 set FFTWLINK="ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4-dll32.zip"
 set POPPLERLINK="https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip"
 
@@ -24,14 +24,15 @@ set APPVEYOR_BUILD_FOLDER="%SCRIPTDIR%\..\.."
 mkdir "%APPVEYOR_BUILD_FOLDER%"
 cd "%APPVEYOR_BUILD_FOLDER%"
 
-curl "%LOG4CPPDLLINK%" -o log4cpp-1.1.1.zip
+curl "%LOG4CPPDLLINK%" -o log4cpp_null.zip
 curl "%FFTWLINK%" -o fftw-3.3.4-dll32.zip
 curl "%POPPLERLINK%" -o poppler-qt5.zip
 
 rem Nominal Qt installation is QTDIR="C:\Qt\5.6\msvc2013" or QTDIR="C:\Qt\5.7\msvc2013"
 set PATH=%QTDIR%\bin;%PATH%
 
-7z x log4cpp-1.1.1.zip -aoa
+7z x log4cpp_null.zip -aoa
+
 mkdir fftw-3.3.4-dll32
 cd fftw-3.3.4-dll32
 
@@ -54,9 +55,10 @@ set FFTW_HOME="%APPVEYOR_BUILD_FOLDER%\fftw-3.3.4-dll32"
 set POPPLER_INCLUDE="%APPVEYOR_BUILD_FOLDER%\poppler-qt5\include\poppler\qt5"
 set POPPLER_LIB="%APPVEYOR_BUILD_FOLDER%\poppler-qt5"
 lrelease engauge.pro
-qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%"
+qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%" "DEFINES+=WIN_RELEASE"
 rem move Makefile Makefile.orig
 rem ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
+nmake clean
 nmake
 
 cd "%APPVEYOR_BUILD_FOLDER%"
@@ -67,7 +69,7 @@ for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I.dll "%RESULTDIR%"
 del /S *d.dll
 copy bin\engauge.exe "%RESULTDIR%"
 
-copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
+copy "%APPVEYOR_BUILD_FOLDER%\log4cpp_null\lib\log4cpp.dll" "%RESULTDIR%"
 
 copy fftw-3.3.4-dll32\lib\libfftw3-3.dll "%RESULTDIR%"
 copy "%APPVEYOR_BUILD_FOLDER%"\poppler-qt5\*.dll "%RESULTDIR%"
@@ -78,6 +80,8 @@ move engauge.qch "%RESULTDIR%"\documentation
 move engauge.qhc "%RESULTDIR%"\documentation
 cd ..
 7z a "%RESULTDIR%.7z" "%RESULTDIR%"
+
+copy "%APPVEYOR_BUILD_FOLDER%"/translations "%RESULTDIR%"
 
 echo ***creating msi
 cd "%SCRIPTDIR%"
