@@ -48,7 +48,6 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
-  setCursorForPoints ();
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
@@ -62,8 +61,6 @@ QCursor DigitizeStateSelect::cursor(CmdMediator * /* cmdMediator */) const
 void DigitizeStateSelect::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::end";
-
-  unsetCursorForPoints ();
 }
 
 void DigitizeStateSelect::handleCurveChange(CmdMediator * /* cmdMediator */)
@@ -207,37 +204,9 @@ QString DigitizeStateSelect::moveTextFromDeltaScreen (const QPointF &deltaScreen
   return moveText;
 }
 
-void DigitizeStateSelect::setCursorForPoints()
-{
-  QCursor cursor (Qt::OpenHandCursor);
-
-  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
-      item->setCursor (cursor);
-    }
-  }
-}
-
 QString DigitizeStateSelect::state() const
 {
   return "DigitizeStateSelect";
-}
-
-void DigitizeStateSelect::unsetCursorForPoints()
-{
-  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
-      item->unsetCursor ();
-    }
-  }
 }
 
 void DigitizeStateSelect::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

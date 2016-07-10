@@ -12,7 +12,6 @@
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include <QApplication>
 #include <QGraphicsScene>
 #include <QImage>
 #include <QMessageBox>
@@ -21,8 +20,7 @@
 #include "Version.h"
 
 DigitizeStateAbstractBase::DigitizeStateAbstractBase(DigitizeStateContext &context) :
-  m_context (context),
-  m_isOverrideCursor (false)
+  m_context (context)
 {
 }
 
@@ -112,33 +110,22 @@ void DigitizeStateAbstractBase::handleLeave (CmdMediator * /* cmdMediator */)
 void DigitizeStateAbstractBase::handleSetOverrideCursor (CmdMediator * /* cmdMediator */,
                                                          const QCursor &cursor)
 {
-  removeOverrideCursor ();
-
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleSetOverrideCursor setOverrideCursor="
                               << QtCursorToString (cursor.shape ()).toLatin1 ().data ();
 
-  QApplication::setOverrideCursor (cursor);
-  m_isOverrideCursor = true;
+  // Note that we are setting the QGraphicsView cursor and NOT the QApplication override cursor
+  m_context.view ().setCursor (cursor);
 }
 
 void DigitizeStateAbstractBase::removeOverrideCursor ()
 {
-  if (m_isOverrideCursor) {
-
-    LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleLeave restoreOverrideCursor="
-                                << QtCursorToString (QApplication::overrideCursor ()->shape ()).toLatin1 ().data ();
-
-    // Override cursor from last QDialog must be restored
-    QApplication::restoreOverrideCursor ();
-
-    m_isOverrideCursor = false;
-  }
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleLeave restoreOverrideCursor";
 }
 
 void DigitizeStateAbstractBase::setCursor(CmdMediator *cmdMediator)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAbstractBase::setCursor";
 
-  removeOverrideCursor ();
-  context().view().setCursor (cursor (cmdMediator));
+  // Note that we are setting the QGraphicsView cursor and NOT the QApplication override cursor
+  m_context.view ().setCursor (cursor (cmdMediator));
 }

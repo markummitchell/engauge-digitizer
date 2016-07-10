@@ -10,6 +10,12 @@
 #include "DigitizeStateAbstractBase.h"
 
 /// Digitizing state for selecting one or more Points in the Document.
+///
+/// Originally this class set the cursor for each QGraphicsItem at the beginning of the state, but that
+/// triggered Qt bug 4190 which has the description 'If you have set the cursor for some QGraphicsItems
+/// you can no longer change the cursor for the view in for example a mouseReleaseEvent'. In turn, that
+/// lead to Engauge issue #155. Unfortunately, this means the user no longer has need feedback that suggests
+/// the user can do something with the QGraphicsItems.
 class DigitizeStateSelect : public DigitizeStateAbstractBase
 {
 public:
@@ -43,8 +49,6 @@ private:
   void keyPressArrow (CmdMediator *cmdMediator,
                       Qt::Key key);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
-  void setCursorForPoints();
-  void unsetCursorForPoints();
   double zoomedToUnzoomedScreenX () const;
   double zoomedToUnzoomedScreenY () const;
 

@@ -112,7 +112,6 @@ private:
 
   DigitizeStateContext &m_context;
 
-  bool m_isOverrideCursor; // Checking QApplication::overrideCursor()==0 is unreliable so this tracks the override cursor state
 };
 
 #endif // DIGITIZE_STATE_ABSTRACT_BASE_H

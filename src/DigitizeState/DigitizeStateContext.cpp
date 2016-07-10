@@ -19,7 +19,6 @@
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include <QApplication>
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QGraphicsView>
