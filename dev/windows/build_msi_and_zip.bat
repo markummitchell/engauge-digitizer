@@ -5,28 +5,36 @@ set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Q
 
 set ENGAUGE_CONFIG='pdf'
 set QTLIBEXT='.lib'
-set LOG4CPPDLLINK='https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
+set LOG4CPPDLLINK="https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip"
+set FFTWLINK="ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4-dll32.zip"
+set POPPLERLINK="https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip"
 
 set SCRIPTDIR=%cd%
 
 rem Double-double quotes are needed in next line if the directory has a space
 set RESULTDIR=""%SCRIPTDIR%\Engauge Digitizer""
 
+rem Next step removes stale files like engauge.log from the release
+if exist "%RESULTDIR%" del /Q /F "%RESULTDIR%" 2>nul
 mkdir "%RESULTDIR%"
 
 rem Directory containing engauge.pro
 set APPVEYOR_BUILD_FOLDER="%SCRIPTDIR%\..\.."
 
+mkdir "%APPVEYOR_BUILD_FOLDER%"
+cd "%APPVEYOR_BUILD_FOLDER%"
+
+curl "%LOG4CPPDLLINK%" -o log4cpp-1.1.1.zip
+curl "%FFTWLINK%" -o fftw-3.3.4-dll32.zip
+curl "%POPPLERLINK%" -o poppler-qt5.zip
+
 rem Nominal Qt installation is QTDIR="C:\Qt\5.6\msvc2013" or QTDIR="C:\Qt\5.7\msvc2013"
 set PATH=%QTDIR%\bin;%PATH%
 
-mkdir "%APPVEYOR_BUILD_FOLDER%"
-cd "%APPVEYOR_BUILD_FOLDER%"
-curl "%LOG4CPPDLLINK%" -o log4cpp-1.1.1.zip
 7z x log4cpp-1.1.1.zip -aoa
 mkdir fftw-3.3.4-dll32
 cd fftw-3.3.4-dll32
-curl 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4-dll32.zip' -o fftw-3.3.4-dll32.zip
+
 7z x fftw-3.3.4-dll32.zip -aoa
 lib /def:libfftw3-3.def
 lib /def:libfftw3f-3.def
@@ -38,7 +46,7 @@ move *dll lib
 move *def lib
 move *.lib lib
 cd "%APPVEYOR_BUILD_FOLDER%"
-curl 'https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip' -o poppler-qt5.zip
+
 7z x poppler-qt5.zip -aoa
 
 cd "%APPVEYOR_BUILD_FOLDER%"
