@@ -8,6 +8,7 @@
 #include "GraphicsPoint.h"
 #include "GraphicsPointEllipse.h"
 #include "Logger.h"
+#include <QColor>
 #include <QGraphicsScene>
 #include "QtToString.h"
 
@@ -33,6 +34,18 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
 
   return QGraphicsEllipseItem::itemChange(change,
                                           value);
+}
+
+void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
+{
+  // Highlighted
+  setOpacity(HIGHLIGHT_OPACITY);
+}
+
+void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
+{
+  // Unhighlighted
+  setOpacity(1.0);
 }
 
 void GraphicsPointEllipse::setRadius(int radius)

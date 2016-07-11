@@ -46,9 +46,11 @@ public:
 private:
   DigitizeStateSelect();
 
+  void addHoverHighlighting();
   void keyPressArrow (CmdMediator *cmdMediator,
                       Qt::Key key);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
+  void removeHoverHighlighting();
   double zoomedToUnzoomedScreenX () const;
   double zoomedToUnzoomedScreenY () const;
 

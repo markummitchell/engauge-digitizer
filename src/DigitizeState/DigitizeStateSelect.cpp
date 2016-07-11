@@ -40,6 +40,21 @@ QString DigitizeStateSelect::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
+void DigitizeStateSelect::addHoverHighlighting()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::addHoverHighlighting";
+
+  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin (); itr != items.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
+       item->setAcceptHoverEvents(true);
+    }
+  }
+}
+
 void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
                                  DigitizeState /* previousState */)
 {
@@ -48,6 +63,7 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
+  addHoverHighlighting();
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
@@ -61,6 +77,8 @@ QCursor DigitizeStateSelect::cursor(CmdMediator * /* cmdMediator */) const
 void DigitizeStateSelect::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::end";
+
+  removeHoverHighlighting();
 }
 
 void DigitizeStateSelect::handleCurveChange(CmdMediator * /* cmdMediator */)
@@ -202,6 +220,21 @@ QString DigitizeStateSelect::moveTextFromDeltaScreen (const QPointF &deltaScreen
   }
 
   return moveText;
+}
+
+void DigitizeStateSelect::removeHoverHighlighting()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::removeHoverHighlighting";
+
+  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin (); itr != items.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
+       item->setAcceptHoverEvents(false);
+    }
+  }
 }
 
 QString DigitizeStateSelect::state() const

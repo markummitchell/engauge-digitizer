@@ -12,6 +12,8 @@
 #include <QColor>
 #include <QPointF>
 
+const double HIGHLIGHT_OPACITY = 0.3; // 0=transparent to 1=opaque
+
 class CurveStyle;
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;

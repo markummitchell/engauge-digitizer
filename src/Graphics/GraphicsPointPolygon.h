@@ -23,6 +23,12 @@ public:
   /// Intercept moves by dragging so moved items can be identified. This replaces unreliable hit tests.
   QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
+  /// Accept hover so point can be highlighted when cursor is over it as a guide to user
+  virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+
+  /// Unhighlight this point
+  virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+
   /// Update the radius
   void setRadius(int radius);
 

@@ -36,6 +36,18 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
                                           value);
 }
 
+void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
+{
+  // Highlighted
+  setOpacity(HIGHLIGHT_OPACITY);
+}
+
+void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
+{
+  // Unhighlighted
+  setOpacity(1.0);
+}
+
 void GraphicsPointPolygon::setRadius(int radius)
 {
   // Resize assuming symmetry about the origin, and an aspect ratio of 1:1 (so x and y scales are the same)
