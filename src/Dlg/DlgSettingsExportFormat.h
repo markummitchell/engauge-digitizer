@@ -40,6 +40,7 @@ public:
 
 private slots:
   void slotDelimitersCommas();
+  void slotDelimitersSemicolons();
   void slotDelimitersSpaces();
   void slotDelimitersTabs();
   void slotExclude();
@@ -115,6 +116,7 @@ private:
   QRadioButton *m_btnRelationsPointsRaw;
 
   QRadioButton *m_btnDelimitersCommas;
+  QRadioButton *m_btnDelimitersSemicolons;
   QRadioButton *m_btnDelimitersSpaces;
   QRadioButton *m_btnDelimitersTabs;
   QCheckBox *m_chkOverrideCsvTsv;

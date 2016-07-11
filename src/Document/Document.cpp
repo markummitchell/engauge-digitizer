@@ -43,6 +43,7 @@ const int NOMINAL_COORD_SYSTEM_COUNT = 1;
 const int VERSION_6 = 6;
 const int VERSION_7 = 7;
 const int VERSION_8 = 8;
+const int VERSION_9 = 9;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -105,6 +106,7 @@ Document::Document (const QString &fileName) :
 
           case VERSION_7:
           case VERSION_8:
+          case VERSION_9:
             loadVersions7AndUp (file);
             break;
 

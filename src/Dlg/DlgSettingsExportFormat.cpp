@@ -129,6 +129,11 @@ void DlgSettingsExportFormat::createDelimiters (QHBoxLayout *layoutMisc)
   layoutDelimiters->addWidget (m_btnDelimitersTabs);
   connect (m_btnDelimitersTabs, SIGNAL (released ()), this, SLOT (slotDelimitersTabs()));
 
+  m_btnDelimitersSemicolons = new QRadioButton (exportDelimiterToString (EXPORT_DELIMITER_SEMICOLON));
+  m_btnDelimitersSemicolons->setWhatsThis (tr ("Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files."));
+  layoutDelimiters->addWidget (m_btnDelimitersSemicolons);
+  connect (m_btnDelimitersSemicolons, SIGNAL (released ()), this, SLOT (slotDelimitersSemicolons()));
+
   m_chkOverrideCsvTsv = new QCheckBox (tr ("Override in CSV/TSV files"));
   m_chkOverrideCsvTsv->setWhatsThis (tr ("Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs "
                                          "respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting "
@@ -557,6 +562,7 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnDelimitersCommas->setChecked (delimiter == EXPORT_DELIMITER_COMMA);
   m_btnDelimitersSpaces->setChecked (delimiter == EXPORT_DELIMITER_SPACE);
   m_btnDelimitersTabs->setChecked (delimiter == EXPORT_DELIMITER_TAB);
+  m_btnDelimitersSemicolons->setChecked (delimiter == EXPORT_DELIMITER_SEMICOLON);
 
   m_chkOverrideCsvTsv->setChecked (m_modelExportAfter->overrideCsvTsv());
 
@@ -590,6 +596,15 @@ void DlgSettingsExportFormat::slotDelimitersCommas()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotDelimitersCommas";
 
   m_modelExportAfter->setDelimiter(EXPORT_DELIMITER_COMMA);
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsExportFormat::slotDelimitersSemicolons()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotDelimitersSemicolons";
+
+  m_modelExportAfter->setDelimiter(EXPORT_DELIMITER_SEMICOLON);
   updateControls();
   updatePreview();
 }

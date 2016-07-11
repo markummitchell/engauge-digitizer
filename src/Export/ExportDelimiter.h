@@ -10,11 +10,12 @@
 #include <QString>
 
 /// Delimiter values that may or may not be overridden by DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV
-/// for CSV and TSV files
+/// for CSV and TSV files. EXPORT_DELIMITER_SEMICOLON is not in alphabetical order since it was added after the code was released
 enum ExportDelimiter {
   EXPORT_DELIMITER_COMMA,
   EXPORT_DELIMITER_SPACE,
-  EXPORT_DELIMITER_TAB
+  EXPORT_DELIMITER_TAB,
+  EXPORT_DELIMITER_SEMICOLON
 };
 
 extern QString exportDelimiterToString (ExportDelimiter exportDelimiter); // Text appearing in logging/debugging

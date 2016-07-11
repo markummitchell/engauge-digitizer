@@ -13,6 +13,9 @@ QString exportDelimiterToString (ExportDelimiter exportDelimiter)
     case EXPORT_DELIMITER_COMMA:
       return QObject::tr ("Commas");
 
+    case EXPORT_DELIMITER_SEMICOLON:
+      return QObject::tr ("Semicolons");
+
     case EXPORT_DELIMITER_SPACE:
       return QObject::tr ("Spaces");
 
@@ -34,6 +37,9 @@ QString exportDelimiterToText (ExportDelimiter exportDelimiter,
       } else {
         return ",";
       }
+
+    case EXPORT_DELIMITER_SEMICOLON:
+      return ";";
 
     case EXPORT_DELIMITER_SPACE:
       return " ";
