@@ -595,11 +595,11 @@ void DlgSettingsGridDisplay::updatePreview ()
   if (textItemsAreValid ()) {
 
     GridLineFactory factory (*m_scenePreview,
-                             cmdMediator ().document ().modelCoords(),
-                             mainWindow ().transformation());
+                             cmdMediator ().document ().modelCoords());
 
     factory.createGridLinesForEvenlySpacedGrid (*m_modelGridDisplayAfter,
                                                 mainWindow ().modelMainWindow(),
+                                                mainWindow ().transformation(),
                                                 m_gridLines);
   }
 }

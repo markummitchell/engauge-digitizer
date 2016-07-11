@@ -29,10 +29,20 @@ Transformation::Transformation() :
 {
 }
 
+Transformation::Transformation (const Transformation &other) :
+  m_transformIsDefined (other.transformIsDefined()),
+  m_transform (other.transformMatrix())
+{
+  setModelCoords (other.modelCoords(),
+                  other.modelMainWindow());
+}
+
 Transformation &Transformation::operator=(const Transformation &other)
 {
   m_transformIsDefined = other.transformIsDefined();
   m_transform = other.transformMatrix ();
+  setModelCoords (other.modelCoords(),
+                  other.modelMainWindow());
 
   return *this;
 }
@@ -242,6 +252,11 @@ double Transformation::logToLinearRadius (double r,
 DocumentModelCoords Transformation::modelCoords() const
 {
   return m_modelCoords;
+}
+
+MainWindowModel Transformation::modelMainWindow() const
+{
+  return m_modelMainWindow;
 }
 
 ostringstream &operator<<(ostringstream &strOuter,

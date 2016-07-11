@@ -32,34 +32,28 @@ const double DEGREES_TO_RADIANS = PI / 180.0;
 const double RADIANS_TO_TICS = 5760 / TWO_PI;
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
-                                 const DocumentModelCoords &modelCoords,
-                                 const Transformation &transformation) :
+                                 const DocumentModelCoords &modelCoords) :
   m_scene (scene),
   m_pointRadius (0.0),
   m_modelCoords (modelCoords),
-  m_transformation (transformation),
   m_isChecker (false)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
-                               << " transformation=" << transformation;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::GridLineFactory";
 }
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
                                  int pointRadius,
                                  const QList<Point> &pointsToIsolate,
-                                 const DocumentModelCoords &modelCoords,
-                                 const Transformation &transformation) :
+                                 const DocumentModelCoords &modelCoords) :
   m_scene (scene),
   m_pointRadius (pointRadius),
   m_pointsToIsolate (pointsToIsolate),
   m_modelCoords (modelCoords),
-  m_transformation (transformation),
   m_isChecker (true)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::GridLineFactory"
                                << " pointRadius=" << pointRadius
-                               << " pointsToIsolate=" << pointsToIsolate.count()
-                               << " transformation=" << transformation;
+                               << " pointsToIsolate=" << pointsToIsolate.count();
 }
 
 void GridLineFactory::bindItemToScene(QGraphicsItem *item) const
@@ -78,7 +72,8 @@ void GridLineFactory::bindItemToScene(QGraphicsItem *item) const
 GridLine *GridLineFactory::createGridLine (double xFrom,
                                            double yFrom,
                                            double xTo,
-                                           double yTo)
+                                           double yTo,
+                                           const Transformation &transformation)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::createGridLine"
                                << " xFrom=" << xFrom
@@ -120,8 +115,8 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
     }
 
     QPointF pointScreen;
-    m_transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
-                                                pointScreen);
+    transformation.transformRawGraphToScreen (QPointF (xGraph, yGraph),
+                                              pointScreen);
 
     double distanceToNearestPoint = minScreenDistanceFromPoints (pointScreen);
     if ((distanceToNearestPoint < m_pointRadius) ||
@@ -135,6 +130,7 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
                               pointScreen,
                               yFrom,
                               yTo,
+                              transformation,
                               *gridLine);
         stateSegmentIsActive = false;
 
@@ -157,12 +153,13 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
 
 void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
                                                           const MainWindowModel &modelMainWindow,
+                                                          const Transformation &transformation,
                                                           GridLines &gridLines)
 {
   // At a minimum the transformation must be defined. Also, there is a brief interval between the definition of
   // the transformation and the initialization of modelGridDisplay (at which point this method gets called again) and
   // we do not want to create grid lines during that brief interval
-  if (m_transformation.transformIsDefined() &&
+  if (transformation.transformIsDefined() &&
       modelGridDisplay.stable()) {
 
     double startX = modelGridDisplay.startX ();
@@ -193,7 +190,7 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
       bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
       for (double x = startX; x <= stopX; (isLinearX ? x += stepX : x *= stepX)) {
 
-        GridLine *gridLine = createGridLine (x, startY, x, stopY);
+        GridLine *gridLine = createGridLine (x, startY, x, stopY, transformation);
         gridLine->setPen (pen);
         gridLines.add (gridLine);
       }
@@ -201,7 +198,7 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
       bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
       for (double y = startY; y <= stopY; (isLinearY ? y += stepY : y *= stepY)) {
 
-        GridLine *gridLine = createGridLine (startX, y, stopX, y);
+        GridLine *gridLine = createGridLine (startX, y, stopX, y, transformation);
         gridLine->setPen (pen);
         gridLines.add (gridLine);
       }
@@ -331,6 +328,7 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
                                             const QPointF &posEndScreen,
                                             double yFrom,
                                             double yTo,
+                                            const Transformation &transformation,
                                             GridLine &gridLine) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GridLineFactory::finishActiveGridLine"
@@ -346,14 +344,14 @@ void GridLineFactory::finishActiveGridLine (const QPointF &posStartScreen,
     // Linear cartesian radius
     double radiusLinearCartesian = yFrom;
     if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      radiusLinearCartesian = m_transformation.logToLinearRadius(yFrom,
-                                                                 m_modelCoords.originRadius());
+      radiusLinearCartesian = transformation.logToLinearRadius(yFrom,
+                                                               m_modelCoords.originRadius());
     } else {
       radiusLinearCartesian -= m_modelCoords.originRadius();
     }
 
     // Draw along an arc since this is a side of constant radius, and we have polar coordinates
-    item = ellipseItem (m_transformation,
+    item = ellipseItem (transformation,
                         radiusLinearCartesian,
                         posStartScreen,
                         posEndScreen);

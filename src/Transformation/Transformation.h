@@ -36,6 +36,9 @@ public:
   /// Default constructor. This is marked as undefined until the proper number of axis points are added
   Transformation();
 
+  /// Copy constructor
+  Transformation (const Transformation &other);
+
   /// Assignment operator.
   Transformation &operator=(const Transformation &other);
 
@@ -81,6 +84,9 @@ public:
 
   /// Get method for DocumentModelCoords
   DocumentModelCoords modelCoords() const;
+
+  /// Get method for MainWindowModel
+  MainWindowModel modelMainWindow() const;
 
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
   void printStream (QString indentation,

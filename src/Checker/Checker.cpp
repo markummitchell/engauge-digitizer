@@ -227,12 +227,11 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   GridLineFactory factory (m_scene,
                            pointRadius,
                            points,
-                           modelCoords,
-                           transformation);
-  m_gridLines.add (factory.createGridLine (xFrom, yFrom, xFrom, yTo  ));
-  m_gridLines.add (factory.createGridLine (xFrom, yTo  , xTo  , yTo  ));
-  m_gridLines.add (factory.createGridLine (xTo  , yTo  , xTo  , yFrom));
-  m_gridLines.add (factory.createGridLine (xTo  , yFrom, xFrom, yFrom));
+                           modelCoords);
+  m_gridLines.add (factory.createGridLine (xFrom, yFrom, xFrom, yTo  , transformation));
+  m_gridLines.add (factory.createGridLine (xFrom, yTo  , xTo  , yTo  , transformation));
+  m_gridLines.add (factory.createGridLine (xTo  , yTo  , xTo  , yFrom, transformation));
+  m_gridLines.add (factory.createGridLine (xTo  , yFrom, xFrom, yFrom, transformation));
 
   updateModelAxesChecker (modelAxesChecker);
 }

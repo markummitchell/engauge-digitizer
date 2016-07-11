@@ -4171,10 +4171,10 @@ void MainWindow::updateGridLines ()
 
   // Create new grid lines
   GridLineFactory factory (*m_scene,
-                           m_cmdMediator->document().modelCoords(),
-                           m_transformation);
+                           m_cmdMediator->document().modelCoords());
   factory.createGridLinesForEvenlySpacedGrid (m_cmdMediator->document().modelGridDisplay(),
                                               m_modelMainWindow,
+                                              m_transformation,
                                               m_gridLines);
 
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
