@@ -95,6 +95,7 @@ public:
              const QString &fileCmdScriptFile,
              bool isRegressionTest,
              bool isGnuplot,
+             bool isReset,
              QStringList loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
@@ -394,7 +395,7 @@ private:
   void setCurrentPathFromFile (const QString &fileName);
   void setPixmap (const QString &curveSelected,
                   const QPixmap &pixmap);
-  void settingsRead ();
+  void settingsRead (bool isReset);
   void settingsReadEnvironment (QSettings &settings);
   void settingsReadMainWindow (QSettings &settings);
   void settingsWrite ();

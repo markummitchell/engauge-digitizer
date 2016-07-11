@@ -126,6 +126,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        const QString &fileCmdScriptFile,
                        bool isRegressionTest,
                        bool isGnuplot,
+                       bool isReset,
                        QStringList loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
@@ -181,7 +182,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createZoomMap ();
   updateControls ();
 
-  settingsRead (); // This changes the current directory when not regression testing
+  settingsRead (isReset); // This changes the current directory when not regression testing
   setCurrentFile ("");
   setUnifiedTitleAndToolBarOnMac(true);
 
@@ -2313,9 +2314,14 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        curveSelected);
 }
 
-void MainWindow::settingsRead ()
+void MainWindow::settingsRead (bool isReset)
 {
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+
+  if (isReset) {
+    // Delete all settings. Default values are specified, later, for each settings as it is loaded
+    settings.clear ();
+  }
 
   settingsReadEnvironment (settings);
   settingsReadMainWindow (settings);

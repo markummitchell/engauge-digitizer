@@ -25,6 +25,7 @@ const QString CMD_FILE_CMD_SCRIPT ("filecmdscript");
 const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
 const QString CMD_REGRESSION ("regression");
+const QString CMD_RESET ("reset");
 const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
 const QString DASH_ERROR_REPORT ("-" + CMD_ERROR_REPORT);
@@ -32,6 +33,7 @@ const QString DASH_FILE_CMD_SCRIPT ("-" + CMD_FILE_CMD_SCRIPT);
 const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
+const QString DASH_RESET ("-" + CMD_RESET);
 const QString ENGAUGE_LOG_FILE ("engauge.log");
 
 // Prototypes
@@ -42,6 +44,7 @@ bool engaugeLogFilenameAttempt (const QString &path,
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
                    bool &isErrorReportRegressionTest,
@@ -105,12 +108,13 @@ int main(int argc, char *argv[])
   TranslatorContainer translatorContainer (app); // Must exist until execution terminates
 
   // Command line
-  bool isDebug, isGnuplot, isErrorReportRegressionTest;
+  bool isDebug, isReset, isGnuplot, isErrorReportRegressionTest;
   QString errorReportFile, fileCmdScriptFile;
   QStringList loadStartupFiles;
   parseCmdLine (argc,
                 argv,
                 isDebug,
+                isReset,
                 errorReportFile,
                 fileCmdScriptFile,
                 isErrorReportRegressionTest,
@@ -128,6 +132,7 @@ int main(int argc, char *argv[])
                 fileCmdScriptFile,
                 isErrorReportRegressionTest,
                 isGnuplot,
+                isReset,
                 loadStartupFiles);
   w.show();
 
@@ -138,6 +143,7 @@ int main(int argc, char *argv[])
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
                    bool &isErrorReportRegressionTest,
@@ -153,6 +159,7 @@ void parseCmdLine (int argc,
 
   // Defaults
   isDebug = false;
+  isReset = false;
   errorReportFile = "";
   fileCmdScriptFile = "";
   isErrorReportRegressionTest = false;
@@ -180,6 +187,8 @@ void parseCmdLine (int argc,
       showUsage = true; // User requested help
     } else if (strcmp (argv [i], DASH_REGRESSION.toLatin1().data()) == 0) {
       isErrorReportRegressionTest = true;
+    } else if (strcmp (argv [i], DASH_RESET.toLatin1().data()) == 0) {
+      isReset = true;
     } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
       showUsage = true; // User entered an unrecognized token
     } else {
@@ -203,6 +212,7 @@ void parseCmdLine (int argc,
          << "[" << DASH_GNUPLOT.toLatin1().data() << "] "
          << "[" << DASH_HELP.toLatin1().data() << "] "
          << "[" << DASH_REGRESSION.toLatin1().data() << "] "
+         << "[" << DASH_RESET.toLatin1().data () << "] "
          << "[<load_file1>] [<load_file2>] ..." << endl
          << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data() << endl
@@ -216,6 +226,8 @@ void parseCmdLine (int argc,
                  << QObject::tr ("Show this help information").toLatin1().data() << endl
          << "  " << DASH_REGRESSION.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("Executes the error report file or file command script. Used for regression testing").toLatin1().data() << endl
+         << "  " << DASH_RESET.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Removes all stored settings, including window positions. Used when windows start up offscreen").toLatin1().data() << endl
          << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data() << endl;
 
