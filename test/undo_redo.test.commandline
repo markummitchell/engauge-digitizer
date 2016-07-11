@@ -1,1 +1,1 @@
--errorreport ../test/undo_redo.xml -regression
+-errorreport ../test/undo_redo.xml -regression -reset

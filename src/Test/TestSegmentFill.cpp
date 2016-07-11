@@ -34,6 +34,7 @@ void TestSegmentFill::initTestCase ()
   const QString NO_REGRESSION_OPEN_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool NO_REGRESSION_IMPORT = false;
+  const bool NO_RESET = false;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -45,6 +46,7 @@ void TestSegmentFill::initTestCase ()
                 NO_REGRESSION_OPEN_FILE,
                 NO_GNUPLOT_LOG_FILES,
                 NO_REGRESSION_IMPORT,
+                NO_RESET,
                 NO_LOAD_STARTUP_FILES);
   m.show ();
 }

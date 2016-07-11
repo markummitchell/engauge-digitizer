@@ -1,1 +1,1 @@
--errorreport ../test/extrapolate_functions_straight.xml -regression
+-errorreport ../test/extrapolate_functions_straight.xml -regression -reset

@@ -23,6 +23,7 @@ void TestCorrelation::initTestCase ()
   const QString NO_REGRESSION_OPEN_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool NO_REGRESSION_IMPORT = false;
+  const bool NO_RESET = false;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -33,6 +34,7 @@ void TestCorrelation::initTestCase ()
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
                 NO_REGRESSION_OPEN_FILE,
                 NO_GNUPLOT_LOG_FILES,
+                NO_RESET,
                 NO_REGRESSION_IMPORT,
                 NO_LOAD_STARTUP_FILES);
   w.show ();

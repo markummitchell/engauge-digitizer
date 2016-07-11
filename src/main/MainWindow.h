@@ -89,6 +89,7 @@ public:
   /// \param fileCmdScriptFile Optional file command script file to be read at startup. Empty if unused. Incompatible with errorReportFile
   /// \param isRegressionTest True if errorReportFile or fileCmdScript is for regression testing, in which case it is executed and the program exits
   /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
+  /// \param isReset True to reset all settings that would otherwise be restored from the previous execution of Engauge
   /// \param loadStartupFiles Zero or more Engauge document files to load at startup. A separate instance of Engauge is created for each file
   /// \param parent Optional parent widget for this widget
   MainWindow(const QString &errorReportFile,

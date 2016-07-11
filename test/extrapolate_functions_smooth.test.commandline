@@ -1,1 +1,1 @@
--errorreport ../test/extrapolate_functions_smooth.xml -regression
+-errorreport ../test/extrapolate_functions_smooth.xml -regression -reset

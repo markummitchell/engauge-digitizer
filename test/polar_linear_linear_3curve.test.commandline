@@ -1,1 +1,1 @@
--errorreport ../test/polar_linear_linear_3curve.xml -regression
+-errorreport ../test/polar_linear_linear_3curve.xml -regression -reset

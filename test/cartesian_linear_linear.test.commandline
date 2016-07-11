@@ -1,1 +1,1 @@
--errorreport ../test/cartesian_linear_linear.xml -regression
+-errorreport ../test/cartesian_linear_linear.xml -regression -reset

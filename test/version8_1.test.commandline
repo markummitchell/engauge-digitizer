@@ -1,2 +1,2 @@
--errorreport ../test/version8_1.dig -regression
+-errorreport ../test/version8_1.dig -regression -reset
 

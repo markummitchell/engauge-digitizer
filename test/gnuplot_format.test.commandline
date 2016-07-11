@@ -1,1 +1,1 @@
--errorreport ../test/gnuplot_format.xml -regression
+-errorreport ../test/gnuplot_format.xml -regression -reset
