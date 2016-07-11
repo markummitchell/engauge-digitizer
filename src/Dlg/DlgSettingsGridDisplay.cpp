@@ -599,6 +599,7 @@ void DlgSettingsGridDisplay::updatePreview ()
                              mainWindow ().transformation());
 
     factory.createGridLinesForEvenlySpacedGrid (*m_modelGridDisplayAfter,
+                                                mainWindow ().modelMainWindow(),
                                                 m_gridLines);
   }
 }

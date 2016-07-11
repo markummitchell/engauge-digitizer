@@ -44,6 +44,9 @@ public:
   /// Get method for MainWindow titlebar filename format
   MainTitleBarFormat mainTitleBarFormat () const;
 
+  /// Maximum number of grid lines
+  int maximumGridLines () const;
+
   /// Get method for resolution of imported PDF files, in dots per inch
   int pdfResolution () const;
 
@@ -65,6 +68,9 @@ public:
 
   /// Set method for MainWindow titlebar filename format
   void setMainTitleBarFormat (MainTitleBarFormat mainTitleBarFormat);
+
+  /// Set method for maximum number of grid lines
+  void setMaximumGridLines (int maximumGridLines);
 
   /// Set method for resolution of imported PDF files, in dots per inch
   void setPdfResolution (int resolution);
@@ -89,6 +95,7 @@ private:
   MainTitleBarFormat m_mainTitleBarFormat;
   int m_pdfResolution;
   ImportCropping m_importCropping;
+  int m_maximumGridLines;
 
 };
 

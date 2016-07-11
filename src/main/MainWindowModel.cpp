@@ -6,6 +6,7 @@
 
 #include "CmdMediator.h"
 #include "DocumentSerialize.h"
+#include "GridLineLimiter.h"
 #include "ImportCroppingUtilBase.h"
 #include "Logger.h"
 #include "MainWindowModel.h"
@@ -26,7 +27,8 @@ MainWindowModel::MainWindowModel() :
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
   m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH),
   m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION),
-  m_importCropping (DEFAULT_IMPORT_CROPPING)
+  m_importCropping (DEFAULT_IMPORT_CROPPING),
+  m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -37,7 +39,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_zoomFactorInitial (other.zoomFactorInitial()),
   m_mainTitleBarFormat (other.mainTitleBarFormat()),
   m_pdfResolution (other.pdfResolution()),
-  m_importCropping (other.importCropping())
+  m_importCropping (other.importCropping()),
+  m_maximumGridLines (other.maximumGridLines())
 {
 }
 
@@ -49,6 +52,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_mainTitleBarFormat = other.mainTitleBarFormat();
   m_pdfResolution = other.pdfResolution();
   m_importCropping = other.importCropping();
+  m_maximumGridLines = other.maximumGridLines();
 
   return *this;
 }
@@ -89,6 +93,11 @@ MainTitleBarFormat MainWindowModel::mainTitleBarFormat() const
   return m_mainTitleBarFormat;
 }
 
+int MainWindowModel::maximumGridLines() const
+{
+  return m_maximumGridLines;
+}
+
 int MainWindowModel::pdfResolution() const
 {
   return m_pdfResolution;
@@ -109,6 +118,7 @@ void MainWindowModel::printStream(QString indentation,
                                                         "Path") << "\n";
   str << indentation << "pdfResolution=" << m_pdfResolution << "\n";
   str << indentation << "importCropping=" << ImportCroppingUtilBase::importCroppingToString (m_importCropping).toLatin1().data() << "\n";
+  str << indentation << "maximumGridLines=" << m_maximumGridLines << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -143,6 +153,11 @@ void MainWindowModel::setLocale (const QLocale &locale)
 void MainWindowModel::setMainTitleBarFormat(MainTitleBarFormat mainTitleBarFormat)
 {
   m_mainTitleBarFormat = mainTitleBarFormat;
+}
+
+void MainWindowModel::setMaximumGridLines(int maximumGridLines)
+{
+  m_maximumGridLines = maximumGridLines;
 }
 
 void MainWindowModel::setPdfResolution(int resolution)

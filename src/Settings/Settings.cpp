@@ -25,6 +25,7 @@ const QString SETTINGS_HELP_SIZE ("helpSize");
 const QString SETTINGS_LOCALE_COUNTRY ("country");
 const QString SETTINGS_LOCALE_LANGUAGE ("language");
 const QString SETTINGS_MAIN_TITLE_BAR_FORMAT ("titleBarFormat");
+const QString SETTINGS_MAXIMUM_GRID_LINES ("maximumGridLines");
 const QString SETTINGS_POS ("pos");
 const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");
 const QString SETTINGS_SIZE ("size");

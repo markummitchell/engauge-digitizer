@@ -263,6 +263,7 @@ HEADERS  += \
     src/Grid/GridInitializer.h \
     src/Grid/GridLine.h \
     src/Grid/GridLineFactory.h \
+    src/Grid/GridLineLimiter.h \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
     src/Grid/GridRemoval.h \
@@ -553,6 +554,7 @@ SOURCES += \
     src/Grid/GridInitializer.cpp \
     src/Grid/GridLine.cpp \
     src/Grid/GridLineFactory.cpp \
+    src/Grid/GridLineLimiter.cpp \
     src/Grid/GridLines.cpp \
     src/Grid/GridRemoval.cpp \
     src/Help/HelpBrowser.cpp \

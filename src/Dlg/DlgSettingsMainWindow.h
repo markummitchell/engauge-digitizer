@@ -38,6 +38,7 @@ public:
 private slots:
   void slotImportCropping (int index);
   void slotLocale (int index);
+  void slotMaximumGridLines (int limit);
   void slotPdfResolution (const QString);
   void slotRecentFileClear ();
   void slotTitleBarFormat(bool);
@@ -60,6 +61,7 @@ private:
   QPushButton *m_btnRecentClear;
   QCheckBox *m_chkTitleBarFormat;
   QComboBox *m_cmbPdfResolution;
+  QSpinBox *m_spinMaximumGridLines;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

@@ -14,6 +14,7 @@
 class DocumentModelCoords;
 class DocumentModelGridDisplay;
 class GridLines;
+class MainWindowModel;
 class QGraphicsScene;
 class QTransform;
 class Transformation;
@@ -48,6 +49,7 @@ public:
 
   /// Create a rectangular (cartesian) or annular (polar) grid of evenly spaced grid lines.
   void createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                           const MainWindowModel &modelMainWindow,
                                            GridLines &gridLines);
 
 private:

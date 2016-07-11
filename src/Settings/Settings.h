@@ -56,6 +56,7 @@ extern const QString SETTINGS_IMPORT_PDF_RESOLUTION;
 extern const QString SETTINGS_LOCALE_COUNTRY;
 extern const QString SETTINGS_LOCALE_LANGUAGE;
 extern const QString SETTINGS_MAIN_TITLE_BAR_FORMAT;
+extern const QString SETTINGS_MAXIMUM_GRID_LINES;
 extern const QString SETTINGS_POS;
 extern const QString SETTINGS_RECENT_FILE_LIST;
 extern const QString SETTINGS_SIZE;

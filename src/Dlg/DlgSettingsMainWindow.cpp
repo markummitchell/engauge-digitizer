@@ -146,6 +146,18 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbPdfResolution, row++, 2);
 #endif
 
+  QLabel *labelMaximumGridLines = new QLabel (tr ("Maximum grid lines:"));
+  layout->addWidget (labelMaximumGridLines, row, 1);
+
+  m_spinMaximumGridLines = new QSpinBox;
+  m_spinMaximumGridLines->setMinimum (2);
+  m_spinMaximumGridLines->setWhatsThis (tr ("Maximum Grid Lines\n\n"
+                                            "Maximum number of grid lines to be processed. This limit is applied when the step value is too "
+                                            "small for the start and stop values, which would result in too many grid lines visually and "
+                                            "possibly extremely long processing time (since each grid line would have to be processed)"));
+  connect (m_spinMaximumGridLines, SIGNAL (valueChanged (int)), this, (SLOT (slotMaximumGridLines (int))));
+  layout->addWidget (m_spinMaximumGridLines, row++, 2);
+
   QLabel *labelRecent = new QLabel (tr ("Recent file list:"));
   layout->addWidget (labelRecent, row, 1);
 
@@ -207,14 +219,6 @@ void DlgSettingsMainWindow::load (CmdMediator & /* cmdMediator */)
   ENGAUGE_ASSERT (false);
 }
 
-void DlgSettingsMainWindow::slotImportCropping (int index)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotImportCropping";
-
-  m_modelMainWindowAfter->setImportCropping ((ImportCropping) m_cmbImportCropping->itemData (index).toInt ());
-  updateControls();
-}
-
 void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
                                                  const MainWindowModel &modelMainWindow)
 {
@@ -247,9 +251,18 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_chkTitleBarFormat->setChecked (m_modelMainWindowAfter->mainTitleBarFormat() == MAIN_TITLE_BAR_FORMAT_PATH);
   index = m_cmbPdfResolution->findData (m_modelMainWindowAfter->pdfResolution());
   m_cmbPdfResolution->setCurrentIndex(index);
+  m_spinMaximumGridLines->setValue (m_modelMainWindowAfter->maximumGridLines());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsMainWindow::slotImportCropping (int index)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotImportCropping";
+
+  m_modelMainWindowAfter->setImportCropping ((ImportCropping) m_cmbImportCropping->itemData (index).toInt ());
+  updateControls();
 }
 
 void DlgSettingsMainWindow::slotLocale (int index)
@@ -258,6 +271,14 @@ void DlgSettingsMainWindow::slotLocale (int index)
 
   m_modelMainWindowAfter->setLocale (m_cmbLocale->itemData (index).toLocale());
   updateControls();
+}
+
+void DlgSettingsMainWindow::slotMaximumGridLines (int limit)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWIndow::slotMaximumGridLines";
+
+  m_modelMainWindowAfter->setMaximumGridLines (limit);
+  updateControls ();
 }
 
 void DlgSettingsMainWindow::slotPdfResolution(const QString)

@@ -10,9 +10,11 @@
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "GridLineFactory.h"
+#include "GridLineLimiter.h"
 #include "GridLines.h"
 #include "GridLineStyle.h"
 #include "Logger.h"
+#include "MainWindowModel.h"
 #include <QGraphicsScene>
 #include <qmath.h>
 #include <QTextStream>
@@ -154,6 +156,7 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
 }
 
 void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                                          const MainWindowModel &modelMainWindow,
                                                           GridLines &gridLines)
 {
   // At a minimum the transformation must be defined. Also, there is a brief interval between the definition of
@@ -169,6 +172,16 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
     double stopX  = modelGridDisplay.stopX  ();
     double stopY  = modelGridDisplay.stopY  ();
 
+    // Limit the number of grid lines. This is a noop if the limit is not exceeded
+    GridLineLimiter gridLineLimiter;
+    stepX = gridLineLimiter.limitedStepXTheta (m_modelCoords,
+                                               modelMainWindow,
+                                               modelGridDisplay);
+    stepY = gridLineLimiter.limitedStepYRange (m_modelCoords,
+                                               modelMainWindow,
+                                               modelGridDisplay);
+
+    // Apply if possible
     if (stepX != 0 &&
         stepY != 0) {
 

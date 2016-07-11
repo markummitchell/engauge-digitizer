@@ -57,6 +57,7 @@
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
+#include "GridLineLimiter.h"
 #include "HelpWindow.h"
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
@@ -2441,6 +2442,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                       QVariant (DEFAULT_IMPORT_PDF_RESOLUTION)).toInt ());
   m_modelMainWindow.setImportCropping ((ImportCropping) settings.value (SETTINGS_IMPORT_CROPPING,
                                                                         QVariant (DEFAULT_IMPORT_CROPPING)).toInt ());
+  m_modelMainWindow.setMaximumGridLines (settings.value (SETTINGS_MAXIMUM_GRID_LINES,
+                                                         QVariant (DEFAULT_MAXIMUM_GRID_LINES)).toInt ());
 
   updateSettingsMainWindow();
 
@@ -2472,13 +2475,15 @@ void MainWindow::settingsWrite ()
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, dockWidgetArea (m_dockChecklistGuide));
 
   }
+  settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
   settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());
+  settings.setValue (SETTINGS_MAIN_TITLE_BAR_FORMAT, m_modelMainWindow.mainTitleBarFormat());
+  settings.setValue (SETTINGS_MAXIMUM_GRID_LINES, m_modelMainWindow.maximumGridLines());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
-  settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
@@ -2487,7 +2492,6 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
   settings.setValue (SETTINGS_ZOOM_FACTOR_INITIAL, m_modelMainWindow.zoomFactorInitial());
-  settings.setValue (SETTINGS_MAIN_TITLE_BAR_FORMAT, m_modelMainWindow.mainTitleBarFormat());
   settings.endGroup ();
 }
 
@@ -4170,6 +4174,7 @@ void MainWindow::updateGridLines ()
                            m_cmdMediator->document().modelCoords(),
                            m_transformation);
   factory.createGridLinesForEvenlySpacedGrid (m_cmdMediator->document().modelGridDisplay(),
+                                              m_modelMainWindow,
                                               m_gridLines);
 
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
