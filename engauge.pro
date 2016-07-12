@@ -159,7 +159,8 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateSegment.h \
     src/DigitizeState/DigitizeStateSelect.h \
     src/Dlg/DlgAbout.h \
-    src/Dlg/DlgEditPoint.h \
+    src/Dlg/DlgEditPointAxis.h \
+    src/Dlg/DlgEditPointCurve.h \
     src/Dlg/DlgErrorReport.h \
     src/Dlg/DlgFilterCommand.h \
     src/Dlg/DlgFilterThread.h \
@@ -458,7 +459,8 @@ SOURCES += \
     src/DigitizeState/DigitizeStateSegment.cpp \
     src/DigitizeState/DigitizeStateSelect.cpp \
     src/Dlg/DlgAbout.cpp \
-    src/Dlg/DlgEditPoint.cpp \
+    src/Dlg/DlgEditPointAxis.cpp \
+    src/Dlg/DlgEditPointCurve.cpp \
     src/Dlg/DlgErrorReport.cpp \
     src/Dlg/DlgFilterCommand.cpp \
     src/Dlg/DlgFilterThread.cpp \
