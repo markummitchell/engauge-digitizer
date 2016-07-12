@@ -39,9 +39,13 @@ public:
   void appendNewCmd(CmdMediator *cmdMediator,
                     QUndoCommand *cmd);
 
-  /// See DigitizeStateAbstractBase::handleContextMenuEvent.
-  void handleContextMenuEvent (CmdMediator *cmdMediator,
-                               const QString &pointIdentifier);
+  /// See DigitizeStateAbstractBase::handleContextMenuEventAxis.
+  void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                   const QString &pointIdentifier);
+
+  /// See DigitizeStateAbstractBase::handleContextMenuEventCurve.
+  void handleContextMenuEventCurve (CmdMediator *cmdMediator,
+                                    const QStringList &pointIdentifiers);
 
   /// See DigitizeStateAbstractBase::handleCurveChange.
   void handleCurveChange (CmdMediator *cmdMediator);

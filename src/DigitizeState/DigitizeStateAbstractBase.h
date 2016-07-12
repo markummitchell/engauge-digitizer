@@ -17,6 +17,8 @@ class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;
+class QString;
+class QStringList;
 class QTimer;
 
 /// Set of possible states of Digitize toolbar.
@@ -56,9 +58,13 @@ public:
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end() = 0;
 
-  /// Handle a right click that was intercepted earlier. This is done in the superclass since it works the same in all states.
-  void handleContextMenuEvent (CmdMediator *cmdMediator,
-                               const QString &pointIdentifier);
+  /// Handle a right click, on an axis point, that was intercepted earlier. This is done in the superclass since it works the same in all states.
+  void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                   const QString &pointIdentifier);
+
+  /// Handle a right click, on a curve point, that was intercepted earlier. This is done in the superclass since it works the same in all states.
+  void handleContextMenuEventCurve (CmdMediator *cmdMediator,
+                                    const QStringList &pointIdentifiers);
 
   /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment will generate a new set of Segments
   virtual void handleCurveChange (CmdMediator *cmdMediator) = 0;

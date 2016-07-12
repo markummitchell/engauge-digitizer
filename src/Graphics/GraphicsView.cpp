@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "DataKey.h"
+#include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "LoadFileInfo.h"
@@ -28,7 +29,8 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
                            MainWindow &mainWindow) :
   QGraphicsView (scene)
 {
-  connect (this, SIGNAL (signalContextMenuEvent (QString)), &mainWindow, SLOT (slotContextMenuEvent (QString)));
+  connect (this, SIGNAL (signalContextMenuEventAxis (QString)), &mainWindow, SLOT (slotContextMenuEventAxis (QString)));
+  connect (this, SIGNAL (signalContextMenuEventCurve (QStringList)), &mainWindow, SLOT (slotContextMenuEventCurve (QStringList)));
   connect (this, SIGNAL (signalDraggedDigFile (QString)), &mainWindow, SLOT (slotFileOpenDraggedDigFile (QString)));
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
@@ -67,28 +69,60 @@ GraphicsView::~GraphicsView()
 {
 }
 
+bool GraphicsView::allItemsAreEitherAxisOrCurve (const QList<QGraphicsItem*> &items,
+                                                 AxisOrCurve axisOrCurve) const
+{
+  bool allAreEitherAxisOrCurve = true;
+
+  QList<QGraphicsItem*>::const_iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    QGraphicsItem *item = *itr;
+    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
+
+    if (type == GRAPHICS_ITEM_TYPE_POINT) {
+
+      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+      QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
+
+      bool unwantedAxisPoint = ((curveName == AXIS_CURVE_NAME) && (axisOrCurve == CURVE_POINTS));
+      bool unwantedCurvePoint = ((curveName != AXIS_CURVE_NAME) && (axisOrCurve == AXIS_POINTS));
+
+      if (unwantedAxisPoint || unwantedCurvePoint) {
+
+        allAreEitherAxisOrCurve = false;
+        break;
+
+      }
+    } else {
+
+      allAreEitherAxisOrCurve = false;
+      break;
+
+    }
+  }
+
+  return allAreEitherAxisOrCurve;
+}
+
 void GraphicsView::contextMenuEvent (QContextMenuEvent *event)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent";
 
   QList<QGraphicsItem*> items = scene()->selectedItems ();
 
-  if (items.count () == 1) {
+  if (allItemsAreEitherAxisOrCurve (items, CURVE_POINTS)) {
 
-    QGraphicsItem *item = items.first ();
-    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
-    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
-    QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
+    // One or more curve points are selected so edit their coordinates
+    QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
+    emit signalContextMenuEventCurve (pointIdentifiers);
 
-    if ((type == GRAPHICS_ITEM_TYPE_POINT) &&
-        (curveName == AXIS_CURVE_NAME)) {
+  } else if (allItemsAreEitherAxisOrCurve (items, AXIS_POINTS) && items.count() == 1) {
 
-      // A single axis point is selected so edit it
-      emit signalContextMenuEvent (pointIdentifier);
-      event->accept ();
+    // A single axis point is selected so edit it
+    QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
+    emit signalContextMenuEventAxis (pointIdentifiers.first());
 
-      return;
-    }
   }
 
   QGraphicsView::contextMenuEvent (event);
@@ -275,6 +309,26 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
   }
 
   QGraphicsView::mouseReleaseEvent (event);
+}
+
+QStringList GraphicsView::pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const
+{
+  // This method assumes that all specified items are points
+
+  QStringList pointIdentifiers;
+
+  QList<QGraphicsItem*>::const_iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    QGraphicsItem *item = *itr;
+    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
+    ENGAUGE_ASSERT (type == GRAPHICS_ITEM_TYPE_POINT);
+
+    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+    pointIdentifiers << pointIdentifier;
+  }
+
+  return pointIdentifiers;
 }
 
 void GraphicsView::wheelEvent(QWheelEvent *event)

@@ -2754,12 +2754,20 @@ void MainWindow::slotCmbCurve(int /* index */)
   updateViewsOfSettings();
 }
 
-void MainWindow::slotContextMenuEvent (QString pointIdentifier)
+void MainWindow::slotContextMenuEventAxis (QString pointIdentifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventAxis point=" << pointIdentifier.toLatin1 ().data ();
 
-  m_digitizeStateContext->handleContextMenuEvent (m_cmdMediator,
-                                                  pointIdentifier);
+  m_digitizeStateContext->handleContextMenuEventAxis (m_cmdMediator,
+                                                      pointIdentifier);
+}
+
+void MainWindow::slotContextMenuEventCurve (QStringList pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventCurve point=" << pointIdentifiers.join(",").toLatin1 ().data ();
+
+  m_digitizeStateContext->handleContextMenuEventCurve (m_cmdMediator,
+                                                       pointIdentifiers);
 }
 
 void MainWindow::slotDigitizeAxis ()
@@ -3981,7 +3989,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommandStatusBarCoords";
 
   // For some reason, mapFromGlobal(QCursor::pos) differs from event->pos by a little bit. We must compensate for
-  // this so cursor coordinates in status bar match the DlgEditPoint inputs initially. After the mouse moves
+  // this so cursor coordinates in status bar match the DlgEditPointAxis inputs initially. After the mouse moves
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 

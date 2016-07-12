@@ -16,6 +16,11 @@ class QByteArray;
 class QGraphicsPixmapItem;
 class QGraphicsScene;
 
+enum AxisOrCurve {
+  AXIS_POINTS,
+  CURVE_POINTS
+};
+
 /// QGraphicsView class with event handling added. Typically the events are sent to the active digitizing state.
 class GraphicsView : public QGraphicsView
 {
@@ -59,7 +64,10 @@ public:
 
 signals:
   /// Send right click on axis point to MainWindow for editing.
-  void signalContextMenuEvent (QString pointIdentifier);
+  void signalContextMenuEventAxis (QString pointIdentifier);
+
+  /// Send right click on curve point(s) to MainWindow for editing.
+  void signalContextMenuEventCurve (QStringList pointIdentifiers);
 
   /// Send dragged dig file to MainWindow for import. This comes from dragging an engauge dig file
   void signalDraggedDigFile (QString);
@@ -94,6 +102,9 @@ signals:
 private:
   GraphicsView();
 
+  bool allItemsAreEitherAxisOrCurve (const QList<QGraphicsItem*> &items,
+                                     AxisOrCurve axisOrCurve) const;
+  QStringList pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const;
   bool inBounds (const QPointF &posScreen);
 
 };

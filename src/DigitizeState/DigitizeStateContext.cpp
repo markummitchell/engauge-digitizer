@@ -88,11 +88,18 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator
   }
 }
 
-void DigitizeStateContext::handleContextMenuEvent (CmdMediator *cmdMediator,
-                                                   const QString &pointIdentifier)
+void DigitizeStateContext::handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                                       const QString &pointIdentifier)
 {
-  m_states [m_currentState]->handleContextMenuEvent (cmdMediator,
-                                                     pointIdentifier);
+  m_states [m_currentState]->handleContextMenuEventAxis (cmdMediator,
+                                                         pointIdentifier);
+}
+
+void DigitizeStateContext::handleContextMenuEventCurve (CmdMediator *cmdMediator,
+                                                        const QStringList &pointIdentifiers)
+{
+  m_states [m_currentState]->handleContextMenuEventCurve (cmdMediator,
+                                                          pointIdentifiers);
 }
 
 void DigitizeStateContext::handleCurveChange (CmdMediator *cmdMediator)

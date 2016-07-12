@@ -8,7 +8,8 @@
 #include "CmdMediator.h"
 #include "DigitizeStateAbstractBase.h"
 #include "DigitizeStateContext.h"
-#include "DlgEditPoint.h"
+#include "DlgEditPointAxis.h"
+#include "DlgEditPointCurve.h"
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -38,10 +39,11 @@ const DigitizeStateContext &DigitizeStateAbstractBase::context() const
   return m_context;
 }
 
-void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator,
-                                                        const QString &pointIdentifier)
+void DigitizeStateAbstractBase::handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                                            const QString &pointIdentifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
 
   QPointF posScreen = cmdMediator->document().positionScreen (pointIdentifier);
   QPointF posGraphBefore = cmdMediator->document().positionGraph (pointIdentifier);
@@ -51,16 +53,16 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
   double x = posGraphBefore.x();
   double y = posGraphBefore.y();
 
-  DlgEditPoint *dlg = new DlgEditPoint(context().mainWindow(),
-                                       *this,
-                                       cmdMediator->document().modelCoords(),
-                                       context().mainWindow().modelMainWindow(),
-                                       cursor (cmdMediator),
-                                       context().mainWindow().transformation(),
-                                       cmdMediator->document().documentAxesPointsRequired(),
-                                       isXOnly,
-                                       &x,
-                                       &y);
+  DlgEditPointAxis *dlg = new DlgEditPointAxis (context().mainWindow(),
+                                                *this,
+                                                cmdMediator->document().modelCoords(),
+                                                context().mainWindow().modelMainWindow(),
+                                                cursor (cmdMediator),
+                                                context().mainWindow().transformation(),
+                                                cmdMediator->document().documentAxesPointsRequired(),
+                                                isXOnly,
+                                                &x,
+                                                &y);
   int rtn = dlg->exec ();
 
   QPointF posGraphAfter = dlg->posGraph (isXOnly); // This call returns new values for isXOnly and the graph position
@@ -98,6 +100,63 @@ void DigitizeStateAbstractBase::handleContextMenuEvent (CmdMediator *cmdMediator
                              cmd);
     }
   }
+}
+
+void DigitizeStateAbstractBase::handleContextMenuEventCurve (CmdMediator *cmdMediator,
+                                                             const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleContextMenuEventCurve "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+
+  // Ask user for coordinates
+//  double x = posGraphBefore.x();
+//  double y = posGraphBefore.y();
+
+//  DlgEditPointCurve *dlg = new DlgEditPointCurve (context().mainWindow(),
+//                                                  *this,
+//                                                  cmdMediator->document().modelCoords(),
+//                                                  context().mainWindow().modelMainWindow(),
+//                                                  cursor (cmdMediator),
+//                                                  context().mainWindow().transformation(),
+//                                                  &x,
+//                                                  &y);
+//  int rtn = dlg->exec ();
+
+//  QPointF posGraphAfter = dlg->posGraph ();
+//  delete dlg;
+
+//  if (rtn == QDialog::Accepted) {
+
+//    // User wants to edit this axis point, but let's perform sanity checks first
+
+//    bool isError;
+//    QString errorMessage;
+
+//    context().mainWindow().cmdMediator()->document().checkEditPointAxis(pointIdentifier,
+//                                                                        posScreen,
+//                                                                        posGraphAfter,
+//                                                                        isError,
+//                                                                        errorMessage);
+
+//    if (isError) {
+
+//      QMessageBox::warning (0,
+//                            engaugeWindowTitle(),
+//                            errorMessage);
+
+//    } else {
+
+      // Create a command to edit the point
+//      CmdEditPointCurve *cmd = new CmdEditPointCurve (context().mainWindow(),
+//                                                      cmdMediator->document(),
+//                                                      pointIdentifier);
+//                                                      posGraphBefore,
+//                                                      posGraphAfter,
+//                                                      isXOnly);
+//      context().appendNewCmd(cmdMediator,
+//                             cmd);
+//    }
+//  }
 }
 
 void DigitizeStateAbstractBase::handleLeave (CmdMediator * /* cmdMediator */)

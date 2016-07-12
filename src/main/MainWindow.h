@@ -234,7 +234,8 @@ private slots:
   void slotCmbBackground(int);
   void slotCmbCoordSystem(int);
   void slotCmbCurve(int);
-  void slotContextMenuEvent (QString);
+  void slotContextMenuEventAxis (QString);
+  void slotContextMenuEventCurve (QStringList);
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();

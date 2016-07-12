@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "DigitizeStateAbstractBase.h"
-#include "DlgEditPoint.h"
+#include "DlgEditPointAxis.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentAxesPointsRequired.h"
@@ -35,30 +35,30 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 const bool IS_X_THETA = true;
 const bool IS_NOT_X_THETA = false;
 
-DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
-                            DigitizeStateAbstractBase &digitizeState,
-                            const DocumentModelCoords &modelCoords,
-                            const MainWindowModel &modelMainWindow,
-                            const QCursor &cursorShape,
-                            const Transformation &transformation,
-                            DocumentAxesPointsRequired documentAxesPointsRequired,
-                            bool isXOnly,
-                            const double *xInitialValue,
-                            const double *yInitialValue) :
+DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
+                                    DigitizeStateAbstractBase &digitizeState,
+                                    const DocumentModelCoords &modelCoords,
+                                    const MainWindowModel &modelMainWindow,
+                                    const QCursor &cursorShape,
+                                    const Transformation &transformation,
+                                    DocumentAxesPointsRequired documentAxesPointsRequired,
+                                    bool isXOnly,
+                                    const double *xInitialValue,
+                                    const double *yInitialValue) :
   QDialog (&mainWindow),
   m_cursorShape (cursorShape),
   m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::DlgEditPoint";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::DlgEditPointAxis";
 
   // Either one or two coordinates are desired
   bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
   bool isY = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || !isXOnly;
 
   // To guarantee the override cursor is always removed, we call removeOverrideCursor here rather than in the code that
-  // allocates this DlgEditPoint. The digitizeState argument is otherwise unused.
+  // allocates this DlgEditPointAxis. The digitizeState argument is otherwise unused.
   digitizeState.removeOverrideCursor();
 
   connect (this, SIGNAL (signalSetOverrideCursor (QCursor)), &mainWindow, SLOT (slotSetOverrideCursor (QCursor)));
@@ -83,14 +83,14 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
   updateControls ();
 }
 
-DlgEditPoint::~DlgEditPoint()
+DlgEditPointAxis::~DlgEditPointAxis()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::~DlgEditPoint";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::~DlgEditPointAxis";
 
   emit signalSetOverrideCursor (m_cursorShape);
 }
 
-void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
+void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
 {
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
@@ -166,7 +166,7 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   layout->addWidget(labelGraphParRight, 0);
 }
 
-void DlgEditPoint::createHint (QVBoxLayout *layoutOuter)
+void DlgEditPointAxis::createHint (QVBoxLayout *layoutOuter)
 {
   // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
   // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
@@ -185,7 +185,7 @@ void DlgEditPoint::createHint (QVBoxLayout *layoutOuter)
   layout->addWidget (label);
 }
 
-void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
+void DlgEditPointAxis::createOkCancel (QVBoxLayout *layoutOuter)
 {
   QWidget *panel = new QWidget (this);
   layoutOuter->addWidget (panel, 0, Qt::AlignCenter);
@@ -202,13 +202,13 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
-                                               const double *yInitialValue,
-                                               const Transformation &transformation,
-                                               bool isX,
-                                               bool isY)
+void DlgEditPointAxis::initializeGraphCoordinates (const double *xInitialValue,
+                                                   const double *yInitialValue,
+                                                   const Transformation &transformation,
+                                                   bool isX,
+                                                   bool isY)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::initializeGraphCoordinates";
 
   QString xTheta, yRadius;
   if ((xInitialValue != 0) &&
@@ -237,22 +237,22 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
   }
 }
 
-bool DlgEditPoint::isCartesian () const
+bool DlgEditPointAxis::isCartesian () const
 {
   return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
 }
 
-QChar DlgEditPoint::nameXTheta () const
+QChar DlgEditPointAxis::nameXTheta () const
 {
   return (isCartesian () ? QChar ('X') : THETA);
 }
 
-QChar DlgEditPoint::nameYRadius () const
+QChar DlgEditPointAxis::nameYRadius () const
 {
   return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
-QPointF DlgEditPoint::posGraph (bool &isXOnly) const
+QPointF DlgEditPointAxis::posGraph (bool &isXOnly) const
 {
   double xTheta, yRadius;
 
@@ -272,12 +272,12 @@ QPointF DlgEditPoint::posGraph (bool &isXOnly) const
                   yRadius);
 }
 
-void DlgEditPoint::slotTextChanged (const QString &)
+void DlgEditPointAxis::slotTextChanged (const QString &)
 {
   updateControls ();
 }
 
-QString DlgEditPoint::unitsType (bool isXTheta) const
+QString DlgEditPointAxis::unitsType (bool isXTheta) const
 {
   if (isCartesian ()) {
     if (isXTheta) {
@@ -294,7 +294,7 @@ QString DlgEditPoint::unitsType (bool isXTheta) const
   }
 }
 
-void DlgEditPoint::updateControls ()
+void DlgEditPointAxis::updateControls ()
 {
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();
