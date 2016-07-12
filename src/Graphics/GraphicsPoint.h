@@ -8,11 +8,11 @@
 #define GRAPHICS_POINT_H
 
 #include "GraphicsPointAbstractBase.h"
-#include "GraphicsPoint.h"
 #include <QColor>
 #include <QPointF>
 
-const double HIGHLIGHT_OPACITY = 0.3; // 0=transparent to 1=opaque
+extern const double DEFAULT_HIGHLIGHT_OPACITY;
+extern const double MAX_OPACITY;
 
 class CurveStyle;
 class GraphicsPointEllipse;
@@ -63,6 +63,9 @@ public:
   /// Proxy method for QGraphicsItem::data
   QVariant data (int key) const;
 
+  /// Get method for highlight opacity
+  double highlightOpacity () const;
+
   /// Proxy method for QGraphicsItem::pos.
   QPointF pos () const;
 
@@ -78,7 +81,8 @@ public:
   void setData (int key, const QVariant &data);
 
   /// Update the point style
-  void setPointStyle (const PointStyle &pointStyle);
+  void setPointStyle (const PointStyle &pointStyle,
+                      double highlightOpacity);
 
   /// Update the position
   void setPos (const QPointF pos);
@@ -90,7 +94,8 @@ public:
   void setWanted ();
 
   /// Update point and line styles that comprise the curve style
-  void updateCurveStyle (const CurveStyle &curveStyle);
+  void updateCurveStyle (const CurveStyle &curveStyle,
+                         double highlightOpacity);
 
   /// Identify point as wanted//unwanted
   bool wanted () const;
@@ -119,6 +124,8 @@ private:
 
   // Housekeeping
   bool m_wanted;
+
+  double m_highlightOpacity;
 };
 
 #endif // GRAPHICS_POINT_H

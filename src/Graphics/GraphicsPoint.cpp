@@ -22,6 +22,8 @@
 #include "QtToString.h"
 #include "ZValues.h"
 
+const double DEFAULT_HIGHLIGHT_OPACITY = 0.35; // 0=transparent to 1=opaque. Values above 0.5 are very hard to notice
+const double MAX_OPACITY = 1.0;
 const double ZERO_WIDTH = 0.0;
 
 GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
@@ -40,7 +42,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_posScreen (posScreen),
   m_color (color),
   m_lineWidth (lineWidth),
-  m_wanted (true)
+  m_wanted (true),
+  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
                                << " identifier=" << identifier.toLatin1 ().data ();
@@ -64,7 +67,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_posScreen (posScreen),
   m_color (color),
   m_lineWidth (lineWidth),
-  m_wanted (true)
+  m_wanted (true),
+  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
                                << " identifier=" << identifier.toLatin1 ().data ();
@@ -180,6 +184,11 @@ QVariant GraphicsPoint::data (int key) const
   }
 }
 
+double GraphicsPoint::highlightOpacity () const
+{
+  return m_highlightOpacity;
+}
+
 QPointF GraphicsPoint::pos () const
 {
   if (m_graphicsItemEllipse == 0) {
@@ -237,8 +246,11 @@ void GraphicsPoint::setData (int key, const QVariant &data)
   }
 }
 
-void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
+void GraphicsPoint::setPointStyle(const PointStyle &pointStyle,
+                                  double highlightOpacity)
 {
+  m_highlightOpacity = highlightOpacity;
+
   // Setting pen and radius of parent graphics items below also affects the child shadows
   // (m_shadowItemPolygon and m_shadowItemEllipse)
   if (m_graphicsItemEllipse == 0) {
@@ -308,9 +320,11 @@ void GraphicsPoint::setWanted ()
   m_wanted = true;
 }
 
-void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle)
+void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle,
+                                      double highlightOpacity)
 {
-  setPointStyle (curveStyle.pointStyle()); // This point
+  setPointStyle (curveStyle.pointStyle(),
+                 highlightOpacity); // This point
 }
 
 bool GraphicsPoint::wanted () const

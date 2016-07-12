@@ -35,6 +35,9 @@ public:
 
   virtual void loadXml(QXmlStreamReader &reader);
 
+  /// Get method for highlight opacity
+  double highlightOpacity() const;
+
   /// Get method for import cropping
   ImportCropping importCropping () const;
 
@@ -55,6 +58,9 @@ public:
                     QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
+
+  /// Set method for highlight opacity
+  void setHighlightOpacity (double highlightOpacity);
 
   /// Set method for locale given attributes
   void setLocale (QLocale::Language language,
@@ -96,6 +102,7 @@ private:
   int m_pdfResolution;
   ImportCropping m_importCropping;
   int m_maximumGridLines;
+  double m_highlightOpacity;
 
 };
 

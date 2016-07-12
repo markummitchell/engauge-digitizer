@@ -62,7 +62,8 @@ public:
                            const Point &point);
 
   /// Update the curve style for this curve
-  void updateCurveStyle (const CurveStyle &curveStyle);
+  void updateCurveStyle (const CurveStyle &curveStyle,
+                         double highlightOpacity);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle);

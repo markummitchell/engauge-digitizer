@@ -13,6 +13,7 @@
 #include "MainWindowModel.h"
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDoubleSpinBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -158,6 +159,18 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_spinMaximumGridLines, SIGNAL (valueChanged (int)), this, (SLOT (slotMaximumGridLines (int))));
   layout->addWidget (m_spinMaximumGridLines, row++, 2);
 
+  QLabel *labelHighlightOpacity = new QLabel (tr ("Highlight opacity:"));
+  layout->addWidget (labelHighlightOpacity, row, 1);
+
+  m_spinHighlightOpacity = new QDoubleSpinBox;
+  m_spinHighlightOpacity->setRange (0, 1);
+  m_spinHighlightOpacity->setSingleStep (0.1);
+  m_spinHighlightOpacity->setWhatsThis (tr ("Highligh Opacity\n\n"
+                                            "Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in "
+                                            "appearance shows when the point can be selected."));
+  connect (m_spinHighlightOpacity, SIGNAL (valueChanged (double)), this, SLOT (slotHighlightOpacity(double)));
+  layout->addWidget (m_spinHighlightOpacity, row++, 2);
+
   QLabel *labelRecent = new QLabel (tr ("Recent file list:"));
   layout->addWidget (labelRecent, row, 1);
 
@@ -252,9 +265,18 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   index = m_cmbPdfResolution->findData (m_modelMainWindowAfter->pdfResolution());
   m_cmbPdfResolution->setCurrentIndex(index);
   m_spinMaximumGridLines->setValue (m_modelMainWindowAfter->maximumGridLines());
+  m_spinHighlightOpacity->setValue (m_modelMainWindowAfter->highlightOpacity());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsMainWindow::slotHighlightOpacity(double)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotHighlightOpacity";
+
+  m_modelMainWindowAfter->setHighlightOpacity (m_spinHighlightOpacity->value());
+  updateControls();
 }
 
 void DlgSettingsMainWindow::slotImportCropping (int index)

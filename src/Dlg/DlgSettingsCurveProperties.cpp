@@ -59,6 +59,7 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Curve Properties"),
                            "DlgSettingsCurveProperties",
                            mainWindow),
+  m_modelMainWindow (mainWindow.modelMainWindow()),
   m_scenePreview (0),
   m_viewPreview (0),
   m_modelCurveStylesBefore (0),
@@ -334,21 +335,24 @@ void DlgSettingsCurveProperties::drawPoints (const PointStyle &pointStyle)
                                                        NULL_IDENTIFIER,
                                                        POS_LEFT,
                                                        pointStyle);
-  pointLeft->setPointStyle (pointStyle);
+  pointLeft->setPointStyle (pointStyle,
+                            m_modelMainWindow.highlightOpacity());
 
   // Center point
   GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
                                                          NULL_IDENTIFIER,
                                                          POS_CENTER,
                                                          pointStyle);
-  pointCenter->setPointStyle (pointStyle);
+  pointCenter->setPointStyle (pointStyle,
+                              m_modelMainWindow.highlightOpacity());
 
   // Right point
   GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
                                                         NULL_IDENTIFIER,
                                                         POS_RIGHT,
                                                         pointStyle);
-  pointRight->setPointStyle (pointStyle);
+  pointRight->setPointStyle (pointStyle,
+                             m_modelMainWindow.highlightOpacity());
 }
 
 void DlgSettingsCurveProperties::handleOk ()

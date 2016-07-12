@@ -290,11 +290,13 @@ void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
                                             curveNames);
 }
 
-void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
+void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles,
+                                       double highlightOpacity)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 
-  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles);
+  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles,
+                                              highlightOpacity);
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,

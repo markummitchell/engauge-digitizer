@@ -6,6 +6,7 @@
 
 #include "CmdMediator.h"
 #include "DocumentSerialize.h"
+#include "GraphicsPoint.h"
 #include "GridLineLimiter.h"
 #include "ImportCroppingUtilBase.h"
 #include "Logger.h"
@@ -28,7 +29,8 @@ MainWindowModel::MainWindowModel() :
   m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH),
   m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION),
   m_importCropping (DEFAULT_IMPORT_CROPPING),
-  m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES)
+  m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES),
+  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -40,7 +42,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_mainTitleBarFormat (other.mainTitleBarFormat()),
   m_pdfResolution (other.pdfResolution()),
   m_importCropping (other.importCropping()),
-  m_maximumGridLines (other.maximumGridLines())
+  m_maximumGridLines (other.maximumGridLines()),
+  m_highlightOpacity (other.highlightOpacity())
 {
 }
 
@@ -53,8 +56,14 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_pdfResolution = other.pdfResolution();
   m_importCropping = other.importCropping();
   m_maximumGridLines = other.maximumGridLines();
+  m_highlightOpacity = other.highlightOpacity();
 
   return *this;
+}
+
+double MainWindowModel::highlightOpacity() const
+{
+  return m_highlightOpacity;
 }
 
 ImportCropping MainWindowModel::importCropping() const
@@ -119,6 +128,7 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "pdfResolution=" << m_pdfResolution << "\n";
   str << indentation << "importCropping=" << ImportCroppingUtilBase::importCroppingToString (m_importCropping).toLatin1().data() << "\n";
   str << indentation << "maximumGridLines=" << m_maximumGridLines << "\n";
+  str << indentation << "highlightOpacity=" << m_highlightOpacity << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -127,6 +137,11 @@ void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_MAIN_WINDOW);
   writer.writeEndElement();
+}
+
+void MainWindowModel::setHighlightOpacity(double highlightOpacity)
+{
+  m_highlightOpacity = highlightOpacity;
 }
 
 void MainWindowModel::setImportCropping (ImportCropping importCropping)

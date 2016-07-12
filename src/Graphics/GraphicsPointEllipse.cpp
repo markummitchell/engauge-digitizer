@@ -39,13 +39,13 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
 void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Highlighted
-  setOpacity(HIGHLIGHT_OPACITY);
+  setOpacity(m_graphicsPoint.highlightOpacity ());
 }
 
 void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Unhighlighted
-  setOpacity(1.0);
+  setOpacity(MAX_OPACITY);
 }
 
 void GraphicsPointEllipse::setRadius(int radius)

@@ -39,13 +39,13 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
 void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Highlighted
-  setOpacity(HIGHLIGHT_OPACITY);
+  setOpacity(m_graphicsPoint.highlightOpacity ());
 }
 
 void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Unhighlighted
-  setOpacity(1.0);
+  setOpacity(MAX_OPACITY);
 }
 
 void GraphicsPointPolygon::setRadius(int radius)

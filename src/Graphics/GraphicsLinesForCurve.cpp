@@ -353,7 +353,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   graphicsPoint->setWanted ();
 }
 
-void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
+void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle,
+                                              double highlightOpacity)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateCurveStyle";
 
@@ -361,7 +362,8 @@ void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
      GraphicsPoint *point = itr.value();
-     point->updateCurveStyle (curveStyle);
+     point->updateCurveStyle (curveStyle,
+                              highlightOpacity);
   }
 }
 

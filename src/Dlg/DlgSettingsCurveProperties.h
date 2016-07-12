@@ -9,6 +9,7 @@
 
 #include "CurveStyles.h"
 #include "DlgSettingsAbstractBase.h"
+#include "MainWindowModel.h"
 
 class GraphicsPoint;
 class QComboBox;
@@ -62,6 +63,8 @@ private:
   void resetSceneRectangle();
   void updateControls();
   void updatePreview();
+
+  MainWindowModel m_modelMainWindow;
 
   QComboBox *m_cmbCurveName;
 

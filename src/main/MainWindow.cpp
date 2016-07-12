@@ -4267,7 +4267,8 @@ void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
 
-  m_scene->updateCurveStyles(modelCurveStyles);
+  m_scene->updateCurveStyles(modelCurveStyles,
+                             m_modelMainWindow.highlightOpacity());
   m_cmdMediator->document().setModelCurveStyles(modelCurveStyles);
   updateViewsOfSettings();
 }
@@ -4324,6 +4325,12 @@ void MainWindow::updateSettingsMainWindow()
     m_actionZoomIn->setShortcut (tr ("+"));
     m_actionZoomOut->setShortcut (tr ("-"));
 
+  }
+
+  if ((m_scene != 0) &&
+      (m_cmdMediator != 0)) {
+    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles(),
+                               m_modelMainWindow.highlightOpacity());
   }
 
   updateWindowTitle();

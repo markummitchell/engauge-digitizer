@@ -12,6 +12,7 @@
 
 class QCheckBox;
 class QComboBox;
+class QDoubleSpinBox;
 class QGridLayout;
 class QPushButton;
 class QSpinBox;
@@ -36,6 +37,7 @@ public:
                             const MainWindowModel &modelMainWindow);
 
 private slots:
+  void slotHighlightOpacity (double);
   void slotImportCropping (int index);
   void slotLocale (int index);
   void slotMaximumGridLines (int limit);
@@ -62,6 +64,7 @@ private:
   QCheckBox *m_chkTitleBarFormat;
   QComboBox *m_cmbPdfResolution;
   QSpinBox *m_spinMaximumGridLines;
+  QDoubleSpinBox *m_spinHighlightOpacity;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

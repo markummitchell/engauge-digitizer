@@ -79,7 +79,8 @@ public:
   void updateAfterCommand (CmdMediator &cmdMediator);
 
   /// Update curve styles after settings changed.
-  void updateCurveStyles(const CurveStyles &modelCurveStyles);
+  void updateCurveStyles(const CurveStyles &modelCurveStyles,
+                         double highlightOpacity);
 
   /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
   /// so the screen coordinates can be converted to graph coordinates when updating point ordinals

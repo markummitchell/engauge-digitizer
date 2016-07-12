@@ -22,6 +22,7 @@ const QString SETTINGS_CHECKLIST_GUIDE_WIZARD ("checklistGuideWizard");
 const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow"); // Capitalize both M and W since this is a group string
 const QString SETTINGS_HELP_POS ("helpPos");
 const QString SETTINGS_HELP_SIZE ("helpSize");
+const QString SETTINGS_HIGHLIGHT_OPACITY ("highlightOpacity");
 const QString SETTINGS_LOCALE_COUNTRY ("country");
 const QString SETTINGS_LOCALE_LANGUAGE ("language");
 const QString SETTINGS_MAIN_TITLE_BAR_FORMAT ("titleBarFormat");

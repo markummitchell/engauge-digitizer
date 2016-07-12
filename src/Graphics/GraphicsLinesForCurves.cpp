@@ -184,7 +184,8 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                            point);
 }
 
-void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles)
+void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles,
+                                                double highlightOpacity)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateCurveStyles";
 
@@ -193,7 +194,8 @@ void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveSty
 
     QString curveName = itr.key();
 
-    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName));
+    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName),
+                                                           highlightOpacity);
   }
 }
 
