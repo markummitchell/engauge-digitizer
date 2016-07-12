@@ -14,7 +14,7 @@ TEMPLATE    = app
 #       qmake "CONFIG+=debug jpeg2000"
 # 2) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
 #       1) previous installation of the poppler-qt5 development package
-#       2) POPPLER_INCLUDE environment variable pointing to directory containing Document.h
+#       2) POPPLER_INCLUDE environment variable pointing to directory containing poppler-qt5.h
 #       3) POPPLER_LIB environment variable pointing to directory containing libpoppler-qt5.so
 #    Sample command lines
 #       qmake CONFIG+=pdf

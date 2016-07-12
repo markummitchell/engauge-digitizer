@@ -14,7 +14,7 @@
 #    At some point, Qt may provide its own support for this format, at which point this can be skipped
 # 3) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
 #        1) previous installation of the poppler-qt5 development package. Engauge has been tested with versions 0.24.5 and 0.44.0
-#        2) POPPLER_INCLUDE environment variable pointing to directory containing Document.h
+#        2) POPPLER_INCLUDE environment variable pointing to directory containing poppler-qt5.h
 #        3) POPPLER_LIB environment variable pointing to directory containing libpoppler-qt5.so
 #    Sample command lines:
 #        qmake CONFIG+=pdf
