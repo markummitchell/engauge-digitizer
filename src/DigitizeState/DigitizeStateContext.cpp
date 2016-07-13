@@ -236,6 +236,13 @@ QString DigitizeStateContext::state() const
   return m_states [m_currentState]->state();
 }
 
+void DigitizeStateContext::updateAfterPointAddition ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
+
+  m_states [m_currentState]->updateAfterPointAddition ();
+}
+
 void DigitizeStateContext::updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                                      const DocumentModelDigitizeCurve &modelDigitizeCurve)
 {

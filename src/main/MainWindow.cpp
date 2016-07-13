@@ -2450,6 +2450,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                         QVariant (DEFAULT_IMPORT_CROPPING)).toInt ());
   m_modelMainWindow.setMaximumGridLines (settings.value (SETTINGS_MAXIMUM_GRID_LINES,
                                                          QVariant (DEFAULT_MAXIMUM_GRID_LINES)).toInt ());
+  m_modelMainWindow.setHighlightOpacity (settings.value (SETTINGS_HIGHLIGHT_OPACITY,
+                                                         QVariant (DEFAULT_HIGHLIGHT_OPACITY)).toDouble ());
 
   updateSettingsMainWindow();
 
@@ -2483,6 +2485,7 @@ void MainWindow::settingsWrite ()
   }
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_HIGHLIGHT_OPACITY, m_modelMainWindow.highlightOpacity());
   settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
@@ -3969,9 +3972,10 @@ void MainWindow::updateAfterCommand ()
   // status bar are up to date. Point coordinates in Document are also updated
   updateAfterCommandStatusBarCoords ();
 
-  // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
-  // by updateAfterCommandStatusBarCoords
-  m_scene->updateAfterCommand (*m_cmdMediator);
+  updateHighlightOpacity ();
+
+  // Update graphics. Effectively, these steps do very little (just needed for highlight opacity)
+  m_digitizeStateContext->updateAfterPointAddition (); // May or may not be needed due to point addition
 
   updateControls ();
 
@@ -4194,6 +4198,17 @@ void MainWindow::updateGridLines ()
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
 }
 
+void MainWindow::updateHighlightOpacity ()
+{
+  if (m_cmdMediator != 0) {
+
+    // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
+    // by updateAfterCommandStatusBarCoords
+    m_scene->updateAfterCommand (*m_cmdMediator,
+                                 m_modelMainWindow.highlightOpacity());
+  }
+}
+
 void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
@@ -4275,8 +4290,7 @@ void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
 
-  m_scene->updateCurveStyles(modelCurveStyles,
-                             m_modelMainWindow.highlightOpacity());
+  m_scene->updateCurveStyles(modelCurveStyles);
   m_cmdMediator->document().setModelCurveStyles(modelCurveStyles);
   updateViewsOfSettings();
 }
@@ -4337,10 +4351,10 @@ void MainWindow::updateSettingsMainWindow()
 
   if ((m_scene != 0) &&
       (m_cmdMediator != 0)) {
-    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles(),
-                               m_modelMainWindow.highlightOpacity());
+    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles());
   }
 
+  updateHighlightOpacity();
   updateWindowTitle();
 }
 

@@ -76,11 +76,11 @@ public:
 
   /// Update the Points and their Curves after executing a command. After a mouse drag, the lines are already updated and
   /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
-  void updateAfterCommand (CmdMediator &cmdMediator);
+  void updateAfterCommand (CmdMediator &cmdMediator,
+                           double highlightOpacity);
 
   /// Update curve styles after settings changed.
-  void updateCurveStyles(const CurveStyles &modelCurveStyles,
-                         double highlightOpacity);
+  void updateCurveStyles(const CurveStyles &modelCurveStyles);
 
   /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
   /// so the screen coordinates can be converted to graph coordinates when updating point ordinals

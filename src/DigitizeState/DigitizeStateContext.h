@@ -18,6 +18,7 @@ class CmdAbstractBase;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class MainWindow;
+class MainWindowModel;
 class QUndoCommand;
 
 /// Container for all DigitizeStateAbstractBase subclasses. This functions as the context class in a standard state machine implementation
@@ -105,6 +106,9 @@ public:
 
   /// State name for debugging
   QString state() const;
+
+  /// Update the graphics attributes
+  void updateAfterPointAddition ();
 
   /// Update the digitize curve settings
   void updateModelDigitizeCurve (CmdMediator *cmdMediator,

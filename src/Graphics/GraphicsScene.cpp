@@ -58,7 +58,6 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
                                                    posScreen,
                                                    pointStyle);
 
-  point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   return point;
@@ -267,9 +266,12 @@ void GraphicsScene::showCurves (bool show,
   }
 }
 
-void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
+void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
+                                        double highlightOpacity)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
+
+  m_graphicsLinesForCurves.updateHighlightOpacity (highlightOpacity);
 
   updateCurves (cmdMediator);
 
@@ -290,13 +292,11 @@ void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
                                             curveNames);
 }
 
-void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles,
-                                       double highlightOpacity)
+void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 
-  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles,
-                                              highlightOpacity);
+  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles);
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,

@@ -69,11 +69,13 @@ public:
                            const Point &point);
 
   /// Update the curve style for every curve
-  void updateCurveStyles (const CurveStyles &modelCurveStyles,
-                          double highlightOpacity);
+  void updateCurveStyles (const CurveStyles &modelCurveStyles);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles);
+
+  /// Update the highlight opacity value. This may or may not affect the current display immediately depending on the state
+  void updateHighlightOpacity (double highlightOpacity);
 
   /// See GraphicsScene::updateOrdinalsAfterDrag
   void updatePointOrdinalsAfterDrag (const CurveStyles &curveStyles,

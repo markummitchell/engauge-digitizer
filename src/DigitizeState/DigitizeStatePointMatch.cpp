@@ -338,6 +338,11 @@ QString DigitizeStatePointMatch::state() const
   return "DigitizeStatePointMatch";
 }
 
+void DigitizeStatePointMatch::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::updateAfterPointAddition";
+}
+
 void DigitizeStatePointMatch::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,
                                                         const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {

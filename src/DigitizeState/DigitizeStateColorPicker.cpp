@@ -321,6 +321,11 @@ QString DigitizeStateColorPicker::state() const
   return "DigitizeStateColorPicker";
 }
 
+void DigitizeStateColorPicker::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::updateAfterPointAddition";
+}
+
 void DigitizeStateColorPicker::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,
                                                          const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {

@@ -36,6 +36,7 @@ public:
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
   virtual QString state() const;
+  virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                          const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);

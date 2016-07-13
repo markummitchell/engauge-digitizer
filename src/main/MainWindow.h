@@ -412,6 +412,7 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateGridLines();
+  void updateHighlightOpacity();
   void updateRecentFileList();
   void updateSettingsMainWindow();
   void updateTransformationAndItsDependencies();

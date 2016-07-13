@@ -39,6 +39,7 @@ public:
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
   virtual QString state() const;
+  virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                          const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);
@@ -51,6 +52,7 @@ private:
                       Qt::Key key);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
   void removeHoverHighlighting();
+  void setHoverHighlighting(const MainWindowModel &modelMainWindow);
   double zoomedToUnzoomedScreenX () const;
   double zoomedToUnzoomedScreenY () const;
 

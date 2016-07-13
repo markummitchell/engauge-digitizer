@@ -13,6 +13,7 @@
 #include "Document.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowModel.h"
 #include <QGraphicsScene>
 #include <QImage>
 #include <QMessageBox>

@@ -81,6 +81,11 @@ QString DigitizeStateEmpty::state() const
   return "DigitizeStateEmpty";
 }
 
+void DigitizeStateEmpty::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::updateAfterPointAddition";
+}
+
 void DigitizeStateEmpty::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,
                                                    const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {

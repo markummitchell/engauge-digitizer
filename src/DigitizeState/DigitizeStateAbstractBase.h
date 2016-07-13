@@ -102,6 +102,9 @@ public:
   /// State name for debugging
   virtual QString state() const = 0;
 
+  /// Update graphics attributes after possible new points. This is useful for highlight opacity
+  virtual void updateAfterPointAddition () = 0;
+
   /// Update the digitize curve settings
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                          const DocumentModelDigitizeCurve &modelDigitizeCurve) = 0;

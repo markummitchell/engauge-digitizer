@@ -127,7 +127,6 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
 
-  m_graphicsItemEllipse->setToolTip (m_identifier);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   // Shadow item is not selectable so it needs no stored data. Do NOT
@@ -162,7 +161,6 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
 
-  m_graphicsItemPolygon->setToolTip (m_identifier);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   // Shadow item is not selectable so it needs no stored data. Do NOT
@@ -246,11 +244,17 @@ void GraphicsPoint::setData (int key, const QVariant &data)
   }
 }
 
-void GraphicsPoint::setPointStyle(const PointStyle &pointStyle,
-                                  double highlightOpacity)
+void GraphicsPoint::setHighlightOpacity (double highlightOpacity)
 {
-  m_highlightOpacity = highlightOpacity;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::setHighlightOpacity"
+                               << " identifier=" << m_identifier.toLatin1().data()
+                               << " highlightOpacity=" << highlightOpacity;
 
+  m_highlightOpacity = highlightOpacity;
+}
+
+void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
+{
   // Setting pen and radius of parent graphics items below also affects the child shadows
   // (m_shadowItemPolygon and m_shadowItemEllipse)
   if (m_graphicsItemEllipse == 0) {
@@ -306,25 +310,14 @@ void GraphicsPoint::setPos (const QPointF pos)
   }
 }
 
-void GraphicsPoint::setToolTip (const QString &toolTip)
-{
-  if (m_graphicsItemEllipse == 0) {
-    m_graphicsItemPolygon->setToolTip (toolTip);
-  } else {
-    m_graphicsItemEllipse->setToolTip (toolTip);
-  }
-}
-
 void GraphicsPoint::setWanted ()
 {
   m_wanted = true;
 }
 
-void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle,
-                                      double highlightOpacity)
+void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle)
 {
-  setPointStyle (curveStyle.pointStyle(),
-                 highlightOpacity); // This point
+  setPointStyle (curveStyle.pointStyle()); // This point
 }
 
 bool GraphicsPoint::wanted () const
