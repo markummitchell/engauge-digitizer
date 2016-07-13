@@ -32,12 +32,12 @@ public:
   /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPointCurve (MainWindow &mainWindow,
                      DigitizeStateAbstractBase &digitizeState,
-                     DocumentModelCoords &modelCoords,
+                     const DocumentModelCoords &modelCoords,
                      const MainWindowModel &modelMainWindow,
                      const QCursor &cursorShape,
                      const Transformation &transformation,
-                     const double *xInitialValue,
-                     const double *yInitialValue);
+                     const double *xInitialValue = 0,
+                     const double *yInitialValue = 0);
   ~DlgEditPointCurve ();
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted

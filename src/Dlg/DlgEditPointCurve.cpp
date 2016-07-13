@@ -27,7 +27,7 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
 DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
                                       DigitizeStateAbstractBase &digitizeState,
-                                      DocumentModelCoords &modelCoords,
+                                      const DocumentModelCoords &modelCoords,
                                       const MainWindowModel &modelMainWindow,
                                       const QCursor &cursorShape,
                                       const Transformation &transformation,

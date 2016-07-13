@@ -14,11 +14,13 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
+#include <QCursor>
 #include <QGraphicsScene>
 #include <QImage>
 #include <QMessageBox>
 #include <QTimer>
 #include "QtToString.h"
+#include "Transformation.h"
 #include "Version.h"
 
 DigitizeStateAbstractBase::DigitizeStateAbstractBase(DigitizeStateContext &context) :
@@ -109,55 +111,46 @@ void DigitizeStateAbstractBase::handleContextMenuEventCurve (CmdMediator *cmdMed
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleContextMenuEventCurve "
                               << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
 
-  // Ask user for coordinates
-//  double x = posGraphBefore.x();
-//  double y = posGraphBefore.y();
+  double *x = 0, *y = 0;
 
-//  DlgEditPointCurve *dlg = new DlgEditPointCurve (context().mainWindow(),
-//                                                  *this,
-//                                                  cmdMediator->document().modelCoords(),
-//                                                  context().mainWindow().modelMainWindow(),
-//                                                  cursor (cmdMediator),
-//                                                  context().mainWindow().transformation(),
-//                                                  &x,
-//                                                  &y);
-//  int rtn = dlg->exec ();
+  if (pointIdentifiers.count() == 1) {
 
-//  QPointF posGraphAfter = dlg->posGraph ();
-//  delete dlg;
+    // There is exactly one point so pass its coordinates to the dialog
+    x = new double;
+    y = new double;
 
-//  if (rtn == QDialog::Accepted) {
+    QPointF posScreenBefore = cmdMediator->document().positionScreen (pointIdentifiers.first());
+    QPointF posGraphBefore;
+    context().mainWindow().transformation().transformScreenToRawGraph (posScreenBefore,
+                                                                       posGraphBefore);
 
-//    // User wants to edit this axis point, but let's perform sanity checks first
+    // Ask user for coordinates
+    *x = posGraphBefore.x();
+    *y = posGraphBefore.y();
+  }
 
-//    bool isError;
-//    QString errorMessage;
+  DlgEditPointCurve *dlg = new DlgEditPointCurve (context().mainWindow(),
+                                                  *this,
+                                                  cmdMediator->document().modelCoords(),
+                                                  context().mainWindow().modelMainWindow(),
+                                                  cursor (cmdMediator),
+                                                  context().mainWindow().transformation(),
+                                                  x,
+                                                  y);
+  if (x != 0) {
+    delete x;
+    x = 0;
+  }
 
-//    context().mainWindow().cmdMediator()->document().checkEditPointAxis(pointIdentifier,
-//                                                                        posScreen,
-//                                                                        posGraphAfter,
-//                                                                        isError,
-//                                                                        errorMessage);
+  if (y != 0) {
+    delete y;
+    y = y;
+  }
 
-//    if (isError) {
+  int rtn = dlg->exec ();
 
-//      QMessageBox::warning (0,
-//                            engaugeWindowTitle(),
-//                            errorMessage);
 
-//    } else {
-
-      // Create a command to edit the point
-//      CmdEditPointCurve *cmd = new CmdEditPointCurve (context().mainWindow(),
-//                                                      cmdMediator->document(),
-//                                                      pointIdentifier);
-//                                                      posGraphBefore,
-//                                                      posGraphAfter,
-//                                                      isXOnly);
-//      context().appendNewCmd(cmdMediator,
-//                             cmd);
-//    }
-//  }
+  delete dlg;
 }
 
 void DigitizeStateAbstractBase::handleLeave (CmdMediator * /* cmdMediator */)

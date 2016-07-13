@@ -107,22 +107,26 @@ bool GraphicsView::allItemsAreEitherAxisOrCurve (const QList<QGraphicsItem*> &it
 
 void GraphicsView::contextMenuEvent (QContextMenuEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent";
-
   QList<QGraphicsItem*> items = scene()->selectedItems ();
 
-  if (allItemsAreEitherAxisOrCurve (items, CURVE_POINTS)) {
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent"
+                              << " itemCount=" << items.count();
 
-    // One or more curve points are selected so edit their coordinates
-    QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
-    emit signalContextMenuEventCurve (pointIdentifiers);
+  if (items.count() > 0) {
 
-  } else if (allItemsAreEitherAxisOrCurve (items, AXIS_POINTS) && items.count() == 1) {
+    if (allItemsAreEitherAxisOrCurve (items, CURVE_POINTS)) {
 
-    // A single axis point is selected so edit it
-    QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
-    emit signalContextMenuEventAxis (pointIdentifiers.first());
+      // One or more curve points are selected so edit their coordinates
+      QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
+      emit signalContextMenuEventCurve (pointIdentifiers);
 
+    } else if (allItemsAreEitherAxisOrCurve (items, AXIS_POINTS) && items.count() == 1) {
+
+      // A single axis point is selected so edit it
+      QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
+      emit signalContextMenuEventAxis (pointIdentifiers.first());
+
+    }
   }
 
   QGraphicsView::contextMenuEvent (event);
