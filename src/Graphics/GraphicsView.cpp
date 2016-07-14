@@ -30,7 +30,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   QGraphicsView (scene)
 {
   connect (this, SIGNAL (signalContextMenuEventAxis (QString)), &mainWindow, SLOT (slotContextMenuEventAxis (QString)));
-  connect (this, SIGNAL (signalContextMenuEventCurve (QStringList)), &mainWindow, SLOT (slotContextMenuEventCurve (QStringList)));
+  connect (this, SIGNAL (signalContextMenuEventGraph (QStringList)), &mainWindow, SLOT (slotContextMenuEventGraph (QStringList)));
   connect (this, SIGNAL (signalDraggedDigFile (QString)), &mainWindow, SLOT (slotFileOpenDraggedDigFile (QString)));
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
@@ -117,7 +117,7 @@ void GraphicsView::contextMenuEvent (QContextMenuEvent *event)
 
       // One or more curve points are selected so edit their coordinates
       QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
-      emit signalContextMenuEventCurve (pointIdentifiers);
+      emit signalContextMenuEventGraph (pointIdentifiers);
 
     } else if (allItemsAreEitherAxisOrCurve (items, AXIS_POINTS) && items.count() == 1) {
 

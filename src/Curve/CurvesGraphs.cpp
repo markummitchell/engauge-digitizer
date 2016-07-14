@@ -93,6 +93,26 @@ int CurvesGraphs::curvesGraphsNumPoints (const QString &curveName) const
   return 0;
 }
 
+void CurvesGraphs::editPointGraph (bool isX,
+                                   bool isY,
+                                   double x,
+                                   double y,
+                                   const QStringList &identifiers,
+                                   const Transformation &transformation)
+{
+  CurveList::iterator itr;
+  for (itr = m_curvesGraphs.begin (); itr != m_curvesGraphs.end (); itr++) {
+
+    Curve &curve = *itr;
+    curve.editPointGraph (isX,
+                          isY,
+                          x,
+                          y,
+                          identifiers,
+                          transformation);
+  }
+}
+
 void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
                                               const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback)
 {

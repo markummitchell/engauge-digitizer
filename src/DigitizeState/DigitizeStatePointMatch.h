@@ -30,6 +30,10 @@ public:
                      DigitizeState previousState);
   virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
+  virtual void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                           const QString &pointIdentifier);
+  virtual void handleContextMenuEventGraph (CmdMediator *cmdMediator,
+                                            const QStringList &pointIdentifiers);
   virtual void handleCurveChange(CmdMediator *cmdMediator);
   virtual void handleKeyPress (CmdMediator *cmdMediator,
                                Qt::Key key,

@@ -1,11 +1,11 @@
 /******************************************************************************************************
- * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2016 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DLG_EDIT_POINT_CURVE_H
-#define DLG_EDIT_POINT_CURVE_H
+#ifndef DLG_EDIT_POINT_GRAPH_H
+#define DLG_EDIT_POINT_GRAPH_H
 
 #include <QDialog>
 #include <QPointF>
@@ -20,30 +20,30 @@ class QPushButton;
 class QVBoxLayout;
 class Transformation;
 
-/// Dialog box for editing the information of one curve point.
-class DlgEditPointCurve : public QDialog
+/// Dialog box for editing the information of one or more points.
+class DlgEditPointGraph : public QDialog
 {
   Q_OBJECT;
 
 public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   /// If initial values are unspecified then the value fields will be initially empty
-  DlgEditPointCurve (MainWindow &mainWindow,
+  DlgEditPointGraph (MainWindow &mainWindow,
                      const DocumentModelCoords &modelCoords,
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
                      const double *xInitialValue = 0,
                      const double *yInitialValue = 0);
-  ~DlgEditPointCurve ();
+  ~DlgEditPointGraph ();
 
-  /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
-  QPointF posGraph () const;
+  /// Return one or both coordinates. Only applies if dialog was accepted
+  void posGraph (bool &isX, double &x, bool &isY, double &y) const;
 
 private slots:
   void slotTextChanged (const QString &);
 
 private:
-  DlgEditPointCurve ();
+  DlgEditPointGraph ();
 
   void createCoords (QVBoxLayout *layoutOuter);
   void createHint (QVBoxLayout *layoutOuter);
@@ -71,4 +71,4 @@ private:
   const MainWindowModel &m_modelMainWindow;
 };
 
-#endif // DLG_EDIT_POINT_CURVE_H
+#endif // DLG_EDIT_POINT_GRAPH_H

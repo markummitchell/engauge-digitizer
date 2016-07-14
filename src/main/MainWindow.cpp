@@ -2765,11 +2765,11 @@ void MainWindow::slotContextMenuEventAxis (QString pointIdentifier)
                                                       pointIdentifier);
 }
 
-void MainWindow::slotContextMenuEventCurve (QStringList pointIdentifiers)
+void MainWindow::slotContextMenuEventGraph (QStringList pointIdentifiers)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventCurve point=" << pointIdentifiers.join(",").toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventGraph point=" << pointIdentifiers.join(",").toLatin1 ().data ();
 
-  m_digitizeStateContext->handleContextMenuEventCurve (m_cmdMediator,
+  m_digitizeStateContext->handleContextMenuEventGraph (m_cmdMediator,
                                                        pointIdentifiers);
 }
 

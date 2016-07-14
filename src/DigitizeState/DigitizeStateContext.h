@@ -44,8 +44,8 @@ public:
   void handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                    const QString &pointIdentifier);
 
-  /// See DigitizeStateAbstractBase::handleContextMenuEventCurve.
-  void handleContextMenuEventCurve (CmdMediator *cmdMediator,
+  /// See DigitizeStateAbstractBase::handleContextMenuEventGraph.
+  void handleContextMenuEventGraph (CmdMediator *cmdMediator,
                                     const QStringList &pointIdentifiers);
 
   /// See DigitizeStateAbstractBase::handleCurveChange.

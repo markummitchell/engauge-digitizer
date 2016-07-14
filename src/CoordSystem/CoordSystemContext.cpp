@@ -209,6 +209,23 @@ void CoordSystemContext::editPointAxis (const QPointF &posGraph,
                                                      identifier);
 }
 
+void CoordSystemContext::editPointGraph (bool isX,
+                                         bool isY,
+                                         double x,
+                                         double y,
+                                         const QStringList &identifiers,
+                                         const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::editPointGraph";
+
+  m_coordSystems [m_coordSystemIndex]->editPointGraph (isX,
+                                                       isY,
+                                                       x,
+                                                       y,
+                                                       identifiers,
+                                                       transformation);
+}
+
 bool CoordSystemContext::isXOnly (const QString &pointIdentifier) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::isXOnly";

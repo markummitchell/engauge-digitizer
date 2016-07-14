@@ -1,10 +1,10 @@
 /******************************************************************************************************
- * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2016 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DlgEditPointCurve.h"
+#include "DlgEditPointGraph.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
@@ -24,7 +24,7 @@ const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
 const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
-DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
+DlgEditPointGraph::DlgEditPointGraph (MainWindow &mainWindow,
                                       const DocumentModelCoords &modelCoords,
                                       const MainWindowModel &modelMainWindow,
                                       const Transformation &transformation,
@@ -35,7 +35,7 @@ DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointCurve::DlgEditPointCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::DlgEditPointGraph";
 
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);
@@ -56,12 +56,12 @@ DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
   updateControls ();
 }
 
-DlgEditPointCurve::~DlgEditPointCurve()
+DlgEditPointGraph::~DlgEditPointGraph()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointCurve::~DlgEditPointCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::~DlgEditPointGraph";
 }
 
-void DlgEditPointCurve::createCoords (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
 {
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
@@ -135,7 +135,7 @@ void DlgEditPointCurve::createCoords (QVBoxLayout *layoutOuter)
   layout->addWidget(labelGraphParRight, 0);
 }
 
-void DlgEditPointCurve::createHint (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createHint (QVBoxLayout *layoutOuter)
 {
   // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
   // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
@@ -154,7 +154,7 @@ void DlgEditPointCurve::createHint (QVBoxLayout *layoutOuter)
   layout->addWidget (label);
 }
 
-void DlgEditPointCurve::createOkCancel (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createOkCancel (QVBoxLayout *layoutOuter)
 {
   QWidget *panel = new QWidget (this);
   layoutOuter->addWidget (panel, 0, Qt::AlignCenter);
@@ -171,11 +171,11 @@ void DlgEditPointCurve::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditPointCurve::initializeGraphCoordinates (const double *xInitialValue,
+void DlgEditPointGraph::initializeGraphCoordinates (const double *xInitialValue,
                                                     const double *yInitialValue,
                                                     const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointCurve::initializeGraphCoordinates";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::initializeGraphCoordinates";
 
   QString xTheta, yRadius;
   if ((xInitialValue != 0) &&
@@ -195,45 +195,50 @@ void DlgEditPointCurve::initializeGraphCoordinates (const double *xInitialValue,
   m_editGraphY->setText (yRadius);
 }
 
-bool DlgEditPointCurve::isCartesian () const
+bool DlgEditPointGraph::isCartesian () const
 {
   return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
 }
 
-QChar DlgEditPointCurve::nameXTheta () const
+QChar DlgEditPointGraph::nameXTheta () const
 {
   return (isCartesian () ? QChar ('X') : THETA);
 }
 
-QChar DlgEditPointCurve::nameYRadius () const
+QChar DlgEditPointGraph::nameYRadius () const
 {
   return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
-QPointF DlgEditPointCurve::posGraph () const
+void DlgEditPointGraph::posGraph (bool &isX,
+                                  double &x,
+                                  bool &isY,
+                                  double &y) const
 {
-  double xTheta, yRadius;
-
   FormatCoordsUnits format;
 
-  format.formattedToUnformatted (m_editGraphX->text(),
-                                 m_editGraphY->text(),
+  // Use zero for any empty coordinate
+  QString xTextNotEmpty = QString ("%1").arg (m_editGraphX->text().isEmpty () ? "0" : m_editGraphX->text());
+  QString yTextNotEmpty = QString ("%1").arg (m_editGraphY->text().isEmpty () ? "0" : m_editGraphY->text());
+
+  format.formattedToUnformatted (xTextNotEmpty,
+                                 yTextNotEmpty,
                                  m_modelCoords,
                                  m_modelMainWindow,
-                                 xTheta,
-                                 yRadius);
+                                 x,
+                                 y);
 
-  return QPointF (xTheta,
-                  yRadius);
+  isX = !m_editGraphX->text().isEmpty();
+  isY = !m_editGraphY->text().isEmpty();
 }
 
-void DlgEditPointCurve::slotTextChanged (const QString &)
+void DlgEditPointGraph::slotTextChanged (const QString &)
 {
   m_changed = true;
   updateControls ();
 }
 
-QString DlgEditPointCurve::unitsType (bool isXTheta) const
+QString DlgEditPointGraph::unitsType (bool isXTheta) const
 {
   if (isCartesian ()) {
     if (isXTheta) {
@@ -250,7 +255,7 @@ QString DlgEditPointCurve::unitsType (bool isXTheta) const
   }
 }
 
-void DlgEditPointCurve::updateControls ()
+void DlgEditPointGraph::updateControls ()
 {
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();

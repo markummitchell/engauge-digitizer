@@ -63,8 +63,8 @@ signals:
   /// Send right click on axis point to MainWindow for editing.
   void signalContextMenuEventAxis (QString pointIdentifier);
 
-  /// Send right click on curve point(s) to MainWindow for editing.
-  void signalContextMenuEventCurve (QStringList pointIdentifiers);
+  /// Send right click on graph point(s) to MainWindow for editing.
+  void signalContextMenuEventGraph (QStringList pointIdentifiers);
 
   /// Send dragged dig file to MainWindow for import. This comes from dragging an engauge dig file
   void signalDraggedDigFile (QString);

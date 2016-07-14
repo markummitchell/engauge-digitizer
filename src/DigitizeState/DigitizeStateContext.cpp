@@ -95,10 +95,10 @@ void DigitizeStateContext::handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                                          pointIdentifier);
 }
 
-void DigitizeStateContext::handleContextMenuEventCurve (CmdMediator *cmdMediator,
+void DigitizeStateContext::handleContextMenuEventGraph (CmdMediator *cmdMediator,
                                                         const QStringList &pointIdentifiers)
 {
-  m_states [m_currentState]->handleContextMenuEventCurve (cmdMediator,
+  m_states [m_currentState]->handleContextMenuEventGraph (cmdMediator,
                                                           pointIdentifiers);
 }
 

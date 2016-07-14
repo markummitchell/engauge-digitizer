@@ -25,6 +25,7 @@
 #include <QList>
 #include <QPixmap>
 #include <QString>
+#include <QStringList>
 #include <QXmlStreamReader>
 
 class Curve;
@@ -85,6 +86,12 @@ public:
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
+  virtual void editPointGraph (bool isX,
+                               bool isY,
+                               double x,
+                               double y,
+                               const QStringList &identifiers,
+                               const Transformation &transformation);
 
   /// Return true if y coordinate is undefined, otherwise x coordinae is undefined in DOCUMENT_AXES_POINT_REQUIRE_4 mode.
   /// Applies to axes points only

@@ -68,6 +68,7 @@ HEADERS  += \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
     Cmd/CmdEditPointAxis.h \
+    Cmd/CmdEditPointGraph.h \
     Cmd/CmdFactory.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
@@ -142,7 +143,7 @@ HEADERS  += \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
     Dlg/DlgEditPointAxis.h \
-    Dlg/DlgEditPointCurve.h \
+    Dlg/DlgEditPointGraph.h \
     Dlg/DlgErrorReport.h \
     Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
@@ -372,6 +373,7 @@ SOURCES += \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
     Cmd/CmdEditPointAxis.cpp \
+    Cmd/CmdEditPointGraph.cpp \
     Cmd/CmdFactory.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
@@ -443,7 +445,7 @@ SOURCES += \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
     Dlg/DlgEditPointAxis.cpp \
-    Dlg/DlgEditPointCurve.cpp \
+    Dlg/DlgEditPointGraph.cpp \
     Dlg/DlgErrorReport.cpp \
     Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \

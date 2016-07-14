@@ -62,8 +62,16 @@ public:
   CurveStyle curveStyle() const;
 
   /// Edit the graph coordinates of an axis point. This method does not apply to a graph point
-  void editPoint (const QPointF &posGraph,
-                  const QString &identifier);
+  void editPointAxis (const QPointF &posGraph,
+                      const QString &identifier);
+
+  /// Edit the graph coordinates of one or more graph points. This method does not apply to an axis point
+  void editPointGraph (bool isX,
+                       bool isY,
+                       double x,
+                       double y,
+                       const QStringList &identifiers,
+                       const Transformation &transformation);
 
   /// Export points in this Curve found in the specified point list.
   void exportToClipboard (const QHash<QString, bool> &selectedHash,

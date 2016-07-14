@@ -138,6 +138,14 @@ public:
   void editPointAxis (const QPointF &posGraph,
                       const QString &identifier);
 
+  /// Edit the graph coordinates of one or more graph points
+  void editPointGraph (bool isX,
+                       bool isY,
+                       double x,
+                       double y,
+                       const QStringList &identifiers,
+                       const Transformation &transformation);
+
   /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
   void initializeGridDisplay (const Transformation &transformation);
 

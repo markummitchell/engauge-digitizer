@@ -115,6 +115,14 @@ public:
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier) = 0;
 
+  /// Edit the graph coordinates of one or more graph points
+  virtual void editPointGraph (bool isX,
+                               bool isY,
+                               double x,
+                               double y,
+                               const QStringList &identifiers,
+                               const Transformation &transformation) = 0;
+
   /// See Curve::iterateThroughCurvePoints, for the axes curve.
   virtual void iterateThroughCurvePointsAxes (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) = 0;
 

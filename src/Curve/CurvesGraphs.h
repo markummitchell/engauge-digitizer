@@ -44,6 +44,14 @@ public:
   /// Point count.
   int curvesGraphsNumPoints (const QString &curveName) const;
 
+  /// Set the x and/or y coordinate values of the specified points
+  void editPointGraph (bool isX,
+                       bool isY,
+                       double x,
+                       double y,
+                       const QStringList &identifiers,
+                       const Transformation &transformation);
+
   /// Apply functor to Points in the specified axis or graph Curve.
   void iterateThroughCurvePoints (const QString &curveNameWanted,
                                   const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback);

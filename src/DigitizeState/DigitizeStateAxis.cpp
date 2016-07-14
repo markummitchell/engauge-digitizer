@@ -76,6 +76,20 @@ void DigitizeStateAxis::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::end";
 }
 
+void DigitizeStateAxis::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                    const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStateAxis::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                     const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+}
+
 void DigitizeStateAxis::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleCurveChange";
