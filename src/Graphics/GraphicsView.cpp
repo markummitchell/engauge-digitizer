@@ -6,6 +6,7 @@
 
 #include "DataKey.h"
 #include "EngaugeAssert.h"
+#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "LoadFileInfo.h"
@@ -68,61 +69,27 @@ GraphicsView::~GraphicsView()
 {
 }
 
-bool GraphicsView::allItemsAreEitherAxisOrCurve (const QList<QGraphicsItem*> &items,
-                                                 AxisOrCurve axisOrCurve) const
+void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-  bool allAreEitherAxisOrCurve = true;
-
-  QList<QGraphicsItem*>::const_iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    QGraphicsItem *item = *itr;
-    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
-
-    if (type == GRAPHICS_ITEM_TYPE_POINT) {
-
-      QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
-      QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
-
-      bool unwantedAxisPoint = ((curveName == AXIS_CURVE_NAME) && (axisOrCurve == CURVE_POINTS));
-      bool unwantedCurvePoint = ((curveName != AXIS_CURVE_NAME) && (axisOrCurve == AXIS_POINTS));
-
-      if (unwantedAxisPoint || unwantedCurvePoint) {
-
-        allAreEitherAxisOrCurve = false;
-        break;
-
-      }
-    } else {
-
-      allAreEitherAxisOrCurve = false;
-      break;
-
-    }
-  }
-
-  return allAreEitherAxisOrCurve;
-}
-
-void GraphicsView::contextMenuEvent (QContextMenuEvent *event)
-{
-  QList<QGraphicsItem*> items = scene()->selectedItems ();
-
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent"
-                              << " itemCount=" << items.count();
+                              << " selectedCount=" << scene()->selectedItems().count();
 
-  if (items.count() > 0) {
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = scene()->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers(items);
 
-    if (allItemsAreEitherAxisOrCurve (items, CURVE_POINTS)) {
+  if (pointIdentifiers.count() > 0) {
 
-      // One or more curve points are selected so edit their coordinates
-      QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
+    if (graphicsItemsExtractor.allSelectedItemsAreEitherAxisOrGraph (items,
+                                                                     GRAPH_POINTS)) {
+
+      // One or more graph points are selected so edit their coordinates
       emit signalContextMenuEventGraph (pointIdentifiers);
 
-    } else if (allItemsAreEitherAxisOrCurve (items, AXIS_POINTS) && items.count() == 1) {
+    } else if (graphicsItemsExtractor.allSelectedItemsAreEitherAxisOrGraph (items,
+                                                                            AXIS_POINTS) && pointIdentifiers.count() == 1) {
 
       // A single axis point is selected so edit it
-      QStringList pointIdentifiers = pointIdentifiersFromSelection (items);
       emit signalContextMenuEventAxis (pointIdentifiers.first());
 
     }
@@ -296,7 +263,6 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
   bool isRightClick = (bitFlag != 0);
 
   if (!isRightClick) {
-
 
     emit signalMouseRelease (posScreen);
 

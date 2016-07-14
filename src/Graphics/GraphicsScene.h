@@ -66,9 +66,6 @@ public:
   /// Reset positionHasChanged flag for all items. Typically this is done as part of mousePressEvent.
   void resetPositionHasChangedFlags();
 
-  /// Return a list of identifiers for the currently selected points.
-  QStringList selectedPointIdentifiers () const;
-
   /// Show or hide all Curves (if showAll is true) or just the selected Curve (if showAll is false);
   void showCurves (bool show,
                    bool showAll = false,

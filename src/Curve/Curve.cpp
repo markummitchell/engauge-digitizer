@@ -165,6 +165,9 @@ void Curve::editPointGraph (bool isX,
                             const QStringList &identifiers,
                             const Transformation &transformation)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::editPointGraph"
+                              << " identifiers=" << identifiers.join(" ").toLatin1().data();
+
   if (transformation.transformIsDefined()) {
 
     // Search for the point with matching identifier
@@ -199,8 +202,6 @@ void Curve::editPointGraph (bool isX,
                                                  posScreen);
 
         point.setPosScreen (posScreen);
-
-        break;
       }
     }
   }

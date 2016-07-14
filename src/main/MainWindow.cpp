@@ -53,6 +53,7 @@
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
 #include "Ghosts.h"
+#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -2843,9 +2844,13 @@ void MainWindow::slotEditCopy ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCopy";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdCopy *cmd = new CmdCopy (*this,
                               m_cmdMediator->document(),
-                              m_scene->selectedPointIdentifiers ());
+                              pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }
@@ -2854,9 +2859,13 @@ void MainWindow::slotEditCut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCut";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdCut *cmd = new CmdCut (*this,
                             m_cmdMediator->document(),
-                            m_scene->selectedPointIdentifiers ());
+                            pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }
@@ -2865,9 +2874,13 @@ void MainWindow::slotEditDelete ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditDelete";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdDelete *cmd = new CmdDelete (*this,
                                   m_cmdMediator->document(),
-                                  m_scene->selectedPointIdentifiers ());
+                                  pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }

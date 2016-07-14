@@ -249,6 +249,7 @@ HEADERS  += \
     src/Ghosts/GhostPolygon.h \
     src/Ghosts/Ghosts.h \
     src/Graphics/GraphicsArcItem.h \
+    src/Graphics/GraphicsItemsExtractor.h \
     src/Graphics/GraphicsItemType.h \
     src/Graphics/GraphicsLinesForCurve.h \
     src/Graphics/GraphicsLinesForCurves.h \
@@ -543,6 +544,7 @@ SOURCES += \
     src/Ghosts/GhostPolygon.cpp \
     src/Ghosts/Ghosts.cpp \
     src/Graphics/GraphicsArcItem.cpp \
+    src/Graphics/GraphicsItemsExtractor.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
     src/Graphics/GraphicsLinesForCurves.cpp \
     src/Graphics/GraphicsPoint.cpp \

@@ -14,6 +14,7 @@
 #include "DlgEditPointAxis.h"
 #include "DlgEditPointGraph.h"
 #include "EngaugeAssert.h"
+#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -318,11 +319,13 @@ void DigitizeStateSelect::keyPressArrow (CmdMediator *cmdMediator,
   }
 
   // Create command to move points
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items  = context().mainWindow().scene ().selectedItems();
   CmdMoveBy *cmd = new CmdMoveBy (context().mainWindow(),
                                   cmdMediator->document(),
                                   deltaScreen,
                                   moveText,
-                                  context().mainWindow().scene ().selectedPointIdentifiers ());
+                                  graphicsItemsExtractor.selectedPointIdentifiers (items));
   context().appendNewCmd (cmdMediator,
                           cmd);
 }

@@ -16,11 +16,6 @@ class QByteArray;
 class QGraphicsPixmapItem;
 class QGraphicsScene;
 
-enum AxisOrCurve {
-  AXIS_POINTS,
-  CURVE_POINTS
-};
-
 /// QGraphicsView class with event handling added. Typically the events are sent to the active digitizing state.
 class GraphicsView : public QGraphicsView
 {
@@ -32,8 +27,8 @@ public:
                MainWindow &mainWindow);
   virtual ~GraphicsView();
 
-  /// Intercept right click to support point editing.
-  void contextMenuEvent (QContextMenuEvent *event);
+  /// Intercept context event to support point editing
+  virtual void contextMenuEvent (QContextMenuEvent *event);
 
   /// Intercept mouse drag event to support drag-and-drop.
   virtual void dragEnterEvent (QDragEnterEvent *event);
@@ -96,8 +91,6 @@ signals:
 private:
   GraphicsView();
 
-  bool allItemsAreEitherAxisOrCurve (const QList<QGraphicsItem*> &items,
-                                     AxisOrCurve axisOrCurve) const;
   QStringList pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const;
   bool inBounds (const QPointF &posScreen);
 
