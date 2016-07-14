@@ -119,14 +119,6 @@ void DigitizeStateContext::handleKeyPress (CmdMediator *cmdMediator,
 
 }
 
-void DigitizeStateContext::handleLeave (CmdMediator *cmdMediator)
-{
-  m_states [m_currentState]->handleLeave (cmdMediator);
-
-  completeRequestedStateTransitionIfExists(cmdMediator);
-
-}
-
 void DigitizeStateContext::handleMouseMove (CmdMediator *cmdMediator,
                                             QPointF pos)
 {
@@ -154,13 +146,6 @@ void DigitizeStateContext::handleMouseRelease (CmdMediator *cmdMediator,
                                                  pos);
 
   completeRequestedStateTransitionIfExists(cmdMediator);
-}
-
-void DigitizeStateContext::handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                                    const QCursor &cursor)
-{
-  m_states [m_currentState]->handleSetOverrideCursor (cmdMediator,
-                                                      cursor);
 }
 
 bool DigitizeStateContext::isGnuplot () const

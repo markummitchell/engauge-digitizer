@@ -56,9 +56,6 @@ public:
                        Qt::Key key,
                        bool atLeastOneSelectedItem);
 
-  /// See DigitizeStateAbstractBase::handleLeave.
-  void handleLeave (CmdMediator *cmdMediator);
-
   /// See DigitizeStateAbstractBase::handleMouseMove.
   void handleMouseMove (CmdMediator *cmdMediator,
                         QPointF pos);
@@ -70,10 +67,6 @@ public:
   /// See DigitizeStateAbstractBase::handleMouseRelease.
   void handleMouseRelease (CmdMediator *cmdMediator,
                            QPointF pos);
-
-  /// See DigitizeStateAbstractBase::handleSetOverrideCursor
-  void handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                const QCursor &cursor);
 
   /// Get method for gnuplot flag
   bool isGnuplot () const;

@@ -47,9 +47,6 @@ public:
   /// Intercept key press events to handle left/right/up/down moving.
   virtual void keyPressEvent (QKeyEvent *event);
 
-  /// Intercept leave events to manage override cursor.
-  virtual void leaveEvent (QEvent *event);
-
   /// Intercept mouse move events to populate the current cursor position in StatusBar.
   virtual void mouseMoveEvent (QMouseEvent *event);
 
@@ -80,9 +77,6 @@ signals:
 
   /// Send keypress to MainWindow for eventual processing by DigitizeStateAbstractBase subclasses.
   void signalKeyPress (Qt::Key, bool atLeastOneSelectedItem);
-
-  /// Send leave to MainWindow for managing the override cursor.
-  void signalLeave ();
 
   /// Send mouse move to MainWindow for eventual display of cursor coordinates in StatusBar
   void signalMouseMove (QPointF);

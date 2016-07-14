@@ -8,12 +8,10 @@
 #define DLG_EDIT_POINT_AXIS_H
 
 #include "DocumentAxesPointsRequired.h"
-#include <QCursor>
 #include <QDialog>
 #include <QLineEdit>
 #include <QPushButton>
 
-class DigitizeStateAbstractBase;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
 class MainWindow;
@@ -31,10 +29,8 @@ public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPointAxis (MainWindow &mainWindow,
-                    DigitizeStateAbstractBase &digitizeState,
                     const DocumentModelCoords &modelCoords,
                     const MainWindowModel &modelMainWindow,
-                    const QCursor &cursorShape,
                     const Transformation &transformation,
                     DocumentAxesPointsRequired documentAxesPointsRequired,
                     bool isXOnly = false,
@@ -44,10 +40,6 @@ public:
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
   QPointF posGraph (bool &isXOnly) const;
-
-signals:
-  /// Send a signal to trigger the setting of the override cursor.
-  void signalSetOverrideCursor (QCursor);
 
 private slots:
   void slotTextChanged (const QString &);
@@ -67,7 +59,6 @@ private:
   QString unitsType (bool isXTheta) const;
   void updateControls ();
 
-  QCursor m_cursorShape;
   QLineEdit *m_editGraphX;
   DlgValidatorAbstract *m_validatorGraphX;
   QLineEdit *m_editGraphY;

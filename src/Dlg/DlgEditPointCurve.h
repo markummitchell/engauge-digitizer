@@ -7,12 +7,10 @@
 #ifndef DLG_EDIT_POINT_CURVE_H
 #define DLG_EDIT_POINT_CURVE_H
 
-#include <QCursor>
 #include <QDialog>
 #include <QPointF>
 #include <QString>
 
-class DigitizeStateAbstractBase;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
 class MainWindow;
@@ -31,10 +29,8 @@ public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPointCurve (MainWindow &mainWindow,
-                     DigitizeStateAbstractBase &digitizeState,
                      const DocumentModelCoords &modelCoords,
                      const MainWindowModel &modelMainWindow,
-                     const QCursor &cursorShape,
                      const Transformation &transformation,
                      const double *xInitialValue = 0,
                      const double *yInitialValue = 0);
@@ -42,10 +38,6 @@ public:
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
   QPointF posGraph () const;
-
-signals:
-  /// Send a signal to trigger the setting of the override cursor.
-  void signalSetOverrideCursor (QCursor);
 
 private slots:
   void slotTextChanged (const QString &);
@@ -65,13 +57,15 @@ private:
   QString unitsType (bool isXTheta) const;
   void updateControls ();
 
-  QCursor m_cursorShape;
   DlgValidatorAbstract *m_validatorGraphX;
   QLineEdit *m_editGraphX;
   DlgValidatorAbstract *m_validatorGraphY;
   QLineEdit *m_editGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
+
+  // Enable Ok button once text has changed. For simplicity, this is true even when original text is restored
+  bool m_changed;
 
   const DocumentModelCoords &m_modelCoords;
   const MainWindowModel &m_modelMainWindow;

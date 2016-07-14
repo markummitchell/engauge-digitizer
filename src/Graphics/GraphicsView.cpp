@@ -35,7 +35,6 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
   connect (this, SIGNAL (signalKeyPress (Qt::Key, bool)), &mainWindow, SLOT (slotKeyPress (Qt::Key, bool)));
-  connect (this, SIGNAL (signalLeave ()), &mainWindow, SLOT (slotLeave ()));
   connect (this, SIGNAL (signalMouseMove(QPointF)), &mainWindow, SLOT (slotMouseMove (QPointF)));
   connect (this, SIGNAL (signalMousePress (QPointF)), &mainWindow, SLOT (slotMousePress (QPointF)));
   connect (this, SIGNAL (signalMouseRelease (QPointF)), &mainWindow, SLOT (slotMouseRelease (QPointF)));
@@ -241,15 +240,6 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
     QGraphicsView::keyPressEvent (event);
 
   }
-}
-
-void GraphicsView::leaveEvent (QEvent *event)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::leaveEvent";
-
-  emit signalLeave ();
-
-  QGraphicsView::leaveEvent (event);
 }
 
 void GraphicsView::mouseMoveEvent (QMouseEvent *event)

@@ -57,10 +57,8 @@ void DigitizeStateAbstractBase::handleContextMenuEventAxis (CmdMediator *cmdMedi
   double y = posGraphBefore.y();
 
   DlgEditPointAxis *dlg = new DlgEditPointAxis (context().mainWindow(),
-                                                *this,
                                                 cmdMediator->document().modelCoords(),
                                                 context().mainWindow().modelMainWindow(),
-                                                cursor (cmdMediator),
                                                 context().mainWindow().transformation(),
                                                 cmdMediator->document().documentAxesPointsRequired(),
                                                 isXOnly,
@@ -130,10 +128,8 @@ void DigitizeStateAbstractBase::handleContextMenuEventCurve (CmdMediator *cmdMed
   }
 
   DlgEditPointCurve *dlg = new DlgEditPointCurve (context().mainWindow(),
-                                                  *this,
                                                   cmdMediator->document().modelCoords(),
                                                   context().mainWindow().modelMainWindow(),
-                                                  cursor (cmdMediator),
                                                   context().mainWindow().transformation(),
                                                   x,
                                                   y);
@@ -151,28 +147,6 @@ void DigitizeStateAbstractBase::handleContextMenuEventCurve (CmdMediator *cmdMed
 
 
   delete dlg;
-}
-
-void DigitizeStateAbstractBase::handleLeave (CmdMediator * /* cmdMediator */)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAbstractBase::handleLeave";
-
-  removeOverrideCursor ();
-}
-
-void DigitizeStateAbstractBase::handleSetOverrideCursor (CmdMediator * /* cmdMediator */,
-                                                         const QCursor &cursor)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleSetOverrideCursor setOverrideCursor="
-                              << QtCursorToString (cursor.shape ()).toLatin1 ().data ();
-
-  // Note that we are setting the QGraphicsView cursor and NOT the QApplication override cursor
-  m_context.view ().setCursor (cursor);
-}
-
-void DigitizeStateAbstractBase::removeOverrideCursor ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAbstractBase::handleLeave restoreOverrideCursor";
 }
 
 void DigitizeStateAbstractBase::setCursor(CmdMediator *cmdMediator)

@@ -4,7 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DigitizeStateAbstractBase.h"
 #include "DlgEditPointCurve.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
@@ -26,32 +25,24 @@ const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
 DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
-                                      DigitizeStateAbstractBase &digitizeState,
                                       const DocumentModelCoords &modelCoords,
                                       const MainWindowModel &modelMainWindow,
-                                      const QCursor &cursorShape,
                                       const Transformation &transformation,
                                       const double *xInitialValue,
                                       const double *yInitialValue) :
   QDialog (&mainWindow),
-  m_cursorShape (cursorShape),
+  m_changed (false),
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointCurve::DlgEditPointCurve";
-
-  // To guarantee the override cursor is always removed, we call removeOverrideCursor here rather than in the code that
-  // allocates this DlgEditPointCurve. The digitizeState argument is otherwise unused.
-  digitizeState.removeOverrideCursor();
-
-  connect (this, SIGNAL (signalSetOverrideCursor (QCursor)), &mainWindow, SLOT (slotSetOverrideCursor (QCursor)));
 
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);
 
   setCursor  (QCursor (Qt::ArrowCursor));
   setModal(true);
-  setWindowTitle (tr ("Edit Curve Point"));
+  setWindowTitle (tr ("Edit Curve Point(s)"));
 
   createCoords (layout);
   createHint (layout);
@@ -61,14 +52,13 @@ DlgEditPointCurve::DlgEditPointCurve (MainWindow &mainWindow,
                               yInitialValue,
                               transformation);
 
+  m_changed = false; // Initialization of coordinate vaues changed this flag so we reset it and update the controls
   updateControls ();
 }
 
 DlgEditPointCurve::~DlgEditPointCurve()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointCurve::~DlgEditPointCurve";
-
-  emit signalSetOverrideCursor (m_cursorShape);
 }
 
 void DlgEditPointCurve::createCoords (QVBoxLayout *layoutOuter)
@@ -239,6 +229,7 @@ QPointF DlgEditPointCurve::posGraph () const
 
 void DlgEditPointCurve::slotTextChanged (const QString &)
 {
+  m_changed = true;
   updateControls ();
 }
 
@@ -264,11 +255,30 @@ void DlgEditPointCurve::updateControls ()
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();
 
-  int posX, posY;
+  // Feedback indicating that empty coordinate will be skipped rather than applied to the selected points
+  QString colorX = (textX.isEmpty() ? QString ("lightGray") : QString ("white"));
+  QString colorY = (textY.isEmpty() ? QString ("lightGray") : QString ("white"));
+  QString styleX = QString ("QLineEdit { background-color: %1; }").arg (colorX);
+  QString styleY = QString ("QLineEdit { background-color: %1; }").arg (colorY);
+  m_editGraphX->setStyleSheet (styleX);
+  m_editGraphY->setStyleSheet (styleY);
 
-  // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
-  m_btnOk->setEnabled (!textX.isEmpty () &&
-                       !textY.isEmpty () &&
-                       (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
-                       (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
+  // Tests that all have to be true
+  // 1) At least one value has been changed
+  // 2) At least one value is not empty
+  // 3) The values that are not empty are properly formatted. This is done remembering that we need to
+  //    check for not empty (which allows single minus sign) and for valid number (which prevents single
+  //    minus sign)
+  bool test2 = (!textX.isEmpty() || !textY.isEmpty());
+
+  int posX, posY;
+  bool test3 = true;
+  if (!textX.isEmpty()) {
+    test3 &= (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable);
+  }
+  if (!textY.isEmpty()) {
+    test3 &= (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable);
+  }
+
+  m_btnOk->setEnabled (m_changed && test2 && test3);
 }

@@ -3150,13 +3150,6 @@ void MainWindow::slotKeyPress (Qt::Key key,
                                           atLeastOneSelectedItem);
 }
 
-void MainWindow::slotLeave ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotLeave";
-
-  m_digitizeStateContext->handleLeave (m_cmdMediator);
-}
-
 void MainWindow::slotLoadStartupFiles ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotLoadStartupFiles";
@@ -3277,14 +3270,6 @@ void MainWindow::slotRedoTextChanged (const QString &text)
     completeText += QString (" \"%1\"").arg (text);
   }
   m_actionEditRedo->setText (completeText);
-}
-
-void MainWindow::slotSetOverrideCursor (QCursor cursor)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
-
-  m_digitizeStateContext->handleSetOverrideCursor (m_cmdMediator,
-                                                   cursor);
 }
 
 void MainWindow::slotSettingsAxesChecker ()

@@ -4,7 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DigitizeStateAbstractBase.h"
 #include "DlgEditPointAxis.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
@@ -36,17 +35,14 @@ const bool IS_X_THETA = true;
 const bool IS_NOT_X_THETA = false;
 
 DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
-                                    DigitizeStateAbstractBase &digitizeState,
                                     const DocumentModelCoords &modelCoords,
                                     const MainWindowModel &modelMainWindow,
-                                    const QCursor &cursorShape,
                                     const Transformation &transformation,
                                     DocumentAxesPointsRequired documentAxesPointsRequired,
                                     bool isXOnly,
                                     const double *xInitialValue,
                                     const double *yInitialValue) :
   QDialog (&mainWindow),
-  m_cursorShape (cursorShape),
   m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
@@ -56,12 +52,6 @@ DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
   // Either one or two coordinates are desired
   bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
   bool isY = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || !isXOnly;
-
-  // To guarantee the override cursor is always removed, we call removeOverrideCursor here rather than in the code that
-  // allocates this DlgEditPointAxis. The digitizeState argument is otherwise unused.
-  digitizeState.removeOverrideCursor();
-
-  connect (this, SIGNAL (signalSetOverrideCursor (QCursor)), &mainWindow, SLOT (slotSetOverrideCursor (QCursor)));
 
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);
@@ -86,8 +76,6 @@ DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
 DlgEditPointAxis::~DlgEditPointAxis()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::~DlgEditPointAxis";
-
-  emit signalSetOverrideCursor (m_cursorShape);
 }
 
 void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
