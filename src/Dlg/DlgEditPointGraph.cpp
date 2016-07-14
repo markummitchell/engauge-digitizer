@@ -109,8 +109,9 @@ void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphX->setAlignment (ALIGNMENT);
   m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
-  m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is X. For polar plots this is the radius R.\n\n"
+  m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate value to be applied to the graph points.\n\n"
+                                  "Leave this field empty if no value is to be applied to the graph points.\n\n"
+                                  "For cartesian plots this is the X coordinate. For polar plots this is the radius R.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphX, 0);
@@ -124,8 +125,9 @@ void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphY->setAlignment (ALIGNMENT);
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
-  m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For plot plots this is the angle Theta.\n\n"
+  m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate value to be applied to the graph points.\n\n"
+                                  "Leave this field empty if no value is to be applied to the graph points.\n\n"
+                                  "For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphY, 0);
@@ -261,8 +263,8 @@ void DlgEditPointGraph::updateControls ()
   QString textY = m_editGraphY->text();
 
   // Feedback indicating that empty coordinate will be skipped rather than applied to the selected points
-  QString colorX = (textX.isEmpty() ? QString ("lightGray") : QString ("white"));
-  QString colorY = (textY.isEmpty() ? QString ("lightGray") : QString ("white"));
+  QString colorX = (textX.isEmpty() ? QString ("#e3e3e3") : QString ("white"));
+  QString colorY = (textY.isEmpty() ? QString ("#e3e3e3") : QString ("white"));
   QString styleX = QString ("QLineEdit { background-color: %1; }").arg (colorX);
   QString styleY = QString ("QLineEdit { background-color: %1; }").arg (colorY);
   m_editGraphX->setStyleSheet (styleX);
