@@ -53,6 +53,7 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
 class FileCmdScript;
+class GeometryWindow;
 class Ghosts;
 class GraphicsScene;
 class GraphicsView;
@@ -262,6 +263,7 @@ private slots:
   void slotFilePrint();
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
+  void slotGeometryWindowClosed();
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
@@ -296,6 +298,7 @@ private slots:
   void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
+  void slotViewToolBarGeometryWindow ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoom16To1 ();
@@ -338,6 +341,7 @@ private:
   void createActionsView ();
   void createCentralWidget ();
   void createCommandStackShadow ();
+  void createDockableWidgets ();
   void createHelpWindow ();
   void createIcons();
   void createLoadImageFromUrl ();
@@ -465,6 +469,7 @@ private:
   QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewCoordSystem;
   QAction *m_actionViewDigitize;
+  QAction *m_actionViewGeometryWindow;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
@@ -538,6 +543,7 @@ private:
   ViewSegmentFilter *m_viewSegmentFilter;
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
+  GeometryWindow *m_dockGeometryWindow;
 
   QComboBox *m_cmbCoordSystem;
   QPushButton *m_btnPrintAll;

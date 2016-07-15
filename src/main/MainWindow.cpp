@@ -52,6 +52,7 @@
 #include "ExportImageForRegression.h"
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
+#include "GeometryWindow.h"
 #include "Ghosts.h"
 #include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
@@ -170,6 +171,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStatusBar ();
   createMenus ();
   createToolBars ();
+  createDockableWidgets ();
   createHelpWindow ();
   createTutorial ();
   createScene ();
@@ -667,10 +669,18 @@ void MainWindow::createActionsView ()
   m_actionViewChecklistGuide = new QAction (tr ("Checklist Guide Toolbar"), this);
   m_actionViewChecklistGuide->setCheckable (true);
   m_actionViewChecklistGuide->setChecked (false);
-  m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide toolbar."));
-  m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide ToolBar\n\n"
-                                                "Show or hide the checklist guide toolbar"));
+  m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide."));
+  m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide\n\n"
+                                                "Show or hide the checklist guide"));
   connect (m_actionViewChecklistGuide, SIGNAL (changed ()), this, SLOT (slotViewToolBarChecklistGuide()));
+
+  m_actionViewGeometryWindow = new QAction (tr ("Geometry Window"), this);
+  m_actionViewGeometryWindow->setCheckable (true);
+  m_actionViewGeometryWindow->setChecked (false);
+  m_actionViewGeometryWindow->setStatusTip (tr ("Show or hide the geometry window."));
+  m_actionViewGeometryWindow->setWhatsThis (tr ("View Geometry Window\n\n"
+                                                "Show or hide the geometry window"));
+  connect (m_actionViewGeometryWindow, SIGNAL (changed ()), this, SLOT (slotViewToolBarGeometryWindow()));
 
   m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), this);
   m_actionViewDigitize->setCheckable (true);
@@ -884,6 +894,19 @@ void MainWindow::createCommandStackShadow ()
   m_cmdStackShadow = new CmdStackShadow;
 }
 
+void MainWindow::createDockableWidgets ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createDockableWidgets";
+
+  // Checklist guide starts out hidden. It will be positioned in settingsRead
+  m_dockChecklistGuide = new ChecklistGuide (this);
+  connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
+
+  // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
+  m_dockGeometryWindow = new GeometryWindow (this);
+  connect (m_dockGeometryWindow, SIGNAL (signalGeometryWindowClosed()), this, SLOT (slotGeometryWindowClosed()));
+}
+
 void MainWindow::createHelpWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
@@ -975,6 +998,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewChecklistGuide);
+  m_menuView->addAction (m_actionViewGeometryWindow);
   m_menuView->addAction (m_actionViewSettingsViews);
   m_menuView->addAction (m_actionViewCoordSystem);
   m_menuView->insertSeparator (m_actionViewToolTips);
@@ -1230,10 +1254,6 @@ void MainWindow::createToolBars ()
   m_toolCoordSystem->addWidget (m_btnShowAll);
   m_toolCoordSystem->addWidget (m_btnPrintAll);
   addToolBar (m_toolCoordSystem);
-
-  // Checklist guide starts out hidden. It will be positioned in settingsRead
-  m_dockChecklistGuide = new ChecklistGuide (this);
-  connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
 }
 
 void MainWindow::createTutorial ()
@@ -3135,6 +3155,13 @@ bool MainWindow::slotFileSaveAs()
   return false;
 }
 
+void MainWindow::slotGeometryWindowClosed()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGeometryWindowClosed";
+
+  m_actionViewGeometryWindow->setChecked (false);
+}
+
 void MainWindow::slotHelpAbout()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotHelpAbout";
@@ -3568,6 +3595,17 @@ void MainWindow::slotViewToolBarDigitize ()
     m_toolDigitize->show();
   } else {
     m_toolDigitize->hide();
+  }
+}
+
+void MainWindow::slotViewToolBarGeometryWindow ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGeometryWindow";
+
+  if (m_actionViewGeometryWindow->isChecked ()) {
+    m_dockGeometryWindow->show();
+  } else {
+    m_dockGeometryWindow->hide();
   }
 }
 

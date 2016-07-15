@@ -227,6 +227,7 @@ HEADERS  += \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     Format/FormatDegreesMinutesSecondsPolarTheta.h \
     Callback/functor.h \
+    Geometry/GeometryWindow.h \
     Ghosts/GhostEllipse.h \
     Ghosts/GhostPath.h \
     Ghosts/GhostPolygon.h \
@@ -524,6 +525,7 @@ SOURCES += \
     Format/FormatDegreesMinutesSecondsBase.cpp \
     Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    Geometry/GeometryWindow.cpp \
     Ghosts/GhostEllipse.cpp \
     Ghosts/GhostPath.cpp \
     Ghosts/GhostPolygon.cpp \
@@ -652,6 +654,7 @@ INCLUDEPATH += Background \
                FileCmd \
                Filter \
                Format \
+               Geometry \
                Ghosts \
                Graphics \
                Grid \
