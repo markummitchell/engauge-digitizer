@@ -12,6 +12,7 @@
 #include "CmdCut.h"
 #include "CmdDelete.h"
 #include "CmdEditPointAxis.h"
+#include "CmdEditPointGraph.h"
 #include "CmdFactory.h"
 #include "CmdMoveBy.h"
 #include "CmdPaste.h"
@@ -92,6 +93,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                 document,
                                 cmdDescription,
                                 reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_EDIT_POINT_GRAPH) {
+    cmd = new CmdEditPointGraph (mainWindow,
+                                 document,
+                                 cmdDescription,
+                                 reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,

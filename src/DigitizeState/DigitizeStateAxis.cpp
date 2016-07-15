@@ -9,7 +9,7 @@
 #include "CursorFactory.h"
 #include "DigitizeStateAxis.h"
 #include "DigitizeStateContext.h"
-#include "DlgEditPoint.h"
+#include "DlgEditPointAxis.h"
 #include "Document.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -50,7 +50,7 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::createTemporaryPoint";
 
-  // Temporary point that user can see while DlgEditPoint is active
+  // Temporary point that user can see while DlgEditPointAxis is active
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
@@ -74,6 +74,20 @@ QCursor DigitizeStateAxis::cursor(CmdMediator *cmdMediator) const
 void DigitizeStateAxis::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::end";
+}
+
+void DigitizeStateAxis::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                    const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStateAxis::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                     const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
 }
 
 void DigitizeStateAxis::handleCurveChange(CmdMediator * /* cmdMediator */)
@@ -118,13 +132,11 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
                           posScreen);
 
     // Ask user for coordinates
-    DlgEditPoint *dlg = new DlgEditPoint (context ().mainWindow (),
-                                          *this,
-                                          cmdMediator->document().modelCoords(),
-                                          context().mainWindow().modelMainWindow(),
-                                          cursor (cmdMediator),
-                                          context().mainWindow().transformation(),
-                                          cmdMediator->document().documentAxesPointsRequired());
+    DlgEditPointAxis *dlg = new DlgEditPointAxis (context ().mainWindow (),
+                                                  cmdMediator->document().modelCoords(),
+                                                  context().mainWindow().modelMainWindow(),
+                                                  context().mainWindow().transformation(),
+                                                  cmdMediator->document().documentAxesPointsRequired());
     int rtn = dlg->exec ();
 
     bool isXOnly;
@@ -174,6 +186,11 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 QString DigitizeStateAxis::state() const
 {
   return "DigitizeStateAxis";
+}
+
+void DigitizeStateAxis::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateAfterPointAddition";
 }
 
 void DigitizeStateAxis::updateModelDigitizeCurve (CmdMediator *cmdMediator,

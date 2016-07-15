@@ -30,6 +30,10 @@ public:
                      DigitizeState previousState);
   virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
+  virtual void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                           const QString &pointIdentifier);
+  virtual void handleContextMenuEventGraph (CmdMediator *cmdMediator,
+                                            const QStringList &pointIdentifiers);
   virtual void handleCurveChange(CmdMediator *cmdMediator);
   virtual void handleKeyPress (CmdMediator *cmdMediator,
                                Qt::Key key,
@@ -41,6 +45,7 @@ public:
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
   virtual QString state() const;
+  virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                          const DocumentModelDigitizeCurve &modelDigitizeCurve);
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments);

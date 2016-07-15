@@ -1,29 +1,21 @@
 /******************************************************************************************************
- * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2016 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DigitizeStateAbstractBase.h"
-#include "DlgEditPoint.h"
+#include "DlgEditPointGraph.h"
+#include "DlgEditPointGraphLineEdit.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
-#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelCoords.h"
-#include "EngaugeAssert.h"
 #include "FormatCoordsUnits.h"
-#include "FormatDateTime.h"
-#include "FormatDegreesMinutesSecondsNonPolarTheta.h"
-#include "FormatDegreesMinutesSecondsPolarTheta.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
-#include <QDoubleValidator>
-#include <QGridLayout>
 #include <QGroupBox>
-#include <QHBoxLayout>
 #include <QLabel>
-#include <QRect>
+#include <QPushButton>
 #include "QtToString.h"
 #include <QVBoxLayout>
 #include "Transformation.h"
@@ -32,43 +24,25 @@ const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
 const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
-const bool IS_X_THETA = true;
-const bool IS_NOT_X_THETA = false;
-
-DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
-                            DigitizeStateAbstractBase &digitizeState,
-                            const DocumentModelCoords &modelCoords,
-                            const MainWindowModel &modelMainWindow,
-                            const QCursor &cursorShape,
-                            const Transformation &transformation,
-                            DocumentAxesPointsRequired documentAxesPointsRequired,
-                            bool isXOnly,
-                            const double *xInitialValue,
-                            const double *yInitialValue) :
+DlgEditPointGraph::DlgEditPointGraph (MainWindow &mainWindow,
+                                      const DocumentModelCoords &modelCoords,
+                                      const MainWindowModel &modelMainWindow,
+                                      const Transformation &transformation,
+                                      const double *xInitialValue,
+                                      const double *yInitialValue) :
   QDialog (&mainWindow),
-  m_cursorShape (cursorShape),
-  m_documentAxesPointsRequired (documentAxesPointsRequired),
+  m_changed (false),
   m_modelCoords (modelCoords),
   m_modelMainWindow (modelMainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::DlgEditPoint";
-
-  // Either one or two coordinates are desired
-  bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
-  bool isY = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || !isXOnly;
-
-  // To guarantee the override cursor is always removed, we call removeOverrideCursor here rather than in the code that
-  // allocates this DlgEditPoint. The digitizeState argument is otherwise unused.
-  digitizeState.removeOverrideCursor();
-
-  connect (this, SIGNAL (signalSetOverrideCursor (QCursor)), &mainWindow, SLOT (slotSetOverrideCursor (QCursor)));
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::DlgEditPointGraph";
 
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);
 
   setCursor  (QCursor (Qt::ArrowCursor));
   setModal(true);
-  setWindowTitle (tr ("Edit Axis Point"));
+  setWindowTitle (tr ("Edit Curve Point(s)"));
 
   createCoords (layout);
   createHint (layout);
@@ -76,21 +50,18 @@ DlgEditPoint::DlgEditPoint (MainWindow &mainWindow,
 
   initializeGraphCoordinates (xInitialValue,
                               yInitialValue,
-                              transformation,
-                              isX,
-                              isY);
+                              transformation);
 
+  m_changed = false; // Initialization of coordinate vaues changed this flag so we reset it and update the controls
   updateControls ();
 }
 
-DlgEditPoint::~DlgEditPoint()
+DlgEditPointGraph::~DlgEditPointGraph()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::~DlgEditPoint";
-
-  emit signalSetOverrideCursor (m_cursorShape);
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::~DlgEditPointGraph";
 }
 
-void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
 {
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
@@ -112,7 +83,7 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                                                                                    m_modelMainWindow.locale());
 
   // Label, with guidance in terms of legal ranges and units
-  QString description = QString ("%1 (%2, %3)%4%5%6%7%8%9 %10 (%11, %12):")
+  QString description = QString ("%1 (%2, %3)%4%5%6%7%8%9 %10:")
                         .arg (tr ("Graph Coordinates"))
                         .arg (nameXTheta ())
                         .arg (nameYRadius ())
@@ -122,9 +93,7 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
                         .arg (isConstraintX && isConstraintY ? " and " : "")
                         .arg (                 isConstraintY ? QString (nameYRadius ()) : "")
                         .arg (                 isConstraintY ? " > 0" : "")
-                        .arg (tr ("as"))
-                        .arg (unitsType (IS_X_THETA))
-                        .arg (unitsType (IS_NOT_X_THETA));
+                        .arg (tr ("as"));
   QGroupBox *panel = new QGroupBox (description, this);
   layoutOuter->addWidget (panel);
 
@@ -135,13 +104,14 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   QLabel *labelGraphParLeft = new QLabel (tr ("("), this);
   layout->addWidget(labelGraphParLeft, 0);
 
-  m_editGraphX = new QLineEdit;
+  m_editGraphX = new DlgEditPointGraphLineEdit;
   m_editGraphX->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
   m_editGraphX->setAlignment (ALIGNMENT);
   m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
-  m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is X. For polar plots this is the radius R.\n\n"
+  m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate value to be applied to the graph points.\n\n"
+                                  "Leave this field empty if no value is to be applied to the graph points.\n\n"
+                                  "For cartesian plots this is the X coordinate. For polar plots this is the radius R.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphX, 0);
@@ -150,13 +120,14 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   QLabel *labelGraphComma = new QLabel (tr (", "), this);
   layout->addWidget(labelGraphComma, 0);
 
-  m_editGraphY = new QLineEdit;
+  m_editGraphY = new DlgEditPointGraphLineEdit;
   m_editGraphY->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
   m_editGraphY->setAlignment (ALIGNMENT);
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
-  m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For plot plots this is the angle Theta.\n\n"
+  m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate value to be applied to the graph points.\n\n"
+                                  "Leave this field empty if no value is to be applied to the graph points.\n\n"
+                                  "For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphY, 0);
@@ -166,7 +137,7 @@ void DlgEditPoint::createCoords (QVBoxLayout *layoutOuter)
   layout->addWidget(labelGraphParRight, 0);
 }
 
-void DlgEditPoint::createHint (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createHint (QVBoxLayout *layoutOuter)
 {
   // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
   // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
@@ -185,7 +156,7 @@ void DlgEditPoint::createHint (QVBoxLayout *layoutOuter)
   layout->addWidget (label);
 }
 
-void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
+void DlgEditPointGraph::createOkCancel (QVBoxLayout *layoutOuter)
 {
   QWidget *panel = new QWidget (this);
   layoutOuter->addWidget (panel, 0, Qt::AlignCenter);
@@ -202,13 +173,11 @@ void DlgEditPoint::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
-                                               const double *yInitialValue,
-                                               const Transformation &transformation,
-                                               bool isX,
-                                               bool isY)
+void DlgEditPointGraph::initializeGraphCoordinates (const double *xInitialValue,
+                                                    const double *yInitialValue,
+                                                    const Transformation &transformation)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPoint::initializeGraphCoordinates";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::initializeGraphCoordinates";
 
   QString xTheta, yRadius;
   if ((xInitialValue != 0) &&
@@ -224,60 +193,54 @@ void DlgEditPoint::initializeGraphCoordinates (const double *xInitialValue,
                                    transformation);
   }
 
-  if (isX) {
-    m_editGraphX->setText (xTheta);
-  } else {
-    m_editGraphX->setText ("");
-  }
-
-  if (isY) {
-    m_editGraphY->setText (yRadius);
-  } else {
-    m_editGraphY->setText ("");
-  }
+  m_editGraphX->setText (xTheta);
+  m_editGraphY->setText (yRadius);
 }
 
-bool DlgEditPoint::isCartesian () const
+bool DlgEditPointGraph::isCartesian () const
 {
   return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
 }
 
-QChar DlgEditPoint::nameXTheta () const
+QChar DlgEditPointGraph::nameXTheta () const
 {
   return (isCartesian () ? QChar ('X') : THETA);
 }
 
-QChar DlgEditPoint::nameYRadius () const
+QChar DlgEditPointGraph::nameYRadius () const
 {
   return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
-QPointF DlgEditPoint::posGraph (bool &isXOnly) const
+void DlgEditPointGraph::posGraph (bool &isX,
+                                  double &x,
+                                  bool &isY,
+                                  double &y) const
 {
-  double xTheta, yRadius;
-
   FormatCoordsUnits format;
 
-  format.formattedToUnformatted (m_editGraphX->text(),
-                                 m_editGraphY->text(),
+  // Use zero for any empty coordinate
+  QString xTextNotEmpty = QString ("%1").arg (m_editGraphX->text().isEmpty () ? "0" : m_editGraphX->text());
+  QString yTextNotEmpty = QString ("%1").arg (m_editGraphY->text().isEmpty () ? "0" : m_editGraphY->text());
+
+  format.formattedToUnformatted (xTextNotEmpty,
+                                 yTextNotEmpty,
                                  m_modelCoords,
                                  m_modelMainWindow,
-                                 xTheta,
-                                 yRadius);
+                                 x,
+                                 y);
 
-  // If yRadius value is empty then this is the xTheta value only
-  isXOnly = m_editGraphY->text().isEmpty();
-
-  return QPointF (xTheta,
-                  yRadius);
+  isX = !m_editGraphX->text().isEmpty();
+  isY = !m_editGraphY->text().isEmpty();
 }
 
-void DlgEditPoint::slotTextChanged (const QString &)
+void DlgEditPointGraph::slotTextChanged (const QString &)
 {
+  m_changed = true;
   updateControls ();
 }
 
-QString DlgEditPoint::unitsType (bool isXTheta) const
+QString DlgEditPointGraph::unitsType (bool isXTheta) const
 {
   if (isCartesian ()) {
     if (isXTheta) {
@@ -294,31 +257,31 @@ QString DlgEditPoint::unitsType (bool isXTheta) const
   }
 }
 
-void DlgEditPoint::updateControls ()
+void DlgEditPointGraph::updateControls ()
 {
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();
 
+  // Feedback indicating that empty coordinate will be skipped rather than applied to the selected points
+  m_editGraphX->updateBackground ();
+  m_editGraphY->updateBackground ();
+
+  // Tests that all have to be true
+  // 1) At least one value has been changed
+  // 2) At least one value is not empty
+  // 3) The values that are not empty are properly formatted. This is done remembering that we need to
+  //    check for not empty (which allows single minus sign) and for valid number (which prevents single
+  //    minus sign)
+  bool test2 = (!textX.isEmpty() || !textY.isEmpty());
+
   int posX, posY;
-
-  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_4) {
-
-    bool gotX = (!textX.isEmpty() &&
-                 (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable));
-    bool gotY = (!textY.isEmpty() &&
-                 (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
-
-    // Check for not empty in one coordinate and for valid number in the other coordinate
-    m_btnOk->setEnabled ((textX.isEmpty() && gotY) ||
-                         (textY.isEmpty() && gotX));
-
-  } else {
-
-    // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
-    m_btnOk->setEnabled (!textX.isEmpty () &&
-                         !textY.isEmpty () &&
-                         (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
-                         (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
-
+  bool test3 = true;
+  if (!textX.isEmpty()) {
+    test3 &= (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable);
   }
+  if (!textY.isEmpty()) {
+    test3 &= (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable);
+  }
+
+  m_btnOk->setEnabled (m_changed && test2 && test3);
 }

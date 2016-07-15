@@ -63,6 +63,20 @@ void DigitizeStateSegment::end ()
   segmentFactory.clearSegments(m_segments);
 }
 
+void DigitizeStateSegment::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                       const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStateSegment::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                        const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment ::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+}
+
 void DigitizeStateSegment::handleCurveChange(CmdMediator *cmdMediator)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleCurveChange";
@@ -184,6 +198,11 @@ void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)
 QString DigitizeStateSegment::state() const
 {
   return "DigitizeStateSegment";
+}
+
+void DigitizeStateSegment::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::updateAfterPointAddition";
 }
 
 void DigitizeStateSegment::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

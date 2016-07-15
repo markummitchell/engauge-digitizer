@@ -53,6 +53,7 @@
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
 #include "Ghosts.h"
+#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -2450,6 +2451,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                                         QVariant (DEFAULT_IMPORT_CROPPING)).toInt ());
   m_modelMainWindow.setMaximumGridLines (settings.value (SETTINGS_MAXIMUM_GRID_LINES,
                                                          QVariant (DEFAULT_MAXIMUM_GRID_LINES)).toInt ());
+  m_modelMainWindow.setHighlightOpacity (settings.value (SETTINGS_HIGHLIGHT_OPACITY,
+                                                         QVariant (DEFAULT_HIGHLIGHT_OPACITY)).toDouble ());
 
   updateSettingsMainWindow();
 
@@ -2483,6 +2486,7 @@ void MainWindow::settingsWrite ()
   }
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
+  settings.setValue (SETTINGS_HIGHLIGHT_OPACITY, m_modelMainWindow.highlightOpacity());
   settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
@@ -2754,12 +2758,20 @@ void MainWindow::slotCmbCurve(int /* index */)
   updateViewsOfSettings();
 }
 
-void MainWindow::slotContextMenuEvent (QString pointIdentifier)
+void MainWindow::slotContextMenuEventAxis (QString pointIdentifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEvent point=" << pointIdentifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventAxis point=" << pointIdentifier.toLatin1 ().data ();
 
-  m_digitizeStateContext->handleContextMenuEvent (m_cmdMediator,
-                                                  pointIdentifier);
+  m_digitizeStateContext->handleContextMenuEventAxis (m_cmdMediator,
+                                                      pointIdentifier);
+}
+
+void MainWindow::slotContextMenuEventGraph (QStringList pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotContextMenuEventGraph point=" << pointIdentifiers.join(",").toLatin1 ().data ();
+
+  m_digitizeStateContext->handleContextMenuEventGraph (m_cmdMediator,
+                                                       pointIdentifiers);
 }
 
 void MainWindow::slotDigitizeAxis ()
@@ -2832,9 +2844,13 @@ void MainWindow::slotEditCopy ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCopy";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdCopy *cmd = new CmdCopy (*this,
                               m_cmdMediator->document(),
-                              m_scene->selectedPointIdentifiers ());
+                              pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }
@@ -2843,9 +2859,13 @@ void MainWindow::slotEditCut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCut";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdCut *cmd = new CmdCut (*this,
                             m_cmdMediator->document(),
-                            m_scene->selectedPointIdentifiers ());
+                            pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }
@@ -2854,9 +2874,13 @@ void MainWindow::slotEditDelete ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditDelete";
 
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
   CmdDelete *cmd = new CmdDelete (*this,
                                   m_cmdMediator->document(),
-                                  m_scene->selectedPointIdentifiers ());
+                                  pointIdentifiers);
   m_digitizeStateContext->appendNewCmd (m_cmdMediator,
                                         cmd);
 }
@@ -3139,13 +3163,6 @@ void MainWindow::slotKeyPress (Qt::Key key,
                                           atLeastOneSelectedItem);
 }
 
-void MainWindow::slotLeave ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotLeave";
-
-  m_digitizeStateContext->handleLeave (m_cmdMediator);
-}
-
 void MainWindow::slotLoadStartupFiles ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotLoadStartupFiles";
@@ -3266,14 +3283,6 @@ void MainWindow::slotRedoTextChanged (const QString &text)
     completeText += QString (" \"%1\"").arg (text);
   }
   m_actionEditRedo->setText (completeText);
-}
-
-void MainWindow::slotSetOverrideCursor (QCursor cursor)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSetOverrideCursor";
-
-  m_digitizeStateContext->handleSetOverrideCursor (m_cmdMediator,
-                                                   cursor);
 }
 
 void MainWindow::slotSettingsAxesChecker ()
@@ -3961,9 +3970,10 @@ void MainWindow::updateAfterCommand ()
   // status bar are up to date. Point coordinates in Document are also updated
   updateAfterCommandStatusBarCoords ();
 
-  // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
-  // by updateAfterCommandStatusBarCoords
-  m_scene->updateAfterCommand (*m_cmdMediator);
+  updateHighlightOpacity ();
+
+  // Update graphics. Effectively, these steps do very little (just needed for highlight opacity)
+  m_digitizeStateContext->updateAfterPointAddition (); // May or may not be needed due to point addition
 
   updateControls ();
 
@@ -3981,7 +3991,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommandStatusBarCoords";
 
   // For some reason, mapFromGlobal(QCursor::pos) differs from event->pos by a little bit. We must compensate for
-  // this so cursor coordinates in status bar match the DlgEditPoint inputs initially. After the mouse moves
+  // this so cursor coordinates in status bar match the DlgEditPointAxis inputs initially. After the mouse moves
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 
@@ -4186,6 +4196,17 @@ void MainWindow::updateGridLines ()
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
 }
 
+void MainWindow::updateHighlightOpacity ()
+{
+  if (m_cmdMediator != 0) {
+
+    // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
+    // by updateAfterCommandStatusBarCoords
+    m_scene->updateAfterCommand (*m_cmdMediator,
+                                 m_modelMainWindow.highlightOpacity());
+  }
+}
+
 void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
@@ -4267,8 +4288,7 @@ void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
 
-  m_scene->updateCurveStyles(modelCurveStyles,
-                             m_modelMainWindow.highlightOpacity());
+  m_scene->updateCurveStyles(modelCurveStyles);
   m_cmdMediator->document().setModelCurveStyles(modelCurveStyles);
   updateViewsOfSettings();
 }
@@ -4329,10 +4349,10 @@ void MainWindow::updateSettingsMainWindow()
 
   if ((m_scene != 0) &&
       (m_cmdMediator != 0)) {
-    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles(),
-                               m_modelMainWindow.highlightOpacity());
+    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles());
   }
 
+  updateHighlightOpacity();
   updateWindowTitle();
 }
 

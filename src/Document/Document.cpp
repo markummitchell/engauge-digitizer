@@ -344,6 +344,23 @@ void Document::editPointAxis (const QPointF &posGraph,
                                      identifier);
 }
 
+void Document::editPointGraph (bool isX,
+                               bool isY,
+                               double x,
+                               double y,
+                               const QStringList &identifiers,
+                               const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::editPointCurve";
+
+  m_coordSystemContext.editPointGraph (isX,
+                                       isY,
+                                       x,
+                                       y,
+                                       identifiers,
+                                       transformation);
+}
+
 void Document::generateEmptyPixmap(const QXmlStreamAttributes &attributes)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::generateEmptyPixmap";

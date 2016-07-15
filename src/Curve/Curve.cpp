@@ -141,8 +141,8 @@ CurveStyle Curve::curveStyle() const
   return m_curveStyle;
 }
 
-void Curve::editPoint (const QPointF &posGraph,
-                       const QString &identifier)
+void Curve::editPointAxis (const QPointF &posGraph,
+                           const QString &identifier)
 {
   // Search for the point with matching identifier
   QList<Point>::iterator itr;
@@ -154,6 +154,55 @@ void Curve::editPoint (const QPointF &posGraph,
       point.setPosGraph (posGraph);
       break;
 
+    }
+  }
+}
+
+void Curve::editPointGraph (bool isX,
+                            bool isY,
+                            double x,
+                            double y,
+                            const QStringList &identifiers,
+                            const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Curve::editPointGraph"
+                              << " identifiers=" << identifiers.join(" ").toLatin1().data();
+
+  if (transformation.transformIsDefined()) {
+
+    // Search for the point with matching identifier
+    QList<Point>::iterator itr;
+    for (itr = m_points.begin(); itr != m_points.end(); itr++) {
+
+      Point &point = *itr;
+
+      if (identifiers.contains (point.identifier ())) {
+
+        // Although one or more graph coordinates are specified, it is the screen coordinates that must be
+        // moved. This is because only the screen coordinates of the graph points are tracked (not the graph coordinates).
+        // So we compute posScreen and call Point::setPosScreen instead of Point::setPosGraph
+
+        // Get original graph coordinates
+        QPointF posScreen = point.posScreen ();
+        QPointF posGraph;
+        transformation.transformScreenToRawGraph (posScreen,
+                                                  posGraph);
+
+        // Override one or both coordinates
+        if (isX) {
+          posGraph.setX (x);
+        }
+
+        if (isY) {
+          posGraph.setY (y);
+        }
+
+        // Set the screen coordinates
+        transformation.transformRawGraphToScreen(posGraph,
+                                                 posScreen);
+
+        point.setPosScreen (posScreen);
+      }
     }
   }
 }

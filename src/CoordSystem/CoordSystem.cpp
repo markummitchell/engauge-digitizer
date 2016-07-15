@@ -265,12 +265,32 @@ int CoordSystem::curvesGraphsNumPoints(const QString &curveName) const
 void CoordSystem::editPointAxis (const QPointF &posGraph,
                                  const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::editPointAxis posGraph=("
-                              << posGraph.x () << ", " << posGraph.y () << ") identifier="
-                              << identifier.toLatin1 ().data ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::editPointAxis"
+                              << " posGraph=(" << posGraph.x () << ", " << posGraph.y () << ") identifier="
+                              << " identifier=" << identifier.toLatin1 ().data ();
 
-  m_curveAxes->editPoint (posGraph,
-                          identifier);
+  m_curveAxes->editPointAxis (posGraph,
+                              identifier);
+}
+
+void CoordSystem::editPointGraph (bool isX,
+                                  bool isY,
+                                  double x,
+                                  double y,
+                                  const QStringList &identifiers,
+                                  const Transformation &transformation)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::editPointGraph posGraph=("
+                              << " x=" << (isX ? QString::number (x).toLatin1().data() : "")
+                              << " y=" << (isY ? QString::number (y).toLatin1().data() : "")
+                              << ") identifiers=" << identifiers.join(" ").toLatin1 ().data ();
+
+  m_curvesGraphs.editPointGraph (isX,
+                                 isY,
+                                 x,
+                                 y,
+                                 identifiers,
+                                 transformation);
 }
 
 bool CoordSystem::isXOnly (const QString &pointIdentifier) const

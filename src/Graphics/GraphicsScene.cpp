@@ -58,7 +58,6 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
                                                    posScreen,
                                                    pointStyle);
 
-  point->setToolTip (identifier);
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
   return point;
@@ -198,32 +197,6 @@ void GraphicsScene::resetPositionHasChangedFlags()
   }
 }
 
-QStringList GraphicsScene::selectedPointIdentifiers () const
-{
-  const QList<QGraphicsItem*> &items = QGraphicsScene::selectedItems();
-
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::selectedPointIdentifiers"
-                              << " selectedItems=" << items.count();
-
-  QStringList selectedIds;
-  QList<QGraphicsItem*>::const_iterator itr;
-  for (itr = items.begin(); itr != items.end(); itr++) {
-
-    const QGraphicsItem* item = *itr;
-
-    // Skip the image and only keep the Points
-    bool isPoint = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_POINT);
-    if (isPoint) {
-
-      // Add Point to the list
-      selectedIds << item->data(DATA_KEY_IDENTIFIER).toString ();
-
-    }
-  }
-
-  return  selectedIds;
-}
-
 void GraphicsScene::showCurves (bool show,
                                 bool showAll,
                                 const QString &curveNameWanted)
@@ -267,9 +240,12 @@ void GraphicsScene::showCurves (bool show,
   }
 }
 
-void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator)
+void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
+                                        double highlightOpacity)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
+
+  m_graphicsLinesForCurves.updateHighlightOpacity (highlightOpacity);
 
   updateCurves (cmdMediator);
 
@@ -290,13 +266,11 @@ void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
                                             curveNames);
 }
 
-void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles,
-                                       double highlightOpacity)
+void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 
-  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles,
-                                              highlightOpacity);
+  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles);
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,

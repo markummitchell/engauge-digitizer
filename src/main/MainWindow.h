@@ -234,7 +234,8 @@ private slots:
   void slotCmbBackground(int);
   void slotCmbCoordSystem(int);
   void slotCmbCurve(int);
-  void slotContextMenuEvent (QString);
+  void slotContextMenuEventAxis (QString);
+  void slotContextMenuEventGraph (QStringList);
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
@@ -264,7 +265,6 @@ private slots:
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
-  void slotLeave ();
   void slotLoadStartupFiles ();
   void slotMouseMove (QPointF);
   void slotMousePress (QPointF);
@@ -272,7 +272,6 @@ private slots:
   void slotRecentFileAction ();
   void slotRecentFileClear ();
   void slotRedoTextChanged (const QString &);
-  void slotSetOverrideCursor (QCursor);
   void slotSettingsAxesChecker ();
   void slotSettingsColorFilter ();
   void slotSettingsCoords ();
@@ -411,6 +410,7 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
   void updateGridLines();
+  void updateHighlightOpacity();
   void updateRecentFileList();
   void updateSettingsMainWindow();
   void updateTransformationAndItsDependencies();

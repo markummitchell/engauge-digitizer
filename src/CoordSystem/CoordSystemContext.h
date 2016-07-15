@@ -81,6 +81,12 @@ class CoordSystemContext : public CoordSystemInterface
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
+  virtual void editPointGraph (bool isX,
+                               bool isY,
+                               double x,
+                               double y,
+                               const QStringList &identifiers,
+                               const Transformation &transformation);
 
   /// True/false if y/x value is empty
   bool isXOnly (const QString &pointIdentifier) const;

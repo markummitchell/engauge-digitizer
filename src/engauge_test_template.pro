@@ -68,6 +68,7 @@ HEADERS  += \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
     Cmd/CmdEditPointAxis.h \
+    Cmd/CmdEditPointGraph.h \
     Cmd/CmdFactory.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
@@ -141,7 +142,9 @@ HEADERS  += \
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
-    Dlg/DlgEditPoint.h \
+    Dlg/DlgEditPointAxis.h \
+    Dlg/DlgEditPointGraph.h \
+    Dlg/DlgEditPointGraphLineEdit.h \
     Dlg/DlgErrorReport.h \
     Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
@@ -229,6 +232,7 @@ HEADERS  += \
     Ghosts/GhostPolygon.h \
     Ghosts/Ghosts.h \
     Graphics/GraphicsArcItem.h \
+    Graphics/GraphicsItemsExtractor.h \
     Graphics/GraphicsItemType.h \
     Graphics/GraphicsLinesForCurve.h \
     Graphics/GraphicsLinesForCurves.h \
@@ -371,6 +375,7 @@ SOURCES += \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
     Cmd/CmdEditPointAxis.cpp \
+    Cmd/CmdEditPointGraph.cpp \
     Cmd/CmdFactory.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
@@ -441,7 +446,9 @@ SOURCES += \
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
-    Dlg/DlgEditPoint.cpp \
+    Dlg/DlgEditPointAxis.cpp \
+    Dlg/DlgEditPointGraph.cpp \
+    Dlg/DlgEditPointGraphLineEdit.cpp \
     Dlg/DlgErrorReport.cpp \
     Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \
@@ -522,6 +529,7 @@ SOURCES += \
     Ghosts/GhostPolygon.cpp \
     Ghosts/Ghosts.cpp \
     Graphics/GraphicsArcItem.cpp \
+    Graphics/GraphicsItemsExtractor.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
     Graphics/GraphicsLinesForCurves.cpp \
     Graphics/GraphicsPoint.cpp \

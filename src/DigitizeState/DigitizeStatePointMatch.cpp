@@ -167,6 +167,20 @@ QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const 
   return samplePointPixels;
 }
 
+void DigitizeStatePointMatch::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                          const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStatePointMatch::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                           const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch ::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+}
+
 void DigitizeStatePointMatch::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleCurveChange";
@@ -336,6 +350,11 @@ void DigitizeStatePointMatch::promoteCandidatePointToPermanentPoint(CmdMediator 
 QString DigitizeStatePointMatch::state() const
 {
   return "DigitizeStatePointMatch";
+}
+
+void DigitizeStatePointMatch::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::updateAfterPointAddition";
 }
 
 void DigitizeStatePointMatch::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

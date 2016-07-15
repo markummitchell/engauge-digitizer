@@ -9,6 +9,7 @@
 
 #include "CmdPointChangeBase.h"
 #include <QPointF>
+#include <QString>
 
 class QXmlStreamReader;
 

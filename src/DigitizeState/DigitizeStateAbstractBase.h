@@ -17,6 +17,8 @@ class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class QGraphicsScene;
 class QImage;
+class QString;
+class QStringList;
 class QTimer;
 
 /// Set of possible states of Digitize toolbar.
@@ -56,9 +58,13 @@ public:
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end() = 0;
 
-  /// Handle a right click that was intercepted earlier. This is done in the superclass since it works the same in all states.
-  void handleContextMenuEvent (CmdMediator *cmdMediator,
-                               const QString &pointIdentifier);
+  /// Handle a right click, on an axis point, that was intercepted earlier
+  virtual void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                           const QString &pointIdentifier) = 0;
+
+  /// Handle a right click, on a graph point, that was intercepted earlier
+  virtual void handleContextMenuEventGraph (CmdMediator *cmdMediator,
+                                            const QStringList &pointIdentifiers) = 0;
 
   /// Handle the selection of a new curve. At a minimum, DigitizeStateSegment will generate a new set of Segments
   virtual void handleCurveChange (CmdMediator *cmdMediator) = 0;
@@ -67,9 +73,6 @@ public:
   virtual void handleKeyPress (CmdMediator *cmdMediator,
                                Qt::Key key,
                                bool atLeastOneSelectedItem) = 0;
-
-  /// Handle leave in case an override cursor is in effect from last QDialog, by resetting the override cursor.
-  virtual void handleLeave (CmdMediator *cmdMediator);
 
   /// Handle a mouse move. This is part of an experiment to see if augmenting the cursor in Point Match mode is worthwhile
   virtual void handleMouseMove (CmdMediator *cmdMediator,
@@ -83,18 +86,14 @@ public:
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF pos) = 0;
 
-  /// Handle the command to set the override cursor
-  void handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                const QCursor &cursor);
-
-  /// Remove the override cursor if it is in use. This is called after a leave event, and prior to displaying a QDialog
-  void removeOverrideCursor ();
-
   /// Update the cursor according to the current state.
   void setCursor(CmdMediator *cmdMediator);
 
   /// State name for debugging
   virtual QString state() const = 0;
+
+  /// Update graphics attributes after possible new points. This is useful for highlight opacity
+  virtual void updateAfterPointAddition () = 0;
 
   /// Update the digitize curve settings
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,

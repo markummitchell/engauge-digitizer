@@ -80,22 +80,20 @@ public:
   /// Proxy method for QGraphicsItem::setData
   void setData (int key, const QVariant &data);
 
+  /// Set method for highlight opacity
+  void setHighlightOpacity (double highlightOpacity);
+
   /// Update the point style
-  void setPointStyle (const PointStyle &pointStyle,
-                      double highlightOpacity);
+  void setPointStyle (const PointStyle &pointStyle);
 
   /// Update the position
   void setPos (const QPointF pos);
-
-  /// Proxy method for QGraphicsItem::setToolTip
-  void setToolTip (const QString &toolTip);
 
   /// Mark point as wanted. Marking as unwanted is done by the reset function
   void setWanted ();
 
   /// Update point and line styles that comprise the curve style
-  void updateCurveStyle (const CurveStyle &curveStyle,
-                         double highlightOpacity);
+  void updateCurveStyle (const CurveStyle &curveStyle);
 
   /// Identify point as wanted//unwanted
   bool wanted () const;

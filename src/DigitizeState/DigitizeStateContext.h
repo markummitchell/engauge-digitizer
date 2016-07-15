@@ -18,6 +18,7 @@ class CmdAbstractBase;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class MainWindow;
+class MainWindowModel;
 class QUndoCommand;
 
 /// Container for all DigitizeStateAbstractBase subclasses. This functions as the context class in a standard state machine implementation
@@ -39,9 +40,13 @@ public:
   void appendNewCmd(CmdMediator *cmdMediator,
                     QUndoCommand *cmd);
 
-  /// See DigitizeStateAbstractBase::handleContextMenuEvent.
-  void handleContextMenuEvent (CmdMediator *cmdMediator,
-                               const QString &pointIdentifier);
+  /// See DigitizeStateAbstractBase::handleContextMenuEventAxis.
+  void handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                   const QString &pointIdentifier);
+
+  /// See DigitizeStateAbstractBase::handleContextMenuEventGraph.
+  void handleContextMenuEventGraph (CmdMediator *cmdMediator,
+                                    const QStringList &pointIdentifiers);
 
   /// See DigitizeStateAbstractBase::handleCurveChange.
   void handleCurveChange (CmdMediator *cmdMediator);
@@ -50,9 +55,6 @@ public:
   void handleKeyPress (CmdMediator *cmdMediator,
                        Qt::Key key,
                        bool atLeastOneSelectedItem);
-
-  /// See DigitizeStateAbstractBase::handleLeave.
-  void handleLeave (CmdMediator *cmdMediator);
 
   /// See DigitizeStateAbstractBase::handleMouseMove.
   void handleMouseMove (CmdMediator *cmdMediator,
@@ -65,10 +67,6 @@ public:
   /// See DigitizeStateAbstractBase::handleMouseRelease.
   void handleMouseRelease (CmdMediator *cmdMediator,
                            QPointF pos);
-
-  /// See DigitizeStateAbstractBase::handleSetOverrideCursor
-  void handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                const QCursor &cursor);
 
   /// Get method for gnuplot flag
   bool isGnuplot () const;
@@ -101,6 +99,9 @@ public:
 
   /// State name for debugging
   QString state() const;
+
+  /// Update the graphics attributes
+  void updateAfterPointAddition ();
 
   /// Update the digitize curve settings
   void updateModelDigitizeCurve (CmdMediator *cmdMediator,

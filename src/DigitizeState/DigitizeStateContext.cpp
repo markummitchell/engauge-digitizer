@@ -88,11 +88,18 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator
   }
 }
 
-void DigitizeStateContext::handleContextMenuEvent (CmdMediator *cmdMediator,
-                                                   const QString &pointIdentifier)
+void DigitizeStateContext::handleContextMenuEventAxis (CmdMediator *cmdMediator,
+                                                       const QString &pointIdentifier)
 {
-  m_states [m_currentState]->handleContextMenuEvent (cmdMediator,
-                                                     pointIdentifier);
+  m_states [m_currentState]->handleContextMenuEventAxis (cmdMediator,
+                                                         pointIdentifier);
+}
+
+void DigitizeStateContext::handleContextMenuEventGraph (CmdMediator *cmdMediator,
+                                                        const QStringList &pointIdentifiers)
+{
+  m_states [m_currentState]->handleContextMenuEventGraph (cmdMediator,
+                                                          pointIdentifiers);
 }
 
 void DigitizeStateContext::handleCurveChange (CmdMediator *cmdMediator)
@@ -107,14 +114,6 @@ void DigitizeStateContext::handleKeyPress (CmdMediator *cmdMediator,
   m_states [m_currentState]->handleKeyPress (cmdMediator,
                                              key,
                                              atLeastOneSelectedItem);
-
-  completeRequestedStateTransitionIfExists(cmdMediator);
-
-}
-
-void DigitizeStateContext::handleLeave (CmdMediator *cmdMediator)
-{
-  m_states [m_currentState]->handleLeave (cmdMediator);
 
   completeRequestedStateTransitionIfExists(cmdMediator);
 
@@ -147,13 +146,6 @@ void DigitizeStateContext::handleMouseRelease (CmdMediator *cmdMediator,
                                                  pos);
 
   completeRequestedStateTransitionIfExists(cmdMediator);
-}
-
-void DigitizeStateContext::handleSetOverrideCursor (CmdMediator *cmdMediator,
-                                                    const QCursor &cursor)
-{
-  m_states [m_currentState]->handleSetOverrideCursor (cmdMediator,
-                                                      cursor);
 }
 
 bool DigitizeStateContext::isGnuplot () const
@@ -227,6 +219,13 @@ QString DigitizeStateContext::state() const
   ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
 
   return m_states [m_currentState]->state();
+}
+
+void DigitizeStateContext::updateAfterPointAddition ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
+
+  m_states [m_currentState]->updateAfterPointAddition ();
 }
 
 void DigitizeStateContext::updateModelDigitizeCurve (CmdMediator *cmdMediator,

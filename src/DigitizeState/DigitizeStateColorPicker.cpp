@@ -220,6 +220,20 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (CmdMediator *cmdMe
   return false;
 }
 
+void DigitizeStateColorPicker::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                           const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStateColorPicker::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                            const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker ::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+}
+
 void DigitizeStateColorPicker::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::handleCurveChange";
@@ -319,6 +333,11 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilte
 QString DigitizeStateColorPicker::state() const
 {
   return "DigitizeStateColorPicker";
+}
+
+void DigitizeStateColorPicker::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateColorPicker::updateAfterPointAddition";
 }
 
 void DigitizeStateColorPicker::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

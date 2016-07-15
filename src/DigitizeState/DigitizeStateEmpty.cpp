@@ -45,6 +45,20 @@ void DigitizeStateEmpty::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::end";
 }
 
+void DigitizeStateEmpty::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                     const QString &pointIdentifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleContextMenuEventAxis "
+                              << " point=" << pointIdentifier.toLatin1 ().data ();
+}
+
+void DigitizeStateEmpty::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+                                                      const QStringList &pointIdentifiers)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty ::handleContextMenuEventGraph "
+                              << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
+}
+
 void DigitizeStateEmpty::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleCurveChange";
@@ -79,6 +93,11 @@ void DigitizeStateEmpty::handleMouseRelease (CmdMediator * /* cmdMediator */,
 QString DigitizeStateEmpty::state() const
 {
   return "DigitizeStateEmpty";
+}
+
+void DigitizeStateEmpty::updateAfterPointAddition ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::updateAfterPointAddition";
 }
 
 void DigitizeStateEmpty::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

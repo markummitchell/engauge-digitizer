@@ -184,8 +184,7 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                            point);
 }
 
-void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles,
-                                                double highlightOpacity)
+void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateCurveStyles";
 
@@ -194,8 +193,7 @@ void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveSty
 
     QString curveName = itr.key();
 
-    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName),
-                                                           highlightOpacity);
+    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName));
   }
 }
 
@@ -213,6 +211,20 @@ void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const Cur
 
       m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName));
     }
+  }
+}
+
+void GraphicsLinesForCurves::updateHighlightOpacity (double highlightOpacity)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateHighlightOpacity"
+                              << " highlightOpacity=" << highlightOpacity;
+
+  GraphicsLinesContainer::const_iterator itr;
+  for (itr = m_graphicsLinesForCurve.begin (); itr != m_graphicsLinesForCurve.end (); itr++) {
+
+    QString curveName = itr.key();
+
+    m_graphicsLinesForCurve [curveName]->updateHighlightOpacity (highlightOpacity);
   }
 }
 

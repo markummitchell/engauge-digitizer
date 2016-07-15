@@ -27,8 +27,8 @@ public:
                MainWindow &mainWindow);
   virtual ~GraphicsView();
 
-  /// Intercept right click to support point editing.
-  void contextMenuEvent (QContextMenuEvent *event);
+  /// Intercept context event to support point editing
+  virtual void contextMenuEvent (QContextMenuEvent *event);
 
   /// Intercept mouse drag event to support drag-and-drop.
   virtual void dragEnterEvent (QDragEnterEvent *event);
@@ -41,9 +41,6 @@ public:
 
   /// Intercept key press events to handle left/right/up/down moving.
   virtual void keyPressEvent (QKeyEvent *event);
-
-  /// Intercept leave events to manage override cursor.
-  virtual void leaveEvent (QEvent *event);
 
   /// Intercept mouse move events to populate the current cursor position in StatusBar.
   virtual void mouseMoveEvent (QMouseEvent *event);
@@ -59,7 +56,10 @@ public:
 
 signals:
   /// Send right click on axis point to MainWindow for editing.
-  void signalContextMenuEvent (QString pointIdentifier);
+  void signalContextMenuEventAxis (QString pointIdentifier);
+
+  /// Send right click on graph point(s) to MainWindow for editing.
+  void signalContextMenuEventGraph (QStringList pointIdentifiers);
 
   /// Send dragged dig file to MainWindow for import. This comes from dragging an engauge dig file
   void signalDraggedDigFile (QString);
@@ -72,9 +72,6 @@ signals:
 
   /// Send keypress to MainWindow for eventual processing by DigitizeStateAbstractBase subclasses.
   void signalKeyPress (Qt::Key, bool atLeastOneSelectedItem);
-
-  /// Send leave to MainWindow for managing the override cursor.
-  void signalLeave ();
 
   /// Send mouse move to MainWindow for eventual display of cursor coordinates in StatusBar
   void signalMouseMove (QPointF);
@@ -94,6 +91,7 @@ signals:
 private:
   GraphicsView();
 
+  QStringList pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const;
   bool inBounds (const QPointF &posScreen);
 
 };

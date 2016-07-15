@@ -5,6 +5,8 @@
  ******************************************************************************************************/
 
 #include "DataKey.h"
+#include "EngaugeAssert.h"
+#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsView.h"
 #include "LoadFileInfo.h"
@@ -28,12 +30,12 @@ GraphicsView::GraphicsView(QGraphicsScene *scene,
                            MainWindow &mainWindow) :
   QGraphicsView (scene)
 {
-  connect (this, SIGNAL (signalContextMenuEvent (QString)), &mainWindow, SLOT (slotContextMenuEvent (QString)));
+  connect (this, SIGNAL (signalContextMenuEventAxis (QString)), &mainWindow, SLOT (slotContextMenuEventAxis (QString)));
+  connect (this, SIGNAL (signalContextMenuEventGraph (QStringList)), &mainWindow, SLOT (slotContextMenuEventGraph (QStringList)));
   connect (this, SIGNAL (signalDraggedDigFile (QString)), &mainWindow, SLOT (slotFileOpenDraggedDigFile (QString)));
   connect (this, SIGNAL (signalDraggedImage (QImage)), &mainWindow, SLOT (slotFileImportDraggedImage (QImage)));
   connect (this, SIGNAL (signalDraggedImageUrl (QUrl)), &mainWindow, SLOT (slotFileImportDraggedImageUrl (QUrl)));
   connect (this, SIGNAL (signalKeyPress (Qt::Key, bool)), &mainWindow, SLOT (slotKeyPress (Qt::Key, bool)));
-  connect (this, SIGNAL (signalLeave ()), &mainWindow, SLOT (slotLeave ()));
   connect (this, SIGNAL (signalMouseMove(QPointF)), &mainWindow, SLOT (slotMouseMove (QPointF)));
   connect (this, SIGNAL (signalMousePress (QPointF)), &mainWindow, SLOT (slotMousePress (QPointF)));
   connect (this, SIGNAL (signalMouseRelease (QPointF)), &mainWindow, SLOT (slotMouseRelease (QPointF)));
@@ -67,27 +69,29 @@ GraphicsView::~GraphicsView()
 {
 }
 
-void GraphicsView::contextMenuEvent (QContextMenuEvent *event)
+void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::contextMenuEvent"
+                              << " selectedCount=" << scene()->selectedItems().count();
 
-  QList<QGraphicsItem*> items = scene()->selectedItems ();
+  GraphicsItemsExtractor graphicsItemsExtractor;
+  const QList<QGraphicsItem*> &items = scene()->selectedItems();
+  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers(items);
 
-  if (items.count () == 1) {
+  if (pointIdentifiers.count() > 0) {
 
-    QGraphicsItem *item = items.first ();
-    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
-    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
-    QString curveName = Point::curveNameFromPointIdentifier (pointIdentifier);
+    if (graphicsItemsExtractor.allSelectedItemsAreEitherAxisOrGraph (items,
+                                                                     GRAPH_POINTS)) {
 
-    if ((type == GRAPHICS_ITEM_TYPE_POINT) &&
-        (curveName == AXIS_CURVE_NAME)) {
+      // One or more graph points are selected so edit their coordinates
+      emit signalContextMenuEventGraph (pointIdentifiers);
+
+    } else if (graphicsItemsExtractor.allSelectedItemsAreEitherAxisOrGraph (items,
+                                                                            AXIS_POINTS) && pointIdentifiers.count() == 1) {
 
       // A single axis point is selected so edit it
-      emit signalContextMenuEvent (pointIdentifier);
-      event->accept ();
+      emit signalContextMenuEventAxis (pointIdentifiers.first());
 
-      return;
     }
   }
 
@@ -205,15 +209,6 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
   }
 }
 
-void GraphicsView::leaveEvent (QEvent *event)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::leaveEvent";
-
-  emit signalLeave ();
-
-  QGraphicsView::leaveEvent (event);
-}
-
 void GraphicsView::mouseMoveEvent (QMouseEvent *event)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::mouseMoveEvent cursor="
@@ -269,12 +264,31 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
 
   if (!isRightClick) {
 
-
     emit signalMouseRelease (posScreen);
 
   }
 
   QGraphicsView::mouseReleaseEvent (event);
+}
+
+QStringList GraphicsView::pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const
+{
+  // This method assumes that all specified items are points
+
+  QStringList pointIdentifiers;
+
+  QList<QGraphicsItem*>::const_iterator itr;
+  for (itr = items.begin(); itr != items.end(); itr++) {
+
+    QGraphicsItem *item = *itr;
+    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
+    ENGAUGE_ASSERT (type == GRAPHICS_ITEM_TYPE_POINT);
+
+    QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();
+    pointIdentifiers << pointIdentifier;
+  }
+
+  return pointIdentifiers;
 }
 
 void GraphicsView::wheelEvent(QWheelEvent *event)

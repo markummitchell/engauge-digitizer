@@ -15,7 +15,6 @@ GraphicsPointPolygon::GraphicsPointPolygon(GraphicsPoint &graphicsPoint,
                                            const QPolygonF &polygon) :
   QGraphicsPolygonItem (polygon),
   m_graphicsPoint (graphicsPoint)
-
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointPolygon::GraphicsPointPolygon";
 }
