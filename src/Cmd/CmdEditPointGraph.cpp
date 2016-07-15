@@ -54,27 +54,57 @@ CmdEditPointGraph::CmdEditPointGraph (MainWindow &mainWindow,
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_X) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_Y) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_X) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_Y) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_IDENTIFIERS)) {
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_EDIT_GRAPH_Y) ) {
     xmlExitWithError (reader,
-                      QString ("%1 %2, %3, %4, %5 %6 %7")
+                      QString ("%1 %2, %3, %4 %5 %6")
                       .arg (QObject::tr ("Missing attribute(s)"))
                       .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_X)
                       .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_Y)
                       .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_X)
-                      .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_Y)
                       .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_IDENTIFIERS));
+                      .arg (DOCUMENT_SERIALIZE_EDIT_GRAPH_Y));
+  } else {
+
+    // Boolean attributes
+    QString isX = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_X).toString();
+    QString isY = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_Y).toString();
+
+    m_isX = (isX == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    m_isY = (isY == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    m_x = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_X).toDouble();
+    m_y = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_Y).toDouble();
+
+    bool success = true;
+    while (loadNextFromReader (reader)) {
+
+      if (reader.atEnd() || reader.hasError ()) {
+        success = false;
+        break;
+      }
+
+      if ((reader.tokenType() == QXmlStreamReader::EndElement) &
+          (reader.name() == DOCUMENT_SERIALIZE_CMD)) {
+        break;
+      }
+
+      // Not done yet
+      if ((reader.tokenType() == QXmlStreamReader::StartElement) &&
+          (reader.name() == DOCUMENT_SERIALIZE_POINT)) {
+
+        // This is an entry that we need to add
+        QXmlStreamAttributes attributes = reader.attributes ();
+
+        if (attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
+
+          m_pointIdentifiers << attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+        }
+      }
+    }
+
+    if (!success) {
+      reader.raiseError (QObject::tr ("Cannot read graph points"));
+    }
   }
-
-  // Boolean attributes
-  QString isX = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_X).toString();
-  QString isY = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_IS_Y).toString();
-
-  m_isX = (isX == DOCUMENT_SERIALIZE_BOOL_TRUE);
-  m_isY = (isY == DOCUMENT_SERIALIZE_BOOL_TRUE);
-  m_x = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_X).toDouble();
-  m_y = attributes.value(DOCUMENT_SERIALIZE_EDIT_GRAPH_Y).toDouble();
 }
 
 CmdEditPointGraph::~CmdEditPointGraph ()
@@ -125,9 +155,8 @@ void CmdEditPointGraph::saveXml (QXmlStreamWriter &writer) const
   for (int index = 0; index < m_pointIdentifiers.count(); index++) {
 
     writer.writeStartElement (DOCUMENT_SERIALIZE_POINT);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_pointIdentifiers [index]);
+    writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_pointIdentifiers.at (index));
     writer.writeEndElement();
-
   }
   writer.writeEndElement();
 }

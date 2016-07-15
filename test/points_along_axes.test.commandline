@@ -1,0 +1,1 @@
+-errorreport ../test/points_along_axes.xml -regression -reset
