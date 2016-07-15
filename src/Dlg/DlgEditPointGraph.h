@@ -11,11 +11,11 @@
 #include <QPointF>
 #include <QString>
 
+class DlgEditPointGraphLineEdit;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
 class MainWindow;
 class MainWindowModel;
-class QLineEdit;
 class QPushButton;
 class QVBoxLayout;
 class Transformation;
@@ -58,9 +58,9 @@ private:
   void updateControls ();
 
   DlgValidatorAbstract *m_validatorGraphX;
-  QLineEdit *m_editGraphX;
+  DlgEditPointGraphLineEdit *m_editGraphX;
   DlgValidatorAbstract *m_validatorGraphY;
-  QLineEdit *m_editGraphY;
+  DlgEditPointGraphLineEdit *m_editGraphY;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
 

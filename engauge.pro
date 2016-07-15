@@ -162,6 +162,7 @@ HEADERS  += \
     src/Dlg/DlgAbout.h \
     src/Dlg/DlgEditPointAxis.h \
     src/Dlg/DlgEditPointGraph.h \
+    src/Dlg/DlgEditPointGraphLineEdit.h \
     src/Dlg/DlgErrorReport.h \
     src/Dlg/DlgFilterCommand.h \
     src/Dlg/DlgFilterThread.h \
@@ -464,6 +465,7 @@ SOURCES += \
     src/Dlg/DlgAbout.cpp \
     src/Dlg/DlgEditPointAxis.cpp \
     src/Dlg/DlgEditPointGraph.cpp \
+    src/Dlg/DlgEditPointGraphLineEdit.cpp \
     src/Dlg/DlgErrorReport.cpp \
     src/Dlg/DlgFilterCommand.cpp \
     src/Dlg/DlgFilterThread.cpp \

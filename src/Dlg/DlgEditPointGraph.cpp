@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "DlgEditPointGraph.h"
+#include "DlgEditPointGraphLineEdit.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
@@ -14,7 +15,6 @@
 #include "MainWindowModel.h"
 #include <QGroupBox>
 #include <QLabel>
-#include <QLineEdit>
 #include <QPushButton>
 #include "QtToString.h"
 #include <QVBoxLayout>
@@ -104,7 +104,7 @@ void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
   QLabel *labelGraphParLeft = new QLabel (tr ("("), this);
   layout->addWidget(labelGraphParLeft, 0);
 
-  m_editGraphX = new QLineEdit;
+  m_editGraphX = new DlgEditPointGraphLineEdit;
   m_editGraphX->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
   m_editGraphX->setAlignment (ALIGNMENT);
   m_editGraphX->setValidator (m_validatorGraphX);
@@ -120,7 +120,7 @@ void DlgEditPointGraph::createCoords (QVBoxLayout *layoutOuter)
   QLabel *labelGraphComma = new QLabel (tr (", "), this);
   layout->addWidget(labelGraphComma, 0);
 
-  m_editGraphY = new QLineEdit;
+  m_editGraphY = new DlgEditPointGraphLineEdit;
   m_editGraphY->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
   m_editGraphY->setAlignment (ALIGNMENT);
   m_editGraphY->setValidator (m_validatorGraphY);
@@ -263,12 +263,8 @@ void DlgEditPointGraph::updateControls ()
   QString textY = m_editGraphY->text();
 
   // Feedback indicating that empty coordinate will be skipped rather than applied to the selected points
-  QString colorX = (textX.isEmpty() ? QString ("#e3e3e3") : QString ("white"));
-  QString colorY = (textY.isEmpty() ? QString ("#e3e3e3") : QString ("white"));
-  QString styleX = QString ("QLineEdit { background-color: %1; }").arg (colorX);
-  QString styleY = QString ("QLineEdit { background-color: %1; }").arg (colorY);
-  m_editGraphX->setStyleSheet (styleX);
-  m_editGraphY->setStyleSheet (styleY);
+  m_editGraphX->updateBackground ();
+  m_editGraphY->updateBackground ();
 
   // Tests that all have to be true
   // 1) At least one value has been changed
