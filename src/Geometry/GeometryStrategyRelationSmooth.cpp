@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "GeometryStrategyRelationSmooth.h"
-#include <qmath.h>
 #include "Transformation.h"
 
 GeometryStrategyRelationSmooth::GeometryStrategyRelationSmooth()
@@ -27,56 +26,25 @@ void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
                                                         QVector<QString> &distanceGraphBackward,
                                                         QVector<QString> &distancePercentBackward) const
 {
-  int i;
+  const int NUM_SUB_INTERVALS_SMOOTH = 10; // One input point becomes NUM_SUB_INTERVALS points to account for smoothing
 
-  QVector<QPointF> positionsGraph;
+  QVector<QPointF> positionsGraph, positionsGraphWithSubintervals;
   calculatePositionsGraph (points,
                            transformation,
                            positionsGraph);
 
-  // Area is computed using trapezoidal integration using using four points (x(I),0) (x(I),y(I)) (x(I+1),0) (y(I+1))
-  double fArea = 0;
+  insertSubintervalsAndLoadDistances (NUM_SUB_INTERVALS_SMOOTH,
+                                      positionsGraph,
+                                      positionsGraphWithSubintervals,
+                                      distanceGraphForward,
+                                      distancePercentForward,
+                                      distanceGraphBackward,
+                                      distancePercentBackward);
+  double pArea = polygonAreaForSimplyConnected (positionsGraphWithSubintervals);
 
-  // Distance is computed using linear segments between (x(I),y(I)) and (x(I+1),y(I+1))
-  double distance = 0;
-
-  // Compute x and y coordinates and cumulative distance vector
-  double xILast = 0, yILast = 0;
-  QVector<double> distanceGraphDouble;
-  for (i = 0; i < positionsGraph.size(); i++) {
-
-    double xI = positionsGraph [i].x();
-    double yI = positionsGraph [i].y();
-
-    if (i > 0) {
-
-      double area = 0.5 * (yILast + yI) * (xI - xILast);
-      double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
-
-      fArea += area;
-      distance += distGraph;
-
-    }
-
-    x.push_back (QString::number (xI));
-    y.push_back (QString::number (yI));
-    distanceGraphDouble.push_back (distance);
-
-    xILast = xI;
-    yILast = yI;
-  }
-
-  // Compute distance columns
-  double dTotal = qMax (1.0, distanceGraphDouble [distanceGraphDouble.size() - 1]);
-  for (i = 0; i < distanceGraphDouble.size (); i++) {
-    double d = distanceGraphDouble [i];
-    distanceGraphForward.push_back (QString::number (d));
-    distancePercentForward.push_back (QString::number (100.0 * d / dTotal));
-    distanceGraphBackward.push_back (QString::number (dTotal - d));
-    distancePercentBackward.push_back (QString::number (100.0 * (dTotal - d) / dTotal));
-  }
+  loadXY (positionsGraph, x, y);
 
   // Set header values
-  funcArea = QString::number (fArea);
-  polyArea = "";
+  funcArea = "";
+  polyArea = QString::number (pArea);
 }

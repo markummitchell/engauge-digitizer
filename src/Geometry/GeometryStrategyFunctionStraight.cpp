@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "GeometryStrategyFunctionStraight.h"
-#include <qmath.h>
 #include "Transformation.h"
 
 GeometryStrategyFunctionStraight::GeometryStrategyFunctionStraight()
@@ -27,55 +26,23 @@ void GeometryStrategyFunctionStraight::calculateGeometry (const Points &points,
                                                           QVector<QString> &distanceGraphBackward,
                                                           QVector<QString> &distancePercentBackward) const
 {
-  int i;
+  const int NUM_SUB_INTERVALS_STRAIGHT = 1; // Value of one with trapezoidal integration results in calculations using straight lines between points
 
-  QVector<QPointF> positionsGraph;
+  QVector<QPointF> positionsGraph, positionsGraphWithSubintervals;
   calculatePositionsGraph (points,
                            transformation,
                            positionsGraph);
 
-  // Area is computed using trapezoidal integration using using four points (x(I),0) (x(I),y(I)) (x(I+1),0) (y(I+1))
-  double fArea = 0;
+  insertSubintervalsAndLoadDistances (NUM_SUB_INTERVALS_STRAIGHT,
+                                      positionsGraph,
+                                      positionsGraphWithSubintervals,
+                                      distanceGraphForward,
+                                      distancePercentForward,
+                                      distanceGraphBackward,
+                                      distancePercentBackward);
+  double fArea = functionArea (positionsGraphWithSubintervals);
 
-  // Distance is computed using linear segments between (x(I),y(I)) and (x(I+1),y(I+1))
-  double distance = 0;
-
-  // Compute x and y coordinates and cumulative distance vector
-  double xILast = 0, yILast = 0;
-  QVector<double> distanceGraphDouble;
-  for (i = 0; i < positionsGraph.size(); i++) {
-
-    double xI = positionsGraph [i].x();
-    double yI = positionsGraph [i].y();
-
-    x.push_back (QString::number (xI));
-    y.push_back (QString::number (yI));
-
-    if (i > 0) {
-
-      double area = 0.5 * (yILast + yI) * (xI - xILast);
-      double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
-
-      fArea += area;
-      distance += distGraph;
-
-    }
-
-    xILast = xI;
-    yILast = yI;
-
-    distanceGraphDouble.push_back (distance);
-  }
-
-  // Compute distance columns
-  double dTotal = qMax (1.0, distanceGraphDouble [distanceGraphDouble.size() - 1]);
-  for (i = 0; i < distanceGraphDouble.size (); i++) {
-    double d = distanceGraphDouble [i];
-    distanceGraphForward.push_back (QString::number (d));
-    distancePercentForward.push_back (QString::number (100.0 * d / dTotal));
-    distanceGraphBackward.push_back (QString::number (dTotal - d));
-    distancePercentBackward.push_back (QString::number (100.0 * (dTotal - d) / dTotal));
-  }
+  loadXY (positionsGraph, x, y);
 
   // Set header values
   funcArea = QString::number (fArea);
