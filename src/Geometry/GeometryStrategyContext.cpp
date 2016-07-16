@@ -25,6 +25,8 @@ GeometryStrategyContext::~GeometryStrategyContext()
 }
 
 void GeometryStrategyContext::calculateGeometry (const Points &points,
+                                                 const DocumentModelCoords &modelCoords,
+                                                 const MainWindowModel &modelMainWindow,
                                                  const Transformation &transformation,
                                                  CurveConnectAs connectAs,
                                                  QString &funcArea,
@@ -37,6 +39,8 @@ void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  QVector<QString> &distancePercentBackward) const
 {
   m_strategies [connectAs]->calculateGeometry (points,
+                                               modelCoords,
+                                               modelMainWindow,
                                                transformation,
                                                funcArea,
                                                polyArea,

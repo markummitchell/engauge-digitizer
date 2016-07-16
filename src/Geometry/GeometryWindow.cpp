@@ -161,6 +161,7 @@ void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */
 }
 
 void GeometryWindow::update (const CmdMediator &cmdMediator,
+                             const MainWindowModel &modelMainWindow,
                              const QString &curveSelected,
                              const Transformation &transformation)
 {
@@ -181,6 +182,8 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
   m_geometryStrategyContext.calculateGeometry (points,
+                                               cmdMediator.document().modelCoords(),
+                                               modelMainWindow,
                                                transformation,
                                                curveStyle.lineStyle().curveConnectAs(),
                                                funcArea,

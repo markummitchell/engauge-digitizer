@@ -4052,6 +4052,7 @@ void MainWindow::updateAfterCommand ()
 
   // Update geometry window
   m_dockGeometryWindow->update (*m_cmdMediator,
+                                m_modelMainWindow,
                                 m_cmbCurve->currentText (),
                                 m_transformation);
 

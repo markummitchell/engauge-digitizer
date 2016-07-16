@@ -16,6 +16,8 @@ GeometryStrategyRelationStraight::~GeometryStrategyRelationStraight()
 }
 
 void GeometryStrategyRelationStraight::calculateGeometry (const Points &points,
+                                                          const DocumentModelCoords &modelCoords,
+                                                          const MainWindowModel &modelMainWindow,
                                                           const Transformation &transformation,
                                                           QString &funcArea,
                                                           QString &polyArea,
@@ -42,7 +44,12 @@ void GeometryStrategyRelationStraight::calculateGeometry (const Points &points,
                                       distancePercentBackward);
   double pArea = polygonAreaForSimplyConnected (positionsGraphWithSubintervals);
 
-  loadXY (positionsGraph, x, y);
+  loadXY (positionsGraph,
+          modelCoords,
+          modelMainWindow,
+          transformation,
+          x,
+          y);
 
   // Set header values
   funcArea = "";

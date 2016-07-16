@@ -13,6 +13,7 @@
 
 class CmdMediator;
 class Curve;
+class MainWindowModel;
 class QItemSelection;
 class QStandardItemModel;
 class QString;
@@ -37,6 +38,7 @@ public:
 
   /// Populate the table with the specified Curve
   void update (const CmdMediator &cmdMediator,
+               const MainWindowModel &modelMainWindow,
                const QString &curveSelected,
                const Transformation &transformation);
 

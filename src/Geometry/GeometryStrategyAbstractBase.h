@@ -11,6 +11,8 @@
 #include <QPolygonF>
 #include <QVector>
 
+class DocumentModelCoords;
+class MainWindowModel;
 class QPointF;
 class Transformation;
 
@@ -26,6 +28,8 @@ public:
 
   /// Calculate geometry parameters
   virtual void calculateGeometry (const Points &points,
+                                  const DocumentModelCoords &modelCoords,
+                                  const MainWindowModel &modelMainWindow,
                                   const Transformation &transformation,
                                   QString &funcArea,
                                   QString &polyArea,
@@ -59,6 +63,9 @@ protected:
 
   /// Load x and y coordinate vectors
   void loadXY (const QVector<QPointF> &positionsGraph,
+               const DocumentModelCoords &modelCoords,
+               const MainWindowModel &modelMainWindow,
+               const Transformation &transformation,
                QVector<QString> &x,
                QVector<QString> &y) const;
 

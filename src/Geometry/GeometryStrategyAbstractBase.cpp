@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "FormatCoordsUnits.h"
 #include "GeometryStrategyAbstractBase.h"
 #include <qmath.h>
 #include <QPointF>
@@ -97,11 +98,15 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
         double x = splinePair.x ();
         double y = splinePair.y ();
 
-        // All points from intervals where i>0, and last point fro interval i=0
+        // All points from intervals where i>0, and last point from interval i=0
         if (i > 0 || subinterval == subintervalsPerInterval - 1) {
 
           // Insert one of several new points for each original point
           positionsGraphWithSubintervals.push_back (QPointF (x, y));
+
+        }
+
+        if (i > 0) {
 
           // Add to cumulative distance
           distance += qSqrt ((x - xLast) * (x - xLast) + (y - yLast) * (y - yLast));
@@ -129,16 +134,29 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
 }
 
 void GeometryStrategyAbstractBase::loadXY (const QVector<QPointF> &positionsGraph,
+                                           const DocumentModelCoords &modelCoords,
+                                           const MainWindowModel &modelMainWindow,
+                                           const Transformation &transformation,
                                            QVector<QString> &x,
                                            QVector<QString> &y) const
 {
+  FormatCoordsUnits formatCoordsUnits;
+
   for (int i = 0; i < positionsGraph.size(); i++) {
 
     double xI = positionsGraph [i].x();
     double yI = positionsGraph [i].y();
 
-    x.push_back (QString::number (xI));
-    y.push_back (QString::number (yI));
+    QString xFormatted, yFormatted;
+    formatCoordsUnits.unformattedToFormatted (xI,
+                                              yI,
+                                              modelCoords,
+                                              modelMainWindow,
+                                              xFormatted,
+                                              yFormatted,
+                                              transformation);
+    x.push_back (xFormatted);
+    y.push_back (yFormatted);
 
   }
 }

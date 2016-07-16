@@ -8,9 +8,11 @@
 #define GEOMETRY_STRATEGY_CONTEXT_H
 
 #include "CurveConnectAs.h"
+#include "MainWindowModel.h"
 #include "Points.h"
 #include <QVector>
 
+class DocumentModelCoords;
 class GeometryStrategyAbstractBase;
 class Transformation;
 
@@ -24,6 +26,8 @@ public:
 
   /// Calculate geometry parameters
   void calculateGeometry (const Points &points,
+                          const DocumentModelCoords &modelCoords,
+                          const MainWindowModel &modelMainWindow,
                           const Transformation &transformation,
                           CurveConnectAs connectAs,
                           QString &funcArea,

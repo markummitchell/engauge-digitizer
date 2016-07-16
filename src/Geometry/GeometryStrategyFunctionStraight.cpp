@@ -16,6 +16,8 @@ GeometryStrategyFunctionStraight::~GeometryStrategyFunctionStraight()
 }
 
 void GeometryStrategyFunctionStraight::calculateGeometry (const Points &points,
+                                                          const DocumentModelCoords &modelCoords,
+                                                          const MainWindowModel &modelMainWindow,
                                                           const Transformation &transformation,
                                                           QString &funcArea,
                                                           QString &polyArea,
@@ -42,7 +44,12 @@ void GeometryStrategyFunctionStraight::calculateGeometry (const Points &points,
                                       distancePercentBackward);
   double fArea = functionArea (positionsGraphWithSubintervals);
 
-  loadXY (positionsGraph, x, y);
+  loadXY (positionsGraph,
+          modelCoords,
+          modelMainWindow,
+          transformation,
+          x,
+          y);
 
   // Set header values
   funcArea = QString::number (fArea);
