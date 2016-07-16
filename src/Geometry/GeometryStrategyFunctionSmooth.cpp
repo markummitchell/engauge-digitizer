@@ -7,7 +7,12 @@
 #include "GeometryStrategyFunctionSmooth.h"
 #include <qdebug.h>
 #include <qmath.h>
+#include "Spline.h"
+#include "SplinePair.h"
 #include "Transformation.h"
+#include <vector>
+
+using namespace std;
 
 GeometryStrategyFunctionSmooth::GeometryStrategyFunctionSmooth()
 {
@@ -28,12 +33,24 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
                                                         QVector<QString> &distanceGraphBackward,
                                                         QVector<QString> &distancePercentBackward) const
 {
+  const int NUM_SUB_INTERVALS = 10; // One input point becomes NUM_SUB_INTERVALS points to account for smoothing
   int i;
 
   QVector<QPointF> positionsGraph;
   calculatePositionsGraph (points,
                            transformation,
                            positionsGraph);
+
+  // Fit splines to the points
+  vector<double> t;
+  vector<SplinePair> xy;
+  for (i = 0; i < positionsGraph.size (); i++) {
+    t.push_back ((double) i);
+    xy.push_back (SplinePair (positionsGraph [i].x(),
+                              positionsGraph [i].y()));
+  }
+  Spline spline (t,
+                 xy);
 
   // Area is computed using trapezoidal integration using using four points (x(I),0) (x(I),y(I)) (x(I+1),0) (y(I+1))
   double fArea = 0;
@@ -49,24 +66,36 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
     double xI = positionsGraph [i].x();
     double yI = positionsGraph [i].y();
 
-    if (i > 0) {
-
-      double area = 0.5 * (yILast + yI) * (xI - xILast);
-      double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
-
-      fArea += area;
-      distance += distGraph;
-
-      qDebug() << " distance=" << distance << " xTraveled=" << (xI - 1.0);
-
-    }
-
     x.push_back (QString::number (xI));
     y.push_back (QString::number (yI));
+
+    for (int subinterval = 0; subinterval < NUM_SUB_INTERVALS; subinterval++) {
+
+      double t = (double) i + (double) (subinterval + 1) / (double) (NUM_SUB_INTERVALS);
+
+      SplinePair splinePair = spline.interpolateCoeff (t);
+
+      xI = splinePair.x ();
+      yI = splinePair.y ();
+
+      qDebug() << t << ", " << xI << ", " << yI;
+
+      if (i > 0) {
+
+        double area = 0.5 * (yILast + yI) * (xI - xILast);
+        double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
+
+        fArea += area;
+        distance += distGraph;
+
+      }
+
+      xILast = xI;
+      yILast = yI;
+    }
+
     distanceGraphDouble.push_back (distance);
 
-    xILast = xI;
-    yILast = yI;
   }
 
   // Compute distance columns

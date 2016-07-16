@@ -19,7 +19,8 @@ GeometryStrategyRelationSmooth::~GeometryStrategyRelationSmooth()
 void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
                                                         const Transformation &transformation,
                                                         QString &funcArea,
-                                                        QString &polyArea,                                                        QVector<QString> &x,
+                                                        QString &polyArea,
+                                                        QVector<QString> &x,
                                                         QVector<QString> &y,
                                                         QVector<QString> &distanceGraphForward,
                                                         QVector<QString> &distancePercentForward,
@@ -46,17 +47,20 @@ void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
 
     double xI = positionsGraph [i].x();
     double yI = positionsGraph [i].y();
-    double area = 0.5 * (yILast + yI) * (xI - xILast);
-    double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
+
+    if (i > 0) {
+
+      double area = 0.5 * (yILast + yI) * (xI - xILast);
+      double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
+
+      fArea += area;
+      distance += distGraph;
+
+    }
 
     x.push_back (QString::number (xI));
     y.push_back (QString::number (yI));
     distanceGraphDouble.push_back (distance);
-
-    if (i > 0) {
-      fArea += area;
-      distance += distGraph;
-    }
 
     xILast = xI;
     yILast = yI;
