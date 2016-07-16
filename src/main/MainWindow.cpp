@@ -4050,7 +4050,6 @@ void MainWindow::updateAfterCommand ()
   // Update geometry window
   m_dockGeometryWindow->update (*m_cmdMediator,
                                 m_cmbCurve->currentText (),
-                                m_modelMainWindow,
                                 m_transformation);
 
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files

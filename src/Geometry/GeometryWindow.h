@@ -7,11 +7,11 @@
 #ifndef GEOMETRY_WINDOW_H
 #define GEOMETRY_WINDOW_H
 
+#include "GeometryStrategyContext.h"
 #include <QDockWidget>
 
 class CmdMediator;
 class Curve;
-class MainWindowModel;
 class QStandardItemModel;
 class QString;
 class QTableView;
@@ -33,7 +33,6 @@ public:
   /// Populate the table with the specified Curve
   void update (const CmdMediator &cmdMediator,
                const QString &curveSelected,
-               const MainWindowModel &modelMainWindow,
                const Transformation &transformation);
 
 signals:
@@ -44,6 +43,7 @@ private:
   GeometryWindow();
 
   void initializeHeader();
+  void loadStrategies ();
   void resizeTable (int rowCount);
 
   enum ColumnsHeader {
@@ -73,6 +73,7 @@ private:
 
   QTableView *m_view;
   QStandardItemModel *m_model;
+  GeometryStrategyContext m_geometryStrategyContext;
 };
 
 #endif // GEOMETRY_WINDOW_H

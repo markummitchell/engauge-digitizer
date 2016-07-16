@@ -7,9 +7,9 @@
 #include "CallbackGatherXThetaValuesFunctions.h"
 #include "CmdMediator.h"
 #include "Curve.h"
+#include "CurveConnectAs.h"
+#include "CurveStyle.h"
 #include "EngaugeAssert.h"
-#include "ExportDelimiter.h"
-#include "ExportToFile.h"
 #include "GeometryWindow.h"
 #include "Logger.h"
 #include <QHeaderView>
@@ -34,6 +34,8 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
 
   m_model = new QStandardItemModel;
   m_view->setModel (m_model);
+
+  loadStrategies();
 
   initializeHeader ();
 }
@@ -67,6 +69,11 @@ void GeometryWindow::initializeHeader ()
   m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (tr ("Percent")));
 }
 
+void GeometryWindow::loadStrategies ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::loadStrategies";
+}
+
 void GeometryWindow::resizeTable (int rowCount)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::resizeTable";
@@ -77,56 +84,47 @@ void GeometryWindow::resizeTable (int rowCount)
 
 void GeometryWindow::update (const CmdMediator &cmdMediator,
                              const QString &curveSelected,
-                             const MainWindowModel &modelMainWindow,
                              const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::update";
 
-  ENGAUGE_CHECK_PTR (m_model);
+  // Gather and calculate geometry data
+  const Curve *curve = cmdMediator.document().curveForCurveName (curveSelected);
 
-  const bool NOT_GNUPLOT = false;
-  const int ROW_COUNT_ADJUSTMENT_FOR_SKIPPING_HEADER = 1;
+  ENGAUGE_CHECK_PTR (curve);
 
-  // Override the export class to select just the desired curve
-  DocumentModelExportFormat modelExportOverride (cmdMediator.document().modelExport());
-  QStringList curveNamesNotExported = cmdMediator.document().curvesGraphsNames(); // List of all curves
-  curveNamesNotExported.removeAll (curveSelected); // Remove all curves except the selected curve
-  modelExportOverride.setCurveNamesNotExported (curveNamesNotExported);
+  const Points points = curve->points();
 
-  // Use ExportToFile to get the coordinates so we are not replicating any processing or formatting (=code) that
-  // is already in that class or its helpers
-  QString text;
-  QTextStream str (&text);
-  ExportToFile exportToFile;
-  exportToFile.exportToFile (modelExportOverride,
-                             cmdMediator.document(),
-                             modelMainWindow,
-                             transformation,
-                             str);
+  QVector<QString> x, y, distanceGraph, distancePercent;
 
-  // The output is a text string that has to be parsed line by line
-  QStringList lines = text.trimmed().split("\n");
-  QString delimiter = exportDelimiterToText (cmdMediator.document().modelExport().delimiter(),
-                                             NOT_GNUPLOT);
+  CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
+  m_geometryStrategyContext.calculateGeometry (points,
+                                               transformation,
+                                               curveStyle.lineStyle().curveConnectAs(),
+                                               x,
+                                               y,
+                                               distanceGraph,
+                                               distancePercent);
 
-  resizeTable (NUM_HEADER_ROWS + lines.count() - ROW_COUNT_ADJUSTMENT_FOR_SKIPPING_HEADER);
+  // Output to table
+  resizeTable (NUM_HEADER_ROWS + points.count());
 
   m_model->setItem (HEADER_ROW_NAME, COLUMN_HEADER_VALUE, new QStandardItem (curveSelected));
 
   int row = NUM_HEADER_ROWS;
-  int indexIn = ROW_COUNT_ADJUSTMENT_FOR_SKIPPING_HEADER;
-  int indexOut = 1;
-  for (; indexIn < lines.count(); row++, indexIn++, indexOut++) {
-    QString line = lines.at (indexIn);
-    QStringList fields = line.split (delimiter);
+  int index = 0;
+  for (; index < points.count(); row++, index++) {
 
-    if (fields.count() > 0) {
-      m_model->setItem (row, COLUMN_BODY_X, new QStandardItem (fields [0]));
-      if (fields.count() > 1) {
-        m_model->setItem (row, COLUMN_BODY_Y, new QStandardItem (fields [1]));
-      }
-    }
+    const Point &point = points.at (index);
 
-    m_model->setItem (row, COLUMN_BODY_INDEX, new QStandardItem (QString::number (indexOut)));
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (point.posScreen (),
+                                              posGraph);
+
+    m_model->setItem (row, COLUMN_BODY_X, new QStandardItem (x [index]));
+    m_model->setItem (row, COLUMN_BODY_Y, new QStandardItem (y [index]));
+    m_model->setItem (row, COLUMN_BODY_INDEX, new QStandardItem (QString::number (index + 1)));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (distanceGraph [index]));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (distancePercent [index]));
   }
 }

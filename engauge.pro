@@ -245,6 +245,12 @@ HEADERS  += \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.h \
     src/Callback/functor.h \
+    src/Geometry/GeometryStrategyAbstractBase.h \
+    src/Geometry/GeometryStrategyContext.h \
+    src/Geometry/GeometryStrategyFunctionSmooth.h \
+    src/Geometry/GeometryStrategyFunctionStraight.h \
+    src/Geometry/GeometryStrategyRelationSmooth.h \
+    src/Geometry/GeometryStrategyRelationStraight.h \
     src/Geometry/GeometryWindow.h \
     src/Ghosts/GhostEllipse.h \
     src/Ghosts/GhostPath.h \
@@ -542,6 +548,12 @@ SOURCES += \
     src/Format/FormatDegreesMinutesSecondsBase.cpp \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    src/Geometry/GeometryStrategyAbstractBase.cpp \
+    src/Geometry/GeometryStrategyContext.cpp \
+    src/Geometry/GeometryStrategyFunctionSmooth.cpp \
+    src/Geometry/GeometryStrategyFunctionStraight.cpp \
+    src/Geometry/GeometryStrategyRelationSmooth.cpp \
+    src/Geometry/GeometryStrategyRelationStraight.cpp \
     src/Geometry/GeometryWindow.cpp \
     src/Ghosts/GhostEllipse.cpp \
     src/Ghosts/GhostPath.cpp \
