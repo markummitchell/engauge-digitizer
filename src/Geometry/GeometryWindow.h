@@ -7,11 +7,13 @@
 #ifndef GEOMETRY_WINDOW_H
 #define GEOMETRY_WINDOW_H
 
+#include "DocumentModelExportFormat.h"
 #include "GeometryStrategyContext.h"
 #include <QDockWidget>
 
 class CmdMediator;
 class Curve;
+class QItemSelection;
 class QStandardItemModel;
 class QString;
 class QTableView;
@@ -27,6 +29,9 @@ public:
   GeometryWindow (QWidget *parent);
   virtual ~GeometryWindow ();
 
+  /// Clear stale information
+  void clear ();
+
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
 
@@ -35,6 +40,10 @@ public:
                const QString &curveSelected,
                const Transformation &transformation);
 
+public slots:
+  /// Prepare for copy after selection has changed
+  void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
+
 signals:
   /// Signal that this QDockWidget was just closed
   void signalGeometryWindowClosed();
@@ -42,6 +51,11 @@ signals:
 private:
   GeometryWindow();
 
+  int fold2dIndexes (int row,
+                     int col,
+                     int rowLow,
+                     int colLow,
+                     int colHigh) const;
   void initializeHeader();
   void loadStrategies ();
   void resizeTable (int rowCount);
@@ -73,7 +87,11 @@ private:
 
   QTableView *m_view;
   QStandardItemModel *m_model;
+
   GeometryStrategyContext m_geometryStrategyContext;
+
+  // Export format is updated after every CmdAbstractBase gets redone/undone
+  DocumentModelExportFormat m_modelExport;
 };
 
 #endif // GEOMETRY_WINDOW_H

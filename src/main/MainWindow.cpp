@@ -2987,6 +2987,9 @@ void MainWindow::slotFileClose()
     // Remove scroll bars if they exist
     m_scene->setSceneRect (QRectF (0, 0, 1, 1));
 
+    // Remove stale data from geometry window
+    m_dockGeometryWindow->clear ();
+
     // Deallocate Document
     delete m_cmdMediator;
 

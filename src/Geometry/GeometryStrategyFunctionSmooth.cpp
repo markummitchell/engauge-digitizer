@@ -5,6 +5,8 @@
  ******************************************************************************************************/
 
 #include "GeometryStrategyFunctionSmooth.h"
+#include <qdebug.h>
+#include <qmath.h>
 #include "Transformation.h"
 
 GeometryStrategyFunctionSmooth::GeometryStrategyFunctionSmooth()
@@ -17,22 +19,67 @@ GeometryStrategyFunctionSmooth::~GeometryStrategyFunctionSmooth()
 
 void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
                                                         const Transformation &transformation,
+                                                        QString &funcArea,
+                                                        QString &polyArea,
                                                         QVector<QString> &x,
                                                         QVector<QString> &y,
-                                                        QVector<QString> &distanceGraph,
-                                                        QVector<QString> &distancePercent) const
+                                                        QVector<QString> &distanceGraphForward,
+                                                        QVector<QString> &distancePercentForward,
+                                                        QVector<QString> &distanceGraphBackward,
+                                                        QVector<QString> &distancePercentBackward) const
 {
-  for (int i = 0; i < points.size(); i++) {
-    const Point &point = points [i];
-    QPointF posScreen = point.posScreen ();
-    QPointF posGraph;
+  int i;
 
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
+  QVector<QPointF> positionsGraph;
+  calculatePositionsGraph (points,
+                           transformation,
+                           positionsGraph);
 
-    x.push_back (QString::number (posGraph.x()));
-    y.push_back (QString::number (posGraph.y()));
-    distanceGraph.push_back (QString::number (1.0));
-    distancePercent.push_back (QString::number (2.0));
+  // Area is computed using trapezoidal integration using using four points (x(I),0) (x(I),y(I)) (x(I+1),0) (y(I+1))
+  double fArea = 0;
+
+  // Distance is computed using linear segments between (x(I),y(I)) and (x(I+1),y(I+1))
+  double distance = 0;
+
+  // Compute x and y coordinates and cumulative distance vector
+  double xILast = 0, yILast = 0;
+  QVector<double> distanceGraphDouble;
+  for (i = 0; i < positionsGraph.size(); i++) {
+
+    double xI = positionsGraph [i].x();
+    double yI = positionsGraph [i].y();
+
+    if (i > 0) {
+
+      double area = 0.5 * (yILast + yI) * (xI - xILast);
+      double distGraph = qSqrt ((xI - xILast) * (xI - xILast) + (yI - yILast) * (yI - yILast));
+
+      fArea += area;
+      distance += distGraph;
+
+      qDebug() << " distance=" << distance << " xTraveled=" << (xI - 1.0);
+
+    }
+
+    x.push_back (QString::number (xI));
+    y.push_back (QString::number (yI));
+    distanceGraphDouble.push_back (distance);
+
+    xILast = xI;
+    yILast = yI;
   }
+
+  // Compute distance columns
+  double dTotal = qMax (1.0, distanceGraphDouble [distanceGraphDouble.size() - 1]); // qMax prevents divide by zero
+  for (i = 0; i < distanceGraphDouble.size (); i++) {
+    double d = distanceGraphDouble [i];
+    distanceGraphForward.push_back (QString::number (d));
+    distancePercentForward.push_back (QString::number (100.0 * d / dTotal));
+    distanceGraphBackward.push_back (QString::number (dTotal - d));
+    distancePercentBackward.push_back (QString::number (100.0 * (dTotal - d) / dTotal));
+  }
+
+  // Set header values
+  funcArea = QString::number (fArea);
+  polyArea = "";
 }

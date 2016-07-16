@@ -23,10 +23,14 @@ public:
   /// Calculate geometry parameters
   virtual void calculateGeometry (const Points &points,
                                   const Transformation &transformation,
+                                  QString &funcArea,
+                                  QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
-                                  QVector<QString> &distanceGraph,
-                                  QVector<QString> &distancePercent) const;
+                                  QVector<QString> &distanceGraphForward,
+                                  QVector<QString> &distancePercentForward,
+                                  QVector<QString> &distanceGraphBackward,
+                                  QVector<QString> &distancePercentBackward) const;
 
 };
 

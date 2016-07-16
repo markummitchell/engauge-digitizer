@@ -25,11 +25,21 @@ public:
   /// Calculate geometry parameters
   virtual void calculateGeometry (const Points &points,
                                   const Transformation &transformation,
+                                  QString &funcArea,
+                                  QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
-                                  QVector<QString> &distanceGraph,
-                                  QVector<QString> &distancePercent) const = 0;
+                                  QVector<QString> &distanceGraphForward,
+                                  QVector<QString> &distancePercentForward,
+                                  QVector<QString> &distanceGraphBackward,
+                                  QVector<QString> &distancePercentBackward) const = 0;
 
+protected:
+
+  /// Convert screen positions to graph positions
+  void calculatePositionsGraph (const Points &points,
+                                const Transformation &transformation,
+                                QVector<QPointF> &positionsGraph) const;
 };
 
 #endif // GEOMETRY_STRATEGY_ABSTRACT_BASE_H

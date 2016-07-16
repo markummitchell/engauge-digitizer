@@ -27,16 +27,24 @@ GeometryStrategyContext::~GeometryStrategyContext()
 void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  const Transformation &transformation,
                                                  CurveConnectAs connectAs,
+                                                 QString &funcArea,
+                                                 QString &polyArea,
                                                  QVector<QString> &x,
                                                  QVector<QString> &y,
-                                                 QVector<QString> &distanceGraph,
-                                                 QVector<QString> &distancePercent) const
+                                                 QVector<QString> &distanceGraphForward,
+                                                 QVector<QString> &distancePercentForward,
+                                                 QVector<QString> &distanceGraphBackward,
+                                                 QVector<QString> &distancePercentBackward) const
 {
   m_strategies [connectAs]->calculateGeometry (points,
                                                transformation,
+                                               funcArea,
+                                               polyArea,
                                                x,
                                                y,
-                                               distanceGraph,
-                                               distancePercent);
+                                               distanceGraphForward,
+                                               distancePercentForward,
+                                               distanceGraphBackward,
+                                               distancePercentBackward);
 }
 

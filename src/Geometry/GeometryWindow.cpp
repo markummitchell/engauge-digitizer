@@ -12,7 +12,10 @@
 #include "EngaugeAssert.h"
 #include "GeometryWindow.h"
 #include "Logger.h"
+#include <QApplication>
+#include <QClipboard>
 #include <QHeaderView>
+#include <QItemSelectionModel>
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QTextStream>
@@ -27,13 +30,17 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
   setWhatsThis (tr ("Geometry Window\n\n"
                     "This table displays geometry data for the currently selected curve."));
 
+  m_model = new QStandardItemModel;
+
   m_view = new QTableView;
+  m_view->setModel (m_model); // Call before setSelectionModel since this also overrides the selection model
   m_view->horizontalHeader()->hide();
   m_view->verticalHeader()->hide();
-  setWidget (m_view);
+  m_view->setEditTriggers(QAbstractItemView::NoEditTriggers); // Control is read only
+  connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
+           this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
 
-  m_model = new QStandardItemModel;
-  m_view->setModel (m_model);
+  setWidget (m_view);
 
   loadStrategies();
 
@@ -44,11 +51,31 @@ GeometryWindow::~GeometryWindow()
 {
 }
 
+void GeometryWindow::clear ()
+{
+  // Resize table to remove stale body data
+  resizeTable (NUM_HEADER_ROWS);
+
+  // Clear stale header data values
+  for (int row = 0; row < NUM_HEADER_ROWS - 1; row++) {
+    m_model->setItem (row, COLUMN_HEADER_VALUE, new QStandardItem (""));
+  }
+}
+
 void GeometryWindow::closeEvent(QCloseEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::closeEvent";
 
   emit signalGeometryWindowClosed();
+}
+
+int GeometryWindow::fold2dIndexes (int row,
+                                   int col,
+                                   int rowLow,
+                                   int colLow,
+                                   int colHigh) const
+{
+  return (row - rowLow) * (colHigh - colLow + 1) + (col - colLow);
 }
 
 void GeometryWindow::initializeHeader ()
@@ -82,11 +109,65 @@ void GeometryWindow::resizeTable (int rowCount)
   m_model->setColumnCount (NUM_BODY_COLUMNS);
 }
 
+void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */,
+                                           const QItemSelection & /* deselected */)
+{
+  const bool NOT_GNUPLOT = false;
+
+  QAbstractItemModel *model = m_view->model ();
+  QItemSelectionModel *selectionModel = m_view->selectionModel ();
+  QModelIndexList selection = selectionModel->selectedIndexes ();
+
+  // Gather input. A rectangular grid that encompasses all selected indexes will be copied
+  int rowLow, rowHigh, colLow, colHigh;
+  bool isFirst = true;
+  for (QModelIndexList::const_iterator itr = selection.begin(); itr != selection.end(); itr++) {
+    QModelIndex index = *itr;
+    if (isFirst || index.row ()    < rowLow ) rowLow  = index.row ();
+    if (isFirst || index.row ()    > rowHigh) rowHigh = index.row ();
+    if (isFirst || index.column () < colLow ) colLow  = index.column ();
+    if (isFirst || index.column () > colHigh) colHigh = index.column ();
+    isFirst = false;
+  }
+
+  int numRows = rowHigh - rowLow + 1;
+  int numCols = colHigh - colLow + 1;
+
+  // Put data into two dimensional rowXcolumn table is handled as a flattened vector. Table is initialized
+  // with empty strings
+  QVector<QString> table (numRows * numCols);
+
+  for (int i = 0; i < selection.size (); i++) {
+    QModelIndex index = selection [i];
+    QVariant data = model->data (index);
+    QString text = data.toString ();
+    table [fold2dIndexes (index.row(), index.column(), rowLow, colLow, colHigh)] = text;
+  }
+  // Concatenate table into output string
+  QString output;
+  QTextStream str (&output);
+  for (int row = rowLow; row <= rowHigh; row++) {
+    QString delimiter;
+    for (int col = colLow; col <= colHigh; col++) {
+      str << delimiter << table [fold2dIndexes (row, col, rowLow, colLow, colHigh)];
+      delimiter = exportDelimiterToText (m_modelExport.delimiter(),
+                                         NOT_GNUPLOT);
+    }
+    str << "\n";
+  }
+
+  // Save to clipboard
+  QApplication::clipboard ()->setText (output);
+}
+
 void GeometryWindow::update (const CmdMediator &cmdMediator,
                              const QString &curveSelected,
                              const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::update";
+
+  // Save export format
+  m_modelExport = cmdMediator.document().modelExport();
 
   // Gather and calculate geometry data
   const Curve *curve = cmdMediator.document().curveForCurveName (curveSelected);
@@ -95,21 +176,28 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   const Points points = curve->points();
 
-  QVector<QString> x, y, distanceGraph, distancePercent;
+  QString funcArea, polyArea;
+  QVector<QString> x, y, distanceGraphForward, distancePercentForward, distanceGraphBackward, distancePercentBackward;
 
   CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
   m_geometryStrategyContext.calculateGeometry (points,
                                                transformation,
                                                curveStyle.lineStyle().curveConnectAs(),
+                                               funcArea,
+                                               polyArea,
                                                x,
                                                y,
-                                               distanceGraph,
-                                               distancePercent);
+                                               distanceGraphForward,
+                                               distancePercentForward,
+                                               distanceGraphBackward,
+                                               distancePercentBackward);
 
   // Output to table
   resizeTable (NUM_HEADER_ROWS + points.count());
 
   m_model->setItem (HEADER_ROW_NAME, COLUMN_HEADER_VALUE, new QStandardItem (curveSelected));
+  m_model->setItem (HEADER_ROW_FUNC_AREA, COLUMN_HEADER_VALUE, new QStandardItem (funcArea));
+  m_model->setItem (HEADER_ROW_POLY_AREA, COLUMN_HEADER_VALUE, new QStandardItem (polyArea));
 
   int row = NUM_HEADER_ROWS;
   int index = 0;
@@ -124,7 +212,9 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
     m_model->setItem (row, COLUMN_BODY_X, new QStandardItem (x [index]));
     m_model->setItem (row, COLUMN_BODY_Y, new QStandardItem (y [index]));
     m_model->setItem (row, COLUMN_BODY_INDEX, new QStandardItem (QString::number (index + 1)));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (distanceGraph [index]));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (distancePercent [index]));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (distanceGraphForward [index]));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (distancePercentForward [index]));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (distanceGraphBackward [index]));
+    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (distancePercentBackward [index]));
   }
 }
