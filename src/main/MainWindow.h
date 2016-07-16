@@ -330,6 +330,11 @@ private:
     IMPORT_TYPE_IMAGE_REPLACE
   };
 
+  void addDockWindow (QDockWidget *dockWidget,
+                      QSettings &settings,
+                      const QString &settingsTokenArea,
+                      const QString &settingsTokenGeometry,
+                      Qt::DockWidgetArea dockWidgetArea);
   void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
   void createActions();

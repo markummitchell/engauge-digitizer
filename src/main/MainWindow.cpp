@@ -216,6 +216,36 @@ MainWindow::~MainWindow()
 {
 }
 
+void MainWindow::addDockWindow (QDockWidget *dockWidget,
+                                QSettings &settings,
+                                const QString &settingsTokenArea,
+                                const QString &settingsTokenGeometry,
+                                Qt::DockWidgetArea dockWidgetArea)
+{
+  // Checklist guide is docked or undocked. Default is docked so it does not get overlooked by the user (which
+  // can happen if it opens elsewhere). The user may not know it can be undocked, but at least can resize or
+  // hide it if he/she needs more room for the main window.
+  const bool DOCKED_EQUALS_NOT_FLOATING = false;
+  Qt::DockWidgetArea area = (Qt::DockWidgetArea) settings.value (settingsTokenArea,
+                                                                 Qt::NoDockWidgetArea).toInt();
+
+  if (area == Qt::NoDockWidgetArea) {
+
+    addDockWidget (dockWidgetArea,
+                   dockWidget); // Add on the right to prevent error message, then immediately make undocked
+    dockWidget->setFloating(DOCKED_EQUALS_NOT_FLOATING);
+    if (settings.contains (settingsTokenGeometry)) {
+      dockWidget->restoreGeometry (settings.value (settingsTokenGeometry).toByteArray());
+    }
+
+  } else {
+
+    addDockWidget (area,
+                   dockWidget);
+
+  }
+}
+
 void MainWindow::applyZoomFactorAfterLoad()
 {
   ZoomFactor zoomFactor;
@@ -2423,28 +2453,16 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionStatusTemporary->setChecked (statusBarMode == STATUS_BAR_MODE_TEMPORARY);
   m_actionStatusAlways->setChecked (statusBarMode == STATUS_BAR_MODE_ALWAYS);
 
-  // Checklist guide is docked or undocked. Default is docked so it does not get overlooked by the user (which
-  // can happen if it opens elsewhere). The user may not know it can be undocked, but at least can resize or
-  // hide it if he/she needs more room for the main window.
-  const bool DOCKED_EQUALS_NOT_FLOATING = false;
-  Qt::DockWidgetArea area = (Qt::DockWidgetArea) settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
-                                                                 Qt::NoDockWidgetArea).toInt();
-
-  if (area == Qt::NoDockWidgetArea) {
-
-    addDockWidget (Qt::RightDockWidgetArea,
-                   m_dockChecklistGuide); // Add on the right to prevent error message, then immediately make undocked
-    m_dockChecklistGuide->setFloating(DOCKED_EQUALS_NOT_FLOATING);
-    if (settings.contains (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY)) {
-      m_dockChecklistGuide->restoreGeometry (settings.value (SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY).toByteArray());
-    }
-
-  } else {
-
-    addDockWidget (area,
-                   m_dockChecklistGuide);
-
-  }
+  addDockWindow (m_dockChecklistGuide,
+                 settings,
+                 SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
+                 SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY,
+                 Qt::RightDockWidgetArea);
+  addDockWindow (m_dockGeometryWindow,
+                 settings,
+                 SETTINGS_GEOMETRY_WINDOW_DOCK_AREA,
+                 SETTINGS_GEOMETRY_WINDOW_DOCK_GEOMETRY,
+                 Qt::RightDockWidgetArea);
 
   // Main window settings. Preference for initial zoom factor is 100%, rather than fill mode, for issue #25. Some or all
   // settings are saved to the application AND saved to m_modelMainWindow for use in DlgSettingsMainWindow. Note that
@@ -2502,6 +2520,16 @@ void MainWindow::settingsWrite ()
   } else {
 
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, dockWidgetArea (m_dockChecklistGuide));
+
+  }
+  if (m_dockGeometryWindow->isFloating()) {
+
+    settings.setValue (SETTINGS_GEOMETRY_WINDOW_DOCK_AREA, Qt::NoDockWidgetArea);
+    settings.setValue (SETTINGS_GEOMETRY_WINDOW_DOCK_GEOMETRY, m_dockGeometryWindow->saveGeometry ());
+
+  } else {
+
+    settings.setValue (SETTINGS_GEOMETRY_WINDOW_DOCK_AREA, dockWidgetArea (m_dockGeometryWindow));
 
   }
   settings.setValue (SETTINGS_BACKGROUND_IMAGE, m_cmbBackground->currentData().toInt());
@@ -4018,6 +4046,12 @@ void MainWindow::updateAfterCommand ()
   // Update checklist guide status
   m_dockChecklistGuide->update (*m_cmdMediator,
                                 m_isDocumentExported);
+
+  // Update geometry window
+  m_dockGeometryWindow->update (*m_cmdMediator,
+                                m_cmbCurve->currentText (),
+                                m_modelMainWindow,
+                                m_transformation);
 
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
   // so proper state can be verified
