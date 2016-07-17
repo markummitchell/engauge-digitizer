@@ -3149,7 +3149,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="123"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="217"/>
-        <source>New axis point cannot be at the same screen position as an exisiting axis point</source>
+        <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

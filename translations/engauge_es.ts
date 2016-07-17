@@ -3509,8 +3509,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="123"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="217"/>
-        <source>New axis point cannot be at the same screen position as an exisiting axis point</source>
-        <translation>Nuevo punto de eje no puede estar en la misma posición de la pantalla como un punto del eje exisiting</translation>
+        <source>New axis point cannot be at the same screen position as an existing axis point</source>
+        <translation>Nuevo punto de eje no puede estar en la misma posición de la pantalla como un punto del eje existente</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="129"/>

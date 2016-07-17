@@ -3513,8 +3513,8 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="123"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="217"/>
-        <source>New axis point cannot be at the same screen position as an exisiting axis point</source>
-        <translation>Novo ponto de eixo não pode ser na mesma posição da tela como um ponto de eixo exisiting</translation>
+        <source>New axis point cannot be at the same screen position as an existing axis point</source>
+        <translation>Novo ponto de eixo não pode ser na mesma posição da tela como um ponto de eixo exisitente</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="129"/>

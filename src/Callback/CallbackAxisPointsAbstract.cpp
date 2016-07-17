@@ -120,7 +120,7 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
     if (anyPointsRepeatPair (m_screenInputs)) {
 
       m_isError = true;
-      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an exisiting axis point");
+      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if (anyPointsRepeatPair (m_graphOutputs)) {
@@ -214,7 +214,7 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
         anyPointsRepeatPair (m_screenInputsY)) {
 
       m_isError = true;
-      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an exisiting axis point");
+      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
     } else if (anyPointsRepeatSingle (m_graphOutputsX) ||
