@@ -28,7 +28,15 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
   setWindowTitle (tr ("Geometry Window")); // Appears in title bar when undocked
   setStatusTip (tr ("Geometry Window"));
   setWhatsThis (tr ("Geometry Window\n\n"
-                    "This table displays geometry data for the currently selected curve."));
+                    "This table displays the following geometry data for the currently selected curve:\n\n"
+                    "Function area = Area under the curve if it is a function\n\n"
+                    "Polygon area = Area inside the curve if it is a relation. This value is only correct "
+                    "if none of the curve lines intersect each other\n\n"
+                    "X = X coordinate of each point\n\n"
+                    "Y = Y coordinate of each point\n\n"
+                    "Index = Point number\n\n"
+                    "Distance = Distance along the curve in forward or backward direction, in either graph units "
+                    "or as a percentage"));
 
   m_model = new QStandardItemModel;
 
