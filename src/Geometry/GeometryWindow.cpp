@@ -158,7 +158,7 @@ void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */
   if (selection.size () > 0) {
 
     // Gather input. A rectangular grid that encompasses all selected indexes will be copied
-    int rowLow, rowHigh, colLow, colHigh;
+    int rowLow = 0, rowHigh = 0, colLow = 0, colHigh = 0;
     bool isFirst = true;
     for (QModelIndexList::const_iterator itr = selection.begin(); itr != selection.end(); itr++) {
       QModelIndex index = *itr;
