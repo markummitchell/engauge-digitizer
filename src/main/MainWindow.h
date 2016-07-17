@@ -417,7 +417,9 @@ private:
   void startRegressionTestErrorReport (const QString &regressionInputFile);
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
+  void updateChecklistGuide ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateGeometryWindow ();
   void updateGridLines();
   void updateHighlightOpacity();
   void updateRecentFileList();

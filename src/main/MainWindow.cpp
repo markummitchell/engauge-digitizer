@@ -1425,10 +1425,7 @@ void MainWindow::fileExport(const QString &fileName,
                                  transformation (),
                                  str);
 
-    // Update checklist guide status
-    m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
-    m_dockChecklistGuide->update (*m_cmdMediator,
-                                  m_isDocumentExported);
+    updateChecklistGuide ();
 
   } else {
 
@@ -2804,6 +2801,7 @@ void MainWindow::slotCmbCurve(int /* index */)
 
   updateViewedCurves();
   updateViewsOfSettings();
+  updateGeometryWindow();
 }
 
 void MainWindow::slotContextMenuEventAxis (QString pointIdentifier)
@@ -4045,16 +4043,8 @@ void MainWindow::updateAfterCommand ()
   m_digitizeStateContext->updateAfterPointAddition (); // May or may not be needed due to point addition
 
   updateControls ();
-
-  // Update checklist guide status
-  m_dockChecklistGuide->update (*m_cmdMediator,
-                                m_isDocumentExported);
-
-  // Update geometry window
-  m_dockGeometryWindow->update (*m_cmdMediator,
-                                m_modelMainWindow,
-                                m_cmbCurve->currentText (),
-                                m_transformation);
+  updateChecklistGuide ();
+  updateGeometryWindow();
 
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
   // so proper state can be verified
@@ -4111,6 +4101,15 @@ void MainWindow::updateAfterMouseRelease ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterMouseRelease";
 
   updateControls ();
+}
+
+void MainWindow::updateChecklistGuide ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateChecklistGuide";
+
+  m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
+  m_dockChecklistGuide->update (*m_cmdMediator,
+                                m_isDocumentExported);
 }
 
 void MainWindow::updateControls ()
@@ -4243,6 +4242,17 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
       LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
       break;
   }
+}
+
+void MainWindow::updateGeometryWindow ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGeometryWindow";
+
+  // Update geometry window
+  m_dockGeometryWindow->update (*m_cmdMediator,
+                                m_modelMainWindow,
+                                m_cmbCurve->currentText (),
+                                m_transformation);
 }
 
 void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()

@@ -32,7 +32,7 @@ QVariant GeometryModel::data(const QModelIndex &index, int role) const
       (index.row () == m_rowToBeHighlighted)) {
 
     // This row is to be highlighted
-    return QVariant (QColor (200, 200, 200));
+    return QVariant (QColor (230, 230, 230));
   }
 
   // Standard behavior
