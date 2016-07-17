@@ -1,7 +1,8 @@
+CurveFitting.py             Python script that reads in a DIG file and performs polynomial curve fitting
 ExampleParseDig.py          Python script that shows how to use ParseDig.py. This script dumps the DIG file specified in
                             the command line. This code can serve as a starting point for other scripts that can process
                             the information into other output formats - like SQL tables and NETCDF.
-insert_derived_column.py    Python script that reads in (longitude,latitude) points and output those points with a timestamp
+InsertDerivedColumn.py      Python script that reads in (longitude,latitude) points and output those points with a timestamp
                             at each point that is computed assuming a constant speed through the points
 ParseDig.py                 Python class that reads Engauge Digitizer DIG files, and provides that information through a
                             very simplie application programming interface (API)

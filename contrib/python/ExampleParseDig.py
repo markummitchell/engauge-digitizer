@@ -18,5 +18,14 @@ else:
     curveNames = parseDig.curveNames()
     print ("Curve names = ", curveNames, "\n")
     for curveName in curveNames:
+
+        # Show (x,y) points as Nx2 matrix
         curve = parseDig.curve (curveName)
         print ("Curve ", "'" + curveName + "'", " = ", curve, "\n");
+
+        # Show (x,y) points as 2 vectors
+        x = [row [0] for row in curve]
+        y = [row [1] for row in curve]
+        print ("x=", x, "y=", y)
+
+
