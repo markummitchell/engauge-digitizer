@@ -7,6 +7,7 @@
 #include "CurveStyle.h"
 #include "DataKey.h"
 #include "EnumsToQt.h"
+#include "GeometryWindow.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointEllipse.h"
@@ -17,6 +18,7 @@
 #include <QGraphicsPolygonItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneContextMenuEvent>
+#include <QObject>
 #include <QPen>
 #include <QTextStream>
 #include "QtToString.h"
@@ -31,7 +33,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QPointF &posScreen,
                              const QColor &color,
                              unsigned int radius,
-                             double lineWidth) :
+                             double lineWidth,
+                             GeometryWindow *geometryWindow) :
   GraphicsPointAbstractBase (),
   m_scene (scene),
   m_graphicsItemEllipse (0),
@@ -43,7 +46,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_color (color),
   m_lineWidth (lineWidth),
   m_wanted (true),
-  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY)
+  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
+  m_geometryWindow (geometryWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
                                << " identifier=" << identifier.toLatin1 ().data ();
@@ -56,7 +60,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              const QPointF &posScreen,
                              const QColor &color,
                              const QPolygonF &polygon,
-                             double lineWidth) :
+                             double lineWidth,
+                             GeometryWindow *geometryWindow) :
   GraphicsPointAbstractBase (),
   m_scene (scene),
   m_graphicsItemEllipse (0),
@@ -68,7 +73,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_color (color),
   m_lineWidth (lineWidth),
   m_wanted (true),
-  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY)
+  m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
+  m_geometryWindow (geometryWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
                                << " identifier=" << identifier.toLatin1 ().data ();
@@ -126,8 +132,11 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
   m_graphicsItemEllipse->setFlags (QGraphicsItem::ItemIsSelectable |
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
-
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  if (m_geometryWindow != 0) {
+    QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
+    QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
+  }
 
   // Shadow item is not selectable so it needs no stored data. Do NOT
   // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item
@@ -160,8 +169,11 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
   m_graphicsItemPolygon->setFlags (QGraphicsItem::ItemIsSelectable |
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
-
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  if (m_geometryWindow != 0) {
+    QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
+    QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
+  }
 
   // Shadow item is not selectable so it needs no stored data. Do NOT
   // call QGraphicsScene::addItem since the QGraphicsItem::setParentItem call adds the item

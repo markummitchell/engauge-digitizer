@@ -8,13 +8,16 @@
 #define GRAPHICS_POINT_POLYGON_H
 
 #include <QGraphicsPolygonItem>
+#include <QObject>
 #include <QPointF>
 
 class GraphicsPoint;
 
 /// This class add event handling to QGraphicsPolygonItem
-class GraphicsPointPolygon : public QGraphicsPolygonItem
+class GraphicsPointPolygon : public QObject, public QGraphicsPolygonItem
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor
   GraphicsPointPolygon(GraphicsPoint &graphicsPoint,
@@ -31,6 +34,14 @@ public:
 
   /// Update the radius
   void setRadius(int radius);
+
+signals:
+
+  /// Signal for geometry window to highlight the current point upon hover enter
+  void signalPointHoverEnter (QString);
+
+  /// Signal for geometry window to unhighlight the current point upon hover leave
+  void signalPointHoverLeave (QString);
 
 private:
   GraphicsPointPolygon();

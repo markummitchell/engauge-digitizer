@@ -8,13 +8,16 @@
 #define GRAPHICS_POINT_ELLIPSE_H
 
 #include <QGraphicsEllipseItem>
+#include <QObject>
 #include <QPointF>
 
 class GraphicsPoint;
 
 /// This class add event handling to QGraphicsEllipseItem
-class GraphicsPointEllipse : public QGraphicsEllipseItem
+class GraphicsPointEllipse : public QObject, public QGraphicsEllipseItem
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor
   GraphicsPointEllipse(GraphicsPoint &graphicsPoint,
@@ -31,6 +34,14 @@ public:
 
   /// Update the radius
   void setRadius(int radius);
+
+signals:
+
+  /// Signal for geometry window to highlight the current point upon hover enter
+  void signalPointHoverEnter (QString);
+
+  /// Signal for geometry window to unhighlight the current point upon hover leave
+  void signalPointHoverLeave (QString);
 
 private:
   GraphicsPointEllipse();

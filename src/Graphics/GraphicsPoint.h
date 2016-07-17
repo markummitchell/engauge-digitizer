@@ -15,6 +15,7 @@ extern const double DEFAULT_HIGHLIGHT_OPACITY;
 extern const double MAX_OPACITY;
 
 class CurveStyle;
+class GeometryWindow;
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;
 class PointStyle;
@@ -47,7 +48,8 @@ public:
                 const QPointF &posScreen,
                 const QColor &color,
                 unsigned int radius,
-                double lineWidth);
+                double lineWidth,
+                GeometryWindow *geometryWindow);
 
   /// Constructor of polygon point.
   GraphicsPoint(QGraphicsScene &scene,
@@ -55,7 +57,8 @@ public:
                 const QPointF &posScreen,
                 const QColor &color,
                 const QPolygonF &polygon,
-                double lineWidth);
+                double lineWidth,
+                GeometryWindow *geometryWindow);
 
   /// Destructor. This remove the graphics item from the scene
   ~GraphicsPoint ();
@@ -124,6 +127,8 @@ private:
   bool m_wanted;
 
   double m_highlightOpacity;
+
+  GeometryWindow *m_geometryWindow; // Can receive hover signals. Null if unused
 };
 
 #endif // GRAPHICS_POINT_H

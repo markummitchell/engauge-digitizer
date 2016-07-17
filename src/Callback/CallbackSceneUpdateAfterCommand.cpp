@@ -8,6 +8,7 @@
 #include "DataKey.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
+#include "GeometryWindow.h"
 #include "GraphicsLinesForCurves.h"
 #include "GraphicsScene.h"
 #include "Point.h"
@@ -15,10 +16,12 @@
 
 CallbackSceneUpdateAfterCommand::CallbackSceneUpdateAfterCommand(GraphicsLinesForCurves &graphicsLinesForCurves,
                                                                  GraphicsScene &scene,
-                                                                 const Document &document) :
+                                                                 const Document &document,
+                                                                 GeometryWindow *geometryWindow) :
   m_graphicsLinesForCurves (graphicsLinesForCurves),
   m_scene (scene),
-  m_document (document)
+  m_document (document),
+  m_geometryWindow (geometryWindow)
 {
 }
 
@@ -30,7 +33,8 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
   m_graphicsLinesForCurves.updateAfterCommand (m_scene,
                                                m_document.modelCurveStyles (),
                                                curveName,
-                                               point);
+                                               point,
+                                               m_geometryWindow);
 
   return rtn;
 }

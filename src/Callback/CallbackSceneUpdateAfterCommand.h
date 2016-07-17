@@ -11,6 +11,7 @@
 #include "PointStyle.h"
 
 class Document;
+class GeometryWindow;
 class GraphicsLinesForCurves;
 class GraphicsScene;
 class Point;
@@ -22,7 +23,8 @@ public:
   /// Single constructor.
   CallbackSceneUpdateAfterCommand(GraphicsLinesForCurves &graphicsLinesForCurves,
                                   GraphicsScene &scene,
-                                  const Document &document);
+                                  const Document &document,
+                                  GeometryWindow *geometryWindow);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString & /* curveName */,
@@ -34,6 +36,7 @@ private:
   GraphicsLinesForCurves &m_graphicsLinesForCurves;
   GraphicsScene &m_scene;
   const Document &m_document;
+  GeometryWindow *m_geometryWindow;
 };
 
 #endif // CALLBACK_SCENE_UPDATE_AFTER_COMMAND_H

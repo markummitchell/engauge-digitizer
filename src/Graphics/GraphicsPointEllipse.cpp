@@ -40,12 +40,16 @@ void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event *
 {
   // Highlighted
   setOpacity(m_graphicsPoint.highlightOpacity ());
+
+  emit signalPointHoverEnter (data (DATA_KEY_IDENTIFIER).toString ());
 }
 
 void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Unhighlighted
   setOpacity(MAX_OPACITY);
+
+  emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
 }
 
 void GraphicsPointEllipse::setRadius(int radius)

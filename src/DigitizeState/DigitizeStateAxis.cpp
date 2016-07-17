@@ -50,12 +50,15 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::createTemporaryPoint";
 
+  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+
   // Temporary point that user can see while DlgEditPointAxis is active
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
                                                                     pointStyleAxes,
-                                                                    posScreen);
+                                                                    posScreen,
+                                                                    NULL_GEOMETRY_WINDOW);
 
   context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
                                                     point);

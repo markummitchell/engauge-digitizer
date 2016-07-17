@@ -10,6 +10,7 @@
 #include <QHash>
 
 class CurveStyles;
+class GeometryWindow;
 class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
@@ -66,7 +67,8 @@ public:
   void updateAfterCommand (GraphicsScene &scene,
                            const CurveStyles &curveStyles,
                            const QString &curveName,
-                           const Point &point);
+                           const Point &point,
+                           GeometryWindow *geometryWindow);
 
   /// Update the curve style for every curve
   void updateCurveStyles (const CurveStyles &modelCurveStyles);

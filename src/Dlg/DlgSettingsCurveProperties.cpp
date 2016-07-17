@@ -10,6 +10,7 @@
 #include "DlgSettingsCurveProperties.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GeometryWindow.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
 #include "GraphicsView.h"
@@ -327,6 +328,7 @@ void DlgSettingsCurveProperties::drawLine (bool isRelation,
 void DlgSettingsCurveProperties::drawPoints (const PointStyle &pointStyle)
 {
   const QString NULL_IDENTIFIER;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
 
   GraphicsPointFactory pointFactory;
 
@@ -334,21 +336,24 @@ void DlgSettingsCurveProperties::drawPoints (const PointStyle &pointStyle)
   GraphicsPoint *pointLeft = pointFactory.createPoint (*m_scenePreview,
                                                        NULL_IDENTIFIER,
                                                        POS_LEFT,
-                                                       pointStyle);
+                                                       pointStyle,
+                                                       NULL_GEOMETRY_WINDOW);
   pointLeft->setPointStyle (pointStyle);
 
   // Center point
   GraphicsPoint *pointCenter = pointFactory.createPoint (*m_scenePreview,
                                                          NULL_IDENTIFIER,
                                                          POS_CENTER,
-                                                         pointStyle);
+                                                         pointStyle,
+                                                         NULL_GEOMETRY_WINDOW);
   pointCenter->setPointStyle (pointStyle);
 
   // Right point
   GraphicsPoint *pointRight = pointFactory.createPoint (*m_scenePreview,
                                                         NULL_IDENTIFIER,
                                                         POS_RIGHT,
-                                                        pointStyle);
+                                                        pointStyle,
+                                                        NULL_GEOMETRY_WINDOW);
   pointRight->setPointStyle (pointStyle);
 }
 

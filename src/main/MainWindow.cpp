@@ -4278,7 +4278,8 @@ void MainWindow::updateHighlightOpacity ()
     // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
     // by updateAfterCommandStatusBarCoords
     m_scene->updateAfterCommand (*m_cmdMediator,
-                                 m_modelMainWindow.highlightOpacity());
+                                 m_modelMainWindow.highlightOpacity(),
+                                 m_dockGeometryWindow);
   }
 }
 

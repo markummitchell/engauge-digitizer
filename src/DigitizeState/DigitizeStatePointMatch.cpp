@@ -89,6 +89,8 @@ void DigitizeStatePointMatch::createTemporaryPoint (CmdMediator *cmdMediator,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::createTemporaryPoint";
 
+  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+
   const DocumentModelPointMatch &modelPointMatch = cmdMediator->document().modelPointMatch();
 
   // Get point style for current graph, and then override with candidate color
@@ -99,7 +101,8 @@ void DigitizeStatePointMatch::createTemporaryPoint (CmdMediator *cmdMediator,
   // Temporary point that user can see while DlgEditPoint is active
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
                                                                     pointStyle,
-                                                                    posScreen);
+                                                                    posScreen,
+                                                                    NULL_GEOMETRY_WINDOW);
 
   context().mainWindow().scene().removeTemporaryPointIfExists(); // Only one temporary point at a time is allowed
 

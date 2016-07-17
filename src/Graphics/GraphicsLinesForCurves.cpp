@@ -172,7 +172,8 @@ void GraphicsLinesForCurves::resetOnLoad()
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
                                                  const CurveStyles &curveStyles,
                                                  const QString &curveName,
-                                                 const Point &point)
+                                                 const Point &point,
+                                                 GeometryWindow *geometryWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurves::updateAfterCommand"
                                << " point=" << point.identifier().toLatin1().data()
@@ -181,7 +182,8 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
   m_graphicsLinesForCurve [curveName]->updateAfterCommand (scene,
                                                            curveStyles.pointStyle(curveName),
-                                                           point);
+                                                           point,
+                                                           geometryWindow);
 }
 
 void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles)

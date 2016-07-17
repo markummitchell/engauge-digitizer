@@ -12,6 +12,7 @@
 #include <QGraphicsPathItem>
 
 class CurveStyle;
+class GeometryWindow;
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
@@ -59,7 +60,8 @@ public:
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
                            const PointStyle &pointStyle,
-                           const Point &point);
+                           const Point &point,
+                           GeometryWindow *geometryWindow);
 
   /// Update the curve style for this curve
   void updateCurveStyle (const CurveStyle &curveStyle);

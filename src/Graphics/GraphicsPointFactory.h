@@ -9,6 +9,7 @@
 
 #include "PointShape.h"
 
+class GeometryWindow;
 class GraphicsPoint;
 class PointStyle;
 class QGraphicsScene;
@@ -25,7 +26,8 @@ public:
   GraphicsPoint *createPoint (QGraphicsScene &scene,
                               const QString &identifier,
                               const QPointF &posScreen,
-                              const PointStyle &pointStyle);
+                              const PointStyle &pointStyle,
+                              GeometryWindow *geometryWindow);
 };
 
 #endif // GRAPHICS_POINT_FACTORY_H

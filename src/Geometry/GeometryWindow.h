@@ -13,14 +13,17 @@
 
 class CmdMediator;
 class Curve;
+class GeometryModel;
 class MainWindowModel;
 class QItemSelection;
-class QStandardItemModel;
 class QString;
 class QTableView;
 class Transformation;
 
 /// Window that displays the geometry information, as a table, for the current curve
+///
+/// Column COLUMN_BODY_POINT_IDENTIFIERS is hidden. It contains the point identifiers so we can find
+/// the line associated with a point, and then highlight that line
 class GeometryWindow : public QDockWidget
 {
   Q_OBJECT;
@@ -36,6 +39,9 @@ public:
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event);
 
+  /// Hidden column that has the point identifiers
+  static int columnBodyPointIdentifiers ();
+
   /// Populate the table with the specified Curve
   void update (const CmdMediator &cmdMediator,
                const MainWindowModel &modelMainWindow,
@@ -43,6 +49,13 @@ public:
                const Transformation &transformation);
 
 public slots:
+
+  /// Highlight the row for the specified point
+  void slotPointHoverEnter (QString);
+
+  /// Unhighlight the row for the specified point
+  void slotPointHoverLeave (QString);
+
   /// Prepare for copy after selection has changed
   void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
 
@@ -61,6 +74,7 @@ private:
   void initializeHeader();
   void loadStrategies ();
   void resizeTable (int rowCount);
+  void unselectAll (); // Unselect all cells. This cleans up nicely when Document is closed
 
   enum ColumnsHeader {
     COLUMN_HEADER_LABEL,
@@ -76,6 +90,7 @@ private:
     COLUMN_BODY_DISTANCE_PERCENT_FORWARD,
     COLUMN_BODY_DISTANCE_GRAPH_BACKWARD,
     COLUMN_BODY_DISTANCE_PERCENT_BACKWARD,
+    COLUMN_BODY_POINT_IDENTIFIERS,
     NUM_BODY_COLUMNS
   };
 
@@ -88,7 +103,7 @@ private:
   };
 
   QTableView *m_view;
-  QStandardItemModel *m_model;
+  GeometryModel *m_model;
 
   GeometryStrategyContext m_geometryStrategyContext;
 

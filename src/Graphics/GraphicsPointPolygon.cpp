@@ -39,12 +39,16 @@ void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event *
 {
   // Highlighted
   setOpacity(m_graphicsPoint.highlightOpacity ());
+
+  emit signalPointHoverEnter (data (DATA_KEY_IDENTIFIER).toString ());
 }
 
 void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   // Unhighlighted
   setOpacity(MAX_OPACITY);
+
+  emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
 }
 
 void GraphicsPointPolygon::setRadius(int radius)

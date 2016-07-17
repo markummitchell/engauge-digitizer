@@ -245,6 +245,7 @@ HEADERS  += \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.h \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.h \
     src/Callback/functor.h \
+    src/Geometry/GeometryModel.h \
     src/Geometry/GeometryStrategyAbstractBase.h \
     src/Geometry/GeometryStrategyContext.h \
     src/Geometry/GeometryStrategyFunctionSmooth.h \
@@ -548,6 +549,7 @@ SOURCES += \
     src/Format/FormatDegreesMinutesSecondsBase.cpp \
     src/Format/FormatDegreesMinutesSecondsNonPolarTheta.cpp \
     src/Format/FormatDegreesMinutesSecondsPolarTheta.cpp \
+    src/Geometry/GeometryModel.cpp \
     src/Geometry/GeometryStrategyAbstractBase.cpp \
     src/Geometry/GeometryStrategyContext.cpp \
     src/Geometry/GeometryStrategyFunctionSmooth.cpp \

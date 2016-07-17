@@ -6,6 +6,7 @@
 
 #include "DataKey.h"
 #include "EnumsToQt.h"
+#include "GeometryWindow.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
@@ -22,7 +23,8 @@ GraphicsPointFactory::GraphicsPointFactory()
 GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                                   const QString &identifier,
                                                   const QPointF &posScreen,
-                                                  const PointStyle &pointStyle)
+                                                  const PointStyle &pointStyle,
+                                                  GeometryWindow *geometryWindow)
 {
   GraphicsPoint *item = 0;
 
@@ -35,7 +37,8 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
                                   pointStyle.radius (),
-                                  pointStyle.lineWidth());
+                                  pointStyle.lineWidth(),
+                                  geometryWindow);
       }
       break;
 
@@ -46,7 +49,8 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
                                   pointStyle.polygon (),
-                                  pointStyle.lineWidth());
+                                  pointStyle.lineWidth(),
+                                  geometryWindow);
       }
       break;
   }

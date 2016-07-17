@@ -11,6 +11,7 @@
 #include "DataKey.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GeometryWindow.h"
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
@@ -43,7 +44,8 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
 
 GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
                                            const PointStyle &pointStyle,
-                                           const QPointF &posScreen)
+                                           const QPointF &posScreen,
+                                           GeometryWindow *geometryWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createPoint"
                               << " identifier=" << identifier.toLatin1().data();
@@ -56,7 +58,8 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
   GraphicsPoint *point = pointFactory.createPoint (*this,
                                                    identifier,
                                                    posScreen,
-                                                   pointStyle);
+                                                   pointStyle,
+                                                   geometryWindow);
 
   point->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
 
@@ -241,7 +244,8 @@ void GraphicsScene::showCurves (bool show,
 }
 
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
-                                        double highlightOpacity)
+                                        double highlightOpacity,
+                                        GeometryWindow *geometryWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
@@ -250,7 +254,8 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
   updateCurves (cmdMediator);
 
   // Update the points
-  updatePointMembership (cmdMediator);
+  updatePointMembership (cmdMediator,
+                         geometryWindow);
 }
 
 void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
@@ -289,13 +294,15 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
   }
 }
 
-void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator)
+void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
+                                           GeometryWindow *geometryWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
   CallbackSceneUpdateAfterCommand ftor (m_graphicsLinesForCurves,
                                         *this,
-                                        cmdMediator.document ());
+                                        cmdMediator.document (),
+                                        geometryWindow);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackSceneUpdateAfterCommand::callback);
 

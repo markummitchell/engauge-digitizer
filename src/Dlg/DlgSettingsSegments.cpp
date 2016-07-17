@@ -8,6 +8,7 @@
 #include "CmdSettingsSegments.h"
 #include "DlgSettingsSegments.h"
 #include "EngaugeAssert.h"
+#include "GeometryWindow.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "PointStyle.h"
@@ -348,6 +349,7 @@ void DlgSettingsSegments::updatePreview()
   const QString ARBITRARY_IDENTIFIER ("");
   const QColor COLOR (Qt::blue);
   const int RADIUS = 5;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
 
   if (!m_loading) {
 
@@ -385,7 +387,9 @@ void DlgSettingsSegments::updatePreview()
                                                         pos,
                                                         COLOR,
                                                         polygon,
-                                                        BRUSH_WIDTH);
+                                                        BRUSH_WIDTH,
+                                                        NULL_GEOMETRY_WINDOW);
+
       m_points.push_back (graphicsPoint);
     }
   }
