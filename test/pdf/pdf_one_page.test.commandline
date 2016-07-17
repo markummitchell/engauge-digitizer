@@ -1,1 +1,1 @@
--filecmdscript ../test/pdf/pdf_one_page.test.xml -regression
+-filecmdscript ../test/pdf/pdf_one_page.xml -regression

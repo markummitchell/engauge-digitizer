@@ -1,1 +1,1 @@
--filecmdscript ../test/version7.1_1.test.xml -regression -reset
+-filecmdscript ../test/version7.1_1.xml -regression -reset

@@ -1,2 +1,2 @@
--errorreport ../test/huge.dig -regression -reset
+-errorreport ../test/huge.xml -regression -reset
 
