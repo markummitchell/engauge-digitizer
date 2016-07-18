@@ -4049,6 +4049,10 @@ void MainWindow::updateAfterCommand ()
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
   // so proper state can be verified
   writeCheckpointToLogFile ();
+
+  // Since focus may have drifted over to Geometry Window or some other control we se focus on the GraphicsView
+  // so the cursor is appropriate for the current state (otherwise it often ends up as default arrow)
+  m_view->setFocus ();
 }
 
 void MainWindow::updateAfterCommandStatusBarCoords ()

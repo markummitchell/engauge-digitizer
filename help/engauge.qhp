@@ -28,6 +28,7 @@
             </section>
             <section title="Answers for users who are having problems">
                 <section title="What happened to my image?" ref="answerdiscretizing.html"></section>
+                <section title="Why am I unable to select or edit a point?" ref="answerselecting.html"></section>
                 <section title="The coordinates are wrong, how do I fix them?" ref="fixingaxispoints.html"></section>
             </section>         
         </toc>
@@ -43,6 +44,7 @@
 	  <keyword name="Multiple coordinate systems" ref="answermultiplecoordsystems.html"/> 
 	  <keyword name="Point graph" ref="answerpointgraph.html"/> 
 	  <keyword name="Select mode" ref="answerselectmode.html"/> 
+	  <keyword name="Selecting" ref="answerselecting.html"/> 
         </keywords>
         <files>
             <file>animation.png</file>
@@ -54,6 +56,7 @@
             <file>answerother.html</file>
             <file>answerout.html</file>
             <file>answerpointgraph.html</file>
+            <file>answerselecting.html</file>
             <file>answerselectmode.html</file>
             <file>betteraccuracy.html</file>
             <file>commandlineoptions.html</file>

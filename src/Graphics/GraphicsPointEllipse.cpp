@@ -36,20 +36,24 @@ QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
                                           value);
 }
 
-void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
+void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
   // Highlighted
   setOpacity(m_graphicsPoint.highlightOpacity ());
 
   emit signalPointHoverEnter (data (DATA_KEY_IDENTIFIER).toString ());
+
+  QGraphicsEllipseItem::hoverEnterEvent (event);
 }
 
-void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
+void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
   // Unhighlighted
   setOpacity(MAX_OPACITY);
 
   emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
+
+  QGraphicsEllipseItem::hoverLeaveEvent (event);
 }
 
 void GraphicsPointEllipse::setRadius(int radius)

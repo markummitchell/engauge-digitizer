@@ -35,20 +35,24 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
                                           value);
 }
 
-void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
+void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
   // Highlighted
   setOpacity(m_graphicsPoint.highlightOpacity ());
 
   emit signalPointHoverEnter (data (DATA_KEY_IDENTIFIER).toString ());
+
+  QGraphicsPolygonItem::hoverEnterEvent (event);
 }
 
-void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
+void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
   // Unhighlighted
   setOpacity(MAX_OPACITY);
 
   emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
+
+  QGraphicsPolygonItem::hoverLeaveEvent (event);
 }
 
 void GraphicsPointPolygon::setRadius(int radius)
