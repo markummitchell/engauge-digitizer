@@ -14,7 +14,8 @@
 GraphicsPointPolygon::GraphicsPointPolygon(GraphicsPoint &graphicsPoint,
                                            const QPolygonF &polygon) :
   QGraphicsPolygonItem (polygon),
-  m_graphicsPoint (graphicsPoint)
+  m_graphicsPoint (graphicsPoint),
+  m_shadow (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointPolygon::GraphicsPointPolygon";
 }
@@ -38,7 +39,7 @@ QVariant GraphicsPointPolygon::itemChange(GraphicsItemChange change,
 void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
   // Highlighted
-  setOpacity(m_graphicsPoint.highlightOpacity ());
+  setOpacityForSubtree (m_graphicsPoint.highlightOpacity ());
 
   emit signalPointHoverEnter (data (DATA_KEY_IDENTIFIER).toString ());
 
@@ -48,11 +49,23 @@ void GraphicsPointPolygon::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void GraphicsPointPolygon::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
   // Unhighlighted
-  setOpacity(MAX_OPACITY);
+  setOpacityForSubtree (MAX_OPACITY);
 
   emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
 
   QGraphicsPolygonItem::hoverLeaveEvent (event);
+}
+
+void GraphicsPointPolygon::setOpacityForSubtree (double opacity)
+{
+  // Set this item
+  setOpacity (opacity);
+
+  if (m_shadow != 0) {
+
+    // Set the child item. Opacity < MAX_OPACITY is too dark so child is set to totally transparent
+    m_shadow->setOpacity (opacity < MAX_OPACITY ? 0.0 : opacity);
+  }
 }
 
 void GraphicsPointPolygon::setRadius(int radius)
@@ -60,4 +73,9 @@ void GraphicsPointPolygon::setRadius(int radius)
   // Resize assuming symmetry about the origin, and an aspect ratio of 1:1 (so x and y scales are the same)
   double scale = (2 * radius) / boundingRect().width();
   setScale (scale);
+}
+
+void GraphicsPointPolygon::setShadow (GraphicsPointPolygon *shadow)
+{
+  m_shadow = shadow;
 }

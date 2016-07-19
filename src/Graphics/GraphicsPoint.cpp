@@ -149,6 +149,8 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
 
   m_shadowZeroWidthEllipse->setPen (QPen (QBrush (m_color), ZERO_WIDTH));
   m_shadowZeroWidthEllipse->setEnabled (true);
+
+  m_graphicsItemEllipse->setShadow (m_shadowZeroWidthEllipse);
 }
 
 void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
@@ -183,6 +185,8 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
 
   m_shadowZeroWidthPolygon->setPen (QPen (QBrush (m_color), ZERO_WIDTH));
   m_shadowZeroWidthPolygon->setEnabled (true);
+
+  m_graphicsItemPolygon->setShadow (m_shadowZeroWidthPolygon);
 }
 
 QVariant GraphicsPoint::data (int key) const

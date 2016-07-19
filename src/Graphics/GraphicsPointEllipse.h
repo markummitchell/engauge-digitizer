@@ -35,6 +35,9 @@ public:
   /// Update the radius
   void setRadius(int radius);
 
+  /// Bind this graphics item to its shadow
+  void setShadow (GraphicsPointEllipse *shadow);
+
 signals:
 
   /// Signal for geometry window to highlight the current point upon hover enter
@@ -46,8 +49,12 @@ signals:
 private:
   GraphicsPointEllipse();
 
+  void setOpacityForSubtree (double opacity);
+
   // Reference to the GraphicsPoint that this class belongs to
   GraphicsPoint &m_graphicsPoint;
+
+  GraphicsPointEllipse *m_shadow;
 };
 
 #endif // GRAPHICS_POINT_ELLIPSE_H
