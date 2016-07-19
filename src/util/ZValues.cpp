@@ -7,7 +7,6 @@
 #include "ZValues.h"
 
 const int Z_VALUE_BACKGROUND = 0;
-const int Z_VALUE_GRID_LINE = 100;
 const int Z_VALUE_CURVE = 200;
 const int Z_VALUE_POINT = 300;
 

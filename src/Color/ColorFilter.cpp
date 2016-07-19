@@ -174,8 +174,10 @@ double ColorFilter::pixelToZeroToOneOrMinusOne (ColorFilterMode colorFilterMode,
 {
   if (m_strategies.contains (colorFilterMode)) {
 
-    return m_strategies [colorFilterMode]->pixelToZeroToOne (pixel,
-                                                             rgbBackground);
+    // Ignore false positive cmake compiler warning about -Wreturn-stack-address in next line (bug #26396)
+    const ColorFilterStrategyAbstractBase *strategy = m_strategies [colorFilterMode];
+    return strategy->pixelToZeroToOne (pixel,
+                                       rgbBackground);
 
   } else {
 
@@ -190,7 +192,8 @@ int ColorFilter::zeroToOneToValue (ColorFilterMode colorFilterMode,
 {
   if (m_strategies.contains (colorFilterMode)) {
 
-    return m_strategies [colorFilterMode]->zeroToOneToValue (s);
+    const ColorFilterStrategyAbstractBase *strategy = m_strategies [colorFilterMode];
+    return strategy->zeroToOneToValue (s);
 
   } else {
 
