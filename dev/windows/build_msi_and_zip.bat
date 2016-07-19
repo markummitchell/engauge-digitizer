@@ -99,13 +99,14 @@ if "%ARG1%" neq "norelease" (
   cd "%SCRIPTDIR%"
   findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
   findStr "Version=" engauge.wxs | findStr /v InstallerVersion
-  set /p VERSION_NUMBER_CODE="If the version numbers are correct, enter the version number seen above to continue and build releases> "
+  set /p VERNUM="If the version numbers are correct, enter the version number seen above to continue and build releases>"
+  echo "Version number will be %VERNUM%"
 
   candle engauge.wxs
   candle WixUI_InstallDir_NoLicense.wxs
-  light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o digit-exe-windows-32-bit-installer-%VERSION_NUMBER_CODE%.msi
+  light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-32-bit-installer-%VERNUM%.msi"
 
   echo *** creating zip
   rem "Engauge Digitizer" in next line is needed since zip crashes on %RESULTDIR% due to the space
-  zip -r "digit-exe-windows-32-bit-without-installer-file-%VERSION_NUMBER_CODE%.zip" "Engauge Digitizer"
+  zip -r "digit-exe-windows-32-bit-without-installer-file-%VERNUM%.zip" "Engauge Digitizer"
 )
