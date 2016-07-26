@@ -8,7 +8,17 @@ Easy      - Installing a Linux package that is bundled in most versions of Linux
 Less Easy - By downloading pre-built binaries for Windows and Linux. The pre-built binaries are available
             from the engauge6 project on github.com, at:
 
-                  https://github.com/markummitchell/engauge6/releases
+                  https://github.com/markummitchell/engauge-digitizer/releases
+
+            ***************************************************************************
+            *                                                                         *
+            *  Special instructions for AppImage releases, which require 'fuse':      *
+            *  1) 'sudo apt-get install fuse'                                         *
+            *  2) 'sudo modprobe fuse'                                                *
+            *  3) 'sudo usermod -a -G fuse <username>'                                *
+            *  4) Logout and then log back in. These steps are only performed once    *
+            *                                                                         *
+            ***************************************************************************
 
 Difficult - By downloading the source code and building Engauge according to the steps in the INSTALL file in
             the highest level directory. The initial build process can take as little as 15 minutes or as long

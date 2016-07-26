@@ -1,27 +1,28 @@
 # engauge.pro : Builds make files for engauge executable
 #
 # Comments:
-# 1) This builds 'release' executables by default, to greatly reduce the chances of a 'debug' build getting deployed.
+# 1) Version numbers for the packages mentioned in the following comments are documented in the BUILD file
+# 2) This builds 'release' executables by default, to greatly reduce the chances of a 'debug' build getting deployed.
 #    To get a 'debug' build, add 'CONFIG=debug' to the qmake command line:
 #        qmake CONFIG=debug
-# 2) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires:
-#        1) previous installation of OpenJPEG 2.1 development package
+# 3) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires:
+#        1) previous installation of OpenJPEG development package
 #        2) OPENJPEG_INCLUDE environment variable pointing to directory with openjpeg.h
 #        3) OPENJPEG_LIB environment variable pointing to directory with libopenjp2.so
 #    Sample command lines:
 #        qmake CONFIG+=jpeg2000
 #        qmake "CONFIG+=debug jpeg2000"
 #    At some point, Qt may provide its own support for this format, at which point this can be skipped
-# 3) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
-#        1) previous installation of the poppler-qt5 development package. Engauge has been tested with versions 0.24.5 and 0.44.0
+# 4) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
+#        1) previous installation of the poppler-qt5 development package
 #        2) POPPLER_INCLUDE environment variable pointing to directory containing poppler-qt5.h
 #        3) POPPLER_LIB environment variable pointing to directory containing libpoppler-qt5.so
 #    Sample command lines:
 #        qmake CONFIG+=pdf
 #        qmake "CONFIG+=debug pdf"
-# 4) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
+# 5) Set environment variable HELPDIR to override the default directory for the help files. On the command line, use
 #    qmake "DEFINES+=HELPDIR=<directory>". The <directory> is absolute or relative to the application executable directory
-# 5) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
+# 6) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
 #
 # More comments are in the INSTALL file, and below
@@ -695,6 +696,12 @@ win32-msvc* {
     QMAKE_LFLAGS += -Wl,--stack,32000000
   }
   LIBS += -lfftw3 -llog4cpp
+}
+
+linux-* {
+  INCLUDEPATH += $$(FFTW_HOME)/include \
+                 $$(LOG4CPP_HOME)/include
+  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
 }
 
 INCLUDEPATH += src \

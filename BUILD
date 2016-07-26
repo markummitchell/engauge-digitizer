@@ -89,10 +89,11 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
      --Package(s)--     --Comment--
      libfftw3-dev       For computing fourier transforms. Tested with 3.3.3-7
      libjpeg-dev        For reading jpeg image files (optional)
-     liblog4cpp-dev     For logging. Tested with 1.0.4
-     libpng12-dev       For reading png image files (optional)
+     liblog4cpp-dev     For logging. Tested with 1.0.4. Alternately, use log4cpp_null
+                        at https://github.com/markummitchell/log4cpp_null
      libopenjpeg-dev    For reading jpeg2000 image files (optional). Compiles
                         with version 2.1.7 but not with version 2.1.3
+     libpng12-dev       For reading png image files (optional)
 
    In Debian and Ubuntu distributions, the following packages are required for
    building Engauge for your own use:
@@ -100,13 +101,18 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
      --Package(s)--     --Comment--
      libfftw3-dev       Required for all distributions
      libjpeg-dev        Required for all distributions
-     liblog4cpp5-dev    Replaces liblog4cpp-dev that is suggested above
+     liblog4cpp5-dev    Replaces liblog4cpp-dev that is suggested above. Alternately, 
+                        use log4cpp_null at https://github.com/markummitchell/log4cpp_null
      libpng12-dev       Required for all distributions
      libqt5sql5-sqlite
      qtbase5-dev  
      qtbase5-dev-tools
      qttools5-dev
      qttools5-dev-tools
+
+   Optional packages that are manually downloaded and installed:
+
+     poppler            Works with version 0.44.0 and 0.45.0
 
 4) Run qmake on this file to generate make files. The qmake executable will
    display what functionality will, and what functionality will not, be included 
