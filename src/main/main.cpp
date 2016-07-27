@@ -62,7 +62,7 @@ QString engaugeLogFilename()
 {
   QString pathAndFile; // Return empty value in OSX which is unused
 
-#if !defined(OSX_RELEASE) && !defined(WIN_RELEASE)
+#if !defined(OSX_RELEASE) && !defined(WIN_RELEASE) && !defined(APPIMAGE_RELEASE)
   QProcessEnvironment env;
 
   // Make multiple attempts until a directory is found where the log file can be written
