@@ -79,11 +79,7 @@ fi
 
 if [ -z "$NO_DOWNLOAD" ] ; then
 # Install AppImageKit build dependencies
-if [[ "$ARCH" = "i686" ]] ; then
-    sudo yum -y install binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel libpng12 # Fedora, RHEL, CentOS
-else
-    sudo yum -y install binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel libpng-devel # Fedora, RHEL, CentOS
-fi
+sudo yum -y install binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel libpng-devel # Fedora, RHEL, CentOS
 
 # Build AppImageKit
 if [ ! -d AppImageKit ] ; then
