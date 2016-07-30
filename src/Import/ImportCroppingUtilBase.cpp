@@ -9,7 +9,7 @@
 #include <QHash>
 #include <QObject>
 
-const ImportCropping DEFAULT_IMPORT_CROPPING = IMPORT_CROPPING_NEVER; // Traditional, and simplest, option
+const ImportCropping DEFAULT_IMPORT_CROPPING = IMPORT_CROPPING_MULTIPAGE_PDFS; // Traditional, and simplest, option
 
 ImportCroppingUtilBase::ImportCroppingUtilBase()
 {
