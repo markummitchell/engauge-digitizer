@@ -128,9 +128,10 @@ cd $HOME/$APP/engauge-digitizer
 VERSION=$(git rev-parse --short=8 HEAD)
 echo $VERSION
 
-qmake-qt5 engauge.pro DEFINES+=APPIMAGE_RELEASE
+qmake-qt5 engauge.pro DEFINES+=APPIMAGE_RELEASE CONFIG+=pdf
 #Hack to nodebug
 sed -i 's/ -g / /g' Makefile
+make clean
 make
 
 if [ ! -e ./bin/engauge ]; then
@@ -193,6 +194,14 @@ fi
 echo $LIB
 cp -a $LIB/libicu* usr/lib
 
+# Poppler library, unlike fftw3, is dynamic so library must be copied
+cp -L $POPPLER_LIB/libpoppler-cpp.so usr/lib
+cp -L $POPPLER_LIB/libpoppler-cpp.so.0 usr/lib
+cp -L $POPPLER_LIB/libpoppler.so usr/lib
+cp -L $POPPLER_LIB/libpoppler.so.61 usr/lib
+cp -L $POPPLER_LIB/libpoppler-qt5.so usr/lib
+cp -L $POPPLER_LIB/libpoppler-qt5.so.1 usr/lib
+ 
 export LD_LIBRARY_PATH=./usr/lib/:../../5.5/gc*/lib/:$LD_LIBRARY_PATH
 ldd $HOME/$APP/engauge-digitizer/bin/engauge | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
 ldd usr/lib/qt5/plugins/platforms/libqxcb.so | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
