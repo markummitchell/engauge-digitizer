@@ -71,7 +71,13 @@ cp /usr/lib/i386-linux-gnu/libfftw3.so.3           $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicudata.so.52        $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicui18n.so.52        $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicuuc.so.52          $STAGINGDIR
-cp /usr/lib/liblog4cpp.so.5                        $STAGINGDIR
+cp $LOG4CPP_HOME/lib/liblog4cpp.so.1               $STAGINGDIR
+cp $POPPLER_LIB/libpoppler.so                      $STAGINGDIR
+cp $POPPLER_LIB/libpoppler.so.61                   $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-cpp.so                  $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-cpp.so.0                $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-qt5.so                  $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-qt5.so.1                $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libQt5CLucene.so.5      $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libQt5Core.so.5         $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libQt5DBus.so.5         $STAGINGDIR
@@ -88,7 +94,7 @@ cp /usr/lib/i386-linux-gnu/qt5/plugins/sqldrivers/libqsqlite.so $SQLDIR
 echo "***Rebuilding release executable" &&
 export ENGAUGE_RELEASE=1 &&
 cd ../.. &&
-qmake engauge.pro &&
+qmake engauge.pro CONFIG+=pdf &&
 make clean &&
 make &&
 cd dev/linux
