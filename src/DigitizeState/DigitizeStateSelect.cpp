@@ -186,7 +186,7 @@ void DigitizeStateSelect::handleContextMenuEventGraph (CmdMediator *cmdMediator,
 
   if (y != 0) {
     delete y;
-    y = y;
+    y = 0;
   }
 
   int rtn = dlg->exec ();

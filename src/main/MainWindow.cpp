@@ -2394,9 +2394,9 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                         QPoint (200, 200)).toPoint ());
 
   // Help window geometry
+#ifndef OSX_RELEASE
   QSize helpSize = settings.value (SETTINGS_HELP_SIZE,
                                    QSize (900, 600)).toSize();
-#ifndef OSX_RELEASE
   m_helpWindow->resize (helpSize);
   if (settings.contains (SETTINGS_HELP_POS)) {
     QPoint helpPos = settings.value (SETTINGS_HELP_POS).toPoint();

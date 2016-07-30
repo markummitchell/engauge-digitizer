@@ -136,7 +136,10 @@ int ColorFilterSettings::foregroundLow () const
 double ColorFilterSettings::high () const
 {
   if (m_strategies.contains (m_colorFilterMode)) {
-    return m_strategies [m_colorFilterMode]->high (*this);
+
+    // Ignore false positive cmake compiler warning about -Wreturn-stack-address in next line (bug #26396)
+    const ColorFilterSettingsStrategyAbstractBase *strategy = m_strategies.value (m_colorFilterMode);
+    return strategy->high (*this);
   } else {
     ENGAUGE_ASSERT (false);
     return m_strategies [COLOR_FILTER_MODE_INTENSITY]->high (*this);
@@ -215,7 +218,8 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
 double ColorFilterSettings::low () const
 {
   if (m_strategies.contains (m_colorFilterMode)) {
-    return m_strategies [m_colorFilterMode]->low (*this);
+    const ColorFilterSettingsStrategyAbstractBase *strategy = m_strategies.value (m_colorFilterMode);
+    return strategy->low (*this);
   } else {
     ENGAUGE_ASSERT (false);
     return m_strategies [COLOR_FILTER_MODE_INTENSITY]->low (*this);
@@ -230,9 +234,10 @@ void ColorFilterSettings::printStream (QString indentation,
   indentation += INDENTATION_DELTA;
 
   if (m_strategies.contains (m_colorFilterMode)) {
-    return m_strategies [m_colorFilterMode]->printStream (*this,
-                                                          indentation,
-                                                          str);
+    const ColorFilterSettingsStrategyAbstractBase *strategy = m_strategies.value (m_colorFilterMode);
+    return strategy->printStream (*this,
+                                  indentation,
+                                  str);
   }
 }
 
@@ -288,8 +293,9 @@ void ColorFilterSettings::setForegroundLow (int foregroundLow)
 void ColorFilterSettings::setHigh (double s0To1)
 {
   if (m_strategies.contains (m_colorFilterMode)) {
-    return m_strategies [m_colorFilterMode]->setHigh (*this,
-                                                      s0To1);
+    ColorFilterSettingsStrategyAbstractBase *strategy = m_strategies [m_colorFilterMode];
+    return strategy->setHigh (*this,
+                              s0To1);
   } else {
     ENGAUGE_ASSERT (false);
   }
@@ -322,8 +328,9 @@ void ColorFilterSettings::setIntensityLow (int intensityLow)
 void ColorFilterSettings::setLow (double s0To1)
 {
   if (m_strategies.contains (m_colorFilterMode)) {
-    return m_strategies [m_colorFilterMode]->setLow (*this,
-                                                     s0To1);
+    ColorFilterSettingsStrategyAbstractBase *strategy = m_strategies [m_colorFilterMode];
+    return strategy->setLow (*this,
+                             s0To1);
   } else {
     ENGAUGE_ASSERT (false);
   }

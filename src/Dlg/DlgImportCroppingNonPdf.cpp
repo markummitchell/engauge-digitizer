@@ -24,8 +24,6 @@
 
 int DlgImportCroppingNonPdf::MINIMUM_DIALOG_WIDTH = 350;
 int DlgImportCroppingNonPdf::MINIMUM_PREVIEW_HEIGHT = 200;
-const int X_TOP_LEFT = 0, Y_TOP_LEFT = 0;
-const int WIDTH = -1, HEIGHT = -1; // Negative values give full page
 
 DlgImportCroppingNonPdf::DlgImportCroppingNonPdf(const QString &fileName) :
   m_fileName (fileName),

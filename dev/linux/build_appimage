@@ -19,6 +19,12 @@ set -e
 # Be verbose
 set -x
 
+# Sanity checks
+if [[ -z "$QTDIR" || $QTDIR == *"qt-3"* || $QTDIR == *"qt-4"* ]] ; then
+    echo "Environment variable QTDIR must point to a qt5 installation"
+    exit 1
+fi
+
 # TODO: move to a library function
 git_pull_rebase_helper()
 {
@@ -31,10 +37,17 @@ export PATH=/bin:/sbin:$PATH # For CentOS 6
 if [ -z "$NO_DOWNLOAD" ] ; then
 # Enable EPEL repository; needed for recent Qt and
 # install dependencies
-sudo yum -y install wget epel-release git make libtool \
+if [[ "$ARCH" = "i686" ]] ; then
+    sudo yum -y install wget epel-release git make libtool \
         libzip-devel libxml2-devel libxslt-devel libsqlite3x-devel \
         libudev-devel libusbx-devel libcurl-devel libssh2-devel mesa-libGL-devel sqlite-devel \
         tar gzip which make mesa-libEGL coreutils grep wget cmake gcc gcc-c++
+else
+    sudo yum -y install wget epel-release git make libtool \
+        libzip-devel libxml2-devel libxslt-devel \
+        libudev-devel libusb-devel libcurl-devel libssh2-devel mesa-libGL-devel sqlite-devel \
+        tar gzip which make mesa-libEGL coreutils grep wget cmake gcc gcc-c++
+fi
 
 # Determine which architecture should be built
 if [[ "$(/bin/arch)" = "i686" ||  "$(/bin/arch)" = "x86_64" ]] ; then
@@ -60,13 +73,13 @@ cd ..
 # EPEL is awesome - fresh Qt5 for old base systems
 sudo yum -y install qt5-qtbase-devel  \
                     qt5-qtsvg-devel qt5-linguist qt5-qtconnectivity-devel \
-                    qt5-qttools-devel qt5-qttools log4cpp-devel fftw-devel \
+                    qt5-qttools-devel qt5-qttools fftw-devel \
                     qt5-qttools-libs-help qt5-qttools-libs-clucene
 fi
 
 if [ -z "$NO_DOWNLOAD" ] ; then
 # Install AppImageKit build dependencies
-sudo yum -y install binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel libpng12 # Fedora, RHEL, CentOS
+sudo yum -y install binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel libpng-devel # Fedora, RHEL, CentOS
 
 # Build AppImageKit
 if [ ! -d AppImageKit ] ; then
@@ -85,7 +98,7 @@ rm -rf $HOME/$APP/$APP.AppDir
 mkdir -p $HOME/$APP/$APP.AppDir
 cd $HOME/$APP
 
-# Get latest engauge-digitizer project from git
+# Get latest engauge-digitizer and log4cpp_null projects from git
 if [ ! -d engauge-digitizer ] ; then
   git clone https://github.com/markummitchell/engauge-digitizer.git
 fi
@@ -93,19 +106,37 @@ cd engauge-digitizer/
 git_pull_rebase_helper
 cd ..
 
+if [ ! -d log4cpp_null ] ; then
+  git clone https://github.com/markummitchell/log4cpp_null.git
+fi
+cd log4cpp_null
+git_pull_rebase_helper
+cd ..
+
 mkdir -p $HOME/$APP/$APP.AppDir/usr/bin
 
+# Build log4cpp
+LOG4CPP_HOME=$HOME/$APP/log4cpp_null
+cd $LOG4CPP_HOME
+qmake-qt5 log4cpp.pro
+make
+cd ..
+
+# Build engauge. Version is displayed
 cd $HOME/$APP/engauge-digitizer
 
-# Figure out $VERSION
 VERSION=$(git rev-parse --short=8 HEAD)
 echo $VERSION
 
-export ENGAUGE_RELEASE=1
-qmake-qt5 engauge.pro
+qmake-qt5 engauge.pro DEFINES+=APPIMAGE_RELEASE
 #Hack to nodebug
 sed -i 's/ -g / /g' Makefile
 make
+
+if [ ! -e ./bin/engauge ]; then
+    echo "bin/engauge executable was not created relative to directory `pwd`"
+    exit 1
+fi
 
 cp ./bin/engauge $HOME/$APP/$APP.AppDir/usr/bin
 cp ./src/img/bannerapp_64.xpm $HOME/$APP/$APP.AppDir/engauge.xpm
@@ -142,19 +173,16 @@ EOF
 # FIXME: How to find out which subset of plugins is really needed? I used strace when running the binary
 mkdir -p ./usr/lib/qt5/plugins/
 
-if [ -e $(dirname /usr/li*/qt5/plugins/bearer) ] ; then
-  PLUGINS=$(dirname /usr/li*/qt5/plugins/bearer)
-else
-  PLUGINS=../../5.5/gc*/plugins/
-fi
-echo $PLUGINS # /usr/lib64/qt5/plugins if build system Qt is found
+# QTDIR can point to personal installation of Qt which can contain Help/Print modules that may be missing from official install
+PLUGINS=$QTDIR/plugins
+
 cp -r $PLUGINS/bearer ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/iconengines ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/imageformats ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/platforminputcontexts ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/platforms ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/platformthemes ./usr/lib/qt5/plugins/
-#cp -r $PLUGINS/sensors ./usr/lib/qt5/plugins/
+cp -r $PLUGINS/sqldrivers ./usr/lib/qt5/plugins/
 cp -r $PLUGINS/xcbglintegrations ./usr/lib/qt5/plugins/
 
 if [ -e $(dirname /usr/li*/libicudata.so.42) ] ; then
@@ -166,7 +194,7 @@ echo $LIB
 cp -a $LIB/libicu* usr/lib
 
 export LD_LIBRARY_PATH=./usr/lib/:../../5.5/gc*/lib/:$LD_LIBRARY_PATH
-ldd bin/engauge | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
+ldd $HOME/$APP/engauge-digitizer/bin/engauge | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
 ldd usr/lib/qt5/plugins/platforms/libqxcb.so | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
 
 # Copy in the indirect dependencies
@@ -277,7 +305,8 @@ for FILE in $BLACKLISTED_FILES ; do
   FOUND=$(find "${APPDIR}" -type f -name "${FILE}" 2>/dev/null)
   echo $FOUND
   if [ ! -z "$FOUND" ] ; then
-    fatal "Blacklisted file ${FOUND} found"
+    echo "Blacklisted file ${FOUND} found"
+    exit 1
   fi
 done
 
@@ -288,7 +317,6 @@ rm usr/lib/qt5/plugins/platformthemes/libqgtk* || true
 # Workaround for:
 # GTK theme is broken
 rm usr/lib/libgtk* usr/lib/libgdk* usr/lib/libpango* || true
-
 
 cd ..
 find $APP.AppDir/

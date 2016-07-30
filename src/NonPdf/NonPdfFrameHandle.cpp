@@ -57,14 +57,14 @@ NonPdfFrameHandle::NonPdfFrameHandle (QGraphicsScene &scene,
 
   // Adjust positions of handles that are not at the top left so handles are laid out symmetrically
   QPointF pointPos = pointReference;
-  if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_LEFT) != 0) {
+  if ((orientationFlags & NonPdfCropping::NON_PDF_CROPPING_LEFT) != 0) {
     pointPos.setX (pointPos.x() - handleSize.width() / 2.0);
-  } else if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_RIGHT) != 0) {
+  } else if ((orientationFlags & NonPdfCropping::NON_PDF_CROPPING_RIGHT) != 0) {
     pointPos.setX (pointPos.x() + handleSize.width() / 2.0);
   }
-  if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_TOP) != 0) {
+  if ((orientationFlags & NonPdfCropping::NON_PDF_CROPPING_TOP) != 0) {
     pointPos.setY (pointPos.y() - handleSize.height() / 2.0);
-  } else if ((orientationFlags && NonPdfCropping::NON_PDF_CROPPING_BOTTOM) != 0) {
+  } else if ((orientationFlags & NonPdfCropping::NON_PDF_CROPPING_BOTTOM) != 0) {
     pointPos.setY (pointPos.y() + handleSize.height() / 2.0);
   }
 
