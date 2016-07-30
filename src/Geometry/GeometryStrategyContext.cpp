@@ -38,17 +38,19 @@ void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  QVector<QString> &distanceGraphBackward,
                                                  QVector<QString> &distancePercentBackward) const
 {
-  m_strategies [connectAs]->calculateGeometry (points,
-                                               modelCoords,
-                                               modelMainWindow,
-                                               transformation,
-                                               funcArea,
-                                               polyArea,
-                                               x,
-                                               y,
-                                               distanceGraphForward,
-                                               distancePercentForward,
-                                               distanceGraphBackward,
-                                               distancePercentBackward);
-}
+  if (transformation.transformIsDefined()) {
 
+    m_strategies [connectAs]->calculateGeometry (points,
+                                                 modelCoords,
+                                                 modelMainWindow,
+                                                 transformation,
+                                                 funcArea,
+                                                 polyArea,
+                                                 x,
+                                                 y,
+                                                 distanceGraphForward,
+                                                 distancePercentForward,
+                                                 distanceGraphBackward,
+                                                 distancePercentBackward);
+  }
+}

@@ -243,24 +243,27 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
   m_model->setItem (HEADER_ROW_FUNC_AREA, COLUMN_HEADER_VALUE, new QStandardItem (funcArea));
   m_model->setItem (HEADER_ROW_POLY_AREA, COLUMN_HEADER_VALUE, new QStandardItem (polyArea));
 
-  int row = NUM_HEADER_ROWS;
-  int index = 0;
-  for (; index < points.count(); row++, index++) {
+  if (transformation.transformIsDefined()) {
 
-    const Point &point = points.at (index);
+    int row = NUM_HEADER_ROWS;
+    int index = 0;
+    for (; index < points.count(); row++, index++) {
 
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (point.posScreen (),
-                                              posGraph);
+      const Point &point = points.at (index);
 
-    m_model->setItem (row, COLUMN_BODY_X, new QStandardItem (x [index]));
-    m_model->setItem (row, COLUMN_BODY_Y, new QStandardItem (y [index]));
-    m_model->setItem (row, COLUMN_BODY_INDEX, new QStandardItem (QString::number (index + 1)));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (distanceGraphForward [index]));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (distancePercentForward [index]));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (distanceGraphBackward [index]));
-    m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (distancePercentBackward [index]));
-    m_model->setItem (row, COLUMN_BODY_POINT_IDENTIFIERS, new QStandardItem (point.identifier()));
+      QPointF posGraph;
+      transformation.transformScreenToRawGraph (point.posScreen (),
+                                                posGraph);
+
+      m_model->setItem (row, COLUMN_BODY_X, new QStandardItem (x [index]));
+      m_model->setItem (row, COLUMN_BODY_Y, new QStandardItem (y [index]));
+      m_model->setItem (row, COLUMN_BODY_INDEX, new QStandardItem (QString::number (index + 1)));
+      m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (distanceGraphForward [index]));
+      m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (distancePercentForward [index]));
+      m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (distanceGraphBackward [index]));
+      m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (distancePercentBackward [index]));
+      m_model->setItem (row, COLUMN_BODY_POINT_IDENTIFIERS, new QStandardItem (point.identifier()));
+    }
   }
 
   // Unselect everything
