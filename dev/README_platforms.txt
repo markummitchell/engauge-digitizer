@@ -11,19 +11,33 @@ Option 1) Many Linux distributions already offer Engauge Digitizer as packages. 
           can be installed by using the distribution's package manager (yum, apt-get, ...).
 
 Option 2) The AppImage release file can be downloaded and executed on all 32 and 64 bit Linux distributions. No installation
-          step is required before executing the AppImage. However, if an error message appears mentioning that 
-          'Fuse is not installed' then the fuse package must be installed. The commands to install that package on 
- 	  some systems are:
+          step is required before executing the AppImage. Some known issues with this approach are listed below.
 
-            On Ubuntu/Kubuntu distributions
-              sudo apt-get install fuse
-              sudo modprobe fuse
-              sudo usermod -a -G fuse $USER
-              (log out and log back in so your account is immediately able to use fuse, and run Engauge Digitizer)
-
-            On openSUSE:
-              sudo zypper install fuse
-
+          |----------------------------------------------------------------------------------------------------------------|
+          |                                             Known AppImage Issues                                              |
+          |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:             'Fuse is not installed'                                                              |
+          |Description:               The fuse package must be installed                                                   |
+          |Solution (Ubuntu/Kubuntu): The commands to install the fuse package on Ubuntu/Kubuntu are:                      |
+          |                             >sudo apt-get install fuse                                                         |
+          |                             >sudo modprobe fuse                                                                |
+          |                             >sudo usermod -a -G fuse $USER                                                     |
+          |                             (log out and log back in so your account is immediately able to use fuse)          |
+          |Solution (openSUSE):       The command to install the fuse package on openSUSE is:                              |
+          |                             >sudo zypper install fuse                                                          |
+          |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:             'D-Bus library appears to be incorrectly set up; failed to read machine uuid'        |
+          |Description:               D-Bus is has not been configured yet                                                 |
+          |Solution (Fedora):         The commands to configure D-Bus are:                                                 |
+          |                             >sudo su                                                                           |
+          |                             >dbus-uuidgen >/var/lib/dbus/machine-id                                            |
+          |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:             'QCommon::drawComplexControl: Control 1 not handled'                                 |
+          |Description:               Qt does not support the GTK style in the AppImage build                              |
+	  |Solution (Fedora):         Execute the AppImage with a different style specified                                |
+	  |                             >./digit-exe-universal-linux-#-bit-without-installer_#_#.AppImage -style=plastique |
+          |----------------------------------------------------------------------------------------------------------------|
+	  
 Option 3) The Debian installer (digit-exe-debian-linux-32-bit-installer-X_Y.run) is released for installing into Debian systems. 
           The Debian installer included in this release has been tested in 32 and 64 bit Kubuntu and Knoppix.
 

@@ -140,6 +140,18 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
 
      > ../bin/engauge
 
+ |-----------------------------------------------------------------------------------------------------------|
+ |                                              Known Linux Issues                                           |
+ |-----------------------------------------------------------------------------------------------------------|
+ |Error message:        'Cannot mix incompatible Qt library (version (0x#) with this library (version 0x#)'  |
+ |Description:          Engauge is trying to use the plugins supplied by the operating system rather than    |
+ |                      the plugins supplied by the current Qt framework. This will not work since the       |
+ |                      two sets of plugins were built with different versions of Qt                         |
+ |Solution (Kubuntu):   Specify the current path of the correct plugins directory (under the root Qt         |
+ |                      directory) as:                                                                       |
+ |                        >export QT_PLUGIN_PATH=$QTDIR/plugins                                              |
+ |-----------------------------------------------------------------------------------------------------------|
+     
 Linux - Steps to build engauge test executables and perform tests
 ---------------------------------------------------------
 These steps build and test engauge, in Linux.
