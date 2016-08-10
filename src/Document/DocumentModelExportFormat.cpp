@@ -21,6 +21,7 @@ const double DEFAULT_POINTS_INTERVAL_RELATIONS = 10; // Consistent with DEFAULT_
 const QString DEFAULT_X_LABEL ("x");
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_FUNCTIONS
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_RELATIONS
+const bool DEFAULT_EXPORT_DELIMITER_OVERRIDE = false; // Target beginner users who expect simplest behavior. Issue #169
 
 DocumentModelExportFormat::DocumentModelExportFormat()
 {
@@ -32,7 +33,7 @@ DocumentModelExportFormat::DocumentModelExportFormat()
   m_delimiter = (ExportDelimiter) settings.value (SETTINGS_EXPORT_DELIMITER,
                                                   QVariant (EXPORT_DELIMITER_COMMA)).toInt();
   m_overrideCsvTsv = settings.value (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
-                                     QVariant (true)).toBool();
+                                     QVariant (DEFAULT_EXPORT_DELIMITER_OVERRIDE)).toBool();
   m_header = (ExportHeader) settings.value (SETTINGS_EXPORT_HEADER,
                                             QVariant (EXPORT_HEADER_SIMPLE)).toInt();
   m_layoutFunctions = (ExportLayoutFunctions) settings.value (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,
