@@ -1,15 +1,39 @@
+@echo off
+
 rem Usage: build_msi_and_zip.bat <norelease>
+rem
+rem        Call this script from the Qt 5.6 shell
+rem
+rem Requirements: 1) Path set to point to:
+rem                  vcvarsall.bat           Microsoft Visual Studio X/vc/bin, where X=12.0 (MSVC2012) and 14.0 (MSVC2015) work
+rem                  candle.exe/light.exe    Wix Toolset
+rem                  zip.exe                 Gnuwin32
+rem                  curl.exe                cURL
+rem                  7z.exe                  7-Zip
+rem                  qmake                   Qt. Typical minimal setup is provided by setup_32bit.bat
+rem               2) This does NOT need the fftw3 library to be installed first, since that is
+rem                  downloaded and set up automatically by this script. The DLLs supplied by the creators are used
+rem               3) This does need the log4cpp library. That is easily built using qmake (just like Engauge)
 
 set ARG1=%1
 
-call C:\"Program Files (x86)"\"Microsoft Visual Studio 12.0"\VC\vcvarsall.bat x86
+call vcvarsall.bat x86
+
+if not defined LOG4CPP_HOME (
+   echo LOG4CPP_HOME must be set and pointing to log4cpp home directory
+   exit /b 
+)
+
+if not defined QTDIR (
+   echo QTDIR must be set and pointing to the Qt directory
+   exit /b
+)
 
 set QTDIRS=bearer iconengines imageformats platforms printsupport sqldrivers
 set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
 set ENGAUGE_CONFIG='pdf'
 set QTLIBEXT='.lib'
-set LOG4CPPDLLINK="https://dl.dropboxusercontent.com/s/gyqcfg2xpm4jjby/log4cpp_null.zip"
 set FFTWLINK="ftp://ftp.fftw.org/pub/fftw/fftw-3.3.4-dll32.zip"
 set POPPLERLINK="https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip"
 
@@ -30,19 +54,17 @@ set APPVEYOR_BUILD_FOLDER="%SCRIPTDIR%\..\.."
 if not exist "%APPVEYOR_BUILD_FOLDER%" mkdir "%APPVEYOR_BUILD_FOLDER%"
 cd "%APPVEYOR_BUILD_FOLDER%"
 
-curl "%LOG4CPPDLLINK%" -o log4cpp_null.zip
 curl "%FFTWLINK%" -o fftw-3.3.4-dll32.zip
 curl "%POPPLERLINK%" -o poppler-qt5.zip
 
 rem Nominal Qt installation is QTDIR="C:\Qt\5.6\msvc2013" or QTDIR="C:\Qt\5.7\msvc2013"
 set PATH=%QTDIR%\bin;%PATH%
 
-7z x log4cpp_null.zip -aoa
+set FFTW_HOME=fftw-3.3.4-dll32
+if not exist %FFTW_HOME% mkdir %FFTW_HOME%
+cd %FFTW_HOME%
 
-if not exist fftw-3.3.4-dll32 mkdir fftw-3.3.4-dll32
-cd fftw-3.3.4-dll32
-
-7z x fftw-3.3.4-dll32.zip -aoa
+7z x ../fftw-3.3.4-dll32.zip -aoa
 lib /def:libfftw3-3.def
 lib /def:libfftw3f-3.def
 lib /def:libfftw3l-3.def
@@ -62,6 +84,9 @@ set POPPLER_INCLUDE="%APPVEYOR_BUILD_FOLDER%\poppler-qt5\include\poppler\qt5"
 set POPPLER_LIB="%APPVEYOR_BUILD_FOLDER%\poppler-qt5"
 lrelease engauge.pro
 qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%" "DEFINES+=WIN_RELEASE"
+
+if not exist bin mkdir bin
+
 rem move Makefile Makefile.orig
 rem ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
 if "%ARG1%" neq "norelease" (
@@ -76,10 +101,10 @@ for %%I in (%QTDIRS%) do (
 )
 for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*.dll "%RESULTDIR%\%%I"
 for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I.dll "%RESULTDIR%"
-del /S *d.dll
+if exist *d.dll del /S *d.dll
 copy bin\engauge.exe "%RESULTDIR%"
 
-copy "%APPVEYOR_BUILD_FOLDER%\log4cpp_null\lib\log4cpp.dll" "%RESULTDIR%"
+copy "%LOG4CPP_HOME%\lib\log4cpp.lib" "%RESULTDIR%"
 
 copy fftw-3.3.4-dll32\lib\libfftw3-3.dll "%RESULTDIR%"
 copy "%APPVEYOR_BUILD_FOLDER%"\poppler-qt5\*.dll "%RESULTDIR%"
@@ -99,8 +124,15 @@ if "%ARG1%" neq "norelease" (
   cd "%SCRIPTDIR%"
   findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
   findStr "Version=" engauge.wxs | findStr /v InstallerVersion
-  set /p VERNUM="If the version numbers are correct, enter the version number seen above to continue and build releases>"
-  echo "Version number will be %VERNUM%"
+  echo *****************************************************************
+  echo * Check the version numbers above. If they are not correct, enter
+  echo * Control-C to exit. Otherwise, enter the version number below...
+  echo *
+  echo * CAUTION - Do not use the mouse wheel at this point or else the
+  echo * entered number will be blank
+  echo *****************************************************************
+  set /p VERNUM="Version number seen above>"
+  echo Version number will be %VERNUM%
 
   candle engauge.wxs
   candle WixUI_InstallDir_NoLicense.wxs
