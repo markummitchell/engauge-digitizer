@@ -38,15 +38,15 @@ if [ -z "$NO_DOWNLOAD" ] ; then
 # Enable EPEL repository; needed for recent Qt and
 # install dependencies
 if [[ "$ARCH" = "i686" ]] ; then
-    sudo yum -y install wget epel-release git make libtool \
+    sudo yum -y install epel-release git make libtool \
         libzip-devel libxml2-devel libxslt-devel libsqlite3x-devel \
         libudev-devel libusbx-devel libcurl-devel libssh2-devel mesa-libGL-devel sqlite-devel \
-        tar gzip which make mesa-libEGL coreutils grep wget cmake gcc gcc-c++
+        tar gzip which make mesa-libEGL coreutils grep cmake gcc gcc-c++
 else
-    sudo yum -y install wget epel-release git make libtool \
+    sudo yum -y install epel-release git make libtool \
         libzip-devel libxml2-devel libxslt-devel \
         libudev-devel libusb-devel libcurl-devel libssh2-devel mesa-libGL-devel sqlite-devel \
-        tar gzip which make mesa-libEGL coreutils grep wget cmake gcc gcc-c++
+        tar gzip which make mesa-libEGL coreutils grep cmake gcc gcc-c++
 fi
 
 # Determine which architecture should be built
@@ -299,7 +299,7 @@ cp $(ldconfig -p | grep libfreetype.so.6 | cut -d ">" -f 2 | xargs) ./usr/lib/ #
 
 # Add desktop integration - TODO: move to a library function
 XAPP=engauge
-wget -O ./usr/bin/$XAPP.wrapper https://raw.githubusercontent.com/probonopd/AppImageKit/master/desktopintegration
+cp $HOME/$APP/engauge-digitizer/dev/linux/engauge.wrapper ./usr/bin/$XAPP.wrapper
 chmod a+x ./usr/bin/$XAPP.wrapper
 sed -i -e "s|Exec=$XAPP|Exec=$XAPP.wrapper|g" $XAPP.desktop
 

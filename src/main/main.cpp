@@ -15,6 +15,7 @@
 #include <QFileInfo>
 #include <QObject>
 #include <QProcessEnvironment>
+#include <QStyleFactory>
 #include "TranslatorContainer.h"
 
 using namespace std;
@@ -26,6 +27,7 @@ const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
 const QString CMD_REGRESSION ("regression");
 const QString CMD_RESET ("reset");
+const QString CMD_STYLES ("styles"); // Not to be confused with -style option that qt handles
 const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
 const QString DASH_ERROR_REPORT ("-" + CMD_ERROR_REPORT);
@@ -34,6 +36,7 @@ const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
 const QString DASH_RESET ("-" + CMD_RESET);
+const QString DASH_STYLES ("-" + CMD_STYLES);
 const QString ENGAUGE_LOG_FILE ("engauge.log");
 
 // Prototypes
@@ -50,6 +53,7 @@ void parseCmdLine (int argc,
                    bool &isErrorReportRegressionTest,
                    bool &isGnuplot,
                    QStringList &loadStartupFiles);
+void showStylesAndExit ();
 
 // Functions
 bool checkFileExists (const QString &file)
@@ -189,6 +193,8 @@ void parseCmdLine (int argc,
       isErrorReportRegressionTest = true;
     } else if (strcmp (argv [i], DASH_RESET.toLatin1().data()) == 0) {
       isReset = true;
+    } else if (strcmp (argv [i], DASH_STYLES.toLatin1().data()) == 0) {
+      showStylesAndExit ();
     } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
       showUsage = true; // User entered an unrecognized token
     } else {
@@ -213,6 +219,7 @@ void parseCmdLine (int argc,
          << "[" << DASH_HELP.toLatin1().data() << "] "
          << "[" << DASH_REGRESSION.toLatin1().data() << "] "
          << "[" << DASH_RESET.toLatin1().data () << "] "
+         << "[" << DASH_STYLES.toLatin1().data () << "] "
          << "[<load_file1>] [<load_file2>] ..." << endl
          << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data() << endl
@@ -228,9 +235,17 @@ void parseCmdLine (int argc,
                  << QObject::tr ("Executes the error report file or file command script. Used for regression testing").toLatin1().data() << endl
          << "  " << DASH_RESET.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("Removes all stored settings, including window positions. Used when windows start up offscreen").toLatin1().data() << endl
+         << "  " << DASH_STYLES.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
+                 << QObject::tr ("Show a list of available styles that can be used with the -style command").toLatin1().data() << endl
          << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
                  << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data() << endl;
 
     exit (0);
   }
+}
+
+void showStylesAndExit ()
+{
+  cout << "Available styles: " << QStyleFactory::keys ().join (", ").toLatin1().data() << endl;
+  exit (0);
 }
