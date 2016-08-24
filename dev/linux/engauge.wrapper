@@ -88,10 +88,11 @@ trap atexit EXIT
 # that appears in Fedora and Ubuntu, which is fixed by changing the style
 atexit()
 {
+set +e
 if [ $NUMBER_OF_ARGS -eq 0 ] ; then
-  exec "${BIN}" || exec "${BIN}" -style=plastique
+  (exec "${BIN}") || (exec "${BIN}" -style=plastique)
 else
-  exec "${BIN}" "${args[@]}" || exec "${BIN}" "${args[@]}" -style=plastique
+  (exec "${BIN}" "${args[@]}") || (exec "${BIN}" "${args[@]}" -style=plastique)
 fi
 }
 
