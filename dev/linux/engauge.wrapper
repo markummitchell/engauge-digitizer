@@ -84,11 +84,18 @@ trap atexit EXIT
 # in POSIX-shell? (FIXME)
 # http://stackoverflow.com/questions/3190818
 #
-# Retry if first execution crashes - we assume it is the gtk library issue
-# that appears in Fedora and Ubuntu, which is fixed by changing the style
+# Retry if first execution crashes - we assume it is the gtk library crash
+# in Ubuntu. Fedora does not crash but just shows corrupted menus. Both OSes
+# are fixed by using a different style
 atexit()
 {
 set +e
+if [ -e /etc/os-release ]; then
+    if grep -q Fedora /etc/os-release; then
+	echo Fedora operating system may require -style=plastique added to the command line for the menus to work correctly
+    fi
+fi
+
 if [ $NUMBER_OF_ARGS -eq 0 ] ; then
   (exec "${BIN}") || (exec "${BIN}" -style=plastique)
 else
