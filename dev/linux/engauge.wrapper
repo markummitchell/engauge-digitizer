@@ -90,16 +90,28 @@ trap atexit EXIT
 atexit()
 {
 set +e
+# Change default style in Fedora. User can still override using -style
+FEDORA=""
 if [ -e /etc/os-release ]; then
-    if grep -q Fedora /etc/os-release; then
-	echo Fedora operating system may require -style=plastique added to the command line for the menus to work correctly
-    fi
+   if grep -q Fedora /etc/os-release; then
+      FEDORA="-style=plastique"
+      if [ ! -e /var/lib/dbus/machine-id ]; then
+        echo "********************************************************************"
+        echo "* Fedora operating system may require a special installation step. *"
+        echo "* If the following error appears:                                  *"
+        echo "*    'D-Bus library appears to be incorrectly set up'              *"
+        echo "* then execute the following steps to permanently stop that error: *"
+        echo "*    > sudo su                                                     *"
+        echo "*    > dbus-uuidgen >/var/lib/dbus/machine-id                      *"
+        echo "********************************************************************"
+     fi
+   fi
 fi
 
 if [ $NUMBER_OF_ARGS -eq 0 ] ; then
-  (exec "${BIN}") || (exec "${BIN}" -style=plastique)
+  (exec "${BIN}" $FEDORA) || (exec "${BIN}" -style=plastique)
 else
-  (exec "${BIN}" "${args[@]}") || (exec "${BIN}" "${args[@]}" -style=plastique)
+  (exec "${BIN}" $FEDORA "${args[@]}") || (exec "${BIN}" "${args[@]}" -style=plastique)
 fi
 }
 
