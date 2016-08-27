@@ -8,3 +8,4 @@ Links:
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/1o7p8iu8qxq0p7ri/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master)
 
+[![DOI](https://zenodo.org/badge/23853/markummitchell/engauge-digitizer.svg)](https://zenodo.org/badge/latestdoi/23853/markummitchell/engauge-digitizer)
