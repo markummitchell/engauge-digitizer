@@ -137,6 +137,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
     // Ask user for coordinates
     DlgEditPointAxis *dlg = new DlgEditPointAxis (context ().mainWindow (),
                                                   cmdMediator->document().modelCoords(),
+                                                  cmdMediator->document().modelGeneral(),
                                                   context().mainWindow().modelMainWindow(),
                                                   context().mainWindow().transformation(),
                                                   cmdMediator->document().documentAxesPointsRequired());

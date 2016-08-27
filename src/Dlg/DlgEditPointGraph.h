@@ -14,6 +14,7 @@
 class DlgEditPointGraphLineEdit;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
+class DocumentModelGeneral;
 class MainWindow;
 class MainWindowModel;
 class QPushButton;
@@ -30,6 +31,7 @@ public:
   /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPointGraph (MainWindow &mainWindow,
                      const DocumentModelCoords &modelCoords,
+                     const DocumentModelGeneral &modelGeneral,
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
                      const double *xInitialValue = 0,
@@ -68,6 +70,7 @@ private:
   bool m_changed;
 
   const DocumentModelCoords &m_modelCoords;
+  const DocumentModelGeneral &m_modelGeneral;
   const MainWindowModel &m_modelMainWindow;
 };
 

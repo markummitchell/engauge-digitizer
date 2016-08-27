@@ -135,6 +135,7 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
 
 void GeometryStrategyAbstractBase::loadXY (const QVector<QPointF> &positionsGraph,
                                            const DocumentModelCoords &modelCoords,
+                                           const DocumentModelGeneral &modelGeneral,
                                            const MainWindowModel &modelMainWindow,
                                            const Transformation &transformation,
                                            QVector<QString> &x,
@@ -151,6 +152,7 @@ void GeometryStrategyAbstractBase::loadXY (const QVector<QPointF> &positionsGrap
     formatCoordsUnits.unformattedToFormatted (xI,
                                               yI,
                                               modelCoords,
+                                              modelGeneral,
                                               modelMainWindow,
                                               xFormatted,
                                               yFormatted,

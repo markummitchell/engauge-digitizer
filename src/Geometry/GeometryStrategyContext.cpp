@@ -26,6 +26,7 @@ GeometryStrategyContext::~GeometryStrategyContext()
 
 void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  const DocumentModelCoords &modelCoords,
+                                                 const DocumentModelGeneral &modelGeneral,
                                                  const MainWindowModel &modelMainWindow,
                                                  const Transformation &transformation,
                                                  CurveConnectAs connectAs,
@@ -42,6 +43,7 @@ void GeometryStrategyContext::calculateGeometry (const Points &points,
 
     m_strategies [connectAs]->calculateGeometry (points,
                                                  modelCoords,
+                                                 modelGeneral,
                                                  modelMainWindow,
                                                  transformation,
                                                  funcArea,

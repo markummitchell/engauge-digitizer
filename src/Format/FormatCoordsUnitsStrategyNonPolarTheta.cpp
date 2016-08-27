@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "DocumentModelGeneral.h"
 #include "EngaugeAssert.h"
 #include "FormatCoordsUnitsStrategyNonPolarTheta.h"
 #include "FormatDateTime.h"
@@ -65,6 +66,7 @@ QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double v
                                                                         CoordUnitsDate coordUnitsDate,
                                                                         CoordUnitsTime coordUnitsTime,
                                                                         bool isXTheta,
+                                                                        const DocumentModelGeneral &modelGeneral,
                                                                         const Transformation &transformation,
                                                                         double valueUnformattedOther) const
 {
@@ -100,6 +102,7 @@ QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double v
                                         precisionDigitsForRawNumber (valueUnformatted,
                                                                      valueUnformattedOther,
                                                                      isXTheta,
+                                                                     modelGeneral,
                                                                      transformation));
       break;
 

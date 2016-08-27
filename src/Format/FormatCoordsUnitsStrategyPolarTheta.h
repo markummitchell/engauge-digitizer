@@ -8,6 +8,7 @@
 #define FORMAT_COORDS_UNITS_STRATEGY_POLAR_THETA_H
 
 #include "CoordUnitsPolarTheta.h"
+#include "DocumentModelGeneral.h"
 #include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include <QString>
 
@@ -29,6 +30,7 @@ class FormatCoordsUnitsStrategyPolarTheta : public FormatCoordsUnitsStrategyAbst
   QString unformattedToFormatted (double valueUnformatted,
                                   const QLocale &locale,
                                   CoordUnitsPolarTheta coordUnits,
+                                  const DocumentModelGeneral &modelGeneral,
                                   const Transformation &transformation,
                                   double valueUnformattedOther) const;
 };

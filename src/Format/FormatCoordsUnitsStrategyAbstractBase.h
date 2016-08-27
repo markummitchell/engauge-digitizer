@@ -7,6 +7,7 @@
 #ifndef FORMAT_COORDS_UNITS_STRATEGY_ABSTRACT_BASE_H
 #define FORMAT_COORDS_UNITS_STRATEGY_ABSTRACT_BASE_H
 
+class DocumentModelGeneral;
 class Transformation;
 
 /// Common methods for formatting strategies
@@ -24,6 +25,7 @@ class FormatCoordsUnitsStrategyAbstractBase
   int precisionDigitsForRawNumber (double valueUnformatted,
                                    double valueUnformattedOther,
                                    bool isXTheta,
+                                   const DocumentModelGeneral &modelGeneral,
                                    const Transformation &transformation) const;
 };
 

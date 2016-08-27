@@ -6,6 +6,7 @@
 
 #include "CurveConnectAs.h"
 #include "Document.h"
+#include "DocumentModelGeneral.h"
 #include "EngaugeAssert.h"
 #include "ExportFileRelations.h"
 #include "ExportLayoutFunctions.h"
@@ -224,6 +225,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
 
       // No interpolation. Raw points
       loadXThetaYRadiusValuesForCurveRaw (document.modelCoords(),
+                                          document.modelGeneral(),
                                           modelMainWindow,
                                           points,
                                           xThetaYRadiusValues [colXTheta],
@@ -243,6 +245,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
 
         loadXThetaYRadiusValuesForCurveInterpolatedSmooth (document.modelCoords(),
+                                                           document.modelGeneral(),
                                                            modelMainWindow,
                                                            points,
                                                            ordinals,
@@ -253,6 +256,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
       } else {
 
         loadXThetaYRadiusValuesForCurveInterpolatedStraight (document.modelCoords(),
+                                                             document.modelGeneral(),
                                                              modelMainWindow,
                                                              points,
                                                              ordinals,
@@ -265,6 +269,7 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                                             const DocumentModelGeneral &modelGeneral,
                                                                              const MainWindowModel &modelMainWindow,
                                                                              const Points &points,
                                                                              const ExportValuesOrdinal &ordinals,
@@ -304,6 +309,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
       format.unformattedToFormatted (xTheta,
                                      yRadius,
                                      modelCoords,
+                                     modelGeneral,
                                      modelMainWindow,
                                      *(xThetaValues [row]),
                                      *(yRadiusValues [row]),
@@ -313,6 +319,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                                               const DocumentModelGeneral &modelGeneral,
                                                                                const MainWindowModel &modelMainWindow,
                                                                                const Points &points,
                                                                                const ExportValuesOrdinal &ordinals,
@@ -337,6 +344,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
     format.unformattedToFormatted (pointInterpolated.x(),
                                    pointInterpolated.y(),
                                    modelCoords,
+                                   modelGeneral,
                                    modelMainWindow,
                                    *(xThetaValues [row]),
                                    *(yRadiusValues [row]),
@@ -345,6 +353,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedStraight (c
 }
 
 void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                                              const DocumentModelGeneral &modelGeneral,
                                                               const MainWindowModel &modelMainWindow,
                                                               const Points &points,
                                                               QVector<QString*> &xThetaValues,
@@ -367,6 +376,7 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
     format.unformattedToFormatted (posGraph.x(),
                                    posGraph.y(),
                                    modelCoords,
+                                   modelGeneral,
                                    modelMainWindow,
                                    *(xThetaValues [pt]),
                                    *(yRadiusValues [pt]),

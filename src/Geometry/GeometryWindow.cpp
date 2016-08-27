@@ -224,6 +224,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
   CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
   m_geometryStrategyContext.calculateGeometry (points,
                                                cmdMediator.document().modelCoords(),
+                                               cmdMediator.document().modelGeneral(),
                                                modelMainWindow,
                                                transformation,
                                                curveStyle.lineStyle().curveConnectAs(),

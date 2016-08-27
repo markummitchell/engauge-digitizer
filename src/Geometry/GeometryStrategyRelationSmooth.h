@@ -23,6 +23,7 @@ public:
   /// Calculate geometry parameters
   virtual void calculateGeometry (const Points &points,
                                   const DocumentModelCoords &modelCoords,
+                                  const DocumentModelGeneral &modelGeneral,
                                   const MainWindowModel &modelMainWindow,
                                   const Transformation &transformation,
                                   QString &funcArea,

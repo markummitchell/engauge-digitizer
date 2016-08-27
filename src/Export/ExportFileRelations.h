@@ -16,6 +16,7 @@
 class Document;
 class DocumentModelCoords;
 class DocumentModelExportFormat;
+class DocumentModelGeneral;
 class MainWindowModel;
 class QTextStream;
 class Transformation;
@@ -62,6 +63,7 @@ private:
                                 const Transformation &transformation,
                                 QVector<QVector<QString*> > &xThetaYRadiusValues) const;
   void loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                          const DocumentModelGeneral  &modelGeneral,
                                                           const MainWindowModel &modelMainWindow,
                                                           const Points &points,
                                                           const ExportValuesOrdinal &ordinals,
@@ -69,6 +71,7 @@ private:
                                                           QVector<QString*> &yRadiusValues,
                                                           const Transformation &transformation) const;
   void loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                            const DocumentModelGeneral &modelGeneral,
                                                             const MainWindowModel &modelMainWindow,
                                                             const Points &points,
                                                             const ExportValuesOrdinal &ordinals,
@@ -76,6 +79,7 @@ private:
                                                             QVector<QString*> &yRadiusValues,
                                                             const Transformation &transformation) const;
   void loadXThetaYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                           const DocumentModelGeneral &modelGeneral,
                                            const MainWindowModel &modelMainWindow,
                                            const Points &points,
                                            QVector<QString*> &xThetaValues,

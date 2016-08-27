@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "DocumentModelGeneral.h"
 #include "EngaugeAssert.h"
 #include "FormatCoordsUnitsStrategyPolarTheta.h"
 #include "FormatDegreesMinutesSecondsPolarTheta.h"
@@ -52,6 +53,7 @@ double FormatCoordsUnitsStrategyPolarTheta::formattedToUnformatted (const QStrin
 QString FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted (double valueUnformatted,
                                                                      const QLocale &locale,
                                                                      CoordUnitsPolarTheta coordUnits,
+                                                                     const DocumentModelGeneral &modelGeneral,
                                                                      const Transformation &transformation,
                                                                      double valueUnformattedOther) const
 {
@@ -83,6 +85,7 @@ QString FormatCoordsUnitsStrategyPolarTheta::unformattedToFormatted (double valu
                                         precisionDigitsForRawNumber (valueUnformatted,
                                                                      valueUnformattedOther,
                                                                      IS_X_THETA,
+                                                                     modelGeneral,
                                                                      transformation));
       break;
 

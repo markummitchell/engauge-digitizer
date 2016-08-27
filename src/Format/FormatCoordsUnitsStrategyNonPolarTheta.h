@@ -13,6 +13,7 @@
 #include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include <QString>
 
+class DocumentModelGeneral;
 class QLocale;
 class Transformation;
 
@@ -37,6 +38,7 @@ class FormatCoordsUnitsStrategyNonPolarTheta : public FormatCoordsUnitsStrategyA
                                   CoordUnitsDate coordUnitsDate,
                                   CoordUnitsTime coordUnitsTime,
                                   bool isXTheta,
+                                  const DocumentModelGeneral &modelGeneral,
                                   const Transformation &transformation,
                                   double valueUnformattedOther) const;
 

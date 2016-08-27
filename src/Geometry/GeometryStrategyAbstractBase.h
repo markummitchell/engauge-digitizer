@@ -12,6 +12,7 @@
 #include <QVector>
 
 class DocumentModelCoords;
+class DocumentModelGeneral;
 class MainWindowModel;
 class QPointF;
 class Transformation;
@@ -29,6 +30,7 @@ public:
   /// Calculate geometry parameters
   virtual void calculateGeometry (const Points &points,
                                   const DocumentModelCoords &modelCoords,
+                                  const DocumentModelGeneral &modelGeneral,
                                   const MainWindowModel &modelMainWindow,
                                   const Transformation &transformation,
                                   QString &funcArea,
@@ -64,6 +66,7 @@ protected:
   /// Load x and y coordinate vectors
   void loadXY (const QVector<QPointF> &positionsGraph,
                const DocumentModelCoords &modelCoords,
+               const DocumentModelGeneral &modelGeneral,
                const MainWindowModel &modelMainWindow,
                const Transformation &transformation,
                QVector<QString> &x,

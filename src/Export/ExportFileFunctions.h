@@ -15,6 +15,7 @@
 class Document;
 class DocumentModelCoords;
 class DocumentModelExportFormat;
+class DocumentModelGeneral;
 class MainWindowModel;
 class QTextStream;
 class Transformation;
@@ -71,18 +72,21 @@ private:
                           const ExportValuesXOrY &xThetaValues,
                           QVector<QVector<QString*> > &yRadiusValues) const;
   void loadYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
+                                                    const DocumentModelGeneral &modelGeneral,
                                                     const MainWindowModel &modelMainWindow,
                                                     const Points &points,
                                                     const ExportValuesXOrY &xThetaValues,
                                                     const Transformation &transformation,
                                                     QVector<QString*> &yRadiusValues) const;
   void loadYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
+                                                      const DocumentModelGeneral &modelGeneral,
                                                       const MainWindowModel &modelMainWindow,
                                                       const Points &points,
                                                       const ExportValuesXOrY &xThetaValues,
                                                       const Transformation &transformation,
                                                       QVector<QString*> &yRadiusValues) const;
   void loadYRadiusValuesForCurveRaw (const DocumentModelCoords &modelCoords,
+                                     const DocumentModelGeneral &modelGeneral,
                                      const MainWindowModel &modelMainWindow,
                                      const Points &points,
                                      const ExportValuesXOrY &xThetaValues,
@@ -92,6 +96,7 @@ private:
   /// Output 2D y/radius array along with x/theta vector in first column
   void outputXThetaYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                                   const DocumentModelCoords &modelCoords,
+                                  const DocumentModelGeneral &modelGeneral,
                                   const MainWindowModel &modelMainWindow,
                                   const QStringList &curvesIncluded,
                                   const ExportValuesXOrY &xThetaValuesMerged,

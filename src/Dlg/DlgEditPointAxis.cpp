@@ -9,6 +9,7 @@
 #include "DlgValidatorFactory.h"
 #include "DocumentAxesPointsRequired.h"
 #include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include "EngaugeAssert.h"
 #include "FormatCoordsUnits.h"
 #include "FormatDateTime.h"
@@ -36,6 +37,7 @@ const bool IS_NOT_X_THETA = false;
 
 DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
                                     const DocumentModelCoords &modelCoords,
+                                    const DocumentModelGeneral &modelGeneral,
                                     const MainWindowModel &modelMainWindow,
                                     const Transformation &transformation,
                                     DocumentAxesPointsRequired documentAxesPointsRequired,
@@ -45,6 +47,7 @@ DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
   QDialog (&mainWindow),
   m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
+  m_modelGeneral (modelGeneral),
   m_modelMainWindow (modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::DlgEditPointAxis";
@@ -206,6 +209,7 @@ void DlgEditPointAxis::initializeGraphCoordinates (const double *xInitialValue,
     format.unformattedToFormatted (*xInitialValue,
                                    *yInitialValue,
                                    m_modelCoords,
+                                   m_modelGeneral,
                                    m_modelMainWindow,
                                    xTheta,
                                    yRadius,

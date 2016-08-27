@@ -8,6 +8,7 @@
 #define FORMAT_COORDS_UNITS_H
 
 class DocumentModelCoords;
+class DocumentModelGeneral;
 class MainWindowModel;
 class QString;
 class Transformation;
@@ -30,6 +31,7 @@ class FormatCoordsUnits {
   void unformattedToFormatted (double xThetaUnformatted,
                                double yRadiusUnformatted,
                                const DocumentModelCoords &modelCoords,
+                               const DocumentModelGeneral &modelGeneral,
                                const MainWindowModel &mainWindowModel,
                                QString &xThetaFormatted,
                                QString &yRadiusFormatted,

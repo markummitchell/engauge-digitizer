@@ -9,6 +9,7 @@
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include "FormatCoordsUnits.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -26,6 +27,7 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
 DlgEditPointGraph::DlgEditPointGraph (MainWindow &mainWindow,
                                       const DocumentModelCoords &modelCoords,
+                                      const DocumentModelGeneral &modelGeneral,
                                       const MainWindowModel &modelMainWindow,
                                       const Transformation &transformation,
                                       const double *xInitialValue,
@@ -33,6 +35,7 @@ DlgEditPointGraph::DlgEditPointGraph (MainWindow &mainWindow,
   QDialog (&mainWindow),
   m_changed (false),
   m_modelCoords (modelCoords),
+  m_modelGeneral (modelGeneral),
   m_modelMainWindow (modelMainWindow)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointGraph::DlgEditPointGraph";
@@ -187,6 +190,7 @@ void DlgEditPointGraph::initializeGraphCoordinates (const double *xInitialValue,
     format.unformattedToFormatted (*xInitialValue,
                                    *yInitialValue,
                                    m_modelCoords,
+                                   m_modelGeneral,
                                    m_modelMainWindow,
                                    xTheta,
                                    yRadius,

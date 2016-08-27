@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "DocumentModelGeneral.h"
 #include "FormatCoordsUnitsStrategyAbstractBase.h"
 #include "Logger.h"
 #include <qmath.h>
@@ -16,6 +17,7 @@ FormatCoordsUnitsStrategyAbstractBase::FormatCoordsUnitsStrategyAbstractBase ()
 int FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber (double valueUnformatted,
                                                                         double valueUnformattedOther,
                                                                         bool isXTheta,
+                                                                        const DocumentModelGeneral &modelGeneral,
                                                                         const Transformation &transformation) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber";
@@ -57,7 +59,7 @@ int FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber (double v
     int powerValue = qFloor (qLn (qAbs (valueUnformatted)) / qLn (10.0));
     int powerResolution = qFloor (qLn (qAbs (resolutionPerPixel)) / qLn (10.0));
 
-    int numberDigitsForResolution = powerValue - powerResolution + 1;
+    int numberDigitsForResolution = powerValue - powerResolution + 1 + modelGeneral.extraPrecision();
 
     return numberDigitsForResolution + 1; // Add one just to be safe
 

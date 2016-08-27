@@ -34,6 +34,7 @@ Transformation::Transformation (const Transformation &other) :
   m_transform (other.transformMatrix())
 {
   setModelCoords (other.modelCoords(),
+                  other.modelGeneral(),
                   other.modelMainWindow());
 }
 
@@ -42,6 +43,7 @@ Transformation &Transformation::operator=(const Transformation &other)
   m_transformIsDefined = other.transformIsDefined();
   m_transform = other.transformMatrix ();
   setModelCoords (other.modelCoords(),
+                  other.modelGeneral(),
                   other.modelMainWindow());
 
   return *this;
@@ -207,6 +209,7 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
       format.unformattedToFormatted (pointGraph.x(),
                                      pointGraph.y(),
                                      m_modelCoords,
+                                     m_modelGeneral,
                                      m_modelMainWindow,
                                      xThetaFormatted,
                                      yRadiusFormatted,
@@ -252,6 +255,11 @@ double Transformation::logToLinearRadius (double r,
 DocumentModelCoords Transformation::modelCoords() const
 {
   return m_modelCoords;
+}
+
+DocumentModelGeneral Transformation::modelGeneral() const
+{
+  return m_modelGeneral;
 }
 
 MainWindowModel Transformation::modelMainWindow() const
@@ -309,9 +317,11 @@ double Transformation::roundOffSmallValues (double value, double range)
 }
 
 void Transformation::setModelCoords (const DocumentModelCoords &modelCoords,
+                                     const DocumentModelGeneral &modelGeneral,
                                      const MainWindowModel &modelMainWindow)
 {
   m_modelCoords = modelCoords;
+  m_modelGeneral = modelGeneral;
   m_modelMainWindow = modelMainWindow;
 }
 
@@ -456,6 +466,7 @@ void Transformation::update (bool fileIsLoaded,
   } else {
 
     setModelCoords (cmdMediator.document().modelCoords(),
+                    cmdMediator.document().modelGeneral(),
                     modelMainWindow);
 
     CallbackUpdateTransform ftor (m_modelCoords,

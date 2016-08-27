@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include "FormatCoordsUnits.h"
 #include "FormatCoordsUnitsStrategyNonPolarTheta.h"
 #include "FormatCoordsUnitsStrategyPolarTheta.h"
@@ -62,6 +63,7 @@ void FormatCoordsUnits::formattedToUnformatted (const QString &xThetaFormatted,
 void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                 double yRadiusUnformatted,
                                                 const DocumentModelCoords &modelCoords,
+                                                const DocumentModelGeneral &modelGeneral,
                                                 const MainWindowModel &mainWindowModel,
                                                 QString &xThetaFormatted,
                                                 QString &yRadiusFormatted,
@@ -80,6 +82,7 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                                   modelCoords.coordUnitsDate(),
                                                                   modelCoords.coordUnitsTime(),
                                                                   IS_X_THETA,
+                                                                  modelGeneral,
                                                                   transformation,
                                                                   yRadiusUnformatted);
     yRadiusFormatted = formatNonPolarTheta.unformattedToFormatted (yRadiusUnformatted,
@@ -88,6 +91,7 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                                    modelCoords.coordUnitsDate(),
                                                                    modelCoords.coordUnitsTime(),
                                                                    IS_NOT_X_THETA,
+                                                                   modelGeneral,
                                                                    transformation,
                                                                    xThetaUnformatted);
     
@@ -96,6 +100,7 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
     xThetaFormatted = formatPolarTheta.unformattedToFormatted (xThetaUnformatted,
                                                                mainWindowModel.locale(),
                                                                modelCoords.coordUnitsTheta(),
+                                                               modelGeneral,
                                                                transformation,
                                                                yRadiusUnformatted);
     yRadiusFormatted = formatNonPolarTheta.unformattedToFormatted (yRadiusUnformatted,
@@ -104,6 +109,7 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                                    modelCoords.coordUnitsDate(),
                                                                    modelCoords.coordUnitsTime(),
                                                                    IS_NOT_X_THETA,
+                                                                   modelGeneral,
                                                                    transformation,
                                                                    xThetaUnformatted);
   }

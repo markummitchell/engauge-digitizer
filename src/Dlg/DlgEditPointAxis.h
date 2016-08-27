@@ -14,6 +14,7 @@
 
 class DlgValidatorAbstract;
 class DocumentModelCoords;
+class DocumentModelGeneral;
 class MainWindow;
 class MainWindowModel;
 class QDoubleValidator;
@@ -30,6 +31,7 @@ public:
   /// If initial values are unspecified then the value fields will be initially empty
   DlgEditPointAxis (MainWindow &mainWindow,
                     const DocumentModelCoords &modelCoords,
+                    const DocumentModelGeneral &modelGeneral,
                     const MainWindowModel &modelMainWindow,
                     const Transformation &transformation,
                     DocumentAxesPointsRequired documentAxesPointsRequired,
@@ -69,6 +71,7 @@ private:
   DocumentAxesPointsRequired m_documentAxesPointsRequired;
 
   const DocumentModelCoords &m_modelCoords;
+  const DocumentModelGeneral &m_modelGeneral;
   const MainWindowModel &m_modelMainWindow;
 };
 

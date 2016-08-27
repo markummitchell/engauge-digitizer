@@ -17,6 +17,7 @@ GeometryStrategyRelationSmooth::~GeometryStrategyRelationSmooth()
 
 void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
                                                         const DocumentModelCoords &modelCoords,
+                                                        const DocumentModelGeneral &modelGeneral,
                                                         const MainWindowModel &modelMainWindow,
                                                         const Transformation &transformation,
                                                         QString &funcArea,
@@ -46,6 +47,7 @@ void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
 
   loadXY (positionsGraph,
           modelCoords,
+          modelGeneral,
           modelMainWindow,
           transformation,
           x,

@@ -13,6 +13,7 @@
 #include <QVector>
 
 class DocumentModelCoords;
+class DocumentModelGeneral;
 class GeometryStrategyAbstractBase;
 class Transformation;
 
@@ -27,6 +28,7 @@ public:
   /// Calculate geometry parameters
   void calculateGeometry (const Points &points,
                           const DocumentModelCoords &modelCoords,
+                          const DocumentModelGeneral &modelGeneral,
                           const MainWindowModel &modelMainWindow,
                           const Transformation &transformation,
                           CurveConnectAs connectAs,
