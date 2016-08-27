@@ -61,7 +61,7 @@ cp LICENSE Engauge\ Digitizer.app/Contents/Resources/
 dsymutil Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer -o Engauge\ Digitizer.app.dSYM
 
 # Manually insert version numbering
-cp dev/osx/Info.plist_valid Engauge\ Digitizer.app/Contents/Info.plist
+cp dev/osx/Info_valid.plist Engauge\ Digitizer.app/Contents/Info.plist
 egrep '>\d+\.\d' Engauge\ Digitizer.app/Contents/Info.plist
 echo "If submitting to app store, then in another window..."
 echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
