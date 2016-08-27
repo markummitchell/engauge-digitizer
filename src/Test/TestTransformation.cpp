@@ -1,4 +1,5 @@
 #include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
@@ -59,7 +60,8 @@ void TestTransformation::initTransformation (const QPointF &s0,
                                              const QPointF &g0,
                                              const QPointF &g1,
                                              const QPointF &g2,
-                                             const DocumentModelCoords &modelCoords)
+                                             const DocumentModelCoords &modelCoords,
+                                             const DocumentModelGeneral &modelGeneral)
 {
   QTransform matrixScreen (s0.x(), s1.x(), s2.x(),
                            s0.y(), s1.y(), s2.y(),
@@ -71,6 +73,7 @@ void TestTransformation::initTransformation (const QPointF &s0,
   Transformation t;
   MainWindowModel mainWindowModel;
   t.setModelCoords (modelCoords,
+                    modelGeneral,
                     mainWindowModel);
   t.updateTransformFromMatrices(matrixScreen,
                                 matrixGraph);
@@ -106,6 +109,17 @@ DocumentModelCoords TestTransformation::modelCoordsDefault() const
 
   return modelCoords;
 }
+
+DocumentModelGeneral TestTransformation::modelGeneralDefault() const
+{
+  DocumentModelGeneral modelGeneral;
+
+  modelGeneral.setCursorSize (5);
+  modelGeneral.setExtraPrecision (1);
+
+  return modelGeneral;
+}
+
 void TestTransformation::testCartesianLinearLinear ()
 {
   QPointF s0 (10, 1000);
@@ -121,7 +135,8 @@ void TestTransformation::testCartesianLinearLinear ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -148,7 +163,8 @@ void TestTransformation::testCartesianLinearLog ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -175,7 +191,8 @@ void TestTransformation::testCartesianLogLinear ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -203,7 +220,8 @@ void TestTransformation::testCartesianLogLog ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -230,7 +248,8 @@ void TestTransformation::testPolarLinear ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -259,7 +278,8 @@ void TestTransformation::testPolarLogOffset1 ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);
@@ -288,7 +308,8 @@ void TestTransformation::testPolarLogOffset10 ()
                       g0,
                       g1,
                       g2,
-                      modelCoordsDefault());
+                      modelCoordsDefault(),
+                      modelGeneralDefault());
 
   QVERIFY (differenceMagnitude (s0, m_s0Transformed) < EPSILON);
   QVERIFY (differenceMagnitude (s1, m_s1Transformed) < EPSILON);

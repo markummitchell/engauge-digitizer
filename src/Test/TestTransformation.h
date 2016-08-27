@@ -2,6 +2,7 @@
 #define TEST_TRANSFORMATION_H
 
 #include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include <QObject>
 #include <QPointF>
 
@@ -27,6 +28,7 @@ private slots:
 
 private:
   DocumentModelCoords modelCoordsDefault() const;
+  DocumentModelGeneral modelGeneralDefault() const;
 
   double differenceMagnitude (const QPointF &vector1,
                               const QPointF &vector2) const;
@@ -36,7 +38,8 @@ private:
                            const QPointF &g0,
                            const QPointF &g1,
                            const QPointF &g2,
-                           const DocumentModelCoords &modelCoords);
+                           const DocumentModelCoords &modelCoords,
+                           const DocumentModelGeneral &modelGeneral);
 
   QPointF m_g0Transformed;
   QPointF m_g1Transformed;
