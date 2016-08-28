@@ -24,6 +24,12 @@ function signAppFramework {
     signAppFile "$vc"
 }
 
+# Make sure we are in the correct directory
+if [ ! -e dev ]; then
+   echo "This must be run from the root directory of Engauge (dev/osx/build_installable_package)"
+   exit
+fi
+
 # Make sure environment variables are correctly set
 exe=`which macdeployqt`
 if [ -z "$exe" ]; then
