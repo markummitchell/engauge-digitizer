@@ -14,6 +14,7 @@ class CmdMediator;
 class MainWindow;
 class QComboBox;
 class QHBoxLayout;
+class QScrollArea;
 
 /// Abstract base class for all Settings dialogs.
 class DlgSettingsAbstractBase : public QDialog
@@ -48,7 +49,8 @@ protected:
   void enableOk (bool enable);
 
   /// Add Ok and Cancel buttons to subpanel to get the whole dialog.
-  void finishPanel (QWidget *subPanel);
+  void finishPanel (QWidget *subPanel,
+                    int minimumWidth = MINIMUM_DIALOG_WIDTH);
 
   /// Process slotOk.
   virtual void handleOk () = 0;
@@ -56,7 +58,7 @@ protected:
   /// Load settings from Document.
   virtual void load (CmdMediator &cmdMediator) = 0;
 
-  /// Dialog layout constant that guarantees every widget has sufficient room
+  /// Dialog layout constant that guarantees every widget has sufficient room. Can be increased by finishPanel
   static int MINIMUM_DIALOG_WIDTH;
 
   /// Dialog layout constant that guarantees preview has sufficent room
@@ -79,7 +81,7 @@ protected:
 
   /// Override the default Ok button behavior applied in showEvent
   void setDisableOkAtStartup(bool disableOkAtStartup);
-
+  
 private slots:
 
   /// Hide dialog.
@@ -92,10 +94,11 @@ private:
   DlgSettingsAbstractBase();
 
   void saveGeometryToSettings ();
-
+  
   /// Do preparation before dialog is displayed.
   virtual void showEvent (QShowEvent *event);
 
+  QScrollArea *m_scroll;
   MainWindow &m_mainWindow;
   CmdMediator *m_cmdMediator; // Cannot be const since Document gets a command pushed if dialog is ok'ed
   QPushButton *m_btnCancel;

@@ -12,12 +12,13 @@
 #include <QColor>
 #include <QComboBox>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QSettings>
 #include <QSpacerItem>
 #include <QVBoxLayout>
 
-int DlgSettingsAbstractBase::MINIMUM_DIALOG_WIDTH = 350;
-int DlgSettingsAbstractBase::MINIMUM_PREVIEW_HEIGHT = 200;
+int DlgSettingsAbstractBase::MINIMUM_DIALOG_WIDTH = 380; // May be overridden by subclass
+int DlgSettingsAbstractBase::MINIMUM_PREVIEW_HEIGHT = 100;
 
 DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
                                                  const QString &dialogName,
@@ -53,14 +54,29 @@ void DlgSettingsAbstractBase::enableOk (bool enable)
   m_btnOk->setEnabled (enable);
 }
 
-void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel)
+void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel,
+                                           int minimumWidth)
 {
   const int STRETCH_OFF = 0, STRETCH_ON = 1;
 
-  QVBoxLayout *panelLayout = new QVBoxLayout (this);
+  m_scroll = new QScrollArea (this);
+  m_scroll->setFrameShape (QFrame::NoFrame);
+  m_scroll->setStyleSheet ("QScrollArea { margin: 0; padding: 0;}"); // Need QScrollArea or interior frames are affected    
+  m_scroll->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
+  m_scroll->setVerticalScrollBarPolicy (Qt::ScrollBarAsNeeded);
+  m_scroll->setMinimumWidth (minimumWidth);
 
-  setMinimumWidth (MINIMUM_DIALOG_WIDTH);
-  setLayout (panelLayout);
+  QWidget *viewport = new QWidget (this);
+  viewport->setStyleSheet ("margin: 0; padding: 0;");
+  m_scroll->setWidget (viewport);
+  m_scroll->setWidgetResizable (true);
+
+  QHBoxLayout *scrollLayout = new QHBoxLayout (this);
+  scrollLayout->addWidget (m_scroll);
+  setLayout (scrollLayout);
+  
+  QVBoxLayout *panelLayout = new QVBoxLayout (viewport);
+  viewport->setLayout (panelLayout);
 
   panelLayout->addWidget (subPanel);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_ON);

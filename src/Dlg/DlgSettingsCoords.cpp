@@ -68,6 +68,8 @@ const int FONT_SIZE = 6;
 
 const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
 
+const int MINIMUM_DIALOG_WIDTH_COORDS = 800;
+
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Coordinates"),
                            "DlgSettingsCoords",
@@ -85,7 +87,8 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::DlgSettingsCoords";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH_COORDS);
 }
 
 DlgSettingsCoords::~DlgSettingsCoords()
@@ -263,7 +266,7 @@ void DlgSettingsCoords::createGroupXTheta (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupXTheta";
 
   m_boxXTheta = new QGroupBox(OVERRIDDEN_VALUE);
-  layout->addWidget (m_boxXTheta, row++, 1, 1, 2);
+  layout->addWidget (m_boxXTheta, row, 1, 1, 1);
 
   QGridLayout *layoutXTheta = new QGridLayout (m_boxXTheta);
   m_boxXTheta->setLayout (layoutXTheta);
@@ -298,7 +301,7 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupYRadius";
 
   m_boxYRadius = new QGroupBox (OVERRIDDEN_VALUE);
-  layout->addWidget (m_boxYRadius, row++, 1, 1, 2);
+  layout->addWidget (m_boxYRadius, row++, 2, 1, 1);
 
   QGridLayout *layoutYRadius = new QGridLayout (m_boxYRadius);
   m_boxYRadius->setLayout (layoutYRadius);
@@ -310,24 +313,16 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   m_yRadiusLinear = new QRadioButton (tr ("Linear"), m_boxYRadius);
   m_yRadiusLinear->setWhatsThis (QString(tr("Specifies linear scale for the Y or R coordinate")));
   connect (m_yRadiusLinear, SIGNAL(released()), this, SLOT (slotYRadiusLinear()));
-  layoutYRadius->addWidget (m_yRadiusLinear, rowGroup++, COLUMN_0);
+  layoutYRadius->addWidget (m_yRadiusLinear, rowGroup, COLUMN_0);
+
+  QLabel *labelOriginRadius = new QLabel(tr ("Origin radius value:"));
+  layoutYRadius->addWidget (labelOriginRadius, rowGroup++, COLUMN_1);
 
   m_yRadiusLog = new QRadioButton (tr ("Log"), m_boxYRadius);
   m_yRadiusLog->setWhatsThis (QString(tr("Specifies logarithmic scale for the Y or R coordinate\n\n"
                                          "Log scale is not allowed if there are negative coordinates.")));
   connect (m_yRadiusLog, SIGNAL(released ()), this, SLOT (slotYRadiusLog ()));
-  layoutYRadius->addWidget (m_yRadiusLog, rowGroup++, COLUMN_0);
-
-  QLabel *labelUnits = new QLabel(tr ("Units:"));
-  layoutYRadius->addWidget (labelUnits, rowGroup++, COLUMN_0);
-
-  m_cmbYRadiusUnits = new QComboBox;
-  connect (m_cmbYRadiusUnits, SIGNAL (activated (const QString &)), this, SLOT (slotUnitsYRadius(const QString &))); // activated() ignores code changes
-  layoutYRadius->addWidget (m_cmbYRadiusUnits, rowGroup++, COLUMN_0, 1, 2);
-
-  rowGroup = 0;
-  QLabel *labelOriginRadius = new QLabel(tr ("Origin radius value:"));
-  layoutYRadius->addWidget (labelOriginRadius, rowGroup++, COLUMN_1);
+  layoutYRadius->addWidget (m_yRadiusLog, rowGroup, COLUMN_0);
 
   m_editOriginRadius = new QLineEdit (m_boxYRadius);
   m_editOriginRadius->setMaximumWidth (MAX_WIDTH_EDIT_ORIGIN_RADIUS);
@@ -336,6 +331,13 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
                                                "(like when the radial units are decibels).")));
   connect (m_editOriginRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPolarOriginRadius(const QString &)));
   layoutYRadius->addWidget (m_editOriginRadius, rowGroup++, COLUMN_1);
+
+  QLabel *labelUnits = new QLabel(tr ("Units:"));
+  layoutYRadius->addWidget (labelUnits, rowGroup++, COLUMN_0);
+  
+  m_cmbYRadiusUnits = new QComboBox;
+  connect (m_cmbYRadiusUnits, SIGNAL (activated (const QString &)), this, SLOT (slotUnitsYRadius(const QString &))); // activated() ignores code changes
+  layoutYRadius->addWidget (m_cmbYRadiusUnits, rowGroup++, COLUMN_0, 1, 2);
 }
 
 void DlgSettingsCoords::createOptionalSaveDefault (QHBoxLayout * /* layout */)

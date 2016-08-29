@@ -44,6 +44,8 @@ const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 
 const QString EMPTY_PREVIEW;
 
+const int MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT = 650;
+
 DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Export Format"),
                            "DlgSettingsExportFormat",
@@ -54,7 +56,8 @@ DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::DlgSettingsExportFormat";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT);
 }
 
 DlgSettingsExportFormat::~DlgSettingsExportFormat()
