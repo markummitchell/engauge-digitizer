@@ -28,6 +28,8 @@
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
 
+const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 480;
+
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Main Window"),
                            "DlgSettingsMainWindow",
@@ -38,7 +40,8 @@ DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::DlgSettingsMainWindow";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH_MAIN_WINDOW);
 }
 
 DlgSettingsMainWindow::~DlgSettingsMainWindow()
