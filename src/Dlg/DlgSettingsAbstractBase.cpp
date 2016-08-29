@@ -60,14 +60,12 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel,
   const int STRETCH_OFF = 0, STRETCH_ON = 1;
 
   m_scroll = new QScrollArea (this);
-  m_scroll->setFrameShape (QFrame::NoFrame);
-  m_scroll->setStyleSheet ("QScrollArea { margin: 0; padding: 0;}"); // Need QScrollArea or interior frames are affected    
+  m_scroll->setStyleSheet ("QScrollArea { border: 0; margin: 0; padding: 0;}"); // Need QScrollArea or interior frames are affected    
   m_scroll->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
   m_scroll->setVerticalScrollBarPolicy (Qt::ScrollBarAsNeeded);
   m_scroll->setMinimumWidth (minimumWidth);
 
   QWidget *viewport = new QWidget (this);
-  viewport->setStyleSheet ("margin: 0; padding: 0;");
   m_scroll->setWidget (viewport);
   m_scroll->setWidgetResizable (true);
 
