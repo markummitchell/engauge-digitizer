@@ -28,7 +28,7 @@
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
 
-const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 530;
+const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 550;
 
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Main Window"),
