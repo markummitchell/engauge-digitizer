@@ -519,7 +519,7 @@ void MainWindow::createActionsFile ()
 
   m_actionClose = new QAction(tr ("&Close"), this);
   m_actionClose->setShortcut (QKeySequence::Close);
-  m_actionClose->setStatusTip (tr ("Closes the open document document."));
+  m_actionClose->setStatusTip (tr ("Closes the open document."));
   m_actionClose->setWhatsThis (tr ("Close Document\n\n"
                                    "Closes the open document."));
   connect (m_actionClose, SIGNAL (triggered ()), this, SLOT (slotFileClose ()));
