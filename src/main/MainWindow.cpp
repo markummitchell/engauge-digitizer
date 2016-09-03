@@ -866,7 +866,7 @@ void MainWindow::createActionsView ()
   m_actionZoom1To1 = new QAction (tr ("1:1 (100%)"), this);
   m_actionZoom1To1->setCheckable (true);
   m_actionZoom1To1->setChecked (true);
-  m_actionZoom1To1->setStatusTip (tr ("Zoom 6:1"));
+  m_actionZoom1To1->setStatusTip (tr ("Zoom 1:1"));
   connect (m_actionZoom1To1, SIGNAL (triggered ()), this, SLOT (slotViewZoom1To1 ()));
 
   m_actionZoom1To2 = new QAction (tr ("1:2 (50%)"), this);
