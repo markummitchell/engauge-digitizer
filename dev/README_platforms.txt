@@ -57,3 +57,25 @@ Option 2) Windows release WITHOUT INSTALLER (digit-exe-windows-32-bit-without-in
           administrative rights (since the MSI installer cannot be used).
 
 Option 3) Engauge can be built from source code. This requires a lot of effort and is not recommended.
+
+          |----------------------------------------------------------------------------------------------------------------|
+          |                                             Known Windows Issues                                               |
+          |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:   'The program can't start because MSVCP140.dll is missing from your computer. Try               |
+          |                 reinstalling the program to fix this problem.'                                                 |
+          |Description:     The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
+          |                 that the 64 bit version will not work!                                                         |
+          |Solution:        The steps to install the Redistributable package on Windows are:                               |
+          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
+          |                     >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
+          |                     >run the vc_redist.x86.exe installer                                                       |
+          |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:   'The program can't start because VCRUNTIME140.dll is missing from your computer. Try           |
+          |                 reinstalling the program to fix this problem.'                                                 |
+          |Description:     The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
+          |                 that the 64 bit version will not work!                                                         |
+          |Solution:        The steps to install the Redistributable package on Windows are:                               |
+          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
+          |                     >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
+          |                     >run the vc_redist.x86.exe installer                                                       |
+          |----------------------------------------------------------------------------------------------------------------|
