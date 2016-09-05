@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-[engauge-digitizer.engauge_en.ts]
-file_filter = translations/engauge-<lang>.ts
-source_file = translations/engauge-en.ts
-source_lang = en
-type = TS
-
