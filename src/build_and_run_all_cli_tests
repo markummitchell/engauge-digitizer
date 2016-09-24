@@ -8,7 +8,16 @@
 #        pdf      = run pdf test(s). Requires CONFIG+=pdf in qmake build
 
 # Test names. Specify a single test to run just that test
-tests=(TestCorrelation TestFormats TestGraphCoords TestProjectedPoint TestSegmentFill TestSpline TestTransformation TestValidators)
+tests=( \
+    TestCorrelation  \
+    TestFormats \
+    TestGraphCoords \
+    TestGridLineLimiter \
+    TestProjectedPoint \
+    TestSegmentFill \
+    TestSpline \
+    TestTransformation \
+    TestValidators)
 
 echo "Available tests: " ${tests[*]}
 
