@@ -4,12 +4,15 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CallbackBoundingRects.h"
+#include "Document.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
 #include "GridLineLimiter.h"
 #include "MainWindowModel.h"
 #include <qmath.h>
+#include "Transformation.h"
 
 const int DEFAULT_MAXIMUM_GRID_LINES = 25;
 
@@ -17,66 +20,111 @@ GridLineLimiter::GridLineLimiter ()
 {
 }
 
-double GridLineLimiter::limitedStepXTheta (const DocumentModelCoords &modelCoords,
-                                           const MainWindowModel &modelMainWindow,
-                                           const DocumentModelGridDisplay &modelGrid) const
+QRectF GridLineLimiter::documentBounds (const Document &document,
+                                        const Transformation &transformation) const
 {
-  double step = modelGrid.stepX();
+  // Get graph coordinate bounds
+  CallbackBoundingRects ftor (transformation);
+
+  Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                     &CallbackBoundingRects::callback);
+  document.iterateThroughCurvePointsAxes (ftorWithCallback);
+  document.iterateThroughCurvesPointsGraphs (ftorWithCallback);
+
+  bool isEmpty;
+  QRectF boundingRectGraph = ftor.boundingRectGraph(isEmpty);
+
+  return boundingRectGraph;
+}
+
+void GridLineLimiter::limitForXTheta (const Document &document,
+                                      const Transformation &transformation,
+                                      const DocumentModelCoords &modelCoords,
+                                      const MainWindowModel &modelMainWindow,
+                                      const DocumentModelGridDisplay &modelGrid,
+                                      double &startX,
+                                      double &stepX) const
+{
+  startX = modelGrid.startX();
+  double stopX = modelGrid.stopX();
+  stepX = modelGrid.stepX();
 
   if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
 
     // Linear
-    double count = 1.0 + (modelGrid.stopX() - modelGrid.startX()) / modelGrid.stepX();
+    double count = 1.0 + (stopX - startX) / stepX;
     if ((int) count > modelMainWindow.maximumGridLines()) {
 
       // Adjust step so maximum grid lines limit is met
-      step = (modelGrid.stopX() - modelGrid.startX()) / (modelMainWindow.maximumGridLines() - 1);
+      stepX = (stopX - startX) / (modelMainWindow.maximumGridLines() - 1);
 
     }
 
   } else {
 
     // Log
-    double count = 1.0 + (qLn (modelGrid.stopX()) - qLn (modelGrid.startX())) / qLn (modelMainWindow.maximumGridLines());
+    if (startX <= 0) {
+
+      // Start value is invalid so override both start and step
+      QRectF boundingRectGraph = documentBounds (document,
+                                                 transformation);
+
+      // Override lower bound
+      startX = boundingRectGraph.left ();
+    }
+
+    double count = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (modelMainWindow.maximumGridLines());
     if ((int) count > modelMainWindow.maximumGridLines()) {
 
       // Adjust step so maximum grid lines limit is met
-      step = qExp ((qLn (modelGrid.stopX()) - qLn (modelGrid.startX())) / (modelMainWindow.maximumGridLines() - 1));
+      stepX = qExp ((qLn (stopX) - qLn (startX)) / (modelMainWindow.maximumGridLines() - 1));
 
     }
   }
-
-  return step;
 }
 
-double GridLineLimiter::limitedStepYRange (const DocumentModelCoords &modelCoords,
-                                           const MainWindowModel &modelMainWindow,
-                                           const DocumentModelGridDisplay &modelGrid) const
+void GridLineLimiter::limitForYRange (const Document &document,
+                                      const Transformation &transformation,
+                                      const DocumentModelCoords &modelCoords,
+                                      const MainWindowModel &modelMainWindow,
+                                      const DocumentModelGridDisplay &modelGrid,
+                                      double &startY,
+                                      double &stepY) const
 {
-  double step = modelGrid.stepY();
+  startY = modelGrid.startY();
+  double stopY = modelGrid.stopY();
+  stepY = modelGrid.stepY();
 
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
 
     // Linear
-    double count = 1.0 + (modelGrid.stopY() - modelGrid.startY()) / modelGrid.stepY();
+    double count = 1.0 + (stopY - startY) / stepY;
     if ((int) count > modelMainWindow.maximumGridLines()) {
 
       // Adjust step so maximum grid lines limit is met
-      step = (modelGrid.stopY() - modelGrid.startY()) / (modelMainWindow.maximumGridLines() - 1);
+      stepY = (stopY - startY) / (modelMainWindow.maximumGridLines() - 1);
 
     }
 
   } else {
 
     // Log
-    double count = 1.0 + (qLn (modelGrid.stopY()) - qLn (modelGrid.startY())) / qLn (modelMainWindow.maximumGridLines());
+    if (startY <= 0) {
+
+      // Start value is invalid so override both start and step
+      QRectF boundingRectGraph = documentBounds (document,
+                                                 transformation);
+
+      // Override lower bound
+      startY = boundingRectGraph.top ();
+    }
+
+    double count = 1.0 + (qLn (stopY) - qLn (startY)) / qLn (modelMainWindow.maximumGridLines());
     if ((int) count > modelMainWindow.maximumGridLines()) {
 
       // Adjust step so maximum grid lines limit is met
-      step = qExp ((qLn (modelGrid.stopY()) - qLn (modelGrid.startY())) / (modelMainWindow.maximumGridLines() - 1));
+      stepY = qExp ((qLn (stopY) - qLn (startY)) / (modelMainWindow.maximumGridLines() - 1));
 
     }
   }
-
-  return step;
 }

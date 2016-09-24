@@ -598,6 +598,7 @@ void DlgSettingsGridDisplay::updatePreview ()
                              cmdMediator ().document ().modelCoords());
 
     factory.createGridLinesForEvenlySpacedGrid (*m_modelGridDisplayAfter,
+                                                cmdMediator ().document (),
                                                 mainWindow ().modelMainWindow(),
                                                 mainWindow ().transformation(),
                                                 m_gridLines);

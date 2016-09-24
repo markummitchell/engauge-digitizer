@@ -11,6 +11,7 @@
 #include "Point.h"
 #include <QList>
 
+class Document;
 class DocumentModelCoords;
 class DocumentModelGridDisplay;
 class GridLines;
@@ -48,6 +49,7 @@ public:
 
   /// Create a rectangular (cartesian) or annular (polar) grid of evenly spaced grid lines.
   void createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                           const Document &document,
                                            const MainWindowModel &modelMainWindow,
                                            const Transformation &transformation,
                                            GridLines &gridLines);

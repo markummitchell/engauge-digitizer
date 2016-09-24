@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "Document.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelGridDisplay.h"
 #include "EngaugeAssert.h"
@@ -152,6 +153,7 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
 }
 
 void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGridDisplay &modelGridDisplay,
+                                                          const Document &document,
                                                           const MainWindowModel &modelMainWindow,
                                                           const Transformation &transformation,
                                                           GridLines &gridLines)
@@ -171,12 +173,20 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
 
     // Limit the number of grid lines. This is a noop if the limit is not exceeded
     GridLineLimiter gridLineLimiter;
-    stepX = gridLineLimiter.limitedStepXTheta (m_modelCoords,
-                                               modelMainWindow,
-                                               modelGridDisplay);
-    stepY = gridLineLimiter.limitedStepYRange (m_modelCoords,
-                                               modelMainWindow,
-                                               modelGridDisplay);
+    gridLineLimiter.limitForXTheta (document,
+                                    transformation,
+                                    m_modelCoords,
+                                    modelMainWindow,
+                                    modelGridDisplay,
+                                    startX,
+                                    stepX);
+    gridLineLimiter.limitForYRange (document,
+                                    transformation,
+                                    m_modelCoords,
+                                    modelMainWindow,
+                                    modelGridDisplay,
+                                    startY,
+                                    stepY);
 
     // Apply if possible
     if (stepX != 0 &&

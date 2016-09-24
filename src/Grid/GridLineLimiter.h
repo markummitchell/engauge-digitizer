@@ -7,9 +7,13 @@
 #ifndef GRID_LINE_LIMITER_H
 #define GRID_LINE_LIMITER_H
 
+#include <QRectF>
+
+class Document;
 class DocumentModelCoords;
 class DocumentModelGridDisplay;
 class MainWindowModel;
+class Transformation;
 
 /// Default for maximum number of grid lines
 extern const int DEFAULT_MAXIMUM_GRID_LINES;
@@ -23,14 +27,27 @@ public:
   GridLineLimiter ();
 
   /// Limit step value for x/theta coordinate. This is a noop if the maximum grid line limit in MainWindowModel is not exceeded
-  double limitedStepXTheta (const DocumentModelCoords &modelCoords,
-                            const MainWindowModel &modelMainWindow,
-                            const DocumentModelGridDisplay &modelGrid) const;
+  void limitForXTheta (const Document &document,
+                       const Transformation &transformation,
+                       const DocumentModelCoords &modelCoords,
+                       const MainWindowModel &modelMainWindow,
+                       const DocumentModelGridDisplay &modelGrid,
+                       double &startX,
+                       double &stepX) const;
 
   /// Limit step value for y/range coordinate. This is a noop if the maximum grid line limit in MainWindowModel is not exceeded
-  double limitedStepYRange (const DocumentModelCoords &modelCoords,
-                            const MainWindowModel &modelMainWindow,
-                            const DocumentModelGridDisplay &modelGrid) const;
+  void limitForYRange (const Document &document,
+                       const Transformation &transformation,
+                       const DocumentModelCoords &modelCoords,
+                       const MainWindowModel &modelMainWindow,
+                       const DocumentModelGridDisplay &modelGrid,
+                       double &startY,
+                       double &stepY) const;
+
+private:
+
+  QRectF documentBounds (const Document &document,
+                         const Transformation &transformation) const;
 
 };
 

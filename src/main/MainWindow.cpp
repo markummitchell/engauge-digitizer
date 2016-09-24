@@ -4278,6 +4278,7 @@ void MainWindow::updateGridLines ()
   GridLineFactory factory (*m_scene,
                            m_cmdMediator->document().modelCoords());
   factory.createGridLinesForEvenlySpacedGrid (m_cmdMediator->document().modelGridDisplay(),
+                                              m_cmdMediator->document(),
                                               m_modelMainWindow,
                                               m_transformation,
                                               m_gridLines);
