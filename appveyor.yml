@@ -9,12 +9,12 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: 1
       ENGAUGE_CONFIG: "pdf"
-      QTLIBEXT: '.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-1.1.1.zip'
+      POPPLERQT5DLLINK: 'https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip'
       RESULTDIR: engauge-build
     - ENGAUGE_CONFIG: "debug pdf"
-      QTLIBEXT: 'd.lib'
       LOG4CPPDLLINK: 'https://dl.dropboxusercontent.com/u/1147076/log4cpp-debug-1.1.1.zip'
+      POPPLERQT5DLLINK: 'https://dl.dropboxusercontent.com/u/1147076/poppler-qt5-debug.zip'
       RESULTDIR: engauge-build-debug
 
 install:
@@ -37,7 +37,7 @@ install:
   - move *def lib
   - move *lib lib
   - cd %APPVEYOR_BUILD_FOLDER%
-  - curl -fsSLO 'https://dl.dropboxusercontent.com/u/1147076/poppler-qt5.zip' -o poppler-qt5.zip
+  - curl -fsSLO %POPPLERQT5DLLINK% -o poppler-qt5.zip
   - 7z x poppler-qt5.zip -aoa
 
 build_script:
@@ -47,8 +47,6 @@ build_script:
   - set POPPLER_INCLUDE=%APPVEYOR_BUILD_FOLDER%\poppler-qt5\include\poppler\qt5
   - set POPPLER_LIB=%APPVEYOR_BUILD_FOLDER%\poppler-qt5
   - qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%"
-  - move Makefile Makefile.orig
-  - ps: gc Makefile.orig | %{ $_ -replace '551.lib', $Env:QTLIBEXT } > Makefile
   - nmake
 
 after_build:
