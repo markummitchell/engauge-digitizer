@@ -37,7 +37,7 @@ install:
   - move *def lib
   - move *lib lib
   - cd %APPVEYOR_BUILD_FOLDER%
-  - curl -fsSLO %POPPLERQT5DLLINK% -o poppler-qt5.zip
+  - curl -fsSL %POPPLERQT5DLLINK% -o poppler-qt5.zip
   - 7z x poppler-qt5.zip -aoa
 
 build_script:
