@@ -3630,17 +3630,17 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4435"/>
+        <location filename="../src/main/MainWindow.cpp" line="4436"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4436"/>
+        <location filename="../src/main/MainWindow.cpp" line="4437"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4545"/>
+        <location filename="../src/main/MainWindow.cpp" line="4546"/>
         <source>Engauge Digitizer %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3682,7 +3682,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridLineFactory.cpp" line="66"/>
+        <location filename="../src/Grid/GridLineFactory.cpp" line="67"/>
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
         <translation type="unfinished"></translation>
     </message>

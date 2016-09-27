@@ -833,6 +833,7 @@ pdf {
 #   YY = two letter country codes in column 'ISO 3166-2' at https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 # where XX and YY are:
 #   ar = Arabic     Egypt=_eg
+#   cs = Czech      Czech Republic=_cs
 #   de = German     Germany=_de
 #   en = English    USA=us
 #   es = Spanish    Spain=_es
@@ -852,6 +853,7 @@ pdf {
 # In other words, translations specific to a country are loaded if available, otherwise translations for a language
 # (which often apply to multiple countries) are loaded.
 TRANSLATIONS = translations/engauge_ar.ts \
+               translations/engauge_cs.ts \
                translations/engauge_de.ts \
                translations/engauge_en.ts \
                translations/engauge_es.ts \

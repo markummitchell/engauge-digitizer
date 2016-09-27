@@ -4050,17 +4050,17 @@ Do you want to save your changes?</translation>
         <translation>Open Document</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4435"/>
+        <location filename="../src/main/MainWindow.cpp" line="4436"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4436"/>
+        <location filename="../src/main/MainWindow.cpp" line="4437"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4545"/>
+        <location filename="../src/main/MainWindow.cpp" line="4546"/>
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4106,7 +4106,7 @@ Do you want to save your changes?</translation>
         <translation>Too many y axis points. There should only be two</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridLineFactory.cpp" line="66"/>
+        <location filename="../src/Grid/GridLineFactory.cpp" line="67"/>
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
         <translation>Axes checker. If this does not align with the axes, then the axes points should be checked</translation>
     </message>
