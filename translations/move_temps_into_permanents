@@ -1,0 +1,10 @@
+mv temp_ar.ts engauge_ar.ts
+mv temp_de.ts engauge_de.ts 
+mv temp_es.ts engauge_es.ts
+mv temp_fr.ts engauge_fr.ts
+mv temp_it.ts engauge_it.ts
+mv temp_pt.ts engauge_pt.ts
+mv temp_ru.ts engauge_ru.ts
+mv temp_zh.ts engauge_zh.ts
+
+rm for*
