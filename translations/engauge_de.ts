@@ -13,7 +13,7 @@
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="22"/>
         <source>Checklist Guide
 
-This box contains a checklist of step suggested by the Checklist Guide Wizard. Following these steps should produce a set of digitized points in an output file.
+This box contains a checklist of steps suggested by the Checklist Guide Wizard. Following these steps should produce a set of digitized points in an output file.
 
 To run the Checklist Guide Wizard when an image file is imported, select the Help / Checklist Wizard menu option.</source>
         <translation>Checkliste Anleitung

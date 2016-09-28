@@ -20,7 +20,7 @@ ChecklistGuide::ChecklistGuide (QWidget *parent) :
   setWindowTitle (tr ("Checklist Guide")); // Appears in title bar when undocked
   setStatusTip (tr ("Checklist Guide"));
   setWhatsThis (tr ("Checklist Guide\n\n"
-                    "This box contains a checklist of step suggested by the Checklist Guide Wizard. Following "
+                    "This box contains a checklist of steps suggested by the Checklist Guide Wizard. Following "
                     "these steps should produce a set of digitized points in an output file.\n\n"
                     "To run the Checklist Guide Wizard when an image file is imported, select the "
                     "Help / Checklist Wizard menu option."));
