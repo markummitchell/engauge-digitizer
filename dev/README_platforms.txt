@@ -39,6 +39,14 @@ Windows Issues
           |                     >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
           |                     >run the vc_redist.x86.exe installer                                                       |
           |----------------------------------------------------------------------------------------------------------------|
+          |Error Message:   'The program was unable to start correctly (0xc0000074). Click OK to close the application'    |
+          |Description:     The Microsoft Visual C++ Redistributable Packages for Visual Studio 2013                       |
+	  |                 should probably be installed.                                                                  |
+          |Solution:        The steps to install the Service Pack package on Windows are:                                  |
+          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=40784                            |
+          |                     >download the x86 version even when the current operating system is 64 bit                 |
+          |                     >run the installer                                                                         |
+          |----------------------------------------------------------------------------------------------------------------|	  
           |Error Message:   'The program was unable to start correctly (0xc0150002). Click OK to close the application'    |
           |Description:     The Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update       |
 	  |                 should probably be installed.                                                                  |
