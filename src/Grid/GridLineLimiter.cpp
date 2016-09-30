@@ -52,8 +52,13 @@ void GridLineLimiter::limitForXTheta (const Document &document,
   if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
 
     // Linear
-    double count = 1.0 + (stopX - startX) / stepX;
-    if ((int) count > modelMainWindow.maximumGridLines()) {
+    bool needNewStep = (stepX == 0); // Prevent divide-by-zero in next computation
+    if (!needNewStep) {
+      double count = 1.0 + (stopX - startX) / stepX;
+      needNewStep = ((int) count > modelMainWindow.maximumGridLines());
+    }
+
+    if (needNewStep) {
 
       // Adjust step so maximum grid lines limit is met
       stepX = (stopX - startX) / (modelMainWindow.maximumGridLines() - 1);
@@ -73,8 +78,13 @@ void GridLineLimiter::limitForXTheta (const Document &document,
       startX = boundingRectGraph.left ();
     }
 
-    double count = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (modelMainWindow.maximumGridLines());
-    if ((int) count > modelMainWindow.maximumGridLines()) {
+    bool needNewStep = (stepX <= 1); // Prevent divide-by-zero in next computation
+    if (!needNewStep) {
+      double count = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
+      needNewStep = ((int) count > modelMainWindow.maximumGridLines());
+    }
+
+    if (needNewStep) {
 
       // Adjust step so maximum grid lines limit is met
       stepX = qExp ((qLn (stopX) - qLn (startX)) / (modelMainWindow.maximumGridLines() - 1));
@@ -83,13 +93,13 @@ void GridLineLimiter::limitForXTheta (const Document &document,
   }
 }
 
-void GridLineLimiter::limitForYRange (const Document &document,
-                                      const Transformation &transformation,
-                                      const DocumentModelCoords &modelCoords,
-                                      const MainWindowModel &modelMainWindow,
-                                      const DocumentModelGridDisplay &modelGrid,
-                                      double &startY,
-                                      double &stepY) const
+void GridLineLimiter::limitForYRadius (const Document &document,
+                                       const Transformation &transformation,
+                                       const DocumentModelCoords &modelCoords,
+                                       const MainWindowModel &modelMainWindow,
+                                       const DocumentModelGridDisplay &modelGrid,
+                                       double &startY,
+                                       double &stepY) const
 {
   startY = modelGrid.startY();
   double stopY = modelGrid.stopY();
@@ -98,8 +108,13 @@ void GridLineLimiter::limitForYRange (const Document &document,
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
 
     // Linear
-    double count = 1.0 + (stopY - startY) / stepY;
-    if ((int) count > modelMainWindow.maximumGridLines()) {
+    bool needNewStep = (stepY == 0); // Prevent divide-by-zero in next computation
+    if (!needNewStep) {
+      double count = 1.0 + (stopY - startY) / stepY;
+      needNewStep = ((int) count > modelMainWindow.maximumGridLines());
+    }
+
+    if (needNewStep) {
 
       // Adjust step so maximum grid lines limit is met
       stepY = (stopY - startY) / (modelMainWindow.maximumGridLines() - 1);
@@ -119,8 +134,13 @@ void GridLineLimiter::limitForYRange (const Document &document,
       startY = boundingRectGraph.top ();
     }
 
-    double count = 1.0 + (qLn (stopY) - qLn (startY)) / qLn (modelMainWindow.maximumGridLines());
-    if ((int) count > modelMainWindow.maximumGridLines()) {
+    bool needNewStep = (stepY <= 1); // Prevent divide-by-zero in next computation
+    if (!needNewStep) {
+      double count = 1.0 + (qLn (stopY) - qLn (startY)) / qLn (stepY);
+      needNewStep = ((int) count > modelMainWindow.maximumGridLines());
+    }
+
+    if (needNewStep) {
 
       // Adjust step so maximum grid lines limit is met
       stepY = qExp ((qLn (stopY) - qLn (startY)) / (modelMainWindow.maximumGridLines() - 1));

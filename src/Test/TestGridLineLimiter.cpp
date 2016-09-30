@@ -45,7 +45,152 @@ void TestGridLineLimiter::initTestCase ()
   w.show ();
 }
 
-void TestGridLineLimiter::testTransitionLinearToLogX ()
+void TestGridLineLimiter::testBadStepLinearX ()
+{
+  bool success = testLinearX (0,
+                              0, // Bad
+                              100,
+                              0.001, 0.001,
+                              1000, 0.001,
+                              0.001, 1000);
+
+  QVERIFY (success);
+}
+
+void TestGridLineLimiter::testBadStepLinearY ()
+{
+  bool success = testLinearY (0,
+                              0, // Bad
+                              100,
+                              0.001, 0.001,
+                              1000, 0.001,
+                              0.001, 1000);
+
+  QVERIFY (success);
+}
+
+void TestGridLineLimiter::testBadStepLogX ()
+{
+  bool success = testLogX (0, // Bad
+                           1, // Bad
+                           100,
+                           0.001, 0.001,
+                           1000, 0.001,
+                           0.001, 1000);
+
+  QVERIFY (success);
+}
+
+void TestGridLineLimiter::testBadStepLogY ()
+{
+  bool success = testLogY (0, // Bad
+                           1, // Bad
+                           100,
+                           0.001, 0.001,
+                           1000, 0.001,
+                           0.001, 1000);
+
+  QVERIFY (success);
+}
+
+bool TestGridLineLimiter::testLinearX (double start,
+                                       double step,
+                                       double stop,
+                                       double x1, double y1,
+                                       double x2, double y2,
+                                       double x3, double y3)
+{
+  GridLineLimiter limiter;
+  QImage image;
+  Document document (image);
+  DocumentModelCoords modelCoords;
+  MainWindowModel modelMainWindow;
+  DocumentModelGridDisplay modelGrid;
+  Transformation transformation;
+  double startX, stepX; // Outputs from GridLineLimiter
+
+  modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
+  modelGrid.setStartX (start);
+  modelGrid.setStepX (step);
+  modelGrid.setStopX (stop);
+  modelMainWindow.setMaximumGridLines (5);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (x3, y3), QString ("axis3"), 0.0, false);
+
+  limiter.limitForXTheta (document,
+                          transformation,
+                          modelCoords,
+                          modelMainWindow,
+                          modelGrid,
+                          startX,
+                          stepX);
+
+  bool success = (stepX > 0);
+
+  if (success) {
+
+    bool stopX = modelGrid.stopX ();
+    int gridLineCount = 1 + (stopX - startX) / stepX;
+    success = (gridLineCount <= 20);
+
+  }
+
+  return success;
+}
+
+bool TestGridLineLimiter::testLinearY (double start,
+                                       double step,
+                                       double stop,
+                                       double x1, double y1,
+                                       double x2, double y2,
+                                       double x3, double y3)
+{
+  GridLineLimiter limiter;
+  QImage image;
+  Document document (image);
+  DocumentModelCoords modelCoords;
+  MainWindowModel modelMainWindow;
+  DocumentModelGridDisplay modelGrid;
+  Transformation transformation;
+  double startY, stepY; // Outputs from GridLineLimiter
+
+  modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
+  modelGrid.setStartY (start);
+  modelGrid.setStepY (step);
+  modelGrid.setStopY (stop);
+  modelMainWindow.setMaximumGridLines (5);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (x3, y3), QString ("axis3"), 0.0, false);
+
+  limiter.limitForYRadius (document,
+                           transformation,
+                           modelCoords,
+                           modelMainWindow,
+                           modelGrid,
+                           startY,
+                           stepY);
+
+  bool success = (stepY > 0);
+
+  if (success) {
+
+    bool stopY = modelGrid.stopY ();
+    int gridLineCount = 1 + (stopY - startY) / stepY;
+    success = (gridLineCount <= 20);
+
+  }
+
+  return success;
+}
+
+bool TestGridLineLimiter::testLogX (double start,
+                                    double step,
+                                    double stop,
+                                    double x1, double y1,
+                                    double x2, double y2,
+                                    double x3, double y3)
 {
   GridLineLimiter limiter;
   QImage image;
@@ -57,12 +202,13 @@ void TestGridLineLimiter::testTransitionLinearToLogX ()
   double startX, stepX; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LOG);
-  modelGrid.setStartX (0);
-  modelGrid.setStopX (1000.0);
+  modelGrid.setStartX (start);
+  modelGrid.setStepX (step);
+  modelGrid.setStopX (stop);
   modelMainWindow.setMaximumGridLines (5);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (0.001, 0.001), QString ("axis1"), 0.0, false);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF ( 1000, 0.001), QString ("axis2"), 0.0, false);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (0.001,  1000), QString ("axis3"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (x3, y3), QString ("axis3"), 0.0, false);
 
   limiter.limitForXTheta (document,
                           transformation,
@@ -82,10 +228,15 @@ void TestGridLineLimiter::testTransitionLinearToLogX ()
 
   }
 
-  QVERIFY (success);
+  return success;
 }
 
-void TestGridLineLimiter::testTransitionLinearToLogY ()
+bool TestGridLineLimiter::testLogY (double start,
+                                    double step,
+                                    double stop,
+                                    double x1, double y1,
+                                    double x2, double y2,
+                                    double x3, double y3)
 {
   GridLineLimiter limiter;
   QImage image;
@@ -97,20 +248,21 @@ void TestGridLineLimiter::testTransitionLinearToLogY ()
   double startY, stepY; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleYRadius (COORD_SCALE_LOG);
-  modelGrid.setStartY (0);
-  modelGrid.setStopY (1000.0);
+  modelGrid.setStartY (start);
+  modelGrid.setStepY (step);
+  modelGrid.setStopY (stop);
   modelMainWindow.setMaximumGridLines (5);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (0.001, 0.001), QString ("axis1"), 0.0, false);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF ( 1000, 0.001), QString ("axis2"), 0.0, false);
-  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (0.001,  1000), QString ("axis3"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
+  document.addPointAxisWithSpecifiedIdentifier (QPointF (0  , 100), QPointF (x3, y3), QString ("axis3"), 0.0, false);
 
-  limiter.limitForYRange (document,
-                          transformation,
-                          modelCoords,
-                          modelMainWindow,
-                          modelGrid,
-                          startY,
-                          stepY);
+  limiter.limitForYRadius (document,
+                           transformation,
+                           modelCoords,
+                           modelMainWindow,
+                           modelGrid,
+                           startY,
+                           stepY);
 
   bool success = (startY > 0) && (stepY > 0);
 
@@ -121,6 +273,30 @@ void TestGridLineLimiter::testTransitionLinearToLogY ()
     success = (gridLineCount <= 20);
 
   }
+
+  return success;
+}
+
+void TestGridLineLimiter::testTransitionLinearToLogX ()
+{
+  bool success = testLogX (0,
+                           250,
+                           1000,
+                           0.001, 0.001,
+                           1000, 0.001,
+                           0.001, 1000);
+
+  QVERIFY (success);
+}
+
+void TestGridLineLimiter::testTransitionLinearToLogY ()
+{
+  bool success = testLogY (0,
+                           250,
+                           1000,
+                           0.001, 0.001,
+                           1000, 0.001,
+                           0.001, 1000);
 
   QVERIFY (success);
 }

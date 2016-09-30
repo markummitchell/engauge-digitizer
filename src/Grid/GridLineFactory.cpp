@@ -180,13 +180,13 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
                                     modelGridDisplay,
                                     startX,
                                     stepX);
-    gridLineLimiter.limitForYRange (document,
-                                    transformation,
-                                    m_modelCoords,
-                                    modelMainWindow,
-                                    modelGridDisplay,
-                                    startY,
-                                    stepY);
+    gridLineLimiter.limitForYRadius (document,
+                                     transformation,
+                                     m_modelCoords,
+                                     modelMainWindow,
+                                     modelGridDisplay,
+                                     startY,
+                                     stepY);
 
     // Apply if possible
     if (stepX != 0 &&
