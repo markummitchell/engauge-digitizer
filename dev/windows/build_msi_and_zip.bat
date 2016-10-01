@@ -94,6 +94,11 @@ if "%ARG1%" neq "norelease" (
 )
 nmake
 
+if not exist bin/engauge.exe (
+  echo "Executable could not be built. Stopping"
+  exit /b 1
+)
+
 cd "%APPVEYOR_BUILD_FOLDER%"
 if not exist "%RESULTDIR%"\documentation mkdir "%RESULTDIR%"\documentation
 for %%I in (%QTDIRS%) do (
