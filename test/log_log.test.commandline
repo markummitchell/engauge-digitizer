@@ -1,0 +1,1 @@
+-errorreport ../test/log_log.xml -regression -reset
