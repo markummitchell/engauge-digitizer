@@ -192,7 +192,9 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
     bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
     bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
     if (stepX > (isLinearX ? 0 : 1) &&
-        stepY > (isLinearY ? 0 : 1)) {
+        stepY > (isLinearY ? 0 : 1) &&
+        (isLinearX || (startX > 0)) &&
+        (isLinearY || (startY > 0))) {
 
       QColor color (ColorPaletteToQColor (modelGridDisplay.paletteColor()));
       QPen pen (QPen (color,
