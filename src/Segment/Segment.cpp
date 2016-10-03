@@ -23,6 +23,7 @@ Segment::Segment(QGraphicsScene &scene,
                  bool isGnuplot) :
   m_scene (scene),
   m_yLast (y),
+  m_length (0),
   m_isGnuplot (isGnuplot)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment"
