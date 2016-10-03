@@ -189,15 +189,16 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
                                      stepY);
 
     // Apply if possible
-    if (stepX != 0 &&
-        stepY != 0) {
+    bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
+    bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
+    if (stepX > (isLinearX ? 0 : 1) &&
+        stepY > (isLinearY ? 0 : 1)) {
 
       QColor color (ColorPaletteToQColor (modelGridDisplay.paletteColor()));
       QPen pen (QPen (color,
                       GRID_LINE_WIDTH,
                       GRID_LINE_STYLE));
 
-      bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
       for (double x = startX; x <= stopX; (isLinearX ? x += stepX : x *= stepX)) {
 
         GridLine *gridLine = createGridLine (x, startY, x, stopY, transformation);
@@ -205,7 +206,6 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
         gridLines.add (gridLine);
       }
 
-      bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
       for (double y = startY; y <= stopY; (isLinearY ? y += stepY : y *= stepY)) {
 
         GridLine *gridLine = createGridLine (startX, y, stopX, y, transformation);

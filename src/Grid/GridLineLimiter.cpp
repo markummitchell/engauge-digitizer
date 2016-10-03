@@ -52,7 +52,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
   if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
 
     // Linear
-    bool needNewStep = (stepX == 0); // Prevent divide-by-zero in next computation
+    bool needNewStep = (stepX <= 0); // Prevent divide-by-zero in next computation
     if (!needNewStep) {
       double count = 1.0 + (stopX - startX) / stepX;
       needNewStep = ((int) count > modelMainWindow.maximumGridLines());
@@ -108,7 +108,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
 
     // Linear
-    bool needNewStep = (stepY == 0); // Prevent divide-by-zero in next computation
+    bool needNewStep = (stepY <= 0); // Prevent divide-by-zero in next computation
     if (!needNewStep) {
       double count = 1.0 + (stopY - startY) / stepY;
       needNewStep = ((int) count > modelMainWindow.maximumGridLines());
