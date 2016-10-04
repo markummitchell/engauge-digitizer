@@ -22,6 +22,7 @@
 #include <QSpinBox>
 #include "ViewPreview.h"
 
+const int MINIMUM_HEIGHT = 480;
 const int POINT_SIZE_MAX = 1024;
 const int POINT_SIZE_MIN = 5;
 
@@ -38,7 +39,9 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::DlgSettingsPointMatch";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsPointMatch::~DlgSettingsPointMatch()

@@ -31,6 +31,7 @@
 #include "ViewProfileScale.h"
 
 const int MINIMUM_DIALOG_WIDTH_COLOR_FILTER = 640;
+const int MINIMUM_HEIGHT = 500;
 
 DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Color Filter"),
@@ -46,7 +47,8 @@ DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH_COLOR_FILTER);
+               MINIMUM_DIALOG_WIDTH_COLOR_FILTER,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsColorFilter::~DlgSettingsColorFilter()

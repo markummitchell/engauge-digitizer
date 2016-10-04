@@ -26,6 +26,7 @@
 #include "SettingsForGraph.h"
 
 const int FIRST_COLUMN = 0;
+const int MINIMUM_HEIGHT = 500;
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Curve Add/Remove"),
@@ -35,7 +36,9 @@ DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsCurveAddRemove::~DlgSettingsCurveAddRemove()

@@ -25,6 +25,7 @@
 #include "ViewPreview.h"
 
 const int AXIS_WIDTH = 4;
+const int MINIMUM_HEIGHT = 500;
 const int RECT_WIDTH = 640;
 const int RECT_HEIGHT = 480;
 const int X_LEFT = RECT_WIDTH / 8;
@@ -46,7 +47,9 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::DlgSettingsAxesChecker";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsAxesChecker::~DlgSettingsAxesChecker()

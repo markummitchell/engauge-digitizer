@@ -12,6 +12,8 @@
 #include <QRadioButton>
 #include <QSpinBox>
 
+const int MINIMUM_DIALOG_WIDTH_COORDS = 800;
+
 DlgImportAdvanced::DlgImportAdvanced(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Import Advanced"),
                            "DlgImportAdvanced",
@@ -20,7 +22,8 @@ DlgImportAdvanced::DlgImportAdvanced(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportAdvanced::DlgImportAdvanced";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH_COORDS);
 
   // Accept even the default value without any additional actions, rather than delay the Ok button to after a change
   enableOk (true);

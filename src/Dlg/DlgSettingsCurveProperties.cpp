@@ -48,6 +48,7 @@ const QString CONNECT_AS_RELATION_STRAIGHT_STR ("Relation - Straight");
 
 const double PREVIEW_WIDTH = 100.0;
 const double PREVIEW_HEIGHT = 100.0;
+const int MINIMUM_HEIGHT = 500;
 
 const QPointF POS_LEFT (PREVIEW_WIDTH / 3.0,
                         PREVIEW_HEIGHT * 2.0 / 3.0);
@@ -69,7 +70,9 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::DlgSettingsCurveProperties";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 
   setMinimumWidth (740); // Override finishPanel width for room for m_cmbLineType and preview to be completely visible
 }

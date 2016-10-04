@@ -30,7 +30,7 @@
 
 const int IMAGE_WIDTH = 100;
 const int IMAGE_HEIGHT = 100;
-
+const int MINIMUM_HEIGHT = 450;
 const int INNER_RADIUS_MAX = 64;
 const int INNER_RADIUS_MIN = 0;
 const int LINE_LENGTH_MIN = 2; // Min length of one line in the cursor, in pixels
@@ -49,7 +49,9 @@ DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsDigitizeCurve::~DlgSettingsDigitizeCurve()

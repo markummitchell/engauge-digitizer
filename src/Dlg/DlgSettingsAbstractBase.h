@@ -50,7 +50,8 @@ protected:
 
   /// Add Ok and Cancel buttons to subpanel to get the whole dialog.
   void finishPanel (QWidget *subPanel,
-                    int minimumWidth = MINIMUM_DIALOG_WIDTH);
+                    int minimumWidth = MINIMUM_DIALOG_WIDTH,
+                    int minimumHeightOrZero = 0);
 
   /// Process slotOk.
   virtual void handleOk () = 0;

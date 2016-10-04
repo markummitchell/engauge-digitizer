@@ -11,6 +11,7 @@
 #include "MainWindow.h"
 #include <QColor>
 #include <QComboBox>
+#include <qDebug>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QSettings>
@@ -55,7 +56,8 @@ void DlgSettingsAbstractBase::enableOk (bool enable)
 }
 
 void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel,
-                                           int minimumWidth)
+                                           int minimumWidth,
+                                           int minimumHeightOrZero)
 {
   const int STRETCH_OFF = 0, STRETCH_ON = 1;
 
@@ -63,6 +65,8 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel,
   m_scroll->setStyleSheet ("QScrollArea { border: 0; margin: 0; padding: 0;}"); // Need QScrollArea or interior frames are affected    
   m_scroll->setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
   m_scroll->setVerticalScrollBarPolicy (Qt::ScrollBarAsNeeded);
+  m_scroll->setSizePolicy (QSizePolicy::Minimum,
+                           QSizePolicy::Minimum);
   m_scroll->setMinimumWidth (minimumWidth);
 
   QWidget *viewport = new QWidget (this);
@@ -107,6 +111,13 @@ void DlgSettingsAbstractBase::finishPanel (QWidget *subPanel,
 
   panelLayout->addWidget (panelButtons, STRETCH_ON);
   panelLayout->setStretch (panelLayout->count () - 1, STRETCH_OFF);
+
+  setSizePolicy (QSizePolicy::Minimum,
+                 QSizePolicy::Minimum);
+
+  if (minimumHeightOrZero > 0) {
+     m_scroll->setMinimumHeight (minimumHeightOrZero);
+  }
 }
 
 MainWindow &DlgSettingsAbstractBase::mainWindow ()

@@ -26,6 +26,7 @@
 const int COUNT_MIN = 1;
 const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
+const int MINIMUM_HEIGHT = 480;
 
 DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Grid Display"),
@@ -39,7 +40,9 @@ DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::DlgSettingsGridDisplay";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel);
+  finishPanel (subPanel,
+               MINIMUM_DIALOG_WIDTH,
+               MINIMUM_HEIGHT);
 }
 
 DlgSettingsGridDisplay::~DlgSettingsGridDisplay()
