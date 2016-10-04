@@ -37,6 +37,7 @@ public:
   virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
+  virtual void setSmallDialogs (bool smallDialogs);
 
 private slots:
   void slotDelimitersCommas();

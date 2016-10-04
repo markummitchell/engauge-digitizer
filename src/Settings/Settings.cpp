@@ -32,6 +32,7 @@ const QString SETTINGS_MAXIMUM_GRID_LINES ("maximumGridLines");
 const QString SETTINGS_POS ("pos");
 const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");
 const QString SETTINGS_SIZE ("size");
+const QString SETTINGS_SMALL_DIALOGS ("smallDialogs");
 const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR ("viewBackgroundToolBar");
 const QString SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR ("viewCoordSystemToolBar");
 const QString SETTINGS_VIEW_DIGITIZE_TOOLBAR ("viewDigitizeToolBar");

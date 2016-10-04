@@ -424,6 +424,7 @@ private:
   void updateHighlightOpacity();
   void updateRecentFileList();
   void updateSettingsMainWindow();
+  void updateSmallDialogs();
   void updateTransformationAndItsDependencies();
   void updateViewedCurves ();
   void updateViewsOfSettings (); // Private version gets active curve name from DigitizeContext

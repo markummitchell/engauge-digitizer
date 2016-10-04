@@ -36,9 +36,7 @@ DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 }
 
 DlgSettingsCurveAddRemove::~DlgSettingsCurveAddRemove()
@@ -47,8 +45,8 @@ DlgSettingsCurveAddRemove::~DlgSettingsCurveAddRemove()
 }
 
 void DlgSettingsCurveAddRemove::appendCurveName (const QString &curveNameNew,
-                                             const QString &curveNameOriginal,
-                                             int numPoints)
+                                                 const QString &curveNameOriginal,
+                                                 int numPoints)
 {
   ENGAUGE_CHECK_PTR (m_curveNameList);
 
@@ -429,6 +427,13 @@ void DlgSettingsCurveAddRemove::selectCurveName (const QString &curveWanted)
       break;
 
     }
+  }
+}
+
+void DlgSettingsCurveAddRemove::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
   }
 }
 

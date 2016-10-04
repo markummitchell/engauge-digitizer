@@ -39,9 +39,7 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::DlgSettingsPointMatch";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 }
 
 DlgSettingsPointMatch::~DlgSettingsPointMatch()
@@ -264,6 +262,13 @@ double DlgSettingsPointMatch::radiusAlongDiagonal () const
   double maxPointSize = m_modelPointMatchAfter->maxPointSize();
 
   return qSqrt (2.0) * maxPointSize / 2.0;
+}
+
+void DlgSettingsPointMatch::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)

@@ -35,6 +35,7 @@ class DlgImportAdvanced : public DlgSettingsAbstractBase
 
   /// Number of coordinate systems selected by user
   unsigned int numberCoordSystem () const;
+  virtual void setSmallDialogs (bool smallDialogs);
 
  private slots:
   void slotAxesPointCount(bool);

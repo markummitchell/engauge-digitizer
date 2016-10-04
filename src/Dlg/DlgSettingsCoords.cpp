@@ -70,7 +70,7 @@ const int FONT_SIZE = 6;
 const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
 
 const int MINIMUM_DIALOG_WIDTH_COORDS = 800;
-const int MINIMUM_HEIGHT = 500;
+const int MINIMUM_HEIGHT = 540;
 
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Coordinates"),
@@ -90,8 +90,7 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH_COORDS,
-               MINIMUM_HEIGHT);
+               MINIMUM_DIALOG_WIDTH_COORDS);
 }
 
 DlgSettingsCoords::~DlgSettingsCoords()
@@ -725,6 +724,13 @@ void DlgSettingsCoords::resetSceneRectangle ()
   itemPerimeter->setVisible(false);
   m_scenePreview->addItem (itemPerimeter);
   m_viewPreview->centerOn (QPointF (0.0, 0.0));
+}
+
+void DlgSettingsCoords::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsCoords::slotCartesianPolar (bool)

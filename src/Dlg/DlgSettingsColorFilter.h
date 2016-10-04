@@ -38,6 +38,7 @@ public:
   virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   virtual void load (CmdMediator &cmdMediator);
+  virtual void setSmallDialogs (bool smallDialogs);
 
 public slots:
   /// Receive processed piece of preview image, to be inserted at xLeft to xLeft+pixmap.width().

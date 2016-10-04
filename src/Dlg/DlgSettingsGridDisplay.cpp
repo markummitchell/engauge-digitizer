@@ -40,9 +40,7 @@ DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::DlgSettingsGridDisplay";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 }
 
 DlgSettingsGridDisplay::~DlgSettingsGridDisplay()
@@ -346,6 +344,13 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+void DlgSettingsGridDisplay::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsGridDisplay::slotColor (QString const &)

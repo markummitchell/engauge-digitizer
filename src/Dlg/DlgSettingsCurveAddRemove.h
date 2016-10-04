@@ -32,6 +32,7 @@ public:
   virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
   void load (CmdMediator &cmdMediator);
+  virtual void setSmallDialogs (bool smallDialogs);
 
 private slots:
   void slotDataChanged (const QModelIndex &topLeft,

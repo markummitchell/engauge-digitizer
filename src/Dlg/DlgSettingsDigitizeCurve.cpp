@@ -49,9 +49,7 @@ DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 }
 
 DlgSettingsDigitizeCurve::~DlgSettingsDigitizeCurve()
@@ -215,6 +213,13 @@ void DlgSettingsDigitizeCurve::load (CmdMediator &cmdMediator)
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+void DlgSettingsDigitizeCurve::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsDigitizeCurve::slotCursorCustom (bool)

@@ -35,6 +35,7 @@ public:
   /// Replaced load method since the main window settings are independent of document, unlike other DlgSettings* classes
   void loadMainWindowModel (CmdMediator &cmdMediator,
                             const MainWindowModel &modelMainWindow);
+  virtual void setSmallDialogs (bool smallDialogs);
 
 private slots:
   void slotHighlightOpacity (double);
@@ -43,6 +44,7 @@ private slots:
   void slotMaximumGridLines (int limit);
   void slotPdfResolution (const QString);
   void slotRecentFileClear ();
+  void slotSmallDialogs(bool);
   void slotTitleBarFormat(bool);
   void slotZoomControl (const QString);
   void slotZoomFactor (const QString);
@@ -65,6 +67,7 @@ private:
   QComboBox *m_cmbPdfResolution;
   QSpinBox *m_spinMaximumGridLines;
   QDoubleSpinBox *m_spinHighlightOpacity;
+  QCheckBox *m_chkSmallDialogs;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

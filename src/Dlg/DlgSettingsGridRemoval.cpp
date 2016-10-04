@@ -41,9 +41,7 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::DlgSettingsGridRemoval";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 }
 
 DlgSettingsGridRemoval::~DlgSettingsGridRemoval()
@@ -345,6 +343,13 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+void DlgSettingsGridRemoval::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsGridRemoval::slotCloseDistance(const QString &)

@@ -70,9 +70,7 @@ DlgSettingsCurveProperties::DlgSettingsCurveProperties(MainWindow &mainWindow) :
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::DlgSettingsCurveProperties";
 
   QWidget *subPanel = createSubPanel ();
-  finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH,
-               MINIMUM_HEIGHT);
+  finishPanel (subPanel);
 
   setMinimumWidth (740); // Override finishPanel width for room for m_cmbLineType and preview to be completely visible
 }
@@ -467,6 +465,13 @@ void DlgSettingsCurveProperties::setCurveName (const QString &curveName)
 {
   m_cmbCurveName->setCurrentText (curveName);
   loadForCurveName (curveName);
+}
+
+void DlgSettingsCurveProperties::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsCurveProperties::slotCurveName(const QString &curveName)

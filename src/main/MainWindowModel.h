@@ -17,6 +17,8 @@
 
 class QTextStream;
 
+extern bool DEFAULT_SMALL_DIALOGS;
+
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
 /// loaded within the document, so no xml or working with the Document class is involved. Also, there is
 /// no associated Cmd. Instead, the settings are saved using QSettings. Method involving xml/Document 
@@ -81,11 +83,17 @@ public:
   /// Set method for resolution of imported PDF files, in dots per inch
   void setPdfResolution (int resolution);
 
+  /// Set method for small dialogs flag
+  void setSmallDialogs (bool smallDialogs);
+
   /// Set method for zoom control
   void setZoomControl (ZoomControl zoomControl);
 
   /// Set method for initial zoom factor
   void setZoomFactorInitial (ZoomFactorInitial zoomFactorInitial);
+
+  /// Get method for small dialogs flag
+  bool smallDialogs () const;
 
   /// Get method for zoom control
   ZoomControl zoomControl () const;
@@ -103,6 +111,7 @@ private:
   ImportCropping m_importCropping;
   int m_maximumGridLines;
   double m_highlightOpacity;
+  bool m_smallDialogs;
 
 };
 

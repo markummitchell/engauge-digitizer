@@ -45,7 +45,7 @@ const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
 const QString EMPTY_PREVIEW;
 
 const int MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT = 650;
-const int MINIMUM_HEIGHT = 500;
+const int MINIMUM_HEIGHT = 780;
 
 DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Export Format"),
@@ -58,8 +58,7 @@ DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT,
-               MINIMUM_HEIGHT);
+               MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT);
 }
 
 DlgSettingsExportFormat::~DlgSettingsExportFormat()
@@ -594,6 +593,13 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   updateIntervalConstraints();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
+}
+
+void DlgSettingsExportFormat::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
 }
 
 void DlgSettingsExportFormat::slotDelimitersCommas()

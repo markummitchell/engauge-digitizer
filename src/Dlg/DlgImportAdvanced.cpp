@@ -114,6 +114,10 @@ unsigned int DlgImportAdvanced::numberCoordSystem () const
   return m_spinCoordSystemCount->value ();
 }
 
+void DlgImportAdvanced::setSmallDialogs(bool /* smallDialogs */)
+{
+}
+
 void DlgImportAdvanced::slotAxesPointCount (bool)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgCoordSystem::slotAxesPointCount";

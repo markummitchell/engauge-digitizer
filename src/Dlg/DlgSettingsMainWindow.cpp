@@ -20,10 +20,8 @@
 #include <QLabel>
 #include <qmath.h>
 #include <QPushButton>
-#include <QSettings>
 #include <QSpinBox>
 #include "QtToString.h"
-#include "Settings.h"
 #include "ZoomControl.h"
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
@@ -194,6 +192,16 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                          "Includes or excludes the path and file extension from the filename in the title bar."));
   connect (m_chkTitleBarFormat, SIGNAL (toggled (bool)), this, SLOT (slotTitleBarFormat(bool)));
   layout->addWidget (m_chkTitleBarFormat, row++, 2);
+
+  QLabel *labelSmallDialogs = new QLabel (tr ("Allow small dialogs:"));
+  layout->addWidget (labelSmallDialogs, row, 1);
+
+  m_chkSmallDialogs = new QCheckBox;
+  m_chkSmallDialogs->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  m_chkSmallDialogs->setWhatsThis (tr ("Allow Small Dialogs\n\n"
+                                       "Allows settings dialogs to be made very small so they fit on small computer screens."));
+  connect (m_chkSmallDialogs, SIGNAL (toggled (bool)), this, SLOT (slotSmallDialogs (bool)));
+  layout->addWidget (m_chkSmallDialogs, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -271,9 +279,14 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
 #endif
   m_spinMaximumGridLines->setValue (m_modelMainWindowAfter->maximumGridLines());
   m_spinHighlightOpacity->setValue (m_modelMainWindowAfter->highlightOpacity());
+  m_chkSmallDialogs->setChecked (m_modelMainWindowAfter->smallDialogs());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsMainWindow::setSmallDialogs(bool /* smallDialogs */)
+{
 }
 
 void DlgSettingsMainWindow::slotHighlightOpacity(double)
@@ -324,6 +337,14 @@ void DlgSettingsMainWindow::slotRecentFileClear()
 
   // The signal that triggered the call to this method was also sent to MainWindow to clear the list there
   updateControls();
+}
+
+void DlgSettingsMainWindow::slotSmallDialogs (bool)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotSmallDialogs";
+
+  m_modelMainWindowAfter->setSmallDialogs (m_chkSmallDialogs->isChecked());
+  updateControls ();
 }
 
 void DlgSettingsMainWindow::slotTitleBarFormat(bool)

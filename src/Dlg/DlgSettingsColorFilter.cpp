@@ -47,8 +47,7 @@ DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
 
   QWidget *subPanel = createSubPanel ();
   finishPanel (subPanel,
-               MINIMUM_DIALOG_WIDTH_COLOR_FILTER,
-               MINIMUM_HEIGHT);
+               MINIMUM_DIALOG_WIDTH_COLOR_FILTER);
 }
 
 DlgSettingsColorFilter::~DlgSettingsColorFilter()
@@ -289,6 +288,13 @@ void DlgSettingsColorFilter::loadForCurveName()
     createThread ();
     updateHistogram();
     updatePreview(); // Needs thread initialized
+  }
+}
+
+void DlgSettingsColorFilter::setSmallDialogs(bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
   }
 }
 

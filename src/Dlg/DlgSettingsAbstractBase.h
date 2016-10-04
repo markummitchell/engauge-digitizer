@@ -83,6 +83,9 @@ protected:
   /// Override the default Ok button behavior applied in showEvent
   void setDisableOkAtStartup(bool disableOkAtStartup);
   
+  /// If false then dialogs have a minimum size so all controls are visible
+  virtual void setSmallDialogs (bool smallDialogs) = 0;
+
 private slots:
 
   /// Hide dialog.

@@ -140,6 +140,10 @@ void DlgSettingsGeneral::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
+void DlgSettingsGeneral::setSmallDialogs(bool /* smallDialogs */)
+{
+}
+
 void DlgSettingsGeneral::slotCursorSize (int cursorSize)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::slotCursorSize";

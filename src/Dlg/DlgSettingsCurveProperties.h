@@ -35,6 +35,7 @@ public:
 
   /// Load information for the specified curve name. When called externally, the load method must have been called first.
   void setCurveName (const QString &curveName);
+  virtual void setSmallDialogs (bool smallDialogs);
 
 private slots:
   void slotCurveName(const QString &);
