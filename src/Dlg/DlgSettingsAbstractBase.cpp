@@ -11,7 +11,6 @@
 #include "MainWindow.h"
 #include <QColor>
 #include <QComboBox>
-#include <qDebug>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QSettings>
