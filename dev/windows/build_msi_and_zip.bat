@@ -92,7 +92,9 @@ rem ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
 if "%ARG1%" neq "norelease" (
   nmake clean
 )
-nmake
+
+rem Make sure the log4cpp library is built with debug info to prevent 'mismatch deteced for _ITERATOR_DEBUG_LEVEL'
+nmake release
 
 if not exist bin/engauge.exe (
   echo "Executable could not be built. Stopping"
