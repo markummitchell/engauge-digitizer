@@ -61,7 +61,7 @@ after_build:
 #  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll %RESULTDIR%\%%I)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
-  - for %%I in (%VCLIBS%) do copy %WINDIR%\system32\%%I %RESULTDIR%
+  - for %%I in (%VCLIBS%) do copy %WINDIR%\SysWOW64\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
   - copy log4cpp-1.1.1\lib\log4cpp.dll %RESULTDIR%
   - copy fftw-3.3.5-dll32\lib\libfftw3-3.dll %RESULTDIR%
