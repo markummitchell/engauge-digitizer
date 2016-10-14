@@ -9,10 +9,12 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: 1
       ENGAUGE_CONFIG: "pdf"
+      VCLIBS: MSVCP120.DLL MSVCR120.DLL
       LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-1.1.1.zip'
       POPPLERQT5FILE: 'dev\windows\appveyor\poppler-qt5.zip'
       RESULTDIR: engauge-build
     - ENGAUGE_CONFIG: "debug pdf"
+      VCLIBS: MSVCP120D.DLL MSVCR120D.DLL
       LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-debug-1.1.1.zip'
       POPPLERQT5FILE: 'dev\windows\appveyor\poppler-qt5-debug.zip'
       RESULTDIR: engauge-build-debug
@@ -59,6 +61,7 @@ after_build:
 #  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll %RESULTDIR%\%%I)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
+  - for %%I in (%VCLIBS%) do copy %WINDIR%\system32\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
   - copy log4cpp-1.1.1\lib\log4cpp.dll %RESULTDIR%
   - copy fftw-3.3.5-dll32\lib\libfftw3-3.dll %RESULTDIR%
