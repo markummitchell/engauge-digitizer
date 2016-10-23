@@ -304,6 +304,10 @@ void DlgEditPointAxis::updateControls ()
     m_btnOk->setEnabled ((textX.isEmpty() && gotY) ||
                          (textY.isEmpty() && gotX));
 
+    // Emphasize that only one coordinate is to be filled in at a time
+    m_editGraphX->setEnabled (!gotY);
+    m_editGraphY->setEnabled (!gotX);
+
   } else {
 
     // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
