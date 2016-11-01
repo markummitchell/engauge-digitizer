@@ -515,9 +515,9 @@ The original document can be sent as part of the error report, which increases t
 Исходный документ может быть отправлен как часть отчета об ошибке, что увеличивает шансы на обнаружение и устранение проблем (ы). Однако, учитывая что информация может быть личной , версия документа будет отправлена обезличенной.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="vanished">Включить информацию об оригинальном документе, иначе информация будет обезличена</translation>
+        <translation>Включить информацию об оригинальном документе, иначе информация будет обезличена</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="56"/>
@@ -533,17 +533,17 @@ The original document can be sent as part of the error report, which increases t
 <context>
     <name>DlgImportAdvanced</name>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="16"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="18"/>
         <source>Import Advanced</source>
         <translation>Загрузка расширенная</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="46"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49"/>
         <source>Coordinate System Count:</source>
         <translation>Число Координатных Систем:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="52"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="55"/>
         <source>Coordinate System Count
 
 Specifies the total number of coordinate systems that will be used in the imported image. There can be one or more graphs in the image, and each graph can have one or more coordinate systems. Each coordinate system is defined by a pair of coordinate axes.</source>
@@ -551,17 +551,17 @@ Specifies the total number of coordinate systems that will be used in the import
 Указывает общее число координатных систем использованных на рассматриваемом изображении. Возможно наличие более чем одного графика на этом изображении и каждый из них может иметь одну или более координатных систем. Каждая из этих систем определена парой кординатных осей.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="60"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63"/>
         <source>Axes Points Count:</source>
         <translation>Число Осевых Точек:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="66"/>
         <source>3 points</source>
         <translation>3 точки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="68"/>
         <source>Three axes points will define the coordinate system. Each will have both x and y coordinates.
 
 This setting is always used when importing images in non-advanced mode.
@@ -572,12 +572,12 @@ In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
 Суммарно, имеется три точки в виде (x1,y1), (x2,y2) и (x3,y3).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="76"/>
         <source>4 points</source>
         <translation>4 точки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="77"/>
         <source>Four axes points will define the coordinate system. Each will have a single x or y coordinate.
 
 This setting is required when the x coordinate of the y axis is unknown, and/or the y coordinate of the x axis is unknown.
@@ -665,12 +665,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99"/>
         <source>Ok</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -678,62 +678,62 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAxesChecker</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="38"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39"/>
         <source>Axes Checker</source>
         <translation>Выделитель Осей</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="62"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="63"/>
         <source>Axes Checker Lifetime</source>
         <translation>Время жизни Выделителя Осей</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="69"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="70"/>
         <source>Do not show</source>
         <translation>Не отображать</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="70"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="71"/>
         <source>Never show axes checker.</source>
         <translation>Не отображать выделитель осей никогда.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="74"/>
         <source>Show for a number of seconds</source>
         <translation>Отображать на число секунд</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="75"/>
         <source>Show axes checker for a number of seconds after changing axes points.</source>
         <translation>Отображать выделитель осей после смены опорыных точек на число секунд</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85"/>
         <source>Show always</source>
         <translation>Отбражать всегда</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="86"/>
         <source>Always show axes checker.</source>
         <translation>Всегда отображать выделитель осей.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="95"/>
         <source>Line color:</source>
         <translation>Цвет линии:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="99"/>
         <source>Select a color for the highlight lines drawn at each axis point</source>
         <translation>Выбор цвета подсвечивающей линии нарисованной для каждой опорной точки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="152"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="153"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="160"/>
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет на отображаемый выделитель осей</translation>
     </message>
@@ -741,27 +741,27 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsColorFilter</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="36"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37"/>
         <source>Color Filter</source>
         <translation>Цветовой Фильтр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="61"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="62"/>
         <source>Curve Name:</source>
         <translation>Название Кривой:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Название кривой выбранной в данный момент для редактирования</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="69"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70"/>
         <source>Filter mode:</source>
         <translation>Режим фильтра:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="74"/>
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
@@ -769,7 +769,7 @@ The Intensity value of a pixel is computed from the red, green and blue componen
 Значение интенсивности пикселя I вычисляется по его красной R, зелёной G и синей B компоненте как I = квадратный_корень (R * R + G * G + B * B)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="81"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="82"/>
         <source>Filter the original image into black and white pixels by isolating the foreground from the background, to hide unimportant information and emphasize important information.
 
 The background color is shown on the left side of the scale bar.
@@ -780,17 +780,17 @@ The distance of any color (R, G, B) from the background color (Rb, Gb, Bb) is co
 Расстояние F от любого цвета (R, G, B) от цвета фона (Rb, Gb, Bb) вычисляется как F = квадратный_корень ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). На левом конце шкалы расстояние от переднего плана равно нулю и увеличивается линейно до максимального в правом конце шкалы.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="92"/>
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Перевести исходное изображение в чёрнобелые пиксели с помощью компоненты Оттенок из цветового представления  Оттенок, Насыщенность, Значение (HSV), чтобы скрыть неважную информацию и выделить значимую.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="99"/>
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Перевести исходное изображение в чёрнобелые пиксели с помощью компоненты Насыщенность из цветового представления  Оттенок, Насыщенность, Значение (HSV), чтобы скрыть неважную информацию и выделить значимую.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="105"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="106"/>
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
@@ -798,27 +798,27 @@ The Value component is also called the Lightness.</source>
 Компонента Значение также называется Освещенность</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="122"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="128"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="129"/>
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет на отфильтрованное изображение.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="143"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="144"/>
         <source>Filter Parameter Histogram Profile</source>
         <translation>Профиль гистограммы параметра фильтрации </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="151"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="152"/>
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
         <translation>Профиль гистограммы  выбранного параметра фильтра. Две Перегородки могут быть перемещены назад и вперед, для настройки диапазона значений параметра фильтра, которые будут включены в отфильтрованное изображение. Чистый участок будет включен, а заштрихованный участок будет исключен.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="159"/>
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
         <translation>Это недоступное для редоктирования графическое представление горизонтальной оси профиля гистограммы представленой выше.</translation>
     </message>
@@ -826,19 +826,19 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="74"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="902"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="906"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916"/>
         <source>Coordinates</source>
         <translation>Координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="215"/>
         <source>Date/Time:</source>
         <translation>Дата/Время:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="223"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="225"/>
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
@@ -846,7 +846,7 @@ Setting the format to an empty value results in just the time portion appearing 
 Установка формата как пустого значения приводит к выводу только временной части полного значения.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="230"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="232"/>
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
@@ -854,28 +854,28 @@ Setting the format to an empty value results in just the date portion appearing 
 Установка формата как пустого значения приводит к выводу только части дата из полного значения.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="242"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="244"/>
         <source>Coordinates Types</source>
         <translation>Тип координат</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
         <source>Polar</source>
         <translation>Полярные</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="905"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="251"/>
         <source>Cartesian (X, Y)</source>
         <translation>Декартовы (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="250"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252"/>
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -883,7 +883,7 @@ The X and Y coordinates will be used</source>
 Будут использованны координаты X и Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="258"/>
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -894,30 +894,30 @@ Polar coordinates are not allowed with log scale for Theta</source>
 Полярные координаты недопускают логарифмического масштаба по углу Тэтта</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="275"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="310"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="277"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="312"/>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="278"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="313"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315"/>
         <source>Linear</source>
         <translation>Линейный</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="279"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281"/>
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>Установить линейный масштаб для X или Тэтта координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="283"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="321"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323"/>
         <source>Log</source>
         <translation>Логарифмический</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="286"/>
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -928,18 +928,18 @@ Log scale is not allowed for the Theta coordinate.</source>
 Логарифмический масштаб недоступен для угловой координаты Тэтта.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="292"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="337"/>
         <source>Units:</source>
         <translation>Единицы измерения:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="314"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316"/>
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>Определить линейный масштаб для Y или R координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="322"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324"/>
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
@@ -947,12 +947,12 @@ Log scale is not allowed if there are negative coordinates.</source>
 Логарифмический масштаб недоступен при отрицательных значениях координат.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="318"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320"/>
         <source>Origin radius value:</source>
         <translation>Исходное значение радиуса:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="329"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331"/>
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
@@ -960,17 +960,17 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 Стандартно начальное значение радиуса равно 0, но в некоторых случаях могут быть допустимы ненулевые значения (например когда радиус определяет децибелы).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="352"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="354"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="359"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="361"/>
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет на систему координат.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="667"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="670"/>
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -981,7 +981,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
 Формат Градусы Минуты Секунды (ГГГ ММ СС.С) использует целые числа для градусов и минут, и вещественное число для секунд. В минуте 60 секунд. При вводе три части должны быть разделены пробелами.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="700"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="703"/>
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -1001,12 +1001,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 Формат Обороты используется для задания значения одним вещественным числом. Один полный оборот имеет значение 1.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="900"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="910"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="904"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -1014,17 +1014,17 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="31"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
         <translation>Добавить/Удалить Кривую</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="64"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65"/>
         <source>Add...</source>
         <translation>Добавить...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="66"/>
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
@@ -1032,12 +1032,12 @@ Every curve name must be unique</source>
 Каждое название кривой должно быть уникальным</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="71"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="73"/>
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
@@ -1045,12 +1045,12 @@ There must always be at least one curve</source>
 Должна оставаться хотябы одна кривая.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="85"/>
         <source>Curve Names:</source>
         <translation>Названия Кривых:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="97"/>
         <source>List of the curves belonging to this document.
 
 Click on a curve name to edit it. Each curve name must be unique.
@@ -1061,43 +1061,43 @@ Reorder curves by dragging them around.</source>
 Изменить порядок кривых можно с помощью перетаскивания.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123"/>
         <source>Save As Default</source>
         <translation>Сохранить как &quot;По умолчанию&quot;</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="124"/>
         <source>Save the curve names for use as defaults for future graph curves.</source>
         <translation>Сохранить названия кривых для использования по умолчанию в следующих графиках.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="127"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128"/>
         <source>Reset Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129"/>
         <source>Reset the defaults for future graph curves to the original settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="486"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494"/>
         <source>Removing this curve will also remove</source>
         <translation>Удаление этой кривой приведет также</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="488"/>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="493"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="496"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="501"/>
         <source>points. Continue?</source>
         <translation>к удалению точек. Продолжить?</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="491"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="499"/>
         <source>Removing these curves will also remove</source>
         <translation>Удаление этих кривых приведет также</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="497"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="505"/>
         <source>Curves With Points</source>
         <translation>Кривые С Точками</translation>
     </message>
@@ -1105,32 +1105,32 @@ Reorder curves by dragging them around.</source>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="60"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="61"/>
         <source>Curve Properties</source>
         <translation>Свойства Кривой</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88"/>
         <source>Curve Name:</source>
         <translation>Название Кривой:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Название кривой выбранной в данный момент для редактирования</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="101"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="102"/>
         <source>Line</source>
         <translation>Линия</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="107"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108"/>
         <source>Width:</source>
         <translation>Толщина:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="111"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112"/>
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -1138,13 +1138,13 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Применяется только к графикам кривых. Линии между опорными точками осей не рисуются.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="117"/>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="202"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203"/>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122"/>
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -1152,12 +1152,12 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Применяется только к графикам кривых. Линии между опорными точками осей не рисуются.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="127"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128"/>
         <source>Connect as:</source>
         <translation>Соединять как:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="135"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136"/>
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -1177,37 +1177,37 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Применяется только к графикам кривых. Линии между опорными точками осей не рисуются.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="155"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="156"/>
         <source>Point</source>
         <translation>Маркер</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="161"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162"/>
         <source>Shape:</source>
         <translation>Форма:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="166"/>
         <source>Select a shape for the points</source>
         <translation>Выбрать форму маркера точки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="181"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182"/>
         <source>Radius:</source>
         <translation>Радиус:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="185"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="186"/>
         <source>Select a radius, in pixels, for the points</source>
         <translation>Выбрать радиус маркера в пикселях</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="190"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="191"/>
         <source>Line width:</source>
         <translation>Толщина линии:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="194"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195"/>
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
@@ -1215,12 +1215,12 @@ A larger width results in a thicker line, with the exception of a value of zero 
 Большая толщина приводит к утолщению линии, за исключением нулевого значения которое всегда приводит к толщине линии в один пиксель (которую легче рассмотреть даже при сильном уменьшении масштаба)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="207"/>
         <source>Select a color for the line used to draw the point shapes</source>
         <translation>Выбрать цвет отрисовки контура маркера точки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="217"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="218"/>
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -1231,12 +1231,12 @@ If the visible settings are for the Nth graph curve in the curve list, then they
 Если установлены визуальные параметры для N-ой кривой графика в списке кривых, то они будут использоваться для будущей N-ой кривой в новом списке, пока новые настройки по умолчанию не будут сохранены.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="231"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="232"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="239"/>
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -1331,22 +1331,22 @@ Drag the cursor over this area to see the effects of the current settings on the
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="50"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="51"/>
         <source>Export Format</source>
         <translation>Формат Выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="73"/>
         <source>Included</source>
         <translation>Включенные</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="75"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="76"/>
         <source>Not included</source>
         <translation>Не включенные</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="80"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="81"/>
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
@@ -1354,134 +1354,134 @@ The order of the curves here does not affect the order in the exported file. Tha
 Порядок кривых здесь не влияет на их порядок в файле выгрузки. Этот порядок определяется Настройками Кривых.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="89"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90"/>
         <source>List of curves to be excluded from the exported file</source>
         <translation>Список кривых которые будут исключены из файла выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95"/>
         <source>&lt;&lt;Include</source>
         <translation>&lt;&lt;Включить</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97"/>
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>Переместить выделенную кривую(ые) из списка исключенных</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="100"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101"/>
         <source>Exclude&gt;&gt;</source>
         <translation>Исключить&gt;&gt;</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="103"/>
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>Переместить выделенную кривую(ые) из списка включенных</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114"/>
         <source>Delimiters</source>
         <translation>Разделители</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="120"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="121"/>
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>Файл выгрузки будет иметь запятые между соседними значениями, если они не будут заменены табуляциямми в TSV-файле.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="126"/>
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>Файл выгрузки будет иметь пробелы между соседними значениями, если они не будут заменены запятыми в CSV файле или табуляциямми в TSV-файле.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="131"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132"/>
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Файл выгрузки будет иметь табуляции между соседними значениями, если они не будут заменены запятыми в CSV файле</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="136"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137"/>
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141"/>
         <source>Override in CSV/TSV files</source>
         <translation>Переписать в формате CSV/TSV файла</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142"/>
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>Comma-separated value (CSV) файл и tab-separated value (TSV) файл используют соответственно запятую и табуляцию в качестве разделителя, не смотря на указанные выше настройки. Выбор этой настройки будем применён как формат разделителя для всех файлов.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153"/>
         <source>Layout</source>
         <translation>Макет</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159"/>
         <source>All curves on each line</source>
         <translation>Все кривые в каждой строке</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="160"/>
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>Файл выгрузки будет иметь в строке значение по X и соответствующее значения по Y для всех кривых</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165"/>
         <source>One curve on each line</source>
         <translation>Одна кривая в строке</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="166"/>
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>Файл выгрузки будет иметь в строке только пару значений X-Y для отдельной кривой. Сначала все для первой, затем все для остальных поочереди.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="175"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305"/>
         <source>Points Selection</source>
         <translation>Выбор Точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="188"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189"/>
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>Интерполяция Y для X во всех кривых</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190"/>
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>Файл выгрузки будет иметь значения Y для каждого уникального значения X во всех кривых. Значения Y будут взяты из линейной интерполяции если не указаны явно.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="194"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195"/>
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>Интерполяция Y для X из первой кривой</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="196"/>
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>Файл выгрузки будет иметь значения Y для каждого уникального значения X из первой кривой. Значения Y будут взяты из линейной интерполяции если не указаны явно.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="200"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201"/>
         <source>Interpolate Ys at evenly spaced X values.</source>
         <translation>Интерполяция Y для равномерных шагов по X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202"/>
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>Файл выгрузки будет иметь значения Y для значений X взятых через равные промежутки указанные ниже. Значения Y будут взяты из линейной интерполяции если не указаны явно.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="324"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325"/>
         <source>Interval:</source>
         <translation>Интервал:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214"/>
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -1492,7 +1492,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 Значения X будут автоматически пронумерованя. Если первая и/или последняя точки не укладываются в диапозон значений X, то одна или две дополнительных точки будут добавлены по мере необходимости.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -1503,74 +1503,74 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 Единицы измерения графика предпочтительнее если интервал должен учитывать масштаб оси X.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="235"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="350"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351"/>
         <source>Raw Xs and Ys</source>
         <translation>Первичные значения X и Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="352"/>
         <source>Exported file will have only original X and Y values</source>
         <translation>Выгружаемый файл будет включать только исходные значения X и Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="248"/>
         <source>Header</source>
         <translation>Заголовок</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="257"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258"/>
         <source>Exported file will have no header line</source>
         <translation>Выгружаемый файл не будет иметь строку заголовков</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="262"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263"/>
         <source>Exported file will have simple header line</source>
         <translation>Выгружаемый файл будет иметь строку простых заголовков</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="268"/>
         <source>Exported file will have gnuplot header line</source>
         <translation>Выгружаемый файл будет иметь строку заголовков в стиле gnuplot</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="279"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="280"/>
         <source>Save As Default</source>
         <translation>Сохранить как &quot;По умолчанию&quot;</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="280"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281"/>
         <source>Save the settings for use as future defaults.</source>
         <translation>Сохранить настройки для дальнейшего использования по умолчанию.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="289"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="294"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295"/>
         <source>Preview window shows how current settings affect the exported file</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет файл выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="317"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318"/>
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>Интерполяция X и Y через интервал</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319"/>
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>Файл выгрузки будет иметь точки вдоль каждой связной кривой через равный интервал указанный ниже. Если последний интервал не заканчивается на последней точке, то будет взят укороченный интервал чтобы закончить последней точкой.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="332"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="333"/>
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>Интервал между последовательными точками при выгрузке через равные промежутки (X,Y) координат.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="338"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="339"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -1581,12 +1581,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 Единицы измерения графика обычно предпочтительнее если масштабы осей X и Y одинаковые.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="394"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395"/>
         <source>Functions</source>
         <translation>Функции</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="397"/>
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -1594,12 +1594,12 @@ Controls for specifying the format of functions during export</source>
 Контролирует определение формата функции для интерполяции в процессе выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403"/>
         <source>Relations</source>
         <translation>Относительная связь</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="404"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="405"/>
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -1607,22 +1607,22 @@ Controls for specifying the format of relations during export</source>
 Контролирует определение формата задания последовательных связей точек в процессе выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="425"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426"/>
         <source>X Label:</source>
         <translation>X Этикетка:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428"/>
         <source>Theta Label:</source>
         <translation>Тэтта Этикетка:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="433"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434"/>
         <source>Label in the header for x values</source>
         <translation>Этикетки в заголовках для значений по X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="435"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="436"/>
         <source>Label in the header for theta values</source>
         <translation>Этикетки в заголовках для значений по Тэтта</translation>
     </message>
@@ -1684,28 +1684,28 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="32"/>
         <source>Grid Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="61"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="62"/>
         <source>Color:</source>
         <translation type="unfinished">Цвет:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="66"/>
         <source>Select a color for the lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="87"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="161"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162"/>
         <source>Disable:</source>
         <translation type="unfinished">Деактивное:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="92"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -1713,13 +1713,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 X линии сетки определяются с использованием только трёх значений одновременно. Для вариативности допустимо указать четыре значения, но тогда надо выбрать какое из них будет деактивировано. Деактивированное значение будет подгоняться в соответствие с остальными указанными при их изменении.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="106"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="180"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="107"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="181"/>
         <source>Count:</source>
         <translation type="unfinished">Количество:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="111"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -1727,13 +1727,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Число горизонтальных линий сетки должно быть заданно целым и отличным от нуля</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="117"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="191"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="192"/>
         <source>Start:</source>
         <translation type="unfinished">Начало:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="122"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -1741,13 +1741,13 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="128"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="202"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203"/>
         <source>Step:</source>
         <translation type="unfinished">Шаг:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="132"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
@@ -1755,13 +1755,13 @@ The step value must be greater than zero</source>
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214"/>
         <source>Stop:</source>
         <translation type="unfinished">Конец:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -1769,7 +1769,7 @@ The stop value cannot be less than the start value</source>
 Конечное значение не может быть меньше чем начальное.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166"/>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -1777,7 +1777,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Y линии сетки определяются с использованием только трёх значений одновременно. Для вариативности допустимо указать четыре значения, но тогда надо выбрать какое из них будет деактивировано. Деактивированное значение будет подгоняться в соответствие с остальными указанными при их изменении.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="185"/>
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -1785,7 +1785,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Число вертикальных линий сетки должно быть заданно целым и отличным от нуля</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196"/>
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -1793,7 +1793,7 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207"/>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
@@ -1801,7 +1801,7 @@ The step value must be greater than zero</source>
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="217"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218"/>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -1809,32 +1809,32 @@ The stop value cannot be less than the start value</source>
 Конечное значение не может быть меньше чем начальное.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="234"/>
         <source>Preview</source>
         <translation type="unfinished">Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241"/>
         <source>Preview window that shows how current settings affect grid display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="304"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305"/>
         <source>X Grid Lines</source>
         <translation type="unfinished">X Линии сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="306"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307"/>
         <source>Grid Lines</source>
         <translation type="unfinished">Линии Сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="310"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
         <source>Y Grid Lines</source>
         <translation type="unfinished">Y Линии сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="312"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313"/>
         <source>Radius Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1842,27 +1842,27 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsGridRemoval</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="32"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="33"/>
         <source>Grid Removal</source>
         <translation>Стиратель Сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="59"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="60"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="66"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="67"/>
         <source>Preview window that shows how current settings affect grid removal</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет стирание сетки.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="77"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="78"/>
         <source>Remove pixels close to defined grid lines</source>
         <translation>Стирает пиксели расположенные близко к указанным линиям сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="78"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="79"/>
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
@@ -1870,12 +1870,12 @@ This option is only available when the axis points have all been defined.</sourc
 Эта опция доступна только после определения всех опорных точек.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="83"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="84"/>
         <source>Close distance (pixels):</source>
         <translation>Окрестность (пиксели):</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="88"/>
         <source>Set closeness distance in pixels.
 
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
@@ -1886,23 +1886,23 @@ This value cannot be negative. A zero value disables this feature. Decimal value
 Это значение не может быть отрицательным. Нулевое значение устраняет эффект этой функции. Дробные значения допустимы.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="105"/>
         <source>X Grid Lines</source>
         <translation>X Линии сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="107"/>
         <source>Grid Lines</source>
         <translation>Линии Сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="114"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="192"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193"/>
         <source>Disable:</source>
         <translation>Деактивное:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="119"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -1910,13 +1910,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 X линии сетки определяются с использованием только трёх значений одновременно. Для вариативности допустимо указать четыре значения, но тогда надо выбрать какое из них будет деактивировано. Деактивированное значение будет подгоняться в соответствие с остальными указанными при их изменении.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="133"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="211"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="212"/>
         <source>Count:</source>
         <translation>Количество:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="137"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="138"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -1924,13 +1924,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Число горизонтальных линий сетки должно быть заданно целым и отличным от нуля</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="144"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="222"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="145"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="223"/>
         <source>Start:</source>
         <translation>Начало:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="148"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="149"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -1938,13 +1938,13 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="155"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="233"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234"/>
         <source>Step:</source>
         <translation>Шаг:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
@@ -1952,13 +1952,13 @@ The step value must be greater than zero</source>
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="166"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="244"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245"/>
         <source>Stop:</source>
         <translation>Конец:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="170"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -1966,17 +1966,17 @@ The stop value cannot be less than the start value</source>
 Конечное значение не может быть меньше чем начальное.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="183"/>
         <source>Y Grid Lines</source>
         <translation>Y Линии сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="185"/>
         <source>R Grid Lines</source>
         <translation>R Линии сетки</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="196"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="197"/>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -1984,7 +1984,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Y линии сетки определяются с использованием только трёх значений одновременно. Для вариативности допустимо указать четыре значения, но тогда надо выбрать какое из них будет деактивировано. Деактивированное значение будет подгоняться в соответствие с остальными указанными при их изменении.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="215"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="216"/>
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -1992,7 +1992,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Число вертикальных линий сетки должно быть заданно целым и отличным от нуля</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="226"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="227"/>
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -2000,7 +2000,7 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="237"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238"/>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
@@ -2008,7 +2008,7 @@ The step value must be greater than zero</source>
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="248"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249"/>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -2019,17 +2019,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="34"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="32"/>
         <source>Main Window</source>
         <translation>Основное Окно</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="59"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="57"/>
         <source>Initial zoom:</source>
         <translation>Стартовый масштаб:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="72"/>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -2037,32 +2037,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 Выбрать начальный фактор масштаба при загрузке нового документа. Иначе будет сохранён предыдущий масштаб, или может быть применен указанный масштаб.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78"/>
         <source>Zoom control:</source>
         <translation>Управление масштабом:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82"/>
         <source>Menu only</source>
         <translation>Только через меню</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83"/>
         <source>Menu and mouse wheel</source>
         <translation>Через меню и колесико мыши</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
         <source>Menu and +/- keys</source>
         <translation>Через меню и кнопки +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>Через меню, колесико мыши и кнопки +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="88"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -2071,12 +2071,12 @@ Select which inputs are used to zoom in and out.</source>
 Выбор доступных механизмов для изменения масштаба.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale:</source>
         <translation>Языковые стандарты:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96"/>
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -2089,65 +2089,65 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 Языковой стандарт определяет форматирования чисел. В частности, запятые или пропуски будут использоваться в качестве  разделителей групп цифр в числах, вводимых пользователем, отображаемых в интерфейсе пользователя, или экспортированных в файл.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
         <source>Import cropping:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="120"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="132"/>
         <source>Import PDF resolution (dots per inch):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="138"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="153"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="151"/>
         <source>Maximum grid lines:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163"/>
         <source>Highlight opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="171"/>
-        <source>Highligh Opacity
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169"/>
+        <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="177"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175"/>
         <source>Recent file list:</source>
         <translation>Список недавних файлов:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="182"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -2156,12 +2156,12 @@ Clear the recent file list in the File menu.</source>
 Очистить список последних файлов в меню Файл.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="188"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="186"/>
         <source>Include title bar path:</source>
         <translation>Добавить путь в строку заголовка:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="193"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="191"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -2169,21 +2169,33 @@ Includes or excludes the path and file extension from the filename in the title 
 
 Включает или исключает путь к файлу и его расширение из строки заголовка.</translation>
     </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
+        <source>Allow small dialogs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="201"/>
+        <source>Allow Small Dialogs
+
+Allows settings dialogs to be made very small so they fit on small computer screens.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgSettingsPointMatch</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="29"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30"/>
         <source>Point Match</source>
         <translation>Совмещение Точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83"/>
         <source>Maximum point size (pixels):</source>
         <translation>Максимальный размер точки (пиксели):</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="86"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87"/>
         <source>Select a maximum point size in pixels.
 
 Sample match points must fit within a square box, around the cursor, having width and height equal to this maximum.
@@ -2200,42 +2212,42 @@ This value has a lower limit</source>
 Это значение имеет нижний предел</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="97"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98"/>
         <source>Accepted point color:</source>
         <translation>Цвет принятых точек:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="101"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102"/>
         <source>Select a color for matched points that are accepted</source>
         <translation>Выбрать цвет для принятых совмещённых точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107"/>
         <source>Rejected point color:</source>
         <translation>Цвет отклоненных точек:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111"/>
         <source>Select a color for matched points that are rejected</source>
         <translation>Выбрать цвет для отклоненных совмещённых точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116"/>
         <source>Candidate point color:</source>
         <translation>Цвет предложенных точек:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="119"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120"/>
         <source>Select a color for the point being decided upon</source>
         <translation>Выбрать цвет для предложенных совмещённых точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142"/>
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
@@ -2247,17 +2259,17 @@ The points are separated by the point separation value, and the maximum point si
 <context>
     <name>DlgSettingsSegments</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="39"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="40"/>
         <source>Segment Fill</source>
         <translation>Сегментное Заполнение</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="77"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="78"/>
         <source>Minimum length (points):</source>
         <translation>Минимальная длина (точки):</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="83"/>
         <source>Select a minimum number of points in a segment.
 
 Only segments with more points will be created.
@@ -2269,12 +2281,12 @@ This value should be as large as possible to reduce memory usage. This value has
 Это значение имеет нижний предел.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="89"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90"/>
         <source>Point separation (pixels):</source>
         <translation>Межточечное расстояние (пиксели):</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="95"/>
         <source>Select a point separation in pixels.
 
 Successive points added to a segment will be separated by this number of pixels. If Fill Corners is enabled, then additional points will be inserted at corners so some points will be closer.
@@ -2287,12 +2299,12 @@ This value has a lower limit</source>
 Это значение имеет нижний предел</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103"/>
         <source>Fill corners:</source>
         <translation>Заполнение углов:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="107"/>
         <source>Fill corners.
 
 In addition to the points placed at regular intervals, this option causes a point to be placed at each corner. This option can capture important information in piecewise linear graphs, but gradually curving graphs may not benefit from the additional points</source>
@@ -2300,32 +2312,32 @@ In addition to the points placed at regular intervals, this option causes a poin
 В дополнение к точками, расположенными через постоянные промежутки, эта опция устанавливает точки в каждом углу графика. Эта опция может захватить важную информацию из кусочно-линейных графиков, но плавно изогнутые графики не получат пользы от таких точек</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114"/>
         <source>Line width:</source>
         <translation>Толщина линии:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="117"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118"/>
         <source>Select a size for the lines drawn along a segment</source>
         <translation>Выберать толщину линии, проведенной вдоль сегмента</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123"/>
         <source>Line color:</source>
         <translation>Цвет линии:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="126"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127"/>
         <source>Select a color for the lines drawn along a segment</source>
         <translation>Выберать цвет линии, проведенной вдоль сегмента</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142"/>
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="148"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149"/>
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
         <translation>Окно предварительного просмотра показывает кратчайший отрезок, который может быть заполнен сегментом, а также эффект от текущих настроек сегментов и точек при Сегментном заполнении</translation>
     </message>
@@ -3942,27 +3954,27 @@ Do you want to save your changes?</source>
         <translation>Не удалось записать файл</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3024"/>
+        <location filename="../src/main/MainWindow.cpp" line="3028"/>
         <source>Export</source>
         <translation>Выгрузка</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3100"/>
+        <location filename="../src/main/MainWindow.cpp" line="3104"/>
         <source>Open Document</source>
         <translation>Открыть Документ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4436"/>
+        <location filename="../src/main/MainWindow.cpp" line="4440"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4437"/>
+        <location filename="../src/main/MainWindow.cpp" line="4441"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4546"/>
+        <location filename="../src/main/MainWindow.cpp" line="4567"/>
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4584,7 +4596,7 @@ Do you want to save your changes?</source>
         <translation>Предыдущий</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="91"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="96"/>
         <source>Cannot read main window data</source>
         <translation>Не удалось прочитать данные Главного Окна</translation>
     </message>

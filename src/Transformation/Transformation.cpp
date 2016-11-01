@@ -11,6 +11,7 @@
 #include "Logger.h"
 #include <QDebug>
 #include <qmath.h>
+#include <QObject>
 #include <QtGlobal>
 #include "QtToString.h"
 #include "Transformation.h"
@@ -225,7 +226,8 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
 
     } else {
 
-      coordsGraph = "<font color=\"red\">Need more axis points</font>";
+      coordsGraph = QString ("<font color=\"red\">%1</font>")
+        .arg (QObject::tr ("Need more axis points"));
       resolutionsGraph = coordsGraph;
 
     }

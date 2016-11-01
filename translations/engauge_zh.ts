@@ -487,9 +487,9 @@ The original document can be sent as part of the error report, which increases t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="vanished">包含原始文件信息, 否则隐去该信息</translation>
+        <translation>包含原始文件信息, 否则隐去该信息</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="56"/>
@@ -505,34 +505,34 @@ The original document can be sent as part of the error report, which increases t
 <context>
     <name>DlgImportAdvanced</name>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="16"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="18"/>
         <source>Import Advanced</source>
         <translation>高级导入</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="46"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49"/>
         <source>Coordinate System Count:</source>
         <translation>坐标系数目: </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="52"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="55"/>
         <source>Coordinate System Count
 
 Specifies the total number of coordinate systems that will be used in the imported image. There can be one or more graphs in the image, and each graph can have one or more coordinate systems. Each coordinate system is defined by a pair of coordinate axes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="60"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63"/>
         <source>Axes Points Count:</source>
         <translation>坐标轴点数目: </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="66"/>
         <source>3 points</source>
         <translation>3点</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="68"/>
         <source>Three axes points will define the coordinate system. Each will have both x and y coordinates.
 
 This setting is always used when importing images in non-advanced mode.
@@ -541,12 +541,12 @@ In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
         <translation>由坐标轴上的3个点来确定坐标系. 每个点均有x和y坐标. 在非高级模式下, 采用这种设置来导入图像, 共有3个点 (x1,y1), (x2,y2) 和 (x3,y3).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="76"/>
         <source>4 points</source>
         <translation>4点</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="77"/>
         <source>Four axes points will define the coordinate system. Each will have a single x or y coordinate.
 
 This setting is required when the x coordinate of the y axis is unknown, and/or the y coordinate of the x axis is unknown.
@@ -632,12 +632,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99"/>
         <source>Ok</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -645,62 +645,62 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAxesChecker</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="38"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39"/>
         <source>Axes Checker</source>
         <translation>坐标方格</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="62"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="63"/>
         <source>Axes Checker Lifetime</source>
         <translation>坐标方格显示时间</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="69"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="70"/>
         <source>Do not show</source>
         <translation>不显示</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="70"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="71"/>
         <source>Never show axes checker.</source>
         <translation>从不显示坐标轴方格</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="74"/>
         <source>Show for a number of seconds</source>
         <translation>显示几秒钟</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="75"/>
         <source>Show axes checker for a number of seconds after changing axes points.</source>
         <translation>改变坐标轴点后显示几秒钟坐标方格</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85"/>
         <source>Show always</source>
         <translation>一直显示</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="86"/>
         <source>Always show axes checker.</source>
         <translation>一直显示坐标方格</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="95"/>
         <source>Line color:</source>
         <translation>线的颜色</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="99"/>
         <source>Select a color for the highlight lines drawn at each axis point</source>
         <translation>选择坐标轴点画出线条的颜色</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="152"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="153"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="160"/>
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
         <translation>预览窗口显示当前设置对坐标方格的影响</translation>
     </message>
@@ -708,34 +708,34 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsColorFilter</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="36"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37"/>
         <source>Color Filter</source>
         <translation>颜色筛选</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="61"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="62"/>
         <source>Curve Name:</source>
         <translation>曲线名称:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation>当前编辑的曲线名称</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="69"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70"/>
         <source>Filter mode:</source>
         <translation>筛选模式:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="73"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="74"/>
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="81"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="82"/>
         <source>Filter the original image into black and white pixels by isolating the foreground from the background, to hide unimportant information and emphasize important information.
 
 The background color is shown on the left side of the scale bar.
@@ -744,44 +744,44 @@ The distance of any color (R, G, B) from the background color (Rb, Gb, Bb) is co
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="92"/>
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="99"/>
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="105"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="106"/>
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="122"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="128"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="129"/>
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
         <translation>预览窗口显示当前设置对筛选图像的影响</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="143"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="144"/>
         <source>Filter Parameter Histogram Profile</source>
         <translation>筛选参数直方图特征</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="151"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="152"/>
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="159"/>
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -789,54 +789,54 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="74"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="902"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="906"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916"/>
         <source>Coordinates</source>
         <translation>坐标系</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="215"/>
         <source>Date/Time:</source>
         <translation>日期/时间</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="223"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="225"/>
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="230"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="232"/>
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="242"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="244"/>
         <source>Coordinates Types</source>
         <translation>坐标系类型</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
         <source>Polar</source>
         <translation>极坐标</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="905"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="251"/>
         <source>Cartesian (X, Y)</source>
         <translation>笛卡尔 (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="250"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252"/>
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -844,7 +844,7 @@ The X and Y coordinates will be used</source>
 使用x和y坐标.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="258"/>
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -853,30 +853,30 @@ Polar coordinates are not allowed with log scale for Theta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="275"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="310"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="277"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="312"/>
         <source>Scale:</source>
         <translation>比例尺:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="278"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="313"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315"/>
         <source>Linear</source>
         <translation>线性</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="279"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281"/>
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>指定X或Theta坐标的线性比例</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="283"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="321"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323"/>
         <source>Log</source>
         <translation>对数</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="286"/>
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -885,47 +885,47 @@ Log scale is not allowed for the Theta coordinate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="292"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="337"/>
         <source>Units:</source>
         <translation>单位:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="314"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316"/>
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>指定Y或R坐标的线性比例</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="322"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324"/>
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="318"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320"/>
         <source>Origin radius value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="329"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331"/>
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="352"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="354"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="359"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="361"/>
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>预览窗口显示当前设置对坐标系的影响</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="667"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="670"/>
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -934,7 +934,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="700"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="703"/>
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -949,12 +949,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="900"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="910"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="904"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -962,17 +962,17 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="31"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
         <translation>添加/删除曲线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="64"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65"/>
         <source>Add...</source>
         <translation>添加</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="66"/>
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
@@ -980,24 +980,24 @@ Every curve name must be unique</source>
 曲线名不可重复.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="71"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72"/>
         <source>Remove</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="73"/>
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="85"/>
         <source>Curve Names:</source>
         <translation>曲线名称:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="97"/>
         <source>List of the curves belonging to this document.
 
 Click on a curve name to edit it. Each curve name must be unique.
@@ -1006,43 +1006,43 @@ Reorder curves by dragging them around.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123"/>
         <source>Save As Default</source>
         <translation>保存为默认</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="124"/>
         <source>Save the curve names for use as defaults for future graph curves.</source>
         <translation>保存为常用曲线名称</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="127"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128"/>
         <source>Reset Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129"/>
         <source>Reset the defaults for future graph curves to the original settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="486"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494"/>
         <source>Removing this curve will also remove</source>
         <translation>删除该曲线同样会删除</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="488"/>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="493"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="496"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="501"/>
         <source>points. Continue?</source>
         <translation>点. 继续?</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="491"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="499"/>
         <source>Removing these curves will also remove</source>
         <translation>删除这些曲线同样会删除</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="497"/>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="505"/>
         <source>Curves With Points</source>
         <translation>带点曲线</translation>
     </message>
@@ -1050,57 +1050,57 @@ Reorder curves by dragging them around.</source>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="60"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="61"/>
         <source>Curve Properties</source>
         <translation>曲线属性</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88"/>
         <source>Curve Name:</source>
         <translation>曲线名称:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation>当前编辑曲线的名称</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="101"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="102"/>
         <source>Line</source>
         <translation>线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="107"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108"/>
         <source>Width:</source>
         <translation>宽度:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="111"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112"/>
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="117"/>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="202"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203"/>
         <source>Color:</source>
         <translation>颜色:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122"/>
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="127"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128"/>
         <source>Connect as:</source>
         <translation>连接为:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="135"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136"/>
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -1115,49 +1115,49 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="155"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="156"/>
         <source>Point</source>
         <translation>点</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="161"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162"/>
         <source>Shape:</source>
         <translation>形状:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="166"/>
         <source>Select a shape for the points</source>
         <translation>为点选择一个形状</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="181"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182"/>
         <source>Radius:</source>
         <translation>半径:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="185"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="186"/>
         <source>Select a radius, in pixels, for the points</source>
         <translation>为点选择一个以像素为单位的半径</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="190"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="191"/>
         <source>Line width:</source>
         <translation>线宽:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="194"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195"/>
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="207"/>
         <source>Select a color for the line used to draw the point shapes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="217"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="218"/>
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -1166,12 +1166,12 @@ If the visible settings are for the Nth graph curve in the curve list, then they
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="231"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="232"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="239"/>
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -1265,156 +1265,156 @@ Drag the cursor over this area to see the effects of the current settings on the
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="50"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="51"/>
         <source>Export Format</source>
         <translation>导出格式</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="73"/>
         <source>Included</source>
         <translation>包含</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="75"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="76"/>
         <source>Not included</source>
         <translation>包含</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="80"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="81"/>
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="89"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90"/>
         <source>List of curves to be excluded from the exported file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95"/>
         <source>&lt;&lt;Include</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97"/>
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="100"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101"/>
         <source>Exclude&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="103"/>
         <source>Move the currently selected curve(s) from the included list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114"/>
         <source>Delimiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="120"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="121"/>
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="126"/>
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="131"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132"/>
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="136"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137"/>
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141"/>
         <source>Override in CSV/TSV files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142"/>
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153"/>
         <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159"/>
         <source>All curves on each line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="160"/>
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165"/>
         <source>One curve on each line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="166"/>
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="175"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305"/>
         <source>Points Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="188"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189"/>
         <source>Interpolate Ys at Xs from all curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190"/>
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="194"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195"/>
         <source>Interpolate Ys at Xs from first curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="196"/>
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="200"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201"/>
         <source>Interpolate Ys at evenly spaced X values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202"/>
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="324"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325"/>
         <source>Interval:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214"/>
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -1423,7 +1423,7 @@ The X values will be automatically aligned along simple numbers. If the first an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -1432,74 +1432,74 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="235"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="350"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351"/>
         <source>Raw Xs and Ys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236"/>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="352"/>
         <source>Exported file will have only original X and Y values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="248"/>
         <source>Header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="257"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258"/>
         <source>Exported file will have no header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="262"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263"/>
         <source>Exported file will have simple header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="268"/>
         <source>Exported file will have gnuplot header line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="279"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="280"/>
         <source>Save As Default</source>
         <translation type="unfinished">保存为默认</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="280"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281"/>
         <source>Save the settings for use as future defaults.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="289"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="294"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295"/>
         <source>Preview window shows how current settings affect the exported file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="317"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318"/>
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319"/>
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="332"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="333"/>
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="338"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="339"/>
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -1508,46 +1508,46 @@ Graph units are usually preferred when the X and Y scales are identical.</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="394"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395"/>
         <source>Functions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="397"/>
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403"/>
         <source>Relations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="404"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="405"/>
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="425"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426"/>
         <source>X Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428"/>
         <source>Theta Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="433"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434"/>
         <source>Label in the header for x values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="435"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="436"/>
         <source>Label in the header for theta values</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1601,147 +1601,147 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="32"/>
         <source>Grid Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="61"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="62"/>
         <source>Color:</source>
         <translation type="unfinished">颜色:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="65"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="66"/>
         <source>Select a color for the lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="87"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="161"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162"/>
         <source>Disable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="92"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="106"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="180"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="107"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="181"/>
         <source>Count:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="111"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="117"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="191"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="192"/>
         <source>Start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="121"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="122"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="128"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="202"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203"/>
         <source>Step:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="132"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214"/>
         <source>Stop:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166"/>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="185"/>
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196"/>
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207"/>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="217"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218"/>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="234"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241"/>
         <source>Preview window that shows how current settings affect grid display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="304"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305"/>
         <source>X Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="306"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307"/>
         <source>Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="310"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
         <source>Y Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="312"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313"/>
         <source>Radius Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1749,39 +1749,39 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsGridRemoval</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="32"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="33"/>
         <source>Grid Removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="59"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="60"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="66"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="67"/>
         <source>Preview window that shows how current settings affect grid removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="77"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="78"/>
         <source>Remove pixels close to defined grid lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="78"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="79"/>
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="83"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="84"/>
         <source>Close distance (pixels):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="88"/>
         <source>Set closeness distance in pixels.
 
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
@@ -1790,120 +1790,120 @@ This value cannot be negative. A zero value disables this feature. Decimal value
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="105"/>
         <source>X Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="107"/>
         <source>Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="114"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="192"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193"/>
         <source>Disable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="119"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="133"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="211"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="212"/>
         <source>Count:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="137"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="138"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="144"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="222"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="145"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="223"/>
         <source>Start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="148"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="149"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="155"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="233"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234"/>
         <source>Step:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="159"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="166"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="244"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245"/>
         <source>Stop:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="170"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="183"/>
         <source>Y Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="185"/>
         <source>R Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="196"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="197"/>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="215"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="216"/>
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="226"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="227"/>
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="237"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238"/>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="248"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249"/>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -1913,61 +1913,61 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="34"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="32"/>
         <source>Main Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="59"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="57"/>
         <source>Initial zoom:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="72"/>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78"/>
         <source>Zoom control:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82"/>
         <source>Menu only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83"/>
         <source>Menu and mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
         <source>Menu and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="87"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="88"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96"/>
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -1976,97 +1976,109 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
         <source>Import cropping:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="120"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="132"/>
         <source>Import PDF resolution (dots per inch):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="138"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="153"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="151"/>
         <source>Maximum grid lines:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="158"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163"/>
         <source>Highlight opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="171"/>
-        <source>Highligh Opacity
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169"/>
+        <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="177"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175"/>
         <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="182"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="188"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="186"/>
         <source>Include title bar path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="193"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="191"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
+        <source>Allow small dialogs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="201"/>
+        <source>Allow Small Dialogs
+
+Allows settings dialogs to be made very small so they fit on small computer screens.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DlgSettingsPointMatch</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="29"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30"/>
         <source>Point Match</source>
         <translation type="unfinished">点匹配</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83"/>
         <source>Maximum point size (pixels):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="86"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87"/>
         <source>Select a maximum point size in pixels.
 
 Sample match points must fit within a square box, around the cursor, having width and height equal to this maximum.
@@ -2077,42 +2089,42 @@ This value has a lower limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="97"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98"/>
         <source>Accepted point color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="101"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102"/>
         <source>Select a color for matched points that are accepted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107"/>
         <source>Rejected point color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111"/>
         <source>Select a color for matched points that are rejected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116"/>
         <source>Candidate point color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="119"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120"/>
         <source>Select a color for the point being decided upon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142"/>
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
@@ -2122,17 +2134,17 @@ The points are separated by the point separation value, and the maximum point si
 <context>
     <name>DlgSettingsSegments</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="39"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="40"/>
         <source>Segment Fill</source>
         <translation type="unfinished">线段填充</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="77"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="78"/>
         <source>Minimum length (points):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="83"/>
         <source>Select a minimum number of points in a segment.
 
 Only segments with more points will be created.
@@ -2141,12 +2153,12 @@ This value should be as large as possible to reduce memory usage. This value has
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="89"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90"/>
         <source>Point separation (pixels):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="95"/>
         <source>Select a point separation in pixels.
 
 Successive points added to a segment will be separated by this number of pixels. If Fill Corners is enabled, then additional points will be inserted at corners so some points will be closer.
@@ -2155,44 +2167,44 @@ This value has a lower limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103"/>
         <source>Fill corners:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="107"/>
         <source>Fill corners.
 
 In addition to the points placed at regular intervals, this option causes a point to be placed at each corner. This option can capture important information in piecewise linear graphs, but gradually curving graphs may not benefit from the additional points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="113"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114"/>
         <source>Line width:</source>
         <translation type="unfinished">线宽:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="117"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118"/>
         <source>Select a size for the lines drawn along a segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123"/>
         <source>Line color:</source>
         <translation type="unfinished">线的颜色</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="126"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127"/>
         <source>Select a color for the lines drawn along a segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="141"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="148"/>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149"/>
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3678,27 +3690,27 @@ Do you want to save your changes?</source>
         <translation>不能写入文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3024"/>
+        <location filename="../src/main/MainWindow.cpp" line="3028"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3100"/>
+        <location filename="../src/main/MainWindow.cpp" line="3104"/>
         <source>Open Document</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4436"/>
+        <location filename="../src/main/MainWindow.cpp" line="4440"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4437"/>
+        <location filename="../src/main/MainWindow.cpp" line="4441"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4546"/>
+        <location filename="../src/main/MainWindow.cpp" line="4567"/>
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4316,7 +4328,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished">上一步</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="91"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="96"/>
         <source>Cannot read main window data</source>
         <translation type="unfinished"></translation>
     </message>
