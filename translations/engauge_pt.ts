@@ -522,13 +522,9 @@ The original document can be sent as part of the error report, which increases t
 O documento original pode ser enviado como parte do relatório de erros , o que aumenta as chances de encontrar e corrigir o problema (s) . No entanto, se alguma informação é privado , em seguida, uma versão anônima do documento será enviado .</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Include original document information, otherwize anonymize the information</source>
-        <translation type="vanished">Incluir informações do documento original, otherwize anonymize as informações</translation>
+        <translation type="vanished">Incluir informações do documento original, caso contrário tornar anónima a informação</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="56"/>

@@ -487,12 +487,8 @@ The original document can be sent as part of the error report, which increases t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Include original document information, otherwize anonymize the information</source>
         <translation type="vanished">包含原始文件信息, 否则隐去该信息</translation>
     </message>
     <message>

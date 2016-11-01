@@ -515,12 +515,8 @@ The original document can be sent as part of the error report, which increases t
 Исходный документ может быть отправлен как часть отчета об ошибке, что увеличивает шансы на обнаружение и устранение проблем (ы). Однако, учитывая что информация может быть личной , версия документа будет отправлена обезличенной.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Include original document information, otherwize anonymize the information</source>
         <translation type="vanished">Включить информацию об оригинальном документе, иначе информация будет обезличена</translation>
     </message>
     <message>

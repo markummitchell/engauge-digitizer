@@ -522,13 +522,9 @@ The original document can be sent as part of the error report, which increases t
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44"/>      
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Include original document information, otherwize anonymize the information</source>
-        <translation type="vanished">Include original document information, otherwize anonymize the information</translation>
+        <translation type="vanished">Include original document information, otherwise anonymize the information</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="56"/>
