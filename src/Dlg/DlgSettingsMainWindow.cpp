@@ -166,7 +166,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_spinHighlightOpacity = new QDoubleSpinBox;
   m_spinHighlightOpacity->setRange (0, 1);
   m_spinHighlightOpacity->setSingleStep (0.1);
-  m_spinHighlightOpacity->setWhatsThis (tr ("Highligh Opacity\n\n"
+  m_spinHighlightOpacity->setWhatsThis (tr ("Highlight Opacity\n\n"
                                             "Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in "
                                             "appearance shows when the point can be selected."));
   connect (m_spinHighlightOpacity, SIGNAL (valueChanged (double)), this, SLOT (slotHighlightOpacity(double)));

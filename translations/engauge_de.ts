@@ -4445,6 +4445,11 @@ Wollen Sie die Änderungen speichern?</translation>
         <source>Always crop</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/Transformation/Transformation.cpp" line="230"/>
+        <source>Need more axis points</source>
+        <translation>Sie benötigen weitere Achse Punkte</translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>

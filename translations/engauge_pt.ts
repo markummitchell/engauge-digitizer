@@ -4860,6 +4860,11 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
         <source>Always crop</source>
         <translation>Cultura sempre</translation>
     </message>
+    <message>
+        <location filename="../src/Transformation/Transformation.cpp" line="230"/>
+        <source>Need more axis points</source>
+        <translation>Precisa de mais pontos do eixo</translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>

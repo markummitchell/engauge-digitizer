@@ -4379,6 +4379,11 @@ Do you want to save your changes?</source>
         <source>Always crop</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/Transformation/Transformation.cpp" line="230"/>
+        <source>Need more axis points</source>
+        <translation>더 축 포인트 필요</translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>
