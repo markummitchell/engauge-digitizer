@@ -354,7 +354,7 @@ El formato esperado del valor de coordenadas está determinada por la configurac
     </message>
     <message>
         <source>Ok</source>
-        <translation type="vanished">De acuerdo</translation>
+        <translation type="vanished">OK</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -427,7 +427,7 @@ El formato esperado del valor de coordenadas está determinada por la configurac
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187"/>
         <source>Ok</source>
-        <translation>De acuerdo</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191"/>
@@ -511,7 +511,7 @@ El formato esperado del valor de coordenadas está determinado por la configurac
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="170"/>
         <source>Ok</source>
-        <translation>De acuerdo</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="174"/>
@@ -634,7 +634,7 @@ En total, habrá dos puntos sobre el eje X como (x1) y (x2), y dos puntos en el 
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="115"/>
         <source>Ok</source>
-        <translation>De acuerdo</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="122"/>
@@ -672,7 +672,7 @@ En total, habrá dos puntos sobre el eje X como (x1) y (x2), y dos puntos en el 
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="151"/>
         <source>Ok</source>
-        <translation>De acuerdo</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="158"/>
@@ -693,7 +693,7 @@ En total, habrá dos puntos sobre el eje X como (x1) y (x2), y dos puntos en el 
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99"/>
         <source>Ok</source>
-        <translation>De acuerdo</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107"/>

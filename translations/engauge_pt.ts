@@ -354,7 +354,7 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     </message>
     <message>
         <source>Ok</source>
-        <translation type="vanished">Está bem</translation>
+        <translation type="vanished">OK</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -366,22 +366,22 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64"/>
         <source>Edit Axis Point</source>
-        <translation type="unfinished">Editar Ponto Axis</translation>
+        <translation>Editar Ponto Axis</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107"/>
         <source>Graph Coordinates</source>
-        <translation type="unfinished">Coordenadas Gráfico</translation>
+        <translation>Coordenadas Gráfico</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116"/>
         <source>as</source>
-        <translation type="unfinished">como</translation>
+        <translation>como</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126"/>
         <source>(</source>
-        <translation type="unfinished">(</translation>
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134"/>
@@ -390,7 +390,7 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
 For cartesian plots this is X. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished">Digite o primeiro gráfico de coordenadas do ponto do eixo .
+        <translation>Digite o primeiro gráfico de coordenadas do ponto do eixo .
 
 Para gráficos cartesianos este é X. Para gráficos polares este é o raio R.
 
@@ -399,7 +399,7 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141"/>
         <source>, </source>
-        <translation type="unfinished">,</translation>
+        <translation>,</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149"/>
@@ -408,7 +408,7 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
 For cartesian plots this is Y. For plot plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished">Introduza o segundo gráfico de coordenadas do ponto do eixo .
+        <translation>Introduza o segundo gráfico de coordenadas do ponto do eixo .
 
 Para gráficos cartesianos este é Y. Para tramas do enredo este é o ângulo Theta .
 
@@ -417,22 +417,22 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156"/>
         <source>)</source>
-        <translation type="unfinished">)</translation>
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173"/>
         <source>Number format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de número</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -440,22 +440,22 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="48"/>
         <source>Edit Curve Point(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Curva de pontos</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="90"/>
         <source>Graph Coordinates</source>
-        <translation type="unfinished">Coordenadas Gráfico</translation>
+        <translation>Coordenadas Gráfico</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="99"/>
         <source>as</source>
-        <translation type="unfinished">como</translation>
+        <translation>como</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="107"/>
         <source>(</source>
-        <translation type="unfinished">(</translation>
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="115"/>
@@ -466,12 +466,18 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entre o primeiro valor gráfico de coordenadas para ser aplicada aos pontos do gráfico.
+
+Deixe este campo em branco se nenhum valor deve ser aplicado aos pontos do gráfico.
+
+Para gráficos cartesianos esta é a coordenada X. Para gráficos polares este é o raio R.
+
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123"/>
         <source>, </source>
-        <translation type="unfinished">,</translation>
+        <translation>,</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="131"/>
@@ -482,27 +488,33 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entre o segundo valor gráfico de coordenadas para ser aplicada aos pontos do gráfico.
+
+Deixe este campo em branco se nenhum valor deve ser aplicado aos pontos do gráfico.
+
+Para gráficos cartesianos esta é a coordenada Y. Para parcelas enredo este é o ângulo Theta.
+
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139"/>
         <source>)</source>
-        <translation type="unfinished">)</translation>
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="156"/>
         <source>Number format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de número</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="170"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="174"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -605,27 +617,27 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="34"/>
         <source>Image File Import Cropping</source>
-        <translation type="unfinished"></translation>
+        <translation>Image File Import Recorte</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="71"/>
         <source>Preview</source>
-        <translation type="unfinished">Visualização</translation>
+        <translation>Visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="78"/>
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela de visualização que mostra o que parte da imagem será importada. A porção de imagem dentro da moldura retangular será importado a partir da página selecionada atualmente. O quadro pode ser movido e redimensionado arrastando as alças de canto.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="115"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="122"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -633,37 +645,37 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="43"/>
         <source>PDF File Import Cropping</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF Import File Recorte</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="77"/>
         <source>Page:</source>
-        <translation type="unfinished"></translation>
+        <translation>Página:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="82"/>
         <source>Page number that will be imported</source>
-        <translation type="unfinished"></translation>
+        <translation>Número da página que será importado</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="100"/>
         <source>Preview</source>
-        <translation type="unfinished">Visualização</translation>
+        <translation>Visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="107"/>
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela de visualização que mostra o que parte da imagem será importada. A porção de imagem dentro da moldura retangular será importado a partir da página selecionada atualmente. O quadro pode ser movido e redimensionado arrastando as alças de canto.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="151"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="158"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1124,12 @@ Reordenar curvas arrastando-os ao redor.</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128"/>
         <source>Reset Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão de reset</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129"/>
         <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Redefinir os padrões para as futuras curvas gráfico para as configurações originais.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494"/>
@@ -1372,7 +1384,9 @@ A coordenada X é na direcção horizontal, e a coordenada Y é na direcção ve
         <source>Preview window showing the currently selected cursor.
 
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela de visualização que mostra o cursor atualmente selecionado.
+
+Arraste o cursor sobre essa área para ver os efeitos das configurações atuais na forma do cursor</translation>
     </message>
     <message>
         <source>Preview window showing the currently selected cursor</source>
@@ -1453,7 +1467,7 @@ A ordem das curvas aqui não afeta a ordem no arquivo exportado. Essa ordem é d
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137"/>
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo exportado terá ponto e vírgula entre valores adjacentes, a menos que substituída por vírgulas em arquivos CSV.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141"/>
@@ -1701,7 +1715,7 @@ Controles para especificar o formato das relações durante a exportação</tran
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47"/>
         <source>Effective cursor size (pixels):</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho do cursor eficaz (pixels):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="52"/>
@@ -1750,30 +1764,30 @@ Este parâmetro é utilizado nas coordenadas na barra de status e durante a expo
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="32"/>
         <source>Grid Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Grade de exibição</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="62"/>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="66"/>
         <source>Select a color for the lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione uma cor para as linhas</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162"/>
         <source>Disable:</source>
-        <translation type="unfinished">Desativar:</translation>
+        <translation>Desativar:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="92"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished">Valor desativado.
+        <translation>Valor desativado.
 
 As linhas de eixo X são especificados usando apenas três valores de cada vez. Para a flexibilidade, quatro valores são oferecidos para que você deve escolher qual o valor é desativado. Uma vez desativada, esse valor é simplesmente atualizado como outros valores mudam</translation>
     </message>
@@ -1781,14 +1795,14 @@ As linhas de eixo X são especificados usando apenas três valores de cada vez. 
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="107"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="181"/>
         <source>Count:</source>
-        <translation type="unfinished">Contagem:</translation>
+        <translation>Contagem:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="111"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished">Número de linhas de grade X.
+        <translation>Número de linhas de grade X.
 
 O número de linhas de grade X deve ser inserido como um número inteiro maior que zero</translation>
     </message>
@@ -1796,14 +1810,14 @@ O número de linhas de grade X deve ser inserido como um número inteiro maior q
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="118"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="192"/>
         <source>Start:</source>
-        <translation type="unfinished">Começar:</translation>
+        <translation>Começar:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="122"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished">Valor da primeira linha da grade X.
+        <translation>Valor da primeira linha da grade X.
 
 O valor inicial não pode ser maior do que o valor de paragem</translation>
     </message>
@@ -1811,14 +1825,14 @@ O valor inicial não pode ser maior do que o valor de paragem</translation>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203"/>
         <source>Step:</source>
-        <translation type="unfinished">Incremento:</translation>
+        <translation>Incremento:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished">Diferença de valor entre duas linhas de grade X sucessivas.
+        <translation>Diferença de valor entre duas linhas de grade X sucessivas.
 
 O valor do passo deve ser superior a zero</translation>
     </message>
@@ -1826,14 +1840,14 @@ O valor do passo deve ser superior a zero</translation>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214"/>
         <source>Stop:</source>
-        <translation type="unfinished">Pare:</translation>
+        <translation>Pare:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished">Valor da linha de grade última X.
+        <translation>Valor da linha de grade última X.
 
 O valor parada não pode ser inferior ao valor inicial</translation>
     </message>
@@ -1842,7 +1856,7 @@ O valor parada não pode ser inferior ao valor inicial</translation>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished">Valor desativado.
+        <translation>Valor desativado.
 
 As linhas de eixo Y são especificados usando apenas três valores de cada vez. Para a flexibilidade, quatro valores são oferecidos para que você deve escolher qual o valor é desativado. Uma vez desativada, esse valor é simplesmente atualizado como outros valores mudam</translation>
     </message>
@@ -1851,7 +1865,7 @@ As linhas de eixo Y são especificados usando apenas três valores de cada vez. 
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished">Número de linhas de grade Y.
+        <translation>Número de linhas de grade Y.
 
 O número de linhas de grade Y deve ser inserido como um número inteiro maior que zero</translation>
     </message>
@@ -1860,7 +1874,7 @@ O número de linhas de grade Y deve ser inserido como um número inteiro maior q
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished">Valor da primeira linha de grelha Y.
+        <translation>Valor da primeira linha de grelha Y.
 
 O valor inicial não pode ser maior do que o valor de paragem</translation>
     </message>
@@ -1869,7 +1883,7 @@ O valor inicial não pode ser maior do que o valor de paragem</translation>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished">Diferença de valor entre duas linhas da grelha Y sucessivas.
+        <translation>Diferença de valor entre duas linhas da grelha Y sucessivas.
 
 O valor do passo deve ser superior a zero</translation>
     </message>
@@ -1878,39 +1892,39 @@ O valor do passo deve ser superior a zero</translation>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished">Valor da última linha da grade Y.
+        <translation>Valor da última linha da grade Y.
 
 O valor parada não pode ser inferior ao valor inicial</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="234"/>
         <source>Preview</source>
-        <translation type="unfinished">Visualização</translation>
+        <translation>Visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241"/>
         <source>Preview window that shows how current settings affect grid display</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela de visualização que mostra como as configurações atuais afetam exibição da grade</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305"/>
         <source>X Grid Lines</source>
-        <translation type="unfinished">X Linhas de grelha</translation>
+        <translation>X Linhas de grelha</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307"/>
         <source>Grid Lines</source>
-        <translation type="unfinished">Linhas de grade</translation>
+        <translation>Linhas de grade</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
         <source>Y Grid Lines</source>
-        <translation type="unfinished">Y Linhas de grelha</translation>
+        <translation>Y Linhas de grelha</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313"/>
         <source>Radius Grid Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Linhas de grade radius</translation>
     </message>
 </context>
 <context>
@@ -2179,50 +2193,58 @@ A localidade determina como os números são formatados. Especificamente, vírgu
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
         <source>Import cropping:</source>
-        <translation type="unfinished"></translation>
+        <translation>Importação de corte:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="120"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Import Recorte
+
+Habilita ou desabilita cultivo da imagem importada ao importar. Cortar a imagem é útil para a remoção de informações sem importância em torno de um gráfico, mas menos útil quando o gráfico já preenche a totalidade da imagem.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="132"/>
         <source>Import PDF resolution (dots per inch):</source>
-        <translation type="unfinished"></translation>
+        <translation>Importação de resolução de PDF (pontos por polegada):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation type="unfinished"></translation>
+        <translation>Import PDF resolução
+
+Importado arquivos Portable Document Format (PDF) será convertido para esse pixels de resolução em pontos por polegada (DPI), onde cada pixel é um ponto. Um valor mais alto aumenta a resolução da imagem e também pode melhorar a precisão de digitalização numérico. No entanto, um valor muito alto pode tornar a imagem tão grande que Engauge vai abrandar.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="151"/>
         <source>Maximum grid lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo de linhas de grade:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Linhas máximas de grade
+
+O número máximo de linhas da grade a ser processado. Este limite é aplicada quando o valor do passo é muito pequeno para o início e parar de valores, o que resultaria em muitas linhas de grade visual e tempo de processamento possivelmente extremamente longa (uma vez que cada linha da grade teria que ser processado)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163"/>
         <source>Highlight opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Realce opacidade:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169"/>
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacidade destaque
+
+Opacidade para ser aplicada quando o cursor está sobre um ponto de curva ou de um eixo em Escolher modo. A mudança na aparência mostra quando o ponto pode ser seleccionado.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175"/>
@@ -2260,14 +2282,16 @@ Inclui ou exclui o caminho e arquivo de extensão do nome do arquivo na barra de
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
         <source>Allow small dialogs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir que pequenos diálogos:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="201"/>
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir Diálogos Pequenas
+
+Permite que as configurações diálogos a ser feita muito pequena para que eles se encaixam em telas de computadores pequenos.</translation>
     </message>
 </context>
 <context>
@@ -2438,7 +2462,7 @@ Além dos pontos colocados com intervalos regulares, esta opção faz com que um
         <location filename="../src/Geometry/GeometryWindow.cpp" line="40"/>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="41"/>
         <source>Geometry Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela de geometria</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="42"/>
@@ -2457,7 +2481,21 @@ Y = Y coordinate of each point
 Index = Point number
 
 Distance = Distance along the curve in forward or backward direction, in either graph units or as a percentage</source>
-        <translation type="unfinished"></translation>
+        <translation>Geometria da janela
+
+Essa tabela exibe os seguintes dados de geometria para a curva selecionada:
+
+área de função = Área sob a curva, se ela é uma função
+
+Polígono área = área no interior da curva se é uma relação. Este valor só é correta se nenhuma das linhas curvas se cruzam entre si
+
+X = X coordenadas de cada ponto
+
+Y = Y coordenadas de cada ponto
+
+Índice = Ponto
+
+Distância = distância ao longo da curva na direção para frente ou para trás, tanto em unidades gráfico ou como uma percentagem</translation>
     </message>
 </context>
 <context>
@@ -2876,19 +2914,21 @@ Cria um novo documento através da importação de uma imagem com suporte para r
     <message>
         <location filename="../src/main/MainWindow.cpp" line="496"/>
         <source>Import (Image Replace)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Import (Imagem Substituir) ...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="497"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa uma nova imagem para o documento atual, substituindo a imagem existente.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="498"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Import (Imagem Substituir)
+
+Importa uma nova imagem para o documento atual. A imagem existente é substituído, e todas as curvas no documento são preservados. Esta operação é útil para aplicar os pontos de eixo e outras configurações a partir de um documento existente para uma imagem diferente.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="504"/>
@@ -2921,7 +2961,7 @@ Abre um documento existente.</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="522"/>
         <source>Closes the open document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha o documento aberto.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="523"/>
@@ -3244,19 +3284,21 @@ Eixos verificador pode revelar quaisquer erros ponto do eixo, que são de outra 
     <message>
         <location filename="../src/main/MainWindow.cpp" line="646"/>
         <source>Grid Line Display...</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha Grelha de exibição ...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="647"/>
         <source>Edit Grid Line Display settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Definições do visor Editar Linha Grelha.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="648"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações de vídeo linha de grade
+
+Linhas de grade exibidas no gráfico pode fornecer mais precisão do que o Verificador de Axis, para os gráficos distorcidos. Em um gráfico distorcida, as linhas de grade pode ser usada para ajustar os pontos de eixo para mais precisão em diferentes regiões.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="653"/>
@@ -3380,36 +3422,40 @@ Mostrar ou ocultar a barra de ferramentas do fundo</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="702"/>
         <source>Show or hide the checklist guide.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ou ocultar o guia checklist.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="703"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver Guia Checklist
+
+Mostrar ou ocultar o guia lista de verificação</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="707"/>
         <source>Geometry Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Geometria da janela</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="710"/>
         <source>Show or hide the geometry window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ou ocultar a janela de geometria.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="711"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver janela de geometria
+
+Mostrar ou ocultar a janela de geometria</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="869"/>
         <source>Zoom 1:1</source>
-        <translation type="unfinished">Zoom 1:1</translation>
+        <translation>Zoom 1:1</translation>
     </message>
     <message>
         <source>Show or hide the checklist guide toolbar.</source>
@@ -3506,19 +3552,21 @@ Mostrar ou ocultar as dicas de ferramentas</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="752"/>
         <source>Grid Lines</source>
-        <translation type="unfinished">Linhas de grade</translation>
+        <translation>Linhas de grade</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="755"/>
         <source>Show or hide grid lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ou ocultar linhas de grade.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="756"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>Veja as linhas de grade
+
+Mostrar ou ocultar linhas de grade que são adicionados para ajustes precisos dos pontos de machados, que pode melhorar a precisão em gráficos distorcidos</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="761"/>
@@ -4009,7 +4057,7 @@ Quando pressionado, este botão Imprime todos os pontos digitalizados e linhas p
         <location filename="../src/main/MainWindow.cpp" line="1642"/>
         <location filename="../src/main/MainWindow.cpp" line="1810"/>
         <source>from directory</source>
-        <translation type="unfinished"></translation>
+        <translation>do diretório</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1594"/>
@@ -4095,7 +4143,7 @@ Você deseja salvar as alterações?</translation>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="123"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="217"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo ponto de eixo não pode ser na mesma posição da tela como um ponto de eixo existente</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="129"/>
@@ -4512,7 +4560,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="17"/>
         <source>Semicolons</source>
-        <translation type="unfinished"></translation>
+        <translation>Semicolons</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="20"/>
@@ -4648,17 +4696,17 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="26"/>
         <source>CurveName:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da curva:</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="27"/>
         <source>FunctionArea:</source>
-        <translation type="unfinished"></translation>
+        <translation>Área função:</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="28"/>
         <source>PolygonArea:</source>
-        <translation type="unfinished"></translation>
+        <translation>Área polígono:</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="29"/>
@@ -4669,22 +4717,22 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="30"/>
         <source>Y</source>
-        <translation type="unfinished">Y</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="31"/>
         <source>Index</source>
-        <translation type="unfinished">Índice</translation>
+        <translation>Índice</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="32"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="33"/>
         <source>Percent</source>
-        <translation type="unfinished"></translation>
+        <translation>Por cento</translation>
     </message>
     <message>
         <location filename="../src/Point/PointStyle.cpp" line="146"/>
@@ -4740,12 +4788,12 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
     <message>
         <location filename="../src/main/main.cpp" line="237"/>
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove todas as configurações armazenadas, incluindo posições de janela. Usado quando o Windows iniciar-se fora da tela</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="239"/>
         <source>Show a list of available styles that can be used with the -style command</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra uma lista de estilos disponíveis que pode ser utilizado com o comando de estilo</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="241"/>
@@ -4775,42 +4823,42 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
         <source>Cannot read grid display data</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível ler dados de exibição de grade</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="26"/>
         <source>Export Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportação de imagens</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="27"/>
         <source>Cannot export file</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível exportar arquivos</translation>
     </message>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="31"/>
         <source>Cannot read script file</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível ler arquivo de script</translation>
     </message>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="33"/>
         <source>from directory</source>
-        <translation type="unfinished"></translation>
+        <translation>do diretório</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="22"/>
         <source>No cropping</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem cortar</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="23"/>
         <source>Crop pdf files with multiple pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos cultura pdf com várias páginas</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="24"/>
         <source>Always crop</source>
-        <translation type="unfinished"></translation>
+        <translation>Cultura sempre</translation>
     </message>
 </context>
 <context>
