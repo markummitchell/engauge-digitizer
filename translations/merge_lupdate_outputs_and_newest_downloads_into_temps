@@ -1,8 +1,13 @@
 lconvert -i engauge_ar.ts -i for_translation_engauge-digitizer_engauge_ents_ar.ts -o temp_ar.ts
+lconvert -i engauge_cs.ts -i for_translation_engauge-digitizer_engauge_ents_cs.ts -o temp_cs.ts
 lconvert -i engauge_de.ts -i for_translation_engauge-digitizer_engauge_ents_de.ts -o temp_de.ts
 lconvert -i engauge_es.ts -i for_translation_engauge-digitizer_engauge_ents_es.ts -o temp_es.ts
 lconvert -i engauge_fr.ts -i for_translation_engauge-digitizer_engauge_ents_fr.ts -o temp_fr.ts
+lconvert -i engauge_hi.ts -i for_translation_engauge-digitizer_engauge_ents_hi.ts -o temp_hi.ts
 lconvert -i engauge_it.ts -i for_translation_engauge-digitizer_engauge_ents_it.ts -o temp_it.ts
+lconvert -i engauge_ja.ts -i for_translation_engauge-digitizer_engauge_ents_ja.ts -o temp_ja.ts
+lconvert -i engauge_kk.ts -i for_translation_engauge-digitizer_engauge_ents_kk.ts -o temp_kk.ts
+lconvert -i engauge_ko.ts -i for_translation_engauge-digitizer_engauge_ents_ko.ts -o temp_ko.ts
 lconvert -i engauge_pt.ts -i for_translation_engauge-digitizer_engauge_ents_pt.ts -o temp_pt.ts
 lconvert -i engauge_ru.ts -i for_translation_engauge-digitizer_engauge_ents_ru.ts -o temp_ru.ts
 lconvert -i engauge_zh.ts -i for_translation_engauge-digitizer_engauge_ents_zh.ts -o temp_zh.ts
