@@ -18,6 +18,7 @@ def main ():
         merge (sys.argv [1], sys.argv [2], sys.argv [3])
 
 def merge (in1, in2, out):
+    # Read input files
     tree1 = etree.parse (in1)
     tree2 = etree.parse (in2)
     root1 = tree1.getroot ()
@@ -31,6 +32,23 @@ def merge (in1, in2, out):
         translation = translations [0].text
         if translation is not None:
             downloadedSourcesTranslations [source] = translation
-    print (downloadedSourcesTranslations)
+
+    # Merge into first ts file
+    recurseOutput (root1, downloadedSourcesTranslations)
+
+    # Output
+    tree1.write (out)
+
+def recurseOutput (node1, downloadedSourcesTranslations):
+    for child in node1:
+        recurseOutput (child, downloadedSourcesTranslations)
+        if child.tag == "message":
+            # Look for source and translation tags
+            source = child.find ('.//source')
+            translation = child.find ('.//translation')
+
+            # Update translation if there is a newer one
+            if source.text in downloadedSourcesTranslations:
+                translation.text = downloadedSourcesTranslations [source.text]
     
 main ()    
