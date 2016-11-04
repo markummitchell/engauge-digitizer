@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE TS>
 <TS language="cs_CZ" version="2.1">
 <context>
     <name>ChecklistGuide</name>
@@ -5,7 +6,7 @@
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="20" />
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="21" />
         <source>Checklist Guide</source>
-        <translation type="unfinished" />
+        <translation>Kontrolního seznam</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="22" />
@@ -14,7 +15,12 @@
 This box contains a checklist of steps suggested by the Checklist Guide Wizard. Following these steps should produce a set of digitized points in an output file.
 
 To run the Checklist Guide Wizard when an image file is imported, select the Help / Checklist Wizard menu option.</source>
-        <translation type="unfinished" />
+        <translation>Kontrolní seznam
+
+Tento oddíl obsahuje kontrolní seznam kroků doporučených průvodcem kontrolním seznamem.
+Následování těchto kroků byste měli být schopni vytvořit sadu digitalizovaných bodů ve výstupním souboru.
+
+Ke spuštění průvodce kontrolním seznamem, pokud je již obrázek importován, zvolte menu Nápověda / Průvodce kontrolním seznamem.</translation>
     </message>
 </context>
 <context>
@@ -22,7 +28,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="15" />
         <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color="red"&gt;Why does the imported image look different?&lt;/font&gt; After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.&lt;/p&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;p&gt;Kontrolní seznam byl vytvořen.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color="red"&gt;Proč vypadá importovaný obrázek odlišně?&lt;/font&gt; Po importu je na pozadí zobrazen filtrovaný obrázek. Tento obrázek je vytvořen z originálního v závislosti na parametrech v Nastavení / Barevný filtr. Pokud byly parametry správně nastaveny, nedůležité informace (pomocné osy, barevná pozadí) byly ve filtrovaném obrázku odebrány a může být jednoduše provedena automatická extrakce dat. Pokud byly z obrázku odstraněny důležité informace, parametry mohou být upraveny v Nastavení / Barevný filtr, případně může být zobrazen původní obrázek pomocí menu Zobrazení / Pozadí / Zobrazit originální obrázek.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -30,37 +36,37 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="21" />
         <source>Curve name. Empty if unused.</source>
-        <translation type="unfinished" />
+        <translation>Název křivky. Pokud není použita, necte prázdné.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="22" />
         <source>Draw lines between points in each curve.</source>
-        <translation type="unfinished" />
+        <translation>Propojit body každé křivky úsečkami .</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="23" />
         <source>Draw points in each curve, without lines between the points.</source>
-        <translation type="unfinished" />
+        <translation>Vytvořit body na všech křivkách, bez propojení úsečkami</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="25" />
         <source>&lt;p&gt;What are the names of the curves that are to be digitized? At least one entry is required.&lt;/p&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;p&gt;Jak se jmenují křivky, které mají být digitalizovány? Alespoň jeden název je vyžadován.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="44" />
         <source>&lt;p&gt;How are those curves drawn?&lt;/p&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;p&gt;Jak jsou tyto křivky nakresleny?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="46" />
         <source>With lines (with or without points)</source>
-        <translation type="unfinished" />
+        <translation>S úsečkami (s nebo bez bodů)</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="48" />
         <source>With points only (no lines between points)</source>
-        <translation type="unfinished" />
+        <translation>Pouze s body (bez úseček mezi body)</translation>
     </message>
 </context>
 <context>
@@ -68,7 +74,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="15" />
         <source>&lt;p&gt;Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.&lt;/p&gt;&lt;p&gt;This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.&lt;/p&gt;&lt;p&gt;New users are encouraged to use this wizard.&lt;/p&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;p&gt;Engauge umožňuje převést obrázkové grafy na data, v případě že tyto grafy mají definovány osy a/nebo mřížku pro definování souřadnic.&lt;/p&gt;&lt;p&gt;Tento průvodce vytvoří kontrolní seznam kroků, které mohou posloužit jako užitečný pomocník. Následováním těchto kroků dostanete digitalizovaná data v podobě exportovaného souboru. Průvodce taktéž poskytuje krátké shrnutí nejužitečnějších vychytávek Engauge.&lt;/p&gt;&lt;p&gt;Novým uživatelům je doporučeno využívat tohoto průvodce.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -76,27 +82,27 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
         <source>Checklist Guide Wizard</source>
-        <translation type="unfinished" />
+        <translation>Průvodce kontrolním seznamem</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62" />
         <source>Curves</source>
-        <translation type="unfinished" />
+        <translation>Křivky</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
-        <translation type="unfinished" />
+        <translation>Pro digitalizaci grafu postupujte podle tohoto kontrolního seznamu. Každý krok bude po svém dokončení označen jako hotový.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
         <source>The coordinates are defined by creating axis points:</source>
-        <translation type="unfinished" />
+        <translation>Souřadnice se definují pomocí vytvoření bodů na osách.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
         <source>Add first of three axis points.</source>
-        <translation type="unfinished" />
+        <translation>Zadejte první ze tří osových bodů.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
@@ -105,26 +111,26 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
         <source>Click on</source>
-        <translation type="unfinished" />
+        <translation>Klikněte na</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
         <source>for &lt;b&gt;Axis Points&lt;/b&gt; mode</source>
-        <translation type="unfinished" />
+        <translation>pro mód &lt;b&gt;Osové body&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
-        <translation type="unfinished" />
+        <translation>Klikněte na dílek na ose nebo na křížení os s uvedenou hodnotou souřadnice</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
         <source>Enter the coordinates of the axis point</source>
-        <translation type="unfinished" />
+        <translation>Zadejte souřadnice osového bodu</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
@@ -133,144 +139,144 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213" />
         <source>Click on Ok</source>
-        <translation type="unfinished" />
+        <translation>Klikněte na OK</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
         <source>Add second of three axis points.</source>
-        <translation type="unfinished" />
+        <translation>Zadejte druhý ze tří osových bodů.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
-        <translation type="unfinished" />
+        <translation>Klikněte na dílek na ose nebo na křížení os s uvedenou hodnotou souřadnice, mimo již zadaný osový bod</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
         <source>Add third of three axis points.</source>
-        <translation type="unfinished" />
+        <translation>Zadejte třetí ze tří osových bodů.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
-        <translation type="unfinished" />
+        <translation>Klikněte na dílek na ose nebo na křížení os s uvedenou hodnotou souřadnice, mimo již zadané osové body</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
         <source>Points are digitized along each curve:</source>
-        <translation type="unfinished" />
+        <translation>Body jsou digitalizovány podél každé křivky:</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149" />
         <source>Add points for curve</source>
-        <translation type="unfinished" />
+        <translation>Přidat body pro křivku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
         <source>for &lt;b&gt;Segment Fill&lt;/b&gt; mode</source>
-        <translation type="unfinished" />
+        <translation>pro mód &lt;b&gt;Vyplnění segmentů&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>Select curve</source>
-        <translation type="unfinished" />
+        <translation>Vyberte křivku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>in the drop-down list</source>
-        <translation type="unfinished" />
+        <translation>v roletovém menu</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
-        <translation type="unfinished" />
+        <translation>Najeďte kurzorem nad křivku. Pokud se křivka nezvýrazní upravte nastavení &lt;b&gt;Barevného Filtru&lt;/b&gt; pro tuto křivku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159" />
         <source>Move the cursor over the curve again. When the &lt;b&gt;Segment Fill&lt;/b&gt; line appears, click on it to generate points</source>
-        <translation type="unfinished" />
+        <translation>Opětovně najeďte kurzorem nad křivku. Jakmile se křivka &lt;b&gt;zvýrazní&lt;/b&gt;, klikněte pro vygenerování bodů.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
         <source>for &lt;b&gt;Point Match&lt;/b&gt; mode</source>
-        <translation type="unfinished" />
+        <translation>pro mód &lt;b&gt;Shoda bodů&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
-        <translation type="unfinished" />
+        <translation>Najeďte kurzorem nad bod na křivce. Pokud kurzor nezmění barvu upravte nastavení &lt;b&gt;Barevného Filtru&lt;/b&gt; pro tuto křivku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
-        <translation type="unfinished" />
+        <translation>Opět najeďte kurzorem nad bod na křivce. Pro spojování bodů klikněte na tento bod.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
-        <translation type="unfinished" />
+        <translation>Engauge navrhne vhodný bod. Pro potvrzení stiskněte na klávesnici pravou šipku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
         <source>The previous step repeats until you select a different mode</source>
-        <translation type="unfinished" />
+        <translation>Předchozí krok se bude opakovat, dokud nezvolíte odlišný mód</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179" />
         <source>The digitized points can be exported</source>
-        <translation type="unfinished" />
+        <translation>Digitalizované body mohou být exportovány</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>Export the points to a file</source>
-        <translation type="unfinished" />
+        <translation>Exportovat body do souboru</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183" />
         <source>Select menu option &lt;b&gt;File / Export&lt;/b&gt;</source>
-        <translation type="unfinished" />
+        <translation>V menu vyberte volbu &lt;b&gt;Soubor / Export&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184" />
         <source>Enter the file name</source>
-        <translation type="unfinished" />
+        <translation>Zadejte jméno souboru</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Congratulations!</source>
-        <translation type="unfinished" />
+        <translation>Gratulujeme!</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
-        <translation type="unfinished" />
+        <translation>Nápověda - pozadí lze přepnout mezi původním a filtrovaným obrázkem.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
         <source>Select menu option &lt;b&gt;View / Background / Show Original Image&lt;/b&gt; to see the original image</source>
-        <translation type="unfinished" />
+        <translation>V menu vyberte volbu &lt;b&gt; Zobrazení / Pozadí / Zobrazit původní obrázek &lt;/b&gt; pro zobrazení originálního obrázku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
         <source>Select menu option &lt;b&gt;View / Background / Show Filtered Image&lt;/b&gt; to see the image from &lt;b&gt;Color Filter&lt;/b&gt;</source>
-        <translation type="unfinished" />
+        <translation>V menu vyberte volbu &lt;b&gt; Zobrazení / Pozadí / Zobrazit filtrovaný obrázek &lt;/b&gt; pro zobrazení odfiltrovaného obrázku</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option &lt;b&gt;Settings / Color Filter&lt;/b&gt;</source>
-        <translation type="unfinished" />
+        <translation>V menu vyberte volbu &lt;b&gt; Nastavení / Barevný filtr&lt;/b&gt; </translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
-        <translation type="unfinished" />
+        <translation>Zvolte filtrační metodu. Odstín je nejlepší, pokud mají křivky různé barvy</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
-        <translation type="unfinished" />
+        <translation>Posouvejte zeleným tlačítkem dopředu a dozadu, dokud nebude křivka snadno viditelná v okně náhledu</translation>
     </message>
 </context>
 <context>
@@ -278,22 +284,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="15" />
         <source>About Engauge</source>
-        <translation type="unfinished" />
+        <translation>O Engauge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="18" />
         <source>&lt;p&gt;Engauge Digitizer&lt;/p&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;p&gt;Engauge Digitizer&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="19" />
         <source>Version</source>
-        <translation type="unfinished" />
+        <translation>Verze</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
         <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished" />
+        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer je open source nástroj pro jednoduchou extrakci číselných dat z obrázků grafů. Tento proces může být nazýván jako "Inverzní tvorba grafu". Pokud použijete "engauge" na dokument, převedete body na čísla.&lt;/p&gt;&lt;p&gt;Tato aplikace je zdarma a smíte ji dále šířit za podmínek licence GNU General Public License verze 2, případně novější verze.&lt;/p&gt;&lt;p&gt;Engauge Digitizer neposkytuje absolutně žádnou záruku.&lt;/p&gt;&lt;p&gt;Pro více detailů čtěte přiložený LICENSE soubor.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Linky&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Domovská stránka projektu&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Fórum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Linky&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Stránka projektu&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Linky&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Stránka projektu&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>
@@ -301,22 +307,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
         <source>Edit Axis Point</source>
-        <translation type="unfinished" />
+        <translation>Upravit osový bod</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
         <source>Graph Coordinates</source>
-        <translation type="unfinished" />
+        <translation>Souřadnice grafu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
         <source>as</source>
-        <translation type="unfinished" />
+        <translation>jako</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
         <source>(</source>
-        <translation type="unfinished" />
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
@@ -325,12 +331,16 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 For cartesian plots this is X. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Zadejte první souřadnici osového bodu. 
+
+Pro kartézský graf jde o hodnotu X, pro polární jde o rádius R.
+
+Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
         <source>, </source>
-        <translation type="unfinished" />
+        <translation>,</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
@@ -339,27 +349,31 @@ The expected format of the coordinate value is determined by the locale setting.
 For cartesian plots this is Y. For plot plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Zadejte druhou souřadnici osového bodu.
+
+Pro kartézský graf jde o hodnotu y, pro polární jde o úhel Theta.
+
+Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
         <source>)</source>
-        <translation type="unfinished" />
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Formát čísla</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -367,22 +381,22 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="48" />
         <source>Edit Curve Point(s)</source>
-        <translation type="unfinished" />
+        <translation>Upravit bod(y) na křivce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="90" />
         <source>Graph Coordinates</source>
-        <translation type="unfinished" />
+        <translation>Souřadnice grafu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="99" />
         <source>as</source>
-        <translation type="unfinished" />
+        <translation>jako</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="107" />
         <source>(</source>
-        <translation type="unfinished" />
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="115" />
@@ -393,12 +407,18 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Zadejte první souřadnici grafu, která bude použita pro body grafu, 
+
+Pokud hodnota neexistuje, nechte toto pole prázdné.
+
+Pro kartézský graf jde o hodnotu X, pro polární jde o rádius R.
+
+Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
         <source>, </source>
-        <translation type="unfinished" />
+        <translation>,</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="131" />
@@ -409,27 +429,33 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Zadejte druhou souřadnici grafu, která bude použita pro body grafu, 
+
+Pokud hodnota neexistuje, nechte toto pole prázdné.
+
+Pro kartézský graf jde o hodnotu X, pro polární jde o rádius R.
+
+Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />
         <source>)</source>
-        <translation type="unfinished" />
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="156" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Formát čísla</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="170" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="174" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -437,29 +463,31 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="33" />
         <source>Error Report</source>
-        <translation type="unfinished" />
+        <translation>Hlášení chyb</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="36" />
         <source>An unrecoverable error has occurred. Would you like to send an error report to the Engauge developers?
 
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
-        <translation type="unfinished" />
+        <translation>V aplikaci došlo k neočekávané chybě, přes kterou nelze pokračovat a aplikace bude ukončena. Chcete poslat hlášení o této chybě vývojářům Engauge?
+
+Dokument, při kterém došlo k pádu aplikace může být přiložen ke hlášení chyby, což zvyšuje pravděpodobnost, že problém(y) budou nalezeny a opraveny. Nicméně, pokud některé informace jsou soukromé, bude odeslána anonymní verze dokumentu.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="44" />
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished" />
+        <translation>Přiložit originální dokument, jinak anonymizovat informace</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="56" />
         <source>Send</source>
-        <translation type="unfinished" />
+        <translation>Odeslat</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReport.cpp" line="61" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -467,29 +495,31 @@ The original document can be sent as part of the error report, which increases t
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="18" />
         <source>Import Advanced</source>
-        <translation type="unfinished" />
+        <translation>Pokročilý import</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49" />
         <source>Coordinate System Count:</source>
-        <translation type="unfinished" />
+        <translation>Počet souřadných systémů:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="55" />
         <source>Coordinate System Count
 
 Specifies the total number of coordinate systems that will be used in the imported image. There can be one or more graphs in the image, and each graph can have one or more coordinate systems. Each coordinate system is defined by a pair of coordinate axes.</source>
-        <translation type="unfinished" />
+        <translation>Počet souřadných systémů
+
+Specifikuje celkový počet souřadných systémů, které budou použity v importovaném obrázku. V obrázku může být jeden či více grafů a každý graf může mít jeden či více souřadných systémů. Každý souřadný systém je definován párem os.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63" />
         <source>Axes Points Count:</source>
-        <translation type="unfinished" />
+        <translation>Počet osových bodů:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="66" />
         <source>3 points</source>
-        <translation type="unfinished" />
+        <translation>3 body</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="68" />
@@ -498,12 +528,16 @@ Specifies the total number of coordinate systems that will be used in the import
 This setting is always used when importing images in non-advanced mode.
 
 In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
-        <translation type="unfinished" />
+        <translation>Tři osové body definující souřadný systém. Každý bude mít X a Y souřadnici.
+
+Toto nastavení je použito při každém ne-pokročilém importu.
+
+Celkově je potřeba zadat tři body (X1, Y1), (X2, Y2) a (X3, Y3).</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="76" />
         <source>4 points</source>
-        <translation type="unfinished" />
+        <translation>4 body</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="77" />
@@ -512,7 +546,11 @@ In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
 This setting is required when the x coordinate of the y axis is unknown, and/or the y coordinate of the x axis is unknown.
 
 In total, there will be two points on the x axis as (x1) and (x2), and two points on the y axis as (y1) and (y2).</source>
-        <translation type="unfinished" />
+        <translation>Čtyři osové body definující souřadný systém. Každý bude mít X nebo Y souřadnici.
+
+Toto nastavení je potřebné když je neznámá X-ová souřadnice Y-ové osy nebo Y-ová souřadnice X-ové osy.
+
+Celkově je potřeba zadat dva body na ose X (X1) a (X2) a dva body na ose Y (Y1) a (Y2).</translation>
     </message>
 </context>
 <context>
@@ -520,27 +558,27 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="34" />
         <source>Image File Import Cropping</source>
-        <translation type="unfinished" />
+        <translation>Ořez importovaného obrázku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="71" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="78" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, která část obrázku bude importována. Jedná se o část obrázku uvnitř čtverhranného rámu na aktuálně vybrané stránce. Rám může být posunut a může být změněna jeho velikost pomocí rohů rámu.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="115" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="122" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -548,37 +586,37 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="43" />
         <source>PDF File Import Cropping</source>
-        <translation type="unfinished" />
+        <translation>Ořez importovaného PDF</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="77" />
         <source>Page:</source>
-        <translation type="unfinished" />
+        <translation>Stránka:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="82" />
         <source>Page number that will be imported</source>
-        <translation type="unfinished" />
+        <translation>Číslo stránky, která bude importována</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="100" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="107" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, která část obrázku bude importována. Jedná se o část obrázku uvnitř čtverhranného rámu na aktuálně vybrané stránce. Rám může být posunut a může být změněna jeho velikost pomocí rohů rámu.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="151" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="158" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -586,7 +624,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgRequiresTransform.cpp" line="16" />
         <source>can only be performed after three axis points have been created, so the coordinates are defined</source>
-        <translation type="unfinished" />
+        <translation>může být použito až po definici souřadného systému</translation>
     </message>
 </context>
 <context>
@@ -594,12 +632,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation>Zrušit</translation>
     </message>
 </context>
 <context>
@@ -607,7 +645,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39" />
         <source>Axes Checker</source>
-        <translation type="unfinished" />
+        <translation>Kontrola os</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="63" />
@@ -617,52 +655,52 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="70" />
         <source>Do not show</source>
-        <translation type="unfinished" />
+        <translation>Nezobrazovat</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="71" />
         <source>Never show axes checker.</source>
-        <translation type="unfinished" />
+        <translation>Nikdy nezobrazovat kontrolu os.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="74" />
         <source>Show for a number of seconds</source>
-        <translation type="unfinished" />
+        <translation>Zobrazit na několik vteřin</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="75" />
         <source>Show axes checker for a number of seconds after changing axes points.</source>
-        <translation type="unfinished" />
+        <translation>Zobrazit kontrolu os na několik vteřin po změně osových bodů</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85" />
         <source>Show always</source>
-        <translation type="unfinished" />
+        <translation>Zobrazovat vždy</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="86" />
         <source>Always show axes checker.</source>
-        <translation type="unfinished" />
+        <translation>Vždy zobrazovat kontrolu os.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="95" />
         <source>Line color:</source>
-        <translation type="unfinished" />
+        <translation>Barva úsečky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="99" />
         <source>Select a color for the highlight lines drawn at each axis point</source>
-        <translation type="unfinished" />
+        <translation>Zvolte barvu zvýrazněných čar kreslených v jednotlivých osových bodech</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="153" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="160" />
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje kontrolu os.</translation>
     </message>
 </context>
 <context>
@@ -670,29 +708,31 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37" />
         <source>Color Filter</source>
-        <translation type="unfinished" />
+        <translation>Barevný filtr</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="62" />
         <source>Curve Name:</source>
-        <translation type="unfinished" />
+        <translation>Název křivky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66" />
         <source>Name of the curve that is currently selected for editing</source>
-        <translation type="unfinished" />
+        <translation>Název křivky, která je aktuálně vybrána pro úpravy</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70" />
         <source>Filter mode:</source>
-        <translation type="unfinished" />
+        <translation>Mód filtrace:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="74" />
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
-        <translation type="unfinished" />
+        <translation>Filtruje originální obrázek na černobílý pomocí parametru Intentity, aby došlo ke skrytí nepotřebných a zvýraznění důležitých informací.
+
+Hodnota Intenzity je počítána z hodnot červené, zelené a modré komponenty jako odmocnina z (Č x Č + Z x Z + M x M)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="82" />
@@ -723,17 +763,17 @@ The Value component is also called the Lightness.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="122" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="129" />
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje originální obrázek.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="144" />
         <source>Filter Parameter Histogram Profile</source>
-        <translation type="unfinished" />
+        <translation>Histogram filtrovacího parametru</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="152" />
@@ -753,12 +793,12 @@ The Value component is also called the Lightness.</source>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
         <source>Coordinates</source>
-        <translation type="unfinished" />
+        <translation>Souřadnice</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="215" />
         <source>Date/Time:</source>
-        <translation type="unfinished" />
+        <translation>Datum/Čas:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="225" />
@@ -777,30 +817,32 @@ Setting the format to an empty value results in just the date portion appearing 
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="244" />
         <source>Coordinates Types</source>
-        <translation type="unfinished" />
+        <translation>Typ souřadného systému</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249" />
         <source>Polar</source>
-        <translation type="unfinished" />
+        <translation>Polární</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
         <source>R</source>
-        <translation type="unfinished" />
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="251" />
         <source>Cartesian (X, Y)</source>
-        <translation type="unfinished" />
+        <translation>Kartézský (X, Y)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
-        <translation type="unfinished" />
+        <translation>Vyberte kartézské souřadnice
+
+Budou použity X a Y souřadnice</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="258" />
@@ -809,30 +851,34 @@ The X and Y coordinates will be used</source>
 The Theta and R coordinates will be used.
 
 Polar coordinates are not allowed with log scale for Theta</source>
-        <translation type="unfinished" />
+        <translation>Vyberte polární souřadnice
+
+Budou použity honoty R a Theta.
+
+U polárních souřadnic není povolenou použití logaritmického měřítka pro Thetu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="277" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="312" />
         <source>Scale:</source>
-        <translation type="unfinished" />
+        <translation>Měřítko:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315" />
         <source>Linear</source>
-        <translation type="unfinished" />
+        <translation>Lineární</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
-        <translation type="unfinished" />
+        <translation>Definuje lineární měřítko pro hodnotu X nebo Theta</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
         <source>Log</source>
-        <translation type="unfinished" />
+        <translation>Logaritmické</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="286" />
@@ -841,47 +887,55 @@ Polar coordinates are not allowed with log scale for Theta</source>
 Log scale is not allowed if there are negative coordinates.
 
 Log scale is not allowed for the Theta coordinate.</source>
-        <translation type="unfinished" />
+        <translation>Definuje logaritmické měřítko pro hodnoty X nebo Theta.
+
+Logaritmické měřítko není povolené pro záporné hodnoty
+
+Logaritmické měřítko není povolené pro hodnoty Theta</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="292" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="337" />
         <source>Units:</source>
-        <translation type="unfinished" />
+        <translation>Jednotky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
         <source>Specifies linear scale for the Y or R coordinate</source>
-        <translation type="unfinished" />
+        <translation>Definuje lineární měřítko pro hodnotu Y nebo R</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Origin radius value:</source>
-        <translation type="unfinished" />
+        <translation>Hodnota počátku poloměru:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
-        <translation type="unfinished" />
+        <translation>Definuje logaritmické měřítko pro hodnoty Y nebo R.
+
+Logaritmické měřítko není povolené pro záporné hodnoty</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
-        <translation type="unfinished" />
+        <translation>Definuje počáteční hodnotu poloměru.
+
+Běžně je tato hodnota rovna 0, ale v některých případech může být použita nenulová hodnota (např. když se radiální jednotku tvoří decibely)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="354" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="361" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje souřadný systém.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="670" />
@@ -910,12 +964,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="910" />
         <source>X</source>
-        <translation type="unfinished" />
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
         <source>Y</source>
-        <translation type="unfinished" />
+        <translation>Y</translation>
     </message>
 </context>
 <context>
@@ -923,36 +977,40 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32" />
         <source>Curve Add/Remove</source>
-        <translation type="unfinished" />
+        <translation>Přidat/Odebrat křivku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65" />
         <source>Add...</source>
-        <translation type="unfinished" />
+        <translation>Přidat...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="66" />
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
-        <translation type="unfinished" />
+        <translation>Přidá novou křivku do seznamu křivek. Název křivky může být změněn v seznamu křivek.
+
+Název každé křivky musí být jedinečný</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72" />
         <source>Remove</source>
-        <translation type="unfinished" />
+        <translation>Odebrat</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="73" />
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
-        <translation type="unfinished" />
+        <translation>Odebere aktuálně vybranou křivku ze seznamu křivek.
+
+Vždy musí existovat alespoň jedna křivka.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="85" />
         <source>Curve Names:</source>
-        <translation type="unfinished" />
+        <translation>Názvy křivek:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="97" />
@@ -961,48 +1019,52 @@ There must always be at least one curve</source>
 Click on a curve name to edit it. Each curve name must be unique.
 
 Reorder curves by dragging them around.</source>
-        <translation type="unfinished" />
+        <translation>Seznam křivek patřících do tohoto dokumentu.
+
+Pro úpravu názvu křivky na požadovaný název klikněte. Název křivky musí být jedinečný.
+
+Pořadí křivek je možno měnit přetažením.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Uložit jako výchozí</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="124" />
         <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="unfinished" />
+        <translation>Uloží názvy křivek jako výchozí pro budoucí grafy.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128" />
         <source>Reset Default</source>
-        <translation type="unfinished" />
+        <translation>Resetovat výchozí</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="unfinished" />
+        <translation>Resetuje názvy křivek pro budoucí grafy na původní hodnoty.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494" />
         <source>Removing this curve will also remove</source>
-        <translation type="unfinished" />
+        <translation>Odebrání této křivky také odebere</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="496" />
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="501" />
         <source>points. Continue?</source>
-        <translation type="unfinished" />
+        <translation>body. Pokračovat?</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="499" />
         <source>Removing these curves will also remove</source>
-        <translation type="unfinished" />
+        <translation>Odebrání těchto křivek také odebere</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="505" />
         <source>Curves With Points</source>
-        <translation type="unfinished" />
+        <translation>Křivky s body</translation>
     </message>
 </context>
 <context>
@@ -1010,52 +1072,56 @@ Reorder curves by dragging them around.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="61" />
         <source>Curve Properties</source>
-        <translation type="unfinished" />
+        <translation>Vlastnosti křivek</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88" />
         <source>Curve Name:</source>
-        <translation type="unfinished" />
+        <translation>Název křivky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92" />
         <source>Name of the curve that is currently selected for editing</source>
-        <translation type="unfinished" />
+        <translation>Název křivky, která je aktuálně vybrána pro úpravy</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="102" />
         <source>Line</source>
-        <translation type="unfinished" />
+        <translation>Úsečka</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108" />
         <source>Width:</source>
-        <translation type="unfinished" />
+        <translation>Délka:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished" />
+        <translation>Zvolte délku úseček vykreslených mezi body.
+
+Toto lze aplikovat pouze na křivky grafu. Úsečky mezi osovými body se nikdy nevykreslují.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118" />
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203" />
         <source>Color:</source>
-        <translation type="unfinished" />
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished" />
+        <translation>Zvolte barvu úseček vykreslených mezi body.
+
+Toto lze aplikovat pouze na křivky grafu. Úsečky mezi osovými body se nikdy nevykreslují.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as:</source>
-        <translation type="unfinished" />
+        <translation>Spojit jako:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -1075,32 +1141,32 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="156" />
         <source>Point</source>
-        <translation type="unfinished" />
+        <translation>Bod</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162" />
         <source>Shape:</source>
-        <translation type="unfinished" />
+        <translation>Tvar:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="166" />
         <source>Select a shape for the points</source>
-        <translation type="unfinished" />
+        <translation>Vyberte tvar bodů</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182" />
         <source>Radius:</source>
-        <translation type="unfinished" />
+        <translation>Poloměr:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="186" />
         <source>Select a radius, in pixels, for the points</source>
-        <translation type="unfinished" />
+        <translation>Vyberte poloměr bodů, v pixelech.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="191" />
         <source>Line width:</source>
-        <translation type="unfinished" />
+        <translation>Délka úsečky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195" />
@@ -1112,7 +1178,7 @@ A larger width results in a thicker line, with the exception of a value of zero 
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="207" />
         <source>Select a color for the line used to draw the point shapes</source>
-        <translation type="unfinished" />
+        <translation>Zvolte barvu čar použitých k vykreslení bodu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="218" />
@@ -1126,14 +1192,16 @@ If the visible settings are for the Nth graph curve in the curve list, then they
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="232" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="239" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje body a úsečky vybrané křivky.
+
+X souřadnice reprezentuje horizontální směr a Y vertikálná. Funkce může mít pouze jednu hodnotu Y pro jakoukoliv hodnotu X, ale spojení může mít více hodnot Y pro jednu hodnotu X</translation>
     </message>
 </context>
 <context>
@@ -1141,79 +1209,81 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41" />
         <source>Digitize Curve</source>
-        <translation type="unfinished" />
+        <translation>Digitalizovat křivku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65" />
         <source>Cursor</source>
-        <translation type="unfinished" />
+        <translation>Kurzor</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73" />
         <source>Type:</source>
-        <translation type="unfinished" />
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76" />
         <source>Standard cross</source>
-        <translation type="unfinished" />
+        <translation>Standardní kříž</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="77" />
         <source>Selects the standard cross cursor</source>
-        <translation type="unfinished" />
+        <translation>Vyberte kurzor standardního kříže</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
         <source>Custom cross</source>
-        <translation type="unfinished" />
+        <translation>Vlastní kříž</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="82" />
         <source>Selects a custom cursor based on the settings selected below</source>
-        <translation type="unfinished" />
+        <translation>Zvolí vlastní kříž dle nastavení vybraných níže</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="86" />
         <source>Size (pixels):</source>
-        <translation type="unfinished" />
+        <translation>Velikost (pixely):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95" />
         <source>Horizontal and vertical size of the cursor in pixels</source>
-        <translation type="unfinished" />
+        <translation>Horizontální a vertikální velikost kurzoru v pixelech</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99" />
         <source>Inner radius (pixels):</source>
-        <translation type="unfinished" />
+        <translation>Vnitřní poloměr (pixely):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104" />
         <source>Radius of circle at the center of the cursor that will remain empty</source>
-        <translation type="unfinished" />
+        <translation>Poloměr prázdného kruhu uprostřed kurzoru</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108" />
         <source>Line width (pixels):</source>
-        <translation type="unfinished" />
+        <translation>Délka úsečky (pixely):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="113" />
         <source>Width of each arm of the cross of the cursor</source>
-        <translation type="unfinished" />
+        <translation>Délka ramene kříže</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
         <source>Preview window showing the currently selected cursor.
 
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu zobrazuje aktuálně zvolený kurzor.
+
+Pohybujte kurzorem po této ploše, aby jste viděli vliv aktuálního nastavení na tvar kurzoru.</translation>
     </message>
 </context>
 <context>
@@ -1221,151 +1291,153 @@ Drag the cursor over this area to see the effects of the current settings on the
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="51" />
         <source>Export Format</source>
-        <translation type="unfinished" />
+        <translation>Formát exportu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="73" />
         <source>Included</source>
-        <translation type="unfinished" />
+        <translation>Zahrnuto</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="76" />
         <source>Not included</source>
-        <translation type="unfinished" />
+        <translation>Nezahrnuto</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="81" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
-        <translation type="unfinished" />
+        <translation>Seznam křivek, které budou exportovány.
+
+Pořadí křivek zde neovlivňuje pořadí v exportovaném souboru. Toto pořadí je odvozeno s nastavení křivek.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
         <source>List of curves to be excluded from the exported file</source>
-        <translation type="unfinished" />
+        <translation>Seznam křivek, které nebudou zahrnuty v exportovaném souboru</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
         <source>&lt;&lt;Include</source>
-        <translation type="unfinished" />
+        <translation>&lt;&lt;Zahrnout</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97" />
         <source>Move the currently selected curve(s) from the excluded list</source>
-        <translation type="unfinished" />
+        <translation>Přesunout vybrané křivky ze seznamu nezahrnutých</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
         <source>Exclude&gt;&gt;</source>
-        <translation type="unfinished" />
+        <translation>Vyjmout&gt;&gt;</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="103" />
         <source>Move the currently selected curve(s) from the included list</source>
-        <translation type="unfinished" />
+        <translation>Přesunout vybrané křivky ze seznamu zahrnutých</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
         <source>Delimiters</source>
-        <translation type="unfinished" />
+        <translation>Oddělovače</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="121" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije čárky mezi hodnotami, pokud nejsou přepsány tabelátory v TSV souborech.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="126" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije mezery mezi hodnotami, pokud nejsou přepsány čárkami v CSV nebo tabelátory v TSV souborech.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije tabelátory mezi hodnotami, pokud nejsou přepsány čárkami v CSV souborech.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije středníky mezi hodnotami, pokud nejsou přepsány čárkami v CSV souborech.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="141" />
         <source>Override in CSV/TSV files</source>
-        <translation type="unfinished" />
+        <translation>Přepsat v CSV/TSV souborech</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
-        <translation type="unfinished" />
+        <translation>CSV(čárkami oddělené hodnoty) a TSV(tabelátory oddělené hodnoty) soubory požívají čárky a tabelátory, dokud není zvoleno toto nastavení. Volbou tohoto nastavení dochází k úpravě oddělovače u obout typů souboru.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
         <source>Layout</source>
-        <translation type="unfinished" />
+        <translation>Rozložení</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="159" />
         <source>All curves on each line</source>
-        <translation type="unfinished" />
+        <translation>Všechny křivky v jednom řádku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="160" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít na každém řádku hodnotu X, hodnotu Y první křivky, hodnotu Y druhé křivky, ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="165" />
         <source>One curve on each line</source>
-        <translation type="unfinished" />
+        <translation>Jedna křivka na řádek</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="166" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít po řádcích páry X-Y první křivky, poté druhé křivky,...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
         <source>Points Selection</source>
-        <translation type="unfinished" />
+        <translation>Výběr bodů</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="189" />
         <source>Interpolate Ys at Xs from all curves</source>
-        <translation type="unfinished" />
+        <translation>Interpolovat Y a X ze všech křivek</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije unikátní hodnoty X z každé křivky. Y-ové hodnoty budou následně dle potřeby lineárně interpolovány</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="195" />
         <source>Interpolate Ys at Xs from first curve</source>
-        <translation type="unfinished" />
+        <translation>Interpolovat Y a X z první křivky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="196" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor použije unikátní hodnoty X z první křivky. Y-ové hodnoty budou následně dle potřeby lineárně interpolovány</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201" />
         <source>Interpolate Ys at evenly spaced X values.</source>
-        <translation type="unfinished" />
+        <translation>Interpolovat Y na rovnoměrně rozložené hodnoty X.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít rovnoměrně rozložené hodnoty X pomocí intervalu zadaného níže.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
         <source>Interval:</source>
-        <translation type="unfinished" />
+        <translation>Interval:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
@@ -1389,58 +1461,58 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
         <source>Raw Xs and Ys</source>
-        <translation type="unfinished" />
+        <translation>Surové X a Y</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="352" />
         <source>Exported file will have only original X and Y values</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít pouze výchozí hodnoty X a Y</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="248" />
         <source>Header</source>
-        <translation type="unfinished" />
+        <translation>Hlavička</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
         <source>Exported file will have no header line</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor nebude mít hlavičku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
         <source>Exported file will have simple header line</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít jednoduchou hlavičku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="268" />
         <source>Exported file will have gnuplot header line</source>
-        <translation type="unfinished" />
+        <translation>Exportovaný soubor bude mít "gnuplot" hlavičku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="280" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Uložit jako výchozí</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
         <source>Save the settings for use as future defaults.</source>
-        <translation type="unfinished" />
+        <translation>Uloží nastavení pro příští použití.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
         <source>Preview window shows how current settings affect the exported file</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje exportovaný soubor.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
-        <translation type="unfinished" />
+        <translation>Interpolovat X a Y v rovnoměrném rozložení.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
@@ -1464,46 +1536,50 @@ Graph units are usually preferred when the X and Y scales are identical.</source
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
         <source>Functions</source>
-        <translation type="unfinished" />
+        <translation>Funkce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="397" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
-        <translation type="unfinished" />
+        <translation>Karta funkcí
+
+Prvky pro specifikaci formátu funkcí během exportu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
         <source>Relations</source>
-        <translation type="unfinished" />
+        <translation>Vztahy</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="405" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
-        <translation type="unfinished" />
+        <translation>Karta vztahů
+
+Prvky pro specifikaci formátu vztahů během exportu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
         <source>X Label:</source>
-        <translation type="unfinished" />
+        <translation>Popis X:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428" />
         <source>Theta Label:</source>
-        <translation type="unfinished" />
+        <translation>Popis Theta:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
         <source>Label in the header for x values</source>
-        <translation type="unfinished" />
+        <translation>Název hlavičky pro hodnoty X</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="436" />
         <source>Label in the header for theta values</source>
-        <translation type="unfinished" />
+        <translation>Název hlavičky pro hodnoty Theta</translation>
     </message>
 </context>
 <context>
@@ -1511,12 +1587,12 @@ Controls for specifying the format of relations during export</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="25" />
         <source>General</source>
-        <translation type="unfinished" />
+        <translation>Obecné</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47" />
         <source>Effective cursor size (pixels):</source>
-        <translation type="unfinished" />
+        <translation>Efektivní velikost kurzoru (pixely)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="52" />
@@ -1525,12 +1601,16 @@ Controls for specifying the format of relations during export</source>
 This is the effective width and height of the cursor when clicking on a pixel that is not part of the background.
 
 This parameter is used in the Color Picker and Point Match modes</source>
-        <translation type="unfinished" />
+        <translation>Efektivní velikost kurzoru
+
+Toto je hodnota šířky a výšky kurzoru během klikání na bod, který není součástí pozadí.
+
+Tento parametr se používá při výběru barvy a sjednocování bodů</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="59" />
         <source>Extra precision (digits):</source>
-        <translation type="unfinished" />
+        <translation>Přesnost navíc (číslice):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="64" />
@@ -1539,17 +1619,21 @@ This parameter is used in the Color Picker and Point Match modes</source>
 This is the number of additional digits of precision appended after the significant digits determined by the digitization accuracy at that point. The digitization accuracy at any point equals the change in graph coordinates from moving one pixel in each direction. Appending extra digits does not improve the accuracy of the numbers. More information can be found in discussions of accuracy versus precision.
 
 This parameter is used on the coordinates in the Status Bar and during Export</source>
-        <translation type="unfinished" />
+        <translation>Extra přesnost
+
+Jde o počet číslic za desetinným oddělovačem odvozených od správnosti digitalizace daného bodu. Správnost digitalizace v kterémkoliv bodě je závislá na změně souřadnic již od posunu o jeden pixel ve kterémkoliv směru. Přidání číslic za desetinným oddělovačem nezvyšuje přesnost těchto čísel. Více informací lze najít v diskuzích ohledně správnosti a přesnosti.
+
+Tento parametr je použit na souřadnice ve stavovém řádku a během exportu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="79" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Uložit jako výchozí</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="80" />
         <source>Save the settings for use as future defaults, according to the curve name selection.</source>
-        <translation type="unfinished" />
+        <translation>Uloží nastavení pro příští použití v závislosti na výběru názvu křivky.</translation>
     </message>
 </context>
 <context>
@@ -1557,147 +1641,169 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="32" />
         <source>Grid Display</source>
-        <translation type="unfinished" />
+        <translation>Zobrazení mřížky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="62" />
         <source>Color:</source>
-        <translation type="unfinished" />
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="66" />
         <source>Select a color for the lines</source>
-        <translation type="unfinished" />
+        <translation>Vyberte barvu čar</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
         <source>Disable:</source>
-        <translation type="unfinished" />
+        <translation>Zakázat:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="92" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Zakázaná hodnota.
+
+Čáry X-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="107" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="181" />
         <source>Count:</source>
-        <translation type="unfinished" />
+        <translation>Počet:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="111" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Počet čar mřížky na ose X.
+
+Počet čar mřížky na ose X musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="118" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="192" />
         <source>Start:</source>
-        <translation type="unfinished" />
+        <translation>Začátek:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="122" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota první čáry mřížky na ose X.
+
+Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203" />
         <source>Step:</source>
-        <translation type="unfinished" />
+        <translation>Krok:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
+
+
+Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214" />
         <source>Stop:</source>
-        <translation type="unfinished" />
+        <translation>Konec:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota poslední čáry mřížky na ose X.
+
+Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Zakázaná hodnota.
+
+Čáry Y-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="185" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Počet čar mřížky na ose Y.
+
+Počet čar mřížky na ose Y musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota první čáry mřížky na ose Y.
+
+Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
+
+
+Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota poslední čáry mřížky na ose Y.
+
+Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="234" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241" />
         <source>Preview window that shows how current settings affect grid display</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje mřížkové zobrazení.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305" />
         <source>X Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na ose X</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307" />
         <source>Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311" />
         <source>Y Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na ose Y</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313" />
         <source>Radius Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na poloměru</translation>
     </message>
 </context>
 <context>
@@ -1705,17 +1811,17 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="33" />
         <source>Grid Removal</source>
-        <translation type="unfinished" />
+        <translation>Odebrání mřížky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="60" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="67" />
         <source>Preview window that shows how current settings affect grid removal</source>
-        <translation type="unfinished" />
+        <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje odstranění mřížky.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="78" />
@@ -1746,122 +1852,144 @@ This value cannot be negative. A zero value disables this feature. Decimal value
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="105" />
         <source>X Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na ose X</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="107" />
         <source>Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="115" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193" />
         <source>Disable:</source>
-        <translation type="unfinished" />
+        <translation>Zakázat:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="119" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Zakázaná hodnota.
+
+Čáry X-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="134" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="212" />
         <source>Count:</source>
-        <translation type="unfinished" />
+        <translation>Počet:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="138" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Počet čar mřížky na ose X.
+
+Počet čar mřížky na ose X musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="145" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="223" />
         <source>Start:</source>
-        <translation type="unfinished" />
+        <translation>Začátek:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="149" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota první čáry mřížky na ose X.
+
+Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234" />
         <source>Step:</source>
-        <translation type="unfinished" />
+        <translation>Krok:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
+
+
+Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245" />
         <source>Stop:</source>
-        <translation type="unfinished" />
+        <translation>Konec:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota poslední čáry mřížky na ose X.
+
+Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="183" />
         <source>Y Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na ose Y</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="185" />
         <source>R Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky na poloměru</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="197" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Zakázaná hodnota.
+
+Čáry Y-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="216" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Počet čar mřížky na ose Y.
+
+Počet čar mřížky na ose Y musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="227" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota první čáry mřížky na ose Y.
+
+Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
+
+
+Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Hodnota poslední čáry mřížky na ose Y.
+
+Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
 </context>
 <context>
@@ -1869,56 +1997,60 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="32" />
         <source>Main Window</source>
-        <translation type="unfinished" />
+        <translation>Hlavní okno</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="57" />
         <source>Initial zoom:</source>
-        <translation type="unfinished" />
+        <translation>Počáteční přiblížení:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="72" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
-        <translation type="unfinished" />
+        <translation>Počáteční přiblížení
+
+Vyberte počáteční přiblížení pro nově otevřené dokumenty. Buď může být zachováno předchozí přiblížení nebo může být specifikováno nové.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78" />
         <source>Zoom control:</source>
-        <translation type="unfinished" />
+        <translation>Ovládání přiblížení:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82" />
         <source>Menu only</source>
-        <translation type="unfinished" />
+        <translation>Pouze menu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
         <source>Menu and mouse wheel</source>
-        <translation type="unfinished" />
+        <translation>Pouze menu a kolečko myši</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84" />
         <source>Menu and +/- keys</source>
-        <translation type="unfinished" />
+        <translation>Menu a klávesy +/-</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85" />
         <source>Menu, mouse wheel and +/- keys</source>
-        <translation type="unfinished" />
+        <translation>Menu, kolečko myši a klávesy +/-</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
-        <translation type="unfinished" />
+        <translation>Ovládání přiblížení
+
+Zvolte, jakými vstupy bude přiblížení ovládáno</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
         <source>Locale:</source>
-        <translation type="unfinished" />
+        <translation>Národnostní nastavení:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
@@ -1927,48 +2059,58 @@ Select which inputs are used to zoom in and out.</source>
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
 
 The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
-        <translation type="unfinished" />
+        <translation>Národnostní nastavení
+
+Vyberte nastavení používaných čísel (změna se projeví okamžitě) a jazyk aplikace (změna se projeví po restartu)
+
+Nastavení definuje, jak budou čísla formátovány. Konkrétně zda budou v číslech použity čárky nebo tečky - pro zobrazení v aplikace a při exportu.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116" />
         <source>Import cropping:</source>
-        <translation type="unfinished" />
+        <translation>Oříznutí importu:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="120" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.</source>
-        <translation type="unfinished" />
+        <translation>Oříznutí importu
+
+Povolí nebo zakáže ořezávání importovaného obrázku. Ořezávání je užitečné pro odstranění nepotřebných informací kolem grafu, ale  méně užitečné, pokud grafy zabírají celou plochu obrázku.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="132" />
         <source>Import PDF resolution (dots per inch):</source>
-        <translation type="unfinished" />
+        <translation>Rozlišení importovaného PDF (body na palec):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation type="unfinished" />
+        <translation>Rozlišení importovaného PDF
+
+Importované PDF bude převedeno do tohoto rozlišení na body na palec, kde každy pixel je jeden bod. Vyšší hodnota zvyšuje rozlišení obrázku a taktéž může zlepšit správnost digitalizace. Naopak příliš velké rozlišení může způsobit zpomalení aplikace.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="151" />
         <source>Maximum grid lines:</source>
-        <translation type="unfinished" />
+        <translation>Maximální počet čar mřížky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
-        <translation type="unfinished" />
+        <translation>Maximální počet čar mřížky
+
+Maximální počet čar mřížky, které budou zpracovány. Tento limit je aplikován pro hodnoty počátku a konce, pokud je hodnota kroku příliš malá, což by mohlo vést  k příliš vysokému počtu čar, nepřehlednosti a příliš dlouhému zpracování (protože každá čára musí být zpracována)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
         <source>Highlight opacity:</source>
-        <translation type="unfinished" />
+        <translation>Průhlednost zvýraznění:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
@@ -1980,19 +2122,21 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
         <source>Recent file list:</source>
-        <translation type="unfinished" />
+        <translation>Poslední soubory</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178" />
         <source>Clear</source>
-        <translation type="unfinished" />
+        <translation>Vyčistit</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
-        <translation type="unfinished" />
+        <translation>Čištění seznamu posledních souborů
+
+Smaže seznam posledních souborů v menu Soubor</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="186" />
@@ -2024,12 +2168,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Shoda bodů</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83" />
         <source>Maximum point size (pixels):</source>
-        <translation type="unfinished" />
+        <translation>Maximální velikost bodu (pixely):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87" />
@@ -2075,7 +2219,7 @@ This value has a lower limit</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
@@ -2135,7 +2279,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114" />
         <source>Line width:</source>
-        <translation type="unfinished" />
+        <translation>Délka úsečky</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118" />
@@ -2145,7 +2289,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123" />
         <source>Line color:</source>
-        <translation type="unfinished" />
+        <translation>Barva úsečky:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127" />
@@ -2155,7 +2299,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
@@ -2697,19 +2841,21 @@ Quits the application.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="567" />
         <source>Checklist Guide Wizard</source>
-        <translation type="unfinished" />
+        <translation>Průvodce kontrolním seznamem</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="569" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
-        <translation type="unfinished" />
+        <translation>Při importu spustit průvodce kontrolním seznamem pro definování kroků digitalizace</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="570" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
-        <translation type="unfinished" />
+        <translation>Průvodce kontrolním seznamem
+
+Použijte průvodce kontrolním seznamem pro vytvoření kontrolního seznamu kroků importovaného dokumentu</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="577" />
@@ -2748,7 +2894,7 @@ Searchable help documentation</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="593" />
         <source>About Engauge</source>
-        <translation type="unfinished" />
+        <translation>O Engauge</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="594" />
@@ -3003,19 +3149,21 @@ Show or hide the background toolbar</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="699" />
         <source>Checklist Guide Toolbar</source>
-        <translation type="unfinished" />
+        <translation>Nástrojová lišta kontrolního seznamu</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="702" />
         <source>Show or hide the checklist guide.</source>
-        <translation type="unfinished" />
+        <translation>Zobrazit nebo skrýt kontrolní seznam.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="703" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
-        <translation type="unfinished" />
+        <translation>Zobrazení kontrolního seznamu
+
+Zobrazí nebo skryje kontrolní seznam.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="707" />
@@ -3107,7 +3255,7 @@ Show or hide the tool tips</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="752" />
         <source>Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Čáry mřížky</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="755" />
@@ -3424,7 +3572,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1043" />
         <source>Curves</source>
-        <translation type="unfinished" />
+        <translation>Křivky</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1048" />
@@ -3961,7 +4109,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="341" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Shoda bodů</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="342" />
@@ -4190,12 +4338,12 @@ Do you want to save your changes?</source>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="29" />
         <location filename="../src/Point/PointShape.cpp" line="29" />
         <source>X</source>
-        <translation type="unfinished" />
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="30" />
         <source>Y</source>
-        <translation type="unfinished" />
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="31" />
@@ -4380,7 +4528,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="230" />
         <source>Need more axis points</source>
-        <translation>Pot&#345;ebujeme v&#237;ce os bod&#367;</translation>
+        <translation>Potřebujeme více os bodů</translation>
     </message>
 </context>
 <context>
@@ -4513,7 +4661,7 @@ This ends the tutorial. Good luck!</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="26" />
         <source>Color Filter</source>
-        <translation type="unfinished" />
+        <translation>Barevný filtr</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="29" />
@@ -4692,7 +4840,7 @@ exported, as numbers, to other software tools.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="26" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Shoda bodů</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="29" />

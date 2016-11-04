@@ -29,13 +29,16 @@ def mergeOldAndNew (inCode, translationMapTransifex, out):
     treeCode = etree.parse (inCode)
     rootCode = treeCode.getroot ()
 
+    (countEmptyCode, countNotEmptyCode, countEmptyOut, countNotEmptyOut, countOverriddenOut) = recurseOutput (
+    rootCode, translationMapTransifex)
+
     # Write output file. We need to insert DOCTYPE at the start of the file
     f = open (out, 'w')
-    f.write ('<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE TS>')
-    f.write (etree.tostring (treeCode, encoding='utf8', method='xml'))
+    f.write ('<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE TS>\n')
+    f.write (etree.tostring (rootCode, encoding='UTF-8', method='xml').decode ("utf-8")) # Convert bytes from tostring() into string
     f.close ()
     
-    return recurseOutput (rootCode, translationMapTransifex)
+    return (countEmptyCode, countNotEmptyCode, countEmptyOut, countNotEmptyOut, countOverriddenOut)
     
 def readTranslationMap (inTransifex):
     treeTransifex = etree.parse (inTransifex)
