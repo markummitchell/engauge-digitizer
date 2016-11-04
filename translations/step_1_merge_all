@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function main {
+    languages=(ar cs de en es fr hi it ja kk ko pt ru zh)
+    for language in "${languages[@]}"
+    do
+        merge_one $language
+    done
+
+    echo "*********************************************************************"
+    echo "*  Check the temp_??.ts files for new content AND old translations  *"
+    echo "*********************************************************************"
+}
+
+function merge_one {
+    if [ -f for_translation_engauge-digitizer_engauge_ents_$1.ts ]; then
+	echo "Converting $1"
+        ./merge.py "engauge_$1.ts" "for_translation_engauge-digitizer_engauge_ents_$1.ts" "temp_$1.ts"
+    else
+	echo "Skipping $1"	
+    fi
+}
+
+main
