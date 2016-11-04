@@ -49,6 +49,12 @@ def recurseOutput (node1, downloadedSourcesTranslations):
 
             # Update translation if there is a newer one
             if source.text in downloadedSourcesTranslations:
+                # Override the old value
                 translation.text = downloadedSourcesTranslations [source.text]
+
+                # Remove type='unfinished' if that attribute is present since now the translation is finished
+                typeAtt = translation.attrib ["type"]
+                if typeAtt == "unfinished":
+                    translation.attrib.pop ("type")
     
 main ()    
