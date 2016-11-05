@@ -1707,7 +1707,7 @@ Controles para especificar el formato de las relaciones durante la exportación<
     </message>
     <message>
         <source>Cursor size (pixels):</source>
-        <translation type="vanished">Tamaño del cursor (píxeles ) :</translation>
+        <translation type="vanished">Tamaño del cursor (píxeles):</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47" />
@@ -3456,13 +3456,13 @@ Mostrar u ocultar la ventana de geometría</translation>
     </message>
     <message>
         <source>Show or hide the checklist guide toolbar.</source>
-        <translation type="vanished">Mostrar u ocultar la barra de herramientas guía lista de verificación .</translation>
+        <translation type="vanished">Mostrar u ocultar la barra de herramientas guía lista de verificación.</translation>
     </message>
     <message>
         <source>View Checklist Guide ToolBar
 
 Show or hide the checklist guide toolbar</source>
-        <translation type="vanished">Ver Guía Lista de verificación barra de herramientas
+        <translation type="vanished">Ver Guía Lista de verificación ToolBar
 
 Mostrar u ocultar la barra de herramientas guía lista de verificación</translation>
     </message>

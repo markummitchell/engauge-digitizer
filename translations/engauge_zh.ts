@@ -3393,7 +3393,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="869" />
         <source>Zoom 1:1</source>
-        <translation type="unfinished">缩放1:1</translation>
+        <translation>缩放1:1</translation>
     </message>
     <message>
         <source>Zoom 6:1</source>

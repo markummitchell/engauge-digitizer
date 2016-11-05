@@ -341,22 +341,22 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
         <source>Edit Axis Point</source>
-        <translation type="unfinished">Editiere Achspunkt</translation>
+        <translation>Editiere Achspunkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
         <source>Graph Coordinates</source>
-        <translation type="unfinished">Graph Koordinaten</translation>
+        <translation>Graph Koordinaten</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
         <source>as</source>
-        <translation type="unfinished">wie</translation>
+        <translation>wie</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
         <source>(</source>
-        <translation type="unfinished">(</translation>
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
@@ -370,7 +370,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
         <source>, </source>
-        <translation type="unfinished">, </translation>
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
@@ -384,7 +384,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
         <source>)</source>
-        <translation type="unfinished">)</translation>
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
@@ -412,17 +412,17 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="90" />
         <source>Graph Coordinates</source>
-        <translation type="unfinished">Graph Koordinaten</translation>
+        <translation>Graph Koordinaten</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="99" />
         <source>as</source>
-        <translation type="unfinished">wie</translation>
+        <translation>wie</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="107" />
         <source>(</source>
-        <translation type="unfinished">(</translation>
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="115" />
@@ -438,7 +438,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
         <source>, </source>
-        <translation type="unfinished">, </translation>
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="131" />
@@ -454,7 +454,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />
         <source>)</source>
-        <translation type="unfinished">)</translation>
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="156" />
@@ -3400,7 +3400,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="869" />
         <source>Zoom 1:1</source>
-        <translation type="unfinished">Zoom 1:1</translation>
+        <translation>Zoom 1:1</translation>
     </message>
     <message>
         <source>Zoom 6:1</source>

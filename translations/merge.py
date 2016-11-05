@@ -84,8 +84,7 @@ def recurseOutput (nodeCode, translationMapTransifex):
 
             if source is not None and translation is not None:
                 empty = True
-                if translation.text is not None:
-                    if len (translation.text) > 0:
+                if translation.text is not None and len (translation.text) > 0:
                         empty = False
                 if empty:
                     countEmptyCode += 1
@@ -98,16 +97,17 @@ def recurseOutput (nodeCode, translationMapTransifex):
                     translation.text = translationMapTransifex [source.text]
                     countOverriddenOut += 1
 
-                    # Remove type='unfinished' if that attribute is present since now the translation is finished
+                if translation.text is not None and len (translation.text) > 0:
+                    # Remove type='unfinished' if that attribute is present and not empty since now the translation is finished
                     try:
                         typeAtt = translation.attrib ["type"]
                         if typeAtt == "unfinished":
                             translation.attrib.pop ("type")
                     except KeyError:
                         pass
+                
                 empty = True
-                if translation.text is not None:
-                    if len (translation.text) > 0:
+                if translation.text is not None and len (translation.text) > 0:
                         empty = False
                 if empty:
                     countEmptyOut += 1
