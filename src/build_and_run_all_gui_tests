@@ -55,11 +55,12 @@ do
 	    else
 		COUNTERSTRING="";
 	    fi
-	    if cmp $EXPECTED $actual
+	    if cmp --silent $EXPECTED $actual
 	    then
 		echo "PASS   : $root $COUNTERSTRING"
 	    else
 		echo "FAIL   : $root $COUNTERSTRING"
+		diff -c2 $EXPECTED $actual
 	    fi
 	    let COUNTER=COUNTER+1
 	done
