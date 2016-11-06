@@ -43,6 +43,8 @@ private:
                                            const QStringList &curvesIncluded,
                                            const QString &delimiter,
                                            const Transformation &transformation,
+                                           bool isLogXTheta,
+                                           bool isLogYRadius,
                                            QTextStream &str) const;
   void exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                            const Document &document,
@@ -50,6 +52,8 @@ private:
                                            const QStringList &curvesIncluded,
                                            const QString &delimiter,
                                            const Transformation &transformation,
+                                           bool isLogXTheta,
+                                           bool isLogYRadius,
                                            QTextStream &str) const;
   void initializeXThetaYRadiusValues (const QStringList &curvesIncluded,
                                       QVector<QVector<QString*> > &xThetaYRadiusValues) const;
@@ -61,6 +65,8 @@ private:
                                 const MainWindowModel &modelMainWindow,
                                 const QStringList &curvesIncluded,
                                 const Transformation &transformation,
+                                bool isLogXTheta,
+                                bool isLogYRadius,
                                 QVector<QVector<QString*> > &xThetaYRadiusValues) const;
   void loadXThetaYRadiusValuesForCurveInterpolatedSmooth (const DocumentModelCoords &modelCoords,
                                                           const DocumentModelGeneral  &modelGeneral,
@@ -69,7 +75,9 @@ private:
                                                           const ExportValuesOrdinal &ordinals,
                                                           QVector<QString*> &xThetaValues,
                                                           QVector<QString*> &yRadiusValues,
-                                                          const Transformation &transformation) const;
+                                                          const Transformation &transformation,
+                                                          bool isLogXTheta,
+                                                          bool isLogYRadius) const;
   void loadXThetaYRadiusValuesForCurveInterpolatedStraight (const DocumentModelCoords &modelCoords,
                                                             const DocumentModelGeneral &modelGeneral,
                                                             const MainWindowModel &modelMainWindow,
@@ -88,14 +96,20 @@ private:
   int maxColumnSizeAllocation (const DocumentModelExportFormat &modelExportOverride,
                                const Document &document,
                                const Transformation &transformation,
+                               bool isLogXTheta,
+                               bool isLogYRadius,
                                const QStringList &curvesIncluded) const;
   ExportValuesOrdinal ordinalsAtIntervals (double pointsIntervalRelations,
                                            ExportPointsIntervalUnits pointsIntervalUnits,
                                            CurveConnectAs curveConnectAs,
                                            const Transformation &transformation,
+                                           bool isLogXTheta,
+                                           bool isLogYRadius,
                                            const Points &points) const;
   ExportValuesOrdinal ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
                                                       const Transformation &transformation,
+                                                      bool isLogXTheta,
+                                                      bool isLogYRadius,
                                                       const Points &points) const;
   ExportValuesOrdinal ordinalsAtIntervalsSmoothScreen (double pointsIntervalRelations,
                                                        const Points &points) const;

@@ -27,7 +27,7 @@ public:
   /// Single constructor.
   ExportFileAbstractBase();
 
- protected:
+protected:
   /// Gnuplot requires, and other graphing tools probably prefer, blank lines between successive curves
   QString curveSeparator (const QString *string) const;
 
@@ -48,6 +48,7 @@ public:
   void insertLineSeparator (bool &isFirst,
                             ExportHeader exportHeader,
                             QTextStream &str) const;
+
 };
 
 #endif // EXPORT_FILE_ABSTRACT_BASE_H

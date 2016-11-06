@@ -31,6 +31,8 @@ class ExportOrdinalsSmooth
   /// Load t (=ordinal) and xy (=screen position) spline pairs, converting screen coordinates to graph coordinates
   void loadSplinePairsWithTransformation (const Points &points,
                                           const Transformation &transformation,
+                                          bool isLogXTheta,
+                                          bool isLogYRadius,
                                           std::vector<double> &t,
                                           std::vector<SplinePair> &xy) const;
 

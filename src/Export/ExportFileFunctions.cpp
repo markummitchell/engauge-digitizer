@@ -14,6 +14,7 @@
 #include "ExportOrdinalsSmooth.h"
 #include "ExportXThetaValuesMergedFunctions.h"
 #include "FormatCoordsUnits.h"
+#include "LinearToLog.h"
 #include "Logger.h"
 #include <QTextStream>
 #include <QVector>
@@ -35,6 +36,8 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                               const ExportValuesXOrY &xThetaValues,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportAllPerLineXThetaValuesMerged";
@@ -50,6 +53,8 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                      modelMainWindow,
                      curvesIncluded,
                      transformation,
+                     isLogXTheta,
+                     isLogYRadius,
                      xThetaValues,
                      yRadiusValues);
 
@@ -73,6 +78,8 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                                               const ExportValuesXOrY &xThetaValues,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportOnePerLineXThetaValuesMerged";
@@ -101,6 +108,8 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                        modelMainWindow,
                        curvesIncluded,
                        transformation,
+                       isLogXTheta,
+                       isLogYRadius,
                        xThetaValues,
                        yRadiusValues);
     outputXThetaYRadiusValues (modelExportOverride,
@@ -124,6 +133,10 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                         QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportToFile";
+
+  // Log coordinates must be temporarily transformed to linear coordinates
+  bool isLogXTheta = (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
+  bool isLogYRadius = (document.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 
   // Identify curves to be included
   QStringList curvesIncluded = curvesToInclude (modelExportOverride,
@@ -161,6 +174,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                           xThetaValuesMerged,
                                           delimiter,
                                           transformation,
+                                          isLogXTheta,
+                                          isLogYRadius,
                                           str);
     } else {
       exportOnePerLineXThetaValuesMerged (modelExportOverride,
@@ -170,6 +185,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                           xThetaValuesMerged,
                                           delimiter,
                                           transformation,
+                                          isLogXTheta,
+                                          isLogYRadius,
                                           str);
     }
   }
@@ -266,6 +283,8 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
                                              const MainWindowModel &modelMainWindow,
                                              const QStringList &curvesIncluded,
                                              const Transformation &transformation,
+                                             bool isLogXTheta,
+                                             bool isLogYRadius,
                                              const ExportValuesXOrY &xThetaValues,
                                              QVector<QVector<QString*> > &yRadiusValues) const
 {
@@ -278,7 +297,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
     const QString curveName = curvesIncluded.at (col);
 
     const Curve *curve = document.curveForCurveName (curveName);
-    const Points points = curve->points ();
+    Points points = curve->points (); // These points will be linearized below if either coordinate is log
 
     if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
 
@@ -301,6 +320,8 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
                                                      points,
                                                      xThetaValues,
                                                      transformation,
+                                                     isLogXTheta,
+                                                     isLogYRadius,
                                                      yRadiusValues [col]);
 
       } else {
@@ -323,6 +344,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
                                                                        const Points &points,
                                                                        const ExportValuesXOrY &xThetaValues,
                                                                        const Transformation &transformation,
+                                                                       bool isLogXTheta,
+                                                                       bool isLogYRadius,
                                                                        QVector<QString*> &yRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth";
@@ -334,6 +357,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
 
   ordinalsSmooth.loadSplinePairsWithTransformation (points,
                                                     transformation,
+                                                    isLogXTheta,
+                                                    isLogYRadius,
                                                     t,
                                                     xy);
 
@@ -400,9 +425,13 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
       for (int row = 0; row < xThetaValues.count(); row++) {
 
         double xTheta = xThetaValues.at (row);
-        SplinePair splinePairFound = spline.findSplinePairForFunctionX (xTheta,
+
+        LinearToLog linearToLog;
+
+        SplinePair splinePairFound = spline.findSplinePairForFunctionX (linearToLog.linearize (xTheta, isLogXTheta),
                                                                         MAX_ITERATIONS);
-        double yRadius = splinePairFound.y ();
+        double yRadius = linearToLog.delinearize (splinePairFound.y (),
+                                                  isLogYRadius);
 
         // Save y/radius value for this row into yRadiusValues, after appropriate formatting
         QString dummyXThetaOut;

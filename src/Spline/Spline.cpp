@@ -133,7 +133,7 @@ SplinePair Spline::findSplinePairForFunctionX (double x,
 
     // Extrapolate with x < x(0) < x(N-1) which correspond to s, s0 and sNm1
     double x1 = interpolateCoeff (m_t[1]).x();
-    double tStart = (x - x0) / (x1 - x0); // This is less than zero. x=x0 for t=0 and x=x1 for t=1
+    double tStart = (x - x0) / (x1 - x0); // This will be less than zero. x=x0 for t=0 and x=x1 for t=1
     tLow = 2.0 * tStart;
     tHigh = 0.0;
 
@@ -145,7 +145,7 @@ SplinePair Spline::findSplinePairForFunctionX (double x,
     tLow = m_xy.size() - 1;
     tHigh = tHigh + 2.0 * (tStart - tLow);
 
-   }
+  }
 
   // Interpolation using bisection search
   double tCurrent = (tHigh + tLow) / 2.0;

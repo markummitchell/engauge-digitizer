@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "ExportOrdinalsSmooth.h"
+#include "LinearToLog.h"
 #include "Logger.h"
 #include <qdebug.h>
 #include <qmath.h>
@@ -37,10 +38,14 @@ void ExportOrdinalsSmooth::loadSplinePairsWithoutTransformation (const Points &p
 
 void ExportOrdinalsSmooth::loadSplinePairsWithTransformation (const Points &points,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               vector<double> &t,
                                                               vector<SplinePair> &xy) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportOrdinalsSmooth::loadSplinePairsWithTransformation";
+
+  LinearToLog linearToLog;
 
   Points::const_iterator itrP;
   for (itrP = points.begin(); itrP != points.end(); itrP++) {
@@ -51,8 +56,8 @@ void ExportOrdinalsSmooth::loadSplinePairsWithTransformation (const Points &poin
                                               posGraph);
 
     t.push_back (point.ordinal ());
-    xy.push_back (SplinePair (posGraph.x(),
-                              posGraph.y()));
+    xy.push_back (SplinePair (linearToLog.linearize (posGraph.x(), isLogXTheta),
+                              linearToLog.linearize (posGraph.y(), isLogYRadius)));
   }
 }
 

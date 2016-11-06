@@ -37,6 +37,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
@@ -45,6 +47,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   int maxColumnSize = maxColumnSizeAllocation (modelExportOverride,
                                                document,
                                                transformation,
+                                               isLogXTheta,
+                                               isLogYRadius,
                                                curvesIncluded);
 
   // Skip if every curve was a function
@@ -58,6 +62,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                              modelMainWindow,
                              curvesIncluded,
                              transformation,
+                             isLogXTheta,
+                             isLogYRadius,
                              xThetaYRadiusValues);
     outputXThetaYRadiusValues (modelExportOverride,
                                curvesIncluded,
@@ -74,6 +80,8 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                                               const QStringList &curvesIncluded,
                                                               const QString &delimiter,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportOnePerLineXThetaValuesMerged";
@@ -89,6 +97,8 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                         QStringList (curveIncluded),
                                         delimiter,
                                         transformation,
+                                        isLogXTheta,
+                                        isLogYRadius,
                                         str);
   }
 }
@@ -100,6 +110,10 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         QTextStream &str) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportToFile";
+
+  // Log coordinates must be temporarily transformed to linear coordinates
+  bool isLogXTheta = (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
+  bool isLogYRadius = (document.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 
   // Identify curves to be included
   QStringList curvesIncluded = curvesToInclude (modelExportOverride,
@@ -120,6 +134,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         curvesIncluded,
                                         delimiter,
                                         transformation,
+                                        isLogXTheta,
+                                        isLogYRadius,
                                         str);
   } else {
     exportOnePerLineXThetaValuesMerged (modelExportOverride,
@@ -128,6 +144,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         curvesIncluded,
                                         delimiter,
                                         transformation,
+                                        isLogXTheta,
+                                        isLogYRadius,
                                         str);
   }
 }
@@ -206,6 +224,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
                                                    const MainWindowModel &modelMainWindow,
                                                    const QStringList &curvesIncluded,
                                                    const Transformation &transformation,
+                                                   bool isLogXTheta,
+                                                   bool isLogYRadius,
                                                    QVector<QVector<QString*> > &xThetaYRadiusValues) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValues";
@@ -240,6 +260,8 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
                                                           modelExportOverride.pointsIntervalUnitsRelations(),
                                                           lineStyle.curveConnectAs(),
                                                           transformation,
+                                                          isLogXTheta,
+                                                          isLogYRadius,
                                                           points);
 
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
@@ -251,7 +273,9 @@ void ExportFileRelations::loadXThetaYRadiusValues (const DocumentModelExportForm
                                                            ordinals,
                                                            xThetaYRadiusValues [colXTheta],
                                                            xThetaYRadiusValues [colYRadius],
-                                                           transformation);
+                                                           transformation,
+                                                           isLogXTheta,
+                                                           isLogYRadius);
 
       } else {
 
@@ -275,7 +299,9 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
                                                                              const ExportValuesOrdinal &ordinals,
                                                                              QVector<QString*> &xThetaValues,
                                                                              QVector<QString*> &yRadiusValues,
-                                                                             const Transformation &transformation) const
+                                                                             const Transformation &transformation,
+                                                                             bool isLogXTheta,
+                                                                             bool isLogYRadius) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth";
 
@@ -285,6 +311,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
 
   ordinalsSmooth.loadSplinePairsWithTransformation (points,
                                                     transformation,
+                                                    isLogXTheta,
+                                                    isLogYRadius,
                                                     t,
                                                     xy);
 
@@ -387,6 +415,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveRaw (const DocumentMode
 int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExportFormat &modelExport,
                                                   const Document &document,
                                                   const Transformation &transformation,
+                                                  bool isLogXTheta,
+                                                  bool isLogYRadius,
                                                   const QStringList &curvesIncluded) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::maxColumnSizeAllocation";
@@ -411,11 +441,14 @@ int ExportFileRelations::maxColumnSizeAllocation (const DocumentModelExportForma
 
       const LineStyle &lineStyle = document.modelCurveStyles().lineStyle(curveName);
 
+
       // Interpolation. Points are taken approximately every every modelExport.pointsIntervalRelations
       ExportValuesOrdinal ordinals = ordinalsAtIntervals (modelExport.pointsIntervalRelations(),
                                                           modelExport.pointsIntervalUnitsRelations(),
                                                           lineStyle.curveConnectAs(),
                                                           transformation,
+                                                          isLogXTheta,
+                                                          isLogYRadius,
                                                           points);
 
       maxColumnSize = qMax (maxColumnSize,
@@ -430,6 +463,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
                                                               ExportPointsIntervalUnits pointsIntervalUnits,
                                                               CurveConnectAs curveConnectAs,
                                                               const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius,
                                                               const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervals";
@@ -439,6 +474,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
 
       return ordinalsAtIntervalsSmoothGraph (pointsIntervalRelations,
                                              transformation,
+                                             isLogXTheta,
+                                             isLogYRadius,
                                              points);
 
     } else {
@@ -466,6 +503,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
 
 ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
                                                                          const Transformation &transformation,
+                                                                         bool isLogXTheta,
+                                                                         bool isLogYRadius,
                                                                          const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsSmoothGraph";
@@ -482,6 +521,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double 
 
     ordinalsSmooth.loadSplinePairsWithTransformation (points,
                                                       transformation,
+                                                      isLogXTheta,
+                                                      isLogYRadius,
                                                       t,
                                                       xy);
 

@@ -125,6 +125,9 @@ void TestExport::testLogExtrapolationFunctionsAll ()
 
   bool success = true;
   try {
+    bool isLogXTheta = (modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
+    bool isLogYRadius = (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
+
     ExportFileFunctions exportFile;    
     exportFile.exportAllPerLineXThetaValuesMerged (modelExportOverride,
                                                    document,
@@ -133,6 +136,8 @@ void TestExport::testLogExtrapolationFunctionsAll ()
                                                    xThetaValues,
                                                    DELIMITER,
                                                    transformation,
+                                                   isLogXTheta,
+                                                   isLogYRadius,
                                                    str);
   }
   catch (...)
