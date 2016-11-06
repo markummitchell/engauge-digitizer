@@ -31,6 +31,7 @@
 class Transformation
 {
   // For unit testing
+  friend class TestExport;
   friend class TestTransformation;
 
 public:

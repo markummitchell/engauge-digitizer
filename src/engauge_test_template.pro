@@ -640,13 +640,10 @@ TARGET = ../bin/TEST
 
 QT += core gui network printsupport testlib widgets xml help
 
-macx-* {
 LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
-}
 
 win32-g++* {
 CONFIG += windows
-LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
 }
 
 LIBS += -llog4cpp -lfftw3
@@ -699,15 +696,8 @@ INCLUDEPATH += Background \
                View \
                Zoom
 
-macx-* {
 INCLUDEPATH += $$(FFTW_HOME)/include \
                $$(LOG4CPP_HOME)/include
-}
-
-win32-g++* {
-INCLUDEPATH += $$(FFTW_HOME)/include \
-               $$(LOG4CPP_HOME)/include
-}
 
 RESOURCES += \
     engauge.qrc
