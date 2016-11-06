@@ -53,6 +53,7 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
 class FileCmdScript;
+class FittingWindow;
 class GeometryWindow;
 class Ghosts;
 class GraphicsScene;
@@ -263,6 +264,7 @@ private slots:
   void slotFilePrint();
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
+  void slotFittingWindowClosed();
   void slotGeometryWindowClosed();
   void slotHelpAbout();
   void slotHelpTutorial();
@@ -298,6 +300,7 @@ private slots:
   void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
+  void slotViewToolBarFittingWindow ();
   void slotViewToolBarGeometryWindow ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
@@ -419,6 +422,7 @@ private:
   void updateAfterCommandStatusBarCoords ();
   void updateChecklistGuide ();
   void updateControls (); // Update the widgets (typically in terms of show/hide state) depending on the application state.
+  void updateFittingWindow ();
   void updateGeometryWindow ();
   void updateGridLines();
   void updateHighlightOpacity();
@@ -477,6 +481,7 @@ private:
   QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewCoordSystem;
   QAction *m_actionViewDigitize;
+  QAction *m_actionViewFittingWindow;
   QAction *m_actionViewGeometryWindow;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
@@ -551,6 +556,7 @@ private:
   ViewSegmentFilter *m_viewSegmentFilter;
   QToolBar *m_toolSettingsViews;
   ChecklistGuide *m_dockChecklistGuide;
+  FittingWindow *m_dockFittingWindow;
   GeometryWindow *m_dockGeometryWindow;
 
   QComboBox *m_cmbCoordSystem;

@@ -52,6 +52,7 @@
 #include "ExportImageForRegression.h"
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
+#include "FittingWindow.h"
 #include "GeometryWindow.h"
 #include "Ghosts.h"
 #include "GraphicsItemsExtractor.h"
@@ -704,6 +705,14 @@ void MainWindow::createActionsView ()
                                                 "Show or hide the checklist guide"));
   connect (m_actionViewChecklistGuide, SIGNAL (changed ()), this, SLOT (slotViewToolBarChecklistGuide()));
 
+  m_actionViewFittingWindow = new QAction (tr ("Curve Fitting Window"), this);
+  m_actionViewFittingWindow->setCheckable (true);
+  m_actionViewFittingWindow->setChecked (false);
+  m_actionViewFittingWindow->setStatusTip (tr ("Show or hide the curve fitting window."));
+  m_actionViewFittingWindow->setWhatsThis (tr ("View Curve Fitting Window\n\n"
+                                               "Show or hide the curve fitting window"));
+  connect (m_actionViewFittingWindow, SIGNAL (changed ()), this, SLOT (slotViewToolBarFittingWindow()));
+
   m_actionViewGeometryWindow = new QAction (tr ("Geometry Window"), this);
   m_actionViewGeometryWindow->setCheckable (true);
   m_actionViewGeometryWindow->setChecked (false);
@@ -932,6 +941,10 @@ void MainWindow::createDockableWidgets ()
   m_dockChecklistGuide = new ChecklistGuide (this);
   connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
 
+  // Fitting window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
+  m_dockFittingWindow = new FittingWindow (this);
+  connect (m_dockFittingWindow, SIGNAL (signalFittingWindowClosed()), this, SLOT (slotFittingWindowClosed()));
+
   // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
   m_dockGeometryWindow = new GeometryWindow (this);
   connect (m_dockGeometryWindow, SIGNAL (signalGeometryWindowClosed()), this, SLOT (slotGeometryWindowClosed()));
@@ -1028,6 +1041,7 @@ void MainWindow::createMenus()
   m_menuView->addAction (m_actionViewBackground);
   m_menuView->addAction (m_actionViewDigitize);
   m_menuView->addAction (m_actionViewChecklistGuide);
+  m_menuView->addAction (m_actionViewFittingWindow);
   m_menuView->addAction (m_actionViewGeometryWindow);
   m_menuView->addAction (m_actionViewSettingsViews);
   m_menuView->addAction (m_actionViewCoordSystem);
@@ -2455,6 +2469,11 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                  SETTINGS_CHECKLIST_GUIDE_DOCK_AREA,
                  SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY,
                  Qt::RightDockWidgetArea);
+  addDockWindow (m_dockFittingWindow,
+                 settings,
+                 SETTINGS_FITTING_WINDOW_DOCK_AREA,
+                 SETTINGS_FITTING_WINDOW_DOCK_GEOMETRY,
+                 Qt::RightDockWidgetArea);
   addDockWindow (m_dockGeometryWindow,
                  settings,
                  SETTINGS_GEOMETRY_WINDOW_DOCK_AREA,
@@ -2521,6 +2540,14 @@ void MainWindow::settingsWrite ()
 
     settings.setValue (SETTINGS_CHECKLIST_GUIDE_DOCK_AREA, dockWidgetArea (m_dockChecklistGuide));
 
+  }
+  if (m_dockFittingWindow->isFloating()) {
+
+    settings.setValue (SETTINGS_FITTING_WINDOW_DOCK_AREA, Qt::NoDockWidgetArea);
+    settings.setValue (SETTINGS_FITTING_WINDOW_DOCK_GEOMETRY, m_dockFittingWindow->saveGeometry());
+  } else {
+
+    settings.setValue (SETTINGS_FITTING_WINDOW_DOCK_AREA, dockWidgetArea (m_dockFittingWindow));
   }
   if (m_dockGeometryWindow->isFloating()) {
 
@@ -2805,6 +2832,7 @@ void MainWindow::slotCmbCurve(int /* index */)
 
   updateViewedCurves();
   updateViewsOfSettings();
+  updateFittingWindow();
   updateGeometryWindow();
 }
 
@@ -2988,6 +3016,9 @@ void MainWindow::slotFileClose()
 
     // Remove scroll bars if they exist
     m_scene->setSceneRect (QRectF (0, 0, 1, 1));
+
+    // Remove stale data from fitting window
+    m_dockFittingWindow->clear ();
 
     // Remove stale data from geometry window
     m_dockGeometryWindow->clear ();
@@ -3186,6 +3217,13 @@ bool MainWindow::slotFileSaveAs()
   }
 
   return false;
+}
+
+void MainWindow::slotFittingWindowClosed()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFittingWindowClosed";
+
+  m_actionViewFittingWindow->setChecked (false);
 }
 
 void MainWindow::slotGeometryWindowClosed()
@@ -3631,6 +3669,17 @@ void MainWindow::slotViewToolBarDigitize ()
   }
 }
 
+void MainWindow::slotViewToolBarFittingWindow()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarFittingWindow";
+
+  if (m_actionViewFittingWindow->isChecked()) {
+    m_dockFittingWindow->show ();
+  } else {
+    m_dockFittingWindow->hide ();
+  }
+}
+
 void MainWindow::slotViewToolBarGeometryWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGeometryWindow";
@@ -4048,6 +4097,7 @@ void MainWindow::updateAfterCommand ()
 
   updateControls ();
   updateChecklistGuide ();
+  updateFittingWindow ();
   updateGeometryWindow();
 
   // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
@@ -4250,6 +4300,17 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
       LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
       break;
   }
+}
+
+void MainWindow::updateFittingWindow ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateFittingWindow";
+
+  // Update fitting window
+  m_dockFittingWindow->update (*m_cmdMediator,
+                               m_modelMainWindow,
+                               m_cmbCurve->currentText(),
+                               m_transformation);
 }
 
 void MainWindow::updateGeometryWindow ()

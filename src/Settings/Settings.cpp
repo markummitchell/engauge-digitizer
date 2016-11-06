@@ -19,6 +19,8 @@ const QString SETTINGS_BACKGROUND_IMAGE ("backgroundImage");
 const QString SETTINGS_CHECKLIST_GUIDE_DOCK_AREA ("checklistGuideDockArea");
 const QString SETTINGS_CHECKLIST_GUIDE_DOCK_GEOMETRY ("checklistGuideDockGeometry");
 const QString SETTINGS_CHECKLIST_GUIDE_WIZARD ("checklistGuideWizard");
+const QString SETTINGS_FITTING_WINDOW_DOCK_AREA ("fittingWindowDockArea");
+const QString SETTINGS_FITTING_WINDOW_DOCK_GEOMETRY ("fittingWindowDockGeometry");
 const QString SETTINGS_GEOMETRY_WINDOW_DOCK_AREA ("geometryWIndowDockArea");
 const QString SETTINGS_GEOMETRY_WINDOW_DOCK_GEOMETRY ("geometryWindowGeometry");
 const QString SETTINGS_GROUP_MAIN_WINDOW ("MainWindow"); // Capitalize both M and W since this is a group string

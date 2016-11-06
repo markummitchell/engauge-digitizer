@@ -237,6 +237,7 @@ HEADERS  += \
     src/FileCmd/FileCmdScript.h \
     src/FileCmd/FileCmdSerialize.h \
     src/Filter/FilterImage.h \
+    src/Fitting/FittingWindow.h \
     src/Format/FormatCoordsUnits.h \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.h \
     src/Format/FormatCoordsUnitsStrategyNonPolarTheta.h \
@@ -543,6 +544,7 @@ SOURCES += \
     src/FileCmd/FileCmdScript.cpp \
     src/FileCmd/FileCmdSerialize.cpp \
     src/Filter/FilterImage.cpp \
+    src/Fitting/FittingWindow.cpp \    
     src/Format/FormatCoordsUnits.cpp \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
     src/Format/FormatCoordsUnitsStrategyNonPolarTheta.cpp \
@@ -724,6 +726,7 @@ INCLUDEPATH += src \
                src/Export \
                src/FileCmd \
                src/Filter \
+               src/Fitting \
                src/Format \
                src/Geometry \
                src/Ghosts \

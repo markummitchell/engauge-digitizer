@@ -89,6 +89,11 @@ void GeometryWindow::closeEvent(QCloseEvent * /* event */)
   emit signalGeometryWindowClosed();
 }
 
+int GeometryWindow::columnBodyPointIdentifiers ()
+{
+  return COLUMN_BODY_POINT_IDENTIFIERS;
+}
+
 int GeometryWindow::fold2dIndexes (int row,
                                    int col,
                                    int rowLow,
@@ -96,11 +101,6 @@ int GeometryWindow::fold2dIndexes (int row,
                                    int colHigh) const
 {
   return (row - rowLow) * (colHigh - colLow + 1) + (col - colLow);
-}
-
-int GeometryWindow::columnBodyPointIdentifiers ()
-{
-  return COLUMN_BODY_POINT_IDENTIFIERS;
 }
 
 void GeometryWindow::initializeHeader ()
@@ -201,6 +201,13 @@ void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */
   }
 }
 
+void GeometryWindow::unselectAll ()
+{
+  QItemSelectionModel *selectionModel = m_view->selectionModel ();
+
+  selectionModel->clearSelection ();
+}
+
 void GeometryWindow::update (const CmdMediator &cmdMediator,
                              const MainWindowModel &modelMainWindow,
                              const QString &curveSelected,
@@ -274,9 +281,3 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
   m_view->setColumnHidden (COLUMN_BODY_POINT_IDENTIFIERS, true);
 }
 
-void GeometryWindow::unselectAll ()
-{
-  QItemSelectionModel *selectionModel = m_view->selectionModel ();
-
-  selectionModel->clearSelection ();
-}

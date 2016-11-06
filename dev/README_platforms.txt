@@ -79,6 +79,13 @@ Linux Distribution Issues
           |----------------------------------------------------------------------------------------------------------------|
           |                                             Known AppImage Issues                                              |
           |----------------------------------------------------------------------------------------------------------------|
+	  |Error Message:             './engauge: No such file or directory'                                               |
+	  |Description:               The operating system is configured to support only 64 bit applications               |
+	  |Solution (Ubuntu/Kubuntu): Install libraries to support 32 bit applications                                     |
+	  |                             >sudo dpkg --add-architecture i386                                                 |
+	  |                             >sudo apt-get update                                                               |
+	  |                             >sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386                  |
+          |----------------------------------------------------------------------------------------------------------------|
           |Error Message:             'Fuse is not installed'                                                              |
           |Description:               The fuse package must be installed                                                   |
           |Solution (Ubuntu/Kubuntu): The commands to install the fuse package on Ubuntu/Kubuntu are:                      |
