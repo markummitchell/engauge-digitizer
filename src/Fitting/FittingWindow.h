@@ -13,8 +13,12 @@ class CmdMediator;
 class Curve;
 class FittingModel;
 class MainWindowModel;
+class QComboBox;
 class QItemSelection;
+class QLabel;
+class QLineEdit;
 class QString;
+class QTableView;
 class Transformation;
 
 /// Window that displays curve fitting as applied to the currently selected curve
@@ -37,12 +41,10 @@ public:
   virtual void closeEvent(QCloseEvent *event);
 
   /// Populate the table with the specified Curve
-  void update (const CmdMediator &cmdMediator,
-               const MainWindowModel &modelMainWindow,
-               const QString &curveSelected,
-               const Transformation &transformation);
+  void update (const CmdMediator &cmdMediator);
 
-public slots:
+private slots:
+  void slotCmbOrder(int index);
 
 signals:
   /// Signal that this QDockWidget was just closed
@@ -50,6 +52,21 @@ signals:
 
 private:
   FittingWindow();
+
+  void createWidgets();
+  void initializeOrder ();
+  void resizeTable (int order);
+
+  QComboBox *m_cmbOrder;
+  QLabel *m_labelY;
+  QTableView *m_view;
+  FittingModel *m_model;
+  QLineEdit *m_lblMeanSquareError;
+  QLineEdit *m_lblRootMeanSquare;
+  QLineEdit *m_lblRSquared;
+
+  bool m_isLogXTheta;
+  bool m_isLogYRadius;
 };
 
 #endif // FITTING_WINDOW_H
