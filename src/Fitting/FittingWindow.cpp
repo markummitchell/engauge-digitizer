@@ -21,8 +21,10 @@
 #include <QItemSelectionModel>
 #include <QLabel>
 #include <QLineEdit>
+#include <qmath.h>
 #include <QTableView>
 #include <QTextStream>
+#include "Transformation.h"
 
 const int COLUMN_COEFFICIENTS = 0;
 const int COLUMN_POLYNOMIAL_TERMS = 1;
@@ -39,8 +41,98 @@ FittingWindow::FittingWindow (QWidget *parent) :
   setWhatsThis (tr ("Curve Fitting Window\n\n"
                     "This window applies a curve fit to the currently selected curve"));
 
+  m_coefficients.resize (MAX_POLYNOMIAL_ORDER + 1);
+
   createWidgets ();
   initializeOrder ();
+}
+
+FittingWindow::~FittingWindow()
+{
+}
+
+void FittingWindow::calculateCurveFit (const PointsConvenient & /* pointsConvenient */)
+{
+  int order, row;
+
+  for (order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
+    m_coefficients [order] = 0;
+  }
+
+  for (row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
+
+    QStandardItem *item = new QStandardItem (QString::number (m_coefficients [order]));
+    m_model->setItem (row, COLUMN_COEFFICIENTS, item);
+  }
+}
+
+void FittingWindow::calculateCurveFitAndStatistics (const Curve *curve,
+                                                    const Transformation &transformation)
+{
+  // Copy points to convenient list
+  PointsConvenient pointsConvenient;
+
+  const Points points = curve->points();
+  Points::const_iterator itr;
+  for (itr = points.begin (); itr != points.end (); itr++) {
+
+    const Point &point = *itr;
+    QPointF posScreen = point.posScreen ();
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (posScreen,
+                                              posGraph);
+    pointsConvenient.append (posGraph);
+  }
+
+  calculateCurveFit (pointsConvenient);
+  calculateStatistics (pointsConvenient);
+}
+
+void FittingWindow::calculateStatistics (const PointsConvenient &pointsConvenient)
+{
+  // First pass to get average y
+  double ySum = 0;
+  PointsConvenient::const_iterator itrC;
+  for (itrC = pointsConvenient.begin (); itrC != pointsConvenient.end (); itrC++) {
+
+    const QPointF &pointC = *itrC;
+    ySum += pointC.y();
+  }
+  double yAverage = ySum / pointsConvenient.length();
+
+  // Second pass to compute squared terms
+  double mseSum = 0, rSquaredNumerator = 0, rSquaredDenominator = 0;
+  for (itrC = pointsConvenient.begin(); itrC != pointsConvenient.end (); itrC++) {
+
+    const QPointF &pointC = *itrC;
+    double yActual = pointC.y();
+    double yCurveFit = yFromXAndCoefficients (pointC.x());
+
+    mseSum              += (yCurveFit - yActual ) * (yCurveFit - yActual );
+    rSquaredNumerator   += (yCurveFit - yAverage) * (yCurveFit - yAverage);
+    rSquaredDenominator += (yActual   - yAverage) * (yActual   - yAverage);
+  }
+
+  double mse = mseSum / pointsConvenient.count ();
+  double rse = qSqrt (mse);
+  double rSquared = (rSquaredDenominator > 0 ?
+                       rSquaredNumerator / rSquaredDenominator :
+                       0);
+
+  m_lblMeanSquareError->setText (QString::number (mse / pointsConvenient.count ()));
+  m_lblRootMeanSquare->setText (QString::number (rse));
+  m_lblRSquared->setText (QString::number (rSquared));
+}
+
+void FittingWindow::clear ()
+{
+}
+
+void FittingWindow::closeEvent(QCloseEvent * /* event */)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::closeEvent";
+
+  emit signalFittingWindowClosed();
 }
 
 void FittingWindow::createWidgets ()
@@ -57,13 +149,9 @@ void FittingWindow::createWidgets ()
   layout->addWidget (labelOrder, row, 0, 1, 1);
 
   m_cmbOrder = new QComboBox;
-  m_cmbOrder->addItem ("0", QVariant (0));
-  m_cmbOrder->addItem ("1", QVariant (1));
-  m_cmbOrder->addItem ("2", QVariant (2));
-  m_cmbOrder->addItem ("3", QVariant (3));
-  m_cmbOrder->addItem ("4", QVariant (4));
-  m_cmbOrder->addItem ("5", QVariant (5));
-  m_cmbOrder->addItem ("6", QVariant (6));
+  for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
+    m_cmbOrder->addItem (QString::number (order), QVariant (order));
+  }
   connect (m_cmbOrder, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbOrder (int)));
   layout->addWidget (m_cmbOrder, row++, 1, 1, 1);
 
@@ -100,7 +188,7 @@ void FittingWindow::createWidgets ()
 
   m_lblRootMeanSquare = new QLineEdit;
   m_lblRootMeanSquare->setReadOnly (true);
-  m_lblRootMeanSquare->setWhatsThis (tr ("Calculated root mean square statistic"));
+  m_lblRootMeanSquare->setWhatsThis (tr ("Calculated root mean square statistic. This is calculated as the square root of the mean square error"));
   layout->addWidget (m_lblRootMeanSquare, row++, 1, 1, 1);
 
   QLabel *lblRSquared = new QLabel (tr ("R squared:"));
@@ -110,21 +198,6 @@ void FittingWindow::createWidgets ()
   m_lblRSquared->setReadOnly (true);
   m_lblRSquared->setWhatsThis (tr ("Calculated R squared statistic"));
   layout->addWidget (m_lblRSquared, row++, 1, 1, 1);
-}
-
-FittingWindow::~FittingWindow()
-{
-}
-
-void FittingWindow::clear ()
-{
-}
-
-void FittingWindow::closeEvent(QCloseEvent * /* event */)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::closeEvent";
-
-  emit signalFittingWindowClosed();
 }
 
 void FittingWindow::initializeOrder ()
@@ -171,15 +244,43 @@ void FittingWindow::slotCmbOrder(int /* index  */)
   resizeTable (order);
 }
 
-void FittingWindow::update (const CmdMediator &cmdMediator)
+void FittingWindow::update (const CmdMediator &cmdMediator,
+                            const QString &curveSelected,
+                            const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::update";
 
+  // Save inputs
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 
   int order = m_cmbOrder->currentData().toInt();
 
+  // Table size may have to change
   resizeTable (order);
+
+  if (transformation.transformIsDefined()) {
+
+    // Gather and calculate geometry data
+    const Curve *curve = cmdMediator.document().curveForCurveName (curveSelected);
+
+    ENGAUGE_CHECK_PTR (curve);
+
+    if (curve->numPoints() > 0) {
+
+      calculateCurveFitAndStatistics (curve,
+                                      transformation);
+    }
+  }
 }
 
+double FittingWindow::yFromXAndCoefficients (double x) const
+{
+  double sum = 0;
+
+  for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
+    sum += m_coefficients [order] * qPow (x, (double) order);
+  }
+
+  return sum;
+}

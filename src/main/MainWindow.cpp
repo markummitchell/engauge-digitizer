@@ -4307,7 +4307,9 @@ void MainWindow::updateFittingWindow ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateFittingWindow";
 
   // Update fitting window
-  m_dockFittingWindow->update (*m_cmdMediator);
+  m_dockFittingWindow->update (*m_cmdMediator,
+                               m_cmbCurve->currentText (),
+                               m_transformation);
 }
 
 void MainWindow::updateGeometryWindow ()

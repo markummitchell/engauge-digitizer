@@ -8,6 +8,9 @@
 #define FITTING_WINDOW_H
 
 #include <QDockWidget>
+#include <QList>
+#include <QPointF>
+#include <QVector>
 
 class CmdMediator;
 class Curve;
@@ -20,6 +23,10 @@ class QLineEdit;
 class QString;
 class QTableView;
 class Transformation;
+
+const int MAX_POLYNOMIAL_ORDER = 6;
+
+typedef QList<QPointF> PointsConvenient;
 
 /// Window that displays curve fitting as applied to the currently selected curve
 ///
@@ -41,7 +48,9 @@ public:
   virtual void closeEvent(QCloseEvent *event);
 
   /// Populate the table with the specified Curve
-  void update (const CmdMediator &cmdMediator);
+  void update (const CmdMediator &cmdMediator,
+               const QString &curveSelected,
+               const Transformation &transformation);
 
 private slots:
   void slotCmbOrder(int index);
@@ -53,9 +62,14 @@ signals:
 private:
   FittingWindow();
 
+  void calculateCurveFit (const PointsConvenient &pointsConvenient);
+  void calculateCurveFitAndStatistics (const Curve *curve,
+                                       const Transformation &transformation);
+  void calculateStatistics (const PointsConvenient &pointsConvenient);
   void createWidgets();
   void initializeOrder ();
   void resizeTable (int order);
+  double yFromXAndCoefficients (double x) const;
 
   QComboBox *m_cmbOrder;
   QLabel *m_labelY;
@@ -67,6 +81,9 @@ private:
 
   bool m_isLogXTheta;
   bool m_isLogYRadius;
+
+  // Calculated curve fit coefficients, with 0th for constant term, 1st for linear term, ...
+  QVector<double> m_coefficients;
 };
 
 #endif // FITTING_WINDOW_H
