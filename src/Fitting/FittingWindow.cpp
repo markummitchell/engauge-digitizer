@@ -28,8 +28,6 @@ FittingWindow::FittingWindow (QWidget *parent) :
   setStatusTip (tr ("Curve Fitting Window"));
   setWhatsThis (tr ("Curve Fitting Window\n\n"
                     "This window applies a curve fit to the currently selected curve"));
-
-  setWidget (m_view);
 }
 
 FittingWindow::~FittingWindow()

@@ -15,7 +15,6 @@ class FittingModel;
 class MainWindowModel;
 class QItemSelection;
 class QString;
-class QTableView;
 class Transformation;
 
 /// Window that displays curve fitting as applied to the currently selected curve
@@ -51,8 +50,6 @@ signals:
 
 private:
   FittingWindow();
-
-  QTableView *m_view;
 };
 
 #endif // FITTING_WINDOW_H
