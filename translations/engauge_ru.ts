@@ -336,7 +336,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation type="vanished">Введите вторую координату опорной точки.
@@ -400,7 +400,7 @@ The expected format of the coordinate value is determined by the locale setting.
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Введите вторую координату опорной точки.
@@ -459,7 +459,13 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Введите значение первой координаты соответствующее точкам графика.
+
+Оставьте поле пустым если нет соответствующих значений для точек графика.
+
+Для декартовой системы координат это X координата. Для полярной - это радиус R.
+
+Ожидаемый формат значений координат определяется текущими настройками. Если введенное значение не принято как ожидаемое, проверьте текущие настройки в Настройки/ Главное Окно... </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
@@ -472,10 +478,16 @@ The expected format of the coordinate value is determined by the locale setting.
 
 Leave this field empty if no value is to be applied to the graph points.
 
-For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
+For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Введите значение второй координаты соответствующее точкам графика.
+
+Оставьте поле пустым если нет соответствующих значений для точек графика.
+
+Для декартовой системы координат это Y координата. Для полярной - это угол Тэтта.
+
+Ожидаемый формат значений координат определяется текущими настройками. Если введенное значение не принято как ожидаемое, проверьте текущие настройки в Настройки/ Главное Окно... </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />
@@ -1072,12 +1084,12 @@ Reorder curves by dragging them around.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128" />
         <source>Reset Default</source>
-        <translation type="unfinished" />
+        <translation>Сбросить "По умолчанию"</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="unfinished" />
+        <translation>Сбросить настройки "По умолчанию" для будущих графиков кривых до исходных настроек.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494" />

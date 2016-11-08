@@ -147,7 +147,7 @@ void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
   m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For plot plots this is the angle Theta.\n\n"
+                                  "For cartesian plots this is Y. For polar plots this is the angle Theta.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphY, 0);

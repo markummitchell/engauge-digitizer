@@ -338,14 +338,14 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
     <message>
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="vanished">Introduza o segundo gráfico de coordenadas do ponto do eixo .
+        <translation type="vanished">Introduza o segundo gráfico de coordenadas do eixo point.
 
-Para gráficos cartesianos este é Y. Para tramas do enredo este é o ângulo Theta .
+Para gráficos cartesianos este é Y. Para gráficos polares este é o ângulo Theta.
 
-O formato esperado do valor da coordenada é determinada pela configuração de localidade . Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <source>)</source>
@@ -404,14 +404,14 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introduza o segundo gráfico de coordenadas do ponto do eixo .
+        <translation>Introduza o segundo gráfico de coordenadas do eixo point.
 
-Para gráficos cartesianos este é Y. Para tramas do enredo este é o ângulo Theta .
+Para gráficos cartesianos este é Y. Para gráficos polares este é o ângulo Theta.
 
-O formato esperado do valor da coordenada é determinada pela configuração de localidade . Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
@@ -484,14 +484,14 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
 
 Leave this field empty if no value is to be applied to the graph points.
 
-For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
+For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Entre o segundo valor gráfico de coordenadas para ser aplicada aos pontos do gráfico.
 
 Deixe este campo em branco se nenhum valor deve ser aplicado aos pontos do gráfico.
 
-Para gráficos cartesianos esta é a coordenada Y. Para parcelas enredo este é o ângulo Theta.
+Para gráficos cartesianos esta é a coordenada Y. Para gráficos polares este é o ângulo Theta.
 
 O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>

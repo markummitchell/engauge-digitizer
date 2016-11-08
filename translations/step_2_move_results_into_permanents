@@ -5,12 +5,17 @@ function main {
         move_one $language
     done
 
-    echo "*******************************************************"
-    echo "* Remaining steps:                                    *"
-    echo "*   1) Run 'lrelease engauge.pro'                     *"
-    echo "*   2) Copy translations directory into bin directory *"
-    echo "*   3) Upload the engauge_*.ts files to Transifex     *"
-    echo "*******************************************************"    
+    echo "********************************************************************"
+    echo "* Remaining steps:                                                 *"
+    echo "*   1) Run 'lrelease engauge.pro'                                  *"
+    echo "*   2) Copy translations directory into bin directory              *"
+    echo "*   3) Update the english engauge_en.ts file to Transifex (since   *"
+    echo "*      non-english uploads will be silently filtered by that file) *"
+    echo "*      3a) Click on "Resources"                                    *"
+    echo "*      3b) Click on "engauge_en.ts"                                *"
+    echo "*      3c) Click on "Update source file"                           *"
+    echo "*   4) Upload the non-english engauge_*.ts files to Transifex      *"
+    echo "********************************************************************"    
 }
 
 function move_one {

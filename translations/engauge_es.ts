@@ -325,11 +325,11 @@ Para ejecutar el Asistente de Guía Lista de verificación cuando se importa un 
 For cartesian plots this is X. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="vanished">Introducir la coordenada del primer gráfico del punto del eje .
+        <translation type="vanished">Digite o primeiro gráfico de coordenadas do ponto do eixo.
 
-Para parcelas cartesianas esto es X. Para diagramas polares este es el radio R.
+Para gráficos cartesianos este é X. Para gráficos polares este é o raio R.
 
-El formato esperado del valor de coordenadas está determinada por la configuración local . Si valores escritos no son reconocidos como se esperaba , compruebe la configuración local en Configuración / Ventana principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <source>, </source>
@@ -338,14 +338,14 @@ El formato esperado del valor de coordenadas está determinada por la configurac
     <message>
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="vanished">Introducir la coordenada del segundo gráfico del punto del eje .
+        <translation type="vanished">Introduza o segundo gráfico de coordenadas do ponto do eixo.
 
-Para parcelas cartesianas esto es Y. Para parcelas de la trama este es el ángulo theta .
+Para gráficos cartesianos este é Y. Para gráficos polares este é o ângulo Theta.
 
-El formato esperado del valor de coordenadas está determinada por la configuración local . Si valores escritos no son reconocidos como se esperaba , compruebe la configuración local en Configuración / Ventana principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <source>)</source>
@@ -389,11 +389,11 @@ El formato esperado del valor de coordenadas está determinada por la configurac
 For cartesian plots this is X. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introducir la coordenada del primer gráfico del punto del eje .
+        <translation>Digite o primeiro gráfico de coordenadas do ponto do eixo.
 
-Para parcelas cartesianas esto es X. Para diagramas polares este es el radio R.
+Para gráficos cartesianos este é X. Para gráficos polares este é o raio R.
 
-El formato esperado del valor de coordenadas está determinada por la configuración local . Si valores escritos no son reconocidos como se esperaba , compruebe la configuración local en Configuración / Ventana principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
@@ -404,14 +404,14 @@ El formato esperado del valor de coordenadas está determinada por la configurac
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introducir la coordenada del segundo gráfico del punto del eje .
+        <translation>Introduza o segundo gráfico de coordenadas do ponto do eixo.
 
-Para parcelas cartesianas esto es Y. Para parcelas de la trama este es el ángulo theta .
+Para gráficos cartesianos este é Y. Para gráficos polares este é o ângulo Theta.
 
-El formato esperado del valor de coordenadas está determinada por la configuración local . Si valores escritos no son reconocidos como se esperaba , compruebe la configuración local en Configuración / Ventana principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
@@ -465,13 +465,13 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introduzca el primer valor de coordenadas del gráfico que se aplicará a los puntos del gráfico.
+        <translation>Entre o primeiro valor gráfico de coordenadas para ser aplicada aos pontos do gráfico.
 
-Deje este campo vacío si no se va a aplicar ningún valor a los puntos del gráfico.
+Deixe este campo em branco se nenhum valor deve ser aplicado aos pontos do gráfico.
 
-Para los diagramas cartesianos esta es la coordenada X. Para los diagramas polares, este es el radio R.
+Para gráficos cartesianos esta é a coordenada X. Para gráficos polares este é o raio R.
 
-El formato esperado del valor de coordenadas está determinado por la configuración regional. Si los valores tipificados no se reconocen como se espera, compruebe la configuración regional en Configuración / Ventana principal ...</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
@@ -484,18 +484,16 @@ El formato esperado del valor de coordenadas está determinado por la configurac
 
 Leave this field empty if no value is to be applied to the graph points.
 
-For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
+For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introduzca el segundo valor de coordenadas del gráfico que se aplicará a los puntos del gráfico.
+        <translation>Entre o segundo valor gráfico de coordenadas para ser aplicada aos pontos do gráfico.
 
-Deje este campo vacío si no se va a aplicar ningún valor a los puntos del gráfico.
+Deixe este campo em branco se nenhum valor deve ser aplicado aos pontos do gráfico.
 
-Para los diagramas cartesianos esta es la coordenada Y. Para las parcelas este es el ángulo Theta.
+Para gráficos cartesianos esta é a coordenada Y. Para gráficos polares este é o ângulo Theta.
 
-El formato esperado del valor de coordenadas está determinado por la configuración regional. Si los valores tipificados no se reconocen como se espera, compruebe la configuración regional en Configuración / Ventana principal ...
-
-</translation>
+O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />

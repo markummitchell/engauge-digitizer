@@ -346,7 +346,7 @@ Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For plot plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Zadejte druhou souřadnici osového bodu.
@@ -426,7 +426,7 @@ Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud
 
 Leave this field empty if no value is to be applied to the graph points.
 
-For cartesian plots this is the Y coordinate. For plot plots this is the angle Theta.
+For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Zadejte druhou souřadnici grafu, která bude použita pro body grafu, 
