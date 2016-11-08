@@ -277,6 +277,7 @@ HEADERS  += \
     main/MainTitleBarFormat.h \
     main/MainWindow.h \
     main/MainWindowModel.h \
+    Matrix/Matrix.h \
     util/MigrateToVersion6.h \
     Mime/MimePoints.h \
     util/mmsubs.h \
@@ -579,6 +580,7 @@ SOURCES += \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
+    Matrix/Matrix.cpp \
     main/MainWindow.cpp \
     main/MainWindowModel.cpp \
     util/MigrateToVersion6.cpp \
@@ -684,6 +686,7 @@ INCLUDEPATH += Background \
                Load \
                Logger \
                main \
+               Matrix \
                Mime \
                Network \
                NonPdf \

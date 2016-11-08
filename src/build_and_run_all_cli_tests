@@ -14,6 +14,7 @@ tests=( \
     TestFormats \
     TestGraphCoords \
     TestGridLineLimiter \
+    TestMatrix \
     TestProjectedPoint \
     TestSegmentFill \
     TestSpline \

@@ -293,6 +293,7 @@ HEADERS  += \
     src/Load/LoadImageFromUrl.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
+    src/Matrix/Matrix.h \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
@@ -597,6 +598,7 @@ SOURCES += \
     src/Load/LoadImageFromUrl.cpp \
     src/Logger/Logger.cpp \
     src/Logger/LoggerUpload.cpp \
+    src/Matrix/Matrix.cpp \
     src/main/main.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
@@ -742,6 +744,7 @@ INCLUDEPATH += src \
                src/Load \
                src/Logger \
                src/main \
+               src/Matrix \
                src/Mime \
                src/Network \
                src/NonPdf \
