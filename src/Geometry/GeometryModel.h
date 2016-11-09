@@ -21,6 +21,10 @@ public:
   /// Override for special processing
   virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+  /// Support dragging of multiple cells. Without this only one cell can be copied by dragging. Clipboard copying
+  /// is handled elsewhere in the window class
+  QMimeData *mimeData (const QModelIndexList &indexes) const;
+
   /// Set the point identifier to be highlighted. Value is empty for no highlighting
   void setCurrentPointIdentifier (const QString  &pointIdentifier);
 

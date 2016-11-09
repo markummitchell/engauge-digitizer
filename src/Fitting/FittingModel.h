@@ -21,7 +21,8 @@ public:
   /// Override for special processing
   virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-  /// Support dragging of multiple cells. Without this only one cell can be copied
+  /// Support dragging of multiple cells. Without this only one cell can be copied by dragging. Clipboard copying
+  /// is handled elsewhere in the window class
   QMimeData *mimeData (const QModelIndexList &indexes) const;
 
 private:

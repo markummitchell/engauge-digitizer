@@ -54,6 +54,7 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
 
   m_view = new QTableView;
   m_view->setModel (m_model); // Call before setSelectionModel since this also overrides the selection model
+  m_view->setDragEnabled (true);
   m_view->horizontalHeader()->hide();
   m_view->verticalHeader()->hide();
   m_view->setEditTriggers(QAbstractItemView::NoEditTriggers); // Control is read only

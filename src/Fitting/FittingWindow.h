@@ -7,6 +7,7 @@
 #ifndef FITTING_WINDOW_H
 #define FITTING_WINDOW_H
 
+#include "DocumentModelExportFormat.h"
 #include <QDockWidget>
 #include <QList>
 #include <QPointF>
@@ -49,12 +50,16 @@ public:
   virtual void closeEvent(QCloseEvent *event);
 
   /// Populate the table with the specified Curve
-  void updateParameters (const CmdMediator &cmdMediator,
-                         const QString &curveSelected,
-                         const Transformation &transformation);
+  void update (const CmdMediator &cmdMediator,
+               const QString &curveSelected,
+               const Transformation &transformation);
 
 private slots:
+  /// Update after change in the selected curve fit order
   void slotCmbOrder(int index);
+
+  /// Prepare for copy after selection has changed
+  void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
 
 signals:
   /// Signal that this QDockWidget was just closed
@@ -67,12 +72,17 @@ private:
   void calculateCurveFitAndStatistics ();
   void calculateStatistics ();
   void createWidgets();
+  int fold2dIndexes (int row,
+                     int col,
+                     int rowLow,
+                     int colLow,
+                     int colHigh) const;
   void initializeOrder ();
   void loadXAndYArrays (Matrix &X,
                         QVector<double> &Y) const;
   int maxOrder () const;
+  void refreshTable ();
   void resizeTable (int order);
-  void update ();
   double yFromXAndCoefficients (double x) const;
 
   QComboBox *m_cmbOrder;
@@ -89,6 +99,9 @@ private:
 
   // Calculated curve fit coefficients, with 0th for constant term, 1st for linear term, ...
   QVector<double> m_coefficients;
+
+  // Export format is updated after every CmdAbstractBase gets redone/undone
+  DocumentModelExportFormat m_modelExport;
 };
 
 #endif // FITTING_WINDOW_H
