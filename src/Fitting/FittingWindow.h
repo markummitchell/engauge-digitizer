@@ -16,6 +16,7 @@ class CmdMediator;
 class Curve;
 class FittingModel;
 class MainWindowModel;
+class Matrix;
 class QComboBox;
 class QItemSelection;
 class QLabel;
@@ -48,9 +49,9 @@ public:
   virtual void closeEvent(QCloseEvent *event);
 
   /// Populate the table with the specified Curve
-  void update (const CmdMediator &cmdMediator,
-               const QString &curveSelected,
-               const Transformation &transformation);
+  void updateParameters (const CmdMediator &cmdMediator,
+                         const QString &curveSelected,
+                         const Transformation &transformation);
 
 private slots:
   void slotCmbOrder(int index);
@@ -62,13 +63,16 @@ signals:
 private:
   FittingWindow();
 
-  void calculateCurveFit (const PointsConvenient &pointsConvenient);
-  void calculateCurveFitAndStatistics (const Curve *curve,
-                                       const Transformation &transformation);
-  void calculateStatistics (const PointsConvenient &pointsConvenient);
+  void calculateCurveFit ();
+  void calculateCurveFitAndStatistics ();
+  void calculateStatistics ();
   void createWidgets();
   void initializeOrder ();
+  void loadXAndYArrays (Matrix &X,
+                        QVector<double> &Y) const;
+  int maxOrder () const;
   void resizeTable (int order);
+  void update ();
   double yFromXAndCoefficients (double x) const;
 
   QComboBox *m_cmbOrder;
@@ -81,6 +85,7 @@ private:
 
   bool m_isLogXTheta;
   bool m_isLogYRadius;
+  PointsConvenient m_pointsConvenient;
 
   // Calculated curve fit coefficients, with 0th for constant term, 1st for linear term, ...
   QVector<double> m_coefficients;

@@ -13,6 +13,7 @@
 #include "GeometryModel.h"
 #include "FittingWindow.h"
 #include "Logger.h"
+#include "Matrix.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QComboBox>
@@ -51,12 +52,27 @@ FittingWindow::~FittingWindow()
 {
 }
 
-void FittingWindow::calculateCurveFit (const PointsConvenient & /* pointsConvenient */)
+void FittingWindow::calculateCurveFit ()
 {
   int order, row;
 
+  // Calculate X and y arrays in y = X a
+  Matrix X (m_pointsConvenient.size (), maxOrder () + 1);
+  QVector<double> Y (m_pointsConvenient.size ());
+  loadXAndYArrays (X, Y);
+
+  // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
+  Matrix denominator = X.transpose () * X;
+  QVector<double> a = denominator.inverse () * X.transpose () * Y;
+
   for (order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
-    m_coefficients [order] = 0;
+    if (order <= maxOrder ()) {
+      // Copy from polynomial regression vector
+      m_coefficients [order] = a [order];
+    } else {
+      // Set to zero in case value gets used somewhere
+      m_coefficients [order] = 0;
+    }
   }
 
   for (row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
@@ -66,43 +82,27 @@ void FittingWindow::calculateCurveFit (const PointsConvenient & /* pointsConveni
   }
 }
 
-void FittingWindow::calculateCurveFitAndStatistics (const Curve *curve,
-                                                    const Transformation &transformation)
+void FittingWindow::calculateCurveFitAndStatistics ()
 {
-  // Copy points to convenient list
-  PointsConvenient pointsConvenient;
-
-  const Points points = curve->points();
-  Points::const_iterator itr;
-  for (itr = points.begin (); itr != points.end (); itr++) {
-
-    const Point &point = *itr;
-    QPointF posScreen = point.posScreen ();
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (posScreen,
-                                              posGraph);
-    pointsConvenient.append (posGraph);
-  }
-
-  calculateCurveFit (pointsConvenient);
-  calculateStatistics (pointsConvenient);
+  calculateCurveFit ();
+  calculateStatistics ();
 }
 
-void FittingWindow::calculateStatistics (const PointsConvenient &pointsConvenient)
+void FittingWindow::calculateStatistics ()
 {
   // First pass to get average y
   double ySum = 0;
   PointsConvenient::const_iterator itrC;
-  for (itrC = pointsConvenient.begin (); itrC != pointsConvenient.end (); itrC++) {
+  for (itrC = m_pointsConvenient.begin (); itrC != m_pointsConvenient.end (); itrC++) {
 
     const QPointF &pointC = *itrC;
     ySum += pointC.y();
   }
-  double yAverage = ySum / pointsConvenient.length();
+  double yAverage = ySum / m_pointsConvenient.length();
 
   // Second pass to compute squared terms
   double mseSum = 0, rSquaredNumerator = 0, rSquaredDenominator = 0;
-  for (itrC = pointsConvenient.begin(); itrC != pointsConvenient.end (); itrC++) {
+  for (itrC = m_pointsConvenient.begin(); itrC != m_pointsConvenient.end (); itrC++) {
 
     const QPointF &pointC = *itrC;
     double yActual = pointC.y();
@@ -113,13 +113,13 @@ void FittingWindow::calculateStatistics (const PointsConvenient &pointsConvenien
     rSquaredDenominator += (yActual   - yAverage) * (yActual   - yAverage);
   }
 
-  double mse = mseSum / pointsConvenient.count ();
+  double mse = mseSum / m_pointsConvenient.count ();
   double rse = qSqrt (mse);
   double rSquared = (rSquaredDenominator > 0 ?
                        rSquaredNumerator / rSquaredDenominator :
                        0);
 
-  m_lblMeanSquareError->setText (QString::number (mse / pointsConvenient.count ()));
+  m_lblMeanSquareError->setText (QString::number (mse / m_pointsConvenient.count ()));
   m_lblRootMeanSquare->setText (QString::number (rse));
   m_lblRSquared->setText (QString::number (rSquared));
 }
@@ -200,6 +200,33 @@ void FittingWindow::createWidgets ()
   layout->addWidget (m_lblRSquared, row++, 1, 1, 1);
 }
 
+void FittingWindow::loadXAndYArrays (Matrix &X,
+                                     QVector<double> &Y) const
+{
+  ENGAUGE_ASSERT (Y.size () == X.rows ());
+
+  int row;
+  PointsConvenient::const_iterator itr;
+  for (row = 0, itr = m_pointsConvenient.begin(); itr != m_pointsConvenient.end(); itr++, row++) {
+
+    const QPointF &p = *itr;
+    double x = p.x ();
+    double y = p.y ();
+
+    for (int order = 0; order <= maxOrder (); order++) {
+
+      X.set (row, order, qPow (x, order));
+    }
+
+    Y [row] = y;
+  }
+}
+
+int FittingWindow::maxOrder () const
+{
+  return m_cmbOrder->currentData().toInt();
+}
+
 void FittingWindow::initializeOrder ()
 {
   const int SECOND_ORDER = 2;
@@ -239,14 +266,22 @@ void FittingWindow::resizeTable (int order)
 
 void FittingWindow::slotCmbOrder(int /* index  */)
 {
-  int order = m_cmbOrder->currentData().toInt();
-
-  resizeTable (order);
+  update ();
 }
 
-void FittingWindow::update (const CmdMediator &cmdMediator,
-                            const QString &curveSelected,
-                            const Transformation &transformation)
+void FittingWindow::update ()
+{
+  int order = m_cmbOrder->currentData().toInt();
+
+  // Table size may have to change
+  resizeTable (order);
+
+  calculateCurveFitAndStatistics ();
+}
+
+void FittingWindow::updateParameters (const CmdMediator &cmdMediator,
+                                      const QString &curveSelected,
+                                      const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::update";
 
@@ -254,10 +289,7 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 
-  int order = m_cmbOrder->currentData().toInt();
-
-  // Table size may have to change
-  resizeTable (order);
+  m_pointsConvenient.clear ();
 
   if (transformation.transformIsDefined()) {
 
@@ -268,10 +300,24 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
 
     if (curve->numPoints() > 0) {
 
-      calculateCurveFitAndStatistics (curve,
-                                      transformation);
+      // Copy points to convenient list
+      PointsConvenient pointsConvenient;
+
+      const Points points = curve->points();
+      Points::const_iterator itr;
+      for (itr = points.begin (); itr != points.end (); itr++) {
+
+        const Point &point = *itr;
+        QPointF posScreen = point.posScreen ();
+        QPointF posGraph;
+        transformation.transformScreenToRawGraph (posScreen,
+                                                  posGraph);
+        m_pointsConvenient.append (posGraph);
+      }
     }
   }
+
+  update ();
 }
 
 double FittingWindow::yFromXAndCoefficients (double x) const

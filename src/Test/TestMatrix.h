@@ -19,7 +19,14 @@ private slots:
   void initTestCase ();
 
   void testDeterminant ();
-
+  void testInverse ();
+  void testInverse2 ();
+  void testMultiplyNonSquareMatrix ();
+  void testMultiplyNonSquareMatrixAndVector ();    
+  void testMultiplySquareMatrix ();
+  void testMultiplySquareMatrixAndVector ();  
+  void testTranspose ();
+  
 private:
 
 };

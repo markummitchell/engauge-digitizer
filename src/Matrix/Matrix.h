@@ -13,14 +13,20 @@
 class Matrix
 {
 public:
-  /// Simple constructor with initialization to identity matrix
+  /// Simple constructor of square matrix with initialization to identity matrix
   Matrix(int N);
+
+  /// Simple constructor of rectangular matrix with initialization to zero matrix
+  Matrix (int rows, int cols);
   
   /// Copy constructor
   Matrix (const Matrix &other);
 
   /// Assignment operator
   Matrix &operator= (const Matrix &matrix);
+
+  /// Width of matrix
+  int cols () const;
 
   /// Return the determinant of this matrix
   double determinant () const;
@@ -34,11 +40,14 @@ public:
   /// Return minor matrix which is the original with the specified row and column omitted. The name 'minor' is a reserved word
   Matrix minorReduced (int rowOmit, int colOmit) const;
   
-  /// Height and width of matrix
-  int N () const;
-  
-  /// Multiplication operator
+  /// Multiplication operator with a matrix
   Matrix operator* (const Matrix &other) const;
+
+  /// Multiplication operator with a vector
+  QVector<double> operator* (const QVector<double> other) const;
+
+  /// Height of matrix
+  int rows () const;
 
   /// Set (row, col) element
   void set (int row, int col, double value);
@@ -50,8 +59,11 @@ private:
   Matrix();
 
   int fold2dIndexes (int row, int col) const;
+  void initialize (int rows,
+                   int cols);
 
-  int m_N; // Height and width of matrix
+  int m_rows; // Height of matrix
+  int m_cols; // Width of matrix
   QVector<double> m_vector;
 };
 
