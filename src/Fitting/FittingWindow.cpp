@@ -126,6 +126,10 @@ void FittingWindow::calculateStatistics ()
 
 void FittingWindow::clear ()
 {
+  m_model->setRowCount (0);
+  m_lblMeanSquareError->setText ("");
+  m_lblRootMeanSquare->setText ("");
+  m_lblRSquared->setText ("");
 }
 
 void FittingWindow::closeEvent(QCloseEvent * /* event */)
