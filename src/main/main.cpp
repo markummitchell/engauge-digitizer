@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "ColorFilterMode.h"
+#include "FittingCurve.h"
 #include <iostream>
 #include "Logger.h"
 #include "MainWindow.h"
@@ -105,6 +106,7 @@ bool engaugeLogFilenameAttempt (const QString &path,
 int main(int argc, char *argv[])
 {
   qRegisterMetaType<ColorFilterMode> ("ColorFilterMode");
+  qRegisterMetaType<FittingCurve> ("FilterCurve");
 
   QApplication app(argc, argv);
 

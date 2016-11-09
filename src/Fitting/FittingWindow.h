@@ -8,6 +8,7 @@
 #define FITTING_WINDOW_H
 
 #include "DocumentModelExportFormat.h"
+#include "FittingCurve.h"
 #include <QDockWidget>
 #include <QList>
 #include <QPointF>
@@ -64,6 +65,9 @@ private slots:
 signals:
   /// Signal that this QDockWidget was just closed
   void signalFittingWindowClosed();
+
+  /// Signal containing coefficients from curve fit
+  void signalCurveFit(FittingCurve);
 
 private:
   FittingWindow();

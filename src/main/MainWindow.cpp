@@ -944,6 +944,7 @@ void MainWindow::createDockableWidgets ()
   // Fitting window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
   m_dockFittingWindow = new FittingWindow (this);
   connect (m_dockFittingWindow, SIGNAL (signalFittingWindowClosed()), this, SLOT (slotFittingWindowClosed()));
+  connect (m_dockFittingWindow, SIGNAL (signalCurveFit(FittingCurve)), this, SLOT (slotFittingWindowCurveFit(FittingCurve)));
 
   // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
   m_dockGeometryWindow = new GeometryWindow (this);
@@ -3224,6 +3225,14 @@ void MainWindow::slotFittingWindowClosed()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFittingWindowClosed";
 
   m_actionViewFittingWindow->setChecked (false);
+}
+
+void MainWindow::slotFittingWindowCurveFit(FittingCurve fittingCurve)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFittingWindowCurveFit"
+                              << " order=" << fittingCurve.size() - 1
+                              << " x0=" << fittingCurve [0]
+                              << " xOrder=" << fittingCurve [fittingCurve.size() - 1];
 }
 
 void MainWindow::slotGeometryWindowClosed()

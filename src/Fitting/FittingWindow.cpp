@@ -11,6 +11,7 @@
 #include "EngaugeAssert.h"
 #include "FittingModel.h"
 #include "GeometryModel.h"
+#include "FittingCurve.h"
 #include "FittingWindow.h"
 #include "Logger.h"
 #include "Matrix.h"
@@ -65,16 +66,27 @@ void FittingWindow::calculateCurveFit ()
   Matrix denominator = X.transpose () * X;
   QVector<double> a = denominator.inverse () * X.transpose () * Y;
 
+  // Copy coefficients into member variable and into list for sending as a signal
+  FittingCurve fittingCurve;
   for (order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
     if (order <= maxOrder ()) {
+
       // Copy from polynomial regression vector
       m_coefficients [order] = a [order];
+      fittingCurve.append (a [order]);
+
     } else {
+
       // Set to zero in case value gets used somewhere
       m_coefficients [order] = 0;
+
     }
   }
 
+  // Send to connected classes
+  emit signalCurveFit (fittingCurve);
+
+  // Copy into displayed control
   for (row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
 
     QStandardItem *item = new QStandardItem (QString::number (m_coefficients [order]));

@@ -11,6 +11,7 @@
 #include "CoordSystemIndex.h"
 #include "DigitizeStateAbstractBase.h"
 #include "DocumentAxesPointsRequired.h"
+#include "FittingCurve.h"
 #include "GridLines.h"
 #include "MainWindowModel.h"
 #include <QCursor>
@@ -265,6 +266,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotFittingWindowClosed();
+  void slotFittingWindowCurveFit(FittingCurve);
   void slotGeometryWindowClosed();
   void slotHelpAbout();
   void slotHelpTutorial();

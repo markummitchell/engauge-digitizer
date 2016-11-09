@@ -218,6 +218,7 @@ HEADERS  += \
     FileCmd/FileCmdSerialize.h \
     FileCmd/FileCmdScript.h \
     Filter/FilterImage.h \
+    Fitting/FittingCurve.h \        
     Fitting/FittingModel.h \    
     Fitting/FittingWindow.h \
     Format/FormatCoordsUnits.h \
