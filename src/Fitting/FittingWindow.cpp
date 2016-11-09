@@ -212,6 +212,14 @@ int FittingWindow::fold2dIndexes (int row,
   return (row - rowLow) * (colHigh - colLow + 1) + (col - colLow);
 }
 
+void FittingWindow::initializeOrder ()
+{
+  const int SECOND_ORDER = 2;
+
+  int index = m_cmbOrder->findData (QVariant (SECOND_ORDER));
+  m_cmbOrder->setCurrentIndex (index);
+}
+
 void FittingWindow::loadXAndYArrays (Matrix &X,
                                      QVector<double> &Y) const
 {
@@ -239,14 +247,6 @@ int FittingWindow::maxOrder () const
   return m_cmbOrder->currentData().toInt();
 }
 
-void FittingWindow::initializeOrder ()
-{
-  const int SECOND_ORDER = 2;
-
-  int index = m_cmbOrder->findData (QVariant (SECOND_ORDER));
-  m_cmbOrder->setCurrentIndex (index);
-}
-
 void FittingWindow::refreshTable ()
 {
   int order = m_cmbOrder->currentData().toInt();
@@ -263,14 +263,14 @@ void FittingWindow::resizeTable (int order)
 
   m_model->setRowCount (order + 1);
 
-  // Populate the Y= row
+  // Populate the Y= row. Base for log must be consistent with base used in update()
   m_labelY->setText (m_isLogYRadius ?
-                       tr ("log(Y)=") :
+                       tr ("log10(Y)=") :
                        tr ("Y="));
 
-  // Populate polynomial terms
+  // Populate polynomial terms. Base for log must be consistent with base used in update()
   QString xString = (m_isLogXTheta ?
-                       tr ("log(X)") :
+                       tr ("log10(X)") :
                        tr ("X"));
   for (int row = 0, term = order; term >= 0; row++, term--) {
 
@@ -351,10 +351,8 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::update";
 
-  // Save export format
-  m_modelExport = cmdMediator.document().modelExport();
-
   // Save inputs
+  m_modelExport = cmdMediator.document().modelExport();
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 
@@ -381,6 +379,17 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
         QPointF posGraph;
         transformation.transformScreenToRawGraph (posScreen,
                                                   posGraph);
+
+        // Adjust for log coordinates
+        if (m_isLogXTheta) {
+          double x = qLn (posGraph.x()) / qLn (10.0); // Use base 10 consistent with text in resizeTable
+          posGraph.setX (x);
+        }
+        if (m_isLogYRadius) {
+          double y = qLn (posGraph.y()) / qLn (10.0); // Use base 10 consistent with text in resizeTable
+          posGraph.setY (y);
+        }
+
         m_pointsConvenient.append (posGraph);
       }
     }

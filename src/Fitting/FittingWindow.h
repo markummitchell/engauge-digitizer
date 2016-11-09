@@ -100,7 +100,7 @@ private:
   // Calculated curve fit coefficients, with 0th for constant term, 1st for linear term, ...
   QVector<double> m_coefficients;
 
-  // Export format is updated after every CmdAbstractBase gets redone/undone
+  // Export format and coordinate scale are updated after every CmdAbstractBase gets redone/undone
   DocumentModelExportFormat m_modelExport;
 };
 
