@@ -54,6 +54,7 @@ class DocumentModelPointMatch;
 class DocumentModelSegments;
 class ExportToFile;
 class FileCmdScript;
+class FittingCurve;
 class FittingWindow;
 class GeometryWindow;
 class Ghosts;
@@ -266,7 +267,7 @@ private slots:
   bool slotFileSave(); /// Slot method that is sometimes called directly with return value expected
   bool slotFileSaveAs(); /// Slot method that is sometimes called directly with return value expected
   void slotFittingWindowClosed();
-  void slotFittingWindowCurveFit(FittingCurveCoefficients);
+  void slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool);
   void slotGeometryWindowClosed();
   void slotHelpAbout();
   void slotHelpTutorial();
@@ -627,6 +628,9 @@ private:
 
   // Map between zoom enumerations. This eliminates the need for a switch statement
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMap;
+
+  // Fitted curve. Null if not currently applicable/defined
+  FittingCurve *m_fittingCurve;
 };
 
 #endif // MAIN_WINDOW_H

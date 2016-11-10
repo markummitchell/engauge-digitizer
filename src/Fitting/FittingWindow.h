@@ -27,7 +27,7 @@ class QString;
 class QTableView;
 class Transformation;
 
-const int MAX_POLYNOMIAL_ORDER = 6;
+const int MAX_POLYNOMIAL_ORDER = 7; // Check execution time if this is increased from, say, 6 or 7
 
 typedef QList<QPointF> PointsConvenient;
 
@@ -67,7 +67,7 @@ signals:
   void signalFittingWindowClosed();
 
   /// Signal containing coefficients from curve fit
-  void signalCurveFit(FittingCurveCoefficients);
+  void signalCurveFit(FittingCurveCoefficients, double, double, bool, bool);
 
 private:
   FittingWindow();
@@ -83,7 +83,8 @@ private:
                      int colHigh) const;
   void initializeOrder ();
   void loadXAndYArrays (Matrix &X,
-                        QVector<double> &Y) const;
+                        QVector<double> &Y,
+                        int orderReduced) const;
   int maxOrder () const;
   void refreshTable ();
   void resizeTable (int order);

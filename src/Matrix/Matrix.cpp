@@ -107,33 +107,38 @@ Matrix Matrix::inverse () const
 {
   ENGAUGE_ASSERT (m_rows == m_cols);
 
+  Matrix inv (m_rows);
   int row, col;
   
-  // Compute cofactor matrix
-  double multiplierStartForRow = 1.0;
-  Matrix cofactor (m_rows);
-  for (row = 0; row < m_rows; row++) {
-    double multiplier = multiplierStartForRow;
-    for (col = 0; col < m_cols; col++) {
-      Matrix min = minorReduced (row, col);
-      double element = multiplier * min.determinant ();
-      multiplier *= -1.0;
-      cofactor.set (row, col, element);
+  if (m_rows > 1) {
+
+    // Compute cofactor matrix
+    double multiplierStartForRow = 1.0;
+    Matrix cofactor (m_rows);
+    for (row = 0; row < m_rows; row++) {
+      double multiplier = multiplierStartForRow;
+      for (col = 0; col < m_cols; col++) {
+        Matrix min = minorReduced (row, col);
+        double element = multiplier * min.determinant ();
+        multiplier *= -1.0;
+        cofactor.set (row, col, element);
+      }
+      multiplierStartForRow *= -1.0;
     }
-    multiplierStartForRow *= -1.0;
-  }
 
-  // Compute adjoint
-  Matrix adjoint = cofactor.transpose ();
+    // Compute adjoint
+    Matrix adjoint = cofactor.transpose ();
 
-  double determ = determinant ();
+    double determ = determinant ();
 
-  // Inverse is the adjoint divided by the determinant
-  Matrix inv (m_rows);
-  for (row = 0; row < m_rows; row++) {
-    for (col = 0; col < m_cols; col++) {
-      inv.set (row, col, adjoint.get (row, col) / determ);
+    // Inverse is the adjoint divided by the determinant
+    for (row = 0; row < m_rows; row++) {
+      for (col = 0; col < m_cols; col++) {
+        inv.set (row, col, adjoint.get (row, col) / determ);
+      }
     }
+  } else {
+    inv.set (0, 0, 1.0 / get (0, 0));
   }
 
   return inv;

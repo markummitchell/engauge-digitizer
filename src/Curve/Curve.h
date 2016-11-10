@@ -124,7 +124,7 @@ public:
   /// Set curve style.
   void setCurveStyle (const CurveStyle &curveStyle);
 
-  /// See CurveGraphs::updatePointOrdinals. Same algorithm as GraphicsLineForCurve::updatePointOrdinalsAfterDrag, although
+  /// See CurveGraphs::updatePointOrdinals. Same algorithm as GraphicsLinesForCurve::updatePointOrdinalsAfterDrag, although
   /// graph coordinates of points have been updated before this is called so the graph coordinates are not updated by this method
   void updatePointOrdinals (const Transformation &transformation);
 

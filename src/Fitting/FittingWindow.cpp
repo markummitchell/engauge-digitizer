@@ -55,21 +55,33 @@ FittingWindow::~FittingWindow()
 
 void FittingWindow::calculateCurveFit ()
 {
-  int order, row;
+  // To prevent having an underdetermined system with an infinite number of solutions (which will result
+  // in divide by zero when computing an inverse) we reduce the order here if necessary.
+  // In other words, we limit the order to 0 for one point, 1 for two points, and so on
+  int orderReduced = qMin (maxOrder (),
+                           m_pointsConvenient.size() - 1);
 
-  // Calculate X and y arrays in y = X a
-  Matrix X (m_pointsConvenient.size (), maxOrder () + 1);
-  QVector<double> Y (m_pointsConvenient.size ());
-  loadXAndYArrays (X, Y);
+  QVector<double> a; // Unused if there are no points
 
-  // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
-  Matrix denominator = X.transpose () * X;
-  QVector<double> a = denominator.inverse () * X.transpose () * Y;
+  if (0 <= orderReduced) {
+
+    // Calculate X and y arrays in y = X a
+    Matrix X (m_pointsConvenient.size (), orderReduced + 1);
+    QVector<double> Y (m_pointsConvenient.size ());
+    loadXAndYArrays (X,
+                     Y,
+                     orderReduced);
+
+    // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
+    Matrix denominator = X.transpose () * X;
+    a = denominator.inverse () * X.transpose () * Y;
+  }
 
   // Copy coefficients into member variable and into list for sending as a signal
   FittingCurveCoefficients fittingCurveCoef;
-  for (order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
-    if (order <= maxOrder ()) {
+  for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
+
+    if (order <= orderReduced) {
 
       // Copy from polynomial regression vector
       m_coefficients [order] = a [order];
@@ -83,11 +95,24 @@ void FittingWindow::calculateCurveFit ()
     }
   }
 
-  // Send to connected classes
-  emit signalCurveFit (fittingCurveCoef);
+  // Send coefficients to connected classes. Also send the first and last x values
+  if (m_pointsConvenient.size () > 0) {
+    int last = m_pointsConvenient.size () - 1;
+    emit signalCurveFit (fittingCurveCoef,
+                         m_pointsConvenient [0].x(),
+                         m_pointsConvenient [last].x (),
+                         m_isLogXTheta,
+                         m_isLogYRadius);
+  } else {
+    emit signalCurveFit (fittingCurveCoef,
+                         0,
+                         0,
+                         false,
+                         false);
+  }
 
   // Copy into displayed control
-  for (row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
+  for (int row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
 
     QStandardItem *item = new QStandardItem (QString::number (m_coefficients [order]));
     m_model->setItem (row, COLUMN_COEFFICIENTS, item);
@@ -237,10 +262,12 @@ void FittingWindow::initializeOrder ()
 }
 
 void FittingWindow::loadXAndYArrays (Matrix &X,
-                                     QVector<double> &Y) const
+                                     QVector<double> &Y,
+                                     int orderReduced) const
 {
   ENGAUGE_ASSERT (Y.size () == X.rows ());
 
+  // Construct the matrices
   int row;
   PointsConvenient::const_iterator itr;
   for (row = 0, itr = m_pointsConvenient.begin(); itr != m_pointsConvenient.end(); itr++, row++) {
@@ -249,7 +276,7 @@ void FittingWindow::loadXAndYArrays (Matrix &X,
     double x = p.x ();
     double y = p.y ();
 
-    for (int order = 0; order <= maxOrder (); order++) {
+    for (int order = 0; order <= orderReduced; order++) {
 
       X.set (row, order, qPow (x, order));
     }

@@ -52,6 +52,7 @@
 #include "ExportImageForRegression.h"
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
+#include "FittingCurve.h"
 #include "FittingWindow.h"
 #include "GeometryWindow.h"
 #include "Ghosts.h"
@@ -148,7 +149,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_timerRegressionErrorReport(0),
   m_fileCmdScript (0),
   m_isErrorReportRegressionTest (isRegressionTest),
-  m_timerRegressionFileCmdScript(0)
+  m_timerRegressionFileCmdScript(0),
+  m_fittingCurve (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -945,8 +947,8 @@ void MainWindow::createDockableWidgets ()
   m_dockFittingWindow = new FittingWindow (this);
   connect (m_dockFittingWindow, SIGNAL (signalFittingWindowClosed()),
            this, SLOT (slotFittingWindowClosed()));
-  connect (m_dockFittingWindow, SIGNAL (signalCurveFit(FittingCurveCoefficients)),
-           this, SLOT (slotFittingWindowCurveFit(FittingCurveCoefficients)));
+  connect (m_dockFittingWindow, SIGNAL (signalCurveFit(FittingCurveCoefficients, double, double, bool, bool)),
+           this, SLOT (slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool)));
 
   // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
   m_dockGeometryWindow = new GeometryWindow (this);
@@ -3011,6 +3013,12 @@ void MainWindow::slotFileClose()
     m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
                                                              DIGITIZE_STATE_EMPTY);
 
+    // Deallocate fitted curve
+    if (m_fittingCurve != 0) {
+      m_scene->removeItem (m_fittingCurve);
+      m_fittingCurve = 0;
+    }
+
     // Remove screen objects
     m_scene->resetOnLoad ();
 
@@ -3229,12 +3237,30 @@ void MainWindow::slotFittingWindowClosed()
   m_actionViewFittingWindow->setChecked (false);
 }
 
-void MainWindow::slotFittingWindowCurveFit(FittingCurveCoefficients fittingCurveCoef)
+void MainWindow::slotFittingWindowCurveFit(FittingCurveCoefficients fittingCurveCoef,
+                                           double xMin,
+                                           double xMax,
+                                           bool isLogXTheta,
+                                           bool isLogYRadius)
 {
+  // Do not output elements in fittingCurveCoef here since that list may be empty
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFittingWindowCurveFit"
-                              << " order=" << fittingCurveCoef.size() - 1
-                              << " x0=" << fittingCurveCoef [0]
-                              << " xOrder=" << fittingCurveCoef [fittingCurveCoef.size() - 1];
+                              << " order=" << fittingCurveCoef.size() - 1;
+
+  if (m_fittingCurve != 0) {
+    m_scene->removeItem (m_fittingCurve);
+    delete m_fittingCurve;
+    m_fittingCurve = 0;
+  }
+
+  m_fittingCurve = new FittingCurve (fittingCurveCoef,
+                                     xMin,
+                                     xMax,
+                                     isLogXTheta,
+                                     isLogYRadius,
+                                     m_transformation);
+  m_fittingCurve->setVisible (m_actionViewFittingWindow->isChecked ());
+  m_scene->addItem (m_fittingCurve);
 }
 
 void MainWindow::slotGeometryWindowClosed()
@@ -3686,8 +3712,14 @@ void MainWindow::slotViewToolBarFittingWindow()
 
   if (m_actionViewFittingWindow->isChecked()) {
     m_dockFittingWindow->show ();
+    if (m_fittingCurve != 0) {
+      m_fittingCurve->setVisible (true);
+    }
   } else {
     m_dockFittingWindow->hide ();
+    if (m_fittingCurve != 0) {
+      m_fittingCurve->setVisible (false);
+    }
   }
 }
 

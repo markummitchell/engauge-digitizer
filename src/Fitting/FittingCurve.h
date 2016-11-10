@@ -7,18 +7,28 @@
 #ifndef FITTING_CURVE_H
 #define FITTING_CURVE_H
 
-#include "GraphicsLinesForCurve.h"
+#include "FittingCurveCoefficients.h"
+#include <QGraphicsPathItem>
 
-/// Repurpose the GraphicsLinesForCurve class to show the curve fit line
-class FittingCurve : public GraphicsLinesForCurve
+class Transformation;
+
+/// Curve that overlays the current scene so the regression-fitted curve is visible
+class FittingCurve : public QGraphicsPathItem
 {
 public:
   /// Single constructor
-  FittingCurve ();
+  FittingCurve (const FittingCurveCoefficients &fittingCoef,
+                double xMin,
+                double xMax,
+                bool isLogXTheta,
+                bool isLogYRadius,
+                const Transformation &transformation);
   virtual ~FittingCurve ();
 
 private:
 
+  double yFromCoefficientsAndX (const FittingCurveCoefficients &fittingCoef,
+                                                                double x) const;
 };
 
 #endif // FITTING_CURVE_H
