@@ -238,6 +238,7 @@ HEADERS  += \
     src/FileCmd/FileCmdSerialize.h \
     src/Filter/FilterImage.h \
     src/Fitting/FittingCurve.h \
+    src/Fitting/FittingCurveCoefficients.h \
     src/Fitting/FittingModel.h \
     src/Fitting/FittingWindow.h \
     src/Format/FormatCoordsUnits.h \
@@ -547,6 +548,7 @@ SOURCES += \
     src/FileCmd/FileCmdScript.cpp \
     src/FileCmd/FileCmdSerialize.cpp \
     src/Filter/FilterImage.cpp \
+    src/Fitting/FittingCurve.cpp \    
     src/Fitting/FittingModel.cpp \
     src/Fitting/FittingWindow.cpp \    
     src/Format/FormatCoordsUnits.cpp \

@@ -9,10 +9,10 @@
 #include "CurveConnectAs.h"
 #include "CurveStyle.h"
 #include "EngaugeAssert.h"
+#include "FittingCurveCoefficients.h"
 #include "FittingModel.h"
-#include "GeometryModel.h"
-#include "FittingCurve.h"
 #include "FittingWindow.h"
+#include "GeometryModel.h"
 #include "Logger.h"
 #include "Matrix.h"
 #include <QApplication>
@@ -67,13 +67,13 @@ void FittingWindow::calculateCurveFit ()
   QVector<double> a = denominator.inverse () * X.transpose () * Y;
 
   // Copy coefficients into member variable and into list for sending as a signal
-  FittingCurve fittingCurve;
+  FittingCurveCoefficients fittingCurveCoef;
   for (order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
     if (order <= maxOrder ()) {
 
       // Copy from polynomial regression vector
       m_coefficients [order] = a [order];
-      fittingCurve.append (a [order]);
+      fittingCurveCoef.append (a [order]);
 
     } else {
 
@@ -84,7 +84,7 @@ void FittingWindow::calculateCurveFit ()
   }
 
   // Send to connected classes
-  emit signalCurveFit (fittingCurve);
+  emit signalCurveFit (fittingCurveCoef);
 
   // Copy into displayed control
   for (row = 0, order = m_model->rowCount () - 1; row < m_model->rowCount (); row++, order--) {
@@ -131,7 +131,7 @@ void FittingWindow::calculateStatistics ()
                        rSquaredNumerator / rSquaredDenominator :
                        0);
 
-  m_lblMeanSquareError->setText (QString::number (mse / m_pointsConvenient.count ()));
+  m_lblMeanSquareError->setText (QString::number (mse));
   m_lblRootMeanSquare->setText (QString::number (rse));
   m_lblRSquared->setText (QString::number (rSquared));
 }

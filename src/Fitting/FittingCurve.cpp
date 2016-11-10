@@ -4,21 +4,22 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef FITTING_CURVE_H
-#define FITTING_CURVE_H
+#include "FittingCurve.h"
+#include "FittingWindow.h"
+#include "Logger.h"
+#include <QMimeData>
+#include <QTextStream>
 
-#include "GraphicsLinesForCurve.h"
+const int COLUMN_COEFFICIENTS = 0;
+const int COLUMN_POLYNOMIAL_TERMS = 1;
 
-/// Repurpose the GraphicsLinesForCurve class to show the curve fit line
-class FittingCurve : public GraphicsLinesForCurve
+const QString CURVE_FIT_CURVE_NAME ("CurveFit"); // Not seen by user
+
+FittingCurve::FittingCurve () :
+  GraphicsLinesForCurve (CURVE_FIT_CURVE_NAME)
 {
-public:
-  /// Single constructor
-  FittingCurve ();
-  virtual ~FittingCurve ();
+}
 
-private:
-
-};
-
-#endif // FITTING_CURVE_H
+FittingCurve::~FittingCurve()
+{
+}

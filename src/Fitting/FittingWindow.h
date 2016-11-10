@@ -8,7 +8,7 @@
 #define FITTING_WINDOW_H
 
 #include "DocumentModelExportFormat.h"
-#include "FittingCurve.h"
+#include "FittingCurveCoefficients.h"
 #include <QDockWidget>
 #include <QList>
 #include <QPointF>
@@ -67,7 +67,7 @@ signals:
   void signalFittingWindowClosed();
 
   /// Signal containing coefficients from curve fit
-  void signalCurveFit(FittingCurve);
+  void signalCurveFit(FittingCurveCoefficients);
 
 private:
   FittingWindow();

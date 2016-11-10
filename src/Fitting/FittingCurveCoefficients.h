@@ -4,21 +4,12 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef FITTING_CURVE_H
-#define FITTING_CURVE_H
+#ifndef FITTING_CURVE_COEFFICIENTS_H
+#define FITTING_CURVE_COEFFICIENTS_H
 
-#include "GraphicsLinesForCurve.h"
+#include <QList>
 
-/// Repurpose the GraphicsLinesForCurve class to show the curve fit line
-class FittingCurve : public GraphicsLinesForCurve
-{
-public:
-  /// Single constructor
-  FittingCurve ();
-  virtual ~FittingCurve ();
+/// Coefficients x0, x1, ... in y = a0 + a1 * x + a2 * x^2 + ...
+typedef QList<double> FittingCurveCoefficients;
 
-private:
-
-};
-
-#endif // FITTING_CURVE_H
+#endif // FITTING_CURVE_COEFFICIENTS_H
