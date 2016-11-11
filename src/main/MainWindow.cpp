@@ -1230,7 +1230,8 @@ void MainWindow::createToolBars ()
   m_cmbCurve->setMinimumWidth (180);
   m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
   m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
-                                "Select curve for any new points. Every point belongs to one curve."));
+                                "Select curve for any new points. Every point belongs to one curve.\n\n"
+                                "This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode."));
   connect (m_cmbCurve, SIGNAL (activated (int)), this, SLOT (slotCmbCurve (int))); // activated() ignores code changes
 
   // Digitize toolbar

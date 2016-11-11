@@ -40,10 +40,10 @@ FittingCurve::FittingCurve (const FittingCurveCoefficients &fittingCoef,
       // The coefficients were computed assuming the x and y values were transformed if they were log scale base 10, so
       // we must compensate here in the same way
       if (isLogXTheta) {
-        x = qLn (x) / qLn (10.0);
+        x = qPow (10.0, x);
       }
       if (isLogYRadius) {
-        y = qLn (y) / qLn (10.0);
+        y = qPow (10.0, y);
       }
 
       // Convert to screen coordinates

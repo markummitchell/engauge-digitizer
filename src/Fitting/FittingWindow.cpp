@@ -47,6 +47,7 @@ FittingWindow::FittingWindow (QWidget *parent) :
 
   createWidgets ();
   initializeOrder ();
+  clear ();
 }
 
 FittingWindow::~FittingWindow()
@@ -138,23 +139,28 @@ void FittingWindow::calculateStatistics ()
   double yAverage = ySum / m_pointsConvenient.length();
 
   // Second pass to compute squared terms
-  double mseSum = 0, rSquaredNumerator = 0, rSquaredDenominator = 0;
-  for (itrC = m_pointsConvenient.begin(); itrC != m_pointsConvenient.end (); itrC++) {
+  double mse = 0, rse = 0, rSquared = 0;
 
-    const QPointF &pointC = *itrC;
-    double yActual = pointC.y();
-    double yCurveFit = yFromXAndCoefficients (pointC.x());
+  if (m_pointsConvenient.count() > 0) {
 
-    mseSum              += (yCurveFit - yActual ) * (yCurveFit - yActual );
-    rSquaredNumerator   += (yCurveFit - yAverage) * (yCurveFit - yAverage);
-    rSquaredDenominator += (yActual   - yAverage) * (yActual   - yAverage);
-  }
+    double mseSum = 0, rSquaredNumerator = 0, rSquaredDenominator = 0;
+    for (itrC = m_pointsConvenient.begin(); itrC != m_pointsConvenient.end (); itrC++) {
 
-  double mse = mseSum / m_pointsConvenient.count ();
-  double rse = qSqrt (mse);
-  double rSquared = (rSquaredDenominator > 0 ?
+      const QPointF &pointC = *itrC;
+      double yActual = pointC.y();
+      double yCurveFit = yFromXAndCoefficients (pointC.x());
+
+      mseSum              += (yCurveFit - yActual ) * (yCurveFit - yActual );
+      rSquaredNumerator   += (yCurveFit - yAverage) * (yCurveFit - yAverage);
+      rSquaredDenominator += (yActual   - yAverage) * (yActual   - yAverage);
+    }
+
+    mse = mseSum / m_pointsConvenient.count ();
+    rse = qSqrt (mse);
+    rSquared = (rSquaredDenominator > 0 ?
                        rSquaredNumerator / rSquaredDenominator :
                        0);
+  }
 
   m_lblMeanSquareError->setText (QString::number (mse));
   m_lblRootMeanSquare->setText (QString::number (rse));
@@ -163,6 +169,7 @@ void FittingWindow::calculateStatistics ()
 
 void FittingWindow::clear ()
 {
+  m_labelY->setText ("");
   m_model->setRowCount (0);
   m_lblMeanSquareError->setText ("");
   m_lblRootMeanSquare->setText ("");
@@ -307,9 +314,15 @@ void FittingWindow::resizeTable (int order)
   m_model->setRowCount (order + 1);
 
   // Populate the Y= row. Base for log must be consistent with base used in update()
-  m_labelY->setText (m_isLogYRadius ?
-                       tr ("log10(Y)=") :
-                       tr ("Y="));
+  QString yTerm = QString ("%1%2%3")
+      .arg (m_curveSelected)
+      .arg (m_curveSelected.isEmpty () ?
+              "" :
+              ": ")
+      .arg (m_isLogYRadius ?
+              tr ("log10(Y)=") :
+              tr ("Y="));
+  m_labelY->setText (yTerm);
 
   // Populate polynomial terms. Base for log must be consistent with base used in update()
   QString xString = (m_isLogXTheta ?
@@ -395,6 +408,7 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::update";
 
   // Save inputs
+  m_curveSelected = curveSelected;
   m_modelExport = cmdMediator.document().modelExport();
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);

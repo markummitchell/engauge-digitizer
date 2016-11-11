@@ -98,6 +98,7 @@ private:
   QLineEdit *m_lblRootMeanSquare;
   QLineEdit *m_lblRSquared;
 
+  QString m_curveSelected; // Save selected curve name so it can be displayed. Let user know what data this fit applies to
   bool m_isLogXTheta;
   bool m_isLogYRadius;
   PointsConvenient m_pointsConvenient;
