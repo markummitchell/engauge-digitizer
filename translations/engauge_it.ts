@@ -3646,7 +3646,7 @@ Seleziona l'immagine di sfondo:
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished">Nome Curva Selezionato
+        <translation>Nome Curva Selezionato
 
 Seleziona la curva per ogni nuovo punto. Ogni punto appartiene a una curva.
 

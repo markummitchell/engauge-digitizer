@@ -4,25 +4,26 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef FITTING_MODEL_H
-#define FITTING_MODEL_H
+#ifndef WINDOW_MODEL_ABSTRACT_H
+#define WINDOW_MODEL_ABSTRACT_H
 
+#include <QStandardItemModel>
 #include <QString>
-#include "WindowModelAbstract.h"
 
-/// Model for FittingWindow
-class FittingModel : public WindowModelAbstract
+/// Model for WindowTableAbstract
+class WindowModelAbstract : public QStandardItemModel
 {
 public:
   /// Single constructor
-  FittingModel ();
-  virtual ~FittingModel ();
+  WindowModelAbstract ();
+  virtual ~WindowModelAbstract ();
 
-  /// Override for special processing
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+  /// Support dragging of multiple cells. Without this only one cell can be copied by dragging. Clipboard copying
+  /// is handled elsewhere in the window class
+  QMimeData *mimeData (const QModelIndexList &indexes) const;
 
 private:
 
 };
 
-#endif // FITTING_MODEL_H
+#endif // WINDOW_MODEL_ABSTRACT_H

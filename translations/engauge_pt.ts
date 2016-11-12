@@ -3551,7 +3551,7 @@ Mostrar ou ocultar a janela de geometria</translation>
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished">Seleccionado Curva Nome
+        <translation>Seleccionado Curva Nome
 
 Select curva para quaisquer novos pontos. Cada ponto pertence a uma curva.
 

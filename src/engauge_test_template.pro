@@ -342,6 +342,8 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
+    Window/WindowModelAbstract.h \
+    Window/WindowTableAbstract.h \    
     util/Xml.h \
     Zoom/ZoomControl.h \
     Zoom/ZoomFactor.h \
@@ -643,6 +645,8 @@ SOURCES += \
     View/ViewProfileParameters.cpp \
     View/ViewProfileScale.cpp \
     View/ViewSegmentFilter.cpp \
+    Window/WindowModelAbstract.cpp \
+    Window/WindowTableAbstract.cpp \    
     util/Xml.cpp \
     Zoom/ZoomLabels.cpp \
     util/ZValues.cpp
@@ -707,6 +711,7 @@ INCLUDEPATH += Background \
                Tutorial \
                util \
                View \
+               Window \
                Zoom
 
 INCLUDEPATH += $$(FFTW_HOME)/include \

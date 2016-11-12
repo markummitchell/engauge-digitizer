@@ -3497,7 +3497,11 @@ Show all digitized axis points and graph curves</source>
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished" />
+        <translation>Ausgewählte Kurvenname
+
+Wählen Sie Kurve für alle neuen Punkte. Jeder Punkt gehört zu einer Kurve.
+
+Dies kann während Fill-Modus in Kurve Punkt, Punkt Match, Color Picker oder Segment geändert werden.</translation>
     </message>
     <message>
         <source>Zoom 6:1</source>

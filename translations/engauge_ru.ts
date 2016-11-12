@@ -3416,7 +3416,7 @@ Show or hide the geometry window</source>
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished">Название Выбранной Кривой
+        <translation>Название Выбранной Кривой
 
 Выбор кривой для последующих точек. Все точки закрепятся за одной кривой.
 	

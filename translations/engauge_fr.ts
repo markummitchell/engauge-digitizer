@@ -3540,7 +3540,7 @@ Affiche ou masque les lignes de grilles ajoutées pour un placement précis des 
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished">Nom de la courbe sélectionnée
+        <translation>Nom de la courbe sélectionnée
 
 Indique la courbe pour les nouveaux points créés.Chaque point appartient à une courbe.
 

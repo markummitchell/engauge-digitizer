@@ -5,10 +5,7 @@
  ******************************************************************************************************/
 
 #include "FittingModel.h"
-#include "FittingWindow.h"
 #include "Logger.h"
-#include <QMimeData>
-#include <QTextStream>
 
 const int COLUMN_COEFFICIENTS = 0;
 const int COLUMN_POLYNOMIAL_TERMS = 1;
@@ -38,48 +35,4 @@ QVariant FittingModel::data(const QModelIndex &index, int role) const
 
   // Standard behavior
   return QStandardItemModel::data (index, role);
-}
-
-QMimeData *FittingModel::mimeData(const QModelIndexList &indexes) const
-{
-  if (indexes.isEmpty ()) {
-    return Q_NULLPTR;
-  }
-
-  QMimeData *data = new QMimeData ();
-  QString html;
-  QTextStream str (&html);
-
-  // Selection mode was set to ContiguousMode so we know the selected cell region is rectangular
-  str << "<table>";
-
-  int rowLast = -1;
-
-  QModelIndexList::const_iterator itr;
-  for (itr = indexes.begin (); itr != indexes.end (); itr++) {
-
-    const QModelIndex &index = *itr;
-
-    if (index.row() != rowLast) {
-      if (rowLast >= 0) {
-        str << "</tr>"; // Close previous row
-      }
-      str << "<tr>"; // Start new row
-      rowLast = index.row();
-    }
-
-    QString cellText = QString ("%1%2%3")
-        .arg ("<td>")
-        .arg (this->data (index, Qt::DisplayRole).toString ())
-        .arg ("</td>");
-
-    str << cellText;
-  }
-  str << "</tr>";
-
-  str << "</table>";
-
-  data->setHtml (html);
-
-  return data;
 }

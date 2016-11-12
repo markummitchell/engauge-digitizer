@@ -15,10 +15,9 @@
 #include "Logger.h"
 #include <QApplication>
 #include <QClipboard>
-#include <QHeaderView>
 #include <QItemSelectionModel>
-#include <QTableView>
 #include <QTextStream>
+#include "WindowTableAbstract.h"
 
 // Token constraints:
 // (1) should fit nicely into narrow columns. This eliminates details like Forward and Backward in the distance parameter tokens
@@ -48,16 +47,12 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
                     "Y = Y coordinate of each point\n\n"
                     "Index = Point number\n\n"
                     "Distance = Distance along the curve in forward or backward direction, in either graph units "
-                    "or as a percentage"));
+                    "or as a percentage\n\n"
+                    "Cells in the table may be selected using Click and Shift+Click for copying or dragging to other applications"));
 
   m_model = new GeometryModel;
 
-  m_view = new QTableView;
-  m_view->setModel (m_model); // Call before setSelectionModel since this also overrides the selection model
-  m_view->setDragEnabled (true);
-  m_view->horizontalHeader()->hide();
-  m_view->verticalHeader()->hide();
-  m_view->setEditTriggers(QAbstractItemView::NoEditTriggers); // Control is read only
+  m_view = new WindowTableAbstract (*m_model);
   connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
            this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
 

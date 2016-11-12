@@ -19,14 +19,13 @@
 #include <QClipboard>
 #include <QComboBox>
 #include <QGridLayout>
-#include <QHeaderView>
 #include <QItemSelectionModel>
 #include <QLabel>
 #include <QLineEdit>
 #include <qmath.h>
-#include <QTableView>
 #include <QTextStream>
 #include "Transformation.h"
+#include "WindowTableAbstract.h"
 
 const int COLUMN_COEFFICIENTS = 0;
 const int COLUMN_POLYNOMIAL_TERMS = 1;
@@ -41,7 +40,8 @@ FittingWindow::FittingWindow (QWidget *parent) :
   setWindowTitle (tr ("Curve Fitting Window")); // Appears in title bar when undocked
   setStatusTip (tr ("Curve Fitting Window"));
   setWhatsThis (tr ("Curve Fitting Window\n\n"
-                    "This window applies a curve fit to the currently selected curve"));
+                    "This window applies a curve fit to the currently selected curve\n\n"
+                    "Cells in the table may be selected using Click and Shift+Click for copying or dragging to other applications"));
 
   m_coefficients.resize (MAX_POLYNOMIAL_ORDER + 1);
 
@@ -211,17 +211,9 @@ void FittingWindow::createWidgets ()
   m_model = new FittingModel;
   m_model->setColumnCount (2);
 
-  m_view = new QTableView;
-  m_view->horizontalHeader()->setStretchLastSection (true);
-  m_view->setModel (m_model); // Call before setSelectionModel since this also overrides the selection model
-  m_view->setSelectionMode (QAbstractItemView::ContiguousSelection);
-  m_view->setDragEnabled (true);
-  m_view->horizontalHeader()->hide();
-  m_view->verticalHeader()->hide();
-  m_view->setEditTriggers(QAbstractItemView::NoEditTriggers); // Control is read only
+  m_view = new WindowTableAbstract (*m_model);
   connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
            this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
-
 
   layout->addWidget (m_view, row++, 0, 1, 2);
 
