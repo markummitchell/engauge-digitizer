@@ -10,6 +10,7 @@
 #include "ExportDelimiter.h"
 #include <QStandardItemModel>
 #include <QString>
+#include <QVector>
 
 class WindowTableBase;
 
@@ -43,6 +44,11 @@ private:
                      int rowLow,
                      int colLow,
                      int colHigh) const;
+  void selectionAsTable (int &rowLow,
+                         int &colLow,
+                         int &rowHigh,
+                         int &colHigh,
+                         QVector<QString> &table) const;
 
   ExportDelimiter m_delimiter;
   WindowTableBase *m_view;
