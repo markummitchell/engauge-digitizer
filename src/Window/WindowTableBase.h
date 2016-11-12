@@ -4,24 +4,24 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef WINDOW_TABLE_ABSTRACT_H
-#define WINDOW_TABLE_ABSTRACT_H
+#ifndef WINDOW_TABLE_BASE_H
+#define WINDOW_TABLE_BASE_H
 
 #include <QTableView>
 
 class QMouseEvent;
-class QStandardItemModel;
+class WindowModelBase;
 
 /// Table view class with support for both drag-and-drop and copy-and-paste
-class WindowTableAbstract : public QTableView
+class WindowTableBase : public QTableView
 {
 public:
   /// Single constructor.
-  WindowTableAbstract(QStandardItemModel &model);
-  ~WindowTableAbstract();
+  WindowTableBase(WindowModelBase &model);
+  ~WindowTableBase();
 
 private:
-  WindowTableAbstract();
+  WindowTableBase();
 };
 
-#endif // WINDOW_TABLE_ABSTRACT_H
+#endif // WINDOW_TABLE_BASE_H

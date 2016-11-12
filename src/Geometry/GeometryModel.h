@@ -8,10 +8,10 @@
 #define GEOMETRY_MODEL_H
 
 #include <QString>
-#include "WindowModelAbstract.h"
+#include "WindowModelBase.h"
 
 /// Model that adds row highlighting according to the currently select point identifier
-class GeometryModel : public WindowModelAbstract
+class GeometryModel : public WindowModelBase
 {
 public:
   /// Single constructor

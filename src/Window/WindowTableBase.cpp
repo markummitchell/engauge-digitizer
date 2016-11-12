@@ -8,7 +8,8 @@
 #include <QHeaderView>
 #include <QMouseEvent>
 #include <QStandardItemModel>
-#include "WindowTableAbstract.h"
+#include "WindowModelBase.h"
+#include "WindowTableBase.h"
 
 // Modes:
 // -ContiguousSelection is an ok selection mode when dragging is disabled since user can click and drag
@@ -19,20 +20,24 @@
 //  which results in tedious deselections
 const QAbstractItemView::SelectionMode SELECTION_MODE = QAbstractItemView::ExtendedSelection;
 
-WindowTableAbstract::WindowTableAbstract(QStandardItemModel &model)
+WindowTableBase::WindowTableBase(WindowModelBase &model)
 {
   horizontalHeader()->setStretchLastSection (true);
   setModel (&model);
   setSelectionMode (SELECTION_MODE);
-  setDragEnabled (true);  setDragDropMode (QAbstractItemView::DragOnly);
+  setDragEnabled (true);
+  setDragDropMode (QAbstractItemView::DragOnly);
   horizontalHeader()->hide();
   verticalHeader()->hide();
-  setEditTriggers (QAbstractItemView::NoEditTriggers); // Control is read only  
+  setEditTriggers (QAbstractItemView::NoEditTriggers); // Control is read only
 
   // No WhatsThis text is needed since this table is within a dockable widget that has the same WhatsThis text for
   // a click anywhere in that widget
+
+  // Connect model to view so model can access the current selection
+  model.setView (*this);
 }
 
-WindowTableAbstract::~WindowTableAbstract()
+WindowTableBase::~WindowTableBase()
 {
 }

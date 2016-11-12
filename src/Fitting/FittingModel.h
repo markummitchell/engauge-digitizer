@@ -8,10 +8,10 @@
 #define FITTING_MODEL_H
 
 #include <QString>
-#include "WindowModelAbstract.h"
+#include "WindowModelBase.h"
 
 /// Model for FittingWindow
-class FittingModel : public WindowModelAbstract
+class FittingModel : public WindowModelBase
 {
 public:
   /// Single constructor

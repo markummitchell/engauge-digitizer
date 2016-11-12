@@ -7,6 +7,7 @@
 #include "GeometryModel.h"
 #include "GeometryWindow.h"
 #include "Logger.h"
+#include <QTableView>
 
 const int NO_HIGHLIGHTED_ROW = -1;
 

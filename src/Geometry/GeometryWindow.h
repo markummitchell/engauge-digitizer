@@ -66,11 +66,6 @@ signals:
 private:
   GeometryWindow();
 
-  int fold2dIndexes (int row,
-                     int col,
-                     int rowLow,
-                     int colLow,
-                     int colHigh) const;
   void initializeHeader();
   void loadStrategies ();
   void resizeTable (int rowCount);

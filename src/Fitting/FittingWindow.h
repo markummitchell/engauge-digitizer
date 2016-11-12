@@ -76,11 +76,6 @@ private:
   void calculateCurveFitAndStatistics ();
   void calculateStatistics ();
   void createWidgets();
-  int fold2dIndexes (int row,
-                     int col,
-                     int rowLow,
-                     int colLow,
-                     int colHigh) const;
   void initializeOrder ();
   void loadXAndYArrays (Matrix &X,
                         QVector<double> &Y,

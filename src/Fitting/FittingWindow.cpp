@@ -25,7 +25,7 @@
 #include <qmath.h>
 #include <QTextStream>
 #include "Transformation.h"
-#include "WindowTableAbstract.h"
+#include "WindowTableBase.h"
 
 const int COLUMN_COEFFICIENTS = 0;
 const int COLUMN_POLYNOMIAL_TERMS = 1;
@@ -211,7 +211,7 @@ void FittingWindow::createWidgets ()
   m_model = new FittingModel;
   m_model->setColumnCount (2);
 
-  m_view = new WindowTableAbstract (*m_model);
+  m_view = new WindowTableBase (*m_model);
   connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
            this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
 
@@ -241,15 +241,6 @@ void FittingWindow::createWidgets ()
   m_lblRSquared->setReadOnly (true);
   m_lblRSquared->setWhatsThis (tr ("Calculated R squared statistic"));
   layout->addWidget (m_lblRSquared, row++, 1, 1, 1);
-}
-
-int FittingWindow::fold2dIndexes (int row,
-                                  int col,
-                                  int rowLow,
-                                  int colLow,
-                                  int colHigh) const
-{
-  return (row - rowLow) * (colHigh - colLow + 1) + (col - colLow);
 }
 
 void FittingWindow::initializeOrder ()
@@ -342,54 +333,13 @@ void FittingWindow::slotCmbOrder(int /* index  */)
 void FittingWindow::slotSelectionChanged (const QItemSelection & /* selected */,
                                           const QItemSelection & /* deselected */)
 {
-  const bool NOT_GNUPLOT = false;
+  QString text = m_model->selectionAsText (m_modelExport.delimiter());
 
-  QItemSelectionModel *selectionModel = m_view->selectionModel ();
-  QModelIndexList selection = selectionModel->selectedIndexes ();
-
-  if (selection.size () > 0) {
-
-    // Gather input. A rectangular grid that encompasses all selected indexes will be copied
-    int rowLow = 0, rowHigh = 0, colLow = 0, colHigh = 0;
-    bool isFirst = true;
-    for (QModelIndexList::const_iterator itr = selection.begin(); itr != selection.end(); itr++) {
-      QModelIndex index = *itr;
-      if (isFirst || index.row ()    < rowLow ) rowLow  = index.row ();
-      if (isFirst || index.row ()    > rowHigh) rowHigh = index.row ();
-      if (isFirst || index.column () < colLow ) colLow  = index.column ();
-      if (isFirst || index.column () > colHigh) colHigh = index.column ();
-      isFirst = false;
-    }
-
-    int numRows = rowHigh - rowLow + 1;
-    int numCols = colHigh - colLow + 1;
-
-    // Put data into two dimensional rowXcolumn table is handled as a flattened vector. Table is initialized
-    // with empty strings
-    QVector<QString> table (numRows * numCols);
-
-    for (int i = 0; i < selection.size (); i++) {
-      QModelIndex index = selection [i];
-      QVariant data = m_model->data (index);
-      QString text = data.toString ();
-      table [fold2dIndexes (index.row(), index.column(), rowLow, colLow, colHigh)] = text;
-    }
-
-    // Concatenate table into output string
-    QString output;
-    QTextStream str (&output);
-    for (int row = rowLow; row <= rowHigh; row++) {
-      QString delimiter;
-      for (int col = colLow; col <= colHigh; col++) {
-        str << delimiter << table [fold2dIndexes (row, col, rowLow, colLow, colHigh)];
-        delimiter = exportDelimiterToText (m_modelExport.delimiter(),
-                                           NOT_GNUPLOT);
-      }
-      str << "\n";
-    }
+  if (!text.isEmpty ()) {
 
     // Save to clipboard
-    QApplication::clipboard ()->setText (output);
+    QApplication::clipboard ()->setText (text);
+
   }
 }
 
@@ -402,6 +352,7 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   // Save inputs
   m_curveSelected = curveSelected;
   m_modelExport = cmdMediator.document().modelExport();
+  m_model->setDelimiter (m_modelExport.delimiter());
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
 

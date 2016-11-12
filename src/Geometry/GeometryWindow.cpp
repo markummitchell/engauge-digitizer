@@ -17,7 +17,7 @@
 #include <QClipboard>
 #include <QItemSelectionModel>
 #include <QTextStream>
-#include "WindowTableAbstract.h"
+#include "WindowTableBase.h"
 
 // Token constraints:
 // (1) should fit nicely into narrow columns. This eliminates details like Forward and Backward in the distance parameter tokens
@@ -52,7 +52,7 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
 
   m_model = new GeometryModel;
 
-  m_view = new WindowTableAbstract (*m_model);
+  m_view = new WindowTableBase (*m_model);
   connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
            this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
 
@@ -88,15 +88,6 @@ void GeometryWindow::closeEvent(QCloseEvent * /* event */)
 int GeometryWindow::columnBodyPointIdentifiers ()
 {
   return COLUMN_BODY_POINT_IDENTIFIERS;
-}
-
-int GeometryWindow::fold2dIndexes (int row,
-                                   int col,
-                                   int rowLow,
-                                   int colLow,
-                                   int colHigh) const
-{
-  return (row - rowLow) * (colHigh - colLow + 1) + (col - colLow);
 }
 
 void GeometryWindow::initializeHeader ()
@@ -146,54 +137,13 @@ void GeometryWindow::slotPointHoverLeave (QString /* pointIdentifier */)
 void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */,
                                            const QItemSelection & /* deselected */)
 {
-  const bool NOT_GNUPLOT = false;
+  QString text = m_model->selectionAsText (m_modelExport.delimiter());
 
-  QItemSelectionModel *selectionModel = m_view->selectionModel ();
-  QModelIndexList selection = selectionModel->selectedIndexes ();
-
-  if (selection.size () > 0) {
-
-    // Gather input. A rectangular grid that encompasses all selected indexes will be copied
-    int rowLow = 0, rowHigh = 0, colLow = 0, colHigh = 0;
-    bool isFirst = true;
-    for (QModelIndexList::const_iterator itr = selection.begin(); itr != selection.end(); itr++) {
-      QModelIndex index = *itr;
-      if (isFirst || index.row ()    < rowLow ) rowLow  = index.row ();
-      if (isFirst || index.row ()    > rowHigh) rowHigh = index.row ();
-      if (isFirst || index.column () < colLow ) colLow  = index.column ();
-      if (isFirst || index.column () > colHigh) colHigh = index.column ();
-      isFirst = false;
-    }
-
-    int numRows = rowHigh - rowLow + 1;
-    int numCols = colHigh - colLow + 1;
-
-    // Put data into two dimensional rowXcolumn table is handled as a flattened vector. Table is initialized
-    // with empty strings
-    QVector<QString> table (numRows * numCols);
-
-    for (int i = 0; i < selection.size (); i++) {
-      QModelIndex index = selection [i];
-      QVariant data = m_model->data (index);
-      QString text = data.toString ();
-      table [fold2dIndexes (index.row(), index.column(), rowLow, colLow, colHigh)] = text;
-    }
-
-    // Concatenate table into output string
-    QString output;
-    QTextStream str (&output);
-    for (int row = rowLow; row <= rowHigh; row++) {
-      QString delimiter;
-      for (int col = colLow; col <= colHigh; col++) {
-        str << delimiter << table [fold2dIndexes (row, col, rowLow, colLow, colHigh)];
-        delimiter = exportDelimiterToText (m_modelExport.delimiter(),
-                                           NOT_GNUPLOT);
-      }
-      str << "\n";
-    }
+  if (!text.isEmpty ()) {
 
     // Save to clipboard
-    QApplication::clipboard ()->setText (output);
+    QApplication::clipboard ()->setText (text);
+
   }
 }
 
@@ -213,6 +163,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   // Save export format
   m_modelExport = cmdMediator.document().modelExport();
+  m_model->setDelimiter (m_modelExport.delimiter());
 
   // Gather and calculate geometry data
   const Curve *curve = cmdMediator.document().curveForCurveName (curveSelected);

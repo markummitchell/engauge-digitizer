@@ -342,8 +342,8 @@ HEADERS  += \
     View/ViewProfileParameters.h \
     View/ViewProfileScale.h \
     View/ViewSegmentFilter.h \
-    Window/WindowModelAbstract.h \
-    Window/WindowTableAbstract.h \    
+    Window/WindowModelBase.h \
+    Window/WindowTableBase.h \    
     util/Xml.h \
     Zoom/ZoomControl.h \
     Zoom/ZoomFactor.h \
@@ -645,8 +645,8 @@ SOURCES += \
     View/ViewProfileParameters.cpp \
     View/ViewProfileScale.cpp \
     View/ViewSegmentFilter.cpp \
-    Window/WindowModelAbstract.cpp \
-    Window/WindowTableAbstract.cpp \    
+    Window/WindowModelBase.cpp \
+    Window/WindowTableBase.cpp \    
     util/Xml.cpp \
     Zoom/ZoomLabels.cpp \
     util/ZValues.cpp
