@@ -11,10 +11,10 @@
 #include "EngaugeAssert.h"
 #include "FittingCurveCoefficients.h"
 #include "FittingModel.h"
+#include "FittingStatistics.h"
 #include "FittingWindow.h"
 #include "GeometryModel.h"
 #include "Logger.h"
-#include "Matrix.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QComboBox>
@@ -23,7 +23,6 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <qmath.h>
-#include <QTextStream>
 #include "Transformation.h"
 #include "WindowTableBase.h"
 
@@ -54,58 +53,28 @@ FittingWindow::~FittingWindow()
 {
 }
 
-void FittingWindow::calculateCurveFit ()
+void FittingWindow::calculateCurveFitAndStatistics ()
 {
-  // To prevent having an underdetermined system with an infinite number of solutions (which will result
-  // in divide by zero when computing an inverse) we reduce the order here if necessary.
-  // In other words, we limit the order to 0 for one point, 1 for two points, and so on
-  int orderReduced = qMin (maxOrder (),
-                           m_pointsConvenient.size() - 1);
+  FittingStatistics fittingStatistics;
 
-  QVector<double> a; // Unused if there are no points
-
-  if (0 <= orderReduced) {
-
-    // Calculate X and y arrays in y = X a
-    Matrix X (m_pointsConvenient.size (), orderReduced + 1);
-    QVector<double> Y (m_pointsConvenient.size ());
-    loadXAndYArrays (X,
-                     Y,
-                     orderReduced);
-
-    // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
-    Matrix denominator = X.transpose () * X;
-    a = denominator.inverse () * X.transpose () * Y;
-  }
-
-  // Copy coefficients into member variable and into list for sending as a signal
-  FittingCurveCoefficients fittingCurveCoef;
-  for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
-
-    if (order <= orderReduced) {
-
-      // Copy from polynomial regression vector
-      m_coefficients [order] = a [order];
-      fittingCurveCoef.append (a [order]);
-
-    } else {
-
-      // Set to zero in case value gets used somewhere
-      m_coefficients [order] = 0;
-
-    }
-  }
+  double mse = 0, rms = 0, rSquared = 0;
+  fittingStatistics.calculateCurveFitAndStatistics (maxOrder (),
+                                                    m_pointsConvenient,
+                                                    m_coefficients,
+                                                    mse,
+                                                    rms,
+                                                    rSquared);
 
   // Send coefficients to connected classes. Also send the first and last x values
   if (m_pointsConvenient.size () > 0) {
     int last = m_pointsConvenient.size () - 1;
-    emit signalCurveFit (fittingCurveCoef,
+    emit signalCurveFit (m_coefficients,
                          m_pointsConvenient [0].x(),
                          m_pointsConvenient [last].x (),
                          m_isLogXTheta,
                          m_isLogYRadius);
   } else {
-    emit signalCurveFit (fittingCurveCoef,
+    emit signalCurveFit (m_coefficients,
                          0,
                          0,
                          false,
@@ -118,53 +87,6 @@ void FittingWindow::calculateCurveFit ()
     QStandardItem *item = new QStandardItem (QString::number (m_coefficients [order]));
     m_model->setItem (row, COLUMN_COEFFICIENTS, item);
   }
-}
-
-void FittingWindow::calculateCurveFitAndStatistics ()
-{
-  calculateCurveFit ();
-  calculateStatistics ();
-}
-
-void FittingWindow::calculateStatistics ()
-{
-  // First pass to get average y
-  double ySum = 0;
-  PointsConvenient::const_iterator itrC;
-  for (itrC = m_pointsConvenient.begin (); itrC != m_pointsConvenient.end (); itrC++) {
-
-    const QPointF &pointC = *itrC;
-    ySum += pointC.y();
-  }
-  double yAverage = ySum / m_pointsConvenient.length();
-
-  // Second pass to compute squared terms
-  double mse = 0, rse = 0, rSquared = 0;
-
-  if (m_pointsConvenient.count() > 0) {
-
-    double mseSum = 0, rSquaredNumerator = 0, rSquaredDenominator = 0;
-    for (itrC = m_pointsConvenient.begin(); itrC != m_pointsConvenient.end (); itrC++) {
-
-      const QPointF &pointC = *itrC;
-      double yActual = pointC.y();
-      double yCurveFit = yFromXAndCoefficients (pointC.x());
-
-      mseSum              += (yCurveFit - yActual ) * (yCurveFit - yActual );
-      rSquaredNumerator   += (yCurveFit - yAverage) * (yCurveFit - yAverage);
-      rSquaredDenominator += (yActual   - yAverage) * (yActual   - yAverage);
-    }
-
-    mse = mseSum / m_pointsConvenient.count ();
-    rse = qSqrt (mse);
-    rSquared = (rSquaredDenominator > 0 ?
-                       rSquaredNumerator / rSquaredDenominator :
-                       0);
-  }
-
-  m_lblMeanSquareError->setText (QString::number (mse));
-  m_lblRootMeanSquare->setText (QString::number (rse));
-  m_lblRSquared->setText (QString::number (rSquared));
 }
 
 void FittingWindow::clear ()
@@ -249,30 +171,6 @@ void FittingWindow::initializeOrder ()
 
   int index = m_cmbOrder->findData (QVariant (SECOND_ORDER));
   m_cmbOrder->setCurrentIndex (index);
-}
-
-void FittingWindow::loadXAndYArrays (Matrix &X,
-                                     QVector<double> &Y,
-                                     int orderReduced) const
-{
-  ENGAUGE_ASSERT (Y.size () == X.rows ());
-
-  // Construct the matrices
-  int row;
-  PointsConvenient::const_iterator itr;
-  for (row = 0, itr = m_pointsConvenient.begin(); itr != m_pointsConvenient.end(); itr++, row++) {
-
-    const QPointF &p = *itr;
-    double x = p.x ();
-    double y = p.y ();
-
-    for (int order = 0; order <= orderReduced; order++) {
-
-      X.set (row, order, qPow (x, order));
-    }
-
-    Y [row] = y;
-  }
 }
 
 int FittingWindow::maxOrder () const
@@ -368,8 +266,6 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
     if (curve->numPoints() > 0) {
 
       // Copy points to convenient list
-      PointsConvenient pointsConvenient;
-
       const Points points = curve->points();
       Points::const_iterator itr;
       for (itr = points.begin (); itr != points.end (); itr++) {
@@ -396,15 +292,4 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   }
 
   refreshTable ();
-}
-
-double FittingWindow::yFromXAndCoefficients (double x) const
-{
-  double sum = 0;
-
-  for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
-    sum += m_coefficients [order] * qPow (x, (double) order);
-  }
-
-  return sum;
 }

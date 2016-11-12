@@ -9,9 +9,8 @@
 
 #include "DocumentModelExportFormat.h"
 #include "FittingCurveCoefficients.h"
+#include "FittingPointsConvenient.h"
 #include <QDockWidget>
-#include <QList>
-#include <QPointF>
 #include <QVector>
 
 class CmdMediator;
@@ -26,10 +25,6 @@ class QLineEdit;
 class QString;
 class QTableView;
 class Transformation;
-
-const int MAX_POLYNOMIAL_ORDER = 7; // Check execution time if this is increased from, say, 6 or 7
-
-typedef QList<QPointF> PointsConvenient;
 
 /// Window that displays curve fitting as applied to the currently selected curve
 ///
@@ -72,18 +67,12 @@ signals:
 private:
   FittingWindow();
 
-  void calculateCurveFit ();
   void calculateCurveFitAndStatistics ();
-  void calculateStatistics ();
   void createWidgets();
   void initializeOrder ();
-  void loadXAndYArrays (Matrix &X,
-                        QVector<double> &Y,
-                        int orderReduced) const;
   int maxOrder () const;
   void refreshTable ();
   void resizeTable (int order);
-  double yFromXAndCoefficients (double x) const;
 
   QComboBox *m_cmbOrder;
   QLabel *m_labelY;
@@ -96,7 +85,7 @@ private:
   QString m_curveSelected; // Save selected curve name so it can be displayed. Let user know what data this fit applies to
   bool m_isLogXTheta;
   bool m_isLogYRadius;
-  PointsConvenient m_pointsConvenient;
+  FittingPointsConvenient m_pointsConvenient;
 
   // Calculated curve fit coefficients, with 0th for constant term, 1st for linear term, ...
   QVector<double> m_coefficients;

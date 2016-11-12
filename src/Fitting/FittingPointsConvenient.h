@@ -4,12 +4,14 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef FITTING_CURVE_COEFFICIENTS_H
-#define FITTING_CURVE_COEFFICIENTS_H
+#ifndef FITTING_POINTS_CONVENIENT_H
+#define FITTING_POINTS_CONVENIENT_H
 
-#include <QList>
+#include <QPointF>
+#include <QVector>
 
-/// Coefficients x0, x1, ... in y = a0 + a1 * x + a2 * x^2 + ...
-typedef QVector<double> FittingCurveCoefficients;
+/// Array of (x,y) points in graph coordinates. This array is more convenient that working with points in
+/// screen coordinates that must be transformed repeatedly into graph coordinates
+typedef QList<QPointF> FittingPointsConvenient;
 
-#endif // FITTING_CURVE_COEFFICIENTS_H
+#endif // FITTING_POINTS_CONVENIENT_H

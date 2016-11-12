@@ -240,6 +240,8 @@ HEADERS  += \
     src/Fitting/FittingCurve.h \
     src/Fitting/FittingCurveCoefficients.h \
     src/Fitting/FittingModel.h \
+    src/Fitting/FittingPointsConvenient.h \
+    src/Fitting/FittingStatistics.h \
     src/Fitting/FittingWindow.h \
     src/Format/FormatCoordsUnits.h \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.h \
@@ -552,6 +554,7 @@ SOURCES += \
     src/Filter/FilterImage.cpp \
     src/Fitting/FittingCurve.cpp \    
     src/Fitting/FittingModel.cpp \
+    src/Fitting/FittingStatistics.cpp \
     src/Fitting/FittingWindow.cpp \    
     src/Format/FormatCoordsUnits.cpp \
     src/Format/FormatCoordsUnitsStrategyAbstractBase.cpp \
