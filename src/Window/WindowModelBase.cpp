@@ -11,7 +11,7 @@
 #include <QTableView>
 #include <QTextStream>
 #include "WindowModelBase.h"
-#include "WindowTableBase.h"
+#include "WindowTable.h"
 
 WindowModelBase::WindowModelBase () :
   m_view (0)
@@ -166,7 +166,7 @@ void WindowModelBase::setDelimiter (ExportDelimiter delimiter)
   m_delimiter = delimiter;
 }
 
-void WindowModelBase::setView (WindowTableBase &view)
+void WindowModelBase::setView (WindowTable &view)
 {
   m_view = &view;
 }

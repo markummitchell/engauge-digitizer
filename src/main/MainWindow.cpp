@@ -952,7 +952,9 @@ void MainWindow::createDockableWidgets ()
 
   // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
   m_dockGeometryWindow = new GeometryWindow (this);
-  connect (m_dockGeometryWindow, SIGNAL (signalGeometryWindowClosed()), this, SLOT (slotGeometryWindowClosed()));
+  connect (m_dockGeometryWindow, SIGNAL (signalGeometryWindowClosed()),
+           this, SLOT (slotGeometryWindowClosed()));
+
 }
 
 void MainWindow::createHelpWindow ()
@@ -3523,6 +3525,15 @@ void MainWindow::slotSettingsSegments ()
   m_dlgSettingsSegments->show ();
 }
 
+void MainWindow::slotTableStatusChange ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTableStatusChange";
+
+  // This slot is called when either window in FittingWindow or GeometryWindow loses/gains focus. This is
+  // so the Copy menu item can be updated
+  updateControls ();
+}
+
 void MainWindow::slotSettingsMainWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsMainWindow";
@@ -4239,8 +4250,16 @@ void MainWindow::updateControls ()
     m_actionEditUndo->setEnabled (m_cmdMediator->canUndo ());
     m_actionEditRedo->setEnabled (m_cmdMediator->canRedo () || m_cmdStackShadow->canRedo ());
   }
-  m_actionEditCut->setEnabled (m_scene->selectedItems().count () > 0);
-  m_actionEditCopy->setEnabled (m_scene->selectedItems().count () > 0);
+  bool tableFittingIsActive, tableFittingIsCopyable;
+  bool tableGeometryIsActive, tableGeometryIsCopyable;
+  m_dockFittingWindow->getTableStatus (tableFittingIsActive, tableFittingIsCopyable); // Fitting window status
+  m_dockGeometryWindow->getTableStatus (tableGeometryIsActive, tableGeometryIsCopyable); // Geometry window status
+  m_actionEditCut->setEnabled (!tableFittingIsActive &&
+                               !tableGeometryIsActive &&
+                               m_scene->selectedItems().count () > 0);
+  m_actionEditCopy->setEnabled ((!tableFittingIsActive && !tableGeometryIsActive && m_scene->selectedItems().count () > 0) ||
+                                (tableFittingIsActive && tableFittingIsCopyable) ||
+                                (tableGeometryIsActive && tableGeometryIsCopyable));
   m_actionEditPaste->setEnabled (false);
   m_actionEditDelete->setEnabled (m_scene->selectedItems().count () > 0);
   // m_actionEditPasteAsNew and m_actionEditPasteAsNewAdvanced are updated when m_menuEdit is about to be shown
@@ -4352,6 +4371,7 @@ void MainWindow::updateFittingWindow ()
 
   // Update fitting window
   m_dockFittingWindow->update (*m_cmdMediator,
+                               m_modelMainWindow,
                                m_cmbCurve->currentText (),
                                m_transformation);
 }

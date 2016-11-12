@@ -12,9 +12,9 @@
 #include <QString>
 #include <QVector>
 
-class WindowTableBase;
+class WindowTable;
 
-/// Model for WindowTableBase
+/// Model for WindowTable
 class WindowModelBase : public QStandardItemModel
 {
 public:
@@ -36,7 +36,7 @@ public:
   void setDelimiter (ExportDelimiter delimiter);
 
   /// Save the view so this class can access the current selection
-  void setView (WindowTableBase &view);
+  void setView (WindowTable &view);
 
 private:
   int fold2dIndexes (int row,
@@ -51,7 +51,7 @@ private:
                          QVector<QString> &table) const;
 
   ExportDelimiter m_delimiter;
-  WindowTableBase *m_view;
+  WindowTable *m_view;
 };
 
 #endif // WINDOW_MODEL_BASE_H

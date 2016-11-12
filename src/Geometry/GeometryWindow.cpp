@@ -13,11 +13,12 @@
 #include "GeometryModel.h"
 #include "GeometryWindow.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QItemSelectionModel>
 #include <QTextStream>
-#include "WindowTableBase.h"
+#include "WindowTable.h"
 
 // Token constraints:
 // (1) should fit nicely into narrow columns. This eliminates details like Forward and Backward in the distance parameter tokens
@@ -31,8 +32,8 @@ const QString TokenIndex (QObject::tr ("Index"));
 const QString TokenDistanceGraph (QObject::tr ("Distance"));
 const QString TokenDistancePercent (QObject::tr ("Percent"));
 
-GeometryWindow::GeometryWindow (QWidget *parent) :
-  QDockWidget (parent)
+GeometryWindow::GeometryWindow (MainWindow *mainWindow) :
+  WindowAbstractBase (mainWindow)
 {
   setVisible (false);
   setAllowedAreas (Qt::AllDockWidgetAreas);
@@ -50,16 +51,8 @@ GeometryWindow::GeometryWindow (QWidget *parent) :
                     "or as a percentage\n\n"
                     "Cells in the table may be selected using Click and Shift+Click for copying or dragging to other applications"));
 
-  m_model = new GeometryModel;
-
-  m_view = new WindowTableBase (*m_model);
-  connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
-           this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
-
-  setWidget (m_view);
-
+  createWidgets (mainWindow);
   loadStrategies();
-
   initializeHeader ();
 }
 
@@ -88,6 +81,26 @@ void GeometryWindow::closeEvent(QCloseEvent * /* event */)
 int GeometryWindow::columnBodyPointIdentifiers ()
 {
   return COLUMN_BODY_POINT_IDENTIFIERS;
+}
+
+void GeometryWindow::createWidgets (MainWindow *mainWindow)
+{
+  m_model = new GeometryModel;
+
+  m_view = new WindowTable (*m_model);
+  connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
+           this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
+  connect (m_view, SIGNAL (signalTableStatusChange ()),
+           mainWindow, SLOT (slotTableStatusChange ()));
+
+  // Send signal if table gains or loses focus
+  connect (m_view, SIGNAL (focusInEvent (QFocusEvent *)),
+           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
+  connect (m_view, SIGNAL (focusOutEvent (QFocusEvent *)),
+           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
+
+
+  setWidget (m_view);
 }
 
 void GeometryWindow::initializeHeader ()
@@ -228,3 +241,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
   m_view->setColumnHidden (COLUMN_BODY_POINT_IDENTIFIERS, true);
 }
 
+QTableView *GeometryWindow::view () const
+{
+  return dynamic_cast<QTableView*> (m_view);
+}

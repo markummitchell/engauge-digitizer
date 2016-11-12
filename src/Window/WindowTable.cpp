@@ -9,7 +9,7 @@
 #include <QMouseEvent>
 #include <QStandardItemModel>
 #include "WindowModelBase.h"
-#include "WindowTableBase.h"
+#include "WindowTable.h"
 
 // Modes:
 // -ContiguousSelection is an ok selection mode when dragging is disabled since user can click and drag
@@ -20,7 +20,7 @@
 //  which results in tedious deselections
 const QAbstractItemView::SelectionMode SELECTION_MODE = QAbstractItemView::ExtendedSelection;
 
-WindowTableBase::WindowTableBase(WindowModelBase &model)
+WindowTable::WindowTable(WindowModelBase &model)
 {
   horizontalHeader()->setStretchLastSection (true);
   setModel (&model);
@@ -38,6 +38,29 @@ WindowTableBase::WindowTableBase(WindowModelBase &model)
   model.setView (*this);
 }
 
-WindowTableBase::~WindowTableBase()
+WindowTable::~WindowTable()
 {
+}
+
+void WindowTable::focusInEvent (QFocusEvent *event)
+{
+  QTableView::focusInEvent (event);
+
+  emit signalTableStatusChange ();
+}
+
+void WindowTable::focusOutEvent (QFocusEvent *event)
+{
+  QTableView::focusOutEvent (event);
+
+  emit signalTableStatusChange ();
+}
+
+void WindowTable::selectionChanged(const QItemSelection &selected,
+                                   const QItemSelection &deselected)
+{
+  QTableView::selectionChanged (selected,
+                                deselected);
+
+  emit signalTableStatusChange ();
 }

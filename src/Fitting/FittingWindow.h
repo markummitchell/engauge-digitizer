@@ -10,12 +10,13 @@
 #include "DocumentModelExportFormat.h"
 #include "FittingCurveCoefficients.h"
 #include "FittingPointsConvenient.h"
-#include <QDockWidget>
 #include <QVector>
+#include "WindowAbstractBase.h"
 
 class CmdMediator;
 class Curve;
 class FittingModel;
+class MainWindow;
 class MainWindowModel;
 class Matrix;
 class QComboBox;
@@ -30,25 +31,22 @@ class Transformation;
 ///
 /// The strategy used assumes no changes to the DIG file format will be made for the original implementation.
 /// Since settings cannot be saved for the Document or Curves, this keeps the implementation siple
-class FittingWindow : public QDockWidget
+class FittingWindow : public WindowAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor. Parent is needed or else this widget cannot be redocked after being undocked
-  FittingWindow (QWidget *parent);
+  FittingWindow (MainWindow *mainWindow);
   virtual ~FittingWindow ();
 
-  /// Clear stale information
-  void clear ();
-
-  /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
+  virtual void clear ();
   virtual void closeEvent(QCloseEvent *event);
-
-  /// Populate the table with the specified Curve
-  void update (const CmdMediator &cmdMediator,
-               const QString &curveSelected,
-               const Transformation &transformation);
+  virtual void update (const CmdMediator &cmdMediator,
+                       const MainWindowModel &modelMainWindow,
+                       const QString &curveSelected,
+                       const Transformation &transformation);
+  virtual QTableView *view () const;
 
 private slots:
   /// Update after change in the selected curve fit order
@@ -58,17 +56,18 @@ private slots:
   void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
 
 signals:
-  /// Signal that this QDockWidget was just closed
-  void signalFittingWindowClosed();
 
   /// Signal containing coefficients from curve fit
   void signalCurveFit(FittingCurveCoefficients, double, double, bool, bool);
+
+  /// Signal that this QDockWidget was just closed
+  void signalFittingWindowClosed();
 
 private:
   FittingWindow();
 
   void calculateCurveFitAndStatistics ();
-  void createWidgets();
+  void createWidgets(MainWindow *mainWindow);
   void initializeOrder ();
   int maxOrder () const;
   void refreshTable ();

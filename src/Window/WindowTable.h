@@ -4,24 +4,41 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef WINDOW_TABLE_BASE_H
-#define WINDOW_TABLE_BASE_H
+#ifndef WINDOW_TABLE_H
+#define WINDOW_TABLE_H
 
+#include <QObject>
 #include <QTableView>
 
 class QMouseEvent;
 class WindowModelBase;
 
 /// Table view class with support for both drag-and-drop and copy-and-paste
-class WindowTableBase : public QTableView
+class WindowTable : public QTableView
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor.
-  WindowTableBase(WindowModelBase &model);
-  ~WindowTableBase();
+  WindowTable(WindowModelBase &model);
+  ~WindowTable();
+
+  /// Catch this table status change
+  virtual void focusInEvent (QFocusEvent *);
+
+  /// Catch this table status change
+  virtual void focusOutEvent (QFocusEvent *);
+
+  /// Catch this table status change
+  virtual void selectionChanged(const QItemSelection &selected,
+                                const QItemSelection &deselected);
+
+signals:
+  /// Sent when a change occurs that should affect the Copy menu item
+  void signalTableStatusChange ();
 
 private:
-  WindowTableBase();
+  WindowTable();
 };
 
-#endif // WINDOW_TABLE_BASE_H
+#endif // WINDOW_TABLE_H

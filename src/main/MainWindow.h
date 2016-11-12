@@ -292,6 +292,7 @@ private slots:
   void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
+  void slotTableStatusChange ();
   void slotTimeoutRegressionErrorReport ();
   void slotTimeoutRegressionFileCmdScript ();
   void slotUndoTextChanged (const QString &);
