@@ -175,6 +175,20 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   layout->addWidget (m_lblRSquared, row++, 1, 1, 1);
 }
 
+void FittingWindow::doCopy ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "FittingWindow::doCopy";
+
+  QString text = m_model->selectionAsText (m_modelExport.delimiter());
+
+  if (!text.isEmpty ()) {
+
+    // Save to clipboard
+    QApplication::clipboard ()->setText (text);
+
+  }
+}
+
 void FittingWindow::initializeOrder ()
 {
   const int SECOND_ORDER = 2;
@@ -236,19 +250,6 @@ void FittingWindow::resizeTable (int order)
 void FittingWindow::slotCmbOrder(int /* index  */)
 {
   refreshTable ();
-}
-
-void FittingWindow::slotSelectionChanged (const QItemSelection & /* selected */,
-                                          const QItemSelection & /* deselected */)
-{
-  QString text = m_model->selectionAsText (m_modelExport.delimiter());
-
-  if (!text.isEmpty ()) {
-
-    // Save to clipboard
-    QApplication::clipboard ()->setText (text);
-
-  }
 }
 
 void FittingWindow::update (const CmdMediator &cmdMediator,

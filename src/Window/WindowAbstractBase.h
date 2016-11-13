@@ -32,6 +32,9 @@ public:
   /// Catch close event so corresponding menu item in MainWindow can be updated accordingly
   virtual void closeEvent(QCloseEvent *event) = 0;
 
+  /// Copy the current selection to the clipboard
+  virtual void doCopy () = 0;
+
   /// Give table status so MainWindow can determine if table can be copied
   void getTableStatus (bool &tableIsActive,
                        bool &tableIsCopyable) const;

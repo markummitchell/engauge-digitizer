@@ -40,6 +40,7 @@ public:
   /// Hidden column that has the point identifiers
   static int columnBodyPointIdentifiers ();
 
+  virtual void doCopy ();
   virtual void update (const CmdMediator &cmdMediator,
                        const MainWindowModel &modelMainWindow,
                        const QString &curveSelected,
@@ -53,9 +54,6 @@ public slots:
 
   /// Unhighlight the row for the specified point
   void slotPointHoverLeave (QString);
-
-  /// Prepare for copy after selection has changed
-  void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
 
 signals:
 

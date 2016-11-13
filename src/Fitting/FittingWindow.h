@@ -42,6 +42,7 @@ public:
 
   virtual void clear ();
   virtual void closeEvent(QCloseEvent *event);
+  virtual void doCopy ();
   virtual void update (const CmdMediator &cmdMediator,
                        const MainWindowModel &modelMainWindow,
                        const QString &curveSelected,
@@ -49,11 +50,9 @@ public:
   virtual QTableView *view () const;
 
 private slots:
+
   /// Update after change in the selected curve fit order
   void slotCmbOrder(int index);
-
-  /// Prepare for copy after selection has changed
-  void slotSelectionChanged (const QItemSelection &, const QItemSelection &);
 
 signals:
 

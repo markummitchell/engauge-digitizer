@@ -103,6 +103,20 @@ void GeometryWindow::createWidgets (MainWindow *mainWindow)
   setWidget (m_view);
 }
 
+void GeometryWindow::doCopy ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::doCopy";
+
+  QString text = m_model->selectionAsText (m_modelExport.delimiter());
+
+  if (!text.isEmpty ()) {
+
+    // Save to clipboard
+    QApplication::clipboard ()->setText (text);
+
+  }
+}
+
 void GeometryWindow::initializeHeader ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::initializeHeader";
@@ -145,19 +159,6 @@ void GeometryWindow::slotPointHoverEnter (QString pointIdentifier)
 void GeometryWindow::slotPointHoverLeave (QString /* pointIdentifier */)
 {
   m_model->setCurrentPointIdentifier ("");
-}
-
-void GeometryWindow::slotSelectionChanged (const QItemSelection & /* selected */,
-                                           const QItemSelection & /* deselected */)
-{
-  QString text = m_model->selectionAsText (m_modelExport.delimiter());
-
-  if (!text.isEmpty ()) {
-
-    // Save to clipboard
-    QApplication::clipboard ()->setText (text);
-
-  }
 }
 
 void GeometryWindow::unselectAll ()

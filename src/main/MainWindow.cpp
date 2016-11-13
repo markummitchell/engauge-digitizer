@@ -2930,45 +2930,93 @@ void MainWindow::slotEditCopy ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCopy";
 
-  GraphicsItemsExtractor graphicsItemsExtractor;
-  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
-  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+  // Copy command is sent to FittingWindow or GeometryWindow, or processed locally
+  bool tableFittingIsActive, tableFittingIsCopyable;
+  bool tableGeometryIsActive, tableGeometryIsCopyable;
+  m_dockFittingWindow->getTableStatus (tableFittingIsActive, tableFittingIsCopyable); // Fitting window status
+  m_dockGeometryWindow->getTableStatus (tableGeometryIsActive, tableGeometryIsCopyable); // Geometry window status
 
-  CmdCopy *cmd = new CmdCopy (*this,
-                              m_cmdMediator->document(),
-                              pointIdentifiers);
-  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
-                                        cmd);
+  if (tableFittingIsActive) {
+
+    // Send to FittingWindow
+    m_dockFittingWindow->doCopy ();
+
+  } else if (tableGeometryIsActive) {
+
+    // Send to GeometryWindow
+    m_dockGeometryWindow->doCopy ();
+
+  } else {
+
+    // Process curve points in main window
+    GraphicsItemsExtractor graphicsItemsExtractor;
+    const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+    QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
+    CmdCopy *cmd = new CmdCopy (*this,
+                                m_cmdMediator->document(),
+                                pointIdentifiers);
+    m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                          cmd);
+  }
 }
 
 void MainWindow::slotEditCut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditCut";
 
-  GraphicsItemsExtractor graphicsItemsExtractor;
-  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
-  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+  // Copy command is sent to FittingWindow or GeometryWindow, or processed locally
+  bool tableFittingIsActive, tableFittingIsCopyable;
+  bool tableGeometryIsActive, tableGeometryIsCopyable;
+  m_dockFittingWindow->getTableStatus (tableFittingIsActive, tableFittingIsCopyable); // Fitting window status
+  m_dockGeometryWindow->getTableStatus (tableGeometryIsActive, tableGeometryIsCopyable); // Geometry window status
 
-  CmdCut *cmd = new CmdCut (*this,
-                            m_cmdMediator->document(),
-                            pointIdentifiers);
-  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
-                                        cmd);
+  if (tableFittingIsActive || tableGeometryIsActive) {
+
+    // Cannot delete from fitting or geometry windows
+
+  } else {
+
+    // Process curve points in main window
+    GraphicsItemsExtractor graphicsItemsExtractor;
+    const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+    QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
+    CmdCut *cmd = new CmdCut (*this,
+                              m_cmdMediator->document(),
+                              pointIdentifiers);
+    m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                          cmd);
+  }
 }
 
 void MainWindow::slotEditDelete ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditDelete";
 
-  GraphicsItemsExtractor graphicsItemsExtractor;
-  const QList<QGraphicsItem*> &items = m_scene->selectedItems();
-  QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+  // Copy command is sent to FittingWindow or GeometryWindow, or processed locally
+  bool tableFittingIsActive, tableFittingIsCopyable;
+  bool tableGeometryIsActive, tableGeometryIsCopyable;
+  m_dockFittingWindow->getTableStatus (tableFittingIsActive, tableFittingIsCopyable); // Fitting window status
+  m_dockGeometryWindow->getTableStatus (tableGeometryIsActive, tableGeometryIsCopyable); // Geometry window status
 
-  CmdDelete *cmd = new CmdDelete (*this,
-                                  m_cmdMediator->document(),
-                                  pointIdentifiers);
-  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
-                                        cmd);
+  if (tableFittingIsActive || tableGeometryIsActive) {
+
+    // Cannot delete from fitting or geometry windows
+
+  } else {
+
+    // Process curve points in main window
+    GraphicsItemsExtractor graphicsItemsExtractor;
+    const QList<QGraphicsItem*> &items = m_scene->selectedItems();
+    QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+
+    CmdDelete *cmd = new CmdDelete (*this,
+                                    m_cmdMediator->document(),
+                                    pointIdentifiers);
+    m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                          cmd);
+  }
 }
 
 void MainWindow::slotEditMenu ()
@@ -4261,7 +4309,9 @@ void MainWindow::updateControls ()
                                 (tableFittingIsActive && tableFittingIsCopyable) ||
                                 (tableGeometryIsActive && tableGeometryIsCopyable));
   m_actionEditPaste->setEnabled (false);
-  m_actionEditDelete->setEnabled (m_scene->selectedItems().count () > 0);
+  m_actionEditDelete->setEnabled (!tableFittingIsActive &&
+                                  !tableGeometryIsActive &&
+                                  m_scene->selectedItems().count () > 0);
   // m_actionEditPasteAsNew and m_actionEditPasteAsNewAdvanced are updated when m_menuEdit is about to be shown
 
   m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
