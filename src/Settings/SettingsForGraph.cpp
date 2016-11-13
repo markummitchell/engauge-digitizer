@@ -13,6 +13,22 @@ SettingsForGraph::SettingsForGraph ()
 {
 }
 
+QString SettingsForGraph::defaultCurveName (int indexOneBased,
+                                            const QString &defaultName) const
+{
+  QString groupName = groupNameForNthCurve (indexOneBased);
+
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
+  settings.beginGroup (groupName);
+
+  QString curveName = settings.value (SETTINGS_CURVE_NAME,
+                                      defaultName).toString();
+
+  settings.endGroup ();
+
+  return curveName;
+}
+
 QString SettingsForGraph::groupNameForNthCurve (int indexOneBased) const
 {
   ENGAUGE_ASSERT (indexOneBased != 0); // Make sure index is one-based versus zero-based
@@ -24,14 +40,15 @@ QString SettingsForGraph::groupNameForNthCurve (int indexOneBased) const
   return groupName;
 }
 
-QString SettingsForGraph::defaultCurveName (int indexOneBased,
-                                            const QString &defaultName) const
+int SettingsForGraph::numberOfCurvesForImport() const
 {
-  QString groupName = groupNameForNthCurve (indexOneBased);
+  const QString EMPTY_CURVE_NAME;
 
-  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
-  settings.beginGroup (groupName);
+  // Loop until the configuration file returns an empty string
+  int indexOneBased = 1;
+  while (defaultCurveName (indexOneBased + 1, EMPTY_CURVE_NAME) != EMPTY_CURVE_NAME) {
+    ++indexOneBased;
+  }
 
-  return settings.value (SETTINGS_CURVE_NAME,
-                         defaultName).toString();
+  return indexOneBased;
 }

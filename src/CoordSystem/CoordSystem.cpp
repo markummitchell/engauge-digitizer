@@ -45,14 +45,19 @@ CoordSystem::CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired)
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
 
   SettingsForGraph settingsForGraph;
-  QString curveName = settingsForGraph.defaultCurveName (1,
-                                                         DEFAULT_GRAPH_CURVE_NAME);
-  m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
-                                            ColorFilterSettings::defaultFilter (),
-                                            CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
-                                                        PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
 
-  resetSelectedCurveNameIfNecessary ();
+  // Create one curve, or as many curve as specified in the configuration file, whichever is greater
+  for (int indexOneBased = 1; indexOneBased <= settingsForGraph.numberOfCurvesForImport (); indexOneBased++) {
+
+    QString curveName = settingsForGraph.defaultCurveName (indexOneBased,
+                                                           DEFAULT_GRAPH_CURVE_NAME);
+    m_curvesGraphs.addGraphCurveAtEnd (Curve (curveName,
+                                              ColorFilterSettings::defaultFilter (),
+                                              CurveStyle (LineStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()),
+                                                          PointStyle::defaultGraphCurve (m_curvesGraphs.numCurves ()))));
+
+    resetSelectedCurveNameIfNecessary ();
+  }
 }
 
 void CoordSystem::addGraphCurveAtEnd (const QString &curveName)

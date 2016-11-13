@@ -22,6 +22,9 @@ class SettingsForGraph
 
   /// Return the group name, that appears in the settings file/registry, for the specified curve index
   QString groupNameForNthCurve (int indexOneBased) const;
+
+  /// Return the number of curve names to be generated. Value is maximum of 1 and the number in the configuration file
+  int numberOfCurvesForImport() const;
 };
 
 #endif // SETTINGS_FOR_GRAPH_H
