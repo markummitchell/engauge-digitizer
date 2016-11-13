@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function main {
+    languages=(ar cs de en es fr hi it ja kk ko pt ru zh)
+    for language in "${languages[@]}"
+    do
+        prepare_one $language
+    done
+
+    echo "**********************************************************"
+    echo "*  engauge_*.ts files have been prepared for 'git diff'  *"
+    echo "**********************************************************"
+}
+
+function prepare_one {
+    if [ -f engauge_$1.ts ]; then
+	echo "Converting $1"
+	sed 's\<translation type="unfinished"></translation>\<translation type="unfinished"/>\g' engauge_$1.ts >tmp
+	mv tmp engauge_$1.ts
+    else
+	echo "Skipping $1"	
+    fi
+}
+
+main

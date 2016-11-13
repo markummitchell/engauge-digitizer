@@ -41,8 +41,10 @@ FittingWindow::FittingWindow (MainWindow *mainWindow) :
   setWindowTitle (tr ("Curve Fitting Window")); // Appears in title bar when undocked
   setStatusTip (tr ("Curve Fitting Window"));
   setWhatsThis (tr ("Curve Fitting Window\n\n"
-                    "This window applies a curve fit to the currently selected curve\n\n"
-                    "Cells in the table may be selected using Click and Shift+Click for copying or dragging to other applications"));
+                    "This window applies a curve fit to the currently selected curve.\n\n"
+                    "If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if "
+                    "drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag "
+                    "starts the dragging operation. Drag-and-drop mode is set in the Main Window settings"));
 
   m_coefficients.resize (MAX_POLYNOMIAL_ORDER + 1);
 

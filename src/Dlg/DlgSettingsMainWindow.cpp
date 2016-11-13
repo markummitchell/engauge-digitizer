@@ -210,9 +210,9 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_chkDragDropExport->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
   m_chkDragDropExport->setWhatsThis (tr ("Allow Drag and Drop Export\n\n"
                                          "Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.\n\n"
-                                         "When drag and drop is disabled, regions of table cells can be selected using click and "
-                                         "drag. When drag and drop is enabled, regions of table cells can be selected using click "
-                                         "and shift-click"));
+                                         "When drag and drop is disabled, a rectangular set of table cells can be selected using click and "
+                                         "drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click "
+                                         "then Shift+Click, since click and drag starts the drag operation."));
   connect (m_chkDragDropExport, SIGNAL (toggled (bool)), this, SLOT (slotDragDropExport (bool)));
   layout->addWidget (m_chkDragDropExport, row++, 2);
 }

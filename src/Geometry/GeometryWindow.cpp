@@ -49,7 +49,9 @@ GeometryWindow::GeometryWindow (MainWindow *mainWindow) :
                     "Index = Point number\n\n"
                     "Distance = Distance along the curve in forward or backward direction, in either graph units "
                     "or as a percentage\n\n"
-                    "Cells in the table may be selected using Click and Shift+Click for copying or dragging to other applications"));
+                    "If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if "
+                    "drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag "
+                    "starts the dragging operation. Drag-and-drop mode is set in the Main Window settings"));
 
   createWidgets (mainWindow);
   loadStrategies();
