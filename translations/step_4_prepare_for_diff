@@ -15,8 +15,13 @@ function main {
 function prepare_one {
     if [ -f engauge_$1.ts ]; then
 	echo "Converting $1"
+
 	sed 's\<translation type="unfinished"></translation>\<translation type="unfinished"/>\g' engauge_$1.ts >tmp
 	mv tmp engauge_$1.ts
+
+	# Download files expect &apos; instead of single quote
+	sed "s/'/&apos;/g" engauge_$1.ts >tmp
+	mv tmp engauge_$1.ts	
     else
 	echo "Skipping $1"	
     fi

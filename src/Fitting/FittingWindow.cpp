@@ -138,16 +138,8 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   m_model->setColumnCount (2);
 
   m_view = new WindowTable (*m_model);
-  connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
-           this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
   connect (m_view, SIGNAL (signalTableStatusChange ()),
            mainWindow, SLOT (slotTableStatusChange ()));
-
-  // Send signal if table gains or loses focus
-  connect (m_view, SIGNAL (focusInEvent (QFocusEvent *)),
-           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
-  connect (m_view, SIGNAL (focusOutEvent (QFocusEvent *)),
-           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
 
   layout->addWidget (m_view, row++, 0, 1, 2);
 

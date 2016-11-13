@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+from pprint import pprint
 import sys
 import xml.etree.ElementTree as etree
 
@@ -11,7 +12,9 @@ def main ():
 def merge (inCode, inTransifex, out):
     # Read translations downloaded from transifex
     (translationMapTransifex, countEmptyTransifex, countNotEmptyTransifex) = readTranslationMap (inTransifex)
-
+    #for k, v in sorted (translationMapTransifex.items ()):
+    #    print (k, "---", v)
+        
     # Merge downloaded transifex into first ts file which came from code, and output it
     (countEmptyCode, countNotEmptyCode, countEmptyOut, countNotEmptyOut, countOverriddenOut) = mergeOldAndNew (
         inCode, translationMapTransifex, out)
@@ -85,7 +88,7 @@ def recurseOutput (nodeCode, translationMapTransifex):
             if source is not None and translation is not None:
                 empty = True
                 if translation.text is not None and len (translation.text) > 0:
-                        empty = False
+                    empty = False
                 if empty:
                     countEmptyCode += 1
                 else:

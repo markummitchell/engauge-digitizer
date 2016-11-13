@@ -90,17 +90,8 @@ void GeometryWindow::createWidgets (MainWindow *mainWindow)
   m_model = new GeometryModel;
 
   m_view = new WindowTable (*m_model);
-  connect (m_view->selectionModel(), SIGNAL (selectionChanged (const QItemSelection &, const QItemSelection &)),
-           this, SLOT (slotSelectionChanged (const QItemSelection &, const QItemSelection &)));
   connect (m_view, SIGNAL (signalTableStatusChange ()),
            mainWindow, SLOT (slotTableStatusChange ()));
-
-  // Send signal if table gains or loses focus
-  connect (m_view, SIGNAL (focusInEvent (QFocusEvent *)),
-           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
-  connect (m_view, SIGNAL (focusOutEvent (QFocusEvent *)),
-           mainWindow, SLOT (slotTableFocusChange (QFocusEvent *)));
-
 
   setWidget (m_view);
 }
