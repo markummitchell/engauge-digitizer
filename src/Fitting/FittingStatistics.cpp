@@ -7,7 +7,9 @@
 #include "EngaugeAssert.h"
 #include "FittingCurveCoefficients.h"
 #include "FittingStatistics.h"
+#include "Logger.h"
 #include "Matrix.h"
+#include <QApplication>
 #include <qmath.h>
 
 FittingStatistics::FittingStatistics ()
@@ -36,6 +38,7 @@ void FittingStatistics::calculateCurveFit (int orderReduced,
 
     // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
     Matrix denominator = X.transpose () * X;
+    LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFit determinant=" << denominator.determinant();
     a = denominator.inverse () * X.transpose () * Y;
   }
 
@@ -65,6 +68,9 @@ void FittingStatistics::calculateCurveFitAndStatistics (unsigned int order,
                                                         double &rms,
                                                         double &rSquared)
 {
+  // Let user know something is happening if a high order was picked since that can take a long time
+  qApp->setOverrideCursor (Qt::WaitCursor);
+
   // To prevent having an underdetermined system with an infinite number of solutions (which will result
   // in divide by zero when computing an inverse) we reduce the order here if necessary.
   // In other words, we limit the order to -1 for no points, 0 for one point, 1 for two points, and so on
@@ -79,6 +85,8 @@ void FittingStatistics::calculateCurveFitAndStatistics (unsigned int order,
                        mse,
                        rms,
                        rSquared);
+
+  qApp->restoreOverrideCursor();
 }
 
 void FittingStatistics::calculateStatistics (const FittingPointsConvenient &pointsConvenient,

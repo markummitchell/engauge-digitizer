@@ -53,25 +53,27 @@ double Matrix::determinant () const
 {
   ENGAUGE_ASSERT (m_rows == m_cols);
 
+  double rtn;
+
   if (m_rows == 1) {
 
-    return m_vector [0];
+    rtn = m_vector [0];
 
   } else {
 
     const int COL = 0; // We arbitrarily iterate through the first column
 
     // This is a recursive algorithm
-    double sum = 0.0;
+    rtn = 0.0;
     double multiplier = +1;
     for (int row = 0; row < m_rows; row++) {
       Matrix min = minorReduced (row, COL);
-      sum += multiplier * get (row, COL) * min.determinant ();
+      rtn += multiplier * get (row, COL) * min.determinant ();
       multiplier *= -1.0;
     }
-
-    return sum;
   }
+
+  return rtn;
 }
 
 int Matrix::fold2dIndexes (int row, int col) const

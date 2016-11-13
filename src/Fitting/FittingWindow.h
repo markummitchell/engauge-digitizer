@@ -30,7 +30,7 @@ class Transformation;
 /// Window that displays curve fitting as applied to the currently selected curve
 ///
 /// The strategy used assumes no changes to the DIG file format will be made for the original implementation.
-/// Since settings cannot be saved for the Document or Curves, this keeps the implementation siple
+/// Since settings cannot be saved for the Document or Curves, this keeps the implementation simple
 class FittingWindow : public WindowAbstractBase
 {
   Q_OBJECT;
