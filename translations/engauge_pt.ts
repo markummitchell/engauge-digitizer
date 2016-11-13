@@ -2435,7 +2435,7 @@ Se drag-and-drop é desativado, um conjunto retangular de células podem ser sel
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="155" />
         <source>Mean square error:</source>
-        <translation>Quadrado médio do erro:<translation>
+        <translation>Quadrado médio do erro:</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="160" />
