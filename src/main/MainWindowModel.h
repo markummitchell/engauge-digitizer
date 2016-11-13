@@ -17,6 +17,7 @@
 
 class QTextStream;
 
+extern bool DEFAULT_DRAG_DROP_EXPORT;
 extern bool DEFAULT_SMALL_DIALOGS;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
@@ -34,6 +35,9 @@ public:
 
   /// Assignment constructor.
   MainWindowModel &operator=(const MainWindowModel &other);
+
+  /// Get method for drag and drop export
+  bool dragDropExport () const;
 
   virtual void loadXml(QXmlStreamReader &reader);
 
@@ -60,6 +64,9 @@ public:
                     QTextStream &str) const;
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
+
+  /// Set method for drag and drop export
+  void setDragDropExport (bool dragDropExport);
 
   /// Set method for highlight opacity
   void setHighlightOpacity (double highlightOpacity);
@@ -112,6 +119,7 @@ private:
   int m_maximumGridLines;
   double m_highlightOpacity;
   bool m_smallDialogs;
+  bool m_dragDropExport;
 
 };
 

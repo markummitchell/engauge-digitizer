@@ -24,6 +24,7 @@ extern const QString SETTINGS_CURVE_POINT_LINE_WIDTH;
 extern const QString SETTINGS_CURVE_POINT_RADIUS;
 extern const QString SETTINGS_CURVE_POINT_SHAPE;
 extern const QString SETTINGS_DIGITIZER;
+extern const QString SETTINGS_DRAG_DROP_EXPORT;
 extern const QString SETTINGS_ENGAUGE;
 extern const QString SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED;
 extern const QString SETTINGS_EXPORT_DELIMITER;

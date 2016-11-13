@@ -202,6 +202,19 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                        "Allows settings dialogs to be made very small so they fit on small computer screens."));
   connect (m_chkSmallDialogs, SIGNAL (toggled (bool)), this, SLOT (slotSmallDialogs (bool)));
   layout->addWidget (m_chkSmallDialogs, row++, 2);
+
+  QLabel *labelDragDropExport = new QLabel (tr ("Allow drag and drop export:"));
+  layout->addWidget (labelDragDropExport, row, 1);
+
+  m_chkDragDropExport = new QCheckBox;
+  m_chkDragDropExport->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  m_chkDragDropExport->setWhatsThis (tr ("Allow Drag and Drop Export\n\n"
+                                         "Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.\n\n"
+                                         "When drag and drop is disabled, regions of table cells can be selected using click and "
+                                         "drag. When drag and drop is enabled, regions of table cells can be selected using click "
+                                         "and shift-click"));
+  connect (m_chkDragDropExport, SIGNAL (toggled (bool)), this, SLOT (slotDragDropExport (bool)));
+  layout->addWidget (m_chkDragDropExport, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -280,6 +293,7 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_spinMaximumGridLines->setValue (m_modelMainWindowAfter->maximumGridLines());
   m_spinHighlightOpacity->setValue (m_modelMainWindowAfter->highlightOpacity());
   m_chkSmallDialogs->setChecked (m_modelMainWindowAfter->smallDialogs());
+  m_chkDragDropExport->setChecked (m_modelMainWindowAfter->dragDropExport());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -287,6 +301,14 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
 
 void DlgSettingsMainWindow::setSmallDialogs(bool /* smallDialogs */)
 {
+}
+
+void DlgSettingsMainWindow::slotDragDropExport (bool)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotDragDropExport";
+
+  m_modelMainWindowAfter->setDragDropExport (m_chkDragDropExport->isChecked());
+  updateControls ();
 }
 
 void DlgSettingsMainWindow::slotHighlightOpacity(double)

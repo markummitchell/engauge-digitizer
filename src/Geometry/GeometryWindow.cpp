@@ -175,9 +175,10 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::update";
 
-  // Save export format
+  // Save inputs
   m_modelExport = cmdMediator.document().modelExport();
   m_model->setDelimiter (m_modelExport.delimiter());
+  m_view->setDragEnabled (modelMainWindow.dragDropExport());
 
   // Gather and calculate geometry data
   const Curve *curve = cmdMediator.document().curveForCurveName (curveSelected);

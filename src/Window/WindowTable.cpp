@@ -25,7 +25,7 @@ WindowTable::WindowTable(WindowModelBase &model)
   horizontalHeader()->setStretchLastSection (true);
   setModel (&model);
   setSelectionMode (SELECTION_MODE);
-  setDragEnabled (true);
+  // setDragEnabled (true); This is set later from MainWindowModel
   setDragDropMode (QAbstractItemView::DragOnly);
   horizontalHeader()->hide();
   verticalHeader()->hide();

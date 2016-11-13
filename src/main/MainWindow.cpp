@@ -2517,6 +2517,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                          QVariant (DEFAULT_HIGHLIGHT_OPACITY)).toDouble ());
   m_modelMainWindow.setSmallDialogs (settings.value (SETTINGS_SMALL_DIALOGS,
                                                      QVariant (DEFAULT_SMALL_DIALOGS)).toBool ());
+  m_modelMainWindow.setDragDropExport (settings.value (SETTINGS_DRAG_DROP_EXPORT,
+                                                       QVariant (DEFAULT_DRAG_DROP_EXPORT)).toBool ());
 
   updateSettingsMainWindow();
   updateSmallDialogs();
@@ -4419,22 +4421,30 @@ void MainWindow::updateFittingWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateFittingWindow";
 
-  // Update fitting window
-  m_dockFittingWindow->update (*m_cmdMediator,
-                               m_modelMainWindow,
-                               m_cmbCurve->currentText (),
-                               m_transformation);
+  if (m_cmdMediator != 0 &&
+      m_cmbCurve != 0) {
+
+    // Update fitting window
+    m_dockFittingWindow->update (*m_cmdMediator,
+                                 m_modelMainWindow,
+                                 m_cmbCurve->currentText (),
+                                 m_transformation);
+  }
 }
 
 void MainWindow::updateGeometryWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGeometryWindow";
 
-  // Update geometry window
-  m_dockGeometryWindow->update (*m_cmdMediator,
-                                m_modelMainWindow,
-                                m_cmbCurve->currentText (),
-                                m_transformation);
+  if (m_cmdMediator != 0 &&
+      m_cmbCurve != 0) {
+
+    // Update geometry window
+    m_dockGeometryWindow->update (*m_cmdMediator,
+                                  m_modelMainWindow,
+                                  m_cmbCurve->currentText (),
+                                  m_transformation);
+  }
 }
 
 void MainWindow::updateGraphicsLinesToMatchGraphicsPoints()
@@ -4623,6 +4633,8 @@ void MainWindow::updateSettingsMainWindow()
 
   updateHighlightOpacity();
   updateWindowTitle();
+  updateFittingWindow(); // Forward the drag and drop choice
+  updateGeometryWindow(); // Forward the drag and drop choice
 }
 
 void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)

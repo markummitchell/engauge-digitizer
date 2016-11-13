@@ -253,7 +253,7 @@ void FittingWindow::slotCmbOrder(int /* index  */)
 }
 
 void FittingWindow::update (const CmdMediator &cmdMediator,
-                            const MainWindowModel & /* modelMainWindow */,
+                            const MainWindowModel &modelMainWindow,
                             const QString &curveSelected,
                             const Transformation &transformation)
 {
@@ -265,6 +265,7 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   m_model->setDelimiter (m_modelExport.delimiter());
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
+  m_view->setDragEnabled (modelMainWindow.dragDropExport());
 
   m_pointsConvenient.clear ();
 

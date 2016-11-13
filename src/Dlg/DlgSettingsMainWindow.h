@@ -38,6 +38,7 @@ public:
   virtual void setSmallDialogs (bool smallDialogs);
 
 private slots:
+  void slotDragDropExport (bool);
   void slotHighlightOpacity (double);
   void slotImportCropping (int index);
   void slotLocale (int index);
@@ -68,6 +69,7 @@ private:
   QSpinBox *m_spinMaximumGridLines;
   QDoubleSpinBox *m_spinHighlightOpacity;
   QCheckBox *m_chkSmallDialogs;
+  QCheckBox *m_chkDragDropExport;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

@@ -23,6 +23,7 @@
 // Prevent comma ambiguity with group separator commas and field delimiting commas
 const QLocale::NumberOption HIDE_GROUP_SEPARATOR = QLocale::OmitGroupSeparator;
 
+bool DEFAULT_DRAG_DROP_EXPORT = false; // False value allows intuitive copy-and-drag to select a rectangular set of table cells
 bool DEFAULT_SMALL_DIALOGS = false;
 
 MainWindowModel::MainWindowModel() :
@@ -33,7 +34,8 @@ MainWindowModel::MainWindowModel() :
   m_importCropping (DEFAULT_IMPORT_CROPPING),
   m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES),
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
-  m_smallDialogs (DEFAULT_SMALL_DIALOGS)
+  m_smallDialogs (DEFAULT_SMALL_DIALOGS),
+  m_dragDropExport (DEFAULT_DRAG_DROP_EXPORT)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -47,7 +49,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_importCropping (other.importCropping()),
   m_maximumGridLines (other.maximumGridLines()),
   m_highlightOpacity (other.highlightOpacity()),
-  m_smallDialogs (other.smallDialogs())
+  m_smallDialogs (other.smallDialogs()),
+  m_dragDropExport (other.dragDropExport())
 {
 }
 
@@ -62,8 +65,14 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_maximumGridLines = other.maximumGridLines();
   m_highlightOpacity = other.highlightOpacity();
   m_smallDialogs = other.smallDialogs();
+  m_dragDropExport = other.dragDropExport();
 
   return *this;
+}
+
+bool MainWindowModel::dragDropExport() const
+{
+  return m_dragDropExport;
 }
 
 double MainWindowModel::highlightOpacity() const
@@ -135,6 +144,7 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "maximumGridLines=" << m_maximumGridLines << "\n";
   str << indentation << "highlightOpacity=" << m_highlightOpacity << "\n";
   str << indentation << "smallDialogs=" << (m_smallDialogs ? "yes" : "no") << "\n";
+  str << indentation << "dragDropExport=" << (m_dragDropExport ? "yes" : "no") << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -143,6 +153,11 @@ void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_MAIN_WINDOW);
   writer.writeEndElement();
+}
+
+void MainWindowModel::setDragDropExport(bool dragDropExport)
+{
+  m_dragDropExport = dragDropExport;
 }
 
 void MainWindowModel::setHighlightOpacity(double highlightOpacity)
