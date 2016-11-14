@@ -55,7 +55,8 @@ void TestMatrix::testInverse ()
   bool success = true;
   int row, col;
   
-  // Try 3x3 matrix
+  // Try 3x3 matrix. The 3 rows would be parallel if we had ((1,2,3),(4,5,6),(7,8,9)) which means there
+  // is no inverse so the last element is slightly tweaked
   Matrix before (3);
   int counter = 0;
   for (row = 0; row < 3; row++) {
@@ -63,6 +64,7 @@ void TestMatrix::testInverse ()
       before.set (row, col, ++counter);
     }
   }
+  before.set (2, 2, 10);
 
   Matrix after = before.inverse ();
 

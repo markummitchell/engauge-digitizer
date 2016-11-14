@@ -1,0 +1,1 @@
+-errorreport ../test/curve_rename.xml -regression -reset
