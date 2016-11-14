@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "Matrix.h"
+#include <QTextStream>
 
 Matrix::Matrix (int N)
 {
@@ -380,6 +381,30 @@ void Matrix::switchRows (int row1,
     set (row2, col, temp2);
     set (row1, col, temp1);
   }
+}
+
+QString Matrix::toString () const
+{
+  QString out;
+  QTextStream str (&out);
+
+  str << "(";
+  for (int row = 0; row < rows (); row++) {
+    if (row > 0) {
+      str << ", ";
+    }
+    str << "(";
+    for (int col = 0; col < cols (); col++) {
+      if (col > 0) {
+        str << ", ";
+      }
+      str << get (row, col);
+    }
+    str << ")";
+  }
+  str << ")";
+
+  return out;
 }
 
 Matrix Matrix::transpose () const

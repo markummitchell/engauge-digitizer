@@ -40,6 +40,10 @@ void FittingStatistics::calculateCurveFit (int orderReduced,
     Matrix denominator = X.transpose () * X;
     LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFit determinant=" << denominator.determinant();
     a = denominator.inverse () * X.transpose () * Y;
+
+    Matrix expectedIdentity = denominator * denominator.inverse ();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFit expectedIdentity="
+                                 << expectedIdentity.toString ().toLatin1().data ();
   }
 
   // Copy coefficients into member variable and into list for sending as a signal

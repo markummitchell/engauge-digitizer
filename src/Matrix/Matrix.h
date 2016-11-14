@@ -7,6 +7,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <QString>
 #include <QVector>
 
 /// Matrix class that supports arbitrary NxN size
@@ -51,6 +52,9 @@ public:
 
   /// Set (row, col) element
   void set (int row, int col, double value);
+
+  /// Dump matrix to a string
+  QString toString () const;
 
   /// Return the transpose of the current matrix
   Matrix transpose () const;
