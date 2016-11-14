@@ -69,6 +69,10 @@ void FittingWindow::calculateCurveFitAndStatistics ()
                                                     rms,
                                                     rSquared);
 
+  m_lblMeanSquareError->setText (QString::number (mse));
+  m_lblRootMeanSquare->setText (QString::number (rms));
+  m_lblRSquared->setText (QString::number (rSquared));
+
   // Send coefficients to connected classes. Also send the first and last x values
   if (m_pointsConvenient.size () > 0) {
     int last = m_pointsConvenient.size () - 1;
