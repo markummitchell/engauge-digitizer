@@ -11,7 +11,7 @@
 #include "FittingPointsConvenient.h"
 #include <QVector>
 
-const int MAX_POLYNOMIAL_ORDER = 7; // Check execution time if this is increased from, say, 6 or 7
+const int MAX_POLYNOMIAL_ORDER = 9; // Check execution time if this is increased from, say, 6 or 7
 
 class Matrix;
 

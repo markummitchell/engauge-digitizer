@@ -58,9 +58,19 @@ public:
 private:
   Matrix();
 
+  void addRowToAnotherWithScaling (int rowFrom,
+                                   int rowTo,
+                                   double factor);
   int fold2dIndexes (int row, int col) const;
   void initialize (int rows,
                    int cols);
+  Matrix inverseCramersRule () const;
+  Matrix inverseGaussianElimination () const;
+  unsigned int leadingZeros (int row) const; // Number of leading zeros in the specified zero
+  void normalizeRow (int rowToNormalize,
+                     int colToNormalize);
+  void switchRows (int row1,
+                   int row2);
 
   int m_rows; // Height of matrix
   int m_cols; // Width of matrix

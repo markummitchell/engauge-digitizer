@@ -44,6 +44,18 @@ Matrix &Matrix::operator= (const Matrix &other)
   return *this;
 }
 
+void Matrix::addRowToAnotherWithScaling (int rowFrom,
+                                         int rowTo,
+                                         double factor)
+{
+  for (int col = 0; col < cols (); col++) {
+    double oldValueFrom = get (rowFrom, col);
+    double oldValueTo = get (rowTo, col);
+    double newValueTo = oldValueFrom * factor + oldValueTo;
+    set (rowTo, col, newValueTo);
+  }
+}
+
 int Matrix::cols () const
 {
   return m_cols;
@@ -107,6 +119,12 @@ void Matrix::initialize (int rows,
 
 Matrix Matrix::inverse () const
 {
+  // Available algorithms are inverseCramersRule and inverseGaussianElimination
+  return inverseGaussianElimination ();
+}
+
+Matrix Matrix::inverseCramersRule () const
+{
   ENGAUGE_ASSERT (m_rows == m_cols);
 
   Matrix inv (m_rows);
@@ -146,6 +164,127 @@ Matrix Matrix::inverse () const
   return inv;
 }
 
+Matrix Matrix::inverseGaussianElimination () const
+{
+  // From https://en.wikipedia.org/wiki/Gaussian_elimination
+
+  int row, col, rowFrom, rowTo;
+
+  // Track the row switches that may or may not be performed below
+  QVector<int> rowIndexes (rows ());
+  for (row = 0; row < rows (); row++) {
+    rowIndexes [row] = row;
+  }
+
+  // Creat the working matrix and populate the left half. Number of columns in the working matrix is twice the number
+  // of cols in this matrix, but we will not populate the right half until after the bubble sort below
+  Matrix working (rows (), 2 * cols ());
+  for (row = 0; row < rows (); row++) {
+    for (col = 0; col < cols (); col++) {
+      double value = get (row, col);
+      working.set (row, col, value);
+    }
+  }
+
+  // Simple bubble sort to rearrange the rows with 0 leading zeros at start, followed by rows with 1 leading zero at start, ...
+  for (int row1 = 0; row1 < rows (); row1++) {
+    for (int row2 = row1 + 1; row2 < rows (); row2++) {
+      if (working.leadingZeros (row1) > working.leadingZeros (row2)) {
+        working.switchRows (row1, row2);
+
+        // Remember this switch
+        int row1Index = rowIndexes [row1];
+        int row2Index = rowIndexes [row2];
+        rowIndexes [row1] = row2Index;
+        rowIndexes [row2] = row1Index;
+      }
+    }
+  }
+
+  // Populate the right half now
+  for (row = 0; row < rows (); row++) {
+    for (col = cols (); col < 2 * cols (); col++) {
+      int colIdentitySubmatrix = col - cols ();
+      double value  = (row == colIdentitySubmatrix) ? 1 : 0;
+      working.set (row, col, value);
+    }
+  }
+\
+  // Loop through the "from" row going down. This results in the lower off-diagonal terms becoming zero, in the left half
+  for (rowFrom = 0; rowFrom < rows (); rowFrom++) {
+    int colFirstWithNonZero = rowFrom;
+
+    // In pathological situations we have (rowFrom, colFirstWithNonzero) = 0 in which case the solution cannot be obtained
+    // so we exit
+    if (working.get (rowFrom, colFirstWithNonZero) == 0) {
+
+      // Fail
+      break;
+    }
+
+    // Normalize the 'from' row with first nonzero term set to 1
+    working.normalizeRow (rowFrom, colFirstWithNonZero);
+
+    // Apply the 'from' row to all the 'to' rows
+    for (rowTo = rowFrom + 1; rowTo < rows (); rowTo++) {
+
+      if (working.get (rowTo, colFirstWithNonZero) != 0) {
+
+        // We need to merge rowFrom and rowTo into rowTo
+        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / working.get (rowFrom, colFirstWithNonZero);
+        working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
+      }
+    }
+  }
+
+  // Loop through the "from" row doing up. This results in the upper off-diagonal terms becoming zero, in the left half
+  for (rowFrom = rows () - 1; rowFrom >= 0; rowFrom--) {
+    int colFirstWithNonZero = rowFrom; // This is true since we should have 1s all down the diagonal at this point
+
+    // Normalize the 'from' row with diagonal term set to 1. The first term should be like 0.9999 or 1.0001 but we want exactly one
+    working.normalizeRow (rowFrom, colFirstWithNonZero);
+
+    // Apply the 'from' row to all the 'to' rows
+    for (rowTo = rowFrom - 1; rowTo >= 0; rowTo--) {
+
+      if (working.get (rowTo, colFirstWithNonZero) != 0) {
+
+        // We need to merge rowFro and rowTo into rowTo
+        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / working.get (rowFrom, colFirstWithNonZero);
+        working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
+      }
+    }
+  }
+
+  // Extract right half of rectangular matrix which is the inverse
+  Matrix inv (working.rows ());
+
+  for (row = 0; row < working.rows (); row++) {
+
+    int rowBeforeSort = rowIndexes [row];
+
+    for (col = 0; col < working.rows (); col++) {
+      int colRightHalf = col + inv.cols ();
+      double value = working.get (rowBeforeSort, colRightHalf);
+      inv.set (row, col, value);
+    }
+  }
+
+  return inv;
+}
+
+unsigned int Matrix::leadingZeros (int row) const
+{
+  unsigned int sum = 0;
+  for (int col = 0; col < cols (); col++) {
+    if (get (row, col) != 0) {
+      ++sum;
+    }
+  }
+
+  return sum;
+}
+
 Matrix Matrix::minorReduced (int rowOmit, int colOmit) const
 {
   ENGAUGE_ASSERT (m_rows == m_cols);
@@ -170,6 +309,18 @@ Matrix Matrix::minorReduced (int rowOmit, int colOmit) const
   }
 
   return outMinor;
+}
+
+void Matrix::normalizeRow (int rowToNormalize,
+                           int colToNormalize)
+{
+  ENGAUGE_ASSERT (get (rowToNormalize, colToNormalize) != 0);
+
+  double factor = 1.0 / get (rowToNormalize, colToNormalize);
+  for (int col = 0; col < cols (); col++) {
+    double value = get (rowToNormalize, col);
+    set (rowToNormalize, col, factor * value);
+  }
 }
 
 Matrix Matrix::operator* (const Matrix &other) const
@@ -217,6 +368,18 @@ int Matrix::rows () const
 void Matrix::set (int row, int col, double value)
 {
   m_vector [fold2dIndexes (row, col)] = value;
+}
+
+void Matrix::switchRows (int row1,
+                         int row2)
+{
+  // Switch rows
+  for (int col = 0; col < cols (); col++) {
+    double temp1 = get (row1, col);
+    double temp2 = get (row2, col);
+    set (row2, col, temp2);
+    set (row1, col, temp1);
+  }
 }
 
 Matrix Matrix::transpose () const
