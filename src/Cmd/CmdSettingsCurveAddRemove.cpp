@@ -29,11 +29,10 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove(MainWindow &mainWindow,
   // Build the 'after' state
   for (int row = 0; row < modelCurves.rowCount (); row++) {
 
-    QModelIndex idxCurrent = modelCurves.index (row, 0);
-    QModelIndex idxOriginal = modelCurves.index (row, 1);
+    QModelIndex idxCurrent = modelCurves.index (row, CURVE_NAME_LIST_COLUMN_CURRENT);
 
     QString curveNameCurrent = modelCurves.data (idxCurrent).toString ();
-    QString curveNameOriginal = modelCurves.data (idxOriginal).toString ();
+    QString curveNameOriginal = modelCurves.currentCurveToOriginalCurve (curveNameCurrent);
     if (!curveNameOriginal.isEmpty ()) {
 
       // There was an original Curve
