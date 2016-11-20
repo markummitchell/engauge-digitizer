@@ -232,8 +232,6 @@ void CurveNameList::reset()
 
   m_currentCurveToOriginalCurve.clear();
   m_originalCurveToPointCount.clear();
-
-  QStandardItemModel::clear();
 }
 
 int CurveNameList::rowCount (const QModelIndex & /* parent */) const

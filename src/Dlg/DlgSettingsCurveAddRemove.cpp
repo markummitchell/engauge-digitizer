@@ -82,7 +82,7 @@ void DlgSettingsCurveAddRemove::createButtons (QGridLayout *layout,
 }
 
 void DlgSettingsCurveAddRemove::createListCurves (QGridLayout *layout,
-                                          int &row)
+                                                  int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createListCurves";
 
@@ -198,6 +198,7 @@ void DlgSettingsCurveAddRemove::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  m_listCurves->reset ();
   m_curveNameList->clear ();
 
   QStringList curveNames = cmdMediator.curvesGraphsNames ();
@@ -464,9 +465,7 @@ void DlgSettingsCurveAddRemove::slotRowsAboutToBeRemoved (const QModelIndex &par
                                << " rowFirst=" << rowFirst
                                << " rowLast=" << rowLast;
 
-//  for (int row = rowLast; row >= rowFirst; row--) {
-//    m_listCurves->model()->removeRow (row);
-//  }
+  updateControls ();
 }
 
 void DlgSettingsCurveAddRemove::slotNew ()
