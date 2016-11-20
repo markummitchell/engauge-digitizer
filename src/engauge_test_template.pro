@@ -126,7 +126,6 @@ HEADERS  += \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurveNameList.h \
-    Curve/CurveNameListEntry.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
     Curve/CurveStyle.h \
@@ -449,7 +448,6 @@ SOURCES += \
     Curve/Curve.cpp \
     Curve/CurveConnectAs.cpp \
     Curve/CurveNameList.cpp \
-    Curve/CurveNameListEntry.cpp \
     Curve/CurveSettingsInt.cpp \
     Curve/CurvesGraphs.cpp \
     Curve/CurveStyle.cpp \

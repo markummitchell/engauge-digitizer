@@ -10,16 +10,17 @@
 #include "DlgSettingsAbstractBase.h"
 #include <QItemSelection>
 #include <QModelIndex>
+#include <QString>
 
 class CurveNameList;
 class QGridLayout;
 class QListView;
 class QPushButton;
+class QStandardItemModel;
 class QTableView;
+class QTextStream;
 
 /// Dialog for editing curve names settings.
-///
-/// The debug macro DLG_SETTINGS_DEBUG can be temporarily set to see the hidden columns
 class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
@@ -34,6 +35,10 @@ public:
   void load (CmdMediator &cmdMediator);
   virtual void setSmallDialogs (bool smallDialogs);
 
+public slots:
+  /// Cleanup after rows have been removed in the model. We remove the corresponding rows in the QListView
+  void slotRowsAboutToBeRemoved (const QModelIndex &parent, int rowFirst, int rowLast);
+
 private slots:
   void slotDataChanged (const QModelIndex &topLeft,
                         const QModelIndex &bottomRight,
@@ -42,7 +47,6 @@ private slots:
   void slotRemove ();
   void slotResetDefault();
   void slotSaveDefault();
-  void slotSelectionChanged (QItemSelection, QItemSelection);
 
 protected:
   virtual void handleOk ();
@@ -62,17 +66,15 @@ private:
   int newIndexFromSelection () const;
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
+  unsigned int numPointsForSelectedCurves () const;
+  void printStream (QTextStream &str) const; // Debugging method
   void removeSelectedCurves();
   void selectCurveName (const QString &curveWanted);
   void updateControls ();
 
   CurveNameList *m_curveNameList; // Model for m_listCurves
 
-#ifdef DLG_SETTINGS_DEBUG
-  QTableView *m_listCurves; // While debugging, the 3 columns in each row are visible to make the operations more clear
-#else
   QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used
-#endif
 
   QPushButton *m_btnAdd;
   QPushButton *m_btnRemove;
@@ -80,6 +82,7 @@ private:
 
   QPushButton *m_btnResetDefault;
   QPushButton *m_btnSaveDefault;
+
 };
 
 #endif // DLG_SETTINGS_CURVE_ADD_REMOVE_H
