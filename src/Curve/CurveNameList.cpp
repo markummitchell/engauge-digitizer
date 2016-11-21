@@ -264,32 +264,52 @@ bool CurveNameList::setData (const QModelIndex &index,
                                << " value=" << value.toString().toLatin1().data()
                                << " role=" << roleAsString (role).toLatin1().data();
 
+  bool success;
   if (role == Qt::EditRole) {
 
-    QModelIndex idxOld = QStandardItemModel::index (index.row(), CURVE_NAME_LIST_COLUMN_CURRENT);
+    // Each curve name must be unique
+    if (curveNameIsAcceptable (value.toString(),
+                               index.row())) {
 
-    // Old and new curve names
-    QString curveCurrentOld = data (idxOld).toString ();
-    QString curveCurrentNew = value.toString ();
+      // Curve name is fine
+      QModelIndex idxOld = QStandardItemModel::index (index.row(), CURVE_NAME_LIST_COLUMN_CURRENT);
 
-    // Remove old entry after saving original curve name
-    QString curveOriginal;
-    if (m_currentCurveToOriginalCurve.contains (curveCurrentOld)) {
+      // Old and new curve names
+      QString curveCurrentOld = data (idxOld).toString ();
+      QString curveCurrentNew = value.toString ();
 
-      // Remember old original curve name
-      curveOriginal = m_currentCurveToOriginalCurve [curveCurrentOld];
+      // Remove old entry after saving original curve name
+      QString curveOriginal;
+      if (m_currentCurveToOriginalCurve.contains (curveCurrentOld)) {
 
-      // Remove old entry
-      m_currentCurveToOriginalCurve.remove (curveCurrentOld);
+        // Remember old original curve name
+        curveOriginal = m_currentCurveToOriginalCurve [curveCurrentOld];
 
-      // Add new entry
-      m_currentCurveToOriginalCurve [curveCurrentNew] = curveOriginal;
+        // Remove old entry
+        m_currentCurveToOriginalCurve.remove (curveCurrentOld);
+
+        // Add new entry
+        m_currentCurveToOriginalCurve [curveCurrentNew] = curveOriginal;
+      }
+
+      success = QStandardItemModel::setData (index,
+                                             value,
+                                             role);
+    } else {
+
+      // Curve name is unacceptable
+      success = false;
+
     }
+  } else {
+
+    // For non-edits, this method just calls the superclass method
+    success = QStandardItemModel::setData (index,
+                                           value,
+                                           role);
   }
 
-  return QStandardItemModel::setData (index,
-                                      value,
-                                      role);
+  return success;
 }
 
 void CurveNameList::setItem(int row,
