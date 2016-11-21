@@ -441,9 +441,15 @@ void Point::saveXml(QXmlStreamWriter &writer) const
   writer.writeEndElement();
 
   if (m_hasPosGraph) {
+
+    // For time coordinates, many digits of precision are needed since a typical date is 1,246,870,000 = July 6, 2009
+    // and we want seconds of precision
+    const char FORMAT = 'g';
+    const int PRECISION = 16;
+
     writer.writeStartElement(DOCUMENT_SERIALIZE_POINT_POSITION_GRAPH);
-    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x()));
-    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y()));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_X, QString::number (m_posGraph.x(), FORMAT, PRECISION));
+    writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_Y, QString::number (m_posGraph.y(), FORMAT, PRECISION));
     writer.writeEndElement();
   }
 
