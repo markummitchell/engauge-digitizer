@@ -69,6 +69,11 @@ public:
   /// One row per curve name.
   virtual int rowCount (const QModelIndex & parent = QModelIndex()) const;
 
+  /// Store data for one curve name
+  virtual bool setData (const QModelIndex &index,
+                        const QVariant &value,
+                        int role);
+
   /// Store one curve name data.
   virtual void setItem(int row, int column, QStandardItem *item);
 

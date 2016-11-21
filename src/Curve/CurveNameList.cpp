@@ -15,7 +15,8 @@
 #include <QVariant>
 #include <QXmlStreamWriter>
 
-CurveNameList::CurveNameList()
+CurveNameList::CurveNameList() :
+  QStandardItemModel()
 {
 }
 
@@ -50,10 +51,14 @@ QString CurveNameList::currentCurvesAsString () const
   for (int row = 0; row < rowCount (); row++) {
 
     QString curveCurrent = data (index (row, CURVE_NAME_LIST_COLUMN_CURRENT)).toString ();
-    QString curveOriginal, points = 0;
-    if (m_currentCurveToOriginalCurve.contains (curveOriginal)) {
+    QString curveOriginal;
+    unsigned int points = 0;
+    if (m_currentCurveToOriginalCurve.contains (curveCurrent)) {
       curveOriginal = m_currentCurveToOriginalCurve [curveCurrent];
-      points = m_originalCurveToPointCount [curveOriginal];
+      if (m_originalCurveToPointCount.contains (curveOriginal)) {
+
+        points = m_originalCurveToPointCount [curveOriginal];
+      }
     }
 
     str << "\n   current=" << curveCurrent.toLatin1().data()
@@ -155,7 +160,7 @@ void CurveNameList::insertRow (int row,
                    row);
 
   m_currentCurveToOriginalCurve [curveCurrent] = curveOriginal;
-  m_originalCurveToPointCount [curveCurrent] = pointCount;
+  m_originalCurveToPointCount [curveOriginal] = pointCount;
 
   endInsertRows ();
 }
@@ -178,8 +183,14 @@ unsigned int CurveNameList::numPointsForSelectedCurves (const QList<unsigned int
 
     QModelIndex idx = index (row, CURVE_NAME_LIST_COLUMN_CURRENT);
     QString currentCurve = data (idx).toString ();
+    if (m_currentCurveToOriginalCurve.contains (currentCurve)) {
 
-    numPoints += m_originalCurveToPointCount [currentCurve];
+      QString originalCurve = m_currentCurveToOriginalCurve [currentCurve];
+      if (m_originalCurveToPointCount.contains (originalCurve)) {
+
+        numPoints += m_originalCurveToPointCount [originalCurve];
+      }
+    }
   }
 
   return numPoints;
@@ -238,10 +249,47 @@ int CurveNameList::rowCount (const QModelIndex & /* parent */) const
 {
   int count = QStandardItemModel::rowCount ();
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::rowCount"
-                               << " count=" << count;
+//  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::rowCount"
+//                               << " count=" << count;
 
   return count;
+}
+
+bool CurveNameList::setData (const QModelIndex &index,
+                             const QVariant &value,
+                             int role)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CurveNameList::setData"
+                               << " row=" << index.row()
+                               << " value=" << value.toString().toLatin1().data()
+                               << " role=" << roleAsString (role).toLatin1().data();
+
+  if (role == Qt::EditRole) {
+
+    QModelIndex idxOld = QStandardItemModel::index (index.row(), CURVE_NAME_LIST_COLUMN_CURRENT);
+
+    // Old and new curve names
+    QString curveCurrentOld = data (idxOld).toString ();
+    QString curveCurrentNew = value.toString ();
+
+    // Remove old entry after saving original curve name
+    QString curveOriginal;
+    if (m_currentCurveToOriginalCurve.contains (curveCurrentOld)) {
+
+      // Remember old original curve name
+      curveOriginal = m_currentCurveToOriginalCurve [curveCurrentOld];
+
+      // Remove old entry
+      m_currentCurveToOriginalCurve.remove (curveCurrentOld);
+
+      // Add new entry
+      m_currentCurveToOriginalCurve [curveCurrentNew] = curveOriginal;
+    }
+  }
+
+  return QStandardItemModel::setData (index,
+                                      value,
+                                      role);
 }
 
 void CurveNameList::setItem(int row,
