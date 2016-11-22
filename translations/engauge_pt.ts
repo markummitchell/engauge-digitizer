@@ -1005,13 +1005,13 @@ Acontece formato usa um único número real. Uma volta completa é um turno.</tr
 Curve Adicionar / Remover</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69" />
         <source>Add...</source>
         <translation>
 Adicionar...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="66" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="70" />
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
@@ -1020,12 +1020,12 @@ Every curve name must be unique</source>
 Cada nome de curva deve ser exclusivo</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="72" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="76" />
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="73" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="77" />
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
@@ -1034,12 +1034,12 @@ There must always be at least one curve</source>
 Deve haver sempre pelo menos uma curva</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="85" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="89" />
         <source>Curve Names:</source>
         <translation>Nomes Curve:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="94" />
         <source>List of the curves belonging to this document.
 
 Click on a curve name to edit it. Each curve name must be unique.
@@ -1052,43 +1052,43 @@ Clique no nome de uma curva para editá-lo. Cada nome de curva deve ser exclusiv
 Reordenar curvas arrastando-os ao redor.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="121" />
         <source>Save As Default</source>
         <translation>Salvar como padrão</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="124" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="122" />
         <source>Save the curve names for use as defaults for future graph curves.</source>
         <translation>Guardar os nomes de curva para uso como padrão para futuros curvas do gráfico.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="126" />
         <source>Reset Default</source>
         <translation>Padrão de reset</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="127" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
         <translation>Redefinir os padrões para as futuras curvas gráfico para as configurações originais.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="494" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="506" />
         <source>Removing this curve will also remove</source>
         <translation>A remoção desta curva também irá remover</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="496" />
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="501" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="508" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="513" />
         <source>points. Continue?</source>
         <translation>pontos. Continuar?</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="499" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="511" />
         <source>Removing these curves will also remove</source>
         <translation>A remoção destas curvas também removerá</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="505" />
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="517" />
         <source>Curves With Points</source>
         <translation>Curvas com pontos de</translation>
     </message>
@@ -2228,7 +2228,7 @@ Permite que as configurações diálogos a ser feita muito pequena para que eles
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
         <source>Allow drag and drop export:</source>
-        <translation></translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
@@ -2412,7 +2412,7 @@ Além dos pontos colocados com intervalos regulares, esta opção faz com que um
         <location filename="../src/Fitting/FittingWindow.cpp" line="41" />
         <location filename="../src/Fitting/FittingWindow.cpp" line="42" />
         <source>Curve Fitting Window</source>
-        <translation>Curve Fitting Janela</translation>
+        <translation>Encaixar uma janela curva</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="43" />
@@ -2428,57 +2428,57 @@ Esta janela aplica uma curva de ajuste à curva actualmente seleccionada.
 Se drag-and-drop é desativado, um conjunto retangular de células podem ser selecionados clicando e arrastando. Caso contrário, se arrastar-e-soltar é ativada, um conjunto retangular de células podem ser selecionados usando Clique então Shift + Clique, uma vez que clicar e arrastar inicia a operação de arrastar. modo de arrastar-e-soltar é definido nas configurações da janela principal</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="122" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="126" />
         <source>Order:</source>
         <translation>Ordem:</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="155" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="151" />
         <source>Mean square error:</source>
         <translation>Quadrado médio do erro:</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="160" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="156" />
         <source>Calculated mean square error statistic</source>
         <translation>Calculado estatística erro médio quadrado</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="163" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="159" />
         <source>Root mean square:</source>
         <translation>Erro médio quadrático:</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="168" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="164" />
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
         <translation>Raiz média calculada estatística quadrado. Este é calculado como a raiz quadrada do erro quadrático médio</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="171" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="167" />
         <source>R squared:</source>
         <translation>R quadrado:</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="176" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="172" />
         <source>Calculated R squared statistic</source>
         <translation>Estatística de R quadrado calculado</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="230" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="226" />
         <source>log10(Y)=</source>
         <translation>log10(Y)=</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="231" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="227" />
         <source>Y=</source>
         <translation>Y=</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="236" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="232" />
         <source>log10(X)</source>
         <translation>log10(X)</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="237" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="233" />
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -4143,27 +4143,27 @@ Você deseja salvar as alterações?</translation>
         <translation>Não é possível gravar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3123" />
+        <location filename="../src/main/MainWindow.cpp" line="3124" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3199" />
+        <location filename="../src/main/MainWindow.cpp" line="3200" />
         <source>Open Document</source>
         <translation>Documento aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4624" />
+        <location filename="../src/main/MainWindow.cpp" line="4625" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4625" />
+        <location filename="../src/main/MainWindow.cpp" line="4626" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4753" />
+        <location filename="../src/main/MainWindow.cpp" line="4754" />
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4285,7 +4285,7 @@ Você deseja salvar as alterações?</translation>
         <location filename="../src/Cmd/CmdSettingsAxesChecker.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsColorFilter.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsCoords.cpp" line="51" />
-        <location filename="../src/Cmd/CmdSettingsCurveAddRemove.cpp" line="79" />
+        <location filename="../src/Cmd/CmdSettingsCurveAddRemove.cpp" line="78" />
         <location filename="../src/Cmd/CmdSettingsCurveProperties.cpp" line="51" />
         <location filename="../src/Cmd/CmdSettingsDigitizeCurve.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsExportFormat.cpp" line="51" />
@@ -4400,7 +4400,7 @@ Você deseja salvar as alterações?</translation>
         <translation>HH:MM:SS</translation>
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="551" />
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="556" />
         <source>Unexpected xml token</source>
         <translation>Token de xml inesperada</translation>
     </message>
