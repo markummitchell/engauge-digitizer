@@ -198,8 +198,9 @@ void DlgSettingsCurveAddRemove::load (CmdMediator &cmdMediator)
 
   setCmdMediator (cmdMediator);
 
+  // Perform comprehensive clearing
   m_listCurves->reset ();
-  m_curveNameList->clear ();
+  m_curveNameList->reset ();
 
   QStringList curveNames = cmdMediator.curvesGraphsNames ();
   QStringList::const_iterator itr;
@@ -215,27 +216,27 @@ void DlgSettingsCurveAddRemove::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
-int DlgSettingsCurveAddRemove::newIndexFromSelection () const
+int DlgSettingsCurveAddRemove::newRowFromSelection () const
 {
   int numSelectedItems = m_listCurves->selectionModel ()->selectedIndexes ().count ();
   int numItems = m_listCurves->model ()->rowCount ();
 
   // Determine index where new entry will be inserted
-  int newIndex = -1;
+  int newRow = -1;
   if ((numSelectedItems == 0) &&
       (numItems > 0)) {
 
     // Append after list which has at least one entry
-    newIndex = numItems;
+    newRow = numItems;
 
   } else if (numSelectedItems == 1) {
 
     // Insert after the selected index
-    newIndex = 1 + m_listCurves->selectionModel ()->selectedIndexes ().at (0).row ();
+    newRow = 1 + m_listCurves->selectionModel ()->selectedIndexes ().at (0).row ();
 
   }
 
-  return newIndex;
+  return newRow;
 }
 
 QString DlgSettingsCurveAddRemove::nextCurveName () const
@@ -244,21 +245,21 @@ QString DlgSettingsCurveAddRemove::nextCurveName () const
 
   ENGAUGE_CHECK_PTR (m_listCurves);
 
-  int newIndex = newIndexFromSelection ();
+  int newRow = newRowFromSelection ();
   int numItems = m_listCurves->model ()->rowCount ();
 
   // Curves names of existing before/after curves
   QString curveNameBefore, curveNameAfter;
-  if (newIndex > 0) {
+  if (newRow > 0) {
 
-    QModelIndex index = m_curveNameList->index (newIndex - 1, 0);
+    QModelIndex index = m_curveNameList->index (newRow - 1, 0);
     curveNameBefore = m_curveNameList->data (index).toString ();
 
   }
 
-  if ((0 <= newIndex) && (newIndex < numItems)) {
+  if ((0 <= newRow) && (newRow < numItems)) {
 
-    QModelIndex index = m_curveNameList->index (newIndex, 0);
+    QModelIndex index = m_curveNameList->index (newRow, 0);
     curveNameAfter = m_curveNameList->data (index).toString ();
 
   }
@@ -477,7 +478,7 @@ void DlgSettingsCurveAddRemove::slotNew ()
 
   QString curveNameSuggestion = nextCurveName ();
 
-  int row = newIndexFromSelection();
+  int row = newRowFromSelection();
 
   insertCurveName (row,
                    curveNameSuggestion,

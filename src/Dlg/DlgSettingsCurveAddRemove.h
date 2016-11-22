@@ -63,7 +63,7 @@ private:
                         const QString &curveNameNew,
                         const QString &curveNameOriginal,
                         int numPoints);
-  int newIndexFromSelection () const;
+  int newRowFromSelection () const;
   QString nextCurveName () const; // Pick good curve name to go at currentRow()
   int numberAtEnd (const QString &str) const;
   unsigned int numPointsForSelectedCurves () const;

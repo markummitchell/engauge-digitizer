@@ -241,6 +241,7 @@ void CurveNameList::reset()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CurveNameList::reset";
 
+  clear();
   m_currentCurveToOriginalCurve.clear();
   m_originalCurveToPointCount.clear();
 }
