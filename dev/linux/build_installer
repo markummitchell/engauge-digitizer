@@ -71,7 +71,7 @@ cp /usr/lib/i386-linux-gnu/libfftw3.so.3           $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicudata.so.52        $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicui18n.so.52        $STAGINGDIR
 cp /usr/lib/i386-linux-gnu/libicuuc.so.52          $STAGINGDIR
-cp $LOG4CPP_HOME/lib/liblog4cpp.so.1               $STAGINGDIR
+cp $LOG4CPP_HOME/lib/liblog4cpp.so                 $STAGINGDIR
 cp $POPPLER_LIB/libpoppler.so                      $STAGINGDIR
 cp $POPPLER_LIB/libpoppler.so.61                   $STAGINGDIR
 cp $POPPLER_LIB/libpoppler-cpp.so                  $STAGINGDIR
