@@ -15,7 +15,7 @@
 #include "PointComparator.h"
 #include <QDataStream>
 #include <QDebug>
-#include <QMap>
+#include <QMultiMap>
 #include <QTextStream>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -27,7 +27,9 @@ const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString DUMMY_CURVE_NAME ("dummy");
 const QString TAB_DELIMITER ("\t");
 
-typedef QMap<double, QString> XOrThetaToPointIdentifier;
+// This has to be a multimap instead of a map since some users may mistakenly allow multiple points with the
+// same x coordinate in their functions even though that should not happen
+typedef QMultiMap<double, QString> XOrThetaToPointIdentifier;
 
 Curve::Curve(const QString &curveName,
              const ColorFilterSettings &colorFilterSettings,
@@ -596,7 +598,9 @@ void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
                               << " curve=" << m_curveName.toLatin1().data()
                               << " connectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 
-  // Get a map of x/theta values as keys with point identifiers as the values
+  // Get a map of x/theta values as keys with point identifiers as the values. This has to be a multimap since
+  // some users will have two (or maybe more) points with the same x coordinate, even though true functions should
+  // never have that happen
   XOrThetaToPointIdentifier xOrThetaToPointIdentifier;
   Points::iterator itr;
   for (itr = m_points.begin (); itr != m_points.end (); itr++) {
@@ -615,8 +619,13 @@ void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
       posGraph= point.posScreen();
     }
 
-    xOrThetaToPointIdentifier [posGraph.x()] = point.identifier();
+    xOrThetaToPointIdentifier.insert (posGraph.x(),
+                                      point.identifier());
   }
+
+  // Every point in m_points must be in the map. Failure to perform this check will probably result in the assert
+  // below getting triggered
+  ENGAUGE_ASSERT (xOrThetaToPointIdentifier.count () == m_points.count ());
 
   // Since m_points is a list (and therefore does not provide direct access to elements), we build a temporary map of
   // point identifier to ordinal, by looping through the sorted x/theta values. Since QMap is used, the x/theta keys are sorted
@@ -632,6 +641,13 @@ void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
   // Override the old ordinal values
   for (itr = m_points.begin(); itr != m_points.end(); itr++) {
     Point &point = *itr;
+
+    // Make sure point is in the map list. If this test is skipped then the square bracket operator
+    // will insert an entry with a zero ordinal, and the presence of multiple points with the same zero ordinal will
+    // cause problems downstream
+    ENGAUGE_ASSERT (pointIdentifierToOrdinal.contains (point.identifier()));
+
+    // Point is to be included since it is in the map list.
     int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
     point.setOrdinal (ordinalNew);
   }
