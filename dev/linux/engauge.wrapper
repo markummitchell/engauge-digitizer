@@ -98,13 +98,26 @@ if [ -e /etc/os-release ]; then
       if [ ! -e /var/lib/dbus/machine-id ]; then
         echo "********************************************************************"
         echo "* Fedora operating system may require a special installation step. *"
+	echo "*                                                                  *"
         echo "* If the following error appears:                                  *"
         echo "*    'D-Bus library appears to be incorrectly set up'              *"
         echo "* then execute the following steps to permanently stop that error: *"
         echo "*    > sudo su                                                     *"
         echo "*    > dbus-uuidgen >/var/lib/dbus/machine-id                      *"
+	echo "*                                                                  *"
         echo "********************************************************************"
-     fi
+      fi
+      if ! yum list installed "qgnomeplatform" >/dev/null 2>&1; then
+        echo "********************************************************************"
+        echo "* Fedora operating system may require a special installation step. *"
+        echo "*                                                                  *"
+        echo "* If a file dialog fails to appear after selecting File / Import   *"
+        echo "* or File / Open then execute the following steps to permanently   *"
+        echo "* stop that error:                                                 *"
+        echo "*    > sudo dnf install qgnomeplatform                             *"
+        echo "*                                                                  *"
+        echo "********************************************************************"
+      fi
    fi
 fi
 

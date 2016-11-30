@@ -18,43 +18,43 @@ Option 3) Engauge can be built from source code. This requires a lot of effort a
 
 Windows Issues
 --------------
-          |----------------------------------------------------------------------------------------------------------------|
-          |                                             Known Windows Issues                                               |
-          |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:   'The program can't start because MSVCP140.dll is missing from your computer. Try               |
-          |                 reinstalling the program to fix this problem.'                                                 |
-          |Description:     The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
-          |                 that the 64 bit version will not work!                                                         |
-          |Solution:        The steps to install the Redistributable package on Windows are:                               |
-          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
-          |                     >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
-          |                     >run the vc_redist.x86.exe installer                                                       |
-          |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:   'The program can't start because VCRUNTIME140.dll is missing from your computer. Try           |
-          |                 reinstalling the program to fix this problem.'                                                 |
-          |Description:     The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
-          |                 that the 64 bit version will not work!                                                         |
-          |Solution:        The steps to install the Redistributable package on Windows are:                               |
-          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
-          |                     >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
-          |                     >run the vc_redist.x86.exe installer                                                       |
-          |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:   'The program was unable to start correctly (0xc0000074). Click OK to close the application'    |
-          |Description:     The Microsoft Visual C++ Redistributable Packages for Visual Studio 2013                       |
-	  |                 should probably be installed.                                                                  |
-          |Solution:        The steps to install the Service Pack package on Windows are:                                  |
-          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=40784                            |
-          |                     >download the x86 version even when the current operating system is 64 bit                 |
-          |                     >run the installer                                                                         |
-          |----------------------------------------------------------------------------------------------------------------|	  
-          |Error Message:   'The program was unable to start correctly (0xc0150002). Click OK to close the application'    |
-          |Description:     The Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update       |
-	  |                 should probably be installed.                                                                  |
-          |Solution:        The steps to install the Service Pack package on Windows are:                                  |
-          |                     >https://www.microsoft.com/en-us/download/details.aspx?id=26347                            |
-          |                     >download the x86 version even when the current operating system is 64 bit                 |
-          |                     >run the installer                                                                         |
-          |----------------------------------------------------------------------------------------------------------------|	  
+          |-----------------------------------------------------------------------------------------------------------------|
+          |                                              Known Windows Issues                                               |
+          |-----------------------------------------------------------------------------------------------------------------|
+          |Error Indication: 'The program can't start because MSVCP140.dll is missing from your computer. Try               |
+          |                  reinstalling the program to fix this problem.'                                                 |
+          |Description:      The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
+          |                  that the 64 bit version will not work!                                                         |
+          |Solution:         The steps to install the Redistributable package on Windows are:                               |
+          |                      >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
+          |                      >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
+          |                      >run the vc_redist.x86.exe installer                                                       |
+          |-----------------------------------------------------------------------------------------------------------------|
+          |Error Indication: 'The program can't start because VCRUNTIME140.dll is missing from your computer. Try           |
+          |                  reinstalling the program to fix this problem.'                                                 |
+          |Description:      The 32 bit Microsoft Visual C++ Redistributable for Visual Studio 2015 must be installed. Note |
+          |                  that the 64 bit version will not work!                                                         |
+          |Solution:         The steps to install the Redistributable package on Windows are:                               |
+          |                      >https://www.microsoft.com/en-us/download/details.aspx?id=48145                            |
+          |                      >download vc_redist.x86.exe    (NOT vc_redist.x64.exe!)                                    |
+          |                      >run the vc_redist.x86.exe installer                                                       |
+          |-----------------------------------------------------------------------------------------------------------------|
+          |Error Indication: 'The program was unable to start correctly (0xc0000074). Click OK to close the application'    |
+          |Description:      The Microsoft Visual C++ Redistributable Packages for Visual Studio 2013                       |
+	  |                  should probably be installed.                                                                  |
+          |Solution:         The steps to install the Service Pack package on Windows are:                                  |
+          |                      >https://www.microsoft.com/en-us/download/details.aspx?id=40784                            |
+          |                      >download the x86 version even when the current operating system is 64 bit                 |
+          |                      >run the installer                                                                         |
+          |-----------------------------------------------------------------------------------------------------------------|	  
+          |Error Indication: 'The program was unable to start correctly (0xc0150002). Click OK to close the application'    |
+          |Description:      The Microsoft Visual C++ 2005 Service Pack 1 Redistributable Package MFC Security Update       |
+	  |                  should probably be installed.                                                                  |
+          |Solution:         The steps to install the Service Pack package on Windows are:                                  |
+          |                      >https://www.microsoft.com/en-us/download/details.aspx?id=26347                            |
+          |                      >download the x86 version even when the current operating system is 64 bit                 |
+          |                      >run the installer                                                                         |
+          |-----------------------------------------------------------------------------------------------------------------|	  
 
 
 Mac OSX Installation Options
@@ -77,16 +77,16 @@ Option 2) The AppImage release file can be downloaded and executed on all 32 and
 Linux Distribution Issues
 -------------------------
           |----------------------------------------------------------------------------------------------------------------|
-          |                                             Known AppImage Issues                                              |
+          |                                             Known Linux Issues                                                 |
           |----------------------------------------------------------------------------------------------------------------|
-	  |Error Message:             './engauge: No such file or directory'                                               |
+	  |Error Indication:          './engauge: No such file or directory'                                               |
 	  |Description:               The operating system is configured to support only 64 bit applications               |
 	  |Solution (Ubuntu/Kubuntu): Install libraries to support 32 bit applications                                     |
 	  |                             >sudo dpkg --add-architecture i386                                                 |
 	  |                             >sudo apt-get update                                                               |
 	  |                             >sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386                  |
           |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:             'Fuse is not installed'                                                              |
+          |Error Indication:          'Fuse is not installed'                                                              |
           |Description:               The fuse package must be installed                                                   |
           |Solution (Ubuntu/Kubuntu): The commands to install the fuse package on Ubuntu/Kubuntu are:                      |
           |                             >sudo apt-get install fuse                                                         |
@@ -96,17 +96,22 @@ Linux Distribution Issues
           |Solution (openSUSE):       The command to install the fuse package on openSUSE is:                              |
           |                             >sudo zypper install fuse                                                          |
           |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:             'D-Bus library appears to be incorrectly set up; failed to read machine uuid'        |
+          |Error Indication:          'D-Bus library appears to be incorrectly set up; failed to read machine uuid'        |
           |Description:               D-Bus is has not been configured yet                                                 |
           |Solution (Fedora):         The commands to configure D-Bus are:                                                 |
           |                             >sudo su                                                                           |
           |                             >dbus-uuidgen >/var/lib/dbus/machine-id                                            |
           |----------------------------------------------------------------------------------------------------------------|
-          |Error Message:             'QCommon::drawComplexControl: Control 1 not handled'                                 |
+          |Error Indication:          'QCommon::drawComplexControl: Control 1 not handled'                                 |
           |Description:               Qt does not support the GTK style in the AppImage build                              |
 	  |Solution (Fedora):         Execute the AppImage with a different style specified                                |
 	  |                             >./digit-exe-universal-linux-#-bit-without-installer_#_#.AppImage -style=plastique |
           |----------------------------------------------------------------------------------------------------------------|
+          |Error Indication:          Crash after selecting File / Import or File / Open                                   |
+          |Description:               Fedora 25 (Wayland) requires the qgnomeplatform package for file dialogs to appear   |
+	  |Solution (Fedora):         Install the qgnomeplatform package using                                             |
+	  |                             >sudo dnf install qgnomeplatform                                                   |
+          |----------------------------------------------------------------------------------------------------------------|	  
 	  
 Option 3) The Debian installer (digit-exe-debian-linux-32-bit-installer-X_Y.run) is released for installing into Debian systems. 
           The Debian installer included in this release has been tested in 32 and 64 bit Kubuntu and Knoppix.
