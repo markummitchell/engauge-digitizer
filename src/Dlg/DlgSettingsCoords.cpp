@@ -33,7 +33,6 @@
 #include "Transformation.h"
 #include "ViewPreview.h"
 
-const int c = 500; // Big enough so ok/cancel buttons are visible
 const QString OVERRIDDEN_VALUE(""); // Values are overridden in updateControls
 
 const int COLUMN_0 = 0;

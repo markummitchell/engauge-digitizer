@@ -8,7 +8,6 @@
 #include "Logger.h"
 #include <QTableView>
 
-const int COLUMN_COEFFICIENTS = 0;
 const int COLUMN_POLYNOMIAL_TERMS = 1;
 
 FittingModel::FittingModel ()
