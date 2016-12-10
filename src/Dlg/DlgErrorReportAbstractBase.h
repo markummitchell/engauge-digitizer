@@ -25,7 +25,6 @@ class DlgErrorReportAbstractBase : public QDialog
   void saveFile (const QString &xml) const;
   
  private:
-  DlgErrorReportAbstractBase ();
 
 };
 
