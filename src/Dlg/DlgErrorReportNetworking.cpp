@@ -4,10 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DlgErrorReport.h"
+#include "DlgErrorReportNetworking.h"
 #include <QCheckBox>
 #include <QCommonStyle>
-#include <QCoreApplication>
 #include <QFile>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -15,12 +14,11 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 
-const QString ERROR_REPORT_FILE ("engauge_error_report.xml");
 const int MAX_BTN_WIDTH = 80;
 
-DlgErrorReport::DlgErrorReport(const QString &xml,
-                               QWidget *parent) :
-  QDialog (parent),
+DlgErrorReportNetworking::DlgErrorReportNetworking(const QString &xml,
+                                                   QWidget *parent) :
+  DlgErrorReportAbstractBase (parent),
   m_xmlOriginal (xml),
   m_xmlAnonymized (xml)
 {
@@ -33,13 +31,13 @@ DlgErrorReport::DlgErrorReport(const QString &xml,
   setWindowTitle (tr ("Error Report"));
   setWindowIcon(style.standardIcon (QStyle::SP_MessageBoxCritical));
 
-  QLabel *lblPreview = new QLabel (tr ("An unrecoverable error has occurred. Would you like to send an error report to "
+  QLabel *lblMessage = new QLabel (tr ("An unrecoverable error has occurred. Would you like to send an error report to "
                                        "the Engauge developers?\n\n"
                                        "The original document can be sent as part of the error report, which increases the "
                                        "chances of finding and fixing the problem(s). However, if any information is private "
                                        "then an anonymized version of the document will be sent."));
-  lblPreview->setWordWrap(true);
-  layout->addWidget (lblPreview);
+  lblMessage->setWordWrap(true);
+  layout->addWidget (lblMessage);
 
   m_chkOriginal = new QCheckBox (tr ("Include original document information, otherwise anonymize the information"));
   m_chkOriginal->setChecked (true);
@@ -64,39 +62,22 @@ DlgErrorReport::DlgErrorReport(const QString &xml,
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-DlgErrorReport::~DlgErrorReport()
+DlgErrorReportNetworking::~DlgErrorReportNetworking()
 {
   removeFile();
 }
 
-QString DlgErrorReport::errorFile () const
-{
-  return QCoreApplication::applicationDirPath() + "/" + ERROR_REPORT_FILE;
-}
-
-void DlgErrorReport::removeFile() const
+void DlgErrorReportNetworking::removeFile() const
 {
   QFile::remove (errorFile ());
 }
 
-void DlgErrorReport::saveFile (const QString &xml) const
-{
-  QFile file (errorFile());
-  if (file.open (QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
-
-    QTextStream out (&file);
-    out << xml;
-
-    file.close();
-  }
-}
-
-void DlgErrorReport::slotDocumentCheckboxChanged(int /* state */)
+void DlgErrorReportNetworking::slotDocumentCheckboxChanged(int /* state */)
 {
   updateFile();
 }
 
-void DlgErrorReport::slotSend()
+void DlgErrorReportNetworking::slotSend()
 {
   // This is the one path that allows information to be sent to the server
   if (m_chkOriginal->isChecked()) {
@@ -110,7 +91,7 @@ void DlgErrorReport::slotSend()
   close();
 }
 
-void DlgErrorReport::updateFile()
+void DlgErrorReportNetworking::updateFile()
 {
   if (m_chkOriginal->isChecked()) {
     saveFile (m_xmlOriginal);
@@ -119,7 +100,7 @@ void DlgErrorReport::updateFile()
   }
 }
 
-QString DlgErrorReport::xmlToUpload() const
+QString DlgErrorReportNetworking::xmlToUpload() const
 {
   return m_xmlToUpload;
 }

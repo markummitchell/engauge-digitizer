@@ -30,7 +30,8 @@
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
-#include "DlgErrorReport.h"
+#include "DlgErrorReportLocal.h"
+#include "DlgErrorReportNetworking.h"
 #include "DlgImportAdvanced.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
@@ -67,11 +68,15 @@
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
 #include "LoadFileInfo.h"
+#ifdef NETWORKING
 #include "LoadImageFromUrl.h"
+#endif
 #include "Logger.h"
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
+#ifdef NETWORKING
 #include "NetworkClient.h"
+#endif
 #include "NonPdf.h"
 #ifdef ENGAUGE_PDF
 #include "Pdf.h"
@@ -140,10 +145,12 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_layout (0),
   m_scene (0),
   m_view (0),
+  m_loadImageFromUrl (0),
   m_cmdMediator (0),
   m_digitizeStateContext (0),
   m_transformationStateContext (0),
   m_backgroundStateContext (0),
+  m_networkClient (0),
   m_isGnuplot (isGnuplot),
   m_ghosts (0),
   m_timerRegressionErrorReport(0),
@@ -994,7 +1001,9 @@ void MainWindow::createIcons()
 
 void MainWindow::createLoadImageFromUrl ()
 {
+#ifdef NETWORKING
   m_loadImageFromUrl = new LoadImageFromUrl (*this);
+#endif
 }
 
 void MainWindow::createMenus()
@@ -1120,7 +1129,9 @@ void MainWindow::createNetwork ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createNetwork";
 
+#ifdef NETWORKING
   m_networkClient = new NetworkClient (this);
+#endif
 }
 
 void MainWindow::createSettingsDialogs ()
@@ -2179,7 +2190,8 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                                     file,
                                                     line,
                                                     comment);
-    DlgErrorReport dlg (report);
+#ifdef NETWORKING  
+    DlgErrorReportNetworking dlg (report);
 
     // Ask user if report should be uploaded, and if the document is included when it is uploaded
     if (dlg.exec() == QDialog::Accepted) {
@@ -2187,6 +2199,11 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
       // Upload the error report to the server
       m_networkClient->uploadErrorReport (dlg.xmlToUpload());
     }
+#else
+    DlgErrorReportLocal dlg (report);
+    dlg.exec();
+    exit (-1);
+#endif
   }
 }
 
@@ -3164,7 +3181,9 @@ void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImageUrl url=" << url.toString ().toLatin1 ().data ();
 
+#ifdef NETWORKING
   m_loadImageFromUrl->startLoadImage (url);
+#endif
 }
 
 void MainWindow::slotFileImportImage(QString fileName, QImage image)

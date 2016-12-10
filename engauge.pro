@@ -24,10 +24,20 @@
 #    qmake "DEFINES+=HELPDIR=<directory>". The <directory> is absolute or relative to the application executable directory
 # 6) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
+# 7) 'network' module of Qt is not included for Windows version since installation file gets blocked by Avast antivirus.
+#    The network module can download files, which is what malware does to install bad things
 #
 # More comments are in the INSTALL file, and below
 
-QT += core gui help network printsupport widgets xml
+QT += core gui help printsupport widgets xml
+!win32 {
+  QT += network
+  DEFINES += "NETWORKING"
+  HEADERS += src/Load/LoadImageFromUrl.h \
+             src/Network/NetworkClient.h
+  SOURCES += src/Load/LoadImageFromUrl.cpp \
+             src/Network/NetworkClient.cpp
+}
 
 CONFIG(debug,debug|release){
   # Debug version:
@@ -163,7 +173,9 @@ HEADERS  += \
     src/Dlg/DlgEditPointAxis.h \
     src/Dlg/DlgEditPointGraph.h \
     src/Dlg/DlgEditPointGraphLineEdit.h \
-    src/Dlg/DlgErrorReport.h \
+    src/Dlg/DlgErrorReportAbstractBase.h \    
+    src/Dlg/DlgErrorReportLocal.h \
+    src/Dlg/DlgErrorReportNetworking.h \    
     src/Dlg/DlgFilterCommand.h \
     src/Dlg/DlgFilterThread.h \
     src/Dlg/DlgFilterWorker.h \
@@ -293,7 +305,6 @@ HEADERS  += \
     src/util/LinearToLog.h \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
-    src/Load/LoadImageFromUrl.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/Matrix/Matrix.h \
@@ -303,7 +314,6 @@ HEADERS  += \
     src/util/MigrateToVersion6.h \
     src/Mime/MimePoints.h \
     src/util/mmsubs.h \
-    src/Network/NetworkClient.h \
     src/NonPdf/NonPdf.h \
     src/NonPdf/NonPdfCropping.h \
     src/NonPdf/NonPdfFrameHandle.h \
@@ -484,7 +494,9 @@ SOURCES += \
     src/Dlg/DlgEditPointAxis.cpp \
     src/Dlg/DlgEditPointGraph.cpp \
     src/Dlg/DlgEditPointGraphLineEdit.cpp \
-    src/Dlg/DlgErrorReport.cpp \
+    src/Dlg/DlgErrorReportAbstractBase.cpp \
+    src/Dlg/DlgErrorReportLocal.cpp \
+    src/Dlg/DlgErrorReportNetworking.cpp \
     src/Dlg/DlgFilterCommand.cpp \
     src/Dlg/DlgFilterThread.cpp \
     src/Dlg/DlgFilterWorker.cpp \
@@ -602,7 +614,6 @@ SOURCES += \
     src/util/LinearToLog.cpp \    
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
-    src/Load/LoadImageFromUrl.cpp \
     src/Logger/Logger.cpp \
     src/Logger/LoggerUpload.cpp \
     src/Matrix/Matrix.cpp \
@@ -612,7 +623,6 @@ SOURCES += \
     src/util/MigrateToVersion6.cpp \
     src/Mime/MimePoints.cpp \
     src/util/mmsubs.cpp \
-    src/Network/NetworkClient.cpp \
     src/NonPdf/NonPdf.cpp \
     src/NonPdf/NonPdfCropping.cpp \
     src/NonPdf/NonPdfFrameHandle.cpp \

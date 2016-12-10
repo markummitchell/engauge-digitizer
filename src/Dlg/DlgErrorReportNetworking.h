@@ -4,26 +4,25 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DLG_ERROR_REPORT_H
-#define DLG_ERROR_REPORT_H
+#ifndef DLG_ERROR_REPORT_NETWORKING_H
+#define DLG_ERROR_REPORT_NETWORKING_H
 
-#include <QDialog>
+#include "DlgErrorReportAbstractBase.h"
 
 class QCheckBox;
 class QPushButton;
 
-/// Dialog for sending error report. Even if it is not sent, the information is available while this dialog
+/// Dialog for sending error report with networking. Even if it is not sent, the information is available while this dialog
 /// is open, as a file in the executable directory
-class DlgErrorReport : public QDialog
+class DlgErrorReportNetworking : public DlgErrorReportAbstractBase
 {
   Q_OBJECT;
 
  public:
   /// Single constructor. With the original data, the extra context improves debugging. With anonymization, user privacy is maintained
-  DlgErrorReport (const QString &xmlWithImage,
-                  QWidget *parent = 0);
-
-  ~DlgErrorReport();
+  DlgErrorReportNetworking (const QString &xmlWithImage,
+                            QWidget *parent = 0);
+  ~DlgErrorReportNetworking ();
 
   /// Xml to be uploaded. Includes document if user has approved
   QString xmlToUpload() const;
@@ -33,11 +32,9 @@ class DlgErrorReport : public QDialog
   void slotSend();
 
  private:
-  DlgErrorReport ();
+  DlgErrorReportNetworking ();
 
-  QString errorFile () const;
   void removeFile () const;
-  void saveFile (const QString &xml) const;
   void updateFile();
 
   QCheckBox *m_chkOriginal;
@@ -48,4 +45,4 @@ class DlgErrorReport : public QDialog
   QString m_xmlToUpload; // Either m_xmlWithoutDocument or m_xmlWithDocument
 };
 
-#endif // DLG_ERROR_REPORT_H
+#endif // DLG_ERROR_REPORT_NETWORKING_H
