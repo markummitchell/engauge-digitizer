@@ -454,14 +454,32 @@ The expected format of the coordinate value is determined by the locale setting.
     </message>
 </context>
 <context>
-    <name>DlgErrorReport</name>
+    <name>DlgErrorReportLocal</name>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="33" />
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="29" />
         <source>Error Report</source>
         <translation>Сообщение об ошибке</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="36" />
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="32" />
+        <source>An unrecoverable error has occurred. Quitting.</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="42" />
+        <source>Ok</source>
+        <translation>Ок</translation>
+    </message>
+</context>
+<context>
+    <name>DlgErrorReportNetworking</name>
+    <message>
+        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="31" />
+        <source>Error Report</source>
+        <translation>Сообщение об ошибке</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="34" />
         <source>An unrecoverable error has occurred. Would you like to send an error report to the Engauge developers?
 
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
@@ -469,17 +487,17 @@ The original document can be sent as part of the error report, which increases t
 Исходный документ может быть отправлен как часть отчета об ошибке, что увеличивает шансы на обнаружение и устранение проблем (ы). Однако, учитывая что информация может быть личной , версия документа будет отправлена обезличенной.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="44" />
+        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="42" />
         <source>Include original document information, otherwise anonymize the information</source>
         <translation>Включить информацию об оригинальном документе, иначе информация будет обезличена</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="56" />
+        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="54" />
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReport.cpp" line="61" />
+        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="59" />
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -780,19 +798,19 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="911" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
         <source>Coordinates</source>
         <translation>Координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="214" />
         <source>Date/Time:</source>
         <translation>Дата/Время:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="225" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="224" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
@@ -800,7 +818,7 @@ Setting the format to an empty value results in just the time portion appearing 
 Установка формата как пустого значения приводит к выводу только временной части полного значения.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="232" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="231" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
@@ -808,28 +826,28 @@ Setting the format to an empty value results in just the date portion appearing 
 Установка формата как пустого значения приводит к выводу только части дата из полного значения.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="244" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="243" />
         <source>Coordinates Types</source>
         <translation>Тип координат</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
         <source>Polar</source>
         <translation>Полярные</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="249" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="251" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="250" />
         <source>Cartesian (X, Y)</source>
         <translation>Декартовы (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="251" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -837,7 +855,7 @@ The X and Y coordinates will be used</source>
 Будут использованны координаты X и Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="257" />
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -848,30 +866,30 @@ Polar coordinates are not allowed with log scale for Theta</source>
 Полярные координаты недопускают логарифмического масштаба по углу Тэтта</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="277" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="312" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="276" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="311" />
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="279" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="314" />
         <source>Linear</source>
         <translation>Линейный</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>Установить линейный масштаб для X или Тэтта координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="322" />
         <source>Log</source>
         <translation>Логарифмический</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="286" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -882,23 +900,23 @@ Log scale is not allowed for the Theta coordinate.</source>
 Логарифмический масштаб недоступен для угловой координаты Тэтта.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="292" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="337" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="291" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="336" />
         <source>Units:</source>
         <translation>Единицы измерения:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315" />
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>Определить линейный масштаб для Y или R координаты</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
         <source>Origin radius value:</source>
         <translation>Исходное значение радиуса:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
@@ -906,7 +924,7 @@ Log scale is not allowed if there are negative coordinates.</source>
 Логарифмический масштаб недоступен при отрицательных значениях координат.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="330" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
@@ -914,17 +932,17 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 Стандартно начальное значение радиуса равно 0, но в некоторых случаях могут быть допустимы ненулевые значения (например когда радиус определяет децибелы).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="354" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="353" />
         <source>Preview</source>
         <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="361" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="360" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>Окно предпросмотра, показывающее как текущая настройка влияет на систему координат.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="670" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="669" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -935,7 +953,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
 Формат Градусы Минуты Секунды (ГГГ ММ СС.С) использует целые числа для градусов и минут, и вещественное число для секунд. В минуте 60 секунд. При вводе три части должны быть разделены пробелами.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="703" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="702" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -955,12 +973,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 Формат Обороты используется для задания значения одним вещественным числом. Один полный оборот имеет значение 1.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="910" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="909" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -2466,22 +2484,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="349" />
+        <location filename="../src/main/MainWindow.cpp" line="356" />
         <source>Select Tool</source>
         <translation>Инструмент Выделения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="350" />
+        <location filename="../src/main/MainWindow.cpp" line="357" />
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="352" />
+        <location filename="../src/main/MainWindow.cpp" line="359" />
         <source>Select points on screen.</source>
         <translation>Выберите точки на экране.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="353" />
+        <location filename="../src/main/MainWindow.cpp" line="360" />
         <source>Select
 
 Select points on the screen.</source>
@@ -2490,22 +2508,22 @@ Select points on the screen.</source>
 Выберите точки на экране.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="357" />
+        <location filename="../src/main/MainWindow.cpp" line="364" />
         <source>Axis Point Tool</source>
         <translation>Инструментарий для Опорной Точки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="358" />
+        <location filename="../src/main/MainWindow.cpp" line="365" />
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="360" />
+        <location filename="../src/main/MainWindow.cpp" line="367" />
         <source>Digitize axis points.</source>
         <translation>Оцифровка опорных точек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="361" />
+        <location filename="../src/main/MainWindow.cpp" line="368" />
         <source>Digitize Axis Point
 
 Digitizes an axis point by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
@@ -2514,22 +2532,22 @@ Digitizes an axis point by placing a new point at the cursor after a mouse click
 Оцифровывает опорные точки, помещая новую точку в позицию курсора после щелчка мыши. Координаты опорной точки затем вводятся. На графике требуется указать три опорных точки для определения на нем системы координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="368" />
+        <location filename="../src/main/MainWindow.cpp" line="375" />
         <source>Curve Point Tool</source>
         <translation>Инструментарий для Точек Кривой</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="369" />
+        <location filename="../src/main/MainWindow.cpp" line="376" />
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="371" />
+        <location filename="../src/main/MainWindow.cpp" line="378" />
         <source>Digitize curve points.</source>
         <translation>Оцифровка точек кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="372" />
+        <location filename="../src/main/MainWindow.cpp" line="379" />
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -2542,22 +2560,22 @@ New points will be assigned to the currently selected curve.</source>
 Новые точки будут добавлены в набор для выбранной кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="379" />
+        <location filename="../src/main/MainWindow.cpp" line="386" />
         <source>Point Match Tool</source>
         <translation>Инструментарий для Совмещения Точек</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="380" />
+        <location filename="../src/main/MainWindow.cpp" line="387" />
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="382" />
+        <location filename="../src/main/MainWindow.cpp" line="389" />
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>Оцифровка точек кривой определеных в режиме Совмещения точек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="383" />
+        <location filename="../src/main/MainWindow.cpp" line="390" />
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -2570,22 +2588,22 @@ New points will be assigned to the currently selected curve.</source>
 Новые точки будут добавлены в набор для выбранной кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="389" />
+        <location filename="../src/main/MainWindow.cpp" line="396" />
         <source>Color Picker Tool</source>
         <translation>Пипетка определения цвета</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="390" />
+        <location filename="../src/main/MainWindow.cpp" line="397" />
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="392" />
+        <location filename="../src/main/MainWindow.cpp" line="399" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>Выбор настроек цвета для фильтрации в режиме Сегментного Заполнения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="393" />
+        <location filename="../src/main/MainWindow.cpp" line="400" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -2594,22 +2612,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 Выберите пиксель вдоль выбранной кривой. Этот пиксель и соседние с ним будут определять параметры (цвет, яркость и другие) фильтра в режиме сегментного заполнения  для выбранной кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="399" />
+        <location filename="../src/main/MainWindow.cpp" line="406" />
         <source>Segment Fill Tool</source>
         <translation>Инструментарий Сегментного Заполнения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="400" />
+        <location filename="../src/main/MainWindow.cpp" line="407" />
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="402" />
+        <location filename="../src/main/MainWindow.cpp" line="409" />
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>Оцифровка точек кривой вдоль определенных сегментов.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="403" />
+        <location filename="../src/main/MainWindow.cpp" line="410" />
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -2622,17 +2640,17 @@ New points will be assigned to the currently selected curve.</source>
 Новые точки будут добавлены в набор для выбранной кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="423" />
+        <location filename="../src/main/MainWindow.cpp" line="430" />
         <source>&amp;Undo</source>
         <translation>&amp;Отменить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="425" />
+        <location filename="../src/main/MainWindow.cpp" line="432" />
         <source>Undo the last operation.</source>
         <translation>Отменить последнюю выполненную операцию.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="426" />
+        <location filename="../src/main/MainWindow.cpp" line="433" />
         <source>Undo
 
 Undo the last operation.</source>
@@ -2641,17 +2659,17 @@ Undo the last operation.</source>
 Отменяет последнюю выполненную операцию.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="430" />
+        <location filename="../src/main/MainWindow.cpp" line="437" />
         <source>&amp;Redo</source>
         <translation>&amp;Вернуть</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="432" />
+        <location filename="../src/main/MainWindow.cpp" line="439" />
         <source>Redo the last operation.</source>
         <translation>Вернуть последнюю отменённую операцию.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="433" />
+        <location filename="../src/main/MainWindow.cpp" line="440" />
         <source>Redo
 
 Redo the last operation.</source>
@@ -2660,17 +2678,17 @@ Redo the last operation.</source>
 Возвращает последнюю отменённую операцию.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="437" />
+        <location filename="../src/main/MainWindow.cpp" line="444" />
         <source>Cut</source>
         <translation>Вырезать</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="439" />
+        <location filename="../src/main/MainWindow.cpp" line="446" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>Вырезать выбранные точки и сохранить их в буфере обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="440" />
+        <location filename="../src/main/MainWindow.cpp" line="447" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -2679,17 +2697,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 Вырезает выбранные точки и сохраняет их в буфере обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="444" />
+        <location filename="../src/main/MainWindow.cpp" line="451" />
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="446" />
+        <location filename="../src/main/MainWindow.cpp" line="453" />
         <source>Copies the selected points to the clipboard.</source>
         <translation>Копировать выбранные точки в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="447" />
+        <location filename="../src/main/MainWindow.cpp" line="454" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -2698,17 +2716,17 @@ Copies the selected points to the clipboard.</source>
 Копирует выбранные точки в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="451" />
+        <location filename="../src/main/MainWindow.cpp" line="458" />
         <source>Paste</source>
         <translation>Вставить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="453" />
+        <location filename="../src/main/MainWindow.cpp" line="460" />
         <source>Pastes the selected points from the clipboard.</source>
         <translation>Вставить выбранные точки из буфера обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="454" />
+        <location filename="../src/main/MainWindow.cpp" line="461" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -2717,17 +2735,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 Вставляет выбранные точки из буфера обмена. Они будут добавлены в набор к выбранной кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="458" />
+        <location filename="../src/main/MainWindow.cpp" line="465" />
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="460" />
+        <location filename="../src/main/MainWindow.cpp" line="467" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>Удалить выбранные точки, после копирования их в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="461" />
+        <location filename="../src/main/MainWindow.cpp" line="468" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -2736,17 +2754,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 Удаляет выбранные точки, после копирования их в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="465" />
+        <location filename="../src/main/MainWindow.cpp" line="472" />
         <source>Paste As New</source>
         <translation>Вставить Как Новый</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="466" />
+        <location filename="../src/main/MainWindow.cpp" line="473" />
         <source>Pastes an image from the clipboard.</source>
         <translation>Вставить изображение из буфера обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="467" />
+        <location filename="../src/main/MainWindow.cpp" line="474" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -2755,17 +2773,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 Создаёт новый документ на основе изображения из буфера обмена.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="471" />
+        <location filename="../src/main/MainWindow.cpp" line="478" />
         <source>Paste As New (Advanced)...</source>
         <translation>Вставить Как Новый (Расширенный)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="472" />
+        <location filename="../src/main/MainWindow.cpp" line="479" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>Вставить изображение из буфера обмена в расширенном режиме.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="473" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -2774,22 +2792,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 Создаёт новый документ на основе изображения из буфера обмена в расширенном режиме.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="482" />
+        <location filename="../src/main/MainWindow.cpp" line="489" />
         <source>&amp;Import...</source>
         <translation>&amp;Загрузить...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="483" />
+        <location filename="../src/main/MainWindow.cpp" line="490" />
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="484" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
         <source>Creates a new document by importing an simple image.</source>
         <translation>Создает новый документ загружая простое изображение.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="485" />
+        <location filename="../src/main/MainWindow.cpp" line="492" />
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -2802,17 +2820,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 Для более сложных изображений с несколькими системами координат и/или плавающей осью следует использовать функцию Загрузить (Расширенный).</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="492" />
+        <location filename="../src/main/MainWindow.cpp" line="499" />
         <source>Import (Advanced)...</source>
         <translation>Загрузить (Расширенный)...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="493" />
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>Создает новый документ загружая изображение с поддержкой расширенного функционала.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="494" />
+        <location filename="../src/main/MainWindow.cpp" line="501" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -2821,34 +2839,34 @@ Creates a new document by importing an image with support for advanced feaures. 
 Создает новый документ загружая изображение с поддержкой расширенного функционала. В расширенном режиме можно обработать изображение с несколькими системами координат и/или плавающей осью.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="506" />
         <source>Import (Image Replace)...</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="500" />
+        <location filename="../src/main/MainWindow.cpp" line="507" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="508" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="507" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>&amp;Open...</source>
         <translation>&amp;Открыть...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="509" />
+        <location filename="../src/main/MainWindow.cpp" line="516" />
         <source>Opens an existing document.</source>
         <translation>Открыть уже существующий документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="510" />
+        <location filename="../src/main/MainWindow.cpp" line="517" />
         <source>Open Document
 
 Opens an existing document.</source>
@@ -2857,17 +2875,17 @@ Opens an existing document.</source>
 Открывает уже существующий документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="523" />
+        <location filename="../src/main/MainWindow.cpp" line="530" />
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="525" />
+        <location filename="../src/main/MainWindow.cpp" line="532" />
         <source>Closes the open document.</source>
         <translation>Закрыть открытый документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="526" />
+        <location filename="../src/main/MainWindow.cpp" line="533" />
         <source>Close Document
 
 Closes the open document.</source>
@@ -2876,17 +2894,17 @@ Closes the open document.</source>
 Закрывает открытый документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="530" />
+        <location filename="../src/main/MainWindow.cpp" line="537" />
         <source>&amp;Save</source>
         <translation>&amp;Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="532" />
+        <location filename="../src/main/MainWindow.cpp" line="539" />
         <source>Saves the current document.</source>
         <translation>Сохранить текущий документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="533" />
+        <location filename="../src/main/MainWindow.cpp" line="540" />
         <source>Save Document
 
 Saves the current document.</source>
@@ -2895,17 +2913,17 @@ Saves the current document.</source>
 Сохраняет текущий документ.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="537" />
+        <location filename="../src/main/MainWindow.cpp" line="544" />
         <source>Save As...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="539" />
+        <location filename="../src/main/MainWindow.cpp" line="546" />
         <source>Saves the current document under a new filename.</source>
         <translation>Сохранить текущий документ под новым именем файла.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="540" />
+        <location filename="../src/main/MainWindow.cpp" line="547" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -2914,22 +2932,22 @@ Saves the current document under a new filename.</source>
 Сохраняет текущий документ с новым именем файла.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544" />
+        <location filename="../src/main/MainWindow.cpp" line="551" />
         <source>Export...</source>
         <translation>Выгрузить...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="545" />
+        <location filename="../src/main/MainWindow.cpp" line="552" />
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="553" />
         <source>Exports the current document into a text file.</source>
         <translation>Выгрузить данные из текущего документа в текстовый файл.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="547" />
+        <location filename="../src/main/MainWindow.cpp" line="554" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
@@ -2938,17 +2956,17 @@ Exports the current document into a text file.</source>
 Выгружает оцифрованные данные из текущего документа в текстовый файл.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="551" />
+        <location filename="../src/main/MainWindow.cpp" line="558" />
         <source>&amp;Print...</source>
         <translation>&amp;Печать...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="553" />
+        <location filename="../src/main/MainWindow.cpp" line="560" />
         <source>Print the current document.</source>
         <translation>Печать текущего документа.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="554" />
+        <location filename="../src/main/MainWindow.cpp" line="561" />
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -2956,17 +2974,17 @@ Print the current document to a printer or file.</source>
 Распечатать текущий документ на принтере или в файл.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="558" />
+        <location filename="../src/main/MainWindow.cpp" line="565" />
         <source>&amp;Exit</source>
         <translation>&amp;Выход</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="560" />
+        <location filename="../src/main/MainWindow.cpp" line="567" />
         <source>Quits the application.</source>
         <translation>Закрыть приложение.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="561" />
+        <location filename="../src/main/MainWindow.cpp" line="568" />
         <source>Exit
 
 Quits the application.</source>
@@ -2974,17 +2992,17 @@ Quits the application.</source>
 Закрыть приложение.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="570" />
+        <location filename="../src/main/MainWindow.cpp" line="577" />
         <source>Checklist Guide Wizard</source>
         <translation>Пошаговая Инструкция Пользователя</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="572" />
+        <location filename="../src/main/MainWindow.cpp" line="579" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>Открыть пошаговую инструкцию пользователя при загрузке для конкретизации шагов процесса оцифровки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="573" />
+        <location filename="../src/main/MainWindow.cpp" line="580" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -2992,17 +3010,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 Использовать Пошаговая Инструкция Пользователя в процессе загрузки чтобы создать список шагов подходящий для загружаемого документа</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="580" />
+        <location filename="../src/main/MainWindow.cpp" line="587" />
         <source>Tutorial</source>
         <translation>Обучение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="581" />
+        <location filename="../src/main/MainWindow.cpp" line="588" />
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>Показать обучение представляющее шаги по оцифровки кривых.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="582" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -3010,17 +3028,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 Показать обучение представляющее шаги по оцифровки точек кривых изображенных линиями и/или точками</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="588" />
+        <location filename="../src/main/MainWindow.cpp" line="595" />
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
+        <location filename="../src/main/MainWindow.cpp" line="597" />
         <source>Help documentation</source>
         <translation>Вспомогательная документация</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="598" />
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -3028,17 +3046,17 @@ Searchable help documentation</source>
 Открытая для поиска вспомогательная документация</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="596" />
+        <location filename="../src/main/MainWindow.cpp" line="603" />
         <source>About Engauge</source>
         <translation>Об Engauge</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="597" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>About the application.</source>
         <translation>О приложении</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="598" />
+        <location filename="../src/main/MainWindow.cpp" line="605" />
         <source>About Engauge
 
 About the application.</source>
@@ -3046,17 +3064,17 @@ About the application.</source>
 О приложении.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="606" />
+        <location filename="../src/main/MainWindow.cpp" line="613" />
         <source>Coordinates...</source>
         <translation>Координаты...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="607" />
+        <location filename="../src/main/MainWindow.cpp" line="614" />
         <source>Edit Coordinate settings.</source>
         <translation>Редактировать Настройки Координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="608" />
+        <location filename="../src/main/MainWindow.cpp" line="615" />
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -3064,17 +3082,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 Настройки Координат определяют как координаты графика соотносятся с пикселями изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="612" />
+        <location filename="../src/main/MainWindow.cpp" line="619" />
         <source>Add/Remove Curve...</source>
         <translation>Добавить/Удалить Кривую...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="613" />
+        <location filename="../src/main/MainWindow.cpp" line="620" />
         <source>Add or Remove Curves.</source>
         <translation>Добавление или Удаление Кривых.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="614" />
+        <location filename="../src/main/MainWindow.cpp" line="621" />
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
@@ -3082,17 +3100,17 @@ Add/Remove Curve settings control which curves are included in the current docum
 Раздел Добавить/Удалить Кривую позволяет контролировать количество кривых включенных в текущем документе</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="618" />
+        <location filename="../src/main/MainWindow.cpp" line="625" />
         <source>Curve Properties...</source>
         <translation>Свойства Кривой...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="619" />
+        <location filename="../src/main/MainWindow.cpp" line="626" />
         <source>Edit Curve Properties settings.</source>
         <translation>Редактировать Настройки Свойств Кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="620" />
+        <location filename="../src/main/MainWindow.cpp" line="627" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -3100,17 +3118,17 @@ Curves properties settings determine how each curve appears</source>
 Настройки свойств кривой определяют вид представления каждой из кривых</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624" />
+        <location filename="../src/main/MainWindow.cpp" line="631" />
         <source>Digitize Curve...</source>
         <translation>Оцифровка Кривой...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="625" />
+        <location filename="../src/main/MainWindow.cpp" line="632" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>Редактировать параметры оцифровки Осей и Кривых.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="633" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -3118,17 +3136,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 Настройки оцифровки кривой определяют как точки будут оцифрованы в режиме Оцифровки Опорных Точек и Оцифровки Точек Графика</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="631" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>Export Format...</source>
         <translation>Формат Выгрузки...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="632" />
+        <location filename="../src/main/MainWindow.cpp" line="639" />
         <source>Edit Export Format settings.</source>
         <translation>Редактировать Настройки Формата Выгрузки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="633" />
+        <location filename="../src/main/MainWindow.cpp" line="640" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -3136,17 +3154,17 @@ Export format settings affect how exported files are formatted</source>
 Настройки формата выгрузки на сруктуру и формат файла выгрузки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="637" />
+        <location filename="../src/main/MainWindow.cpp" line="644" />
         <source>Color Filter...</source>
         <translation>Цветовой Фильтр...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="638" />
+        <location filename="../src/main/MainWindow.cpp" line="645" />
         <source>Edit Color Filter settings.</source>
         <translation>Редактировать Настройки Цветового Фильтра.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="639" />
+        <location filename="../src/main/MainWindow.cpp" line="646" />
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -3154,17 +3172,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 Цветовая фильтрация упрощает изображение графика для облегчения успешного использования Совмещения Точек и Сегментного Заполнения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="643" />
+        <location filename="../src/main/MainWindow.cpp" line="650" />
         <source>Axes Checker...</source>
         <translation>Выделитель Осей...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="644" />
+        <location filename="../src/main/MainWindow.cpp" line="651" />
         <source>Edit Axes Checker settings.</source>
         <translation>Редактировать Настройки Выделителя Осей.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="645" />
+        <location filename="../src/main/MainWindow.cpp" line="652" />
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -3172,34 +3190,34 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 Выделитель осей позволяет заметить ошибки в опорных точках, которые незаметны в других ситуациях.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="649" />
+        <location filename="../src/main/MainWindow.cpp" line="656" />
         <source>Grid Line Display...</source>
         <translation>Отображение Линий Сетки...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="650" />
+        <location filename="../src/main/MainWindow.cpp" line="657" />
         <source>Edit Grid Line Display settings.</source>
         <translation>Редактировать Настройки Отображения Линий Сетки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="651" />
+        <location filename="../src/main/MainWindow.cpp" line="658" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="656" />
+        <location filename="../src/main/MainWindow.cpp" line="663" />
         <source>Grid Line Removal...</source>
         <translation>Стиратель Линий Сетки...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="657" />
+        <location filename="../src/main/MainWindow.cpp" line="664" />
         <source>Edit Grid Line Removal settings.</source>
         <translation>Редактировать Настройки Стирателя Линий Сетки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="658" />
+        <location filename="../src/main/MainWindow.cpp" line="665" />
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -3208,17 +3226,17 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 Стиратель Линий Сетки отделяет графики кривых от линий сетки, когда Цветовая Фильтрация не в состоянии их разделить, для облегчения Совмещения Точек и Сегментного Заполнения.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663" />
+        <location filename="../src/main/MainWindow.cpp" line="670" />
         <source>Point Match...</source>
         <translation>Совмещение Точек...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="664" />
+        <location filename="../src/main/MainWindow.cpp" line="671" />
         <source>Edit Point Match settings.</source>
         <translation>Редактировать Настройки Совмещения Точек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="665" />
+        <location filename="../src/main/MainWindow.cpp" line="672" />
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -3227,17 +3245,17 @@ Point match settings determine how points are matched while in Point Match mode<
 Настройки Совмещения Точек определяют как будут определяться точки в режиме Совмещение Точек</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="669" />
+        <location filename="../src/main/MainWindow.cpp" line="676" />
         <source>Segment Fill...</source>
         <translation>Сегментное Заполнение...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670" />
+        <location filename="../src/main/MainWindow.cpp" line="677" />
         <source>Edit Segment Fill settings.</source>
         <translation>Редактировать Настройки Сегментного Заполнения.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671" />
+        <location filename="../src/main/MainWindow.cpp" line="678" />
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -3246,17 +3264,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 Настройки сегментного заполнения определяют как будут создаваться точки в режиме Сегментного Заполнения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="682" />
         <source>General...</source>
         <translation>Общие...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="683" />
         <source>Edit General settings.</source>
         <translation>Редактировать Общие Настройки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="677" />
+        <location filename="../src/main/MainWindow.cpp" line="684" />
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -3265,17 +3283,17 @@ General settings are document-specific settings that affect multiple modes. For 
 Общие Настройки включают настройки для документа влияющие на несколько режимов одновременно. Например, размер курсора работает и для режима Цветовой Пипетки и для режима Совмещения Точек</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="682" />
+        <location filename="../src/main/MainWindow.cpp" line="689" />
         <source>Main Window...</source>
         <translation>Основное Окно...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="684" />
+        <location filename="../src/main/MainWindow.cpp" line="691" />
         <source>Edit Main Window settings.</source>
         <translation>Редактировать Настройки Основного Окна.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="685" />
+        <location filename="../src/main/MainWindow.cpp" line="692" />
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -3284,17 +3302,17 @@ Main window settings affect the user interface and are not specific to any docum
 Настройки Основного Окна включают настройки рабочего пространства пользовательского интерфейса приложения во всех документах.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="694" />
+        <location filename="../src/main/MainWindow.cpp" line="701" />
         <source>Background Toolbar</source>
         <translation>Инструментарий Фонового Изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="697" />
+        <location filename="../src/main/MainWindow.cpp" line="704" />
         <source>Show or hide the background toolbar.</source>
         <translation>Показать или спрятать инструментарий фонового изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="698" />
+        <location filename="../src/main/MainWindow.cpp" line="705" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -3303,68 +3321,68 @@ Show or hide the background toolbar</source>
 Показать или спрятать инструментарий фонового изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="702" />
+        <location filename="../src/main/MainWindow.cpp" line="709" />
         <source>Checklist Guide Toolbar</source>
         <translation>Инструментарий Пошаговой Инструкции</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="705" />
+        <location filename="../src/main/MainWindow.cpp" line="712" />
         <source>Show or hide the checklist guide.</source>
         <translation>Показать или спрятать пошаговую инструкцию.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="706" />
+        <location filename="../src/main/MainWindow.cpp" line="713" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="717" />
         <source>Curve Fitting Window</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="713" />
+        <location filename="../src/main/MainWindow.cpp" line="720" />
         <source>Show or hide the curve fitting window.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="714" />
+        <location filename="../src/main/MainWindow.cpp" line="721" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="718" />
+        <location filename="../src/main/MainWindow.cpp" line="725" />
         <source>Geometry Window</source>
         <translation>Окно Геометрии</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="721" />
+        <location filename="../src/main/MainWindow.cpp" line="728" />
         <source>Show or hide the geometry window.</source>
         <translation>Показать или спрятать окно геометрии.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="722" />
+        <location filename="../src/main/MainWindow.cpp" line="729" />
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="726" />
+        <location filename="../src/main/MainWindow.cpp" line="733" />
         <source>Digitizing Tools Toolbar</source>
         <translation>Инструментарий Оцифровки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="729" />
+        <location filename="../src/main/MainWindow.cpp" line="736" />
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>Показать или спрятать инструментарий оцифровки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="730" />
+        <location filename="../src/main/MainWindow.cpp" line="737" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -3373,17 +3391,17 @@ Show or hide the digitizing tools toolbar</source>
 Показать или спрятать инструментарий оцифровки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="734" />
+        <location filename="../src/main/MainWindow.cpp" line="741" />
         <source>Settings Views Toolbar</source>
         <translation>Инструментарий Настроек Представления</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="737" />
+        <location filename="../src/main/MainWindow.cpp" line="744" />
         <source>Show or hide the settings views toolbar.</source>
         <translation>Показать или спрятать инструментарий настроек представления</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="738" />
+        <location filename="../src/main/MainWindow.cpp" line="745" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -3392,17 +3410,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Показать или спрятать инструментарий настроек представления</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="743" />
+        <location filename="../src/main/MainWindow.cpp" line="750" />
         <source>Coordinate System Toolbar</source>
         <translation>Инструментарий Системы Координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="746" />
+        <location filename="../src/main/MainWindow.cpp" line="753" />
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>Показать или спрятать инструментарий системы координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="747" />
+        <location filename="../src/main/MainWindow.cpp" line="754" />
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -3415,17 +3433,17 @@ This toolbar is disabled when there is only one coordinate system.</source>
 Неактивен если существует только одна система координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="755" />
+        <location filename="../src/main/MainWindow.cpp" line="762" />
         <source>Tool Tips</source>
         <translation>Всплывающие Подсказки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="758" />
+        <location filename="../src/main/MainWindow.cpp" line="765" />
         <source>Show or hide the tool tips.</source>
         <translation>Показать или спрятать всплывающие подсказки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="766" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -3434,34 +3452,34 @@ Show or hide the tool tips</source>
 Показать или спрятать всплывающие подсказки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="763" />
+        <location filename="../src/main/MainWindow.cpp" line="770" />
         <source>Grid Lines</source>
         <translation>Линии Сетки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="766" />
+        <location filename="../src/main/MainWindow.cpp" line="773" />
         <source>Show or hide grid lines.</source>
         <translation>Показать или спрятать линии сетки.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="767" />
+        <location filename="../src/main/MainWindow.cpp" line="774" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="772" />
+        <location filename="../src/main/MainWindow.cpp" line="779" />
         <source>No Background</source>
         <translation>Без фона</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="774" />
+        <location filename="../src/main/MainWindow.cpp" line="781" />
         <source>Do not show the image underneath the points.</source>
         <translation>Не показывать изображение под точками.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="775" />
+        <location filename="../src/main/MainWindow.cpp" line="782" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -3470,17 +3488,17 @@ No image is shown so points are easier to see</source>
 Никакое изображение не показывается чтобы точки было легче рассматривать</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="778" />
+        <location filename="../src/main/MainWindow.cpp" line="785" />
         <source>Show Original Image</source>
         <translation>Показать исходное изображение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="780" />
+        <location filename="../src/main/MainWindow.cpp" line="787" />
         <source>Show the original image underneath the points.</source>
         <translation>Отрисовывать исходное изображение под точками.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="781" />
+        <location filename="../src/main/MainWindow.cpp" line="788" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -3489,17 +3507,17 @@ Show the original image underneath the points</source>
 Отрисовывать исходное изображение под точками</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="784" />
+        <location filename="../src/main/MainWindow.cpp" line="791" />
         <source>Show Filtered Image</source>
         <translation>Показать Обработанное Изображение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="787" />
+        <location filename="../src/main/MainWindow.cpp" line="794" />
         <source>Show the filtered image underneath the points.</source>
         <translation>Отрисовывать обработанное фильтром изображение под точками.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="788" />
+        <location filename="../src/main/MainWindow.cpp" line="795" />
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -3512,17 +3530,17 @@ The filtered image is created from the original image according to the Filter pr
 Обработанное изображение  создаётся из исходного следуя настройкам Фильтра так чтобы важная информация была выделена, а неважная спрятана</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="794" />
+        <location filename="../src/main/MainWindow.cpp" line="801" />
         <source>Hide All Curves</source>
         <translation>Скрыть Все Кривые</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="796" />
+        <location filename="../src/main/MainWindow.cpp" line="803" />
         <source>Hide all digitized curves.</source>
         <translation>Скрыть все оцифрованные кривые.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="797" />
+        <location filename="../src/main/MainWindow.cpp" line="804" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -3530,17 +3548,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 Никаких опорных точек, осей и оцифрованных кривых графика не будет видно, чтобы обрабатываемое изображение было легче рассмотреть.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="800" />
+        <location filename="../src/main/MainWindow.cpp" line="807" />
         <source>Show Selected Curve</source>
         <translation>Показать Выбранную Кривую</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="802" />
+        <location filename="../src/main/MainWindow.cpp" line="809" />
         <source>Show only the currently selected curve.</source>
         <translation>Показывать только выбранную в данный момент кривую.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="803" />
+        <location filename="../src/main/MainWindow.cpp" line="810" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -3548,17 +3566,17 @@ Show only the digitized points and line that belong to the currently selected cu
 Показать только оцифрованные точки и линии принадлежащие к выбранной в данный момент кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="806" />
+        <location filename="../src/main/MainWindow.cpp" line="813" />
         <source>Show All Curves</source>
         <translation>Показать Все Кривые</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="809" />
+        <location filename="../src/main/MainWindow.cpp" line="816" />
         <source>Show all curves.</source>
         <translation>Показать все кривые сразу.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="810" />
+        <location filename="../src/main/MainWindow.cpp" line="817" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -3566,233 +3584,233 @@ Show all digitized axis points and graph curves</source>
 Показать все оцифрованные оси и кривые графика.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="825" />
+        <location filename="../src/main/MainWindow.cpp" line="832" />
         <source>Hide Always</source>
         <translation>Скрывать Всегда</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="827" />
+        <location filename="../src/main/MainWindow.cpp" line="834" />
         <source>Always hide the status bar.</source>
         <translation>Всегда скрывать панель статуса.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="828" />
+        <location filename="../src/main/MainWindow.cpp" line="835" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>Скрыть панель статуса. Временные статусы и ответные сообщения не будут появляться.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="830" />
+        <location filename="../src/main/MainWindow.cpp" line="837" />
         <source>Show Temporary Messages</source>
         <translation>Показать Временные Сообщения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="832" />
+        <location filename="../src/main/MainWindow.cpp" line="839" />
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>Скрыть панель статуса, за исключением демонстрации временных сообщений.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="833" />
+        <location filename="../src/main/MainWindow.cpp" line="840" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>Скрыть панель статуса, за исключением демонстрации временных статусов и ответных сообщений.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="835" />
+        <location filename="../src/main/MainWindow.cpp" line="842" />
         <source>Show Always</source>
         <translation>Отбражать Всегда</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="837" />
+        <location filename="../src/main/MainWindow.cpp" line="844" />
         <source>Always show the status bar.</source>
         <translation>Всегда отображать панель статуса.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="838" />
+        <location filename="../src/main/MainWindow.cpp" line="845" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>Показывать панель статуса.Кроме демонстрации временных статусов и ответных сообщений, панель статуса отображает информацию о позиции курсора, когда свободна.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="847" />
+        <location filename="../src/main/MainWindow.cpp" line="854" />
         <source>Zoom Out</source>
         <translation>Отдалить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="848" />
+        <location filename="../src/main/MainWindow.cpp" line="855" />
         <source>Zoom out</source>
         <translation>Уменьшить масштаб</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="852" />
+        <location filename="../src/main/MainWindow.cpp" line="859" />
         <source>Zoom In</source>
         <translation>Приблизить</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="853" />
+        <location filename="../src/main/MainWindow.cpp" line="860" />
         <source>Zoom in</source>
         <translation>Увеличить масштаб</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="857" />
+        <location filename="../src/main/MainWindow.cpp" line="864" />
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="859" />
+        <location filename="../src/main/MainWindow.cpp" line="866" />
         <source>Zoom 16:1</source>
         <translation>Масштаб 16:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="862" />
+        <location filename="../src/main/MainWindow.cpp" line="869" />
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="864" />
+        <location filename="../src/main/MainWindow.cpp" line="871" />
         <source>Zoom 8:1</source>
         <translation>Масштаб 8:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="867" />
+        <location filename="../src/main/MainWindow.cpp" line="874" />
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="869" />
+        <location filename="../src/main/MainWindow.cpp" line="876" />
         <source>Zoom 4:1</source>
         <translation>Масштаб 4:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="872" />
+        <location filename="../src/main/MainWindow.cpp" line="879" />
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="874" />
+        <location filename="../src/main/MainWindow.cpp" line="881" />
         <source>Zoom 2:1</source>
         <translation>Масштаб 2:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="877" />
+        <location filename="../src/main/MainWindow.cpp" line="884" />
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="880" />
+        <location filename="../src/main/MainWindow.cpp" line="887" />
         <source>Zoom 1:1</source>
         <translation>Масштаб 1:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="883" />
+        <location filename="../src/main/MainWindow.cpp" line="890" />
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="885" />
+        <location filename="../src/main/MainWindow.cpp" line="892" />
         <source>Zoom 1:2</source>
         <translation>Масштаб 1:2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="888" />
+        <location filename="../src/main/MainWindow.cpp" line="895" />
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="890" />
+        <location filename="../src/main/MainWindow.cpp" line="897" />
         <source>Zoom 1:4</source>
         <translation>Масштаб 1:4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="893" />
+        <location filename="../src/main/MainWindow.cpp" line="900" />
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="895" />
+        <location filename="../src/main/MainWindow.cpp" line="902" />
         <source>Zoom 1:8</source>
         <translation>Масштаб 1:8</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="898" />
+        <location filename="../src/main/MainWindow.cpp" line="905" />
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="900" />
+        <location filename="../src/main/MainWindow.cpp" line="907" />
         <source>Zoom 1:16</source>
         <translation>Масштаб 1:16</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="903" />
+        <location filename="../src/main/MainWindow.cpp" line="910" />
         <source>Fill</source>
         <translation>Заполнение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="905" />
+        <location filename="../src/main/MainWindow.cpp" line="912" />
         <source>Zoom with stretching to fill window</source>
         <translation>Масштабировать с растяжением до заполнения всего окна</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1004" />
+        <location filename="../src/main/MainWindow.cpp" line="1013" />
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1010" />
+        <location filename="../src/main/MainWindow.cpp" line="1019" />
         <source>Open &amp;Recent</source>
         <translation>Открыть &amp;Недавние</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1026" />
+        <location filename="../src/main/MainWindow.cpp" line="1035" />
         <source>&amp;Edit</source>
         <translation>&amp;Редактировать</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1039" />
+        <location filename="../src/main/MainWindow.cpp" line="1048" />
         <source>Digitize</source>
         <translation>Оцифровка</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1047" />
+        <location filename="../src/main/MainWindow.cpp" line="1056" />
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1059" />
-        <location filename="../src/main/MainWindow.cpp" line="1225" />
+        <location filename="../src/main/MainWindow.cpp" line="1068" />
+        <location filename="../src/main/MainWindow.cpp" line="1236" />
         <source>Background</source>
         <translation>Фоновое Изображение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1064" />
+        <location filename="../src/main/MainWindow.cpp" line="1073" />
         <source>Curves</source>
         <translation>Кривые</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1069" />
+        <location filename="../src/main/MainWindow.cpp" line="1078" />
         <source>Status Bar</source>
         <translation>Панель Статуса</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1074" />
+        <location filename="../src/main/MainWindow.cpp" line="1083" />
         <source>Zoom</source>
         <translation>Масштаб</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1090" />
+        <location filename="../src/main/MainWindow.cpp" line="1099" />
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1106" />
+        <location filename="../src/main/MainWindow.cpp" line="1115" />
         <source>&amp;Help</source>
         <translation>&amp;Помощь</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1212" />
+        <location filename="../src/main/MainWindow.cpp" line="1223" />
         <source>Select background image</source>
         <translation>Выбор фонового изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1213" />
+        <location filename="../src/main/MainWindow.cpp" line="1224" />
         <source>Selected Background
 
 Select background image:
@@ -3807,27 +3825,27 @@ Select background image:
 3) Обработанное изображение, на котором выделены важные детали изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1218" />
+        <location filename="../src/main/MainWindow.cpp" line="1229" />
         <source>No background</source>
         <translation>Без фона</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1219" />
+        <location filename="../src/main/MainWindow.cpp" line="1230" />
         <source>Original image</source>
         <translation>Исходное изображение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1220" />
+        <location filename="../src/main/MainWindow.cpp" line="1231" />
         <source>Filtered image</source>
         <translation>Отфильтрованное изображение</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1233" />
+        <location filename="../src/main/MainWindow.cpp" line="1244" />
         <source>Select curve for new points.</source>
         <translation>Выбрать кривую для новых точек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1234" />
+        <location filename="../src/main/MainWindow.cpp" line="1245" />
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -3841,17 +3859,17 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
 </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1240" />
+        <location filename="../src/main/MainWindow.cpp" line="1251" />
         <source>Drawing</source>
         <translation>Отрисовка</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1256" />
+        <location filename="../src/main/MainWindow.cpp" line="1267" />
         <source>Points style for the currently selected curve</source>
         <translation>Стиль точек для выбранной в текущий момент кривой</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1268" />
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
@@ -3860,12 +3878,12 @@ Points style for the currently selected curve. The points style is only displaye
 Стиль точек для выбранной в текущий момент кривой. На этой панели стиль точек только отображается. Чтобы его изменить используйте диалоговое окно Свойства Кривой.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1265" />
+        <location filename="../src/main/MainWindow.cpp" line="1276" />
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>Отображение фильтра для текущей кривой в режиме Сегментного Заполнения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1266" />
+        <location filename="../src/main/MainWindow.cpp" line="1277" />
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
@@ -3874,17 +3892,17 @@ View of filter for the current curve in Segment Fill mode. The filter settings a
 Вид фильтра для выбранной в данный момент кривой в режиме Сегментного Заполнения. На этой панели вид фильтра только отображается. Чтобы его изменить используйте диалоговое окно Настройки Фильтра или Цветовую Пипетку.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1272" />
+        <location filename="../src/main/MainWindow.cpp" line="1283" />
         <source>Views</source>
         <translation>Отображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1281" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Currently selected coordinate system</source>
         <translation>Выбранная система координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1282" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
@@ -3893,12 +3911,12 @@ Currently selected coordinate system. This is used to switch between coordinate 
 Выбранная система координат. Используется для переключения между системами координат в документе с несколькими системами координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1301" />
         <source>Show all coordinate systems</source>
         <translation>Показать все системы координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1302" />
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
@@ -3907,12 +3925,12 @@ When pressed and held, this button shows all digitized points and lines for all 
 При нажатии и удержании этой кнопки отображаются все оцифрованные точки и линии для всех систем координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299" />
+        <location filename="../src/main/MainWindow.cpp" line="1310" />
         <source>Print all coordinate systems</source>
         <translation>Отобразить все системы координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1300" />
+        <location filename="../src/main/MainWindow.cpp" line="1311" />
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
@@ -3921,99 +3939,99 @@ When pressed, this button Prints all digitized points and lines for all coordina
 После нажатия этой кнопки отображаются все оцифрованные точки и линии для всех систем координат.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1304" />
+        <location filename="../src/main/MainWindow.cpp" line="1315" />
         <source>Coordinate System</source>
         <translation>Система Координат</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1459" />
+        <location filename="../src/main/MainWindow.cpp" line="1470" />
         <source>Unable to export to file </source>
         <translation>Не в состоянии выгрузить в файл</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1534" />
-        <location filename="../src/main/MainWindow.cpp" line="1662" />
-        <location filename="../src/main/MainWindow.cpp" line="1830" />
+        <location filename="../src/main/MainWindow.cpp" line="1545" />
+        <location filename="../src/main/MainWindow.cpp" line="1673" />
+        <location filename="../src/main/MainWindow.cpp" line="1841" />
         <source>Cannot read file</source>
         <translation>Не удалось прочитать файл</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1536" />
-        <location filename="../src/main/MainWindow.cpp" line="1664" />
-        <location filename="../src/main/MainWindow.cpp" line="1832" />
+        <location filename="../src/main/MainWindow.cpp" line="1547" />
+        <location filename="../src/main/MainWindow.cpp" line="1675" />
+        <location filename="../src/main/MainWindow.cpp" line="1843" />
         <source>from directory</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1616" />
+        <location filename="../src/main/MainWindow.cpp" line="1627" />
         <source>Import Image</source>
         <translation>Загрузка Изображения</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1852" />
+        <location filename="../src/main/MainWindow.cpp" line="1863" />
         <source>File not found:</source>
         <translation>Файл не найден:</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1927" />
-        <location filename="../src/main/MainWindow.cpp" line="1995" />
+        <location filename="../src/main/MainWindow.cpp" line="1938" />
+        <location filename="../src/main/MainWindow.cpp" line="2006" />
         <source>File imported</source>
         <translation>Файл загружен</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2028" />
+        <location filename="../src/main/MainWindow.cpp" line="2039" />
         <source>Background image.</source>
         <translation>Фоновое изображение.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2029" />
+        <location filename="../src/main/MainWindow.cpp" line="2040" />
         <source>Currently selected curve.</source>
         <translation>Выбранная кривая.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2030" />
+        <location filename="../src/main/MainWindow.cpp" line="2041" />
         <source>Point style for currently selected curve.</source>
         <translation>Стиль точек выбранной в данный момент кривой</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2031" />
+        <location filename="../src/main/MainWindow.cpp" line="2042" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Фильтр Сегментного Заполнения выбранной в данный момент кривой</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2056" />
+        <location filename="../src/main/MainWindow.cpp" line="2067" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Документ был изменён.
 Хотите сохранить изменения?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2140" />
+        <location filename="../src/main/MainWindow.cpp" line="2151" />
         <source>Cannot write file</source>
         <translation>Не удалось записать файл</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3124" />
+        <location filename="../src/main/MainWindow.cpp" line="3141" />
         <source>Export</source>
         <translation>Выгрузка</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3200" />
+        <location filename="../src/main/MainWindow.cpp" line="3219" />
         <source>Open Document</source>
         <translation>Открыть Документ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4625" />
+        <location filename="../src/main/MainWindow.cpp" line="4644" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4626" />
+        <location filename="../src/main/MainWindow.cpp" line="4645" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4754" />
+        <location filename="../src/main/MainWindow.cpp" line="4773" />
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4255,8 +4273,8 @@ Do you want to save your changes?</source>
         <translation>Неподходящий маркер xml</translation>
     </message>
     <message>
-        <location filename="../src/Curve/Curve.cpp" line="358" />
-        <location filename="../src/Curve/Curve.cpp" line="410" />
+        <location filename="../src/Curve/Curve.cpp" line="360" />
+        <location filename="../src/Curve/Curve.cpp" line="412" />
         <source>Cannot read curve data</source>
         <translation>Не удалось прочитать данные кривой</translation>
     </message>

@@ -14,6 +14,8 @@ class QPushButton;
 /// Dialog for saving error report to local hard drive
 class DlgErrorReportLocal : public DlgErrorReportAbstractBase
 {
+  Q_OBJECT;
+
  public:
   /// Single constructor. With the original data, the extra context improves debugging. With anonymization, user privacy is maintained
   DlgErrorReportLocal (const QString &xmlWithImage,
