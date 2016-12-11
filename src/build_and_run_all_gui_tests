@@ -32,9 +32,10 @@ do
 
     if [ $skip == 0 ]; then
 
-	# Run regression test
+	# Run regression test. Standard error is redirected to standard out so we can strip out unimportant
+	# 'QXcbXSettings::QXcbXSettings(QXcbScreen*) Failed to get selection owner for XSETTINGS_S atom' errors
 	commandLine=`cat $script`
-	../bin/engauge $commandLine
+	../bin/engauge $commandLine 2>&1 | grep -v 'Failed to get selection owner'
 
 	# Compare actual and desired output files. There is one pair for each coordinate system
 	scriptfile=`basename $script`
