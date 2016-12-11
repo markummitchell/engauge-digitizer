@@ -12,7 +12,7 @@ tests=( \
     TestCorrelation  \
     TestExport \
     TestFitting \
-    TestFormats \    
+    TestFormats \
     TestGraphCoords \
     TestGridLineLimiter \
     TestMatrix \
