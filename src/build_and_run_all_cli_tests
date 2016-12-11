@@ -11,7 +11,8 @@
 tests=( \
     TestCorrelation  \
     TestExport \
-    TestFormats \
+    TestFitting \
+    TestFormats \    
     TestGraphCoords \
     TestGridLineLimiter \
     TestMatrix \
