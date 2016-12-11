@@ -2,13 +2,14 @@
 
 # Description: Script that runs command-line tests
 #
-# Usage: build_and_run_all_cli_tests [jpeg2000] [pdf]
+# Usage: build_and_run_all_cli_tests [jpeg2000] [pdf] [<Test1>] [<Test2>] ...
 #
 # where: jpeg2000 = run jpeg2000 test(s). Requires CONFIG+=jpeg2000 in qmake build
 #        pdf      = run pdf test(s). Requires CONFIG+=pdf in qmake build
+#        <Test#>  = specifies a selected test. If none are selected then all are run
 
 # Test names. Specify a single test to run just that test
-tests=( \
+testsAvailable=( \
     TestCorrelation  \
     TestExport \
     TestFitting \
@@ -22,17 +23,20 @@ tests=( \
     TestTransformation \
     TestValidators)
 
-echo "Available tests: " ${tests[*]}
+echo 
+echo "Available tests: " ${testsAvailable[*]}
 
-# Pass script arguments to qmake
+# Pass script arguments to qmake. Other arguments are interpretted as tests to be run
 CONFIGARGS=""
+testsSelected=()
 while test $# -gt 0
 do
     case "$1" in
 	jpeg2000) CONFIGARGS="jpeg2000 $CONFIGARGS"
 	    ;;
         pdf) CONFIGARGS="pdf $CONFIGARGS"
-            ;;
+             ;;
+	*) testsSelected+=("$1")
     esac
     shift
 done
@@ -41,38 +45,42 @@ if [ -n "$CONFIGARGS" ]; then
     CONFIGARGS="CONFIG+=$CONFIGARGS"
 fi
 
+selectedCount=${#testsSelected[@]}
+if [ $selectedCount -eq 0 ]; then
+    testsSelected=(${testsAvailable[*]})
+fi
+
+echo
+echo "Selected tests: " ${testsSelected[*]}
+
+if [ $selectedCount -eq 1 ]
+then
+    echo
+    echo "Since a single test is selected, engauge_test.pro will not be deleted so the code can be easily rebuilt and debugged"
+fi
+
 # Need gcc 4 at /C/cygwin/bin rather than gcc 3 at /usr/bin to prevent 'unrecognized command line
 # option -fno-keep-inline-dllexport'
 PATH=/C/QtOpenSource/Qt5.5.1/Tools/mingw492_32/bin:$PATH
-argcount="$#"
-
-if [ $argcount -gt 0 ]
-then 
-    tests=("$@");
-fi
-
-echo "Selected tests: " ${tests[*]}
-
-if [ $argcount -eq 1 ]
-then
-    echo "Since a single test is selected, engauge_test.pro will not be deleted so the code can be easily rebuilt and debugged"
-fi
 
 # Logging
 LOGFILE="build_and_run_all_cli_tests.log"
 rm -rf $LOGFILE
+echo
 echo "Afterwards, check $LOGFILE to verify success"
 
 # Cleanup. We do not want to force complete rebuild for each test application since that takes VERY long
 rm .moc_test/* 2>/dev/null
 rm .objs_test/* 2>/dev/null
 rm ../bin/Test* 2>/dev/null
+echo
 echo "Rebuilding..."
 
 # Make sure correct qt installation is being used, by looking for '5.' in the version number
 VERSION5=`qmake -v | grep '5\.'`
 if [ -z "$VERSION5" ]
 then
+    echo
     echo "Need Qt5";
 else
 
@@ -80,13 +88,13 @@ else
     set -e 
 
     # Build and run each test
-    for t in "${tests[@]}"
+    for t in "${testsSelected[@]}"
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake $CONFIGARGS engauge_test.pro
 	make all 2>>$LOGFILE >/dev/null
 	../bin/$t
-	if [ $argcount -ne 1 ]
+	if [ $selectedCount -ne 1 ]
 	then
             rm engauge_test.pro
 	fi

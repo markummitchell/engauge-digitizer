@@ -37,9 +37,12 @@ bool TestFitting::generalTest (int order,
   FittingPointsConvenient points;
   for (int iPoint = 0; iPoint < numPoints; iPoint++) {
     double x = iPoint; //  Pick arbitrary x values that are near the zeros
-    double y = 1; // Multiply this by successive terms
-    for (int ord = 0; ord < orderReduced; ord++) {
-      y *= (x + ord + 1);
+    double y = 0;
+    if (orderReduced > 0) {
+      y = 1; // Multiply this by successive terms
+      for (int ord = 0; ord < orderReduced; ord++) {
+        y *= (x + ord + 1);
+      }
     }
 
     points.append (QPointF (x, y));
@@ -59,7 +62,7 @@ bool TestFitting::generalTest (int order,
   switch (orderReduced)
   {
   case 0: // y=0
-    coefficientsExpected [0] = 1; 
+    coefficientsExpected [0] = 0;
     break;
   case 1: // y=(x+1)
     coefficientsExpected [0] = 1;
@@ -125,6 +128,26 @@ void TestFitting::initTestCase ()
                 NO_RESET,
                 NO_LOAD_STARTUP_FILES);
   w.show ();
+}
+
+void TestFitting::testExactFit01 ()
+{
+  QVERIFY (generalTest (0, 1));
+}
+
+void TestFitting::testExactFit12 ()
+{
+  QVERIFY (generalTest (1, 2));
+}
+
+void TestFitting::testExactFit23 ()
+{
+  QVERIFY (generalTest (2, 3));
+}
+
+void TestFitting::testExactFit34 ()
+{
+  QVERIFY (generalTest (3, 4));
 }
 
 void TestFitting::testOverfit11 ()
