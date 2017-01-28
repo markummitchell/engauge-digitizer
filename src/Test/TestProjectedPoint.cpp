@@ -93,14 +93,14 @@ void TestProjectedPoint::testProjectedPoints ()
     if ((angleCriticalRight <= angle && angle <= 180 - angleCriticalRight) ||
         (180 + angleCriticalRight <= angle && angle <= 360 - angleCriticalRight)) {
 
-      QVERIFY (projectedDistanceOutsideLineRight == 0);
+      QVERIFY ((projectedDistanceOutsideLineRight == 0));
     } else {
-      QVERIFY (projectedDistanceOutsideLineRight != 0);
+      QVERIFY ((projectedDistanceOutsideLineRight != 0));
     }
-    QVERIFY (xMin <= xProjectionRight);
-    QVERIFY (yMin <= yProjectionRight);
-    QVERIFY (xProjectionRight <= xMax);
-    QVERIFY (yProjectionRight <= yMax);
+    QVERIFY ((xMin <= xProjectionRight));
+    QVERIFY ((yMin <= yProjectionRight));
+    QVERIFY ((xProjectionRight <= xMax));
+    QVERIFY ((yProjectionRight <= yMax));
 
     // Project point that is up
     projectPointOntoLine (xToProjectUp,
@@ -120,13 +120,13 @@ void TestProjectedPoint::testProjectedPoints ()
         (180 - angleCriticalUp <= angle && angle <= 180 + angleCriticalUp) ||
         (360 - angleCriticalUp <= angle)) {
 
-      QVERIFY (projectedDistanceOutsideLineUp == 0);
+      QVERIFY ((projectedDistanceOutsideLineUp == 0));
     } else {
-      QVERIFY (projectedDistanceOutsideLineUp != 0);
+      QVERIFY ((projectedDistanceOutsideLineUp != 0));
     }
-    QVERIFY (xMin <= xProjectionUp);
-    QVERIFY (yMin <= yProjectionUp);
-    QVERIFY (xProjectionUp <= xMax);
-    QVERIFY (yProjectionUp <= yMax);
+    QVERIFY ((xMin <= xProjectionUp));
+    QVERIFY ((yMin <= yProjectionUp));
+    QVERIFY ((xProjectionUp <= xMax));
+    QVERIFY ((yProjectionUp <= yMax));
   }
 }

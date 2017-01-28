@@ -19,7 +19,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 
 Questa finestra contiene una lista di controlli suggeriti dal Checklist Guide Wizard. Seguendo questi passaggi si produrrà un gruppo di punti digitalizzati in un file.
 
-Per avviare Checklist Guide Wizard quando un'immagine viene importata, selezionare l'opzione Aiuto / Checklist Wizard dal menu.</translation>
+Per avviare Checklist Guide Wizard quando un'apos;immagine viene importata, selezionare l'apos;opzione Aiuto / Checklist Wizard dal menu.</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="15" />
         <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color="red"&gt;Why does the imported image look different?&lt;/font&gt; After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;É stata creata una lista di controlli.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color="red"&gt;Perché l'immagine importata sembra differente?&lt;/font&gt; Dopo l'importazione, viene mostrata un'immagine filtrata sullo sfondo. Tale immagine è prodotta da quella originale secondo i parametri impostati in Impostazioni / Filtro Colore. Quando i parametri sono settati correttamente, l'informazione meno importante (come le linee a griglia ed i colori di sfondo) viene rimossa dall'immagine filtrata così da eseguire l'estrazione automatica delle caratteristiche. Se vengono rimosse anche delle caratteristiche volute, è possibile aggiustare i parametri dal menu Impostazioni / Filtro Colore, oppure mostrare l'immagine originale usando Visualizza / Sfondo / Mostra Immagine Orginale.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;É stata creata una lista di controlli.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color="red"&gt;Perché l'apos;immagine importata sembra differente?&lt;/font&gt; Dopo l'apos;importazione, viene mostrata un'apos;immagine filtrata sullo sfondo. Tale immagine è prodotta da quella originale secondo i parametri impostati in Impostazioni / Filtro Colore. Quando i parametri sono settati correttamente, l'apos;informazione meno importante (come le linee a griglia ed i colori di sfondo) viene rimossa dall'apos;immagine filtrata così da eseguire l'apos;estrazione automatica delle caratteristiche. Se vengono rimosse anche delle caratteristiche volute, è possibile aggiustare i parametri dal menu Impostazioni / Filtro Colore, oppure mostrare l'apos;immagine originale usando Visualizza / Sfondo / Mostra Immagine Orginale.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -73,7 +73,7 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="15" />
         <source>&lt;p&gt;Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.&lt;/p&gt;&lt;p&gt;This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.&lt;/p&gt;&lt;p&gt;New users are encouraged to use this wizard.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Engauge converte un'immagine di un grafico o di una mappa in numeri, finché l'immagine ha assi e/o griglia per definire le coordinate.&lt;/p&gt;&lt;p&gt;Questo wizard crea una lista di controlli che può servire come aiuto. Seguendo questi passaggi, è possibile ottenere dei punti digitalizzati in un file esportato. Viene fornito anche un sommario veloce delle funzioni maggiormente utili di Engauge.&lt;/p&gt;&lt;p&gt;I nuovi utenti sono incoraggiati a farne uso.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Engauge converte un'apos;immagine di un grafico o di una mappa in numeri, finché l'apos;immagine ha assi e/o griglia per definire le coordinate.&lt;/p&gt;&lt;p&gt;Questo wizard crea una lista di controlli che può servire come aiuto. Seguendo questi passaggi, è possibile ottenere dei punti digitalizzati in un file esportato. Viene fornito anche un sommario veloce delle funzioni maggiormente utili di Engauge.&lt;/p&gt;&lt;p&gt;I nuovi utenti sono incoraggiati a farne uso.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -91,7 +91,7 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
-        <translation>Seguire questa lista di controlli per digitalizzare l'immagine. Ogni passaggio mostrerà un esempio al completamento delle operazioni.</translation>
+        <translation>Seguire questa lista di controlli per digitalizzare l'apos;immagine. Ogni passaggio mostrerà un esempio al completamento delle operazioni.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
@@ -101,7 +101,7 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
         <source>Add first of three axis points.</source>
-        <translation>Aggiungere il primo dei tre punti dell'asse.</translation>
+        <translation>Aggiungere il primo dei tre punti dell'apos;asse.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
@@ -122,14 +122,14 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
-        <translation>Cliccare su un punto contrassegnato dell'asse o sull'intersezione di due linee con coordinate conosciute</translation>
+        <translation>Cliccare su un punto contrassegnato dell'apos;asse o sull'apos;intersezione di due linee con coordinate conosciute</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
         <source>Enter the coordinates of the axis point</source>
-        <translation>Indicare le coordinate del punto dell'asse</translation>
+        <translation>Indicare le coordinate del punto dell'apos;asse</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
@@ -143,22 +143,22 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
         <source>Add second of three axis points.</source>
-        <translation>Aggiungere il secondo dei tre punti dell'asse</translation>
+        <translation>Aggiungere il secondo dei tre punti dell'apos;asse</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
-        <translation>Cliccare su un punto contrassegnato dell'asse, o sull'intersezione di due linee sulla griglia, con coordinate conosciute, distante dall'altro punto</translation>
+        <translation>Cliccare su un punto contrassegnato dell'apos;asse, o sull'apos;intersezione di due linee sulla griglia, con coordinate conosciute, distante dall'apos;altro punto</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
         <source>Add third of three axis points.</source>
-        <translation>Aggiungere il terzo dei tre punti dell'asse.</translation>
+        <translation>Aggiungere il terzo dei tre punti dell'apos;asse.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
-        <translation>Cliccare su un punto contrassegnato dell'asse, o sull'intersezione di due linee, con coordinate conosciute, lontano dagli altri punti</translation>
+        <translation>Cliccare su un punto contrassegnato dell'apos;asse, o sull'apos;intersezione di due linee, con coordinate conosciute, lontano dagli altri punti</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
@@ -297,7 +297,7 @@ Per avviare Checklist Guide Wizard quando un'immagine viene importata, seleziona
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -1070,7 +1070,7 @@ Reorder curves by dragging them around.</source>
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation>Seleziona una larghezza per le linee tracciate tra i punti.
 
-Questa si applica solo alle curve del grafico. Nessuna linea sarà mai disegnata tra i punti dell'asse.</translation>
+Questa si applica solo alle curve del grafico. Nessuna linea sarà mai disegnata tra i punti dell'apos;asse.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118" />
@@ -1506,7 +1506,7 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 Controls for specifying the format of functions during export</source>
         <translation>Scheda delle Funzioni
 
-Controlli per specificare il formato delle funzioni durante l'esportazione</translation>
+Controlli per specificare il formato delle funzioni durante l'apos;esportazione</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
@@ -1520,7 +1520,7 @@ Controlli per specificare il formato delle funzioni durante l'esportazione</tran
 Controls for specifying the format of relations during export</source>
         <translation>Scheda delle Relazioni
 
-Controlli per specificare il formato delle relazioni durante l'esportazione</translation>
+Controlli per specificare il formato delle relazioni durante l'apos;esportazione</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
@@ -1535,12 +1535,12 @@ Controlli per specificare il formato delle relazioni durante l'esportazione</tra
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
         <source>Label in the header for x values</source>
-        <translation>Etichetta nell'intestazione per i valori di x</translation>
+        <translation>Etichetta nell'apos;intestazione per i valori di x</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="436" />
         <source>Label in the header for theta values</source>
-        <translation>Etichetta nell'intestazione per i valori di theta</translation>
+        <translation>Etichetta nell'apos;intestazione per i valori di theta</translation>
     </message>
 </context>
 <context>
@@ -1564,7 +1564,7 @@ This is the effective width and height of the cursor when clicking on a pixel th
 This parameter is used in the Color Picker and Point Match modes</source>
         <translation>Dimensione Effettiva del Cursore
 
-Questa è l'effettiva larghezza e altezza del cursore quando si clicca su di un pixel che non è parte dello sfondo.
+Questa è l'apos;effettiva larghezza e altezza del cursore quando si clicca su di un pixel che non è parte dello sfondo.
 
 Questo parametro è usato nelle modalità Selettore del Colore e Punto di Incontro</translation>
     </message>
@@ -1718,7 +1718,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241" />
         <source>Preview window that shows how current settings affect grid display</source>
-        <translation>Finestra di anteprima che mostra come le attuali impostazioni influenzano l'esposizione della griglia</translation>
+        <translation>Finestra di anteprima che mostra come le attuali impostazioni influenzano l'apos;esposizione della griglia</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305" />
@@ -1924,12 +1924,12 @@ The stop value cannot be less than the start value</source>
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation>Ingrandimento Iniziale
 
-Selezionare il fattore di ingrandimento iniziale quando un nuovo documento viene caricato. L'ingrandimento precedente può essere mantenuto, oppure l'ingrandimento specificato può essere applicato.</translation>
+Selezionare il fattore di ingrandimento iniziale quando un nuovo documento viene caricato. L'apos;ingrandimento precedente può essere mantenuto, oppure l'apos;ingrandimento specificato può essere applicato.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78" />
         <source>Zoom control:</source>
-        <translation>Controllo dell'ingrandimento:</translation>
+        <translation>Controllo dell'apos;ingrandimento:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82" />
@@ -1956,7 +1956,7 @@ Selezionare il fattore di ingrandimento iniziale quando un nuovo documento viene
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
-        <translation>Controllo dell'Ingrandimento
+        <translation>Controllo dell'apos;Ingrandimento
 
 Seleziona quali input sono usati per ingrandire e rimpicciolire.</translation>
     </message>
@@ -2083,7 +2083,7 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30" />
         <source>Point Match</source>
-        <translation>Punto d'Incontro</translation>
+        <translation>Punto d'apos;Incontro</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83" />
@@ -2518,7 +2518,7 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="432" />
         <source>Undo the last operation.</source>
-        <translation>Annulla l'ultima operazione.</translation>
+        <translation>Annulla l'apos;ultima operazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="433" />
@@ -2527,7 +2527,7 @@ New points will be assigned to the currently selected curve.</source>
 Undo the last operation.</source>
         <translation>Annulla
 
-Annulla l'ultima operazione.</translation>
+Annulla l'apos;ultima operazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="437" />
@@ -2537,7 +2537,7 @@ Annulla l'ultima operazione.</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="439" />
         <source>Redo the last operation.</source>
-        <translation>Ripristina l'ultima operazione.</translation>
+        <translation>Ripristina l'apos;ultima operazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="440" />
@@ -2546,7 +2546,7 @@ Annulla l'ultima operazione.</translation>
 Redo the last operation.</source>
         <translation>Ripristina
 
-Ripristina l'ultima operazione.</translation>
+Ripristina l'apos;ultima operazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="444" />
@@ -2632,7 +2632,7 @@ Cancella i punti selezionati, dopo averli copiati negli appunti.</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="473" />
         <source>Pastes an image from the clipboard.</source>
-        <translation>Incolla un'immagine dagli appunti.</translation>
+        <translation>Incolla un'apos;immagine dagli appunti.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="474" />
@@ -2641,7 +2641,7 @@ Cancella i punti selezionati, dopo averli copiati negli appunti.</translation>
 Creates a new document by pasting an image from the clipboard.</source>
         <translation>Incolla come Nuovo
 
-Crea un nuovo documento incollando un'immagine dagli appunti.</translation>
+Crea un nuovo documento incollando un'apos;immagine dagli appunti.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="478" />
@@ -2651,7 +2651,7 @@ Crea un nuovo documento incollando un'immagine dagli appunti.</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="479" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
-        <translation>Incolla un'immagine dagli appunti, in modalità avanzata.</translation>
+        <translation>Incolla un'apos;immagine dagli appunti, in modalità avanzata.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="480" />
@@ -2660,7 +2660,7 @@ Crea un nuovo documento incollando un'immagine dagli appunti.</translation>
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation>Incolla come Nuovo (Avanzato)
 
-Crea un nuovo documento incollando un'immagine dagli appunti, in modalità avanzata.</translation>
+Crea un nuovo documento incollando un'apos;immagine dagli appunti, in modalità avanzata.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="489" />
@@ -2847,7 +2847,7 @@ Stampa il documento corrente in una stampante o un file.</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="567" />
         <source>Quits the application.</source>
-        <translation>Chiude l'applicazione.</translation>
+        <translation>Chiude l'apos;applicazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="568" />
@@ -2856,7 +2856,7 @@ Stampa il documento corrente in una stampante o un file.</translation>
 Quits the application.</source>
         <translation>Uscire
 
-Chiude l'applicazione.</translation>
+Chiude l'apos;applicazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="577" />
@@ -2919,7 +2919,7 @@ Documentazione di aiuto ricercabile</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>About the application.</source>
-        <translation>Circa l'applicazione.</translation>
+        <translation>Circa l'apos;applicazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="605" />
@@ -2928,7 +2928,7 @@ Documentazione di aiuto ricercabile</translation>
 About the application.</source>
         <translation>Circa Engauge
 
-Circa l'applicazione.</translation>
+Circa l'apos;applicazione.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="613" />
@@ -2947,7 +2947,7 @@ Circa l'applicazione.</translation>
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
         <translation>Impostazioni delle Coordinate
 
-Le impostazioni delle coordinate determinano come li coordinate del grafico sono mappate ai pixel nell'immagine</translation>
+Le impostazioni delle coordinate determinano come li coordinate del grafico sono mappate ai pixel nell'apos;immagine</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="619" />
@@ -3328,7 +3328,7 @@ No image is shown so points are easier to see</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="785" />
         <source>Show Original Image</source>
-        <translation>Mostrare l'Immagine Originale</translation>
+        <translation>Mostrare l'apos;Immagine Originale</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="787" />
@@ -3345,7 +3345,7 @@ Show the original image underneath the points</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="791" />
         <source>Show Filtered Image</source>
-        <translation>Mostrare l'Immagine Filtrata</translation>
+        <translation>Mostrare l'apos;Immagine Filtrata</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="794" />
@@ -3638,7 +3638,7 @@ Mostra tutti i punti degli assi digitalizzati e le curve del grafico</translatio
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1223" />
         <source>Select background image</source>
-        <translation>Selezionare l'immagine di sfondo</translation>
+        <translation>Selezionare l'apos;immagine di sfondo</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1224" />
@@ -3650,7 +3650,7 @@ Select background image:
 3) Filtered image which highlights important details</source>
         <translation>Sfondo Selezionato
 
-Seleziona l'immagine di sfondo:
+Seleziona l'apos;immagine di sfondo:
 1) Nessuno sfondo che risalti i punti
 2) Immagine originale che mostra tutto
 3) Immagine filtrata che risalta i dettagli importanti</translation>
@@ -3857,13 +3857,13 @@ Do you want to save your changes?</source>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="123" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="217" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation>Nuovo punto dell'asse non può essere nella stessa posizione di un già esistente punto assiale.</translation>
+        <translation>Nuovo punto dell'apos;asse non può essere nella stessa posizione di un già esistente punto assiale.</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="129" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="224" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
-        <translation>Nuovo punto dell'asse non può avere le stesse coordinate di un punto assiale già esistente</translation>
+        <translation>Nuovo punto dell'apos;asse non può avere le stesse coordinate di un punto assiale già esistente</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="135" />
@@ -3880,12 +3880,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194" />
         <source>Too many x axis points. There should only be two</source>
-        <translation>Troppi punti sull'asse x. Ce ne dovrebbero essere solo due</translation>
+        <translation>Troppi punti sull'apos;asse x. Ce ne dovrebbero essere solo due</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="200" />
         <source>Too many y axis points. There should only be two</source>
-        <translation>Troppi punti sull'asse y. Ce ne dovrebbero essere solo due</translation>
+        <translation>Troppi punti sull'apos;asse y. Ce ne dovrebbero essere solo due</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="14" />
@@ -3978,7 +3978,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50" />
         <source>Reached end of file before finding end element for</source>
-        <translation>Raggiunta la fine del file prima di aver trovato l'elemento finale</translation>
+        <translation>Raggiunta la fine del file prima di aver trovato l'apos;elemento finale</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="14" />
@@ -4157,12 +4157,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="341" />
         <source>Point Match</source>
-        <translation>Punto d'Incontro</translation>
+        <translation>Punto d'apos;Incontro</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="342" />
         <source>There are no more matching points</source>
-        <translation>Non ci sono punti d'incontro</translation>
+        <translation>Non ci sono punti d'apos;incontro</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="31" />
@@ -4214,7 +4214,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Document/Document.cpp" line="484" />
         <source>Cannot read image data</source>
-        <translation>Impossibile leggere i dati dell'immagine</translation>
+        <translation>Impossibile leggere i dati dell'apos;immagine</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelAxesChecker.cpp" line="96" />
@@ -4637,7 +4637,7 @@ Click on the Axis Points button</source>
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
-for entering the axis point's
+for entering the axis point'apos;s
 coordinates</source>
         <translation type="unfinished" />
     </message>
@@ -4888,7 +4888,7 @@ exported, as numbers, to other software tools.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="26" />
         <source>Point Match</source>
-        <translation>Punto d'Incontro</translation>
+        <translation>Punto d'apos;Incontro</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="29" />

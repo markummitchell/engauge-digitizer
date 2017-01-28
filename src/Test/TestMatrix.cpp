@@ -47,7 +47,7 @@ void TestMatrix::testDeterminant ()
   m.set (0, 1, a01);
   m.set (1, 0, a10);
   m.set (1, 1, a11);
-  QVERIFY (m.determinant () == a00 * a11 - a01 * a10);
+  QVERIFY ((m.determinant () == a00 * a11 - a01 * a10));
 }
 
 void TestMatrix::testInverse ()

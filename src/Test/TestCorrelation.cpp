@@ -111,7 +111,7 @@ void TestCorrelation::testShiftSinusoidNonPowerOf2 ()
                                   corrMax,
                                   correlations);
 
-  QVERIFY (binStartMax = INDEX_SHIFT);
+  QVERIFY ((binStartMax = INDEX_SHIFT));
 }
 
 void TestCorrelation::testShiftSinusoidPowerOf2 ()
@@ -137,7 +137,7 @@ void TestCorrelation::testShiftSinusoidPowerOf2 ()
                                   corrMax,
                                   correlations);
 
-  QVERIFY (binStartMax = INDEX_SHIFT);
+  QVERIFY ((binStartMax = INDEX_SHIFT));
 }
 
 void TestCorrelation::testShiftThreeTrianglesNonPowerOf2 ()
@@ -163,7 +163,7 @@ void TestCorrelation::testShiftThreeTrianglesNonPowerOf2 ()
                                   corrMax,
                                   correlations);
 
-  QVERIFY (binStartMax = INDEX_SHIFT);
+  QVERIFY ((binStartMax = INDEX_SHIFT));
 }
 
 void TestCorrelation::testShiftThreeTrianglesPowerOf2 ()
@@ -189,5 +189,5 @@ void TestCorrelation::testShiftThreeTrianglesPowerOf2 ()
                                   corrMax,
                                   correlations);
 
-  QVERIFY (binStartMax = INDEX_SHIFT);
+  QVERIFY ((binStartMax = INDEX_SHIFT));
 }
