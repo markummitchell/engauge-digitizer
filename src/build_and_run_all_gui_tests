@@ -56,12 +56,29 @@ do
 	    else
 		COUNTERSTRING="";
 	    fi
-	    if cmp --silent $EXPECTED $actual
+	    # If there is a line that starts with XXX then it must be skipped because one of the values
+	    # is so small that roundoff error will give a false positive error result
+	    LINE=`sed -n '\|XXX|=' $EXPECTED`
+	    if [[ -n $LINE ]];
 	    then
-		echo "PASS   : $root $COUNTERSTRING"
+		# Skip the specified line
+		awk "NR != $LINE" $EXPECTED >.file1
+		awk "NR != $LINE" $actual   >.file2
+		if cmp --silent .file1 .file2
+		then
+		    echo "PASS   : $root $COUNTERSTRING"
+		else
+		    echo "FAIL   : $root $COUNTERSTRING"
+		    diff -c2 $EXPECTED $actual
+		fi		   
 	    else
-		echo "FAIL   : $root $COUNTERSTRING"
-		diff -c2 $EXPECTED $actual
+		if cmp --silent $EXPECTED $actual
+		then
+		    echo "PASS   : $root $COUNTERSTRING"
+		else
+		    echo "FAIL   : $root $COUNTERSTRING"
+		    diff -c2 $EXPECTED $actual
+		fi
 	    fi
 	    let COUNTER=COUNTER+1
 	done

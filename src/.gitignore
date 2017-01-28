@@ -12,6 +12,8 @@ engauge_resource.rc
 engauge_test.log*
 engauge_test.pro
 engauge_test.pro.user
+.file1
+.file2
 Makefile*
 object_script.*
 qrc_*

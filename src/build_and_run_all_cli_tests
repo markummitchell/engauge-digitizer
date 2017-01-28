@@ -32,18 +32,14 @@ testsSelected=()
 while test $# -gt 0
 do
     case "$1" in
-	jpeg2000) CONFIGARGS="jpeg2000 $CONFIGARGS"
+	jpeg2000) CONFIGARGS="CONFIG+=jpeg2000 $CONFIGARGS"
 	    ;;
-        pdf) CONFIGARGS="pdf $CONFIGARGS"
+        pdf) CONFIGARGS="CONFIG+=pdf $CONFIGARGS"
              ;;
 	*) testsSelected+=("$1")
     esac
     shift
 done
-
-if [ -n "$CONFIGARGS" ]; then
-    CONFIGARGS="CONFIG+=$CONFIGARGS"
-fi
 
 selectedCount=${#testsSelected[@]}
 if [ $selectedCount -eq 0 ]; then
