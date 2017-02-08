@@ -38,9 +38,19 @@ CallbackSearchReturn CallbackDocumentHash::callback (const QString &curveName,
 
   if (point.isAxisPoint()) {
 
-    if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
+    switch (m_documentAxesPointsRequired) {
+    case DOCUMENT_AXES_POINTS_REQUIRED_2:
+      // Axis point has same value for both coordinates so we chose one coordinate
+      details += " " + QString::number (point.posGraph().x());
+      break;
 
-      // Axis point has one or coordinate
+    case DOCUMENT_AXES_POINTS_REQUIRED_3:
+      // Axis point has two coordinates
+      details += " " + QPointFToString (point.posGraph());
+      break;
+
+    case DOCUMENT_AXES_POINTS_REQUIRED_4:
+      // Axis point has one coordinate
       if (point.isXOnly()) {
 
         details += " " + QString::number (point.posGraph().x());
@@ -50,12 +60,10 @@ CallbackSearchReturn CallbackDocumentHash::callback (const QString &curveName,
         details += " " + QString::number (point.posGraph().y());
 
       }
+      break;
 
-    } else {
-
-      // Axis point has two coordinates
-      details += " " + QPointFToString (point.posGraph());
-
+    default:
+      ENGAUGE_ASSERT (false);
     }
   }
 

@@ -20,6 +20,7 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
+const int NUM_AXES_POINTS_2 = 2;
 const int NUM_AXES_POINTS_3 = 3;
 const int NUM_AXES_POINTS_4 = 4;
 
@@ -134,7 +135,8 @@ void Checker::prepareForDisplay (const QPolygonF &polygon,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay";
 
-  ENGAUGE_ASSERT ((polygon.count () == NUM_AXES_POINTS_3) ||
+  ENGAUGE_ASSERT ((polygon.count () == NUM_AXES_POINTS_2) ||
+                  (polygon.count () == NUM_AXES_POINTS_3) ||
                   (polygon.count () == NUM_AXES_POINTS_4));
 
   // Convert pixel coordinates in QPointF to screen and graph coordinates in Point using
@@ -173,7 +175,8 @@ void Checker::prepareForDisplay (const QList<Point> &points,
   LOG4CPP_INFO_S ((*mainCat)) << "Checker::prepareForDisplay "
                               << " transformation=" << transformation;
 
-  ENGAUGE_ASSERT ((points.count () == NUM_AXES_POINTS_3) ||
+  ENGAUGE_ASSERT ((points.count () == NUM_AXES_POINTS_2) ||
+                  (points.count () == NUM_AXES_POINTS_3) ||
                   (points.count () == NUM_AXES_POINTS_4));
 
   // Remove previous lines

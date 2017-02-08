@@ -45,6 +45,7 @@ class DlgImportAdvanced : public DlgSettingsAbstractBase
   DlgImportAdvanced();
 
   QSpinBox *m_spinCoordSystemCount;
+  QRadioButton *m_btnAxesPointCount2;
   QRadioButton *m_btnAxesPointCount3;
   QRadioButton *m_btnAxesPointCount4;
 };

@@ -63,7 +63,15 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   QLabel *labelPointCount = new QLabel (tr ("Axes Points Count:"));
   layout->addWidget (labelPointCount, row, 1);
 
-  m_btnAxesPointCount3 = new QRadioButton (tr ("3 points"));
+  m_btnAxesPointCount2 = new QRadioButton (tr ("2 points - Used for map with a scale bar defining the map scale"));
+  m_btnAxesPointCount2->setWhatsThis (tr ("Two axes points will define the scale of a map. Either point can be "
+                                          "edited to set the length of the scale bar.\n\n"
+                                          "This setting is used when importing a map that has only a scale bar "
+                                          "to define distance, rather than a graph with axes that define two coordinates."));
+  connect (m_btnAxesPointCount2, SIGNAL (toggled (bool)), this, SLOT (slotAxesPointCount (bool)));
+  layout->addWidget (m_btnAxesPointCount2, row++, 2);
+
+  m_btnAxesPointCount3 = new QRadioButton (tr ("3 points - Used for graph with both coordinates defined on each axis"));
   m_btnAxesPointCount3->setChecked (true); // This is the traditional setting, and so is used as the default
   m_btnAxesPointCount3->setWhatsThis (tr ("Three axes points will define the coordinate system. Each will have both "
                                           "x and y coordinates.\n\n"
@@ -73,7 +81,7 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   connect (m_btnAxesPointCount3, SIGNAL (toggled (bool)), this, SLOT (slotAxesPointCount (bool)));
   layout->addWidget (m_btnAxesPointCount3, row++, 2);
 
-  m_btnAxesPointCount4 = new QRadioButton (tr ("4 points"));
+  m_btnAxesPointCount4 = new QRadioButton (tr ("4 points - Used for graph with only one coordinate defined on each axis"));
   m_btnAxesPointCount4->setWhatsThis (tr ("Four axes points will define the coordinate system. Each will have a single "
                                           "x or y coordinate.\n\n"
                                           "This setting is required when the x coordinate of the y axis is unknown, and/or "
@@ -88,7 +96,9 @@ QWidget *DlgImportAdvanced::createSubPanel ()
 
 DocumentAxesPointsRequired DlgImportAdvanced::documentAxesPointsRequired () const
 {
-  if (m_btnAxesPointCount3->isChecked ()) {
+  if (m_btnAxesPointCount2->isChecked ()) {
+    return DOCUMENT_AXES_POINTS_REQUIRED_2;
+  } else if (m_btnAxesPointCount3->isChecked ()) {
     return DOCUMENT_AXES_POINTS_REQUIRED_3;
   } else {
     return DOCUMENT_AXES_POINTS_REQUIRED_4;

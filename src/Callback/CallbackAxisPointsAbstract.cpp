@@ -83,7 +83,10 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
   }
 
   // Try to compute transform
-  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
+  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
+    return callbackRequire2AxisPoints (posScreen,
+                                       posGraph);
+  } else if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
     return callbackRequire3AxisPoints (posScreen,
                                        posGraph);
   } else {
@@ -91,6 +94,49 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callback (const QString & /* cu
                                        posScreen,
                                        posGraph);
   }
+}
+
+CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire2AxisPoints (const QPointF &posScreen,
+                                                                             const QPointF &posGraph)
+{
+  CallbackSearchReturn rtn = CALLBACK_SEARCH_RETURN_CONTINUE;
+
+  // Update range variables. The same nonzero length value is stored in every x and y coordinate of every axis point
+  m_xGraphLow = 0;
+  m_yGraphLow = 0;
+  m_xGraphHigh = posGraph.x();
+  m_yGraphHigh = posGraph.x();
+
+  int numberPoints = m_screenInputs.count();
+  if (numberPoints < 2) {
+
+    // Append new point
+    m_screenInputs.push_back (posScreen);
+    m_graphOutputs.push_back (posGraph);
+    numberPoints = m_screenInputs.count();
+
+    if (numberPoints == 2) {
+      loadTransforms2 ();
+    }
+
+    // Error checking
+    if (anyPointsRepeatPair (m_screenInputs)) {
+
+      m_isError = true;
+      m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
+      rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+    }
+  }
+
+  if (m_screenInputs.count() > 1) {
+
+    // There are enough axis points so quit
+    rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
+
+  }
+
+  return rtn;
 }
 
 CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (const QPointF &posScreen,
@@ -247,6 +293,19 @@ DocumentAxesPointsRequired CallbackAxisPointsAbstract::documentAxesPointsRequire
   return m_documentAxesPointsRequired;
 }
 
+void CallbackAxisPointsAbstract::loadTransforms2 ()
+{
+  // Screen coordinates
+  m_screenInputsTransform = QTransform (m_screenInputs.at(0).x(), m_screenInputs.at(1).x(), m_screenInputs.at(0).x(),
+                                        m_screenInputs.at(0).y(), m_screenInputs.at(0).y(), m_screenInputs.at(1).y(),
+                                        1.0                     , 1.0                     , 1.0                     );
+
+  // Graph coordinates
+  m_graphOutputsTransform = QTransform (0.0, m_graphOutputs.at(1).x(), 0.0                     ,
+                                        0.0, 0.0                     , m_graphOutputs.at(1).x(),
+                                        1.0, 1.0                     , 1.0                     );
+}
+
 void CallbackAxisPointsAbstract::loadTransforms3 ()
 {
   // Screen coordinates
@@ -375,7 +434,9 @@ QTransform CallbackAxisPointsAbstract::matrixScreen () const
 
 unsigned int CallbackAxisPointsAbstract::numberAxisPoints () const
 {
-  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
+  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
+    return m_screenInputs.count();
+  } else if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
     return m_screenInputs.count();
   } else {
     return m_screenInputsX.count() + m_screenInputsY.count();
