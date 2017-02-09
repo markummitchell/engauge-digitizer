@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DLG_EDIT_POINT_AXIS_H
-#define DLG_EDIT_POINT_AXIS_H
+#ifndef DLG_EDIT_POINT_AXIS_NON_MAP_H
+#define DLG_EDIT_POINT_AXIS_NON_MAP_H
 
 #include "DocumentAxesPointsRequired.h"
 #include <QDialog>
@@ -21,24 +21,24 @@ class QDoubleValidator;
 class QVBoxLayout;
 class Transformation;
 
-/// Dialog box for editing the information of one axis point.
-class DlgEditPointAxis : public QDialog
+/// Dialog box for editing the information of one axis point, in a graph with two axes
+class DlgEditPointAxisNonMap : public QDialog
 {
   Q_OBJECT;
 
 public:
   /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
   /// If initial values are unspecified then the value fields will be initially empty
-  DlgEditPointAxis (MainWindow &mainWindow,
-                    const DocumentModelCoords &modelCoords,
-                    const DocumentModelGeneral &modelGeneral,
-                    const MainWindowModel &modelMainWindow,
-                    const Transformation &transformation,
-                    DocumentAxesPointsRequired documentAxesPointsRequired,
-                    bool isXOnly = false,
-                    const double *xInitialValue = 0,
-                    const double *yInitialValue = 0);
-  ~DlgEditPointAxis ();
+  DlgEditPointAxisNonMap (MainWindow &mainWindow,
+                          const DocumentModelCoords &modelCoords,
+                          const DocumentModelGeneral &modelGeneral,
+                          const MainWindowModel &modelMainWindow,
+                          const Transformation &transformation,
+                          DocumentAxesPointsRequired documentAxesPointsRequired,
+                          bool isXOnly = false,
+                          const double *xInitialValue = 0,
+                          const double *yInitialValue = 0);
+  ~DlgEditPointAxisNonMap ();
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
   QPointF posGraph (bool &isXOnly) const;
@@ -75,4 +75,4 @@ private:
   const MainWindowModel &m_modelMainWindow;
 };
 
-#endif // DLG_EDIT_POINT_AXIS_H
+#endif // DLG_EDIT_POINT_AXIS_NON_MAP_H

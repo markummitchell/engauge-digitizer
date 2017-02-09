@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "DlgEditPointAxis.h"
+#include "DlgEditPointAxisNonMap.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorFactory.h"
 #include "DocumentAxesPointsRequired.h"
@@ -35,22 +35,22 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 const bool IS_X_THETA = true;
 const bool IS_NOT_X_THETA = false;
 
-DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
-                                    const DocumentModelCoords &modelCoords,
-                                    const DocumentModelGeneral &modelGeneral,
-                                    const MainWindowModel &modelMainWindow,
-                                    const Transformation &transformation,
-                                    DocumentAxesPointsRequired documentAxesPointsRequired,
-                                    bool isXOnly,
-                                    const double *xInitialValue,
-                                    const double *yInitialValue) :
+DlgEditPointAxisNonMap::DlgEditPointAxisNonMap (MainWindow &mainWindow,
+                                                const DocumentModelCoords &modelCoords,
+                                                const DocumentModelGeneral &modelGeneral,
+                                                const MainWindowModel &modelMainWindow,
+                                                const Transformation &transformation,
+                                                DocumentAxesPointsRequired documentAxesPointsRequired,
+                                                bool isXOnly,
+                                                const double *xInitialValue,
+                                                const double *yInitialValue) :
   QDialog (&mainWindow),
   m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
   m_modelGeneral (modelGeneral),
   m_modelMainWindow (modelMainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::DlgEditPointAxis";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxisNonMap::DlgEditPointAxisNonMap";
 
   // Either one or two coordinates are desired
   bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
@@ -76,12 +76,12 @@ DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
   updateControls ();
 }
 
-DlgEditPointAxis::~DlgEditPointAxis()
+DlgEditPointAxisNonMap::~DlgEditPointAxisNonMap()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::~DlgEditPointAxis";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxisNonMap::~DlgEditPointAxisNonMap";
 }
 
-void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
+void DlgEditPointAxisNonMap::createCoords (QVBoxLayout *layoutOuter)
 {
   // Constraints on x and y are needed for log scaling
   bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
@@ -157,7 +157,7 @@ void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
   layout->addWidget(labelGraphParRight, 0);
 }
 
-void DlgEditPointAxis::createHint (QVBoxLayout *layoutOuter)
+void DlgEditPointAxisNonMap::createHint (QVBoxLayout *layoutOuter)
 {
   // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
   // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
@@ -176,7 +176,7 @@ void DlgEditPointAxis::createHint (QVBoxLayout *layoutOuter)
   layout->addWidget (label);
 }
 
-void DlgEditPointAxis::createOkCancel (QVBoxLayout *layoutOuter)
+void DlgEditPointAxisNonMap::createOkCancel (QVBoxLayout *layoutOuter)
 {
   QWidget *panel = new QWidget (this);
   layoutOuter->addWidget (panel, 0, Qt::AlignCenter);
@@ -193,13 +193,13 @@ void DlgEditPointAxis::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditPointAxis::initializeGraphCoordinates (const double *xInitialValue,
-                                                   const double *yInitialValue,
-                                                   const Transformation &transformation,
-                                                   bool isX,
-                                                   bool isY)
+void DlgEditPointAxisNonMap::initializeGraphCoordinates (const double *xInitialValue,
+                                                         const double *yInitialValue,
+                                                         const Transformation &transformation,
+                                                         bool isX,
+                                                         bool isY)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::initializeGraphCoordinates";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxisNonMap::initializeGraphCoordinates";
 
   QString xTheta, yRadius;
   if ((xInitialValue != 0) &&
@@ -229,22 +229,22 @@ void DlgEditPointAxis::initializeGraphCoordinates (const double *xInitialValue,
   }
 }
 
-bool DlgEditPointAxis::isCartesian () const
+bool DlgEditPointAxisNonMap::isCartesian () const
 {
   return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
 }
 
-QChar DlgEditPointAxis::nameXTheta () const
+QChar DlgEditPointAxisNonMap::nameXTheta () const
 {
   return (isCartesian () ? QChar ('X') : THETA);
 }
 
-QChar DlgEditPointAxis::nameYRadius () const
+QChar DlgEditPointAxisNonMap::nameYRadius () const
 {
   return (isCartesian () ? QChar ('Y') : QChar ('R'));
 }
 
-QPointF DlgEditPointAxis::posGraph (bool &isXOnly) const
+QPointF DlgEditPointAxisNonMap::posGraph (bool &isXOnly) const
 {
   double xTheta, yRadius;
 
@@ -264,12 +264,12 @@ QPointF DlgEditPointAxis::posGraph (bool &isXOnly) const
                   yRadius);
 }
 
-void DlgEditPointAxis::slotTextChanged (const QString &)
+void DlgEditPointAxisNonMap::slotTextChanged (const QString &)
 {
   updateControls ();
 }
 
-QString DlgEditPointAxis::unitsType (bool isXTheta) const
+QString DlgEditPointAxisNonMap::unitsType (bool isXTheta) const
 {
   if (isCartesian ()) {
     if (isXTheta) {
@@ -286,7 +286,7 @@ QString DlgEditPointAxis::unitsType (bool isXTheta) const
   }
 }
 
-void DlgEditPointAxis::updateControls ()
+void DlgEditPointAxisNonMap::updateControls ()
 {
   QString textX = m_editGraphX->text();
   QString textY = m_editGraphY->text();

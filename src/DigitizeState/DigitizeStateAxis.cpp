@@ -9,7 +9,7 @@
 #include "CursorFactory.h"
 #include "DigitizeStateAxis.h"
 #include "DigitizeStateContext.h"
-#include "DlgEditPointAxis.h"
+#include "DlgEditPointAxisNonMap.h"
 #include "Document.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -52,7 +52,7 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
 
   GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
 
-  // Temporary point that user can see while DlgEditPointAxis is active
+  // Temporary point that user can see while DlgEditPointAxisNonMap is active
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
@@ -135,12 +135,12 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
                           posScreen);
 
     // Ask user for coordinates
-    DlgEditPointAxis *dlg = new DlgEditPointAxis (context ().mainWindow (),
-                                                  cmdMediator->document().modelCoords(),
-                                                  cmdMediator->document().modelGeneral(),
-                                                  context().mainWindow().modelMainWindow(),
-                                                  context().mainWindow().transformation(),
-                                                  cmdMediator->document().documentAxesPointsRequired());
+    DlgEditPointAxisNonMap *dlg = new DlgEditPointAxisNonMap (context ().mainWindow (),
+                                                              cmdMediator->document().modelCoords(),
+                                                              cmdMediator->document().modelGeneral(),
+                                                              context().mainWindow().modelMainWindow(),
+                                                              context().mainWindow().transformation(),
+                                                              cmdMediator->document().documentAxesPointsRequired());
     int rtn = dlg->exec ();
 
     bool isXOnly;
