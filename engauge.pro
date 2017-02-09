@@ -170,7 +170,8 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateSegment.h \
     src/DigitizeState/DigitizeStateSelect.h \
     src/Dlg/DlgAbout.h \
-    src/Dlg/DlgEditPointAxis.h \
+    src/Dlg/DlgEditPointAxisMap.h \    
+    src/Dlg/DlgEditPointAxisNonMap.h \
     src/Dlg/DlgEditPointGraph.h \
     src/Dlg/DlgEditPointGraphLineEdit.h \
     src/Dlg/DlgErrorReportAbstractBase.h \    
@@ -491,7 +492,8 @@ SOURCES += \
     src/DigitizeState/DigitizeStateSegment.cpp \
     src/DigitizeState/DigitizeStateSelect.cpp \
     src/Dlg/DlgAbout.cpp \
-    src/Dlg/DlgEditPointAxis.cpp \
+    src/Dlg/DlgEditPointAxisMap.cpp \    
+    src/Dlg/DlgEditPointAxisNonMap.cpp \
     src/Dlg/DlgEditPointGraph.cpp \
     src/Dlg/DlgEditPointGraphLineEdit.cpp \
     src/Dlg/DlgErrorReportAbstractBase.cpp \
