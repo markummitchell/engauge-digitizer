@@ -4239,7 +4239,7 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateAfterCommandStatusBarCoords";
 
   // For some reason, mapFromGlobal(QCursor::pos) differs from event->pos by a little bit. We must compensate for
-  // this so cursor coordinates in status bar match the DlgEditPointAxisNonMap inputs initially. After the mouse moves
+  // this so cursor coordinates in status bar match the DlgEditPointAxis inputs initially. After the mouse moves
   // the problem disappears since event->pos is available and QCursor::pos is no longer needed
   const QPoint HACK_SO_GRAPH_COORDINATE_MATCHES_INPUT (1, 1);
 

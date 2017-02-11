@@ -11,7 +11,7 @@
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateSelect.h"
-#include "DlgEditPointAxisNonMap.h"
+#include "DlgEditPointAxis.h"
 #include "DlgEditPointGraph.h"
 #include "EngaugeAssert.h"
 #include "GraphicsItemsExtractor.h"
@@ -102,15 +102,15 @@ void DigitizeStateSelect::handleContextMenuEventAxis (CmdMediator *cmdMediator,
   double x = posGraphBefore.x();
   double y = posGraphBefore.y();
 
-  DlgEditPointAxisNonMap *dlg = new DlgEditPointAxisNonMap (context().mainWindow(),
-                                                            cmdMediator->document().modelCoords(),
-                                                            cmdMediator->document().modelGeneral(),
-                                                            context().mainWindow().modelMainWindow(),
-                                                            context().mainWindow().transformation(),
-                                                            cmdMediator->document().documentAxesPointsRequired(),
-                                                            isXOnly,
-                                                            &x,
-                                                            &y);
+  DlgEditPointAxis *dlg = new DlgEditPointAxis (context().mainWindow(),
+                                                cmdMediator->document().modelCoords(),
+                                                cmdMediator->document().modelGeneral(),
+                                                context().mainWindow().modelMainWindow(),
+                                                context().mainWindow().transformation(),
+                                                cmdMediator->document().documentAxesPointsRequired(),
+                                                isXOnly,
+                                                &x,
+                                                &y);
   int rtn = dlg->exec ();
 
   QPointF posGraphAfter = dlg->posGraph (isXOnly); // This call returns new values for isXOnly and the graph position

@@ -1,15 +1,15 @@
 /******************************************************************************************************
- * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2017 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CmdAddPointAxis.h"
+#include "CmdAddScale.h"
 #include "CmdMediator.h"
 #include "CursorFactory.h"
-#include "DigitizeStateAxis.h"
+#include "DigitizeStateScale.h"
 #include "DigitizeStateContext.h"
-#include "DlgEditPointAxis.h"
+#include "DlgEditScale.h"
 #include "Document.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -21,38 +21,38 @@
 #include <QMessageBox>
 #include <QTimer>
 
-DigitizeStateAxis::DigitizeStateAxis (DigitizeStateContext &context) :
+DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
 {
 }
 
-DigitizeStateAxis::~DigitizeStateAxis ()
+DigitizeStateScale::~DigitizeStateScale ()
 {
 }
 
-QString DigitizeStateAxis::activeCurve () const
+QString DigitizeStateScale::activeCurve () const
 {
   return AXIS_CURVE_NAME;
 }
 
-void DigitizeStateAxis::begin (CmdMediator *cmdMediator,
+void DigitizeStateScale::begin (CmdMediator *cmdMediator,
                                DigitizeState /* previousState */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::begin";
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
-void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
+void DigitizeStateScale::createTemporaryPoint (CmdMediator *cmdMediator,
                                               const QPointF &posScreen)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::createTemporaryPoint";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::createTemporaryPoint";
 
   GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
 
-  // Temporary point that user can see while DlgEditPointAxis is active
+  // Temporary point that user can see while DlgEditScale is active
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
@@ -64,9 +64,9 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
                                                     point);
 }
 
-QCursor DigitizeStateAxis::cursor(CmdMediator *cmdMediator) const
+QCursor DigitizeStateScale::cursor(CmdMediator *cmdMediator) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::cursor";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::cursor";
 
   CursorFactory cursorFactory;
   QCursor cursor = cursorFactory.generate (cmdMediator->document().modelDigitizeCurve());
@@ -74,60 +74,60 @@ QCursor DigitizeStateAxis::cursor(CmdMediator *cmdMediator) const
   return cursor;
 }
 
-void DigitizeStateAxis::end ()
+void DigitizeStateScale::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::end";
 }
 
-void DigitizeStateAxis::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
-                                                    const QString &pointIdentifier)
+void DigitizeStateScale::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
+                                                     const QString &pointIdentifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventAxis "
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleContextMenuEventAxis "
                               << " point=" << pointIdentifier.toLatin1 ().data ();
 }
 
-void DigitizeStateAxis::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
+void DigitizeStateScale::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
                                                      const QStringList &pointIdentifiers)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleContextMenuEventGraph "
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleContextMenuEventGraph "
                               << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
 }
 
-void DigitizeStateAxis::handleCurveChange(CmdMediator * /* cmdMediator */)
+void DigitizeStateScale::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleCurveChange";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleCurveChange";
 }
 
-void DigitizeStateAxis::handleKeyPress (CmdMediator * /* cmdMediator */,
+void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
                                         Qt::Key key,
                                         bool /* atLeastOneSelectedItem */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleKeyPress"
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
-void DigitizeStateAxis::handleMouseMove (CmdMediator * /* cmdMediator */,
+void DigitizeStateScale::handleMouseMove (CmdMediator * /* cmdMediator */,
                                          QPointF /* posScreen */)
 {
-//  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::handleMouseMove";
+//  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove";
 }
 
-void DigitizeStateAxis::handleMousePress (CmdMediator * /* cmdMediator */,
+void DigitizeStateScale::handleMousePress (CmdMediator * /* cmdMediator */,
                                           QPointF /* posScreen */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleMousePress";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";
 }
 
-void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
+void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
                                             QPointF posScreen)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::handleMouseRelease";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseRelease";
 
   if (context().mainWindow().transformIsDefined()) {
 
     QMessageBox::warning (0,
                           QObject::tr ("Engauge Digitizer"),
-                          QObject::tr ("Three axis points have been defined, and no more are needed or allowed."));
+                          QObject::tr ("Three scale points have been defined, and no more are needed or allowed."));
 
   } else {
 
@@ -135,12 +135,12 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
                           posScreen);
 
     // Ask user for coordinates
-    DlgEditPointAxis *dlg = new DlgEditPointAxis (context ().mainWindow (),
-                                                  cmdMediator->document().modelCoords(),
-                                                  cmdMediator->document().modelGeneral(),
-                                                  context().mainWindow().modelMainWindow(),
-                                                  context().mainWindow().transformation(),
-                                                  cmdMediator->document().documentAxesPointsRequired());
+    DlgEditScale *dlg = new DlgEditScale (context ().mainWindow (),
+                                          cmdMediator->document().modelCoords(),
+                                          cmdMediator->document().modelGeneral(),
+                                          context().mainWindow().modelMainWindow(),
+                                          context().mainWindow().transformation(),
+                                          cmdMediator->document().documentAxesPointsRequired());
     int rtn = dlg->exec ();
 
     bool isXOnly;
@@ -152,7 +152,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 
     if (rtn == QDialog::Accepted) {
 
-      // User wants to add this axis point, but let's perform sanity checks first
+      // User wants to add this scale point, but let's perform sanity checks first
 
       bool isError;
       QString errorMessage;
@@ -174,12 +174,12 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 
         // Create command to add point
         Document &document = cmdMediator->document ();
-        QUndoCommand *cmd = new CmdAddPointAxis (context ().mainWindow(),
-                                                 document,
-                                                 posScreen,
-                                                 posGraph,
-                                                 nextOrdinal,
-                                                 isXOnly);
+        QUndoCommand *cmd = new CmdAddScale (context ().mainWindow(),
+                                             document,
+                                             posScreen,
+                                             posGraph,
+                                             nextOrdinal,
+                                             isXOnly);
         context().appendNewCmd(cmdMediator,
                                cmd);
       }
@@ -187,25 +187,25 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
   }
 }
 
-QString DigitizeStateAxis::state() const
+QString DigitizeStateScale::state() const
 {
-  return "DigitizeStateAxis";
+  return "DigitizeStateScale";
 }
 
-void DigitizeStateAxis::updateAfterPointAddition ()
+void DigitizeStateScale::updateAfterPointAddition ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateAfterPointAddition";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::updateAfterPointAddition";
 }
 
-void DigitizeStateAxis::updateModelDigitizeCurve (CmdMediator *cmdMediator,
+void DigitizeStateScale::updateModelDigitizeCurve (CmdMediator *cmdMediator,
                                                   const DocumentModelDigitizeCurve & /*modelDigitizeCurve */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateModelDigitizeCurve";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::updateModelDigitizeCurve";
 
   setCursor(cmdMediator);
 }
 
-void DigitizeStateAxis::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
+void DigitizeStateScale::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateAxis::updateModelSegments";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::updateModelSegments";
 }

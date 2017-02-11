@@ -1,11 +1,11 @@
 /******************************************************************************************************
- * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2017 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DLG_EDIT_POINT_AXIS_NON_MAP_H
-#define DLG_EDIT_POINT_AXIS_NON_MAP_H
+#ifndef DLG_EDIT_SCALE_H
+#define DLG_EDIT_SCALE_H
 
 #include "DocumentAxesPointsRequired.h"
 #include <QDialog>
@@ -21,24 +21,23 @@ class QDoubleValidator;
 class QVBoxLayout;
 class Transformation;
 
-/// Dialog box for editing the information of one axis point, in a graph with two axes
-class DlgEditPointAxisNonMap : public QDialog
+/// Dialog box for editing the information of the map scale
+class DlgEditScale : public QDialog
 {
   Q_OBJECT;
 
 public:
-  /// Constructor for existing point which already has graph coordinates (which may be changed using this dialog).
-  /// If initial values are unspecified then the value fields will be initially empty
-  DlgEditPointAxisNonMap (MainWindow &mainWindow,
-                          const DocumentModelCoords &modelCoords,
-                          const DocumentModelGeneral &modelGeneral,
-                          const MainWindowModel &modelMainWindow,
-                          const Transformation &transformation,
-                          DocumentAxesPointsRequired documentAxesPointsRequired,
-                          bool isXOnly = false,
-                          const double *xInitialValue = 0,
-                          const double *yInitialValue = 0);
-  ~DlgEditPointAxisNonMap ();
+  /// Single constructor
+  DlgEditScale (MainWindow &mainWindow,
+                const DocumentModelCoords &modelCoords,
+                const DocumentModelGeneral &modelGeneral,
+                const MainWindowModel &modelMainWindow,
+                const Transformation &transformation,
+                DocumentAxesPointsRequired documentAxesPointsRequired,
+                bool isXOnly = false,
+                const double *xInitialValue = 0,
+                const double *yInitialValue = 0);
+  ~DlgEditScale ();
 
   /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
   QPointF posGraph (bool &isXOnly) const;
@@ -75,4 +74,4 @@ private:
   const MainWindowModel &m_modelMainWindow;
 };
 
-#endif // DLG_EDIT_POINT_AXIS_NON_MAP_H
+#endif // DLG_EDIT_SCALE_H

@@ -221,6 +221,21 @@ void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   m_coordSystemContext.addPointsInCurvesGraphs(curvesGraphs);
 }
 
+void Document::addScaleWithGeneratedIdentifier (const QPointF &posScreen,
+                                                const QPointF &posGraph,
+                                                QString &identifier,
+                                                double ordinal,
+                                                bool isXOnly)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addScaleWithGeneratedIdentifier";
+
+  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen,
+                                                           posGraph,
+                                                           identifier,
+                                                           ordinal,
+                                                           isXOnly);
+}
+
 bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::bytesIndicatePreVersion6";

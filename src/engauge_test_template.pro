@@ -64,6 +64,7 @@ HEADERS  += \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
     Cmd/CmdAddPointsGraph.h \
+    Cmd/CmdAddScale.h \
     Cmd/CmdCopy.h \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
@@ -138,13 +139,14 @@ HEADERS  += \
     DigitizeState/DigitizeStateCurve.h \
     DigitizeState/DigitizeStateEmpty.h \
     DigitizeState/DigitizeStatePointMatch.h \
+    DigitizeState/DigitizeStateScale.h \    
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
-    Dlg/DlgEditPointAxisMap.h \    
-    Dlg/DlgEditPointAxisNonMap.h \
+    Dlg/DlgEditPointAxis.h \
     Dlg/DlgEditPointGraph.h \
     Dlg/DlgEditPointGraphLineEdit.h \
+    Dlg/DlgEditScale.h \    
     Dlg/DlgErrorReportAbstractBase.h \
     Dlg/DlgErrorReportLocal.h \    
     Dlg/DlgErrorReportNetworking.h \
@@ -392,6 +394,7 @@ SOURCES += \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
     Cmd/CmdAddPointsGraph.cpp \
+    Cmd/CmdAddScale.cpp \    
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
@@ -463,13 +466,14 @@ SOURCES += \
     DigitizeState/DigitizeStateCurve.cpp \
     DigitizeState/DigitizeStateEmpty.cpp \
     DigitizeState/DigitizeStatePointMatch.cpp \
+    DigitizeState/DigitizeStateScale.cpp \        
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
-    Dlg/DlgEditPointAxisMap.cpp \    
-    Dlg/DlgEditPointAxisNonMap.cpp \
+    Dlg/DlgEditPointAxis.cpp \
     Dlg/DlgEditPointGraph.cpp \
     Dlg/DlgEditPointGraphLineEdit.cpp \
+    Dlg/DlgEditScale.cpp \        
     Dlg/DlgErrorReportAbstractBase.cpp \
     Dlg/DlgErrorReportLocal.cpp \        
     Dlg/DlgErrorReportNetworking.cpp \    
