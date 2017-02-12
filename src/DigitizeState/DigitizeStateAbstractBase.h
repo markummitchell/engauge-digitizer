@@ -30,6 +30,7 @@ enum DigitizeState {
   DIGITIZE_STATE_POINT_MATCH,
   DIGITIZE_STATE_SEGMENT,
   DIGITIZE_STATE_SELECT,
+  DIGITIZE_STATE_SCALE, // Out of order for backwards compatibility with pre-version 10
   NUM_DIGITIZE_STATES
 };
 

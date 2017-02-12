@@ -27,6 +27,7 @@
 #include "DigitColorPicker.xpm"
 #include "DigitCurve.xpm"
 #include "DigitPointMatch.xpm"
+#include "DigitScale.xpm"
 #include "DigitSegment.xpm"
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
@@ -343,6 +344,7 @@ void MainWindow::createActionsDigitize ()
   QPixmap pixmapCurve (DigitCurve_xpm);
   QPixmap pixmapColorPicker (DigitColorPicker_xpm);
   QPixmap pixmapPointMatch (DigitPointMatch_xpm);
+  QPixmap pixmapScale (DigitScale_xpm);
   QPixmap pixmapSegment (DigitSegment_xpm);
   QPixmap pixmapSelect (DigitSelect_xpm);
 
@@ -350,6 +352,7 @@ void MainWindow::createActionsDigitize ()
   QIcon iconCurve (pixmapCurve);
   QIcon iconColorPicker (pixmapColorPicker);
   QIcon iconPointMatch (pixmapPointMatch);
+  QIcon iconScale (pixmapScale);
   QIcon iconSegment (pixmapSegment);
   QIcon iconSelect (pixmapSelect);
 
@@ -371,6 +374,16 @@ void MainWindow::createActionsDigitize ()
                                           "entered. In a graph, three axis points are required to define "
                                           "the graph coordinates."));
   connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
+
+  m_actionDigitizeScale = new QAction (iconScale, tr ("Scale Bar Tool"), this);
+  m_actionDigitizeScale->setShortcut (QKeySequence (tr ("Shift+F8")));
+  m_actionDigitizeScale->setCheckable (true);
+  m_actionDigitizeScale->setStatusTip (tr ("Digitize Scale Bar."));
+  m_actionDigitizeScale->setWhatsThis (tr ("Digitize Scale Bar\n\n"
+                                           "Digitize a scale bar by clicking and dragging. The length of the "
+                                           "scale bar is then entered. In a map, the two endpoints of the scale "
+                                           "bar define the distances in graph coordinates."));
+  connect (m_actionDigitizeScale, SIGNAL (triggered ()), this, SLOT (slotDigitizeScale ()));
 
   m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
   m_actionDigitizeCurve->setShortcut (QKeySequence (tr ("Shift+F4")));
@@ -417,6 +430,7 @@ void MainWindow::createActionsDigitize ()
   m_groupDigitize = new QActionGroup (this);
   m_groupDigitize->addAction (m_actionDigitizeSelect);
   m_groupDigitize->addAction (m_actionDigitizeAxis);
+  m_groupDigitize->addAction (m_actionDigitizeScale);
   m_groupDigitize->addAction (m_actionDigitizeCurve);
   m_groupDigitize->addAction (m_actionDigitizePointMatch);
   m_groupDigitize->addAction (m_actionDigitizeColorPicker);
@@ -1048,6 +1062,7 @@ void MainWindow::createMenus()
   m_menuDigitize = menuBar()->addMenu(tr("Digitize"));
   m_menuDigitize->addAction (m_actionDigitizeSelect);
   m_menuDigitize->addAction (m_actionDigitizeAxis);
+  m_menuDigitize->addAction (m_actionDigitizeScale);
   m_menuDigitize->addAction (m_actionDigitizeCurve);
   m_menuDigitize->addAction (m_actionDigitizePointMatch);
   m_menuDigitize->addAction (m_actionDigitizeColorPicker);
@@ -1252,6 +1267,7 @@ void MainWindow::createToolBars ()
   m_toolDigitize->addAction (m_actionDigitizeSelect);
   m_toolDigitize->insertSeparator (m_actionDigitizeAxis);
   m_toolDigitize->addAction (m_actionDigitizeAxis);
+  m_toolDigitize->addAction (m_actionDigitizeScale);
   m_toolDigitize->insertSeparator (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizeCurve);
   m_toolDigitize->addAction (m_actionDigitizePointMatch);
@@ -2032,6 +2048,7 @@ void MainWindow::loadToolTips()
     // Show tool tips
     m_actionDigitizeSelect->setToolTip (m_actionDigitizeSelect->text());
     m_actionDigitizeAxis->setToolTip (m_actionDigitizeAxis->text());
+    m_actionDigitizeScale->setToolTip (m_actionDigitizeScale->text());
     m_actionDigitizeCurve->setToolTip (m_actionDigitizeCurve->text());
     m_actionDigitizePointMatch->setToolTip (m_actionDigitizePointMatch->text());
     m_actionDigitizeColorPicker->setToolTip (m_actionDigitizeColorPicker->text());
@@ -2046,6 +2063,7 @@ void MainWindow::loadToolTips()
     // Remove any previous tool tips
     m_actionDigitizeSelect->setToolTip ("");
     m_actionDigitizeAxis->setToolTip ("");
+    m_actionDigitizeScale->setToolTip ("");
     m_actionDigitizeCurve->setToolTip ("");
     m_actionDigitizePointMatch->setToolTip ("");
     m_actionDigitizeColorPicker->setToolTip ("");
@@ -2922,6 +2940,17 @@ void MainWindow::slotDigitizePointMatch ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+}
+
+void MainWindow::slotDigitizeScale ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeScale";
+
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_SCALE);
+  m_cmbCurve->setEnabled (false);
+  m_viewPointStyle->setEnabled (false);
+  m_viewSegmentFilter->setEnabled (false);
 }
 
 void MainWindow::slotDigitizeSegment ()
@@ -4337,6 +4366,7 @@ void MainWindow::updateControls ()
   // m_actionEditPasteAsNew and m_actionEditPasteAsNewAdvanced are updated when m_menuEdit is about to be shown
 
   m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeScale->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeColorPicker->setEnabled (!m_currentFile.isEmpty ());
@@ -4403,30 +4433,35 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
       slotDigitizeAxis(); // Call the slot that the setChecked call fails to trigger
       break;
 
-    case  DIGITIZE_STATE_COLOR_PICKER:
+    case DIGITIZE_STATE_COLOR_PICKER:
       m_actionDigitizeColorPicker->setChecked(true);
       slotDigitizeColorPicker(); // Call the slot that the setChecked call fails to trigger
       break;
 
-    case  DIGITIZE_STATE_CURVE:
+    case DIGITIZE_STATE_CURVE:
       m_actionDigitizeCurve->setChecked(true);
       slotDigitizeCurve(); // Call the slot that the setChecked call fails to trigger
       break;
 
-    case  DIGITIZE_STATE_EMPTY:
+    case DIGITIZE_STATE_EMPTY:
       break;
 
-    case  DIGITIZE_STATE_POINT_MATCH:
+    case DIGITIZE_STATE_POINT_MATCH:
       m_actionDigitizePointMatch->setChecked(true);
       slotDigitizePointMatch(); // Call the slot that the setChecked call fails to trigger
       break;
 
-    case  DIGITIZE_STATE_SEGMENT:
+    case DIGITIZE_STATE_SCALE:
+      m_actionDigitizeScale->setChecked(true);
+      slotDigitizeScale(); // Call the slot that the setChecked call fails to trigger
+      break;
+
+    case DIGITIZE_STATE_SEGMENT:
       m_actionDigitizeSegment->setChecked(true);
        slotDigitizeSegment(); // Call the slot that the setChecked call fails to trigger
       break;
 
-    case  DIGITIZE_STATE_SELECT:
+    case DIGITIZE_STATE_SELECT:
       m_actionDigitizeSelect->setChecked(true);
       slotDigitizeSelect(); // Call the slot that the setChecked call fails to trigger
       break;

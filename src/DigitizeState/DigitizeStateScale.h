@@ -11,7 +11,11 @@
 
 class QTimer;
 
-/// Digitizing state for digitizing the scale
+/// Digitizing state for digitizing the scale bar. A scale bar is preferred over an approach using two axis points
+/// and DigitizeStateAxis since:
+/// -# Fewer clicks are involved to move the scale bar. One click and drag moves the scale bar, but two click and drags
+///    would be needed to move two axis points
+/// -# Clicking on a large scale bar is easier than clicking on much smaller axis points
 class DigitizeStateScale : public DigitizeStateAbstractBase
 {
 public:

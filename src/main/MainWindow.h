@@ -244,6 +244,7 @@ private slots:
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
   void slotDigitizePointMatch ();
+  void slotDigitizeScale ();
   void slotDigitizeSegment ();
   void slotDigitizeSelect ();
   void slotEditCopy ();
@@ -475,6 +476,7 @@ private:
   QActionGroup *m_groupDigitize;
   QAction *m_actionDigitizeSelect;
   QAction *m_actionDigitizeAxis;
+  QAction *m_actionDigitizeScale;
   QAction *m_actionDigitizeCurve;
   QAction *m_actionDigitizePointMatch;
   QAction *m_actionDigitizeColorPicker;
