@@ -367,9 +367,9 @@ void MainWindow::createActionsDigitize ()
   m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point Tool"), this);
   m_actionDigitizeAxis->setShortcut (QKeySequence (tr ("Shift+F3")));
   m_actionDigitizeAxis->setCheckable (true);
-  m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points."));
+  m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points for a graph."));
   m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
-                                          "Digitizes an axis point by placing a new point at the cursor "
+                                          "Digitizes an axis point for a graph by placing a new point at the cursor "
                                           "after a mouse click. The coordinates of the axis point are then "
                                           "entered. In a graph, three axis points are required to define "
                                           "the graph coordinates."));
@@ -378,11 +378,12 @@ void MainWindow::createActionsDigitize ()
   m_actionDigitizeScale = new QAction (iconScale, tr ("Scale Bar Tool"), this);
   m_actionDigitizeScale->setShortcut (QKeySequence (tr ("Shift+F8")));
   m_actionDigitizeScale->setCheckable (true);
-  m_actionDigitizeScale->setStatusTip (tr ("Digitize Scale Bar."));
+  m_actionDigitizeScale->setStatusTip (tr ("Digitize scale bar for a map."));
   m_actionDigitizeScale->setWhatsThis (tr ("Digitize Scale Bar\n\n"
-                                           "Digitize a scale bar by clicking and dragging. The length of the "
+                                           "Digitize a scale bar for a map by clicking and dragging. The length of the "
                                            "scale bar is then entered. In a map, the two endpoints of the scale "
-                                           "bar define the distances in graph coordinates."));
+                                           "bar define the distances in graph coordinates.\n\n"
+                                           "Maps must be imported using Import (Advanced)."));
   connect (m_actionDigitizeScale, SIGNAL (triggered ()), this, SLOT (slotDigitizeScale ()));
 
   m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
@@ -1992,7 +1993,13 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
 
     // Start axis mode
     m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
-    slotDigitizeAxis (); // Trigger transition so cursor gets updated immediately
+
+    // Trigger transition so cursor gets updated immediately
+    if (modeMap ()) {
+      slotDigitizeScale ();
+    } else if (modeGraph ()) {
+      slotDigitizeAxis ();
+    }
 
     updateControls ();
   }
@@ -2074,6 +2081,28 @@ void MainWindow::loadToolTips()
     m_viewSegmentFilter->setToolTip ("");
 
   }
+}
+
+bool MainWindow::modeGraph () const
+{
+  bool success = false;
+
+  if (m_cmdMediator != 0) {
+    success = (m_cmdMediator->document().documentAxesPointsRequired() != DOCUMENT_AXES_POINTS_REQUIRED_2);
+  }
+
+  return success;
+}
+
+bool MainWindow::modeMap () const
+{
+  bool success = false;
+
+  if (m_cmdMediator != 0) {
+    success = (m_cmdMediator->document().documentAxesPointsRequired() == DOCUMENT_AXES_POINTS_REQUIRED_2);
+  }
+
+  return success;
 }
 
 bool MainWindow::maybeSave()
@@ -3438,12 +3467,17 @@ void MainWindow::slotMouseMove (QPointF pos)
   // Ignore mouse moves before Document is loaded
   if (m_cmdMediator != 0) {
 
+    QString needMoreText = (modeMap () ?
+                              QObject::tr ("Need scale bar") :
+                              QObject::tr ("Need more axis points"));
+
     // Get status bar coordinates
     QString coordsScreen, coordsGraph, resolutionGraph;
     m_transformation.coordTextForStatusBar (pos,
                                             coordsScreen,
                                             coordsGraph,
-                                            resolutionGraph);
+                                            resolutionGraph,
+                                            needMoreText);
 
     // Update status bar coordinates
     m_statusBar->setCoordinates (coordsScreen,
@@ -4365,8 +4399,8 @@ void MainWindow::updateControls ()
                                   m_scene->selectedItems().count () > 0);
   // m_actionEditPasteAsNew and m_actionEditPasteAsNewAdvanced are updated when m_menuEdit is about to be shown
 
-  m_actionDigitizeAxis->setEnabled (!m_currentFile.isEmpty ());
-  m_actionDigitizeScale->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeAxis->setEnabled (modeGraph ());
+  m_actionDigitizeScale->setEnabled (modeMap ());
   m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeColorPicker->setEnabled (!m_currentFile.isEmpty ());

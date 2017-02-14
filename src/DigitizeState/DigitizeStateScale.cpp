@@ -45,25 +45,6 @@ void DigitizeStateScale::begin (CmdMediator *cmdMediator,
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
-void DigitizeStateScale::createTemporaryPoint (CmdMediator *cmdMediator,
-                                              const QPointF &posScreen)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::createTemporaryPoint";
-
-  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
-
-  // Temporary point that user can see while DlgEditScale is active
-  const Curve &curveAxes = cmdMediator->curveAxes();
-  PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
-  GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
-                                                                    pointStyleAxes,
-                                                                    posScreen,
-                                                                    NULL_GEOMETRY_WINDOW);
-
-  context().mainWindow().scene().addTemporaryPoint (Point::temporaryPointIdentifier(),
-                                                    point);
-}
-
 QCursor DigitizeStateScale::cursor(CmdMediator *cmdMediator) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::cursor";
@@ -127,12 +108,9 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
 
     QMessageBox::warning (0,
                           QObject::tr ("Engauge Digitizer"),
-                          QObject::tr ("Three scale points have been defined, and no more are needed or allowed."));
+                          QObject::tr ("The scale bar has been defined, and another is not needed or allowed."));
 
   } else {
-
-    createTemporaryPoint (cmdMediator,
-                          posScreen);
 
     // Ask user for coordinates
     DlgEditScale *dlg = new DlgEditScale (context ().mainWindow (),

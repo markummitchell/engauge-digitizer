@@ -333,6 +333,7 @@ HEADERS  += \
     src/Point/PointShape.h \
     src/Point/PointStyle.h \
     src/util/QtToString.h \
+    src/Scale/ScaleBar.h \
     src/Segment/Segment.h \
     src/Segment/SegmentFactory.h \
     src/Segment/SegmentLine.h \
@@ -642,6 +643,7 @@ SOURCES += \
     src/Point/PointShape.cpp \
     src/Point/PointStyle.cpp \
     src/util/QtToString.cpp \
+    src/Scale/ScaleBar.cpp \    
     src/Segment/Segment.cpp \
     src/Segment/SegmentFactory.cpp \
     src/Segment/SegmentLine.cpp \
@@ -778,6 +780,7 @@ INCLUDEPATH += src \
                src/Pdf \
                src/Plot \
                src/Point \
+               src/Scale \
                src/Segment \
                src/Settings \
                src/Spline \

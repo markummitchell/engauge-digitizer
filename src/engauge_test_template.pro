@@ -306,6 +306,7 @@ HEADERS  += \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
+    Scale/ScaleBar.h \
     Segment/Segment.h \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
@@ -617,6 +618,7 @@ SOURCES += \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
+    Scale/ScaleBar.cpp \    
     Segment/Segment.cpp \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
