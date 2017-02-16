@@ -11,6 +11,7 @@
 #include "DigitizeStateContext.h"
 #include "DlgEditScale.h"
 #include "Document.h"
+#include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
@@ -20,9 +21,11 @@
 #include <QImage>
 #include <QMessageBox>
 #include <QTimer>
+#include "ScaleBar.h"
 
 DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
-  DigitizeStateAbstractBase (context)
+  DigitizeStateAbstractBase (context),
+  m_scaleBar (0)
 {
 }
 
@@ -36,7 +39,7 @@ QString DigitizeStateScale::activeCurve () const
 }
 
 void DigitizeStateScale::begin (CmdMediator *cmdMediator,
-                               DigitizeState /* previousState */)
+                                DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::begin";
 
@@ -68,7 +71,7 @@ void DigitizeStateScale::handleContextMenuEventAxis (CmdMediator * /* cmdMediato
 }
 
 void DigitizeStateScale::handleContextMenuEventGraph (CmdMediator * /* cmdMediator */,
-                                                     const QStringList &pointIdentifiers)
+                                                      const QStringList &pointIdentifiers)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleContextMenuEventGraph "
                               << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
@@ -80,89 +83,95 @@ void DigitizeStateScale::handleCurveChange(CmdMediator * /* cmdMediator */)
 }
 
 void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
-                                        Qt::Key key,
-                                        bool /* atLeastOneSelectedItem */)
+                                         Qt::Key key,
+                                         bool /* atLeastOneSelectedItem */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 }
 
 void DigitizeStateScale::handleMouseMove (CmdMediator * /* cmdMediator */,
-                                         QPointF /* posScreen */)
+                                          QPointF /* posScreen */)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove";
 }
 
 void DigitizeStateScale::handleMousePress (CmdMediator * /* cmdMediator */,
-                                          QPointF /* posScreen */)
+                                           QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";
+
+  // Create the scale bar
+  m_scaleBar = context().mainWindow().scene().createAndAddScaleBar (posScreen);
 }
 
 void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
-                                            QPointF posScreen)
+                                             QPointF posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseRelease";
 
-  if (context().mainWindow().transformIsDefined()) {
-
-    QMessageBox::warning (0,
-                          QObject::tr ("Engauge Digitizer"),
-                          QObject::tr ("The scale bar has been defined, and another is not needed or allowed."));
-
-  } else {
-
-    // Ask user for coordinates
-    DlgEditScale *dlg = new DlgEditScale (context ().mainWindow (),
-                                          cmdMediator->document().modelCoords(),
-                                          cmdMediator->document().modelGeneral(),
-                                          context().mainWindow().modelMainWindow(),
-                                          context().mainWindow().transformation(),
-                                          cmdMediator->document().documentAxesPointsRequired());
-    int rtn = dlg->exec ();
-
-    bool isXOnly;
-    QPointF posGraph = dlg->posGraph (isXOnly);
-    delete dlg;
-
-    // Remove temporary point
-    context().mainWindow().scene().removePoint(Point::temporaryPointIdentifier ());
-
-    if (rtn == QDialog::Accepted) {
-
-      // User wants to add this scale point, but let's perform sanity checks first
-
-      bool isError;
-      QString errorMessage;
-      int nextOrdinal = cmdMediator->document().nextOrdinalForCurve(AXIS_CURVE_NAME);
-
-      cmdMediator->document().checkAddPointAxis(posScreen,
-                                                posGraph,
-                                                isError,
-                                                errorMessage,
-                                                isXOnly);
-
-      if (isError) {
-
-        QMessageBox::warning (0,
-                              QObject::tr ("Engauge Digitizer"),
-                              errorMessage);
-
-      } else {
-
-        // Create command to add point
-        Document &document = cmdMediator->document ();
-        QUndoCommand *cmd = new CmdAddScale (context ().mainWindow(),
-                                             document,
-                                             posScreen,
-                                             posGraph,
-                                             nextOrdinal,
-                                             isXOnly);
-        context().appendNewCmd(cmdMediator,
-                               cmd);
-      }
-    }
-  }
+//  if (context().mainWindow().transformIsDefined()) {
+//
+//    QMessageBox::warning (0,
+//                          QObject::tr ("Engauge Digitizer"),
+//                          QObject::tr ("The scale bar has been defined, and another is not needed or allowed."));
+//
+//  } else {
+//
+//    // Ask user for coordinates
+//    DlgEditScale *dlg = new DlgEditScale (context ().mainWindow (),
+//                                          cmdMediator->document().modelCoords(),
+//                                          cmdMediator->document().modelGeneral(),
+//                                          context().mainWindow().modelMainWindow(),
+//                                          context().mainWindow().transformation(),
+//                                          cmdMediator->document().documentAxesPointsRequired());
+//    int rtn = dlg->exec ();
+//
+//    bool isXOnly;
+//    QPointF posGraph = dlg->posGraph (isXOnly);
+//    delete dlg;
+//
+//    // Remove temporary point
+//    context().mainWindow().scene().removePoint(Point::temporaryPointIdentifier ());
+//
+//    if (rtn == QDialog::Accepted) {
+//
+//      // User wants to add this scale point, but let's perform sanity checks first
+//
+//      bool isError;
+//      QString errorMessage;
+//      int nextOrdinal = cmdMediator->document().nextOrdinalForCurve(AXIS_CURVE_NAME);
+//
+//      cmdMediator->document().checkAddPointAxis(posScreen,
+//                                                posGraph,
+//                                                isError,
+//                                                errorMessage,
+//                                                isXOnly);
+//
+//      if (isError) {
+//
+//        QMessageBox::warning (0,
+//                              QObject::tr ("Engauge Digitizer"),
+//                              errorMessage);
+//
+//      } else {
+//
+//        // Create command to add point
+//        Document &document = cmdMediator->document ();
+//        QUndoCommand *cmd = new CmdAddScale (context ().mainWindow(),
+//                                             document,
+//                                             posScreen,
+//                                             posGraph,
+//                                             nextOrdinal,
+//                                             isXOnly);
+//        context().appendNewCmd(cmdMediator,
+//                               cmd);
+//      }
+//    }
+//  }
+//
+//  // TODO - deallocate the scale bar here even though it lives on in the scene
+//  ENGAUGE_ASSERT (m_scaleBar == 0);
 }
 
 QString DigitizeStateScale::state() const

@@ -10,6 +10,7 @@
 /// Z values for ordering of the various graphics layers, with background at the bottom
 extern const int Z_VALUE_BACKGROUND;
 extern const int Z_VALUE_CURVE;
+extern const int Z_VALUE_CURVE_ENDPOINT;
 extern const int Z_VALUE_GRID;
 extern const int Z_VALUE_POINT;
 

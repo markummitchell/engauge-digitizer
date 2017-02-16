@@ -4,30 +4,26 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef SCALE_BAR_H
-#define SCALE_BAR_H
+#ifndef SCALE_ENDPOINT_H
+#define SCALE_ENDPOINT_H
 
-#include <QGraphicsLineItem>
+#include <QGraphicsEllipseItem>
 
 class QGraphicsScene;
 class QPointF;
-class ScaleEndpoint;
 
-/// Scale bar that is defined as the line segment between two endpoints that are placed at the two ends of a
-/// maps scale bar. The scale bar can be edited to set the scale bar length in graph coordinates
-class ScaleBar : public QGraphicsLineItem
+/// Scale bar endpoint that is implemented as a circle that can be selected and dragged
+class ScaleEndpoint : public QGraphicsEllipseItem
 {
 public:
   /// Single constructor.
-  ScaleBar(QGraphicsScene &scene,
-           const QPointF &posScreen);
-  ~ScaleBar();
+  ScaleEndpoint(QGraphicsScene &scene,
+                QGraphicsItem *parent,
+                const QPointF &posScreen);
+  ~ScaleEndpoint();
 
 private:
-  ScaleBar();
-
-  ScaleEndpoint *m_endpoint1;
-  ScaleEndpoint *m_endpoint2;
+  ScaleEndpoint();
 };
 
-#endif // SCALE_BAR_H
+#endif // SCALE_ENDPOINT_H

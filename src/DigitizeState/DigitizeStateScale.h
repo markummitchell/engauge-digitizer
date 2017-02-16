@@ -10,6 +10,7 @@
 #include "DigitizeStateAbstractBase.h"
 
 class QTimer;
+class ScaleBar;
 
 /// Digitizing state for creating the scale bar. A scale bar is preferred over an approach using two axis points
 /// and DigitizeStateAxis since:
@@ -52,6 +53,7 @@ public:
 private:
   DigitizeStateScale();
 
+  ScaleBar *m_scaleBar;
 };
 
 #endif // DIGITIZE_STATE_SCALE_H

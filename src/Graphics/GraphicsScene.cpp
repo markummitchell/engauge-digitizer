@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include "QtToString.h"
+#include "ScaleBar.h"
 #include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
@@ -40,6 +41,16 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                      identifier,
                                      Point::UNDEFINED_ORDINAL (),
                                      *point);
+}
+
+ScaleBar *GraphicsScene::createAndAddScaleBar (const QPointF &posScreen)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createAndAddScaleBar";
+
+  ScaleBar *scaleBar = new ScaleBar (*this,
+                                     posScreen);
+
+  return scaleBar;
 }
 
 GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,

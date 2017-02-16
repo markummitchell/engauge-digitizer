@@ -8,5 +8,5 @@
 
 const int Z_VALUE_BACKGROUND = 0;
 const int Z_VALUE_CURVE = 200;
+const int Z_VALUE_CURVE_ENDPOINT = 201;
 const int Z_VALUE_POINT = 300;
-
