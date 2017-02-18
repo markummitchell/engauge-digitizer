@@ -8,23 +8,21 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Logger.h"
-#include <QGraphicsScene>
+#include <QPen>
 #include <QPointF>
 #include "ScaleEndpoint.h"
 #include "ZValues.h"
 
-ScaleEndpoint::ScaleEndpoint(QGraphicsScene  &scene,
-                             QGraphicsItem *parent,
+ScaleEndpoint::ScaleEndpoint(QGraphicsItem *parent,
                              const QPointF &posScreen) :
-  QGraphicsEllipseItem (parent)
+  QGraphicsEllipseItem (parent) // This registers with the QGraphicsScene so addItem is not needed
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleEndpoint::ScaleEndpoint";
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_SCALE_ENDPOINT));
 
   // Make this transparent now, but always visible so hover events work
-  scene.addItem (this);
-  setPen (QPen (Qt::transparent));
+  setPen (QPen (Qt::black));
   setZValue (Z_VALUE_CURVE_ENDPOINT);
   setVisible (true);
   setAcceptHoverEvents (true);

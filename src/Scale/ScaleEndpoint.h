@@ -9,7 +9,6 @@
 
 #include <QGraphicsEllipseItem>
 
-class QGraphicsScene;
 class QPointF;
 
 /// Scale bar endpoint that is implemented as a circle that can be selected and dragged
@@ -17,8 +16,7 @@ class ScaleEndpoint : public QGraphicsEllipseItem
 {
 public:
   /// Single constructor.
-  ScaleEndpoint(QGraphicsScene &scene,
-                QGraphicsItem *parent,
+  ScaleEndpoint(QGraphicsItem *parent,
                 const QPointF &posScreen);
   ~ScaleEndpoint();
 
