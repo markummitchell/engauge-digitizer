@@ -20,7 +20,10 @@ environment:
       RESULTDIR: engauge-build-debug
 
 install:
-  - set QTDIR=C:\Qt\5.7\msvc2013
+  - set QTDIR=C:\Qt\5.8\msvc2013
+  - dir C:\Qt\
+  - dir C:\Qt\5.8\
+  - dir C:\Qt\5.8\msvc2013\bin
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - 7z x %APPVEYOR_BUILD_FOLDER%\%LOG4CPPFILE% -aoa
