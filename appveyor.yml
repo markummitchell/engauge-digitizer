@@ -1,6 +1,5 @@
-environment:
-  os: Visual Studio 2015
-  platform: x86
+init:
+  - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat x86
   
   global:
       QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
