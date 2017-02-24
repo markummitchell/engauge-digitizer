@@ -1,7 +1,7 @@
-init:
-  - C:\"Program Files (x86)"\"Microsoft Visual Studio 12.0"\VC\vcvarsall.bat x86
-
 environment:
+  os: Visual Studio 2015
+  platform: x86
+  
   global:
       QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
       QTLIBS: Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
@@ -9,18 +9,18 @@ environment:
   matrix:
     - ENGAUGE_RELEASE: 1
       ENGAUGE_CONFIG: "pdf"
-      VCLIBS: MSVCP120.DLL MSVCR120.DLL
+      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
       LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-1.1.1.zip'
       POPPLERQT5FILE: 'dev\windows\appveyor\poppler-qt5-0.48.0.zip'
       RESULTDIR: engauge-build
     - ENGAUGE_CONFIG: "debug pdf"
-      VCLIBS: MSVCP120D.DLL MSVCR120D.DLL
+      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll 
       LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-debug-1.1.1.zip'
       POPPLERQT5FILE: 'dev\windows\appveyor\poppler-qt5-debug-0.48.0.zip'
       RESULTDIR: engauge-build-debug
 
 install:
-  - set QTDIR=C:\Qt\5.8\msvc2013
+  - set QTDIR=C:\Qt\5.8\msvc2015
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - 7z x %APPVEYOR_BUILD_FOLDER%\%LOG4CPPFILE% -aoa
