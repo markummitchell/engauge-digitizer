@@ -1,6 +1,7 @@
 init:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat x86
-  
+
+environment:
   global:
       QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
       QTLIBS: Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
