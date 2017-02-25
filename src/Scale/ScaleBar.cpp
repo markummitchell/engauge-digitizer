@@ -34,16 +34,25 @@ ScaleBar::ScaleBar(QGraphicsScene  &scene,
   setLine (QLineF (posScreen,
                    posScreen));
 
-  m_endpoint1 = new ScaleEndpoint (this,
+  m_endpoint1 = new ScaleEndpoint (*this,
                                    posScreen);
-  m_endpoint2 = new ScaleEndpoint (this,
+  m_endpoint2 = new ScaleEndpoint (*this,
                                    posScreen);
-
-  // Make the second endpoint follow the cursor
-  m_endpoint2->setSelected (true);
 }
 
 ScaleBar::~ScaleBar ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleBar::~ScaleBar";
+}
+
+void ScaleBar::handleEndpointMove ()
+{
+  setLine (QLineF (m_endpoint1->pos (),
+                   m_endpoint2->pos ()));
+}
+
+void ScaleBar::selectEndpoint2 ()
+{
+  // Make the second endpoint follow the cursor
+  m_endpoint2->setSelected (true);
 }

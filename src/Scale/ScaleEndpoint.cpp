@@ -5,17 +5,21 @@
  ******************************************************************************************************/
 
 #include "DataKey.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Logger.h"
+#include <QGraphicsSceneEvent>
 #include <QPen>
 #include <QPointF>
+#include "ScaleBar.h"
 #include "ScaleEndpoint.h"
 #include "ZValues.h"
 
-ScaleEndpoint::ScaleEndpoint(QGraphicsItem *parent,
+ScaleEndpoint::ScaleEndpoint(ScaleBar &scaleBar,
                              const QPointF &posScreen) :
-  QGraphicsEllipseItem (parent) // This registers with the QGraphicsScene so addItem is not needed
+  QGraphicsEllipseItem (&scaleBar), // This registers with the QGraphicsScene so addItem is not needed
+  m_scaleBar (scaleBar)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleEndpoint::ScaleEndpoint";
 
@@ -26,11 +30,19 @@ ScaleEndpoint::ScaleEndpoint(QGraphicsItem *parent,
   setZValue (Z_VALUE_CURVE_ENDPOINT);
   setVisible (true);
   setAcceptHoverEvents (true);
-  setFlags (QGraphicsItem::ItemIsFocusable);
+  setFlags (QGraphicsItem::ItemIsFocusable |
+            QGraphicsItem::ItemIsSelectable |
+            QGraphicsItem::ItemIsMovable);
   setPos (posScreen);
 }
 
 ScaleEndpoint::~ScaleEndpoint ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleEndpoint::~ScaleEndpoint";
+}
+
+void ScaleEndpoint::mouseMoveEvent (QGraphicsSceneMouseEvent * /* event */)
+{
+  // Forward to the scale bar
+  m_scaleBar.handleEndpointMove ();
 }

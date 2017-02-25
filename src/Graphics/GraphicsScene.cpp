@@ -50,6 +50,8 @@ ScaleBar *GraphicsScene::createAndAddScaleBar (const QPointF &posScreen)
   ScaleBar *scaleBar = new ScaleBar (*this,
                                      posScreen);
 
+  scaleBar->selectEndpoint2 (); // Call after constructor has completed
+
   return scaleBar;
 }
 
