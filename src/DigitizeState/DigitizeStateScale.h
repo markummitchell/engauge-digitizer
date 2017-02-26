@@ -8,8 +8,9 @@
 #define DIGITIZE_STATE_SCALE_H
 
 #include "DigitizeStateAbstractBase.h"
+#include <QObject>
 
-class QTimer;
+class QPointF;
 class ScaleBar;
 
 /// Digitizing state for creating the scale bar. A scale bar is preferred over an approach using two axis points
@@ -18,7 +19,7 @@ class ScaleBar;
 ///    drag operations would be needed to move two axis points
 /// -# Clicking on a large scale bar is easier than clicking on much smaller axis points
 /// -# DigitizeStateAxis solution would have a line, representing the scale bar, that would be unselectable - confusing to users
-class DigitizeStateScale : public DigitizeStateAbstractBase
+class DigitizeStateScale : public QObject, public DigitizeStateAbstractBase
 {
 public:
   /// Single constructor.
@@ -53,7 +54,13 @@ public:
 private:
   DigitizeStateScale();
 
+  enum Substate {
+    SUBSTATE_NOMINAL,
+    SUBSTATE_MOVING_SECOND_ENDPOINT
+  };
+
   ScaleBar *m_scaleBar;
+  Substate m_substate; // Simple two-state state machine for remembering when mouse move events control second endpoint
 };
 
 #endif // DIGITIZE_STATE_SCALE_H

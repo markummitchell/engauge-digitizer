@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "DataKey.h"
+#include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Logger.h"
@@ -47,12 +48,22 @@ ScaleBar::~ScaleBar ()
 
 void ScaleBar::handleEndpointMove ()
 {
-  setLine (QLineF (m_endpoint1->pos (),
-                   m_endpoint2->pos ()));
+  setLine (QLineF (m_endpoint1->pos ().x () + m_endpoint1->boundingRect ().size ().width () / 2,
+                   m_endpoint1->pos ().y () + m_endpoint1->boundingRect ().size ().height () / 2,
+                   m_endpoint2->pos ().x () + m_endpoint2->boundingRect ().size ().width () / 2,
+                   m_endpoint2->pos ().y () + m_endpoint2->boundingRect ().size ().height ()/ 2));
 }
 
-void ScaleBar::selectEndpoint2 ()
+void ScaleBar::moveSecondEndpointDuringCreation (const QPointF &posScreen)
 {
-  // Make the second endpoint follow the cursor
+  ENGAUGE_CHECK_PTR (m_endpoint2);
+
+  m_endpoint2->setEndpointPosition (posScreen);
+}
+
+void ScaleBar::selectAnEndpointAfterCreation ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleBar::selectAnEndpointAfterCreation";
+
   m_endpoint2->setSelected (true);
 }

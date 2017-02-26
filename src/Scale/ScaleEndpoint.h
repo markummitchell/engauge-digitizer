@@ -24,6 +24,9 @@ public:
   /// Catch mouse move event to move scale bar in sync with this endpoint
   virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
 
+  /// Set endpoint position relative to scale bar parent, for the specified absolute screen position
+  void setEndpointPosition (const QPointF &posScreen);
+
 private:
   ScaleEndpoint();
 

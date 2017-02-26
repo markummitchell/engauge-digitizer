@@ -18,14 +18,13 @@
 #include "MainWindow.h"
 #include "PointStyle.h"
 #include <QCursor>
-#include <QImage>
 #include <QMessageBox>
-#include <QTimer>
 #include "ScaleBar.h"
 
 DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
-  m_scaleBar (0)
+  m_scaleBar (0),
+  m_substate (SUBSTATE_NOMINAL)
 {
 }
 
@@ -91,9 +90,15 @@ void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
 }
 
 void DigitizeStateScale::handleMouseMove (CmdMediator * /* cmdMediator */,
-                                          QPointF /* posScreen */)
+                                          QPointF posScreen)
 {
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove";
+
+  if ((m_scaleBar != 0) &&
+      (m_substate == SUBSTATE_MOVING_SECOND_ENDPOINT)) {
+
+    m_scaleBar->moveSecondEndpointDuringCreation (posScreen);
+  }
 }
 
 void DigitizeStateScale::handleMousePress (CmdMediator * /* cmdMediator */,
@@ -101,8 +106,15 @@ void DigitizeStateScale::handleMousePress (CmdMediator * /* cmdMediator */,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";
 
-  // Create the scale bar
+  // Create the scale bar to give the user immediate feedback that something was created
   m_scaleBar = context().mainWindow().scene().createAndAddScaleBar (posScreen);
+
+  // Attempts to select an endpoint right here, or after an super short timer interval
+  // failed. That would have been nice for having the click create the scale bar and, while
+  // the mouse was still pressed, selecting an endpoint thus allowing a single click-and-drag to
+  // create the scale bar. We fall back to the less elegant solution (which the user will never
+  // notice) of capturing mouse move events and using those to move an endpoint
+  m_substate = SUBSTATE_MOVING_SECOND_ENDPOINT;
 }
 
 void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
@@ -110,6 +122,7 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseRelease";
 
+  m_substate = SUBSTATE_NOMINAL;
 //  if (context().mainWindow().transformIsDefined()) {
 //
 //    QMessageBox::warning (0,

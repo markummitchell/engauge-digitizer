@@ -16,24 +16,35 @@
 #include "ScaleEndpoint.h"
 #include "ZValues.h"
 
+const int WIDTH = 16;
+const int HEIGHT = 16;
+
 ScaleEndpoint::ScaleEndpoint(ScaleBar &scaleBar,
                              const QPointF &posScreen) :
   QGraphicsEllipseItem (&scaleBar), // This registers with the QGraphicsScene so addItem is not needed
   m_scaleBar (scaleBar)
 {
+  const int DUMMY_X = 0, DUMMY_Y = 0; // Values that are immediately overwritten
+
   LOG4CPP_DEBUG_S ((*mainCat)) << "ScaleEndpoint::ScaleEndpoint";
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_SCALE_ENDPOINT));
 
   // Make this transparent now, but always visible so hover events work
   setPen (QPen (Qt::black));
+  setBrush (QBrush (Qt::transparent)); // See through approach lets boundary be seen inside the endpoint for better alignment
   setZValue (Z_VALUE_CURVE_ENDPOINT);
   setVisible (true);
   setAcceptHoverEvents (true);
   setFlags (QGraphicsItem::ItemIsFocusable |
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable);
-  setPos (posScreen);
+
+  setRect (DUMMY_X,
+           DUMMY_Y,
+           WIDTH,
+           HEIGHT);
+  setEndpointPosition (posScreen);
 }
 
 ScaleEndpoint::~ScaleEndpoint ()
@@ -45,4 +56,12 @@ void ScaleEndpoint::mouseMoveEvent (QGraphicsSceneMouseEvent * /* event */)
 {
   // Forward to the scale bar
   m_scaleBar.handleEndpointMove ();
+}
+
+void ScaleEndpoint::setEndpointPosition (const QPointF &posScreen)
+{
+  ENGAUGE_CHECK_PTR (parentItem ());
+
+  setPos (posScreen.x () - parentItem ()->scenePos ().x () - WIDTH / 2,
+          posScreen.y () - parentItem ()->scenePos ().y () - HEIGHT / 2);
 }

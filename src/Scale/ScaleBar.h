@@ -26,9 +26,12 @@ public:
   /// Update the two ends of the scale bar line segment to be consistent with the endpoints of one endpoint was moved
   void handleEndpointMove ();
 
-  /// Select second endpoint so it will be moved along with the cursor. The code in this method does not seem to
-  /// work when called from the constructor so this is called after construction is completed
-  void selectEndpoint2 ();
+  /// During creation, while mouse is still pressed, we move one endpoint (arbitrarily the second)
+  void moveSecondEndpointDuringCreation (const QPointF &posScreen);
+
+  /// Select an endpoint immediately after the scale bar has been created. This is called after a timer delay so
+  /// the stack is clean (=no event handling other than the timer=done with scale bar creation and registration)
+  void selectAnEndpointAfterCreation ();
 
 private:
   ScaleBar();
