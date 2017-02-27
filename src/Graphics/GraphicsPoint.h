@@ -96,6 +96,9 @@ public:
   /// Update the position
   void setPos (const QPointF pos);
 
+  /// Prevent automatic focus on point (=make it passive) for scale bar so drags can be made to work properly
+  void setPassive ();
+
   /// Mark point as wanted. Marking as unwanted is done by the reset function
   void setWanted ();
 

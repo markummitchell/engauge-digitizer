@@ -55,9 +55,10 @@ public:
 private:
   DigitizeStateScale();
 
-  QString temporaryPointIdentifierSecond () const;
   void updateLineGeometry ();
 
+  QString m_pointIdentifier0;
+  QString m_pointIdentifier1;
   GraphicsPoint *m_temporaryPoint0;
   GraphicsPoint *m_temporaryPoint1;
 

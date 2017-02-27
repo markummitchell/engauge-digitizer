@@ -22,6 +22,7 @@
 #include <QGraphicsLineItem>
 #include <QMessageBox>
 #include "QtToString.h"
+#include "ZValues.h"
 
 DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
@@ -117,27 +118,34 @@ void DigitizeStateScale::handleMousePress (CmdMediator *cmdMediator,
   // Create the scale bar to give the user immediate feedback that something was created
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
-  QString pointIdentifier0 = Point::temporaryPointIdentifier();
-  QString pointIdentifier1 = temporaryPointIdentifierSecond();
-  m_temporaryPoint0 = context().mainWindow().scene().createPoint(pointIdentifier0,
+  m_pointIdentifier0 = Point::temporaryPointIdentifier();
+  m_pointIdentifier1 = m_pointIdentifier0 + "b";
+  m_temporaryPoint0 = context().mainWindow().scene().createPoint(m_pointIdentifier0,
                                                                  pointStyleAxes,
                                                                  posScreen,
                                                                  NULL_GEOMETRY_WINDOW);
-  m_temporaryPoint1 = context().mainWindow().scene().createPoint(pointIdentifier1,
+  m_temporaryPoint1 = context().mainWindow().scene().createPoint(m_pointIdentifier1,
                                                                  pointStyleAxes,
                                                                  posScreen,
                                                                  NULL_GEOMETRY_WINDOW);
 
+  // Subtle stuff happening here. GraphicsPoints by default can receive focus for clicking/dragging,
+  // but for some reason that was causing the dragged second endpoint to jump to the origin the Nth
+  // time that a scale bar was created, for every N>1. So we make the endpoint passive and update
+  // its position manually in handleMouseMove
+  m_temporaryPoint0->setPassive ();
+  m_temporaryPoint1->setPassive ();
+
   context().mainWindow().scene().addTemporaryScaleBar (m_temporaryPoint0,
                                                        m_temporaryPoint1,
-                                                       pointIdentifier0,
-                                                       pointIdentifier1);
+                                                       m_pointIdentifier0,
+                                                       m_pointIdentifier1);
 
   m_line = new QGraphicsLineItem;
   context().mainWindow().scene().addItem (m_line);
   m_line->setPen (QColor (Qt::red));
-  m_line->setZValue (1000);
-  m_line->setEnabled (true);
+  m_line->setZValue (Z_VALUE_CURVE);
+  m_line->setVisible (true);
 
   updateLineGeometry ();
 
@@ -154,8 +162,8 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator * /* cmdMediator */,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseRelease";
 
   // Remove temporary points
-  context().mainWindow().scene().removePoint (Point::temporaryPointIdentifier ()); // Deallocates GraphicsPoint automatically
-  context().mainWindow().scene().removePoint (temporaryPointIdentifierSecond ()); // Deallocates GraphicsPoint automaticall
+  context().mainWindow().scene().removePoint (m_pointIdentifier0); // Deallocates GraphicsPoint automatically
+  context().mainWindow().scene().removePoint (m_pointIdentifier1); // Deallocates GraphicsPoint automaticall
   context().mainWindow().scene().removeItem (m_line);
   delete m_line;
   m_temporaryPoint0 = 0;
@@ -229,11 +237,6 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator * /* cmdMediator */,
 QString DigitizeStateScale::state() const
 {
   return "DigitizeStateScale";
-}
-
-QString DigitizeStateScale::temporaryPointIdentifierSecond () const
-{
-  return Point::temporaryPointIdentifier () + "Second";
 }
 
 void DigitizeStateScale::updateAfterPointAddition ()
