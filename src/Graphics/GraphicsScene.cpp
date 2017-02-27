@@ -23,7 +23,6 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include "QtToString.h"
-#include "ScaleBar.h"
 #include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
@@ -43,14 +42,23 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                      *point);
 }
 
-ScaleBar *GraphicsScene::createAndAddScaleBar (const QPointF &posScreen)
+void GraphicsScene::addTemporaryScaleBar (GraphicsPoint *point0,
+                                          GraphicsPoint *point1,
+                                          const QString &pointIdentifier0,
+                                          const QString &pointIdentifier1)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::createAndAddScaleBar";
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addTemporaryScaleBar";
 
-  ScaleBar *scaleBar = new ScaleBar (*this,
-                                     posScreen);
+  const double ORDINAL_0 = 0, ORDINAL_1 = 1;
 
-  return scaleBar;
+  m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
+                                     pointIdentifier0,
+                                     ORDINAL_0,
+                                     *point0);
+  m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
+                                     pointIdentifier1,
+                                     ORDINAL_1,
+                                     *point1);
 }
 
 GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
@@ -181,6 +189,11 @@ void GraphicsScene::removeTemporaryPointIfExists ()
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removeTemporaryPointIfExists";
 
   m_graphicsLinesForCurves.removeTemporaryPointIfExists ();
+}
+
+void GraphicsScene::removeTemporaryScaleBarIfExists ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removeTemporaryScaleBarIfExists";
 }
 
 void GraphicsScene::resetOnLoad()

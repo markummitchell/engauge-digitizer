@@ -306,8 +306,6 @@ HEADERS  += \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
-    Scale/ScaleBar.h \
-    Scale/ScaleEndpoint.h \    
     Segment/Segment.h \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
@@ -619,8 +617,6 @@ SOURCES += \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
-    Scale/ScaleBar.cpp \
-    Scale/ScaleEndpoint.cpp \
     Segment/Segment.cpp \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
@@ -718,7 +714,6 @@ INCLUDEPATH += Background \
                Pdf \
                Plot \
                Point \
-               Scale \
                Segment \
                Settings \
                Spline \

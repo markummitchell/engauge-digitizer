@@ -10,6 +10,7 @@
 #include "GraphicsPointAbstractBase.h"
 #include <QColor>
 #include <QPointF>
+#include <QRectF>
 
 extern const double DEFAULT_HIGHLIGHT_OPACITY;
 extern const double MAX_OPACITY;
@@ -62,6 +63,9 @@ public:
 
   /// Destructor. This remove the graphics item from the scene
   ~GraphicsPoint ();
+
+  /// Proxy method for QGraphicsItem::boundingRect
+  QRectF boundingRect () const;
 
   /// Proxy method for QGraphicsItem::data
   QVariant data (int key) const;

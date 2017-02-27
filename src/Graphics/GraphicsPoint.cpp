@@ -110,6 +110,15 @@ GraphicsPoint::~GraphicsPoint()
   }
 }
 
+QRectF GraphicsPoint::boundingRect () const
+{
+  if (m_graphicsItemEllipse == 0) {
+    return m_graphicsItemPolygon->boundingRect ();
+  } else {
+    return m_graphicsItemEllipse->boundingRect ();
+  }
+}
+
 void GraphicsPoint::createPointEllipse (unsigned int radius)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";

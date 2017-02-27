@@ -10,8 +10,9 @@
 #include "DigitizeStateAbstractBase.h"
 #include <QObject>
 
+class GraphicsPoint;
+class QGraphicsLineItem;
 class QPointF;
-class ScaleBar;
 
 /// Digitizing state for creating the scale bar. A scale bar is preferred over an approach using two axis points
 /// and DigitizeStateAxis since:
@@ -54,13 +55,13 @@ public:
 private:
   DigitizeStateScale();
 
-  enum Substate {
-    SUBSTATE_NOMINAL,
-    SUBSTATE_MOVING_SECOND_ENDPOINT
-  };
+  QString temporaryPointIdentifierSecond () const;
+  void updateLineGeometry ();
 
-  ScaleBar *m_scaleBar;
-  Substate m_substate; // Simple two-state state machine for remembering when mouse move events control second endpoint
+  GraphicsPoint *m_temporaryPoint0;
+  GraphicsPoint *m_temporaryPoint1;
+
+  QGraphicsLineItem *m_line;
 };
 
 #endif // DIGITIZE_STATE_SCALE_H

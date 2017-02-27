@@ -12,6 +12,7 @@
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "CurveStyle.h"
 #include "CurveStyles.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -22,6 +23,7 @@
 #include "Logger.h"
 #include "OrdinalGenerator.h"
 #include "Point.h"
+#include "PointStyle.h"
 #include <QByteArray>
 #include <QDataStream>
 #include <QDebug>
@@ -881,6 +883,36 @@ void Document::setDocumentAxesPointsRequired(DocumentAxesPointsRequired document
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setDocumentAxesPointsRequired";
 
   m_documentAxesPointsRequired = documentAxesPointsRequired;
+
+  if (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
+
+    const int DEFAULT_WIDTH = 1;
+
+    // Axis style for scale bar is better with transparent-filled circles so user can more accurately place them,
+    // and a visible line between the points also helps to make the points more visible
+    CurveStyles curveStyles = modelCurveStyles ();
+
+    CurveStyle curveStyle  = curveStyles.curveStyle (AXIS_CURVE_NAME);
+
+    PointStyle pointStyle = curveStyle.pointStyle ();
+    pointStyle.setShape (POINT_SHAPE_CIRCLE);
+    pointStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+    LineStyle lineStyle = curveStyle.lineStyle ();
+    lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
+    lineStyle.setWidth (DEFAULT_WIDTH);
+    lineStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+    curveStyle.setPointStyle (pointStyle);
+    curveStyle.setLineStyle (lineStyle);
+
+    curveStyles.setCurveStyle (AXIS_CURVE_NAME,
+                               curveStyle);
+
+    // Save into Document
+    setModelCurveStyles (curveStyles);
+
+  }
 }
 
 void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)

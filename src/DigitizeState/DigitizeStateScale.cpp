@@ -12,19 +12,22 @@
 #include "DlgEditScale.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
+#include "GraphicsPoint.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "PointStyle.h"
 #include <QCursor>
+#include <QGraphicsLineItem>
 #include <QMessageBox>
-#include "ScaleBar.h"
+#include "QtToString.h"
 
 DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
-  m_scaleBar (0),
-  m_substate (SUBSTATE_NOMINAL)
+  m_temporaryPoint0 (0),
+  m_temporaryPoint1 (0),
+  m_line (0)
 {
 }
 
@@ -92,37 +95,73 @@ void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
 void DigitizeStateScale::handleMouseMove (CmdMediator * /* cmdMediator */,
                                           QPointF posScreen)
 {
-//  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove";
+  if (m_temporaryPoint1 != 0) {
 
-  if ((m_scaleBar != 0) &&
-      (m_substate == SUBSTATE_MOVING_SECOND_ENDPOINT)) {
+    LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove"
+                                 << " oldPos=" << QPointFToString (m_temporaryPoint1->pos ()).toLatin1().data()
+                                 << " newPos=" << QPointFToString (posScreen).toLatin1().data();
 
-    m_scaleBar->moveSecondEndpointDuringCreation (posScreen);
+    m_temporaryPoint1->setPos (posScreen);
+
+    updateLineGeometry();
   }
 }
 
-void DigitizeStateScale::handleMousePress (CmdMediator * /* cmdMediator */,
+void DigitizeStateScale::handleMousePress (CmdMediator *cmdMediator,
                                            QPointF posScreen)
-{
+{ 
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";
 
+  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+
   // Create the scale bar to give the user immediate feedback that something was created
-  m_scaleBar = context().mainWindow().scene().createAndAddScaleBar (posScreen);
+  const Curve &curveAxes = cmdMediator->curveAxes();
+  PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
+  QString pointIdentifier0 = Point::temporaryPointIdentifier();
+  QString pointIdentifier1 = temporaryPointIdentifierSecond();
+  m_temporaryPoint0 = context().mainWindow().scene().createPoint(pointIdentifier0,
+                                                                 pointStyleAxes,
+                                                                 posScreen,
+                                                                 NULL_GEOMETRY_WINDOW);
+  m_temporaryPoint1 = context().mainWindow().scene().createPoint(pointIdentifier1,
+                                                                 pointStyleAxes,
+                                                                 posScreen,
+                                                                 NULL_GEOMETRY_WINDOW);
+
+  context().mainWindow().scene().addTemporaryScaleBar (m_temporaryPoint0,
+                                                       m_temporaryPoint1,
+                                                       pointIdentifier0,
+                                                       pointIdentifier1);
+
+  m_line = new QGraphicsLineItem;
+  context().mainWindow().scene().addItem (m_line);
+  m_line->setPen (QColor (Qt::red));
+  m_line->setZValue (1000);
+  m_line->setEnabled (true);
+
+  updateLineGeometry ();
 
   // Attempts to select an endpoint right here, or after an super short timer interval
   // failed. That would have been nice for having the click create the scale bar and, while
   // the mouse was still pressed, selecting an endpoint thus allowing a single click-and-drag to
   // create the scale bar. We fall back to the less elegant solution (which the user will never
   // notice) of capturing mouse move events and using those to move an endpoint
-  m_substate = SUBSTATE_MOVING_SECOND_ENDPOINT;
 }
 
-void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
-                                             QPointF posScreen)
+void DigitizeStateScale::handleMouseRelease (CmdMediator * /* cmdMediator */,
+                                             QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMouseRelease";
 
-  m_substate = SUBSTATE_NOMINAL;
+  // Remove temporary points
+  context().mainWindow().scene().removePoint (Point::temporaryPointIdentifier ()); // Deallocates GraphicsPoint automatically
+  context().mainWindow().scene().removePoint (temporaryPointIdentifierSecond ()); // Deallocates GraphicsPoint automaticall
+  context().mainWindow().scene().removeItem (m_line);
+  delete m_line;
+  m_temporaryPoint0 = 0;
+  m_temporaryPoint1 = 0;
+  m_line = 0;
+
 //  if (context().mainWindow().transformIsDefined()) {
 //
 //    QMessageBox::warning (0,
@@ -192,9 +231,22 @@ QString DigitizeStateScale::state() const
   return "DigitizeStateScale";
 }
 
+QString DigitizeStateScale::temporaryPointIdentifierSecond () const
+{
+  return Point::temporaryPointIdentifier () + "Second";
+}
+
 void DigitizeStateScale::updateAfterPointAddition ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::updateAfterPointAddition";
+}
+
+void DigitizeStateScale::updateLineGeometry ()
+{
+  m_line->setLine (m_temporaryPoint0->pos ().x (),
+                   m_temporaryPoint0->pos ().y (),
+                   m_temporaryPoint1->pos ().x (),
+                   m_temporaryPoint1->pos ().y ());
 }
 
 void DigitizeStateScale::updateModelDigitizeCurve (CmdMediator *cmdMediator,
