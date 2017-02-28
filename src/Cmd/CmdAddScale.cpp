@@ -18,22 +18,26 @@ const QString CMD_DESCRIPTION ("Add scale point");
 
 CmdAddScale::CmdAddScale (MainWindow &mainWindow,
                           Document &document,
-                          const QPointF &posScreen,
-                          const QPointF &posGraph,
-                          double ordinal,
-                          bool isXOnly) :
+                          const QPointF &posScreen0,
+                          const QPointF &posScreen1,
+                          double scaleLength,
+                          double ordinal0,
+                          double ordinal1) :
   CmdPointChangeBase (mainWindow,
                       document,
                       CMD_DESCRIPTION),
-  m_posScreen (posScreen),
-  m_posGraph (posGraph),
-  m_ordinal (ordinal),
-  m_isXOnly (isXOnly)
+  m_posScreen0 (posScreen0),
+  m_posScreen1 (posScreen1),
+  m_scaleLength (scaleLength),
+  m_ordinal0 (ordinal0),
+  m_ordinal1 (ordinal1)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddScale::CmdAddScale"
-                              << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
-                              << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ()
-                              << " ordinal=" << ordinal;
+                              << " posScreen0=" << QPointFToString (posScreen0).toLatin1 ().data ()
+                              << " posScreen1=" << QPointFToString (posScreen1).toLatin1 ().data ()
+                              << " scaleLength=" << scaleLength
+                              << " ordinal0=" << ordinal0
+                              << " ordinal1=" << ordinal1;
 }
 
 CmdAddScale::CmdAddScale (MainWindow &mainWindow,
@@ -50,32 +54,35 @@ CmdAddScale::CmdAddScale (MainWindow &mainWindow,
 
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X1) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y1) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCALE_LENGTH) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER1) ||
       !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL1)) {
     xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1, %2, %3, %4, %5, %6 and/or %7")
+                      QString ("Missing attribute(s) %1, %2, %3, %4, %5, %6, %7, %8 and/or %9")
                       .arg (DOCUMENT_SERIALIZE_SCREEN_X)
                       .arg (DOCUMENT_SERIALIZE_SCREEN_Y)
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_X)
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y)
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_X1)
+                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y1)
+                      .arg (DOCUMENT_SERIALIZE_SCALE_LENGTH)
                       .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
+                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER1)
                       .arg (DOCUMENT_SERIALIZE_ORDINAL)
-                      .arg (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY));
+                      .arg (DOCUMENT_SERIALIZE_ORDINAL1));
   }
 
-  // Boolean values
-  QString isXOnlyValue = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
-
-  m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
-  m_posScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
-  m_posGraph.setX(attributes.value(DOCUMENT_SERIALIZE_GRAPH_X).toDouble());
-  m_posGraph.setY(attributes.value(DOCUMENT_SERIALIZE_GRAPH_Y).toDouble());
-  m_identifierAdded = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
-  m_ordinal = attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
-  m_isXOnly = (isXOnlyValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
+  m_posScreen0.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
+  m_posScreen0.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
+  m_posScreen1.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X1).toDouble());
+  m_posScreen1.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y1).toDouble());
+  m_scaleLength = attributes.value(DOCUMENT_SERIALIZE_SCALE_LENGTH).toDouble();
+  m_identifierAdded0 = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+  m_identifierAdded1 = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER1).toString();
+  m_ordinal0 = attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
+  m_ordinal1 = attributes.value(DOCUMENT_SERIALIZE_ORDINAL1).toDouble();
 }
 
 CmdAddScale::~CmdAddScale ()
@@ -88,11 +95,13 @@ void CmdAddScale::cmdRedo ()
 
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
-  document().addScaleWithGeneratedIdentifier (m_posScreen,
-                                              m_posGraph,
-                                              m_identifierAdded,
-                                              m_ordinal,
-                                              m_isXOnly);
+  document().addScaleWithGeneratedIdentifier (m_posScreen0,
+                                              m_posScreen1,
+                                              m_scaleLength,
+                                              m_identifierAdded0,
+                                              m_identifierAdded1,
+                                              m_ordinal0,
+                                              m_ordinal1);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
   saveOrCheckPostCommandDocumentStateHash (document ());
@@ -118,14 +127,14 @@ void CmdAddScale::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_ADD_SCALE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
-  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen.x()));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_X, QString::number (m_posGraph.x(), FORMAT, PRECISION));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_Y, QString::number (m_posGraph.y(), FORMAT, PRECISION));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY, m_isXOnly ?
-                        DOCUMENT_SERIALIZE_BOOL_TRUE :
-                        DOCUMENT_SERIALIZE_BOOL_FALSE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X, QString::number (m_posScreen0.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen0.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X1, QString::number (m_posScreen1.x()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y1, QString::number (m_posScreen1.y()));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SCALE_LENGTH, QString::number (m_scaleLength, FORMAT, PRECISION));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded0);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER1, m_identifierAdded1);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal0));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL1, QString::number (m_ordinal1));
   writer.writeEndElement();
 }

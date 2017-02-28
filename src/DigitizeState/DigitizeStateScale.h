@@ -55,6 +55,7 @@ public:
 private:
   DigitizeStateScale();
 
+  void removeTemporaryPointsAndLine();
   void updateLineGeometry ();
 
   QString m_pointIdentifier0;

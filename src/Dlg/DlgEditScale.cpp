@@ -32,18 +32,11 @@ const Qt::Alignment ALIGNMENT = Qt::AlignCenter;
 
 const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 
-const bool IS_X_THETA = true;
-const bool IS_NOT_X_THETA = false;
-
 DlgEditScale::DlgEditScale (MainWindow &mainWindow,
                             const DocumentModelCoords &modelCoords,
                             const DocumentModelGeneral &modelGeneral,
                             const MainWindowModel &modelMainWindow,
-                            const Transformation &transformation,
-                            DocumentAxesPointsRequired documentAxesPointsRequired,
-                            bool isXOnly,
-                            const double *xInitialValue,
-                            const double *yInitialValue) :
+                            DocumentAxesPointsRequired documentAxesPointsRequired) :
   QDialog (&mainWindow),
   m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
@@ -52,10 +45,6 @@ DlgEditScale::DlgEditScale (MainWindow &mainWindow,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditScale::DlgEditScale";
 
-  // Either one or two coordinates are desired
-  bool isX = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || isXOnly;
-  bool isY = (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) || !isXOnly;
-
   QVBoxLayout *layout = new QVBoxLayout;
   setLayout (layout);
 
@@ -63,15 +52,9 @@ DlgEditScale::DlgEditScale (MainWindow &mainWindow,
   setModal(true);
   setWindowTitle (tr ("Edit Axis Point"));
 
-  createCoords (layout);
+  createScaleLength (layout);
   createHint (layout);
   createOkCancel (layout);
-
-  initializeGraphCoordinates (xInitialValue,
-                              yInitialValue,
-                              transformation,
-                              isX,
-                              isY);
 
   updateControls ();
 }
@@ -79,82 +62,6 @@ DlgEditScale::DlgEditScale (MainWindow &mainWindow,
 DlgEditScale::~DlgEditScale()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditScale::~DlgEditScale";
-}
-
-void DlgEditScale::createCoords (QVBoxLayout *layoutOuter)
-{
-  // Constraints on x and y are needed for log scaling
-  bool isConstraintX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG);
-  bool isConstraintY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
-  DlgValidatorFactory dlgValidatorFactory;
-  m_validatorGraphX = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (m_modelCoords.coordScaleXTheta(),
-                                                                                isCartesian (),
-                                                                                m_modelCoords.coordUnitsX(),
-                                                                                m_modelCoords.coordUnitsTheta(),
-                                                                                m_modelCoords.coordUnitsDate(),
-                                                                                m_modelCoords.coordUnitsTime(),
-                                                                                m_modelMainWindow.locale());
-  m_validatorGraphY = dlgValidatorFactory.createCartesianOrPolarWithNonPolarPolar (m_modelCoords.coordScaleYRadius(),
-                                                                                   isCartesian (),
-                                                                                   m_modelCoords.coordUnitsY(),
-                                                                                   m_modelCoords.coordUnitsRadius(),
-                                                                                   m_modelCoords.coordUnitsDate(),
-                                                                                   m_modelCoords.coordUnitsTime(),
-                                                                                   m_modelMainWindow.locale());
-
-  // Label, with guidance in terms of legal ranges and units
-  QString description = QString ("%1 (%2, %3)%4%5%6%7%8%9 %10 (%11, %12):")
-                        .arg (tr ("Graph Coordinates"))
-                        .arg (nameXTheta ())
-                        .arg (nameYRadius ())
-                        .arg (isConstraintX || isConstraintY ? " with " : "")
-                        .arg (isConstraintX                  ? QString (nameXTheta ()) : "")
-                        .arg (isConstraintX                  ? " > 0" : "")
-                        .arg (isConstraintX && isConstraintY ? " and " : "")
-                        .arg (                 isConstraintY ? QString (nameYRadius ()) : "")
-                        .arg (                 isConstraintY ? " > 0" : "")
-                        .arg (tr ("as"))
-                        .arg (unitsType (IS_X_THETA))
-                        .arg (unitsType (IS_NOT_X_THETA));
-  QGroupBox *panel = new QGroupBox (description, this);
-  layoutOuter->addWidget (panel);
-
-  QHBoxLayout *layout = new QHBoxLayout (panel);
-  panel->setLayout (layout);
-
-  // Row
-  QLabel *labelGraphParLeft = new QLabel (tr ("("), this);
-  layout->addWidget(labelGraphParLeft, 0);
-
-  m_editGraphX = new QLineEdit;
-  m_editGraphX->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
-  m_editGraphX->setAlignment (ALIGNMENT);
-  m_editGraphX->setValidator (m_validatorGraphX);
-  // setStatusTip does not work for modal dialogs
-  m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is X. For polar plots this is the radius R.\n\n"
-                                  "The expected format of the coordinate value is determined by the locale setting. If "
-                                  "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
-  layout->addWidget(m_editGraphX, 0);
-  connect (m_editGraphX, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
-
-  QLabel *labelGraphComma = new QLabel (tr (", "), this);
-  layout->addWidget(labelGraphComma, 0);
-
-  m_editGraphY = new QLineEdit;
-  m_editGraphY->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
-  m_editGraphY->setAlignment (ALIGNMENT);
-  m_editGraphY->setValidator (m_validatorGraphY);
-  // setStatusTip does not work for modal dialogs
-  m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For polar plots this is the angle Theta.\n\n"
-                                  "The expected format of the coordinate value is determined by the locale setting. If "
-                                  "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
-  layout->addWidget(m_editGraphY, 0);
-  connect (m_editGraphY, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
-
-  QLabel *labelGraphParRight = new QLabel (tr (")"), this);
-  layout->addWidget(labelGraphParRight, 0);
 }
 
 void DlgEditScale::createHint (QVBoxLayout *layoutOuter)
@@ -193,75 +100,54 @@ void DlgEditScale::createOkCancel (QVBoxLayout *layoutOuter)
   connect (m_btnCancel, SIGNAL (released ()), this, SLOT (reject ()));
 }
 
-void DlgEditScale::initializeGraphCoordinates (const double *xInitialValue,
-                                               const double *yInitialValue,
-                                               const Transformation &transformation,
-                                               bool isX,
-                                               bool isY)
+void DlgEditScale::createScaleLength (QVBoxLayout *layoutOuter)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgEditScale::initializeGraphCoordinates";
+  const bool IS_CARTESIAN = true;
 
-  QString xTheta, yRadius;
-  if ((xInitialValue != 0) &&
-      (yInitialValue != 0)) {
+  // Constraints on x and y are needed for log scaling
+  DlgValidatorFactory dlgValidatorFactory;
+  m_validatorScaleLength = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (m_modelCoords.coordScaleXTheta(),
+                                                                                     IS_CARTESIAN,
+                                                                                     m_modelCoords.coordUnitsX(),
+                                                                                     m_modelCoords.coordUnitsTheta(),
+                                                                                     m_modelCoords.coordUnitsDate(),
+                                                                                     m_modelCoords.coordUnitsTime(),
+                                                                                     m_modelMainWindow.locale());
 
-    FormatCoordsUnits format;
-    format.unformattedToFormatted (*xInitialValue,
-                                   *yInitialValue,
-                                   m_modelCoords,
-                                   m_modelGeneral,
-                                   m_modelMainWindow,
-                                   xTheta,
-                                   yRadius,
-                                   transformation);
-  }
+  // Label, with guidance in terms of legal ranges and units
+  QGroupBox *panel = new QGroupBox (tr ("Scale Length"), this);
+  layoutOuter->addWidget (panel);
 
-  if (isX) {
-    m_editGraphX->setText (xTheta);
-  } else {
-    m_editGraphX->setText ("");
-  }
+  QHBoxLayout *layout = new QHBoxLayout (panel);
+  panel->setLayout (layout);
 
-  if (isY) {
-    m_editGraphY->setText (yRadius);
-  } else {
-    m_editGraphY->setText ("");
-  }
+  // Row
+  m_editScaleLength = new QLineEdit;
+  m_editScaleLength->setMinimumWidth(MIN_WIDTH_TO_FIT_STRANGE_UNITS);
+  m_editScaleLength->setAlignment (ALIGNMENT);
+  m_editScaleLength->setValidator (m_validatorScaleLength);
+  // setStatusTip does not work for modal dialogs
+  m_editScaleLength->setWhatsThis (tr ("Enter the scale bar length"));
+  layout->addWidget(m_editScaleLength, 0);
+  connect (m_editScaleLength, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
 }
 
-bool DlgEditScale::isCartesian () const
-{
-  return (m_modelCoords.coordsType() == COORDS_TYPE_CARTESIAN);
-}
-
-QChar DlgEditScale::nameXTheta () const
-{
-  return (isCartesian () ? QChar ('X') : THETA);
-}
-
-QChar DlgEditScale::nameYRadius () const
-{
-  return (isCartesian () ? QChar ('Y') : QChar ('R'));
-}
-
-QPointF DlgEditScale::posGraph (bool &isXOnly) const
+double DlgEditScale::scaleLength () const
 {
   double xTheta, yRadius;
+  const QString DUMMY_Y ("0");
 
   FormatCoordsUnits format;
 
-  format.formattedToUnformatted (m_editGraphX->text(),
-                                 m_editGraphY->text(),
+  // Format conversion is done using x coordinate. Y coordinate is given a dummy value and the result is ignored
+  format.formattedToUnformatted (m_editScaleLength->text(),
+                                 DUMMY_Y,
                                  m_modelCoords,
                                  m_modelMainWindow,
                                  xTheta,
                                  yRadius);
 
-  // If yRadius value is empty then this is the xTheta value only
-  isXOnly = m_editGraphY->text().isEmpty();
-
-  return QPointF (xTheta,
-                  yRadius);
+  return xTheta;
 }
 
 void DlgEditScale::slotTextChanged (const QString &)
@@ -269,52 +155,13 @@ void DlgEditScale::slotTextChanged (const QString &)
   updateControls ();
 }
 
-QString DlgEditScale::unitsType (bool isXTheta) const
-{
-  if (isCartesian ()) {
-    if (isXTheta) {
-      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsX());
-    } else {
-      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsY());
-    }
-  } else {
-    if (isXTheta) {
-      return coordUnitsPolarThetaToBriefType (m_modelCoords.coordUnitsTheta());
-    } else {
-      return coordUnitsNonPolarThetaToBriefType (m_modelCoords.coordUnitsRadius());
-    }
-  }
-}
-
 void DlgEditScale::updateControls ()
 {
-  QString textX = m_editGraphX->text();
-  QString textY = m_editGraphY->text();
+  QString textScaleLength = m_editScaleLength->text();
 
-  int posX, posY;
+  int posScaleLength;
 
-  if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_4) {
-
-    bool gotX = (!textX.isEmpty() &&
-                 (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable));
-    bool gotY = (!textY.isEmpty() &&
-                 (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
-
-    // Check for not empty in one coordinate and for valid number in the other coordinate
-    m_btnOk->setEnabled ((textX.isEmpty() && gotY) ||
-                         (textY.isEmpty() && gotX));
-
-    // Emphasize that only one coordinate is to be filled in at a time
-    m_editGraphX->setEnabled (!gotY);
-    m_editGraphY->setEnabled (!gotX);
-
-  } else {
-
-    // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
-    m_btnOk->setEnabled (!textX.isEmpty () &&
-                         !textY.isEmpty () &&
-                         (m_validatorGraphX->validate(textX, posX) == QValidator::Acceptable) &&
-                         (m_validatorGraphY->validate(textY, posY) == QValidator::Acceptable));
-
-  }
+  // Check for not empty (which allows single minus sign) and for valid number (which prevents single minus sign)
+  m_btnOk->setEnabled (!textScaleLength.isEmpty () &&
+                       (m_validatorScaleLength->validate(textScaleLength, posScaleLength) == QValidator::Acceptable));
 }

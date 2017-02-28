@@ -46,6 +46,7 @@ const int VERSION_6 = 6;
 const int VERSION_7 = 7;
 const int VERSION_8 = 8;
 const int VERSION_9 = 9;
+const int VERSION_10 = 10;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -109,6 +110,7 @@ Document::Document (const QString &fileName) :
           case VERSION_7:
           case VERSION_8:
           case VERSION_9:
+          case VERSION_10:
             loadVersions7AndUp (file);
             break;
 
@@ -223,19 +225,28 @@ void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   m_coordSystemContext.addPointsInCurvesGraphs(curvesGraphs);
 }
 
-void Document::addScaleWithGeneratedIdentifier (const QPointF &posScreen,
-                                                const QPointF &posGraph,
-                                                QString &identifier,
-                                                double ordinal,
-                                                bool isXOnly)
+void Document::addScaleWithGeneratedIdentifier (const QPointF &posScreen0,
+                                                const QPointF &posScreen1,
+                                                double scaleLength,
+                                                QString &identifier0,
+                                                QString &identifier1,
+                                                double ordinal0,
+                                                double ordinal1)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addScaleWithGeneratedIdentifier";
 
-  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen,
-                                                           posGraph,
-                                                           identifier,
-                                                           ordinal,
-                                                           isXOnly);
+  const bool IS_X_ONLY = false;
+
+  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen0,
+                                                           QPointF (0, 0),
+                                                           identifier0,
+                                                           ordinal0,
+                                                           IS_X_ONLY);
+  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen1,
+                                                           QPointF (scaleLength, 0),
+                                                           identifier1,
+                                                           ordinal1,
+                                                           IS_X_ONLY);
 }
 
 bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const

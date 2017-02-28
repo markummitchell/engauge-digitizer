@@ -19,10 +19,11 @@ class CmdAddScale : public CmdPointChangeBase
   /// Constructor for normal creation
   CmdAddScale(MainWindow &mainWindow,
               Document &document,
-              const QPointF &posScreen,
-              const QPointF &posGraph,
-              double ordinal,
-              bool isXOnly);
+              const QPointF &posScreen0,
+              const QPointF &posScreen1,
+              double scaleLength,
+              double ordinal0,
+              double ordinal1);
 
   /// Constructor for parsing error report file xml
   CmdAddScale(MainWindow &mainWindow,
@@ -39,11 +40,13 @@ class CmdAddScale : public CmdPointChangeBase
 private:
   CmdAddScale();
 
-  QPointF m_posScreen;
-  QPointF m_posGraph;
-  QString m_identifierAdded; // Point that got added
-  double m_ordinal;
-  bool m_isXOnly;
+  QPointF m_posScreen0;
+  QPointF m_posScreen1;
+  double m_scaleLength;
+  QString m_identifierAdded0; // First point that got added
+  QString m_identifierAdded1; // Second point that got added
+  double m_ordinal0;
+  double m_ordinal1;
 };
 
 #endif // CMD_ADD_SCALE_H

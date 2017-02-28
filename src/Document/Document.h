@@ -94,16 +94,20 @@ public:
   void addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs);
 
   /// Add scale with a generated point identifier. Call this after checkAddPointAxis to guarantee success in this call.
-  /// \param posScreen Screen coordinates from QGraphicsView
-  /// \param posGraph Graph coordiantes from user
-  /// \param identifier Identifier for new axis point
-  /// \param ordinal Unique, for curve, ordinal number
-  /// \param isXOnly True if point has only an x coordinate
-  void addScaleWithGeneratedIdentifier (const QPointF &posScreen,
-                                        const QPointF &posGraph,
-                                        QString &identifier,
-                                        double ordinal,
-                                        bool isXOnly);
+  /// \param posScreen0 Screen coordinates of first point from QGraphicsView
+  /// \param posScreen1 Screen coordinates of second point from QGraphicsView
+  /// \param scaleLength Scale bar length in graph coordinates
+  /// \param identifier0 Identifier for first new axis point
+  /// \param identifier1 Identifier for second new axis point
+  /// \param ordinal0 Unique, for curve, ordinal number of first point
+  /// \param ordinal1 Unique, for curve, ordinal number of second point
+  void addScaleWithGeneratedIdentifier (const QPointF &posScreen0,
+                                        const QPointF &posScreen1,
+                                        double scaleLength,
+                                        QString &identifier0,
+                                        QString &identifier1,
+                                        double ordinal0,
+                                        double ordinal1);
 
   /// Check before calling addPointAxis. Also returns the next available ordinal number (to prevent clashes)
   void checkAddPointAxis (const QPointF &posScreen,

@@ -19,7 +19,6 @@ class MainWindow;
 class MainWindowModel;
 class QDoubleValidator;
 class QVBoxLayout;
-class Transformation;
 
 /// Dialog box for editing the information of the map scale
 class DlgEditScale : public QDialog
@@ -32,38 +31,23 @@ public:
                 const DocumentModelCoords &modelCoords,
                 const DocumentModelGeneral &modelGeneral,
                 const MainWindowModel &modelMainWindow,
-                const Transformation &transformation,
-                DocumentAxesPointsRequired documentAxesPointsRequired,
-                bool isXOnly = false,
-                const double *xInitialValue = 0,
-                const double *yInitialValue = 0);
+                DocumentAxesPointsRequired documentAxesPointsRequired);
   ~DlgEditScale ();
 
-  /// Return the graph coordinates position specified by the user. Only applies if dialog was accepted
-  QPointF posGraph (bool &isXOnly) const;
+  /// Return the scale bar length specified by the user. Only applies if dialog was accepted
+  double scaleLength () const;
 
 private slots:
   void slotTextChanged (const QString &);
 
 private:
-  void createCoords (QVBoxLayout *layoutOuter);
   void createHint (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
-  void initializeGraphCoordinates (const double *xInitialValue,
-                                   const double *yInitialValue,
-                                   const Transformation &transformation,
-                                   bool isX,
-                                   bool isY);
-  bool isCartesian () const;
-  QChar nameXTheta () const;
-  QChar nameYRadius () const;
-  QString unitsType (bool isXTheta) const;
+  void createScaleLength (QVBoxLayout *layoutOuter);
   void updateControls ();
 
-  QLineEdit *m_editGraphX;
-  DlgValidatorAbstract *m_validatorGraphX;
-  QLineEdit *m_editGraphY;
-  DlgValidatorAbstract *m_validatorGraphY;
+  QLineEdit *m_editScaleLength;
+  DlgValidatorAbstract *m_validatorScaleLength;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
 
