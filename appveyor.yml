@@ -8,14 +8,12 @@ environment:
 
   matrix:
     - ENGAUGE_RELEASE: 1
-      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
-      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-build.7z'
-      LOG4CPPFOLDER: 'log4cpp-build'
+      VCLIBS: MSVCP140.dll VCRUNTIME140.dll UCRTBASE.dll
+      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-1.1.2rc5.zip'
       RESULTDIR: engauge-build
     - ENGAUGE_CONFIG: "debug"
-      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll
-      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-build-debug.7z'
-      LOG4CPPFOLDER: 'log4cpp-build-debug'
+      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
+      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-debug-1.1.2rc5.zip'
       RESULTDIR: engauge-build-debug
 
 install:
@@ -38,7 +36,7 @@ install:
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\%LOG4CPPFOLDER%
+  - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\log4cpp-1.1.2rc5
   - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.5-dll32
   - qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%"
   - nmake
@@ -59,8 +57,8 @@ after_build:
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
   - for %%I in (%VCLIBS%) do copy %WINDIR%\SysWOW64\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
+  - copy log4cpp-1.1.2rc5\lib\log4cpp.dll %RESULTDIR%
   - copy fftw-3.3.5-dll32\lib\libfftw3-3.dll %RESULTDIR%
-  - copy %LOG4CPPFOLDER%\lib\log4cpp.dll %RESULTDIR%
   - copy LICENSE %RESULTDIR%
   - cd %APPVEYOR_BUILD_FOLDER%\help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
