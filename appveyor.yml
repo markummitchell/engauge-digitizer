@@ -23,7 +23,6 @@ install:
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - 7z x %APPVEYOR_BUILD_FOLDER%\%LOG4CPPFILE% -aoa
-  - 7z x %APPVEYOR_BUILD_FOLDER%\%POPPLERQT5FILE% -aoa
   - mkdir fftw-3.3.5-dll32
   - cd fftw-3.3.5-dll32
   - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\fftw-3.3.5-dll32.zip -aoa
