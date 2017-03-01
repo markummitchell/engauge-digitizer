@@ -8,7 +8,7 @@ environment:
 
   matrix:
     - ENGAUGE_RELEASE: 1
-      VCLIBS: MSVCP140.dll VCRUNTIME140.dll UCRTBASE.dll
+      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
       LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-1.1.2rc5.zip'
       RESULTDIR: engauge-build
     - ENGAUGE_CONFIG: "debug"
