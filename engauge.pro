@@ -72,6 +72,7 @@ HEADERS  += \
     src/Callback/CallbackCheckEditPointAxis.h \
     src/Callback/CallbackDocumentHash.h \
     src/Callback/CallbackGatherXThetaValuesFunctions.h \
+    src/Callback/CallbackIdentifyScaleBarPointIdentifier.h \    
     src/Callback/CallbackNextOrdinal.h \
     src/Callback/CallbackPointOrdinal.h \
     src/Callback/CallbackRemovePointsInCurvesGraphs.h \
@@ -400,6 +401,7 @@ SOURCES += \
     src/Callback/CallbackCheckEditPointAxis.cpp \
     src/Callback/CallbackDocumentHash.cpp \
     src/Callback/CallbackGatherXThetaValuesFunctions.cpp \
+    src/Callback/CallbackIdentifyScaleBarPointIdentifier.cpp \
     src/Callback/CallbackNextOrdinal.cpp \
     src/Callback/CallbackPointOrdinal.cpp \
     src/Callback/CallbackRemovePointsInCurvesGraphs.cpp \

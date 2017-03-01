@@ -35,10 +35,8 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 DlgEditScale::DlgEditScale (MainWindow &mainWindow,
                             const DocumentModelCoords &modelCoords,
                             const DocumentModelGeneral &modelGeneral,
-                            const MainWindowModel &modelMainWindow,
-                            DocumentAxesPointsRequired documentAxesPointsRequired) :
+                            const MainWindowModel &modelMainWindow) :
   QDialog (&mainWindow),
-  m_documentAxesPointsRequired (documentAxesPointsRequired),
   m_modelCoords (modelCoords),
   m_modelGeneral (modelGeneral),
   m_modelMainWindow (modelMainWindow)

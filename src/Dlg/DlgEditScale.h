@@ -7,7 +7,6 @@
 #ifndef DLG_EDIT_SCALE_H
 #define DLG_EDIT_SCALE_H
 
-#include "DocumentAxesPointsRequired.h"
 #include <QDialog>
 #include <QLineEdit>
 #include <QPushButton>
@@ -30,8 +29,7 @@ public:
   DlgEditScale (MainWindow &mainWindow,
                 const DocumentModelCoords &modelCoords,
                 const DocumentModelGeneral &modelGeneral,
-                const MainWindowModel &modelMainWindow,
-                DocumentAxesPointsRequired documentAxesPointsRequired);
+                const MainWindowModel &modelMainWindow);
   ~DlgEditScale ();
 
   /// Return the scale bar length specified by the user. Only applies if dialog was accepted
@@ -50,8 +48,6 @@ private:
   DlgValidatorAbstract *m_validatorScaleLength;
   QPushButton *m_btnOk;
   QPushButton *m_btnCancel;
-
-  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 
   const DocumentModelCoords &m_modelCoords;
   const DocumentModelGeneral &m_modelGeneral;

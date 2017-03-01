@@ -175,8 +175,7 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
     DlgEditScale *dlg = new DlgEditScale (context ().mainWindow (),
                                           cmdMediator->document().modelCoords(),
                                           cmdMediator->document().modelGeneral(),
-                                          context().mainWindow().modelMainWindow(),
-                                          cmdMediator->document().documentAxesPointsRequired());
+                                          context().mainWindow().modelMainWindow());
     int rtn = dlg->exec ();
 
     double scaleLength = dlg->scaleLength ();

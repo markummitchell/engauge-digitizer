@@ -52,10 +52,14 @@ private:
   DigitizeStateSelect();
 
   void addHoverHighlighting();
+  void handleContextMenuEventAxis2 (CmdMediator *cmdMediator);
+  void handleContextMenuEventAxis34 (CmdMediator *cmdMediator,
+                                     const QString &pointIdentifier);
   void keyPressArrow (CmdMediator *cmdMediator,
                       Qt::Key key);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
   void removeHoverHighlighting();
+  QString scaleBarPointIdentifier (CmdMediator *cmdMediator) const;
   void setHoverHighlighting(const MainWindowModel &modelMainWindow);
   double zoomedToUnzoomedScreenX () const;
   double zoomedToUnzoomedScreenY () const;

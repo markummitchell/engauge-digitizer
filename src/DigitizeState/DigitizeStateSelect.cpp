@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CallbackIdentifyScaleBarPointIdentifier.h"
 #include "CmdEditPointAxis.h"
 #include "CmdEditPointGraph.h"
 #include "CmdMediator.h"
@@ -13,6 +14,7 @@
 #include "DigitizeStateSelect.h"
 #include "DlgEditPointAxis.h"
 #include "DlgEditPointGraph.h"
+#include "DlgEditScale.h"
 #include "EngaugeAssert.h"
 #include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
@@ -93,6 +95,79 @@ void DigitizeStateSelect::handleContextMenuEventAxis (CmdMediator *cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleContextMenuEventAxis "
                               << " point=" << pointIdentifier.toLatin1 ().data ();
+
+  if (cmdMediator->document().documentAxesPointsRequired() == DOCUMENT_AXES_POINTS_REQUIRED_2) {
+    handleContextMenuEventAxis2 (cmdMediator);
+  } else {
+    handleContextMenuEventAxis34 (cmdMediator,
+                                  pointIdentifier);
+  }
+}
+
+void DigitizeStateSelect::handleContextMenuEventAxis2 (CmdMediator *cmdMediator)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSelect::handleContextMenuEventAxis2";
+
+  const bool IS_NOT_X_ONLY = false;
+
+  // The point identifier we want is not necessarily the one edited but is the one with the
+  // nonzero x or y (but not both) coordinate
+  QString pointIdentifier = scaleBarPointIdentifier (cmdMediator);
+
+  QPointF posScreen = cmdMediator->document().positionScreen (pointIdentifier);
+  QPointF posGraphBefore = cmdMediator->document().positionGraph (pointIdentifier);
+
+  // Ask user for scale length
+  DlgEditScale *dlg = new DlgEditScale (context().mainWindow(),
+                                        cmdMediator->document().modelCoords(),
+                                        cmdMediator->document().modelGeneral(),
+                                        context().mainWindow().modelMainWindow());
+  int rtn = dlg->exec ();
+
+  double scaleLength = dlg->scaleLength (); // This call returns new value for scale length
+  delete dlg;
+
+  if (rtn == QDialog::Accepted) {
+
+    // User wants to edit the scale length, which is effectively editing this axis point, but let's perform sanity checks first
+
+    bool isError;
+    QString errorMessage;
+
+    bool isXNonzero = (posGraphBefore.x() != 0); // Identify which coordinate is to be edited
+    QPointF posGraphAfter (isXNonzero ? scaleLength : 0,
+                           isXNonzero ? 0 : scaleLength);
+    context().mainWindow().cmdMediator()->document().checkEditPointAxis(pointIdentifier,
+                                                                        posScreen,
+                                                                        posGraphAfter,
+                                                                        isError,
+                                                                        errorMessage);
+
+    if (isError) {
+
+      QMessageBox::warning (0,
+                            engaugeWindowTitle(),
+                            errorMessage);
+
+    } else {
+
+      // Create a command to change the scale length
+      CmdEditPointAxis *cmd = new CmdEditPointAxis (context().mainWindow(),
+                                                    cmdMediator->document(),
+                                                    pointIdentifier,
+                                                    posGraphBefore,
+                                                    posGraphAfter,
+                                                    IS_NOT_X_ONLY);
+      context().appendNewCmd(cmdMediator,
+                             cmd);
+    }
+  }
+}
+
+void DigitizeStateSelect::handleContextMenuEventAxis34 (CmdMediator *cmdMediator,
+                                                        const QString &pointIdentifier)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateSelect::handleContextMenuEventAxis34";
 
   QPointF posScreen = cmdMediator->document().positionScreen (pointIdentifier);
   QPointF posGraphBefore = cmdMediator->document().positionGraph (pointIdentifier);
@@ -369,6 +444,17 @@ void DigitizeStateSelect::removeHoverHighlighting()
        item->setAcceptHoverEvents(false);
     }
   }
+}
+
+QString DigitizeStateSelect::scaleBarPointIdentifier (CmdMediator *cmdMediator) const
+{
+  CallbackIdentifyScaleBarPointIdentifier ftor;
+
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackIdentifyScaleBarPointIdentifier::callback);
+  cmdMediator->iterateThroughCurvePointsAxes (ftorWithCallback);
+
+  return ftor.scaleBarPointIdentifier();
 }
 
 void DigitizeStateSelect::setHoverHighlighting(const MainWindowModel &modelMainWindow)
