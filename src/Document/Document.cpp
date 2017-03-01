@@ -767,6 +767,51 @@ int Document::nextOrdinalForCurve (const QString &curveName) const
   return m_coordSystemContext.nextOrdinalForCurve(curveName);
 }
 
+void Document::overrideGraphDefaultsWithMapDefaults ()
+{
+  const int DEFAULT_WIDTH = 1;
+
+  // Axis style for scale bar is better with transparent-filled circles so user can more accurately place them,
+  // and a visible line between the points also helps to make the points more visible
+  CurveStyles curveStyles = modelCurveStyles ();
+
+  CurveStyle curveStyle  = curveStyles.curveStyle (AXIS_CURVE_NAME);
+
+  PointStyle pointStyle = curveStyle.pointStyle ();
+  pointStyle.setShape (POINT_SHAPE_CIRCLE);
+  pointStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+  LineStyle lineStyle = curveStyle.lineStyle ();
+  lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
+  lineStyle.setWidth (DEFAULT_WIDTH);
+  lineStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+  curveStyle.setPointStyle (pointStyle);
+  curveStyle.setLineStyle (lineStyle);
+
+  curveStyles.setCurveStyle (AXIS_CURVE_NAME,
+                             curveStyle);
+
+  // Change all graph curves from functions to relations
+  QStringList curveNames = curvesGraphsNames ();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
+    QString curveName = *itr;
+    CurveStyle curveStyle = curveStyles.curveStyle (curveName);
+
+    LineStyle lineStyle = curveStyle.lineStyle ();
+    lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
+
+    curveStyle.setLineStyle (lineStyle);
+
+    curveStyles.setCurveStyle (curveName,
+                               curveStyle);
+  }
+
+  // Save modified curve styles into Document
+  setModelCurveStyles (curveStyles);
+}
+
 QPixmap Document::pixmap () const
 {                               
   return m_pixmap;
@@ -897,32 +942,7 @@ void Document::setDocumentAxesPointsRequired(DocumentAxesPointsRequired document
 
   if (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
 
-    const int DEFAULT_WIDTH = 1;
-
-    // Axis style for scale bar is better with transparent-filled circles so user can more accurately place them,
-    // and a visible line between the points also helps to make the points more visible
-    CurveStyles curveStyles = modelCurveStyles ();
-
-    CurveStyle curveStyle  = curveStyles.curveStyle (AXIS_CURVE_NAME);
-
-    PointStyle pointStyle = curveStyle.pointStyle ();
-    pointStyle.setShape (POINT_SHAPE_CIRCLE);
-    pointStyle.setPaletteColor (COLOR_PALETTE_RED);
-
-    LineStyle lineStyle = curveStyle.lineStyle ();
-    lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
-    lineStyle.setWidth (DEFAULT_WIDTH);
-    lineStyle.setPaletteColor (COLOR_PALETTE_RED);
-
-    curveStyle.setPointStyle (pointStyle);
-    curveStyle.setLineStyle (lineStyle);
-
-    curveStyles.setCurveStyle (AXIS_CURVE_NAME,
-                               curveStyle);
-
-    // Save into Document
-    setModelCurveStyles (curveStyles);
-
+    overrideGraphDefaultsWithMapDefaults ();
   }
 }
 

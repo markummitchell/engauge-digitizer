@@ -330,6 +330,7 @@ private:
   void loadPreVersion6 (QDataStream &str);
   void loadVersion6 (QFile *file);
   void loadVersions7AndUp (QFile *file);
+  void overrideGraphDefaultsWithMapDefaults ();
   int versionFromFile (QFile *file) const;
 
   // Metadata
