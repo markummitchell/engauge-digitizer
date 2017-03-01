@@ -60,6 +60,7 @@ after_build:
   - for %%I in (%VCLIBS%) do copy %WINDIR%\SysWOW64\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
   - copy fftw-3.3.5-dll32\lib\libfftw3-3.dll %RESULTDIR%
+  - copy %LOG4CPPFOLDER%\lib\log4cpp.dll %RESULTDIR%
   - copy LICENSE %RESULTDIR%
   - cd %APPVEYOR_BUILD_FOLDER%\help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
