@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CallbackIdentifyScaleBarPointIdentifier.h"
+#include "CallbackScaleBar.h"
 #include "Curve.h"
 #include "DocumentModelExportFormat.h"
 #include "ExportAlignLinear.h"
@@ -14,32 +14,50 @@
 #include "Logger.h"
 #include "Point.h"
 
-CallbackIdentifyScaleBarPointIdentifier::CallbackIdentifyScaleBarPointIdentifier()
+CallbackScaleBar::CallbackScaleBar() :
+  m_scaleBarLength (0)
 {
 }
 
-CallbackSearchReturn CallbackIdentifyScaleBarPointIdentifier::callback (const QString &curveName,
-                                                                        const Point &point)
+QStringList CallbackScaleBar::axisCurvePointIdentifiers () const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackIdentifyScaleBarPointIdentifier::callback"
+  return m_axisCurvePointIdentifiers;
+}
+
+CallbackSearchReturn CallbackScaleBar::callback (const QString &curveName,
+                                                 const Point &point)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackScaleBar::callback"
                                << " curveName=" << curveName.toLatin1().data()
                                << " point=" << point.identifier().toLatin1().data();
 
   if (curveName == AXIS_CURVE_NAME) {
 
-    if (point.posGraph ().x () != 0 ||
-        point.posGraph ().y () != 0) {
+    bool isNonzeroX = (point.posGraph ().x () != 0);
+    bool isNonzeroY = (point.posGraph ().y () != 0);
+    
+    if (isNonzeroX || isNonzeroY) {
 
       m_scaleBarPointIdentifier = point.identifier ();
+      m_scaleBarLength = (isNonzeroX ?
+                          point.posGraph ().x () :
+                          point.posGraph ().y ());
     }
+
+    m_axisCurvePointIdentifiers << point.identifier ();
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-QString CallbackIdentifyScaleBarPointIdentifier::scaleBarPointIdentifier () const
+double CallbackScaleBar::scaleBarLength () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackIdentifyScaleBarPointIdentifier::scaleBarPointIdentifier";
+  return m_scaleBarLength;
+}
+
+QString CallbackScaleBar::scaleBarPointIdentifier () const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackScaleBar::scaleBarPointIdentifier";
 
   return m_scaleBarPointIdentifier;
 }

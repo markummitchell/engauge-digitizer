@@ -17,7 +17,6 @@ class DocumentModelCoords;
 class DocumentModelGeneral;
 class MainWindow;
 class MainWindowModel;
-class QDoubleValidator;
 class QVBoxLayout;
 class Transformation;
 

@@ -72,10 +72,10 @@ HEADERS  += \
     src/Callback/CallbackCheckEditPointAxis.h \
     src/Callback/CallbackDocumentHash.h \
     src/Callback/CallbackGatherXThetaValuesFunctions.h \
-    src/Callback/CallbackIdentifyScaleBarPointIdentifier.h \    
     src/Callback/CallbackNextOrdinal.h \
     src/Callback/CallbackPointOrdinal.h \
     src/Callback/CallbackRemovePointsInCurvesGraphs.h \
+    src/Callback/CallbackScaleBar.h \
     src/Callback/CallbackSceneUpdateAfterCommand.h \
     src/Callback/CallbackSearchReturn.h \
     src/Callback/CallbackUpdateTransform.h \
@@ -200,6 +200,7 @@ HEADERS  += \
     src/Dlg/DlgSettingsMainWindow.h \
     src/Dlg/DlgSettingsPointMatch.h \
     src/Dlg/DlgSettingsSegments.h \
+    src/Dlg/DlgValidatorAboveZero.h \
     src/Dlg/DlgValidatorAbstract.h \
     src/Dlg/DlgValidatorDateTime.h \
     src/Dlg/DlgValidatorDegreesMinutesSeconds.h \
@@ -334,6 +335,7 @@ HEADERS  += \
     src/Point/PointShape.h \
     src/Point/PointStyle.h \
     src/util/QtToString.h \
+    src/ScaleBar/ScaleBarAxisPointsUnite.h \
     src/Segment/Segment.h \
     src/Segment/SegmentFactory.h \
     src/Segment/SegmentLine.h \
@@ -401,10 +403,10 @@ SOURCES += \
     src/Callback/CallbackCheckEditPointAxis.cpp \
     src/Callback/CallbackDocumentHash.cpp \
     src/Callback/CallbackGatherXThetaValuesFunctions.cpp \
-    src/Callback/CallbackIdentifyScaleBarPointIdentifier.cpp \
     src/Callback/CallbackNextOrdinal.cpp \
     src/Callback/CallbackPointOrdinal.cpp \
     src/Callback/CallbackRemovePointsInCurvesGraphs.cpp \
+    src/Callback/CallbackScaleBar.cpp \
     src/Callback/CallbackSceneUpdateAfterCommand.cpp \
     src/Callback/CallbackUpdateTransform.cpp \
     src/Checker/Checker.cpp \
@@ -525,6 +527,7 @@ SOURCES += \
     src/Dlg/DlgSettingsMainWindow.cpp \
     src/Dlg/DlgSettingsPointMatch.cpp \
     src/Dlg/DlgSettingsSegments.cpp \
+    src/Dlg/DlgValidatorAboveZero.cpp \
     src/Dlg/DlgValidatorAbstract.cpp \
     src/Dlg/DlgValidatorDateTime.cpp \
     src/Dlg/DlgValidatorDegreesMinutesSeconds.cpp \
@@ -644,6 +647,7 @@ SOURCES += \
     src/Point/PointShape.cpp \
     src/Point/PointStyle.cpp \
     src/util/QtToString.cpp \
+    src/ScaleBar/ScaleBarAxisPointsUnite.cpp \
     src/Segment/Segment.cpp \
     src/Segment/SegmentFactory.cpp \
     src/Segment/SegmentLine.cpp \
@@ -780,6 +784,7 @@ INCLUDEPATH += src \
                src/Pdf \
                src/Plot \
                src/Point \
+               src/ScaleBar \
                src/Segment \
                src/Settings \
                src/Spline \

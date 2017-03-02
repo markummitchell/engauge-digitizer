@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CallbackIdentifyScaleBarPointIdentifier.h"
+#include "CallbackScaleBar.h"
 #include "CmdEditPointAxis.h"
 #include "CmdEditPointGraph.h"
 #include "CmdMediator.h"
@@ -118,13 +118,15 @@ void DigitizeStateSelect::handleContextMenuEventAxis2 (CmdMediator *cmdMediator)
   QPointF posGraphBefore = cmdMediator->document().positionGraph (pointIdentifier);
 
   // Ask user for scale length
+  double scaleLength = scaleBarLength (cmdMediator);
   DlgEditScale *dlg = new DlgEditScale (context().mainWindow(),
                                         cmdMediator->document().modelCoords(),
                                         cmdMediator->document().modelGeneral(),
-                                        context().mainWindow().modelMainWindow());
+                                        context().mainWindow().modelMainWindow(),
+                                        &scaleLength);
   int rtn = dlg->exec ();
 
-  double scaleLength = dlg->scaleLength (); // This call returns new value for scale length
+  scaleLength = dlg->scaleLength (); // This call returns new value for scale length
   delete dlg;
 
   if (rtn == QDialog::Accepted) {
@@ -446,12 +448,23 @@ void DigitizeStateSelect::removeHoverHighlighting()
   }
 }
 
-QString DigitizeStateSelect::scaleBarPointIdentifier (CmdMediator *cmdMediator) const
+double DigitizeStateSelect::scaleBarLength (CmdMediator *cmdMediator) const
 {
-  CallbackIdentifyScaleBarPointIdentifier ftor;
+  CallbackScaleBar ftor;
 
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                    &CallbackIdentifyScaleBarPointIdentifier::callback);
+                                                                                                    &CallbackScaleBar::callback);
+  cmdMediator->iterateThroughCurvePointsAxes (ftorWithCallback);
+
+  return ftor.scaleBarLength ();
+}
+
+QString DigitizeStateSelect::scaleBarPointIdentifier (CmdMediator *cmdMediator) const
+{
+  CallbackScaleBar ftor;
+
+  Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                    &CallbackScaleBar::callback);
   cmdMediator->iterateThroughCurvePointsAxes (ftorWithCallback);
 
   return ftor.scaleBarPointIdentifier();

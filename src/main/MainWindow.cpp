@@ -116,6 +116,7 @@
 #include <QWhatsThis>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include "ScaleBarAxisPointsUnite.h"
 #include "Settings.h"
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
@@ -3084,10 +3085,16 @@ void MainWindow::slotEditDelete ()
 
   } else {
 
+    // If this is a map, which has a scale bar with two axis points, then selection of just one axis point
+    // for deletion should result in deletion of the other point also so this object will enforce that. Otherwise
+    // this class has no effect below
+    ScaleBarAxisPointsUnite scaleBarAxisPoints;
+
     // Process curve points in main window
     GraphicsItemsExtractor graphicsItemsExtractor;
     const QList<QGraphicsItem*> &items = m_scene->selectedItems();
-    QStringList pointIdentifiers = graphicsItemsExtractor.selectedPointIdentifiers (items);
+    QStringList pointIdentifiers = scaleBarAxisPoints.unite (m_cmdMediator,
+                                                             graphicsItemsExtractor.selectedPointIdentifiers (items));
 
     CmdDelete *cmd = new CmdDelete (*this,
                                     m_cmdMediator->document(),

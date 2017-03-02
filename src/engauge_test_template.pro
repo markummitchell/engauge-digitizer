@@ -43,10 +43,10 @@ HEADERS  += \
     Callback/CallbackCheckEditPointAxis.h \
     Callback/CallbackDocumentHash.h \
     Callback/CallbackGatherXThetaValuesFunctions.h \
-    Callback/CallbackIdentifyScaleBarPointIdentifier.h \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
+    Callback/CallbackScaleBar.h \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
     Callback/CallbackUpdateTransform.h \
@@ -171,6 +171,7 @@ HEADERS  += \
     Dlg/DlgSettingsMainWindow.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
+    Dlg/DlgValidatorAboveZero.h \
     Dlg/DlgValidatorAbstract.h \
     Dlg/DlgValidatorDateTime.h \
     Dlg/DlgValidatorDegreesMinutesSeconds.h \
@@ -307,6 +308,7 @@ HEADERS  += \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
+    ScaleBar/ScaleBarAxisPointsUnite.h \
     Segment/Segment.h \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
@@ -375,10 +377,10 @@ SOURCES += \
     Callback/CallbackCheckEditPointAxis.cpp \
     Callback/CallbackDocumentHash.cpp \
     Callback/CallbackGatherXThetaValuesFunctions.cpp \
-    Callback/CallbackIdentifyScaleBarPointIdentifier.cpp \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
+    Callback/CallbackScaleBar.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
     Checker/Checker.cpp \
@@ -499,6 +501,7 @@ SOURCES += \
     Dlg/DlgSettingsMainWindow.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
+    Dlg/DlgValidatorAboveZero.cpp \
     Dlg/DlgValidatorAbstract.cpp \
     Dlg/DlgValidatorDateTime.cpp \
     Dlg/DlgValidatorDegreesMinutesSeconds.cpp \
@@ -619,6 +622,7 @@ SOURCES += \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
+    ScaleBar/ScaleBarAxisPointsUnite.cpp \    
     Segment/Segment.cpp \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
@@ -716,6 +720,7 @@ INCLUDEPATH += Background \
                Pdf \
                Plot \
                Point \
+               ScaleBar \
                Segment \
                Settings \
                Spline \

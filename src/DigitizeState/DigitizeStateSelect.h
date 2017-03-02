@@ -59,6 +59,7 @@ private:
                       Qt::Key key);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
   void removeHoverHighlighting();
+  double scaleBarLength (CmdMediator *cmdMediator) const;
   QString scaleBarPointIdentifier (CmdMediator *cmdMediator) const;
   void setHoverHighlighting(const MainWindowModel &modelMainWindow);
   double zoomedToUnzoomedScreenX () const;

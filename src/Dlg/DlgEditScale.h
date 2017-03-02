@@ -16,7 +16,6 @@ class DocumentModelCoords;
 class DocumentModelGeneral;
 class MainWindow;
 class MainWindowModel;
-class QDoubleValidator;
 class QVBoxLayout;
 
 /// Dialog box for editing the information of the map scale
@@ -29,7 +28,8 @@ public:
   DlgEditScale (MainWindow &mainWindow,
                 const DocumentModelCoords &modelCoords,
                 const DocumentModelGeneral &modelGeneral,
-                const MainWindowModel &modelMainWindow);
+                const MainWindowModel &modelMainWindow,
+                const double *scaleLength = 0);
   ~DlgEditScale ();
 
   /// Return the scale bar length specified by the user. Only applies if dialog was accepted
@@ -42,6 +42,7 @@ private:
   void createHint (QVBoxLayout *layoutOuter);
   void createOkCancel (QVBoxLayout *layoutOuter);
   void createScaleLength (QVBoxLayout *layoutOuter);
+  void initializeScaleLength (const double *scaleLength);
   void updateControls ();
 
   QLineEdit *m_editScaleLength;

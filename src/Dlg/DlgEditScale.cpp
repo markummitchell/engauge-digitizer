@@ -18,7 +18,6 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
-#include <QDoubleValidator>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -35,7 +34,8 @@ const int MIN_WIDTH_TO_FIT_STRANGE_UNITS = 200;
 DlgEditScale::DlgEditScale (MainWindow &mainWindow,
                             const DocumentModelCoords &modelCoords,
                             const DocumentModelGeneral &modelGeneral,
-                            const MainWindowModel &modelMainWindow) :
+                            const MainWindowModel &modelMainWindow,
+                            const double *scaleLength) :
   QDialog (&mainWindow),
   m_modelCoords (modelCoords),
   m_modelGeneral (modelGeneral),
@@ -54,6 +54,8 @@ DlgEditScale::DlgEditScale (MainWindow &mainWindow,
   createHint (layout);
   createOkCancel (layout);
 
+  initializeScaleLength (scaleLength);
+  
   updateControls ();
 }
 
@@ -100,17 +102,9 @@ void DlgEditScale::createOkCancel (QVBoxLayout *layoutOuter)
 
 void DlgEditScale::createScaleLength (QVBoxLayout *layoutOuter)
 {
-  const bool IS_CARTESIAN = true;
-
-  // Constraints on x and y are needed for log scaling
+  // Simple validation strategy
   DlgValidatorFactory dlgValidatorFactory;
-  m_validatorScaleLength = dlgValidatorFactory.createCartesianOrPolarWithPolarPolar (m_modelCoords.coordScaleXTheta(),
-                                                                                     IS_CARTESIAN,
-                                                                                     m_modelCoords.coordUnitsX(),
-                                                                                     m_modelCoords.coordUnitsTheta(),
-                                                                                     m_modelCoords.coordUnitsDate(),
-                                                                                     m_modelCoords.coordUnitsTime(),
-                                                                                     m_modelMainWindow.locale());
+  m_validatorScaleLength = dlgValidatorFactory.createAboveZero (m_modelMainWindow.locale());
 
   // Label, with guidance in terms of legal ranges and units
   QGroupBox *panel = new QGroupBox (tr ("Scale Length"), this);
@@ -128,6 +122,13 @@ void DlgEditScale::createScaleLength (QVBoxLayout *layoutOuter)
   m_editScaleLength->setWhatsThis (tr ("Enter the scale bar length"));
   layout->addWidget(m_editScaleLength, 0);
   connect (m_editScaleLength, SIGNAL (textChanged (const QString &)), this, SLOT (slotTextChanged (const QString &)));
+}
+
+void DlgEditScale::initializeScaleLength (const double *scaleLength)
+{
+  if (scaleLength != 0) {
+    m_editScaleLength->setText (QString::number (*scaleLength));
+  }
 }
 
 double DlgEditScale::scaleLength () const
