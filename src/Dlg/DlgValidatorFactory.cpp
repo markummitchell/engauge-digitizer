@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "DlgValidatorAboveZero.h"
 #include "DlgValidatorAbstract.h"
 #include "DlgValidatorDateTime.h"
 #include "DlgValidatorDegreesMinutesSeconds.h"
@@ -15,6 +16,11 @@
 DlgValidatorFactory::DlgValidatorFactory()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgValidatorFactory::DlgValidatorFactory";
+}
+
+DlgValidatorAbstract *DlgValidatorFactory::createAboveZero (const QLocale &locale) const
+{
+  return new DlgValidatorAboveZero (locale);
 }
 
 DlgValidatorAbstract *DlgValidatorFactory::createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,

@@ -21,6 +21,9 @@ public:
   /// Single constructor
   DlgValidatorFactory();
 
+  /// Factory method for generating validators for scale length which must be a number greater than zero
+  DlgValidatorAbstract *createAboveZero (const QLocale &locale) const;
+
   /// Factory method for generating validators for either cartesian or polar case, when polar format is specified by CoordUnitsNonPolarTheta
   DlgValidatorAbstract *createCartesianOrPolarWithNonPolarPolar (CoordScale coordScale,
                                                                  bool isCartesian,

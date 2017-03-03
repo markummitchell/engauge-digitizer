@@ -25,6 +25,7 @@
 const QString AXIS_CURVE_NAME ("Axes");
 const QString DEFAULT_GRAPH_CURVE_NAME ("Curve1");
 const QString DUMMY_CURVE_NAME ("dummy");
+const QString SCALE_CURVE_NAME ("Scale"); // Used for pre-version 6 input files
 const QString TAB_DELIMITER ("\t");
 
 // This has to be a multimap instead of a map since some users may mistakenly allow multiple points with the
@@ -57,6 +58,12 @@ Curve::Curve (QDataStream &str)
   double xGraph, yGraph;
 
   str >> m_curveName;
+
+  // Scale bar points are handled as if they are axis points
+  if (m_curveName == SCALE_CURVE_NAME) {
+    m_curveName = AXIS_CURVE_NAME;
+  }
+
   str >> int32;
   m_curveStyle.setPointShape(migrate.pointShape (int32));
   str >> int32;

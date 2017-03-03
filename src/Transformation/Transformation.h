@@ -75,7 +75,8 @@ public:
   void coordTextForStatusBar (QPointF cursorScreen,
                               QString &coordsScreen,
                               QString &coordsGraph,
-                              QString &resolutionGraph);
+                              QString &resolutionGraph,
+                              const QString &needMoreText);
 
   /// Convert cartesian scaling from log to linear. Calling code is responsible for determining if this is necessary
   static double logToLinearCartesian (double xy);

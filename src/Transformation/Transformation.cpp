@@ -167,7 +167,8 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
 void Transformation::coordTextForStatusBar (QPointF cursorScreen,
                                             QString &coordsScreen,
                                             QString &coordsGraph,
-                                            QString &resolutionsGraph)
+                                            QString &resolutionsGraph,
+                                            const QString &needMoreText)
 {
   const int UNCONSTRAINED_FIELD_WIDTH = 0;
   const double X_DELTA_PIXELS = 1.0, Y_DELTA_PIXELS = 1.0;
@@ -227,7 +228,7 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
     } else {
 
       coordsGraph = QString ("<font color=\"red\">%1</font>")
-        .arg (QObject::tr ("Need more axis points"));
+        .arg (needMoreText);
       resolutionsGraph = coordsGraph;
 
     }

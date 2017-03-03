@@ -86,6 +86,8 @@ private:
 
   bool anyPointsRepeatPair (const CoordPairVector &vector) const;
   bool anyPointsRepeatSingle (const CoordSingleVector &vector) const;
+  CallbackSearchReturn callbackRequire2AxisPoints (const QPointF &posScreen,
+                                                   const QPointF &posGraph);
   CallbackSearchReturn callbackRequire3AxisPoints (const QPointF &posScreen,
                                                    const QPointF &posGraph);
   CallbackSearchReturn callbackRequire4AxisPoints (bool isXOnly,
@@ -93,6 +95,7 @@ private:
                                                    const QPointF &posGraph);
   void computeTransforms3();
   void computeTransforms4();
+  void loadTransforms2();
   void loadTransforms3();
   void loadTransforms4();
   bool threePointsAreCollinear (const QTransform &transform);

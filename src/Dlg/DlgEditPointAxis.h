@@ -17,11 +17,10 @@ class DocumentModelCoords;
 class DocumentModelGeneral;
 class MainWindow;
 class MainWindowModel;
-class QDoubleValidator;
 class QVBoxLayout;
 class Transformation;
 
-/// Dialog box for editing the information of one axis point.
+/// Dialog box for editing the information of one axis point, in a graph with two axes
 class DlgEditPointAxis : public QDialog
 {
   Q_OBJECT;

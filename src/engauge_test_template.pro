@@ -46,6 +46,7 @@ HEADERS  += \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
+    Callback/CallbackScaleBar.h \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
     Callback/CallbackUpdateTransform.h \
@@ -64,6 +65,7 @@ HEADERS  += \
     Cmd/CmdAddPointAxis.h \
     Cmd/CmdAddPointGraph.h \
     Cmd/CmdAddPointsGraph.h \
+    Cmd/CmdAddScale.h \
     Cmd/CmdCopy.h \
     Cmd/CmdCut.h \
     Cmd/CmdDelete.h \
@@ -138,12 +140,14 @@ HEADERS  += \
     DigitizeState/DigitizeStateCurve.h \
     DigitizeState/DigitizeStateEmpty.h \
     DigitizeState/DigitizeStatePointMatch.h \
+    DigitizeState/DigitizeStateScale.h \    
     DigitizeState/DigitizeStateSegment.h \
     DigitizeState/DigitizeStateSelect.h \
     Dlg/DlgAbout.h \
     Dlg/DlgEditPointAxis.h \
     Dlg/DlgEditPointGraph.h \
     Dlg/DlgEditPointGraphLineEdit.h \
+    Dlg/DlgEditScale.h \    
     Dlg/DlgErrorReportAbstractBase.h \
     Dlg/DlgErrorReportLocal.h \    
     Dlg/DlgErrorReportNetworking.h \
@@ -167,6 +171,7 @@ HEADERS  += \
     Dlg/DlgSettingsMainWindow.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
+    Dlg/DlgValidatorAboveZero.h \
     Dlg/DlgValidatorAbstract.h \
     Dlg/DlgValidatorDateTime.h \
     Dlg/DlgValidatorDegreesMinutesSeconds.h \
@@ -303,6 +308,7 @@ HEADERS  += \
     Point/PointShape.h \
     Point/PointStyle.h \
     util/QtToString.h \
+    ScaleBar/ScaleBarAxisPointsUnite.h \
     Segment/Segment.h \
     Segment/SegmentFactory.h \
     Segment/SegmentLine.h \
@@ -374,6 +380,7 @@ SOURCES += \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
+    Callback/CallbackScaleBar.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
     Checker/Checker.cpp \
@@ -391,6 +398,7 @@ SOURCES += \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
     Cmd/CmdAddPointsGraph.cpp \
+    Cmd/CmdAddScale.cpp \    
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
@@ -462,12 +470,14 @@ SOURCES += \
     DigitizeState/DigitizeStateCurve.cpp \
     DigitizeState/DigitizeStateEmpty.cpp \
     DigitizeState/DigitizeStatePointMatch.cpp \
+    DigitizeState/DigitizeStateScale.cpp \        
     DigitizeState/DigitizeStateSegment.cpp \
     DigitizeState/DigitizeStateSelect.cpp \
     Dlg/DlgAbout.cpp \
     Dlg/DlgEditPointAxis.cpp \
     Dlg/DlgEditPointGraph.cpp \
     Dlg/DlgEditPointGraphLineEdit.cpp \
+    Dlg/DlgEditScale.cpp \        
     Dlg/DlgErrorReportAbstractBase.cpp \
     Dlg/DlgErrorReportLocal.cpp \        
     Dlg/DlgErrorReportNetworking.cpp \    
@@ -491,6 +501,7 @@ SOURCES += \
     Dlg/DlgSettingsMainWindow.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
+    Dlg/DlgValidatorAboveZero.cpp \
     Dlg/DlgValidatorAbstract.cpp \
     Dlg/DlgValidatorDateTime.cpp \
     Dlg/DlgValidatorDegreesMinutesSeconds.cpp \
@@ -611,6 +622,7 @@ SOURCES += \
     Point/PointShape.cpp \
     Point/PointStyle.cpp \
     util/QtToString.cpp \
+    ScaleBar/ScaleBarAxisPointsUnite.cpp \    
     Segment/Segment.cpp \
     Segment/SegmentFactory.cpp \
     Segment/SegmentLine.cpp \
@@ -708,6 +720,7 @@ INCLUDEPATH += Background \
                Pdf \
                Plot \
                Point \
+               ScaleBar \
                Segment \
                Settings \
                Spline \

@@ -200,6 +200,11 @@ int CoordSystemContext::curvesGraphsNumPoints (const QString &curveName) const
   return m_coordSystems [m_coordSystemIndex]->curvesGraphsNumPoints(curveName);
 }
 
+DocumentAxesPointsRequired CoordSystemContext::documentAxesPointsRequired () const
+{
+  return m_coordSystems [m_coordSystemIndex]->documentAxesPointsRequired ();
+}
+
 void CoordSystemContext::editPointAxis (const QPointF &posGraph,
                                         const QString &identifier)
 {

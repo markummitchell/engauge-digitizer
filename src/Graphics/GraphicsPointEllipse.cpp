@@ -21,22 +21,6 @@ GraphicsPointEllipse::GraphicsPointEllipse(GraphicsPoint &graphicsPoint,
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointEllipse::GraphicsPointEllipse";
 }
 
-QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
-                                          const QVariant &value)
-{
-  if (change == QGraphicsItem::ItemPositionHasChanged) {
-
-    LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPointEllipse::itemChange"
-                                 << " identifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
-                                 << " positionHasChanged";
-
-    setData (DATA_KEY_POSITION_HAS_CHANGED, QVariant (true));
-  }
-
-  return QGraphicsEllipseItem::itemChange(change,
-                                          value);
-}
-
 void GraphicsPointEllipse::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
   // Highlighted
@@ -55,6 +39,22 @@ void GraphicsPointEllipse::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
   emit signalPointHoverLeave (data (DATA_KEY_IDENTIFIER).toString ());
 
   QGraphicsEllipseItem::hoverLeaveEvent (event);
+}
+
+QVariant GraphicsPointEllipse::itemChange(GraphicsItemChange change,
+                                          const QVariant &value)
+{
+  if (change == QGraphicsItem::ItemPositionHasChanged) {
+
+    LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPointEllipse::itemChange"
+                                 << " identifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
+                                 << " positionHasChanged";
+
+    setData (DATA_KEY_POSITION_HAS_CHANGED, QVariant (true));
+  }
+
+  return QGraphicsEllipseItem::itemChange(change,
+                                          value);
 }
 
 void GraphicsPointEllipse::setOpacityForSubtree (double opacity)
