@@ -9,7 +9,8 @@
 
 enum DocumentAxesPointsRequired {
   DOCUMENT_AXES_POINTS_REQUIRED_3,
-  DOCUMENT_AXES_POINTS_REQUIRED_4
+  DOCUMENT_AXES_POINTS_REQUIRED_4,
+  DOCUMENT_AXES_POINTS_REQUIRED_2 // After the others for easier backwards compatibility since this was added later
 };
 
 #endif // DOCUMENT_AXES_POINTS_REQUIRED_H

@@ -15,11 +15,8 @@ class CmdMediator;
 class DigitizeStateContext;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
-class QGraphicsScene;
-class QImage;
 class QString;
 class QStringList;
-class QTimer;
 
 /// Set of possible states of Digitize toolbar.
 enum DigitizeState {
@@ -30,6 +27,7 @@ enum DigitizeState {
   DIGITIZE_STATE_POINT_MATCH,
   DIGITIZE_STATE_SEGMENT,
   DIGITIZE_STATE_SELECT,
+  DIGITIZE_STATE_SCALE, // Out of order for backwards compatibility with pre-version 10
   NUM_DIGITIZE_STATES
 };
 

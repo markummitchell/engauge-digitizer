@@ -42,6 +42,25 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                      *point);
 }
 
+void GraphicsScene::addTemporaryScaleBar (GraphicsPoint *point0,
+                                          GraphicsPoint *point1,
+                                          const QString &pointIdentifier0,
+                                          const QString &pointIdentifier1)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addTemporaryScaleBar";
+
+  const double ORDINAL_0 = 0, ORDINAL_1 = 1;
+
+  m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
+                                     pointIdentifier0,
+                                     ORDINAL_0,
+                                     *point0);
+  m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
+                                     pointIdentifier1,
+                                     ORDINAL_1,
+                                     *point1);
+}
+
 GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
                                            const PointStyle &pointStyle,
                                            const QPointF &posScreen,
@@ -170,6 +189,11 @@ void GraphicsScene::removeTemporaryPointIfExists ()
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removeTemporaryPointIfExists";
 
   m_graphicsLinesForCurves.removeTemporaryPointIfExists ();
+}
+
+void GraphicsScene::removeTemporaryScaleBarIfExists ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::removeTemporaryScaleBarIfExists";
 }
 
 void GraphicsScene::resetOnLoad()

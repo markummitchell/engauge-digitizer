@@ -10,6 +10,7 @@
 #include "GraphicsPointAbstractBase.h"
 #include <QColor>
 #include <QPointF>
+#include <QRectF>
 
 extern const double DEFAULT_HIGHLIGHT_OPACITY;
 extern const double MAX_OPACITY;
@@ -63,6 +64,9 @@ public:
   /// Destructor. This remove the graphics item from the scene
   ~GraphicsPoint ();
 
+  /// Proxy method for QGraphicsItem::boundingRect
+  QRectF boundingRect () const;
+
   /// Proxy method for QGraphicsItem::data
   QVariant data (int key) const;
 
@@ -91,6 +95,9 @@ public:
 
   /// Update the position
   void setPos (const QPointF pos);
+
+  /// Prevent automatic focus on point (=make it passive) for scale bar so drags can be made to work properly
+  void setPassive ();
 
   /// Mark point as wanted. Marking as unwanted is done by the reset function
   void setWanted ();

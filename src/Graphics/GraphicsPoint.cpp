@@ -110,6 +110,15 @@ GraphicsPoint::~GraphicsPoint()
   }
 }
 
+QRectF GraphicsPoint::boundingRect () const
+{
+  if (m_graphicsItemEllipse == 0) {
+    return m_graphicsItemPolygon->boundingRect ();
+  } else {
+    return m_graphicsItemEllipse->boundingRect ();
+  }
+}
+
 void GraphicsPoint::createPointEllipse (unsigned int radius)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
@@ -269,6 +278,19 @@ void GraphicsPoint::setHighlightOpacity (double highlightOpacity)
   m_highlightOpacity = highlightOpacity;
 }
 
+void GraphicsPoint::setPassive ()
+{
+  if (m_graphicsItemEllipse == 0) {
+    m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsFocusable, false);
+    m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsMovable, false);
+    m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsSelectable, false);
+  } else {
+    m_graphicsItemEllipse->setFlag (QGraphicsItem::ItemIsFocusable, false);
+    m_graphicsItemEllipse->setFlag (QGraphicsItem::ItemIsMovable, false);
+    m_graphicsItemEllipse->setFlag (QGraphicsItem::ItemIsSelectable, false);
+  }
+}
+
 void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 {
   // Setting pen and radius of parent graphics items below also affects the child shadows
@@ -320,9 +342,9 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 void GraphicsPoint::setPos (const QPointF pos)
 {
   if (m_graphicsItemEllipse == 0) {
-    return m_graphicsItemPolygon->setPos (pos);
+    m_graphicsItemPolygon->setPos (pos);
   } else {
-    return m_graphicsItemEllipse->setPos (pos);
+    m_graphicsItemEllipse->setPos (pos);
   }
 }
 

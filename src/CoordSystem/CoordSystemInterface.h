@@ -9,6 +9,7 @@
 
 #include "CallbackSearchReturn.h"
 #include "CurveStyles.h"
+#include "DocumentAxesPointsRequired.h"
 #include "DocumentModelAxesChecker.h"
 #include "DocumentModelColorFilter.h"
 #include "DocumentModelCoords.h"
@@ -110,6 +111,9 @@ public:
 
   /// See CurvesGraphs::curvesGraphsNumPoints.
   virtual int curvesGraphsNumPoints (const QString &curveName) const = 0;
+
+  /// Number of axes points for map or graph. This value is returned after opening a file
+  virtual DocumentAxesPointsRequired documentAxesPointsRequired () const = 0;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   virtual void editPointAxis (const QPointF &posGraph,

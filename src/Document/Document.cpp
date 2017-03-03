@@ -12,6 +12,7 @@
 #include "CallbackRemovePointsInCurvesGraphs.h"
 #include "Curve.h"
 #include "CurvesGraphs.h"
+#include "CurveStyle.h"
 #include "CurveStyles.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -22,6 +23,7 @@
 #include "Logger.h"
 #include "OrdinalGenerator.h"
 #include "Point.h"
+#include "PointStyle.h"
 #include <QByteArray>
 #include <QDataStream>
 #include <QDebug>
@@ -44,6 +46,7 @@ const int VERSION_6 = 6;
 const int VERSION_7 = 7;
 const int VERSION_8 = 8;
 const int VERSION_9 = 9;
+const int VERSION_10 = 10;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -107,6 +110,7 @@ Document::Document (const QString &fileName) :
           case VERSION_7:
           case VERSION_8:
           case VERSION_9:
+          case VERSION_10:
             loadVersions7AndUp (file);
             break;
 
@@ -219,6 +223,30 @@ void Document::addPointsInCurvesGraphs (CurvesGraphs &curvesGraphs)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addPointsInCurvesGraphs";
 
   m_coordSystemContext.addPointsInCurvesGraphs(curvesGraphs);
+}
+
+void Document::addScaleWithGeneratedIdentifier (const QPointF &posScreen0,
+                                                const QPointF &posScreen1,
+                                                double scaleLength,
+                                                QString &identifier0,
+                                                QString &identifier1,
+                                                double ordinal0,
+                                                double ordinal1)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::addScaleWithGeneratedIdentifier";
+
+  const bool IS_X_ONLY = false;
+
+  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen0,
+                                                           QPointF (0, 0),
+                                                           identifier0,
+                                                           ordinal0,
+                                                           IS_X_ONLY);
+  m_coordSystemContext.addPointAxisWithGeneratedIdentifier(posScreen1,
+                                                           QPointF (scaleLength, 0),
+                                                           identifier1,
+                                                           ordinal1,
+                                                           IS_X_ONLY);
 }
 
 bool Document::bytesIndicatePreVersion6 (const QByteArray &bytes) const
@@ -493,8 +521,6 @@ void Document::loadPreVersion6 (QDataStream &str)
   double version;
   QString st;
 
-  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
-
   str >> int32; // Magic number
   str >> version;
   str >> st; // Version string
@@ -504,6 +530,8 @@ void Document::loadPreVersion6 (QDataStream &str)
 
   m_coordSystemContext.loadPreVersion6 (str,
                                         version);
+
+  m_documentAxesPointsRequired = m_coordSystemContext.documentAxesPointsRequired ();
 }
 
 void Document::loadVersion6 (QFile *file)
@@ -739,6 +767,51 @@ int Document::nextOrdinalForCurve (const QString &curveName) const
   return m_coordSystemContext.nextOrdinalForCurve(curveName);
 }
 
+void Document::overrideGraphDefaultsWithMapDefaults ()
+{
+  const int DEFAULT_WIDTH = 1;
+
+  // Axis style for scale bar is better with transparent-filled circles so user can more accurately place them,
+  // and a visible line between the points also helps to make the points more visible
+  CurveStyles curveStyles = modelCurveStyles ();
+
+  CurveStyle curveStyle  = curveStyles.curveStyle (AXIS_CURVE_NAME);
+
+  PointStyle pointStyle = curveStyle.pointStyle ();
+  pointStyle.setShape (POINT_SHAPE_CIRCLE);
+  pointStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+  LineStyle lineStyle = curveStyle.lineStyle ();
+  lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
+  lineStyle.setWidth (DEFAULT_WIDTH);
+  lineStyle.setPaletteColor (COLOR_PALETTE_RED);
+
+  curveStyle.setPointStyle (pointStyle);
+  curveStyle.setLineStyle (lineStyle);
+
+  curveStyles.setCurveStyle (AXIS_CURVE_NAME,
+                             curveStyle);
+
+  // Change all graph curves from functions to relations
+  QStringList curveNames = curvesGraphsNames ();
+  QStringList::const_iterator itr;
+  for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
+    QString curveName = *itr;
+    CurveStyle curveStyle = curveStyles.curveStyle (curveName);
+
+    LineStyle lineStyle = curveStyle.lineStyle ();
+    lineStyle.setCurveConnectAs (CONNECT_AS_RELATION_STRAIGHT);
+
+    curveStyle.setLineStyle (lineStyle);
+
+    curveStyles.setCurveStyle (curveName,
+                               curveStyle);
+  }
+
+  // Save modified curve styles into Document
+  setModelCurveStyles (curveStyles);
+}
+
 QPixmap Document::pixmap () const
 {                               
   return m_pixmap;
@@ -866,6 +939,11 @@ void Document::setDocumentAxesPointsRequired(DocumentAxesPointsRequired document
   LOG4CPP_INFO_S ((*mainCat)) << "Document::setDocumentAxesPointsRequired";
 
   m_documentAxesPointsRequired = documentAxesPointsRequired;
+
+  if (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
+
+    overrideGraphDefaultsWithMapDefaults ();
+  }
 }
 
 void Document::setModelAxesChecker(const DocumentModelAxesChecker &modelAxesChecker)

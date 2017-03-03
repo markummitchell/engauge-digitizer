@@ -21,6 +21,7 @@ class GraphicsPoint;
 class MainWindow;
 class PointStyle;
 class QTextStream;
+class ScaleBar;
 class Transformation;
 
 /// Add point and line handling to generic QGraphicsScene. The primary tasks are:
@@ -38,6 +39,13 @@ public:
   /// Add one temporary point to m_graphicsLinesForCurves. Non-temporary points are handled by the updateLineMembership functions
   void addTemporaryPoint (const QString &identifier,
                           GraphicsPoint *point);
+
+  /// Add temporary scale bar to scene. The scale bar is different from points and lines (always a complete set of 2 points
+  /// and one line, and drawn using different point and line styles) that it is handled outside m_graphisLinesForCurves
+  void addTemporaryScaleBar (GraphicsPoint *point0,
+                             GraphicsPoint *point1,
+                             const QString &pointIdentifier0,
+                             const QString &pointIdentifier1);
 
   /// Create one QGraphicsItem-based object that represents one Point. It is NOT added to m_graphicsLinesForCurves (see addPoint)
   GraphicsPoint *createPoint (const QString &identifier,
@@ -61,6 +69,9 @@ public:
   /// Remove temporary point if it exists. Temporary point handling is so complicated that this method quietly
   /// allows redundant calls to this method, without complaining that the point has already been removed when called again
   void removeTemporaryPointIfExists ();
+
+  /// Remove temporary scale bar, composed of two points and the line between them
+  void removeTemporaryScaleBarIfExists ();
 
   /// Reset, when loading a document after the first, to same state that first document was at when loaded
   void resetOnLoad();

@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "CallbackUpdateTransform.h"
+#include "EngaugeAssert.h"
 #include "Point.h"
 
 CallbackUpdateTransform::CallbackUpdateTransform(const DocumentModelCoords &modelCoords,
@@ -16,9 +17,17 @@ CallbackUpdateTransform::CallbackUpdateTransform(const DocumentModelCoords &mode
 
 bool CallbackUpdateTransform::transformIsDefined () const
 {
-  if (documentAxesPointsRequired () == DOCUMENT_AXES_POINTS_REQUIRED_3) {
+  switch (documentAxesPointsRequired ()) {
+  case DOCUMENT_AXES_POINTS_REQUIRED_2:
+    return !isError () && (numberAxisPoints () == 2);
+
+  case DOCUMENT_AXES_POINTS_REQUIRED_3:
     return !isError () && (numberAxisPoints () == 3);
-  } else {
+
+  case DOCUMENT_AXES_POINTS_REQUIRED_4:
     return !isError () && (numberAxisPoints () == 4);
+
+  default:
+    ENGAUGE_ASSERT (false);
   }
 }

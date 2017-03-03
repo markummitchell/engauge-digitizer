@@ -244,6 +244,7 @@ private slots:
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
   void slotDigitizePointMatch ();
+  void slotDigitizeScale ();
   void slotDigitizeSegment ();
   void slotDigitizeSelect ();
   void slotEditCopy ();
@@ -400,6 +401,8 @@ private:
   DocumentModelExportFormat modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
                                                  const ExportToFile &exportStrategy,
                                                  const QString &selectedNameFilter) const;
+  bool modeGraph () const; // True if document is loaded and it has all graphs
+  bool modeMap () const; // True of document is loaded and it has all maps
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   bool saveDocumentFile(const QString &fileName);
   QString saveErrorReportFileAndExitXml (const char *comment,
@@ -475,6 +478,7 @@ private:
   QActionGroup *m_groupDigitize;
   QAction *m_actionDigitizeSelect;
   QAction *m_actionDigitizeAxis;
+  QAction *m_actionDigitizeScale;
   QAction *m_actionDigitizeCurve;
   QAction *m_actionDigitizePointMatch;
   QAction *m_actionDigitizeColorPicker;
