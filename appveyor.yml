@@ -35,7 +35,7 @@ environment:
 
 install:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat %BUILD_TYPE%
-  - IF %BUILD_TYPE%=="X86" (set QTDIR=C:\Qt\5.8\msvc2015) ELSE (set QTDIR=C:\Qt\5.8\msvc2015_64)
+  - IF %BUILD_TYPE% == X86 (set QTDIR=C:\Qt\5.8\msvc2015) ELSE (set QTDIR=C:\Qt\5.8\msvc2015_64)
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\%LOG4CPP_FILE% -aoa
@@ -73,7 +73,7 @@ after_build:
 #  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll %RESULTDIR%\%%I)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
-  - IF %BUILD_TYPE%=="X86" (set VCLIBDIR=%WINDIR%\SysWOW64) ELSE (set VCLIBDIR=%WINDIR%)
+  - IF %BUILD_TYPE% == X86 (set VCLIBDIR=%WINDIR%\SysWOW64) ELSE (set VCLIBDIR=%WINDIR%)
   - for %%I in (%VCLIBS%) do copy %VCLIBDIR%\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
   - copy %LOG4CPP_VER%\lib\log4cpp.dll %RESULTDIR%
