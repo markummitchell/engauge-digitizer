@@ -1459,6 +1459,7 @@ void MainWindow::fileExport(const QString &fileName,
                                  str);
 
     updateChecklistGuide ();
+    m_statusBar->showTemporaryMessage("File saved");
 
   } else {
 
