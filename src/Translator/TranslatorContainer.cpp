@@ -6,7 +6,7 @@
 #include "Settings.h"
 #include "TranslatorContainer.h"
 
-TranslatorContainer::TranslatorContainer(QApplication &appEngauge) // Argument name "app" triggers compiler false alarm here
+TranslatorContainer::TranslatorContainer(QApplication & /* app */)
 {
   QLocale localeDefault;
 
@@ -34,7 +34,7 @@ TranslatorContainer::TranslatorContainer(QApplication &appEngauge) // Argument n
     m_translatorGeneric = new QTranslator;
     m_translatorGeneric->load ("qt_" + locale.name().toLower(),
                                QLibraryInfo::location (QLibraryInfo::TranslationsPath));
-    appEngauge.installTranslator (m_translatorGeneric);
+    QApplication::installTranslator (m_translatorGeneric);
 
     // Engauge-specific translators. As documented in engauge.pro, the country-specific engauge_XX_YY locale is loaded
     // if available, otherwise engauge_XX is loaded if available
@@ -52,6 +52,6 @@ TranslatorContainer::TranslatorContainer(QApplication &appEngauge) // Argument n
                                QCoreApplication::applicationDirPath () + "/translations",
                                delimiters);
 #endif
-    appEngauge.installTranslator (m_translatorEngauge);
+    QApplication::installTranslator (m_translatorEngauge);
   }
 }

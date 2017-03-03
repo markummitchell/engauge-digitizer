@@ -8,7 +8,7 @@ class QTranslator;
 class TranslatorContainer
 {
  public:
-  /// Single constructor
+  /// Single constructor. Argument is needed so object is not optimized away in main() in Windows
   TranslatorContainer(QApplication &app);
 
  private:
