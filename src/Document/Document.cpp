@@ -521,8 +521,6 @@ void Document::loadPreVersion6 (QDataStream &str)
   double version;
   QString st;
 
-  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
-
   str >> int32; // Magic number
   str >> version;
   str >> st; // Version string
@@ -532,6 +530,8 @@ void Document::loadPreVersion6 (QDataStream &str)
 
   m_coordSystemContext.loadPreVersion6 (str,
                                         version);
+
+  m_documentAxesPointsRequired = m_coordSystemContext.documentAxesPointsRequired ();
 }
 
 void Document::loadVersion6 (QFile *file)

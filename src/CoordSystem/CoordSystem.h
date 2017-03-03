@@ -84,6 +84,7 @@ public:
   virtual const CurvesGraphs &curvesGraphs () const;
   virtual QStringList curvesGraphsNames () const;
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
+  virtual DocumentAxesPointsRequired documentAxesPointsRequired () const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
   virtual void editPointGraph (bool isX,

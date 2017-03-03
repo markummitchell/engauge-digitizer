@@ -989,7 +989,7 @@ void DlgSettingsExportFormat::updatePreview()
 
   if (mainWindow().transformation().transformIsDefined()) {
 
-    // Transformaiton is defined so we can create a preview
+    // Transformation is defined so we can create a preview
     if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
 
       ExportFileFunctions exportStrategy;

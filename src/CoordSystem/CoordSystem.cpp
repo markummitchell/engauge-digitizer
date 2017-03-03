@@ -267,6 +267,11 @@ int CoordSystem::curvesGraphsNumPoints(const QString &curveName) const
   return m_curvesGraphs.curvesGraphsNumPoints(curveName);
 }
 
+DocumentAxesPointsRequired CoordSystem::documentAxesPointsRequired () const
+{
+  return m_documentAxesPointsRequired;
+}
+
 void CoordSystem::editPointAxis (const QPointF &posGraph,
                                  const QString &identifier)
 {
@@ -358,8 +363,6 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   double dbl, radius = 0.0;
   QString st;
 
-  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
-
   str >> st; // CurveCmbText selection
   str >> st; // MeasureCmbText selection
   str >> int32;
@@ -382,6 +385,8 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   m_modelExport.setLayoutFunctions((ExportLayoutFunctions) int32);
   str >> int32;
   m_modelExport.setPointsSelectionFunctions((ExportPointsSelectionFunctions) int32);
+  m_modelExport.setPointsSelectionRelations(EXPORT_POINTS_SELECTION_RELATIONS_RAW); // Best for maps
+  m_modelExport.setPointsIntervalUnitsFunctions((ExportPointsIntervalUnits) int32);
   m_modelExport.setPointsIntervalUnitsRelations((ExportPointsIntervalUnits) int32);
   str >> int32;
   m_modelExport.setHeader((ExportHeader) int32);
@@ -493,12 +498,25 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> int32; // Value threshold low
   str >> int32; // Value threshold high
 
-  m_curveAxes = new Curve (str);
-  Curve curveScale (str); // Scales are dropped on the floor
+  // Old versions have two Curve objects for 3 point axes and 2 point scales. New version picks one Curve
+  Curve *curveAxesIn = new Curve (str);
+  Curve *curveScaleIn = new Curve (str);
+  if (curveScaleIn->numPoints() == 2) {
+    // Nondefault case is map with scale bar
+    m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_2;
+    m_curveAxes = curveScaleIn;
+    m_curveAxes->setCurveName (AXIS_CURVE_NAME); // Override existing "Scale" name
+    delete curveAxesIn;
+  } else {
+    // Default case is graph with axes
+    m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+    m_curveAxes = curveAxesIn;
+    delete curveScaleIn;
+  }
   m_curvesGraphs.loadPreVersion6 (str);
 
   // Information from curves and points can affect some data structures that were (mostly) set earlier
-  if (m_curveAxes->numPoints () > 2) {
+  if (m_curveAxes->numPoints () >= m_documentAxesPointsRequired) {
     m_modelGridRemoval.setStable();
   }
 
