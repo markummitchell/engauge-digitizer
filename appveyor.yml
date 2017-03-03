@@ -73,7 +73,7 @@ after_build:
 #  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll %RESULTDIR%\%%I)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
-  - IF %BUILD_TYPE% == X86 (set VCLIBDIR=%WINDIR%\SysWOW64) ELSE (set VCLIBDIR=%WINDIR%)
+  - IF %BUILD_TYPE% == X86 (set VCLIBDIR=%WINDIR%\SysWOW64) ELSE (set VCLIBDIR=%WINDIR%\system32)
   - for %%I in (%VCLIBS%) do copy %VCLIBDIR%\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
   - copy %LOG4CPP_VER%\lib\log4cpp.dll %RESULTDIR%
