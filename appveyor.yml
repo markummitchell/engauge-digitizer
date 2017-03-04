@@ -1,6 +1,3 @@
-init:
-  - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat x86
-
 environment:
   global:
       QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
@@ -8,25 +5,46 @@ environment:
 
   matrix:
     - ENGAUGE_RELEASE: 1
-      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
-      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-1.1.2rc5.zip'
+      BUILD_TYPE: X86
+      FFTW_VER: 'fftw-3.3.5-dll32'
+      LOG4CPP_VER: 'log4cpp-1.1.2rc5'
+      LOG4CPP_FILE: 'log4cpp-1.1.2rc5.zip'
       RESULTDIR: engauge-build
+      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
     - ENGAUGE_CONFIG: "debug"
-      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
-      LOG4CPPFILE: 'dev\windows\appveyor\log4cpp-debug-1.1.2rc5.zip'
+      BUILD_TYPE: X86
+      FFTW_VER: 'fftw-3.3.5-dll32'
+      LOG4CPP_VER: 'log4cpp-1.1.2rc5'
+      LOG4CPP_FILE: 'log4cpp-debug-1.1.2rc5.zip'
       RESULTDIR: engauge-build-debug
+      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
+    - ENGAUGE_RELEASE: 1
+      BUILD_TYPE: X64
+      FFTW_VER: 'fftw-3.3.5-dll64'
+      LOG4CPP_VER: 'log4cpp-x64-1.1.2rc5'
+      LOG4CPP_FILE: 'log4cpp-x64-1.1.2rc5.zip'
+      RESULTDIR: engauge-build-x64
+      VCLIBS: MSVCP140.dll VCRUNTIME140.dll
+    - ENGAUGE_CONFIG: "debug"
+      BUILD_TYPE: X64
+      FFTW_VER: 'fftw-3.3.5-dll64'
+      LOG4CPP_VER: 'log4cpp-x64-1.1.2rc5'
+      LOG4CPP_FILE: 'log4cpp-x64-debug-1.1.2rc5.zip'
+      RESULTDIR: engauge-build-x64-debug
+      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
 
 install:
-  - set QTDIR=C:\Qt\5.8\msvc2015
+  - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat %BUILD_TYPE%
+  - IF %BUILD_TYPE% == X86 (set QTDIR=C:\Qt\5.8\msvc2015) ELSE (set QTDIR=C:\Qt\5.8\msvc2015_64)
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
-  - 7z x %APPVEYOR_BUILD_FOLDER%\%LOG4CPPFILE% -aoa
-  - mkdir fftw-3.3.5-dll32
-  - cd fftw-3.3.5-dll32
-  - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\fftw-3.3.5-dll32.zip -aoa
-  - lib /def:libfftw3-3.def
-  - lib /def:libfftw3f-3.def
-  - lib /def:libfftw3l-3.def
+  - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\%LOG4CPP_FILE% -aoa
+  - mkdir %FFTW_VER%
+  - cd %FFTW_VER%
+  - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\%FFTW_VER%.zip -aoa
+  - lib /machine:%BUILD_TYPE% /def:libfftw3-3.def
+  - lib /machine:%BUILD_TYPE% /def:libfftw3f-3.def
+  - lib /machine:%BUILD_TYPE% /def:libfftw3l-3.def
   - mkdir include
   - mkdir lib
   - move fftw3.h include
@@ -36,8 +54,8 @@ install:
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\log4cpp-1.1.2rc5
-  - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\fftw-3.3.5-dll32
+  - set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\%LOG4CPP_VER%
+  - set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\%FFTW_VER%
   - qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%"
   - nmake
 
@@ -55,10 +73,11 @@ after_build:
 #  - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.* %RESULTDIR%)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTDIRS%) do copy %QTDIR%\plugins\%%I\*d.dll %RESULTDIR%\%%I)
   - if not defined ENGAUGE_RELEASE (for %%I in (%QTLIBS%) do copy %QTDIR%\bin\%%I*d.dll %RESULTDIR%)
-  - for %%I in (%VCLIBS%) do copy %WINDIR%\SysWOW64\%%I %RESULTDIR%
+  - IF %BUILD_TYPE% == X86 (set VCLIBDIR=%WINDIR%\SysWOW64) ELSE (set VCLIBDIR=%WINDIR%\system32)
+  - for %%I in (%VCLIBS%) do copy %VCLIBDIR%\%%I %RESULTDIR%
   - copy bin\engauge.exe %RESULTDIR%
-  - copy log4cpp-1.1.2rc5\lib\log4cpp.dll %RESULTDIR%
-  - copy fftw-3.3.5-dll32\lib\libfftw3-3.dll %RESULTDIR%
+  - copy %LOG4CPP_VER%\lib\log4cpp.dll %RESULTDIR%
+  - copy %FFTW_VER%\lib\libfftw3-3.dll %RESULTDIR%
   - copy LICENSE %RESULTDIR%
   - cd %APPVEYOR_BUILD_FOLDER%\help
   - qcollectiongenerator engauge.qhcp -o engauge.qhc
