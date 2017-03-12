@@ -19,14 +19,15 @@
         </Component>
 	<Directory Id='MYAPPDIRPROPERTY' Name='Engauge Digitizer'>
 	  <Component Id='MainExecutable' Guid='5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F'>
-	    <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='../../bin/engauge.exe' KeyPath='yes'>
+	    <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='Engauge Digitizer/engauge.exe' KeyPath='yes'>
 	      <Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
 	    </File>
-	    <File Id='freetype6'    Name='freetype6.dll'       DiskId='1' Source='Engauge Digitizer/freetype6.dll'       />
+	    <!--<File Id='freetype6'    Name='freetype6.dll'       DiskId='1' Source='Engauge Digitizer/freetype6.dll'       />-->
 	    <File Id='libfftw33'    Name='libfftw3-3.dll'      DiskId='1' Source='Engauge Digitizer/libfftw3-3.dll'      />
-	    <File Id='log4cpp'      Name='log4cpp.lib'         DiskId='1' Source='Engauge Digitizer/log4cpp.lib'         />
-	    <File Id='openjpeg'     Name='openjpeg.dll'        DiskId='1' Source='Engauge Digitizer/openjpeg.dll'        />
-	    <File Id='popplerqt5'   Name='poppler-qt5.dll'     DiskId='1' Source='Engauge Digitizer/poppler-qt5.dll'     />
+	    <File Id='log4cpp'      Name='log4cpp.dll'         DiskId='1' Source='Engauge Digitizer/log4cpp.dll'         />
+	    <File Id='msvcp140'     Name='msvcp140.dll'        DiskId='1' Source='Engauge Digitizer/msvcp140.dll'        />
+	    <!--<File Id='openjpeg'     Name='openjpeg.dll'        DiskId='1' Source='Engauge Digitizer/openjpeg.dll'        />-->
+	    <!--<File Id='popplerqt5'   Name='poppler-qt5.dll'     DiskId='1' Source='Engauge Digitizer/poppler-qt5.dll'     />-->
 	    <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='Engauge Digitizer/Qt5CLucene.dll'      />
 	    <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Core.dll'         />
 	    <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Gui.dll'          />
@@ -36,7 +37,7 @@
 	    <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Sql.dll'          />
 	    <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='Engauge Digitizer/Qt5Widgets.dll'      />
 	    <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Xml.dll'          />
-	    <File Id='zlib'         Name='zlib1.dll'           DiskId='1' Source='Engauge Digitizer/zlib1.dll'           />
+	    <!--<File Id='zlib'         Name='zlib1.dll'           DiskId='1' Source='Engauge Digitizer/zlib1.dll'           />-->
 	  </Component>
 	  <Directory Id='bearer' Name='bearer'>
 	    <Component Id='bearer' Guid='C7385BF7-2EF9-499A-90FF-17C3F8D4C708'>
@@ -57,7 +58,7 @@
 	  </Directory>
 	  <Directory Id='imageformats' Name='imageformats'>
 	    <Component Id='imageformats' Guid='94F1114F-216F-4409-AAC6-1B4ADCB3AC32'>
-	      <File Id='qdds'  Name='qdds.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qdds.dll'  />
+	      <!--<File Id='qdds'  Name='qdds.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qdds.dll'  />-->
 	      <File Id='qgif'  Name='qgif.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qgif.dll'  />
 	      <File Id='qicns' Name='qicns.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qicns.dll' />
 	      <File Id='qico'  Name='qico.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qico.dll'  />
@@ -71,6 +72,7 @@
 	  </Directory>
 	  <Directory Id='platforms' Name='platforms'>
 	    <Component Id='platforms' Guid='679FF2A9-FB70-47ED-BA76-7CDC68367777'>
+	      <File Id='qdirect2d'  Name='qdirect2d.dll'  DiskId='1' Source='Engauge Digitizer/platforms/qdirect2d.dll'  />
 	      <File Id='qminimal'   Name='qminimal.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qminimal.dll'   />
 	      <File Id='qoffscreen' Name='qoffscreen.dll' DiskId='1' Source='Engauge Digitizer/platforms/qoffscreen.dll' />
 	      <File Id='win'        Name='qwindows.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qwindows.dll'   />
@@ -91,19 +93,20 @@
 	  </Directory>
 	  <Directory Id='translations' Name='translations'>
 	    <Component Id='translations' Guid='A9AD2B5C-8B4F-48E5-819A-D38C4EA11153'>
-	      <File Id='qt_ar'  Name='engauge_ar.qm'  DiskId='1' Source='../../translations/engauge_ar.qm'  />
-	      <File Id='qt_de'  Name='engauge_de.qm'  DiskId='1' Source='../../translations/engauge_de.qm'  />
-	      <File Id='qt_en'  Name='engauge_en.qm'  DiskId='1' Source='../../translations/engauge_en.qm'  />
-	      <File Id='qt_es'  Name='engauge_es.qm'  DiskId='1' Source='../../translations/engauge_es.qm'  />
-	      <File Id='qt_fr'  Name='engauge_fr.qm'  DiskId='1' Source='../../translations/engauge_fr.qm'  />
-	      <File Id='qt_hi'  Name='engauge_hi.qm'  DiskId='1' Source='../../translations/engauge_hi.qm'  />
-	      <File Id='qt_it'  Name='engauge_it.qm'  DiskId='1' Source='../../translations/engauge_it.qm'  />
-	      <File Id='qt_ja'  Name='engauge_ja.qm'  DiskId='1' Source='../../translations/engauge_ja.qm'  />
-	      <File Id='qt_kk'  Name='engauge_kk.qm'  DiskId='1' Source='../../translations/engauge_kk.qm'  />
-	      <File Id='qt_ko'  Name='engauge_ko.qm'  DiskId='1' Source='../../translations/engauge_ko.qm'  />
-	      <File Id='qt_pt'  Name='engauge_pt.qm'  DiskId='1' Source='../../translations/engauge_pt.qm'  />
-	      <File Id='qt_ru'  Name='engauge_ru.qm'  DiskId='1' Source='../../translations/engauge_ru.qm'  />
-	      <File Id='qt_zh'  Name='engauge_zh.qm'  DiskId='1' Source='../../translations/engauge_zh.qm'  />
+	      <File Id='qt_ar'  Name='engauge_ar.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ar.qm'  />
+	      <File Id='qt_cs'  Name='engauge_cs.qm'  DiskId='1' Source='Engauge Digitizer/engauge_cs.qm'  />
+	      <File Id='qt_de'  Name='engauge_de.qm'  DiskId='1' Source='Engauge Digitizer/engauge_de.qm'  />
+	      <File Id='qt_en'  Name='engauge_en.qm'  DiskId='1' Source='Engauge Digitizer/engauge_en.qm'  />
+	      <File Id='qt_es'  Name='engauge_es.qm'  DiskId='1' Source='Engauge Digitizer/engauge_es.qm'  />
+	      <File Id='qt_fr'  Name='engauge_fr.qm'  DiskId='1' Source='Engauge Digitizer/engauge_fr.qm'  />
+	      <File Id='qt_hi'  Name='engauge_hi.qm'  DiskId='1' Source='Engauge Digitizer/engauge_hi.qm'  />
+	      <File Id='qt_it'  Name='engauge_it.qm'  DiskId='1' Source='Engauge Digitizer/engauge_it.qm'  />
+	      <File Id='qt_ja'  Name='engauge_ja.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ja.qm'  />
+	      <File Id='qt_kk'  Name='engauge_kk.qm'  DiskId='1' Source='Engauge Digitizer/engauge_kk.qm'  />
+	      <File Id='qt_ko'  Name='engauge_ko.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ko.qm'  />
+	      <File Id='qt_pt'  Name='engauge_pt.qm'  DiskId='1' Source='Engauge Digitizer/engauge_pt.qm'  />
+	      <File Id='qt_ru'  Name='engauge_ru.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ru.qm'  />
+	      <File Id='qt_zh'  Name='engauge_zh.qm'  DiskId='1' Source='Engauge Digitizer/engauge_zh.qm'  />
 	    </Component>
 	  </Directory>
 	</Directory>
