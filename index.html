@@ -8,10 +8,21 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
-
+    <script type="text/javascript">
+      window.onload = function() {
+        var monthNames = ["January", "February", "March",
+                          "April", "May", "June", "July",
+                          "August", "September", "October",
+                          "November", "December"];
+        var today = new Date();
+        dateStr = monthNames [today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear ();
+        document.getElementById ('idCurDate').innerHTML = dateStr;
+      }
+    </script>
     <!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+    <
     <title>Engauge Digitizer</title>
   </head>
   
@@ -183,6 +194,15 @@
 	    file that is found in the main directory. The build process can take as little as one hour in Linux or as long as 
 	    several hours in Microsoft Windows.
 	  </p>
+	  <h2>
+	    <a id="citations" class="anchor" href="#citations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Citations
+	  </h2>
+	  <ul>
+	  <li><b>Suggested permanent citation:</b> Mark Mitchell, Baurzhan Muftakhidinov and Tobias Winchen, 
+                 "Engauge Digitizer Software." Webpage: http://markummitchell.github.io/engauge-digitizer,
+                 Last Accessed: <span id="idCurDate"></span></li>
+          <li><b>Latest release:</b> <a href="https://zenodo.org/badge/latestdoi/26443394"><img src="https://zenodo.org/badge/26443394.svg" alt="DOI"></a></li>
+	  </ul>
 	  <h2>
 	    <a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors
 	  </h2>
