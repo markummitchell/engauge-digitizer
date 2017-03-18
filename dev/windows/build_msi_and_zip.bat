@@ -41,7 +41,7 @@ call vcvarsall.bat %ARCH%
 set QTDIRS=bearer iconengines imageformats platforms printsupport sqldrivers
 set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
-set ENGAUGE_CONFIG=''
+set ENGAUGE_CONFIG='pdf'
 set QTLIBEXT='.lib'
 set SCRIPTDIR=%cd%
 
@@ -130,7 +130,10 @@ if exist *d.dll del /S *d.dll
 copy bin\engauge.exe "%RESULTDIR%"
 
 copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
+copy "C:\windows\system32\concrt140.dll" "%RESULTDIR%"
 copy "C:\windows\system32\msvcp140.dll" "%RESULTDIR%"
+copy "C:\windows\system32\vccorlib140.dll" "%RESULTDIR%"
+copy "C:\windows\system32\vcruntime140.dll" "%RESULTDIR%"
 
 copy fftw-3.3.4-dll32\lib\libfftw3-3.dll "%RESULTDIR%"
 copy LICENSE "%RESULTDIR%"
