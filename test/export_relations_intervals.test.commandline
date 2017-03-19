@@ -1,0 +1,2 @@
+-errorreport ../test/export_relations_intervals.dig -regression -reset
+

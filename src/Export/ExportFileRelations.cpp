@@ -43,7 +43,6 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
 
-  int curveCount = curvesIncluded.count();
   int maxColumnSize = maxColumnSizeAllocation (modelExportOverride,
                                                document,
                                                transformation,
@@ -54,24 +53,133 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
   // Skip if every curve was a function
   if (maxColumnSize > 0) {
 
-    QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
-    initializeXThetaYRadiusValues (curvesIncluded,
-                                   xThetaYRadiusValues);
+    if (modelExportOverride.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE) {
+
+      exportAllPerLineXThetaValuesMergedMultiplePass (maxColumnSize,
+                                                      modelExportOverride,
+                                                      document,
+                                                      modelMainWindow,
+                                                      curvesIncluded,
+                                                      delimiter,
+                                                      transformation,
+                                                      isLogXTheta,
+                                                      isLogYRadius,
+                                                      str);
+
+    } else {
+
+      exportAllPerLineXThetaValuesMergedOnePass (maxColumnSize,
+                                                 modelExportOverride,
+                                                 document,
+                                                 modelMainWindow,
+                                                 curvesIncluded,
+                                                 delimiter,
+                                                 transformation,
+                                                 isLogXTheta,
+                                                 isLogYRadius,
+                                                 str);
+    }
+  }
+}
+
+void ExportFileRelations::exportAllPerLineXThetaValuesMergedMultiplePass (int maxColumnSize,
+                                                                          const DocumentModelExportFormat &modelExportOverride,
+                                                                          const Document &document,
+                                                                          const MainWindowModel &modelMainWindow,
+                                                                          const QStringList &curvesIncluded,
+                                                                          const QString &delimiter,
+                                                                          const Transformation &transformation,
+                                                                          bool isLogXTheta,
+                                                                          bool isLogYRadius,
+                                                                          QTextStream &str) const
+{
+  // For interpolation of relations in general a single set of x/theta values cannot be created that work for every
+  // relation curve, since one curve may have M y/radius values for a specific x/radius while another curve has
+  // N y/radius values for that same x/radius value. So we export each curve into memory separately and then merge
+  // the results. Why? Since the methods called from this method all assume a single set of x/theta values can be
+  // used for all curves
+
+  const int CURVE_COUNT_PER_PASS = 1;
+
+  int curveCount = curvesIncluded.count ();
+
+  QVector<QVector<QString*> > xThetaYRadiusValuesAll (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
+
+  initializeXThetaYRadiusValues (curvesIncluded,
+                                 xThetaYRadiusValuesAll);
+
+  // One pass per curve
+  int colX = 0, colY = colX + 1;
+  for (int c = 0; c < curvesIncluded.count (); c++) {
+    QString curve = curvesIncluded [c];
+
+    QStringList curvesIncludedInPass;
+    curvesIncludedInPass << curve;
+    ENGAUGE_ASSERT (curvesIncludedInPass.count () == CURVE_COUNT_PER_PASS);
+
+    QVector<QVector<QString*> > xThetaYRadiusValuesOne (COLUMNS_PER_CURVE * CURVE_COUNT_PER_PASS, QVector<QString*> (maxColumnSize));
+
+    initializeXThetaYRadiusValues (curvesIncludedInPass,
+                                   xThetaYRadiusValuesOne);
     loadXThetaYRadiusValues (modelExportOverride,
                              document,
                              modelMainWindow,
-                             curvesIncluded,
+                             curvesIncludedInPass,
                              transformation,
                              isLogXTheta,
                              isLogYRadius,
-                             xThetaYRadiusValues);
-    outputXThetaYRadiusValues (modelExportOverride,
-                               curvesIncluded,
-                               xThetaYRadiusValues,
-                               delimiter,
-                               str);
-    destroy2DArray (xThetaYRadiusValues);
+                             xThetaYRadiusValuesOne);
+
+    // Merge one curve array into all curves array
+    for (int row = 0; row < maxColumnSize; row++) {
+      *(xThetaYRadiusValuesAll [colX] [row]) = *(xThetaYRadiusValuesOne [0] [row]);
+      *(xThetaYRadiusValuesAll [colY] [row]) = *(xThetaYRadiusValuesOne [1] [row]);
+    }
+
+    destroy2DArray (xThetaYRadiusValuesOne);
+
+    colX += 2;
+    colY += 2;
   }
+
+  outputXThetaYRadiusValues (modelExportOverride,
+                             curvesIncluded,
+                             xThetaYRadiusValuesAll,
+                             delimiter,
+                             str);
+  destroy2DArray (xThetaYRadiusValuesAll);
+}
+
+void ExportFileRelations::exportAllPerLineXThetaValuesMergedOnePass (int maxColumnSize,
+                                                                     const DocumentModelExportFormat &modelExportOverride,
+                                                                     const Document &document,
+                                                                     const MainWindowModel &modelMainWindow,
+                                                                     const QStringList &curvesIncluded,
+                                                                     const QString &delimiter,
+                                                                     const Transformation &transformation,
+                                                                     bool isLogXTheta,
+                                                                     bool isLogYRadius,
+                                                                     QTextStream &str) const
+{
+  int curveCount = curvesIncluded.count ();
+
+  QVector<QVector<QString*> > xThetaYRadiusValues (COLUMNS_PER_CURVE * curveCount, QVector<QString*> (maxColumnSize));
+  initializeXThetaYRadiusValues (curvesIncluded,
+                                 xThetaYRadiusValues);
+  loadXThetaYRadiusValues (modelExportOverride,
+                           document,
+                           modelMainWindow,
+                           curvesIncluded,
+                           transformation,
+                           isLogXTheta,
+                           isLogYRadius,
+                           xThetaYRadiusValues);
+  outputXThetaYRadiusValues (modelExportOverride,
+                             curvesIncluded,
+                             xThetaYRadiusValues,
+                             delimiter,
+                             str);
+  destroy2DArray (xThetaYRadiusValues);
 }
 
 void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
