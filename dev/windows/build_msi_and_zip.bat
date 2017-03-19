@@ -21,12 +21,14 @@ for /f "delims=" %%a in ('qmake -query QT_INSTALL_PREFIX') do @set QTDIR=%%a
 if not x%QTDIR:msvc2015_64=%==x%QTDIR% (
   rem QTDIR includes msvc2015_64 (for 64 bits)
   set ARCH=x64
+  set BITS=64
   echo "Building for Microsoft Visual Studio 2015 with 64 bits"
-  set /p rtn=Press any key to continue...
+  set /p rtn=Press Enter to continue...
 ) else (
   if not x%QTDIR:msvc2015=%==x%QTDIR% (
     rem QTDIR includes msvc2015 (for 32 bits)
     set ARCH=x86
+    set BITS=32
     echo "Building for Microsoft Visual Studio 2015 with 32 bits"
     set /p rtn=Press any key to continue...
   ) else (
@@ -41,7 +43,8 @@ call vcvarsall.bat %ARCH%
 set QTDIRS=bearer iconengines imageformats platforms printsupport sqldrivers
 set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
-set ENGAUGE_CONFIG='pdf'
+rem Next line is where pdf can be added for pdf support
+set ENGAUGE_CONFIG=
 set QTLIBEXT='.lib'
 set SCRIPTDIR=%cd%
 
@@ -60,8 +63,10 @@ cd "%APPVEYOR_BUILD_FOLDER%"
 
 set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_fftw
 set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_log4cpp
+set SYSTEM32_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_system32
 if not exist %FFTW_HOME% mkdir %FFTW_HOME%
 if not exist %LOG4CPP_HOME% mkdir %LOG4CPP_HOME%
+if not exist %SYSTEM32_HOME% mkdir %SYSTEM32_HOME%
 
 cd %FFTW_HOME%
 if "%ARCH%" == "x86" (
@@ -86,16 +91,52 @@ cd %LOG4CPP_HOME%
 if exist include rmdir include /s /q
 if exist lib rmdir lib /s /q
 if "%ARCH%" == "x86" (
-  7z x ../log4cpp_null/log4cpp.zip -aoa
+  7z x ../appveyor/log4cpp_null-32-64.zip -aoa
   move lib32 lib
 ) else (
-  7z x ../log4cpp_null/log4cpp.zip -aoa
+  7z x ../appveyor/log4cpp_null-32-64.zip -aoa
   move lib64 lib
 )
 
+cd %SYSTEM32_HOME%
+if "%ARCH%" == "x86" (
+  7z x ../appveyor/system32-32.zip -aoa
+  move system32\concrt140.dll    concrt140.dll
+  move system32\msvcp140.dll     msvcp140.dll
+  move system32\vccorlib140.dll  vccorlib140.dll
+  move system32\vcruntime140.dll vcruntime140.dll
+) else (
+  7z x ../appveyor/system32-64.zip -aoa
+  move system32\concrt140.dll    concrt140.dll
+  move system32\msvcp140.dll     msvcp140.dll
+  move system32\vccorlib140.dll  vccorlib140.dll
+  move system32\vcruntime140.dll vcruntime140.dll
+)
+
 cd "%APPVEYOR_BUILD_FOLDER%"
+
+echo *************************************
+echo APPVEYOR_BUILD_FOLDER: %APPVEYOR_BUILD_FOLDER%
+echo current directory:
+cd
+echo ENGAUGE_CONFIG: %ENGAUGE_CONFIG%
+echo FFTW_HOME: %FFTW_HOME%
+echo LOG4CPP_HOME: %LOG4CPP_HOME%
+echo SYSTEM32_HOME: %SYSTEM32_HOME%
+echo QTDIRS: %QTDIRS%
+echo QTLIBS: %QTLIBS%
+echo RESULTDIR: %RESULTDIR%
+echo *************************************
+set /p VERNUM="Press Enter to continue..."
+
 lrelease engauge.pro
+if exist Makefile del /S Makefile
 qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%" 
+
+if not exist Makefile (
+   echo qmake command has failed. Quitting
+   exit /b 1
+)
 
 if not exist bin mkdir bin
 
@@ -111,12 +152,6 @@ if not exist bin/engauge.exe (
   exit /b 1
 )
 
-rem echo "*************************************"
-rem echo "APPVEYOR_BUILD_FOLDER %APPVEYOR_BUILD_FOLDER%"
-rem echo "QTDIRS %QTDIRS%"
-rem echo "QTLIBS %QTLIBS%"
-rem echo "RESULTDIR %RESULTDIR%"
-rem echo "*************************************"
 cd "%APPVEYOR_BUILD_FOLDER%"
 if not exist "%RESULTDIR%"\documentation mkdir "%RESULTDIR%"\documentation
 for %%I in (%QTDIRS%) do (
@@ -129,19 +164,16 @@ for %%I in (%QTLIBS%) do copy "%QTDIR%\bin\%%I.dll" "%RESULTDIR%"
 if exist *d.dll del /S *d.dll
 copy bin\engauge.exe "%RESULTDIR%"
 
-copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
-copy "C:\windows\system32\concrt140.dll" "%RESULTDIR%"
-copy "C:\windows\system32\msvcp140.dll" "%RESULTDIR%"
-copy "C:\windows\system32\vccorlib140.dll" "%RESULTDIR%"
-copy "C:\windows\system32\vcruntime140.dll" "%RESULTDIR%"
-
-copy fftw-3.3.4-dll32\lib\libfftw3-3.dll "%RESULTDIR%"
 copy LICENSE "%RESULTDIR%"
 cd "%APPVEYOR_BUILD_FOLDER%"\help
 qcollectiongenerator engauge.qhcp -o engauge.qhc
 move engauge.qch "%RESULTDIR%"\documentation
 move engauge.qhc "%RESULTDIR%"\documentation
 cd ..
+
+copy "%FFTW_HOME%\lib\libfftw3-3.dll" "%RESULTDIR%"
+copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
+copy "%SYSTEM32_HOME%\*" "%RESULTDIR%"
 
 copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
 
@@ -163,8 +195,8 @@ echo Version number will be %VERNUM%
 
 candle engauge.wxs
 candle WixUI_InstallDir_NoLicense.wxs
-light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-32-bit-installer-%VERNUM%.msi"
+light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-%BITS%-bit-installer-%VERNUM%.msi"
 
 echo *** creating zip
 rem "Engauge Digitizer" in next line is needed since zip crashes on %RESULTDIR% due to the space
-zip -r "digit-exe-windows-32-bit-without-installer-file-%VERNUM%.zip" "Engauge Digitizer"
+zip -r "digit-exe-windows-%BITS%-bit-without-installer-file-%VERNUM%.zip" "Engauge Digitizer"
