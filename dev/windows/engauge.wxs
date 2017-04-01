@@ -75,7 +75,6 @@
 	  </Directory>
 	  <Directory Id='platforms' Name='platforms'>
 	    <Component Id='platforms' Guid='679FF2A9-FB70-47ED-BA76-7CDC68367777'>
-	      <File Id='qdirect2d'  Name='qdirect2d.dll'  DiskId='1' Source='Engauge Digitizer/platforms/qdirect2d.dll'  />
 	      <File Id='qminimal'   Name='qminimal.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qminimal.dll'   />
 	      <File Id='qoffscreen' Name='qoffscreen.dll' DiskId='1' Source='Engauge Digitizer/platforms/qoffscreen.dll' />
 	      <File Id='win'        Name='qwindows.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qwindows.dll'   />
