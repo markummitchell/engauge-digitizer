@@ -48,6 +48,9 @@
 	    <a href="https://zenodo.org/badge/latestdoi/26443394">
 	      <img src="https://zenodo.org/badge/26443394.svg" alt="DOI" />
 	    </a>
+	    <a href="">
+	      <img src=
+	    </a>
 	    </p>
 	  </div>
 	  <div style="clear: both"></div>
@@ -84,9 +87,6 @@
 	    Linux and Windows operating systems as downloads:
 	  </p>
 	  <ul>
-	    <li>
-              <p>Version 10.0 (3/31/2017) supports maps with a scale bar</p>
-	    </li>
 	    <li>
               <p>Version 9.8 (12/10/2016) does not trigger false alarm in antivirus software</p>
 	    </li>
