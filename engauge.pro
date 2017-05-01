@@ -30,14 +30,6 @@
 # More comments are in the INSTALL file, and below
 
 QT += core gui help printsupport widgets xml
-!win32 {
-  QT += network
-  DEFINES += "NETWORKING"
-  HEADERS += src/Load/LoadImageFromUrl.h \
-             src/Network/NetworkClient.h
-  SOURCES += src/Load/LoadImageFromUrl.cpp \
-             src/Network/NetworkClient.cpp
-}
 
 CONFIG(debug,debug|release){
   # Debug version:
@@ -708,13 +700,7 @@ macx-* {
 
   QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
   INCLUDEPATH += $$(FFTW_HOME)/include \
-                 $$(LOG4CPP_HOME)/include \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtNetwork.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
+                 $$(LOG4CPP_HOME)/include
   LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
 } else {
   CONFIG += qt warn_on thread
@@ -739,6 +725,12 @@ win32-msvc* {
 }
 
 linux-* {
+  QT += network
+  DEFINES += "NETWORKING"
+  HEADERS += src/Load/LoadImageFromUrl.h \
+             src/Network/NetworkClient.h
+  SOURCES += src/Load/LoadImageFromUrl.cpp \
+             src/Network/NetworkClient.cpp
   INCLUDEPATH += $$(FFTW_HOME)/include \
                  $$(LOG4CPP_HOME)/include
   LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib

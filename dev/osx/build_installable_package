@@ -74,18 +74,22 @@ echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
 echo '2. append/add .1 to version number)'
 echo '3. save the file and exit)'
 read -p "Press any key to continue"
-echo 'Ignore error about /usr/lib/log4cpp... in the next line'
+echo 'Ignore the following errors in the next lines'
+echo '1. Anything about /usr/lib/log4cpp'
+echo '2. Warnings about private API sql plugins being skipped. They are not used'
+echo '3. Error about missing /opt/local/lib/mysql55/mysql/libmysqlclient.18.dylib. This is not used'
 
 # Insert Qt libraries. Log4cpp library does not get processed so we manually copy first. The
 # error 'ERROR No file at /usr/lib/log4cpp.1.dylib' is a bug in macdeployqt that is claimed to 
 # not cause any problems, but copying a library to /usr/lib or creating symlink does not work
 # due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
 # copy the file just after macdeployqt
-macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg
+macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg 
+read -p "Press any key to continue"
 cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
 # Signing
-frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
+frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
     signAppFramework $i
@@ -97,7 +101,6 @@ signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | s
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
-signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
 signAppFile /Contents/MacOS/Engauge\ Digitizer
 
 echo "******************************************************************************"
@@ -115,7 +118,8 @@ mv Engauge\ Digitizer.pkg.signed Engauge\ Digitizer.pkg
 #spctl --assess --type execute Engauge\ Digitizer.app 2>&1 | grep -i rejected
 #spctl --assess --type install Engauge\ Digitizer.app 2>&1 | grep -i rejected
 echo "******************** codesign validations ************************"
-codesign --verbose --deep --strict Engauge\ Digitizer.app
+# Note --strict is for newer xcode (osx 10.10) only
+codesign --verbose --deep Engauge\ Digitizer.app
 echo "******************** codesign entitlements ***********************"
 codesign --display --verbose=4 --entitlements - Engauge\ Digitizer.app
 echo "******************************************************************"

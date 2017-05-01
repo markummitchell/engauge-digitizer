@@ -3,7 +3,7 @@
 #export QTDIR=/usr/local/Qt-5.5.1
 #export PATH=$QTDIR/bin:$PATH
 
-export QTDIR=/usr/local/Cellar/qt5/5.5.1_2
+export QTDIR=$HOME/Qt/5.5/clang_64
 export PATH=$QTDIR/bin:$PATH
 
 export LOG4CPP_HOME=$HOME/log4cpp_null
