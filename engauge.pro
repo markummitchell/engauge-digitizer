@@ -699,8 +699,14 @@ macx-* {
   }
 
   QMAKE_LFLAGS += "-stdlib=libc++ -gdwarf-2"
+  # /usr/local/Cellar path below is for Travis builds
   INCLUDEPATH += $$(FFTW_HOME)/include \
-                 $$(LOG4CPP_HOME)/include
+                 $$(LOG4CPP_HOME)/include \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
+                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
   LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
 } else {
   CONFIG += qt warn_on thread
