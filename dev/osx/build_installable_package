@@ -39,6 +39,8 @@ fi
 
 # Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
 # engauge.log file, which would other break the sandbox
+sudo rm Engauge\ Digitizer.dmg
+sudo rm Engauge\ Digitizer.pkg
 sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
 # Make into Engauge Digitizer.app
@@ -85,11 +87,16 @@ echo '3. Error about missing /opt/local/lib/mysql55/mysql/libmysqlclient.18.dyli
 # due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
 # copy the file just after macdeployqt
 macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg 
+
+# An attempt was made to remove QtNetwork, and then QtSql framework which uses QtNetwork, to
+# help with installation issues in OSX 10.12 but both are required by QtHelp so they were restored
+
+# Subtle stuff here. Copying the library will not complete before the signing unless we insert a prompt as a hack
+cp $LOG4CPP_HOME/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 read -p "Press any key to continue"
-cp ${LOG4CPP_HOME}/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 
 # Signing
-frameworks=(QtCLucene QtCore QtGui QtHelp QtNetwork QtPrintSupport QtWidgets QtXml)
+frameworks=(QtCLucene QtCore QtDbus QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
     signAppFramework $i
