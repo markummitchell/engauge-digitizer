@@ -11,9 +11,11 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
+#include "MimePointsDetector.h"
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QImage>
+#include <QSize>
 #include <QTimer>
 #include "QtToString.h"
 #include "Transformation.h"
@@ -25,6 +27,15 @@ DigitizeStateAbstractBase::DigitizeStateAbstractBase(DigitizeStateContext &conte
 
 DigitizeStateAbstractBase::~DigitizeStateAbstractBase()
 {
+}
+
+bool DigitizeStateAbstractBase::canPasteProtected (const Transformation &transformation,
+                                                   const QSize &viewSize) const
+{
+  MimePointsDetector mimePointsDetector;
+
+  return mimePointsDetector.isMimePointsData (transformation,
+                                              viewSize);
 }
 
 DigitizeStateContext &DigitizeStateAbstractBase::context()

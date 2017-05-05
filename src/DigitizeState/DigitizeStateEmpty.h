@@ -20,6 +20,8 @@ public:
   virtual QString activeCurve () const;
   virtual void begin(CmdMediator *cmdMediator,
                      DigitizeState previousState);
+  virtual bool canPaste (const Transformation &transformation,
+                         const QSize &viewSize) const;
   virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
   virtual void handleCurveChange(CmdMediator *cmdMediator);

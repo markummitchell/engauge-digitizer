@@ -14,7 +14,7 @@
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "MimePoints.h"
+#include "MimePointsExport.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QTextStream>
@@ -86,16 +86,16 @@ void CmdCopy::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdRedo";
 
-  MimePoints *mimePoints;
+  MimePointsExport *mimePointsExport;
   if (m_transformIsDefined) {
-    mimePoints = new MimePoints (m_csv,
-                                 m_html);
+    mimePointsExport = new MimePointsExport (m_csv,
+                                             m_html);
   } else {
-    mimePoints = new MimePoints (m_csv);
+    mimePointsExport = new MimePointsExport (m_csv);
   }
 
   QClipboard *clipboard = QApplication::clipboard();
-  clipboard->setMimeData (mimePoints, QClipboard::Clipboard);
+  clipboard->setMimeData (mimePointsExport, QClipboard::Clipboard);
 
   saveOrCheckPreCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());

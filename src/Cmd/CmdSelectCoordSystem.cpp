@@ -11,7 +11,6 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "MimePoints.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QTextStream>

@@ -28,6 +28,8 @@
 #include <qmath.h>
 #include <QMessageBox>
 #include <QPen>
+#include <QSize>
+#include "Transformation.h"
 
 const double Z_VALUE = 200.0;
 
@@ -62,6 +64,13 @@ void DigitizeStatePointMatch::begin (CmdMediator *cmdMediator,
   m_outline->setPen (QPen (Qt::black));
   m_outline->setVisible (true);
   m_outline->setZValue (Z_VALUE);
+}
+
+bool DigitizeStatePointMatch::canPaste (const Transformation &transformation,
+                                        const QSize &viewSize) const
+{
+  return canPasteProtected (transformation,
+                            viewSize);
 }
 
 void DigitizeStatePointMatch::createPermanentPoint (CmdMediator *cmdMediator,

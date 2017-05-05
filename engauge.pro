@@ -95,7 +95,6 @@ HEADERS  += \
     src/Cmd/CmdFactory.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
-    src/Cmd/CmdPaste.h \
     src/Cmd/CmdPointChangeBase.h \
     src/Cmd/CmdRedoForTest.h \
     src/Cmd/CmdSelectCoordSystem.h \
@@ -309,7 +308,9 @@ HEADERS  += \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
     src/util/MigrateToVersion6.h \
-    src/Mime/MimePoints.h \
+    src/Mime/MimePointsDetector.h \
+    src/Mime/MimePointsExport.h \
+    src/Mime/MimePointsImport.h \    
     src/util/mmsubs.h \
     src/NonPdf/NonPdf.h \
     src/NonPdf/NonPdfCropping.h \
@@ -425,7 +426,6 @@ SOURCES += \
     src/Cmd/CmdFactory.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
-    src/Cmd/CmdPaste.cpp \
     src/Cmd/CmdRedoForTest.cpp \
     src/Cmd/CmdPointChangeBase.cpp \
     src/Cmd/CmdSelectCoordSystem.cpp \
@@ -624,7 +624,9 @@ SOURCES += \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
     src/util/MigrateToVersion6.cpp \
-    src/Mime/MimePoints.cpp \
+    src/Mime/MimePointsDetector.cpp \
+    src/Mime/MimePointsExport.cpp \
+    src/Mime/MimePointsImport.cpp \    
     src/util/mmsubs.cpp \
     src/NonPdf/NonPdf.cpp \
     src/NonPdf/NonPdfCropping.cpp \

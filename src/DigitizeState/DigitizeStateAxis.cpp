@@ -45,6 +45,12 @@ void DigitizeStateAxis::begin (CmdMediator *cmdMediator,
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
+bool DigitizeStateAxis::canPaste (const Transformation & /* transformation */,
+                                  const QSize & /* size */) const
+{
+  return false;
+}
+
 void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
                                               const QPointF &posScreen)
 {

@@ -13,6 +13,7 @@
 #include "img/bannerapp_256.xpm"
 #include "ChecklistGuide.h"
 #include "ChecklistGuideWizard.h"
+#include "CmdAddPointsGraph.h"
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
@@ -75,6 +76,7 @@
 #include "Logger.h"
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
+#include "MimePointsImport.h"
 #ifdef NETWORKING
 #include "NetworkClient.h"
 #endif
@@ -2938,6 +2940,7 @@ void MainWindow::slotDigitizeAxis ()
   m_cmbCurve->setEnabled (false); // Graph curve is irrelevant in this mode
   m_viewPointStyle->setEnabled (true); // Point style is important in this mode
   m_viewSegmentFilter->setEnabled (true); // Filtering is important in this mode
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizeColorPicker ()
@@ -2949,6 +2952,7 @@ void MainWindow::slotDigitizeColorPicker ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizeCurve ()
@@ -2960,6 +2964,7 @@ void MainWindow::slotDigitizeCurve ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizePointMatch ()
@@ -2971,6 +2976,7 @@ void MainWindow::slotDigitizePointMatch ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizeScale ()
@@ -2982,6 +2988,7 @@ void MainWindow::slotDigitizeScale ()
   m_cmbCurve->setEnabled (false);
   m_viewPointStyle->setEnabled (false);
   m_viewSegmentFilter->setEnabled (false);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizeSegment ()
@@ -2993,6 +3000,7 @@ void MainWindow::slotDigitizeSegment ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotDigitizeSelect ()
@@ -3004,6 +3012,7 @@ void MainWindow::slotDigitizeSelect ()
   m_cmbCurve->setEnabled (false);
   m_viewPointStyle->setEnabled (false);
   m_viewSegmentFilter->setEnabled (false);
+  updateControls (); // For Paste which is state dependent
 }
 
 void MainWindow::slotEditCopy ()
@@ -3116,6 +3125,22 @@ void MainWindow::slotEditMenu ()
 void MainWindow::slotEditPaste ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotEditPaste";
+
+  QList<QPoint> points;
+  QList<double> ordinals;
+
+  MimePointsImport mimePointsImport;
+  mimePointsImport.retrievePoints (m_transformation,
+                                   points,
+                                   ordinals);
+
+  CmdAddPointsGraph *cmd = new CmdAddPointsGraph (*this,
+                                                  m_cmdMediator->document(),
+                                                  m_cmbCurve->currentText (),
+                                                  points,
+                                                  ordinals);
+  m_digitizeStateContext->appendNewCmd (m_cmdMediator,
+                                        cmd);
 }
 
 void MainWindow::slotEditPasteAsNew ()
@@ -4401,7 +4426,8 @@ void MainWindow::updateControls ()
   m_actionEditCopy->setEnabled ((!tableFittingIsActive && !tableGeometryIsActive && m_scene->selectedItems().count () > 0) ||
                                 (tableFittingIsActive && tableFittingIsCopyable) ||
                                 (tableGeometryIsActive && tableGeometryIsCopyable));
-  m_actionEditPaste->setEnabled (false);
+  m_actionEditPaste->setEnabled (m_digitizeStateContext->canPaste (m_transformation,
+                                                                   m_view->size ()));
   m_actionEditDelete->setEnabled (!tableFittingIsActive &&
                                   !tableGeometryIsActive &&
                                   m_scene->selectedItems().count () > 0);

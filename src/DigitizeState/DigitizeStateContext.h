@@ -19,7 +19,9 @@ class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
 class MainWindow;
 class MainWindowModel;
+class QSize;
 class QUndoCommand;
+class Transformation;
 
 /// Container for all DigitizeStateAbstractBase subclasses. This functions as the context class in a standard state machine implementation
 class DigitizeStateContext : public QObject
@@ -39,6 +41,10 @@ public:
   /// Append just-created QUndoCommand to command stack. This is called from DigitizeStateAbstractBase subclasses
   void appendNewCmd(CmdMediator *cmdMediator,
                     QUndoCommand *cmd);
+
+  /// Return true if there is good data in the clipboard for pasting, and that operation is compatible with the current state
+  bool canPaste (const Transformation &transformation,
+                 const QSize &viewSize) const;
 
   /// See DigitizeStateAbstractBase::handleContextMenuEventAxis.
   void handleContextMenuEventAxis (CmdMediator *cmdMediator,

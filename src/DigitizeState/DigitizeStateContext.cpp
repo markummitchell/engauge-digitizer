@@ -23,7 +23,9 @@
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QSize>
 #include "QtToString.h"
+#include "Transformation.h"
 
 DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
                                            QGraphicsView &view,
@@ -64,6 +66,13 @@ void DigitizeStateContext::appendNewCmd(CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateContext::appendNewCmd";
 
   cmdMediator->push (cmd);
+}
+
+bool DigitizeStateContext::canPaste (const Transformation &transformation,
+                                     const QSize &size) const
+{
+  return m_states [m_currentState]->canPaste (transformation,
+                                              size);
 }
 
 void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator)

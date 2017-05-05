@@ -49,6 +49,12 @@ void DigitizeStateColorPicker::begin (CmdMediator *cmdMediator,
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
+bool DigitizeStateColorPicker::canPaste (const Transformation & /* transformation */,
+                                         const QSize & /* viewSize */) const
+{
+  return false;
+}
+
 bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
                                                        const QPointF &posScreen,
                                                        const QString &curveName,

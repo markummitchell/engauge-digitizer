@@ -15,6 +15,8 @@
 #include <QCursor>
 #include <QGraphicsScene>
 #include <QImage>
+#include <QSize>
+#include "Transformation.h"
 
 DigitizeStateCurve::DigitizeStateCurve (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -38,6 +40,13 @@ void DigitizeStateCurve::begin (CmdMediator *cmdMediator,
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
+}
+
+bool DigitizeStateCurve::canPaste (const Transformation &transformation,
+                                   const QSize &size) const
+{
+  return canPasteProtected (transformation,
+                            size);
 }
 
 QCursor DigitizeStateCurve::cursor(CmdMediator *cmdMediator) const

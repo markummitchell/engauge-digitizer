@@ -9,6 +9,8 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCursor>
+#include <QSize>
+#include "Transformation.h"
 
 DigitizeStateEmpty::DigitizeStateEmpty (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -31,6 +33,12 @@ void DigitizeStateEmpty::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
+}
+
+bool DigitizeStateEmpty::canPaste (const Transformation & /* transformation */,
+                                   const QSize & /* size */) const
+{
+  return false;
 }
 
 QCursor DigitizeStateEmpty::cursor(CmdMediator * /* cmdMediator */) const

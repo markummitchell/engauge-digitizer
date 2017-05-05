@@ -4,32 +4,33 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef MIME_POINTS_H
-#define MIME_POINTS_H
+#ifndef MIME_POINTS_EXPORT_H
+#define MIME_POINTS_EXPORT_H
 
 #include <QMimeData>
 #include <QString>
 #include <QStringList>
 
 /// Custom mime type for separate treatment of graph coordinates and, when there is no transform, points coordinates.
-class MimePoints : public QMimeData
+/// Used for export only.
+class MimePointsExport : public QMimeData
 {
 public:
   /// Default constructor. Initial contents are overwritten by other constructors.
-  MimePoints();
+  MimePointsExport();
 
   /// Constructor when graph coordinates are available because the transformation is defined.
-  MimePoints(const QString &csvGraph,
-             const QString &htmlGraph);
+  MimePointsExport(const QString &csvGraph,
+                   const QString &htmlGraph);
 
   /// Constructor when transformation is not defined. This data is not meant to leave this application
-  MimePoints (const QString &csvPoints);
+  MimePointsExport (const QString &csvPoints);
 
   /// Assignment operator.
-  MimePoints &operator=(const MimePoints &other);
+  MimePointsExport &operator=(const MimePointsExport &other);
 
   /// Destructor.
-  virtual ~MimePoints ();
+  virtual ~MimePointsExport ();
 
   /// Get method for csvGraph.
   QString csvGraph () const;
@@ -55,4 +56,4 @@ private:
   QStringList m_formats;
 };
 
-#endif // MIME_POINTS_H
+#endif // MIME_POINTS_EXPORT_H

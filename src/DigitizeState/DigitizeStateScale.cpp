@@ -51,6 +51,12 @@ void DigitizeStateScale::begin (CmdMediator *cmdMediator,
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
+bool DigitizeStateScale::canPaste (const Transformation & /* transformation */,
+                                   const QSize & /* viewSize */) const
+{
+  return false;
+}
+
 QCursor DigitizeStateScale::cursor(CmdMediator *cmdMediator) const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::cursor";

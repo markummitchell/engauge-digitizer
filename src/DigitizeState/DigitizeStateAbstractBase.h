@@ -15,8 +15,10 @@ class CmdMediator;
 class DigitizeStateContext;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
+class QSize;
 class QString;
 class QStringList;
+class Transformation;
 
 /// Set of possible states of Digitize toolbar.
 enum DigitizeState {
@@ -46,6 +48,10 @@ public:
   /// The previousState value is used by DigitizeStateColorPicker to return to the previous state
   virtual void begin(CmdMediator *cmdMediator,
                      DigitizeState previousState) = 0;
+
+  /// Return true if there is good data in the clipboard for pasting, and that is compatible with the current state
+  virtual bool canPaste (const Transformation &transformation,
+                         const QSize &viewSize) const = 0;
 
   /// Reference to the DigitizeStateContext that contains all the DigitizeStateAbstractBase subclasses, without const.
   DigitizeStateContext &context();
@@ -101,6 +107,10 @@ public:
   virtual void updateModelSegments(const DocumentModelSegments &modelSegments) = 0;
 
 protected:
+  /// Protected version of canPaste method. Some, but not all, leaf classes use this method
+  bool canPasteProtected (const Transformation &transformation,
+                          const QSize &viewSize) const;
+
   /// Returns the state-specific cursor shape.
   virtual QCursor cursor (CmdMediator *cmdMediator) const = 0;
 

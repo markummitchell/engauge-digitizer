@@ -10,7 +10,6 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "MimePoints.h"
 #include <QXmlStreamReader>
 #include "Xml.h"
 

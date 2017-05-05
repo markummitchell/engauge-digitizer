@@ -74,7 +74,6 @@ HEADERS  += \
     Cmd/CmdFactory.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
-    Cmd/CmdPaste.h \
     Cmd/CmdPointChangeBase.h \
     Cmd/CmdRedoForTest.h \
     Cmd/CmdSelectCoordSystem.h \
@@ -289,7 +288,9 @@ HEADERS  += \
     main/MainWindowModel.h \
     Matrix/Matrix.h \
     util/MigrateToVersion6.h \
-    Mime/MimePoints.h \
+    Mime/MimePointsDetector.h \
+    Mime/MimePointsExport.h \
+    Mime/MimePointsImport.h \    
     util/mmsubs.h \
     Network/NetworkClient.h \
     NonPdf/NonPdf.h \
@@ -407,7 +408,6 @@ SOURCES += \
     Cmd/CmdFactory.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
-    Cmd/CmdPaste.cpp \
     Cmd/CmdRedoForTest.cpp \
     Cmd/CmdPointChangeBase.cpp \
     Cmd/CmdSelectCoordSystem.cpp \
@@ -606,7 +606,9 @@ SOURCES += \
     main/MainWindow.cpp \
     main/MainWindowModel.cpp \
     util/MigrateToVersion6.cpp \
-    Mime/MimePoints.cpp \
+    Mime/MimePointsDetector.cpp \
+    Mime/MimePointsExport.cpp \
+    Mime/MimePointsImport.cpp \    
     util/mmsubs.cpp \
     Network/NetworkClient.cpp \
     NonPdf/NonPdf.cpp \

@@ -27,7 +27,9 @@
 #include <QImage>
 #include <QMessageBox>
 #include <QObject>
+#include <QSize>
 #include <QtToString.h>
+#include "Transformation.h"
 #include "Version.h"
 
 const QString MOVE_TEXT_DOWN (QObject::tr ("Move down"));
@@ -74,6 +76,12 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
 
   addHoverHighlighting();
   context().mainWindow().updateViewsOfSettings(activeCurve ());
+}
+
+bool DigitizeStateSelect::canPaste (const Transformation & /* transformation */,
+                                    const QSize & /* viewSize */) const
+{
+  return false;
 }
 
 QCursor DigitizeStateSelect::cursor(CmdMediator * /* cmdMediator */) const

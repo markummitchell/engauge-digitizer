@@ -15,7 +15,6 @@
 #include "CmdEditPointGraph.h"
 #include "CmdFactory.h"
 #include "CmdMoveBy.h"
-#include "CmdPaste.h"
 #include "CmdRedoForTest.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdSettingsAxesChecker.h"
@@ -104,11 +103,6 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                          document,
                          cmdDescription,
                          reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_PASTE) {
-    cmd = new CmdPaste (mainWindow,
-                        document,
-                        cmdDescription,
-                        reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_REDO_FOR_TEST) {
     cmd = new CmdRedoForTest (mainWindow,
                               document,

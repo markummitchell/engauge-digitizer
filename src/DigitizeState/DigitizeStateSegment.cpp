@@ -14,8 +14,10 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
+#include <QSize>
 #include "Segment.h"
 #include "SegmentFactory.h"
+#include "Transformation.h"
 
 DigitizeStateSegment::DigitizeStateSegment (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -43,6 +45,13 @@ void DigitizeStateSegment::begin (CmdMediator *cmdMediator,
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
   handleCurveChange(cmdMediator);
+}
+
+bool DigitizeStateSegment::canPaste (const Transformation &transformation,
+                                     const QSize &viewSize) const
+{
+  return canPasteProtected (transformation,
+                            viewSize);
 }
 
 QCursor DigitizeStateSegment::cursor(CmdMediator * /* cmdMediator */) const
