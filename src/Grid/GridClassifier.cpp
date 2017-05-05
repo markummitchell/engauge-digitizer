@@ -511,10 +511,21 @@ void GridClassifier::searchStartStepSpace (bool isGnuplot,
   start = coordinateFromBin (binStartMax,
                              valueMin,
                              valueMax);
-  double next = coordinateFromBin (binStartMax + binStepMax,
-                                   valueMin,
-                                   valueMax);
-  step = next - start;
+  if (binStartMax + binStepMax < m_numHistogramBins) {
+
+    // Normal case where a reasonable step value is being calculated
+    double next = coordinateFromBin (binStartMax + binStepMax,
+                                     valueMin,
+                                     valueMax);
+    step = next - start;
+  } else {
+
+    // Pathological case where step jumps to outside the legal range. We bring the step back into range
+    double next = coordinateFromBin (m_numHistogramBins - 1,
+                                     valueMin,
+                                     valueMax);
+    step = next - start;
+  }
 
   if (isGnuplot) {
     dumpGnuplotCorrelations (coordinateLabel,

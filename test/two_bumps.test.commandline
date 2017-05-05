@@ -1,0 +1,2 @@
+-errorreport ../test/two_bumps.dig -regression -reset
+
