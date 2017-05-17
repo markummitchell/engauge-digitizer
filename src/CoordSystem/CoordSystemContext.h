@@ -30,8 +30,7 @@ class CoordSystemContext : public CoordSystemInterface
   ~CoordSystemContext();
 
   /// Add specified number of coordinate systems to the original one created by the constructor
-  void addCoordSystems(DocumentAxesPointsRequired documentAxesPointsRequired,
-                       unsigned int numberCoordSystemToAdd);
+  void addCoordSystems(unsigned int numberCoordSystemToAdd);
 
   virtual void addGraphCurveAtEnd (const QString &curveName);
   virtual void addPointAxisWithGeneratedIdentifier (const QPointF &posScreen,
@@ -57,12 +56,14 @@ class CoordSystemContext : public CoordSystemInterface
                                   const QPointF &posGraph,
                                   bool &isError,
                                   QString &errorMessage,
-                                  bool isXOnly);
+                                  bool isXOnly,
+                                  DocumentAxesPointsRequired documentAxesPointsRequired);
   virtual void checkEditPointAxis (const QString &pointIdentifier,
                                    const QPointF &posScreen,
                                    const QPointF &posGraph,
                                    bool &isError,
-                                   QString &errorMessage);
+                                   QString &errorMessage,
+                                   DocumentAxesPointsRequired documentAxesPointsRequired);
 
   /// Current CoordSystem
   const CoordSystem &coordSystem () const;
@@ -79,7 +80,6 @@ class CoordSystemContext : public CoordSystemInterface
   virtual const CurvesGraphs &curvesGraphs () const;
   virtual QStringList curvesGraphsNames () const;
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
-  virtual DocumentAxesPointsRequired documentAxesPointsRequired () const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
   virtual void editPointGraph (bool isX,
@@ -102,9 +102,11 @@ class CoordSystemContext : public CoordSystemInterface
 
   /// Load from file in pre-version 6 format
   void loadPreVersion6 (QDataStream &str,
-                        double version);
+                        double version,
+                        DocumentAxesPointsRequired &documentAxesPointsRequired);
   /// Load from file in version 6 format, into the single CoordSystem
-  void loadVersion6 (QXmlStreamReader &reader);
+  void loadVersion6 (QXmlStreamReader &reader,
+                     DocumentAxesPointsRequired &documentAxesPointsRequired);
   /// Load one CoordSystem from file in version 7 format or newer, into the most recent CoordSystem which was just created before
   /// the call to this method
   void loadVersions7AndUp (QXmlStreamReader &reader,

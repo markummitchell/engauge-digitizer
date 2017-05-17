@@ -29,15 +29,14 @@ CoordSystemContext::~CoordSystemContext()
   m_coordSystemIndex = 0;
 }
 
-void CoordSystemContext::addCoordSystems(DocumentAxesPointsRequired documentAxesPointsRequired,
-                                         unsigned int numberCoordSystemToAdd)
+void CoordSystemContext::addCoordSystems(unsigned int numberCoordSystemToAdd)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::addCoordSystems"
                               << " numberToAdd=" << numberCoordSystemToAdd;
 
   // The CoordSystem vector is populated with defaults here
   for (unsigned int i = 0; i < numberCoordSystemToAdd; i++) {
-    m_coordSystems.push_back (new CoordSystem (documentAxesPointsRequired));
+    m_coordSystems.push_back (new CoordSystem ());
   }
 }
 
@@ -115,7 +114,8 @@ void CoordSystemContext::checkAddPointAxis (const QPointF &posScreen,
                                             const QPointF &posGraph,
                                             bool &isError,
                                             QString &errorMessage,
-                                            bool isXOnly)
+                                            bool isXOnly,
+                                            DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::checkAddPointAxis";
 
@@ -123,14 +123,16 @@ void CoordSystemContext::checkAddPointAxis (const QPointF &posScreen,
                                                          posGraph,
                                                          isError,
                                                          errorMessage,
-                                                         isXOnly);
+                                                         isXOnly,
+                                                         documentAxesPointsRequired);
 }
 
 void CoordSystemContext::checkEditPointAxis (const QString &pointIdentifier,
                                              const QPointF &posScreen,
                                              const QPointF &posGraph,
                                              bool &isError,
-                                             QString &errorMessage)
+                                             QString &errorMessage,
+                                             DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::checkEditPointAxis";
 
@@ -138,7 +140,8 @@ void CoordSystemContext::checkEditPointAxis (const QString &pointIdentifier,
                                                           posScreen,
                                                           posGraph,
                                                           isError,
-                                                          errorMessage);
+                                                          errorMessage,
+                                                          documentAxesPointsRequired);
 }
 
 const CoordSystem &CoordSystemContext::coordSystem () const
@@ -198,11 +201,6 @@ int CoordSystemContext::curvesGraphsNumPoints (const QString &curveName) const
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::curvesGraphsNumPoints";
 
   return m_coordSystems [m_coordSystemIndex]->curvesGraphsNumPoints(curveName);
-}
-
-DocumentAxesPointsRequired CoordSystemContext::documentAxesPointsRequired () const
-{
-  return m_coordSystems [m_coordSystemIndex]->documentAxesPointsRequired ();
 }
 
 void CoordSystemContext::editPointAxis (const QPointF &posGraph,
@@ -283,19 +281,23 @@ bool CoordSystemContext::loadCurvesFile (const QString &curvesFile)
 }
 
 void CoordSystemContext::loadPreVersion6 (QDataStream &str,
-                                          double version)
+                                          double version,
+                                          DocumentAxesPointsRequired &documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadPreVersion6";
 
   m_coordSystems [m_coordSystemIndex]->loadPreVersion6 (str,
-                                                        version);
+                                                        version,
+                                                        documentAxesPointsRequired);
 }
 
-void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader)
+void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader,
+                                       DocumentAxesPointsRequired &documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion6";
 
-  m_coordSystems [m_coordSystemIndex]->loadVersion6 (reader);
+  m_coordSystems [m_coordSystemIndex]->loadVersion6 (reader,
+                                                     documentAxesPointsRequired);
 }
 
 void CoordSystemContext::loadVersions7AndUp (QXmlStreamReader &reader,

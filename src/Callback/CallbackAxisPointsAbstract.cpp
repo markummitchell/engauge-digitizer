@@ -163,13 +163,17 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
     }
 
     // Error checking
-    if (anyPointsRepeatPair (m_screenInputs)) {
+    if ((m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2 ||
+         m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) &&
+        anyPointsRepeatPair (m_screenInputs)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if (anyPointsRepeatPair (m_graphOutputs)) {
+    } else if ((m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2 ||
+                m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) &&
+               anyPointsRepeatPair (m_graphOutputs)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");

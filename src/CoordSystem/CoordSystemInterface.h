@@ -85,14 +85,16 @@ public:
                                   const QPointF &posGraph,
                                   bool &isError,
                                   QString &errorMessage,
-                                  bool isXOnly) = 0;
+                                  bool isXOnly,
+                                  DocumentAxesPointsRequired documentAxesPointsRequired) = 0;
 
   /// Check before calling editPointAxis
   virtual void checkEditPointAxis (const QString &pointIdentifier,
                                    const QPointF &posScreen,
                                    const QPointF &posGraph,
                                    bool &isError,
-                                   QString &errorMessage) = 0;
+                                   QString &errorMessage,
+                                   DocumentAxesPointsRequired documentAxesPointsRequired) = 0;
 
   /// Get method for axis curve.
   virtual const Curve &curveAxes () const = 0;
@@ -111,9 +113,6 @@ public:
 
   /// See CurvesGraphs::curvesGraphsNumPoints.
   virtual int curvesGraphsNumPoints (const QString &curveName) const = 0;
-
-  /// Number of axes points for map or graph. This value is returned after opening a file
-  virtual DocumentAxesPointsRequired documentAxesPointsRequired () const = 0;
 
   /// Edit the graph coordinates of a single axis point. Call this after checkAddPointAxis to guarantee success in this call
   virtual void editPointAxis (const QPointF &posGraph,

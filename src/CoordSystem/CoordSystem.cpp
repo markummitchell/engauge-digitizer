@@ -35,12 +35,11 @@
 
 const int FOUR_BYTES = 4;
 
-CoordSystem::CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired) :
+CoordSystem::CoordSystem () :
   m_curveAxes (new Curve (AXIS_CURVE_NAME,
                           ColorFilterSettings::defaultFilter (),
                           CurveStyle (LineStyle::defaultAxesCurve(),
-                                      PointStyle::defaultAxesCurve ()))),
-  m_documentAxesPointsRequired (documentAxesPointsRequired)
+                                      PointStyle::defaultAxesCurve ())))
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::CoordSystem";
 
@@ -176,7 +175,8 @@ void CoordSystem::checkAddPointAxis (const QPointF &posScreen,
                                      const QPointF &posGraph,
                                      bool &isError,
                                      QString &errorMessage,
-                                     bool isXOnly)
+                                     bool isXOnly,
+                                     DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::checkAddPointAxis"
                               << " posScreen=" << QPointFToString (posScreen).toLatin1 ().data ()
@@ -185,7 +185,7 @@ void CoordSystem::checkAddPointAxis (const QPointF &posScreen,
   CallbackCheckAddPointAxis ftor (m_modelCoords,
                                   posScreen,
                                   posGraph,
-                                  m_documentAxesPointsRequired,
+                                  documentAxesPointsRequired,
                                   isXOnly);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
@@ -200,7 +200,8 @@ void CoordSystem::checkEditPointAxis (const QString &pointIdentifier,
                                       const QPointF &posScreen,
                                       const QPointF &posGraph,
                                       bool &isError,
-                                      QString &errorMessage)
+                                      QString &errorMessage,
+                                      DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::checkEditPointAxis"
                               << " posGraph=" << QPointFToString (posGraph).toLatin1 ().data ();
@@ -209,7 +210,7 @@ void CoordSystem::checkEditPointAxis (const QString &pointIdentifier,
                                    pointIdentifier,
                                    posScreen,
                                    posGraph,
-                                   m_documentAxesPointsRequired);
+                                   documentAxesPointsRequired);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackCheckEditPointAxis::callback);
@@ -265,11 +266,6 @@ QStringList CoordSystem::curvesGraphsNames() const
 int CoordSystem::curvesGraphsNumPoints(const QString &curveName) const
 {
   return m_curvesGraphs.curvesGraphsNumPoints(curveName);
-}
-
-DocumentAxesPointsRequired CoordSystem::documentAxesPointsRequired () const
-{
-  return m_documentAxesPointsRequired;
 }
 
 void CoordSystem::editPointAxis (const QPointF &posGraph,
@@ -355,7 +351,8 @@ bool CoordSystem::loadCurvesFile(const QString & /* curvesFile */)
 }
 
 void CoordSystem::loadPreVersion6 (QDataStream &str,
-                                   double version)
+                                   double version,
+                                   DocumentAxesPointsRequired &documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadPreVersion6";
 
@@ -503,31 +500,32 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   Curve *curveScaleIn = new Curve (str);
   if (curveScaleIn->numPoints() == 2) {
     // Nondefault case is map with scale bar
-    m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_2;
+    documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_2;
     m_curveAxes = curveScaleIn;
     m_curveAxes->setCurveName (AXIS_CURVE_NAME); // Override existing "Scale" name
     delete curveAxesIn;
   } else {
     // Default case is graph with axes
-    m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+    documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
     m_curveAxes = curveAxesIn;
     delete curveScaleIn;
   }
   m_curvesGraphs.loadPreVersion6 (str);
 
   // Information from curves and points can affect some data structures that were (mostly) set earlier
-  if (m_curveAxes->numPoints () >= m_documentAxesPointsRequired) {
+  if (m_curveAxes->numPoints () >= documentAxesPointsRequired) {
     m_modelGridRemoval.setStable();
   }
 
   resetSelectedCurveNameIfNecessary ();
 }
 
-void CoordSystem::loadVersion6 (QXmlStreamReader &reader)
+void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
+                                DocumentAxesPointsRequired &documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersion6";
 
-  m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+  documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
 
   // Import from xml. Loop to end of data or error condition occurs, whichever is first
   while (!reader.atEnd() &&
@@ -586,8 +584,6 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader,
                                       DocumentAxesPointsRequired documentAxesPointsRequired)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersions7AndUp";
-
-  m_documentAxesPointsRequired = documentAxesPointsRequired;
 
   // Import from xml. Loop to end of data or error condition occurs, whichever is first
   while (!reader.atEnd() &&

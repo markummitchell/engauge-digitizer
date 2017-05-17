@@ -43,7 +43,7 @@ class CoordSystem : public CoordSystemInterface
 {
 public:
   /// Single constructor
-  CoordSystem (DocumentAxesPointsRequired documentAxesPointsRequired);
+  CoordSystem ();
 
   /// Constructor for opened Graphs, and error report files. The specified file is opened and read
   CoordSystem (const QString &fileName);
@@ -72,19 +72,20 @@ public:
                                   const QPointF &posGraph,
                                   bool &isError,
                                   QString &errorMessage,
-                                  bool isXOnly);
+                                  bool isXOnly,
+                                  DocumentAxesPointsRequired documentAxesPointsRequired);
   virtual void checkEditPointAxis (const QString &pointIdentifier,
                                    const QPointF &posScreen,
                                    const QPointF &posGraph,
                                    bool &isError,
-                                   QString &errorMessage);
+                                   QString &errorMessage,
+                                   DocumentAxesPointsRequired documentAxesPointsRequired);
   virtual const Curve &curveAxes () const;
   virtual Curve *curveForCurveName (const QString &curveName);
   virtual const Curve *curveForCurveName (const QString &curveName) const;
   virtual const CurvesGraphs &curvesGraphs () const;
   virtual QStringList curvesGraphsNames () const;
   virtual int curvesGraphsNumPoints (const QString &curveName) const;
-  virtual DocumentAxesPointsRequired documentAxesPointsRequired () const;
   virtual void editPointAxis (const QPointF &posGraph,
                               const QString &identifier);
   virtual void editPointGraph (bool isX,
@@ -106,12 +107,14 @@ public:
   virtual void iterateThroughCurvesPointsGraphs (const Functor2wRet<const QString &, const Point &, CallbackSearchReturn> &ftorWithCallback) const;
   virtual bool loadCurvesFile (const QString &curvesFile);
 
-  /// Load from file in pre-version 6 format
+  /// Load from file in pre-version 6 format. Number of axes points is read in and passed to Document
   void loadPreVersion6 (QDataStream &str,
-                        double version);
-  /// Load from file in version 6 format
-  void loadVersion6 (QXmlStreamReader &reader);
-  /// Load from file in versions 7 and 8 formats
+                        double version,
+                        DocumentAxesPointsRequired &documentAxesPointsRequired);
+  /// Load from file in version 6 format. Number of axes points is read in and passed to Document
+  void loadVersion6 (QXmlStreamReader &reader,
+                     DocumentAxesPointsRequired &documentAxesPointsRequired);
+  /// Load from file in versions 7 and 8 formats. Number of axes points is already defined at Document level
   void loadVersions7AndUp (QXmlStreamReader &reader,
                            DocumentAxesPointsRequired documentAxesPointsRequired);
 
@@ -158,7 +161,6 @@ public:
   virtual void updatePointOrdinals (const Transformation &transformation);
 
 private:
-  CoordSystem();
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
   void resetSelectedCurveNameIfNecessary ();
@@ -183,9 +185,6 @@ private:
   DocumentModelGridRemoval m_modelGridRemoval;
   DocumentModelPointMatch m_modelPointMatch;
   DocumentModelSegments m_modelSegments;
-
-  // Save the number of required axes points
-  DocumentAxesPointsRequired m_documentAxesPointsRequired;
 
   // Each coordinate systems manages its own selected curve name
   QString m_selectedCurveName;

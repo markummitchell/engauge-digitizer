@@ -55,8 +55,7 @@ Document::Document (const QImage &image) :
   LOG4CPP_INFO_S ((*mainCat)) << "Document::Document"
                               << " image=" << image.width() << "x" << image.height();
 
-  m_coordSystemContext.addCoordSystems(m_documentAxesPointsRequired,
-                                       NOMINAL_COORD_SYSTEM_COUNT);
+  m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
 
   m_successfulRead = true; // Reading from QImage always succeeds, resulting in empty Document
 
@@ -85,8 +84,7 @@ Document::Document (const QString &fileName) :
       if (file->open (QIODevice::ReadOnly)) {
         QDataStream str (file);
 
-        m_coordSystemContext.addCoordSystems(m_documentAxesPointsRequired,
-                                             NOMINAL_COORD_SYSTEM_COUNT);
+        m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
         loadPreVersion6 (str);
 
       } else {
@@ -151,8 +149,7 @@ void Document::addCoordSystems(unsigned int numberCoordSystemToAdd)
   LOG4CPP_INFO_S ((*mainCat)) << "Document::addCoordSystems"
                               << " toAdd=" << numberCoordSystemToAdd;
 
-  m_coordSystemContext.addCoordSystems(m_documentAxesPointsRequired,
-                                       numberCoordSystemToAdd);
+  m_coordSystemContext.addCoordSystems(numberCoordSystemToAdd);
 }
 
 void Document::addGraphCurveAtEnd (const QString &curveName)
@@ -277,7 +274,8 @@ void Document::checkAddPointAxis (const QPointF &posScreen,
                                          posGraph,
                                          isError,
                                          errorMessage,
-                                         isXOnly);
+                                         isXOnly,
+                                         m_documentAxesPointsRequired);
 }
 
 void Document::checkEditPointAxis (const QString &pointIdentifier,
@@ -292,7 +290,8 @@ void Document::checkEditPointAxis (const QString &pointIdentifier,
                                           posScreen,
                                           posGraph,
                                           isError,
-                                          errorMessage);
+                                          errorMessage,
+                                          m_documentAxesPointsRequired);
 }
 
 const CoordSystem &Document::coordSystem() const
@@ -529,9 +528,8 @@ void Document::loadPreVersion6 (QDataStream &str)
   str >> m_name;
 
   m_coordSystemContext.loadPreVersion6 (str,
-                                        version);
-
-  m_documentAxesPointsRequired = m_coordSystemContext.documentAxesPointsRequired ();
+                                        version,
+                                        m_documentAxesPointsRequired); // Returns axes points required
 }
 
 void Document::loadVersion6 (QFile *file)
@@ -543,8 +541,7 @@ void Document::loadVersion6 (QFile *file)
   m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
 
   // Create the single CoordSystem used in versions before version 7
-  m_coordSystemContext.addCoordSystems(m_documentAxesPointsRequired,
-                                       NOMINAL_COORD_SYSTEM_COUNT);
+  m_coordSystemContext.addCoordSystems(NOMINAL_COORD_SYSTEM_COUNT);
 
   // If this is purely a serialized Document then we process every node under the root. However, if this is an error report file
   // then we need to skip the non-Document stuff. The common solution is to skip nodes outside the Document subtree using this flag
@@ -587,7 +584,8 @@ void Document::loadVersion6 (QFile *file)
           loadImage(reader);
 
           // Now that we have the image at the DOCUMENT_SERIALIZE_DOCUMENT level, we read the rest at this level into CoordSystem
-          m_coordSystemContext.loadVersion6 (reader);
+          m_coordSystemContext.loadVersion6 (reader,
+                                             m_documentAxesPointsRequired); // Returns axes points required
 
           // Reading of DOCUMENT_SERIALIZE_DOCUMENT has just finished, so the reading has finished
           break;
@@ -656,8 +654,7 @@ void Document::loadVersions7AndUp (QFile *file)
         // This is a StartElement, so process it
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
-          m_coordSystemContext.addCoordSystems (m_documentAxesPointsRequired,
-                                                ONE_COORDINATE_SYSTEM);
+          m_coordSystemContext.addCoordSystems (ONE_COORDINATE_SYSTEM);
           m_coordSystemContext.loadVersions7AndUp (reader,
                                                    m_documentAxesPointsRequired);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
