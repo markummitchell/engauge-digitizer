@@ -91,7 +91,8 @@ macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg
 # An attempt was made to remove QtNetwork, and then QtSql framework which uses QtNetwork, to
 # help with installation issues in OSX 10.12 but both are required by QtHelp so they were restored
 
-# Subtle stuff here. Copying the library will not complete before the signing unless we insert a prompt as a hack
+# Subtle stuff here. Copying the library will not complete before the signing unless we insert a prompt as a hack.
+# Also, xcode 5 and 6 want log4cpp and fftw libraries in Frameworks, but newer xcode wants them in MacOS
 cp $LOG4CPP_HOME/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
 read -p "Press any key to continue"
 
@@ -102,12 +103,14 @@ do
     signAppFramework $i
 done
 
-signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'` # xcode 5 and 6
 signAppArray `find Engauge\ Digitizer.app | grep '/engauge_'                 | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+# Next line is needed for newer versions of xcode but not for xcode 5 and 6
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
 signAppFile /Contents/MacOS/Engauge\ Digitizer
 
 echo "******************************************************************************"
