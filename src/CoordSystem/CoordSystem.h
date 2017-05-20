@@ -115,8 +115,7 @@ public:
   void loadVersion6 (QXmlStreamReader &reader,
                      DocumentAxesPointsRequired &documentAxesPointsRequired);
   /// Load from file in versions 7 and 8 formats. Number of axes points is already defined at Document level
-  void loadVersions7AndUp (QXmlStreamReader &reader,
-                           DocumentAxesPointsRequired documentAxesPointsRequired);
+  void loadVersions7AndUp (QXmlStreamReader &reader);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;

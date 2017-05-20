@@ -655,8 +655,7 @@ void Document::loadVersions7AndUp (QFile *file)
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_COORD_SYSTEM) {
           m_coordSystemContext.addCoordSystems (ONE_COORDINATE_SYSTEM);
-          m_coordSystemContext.loadVersions7AndUp (reader,
-                                                   m_documentAxesPointsRequired);
+          m_coordSystemContext.loadVersions7AndUp (reader);
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
           loadImage(reader);

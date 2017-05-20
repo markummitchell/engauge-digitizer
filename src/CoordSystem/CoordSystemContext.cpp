@@ -300,14 +300,12 @@ void CoordSystemContext::loadVersion6 (QXmlStreamReader &reader,
                                                      documentAxesPointsRequired);
 }
 
-void CoordSystemContext::loadVersions7AndUp (QXmlStreamReader &reader,
-                                             DocumentAxesPointsRequired documentAxesPointsRequired)
+void CoordSystemContext::loadVersions7AndUp (QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::loadVersion7AndUp";
 
   int indexLast = m_coordSystems.count() - 1;
-  m_coordSystems [indexLast]->loadVersions7AndUp (reader,
-                                                  documentAxesPointsRequired);
+  m_coordSystems [indexLast]->loadVersions7AndUp (reader);
 }
 
 DocumentModelAxesChecker CoordSystemContext::modelAxesChecker() const

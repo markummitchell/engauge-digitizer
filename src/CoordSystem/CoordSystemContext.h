@@ -109,8 +109,7 @@ class CoordSystemContext : public CoordSystemInterface
                      DocumentAxesPointsRequired &documentAxesPointsRequired);
   /// Load one CoordSystem from file in version 7 format or newer, into the most recent CoordSystem which was just created before
   /// the call to this method
-  void loadVersions7AndUp (QXmlStreamReader &reader,
-                           DocumentAxesPointsRequired documentAxesPointsRequired);
+  void loadVersions7AndUp (QXmlStreamReader &reader);
 
   virtual DocumentModelAxesChecker modelAxesChecker() const;
   virtual DocumentModelColorFilter modelColorFilter() const;

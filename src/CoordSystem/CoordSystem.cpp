@@ -580,8 +580,7 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
   resetSelectedCurveNameIfNecessary ();
 }
 
-void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader,
-                                      DocumentAxesPointsRequired documentAxesPointsRequired)
+void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::loadVersions7AndUp";
 
