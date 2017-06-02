@@ -4,12 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-/**
- * \file CallbackSearchReturn.h
- * \brief
- * \copyright Copyright (c) 2012 Mark Mitchell. All rights reserved. Distribution requires prior written permission.
- */
-
 #ifndef CALLBACK_SEARCH_RETURN_H
 #define CALLBACK_SEARCH_RETURN_H
 
