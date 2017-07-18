@@ -553,10 +553,10 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
 
   // Header
   if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
+    insertLineSeparator (numWritesSoFar == 0,
+                         modelExportOverride.header (),
+                         str);
     if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
-      insertLineSeparator (numWritesSoFar == 0,
-                           modelExportOverride.header (),
-                           str);
       str << gnuplotComment();
     }
     str << modelExportOverride.xLabel();

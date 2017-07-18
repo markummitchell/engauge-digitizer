@@ -1,0 +1,2 @@
+-errorreport ../test/function_function.dig -regression -reset
+
