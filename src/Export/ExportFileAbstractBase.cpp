@@ -20,15 +20,12 @@ ExportFileAbstractBase::ExportFileAbstractBase()
 {
 }
 
-QString ExportFileAbstractBase::curveSeparator (const QString *string) const
+QString ExportFileAbstractBase::curveSeparator (unsigned int numWritesSoFar) const
 {
   QString separator = "";
 
-  if (string != 0) {
-
-    if (!string->trimmed().isEmpty()) {
-      return "\n";
-    }
+  if (numWritesSoFar > 0) {
+      separator = "\n";
   }
 
   return separator;

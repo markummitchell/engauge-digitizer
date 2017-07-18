@@ -28,19 +28,23 @@ void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportToFile::exportToFile";
 
+  unsigned int numWritesSoFar = 0;
+
   ExportFileFunctions exportFunctions;
   exportFunctions.exportToFile (modelExport,
                                 document,
                                 modelMainWindow,
                                 transformation,
-                                str);
+                                str,
+                                numWritesSoFar);
 
   ExportFileRelations exportRelations;
   exportRelations.exportToFile (modelExport,
                                 document,
                                 modelMainWindow,
                                 transformation,
-                                str);
+                                str,
+                                numWritesSoFar);
 }
 
 QString ExportToFile::fileExtensionCsv () const

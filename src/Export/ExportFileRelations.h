@@ -34,7 +34,8 @@ public:
                      const Document &document,
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
-                     QTextStream &str) const;
+                     QTextStream &str,
+                     unsigned int &numWritesSoFar) const;
 
 private:
   void exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
@@ -45,7 +46,8 @@ private:
                                            const Transformation &transformation,
                                            bool isLogXTheta,
                                            bool isLogYRadius,
-                                           QTextStream &str) const;
+                                           QTextStream &str,
+                                           unsigned int &numWritesSoFar) const;
   void exportAllPerLineXThetaValuesMergedMultiplePass (int maxColumnSize,
                                                        const DocumentModelExportFormat &modelExportOverride,
                                                        const Document &document,
@@ -55,7 +57,8 @@ private:
                                                        const Transformation &transformation,
                                                        bool isLogXTheta,
                                                        bool isLogYRadius,
-                                                       QTextStream &str) const;
+                                                       QTextStream &str,
+                                                       unsigned int &numWritesSoFar) const;
   void exportAllPerLineXThetaValuesMergedOnePass (int maxColumnSize,
                                                   const DocumentModelExportFormat &modelExportOverride,
                                                   const Document &document,
@@ -65,7 +68,8 @@ private:
                                                   const Transformation &transformation,
                                                   bool isLogXTheta,
                                                   bool isLogYRadius,
-                                                  QTextStream &str) const;
+                                                  QTextStream &str,
+                                                  unsigned int &numWritesSoFar) const;
   void exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                            const Document &document,
                                            const MainWindowModel &modelMainWindow,
@@ -74,7 +78,8 @@ private:
                                            const Transformation &transformation,
                                            bool isLogXTheta,
                                            bool isLogYRadius,
-                                           QTextStream &str) const;
+                                           QTextStream &str,
+                                           unsigned int &numWritesSoFar) const;
   void initializeXThetaYRadiusValues (const QStringList &curvesIncluded,
                                       QVector<QVector<QString*> > &xThetaYRadiusValues) const;
   QPointF linearlyInterpolate (const Points &points,
@@ -144,7 +149,8 @@ private:
                                   const QStringList &curvesIncluded,
                                   QVector<QVector<QString*> > &xThetaYRadiusValues,
                                   const QString &delimiter,
-                                  QTextStream &str) const;
+                                  QTextStream &str,
+                                  unsigned int &numWritesSoFar) const;
 };
 
 #endif // EXPORT_FILE_RELATIONS_H

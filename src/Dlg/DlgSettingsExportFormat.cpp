@@ -989,26 +989,24 @@ void DlgSettingsExportFormat::updatePreview()
 
   if (mainWindow().transformation().transformIsDefined()) {
 
-    // Transformation is defined so we can create a preview
-    if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
+    unsigned int numWritesSoFar = 0;
 
-      ExportFileFunctions exportStrategy;
-      exportStrategy.exportToFile (*m_modelExportAfter,
-                                   cmdMediator().document(),
-                                   mainWindow().modelMainWindow(),
-                                   mainWindow().transformation(),
-                                   str);
+    ExportFileFunctions exportStrategyFunctions;
+    exportStrategyFunctions.exportToFile (*m_modelExportAfter,
+                                          cmdMediator().document(),
+                                          mainWindow().modelMainWindow(),
+                                          mainWindow().transformation(),
+                                          str,
+                                          numWritesSoFar);
 
-    } else {
+    ExportFileRelations exportStrategyRelations;
+    exportStrategyRelations.exportToFile (*m_modelExportAfter,
+                                          cmdMediator().document(),
+                                          mainWindow().modelMainWindow(),
+                                          mainWindow().transformation(),
+                                          str,
+                                          numWritesSoFar);
 
-      ExportFileRelations exportStrategy;
-      exportStrategy.exportToFile (*m_modelExportAfter,
-                                   cmdMediator().document(),
-                                   mainWindow().modelMainWindow(),
-                                   mainWindow().transformation(),
-                                   str);
-
-    }
   } else {
 
     str << "Preview is unavailable until axis points are defined.";

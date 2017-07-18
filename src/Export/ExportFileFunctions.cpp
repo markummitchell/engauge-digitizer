@@ -38,7 +38,8 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                               const Transformation &transformation,
                                                               bool isLogXTheta,
                                                               bool isLogYRadius,
-                                                              QTextStream &str) const
+                                                              QTextStream &str,
+                                                              unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportAllPerLineXThetaValuesMerged";
 
@@ -67,7 +68,8 @@ void ExportFileFunctions::exportAllPerLineXThetaValuesMerged (const DocumentMode
                              transformation,
                              yRadiusValues,
                              delimiter,
-                             str);
+                             str,
+                             numWritesSoFar);
   destroy2DArray (yRadiusValues);
 }
 
@@ -80,7 +82,8 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                                               const Transformation &transformation,
                                                               bool isLogXTheta,
                                                               bool isLogYRadius,
-                                                              QTextStream &str) const
+                                                              QTextStream &str,
+                                                              unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportOnePerLineXThetaValuesMerged";
 
@@ -121,7 +124,8 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                transformation,
                                yRadiusValues,
                                delimiter,
-                               str);
+                               str,
+                               numWritesSoFar);
     destroy2DArray (yRadiusValues);
   }
 }
@@ -130,7 +134,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                         const Document &document,
                                         const MainWindowModel &modelMainWindow,
                                         const Transformation &transformation,
-                                        QTextStream &str) const
+                                        QTextStream &str,
+                                        unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportToFile";
 
@@ -176,7 +181,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                           transformation,
                                           isLogXTheta,
                                           isLogYRadius,
-                                          str);
+                                          str,
+                                          numWritesSoFar);
     } else {
       exportOnePerLineXThetaValuesMerged (modelExportOverride,
                                           document,
@@ -187,7 +193,8 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                           transformation,
                                           isLogXTheta,
                                           isLogYRadius,
-                                          str);
+                                          str,
+                                          numWritesSoFar);
     }
   }
 }
@@ -545,14 +552,15 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
                                                      const Transformation &transformation,
                                                      QVector<QVector<QString*> > &yRadiusValues,
                                                      const QString &delimiter,
-                                                     QTextStream &str) const
+                                                     QTextStream &str,
+                                                     unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::outputXThetaYRadiusValues";
 
   // Header
   if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
     if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
-      str << curveSeparator (str.string());
+      str << curveSeparator (numWritesSoFar);
       str << gnuplotComment();
     }
     str << modelExportOverride.xLabel();
@@ -594,6 +602,8 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
       str << "\n";
     }
   }
+
+  ++numWritesSoFar;
 }
 
 bool ExportFileFunctions::rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,

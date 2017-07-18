@@ -39,7 +39,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                               const Transformation &transformation,
                                                               bool isLogXTheta,
                                                               bool isLogYRadius,
-                                                              QTextStream &str) const
+                                                              QTextStream &str,
+                                                              unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportAllPerLineXThetaValuesMerged";
 
@@ -64,7 +65,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                       transformation,
                                                       isLogXTheta,
                                                       isLogYRadius,
-                                                      str);
+                                                      str,
+                                                      numWritesSoFar);
 
     } else {
 
@@ -77,7 +79,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMerged (const DocumentMode
                                                  transformation,
                                                  isLogXTheta,
                                                  isLogYRadius,
-                                                 str);
+                                                 str,
+                                                 numWritesSoFar);
     }
   }
 }
@@ -91,7 +94,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMergedMultiplePass (int ma
                                                                           const Transformation &transformation,
                                                                           bool isLogXTheta,
                                                                           bool isLogYRadius,
-                                                                          QTextStream &str) const
+                                                                          QTextStream &str,
+                                                                          unsigned int &numWritesSoFar) const
 {
   // For interpolation of relations in general a single set of x/theta values cannot be created that work for every
   // relation curve, since one curve may have M y/radius values for a specific x/radius while another curve has
@@ -146,7 +150,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMergedMultiplePass (int ma
                              curvesIncluded,
                              xThetaYRadiusValuesAll,
                              delimiter,
-                             str);
+                             str,
+                             numWritesSoFar);
   destroy2DArray (xThetaYRadiusValuesAll);
 }
 
@@ -159,7 +164,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMergedOnePass (int maxColu
                                                                      const Transformation &transformation,
                                                                      bool isLogXTheta,
                                                                      bool isLogYRadius,
-                                                                     QTextStream &str) const
+                                                                     QTextStream &str,
+                                                                     unsigned int &numWritesSoFar) const
 {
   int curveCount = curvesIncluded.count ();
 
@@ -178,7 +184,8 @@ void ExportFileRelations::exportAllPerLineXThetaValuesMergedOnePass (int maxColu
                              curvesIncluded,
                              xThetaYRadiusValues,
                              delimiter,
-                             str);
+                             str,
+                             numWritesSoFar);
   destroy2DArray (xThetaYRadiusValues);
 }
 
@@ -190,7 +197,8 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                                               const Transformation &transformation,
                                                               bool isLogXTheta,
                                                               bool isLogYRadius,
-                                                              QTextStream &str) const
+                                                              QTextStream &str,
+                                                              unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportOnePerLineXThetaValuesMerged";
 
@@ -207,7 +215,8 @@ void ExportFileRelations::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                         transformation,
                                         isLogXTheta,
                                         isLogYRadius,
-                                        str);
+                                        str,
+                                        numWritesSoFar);
   }
 }
 
@@ -215,7 +224,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         const Document &document,
                                         const MainWindowModel &modelMainWindow,
                                         const Transformation &transformation,
-                                        QTextStream &str) const
+                                        QTextStream &str,
+                                        unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportToFile";
 
@@ -244,7 +254,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         transformation,
                                         isLogXTheta,
                                         isLogYRadius,
-                                        str);
+                                        str,
+                                        numWritesSoFar);
   } else {
     exportOnePerLineXThetaValuesMerged (modelExportOverride,
                                         document,
@@ -254,7 +265,8 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         transformation,
                                         isLogXTheta,
                                         isLogYRadius,
-                                        str);
+                                        str,
+                                        numWritesSoFar);
   }
 }
 
@@ -719,14 +731,15 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExportFo
                                                      const QStringList &curvesIncluded,
                                                      QVector<QVector<QString*> > &xThetaYRadiusValues,
                                                      const QString &delimiter,
-                                                     QTextStream &str) const
+                                                     QTextStream &str,
+                                                     unsigned int &numWritesSoFar) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::outputXThetaYRadiusValues";
 
   // Header
   if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
     if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
-      str << curveSeparator(str.string());
+      str << curveSeparator(numWritesSoFar);
       str << gnuplotComment();
     }
     QString delimiterForRow;
@@ -751,4 +764,6 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExportFo
 
     str << "\n";
   }
+
+  ++numWritesSoFar;
 }

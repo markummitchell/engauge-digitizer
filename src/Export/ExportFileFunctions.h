@@ -36,7 +36,8 @@ public:
                      const Document &document,
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
-                     QTextStream &str) const;
+                     QTextStream &str,
+                     unsigned int &numWritesSoFar) const;
 
 private:
 
@@ -49,7 +50,8 @@ private:
                                            const Transformation &transformation,
                                            bool isLogXTheta,
                                            bool isLogYRadius,
-                                           QTextStream &str) const;
+                                           QTextStream &str,
+                                           unsigned int &numWritesSoFar) const;
   void exportOnePerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,
                                            const Document &document,
                                            const MainWindowModel &modelMainWindow,
@@ -59,7 +61,8 @@ private:
                                            const Transformation &transformation,
                                            bool isLogXTheta,
                                            bool isLogYRadius,
-                                           QTextStream &str) const;
+                                           QTextStream &str,
+                                           unsigned int &numWritesSoFar) const;
 
   /// Allocate a 2D y/radius array indexed by (included) curve and x/theta.
   /// Array rows and columns are set up so yRadiusValues[N] gives vector for Nth curve. Values are strings
@@ -114,7 +117,8 @@ private:
                                   const Transformation &transformation,
                                   QVector<QVector<QString*> > &yRadiusValues,
                                   const QString &delimiter,
-                                  QTextStream &str) const;
+                                  QTextStream &str,
+                                  unsigned int &numWritesSoFar) const;
   // Only include rows that have at least one y/radius entry. This check is required when outputing one curve per row
   // since the union of all x/theta values is applied to each curve
   bool rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,
