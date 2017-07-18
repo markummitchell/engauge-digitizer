@@ -87,14 +87,8 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportOnePerLineXThetaValuesMerged";
 
-  bool isFirst = true;
-
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
-
-    insertLineSeparator (isFirst,
-                         modelExportOverride.header(),
-                         str);
 
     // This curve
     const int CURVE_COUNT = 1;
@@ -560,7 +554,9 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
   // Header
   if (modelExportOverride.header() != EXPORT_HEADER_NONE) {
     if (modelExportOverride.header() == EXPORT_HEADER_GNUPLOT) {
-      str << curveSeparator (numWritesSoFar);
+      insertLineSeparator (numWritesSoFar == 0,
+                           modelExportOverride.header (),
+                           str);
       str << gnuplotComment();
     }
     str << modelExportOverride.xLabel();

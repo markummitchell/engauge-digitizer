@@ -1,0 +1,2 @@
+-errorreport ../test/function_relation.dig -regression -reset
+

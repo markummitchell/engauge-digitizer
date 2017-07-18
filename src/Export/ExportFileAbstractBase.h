@@ -28,15 +28,6 @@ public:
   ExportFileAbstractBase();
 
 protected:
-  /// Gnuplot requires, and other graphing tools probably prefer, blank lines between successive curves.
-  /// If the argument indicates at least one character has been written to the QString/QFile, then the
-  /// separator gets inserted.
-  ///
-  /// Originally the QTextStream argument str.string() was given as the argument, but
-  /// that only worked for QString (=value of original QString appeared). For the QIODevice,
-  /// 0x0 appeared which was useless. In other words, Export Settings preview worked but actual file
-  /// export was incorrect.
-  QString curveSeparator (unsigned int numWritesSoFar) const;
 
   /// Identify curves to include in export. The specified DocumentModelExportFormat overrides same data in Document for previewing window
   QStringList curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
@@ -52,7 +43,7 @@ protected:
   QString gnuplotComment() const;
 
   /// Insert line(s) between successive sets of curves
-  void insertLineSeparator (bool &isFirst,
+  void insertLineSeparator (bool isFirst,
                             ExportHeader exportHeader,
                             QTextStream &str) const;
 
