@@ -1016,6 +1016,13 @@ void DlgSettingsExportFormat::updateControlsUponLoad ()
   m_editRelationsPointsEvenlySpacing->setEnabled (m_haveRelation);
   m_cmbRelationsPointsEvenlySpacingUnits->setEnabled (m_haveRelation);
   m_btnRelationsPointsRaw->setEnabled (m_haveRelation);
+
+  // Do not start with a tab that does not apply to the current set of functions/relations
+  if (!m_haveRelation) {
+    m_tabWidget->setCurrentIndex (0);
+  } else if (!m_haveFunction) {
+    m_tabWidget->setCurrentIndex (1);
+  }
 }
 
 void DlgSettingsExportFormat::updateIntervalConstraints ()
