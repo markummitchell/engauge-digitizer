@@ -84,10 +84,13 @@ private:
                         int &row);
   void createXLabel (QGridLayout *layoutHeader,
                      int colLabel);
+  QString exportedTextToExportedHtml (const QString &text,
+                                      const QString &color) const;
   bool goodIntervalFunctions() const;
   bool goodIntervalRelations() const;
   void initializeIntervalConstraints ();
   void updateControls();
+  void updateControlsUponLoad();
   void updateIntervalConstraints(); // Update constraints on intervals to prevent overflows downstream (especially when value is temporarily 0)
   void updatePreview();
 
@@ -107,8 +110,8 @@ private:
   QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
   QRadioButton *m_btnFunctionsPointsRaw;
 
-  QRadioButton *m_btnFunctionsLayoutAllCurves;
-  QRadioButton *m_btnFunctionsLayoutOneCurve;
+  QRadioButton *m_btnCurvesLayoutAllCurves;
+  QRadioButton *m_btnCurvesLayoutOneCurve;
 
   QRadioButton *m_btnRelationsPointsEvenlySpaced;
   QLineEdit *m_editRelationsPointsEvenlySpacing;
@@ -140,6 +143,9 @@ private:
   // with a resulting crash
   double m_minIntervalGraph;
   double m_minIntervalScreen;
+
+  bool m_haveFunction;
+  bool m_haveRelation;
 };
 
 #endif // DLG_SETTINGS_EXPORT_FORMAT_H
