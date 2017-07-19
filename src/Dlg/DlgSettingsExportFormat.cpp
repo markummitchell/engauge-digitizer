@@ -44,7 +44,7 @@ const int MIN_EDIT_WIDTH = 110;
 const int MAX_EDIT_WIDTH = 180;
 
 const int TAB_WIDGET_INDEX_FUNCTIONS = 0;
-//const int TAB_WIDGET_INDEX_RELATIONS = 1;
+const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 const QString EMPTY_PREVIEW;
 
@@ -403,7 +403,6 @@ void DlgSettingsExportFormat::createTabWidget (QGridLayout *layout,
   // This gets connected below, after the tabs have been added
   layout->addWidget (m_tabWidget, row++, 0, 1, 3);
 
-  // Attempts to set the tab color with COLOR_FUNCTIONS will not work on all targeted platforms
   QWidget *widgetFunctions = new QWidget;
   int indexFunctions = m_tabWidget->addTab (widgetFunctions, tr ("Functions"));
   QWidget *tabFunctions = m_tabWidget->widget (indexFunctions);
@@ -412,7 +411,6 @@ void DlgSettingsExportFormat::createTabWidget (QGridLayout *layout,
   QHBoxLayout *layoutFunctions = new QHBoxLayout;
   widgetFunctions->setLayout (layoutFunctions);
 
-  // Attempts to set the tab color with COLOR_RELATIONS will not work on all targeted platforms
   QWidget *widgetRelations = new QWidget;
   int indexRelations = m_tabWidget->addTab (widgetRelations, tr ("Relations"));
   QWidget *tabRelations = m_tabWidget->widget (indexRelations);
@@ -951,6 +949,7 @@ void DlgSettingsExportFormat::slotTabChanged (int)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotTabChanged";
 
+  updateTabBorder();
   updatePreview();
 }
 
@@ -1019,10 +1018,11 @@ void DlgSettingsExportFormat::updateControlsUponLoad ()
 
   // Do not start with a tab that does not apply to the current set of functions/relations
   if (!m_haveRelation) {
-    m_tabWidget->setCurrentIndex (0);
+    m_tabWidget->setCurrentIndex (TAB_WIDGET_INDEX_FUNCTIONS);
   } else if (!m_haveFunction) {
-    m_tabWidget->setCurrentIndex (1);
+    m_tabWidget->setCurrentIndex (TAB_WIDGET_INDEX_RELATIONS);
   }
+  updateTabBorder();
 }
 
 void DlgSettingsExportFormat::updateIntervalConstraints ()
@@ -1110,4 +1110,25 @@ void DlgSettingsExportFormat::updatePreview()
 
   // Restore scroll position
   m_editPreview->verticalScrollBar()->setValue (scrollPosition);
+}
+
+void DlgSettingsExportFormat::updateTabBorder()
+{
+  // Options for color highlighting the function/relation tab to associate that with
+  // the functions/relations in the preview are:
+  // 1) Color the tiny tab. Will not work with many platforms that use operating system
+  //    code to draw the tabs
+  // 2) Set the background color of the tab. This works but the huge region of color is
+  //    way too distracting
+  // 3) Set the color of some text in a QLabel. This works but the colors are hardly
+  //    distinguishable with the gray background, making the text illegible
+  // 4) Set the color in the thin border around the outside of the tab widget. This works,
+  //    and is the solution implemented here. Slight challenge is that the border is
+  //    shared by both tabs so it has to be manually updated when the tab selection changes
+  QString newColor = (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS ?
+                        COLOR_FUNCTIONS :
+                        COLOR_RELATIONS);
+  QString styleSheet = QString ("QTabWidget { background: %1; }").arg (newColor);
+
+  m_tabWidget->setStyleSheet (styleSheet);
 }
