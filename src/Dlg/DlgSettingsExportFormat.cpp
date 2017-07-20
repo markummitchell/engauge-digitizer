@@ -179,7 +179,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createFunctionsPointsSelection";
 
-  QGroupBox *groupPointsSelection = new QGroupBox (tr ("Functions Points Selection"));
+  QGroupBox *groupPointsSelection = new QGroupBox (tr ("Function Points Selection"));
   layoutFunctions->addWidget (groupPointsSelection, 1);
 
   QGridLayout *layoutPointsSelections = new QGridLayout;
@@ -189,30 +189,29 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
   layoutPointsSelections->setColumnStretch (2, 0);
-  layoutPointsSelections->setColumnStretch (3, 0);
-  layoutPointsSelections->setColumnStretch (4, 1);
+  layoutPointsSelections->setColumnStretch (3, 1);
 
   int row = 0;
 
   m_btnFunctionsPointsAllCurves = new QRadioButton (tr ("Interpolate Ys at Xs from all curves"));
   m_btnFunctionsPointsAllCurves->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                    "value from every curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsAllCurves, SIGNAL (released()), this, SLOT (slotFunctionsPointsAllCurves()));
 
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                     "value from the first curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values."));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
   QLabel *labelInterval = new QLabel (tr ("Interval:"));
-  layoutPointsSelections->addWidget (labelInterval, row, 2, 1, 1, Qt::AlignRight);
+  layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
   m_validatorFunctionsPointsEvenlySpacing = new QDoubleValidator; // Minimum value, to prevent overflow, is set later according to settings
@@ -225,7 +224,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
                                                         "The X values will be automatically aligned along simple numbers. If the first and/or last "
                                                         "points are not along the aligned X values, then one or two additional points are added "
                                                         "as necessary."));
-  layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row, 3, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_editFunctionsPointsEvenlySpacing, row, 2, 1, 1, Qt::AlignLeft);
   connect (m_editFunctionsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotFunctionsPointsEvenlySpacedInterval(const QString &)));
 
   m_cmbFunctionsPointsEvenlySpacingUnits = new QComboBox;
@@ -239,18 +238,12 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbFunctionsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
-  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 4, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
   m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsRaw, SIGNAL (released()), this, SLOT (slotFunctionsPointsRaw()));
-
-  // Color swatch on the left that should visually connect this control group with the functions in the preview
-  QLabel *labelSwatchFunctions = new QLabel;
-  labelSwatchFunctions->setStyleSheet (QString ("QLabel { border: 0; background-color: %1; }").arg (COLOR_FUNCTIONS));
-  labelSwatchFunctions->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Expanding);
-  layoutPointsSelections->addWidget (labelSwatchFunctions, 0, 0, row, 1);
 }
 
 void DlgSettingsExportFormat::createHeader (QHBoxLayout *layoutMisc)
@@ -302,7 +295,18 @@ void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createPreview";
 
   QLabel *label = new QLabel (tr ("Preview"));
-  layout->addWidget (label, row++, 0, 1, 3);
+  layout->addWidget (label, row, 0, 1, 3);
+
+  // Legend. Padding and margin in rich text do not work so &nbsp; is used for spacing
+  QLabel *labelLegend = new QLabel;
+  labelLegend->setTextFormat (Qt::RichText);
+  QString legendHtml = QString ("<span style=\"background-color: %1\">&nbsp;Functions&nbsp;</span>"
+                                "&nbsp;&nbsp;&nbsp;"
+                                "<span style=\"background-color: %2\">&nbsp;Relations&nbsp;</span>")
+      .arg (COLOR_FUNCTIONS)
+      .arg (COLOR_RELATIONS);
+  labelLegend->setText (legendHtml);
+  layout->addWidget (labelLegend, row++, 1, 1, 2, Qt::AlignRight);
 
   m_editPreview = new QTextEdit;
   m_editPreview->setReadOnly (true);
@@ -322,7 +326,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createRelationsPointsSelection";
 
-  QGroupBox *groupPointsSelection = new QGroupBox (tr ("Relations Points Selection"));
+  QGroupBox *groupPointsSelection = new QGroupBox (tr ("Relation Points Selection"));
   layoutRelations->addWidget (groupPointsSelection);
 
   QGridLayout *layoutPointsSelections = new QGridLayout;
@@ -332,8 +336,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
   layoutPointsSelections->setColumnStretch (2, 0);
-  layoutPointsSelections->setColumnStretch (3, 0);
-  layoutPointsSelections->setColumnStretch (4, 1);
+  layoutPointsSelections->setColumnStretch (3, 1);
 
   int row = 0;
 
@@ -341,11 +344,11 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   m_btnRelationsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have points evenly spaced along each relation, separated by the interval "
                                                       "selected below. If the last interval does not end at the last point, then a shorter last interval "
                                                       "is added that ends on the last point."));
-  layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
   QLabel *labelInterval = new QLabel (tr ("Interval:"));
-  layoutPointsSelections->addWidget (labelInterval, row, 2, 1, 1, Qt::AlignRight);
+  layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
   m_validatorRelationsPointsEvenlySpacing = new QDoubleValidator; // Minimum value, to prevent overflow, is set later according to settings
@@ -354,7 +357,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   m_editRelationsPointsEvenlySpacing->setMaximumWidth (MAX_EDIT_WIDTH);
   m_editRelationsPointsEvenlySpacing->setWhatsThis (tr ("Interval between successive points when "
                                                         "exporting at evenly spaced (X,Y) coordinates."));
-  layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row, 3, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_editRelationsPointsEvenlySpacing, row, 2, 1, 1, Qt::AlignLeft);
   connect (m_editRelationsPointsEvenlySpacing, SIGNAL (textChanged(const QString &)), this, SLOT (slotRelationsPointsEvenlySpacedInterval(const QString &)));
 
   m_cmbRelationsPointsEvenlySpacingUnits = new QComboBox;
@@ -368,18 +371,12 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbRelationsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotRelationsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
-  layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row++, 4, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
   m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnRelationsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
-  layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 1, 1, 4);
+  layoutPointsSelections->addWidget (m_btnRelationsPointsRaw, row++, 0, 1, 4);
   connect (m_btnRelationsPointsRaw, SIGNAL (released()), this, SLOT (slotRelationsPointsRaw()));
-
-  // Color swatch on the left that should visually connect this control group with the relations in the preview
-  QLabel *labelSwatchRelations = new QLabel;
-  labelSwatchRelations->setStyleSheet (QString ("QLabel { border: 0; background-color: %1; }").arg (COLOR_RELATIONS));
-  labelSwatchRelations->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Expanding);
-  layoutPointsSelections->addWidget (labelSwatchRelations, 0, 0, row, 1);
 }
 
 QWidget *DlgSettingsExportFormat::createSubPanel ()
