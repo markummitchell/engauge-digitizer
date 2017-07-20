@@ -93,7 +93,6 @@ private:
   void updateControlsUponLoad();
   void updateIntervalConstraints(); // Update constraints on intervals to prevent overflows downstream (especially when value is temporarily 0)
   void updatePreview();
-  void updateTabBorder();
 
   QTabWidget *m_tabWidget;
 
