@@ -1,3 +1,4 @@
+
 /******************************************************************************************************
  * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
@@ -87,6 +88,7 @@
 #include "PdfResolution.h"
 #include <QAction>
 #include <QApplication>
+#include <QClipboard>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QDebug>
@@ -107,9 +109,13 @@
 #include <QMouseEvent>
 #include <QPrintDialog>
 #include <QPrinter>
+#include <QProcess>
+#include <QPushButton>
 #include <QSettings>
 #include <QTextStream>
+#ifndef OSX_RELEASE
 #include <QtHelp>
+#endif
 #include <QTimer>
 #include <QToolBar>
 #include <QToolButton>
@@ -177,7 +183,9 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   setCurrentFile ("");
   createIcons();
+#ifndef OSX_RELEASE
   setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
+#endif
   setWindowTitle (engaugeWindowTitle ());
 
   createCentralWidget();

@@ -76,28 +76,23 @@ echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
 echo '2. append/add .1 to version number)'
 echo '3. save the file and exit)'
 read -p "Press any key to continue"
-echo 'Ignore the following errors in the next lines'
-echo '1. Anything about /usr/lib/log4cpp'
-echo '2. Warnings about private API sql plugins being skipped. They are not used'
-echo '3. Error about missing /opt/local/lib/mysql55/mysql/libmysqlclient.18.dylib. This is not used'
 
-# Insert Qt libraries. Log4cpp library does not get processed so we manually copy first. The
-# error 'ERROR No file at /usr/lib/log4cpp.1.dylib' is a bug in macdeployqt that is claimed to 
-# not cause any problems, but copying a library to /usr/lib or creating symlink does not work
-# due to "System Integrity Protection" which prevents write access to /usr/lib. So we manually
-# copy the file just after macdeployqt
+# Insert Qt libraries. This step will output an error unless log4cpp.1.dylib
+# has been copied to /usr/lib/. To copy to the /usr/lib directory, the
+# System Integrity Protection must be turned off by:
+# 1) Reboot with Command+R pressed
+# 2) Utilities / Terminal
+# 3) csrutil disable
+# 4) Reboot
+# 5) cp log4cpp.1.dylib /usr/lib
+# 6) Reset using 'csrutil enable'
 macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg 
 
-# An attempt was made to remove QtNetwork, and then QtSql framework which uses QtNetwork, to
-# help with installation issues in OSX 10.12 but both are required by QtHelp so they were restored
+sudo rm -rf Engauge\ Digitizer.app/Contents/Frameworks/QtNetwork.framework
+sudo rm -rf Engauge\ Digitizer.app/Contents/Frameworks/QtSql.framework
 
-# Subtle stuff here. Copying the library will not complete before the signing unless we insert a prompt as a hack.
-# Also, xcode 5 and 6 want log4cpp and fftw libraries in Frameworks, but newer xcode wants them in MacOS
-cp $LOG4CPP_HOME/lib/liblog4cpp.1.dylib Engauge\ Digitizer.app/Contents/Frameworks
-read -p "Press any key to continue"
-
-# Signing
-frameworks=(QtCLucene QtCore QtDbus QtGui QtHelp QtNetwork QtPrintSupport QtSql QtWidgets QtXml)
+# Signing. QtNetwork, QtDbus and QtSql were removed recently
+frameworks=(QtCLucene QtCore QtGui QtPrintSupport QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
     signAppFramework $i
@@ -109,8 +104,9 @@ signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | s
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
-# Next line is needed for newer versions of xcode but not for xcode 5 and 6
-signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
+# Next line is needed for newer versions of xcode but not for xcode 5 and 6. Update - probably should manually remove unwanted 
+# plugins after the macdeployqt line
+#signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`
 signAppFile /Contents/MacOS/Engauge\ Digitizer
 
 echo "******************************************************************************"

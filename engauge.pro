@@ -25,11 +25,21 @@
 # 6) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
 # 7) 'network' module of Qt is not included for Windows version since installation file gets blocked by Avast antivirus.
+#    Likewise, it is not included for OSX since it is interpretted as a threat. 
 #    The network module can download files, which is what malware does to install bad things
+# 8) In OSX, QtHelp requires QtNetwork which is rejected by the operating system, so QtHelp is disabled
 #
 # More comments are in the INSTALL file, and below
 
-QT += core gui help printsupport widgets xml
+QT += core gui printsupport widgets xml
+
+win32-*,linux-* {
+Qt += help
+HEADERS += src/Help/HelpBrowser.h \
+           src/Help/HelpWindow.cpp
+SOURCES += src/Help/HelpBrowser.cpp \
+           src/Help/HelpWindow.cpp
+}
 
 CONFIG(debug,debug|release){
   # Debug version:
@@ -293,8 +303,6 @@ HEADERS  += \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
     src/Grid/GridRemoval.h \
-    src/Help/HelpBrowser.h \
-    src/Help/HelpWindow.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -610,8 +618,6 @@ SOURCES += \
     src/Grid/GridLineLimiter.cpp \
     src/Grid/GridLines.cpp \
     src/Grid/GridRemoval.cpp \
-    src/Help/HelpBrowser.cpp \
-    src/Help/HelpWindow.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/util/LinearToLog.cpp \    
@@ -705,7 +711,6 @@ macx-* {
   INCLUDEPATH += $$(FFTW_HOME)/include \
                  $$(LOG4CPP_HOME)/include \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtCore.framework/Versions/5/Headers \
-                 /usr/local/Cellar/qt5/5.5.1_2/lib/QtHelp.framework/Versions/5/Headers \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
