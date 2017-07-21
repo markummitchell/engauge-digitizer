@@ -113,7 +113,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QTextStream>
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include <QtHelp>
 #endif
 #include <QTimer>
@@ -183,7 +183,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
   setCurrentFile ("");
   createIcons();
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
 #endif
   setWindowTitle (engaugeWindowTitle ());
@@ -544,7 +544,7 @@ void MainWindow::createActionsFile ()
                                   "Opens an existing document."));
   connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     QAction *recentFileAction = new QAction (this);
     recentFileAction->setVisible (true);
@@ -617,7 +617,7 @@ void MainWindow::createActionsHelp ()
                                           "and/or point"));
   connect (m_actionHelpTutorial, SIGNAL (triggered ()), this, SLOT (slotHelpTutorial()));
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   m_actionHelpHelp = new QAction (tr ("Help"), this);
   m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
   m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
@@ -994,7 +994,7 @@ void MainWindow::createHelpWindow ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   m_helpWindow = new HelpWindow (this);
   m_helpWindow->hide ();
   addDockWidget (Qt::RightDockWidgetArea,
@@ -1041,7 +1041,7 @@ void MainWindow::createMenus()
   m_menuFile->addAction (m_actionImportAdvanced);
   m_menuFile->addAction (m_actionImportImageReplace);
   m_menuFile->addAction (m_actionOpen);
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
   for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
     m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
@@ -1144,7 +1144,7 @@ void MainWindow::createMenus()
   m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpWhatsThis);
   m_menuHelp->addAction (m_actionHelpTutorial);
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   m_menuHelp->addAction (m_actionHelpHelp);
 #endif
   m_menuHelp->addAction (m_actionHelpAbout);
@@ -1422,7 +1422,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event)
   return QObject::eventFilter (target, event);
 }
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 void MainWindow::exportAllCoordinateSystemsAfterRegressionTests()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::exportAllCoordinateSystemsAfterRegressionTests curDir=" << QDir::currentPath().toLatin1().data();
@@ -2492,7 +2492,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                         QPoint (200, 200)).toPoint ());
 
   // Help window geometry
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   QSize helpSize = settings.value (SETTINGS_HELP_SIZE,
                                    QSize (900, 600)).toSize();
   m_helpWindow->resize (helpSize);
@@ -2613,7 +2613,7 @@ void MainWindow::settingsWrite ()
   settings.beginGroup (SETTINGS_GROUP_MAIN_WINDOW);
   settings.setValue (SETTINGS_SIZE, size ());
   settings.setValue (SETTINGS_POS, pos ());
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   settings.setValue (SETTINGS_HELP_SIZE, m_helpWindow->size());
   settings.setValue (SETTINGS_HELP_POS, m_helpWindow->pos ());
 #endif
@@ -3386,8 +3386,7 @@ bool MainWindow::slotFileSaveAs()
   dlg.setFileMode (QFileDialog::AnyFile);
   dlg.selectNameFilter (filterDigitizer);
   dlg.setNameFilters (filters);
-#if defined(OSX_DEBUG) || defined(OSX_RELEASE)
-#else
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   // Prevent hang in OSX
   dlg.setWindowModality(Qt::WindowModal);
 #endif
@@ -3735,7 +3734,7 @@ void MainWindow::slotTimeoutRegressionErrorReport ()
 
   } else {
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
     exportAllCoordinateSystemsAfterRegressionTests ();
 #endif
 
@@ -3765,7 +3764,7 @@ void MainWindow::slotTimeoutRegressionFileCmdScript ()
     // Script file might already have closed the Document so export only if last was not closed
     if (m_cmdMediator != 0) {
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
       exportAllCoordinateSystemsAfterRegressionTests ();
 #endif
 
@@ -4407,7 +4406,7 @@ void MainWindow::updateControls ()
   m_cmbBackground->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionImportImageReplace->setEnabled (m_cmdMediator != 0);
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   m_menuFileOpenRecent->setEnabled ((m_actionRecentFiles.count () > 0) &&
                                     (m_actionRecentFiles.at(0)->isVisible ())); // Need at least one visible recent file entry
 #endif
@@ -4621,7 +4620,7 @@ void MainWindow::updateRecentFileList()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateRecentFileList";
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   QStringList recentFilePaths = settings.value(SETTINGS_RECENT_FILE_LIST).toStringList();
 

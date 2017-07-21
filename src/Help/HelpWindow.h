@@ -24,7 +24,7 @@ class HelpWindow : public QDockWidget
  private:
   HelpWindow ();
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   QString helpPath() const;
 #endif
 

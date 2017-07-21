@@ -370,7 +370,7 @@ private:
   void createTutorial();
   void createZoomMap ();
   ZoomFactor currentZoomFactor () const;
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();
 #endif
   QString exportFilenameFromInputFilename (const QString &fileName) const;

@@ -25,7 +25,7 @@ HelpWindow::HelpWindow(QWidget *parent) :
   setMinimumWidth (MIN_WIDTH);
   setMinimumHeight (MIN_HEIGHT);
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   QHelpEngine *helpEngine = new QHelpEngine (helpPath());
   helpEngine->setupData();
 
