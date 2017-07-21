@@ -34,7 +34,7 @@
 QT += core gui printsupport widgets xml
 
 win32-*,linux-* {
-Qt += help
+QT += help
 HEADERS += src/Help/HelpBrowser.h \
            src/Help/HelpWindow.cpp
 SOURCES += src/Help/HelpBrowser.cpp \
