@@ -52,7 +52,7 @@ HelpWindow::HelpWindow(QWidget *parent) :
 #endif
 }
 
-#ifndef OSX_RELEASE
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 QString HelpWindow::helpPath() const
 {
   // Possible locations of help file. Each entry is first tried as is, and then with

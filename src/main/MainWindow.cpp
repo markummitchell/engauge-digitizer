@@ -66,7 +66,9 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
+#endif
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000

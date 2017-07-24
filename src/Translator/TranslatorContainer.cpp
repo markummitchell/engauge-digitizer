@@ -43,7 +43,7 @@ TranslatorContainer::TranslatorContainer(QApplication & /* app */)
     // QCoreApplication::applicationDirPath points to ../Engauge Digitizer.app/Contents/MacOS (which we want)
     QString delimiters ("._");
     m_translatorEngauge = new QTranslator;
-#ifdef OSX_RELEASE
+#if defined(OSX_DEBUG) || defined(OSX_RELEASE)
     m_translatorEngauge->load ("engauge_" + locale.name().toLower(),
                                QCoreApplication::applicationDirPath () + "/../Resources/translations",
                                delimiters);

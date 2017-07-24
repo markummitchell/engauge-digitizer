@@ -60,7 +60,9 @@ class GeometryWindow;
 class Ghosts;
 class GraphicsScene;
 class GraphicsView;
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 class HelpWindow;
+#endif
 class LoadImageFromUrl;
 class NetworkClient;
 class QAction;
@@ -572,7 +574,9 @@ private:
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)  
   HelpWindow *m_helpWindow;
+#endif
   TutorialDlg *m_tutorialDlg;
 
   CmdMediator *m_cmdMediator; /// Contains the Document as a private member
