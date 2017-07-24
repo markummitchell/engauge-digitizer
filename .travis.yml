@@ -37,7 +37,7 @@ script:
     export LDFLAGS="-L$QT5BREWHOME/lib";
     export PATH=$QT5BREWHOME/bin:$PATH;
     export FFTW_HOME="/usr/local/Cellar/fftw/3.3.6-pl2";
-    export LOG4CPP_HOME="/usr/local/Cellar/log4cpp/1.1.2";
+    export LOG4CPP_HOME="/usr/local/Cellar/log4cpp/1.1.3";
    fi
  - if [ "$BUILD_DEBUG" = "1" ]; then
     export BUILD_FLAGS="CONFIG+=debug";

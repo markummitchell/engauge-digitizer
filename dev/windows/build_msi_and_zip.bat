@@ -22,6 +22,7 @@ if not x%QTDIR:msvc2015_64=%==x%QTDIR% (
   rem QTDIR includes msvc2015_64 (for 64 bits)
   set ARCH=x64
   set BITS=64
+  set WXSFILE=engauge_64.wxs
   echo "Building for Microsoft Visual Studio 2015 with 64 bits"
   set /p rtn=Press Enter to continue...
 ) else (
@@ -29,6 +30,7 @@ if not x%QTDIR:msvc2015_64=%==x%QTDIR% (
     rem QTDIR includes msvc2015 (for 32 bits)
     set ARCH=x86
     set BITS=32
+  set WXSFILE=engauge.wxs    
     echo "Building for Microsoft Visual Studio 2015 with 32 bits"
     set /p rtn=Press any key to continue...
   ) else (
@@ -182,7 +184,7 @@ copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
 echo ***creating msi
 cd "%SCRIPTDIR%"
 findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
-findStr "Version=" engauge.wxs | findStr /v InstallerVersion
+findStr "Version=" "%WXSFILE%" | findStr /v InstallerVersion
 echo *****************************************************************
 echo * Check the version numbers above. If they are not correct, enter
 echo * Control-C to exit. Otherwise, enter the version number below...
@@ -193,7 +195,7 @@ echo *****************************************************************
 set /p VERNUM="Version number seen above>"
 echo Version number will be %VERNUM%
 
-candle engauge.wxs
+candle "%WXSFILE%"
 candle WixUI_InstallDir_NoLicense.wxs
 light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-%BITS%-bit-installer-%VERNUM%.msi"
 

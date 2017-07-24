@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+  <Product Name='Engauge Digitizer' 
+           Manufacturer='Engauge Open Source Developers'
+	   Id='9900018c-08b0-4646-b45d-bb6473e0082b'
+	   UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
+	   Language='1033' Codepage='1252' 
+           Version='10.1'>
+    <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
+	     Comments='Engauge Digitizer is available from github.com' Manufacturer='Engauge Open Source Developers'
+	     InstallerVersion='200' Languages='1033' Compressed='yes' SummaryCodepage='1252'
+	     InstallScope='perMachine' Platform='x64' />
+    <MajorUpgrade AllowDowngrades='no' DowngradeErrorMessage='A later version of Engauge Digitizer is already installed. Setup will now exit.' />
+    <Media Id='1' Cabinet='engauge.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
+    <Property Id='DiskPrompt' Value="Engauge Digitizer Installation [1]" />
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Directory Id='ProgramFiles64Folder' Name='PFiles'>
+	<Component Id='LicenseFile' Guid='EF8FB8C6-E08A-4FC6-8E58-ADFC9A0B0AFE'>
+          <File Id='license'  Name='LICENSE'  DiskId='1' Source='../../LICENSE'  />
+        </Component>
+	<Directory Id='MYAPPDIRPROPERTY' Name='Engauge Digitizer'>
+	  <Component Id='MainExecutable' Guid='5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F'>
+	    <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='Engauge Digitizer/engauge.exe' KeyPath='yes'>
+	      <Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
+	    </File>
+	    <!--<File Id='freetype6'    Name='freetype6.dll'       DiskId='1' Source='Engauge Digitizer/freetype6.dll'       />-->
+	    <File Id='libfftw33'    Name='libfftw3-3.dll'      DiskId='1' Source='Engauge Digitizer/libfftw3-3.dll'      />
+	    <File Id='log4cpp'      Name='log4cpp.dll'         DiskId='1' Source='Engauge Digitizer/log4cpp.dll'         />
+	    <File Id='concrt140'    Name='concrt140.dll'       DiskId='1' Source='Engauge Digitizer/concrt140.dll'       />
+	    <File Id='msvcp140'     Name='msvcp140.dll'        DiskId='1' Source='Engauge Digitizer/msvcp140.dll'        />
+	    <File Id='vccorlib140'  Name='vccorlib140.dll'     DiskId='1' Source='Engauge Digitizer/vccorlib140.dll'     />
+	    <File Id='vcruntime140' Name='vcruntime140.dll'    DiskId='1' Source='Engauge Digitizer/vcruntime140.dll'    />
+	    <!--<File Id='openjpeg'     Name='openjpeg.dll'        DiskId='1' Source='Engauge Digitizer/openjpeg.dll'        />-->
+	    <!--<File Id='popplerqt5'   Name='poppler-qt5.dll'     DiskId='1' Source='Engauge Digitizer/poppler-qt5.dll'     />-->
+	    <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='Engauge Digitizer/Qt5CLucene.dll'      />
+	    <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Core.dll'         />
+	    <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Gui.dll'          />
+	    <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Help.dll'         />
+	    <File Id='network'      Name='Qt5Network.dll'      DiskId='1' Source='Engauge Digitizer/Qt5Network.dll'      />
+	    <File Id='printsupport' Name='Qt5PrintSupport.dll' DiskId='1' Source='Engauge Digitizer/Qt5PrintSupport.dll' />
+	    <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Sql.dll'          />
+	    <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='Engauge Digitizer/Qt5Widgets.dll'      />
+	    <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Xml.dll'          />
+	    <!--<File Id='zlib'         Name='zlib1.dll'           DiskId='1' Source='Engauge Digitizer/zlib1.dll'           />-->
+	  </Component>
+	  <Directory Id='bearer' Name='bearer'>
+	    <Component Id='bearer' Guid='C7385BF7-2EF9-499A-90FF-17C3F8D4C708'>
+	      <File Id='generic'  Name='qgenericbearer.dll'    DiskId='1' Source='Engauge Digitizer/bearer/qgenericbearer.dll'          />
+	      <File Id='native'   Name='qnativewifibearer.dll' DiskId='1' Source='Engauge Digitizer/bearer/qnativewifibearer.dll'       />
+	    </Component>
+	  </Directory>
+	  <Directory Id='documentation' Name='documentation'>
+	    <Component Id='documentation' Guid='34F27B58-56AC-4380-9B85-131DED5BA593'>
+	      <File Id='qch' Name='engauge.qch' DiskId='1' Source='Engauge Digitizer/documentation/engauge.qch' />
+	      <File Id='qhc' Name='engauge.qhc' DiskId='1' Source='Engauge Digitizer/documentation/engauge.qhc' />
+	    </Component>
+	  </Directory>
+	  <Directory Id='iconengines' Name='iconengines'>
+	    <Component Id='iconengines' Guid='ADE56F32-F33D-4315-ADEA-244EAD400CC2'>
+	      <File Id='svgicon' Name='qsvgicon.dll' DiskId='1' Source='Engauge Digitizer/iconengines/qsvgicon.dll' KeyPath='yes' />
+	    </Component>
+	  </Directory>
+	  <Directory Id='imageformats' Name='imageformats'>
+	    <Component Id='imageformats' Guid='94F1114F-216F-4409-AAC6-1B4ADCB3AC32'>
+	      <!--<File Id='qdds'  Name='qdds.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qdds.dll'  />-->
+	      <File Id='qgif'  Name='qgif.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qgif.dll'  />
+	      <File Id='qicns' Name='qicns.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qicns.dll' />
+	      <File Id='qico'  Name='qico.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qico.dll'  />
+	      <File Id='qjpeg' Name='qjpeg.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qjpeg.dll' />
+	      <File Id='qsvg'  Name='qsvg.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qsvg.dll'  />
+	      <File Id='qtga'  Name='qtga.dll'     DiskId='1' Source='Engauge Digitizer/imageformats/qtga.dll'  />
+	      <File Id='qtiff' Name='qtiff.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qtiff.dll' />
+	      <File Id='qwbmp' Name='qwbmp.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qwbmp.dll' />
+	      <File Id='qwebp' Name='qwebp.dll'    DiskId='1' Source='Engauge Digitizer/imageformats/qwebp.dll' />
+	    </Component>
+	  </Directory>
+	  <Directory Id='platforms' Name='platforms'>
+	    <Component Id='platforms' Guid='679FF2A9-FB70-47ED-BA76-7CDC68367777'>
+	      <File Id='qminimal'   Name='qminimal.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qminimal.dll'   />
+	      <File Id='qoffscreen' Name='qoffscreen.dll' DiskId='1' Source='Engauge Digitizer/platforms/qoffscreen.dll' />
+	      <File Id='win'        Name='qwindows.dll'   DiskId='1' Source='Engauge Digitizer/platforms/qwindows.dll'   />
+	    </Component>
+	  </Directory>
+	  <Directory Id='printsupport' Name='printsupport'>
+	    <Component Id='printsupport' Guid='39CBE62C-09FA-4D88-B3F0-1691B91DC5C3'>
+	      <File Id='winprint' Name='windowsprintersupport.dll' DiskId='1' Source='Engauge Digitizer/printsupport/windowsprintersupport.dll' KeyPath='yes' />
+	    </Component>
+	  </Directory>
+	  <Directory Id='sqldrivers' Name='sqldrivers'>
+	    <Component Id='sqldrivers' Guid='642778D3-ED5F-47CA-9978-671DF3B472D0'>
+	      <File Id='qsqlite'    Name='qsqlite.dll'   DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlite.dll'   />
+	      <File Id='qsqlmysql'  Name='qsqlmysql.dll' DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlmysql.dll' />
+	      <File Id='qsqlodbc'   Name='qsqlodbc.dll'  DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlodbc.dll'  />
+	      <File Id='qsqlpsql'   Name='qsqlpsql.dll'  DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlpsql.dll'  />
+	    </Component>
+	  </Directory>
+	  <Directory Id='translations' Name='translations'>
+	    <Component Id='translations' Guid='A9AD2B5C-8B4F-48E5-819A-D38C4EA11153'>
+	      <File Id='qt_ar'  Name='engauge_ar.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ar.qm'  />
+	      <File Id='qt_cs'  Name='engauge_cs.qm'  DiskId='1' Source='Engauge Digitizer/engauge_cs.qm'  />
+	      <File Id='qt_de'  Name='engauge_de.qm'  DiskId='1' Source='Engauge Digitizer/engauge_de.qm'  />
+	      <File Id='qt_en'  Name='engauge_en.qm'  DiskId='1' Source='Engauge Digitizer/engauge_en.qm'  />
+	      <File Id='qt_es'  Name='engauge_es.qm'  DiskId='1' Source='Engauge Digitizer/engauge_es.qm'  />
+	      <File Id='qt_fr'  Name='engauge_fr.qm'  DiskId='1' Source='Engauge Digitizer/engauge_fr.qm'  />
+	      <File Id='qt_hi'  Name='engauge_hi.qm'  DiskId='1' Source='Engauge Digitizer/engauge_hi.qm'  />
+	      <File Id='qt_it'  Name='engauge_it.qm'  DiskId='1' Source='Engauge Digitizer/engauge_it.qm'  />
+	      <File Id='qt_ja'  Name='engauge_ja.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ja.qm'  />
+	      <File Id='qt_kk'  Name='engauge_kk.qm'  DiskId='1' Source='Engauge Digitizer/engauge_kk.qm'  />
+	      <File Id='qt_ko'  Name='engauge_ko.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ko.qm'  />
+	      <File Id='qt_pt'  Name='engauge_pt.qm'  DiskId='1' Source='Engauge Digitizer/engauge_pt.qm'  />
+	      <File Id='qt_ru'  Name='engauge_ru.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ru.qm'  />
+	      <File Id='qt_zh'  Name='engauge_zh.qm'  DiskId='1' Source='Engauge Digitizer/engauge_zh.qm'  />
+	    </Component>
+	  </Directory>
+	</Directory>
+      </Directory>
+      <Directory Id='ProgramMenuFolder' Name='Programs'>
+	<Directory Id='ProgramMenuDir' Name='Engauge Digitizer'>
+	  <Component Id='ProgramMenuDir' Guid='{2FD05FCA-8337-4E5B-9186-43A9A791D274}'>
+	    <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+	    <RegistryValue Root='HKCU' Key='Software\Engauge Digitizer' Type='string' Value='' KeyPath='yes' />
+	  </Component>
+	</Directory>
+      </Directory>
+      <Directory Id='DesktopFolder' Name='Desktop'>
+	<Component Id='ApplicationShortcutDesktop' Guid="*">
+	  <Shortcut Id='ApplicationDesktopShortcut' Name='Engauge Digitizer' Description='Convert graph images to data' Target='[MYAPPDIRPROPERTY]engauge.exe' WorkingDirectory='MYAPPDIRPROPERTY' Icon='engauge.ico' />
+	  <RemoveFolder Id='DesktopFolder' On='uninstall' />
+	  <RegistryValue Root='HKCU' Key='Software/EngaugeDigitizer' Name='installed' Type='integer' Value='1' KeyPath='yes' />
+	</Component>
+      </Directory>
+    </Directory> 
+    <Feature Id='Complete' Level='1'>
+      <ComponentRef Id='LicenseFile'    />
+      <ComponentRef Id='ProgramMenuDir' />
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='ApplicationShortcutDesktop' />
+      <ComponentRef Id='bearer'        />
+      <ComponentRef Id='documentation' />
+      <ComponentRef Id='iconengines'   />
+      <ComponentRef Id='imageformats'  />
+      <ComponentRef Id='platforms'     />
+      <ComponentRef Id='printsupport'  />
+      <ComponentRef Id='sqldrivers'    />
+      <ComponentRef Id='translations'  />
+    </Feature>
+    <Icon Id='engauge.ico' SourceFile='../../src/img/digitizer.ico' />
+    <Property Id='ARPPRODUCTION' Value='engauge.ico' />
+    <Property Id="WIXUI_INSTALLDIR" Value="MYAPPDIRPROPERTY" />
+    <UIRef Id="WixUI_InstallDir_NoLicense" />
+    <UI>
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" 
+	       Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id='WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT' Value='Launch Engauge Digitizer' />
+    <Property Id="WixShellExecTarget" Value="[#engauge.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+  </Product>
+</Wix>
