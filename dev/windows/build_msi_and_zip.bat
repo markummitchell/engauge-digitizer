@@ -23,22 +23,25 @@ if not x%QTDIR:msvc2015_64=%==x%QTDIR% (
   set ARCH=x64
   set BITS=64
   set WXSFILE=engauge_64.wxs
-  echo "Building for Microsoft Visual Studio 2015 with 64 bits"
+  set WXSOBJFILE=engauge_64.wixobj
+  echo Building for Microsoft Visual Studio 2015 with 64 bits
   set /p rtn=Press Enter to continue...
 ) else (
   if not x%QTDIR:msvc2015=%==x%QTDIR% (
     rem QTDIR includes msvc2015 (for 32 bits)
     set ARCH=x86
     set BITS=32
-  set WXSFILE=engauge.wxs    
-    echo "Building for Microsoft Visual Studio 2015 with 32 bits"
+    set WXSFILE=engauge.wxs
+    set WXSOBJFILE=engauge.wixobj
+    echo Building for Microsoft Visual Studio 2015 with 32 bits
     set /p rtn=Press any key to continue...
   ) else (
-    echo "Unknown build setup encountered. MSVC 2015 with 32 or 64 bits expected according to 'qmake -query'. Quitting"
+    echo Unknown build setup encountered. MSVC 2015 with 32 or 64 bits expected according to 'qmake -query'. Quitting
     set /p rtn=Press any key to continue...
     exit /b
   )
 )
+echo Continuing...
 
 call vcvarsall.bat %ARCH%
 
@@ -150,7 +153,7 @@ rem Make sure the log4cpp library is built with debug info to prevent 'mismatch 
 nmake release
 
 if not exist bin/engauge.exe (
-  echo "Executable could not be built. Stopping"
+  echo Executable could not be built. Stopping
   exit /b 1
 )
 
@@ -159,9 +162,9 @@ if not exist "%RESULTDIR%"\documentation mkdir "%RESULTDIR%"\documentation
 for %%I in (%QTDIRS%) do (
   if not exist "%RESULTDIR%\%%I" mkdir "%RESULTDIR%\%%I"
 )
-for %%I in (%QTDIRS%) do echo "copy %QTDIR%\plugins\%%I\*.dll"
+for %%I in (%QTDIRS%) do echo copy %QTDIR%\plugins\%%I\*.dll
 for %%I in (%QTDIRS%) do copy "%QTDIR%\plugins\%%I\*.dll" "%RESULTDIR%\%%I"
-for %%I in (%QTLIBS%) do echo "copy %QTDIR%\bin\%%I.dll"
+for %%I in (%QTLIBS%) do echo copy %QTDIR%\bin\%%I.dll
 for %%I in (%QTLIBS%) do copy "%QTDIR%\bin\%%I.dll" "%RESULTDIR%"
 if exist *d.dll del /S *d.dll
 copy bin\engauge.exe "%RESULTDIR%"
@@ -184,7 +187,7 @@ copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
 echo ***creating msi
 cd "%SCRIPTDIR%"
 findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
-findStr "Version=" "%WXSFILE%" | findStr /v InstallerVersion
+findStr "Version=" %WXSFILE% | findStr /v InstallerVersion
 echo *****************************************************************
 echo * Check the version numbers above. If they are not correct, enter
 echo * Control-C to exit. Otherwise, enter the version number below...
@@ -195,9 +198,9 @@ echo *****************************************************************
 set /p VERNUM="Version number seen above>"
 echo Version number will be %VERNUM%
 
-candle "%WXSFILE%"
+candle %WXSFILE%
 candle WixUI_InstallDir_NoLicense.wxs
-light.exe -ext WixUIExtension -ext WixUtilExtension engauge.wixobj WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-%BITS%-bit-installer-%VERNUM%.msi"
+light.exe -ext WixUIExtension -ext WixUtilExtension %WXSOBJFILE% WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-%BITS%-bit-installer-%VERNUM%.msi"
 
 echo *** creating zip
 rem "Engauge Digitizer" in next line is needed since zip crashes on %RESULTDIR% due to the space
