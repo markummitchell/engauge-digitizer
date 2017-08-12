@@ -17,7 +17,24 @@ enum ZoomFactor {
   ZOOM_1_TO_4,
   ZOOM_1_TO_8,
   ZOOM_1_TO_16,
-  ZOOM_FILL
+  ZOOM_FILL,
+  // Factors that were added to version 10.2 and are replaced by pre-10.2 values for dig file compatibility
+  ZOOM_16_TO_1_FARTHER,
+  ZOOM_8_TO_1_CLOSER,
+  ZOOM_8_TO_1_FARTHER,
+  ZOOM_4_TO_1_CLOSER,
+  ZOOM_4_TO_1_FARTHER,
+  ZOOM_2_TO_1_CLOSER,
+  ZOOM_2_TO_1_FARTHER,
+  ZOOM_1_TO_1_CLOSER,
+  ZOOM_1_TO_1_FARTHER,
+  ZOOM_1_TO_2_CLOSER,
+  ZOOM_1_TO_2_FARTHER,
+  ZOOM_1_TO_4_CLOSER,
+  ZOOM_1_TO_4_FARTHER,
+  ZOOM_1_TO_8_CLOSER,
+  ZOOM_1_TO_8_FARTHER,
+  ZOOM_1_TO_16_CLOSER
 };
 
 #endif // ZOOM_FACTOR_H

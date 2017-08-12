@@ -98,16 +98,35 @@ void StatusBar::createGroupUnits ()
 
 void StatusBar::createZoom ()
 {
+  const int MIN_ZOOM_WIDTH = 140;
+
   m_cmbZoom = new QComboBox ();
   m_cmbZoom->setEnabled (false); // Disabled until file is opened
+  m_cmbZoom->setMinimumWidth (MIN_ZOOM_WIDTH);
   m_cmbZoom->addItem (LABEL_ZOOM_16_TO_1);
+  m_cmbZoom->addItem (LABEL_ZOOM_16_TO_1_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_8_TO_1_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_8_TO_1);
+  m_cmbZoom->addItem (LABEL_ZOOM_8_TO_1_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_4_TO_1_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_4_TO_1);
+  m_cmbZoom->addItem (LABEL_ZOOM_4_TO_1_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_2_TO_1_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_2_TO_1);
+  m_cmbZoom->addItem (LABEL_ZOOM_2_TO_1_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_1_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_1_TO_1);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_1_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_2_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_1_TO_2);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_2_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_4_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_1_TO_4);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_4_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_8_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_1_TO_8);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_8_FARTHER);
+  m_cmbZoom->addItem (LABEL_ZOOM_1_TO_16_CLOSER);
   m_cmbZoom->addItem (LABEL_ZOOM_1_TO_16);
   m_cmbZoom->addItem (LABEL_ZOOM_FILL);
   m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_1);
@@ -180,20 +199,52 @@ void StatusBar::slotComboZoom (const QString &text)
 
   if  (text == LABEL_ZOOM_16_TO_1) {
     emit signalZoom (ZOOM_16_TO_1);
+  } else if (text == LABEL_ZOOM_16_TO_1_FARTHER) {
+    emit signalZoom (ZOOM_16_TO_1_FARTHER);
+  } else if (text == LABEL_ZOOM_8_TO_1_CLOSER) {
+    emit signalZoom (ZOOM_8_TO_1_CLOSER);
   } else if (text == LABEL_ZOOM_8_TO_1) {
     emit signalZoom (ZOOM_8_TO_1);
+  } else if (text == LABEL_ZOOM_8_TO_1_FARTHER) {
+    emit signalZoom (ZOOM_8_TO_1_FARTHER);
+  } else if (text == LABEL_ZOOM_4_TO_1_CLOSER) {
+    emit signalZoom (ZOOM_4_TO_1_CLOSER);
   } else if (text == LABEL_ZOOM_4_TO_1) {
     emit signalZoom (ZOOM_4_TO_1);
+  } else if (text == LABEL_ZOOM_4_TO_1_FARTHER) {
+    emit signalZoom (ZOOM_4_TO_1_FARTHER);
+  } else if (text == LABEL_ZOOM_2_TO_1_CLOSER) {
+    emit signalZoom (ZOOM_2_TO_1_CLOSER);
   } else if (text == LABEL_ZOOM_2_TO_1) {
     emit signalZoom (ZOOM_2_TO_1);
+  } else if (text == LABEL_ZOOM_2_TO_1_FARTHER) {
+    emit signalZoom (ZOOM_2_TO_1_FARTHER);
+  } else if (text == LABEL_ZOOM_1_TO_1_CLOSER) {
+    emit signalZoom (ZOOM_1_TO_1_CLOSER);
   } else if (text == LABEL_ZOOM_1_TO_1) {
     emit signalZoom (ZOOM_1_TO_1);
+  } else if (text == LABEL_ZOOM_1_TO_1_FARTHER) {
+    emit signalZoom (ZOOM_1_TO_1_FARTHER);
+  } else if (text == LABEL_ZOOM_1_TO_2_CLOSER) {
+    emit signalZoom (ZOOM_1_TO_2_CLOSER);
   } else if (text == LABEL_ZOOM_1_TO_2) {
     emit signalZoom (ZOOM_1_TO_2);
+  } else if (text == LABEL_ZOOM_1_TO_2_FARTHER) {
+    emit signalZoom (ZOOM_1_TO_2_FARTHER);
+  } else if (text == LABEL_ZOOM_1_TO_4_CLOSER) {
+    emit signalZoom (ZOOM_1_TO_4_CLOSER);
   } else if (text == LABEL_ZOOM_1_TO_4) {
     emit signalZoom (ZOOM_1_TO_4);
-  } else if (text ==  LABEL_ZOOM_1_TO_8) {
+  } else if (text == LABEL_ZOOM_1_TO_4_FARTHER) {
+    emit signalZoom (ZOOM_1_TO_4_FARTHER);
+  } else if (text == LABEL_ZOOM_1_TO_8_CLOSER) {
+    emit signalZoom (ZOOM_1_TO_8_CLOSER);
+  } else if (text == LABEL_ZOOM_1_TO_8) {
     emit signalZoom (ZOOM_1_TO_8);
+  } else if (text == LABEL_ZOOM_1_TO_8_FARTHER) {
+    emit signalZoom (ZOOM_1_TO_8_FARTHER);
+  } else if (text == LABEL_ZOOM_1_TO_16_CLOSER) {
+    emit signalZoom (ZOOM_1_TO_16_CLOSER);
   } else if (text == LABEL_ZOOM_1_TO_16) {
     emit signalZoom (ZOOM_1_TO_16);
   } else if (text == LABEL_ZOOM_FILL) {
@@ -231,26 +282,74 @@ void StatusBar::slotZoom(int zoom)
     case ZOOM_16_TO_1:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_16_TO_1);
       break;
+    case ZOOM_16_TO_1_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_16_TO_1_FARTHER);
+      break;
+    case ZOOM_8_TO_1_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_8_TO_1_CLOSER);
+      break;
     case ZOOM_8_TO_1:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_8_TO_1);
+      break;
+    case ZOOM_8_TO_1_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_8_TO_1_FARTHER);
+      break;
+    case ZOOM_4_TO_1_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_4_TO_1_CLOSER);
       break;
     case ZOOM_4_TO_1:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_4_TO_1);
       break;
+    case ZOOM_4_TO_1_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_4_TO_1_FARTHER);
+      break;
+    case ZOOM_2_TO_1_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_2_TO_1_CLOSER);
+      break;
     case ZOOM_2_TO_1:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_2_TO_1);
+      break;
+    case ZOOM_2_TO_1_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_2_TO_1_FARTHER);
+      break;
+    case ZOOM_1_TO_1_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_1_CLOSER);
       break;
     case ZOOM_1_TO_1:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_1);
       break;
+    case ZOOM_1_TO_1_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_1_FARTHER);
+      break;
+    case ZOOM_1_TO_2_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_2_CLOSER);
+      break;
     case ZOOM_1_TO_2:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_2);
+      break;
+    case ZOOM_1_TO_2_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_2_FARTHER);
+      break;
+    case ZOOM_1_TO_4_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_4_CLOSER);
       break;
     case ZOOM_1_TO_4:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_4);
       break;
+    case ZOOM_1_TO_4_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_4_FARTHER);
+      break;
+    case ZOOM_1_TO_8_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_8_CLOSER);
+      break;
     case ZOOM_1_TO_8:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_8);
+      break;
+    case ZOOM_1_TO_8_FARTHER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_8_FARTHER);
+      break;
+    case ZOOM_1_TO_16_CLOSER:
+      m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_16_CLOSER);
       break;
     case ZOOM_1_TO_16:
       m_cmbZoom->setCurrentText (LABEL_ZOOM_1_TO_16);

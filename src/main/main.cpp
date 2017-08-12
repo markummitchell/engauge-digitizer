@@ -18,6 +18,7 @@
 #include <QProcessEnvironment>
 #include <QStyleFactory>
 #include "TranslatorContainer.h"
+#include "ZoomFactor.h"
 
 using namespace std;
 
@@ -107,6 +108,7 @@ int main(int argc, char *argv[])
 {
   qRegisterMetaType<ColorFilterMode> ("ColorFilterMode");
   qRegisterMetaType<FittingCurveCoefficients> ("FilterCurveCoefficients");
+  qRegisterMetaType<ZoomFactor> ("ZoomFactor");
 
   QApplication app(argc, argv);
 
