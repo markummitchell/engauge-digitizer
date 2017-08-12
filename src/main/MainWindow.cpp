@@ -105,6 +105,7 @@
 #include <QKeyEvent>
 #include <QKeySequence>
 #include <QLabel>
+#include <qmath.h>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
@@ -138,7 +139,7 @@
 #include "ZoomFactor.h"
 #include "ZoomFactorInitial.h"
 
-const double CLOSER = pow (2, 1.0 / 3.0);
+const double CLOSER = qPow (2, 1.0 / 3.0);
 const double FARTHER = 1.0 / CLOSER;
 const QString EMPTY_FILENAME ("");
 const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
