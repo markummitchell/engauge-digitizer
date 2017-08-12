@@ -210,7 +210,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   createStateContextTransformation ();
   createSettingsDialogs ();
   createCommandStackShadow ();
-  createZoomMap ();
+  createZoomMaps ();
   updateControls ();
 
   settingsRead (isReset); // This changes the current directory when not regression testing
@@ -279,8 +279,8 @@ void MainWindow::applyZoomFactorAfterLoad()
   ZoomFactor zoomFactor;
   ZoomFactorInitial zoomFactorInitial = m_modelMainWindow.zoomFactorInitial();
 
-  if (m_zoomMap.contains (zoomFactorInitial)) {
-    zoomFactor = m_zoomMap [zoomFactorInitial];
+  if (m_zoomMapFromInitial.contains (zoomFactorInitial)) {
+    zoomFactor = m_zoomMapFromInitial [zoomFactorInitial];
   } else if (zoomFactorInitial == ZOOM_INITIAL_PREVIOUS) {
     zoomFactor = currentZoomFactor ();
   } else {
@@ -1505,80 +1505,88 @@ void MainWindow::createTutorial ()
   m_tutorialDlg->hide();
 }
 
-void MainWindow::createZoomMap ()
+void MainWindow::createZoomMaps ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createZoomMap";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createZoomMaps";
 
-  m_zoomMap [ZOOM_INITIAL_16_TO_1] = ZOOM_16_TO_1;
-  m_zoomMap [ZOOM_INITIAL_8_TO_1] = ZOOM_8_TO_1;
-  m_zoomMap [ZOOM_INITIAL_4_TO_1] = ZOOM_4_TO_1;
-  m_zoomMap [ZOOM_INITIAL_2_TO_1] = ZOOM_2_TO_1;
-  m_zoomMap [ZOOM_INITIAL_1_TO_1] = ZOOM_1_TO_1;
-  m_zoomMap [ZOOM_INITIAL_1_TO_2] = ZOOM_1_TO_2;
-  m_zoomMap [ZOOM_INITIAL_1_TO_4] = ZOOM_1_TO_4;
-  m_zoomMap [ZOOM_INITIAL_1_TO_8] = ZOOM_1_TO_8;
-  m_zoomMap [ZOOM_INITIAL_1_TO_16] = ZOOM_1_TO_16;
-  m_zoomMap [ZOOM_INITIAL_FILL] = ZOOM_FILL;
+  m_zoomMapFromInitial [ZOOM_INITIAL_16_TO_1] = ZOOM_16_TO_1;
+  m_zoomMapFromInitial [ZOOM_INITIAL_8_TO_1] = ZOOM_8_TO_1;
+  m_zoomMapFromInitial [ZOOM_INITIAL_4_TO_1] = ZOOM_4_TO_1;
+  m_zoomMapFromInitial [ZOOM_INITIAL_2_TO_1] = ZOOM_2_TO_1;
+  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_1] = ZOOM_1_TO_1;
+  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_2] = ZOOM_1_TO_2;
+  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_4] = ZOOM_1_TO_4;
+  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_8] = ZOOM_1_TO_8;
+  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_16] = ZOOM_1_TO_16;
+  m_zoomMapFromInitial [ZOOM_INITIAL_FILL] = ZOOM_FILL;
+
+  m_zoomMapToAction [ZOOM_16_TO_1] = m_actionZoom16To1;
+  m_zoomMapToAction [ZOOM_16_TO_1_FARTHER] = m_actionZoom16To1Farther;
+  m_zoomMapToAction [ZOOM_8_TO_1_CLOSER] = m_actionZoom8To1Closer;
+  m_zoomMapToAction [ZOOM_8_TO_1] = m_actionZoom8To1;
+  m_zoomMapToAction [ZOOM_8_TO_1_FARTHER] = m_actionZoom8To1Farther;
+  m_zoomMapToAction [ZOOM_4_TO_1_CLOSER] = m_actionZoom4To1Closer;
+  m_zoomMapToAction [ZOOM_4_TO_1] = m_actionZoom4To1;
+  m_zoomMapToAction [ZOOM_4_TO_1_FARTHER] = m_actionZoom4To1Farther;
+  m_zoomMapToAction [ZOOM_2_TO_1_CLOSER] = m_actionZoom2To1Closer;
+  m_zoomMapToAction [ZOOM_2_TO_1] = m_actionZoom2To1;
+  m_zoomMapToAction [ZOOM_2_TO_1_FARTHER] = m_actionZoom2To1Farther;
+  m_zoomMapToAction [ZOOM_1_TO_1_CLOSER] = m_actionZoom1To1Closer;
+  m_zoomMapToAction [ZOOM_1_TO_1] = m_actionZoom1To1;
+  m_zoomMapToAction [ZOOM_1_TO_1_FARTHER] = m_actionZoom1To1Farther;
+  m_zoomMapToAction [ZOOM_1_TO_2_CLOSER] = m_actionZoom1To2Closer;
+  m_zoomMapToAction [ZOOM_1_TO_2] = m_actionZoom1To2;
+  m_zoomMapToAction [ZOOM_1_TO_2_FARTHER] = m_actionZoom1To2Farther;
+  m_zoomMapToAction [ZOOM_1_TO_4_CLOSER] = m_actionZoom1To4Closer;
+  m_zoomMapToAction [ZOOM_1_TO_4] = m_actionZoom1To4;
+  m_zoomMapToAction [ZOOM_1_TO_4_FARTHER] = m_actionZoom1To4Farther;
+  m_zoomMapToAction [ZOOM_1_TO_8_CLOSER] = m_actionZoom1To8Closer;
+  m_zoomMapToAction [ZOOM_1_TO_8] = m_actionZoom1To8;
+  m_zoomMapToAction [ZOOM_1_TO_8_FARTHER] = m_actionZoom1To8Farther;
+  m_zoomMapToAction [ZOOM_1_TO_16_CLOSER] = m_actionZoom1To16Closer;
+  m_zoomMapToAction [ZOOM_1_TO_16] = m_actionZoom1To16;
+  m_zoomMapToAction [ZOOM_FILL] = m_actionZoomFill;
+
+  m_zoomMapToFactor [ZOOM_16_TO_1] = 16.0;
+  m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER] = 16.0 * FARTHER;
+  m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER] = 8.0 * CLOSER;
+  m_zoomMapToFactor [ZOOM_8_TO_1] = 8.0;
+  m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER] = 8.0 * FARTHER;
+  m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER] = 4.0 * CLOSER;
+  m_zoomMapToFactor [ZOOM_4_TO_1] = 4.0;
+  m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER] = 4.0 * FARTHER;
+  m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER] = 2.0 * CLOSER;
+  m_zoomMapToFactor [ZOOM_2_TO_1] = 2.0;
+  m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER] = 2.0 * FARTHER;
+  m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER] = 1.0 * CLOSER;
+  m_zoomMapToFactor [ZOOM_1_TO_1] = 1.0;
+  m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER] = 1.0 * FARTHER;
+  m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER] = 0.5 * CLOSER;
+  m_zoomMapToFactor [ZOOM_1_TO_2] = 0.5;
+  m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER] = 0.5 * FARTHER;
+  m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER] = 0.25 * CLOSER;
+  m_zoomMapToFactor [ZOOM_1_TO_4] = 0.25;
+  m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER] = 0.25 * FARTHER;
+  m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER] = 0.125 * CLOSER;
+  m_zoomMapToFactor [ZOOM_1_TO_8] = 0.125;
+  m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER] = 0.125 * FARTHER;
+  m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER] = 0.0625 * CLOSER;
+  m_zoomMapToFactor [ZOOM_1_TO_16] = 0.0625;
 }
 
 ZoomFactor MainWindow::currentZoomFactor () const
 {
-  if (m_actionZoom1To1->isChecked()) {
-    return ZOOM_1_TO_1;
-  } else if (m_actionZoom1To1Closer->isChecked ()) {
-    return ZOOM_1_TO_1_CLOSER;
-  } else if (m_actionZoom1To1Farther->isChecked ()) {
-    return ZOOM_1_TO_1_FARTHER;
-  } else if (m_actionZoom1To2->isChecked()) {
-    return ZOOM_1_TO_2;
-  } else if (m_actionZoom1To2Closer->isChecked ()) {
-    return ZOOM_1_TO_2_CLOSER;
-  } else if (m_actionZoom1To2Farther->isChecked ()) {
-    return ZOOM_1_TO_2_FARTHER;
-  } else if (m_actionZoom1To4->isChecked()) {
-    return ZOOM_1_TO_4;
-  } else if (m_actionZoom1To4Closer->isChecked ()) {
-    return ZOOM_1_TO_4_CLOSER;
-  } else if (m_actionZoom1To4Farther->isChecked ()) {
-    return ZOOM_1_TO_4_FARTHER;
-  } else if (m_actionZoom1To8->isChecked()) {
-    return ZOOM_1_TO_8;
-  } else if (m_actionZoom1To8Closer->isChecked ()) {
-    return ZOOM_1_TO_8_CLOSER;
-  } else if (m_actionZoom1To8Farther->isChecked ()) {
-    return ZOOM_1_TO_8_FARTHER;
-  } else if (m_actionZoom1To16->isChecked()) {
-    return ZOOM_1_TO_16;
-  } else if (m_actionZoom1To16Closer->isChecked ()) {
-    return ZOOM_1_TO_16_CLOSER;
-  } else if (m_actionZoom2To1->isChecked()) {
-    return ZOOM_2_TO_1;
-  } else if (m_actionZoom2To1Closer->isChecked ()) {
-    return ZOOM_2_TO_1_CLOSER;
-  } else if (m_actionZoom2To1Farther->isChecked ()) {
-    return ZOOM_2_TO_1_FARTHER;
-  } else if (m_actionZoom4To1->isChecked()) {
-    return ZOOM_4_TO_1;
-  } else if (m_actionZoom4To1Closer->isChecked ()) {
-    return ZOOM_4_TO_1_CLOSER;
-  } else if (m_actionZoom4To1Farther->isChecked ()) {
-    return ZOOM_4_TO_1_FARTHER;
-  } else if (m_actionZoom8To1->isChecked()) {
-    return ZOOM_8_TO_1;
-  } else if (m_actionZoom8To1Closer->isChecked ()) {
-    return ZOOM_8_TO_1_CLOSER;
-  } else if (m_actionZoom8To1Farther->isChecked ()) {
-    return ZOOM_8_TO_1_FARTHER;
-  } else if (m_actionZoom16To1->isChecked()) {
-    return ZOOM_16_TO_1;
-  } else if (m_actionZoom16To1Farther->isChecked ()) {
-    return ZOOM_16_TO_1_FARTHER;
-  } else if (m_actionZoomFill->isChecked()) {
-    return ZOOM_FILL;
-  } else {
-    ENGAUGE_ASSERT (false);
-    return ZOOM_1_TO_1;
+  // Find the zoom control that is checked
+  for (int z = 0; z < NUMBER_ZOOM_FACTORS; z++) {
+    ZoomFactor zoomFactor = (ZoomFactor) z;
+    if (m_zoomMapToAction [zoomFactor]->isChecked ()) {
+      // This zoom control is checked
+      return zoomFactor;
+    }
   }
+
+  ENGAUGE_ASSERT (false);
+  return ZOOM_1_TO_1;
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -2626,112 +2634,11 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
 
 void MainWindow::setNonFillZoomFactor (ZoomFactor newZoomFactor)
 {
+  ENGAUGE_ASSERT (newZoomFactor != ZOOM_FILL);
+
   // Update controls and apply zoom factor
-  switch (newZoomFactor)
-  {
-  case ZOOM_16_TO_1:
-    m_actionZoom16To1->setChecked (true);
-    slotViewZoomFactor (ZOOM_16_TO_1);
-    break;
-  case ZOOM_16_TO_1_FARTHER:
-    m_actionZoom16To1Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_16_TO_1_FARTHER);
-    break;
-  case ZOOM_8_TO_1_CLOSER:
-    m_actionZoom8To1Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_8_TO_1_CLOSER);
-    break;
-  case ZOOM_8_TO_1:
-    m_actionZoom8To1->setChecked (true);
-    slotViewZoomFactor (ZOOM_8_TO_1);
-    break;
-  case ZOOM_8_TO_1_FARTHER:
-    m_actionZoom8To1Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_8_TO_1_FARTHER);
-    break;
-  case ZOOM_4_TO_1_CLOSER:
-    m_actionZoom4To1Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_4_TO_1_CLOSER);
-    break;
-  case ZOOM_4_TO_1:
-    m_actionZoom4To1->setChecked (true);
-    slotViewZoomFactor (ZOOM_4_TO_1);
-    break;
-  case ZOOM_4_TO_1_FARTHER:
-    m_actionZoom4To1Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_4_TO_1_FARTHER);
-    break;
-  case ZOOM_2_TO_1_CLOSER:
-    m_actionZoom2To1Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_2_TO_1_FARTHER);
-    break;
-  case ZOOM_2_TO_1:
-    m_actionZoom2To1->setChecked (true);
-    slotViewZoomFactor (ZOOM_2_TO_1);
-    break;
-  case ZOOM_2_TO_1_FARTHER:
-    m_actionZoom2To1Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_2_TO_1_CLOSER);
-    break;
-  case ZOOM_1_TO_1_CLOSER:
-    m_actionZoom1To1Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_1_CLOSER);
-    break;
-  case ZOOM_1_TO_1:
-    m_actionZoom1To1->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_1);
-    break;
-  case ZOOM_1_TO_1_FARTHER:
-    m_actionZoom1To1Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_1_FARTHER);
-    break;
-  case ZOOM_1_TO_2_CLOSER:
-    m_actionZoom1To2Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_2_CLOSER);
-    break;
-  case ZOOM_1_TO_2:
-    m_actionZoom1To2->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_2);
-    break;
-  case ZOOM_1_TO_2_FARTHER:
-    m_actionZoom1To2Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_2_FARTHER);
-    break;
-  case ZOOM_1_TO_4_CLOSER:
-    m_actionZoom1To4Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_4_CLOSER);
-    break;
-  case ZOOM_1_TO_4:
-    m_actionZoom1To4->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_4);
-    break;
-  case ZOOM_1_TO_4_FARTHER:
-    m_actionZoom1To4Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_4_FARTHER);
-    break;
-  case ZOOM_1_TO_8_CLOSER:
-    m_actionZoom1To8Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_8_CLOSER);
-    break;
-  case ZOOM_1_TO_8:
-    m_actionZoom1To8->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_8);
-    break;
-  case ZOOM_1_TO_8_FARTHER:
-    m_actionZoom1To8Farther->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_8_FARTHER);
-    break;
-  case ZOOM_1_TO_16_CLOSER:
-    m_actionZoom1To16Closer->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_16_CLOSER);
-    break;
-  case ZOOM_1_TO_16:
-    m_actionZoom1To16->setChecked (true);
-    slotViewZoomFactor (ZOOM_1_TO_16);
-    break;
-  case ZOOM_FILL:
-    ENGAUGE_ASSERT (false);
-  }
+  m_zoomMapToAction [newZoomFactor]->setChecked (true);
+  slotViewZoomFactor (newZoomFactor);
 }
 
 void MainWindow::setPixmap (const QString &curveSelected,
@@ -4233,87 +4140,8 @@ void MainWindow::slotViewZoom (int zoom)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoom";
 
   // Update zoom controls and apply the zoom factor
-  switch ((ZoomFactor) zoom) {
-    case ZOOM_16_TO_1:
-      m_actionZoom16To1->setChecked(true);
-      break;
-    case ZOOM_16_TO_1_FARTHER:
-      m_actionZoom16To1Farther->setChecked (true);
-      break;
-    case ZOOM_8_TO_1:
-      m_actionZoom8To1->setChecked(true);
-      break;
-    case ZOOM_8_TO_1_CLOSER:
-      m_actionZoom8To1Closer->setChecked(true);
-      break;
-    case ZOOM_8_TO_1_FARTHER:
-      m_actionZoom8To1Farther->setChecked(true);
-      break;
-    case ZOOM_4_TO_1:
-      m_actionZoom4To1->setChecked(true);
-      break;
-    case ZOOM_4_TO_1_CLOSER:
-      m_actionZoom4To1Closer->setChecked(true);
-      break;
-    case ZOOM_4_TO_1_FARTHER:
-      m_actionZoom4To1Farther->setChecked(true);
-      break;
-    case ZOOM_2_TO_1:
-      m_actionZoom2To1->setChecked(true);
-      break;
-    case ZOOM_2_TO_1_CLOSER:
-      m_actionZoom2To1Closer->setChecked(true);
-      break;
-    case ZOOM_2_TO_1_FARTHER:
-      m_actionZoom2To1Farther->setChecked(true);
-      break;
-    case ZOOM_1_TO_1:
-      m_actionZoom1To1->setChecked(true);
-      break;
-    case ZOOM_1_TO_1_CLOSER:
-      m_actionZoom1To1Closer->setChecked(true);
-      break;
-    case ZOOM_1_TO_1_FARTHER:
-      m_actionZoom1To1Farther->setChecked(true);
-      break;
-    case ZOOM_1_TO_2:
-      m_actionZoom1To2->setChecked(true);
-      break;
-    case ZOOM_1_TO_2_CLOSER:
-      m_actionZoom1To2Closer->setChecked(true);
-      break;
-    case ZOOM_1_TO_2_FARTHER:
-      m_actionZoom1To2Farther->setChecked(true);
-      break;
-    case ZOOM_1_TO_4:
-      m_actionZoom1To4->setChecked(true);
-      break;
-    case ZOOM_1_TO_4_CLOSER:
-      m_actionZoom1To4Closer->setChecked(true);
-      break;
-    case ZOOM_1_TO_4_FARTHER:
-      m_actionZoom1To4Farther->setChecked(true);
-      break;
-    case ZOOM_1_TO_8:
-      m_actionZoom1To8->setChecked(true);
-      break;
-    case ZOOM_1_TO_8_CLOSER:
-      m_actionZoom1To8Closer->setChecked(true);
-      break;
-    case ZOOM_1_TO_8_FARTHER:
-      m_actionZoom1To8Farther->setChecked(true);
-      break;
-    case ZOOM_1_TO_16:
-      m_actionZoom1To16->setChecked(true);
-      break;
-    case ZOOM_1_TO_16_CLOSER:
-      m_actionZoom1To16Closer->setChecked(true);
-      break;
-    case ZOOM_FILL:
-      m_actionZoomFill->setChecked(true);
-      break;
-  }
-
+  ZoomFactor zoomFactor = (ZoomFactor) zoom;
+  m_zoomMapToAction [zoomFactor]->setChecked (true);
   slotViewZoomFactor ((ZoomFactor) zoom);
 }
 
@@ -4325,87 +4153,7 @@ void MainWindow::slotViewZoomFactor (ZoomFactor zoomFactor)
       m_backgroundStateContext->fitInView (*m_view);
   } else {
 
-    double factor = 1;
-    switch (zoomFactor) {
-    case ZOOM_1_TO_1:
-      factor = 1;
-      break;
-    case ZOOM_1_TO_1_CLOSER:
-      factor = 1 * CLOSER;
-      break;
-    case ZOOM_1_TO_1_FARTHER:
-      factor = 1 * FARTHER;
-      break;
-    case ZOOM_1_TO_16:
-      factor = 0.0625;
-      break;
-    case ZOOM_1_TO_16_CLOSER:
-      factor = 0.0625 * CLOSER;
-      break;
-    case ZOOM_1_TO_2:
-      factor = 0.5;
-      break;
-    case ZOOM_1_TO_2_CLOSER:
-      factor = 0.5 * CLOSER;
-      break;
-    case ZOOM_1_TO_2_FARTHER:
-      factor = 0.5 * FARTHER;
-      break;
-    case ZOOM_1_TO_4:
-      factor = 0.25;
-      break;
-    case ZOOM_1_TO_4_CLOSER:
-      factor = 0.25 * CLOSER;
-      break;
-    case ZOOM_1_TO_4_FARTHER:
-      factor = 0.25 * FARTHER;
-      break;
-    case ZOOM_1_TO_8:
-      factor = 0.125;
-      break;
-    case ZOOM_1_TO_8_CLOSER:
-      factor = 0.125 * CLOSER;
-      break;
-    case ZOOM_1_TO_8_FARTHER:
-      factor = 0.125 * FARTHER;
-      break;
-    case ZOOM_16_TO_1:
-      factor = 16.0;
-      break;
-    case ZOOM_16_TO_1_FARTHER:
-      factor = 16.0 * FARTHER;
-      break;
-    case ZOOM_2_TO_1:
-      factor = 2.0;
-      break;
-    case ZOOM_2_TO_1_CLOSER:
-      factor = 2.0 * CLOSER;
-      break;
-    case ZOOM_2_TO_1_FARTHER:
-      factor = 2.0 * FARTHER;
-      break;
-    case ZOOM_4_TO_1:
-      factor = 4.0;
-      break;
-    case ZOOM_4_TO_1_CLOSER:
-      factor = 4.0 * CLOSER;
-      break;
-    case ZOOM_4_TO_1_FARTHER:
-      factor = 4.0 * FARTHER;
-      break;
-    case ZOOM_8_TO_1:
-      factor = 8.0;
-      break;
-    case ZOOM_8_TO_1_CLOSER:
-      factor = 8.0 * CLOSER;
-      break;
-    case ZOOM_8_TO_1_FARTHER:
-      factor = 8.0 * FARTHER;
-      break;
-    case ZOOM_FILL:
-      // Noop since this is handled in the previous branch
-      break;
-    }
+    double factor = m_zoomMapToFactor [zoomFactor];
 
     QTransform transform;
     transform.scale (factor, factor);
@@ -4428,102 +4176,59 @@ void MainWindow::slotViewZoomIn ()
     double xScale = m_view->transform().m11();
     double yScale = m_view->transform().m22();
     double scale = qMin(xScale, yScale);
-    if (scale < 0.0625 * CLOSER) {
+    if (scale < m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_16_CLOSER;
-    } else if (scale < 0.125 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (scale < 0.125) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8]) {
       newZoomFactor = ZOOM_1_TO_8;
-    } else if (scale < 0.125 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (scale < 0.25 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (scale < 0.25) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4]) {
       newZoomFactor = ZOOM_1_TO_4;
-    } else if (scale < 0.25 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (scale < 0.5 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (scale < 0.5) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2]) {
       newZoomFactor = ZOOM_1_TO_2;
-    } else if (scale < 0.5 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (scale < 1 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (scale < 1) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1]) {
       newZoomFactor = ZOOM_1_TO_1;
-    } else if (scale < 1 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (scale < 2 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (scale < 2) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1]) {
       newZoomFactor = ZOOM_2_TO_1;
-    } else if (scale < 2 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (scale < 4 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (scale < 4) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1]) {
       newZoomFactor = ZOOM_4_TO_1;
-    } else if (scale < 4 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (scale < 8 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (scale < 8) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1]) {
       newZoomFactor = ZOOM_8_TO_1;
-    } else if (scale < 8 * CLOSER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (scale < 16 * FARTHER) {
+    } else if (scale < m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_16_TO_1_FARTHER;
     } else {
       newZoomFactor = ZOOM_16_TO_1;
     }
   } else {
-    if (m_actionZoom16To1->isChecked ()) {
-      newZoomFactor = ZOOM_16_TO_1_FARTHER;
-    } else if (m_actionZoom16To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (m_actionZoom8To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1;
-    } else if (m_actionZoom8To1->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (m_actionZoom8To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (m_actionZoom4To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1;
-    } else if (m_actionZoom4To1->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (m_actionZoom4To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (m_actionZoom2To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1;
-    } else if (m_actionZoom2To1->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (m_actionZoom2To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (m_actionZoom1To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1;
-    } else if (m_actionZoom1To1->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (m_actionZoom1To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (m_actionZoom1To2Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2;
-    } else if (m_actionZoom1To2->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (m_actionZoom1To2Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (m_actionZoom1To4Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4;
-    } else if (m_actionZoom1To4->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (m_actionZoom1To4Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (m_actionZoom1To8Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8;
-    } else if (m_actionZoom1To8->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (m_actionZoom1To8Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_16_CLOSER;
+    ZoomFactor zoomFactorOld = currentZoomFactor();
+    if (zoomFactorOld < ZOOM_1_TO_16) {
+      newZoomFactor = (ZoomFactor) (zoomFactorOld + 1);
     } else {
       newZoomFactor = ZOOM_1_TO_16;
     }
@@ -4563,104 +4268,61 @@ void MainWindow::slotViewZoomOut ()
     double xScale = m_view->transform().m11();
     double yScale = m_view->transform().m22();
     double scale = qMin(xScale, yScale);
-    if (scale > 16.0) {
+    if (scale > m_zoomMapToFactor [ZOOM_16_TO_1]) {
       newZoomFactor = ZOOM_16_TO_1;
-    } else if (scale > 16.0 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_16_TO_1_FARTHER;
-    } else if (scale > 8.0 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (scale > 8.0) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1]) {
       newZoomFactor = ZOOM_8_TO_1;
-    } else if (scale > 8.0 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (scale > 4.0 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (scale > 4.0) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1]) {
       newZoomFactor = ZOOM_4_TO_1;
-    } else if (scale > 4.0 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (scale > 2.0 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (scale > 2.0) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1]) {
       newZoomFactor = ZOOM_2_TO_1;
-    } else if (scale > 2.0 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (scale > 1.0 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (scale > 1.0) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1]) {
       newZoomFactor = ZOOM_1_TO_1;
-    } else if (scale > 1.0 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (scale > 0.5 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (scale > 0.5) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2]) {
       newZoomFactor = ZOOM_1_TO_2;
-    } else if (scale > 0.5 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (scale > 0.25 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (scale > 0.25) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4]) {
       newZoomFactor = ZOOM_1_TO_4;
-    } else if (scale > 0.25 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (scale > 0.125 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (scale > 0.125) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8]) {
       newZoomFactor = ZOOM_1_TO_8;
-    } else if (scale > 0.125 * FARTHER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER]) {
       newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (scale > 0.0625 * CLOSER) {
+    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER]) {
       newZoomFactor = ZOOM_1_TO_16_CLOSER;
     } else {
       newZoomFactor = ZOOM_1_TO_16;
     }
   } else {
-    if (m_actionZoom1To16->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_16_CLOSER;
-    } else if (m_actionZoom1To16Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (m_actionZoom1To8Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8;
-    } else if (m_actionZoom1To8->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (m_actionZoom1To8Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (m_actionZoom1To4Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4;
-    } else if (m_actionZoom1To4->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (m_actionZoom1To4Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (m_actionZoom1To2Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2;
-    } else if (m_actionZoom1To2->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (m_actionZoom1To2Closer->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (m_actionZoom1To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1;
-    } else if (m_actionZoom1To1->isChecked ()) {
-      newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (m_actionZoom1To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (m_actionZoom2To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1;
-    } else if (m_actionZoom2To1->isChecked ()) {
-      newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (m_actionZoom2To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (m_actionZoom4To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1;
-    } else if (m_actionZoom4To1->isChecked ()) {
-      newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (m_actionZoom4To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (m_actionZoom8To1Farther->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1;
-    } else if (m_actionZoom8To1->isChecked ()) {
-      newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (m_actionZoom8To1Closer->isChecked ()) {
-      newZoomFactor = ZOOM_16_TO_1_FARTHER;
+    ZoomFactor zoomFactorOld = currentZoomFactor();
+    if (zoomFactorOld > ZOOM_16_TO_1) {
+      newZoomFactor = (ZoomFactor) (zoomFactorOld - 1);
     } else {
       newZoomFactor = ZOOM_16_TO_1;
     }

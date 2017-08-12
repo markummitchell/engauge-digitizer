@@ -362,7 +362,7 @@ private:
   void createStatusBar();
   void createToolBars();
   void createTutorial();
-  void createZoomMap ();
+  void createZoomMaps ();
   ZoomFactor currentZoomFactor () const;
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();
@@ -645,8 +645,10 @@ private:
   // Grid lines
   GridLines m_gridLines;
 
-  // Map between zoom enumerations. This eliminates the need for a switch statement
-  QMap<ZoomFactorInitial, ZoomFactor> m_zoomMap;
+  // Map to/from/between zoom enumerations. These eliminate the need for switch statements
+  QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;
+  QMap<ZoomFactor, QAction*> m_zoomMapToAction;
+  QMap<ZoomFactor, double> m_zoomMapToFactor;
 
   // Fitted curve. Null if not currently applicable/defined
   FittingCurve *m_fittingCurve;

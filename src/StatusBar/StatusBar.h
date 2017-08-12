@@ -8,8 +8,11 @@
 #define STATUS_BAR_H
 
 #include <QComboBox>
+#include <QMap>
 #include <QObject>
+#include <QString>
 #include "StatusBarMode.h"
+#include "ZoomFactor.h"
 
 class QFrame;
 class QStatusBar;
@@ -71,6 +74,7 @@ private:
 
   void createGroupUnits ();
   void createZoom ();
+  void createZoomMaps ();
   void updateCoordsText ();
 
   enum StatusBarUnits {
@@ -94,6 +98,10 @@ private:
   StatusBarMode m_statusBarMode;
 
   QTimer *m_timer;
+
+  // Map to/from/between zoom enumerations. These eliminate the need for switch statements
+  QMap<ZoomFactor, QString> m_zoomMapToLabel;
+  QMap<QString, ZoomFactor> m_zoomMapFromLabel;
 };
 
 #endif // STATUS_BAR_H
