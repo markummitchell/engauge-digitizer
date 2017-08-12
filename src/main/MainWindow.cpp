@@ -4169,61 +4169,21 @@ void MainWindow::slotViewZoomIn ()
 
   // Try to zoom in
 
-  ZoomFactor newZoomFactor = ZOOM_1_TO_1;
+  ZoomFactor newZoomFactor = ZOOM_16_TO_1;
   if (m_actionZoomFill->isChecked ()) {
 
-    // Zooming in means user probably wants the more squished direction to be zoomed in by one step
+    // Zooming in means user probably wants the more squished direction to be zoomed in by one step.
+    // Loop through the zoom values until a match is found
     double xScale = m_view->transform().m11();
     double yScale = m_view->transform().m22();
     double scale = qMin(xScale, yScale);
-    if (scale < m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_16_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8]) {
-      newZoomFactor = ZOOM_1_TO_8;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4]) {
-      newZoomFactor = ZOOM_1_TO_4;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2]) {
-      newZoomFactor = ZOOM_1_TO_2;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1]) {
-      newZoomFactor = ZOOM_1_TO_1;
-    } else if (scale < m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1]) {
-      newZoomFactor = ZOOM_2_TO_1;
-    } else if (scale < m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1]) {
-      newZoomFactor = ZOOM_4_TO_1;
-    } else if (scale < m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1]) {
-      newZoomFactor = ZOOM_8_TO_1;
-    } else if (scale < m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (scale < m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_16_TO_1_FARTHER;
-    } else {
-      newZoomFactor = ZOOM_16_TO_1;
+
+    for (int zoom = ZOOM_1_TO_16_CLOSER; zoom >= 0; zoom--) {
+      ZoomFactor zoomFactor = (ZoomFactor) zoom;
+      if (scale < m_zoomMapToFactor [zoomFactor]) {
+        newZoomFactor = zoomFactor;
+        break;
+      }
     }
   } else {
     ZoomFactor zoomFactorOld = currentZoomFactor();
@@ -4259,65 +4219,23 @@ void MainWindow::slotViewZoomOut ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomOut";
 
-  // Try to zoom in
+  // Try to zoom out
 
-  ZoomFactor newZoomFactor = ZOOM_1_TO_1;
+  ZoomFactor newZoomFactor = ZOOM_1_TO_16;
   if (m_actionZoomFill->isChecked ()) {
 
-    // Zooming out means user probably wants the less squished direction to be zoomed out by one step
+    // Zooming out means user probably wants the less squished direction to be zoomed out by one step.
+    // Loop through the zoom values until a match is found
     double xScale = m_view->transform().m11();
     double yScale = m_view->transform().m22();
     double scale = qMin(xScale, yScale);
-    if (scale > m_zoomMapToFactor [ZOOM_16_TO_1]) {
-      newZoomFactor = ZOOM_16_TO_1;
-    } else if (scale > m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_16_TO_1_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_8_TO_1_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1]) {
-      newZoomFactor = ZOOM_8_TO_1;
-    } else if (scale > m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_8_TO_1_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_4_TO_1_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1]) {
-      newZoomFactor = ZOOM_4_TO_1;
-    } else if (scale > m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_4_TO_1_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_2_TO_1_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1]) {
-      newZoomFactor = ZOOM_2_TO_1;
-    } else if (scale > m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_2_TO_1_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_1_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1]) {
-      newZoomFactor = ZOOM_1_TO_1;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_1_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_2_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2]) {
-      newZoomFactor = ZOOM_1_TO_2;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_2_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_4_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4]) {
-      newZoomFactor = ZOOM_1_TO_4;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_4_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_8_CLOSER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8]) {
-      newZoomFactor = ZOOM_1_TO_8;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER]) {
-      newZoomFactor = ZOOM_1_TO_8_FARTHER;
-    } else if (scale > m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER]) {
-      newZoomFactor = ZOOM_1_TO_16_CLOSER;
-    } else {
-      newZoomFactor = ZOOM_1_TO_16;
+
+    for (int zoom = 0; zoom <= ZOOM_1_TO_16_CLOSER; zoom++) {
+      ZoomFactor zoomFactor = (ZoomFactor) zoom;
+      if (scale > m_zoomMapToFactor [zoomFactor]) {
+        newZoomFactor = zoomFactor;
+        break;
+      }
     }
   } else {
     ZoomFactor zoomFactorOld = currentZoomFactor();
