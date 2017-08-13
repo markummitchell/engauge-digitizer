@@ -894,6 +894,7 @@ void MainWindow::createActionsView ()
   connect (m_actionZoomIn, SIGNAL (triggered ()), this, SLOT (slotViewZoomIn ()));
 
   m_mapperZoomFactor = new QSignalMapper (this);
+  connect (m_mapperZoomFactor, SIGNAL (mapped (int)), this, SLOT (slotViewZoomFactorInt (int)));
 
   m_actionZoom16To1 = new QAction (tr ("16:1 (1600%)"), this);
   m_actionZoom16To1->setCheckable (true);
@@ -901,13 +902,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom16To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom16To1, ZOOM_16_TO_1);
 
-  m_actionZoom16To1Farther = new QAction (tr ("13:1 (1270%)"), this);
+  m_actionZoom16To1Farther = new QAction (tr ("16:1 farther (1270%)"), this);
   m_actionZoom16To1Farther->setCheckable (true);
   m_actionZoom16To1Farther->setStatusTip (tr ("Zoom 12.7:1"));
   connect (m_actionZoom16To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom16To1Farther, ZOOM_16_TO_1_FARTHER);
 
-  m_actionZoom8To1Closer = new QAction (tr ("10:1 (1008%)"), this);
+  m_actionZoom8To1Closer = new QAction (tr ("8:1 closer (1008%)"), this);
   m_actionZoom8To1Closer->setCheckable (true);
   m_actionZoom8To1Closer->setStatusTip (tr ("Zoom 10.08:1"));
   connect (m_actionZoom8To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -919,13 +920,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom8To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom8To1, ZOOM_8_TO_1);
 
-  m_actionZoom8To1Farther = new QAction (tr ("6:1 (635%)"), this);
+  m_actionZoom8To1Farther = new QAction (tr ("8:1 farther (635%)"), this);
   m_actionZoom8To1Farther->setCheckable (true);
   m_actionZoom8To1Farther->setStatusTip (tr ("Zoom 6.35:1"));
   connect (m_actionZoom8To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom8To1Farther, ZOOM_8_TO_1_FARTHER);
 
-  m_actionZoom4To1Closer = new QAction (tr ("5:1 (504%)"), this);
+  m_actionZoom4To1Closer = new QAction (tr ("4:1 closer (504%)"), this);
   m_actionZoom4To1Closer->setCheckable (true);
   m_actionZoom4To1Closer->setStatusTip (tr ("Zoom 5.04:1"));
   connect (m_actionZoom4To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -937,13 +938,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom4To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom4To1, ZOOM_4_TO_1);
 
-  m_actionZoom4To1Farther = new QAction (tr ("3.17:1 (317%)"), this);
+  m_actionZoom4To1Farther = new QAction (tr ("4:1 farther (317%)"), this);
   m_actionZoom4To1Farther->setCheckable (true);
   m_actionZoom4To1Farther->setStatusTip (tr ("Zoom 3.17:1"));
   connect (m_actionZoom4To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom4To1Farther, ZOOM_4_TO_1_FARTHER);
 
-  m_actionZoom2To1Closer = new QAction (tr ("2.52:1 (252%)"), this);
+  m_actionZoom2To1Closer = new QAction (tr ("2:1 closer (252%)"), this);
   m_actionZoom2To1Closer->setCheckable (true);
   m_actionZoom2To1Closer->setStatusTip (tr ("Zoom 2.52:1"));
   connect (m_actionZoom2To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -955,13 +956,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom2To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom2To1, ZOOM_2_TO_1);
 
-  m_actionZoom2To1Farther = new QAction (tr ("1.59:1 (159%)"), this);
+  m_actionZoom2To1Farther = new QAction (tr ("2:1 farther (159%)"), this);
   m_actionZoom2To1Farther->setCheckable (true);
   m_actionZoom2To1Farther->setStatusTip (tr ("Zoom 1.59:1"));
   connect (m_actionZoom2To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom2To1Farther, ZOOM_2_TO_1_FARTHER);
 
-  m_actionZoom1To1Closer = new QAction (tr ("1.26:1 (126%)"), this);
+  m_actionZoom1To1Closer = new QAction (tr ("1:1 closer (126%)"), this);
   m_actionZoom1To1Closer->setCheckable (true);
   m_actionZoom1To1Closer->setChecked (true);
   m_actionZoom1To1Closer->setStatusTip (tr ("Zoom 1.3:1"));
@@ -975,14 +976,14 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom1To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To1, ZOOM_1_TO_1);
 
-  m_actionZoom1To1Farther = new QAction (tr ("0.79:1 (79%)"), this);
+  m_actionZoom1To1Farther = new QAction (tr ("1:1 farther (79%)"), this);
   m_actionZoom1To1Farther->setCheckable (true);
   m_actionZoom1To1Farther->setChecked (true);
   m_actionZoom1To1Farther->setStatusTip (tr ("Zoom 0.8:1"));
   connect (m_actionZoom1To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To1Farther, ZOOM_1_TO_1_FARTHER);
 
-  m_actionZoom1To2Closer = new QAction (tr ("1.3:2 (63%)"), this);
+  m_actionZoom1To2Closer = new QAction (tr ("1:2 closer (63%)"), this);
   m_actionZoom1To2Closer->setCheckable (true);
   m_actionZoom1To2Closer->setStatusTip (tr ("Zoom 1.3:2"));
   connect (m_actionZoom1To2Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -994,13 +995,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom1To2, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To2, ZOOM_1_TO_2);
 
-  m_actionZoom1To2Farther = new QAction (tr ("0.8:2 (40%)"), this);
+  m_actionZoom1To2Farther = new QAction (tr ("1:2 farther (40%)"), this);
   m_actionZoom1To2Farther->setCheckable (true);
   m_actionZoom1To2Farther->setStatusTip (tr ("Zoom 0.8:2"));
   connect (m_actionZoom1To2Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To2Farther, ZOOM_1_TO_2_FARTHER);
 
-  m_actionZoom1To4Closer = new QAction (tr ("1.3:4 (31%)"), this);
+  m_actionZoom1To4Closer = new QAction (tr ("1:4 closer (31%)"), this);
   m_actionZoom1To4Closer->setCheckable (true);
   m_actionZoom1To4Closer->setStatusTip (tr ("Zoom 1.3:4"));
   connect (m_actionZoom1To4Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -1012,13 +1013,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom1To4, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To4, ZOOM_1_TO_4);
 
-  m_actionZoom1To4Farther = new QAction (tr ("0.8:4 (20%)"), this);
+  m_actionZoom1To4Farther = new QAction (tr ("1:4 farther (20%)"), this);
   m_actionZoom1To4Farther->setCheckable (true);
   m_actionZoom1To4Farther->setStatusTip (tr ("Zoom 0.8:4"));
   connect (m_actionZoom1To4Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To4Farther, ZOOM_1_TO_4_FARTHER);
 
-  m_actionZoom1To8Closer = new QAction (tr ("1:.38 (12.5%)"), this);
+  m_actionZoom1To8Closer = new QAction (tr ("1:8 closer (12.5%)"), this);
   m_actionZoom1To8Closer->setCheckable (true);
   m_actionZoom1To8Closer->setStatusTip (tr ("Zoom 1:8"));
   connect (m_actionZoom1To8Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -1030,13 +1031,13 @@ void MainWindow::createActionsView ()
   connect (m_actionZoom1To8, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To8, ZOOM_1_TO_8);
 
-  m_actionZoom1To8Farther = new QAction (tr ("0.8:8 (10%)"), this);
+  m_actionZoom1To8Farther = new QAction (tr ("1:8 farther (10%)"), this);
   m_actionZoom1To8Farther->setCheckable (true);
   m_actionZoom1To8Farther->setStatusTip (tr ("Zoom 0.8:8"));
   connect (m_actionZoom1To8Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
   m_mapperZoomFactor->setMapping (m_actionZoom1To8Farther, ZOOM_1_TO_8_FARTHER);
 
-  m_actionZoom1To16Closer = new QAction (tr ("1.3:16 (8%)"), this);
+  m_actionZoom1To16Closer = new QAction (tr ("1:16 closer (8%)"), this);
   m_actionZoom1To16Closer->setCheckable (true);
   m_actionZoom1To16Closer->setStatusTip (tr ("Zoom 1.3:16"));
   connect (m_actionZoom1To16Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
@@ -1259,8 +1260,8 @@ void MainWindow::createMenus()
   m_menuViewZoom->addAction (m_actionZoom1To1Farther);
   m_menuViewZoom->addAction (m_actionZoom1To2Closer);
   m_menuViewZoom->addAction (m_actionZoom1To2);
-  m_menuViewZoom->addAction (m_actionZoom1To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To2Closer);
+  m_menuViewZoom->addAction (m_actionZoom1To2Farther);
+  m_menuViewZoom->addAction (m_actionZoom1To4Closer);
   m_menuViewZoom->addAction (m_actionZoom1To4);
   m_menuViewZoom->addAction (m_actionZoom1To4Farther);
   m_menuViewZoom->addAction (m_actionZoom1To8Closer);
@@ -4161,6 +4162,13 @@ void MainWindow::slotViewZoomFactor (ZoomFactor zoomFactor)
   }
 
   emit signalZoom(zoomFactor);
+}
+
+void MainWindow::slotViewZoomFactorInt (int zoom)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomFactorInt";
+
+  slotViewZoomFactor ((ZoomFactor) zoom);
 }
 
 void MainWindow::slotViewZoomIn ()

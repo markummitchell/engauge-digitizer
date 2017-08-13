@@ -38,7 +38,9 @@ HelpWindow::HelpWindow(QWidget *parent) :
   HelpBrowser *browser = new HelpBrowser (helpEngine);
 
   // URL is constructed from <namespace>, <virtualFolder> and <file> in engauge.qhp. If this line shows
-  // the error message 'QTextBrowser: No document for qthelp...' then the qhc file has not been built
+  // the error message 'QTextBrowser: No document for qthelp...' then one of the following applies:
+  // (1) the qhc file has not been built and put into the bin/documentation folder
+  // (2) in qtcreator the build is getting put into some directory other than engauge-digitizer/bin
   browser->setSource (QUrl ("qthelp://engaugedigitizer.net/doc/index.html"));
 
   connect (helpEngine->contentWidget (), SIGNAL (linkActivated (QUrl)), browser, SLOT (setSource (QUrl)));

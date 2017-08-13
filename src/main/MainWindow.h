@@ -313,6 +313,7 @@ private slots:
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoomFactor (ZoomFactor);
+  void slotViewZoomFactorInt (int);
   void slotViewZoom (int);
   void slotViewZoomIn ();
   void slotViewZoomInFromWheelEvent ();
