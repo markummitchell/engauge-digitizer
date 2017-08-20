@@ -649,7 +649,6 @@ private:
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;
   QMap<ZoomFactor, QAction*> m_zoomMapToAction;
-  QMap<ZoomFactor, double> m_zoomMapToFactor;
 
   // Fitted curve. Null if not currently applicable/defined
   FittingCurve *m_fittingCurve;

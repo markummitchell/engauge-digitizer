@@ -386,6 +386,7 @@ HEADERS  += \
     src/Zoom/ZoomFactor.h \
     src/Zoom/ZoomFactorInitial.h \
     src/Zoom/ZoomLabels.h \
+    src/Zoom/ZoomTransition.h \
     src/util/ZValues.h
 
 SOURCES += \
@@ -692,6 +693,7 @@ SOURCES += \
     src/Window/WindowTable.cpp \    
     src/util/Xml.cpp \
     src/Zoom/ZoomLabels.cpp \
+    src/Zoom/ZoomTransition.cpp \
     src/util/ZValues.cpp
 
 macx-* {

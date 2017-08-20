@@ -138,9 +138,8 @@
 #include "ViewSegmentFilter.h"
 #include "ZoomFactor.h"
 #include "ZoomFactorInitial.h"
+#include "ZoomTransition.h"
 
-const double CLOSER = qPow (2, 1.0 / 3.0);
-const double FARTHER = 1.0 / CLOSER;
 const QString EMPTY_FILENAME ("");
 const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
@@ -1547,32 +1546,6 @@ void MainWindow::createZoomMaps ()
   m_zoomMapToAction [ZOOM_1_TO_16_CLOSER] = m_actionZoom1To16Closer;
   m_zoomMapToAction [ZOOM_1_TO_16] = m_actionZoom1To16;
   m_zoomMapToAction [ZOOM_FILL] = m_actionZoomFill;
-
-  m_zoomMapToFactor [ZOOM_16_TO_1] = 16.0;
-  m_zoomMapToFactor [ZOOM_16_TO_1_FARTHER] = 16.0 * FARTHER;
-  m_zoomMapToFactor [ZOOM_8_TO_1_CLOSER] = 8.0 * CLOSER;
-  m_zoomMapToFactor [ZOOM_8_TO_1] = 8.0;
-  m_zoomMapToFactor [ZOOM_8_TO_1_FARTHER] = 8.0 * FARTHER;
-  m_zoomMapToFactor [ZOOM_4_TO_1_CLOSER] = 4.0 * CLOSER;
-  m_zoomMapToFactor [ZOOM_4_TO_1] = 4.0;
-  m_zoomMapToFactor [ZOOM_4_TO_1_FARTHER] = 4.0 * FARTHER;
-  m_zoomMapToFactor [ZOOM_2_TO_1_CLOSER] = 2.0 * CLOSER;
-  m_zoomMapToFactor [ZOOM_2_TO_1] = 2.0;
-  m_zoomMapToFactor [ZOOM_2_TO_1_FARTHER] = 2.0 * FARTHER;
-  m_zoomMapToFactor [ZOOM_1_TO_1_CLOSER] = 1.0 * CLOSER;
-  m_zoomMapToFactor [ZOOM_1_TO_1] = 1.0;
-  m_zoomMapToFactor [ZOOM_1_TO_1_FARTHER] = 1.0 * FARTHER;
-  m_zoomMapToFactor [ZOOM_1_TO_2_CLOSER] = 0.5 * CLOSER;
-  m_zoomMapToFactor [ZOOM_1_TO_2] = 0.5;
-  m_zoomMapToFactor [ZOOM_1_TO_2_FARTHER] = 0.5 * FARTHER;
-  m_zoomMapToFactor [ZOOM_1_TO_4_CLOSER] = 0.25 * CLOSER;
-  m_zoomMapToFactor [ZOOM_1_TO_4] = 0.25;
-  m_zoomMapToFactor [ZOOM_1_TO_4_FARTHER] = 0.25 * FARTHER;
-  m_zoomMapToFactor [ZOOM_1_TO_8_CLOSER] = 0.125 * CLOSER;
-  m_zoomMapToFactor [ZOOM_1_TO_8] = 0.125;
-  m_zoomMapToFactor [ZOOM_1_TO_8_FARTHER] = 0.125 * FARTHER;
-  m_zoomMapToFactor [ZOOM_1_TO_16_CLOSER] = 0.0625 * CLOSER;
-  m_zoomMapToFactor [ZOOM_1_TO_16] = 0.0625;
 }
 
 ZoomFactor MainWindow::currentZoomFactor () const
@@ -4154,7 +4127,8 @@ void MainWindow::slotViewZoomFactor (ZoomFactor zoomFactor)
       m_backgroundStateContext->fitInView (*m_view);
   } else {
 
-    double factor = m_zoomMapToFactor [zoomFactor];
+    ZoomTransition zoomTransition;    
+    double factor = zoomTransition.mapToFactor (zoomFactor);
 
     QTransform transform;
     transform.scale (factor, factor);
@@ -4175,34 +4149,12 @@ void MainWindow::slotViewZoomIn ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomIn";
 
-  // Try to zoom in
-
-  ZoomFactor newZoomFactor = ZOOM_16_TO_1;
-  if (m_actionZoomFill->isChecked ()) {
-
-    // Zooming in means user probably wants the more squished direction to be zoomed in by one step.
-    // Loop through the zoom values until a match is found
-    double xScale = m_view->transform().m11();
-    double yScale = m_view->transform().m22();
-    double scale = qMin(xScale, yScale);
-
-    for (int zoom = ZOOM_1_TO_16_CLOSER; zoom >= 0; zoom--) {
-      ZoomFactor zoomFactor = (ZoomFactor) zoom;
-      if (scale < m_zoomMapToFactor [zoomFactor]) {
-        newZoomFactor = zoomFactor;
-        break;
-      }
-    }
-  } else {
-    ZoomFactor zoomFactorOld = currentZoomFactor();
-    if (zoomFactorOld < ZOOM_1_TO_16) {
-      newZoomFactor = (ZoomFactor) (zoomFactorOld + 1);
-    } else {
-      newZoomFactor = ZOOM_1_TO_16;
-    }
-  }
-
-  setNonFillZoomFactor (newZoomFactor);
+  ZoomTransition zoomTransition;
+  ZoomFactor zoomFactorNew = zoomTransition.zoomIn (currentZoomFactor (),
+                                                    m_view->transform ().m11 (),
+                                                    m_view->transform ().m22 (),
+                                                    m_actionZoomFill->isChecked ());
+  setNonFillZoomFactor (zoomFactorNew);
 }
 
 
@@ -4228,33 +4180,12 @@ void MainWindow::slotViewZoomOut ()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewZoomOut";
 
   // Try to zoom out
-
-  ZoomFactor newZoomFactor = ZOOM_1_TO_16;
-  if (m_actionZoomFill->isChecked ()) {
-
-    // Zooming out means user probably wants the less squished direction to be zoomed out by one step.
-    // Loop through the zoom values until a match is found
-    double xScale = m_view->transform().m11();
-    double yScale = m_view->transform().m22();
-    double scale = qMin(xScale, yScale);
-
-    for (int zoom = 0; zoom <= ZOOM_1_TO_16_CLOSER; zoom++) {
-      ZoomFactor zoomFactor = (ZoomFactor) zoom;
-      if (scale > m_zoomMapToFactor [zoomFactor]) {
-        newZoomFactor = zoomFactor;
-        break;
-      }
-    }
-  } else {
-    ZoomFactor zoomFactorOld = currentZoomFactor();
-    if (zoomFactorOld > ZOOM_16_TO_1) {
-      newZoomFactor = (ZoomFactor) (zoomFactorOld - 1);
-    } else {
-      newZoomFactor = ZOOM_16_TO_1;
-    }
-  }
-
-  setNonFillZoomFactor (newZoomFactor);
+  ZoomTransition zoomTransition;
+  ZoomFactor zoomFactorNew = zoomTransition.zoomOut (currentZoomFactor (),
+                                                     m_view->transform ().m11 (),
+                                                     m_view->transform ().m22 (),
+                                                     m_actionZoomFill->isChecked ());
+  setNonFillZoomFactor (zoomFactorNew);
 }
 
 void MainWindow::slotViewZoomOutFromWheelEvent ()

@@ -21,7 +21,8 @@ testsAvailable=( \
     TestSegmentFill \
     TestSpline \
     TestTransformation \
-    TestValidators)
+    TestValidators \
+    TestZoomTransition)
 
 echo 
 echo "Available tests: " ${testsAvailable[*]}

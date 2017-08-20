@@ -360,6 +360,7 @@ HEADERS  += \
     Zoom/ZoomFactor.h \
     Zoom/ZoomFactorInitial.h\
     Zoom/ZoomLabels.h \
+    Zoom/ZoomTransition.h \
     util/ZValues.h
 
 SOURCES += \
@@ -670,6 +671,7 @@ SOURCES += \
     Window/WindowTable.cpp \    
     util/Xml.cpp \
     Zoom/ZoomLabels.cpp \
+    Zoom/ZoomTransition.cpp \
     util/ZValues.cpp
 
 TARGET = ../bin/TEST
