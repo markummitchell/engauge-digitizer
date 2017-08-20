@@ -77,8 +77,7 @@ do
 		echo "PASS   : $root $COUNTERSTRING"
 	    else
 		echo "FAIL   : $root $COUNTERSTRING"
-		# Skip -c2 option since it fails on some systems
-		diff .expected .actual
+		diff -C2 .expected .actual
 	    fi		   
 	    let COUNTER=COUNTER+1
 	done
