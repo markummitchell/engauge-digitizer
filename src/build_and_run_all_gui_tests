@@ -82,7 +82,7 @@ do
 		fi
 	    else
 		# Branch for failed OSX testing
-		echo "SKIPPED: $root $COUNTERSTING"
+		echo "SKIPPED: $root $COUNTERSTRING"
 	    fi
 	    let COUNTER=COUNTER+1
 	done
