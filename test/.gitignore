@@ -1,4 +1,5 @@
-*_actual_*
+.expected
+.actual
 *_actual*
 .file1
 .file2

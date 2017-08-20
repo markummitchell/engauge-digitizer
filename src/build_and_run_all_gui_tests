@@ -56,30 +56,30 @@ do
 	    else
 		COUNTERSTRING="";
 	    fi
-	    # If there is a line that starts with XXX then it must be skipped because one of the values
+	    # If there is a line that contains 'XXX' then it must be skipped because one of the values
 	    # is so small that roundoff error will give a false positive error result
-	    LINE=`sed -n '\|XXX|=' $EXPECTED`
-	    if [[ -n $LINE ]];
-	    then
+	    cp $EXPECTED .expected
+	    cp $actual   .actual
+	    LINES=`sed -n '\|XXX|=' .expected`
+	    read -r -a LINEARR <<< $LINES
+	    # Iterate backwards through line numbers so deletions are applied to the right lines
+	    for ((idx=${#LINEARR[@]}-1; idx>=0; idx--))
+	    do
+		LINE=${LINEARR[idx]}
 		# Skip the specified line
-		awk "NR != $LINE" $EXPECTED >.file1
-		awk "NR != $LINE" $actual   >.file2
-		if cmp --silent .file1 .file2
-		then
-		    echo "PASS   : $root $COUNTERSTRING"
-		else
-		    echo "FAIL   : $root $COUNTERSTRING"
-		    diff -c2 $EXPECTED $actual
-		fi		   
+		awk "NR != $LINE" .expected >.expected2
+		awk "NR != $LINE" .actual   >.actual2
+		mv .expected2 .expected
+		mv .actual2   .actual
+	    done
+	    if cmp --silent .expected .actual
+	    then
+		echo "PASS   : $root $COUNTERSTRING"
 	    else
-		if cmp --silent $EXPECTED $actual
-		then
-		    echo "PASS   : $root $COUNTERSTRING"
-		else
-		    echo "FAIL   : $root $COUNTERSTRING"
-		    diff -c2 $EXPECTED $actual
-		fi
-	    fi
+		echo "FAIL   : $root $COUNTERSTRING"
+		# Skip -c2 option since it fails on some systems
+		diff .expected .actual
+	    fi		   
 	    let COUNTER=COUNTER+1
 	done
     fi

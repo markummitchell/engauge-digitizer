@@ -1,4 +1,6 @@
 \#*
+.actual
+.expected
 *.autosave
 build_and_run_all_cli_tests.log
 build_and_run_all_gui_tests.log
