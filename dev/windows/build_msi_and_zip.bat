@@ -118,6 +118,33 @@ if "%ARCH%" == "x86" (
   move system32\vcruntime140.dll vcruntime140.dll
 )
 
+cd "%SCRIPTDIR%"
+echo "*** engauge.wxs ***"
+git diff --word-diff --unified=0 engauge.wxs 2>nul | findStr "["
+findStr "Id='" engauge.wxs | findStr /v Component | findStr /v Directory | findStr /v Feature | findStr /v File | findStr /v Folder | findStr /v Media | findStr /v Package | findStr /v Property 
+findStr "Version=" engauge.wxs | findStr /v InstallerVersion
+
+echo "*** engauge_64.wxs ***"
+git diff --word-diff --unified=0 engauge_64.wxs 2>nul | findStr "["
+findStr "Id='" engauge_64.wxs | findStr /v Component | findStr /v Directory | findStr /v Feature | findStr /v File | findStr /v Folder | findStr /v Media | findStr /v Package | findStr /v Property 
+findStr "Version=" engauge_64.wxs | findStr /v InstallerVersion
+
+echo "*** Version.cpp ***"
+findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
+
+echo "*** info_valid.plist ***"
+findStr "<string>1" ..\osx\info_valid.plist
+
+echo *************************************************************************
+echo * Check the version numbers and Ids above. If they are not correct, enter
+echo * Control-C to exit. Otherwise, enter the version number below...
+echo *
+echo * CAUTION - Do not use the mouse wheel at this point or else the
+echo * entered number will be blank
+echo *************************************************************************
+set /p VERNUM="Version number seen above>"
+echo Version number will be %VERNUM%
+
 cd "%APPVEYOR_BUILD_FOLDER%"
 
 echo *************************************
@@ -186,18 +213,6 @@ copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
 
 echo ***creating msi
 cd "%SCRIPTDIR%"
-findStr "char *VERSION_NUMBER" ..\..\src\util\Version.cpp
-findStr "Version=" %WXSFILE% | findStr /v InstallerVersion
-echo *****************************************************************
-echo * Check the version numbers above. If they are not correct, enter
-echo * Control-C to exit. Otherwise, enter the version number below...
-echo *
-echo * CAUTION - Do not use the mouse wheel at this point or else the
-echo * entered number will be blank
-echo *****************************************************************
-set /p VERNUM="Version number seen above>"
-echo Version number will be %VERNUM%
-
 candle %WXSFILE%
 candle WixUI_InstallDir_NoLicense.wxs
 light.exe -ext WixUIExtension -ext WixUtilExtension %WXSOBJFILE% WixUI_InstallDir_NoLicense.wixobj -o "digit-exe-windows-%BITS%-bit-installer-%VERNUM%.msi"
