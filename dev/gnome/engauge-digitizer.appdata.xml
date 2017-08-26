@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2015 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> -->
-<application>
-  <id type="desktop">engauge-digitizer.desktop</id>
+<component type="desktop-application">
+  <id>engauge-digitizer.desktop</id>
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <name>Engauge Digitizer</name>
+	<name>Engauge Digitizer</name>
+	<summary> interactively convert a bitmap graph or map into numbers </summary>
+
   <description>
 		<p>
 			The Engauge Digitizer tool assists in interactively extracting numbers
@@ -34,13 +36,12 @@
 			<li>Preview windows to give immediate feedback while modifying settings</li>
 			<li>Automated line and point extraction to rapidly digitize data</li>
 	</ul>
+</description>
 
-  </description>
   <screenshots>
     <screenshot type="default">https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
     <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
     <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
   </screenshots>
 	<url type="homepage">http://markummitchell.github.io/engauge-digitizer/</url>
-  <updatecontact>zbyszek@in.waw.pl</updatecontact>
-</application>
+</component>
