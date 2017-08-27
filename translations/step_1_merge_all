@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Usage: Download every language translation from transifex. Either 'Download for translation' or
+#        'Download for use', since either option produces the same file but with a different name
+#        (which is handled below)
+
 function main {
     languages=(ar cs de en es fr hi it ja kk ko pt ru zh)
     for language in "${languages[@]}"
@@ -16,6 +20,9 @@ function merge_one {
     if [ -f for_translation_engauge-digitizer_engauge_ents_$1.ts ]; then
 	echo "Converting $1"
         ./merge.py "engauge_$1.ts" "for_translation_engauge-digitizer_engauge_ents_$1.ts" "temp_$1.ts"
+    elif [ -f for_use_engauge-digitizer_engauge_ents_$1.ts ]; then
+	echo "Converting $1"
+        ./merge.py "engauge_$1.ts" "for_use_engauge-digitizer_engauge_ents_$1.ts" "temp_$1.ts"	
     else
 	echo "Skipping $1"	
     fi
