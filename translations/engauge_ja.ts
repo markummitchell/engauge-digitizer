@@ -1502,7 +1502,7 @@ The order of the curves here does not affect the order in the exported file. Tha
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="182" />
         <source>Function Points Selection</source>
-        <translation>補間に使用する X 値の読み取り方法の選択</translation>
+        <translation>近似式で補間する際に使用する X 値の読み取り方法の選択</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="196" />
@@ -1618,12 +1618,14 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
-        <translation type="unfinished" />
+        <translation>プレビュー 画面では、設定により エクスポート された ファイル がどのようになるかを見ることができます。
+
+(青色で表示された) 近似式による補間結果がまず出力され、またポイント 間を順に接続して得られたライン (緑色) による補間結果があれば、これも続いて出力されます。</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="329" />
         <source>Relation Points Selection</source>
-        <translation type="unfinished" />
+        <translation>ポイント 間の接続線からの X 値の読み取り方法の選択</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="343" />
@@ -1704,7 +1706,7 @@ Controls for specifying the format of relations during export</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1117" />
         <source>Preview is unavailable until axis points are defined.</source>
-        <translation type="unfinished" />
+        <translation>プレビュー 画面は座標軸の基準となる ポイント が設定されるまでは表示されません。</translation>
     </message>
 </context>
 <context>
@@ -2693,29 +2695,31 @@ Select points on the screen.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="386" />
         <source>Digitize axis points for a graph.</source>
-        <translation type="unfinished" />
+        <translation>グラフ を対象に 座標軸の基準となる ポイント を デジタイズ します。</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="387" />
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
-        <translation type="unfinished" />
+        <translation>座標軸の基準となる ポイント の デジタイズ
+
+グラフ の座標軸の基準となる ポイント を、マウス の クリック で追加するとともに、座標値を入力していきます。グラフ の場合には座標軸を決めるために 3 点 の ポイント が必要になります。</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="394" />
         <source>Scale Bar Tool</source>
-        <translation type="unfinished" />
+        <translation>スケールバー ツール</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="395" />
         <source>Shift+F8</source>
-        <translation type="unfinished" />
+        <translation>Shift+F8</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="397" />
         <source>Digitize scale bar for a map.</source>
-        <translation type="unfinished" />
+        <translation>マップ を対象に スケールバー を デジタイズ</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="398" />
@@ -2724,7 +2728,11 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
 
 Maps must be imported using Import (Advanced).</source>
-        <translation type="unfinished" />
+        <translation>スケールバー を デジタイズ
+
+マップ を 対象に、スケールバー の位置で マウス を クリック してから ドラッグ します。続いて スケールバー の示す距離を入力してください。 マップ の場合には スケールバー の両端の座標が距離を設定するために使われます。
+
+マップ 画像は、ファイル メニュー の インポート (アドバンス) を選択して インポート してください。</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="405" />
@@ -3884,22 +3892,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="904" />
         <source>16:1 farther (1270%)</source>
-        <translation type="unfinished" />
+        <translation>16:1 やや遠望 (1270%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="906" />
         <source>Zoom 12.7:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 12.7:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="910" />
         <source>8:1 closer (1008%)</source>
-        <translation type="unfinished" />
+        <translation>8:1 やや近望 (1008%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="912" />
         <source>Zoom 10.08:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 10.08:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="916" />
@@ -3914,22 +3922,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="922" />
         <source>8:1 farther (635%)</source>
-        <translation type="unfinished" />
+        <translation>8:1 やや遠望 (635%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="924" />
         <source>Zoom 6.35:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 6.35:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="928" />
         <source>4:1 closer (504%)</source>
-        <translation type="unfinished" />
+        <translation>4:1 やや近望 (504%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="930" />
         <source>Zoom 5.04:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 5.04:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="934" />
@@ -3944,22 +3952,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>4:1 farther (317%)</source>
-        <translation type="unfinished" />
+        <translation>4:1 やや遠望 (317%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="942" />
         <source>Zoom 3.17:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 3.17:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="946" />
         <source>2:1 closer (252%)</source>
-        <translation type="unfinished" />
+        <translation>2:1 やや近望 (252%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="948" />
         <source>Zoom 2.52:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 2.52:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="952" />
@@ -3974,22 +3982,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="958" />
         <source>2:1 farther (159%)</source>
-        <translation type="unfinished" />
+        <translation>2:1 やや遠望 (159%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>Zoom 1.59:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 1.59:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="964" />
         <source>1:1 closer (126%)</source>
-        <translation type="unfinished" />
+        <translation>1:1 やや近望 (126%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="967" />
         <source>Zoom 1.3:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 1.3:1 倍に拡大</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="971" />
@@ -4004,22 +4012,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="978" />
         <source>1:1 farther (79%)</source>
-        <translation type="unfinished" />
+        <translation>1:1 やや遠望 (79%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="981" />
         <source>Zoom 0.8:1</source>
-        <translation type="unfinished" />
+        <translation>倍率を 0.8:1 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="985" />
         <source>1:2 closer (63%)</source>
-        <translation type="unfinished" />
+        <translation>1:2 やや近望 (63%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="987" />
         <source>Zoom 1.3:2</source>
-        <translation type="unfinished" />
+        <translation>倍率を 1.3:2 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="991" />
@@ -4034,22 +4042,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="997" />
         <source>1:2 farther (40%)</source>
-        <translation type="unfinished" />
+        <translation>1:2 やや遠望 (40%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="999" />
         <source>Zoom 0.8:2</source>
-        <translation type="unfinished" />
+        <translation>倍率を 0.8:2 倍に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1003" />
         <source>1:4 closer (31%)</source>
-        <translation type="unfinished" />
+        <translation>1:4 やや遠望 (31%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1005" />
         <source>Zoom 1.3:4</source>
-        <translation type="unfinished" />
+        <translation>倍率を 1.3:4 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1009" />
@@ -4064,17 +4072,17 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1015" />
         <source>1:4 farther (20%)</source>
-        <translation type="unfinished" />
+        <translation>1:4 やや遠望 (20%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1017" />
         <source>Zoom 0.8:4</source>
-        <translation type="unfinished" />
+        <translation>倍率を 0.8:4 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1021" />
         <source>1:8 closer (12.5%)</source>
-        <translation type="unfinished" />
+        <translation>1:8 やや近望 (12.5%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1023" />
@@ -4090,22 +4098,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1033" />
         <source>1:8 farther (10%)</source>
-        <translation type="unfinished" />
+        <translation>1:8 やや遠望 (10%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1035" />
         <source>Zoom 0.8:8</source>
-        <translation type="unfinished" />
+        <translation>倍率を 0.8:8 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1039" />
         <source>1:16 closer (8%)</source>
-        <translation type="unfinished" />
+        <translation>1:16 やや近望 (8%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1041" />
         <source>Zoom 1.3:16</source>
-        <translation type="unfinished" />
+        <translation>倍率を 1.3:16 に縮小</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1045" />
@@ -4732,7 +4740,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
-        <translation type="unfinished" />
+        <translation>スケールバー が既に設定済みですので、改めて設定する必要がありません。</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="35" />
@@ -5066,82 +5074,82 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="11" />
         <source>16:1 farther</source>
-        <translation type="unfinished" />
+        <translation>16:1 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="12" />
         <source>8:1 closer</source>
-        <translation type="unfinished" />
+        <translation>8:1 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="14" />
         <source>8:1 farther</source>
-        <translation type="unfinished" />
+        <translation>8:1 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="15" />
         <source>4:1 closer</source>
-        <translation type="unfinished" />
+        <translation>4:1 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="17" />
         <source>4:1 farther</source>
-        <translation type="unfinished" />
+        <translation>4:1 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="18" />
         <source>2:1 closer</source>
-        <translation type="unfinished" />
+        <translation>2:1 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="20" />
         <source>2:1 farther</source>
-        <translation type="unfinished" />
+        <translation>2:1 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="21" />
         <source>1:1 closer</source>
-        <translation type="unfinished" />
+        <translation>1:1 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="23" />
         <source>1:1 farther</source>
-        <translation type="unfinished" />
+        <translation>1:1 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="24" />
         <source>1:2 closer</source>
-        <translation type="unfinished" />
+        <translation>1:2 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="26" />
         <source>1:2 farther</source>
-        <translation type="unfinished" />
+        <translation>1:2 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="27" />
         <source>1:4 closer</source>
-        <translation type="unfinished" />
+        <translation>1:4 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="29" />
         <source>1:4 farther</source>
-        <translation type="unfinished" />
+        <translation>1:4 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="30" />
         <source>1:8 closer</source>
-        <translation type="unfinished" />
+        <translation>1:8 やや近望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="32" />
         <source>1:8 farther</source>
-        <translation type="unfinished" />
+        <translation>1:8 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="33" />
         <source>1:16 closer</source>
-        <translation type="unfinished" />
+        <translation>1:16 やや遠望</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="35" />
@@ -5156,7 +5164,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3683" />
         <source>Need scale bar</source>
-        <translation type="unfinished" />
+        <translation>スケールバー が必要です。</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3684" />
