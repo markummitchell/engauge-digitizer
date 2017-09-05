@@ -1,0 +1,109 @@
+#!/bin/bash
+
+export FROMQCH="$HOME/engauge-digitizer/bin/documentation/engauge.qch"
+export FROMQHC="$HOME/engauge-digitizer/bin/documentation/engauge.qhc"
+export FROMICO="$HOME/engauge-digitizer/src/img/digitizer.ico"
+export FROMEXE="$HOME/engauge-digitizer/bin/engauge"
+
+ls -ls $FROMQCH | awk '{print $7,$8,$9,$10}' 
+ls -ls $FROMQHC | awk '{print $7,$8,$9,$10}' 
+
+read -p 'If the help input files are up to date, press Enter to continue'
+
+VERSION_NUMBER_CODE=`fgrep -e 'char *VERSION_NUMBER' ../../src/util/Version.cpp | awk -F '"' '{print $2}'`
+VERSION_NUMBER_WIX=`fgrep -e 'Version' ../windows/engauge.wxs | grep -v Installer | awk -F "'" '{print $2}'`
+echo "Version number in C++ code (Version.cpp)=$VERSION_NUMBER_CODE"
+echo "Version number in Windows WiX installer (engauge.wxs)=$VERSION_NUMBER_WIX"
+
+read -p 'If the version numbers are correct, press Enter to continue'
+
+VERSION_NUMBER_CODE=`echo $VERSION_NUMBER_CODE | sed 's/\./_/g'`
+
+export STAGINGDIR=engauge
+export TRANSLATIONSDIR=engauge/translations
+export DOCDIR=$STAGINGDIR/documentation
+export IMAGEDIR=$STAGINGDIR/imageformats
+export PLATFORMSDIR=$STAGINGDIR/platforms
+export SQLDIR=$STAGINGDIR/sqldrivers
+
+rm -rf $STAGINGDIR
+
+mkdir -p $STAGINGDIR
+mkdir -p $TRANSLATIONSDIR
+mkdir -p $DOCDIR
+mkdir -p $IMAGEDIR
+mkdir -p $PLATFORMSDIR
+mkdir -p $SQLDIR
+
+echo "***Copying executable"
+cp $FROMEXE $STAGINGDIR
+
+echo "***Copying help input files"
+cp $FROMQCH $STAGINGDIR/documentation
+cp $FROMQHC $STAGINGDIR/documentation
+
+echo "***Copying icon file"
+cp $FROMICO $STAGINGDIR
+
+echo "***Building translations"
+lrelease ../../engauge.pro
+mv ../../translations/*.qm $TRANSLATIONSDIR
+
+echo "***Copying libraries"
+cp /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2                   $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqgif.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqicns.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqico.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqjp2.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqjpeg.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqsvg.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqtga.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqtiff.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqwbmp.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/imageformats/libqwebp.so      $IMAGEDIR
+cp /usr/lib/x86_64-linux-gnu/libxcb-image.so.0                  $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxcb-icccm.so.4                  $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxcb-render-util.so.0            $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxcb-sync.so.1                   $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxcb-xkb.so.1                    $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so.0              $PLATFORMSDIR
+cp /usr/lib/x86_64-linux-gnu/libxkbcommon.so.0                  $PLATFORMSDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/platforms/libqxcb.so          $PLATFORMSDIR
+cp $FFTW_HOME/lib/libfftw3.so.3                       $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libicudata.so.56        $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libicui18n.so.56        $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libicuuc.so.56          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5XcbQpa.so.5       $STAGINGDIR
+cp /usr/lib/x86_64-linux-gnu/libGL.so                $STAGINGDIR
+cp $LOG4CPP_HOME/lib/liblog4cpp.so                   $STAGINGDIR
+cp $LOG4CPP_HOME/lib/liblog4cpp.so.1                 $STAGINGDIR
+cp $POPPLER_LIB/libpoppler.so                        $STAGINGDIR
+cp $POPPLER_LIB/libpoppler.so.66                     $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-cpp.so                    $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-qt5.so                    $STAGINGDIR
+cp $POPPLER_LIB/libpoppler-qt5.so.1                  $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5CLucene.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Core.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5DBus.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Gui.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Help.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Network.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5PrintSupport.so.5 $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Sql.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Svg.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Widgets.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5Xml.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc_64/plugins/sqldrivers/libqsqlite.so $SQLDIR
+
+echo "***Rebuilding release executable" &&
+export ENGAUGE_RELEASE=1 &&
+cd ../.. &&
+qmake engauge.pro CONFIG+=pdf &&
+make clean &&
+make &&
+cd dev/linux
+
+echo "***Compiling installer"
+cp startup_script.run $STAGINGDIR
+# './' prefix is needed before script so script is found during installation (especially if running sudo)
+makeself engauge/ digit-exe-debian-linux-64-bit-installer-$VERSION_NUMBER_CODE.run "Engauge Digitizer" ./startup_script.run
