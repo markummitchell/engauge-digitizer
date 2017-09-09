@@ -17,16 +17,15 @@
 #include "ZoomFactor.h"
 #include "ZoomLabels.h"
 
-const QString LABEL_COORDS_SCREEN ("Coordinates (pixels):");
-const QString LABEL_COORDS_GRAPH ("Coordinates (graph):");
-const QString LABEL_RESOLUTION_GRAPH ("Resolution (graph):");
+const QString LABEL_COORDS_SCREEN (QObject::tr ("Coordinates (pixels):"));
+const QString LABEL_COORDS_GRAPH (QObject::tr ("Coordinates (graph):"));
+const QString LABEL_RESOLUTION_GRAPH (QObject::tr ("Resolution (graph):"));
 
 const int TEMPORARY_MESSAGE_LIFETIME = 5000; // Milliseconds. Two seconds is too fast even when the text is anticipated
 
 const int MIN_WIDTH_ZOOM = 110;
 const int MIN_WIDTH_COMBO_UNITS = 160;
-const int MAX_WIDTH_GROUP_UNITS = 400;
-const int MAX_SIZE_EDIT_COORDS = 550; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
+const int MIN_SIZE_EDIT_COORDS = 250; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
 const int MAX_HEIGHT_EDIT_COORDS = 24;
 
 StatusBar::StatusBar(QStatusBar &statusBar) :
@@ -60,7 +59,7 @@ void StatusBar::createGroupUnits ()
   m_cmbUnits->addItem (LABEL_COORDS_GRAPH, QVariant (STATUS_BAR_UNITS_COORDS_GRAPH));
   m_cmbUnits->addItem (LABEL_RESOLUTION_GRAPH, QVariant (STATUS_BAR_UNITS_RESOLUTION_GRAPH));
   m_cmbUnits->setCurrentText (LABEL_COORDS_GRAPH);
-  m_cmbUnits->setMaximumWidth (MIN_WIDTH_COMBO_UNITS);
+  m_cmbUnits->setMinimumWidth (MIN_WIDTH_COMBO_UNITS);
   m_cmbUnits->setToolTip (tr ("Select cursor coordinate values to display."));
   m_cmbUnits->setWhatsThis (tr("Select Cursor Coordinate Values\n\n"
                                "Values at cursor coordinates to display. Coordinates are in screen (pixels) or "
@@ -72,8 +71,8 @@ void StatusBar::createGroupUnits ()
   m_editCoords->setEnabled (false); // Disabled until file is opened
   m_editCoords->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   m_editCoords->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  m_editCoords->setMinimumSize (MAX_SIZE_EDIT_COORDS, MAX_HEIGHT_EDIT_COORDS);
-  m_editCoords->setMaximumSize (MAX_SIZE_EDIT_COORDS, MAX_HEIGHT_EDIT_COORDS);
+  m_editCoords->setMinimumSize (MIN_SIZE_EDIT_COORDS, MAX_HEIGHT_EDIT_COORDS);
+  m_editCoords->setMaximumHeight (MAX_HEIGHT_EDIT_COORDS);
   m_editCoords->setReadOnly(true);
   m_editCoords->setToolTip (tr ("Cursor coordinate values."));
   m_editCoords->setWhatsThis (tr ("Cursor Coordinate Values\n\n"
@@ -86,7 +85,6 @@ void StatusBar::createGroupUnits ()
   QPalette *palette = new QPalette;
   palette->setColor (QPalette::Foreground, Qt::gray);
   m_groupUnits->setPalette (*palette);
-  m_groupUnits->setMaximumWidth (MAX_WIDTH_GROUP_UNITS);
 
   QHBoxLayout *groupLayout = new QHBoxLayout;
   m_groupUnits->setLayout (groupLayout);

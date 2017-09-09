@@ -4838,40 +4838,55 @@ Do you want to save your changes?</source>
         <source>Error reading xml</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="20"/>
+        <source>Coordinates (pixels):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="21"/>
+        <source>Coordinates (graph):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="22"/>
+        <source>Resolution (graph):</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="64"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="63"/>
         <source>Select cursor coordinate values to display.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="65"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="64"/>
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="78"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="77"/>
         <source>Cursor coordinate values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="79"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="78"/>
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="134"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="132"/>
         <source>Select zoom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="135"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="133"/>
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>
