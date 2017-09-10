@@ -1,2 +1,5 @@
+.download
+.local
+__pycache__
 *.qm
 for*
