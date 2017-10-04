@@ -85,3 +85,16 @@ void ExportFileAbstractBase::insertLineSeparator (bool isFirst,
     }
   }
 }
+
+QString ExportFileAbstractBase::overrideCommasForCommaDelimiter (const DocumentModelExportFormat &modelExportOverride,
+                                                                 const QString &valueString) const
+{
+  QString newValueString = valueString;
+
+  if (modelExportOverride.delimiter () == EXPORT_DELIMITER_COMMA) {
+    QString tempString = valueString;
+    newValueString = tempString.replace (",", ".");
+  }
+
+  return newValueString;
+}

@@ -120,7 +120,8 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_cmbImportCropping->setWhatsThis (tr ("Import Cropping\n\n"
                                          "Enables or disables cropping of the imported image when importing. Cropping the image is useful "
                                          "for removing unimportant information around a graph, but less useful when the graph already fills "
-                                         "the entire image."));
+                                         "the entire image.\n\n"
+                                         "This setting only has an effect when Engauge has been built with support for pdf files."));
   ImportCroppingUtilBase importCroppingUtil;
   m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_NEVER), IMPORT_CROPPING_NEVER);
   m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_MULTIPAGE_PDFS), IMPORT_CROPPING_MULTIPAGE_PDFS);

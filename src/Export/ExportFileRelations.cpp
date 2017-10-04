@@ -755,12 +755,15 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExportFo
     str << "\n";
   }
 
+  // Table body
   for (int row = 0; row < xThetaYRadiusValues [0].count(); row++) {
 
     QString delimiterForRow;
     for (int col = 0; col < xThetaYRadiusValues.count(); col++) {
 
-      str << delimiterForRow << *(xThetaYRadiusValues [col] [row]);
+      QString xThetaString = *(xThetaYRadiusValues [col] [row]);
+      str << delimiterForRow << overrideCommasForCommaDelimiter (modelExportOverride,
+                                                                 xThetaString);
       delimiterForRow = delimiter;
     }
 

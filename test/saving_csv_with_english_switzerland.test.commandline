@@ -1,0 +1,1 @@
+-errorreport ../test/saving_csv_with_english_switzerland.xml -regression -reset

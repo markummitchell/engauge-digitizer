@@ -47,6 +47,11 @@ protected:
                             ExportHeader exportHeader,
                             QTextStream &str) const;
 
+  /// If values are delimited by a comma AND the values have commas in them (for locale like
+  /// English/Switzerland) then replace the internal commas by periods. In other cases this
+  /// method is a noop
+  QString overrideCommasForCommaDelimiter (const DocumentModelExportFormat &modelExportOverride,
+                                           const QString &valueString) const;
 };
 
 #endif // EXPORT_FILE_ABSTRACT_BASE_H

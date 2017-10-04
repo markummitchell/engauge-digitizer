@@ -568,6 +568,7 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
     str << "\n";
   }
 
+  // Table body
   FormatCoordsUnits format;
   const double DUMMY_Y_RADIUS = 1.0;
 
@@ -588,11 +589,14 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
                                      xThetaString,
                                      yRadiusString,
                                      transformation);
-      str << xThetaString;
+      str << overrideCommasForCommaDelimiter (modelExportOverride,
+                                              xThetaString);
 
       for (int col = 0; col < yRadiusValues.count(); col++) {
 
-        str << delimiter << *(yRadiusValues [col] [row]);
+        QString yRadiusString = *(yRadiusValues [col] [row]);
+        str << delimiter << overrideCommasForCommaDelimiter (modelExportOverride,
+                                                             yRadiusString);
       }
 
       str << "\n";
