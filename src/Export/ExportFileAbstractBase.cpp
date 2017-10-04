@@ -86,14 +86,16 @@ void ExportFileAbstractBase::insertLineSeparator (bool isFirst,
   }
 }
 
-QString ExportFileAbstractBase::overrideCommasForCommaDelimiter (const DocumentModelExportFormat &modelExportOverride,
-                                                                 const QString &valueString) const
+QString ExportFileAbstractBase::wrapInDoubleQuotesIfNeeded (const DocumentModelExportFormat &modelExportOverride,
+                                                            const QString &valueString) const
 {
   QString newValueString = valueString;
 
-  if (modelExportOverride.delimiter () == EXPORT_DELIMITER_COMMA) {
-    QString tempString = valueString;
-    newValueString = tempString.replace (",", ".");
+  if ((modelExportOverride.delimiter () == EXPORT_DELIMITER_COMMA) &&
+      (valueString.indexOf (",") >= 0)) {
+
+    // Eliminate ambiguities according to RFC 4180
+    newValueString = """" + valueString + """";
   }
 
   return newValueString;

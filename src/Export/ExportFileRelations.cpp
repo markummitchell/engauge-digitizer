@@ -762,8 +762,8 @@ void ExportFileRelations::outputXThetaYRadiusValues (const DocumentModelExportFo
     for (int col = 0; col < xThetaYRadiusValues.count(); col++) {
 
       QString xThetaString = *(xThetaYRadiusValues [col] [row]);
-      str << delimiterForRow << overrideCommasForCommaDelimiter (modelExportOverride,
-                                                                 xThetaString);
+      str << delimiterForRow << wrapInDoubleQuotesIfNeeded (modelExportOverride,
+                                                            xThetaString);
       delimiterForRow = delimiter;
     }
 

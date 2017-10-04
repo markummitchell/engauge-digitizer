@@ -24,6 +24,9 @@ class Transformation;
 /// Strategy class for exporting to a file. This strategy is external to the Document class so that class is simpler.
 class ExportFileRelations : public ExportFileAbstractBase
 {
+  // For unit testing
+  friend class TestExport;
+  
 public:
   /// Single constructor.
   ExportFileRelations();

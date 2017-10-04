@@ -589,14 +589,14 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
                                      xThetaString,
                                      yRadiusString,
                                      transformation);
-      str << overrideCommasForCommaDelimiter (modelExportOverride,
-                                              xThetaString);
+      str << wrapInDoubleQuotesIfNeeded (modelExportOverride,
+                                         xThetaString);
 
       for (int col = 0; col < yRadiusValues.count(); col++) {
 
         QString yRadiusString = *(yRadiusValues [col] [row]);
-        str << delimiter << overrideCommasForCommaDelimiter (modelExportOverride,
-                                                             yRadiusString);
+        str << delimiter << wrapInDoubleQuotesIfNeeded (modelExportOverride,
+                                                        yRadiusString);
       }
 
       str << "\n";
