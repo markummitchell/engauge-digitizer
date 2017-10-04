@@ -14,6 +14,10 @@ Windows - Steps to build and run engauge executable:
 ----------------------------------------------------
 These steps build and run, in Microsoft Windows, the standard engauge executable for digitizing data.
 
+Note that support for reading PDF files, using the Poppler library, has not been available in recent
+Engauge releases due to incompatibilities between recent libraries and the many software libraries 
+required by the Poppler library.
+
 1) Install the MinGW version of the Qt Open Source toolkit from http://www.qt.io. Since the default
    Qt Open Source download supports Microsoft Visual Studio rather than MinGW, careful navigation
    of the Qt website is required to find, and then download, the Qt installation package that
