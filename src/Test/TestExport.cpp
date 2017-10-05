@@ -213,7 +213,7 @@ void TestExport::initTestCase ()
 
 void TestExport::testCommasInFunctionsForCommasSwitzerland ()
 {
-  QString outputExpected =
+  QString outputExpectedIfCommaSeparator =
     "x,Curve1\n"
     """0,001"",""-1,27563""\n"
     """0,001"",""-1,27563""\n"
@@ -223,6 +223,16 @@ void TestExport::testCommasInFunctionsForCommasSwitzerland ()
     "10,""-706,15184""\n"
     "100,""-3997814,14355""\n"
     "1000,""-4541901224,06376""\n";
+  QString outputExpectedIfPeriodSeparator =
+    "x,Curve1\n"
+    "0.001,-1.27563\n"
+    "0.001,-1.27563\n"
+    "0.01,-1.26683\n"
+    "0,1,-1.17881\n"
+    "1,-0.29658\n"
+    "10,-706.15184\n"
+    "100,-3997814.14355\n"
+    "1000,-4541901224.06376\n";
   
   QString outputGot;
   bool success = checkCommasInFunctionsForDelimiter (EXPORT_DELIMITER_COMMA,
@@ -232,8 +242,8 @@ void TestExport::testCommasInFunctionsForCommasSwitzerland ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInFunctionsForCommasSwitzerland " << outputGot.toLatin1().data () << endl;
-  QVERIFY (outputGot == outputExpected);
+  QVERIFY (outputGot == outputExpectedIfCommaSeparator ||
+	   outputGot == outputExpectedIfPeriodSeparator);
 }
 
 void TestExport::testCommasInFunctionsForCommasUnitedStates ()
@@ -257,13 +267,12 @@ void TestExport::testCommasInFunctionsForCommasUnitedStates ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInFunctionsForCommasUnitedStates " << outputGot.toLatin1().data () << endl;
   QVERIFY (outputGot == outputExpected);
 }
 
 void TestExport::testCommasInFunctionsForTabsSwitzerland ()
 {
-  QString outputExpected =
+  QString outputExpectedIfCommaSeparator =
     "x\tCurve1\n"
     "0,001\t-1,27563\n"
     "0,001\t-1,27563\n"
@@ -273,6 +282,16 @@ void TestExport::testCommasInFunctionsForTabsSwitzerland ()
     "10\t-706,15184\n"
     "100\t-3997814,14355\n"
     "1000\t-4541901224,06376\n";
+  QString outputExpectedIfPeriodSeparator =
+    "x\tCurve1\n"
+    "0.001\t-1.27563\n"
+    "0.001\t-1.27563\n"
+    "0.01\t-1.26683\n"
+    "0.1\t-1.17881\n"
+    "1\t-0.29658\n"
+    "10\t-706.15184\n"
+    "100\t-3997814.14355\n"
+    "1000\t-4541901224.06376\n";
   
   QString outputGot;
   bool success = checkCommasInFunctionsForDelimiter (EXPORT_DELIMITER_TAB,
@@ -282,8 +301,8 @@ void TestExport::testCommasInFunctionsForTabsSwitzerland ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInFunctionsForTabsSwitzerland " << outputGot.toLatin1().data () << endl;
-  QVERIFY (outputGot == outputExpected);
+  QVERIFY (outputGot == outputExpectedIfCommaSeparator ||
+	   outputGot == outputExpectedIfPeriodSeparator);
 }
 
 void TestExport::testCommasInFunctionsForTabsUnitedStates ()
@@ -307,13 +326,12 @@ void TestExport::testCommasInFunctionsForTabsUnitedStates ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInFunctionsForTabsUnitedStates " << outputGot.toLatin1().data () << endl;
   QVERIFY (outputGot == outputExpected);
 }
 
 void TestExport::testCommasInRelationsForCommasSwitzerland ()
 {
-  QString outputExpected =
+  QString outputExpectedIfCommaSeparator =
     "x,Curve1\n"
     """3,3192"",""2,08003""\n"
     """3,3723"",""2,15796""\n"
@@ -337,6 +355,30 @@ void TestExport::testCommasInRelationsForCommasSwitzerland ()
     """4,4305"",""3,52738""\n"
     """4,4892"",""3,60349""\n"
     """4,5486"",""3,67938""\n";
+  QString outputExpectedIfPeriodSeparator =
+    "x,Curve1\n"
+    "3.3192,2.08003\n"
+    "3.3723,2.15796\n"
+    "3.432,2.23368\n"
+    "3.4935,2.30883\n"
+    "3.5539,2.38438\n"
+    "3.6113,2.46094\n"
+    "3.6687,2.5375\n"
+    "3.7261,2.61406\n"
+    "3.7836,2.69062\n"
+    "3.841,2.76718\n"
+    "3.9012,2.84276\n"
+    "3.9628,2.91791\n"
+    "4.0231,2.99345\n"
+    "4.0785,3.07067\n"
+    "4.1339,3.14789\n"
+    "4.1932,3.22378\n"
+    "4.2547,3.29893\n"
+    "4.3156,3.37426\n"
+    "4.3731,3.45082\n"
+    "4.4305,3.52738\n"
+    "4.4892,3.60349\n"
+    "4.5486,3.67938\n";
   
   QString outputGot;
   bool success = checkCommasInRelationsForDelimiter (EXPORT_DELIMITER_COMMA,
@@ -346,8 +388,8 @@ void TestExport::testCommasInRelationsForCommasSwitzerland ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInRelationsForCommasSwitzerland " << outputGot.toLatin1().data () << endl;
-  QVERIFY (outputGot == outputExpected);
+  QVERIFY (outputGot == outputExpectedIfCommaSeparator ||
+	   outputGot == outputExpectedIfPeriodSeparator);
 }
 
 void TestExport::testCommasInRelationsForCommasUnitedStates ()
@@ -385,13 +427,12 @@ void TestExport::testCommasInRelationsForCommasUnitedStates ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInRelationsForCommasUnitedStates " << outputGot.toLatin1().data () << endl;
   QVERIFY (outputGot == outputExpected);
 }
 
 void TestExport::testCommasInRelationsForTabsSwitzerland ()
 {
-  QString outputExpected =
+  QString outputExpectedIfCommaSeparator =
     "x\tCurve1\n"
     "3,3192\t2,08003\n"
     "3,3723\t2,15796\n"
@@ -415,6 +456,30 @@ void TestExport::testCommasInRelationsForTabsSwitzerland ()
     "4,4305\t3,52738\n"
     "4,4892\t3,60349\n"
     "4,5486\t3,67938\n";
+  QString outputExpectedIfPeriodSeparator =
+    "x\tCurve1\n"
+    "3.3192\t2.08003\n"
+    "3.3723\t2.15796\n"
+    "3.432\t2.23368\n"
+    "3.4935\t2.30883\n"
+    "3.5539\t2.38438\n"
+    "3.6113\t2.46094\n"
+    "3.6687\t2.5375\n"
+    "3.7261\t2.61406\n"
+    "3.7836\t2.69062\n"
+    "3.841\t2.76718\n"
+    "3.9012\t2.84276\n"
+    "3.9628\t2.91791\n"
+    "4.0231\t2.99345\n"
+    "4.0785\t3.07067\n"
+    "4.1339\t3.14789\n"
+    "4.1932\t3.22378\n"
+    "4.2547\t3.29893\n"
+    "4.3156\t3.37426\n"
+    "4.3731\t3.45082\n"
+    "4.4305\t3.52738\n"
+    "4.4892\t3.60349\n"
+    "4.5486\t3.67938\n";
   
   QString outputGot;
   bool success = checkCommasInRelationsForDelimiter (EXPORT_DELIMITER_TAB,
@@ -424,8 +489,8 @@ void TestExport::testCommasInRelationsForTabsSwitzerland ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInRelationsForTabsSwitzerland " << outputGot.toLatin1().data () << endl;
-  QVERIFY (outputGot == outputExpected);
+  QVERIFY (outputGot == outputExpectedIfCommaSeparator ||
+	   outputGot == outputExpectedIfPeriodSeparator);
 }
 
 void TestExport::testCommasInRelationsForTabsUnitedStates ()
@@ -463,7 +528,6 @@ void TestExport::testCommasInRelationsForTabsUnitedStates ()
     outputGot = "";
   }
 
-  cout << "TestExport::testCommasInRelationsForTabsUnitedStates " << outputGot.toLatin1().data () << endl;
   QVERIFY (outputGot == outputExpected);
 }
 

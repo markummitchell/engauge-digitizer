@@ -25,6 +25,9 @@ private slots:
   void cleanupTestCase ();
   void initTestCase ();
 
+  // For Switzerland cases below we are testing for case when comma is used,
+  // but on some computers that locale will use period instead so we handle
+  // both cases (to prevent false alarms)
   void testCommasInFunctionsForCommasSwitzerland ();
   void testCommasInFunctionsForCommasUnitedStates ();  
   void testCommasInFunctionsForTabsSwitzerland ();
