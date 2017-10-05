@@ -230,6 +230,7 @@ void TestExport::testCommasInFunctionsForCommasSwitzerland ()
                                                      outputGot);
   if (!success) {
     outputGot = "";
+    cerr << "TestExport::testCommasInFunctionsForCommasSwitzerland " << outputGot.toLatin1().data () << endl;
   }
 
   QVERIFY (outputGot == outputExpected);
@@ -253,6 +254,7 @@ void TestExport::testCommasInFunctionsForCommasUnitedStates ()
                                                      QLocale::UnitedStates,                                                     
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInFunctionsForCommasUnitedStates " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -277,6 +279,7 @@ void TestExport::testCommasInFunctionsForTabsSwitzerland ()
                                                      QLocale::Switzerland,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInFunctionsForTabsSwitzerland " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -301,6 +304,7 @@ void TestExport::testCommasInFunctionsForTabsUnitedStates ()
                                                      QLocale::UnitedStates,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInFunctionsForTabsUnitedStates " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -339,6 +343,7 @@ void TestExport::testCommasInRelationsForCommasSwitzerland ()
                                                      QLocale::Switzerland,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInRelationsForCommasSwitzerland " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -377,6 +382,7 @@ void TestExport::testCommasInRelationsForCommasUnitedStates ()
                                                      QLocale::UnitedStates,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInRelationsForCommasUnitedStates " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -415,6 +421,7 @@ void TestExport::testCommasInRelationsForTabsSwitzerland ()
                                                      QLocale::Switzerland,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInRelationsForTabsSwitzerland " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
@@ -453,6 +460,7 @@ void TestExport::testCommasInRelationsForTabsUnitedStates ()
                                                      QLocale::UnitedStates,
                                                      outputGot);
   if (!success) {
+    cerr << "TestExport::testCommasInRelationsForTabsUnitedStates " << outputGot.toLatin1().data () << endl;
     outputGot = "";
   }
 
