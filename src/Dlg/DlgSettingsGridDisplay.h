@@ -18,6 +18,7 @@ class QGraphicsScene;
 class QGridLayout;
 class QGroupBox;
 class QHBoxLayout;
+class QLabel;
 class QLineEdit;
 class ViewPreview;
 
@@ -62,6 +63,7 @@ private:
   void createDisplayGridLinesY (QGridLayout *layoutGridLines, int &row);
   void createPreview (QGridLayout *layout, int &row);
   bool textItemsAreValid () const;
+  bool textItemsDoNotBreakLineCountLimit ();
   void updateControls ();
   void updateDisplayedVariableX ();
   void updateDisplayedVariableY ();
@@ -88,6 +90,8 @@ private:
   QDoubleValidator *m_validatorStartY;
   QDoubleValidator *m_validatorStepY;
   QDoubleValidator *m_validatorStopY;
+
+  QLabel *m_labelLimitWarning;
 
   QComboBox *m_cmbColor;
 

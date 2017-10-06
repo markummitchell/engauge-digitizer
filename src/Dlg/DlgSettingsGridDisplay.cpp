@@ -24,7 +24,6 @@
 #include "ViewPreview.h"
 
 const int COUNT_MIN = 1;
-const int COUNT_MAX = 100;
 const int COUNT_DECIMALS = 0;
 const int MINIMUM_HEIGHT = 480;
 
@@ -58,6 +57,10 @@ void DlgSettingsGridDisplay::createDisplayCommon (QGridLayout *layout, int &row)
   QGridLayout *layoutCommon = new QGridLayout;
   widgetCommon->setLayout (layoutCommon);
   int rowCommon = 0;
+
+  m_labelLimitWarning = new QLabel;
+  m_labelLimitWarning->setStyleSheet ("QLabel { color: red; }");
+  layoutCommon->addWidget (m_labelLimitWarning, rowCommon++, 0, 1, 4, Qt::AlignCenter);
 
   QLabel *labelColor = new QLabel (tr ("Color:"));
   layoutCommon->addWidget (labelColor, rowCommon, 1);
@@ -110,7 +113,9 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   m_editCountX = new QLineEdit;
   m_editCountX->setWhatsThis (tr ("Number of X grid lines.\n\n"
                                   "The number of X grid lines must be entered as an integer greater than zero"));
-  m_validatorCountX = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
+  m_validatorCountX = new QDoubleValidator;
+  m_validatorCountX->setBottom (COUNT_MIN);
+  m_validatorCountX->setDecimals (COUNT_DECIMALS);
   m_editCountX->setValidator (m_validatorCountX);
   connect (m_editCountX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
@@ -184,7 +189,9 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   m_editCountY = new QLineEdit;
   m_editCountY->setWhatsThis (tr ("Number of Y grid lines.\n\n"
                                   "The number of Y grid lines must be entered as an integer greater than zero"));
-  m_validatorCountY = new QDoubleValidator (COUNT_MIN, COUNT_MAX, COUNT_DECIMALS);
+  m_validatorCountY = new QDoubleValidator;
+  m_validatorCountY->setBottom (COUNT_MIN);
+  m_validatorCountY->setDecimals (COUNT_DECIMALS);
   m_editCountY->setValidator (m_validatorCountY);
   connect (m_editCountY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
@@ -249,15 +256,12 @@ QWidget *DlgSettingsGridDisplay::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::createSubPanel";
 
-  const int COLUMN_CHECKBOX_WIDTH = 60;
-
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
 
   layout->setColumnStretch(0, 1); // Empty first column
   layout->setColumnStretch(1, 0); // Checkbox part of "section" checkboxes. In other rows this has empty space as indentation
-  layout->setColumnMinimumWidth(1, COLUMN_CHECKBOX_WIDTH);
   layout->setColumnStretch(2, 0); // X
   layout->setColumnStretch(3, 0); // Y
   layout->setColumnStretch(4, 1); // Empty last column
@@ -478,8 +482,10 @@ bool DlgSettingsGridDisplay::textItemsAreValid () const
   // To prevent an infinite loop, skip if either:
   // 1) a field is empty
   // 2) value in a field is malformed
+  bool ok = false;
   int pos;
-  return (!textCountX.isEmpty() &&
+  if (
+      !textCountX.isEmpty() &&
       !textCountY.isEmpty() &&
       !textStartX.isEmpty() &&
       !textStartY.isEmpty() &&
@@ -494,7 +500,59 @@ bool DlgSettingsGridDisplay::textItemsAreValid () const
       m_validatorStepX->validate(textStepX, pos) == QValidator::Acceptable &&
       m_validatorStepY->validate(textStepY, pos) == QValidator::Acceptable &&
       m_validatorStopX->validate(textStopX, pos) == QValidator::Acceptable &&
-      m_validatorStopY->validate(textStopY, pos) == QValidator::Acceptable);
+      m_validatorStopY->validate(textStopY, pos) == QValidator::Acceptable) {
+
+    // Reject zero steps
+    double stepX = textCountX.toDouble ();
+    double stepY = textCountY.toDouble ();
+
+    if (stepX != 0 && stepY != 0) {
+
+      ok = true;
+    }
+  }
+
+  return ok;
+}
+
+bool DlgSettingsGridDisplay::textItemsDoNotBreakLineCountLimit ()
+{
+  if (textItemsAreValid ()) {
+    QString textCountX = m_editCountX->text();
+    QString textCountY = m_editCountY->text();
+    QString textStartX = m_editStartX->text();
+    QString textStartY = m_editStartY->text();
+    QString textStepX = m_editStepX->text();
+    QString textStepY = m_editStepY->text();
+    QString textStopX = m_editStopX->text();
+    QString textStopY = m_editStopY->text();
+
+    // Given that text fields have good values, now compare grid line counts to limit
+    GridInitializer initializer;
+
+    bool linearAxisXTheta = (cmdMediator ().document ().modelCoords ().coordScaleXTheta() == COORD_SCALE_LINEAR);
+    bool linearAxisYRadius = (cmdMediator ().document ().modelCoords ().coordScaleYRadius() == COORD_SCALE_LINEAR);
+
+    int countX = textCountX.toInt ();
+    if (m_modelGridDisplayAfter->disableX() == GRID_COORD_DISABLE_COUNT) {
+      countX = initializer.computeCount (linearAxisXTheta,
+                                         textStartX.toDouble (),
+                                         textStopX.toDouble (),
+                                         textStepX.toDouble ());
+    }
+    int countY = textCountY.toInt ();
+    if (m_modelGridDisplayAfter->disableY() == GRID_COORD_DISABLE_COUNT) {
+      countY = initializer.computeCount (linearAxisYRadius,
+                                         textStartY.toDouble (),
+                                         textStopY.toDouble (),
+                                         textStepY.toDouble ());
+    }
+
+    return (countX <= mainWindow ().modelMainWindow ().maximumGridLines() &&
+            countY <= mainWindow ().modelMainWindow ().maximumGridLines());
+  }
+
+  return true;
 }
 
 void DlgSettingsGridDisplay::updateControls ()
@@ -511,7 +569,13 @@ void DlgSettingsGridDisplay::updateControls ()
   m_editStepY->setEnabled (disableY != GRID_COORD_DISABLE_STEP);
   m_editStopY->setEnabled (disableY != GRID_COORD_DISABLE_STOP);
 
-  enableOk (textItemsAreValid ());
+  if (textItemsDoNotBreakLineCountLimit ()) {
+    m_labelLimitWarning->setText ("");
+  } else {
+    m_labelLimitWarning->setText (tr ("Grid line count exceeds limit set by Settings / Main Window."));
+  }
+
+  enableOk (textItemsAreValid () && textItemsDoNotBreakLineCountLimit ());
 }
 
 void DlgSettingsGridDisplay::updateDisplayedVariableX ()

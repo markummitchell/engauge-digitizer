@@ -14,7 +14,7 @@
 #include <qmath.h>
 #include "Transformation.h"
 
-const int DEFAULT_MAXIMUM_GRID_LINES = 25;
+const int DEFAULT_MAXIMUM_GRID_LINES = 100;
 
 GridLineLimiter::GridLineLimiter ()
 {

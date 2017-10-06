@@ -26,6 +26,8 @@
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
 
+const int MAX_GRID_LINES_MIN = 2;
+const int MAX_GRID_LINES_MAX = 1000;
 const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 550;
 
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
@@ -153,7 +155,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (labelMaximumGridLines, row, 1);
 
   m_spinMaximumGridLines = new QSpinBox;
-  m_spinMaximumGridLines->setMinimum (2);
+  m_spinMaximumGridLines->setRange (MAX_GRID_LINES_MIN, MAX_GRID_LINES_MAX);
   m_spinMaximumGridLines->setWhatsThis (tr ("Maximum Grid Lines\n\n"
                                             "Maximum number of grid lines to be processed. This limit is applied when the step value is too "
                                             "small for the start and stop values, which would result in too many grid lines visually and "

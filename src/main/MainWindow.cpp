@@ -4668,6 +4668,7 @@ void MainWindow::updateSettingsGridDisplay(const DocumentModelGridDisplay &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridDisplay";
 
   m_cmdMediator->document().setModelGridDisplay(modelGridDisplay);
+  updateGridLines ();
 }
 
 void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
