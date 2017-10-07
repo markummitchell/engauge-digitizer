@@ -258,15 +258,12 @@ QWidget *DlgSettingsGridRemoval::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::createSubPanel";
 
-  const int COLUMN_CHECKBOX_WIDTH = 60;
-
   QWidget *subPanel = new QWidget ();
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
 
   layout->setColumnStretch(0, 1); // Empty first column
   layout->setColumnStretch(1, 0); // Checkbox part of "section" checkboxes. In other rows this has empty space as indentation
-  layout->setColumnMinimumWidth(1, COLUMN_CHECKBOX_WIDTH);
   layout->setColumnStretch(2, 0); // X
   layout->setColumnStretch(3, 0); // Y
   layout->setColumnStretch(4, 1); // Empty last column

@@ -33,7 +33,8 @@ public:
                        const MainWindowModel &modelMainWindow,
                        const DocumentModelGridDisplay &modelGrid,
                        double &startX,
-                       double &stepX) const;
+                       double &stepX,
+                       double &stopX) const;
 
   /// Limit step value for y/range coordinate. This is a noop if the maximum grid line limit in MainWindowModel is not exceeded
   void limitForYRadius (const Document &document,
@@ -42,7 +43,8 @@ public:
                         const MainWindowModel &modelMainWindow,
                         const DocumentModelGridDisplay &modelGrid,
                         double &startY,
-                        double &stepY) const;
+                        double &stepY,
+                        double &stopY) const;
 
 private:
 

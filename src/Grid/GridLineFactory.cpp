@@ -179,14 +179,16 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
                                     modelMainWindow,
                                     modelGridDisplay,
                                     startX,
-                                    stepX);
+                                    stepX,
+                                    stopX);
     gridLineLimiter.limitForYRadius (document,
                                      transformation,
                                      m_modelCoords,
                                      modelMainWindow,
                                      modelGridDisplay,
                                      startY,
-                                     stepY);
+                                     stepY,
+                                     stopY);
 
     // Apply if possible
     bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
