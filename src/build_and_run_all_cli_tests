@@ -89,7 +89,11 @@ else
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake $CONFIGARGS engauge_test.pro
-	make all 2>>$LOGFILE >/dev/null
+	make all 2>>$LOGFILE >/dev/null || {
+	    echo "FAIL   : Compilation error is described in build_and_run_all_cli_tests"
+	    echo "         Testing will be stopped"
+	    exit 1
+        }
 	../bin/$t
 	if [ $selectedCount -ne 1 ]
 	then
