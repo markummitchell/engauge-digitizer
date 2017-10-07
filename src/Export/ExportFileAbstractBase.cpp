@@ -95,7 +95,7 @@ QString ExportFileAbstractBase::wrapInDoubleQuotesIfNeeded (const DocumentModelE
       (valueString.indexOf (",") >= 0)) {
 
     // Eliminate ambiguities according to RFC 4180
-    newValueString = """" + valueString + """";
+    newValueString = QString ("\"%1\"").arg (valueString);
   }
 
   return newValueString;
