@@ -107,7 +107,7 @@ bool TestGridLineLimiter::testLinearX (double start,
   MainWindowModel modelMainWindow;
   DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startX, stepX; // Outputs from GridLineLimiter
+  double startX, stepX, stopX; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
   modelGrid.setStartX (start);
@@ -124,15 +124,19 @@ bool TestGridLineLimiter::testLinearX (double start,
                           modelMainWindow,
                           modelGrid,
                           startX,
-                          stepX);
+                          stepX,
+                          stopX);
 
-  bool success = (stepX > 0);
+  bool success = true;
 
-  if (success) {
+  if (stepX > 0) {
 
-    bool stopX = modelGrid.stopX ();
     int gridLineCount = 1 + (stopX - startX) / stepX;
     success = (gridLineCount <= 20);
+
+  } else {
+
+    success = (startX == stopX);
 
   }
 
@@ -153,7 +157,7 @@ bool TestGridLineLimiter::testLinearY (double start,
   MainWindowModel modelMainWindow;
   DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startY, stepY; // Outputs from GridLineLimiter
+  double startY, stepY, stopY; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
   modelGrid.setStartY (start);
@@ -170,15 +174,19 @@ bool TestGridLineLimiter::testLinearY (double start,
                            modelMainWindow,
                            modelGrid,
                            startY,
-                           stepY);
+                           stepY,
+                           stopY);
 
-  bool success = (stepY > 0);
+  bool success = true;
 
-  if (success) {
+  if (stepY > 0) {
 
-    bool stopY = modelGrid.stopY ();
     int gridLineCount = 1 + (stopY - startY) / stepY;
     success = (gridLineCount <= 20);
+
+  } else {
+
+    success = (startY == stopY);
 
   }
 
@@ -199,7 +207,7 @@ bool TestGridLineLimiter::testLogX (double start,
   MainWindowModel modelMainWindow;
   DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startX, stepX; // Outputs from GridLineLimiter
+  double startX, stepX, stopX; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LOG);
   modelGrid.setStartX (start);
@@ -216,13 +224,13 @@ bool TestGridLineLimiter::testLogX (double start,
                           modelMainWindow,
                           modelGrid,
                           startX,
-                          stepX);
+                          stepX,
+                          stopX);
 
   bool success = (startX > 0) && (stepX > 0);
 
   if (success) {
 
-    bool stopX = modelGrid.stopX ();
     int gridLineCount = 1 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
     success = (gridLineCount <= 20);
 
@@ -245,7 +253,7 @@ bool TestGridLineLimiter::testLogY (double start,
   MainWindowModel modelMainWindow;
   DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startY, stepY; // Outputs from GridLineLimiter
+  double startY, stepY, stopY; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleYRadius (COORD_SCALE_LOG);
   modelGrid.setStartY (start);
@@ -262,13 +270,13 @@ bool TestGridLineLimiter::testLogY (double start,
                            modelMainWindow,
                            modelGrid,
                            startY,
-                           stepY);
+                           stepY,
+                           stopY);
 
   bool success = (startY > 0) && (stepY > 0);
 
   if (success) {
 
-    bool stopY = modelGrid.stopY ();
     int gridLineCount = 1 + (qLn (stopY) - qLn (startY)) / qLn (stepY);
     success = (gridLineCount <= 20);
 

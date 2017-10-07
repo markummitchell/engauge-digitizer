@@ -59,6 +59,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
     if (!needReduction) {
       if (stepX <= 0) {
         stepX = 0;
+        needReduction = true;
       } else {
         countX = 1.0 + (stopX - startX) / stepX;
         needReduction = (countX > modelMainWindow.maximumGridLines());
@@ -85,6 +86,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
     if (!needReduction) {
       if (stepX <= 1) {
         stepX = 1;
+        needReduction = true;        
       } else {
         countX = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
         needReduction = (countX > modelMainWindow.maximumGridLines());
@@ -119,6 +121,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
     if (!needReduction) {
       if (stepY <= 0) {
         stepY = 0;
+        needReduction = true;        
       } else {
         countY = 1.0 + (stopY - startY) / stepY;
         needReduction = (countY > modelMainWindow.maximumGridLines());
@@ -145,6 +148,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
     if (!needReduction) {
       if (stepY <= 1) {
         stepY = 1;
+        needReduction = true;        
       } else {
         countY = 1.0 + (qLn (stopY) - qLn (startY)) / qLn (stepY);
         needReduction = (countY > modelMainWindow.maximumGridLines());
