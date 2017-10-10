@@ -4103,8 +4103,18 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <translation type="unfinished" />
     </message>
     <message>
+        <location filename="../src/main/MainWindow.cpp" line="2010" />
+        <source>File opened</source>
+        <translation>Soubor byl otevřen</translation>
+    </message>
+    <message>
         <location filename="../src/main/MainWindow.cpp" line="2055" />
         <source>File not found:</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="2072" />
+        <source>Error report opened</source>
         <translation type="unfinished" />
     </message>
     <message>

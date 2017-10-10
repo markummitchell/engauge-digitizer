@@ -4359,9 +4359,19 @@ Cuando se pulsa, este botón se imprime todos los puntos digitalizados y líneas
         <translation>Importación de imágenes</translation>
     </message>
     <message>
+        <location filename="../src/main/MainWindow.cpp" line="2010" />
+        <source>File opened</source>
+        <translation>Archivo abierto</translation>
+    </message>
+    <message>
         <location filename="../src/main/MainWindow.cpp" line="2055" />
         <source>File not found:</source>
         <translation>Archivo no encontrado:</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="2072" />
+        <source>Error report opened</source>
+        <translation>Informe de error abierto</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2130" />

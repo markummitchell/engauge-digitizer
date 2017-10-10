@@ -4211,9 +4211,19 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <translation>Загрузка Изображения</translation>
     </message>
     <message>
+        <location filename="../src/main/MainWindow.cpp" line="2010" />
+        <source>File opened</source>
+        <translation>Файл открыт</translation>
+    </message>
+    <message>
         <location filename="../src/main/MainWindow.cpp" line="2055" />
         <source>File not found:</source>
         <translation>Файл не найден:</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="2072" />
+        <source>Error report opened</source>
+        <translation>Открыт отчет об ошибке</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2130" />

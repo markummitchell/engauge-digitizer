@@ -2007,7 +2007,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     m_cmdMediator = cmdMediator;
     setupAfterLoadNewDocument (fileName,
-                               "File opened",
+                               tr ("File opened"),
                                IMPORT_TYPE_SIMPLE);
 
     // Start select mode
@@ -2069,7 +2069,7 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
   file.close();
 
   setupAfterLoadNewDocument (errorReportFile,
-                             "Error report opened",
+                             tr ("Error report opened"),
                              IMPORT_TYPE_SIMPLE);
 
   // Start select mode
