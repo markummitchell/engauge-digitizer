@@ -1631,148 +1631,153 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="32"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31"/>
         <source>Grid Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="62"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="65"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="66"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="69"/>
         <source>Select a color for the lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167"/>
         <source>Disable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="92"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="95"/>
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="107"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="181"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186"/>
         <source>Count:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="111"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="118"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="192"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="199"/>
         <source>Start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="122"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="127"/>
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="210"/>
         <source>Step:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="138"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="145"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="221"/>
         <source>Stop:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="149"/>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="171"/>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="185"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190"/>
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203"/>
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="214"/>
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="225"/>
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="234"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="241"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="248"/>
         <source>Preview window that shows how current settings affect grid display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="309"/>
         <source>X Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
         <source>Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="315"/>
         <source>Y Grid Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="317"/>
         <source>Radius Grid Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="575"/>
+        <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1943,61 +1948,61 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="32"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="34"/>
         <source>Main Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="57"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="59"/>
         <source>Initial zoom:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="72"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74"/>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="78"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
         <source>Zoom control:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="82"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
         <source>Menu only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
         <source>Menu and mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
         <source>Menu and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="87"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="88"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93"/>
         <source>Locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -2006,101 +2011,103 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="118"/>
         <source>Import cropping:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="120"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="122"/>
         <source>Import Cropping
 
-Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.</source>
+Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
+
+This setting only has an effect when Engauge has been built with support for pdf files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="132"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="135"/>
         <source>Import PDF resolution (dots per inch):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="139"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="151"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154"/>
         <source>Maximum grid lines:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="159"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="166"/>
         <source>Highlight opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172"/>
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
         <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="180"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="183"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="186"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189"/>
         <source>Include title bar path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="191"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="199"/>
         <source>Allow small dialogs:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="201"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="204"/>
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209"/>
         <source>Allow drag and drop export:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="214"/>
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4004,17 +4011,17 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4692"/>
+        <location filename="../src/main/MainWindow.cpp" line="4693"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4693"/>
+        <location filename="../src/main/MainWindow.cpp" line="4694"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4821"/>
+        <location filename="../src/main/MainWindow.cpp" line="4822"/>
         <source>Engauge Digitizer %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4669,6 +4676,21 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="20"/>
+        <source>Coordinates (pixels):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="21"/>
+        <source>Coordinates (graph):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="22"/>
+        <source>Resolution (graph):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="11"/>
         <source>16:1 farther</source>
         <translation type="unfinished"></translation>
@@ -4836,21 +4858,6 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/util/Xml.cpp" line="54"/>
         <source>Error reading xml</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="20"/>
-        <source>Coordinates (pixels):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="21"/>
-        <source>Coordinates (graph):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="22"/>
-        <source>Resolution (graph):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
