@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $LOG4CPP_HOME != *"null"* ]]; then
+    echo "Releases require log4cpp_null rather than log4cpp. Stopping"
+    exit
+fi
+
 export FROMQCH="$HOME/engauge-digitizer/bin/documentation/engauge.qch"
 export FROMQHC="$HOME/engauge-digitizer/bin/documentation/engauge.qhc"
 export FROMICO="$HOME/engauge-digitizer/src/img/digitizer.ico"

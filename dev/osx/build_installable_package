@@ -37,6 +37,11 @@ if [ -z "$exe" ]; then
     exit
 fi
 
+if [[ $LOG4CPP_HOME != *"null"* ]]; then
+    echo "Releases require log4cpp_null rather than log4cpp. Stopping"
+    exit
+fi
+
 # Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
 # engauge.log file, which would other break the sandbox
 sudo rm Engauge\ Digitizer.dmg

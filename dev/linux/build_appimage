@@ -20,6 +20,11 @@ set -e
 set -x
 
 # Sanity checks
+if [[ $LOG4CPP_HOME != *"null"* ]]; then
+    echo "Releases require log4cpp_null rather than log4cpp. Stopping"
+    exit
+fi
+
 if [[ -z "$QTDIR" || $QTDIR == *"qt-3"* || $QTDIR == *"qt-4"* ]] ; then
     echo "Environment variable QTDIR must point to a qt5 installation"
     exit 1
