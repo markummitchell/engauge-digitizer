@@ -718,7 +718,7 @@ macx-* {
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtPrintSupport.framework/Versions/5/Headers \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtWidgets.framework/Versions/5/Headers \
                  /usr/local/Cellar/qt5/5.5.1_2/lib/QtXml.framework/Versions/5/Headers
-  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation -lfftw3 -llog4cpp
+  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -framework CoreFoundation
 } else {
   CONFIG += qt warn_on thread
   TEMPLATE = app
@@ -730,16 +730,6 @@ win32-* {
   CONFIG += windows
 }
 
-win32-msvc* {
-  QMAKE_CXXFLAGS += -EHsc /F 32000000
-  LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib -lfftw3 -llog4cpp
-} else {
-  win32-g++* {
-    LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib -lfftw3 -llog4cpp
-    QMAKE_LFLAGS += -Wl,--stack,32000000
-  }
-}
-
 linux-* {
   QT += network
   DEFINES += "NETWORKING"
@@ -749,7 +739,18 @@ linux-* {
              src/Network/NetworkClient.cpp
   INCLUDEPATH += $$(FFTW_HOME)/include \
                  $$(LOG4CPP_HOME)/include
-  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib -lfftw3 -llog4cpp
+  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
+}
+  
+win32-msvc* {
+  QMAKE_CXXFLAGS += -EHsc /F 32000000
+  LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+} else {
+  win32-g++* {
+    LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
+    QMAKE_LFLAGS += -Wl,--stack,32000000
+  }
+  LIBS += -lfftw3 -llog4cpp
 }
 
 INCLUDEPATH += src \
