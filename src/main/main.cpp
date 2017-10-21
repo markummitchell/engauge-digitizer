@@ -98,6 +98,7 @@ bool engaugeLogFilenameAttempt (const QString &path,
   if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
     // Success
     file.close();
+    file.remove(); // Cleanup
     success = true;
   }
 
