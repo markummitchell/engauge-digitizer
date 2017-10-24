@@ -39,7 +39,7 @@ const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
 const QString DASH_RESET ("-" + CMD_RESET);
 const QString DASH_STYLES ("-" + CMD_STYLES);
-const QString ENGAUGE_LOG_FILE ("engauge.log");
+const QString ENGAUGE_LOG_FILE (".engauge.log");
 
 // Prototypes
 bool checkFileExists (const QString &file);
