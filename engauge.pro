@@ -6,7 +6,8 @@
 #    To get a 'debug' build, add 'CONFIG=debug' to the qmake command line:
 #        qmake CONFIG=debug
 # 3) Add 'jpeg2000' to the qmake command line to include support for JPEG2000 input files. Requires:
-#        1) previous installation of OpenJPEG development package
+#        1) previous installation of OpenJPEG development package. According to Debian Security
+#           Advisory DSA-4013-1 the version should be newer than 2.1.2-1.1.
 #        2) OPENJPEG_INCLUDE environment variable pointing to directory with openjpeg.h
 #        3) OPENJPEG_LIB environment variable pointing to directory with libopenjp2.so
 #    Sample command lines:
