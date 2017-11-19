@@ -168,11 +168,15 @@ void Transformation::coordTextForStatusBar (QPointF cursorScreen,
                                             QString &coordsScreen,
                                             QString &coordsGraph,
                                             QString &resolutionsGraph,
-                                            const QString &needMoreText)
+                                            bool usingScaleBar)
 {
   const int UNCONSTRAINED_FIELD_WIDTH = 0;
   const double X_DELTA_PIXELS = 1.0, Y_DELTA_PIXELS = 1.0;
   const char FORMAT = 'g';
+
+  QString needMoreText = (usingScaleBar ?
+                            QObject::tr ("Need scale bar") :
+                            QObject::tr ("Need more axis points"));
 
   if (cursorScreen.x() < 0 ||
       cursorScreen.y() < 0) {

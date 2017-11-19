@@ -372,6 +372,7 @@ void DigitizeStateSelect::handleMouseRelease (CmdMediator *cmdMediator,
     // Selection probably changed so update the MainWindow controls (especially Cut)
     context().mainWindow().updateAfterMouseRelease();
 
+    showCoordinatesIfSinglePointIsSelected ();
   }
 }
 
@@ -490,6 +491,30 @@ void DigitizeStateSelect::setHoverHighlighting(const MainWindowModel &modelMainW
     QGraphicsItem *item = *itr;
     if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
        item->setOpacity (modelMainWindow.highlightOpacity());
+    }
+  }
+}
+
+void DigitizeStateSelect::showCoordinatesIfSinglePointIsSelected ()
+{
+  // See if there is a single point selected
+  QList<QGraphicsItem*> items = context().mainWindow().scene().selectedItems();
+  if (items.size () == 1) {
+
+    // There is a single item selected but we must see if it is a point
+    QGraphicsItem *item = * (items.begin ());
+
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
+
+      // Show the coordinates of the point in the status bar
+      QString coordsScreen, coordsGraph, resolutionGraph;
+      context().mainWindow().transformation().coordTextForStatusBar (item->pos(),
+                                              coordsScreen,
+                                              coordsGraph,
+                                              resolutionGraph,
+                                              context().mainWindow().modeMap());
+
+      context().mainWindow().showTemporaryMessage(coordsGraph);
     }
   }
 }

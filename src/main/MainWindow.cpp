@@ -3679,17 +3679,13 @@ void MainWindow::slotMouseMove (QPointF pos)
   // Ignore mouse moves before Document is loaded
   if (m_cmdMediator != 0) {
 
-    QString needMoreText = (modeMap () ?
-                              QObject::tr ("Need scale bar") :
-                              QObject::tr ("Need more axis points"));
-
     // Get status bar coordinates
     QString coordsScreen, coordsGraph, resolutionGraph;
     m_transformation.coordTextForStatusBar (pos,
                                             coordsScreen,
                                             coordsGraph,
                                             resolutionGraph,
-                                            needMoreText);
+                                            modeMap ());
 
     // Update status bar coordinates
     m_statusBar->setCoordinates (coordsScreen,

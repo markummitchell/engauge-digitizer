@@ -135,6 +135,9 @@ public:
   /// Get method for main window model
   MainWindowModel modelMainWindow () const;
 
+  /// True if document scale is set using a scale bar, otherwise using axis points
+  bool modeMap () const;
+
   /// Intercept resize event so graphics scene can be appropriately resized when in Fill mode.
   void resizeEvent (QResizeEvent *event);
 
@@ -397,7 +400,6 @@ private:
                                                  const ExportToFile &exportStrategy,
                                                  const QString &selectedNameFilter) const;
   bool modeGraph () const; // True if document is loaded and it has all graphs
-  bool modeMap () const; // True of document is loaded and it has all maps
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   bool saveDocumentFile(const QString &fileName);
   QString saveErrorReportFileAndExitXml (const char *comment,

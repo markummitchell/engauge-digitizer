@@ -76,7 +76,7 @@ public:
                               QString &coordsScreen,
                               QString &coordsGraph,
                               QString &resolutionGraph,
-                              const QString &needMoreText);
+                              bool usingScaleBar);
 
   /// Convert cartesian scaling from log to linear. Calling code is responsible for determining if this is necessary
   static double logToLinearCartesian (double xy);

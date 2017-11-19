@@ -64,6 +64,7 @@ private:
   double scaleBarLength (CmdMediator *cmdMediator) const;
   QString scaleBarPointIdentifier (CmdMediator *cmdMediator) const;
   void setHoverHighlighting(const MainWindowModel &modelMainWindow);
+  void showCoordinatesIfSinglePointIsSelected ();
   double zoomedToUnzoomedScreenX () const;
   double zoomedToUnzoomedScreenY () const;
 
