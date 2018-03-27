@@ -27,8 +27,8 @@ before_install:
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;b
    elif [ `uname` = "Darwin" ]; then
      brew update;
-     brew install homebrew-core/qt@5.5 fftw log4cpp;
-     export QT5BREWHOME=`brew --prefix homebrew-core/qt@5.5`;
+     brew install homebrew/core/qt@5.5 fftw log4cpp;
+     export QT5BREWHOME=`brew --prefix homebrew/core/qt@5.5`;
    fi
 
 script:
