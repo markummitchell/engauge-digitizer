@@ -747,6 +747,7 @@ win32-msvc* {
   QMAKE_CXXFLAGS += -EHsc /F 32000000
   contains(QT_ARCH,i386) {
     LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+    QMAKE_LFLAGS += /MACHINE:i386
   } else {
     LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib 
   }
