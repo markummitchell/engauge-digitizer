@@ -2,13 +2,14 @@
 Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bit)
 
 1. Install Visual Studio 2015
-2. >set PBBUILD=<root>\engauge-digitizer\dev\windows\poppler-64bit-build
-3. >set PBLIBS=<root>\engauge-digitizer\dev\windows\poppler-64bit-libs
-4. Download and install nasm=-2.14rc0-installer-x64.exe
+2. Define the critical environment variables using these lines after replacing <root>:
+   >set PBBUILD=<root>\engauge-digitizer\dev\windows\poppler-64bit-build
+   >set PBLIBS=<root>\engauge-digitizer\dev\windows\poppler-64bit-libs
+3. Download and install nasm=-2.14rc0-installer-x64.exe
    a. Add directory containing nasm.exe to PATH
-5. Install the yasm assembler into Visual Studio 2015 according to steps at 
+4. Install the yasm assembler into Visual Studio 2015 according to steps at 
    https://www.tortall.net/projects/yasm/manual/html/vsyasm.html 
-6. Extract the following into %PBBUILD% (with version numbers recommended by 
+5. Extract the following into %PBBUILD% (with version numbers recommended by 
    http://www.linuxfromscratch.org/blfs/view/cvs/general/poppler.html):
    a. Cmake-3.8.0-win64-x64.msi (creates solution files for visual studio)
    b. Fontconfig-master.zip (from github/ShiftMediaProject/fontconfig which has a Windows 
@@ -21,10 +22,10 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    h. Openjpeg-2.3.0.tar.gz (for poppler)
    i. Poppler-0.62.0.tar.xz
    j. Zlib-1.2.8.tar.gz (for libpng)
-7. For cmake
+6. For cmake
    a. Run the cmake-3.8.0-win64-x64.msi
    b. Put cmake.exe into PATH in Control Panel / System / Advanced Settings / Environment Variables
-8. For openjpeg,
+7. For openjpeg,
    a. start Qt 64 bit window for VS 2015
    b. >cd %PBBUILD%/openjpeg-0.62.0
    c. >mkdir build
@@ -37,7 +38,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    j. Verify other dropdown at top says x64
    k. Select "ALL_BUILD" in Solution Explorer window
    l. Build / Build Solution (creates files in openjpeg-0.62.0/build/bin/Release)
-9. For zlib
+8. For zlib
    a. start Qt 64 bit window for VS 2015
    b. >cd %PBBUILD%/zlib-1.2.8
    c. >mkdir build
@@ -50,7 +51,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    j. Verify other dropdown at top says x64
    k. Select zlib in Solution Explorer window
    l. Build / Build Solution (creates files in zlib-1.2.8/build/Release)
-10. For libpng
+9. For libpng
    a. Start "Visual Studio 2015"
    b. File / Open / Project Solution
    c. <PBBUILD>/libpng-1.6.34/projects/vstudio/vstudio.sln
@@ -127,7 +128,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
             problem, especially if the linking issue involves unexpected underscores before the function
             names supplied by the zlib package, then one of the two libraries was mistakenly built
             for 32 bits instead of 64 bits - so repeat the previous steps making sure to pick 64 bits.
-11. For libjpeg-turbo
+10. For libjpeg-turbo
    a. start Qt 64 bit window for VS 2015
    b. >cd %PBBUILD%/libjpeg-turbo-1.5.3
    c. Edit simd/CMakeLists.txt
@@ -149,7 +150,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    q. Select "Solution / ALL_BUILD" in Solution Explorer window
    r. Build / Build Solution (creates files in libjpeg-turbo-1.5.3/build/Release and 
                               libjpeg-turbo-1.5.3/build/sharedlib/Release)
-12. For freetype
+11. For freetype
    a. Start "Visual Studio 2015"
    b. File / Open / ProjectSolution
    c. Freetype-2.9 / builds / windows / vc2010
@@ -160,7 +161,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    h. Build (creates freetype-2.9 / objs /win32 / vc2010 / Release / freetype.lib and freetype.dll)
    i. >cd objs / x64 / vc2010 / Release
    j. >copy freetype.lib libfreetype.lib (expected by fontconfig)
-13. For libiconv-win-build
+12. For libiconv-win-build
    a. Start "Visual Studio 2015"
    b. File / Open / ProjectSolution
    c. Libiconv-win-build-master / build-VS2015 / libiconv.sln
@@ -172,7 +173,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
       build-VS2015 / Release / libiconv.lib)
    h. >cd build-VS2015 / x64 / Release
    i. >copy libiconv.lib iconv.lib (filename expected by libxml2)
-14. For libxml2 we use nmake, since the Visual Studio project file is broken. Following 
+13. For libxml2 we use nmake, since the Visual Studio project file is broken. Following 
     http://marlowa.blogspot.com/2013/07/how-to-build-libxml2-on-windows-using.html
    a. start Qt 64 bit window for VS 2015
    b. set PATH=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC:%PATH%
@@ -187,7 +188,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    i. Save file and exit editor
    j. >vcvarsall.bat
    k. >nmake (this creates win32/bin.msvc/libxml2.dll and libxml2.lib)
-15. For fontconfig (using ShiftMediaSolution release with its support for Windows)
+14. For fontconfig (using ShiftMediaSolution release with its support for Windows)
    a. Start "Visual Studio 2015"
    b. File / Open / ProjectSolution 
    c. Fontconfig-master / SMP / libfontconfig.sln
@@ -210,7 +211,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
        iii. add <PBBUILD>/freetype-2.9/objs/Win32/Release
         iv. add <PBBUILD>/libxml2-2.9.7/win32/bin.msvc
    k. Build (creates SMP/msvc/lib/x64/libfontconfig.lib)
-16. For poppler
+15. For poppler
    a. start Qt 64 bit window for VS 2015
    b. >cd %PBBUILD%/poppler-0.62.0
    c. edit CMakeLists.txt and add the following two ines after the 'find_package (LIBOPENJPEG2)' line.
@@ -226,25 +227,26 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
          poppler/UnicodeMap.cc
    e. >mkdir build
    f. >cd build
-   g. >set FREETYPE_INCLUDE_DIRS="%PBBUILD%\freetype-2.9\include; %PBBUILD%\freetype-2.9\include\freetype"
-   h. >set FREETYPE_LIBRARY="%PBBUILD%\freetype-2.9\objs\x64\Release\freetype.lib"
-   i. >set ICONV_LIBRARY="%PBBUILD%\libiconv-win-build-master\build-VS2015\Release\libiconv.lib"
-   j. >set JPEG_INCLUDE_DIR="%PBBUILD%\libjpeg-turbo-1.5.3"
-   k. >set JPEG_LIBRARY="%PBBUILD%\libjpeg-turbo-1.5.3\build\Release\jpeg-static.lib"
-   l. >set LIBOPENJPEG2_INCLUDE_DIR="%PBBUILD%\openjpeg-2.3.0\src\lib\openjp2"
-   m. >set LIBOPENJPEG2_LIBRARY="%PBBUILD%\openjpeg-2.3.0\build\bin\Release\openjp2.lib"
-   n. >set PNG_INCLUDE_DIR="%PBBUILD%\libpng-1.6.34"
-   o. >set PNG_LIBRARY="%PBBUILD%\libpng-1.6.34\projects\vstudio\x64\Release\libpng16.lib"
-   p. >set ZLIB_INCLUDE_DIR="%PBBUILD%\zlib-1.2.8"
-   q. >set ZLIB_LIBRARY="%PBBUILD%\zlib-1.2.8\build\Release\zlib.lib"
-   r. >cmake -G "Visual Studio 14 2015 Win64" .. -DFREETYPE_INCLUDE_DIRS=%FREETYPE_INCLUDE_DIRS% -DFREETYPE_LIBRARY=%FREETYPE_LIBRARY% -DICONV_LIBRARIES=%ICONV_LIBRARY% -DJPEG_INCLUDE_DIR=%JPEG_INCLUDE_DIR% -DJPEG_LIBRARY=%JPEG_LIBRARY% -DLIBOPENJPEG2_INCLUDE_DIRS=%LIBOPENJPEG2_INCLUDE_DIR% -DLIBOPENJPEG2_LIBRARIES=%LIBOPENJPEG2_LIBRARY% -DPNG_PNG_INCLUDE_DIR=%PNG_INCLUDE_DIR% -DPNG_LIBRARY=%PNG_LIBRARY% -DZLIB_INCLUDE_DIR=%ZLIB_INCLUDE_DIR% -DZLIB_LIBRARY=%ZLIB_LIBRARY%
+   g. following lines define the environment variables:
+      >set FREETYPE_INCLUDE_DIRS="%PBBUILD%\freetype-2.9\include; %PBBUILD%\freetype-2.9\include\freetype"
+      >set FREETYPE_LIBRARY="%PBBUILD%\freetype-2.9\objs\x64\Release\freetype.lib"
+      >set ICONV_LIBRARY="%PBBUILD%\libiconv-win-build-master\build-VS2015\Release\libiconv.lib"
+      >set JPEG_INCLUDE_DIR="%PBBUILD%\libjpeg-turbo-1.5.3"
+      >set JPEG_LIBRARY="%PBBUILD%\libjpeg-turbo-1.5.3\build\Release\jpeg-static.lib"
+      >set LIBOPENJPEG2_INCLUDE_DIR="%PBBUILD%\openjpeg-2.3.0\src\lib\openjp2"
+      >set LIBOPENJPEG2_LIBRARY="%PBBUILD%\openjpeg-2.3.0\build\bin\Release\openjp2.lib"
+      >set PNG_INCLUDE_DIR="%PBBUILD%\libpng-1.6.34"
+      >set PNG_LIBRARY="%PBBUILD%\libpng-1.6.34\projects\vstudio\x64\Release\libpng16.lib"
+      >set ZLIB_INCLUDE_DIR="%PBBUILD%\zlib-1.2.8"
+      >set ZLIB_LIBRARY="%PBBUILD%\zlib-1.2.8\build\Release\zlib.lib"
+   h. >cmake -G "Visual Studio 14 2015 Win64" .. -DFREETYPE_INCLUDE_DIRS=%FREETYPE_INCLUDE_DIRS% -DFREETYPE_LIBRARY=%FREETYPE_LIBRARY% -DICONV_LIBRARIES=%ICONV_LIBRARY% -DJPEG_INCLUDE_DIR=%JPEG_INCLUDE_DIR% -DJPEG_LIBRARY=%JPEG_LIBRARY% -DLIBOPENJPEG2_INCLUDE_DIRS=%LIBOPENJPEG2_INCLUDE_DIR% -DLIBOPENJPEG2_LIBRARIES=%LIBOPENJPEG2_LIBRARY% -DPNG_PNG_INCLUDE_DIR=%PNG_INCLUDE_DIR% -DPNG_LIBRARY=%PNG_LIBRARY% -DZLIB_INCLUDE_DIR=%ZLIB_INCLUDE_DIR% -DZLIB_LIBRARY=%ZLIB_LIBRARY%
       (note there are several unexpected spellings!)
-   s. Start "Visual Studio 2015"
-   t. File / Open / ProjectSolution 
-   u. poppler-0.62.0\build\poppler.sln
-   v. Change dropdown at top from Debug to Release
-   w. Verify the other dropdown at top says x64
-   x. Right click on poppler in Solution Explorer window
+   i. Start "Visual Studio 2015"
+   j. File / Open / ProjectSolution 
+   k. poppler-0.62.0\build\poppler.sln
+   l. Change dropdown at top from Debug to Release
+   m. Verify the other dropdown at top says x64
+   n. Right click on poppler in Solution Explorer window
          i. Properties
         ii. Select "VC++ Directories"
        iii. Select "Include Directories"
@@ -258,7 +260,7 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
         xi. Add <PBBUILD>\zlib-1.2.8\
        xii. Add <PBBUILD>\zlib-1.2.8\build
       xiii. Build (this creates build\Release\poppler.lib)
-   y. Right click on poppler-qt5 in Solution Explorer window
+   o. Right click on poppler-qt5 in Solution Explorer window
          i. Properties
         ii. Select "VC++ Directories"
        iii. Select "Include Directories"
@@ -272,12 +274,20 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
         xi. Add <PBBUILD>\zlib-1.2.8\
        xii. Add <PBBUILD>\zlib-1.2.8\build
       xiii. Build (this creates build\qt5/src/Release\poppler-qt5.lib)
-17. Copy *.lib files to ../poppler-64bit-libs/lib
-18. To build with poppler:
-   a. set FFTW_HOME=%PBBUILD%\..\unzip_fftw\lib64
-   b. set LOG4CPP_HOME=%PBBUILD%\..\unzip_log4cpp\lib
-   b. set POPPLER_INCLUDE=%PBLIBS%\include
-   c. set POPPLER_LIB=%PBLIBS%\lib
-   c. vcvarsall amd64
-   d. qmake CONFIG+=pdf engauge.pro
-   e. nmake
+16. Copy built files to ../poppler-64bit-libs/lib
+    a. copy/Y %PBBUILD%\freetype-2.9\objs\x64\Release\freetype.dll           %PBLIBS%\lib
+    b. copy/Y %PBBUILD%\openjpeg-2.3.0\build\bin\Release\openjp2.dll         %PBLIBS%\lib
+    c. copy/Y %PBBUILD%\poppler-0.6.20\build\qt5\src\Release\poppler-qt5.lib %PBLIBS%\lib
+    d. copy/Y %PBBUILD%\poppler-0.6.20\build\qt5\src\Release\poppler-qt5.dll %PBLIBS%\lib
+    e. copy/Y %PBBUILD%\poppler-0.6.20\build\Release\poppler.lib             %PBLIBS%\lib
+    f. copy/Y %PBBUILD%\zlib-1.2.8\build\Release\zlib.dll                    %PBLIBS%\lib
+17. To build with poppler, make sure PBBUILD and PBLIB are defined then use the following lines:
+    >set FFTW_HOME=%PBBUILD%\..\unzip_fftw\lib64
+    >set LOG4CPP_HOME=%PBBUILD%\..\unzip_log4cpp\lib
+    >set POPPLER_INCLUDE=%PBLIBS%\include
+    >set POPPLER_LIB=%PBLIBS%\lib
+    >vcvarsall amd64
+    >cd <root>\engauge-digitizer         (after replacing <root>)
+    >qmake CONFIG+=pdf engauge.pro
+    >nmake
+    >copy/Y %PBLIBS%\lib\*.dll bin
