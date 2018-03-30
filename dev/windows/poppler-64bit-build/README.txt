@@ -67,40 +67,66 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    e. Build zlib:
          i. Select "zlib" in Solution Explorer
         ii. Right click on "zlib" and select "Properties"
-       iii. Select "VC++ Directories"
-        iv. Select "Include Directories"
-         v. Select "arrow down" button to the right of "Include Directories"
-        vi. Select "<Edit>"
-       vii. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
-      viii. Select "..." to select a directory
-        ix. Select "<PBBUILD>/zlib-1.2.8/build"
-         x. Select "Select Folder" button
-        xi. Select "Ok" button
-       xii. Select "Ok" button
-      xiii. Right click on "zlib" in Solution Explorer and pick "Build". This builds zlib.lib
+       iii. Platform dropdown probably says Win32 but we want x64
+            a. Click on Configuration Manager button
+            b. Click on cell in Platform column and zlib row. This makes a previously invisible
+               dropdown button appear
+            c. Click on the dropdown button in Platform column and zlib row
+            d. Select x64 for New Platform
+            e. Unselect the "Create new solution platforms". This step is required if x64 has
+               been selected for any other rows in the Configuration Manager table
+            f. Ok
+            g. Close
+        iv. Add to the Include Directories
+            a. Select "VC++ Directories"
+            b. Select "Include Directories"
+            c. Select "arrow down" button to the right of "Include Directories"
+            d. Select "<Edit>"
+            e. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
+            f. Select "..." to select a directory
+            g. Select "<PBBUILD>/zlib-1.2.8/build"
+            h. Select "Select Folder" button
+            i. Select "Ok" button
+            j. Select "Ok" button
+         v. Right click on "zlib" in Solution Explorer and pick "Build". This builds zlib.lib
    f. Build libpng:
          i. Select "libpng" in Solution Explorer
         ii. Right click on "libpng" and select "Properties"
-       iii. Select "VC++ Directories"
-        iv. Select "Include Directories"
-         v. Select "arrow down" button to the right of "Include Directories"
-        vi. Select "<Edit>"
-       vii. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
-      viii. Select "..." to select a directory
-        ix. Select "<PBBUILD>/zlib-1.2.8/build"
-         x. Select "Select Folder" button
-        xi. Select "Ok" button
-       xii. Select "Ok" button
-      xiii. Select "Library Directories"
-        ix. Select "arrow down" button to the right of "Library Directories"
-         x. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
-        xi. Select "..." to select a directory
-       xii. Select "<PBUILD>/zlib-1.2.8/projects/vstudio/x64/Release"
-      xiii. Select "Select Folder" button
-       xiv. Select "Ok" button
-        xv. Select "Ok" button
+       iii. Platform dropdown probably says Win32 but we want x64
+            a. Click on Configuration Manager button
+            b. Click on cell in Platform column and libpng row. This makes a previously invisible
+               dropdown button appear
+            c. Click on the dropdown button in Platform column and libpng row
+            d. Select x64 for New Platform
+            e. Unselect the "Create new solution platforms". This step is required if x64 has
+               been selected for any other rows in the Configuration Manager table
+            f. Ok
+            g. Close
+        iv. Add to the Include Directories
+            a. Select "VC++ Directories"
+            b. Select "Include Directories"
+            c. Select "arrow down" button to the right of "Include Directories"
+            d. Select "<Edit>"
+            e. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
+            f. Select "..." to select a directory
+            g. Select "<PBBUILD>/zlib-1.2.8/build"
+            h. Select "Select Folder" button
+            i. Select "Ok" button
+            j. Select "Ok" button
+         v. Add to the Library Directories
+            a. Select "Library Directories"
+            b. Select "arrow down" button to the right of "Library Directories"
+            c. Select "New Line" button which looks like a yellow folder with a yellow asterisk on it
+            d. Select "..." to select a directory
+            e. Select "<PBUILD>/zlib-1.2.8/projects/vstudio/x64/Release"
+            f. Select "Select Folder" button
+            g. Select "Ok" button
+            h. Select "Ok" button
        xvi. Right click on "libpng" in Solution Explorer and pick "Build". This builds
-            libpng-1.6.34/projects/vstudio/Release/libpng16.lib and zlib.lib
+            libpng-1.6.34/projects/vstudio/x64/Release/libpng16.lib and zlib.lib. If there is a linking
+            problem, especially if the linking issue involves unexpected underscores before the function
+            names supplied by the zlib package, then one of the two libraries was mistakenly built
+            for 32 bits instead of 64 bits - so repeat the previous steps making sure to pick 64 bits.
 11. For libjpeg-turbo
    a. start Qt 64 bit window for VS 2015
    b. >cd %PBBUILD%/libjpeg-turbo-1.5.3
@@ -208,8 +234,8 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
    l. >set LIBOPENJPEG2_INCLUDE_DIR="%PBBUILD%\openjpeg-2.3.0\src\lib\openjp2"
    m. >set LIBOPENJPEG2_LIBRARY="%PBBUILD%\openjpeg-2.3.0\build\bin\Release\openjp2.lib"
    n. >set PNG_INCLUDE_DIR="%PBBUILD%\libpng-1.6.34"
-   o. >set PNG_LIBRARY="%PBBUILD%\libpng-1.6.34\projects\vstudio\Release\libpng16.lib"
-   p. >set ZLIB_INCLUDE_DIR="%PBBUILD%"
+   o. >set PNG_LIBRARY="%PBBUILD%\libpng-1.6.34\projects\vstudio\x64\Release\libpng16.lib"
+   p. >set ZLIB_INCLUDE_DIR="%PBBUILD%\zlib-1.2.8"
    q. >set ZLIB_LIBRARY="%PBBUILD%\zlib-1.2.8\build\Release\zlib.lib"
    r. >cmake -G "Visual Studio 14 2015 Win64" .. -DFREETYPE_INCLUDE_DIRS=%FREETYPE_INCLUDE_DIRS% -DFREETYPE_LIBRARY=%FREETYPE_LIBRARY% -DICONV_LIBRARIES=%ICONV_LIBRARY% -DJPEG_INCLUDE_DIR=%JPEG_INCLUDE_DIR% -DJPEG_LIBRARY=%JPEG_LIBRARY% -DLIBOPENJPEG2_INCLUDE_DIRS=%LIBOPENJPEG2_INCLUDE_DIR% -DLIBOPENJPEG2_LIBRARIES=%LIBOPENJPEG2_LIBRARY% -DPNG_PNG_INCLUDE_DIR=%PNG_INCLUDE_DIR% -DPNG_LIBRARY=%PNG_LIBRARY% -DZLIB_INCLUDE_DIR=%ZLIB_INCLUDE_DIR% -DZLIB_LIBRARY=%ZLIB_LIBRARY%
       (note there are several unexpected spellings!)
@@ -225,11 +251,13 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
         iv. Select "arrow down" button to the right of "Include Directories"
          v. Select "<Edit>"
         vi. Add <PBBUILD>\freetype-2.9\include
-       vii. Add <PBBUILD>\libjpeg-turbo-1.5.3\build
-      viii. Add <PBBUILD>\openjpeg-2.3.0\build\src\lib\openjp2
-        ix. Add <PBBUILD>\zlib-1.2.8\
-         x. Add <PBBUILD>\zlib-1.2.8\build
-        xi. Build (this creates build\Release\poppler.lib)
+       vii. Add <PBBUILD>\libjpeg-turbo-1.5.3
+      viii. Add <PBBUILD>\libjpeg-turbo-1.5.3\build
+        ix. Add <PBBUILD>\libpng-1.6.34
+         x. Add <PBBUILD>\openjpeg-2.3.0\build\src\lib\openjp2
+        xi. Add <PBBUILD>\zlib-1.2.8\
+       xii. Add <PBBUILD>\zlib-1.2.8\build
+      xiii. Build (this creates build\Release\poppler.lib)
    y. Right click on poppler-qt5 in Solution Explorer window
          i. Properties
         ii. Select "VC++ Directories"
@@ -237,17 +265,19 @@ Building the Poppler Library, and the Libraries It Depends On, In Windows (64 Bi
         iv. Select "arrow down" button to the right of "Include Directories"
          v. Select "<Edit>"
         vi. Add <PBBUILD>\freetype-2.9\include
-       vii. Add <PBBUILD>\libjpeg-turbo-1.5.3\build
-      viii. Add <PBBUILD>\openjpeg-2.3.0\build\src\lib\openjp2
-        ix. Add <PBBUILD>\zlib-1.2.8\
-         x. Add <PBBUILD>\zlib-1.2.8\build
-        xi. Build (this creates build\qt5/src/Release\poppler-qt5.lib)
+       vii. Add <PBBUILD>\libjpeg-turbo-1.5.3
+      viii. Add <PBBUILD>\libjpeg-turbo-1.5.3\build
+        ix. Add <PBBUILD>\libpng-1.6.34
+         x. Add <PBBUILD>\openjpeg-2.3.0\build\src\lib\openjp2
+        xi. Add <PBBUILD>\zlib-1.2.8\
+       xii. Add <PBBUILD>\zlib-1.2.8\build
+      xiii. Build (this creates build\qt5/src/Release\poppler-qt5.lib)
 17. Copy *.lib files to ../poppler-64bit-libs/lib
 18. To build with poppler:
    a. set FFTW_HOME=%PBBUILD%\..\unzip_fftw\lib64
    b. set LOG4CPP_HOME=%PBBUILD%\..\unzip_log4cpp\lib
    b. set POPPLER_INCLUDE=%PBLIBS%\include
-   c. set POPPLER_LIB=%PBLIBS%\libs\lib
+   c. set POPPLER_LIB=%PBLIBS%\lib
    c. vcvarsall amd64
    d. qmake CONFIG+=pdf engauge.pro
    e. nmake

@@ -745,7 +745,11 @@ linux-* {
   
 win32-msvc* {
   QMAKE_CXXFLAGS += -EHsc /F 32000000
-  LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+  contains(QT_ARCH,i386) {
+    LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+  } else {
+    LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib 
+  }
 } else {
   win32-g++* {
     LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
