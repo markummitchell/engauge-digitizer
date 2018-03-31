@@ -48,10 +48,18 @@ call vcvarsall.bat %ARCH%
 set QTDIRS=bearer iconengines imageformats platforms printsupport sqldrivers
 set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
-rem Next line is where pdf can be added for pdf support
-set ENGAUGE_CONFIG=
-set QTLIBEXT='.lib'
 set SCRIPTDIR=%cd%
+rem Directory containing engauge.pro
+set APPVEYOR_BUILD_FOLDER=%SCRIPTDIR%\..\..
+if not exist "%APPVEYOR_BUILD_FOLDER%" mkdir "%APPVEYOR_BUILD_FOLDER%"
+cd "%APPVEYOR_BUILD_FOLDER%"
+
+rem Next line is where pdf can be added for pdf support
+set ENGAUGE_CONFIG=pdf
+set POPPLER_INCLUDE=%APPVEYOR_BUILD_FOLDER%\dev\windows\poppler-%BITS%bit-libs\include
+set POPPLER_LIB=%APPVEYOR_BUILD_FOLDER%\dev\windows\poppler-%BITS%bit-libs\lib
+
+set QTLIBEXT='.lib'
 
 rem Double-double quotes are needed in next line if the directory has a space
 set RESULTDIR=%SCRIPTDIR%\Engauge Digitizer
@@ -59,12 +67,6 @@ set RESULTDIR=%SCRIPTDIR%\Engauge Digitizer
 rem Next step removes stale files like engauge.log from the release
 if exist "%RESULTDIR%" del /Q /F "%RESULTDIR%" 2>nul
 if not exist "%RESULTDIR%" mkdir "%RESULTDIR%"
-
-rem Directory containing engauge.pro
-set APPVEYOR_BUILD_FOLDER=%SCRIPTDIR%\..\..
-
-if not exist "%APPVEYOR_BUILD_FOLDER%" mkdir "%APPVEYOR_BUILD_FOLDER%"
-cd "%APPVEYOR_BUILD_FOLDER%"
 
 set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_fftw
 set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_log4cpp
@@ -154,12 +156,15 @@ cd
 echo ENGAUGE_CONFIG: %ENGAUGE_CONFIG%
 echo FFTW_HOME: %FFTW_HOME%
 echo LOG4CPP_HOME: %LOG4CPP_HOME%
-echo SYSTEM32_HOME: %SYSTEM32_HOME%
+echo POPPLER_INCLUDE: %POPPLER_INCLUDE%
+echo POPPLER_LIB: %POPPLER_LIB%
 echo QTDIRS: %QTDIRS%
 echo QTLIBS: %QTLIBS%
 echo RESULTDIR: %RESULTDIR%
+echo SYSTEM32_HOME: %SYSTEM32_HOME%
 echo *************************************
 set /p VERNUM="Press Enter to continue..."
+echo Continuing...
 
 lrelease engauge.pro
 if exist Makefile del /S Makefile
@@ -203,9 +208,14 @@ move engauge.qch "%RESULTDIR%"\documentation
 move engauge.qhc "%RESULTDIR%"\documentation
 cd ..
 
+copy "%POPPLER_LIB%\freetype.dll"     "%RESULTDIR%"
+copy "%POPPLER_LIB%\openjp2.dll"      "%RESULTDIR%"
+copy "%POPPLER_LIB%\poppler.dll"      "%RESULTDIR%"
+copy "%POPPLER_LIB%\poppler-qt5.dll"  "%RESULTDIR%"
+copy "%POPPLER_LIB%\zlib.dll"         "%RESULTDIR%"
 copy "%FFTW_HOME%\lib\libfftw3-3.dll" "%RESULTDIR%"
 copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
-copy "%SYSTEM32_HOME%\*" "%RESULTDIR%"
+copy "%SYSTEM32_HOME%\*"              "%RESULTDIR%"
 
 copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
 
