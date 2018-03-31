@@ -95,7 +95,7 @@ double ExportFileAbstractBase::linearlyInterpolateYRadiusFromTwoPoints (double x
 {
     // X coordinate scaling is linear or log
     double s;
-    if (modelCoords.coordScaleXTheta() == CoordScale::COORD_SCALE_LINEAR) {
+    if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
         s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
     } else {
         s = (qLn (xThetaValue) - qLn (posGraphBefore.x())) / (qLn (posGraph.x()) - qLn (posGraphBefore.x()));
@@ -103,7 +103,7 @@ double ExportFileAbstractBase::linearlyInterpolateYRadiusFromTwoPoints (double x
 
     // Y coordinate scaling is linear or log
     double yRadius;
-    if (modelCoords.coordScaleYRadius() == CoordScale::COORD_SCALE_LINEAR) {
+    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
         yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraph.y();
     } else {
         yRadius = qExp ((1.0 - s) * qLn (posGraphBefore.y()) + s * qLn (posGraph.y()));
