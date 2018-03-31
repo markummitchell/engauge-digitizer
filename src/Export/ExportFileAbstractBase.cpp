@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CoordScale.h"
 #include "CurveConnectAs.h"
 #include "Document.h"
 #include "DocumentModelCoords.h"
