@@ -11,4 +11,6 @@ engauge-build
 engauge-build.7z
 fftw-3.3.4-dll32
 log4cpp-1.1.1*
-
+unzip_fftw
+unzip_log4cpp
+unzip_system32

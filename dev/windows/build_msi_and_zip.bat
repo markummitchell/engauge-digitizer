@@ -97,12 +97,11 @@ lib /def:libfftw3l-3.def /out:libfftw3l-3.lib
 cd %LOG4CPP_HOME%
 if exist include rmdir include /s /q
 if exist lib rmdir lib /s /q
+7z x ../appveyor/log4cpp_null_build.zip -aoa
 if "%ARCH%" == "x86" (
-  7z x ../appveyor/log4cpp_null-32-64.zip -aoa
-  move lib32 lib
+  xcopy/e lib32\* .
 ) else (
-  7z x ../appveyor/log4cpp_null-32-64.zip -aoa
-  move lib64 lib
+  xcopy/e lib64\* .
 )
 
 cd %SYSTEM32_HOME%
