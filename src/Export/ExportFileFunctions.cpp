@@ -16,6 +16,7 @@
 #include "FormatCoordsUnits.h"
 #include "LinearToLog.h"
 #include "Logger.h"
+#include <qmath.h>
 #include <QTextStream>
 #include <QVector>
 #include "Spline.h"
@@ -218,7 +219,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
   // If point is within the range of the function points then interpolation will be used, otherwise
   // extrapolation will be used
   double yRadius = 0;
-  QPointF posGraphBefore; // Not set until ip=1
+  QPointF posGraphBefore, posScreenBefore; // Not set until ip=1
   bool foundIt = false;
   for (int ip = 0; !foundIt && (ip < points.count()); ip++) {
 
@@ -238,8 +239,10 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
       // Case 1 comments: xThetaValue is between posGraphBefore and posGraph. Note that if posGraph.x()=posGraphBefore.x() then
       // previous iteration of loop would have been used for interpolation, and then the loop was exited. Range of s is 0<s<1
       // Case 2 comments: Range of s is s<0
-      double s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
-      yRadius = (1.0 -s) * posGraphBefore.y() + s * posGraph.y();
+      yRadius = linearlyInterpolateYRadiusFromTwoPoints (xThetaValue,
+                                                         transformation.modelCoords(),
+                                                         posGraphBefore,
+                                                         posGraph);
 
       break;
     }
@@ -261,8 +264,10 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
                                                 posGraphLast);
       transformation.transformScreenToRawGraph (pointBefore.posScreen(),
                                                 posGraphBefore);
-      double s = (xThetaValue - posGraphBefore.x()) / (posGraphLast.x() - posGraphBefore.x());
-      yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraphLast.y();
+      yRadius = linearlyInterpolateYRadiusFromTwoPoints (xThetaValue,
+                                                         transformation.modelCoords(),
+                                                         posGraphBefore,
+                                                         posGraphLast);
 
     } else if (points.count() == 1) {
 

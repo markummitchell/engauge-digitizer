@@ -6,6 +6,7 @@
 
 #include "CurveConnectAs.h"
 #include "Document.h"
+#include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "ExportFileAbstractBase.h"
 #include "Logger.h"
@@ -84,6 +85,30 @@ void ExportFileAbstractBase::insertLineSeparator (bool isFirst,
       str << "\n"; // Single blank line
     }
   }
+}
+
+double ExportFileAbstractBase::linearlyInterpolateYRadiusFromTwoPoints (double xThetaValue,
+                                                                        const DocumentModelCoords &modelCoords,
+                                                                        const QPointF &posGraphBefore,
+                                                                        const QPointF &posGraph) const
+{
+    // X coordinate scaling is linear or log
+    double s;
+    if (modelCoords.coordScaleXTheta() == CoordScale::COORD_SCALE_LINEAR) {
+        s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
+    } else {
+        s = (qLn (xThetaValue) - qLn (posGraphBefore.x())) / (qLn (posGraph.x()) - qLn (posGraphBefore.x()));
+    }
+
+    // Y coordinate scaling is linear or log
+    double yRadius;
+    if (modelCoords.coordScaleYRadius() == CoordScale::COORD_SCALE_LINEAR) {
+        yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraph.y();
+    } else {
+        yRadius = qExp ((1.0 - s) * qLn (posGraphBefore.y()) + s * qLn (posGraph.y()));
+    }
+
+    return yRadius;
 }
 
 QString ExportFileAbstractBase::wrapInDoubleQuotesIfNeeded (const DocumentModelExportFormat &modelExportOverride,

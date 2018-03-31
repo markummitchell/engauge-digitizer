@@ -15,6 +15,7 @@
 #include <vector>
 
 class Document;
+class DocumentModelCoords;
 class DocumentModelExportFormat;
 class QTextStream;
 class SplinePair;
@@ -46,6 +47,14 @@ protected:
   void insertLineSeparator (bool isFirst,
                             ExportHeader exportHeader,
                             QTextStream &str) const;
+
+  /// Interpolate (if xThetaValue is between posGraphBefore.x() and posGraph.x()) or
+  /// extrapolate (if xThetaValue < posGraphBefore.x() or xThetaValue > posGraph.x())
+  /// the given x/theta value using the two specified graph points
+  double linearlyInterpolateYRadiusFromTwoPoints (double xThetaValue,
+                                                  const DocumentModelCoords &modelCoords,
+                                                  const QPointF &posGraphBefore,
+                                                  const QPointF &posGraph) const;
 
   /// RFC 4180 says if values are delimited by a comma AND a value has commas in it (for locale like
   /// English/Switzerland when dealing with numbers) then double quotes are required for the value.
