@@ -11,24 +11,12 @@ environment:
       LOG4CPP_VER: 'lib32'
       RESULTDIR: engauge-build
       VCLIBS: MSVCP140.dll VCRUNTIME140.dll
-    - ENGAUGE_CONFIG: "debug"
-      BUILD_TYPE: X86
-      FFTW_VER: 'fftw-3.3.5-dll32'
-      LOG4CPP_VER: 'lib32'
-      RESULTDIR: engauge-build-debug
-      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
     - ENGAUGE_RELEASE: 1
       BUILD_TYPE: X64
       FFTW_VER: 'fftw-3.3.5-dll64'
       LOG4CPP_VER: 'lib64'
       RESULTDIR: engauge-build-x64
       VCLIBS: MSVCP140.dll VCRUNTIME140.dll
-    - ENGAUGE_CONFIG: "debug"
-      BUILD_TYPE: X64
-      FFTW_VER: 'fftw-3.3.5-dll64'
-      LOG4CPP_VER: 'lib64'
-      RESULTDIR: engauge-build-x64-debug
-      VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
 
 install:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat %BUILD_TYPE%
