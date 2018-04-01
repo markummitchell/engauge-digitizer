@@ -43,5 +43,45 @@
     <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
     <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
   </screenshots>
-	<url type="homepage">http://markummitchell.github.io/engauge-digitizer/</url>
+  <url type="homepage">http://markummitchell.github.io/engauge-digitizer/</url>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <releases>
+    <release date="2017-10-10" version="10.4">
+      <description>
+        <ul>
+	  <li>Show warning message when grid line maximum is exceed (#244)</li>
+	  <li>CSV export files have double quotes on fields with internal commas (#243)</li>
+	  <li>Status bar shows all of text for right-to-left languages (#240)</li>
+	</ul>
+      </description>
+    </release>
+  </releases>
 </component>
