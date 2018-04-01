@@ -2,34 +2,31 @@ environment:
   global:
       QTDIRS: bearer iconengines imageformats platforms printsupport sqldrivers
       QTLIBS: Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
+      LOG4CPP_FILE: 'log4cpp_null_build.zip'
 
   matrix:
     - ENGAUGE_RELEASE: 1
       BUILD_TYPE: X86
       FFTW_VER: 'fftw-3.3.5-dll32'
-      LOG4CPP_VER: 'log4cpp-1.1.2rc5'
-      LOG4CPP_FILE: 'log4cpp-1.1.2rc5.zip'
+      LOG4CPP_VER: 'lib32'
       RESULTDIR: engauge-build
       VCLIBS: MSVCP140.dll VCRUNTIME140.dll
     - ENGAUGE_CONFIG: "debug"
       BUILD_TYPE: X86
       FFTW_VER: 'fftw-3.3.5-dll32'
-      LOG4CPP_VER: 'log4cpp-1.1.2rc5'
-      LOG4CPP_FILE: 'log4cpp-debug-1.1.2rc5.zip'
+      LOG4CPP_VER: 'lib32'
       RESULTDIR: engauge-build-debug
       VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
     - ENGAUGE_RELEASE: 1
       BUILD_TYPE: X64
       FFTW_VER: 'fftw-3.3.5-dll64'
-      LOG4CPP_VER: 'log4cpp-x64-1.1.2rc5'
-      LOG4CPP_FILE: 'log4cpp-x64-1.1.2rc5.zip'
+      LOG4CPP_VER: 'lib64'
       RESULTDIR: engauge-build-x64
       VCLIBS: MSVCP140.dll VCRUNTIME140.dll
     - ENGAUGE_CONFIG: "debug"
       BUILD_TYPE: X64
       FFTW_VER: 'fftw-3.3.5-dll64'
-      LOG4CPP_VER: 'log4cpp-x64-1.1.2rc5'
-      LOG4CPP_FILE: 'log4cpp-x64-debug-1.1.2rc5.zip'
+      LOG4CPP_VER: 'lib64'
       RESULTDIR: engauge-build-x64-debug
       VCLIBS: MSVCP140D.dll VCRUNTIME140D.dll UCRTBASED.dll
 
