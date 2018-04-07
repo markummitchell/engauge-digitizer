@@ -74,24 +74,12 @@
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
   <releases>
-    <release date="2018-04-01" version="10.5">
+    <release date="2018-04-01" version="10.6">
       <description>
         <ul>
-	  <li>Fix crash on export of interpolated/extrapolated log data (#254)</li>
-	  <li>Windows 10 releases (32 and 64 bit) now support import of pdf files (#253)</li>
-	  <li>Log files are disabled in releases (#246)</li>
-	  <li>Support FreeBSD and other builds (#245)</li>
+	  <li>Accomodate build for flathub</li>
 	</ul>
       </description>
     </release>
-    <release date="2017-10-10" version="10.4">
-      <description>
-        <ul>
-	  <li>Show warning message when grid line maximum is exceed (#244)</li>
-	  <li>CSV export files have double quotes on fields with internal commas (#243)</li>
-	  <li>Status bar shows all of text for right-to-left languages (#240)</li>
-	</ul>
-      </description>
-    </release>    
   </releases>
 </component>
