@@ -111,4 +111,4 @@ cd dev/linux
 echo "***Compiling installer"
 cp startup_script.run $STAGINGDIR
 # './' prefix is needed before script so script is found during installation (especially if running sudo)
-makeself engauge/ digit-exe-debian-linux-64-bit-installer-$VERSION_NUMBER_CODE.run "Engauge Digitizer" ./startup_script.run
+makeself engauge/ digit-exe-linux-debian-64-bit-installer-$VERSION_NUMBER_CODE.run "Engauge Digitizer" ./startup_script.run

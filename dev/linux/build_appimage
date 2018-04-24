@@ -129,10 +129,6 @@ cd ..
 
 # Build engauge. Version is displayed
 cd $HOME/$APP/engauge-digitizer
-
-VERSION=$(git rev-parse --short=8 HEAD)
-echo $VERSION
-
 qmake-qt5 engauge.pro DEFINES+=APPIMAGE_RELEASE CONFIG+=pdf
 #Hack to nodebug
 sed -i 's/ -g / /g' Makefile
@@ -338,10 +334,10 @@ cd ..
 find $APP.AppDir/
 
 if [[ "$ARCH" = "x86_64" ]] ; then
-	APPIMAGE=$APP"-"$VERSION"-x86_64.AppImage"
+        APPIMAGE=digit-exe-linux-universal-64-bit-without-installer-X.Y.AppImage
 fi
 if [[ "$ARCH" = "i686" ]] ; then
-	APPIMAGE=$APP"-"$VERSION"-i386.AppImage"
+        APPIMAGE=digit-exe-linux-universal-32-bit-without-installer-X.Y.AppImage
 fi
 
 # Put this script into the AppImage for debugging
