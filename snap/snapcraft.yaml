@@ -2,27 +2,19 @@ name: engauge
 version: '10.6'
 summary: Interactively convert a bitmap graph or map into numbers.
 description: Software tool for extracting numbers from images of graphs and maps.
-
 grade: devel
 confinement: strict
 
 parts:
   engauge:
     plugin: qmake
-    options:
-      - CONFIG+=log4cpp_null
+    options: [CONFIG+=log4cpp_null, QT+=printsupport]
     qt-version: qt5
     source: ..
-    build-packages:
-      - g++
-    stage-packages:
-      - libqt5gui5
-      - libgtk2.0-0
     after: [desktop-qt5]
-
+    
 apps:
   engauge:
-    command: desktop-launch bin/engauge
-    plugs:
-      - unity7
-    
+    plugs: [cups-control]  
+    command: desktop-launch ../bin/engauge
+
