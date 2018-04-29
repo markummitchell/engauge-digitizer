@@ -7,6 +7,10 @@
 #  2) snapcraft must be run in the root directory or else the executable is not included in the snap package
 #  3) desktop-qt5 only snaps a minimal qt application, so other packages must be added by us
 
+
+# Remove existing snap so it will not be confused with new snap if this script is interrupted
+sudo snap remove engauge
+
 # Rebuild, making sure official qt is used
 cd ..
 PATH=/usr/bin:$PATH

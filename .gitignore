@@ -8,6 +8,7 @@ engauge
 engauge.log
 engauge.pro.user
 engauge.pro.user.markummitchell
+engauge_*.snap
 Makefile*
 object_script.engauge
 qrc_*
@@ -24,6 +25,11 @@ engauge.app.dSYM
 fftw-3.3.4*
 log4cpp-1.1.1*
 log4cpp_null*
+parts
 poppler-qt5*
+prime
+snap
+snapcraft.yaml
+stage
 transifex_downloads
 bin/engauge.ilk

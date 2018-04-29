@@ -8,14 +8,17 @@ confinement: strict
 parts:
   engauge:
     plugin: qmake
+    source: .
     options: [CONFIG+=log4cpp_null, QT+=printsupport, QT+=sql]
     qt-version: qt5
     build-packages: [qttools5-dev, libqt5gui5]
     stage-packages: [qttools5-dev, libqt5gui5]    
     after: [desktop-qt5]
-    
+  help:
+    plugin: dump
+    source: .
+    snap: [documentation]
 apps:
   engauge:
-    plugs: [cups-control]  
-    command: desktop-launch engauge
-
+    command: desktop-launch application
+    plugs: [unity7, home, cups-control]
