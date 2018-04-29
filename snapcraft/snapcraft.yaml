@@ -10,13 +10,13 @@ parts:
     plugin: qmake
     options: [CONFIG+=log4cpp_null, QT+=printsupport, QT+=sql]
     qt-version: qt5
-    build-packages: [qttools5-dev, libqt5gui5]
-    stage-packages: [qttools5-dev, libqt5gui5]
+    build-packages: [qttools5-dev, libqt5gui5, libqt5sql5-sqlite]
+    stage-packages: [qttools5-dev, libqt5gui5, libqt5sql5-sqlite]
     project-files: [engauge.pro]
     after: [help]
   help:
     plugin: dump
-    stage: [engauge, documentation]
+    stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
     after: [desktop-qt5]
 apps:
   engauge:
