@@ -2,7 +2,7 @@ name: engauge-digitizer
 version: '10.6'
 summary: Interactively convert a bitmap graph or map into numbers.
 description: Software tool for extracting numbers from images of graphs and maps.
-grade: devel
+grade: stable
 confinement: strict
 
 parts:
@@ -21,4 +21,4 @@ parts:
 apps:
   engauge-digitizer:
     command: desktop-launch $SNAP/engauge
-    plugs: [unity7, home, cups-control]
+    plugs: [home, cups-control]
