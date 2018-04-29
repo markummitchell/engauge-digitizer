@@ -12,7 +12,10 @@
 sudo snap remove engauge
 
 # Rebuild, making sure official qt is used
-cd ..
+PWD=`pwd`
+if [[ "$PWD" == *snapcraft ]]; then
+   cd ..
+fi   
 PATH=/usr/bin:$PATH
 LD_LIBRARY_PATH=
 
