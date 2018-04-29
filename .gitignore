@@ -22,6 +22,7 @@ engauge.app
 engauge.dmg
 engauge.pkg
 engauge.app.dSYM
+engauge-digitizer_*.snap
 fftw-3.3.4*
 log4cpp-1.1.1*
 log4cpp_null*

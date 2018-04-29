@@ -10,7 +10,7 @@
 #     that disappeared when the help feature started working
 
 # Remove existing snap so it will not be confused with new snap if this script is interrupted
-sudo snap remove engauge
+sudo snap remove engauge-digitizer
 
 # Rebuild, making sure official qt is used
 PWD=`pwd`
@@ -23,15 +23,18 @@ LD_LIBRARY_PATH=
 sed 's/DESTDIR = bin/DESTDIR = ./g' engauge.pro >engauge.pro.tmp
 mv engauge.pro.tmp engauge.pro
 
-qmake engauge.pro CONFIG+=log4cpp_null
+export POPPLER_INCLUDE=/usr/include/poppler/qt5
+export POPPLER_LIB=/usr/lib/x86_64-linux-gnu
+qmake engauge.pro CONFIG+=log4cpp_null CONFIG+=pdf
 make clean
 make -j4
 
 sed 's/DESTDIR = ./DESTDIR = bin/g' engauge.pro >engauge.pro.tmp
 mv engauge.pro.tmp engauge.pro
 
-rm -rf parts prime snap stage snapcraft.yaml
+rm -rf parts prime snap stage snapcraft.yaml engauge-digitizer*.snap
+
 ln -s snapcraft/snapcraft.yaml
-snapcraft clean engauge
+snapcraft clean engauge-digitizer
 snapcraft
-sudo snap install engauge_10.6_amd64.snap --devmode --dangerous
+sudo snap install engauge-digitizer_*.snap --devmode --dangerous
