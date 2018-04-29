@@ -1,0 +1,29 @@
+# For debugging:
+#  1) snapcraft define desktop-qt5
+#  2) export QT_DEBUG_PLUGINS=1
+#  3) export SNAPCRAFT_DEBUG=true
+# Lessons learned:
+#  1) executable must be built into root directory or else the relative path breaks the snap so executable is not found
+#  2) snapcraft must be run in the root directory or else the executable is not included in the snap package
+#  3) desktop-qt5 only snaps a minimal qt application, so other packages must be added by us
+
+# Rebuild, making sure official qt is used
+cd ..
+PATH=/usr/bin:$PATH
+LD_LIBRARY_PATH=
+
+sed 's/DESTDIR = bin/DESTDIR = ./g' engauge.pro >engauge.pro.tmp
+mv engauge.pro.tmp engauge.pro
+
+qmake engauge.pro CONFIG+=log4cpp_null
+make clean
+make -j4
+
+sed 's/DESTDIR = ./DESTDIR = bin/g' engauge.pro >engauge.pro.tmp
+mv engauge.pro.tmp engauge.pro
+
+rm -rf parts prime snap stage snapcraft.yaml 2>/dev/null
+ln -s snapcraft/snapcraft.yaml
+snapcraft clean engauge
+snapcraft
+sudo snap install engauge_10.6_amd64.snap --devmode --dangerous
