@@ -11,6 +11,6 @@ Links:
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/1o7p8iu8qxq0p7ri/branch/master?svg=true)](https://ci.appveyor.com/project/markummitchell/engauge-digitizer/branch/master) is green if the latest source code builds for Windows
 
-[![DOI](https://zenodo.org/badge/26443394.svg)](https://zenodo.org/badge/latestdoi/26443394) is suggested, but not required, for making a citation
+[![DOI](https://zenodo.org/badge/26443394.svg)](https://zenodo.org/badge/latestdoi/26443394) is suggested, but not required, for making a citation in scientific literature
 
 Thanks for all the [stars](https://github.com/markummitchell/engauge-digitizer/stargazers)!
