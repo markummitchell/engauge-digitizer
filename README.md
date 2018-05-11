@@ -1,9 +1,9 @@
 Links:
 ------
 
-[Project](http://markummitchell.github.io/engauge-digitizer)
+[Project](http://markummitchell.github.io/engauge-digitizer) page explains what Engauge Digitizer does and how it is used
 
-[Downloads](https://github.com/markummitchell/engauge-digitizer/releases/latest)
+[Downloads](https://github.com/markummitchell/engauge-digitizer/releases/latest) page has files in the latest release
 
 [![Join the chat at https://gitter.im/markummitchell/engauge-digitizer](https://badges.gitter.im/markummitchell/engauge-digitizer.svg)](https://gitter.im/markummitchell/engauge-digitizer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) is for help, or you can submit a [New issue](https://github.com/markummitchell/engauge-digitizer/issues)
 
