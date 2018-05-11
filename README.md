@@ -1,6 +1,9 @@
 Links:
 ------
-[Project page](http://markummitchell.github.io/engauge-digitizer)
+
+[Project](http://markummitchell.github.io/engauge-digitizer)
+
+[Downloads](https://github.com/markummitchell/engauge-digitizer/releases)
 
 [![Join the chat at https://gitter.im/markummitchell/engauge-digitizer](https://badges.gitter.im/markummitchell/engauge-digitizer.svg)](https://gitter.im/markummitchell/engauge-digitizer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
