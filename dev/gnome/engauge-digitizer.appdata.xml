@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2015 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> -->
 <component type="desktop-application">
-  <id>engauge-digitizer.desktop</id>
-  <metadata_license>CC0</metadata_license>
-  <project_license>GPL-2.0+</project_license>
+	<id>engauge-digitizer.desktop</id>
+	<metadata_license>CC0</metadata_license>
+	<project_license>GPL-2.0+</project_license>
+	<developer_name>Mark Mitchell</developer_name>
 	<name>Engauge Digitizer</name>
-	<summary> interactively convert a bitmap graph or map into numbers </summary>
-
-  <description>
-		<p>
-			The Engauge Digitizer tool assists in interactively extracting numbers
+	<summary>interactively convert a bitmap graph or map into numbers</summary>
+	<description>
+		<p>The Engauge Digitizer tool assists in interactively extracting numbers
 			from images of graphs. Conceptually, it is thus the opposite of a
 			graphing tool that converts data points to graphs. It provides assistance
 			in enhancing the image quality and matching the data points. Engauge
 			Digitizer is used by individuals such as grad students and researchers as
 			well as engineers and employees in large government and commercial
 			organizations for processing single files but also managing databases of
-			thousands of image files.
-		</p>
-			
-		<p>
-			Features of Engauge Digitizer include:
-		</p>
+			thousands of image files.</p>
+		<p>Features of Engauge Digitizer include:</p>
 		<ul>
 			<li>Automatic grid line removal</li>
 			<li>Automatic point and axis matching</li>
@@ -35,51 +30,50 @@
 			<li>Context-sensitive help, user manual and tutorials explaining every feature</li>
 			<li>Preview windows to give immediate feedback while modifying settings</li>
 			<li>Automated line and point extraction to rapidly digitize data</li>
-	</ul>
-</description>
-
-  <screenshots>
-    <screenshot type="default">https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
-    <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
-    <screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
-  </screenshots>
-  <url type="homepage">http://markummitchell.github.io/engauge-digitizer/</url>
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-cartoon">none</content_attribute>
-    <content_attribute id="violence-fantasy">none</content_attribute>
-    <content_attribute id="violence-realistic">none</content_attribute>
-    <content_attribute id="violence-bloodshed">none</content_attribute>
-    <content_attribute id="violence-sexual">none</content_attribute>
-    <content_attribute id="violence-desecration">none</content_attribute>
-    <content_attribute id="violence-slavery">none</content_attribute>
-    <content_attribute id="violence-worship">none</content_attribute>
-    <content_attribute id="drugs-alcohol">none</content_attribute>
-    <content_attribute id="drugs-narcotics">none</content_attribute>
-    <content_attribute id="drugs-tobacco">none</content_attribute>
-    <content_attribute id="sex-nudity">none</content_attribute>
-    <content_attribute id="sex-themes">none</content_attribute>
-    <content_attribute id="sex-homosexuality">none</content_attribute>
-    <content_attribute id="sex-prostitution">none</content_attribute>
-    <content_attribute id="sex-adultery">none</content_attribute>
-    <content_attribute id="sex-appearance">none</content_attribute>
-    <content_attribute id="language-profanity">none</content_attribute>
-    <content_attribute id="language-humor">none</content_attribute>
-    <content_attribute id="language-discrimination">none</content_attribute>
-    <content_attribute id="social-chat">none</content_attribute>
-    <content_attribute id="social-info">none</content_attribute>
-    <content_attribute id="social-audio">none</content_attribute>
-    <content_attribute id="social-location">none</content_attribute>
-    <content_attribute id="social-contacts">none</content_attribute>
-    <content_attribute id="money-purchasing">none</content_attribute>
-    <content_attribute id="money-gambling">none</content_attribute>
-  </content_rating>
-  <releases>
-    <release date="2018-04-01" version="10.6">
-      <description>
-        <ul>
-	  <li>Accomodate build for flathub</li>
-	</ul>
-      </description>
-    </release>
-  </releases>
+		</ul>
+	</description>
+	<screenshots>
+		<screenshot type="default">https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-points-save-as.png</screenshot>
+		<screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-axis-point.png</screenshot>
+		<screenshot>https://github.com/markummitchell/engauge-digitizer/raw/master/dev/gnome/engauge-screenshots/engauge-screenshot-map-points.png</screenshot>
+	</screenshots>
+	<url type="homepage">http://markummitchell.github.io/engauge-digitizer/</url>
+	<content_rating type="oars-1.1">
+		<content_attribute id="violence-cartoon">none</content_attribute>
+		<content_attribute id="violence-fantasy">none</content_attribute>
+		<content_attribute id="violence-realistic">none</content_attribute>
+		<content_attribute id="violence-bloodshed">none</content_attribute>
+		<content_attribute id="violence-sexual">none</content_attribute>
+		<content_attribute id="violence-desecration">none</content_attribute>
+		<content_attribute id="violence-slavery">none</content_attribute>
+		<content_attribute id="violence-worship">none</content_attribute>
+		<content_attribute id="drugs-alcohol">none</content_attribute>
+		<content_attribute id="drugs-narcotics">none</content_attribute>
+		<content_attribute id="drugs-tobacco">none</content_attribute>
+		<content_attribute id="sex-nudity">none</content_attribute>
+		<content_attribute id="sex-themes">none</content_attribute>
+		<content_attribute id="sex-homosexuality">none</content_attribute>
+		<content_attribute id="sex-prostitution">none</content_attribute>
+		<content_attribute id="sex-adultery">none</content_attribute>
+		<content_attribute id="sex-appearance">none</content_attribute>
+		<content_attribute id="language-profanity">none</content_attribute>
+		<content_attribute id="language-humor">none</content_attribute>
+		<content_attribute id="language-discrimination">none</content_attribute>
+		<content_attribute id="social-chat">none</content_attribute>
+		<content_attribute id="social-info">none</content_attribute>
+		<content_attribute id="social-audio">none</content_attribute>
+		<content_attribute id="social-location">none</content_attribute>
+		<content_attribute id="social-contacts">none</content_attribute>
+		<content_attribute id="money-purchasing">none</content_attribute>
+		<content_attribute id="money-gambling">none</content_attribute>
+	</content_rating>
+	<releases>
+		<release date="2018-06-02" version="10.7">
+			<description>
+				<ul>
+					<li>Return to last directory when selecting a file</li>
+				</ul>
+			</description>
+		</release>
+	</releases>
 </component>

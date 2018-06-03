@@ -6,7 +6,7 @@
 
 #include "Version.h"
 
-const char *VERSION_NUMBER = "10.6";
+const char *VERSION_NUMBER = "10.7";
 
 QString engaugeWindowTitle()
 {

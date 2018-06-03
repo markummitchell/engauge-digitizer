@@ -77,6 +77,7 @@
 #include "LoadImageFromUrl.h"
 #endif
 #include "Logger.h"
+#include "MainDirectoryPersist.h"
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
 #include "MimePointsImport.h"
@@ -97,7 +98,6 @@
 #include <QDesktopServices>
 #include <QDockWidget>
 #include <QDomDocument>
-#include <QKeyEvent>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsLineItem>
@@ -1815,11 +1815,14 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
     // the default is the first filter, we add this afterwards (it is the off-nominal case)
     str << ";; All Files (*.*)";
 
+    MainDirectoryPersist directoryPersist;
     QString fileName = QFileDialog::getOpenFileName (this,
                                                      tr("Import Image"),
-                                                     QDir::currentPath (),
+                                                     directoryPersist.getDirectoryImportOpen ().path (),
                                                      filter);
     if (!fileName.isEmpty ()) {
+
+      directoryPersist.setDirectoryImportOpenFromFilename (fileName);
 
       // We import the file BEFORE asking the number of coordinate systems, so user can see how many there are
       fileImport (fileName,
@@ -3402,8 +3405,9 @@ void MainWindow::slotFileExport ()
                      .arg (exportStrategy.filterTsv ());
 
     // OSX sandbox requires, for the default, a non-empty filename
+    MainDirectoryPersist directoryPersist;
     QString defaultFileName = QString ("%1/%2.%3")
-                              .arg (QDir::currentPath ())
+                              .arg (directoryPersist.getDirectoryExportSave().path ())
                               .arg (m_currentFile)
                               .arg (exportStrategy.fileExtensionCsv ());
     QFileDialog dlg;
@@ -3415,6 +3419,7 @@ void MainWindow::slotFileExport ()
                                             &filterCsv);
     if (!fileName.isEmpty ()) {
 
+      directoryPersist.setDirectoryExportSaveFromFilename(fileName);
       fileExport(fileName,
                  exportStrategy);
     }
@@ -3486,12 +3491,14 @@ void MainWindow::slotFileOpen()
                      .arg (ENGAUGE_FILENAME_DESCRIPTION)
                      .arg (ENGAUGE_FILENAME_EXTENSION);
 
+    MainDirectoryPersist directoryPersist;
     QString fileName = QFileDialog::getOpenFileName (this,
                                                      tr("Open Document"),
-                                                     QDir::currentPath (),
+                                                     directoryPersist.getDirectoryImportOpen ().path (),
                                                      filter);
     if (!fileName.isEmpty ()) {
 
+      directoryPersist.setDirectoryImportOpenFromFilename (fileName);
       loadDocumentFile (fileName);
 
     }
@@ -3554,6 +3561,8 @@ bool MainWindow::slotFileSaveAs()
   filters << filterDigitizer;
   filters << filterAll;
 
+  MainDirectoryPersist directoryPersist;
+
   QFileDialog dlg(this);
   dlg.setFileMode (QFileDialog::AnyFile);
   dlg.selectNameFilter (filterDigitizer);
@@ -3564,9 +3573,11 @@ bool MainWindow::slotFileSaveAs()
 #endif
   dlg.setAcceptMode(QFileDialog::AcceptSave);
   dlg.selectFile(filenameDefault);
+  dlg.setDirectory (directoryPersist.getDirectoryExportSave ());
   if (dlg.exec()) {
 
     QStringList files = dlg.selectedFiles();
+    directoryPersist.setDirectoryExportSaveFromFilename (files.at(0));
     return saveDocumentFile(files.at(0));
   }
 

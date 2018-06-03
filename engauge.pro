@@ -31,6 +31,9 @@
 #    Likewise, it is not included for OSX since it is interpretted as a threat. 
 #    The network module can download files, which is what malware does to install bad things
 # 8) In OSX, QtHelp requires QtNetwork which is rejected by the operating system, so QtHelp is disabled
+# 9) To include log4cpp_null as part of the build, add the 'log4cpp_null' config argument. This is meant only for
+#    building the snap package.
+#        qmake CONFIG+=log4cpp_null
 #
 # More comments are in the INSTALL file, and below
 
@@ -315,6 +318,7 @@ HEADERS  += \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/Matrix/Matrix.h \
+    src/main/MainDirectoryPersist.h \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
@@ -631,6 +635,7 @@ SOURCES += \
     src/Logger/LoggerUpload.cpp \
     src/Matrix/Matrix.cpp \
     src/main/main.cpp \
+    src/main/MainDirectoryPersist.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
     src/util/MigrateToVersion6.cpp \
@@ -820,13 +825,13 @@ win32-* {
 RESOURCES += src/engauge.qrc
 
 CONFIG(debug,debug|release) {
-  message("Build type:       debug")
+  message("Build type:         debug")
 } else {
-  message("Build type:       release")
+  message("Build type:         release")
 }
 
 jpeg2000 {
-    message("JPEG2000 support: yes")
+    message("JPEG2000 support:   yes")
     _OPENJPEG_INCLUDE = $$(OPENJPEG_INCLUDE)
     _OPENJPEG_LIB = $$(OPENJPEG_LIB)
     isEmpty(_OPENJPEG_INCLUDE) {
@@ -853,11 +858,11 @@ jpeg2000 {
     QMAKE_POST_LINK += cp $$(OPENJPEG_LIB)/libopenjp2.so.7 bin
 
 } else {
-    message("JPEG2000 support: no")
+    message("JPEG2000 support:   no")
 }
 
 pdf {
-    message("PDF support:      yes")
+    message("PDF support:        yes")
     _POPPLER_INCLUDE = $$(POPPLER_INCLUDE)
     _POPPLER_LIB = $$(POPPLER_LIB)
     isEmpty(_POPPLER_INCLUDE) {
@@ -882,9 +887,40 @@ pdf {
                src/Pdf/PdfFrameHandle.cpp
 
 } else {
-    message("PDF support:      no")
+    message("PDF support:        no")
 }
 
+log4cpp_null {
+    message("log4cpp_null build: yes")
+    HEADERS += $$(LOG4CPP_HOME)/include/log4cpp/Appender.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/Category.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/CategoryStream.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/Configurator.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/convenience.h \
+               $$(LOG4CPP_HOME)/include/log4cpp/FileAppender.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/Layout.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/LayoutAppender.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/LoggingEvent.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/PatternLayout.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/Priority.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/PropertyConfigurator.hh \
+               $$(LOG4CPP_HOME)/include/log4cpp/RollingFileAppender.hh
+    SOURCES += $$(LOG4CPP_HOME)/src/Appender.cpp \
+               $$(LOG4CPP_HOME)/src/Category.cpp \
+               $$(LOG4CPP_HOME)/src/CategoryStream.cpp \
+               $$(LOG4CPP_HOME)/src/Configurator.cpp \
+               $$(LOG4CPP_HOME)/src/FileAppender.cpp \
+               $$(LOG4CPP_HOME)/src/Layout.cpp \
+               $$(LOG4CPP_HOME)/src/LayoutAppender.cpp \
+               $$(LOG4CPP_HOME)/src/LoggingEvent.cpp \
+               $$(LOG4CPP_HOME)/src/PatternLayout.cpp \
+               $$(LOG4CPP_HOME)/src/PropertyConfigurator.cpp \
+               $$(LOG4CPP_HOME)/src/RollingFileAppender.cpp
+    
+} else {
+    message("log4cpp_null build: no")
+}
+    
 # People interested in translating a language can contact the developers for help. 
 # 
 # Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:

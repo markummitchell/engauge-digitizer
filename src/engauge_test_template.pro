@@ -283,6 +283,7 @@ HEADERS  += \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
+    main/MainDirectoryPersist.h \
     main/MainTitleBarFormat.h \
     main/MainWindow.h \
     main/MainWindowModel.h \
@@ -604,6 +605,7 @@ SOURCES += \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
     Matrix/Matrix.cpp \
+    main/MainDirectoryPersist.cpp \
     main/MainWindow.cpp \
     main/MainWindowModel.cpp \
     util/MigrateToVersion6.cpp \

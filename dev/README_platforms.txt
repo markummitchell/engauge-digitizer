@@ -46,6 +46,8 @@ Option 1) Many Linux distributions already offer Engauge Digitizer as packages. 
 Option 2) The AppImage release file can be downloaded and executed on all 32 and 64 bit Linux distributions. No installation
           step is required before executing the AppImage. Some known issues with this approach are listed below.
 
+Option 3) The Flathub project is working on an installation system that can target all Linux distributions. The flatpak
+          package must be installed, and then the Flatpak release of Engauge Digitizer can be installed. 
 
 Linux Distribution Issues
 -------------------------

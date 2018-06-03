@@ -1,0 +1,5 @@
+The Flathub project has released Engauge Digitizer for many Linux operating
+systems.
+
+The Flathub release of Engauge Digitizer is available at
+https://flathub.org/apps/details/io.github.markummitchell.Engauge_Digitizer
