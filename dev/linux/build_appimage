@@ -200,6 +200,7 @@ echo $LIB
 cp -a $LIB/libicu* usr/lib
 
 cp -L $LOG4CPP_HOME/lib/liblog4cpp.so.1 usr/lib
+cp -L $LOG4CPP_HOME/lib/liblog4cpp.so.5 usr/lib
 
 # Poppler library, unlike fftw3, is dynamic so library must be copied
 cp -L $POPPLER_LIB/libpoppler-cpp.so usr/lib
