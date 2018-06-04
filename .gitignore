@@ -2,7 +2,7 @@
 .qmake.stash
 object_script.*
 \#*
-digit-exe-windows-*
+digit-exe-*.pkg
 documentation
 engauge
 engauge.log
@@ -17,7 +17,6 @@ Engauge Digitizer
 Engauge Digitizer.app
 Engauge Digitizer.app.dSYM
 Engauge Digitizer.dmg
-Engauge Digitizer.pkg
 engauge.app
 engauge.dmg
 engauge.pkg
