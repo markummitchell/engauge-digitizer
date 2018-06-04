@@ -122,7 +122,7 @@ echo "**************************************************************************
 productbuild --component Engauge\ Digitizer.app /Applications Engauge\ Digitizer.pkg
 
 # Sign package
-productsign --sign "Developer ID Installer: Mark Mitchell" Engauge\ Digitizer.pkg Engauge\ Digitizer.pkg.signed
+productsign --sign "3rd Party Mac Developer Installer: Mark Mitchell" Engauge\ Digitizer.pkg Engauge\ Digitizer.pkg.signed
 mv Engauge\ Digitizer.pkg.signed Engauge\ Digitizer.pkg
 
 # Code signing checks. Note that spctl seems to give false alarms, while codesign seems to be happy
