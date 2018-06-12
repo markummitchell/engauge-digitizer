@@ -1,0 +1,20 @@
+inherit qt5-qmake
+
+NAME="engauge"
+VERSION=10.7
+RELEASE=1
+CATEGORY="Math"
+SUMMARY="Convert graph images to numeric data"
+DESCRIPTION="Engauge Digitizer offer multiple methods of 
+digitizing graph images into numbers"
+HOMEPAGE="http://github.com/engauge-digitizer"
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/v${VERSION}.tar.gz"
+SRC_DIR="."
+PATCH_URI="
+	10.7-no-undefined.patch
+	10.7-webkit.patch
+"
+
+src_install() {
+	      dobin ${B}/bin/engauge.exe
+}
