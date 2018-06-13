@@ -921,7 +921,12 @@ log4cpp_null {
 } else {
     message("log4cpp_null build: no")
 }
-    
+
+cygport {
+  INCLUDEPATH += $$(FFTW_HOME)/include \
+                 $$(LOG4CPP_HOME)/include
+}
+
 # People interested in translating a language can contact the developers for help. 
 # 
 # Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:
