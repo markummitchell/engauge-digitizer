@@ -892,6 +892,7 @@ pdf {
 
 log4cpp_null {
     message("log4cpp_null build: yes")
+    INCLUDEPATH += $$(LOG4CPP_HOME)/include
     HEADERS += $$(LOG4CPP_HOME)/include/log4cpp/Appender.hh \
                $$(LOG4CPP_HOME)/include/log4cpp/Category.hh \
                $$(LOG4CPP_HOME)/include/log4cpp/CategoryStream.hh \

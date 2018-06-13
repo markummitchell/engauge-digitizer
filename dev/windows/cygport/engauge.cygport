@@ -6,7 +6,7 @@ RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
 LOG4CPP_HOME=../../../log4cpp_null
-CYGQMAKE5_ARGS=log4cpp_null
+CYGQMAKE5_ARGS="CONFIG+=log4cpp_null"
 S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"
 DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
