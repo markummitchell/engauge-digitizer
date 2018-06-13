@@ -6,7 +6,7 @@ RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
 LOG4CPP_HOME=../../../log4cpp_null
-FFTW_HOME=/usr/x86_64-w64-mingw32/sys-root/mingw
+FFTW_HOME=/usr
 CYGQMAKE5_ARGS="CONFIG+=cygport CONFIG+=log4cpp_null"
 S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"

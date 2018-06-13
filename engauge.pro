@@ -761,7 +761,10 @@ win32-msvc* {
     LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
     QMAKE_LFLAGS += -Wl,--stack,32000000
   }
-  LIBS += -lfftw3 -llog4cpp
+  LIBS += -lfftw3
+  !log4cpp_null {
+    LIBS += -llog4cpp
+  }
 }
 
 INCLUDEPATH += src \
@@ -892,7 +895,6 @@ pdf {
 
 log4cpp_null {
     message("log4cpp_null build: yes")
-    INCLUDEPATH += $$(LOG4CPP_HOME)/include
     HEADERS += $$(LOG4CPP_HOME)/include/log4cpp/Appender.hh \
                $$(LOG4CPP_HOME)/include/log4cpp/Category.hh \
                $$(LOG4CPP_HOME)/include/log4cpp/CategoryStream.hh \
@@ -923,8 +925,9 @@ log4cpp_null {
 }
 
 cygport {
-  INCLUDEPATH += $$(FFTW_HOME)/include \
-                 $$(LOG4CPP_HOME)/include
+    INCLUDEPATH += $$(FFTW_HOME)/include \
+                   $$(LOG4CPP_HOME)/include
+    LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
 }
 
 # People interested in translating a language can contact the developers for help. 
