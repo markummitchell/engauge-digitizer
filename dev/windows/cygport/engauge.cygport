@@ -4,12 +4,15 @@ NAME="engauge"
 VERSION=10.7
 RELEASE=1
 CATEGORY="Math"
+LOG_DIR=/tmp
+LOG4CPP_HOME=../../../log4cpp_null
+CYGQMAKE5_ARGS=log4cpp_null
+S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"
-DESCRIPTION="Engauge Digitizer offer multiple methods of 
-digitizing graph images into numbers"
+DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
 HOMEPAGE="http://github.com/engauge-digitizer"
-SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/v${VERSION}.tar.gz"
-SRC_DIR="."
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/cygwin260.zip"
+SRC_DIR="engauge-digitizer-${VERSION}"
 PATCH_URI="
 	10.7-no-undefined.patch
 	10.7-webkit.patch
