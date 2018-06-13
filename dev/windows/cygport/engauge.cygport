@@ -1,7 +1,7 @@
 inherit qt5-qmake
 
 NAME="engauge"
-VERSION=10.7
+VERSION=cygwin260
 RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
@@ -11,7 +11,7 @@ S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"
 DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
 HOMEPAGE="http://github.com/engauge-digitizer"
-SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/cygwin260.zip"
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
 SRC_DIR="engauge-digitizer-${VERSION}"
 PATCH_URI="
 	10.7-no-undefined.patch
