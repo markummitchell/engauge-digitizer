@@ -19,6 +19,16 @@ PATCH_URI="
 	10.7-webkit.patch
 "
 
+src_compile() {
+	      cd ${B}
+	      qt5_qmake_compile
+	      cd ${S}/help
+	      dos2unix build
+	      build
+	      cp -r ../bin/documentation ${B}/bin
+}
+
 src_install() {
 	      dobin ${B}/bin/engauge.exe
+	      cp -r ${B}/bin/documentation ${D}/usr/bin
 }
