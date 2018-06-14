@@ -761,7 +761,10 @@ win32-msvc* {
     LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
     QMAKE_LFLAGS += -Wl,--stack,32000000
   }
-  LIBS += -lfftw3 -llog4cpp
+  LIBS += -lfftw3
+  !log4cpp_null {
+    LIBS += -llog4cpp
+  }
 }
 
 INCLUDEPATH += src \
@@ -920,7 +923,13 @@ log4cpp_null {
 } else {
     message("log4cpp_null build: no")
 }
-    
+
+cygport {
+    INCLUDEPATH += $$(FFTW_HOME)/include \
+                   $$(LOG4CPP_HOME)/include
+    LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
+}
+
 # People interested in translating a language can contact the developers for help. 
 # 
 # Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:
