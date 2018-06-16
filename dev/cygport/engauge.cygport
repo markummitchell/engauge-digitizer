@@ -1,7 +1,14 @@
 inherit qt5-qmake
 
+VERSION=v10.7.1
+SRC_URI_REMOTE="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
+SRC_DIR_REMOTE="engauge-digitizer-${VERSION}"
+SRC_URI_LOCAL="/tmp/local.zip"
+SRC_DIR_LOCAL="local"
+SRC_URI=SRC_URI_LOCAL
+SRC_DIR=SRC_DIR_LOCAL
+
 NAME="engauge"
-VERSION=cygwin260
 RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
@@ -12,11 +19,9 @@ S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"
 DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
 HOMEPAGE="http://github.com/engauge-digitizer"
-SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
-SRC_DIR="engauge-digitizer-${VERSION}"
 PATCH_URI="
-	10.7-no-undefined.patch
-	10.7-webkit.patch
+	engauge-no-undefined.patch
+	engauge-webkit.patch
 "
 
 src_compile() {

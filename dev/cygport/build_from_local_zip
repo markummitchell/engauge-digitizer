@@ -1,0 +1,15 @@
+cd ../../
+rm /tmp/local.zip 2>/dev/null
+zip -r /tmp/local.zip . -x '*bin*' '*dev*' '*.git*' '*src/.moc*' '*src/.objs*' '*src/.rcc*'
+cd dev/cygport
+dos2unix engauge.cygport
+
+sed 's/SRC_URI=SRC_URI_REMOTE/SRC_URI=SRC_URI_LOCAL/' engauge.cygport >/tmp/engauge.cygport
+sed 's/SRC_DIR=SRC_DIR_REMOTE/SRC_DIR=SRC_DIR_LOCAL/' /tmp/engauge.cygport >engauge.cygport.local
+
+mkdir build 2>/dev/null
+cd build
+
+cygport engauge.cygport.local download 
+cygport engauge.cygport.local prep 
+cygport engauge.cygport.local compile 
