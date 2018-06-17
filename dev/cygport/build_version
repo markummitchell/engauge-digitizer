@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+show_usage_and_quit() {
+    echo "Usage: build_version <versiontag>"
+    echo "where versiontag has the format v#.#"
+    exit
+}
+
+if [ "$#" -ne 1 ]; then
+    show_usage_and_quit
+fi
+
+# Tag with and without the leading v
+VERSION=$1
+ERSION=`echo $VERSION | cut -c 2-`
+
+CHAR1=`echo $VERSION | cut -c -1`
+if [ "$CHAR1" -ne "v" ]; then
+    show_usage_and_quit
+fi
+
+dos2unix engauge.cygport
+
+sed 's/<VERSION>/'"$VERSION"'/' engauge.cygport >/tmp/engauge.cygport
+sed 's/<ERSION>/'"$ERSION"'/' /tmp/engauge.cygport >.engauge.cygport
+
+DEBUG=--debug
+
+cygport $DEBUG .engauge.cygport download 2>&1 | tee build_version.log
+cygport $DEBUG .engauge.cygport prep     2>&1 | tee -a build_version.log
+cygport $DEBUG .engauge.cygport compile  2>&1 | tee -a build_version.log
+
+echo "Output was logged to build_version.log"

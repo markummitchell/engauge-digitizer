@@ -1,11 +1,10 @@
 inherit qt5-qmake
 
-VERSION=v10.7
-SRC_URI_REMOTE="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
-SRC_URI_LOCAL="local.zip"
-SRC_URI="${SRC_URI_REMOTE}"
+VERSION=<VERSION>
+ERSION=<ERSION>
 
-SRC_DIR="engauge-digitizer-${VERSION}"
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
+SRC_DIR="engauge-digitizer-${ERSION}"
 NAME="engauge"
 RELEASE=1
 CATEGORY="Math"

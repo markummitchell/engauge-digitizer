@@ -1,0 +1,8 @@
+sdesc: "Extract numbers from graph images"
+ldesc: "Recover numeric data from images of graphs"
+category: Math Graphics Utils
+requires: cygwin
+
+
+
+
