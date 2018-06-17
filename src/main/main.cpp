@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QMessageBox>
 #include <QObject>
 #include <QProcessEnvironment>
 #include <QStyleFactory>
@@ -159,7 +160,6 @@ void parseCmdLine (int argc,
                    bool &isGnuplot,
                    QStringList &loadStartupFiles)
 {
-  const int COLUMN_WIDTH = 20;
   bool showUsage = false;
 
   // State
@@ -216,35 +216,61 @@ void parseCmdLine (int argc,
 
   if (showUsage || nextIsErrorReportFile) {
 
-    cerr << "Usage: engauge "
-         << "[" << DASH_DEBUG.toLatin1().data() << "] "
-         << "[" << DASH_ERROR_REPORT.toLatin1().data() << " <file>] "
-         << "[" << DASH_FILE_CMD_SCRIPT.toLatin1().data() << " <file> "
-         << "[" << DASH_GNUPLOT.toLatin1().data() << "] "
-         << "[" << DASH_HELP.toLatin1().data() << "] "
-         << "[" << DASH_REGRESSION.toLatin1().data() << "] "
-         << "[" << DASH_RESET.toLatin1().data () << "] "
-         << "[" << DASH_STYLES.toLatin1().data () << "] "
-         << "[<load_file1>] [<load_file2>] ..." << endl
-         << "  " << DASH_DEBUG.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data() << endl
-         << "  " << DASH_ERROR_REPORT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data() << endl
-         << "  " << DASH_FILE_CMD_SCRIPT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Specifies a file command script file as input. Used for debugging and testing").toLatin1().data() << endl
-         << "  " << DASH_GNUPLOT.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Output diagnostic gnuplot input files. Used for debugging").toLatin1().data() << endl
-         << "  " << DASH_HELP.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Show this help information").toLatin1().data() << endl
-         << "  " << DASH_REGRESSION.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Executes the error report file or file command script. Used for regression testing").toLatin1().data() << endl
-         << "  " << DASH_RESET.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Removes all stored settings, including window positions. Used when windows start up offscreen").toLatin1().data() << endl
-         << "  " << DASH_STYLES.leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("Show a list of available styles that can be used with the -style command").toLatin1().data() << endl
-         << "  " << QString ("<load file> ").leftJustified(COLUMN_WIDTH, ' ').toLatin1().data()
-                 << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data() << endl;
+    QString msg;
+    QTextStream str (&msg);
+    str << "<html>Usage: engauge "
+        << "[" << DASH_DEBUG.toLatin1().data() << "] "
+        << "[" << DASH_ERROR_REPORT.toLatin1().data() << " <file>] "
+        << "[" << DASH_FILE_CMD_SCRIPT.toLatin1().data() << " <file> "
+        << "[" << DASH_GNUPLOT.toLatin1().data() << "] "
+        << "[" << DASH_HELP.toLatin1().data() << "] "
+        << "[" << DASH_REGRESSION.toLatin1().data() << "] "
+        << "[" << DASH_RESET.toLatin1().data () << "] "
+        << "[" << DASH_STYLES.toLatin1().data () << "] "
+        << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << endl
+        << "<table>"
+        << "<tr>"
+        << "<td>" << DASH_DEBUG.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_ERROR_REPORT.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_FILE_CMD_SCRIPT.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Specifies a file command script file as input. Used for debugging and testing").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_GNUPLOT.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Output diagnostic gnuplot input files. Used for debugging").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_HELP.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Show this help information").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_REGRESSION.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Executes the error report file or file command script. Used for regression testing").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_RESET.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Removes all stored settings, including window positions. Used when windows start up offscreen").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_STYLES.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Show a list of available styles that can be used with the -style command").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << QString ("&lt;load file&gt; ").toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "</table></html>";
 
+    // Show error in QMessageBox instead of cerr since console output is disabled in Microsoft Windows
+    QMessageBox::critical (0,
+                           QObject::tr ("Engauge Digitizer"),
+                           msg);
     exit (0);
   }
 }
