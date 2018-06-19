@@ -895,19 +895,19 @@ pdf {
 
 log4cpp_null {
     message("log4cpp_null build: yes")
-    HEADERS += src/log4cpp_null/include/Appender.hh \
-               src/log4cpp_null/include/Category.hh \
-               src/log4cpp_null/include/CategoryStream.hh \
-               src/log4cpp_null/include/Configurator.hh \
-               src/log4cpp_null/include/convenience.h \
-               src/log4cpp_null/include/FileAppender.hh \
-               src/log4cpp_null/include/Layout.hh \
-               src/log4cpp_null/include/LayoutAppender.hh \
-               src/log4cpp_null/include/LoggingEvent.hh \
-               src/log4cpp_null/include/PatternLayout.hh \
-               src/log4cpp_null/include/Priority.hh \
-               src/log4cpp_null/include/PropertyConfigurator.hh \
-               src/log4cpp_null/include/RollingFileAppender.hh
+    HEADERS += src/log4cpp_null/include/log4cpp/Appender.hh \
+               src/log4cpp_null/include/log4cpp/Category.hh \
+               src/log4cpp_null/include/log4cpp/CategoryStream.hh \
+               src/log4cpp_null/include/log4cpp/Configurator.hh \
+               src/log4cpp_null/include/log4cpp/convenience.h \
+               src/log4cpp_null/include/log4cpp/FileAppender.hh \
+               src/log4cpp_null/include/log4cpp/Layout.hh \
+               src/log4cpp_null/include/log4cpp/LayoutAppender.hh \
+               src/log4cpp_null/include/log4cpp/LoggingEvent.hh \
+               src/log4cpp_null/include/log4cpp/PatternLayout.hh \
+               src/log4cpp_null/include/log4cpp/Priority.hh \
+               src/log4cpp_null/include/log4cpp/PropertyConfigurator.hh \
+               src/log4cpp_null/include/log4cpp/RollingFileAppender.hh
     SOURCES += src/log4cpp_null/src/Appender.cpp \
                src/log4cpp_null/src/Category.cpp \
                src/log4cpp_null/src/CategoryStream.cpp \
