@@ -97,6 +97,7 @@ public:
   /// \param isRegressionTest True if errorReportFile or fileCmdScript is for regression testing, in which case it is executed and the program exits
   /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
   /// \param isReset True to reset all settings that would otherwise be restored from the previous execution of Engauge
+  /// \param isExportOnly True to export the loaded startup file and then exit
   /// \param loadStartupFiles Zero or more Engauge document files to load at startup. A separate instance of Engauge is created for each file
   /// \param parent Optional parent widget for this widget
   MainWindow(const QString &errorReportFile,
@@ -104,7 +105,8 @@ public:
              bool isRegressionTest,
              bool isGnuplot,
              bool isReset,
-             QStringList loadStartupFiles,
+             bool isExportOnly,
+             const QStringList &loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -654,6 +656,9 @@ private:
 
   // Fitted curve. Null if not currently applicable/defined
   FittingCurve *m_fittingCurve;
+
+  // Export the single dig file that was loaded in the command line, as enforced by parseCmdLine
+  bool m_isExportOnly;
 };
 
 #endif // MAIN_WINDOW_H

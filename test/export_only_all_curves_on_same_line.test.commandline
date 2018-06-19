@@ -1,0 +1,1 @@
+-exportonly -regression ../test/export_only_all_curves_on_same_line.dig

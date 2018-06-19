@@ -1,4 +1,3 @@
-
 /******************************************************************************************************
  * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
@@ -151,7 +150,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        bool isRegressionTest,
                        bool isGnuplot,
                        bool isReset,
-                       QStringList loadStartupFiles,
+                       bool isExportOnly,
+                       const QStringList &loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
@@ -172,7 +172,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (0),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0),
-  m_fittingCurve (0)
+  m_fittingCurve (0),
+  m_isExportOnly (isExportOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -222,7 +223,15 @@ MainWindow::MainWindow(const QString &errorReportFile,
   // current directory, so we temporarily reset the current directory
   QString originalPath = QDir::currentPath();
   QDir::setCurrent (m_startupDirectory);
-  if (!errorReportFile.isEmpty()) {
+  if (isExportOnly) {
+    ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
+    m_loadStartupFiles = loadStartupFiles;
+    m_regressionFile = QString ("%1_1").arg (exportFilenameFromInputFilename (loadStartupFiles.first ())); // For regression test
+    slotLoadStartupFiles ();
+    slotFileExport ();
+    exit (0);
+  }
+  else if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
     if (m_isErrorReportRegressionTest) {
       startRegressionTestErrorReport(errorReportFile);
@@ -3399,24 +3408,41 @@ void MainWindow::slotFileExport ()
 
   if (m_transformation.transformIsDefined()) {
 
-    ExportToFile exportStrategy;
-    QString filter = QString ("%1;;%2;;All files (*.*)")
-                     .arg (exportStrategy.filterCsv ())
-                     .arg (exportStrategy.filterTsv ());
-
-    // OSX sandbox requires, for the default, a non-empty filename
     MainDirectoryPersist directoryPersist;
-    QString defaultFileName = QString ("%1/%2.%3")
-                              .arg (directoryPersist.getDirectoryExportSave().path ())
-                              .arg (m_currentFile)
-                              .arg (exportStrategy.fileExtensionCsv ());
-    QFileDialog dlg;
-    QString filterCsv = exportStrategy.filterCsv ();
-    QString fileName = dlg.getSaveFileName (this,
-                                            tr("Export"),
-                                            defaultFileName,
-                                            filter,
-                                            &filterCsv);
+    ExportToFile exportStrategy;
+
+    QString fileName;
+    if (m_isExportOnly) {
+      if (m_isErrorReportRegressionTest) {
+        // Regression test has a specific file extension
+        fileName = m_regressionFile;
+      } else {
+        // User requested export-only mode so just change file extension
+        fileName = QString ("%1.%2")
+                            .arg (m_currentFile)
+                            .arg (exportStrategy.fileExtensionCsv ());
+      }
+    } else {
+
+      QString filter = QString ("%1;;%2;;All files (*.*)")
+                       .arg (exportStrategy.filterCsv ())
+                       .arg (exportStrategy.filterTsv ());
+
+      // OSX sandbox requires, for the default, a non-empty filename
+      QString defaultFileName = QString ("%1/%2.%3")
+                                .arg (directoryPersist.getDirectoryExportSave().path ())
+                                .arg (m_currentFile)
+                                .arg (exportStrategy.fileExtensionCsv ());
+      QFileDialog dlg;
+      QString filterCsv = exportStrategy.filterCsv ();
+
+      fileName = dlg.getSaveFileName (this,
+                                      tr("Export"),
+                                      defaultFileName,
+                                      filter,
+                                      &filterCsv);
+    }
+
     if (!fileName.isEmpty ()) {
 
       directoryPersist.setDirectoryExportSaveFromFilename(fileName);

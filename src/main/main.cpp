@@ -25,6 +25,7 @@ using namespace std;
 
 const QString CMD_DEBUG ("debug");
 const QString CMD_ERROR_REPORT ("errorreport");
+const QString CMD_EXPORT_ONLY ("exportonly");
 const QString CMD_FILE_CMD_SCRIPT ("filecmdscript");
 const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
@@ -34,6 +35,7 @@ const QString CMD_STYLES ("styles"); // Not to be confused with -style option th
 const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
 const QString DASH_ERROR_REPORT ("-" + CMD_ERROR_REPORT);
+const QString DASH_EXPORT_ONLY ("-" + CMD_EXPORT_ONLY);
 const QString DASH_FILE_CMD_SCRIPT ("-" + CMD_FILE_CMD_SCRIPT);
 const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
@@ -55,6 +57,7 @@ void parseCmdLine (int argc,
                    QString &fileCmdScriptFile,
                    bool &isErrorReportRegressionTest,
                    bool &isGnuplot,
+                   bool &isExportOnly,
                    QStringList &loadStartupFiles);
 void showStylesAndExit ();
 
@@ -118,7 +121,7 @@ int main(int argc, char *argv[])
   TranslatorContainer translatorContainer (app); // Must exist until execution terminates
 
   // Command line
-  bool isDebug, isReset, isGnuplot, isErrorReportRegressionTest;
+  bool isDebug, isReset, isGnuplot, isErrorReportRegressionTest, isExportOnly;
   QString errorReportFile, fileCmdScriptFile;
   QStringList loadStartupFiles;
   parseCmdLine (argc,
@@ -129,6 +132,7 @@ int main(int argc, char *argv[])
                 fileCmdScriptFile,
                 isErrorReportRegressionTest,
                 isGnuplot,
+                isExportOnly,
                 loadStartupFiles);
 
   // Logging
@@ -143,6 +147,7 @@ int main(int argc, char *argv[])
                 isErrorReportRegressionTest,
                 isGnuplot,
                 isReset,
+                isExportOnly,
                 loadStartupFiles);
   w.show();
 
@@ -158,6 +163,7 @@ void parseCmdLine (int argc,
                    QString &fileCmdScriptFile,
                    bool &isErrorReportRegressionTest,
                    bool &isGnuplot,
+                   bool &isExportOnly,
                    QStringList &loadStartupFiles)
 {
   bool showUsage = false;
@@ -173,6 +179,7 @@ void parseCmdLine (int argc,
   fileCmdScriptFile = "";
   isErrorReportRegressionTest = false;
   isGnuplot = false;
+  isExportOnly = false;
 
   for (int i = 1; i < argc; i++) {
 
@@ -188,6 +195,8 @@ void parseCmdLine (int argc,
       isDebug = true;
     } else if (strcmp (argv [i], DASH_ERROR_REPORT.toLatin1().data()) == 0) {
       nextIsErrorReportFile = true;
+    } else if (strcmp (argv [i], DASH_EXPORT_ONLY.toLatin1().data()) == 0) {
+      isExportOnly = true;
     } else if (strcmp (argv [i], DASH_FILE_CMD_SCRIPT.toLatin1().data()) == 0) {
       nextIsFileCmdScript = true;
     } else if (strcmp (argv [i], DASH_GNUPLOT.toLatin1().data()) == 0) {
@@ -214,6 +223,20 @@ void parseCmdLine (int argc,
     }
   }
 
+  // Sanity checks
+  if (isExportOnly && (!errorReportFile.isEmpty() ||
+                       !fileCmdScriptFile.isEmpty() ||
+                       loadStartupFiles.size() != 1)) {
+    QString msg;
+    QTextStream str (&msg);
+    str << DASH_EXPORT_ONLY.toLatin1().data() << " " << QObject::tr (" is used only with one document file specified");
+    QMessageBox::critical (0,
+                           QObject::tr ("Engauge Digitizer"),
+                           msg);
+    exit (0);
+  }
+
+  // Usage
   if (showUsage || nextIsErrorReportFile) {
 
     QString msg;
@@ -221,6 +244,7 @@ void parseCmdLine (int argc,
     str << "<html>Usage: engauge "
         << "[" << DASH_DEBUG.toLatin1().data() << "] "
         << "[" << DASH_ERROR_REPORT.toLatin1().data() << " <file>] "
+        << "[" << DASH_EXPORT_ONLY.toLatin1().data() << "] "
         << "[" << DASH_FILE_CMD_SCRIPT.toLatin1().data() << " <file> "
         << "[" << DASH_GNUPLOT.toLatin1().data() << "] "
         << "[" << DASH_HELP.toLatin1().data() << "] "
@@ -236,6 +260,10 @@ void parseCmdLine (int argc,
         << "<tr>"
         << "<td>" << DASH_ERROR_REPORT.toLatin1().data() << "</td>"
         << "<td>" << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data() << "</td>"
+        << "</tr>"
+        << "<tr>"
+        << "<td>" << DASH_EXPORT_ONLY.toLatin1().data() << "</td>"
+        << "<td>" << QObject::tr ("Export the loaded startup file, which must have all axis points defined, then stop").toLatin1().data() << "</td>"
         << "</tr>"
         << "<tr>"
         << "<td>" << DASH_FILE_CMD_SCRIPT.toLatin1().data() << "</td>"
