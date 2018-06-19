@@ -895,6 +895,7 @@ pdf {
 
 log4cpp_null {
     message("log4cpp_null build: yes")
+    INCLUDEPATH += src/log4cpp_null/include
     HEADERS += src/log4cpp_null/include/log4cpp/Appender.hh \
                src/log4cpp_null/include/log4cpp/Category.hh \
                src/log4cpp_null/include/log4cpp/CategoryStream.hh \
