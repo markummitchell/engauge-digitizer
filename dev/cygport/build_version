@@ -25,10 +25,15 @@ if [ "$CHAR1" != "v" ]; then
     show_usage_and_quit
 fi
 
-dos2unix engauge.cygport.template
+echo "Cleaning old build directory"
+rm -rf 'engauge-'"$VERSION"'-1.x86_64' 2>/dev/null
+echo
 
+echo "Creating engauge.cygport file from engauge.cygport.template"
+dos2unix engauge.cygport.template
 sed 's/<VERSION>/'"$VERSION"'/' engauge.cygport.template >/tmp/engauge.cygport
 sed 's/<ERSION>/'"$ERSION"'/' /tmp/engauge.cygport >engauge.cygport
+echo
 
 #DEBUG=--debug
 

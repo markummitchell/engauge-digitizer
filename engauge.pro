@@ -895,39 +895,40 @@ pdf {
 
 log4cpp_null {
     message("log4cpp_null build: yes")
-    HEADERS += $$(LOG4CPP_HOME)/include/log4cpp/Appender.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/Category.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/CategoryStream.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/Configurator.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/convenience.h \
-               $$(LOG4CPP_HOME)/include/log4cpp/FileAppender.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/Layout.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/LayoutAppender.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/LoggingEvent.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/PatternLayout.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/Priority.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/PropertyConfigurator.hh \
-               $$(LOG4CPP_HOME)/include/log4cpp/RollingFileAppender.hh
-    SOURCES += $$(LOG4CPP_HOME)/src/Appender.cpp \
-               $$(LOG4CPP_HOME)/src/Category.cpp \
-               $$(LOG4CPP_HOME)/src/CategoryStream.cpp \
-               $$(LOG4CPP_HOME)/src/Configurator.cpp \
-               $$(LOG4CPP_HOME)/src/FileAppender.cpp \
-               $$(LOG4CPP_HOME)/src/Layout.cpp \
-               $$(LOG4CPP_HOME)/src/LayoutAppender.cpp \
-               $$(LOG4CPP_HOME)/src/LoggingEvent.cpp \
-               $$(LOG4CPP_HOME)/src/PatternLayout.cpp \
-               $$(LOG4CPP_HOME)/src/PropertyConfigurator.cpp \
-               $$(LOG4CPP_HOME)/src/RollingFileAppender.cpp
-    
+    HEADERS += src/log4cpp_null/include/Appender.hh \
+               src/log4cpp_null/include/Category.hh \
+               src/log4cpp_null/include/CategoryStream.hh \
+               src/log4cpp_null/include/Configurator.hh \
+               src/log4cpp_null/include/convenience.h \
+               src/log4cpp_null/include/FileAppender.hh \
+               src/log4cpp_null/include/Layout.hh \
+               src/log4cpp_null/include/LayoutAppender.hh \
+               src/log4cpp_null/include/LoggingEvent.hh \
+               src/log4cpp_null/include/PatternLayout.hh \
+               src/log4cpp_null/include/Priority.hh \
+               src/log4cpp_null/include/PropertyConfigurator.hh \
+               src/log4cpp_null/include/RollingFileAppender.hh
+    SOURCES += src/log4cpp_null/src/Appender.cpp \
+               src/log4cpp_null/src/Category.cpp \
+               src/log4cpp_null/src/CategoryStream.cpp \
+               src/log4cpp_null/src/Configurator.cpp \
+               src/log4cpp_null/src/FileAppender.cpp \
+               src/log4cpp_null/src/Layout.cpp \
+               src/log4cpp_null/src/LayoutAppender.cpp \
+               src/log4cpp_null/src/LoggingEvent.cpp \
+               src/log4cpp_null/src/PatternLayout.cpp \
+               src/log4cpp_null/src/PropertyConfigurator.cpp \
+               src/log4cpp_null/src/RollingFileAppender.cpp
 } else {
     message("log4cpp_null build: no")
 }
 
 cygport {
-    INCLUDEPATH += $$(FFTW_HOME)/include \
-                   $$(LOG4CPP_HOME)/include
-    LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
+    message("cygport build:      yes")
+    INCLUDEPATH += $$(FFTW_HOME)/include
+    LIBS += -L/$$(FFTW_HOME)/lib
+} else {
+    message("cygport build:      no")
 }
 
 # People interested in translating a language can contact the developers for help. 

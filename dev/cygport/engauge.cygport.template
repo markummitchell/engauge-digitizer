@@ -9,13 +9,12 @@ NAME="engauge"
 RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
-LOG4CPP_HOME=../../../log4cpp_null
+LOG4CPP_HOME=${S}/dev/cygport/log4cpp_null
 FFTW_HOME=/usr
 CYGQMAKE5_ARGS="CONFIG+=cygport CONFIG+=log4cpp_null"
-S=../engauge.pro
 SUMMARY="Convert graph images to numeric data"
 DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
-HOMEPAGE="http://github.com/engauge-digitizer"
+HOMEPAGE="http://github.com/markummitchell/engauge-digitizer"
 PATCH_URI="
 	engauge-no-undefined.patch
 	engauge-webkit.patch
