@@ -23,13 +23,12 @@ PATCH_URI="
 src_compile() {
 	      cd ${B}
 	      qt5_qmake_compile
-	      cd ${S}/help
-	      dos2unix build
-	      build
 }
 
 src_install() {
 	      dobin ${B}/bin/engauge.exe
+	      cd ${S}/help
+	      dos2unix build
 	      mkdir -p ${B}/share/doc/engauge
-	      cp ../bin/documentation/* ${B}/share/doc/engauge
+	      build ${B}/share/doc/engauge
 }
