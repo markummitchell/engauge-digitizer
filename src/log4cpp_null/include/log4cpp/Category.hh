@@ -17,11 +17,13 @@ namespace log4cpp
     Category();
     virtual ~Category();
 
+    /// Noop method to add an Appender
     void addAppender (Appender *appender);
 
     /// Returns unused priority
     Priority::Value getPriority() const;
 
+    /// Noop method to get root
     static Category &getRoot();
 
     /// Returns a stream
@@ -30,6 +32,7 @@ namespace log4cpp
     /// Stream that never gets used, as seen by inspection of convenience.h
     inline CategoryStream nullStream() { return getStream (Priority::NOTSET); }
 
+    /// Noop method to set priority
     void setPriority (Priority::Value priority);
 
   private:

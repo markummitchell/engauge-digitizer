@@ -6,6 +6,7 @@ namespace log4cpp {
   /// This class provides importance levels for categorizing log messages
   class Priority {
   public:
+    /// Enum for debug levels
     typedef enum {
       EMERG  = 0,
       FATAL  = 0,
@@ -19,6 +20,7 @@ namespace log4cpp {
       NOTSET = 800
     } PriorityLevel;
 
+    /// Priority level
     typedef int Value;
   };  
 }

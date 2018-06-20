@@ -376,7 +376,7 @@ private:
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();
 #endif
-  QString exportFilenameFromInputFilename (const QString &fileName) const;
+  QString exportRegressionFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);
   void fileImport (const QString &fileName,

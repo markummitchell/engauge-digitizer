@@ -6,10 +6,11 @@
 
 namespace log4cpp {
 
-  /// Property configuration
+  /// Noop class that mimics the same class in the log4cpp library
   class PropertyConfigurator
   {
   public:
+    /// Noop method for configuration
     static void configure (const std::string &initFilename);
   };
 }

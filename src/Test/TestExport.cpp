@@ -566,7 +566,7 @@ void TestExport::testExportOnlyNonRegressionUpperCase ()
 void TestExport::testExportOnlyRegressionLowerCase ()
 {
   m_mainWindow->m_isErrorReportRegressionTest = REGRESSION_IMPORT;
-  m_mainWindow->m_loadStartupFiles << STARTUP_DIG_LOWER_CASE;
+  m_mainWindow->m_regressionFile = STARTUP_DIG_LOWER_CASE;
   
   QString outputGot = m_mainWindow->fileNameForExportOnly ();
   QString outputWanted = STARTUP_DIG_LOWER_CASE;
@@ -578,7 +578,7 @@ void TestExport::testExportOnlyRegressionLowerCase ()
 void TestExport::testExportOnlyRegressionUpperCase ()
 {
   m_mainWindow->m_isErrorReportRegressionTest = REGRESSION_IMPORT;
-  m_mainWindow->m_loadStartupFiles << STARTUP_DIG_UPPER_CASE;
+  m_mainWindow->m_regressionFile = STARTUP_DIG_UPPER_CASE;
 
   QString outputGot = m_mainWindow->fileNameForExportOnly ();
   QString outputWanted = STARTUP_DIG_UPPER_CASE;

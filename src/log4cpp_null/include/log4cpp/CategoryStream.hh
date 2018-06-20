@@ -38,14 +38,17 @@ namespace log4cpp {
       return *this;
     }
 
+    /// Noop insertion method for character
     CategoryStream &operator<<(const char*) {
       return *this;
     }
 
+    /// Noop insertion method for string
     CategoryStream &operator<<(const std::string &) {
       return *this;
     }
 
+    /// Noop method to get width
     std::streamsize width(std::streamsize wide);
 
   private:

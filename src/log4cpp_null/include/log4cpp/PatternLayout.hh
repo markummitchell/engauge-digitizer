@@ -9,14 +9,18 @@ namespace log4cpp {
 
   class LoggingEvent;
 
-  /// Layout class
+  /// Noop class that mimics the same class in the log4cpp library
   class PatternLayout : public Layout
   {
   public:
+    /// Single constructor
     PatternLayout ();
     virtual ~PatternLayout ();
 
+    /// Noop method for formatting an event
     virtual std::string format(const LoggingEvent &event);
+
+    /// Noop method for setting the conversion pattern
     virtual void setConversionPattern (const std::string &conversionPattern) throw (ConfigureFailure);
 
   private:

@@ -6,9 +6,11 @@
 
 namespace log4cpp {
 
+  /// Noop class that mimics the same class in log4cpp library
   class FileAppender : public LayoutAppender
   {
   public:
+    /// Single constructor
     FileAppender(const std::string &name);
     virtual ~FileAppender();
   };

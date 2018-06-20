@@ -226,7 +226,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (isExportOnly) {
     ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
     m_loadStartupFiles = loadStartupFiles;
-    m_regressionFile = QString ("%1_1").arg (exportFilenameFromInputFilename (loadStartupFiles.first ())); // For regression test
+    m_regressionFile = QString ("%1_1").arg (exportRegressionFilenameFromInputFilename (loadStartupFiles.first ())); // For regression test
     slotLoadStartupFiles ();
     slotFileExport ();
     exit (0);
@@ -330,7 +330,7 @@ void MainWindow::cmdFileImport(const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileImport";
 
-  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (fileName);
   fileImport (fileName,
               IMPORT_TYPE_SIMPLE);
 }
@@ -339,7 +339,7 @@ void MainWindow::cmdFileOpen(const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileOpen";
 
-  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (fileName);
   loadDocumentFile(fileName);
 }
 
@@ -1626,13 +1626,13 @@ void MainWindow::exportAllCoordinateSystemsAfterRegressionTests()
 }
 #endif
 
-QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) const
+QString MainWindow::exportRegressionFilenameFromInputFilename (const QString &fileName) const
 {
   QString outFileName = fileName;
 
-  outFileName = outFileName.replace (".xml", ".csv_actual"); // Applies when extension is xml
-  outFileName = outFileName.replace (".dig", ".csv_actual"); // Applies when extension is dig
-  outFileName = outFileName.replace (".pdf", ".csv_actual"); // Applies when extension is pdf
+  outFileName = outFileName.replace (".xml", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is xml
+  outFileName = outFileName.replace (".dig", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is dig
+  outFileName = outFileName.replace (".pdf", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is pdf
 
   return outFileName;
 }
@@ -1848,7 +1848,8 @@ QString MainWindow::fileNameForExportOnly () const
   if (m_isErrorReportRegressionTest) {
 
     // Regression test has a specific file extension
-    fileName = m_regressionFile;
+    fileName = QString ("%1_1")
+      .arg (exportRegressionFilenameFromInputFilename (m_regressionFile));
 
   } else {
 
@@ -4264,7 +4265,7 @@ void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFi
   Point::setIdentifierIndex(0);
 
   // Save output/export file name
-  m_regressionFile = exportFilenameFromInputFilename (regressionInputFile);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (regressionInputFile);
 
   m_timerRegressionErrorReport = new QTimer();
   m_timerRegressionErrorReport->setSingleShot(false);
