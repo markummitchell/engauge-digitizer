@@ -1840,6 +1840,29 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
   }
 }
 
+QString MainWindow::fileNameForExportOnly () const
+{
+  ExportToFile exportStrategy;      
+
+  QString fileName;
+  if (m_isErrorReportRegressionTest) {
+
+    // Regression test has a specific file extension
+    fileName = m_regressionFile;
+
+  } else {
+
+    // User requested export-only mode so just change file extension
+    QString dir = QFileInfo (m_currentFileWithPathAndFileExtension).absolutePath();
+    fileName = QString ("%1/%2.%3")
+      .arg (dir)
+      .arg (m_currentFile)
+      .arg (exportStrategy.fileExtensionCsv ());
+  }
+
+  return fileName;
+}
+
 void MainWindow::filePaste (ImportType importType)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::filePaste"
@@ -3413,15 +3436,7 @@ void MainWindow::slotFileExport ()
 
     QString fileName;
     if (m_isExportOnly) {
-      if (m_isErrorReportRegressionTest) {
-        // Regression test has a specific file extension
-        fileName = m_regressionFile;
-      } else {
-        // User requested export-only mode so just change file extension
-        fileName = QString ("%1.%2")
-                            .arg (m_currentFile)
-                            .arg (exportStrategy.fileExtensionCsv ());
-      }
+      fileName = fileNameForExportOnly ();
     } else {
 
       QString filter = QString ("%1;;%2;;All files (*.*)")

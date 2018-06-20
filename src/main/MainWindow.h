@@ -90,6 +90,9 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
+  /// For unit testing
+  friend class TestExport;
+  
 public:
   /// Single constructor.
   /// \param errorReportFile Optional error report file to be read at startup. Empty if unused. Incompatible with fileCmdScript
@@ -379,6 +382,7 @@ private:
   void fileImport (const QString &fileName,
                    ImportType ImportType); /// Same steps as filePaste but with import from file
   void fileImportWithPrompts (ImportType ImportType); /// Wrapper around fileImport that adds user prompt(s)
+  QString fileNameForExportOnly () const; /// File name for export-only batch mode
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
