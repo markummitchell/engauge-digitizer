@@ -26,11 +26,10 @@ src_compile() {
 	      cd ${S}/help
 	      dos2unix build
 	      build
-	      mkdir -p ${B}/share/doc/engauge
-	      cp ../bin/documentation/* ${B}/share/doc/engauge
 }
 
 src_install() {
 	      dobin ${B}/bin/engauge.exe
-	      cp -r ${B}/bin/documentation ${D}/usr/bin
+	      mkdir -p ${B}/share/doc/engauge
+	      cp ../bin/documentation/* ${B}/share/doc/engauge
 }
