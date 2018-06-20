@@ -68,7 +68,7 @@ make
 
 # Help
 cd help
-./build
+./build.bash
 cd ..
 cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources
 

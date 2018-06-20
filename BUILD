@@ -67,7 +67,7 @@ required by the Poppler library.
 6) Build the help file
 
    > cd help
-   > build
+   > build.windows or build.bash
 
 Linux - Steps to build and run engauge executable:
 --------------------------------------------------
