@@ -26,7 +26,8 @@ src_compile() {
 	      cd ${S}/help
 	      dos2unix build
 	      build
-	      cp -r ../bin/documentation ${B}/bin
+	      mkdir -p ${B}/share/doc/engauge
+	      cp ../bin/documentation/* ${B}/share/doc/engauge
 }
 
 src_install() {
