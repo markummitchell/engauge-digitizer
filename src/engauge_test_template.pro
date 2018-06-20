@@ -149,7 +149,6 @@ HEADERS  += \
     Dlg/DlgEditScale.h \    
     Dlg/DlgErrorReportAbstractBase.h \
     Dlg/DlgErrorReportLocal.h \    
-    Dlg/DlgErrorReportNetworking.h \
     Dlg/DlgFilterCommand.h \
     Dlg/DlgFilterThread.h \
     Dlg/DlgFilterWorker.h \
@@ -482,7 +481,6 @@ SOURCES += \
     Dlg/DlgEditScale.cpp \        
     Dlg/DlgErrorReportAbstractBase.cpp \
     Dlg/DlgErrorReportLocal.cpp \        
-    Dlg/DlgErrorReportNetworking.cpp \    
     Dlg/DlgFilterCommand.cpp \
     Dlg/DlgFilterThread.cpp \
     Dlg/DlgFilterWorker.cpp \

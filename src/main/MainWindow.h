@@ -150,7 +150,7 @@ public:
   void saveErrorReportFileAndExit(const char *comment,
                                   const char *file,
                                   int line,
-                                  const char *context) const;
+                                  const char *context);
 
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();

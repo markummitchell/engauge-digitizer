@@ -33,7 +33,6 @@
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
 #include "DlgErrorReportLocal.h"
-#include "DlgErrorReportNetworking.h"
 #include "DlgImportAdvanced.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
@@ -2438,7 +2437,7 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
 void MainWindow::saveErrorReportFileAndExit (const char *context,
                                              const char *file,
                                              int line,
-                                             const char *comment) const
+                                             const char *comment)
 {
   // Skip if currently performing a regression test - in which case the preferred behavior is to let the current test fail and
   // continue on to execute the remaining tests
@@ -2448,20 +2447,25 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                                     file,
                                                     line,
                                                     comment);
-#ifdef NETWORKING  
-    DlgErrorReportNetworking dlg (report);
 
-    // Ask user if report should be uploaded, and if the document is included when it is uploaded
-    if (dlg.exec() == QDialog::Accepted) {
-
-      // Upload the error report to the server
-      m_networkClient->uploadErrorReport (dlg.xmlToUpload());
-    }
-#else
     DlgErrorReportLocal dlg (report);
-    dlg.exec();
+    if (dlg.exec() == QDialog::Accepted) {
+      QFileDialog dlg;
+
+      QString fileName = dlg.getSaveFileName (this,
+                                              tr("Save"),
+                                              "error_report.xml");
+      if (!fileName.isEmpty ()) {
+        // Save the error report
+        QFile fileError (fileName);
+        QTextStream str (&fileError);
+        fileError.open (QIODevice::WriteOnly | QIODevice::Text);
+        str << report;
+        fileError.close ();
+      }
+    }
+
     exit (-1);
-#endif
   }
 }
 
@@ -2490,7 +2494,8 @@ QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
   while (!reader.atEnd ()) {
     reader.readNext ();
     if (reader.tokenType() != QXmlStreamReader::StartDocument &&
-        reader.tokenType() != QXmlStreamReader::EndDocument) {
+        reader.tokenType() != QXmlStreamReader::EndDocument &&
+        reader.tokenType() != QXmlStreamReader::Invalid) {
       writer.writeCurrentToken (reader);
     }
   }

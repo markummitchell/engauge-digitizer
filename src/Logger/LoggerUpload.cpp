@@ -8,13 +8,13 @@
 #include "LoggerUpload.h"
 #include "MainWindow.h"
 
-const MainWindow *LoggerUpload::m_mainWindow = (const MainWindow*) 0;
+MainWindow *LoggerUpload::m_mainWindow = (MainWindow*) 0;
 
 LoggerUpload::LoggerUpload()
 {
 }
 
-void LoggerUpload::bindToMainWindow (const MainWindow *mainWindow)
+void LoggerUpload::bindToMainWindow (MainWindow *mainWindow)
 {
   m_mainWindow = mainWindow;
 }
