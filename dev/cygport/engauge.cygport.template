@@ -29,6 +29,6 @@ src_install() {
 	      dobin ${B}/bin/engauge.exe
 	      cd ${S}/help
 	      dos2unix build.bash
-	      mkdir -p ${B}/share/doc/engauge
-	      build.bash ${B}/share/doc/engauge
+	      mkdir -p ${D}/usr/share/doc/engauge
+	      build.bash ${D}/usr/share/doc/engauge
 }
