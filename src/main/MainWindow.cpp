@@ -225,7 +225,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   if (isExportOnly) {
     ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
     m_loadStartupFiles = loadStartupFiles;
-    m_regressionFile = QString ("%1_1").arg (exportRegressionFilenameFromInputFilename (loadStartupFiles.first ())); // For regression test
+    m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
     slotLoadStartupFiles ();
     slotFileExport ();
     exit (0);

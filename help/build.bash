@@ -1,6 +1,5 @@
-#!/usr/bin/bash
-
-# This creates .qch and .qhc output files. Optional argument is target directory
+# This bash script creates .qch and .qhc output files. Optional argument is target directory.
+# Since bash has different locations depending on the operating system, no #! line is included
 
 if [ $# -eq 0 ]; then
     DESTDIR=../bin/documentation
