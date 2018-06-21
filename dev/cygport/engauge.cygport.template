@@ -1,10 +1,9 @@
 inherit qt5-qmake
 
 VERSION=<VERSION>
-ERSION=<ERSION>
 
-SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/${VERSION}.zip"
-SRC_DIR="engauge-digitizer-${ERSION}"
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/v${VERSION}.zip"
+SRC_DIR="engauge-digitizer-${VERSION}"
 NAME="engauge"
 RELEASE=1
 CATEGORY="Math"
@@ -20,15 +19,19 @@ PATCH_URI="
 	engauge-webkit.patch
 "
 
+DIFF_EXCLUDES="engauge.qch engauge.qhc"
+
 src_compile() {
 	      cd ${B}
 	      qt5_qmake_compile
+	      cd ${S}/help
+	      dos2unix build.bash
+	      build.bash
+	      cp -r ../bin/documentation ${B}/bin
 }
 
 src_install() {
 	      dobin ${B}/bin/engauge.exe
-	      cd ${S}/help
-	      dos2unix build.bash
 	      mkdir -p ${D}/usr/share/doc/engauge
-	      build.bash ${D}/usr/share/doc/engauge
+	      cp ${B}/bin/documentation/* ${D}/usr/share/doc/engauge
 }

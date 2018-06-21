@@ -8,7 +8,7 @@
 
 show_usage_and_quit() {
     echo "Usage: build_version <versiontag>"
-    echo "where versiontag has the format v#.#"
+    echo "where versiontag has the format #.# or #.#.#"
     exit
 }
 
@@ -16,14 +16,8 @@ if [ "$#" -ne 1 ]; then
     show_usage_and_quit
 fi
 
-# Tag with and without the leading v
+# Version number format is documented in show_usage_and_quit
 VERSION=$1
-ERSION=`echo $VERSION | cut -c 2-`
-
-CHAR1=`echo $VERSION | cut -c -1`
-if [ "$CHAR1" != "v" ]; then
-    show_usage_and_quit
-fi
 
 echo "Cleaning old build directory"
 rm -rf 'engauge-'"$VERSION"'-1.x86_64' 2>/dev/null
@@ -31,16 +25,15 @@ echo
 
 echo "Creating engauge.cygport file from engauge.cygport.template"
 dos2unix engauge.cygport.template
-sed 's/<VERSION>/'"$VERSION"'/' engauge.cygport.template >/tmp/engauge.cygport
-sed 's/<ERSION>/'"$ERSION"'/' /tmp/engauge.cygport >engauge.cygport
+sed 's/<VERSION>/'"$VERSION"'/' engauge.cygport.template >.engauge.cygport
 echo
 
 #DEBUG=--debug
 
-cygport $DEBUG engauge.cygport download 2>&1 | tee build_version.log
-cygport $DEBUG engauge.cygport prep     2>&1 | tee -a build_version.log
-cygport $DEBUG engauge.cygport compile  2>&1 | tee -a build_version.log
-cygport $DEBUG engauge.cygport install  2>&1 | tee -a build_version.log
-cygport $DEBUG engauge.cygport package  2>&1 | tee -a build_version.log
+cygport $DEBUG .engauge.cygport download 2>&1 | tee build_version.log
+cygport $DEBUG .engauge.cygport prep     2>&1 | tee -a build_version.log
+cygport $DEBUG .engauge.cygport compile  2>&1 | tee -a build_version.log
+cygport $DEBUG .engauge.cygport install  2>&1 | tee -a build_version.log
+cygport $DEBUG .engauge.cygport package  2>&1 | tee -a build_version.log
 
 echo "Output was logged to build_version.log"
