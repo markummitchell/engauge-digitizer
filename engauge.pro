@@ -730,10 +730,6 @@ macx-* {
   DESTDIR = bin
 }
 
-win32-* {
-  CONFIG += windows
-}
-
 linux-* {
   QT += network
   DEFINES += "NETWORKING"
@@ -748,21 +744,41 @@ linux-* {
   
 win32-msvc* {
   QMAKE_CXXFLAGS += -EHsc /F 32000000
+  !log4cpp_null {
+    LIBS += $$(LOG4CPP_HOME)/lib/log4cpp.lib
+  }
+  LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib
   contains(QT_ARCH,i386) {
-    LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib shell32.lib
+    LIBS += shell32.lib
     QMAKE_LFLAGS += /MACHINE:i386
-  } else {
-    LIBS += $$(FFTW_HOME)/lib/libfftw3-3.lib $$(LOG4CPP_HOME)/lib/log4cpp.lib 
   }
 } else {
   win32-g++* {
-    LIBS += -L$$(LOG4CPP_HOME)/lib -L$$(FFTW_HOME)/lib
+    !log4cpp_null {
+      LIBS += -L$$(LOG4CPP_HOME)/lib
+    }
+    LIBS +=  -L$$(FFTW_HOME)/lib
     QMAKE_LFLAGS += -Wl,--stack,32000000
   }
   LIBS += -lfftw3
   !log4cpp_null {
     LIBS += -llog4cpp
   }
+}
+win32-* {
+  CONFIG += windows
+  INCLUDEPATH += $$(FFTW_HOME)/include
+  !log4cpp_null {
+    INCLUDEPATH += $$(LOG4CPP_HOME)/include
+  }
+}
+
+cygport {
+    message("cygport build:      yes")
+    INCLUDEPATH += $$(FFTW_HOME)/include
+    LIBS += -L/$$(FFTW_HOME)/lib
+} else {
+    message("cygport build:      no")
 }
 
 INCLUDEPATH += src \
@@ -817,11 +833,6 @@ INCLUDEPATH += src \
                src/View \
                src/Window \
                src/Zoom
-
-win32-* {
-  INCLUDEPATH += $$(FFTW_HOME)/include \
-                 $$(LOG4CPP_HOME)/include
-}
 
 RESOURCES += src/engauge.qrc
 
@@ -920,14 +931,6 @@ log4cpp_null {
                src/log4cpp_null/src/RollingFileAppender.cpp
 } else {
     message("log4cpp_null build: no")
-}
-
-cygport {
-    message("cygport build:      yes")
-    INCLUDEPATH += $$(FFTW_HOME)/include
-    LIBS += -L/$$(FFTW_HOME)/lib
-} else {
-    message("cygport build:      no")
 }
 
 # People interested in translating a language can contact the developers for help. 
