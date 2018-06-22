@@ -15,7 +15,7 @@ sudo snap remove engauge-digitizer
 # Rebuild, making sure official qt is used
 PWD=`pwd`
 if [[ "$PWD" == *snapcraft ]]; then
-   cd ..
+   cd ../..
 fi   
 PATH=/usr/bin:$PATH
 LD_LIBRARY_PATH=
@@ -29,12 +29,16 @@ qmake engauge.pro CONFIG+=log4cpp_null CONFIG+=pdf
 make clean
 make -j4
 
+cd help
+./build.bash
+cd ..
+
 sed 's/DESTDIR = ./DESTDIR = bin/g' engauge.pro >engauge.pro.tmp
 mv engauge.pro.tmp engauge.pro
 
 rm -rf parts prime snap stage snapcraft.yaml engauge-digitizer*.snap
 
-ln -s snapcraft/snapcraft.yaml
+ln -s dev/snapcraft/snapcraft.yaml
 snapcraft clean engauge-digitizer
 snapcraft
 sudo snap install engauge-digitizer_*.snap --devmode --dangerous
