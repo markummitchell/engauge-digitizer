@@ -2621,9 +2621,10 @@ void MainWindow::setCurrentFile (const QString &fileName)
   QString fileNameStripped;
   if (!fileName.isEmpty()) {
 
-    // Strip out path and file extension
+    // Strip out path and file extension. We use completeBaseName rather than baseName so
+    // files with multiple periods are handled correctly - all but last suffix gets kept
     QFileInfo fileInfo (fileName);
-    fileNameStripped = fileInfo.baseName();
+    fileNameStripped = fileInfo.completeBaseName();
   }
 
   m_currentFile = fileNameStripped;
@@ -4884,7 +4885,9 @@ void MainWindow::updateWindowTitle ()
     switch (m_modelMainWindow.mainTitleBarFormat())
     {
       case MAIN_TITLE_BAR_FORMAT_NO_PATH:
-        fileNameMaybeStripped = fileInfo.baseName(); // Remove file extension and path for "clean look"
+        // Remove file extension and path for "clean look". We use completeBaseName rather than baseName so
+        // files with multiple periods are handled correctly - all but last suffix gets kept
+        fileNameMaybeStripped = fileInfo.completeBaseName();
         break;
 
       case MAIN_TITLE_BAR_FORMAT_PATH:
