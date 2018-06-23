@@ -26,7 +26,7 @@ src_compile() {
 	      qt5_qmake_compile
 	      cd ${S}/help
 	      dos2unix build.bash
-	      build.bash
+	      ./build.bash
 	      cp -r ../bin/documentation ${B}/bin
 }
 
