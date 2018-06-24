@@ -19,7 +19,7 @@ string PatternLayout::format(const LoggingEvent &)
   return empty;
 }
 
-void PatternLayout::setConversionPattern (const std::string &conversionPattern) throw (ConfigureFailure)
+void PatternLayout::setConversionPattern (const std::string &conversionPattern)
 {
   if (conversionPattern == "") {
     throw ConfigureFailure("Empty reason");

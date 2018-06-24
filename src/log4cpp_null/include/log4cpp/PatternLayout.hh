@@ -20,8 +20,9 @@ namespace log4cpp {
     /// Noop method for formatting an event
     virtual std::string format(const LoggingEvent &event);
 
-    /// Noop method for setting the conversion pattern
-    virtual void setConversionPattern (const std::string &conversionPattern) throw (ConfigureFailure);
+    /// Noop method for setting the conversion pattern. This used to throw
+    /// ConfigureFailure but newer compilers do not like explicit throws
+    virtual void setConversionPattern (const std::string &conversionPattern);
 
   private:
     std::string m_conversionPattern;
