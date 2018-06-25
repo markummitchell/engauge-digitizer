@@ -140,7 +140,6 @@ Document::Document (const QString &fileName) :
                                   .arg (QObject::tr ("File"))
                                   .arg (fileName)
                                   .arg (QObject::tr ("was not found"));
-
   }
 }
 

@@ -1746,6 +1746,16 @@ void MainWindow::fileImport (const QString &fileName,
                   .arg (fileName)
                   .arg (tr ("from directory"))
                   .arg (QDir::currentPath());
+#ifdef WIN32
+    if (fileName.contains ("???")) {
+
+      // At this point the file name is filled with question marks in Windows if it had letter from
+      // more than one alphabet (e.g. latin '.dig' suffix and cyrillic basename)
+      // in which case we cannot recover the original file without user intervention
+      msg += QObject::tr ("The file appears to have characters from multiple language "
+                          "alphabets, which does not work in the Windows command line");
+    }
+#endif
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
                           msg);
