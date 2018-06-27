@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "CallbackDocumentScrub.h"
+#include "CallbackSearchReturn.h"
 #include "Point.h"
 #include <QStringList>
 
