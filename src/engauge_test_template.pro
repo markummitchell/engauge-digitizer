@@ -42,6 +42,7 @@ HEADERS  += \
     Callback/CallbackCheckAddPointAxis.h \
     Callback/CallbackCheckEditPointAxis.h \
     Callback/CallbackDocumentHash.h \
+    Callback/CallbackDocumentScrub.h \
     Callback/CallbackGatherXThetaValuesFunctions.h \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
@@ -190,6 +191,7 @@ HEADERS  += \
     Document/DocumentModelGridRemoval.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
+    Document/DocumentScrub.h \
     Document/DocumentSerialize.h \
     include/EngaugeAssert.h \
     util/EnumsToQt.h \
@@ -378,6 +380,7 @@ SOURCES += \
     Callback/CallbackCheckAddPointAxis.cpp \
     Callback/CallbackCheckEditPointAxis.cpp \
     Callback/CallbackDocumentHash.cpp \
+    Callback/CallbackDocumentScrub.cpp \
     Callback/CallbackGatherXThetaValuesFunctions.cpp \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
@@ -520,6 +523,7 @@ SOURCES += \
     Document/DocumentModelGridRemoval.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
+    Document/DocumentScrub.cpp \
     Document/DocumentSerialize.cpp \
     util/EnumsToQt.cpp \
     Export/ExportAlignLinear.cpp \

@@ -48,6 +48,7 @@
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
@@ -4331,9 +4332,13 @@ void MainWindow::updateAfterCommand ()
   updateFittingWindow ();
   updateGeometryWindow();
 
-  // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
-  // so proper state can be verified
+  // Final actions at the end of a redo/undo are:
+  // 1) checkpoint the Document and GraphicsScene to log files so proper state can be verified
+  // 2) run sanity check on state
   writeCheckpointToLogFile ();
+  DocumentScrub docScrub;
+  docScrub.check (*this,
+                  m_cmdMediator->document ());
 
   // Since focus may have drifted over to Geometry Window or some other control we se focus on the GraphicsView
   // so the cursor is appropriate for the current state (otherwise it often ends up as default arrow)

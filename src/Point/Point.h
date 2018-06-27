@@ -19,6 +19,8 @@ enum ApplyHasCheck {
   SKIP_HAS_CHECK
 };
 
+extern const QString POINT_IDENTIFIER_DELIMITER_SAFE;
+
 /// Class that represents one digitized point. The screen-to-graph coordinate transformation is always external to this class
 class Point
 {
