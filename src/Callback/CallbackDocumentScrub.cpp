@@ -63,8 +63,8 @@ CallbackSearchReturn CallbackDocumentScrub::callback (const QString & /* curveNa
     m_badPointName = point.identifier ();
   }
 
-  return (m_success ? CallbackSearchReturn::CALLBACK_SEARCH_RETURN_CONTINUE :
-                      CallbackSearchReturn::CALLBACK_SEARCH_RETURN_INTERRUPT);
+  return (m_success ? CALLBACK_SEARCH_RETURN_CONTINUE :
+                      CALLBACK_SEARCH_RETURN_INTERRUPT);
 }
 
 bool CallbackDocumentScrub::success () const
