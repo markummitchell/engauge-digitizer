@@ -30,7 +30,7 @@ make clean
 make -j4
 
 cd help
-./build.bash
+./build.bash documentation
 cd ..
 
 sed 's/DESTDIR = ./DESTDIR = bin/g' engauge.pro >engauge.pro.tmp

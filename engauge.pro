@@ -741,9 +741,12 @@ linux-* {
              src/Network/NetworkClient.h
   SOURCES += src/Load/LoadImageFromUrl.cpp \
              src/Network/NetworkClient.cpp
-  INCLUDEPATH += $$(FFTW_HOME)/include \
-                 $$(LOG4CPP_HOME)/include
-  LIBS += -L/$$(FFTW_HOME)/lib -L$$(LOG4CPP_HOME)/lib
+  INCLUDEPATH += $$(FFTW_HOME)/include
+  LIBS += -L/$$(FFTW_HOME)/lib
+  !log4cpp_null {
+    INCLUDEPATH += $$(LOG4CPP_HOME)/include
+    LIBS += -L$$(LOG4CPP_HOME)/lib
+  }
 }
   
 win32-msvc* {

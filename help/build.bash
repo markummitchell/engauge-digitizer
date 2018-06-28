@@ -12,6 +12,7 @@ fi
 qcollectiongenerator engauge.qhcp -o engauge.qhc
 
 # Move to target directory
+mkdir $DESTDIR
 mv engauge.qch $DESTDIR
 mv engauge.qhc $DESTDIR
 
