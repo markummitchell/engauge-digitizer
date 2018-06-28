@@ -2,10 +2,10 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <Product Name='Engauge Digitizer' 
            Manufacturer='Engauge Open Source Developers'
-	   Id='d40e94ab-f5ef-4ea2-9371-375aafd1c0a9'
+	   Id='b2aeb683-b0f5-4fe1-96e0-e069a0474d0c'
 	   UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
 	   Language='1033' Codepage='1252' 
-           Version='10.7'>
+           Version='10.8'>
     <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
 	     Comments='Engauge Digitizer is available from github.com' Manufacturer='Engauge Open Source Developers'
 	     InstallerVersion='300' Languages='1033' Compressed='yes' SummaryCodepage='1252' InstallScope='perMachine' Platform='x64' />
