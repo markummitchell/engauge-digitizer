@@ -28,6 +28,8 @@ CallbackSearchReturn CallbackDocumentScrub::callback (const QString & /* curveNa
 
   QStringList fields = identifier.split (POINT_IDENTIFIER_DELIMITER_SAFE);
 
+  bool successBefore = m_success;
+
   // Required format is defined by Point::temporaryPointIdentifier and Point::uniqueIdentifierGenerator
   if (fields.size () == 2) {
 
@@ -59,7 +61,7 @@ CallbackSearchReturn CallbackDocumentScrub::callback (const QString & /* curveNa
 
   }
 
-  if (!m_success) {
+  if (!m_success && successBefore) {
     m_badPointName = point.identifier ();
   }
 
