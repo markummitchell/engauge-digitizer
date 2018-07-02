@@ -297,8 +297,8 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer はグラフの画像から精密な数値データを効率的に抽出するためのオープンソース ツールです。この工程は  "inverse graphing"とも呼べるかも知れません。もしあなたがドキュメントと "engauge" ー Engaugeを通して携わる ー とき、あなたはピクセルを数値に変換しているのです。&lt;/p&gt;&lt;p&gt;これはフリーソフトであり、 GNU General Public License Version 2または(選択はお任せしますが)それ以降のライセンス条件に基づいて自由に再配布していただいて構いません。&lt;/p&gt;&lt;p&gt;Engauge Digitizer に関しては一切の保証を負いません。&lt;/p&gt;&lt;p&gt;詳細については同梱のLICENSE ファイルをお読みください。&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer はグラフの画像から精密な数値データを効率的に抽出するためのオープンソース ツールです。この工程は  "inverse graphing"とも呼べるかも知れません。もしあなたがドキュメントと "engauge" ー Engaugeを通して携わる ー とき、あなたはピクセルを数値に変換しているのです。&lt;/p&gt;&lt;p&gt;これはフリーソフトであり、 GNU General Public License Version 2または(選択はお任せしますが)それ以降のライセンス条件に基づいて自由に再配布していただいて構いません。&lt;/p&gt;&lt;p&gt;Engauge Digitizer に関しては一切の保証を負いません。&lt;/p&gt;&lt;p&gt;詳細については同梱のLICENSE ファイルをお読みください。&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>
@@ -511,7 +511,7 @@ The original document can be sent as part of the error report, which increases t
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>セーブ</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="59" />
@@ -4411,7 +4411,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2467" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>セーブ</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3475" />
@@ -5361,7 +5361,7 @@ Click on the Axis Points button</source>
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
-for entering the axis point's
+for entering the axis point'apos;s
 coordinates</source>
         <translation>ステップ 2 - 座標軸または グリッド の線上で座標値の分かっている位置をクリックします。
 その点は座標軸 の基準となる ポイント として表示され、 またそれらのポイント の座標入力を促すダイアログ画面が現れます。</translation>

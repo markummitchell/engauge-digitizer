@@ -297,8 +297,8 @@ Para executar o Assistente de Guia Checklist quando um arquivo de imagem é impo
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitador é uma ferramenta de código aberto para extrair de forma eficiente os dados numéricos precisos a partir de imagens de gráficos. O processo pode ser considerado como " gráfica inversa " . Quando você " Engauge " um documento, que está a converter pixels em números.&lt;/p&gt;&lt;p&gt;Isto é software livre, e você está convidado a redistribui-lo sob certas condições de acordo com a GNU General Public License versão 2 , ou (a seu critério ) qualquer versão posterior .&lt;/p&gt;&lt;p&gt;Engauge Digitador vem com ABSOLUTAMENTE NENHUMA GARANTIA .&lt;/p&gt;&lt;p&gt;Leia o arquivo de licença incluído para obter detalhes.&lt;/p&gt;&lt;p&gt;Ligações Engauge digitador&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Projeto Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Fórum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X ligações&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Página do projeto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X ligações&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Página do projeto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitador é uma ferramenta de código aberto para extrair de forma eficiente os dados numéricos precisos a partir de imagens de gráficos. O processo pode ser considerado como " gráfica inversa " . Quando você " Engauge " um documento, que está a converter pixels em números.&lt;/p&gt;&lt;p&gt;Isto é software livre, e você está convidado a redistribui-lo sob certas condições de acordo com a GNU General Public License versão 2 , ou (a seu critério ) qualquer versão posterior .&lt;/p&gt;&lt;p&gt;Engauge Digitador vem com ABSOLUTAMENTE NENHUMA GARANTIA .&lt;/p&gt;&lt;p&gt;Leia o arquivo de licença incluído para obter detalhes.&lt;/p&gt;&lt;p&gt;Ligações Engauge digitador&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Projeto Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Fórum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X ligações&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Página do projeto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X ligações&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Página do projeto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>
@@ -502,17 +502,17 @@ O formato esperado do valor da coordenada é determinada pela configuração de 
         <source>An unrecoverable error has occurred. Would you like to save an error report that can be sent later to the Engauge developers?
 
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
-        <translation type="unfinished" />
+        <translation>Um erro irrecuperável ocorreu. Gostaria de salvar um relatório de erro que possa ser enviado posteriormente aos desenvolvedores do Engauge? O documento original pode ser enviado como parte do relatório de erros, o que aumenta as chances de encontrar e corrigir o (s) problema (s). No entanto, se alguma informação for privada, será enviada uma versão anônima do documento.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="42" />
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation>Incluir informações do documento original, caso contrário tornar anónima a informação</translation>
+        <translation>Incluir informações do documento original, senão anonimizar as informações</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>Salve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="59" />
@@ -2310,14 +2310,14 @@ Quando arrastar e soltar está desativado, um conjunto retangular de células da
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228" />
         <source>Significant digits:</source>
-        <translation type="unfinished" />
+        <translation>Dígitos significantes:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="233" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
-        <translation type="unfinished" />
+        <translation>Dígitos SignificativosNúmero de dígitos de precisão em números de ponto flutuante. Esse valor afeta os cálculos para ajustes de curva, uma vez que resultados intermediários menores que um limite T indicam que uma curva polinomial com uma ordem específica não pode ser ajustada aos dados. O limiar T é calculado a partir do elemento máximo da matriz M e dos dígitos significativos S como T = M / 10 ^ S.</translation>
     </message>
 </context>
 <context>
@@ -4409,7 +4409,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2467" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>Salve</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3475" />
@@ -4864,7 +4864,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40" />
         <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and langauge locale. The invalid point name was</source>
-        <translation type="unfinished" />
+        <translation>Erro do identificador de ponto encontrado. Por favor, notifique os desenvolvedores do Engauge junto com quaisquer comentários sobre o país e a localidade do idioma. O nome do ponto inválido era</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="14" />
@@ -5211,7 +5211,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1756" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
-        <translation type="unfinished" />
+        <translation>O arquivo parece ter caracteres de vários alfabetos de idioma, o que não funciona na linha de comando do Windows</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindowModel.cpp" line="109" />
@@ -5221,7 +5221,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/main/main.cpp" line="232" />
         <source> is used only with one document file specified</source>
-        <translation type="unfinished" />
+        <translation>é usado apenas com um arquivo de documento especificado</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="258" />
@@ -5236,7 +5236,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/main/main.cpp" line="266" />
         <source>Export the loaded startup file, which must have all axis points defined, then stop</source>
-        <translation type="unfinished" />
+        <translation>Exporte o arquivo de inicialização carregado, que deve ter todos os pontos de eixo definidos e, em seguida, pare</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="270" />
@@ -5361,7 +5361,7 @@ Clique no botão Pontos Axis</translation>
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
-for entering the axis point's
+for entering the axis point'apos;s
 coordinates</source>
         <translation>Passo 2 - Clique em um eixo ou grade
 linha com coordenadas conhecidas. um eixo
