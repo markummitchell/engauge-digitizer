@@ -24,6 +24,7 @@
 const QLocale::NumberOption HIDE_GROUP_SEPARATOR = QLocale::OmitGroupSeparator;
 
 bool DEFAULT_DRAG_DROP_EXPORT = false; // False value allows intuitive copy-and-drag to select a rectangular set of table cells
+int DEFAULT_SIGNIFICANT_DIGITS = 7;
 bool DEFAULT_SMALL_DIALOGS = false;
 
 MainWindowModel::MainWindowModel() :
@@ -35,7 +36,8 @@ MainWindowModel::MainWindowModel() :
   m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES),
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_smallDialogs (DEFAULT_SMALL_DIALOGS),
-  m_dragDropExport (DEFAULT_DRAG_DROP_EXPORT)
+  m_dragDropExport (DEFAULT_DRAG_DROP_EXPORT),
+  m_significantDigits (DEFAULT_SIGNIFICANT_DIGITS)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -50,7 +52,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_maximumGridLines (other.maximumGridLines()),
   m_highlightOpacity (other.highlightOpacity()),
   m_smallDialogs (other.smallDialogs()),
-  m_dragDropExport (other.dragDropExport())
+  m_dragDropExport (other.dragDropExport()),
+  m_significantDigits (other.significantDigits())
 {
 }
 
@@ -66,6 +69,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_highlightOpacity = other.highlightOpacity();
   m_smallDialogs = other.smallDialogs();
   m_dragDropExport = other.dragDropExport();
+  m_significantDigits = other.significantDigits();
 
   return *this;
 }
@@ -145,6 +149,7 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "highlightOpacity=" << m_highlightOpacity << "\n";
   str << indentation << "smallDialogs=" << (m_smallDialogs ? "yes" : "no") << "\n";
   str << indentation << "dragDropExport=" << (m_dragDropExport ? "yes" : "no") << "\n";
+  str << indentation << "significantDigits=" << m_significantDigits << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -201,6 +206,11 @@ void MainWindowModel::setPdfResolution(int resolution)
   m_pdfResolution = resolution;
 }
 
+void MainWindowModel::setSignificantDigits (int significantDigits)
+{
+  m_significantDigits = significantDigits;
+}
+
 void MainWindowModel::setSmallDialogs(bool smallDialogs)
 {
   m_smallDialogs = smallDialogs;
@@ -214,6 +224,11 @@ void MainWindowModel::setZoomControl (ZoomControl zoomControl)
 void MainWindowModel::setZoomFactorInitial(ZoomFactorInitial zoomFactorInitial)
 {
   m_zoomFactorInitial = zoomFactorInitial;
+}
+
+int MainWindowModel::significantDigits() const
+{
+  return m_significantDigits;
 }
 
 bool MainWindowModel::smallDialogs () const

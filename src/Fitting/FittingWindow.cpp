@@ -34,7 +34,8 @@ const int COLUMN_POLYNOMIAL_TERMS = 1;
 FittingWindow::FittingWindow (MainWindow *mainWindow) :
   WindowAbstractBase (mainWindow),
   m_isLogXTheta (false),
-  m_isLogYRadius (false)
+  m_isLogYRadius (false),
+  m_significantDigits (mainWindow->modelMainWindow().significantDigits ())
 {
   setVisible (false);
   setAllowedAreas (Qt::AllDockWidgetAreas);
@@ -67,7 +68,8 @@ void FittingWindow::calculateCurveFitAndStatistics ()
                                                     m_coefficients,
                                                     mse,
                                                     rms,
-                                                    rSquared);
+                                                    rSquared,
+                                                    m_significantDigits);
 
   m_lblMeanSquareError->setText (QString::number (mse));
   m_lblRootMeanSquare->setText (QString::number (rms));
@@ -264,6 +266,7 @@ void FittingWindow::update (const CmdMediator &cmdMediator,
   m_isLogXTheta = (cmdMediator.document().modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
   m_isLogYRadius = (cmdMediator.document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG);
   m_view->setDragEnabled (modelMainWindow.dragDropExport());
+  m_significantDigits = modelMainWindow.significantDigits();
 
   m_pointsConvenient.clear ();
 

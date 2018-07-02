@@ -18,6 +18,7 @@
 class QTextStream;
 
 extern bool DEFAULT_DRAG_DROP_EXPORT;
+extern int DEFAULT_SIGNIFICANT_DIGITS;
 extern bool DEFAULT_SMALL_DIALOGS;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
@@ -90,6 +91,9 @@ public:
   /// Set method for resolution of imported PDF files, in dots per inch
   void setPdfResolution (int resolution);
 
+  /// Set method for significant digits
+  void setSignificantDigits (int significantDigits);
+
   /// Set method for small dialogs flag
   void setSmallDialogs (bool smallDialogs);
 
@@ -98,6 +102,9 @@ public:
 
   /// Set method for initial zoom factor
   void setZoomFactorInitial (ZoomFactorInitial zoomFactorInitial);
+
+  /// Get method for significant digits
+  int significantDigits () const;
 
   /// Get method for small dialogs flag
   bool smallDialogs () const;
@@ -120,6 +127,7 @@ private:
   double m_highlightOpacity;
   bool m_smallDialogs;
   bool m_dragDropExport;
+  int m_significantDigits;
 
 };
 

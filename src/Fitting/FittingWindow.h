@@ -90,6 +90,8 @@ private:
 
   // Export format and coordinate scale are updated after every CmdAbstractBase gets redone/undone
   DocumentModelExportFormat m_modelExport;
+
+  double m_significantDigits;
 };
 
 #endif // FITTING_WINDOW_H

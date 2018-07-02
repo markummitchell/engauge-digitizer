@@ -65,6 +65,7 @@ extern const QString SETTINGS_MAIN_TITLE_BAR_FORMAT;
 extern const QString SETTINGS_MAXIMUM_GRID_LINES;
 extern const QString SETTINGS_POS;
 extern const QString SETTINGS_RECENT_FILE_LIST;
+extern const QString SETTINGS_SIGNIFICANT_DIGITS;
 extern const QString SETTINGS_SIZE;
 extern const QString SETTINGS_SMALL_DIALOGS;
 extern const QString SETTINGS_VIEW_BACKGROUND_TOOLBAR;

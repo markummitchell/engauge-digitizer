@@ -2820,6 +2820,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                      QVariant (DEFAULT_SMALL_DIALOGS)).toBool ());
   m_modelMainWindow.setDragDropExport (settings.value (SETTINGS_DRAG_DROP_EXPORT,
                                                        QVariant (DEFAULT_DRAG_DROP_EXPORT)).toBool ());
+  m_modelMainWindow.setSignificantDigits (settings.value (SETTINGS_SIGNIFICANT_DIGITS,
+                                                          QVariant (DEFAULT_SIGNIFICANT_DIGITS)).toInt ());
 
   updateSettingsMainWindow();
   updateSmallDialogs();

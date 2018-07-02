@@ -22,41 +22,42 @@ FittingStatistics::~FittingStatistics()
 
 void FittingStatistics::calculateCurveFit (int orderReduced,
                                            const FittingPointsConvenient &pointsConvenient,
-                                           FittingCurveCoefficients &coefficients)
+                                           FittingCurveCoefficients &coefficients,
+                                           int significantDigits)
 {
   QVector<double> a; // Unused if there are no points
 
   if (0 <= orderReduced) {
 
-    // Calculate X and y arrays in y = X a
-    Matrix X (pointsConvenient.size (), orderReduced + 1);
-    QVector<double> Y (pointsConvenient.size ());
-    loadXAndYArrays (orderReduced,
-                     pointsConvenient,
-                     X,
-                     Y);
+    // We further reduce the order in case the inputs are badly defined. Known bad data example
+    // is trying to linearly fit two points with same x but different y values (=infinite slope).
+    // Retries are done with successively reduced order. With good inputs no reduction is required
+    // so orderReducedFurther succeeds with the same value as orderReduced
+    int orderReducedFurther = orderReduced;
+    while (!calculateCurveFitReducedFurther (orderReducedFurther,
+                                             pointsConvenient,
+                                             significantDigits,
+                                             a)) {
 
-    // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y
-    Matrix denominator = X.transpose () * X;
-    LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFit determinant=" << denominator.determinant();
-    a = denominator.inverse () * X.transpose () * Y;
-
-    Matrix expectedIdentity = denominator * denominator.inverse ();
-    LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFit expectedIdentity="
-                                 << expectedIdentity.toString ().toLatin1().data ();
+      // Retry if possible with lower order
+      --orderReducedFurther;
+      if (orderReducedFurther < 0) {
+        break;
+      }
+    }
   }
 
   // Copy coefficients into member variable and into list for sending as a signal
   FittingCurveCoefficients fittingCurveCoef;
   for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
 
-    if (order <= orderReduced) {
+    if (order < a.size ()) {
 
       // Copy from polynomial regression vector
       coefficients [order] = a [order];
       fittingCurveCoef.append (a [order]);
 
-    } else {
+    } else if (order < coefficients.size ()) {
 
       // Set to zero in case value gets used somewhere
       coefficients [order] = 0;
@@ -65,12 +66,55 @@ void FittingStatistics::calculateCurveFit (int orderReduced,
   }
 }
 
+bool FittingStatistics::calculateCurveFitReducedFurther (int orderReducedFurther,
+                                                         const FittingPointsConvenient &pointsConvenient,
+                                                         int significantDigits,
+                                                         QVector<double> &a) const
+{
+  // Calculate X and y arrays in y = X a
+  Matrix X (pointsConvenient.size (), orderReducedFurther + 1);
+  QVector<double> Y (pointsConvenient.size ());
+  loadXAndYArrays (orderReducedFurther,
+                   pointsConvenient,
+                   X,
+                   Y);
+
+  // Solve for the coefficients a in y = X a + epsilon using a = (Xtranpose X)^(-1) Xtranspose y. Solution
+  // uses more complicated transposes rather than just using a = X^(-1) y since the transpose approach
+  // can handle when the a matrix is nonsquare
+  Matrix denominator = X.transpose () * X;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFitReducedFurther determinant=" << denominator.determinant();
+
+  MatrixConsistent matrixConsistent = MATRIX_CONSISTENT;
+  Matrix inv = denominator.inverse (significantDigits,
+                                    matrixConsistent);
+
+  if (matrixConsistent == MATRIX_INCONSISTENT) {
+
+    LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFitReducedFurther failed with order="
+                                 << orderReducedFurther;
+
+    return false;
+  }
+
+  a = inv * X.transpose () * Y;
+  Matrix expectedIdentity = denominator * inv;
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "FittingStatistics::calculateCurveFitReducedFurther succeeded with order="
+                               << orderReducedFurther
+                               << " expectedIdentity="
+                               << expectedIdentity.toString ().toLatin1().data ();
+
+  return true;
+}
+
 void FittingStatistics::calculateCurveFitAndStatistics (unsigned int order,
                                                         const FittingPointsConvenient &pointsConvenient,
                                                         FittingCurveCoefficients &coefficients,
                                                         double &mse,
                                                         double &rms,
-                                                        double &rSquared)
+                                                        double &rSquared,
+                                                        int significantDigits)
 {
   // Let user know something is happening if a high order was picked since that can take a long time
   qApp->setOverrideCursor (Qt::WaitCursor);
@@ -83,7 +127,8 @@ void FittingStatistics::calculateCurveFitAndStatistics (unsigned int order,
 
   calculateCurveFit (orderReduced,
                      pointsConvenient,
-                     coefficients);
+                     coefficients,
+                     significantDigits);
   calculateStatistics (pointsConvenient,
                        coefficients,
                        mse,
@@ -168,7 +213,11 @@ double FittingStatistics::yFromXAndCoefficients (const FittingCurveCoefficients 
   double sum = 0;
 
   for (int order = 0; order <= MAX_POLYNOMIAL_ORDER; order++) {
-    sum += coefficients [order] * qPow (x, (double) order);
+    double coef = 0;
+    if (order < coefficients.size ()) {
+      coef = coefficients [order];
+    }
+    sum += coef * qPow (x, (double) order);
   }
 
   return sum;
