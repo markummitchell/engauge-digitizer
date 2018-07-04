@@ -145,7 +145,7 @@ cp ./src/img/bannerapp_64.xpm $HOME/$APP/$APP.AppDir/engauge.xpm
 
 # Documentation and translation
 cd help
-./build
+./build.bash
 cd ..
 
 lrelease engauge.pro

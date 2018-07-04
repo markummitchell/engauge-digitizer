@@ -14,6 +14,7 @@
 #include "MainWindow.h"
 #include "Point.h"
 #include <QApplication>
+#include <QContextMenuEvent>
 #include <QDebug>
 #include <QDropEvent>
 #include <QGraphicsPixmapItem>

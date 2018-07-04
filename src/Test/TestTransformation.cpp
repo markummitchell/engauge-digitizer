@@ -38,6 +38,7 @@ void TestTransformation::initTestCase ()
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool NO_REGRESSION_IMPORT = false;
   const bool NO_RESET = false;
+  const bool NO_EXPORT_ONLY = false;  
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -47,9 +48,10 @@ void TestTransformation::initTestCase ()
 
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
                 NO_REGRESSION_OPEN_FILE,
-                NO_GNUPLOT_LOG_FILES,
                 NO_REGRESSION_IMPORT,
+                NO_GNUPLOT_LOG_FILES,
                 NO_RESET,
+                NO_EXPORT_ONLY,
                 NO_LOAD_STARTUP_FILES);
   w.show ();
 }

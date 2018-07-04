@@ -1,0 +1,9 @@
+sdesc: "Extract numbers from graph images"
+ldesc: "Recover numeric data from images of graphs"
+category: Math Graphics Utils
+requires: cygwin libfftw3_3 libgcc1 libQt5Core5 libQt5Gui5 libQt5Help5 libstdc++6 
+
+
+
+
+

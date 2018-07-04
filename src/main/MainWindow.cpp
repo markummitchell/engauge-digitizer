@@ -1,4 +1,3 @@
-
 /******************************************************************************************************
  * (C) 2014 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
@@ -34,7 +33,6 @@
 #include "DigitSelect.xpm"
 #include "DlgAbout.h"
 #include "DlgErrorReportLocal.h"
-#include "DlgErrorReportNetworking.h"
 #include "DlgImportAdvanced.h"
 #include "DlgRequiresTransform.h"
 #include "DlgSettingsAxesChecker.h"
@@ -50,6 +48,7 @@
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
@@ -151,7 +150,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        bool isRegressionTest,
                        bool isGnuplot,
                        bool isReset,
-                       QStringList loadStartupFiles,
+                       bool isExportOnly,
+                       const QStringList &loadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
@@ -172,7 +172,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (0),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0),
-  m_fittingCurve (0)
+  m_fittingCurve (0),
+  m_isExportOnly (isExportOnly)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -222,7 +223,15 @@ MainWindow::MainWindow(const QString &errorReportFile,
   // current directory, so we temporarily reset the current directory
   QString originalPath = QDir::currentPath();
   QDir::setCurrent (m_startupDirectory);
-  if (!errorReportFile.isEmpty()) {
+  if (isExportOnly) {
+    ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
+    m_loadStartupFiles = loadStartupFiles;
+    m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
+    slotLoadStartupFiles ();
+    slotFileExport ();
+    exit (0);
+  }
+  else if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
     if (m_isErrorReportRegressionTest) {
       startRegressionTestErrorReport(errorReportFile);
@@ -321,7 +330,7 @@ void MainWindow::cmdFileImport(const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileImport";
 
-  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (fileName);
   fileImport (fileName,
               IMPORT_TYPE_SIMPLE);
 }
@@ -330,7 +339,7 @@ void MainWindow::cmdFileOpen(const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::cmdFileOpen";
 
-  m_regressionFile = exportFilenameFromInputFilename (fileName);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (fileName);
   loadDocumentFile(fileName);
 }
 
@@ -1617,13 +1626,13 @@ void MainWindow::exportAllCoordinateSystemsAfterRegressionTests()
 }
 #endif
 
-QString MainWindow::exportFilenameFromInputFilename (const QString &fileName) const
+QString MainWindow::exportRegressionFilenameFromInputFilename (const QString &fileName) const
 {
   QString outFileName = fileName;
 
-  outFileName = outFileName.replace (".xml", ".csv_actual"); // Applies when extension is xml
-  outFileName = outFileName.replace (".dig", ".csv_actual"); // Applies when extension is dig
-  outFileName = outFileName.replace (".pdf", ".csv_actual"); // Applies when extension is pdf
+  outFileName = outFileName.replace (".xml", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is xml
+  outFileName = outFileName.replace (".dig", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is dig
+  outFileName = outFileName.replace (".pdf", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is pdf
 
   return outFileName;
 }
@@ -1738,6 +1747,16 @@ void MainWindow::fileImport (const QString &fileName,
                   .arg (fileName)
                   .arg (tr ("from directory"))
                   .arg (QDir::currentPath());
+#ifdef WIN32
+    if (fileName.contains ("???")) {
+
+      // At this point the file name is filled with question marks in Windows if it had letter from
+      // more than one alphabet (e.g. latin '.dig' suffix and cyrillic basename)
+      // in which case we cannot recover the original file without user intervention
+      msg += QObject::tr ("The file appears to have characters from multiple language "
+                          "alphabets, which does not work in the Windows command line");
+    }
+#endif
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
                           msg);
@@ -1829,6 +1848,30 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
                   importType);
     }
   }
+}
+
+QString MainWindow::fileNameForExportOnly () const
+{
+  ExportToFile exportStrategy;      
+
+  QString fileName;
+  if (m_isErrorReportRegressionTest) {
+
+    // Regression test has a specific file extension
+    fileName = QString ("%1_1")
+      .arg (exportRegressionFilenameFromInputFilename (m_regressionFile));
+
+  } else {
+
+    // User requested export-only mode so just change file extension
+    QString dir = QFileInfo (m_currentFileWithPathAndFileExtension).absolutePath();
+    fileName = QString ("%1/%2.%3")
+      .arg (dir)
+      .arg (m_currentFile)
+      .arg (exportStrategy.fileExtensionCsv ());
+  }
+
+  return fileName;
 }
 
 void MainWindow::filePaste (ImportType importType)
@@ -2405,7 +2448,7 @@ bool MainWindow::saveDocumentFile (const QString &fileName)
 void MainWindow::saveErrorReportFileAndExit (const char *context,
                                              const char *file,
                                              int line,
-                                             const char *comment) const
+                                             const char *comment)
 {
   // Skip if currently performing a regression test - in which case the preferred behavior is to let the current test fail and
   // continue on to execute the remaining tests
@@ -2415,20 +2458,25 @@ void MainWindow::saveErrorReportFileAndExit (const char *context,
                                                     file,
                                                     line,
                                                     comment);
-#ifdef NETWORKING  
-    DlgErrorReportNetworking dlg (report);
 
-    // Ask user if report should be uploaded, and if the document is included when it is uploaded
-    if (dlg.exec() == QDialog::Accepted) {
-
-      // Upload the error report to the server
-      m_networkClient->uploadErrorReport (dlg.xmlToUpload());
-    }
-#else
     DlgErrorReportLocal dlg (report);
-    dlg.exec();
+    if (dlg.exec() == QDialog::Accepted) {
+      QFileDialog dlg;
+
+      QString fileName = dlg.getSaveFileName (this,
+                                              tr("Save"),
+                                              "error_report.xml");
+      if (!fileName.isEmpty ()) {
+        // Save the error report
+        QFile fileError (fileName);
+        QTextStream str (&fileError);
+        fileError.open (QIODevice::WriteOnly | QIODevice::Text);
+        str << report;
+        fileError.close ();
+      }
+    }
+
     exit (-1);
-#endif
   }
 }
 
@@ -2457,7 +2505,8 @@ QString MainWindow::saveErrorReportFileAndExitXml (const char *context,
   while (!reader.atEnd ()) {
     reader.readNext ();
     if (reader.tokenType() != QXmlStreamReader::StartDocument &&
-        reader.tokenType() != QXmlStreamReader::EndDocument) {
+        reader.tokenType() != QXmlStreamReader::EndDocument &&
+        reader.tokenType() != QXmlStreamReader::Invalid) {
       writer.writeCurrentToken (reader);
     }
   }
@@ -2583,9 +2632,10 @@ void MainWindow::setCurrentFile (const QString &fileName)
   QString fileNameStripped;
   if (!fileName.isEmpty()) {
 
-    // Strip out path and file extension
+    // Strip out path and file extension. We use completeBaseName rather than baseName so
+    // files with multiple periods are handled correctly - all but last suffix gets kept
     QFileInfo fileInfo (fileName);
-    fileNameStripped = fileInfo.baseName();
+    fileNameStripped = fileInfo.completeBaseName();
   }
 
   m_currentFile = fileNameStripped;
@@ -2770,6 +2820,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                      QVariant (DEFAULT_SMALL_DIALOGS)).toBool ());
   m_modelMainWindow.setDragDropExport (settings.value (SETTINGS_DRAG_DROP_EXPORT,
                                                        QVariant (DEFAULT_DRAG_DROP_EXPORT)).toBool ());
+  m_modelMainWindow.setSignificantDigits (settings.value (SETTINGS_SIGNIFICANT_DIGITS,
+                                                          QVariant (DEFAULT_SIGNIFICANT_DIGITS)).toInt ());
 
   updateSettingsMainWindow();
   updateSmallDialogs();
@@ -3399,24 +3451,33 @@ void MainWindow::slotFileExport ()
 
   if (m_transformation.transformIsDefined()) {
 
-    ExportToFile exportStrategy;
-    QString filter = QString ("%1;;%2;;All files (*.*)")
-                     .arg (exportStrategy.filterCsv ())
-                     .arg (exportStrategy.filterTsv ());
-
-    // OSX sandbox requires, for the default, a non-empty filename
     MainDirectoryPersist directoryPersist;
-    QString defaultFileName = QString ("%1/%2.%3")
-                              .arg (directoryPersist.getDirectoryExportSave().path ())
-                              .arg (m_currentFile)
-                              .arg (exportStrategy.fileExtensionCsv ());
-    QFileDialog dlg;
-    QString filterCsv = exportStrategy.filterCsv ();
-    QString fileName = dlg.getSaveFileName (this,
-                                            tr("Export"),
-                                            defaultFileName,
-                                            filter,
-                                            &filterCsv);
+    ExportToFile exportStrategy;
+
+    QString fileName;
+    if (m_isExportOnly) {
+      fileName = fileNameForExportOnly ();
+    } else {
+
+      QString filter = QString ("%1;;%2;;All files (*.*)")
+                       .arg (exportStrategy.filterCsv ())
+                       .arg (exportStrategy.filterTsv ());
+
+      // OSX sandbox requires, for the default, a non-empty filename
+      QString defaultFileName = QString ("%1/%2.%3")
+                                .arg (directoryPersist.getDirectoryExportSave().path ())
+                                .arg (m_currentFile)
+                                .arg (exportStrategy.fileExtensionCsv ());
+      QFileDialog dlg;
+      QString filterCsv = exportStrategy.filterCsv ();
+
+      fileName = dlg.getSaveFileName (this,
+                                      tr("Export"),
+                                      defaultFileName,
+                                      filter,
+                                      &filterCsv);
+    }
+
     if (!fileName.isEmpty ()) {
 
       directoryPersist.setDirectoryExportSaveFromFilename(fileName);
@@ -4223,7 +4284,7 @@ void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFi
   Point::setIdentifierIndex(0);
 
   // Save output/export file name
-  m_regressionFile = exportFilenameFromInputFilename (regressionInputFile);
+  m_regressionFile = exportRegressionFilenameFromInputFilename (regressionInputFile);
 
   m_timerRegressionErrorReport = new QTimer();
   m_timerRegressionErrorReport->setSingleShot(false);
@@ -4273,9 +4334,13 @@ void MainWindow::updateAfterCommand ()
   updateFittingWindow ();
   updateGeometryWindow();
 
-  // Final action at the end of a redo/undo is to checkpoint the Document and GraphicsScene to log files
-  // so proper state can be verified
+  // Final actions at the end of a redo/undo are:
+  // 1) checkpoint the Document and GraphicsScene to log files so proper state can be verified
+  // 2) run sanity check on state
   writeCheckpointToLogFile ();
+  DocumentScrub docScrub;
+  docScrub.check (*this,
+                  m_cmdMediator->document ());
 
   // Since focus may have drifted over to Geometry Window or some other control we se focus on the GraphicsView
   // so the cursor is appropriate for the current state (otherwise it often ends up as default arrow)
@@ -4837,7 +4902,9 @@ void MainWindow::updateWindowTitle ()
     switch (m_modelMainWindow.mainTitleBarFormat())
     {
       case MAIN_TITLE_BAR_FORMAT_NO_PATH:
-        fileNameMaybeStripped = fileInfo.baseName(); // Remove file extension and path for "clean look"
+        // Remove file extension and path for "clean look". We use completeBaseName rather than baseName so
+        // files with multiple periods are handled correctly - all but last suffix gets kept
+        fileNameMaybeStripped = fileInfo.completeBaseName();
         break;
 
       case MAIN_TITLE_BAR_FORMAT_PATH:

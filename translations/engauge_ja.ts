@@ -297,8 +297,8 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer はグラフの画像から精密な数値データを効率的に抽出するためのオープンソース ツールです。この工程は  "inverse graphing"とも呼べるかも知れません。もしあなたがドキュメントと "engauge" ー Engaugeを通して携わる ー とき、あなたはピクセルを数値に変換しているのです。&lt;/p&gt;&lt;p&gt;これはフリーソフトであり、 GNU General Public License Version 2または(選択はお任せしますが)それ以降のライセンス条件に基づいて自由に再配布していただいて構いません。&lt;/p&gt;&lt;p&gt;Engauge Digitizer に関しては一切の保証を負いません。&lt;/p&gt;&lt;p&gt;詳細については同梱のLICENSE ファイルをお読みください。&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='https://github.com/markummitchell/engauge-digitizer'&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='https://gitter.im/markummitchell/engauge-digitizer'&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.fftw.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='http://www.openjpeg.org'&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer はグラフの画像から精密な数値データを効率的に抽出するためのオープンソース ツールです。この工程は  "inverse graphing"とも呼べるかも知れません。もしあなたがドキュメントと "engauge" ー Engaugeを通して携わる ー とき、あなたはピクセルを数値に変換しているのです。&lt;/p&gt;&lt;p&gt;これはフリーソフトであり、 GNU General Public License Version 2または(選択はお任せしますが)それ以降のライセンス条件に基づいて自由に再配布していただいて構いません。&lt;/p&gt;&lt;p&gt;Engauge Digitizer に関しては一切の保証を負いません。&lt;/p&gt;&lt;p&gt;詳細については同梱のLICENSE ファイルをお読みください。&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>
@@ -492,49 +492,29 @@ The expected format of the coordinate value is determined by the locale setting.
 <context>
     <name>DlgErrorReportLocal</name>
     <message>
-        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="29" />
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="31" />
         <source>Error Report</source>
         <translation>エラー レポート</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="32" />
-        <source>An unrecoverable error has occurred. Quitting.</source>
-        <translation>修復できない エラー が発生しました。プログラムを終了します。</translation>
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="34" />
+        <source>An unrecoverable error has occurred. Would you like to save an error report that can be sent later to the Engauge developers?
+
+The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
+        <translation>回復不能なエラーが発生しました。後でエンゲージ開発者に送信できるエラーレポートを保存しますか？元のドキュメントは、エラーレポートの一部として送信することができ、問題を見つけて修正する機会が増えます。ただし、情報がプライベートである場合、匿名化されたバージョンのドキュメントが送信されます。</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="42" />
-        <source>Ok</source>
-        <translation>Ok</translation>
-    </message>
-</context>
-<context>
-    <name>DlgErrorReportNetworking</name>
-    <message>
-        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="31" />
-        <source>Error Report</source>
-        <translation>エラー レポート</translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="34" />
-        <source>An unrecoverable error has occurred. Would you like to send an error report to the Engauge developers?
-
-The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
-        <translation>修復できないエラーが発生しました。 エラー レポートを Engauge の開発グループに送りませんか ?
-
-オリジナルのドキュメントを エラー レポートの一部として含めて送信することもでき、これは(時に複数の)問題を修正する手がかりとなると期待されます。しかしながら、私的な情報が含まれることもありますので、その場合は情報を秘匿したかたちでのドキュメントを送信します。 </translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="42" />
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation>オリジナルのドキュメント情報を含めます。これを選択しない場合にはドキュメント情報は秘匿されます。</translation>
+        <translation>元の文書情報を含める、そうでなければ情報を匿名化する</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="54" />
-        <source>Send</source>
-        <translation>送信</translation>
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54" />
+        <source>Save</source>
+        <translation>セーブ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgErrorReportNetworking.cpp" line="59" />
+        <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="59" />
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -2129,17 +2109,17 @@ Y 枠線を終了する位置です。この値は開始位置の値よりも小
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="34" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="40" />
         <source>Main Window</source>
         <translation>メイン画面</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="59" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65" />
         <source>Initial zoom:</source>
         <translation>初期画面の倍率：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -2148,32 +2128,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 新たにドキュメントを開いたときに画面に表示される倍率を設定します。前回閉じたときの倍率を維持することもできますし、また倍率を指定して開くこともできます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86" />
         <source>Zoom control:</source>
         <translation>倍率の変更：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="90" />
         <source>Menu only</source>
         <translation>メニューのみ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="85" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
         <source>Menu and mouse wheel</source>
         <translation>メニューおよびマウス ホィールを使用</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92" />
         <source>Menu and +/- keys</source>
         <translation>メニューおよび +/- キーを使用</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>メニュー、マウス ホィール、あるいは +/- キーを使用</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -2182,12 +2162,12 @@ Select which inputs are used to zoom in and out.</source>
 倍率の拡大・縮小にどの入力方法を使うかを選べます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale:</source>
         <translation>ロケール</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -2200,12 +2180,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 ロケール は数値の表現形式を決定付けますが、特に コンマ とピリオド はユーザーインターフェースでの表示に加えて出力ファイルでの取り扱いに影響します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="118" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124" />
         <source>Import cropping:</source>
         <translation>画像をトリミングしてインポート</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="122" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -2219,12 +2199,12 @@ This setting only has an effect when Engauge has been built with support for pdf
 </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="135" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141" />
         <source>Import PDF resolution (dots per inch):</source>
         <translation>PDF インポート の解像度 (dpi)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="145" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -2233,12 +2213,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 Portable Document Format (PDF) ファイルをインポートすると、ここで指定した解像度  (dots per inch: DPI)に変換されます。ここでのドットはピクセルに相当します。 値を大きくすると解像度が上がり、デジタイズ精度がよくなる可能性があります。一方で、あまり大きな値を与えて画像ファイルサイズが大きいと Engauge の動きが遅くなります。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160" />
         <source>Maximum grid lines:</source>
         <translation>枠線の最大数</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="159" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -2247,12 +2227,12 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 ここで作成できる枠線の最大本数を指定します。この上限値を設定することで、枠線を生成する際にその範囲に比べてインターバル間隔が小さすぎるなど、枠線が多すぎて見分けがつかなくなったり、処理に時間がかかりすぎたりすることを防ぐことができます。 (各枠線の処理にある程度の時間を要します)。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="166" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172" />
         <source>Highlight opacity:</source>
         <translation>ハイライト時の透明度</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -2261,17 +2241,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 選択モードで カーブ あるいは座標軸の基準点にマウスを重ねると、透明度の変化でハイライトしています。この見た目の変化でポイントがいつ選択されたかなどを知ることができます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184" />
         <source>Recent file list:</source>
         <translation>最近利用したファイルのリスト</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
         <source>Clear</source>
         <translation>クリア</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="183" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -2280,12 +2260,12 @@ Clear the recent file list in the File menu.</source>
 ファイル メニューに表示される 最近利用したファイルリストをクリアすることができます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195" />
         <source>Include title bar path:</source>
         <translation>タイトルバーにファイルへのパスを含める</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -2294,12 +2274,12 @@ Includes or excludes the path and file extension from the filename in the title 
 タイトル バーにはファイル名が表示されますが、同時にファイルへのパスや拡張子を表示するか非表示とするかを選択できます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="199" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205" />
         <source>Allow small dialogs:</source>
         <translation>設定画面を小さく</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="210" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -2308,12 +2288,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 設定画面を可能な限り小さくして、小型のコンピューターの画面で扱いやすくします。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215" />
         <source>Allow drag and drop export:</source>
         <translation>ドラッグ アンド ドロップ でのエクスポートを許可</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="214" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="220" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -2324,6 +2304,18 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
 カーブ フィッティング 画面 や ジオメトリ 画面からのドラッグ アンド ドロップ でのエクスポートを可能にします。
 
 ドラッグ アンド ドロップ でのエクスポートを許可しない状態であれば、クリック アンド ドラッグ でセルを長方形のテーブル状に選択することができます。一方、ドラッグ アンド ドロップ でのエクスポートを許可しているときには、クリック したあとに シフトボタンを押しながらクリックすることでセルを選択状態にします。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228" />
+        <source>Significant digits:</source>
+        <translation>重要な数字：</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="233" />
+        <source>Significant Digits
+
+Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
+        <translation>有意な桁数浮動小数点数の精度の桁数。この値は、中間結果がしきい値Tよりも小さいため、特定の次数を持つ多項式曲線をデータに当てはめることができないため、曲線適合の計算に影響します。閾値Tは、最大行列要素MとT = M / 10 ^ Sのような有効桁Sから計算される。</translation>
     </message>
 </context>
 <context>
@@ -2490,13 +2482,13 @@ In addition to the points placed at regular intervals, this option causes a poin
 <context>
     <name>FittingWindow</name>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="41" />
         <location filename="../src/Fitting/FittingWindow.cpp" line="42" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="43" />
         <source>Curve Fitting Window</source>
         <translation>カーブ フィッティング 画面</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="43" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="44" />
         <source>Curve Fitting Window
 
 This window applies a curve fit to the currently selected curve.
@@ -2509,57 +2501,57 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 もし ドラッグ アンド ドロップ が有効になっていない場合には、クリックしてからドラッグすることでその四角形の範囲を選択状態にすることができます。逆に ドラッグ アンド ドロップ が有効な場合には、クリックしてからシフトキーを押しながら再度クリックし四角形の範囲を選択します。なおドラッグ アンド ドロップ を有効にするには メイン画面 設定を利用してください。</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="126" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="128" />
         <source>Order:</source>
         <translation>多項式の次数</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="151" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="153" />
         <source>Mean square error:</source>
         <translation>平均二乗誤差</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="156" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="158" />
         <source>Calculated mean square error statistic</source>
         <translation>平均二乗誤差の計算結果</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="159" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="161" />
         <source>Root mean square:</source>
         <translation>二乗平均平方根</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="164" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="166" />
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
         <translation>二乗平均平方根の計算結果。（平均二乗誤差の平方根として得られます）。</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="167" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="169" />
         <source>R squared:</source>
         <translation>決定係数</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="172" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="174" />
         <source>Calculated R squared statistic</source>
         <translation>決定係数の計算結果</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="226" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="228" />
         <source>log10(Y)=</source>
         <translation>log10(Y)=</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="227" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="229" />
         <source>Y=</source>
         <translation>Y=</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="232" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="234" />
         <source>log10(X)</source>
         <translation>log10(X)</translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="233" />
+        <location filename="../src/Fitting/FittingWindow.cpp" line="235" />
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -2613,7 +2605,7 @@ Distance = カーブに沿った 距離で、グラフ 単位あるいはパー�
 <context>
     <name>GraphicsView</name>
     <message>
-        <location filename="../src/Graphics/GraphicsView.cpp" line="54" />
+        <location filename="../src/Graphics/GraphicsView.cpp" line="55" />
         <source>Main Window
 
 After an image file is imported, or an Engauge Document opened, an image appears in this area. Points are added to the image.
@@ -2669,22 +2661,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="375" />
+        <location filename="../src/main/MainWindow.cpp" line="384" />
         <source>Select Tool</source>
         <translation>選択ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="376" />
+        <location filename="../src/main/MainWindow.cpp" line="385" />
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="378" />
+        <location filename="../src/main/MainWindow.cpp" line="387" />
         <source>Select points on screen.</source>
         <translation>画面上でポイントを選択</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="379" />
+        <location filename="../src/main/MainWindow.cpp" line="388" />
         <source>Select
 
 Select points on the screen.</source>
@@ -2693,22 +2685,22 @@ Select points on the screen.</source>
 画面上でポイントを選択</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="383" />
+        <location filename="../src/main/MainWindow.cpp" line="392" />
         <source>Axis Point Tool</source>
         <translation>座標軸ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="384" />
+        <location filename="../src/main/MainWindow.cpp" line="393" />
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="386" />
+        <location filename="../src/main/MainWindow.cpp" line="395" />
         <source>Digitize axis points for a graph.</source>
         <translation>グラフ を対象に 座標軸の基準となる ポイント を デジタイズ します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="387" />
+        <location filename="../src/main/MainWindow.cpp" line="396" />
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
@@ -2717,22 +2709,22 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
 グラフ の座標軸の基準となる ポイント を、マウス の クリック で追加するとともに、座標値を入力していきます。グラフ の場合には座標軸を決めるために 3 点 の ポイント が必要になります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="394" />
+        <location filename="../src/main/MainWindow.cpp" line="403" />
         <source>Scale Bar Tool</source>
         <translation>スケールバー ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="395" />
+        <location filename="../src/main/MainWindow.cpp" line="404" />
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="397" />
+        <location filename="../src/main/MainWindow.cpp" line="406" />
         <source>Digitize scale bar for a map.</source>
         <translation>マップ を対象に スケールバー を デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="398" />
+        <location filename="../src/main/MainWindow.cpp" line="407" />
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -2745,22 +2737,22 @@ Maps must be imported using Import (Advanced).</source>
 マップ 画像は、ファイル メニュー の インポート (アドバンス) を選択して インポート してください。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="405" />
+        <location filename="../src/main/MainWindow.cpp" line="414" />
         <source>Curve Point Tool</source>
         <translation>カーブ ポイント ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="406" />
+        <location filename="../src/main/MainWindow.cpp" line="415" />
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="408" />
+        <location filename="../src/main/MainWindow.cpp" line="417" />
         <source>Digitize curve points.</source>
         <translation>カーブ の ポイント を デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="409" />
+        <location filename="../src/main/MainWindow.cpp" line="418" />
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -2773,22 +2765,22 @@ New points will be assigned to the currently selected curve.</source>
 新たに ポイント をデジタイズ するたびに、それらの ポイント は現在選択中の カーブ に追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="416" />
+        <location filename="../src/main/MainWindow.cpp" line="425" />
         <source>Point Match Tool</source>
         <translation>ポイント マッチング ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="417" />
+        <location filename="../src/main/MainWindow.cpp" line="426" />
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="419" />
+        <location filename="../src/main/MainWindow.cpp" line="428" />
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>ポイント を マッチング して カーブ 上の ポイント 座標を決定します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="420" />
+        <location filename="../src/main/MainWindow.cpp" line="429" />
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -2801,22 +2793,22 @@ New points will be assigned to the currently selected curve.</source>
 新たに 得られた ポイント は現在選択されている カーブ のポイントとなります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="426" />
+        <location filename="../src/main/MainWindow.cpp" line="435" />
         <source>Color Picker Tool</source>
         <translation>カラーピッカー ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="427" />
+        <location filename="../src/main/MainWindow.cpp" line="436" />
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="429" />
+        <location filename="../src/main/MainWindow.cpp" line="438" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>セグメント フィル モード の色指定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="430" />
+        <location filename="../src/main/MainWindow.cpp" line="439" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -2825,22 +2817,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 現在 選択中の カーブ に沿ってピクセルを選択します。このピクセルおよびその周辺の画像情報 (色・明度等) が セグメント フィル モード で利用されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="436" />
+        <location filename="../src/main/MainWindow.cpp" line="445" />
         <source>Segment Fill Tool</source>
         <translation>セグメント フィル ツール</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="437" />
+        <location filename="../src/main/MainWindow.cpp" line="446" />
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="439" />
+        <location filename="../src/main/MainWindow.cpp" line="448" />
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>カーブの線分とポイントのデジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="440" />
+        <location filename="../src/main/MainWindow.cpp" line="449" />
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -2853,17 +2845,17 @@ New points will be assigned to the currently selected curve.</source>
 生成された新たなポイントは現在選択されているカーブに追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="461" />
+        <location filename="../src/main/MainWindow.cpp" line="470" />
         <source>&amp;Undo</source>
         <translation>やり直し</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="463" />
+        <location filename="../src/main/MainWindow.cpp" line="472" />
         <source>Undo the last operation.</source>
         <translation>直前の操作を取り消します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="464" />
+        <location filename="../src/main/MainWindow.cpp" line="473" />
         <source>Undo
 
 Undo the last operation.</source>
@@ -2872,17 +2864,17 @@ Undo the last operation.</source>
 直前の操作を取り消します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="468" />
+        <location filename="../src/main/MainWindow.cpp" line="477" />
         <source>&amp;Redo</source>
         <translation>繰り返し</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="470" />
+        <location filename="../src/main/MainWindow.cpp" line="479" />
         <source>Redo the last operation.</source>
         <translation>直前の操作を再度実行します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="471" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Redo
 
 Redo the last operation.</source>
@@ -2891,17 +2883,17 @@ Redo the last operation.</source>
 直前の操作を再度実行します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="475" />
+        <location filename="../src/main/MainWindow.cpp" line="484" />
         <source>Cut</source>
         <translation>カット</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477" />
+        <location filename="../src/main/MainWindow.cpp" line="486" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>選択されたポイントを切り取り、クリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="478" />
+        <location filename="../src/main/MainWindow.cpp" line="487" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -2910,17 +2902,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 選択されたポイントを切り取り、クリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="482" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
         <source>Copy</source>
         <translation>コピー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="484" />
+        <location filename="../src/main/MainWindow.cpp" line="493" />
         <source>Copies the selected points to the clipboard.</source>
         <translation>選択されたポイントをクリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="485" />
+        <location filename="../src/main/MainWindow.cpp" line="494" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -2929,17 +2921,17 @@ Copies the selected points to the clipboard.</source>
 選択されたポイントをクリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="489" />
+        <location filename="../src/main/MainWindow.cpp" line="498" />
         <source>Paste</source>
         <translation>貼り付け</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Pastes the selected points from the clipboard.</source>
         <translation>選択されたポイントをクリップボード からコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="492" />
+        <location filename="../src/main/MainWindow.cpp" line="501" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -2948,17 +2940,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 選択されたポイントを クリップボード から貼り付けます。現在のカーブに追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="496" />
+        <location filename="../src/main/MainWindow.cpp" line="505" />
         <source>Delete</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="498" />
+        <location filename="../src/main/MainWindow.cpp" line="507" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>選択された ポイント を クリップボードに コピーしたうえで削除します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="508" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -2967,17 +2959,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 選択された ポイント をクリップボードにコピーしたうえで削除します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="503" />
+        <location filename="../src/main/MainWindow.cpp" line="512" />
         <source>Paste As New</source>
         <translation>新規画像として貼り付け</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="504" />
+        <location filename="../src/main/MainWindow.cpp" line="513" />
         <source>Pastes an image from the clipboard.</source>
         <translation>クリップボード から 画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="505" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -2986,17 +2978,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 クリップボード から 画像を貼り付けて 新たなドキュメントを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="509" />
+        <location filename="../src/main/MainWindow.cpp" line="518" />
         <source>Paste As New (Advanced)...</source>
         <translation>新規画像として貼り付け (アドバンス)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="510" />
+        <location filename="../src/main/MainWindow.cpp" line="519" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>アドバンス モード で クリップボード から画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="511" />
+        <location filename="../src/main/MainWindow.cpp" line="520" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -3005,22 +2997,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 アドバンス モード で クリップボード から画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="520" />
+        <location filename="../src/main/MainWindow.cpp" line="529" />
         <source>&amp;Import...</source>
         <translation>インポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="521" />
+        <location filename="../src/main/MainWindow.cpp" line="530" />
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="522" />
+        <location filename="../src/main/MainWindow.cpp" line="531" />
         <source>Creates a new document by importing an simple image.</source>
         <translation>画像をインポートすることで新たにドキュメントを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="523" />
+        <location filename="../src/main/MainWindow.cpp" line="532" />
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -3033,17 +3025,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 複数の座標系からなるさらに複雑な画像を利用する場合あるいは座標軸が変化するような場合には、画像のインポート (アドバンス) を代わりに実行します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="530" />
+        <location filename="../src/main/MainWindow.cpp" line="539" />
         <source>Import (Advanced)...</source>
         <translation>画像のインポート (アドバンス)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="531" />
+        <location filename="../src/main/MainWindow.cpp" line="540" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>画像をインポートして新たにドキュメントを作る際に、アドバンス機能を利用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="532" />
+        <location filename="../src/main/MainWindow.cpp" line="541" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -3052,17 +3044,17 @@ Creates a new document by importing an image with support for advanced feaures. 
 画像をインポートして新たにドキュメントを作る際に、アドバンス機能を利用します。このアドバンス モードでは、複数の座標軸や、変化する座標軸を利用できます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="537" />
+        <location filename="../src/main/MainWindow.cpp" line="546" />
         <source>Import (Image Replace)...</source>
         <translation>画像のインポート (差し替え)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="538" />
+        <location filename="../src/main/MainWindow.cpp" line="547" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>現在のドキュメントに新たな画像をインポートし、既存の画像を差し替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="539" />
+        <location filename="../src/main/MainWindow.cpp" line="548" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
@@ -3071,17 +3063,17 @@ Imports a new image into the current document. The existing image is replaced, a
 現在のドキュメントに新たな画像をインポートします。既存の画像は新たな画像に差し替えられますが、ドキュメント内の全てのカーブはそのまま保持されます。この操作は設定を変えずに新たな画像に対して作業を行いたい場合に大変便利です。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="545" />
+        <location filename="../src/main/MainWindow.cpp" line="554" />
         <source>&amp;Open...</source>
         <translation>開く</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="547" />
+        <location filename="../src/main/MainWindow.cpp" line="556" />
         <source>Opens an existing document.</source>
         <translation>既存のドキュメントを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="548" />
+        <location filename="../src/main/MainWindow.cpp" line="557" />
         <source>Open Document
 
 Opens an existing document.</source>
@@ -3090,17 +3082,17 @@ Opens an existing document.</source>
 既存のドキュメントを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="561" />
+        <location filename="../src/main/MainWindow.cpp" line="570" />
         <source>&amp;Close</source>
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="563" />
+        <location filename="../src/main/MainWindow.cpp" line="572" />
         <source>Closes the open document.</source>
         <translation>現在開いているドキュメントを閉じます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="564" />
+        <location filename="../src/main/MainWindow.cpp" line="573" />
         <source>Close Document
 
 Closes the open document.</source>
@@ -3109,17 +3101,17 @@ Closes the open document.</source>
 現在開いているドキュメントを閉じます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="568" />
+        <location filename="../src/main/MainWindow.cpp" line="577" />
         <source>&amp;Save</source>
         <translation>上書き保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="570" />
+        <location filename="../src/main/MainWindow.cpp" line="579" />
         <source>Saves the current document.</source>
         <translation>現在のドキュメントを上書き保存します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="571" />
+        <location filename="../src/main/MainWindow.cpp" line="580" />
         <source>Save Document
 
 Saves the current document.</source>
@@ -3128,17 +3120,17 @@ Saves the current document.</source>
 現在のドキュメントを上書き保存します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="575" />
+        <location filename="../src/main/MainWindow.cpp" line="584" />
         <source>Save As...</source>
         <translation>名前を付けて保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="577" />
+        <location filename="../src/main/MainWindow.cpp" line="586" />
         <source>Saves the current document under a new filename.</source>
         <translation>現在開いているドキュメントを新たにファイル名をつけて保存します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="578" />
+        <location filename="../src/main/MainWindow.cpp" line="587" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -3147,22 +3139,22 @@ Saves the current document under a new filename.</source>
 現在開いているドキュメントを粗らにファイル名をつけて保存します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="582" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
         <source>Export...</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="583" />
+        <location filename="../src/main/MainWindow.cpp" line="592" />
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="584" />
+        <location filename="../src/main/MainWindow.cpp" line="593" />
         <source>Exports the current document into a text file.</source>
         <translation>現在のドキュメントをテキストファイルとしてエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="585" />
+        <location filename="../src/main/MainWindow.cpp" line="594" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
@@ -3171,17 +3163,17 @@ Exports the current document into a text file.</source>
 現在のドキュメントをテキストファイルとしてエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="598" />
         <source>&amp;Print...</source>
         <translation>印刷</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="600" />
         <source>Print the current document.</source>
         <translation>現在のドキュメントを印刷します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
+        <location filename="../src/main/MainWindow.cpp" line="601" />
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -3190,17 +3182,17 @@ Print the current document to a printer or file.</source>
 現在のドキュメントをプリンターまたはファイルに出力します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="596" />
+        <location filename="../src/main/MainWindow.cpp" line="605" />
         <source>&amp;Exit</source>
         <translation>終了</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="598" />
+        <location filename="../src/main/MainWindow.cpp" line="607" />
         <source>Quits the application.</source>
         <translation>アプリケーションを終了します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="599" />
+        <location filename="../src/main/MainWindow.cpp" line="608" />
         <source>Exit
 
 Quits the application.</source>
@@ -3209,17 +3201,17 @@ Quits the application.</source>
 アプリケーションを終了します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="608" />
+        <location filename="../src/main/MainWindow.cpp" line="617" />
         <source>Checklist Guide Wizard</source>
         <translation>チェックリストと手引きウィザード</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="610" />
+        <location filename="../src/main/MainWindow.cpp" line="619" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>インポートの作業の過程で、チェックリストと手引きウィザードを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="611" />
+        <location filename="../src/main/MainWindow.cpp" line="620" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -3228,17 +3220,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 インポートの過程でチェックリストと手引きウィザードを使い、画像をインポートしてドキュメントを作成するための一連の手順のチェックリストを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="618" />
+        <location filename="../src/main/MainWindow.cpp" line="627" />
         <source>Tutorial</source>
         <translation>チュートリアル</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="619" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>カーブ をデジタイズ する手順を チュートリアル形式で実行します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="620" />
+        <location filename="../src/main/MainWindow.cpp" line="629" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -3247,17 +3239,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 カーブ をデジタイズ する手順をチュートリアル形式で実行します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="635" />
         <source>Help</source>
         <translation>ヘルプ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628" />
+        <location filename="../src/main/MainWindow.cpp" line="637" />
         <source>Help documentation</source>
         <translation>ヘルプ ドキュメント</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="629" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -3266,17 +3258,17 @@ Searchable help documentation</source>
 検索可能なヘルプ ドキュメント</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634" />
+        <location filename="../src/main/MainWindow.cpp" line="643" />
         <source>About Engauge</source>
         <translation>Engaugeについて</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="635" />
+        <location filename="../src/main/MainWindow.cpp" line="644" />
         <source>About the application.</source>
         <translation>このアプリケーションについて</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="636" />
+        <location filename="../src/main/MainWindow.cpp" line="645" />
         <source>About Engauge
 
 About the application.</source>
@@ -3285,17 +3277,17 @@ About the application.</source>
 このアプリケーションについて</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="644" />
+        <location filename="../src/main/MainWindow.cpp" line="653" />
         <source>Coordinates...</source>
         <translation>座標系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="645" />
+        <location filename="../src/main/MainWindow.cpp" line="654" />
         <source>Edit Coordinate settings.</source>
         <translation>座標系の設定を編集します</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="646" />
+        <location filename="../src/main/MainWindow.cpp" line="655" />
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -3304,17 +3296,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 座標系の設定はグラフに設定した座標がどのように画像上のピクセル位置に対応するかを定めます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="650" />
+        <location filename="../src/main/MainWindow.cpp" line="659" />
         <source>Add/Remove Curve...</source>
         <translation>カーブの追加/削除</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="651" />
+        <location filename="../src/main/MainWindow.cpp" line="660" />
         <source>Add or Remove Curves.</source>
         <translation>カーブを追加または削除します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="652" />
+        <location filename="../src/main/MainWindow.cpp" line="661" />
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
@@ -3323,17 +3315,17 @@ Add/Remove Curve settings control which curves are included in the current docum
 ドキュメント中に含む カーブ の追加あるいは削除を行います。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="656" />
+        <location filename="../src/main/MainWindow.cpp" line="665" />
         <source>Curve Properties...</source>
         <translation>カーブ 設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="657" />
+        <location filename="../src/main/MainWindow.cpp" line="666" />
         <source>Edit Curve Properties settings.</source>
         <translation>カーブ の設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="658" />
+        <location filename="../src/main/MainWindow.cpp" line="667" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -3342,17 +3334,17 @@ Curves properties settings determine how each curve appears</source>
 カーブ 設定では、それぞれの カーブ をどのように表示するかを設定します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="662" />
+        <location filename="../src/main/MainWindow.cpp" line="671" />
         <source>Digitize Curve...</source>
         <translation>カーブ を デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663" />
+        <location filename="../src/main/MainWindow.cpp" line="672" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>座標軸 および グラフ 設定の編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="664" />
+        <location filename="../src/main/MainWindow.cpp" line="673" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -3361,17 +3353,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 デジタイズ 設定は座標軸上の基準点やカーブ ポイント をデジタイズする際の設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="669" />
+        <location filename="../src/main/MainWindow.cpp" line="678" />
         <source>Export Format...</source>
         <translation>エクスポート フォーマット</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670" />
+        <location filename="../src/main/MainWindow.cpp" line="679" />
         <source>Edit Export Format settings.</source>
         <translation>エクスポート フォーマット の編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671" />
+        <location filename="../src/main/MainWindow.cpp" line="680" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -3380,17 +3372,17 @@ Export format settings affect how exported files are formatted</source>
 エクスポートされたファイルのフォーマットを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="684" />
         <source>Color Filter...</source>
         <translation>カラー フィルター</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="685" />
         <source>Edit Color Filter settings.</source>
         <translation>カラー フィルター 設定の編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="677" />
+        <location filename="../src/main/MainWindow.cpp" line="686" />
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -3399,17 +3391,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 カラー フィルター により、 ポイント マッチング や セグメント フィル の処理に際して グラフの認識がより効率的になります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="681" />
+        <location filename="../src/main/MainWindow.cpp" line="690" />
         <source>Axes Checker...</source>
         <translation>座標軸 チェッカー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="682" />
+        <location filename="../src/main/MainWindow.cpp" line="691" />
         <source>Edit Axes Checker settings.</source>
         <translation>座標軸 チェッカー の設定を編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="683" />
+        <location filename="../src/main/MainWindow.cpp" line="692" />
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -3418,17 +3410,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 座標軸 チェッカー により、座標軸の基準点に問題がないかどうかを確認することができます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="687" />
+        <location filename="../src/main/MainWindow.cpp" line="696" />
         <source>Grid Line Display...</source>
         <translation>グリッド 線の表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="688" />
+        <location filename="../src/main/MainWindow.cpp" line="697" />
         <source>Edit Grid Line Display settings.</source>
         <translation>グリット 線の表示設定を編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="689" />
+        <location filename="../src/main/MainWindow.cpp" line="698" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -3437,17 +3429,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 グラフ上にグリッド 線を表示すると、座標軸 チェッカー よりもさらに正確に グラフ の歪みなどをチェックすることができます。グラフの画像が歪んでいる場合には、グリッド 線を利用して座標軸の基準点を微調整することで、グラフ の各部分にわたって精度を上げることができます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="694" />
+        <location filename="../src/main/MainWindow.cpp" line="703" />
         <source>Grid Line Removal...</source>
         <translation>グリッド 線の除去</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="695" />
+        <location filename="../src/main/MainWindow.cpp" line="704" />
         <source>Edit Grid Line Removal settings.</source>
         <translation>グリッド 線の除去機能の設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="696" />
+        <location filename="../src/main/MainWindow.cpp" line="705" />
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -3456,17 +3448,17 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 特に カラー フィルター がグリッド 線と カーブ を区別できないときなど、カーブ の線を残してグリッド 線を除去することで、ポイント マッチング やセグメント フィル 処理が容易になります。 </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="701" />
+        <location filename="../src/main/MainWindow.cpp" line="710" />
         <source>Point Match...</source>
         <translation>ポイント マッチング</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="702" />
+        <location filename="../src/main/MainWindow.cpp" line="711" />
         <source>Edit Point Match settings.</source>
         <translation>ポイント マッチング 設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="703" />
+        <location filename="../src/main/MainWindow.cpp" line="712" />
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -3475,17 +3467,17 @@ Point match settings determine how points are matched while in Point Match mode<
 ポイント マッチング 設定では ポイント マッチング モード でどのようにポイント を認識するか を指定します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="707" />
+        <location filename="../src/main/MainWindow.cpp" line="716" />
         <source>Segment Fill...</source>
         <translation>セグメント フィル</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708" />
+        <location filename="../src/main/MainWindow.cpp" line="717" />
         <source>Edit Segment Fill settings.</source>
         <translation>セグメント フィル 設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="709" />
+        <location filename="../src/main/MainWindow.cpp" line="718" />
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -3494,17 +3486,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 セグメント フィル 設定では、セグメント フィル モードでどのように ポイント を決定するかを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="713" />
+        <location filename="../src/main/MainWindow.cpp" line="722" />
         <source>General...</source>
         <translation>一般設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="714" />
+        <location filename="../src/main/MainWindow.cpp" line="723" />
         <source>Edit General settings.</source>
         <translation>全般的な設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="715" />
+        <location filename="../src/main/MainWindow.cpp" line="724" />
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -3513,17 +3505,17 @@ General settings are document-specific settings that affect multiple modes. For 
 一般設定では、それぞれのドキュメントについて複数のモードに影響を及ぼす設定を行います。 例えば、カーソル サイズの 設定は カラーピッカー と ポイントマッチ モード に影響します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="720" />
+        <location filename="../src/main/MainWindow.cpp" line="729" />
         <source>Main Window...</source>
         <translation>メイン画面</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="722" />
+        <location filename="../src/main/MainWindow.cpp" line="731" />
         <source>Edit Main Window settings.</source>
         <translation>メイン画面 の設定を編集します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="723" />
+        <location filename="../src/main/MainWindow.cpp" line="732" />
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -3532,17 +3524,17 @@ Main window settings affect the user interface and are not specific to any docum
 メイン画面 の設定はユーザーインターフェースに関するもので、特定のドキュメントに関わる設定項目ではありません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="732" />
+        <location filename="../src/main/MainWindow.cpp" line="741" />
         <source>Background Toolbar</source>
         <translation>バックグラウンド ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="735" />
+        <location filename="../src/main/MainWindow.cpp" line="744" />
         <source>Show or hide the background toolbar.</source>
         <translation>バックグラウンド ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="736" />
+        <location filename="../src/main/MainWindow.cpp" line="745" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -3551,17 +3543,17 @@ Show or hide the background toolbar</source>
 バックグラウンド ツールバー の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="740" />
+        <location filename="../src/main/MainWindow.cpp" line="749" />
         <source>Checklist Guide Toolbar</source>
         <translation>チェックリスト と手引き ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="743" />
+        <location filename="../src/main/MainWindow.cpp" line="752" />
         <source>Show or hide the checklist guide.</source>
         <translation>チェックリスト と手引き の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="744" />
+        <location filename="../src/main/MainWindow.cpp" line="753" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -3570,17 +3562,17 @@ Show or hide the checklist guide</source>
 チェックリスト と手引き の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="748" />
+        <location filename="../src/main/MainWindow.cpp" line="757" />
         <source>Curve Fitting Window</source>
         <translation>カーブ フィッティング 画面</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="751" />
+        <location filename="../src/main/MainWindow.cpp" line="760" />
         <source>Show or hide the curve fitting window.</source>
         <translation>カーブ フィッティング 画面の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="752" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -3589,17 +3581,17 @@ Show or hide the curve fitting window</source>
 カーブ フィッティング 画面の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="756" />
+        <location filename="../src/main/MainWindow.cpp" line="765" />
         <source>Geometry Window</source>
         <translation>カーブ の形状画面</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="768" />
         <source>Show or hide the geometry window.</source>
         <translation>カーブ の形状画面の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="760" />
+        <location filename="../src/main/MainWindow.cpp" line="769" />
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -3608,17 +3600,17 @@ Show or hide the geometry window</source>
 カーブ の形状画面の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="764" />
+        <location filename="../src/main/MainWindow.cpp" line="773" />
         <source>Digitizing Tools Toolbar</source>
         <translation>デジタイズ ツール ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="767" />
+        <location filename="../src/main/MainWindow.cpp" line="776" />
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>デジタイズ ツール の ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="768" />
+        <location filename="../src/main/MainWindow.cpp" line="777" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -3627,17 +3619,17 @@ Show or hide the digitizing tools toolbar</source>
 デジタイズ ツール ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="772" />
+        <location filename="../src/main/MainWindow.cpp" line="781" />
         <source>Settings Views Toolbar</source>
         <translation>設定 ビュー ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="775" />
+        <location filename="../src/main/MainWindow.cpp" line="784" />
         <source>Show or hide the settings views toolbar.</source>
         <translation>設定 ビュー ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="776" />
+        <location filename="../src/main/MainWindow.cpp" line="785" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -3646,17 +3638,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 設定 ビュー ツールバー の表示・非表示を切り替えます。これらの ビュー では 最も重要な設定を画像として確認することができます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="781" />
+        <location filename="../src/main/MainWindow.cpp" line="790" />
         <source>Coordinate System Toolbar</source>
         <translation>座標系 ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="784" />
+        <location filename="../src/main/MainWindow.cpp" line="793" />
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>座標系 ツールバー の表示 非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="785" />
+        <location filename="../src/main/MainWindow.cpp" line="794" />
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -3669,17 +3661,17 @@ This toolbar is disabled when there is only one coordinate system.</source>
 この ツールバー は、座標系 が一つしかないときにはアクティブになりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="793" />
+        <location filename="../src/main/MainWindow.cpp" line="802" />
         <source>Tool Tips</source>
         <translation>ツール ティップ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="796" />
+        <location filename="../src/main/MainWindow.cpp" line="805" />
         <source>Show or hide the tool tips.</source>
         <translation>ツール ティップ の表示・非表示の切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="797" />
+        <location filename="../src/main/MainWindow.cpp" line="806" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -3688,17 +3680,17 @@ Show or hide the tool tips</source>
 ツール ティップ の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="801" />
+        <location filename="../src/main/MainWindow.cpp" line="810" />
         <source>Grid Lines</source>
         <translation>グリッド 線</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="804" />
+        <location filename="../src/main/MainWindow.cpp" line="813" />
         <source>Show or hide grid lines.</source>
         <translation>グリッド 線の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="805" />
+        <location filename="../src/main/MainWindow.cpp" line="814" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -3707,17 +3699,17 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 グリッド 線の表示・非表示を切り替えます。グリッド 線は座標軸の基準点を微調整するために利用すると、特に画像が歪んだ グラフ を デジタイズ するときの精度の向上に役立ちます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="810" />
+        <location filename="../src/main/MainWindow.cpp" line="819" />
         <source>No Background</source>
         <translation>バックグラウンド 画像なし</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="812" />
+        <location filename="../src/main/MainWindow.cpp" line="821" />
         <source>Do not show the image underneath the points.</source>
         <translation>ポイント の背景に 画像を表示しません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="813" />
+        <location filename="../src/main/MainWindow.cpp" line="822" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -3726,17 +3718,17 @@ No image is shown so points are easier to see</source>
 背景に画像を表示せず、ポイントをより視認しやすくします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="816" />
+        <location filename="../src/main/MainWindow.cpp" line="825" />
         <source>Show Original Image</source>
         <translation>オリジナル画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="818" />
+        <location filename="../src/main/MainWindow.cpp" line="827" />
         <source>Show the original image underneath the points.</source>
         <translation>ポイントの背景としてオリジナル画像を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="819" />
+        <location filename="../src/main/MainWindow.cpp" line="828" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -3745,17 +3737,17 @@ Show the original image underneath the points</source>
 ポイントの背景としてオリジナル画像を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="822" />
+        <location filename="../src/main/MainWindow.cpp" line="831" />
         <source>Show Filtered Image</source>
         <translation>フィルタ 処理された画像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="825" />
+        <location filename="../src/main/MainWindow.cpp" line="834" />
         <source>Show the filtered image underneath the points.</source>
         <translation>ポイント の背景に フィルタ 処理された画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="826" />
+        <location filename="../src/main/MainWindow.cpp" line="835" />
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -3768,17 +3760,17 @@ The filtered image is created from the original image according to the Filter pr
 フィルタに関する設定に基づきオリジナル画像をフィルタ処理したものを背景として利用します。画像に含まれる重要ではない情報を除くことで、重要な情報を強調する狙いがあります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="832" />
+        <location filename="../src/main/MainWindow.cpp" line="841" />
         <source>Hide All Curves</source>
         <translation>全てのカーブを非表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="834" />
+        <location filename="../src/main/MainWindow.cpp" line="843" />
         <source>Hide all digitized curves.</source>
         <translation>全てのカーブを非表示にします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="835" />
+        <location filename="../src/main/MainWindow.cpp" line="844" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -3787,17 +3779,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 座標軸の基準点やデジタイズされたカーブを全て非表示にしますので、画像が見やすくなります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="838" />
+        <location filename="../src/main/MainWindow.cpp" line="847" />
         <source>Show Selected Curve</source>
         <translation>選択中のカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="840" />
+        <location filename="../src/main/MainWindow.cpp" line="849" />
         <source>Show only the currently selected curve.</source>
         <translation>現在選択されているカーブのみを表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="841" />
+        <location filename="../src/main/MainWindow.cpp" line="850" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -3806,17 +3798,17 @@ Show only the digitized points and line that belong to the currently selected cu
 デジタイズされたポイントとラインのうち、現在選択中のカーブに属するものだけを表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="844" />
+        <location filename="../src/main/MainWindow.cpp" line="853" />
         <source>Show All Curves</source>
         <translation>全てのカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="847" />
+        <location filename="../src/main/MainWindow.cpp" line="856" />
         <source>Show all curves.</source>
         <translation>全てのカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="848" />
+        <location filename="../src/main/MainWindow.cpp" line="857" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -3825,389 +3817,389 @@ Show all digitized axis points and graph curves</source>
 デジタイズされた座標軸とグラフの全てのポイントとカーブを表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="863" />
+        <location filename="../src/main/MainWindow.cpp" line="872" />
         <source>Hide Always</source>
         <translation>常に非表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="865" />
+        <location filename="../src/main/MainWindow.cpp" line="874" />
         <source>Always hide the status bar.</source>
         <translation>ステータスバーを常に非表示にします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="866" />
+        <location filename="../src/main/MainWindow.cpp" line="875" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>ステータスバー を非表示とし、ステータス情報や メッセージ が表示されなくなります。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="868" />
+        <location filename="../src/main/MainWindow.cpp" line="877" />
         <source>Show Temporary Messages</source>
         <translation>メッセージ を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="870" />
+        <location filename="../src/main/MainWindow.cpp" line="879" />
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>メッセージ があるとき以外ステータスバー を非表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="871" />
+        <location filename="../src/main/MainWindow.cpp" line="880" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>メッセージ があるときを除いて ステータスバー を非表示とします。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="873" />
+        <location filename="../src/main/MainWindow.cpp" line="882" />
         <source>Show Always</source>
         <translation>常に表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="875" />
+        <location filename="../src/main/MainWindow.cpp" line="884" />
         <source>Always show the status bar.</source>
         <translation>ステータスバーを常に表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="876" />
+        <location filename="../src/main/MainWindow.cpp" line="885" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>ステータスバー を表示します。ステータスバー には実行状況やフェードバック メッセージに加えて、カーソルの位置における情報も表示されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="885" />
+        <location filename="../src/main/MainWindow.cpp" line="894" />
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="886" />
+        <location filename="../src/main/MainWindow.cpp" line="895" />
         <source>Zoom out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="890" />
+        <location filename="../src/main/MainWindow.cpp" line="899" />
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="891" />
+        <location filename="../src/main/MainWindow.cpp" line="900" />
         <source>Zoom in</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="898" />
+        <location filename="../src/main/MainWindow.cpp" line="907" />
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="900" />
+        <location filename="../src/main/MainWindow.cpp" line="909" />
         <source>Zoom 16:1</source>
         <translation>倍率を16:1倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="904" />
+        <location filename="../src/main/MainWindow.cpp" line="913" />
         <source>16:1 farther (1270%)</source>
         <translation>16:1 よりやや遠望 (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="906" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>Zoom 12.7:1</source>
         <translation>倍率を 12.7:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="910" />
+        <location filename="../src/main/MainWindow.cpp" line="919" />
         <source>8:1 closer (1008%)</source>
         <translation>8:1 よりやや近接 (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="912" />
+        <location filename="../src/main/MainWindow.cpp" line="921" />
         <source>Zoom 10.08:1</source>
         <translation>倍率を 10.08:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="925" />
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="918" />
+        <location filename="../src/main/MainWindow.cpp" line="927" />
         <source>Zoom 8:1</source>
         <translation>倍率を8:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="922" />
+        <location filename="../src/main/MainWindow.cpp" line="931" />
         <source>8:1 farther (635%)</source>
         <translation>8:1 よりやや遠望 (635%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="924" />
+        <location filename="../src/main/MainWindow.cpp" line="933" />
         <source>Zoom 6.35:1</source>
         <translation>倍率を 6.35:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="928" />
+        <location filename="../src/main/MainWindow.cpp" line="937" />
         <source>4:1 closer (504%)</source>
         <translation>4:1 よりやや近接 (504%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="930" />
+        <location filename="../src/main/MainWindow.cpp" line="939" />
         <source>Zoom 5.04:1</source>
         <translation>倍率を 5.04:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="934" />
+        <location filename="../src/main/MainWindow.cpp" line="943" />
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="936" />
+        <location filename="../src/main/MainWindow.cpp" line="945" />
         <source>Zoom 4:1</source>
         <translation>倍率を 4:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="940" />
+        <location filename="../src/main/MainWindow.cpp" line="949" />
         <source>4:1 farther (317%)</source>
         <translation>4:1 よりやや遠望 (317%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="942" />
+        <location filename="../src/main/MainWindow.cpp" line="951" />
         <source>Zoom 3.17:1</source>
         <translation>倍率を 3.17:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="946" />
+        <location filename="../src/main/MainWindow.cpp" line="955" />
         <source>2:1 closer (252%)</source>
         <translation>2:1 よりやや近接 (252%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="948" />
+        <location filename="../src/main/MainWindow.cpp" line="957" />
         <source>Zoom 2.52:1</source>
         <translation>倍率を 2.52:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="952" />
+        <location filename="../src/main/MainWindow.cpp" line="961" />
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="954" />
+        <location filename="../src/main/MainWindow.cpp" line="963" />
         <source>Zoom 2:1</source>
         <translation>倍率を 2:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="958" />
+        <location filename="../src/main/MainWindow.cpp" line="967" />
         <source>2:1 farther (159%)</source>
         <translation>2:1 よりやや遠望 (159%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="960" />
+        <location filename="../src/main/MainWindow.cpp" line="969" />
         <source>Zoom 1.59:1</source>
         <translation>倍率を 1.59:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="964" />
+        <location filename="../src/main/MainWindow.cpp" line="973" />
         <source>1:1 closer (126%)</source>
         <translation>1:1 よりやや近接 (126%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="967" />
+        <location filename="../src/main/MainWindow.cpp" line="976" />
         <source>Zoom 1.3:1</source>
         <translation>倍率を 1.3:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="971" />
+        <location filename="../src/main/MainWindow.cpp" line="980" />
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="974" />
+        <location filename="../src/main/MainWindow.cpp" line="983" />
         <source>Zoom 1:1</source>
         <translation>倍率を 1:1 の等倍に</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="987" />
         <source>1:1 farther (79%)</source>
         <translation>1:1 よりやや遠望 (79%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="981" />
+        <location filename="../src/main/MainWindow.cpp" line="990" />
         <source>Zoom 0.8:1</source>
         <translation>倍率を 0.8:1 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="985" />
+        <location filename="../src/main/MainWindow.cpp" line="994" />
         <source>1:2 closer (63%)</source>
         <translation>1:2 よりやや近接 (63%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="987" />
+        <location filename="../src/main/MainWindow.cpp" line="996" />
         <source>Zoom 1.3:2</source>
         <translation>倍率を 1.3:2 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="991" />
+        <location filename="../src/main/MainWindow.cpp" line="1000" />
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="993" />
+        <location filename="../src/main/MainWindow.cpp" line="1002" />
         <source>Zoom 1:2</source>
         <translation>倍率を 1:2 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="997" />
+        <location filename="../src/main/MainWindow.cpp" line="1006" />
         <source>1:2 farther (40%)</source>
         <translation>1:2 よりやや遠望 (40%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="999" />
+        <location filename="../src/main/MainWindow.cpp" line="1008" />
         <source>Zoom 0.8:2</source>
         <translation>倍率を 0.8:2 倍に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1003" />
+        <location filename="../src/main/MainWindow.cpp" line="1012" />
         <source>1:4 closer (31%)</source>
         <translation>1:4 よりやや遠望 (31%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1005" />
+        <location filename="../src/main/MainWindow.cpp" line="1014" />
         <source>Zoom 1.3:4</source>
         <translation>倍率を 1.3:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1009" />
+        <location filename="../src/main/MainWindow.cpp" line="1018" />
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1011" />
+        <location filename="../src/main/MainWindow.cpp" line="1020" />
         <source>Zoom 1:4</source>
         <translation>倍率を 1:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1015" />
+        <location filename="../src/main/MainWindow.cpp" line="1024" />
         <source>1:4 farther (20%)</source>
         <translation>1:4 よりやや遠望 (20%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1017" />
+        <location filename="../src/main/MainWindow.cpp" line="1026" />
         <source>Zoom 0.8:4</source>
         <translation>倍率を 0.8:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1021" />
+        <location filename="../src/main/MainWindow.cpp" line="1030" />
         <source>1:8 closer (12.5%)</source>
         <translation>1:8 よりやや近接 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1023" />
-        <location filename="../src/main/MainWindow.cpp" line="1029" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1038" />
         <source>Zoom 1:8</source>
         <translation>倍率を 1:8 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1027" />
+        <location filename="../src/main/MainWindow.cpp" line="1036" />
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
+        <location filename="../src/main/MainWindow.cpp" line="1042" />
         <source>1:8 farther (10%)</source>
         <translation>1:8 よりやや遠望 (10%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1035" />
+        <location filename="../src/main/MainWindow.cpp" line="1044" />
         <source>Zoom 0.8:8</source>
         <translation>倍率を 0.8:8 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1039" />
+        <location filename="../src/main/MainWindow.cpp" line="1048" />
         <source>1:16 closer (8%)</source>
         <translation>1:16 よりやや近接 (8%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1041" />
+        <location filename="../src/main/MainWindow.cpp" line="1050" />
         <source>Zoom 1.3:16</source>
         <translation>倍率を 1.3:16 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1045" />
+        <location filename="../src/main/MainWindow.cpp" line="1054" />
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1047" />
+        <location filename="../src/main/MainWindow.cpp" line="1056" />
         <source>Zoom 1:16</source>
         <translation>倍率を 1:16 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1051" />
+        <location filename="../src/main/MainWindow.cpp" line="1060" />
         <source>Fill</source>
         <translation>フィル</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1053" />
+        <location filename="../src/main/MainWindow.cpp" line="1062" />
         <source>Zoom with stretching to fill window</source>
         <translation>画面サイズに合わせて拡大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1171" />
+        <location filename="../src/main/MainWindow.cpp" line="1180" />
         <source>&amp;File</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1177" />
+        <location filename="../src/main/MainWindow.cpp" line="1186" />
         <source>Open &amp;Recent</source>
         <translation>最近使ったドキュメント</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1193" />
+        <location filename="../src/main/MainWindow.cpp" line="1202" />
         <source>&amp;Edit</source>
         <translation>編集</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1206" />
+        <location filename="../src/main/MainWindow.cpp" line="1215" />
         <source>Digitize</source>
         <translation>デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1215" />
+        <location filename="../src/main/MainWindow.cpp" line="1224" />
         <source>View</source>
         <translation>ビュー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1227" />
-        <location filename="../src/main/MainWindow.cpp" line="1411" />
+        <location filename="../src/main/MainWindow.cpp" line="1236" />
+        <location filename="../src/main/MainWindow.cpp" line="1420" />
         <source>Background</source>
         <translation>バックグラウンド</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1232" />
+        <location filename="../src/main/MainWindow.cpp" line="1241" />
         <source>Curves</source>
         <translation>カーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1237" />
+        <location filename="../src/main/MainWindow.cpp" line="1246" />
         <source>Status Bar</source>
         <translation>ステータスバー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1242" />
+        <location filename="../src/main/MainWindow.cpp" line="1251" />
         <source>Zoom</source>
         <translation>拡大率</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1274" />
+        <location filename="../src/main/MainWindow.cpp" line="1283" />
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1299" />
         <source>&amp;Help</source>
         <translation>ヘルプ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1398" />
+        <location filename="../src/main/MainWindow.cpp" line="1407" />
         <source>Select background image</source>
         <translation>バックグラウンド画像の選択</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1399" />
+        <location filename="../src/main/MainWindow.cpp" line="1408" />
         <source>Selected Background
 
 Select background image:
@@ -4222,27 +4214,27 @@ Select background image:
 3) フィルタ処理された画像で重要な部分を詳細に見せます</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1404" />
+        <location filename="../src/main/MainWindow.cpp" line="1413" />
         <source>No background</source>
         <translation>バックグラウンド画像なし</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405" />
+        <location filename="../src/main/MainWindow.cpp" line="1414" />
         <source>Original image</source>
         <translation>オリジナル画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1415" />
         <source>Filtered image</source>
         <translation>フィルタ処理された画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1419" />
+        <location filename="../src/main/MainWindow.cpp" line="1428" />
         <source>Select curve for new points.</source>
         <translation>ポイント を追加する 対象の カーブ を選択</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1420" />
+        <location filename="../src/main/MainWindow.cpp" line="1429" />
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -4255,17 +4247,17 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
 選択された カーブ は カーブ の ポイント 追加、ポイント マッチング 、カラーピッカー、セグメント フィル モード のいずれにおいても 変更可能です。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1426" />
+        <location filename="../src/main/MainWindow.cpp" line="1435" />
         <source>Drawing</source>
         <translation>描画設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1443" />
+        <location filename="../src/main/MainWindow.cpp" line="1452" />
         <source>Points style for the currently selected curve</source>
         <translation>選択された カーブ の ポイント の表示スタイル</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1444" />
+        <location filename="../src/main/MainWindow.cpp" line="1453" />
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
@@ -4274,12 +4266,12 @@ Points style for the currently selected curve. The points style is only displaye
 選択された カーブ の ポイント の表示スタイル を設定します。このツールバー ではポイント の スタイルが表示されるだけなので、スタイル を変更するには カーブ の プロパティ 画面を利用してください。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1452" />
+        <location filename="../src/main/MainWindow.cpp" line="1461" />
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>セグメント フィル モード での現在の カーブ に対するフィルタ設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1462" />
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
@@ -4288,17 +4280,17 @@ View of filter for the current curve in Segment Fill mode. The filter settings a
 セグメント フィル モード で現在選択中の カーブ に対するフィルタ設定を確認します。この ツールバーでは設定の確認のみが可能ですのでフィルタ設定を変更するには カラーピッカー モード またはフィルタ 設定画面を利用してください。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1459" />
+        <location filename="../src/main/MainWindow.cpp" line="1468" />
         <source>Views</source>
         <translation>ビュー</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1468" />
+        <location filename="../src/main/MainWindow.cpp" line="1477" />
         <source>Currently selected coordinate system</source>
         <translation>現在の座標系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1469" />
+        <location filename="../src/main/MainWindow.cpp" line="1478" />
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
@@ -4307,12 +4299,12 @@ Currently selected coordinate system. This is used to switch between coordinate 
 現在 設定されている座標系を表示します。ドキュメントによりますが複数の座標系を切り替えることが可能です。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1477" />
+        <location filename="../src/main/MainWindow.cpp" line="1486" />
         <source>Show all coordinate systems</source>
         <translation>全ての座標系を表示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1478" />
+        <location filename="../src/main/MainWindow.cpp" line="1487" />
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
@@ -4321,12 +4313,12 @@ When pressed and held, this button shows all digitized points and lines for all 
 このボタンを長押しすることで全ての座標系においてデジタイズされたポイントやラインを表示することができます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1486" />
+        <location filename="../src/main/MainWindow.cpp" line="1495" />
         <source>Print all coordinate systems</source>
         <translation>全ての 座標系を印刷</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1487" />
+        <location filename="../src/main/MainWindow.cpp" line="1496" />
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
@@ -4335,109 +4327,114 @@ When pressed, this button Prints all digitized points and lines for all coordina
 このボタンを押すころで座標系に関わらずデジタイズされた全ての ポイント と ライン を印刷することができます。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1491" />
+        <location filename="../src/main/MainWindow.cpp" line="1500" />
         <source>Coordinate System</source>
         <translation>座標系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1662" />
+        <location filename="../src/main/MainWindow.cpp" line="1671" />
         <source>Unable to export to file </source>
         <translation>ファイルのエクスポートに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1737" />
-        <location filename="../src/main/MainWindow.cpp" line="1865" />
-        <location filename="../src/main/MainWindow.cpp" line="2033" />
+        <location filename="../src/main/MainWindow.cpp" line="1746" />
+        <location filename="../src/main/MainWindow.cpp" line="1911" />
+        <location filename="../src/main/MainWindow.cpp" line="2079" />
         <source>Cannot read file</source>
         <translation>ファイルを読み込むことができません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1739" />
-        <location filename="../src/main/MainWindow.cpp" line="1867" />
-        <location filename="../src/main/MainWindow.cpp" line="2035" />
+        <location filename="../src/main/MainWindow.cpp" line="1748" />
+        <location filename="../src/main/MainWindow.cpp" line="1913" />
+        <location filename="../src/main/MainWindow.cpp" line="2081" />
         <source>from directory</source>
         <translation>指定のディレクトリから</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1819" />
+        <location filename="../src/main/MainWindow.cpp" line="1839" />
         <source>Import Image</source>
         <translation>画像を インポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2010" />
+        <location filename="../src/main/MainWindow.cpp" line="2056" />
         <source>File opened</source>
         <translation>ファイルが開かれた</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2055" />
+        <location filename="../src/main/MainWindow.cpp" line="2101" />
         <source>File not found:</source>
         <translation>ファイル が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2072" />
+        <location filename="../src/main/MainWindow.cpp" line="2118" />
         <source>Error report opened</source>
-        <translation type="unfinished" />
+        <translation>エラー レポートを 開きました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2130" />
-        <location filename="../src/main/MainWindow.cpp" line="2204" />
+        <location filename="../src/main/MainWindow.cpp" line="2176" />
+        <location filename="../src/main/MainWindow.cpp" line="2250" />
         <source>File imported</source>
         <translation>ファイル をインポートしました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2238" />
+        <location filename="../src/main/MainWindow.cpp" line="2284" />
         <source>Background image.</source>
         <translation>バックグラウンド 画像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2239" />
+        <location filename="../src/main/MainWindow.cpp" line="2285" />
         <source>Currently selected curve.</source>
         <translation>現在 選択中の カーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2240" />
+        <location filename="../src/main/MainWindow.cpp" line="2286" />
         <source>Point style for currently selected curve.</source>
         <translation>現在 選択中の カーブの ポイント 表示設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2241" />
+        <location filename="../src/main/MainWindow.cpp" line="2287" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>現在 選択中の カーブに対する セグメント フィル フィルタ </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2289" />
+        <location filename="../src/main/MainWindow.cpp" line="2335" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>ドキュメントの内容が変更されました。
 変更を保存しますか？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2373" />
+        <location filename="../src/main/MainWindow.cpp" line="2419" />
         <source>Cannot write file</source>
         <translation>ファイル への書き込みに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3412" />
+        <location filename="../src/main/MainWindow.cpp" line="2467" />
+        <source>Save</source>
+        <translation>セーブ</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="3475" />
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3490" />
+        <location filename="../src/main/MainWindow.cpp" line="3557" />
         <source>Open Document</source>
         <translation>ドキュメントを開く</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4693" />
+        <location filename="../src/main/MainWindow.cpp" line="4765" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4694" />
+        <location filename="../src/main/MainWindow.cpp" line="4766" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4822" />
+        <location filename="../src/main/MainWindow.cpp" line="4894" />
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4729,6 +4726,8 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
+        <location filename="../src/main/main.cpp" line="234" />
+        <location filename="../src/main/main.cpp" line="300" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4810,7 +4809,7 @@ Do you want to save your changes?</source>
         <translation>見つかりませんでした。</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="511" />
+        <location filename="../src/Document/Document.cpp" line="510" />
         <source>Cannot read image data</source>
         <translation>画像を読み込むことができません。</translation>
     </message>
@@ -4863,6 +4862,11 @@ Do you want to save your changes?</source>
         <location filename="../src/Document/DocumentModelSegments.cpp" line="91" />
         <source>Cannot read segment data</source>
         <translation>セグメント 情報を読み込むことができません。</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentScrub.cpp" line="40" />
+        <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and langauge locale. The invalid point name was</source>
+        <translation>ポイント識別子エラーが発生しました。 Engageの開発者に、国と言語のロケールに関するコメントとともにお知らせください。無効なポイント名は</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="14" />
@@ -5107,6 +5111,16 @@ Do you want to save your changes?</source>
         <translation>グラフ座標における解像度</translation>
     </message>
     <message>
+        <location filename="../src/Transformation/Transformation.cpp" line="178" />
+        <source>Need scale bar</source>
+        <translation>スケールバー が必要です。</translation>
+    </message>
+    <message>
+        <location filename="../src/Transformation/Transformation.cpp" line="179" />
+        <source>Need more axis points</source>
+        <translation>座標軸の基準となる点がさらに必要です。</translation>
+    </message>
+    <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="11" />
         <source>16:1 farther</source>
         <translation>16:1 よりやや遠望</translation>
@@ -5197,62 +5211,67 @@ Do you want to save your changes?</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3683" />
-        <source>Need scale bar</source>
-        <translation>スケールバー が必要です。</translation>
+        <location filename="../src/main/MainWindow.cpp" line="1756" />
+        <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
+        <translation>ファイルに複数の言語アルファベットの文字が含まれているように見えますが、これはWindowsコマンドラインでは機能しません</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3684" />
-        <source>Need more axis points</source>
-        <translation>座標軸の基準となる点がさらに必要です。</translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="105" />
+        <location filename="../src/main/MainWindowModel.cpp" line="109" />
         <source>Cannot read main window data</source>
         <translation>メイン画面 の設定を読み込むことができません。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="229" />
+        <location filename="../src/main/main.cpp" line="232" />
+        <source> is used only with one document file specified</source>
+        <translation>指定された1つの文書ファイルでのみ使用されます</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="258" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>エラー 解決のため追加情報を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="231" />
+        <location filename="../src/main/main.cpp" line="262" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>エラー レポート の ファイル を設定します。エラー 処理や テスト の際に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="233" />
+        <location filename="../src/main/main.cpp" line="266" />
+        <source>Export the loaded startup file, which must have all axis points defined, then stop</source>
+        <translation>読み込まれた起動ファイルをエクスポートします。すべての軸ポイントが定義されている必要があります。</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="270" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>コマンド の スクリプト ファイル を設定します。エラー 処理や テスト の際に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="235" />
+        <location filename="../src/main/main.cpp" line="274" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>gnuplot 用の入力ファイルを問題確認の可能な形で出力し エラー処理に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="237" />
+        <location filename="../src/main/main.cpp" line="278" />
         <source>Show this help information</source>
         <translation>ヘルプ　を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="239" />
+        <location filename="../src/main/main.cpp" line="282" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>エラー レポート あるいは コマンド スクリプト を ファイル として出力します。これらは リグレッション テスト に使用されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="241" />
+        <location filename="../src/main/main.cpp" line="286" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>全ての 設定条件を クリア します。これにはこの ソフト の画面位置の情報も含まれるので、 起動時にこの ソフト が コンピューター 画面の外に表示されるような場合に対処可能になります。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="243" />
+        <location filename="../src/main/main.cpp" line="290" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>いくつかの 設定条件のなかで -style コマンド で利用可能なものを リスト として表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245" />
+        <location filename="../src/main/main.cpp" line="294" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>ソフト の開始時点で開く ファイル (複数可)</translation>
     </message>
@@ -5342,7 +5361,7 @@ Click on the Axis Points button</source>
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
-for entering the axis point's
+for entering the axis point'apos;s
 coordinates</source>
         <translation>ステップ 2 - 座標軸または グリッド の線上で座標値の分かっている位置をクリックします。
 その点は座標軸 の基準となる ポイント として表示され、 またそれらのポイント の座標入力を促すダイアログ画面が現れます。</translation>

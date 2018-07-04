@@ -1,5 +1,5 @@
 name: engauge-digitizer
-version: '10.7'
+version: '10.8'
 summary: Interactively convert a bitmap graph or map into numbers.
 description: Software tool for extracting numbers from images of graphs and maps.
 grade: stable
@@ -14,6 +14,10 @@ parts:
     stage-packages: [qttools5-dev, libqt5gui5, libqt5sql5-sqlite, libfftw3-double3, libpoppler-dev, libpoppler-qt5-dev]
     project-files: [engauge.pro]
     after: [help]
+  desktop-file:
+    plugin: dump
+    stage:
+    - engauge-digitizer.desktop
   help:
     plugin: dump
     stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
@@ -21,4 +25,5 @@ parts:
 apps:
   engauge-digitizer:
     command: desktop-launch $SNAP/engauge
-    plugs: [home, cups-control]
+    plugs: [home, cups-control, unity7, x11]
+    desktop: engauge-digitizer.desktop

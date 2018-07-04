@@ -1,0 +1,8 @@
+engauge.cygport
+.engauge.cygport
+engauge-*.x86_64
+v*.tar.gz
+*.tmp
+*.zip
+build_version.log
+

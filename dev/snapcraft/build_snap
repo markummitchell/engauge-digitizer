@@ -9,19 +9,26 @@
 #  4) sql plugins must be added so sqlite is available, which prevents a runtime error message about missing qsqlite
 #     that disappeared when the help feature started working
 
-# Remove existing snap so it will not be confused with new snap if this script is interrupted
+echo "Removing existing snap, if any, so it will not be confused with new snap if this script is interrupted"
 sudo snap remove engauge-digitizer
 
-# Rebuild, making sure official qt is used
-PWD=`pwd`
-if [[ "$PWD" == *snapcraft ]]; then
-   cd ..
-fi   
+# Build into the build directory
+echo "Removing previous build, if any"
+rm -rf build
+rm -rf documentation
+cd build
+BUILD=`pwd`
+
+# Make sure official qt is used
 PATH=/usr/bin:$PATH
 LD_LIBRARY_PATH=
 
-sed 's/DESTDIR = bin/DESTDIR = ./g' engauge.pro >engauge.pro.tmp
-mv engauge.pro.tmp engauge.pro
+sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
+
+cp ../snapcraft.yaml .
+cp ../../engauge-digitizer.desktop .
+cp -r ../../../help .
+cp -r ../../../src .
 
 export POPPLER_INCLUDE=/usr/include/poppler/qt5
 export POPPLER_LIB=/usr/lib/x86_64-linux-gnu
@@ -29,12 +36,15 @@ qmake engauge.pro CONFIG+=log4cpp_null CONFIG+=pdf
 make clean
 make -j4
 
-sed 's/DESTDIR = ./DESTDIR = bin/g' engauge.pro >engauge.pro.tmp
-mv engauge.pro.tmp engauge.pro
+cd help
+./build.bash $BUILD/documentation
+cd ..
 
-rm -rf parts prime snap stage snapcraft.yaml engauge-digitizer*.snap
-
-ln -s snapcraft/snapcraft.yaml
 snapcraft clean engauge-digitizer
 snapcraft
 sudo snap install engauge-digitizer_*.snap --devmode --dangerous
+echo "Remaining steps:"
+echo "1) Test the just-installed snap executing 'engauge-digitizer',"
+echo "2) 'snapcraft push engauge-digitizer-*.snap'"
+echo "3) 'snapcraft list-revisions engauge-digitizer' to see revision number"
+echo "4) 'snapcraft release engauge-digitizer <revision> stable'"

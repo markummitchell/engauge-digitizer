@@ -1,0 +1,37 @@
+inherit qt5-qmake
+
+VERSION=<VERSION>
+
+SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/v${VERSION}.zip"
+SRC_DIR="engauge-digitizer-${VERSION}"
+NAME="engauge"
+RELEASE=1
+CATEGORY="Math"
+LOG_DIR=/tmp
+LOG4CPP_HOME=${S}/dev/cygport/log4cpp_null
+FFTW_HOME=/usr
+CYGQMAKE5_ARGS="CONFIG+=cygport CONFIG+=log4cpp_null"
+SUMMARY="Convert graph images to numeric data"
+DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
+HOMEPAGE="http://github.com/markummitchell/engauge-digitizer"
+PATCH_URI="
+	engauge-no-undefined.patch
+	engauge-webkit.patch
+"
+
+DIFF_EXCLUDES="engauge.qch engauge.qhc"
+
+src_compile() {
+	      cd ${B}
+	      qt5_qmake_compile
+	      cd ${S}/help
+	      dos2unix build.bash
+	      ./build.bash
+	      cp -r ../bin/documentation ${B}/bin
+}
+
+src_install() {
+	      dobin ${B}/bin/engauge.exe
+	      mkdir -p ${D}/usr/share/doc/engauge
+	      cp ${B}/bin/documentation/* ${D}/usr/share/doc/engauge
+}

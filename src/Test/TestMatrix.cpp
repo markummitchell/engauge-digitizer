@@ -6,6 +6,8 @@
 
 QTEST_MAIN (TestMatrix)
 
+const int SIGNIFICANT_DIGITS = 7;
+
 TestMatrix::TestMatrix(QObject *parent) :
   QObject(parent)
 {
@@ -22,6 +24,7 @@ void TestMatrix::initTestCase ()
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool NO_REGRESSION_IMPORT = false;
   const bool NO_RESET = false;
+  const bool NO_EXPORT_ONLY = false;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -31,9 +34,10 @@ void TestMatrix::initTestCase ()
 
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
                 NO_REGRESSION_OPEN_FILE,
+                NO_REGRESSION_IMPORT,                
                 NO_GNUPLOT_LOG_FILES,
-                NO_REGRESSION_IMPORT,
                 NO_RESET,
+                NO_EXPORT_ONLY,
                 NO_LOAD_STARTUP_FILES);
   w.show ();
 }
@@ -66,15 +70,21 @@ void TestMatrix::testInverse ()
   }
   before.set (2, 2, 10);
 
-  Matrix after = before.inverse ();
+  MatrixConsistent matrixConsistent;
+  Matrix after = before.inverse (SIGNIFICANT_DIGITS,
+                                 matrixConsistent);
 
-  Matrix product = before * after;
-  Matrix identity (3);
-  for (row = 0; row < 3; row++) {
-    for (col = 0; col < 3; col++) {
-      if (qAbs (product.get (row, col) - identity.get (row, col)) > 0.00001) {
-        success = false;
-        break;
+  if (matrixConsistent != MATRIX_CONSISTENT) {
+    success = false;
+  } else {
+    Matrix product = before * after;
+    Matrix identity (3);
+    for (row = 0; row < 3; row++) {
+      for (col = 0; col < 3; col++) {
+        if (qAbs (product.get (row, col) - identity.get (row, col)) > 0.00001) {
+          success = false;
+          break;
+        }
       }
     }
   }
@@ -94,15 +104,21 @@ void TestMatrix::testInverse2 ()
   before.set (1, 0, 1);
   before.set (1, 1, 1);
 
-  Matrix after = before.inverse ();
+  MatrixConsistent matrixConsistent;
+  Matrix after = before.inverse (SIGNIFICANT_DIGITS,
+                                 matrixConsistent);
 
-  Matrix product = before * after;
-  Matrix identity (2);
-  for (row = 0; row < 2; row++) {
-    for (col = 0; col < 2; col++) {
-      if (qAbs (product.get (row, col) - identity.get (row, col)) > 0.00001) {
-        success = false;
-        break;
+  if (matrixConsistent != MATRIX_CONSISTENT) {
+    success = false;
+  } else {
+    Matrix product = before * after;
+    Matrix identity (2);
+    for (row = 0; row < 2; row++) {
+      for (col = 0; col < 2; col++) {
+        if (qAbs (product.get (row, col) - identity.get (row, col)) > 0.00001) {
+          success = false;
+          break;
+        }
       }
     }
   }

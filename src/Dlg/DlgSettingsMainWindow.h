@@ -45,6 +45,7 @@ private slots:
   void slotMaximumGridLines (int limit);
   void slotPdfResolution (const QString);
   void slotRecentFileClear ();
+  void slotSignificantDigits (int);
   void slotSmallDialogs(bool);
   void slotTitleBarFormat(bool);
   void slotZoomControl (const QString);
@@ -70,6 +71,7 @@ private:
   QDoubleSpinBox *m_spinHighlightOpacity;
   QCheckBox *m_chkSmallDialogs;
   QCheckBox *m_chkDragDropExport;
+  QSpinBox *m_spinSignificantDigits;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

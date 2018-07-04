@@ -18,56 +18,36 @@ Note that support for reading PDF files, using the Poppler library, has not been
 Engauge releases due to incompatibilities between recent libraries and the many software libraries 
 required by the Poppler library.
 
-1) Install the MinGW version of the Qt Open Source toolkit from http://www.qt.io. Since the default
-   Qt Open Source download supports Microsoft Visual Studio rather than MinGW, careful navigation
-   of the Qt website is required to find, and then download, the Qt installation package that
-   explicitly targets the MinGW compiler. The MinGW compiler provides the correct header files and system
-   functions (unlike Visual Studio).
+1) Install the Visual Studio 2015 version of the Qt Open Source toolkit from http://www.qt.io. 
 
-   Note that the MinGW version of the Qt Open Source toolkit provides both Qt and MinGW. There is no
-   need to install a standalone version of MinGW.
-
-   Qt Open Source 5.2.1 and 5.5.1 have been tested with Engauge. Qt Versions 5.1 and older do not offer
+   Qt Open Source 5.2.1, 5.5.1 and 5.8.0 have been tested with Engauge. Qt Versions 5.1 and older do not offer
    features, that were added in version 5.2, that are required to build Engauge.
 
-   HINT - At this point, the MSYS shell is available by clicking on the msys.bat shortcut on the Windows
-          desktop. The MSYS shell is preferred over the Cygwin shell (if you have installed Cygwin earlier).
-
-2) Download and build log4cpp from http://log4cpp.sourceforge.net. Version 1.1 was tested with Engauge. 
-   The following minor changes were required for the code to compile:
-  
-   2a) In config-MinGW32.h, comment out '#define int64_t __int64' to prevent 'long long long is too long for gcc'
-   2b) In DailyRollingFileAppender.cpp, insert '#include <time.h>'
-   2c) In DailyRollingFileAppender.cpp, replace 'time(X)' by 'time_t(X)' where X is the argument
-   2d) In DailyRollingFileAppender.cpp, replace 'localtime_s(X,Y)' by 'localtime(Y)' where X and Y are arguments
-
-   Then following the normal configure, make and make install steps.
-
-3) Download and build fftw from http://www.fftw.org. Version 3.3.4 was tested with Engauge.
+2) Download and build fftw from http://www.fftw.org. Version 3.3.4 was tested with Engauge.
    
    Then following the normal configure, make and make install steps.
 
-4) Set LOG4CPP_HOME and FFTW_HOME environment variables to point to the installation directories of 
-   log4cpp and fftw in the previous steps.
+3) Set the FFTW_HOME environment variable to point to the installation directory of fftw in the previous steps.
 
-5) Build engauge using either the command line approach, or qtcreator. 
+4) Build engauge using either the command line approach, or qtcreator. 
 
    The command line approach is run from the highest level Engauge directory:
 
-   > qmake engauge.pro
+   > qmake engauge.pro CONFIG+=log4cpp_null
    > make
 
    Alternately, you can use the qtcreator approach instead:
 
    > qtcreator
    > File / Open / open engauge.pro
+   > (edit the Project settings to add 'CONFIG+=log4cpp_null' to the qmake line)
    > Build / BuildAll
    > Run 
 
 6) Build the help file
 
    > cd help
-   > build
+   > build.windows
 
 Linux - Steps to build and run engauge executable:
 --------------------------------------------------
@@ -138,7 +118,7 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
 
 6) Generate the help files
 
-     > ../help/build
+     > ../help/build.bash
 
 7) Run engauge
 

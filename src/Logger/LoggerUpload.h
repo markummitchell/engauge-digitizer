@@ -25,7 +25,7 @@ public:
   LoggerUpload();
 
   /// Bind to MainWindow so this class can access the command stack
-  static void bindToMainWindow (const MainWindow *mainWindow);
+  static void bindToMainWindow (MainWindow *mainWindow);
 
   /// Smart equivalent to standard assert method and Q_ASSERT (in qglobal.h). Upon error, an upload is proposed.
   /// This is static for easy access from anywhere else in the application
@@ -45,7 +45,7 @@ private:
                             int line,
                             const char* context) NO_RETURN_VALUE;
 
-  static const MainWindow *m_mainWindow;
+  static MainWindow *m_mainWindow;
 };
 
 #endif // LOGGER_UPLOAD_H

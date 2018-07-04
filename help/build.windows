@@ -1,0 +1,10 @@
+# This creates .qch and .qhc output files
+
+# Specifying ../bin/documentation directory here creates files in this directory
+# AND ../bin/documentation (with different sizes) so we build into this directory
+qcollectiongenerator engauge.qhcp -o engauge.qhc
+
+# Move to target directory
+mv engauge.qch ../bin/documentation
+mv engauge.qhc ../bin/documentation
+

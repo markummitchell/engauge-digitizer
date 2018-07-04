@@ -90,6 +90,9 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
+  /// For unit testing
+  friend class TestExport;
+  
 public:
   /// Single constructor.
   /// \param errorReportFile Optional error report file to be read at startup. Empty if unused. Incompatible with fileCmdScript
@@ -97,6 +100,7 @@ public:
   /// \param isRegressionTest True if errorReportFile or fileCmdScript is for regression testing, in which case it is executed and the program exits
   /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
   /// \param isReset True to reset all settings that would otherwise be restored from the previous execution of Engauge
+  /// \param isExportOnly True to export the loaded startup file and then exit
   /// \param loadStartupFiles Zero or more Engauge document files to load at startup. A separate instance of Engauge is created for each file
   /// \param parent Optional parent widget for this widget
   MainWindow(const QString &errorReportFile,
@@ -104,7 +108,8 @@ public:
              bool isRegressionTest,
              bool isGnuplot,
              bool isReset,
-             QStringList loadStartupFiles,
+             bool isExportOnly,
+             const QStringList &loadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -145,7 +150,7 @@ public:
   void saveErrorReportFileAndExit(const char *comment,
                                   const char *file,
                                   int line,
-                                  const char *context) const;
+                                  const char *context);
 
   /// Scene container for the QImage and QGraphicsItems.
   GraphicsScene &scene();
@@ -371,12 +376,13 @@ private:
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();
 #endif
-  QString exportFilenameFromInputFilename (const QString &fileName) const;
+  QString exportRegressionFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);
   void fileImport (const QString &fileName,
                    ImportType ImportType); /// Same steps as filePaste but with import from file
   void fileImportWithPrompts (ImportType ImportType); /// Wrapper around fileImport that adds user prompt(s)
+  QString fileNameForExportOnly () const; /// File name for export-only batch mode
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
@@ -654,6 +660,9 @@ private:
 
   // Fitted curve. Null if not currently applicable/defined
   FittingCurve *m_fittingCurve;
+
+  // Export the single dig file that was loaded in the command line, as enforced by parseCmdLine
+  bool m_isExportOnly;
 };
 
 #endif // MAIN_WINDOW_H

@@ -16,26 +16,30 @@ private slots:
   void initTestCase ();
 
   // Test exact fit cases, for which the order equals the number of points minus 1
-  void testExactFit01 ();
-  void testExactFit12 ();
-  void testExactFit23 ();
-  void testExactFit34 ();
+  void testFunctionExactFit01 ();
+  void testFunctionExactFit12 ();
+  void testFunctionExactFit23 ();
+  void testFunctionExactFit34 ();
 
   // Test overfitted cases, for which the order is equal to, or greater than, the number of points
-  void testOverfit11 ();
-  void testOverfit22 ();
-  void testOverfit33 ();
-  void testOverfit44 ();
+  void testFunctionOverfit11 ();
+  void testFunctionOverfit22 ();
+  void testFunctionOverfit33 ();
+  void testFunctionOverfit44 ();
 
   // Test underfitted cases, for which the order is less than the number of points minus 1
-  void testUnderfit02 ();
-  void testUnderfit13 ();
-  void testUnderfit24 ();
-  void testUnderfit35 ();
+  void testFunctionUnderfit02 ();
+  void testFunctionUnderfit13 ();
+  void testFunctionUnderfit24 ();
+  void testFunctionUnderfit35 ();
   
+  // Test case where non-function data was entered even though points should be functional
+  void testNonFunction ();
+
  private:
-  bool generalTest (int order,
-                    int numPoints) const;
+  bool generalFunctionTest (int order,
+                            int numPoints) const;
+  bool generalNonFunctionTest () const;
 };
 
 #endif // TEST_FITTING_H

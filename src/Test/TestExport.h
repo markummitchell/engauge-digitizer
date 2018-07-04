@@ -10,6 +10,7 @@
 #include "Transformation.h"
 
 class Document;
+class MainWindow;
 
 /// Unit test of Export classes
 class TestExport : public QObject
@@ -35,7 +36,11 @@ private slots:
   void testCommasInRelationsForCommasSwitzerland ();
   void testCommasInRelationsForCommasUnitedStates ();  
   void testCommasInRelationsForTabsSwitzerland ();  
-  void testCommasInRelationsForTabsUnitedStates ();  
+  void testCommasInRelationsForTabsUnitedStates ();
+  void testExportOnlyNonRegressionLowerCase ();
+  void testExportOnlyNonRegressionUpperCase ();  
+  void testExportOnlyRegressionLowerCase ();
+  void testExportOnlyRegressionUpperCase ();    
   void testLogExtrapolationFunctionsAll ();
 
 private:
@@ -49,6 +54,7 @@ private:
                  ExportDelimiter delimiter,
                  QLocale::Country country);
 
+  MainWindow *m_mainWindow;
   Document *m_document;
   DocumentModelCoords m_modelCoords;
   DocumentModelExportFormat m_modelExportOverride;

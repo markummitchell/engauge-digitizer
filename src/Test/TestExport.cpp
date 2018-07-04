@@ -22,9 +22,24 @@ QTEST_MAIN (TestExport)
 using namespace std;
 
 const bool NOT_USING_GNUPLOT = false;
+const bool EXPORT_ONLY= true;
+const QString NO_ERROR_REPORT_LOG_FILE;
+const QString NO_REGRESSION_OPEN_FILE;
+const bool NO_GNUPLOT_LOG_FILES = false;
+const bool NO_REGRESSION_IMPORT = false;
+const bool NO_RESET = false;
+const bool NO_EXPORT_ONLY = false;
+const bool DEBUG_FLAG = false;
+const QStringList NO_LOAD_STARTUP_FILES;
+const QString STARTUP_DIG_LOWER_CASE ("/tmp/export_only.dig");
+const QString STARTUP_DIG_UPPER_CASE ("/tmp/export_only.DIG");
+const QStringList ONE_LOAD_STARTUP_FILE_LOWER_CASE (STARTUP_DIG_LOWER_CASE);
+const QStringList ONE_LOAD_STARTUP_FILE_UPPER_CASE (STARTUP_DIG_UPPER_CASE);
+const bool REGRESSION_IMPORT = true;
 
 TestExport::TestExport(QObject *parent) :
   QObject(parent),
+  m_mainWindow (0),
   m_document (0)
 {
 }
@@ -189,26 +204,19 @@ void TestExport::initData (bool isLog,
 
 void TestExport::initTestCase ()
 {
-  const QString NO_ERROR_REPORT_LOG_FILE;
-  const QString NO_REGRESSION_OPEN_FILE;
-  const bool NO_GNUPLOT_LOG_FILES = false;
-  const bool NO_REGRESSION_IMPORT = false;
-  const bool NO_RESET = false;
-  const bool DEBUG_FLAG = false;
-  const QStringList NO_LOAD_STARTUP_FILES;
-
   initializeLogging ("engauge_test",
                      "engauge_test.log",
                      DEBUG_FLAG);
 
-  MainWindow w (NO_ERROR_REPORT_LOG_FILE,
-                NO_REGRESSION_OPEN_FILE,
-                NO_GNUPLOT_LOG_FILES,
-                NO_REGRESSION_IMPORT,
-                NO_RESET,
-                NO_LOAD_STARTUP_FILES);
+  m_mainWindow = new MainWindow (NO_ERROR_REPORT_LOG_FILE,
+                                 NO_REGRESSION_OPEN_FILE,
+                                 NO_REGRESSION_IMPORT,                
+                                 NO_GNUPLOT_LOG_FILES,
+                                 NO_RESET,
+                                 NO_EXPORT_ONLY,
+                                 NO_LOAD_STARTUP_FILES);
 
-  w.show ();
+  m_mainWindow->show ();
 }
 
 void TestExport::testCommasInFunctionsForCommasSwitzerland ()
@@ -529,6 +537,54 @@ void TestExport::testCommasInRelationsForTabsUnitedStates ()
   }
 
   QVERIFY (outputGot == outputExpected);
+}
+
+void TestExport::testExportOnlyNonRegressionLowerCase ()
+{
+  m_mainWindow->m_isErrorReportRegressionTest = NO_REGRESSION_IMPORT;
+  m_mainWindow->setCurrentFile (STARTUP_DIG_LOWER_CASE);
+  
+  QString outputGot = m_mainWindow->fileNameForExportOnly ();
+  QString outputWanted = STARTUP_DIG_LOWER_CASE;
+  outputWanted = outputWanted.replace (".dig", ".csv");
+  
+  QVERIFY (outputGot == outputWanted);
+}
+
+void TestExport::testExportOnlyNonRegressionUpperCase ()
+{
+  m_mainWindow->m_isErrorReportRegressionTest = NO_REGRESSION_IMPORT;
+  m_mainWindow->setCurrentFile (STARTUP_DIG_UPPER_CASE);
+  
+  QString outputGot = m_mainWindow->fileNameForExportOnly ();
+  QString outputWanted = STARTUP_DIG_UPPER_CASE;
+  outputWanted = outputWanted.replace (".DIG", ".csv");
+  
+  QVERIFY (outputGot == outputWanted);
+}
+
+void TestExport::testExportOnlyRegressionLowerCase ()
+{
+  m_mainWindow->m_isErrorReportRegressionTest = REGRESSION_IMPORT;
+  m_mainWindow->m_regressionFile = STARTUP_DIG_LOWER_CASE;
+  
+  QString outputGot = m_mainWindow->fileNameForExportOnly ();
+  QString outputWanted = STARTUP_DIG_LOWER_CASE;
+  outputWanted = outputWanted.replace (".dig", ".csv_actual_1");
+  
+  QVERIFY (outputGot == outputWanted);
+}
+
+void TestExport::testExportOnlyRegressionUpperCase ()
+{
+  m_mainWindow->m_isErrorReportRegressionTest = REGRESSION_IMPORT;
+  m_mainWindow->m_regressionFile = STARTUP_DIG_UPPER_CASE;
+
+  QString outputGot = m_mainWindow->fileNameForExportOnly ();
+  QString outputWanted = STARTUP_DIG_UPPER_CASE;
+  outputWanted = outputWanted.replace (".DIG", ".csv_actual_1");
+  
+  QVERIFY (outputGot == outputWanted);
 }
 
 void TestExport::testLogExtrapolationFunctionsAll ()

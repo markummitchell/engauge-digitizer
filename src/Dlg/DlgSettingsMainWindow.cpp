@@ -26,6 +26,12 @@
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
 
+// Curve fitting number of significant figures should be much greater than 1 to prevent
+// gratuitous triggering of 'matrix is inconsistent' errors, but not too much greater than
+// the precision of floating point values which is about 7
+const int MIN_SIGNIFICANT_DIGITS = 4;
+const int MAX_SIGNIFICANT_DIGITS = 9;
+
 const int MAX_GRID_LINES_MIN = 2;
 const int MAX_GRID_LINES_MAX = 1000;
 const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 550;
@@ -218,6 +224,20 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                          "then Shift+Click, since click and drag starts the drag operation."));
   connect (m_chkDragDropExport, SIGNAL (toggled (bool)), this, SLOT (slotDragDropExport (bool)));
   layout->addWidget (m_chkDragDropExport, row++, 2);
+
+  QLabel *labelSignificantDigits = new QLabel (tr ("Significant digits:"));
+  layout->addWidget (labelSignificantDigits, row, 1);
+
+  m_spinSignificantDigits = new QSpinBox;
+  m_spinSignificantDigits->setRange (MIN_SIGNIFICANT_DIGITS, MAX_SIGNIFICANT_DIGITS);
+  m_spinSignificantDigits->setWhatsThis (tr ("Significant Digits\n\n"
+                                             "Number of digits of precision in floating point numbers. This value affects "
+                                             "calculations for curve fits, since intermediate results smaller than a "
+                                             "threshold T indicate that a polynomial curve with a specific order cannot be "
+                                             "fitted to the data. The threshold T is computed from the maximum matrix "
+                                             "element M and significant digits S as T = M / 10^S."));
+  connect (m_spinSignificantDigits, SIGNAL (valueChanged (int)), this, SLOT (slotSignificantDigits (int)));
+  layout->addWidget (m_spinSignificantDigits, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -297,6 +317,7 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_spinHighlightOpacity->setValue (m_modelMainWindowAfter->highlightOpacity());
   m_chkSmallDialogs->setChecked (m_modelMainWindowAfter->smallDialogs());
   m_chkDragDropExport->setChecked (m_modelMainWindowAfter->dragDropExport());
+  m_spinSignificantDigits->setValue (m_modelMainWindowAfter->significantDigits ());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -362,6 +383,14 @@ void DlgSettingsMainWindow::slotRecentFileClear()
 
   // The signal that triggered the call to this method was also sent to MainWindow to clear the list there
   updateControls();
+}
+
+void DlgSettingsMainWindow::slotSignificantDigits(int)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotSignificantDigits";
+
+  m_modelMainWindowAfter->setSignificantDigits(m_spinSignificantDigits->value ());
+  updateControls ();
 }
 
 void DlgSettingsMainWindow::slotSmallDialogs (bool)

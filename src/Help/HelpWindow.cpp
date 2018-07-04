@@ -70,7 +70,9 @@ QString HelpWindow::helpPath() const
 #endif
   paths << "/documentation/engauge.qhc";
   paths << "/../share/doc/engauge-digitizer/engauge.qhc";
+  paths << "/../documentation/engauge.qhc"; // snap
   paths << "/usr/share/engauge-digitizer-doc/engauge.qhc";
+  paths << "/usr/share/doc/engauge/engauge.qhc"; // cygwin
 
   QStringList::iterator itr;
   for (itr = paths.begin(); itr != paths.end(); itr++) {

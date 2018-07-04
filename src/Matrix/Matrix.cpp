@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "Matrix.h"
+#include <qmath.h>
 #include <QTextStream>
 
 Matrix::Matrix (int N)
@@ -118,13 +119,30 @@ void Matrix::initialize (int rows,
   }
 }
 
-Matrix Matrix::inverse () const
+Matrix Matrix::inverse (int significantDigits,
+                        MatrixConsistent &matrixConsistent) const
 {
+  // Set epsilon threshold for valueFailsEpsilonTest
+  double maxValue = 0;
+  for (int row = 0; row < m_rows; row++) {
+    for (int col = 0; col < m_cols; col++) {
+      double value = qAbs (get (row, col));
+      if (value > maxValue) {
+        maxValue = value;
+      }
+    }
+  }
+
+  double epsilonThreshold = maxValue / qPow (10.0, significantDigits);
+
   // Available algorithms are inverseCramersRule and inverseGaussianElimination
-  return inverseGaussianElimination ();
+  matrixConsistent = MATRIX_CONSISTENT;
+  return inverseGaussianElimination (matrixConsistent,
+                                     epsilonThreshold);
 }
 
-Matrix Matrix::inverseCramersRule () const
+Matrix Matrix::inverseCramersRule (MatrixConsistent & matrixConsistent,
+                                   double epsilonThreshold) const
 {
   ENGAUGE_ASSERT (m_rows == m_cols);
 
@@ -151,6 +169,11 @@ Matrix Matrix::inverseCramersRule () const
     Matrix adjoint = cofactor.transpose ();
 
     double determ = determinant ();
+    if (valueFailsEpsilonTest (determ,
+                               epsilonThreshold)) {
+      matrixConsistent = MATRIX_INCONSISTENT;
+      return inv;
+    }
 
     // Inverse is the adjoint divided by the determinant
     for (row = 0; row < m_rows; row++) {
@@ -159,17 +182,25 @@ Matrix Matrix::inverseCramersRule () const
       }
     }
   } else {
-    inv.set (0, 0, 1.0 / get (0, 0));
+    double denominator = get (0, 0);
+    if (valueFailsEpsilonTest (denominator,
+                               epsilonThreshold)) {
+      matrixConsistent = MATRIX_INCONSISTENT;
+      return inv;
+    }
+    inv.set (0, 0, 1.0 / denominator);
   }
 
   return inv;
 }
 
-Matrix Matrix::inverseGaussianElimination () const
+Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
+                                           double epsilonThreshold) const
 {
   // From https://en.wikipedia.org/wiki/Gaussian_elimination
 
   int row, col, rowFrom, rowTo;
+  Matrix inv (rows ());
 
   // Track the row switches that may or may not be performed below
   QVector<int> rowIndexes (rows ());
@@ -177,7 +208,7 @@ Matrix Matrix::inverseGaussianElimination () const
     rowIndexes [row] = row;
   }
 
-  // Creat the working matrix and populate the left half. Number of columns in the working matrix is twice the number
+  // Create the working matrix and populate the left half. Number of columns in the working matrix is twice the number
   // of cols in this matrix, but we will not populate the right half until after the bubble sort below
   Matrix working (rows (), 2 * cols ());
   for (row = 0; row < rows (); row++) {
@@ -210,7 +241,7 @@ Matrix Matrix::inverseGaussianElimination () const
       working.set (row, col, value);
     }
   }
-\
+
   // Loop through the "from" row going down. This results in the lower off-diagonal terms becoming zero, in the left half
   for (rowFrom = 0; rowFrom < rows (); rowFrom++) {
     int colFirstWithNonZero = rowFrom;
@@ -218,13 +249,15 @@ Matrix Matrix::inverseGaussianElimination () const
     // In pathological situations we have (rowFrom, colFirstWithNonzero) = 0 in which case the solution cannot be obtained
     // so we exit
     if (working.get (rowFrom, colFirstWithNonZero) == 0) {
-
-      // Fail
-      break;
+      matrixConsistent = MATRIX_INCONSISTENT;
+      return inv;
     }
 
     // Normalize the 'from' row with first nonzero term set to 1
-    working.normalizeRow (rowFrom, colFirstWithNonZero);
+    working.normalizeRow (rowFrom, colFirstWithNonZero, matrixConsistent, epsilonThreshold);
+    if (matrixConsistent == MATRIX_INCONSISTENT) {
+      return inv;
+    }
 
     // Apply the 'from' row to all the 'to' rows
     for (rowTo = rowFrom + 1; rowTo < rows (); rowTo++) {
@@ -232,7 +265,12 @@ Matrix Matrix::inverseGaussianElimination () const
       if (working.get (rowTo, colFirstWithNonZero) != 0) {
 
         // We need to merge rowFrom and rowTo into rowTo
-        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / working.get (rowFrom, colFirstWithNonZero);
+        double denominator = working.get (rowFrom, colFirstWithNonZero);
+        if (valueFailsEpsilonTest (denominator, epsilonThreshold)) {
+          matrixConsistent = MATRIX_INCONSISTENT;
+          return inv;
+        }
+        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / denominator;
         working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
       }
     }
@@ -243,7 +281,11 @@ Matrix Matrix::inverseGaussianElimination () const
     int colFirstWithNonZero = rowFrom; // This is true since we should have 1s all down the diagonal at this point
 
     // Normalize the 'from' row with diagonal term set to 1. The first term should be like 0.9999 or 1.0001 but we want exactly one
-    working.normalizeRow (rowFrom, colFirstWithNonZero);
+    MatrixConsistent matrixConsistent;
+    working.normalizeRow (rowFrom, colFirstWithNonZero, matrixConsistent, epsilonThreshold);
+    if (matrixConsistent == MATRIX_INCONSISTENT) {
+      return inv;
+    }
 
     // Apply the 'from' row to all the 'to' rows
     for (rowTo = rowFrom - 1; rowTo >= 0; rowTo--) {
@@ -251,14 +293,18 @@ Matrix Matrix::inverseGaussianElimination () const
       if (working.get (rowTo, colFirstWithNonZero) != 0) {
 
         // We need to merge rowFro and rowTo into rowTo
-        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / working.get (rowFrom, colFirstWithNonZero);
+        double denominator = working.get (rowFrom, colFirstWithNonZero);
+        if (valueFailsEpsilonTest (denominator, epsilonThreshold)) {
+          matrixConsistent = MATRIX_INCONSISTENT;
+          return inv;
+        }
+        double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / denominator;
         working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
       }
     }
   }
 
   // Extract right half of rectangular matrix which is the inverse
-  Matrix inv (working.rows ());
 
   for (row = 0; row < working.rows (); row++) {
 
@@ -313,14 +359,26 @@ Matrix Matrix::minorReduced (int rowOmit, int colOmit) const
 }
 
 void Matrix::normalizeRow (int rowToNormalize,
-                           int colToNormalize)
+                           int colToNormalize,
+                           MatrixConsistent &matrixConsistent,
+                           double epsilonThreshold)
 {
-  ENGAUGE_ASSERT (get (rowToNormalize, colToNormalize) != 0);
+  double denominator = get (rowToNormalize, colToNormalize);
 
-  double factor = 1.0 / get (rowToNormalize, colToNormalize);
-  for (int col = 0; col < cols (); col++) {
-    double value = get (rowToNormalize, col);
-    set (rowToNormalize, col, factor * value);
+  if (valueFailsEpsilonTest (denominator,
+                             epsilonThreshold)) {
+
+    matrixConsistent = MATRIX_INCONSISTENT;
+
+  } else {
+
+    matrixConsistent = MATRIX_CONSISTENT;
+
+    double factor = 1.0 / denominator;
+    for (int col = 0; col < cols (); col++) {
+      double value = get (rowToNormalize, col);
+      set (rowToNormalize, col, factor * value);
+    }
   }
 }
 
@@ -418,4 +476,10 @@ Matrix Matrix::transpose () const
   }
 
   return out;
+}
+
+bool Matrix::valueFailsEpsilonTest (double value,
+                                    double epsilonThreshold) const
+{
+  return (qAbs (value) < qAbs (epsilonThreshold));
 }

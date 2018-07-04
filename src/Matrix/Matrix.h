@@ -10,6 +10,12 @@
 #include <QString>
 #include <QVector>
 
+/// Indicates if matrix is consistent (i.e. has at least one solution)
+enum MatrixConsistent {
+  MATRIX_CONSISTENT,
+  MATRIX_INCONSISTENT
+};
+
 /// Matrix class that supports arbitrary NxN size
 class Matrix
 {
@@ -28,15 +34,19 @@ public:
 
   /// Width of matrix
   int cols () const;
-
+  
   /// Return the determinant of this matrix
   double determinant () const;
-  
+
   /// Return (row, col) element
   double get (int row, int col) const;
 
   /// Return the inverse of this matrix
-  Matrix inverse () const;
+  /// \param signficantDigits Input value for calculating epsilon threshold for determinants
+  ///                         that are so close to zero that matrix should be considered inconsistent.
+  /// \param matrixConsistent Output flag indicating success or failure
+  Matrix inverse (int significantDigits,
+                  MatrixConsistent &matrixConsistent) const;
 
   /// Return minor matrix which is the original with the specified row and column omitted. The name 'minor' is a reserved word
   Matrix minorReduced (int rowOmit, int colOmit) const;
@@ -68,13 +78,24 @@ private:
   int fold2dIndexes (int row, int col) const;
   void initialize (int rows,
                    int cols);
-  Matrix inverseCramersRule () const;
-  Matrix inverseGaussianElimination () const;
+  Matrix inverseCramersRule (MatrixConsistent &matrixConsistent,
+                             double epsilonThreshold) const;
+  Matrix inverseGaussianElimination (MatrixConsistent &matrixConsistent,
+                                     double epsilonThreshold) const;
   unsigned int leadingZeros (int row) const; // Number of leading zeros in the specified zero
   void normalizeRow (int rowToNormalize,
-                     int colToNormalize);
+                     int colToNormalize,
+                     MatrixConsistent &matrixConsistent,
+                     double epsilonThreshold);
   void switchRows (int row1,
                    int row2);
+
+  // Return true if value is sufficiently far from zero that we can divide by it as part of
+  // calculating a matrix inverse. The epsilon threshold is proportional to the largest value in the
+  // matrix since a good threshold of 1e-8 for matrix elements near 1 should be scaled to
+  // 1e-18 for matrix elements near 1e-10
+  bool valueFailsEpsilonTest (double value,
+                              double epsilonThreshold) const;
 
   int m_rows; // Height of matrix
   int m_cols; // Width of matrix

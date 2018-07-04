@@ -10,6 +10,8 @@ QTEST_MAIN (TestFitting)
 
 using namespace std;
 
+const int SIGNIFICANT_DIGITS = 7;
+
 TestFitting::TestFitting(QObject *parent) :
   QObject(parent)
 {
@@ -20,8 +22,8 @@ void TestFitting::cleanupTestCase ()
 
 }
 
-bool TestFitting::generalTest (int order,
-                               int numPoints) const
+bool TestFitting::generalFunctionTest (int order,
+                                       int numPoints) const
 {
   int orderReduced = qMin (order, numPoints - 1);
   
@@ -53,7 +55,8 @@ bool TestFitting::generalTest (int order,
                                           coefficientsGot,
                                           mse,
                                           rms,
-                                          rSquared);
+                                          rSquared,
+                                          SIGNIFICANT_DIGITS);
 
   bool success = true;
 
@@ -107,6 +110,45 @@ bool TestFitting::generalTest (int order,
   return success;
 }
 
+bool TestFitting::generalNonFunctionTest () const
+{
+  const double EPSILON = 0.0001;
+  FittingStatistics fitting;
+  double mse, rms, rSquared;
+  FittingCurveCoefficients coefficientsGot (MAX_POLYNOMIAL_ORDER);
+
+  // Create the points according to y = 0 + 1 * (x + 1) (x + 2) ... (x + order), with y=0 for order=0
+  FittingPointsConvenient points;
+  const double Y1 = 1, Y2 = 2;
+  points.append (QPointF (1, Y1));
+  points.append (QPointF (1, Y2));
+    
+  fitting.calculateCurveFitAndStatistics (1,
+                                          points,
+                                          coefficientsGot,
+                                          mse,
+                                          rms,
+                                          rSquared,
+                                          SIGNIFICANT_DIGITS);
+
+  bool success = true;
+
+  // Expected coefficients are hardcoded
+  FittingCurveCoefficients coefficientsExpected (2);
+  coefficientsExpected [0] = (Y1 + Y2) / 2.0;
+  coefficientsExpected [1] = 0;
+
+  for (int coef = 0; coef < 2; coef++) {
+    double coefGot = coefficientsGot [coef];
+
+    double coefExpected = coefficientsExpected [coef];
+
+    success = (success && ((qAbs (coefGot - coefExpected) < EPSILON)));
+  }
+
+  return success;
+}
+
 void TestFitting::initTestCase ()
 {
   const QString NO_ERROR_REPORT_LOG_FILE;
@@ -114,6 +156,7 @@ void TestFitting::initTestCase ()
   const bool NO_GNUPLOT_LOG_FILES = false;
   const bool NO_REGRESSION_IMPORT = false;
   const bool NO_RESET = false;
+  const bool NO_EXPORT_ONLY = false;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
 
@@ -123,69 +166,75 @@ void TestFitting::initTestCase ()
 
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
                 NO_REGRESSION_OPEN_FILE,
-                NO_GNUPLOT_LOG_FILES,
                 NO_REGRESSION_IMPORT,
+                NO_GNUPLOT_LOG_FILES,
                 NO_RESET,
+                NO_EXPORT_ONLY,
                 NO_LOAD_STARTUP_FILES);
   w.show ();
 }
 
-void TestFitting::testExactFit01 ()
+void TestFitting::testFunctionExactFit01 ()
 {
-  QVERIFY (generalTest (0, 1));
+  QVERIFY (generalFunctionTest (0, 1));
 }
 
-void TestFitting::testExactFit12 ()
+void TestFitting::testFunctionExactFit12 ()
 {
-  QVERIFY (generalTest (1, 2));
+  QVERIFY (generalFunctionTest (1, 2));
 }
 
-void TestFitting::testExactFit23 ()
+void TestFitting::testFunctionExactFit23 ()
 {
-  QVERIFY (generalTest (2, 3));
+  QVERIFY (generalFunctionTest (2, 3));
 }
 
-void TestFitting::testExactFit34 ()
+void TestFitting::testFunctionExactFit34 ()
 {
-  QVERIFY (generalTest (3, 4));
+  QVERIFY (generalFunctionTest (3, 4));
 }
 
-void TestFitting::testOverfit11 ()
+void TestFitting::testFunctionOverfit11 ()
 {
-  QVERIFY (generalTest (1, 1));
+  QVERIFY (generalFunctionTest (1, 1));
 }
 
-void TestFitting::testOverfit22 ()
+void TestFitting::testFunctionOverfit22 ()
 {
-  QVERIFY (generalTest (2, 2));
+  QVERIFY (generalFunctionTest (2, 2));
 }
 
-void TestFitting::testOverfit33 ()
+void TestFitting::testFunctionOverfit33 ()
 {
-  QVERIFY (generalTest (3, 3));
+  QVERIFY (generalFunctionTest (3, 3));
 }
 
-void TestFitting::testOverfit44 ()
+void TestFitting::testFunctionOverfit44 ()
 {
-  QVERIFY (generalTest (4, 4));
+  QVERIFY (generalFunctionTest (4, 4));
 }
 
-void TestFitting::testUnderfit02 ()
+void TestFitting::testFunctionUnderfit02 ()
 {
-  QVERIFY (generalTest (0, 2));
+  QVERIFY (generalFunctionTest (0, 2));
 }
 
-void TestFitting::testUnderfit13 ()
+void TestFitting::testFunctionUnderfit13 ()
 {
-  QVERIFY (generalTest (1, 3));
+  QVERIFY (generalFunctionTest (1, 3));
 }
 
-void TestFitting::testUnderfit24 ()
+void TestFitting::testFunctionUnderfit24 ()
 {
-  QVERIFY (generalTest (2, 4));
+  QVERIFY (generalFunctionTest (2, 4));
 }
 
-void TestFitting::testUnderfit35 ()
+void TestFitting::testFunctionUnderfit35 ()
 {
-  QVERIFY (generalTest (3, 5));
+  QVERIFY (generalFunctionTest (3, 5));
+}
+
+void TestFitting::testNonFunction ()
+{
+  QVERIFY (generalNonFunctionTest ());
 }
