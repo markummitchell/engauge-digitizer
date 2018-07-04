@@ -16,7 +16,7 @@ sudo snap remove engauge-digitizer
 echo "Removing previous build, if any"
 rm -rf build
 rm -rf documentation
-mkdir -p build/snap/gui
+mkdir -p build/prime/meta/gui
 cd build
 BUILD=`pwd`
 
@@ -27,9 +27,9 @@ LD_LIBRARY_PATH=
 sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
 
 cp ../snapcraft.yaml .
-cp ../../engauge-digitizer.desktop snap/gui/engauge-digitizer.desktop
-cp -r ../../../help
-cp -r ../../../src
+cp ../../engauge-digitizer.desktop prime/meta/gui/engauge-digitizer.desktop
+cp -r ../../../help .
+cp -r ../../../src .
 
 export POPPLER_INCLUDE=/usr/include/poppler/qt5
 export POPPLER_LIB=/usr/lib/x86_64-linux-gnu
@@ -44,3 +44,8 @@ cd ..
 snapcraft clean engauge-digitizer
 snapcraft
 sudo snap install engauge-digitizer_*.snap --devmode --dangerous
+echo "Remaining steps:"
+echo "1) Test the just-installed snap executing 'engauge-digitizer',"
+echo "2) 'snapcraft push engauge-digitizer-*.snap'"
+echo "3) 'snapcraft list-revisions engauge-digitizer' to see revision number"
+echo "4) 'snapcraft release engauge-digitizer <revision> stable'"
