@@ -21,4 +21,5 @@ parts:
 apps:
   engauge-digitizer:
     command: desktop-launch $SNAP/engauge
-    plugs: [home, cups-control]
+    plugs: [home, cups-control, unity7, x11]
+    desktop: dev/engauge-digitizer.desktop
