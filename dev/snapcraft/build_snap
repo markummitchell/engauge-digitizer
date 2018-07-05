@@ -16,6 +16,8 @@ sudo snap remove engauge-digitizer
 echo "Removing previous build, if any"
 rm -rf build
 rm -rf documentation
+
+mkdir build
 cd build
 BUILD=`pwd`
 
@@ -25,8 +27,10 @@ LD_LIBRARY_PATH=
 
 sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
 
+mkdir -p meta/gui
+
 cp ../snapcraft.yaml .
-cp ../../engauge-digitizer.desktop .
+cp ../../engauge-digitizer.desktop meta/gui
 cp -r ../../../help .
 cp -r ../../../src .
 
