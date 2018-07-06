@@ -6,6 +6,11 @@ grade: stable
 confinement: strict
 
 parts:
+  desktop-file:
+    plugin: dump
+    stage: [meta/gui/engauge-digitizer.desktop]
+    prime: [meta/gui/engauge-digitizer.desktop]
+    after: [engauge-digitizer]
   engauge-digitizer:
     plugin: qmake
     options: [CONFIG+=log4cpp_null, CONFIG+=pdf, QT+=printsupport, QT+=sql]
@@ -16,10 +21,11 @@ parts:
     after: [help]
   help:
     plugin: dump
-    stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc, meta/gui/engauge-digitizer.desktop]
+    stage: [documentation/engauge.qch, documentation/engauge.qhc]
+    prime: [documentation/engauge.qch, documentation/engauge.qhc]
     after: [desktop-qt5]
 apps:
   engauge-digitizer:
     command: desktop-launch $SNAP/engauge
-    plugs: [home, cups-control, unity7, x11]
+    plugs: [home, cups-control, x11]
     desktop: engauge-digitizer.desktop
