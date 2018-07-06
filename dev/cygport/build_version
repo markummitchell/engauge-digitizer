@@ -20,7 +20,7 @@ fi
 VERSION=$1
 
 echo "Cleaning old build directory"
-rm -rf 'engauge-'"$VERSION"'-1.x86_64' 2>/dev/null
+rm -rf 'engauge-digitizer-'"$VERSION"'-1.x86_64' 2>/dev/null
 echo
 
 # Cygport file must have the format <package name>.cygport
@@ -28,7 +28,7 @@ CYGFILE=engauge-digitizer.cygport
 
 echo "Creating engauge-digitizer.cygport file from engauge-digitizer.cygport.template"
 dos2unix engauge-digitizer.cygport.template
-sed 's/<VERSION>/'"$VERSION"'/' engauge-digitizer.cygport.template >$CYGFILE
+sed 's/<VERSION>/'"$VERSION"'/' engauge-digitizer.cygport.template | sed 's/TARGET = engauge/TARGET = engauge-digitizer/g' >$CYGFILE
 echo
 
 #DEBUG=--debug
