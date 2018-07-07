@@ -27,10 +27,8 @@ LD_LIBRARY_PATH=
 
 sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
 
-mkdir -p meta/gui
-
 cp ../snapcraft.yaml .
-cp ../../engauge-digitizer.desktop meta/gui
+cp ../../engauge-digitizer.desktop .
 cp -r ../../../help .
 cp -r ../../../src .
 

@@ -6,11 +6,6 @@ grade: stable
 confinement: strict
 
 parts:
-  desktop-file:
-    plugin: dump
-    stage: [meta/gui/engauge-digitizer.desktop]
-    prime: [meta/gui/engauge-digitizer.desktop]
-    after: [engauge-digitizer]
   engauge-digitizer:
     plugin: qmake
     options: [CONFIG+=log4cpp_null, CONFIG+=pdf, QT+=printsupport, QT+=sql]
