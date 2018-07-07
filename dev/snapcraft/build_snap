@@ -17,7 +17,7 @@ echo "Removing previous build, if any"
 rm -rf build
 rm -rf documentation
 
-mkdir build
+mkdir -p build
 cd build
 BUILD=`pwd`
 

@@ -18,7 +18,12 @@ parts:
     plugin: dump
     stage: [documentation/engauge.qch, documentation/engauge.qhc]
     prime: [documentation/engauge.qch, documentation/engauge.qhc]
-    after: [desktop-qt5]
+    after: [desktop-file]
+  desktop-file:
+    source: engauge-digitizer.desktop
+    source-type: local
+    plugin: dump
+    after: [desktop-qt5]    
 apps:
   engauge-digitizer:
     command: desktop-launch $SNAP/engauge
