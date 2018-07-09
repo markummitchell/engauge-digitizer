@@ -47,6 +47,7 @@ snapcraft
 sudo snap install engauge-digitizer_*.snap --devmode --dangerous
 echo "Remaining steps:"
 echo "1) Test the just-installed snap executing 'engauge-digitizer',"
-echo "2) 'snapcraft push engauge-digitizer-*.snap'"
+echo "2) 'snapcraft push build/engauge-digitizer-*.snap'"
 echo "3) 'snapcraft list-revisions engauge-digitizer' to see revision number"
 echo "4) 'snapcraft release engauge-digitizer <revision> stable'"
+echo "5) log into https://dashboard.snapcraft.io/snaps, select newest upload and then click on Release buttons"
