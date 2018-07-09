@@ -16,11 +16,11 @@ parts:
     after: [help]
   help:
     plugin: dump
-    stage: [documentation/engauge.qch, documentation/engauge.qhc]
-    prime: [documentation/engauge.qch, documentation/engauge.qhc]
+    stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
+    prime: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
     after: [desktop-file]
   desktop-file:
-    source: desktop-file/engauge-digitizer.desktop
+    source: desktop-file
     source-type: local
     plugin: dump
     after: [desktop-qt5]    
