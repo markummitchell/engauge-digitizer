@@ -20,7 +20,7 @@ parts:
     prime: [documentation/engauge.qch, documentation/engauge.qhc]
     after: [desktop-file]
   desktop-file:
-    source: engauge-digitizer.desktop
+    source: desktop-file/engauge-digitizer.desktop
     source-type: local
     plugin: dump
     after: [desktop-qt5]    
