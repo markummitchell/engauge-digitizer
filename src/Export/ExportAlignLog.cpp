@@ -19,7 +19,7 @@ ExportAlignLog::ExportAlignLog(double xMin,
                                  xMaxLog);
 
   // Convert result back to log numbers
-  m_firstSimplestNumber = qPow (10.0, alignLinear.firstSimplestNumber());
+  m_firstSimplestNumber = qPow (10.0, alignLinear.firstSimplestNumber ());
 }
 
 double ExportAlignLog::firstSimplestNumber () const

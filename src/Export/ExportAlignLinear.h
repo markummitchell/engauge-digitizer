@@ -10,10 +10,8 @@
 /// Pick first simplest x value between specified min and max, for linear scaling.
 /// A simplest value is defined here as one having the smallest number of significant digits, and is used for aligning 
 /// periodic values on simple numbers.
-/// Examples:
-/// -# 0.4 to 3.4, result is 1
-/// -# 110 to 1100, result is 200 (not 1000 although both have same number of significant digits)
-/// -# 112.123 to 122.456, result is 120
+///
+/// A comprehensive set of examples is given in TestExportAlign
 class ExportAlignLinear
 {
  public:
@@ -28,6 +26,8 @@ class ExportAlignLinear
   ExportAlignLinear();
 
   double log10 (double in) const;
+  double roundToDigit (double value,
+                       int digit) const;
 
   double m_firstSimplestNumber;
 };
