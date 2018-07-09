@@ -4,11 +4,11 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "ExportXThetaValuesMergedFunctions.h"
 #include "ExportAlignLinear.h"
 #include "ExportAlignLog.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsSelectionFunctions.h"
+#include "ExportXThetaValuesMergedFunctions.h"
 #include "Logger.h"
 #include "Point.h"
 #include <qmath.h>
@@ -39,7 +39,7 @@ void ExportXThetaValuesMergedFunctions::firstSimplestNumberLinear (double &xThet
   ExportAlignLinear alignLinear (xThetaMin,
                                  xThetaMax);
 
-  xThetaFirstSimplestNumber = alignLinear.firstSimplestNumber();
+  xThetaFirstSimplestNumber = alignLinear.firstSimplestNumber ();
 }
 
 void ExportXThetaValuesMergedFunctions::firstSimplestNumberLog (double &xThetaFirstSimplestNumber,
