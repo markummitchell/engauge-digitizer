@@ -28,7 +28,7 @@ git pull
 #    "url": "https://github.com/markummitchell/engauge-digitizer/archive/v#.#.tar.gz",
 #    "sha256": "..."
 # N; flag appends next line to current line
-sed 'N;s|"url": "https://github.com/markummitchell/engauge-digitizer/archive/v.\+.gz",\s*\n\s*"sha256":\s*"[0123456789abcdef]\+"|"url": "https://github.com/markummitchell/engauge-digitizer/archive/'$TARBALLDOWNLOAD'",\n"sha256": "'$CKSUM'"|' $JSONFILE >$TMPJSONFILE
+sed 'N;s|"url": "https://github.com/markummitchell/engauge-digitizer/archive/v.\+.gz",\s*\n\s*"sha256":\s*"[0123456789abcdef]\+"|"url": "https://github.com/markummitchell/engauge-digitizer/archive/'$TARBALLDOWNLOAD'",\n                                        "sha256": "'$CKSUM'"|' $JSONFILE >$TMPJSONFILE
 mv $TMPJSONFILE $JSONFILE
 
 rm -rf app 
