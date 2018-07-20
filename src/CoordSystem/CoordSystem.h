@@ -162,6 +162,7 @@ public:
 private:
 
   bool bytesIndicatePreVersion6 (const QByteArray &bytes) const;
+  void hackUnsetGridRemovalFromGridDisplay ();
   void resetSelectedCurveNameIfNecessary ();
 
   // Read variables
