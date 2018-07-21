@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Assumes prerequisites are already installed:
-# 1) flatpak install flathub org.kde.Platform//5.10
-# 2) flatpak install flathub org.kde.Sdk//5.10
-
+# 1) flatpak install flathub org.kde.Platform//5.11
+# 2) flatpak install flathub org.kde.Sdk//5.11
+# According to Nick Richards email on 7/17/18 qt version 5.10 is deprecated for 5.9 or 5.11
 if [[ -z $1 ]]; then
     echo "Usage: build_flathub <version>"
     exit

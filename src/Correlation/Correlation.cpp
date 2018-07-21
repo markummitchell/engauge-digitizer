@@ -48,11 +48,12 @@ void Correlation::correlateWithShift (int N,
                                       double &corrMax,
                                       double correlations []) const
 {
-//  LOG4CPP_DEBUG_S ((*mainCat)) << "Correlation::correlateWithShift";
+  // LOG4CPP_DEBUG_S ((*mainCat)) << "Correlation::correlateWithShift";
 
   int i;
 
   ENGAUGE_ASSERT (N == m_N);
+  ENGAUGE_ASSERT (N > 0); // Prevent divide by zero errors for additiveNormalization* and scale
 
   // Normalize input functions so that:
   // 1) mean is zero. This is used to compute an additive normalization constant
@@ -67,6 +68,14 @@ void Correlation::correlateWithShift (int N,
 
   }
 
+  // Handle all-zero data
+  if (max1 == 0.0) {
+    max1 = 1.0;
+  }
+  if (max2 == 0.0) {
+    max2 = 1.0;
+  }
+  
   double additiveNormalization1 = sumMean1 / N;
   double additiveNormalization2 = sumMean2 / N;
   double multiplicativeNormalization1 = 1.0 / max1;

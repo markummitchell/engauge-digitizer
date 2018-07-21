@@ -68,15 +68,13 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2018-06-28" version="10.8">
+		<release date="2018-07-22" version="10.9">
 			<description>
-				<ul>
-					<li>Validate document to identify issues with multiple langauges in same document</li>
-					<li>Warn when Windows may have mangled file name due to multiple languages in file name</li>
-					<li>Handle multiple periods in file name</li>
-					<li>Dialog that appears after an exception saves error report for later upload</li>
-					<li>Error message now appears in Windows after invalid command line arguments</li>
-				</ul>
+			  <ul>
+			    <li>Handle non-function points in functions</li>
+			    <li>Load version 4 files with unset settings</li>
+			    <li>Improved grid line setup</li>
+			  </ul>
 			</description>
 		</release>
 	</releases>

@@ -60,6 +60,7 @@ void GridClassifier::classify (bool isGnuplot,
   QImage image = originalPixmap.toImage ();
 
   m_numHistogramBins = image.width() / NUM_PIXELS_PER_HISTOGRAM_BINS;
+  ENGAUGE_ASSERT (m_numHistogramBins > 1);
 
   double xMin, xMax, yMin, yMax;
   double binStartX, binStepX, binStartY, binStepY;
@@ -156,7 +157,7 @@ double GridClassifier::coordinateFromBin (int bin,
                                           double coordMin,
                                           double coordMax) const
 {
-  ENGAUGE_ASSERT (bin < m_numHistogramBins);
+  ENGAUGE_ASSERT (1 < m_numHistogramBins);
   ENGAUGE_ASSERT (coordMin < coordMax);
 
   return coordMin + (coordMax - coordMin) * (double) bin / ((double) m_numHistogramBins - 1.0);
@@ -265,6 +266,14 @@ void GridClassifier::dumpGnuplotCorrelations (const QString &coordinateLabel,
     }
   }
 
+  // Prevent divide by zero error
+  if (signalAMax == 0) {
+    signalAMax = 1.0;
+  }
+  if (signalBMax == 0) {
+    signalBMax = 1.0;
+  }
+  
   // Output normalized curves
   for (int bin = 0; bin < m_numHistogramBins; bin++) {
 
@@ -298,6 +307,7 @@ void GridClassifier::loadPicketFence (double picketFence [],
   // Count argument is optional. Note that binStart already excludes PEAK_HALF_WIDTH bins at start,
   // and we also exclude PEAK_HALF_WIDTH bins at the end
   ENGAUGE_ASSERT (binStart >= PEAK_HALF_WIDTH);
+  ENGAUGE_ASSERT (binStep != 0);
   if (!isCount) {
     count = 1 + (m_numHistogramBins - binStart - PEAK_HALF_WIDTH) / binStep;
   }

@@ -24,7 +24,10 @@ QPointF GridRemoval::clipX (const QPointF &posUnprojected,
                             double xBoundary,
                             const QPointF &posOther) const
 {
-  double s = (xBoundary - posUnprojected.x()) / (posOther.x() - posUnprojected.x());
+  double s = 0;
+  if (posOther.x() != posUnprojected.x()) {
+    s = (xBoundary - posUnprojected.x()) / (posOther.x() - posUnprojected.x());
+  }
   ENGAUGE_ASSERT ((-1.0 * EPSILON < s) && (s < 1.0 + EPSILON));
 
   return QPointF ((1.0 - s) * posUnprojected.x() + s * posOther.x(),
@@ -35,7 +38,10 @@ QPointF GridRemoval::clipY (const QPointF &posUnprojected,
                             double yBoundary,
                             const QPointF &posOther) const
 {
-  double s = (yBoundary - posUnprojected.y()) / (posOther.y() - posUnprojected.y());
+  double s = 0;
+  if (posOther.y() != posUnprojected.y()) {
+    s = (yBoundary - posUnprojected.y()) / (posOther.y() - posUnprojected.y());
+  }
   ENGAUGE_ASSERT ((-1.0 * EPSILON < s) && (s < 1.0 + EPSILON));
 
   return QPointF ((1.0 - s) * posUnprojected.x() + s * posOther.x(),

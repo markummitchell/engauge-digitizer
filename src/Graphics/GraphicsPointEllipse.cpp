@@ -72,8 +72,10 @@ void GraphicsPointEllipse::setOpacityForSubtree (double opacity)
 void GraphicsPointEllipse::setRadius(int radius)
 {
   // Resize assuming symmetry about the origin, and an aspect ratio of 1:1 (so x and y scales are the same)
-  double scale = (2 * radius) / boundingRect().width();
-  setScale (scale);
+  if (boundingRect().width() > 0) {
+    double scale = (2 * radius) / boundingRect().width();
+    setScale (scale);
+  }
 }
 
 void GraphicsPointEllipse::setShadow (GraphicsPointEllipse *shadow)

@@ -425,23 +425,25 @@ void DlgSettingsColorFilter::updateHistogram()
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
   double logMaxBinCount = qLn (maxBinCount);
-  for (int bin = 1; bin < ColorFilterHistogram::HISTOGRAM_BINS (); bin++) {
+  if (logMaxBinCount != 0) { // Will not have divide by zero from logMaxBinCount below
+    for (int bin = 1; bin < ColorFilterHistogram::HISTOGRAM_BINS (); bin++) {
 
-    double x0 = PROFILE_SCENE_WIDTH () * (bin - 1.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
+      double x0 = PROFILE_SCENE_WIDTH () * (bin - 1.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
 
-    // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
-    double count0 = 1.0 + histogramBins [bin - 1];
-    double y0 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count0) / logMaxBinCount);
+      // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+      double count0 = 1.0 + histogramBins [bin - 1];
+      double y0 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count0) / logMaxBinCount);
 
-    double x1 = PROFILE_SCENE_WIDTH () * (bin - 0.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
+      double x1 = PROFILE_SCENE_WIDTH () * (bin - 0.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
 
-    // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
-    double count1 = 1.0 + histogramBins [bin];
-    double y1 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count1) / logMaxBinCount);
+      // Map logPixelCount through 0 to 0 through PROFILE_SCENE_HEIGHT-1, using log scale
+      double count1 = 1.0 + histogramBins [bin];
+      double y1 = (PROFILE_SCENE_HEIGHT () - 1.0) * (1.0 - qLn (count1) / logMaxBinCount);
 
-    QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
-    line->setPen (QPen (QBrush (Qt::black), PEN_WIDTH));
-    m_sceneProfile->addItem (line);
+      QGraphicsLineItem *line = new QGraphicsLineItem (x0, y0, x1, y1);
+      line->setPen (QPen (QBrush (Qt::black), PEN_WIDTH));
+      m_sceneProfile->addItem (line);
+    }
   }
 
   // Create low and high dividers
