@@ -299,27 +299,31 @@ void CoordSystem::editPointGraph (bool isX,
                                  transformation);
 }
 
-void CoordSystem::hackUnsetGridRemovalFromGridDisplay ()
+void CoordSystem::initializeUnsetGridRemovalFromGridDisplay (double version)
 {
   // In issue #273 a broken dig file was encountered with grid removal values that were apparently
-  // corrupted. This code was inserted to accomodate that file and other files presumably having
-  // the same issue
+  // corrupted, from version 4.1. This code was inserted to accomodate that file and other files presumably having
+  // the same issue. Newer versions are assumed to be properly initialized, and this code is not applied
+  // so it does not interfere with properly set values
 
-  // Most reliable indicator of a problem is very unrealistic values for counts
-  if (m_modelGridRemoval.countX () < 2 ||
-      m_modelGridRemoval.countY () < 2 ||
-      m_modelGridRemoval.countX () > 100 ||
-      m_modelGridRemoval.countY () > 100) {
+  if (version < 5) {
 
-    // Problem found. Fix by copying values from m_modelGridDisplay
-    m_modelGridRemoval.setStartX (m_modelGridDisplay.startX ());
-    m_modelGridRemoval.setStartY (m_modelGridDisplay.startY ());
-    m_modelGridRemoval.setStepX (m_modelGridDisplay.stepX ());
-    m_modelGridRemoval.setStepY (m_modelGridDisplay.stepY ());
-    m_modelGridRemoval.setStopX (m_modelGridDisplay.stopX ());
-    m_modelGridRemoval.setStopY (m_modelGridDisplay.stopY ());
-    m_modelGridRemoval.setCountX (m_modelGridDisplay.countX ());
-    m_modelGridRemoval.setCountY (m_modelGridDisplay.countY ());
+    // Most reliable indicator of a problem is very unrealistic values for counts
+    if (m_modelGridRemoval.countX () < 2 ||
+        m_modelGridRemoval.countY () < 2 ||
+        m_modelGridRemoval.countX () > 100 ||
+        m_modelGridRemoval.countY () > 100) {
+
+      // Problem found. Prevent issues later by copying values from m_modelGridDisplay
+      m_modelGridRemoval.setStartX (m_modelGridDisplay.startX ());
+      m_modelGridRemoval.setStartY (m_modelGridDisplay.startY ());
+      m_modelGridRemoval.setStepX (m_modelGridDisplay.stepX ());
+      m_modelGridRemoval.setStepY (m_modelGridDisplay.stepY ());
+      m_modelGridRemoval.setStopX (m_modelGridDisplay.stopX ());
+      m_modelGridRemoval.setStopY (m_modelGridDisplay.stopY ());
+      m_modelGridRemoval.setCountX (m_modelGridDisplay.countX ());
+      m_modelGridRemoval.setCountY (m_modelGridDisplay.countY ());
+    }
   }
 }
 
@@ -484,7 +488,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> dbl;
   m_modelGridDisplay.setStopY (dbl);
 
-  hackUnsetGridRemovalFromGridDisplay ();
+  initializeUnsetGridRemovalFromGridDisplay (version);
 
   str >> int32;
   m_modelSegments.setMinLength(int32);
