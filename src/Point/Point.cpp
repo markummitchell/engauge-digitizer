@@ -243,6 +243,18 @@ QString Point::curveNameFromPointIdentifier (const QString &pointIdentifier)
   return tokens.value (0);
 }
 
+QString Point::fixUnderscores (const QString &identifier) const
+{
+  QString rtn = identifier;
+
+  if (!identifier.contains (POINT_IDENTIFIER_DELIMITER_SAFE)) {
+    QString mutableIdentifier = identifier;
+    rtn = mutableIdentifier.replace ("_", POINT_IDENTIFIER_DELIMITER_SAFE);
+  }
+
+  return rtn;
+}
+
 bool Point::hasOrdinal () const
 {
   return m_hasOrdinal;
@@ -303,7 +315,7 @@ void Point::loadXml(QXmlStreamReader &reader)
       isXOnly = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
     }
 
-    m_identifier = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString();
+    m_identifier = fixUnderscores (attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString());
     m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();
     m_isAxisPoint = (isAxisPoint == DOCUMENT_SERIALIZE_BOOL_TRUE);
     m_hasPosGraph = false;
