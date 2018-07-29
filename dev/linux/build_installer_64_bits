@@ -9,7 +9,7 @@ function checkMakeselfVersion()
     MINORGOT=`makeself -v | awk '{print $3}' | awk -F. '{print $2}'`
     REVISIONGOT=`makeself -v | awk '{print $3}' | awk -F. '{print $3}'`
     MAJORWANTED=2
-    MINORWANTED=4
+    MINORWANTED=3
     REVISIONWANTED=0
     BAD=0
     if [ "$MAJORGOT" -lt "$MAJORWANTED" ]; then
