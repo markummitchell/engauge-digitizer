@@ -1,9 +1,29 @@
 #!/bin/bash
 
-if [[ $LOG4CPP_HOME != *"null"* ]]; then
-    echo "Releases require log4cpp_null rather than log4cpp. Stopping"
-    exit
-fi
+function checkMakeselfVersion()
+{
+    # Parse 'Makeself version #.#.#' to verify that makeself issue #32 is fixed so permissions
+    # of files/directories outside of the engauge install directory are not changed. Version
+    # 2.2.0 is known bad and version 2.4.0 is known good
+    MAJORGOT=`makeself -v | awk '{print $3}' | awk -F. '{print $1}'`
+    MINORGOT=`makeself -v | awk '{print $3}' | awk -F. '{print $2}'`
+    REVISIONGOT=`makeself -v | awk '{print $3}' | awk -F. '{print $3}'`
+    MAJORWANTED=2
+    MINORWANTED=4
+    REVISIONWANTED=0
+    BAD=0
+    if [ "$MAJORGOT" -lt "$MAJORWANTED" ]; then
+	BAD=1
+    elif [ "$MAJORGOT" -eq "$MAJORWANTED" ] && [ "$MINORGOT" -lt "$MINORWANTED" ]; then
+	BAD=1
+    fi
+    if (( $BAD )); then
+	echo "Releases require makeself version $MAJORWANTED.$MINORWANTED.$REVISIONWANTED or newer so issue #32 is fixed. Stopping"
+	exit
+    fi
+}
+
+checkMakeselfVersion
 
 export FROMQCH="$HOME/engauge-digitizer/bin/documentation/engauge.qch"
 export FROMQHC="$HOME/engauge-digitizer/bin/documentation/engauge.qhc"
@@ -25,7 +45,7 @@ read -p 'If the version numbers are correct, press Enter to continue'
 VERSION_NUMBER_CODE=`echo $VERSION_NUMBER_CODE | sed 's/\./_/g'`
 
 export STAGINGDIR=engauge
-export TRANSLATIONSDIR=engauge/translations
+export TRANSLATIONSDIR=$STAGINGDIR/translations
 export DOCDIR=$STAGINGDIR/documentation
 export IMAGEDIR=$STAGINGDIR/imageformats
 export PLATFORMSDIR=$STAGINGDIR/platforms
@@ -80,8 +100,6 @@ cp $HOME/Qt5.8/5.8/gcc_64/lib/libicui18n.so.56        $STAGINGDIR
 cp $HOME/Qt5.8/5.8/gcc_64/lib/libicuuc.so.56          $STAGINGDIR
 cp $HOME/Qt5.8/5.8/gcc_64/lib/libQt5XcbQpa.so.5       $STAGINGDIR
 cp /usr/lib/x86_64-linux-gnu/libGL.so                $STAGINGDIR
-cp $LOG4CPP_HOME/lib/liblog4cpp.so                   $STAGINGDIR
-cp $LOG4CPP_HOME/lib/liblog4cpp.so.1                 $STAGINGDIR
 cp $POPPLER_LIB/libpoppler.so                        $STAGINGDIR
 cp $POPPLER_LIB/libpoppler.so.66                     $STAGINGDIR
 cp $POPPLER_LIB/libpoppler-cpp.so                    $STAGINGDIR
@@ -103,7 +121,7 @@ cp $HOME/Qt5.8/5.8/gcc_64/plugins/sqldrivers/libqsqlite.so $SQLDIR
 echo "***Rebuilding release executable" &&
 export ENGAUGE_RELEASE=1 &&
 cd ../.. &&
-qmake engauge.pro CONFIG+=pdf &&
+qmake engauge.pro CONFIG+=pdf CONFIG+=log4cpp_null &&
 make clean &&
 make &&
 cd dev/linux

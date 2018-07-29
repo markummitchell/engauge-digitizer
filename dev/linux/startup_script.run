@@ -1,18 +1,24 @@
 #!/bin/bash
 
-read -e -p "Installation directory [/usr/local/engauge]:" -i "/usr/local/engauge" INSTALLDIR
+read -e -p "Installation directory [/usr/local/engauge]: " -i "/usr/local/engauge" INSTALLDIR
 
-PARENTDIR=$INSTALLDIR/..
+if [ -d "$INSTALLDIR" ]; then
+    echo "Warning: installation directory already exists. This installer will only install into an empty directory. If reinstalling then remove the old installation directory, otherwise append \"/engauge\" or similar to the installation directory"
+else
+    
+    PARENTDIR=$INSTALLDIR/..
 
-# First cp duplicates the recursive second cp, but gives a single tidy error about privileges if there is a privilege problem
-mkdir -p $INSTALLDIR &&
-cp engauge $INSTALLDIR &&
-cp -r . $INSTALLDIR &&
-EXECEXE=$INSTALLDIR/engauge.exe &&
-EXECSCRIPT=$INSTALLDIR/engauge &&
-mv $INSTALLDIR/engauge $EXECEXE &&
-echo "export LD_LIBRARY_PATH=$INSTALLDIR:$INSTALLDIR/platforms" >$EXECSCRIPT &&
-echo "$EXECEXE"                                                 >>$EXECSCRIPT &&
-chmod -R 755 $PARENTDIR &&
-chmod +x $EXECSCRIPT &&
-echo "Engauge Digitizer has been installed. Your PATH should include $INSTALLDIR"
+    # First cp duplicates the recursive second cp, but gives a single tidy error about privileges if there is a privilege problem
+    mkdir -p $INSTALLDIR &&
+    cp engauge $INSTALLDIR &&
+    cp -r . $INSTALLDIR &&
+    EXECEXE=$INSTALLDIR/engauge.exe &&
+    EXECSCRIPT=$INSTALLDIR/engauge &&
+    mv $INSTALLDIR/engauge $EXECEXE &&
+    echo "export LD_LIBRARY_PATH=$INSTALLDIR:$INSTALLDIR/platforms" >$EXECSCRIPT &&
+    echo "$EXECEXE"                                                 >>$EXECSCRIPT &&
+    chmod 755 $PARENTDIR &&
+    chmod -R 755 $INSTALLDIR &&
+    chmod +x $EXECSCRIPT &&
+    echo "Engauge Digitizer has been installed. Your PATH should include $INSTALLDIR"
+fi
