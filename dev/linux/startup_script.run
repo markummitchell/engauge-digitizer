@@ -3,7 +3,7 @@
 read -e -p "Installation directory [/usr/local/engauge]: " -i "/usr/local/engauge" INSTALLDIR
 
 if [ -d "$INSTALLDIR" ]; then
-    echo "Warning: installation directory already exists. This installer will only install into an empty directory. If reinstalling then remove the old installation directory, otherwise append \"/engauge\" or similar to the installation directory"
+    echo "Warning: installation directory already exists. This installer will only install into a new directory. If reinstalling then remove the old installation directory, otherwise append \"/engauge\" or similar to the installation directory"
 else
     
     PARENTDIR=$INSTALLDIR/..
