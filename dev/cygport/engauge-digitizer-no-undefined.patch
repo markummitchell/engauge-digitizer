@@ -1,0 +1,20 @@
+--- engauge-digitizer-10.9-1.x86_64/src/engauge-digitizer-10.9/engauge.pro	2018-07-04 13:13:50.000000000 -0700
++++ engauge-digitizer-10.9-1.x86_642/src/engauge-digitizer-10.9/engauge.pro	2018-07-06 07:38:44.612284500 -0700
+@@ -709,7 +709,7 @@
+ macx-* {
+   CONFIG(debug,debug|release){
+     CONFIG -= app_bundle
+-    TARGET = engauge
++    TARGET = engauge-digitizer
+     DESTDIR = bin
+     QMAKE_CXXFLAGS += "-DOSX_DEBUG -stdlib=libc++ -gdwarf-2"
+   } else {
+@@ -730,7 +730,7 @@
+ } else {
+   CONFIG += qt warn_on thread
+   TEMPLATE = app
+-  TARGET = engauge
++  TARGET = engauge-digitizer
+   DESTDIR = bin
+ }
+ 

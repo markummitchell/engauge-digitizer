@@ -280,9 +280,15 @@ void GridInitializer::overridePolarCoordinateSettings (const DocumentModelCoords
                      modelCoords.originRadius());
   double stopY = radius;
   double stepY = modelGridDisplay.stepY ();
-  int countY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
-                 (int) (0.5 + (stopY - startY) / stepY) :
-                 (int) (0.5 + (qLn (stopY) - qLn (startY)) / qLn (stepY)));
+  double denominator = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
+                        stepY :
+                        qLn (stepY));
+  int countY = 1;
+  if (denominator != 0) {
+    countY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
+              (int) (0.5 + (stopY - startY) / denominator) :
+              (int) (0.5 + (qLn (stopY) - qLn (startY)) / denominator));
+  }
 
   modelGridDisplay.setStartY (startY);
   modelGridDisplay.setStopY (stopY);

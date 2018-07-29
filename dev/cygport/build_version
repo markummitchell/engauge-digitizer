@@ -20,20 +20,27 @@ fi
 VERSION=$1
 
 echo "Cleaning old build directory"
-rm -rf 'engauge-'"$VERSION"'-1.x86_64' 2>/dev/null
+rm -rf 'engauge-digitizer-'"$VERSION"'-1.x86_64' 2>/dev/null
 echo
 
-echo "Creating engauge.cygport file from engauge.cygport.template"
-dos2unix engauge.cygport.template
-sed 's/<VERSION>/'"$VERSION"'/' engauge.cygport.template >.engauge.cygport
+# Cygport file must have the format <package name>.cygport
+CYGFILE=engauge-digitizer.cygport
+
+echo "Creating engauge-digitizer.cygport file from engauge-digitizer.cygport.template"
+dos2unix engauge-digitizer.cygport.template
+sed 's/<VERSION>/'"$VERSION"'/' engauge-digitizer.cygport.template >$CYGFILE
 echo
 
 #DEBUG=--debug
 
-cygport $DEBUG .engauge.cygport download 2>&1 | tee build_version.log
-cygport $DEBUG .engauge.cygport prep     2>&1 | tee -a build_version.log
-cygport $DEBUG .engauge.cygport compile  2>&1 | tee -a build_version.log
-cygport $DEBUG .engauge.cygport install  2>&1 | tee -a build_version.log
-cygport $DEBUG .engauge.cygport package  2>&1 | tee -a build_version.log
+cygport $DEBUG $CYGFILE download 2>&1 | tee build_version.log
+cygport $DEBUG $CYGFILE prep     2>&1 | tee -a build_version.log
+cygport $DEBUG $CYGFILE compile  2>&1 | tee -a build_version.log
+cygport $DEBUG $CYGFILE install  2>&1 | tee -a build_version.log
+cygport $DEBUG $CYGFILE package  2>&1 | tee -a build_version.log
 
 echo "Output was logged to build_version.log"
+
+echo "After testing, then upload according to https://cygwin.com/package-upload.html#uploading-files"
+
+echo "After uploading, release according to https://cygwin.com/packaging-contributors-guide.html#acceptance"

@@ -42,8 +42,8 @@ public:
   double get (int row, int col) const;
 
   /// Return the inverse of this matrix
-  /// \param signficantDigits Input value for calculating epsilon threshold for determinants
-  ///                         that are so close to zero that matrix should be considered inconsistent.
+  /// \param significantDigits Input value for calculating epsilon threshold for determinants
+  ///                          that are so close to zero that matrix should be considered inconsistent.
   /// \param matrixConsistent Output flag indicating success or failure
   Matrix inverse (int significantDigits,
                   MatrixConsistent &matrixConsistent) const;

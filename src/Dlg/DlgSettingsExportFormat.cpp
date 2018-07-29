@@ -759,7 +759,7 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval(const QStr
 
   // Prevent infinite loop on empty and "-" values which get treated as zero interval
   if (goodIntervalFunctions()) {
-    m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+   m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
     updateControls();
     updatePreview();
   } else {

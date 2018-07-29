@@ -4,7 +4,7 @@ VERSION=<VERSION>
 
 SRC_URI="http://github.com/markummitchell/engauge-digitizer/archive/v${VERSION}.zip"
 SRC_DIR="engauge-digitizer-${VERSION}"
-NAME="engauge"
+NAME="engauge-digitizer"
 RELEASE=1
 CATEGORY="Math"
 LOG_DIR=/tmp
@@ -15,8 +15,8 @@ SUMMARY="Convert graph images to numeric data"
 DESCRIPTION="Engauge Digitizer digitizes images of graphs into numbers"
 HOMEPAGE="http://github.com/markummitchell/engauge-digitizer"
 PATCH_URI="
-	engauge-no-undefined.patch
-	engauge-webkit.patch
+	engauge-digitizer-no-undefined.patch
+	engauge-digitizer-webkit.patch
 "
 
 DIFF_EXCLUDES="engauge.qch engauge.qhc"
@@ -31,7 +31,7 @@ src_compile() {
 }
 
 src_install() {
-	      dobin ${B}/bin/engauge.exe
-	      mkdir -p ${D}/usr/share/doc/engauge
-	      cp ${B}/bin/documentation/* ${D}/usr/share/doc/engauge
+	      dobin ${B}/bin/engauge-digitizer.exe
+	      mkdir -p ${D}/usr/share/doc/engauge-digitizer
+	      cp ${B}/bin/documentation/* ${D}/usr/share/doc/engauge-digitizer
 }

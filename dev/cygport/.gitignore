@@ -1,6 +1,5 @@
-engauge.cygport
-.engauge.cygport
-engauge-*.x86_64
+engauge-digitizer.cygport
+engauge-digitizer-*.x86_64
 v*.tar.gz
 *.tmp
 *.zip

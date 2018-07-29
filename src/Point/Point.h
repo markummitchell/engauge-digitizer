@@ -135,6 +135,10 @@ public:
 
 private:
 
+  /// Version 10.7 was known to have unwanted underscores in points rather than the correct
+  /// tabs, in issue #273
+  QString fixUnderscores (const QString &identifer) const;
+
   /// Load from serialized xml
   void loadXml(QXmlStreamReader &reader);
 

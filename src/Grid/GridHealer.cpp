@@ -75,18 +75,20 @@ void GridHealer::connectCloseGroups(QImage &imageToHeal)
         int count = 1 + qMax (qAbs (pixelPointFrom.x() - pixelPointTo.x()),
                               qAbs (pixelPointFrom.y() - pixelPointTo.y()));
 
-        for (int index = 0; index < count; index++) {
+        if (count > 1) {
+          for (int index = 0; index < count; index++) {
 
-          // Replace PIXEL_STATE_REMOVED by PIXEL_STATE_HEALED
-          double s = (double) index / (double) (count - 1);
-          int xCol = (int) (0.5 + (1.0 - s) * pixelPointFrom.y() + s * pixelPointTo.y());
-          int yRow = (int) (0.5 + (1.0 - s) * pixelPointFrom.x() + s * pixelPointTo.x());
-          m_pixels [yRow] [xCol] = PIXEL_STATE_HEALED;
+            // Replace PIXEL_STATE_REMOVED by PIXEL_STATE_HEALED
+            double s = (double) index / (double) (count - 1);
+            int xCol = (int) (0.5 + (1.0 - s) * pixelPointFrom.y() + s * pixelPointTo.y());
+            int yRow = (int) (0.5 + (1.0 - s) * pixelPointFrom.x() + s * pixelPointTo.x());
+            m_pixels [yRow] [xCol] = PIXEL_STATE_HEALED;
 
-          // Fill in the pixel
-          imageToHeal.setPixel (QPoint (xCol,
-                                        yRow),
-                                Qt::black);
+            // Fill in the pixel
+            imageToHeal.setPixel (QPoint (xCol,
+                                          yRow),
+                                  Qt::black);
+          }
         }
       }
     }
@@ -138,13 +140,15 @@ void GridHealer::groupContiguousAdjacentPixels()
                                           rowCentroidSum,
                                           colCentroidSum);
 
-        // Save the centroid and a representative point in hash tables that are indexed by group number
-        m_groupNumberToCentroid [m_boundaryGroupNext] = QPointF (rowCentroidSum / centroidCount,
+        if (centroidCount > 0) {
+          // Save the centroid and a representative point in hash tables that are indexed by group number
+          m_groupNumberToCentroid [m_boundaryGroupNext] = QPointF (rowCentroidSum / centroidCount,
                                                                    colCentroidSum / centroidCount);
-        m_groupNumberToPixel [m_boundaryGroupNext] = QPointF (row,
-                                                              col);
-
-        ++m_boundaryGroupNext;
+          m_groupNumberToPixel [m_boundaryGroupNext] = QPointF (row,
+                                                                col);
+          
+          ++m_boundaryGroupNext;
+        }
       }
     }
   }

@@ -16,6 +16,8 @@ sudo snap remove engauge-digitizer
 echo "Removing previous build, if any"
 rm -rf build
 rm -rf documentation
+
+mkdir -p build/desktop-file
 cd build
 BUILD=`pwd`
 
@@ -26,7 +28,7 @@ LD_LIBRARY_PATH=
 sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
 
 cp ../snapcraft.yaml .
-cp ../../engauge-digitizer.desktop .
+cp ../../engauge-digitizer.desktop desktop-file
 cp -r ../../../help .
 cp -r ../../../src .
 
@@ -45,6 +47,8 @@ snapcraft
 sudo snap install engauge-digitizer_*.snap --devmode --dangerous
 echo "Remaining steps:"
 echo "1) Test the just-installed snap executing 'engauge-digitizer',"
-echo "2) 'snapcraft push engauge-digitizer-*.snap'"
+echo "2) 'snapcraft push build/engauge-digitizer-*.snap'"
 echo "3) 'snapcraft list-revisions engauge-digitizer' to see revision number"
 echo "4) 'snapcraft release engauge-digitizer <revision> stable'"
+echo "5) log into https://dashboard.snapcraft.io/snaps, select newest upload and then click on Release buttons"
+echo "6) on the web page, click Make Public button"

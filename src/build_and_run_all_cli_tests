@@ -12,6 +12,7 @@
 testsAvailable=( \
     TestCorrelation  \
     TestExport \
+    TestExportAlign \
     TestFitting \
     TestFormats \
     TestGraphCoords \

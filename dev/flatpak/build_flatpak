@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Assumes prerequisites are already installed:
+# 1) flatpak install flathub org.kde.Platform//5.11
+# 2) flatpak install flathub org.kde.Sdk//5.11
+# According to Nick Richards email on 7/17/18 qt version 5.10 is deprecated for 5.9 or 5.11
+if [[ -z $1 ]]; then
+    echo "Usage: build_flathub <version>"
+    exit
+fi    
+TARBALLDOWNLOAD="v$1.tar.gz"
+TARBALLLOCAL=/tmp/$TARBALLDOWNLOAD
+echo "Downloading $TARBALLDOWNLOAD"
+
+wget "https://github.com/markummitchell/engauge-digitizer/archive/$TARBALLDOWNLOAD" --output-document="$TARBALLLOCAL"
+CKSUM=`sha256sum $TARBALLLOCAL | awk '{print $1}'`
+
+cd $HOME/io.github.markummitchell.Engauge_Digitizer
+rm -rf app >/dev/null
+rm -rf repo >/dev/null
+
+JSONFILE=io.github.markummitchell.Engauge_Digitizer.json
+TMPJSONFILE=/tmp/$JSONFILE
+
+git pull
+
+# We replace following two lines:
+#    "url": "https://github.com/markummitchell/engauge-digitizer/archive/v#.#.tar.gz",
+#    "sha256": "..."
+# N; flag appends next line to current line
+sed 'N;s|"url": "https://github.com/markummitchell/engauge-digitizer/archive/v.\+.gz",\s*\n\s*"sha256":\s*"[0123456789abcdef]\+"|"url": "https://github.com/markummitchell/engauge-digitizer/archive/'$TARBALLDOWNLOAD'",\n                                        "sha256": "'$CKSUM'"|' $JSONFILE >$TMPJSONFILE
+mv $TMPJSONFILE $JSONFILE
+
+rm -rf app 
+flatpak-builder --ccache --repo=repo --subject="Test" app $JSONFILE
+
+# Uninstall previous if it exists
+LISTOLD=`flatpak list --app | grep Engauge_Digitizer`
+if [[ ! -z $LISTOLD ]]; then
+    flatpak uninstall io.github.markummitchell.Engauge_Digitizer
+fi
+
+flatpak remote-add --if-not-exists engauge-digitizer repo --no-gpg-verify
+flatpak install engauge-digitizer io.github.markummitchell.Engauge_Digitizer
+flatpak run io.github.markummitchell.Engauge_Digitizer
+
+echo "If testing was successful then commit the changes in $HOME/io.github.markummitchell.Engauge_Digitizer"
+

@@ -1,0 +1,2 @@
+-errorreport ../test/version10_7_invalid_axes_point_names.dig -regression -reset
+
