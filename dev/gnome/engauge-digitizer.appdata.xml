@@ -68,7 +68,7 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2018-07-22" version="10.9">
+		<release date="2018-07-22" version="10.10">
 			<description>
 			  <ul>
 			    <li>Handle non-function points in functions</li>

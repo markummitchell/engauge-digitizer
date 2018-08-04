@@ -33,7 +33,7 @@ void TutorialStateAxisPoints::begin ()
   m_text1 = createTextItem (tr ("Step 2 - Click on an axis or grid\n"
                                 "line with known coordinates. An axis\n"
                                 "point appears, with a dialog window\n"
-                                "for entering the axis point's\n"
+                                "for entering the axis point\n"
                                 "coordinates"),
                             QPoint (300, 210));
   m_text2 = createTextItem (tr ("Step 3 - Enter the two coordinates\n"

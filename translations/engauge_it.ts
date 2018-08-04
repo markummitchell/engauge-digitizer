@@ -297,8 +297,10 @@ Per avviare Checklist Guide Wizard quando un'apos;immagine viene importata, sele
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="21" />
-        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer è uno strumento open source per estrarre efficientemente accurati dati numerici da immagini di grafici. Il processo può essere considerato come un "inverse graphing". Quando tu "engauge" un documento, tu stai convertendo i pixel in numeri.&lt;/p&gt;&lt;p&gt;Questo è software libero, e tu sei benvenuto a redistribuirlo sotto certe condizioni in accordo alla GNU General Public License Version 2, o (a tua scelta) qualsiasi versione successiva.&lt;/p&gt;&lt;p&gt;Engauge Digitizer viene fornito SENZA ALCUNA GARANZIA&lt;/p&gt;&lt;p&gt;Leggi il file LICENSE incluso per dettagli.&lt;/p&gt;&lt;p&gt;Collegamenti di Engauge Digitizer&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;https://github.com/markummitchell/engauge-digitizer'apos;&gt;Home Page del Progetto&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='apos;https://gitter.im/markummitchell/engauge-digitizer'apos;&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Collegamenti FFTW 3.X.X&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.fftw.org'apos;&gt;Pagina del progetto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Collegamenti OpenJPEG 2.X&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='apos;http://www.openjpeg.org'apos;&gt;Pagina del progetto&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <source>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as "inverse graphing". When you "engauge" a document, you are converting pixels into numbers.&lt;/p&gt;&lt;p&gt;This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.&lt;/p&gt;&lt;p&gt;Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.&lt;/p&gt;&lt;p&gt;Read the included LICENSE file for details.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://github.com/markummitchell/engauge-digitizer"&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://gitter.im/markummitchell/engauge-digitizer"&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://www.fftw.org"&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://www.openjpeg.org"&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation>&lt;/p&gt;&lt;p&gt;&amp;copy; 2014 Mark Mitchell&lt;/p&gt;&lt;p&gt;Engauge Digitizer è uno strumento open source per estrarre in modo efficiente dati numerici precisi da immagini di grafici. Il processo può essere considerato come "grafico inverso". Quando si "engauge" un documento, si convertono i pixel in numeri.&lt;/p&gt;&lt;p&gt;
+Questo è un software gratuito, e siete invitati a ridistribuirlo a determinate condizioni in base alla GNU General Public License Versione 2 o (a vostra discrezione) a qualsiasi versione successiva.&lt;/p&gt;&lt;p&gt;
+Engauge Digitizer viene fornito ASSOLUTAMENTE NESSUNA GARANZIA.&lt;/p&gt;&lt;p&gt;Leggi il file LICENZA incluso per i dettagli.&lt;/p&gt;&lt;p&gt;Engauge Digitizer Links&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://github.com/markummitchell/engauge-digitizer"&gt;Project Home Page&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://gitter.im/markummitchell/engauge-digitizer"&gt;Gitter Forum&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;FFTW 3.X.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://www.fftw.org"&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;OpenJPEG 2.X Links&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://www.openjpeg.org"&gt;Project page&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
 </context>
 <context>
@@ -4426,7 +4428,7 @@ Do you want to save your changes?</source>
         <translation>OO:MM:SS</translation>
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="572" />
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="602" />
         <source>Unexpected xml token</source>
         <translation>Token xml inaspettato</translation>
     </message>
@@ -4811,7 +4813,7 @@ Do you want to save your changes?</source>
         <translation>Impossibile leggere i dati dello stile della linea</translation>
     </message>
     <message>
-        <location filename="../src/Point/Point.cpp" line="370" />
+        <location filename="../src/Point/Point.cpp" line="382" />
         <source>Cannot read point data</source>
         <translation>Impossibile leggere i dati del punto</translation>
     </message>
@@ -5113,13 +5115,13 @@ Clicca sul pulsante Punti Assiali</translation>
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
-for entering the axis point'apos;s
+for entering the axis point
 coordinates</source>
-        <translation>Passo 2 - Clicca su un asse o una linea
-della griglia con coordinate conosciute.
-Un punto assiale apparirà, con una
-finestra di dialogo per inserire le
-coordinate del punto assiale</translation>
+        <translation>Passo 2: fare clic su un asse o una griglia
+linea con coordinate conosciute. Un asse
+appare il punto, con una finestra di dialogo
+per entrare nel punto dell'apos;asse
+coordinate</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="39" />

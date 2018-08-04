@@ -8,7 +8,7 @@ function main {
     echo "********************************************************************"
     echo "* Remaining steps:                                                 *"
     echo "*   1) Run 'lrelease engauge.pro'                                  *"
-    echo "*   2) Copy translations directory into bin directory              *"
+    echo "*   2) Copy *.qm translations into the bin/translations directory  *"
     echo "*   3) Upload the english engauge_en.ts file to Transifex (since   *"
     echo "*      non-english uploads will be silently filtered by that file) *"
     echo "*      3a) Click on "Resources"                                    *"

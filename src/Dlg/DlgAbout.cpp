@@ -14,6 +14,8 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
 {
   setWindowTitle (tr ("About Engauge"));
   setTextFormat (Qt::RichText);
+
+  // Do not embed single quotes in the strings below since that will interfere with the translations
   setText (QString ("%1 %2 %3 %4")
            .arg (tr ("<p>Engauge Digitizer</p>"))
            .arg (tr ("Version"))
@@ -29,15 +31,15 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
                      "<p>Read the included LICENSE file for details.</p>"
                      "<p>Engauge Digitizer Links<p>"
                      "<ul>"
-                     "<li><a href='https://github.com/markummitchell/engauge-digitizer'>Project Home Page</a></li>"
-                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum</a></li>"
+                     "<li><a href=\"https://github.com/markummitchell/engauge-digitizer\">Project Home Page</a></li>"
+                     "<li><a href=\"https://gitter.im/markummitchell/engauge-digitizer\">Gitter Forum</a></li>"
                      "</ul>"
                      "<p>FFTW 3.X.X Links</p>"
                      "<ul>"
-                     "<li><a href='http://www.fftw.org'>Project page</a></li>"
+                     "<li><a href=\"http://www.fftw.org\">Project page</a></li>"
                      "</ul>"
                      "<p>OpenJPEG 2.X Links</p>"
                      "<ul>"
-                     "<li><a href='http://www.openjpeg.org'>Project page</a></li>"
+                     "<li><a href=\"http://www.openjpeg.org\">Project page</a></li>"
                      "</ul>")));
 }
