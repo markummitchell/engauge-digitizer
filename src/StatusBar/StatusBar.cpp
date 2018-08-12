@@ -45,10 +45,7 @@ StatusBar::StatusBar(QStatusBar &statusBar) :
 
 StatusBar::~StatusBar ()
 {
-  if (m_timer != 0) {
-    delete m_timer;
-    m_timer = 0;
-  }
+  delete m_timer;
 }
 
 void StatusBar::createGroupUnits ()

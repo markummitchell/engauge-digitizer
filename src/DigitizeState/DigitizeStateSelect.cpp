@@ -266,15 +266,11 @@ void DigitizeStateSelect::handleContextMenuEventGraph (CmdMediator *cmdMediator,
                                                   context().mainWindow().transformation(),
                                                   x,
                                                   y);
-  if (x != 0) {
-    delete x;
-    x = 0;
-  }
+  delete x;
+  delete y;
 
-  if (y != 0) {
-    delete y;
-    y = 0;
-  }
+  x = 0;
+  y = 0;
 
   int rtn = dlg->exec ();
 

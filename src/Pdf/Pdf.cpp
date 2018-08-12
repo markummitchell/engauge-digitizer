@@ -53,9 +53,8 @@ PdfReturn Pdf::load (const QString &fileName,
   }
   QApplication::restoreOverrideCursor();
 
-  if (document != 0) {
-    delete document;
-  }
+  delete document;
+  document = 0;
 
   return rtn;
 }

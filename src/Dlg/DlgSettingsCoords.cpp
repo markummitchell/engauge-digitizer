@@ -567,12 +567,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_yRadiusLog->setEnabled (!yRGoesNegative);
 
   // Flush old data
-  if (m_modelCoordsBefore != 0) {
-    delete m_modelCoordsBefore;
-  }
-  if (m_modelCoordsAfter != 0) {
-    delete m_modelCoordsAfter;
-  }
+  delete m_modelCoordsBefore;
+  delete m_modelCoordsAfter;
 
   // Save new data
   m_modelCoordsBefore = new DocumentModelCoords (cmdMediator.document().modelCoords());

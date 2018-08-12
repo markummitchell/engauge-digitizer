@@ -2046,10 +2046,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     rebuildRecentFileListForCurrentFile(fileName);
     m_currentFile = fileName; // This enables the FileSaveAs menu option
 
-    if (m_cmdMediator != 0) {
-      delete m_cmdMediator;
-      m_cmdMediator = 0;
-    }
+    delete m_cmdMediator;
 
     m_cmdMediator = cmdMediator;
     setupAfterLoadNewDocument (fileName,
@@ -2166,10 +2163,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
   // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list
   m_engaugeFile = EMPTY_FILENAME; // Forces first Save to be treated as Save As
 
-  if (m_cmdMediator != 0) {
-    delete m_cmdMediator;
-    m_cmdMediator = 0;
-  }
+  delete m_cmdMediator;
 
   m_cmdMediator = cmdMediator;
   bool accepted = setupAfterLoadNewDocument (fileName,
@@ -3665,7 +3659,6 @@ void MainWindow::slotFittingWindowCurveFit(FittingCurveCoefficients fittingCurve
   if (m_fittingCurve != 0) {
     m_scene->removeItem (m_fittingCurve);
     delete m_fittingCurve;
-    m_fittingCurve = 0;
   }
 
   m_fittingCurve = new FittingCurve (fittingCurveCoef,

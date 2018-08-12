@@ -232,12 +232,8 @@ void DlgSettingsColorFilter::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelColorFilterBefore != 0) {
-    delete m_modelColorFilterBefore;
-  }
-  if (m_modelColorFilterAfter != 0) {
-    delete m_modelColorFilterAfter;
-  }
+  delete m_modelColorFilterBefore;
+  delete m_modelColorFilterAfter;
 
   // Save new data
   m_modelColorFilterBefore = new DocumentModelColorFilter (cmdMediator.document().modelColorFilter());

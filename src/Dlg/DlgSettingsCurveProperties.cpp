@@ -381,12 +381,8 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelCurveStylesBefore != 0) {
-    delete m_modelCurveStylesBefore;
-  }
-  if (m_modelCurveStylesAfter != 0) {
-    delete m_modelCurveStylesAfter;
-  }
+  delete m_modelCurveStylesBefore;
+  delete m_modelCurveStylesAfter;
 
   // Save new data
   m_modelCurveStylesBefore = new CurveStyles (cmdMediator.coordSystem());
