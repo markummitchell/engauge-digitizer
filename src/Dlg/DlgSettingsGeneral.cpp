@@ -121,12 +121,8 @@ void DlgSettingsGeneral::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelGeneralBefore != 0) {
-    delete m_modelGeneralBefore;
-  }
-  if (m_modelGeneralAfter != 0) {
-    delete m_modelGeneralAfter;
-  }
+  delete m_modelGeneralBefore;
+  delete m_modelGeneralAfter;
 
   // Save new data
   m_modelGeneralBefore = new DocumentModelGeneral (cmdMediator.document());

@@ -562,12 +562,8 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelExportBefore != 0) {
-    delete m_modelExportBefore;
-  }
-  if (m_modelExportAfter != 0) {
-    delete m_modelExportAfter;
-  }
+  delete m_modelExportBefore;
+  delete m_modelExportAfter;
 
   // Save new data
   m_modelExportBefore = new DocumentModelExportFormat (cmdMediator.document());

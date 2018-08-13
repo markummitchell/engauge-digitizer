@@ -298,12 +298,8 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelGridDisplayBefore != 0) {
-    delete m_modelGridDisplayBefore;
-  }
-  if (m_modelGridDisplayAfter != 0) {
-    delete m_modelGridDisplayAfter;
-  }
+  delete m_modelGridDisplayBefore;
+  delete m_modelGridDisplayAfter;
 
   // Display cartesian or polar headers as appropriate
   QString titleX = tr ("X Grid Lines");

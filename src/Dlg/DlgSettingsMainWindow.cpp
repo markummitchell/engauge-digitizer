@@ -287,12 +287,8 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelMainWindowBefore != 0) {
-    delete m_modelMainWindowBefore;
-  }
-  if (m_modelMainWindowAfter != 0) {
-    delete m_modelMainWindowAfter;
-  }
+  delete m_modelMainWindowBefore;
+  delete m_modelMainWindowAfter;
 
   // Save new data
   m_modelMainWindowBefore = new MainWindowModel (modelMainWindow);

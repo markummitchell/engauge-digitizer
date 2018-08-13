@@ -257,12 +257,8 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelSegmentsBefore != 0) {
-    delete m_modelSegmentsBefore;
-  }
-  if (m_modelSegmentsAfter != 0) {
-    delete m_modelSegmentsAfter;
-  }
+  delete m_modelSegmentsBefore;
+  delete m_modelSegmentsAfter;
 
   // Save new data
   m_modelSegmentsBefore = new DocumentModelSegments (cmdMediator.document());

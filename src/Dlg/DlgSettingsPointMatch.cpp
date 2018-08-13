@@ -211,12 +211,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelPointMatchBefore != 0) {
-    delete m_modelPointMatchBefore;
-  }
-  if (m_modelPointMatchAfter != 0) {
-    delete m_modelPointMatchAfter;
-  }
+  delete m_modelPointMatchBefore;
+  delete m_modelPointMatchAfter;
 
   // Save new data
   m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator.document());

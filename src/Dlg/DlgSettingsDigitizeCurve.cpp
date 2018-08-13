@@ -185,12 +185,8 @@ void DlgSettingsDigitizeCurve::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelDigitizeCurveBefore != 0) {
-    delete m_modelDigitizeCurveBefore;
-  }
-  if (m_modelDigitizeCurveAfter != 0) {
-    delete m_modelDigitizeCurveAfter;
-  }
+  delete m_modelDigitizeCurveBefore;
+  delete m_modelDigitizeCurveAfter;
 
   // Save new data
   m_modelDigitizeCurveBefore = new DocumentModelDigitizeCurve (cmdMediator.document());

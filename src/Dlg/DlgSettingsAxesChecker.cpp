@@ -207,15 +207,9 @@ void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelAxesCheckerBefore != 0) {
-    delete m_modelAxesCheckerBefore;
-  }
-  if (m_modelAxesCheckerAfter != 0) {
-    delete m_modelAxesCheckerAfter;
-  }
-  if (m_modelCoords != 0) {
-    delete m_modelCoords;
-  }
+  delete m_modelAxesCheckerBefore;
+  delete m_modelAxesCheckerAfter;
+  delete m_modelCoords;
 
   // Save new data
   m_modelAxesCheckerBefore = new DocumentModelAxesChecker (cmdMediator.document());
