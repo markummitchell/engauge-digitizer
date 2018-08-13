@@ -1,0 +1,2 @@
+-extractimageonly png -regression ../test/extract_image_only_1.dig
+

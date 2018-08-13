@@ -68,6 +68,7 @@
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
+#include "ImportImageExtensions.h"
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
@@ -151,7 +152,10 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
                        bool isReset,
                        bool isExportOnly,
+                       bool isExtractImageOnly,
+                       const QString &extractImageOnlyExtension,
                        const QStringList &loadStartupFiles,
+                       const QStringList &commandLineWithoutLoadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
@@ -167,13 +171,16 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_backgroundStateContext (0),
   m_networkClient (0),
   m_isGnuplot (isGnuplot),
+  m_commandLineWithoutLoadStartupFiles (commandLineWithoutLoadStartupFiles),
   m_ghosts (0),
   m_timerRegressionErrorReport(0),
   m_fileCmdScript (0),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0),
   m_fittingCurve (0),
-  m_isExportOnly (isExportOnly)
+  m_isExportOnly (isExportOnly),
+  m_isExtractImageOnly (isExtractImageOnly),
+  m_extractImageOnlyExtension (extractImageOnlyExtension)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -224,14 +231,18 @@ MainWindow::MainWindow(const QString &errorReportFile,
   QString originalPath = QDir::currentPath();
   QDir::setCurrent (m_startupDirectory);
   if (isExportOnly) {
-    ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
     m_loadStartupFiles = loadStartupFiles;
     m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
     slotLoadStartupFiles ();
-    slotFileExport ();
+    slotFileExport (); // Export one file. QProcess::startDetached will be called for each remaining file
     exit (0);
-  }
-  else if (!errorReportFile.isEmpty()) {
+  } else if (isExtractImageOnly) {
+    m_loadStartupFiles = loadStartupFiles;
+    m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
+    slotLoadStartupFiles ();
+    handlerFileExtractImage ();  // Extract one file. QProcess::startDetached will be called for each remaining file
+    exit (0);
+  } else if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
     if (m_isErrorReportRegressionTest) {
       startRegressionTestErrorReport(errorReportFile);
@@ -1672,6 +1683,40 @@ void MainWindow::fileExport(const QString &fileName,
   }
 }
 
+void MainWindow::fileExtractImage (const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileExtractImage"
+                              << " curDir=" << QDir::currentPath().toLatin1().data()
+                              << " fileName=" << fileName.toLatin1().data();
+
+  QFile file (fileName);
+  if (file.open(QIODevice::WriteOnly)) {
+
+    QPixmap pixmap = m_cmdMediator->pixmap();
+    pixmap.save (&file);
+
+    // Generate a checksum file if performing a regression test
+    if (m_isErrorReportRegressionTest) {
+      QString csvFile = QString ("%1_1")
+          .arg (exportRegressionFilenameFromInputFilename (m_regressionFile));
+
+      // Generate csv file with only checksum. Since QProcess cannot handle pipes, we let shell execute it
+      QProcess process;
+      process.start ("bash -c \"cksum " + fileName + " | awk '{print $1}' > " + csvFile + "\"");
+      process.waitForFinished (-1);
+    }
+
+  } else {
+
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::fileExtractImage"
+                                 << " file=" << fileName.toLatin1().data()
+                                 << " curDir=" << QDir::currentPath().toLatin1().data();
+    QMessageBox::critical (0,
+                           engaugeWindowTitle(),
+                           tr ("Unable to extract image to file ") + fileName);
+  }
+}
+
 void MainWindow::fileImport (const QString &fileName,
                              ImportType importType)
 {
@@ -1808,25 +1853,8 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
     QString filter;
     QTextStream str (&filter);
 
-    // Compile a list of supported formats into a filter
-    QList<QByteArray>::const_iterator itr;
-    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QStringList supportedImageFormatStrings;
-    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
-      QByteArray arr = *itr;
-      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
-      supportedImageFormatStrings << extensionAsWildcard;
-    }
-#ifdef ENGAUGE_JPEG2000
-    Jpeg2000 jpeg2000;
-    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
-#endif // ENGAUGE_JPEG2000
-
-#ifdef ENGAUGE_PDF
-    supportedImageFormatStrings << "*.pdf";
-#endif // ENGAUGE_PDF
-
-    supportedImageFormatStrings.sort();
+    ImportImageExtensions importImageExtensions;
+    QStringList supportedImageFormatStrings = importImageExtensions.fileExtensionsWithAsterisks ();
 
     str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
 
@@ -1870,6 +1898,18 @@ QString MainWindow::fileNameForExportOnly () const
       .arg (m_currentFile)
       .arg (exportStrategy.fileExtensionCsv ());
   }
+
+  return fileName;
+}
+
+QString MainWindow::fileNameForExtractImageOnly () const
+{
+  // User requested export-only mode so just change file extension
+  QString dir = QFileInfo (m_currentFileWithPathAndFileExtension).absolutePath();
+  QString fileName = QString ("%1/%2.%3")
+    .arg (dir)
+    .arg (m_currentFile)
+    .arg (m_extractImageOnlyExtension);
 
   return fileName;
 }
@@ -1979,6 +2019,20 @@ void MainWindow::ghostsDestroy ()
 
   delete m_ghosts;
   m_ghosts = 0;
+}
+
+void MainWindow::handlerFileExtractImage ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
+
+  if (m_isExtractImageOnly) {
+    QString fileName = fileNameForExtractImageOnly ();
+
+    MainDirectoryPersist directoryPersist;
+
+    directoryPersist.setDirectoryExportSaveFromFilename(fileName);
+    fileExtractImage(fileName);
+  }
 }
 
 QImage MainWindow::imageFiltered () const
@@ -3733,7 +3787,7 @@ void MainWindow::slotLoadStartupFiles ()
     // Fork off another instance of this application to handle the remaining files recursively. New process
     // is detached so killing/terminating this process does not automatically kill the child process(es) also
     QProcess::startDetached (QCoreApplication::applicationFilePath(),
-                             m_loadStartupFiles);
+                             m_commandLineWithoutLoadStartupFiles + m_loadStartupFiles);
   }
 }
 

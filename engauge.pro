@@ -313,6 +313,7 @@ HEADERS  += \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
+    src/Import/ImportImageExtensions.h \
     src/util/LinearToLog.h \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
@@ -630,7 +631,8 @@ SOURCES += \
     src/Grid/GridRemoval.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
-    src/util/LinearToLog.cpp \    
+    src/Import/ImportImageExtensions.cpp \
+    src/util/LinearToLog.cpp \
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
     src/Logger/Logger.cpp \
