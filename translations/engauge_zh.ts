@@ -833,8 +833,8 @@ The Value component is also called the Lightness.</source>
     <name>DlgSettingsCoords</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="907" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="911" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
         <source>Coordinates</source>
         <translation>坐标系</translation>
     </message>
@@ -869,7 +869,7 @@ Setting the format to an empty value results in just the date portion appearing 
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="910" />
         <source>R</source>
         <translation>R</translation>
     </message>
@@ -970,7 +970,7 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
         <translation>预览窗口显示当前设置对坐标系的影响</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="669" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="665" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -979,7 +979,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
         <translation>数字具有最简单和最通用的格式。日期和时间值具有日期和/或时间分量。度数分钟（DDD MM SS.S）格式使用两个整数来表示度和分钟数，而一个实数秒。每分钟有60秒。在输入过程中，必须在三个数字之间插入空格。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="702" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="698" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -994,12 +994,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
         <translation>度（DDD.DDDDD）格式使用单个实数。一个完整的旋转是360度。度数分钟（DDD MM.MMM）格式使用一个整数作为度数，而一个实数作为分钟。每学位有60分钟。在输入过程中，必须在两个数字之间插入一个空格。度数分钟（DDD MM SS.S）格式对度和分钟使用两个整数，对于秒数使用两个整数。每分钟有60秒。在输入过程中，必须在三个数字之间插入空格.Gradians格式使用单个实数。一个完整的革命是400个gradians.Radians格式使用一个单一的实数。一个完整的革命是2 * pi弧度。转换格式使用一个单一的实数。一次完整的革命是一回合。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="909" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="905" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="909" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -1599,7 +1599,7 @@ Controls for specifying the format of relations during export</source>
         <translation>在标题中为theta值标记</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1117" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1113" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>在定义轴点之前预览不可用。</translation>
     </message>
@@ -1780,27 +1780,27 @@ The stop value cannot be less than the start value</source>
         <translation>显示当前设置如何影响网格显示的预览窗口</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="305" />
         <source>X Grid Lines</source>
         <translation>X网格线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307" />
         <source>Grid Lines</source>
         <translation>网格线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="315" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311" />
         <source>Y Grid Lines</source>
         <translation>Y网格线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="317" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="313" />
         <source>Radius Grid Lines</source>
         <translation>半径网格线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="575" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="571" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>网格线数超出设置/主窗口设置的限制。</translation>
     </message>
@@ -2434,12 +2434,12 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>LoadImageFromUrl</name>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="63" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="59" />
         <source>Unable to download image from</source>
         <translation>不能下载图像</translation>
     </message>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="95" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="91" />
         <source>Unable to load image from</source>
         <translation>不能加载图像</translation>
     </message>
@@ -2447,22 +2447,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="384" />
+        <location filename="../src/main/MainWindow.cpp" line="395" />
         <source>Select Tool</source>
         <translation>选择工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="385" />
+        <location filename="../src/main/MainWindow.cpp" line="396" />
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="387" />
+        <location filename="../src/main/MainWindow.cpp" line="398" />
         <source>Select points on screen.</source>
         <translation>选择屏幕上的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="388" />
+        <location filename="../src/main/MainWindow.cpp" line="399" />
         <source>Select
 
 Select points on the screen.</source>
@@ -2470,44 +2470,44 @@ Select points on the screen.</source>
 选择屏幕上的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="392" />
+        <location filename="../src/main/MainWindow.cpp" line="403" />
         <source>Axis Point Tool</source>
         <translation>坐标轴点工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="393" />
+        <location filename="../src/main/MainWindow.cpp" line="404" />
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="395" />
+        <location filename="../src/main/MainWindow.cpp" line="406" />
         <source>Digitize axis points for a graph.</source>
         <translation>为图形数字化轴点。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="396" />
+        <location filename="../src/main/MainWindow.cpp" line="407" />
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
         <translation>数字化轴点点击鼠标后在光标处放置一个新点，为图形指定一个轴点。然后输入轴点坐标。在图中，需要三个轴点来定义图坐标。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="403" />
+        <location filename="../src/main/MainWindow.cpp" line="414" />
         <source>Scale Bar Tool</source>
         <translation>比例尺工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="404" />
+        <location filename="../src/main/MainWindow.cpp" line="415" />
         <source>Shift+F8</source>
         <translation>按住Shift + F8</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="406" />
+        <location filename="../src/main/MainWindow.cpp" line="417" />
         <source>Digitize scale bar for a map.</source>
         <translation>数字化地图的比例尺。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="407" />
+        <location filename="../src/main/MainWindow.cpp" line="418" />
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -2516,22 +2516,22 @@ Maps must be imported using Import (Advanced).</source>
         <translation>数字化比例尺通过单击并拖动来为地图的比例尺数字化。然后输入比例尺的长度。在地图中，比例尺的两个端点以图形坐标定义距离。必须使用导入（高级）导入地图。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="414" />
+        <location filename="../src/main/MainWindow.cpp" line="425" />
         <source>Curve Point Tool</source>
         <translation>曲线点工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="415" />
+        <location filename="../src/main/MainWindow.cpp" line="426" />
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="417" />
+        <location filename="../src/main/MainWindow.cpp" line="428" />
         <source>Digitize curve points.</source>
         <translation>数字化曲线上的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="418" />
+        <location filename="../src/main/MainWindow.cpp" line="429" />
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -2540,22 +2540,22 @@ New points will be assigned to the currently selected curve.</source>
         <translation>数字化曲线点点击鼠标后在光标处放置一个新点，使曲线点数字化。使用此模式逐个数字化曲线上的点。新点将分配给当前选定的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="425" />
+        <location filename="../src/main/MainWindow.cpp" line="436" />
         <source>Point Match Tool</source>
         <translation>点匹配工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="426" />
+        <location filename="../src/main/MainWindow.cpp" line="437" />
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="428" />
+        <location filename="../src/main/MainWindow.cpp" line="439" />
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>通过匹配点数字化点图中的曲线点。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="429" />
+        <location filename="../src/main/MainWindow.cpp" line="440" />
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -2564,44 +2564,44 @@ New points will be assigned to the currently selected curve.</source>
         <translation>通过点匹配对曲线点进行数字化通过查找与采样点相匹配的点来对点图中的曲线点进行数字化。该过程首先选择一个有代表性的采样点。新点将分配给当前选择的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="435" />
+        <location filename="../src/main/MainWindow.cpp" line="446" />
         <source>Color Picker Tool</source>
         <translation>颜色拾取工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="436" />
+        <location filename="../src/main/MainWindow.cpp" line="447" />
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="438" />
+        <location filename="../src/main/MainWindow.cpp" line="449" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>线段填充模式下的筛选选择颜色设置</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="439" />
+        <location filename="../src/main/MainWindow.cpp" line="450" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
         <translation>选择Segment Fill滤镜的颜色设置沿着当前选择的曲线选择一个像素。该像素及其邻居将在分段填充模式下定义当前所选曲线的滤镜设置（颜色，亮度等）。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="445" />
+        <location filename="../src/main/MainWindow.cpp" line="456" />
         <source>Segment Fill Tool</source>
         <translation>线段填充工具</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="446" />
+        <location filename="../src/main/MainWindow.cpp" line="457" />
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="448" />
+        <location filename="../src/main/MainWindow.cpp" line="459" />
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>将一段曲线上的曲线点数字化</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="449" />
+        <location filename="../src/main/MainWindow.cpp" line="460" />
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -2610,17 +2610,17 @@ New points will be assigned to the currently selected curve.</source>
         <translation>使用分段填充对曲线点进行数字化by通过沿光标下高亮显示的段放置新点来使曲线点数字化。使用此模式，只需点击一次即可快速数字化曲线上的多个点。新点将分配给当前选定的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="470" />
+        <location filename="../src/main/MainWindow.cpp" line="481" />
         <source>&amp;Undo</source>
         <translation>&amp;撤销</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="472" />
+        <location filename="../src/main/MainWindow.cpp" line="483" />
         <source>Undo the last operation.</source>
         <translation>撤销上一操作</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="473" />
+        <location filename="../src/main/MainWindow.cpp" line="484" />
         <source>Undo
 
 Undo the last operation.</source>
@@ -2628,17 +2628,17 @@ Undo the last operation.</source>
 撤销上一操作.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477" />
+        <location filename="../src/main/MainWindow.cpp" line="488" />
         <source>&amp;Redo</source>
         <translation>&amp;恢复</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="479" />
+        <location filename="../src/main/MainWindow.cpp" line="490" />
         <source>Redo the last operation.</source>
         <translation>恢复上一操作</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="480" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
         <source>Redo
 
 Redo the last operation.</source>
@@ -2646,124 +2646,124 @@ Redo the last operation.</source>
 恢复上一操作</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="484" />
+        <location filename="../src/main/MainWindow.cpp" line="495" />
         <source>Cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="486" />
+        <location filename="../src/main/MainWindow.cpp" line="497" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>剪切选中的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="487" />
+        <location filename="../src/main/MainWindow.cpp" line="498" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <location filename="../src/main/MainWindow.cpp" line="502" />
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="493" />
+        <location filename="../src/main/MainWindow.cpp" line="504" />
         <source>Copies the selected points to the clipboard.</source>
         <translation>复制选中的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="494" />
+        <location filename="../src/main/MainWindow.cpp" line="505" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="498" />
+        <location filename="../src/main/MainWindow.cpp" line="509" />
         <source>Paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="500" />
+        <location filename="../src/main/MainWindow.cpp" line="511" />
         <source>Pastes the selected points from the clipboard.</source>
         <translation>粘贴选中的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="512" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="505" />
+        <location filename="../src/main/MainWindow.cpp" line="516" />
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="507" />
+        <location filename="../src/main/MainWindow.cpp" line="518" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>复制选中的点入剪切板, 然后删除这些点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="508" />
+        <location filename="../src/main/MainWindow.cpp" line="519" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="512" />
+        <location filename="../src/main/MainWindow.cpp" line="523" />
         <source>Paste As New</source>
         <translation>粘贴为新图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="513" />
+        <location filename="../src/main/MainWindow.cpp" line="524" />
         <source>Pastes an image from the clipboard.</source>
         <translation>粘贴图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="514" />
+        <location filename="../src/main/MainWindow.cpp" line="525" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
         <translation>粘贴为新图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="518" />
+        <location filename="../src/main/MainWindow.cpp" line="529" />
         <source>Paste As New (Advanced)...</source>
         <translation>粘贴为新图像(高级)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="519" />
+        <location filename="../src/main/MainWindow.cpp" line="530" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>在高级模式下从剪贴板粘贴图像。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="520" />
+        <location filename="../src/main/MainWindow.cpp" line="531" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation>粘贴为新建（高级）通过在高级模式下粘贴剪贴板中的图像来创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="529" />
+        <location filename="../src/main/MainWindow.cpp" line="540" />
         <source>&amp;Import...</source>
         <translation>&amp;导入</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="530" />
+        <location filename="../src/main/MainWindow.cpp" line="541" />
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="531" />
+        <location filename="../src/main/MainWindow.cpp" line="542" />
         <source>Creates a new document by importing an simple image.</source>
         <translation>通过导入简单图像来创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="532" />
+        <location filename="../src/main/MainWindow.cpp" line="543" />
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -2772,51 +2772,51 @@ For more complicated images with multiple coordinate systems, and/or floating ax
         <translation>导入图像by通过导入具有单个坐标系统的图像创建新文档，并使两个坐标轴都已知.对于具有多个坐标系和/或浮动轴的更复杂图像，将使用导入（高级）。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="539" />
+        <location filename="../src/main/MainWindow.cpp" line="550" />
         <source>Import (Advanced)...</source>
         <translation>导入(高级)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="540" />
+        <location filename="../src/main/MainWindow.cpp" line="551" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>通过导入支持高级功能的图像创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="541" />
+        <location filename="../src/main/MainWindow.cpp" line="552" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation>导入（高级）通过导入支持高级功能的图像创建新文档。在高级模式下，可以有多个坐标系和/或浮动轴。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="557" />
         <source>Import (Image Replace)...</source>
         <translation>导入（图片替换）...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="547" />
+        <location filename="../src/main/MainWindow.cpp" line="558" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>将新图像导入当前文档，替换现有图像。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="548" />
+        <location filename="../src/main/MainWindow.cpp" line="559" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
         <translation>导入（图像替换）将新图像导入当前文档。现有的图像被替换，文档中的所有曲线都被保留。此操作对于将轴点和其他设置从现有文档应用到不同图像很有用。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="554" />
+        <location filename="../src/main/MainWindow.cpp" line="565" />
         <source>&amp;Open...</source>
         <translation>&amp;打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="556" />
+        <location filename="../src/main/MainWindow.cpp" line="567" />
         <source>Opens an existing document.</source>
         <translation>打开现有文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="557" />
+        <location filename="../src/main/MainWindow.cpp" line="568" />
         <source>Open Document
 
 Opens an existing document.</source>
@@ -2824,17 +2824,17 @@ Opens an existing document.</source>
 打开现有文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="570" />
+        <location filename="../src/main/MainWindow.cpp" line="581" />
         <source>&amp;Close</source>
         <translation>&amp;关闭</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="572" />
+        <location filename="../src/main/MainWindow.cpp" line="583" />
         <source>Closes the open document.</source>
         <translation>关闭打开的文件。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="573" />
+        <location filename="../src/main/MainWindow.cpp" line="584" />
         <source>Close Document
 
 Closes the open document.</source>
@@ -2842,17 +2842,17 @@ Closes the open document.</source>
 关闭打开的文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="577" />
+        <location filename="../src/main/MainWindow.cpp" line="588" />
         <source>&amp;Save</source>
         <translation>&amp;保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="579" />
+        <location filename="../src/main/MainWindow.cpp" line="590" />
         <source>Saves the current document.</source>
         <translation>保存当前文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="580" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
         <source>Save Document
 
 Saves the current document.</source>
@@ -2860,481 +2860,481 @@ Saves the current document.</source>
 保存当前文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="584" />
+        <location filename="../src/main/MainWindow.cpp" line="595" />
         <source>Save As...</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="586" />
+        <location filename="../src/main/MainWindow.cpp" line="597" />
         <source>Saves the current document under a new filename.</source>
         <translation>保存当前文件为新名的文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="587" />
+        <location filename="../src/main/MainWindow.cpp" line="598" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="602" />
         <source>Export...</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
+        <location filename="../src/main/MainWindow.cpp" line="603" />
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="593" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>Exports the current document into a text file.</source>
         <translation>将当前文档导出为文本文件。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="594" />
+        <location filename="../src/main/MainWindow.cpp" line="605" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
         <translation>导出文档将当前文档导出为文本文件。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="598" />
+        <location filename="../src/main/MainWindow.cpp" line="609" />
         <source>&amp;Print...</source>
         <translation>打印...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="611" />
         <source>Print the current document.</source>
         <translation>打印当前文档。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="601" />
+        <location filename="../src/main/MainWindow.cpp" line="612" />
         <source>Print Document
 
 Print the current document to a printer or file.</source>
         <translation>打印文档将当前文档打印到打印机或文件。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="605" />
+        <location filename="../src/main/MainWindow.cpp" line="616" />
         <source>&amp;Exit</source>
         <translation>出口</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="607" />
+        <location filename="../src/main/MainWindow.cpp" line="618" />
         <source>Quits the application.</source>
         <translation>退出应用程序。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="608" />
+        <location filename="../src/main/MainWindow.cpp" line="619" />
         <source>Exit
 
 Quits the application.</source>
         <translation>退出退出应用程序</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="617" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>Checklist Guide Wizard</source>
         <translation>清单指南向导</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="619" />
+        <location filename="../src/main/MainWindow.cpp" line="630" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>在导入期间打开清单向导向导以定义数字化步骤</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="620" />
+        <location filename="../src/main/MainWindow.cpp" line="631" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
         <translation>清单向导向导在导入过程中使用清单向导向导生成导入文档的步骤清单</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="627" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>Tutorial</source>
         <translation>教程</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628" />
+        <location filename="../src/main/MainWindow.cpp" line="639" />
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>播放教程，显示数字化曲线的步骤</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="629" />
+        <location filename="../src/main/MainWindow.cpp" line="640" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
         <translation>教程播放教程，演示如何使用线和/或点绘制曲线中的点进行数字化</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="635" />
+        <location filename="../src/main/MainWindow.cpp" line="646" />
         <source>Help</source>
         <translation>帮帮我</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="637" />
+        <location filename="../src/main/MainWindow.cpp" line="648" />
         <source>Help documentation</source>
         <translation>帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="638" />
+        <location filename="../src/main/MainWindow.cpp" line="649" />
         <source>Help Documentation
 
 Searchable help documentation</source>
         <translation>帮助文档可分析的帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="643" />
+        <location filename="../src/main/MainWindow.cpp" line="654" />
         <source>About Engauge</source>
         <translation>关于 Engauge</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="644" />
+        <location filename="../src/main/MainWindow.cpp" line="655" />
         <source>About the application.</source>
         <translation>关于应用程序。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="645" />
+        <location filename="../src/main/MainWindow.cpp" line="656" />
         <source>About Engauge
 
 About the application.</source>
         <translation>关于Engauge关于申请。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="653" />
+        <location filename="../src/main/MainWindow.cpp" line="664" />
         <source>Coordinates...</source>
         <translation>坐标...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="654" />
+        <location filename="../src/main/MainWindow.cpp" line="665" />
         <source>Edit Coordinate settings.</source>
         <translation>编辑坐标设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="655" />
+        <location filename="../src/main/MainWindow.cpp" line="666" />
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
         <translation>“坐标设置”→“坐标”设置确定图形坐标如何映射到图像中的像素</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="659" />
+        <location filename="../src/main/MainWindow.cpp" line="670" />
         <source>Add/Remove Curve...</source>
         <translation>添加/删除曲线...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="660" />
+        <location filename="../src/main/MainWindow.cpp" line="671" />
         <source>Add or Remove Curves.</source>
         <translation>添加或删除曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="661" />
+        <location filename="../src/main/MainWindow.cpp" line="672" />
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
         <translation>添加/删除曲线添加/删除曲线设置控制当前文档中包含哪些曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="665" />
+        <location filename="../src/main/MainWindow.cpp" line="676" />
         <source>Curve Properties...</source>
         <translation>曲线属性...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="666" />
+        <location filename="../src/main/MainWindow.cpp" line="677" />
         <source>Edit Curve Properties settings.</source>
         <translation>编辑曲线属性设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="667" />
+        <location filename="../src/main/MainWindow.cpp" line="678" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
         <translation>曲线属性设置曲线属性设置确定每条曲线的显示方式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671" />
+        <location filename="../src/main/MainWindow.cpp" line="682" />
         <source>Digitize Curve...</source>
         <translation>数字化曲线...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="672" />
+        <location filename="../src/main/MainWindow.cpp" line="683" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>编辑数字化轴和曲线图设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="673" />
+        <location filename="../src/main/MainWindow.cpp" line="684" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
         <translation>数字化轴和曲线图设置数字化曲线设置确定点在数字化轴点和数字化图点模式中的数字化方式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="678" />
+        <location filename="../src/main/MainWindow.cpp" line="689" />
         <source>Export Format...</source>
         <translation>导出格式...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="679" />
+        <location filename="../src/main/MainWindow.cpp" line="690" />
         <source>Edit Export Format settings.</source>
         <translation>编辑导出格式设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="680" />
+        <location filename="../src/main/MainWindow.cpp" line="691" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
         <translation>导出格式设置导出格式设置会影响导出文件的格式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="684" />
+        <location filename="../src/main/MainWindow.cpp" line="695" />
         <source>Color Filter...</source>
         <translation>彩色滤光片...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="685" />
+        <location filename="../src/main/MainWindow.cpp" line="696" />
         <source>Edit Color Filter settings.</source>
         <translation>编辑颜色过滤器设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="686" />
+        <location filename="../src/main/MainWindow.cpp" line="697" />
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
         <translation>色彩过滤器设置色彩过滤简化了图形，更便于点匹配和分段填充</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="690" />
+        <location filename="../src/main/MainWindow.cpp" line="701" />
         <source>Axes Checker...</source>
         <translation>轴检查器...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="691" />
+        <location filename="../src/main/MainWindow.cpp" line="702" />
         <source>Edit Axes Checker settings.</source>
         <translation>编辑轴检查器设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="692" />
+        <location filename="../src/main/MainWindow.cpp" line="703" />
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
         <translation>轴检查设置轴检查器可以显示任何轴点错误，否则很难找到。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="696" />
+        <location filename="../src/main/MainWindow.cpp" line="707" />
         <source>Grid Line Display...</source>
         <translation>网格线显示...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="697" />
+        <location filename="../src/main/MainWindow.cpp" line="708" />
         <source>Edit Grid Line Display settings.</source>
         <translation>编辑网格线显示设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="698" />
+        <location filename="../src/main/MainWindow.cpp" line="709" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
         <translation>网格线显示设置对曲线图显示的网格线可以提供比Axis Checker更高的精度。在扭曲图形中，网格线可用于调整轴点以在不同区域获得更高精度。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="703" />
+        <location filename="../src/main/MainWindow.cpp" line="714" />
         <source>Grid Line Removal...</source>
         <translation>网格线删除...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="704" />
+        <location filename="../src/main/MainWindow.cpp" line="715" />
         <source>Edit Grid Line Removal settings.</source>
         <translation>编辑网格线删除设置</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="705" />
+        <location filename="../src/main/MainWindow.cpp" line="716" />
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
         <translation>网格线移除设置网格线移除可隔离曲线，以便在颜色过滤无法将网格线与曲线分离时进行点匹配和网格填充。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="721" />
         <source>Point Match...</source>
         <translation>点匹配...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="711" />
+        <location filename="../src/main/MainWindow.cpp" line="722" />
         <source>Edit Point Match settings.</source>
         <translation>编辑点匹配设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712" />
+        <location filename="../src/main/MainWindow.cpp" line="723" />
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
         <translation>点匹配设置点匹配设置确定在点匹配模式下点的匹配方式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="716" />
+        <location filename="../src/main/MainWindow.cpp" line="727" />
         <source>Segment Fill...</source>
         <translation>分段填充...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="717" />
+        <location filename="../src/main/MainWindow.cpp" line="728" />
         <source>Edit Segment Fill settings.</source>
         <translation>编辑分段填充设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="718" />
+        <location filename="../src/main/MainWindow.cpp" line="729" />
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
         <translation>分段填充设置分段填充设置确定在分段填充模式下如何生成点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="722" />
+        <location filename="../src/main/MainWindow.cpp" line="733" />
         <source>General...</source>
         <translation>一般...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="723" />
+        <location filename="../src/main/MainWindow.cpp" line="734" />
         <source>Edit General settings.</source>
         <translation>编辑常规设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="724" />
+        <location filename="../src/main/MainWindow.cpp" line="735" />
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
         <translation>常规设置常规设置是影响多种模式的文档特定设置。例如，光标大小设置影响拾色器和点匹配模式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="729" />
+        <location filename="../src/main/MainWindow.cpp" line="740" />
         <source>Main Window...</source>
         <translation>主窗口...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="731" />
+        <location filename="../src/main/MainWindow.cpp" line="742" />
         <source>Edit Main Window settings.</source>
         <translation>编辑主窗口设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="732" />
+        <location filename="../src/main/MainWindow.cpp" line="743" />
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
         <translation>主窗口设置主窗口设置影响用户界面，并非特定于任何文档</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="741" />
+        <location filename="../src/main/MainWindow.cpp" line="752" />
         <source>Background Toolbar</source>
         <translation>背景工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="744" />
+        <location filename="../src/main/MainWindow.cpp" line="755" />
         <source>Show or hide the background toolbar.</source>
         <translation>显示或隐藏背景工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="745" />
+        <location filename="../src/main/MainWindow.cpp" line="756" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
         <translation>查看背景工具栏显示或隐藏背景工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="749" />
+        <location filename="../src/main/MainWindow.cpp" line="760" />
         <source>Checklist Guide Toolbar</source>
         <translation>清单指南工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="752" />
+        <location filename="../src/main/MainWindow.cpp" line="763" />
         <source>Show or hide the checklist guide.</source>
         <translation>显示或隐藏清单指南。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="753" />
+        <location filename="../src/main/MainWindow.cpp" line="764" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
         <translation>查看清单指南显示或隐藏清单指南</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="757" />
+        <location filename="../src/main/MainWindow.cpp" line="768" />
         <source>Curve Fitting Window</source>
         <translation>曲线拟合窗口</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="760" />
+        <location filename="../src/main/MainWindow.cpp" line="771" />
         <source>Show or hide the curve fitting window.</source>
         <translation>显示或隐藏曲线拟合窗口。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="772" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
         <translation>查看曲线拟合窗口显示或隐藏曲线拟合窗口</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="765" />
+        <location filename="../src/main/MainWindow.cpp" line="776" />
         <source>Geometry Window</source>
         <translation>几何窗口</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="768" />
+        <location filename="../src/main/MainWindow.cpp" line="779" />
         <source>Show or hide the geometry window.</source>
         <translation>显示或隐藏几何窗口。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="769" />
+        <location filename="../src/main/MainWindow.cpp" line="780" />
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
         <translation>查看几何窗口显示或隐藏几何窗口</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="773" />
+        <location filename="../src/main/MainWindow.cpp" line="784" />
         <source>Digitizing Tools Toolbar</source>
         <translation>数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="776" />
+        <location filename="../src/main/MainWindow.cpp" line="787" />
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>显示或隐藏数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="777" />
+        <location filename="../src/main/MainWindow.cpp" line="788" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
         <translation>查看数字化工具工具栏显示或隐藏数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="781" />
+        <location filename="../src/main/MainWindow.cpp" line="792" />
         <source>Settings Views Toolbar</source>
         <translation>设置视图工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="784" />
+        <location filename="../src/main/MainWindow.cpp" line="795" />
         <source>Show or hide the settings views toolbar.</source>
         <translation>显示或隐藏设置视图工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="785" />
+        <location filename="../src/main/MainWindow.cpp" line="796" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
         <translation>查看设置视图工具栏显示或隐藏设置视图工具栏。这些视图以图形方式显示最重要的设置。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="790" />
+        <location filename="../src/main/MainWindow.cpp" line="801" />
         <source>Coordinate System Toolbar</source>
         <translation>坐标系统工具栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="793" />
+        <location filename="../src/main/MainWindow.cpp" line="804" />
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>显示或隐藏坐标系工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="794" />
+        <location filename="../src/main/MainWindow.cpp" line="805" />
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -3343,85 +3343,85 @@ This toolbar is disabled when there is only one coordinate system.</source>
         <translation>查看坐标系工具栏显示或隐藏坐标系选择工具栏。当文档具有多个坐标系时，该工具栏用于选择当前坐标系。此工具栏也用于查看和打印所有坐标系。when当只有一个坐标系时，此工具栏被禁用。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="802" />
+        <location filename="../src/main/MainWindow.cpp" line="813" />
         <source>Tool Tips</source>
         <translation>工具提示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="805" />
+        <location filename="../src/main/MainWindow.cpp" line="816" />
         <source>Show or hide the tool tips.</source>
         <translation>显示或隐藏工具提示。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="806" />
+        <location filename="../src/main/MainWindow.cpp" line="817" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
         <translation>查看工具提示显示或隐藏工具提示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="810" />
+        <location filename="../src/main/MainWindow.cpp" line="821" />
         <source>Grid Lines</source>
         <translation>网格线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="813" />
+        <location filename="../src/main/MainWindow.cpp" line="824" />
         <source>Show or hide grid lines.</source>
         <translation>显示或隐藏网格线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="814" />
+        <location filename="../src/main/MainWindow.cpp" line="825" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
         <translation>查看网格线显示或隐藏为了精确调整轴点而添加的网格线，这可以提高扭曲图形的准确性</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="819" />
+        <location filename="../src/main/MainWindow.cpp" line="830" />
         <source>No Background</source>
         <translation>无背景</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="821" />
+        <location filename="../src/main/MainWindow.cpp" line="832" />
         <source>Do not show the image underneath the points.</source>
         <translation>不显示图像下面的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="822" />
+        <location filename="../src/main/MainWindow.cpp" line="833" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
         <translation>没有背景没有显示图像，所以点更容易看到</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="825" />
+        <location filename="../src/main/MainWindow.cpp" line="836" />
         <source>Show Original Image</source>
         <translation>显示原始图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="827" />
+        <location filename="../src/main/MainWindow.cpp" line="838" />
         <source>Show the original image underneath the points.</source>
         <translation>显示图像下面的点</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="828" />
+        <location filename="../src/main/MainWindow.cpp" line="839" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
         <translation>显示原始图像在点下方显示原始图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="831" />
+        <location filename="../src/main/MainWindow.cpp" line="842" />
         <source>Show Filtered Image</source>
         <translation>显示筛选的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="834" />
+        <location filename="../src/main/MainWindow.cpp" line="845" />
         <source>Show the filtered image underneath the points.</source>
         <translation>在点下方显示已过滤的图像。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="835" />
+        <location filename="../src/main/MainWindow.cpp" line="846" />
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -3430,440 +3430,440 @@ The filtered image is created from the original image according to the Filter pr
         <translation>显示已过滤的图像在点下方显示已过滤的图像。根据过滤器首选项从原始图像创建已过滤图像，因此隐藏不重要的信息并强调重要信息</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="841" />
+        <location filename="../src/main/MainWindow.cpp" line="852" />
         <source>Hide All Curves</source>
         <translation>隐藏所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="843" />
+        <location filename="../src/main/MainWindow.cpp" line="854" />
         <source>Hide all digitized curves.</source>
         <translation>隐藏所有数字化的曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="844" />
+        <location filename="../src/main/MainWindow.cpp" line="855" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
         <translation>隐藏所有曲线shown显示没有轴点或数字化曲线图，因此图像更易于查看。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="847" />
+        <location filename="../src/main/MainWindow.cpp" line="858" />
         <source>Show Selected Curve</source>
         <translation>显示选择的曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="849" />
+        <location filename="../src/main/MainWindow.cpp" line="860" />
         <source>Show only the currently selected curve.</source>
         <translation>只显示当前选择的曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="850" />
+        <location filename="../src/main/MainWindow.cpp" line="861" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
         <translation>显示选定曲线仅显示属于当前选定曲线的数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="853" />
+        <location filename="../src/main/MainWindow.cpp" line="864" />
         <source>Show All Curves</source>
         <translation>显示所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="856" />
+        <location filename="../src/main/MainWindow.cpp" line="867" />
         <source>Show all curves.</source>
         <translation>显示所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="857" />
+        <location filename="../src/main/MainWindow.cpp" line="868" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
         <translation>显示所有曲线显示所有数字化的轴点和曲线图</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="872" />
+        <location filename="../src/main/MainWindow.cpp" line="883" />
         <source>Hide Always</source>
         <translation>保持隐藏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="874" />
+        <location filename="../src/main/MainWindow.cpp" line="885" />
         <source>Always hide the status bar.</source>
         <translation>隐藏状态栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="875" />
+        <location filename="../src/main/MainWindow.cpp" line="886" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>隐藏状态栏. 将不再显示临时状态和反馈信息.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="877" />
+        <location filename="../src/main/MainWindow.cpp" line="888" />
         <source>Show Temporary Messages</source>
         <translation>显示临时信息.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="879" />
+        <location filename="../src/main/MainWindow.cpp" line="890" />
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>除了显示临时消息时，隐藏状态栏。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="880" />
+        <location filename="../src/main/MainWindow.cpp" line="891" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>隐藏状态栏，除了显示临时状态和反馈信息时。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="882" />
+        <location filename="../src/main/MainWindow.cpp" line="893" />
         <source>Show Always</source>
         <translation>保持显示</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="884" />
+        <location filename="../src/main/MainWindow.cpp" line="895" />
         <source>Always show the status bar.</source>
         <translation>总是显示状态栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="885" />
+        <location filename="../src/main/MainWindow.cpp" line="896" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>显示状态栏。除显示临时状态和反馈消息外，状态栏还显示有关光标位置的信息。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="894" />
+        <location filename="../src/main/MainWindow.cpp" line="905" />
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="895" />
+        <location filename="../src/main/MainWindow.cpp" line="906" />
         <source>Zoom out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="899" />
+        <location filename="../src/main/MainWindow.cpp" line="910" />
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="900" />
+        <location filename="../src/main/MainWindow.cpp" line="911" />
         <source>Zoom in</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="907" />
+        <location filename="../src/main/MainWindow.cpp" line="918" />
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="909" />
+        <location filename="../src/main/MainWindow.cpp" line="920" />
         <source>Zoom 16:1</source>
         <translation>缩放16:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="913" />
+        <location filename="../src/main/MainWindow.cpp" line="924" />
         <source>16:1 farther (1270%)</source>
         <translation>16：1更远（1270％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="915" />
+        <location filename="../src/main/MainWindow.cpp" line="926" />
         <source>Zoom 12.7:1</source>
         <translation>缩放12.7：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="919" />
+        <location filename="../src/main/MainWindow.cpp" line="930" />
         <source>8:1 closer (1008%)</source>
         <translation>8：1接近（1008％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="921" />
+        <location filename="../src/main/MainWindow.cpp" line="932" />
         <source>Zoom 10.08:1</source>
         <translation>缩放10.08：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="925" />
+        <location filename="../src/main/MainWindow.cpp" line="936" />
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="927" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Zoom 8:1</source>
         <translation>缩放8:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="931" />
+        <location filename="../src/main/MainWindow.cpp" line="942" />
         <source>8:1 farther (635%)</source>
         <translation>8：1更远（635％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="933" />
+        <location filename="../src/main/MainWindow.cpp" line="944" />
         <source>Zoom 6.35:1</source>
         <translation>放大6.35：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="937" />
+        <location filename="../src/main/MainWindow.cpp" line="948" />
         <source>4:1 closer (504%)</source>
         <translation>4：1更接近（504％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="950" />
         <source>Zoom 5.04:1</source>
         <translation>缩放5.04：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="943" />
+        <location filename="../src/main/MainWindow.cpp" line="954" />
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="945" />
+        <location filename="../src/main/MainWindow.cpp" line="956" />
         <source>Zoom 4:1</source>
         <translation>缩放4:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="949" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>4:1 farther (317%)</source>
         <translation>4：1更远（317％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="951" />
+        <location filename="../src/main/MainWindow.cpp" line="962" />
         <source>Zoom 3.17:1</source>
         <translation>缩放3.17：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="955" />
+        <location filename="../src/main/MainWindow.cpp" line="966" />
         <source>2:1 closer (252%)</source>
         <translation>2：1更近（252％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="957" />
+        <location filename="../src/main/MainWindow.cpp" line="968" />
         <source>Zoom 2.52:1</source>
         <translation>缩放2.52：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="972" />
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="963" />
+        <location filename="../src/main/MainWindow.cpp" line="974" />
         <source>Zoom 2:1</source>
         <translation>缩放2:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="967" />
+        <location filename="../src/main/MainWindow.cpp" line="978" />
         <source>2:1 farther (159%)</source>
         <translation>2：1更远（159％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="969" />
+        <location filename="../src/main/MainWindow.cpp" line="980" />
         <source>Zoom 1.59:1</source>
         <translation>缩放1.59：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="973" />
+        <location filename="../src/main/MainWindow.cpp" line="984" />
         <source>1:1 closer (126%)</source>
         <translation>1：1更近（126％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="976" />
+        <location filename="../src/main/MainWindow.cpp" line="987" />
         <source>Zoom 1.3:1</source>
         <translation>缩放1.3：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="980" />
+        <location filename="../src/main/MainWindow.cpp" line="991" />
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="983" />
+        <location filename="../src/main/MainWindow.cpp" line="994" />
         <source>Zoom 1:1</source>
         <translation>缩放1:1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="987" />
+        <location filename="../src/main/MainWindow.cpp" line="998" />
         <source>1:1 farther (79%)</source>
         <translation>1：1更远（79％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="990" />
+        <location filename="../src/main/MainWindow.cpp" line="1001" />
         <source>Zoom 0.8:1</source>
         <translation>缩放0.8：1</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="994" />
+        <location filename="../src/main/MainWindow.cpp" line="1005" />
         <source>1:2 closer (63%)</source>
         <translation>1：2更近（63％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="996" />
+        <location filename="../src/main/MainWindow.cpp" line="1007" />
         <source>Zoom 1.3:2</source>
         <translation>缩放1.3：2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1000" />
+        <location filename="../src/main/MainWindow.cpp" line="1011" />
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1002" />
+        <location filename="../src/main/MainWindow.cpp" line="1013" />
         <source>Zoom 1:2</source>
         <translation>缩放1:2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1006" />
+        <location filename="../src/main/MainWindow.cpp" line="1017" />
         <source>1:2 farther (40%)</source>
         <translation>1：2更远（40％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1008" />
+        <location filename="../src/main/MainWindow.cpp" line="1019" />
         <source>Zoom 0.8:2</source>
         <translation>缩放0.8：2</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1012" />
+        <location filename="../src/main/MainWindow.cpp" line="1023" />
         <source>1:4 closer (31%)</source>
         <translation>1：4更近（31％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1014" />
+        <location filename="../src/main/MainWindow.cpp" line="1025" />
         <source>Zoom 1.3:4</source>
         <translation>缩放1.3：4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1018" />
+        <location filename="../src/main/MainWindow.cpp" line="1029" />
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1020" />
+        <location filename="../src/main/MainWindow.cpp" line="1031" />
         <source>Zoom 1:4</source>
         <translation>缩放1:4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1024" />
+        <location filename="../src/main/MainWindow.cpp" line="1035" />
         <source>1:4 farther (20%)</source>
         <translation>1：4更远（20％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1026" />
+        <location filename="../src/main/MainWindow.cpp" line="1037" />
         <source>Zoom 0.8:4</source>
         <translation>缩放0.8：4</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1030" />
+        <location filename="../src/main/MainWindow.cpp" line="1041" />
         <source>1:8 closer (12.5%)</source>
         <translation>1：8更接近（12.5％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1032" />
-        <location filename="../src/main/MainWindow.cpp" line="1038" />
+        <location filename="../src/main/MainWindow.cpp" line="1043" />
+        <location filename="../src/main/MainWindow.cpp" line="1049" />
         <source>Zoom 1:8</source>
         <translation>缩放1:8</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1036" />
+        <location filename="../src/main/MainWindow.cpp" line="1047" />
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1042" />
+        <location filename="../src/main/MainWindow.cpp" line="1053" />
         <source>1:8 farther (10%)</source>
         <translation>1：8更远（10％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1044" />
+        <location filename="../src/main/MainWindow.cpp" line="1055" />
         <source>Zoom 0.8:8</source>
         <translation>缩放0.8：8</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1048" />
+        <location filename="../src/main/MainWindow.cpp" line="1059" />
         <source>1:16 closer (8%)</source>
         <translation>1:16更近（8％）</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1050" />
+        <location filename="../src/main/MainWindow.cpp" line="1061" />
         <source>Zoom 1.3:16</source>
         <translation>缩放1.3：16</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1054" />
+        <location filename="../src/main/MainWindow.cpp" line="1065" />
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1056" />
+        <location filename="../src/main/MainWindow.cpp" line="1067" />
         <source>Zoom 1:16</source>
         <translation>缩放1:16</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1060" />
+        <location filename="../src/main/MainWindow.cpp" line="1071" />
         <source>Fill</source>
         <translation>填充</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1062" />
+        <location filename="../src/main/MainWindow.cpp" line="1073" />
         <source>Zoom with stretching to fill window</source>
         <translation>拉伸以填充窗口放大</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1180" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>&amp;File</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1186" />
+        <location filename="../src/main/MainWindow.cpp" line="1197" />
         <source>Open &amp;Recent</source>
         <translation>打开最近的文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1202" />
+        <location filename="../src/main/MainWindow.cpp" line="1213" />
         <source>&amp;Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1215" />
+        <location filename="../src/main/MainWindow.cpp" line="1226" />
         <source>Digitize</source>
         <translation>数字化</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1224" />
+        <location filename="../src/main/MainWindow.cpp" line="1235" />
         <source>View</source>
         <translation>查看</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1236" />
-        <location filename="../src/main/MainWindow.cpp" line="1420" />
+        <location filename="../src/main/MainWindow.cpp" line="1247" />
+        <location filename="../src/main/MainWindow.cpp" line="1431" />
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1241" />
+        <location filename="../src/main/MainWindow.cpp" line="1252" />
         <source>Curves</source>
         <translation>曲线</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1246" />
+        <location filename="../src/main/MainWindow.cpp" line="1257" />
         <source>Status Bar</source>
         <translation>状态栏</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1251" />
+        <location filename="../src/main/MainWindow.cpp" line="1262" />
         <source>Zoom</source>
         <translation>缩放</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1283" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299" />
+        <location filename="../src/main/MainWindow.cpp" line="1310" />
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1407" />
+        <location filename="../src/main/MainWindow.cpp" line="1418" />
         <source>Select background image</source>
         <translation>选择背景图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1408" />
+        <location filename="../src/main/MainWindow.cpp" line="1419" />
         <source>Selected Background
 
 Select background image:
@@ -3873,27 +3873,27 @@ Select background image:
         <translation>选择的背景选择背景图像：1）没有高亮点的背景2）显示所有内容的原始图像3）高亮显示重要细节的过滤图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1413" />
+        <location filename="../src/main/MainWindow.cpp" line="1424" />
         <source>No background</source>
         <translation>无背景</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1414" />
+        <location filename="../src/main/MainWindow.cpp" line="1425" />
         <source>Original image</source>
         <translation>原始图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1415" />
+        <location filename="../src/main/MainWindow.cpp" line="1426" />
         <source>Filtered image</source>
         <translation>筛选的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1428" />
+        <location filename="../src/main/MainWindow.cpp" line="1439" />
         <source>Select curve for new points.</source>
         <translation>选择新点的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1429" />
+        <location filename="../src/main/MainWindow.cpp" line="1440" />
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -3902,183 +3902,188 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
         <translation>选择曲线名称选择任何新点的曲线。每个点都属于一条曲线。？可以在曲线点，点匹配，拾色器或分段填充模式下更改。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1435" />
+        <location filename="../src/main/MainWindow.cpp" line="1446" />
         <source>Drawing</source>
         <translation>绘画</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1452" />
+        <location filename="../src/main/MainWindow.cpp" line="1463" />
         <source>Points style for the currently selected curve</source>
         <translation>当前选定曲线的点样式</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1464" />
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
         <translation>点样式为当前选定曲线的点样式。点样式仅显示在此工具栏中。要更改点样式，请使用“曲线属性”对话框。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1461" />
+        <location filename="../src/main/MainWindow.cpp" line="1472" />
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>在段填充模式下查看当前曲线的过滤器</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1462" />
+        <location filename="../src/main/MainWindow.cpp" line="1473" />
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
         <translation>分段填充过滤器Se在分段填充模式下查看当前曲线的过滤器。过滤器设置仅显示在此工具栏中。要更改滤镜设置，请使用拾色器模式或滤镜设置对话框。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1468" />
+        <location filename="../src/main/MainWindow.cpp" line="1479" />
         <source>Views</source>
         <translation>视图</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1477" />
+        <location filename="../src/main/MainWindow.cpp" line="1488" />
         <source>Currently selected coordinate system</source>
         <translation>当前选择的坐标系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1478" />
+        <location filename="../src/main/MainWindow.cpp" line="1489" />
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
         <translation>选定的坐标系当前选定的坐标系。这用于在具有多个坐标系的文档中的坐标系之间切换</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1486" />
+        <location filename="../src/main/MainWindow.cpp" line="1497" />
         <source>Show all coordinate systems</source>
         <translation>显示所有坐标系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1487" />
+        <location filename="../src/main/MainWindow.cpp" line="1498" />
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
         <translation>显示所有坐标系当按住时，此按钮显示所有坐标系的所有数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1495" />
+        <location filename="../src/main/MainWindow.cpp" line="1506" />
         <source>Print all coordinate systems</source>
         <translation>打印所有坐标系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1496" />
+        <location filename="../src/main/MainWindow.cpp" line="1507" />
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
         <translation>打印所有坐标系当按下此按钮时，打印所有坐标系的所有数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1500" />
+        <location filename="../src/main/MainWindow.cpp" line="1511" />
         <source>Coordinate System</source>
         <translation>坐标系</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1671" />
-        <source>Unable to export to file </source>
+        <location filename="../src/main/MainWindow.cpp" line="1682" />
+        <source>Unable to export to file</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1746" />
-        <location filename="../src/main/MainWindow.cpp" line="1911" />
-        <location filename="../src/main/MainWindow.cpp" line="2079" />
+        <location filename="../src/main/MainWindow.cpp" line="1716" />
+        <source>Unable to extract image to file</source>
+        <translation>無法將圖像提取到文件</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1791" />
+        <location filename="../src/main/MainWindow.cpp" line="1951" />
+        <location filename="../src/main/MainWindow.cpp" line="2130" />
         <source>Cannot read file</source>
         <translation>不能读取文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1748" />
-        <location filename="../src/main/MainWindow.cpp" line="1913" />
-        <location filename="../src/main/MainWindow.cpp" line="2081" />
+        <location filename="../src/main/MainWindow.cpp" line="1793" />
+        <location filename="../src/main/MainWindow.cpp" line="1953" />
+        <location filename="../src/main/MainWindow.cpp" line="2132" />
         <source>from directory</source>
         <translation>从目录</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1839" />
+        <location filename="../src/main/MainWindow.cpp" line="1867" />
         <source>Import Image</source>
         <translation>导入图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2056" />
+        <location filename="../src/main/MainWindow.cpp" line="2107" />
         <source>File opened</source>
         <translation>文件打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2101" />
+        <location filename="../src/main/MainWindow.cpp" line="2152" />
         <source>File not found:</source>
         <translation>找不到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2118" />
+        <location filename="../src/main/MainWindow.cpp" line="2169" />
         <source>Error report opened</source>
         <translation>错误报告打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2176" />
-        <location filename="../src/main/MainWindow.cpp" line="2250" />
+        <location filename="../src/main/MainWindow.cpp" line="2224" />
+        <location filename="../src/main/MainWindow.cpp" line="2298" />
         <source>File imported</source>
         <translation>文件已导入</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2284" />
+        <location filename="../src/main/MainWindow.cpp" line="2332" />
         <source>Background image.</source>
         <translation>背景图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2285" />
+        <location filename="../src/main/MainWindow.cpp" line="2333" />
         <source>Currently selected curve.</source>
         <translation>当前选择的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2286" />
+        <location filename="../src/main/MainWindow.cpp" line="2334" />
         <source>Point style for currently selected curve.</source>
         <translation>当前选定曲线的点样式。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2287" />
+        <location filename="../src/main/MainWindow.cpp" line="2335" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>段填充当前选定曲线的过滤器。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2335" />
+        <location filename="../src/main/MainWindow.cpp" line="2383" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>该文件已被修改。您是否要保存更改？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2419" />
+        <location filename="../src/main/MainWindow.cpp" line="2467" />
         <source>Cannot write file</source>
         <translation>不能写入文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2467" />
+        <location filename="../src/main/MainWindow.cpp" line="2515" />
         <source>Save</source>
         <translation>文件保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3475" />
+        <location filename="../src/main/MainWindow.cpp" line="3523" />
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3557" />
+        <location filename="../src/main/MainWindow.cpp" line="3605" />
         <source>Open Document</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4765" />
+        <location filename="../src/main/MainWindow.cpp" line="4812" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4766" />
+        <location filename="../src/main/MainWindow.cpp" line="4813" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4894" />
+        <location filename="../src/main/MainWindow.cpp" line="4941" />
         <source>Engauge Digitizer %1</source>
         <translation>Engauge Digitizer %1</translation>
     </message>
@@ -4372,8 +4377,8 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="234" />
-        <location filename="../src/main/main.cpp" line="300" />
+        <location filename="../src/main/main.cpp" line="301" />
+        <location filename="../src/main/main.cpp" line="400" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4857,7 +4862,7 @@ Do you want to save your changes?</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1756" />
+        <location filename="../src/main/MainWindow.cpp" line="1801" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>该文件似乎具有来自多个语言字母的字符，这些字符在Windows命令行中不起作用</translation>
     </message>
@@ -4867,57 +4872,62 @@ Do you want to save your changes?</source>
         <translation>无法读取主窗口数据</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="232" />
-        <source> is used only with one document file specified</source>
-        <translation>仅用于指定的一个文档文件</translation>
+        <location filename="../src/main/main.cpp" line="299" />
+        <source>is used only with one or more load files</source>
+        <translation>僅用於一個或多個加載文件</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="258" />
+        <location filename="../src/main/main.cpp" line="333" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>启用额外的调试信息。用于调试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="262" />
+        <location filename="../src/main/main.cpp" line="339" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>指定错误报告文件作为输入。用于调试和测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="266" />
-        <source>Export the loaded startup file, which must have all axis points defined, then stop</source>
-        <translation>导出加载的启动文件，必须定义所有的轴点，然后停止</translation>
+        <location filename="../src/main/main.cpp" line="345" />
+        <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
+        <translation>導出每個已加載的啟動文件，必須定義所有軸點，然後停止</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="270" />
+        <location filename="../src/main/main.cpp" line="351" />
+        <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
+        <translation>將每個加載的啟動文件中的圖像提取到具有指定擴展名的文件，然後停止</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="357" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>指定一个文件命令脚本文件作为输入。用于调试和测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="274" />
+        <location filename="../src/main/main.cpp" line="363" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>输出诊断gnuplot输入文件。用于调试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="278" />
+        <location filename="../src/main/main.cpp" line="369" />
         <source>Show this help information</source>
         <translation>显示此帮助信息</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="282" />
+        <location filename="../src/main/main.cpp" line="375" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>执行错误报告文件或文件命令脚本。用于回归测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="286" />
+        <location filename="../src/main/main.cpp" line="381" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>删除所有存储的设置，包括窗口位置。当窗口在屏幕外启动时使用</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="290" />
+        <location filename="../src/main/main.cpp" line="387" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>显示可用于-style命令的可用样式的列表</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="294" />
+        <location filename="../src/main/main.cpp" line="393" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>要在启动时导入或打开的文件</translation>
     </message>
@@ -4945,36 +4955,36 @@ Do you want to save your changes?</source>
 <context>
     <name>StatusBar</name>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="63" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="60" />
         <source>Select cursor coordinate values to display.</source>
         <translation>选择要显示的光标坐标值。</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="64" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="61" />
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation>选择光标坐标值显示光标坐标值。坐标位于屏幕（像素）或图形单位中。分辨率（这是每个像素的图形单位数）以图形为单位。图形单位只有在定义了轴点后才可用。</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="77" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="74" />
         <source>Cursor coordinate values.</source>
         <translation>光标坐标值。</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="78" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="75" />
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation>游标坐标值cursor光标坐标处的值。坐标位于屏幕（像素）或图形单位中。分辨率（这是每个像素的图形单位数）以图形为单位。图形单位只有在定义了轴点后才可用。</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="132" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="129" />
         <source>Select zoom.</source>
         <translation>选择缩放。</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="133" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="130" />
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>

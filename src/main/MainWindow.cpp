@@ -1679,7 +1679,7 @@ void MainWindow::fileExport(const QString &fileName,
                                  << " curDir=" << QDir::currentPath().toLatin1().data();
     QMessageBox::critical (0,
                            engaugeWindowTitle(),
-                           tr ("Unable to export to file ") + fileName);
+                           tr ("Unable to export to file") + " " + fileName);
   }
 }
 
@@ -1713,7 +1713,7 @@ void MainWindow::fileExtractImage (const QString &fileName)
                                  << " curDir=" << QDir::currentPath().toLatin1().data();
     QMessageBox::critical (0,
                            engaugeWindowTitle(),
-                           tr ("Unable to extract image to file ") + fileName);
+                           tr ("Unable to extract image to file") + " " + fileName);
   }
 }
 
