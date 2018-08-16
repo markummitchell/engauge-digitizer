@@ -4763,8 +4763,9 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="301" />
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="313" />
+        <location filename="../src/main/main.cpp" line="330" />
+        <location filename="../src/main/main.cpp" line="429" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5258,62 +5259,73 @@ Do you want to save your changes?</source>
         <translation>メイン画面 の設定を読み込むことができません。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="299" />
+        <location filename="../src/main/main.cpp" line="220" />
+        <location filename="../src/main/main.cpp" line="232" />
+        <source>is not a valid file name</source>
+        <translation>有効なファイル名ではありません</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="226" />
+        <source>is not a valid image file extension</source>
+        <translation>有効な画像ファイル拡張子ではありません</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="311" />
         <source>is used only with one or more load files</source>
         <translation>1つ以上のロードファイルでのみ使用されます</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="333" />
+        <location filename="../src/main/main.cpp" line="362" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>エラー 解決のため追加情報を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="339" />
+        <location filename="../src/main/main.cpp" line="368" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>エラー レポート の ファイル を設定します。エラー 処理や テスト の際に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="345" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>ロードされた各起動ファイルをエクスポートします。すべての軸ポイントが定義されていなければなりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="351" />
+        <location filename="../src/main/main.cpp" line="380" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>ロードされた各起動ファイルのイメージを、指定された拡張子を持つファイルに抽出してから停止する</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="357" />
+        <location filename="../src/main/main.cpp" line="386" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>コマンド の スクリプト ファイル を設定します。エラー 処理や テスト の際に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="363" />
+        <location filename="../src/main/main.cpp" line="392" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>gnuplot 用の入力ファイルを問題確認の可能な形で出力し エラー処理に使用します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="398" />
         <source>Show this help information</source>
         <translation>ヘルプ　を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="404" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>エラー レポート あるいは コマンド スクリプト を ファイル として出力します。これらは リグレッション テスト に使用されます。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="381" />
+        <location filename="../src/main/main.cpp" line="410" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>全ての 設定条件を クリア します。これにはこの ソフト の画面位置の情報も含まれるので、 起動時にこの ソフト が コンピューター 画面の外に表示されるような場合に対処可能になります。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="387" />
+        <location filename="../src/main/main.cpp" line="416" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>いくつかの 設定条件のなかで -style コマンド で利用可能なものを リスト として表示します。</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="393" />
+        <location filename="../src/main/main.cpp" line="422" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>ソフト の開始時点で開く ファイル (複数可)</translation>
     </message>

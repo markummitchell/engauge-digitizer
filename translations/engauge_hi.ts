@@ -4358,8 +4358,9 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="301" />
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="313" />
+        <location filename="../src/main/main.cpp" line="330" />
+        <location filename="../src/main/main.cpp" line="429" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4745,7 +4746,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="178" />
         <source>Need scale bar</source>
-        <translation type="unfinished" />
+        <translation>स्केल बार की आवश्यकता है</translation>
     </message>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="179" />
@@ -4853,64 +4854,75 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="299" />
+        <location filename="../src/main/main.cpp" line="220" />
+        <location filename="../src/main/main.cpp" line="232" />
+        <source>is not a valid file name</source>
+        <translation>वैध फ़ाइल नाम नहीं है</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="226" />
+        <source>is not a valid image file extension</source>
+        <translation>मान्य छवि फ़ाइल एक्सटेंशन नहीं है</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="311" />
         <source>is used only with one or more load files</source>
-        <translation type="unfinished" />
+        <translation>केवल एक या अधिक लोड फ़ाइलों के साथ प्रयोग किया जाता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="333" />
+        <location filename="../src/main/main.cpp" line="362" />
         <source>Enables extra debug information. Used for debugging</source>
-        <translation type="unfinished" />
+        <translation>अतिरिक्त डीबग जानकारी सक्षम करता है। डीबगिंग के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="339" />
+        <location filename="../src/main/main.cpp" line="368" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
-        <translation type="unfinished" />
+        <translation>एक त्रुटि रिपोर्ट फ़ाइल इनपुट के रूप में निर्दिष्ट करता है। डिबगिंग और परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="345" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
-        <translation type="unfinished" />
+        <translation>प्रत्येक लोड की गई स्टार्टअप फ़ाइल को निर्यात करें, जिसमें सभी अक्ष बिंदु परिभाषित होना चाहिए, फिर रोकें</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="351" />
+        <location filename="../src/main/main.cpp" line="380" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
-        <translation type="unfinished" />
+        <translation>प्रत्येक लोड की गई स्टार्टअप फ़ाइल में निर्दिष्ट एक्सटेंशन वाले फ़ाइल में छवि निकालें, फिर रोकें</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="357" />
+        <location filename="../src/main/main.cpp" line="386" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
-        <translation type="unfinished" />
+        <translation>इनपुट के रूप में फ़ाइल कमांड स्क्रिप्ट फ़ाइल निर्दिष्ट करता है। डिबगिंग और परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="363" />
+        <location filename="../src/main/main.cpp" line="392" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
-        <translation type="unfinished" />
+        <translation>आउटपुट डायग्नोस्टिक gnuplot इनपुट फाइलें। डीबगिंग के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="398" />
         <source>Show this help information</source>
-        <translation type="unfinished" />
+        <translation>इस सहायता की जानकारी दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="404" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
-        <translation type="unfinished" />
+        <translation>त्रुटि रिपोर्ट फ़ाइल या फ़ाइल कमांड स्क्रिप्ट निष्पादित करता है। प्रतिगमन परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="381" />
+        <location filename="../src/main/main.cpp" line="410" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
-        <translation type="unfinished" />
+        <translation>खिड़की की स्थिति सहित सभी संग्रहीत सेटिंग्स को हटा देता है। विंडोज़ ऑफस्क्रीन शुरू होने पर प्रयुक्त होता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="387" />
+        <location filename="../src/main/main.cpp" line="416" />
         <source>Show a list of available styles that can be used with the -style command</source>
-        <translation type="unfinished" />
+        <translation>उपलब्ध स्टाइल की एक सूची दिखाएं जिसका उपयोग स्टाइल कमांड के साथ किया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="393" />
+        <location filename="../src/main/main.cpp" line="422" />
         <source>File(s) to be imported or opened at startup</source>
-        <translation type="unfinished" />
+        <translation>स्टार्टअप पर फ़ाइल आयात या खोला जाना है</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="34" />

@@ -65,11 +65,14 @@ void parseCmdLine (int argc,
                    QString &extractImageOnlyExtension,
                    QStringList &loadStartupFiles,
                    QStringList &commandLineWithoutLoadStartupFiles);
-void sanityCheckRepeating (bool isRepeatingFlag,
-                           const QString &dashForRepeatingFlag,
-                           const QString &errorReportFile,
-                           const QString &fileCmdScriptFile,
-                           const QStringList &loadStartupFiles);
+void sanityCheckLoadStartupFiles (bool isRepeatingFlag,
+                                  const QString &dashForRepeatingFlag,
+                                  const QString &errorReportFile,
+                                  const QString &fileCmdScriptFile,
+                                  const QStringList &loadStartupFiles);
+void sanityCheckValue (bool requiredCondition,
+                       const QString &arg,
+                       const QString &msgUnadorned);
 void showStylesAndExit ();
 void showUsageAndQuit ();
 
@@ -212,16 +215,22 @@ void parseCmdLine (int argc,
     bool isLoadStartupFile = false;
 
     if (nextIsErrorReportFile) {
+      sanityCheckValue (checkFileExists (argv [i]),
+                        argv [i],
+                        QObject::tr ("is not a valid file name"));
       errorReportFile = argv [i];
-      showUsage |= !checkFileExists (errorReportFile);
       nextIsErrorReportFile = false;
     } else if (nextIsExtractImageOnly) {
+      sanityCheckValue (importImageExtensions.offers (argv [i]),
+                        argv [i],
+                        QObject::tr ("is not a valid image file extension"));
       extractImageOnlyExtension = argv [i];
-      showUsage |= !importImageExtensions.offers (extractImageOnlyExtension);
       nextIsExtractImageOnly = false;
     } else if (nextIsFileCmdScript) {
+      sanityCheckValue (checkFileExists (argv [i]),
+                        argv [i],
+                        QObject::tr ("is not a valid file name"));
       fileCmdScriptFile = argv [i];
-      showUsage |= !checkFileExists (fileCmdScriptFile);
       nextIsFileCmdScript = false;
     } else if (strcmp (argv [i], DASH_DEBUG.toLatin1().data()) == 0) {
       isDebug = true;
@@ -266,16 +275,16 @@ void parseCmdLine (int argc,
   }
 
   // Sanity checks
-  sanityCheckRepeating (isExportOnly,
-                        DASH_EXPORT_ONLY,
-                        errorReportFile,
-                        fileCmdScriptFile,
-                        loadStartupFiles);
-  sanityCheckRepeating (isExtractImageOnly,
-                        DASH_EXTRACT_IMAGE_ONLY,
-                        errorReportFile,
-                        fileCmdScriptFile,
-                        loadStartupFiles);
+  sanityCheckLoadStartupFiles (isExportOnly,
+                               DASH_EXPORT_ONLY,
+                               errorReportFile,
+                               fileCmdScriptFile,
+                               loadStartupFiles);
+  sanityCheckLoadStartupFiles (isExtractImageOnly,
+                               DASH_EXTRACT_IMAGE_ONLY,
+                               errorReportFile,
+                               fileCmdScriptFile,
+                               loadStartupFiles);
 
   // Usage
   if (showUsage || nextIsErrorReportFile || nextIsExtractImageOnly || nextIsFileCmdScript) {
@@ -285,18 +294,38 @@ void parseCmdLine (int argc,
   }
 }
 
-void sanityCheckRepeating (bool isRepeatingFlag,
-                           const QString &dashForRepeatingFlag,
-                           const QString &errorReportFile,
-                           const QString &fileCmdScriptFile,
-                           const QStringList &loadStartupFiles)
+void sanityCheckLoadStartupFiles (bool isRepeatingFlag,
+                                  const QString &dashForRepeatingFlag,
+                                  const QString &errorReportFile,
+                                  const QString &fileCmdScriptFile,
+                                  const QStringList &loadStartupFiles)
 {
   if (isRepeatingFlag && (!errorReportFile.isEmpty() ||
                           !fileCmdScriptFile.isEmpty() ||
                           loadStartupFiles.size() == 0)) {
+
+    // Condition that at only load files are specified, and there is at least one of them, is not satisfied so
+    // show more specific error message than showUsageAndQuit, and then quit
     QString msg;
     QTextStream str (&msg);
     str << dashForRepeatingFlag.toLatin1().data() << " " << QObject::tr ("is used only with one or more load files");
+    QMessageBox::critical (0,
+                           QObject::tr ("Engauge Digitizer"),
+                           msg);
+    exit (0);
+  }
+}
+
+void sanityCheckValue (bool requiredCondition,
+                       const QString &arg,
+                       const QString &msgUnadorned)
+{
+  if (!requiredCondition) {
+
+    // Required condition is not satisfied. Show a more specific error message than showUsageAndQuit and then quit
+    QString msg = QString ("%1 %2")
+        .arg (arg)
+        .arg (msgUnadorned);
     QMessageBox::critical (0,
                            QObject::tr ("Engauge Digitizer"),
                            msg);

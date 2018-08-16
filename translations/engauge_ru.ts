@@ -4611,8 +4611,9 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="301" />
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="313" />
+        <location filename="../src/main/main.cpp" line="330" />
+        <location filename="../src/main/main.cpp" line="429" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5106,62 +5107,73 @@ Do you want to save your changes?</source>
         <translation>Не удалось прочитать данные Главного Окна</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="299" />
+        <location filename="../src/main/main.cpp" line="220" />
+        <location filename="../src/main/main.cpp" line="232" />
+        <source>is not a valid file name</source>
+        <translation>не является допустимым именем файла</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="226" />
+        <source>is not a valid image file extension</source>
+        <translation>не является допустимым расширением файла изображения</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="311" />
         <source>is used only with one or more load files</source>
         <translation>используется только с одним или несколькими файлами нагрузки</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="333" />
+        <location filename="../src/main/main.cpp" line="362" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Включает дополнительную информацию о проблеме. Используется для отладки</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="339" />
+        <location filename="../src/main/main.cpp" line="368" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>Подготавливает файл отчёта об ошибке. Используется для отладки и тестирования</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="345" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Экспортируйте каждый загруженный загрузочный файл, который должен иметь все осевые точки, а затем остановить</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="351" />
+        <location filename="../src/main/main.cpp" line="380" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Извлеките изображение в каждый загруженный загрузочный файл в файл с указанным расширением, затем остановите</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="357" />
+        <location filename="../src/main/main.cpp" line="386" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Подготавливает файл со сценарием командной строки. Используется для отладки и тестирования</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="363" />
+        <location filename="../src/main/main.cpp" line="392" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Выводит диагностический файл данных из gnuplot. Используется для отладки</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="398" />
         <source>Show this help information</source>
         <translation>Показать вспомогательную инфирмацию</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="404" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Запускает файл отчета об ошибке или файл сценария командной строки. Используется для регрессионного тестирования</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="381" />
+        <location filename="../src/main/main.cpp" line="410" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Удаляет все сохраненные настройки, включая позиции окна. Используется, когда окна запускаются на экране</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="387" />
+        <location filename="../src/main/main.cpp" line="416" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>Показать список доступных стилей, которые могут быть использованы с командой -style</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="393" />
+        <location filename="../src/main/main.cpp" line="422" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Файл(ы) будут загружены или открыты при запуске</translation>
     </message>
