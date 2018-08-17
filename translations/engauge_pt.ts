@@ -4761,9 +4761,7 @@ Você deseja salvar as alterações?</translation>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="313" />
-        <location filename="../src/main/main.cpp" line="330" />
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="334" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
@@ -5273,58 +5271,63 @@ Você deseja salvar as alterações?</translation>
         <translation>é usado apenas com um ou mais arquivos de carregamento</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="362" />
+        <location filename="../src/main/main.cpp" line="343" />
+        <source>Available styles</source>
+        <translation>Estilos disponíveis</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="367" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Permite que as informações de depuração extra. Usado para depuração</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="368" />
+        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>Especifica um arquivo de relatório de erro como entrada. Usado para depuração e teste</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="374" />
+        <location filename="../src/main/main.cpp" line="379" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Exportar cada arquivo de inicialização carregado, que deve ter todos os pontos do eixo definidos e, em seguida, parar</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="380" />
+        <location filename="../src/main/main.cpp" line="385" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Extraia a imagem em cada arquivo de inicialização carregado para um arquivo com a extensão especificada e, em seguida, pare</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="386" />
+        <location filename="../src/main/main.cpp" line="391" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>
 Especifica um arquivo de script de comando arquivo como entrada. Usado para depuração e teste</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="392" />
+        <location filename="../src/main/main.cpp" line="397" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>arquivos de entrada gnuplot diagnóstico de saída. Usado para depuração</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="398" />
+        <location filename="../src/main/main.cpp" line="403" />
         <source>Show this help information</source>
         <translation>Mostrar esta informação ajuda</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="404" />
+        <location filename="../src/main/main.cpp" line="409" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Executa o script de comando arquivo de relatório de erro ou arquivo. Usado para testes de regressão</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="410" />
+        <location filename="../src/main/main.cpp" line="415" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Remove todas as configurações armazenadas, incluindo posições de janela. Usado quando o Windows iniciar-se fora da tela</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="416" />
+        <location filename="../src/main/main.cpp" line="421" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>Mostra uma lista de estilos disponíveis que pode ser utilizado com o comando de estilo</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="422" />
+        <location filename="../src/main/main.cpp" line="427" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Arquivo (s) a ser importado ou aberto na inicialização</translation>
     </message>

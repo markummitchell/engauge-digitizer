@@ -4358,9 +4358,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="313" />
-        <location filename="../src/main/main.cpp" line="330" />
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="334" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4872,57 +4870,62 @@ Do you want to save your changes?</source>
         <translation>يستخدم فقط مع واحد أو أكثر من ملفات التحميل</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="362" />
+        <location filename="../src/main/main.cpp" line="343" />
+        <source>Available styles</source>
+        <translation>الأنماط المتاحة</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="367" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>لتمكين معلومات التصحيح الإضافية. تستخدم لتصحيح الأخطاء</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="368" />
+        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>يحدد ملف تقرير الخطأ كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="374" />
+        <location filename="../src/main/main.cpp" line="379" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>قم بتصدير كل ملف بدء تشغيل تم تحميله ، والذي يجب أن يحتوي على جميع نقاط المحور المحددة ، ثم قم بإيقافها</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="380" />
+        <location filename="../src/main/main.cpp" line="385" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>قم باستخراج الصورة في كل ملف بدء تشغيل تم تحميله إلى ملف بالملحق المحدد ، ثم قم بإيقافه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="386" />
+        <location filename="../src/main/main.cpp" line="391" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>يحدد ملف البرنامج النصي لأمر الملف كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="392" />
+        <location filename="../src/main/main.cpp" line="397" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>إخراج ملفات التشخيص gnuplot الإدخال. تستخدم لتصحيح الأخطاء</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="398" />
+        <location filename="../src/main/main.cpp" line="403" />
         <source>Show this help information</source>
         <translation>عرض معلومات المساعدة هذه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="404" />
+        <location filename="../src/main/main.cpp" line="409" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>ينفذ ملف تقرير الخطأ أو البرنامج النصي لأمر الملف. تستخدم لاختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="410" />
+        <location filename="../src/main/main.cpp" line="415" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>يزيل كل الإعدادات المخزنة ، بما في ذلك أوضاع النوافذ. تستخدم عند تشغيل النوافذ خارج الشاشة</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="416" />
+        <location filename="../src/main/main.cpp" line="421" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>إظهار قائمة بالأنماط المتوفرة التي يمكن استخدامها مع الأمر -style</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="422" />
+        <location filename="../src/main/main.cpp" line="427" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>ملف (ملفات) ليتم استيراده أو فتحه عند بدء التشغيل</translation>
     </message>

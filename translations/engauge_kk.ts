@@ -4358,9 +4358,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="313" />
-        <location filename="../src/main/main.cpp" line="330" />
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="334" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4870,57 +4868,62 @@ Do you want to save your changes?</source>
         <translation>бір немесе бірнеше жүктеме файлдарымен ғана пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="362" />
+        <location filename="../src/main/main.cpp" line="343" />
+        <source>Available styles</source>
+        <translation>Қол жетімді стильдер</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="367" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Қосымша отладтау туралы ақпаратты қосады. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="368" />
+        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="374" />
+        <location filename="../src/main/main.cpp" line="379" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Белгіленген барлық ось нүктелері болуы керек жүктелген әрбір іске қосу файлын экспорттап, тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="380" />
+        <location filename="../src/main/main.cpp" line="385" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Әр жүктелген іске қосу файлында көрсетілген кеңейтілімдегі файлға суретті шығарыңыз, содан кейін тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="386" />
+        <location filename="../src/main/main.cpp" line="391" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Файлдың пәрмен сценарий файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="392" />
+        <location filename="../src/main/main.cpp" line="397" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Шығу диагностикалық gnuplot кіріс файлдары. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="398" />
+        <location filename="../src/main/main.cpp" line="403" />
         <source>Show this help information</source>
         <translation>Бұл анықтама ақпаратын көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="404" />
+        <location filename="../src/main/main.cpp" line="409" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Қате туралы есеп файлын немесе файл пәрмен сценарийін орындайды. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="410" />
+        <location filename="../src/main/main.cpp" line="415" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Барлық сақталған параметрлерді, соның ішінде терезе орындарын жояды. Терезелер экраннан бастағанда қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="416" />
+        <location filename="../src/main/main.cpp" line="421" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>-Style командасымен пайдалануға болатын қол жетімді стильдердің тізімін көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="422" />
+        <location filename="../src/main/main.cpp" line="427" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Импортталатын немесе іске қосылған кезде ашылатын файл (дар)</translation>
     </message>

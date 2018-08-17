@@ -7,7 +7,6 @@
 #include "ColorFilterMode.h"
 #include "FittingCurveCoefficients.h"
 #include "ImportImageExtensions.h"
-#include <iostream>
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QApplication>
@@ -73,7 +72,8 @@ void sanityCheckLoadStartupFiles (bool isRepeatingFlag,
 void sanityCheckValue (bool requiredCondition,
                        const QString &arg,
                        const QString &msgUnadorned);
-void showStylesAndExit ();
+void showMessageAndQuit (const QString &msg);
+void showStylesAndQuit ();
 void showUsageAndQuit ();
 
 // Functions
@@ -252,7 +252,7 @@ void parseCmdLine (int argc,
     } else if (strcmp (argv [i], DASH_RESET.toLatin1().data()) == 0) {
       isReset = true;
     } else if (strcmp (argv [i], DASH_STYLES.toLatin1().data()) == 0) {
-      showStylesAndExit ();
+      showStylesAndQuit ();
     } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
       showUsage = true; // User entered an unrecognized token
     } else {
@@ -309,10 +309,7 @@ void sanityCheckLoadStartupFiles (bool isRepeatingFlag,
     QString msg;
     QTextStream str (&msg);
     str << dashForRepeatingFlag.toLatin1().data() << " " << QObject::tr ("is used only with one or more load files");
-    QMessageBox::critical (0,
-                           QObject::tr ("Engauge Digitizer"),
-                           msg);
-    exit (0);
+    showMessageAndQuit (msg);
   }
 }
 
@@ -326,17 +323,25 @@ void sanityCheckValue (bool requiredCondition,
     QString msg = QString ("%1 %2")
         .arg (arg)
         .arg (msgUnadorned);
-    QMessageBox::critical (0,
-                           QObject::tr ("Engauge Digitizer"),
-                           msg);
-    exit (0);
+    showMessageAndQuit (msg);
   }
 }
 
-void showStylesAndExit ()
+void showMessageAndQuit (const QString &msg)
 {
-  cout << "Available styles: " << QStyleFactory::keys ().join (", ").toLatin1().data() << endl;
+  // Show message in QMessageBox instead of cout or cerr since console output is disabled in Microsoft Windows
+  QMessageBox::critical (0,
+                         QObject::tr ("Engauge Digitizer"),
+                         msg);
   exit (0);
+}
+
+void showStylesAndQuit ()
+{
+  QString msg;
+  QTextStream str (&msg);
+  str << QObject::tr ("Available styles") << ": " << QStyleFactory::keys ().join (", ");
+  showMessageAndQuit (msg);
 }
 
 void showUsageAndQuit ()
@@ -424,9 +429,5 @@ void showUsageAndQuit ()
       << "</tr>"
       << "</table></html>";
 
-  // Show error in QMessageBox instead of cerr since console output is disabled in Microsoft Windows
-  QMessageBox::critical (0,
-                         QObject::tr ("Engauge Digitizer"),
-                         msg);
- exit (0);
+  showMessageAndQuit (msg);
 }

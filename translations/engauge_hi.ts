@@ -4358,9 +4358,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="313" />
-        <location filename="../src/main/main.cpp" line="330" />
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="334" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4870,57 +4868,62 @@ Do you want to save your changes?</source>
         <translation>केवल एक या अधिक लोड फ़ाइलों के साथ प्रयोग किया जाता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="362" />
+        <location filename="../src/main/main.cpp" line="343" />
+        <source>Available styles</source>
+        <translation>उपलब्ध शैलियों</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="367" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>अतिरिक्त डीबग जानकारी सक्षम करता है। डीबगिंग के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="368" />
+        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation>एक त्रुटि रिपोर्ट फ़ाइल इनपुट के रूप में निर्दिष्ट करता है। डिबगिंग और परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="374" />
+        <location filename="../src/main/main.cpp" line="379" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>प्रत्येक लोड की गई स्टार्टअप फ़ाइल को निर्यात करें, जिसमें सभी अक्ष बिंदु परिभाषित होना चाहिए, फिर रोकें</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="380" />
+        <location filename="../src/main/main.cpp" line="385" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>प्रत्येक लोड की गई स्टार्टअप फ़ाइल में निर्दिष्ट एक्सटेंशन वाले फ़ाइल में छवि निकालें, फिर रोकें</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="386" />
+        <location filename="../src/main/main.cpp" line="391" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>इनपुट के रूप में फ़ाइल कमांड स्क्रिप्ट फ़ाइल निर्दिष्ट करता है। डिबगिंग और परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="392" />
+        <location filename="../src/main/main.cpp" line="397" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>आउटपुट डायग्नोस्टिक gnuplot इनपुट फाइलें। डीबगिंग के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="398" />
+        <location filename="../src/main/main.cpp" line="403" />
         <source>Show this help information</source>
         <translation>इस सहायता की जानकारी दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="404" />
+        <location filename="../src/main/main.cpp" line="409" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>त्रुटि रिपोर्ट फ़ाइल या फ़ाइल कमांड स्क्रिप्ट निष्पादित करता है। प्रतिगमन परीक्षण के लिए प्रयुक्त</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="410" />
+        <location filename="../src/main/main.cpp" line="415" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>खिड़की की स्थिति सहित सभी संग्रहीत सेटिंग्स को हटा देता है। विंडोज़ ऑफस्क्रीन शुरू होने पर प्रयुक्त होता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="416" />
+        <location filename="../src/main/main.cpp" line="421" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>उपलब्ध स्टाइल की एक सूची दिखाएं जिसका उपयोग स्टाइल कमांड के साथ किया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="422" />
+        <location filename="../src/main/main.cpp" line="427" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>स्टार्टअप पर फ़ाइल आयात या खोला जाना है</translation>
     </message>
