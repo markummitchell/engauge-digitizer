@@ -284,7 +284,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="15"/>
         <source>About Engauge</source>
-        <translation type="unfinished"></translation>
+        <translation>Engauge 정보</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="32"/>
@@ -295,7 +295,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="33"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>번역</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="35"/>
@@ -305,7 +305,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="38"/>
         <source>This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.</source>
-        <translation type="unfinished"></translation>
+        <translation>이것은 자유 소프트웨어이며 GNU 일반 공중 사용 허가서 버전 2 또는 (귀하의 선택에 따라) 이후 버전에 따라 특정 조건 하에서 배포 할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="41"/>
@@ -315,17 +315,17 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="42"/>
         <source>Read the included LICENSE file for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>자세한 내용은 포함 된 LICENSE 파일을 읽으십시오.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="44"/>
         <source>Project Home Page</source>
-        <translation type="unfinished"></translation>
+        <translation>프로젝트 홈 페이지</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="45"/>
         <source>Gitter Forum</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 포럼</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="46"/>
@@ -339,22 +339,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64"/>
         <source>Edit Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation>축점 편집</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107"/>
         <source>Graph Coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프 좌표</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116"/>
         <source>as</source>
-        <translation type="unfinished"></translation>
+        <translation>같이</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126"/>
         <source>(</source>
-        <translation type="unfinished"></translation>
+        <translation>(</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134"/>
@@ -363,12 +363,16 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 For cartesian plots this is X. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>축 지점의 첫 번째 그래프 좌표를 입력하십시오.
+
+데카르트 플롯의 경우 X입니다. 극좌표의 경우 반경 R입니다.
+
+좌표 값의 예상 형식은로 I 일 설정에 의해 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141"/>
         <source>, </source>
-        <translation type="unfinished"></translation>
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149"/>
@@ -377,27 +381,31 @@ The expected format of the coordinate value is determined by the locale setting.
 For cartesian plots this is Y. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>축점의 두 번째 그래프 좌표를 입력하십시오.
+
+데카르트 플롯의 경우 이것은 Y입니다. 극좌표의 경우이 값은 세타 쎄타입니다.
+
+좌표 값의 예상 형식은로 I 일 설정에 의해 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156"/>
         <source>)</source>
-        <translation type="unfinished"></translation>
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173"/>
         <source>Number format</source>
-        <translation type="unfinished"></translation>
+        <translation>숫자 형식</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel</translation>
     </message>
 </context>
 <context>
@@ -525,7 +533,7 @@ The original document can be sent as part of the error report, which increases t
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">구하다</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="59"/>
@@ -841,7 +849,7 @@ The Value component is also called the Lightness.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="214"/>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>날짜 시간</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="224"/>
@@ -1224,7 +1232,7 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41"/>
         <source>Digitize Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 디지타이징</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65"/>
@@ -1781,7 +1789,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="307"/>
         <source>Grid Lines</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">눈금 선</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="311"/>
@@ -1850,7 +1858,7 @@ This value cannot be negative. A zero value disables this feature. Decimal value
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="107"/>
         <source>Grid Lines</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">눈금 선</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="115"/>
@@ -1975,94 +1983,98 @@ The stop value cannot be less than the start value</source>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>초기 확대 / 축소
+
+새 문서가로드되면 초기 확대 / 축소 비율을 선택하십시오. 이전 확대 / 축소를 유지하거나 지정된 확대 / 축소를 적용 할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65"/>
         <source>Initial zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>초기 확대 / 축소</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
         <source>Zoom control</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 제어</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="90"/>
         <source>Menu only</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴 만</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
         <source>Menu and mouse wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴 및 마우스 휠</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92"/>
         <source>Menu and +/- keys</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴 및 +/- 키</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93"/>
         <source>Menu, mouse wheel and +/- keys</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴, 마우스 휠 및 +/- 키</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 제어
+
+확대 및 축소하는 데 사용할 입력을 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99"/>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>장소</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124"/>
         <source>Import cropping</source>
-        <translation type="unfinished"></translation>
+        <translation>자르기 가져 오기</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141"/>
         <source>Import PDF resolution (dots per inch)</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF 해상도 가져 오기 (인치당 도트 수)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160"/>
         <source>Maximum grid lines</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 그리드 선</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172"/>
         <source>Highlight opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>불투명도 강조 표시</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184"/>
         <source>Recent file list</source>
-        <translation type="unfinished"></translation>
+        <translation>최근 파일 목록</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195"/>
         <source>Include title bar path</source>
-        <translation type="unfinished"></translation>
+        <translation>제목 표시 줄 경로 포함</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205"/>
         <source>Allow small dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>작은 파일 창 허용</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215"/>
         <source>Allow drag and drop export</source>
-        <translation type="unfinished"></translation>
+        <translation>드래그 앤 드롭 내보내기 허용</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228"/>
         <source>Significant digits</source>
-        <translation type="unfinished"></translation>
+        <translation>유효 숫자</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104"/>
@@ -2071,7 +2083,11 @@ Select which inputs are used to zoom in and out.</source>
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
 
 The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>장소
+
+숫자 (즉시)에 사용되는 로케일과 사용자 인터페이스의 언어 (재시작 후)를 선택하십시오.
+
+로케일은 숫자의 형식을 지정합니다. 특히 쉼표 나 마침표는 사용자가 입력하거나 사용자 인터페이스에 표시되거나 파일로 내보내는 각 숫자에서 그룹 구분 기호로 사용됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
@@ -2080,54 +2096,70 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
 
 This setting only has an effect when Engauge has been built with support for pdf files.</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오기 자르기
+
+가져올 때 가져온 이미지 자르기를 사용하거나 사용하지 않도록 설정합니다. 이미지 자르기는 그래프 주변의 중요하지 않은 정보를 제거하는 데 유용하지만 그래프가 이미 전체 이미지를 채울 때 유용하지 않습니다.
+
+이 설정은 Engauge가 PDF 파일을 지원하도록 빌드 된 경우에만 적용됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="145"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF 해상도 가져 오기
+
+가져온 PDF (Portable Document Format) 파일은 DPI (dots per inch)로이 픽셀 해상도로 변환되며 각 픽셀은 한 점입니다. 값이 높을수록 그림 해상도가 향상되고 수치 디지털화 정확도가 향상 될 수 있습니다. 그러나 매우 높은 값으로 설정하면 이미지가 너무 커져서 Engauge가 느려집니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 그리드 라인
+
+처리 할 그리드 라인의 최대 수. 이 제한은 시작 값과 종료 값에 대해 단계 값이 너무 작 으면 시각적으로 그리드 선이 너무 많아지며 처리 시간이 매우 길어집니다 (각 그리드 선을 처리해야하기 때문에)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>불투명도 강조 표시
+
+선택 모드에서 커서가 곡선 또는 축 포인트 위에있을 때 적용 할 불투명도입니다. 모양의 변경은 포인트를 선택할 수있는 시점을 나타냅니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>명확한</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>최근 파일 목록 지우기
+
+파일 메뉴에서 최근 파일 목록을 지 웁니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
-        <translation type="unfinished"></translation>
+        <translation>제목 표시 줄 파일 이름
+
+제목 표시 줄에 파일 이름의 경로 및 파일 확장명을 포함하거나 제외합니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="210"/>
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
-        <translation type="unfinished"></translation>
+        <translation>작은 대화 상자 허용
+
+설정 대화 상자를 작게 만들어 소형 컴퓨터 화면에 맞출 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="220"/>
@@ -2136,14 +2168,20 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
 
 When drag and drop is disabled, a rectangular set of table cells can be selected using click and drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click then Shift+Click, since click and drag starts the drag operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>드래그 앤 드롭 내보내기 허용
+
+Curve Fitting Window 및 Geometry Window 테이블에서 끌어서 놓기를 내보낼 수 있습니다.
+
+드래그 앤 드롭을 사용하지 않으면 클릭하고 끌기를 사용하여 사각형 셀 세트를 선택할 수 있습니다. 드래그 앤 드롭을 사용하면 클릭 한 다음 Shift 키를 누른 상태로 클릭하면 사각형 셀 집합을 선택할 수 있습니다. 클릭 및 드래그로 드래그 작업이 시작되기 때문입니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="233"/>
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
-        <translation type="unfinished"></translation>
+        <translation>유효 숫자
+
+부동 소수점 숫자의 정밀도 자릿수입니다. 이 값은 중간 값이 임계 값 T보다 작 으면 특정 차수의 다항식 곡선을 데이터에 적용 할 수 없으므로 곡선 맞춤에 대한 계산에 영향을줍니다. 임계 값 T는 최대 행렬 요소 M과 T = M / 10 ^ S와 같은 유효 자릿수 S로부터 계산됩니다.</translation>
     </message>
 </context>
 <context>
@@ -2151,12 +2189,12 @@ Number of digits of precision in floating point numbers. This value affects calc
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30"/>
         <source>Point Match</source>
-        <translation type="unfinished"></translation>
+        <translation>점 일치</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83"/>
         <source>Maximum point size (pixels)</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 포인트 크기 (픽셀)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87"/>
@@ -2167,49 +2205,57 @@ Sample match points must fit within a square box, around the cursor, having widt
 This size is also used to determine if a region of pixels that are on, in the processed image, should be ignored since that region is wider or taller than this limit.
 
 This value has a lower limit</source>
-        <translation type="unfinished"></translation>
+        <translation>최대 포인트 크기 (픽셀)를 선택하십시오.
+
+샘플 일치 점은 너비와 높이가이 최대 값과 동일한 커서 주위의 정사각형 상자 안에 맞아야합니다.
+
+이 크기는 처리 된 이미지에서 켜져있는 픽셀 영역이이 제한보다 넓거나 더 크기 때문에 무시해야하는지 여부를 결정하는데도 사용됩니다.
+
+이 값에는 한도가 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98"/>
         <source>Accepted point color</source>
-        <translation type="unfinished"></translation>
+        <translation>허용되는 포인트 색상</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107"/>
         <source>Rejected point color</source>
-        <translation type="unfinished"></translation>
+        <translation>거부 된 포인트 색상</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116"/>
         <source>Candidate point color</source>
-        <translation type="unfinished"></translation>
+        <translation>후보 점 색상</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102"/>
         <source>Select a color for matched points that are accepted</source>
-        <translation type="unfinished"></translation>
+        <translation>수락 된 일치하는 포인트의 색상 선택</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111"/>
         <source>Select a color for matched points that are rejected</source>
-        <translation type="unfinished"></translation>
+        <translation>거부 된 일치하는 점의 색상 선택</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120"/>
         <source>Select a color for the point being decided upon</source>
-        <translation type="unfinished"></translation>
+        <translation>결정할 포인트의 색상을 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>시사</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142"/>
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
-        <translation type="unfinished"></translation>
+        <translation>미리보기 창은 현재 설정이 점 매칭에 미치는 영향과 표시 및 후보 점 표시 방법을 보여줍니다.
+
+포인트는 포인트 분리 값으로 분리되며 최대 포인트 크기는 가운데 상자로 표시됩니다</translation>
     </message>
 </context>
 <context>
@@ -2217,12 +2263,12 @@ The points are separated by the point separation value, and the maximum point si
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="40"/>
         <source>Segment Fill</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="78"/>
         <source>Minimum length (points)</source>
-        <translation type="unfinished"></translation>
+        <translation>최소 길이 (포인트)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="83"/>
@@ -2231,12 +2277,16 @@ The points are separated by the point separation value, and the maximum point si
 Only segments with more points will be created.
 
 This value should be as large as possible to reduce memory usage. This value has a lower limit</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트에서 최소 포인트 수를 선택하십시오.
+
+더 많은 포인트가있는 세그먼트 만 생성됩니다.
+
+이 값은 메모리 사용을 줄이기 위해 가능한 한 커야합니다. 이 값에는 한도가 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90"/>
         <source>Point separation (pixels)</source>
-        <translation type="unfinished"></translation>
+        <translation>점 분리 (픽셀)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="95"/>
@@ -2245,49 +2295,55 @@ This value should be as large as possible to reduce memory usage. This value has
 Successive points added to a segment will be separated by this number of pixels. If Fill Corners is enabled, then additional points will be inserted at corners so some points will be closer.
 
 This value has a lower limit</source>
-        <translation type="unfinished"></translation>
+        <translation>점 간격을 픽셀 단위로 선택하십시오.
+
+세그먼트에 추가 된 연속 점은이 픽셀 수로 구분됩니다. 채우기 모서리가 활성화 된 경우 추가 점이 모서리에 삽입되어 일부 점이 더 가까워집니다.
+
+이 값에는 한도가 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103"/>
         <source>Fill corners</source>
-        <translation type="unfinished"></translation>
+        <translation>모서리 채우기</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114"/>
         <source>Line width</source>
-        <translation type="unfinished"></translation>
+        <translation>선의 폭</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123"/>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>선 색상</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="107"/>
         <source>Fill corners.
 
 In addition to the points placed at regular intervals, this option causes a point to be placed at each corner. This option can capture important information in piecewise linear graphs, but gradually curving graphs may not benefit from the additional points</source>
-        <translation type="unfinished"></translation>
+        <translation>모서리를 채 웁니다.
+
+규칙적인 간격으로 배치 된 점 외에도이 옵션을 사용하면 각 모서리에 점이 배치됩니다. 이 옵션은 조각 별 선형 그래프에서 중요한 정보를 캡처 할 수 있지만 그래프를 점차 커브하면 추가 점의 이점을 얻을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118"/>
         <source>Select a size for the lines drawn along a segment</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트를 따라 그려지는 선의 크기 선택</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127"/>
         <source>Select a color for the lines drawn along a segment</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트를 따라 그린 선의 색상 선택</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>시사</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149"/>
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
-        <translation type="unfinished"></translation>
+        <translation>미리보기 창에는 세그먼트로 채울 수있는 가장 짧은 선이 표시되고 세그먼트 채우기로 생성 된 세그먼트 및 점에 대한 현재 설정의 효과가 표시됩니다</translation>
     </message>
 </context>
 <context>
@@ -2296,7 +2352,7 @@ In addition to the points placed at regular intervals, this option causes a poin
         <location filename="../src/Fitting/FittingWindow.cpp" line="42"/>
         <location filename="../src/Fitting/FittingWindow.cpp" line="43"/>
         <source>Curve Fitting Window</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 피팅 윈도우</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="44"/>
@@ -2305,62 +2361,66 @@ In addition to the points placed at regular intervals, this option causes a poin
 This window applies a curve fit to the currently selected curve.
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 피팅 윈도우
+
+이 창은 현재 선택된 커브에 커브 맞춤을 적용합니다.
+
+드래그 앤 드롭이 비활성화 된 경우 클릭하고 드래그하여 직사각형 셀 집합을 선택할 수 있습니다. 그렇지 않으면 드래그 앤 드롭이 활성화 된 경우 클릭 및 드래그가 드래그 작업을 시작하기 때문에 클릭 한 다음 Shift + 클릭을 사용하여 직사각형 셀 집합을 선택할 수 있습니다. 끌어서 놓기 모드는 기본 창 설정에서 설정됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="158"/>
         <source>Calculated mean square error statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>계산 된 평균 제곱 오류 통계</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="166"/>
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
-        <translation type="unfinished"></translation>
+        <translation>계산 된 평균 제곱근 통계. 이것은 평균 제곱 오류의 제곱근으로 계산됩니다</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="128"/>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>주문</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="153"/>
         <source>Mean square error</source>
-        <translation type="unfinished"></translation>
+        <translation>평균 제곱 오차</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="161"/>
         <source>Root mean square</source>
-        <translation type="unfinished"></translation>
+        <translation>제곱 평균 제곱근</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="169"/>
         <source>R squared</source>
-        <translation type="unfinished"></translation>
+        <translation>R 제곱</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="174"/>
         <source>Calculated R squared statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>계산 된 R 제곱 통계</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="228"/>
         <source>log10(Y)=</source>
-        <translation type="unfinished"></translation>
+        <translation>log10(Y)</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="229"/>
         <source>Y=</source>
-        <translation type="unfinished"></translation>
+        <translation>Y=</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="234"/>
         <source>log10(X)</source>
-        <translation type="unfinished"></translation>
+        <translation>log10(X)</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="235"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
 </context>
 <context>
@@ -2369,7 +2429,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
         <location filename="../src/Geometry/GeometryWindow.cpp" line="28"/>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="29"/>
         <source>Geometry Window</source>
-        <translation type="unfinished"></translation>
+        <translation>기하학 창</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="30"/>
@@ -2390,7 +2450,23 @@ Index = Point number
 Distance = Distance along the curve in forward or backward direction, in either graph units or as a percentage
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation type="unfinished"></translation>
+        <translation>기하학 창
+
+이 테이블은 현재 선택된 커브에 대한 다음과 같은 형상 데이터를 표시합니다.
+
+함수 영역 = 함수 인 경우 곡선 아래 영역
+
+다각형 영역 = 커브 내부의 영역입니다 (관계 인 경우). 이 값은 곡선 선이 서로 교차하지 않는 경우에만 정확합니다.
+
+X = 각 점의 X 좌표
+
+Y = 각 점의 Y 좌표
+
+색인 = 포인트 번호
+
+거리 = 그래프 단위 또는 백분율로 정방향 또는 역방향 커브를 따라 거리
+
+드래그 앤 드롭이 비활성화 된 경우 클릭하고 드래그하여 직사각형 셀 집합을 선택할 수 있습니다. 그렇지 않으면 드래그 앤 드롭이 활성화 된 경우 클릭 및 드래그가 드래그 작업을 시작하기 때문에 클릭 한 다음 Shift + 클릭을 사용하여 직사각형 셀 집합을 선택할 수 있습니다. 끌어서 놓기 모드는 기본 창 설정에서 설정됩니다.</translation>
     </message>
 </context>
 <context>
@@ -2409,7 +2485,18 @@ Zooming the image in or out is performed using any of several methods:
 1) rotating the mouse wheel when the cursor is outside of the image
 2) pressing the minus or plus keys
 3) selecting a new zoom setting from the View/Zoom menu</source>
-        <translation type="unfinished"></translation>
+        <translation>메인 윈도우
+
+이미지 파일을 가져 오거나 Engauge 문서를 연 후이 영역에 이미지가 나타납니다. 포인트가 이미지에 추가됩니다.
+
+이미지가 두 개의 축과 하나 이상의 커브가있는 그래프 인 경우 해당 축을 따라 세 개의 축 지점을 만들어야합니다. 한 축에 두 개의 축 지점을 배치하고 다른 축에 세 번째 축 지점을 배치하여 최대한 정확도를 높이십시오. 그런 다음 곡선을 따라 커브 점을 추가 할 수 있습니다.
+
+이미지가 길이를 정의하는 눈금이있는지도 인 경우 눈금의 양쪽 끝에 두 개의 축 점이 만들어야합니다. 그런 다음 커브 포인트를 추가 할 수 있습니다.
+
+이미지를 확대 또는 축소하는 것은 여러 가지 방법 중 하나를 사용하여 수행됩니다.
+1) 커서가 이미지 외부에있을 때 마우스 휠을 돌립니다.
+2) 마이너스 또는 플러스 키 누르기
+3)보기 / 줌 메뉴에서 새로운 줌 설정 선택</translation>
     </message>
 </context>
 <context>
@@ -2417,12 +2504,12 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/Help/HelpWindow.cpp" line="34"/>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>내용</translation>
     </message>
     <message>
         <location filename="../src/Help/HelpWindow.cpp" line="36"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>색인</translation>
     </message>
 </context>
 <context>
@@ -2430,12 +2517,12 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/Load/LoadImageFromUrl.cpp" line="59"/>
         <source>Unable to download image from</source>
-        <translation type="unfinished"></translation>
+        <translation>에서 이미지를 다운로드 할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Load/LoadImageFromUrl.cpp" line="91"/>
         <source>Unable to load image from</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지를로드 할 수 없습니다.</translation>
     </message>
 </context>
 <context>
@@ -2448,7 +2535,7 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/main/MainWindow.cpp" line="396"/>
         <source>Shift+F2</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F2</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="398"/>
@@ -2472,7 +2559,7 @@ Select points on the screen.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="404"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="406"/>
@@ -2496,7 +2583,7 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
     <message>
         <location filename="../src/main/MainWindow.cpp" line="415"/>
         <source>Shift+F8</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F8</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="417"/>
@@ -3642,324 +3729,324 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="905"/>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>축소</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="906"/>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>축소</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="910"/>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>확대</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="911"/>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>확대</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="918"/>
         <source>16:1 (1600%)</source>
-        <translation type="unfinished"></translation>
+        <translation>16:1 (1600%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="920"/>
         <source>Zoom 16:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 16:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="924"/>
         <source>16:1 farther (1270%)</source>
-        <translation type="unfinished"></translation>
+        <translation>16:1 더 멀리 (1270%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="926"/>
         <source>Zoom 12.7:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 12.7:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="930"/>
         <source>8:1 closer (1008%)</source>
-        <translation type="unfinished"></translation>
+        <translation>8:1 더 가까운 (1008%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="932"/>
         <source>Zoom 10.08:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 10.08:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="936"/>
         <source>8:1 (800%)</source>
-        <translation type="unfinished"></translation>
+        <translation>8:1 (800%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="938"/>
         <source>Zoom 8:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 8:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="942"/>
         <source>8:1 farther (635%)</source>
-        <translation type="unfinished"></translation>
+        <translation>8:1 더 멀리 (635%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="944"/>
         <source>Zoom 6.35:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 6.35:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="948"/>
         <source>4:1 closer (504%)</source>
-        <translation type="unfinished"></translation>
+        <translation>4:1 더 가까운 (504%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="950"/>
         <source>Zoom 5.04:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 5.04:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="954"/>
         <source>4:1 (400%)</source>
-        <translation type="unfinished"></translation>
+        <translation>4:1 (400%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="956"/>
         <source>Zoom 4:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 4:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="960"/>
         <source>4:1 farther (317%)</source>
-        <translation type="unfinished"></translation>
+        <translation>4:1 더 멀리 (317%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="962"/>
         <source>Zoom 3.17:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 3.17:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="966"/>
         <source>2:1 closer (252%)</source>
-        <translation type="unfinished"></translation>
+        <translation>2:1 더 가까운 (252%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="968"/>
         <source>Zoom 2.52:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 2.52:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="972"/>
         <source>2:1 (200%)</source>
-        <translation type="unfinished"></translation>
+        <translation>2:1 (200%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="974"/>
         <source>Zoom 2:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 2:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="978"/>
         <source>2:1 farther (159%)</source>
-        <translation type="unfinished"></translation>
+        <translation>2:1 더 멀리 (159%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="980"/>
         <source>Zoom 1.59:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1.59:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="984"/>
         <source>1:1 closer (126%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:1 더 가까운 (126%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="987"/>
         <source>Zoom 1.3:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1.3:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="991"/>
         <source>1:1 (100%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:1 (100%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="994"/>
         <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="998"/>
         <source>1:1 farther (79%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:1 더 멀리 (79%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1001"/>
         <source>Zoom 0.8:1</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 0.8:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1005"/>
         <source>1:2 closer (63%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:2 더 가까운 (63%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1007"/>
         <source>Zoom 1.3:2</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1.3:2</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1011"/>
         <source>1:2 (50%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:2 (50%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1013"/>
         <source>Zoom 1:2</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1:2</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1017"/>
         <source>1:2 farther (40%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:2 더 멀리 (40%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1019"/>
         <source>Zoom 0.8:2</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 0.8:2</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1023"/>
         <source>1:4 closer (31%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:4 더 가까운 (31%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1025"/>
         <source>Zoom 1.3:4</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1.3:2</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1029"/>
         <source>1:4 (25%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:4 (25%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1031"/>
         <source>Zoom 1:4</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1:4</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1035"/>
         <source>1:4 farther (20%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:4 더 멀리 (20%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1037"/>
         <source>Zoom 0.8:4</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 0.8:4</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1041"/>
         <source>1:8 closer (12.5%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:8 더 가까운 (12.5%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1043"/>
         <location filename="../src/main/MainWindow.cpp" line="1049"/>
         <source>Zoom 1:8</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1:8</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1047"/>
         <source>1:8 (12.5%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:8 (12.5%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1053"/>
         <source>1:8 farther (10%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:8 더 멀리 (10%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1055"/>
         <source>Zoom 0.8:8</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 0.8:8</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1059"/>
         <source>1:16 closer (8%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:16 더 가까운 (8%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1061"/>
         <source>Zoom 1.3:16</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1.3:16</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1065"/>
         <source>1:16 (6.25%)</source>
-        <translation type="unfinished"></translation>
+        <translation>1:16 (6.25%)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1067"/>
         <source>Zoom 1:16</source>
-        <translation type="unfinished"></translation>
+        <translation>줌 1:16</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1071"/>
         <source>Fill</source>
-        <translation type="unfinished"></translation>
+        <translation>가득 따르다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1073"/>
         <source>Zoom with stretching to fill window</source>
-        <translation type="unfinished"></translation>
+        <translation>창을 채우기 위해 늘려 줌</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1191"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>파일</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1197"/>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>최근에 열린</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1213"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>편집하다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1226"/>
         <source>Digitize</source>
-        <translation type="unfinished"></translation>
+        <translation>디지털화하다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1235"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>전망</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1247"/>
         <location filename="../src/main/MainWindow.cpp" line="1431"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>배경</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1252"/>
         <source>Curves</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1257"/>
         <source>Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>상태 표시 줄</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1262"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>줌</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1294"/>
@@ -3989,22 +4076,22 @@ Select background image:
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1424"/>
         <source>No background</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 없음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1425"/>
         <source>Original image</source>
-        <translation type="unfinished"></translation>
+        <translation>원본 이미지</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1426"/>
         <source>Filtered image</source>
-        <translation type="unfinished"></translation>
+        <translation>필터링 된 이미지</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1439"/>
         <source>Select curve for new points.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1440"/>
@@ -4064,26 +4151,30 @@ Currently selected coordinate system. This is used to switch between coordinate 
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1497"/>
         <source>Show all coordinate systems</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 좌표계 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1498"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 좌표계 표시
+
+이 버튼을 길게 누르면 모든 좌표계에 대한 모든 디지털화 된 점과 선이 표시됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1506"/>
         <source>Print all coordinate systems</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 좌표계 인쇄</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1507"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 좌표계 인쇄
+
+이 버튼을 누르면 모든 좌표계에 대한 모든 디지털화 된 점과 선이 인쇄됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1511"/>
@@ -4093,12 +4184,12 @@ When pressed, this button Prints all digitized points and lines for all coordina
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1682"/>
         <source>Unable to export to file</source>
-        <translation type="unfinished"></translation>
+        <translation>파일로 내보낼 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1716"/>
         <source>Unable to extract image to file</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지를 파일로 추출 할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1791"/>
@@ -4138,7 +4229,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <location filename="../src/main/MainWindow.cpp" line="2224"/>
         <location filename="../src/main/MainWindow.cpp" line="2298"/>
         <source>File imported</source>
-        <translation type="unfinished"></translation>
+        <translation>가져온 파일</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2332"/>
@@ -4164,12 +4255,13 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <location filename="../src/main/MainWindow.cpp" line="2383"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>문서가 수정되었습니다.
+변경 사항을 저장 하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2467"/>
         <source>Cannot write file</source>
-        <translation type="unfinished"></translation>
+        <translation>파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2515"/>
@@ -4271,7 +4363,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="26"/>
         <location filename="../src/Point/PointShape.cpp" line="32"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>알 수 없는</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69"/>
@@ -4284,13 +4376,13 @@ Do you want to save your changes?</source>
         <location filename="../src/FileCmd/FileCmdImport.cpp" line="29"/>
         <location filename="../src/FileCmd/FileCmdOpen.cpp" line="29"/>
         <source>Missing attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>누락 된 속성</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="93"/>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="105"/>
         <source>Cannot read graph points</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프 포인트를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdCopy.cpp" line="66"/>
@@ -4299,7 +4391,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="60"/>
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="62"/>
         <source>Missing attribute(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>누락 된 속성</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdCopy.cpp" line="69"/>
@@ -4314,7 +4406,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Cmd/CmdCut.cpp" line="67"/>
         <source>Missing argument(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>누락 된 인수</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdSettingsAxesChecker.cpp" line="50"/>
@@ -4330,7 +4422,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
-        <translation type="unfinished"></translation>
+        <translation>끝 요소를 찾기 전에 파일 끝에 도달했습니다.</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="14"/>
@@ -4360,7 +4452,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Color/ColorFilterSettings.cpp" line="214"/>
         <source>Cannot read curve filter data</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선 필터 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="14"/>
@@ -4386,7 +4478,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="16"/>
         <source>Date Time</source>
-        <translation type="unfinished"></translation>
+        <translation>날짜 시간</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="19"/>
@@ -4396,18 +4488,18 @@ Do you want to save your changes?</source>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="21"/>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="24"/>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>도</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="25"/>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="46"/>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>번호</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="37"/>
         <source>Date/Time</source>
-        <translation type="unfinished"></translation>
+        <translation>날짜 시간</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="27"/>
@@ -4437,13 +4529,13 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/CoordSystem/CoordSystem.cpp" line="602"/>
         <source>Unexpected xml token</source>
-        <translation type="unfinished"></translation>
+        <translation>예기치 않은 xml 토큰</translation>
     </message>
     <message>
         <location filename="../src/Curve/Curve.cpp" line="367"/>
         <location filename="../src/Curve/Curve.cpp" line="419"/>
         <source>Cannot read curve data</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="15"/>
@@ -4473,17 +4565,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Curve/CurveStyle.cpp" line="69"/>
         <source>Cannot read curve style data</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurvesGraphs.cpp" line="223"/>
         <source>DUPLICATE</source>
-        <translation type="unfinished"></translation>
+        <translation>복제</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurvesGraphs.cpp" line="237"/>
         <source>Cannot read graph curves data</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프 커브 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135"/>
@@ -4496,32 +4588,32 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136"/>
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>세 개의 축 포인트가 정의되어 더 이상 필요하거나 허용되지 않습니다.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="151"/>
         <source>Color Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>색상 선택기</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152"/>
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>죄송 합니다만 색상 피커 지점은 배경색이 아닌 픽셀 근처에 있어야합니다. 다시 시도하십시오.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="350"/>
         <source>Point Match</source>
-        <translation type="unfinished"></translation>
+        <translation>점 일치</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351"/>
         <source>There are no more matching points</source>
-        <translation type="unfinished"></translation>
+        <translation>더 이상 일치하는 포인트가 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174"/>
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 막대가 정의되고 다른 막대가 필요하지 않거나 허용되지 않습니다.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="35"/>
@@ -4547,108 +4639,108 @@ Do you want to save your changes?</source>
         <location filename="../src/Document/Document.cpp" line="93"/>
         <location filename="../src/Document/Document.cpp" line="133"/>
         <source>Operating system says file is not readable</source>
-        <translation type="unfinished"></translation>
+        <translation>운영 체제가 파일을 읽을 수 없다고 말함</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="119"/>
         <source>cannot read newer files from version</source>
-        <translation type="unfinished"></translation>
+        <translation>버전에서 최신 파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="121"/>
         <source>of</source>
-        <translation type="unfinished"></translation>
+        <translation>의</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="140"/>
         <location filename="../src/util/Xml.cpp" line="40"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>파일</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="142"/>
         <source>was not found</source>
-        <translation type="unfinished"></translation>
+        <translation>찾을 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="510"/>
         <source>Cannot read image data</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelAxesChecker.cpp" line="96"/>
         <source>Cannot read axes checker data</source>
-        <translation type="unfinished"></translation>
+        <translation>축 검사기 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelColorFilter.cpp" line="205"/>
         <source>Cannot read filter data</source>
-        <translation type="unfinished"></translation>
+        <translation>필터 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="172"/>
         <source>Cannot read coordinates data</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelDigitizeCurve.cpp" line="108"/>
         <source>Cannot read digitize curve data</source>
-        <translation type="unfinished"></translation>
+        <translation>디지털화 된 곡선 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelExportFormat.cpp" line="203"/>
         <source>Cannot read export data</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGeneral.cpp" line="93"/>
         <source>Cannot read general data</source>
-        <translation type="unfinished"></translation>
+        <translation>일반 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
         <source>Cannot read grid display data</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 표시 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridRemoval.cpp" line="191"/>
         <source>Cannot read grid removal data</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 제거 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelPointMatch.cpp" line="87"/>
         <source>Cannot read point match data</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 일치 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelSegments.cpp" line="91"/>
         <source>Cannot read segment data</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40"/>
         <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and langauge locale. The invalid point name was</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 식별자 오류가 발생했습니다. Engauge 개발자에게 국가 및 언어에 대한 의견이 있으면 알려주십시오. 유효하지 않은 포인트 이름은</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="14"/>
         <source>Commas</source>
-        <translation type="unfinished"></translation>
+        <translation>쉼표</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="17"/>
         <source>Semicolons</source>
-        <translation type="unfinished"></translation>
+        <translation>세미콜론</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="20"/>
         <source>Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>공백</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="23"/>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>탭</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="14"/>
@@ -4658,63 +4750,63 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="17"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>없음</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="20"/>
         <source>Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>단순한</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="26"/>
         <source>Export Image</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 내보내기</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="27"/>
         <source>Cannot export file</source>
-        <translation type="unfinished"></translation>
+        <translation>파일을 내보낼 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportLayoutFunctions.cpp" line="14"/>
         <source>AllPerLine</source>
-        <translation type="unfinished"></translation>
+        <translation>한 줄에 모든</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportLayoutFunctions.cpp" line="17"/>
         <source>OnePerLine</source>
-        <translation type="unfinished"></translation>
+        <translation>한 줄에 하나씩</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="14"/>
         <source>Graph Units</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프 단위</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="17"/>
         <source>Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>픽셀</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="14"/>
         <source>InterpolateAllCurves</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 곡선을 보간하다.</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="17"/>
         <source>InterpolateFirstCurve</source>
-        <translation type="unfinished"></translation>
+        <translation>첫 번째 곡선을 보간하다.</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20"/>
         <source>InterpolatePeriodic</source>
-        <translation type="unfinished"></translation>
+        <translation>주기적으로 보간하다</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="23"/>
         <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="17"/>
         <source>Raw</source>
-        <translation type="unfinished"></translation>
+        <translation>노골적인</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="14"/>
@@ -4724,138 +4816,138 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="31"/>
         <source>Cannot read script file</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="33"/>
         <source>from directory</source>
-        <translation type="unfinished"></translation>
+        <translation>디렉토리에서</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="147"/>
         <source>CurveName</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선 이름</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="162"/>
         <source>FunctionArea</source>
-        <translation type="unfinished"></translation>
+        <translation>기능 영역</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="172"/>
         <source>PolygonArea</source>
-        <translation type="unfinished"></translation>
+        <translation>다각형 영역</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="177"/>
         <location filename="../src/Point/PointShape.cpp" line="29"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="182"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="167"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>색인</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="152"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>거리</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="157"/>
         <source>Percent</source>
-        <translation type="unfinished"></translation>
+        <translation>퍼센트</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="14"/>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>카운트</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="17"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>스타트</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="20"/>
         <source>Step</source>
-        <translation type="unfinished"></translation>
+        <translation>단계</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="23"/>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>중지</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridLineFactory.cpp" line="67"/>
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
-        <translation type="unfinished"></translation>
+        <translation>축 검사기. 이것이 축과 정렬되지 않으면 축 점을 검사해야합니다</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="22"/>
         <source>No cropping</source>
-        <translation type="unfinished"></translation>
+        <translation>자르기 없음</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="23"/>
         <source>Crop pdf files with multiple pages</source>
-        <translation type="unfinished"></translation>
+        <translation>여러 페이지로 PDF 파일 자르기</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="24"/>
         <source>Always crop</source>
-        <translation type="unfinished"></translation>
+        <translation>항상 자르기</translation>
     </message>
     <message>
         <location filename="../src/Line/LineStyle.cpp" line="124"/>
         <source>Cannot read line style data</source>
-        <translation type="unfinished"></translation>
+        <translation>선 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Point/Point.cpp" line="382"/>
         <source>Cannot read point data</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Point/PointIdentifiers.cpp" line="87"/>
         <source>Cannot read point identifiers</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 식별자를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Point/PointShape.cpp" line="14"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>원</translation>
     </message>
     <message>
         <location filename="../src/Point/PointShape.cpp" line="17"/>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>십자가</translation>
     </message>
     <message>
         <location filename="../src/Point/PointShape.cpp" line="20"/>
         <source>Diamond</source>
-        <translation type="unfinished"></translation>
+        <translation>다이아몬드</translation>
     </message>
     <message>
         <location filename="../src/Point/PointShape.cpp" line="23"/>
         <source>Square</source>
-        <translation type="unfinished"></translation>
+        <translation>광장</translation>
     </message>
     <message>
         <location filename="../src/Point/PointShape.cpp" line="26"/>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>삼각형</translation>
     </message>
     <message>
         <location filename="../src/Point/PointStyle.cpp" line="146"/>
         <source>Cannot read point style data</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="198"/>
@@ -4885,97 +4977,97 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="11"/>
         <source>16:1 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>16:1 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="12"/>
         <source>8:1 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>8:1 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="14"/>
         <source>8:1 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>8:1 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="15"/>
         <source>4:1 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>4:1 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="17"/>
         <source>4:1 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>4:1 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="18"/>
         <source>2:1 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>2:1 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="20"/>
         <source>2:1 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>2:1 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="21"/>
         <source>1:1 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>1:1 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="23"/>
         <source>1:1 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>1:1 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="24"/>
         <source>1:2 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>1:2 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="26"/>
         <source>1:2 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>1:2 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="27"/>
         <source>1:4 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>1:4 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="29"/>
         <source>1:4 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>1:4 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="30"/>
         <source>1:8 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>1:8 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="32"/>
         <source>1:8 farther</source>
-        <translation type="unfinished"></translation>
+        <translation>1:8 더 멀리</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="33"/>
         <source>1:16 closer</source>
-        <translation type="unfinished"></translation>
+        <translation>1:16 더 가까운</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="35"/>
         <source>Fill</source>
-        <translation type="unfinished"></translation>
+        <translation>가득 따르다</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="36"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>너무 이른</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1801"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
-        <translation type="unfinished"></translation>
+        <translation>파일이 Windows 명령 행에서 작동하지 않는 다국어 알파벳의 문자를 가지고있는 것으로 보입니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindowModel.cpp" line="109"/>
@@ -5108,14 +5200,16 @@ Values at cursor coordinates. Coordinates are in screen (pixels) or graph units.
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="125"/>
         <source>Select zoom.</source>
-        <translation type="unfinished"></translation>
+        <translation>확대 / 축소 선택</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="126"/>
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>
-        <translation type="unfinished"></translation>
+        <translation>확대 / 축소 선택
+
+확대하여 점을보다 정확하게 배치 할 수 있습니다.</translation>
     </message>
 </context>
 <context>
