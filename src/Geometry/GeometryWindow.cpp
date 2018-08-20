@@ -20,18 +20,6 @@
 #include <QTextStream>
 #include "WindowTable.h"
 
-// Token constraints:
-// (1) should fit nicely into narrow columns. This eliminates details like Forward and Backward in the distance parameter tokens
-// (2) should not have any spaces. This simplifies copying and pasting into spreadsheet programs
-const QString TokenName (QObject::tr ("CurveName:"));
-const QString TokenFunctionArea (QObject::tr ("FunctionArea:"));
-const QString TokenPolygonArea (QObject::tr ("PolygonArea:"));
-const QString TokenX (QObject::tr ("X"));
-const QString TokenY (QObject::tr ("Y"));
-const QString TokenIndex (QObject::tr ("Index"));
-const QString TokenDistanceGraph (QObject::tr ("Distance"));
-const QString TokenDistancePercent (QObject::tr ("Percent"));
-
 GeometryWindow::GeometryWindow (MainWindow *mainWindow) :
   WindowAbstractBase (mainWindow)
 {
@@ -116,16 +104,16 @@ void GeometryWindow::initializeHeader ()
 
   resizeTable (NUM_HEADER_ROWS);
 
-  m_model->setItem (HEADER_ROW_NAME, COLUMN_HEADER_LABEL, new QStandardItem (TokenName));
-  m_model->setItem (HEADER_ROW_FUNC_AREA, COLUMN_HEADER_LABEL, new QStandardItem (TokenFunctionArea));
-  m_model->setItem (HEADER_ROW_POLY_AREA, COLUMN_HEADER_LABEL, new QStandardItem (TokenPolygonArea));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_X, new QStandardItem (TokenX));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_Y, new QStandardItem (TokenY));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_INDEX, new QStandardItem (TokenIndex));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (TokenDistanceGraph));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (TokenDistancePercent));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (TokenDistanceGraph));
-  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (TokenDistancePercent));
+  m_model->setItem (HEADER_ROW_NAME, COLUMN_HEADER_LABEL, new QStandardItem (tokenCurveName ()));
+  m_model->setItem (HEADER_ROW_FUNC_AREA, COLUMN_HEADER_LABEL, new QStandardItem (tokenFunctionArea ()));
+  m_model->setItem (HEADER_ROW_POLY_AREA, COLUMN_HEADER_LABEL, new QStandardItem (tokenPolygonArea ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_X, new QStandardItem (tokenX ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_Y, new QStandardItem (tokenY ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_INDEX, new QStandardItem (tokenIndex ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_GRAPH_FORWARD, new QStandardItem (tokenDistanceGraph ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_PERCENT_FORWARD, new QStandardItem (tokenDistancePercent ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (tokenDistanceGraph ()));
+  m_model->setItem (HEADER_ROW_COLUMN_NAMES, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (tokenDistancePercent ()));
 }
 
 void GeometryWindow::loadStrategies ()
@@ -152,6 +140,46 @@ void GeometryWindow::slotPointHoverEnter (QString pointIdentifier)
 void GeometryWindow::slotPointHoverLeave (QString /* pointIdentifier */)
 {
   m_model->setCurrentPointIdentifier ("");
+}
+
+QString GeometryWindow::tokenCurveName () const
+{
+  return QString ("%1:").arg (QObject::tr ("CurveName"));
+}
+
+QString GeometryWindow::tokenDistanceGraph () const
+{
+  return QObject::tr ("Distance");
+}
+
+QString GeometryWindow::tokenDistancePercent () const
+{
+  return QObject::tr ("Percent");
+}
+
+QString GeometryWindow::tokenFunctionArea () const
+{
+  return QString ("%1:").arg (QObject::tr ("FunctionArea"));
+}
+
+QString GeometryWindow::tokenIndex () const
+{
+  return QObject::tr ("Index");
+}
+
+QString GeometryWindow::tokenPolygonArea () const
+{
+  return QString ("%1:").arg (QObject::tr ("PolygonArea"));
+}
+
+QString GeometryWindow::tokenX () const
+{
+  return QObject::tr ("X");
+}
+
+QString GeometryWindow::tokenY () const
+{
+  return QObject::tr ("Y");
 }
 
 void GeometryWindow::unselectAll ()

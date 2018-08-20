@@ -81,7 +81,7 @@ void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &ro
   connect (m_chkRemoveGridLines, SIGNAL (stateChanged (int)), this, SLOT (slotRemoveGridLines (int)));
   layout->addWidget (m_chkRemoveGridLines, row++, 1, 1, 3);
 
-  QLabel *labelCloseDistance = new QLabel (tr ("Close distance (pixels):"));
+  QLabel *labelCloseDistance = new QLabel (QString ("%1:").arg (tr ("Close distance (pixels)")));
   layout->addWidget (labelCloseDistance, row, 2);
 
   m_editCloseDistance = new QLineEdit;
@@ -112,7 +112,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupX->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableX = new QComboBox;
@@ -131,7 +131,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_cmbDisableX, SIGNAL (activated (const QString &)), this, SLOT (slotDisableX (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountX = new QLineEdit;
@@ -142,7 +142,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartX = new QLineEdit;
@@ -153,7 +153,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepX = new QLineEdit;
@@ -164,7 +164,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopX = new QLineEdit;
@@ -190,7 +190,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupY->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableY = new QComboBox;
@@ -209,7 +209,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_cmbDisableY, SIGNAL (activated (const QString &)), this, SLOT (slotDisableY (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountY = new QLineEdit;
@@ -220,7 +220,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartY = new QLineEdit;
@@ -231,7 +231,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepY = new QLineEdit;
@@ -242,7 +242,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopY = new QLineEdit;

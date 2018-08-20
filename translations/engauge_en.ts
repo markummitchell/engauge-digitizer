@@ -91,11 +91,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107"/>
-        <source>The coordinates are defined by creating axis points:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108"/>
         <source>Add first of three axis points.</source>
         <translation type="unfinished"></translation>
@@ -158,8 +153,13 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107"/>
+        <source>The coordinates are defined by creating axis points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137"/>
-        <source>Points are digitized along each curve:</source>
+        <source>Points are digitized along each curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -537,11 +537,6 @@ The original document can be sent as part of the error report, which increases t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49"/>
-        <source>Coordinate System Count:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="55"/>
         <source>Coordinate System Count
 
@@ -549,8 +544,13 @@ Specifies the total number of coordinate systems that will be used in the import
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49"/>
+        <source>Coordinate System Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63"/>
-        <source>Graph Coordinates Definition:</source>
+        <source>Graph Coordinates Definition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -631,7 +631,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="77"/>
-        <source>Page:</source>
+        <source>Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -725,7 +725,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="95"/>
-        <source>Line color:</source>
+        <source>Line color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -752,18 +752,18 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="62"/>
-        <source>Curve Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="62"/>
+        <source>Curve Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70"/>
-        <source>Filter mode:</source>
+        <source>Filter mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -836,7 +836,7 @@ The Value component is also called the Lightness.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="214"/>
-        <source>Date/Time:</source>
+        <source>Date/Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -893,7 +893,18 @@ Polar coordinates are not allowed with log scale for Theta</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="276"/>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="311"/>
-        <source>Scale:</source>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="291"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="336"/>
+        <source>Units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319"/>
+        <source>Origin radius value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -923,19 +934,8 @@ Log scale is not allowed for the Theta coordinate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="291"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="336"/>
-        <source>Units:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315"/>
         <source>Specifies linear scale for the Y or R coordinate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319"/>
-        <source>Origin radius value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1030,7 +1030,7 @@ There must always be at least one curve</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="89"/>
-        <source>Curve Names:</source>
+        <source>Curve Names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1092,11 +1092,6 @@ Reorder curves by dragging them around.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88"/>
-        <source>Curve Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92"/>
         <source>Name of the curve that is currently selected for editing</source>
         <translation type="unfinished"></translation>
@@ -1107,11 +1102,6 @@ Reorder curves by dragging them around.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108"/>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112"/>
         <source>Select a width for the lines drawn between points.
 
@@ -1119,21 +1109,10 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118"/>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203"/>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122"/>
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128"/>
-        <source>Connect as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1157,18 +1136,8 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162"/>
-        <source>Shape:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="166"/>
         <source>Select a shape for the points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182"/>
-        <source>Radius:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1177,8 +1146,39 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88"/>
+        <source>Curve Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108"/>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203"/>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128"/>
+        <source>Connect as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162"/>
+        <source>Shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182"/>
+        <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="191"/>
-        <source>Line width:</source>
+        <source>Line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1228,11 +1228,6 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73"/>
-        <source>Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76"/>
         <source>Standard cross</source>
         <translation type="unfinished"></translation>
@@ -1254,7 +1249,17 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="86"/>
-        <source>Size (pixels):</source>
+        <source>Size (pixels)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99"/>
+        <source>Inner radius (pixels)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108"/>
+        <source>Line width (pixels)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1263,18 +1268,13 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99"/>
-        <source>Inner radius (pixels):</source>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73"/>
+        <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104"/>
         <source>Radius of circle at the center of the cursor that will remain empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108"/>
-        <source>Line width (pixels):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1442,7 +1442,17 @@ The order of the curves here does not affect the order in the exported file. Tha
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213"/>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="350"/>
-        <source>Interval:</source>
+        <source>Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="451"/>
+        <source>X Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="453"/>
+        <source>Theta Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1571,16 +1581,6 @@ Controls for specifying the format of relations during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="451"/>
-        <source>X Label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="453"/>
-        <source>Theta Label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="459"/>
         <source>Label in the header for x values</source>
         <translation type="unfinished"></translation>
@@ -1605,7 +1605,7 @@ Controls for specifying the format of relations during export</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47"/>
-        <source>Effective cursor size (pixels):</source>
+        <source>Effective cursor size (pixels)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1619,7 +1619,7 @@ This parameter is used in the Color Picker and Point Match modes</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="59"/>
-        <source>Extra precision (digits):</source>
+        <source>Extra precision (digits)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1650,19 +1650,8 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="65"/>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="69"/>
         <source>Select a color for the lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="91"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167"/>
-        <source>Disable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1673,22 +1662,10 @@ The X grid lines are specified using only three values at a time. For flexibilit
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186"/>
-        <source>Count:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="123"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="199"/>
-        <source>Start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1699,12 +1676,6 @@ The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="134"/>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="210"/>
-        <source>Step:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="138"/>
         <source>Difference in value between two successive X grid lines.
 
@@ -1712,9 +1683,38 @@ The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="65"/>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167"/>
+        <source>Disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186"/>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="199"/>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="210"/>
+        <source>Step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="145"/>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="221"/>
-        <source>Stop:</source>
+        <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1826,7 +1826,7 @@ This option is only available when the axis points have all been defined.</sourc
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="84"/>
-        <source>Close distance (pixels):</source>
+        <source>Close distance (pixels)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1851,7 +1851,31 @@ This value cannot be negative. A zero value disables this feature. Decimal value
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="115"/>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193"/>
-        <source>Disable:</source>
+        <source>Disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="134"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="212"/>
+        <source>Count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="145"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="223"/>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234"/>
+        <source>Step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167"/>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245"/>
+        <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1862,22 +1886,10 @@ The X grid lines are specified using only three values at a time. For flexibilit
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="134"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="212"/>
-        <source>Count:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="138"/>
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="145"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="223"/>
-        <source>Start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1888,22 +1900,10 @@ The start value cannot be greater than the stop value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234"/>
-        <source>Step:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160"/>
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167"/>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245"/>
-        <source>Stop:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1967,11 +1967,6 @@ The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65"/>
-        <source>Initial zoom:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80"/>
         <source>Initial Zoom
 
@@ -1979,8 +1974,13 @@ Select the initial zoom factor when a new document is loaded. Either the previou
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65"/>
+        <source>Initial zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86"/>
-        <source>Zoom control:</source>
+        <source>Zoom control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2012,7 +2012,52 @@ Select which inputs are used to zoom in and out.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99"/>
-        <source>Locale:</source>
+        <source>Locale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124"/>
+        <source>Import cropping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141"/>
+        <source>Import PDF resolution (dots per inch)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160"/>
+        <source>Maximum grid lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172"/>
+        <source>Highlight opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184"/>
+        <source>Recent file list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195"/>
+        <source>Include title bar path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205"/>
+        <source>Allow small dialogs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215"/>
+        <source>Allow drag and drop export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228"/>
+        <source>Significant digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2025,22 +2070,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124"/>
-        <source>Import cropping:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
 
 This setting only has an effect when Engauge has been built with support for pdf files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141"/>
-        <source>Import PDF resolution (dots per inch):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2051,11 +2086,6 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160"/>
-        <source>Maximum grid lines:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
         <source>Maximum Grid Lines
 
@@ -2063,20 +2093,10 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172"/>
-        <source>Highlight opacity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178"/>
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184"/>
-        <source>Recent file list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2092,20 +2112,10 @@ Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195"/>
-        <source>Include title bar path:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205"/>
-        <source>Allow small dialogs:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2116,22 +2126,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215"/>
-        <source>Allow drag and drop export:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="220"/>
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
 
 When drag and drop is disabled, a rectangular set of table cells can be selected using click and drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click then Shift+Click, since click and drag starts the drag operation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228"/>
-        <source>Significant digits:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2151,7 +2151,7 @@ Number of digits of precision in floating point numbers. This value affects calc
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83"/>
-        <source>Maximum point size (pixels):</source>
+        <source>Maximum point size (pixels)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2167,7 +2167,17 @@ This value has a lower limit</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98"/>
-        <source>Accepted point color:</source>
+        <source>Accepted point color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107"/>
+        <source>Rejected point color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116"/>
+        <source>Candidate point color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2176,18 +2186,8 @@ This value has a lower limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107"/>
-        <source>Rejected point color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111"/>
         <source>Select a color for matched points that are rejected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116"/>
-        <source>Candidate point color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2217,7 +2217,7 @@ The points are separated by the point separation value, and the maximum point si
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="78"/>
-        <source>Minimum length (points):</source>
+        <source>Minimum length (points)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2231,7 +2231,7 @@ This value should be as large as possible to reduce memory usage. This value has
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90"/>
-        <source>Point separation (pixels):</source>
+        <source>Point separation (pixels)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2245,7 +2245,17 @@ This value has a lower limit</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103"/>
-        <source>Fill corners:</source>
+        <source>Fill corners</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114"/>
+        <source>Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123"/>
+        <source>Line color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2256,18 +2266,8 @@ In addition to the points placed at regular intervals, this option causes a poin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114"/>
-        <source>Line width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118"/>
         <source>Select a size for the lines drawn along a segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123"/>
-        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2304,23 +2304,8 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="128"/>
-        <source>Order:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="153"/>
-        <source>Mean square error:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="158"/>
         <source>Calculated mean square error statistic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Fitting/FittingWindow.cpp" line="161"/>
-        <source>Root mean square:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2329,8 +2314,23 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Fitting/FittingWindow.cpp" line="128"/>
+        <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Fitting/FittingWindow.cpp" line="153"/>
+        <source>Mean square error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Fitting/FittingWindow.cpp" line="161"/>
+        <source>Root mean square</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="169"/>
-        <source>R squared:</source>
+        <source>R squared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2362,13 +2362,13 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 <context>
     <name>GeometryWindow</name>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="40"/>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="41"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="28"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="29"/>
         <source>Geometry Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="42"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="30"/>
         <source>Geometry Window
 
 This table displays the following geometry data for the currently selected curve:
@@ -3996,7 +3996,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2152"/>
-        <source>File not found:</source>
+        <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4602,43 +4602,43 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="26"/>
-        <source>CurveName:</source>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="147"/>
+        <source>CurveName</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="27"/>
-        <source>FunctionArea:</source>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="162"/>
+        <source>FunctionArea</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="28"/>
-        <source>PolygonArea:</source>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="172"/>
+        <source>PolygonArea</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="29"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="177"/>
         <location filename="../src/Point/PointShape.cpp" line="29"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="30"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="182"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="31"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="167"/>
         <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="32"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="152"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="33"/>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="157"/>
         <source>Percent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4725,21 +4725,6 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Point/PointStyle.cpp" line="146"/>
         <source>Cannot read point style data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="20"/>
-        <source>Coordinates (pixels):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="21"/>
-        <source>Coordinates (graph):</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="22"/>
-        <source>Resolution (graph):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4948,40 +4933,55 @@ Do you want to save your changes?</source>
         <source>Error reading xml</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="198"/>
+        <source>Coordinates (pixels)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="193"/>
+        <source>Coordinates (graph)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="203"/>
+        <source>Resolution (graph)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StatusBar</name>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="60"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="56"/>
         <source>Select cursor coordinate values to display.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="61"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="57"/>
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="74"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="70"/>
         <source>Cursor coordinate values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="75"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="71"/>
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="129"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="125"/>
         <source>Select zoom.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="130"/>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="126"/>
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>

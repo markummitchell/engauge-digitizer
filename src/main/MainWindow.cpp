@@ -2149,7 +2149,7 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
 
     QMessageBox::critical (this,
                            engaugeWindowTitle(),
-                           tr ("File not found:") + " " + fileInfo.absoluteFilePath());
+                           tr ("File not found") + ": " + fileInfo.absoluteFilePath());
     exit (-1);
   }
 

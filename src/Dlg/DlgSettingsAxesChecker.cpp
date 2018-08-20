@@ -92,7 +92,7 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   m_groupMode->addButton (m_btnForever);
   connect (m_groupMode, SIGNAL (buttonReleased (QAbstractButton*)), this, SLOT (slotGroupMode (QAbstractButton*)));
 
-  QLabel *labelLineColor = new QLabel (tr ("Line color:"));
+  QLabel *labelLineColor = new QLabel (QString ("%1:").arg (tr ("Line color")));
   layout->addWidget (labelLineColor, row, 1);
 
   m_cmbLineColor = new QComboBox;

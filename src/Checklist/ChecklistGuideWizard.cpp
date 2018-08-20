@@ -104,7 +104,7 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
   str << "<style type='text/css'>li { margin-top: 10px 0; }</style>";
 
   str << "<p>" << tr ("Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.");
-  str << "<p>" << tr ("The coordinates are defined by creating axis points:") << "</p>\n";
+  str << "<p>" << tr ("The coordinates are defined by creating axis points") << ":</p>\n";
   str << "<p>" << TAG_ANCHOR_AXIS_1 << "&nbsp;" << tr ("Add first of three axis points.") << " " << TAG_AHREF_AXIS_1 << "</p>\n";
   str << TAG_DIV_AXIS_START_1;
   str << "<ul>\n";
@@ -134,7 +134,7 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
   str << TAG_DIV_AXIS_END_3;
 
   str << "<p>&nbsp;</p>\n";
-  str << "<p>" << tr ("Points are digitized along each curve:") << "</p>\n";
+  str << "<p>" << tr ("Points are digitized along each curve") << ":</p>\n";
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 

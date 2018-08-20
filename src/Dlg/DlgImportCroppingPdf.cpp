@@ -74,7 +74,7 @@ void DlgImportCroppingPdf::createPageSpinner (QGridLayout *layout,
 
   const int MIN_WIDTH_SPINNER = 90;
 
-  QLabel *labelPage = new QLabel (tr ("Page:"));
+  QLabel *labelPage = new QLabel (QString ("%1:").arg (tr ("Page")));
   layout->addWidget (labelPage, row, 1, 1, 1);
 
   m_spinPage = new QSpinBox;

@@ -210,7 +210,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel (tr ("Interval:"));
+  QLabel *labelInterval = new QLabel (QString ("%1:").arg (tr ("Interval")));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
@@ -347,7 +347,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel (tr ("Interval:"));
+  QLabel *labelInterval = new QLabel (QString ("%1:").arg (tr ("Interval")));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
@@ -448,9 +448,9 @@ void DlgSettingsExportFormat::createXLabel (QGridLayout *layoutHeader,
 
   QLabel *title;
   if (true) {
-    title = new QLabel (tr ("X Label:"));
+    title = new QLabel (QString ("%1:").arg (tr ("X Label")));
   } else {
-    title = new QLabel (tr ("Theta Label:"));
+    title = new QLabel (QString ("%1:").arg (tr ("Theta Label")));
   }
   layoutHeader->addWidget (title, row++, colLabel, 1, 1);
 

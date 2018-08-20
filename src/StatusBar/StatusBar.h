@@ -75,6 +75,9 @@ private:
   void createGroupUnits ();
   void createZoom ();
   void createZoomMaps ();
+  QString labelCoordsGraph () const; // Return string initialized after QTranslator has become available
+  QString labelCoordsScreen () const; // Return string initialized after QTranslator has become available
+  QString labelResolutionGraph () const; // Return string initialized after QTranslator has become available
   void updateCoordsText ();
 
   enum StatusBarUnits {

@@ -67,6 +67,21 @@ private:
   void initializeHeader();
   void loadStrategies ();
   void resizeTable (int rowCount);
+
+  // String constants that get translated, by wrapper functions, after QTranslator has been set up.
+  //
+  // Token constraints:
+  // (1) should fit nicely into narrow columns. This eliminates details like Forward and Backward in the distance parameter tokens
+  // (2) should not have any spaces. This simplifies copying and pasting into spreadsheet programs
+  QString tokenCurveName () const;
+  QString tokenDistanceGraph () const;
+  QString tokenDistancePercent () const;
+  QString tokenFunctionArea () const;
+  QString tokenIndex () const;
+  QString tokenPolygonArea () const;
+  QString tokenX () const;
+  QString tokenY () const;
+
   void unselectAll (); // Unselect all cells. This cleans up nicely when Document is closed
 
   enum ColumnsHeader {
