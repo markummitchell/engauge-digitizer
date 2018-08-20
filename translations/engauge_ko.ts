@@ -7,7 +7,7 @@
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="20"/>
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="21"/>
         <source>Checklist Guide</source>
-        <translation type="unfinished"></translation>
+        <translation>체크리스트 가이드</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="22"/>
@@ -16,7 +16,11 @@
 This box contains a checklist of steps suggested by the Checklist Guide Wizard. Following these steps should produce a set of digitized points in an output file.
 
 To run the Checklist Guide Wizard when an image file is imported, select the Help / Checklist Wizard menu option.</source>
-        <translation type="unfinished"></translation>
+        <translation>체크리스트 가이드
+
+이 상자에는 검사 목록 가이드 마법사에서 제안한 단계의 검사 목록이 있습니다. 이 단계를 따르면 출력 파일에 디지털화 된 점 집합이 생성됩니다.
+
+이미지 파일을 가져올 때 검사 목록 가이드 마법사를 실행하려면 도움말 / 검사 목록 마법사 메뉴 옵션을 선택하십시오.</translation>
     </message>
 </context>
 <context>
@@ -24,7 +28,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="15"/>
         <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color=&quot;red&quot;&gt;Why does the imported image look different?&lt;/font&gt; After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -32,37 +36,37 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="21"/>
         <source>Curve name. Empty if unused.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 이름. 사용하지 않으면 비워 둡니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="22"/>
         <source>Draw lines between points in each curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>각 곡선의 점 사이에 선을 그립니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="23"/>
         <source>Draw points in each curve, without lines between the points.</source>
-        <translation type="unfinished"></translation>
+        <translation>점 사이의 선없이 각 곡선에 점을 그립니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="25"/>
         <source>&lt;p&gt;What are the names of the curves that are to be digitized? At least one entry is required.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;디지털화 할 곡선의 이름은 무엇입니까? 하나 이상의 항목이 필요합니다.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="44"/>
         <source>&lt;p&gt;How are those curves drawn?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>그 커브는 어떻게 그려져 있습니까?</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="46"/>
         <source>With lines (with or without points)</source>
-        <translation type="unfinished"></translation>
+        <translation>선 (점이 있거나 없음)</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="48"/>
         <source>With points only (no lines between points)</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 만있는 경우 (포인트 사이에 선이 없음)</translation>
     </message>
 </context>
 <context>
@@ -78,22 +82,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29"/>
         <source>Checklist Guide Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>검사 목록 가이드 마법사</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62"/>
         <source>Curves</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106"/>
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>다음 단계에 따라 이미지를 디지털화하십시오. 각 단계는 완료되면 확인을 표시합니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108"/>
         <source>Add first of three axis points.</source>
-        <translation type="unfinished"></translation>
+        <translation>세 축의 첫 번째 점을 추가하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
@@ -102,26 +106,26 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
         <source>Click on</source>
-        <translation type="unfinished"></translation>
+        <translation>클릭</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
         <source>for &lt;b&gt;Axis Points&lt;/b&gt; mode</source>
-        <translation type="unfinished"></translation>
+        <translation>축 포인트 모드</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112"/>
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>축 눈금 표시 또는 레이블이있는 좌표가있는 두 개의 그리드 선의 교차를 클릭합니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131"/>
         <source>Enter the coordinates of the axis point</source>
-        <translation type="unfinished"></translation>
+        <translation>축점의 좌표를 입력하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114"/>
@@ -130,149 +134,149 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213"/>
         <source>Click on Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>확인을 클릭하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117"/>
         <source>Add second of three axis points.</source>
-        <translation type="unfinished"></translation>
+        <translation>세 축의 두 번째 점을 추가하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121"/>
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
-        <translation type="unfinished"></translation>
+        <translation>축 눈금 표시 또는 두 개의 그리드 선의 교차점을 다른 축 점에서 떨어진 레이블이있는 좌표로 클릭하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126"/>
         <source>Add third of three axis points.</source>
-        <translation type="unfinished"></translation>
+        <translation>세 축 포인트 중 세 번째를 추가하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130"/>
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
-        <translation type="unfinished"></translation>
+        <translation>축 눈금 표시 또는 다른 축 지점에서 떨어진 레이블이있는 좌표로 두 개의 그리드 선의 교차를 클릭하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107"/>
         <source>The coordinates are defined by creating axis points</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표는 축 지점을 작성하여 정의됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137"/>
         <source>Points are digitized along each curve</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트는 각 곡선을 따라 디지털화됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149"/>
         <source>Add points for curve</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선에 점 추가</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
         <source>for &lt;b&gt;Segment Fill&lt;/b&gt; mode</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 모드</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>Select curve</source>
-        <translation type="unfinished"></translation>
+        <translation>곡선 선택</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>in the drop-down list</source>
-        <translation type="unfinished"></translation>
+        <translation>드롭 다운 목록에서</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157"/>
         <source>Move the cursor over the curve. If a line does not appear then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 위로 커서를 이동하십시오. 선이 나타나지 않으면이 곡선의 색상 필터 설정을 조정하십시오</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159"/>
         <source>Move the cursor over the curve again. When the &lt;b&gt;Segment Fill&lt;/b&gt; line appears, click on it to generate points</source>
-        <translation type="unfinished"></translation>
+        <translation>커서를 다시 커브 위로 이동하십시오. 세그먼트 채우기 선이 나타나면 클릭하여 점을 생성합니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
         <source>for &lt;b&gt;Point Match&lt;/b&gt; mode</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 매치 모드</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166"/>
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
-        <translation type="unfinished"></translation>
+        <translation>커브의 일반 지점 위로 커서를 이동하십시오. 커서 원이 색상을 변경하지 않으면이 곡선의 색상 필터 설정을 조정하십시오</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169"/>
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
-        <translation type="unfinished"></translation>
+        <translation>커브의 일반 지점 위로 커서를 다시 이동하십시오. 점을 클릭하여 점을 일치시킵니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170"/>
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
-        <translation type="unfinished"></translation>
+        <translation>Engauge가 후보 지점을 표시합니다. 후보 지점을 수락하려면 오른쪽 화살표 키를 누릅니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171"/>
         <source>The previous step repeats until you select a different mode</source>
-        <translation type="unfinished"></translation>
+        <translation>이전 단계는 다른 모드를 선택할 때까지 반복됩니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179"/>
         <source>The digitized points can be exported</source>
-        <translation type="unfinished"></translation>
+        <translation>디지털화 된 포인트를 내보낼 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180"/>
         <source>Export the points to a file</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트를 파일로 내보내기</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183"/>
         <source>Select menu option &lt;b&gt;File / Export&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴 옵션 파일 / 내보내기 선택</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184"/>
         <source>Enter the file name</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 이름을 입력하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186"/>
         <source>Congratulations!</source>
-        <translation type="unfinished"></translation>
+        <translation>축하해!</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191"/>
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
-        <translation type="unfinished"></translation>
+        <translation>힌트 - 원본 이미지와 필터링 된 이미지간에 배경 이미지를 전환 할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194"/>
         <source>Select menu option &lt;b&gt;View / Background / Show Original Image&lt;/b&gt; to see the original image</source>
-        <translation type="unfinished"></translation>
+        <translation>원본 이미지를 보려면 메뉴 옵션보기 / 배경 / 원본 이미지 표시를 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195"/>
         <source>Select menu option &lt;b&gt;View / Background / Show Filtered Image&lt;/b&gt; to see the image from &lt;b&gt;Color Filter&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>색상 필터에서 이미지를 보려면 메뉴 옵션보기 / 배경 / 필터링 된 이미지보기를 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
         <source>Select menu option &lt;b&gt;Settings / Color Filter&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴 옵션 설정 / 색상 필터 선택</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211"/>
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
-        <translation type="unfinished"></translation>
+        <translation>필터링 방법을 선택하십시오. 색상이 다른 경우 색조가 가장 좋습니다.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212"/>
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
-        <translation type="unfinished"></translation>
+        <translation>그린 버튼을 미리보기 창에서 쉽게 볼 수있을 때까지 앞뒤로 미십시오.</translation>
     </message>
 </context>
 <context>
@@ -2439,7 +2443,7 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/main/MainWindow.cpp" line="395"/>
         <source>Select Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>도구를 고르시 오</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="396"/>
@@ -2449,19 +2453,21 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/main/MainWindow.cpp" line="398"/>
         <source>Select points on screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>화면상의 점 선택</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="399"/>
         <source>Select
 
 Select points on the screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>고르다
+
+화면에서 포인트를 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="403"/>
         <source>Axis Point Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>축 포인트 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="404"/>
@@ -2471,19 +2477,21 @@ Select points on the screen.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="406"/>
         <source>Digitize axis points for a graph.</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프의 축 지점을 디지타이징합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="407"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>축점 디지타이징
+
+마우스 클릭 후 커서에 새로운 점을 배치하여 그래프에 대한 축 점을 디지타이징합니다. 그런 다음 축 포인트의 좌표가 입력됩니다. 그래프에서 그래프 좌표를 정의하려면 세 축의 점이 필요합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="414"/>
         <source>Scale Bar Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>스케일 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="415"/>
@@ -2493,7 +2501,7 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
     <message>
         <location filename="../src/main/MainWindow.cpp" line="417"/>
         <source>Digitize scale bar for a map.</source>
-        <translation type="unfinished"></translation>
+        <translation>지도의 스케일 막대를 디지타이징합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="418"/>
@@ -2502,12 +2510,16 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
 
 Maps must be imported using Import (Advanced).</source>
-        <translation type="unfinished"></translation>
+        <translation>스케일 바 디지털화
+
+클릭하고 드래그하여지도의 눈금 막대를 디지타이징합니다. 그러면 눈금 막대의 길이가 입력됩니다. 지도에서 축척 막대의 두 끝점은 그래프 좌표의 거리를 정의합니다.
+
+가져 오기 (고급)를 사용하여지도를 가져와야합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="425"/>
         <source>Curve Point Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 포인트 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="426"/>
@@ -2517,7 +2529,7 @@ Maps must be imported using Import (Advanced).</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="428"/>
         <source>Digitize curve points.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 점을 디지타이징합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="429"/>
@@ -2526,12 +2538,16 @@ Maps must be imported using Import (Advanced).</source>
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 포인트 디지털화
+
+마우스 클릭 후 커서에 새로운 점을 배치하여 곡선 점을 디지털화합니다. 곡선을 따라 점을 하나씩 디지털화하려면이 모드를 사용하십시오.
+
+새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="436"/>
         <source>Point Match Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 매치 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="437"/>
@@ -2541,7 +2557,7 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="439"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트를 일치시켜 점 플롯의 곡선 점을 디지타이징합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="440"/>
@@ -2550,12 +2566,16 @@ New points will be assigned to the currently selected curve.</source>
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 매칭을 통해 커브 포인트 디지타이징
+
+샘플 점과 일치하는 점을 찾아 포인트 플롯의 곡선 점을 디지털화합니다. 이 프로세스는 대표 샘플 포인트를 선택하여 시작합니다.
+
+새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="446"/>
         <source>Color Picker Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>색상 선택 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="447"/>
@@ -2565,19 +2585,21 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="449"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 모드에서 필터링을위한 색상 설정을 선택하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="450"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 필터링에 대한 색상 설정 선택
+
+현재 선택된 커브를 따라 픽셀을 선택하십시오. 이 픽셀과 그 이웃은 세그먼트 채우기 모드에서 현재 선택된 곡선의 필터 설정 (색, 밝기 등)을 정의합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="456"/>
         <source>Segment Fill Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 도구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="457"/>
@@ -2587,7 +2609,7 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
     <message>
         <location filename="../src/main/MainWindow.cpp" line="459"/>
         <source>Digitize curve points along a segment of a curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브의 세그먼트를 따라 커브 점을 디지타이징합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="460"/>
@@ -2596,148 +2618,168 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기로 커브 포인트 디지타이징
+
+강조 표시된 세그먼트를 따라 커서 아래에 새 점을 배치하여 곡선 점을 디지털화합니다. 이 모드를 사용하면 한 번의 클릭으로 곡선을 따라 여러 점을 빠르게 디지털화 할 수 있습니다.
+
+새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="481"/>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>끄르다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="483"/>
         <source>Undo the last operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>마지막 작업 취소</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="484"/>
         <source>Undo
 
 Undo the last operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>끄르다
+
+마지막 작업을 취소하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="488"/>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>다시 하다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="490"/>
         <source>Redo the last operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>마지막 작업 다시 실행</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="491"/>
         <source>Redo
 
 Redo the last operation.</source>
-        <translation type="unfinished"></translation>
+        <translation>다시 하다
+
+마지막 작업 다시 실행</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="495"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>절단</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="497"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 점을 잘라내어 클립 보드에 복사합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="498"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>절단
+
+선택한 점을 잘라내어 클립 보드에 복사합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="502"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>부</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="504"/>
         <source>Copies the selected points to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 점을 클립 보드에 복사합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="505"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>부
+
+선택한 점을 클립 보드에 복사합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="509"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>풀</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="511"/>
         <source>Pastes the selected points from the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 점을 클립 보드에서 붙여 넣습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="512"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>풀
+
+선택한 점을 클립 보드에서 붙여 넣습니다. 그것들은 현재 곡선에 할당됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="516"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>지우다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="518"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>클립 보드에 복사 한 후 선택한 포인트를 삭제합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="519"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>지우다
+
+클립 보드에 복사 한 후 선택한 포인트를 삭제합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="523"/>
         <source>Paste As New</source>
-        <translation type="unfinished"></translation>
+        <translation>새 항목으로 붙여 넣기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="524"/>
         <source>Pastes an image from the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>클립 보드에서 이미지를 붙여 넣습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="525"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>새 항목으로 붙여 넣기
+
+클립 보드에서 이미지를 붙여 넣어 새 문서를 만듭니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="529"/>
         <source>Paste As New (Advanced)...</source>
-        <translation type="unfinished"></translation>
+        <translation>새로 붙여 넣기 (고급)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="530"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 모드에서 클립 보드의 이미지를 붙여 넣습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="531"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>새로 붙여 넣기 (고급)
+
+고급 모드에서 클립 보드의 이미지를 붙여 넣어 새 문서를 만듭니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="540"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>수입</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="541"/>
@@ -2747,7 +2789,7 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
     <message>
         <location filename="../src/main/MainWindow.cpp" line="542"/>
         <source>Creates a new document by importing an simple image.</source>
-        <translation type="unfinished"></translation>
+        <translation>간단한 이미지를 가져와 새 문서를 만듭니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="543"/>
@@ -2756,114 +2798,130 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
 
 For more complicated images with multiple coordinate systems, and/or floating axes, Import (Advanced) is used instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 가져 오기
+
+단일 좌표계와 두 좌표가 알려진 좌표로 이미지를 가져 와서 새 문서를 만듭니다.
+
+여러 좌표계 및 / 또는 부동 축이있는 더 복잡한 이미지의 경우 가져 오기 (고급)가 대신 사용됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="550"/>
         <source>Import (Advanced)...</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오기 (고급)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="551"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
-        <translation type="unfinished"></translation>
+        <translation>고급 기능을 지원하는 이미지를 가져 와서 새 문서를 만듭니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="552"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오기 (고급)
+
+고급 기능을 지원하는 이미지를 가져 와서 새 문서를 만듭니다. 고급 모드에서는 여러 좌표 시스템 및 / 또는 부동 축이있을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="557"/>
         <source>Import (Image Replace)...</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오기 (이미지 바꾸기)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="558"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
-        <translation type="unfinished"></translation>
+        <translation>새 이미지를 현재 문서로 가져 와서 기존 이미지를 바꿉니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="559"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오기 (이미지 바꾸기)
+
+새 이미지를 현재 문서로 가져옵니다. 기존 이미지가 대체되고 문서의 모든 커브가 유지됩니다. 이 작업은 기존 문서의 축 지점 및 기타 설정을 다른 이미지에 적용 할 때 유용합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="565"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>열다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="567"/>
         <source>Opens an existing document.</source>
-        <translation type="unfinished"></translation>
+        <translation>기존 문서를 엽니 다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="568"/>
         <source>Open Document
 
 Opens an existing document.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 열기
+
+기존 문서를 엽니 다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="581"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="583"/>
         <source>Closes the open document.</source>
-        <translation type="unfinished"></translation>
+        <translation>열려있는 문서를 닫습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="584"/>
         <source>Close Document
 
 Closes the open document.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 닫기
+
+열려있는 문서를 닫습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="588"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>구하다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="590"/>
         <source>Saves the current document.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 문서를 저장합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="591"/>
         <source>Save Document
 
 Saves the current document.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 저장
+
+현재 문서를 저장합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="595"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 이름으로 저장</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="597"/>
         <source>Saves the current document under a new filename.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 문서를 새 파일 이름으로 저장합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="598"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
-        <translation type="unfinished"></translation>
+        <translation>다른 이름으로 문서 저장
+
+현재 문서를 새 파일 이름으로 저장합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="602"/>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>수출</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="603"/>
@@ -2873,449 +2931,501 @@ Saves the current document under a new filename.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="604"/>
         <source>Exports the current document into a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 문서를 텍스트 파일로 내 보냅니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="605"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 내보내기
+
+현재 문서를 텍스트 파일로 내 보냅니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="609"/>
         <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>인쇄</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="611"/>
         <source>Print the current document.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 문서를 인쇄하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="612"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 인쇄
+
+현재 문서를 프린터 또는 파일로 인쇄하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="616"/>
         <source>&amp;Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>출구</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="618"/>
         <source>Quits the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>응용 프로그램을 종료합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="619"/>
         <source>Exit
 
 Quits the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>출구
+
+응용 프로그램을 종료합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="628"/>
         <source>Checklist Guide Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>검사 목록 가이드 마법사</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="630"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
-        <translation type="unfinished"></translation>
+        <translation>가져 오는 동안 점검 목록 마법사를 열어 디지털화 단계 정의</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="631"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
-        <translation type="unfinished"></translation>
+        <translation>검사 목록 가이드 마법사
+
+가져 오는 동안 체크리스트 가이드 마법사를 사용하여 가져온 문서에 대한 단계별 체크리스트 생성</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="638"/>
         <source>Tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation>지도 시간</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="639"/>
         <source>Play tutorial showing steps for digitizing curves</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 디지타이징 단계를 보여주는 튜토리얼 재생</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="640"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
-        <translation type="unfinished"></translation>
+        <translation>지도 시간
+
+선 및 / 또는 점으로 그려진 커브에서 점을 디지타이징하는 단계를 보여주는 자습서 재생</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="646"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>도움</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="648"/>
         <source>Help documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말 문서</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="649"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말 문서
+
+검색 가능한 도움말 문서</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="654"/>
         <source>About Engauge</source>
-        <translation type="unfinished"></translation>
+        <translation>Engauge 정보</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="655"/>
         <source>About the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>응용 프로그램 정보</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="656"/>
         <source>About Engauge
 
 About the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Engauge 정보
+
+응용 프로그램 정보</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="664"/>
         <source>Coordinates...</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="665"/>
         <source>Edit Coordinate settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표 설정 편집</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="666"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표 설정
+
+좌표 설정은 그래프 좌표가 이미지의 픽셀에 매핑되는 방법을 결정합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Add/Remove Curve...</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 추가 / 제거</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Add or Remove Curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 추가 또는 제거.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 추가 / 제거
+
+추가 / 제거 커브 설정은 현재 문서에 포함 된 커브를 제어합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
         <source>Curve Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 속성</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="677"/>
         <source>Edit Curve Properties settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 속성 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="678"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 속성 설정
+
+커브 속성 설정에 따라 각 커브의 모양이 결정됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="682"/>
         <source>Digitize Curve...</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 디지타이징</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="683"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>디지타이징 축 및 그래프 커브 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="684"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
-        <translation type="unfinished"></translation>
+        <translation>축 및 그래프 곡선 설정 디지타이징
+
+디지 타이즈 커브 설정은 디지타이징 축 포인트 및 디지타이징 그래프 포인트 모드에서 포인트가 디지털화되는 방법을 결정합니다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="689"/>
         <source>Export Format...</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기 형식</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="690"/>
         <source>Edit Export Format settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기 형식 편집 설정.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="691"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기 형식 설정
+
+내보내기 형식 설정은 내 보낸 파일의 형식에 영향을줍니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="695"/>
         <source>Color Filter...</source>
-        <translation type="unfinished"></translation>
+        <translation>컬러 필터</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="696"/>
         <source>Edit Color Filter settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>색상 필터 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="697"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
-        <translation type="unfinished"></translation>
+        <translation>색상 필터 설정
+
+색상 필터링은 그래프를 단순화하여보다 쉬운 Point Matching 및 Segment Filling</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="701"/>
         <source>Axes Checker...</source>
-        <translation type="unfinished"></translation>
+        <translation>축 검사기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="702"/>
         <source>Edit Axes Checker settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>축 검사기 설정 편집</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="703"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
-        <translation type="unfinished"></translation>
+        <translation>축 검사기 설정
+
+축 검사기는 다른 점 찾기가 어려운 축 지점 실수를 표시 할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="707"/>
         <source>Grid Line Display...</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="708"/>
         <source>Edit Grid Line Display settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선 표시 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="709"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선 표시 설정
+
+그래프에 표시되는 눈금 선은 왜곡 된 그래프의 경우 Axis Checker보다 더 높은 정확도를 제공합니다. 왜곡 된 그래프에서는 그리드 선을 사용하여 다른 지역에서 더 정확한 축 포인트를 조정할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="714"/>
         <source>Grid Line Removal...</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 선 제거</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="715"/>
         <source>Edit Grid Line Removal settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선 제거 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="716"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 선 제거 설정
+
+그리드 선 제거는 컬러 필터가 그리드 선을 곡선 선과 분리 할 수없는 경우보다 쉬운 점 매칭 및 세그먼트 채우기를 위해 곡선 선을 분리합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="721"/>
         <source>Point Match...</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 매치</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="722"/>
         <source>Edit Point Match settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 일치 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="723"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
-        <translation type="unfinished"></translation>
+        <translation>지점 일치 설정
+
+지점 일치 설정은 지점 일치 모드에서 지점 일치 방법을 결정합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="727"/>
         <source>Segment Fill...</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="728"/>
         <source>Edit Segment Fill settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 설정 수정</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="729"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
-        <translation type="unfinished"></translation>
+        <translation>세그먼트 채우기 설정
+
+세그먼트 채우기 설정은 세그먼트 채우기 모드에서 포인트가 생성되는 방식을 결정합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="733"/>
         <source>General...</source>
-        <translation type="unfinished"></translation>
+        <translation>일반</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="734"/>
         <source>Edit General settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>일반 설정 편집.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="735"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
-        <translation type="unfinished"></translation>
+        <translation>일반 설정
+
+일반 설정은 여러 모드에 영향을주는 문서 별 설정입니다. 예를 들어, 커서 크기 설정은 [색상 피커] 및 [포인트 일치] 모드 모두에 영향을줍니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="740"/>
         <source>Main Window...</source>
-        <translation type="unfinished"></translation>
+        <translation>메인 윈도우</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="742"/>
         <source>Edit Main Window settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 창 설정 편집</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="743"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
-        <translation type="unfinished"></translation>
+        <translation>기본 창 설정
+
+기본 창 설정은 사용자 인터페이스에 영향을 미치며 어떤 문서에도 관련되지 않습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="752"/>
         <source>Background Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 툴바</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="755"/>
         <source>Show or hide the background toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 도구 모음을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="756"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 도구 모음보기
+
+배경 도구 모음 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="760"/>
         <source>Checklist Guide Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>점검 목록 가이드 툴바</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="763"/>
         <source>Show or hide the checklist guide.</source>
-        <translation type="unfinished"></translation>
+        <translation>체크리스트 가이드를 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="764"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
-        <translation type="unfinished"></translation>
+        <translation>체크리스트 가이드보기
+
+체크리스트 가이드 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="768"/>
         <source>Curve Fitting Window</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 피팅 윈도우</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="771"/>
         <source>Show or hide the curve fitting window.</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 피팅 윈도우를 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="772"/>
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
-        <translation type="unfinished"></translation>
+        <translation>커브 피팅 윈도우보기
+
+커브 피팅 창 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="776"/>
         <source>Geometry Window</source>
-        <translation type="unfinished"></translation>
+        <translation>기하학 창</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="779"/>
         <source>Show or hide the geometry window.</source>
-        <translation type="unfinished"></translation>
+        <translation>기하학 창을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="780"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
-        <translation type="unfinished"></translation>
+        <translation>기하학 창보기
+
+기하학 창 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="784"/>
         <source>Digitizing Tools Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>디지타이징 도구 툴바</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="787"/>
         <source>Show or hide the digitizing tools toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>디지타이징 도구 모음 표시 또는 숨기기.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="788"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>디지타이징 도구 도구 모음보기
+
+디지타이징 도구 모음 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="792"/>
         <source>Settings Views Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>설정보기 도구 모음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="795"/>
         <source>Show or hide the settings views toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정보기 도구 모음을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="796"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>보기 설정보기 도구 모음
+
+설정보기 도구 모음을 표시하거나 숨 깁니다. 이보기는 그래픽으로 가장 중요한 설정을 보여줍니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="801"/>
         <source>Coordinate System Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표계 도구 모음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="804"/>
         <source>Show or hide the coordinate system toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표계 도구 모음 표시 또는 숨기기.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="805"/>
@@ -3324,85 +3434,95 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
 
 This toolbar is disabled when there is only one coordinate system.</source>
-        <translation type="unfinished"></translation>
+        <translation>좌표계 도구 모음보기
+
+좌표계 선택 도구 모음 표시 또는 숨기기. 이 도구 모음은 문서에 여러 좌표계가있는 경우 현재 좌표계를 선택하는 데 사용됩니다. 이 도구 모음은 모든 좌표계를보고 인쇄하는데도 사용됩니다.
+
+좌표계가 하나만있는 경우이 도구 모음을 사용할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="813"/>
         <source>Tool Tips</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 팁</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="816"/>
         <source>Show or hide the tool tips.</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 설명 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="817"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 팁보기
+
+도구 설명 표시 또는 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="821"/>
         <source>Grid Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="824"/>
         <source>Show or hide grid lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>그리드 선을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="825"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
-        <translation type="unfinished"></translation>
+        <translation>눈금 선보기
+
+축 포인트를 정확하게 조정하기 위해 추가 된 그리드 선을 표시하거나 숨김으로써 왜곡 된 그래프의 정확도를 높일 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="830"/>
         <source>No Background</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 없음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="832"/>
         <source>Do not show the image underneath the points.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 아래에 이미지를 표시하지 마십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="833"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 없음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="836"/>
         <source>Show Original Image</source>
-        <translation type="unfinished"></translation>
+        <translation>원본 이미지 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="838"/>
         <source>Show the original image underneath the points.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 아래에 원본 이미지를 표시하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="839"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
-        <translation type="unfinished"></translation>
+        <translation>원본 이미지 표시
+
+점들 밑에 원본 이미지를 보여라.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="842"/>
         <source>Show Filtered Image</source>
-        <translation type="unfinished"></translation>
+        <translation>필터링 된 이미지 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="845"/>
         <source>Show the filtered image underneath the points.</source>
-        <translation type="unfinished"></translation>
+        <translation>포인트 아래에 필터링 된 이미지를 표시하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="846"/>
@@ -3411,103 +3531,113 @@ Show the original image underneath the points</source>
 Show the filtered image underneath the points.
 
 The filtered image is created from the original image according to the Filter preferences so unimportant information is hidden and important information is emphasized</source>
-        <translation type="unfinished"></translation>
+        <translation>필터링 된 이미지 표시
+
+포인트 아래에 필터링 된 이미지를 표시하십시오.
+
+필터링 된 이미지는 필터 환경 설정에 따라 원본 이미지에서 만들어 지므로 중요하지 않은 정보가 숨겨지고 중요한 정보가 강조됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="852"/>
         <source>Hide All Curves</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 커브 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="854"/>
         <source>Hide all digitized curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 디지털화 된 커브 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="855"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 커브 숨기기
+
+축 점이나 디지털화 된 그래프 커브가 표시되지 않으므로 이미지를보다 쉽게 ​​볼 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="858"/>
         <source>Show Selected Curve</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 곡선 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="860"/>
         <source>Show only the currently selected curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>현재 선택된 커브 만 표시합니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="861"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
-        <translation type="unfinished"></translation>
+        <translation>선택한 곡선 표시
+
+현재 선택된 커브에 속한 디지털화 된 점과 선만 표시하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="864"/>
         <source>Show All Curves</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 커브보기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="867"/>
         <source>Show all curves.</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 커브보기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="868"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
-        <translation type="unfinished"></translation>
+        <translation>모든 커브 표시
+
+모든 디지털화 된 축 지점 및 그래프 커브 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="883"/>
         <source>Hide Always</source>
-        <translation type="unfinished"></translation>
+        <translation>항상 숨기기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="885"/>
         <source>Always hide the status bar.</source>
-        <translation type="unfinished"></translation>
+        <translation>항상 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="886"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
-        <translation type="unfinished"></translation>
+        <translation>상태 표시 줄을 숨 깁니다. 임시 상태 또는 피드백 메시지가 나타나지 않습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="888"/>
         <source>Show Temporary Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>임시 메시지 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="890"/>
         <source>Hide the status bar except when display temporary messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>임시 메시지를 표시 할 때를 제외하고는 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="891"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>임시 상태 및 피드백 메시지를 표시 할 때를 제외하고는 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="893"/>
         <source>Show Always</source>
-        <translation type="unfinished"></translation>
+        <translation>항상 표시</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="895"/>
         <source>Always show the status bar.</source>
-        <translation type="unfinished"></translation>
+        <translation>상태 표시 줄을 항상 표시하십시오.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="896"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
-        <translation type="unfinished"></translation>
+        <translation>상태 표시 줄을 보여줍니다. 임시 상태 및 피드백 메시지를 표시하는 것 외에도 상태 표시 줄에는 커서 위치에 대한 정보도 표시됩니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="905"/>
@@ -3834,17 +3964,17 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1294"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>설정</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1310"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>도움</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1418"/>
         <source>Select background image</source>
-        <translation type="unfinished"></translation>
+        <translation>배경 이미지 선택</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1419"/>
@@ -3975,7 +4105,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <location filename="../src/main/MainWindow.cpp" line="1951"/>
         <location filename="../src/main/MainWindow.cpp" line="2130"/>
         <source>Cannot read file</source>
-        <translation type="unfinished"></translation>
+        <translation>파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1793"/>
@@ -3987,7 +4117,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1867"/>
         <source>Import Image</source>
-        <translation type="unfinished"></translation>
+        <translation>이미지 가져 오기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2107"/>
@@ -3997,7 +4127,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2152"/>
         <source>File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>파일을 찾을 수 없음</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2169"/>
@@ -4044,17 +4174,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2515"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>구하다</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3523"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>수출</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3605"/>
         <source>Open Document</source>
-        <translation type="unfinished"></translation>
+        <translation>문서 열기</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4812"/>
@@ -4079,35 +4209,35 @@ Do you want to save your changes?</source>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="171"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="267"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation type="unfinished"></translation>
+        <translation>새 축 포인트는 기존 축 포인트와 동일한 화면 위치에있을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="179"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="274"/>
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
-        <translation type="unfinished"></translation>
+        <translation>새 축 포인트는 기존 축 포인트와 동일한 그래프 좌표를 가질 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="185"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280"/>
         <source>No more than two axis points can lie along the same line on the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>두 개 이상의 축 지점이 화면의 같은 선을 따라 놓일 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191"/>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="286"/>
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>그래프 좌표에서 동일한 선을 따라 두 개 이상의 축 점이있을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="244"/>
         <source>Too many x axis points. There should only be two</source>
-        <translation type="unfinished"></translation>
+        <translation>너무 많은 x 축 지점. 두 개만 있어야합니다.</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="250"/>
         <source>Too many y axis points. There should only be two</source>
-        <translation type="unfinished"></translation>
+        <translation>Y 축 포인트가 너무 많습니다. 두 개만 있어야합니다.</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="14"/>
