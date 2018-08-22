@@ -1669,6 +1669,8 @@ void MainWindow::fileExport(const QString &fileName,
                                  transformation (),
                                  str);
 
+    m_isDocumentExported = true; // Remember that export was performed
+
     updateChecklistGuide ();
     m_statusBar->showTemporaryMessage("File saved");
 
@@ -4450,7 +4452,6 @@ void MainWindow::updateChecklistGuide ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateChecklistGuide";
 
-  m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
   m_dockChecklistGuide->update (*m_cmdMediator,
                                 m_isDocumentExported);
 }
