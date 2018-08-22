@@ -539,7 +539,7 @@ void MainWindow::createActionsFile ()
 
   m_actionImport = new QAction(tr ("&Import..."), this);
   m_actionImport->setShortcut (tr ("Ctrl+I"));
-  m_actionImport->setStatusTip (tr ("Creates a new document by importing an simple image."));
+  m_actionImport->setStatusTip (tr ("Creates a new document by importing a simple image."));
   m_actionImport->setWhatsThis (tr ("Import Image\n\n"
                                     "Creates a new document by importing an image with a single coordinate system, "
                                     "and axes both coordinates known.\n\n"

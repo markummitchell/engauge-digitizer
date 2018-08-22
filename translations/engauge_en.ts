@@ -22,8 +22,18 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>ChecklistGuidePageConclusion</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="15"/>
-        <source>&lt;p&gt;A checklist guide has been created.&lt;/p&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;p&gt;&lt;font color=&quot;red&quot;&gt;Why does the imported image look different?&lt;/font&gt; After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.&lt;/p&gt;</source>
+        <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="19"/>
+        <source>A checklist guide has been created.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="20"/>
+        <source>Why does the imported image look different?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="21"/>
+        <source>After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -45,22 +55,17 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="25"/>
-        <source>&lt;p&gt;What are the names of the curves that are to be digitized? At least one entry is required.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="44"/>
-        <source>&lt;p&gt;How are those curves drawn?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="46"/>
-        <source>With lines (with or without points)</source>
+        <source>How are those curves drawn?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="48"/>
+        <source>With lines (with or without points)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="50"/>
         <source>With points only (no lines between points)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68,8 +73,18 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>ChecklistGuidePageIntro</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="15"/>
-        <source>&lt;p&gt;Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.&lt;/p&gt;&lt;p&gt;This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.&lt;/p&gt;&lt;p&gt;New users are encouraged to use this wizard.&lt;/p&gt;</source>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18"/>
+        <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20"/>
+        <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23"/>
+        <source>New users are encouraged to use this wizard.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -102,13 +117,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
         <source>Click on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
-        <source>for &lt;b&gt;Axis Points&lt;/b&gt; mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -153,8 +161,60 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
+        <source>for Segment Fill mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157"/>
+        <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159"/>
+        <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
+        <source>for Point Match mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166"/>
+        <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183"/>
+        <source>Select menu option File / Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194"/>
+        <source>Select menu option View / Background / Show Original Image to see the original image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195"/>
+        <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
+        <source>Select menu option Settings / Color Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107"/>
         <source>The coordinates are defined by creating axis points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
+        <source>for Axis Points mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -168,11 +228,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155"/>
-        <source>for &lt;b&gt;Segment Fill&lt;/b&gt; mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>Select curve</source>
@@ -182,26 +237,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165"/>
         <source>in the drop-down list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157"/>
-        <source>Move the cursor over the curve. If a line does not appear then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159"/>
-        <source>Move the cursor over the curve again. When the &lt;b&gt;Segment Fill&lt;/b&gt; line appears, click on it to generate points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164"/>
-        <source>for &lt;b&gt;Point Match&lt;/b&gt; mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166"/>
-        <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the &lt;b&gt;Color Filter&lt;/b&gt; settings for this curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -230,11 +265,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183"/>
-        <source>Select menu option &lt;b&gt;File / Export&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184"/>
         <source>Enter the file name</source>
         <translation type="unfinished"></translation>
@@ -247,21 +277,6 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191"/>
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194"/>
-        <source>Select menu option &lt;b&gt;View / Background / Show Original Image&lt;/b&gt; to see the original image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195"/>
-        <source>Select menu option &lt;b&gt;View / Background / Show Filtered Image&lt;/b&gt; to see the image from &lt;b&gt;Color Filter&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
-        <source>Select menu option &lt;b&gt;Settings / Color Filter&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1325,18 +1340,8 @@ The order of the curves here does not affect the order in the exported file. Tha
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101"/>
-        <source>&lt;&lt;Include</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="103"/>
         <source>Move the currently selected curve(s) from the excluded list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="107"/>
-        <source>Exclude&gt;&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1462,6 +1467,16 @@ The order of the curves here does not affect the order in the exported file. Tha
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
 
 The X values will be automatically aligned along simple numbers. If the first and/or last points are not along the aligned X values, then one or two additional points are added as necessary.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101"/>
+        <source>Include</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="107"/>
+        <source>Exclude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2746,7 +2761,7 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="542"/>
-        <source>Creates a new document by importing an simple image.</source>
+        <source>Creates a new document by importing a simple image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
