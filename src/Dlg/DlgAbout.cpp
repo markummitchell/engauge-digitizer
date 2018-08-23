@@ -33,7 +33,7 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
            .arg (tr ("Version"))
            .arg (VERSION_NUMBER)
            .arg (tr ("Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from "
-                     "images of graphs. The process may be considered as \"inverse graphing\". When you \"engauge\" a document, "
+                     "images of graphs. The process may be considered as inverse graphing. When you engauge a document, "
                      "you are converting pixels into numbers."))
            .arg (tr ("This is free software, and you are welcome to redistribute it under "
                      "certain conditions according to the GNU General Public License Version 2,"

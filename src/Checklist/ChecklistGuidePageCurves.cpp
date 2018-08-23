@@ -23,7 +23,7 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
   const QString WHATS_THIS_POINTS (tr ("Draw points in each curve, without lines between the points."));
 
   addHtml (QString ("<p>%1</p>")
-           .arg ("What are the names of the curves that are to be digitized? At least one entry is required."));
+           .arg (tr ("What are the names of the curves that are to be digitized? At least one entry is required.")));
 
   m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
 

@@ -24,7 +24,7 @@
 ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow,
                                             unsigned int numberCoordSystem) :
   m_mainWindow (mainWindow),
-  m_dialogName ("ChecklistGuide")
+  m_dialogName (tr ("Checklist Guide"))
 {
   setWindowTitle (tr ("Checklist Guide Wizard"));
   setModal (true);

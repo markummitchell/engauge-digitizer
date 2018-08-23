@@ -22,6 +22,11 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>ChecklistGuidePageConclusion</name>
     <message>
+        <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="11"/>
+        <source>Conclusion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="19"/>
         <source>A checklist guide has been created.</source>
         <translation type="unfinished"></translation>
@@ -55,6 +60,11 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="26"/>
+        <source>What are the names of the curves that are to be digitized? At least one entry is required.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="46"/>
         <source>How are those curves drawn?</source>
         <translation type="unfinished"></translation>
@@ -72,6 +82,11 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 </context>
 <context>
     <name>ChecklistGuidePageIntro</name>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="11"/>
+        <source>Introduction</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18"/>
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
@@ -211,6 +226,11 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27"/>
+        <source>Checklist Guide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120"/>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129"/>
@@ -310,7 +330,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="35"/>
-        <source>Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as &quot;inverse graphing&quot;. When you &quot;engauge&quot; a document, you are converting pixels into numbers.</source>
+        <source>Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as inverse graphing. When you engauge a document, you are converting pixels into numbers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3976,113 +3996,113 @@ When pressed, this button Prints all digitized points and lines for all coordina
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1682"/>
+        <location filename="../src/main/MainWindow.cpp" line="1684"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1716"/>
+        <location filename="../src/main/MainWindow.cpp" line="1718"/>
         <source>Unable to extract image to file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="1791"/>
-        <location filename="../src/main/MainWindow.cpp" line="1951"/>
-        <location filename="../src/main/MainWindow.cpp" line="2130"/>
-        <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1793"/>
         <location filename="../src/main/MainWindow.cpp" line="1953"/>
         <location filename="../src/main/MainWindow.cpp" line="2132"/>
+        <source>Cannot read file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1795"/>
+        <location filename="../src/main/MainWindow.cpp" line="1955"/>
+        <location filename="../src/main/MainWindow.cpp" line="2134"/>
         <source>from directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1867"/>
+        <location filename="../src/main/MainWindow.cpp" line="1869"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2107"/>
+        <location filename="../src/main/MainWindow.cpp" line="2109"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2152"/>
+        <location filename="../src/main/MainWindow.cpp" line="2154"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2169"/>
+        <location filename="../src/main/MainWindow.cpp" line="2171"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2224"/>
-        <location filename="../src/main/MainWindow.cpp" line="2298"/>
+        <location filename="../src/main/MainWindow.cpp" line="2226"/>
+        <location filename="../src/main/MainWindow.cpp" line="2300"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2332"/>
+        <location filename="../src/main/MainWindow.cpp" line="2334"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2333"/>
+        <location filename="../src/main/MainWindow.cpp" line="2335"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2334"/>
+        <location filename="../src/main/MainWindow.cpp" line="2336"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2335"/>
+        <location filename="../src/main/MainWindow.cpp" line="2337"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2383"/>
+        <location filename="../src/main/MainWindow.cpp" line="2385"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2467"/>
+        <location filename="../src/main/MainWindow.cpp" line="2469"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2515"/>
+        <location filename="../src/main/MainWindow.cpp" line="2517"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3523"/>
+        <location filename="../src/main/MainWindow.cpp" line="3525"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3605"/>
+        <location filename="../src/main/MainWindow.cpp" line="3607"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4812"/>
+        <location filename="../src/main/MainWindow.cpp" line="4813"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4813"/>
+        <location filename="../src/main/MainWindow.cpp" line="4814"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4941"/>
+        <location filename="../src/main/MainWindow.cpp" line="4942"/>
         <source>Engauge Digitizer %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4843,7 +4863,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1801"/>
+        <location filename="../src/main/MainWindow.cpp" line="1803"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished"></translation>
     </message>

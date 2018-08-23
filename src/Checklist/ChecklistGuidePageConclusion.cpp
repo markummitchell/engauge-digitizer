@@ -8,7 +8,7 @@
 #include "Logger.h"
 
 ChecklistGuidePageConclusion::ChecklistGuidePageConclusion() :
-  ChecklistGuidePage ("Conclusion")
+  ChecklistGuidePage (tr ("Conclusion"))
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuidePageConclusion::ChecklistGuidePageConclusion";
 
