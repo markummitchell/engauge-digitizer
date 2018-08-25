@@ -924,7 +924,7 @@ Vzdálenost F (R, G, B) od barvy pozadí (Rb, Gb, Bb) se vypočítá jako F = sq
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="99"/>
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrovejte původní obrázek do černobílých pixelů pomocí komponenty Saturation (Sytost) barevných komponent Hue, Saturation a Value (HSV), abyste skryli nedůležité informace a zdůraznili důležité informace.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="106"/>
