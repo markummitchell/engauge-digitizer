@@ -4939,8 +4939,9 @@ void MainWindow::updateWindowTitle ()
 
   const QString PLACEHOLDER ("[*]");
 
-  QString title = QString (tr ("Engauge Digitizer %1")
-                           .arg (VERSION_NUMBER));
+  QString title = QString ("%1 %2")
+                           .arg (tr ("Engauge Digitizer"))
+                           .arg (VERSION_NUMBER);
 
   QString fileNameMaybeStripped;
   if (!m_currentFileWithPathAndFileExtension.isEmpty()) {

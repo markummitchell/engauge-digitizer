@@ -4999,7 +4999,7 @@ Você deseja salvar as alterações?</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40"/>
-        <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and langauge locale. The invalid point name was</source>
+        <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and language locale. The invalid point name was</source>
         <translation>Erro do identificador de ponto encontrado. Por favor, notifique os desenvolvedores do Engauge junto com quaisquer comentários sobre o país e a localidade do idioma. O nome do ponto inválido era</translation>
     </message>
     <message>

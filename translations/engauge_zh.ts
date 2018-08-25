@@ -4616,7 +4616,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40"/>
-        <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and langauge locale. The invalid point name was</source>
+        <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and language locale. The invalid point name was</source>
         <translation>遇到点标识符错误。请通知Engauge开发人员以及有关国家和语言区域的任何评论。无效点名称是</translation>
     </message>
     <message>
