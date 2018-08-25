@@ -1040,7 +1040,7 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <name>DlgSettingsCurveAddRemove</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
-        <source>Curve Add/Remove</source>
+        <source>Curve List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3042,19 +3042,19 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
-        <source>Add/Remove Curve...</source>
+        <source>Curve List...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
-        <source>Add or Remove Curves.</source>
+        <source>Edit Curve List settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
-        <source>Add/Remove Curve
+        <source>Curve List
 
-Add/Remove Curve settings control which curves are included in the current document</source>
+Curve list settings add, rename and/or remove curves in the current document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4106,8 +4106,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4942"/>
-        <source>Engauge Digitizer %1</source>
+        <location filename="../src/main/MainWindow.cpp" line="4943"/>
+        <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ar_EG">
+<TS version="2.1" language="ar">
 <context>
     <name>ChecklistGuide</name>
     <message>
@@ -16,11 +16,7 @@
 This box contains a checklist of steps suggested by the Checklist Guide Wizard. Following these steps should produce a set of digitized points in an output file.
 
 To run the Checklist Guide Wizard when an image file is imported, select the Help / Checklist Wizard menu option.</source>
-        <translation>دليل المرجعية
-
-يحتوي هذا المربع على قائمة التحقق من الخطوات المقترحة بواسطة معالج دليل قائمة الاختيار. اتباع هذه الخطوات يجب أن ينتج مجموعة من النقاط الرقمية في ملف الإخراج.
-
-لتشغيل &quot;معالج دليل Checklist&quot; عند استيراد ملف صورة ، حدد خيار القائمة Help / Checklist Wizard</translation>
+        <translation>دليل القائمة المرجعية يحتوي هذا المربع على قائمة التحقق من الخطوات المقترحة بواسطة معالج دليل قائمة الاختيار. يجب أن يؤدي اتباع هذه الخطوات إلى إنشاء مجموعة من النقاط الرقمية في ملف الإخراج. لتشغيل معالج دليل قائمة الاختيار عند استيراد ملف صورة ، حدد خيار قائمة معالج المساعدة / قائمة التحقق.</translation>
     </message>
 </context>
 <context>
@@ -43,7 +39,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="21"/>
         <source>After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.</source>
-        <translation>بعد الاستيراد ، تظهر صورة مفلترة في الخلفية. يتم إنتاج هذه الصورة التي تمت تصفيتها من الصورة الأصلية وفقًا للمعايير المحددة في إعدادات / تصفية الألوان. عند تعيين المعلمات بشكل صحيح ، تمت إزالة معلومات غير مهمة (مثل خطوط الشبكة وألوان الخلفية) من الصور التي تمت تصفيتها بحيث يمكن تنفيذ الاستخراج التلقائي للميزة. إذا تمت إزالة الميزات المرغوب فيها من الصورة ، يمكن ضبط المعلمات باستخدام مرشح إعدادات / ألوان ، أو يمكن عرض الصورة الأصلية بدلاً من ذلك باستخدام عرض / Background / Show Original Image</translation>
+        <translation>بعد الاستيراد ، تظهر صورة مفلترة في الخلفية. يتم إنتاج هذه الصورة التي تمت تصفيتها من الصورة الأصلية وفقًا للمعايير المحددة في إعدادات / تصفية الألوان. عند تعيين المعلمات بشكل صحيح ، تمت إزالة معلومات غير مهمة (مثل خطوط الشبكة وألوان الخلفية) من الصور التي تمت تصفيتها بحيث يمكن تنفيذ الاستخراج التلقائي للميزة. إذا تمت إزالة الميزات المرغوب فيها من الصورة ، يمكن ضبط المعلمات باستخدام مرشح إعدادات / ألوان ، أو يمكن عرض الصورة الأصلية بدلاً من ذلك باستخدام صورة / عرض / إظهار الصورة الأصلية.</translation>
     </message>
 </context>
 <context>
@@ -217,9 +213,7 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195"/>
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
-        <translation>حدد خيار القائمة View / Background / Show Filtered Image لرؤية الصورة من Color Filter
-
-</translation>
+        <translation>حدد خيار عرض القائمة / الخلفية / إظهار الصورة </translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210"/>
@@ -1115,9 +1109,13 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
-        <translation>منحنى إضافة / إزالة</translation>
+        <translation type="vanished">منحنى إضافة / إزالة</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
+        <source>Curve List</source>
+        <translation>قائمة المنحنى</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -1373,11 +1371,6 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
         <translation>المؤشر</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73"/>
-        <source>Type</source>
-        <translation>اكتب</translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76"/>
         <source>Standard cross</source>
         <translation>معيار الصليب</translation>
@@ -1403,24 +1396,29 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
         <translation>الحجم (بكسل)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95"/>
-        <source>Horizontal and vertical size of the cursor in pixels</source>
-        <translation>حجم أفقي ورأسي للمؤشر بالبكسل</translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99"/>
         <source>Inner radius (pixels)</source>
         <translation>نصف القطر الداخلي (بكسل)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104"/>
-        <source>Radius of circle at the center of the cursor that will remain empty</source>
-        <translation>دائرة نصف قطرها دائرة في مركز المؤشر ستبقى فارغة</translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108"/>
         <source>Line width (pixels)</source>
         <translation>عرض الخط (بكسل)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95"/>
+        <source>Horizontal and vertical size of the cursor in pixels</source>
+        <translation>حجم أفقي ورأسي للمؤشر بالبكسل</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73"/>
+        <source>Type</source>
+        <translation>اكتب</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104"/>
+        <source>Radius of circle at the center of the cursor that will remain empty</source>
+        <translation>دائرة نصف قطرها دائرة في مركز المؤشر ستبقى فارغة</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="113"/>
@@ -1698,7 +1696,7 @@ Functions (shown here in blue) are output first, followed by relations (shown he
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="343"/>
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
-        <translation>interpolate Xs و Ys على فترات متساوية المسافات.</translation>
+        <translation>الاستيفاء من XS و YS على فترات متباعدة بشكل متساو.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="344"/>
@@ -2323,7 +2321,7 @@ This setting only has an effect when Engauge has been built with support for pdf
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
         <translation>استيراد PDF القرار
 
-سيتم تحويل ملفات Portable Document Format (PDF) المستوردة إلى دقة البكسل هذه بالنقاط لكل بوصة (DPI) ، حيث تكون كل بكسل نقطة واحدة. تزيد القيمة الأعلى من دقة الصورة وقد تعمل أيضًا على تحسين دقة الرقمنة الرقمية. ومع ذلك ، فإن القيمة العالية جدًا يمكن أن تجعل الصورة كبيرة جدًا بحيث تبطئ Engauge.</translation>
+سيتم تحويل ملفات تنسيق المستندات المحمولة (PDF) المستوردة إلى دقة البكسل هذه بالنقاط لكل بوصة (DPI) ، حيث تكون كل بكسل نقطة واحدة. تزيد القيمة الأعلى من دقة الصورة وقد تعمل أيضًا على تحسين دقة الرقمنة الرقمية. ومع ذلك ، فإن القيمة العالية جدًا يمكن أن تجعل الصورة كبيرة جدًا بحيث تبطئ Engauge.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
@@ -2860,11 +2858,7 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="439"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
-        <translation>رقمنة نقاط منحنى حسب نقطة مطابقة
-
-منحنى Digitizes نقطة في مؤامرة نقطة من خلال إيجاد نقاط تطابق نقطة عينة. تبدأ العملية عن طريق اختيار نقطة عينة تمثيلية.
-
-سيتم تعيين نقاط جديدة للمنحنى المحدد حاليًا.</translation>
+        <translation>رقمنة نقاط المنحنى في مؤامرة نقطة عن طريق مطابقة نقطة.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="440"/>
@@ -2875,9 +2869,9 @@ Digitizes curve points in a point plot by finding points that match a sample poi
 New points will be assigned to the currently selected curve.</source>
         <translation>رقمنة نقاط منحنى حسب نقطة مطابقة
 
-منحنى Digitizes نقطة في مؤامرة نقطة من خلال إيجاد نقاط تطابق نقطة عينة. تبدأ العملية عن طريق اختيار نقطة عينة تمثيلية.
+رقم نقطة منحنى في نقطة مؤامرة من خلال إيجاد نقاط تطابق نقطة عينة. تبدأ العملية عن طريق اختيار نقطة عينة تمثيلية.
 
-سيتم تعيين نقاط جديدة للمنحنى المحدد حاليًا</translation>
+سيتم تعيين نقاط جديدة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="446"/>
@@ -2927,7 +2921,9 @@ Digitizes curve points by placing new points along the highlighted segment under
 New points will be assigned to the currently selected curve.</source>
         <translation>نقاط رقمنة منحنى مع تعبئة قطعة
 
-منحنى Digitizes عن طريق وضع نقاط جديدة على طول الجزء المميز تحت المؤشر. استخدم هذا الوضع لترقيم نقاط متعددة بسرعة على طول منحنى بنقرة واحدة.</translation>
+رقمنة نقاط المنحنى عن طريق وضع نقاط جديدة على طول الجزء المظلل تحت المؤشر. استخدم هذا الوضع لترقيم نقاط متعددة بسرعة على طول منحنى بنقرة واحدة.
+
+سيتم تعيين نقاط جديدة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="481"/>
@@ -3381,23 +3377,39 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 تحدد إعدادات الإحداثيات كيفية تعيين إحداثيات الرسم البياني إلى وحدات البكسل في الصورة</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Add/Remove Curve...</source>
-        <translation>إضافة / إزالة المنحنى ...</translation>
+        <translation type="vanished">إضافة / إزالة المنحنى ...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Add or Remove Curves.</source>
-        <translation>إضافة أو إزالة المنحنيات.</translation>
+        <translation type="vanished">إضافة أو إزالة المنحنيات.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
-        <translation>إضافة / إزالة المنحنى
+        <translation type="vanished">إضافة / إزالة المنحنى
 
-إضافة / إزالة إعدادات Curve تتحكم في المنحنيات الموجودة في المستند الحالي</translation>
+إضافة / إزالة إعدادات المنحنى التي تتحكم في المنحنيات المضمنة في المستند الحالي</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="670"/>
+        <source>Curve List...</source>
+        <translation>قائمة المنحنى ...</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="671"/>
+        <source>Edit Curve List settings.</source>
+        <translation>تحرير إعدادات قائمة المنحنى.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="672"/>
+        <source>Curve List
+
+Curve list settings add, rename and/or remove curves in the current document</source>
+        <translation>قائمة المنحنى
+
+تقوم إعدادات قائمة المنحنيات بإضافة ، وإعادة تسمية و / أو إزالة المنحنيات في المستند الحالي</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -3971,7 +3983,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="918"/>
         <source>16:1 (1600%)</source>
-        <translation>6: 1 (1600 ٪)</translation>
+        <translation>16: 1 (1600 ٪)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="920"/>
@@ -4197,7 +4209,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1059"/>
         <source>1:16 closer (8%)</source>
-        <translation>1:16 أقرب (8 ٪)</translation>
+        <translation>16:1 أقرب (8 ٪)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1061"/>
@@ -4207,12 +4219,12 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1065"/>
         <source>1:16 (6.25%)</source>
-        <translation>1:16 (6.25٪)</translation>
+        <translation>16:1 (6.25٪)</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1067"/>
         <source>Zoom 1:16</source>
-        <translation>تكبير 1:16</translation>
+        <translation>تكبير 16:1</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1071"/>
@@ -4526,9 +4538,13 @@ Do you want to save your changes?</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4942"/>
+        <location filename="../src/main/MainWindow.cpp" line="4943"/>
+        <source>Engauge Digitizer</source>
+        <translation>Engauge Digitizer</translation>
+    </message>
+    <message>
         <source>Engauge Digitizer %1</source>
-        <translation>Engauge Digitizer %1</translation>
+        <translation type="vanished">Engauge Digitizer %1</translation>
     </message>
 </context>
 <context>
@@ -5187,23 +5203,6 @@ Do you want to save your changes?</source>
         <translation>لا يمكن قراءة بيانات نمط النقطة</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="198"/>
-        <source>Coordinates (pixels)</source>
-        <translation>بكسل الإحداثيات</translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="193"/>
-        <source>Coordinates (graph)</source>
-        <translation>الرسم البياني الإحداثيات
-
-</translation>
-    </message>
-    <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="203"/>
-        <source>Resolution (graph)</source>
-        <translation>الرسم البياني القرار</translation>
-    </message>
-    <message>
         <location filename="../src/Transformation/Transformation.cpp" line="178"/>
         <source>Need scale bar</source>
         <translation>تحتاج شريط النطاق</translation>
@@ -5291,7 +5290,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="33"/>
         <source>1:16 closer</source>
-        <translation>1:16 اقرب</translation>
+        <translation>16:1 اقرب</translation>
     </message>
     <message>
         <location filename="../src/Zoom/ZoomLabels.cpp" line="35"/>
@@ -5408,6 +5407,23 @@ Do you want to save your changes?</source>
         <location filename="../src/util/Xml.cpp" line="54"/>
         <source>Error reading xml</source>
         <translation>خطأ في قراءة xml</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="198"/>
+        <source>Coordinates (pixels)</source>
+        <translation>بكسل الإحداثيات</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="193"/>
+        <source>Coordinates (graph)</source>
+        <translation>الرسم البياني الإحداثيات
+
+</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="203"/>
+        <source>Resolution (graph)</source>
+        <translation>الرسم البياني القرار</translation>
     </message>
 </context>
 <context>
@@ -5596,7 +5612,7 @@ be given the new settings.</source>
 suggested for uncolored lines, and Hue
 is suggested for colored lines.</source>
         <translation>الخطوة 3 - اختر الوضع. كثافة هو
-اقترح للخطوط uncolored ، وهوى
+اقترح للخطوط غير الملونة ، وهوى
 يقترح للخطوط الملونة.</translation>
     </message>
     <message>
@@ -5612,7 +5628,7 @@ Click Ok when finished.</source>
 منحنى واضح في نافذة المعاينة
 أدناه. يعرض الرسم البياني المدرج التكراري
 توزيع القيم في الاسفل.
-انقر فوق "موافق" عند الانتهاء.</translation>
+انقر فوق &quot;موافق&quot; عند الانتهاء.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="54"/>

@@ -29,7 +29,7 @@
 const int MINIMUM_HEIGHT = 500;
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase (tr ("Curve Add/Remove"),
+  DlgSettingsAbstractBase (tr ("Curve List"),
                            "DlgSettingsCurveAddRemove",
                            mainWindow),
   m_curveNameList (0)

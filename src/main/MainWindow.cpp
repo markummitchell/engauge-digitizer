@@ -667,10 +667,10 @@ void MainWindow::createActionsSettings ()
                                             "Coordinate settings determine how the graph coordinates are mapped to the pixels in the image"));
   connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
 
-  m_actionSettingsCurveAddRemove = new QAction (tr ("Add/Remove Curve..."), this);
-  m_actionSettingsCurveAddRemove->setStatusTip (tr ("Add or Remove Curves."));
-  m_actionSettingsCurveAddRemove->setWhatsThis (tr ("Add/Remove Curve\n\n"
-                                                    "Add/Remove Curve settings control which curves are included in the current document"));
+  m_actionSettingsCurveAddRemove = new QAction (tr ("Curve List..."), this);
+  m_actionSettingsCurveAddRemove->setStatusTip (tr ("Edit Curve List settings."));
+  m_actionSettingsCurveAddRemove->setWhatsThis (tr ("Curve List\n\n"
+                                                    "Curve list settings add, rename and/or remove curves in the current document"));
   connect (m_actionSettingsCurveAddRemove, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveAddRemove ()));
 
   m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties..."), this);

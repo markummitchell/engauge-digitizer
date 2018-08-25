@@ -1100,9 +1100,13 @@ Turns format uses a single real number. One complete revolution is one turn.</so
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
-        <translation>添加/删除曲线</translation>
+        <translation type="vanished">添加/删除曲线</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
+        <source>Curve List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3119,21 +3123,35 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
         <translation>“坐标设置”→“坐标”设置确定图形坐标如何映射到图像中的像素</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Add/Remove Curve...</source>
-        <translation>添加/删除曲线...</translation>
+        <translation type="vanished">添加/删除曲线...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Add or Remove Curves.</source>
-        <translation>添加或删除曲线。</translation>
+        <translation type="vanished">添加或删除曲线。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
-        <translation>添加/删除曲线添加/删除曲线设置控制当前文档中包含哪些曲线</translation>
+        <translation type="vanished">添加/删除曲线添加/删除曲线设置控制当前文档中包含哪些曲线</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="670"/>
+        <source>Curve List...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="671"/>
+        <source>Edit Curve List settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="672"/>
+        <source>Curve List
+
+Curve list settings add, rename and/or remove curves in the current document</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4184,9 +4202,13 @@ Do you want to save your changes?</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4942"/>
+        <location filename="../src/main/MainWindow.cpp" line="4943"/>
+        <source>Engauge Digitizer</source>
+        <translation type="unfinished">Engauge Digitizer</translation>
+    </message>
+    <message>
         <source>Engauge Digitizer %1</source>
-        <translation>Engauge Digitizer %1</translation>
+        <translation type="vanished">Engauge Digitizer %1</translation>
     </message>
 </context>
 <context>

@@ -1167,9 +1167,13 @@ Activa formato utiliza un único número real. Es una revolución completa una v
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
-        <translation>Curva Agregar / Quitar</translation>
+        <translation type="vanished">Curva Agregar / Quitar</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
+        <source>Curve List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3425,23 +3429,37 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 ajustes determinan cómo coordinar las coordenadas del gráfico se asignan a los píxeles de la imagen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Add/Remove Curve...</source>
-        <translation>Agregar / Quitar Curva ...</translation>
+        <translation type="vanished">Agregar / Quitar Curva ...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Add or Remove Curves.</source>
-        <translation>Añadir o quitar curvas .</translation>
+        <translation type="vanished">Añadir o quitar curvas .</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
-        <translation>Añadir / Quitar Curva
+        <translation type="vanished">Añadir / Quitar Curva
 
 Añadir / Quitar Curva de control de configuración que se curva se incluyen en el documento actual</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="670"/>
+        <source>Curve List...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="671"/>
+        <source>Edit Curve List settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="672"/>
+        <source>Curve List
+
+Curve list settings add, rename and/or remove curves in the current document</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4566,9 +4584,13 @@ Do you want to save your changes?</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4942"/>
+        <location filename="../src/main/MainWindow.cpp" line="4943"/>
+        <source>Engauge Digitizer</source>
+        <translation type="unfinished">Engauge Digitizer</translation>
+    </message>
+    <message>
         <source>Engauge Digitizer %1</source>
-        <translation>Engauge Digitizer %1</translation>
+        <translation type="vanished">Engauge Digitizer %1</translation>
     </message>
 </context>
 <context>

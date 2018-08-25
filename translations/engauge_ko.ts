@@ -1149,9 +1149,13 @@ Turns 형식은 단일 실수를 사용합니다. 하나의 완전한 혁명은 
 <context>
     <name>DlgSettingsCurveAddRemove</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve Add/Remove</source>
-        <translation>커브 추가 / 제거</translation>
+        <translation type="vanished">커브 추가 / 제거</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
+        <source>Curve List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3406,23 +3410,37 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 좌표 설정은 그래프 좌표가 이미지의 픽셀에 매핑되는 방법을 결정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Add/Remove Curve...</source>
-        <translation>커브 추가 / 제거</translation>
+        <translation type="vanished">커브 추가 / 제거</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Add or Remove Curves.</source>
-        <translation>커브 추가 또는 제거.</translation>
+        <translation type="vanished">커브 추가 또는 제거.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Add/Remove Curve
 
 Add/Remove Curve settings control which curves are included in the current document</source>
-        <translation>커브 추가 / 제거
+        <translation type="vanished">커브 추가 / 제거
 
 추가 / 제거 커브 설정은 현재 문서에 포함 된 커브를 제어합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="670"/>
+        <source>Curve List...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="671"/>
+        <source>Edit Curve List settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="672"/>
+        <source>Curve List
+
+Curve list settings add, rename and/or remove curves in the current document</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4547,9 +4565,13 @@ Do you want to save your changes?</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4942"/>
+        <location filename="../src/main/MainWindow.cpp" line="4943"/>
+        <source>Engauge Digitizer</source>
+        <translation type="unfinished">Engauge Digitizer</translation>
+    </message>
+    <message>
         <source>Engauge Digitizer %1</source>
-        <translation>Engauge Digitizer</translation>
+        <translation type="vanished">Engauge Digitizer</translation>
     </message>
 </context>
 <context>
