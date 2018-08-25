@@ -1041,7 +1041,7 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Қисық тізім</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3043,19 +3043,21 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Қисық тізім...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Қисық тізім параметрлерін өңдеу.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Қисық тізім
+
+Қисық тізім параметрлері ағымдағы құжатта қисықтарды қосу, атын өзгерту және / немесе жою</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -5266,7 +5268,7 @@ Next (Points).</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="26"/>
         <source>Introduction</source>
-        <translation type="unfinished">Кіріспе</translation>
+        <translation>Кіріспе</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="29"/>

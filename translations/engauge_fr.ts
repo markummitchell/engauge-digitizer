@@ -1170,7 +1170,7 @@ Le format Tour format utilise un nombre réel unique. Une révolution complète 
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste de courbes</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3426,19 +3426,21 @@ Ce réglage contrôle quelles courbes sont incluses dans le document en cours</t
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste de courbes...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier les paramètres de la liste des courbes.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des courbes
+
+Les paramètres de liste de courbes ajoutent, renomment et / ou suppriment des courbes dans le document actuel</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4566,7 +4568,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4943"/>
         <source>Engauge Digitizer</source>
-        <translation type="unfinished">Engauge Digitizer</translation>
+        <translation>Engauge Digitizer</translation>
     </message>
     <message>
         <source>Engauge Digitizer %1</source>

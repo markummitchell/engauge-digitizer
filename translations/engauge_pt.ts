@@ -1173,7 +1173,7 @@ Curve Adicionar / Remover</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Curvas</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3447,19 +3447,21 @@ Adicionar / Remover curva de controle configurações que as curvas estão inclu
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Curvas...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar configurações da lista de curvas.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Curvas
+
+Configurações da lista de curvas adicionam, renomeam e / ou removem curvas no documento atual</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4589,7 +4591,7 @@ Você deseja salvar as alterações?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4943"/>
         <source>Engauge Digitizer</source>
-        <translation type="unfinished">Engauge Digitalizador</translation>
+        <translation>Engauge Digitalizador</translation>
     </message>
     <message>
         <source>Engauge Digitizer %1</source>

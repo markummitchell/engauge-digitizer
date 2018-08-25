@@ -1037,7 +1037,7 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>वक्र सूची</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3039,24 +3039,26 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>वक्र सूची ...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>वक्र सूची सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>वक्र सूची
+
+वक्र सूची सेटिंग्स वर्तमान दस्तावेज़ में वक्र को जोड़, नाम बदलें और / या हटा दें</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
         <source>Curve Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>वक्र गुण ...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="677"/>

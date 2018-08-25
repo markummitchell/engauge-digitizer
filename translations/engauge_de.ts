@@ -1127,7 +1127,7 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurvenliste</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3262,19 +3262,21 @@ Hinzufügen / Entfernen der Kurveneinstellungen steuern, welche Kurven im aktuel
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurvenliste...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeiten Sie die Einstellungen der Kurvenliste.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurvenliste
+
+Kurvenlisteneinstellungen können Kurven im aktuellen Dokument hinzufügen, umbenennen und / oder entfernen</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4399,7 +4401,7 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4943"/>
         <source>Engauge Digitizer</source>
-        <translation type="unfinished">Engauge Digitizer</translation>
+        <translation>Engauge Digitizer</translation>
     </message>
     <message>
         <source>Engauge Digitizer %1</source>

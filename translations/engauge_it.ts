@@ -1149,7 +1149,7 @@ Il formato Giri usa un singolo numero reale. Una rivoluzione completa è un giro
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista delle curve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3268,19 +3268,21 @@ Le impostazioni Aggiungi/Rimuovi Curva controllano quali curve sono incluse nel 
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista delle curve...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica le impostazioni della lista curva.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista delle curve
+
+Le impostazioni dell'elenco di curve aggiungono, rinominano e / o rimuovono le curve nel documento corrente</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4344,7 +4346,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4943"/>
         <source>Engauge Digitizer</source>
-        <translation type="unfinished">Engauge Digitizer</translation>
+        <translation>Engauge Digitizer</translation>
     </message>
     <message>
         <source>Engauge Digitizer %1</source>

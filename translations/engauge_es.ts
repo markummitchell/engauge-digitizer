@@ -1173,7 +1173,7 @@ Activa formato utiliza un único número real. Es una revolución completa una v
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="32"/>
         <source>Curve List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de curvas</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveAddRemove.cpp" line="69"/>
@@ -3447,19 +3447,19 @@ Añadir / Quitar Curva de control de configuración que se curva se incluyen en 
     <message>
         <location filename="../src/main/MainWindow.cpp" line="670"/>
         <source>Curve List...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de curvas...</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="671"/>
         <source>Edit Curve List settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar la configuración de la lista de curvas.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="672"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar la configuración de la lista de curvas.</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="676"/>
@@ -4586,7 +4586,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="4943"/>
         <source>Engauge Digitizer</source>
-        <translation type="unfinished">Engauge Digitizer</translation>
+        <translation>Engauge Digitizer</translation>
     </message>
     <message>
         <source>Engauge Digitizer %1</source>
