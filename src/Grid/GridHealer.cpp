@@ -45,31 +45,34 @@ void GridHealer::connectCloseGroups(QImage &imageToHeal)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::connectCloseGroups";
 
-  // N*(N-1)/2 search for groups that are close to each other
-  for (int iFrom = 0; iFrom < m_groupNumberToCentroid.count() - 1; iFrom++) {
+  double closeDistanceSquared = m_modelGridRemoval.closeDistance () * m_modelGridRemoval.closeDistance ();
 
-    BoundaryGroup groupFrom = m_groupNumberToCentroid.keys().at (iFrom);
+  // N*(N-1)/2 search for groups that are close to each other. This was iterated using integer and
+  // keys().at(integer) but that was too slow and iterator approach proved to be about 30x faster. There is
+  // a constraint on the outer/inner loop that we do not want to repeat an (I,J) pair as (J,I), or allow I=J
+  GroupNumberToPoint::iterator itrFrom, itrTo;
+  for (itrFrom = m_groupNumberToCentroid.begin(); itrFrom != m_groupNumberToCentroid.end(); itrFrom++) {
 
-    ENGAUGE_ASSERT (m_groupNumberToCentroid.contains (groupFrom));
+    BoundaryGroup groupFrom = itrFrom.key();
+
     ENGAUGE_ASSERT (m_groupNumberToPixel.contains (groupFrom));
 
-    QPointF posCentroidFrom = m_groupNumberToCentroid [groupFrom];
+    QPointF posCentroidFrom = itrFrom.value();
     QPointF pixelPointFrom = m_groupNumberToPixel [groupFrom];
 
-    for (int iTo = iFrom + 1; iTo < m_groupNumberToCentroid.count(); iTo++) {
+    for (itrTo = itrFrom + 1; itrTo != m_groupNumberToCentroid.end(); itrTo++) {
 
-      BoundaryGroup groupTo = m_groupNumberToCentroid.keys().at (iTo);
+      BoundaryGroup groupTo = itrTo.key();
 
-      ENGAUGE_ASSERT (m_groupNumberToCentroid.contains (groupTo));
       ENGAUGE_ASSERT (m_groupNumberToPixel.contains (groupTo));
 
-      QPointF posCentroidTo = m_groupNumberToCentroid [groupTo];
+      QPointF posCentroidTo = itrTo.value();
       QPointF pixelPointTo = m_groupNumberToPixel [groupTo];
 
       QPointF separation = posCentroidFrom - posCentroidTo;
-      double separationMagnitude = qSqrt (separation.x() * separation.x() + separation.y() * separation.y());
+      double separationMagnitudeSquared = separation.x() * separation.x() + separation.y() * separation.y();
 
-      if (separationMagnitude < m_modelGridRemoval.closeDistance()) {
+      if (separationMagnitudeSquared < closeDistanceSquared) {
 
         // Draw line from pixelPointFrom to pixelPointTo
         int count = 1 + qMax (qAbs (pixelPointFrom.x() - pixelPointTo.x()),
