@@ -41,6 +41,12 @@ class GridHealer
   GridHealer(const QImage &imageBefore,
              const DocumentModelGridRemoval &modelGridRemoval);
 
+  /// Draw continuous line. Diagonal jumps are avoided by being replaced with horizontal then vertical,
+  /// or vertical then horizontal movements
+  void drawLineBetweenFromAndTo (QImage &imageToHeal,
+                                 const QPointF &pixelPointFrom,
+                                 const QPointF &pixelPointTo);
+
   /// Remember that pixel was erased since it belongs to an grid line. In the image, erasure
   /// correponds to a foreground pixel being changed to the background color
   void erasePixel (int xCol,

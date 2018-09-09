@@ -74,27 +74,69 @@ void GridHealer::connectCloseGroups(QImage &imageToHeal)
 
       if (separationMagnitudeSquared < closeDistanceSquared) {
 
-        // Draw line from pixelPointFrom to pixelPointTo
-        int count = 1 + qMax (qAbs (pixelPointFrom.x() - pixelPointTo.x()),
-                              qAbs (pixelPointFrom.y() - pixelPointTo.y()));
+        drawLineBetweenFromAndTo (imageToHeal,
+                                  pixelPointFrom,
+                                  pixelPointTo);
+      }
+    }
+  }
+}
 
-        if (count > 1) {
-          for (int index = 0; index < count; index++) {
+void GridHealer::drawLineBetweenFromAndTo (QImage &imageToHeal,
+                                           const QPointF &pixelPointFrom,
+                                           const QPointF &pixelPointTo)
+{
+  // Draw line from pixelPointFrom to pixelPointTo. To get a nice thick lines (=no diagonal jumps)
+  // we use the following algorithm at each point (I,J)
+  // 1) Look at the 4 horizontal/vertical neighbors and jump to the one closest to the destination than (I,J)
+  // 2) If landed on the destination point then quit
+  QPoint pCurrent ((int) (0.5 + pixelPointFrom.y()),
+                   (int) (0.5 + pixelPointFrom.x()));
+  QPoint pFinal ((int) (0.5 + pixelPointTo.y()),
+                 (int) (0.5 + pixelPointTo.x()));
 
-            // Replace PIXEL_STATE_REMOVED by PIXEL_STATE_HEALED
-            double s = (double) index / (double) (count - 1);
-            int xCol = (int) (0.5 + (1.0 - s) * pixelPointFrom.y() + s * pixelPointTo.y());
-            int yRow = (int) (0.5 + (1.0 - s) * pixelPointFrom.x() + s * pixelPointTo.x());
-            m_pixels [yRow] [xCol] = PIXEL_STATE_HEALED;
+  while (true) {
 
-            // Fill in the pixel
-            imageToHeal.setPixel (QPoint (xCol,
-                                          yRow),
-                                  Qt::black);
+    // Replace PIXEL_STATE_REMOVED by PIXEL_STATE_HEALED
+    m_pixels [pCurrent.y()] [pCurrent.x()] = PIXEL_STATE_HEALED;
+    imageToHeal.setPixel (pCurrent,
+                          Qt::black);
+
+    // Exit just after saving the final point
+    if (pCurrent == pFinal) {
+      break;
+    }
+
+    // Loop through neighbors
+    bool isFirst = true;
+    double dFurthestSoFarSquared = 0;
+    QPoint pBest = pCurrent;
+    for (int dx = -1; dx <= 1; dx++) {
+      for (int dy = -1; dy <= 1; dy++) {
+
+        // Horizontal or vertical directions only
+        if ((dx == 0 && dy != 0) ||
+            (dx != 0 && dy == 0)) {
+
+          QPoint pNeighbor (pCurrent.x () + dx,
+                            pCurrent.y () + dy);
+
+          double dNeighborSquared =
+            (pNeighbor.x() - pFinal.x()) * (pNeighbor.x() - pFinal.x()) +
+            (pNeighbor.y() - pFinal.y()) * (pNeighbor.y() - pFinal.y());
+          if (isFirst || (dNeighborSquared < dFurthestSoFarSquared)) {
+
+            // Save this one as it is the best so far
+            isFirst = false;
+            dFurthestSoFarSquared = dNeighborSquared;
+            pBest = pNeighbor;
           }
         }
       }
     }
+
+    // Save for next iteration
+    pCurrent = pBest;
   }
 }
 
