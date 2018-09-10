@@ -362,6 +362,7 @@ HEADERS  += \
     src/Transformation/TransformationStateDefined.h \
     src/Transformation/TransformationStateUndefined.h \
     src/Translator/TranslatorContainer.h \
+    src/util/TriangleFill.h \
     src/Tutorial/TutorialButton.h \
     src/Tutorial/TutorialButtonRect.h \
     src/Tutorial/TutorialButtonText.h \
@@ -676,6 +677,7 @@ SOURCES += \
     src/Transformation/TransformationStateDefined.cpp \
     src/Transformation/TransformationStateUndefined.cpp \
     src/Translator/TranslatorContainer.cpp \
+    src/util/TriangleFill.cpp \
     src/Tutorial/TutorialButton.cpp \
     src/Tutorial/TutorialButtonRect.cpp \
     src/Tutorial/TutorialButtonText.cpp \

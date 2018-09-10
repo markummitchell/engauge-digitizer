@@ -7,78 +7,75 @@
 #ifndef GRID_HEALER_H
 #define GRID_HEALER_H
 
+#include <QImage>
 #include <QMap>
-#include <QPointF>
-#include <QVector>
 
 class DocumentModelGridRemoval;
 class QImage;
 
-enum PixelState {
-  PIXEL_STATE_BACKGROUND, /// Background pixel in original image
-  PIXEL_STATE_FOREGROUND, /// Foreground pixel in original image. May become PIXEL_STATE_REMOVED or PIXEL_STATE_BOUNDARY
-  PIXEL_STATE_REMOVED,    /// Pixel removed because it belonged to a grid line
-  PIXEL_STATE_ADJACENT,   /// Foreground pixel adjacent to a PIXEL_STATE_REMOVED
-  PIXEL_STATE_HEALED,     /// Removed pixel that has been filled so a line crosses the gap from a removed grid line
-  NUM_PIXEL_STATES
-};
+/// Saved adjacent pairs
+typedef QList<QPoint> AdjacentPairHalves;
 
-/// Each boundary group has its own number, starting at BOUNDARY_GROUP_FIRST
-typedef int BoundaryGroup;
+/// (X,Y) pairs for horizontal lines, and (Y,X) pairs for vertical lines
+typedef QMap<int, int> IndependentToDependent;
 
-/// Each pixel can either have an enumerated state, or be assigned to a boundary group
-typedef int PixelStateOrBoundaryGroup;
-
-/// Map group to an associated point
-typedef QMap<BoundaryGroup, QPointF> GroupNumberToPoint;
-
-/// Class that 'heals' the curves after grid lines have been removed. Specifically, gaps that
-/// span the pixels in the removed grid lines are filled in, if they are less than some epsilon value
+/// Class that 'heals' the curves after one grid line has been removed. Specifically, gaps that
+/// span the pixels in the removed grid line are filled in, when a black pixel on one side of the
+/// gap is across from a black pixel on the other side of the pixel
 class GridHealer
 {
  public:
   /// Single constructor
-  GridHealer(const QImage &imageBefore,
-             const DocumentModelGridRemoval &modelGridRemoval);
+  GridHealer(const DocumentModelGridRemoval &modelGridRemoval);
 
-  /// Draw continuous line. Diagonal jumps are avoided by being replaced with horizontal then vertical,
-  /// or vertical then horizontal movements
-  void drawLineBetweenFromAndTo (QImage &imageToHeal,
-                                 const QPointF &pixelPointFrom,
-                                 const QPointF &pixelPointTo);
+  /// Add two points on either side of a gap, if they are black
+  void addAdjacentPoints (int x0,
+                          int y0,
+                          int x1,
+                          int y1);
 
-  /// Remember that pixel was erased since it belongs to an grid line. In the image, erasure
-  /// correponds to a foreground pixel being changed to the background color
-  void erasePixel (int xCol,
-                   int yRow);
-
-  /// Heal the broken curve lines by spanning the gaps across the newly-removed grid lines
-  void heal (QImage &imageToHeal);
+  /// Return healed image
+  QImage healed (const QImage &imageAfterGridRemoval);
 
  private:
   GridHealer();
 
-  void connectCloseGroups(QImage &imageToHeal);
-  void groupContiguousAdjacentPixels();
-  void recursiveSearchForAdjacentPixels (int boundaryGroup,
-                                         int row,
-                                         int col,
-                                         int &centroidCount,
-                                         double &rowCentroidSum,
-                                         double &colCentroidSum);
+  /// Apply pairs that were saved earlier during grid removal algorithm
+  void applyAdjacentPairs (const QImage &image);
 
-  // Mirror of original image
-  QVector<QVector<PixelStateOrBoundaryGroup> > m_pixels;
+  /// Guts of the algorithm in which sequences of black pixels across the gap from each other
+  /// are filled in. Specifically, trapezoids with endpoints separated by no more than the
+  /// closest distance are filled in. A greedy algorithm is used which makes each trapezoid as
+  /// big as possible
+  void doHealingHorizontal (QImage &image);
+  void doHealingVertical (QImage &image);
 
-  BoundaryGroup m_boundaryGroupNext;
+  /// Fill trapezoid with bottom left, bottom right, top right, and top left points
+  void fillTrapezoid (QImage &image,
+                      int xBL, int yBL,
+                      int xBR, int yBR,
+                      int xTR, int yTR,
+                      int xTL, int yTL);
 
-  /// Hash table that returns centroid coordinates for each group
-  GroupNumberToPoint m_groupNumberToCentroid;
-
-  /// Hash table that returns a pixel in each group
-  GroupNumberToPoint m_groupNumberToPixel;
+  bool pixelIsBlack (const QImage &image,
+                     int x,
+                     int y) const;
 
   DocumentModelGridRemoval m_modelGridRemoval;
+
+  // Adjacent pairs
+  AdjacentPairHalves m_pairHalves0;
+  AdjacentPairHalves m_pairHalves1;
+
+  // Horizontal lines
+  IndependentToDependent m_blackPixelsBelow; // Black pixels just below gap
+  IndependentToDependent m_blackPixelsAbove; // Black pixels just above gap
+  int m_verticalSeparation; // Pixel distance between vertical point pairs
+
+  // Vertical lines
+  IndependentToDependent m_blackPixelsLeft; // Black pixels just to the left of the gap
+  IndependentToDependent m_blackPixelsRight; // Black pixels just to the right of the gap
+  int m_horizontalSeparation; // Pixel distance between horizontal point pairs
 };
 
 #endif // GRID_HEALER_H

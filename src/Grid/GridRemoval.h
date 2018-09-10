@@ -11,7 +11,6 @@
 #include <QPointF>
 
 class DocumentModelGridRemoval;
-class GridHealer;
 class QImage;
 class Transformation;
 
@@ -42,7 +41,7 @@ private:
   void removeLine (const QPointF &pos1,
                    const QPointF &pos2,
                    QImage &image,
-                   GridHealer &gridHealer);
+                   const DocumentModelGridRemoval &modelGridRemoval);
 };
 
 #endif // GRID_REMOVAL_H
