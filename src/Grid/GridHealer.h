@@ -25,11 +25,20 @@ typedef QMap<int, int> IndependentToDependent;
 class GridHealer
 {
  public:
+
+  /// Orientation of gridline
+  enum GridLineOrientation {
+    Horizontal,
+    Vertical
+  };
+
   /// Single constructor
-  GridHealer(const DocumentModelGridRemoval &modelGridRemoval);
+  GridHealer(GridLineOrientation gridLineOrientation,
+             const DocumentModelGridRemoval &modelGridRemoval);
 
   /// Add two points on either side of a gap, if they are black
-  void addAdjacentPoints (int x0,
+  void addAdjacentPoints (const QImage &image,
+                          int x0,
                           int y0,
                           int x1,
                           int y1);
@@ -40,15 +49,11 @@ class GridHealer
  private:
   GridHealer();
 
-  /// Apply pairs that were saved earlier during grid removal algorithm
-  void applyAdjacentPairs (const QImage &image);
-
   /// Guts of the algorithm in which sequences of black pixels across the gap from each other
   /// are filled in. Specifically, trapezoids with endpoints separated by no more than the
   /// closest distance are filled in. A greedy algorithm is used which makes each trapezoid as
   /// big as possible
-  void doHealingHorizontal (QImage &image);
-  void doHealingVertical (QImage &image);
+  void doHealing (QImage &image);
 
   /// Fill trapezoid with bottom left, bottom right, top right, and top left points
   void fillTrapezoid (QImage &image,
@@ -61,21 +66,16 @@ class GridHealer
                      int x,
                      int y) const;
 
+  /// Horizontal or vertical?
+  GridLineOrientation m_gridLineOrientation;
+  
   DocumentModelGridRemoval m_modelGridRemoval;
 
-  // Adjacent pairs
-  AdjacentPairHalves m_pairHalves0;
-  AdjacentPairHalves m_pairHalves1;
+  /// Horizontal lines
+  IndependentToDependent m_blackPixelsBelow; // Black pixels in -x or -y direction
+  IndependentToDependent m_blackPixelsAbove; // Black pixels in +x or +y direction
+  int m_gapSeparation; // Pixel distance between vertical point pairs
 
-  // Horizontal lines
-  IndependentToDependent m_blackPixelsBelow; // Black pixels just below gap
-  IndependentToDependent m_blackPixelsAbove; // Black pixels just above gap
-  int m_verticalSeparation; // Pixel distance between vertical point pairs
-
-  // Vertical lines
-  IndependentToDependent m_blackPixelsLeft; // Black pixels just to the left of the gap
-  IndependentToDependent m_blackPixelsRight; // Black pixels just to the right of the gap
-  int m_horizontalSeparation; // Pixel distance between horizontal point pairs
 };
 
 #endif // GRID_HEALER_H

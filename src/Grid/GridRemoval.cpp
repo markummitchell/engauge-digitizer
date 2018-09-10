@@ -141,7 +141,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
-      GridHealer gridHealer (modelGridRemoval);
+      GridHealer gridHealer (GridHealer::Horizontal,
+                             modelGridRemoval);
       int xMin = qMin (pos1.x(), pos2.x());
       int xMax = qMax (pos1.x(), pos2.x());
       int yAtXMin = (pos1.x() < pos2.x() ? pos1.y() : pos2.y());
@@ -153,14 +154,14 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int y = (int) (0.5 + yLine + yOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer.addAdjacentPoints (x, yLine - 2, x, yLine + 2);
+        gridHealer.addAdjacentPoints (image, x, yLine - 2, x, yLine + 2);
       }
-      // Connect regions that must have been disconnected by the removed grid line
       image = gridHealer.healed (image);
     } else {
 
       // More vertical
-      GridHealer gridHealer (modelGridRemoval);
+      GridHealer gridHealer (GridHealer::Vertical,
+                             modelGridRemoval);
       int yMin = qMin (pos1.y(), pos2.y());
       int yMax = qMax (pos1.y(), pos2.y());
       int xAtYMin = (pos1.y() < pos2.y() ? pos1.x() : pos2.x());
@@ -172,9 +173,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int x = (int) (0.5 + xLine + xOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer.addAdjacentPoints (xLine - 2, y, xLine + 2, y);
+        gridHealer.addAdjacentPoints (image, xLine - 2, y, xLine + 2, y);
       }
-      // Connect regions that must have been disconnected by the removed grid line
       image = gridHealer.healed (image);
     }
   }
