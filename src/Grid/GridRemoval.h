@@ -7,6 +7,7 @@
 #ifndef GRID_REMOVAL_H
 #define GRID_REMOVAL_H
 
+#include <QList>
 #include <QPixmap>
 #include <QPointF>
 
@@ -14,6 +15,9 @@ class DocumentModelGridRemoval;
 class GridHealer;
 class QImage;
 class Transformation;
+
+/// Storage of GridHealer instances
+typedef QList<GridHealer*> GridHealers;
 
 /// Strategy class for grid removal
 class GridRemoval
@@ -42,7 +46,8 @@ private:
   void removeLine (const QPointF &pos1,
                    const QPointF &pos2,
                    QImage &image,
-                   GridHealer &gridHealer);
+                   const DocumentModelGridRemoval &modelGridRemoval,
+                   GridHealers &gridHealers);
 };
 
 #endif // GRID_REMOVAL_H

@@ -58,8 +58,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
 
   QImage image = imageBefore;
 
-  GridHealer gridHealerVertical (GridHealer::GridLineOrientation::Vertical, modelGridRemoval);
-  GridHealer gridHealerHorizontal (GridHealer::GridLineOrientation::Horizontal, modelGridRemoval);
+  // Collect GridHealers instances, one per grid line
+  GridHealers gridHealers;
 
   // Make sure grid line removal is wanted, and possible. Otherwise all processing is skipped
   if (modelGridRemoval.removeDefinedGridLines() &&
@@ -82,7 +82,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
       removeLine (posScreenMin,
                   posScreenMax,
                   image,
-                  gridHealerVertical);
+                  modelGridRemoval,
+                  gridHealers);
     }
 
     double xGraphMin = modelGridRemoval.startX();
@@ -102,12 +103,17 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
       removeLine (posScreenMin,
                   posScreenMax,
                   image,
-                  gridHealerHorizontal);
+                  modelGridRemoval,
+                  gridHealers);
     }
 
     // Heal the broken lines now that all grid lines have been removed and the image has stabilized
-    image = gridHealerVertical.healed (image);
-    image = gridHealerHorizontal.healed (image);
+    GridHealers::iterator itr;
+    for (itr = gridHealers.begin(); itr != gridHealers.end(); itr++) {
+      GridHealer *gridHealer = *itr;
+      image = gridHealer->healed (image);
+      delete gridHealer;
+    }
   }
 
   return QPixmap::fromImage (image);
@@ -116,7 +122,8 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
 void GridRemoval::removeLine (const QPointF &posMin,
                               const QPointF &posMax,
                               QImage &image,
-                              GridHealer &gridHealer)
+                              const DocumentModelGridRemoval &modelGridRemoval,
+                              GridHealers &gridHealers)
 {
   double w = image.width() - 1; // Inclusive width = exclusive width - 1
   double h = image.height() - 1; // Inclusive height = exclusive height - 1
@@ -148,6 +155,11 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
+      GridHealer *gridHealer = new GridHealer (GridHealer::GridLineOrientation::Horizontal,
+                                               modelGridRemoval);
+      gridHealers.push_back (gridHealer);
+
+
       int xMin = qMin (pos1.x(), pos2.x());
       int xMax = qMax (pos1.x(), pos2.x());
       int yAtXMin = (pos1.x() < pos2.x() ? pos1.y() : pos2.y());
@@ -159,12 +171,16 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int y = (int) (0.5 + yLine + yOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer.addAdjacentPoints (image, x, yLine - 2, x, yLine + 2);
+        gridHealer->addAdjacentPoints (image, x, yLine - 2, x, yLine + 2);
       }
 
     } else {
 
       // More vertical
+      GridHealer *gridHealer = new GridHealer (GridHealer::GridLineOrientation::Vertical,
+                                               modelGridRemoval);
+      gridHealers.push_back (gridHealer);
+
       int yMin = qMin (pos1.y(), pos2.y());
       int yMax = qMax (pos1.y(), pos2.y());
       int xAtYMin = (pos1.y() < pos2.y() ? pos1.x() : pos2.x());
@@ -176,7 +192,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int x = (int) (0.5 + xLine + xOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer.addAdjacentPoints (image, xLine - 2, y, xLine + 2, y);
+        gridHealer->addAdjacentPoints (image, xLine - 2, y, xLine + 2, y);
       }
 
     }

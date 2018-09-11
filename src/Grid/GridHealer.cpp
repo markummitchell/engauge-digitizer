@@ -37,7 +37,7 @@ void GridHealer::addAdjacentPoints (const QImage &image,
 
   // Convert (x,y) pairs to (independent,dependent) pairs
   int i0 = x0, d0 = y0, i1 = x1, d1 = y1;
-  if (m_gridLineOrientation == GridHealer::GridLineOrientation::Vertical) {
+  if (m_gridLineOrientation == GridHealer::Vertical) {
     i0 = y0;
     d0 = x0;
     i1 = y1;
@@ -60,7 +60,7 @@ bool GridHealer::blackPixelRegionIsBigEnough (const QImage &image,
 {
   // Convert from (independent,dependent) pair to (x,y) pair
   int x = i, y = d;
-  if (m_gridLineOrientation == GridHealer::GridLineOrientation::Vertical) {
+  if (m_gridLineOrientation == GridHealer::Vertical) {
     x = d;
     y = i;
   }
@@ -266,7 +266,7 @@ void GridHealer::fillTrapezoid (QImage &image,
 
   // Convert input (independent,dependent) pairs to (x,y) pairs
   int xBL = iBL, yBL = dBL, xBR = iBR, yBR = dBR, xTR = iTR, yTR = dTR, xTL = iTL, yTL = dTL;
-  if (m_gridLineOrientation == GridHealer::GridLineOrientation::Vertical) {
+  if (m_gridLineOrientation == GridHealer::Vertical) {
     xBL = dBL;
     yBL = iBL;
     xBR = dBR;
@@ -335,7 +335,7 @@ bool GridHealer::pointsAreGood (const QImage &image,
 
   // Convert (independent,dependent) pair to (x,y) pair
   int x0 = i0, y0 = d0, x3 = i3, y3 = d3;
-  if (m_gridLineOrientation == GridHealer::GridLineOrientation::Vertical) {
+  if (m_gridLineOrientation == GridHealer::Vertical) {
     x0 = d0;
     y0 = i0;
     x3 = d3;
