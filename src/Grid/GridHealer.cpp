@@ -8,10 +8,15 @@
 #include "EngaugeAssert.h"
 #include "GridHealer.h"
 #include "Logger.h"
+#include "Pixels.h"
 #include <QImage>
 #include <qmath.h>
 #include <QRgb>
+#include <QTextStream>
 #include "TriangleFill.h"
+
+// Enable large amount of debug spew
+//#define DETAILED_LOGGING 1
 
 GridHealer::GridHealer(GridLineOrientation gridLineOrientation,
                        const DocumentModelGridRemoval &modelGridRemoval) :
@@ -28,41 +33,107 @@ void GridHealer::addAdjacentPoints (const QImage &image,
                                     int x1,
                                     int y1)
 {
+  Pixels pixels (image);
 
-  if (m_gridLineOrientation == GridLineOrientation::Horizontal) {
-
-    // Line is horizontal so independent variable is x, and points across the gap have the same x
-    ENGAUGE_ASSERT (x0 == x1);
-    if (pixelIsBlack (image, x0, y0)) {
-      m_blackPixelsBelow [x0] = y0;
-    }
-    if (pixelIsBlack (image, x1, y1)) {
-      m_blackPixelsAbove [x1] = y1;
-    }
-    m_gapSeparation = qAbs (y1 - y0);
-    
-  } else if (y0 == y1) {
-    
-    // Line is vertical so independent variable is y, and points across the gap have the same y
-    ENGAUGE_ASSERT (y0 == y1);
-    if (pixelIsBlack (image, x0, y0)) {
-      m_blackPixelsBelow [y0] = x0;
-    }
-    if (pixelIsBlack (image, x1, y1)) {
-      m_blackPixelsAbove [y1] = x1;
-    }
-    m_gapSeparation = qAbs (x1 - x0);
-    
-  } else {
-    LOG4CPP_ERROR_S ((*mainCat)) << "Invalid case in GridHealer";
+  // Convert (x,y) pairs to (independent,dependent) pairs
+  int i0 = x0, d0 = y0, i1 = x1, d1 = y1;
+  if (m_gridLineOrientation == GridLineOrientation::Vertical) {
+    i0 = y0;
+    d0 = x0;
+    i1 = y1;
+    d1 = x1;
   }
+
+  // Save (independent,dependent) pairs
+  if (pixels.pixelIsBlack (image, x0, y0)) {
+    m_blackPixelsBelow [i0] = d0;
+  }
+  if (pixels.pixelIsBlack (image, x1, y1)) {
+    m_blackPixelsAbove [i1] = d1;
+  }
+  m_gapSeparation = qAbs (d1 - d0);
 }
+
+bool GridHealer::blackPixelRegionIsBigEnough (const QImage &image,
+                                              int i,
+                                              int d) const
+{
+  // Convert from (independent,dependent) pair to (x,y) pair
+  int x = i, y = d;
+  if (m_gridLineOrientation == GridLineOrientation::Vertical) {
+    x = d;
+    y = i;
+  }
+
+  Pixels pixels  (image);
+  int count = pixels.countBlackPixelsAroundPoint (x,
+                                                  y,
+                                                  m_modelGridRemoval.closeDistance());
+  return (count >= m_modelGridRemoval.closeDistance ());
+}
+
+#ifdef DETAILED_LOGGING
+void GridHealer::detailedLogInputs () const
+{
+  const int FIRST_CHARACTERS = 80;
+
+  // In LOG4CPP_INFO_S we dump out the first few black pixels
+  QString below, above;
+  QTextStream strBelow (&below), strAbove (&above);
+  IndependentToDependent::const_iterator itrBelow, itrAbove;
+  QString delimiter;
+
+  // Iterate through values
+  for (itrBelow = m_blackPixelsBelow.begin (); itrBelow != m_blackPixelsBelow.end (); itrBelow++) {
+    strBelow << delimiter << itrBelow.key();
+    delimiter = ", ";
+  }
+  delimiter = "";
+  for (itrAbove = m_blackPixelsAbove.begin (); itrAbove != m_blackPixelsAbove.end (); itrAbove++) {
+    strAbove << delimiter << itrAbove.key();
+    delimiter = ", ";
+  }
+
+  // Indicate some text was dropped if appropriate
+  if (below.count() > FIRST_CHARACTERS) {
+    below.truncate (FIRST_CHARACTERS);
+    below = below + "...";
+  }
+  if (above.count() > FIRST_CHARACTERS) {
+    above.truncate (FIRST_CHARACTERS);
+    above = above + "...";
+  }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::detailedLogInputs "
+                              << " below=(" << below.toLatin1().data() << ")"
+                              << " above=(" << above.toLatin1().data() << ")";
+}
+#else
+void GridHealer::detailedLogInputs() const
+{
+}
+#endif
+
+#ifdef DETAILED_LOGGING
+void GridHealer::detailedLogOutputs (int xBelowStart,
+                                     int xBelowEnd,
+                                     int xAboveEnd,
+                                     int xAboveStart) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::detailedLogOutputs "
+                              << xBelowStart << "<=xBelow<=" << xBelowEnd << " "
+                              << xAboveStart << "<=xAbove<=" << xAboveEnd;
+}
+#else
+void GridHealer::detailedLogOutputs (int, int, int, int) const
+{
+}
+#endif
 
 void GridHealer::doHealing (QImage &image)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::doHealing "
-                              << " countBelow=" << m_blackPixelsBelow.count()
-                              << " countAbove=" << m_blackPixelsAbove.count();
+  // LOG4CPP_INFO_S is in detailedLogInputs
+  detailedLogInputs ();
 
   // Algorithm requires at least one point in each of the lists
   if (m_blackPixelsBelow.count() > 0 &&
@@ -78,58 +149,106 @@ void GridHealer::doHealing (QImage &image)
     int maxHorSep = qSqrt (qPow (m_modelGridRemoval.closeDistance(), 2) -
                            qPow (m_gapSeparation, 2));
 
-    int xBelowSkipTo = 0; // Used by inner loop to skip to this iterator value
+    int xBelowEnd = 0; // Used by inner loop to skip to this iterator value
 
     for (int xBelowStart = xFirst; xBelowStart <= xLast; xBelowStart++) {
-      if ((xBelowSkipTo < xBelowStart) && m_blackPixelsBelow.contains (xBelowStart)) {
+
+      if ((xBelowEnd < xBelowStart) &&
+          m_blackPixelsBelow.contains (xBelowStart)) {
+
         // This could be the start of a new trapezoid. Find where the range on the same side ends
         int xBelowOutOfBounds = xLast + 1; // Value forcing transition to out of range
-        for (int xBelowEnd = xBelowStart + 1; xBelowEnd <= xBelowOutOfBounds; xBelowEnd++) {
 
-          if (xBelowSkipTo > xBelowStart) {
-            break; // Pop this iteration level
+        for (xBelowEnd = xBelowStart + 1; xBelowEnd <= xBelowOutOfBounds; xBelowEnd++) {
+
+          if (!m_blackPixelsBelow.contains (xBelowEnd) || (xBelowEnd == xBelowOutOfBounds)) {
+
+            doHealingOnBelowRange (image,
+                                   xBelowStart,
+                                   xBelowEnd,
+                                   maxHorSep);
+
+            // Go back to outer loop, which will skip to xBelowEnd
+            break;
           }
+        }
+      }
+    }
+  }
+}
 
-          if ((xBelowSkipTo < xBelowEnd) && (!m_blackPixelsBelow.contains (xBelowEnd) || (xBelowEnd == xBelowOutOfBounds))) {
+void GridHealer::doHealingOnBelowAndAboveRangePair (QImage &image,
+                                                    int xBelowStart,
+                                                    int xBelowEnd,
+                                                    int xAboveStart,
+                                                    int xAboveEnd)
+{
+  // LOG4CPP_INFO_S is in detailedLogOutputs
+  detailedLogOutputs (xBelowStart,
+                      xBelowEnd,
+                      xAboveEnd,
+                      xAboveStart);
 
-            // Below range goes from xBelowStart (inclusive) to xBelowEnd (exclusive). There could
-            // be zero, one or more above ranges that overlap within maxHorSep, corresponding
-            // to an equal number of trapezoids to be filled in
-            //
-            // It is important to note that every above point between xBelowStart-maxHorSep to
-            // xBelowEnd+maxHorSep is close enough (<close distance) to a point in the below range
-            bool insideRange = false; // Trivial state machine which targets transitions into/out of ranges
-            int xAboveStartForThisRange = 0;
-            int xAboveOutOfBounds = xBelowEnd + maxHorSep + 1; // Value forcing transition to out of range
-            for (int xAbove = xBelowStart - maxHorSep; xAbove <= xAboveOutOfBounds; xAbove++) {
+  int x0 = xBelowStart;
+  int x1 = xBelowEnd;
+  int x2 = xAboveEnd;
+  int x3 = xAboveStart;
+  int y0 = m_blackPixelsBelow [xBelowStart];
+  int y1 = m_blackPixelsBelow [xBelowEnd  ];
+  int y2 = m_blackPixelsAbove [xAboveEnd  ];
+  int y3 = m_blackPixelsAbove [xAboveStart];
 
-              bool includePixel = m_blackPixelsAbove.contains (xAbove) && (xAbove < xAboveOutOfBounds);
+  if (pointsAreGood (image, x0, y0, x3, y3)) {
 
-              if (!insideRange && includePixel) {
-                // Transition from outside range to inside range
-                insideRange = true;
-                xAboveStartForThisRange = xAbove;
-              } else if (insideRange && !includePixel) {
-                // Transition from inside range to outside range
-                insideRange = false;
-                int xAboveEndForThisRange = xAbove - 1;
-                int xBelowStartForThisRange = qMax (xBelowStart, xAboveStartForThisRange - maxHorSep);
-                int xBelowEndForThisRange = qMin (xBelowEnd - 1, xAboveEndForThisRange + maxHorSep);
+    // Big enough so keep it. Four points that define the trapezoid to be filled in
+    fillTrapezoid (image,
+                   x0, y0,
+                   x1, y1,
+                   x2, y2,
+                   x3, y3);
+  }
+}
 
-                if (xBelowStartForThisRange <= xBelowEndForThisRange) {
+void GridHealer::doHealingOnBelowRange (QImage &image,
+                                        int xBelowStart,
+                                        int xBelowEnd,
+                                        int maxHorSep)
+{
+  // Below range goes from xBelowStart (inclusive) to xBelowEnd (exclusive). There could
+  // be zero, one or more above ranges that overlap within maxHorSep, corresponding
+  // to an equal number of trapezoids to be filled in
+  //
+  // It is important to note that every above point between xBelowStart-maxHorSep to
+  // xBelowEnd+maxHorSep is close enough (<close distance) to a point in the below range
 
-                  // Four points that define the trapezoid to be filled in
-                  fillTrapezoid (image,
-                                 xBelowStartForThisRange, m_blackPixelsBelow [xBelowStartForThisRange],
-                                 xBelowEndForThisRange,   m_blackPixelsBelow [xBelowEndForThisRange  ],
-                                 xAboveEndForThisRange,   m_blackPixelsAbove [xAboveEndForThisRange  ],
-                                 xAboveStartForThisRange, m_blackPixelsAbove [xAboveStartForThisRange]);
-                }
-              }
-            }
+  int xAboveOutOfBounds = xBelowEnd + maxHorSep + 1; // Value forcing transition to out of range
 
-            // Make outer loop skip already-processed xBelowStart values
-            xBelowSkipTo = xBelowEnd + 1;
+  int xAboveEnd = 0; // Used by inner loop to skip to this iterator value
+
+  for (int xAboveStart = xBelowStart - maxHorSep; xAboveStart <= xAboveOutOfBounds; xAboveStart++) {
+
+    if ((xAboveEnd < xAboveStart) &&
+        m_blackPixelsAbove.contains (xAboveStart) &&
+        (xAboveStart < xAboveOutOfBounds)) {
+
+      for (xAboveEnd = xAboveStart + 1; xAboveEnd <= xAboveOutOfBounds; xAboveEnd++) {
+
+        if (!m_blackPixelsAbove.contains (xAboveEnd) || (xAboveEnd == xAboveOutOfBounds)) {
+
+          int xBelowStartNearEnough = qMax (xBelowStart, xAboveStart - maxHorSep);
+          int xBelowEndNearEnough = qMin (xBelowEnd - 1, xAboveEnd + maxHorSep);
+          int xAboveEndInclusive = xAboveEnd - 1;
+
+          if (xBelowStartNearEnough <= xBelowEndNearEnough) {
+
+            doHealingOnBelowAndAboveRangePair (image,
+                                               xBelowStartNearEnough,
+                                               xBelowEndNearEnough,
+                                               xAboveStart,
+                                               xAboveEndInclusive);
+
+            // Go back to outer loop, which will skip to xAboveEnd
+            break;
           }
         }
       }
@@ -138,11 +257,26 @@ void GridHealer::doHealing (QImage &image)
 }
 
 void GridHealer::fillTrapezoid (QImage &image,
-                                int xBL, int yBL,
-                                int xBR, int yBR,
-                                int xTR, int yTR,
-                                int xTL, int yTL)
+                                int iBL, int dBL,
+                                int iBR, int dBR,
+                                int iTR, int dTR,
+                                int iTL, int dTL)
 {
+  Pixels pixels (image);
+
+  // Convert input (independent,dependent) pairs to (x,y) pairs
+  int xBL = iBL, yBL = dBL, xBR = iBR, yBR = dBR, xTR = iTR, yTR = dTR, xTL = iTL, yTL = dTL;
+  if (m_gridLineOrientation == GridLineOrientation::Vertical) {
+    xBL = dBL;
+    yBL = iBL;
+    xBR = dBR;
+    yBR = iBR;
+    xTR = dTR;
+    yTR = iTR;
+    xTL = dTL;
+    yTL = iTL;
+  }
+
   // Sanity checks
   if (xBL == 0 || yBL == 0 || xBR == 0 || yBR == 0 || xTR == 0 || yTR == 0 || xTL == 0 || yTL == 0) {
     LOG4CPP_ERROR_S ((*mainCat)) << "GridHealer::fillTrapezoid received undefined corner coordinate "
@@ -150,16 +284,16 @@ void GridHealer::fillTrapezoid (QImage &image,
                                  << "xTR=" << xTR << " yTR=" << yTR << " xTL=" << xTL << " yTL=" << yTL;
   }
 
-  if (!pixelIsBlack(image, xBL, yBL)) {
+  if (!pixels.pixelIsBlack(image, xBL, yBL)) {
     LOG4CPP_ERROR_S ((*mainCat)) << "GridHealer::fillTrapezoid has bad bottom left point";
   }
-  if (!pixelIsBlack(image, xBR, yBR)) {
+  if (!pixels.pixelIsBlack(image, xBR, yBR)) {
     LOG4CPP_ERROR_S ((*mainCat)) << "GridHealer::fillTrapezoid has bad bottom right point";
   }
-  if (!pixelIsBlack(image, xTR, yTR)) {
+  if (!pixels.pixelIsBlack(image, xTR, yTR)) {
     LOG4CPP_ERROR_S ((*mainCat)) << "GridHealer::fillTrapezoid has bad top right point";
   }
-  if (!pixelIsBlack(image, xTL, yTL)) {
+  if (!pixels.pixelIsBlack(image, xTL, yTL)) {
     LOG4CPP_ERROR_S ((*mainCat)) << "GridHealer::fillTrapezoid has bad top left point";
   }
 
@@ -167,25 +301,14 @@ void GridHealer::fillTrapezoid (QImage &image,
   // convert from the (independent,dependent) variable pair to (x,y) pair depending on gridline direction
   // (consistent with addAdjacentPairs()
   TriangleFill triangleFill;
-  if (m_gridLineOrientation == GridLineOrientation::Horizontal) {
-    triangleFill.fill (image,
-                       QPoint (xBL, yBL),
-                       QPoint (xBR, yBR),
-                       QPoint (xTR, yTR));
-    triangleFill.fill (image,
-                       QPoint (xBL, yBL),
-                       QPoint (xTL, yTL),
-                       QPoint (xTR, yTR));
-  } else {
-    triangleFill.fill (image,
-                       QPoint (yBL, xBL),
-                       QPoint (yBR, xBR),
-                       QPoint (yTR, xTR));
-    triangleFill.fill (image,
-                       QPoint (yBL, xBL),
-                       QPoint (yTL, xTL),
-                       QPoint (yTR, xTR));    
-  }
+  triangleFill.fill (image,
+                     QPoint (xBL, yBL),
+                     QPoint (xBR, yBR),
+                     QPoint (xTR, yTR));
+  triangleFill.fill (image,
+                     QPoint (xBL, yBL),
+                     QPoint (xTL, yTL),
+                     QPoint (xTR, yTR));
 }
 
 QImage GridHealer::healed (const QImage &imageAfterGridRemoval)
@@ -199,10 +322,28 @@ QImage GridHealer::healed (const QImage &imageAfterGridRemoval)
   return image;
 }
 
-bool GridHealer::pixelIsBlack (const QImage &image,
-                               int x,
-                               int y) const
+bool GridHealer::pointsAreGood (const QImage &image,
+                                int i0,
+                                int d0,
+                                int i3,
+                                int d3) const
 {
-  QRgb rgb = image.pixel (x, y);
-  return qGray (rgb) < 128;
+  Pixels pixels (image);
+
+  // For now we will use the close distance as the minimum pixel count
+  int stopCountAt = m_modelGridRemoval.closeDistance();
+
+  // Convert (independent,dependent) pair to (x,y) pair
+  int x0 = i0, y0 = d0, x3 = i3, y3 = d3;
+  if (m_gridLineOrientation == GridLineOrientation::Vertical) {
+    x0 = d0;
+    y0 = i0;
+    x3 = d3;
+    y3 = i3;
+  }
+
+  // Skip if either endpoint is an unwanted artifact. Look at start point below (since it is connected
+  // to the end point below), and the start point above (which is connected to the end point above)
+  return ((pixels.countBlackPixelsAroundPoint (x0, y0, stopCountAt) >= stopCountAt) &&
+          (pixels.countBlackPixelsAroundPoint (x3, y3, stopCountAt) >= stopCountAt));
 }

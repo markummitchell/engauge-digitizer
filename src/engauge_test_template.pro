@@ -302,6 +302,7 @@ HEADERS  += \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Pdf/PdfResolution.h \
+    util/Pixels.h \
     Point/Point.h \
     Point/PointComparator.h \
     Point/PointIdentifiers.h \
@@ -624,6 +625,7 @@ SOURCES += \
     NonPdf/NonPdfFrameHandle.cpp \
     Ordinal/OrdinalGenerator.cpp \
     Pdf/PdfResolution.cpp \
+    util/Pixels.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointMatchAlgorithm.cpp \

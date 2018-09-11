@@ -39,24 +39,22 @@ void TriangleFill::fill (QImage &image,
       p1In.x() > 0 && p1In.y() > 0 &&
       p2In.x() > 0 && p2In.y() > 0) {
 
-    // Sort by ascending y value
-    QList<QPoint> list;
-    list << p0In << p1In << p2In;
-    std::sort (list.begin(), list.end(), compareByY);
+    QPoint p0, p1, p2;
 
-    QPoint p0 = list.front();
-    list.pop_front();
-    QPoint p1 = list.front();
-    list.pop_front();
-    QPoint p2 = list.front();
+    sortByAscendingY (p0In, p1In, p2In, p0, p1, p2);
 
     if (p1.y() == p2.y()) {
+
       // Triangle with flat bottom
       flatBottom (image, p0, p1, p2);
+
     } else if (p0.y() == p1.y()) {
+
       // Triangle with flat top
       flatTop (image, p0, p1, p2);
+
     } else {
+
       // General case is handled by splitting the triangle into one flat top piece and
       // one flat bottom piece. Fourth point is at same y value as middle point p1
       double s = (double) (p1.y() - p0.y())/ (double) (p2.y() - p0.y());
@@ -146,4 +144,23 @@ void TriangleFill::flatTop (QImage &image,
       x1 -= slopeInverse1;
     }
   }
+}
+
+void TriangleFill::sortByAscendingY (QPoint p0In,
+                                     QPoint p1In,
+                                     QPoint p2In,
+                                     QPoint &p0,
+                                     QPoint &p1,
+                                     QPoint &p2) const
+{
+  // Sort by ascending y value
+  QList<QPoint> list;
+  list << p0In << p1In << p2In;
+  std::sort (list.begin(), list.end(), compareByY);
+
+  p0 = list.front();
+  list.pop_front();
+  p1 = list.front();
+  list.pop_front();
+  p2 = list.front();
 }

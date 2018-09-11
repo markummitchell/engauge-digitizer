@@ -38,6 +38,12 @@ private:
                 const QPoint &p0,
                 const QPoint &p1,
                 const QPoint &p2); // Assumes p0 and p1 are at top at same y level
+  void sortByAscendingY (QPoint p0In,
+                         QPoint p1In,
+                         QPoint p2In,
+                         QPoint &p0,
+                         QPoint &p1,
+                         QPoint &p2) const;
 
   QPoint m_p0;
   QPoint m_p1;
