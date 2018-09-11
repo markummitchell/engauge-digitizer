@@ -155,7 +155,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
-      GridHealer *gridHealer = new GridHealer (GridHealer::GridLineOrientation::Horizontal,
+      GridHealer *gridHealer = new GridHealer (GridHealer::Horizontal,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
@@ -177,7 +177,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
     } else {
 
       // More vertical
-      GridHealer *gridHealer = new GridHealer (GridHealer::GridLineOrientation::Vertical,
+      GridHealer *gridHealer = new GridHealer (GridHealer::Vertical,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
